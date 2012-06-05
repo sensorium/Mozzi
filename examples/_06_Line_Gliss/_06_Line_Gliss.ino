@@ -18,8 +18,8 @@
 #include <utils.h>
 #include <utils.c>
 
-// use: Oscil <table_size, UPDATE_RATE> oscilName (wavetable)
-Oscil <TRIANGLE_WARM8192_NUM_TABLE_CELLS, AUDIO_RATE> aTriangle(TRIANGLE_WARM8192_DATA);
+// use: Oscil <table_size, update_rate> oscilName (wavetable)
+Oscil <TRIANGLE_WARM8192_NUM_CELLS, AUDIO_RATE> aTriangle(TRIANGLE_WARM8192_DATA);
 
 // use: Line <type> lineName
 Line <long> aGliss;

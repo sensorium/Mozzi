@@ -22,8 +22,8 @@
 
 #define CONTROL_RATE 2048 // powers of 2 please
 
-Oscil<COS8192_NUM_TABLE_CELLS, AUDIO_RATE> aSig(COS8192_DATA);
-Oscil<COS8192_NUM_TABLE_CELLS, CONTROL_RATE> kTremelo(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aSig(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kTremelo(COS8192_DATA);
 
 // updated by kTremelo and reused in updateAudio until next control step
 char gain;
@@ -43,5 +43,6 @@ void updateControl(){
 }
 
 int updateAudio(){
-  return ((int) aSig.next() * gain) >> 8; // shift back to 8bit range after multiplying
+  // Cuttlefish limits output to -244 to 243 range (almost 9 bits)
+  return ((int) aSig.next() * gain) >> 8; // shift back to 8 bit audio output range after multiplying
 }

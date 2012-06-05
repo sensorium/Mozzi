@@ -25,15 +25,15 @@
 // each using a different sized table makes them different types, with the table length compiled in as
 // a literal value (helps speed).  We can't have an array of different types, and pointers have to be
 // cast to different types so there's not really any advantage there.  Any suggestions?
-// use: Oscil <table_size, UPDATE_RATE> oscilName (wavetable)
-Oscil <SIN256_NUM_TABLE_CELLS, AUDIO_RATE> aSin0(SIN256_DATA); // can hear significant aliasing noise
-Oscil <SIN512_NUM_TABLE_CELLS, AUDIO_RATE> aSin1(SIN512_DATA); // noise still there but less noticeable
-Oscil <SIN1024_NUM_TABLE_CELLS, AUDIO_RATE> aSin2(SIN1024_DATA); // borderline, hardly there if at all
-Oscil <SIN2048_NUM_TABLE_CELLS, AUDIO_RATE> aSin3(SIN2048_DATA); // no audible improvement from here on
-Oscil <SIN4096_NUM_TABLE_CELLS, AUDIO_RATE> aSin4(SIN4096_DATA); // for 45 year old loud sound damaged ears
-Oscil <SIN8192_NUM_TABLE_CELLS, AUDIO_RATE> aSin5(SIN8192_DATA);
+// use: Oscil <table_size, update_rate> oscilName (wavetable)
+Oscil <SIN256_NUM_CELLS, AUDIO_RATE> aSin0(SIN256_DATA); // can hear significant aliasing noise
+Oscil <SIN512_NUM_CELLS, AUDIO_RATE> aSin1(SIN512_DATA); // noise still there but less noticeable
+Oscil <SIN1024_NUM_CELLS, AUDIO_RATE> aSin2(SIN1024_DATA); // borderline, hardly there if at all
+Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin3(SIN2048_DATA); // no audible improvement from here on
+Oscil <SIN4096_NUM_CELLS, AUDIO_RATE> aSin4(SIN4096_DATA); // for 45 year old loud sound damaged ears
+Oscil <SIN8192_NUM_CELLS, AUDIO_RATE> aSin5(SIN8192_DATA);
 
-DelayCuttlefish kBoom(CONTROL_RATE);
+DelayCuttlefish kWhoseTurnDelay(CONTROL_RATE);
 
 const unsigned char NUM_OSCILS = 6;
 unsigned char gain[NUM_OSCILS] = {0,0,0,0,0,0}; // gain for each oscil
@@ -41,24 +41,24 @@ unsigned char whose_turn = 0; // which oscil to listen to
 
 // Line to sweep frequency at control rate
 Line <float> kSweep;
-const unsigned int MILLIS_PER_SWEEP = 5000;
+const unsigned int MILLIS_PER_SWEEP = 2000;
 const unsigned int MILLIS_PER_CONTROL = 1000u / CONTROL_RATE;
 const unsigned long CONTROL_STEPS_PER_SWEEP = (unsigned long) MILLIS_PER_SWEEP / MILLIS_PER_CONTROL;
 
 void setup(){
   startCuttlefish(CONTROL_RATE);
-  kBoom.set(MILLIS_PER_SWEEP);
+  kWhoseTurnDelay.set(MILLIS_PER_SWEEP);
   kSweep.set(0.f, 8192.f, CONTROL_STEPS_PER_SWEEP);
 }
 
 
 void updateControl(){
 
-  if(kBoom.ready()){
+  if(kWhoseTurnDelay.ready()){
     gain[whose_turn] =0;
     if (++whose_turn >= NUM_OSCILS) whose_turn =0;
     gain[whose_turn] = 1;
-    kBoom.start();
+    kWhoseTurnDelay.start();
     kSweep.set(0UL);
     Serial.print(whose_turn);
     Serial.print("  ");

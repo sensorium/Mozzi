@@ -2,8 +2,9 @@
  *  using Cuttlefish sonification library.
  *
  *  Demonstrates one-shot samples scheduled
- *  with DelayCuttlefish, and use of xorshift96(),
- *  a random number generator.
+ *  with DelayCuttlefish(), and uses xorshift96(),
+ *  a random number generator which is faster
+ *  than Arduino random(), to vary the gain of each sample.
  *
  *  Circuit: Audio output on digital pin 9.
  *
@@ -21,21 +22,20 @@
 
 #define CONTROL_RATE 64
 
-// use: Sample <table_size, UPDATE_RATE> SampleName (wavetable)
-Sample <BAMBOO1_1024_NUM_TABLE_CELLS, AUDIO_RATE> aBamboo1(BAMBOO1_1024_DATA);
-Sample <BAMBOO2_1024_NUM_TABLE_CELLS, AUDIO_RATE> aBamboo2(BAMBOO2_1024_DATA);
-Sample <BAMBOO3_2048_NUM_TABLE_CELLS, AUDIO_RATE> aBamboo3(BAMBOO3_2048_DATA);
+// use: Sample <table_size, update_rate> SampleName (wavetable)
+Sample <BAMBOO1_1024_NUM_CELLS, AUDIO_RATE> aBamboo1(BAMBOO1_1024_DATA);
+Sample <BAMBOO2_1024_NUM_CELLS, AUDIO_RATE> aBamboo2(BAMBOO2_1024_DATA);
+Sample <BAMBOO3_2048_NUM_CELLS, AUDIO_RATE> aBamboo3(BAMBOO3_2048_DATA);
 
 // for scheduling audio gain changes
-DelayCuttlefish kBoom(CONTROL_RATE);
+DelayCuttlefish kTriggerDelay(CONTROL_RATE);
 
 void setup(){
   startCuttlefish(CONTROL_RATE);
-  aBamboo1.setFreq((float) BAMBOO1_1024_SAMPLERATE / (float) BAMBOO1_1024_NUM_TABLE_CELLS); // play at the speed it was recorded at
-  aBamboo2.setFreq((float) BAMBOO2_1024_SAMPLERATE / (float) BAMBOO2_1024_NUM_TABLE_CELLS);
-  aBamboo3.setFreq((float) BAMBOO3_2048_SAMPLERATE / (float) BAMBOO3_2048_NUM_TABLE_CELLS);
-  kBoom.set(111); // countdown ms, within resolution of CONTROL_RATE
-
+  aBamboo1.setFreq((float) BAMBOO1_1024_SAMPLERATE / (float) BAMBOO1_1024_NUM_CELLS); // play at the speed it was recorded at
+  aBamboo2.setFreq((float) BAMBOO2_1024_SAMPLERATE / (float) BAMBOO2_1024_NUM_CELLS);
+  aBamboo3.setFreq((float) BAMBOO3_2048_SAMPLERATE / (float) BAMBOO3_2048_NUM_CELLS);
+  kTriggerDelay.set(111); // countdown ms, within resolution of CONTROL_RATE
 }
 
 
@@ -55,7 +55,7 @@ struct gainstruct{
 gains;
 
 void updateControl(){
-  if(kBoom.ready()){
+  if(kTriggerDelay.ready()){
     switch(byteMod(lowByte(xorshift96()), 3)) {
     case 0:
       gains.gain1 = randomGain();
@@ -70,7 +70,7 @@ void updateControl(){
       aBamboo3.start();
       break;
     }
-    kBoom.start();
+    kTriggerDelay.start();
   }
 }
 
@@ -79,7 +79,7 @@ int updateAudio(){
   int asig= (int) ((long) aBamboo1.next()*gains.gain1 +
     aBamboo2.next()*gains.gain2 +
     aBamboo3.next()*gains.gain3)/16;
-  //clip
+  //clip to keep audio loud but still in range
   if (asig > 243) asig = 243;
   if (asig < -244) asig = -244;
   return asig;

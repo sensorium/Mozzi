@@ -17,13 +17,13 @@
 
 #define CONTROL_RATE 512
 
-// use: Oscil <table_size, UPDATE_RATE> oscilName (wavetable)
-Oscil <SIN8192_NUM_TABLE_CELLS, AUDIO_RATE> aSin(SIN8192_DATA);
+// use: Oscil <table_size, update_rate> oscilName (wavetable)
+Oscil <SIN8192_NUM_CELLS, AUDIO_RATE> aSin(SIN8192_DATA);
 
 // for scheduling audio gain changes
-DelayCuttlefish kBoom(CONTROL_RATE);
+DelayCuttlefish kGainChangeDelay(CONTROL_RATE);
 
-Smooth <int> kSmoothGain(0.95f); // for smoothing kBoom
+Smooth <int> kSmoothGain(0.95f); // for smoothing kGainChangeDelay
 int smooth_gain; // for conveying kSmoothGain to updateAudio
 
 char gain = 1;
@@ -31,14 +31,14 @@ char gain = 1;
 void setup(){
   startCuttlefish(CONTROL_RATE);
   aSin.setFreq(330u); // set the frequency, using an unsigned int or a float
-  kBoom.set(1000); // 1 second countdown, within resolution of CONTROL_RATE
+  kGainChangeDelay.set(1000); // 1 second countdown, within resolution of CONTROL_RATE
 }
 
 
 void updateControl(){
-  if(kBoom.ready()){
+  if(kGainChangeDelay.ready()){
     gain = 1-gain; // flip 0/1
-    kBoom.start();
+    kGainChangeDelay.start();
   }
   smooth_gain = (int)kSmoothGain.next(256*gain);
 }

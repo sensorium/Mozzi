@@ -3,10 +3,10 @@
 
 #include "Arduino.h"
 #include <avr/pgmspace.h>
- 
+
 #define SAW256_NUM_CELLS 256
-#define SAW256_SAMPLERATE 256 
- 
+#define SAW256_SAMPLERATE 256
+
 prog_char SAW256_DATA [] PROGMEM = {0, 1, 2, 3, 4, 5, 5, 7, 7, 9, 9, 10,
 12, 12, 14, 14, 16, 16, 18, 18, 20, 20, 22, 22, 24, 25, 25, 27, 27, 29, 30, 31,
 31, 33, 33, 35, 35, 37, 38, 38, 40, 40, 42, 42, 44, 44, 46, 47, 47, 49, 50, 50,

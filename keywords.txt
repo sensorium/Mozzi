@@ -13,7 +13,16 @@ incrementPhase	KEYWORD2
 next	KEYWORD2
 phMod	KEYWORD2
 setFreq_n8	KEYWORD2
-setFreq_n16	KEYWORD2
+setFreq	KEYWORD2
+atIndex	KEYWORD2
+phaseIncFromFreq	KEYWORD2
+setPhaseInc	KEYWORD2
+
+Sample	KEYWORD1
+incrementPhase	KEYWORD2
+next	KEYWORD2
+phMod	KEYWORD2
+setFreq_n8	KEYWORD2
 setFreq	KEYWORD2
 atIndex	KEYWORD2
 phaseIncFromFreq	KEYWORD2
@@ -24,15 +33,32 @@ increment	KEYWORD2
 next	KEYWORD2
 set	KEYWORD2
 
-Timebomb	KEYWORD1
+DelayCuttlefish	KEYWORD1
 set	KEYWORD2
-store	KEYWORD2
-reset	KEYWORD2
-boom	KEYWORD2
+start	KEYWORD2
+ready	KEYWORD2
 
 Smooth	KEYWORD1
 next	KEYWORD2
 setSmoothness	KEYWORD2
 
+AudioDelay	KEYWORD1
+next	KEYWORD2
+
+AudioDelayFeedback	KEYWORD1
+next	KEYWORD2
+setFeedbackLevel	KEYWORD2
+
+Ead	KEYWORD1
+setAttack	KEYWORD2
+setDecay	KEYWORD2
+set	KEYWORD2
+start	KEYWORD2
+next	KEYWORD2
+
+Q7n8_float2fix	KEYWORD2
+Q7n8_keepFixedInRange		KEYWORD2
+
 mtof	KEYWORD2
 xorshift96	KEYWORD2
+setupFastADC	KEYWORD2

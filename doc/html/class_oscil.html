@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Cuttlefish: Oscil&lt; NUM_CELLS, UPDATE_RATE &gt; Class Template Reference</title>
+<title>Cuttlefish: Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt; Class Template Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Oscil&lt; NUM_CELLS, UPDATE_RATE &gt; Class Template Reference</div>  </div>
+<div class="title">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -108,43 +108,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1728b1051a7344ad33b83ecdee92b087"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a1728b1051a7344ad33b83ecdee92b087">Oscil</a> (prog_char *TABLE_NAME)</td></tr>
-<tr class="memdesc:a1728b1051a7344ad33b83ecdee92b087"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> is a template class, declared in a sketch as follows, with NUM_CELLS and UPDATE_RATE replaced by your own values: <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> &lt;NUM_CELLS, UPDATE_RATE&gt; myoscil(tablename); It's important that NUM_CELLS and UPDATE_RATE are both literal integers, directly stated as numbers (eg.  <a href="#a1728b1051a7344ad33b83ecdee92b087"></a><br/></td></tr>
-<tr class="memitem:ae4a4cb7018246d92e91709f4854613c0"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#ae4a4cb7018246d92e91709f4854613c0">next</a> ()</td></tr>
-<tr class="memdesc:ae4a4cb7018246d92e91709f4854613c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next sample.  <a href="#ae4a4cb7018246d92e91709f4854613c0"></a><br/></td></tr>
-<tr class="memitem:ab27e7d343de7e35b3639d52e5d03b688"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#ab27e7d343de7e35b3639d52e5d03b688">phMod</a> (long phmod_proportion)</td></tr>
-<tr class="memdesc:ab27e7d343de7e35b3639d52e5d03b688"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next sample given a phase modulation value.  <a href="#ab27e7d343de7e35b3639d52e5d03b688"></a><br/></td></tr>
-<tr class="memitem:a6a4c35443595841b6fbe6416cdc64caf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a6a4c35443595841b6fbe6416cdc64caf">setFreq_n8</a> (unsigned long freq)</td></tr>
-<tr class="memdesc:a6a4c35443595841b6fbe6416cdc64caf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the frequency using 24n8 fixed-point number format.  <a href="#a6a4c35443595841b6fbe6416cdc64caf"></a><br/></td></tr>
-<tr class="memitem:a1768d1756a570fc2fe461e6662dff654"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a1768d1756a570fc2fe461e6662dff654">setFreq</a> (unsigned int freq)</td></tr>
-<tr class="memdesc:a1768d1756a570fc2fe461e6662dff654"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the oscillator frequency with an unsigned int.  <a href="#a1768d1756a570fc2fe461e6662dff654"></a><br/></td></tr>
-<tr class="memitem:aa53724b32bf6e136e06926fb46d20d59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#aa53724b32bf6e136e06926fb46d20d59">setFreq</a> (float freq)</td></tr>
-<tr class="memdesc:aa53724b32bf6e136e06926fb46d20d59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the oscillator frequency with a float.  <a href="#aa53724b32bf6e136e06926fb46d20d59"></a><br/></td></tr>
-<tr class="memitem:a8af1ff497b42c3b726f34997dbbc1a7f"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a8af1ff497b42c3b726f34997dbbc1a7f">atIndex</a> (unsigned int index)</td></tr>
-<tr class="memdesc:a8af1ff497b42c3b726f34997dbbc1a7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sample at the given table index between 0 and the table size.The index rolls back around to 0 if it's larger than the table size.  <a href="#a8af1ff497b42c3b726f34997dbbc1a7f"></a><br/></td></tr>
-<tr class="memitem:acb05afbf7b825abfdf52f2138d36d8b2"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#acb05afbf7b825abfdf52f2138d36d8b2">phaseIncFromFreq</a> (unsigned int freq)</td></tr>
-<tr class="memdesc:acb05afbf7b825abfdf52f2138d36d8b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">phaseIncFromFreq and setPhaseInc are for saving processor time when sliding between frequencies.  <a href="#acb05afbf7b825abfdf52f2138d36d8b2"></a><br/></td></tr>
-<tr class="memitem:a6e36b0119d267ac23b38d04226dea5dd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6e36b0119d267ac23b38d04226dea5dd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a6e36b0119d267ac23b38d04226dea5dd">setPhaseInc</a> (unsigned long phaseinc_fractional)</td></tr>
-<tr class="memdesc:a6e36b0119d267ac23b38d04226dea5dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">See phaseIncFromFreq. <br/></td></tr>
+<tr class="memitem:ae78d76f58ea60bd367753bd73838c4e2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#ae78d76f58ea60bd367753bd73838c4e2">Oscil</a> (prog_char *TABLE_NAME)</td></tr>
+<tr class="memdesc:ae78d76f58ea60bd367753bd73838c4e2"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> is a template class, declared in a sketch as follows, with NUM_TABLE_CELLS and UPDATE_RATE replaced by your own values: <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> &lt;NUM_TABLE_CELLS, UPDATE_RATE&gt; myoscil(tablename); It's important that NUM_TABLE_CELLS and UPDATE_RATE are both literal integers, directly stated as numbers (eg.  <a href="#ae78d76f58ea60bd367753bd73838c4e2"></a><br/></td></tr>
+<tr class="memitem:a2a76960954a19c7b24dfb7524b740c8f"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a2a76960954a19c7b24dfb7524b740c8f">next</a> ()</td></tr>
+<tr class="memdesc:a2a76960954a19c7b24dfb7524b740c8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next sample.  <a href="#a2a76960954a19c7b24dfb7524b740c8f"></a><br/></td></tr>
+<tr class="memitem:ac773e94198dafcd0799216e113272512"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#ac773e94198dafcd0799216e113272512">phMod</a> (long phmod_proportion)</td></tr>
+<tr class="memdesc:ac773e94198dafcd0799216e113272512"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next sample given a phase modulation value.  <a href="#ac773e94198dafcd0799216e113272512"></a><br/></td></tr>
+<tr class="memitem:af7012b131cfb0d07c134b9a82146658b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#af7012b131cfb0d07c134b9a82146658b">setFreq_n8</a> (unsigned long freq)</td></tr>
+<tr class="memdesc:af7012b131cfb0d07c134b9a82146658b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the frequency using 24n8 fixed-point number format.  <a href="#af7012b131cfb0d07c134b9a82146658b"></a><br/></td></tr>
+<tr class="memitem:a968aa7b2c215173784deb6a107caabbf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a968aa7b2c215173784deb6a107caabbf">setFreq</a> (unsigned int freq)</td></tr>
+<tr class="memdesc:a968aa7b2c215173784deb6a107caabbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the oscillator frequency with an unsigned int.  <a href="#a968aa7b2c215173784deb6a107caabbf"></a><br/></td></tr>
+<tr class="memitem:a04f7e9ce5d79e1f51dd3c17f4491190f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a04f7e9ce5d79e1f51dd3c17f4491190f">setFreq</a> (float freq)</td></tr>
+<tr class="memdesc:a04f7e9ce5d79e1f51dd3c17f4491190f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the oscillator frequency with a float.  <a href="#a04f7e9ce5d79e1f51dd3c17f4491190f"></a><br/></td></tr>
+<tr class="memitem:a3b2ea7727b2ec911957b3862dbb6a8ec"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a3b2ea7727b2ec911957b3862dbb6a8ec">atIndex</a> (unsigned int index)</td></tr>
+<tr class="memdesc:a3b2ea7727b2ec911957b3862dbb6a8ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sample at the given table index between 0 and the table size.The index rolls back around to 0 if it's larger than the table size.  <a href="#a3b2ea7727b2ec911957b3862dbb6a8ec"></a><br/></td></tr>
+<tr class="memitem:abc6040c5484c0ce7b9a6c3011336fd13"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#abc6040c5484c0ce7b9a6c3011336fd13">phaseIncFromFreq</a> (unsigned int freq)</td></tr>
+<tr class="memdesc:abc6040c5484c0ce7b9a6c3011336fd13"><td class="mdescLeft">&#160;</td><td class="mdescRight">phaseIncFromFreq and setPhaseInc are for saving processor time when sliding between frequencies.  <a href="#abc6040c5484c0ce7b9a6c3011336fd13"></a><br/></td></tr>
+<tr class="memitem:a2ff9bfcc57e07bf0df2ed7db186ecff7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2ff9bfcc57e07bf0df2ed7db186ecff7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a2ff9bfcc57e07bf0df2ed7db186ecff7">setPhaseInc</a> (unsigned long phaseinc_fractional)</td></tr>
+<tr class="memdesc:a2ff9bfcc57e07bf0df2ed7db186ecff7"><td class="mdescLeft">&#160;</td><td class="mdescRight">See phaseIncFromFreq. <br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><h3>template&lt;unsigned int NUM_CELLS, unsigned int UPDATE_RATE&gt;<br/>
-class Oscil&lt; NUM_CELLS, UPDATE_RATE &gt;</h3>
+<div class="textblock"><h3>template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt;<br/>
+class Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</h3>
 
 <p><a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> plays a wavetable, cycling through the table to generate an audio or control signal. </p>
-<p>The frequency of the signal can be set or changed with <a class="el" href="class_oscil.html#a1768d1756a570fc2fe461e6662dff654" title="Set the oscillator frequency with an unsigned int.">setFreq()</a>, and the output of an <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> can be produced with <a class="el" href="class_oscil.html#ae4a4cb7018246d92e91709f4854613c0" title="Returns the next sample.">next()</a> for a simple cycling oscillator, or <a class="el" href="class_oscil.html#a8af1ff497b42c3b726f34997dbbc1a7f" title="Returns the sample at the given table index between 0 and the table size.The index rolls back around ...">atIndex()</a> for a particular sample in the table. </p>
+<p>The frequency of the signal can be set or changed with <a class="el" href="class_oscil.html#a968aa7b2c215173784deb6a107caabbf" title="Set the oscillator frequency with an unsigned int.">setFreq()</a>, and the output of an <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> can be produced with <a class="el" href="class_oscil.html#a2a76960954a19c7b24dfb7524b740c8f" title="Returns the next sample.">next()</a> for a simple cycling oscillator, or <a class="el" href="class_oscil.html#a3b2ea7727b2ec911957b3862dbb6a8ec" title="Returns the sample at the given table index between 0 and the table size.The index rolls back around ...">atIndex()</a> for a particular sample in the table. </p>
 
 <p>Definition at line <a class="el" href="_oscil_8h_source.html#l00044">44</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a1728b1051a7344ad33b83ecdee92b087"></a>
+<a class="anchor" id="ae78d76f58ea60bd367753bd73838c4e2"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html">Oscil</a> </td>
+          <td class="memname"><a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html">Oscil</a> </td>
           <td>(</td>
           <td class="paramtype">prog_char *&#160;</td>
           <td class="paramname"><em>TABLE_NAME</em></td><td>)</td>
@@ -154,7 +154,7 @@ template&lt;unsigned int NUM_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </div>
 <div class="memdoc">
 
-<p><a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> is a template class, declared in a sketch as follows, with NUM_CELLS and UPDATE_RATE replaced by your own values: <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> &lt;NUM_CELLS, UPDATE_RATE&gt; myoscil(tablename); It's important that NUM_CELLS and UPDATE_RATE are both literal integers, directly stated as numbers (eg. </p>
+<p><a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> is a template class, declared in a sketch as follows, with NUM_TABLE_CELLS and UPDATE_RATE replaced by your own values: <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> &lt;NUM_TABLE_CELLS, UPDATE_RATE&gt; myoscil(tablename); It's important that NUM_TABLE_CELLS and UPDATE_RATE are both literal integers, directly stated as numbers (eg. </p>
 <p>"8192") or as predefined macros. AUDIO_RATE is a defined literal used by Cuttlefish. It's useful to define CONTROL_RATE in your sketches ("eg. #define CONTROL_RATE 128"), to configure startCuttlefish(CONTROL_RATE) in setup() and to sync your control calculations using the same value in updateControl(). </p>
 
 <p>Definition at line <a class="el" href="_oscil_8h_source.html#l00058">58</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
@@ -162,14 +162,14 @@ template&lt;unsigned int NUM_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a8af1ff497b42c3b726f34997dbbc1a7f"></a>
+<a class="anchor" id="a3b2ea7727b2ec911957b3862dbb6a8ec"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">char <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html#a8af1ff497b42c3b726f34997dbbc1a7f">atIndex</a> </td>
+          <td class="memname">char <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html#a3b2ea7727b2ec911957b3862dbb6a8ec">atIndex</a> </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>index</em></td><td>)</td>
@@ -185,14 +185,14 @@ template&lt;unsigned int NUM_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ae4a4cb7018246d92e91709f4854613c0"></a>
+<a class="anchor" id="a2a76960954a19c7b24dfb7524b740c8f"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">char <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html#ae4a4cb7018246d92e91709f4854613c0">next</a> </td>
+          <td class="memname">char <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html#a2a76960954a19c7b24dfb7524b740c8f">next</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [inline]</code></td>
@@ -208,14 +208,14 @@ template&lt;unsigned int NUM_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="acb05afbf7b825abfdf52f2138d36d8b2"></a>
+<a class="anchor" id="abc6040c5484c0ce7b9a6c3011336fd13"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">unsigned long <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html#acb05afbf7b825abfdf52f2138d36d8b2">phaseIncFromFreq</a> </td>
+          <td class="memname">unsigned long <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html#abc6040c5484c0ce7b9a6c3011336fd13">phaseIncFromFreq</a> </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>freq</em></td><td>)</td>
@@ -232,14 +232,14 @@ template&lt;unsigned int NUM_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ab27e7d343de7e35b3639d52e5d03b688"></a>
+<a class="anchor" id="ac773e94198dafcd0799216e113272512"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">char <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html#ab27e7d343de7e35b3639d52e5d03b688">phMod</a> </td>
+          <td class="memname">char <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html#ac773e94198dafcd0799216e113272512">phMod</a> </td>
           <td>(</td>
           <td class="paramtype">long&#160;</td>
           <td class="paramname"><em>phmod_proportion</em></td><td>)</td>
@@ -256,14 +256,14 @@ template&lt;unsigned int NUM_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a1768d1756a570fc2fe461e6662dff654"></a>
+<a class="anchor" id="a968aa7b2c215173784deb6a107caabbf"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html#a1768d1756a570fc2fe461e6662dff654">setFreq</a> </td>
+          <td class="memname">void <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html#a968aa7b2c215173784deb6a107caabbf">setFreq</a> </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>freq</em></td><td>)</td>
@@ -280,14 +280,14 @@ template&lt;unsigned int NUM_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aa53724b32bf6e136e06926fb46d20d59"></a>
+<a class="anchor" id="a04f7e9ce5d79e1f51dd3c17f4491190f"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html#a1768d1756a570fc2fe461e6662dff654">setFreq</a> </td>
+          <td class="memname">void <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html#a968aa7b2c215173784deb6a107caabbf">setFreq</a> </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>freq</em></td><td>)</td>
@@ -304,14 +304,14 @@ template&lt;unsigned int NUM_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a6a4c35443595841b6fbe6416cdc64caf"></a>
+<a class="anchor" id="af7012b131cfb0d07c134b9a82146658b"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html#a6a4c35443595841b6fbe6416cdc64caf">setFreq_n8</a> </td>
+          <td class="memname">void <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html#af7012b131cfb0d07c134b9a82146658b">setFreq_n8</a> </td>
           <td>(</td>
           <td class="paramtype">unsigned long&#160;</td>
           <td class="paramname"><em>freq</em></td><td>)</td>
@@ -335,7 +335,7 @@ template&lt;unsigned int NUM_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 31 2012 13:12:17 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jun 4 2012 01:13:34 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

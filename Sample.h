@@ -1,7 +1,7 @@
 /*
  * Sample.h
  *
- * Copyright 2012 sweatsonics@sweatsonics.com.
+ * Copyright 2012 unbackwards@gmail.com.
  *
  * This file is part of Cuttlefish.
  *
@@ -38,19 +38,20 @@
 
 /** Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finish.
 */
-template <unsigned int NUM_CELLS, unsigned int UPDATE_RATE>
+template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE>
 class Sample
 {
 
 public:
 
-	/** Sample is a template class, declared in a sketch as follows, with NUM_CELLS and
-	UPDATE_RATE replaced by your own values: Sample <NUM_CELLS, UPDATE_RATE>
-	mysample(tablename); It's important that NUM_CELLS and UPDATE_RATE are both
-	literal integers, directly stated as numbers (eg. "8192") or as predefined
-	macros. AUDIO_RATE is a defined literal used by Cuttlefish. It's useful to
-	define CONTROL_RATE in your sketches ("eg. #define CONTROL_RATE 128"), to
-	configure startCuttlefish(CONTROL_RATE) in setup() and to sync your control
+	/** Sample is a template class, declared in a sketch as follows, with
+	NUM_TABLE_CELLS and UPDATE_RATE replaced by your own values: Sample
+	<NUM_TABLE_CELLS, UPDATE_RATE> mysample(tablename); It's important that
+	NUM_TABLE_CELLS and UPDATE_RATE are both literal integers, directly
+	stated as numbers (eg. "8192") or as predefined macros. AUDIO_RATE is a
+	defined literal used by Cuttlefish. It's useful to define CONTROL_RATE
+	in your sketches ("eg. #define CONTROL_RATE 128"), to configure
+	startCuttlefish(CONTROL_RATE) in setup() and to sync your control
 	calculations using the same value in updateControl().
 	*/
 	Sample(prog_char * TABLE_NAME):table(TABLE_NAME)
@@ -68,7 +69,7 @@ public:
 
 
 	/** Returns the next sample. Updates the phase according to the current frequency
-	and returns the sample at the new phase position, or 0 iwhen the phase
+	and returns the sample at the new phase position, or 0 when the phase
 	overshoots the end of the table.
 	*/
 	inline
@@ -76,7 +77,7 @@ public:
 	{
 		char out = 0;
 		incrementPhase();
-		if (phase_fractional < (unsigned long) NUM_CELLS<<SAMPLE_F_BITS )
+		if (phase_fractional < (unsigned long) NUM_TABLE_CELLS<<SAMPLE_F_BITS )
 			out = readTable();
 		return out;
 	}
@@ -91,7 +92,7 @@ public:
 	char phMod(long phmod_proportion)
 	{
 		incrementPhase();
-		return (char)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_CELLS))>>SAMPLE_F_BITS) & (NUM_CELLS - 1)));
+		return (char)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))>>SAMPLE_F_BITS) & (NUM_TABLE_CELLS - 1)));
 	}
 
 
@@ -106,7 +107,7 @@ public:
 	{
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
-			phase_increment_fractional = ((freq * NUM_CELLS)/UPDATE_RATE) << (SAMPLE_F_BITS-8);
+			phase_increment_fractional = ((freq * NUM_TABLE_CELLS)/UPDATE_RATE) << (SAMPLE_F_BITS-8);
 		}
 	}
 
@@ -122,7 +123,7 @@ public:
 	{
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
-			phase_increment_fractional = (((unsigned long)freq * NUM_CELLS)/UPDATE_RATE) << SAMPLE_F_BITS; // Obvious but slow
+			phase_increment_fractional = (((unsigned long)freq * NUM_TABLE_CELLS)/UPDATE_RATE) << SAMPLE_F_BITS; // Obvious but slow
 		}
 	}
 
@@ -136,7 +137,7 @@ public:
 	{ // 1 us
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
-			phase_increment_fractional = (unsigned long)((((float)NUM_CELLS * freq)/UPDATE_RATE) * SAMPLE_F_BITS_AS_MULTIPLIER);
+			phase_increment_fractional = (unsigned long)((((float)NUM_TABLE_CELLS * freq)/UPDATE_RATE) * SAMPLE_F_BITS_AS_MULTIPLIER);
 		}
 	}
 
@@ -146,7 +147,7 @@ public:
 	inline
 	char atIndex(unsigned int index)
 	{
-		return (char)pgm_read_byte_near(table + (index & (NUM_CELLS - 1)));
+		return (char)pgm_read_byte_near(table + (index & (NUM_TABLE_CELLS - 1)));
 	}
 
 
@@ -160,7 +161,7 @@ public:
 	inline
 	unsigned long phaseIncFromFreq(unsigned int freq)
 	{
-		return (((unsigned long)freq * NUM_CELLS)/UPDATE_RATE) << SAMPLE_F_BITS;
+		return (((unsigned long)freq * NUM_TABLE_CELLS)/UPDATE_RATE) << SAMPLE_F_BITS;
 	}
 
 
@@ -195,7 +196,7 @@ private:
 	inline
 	char readTable()
 	{
-		return (char)pgm_read_byte_near(table + ((phase_fractional >> SAMPLE_F_BITS) & (NUM_CELLS - 1)));
+		return (char)pgm_read_byte_near(table + ((phase_fractional >> SAMPLE_F_BITS) & (NUM_TABLE_CELLS - 1)));
 	}
 
 	unsigned long phase_fractional;

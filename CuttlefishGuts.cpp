@@ -1,7 +1,7 @@
 /*
  * CuttlefishGuts.cpp
  *
- * Copyright 2012 sweatsonics@sweatsonics.com.
+ * Copyright 2012 unbackwards@gmail.com.
  *
  * This file is part of Cuttlefish.
  *
@@ -61,8 +61,8 @@ void startCuttlefish(unsigned int control_rate_hz)
 }
 
 
-#define BUFFER_NUM_CELLS 256
-static int bufarray[BUFFER_NUM_CELLS];
+#define BUFFER_NUM_TABLE_CELLS 256
+static int bufarray[BUFFER_NUM_TABLE_CELLS];
 static volatile unsigned int num_out;
 
 
@@ -76,7 +76,7 @@ void audioHook()
 	{ // because 16bit access to num_out which can be changed in Buffer::out() used in audio interrupt
 		gap = num_in - num_out; // wraps to a big number if it's negative
 	}
-	if (gap < BUFFER_NUM_CELLS)
+	if (gap < BUFFER_NUM_TABLE_CELLS)
 	{
 		in_pos++;
 		num_in++;

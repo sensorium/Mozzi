@@ -1,7 +1,7 @@
 /*
  * Oscil.h
  *
- * Copyright 2012 sweatsonics@sweatsonics.com.
+ * Copyright 2012 unbackwards@gmail.com.
  *
  * This file is part of Cuttlefish.
  *
@@ -40,20 +40,20 @@ control signal. The frequency of the signal can be set or changed with
 setFreq(), and the output of an Oscil can be produced with next() for a simple
 cycling oscillator, or atIndex() for a particular sample in the table.
 */
-template <unsigned int NUM_CELLS, unsigned int UPDATE_RATE>
+template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE>
 class Oscil
 {
 
 public:
-
-	/** Oscil is a template class, declared in a sketch as follows, with NUM_CELLS and
-	UPDATE_RATE replaced by your own values: Oscil <NUM_CELLS, UPDATE_RATE>
-	myoscil(tablename); It's important that NUM_CELLS and UPDATE_RATE are both
-	literal integers, directly stated as numbers (eg. "8192") or as predefined
-	macros. AUDIO_RATE is a defined literal used by Cuttlefish. It's useful to
-	define CONTROL_RATE in your sketches ("eg. #define CONTROL_RATE 128"), to
-	configure startCuttlefish(CONTROL_RATE) in setup() and to sync your control
-	calculations using the same value in updateControl().
+	/** Oscil is a template class, declared in a sketch as follows, with
+	NUM_TABLE_CELLS and UPDATE_RATE replaced by your own values: Oscil
+	<NUM_TABLE_CELLS, UPDATE_RATE> myoscil(tablename); It's important that
+	NUM_TABLE_CELLS and UPDATE_RATE are both literal integers, directly stated as
+	numbers (eg. "8192") or as predefined macros. AUDIO_RATE is a defined literal
+	used by Cuttlefish. It's useful to define CONTROL_RATE in your sketches ("eg.
+	#define CONTROL_RATE 128"), to configure startCuttlefish(CONTROL_RATE) in
+	setup() and to sync your control calculations using the same value in
+	updateControl().
 	*/
 	Oscil(prog_char * TABLE_NAME):table(TABLE_NAME)
 	{}
@@ -80,7 +80,7 @@ public:
 	char phMod(long phmod_proportion)
 	{
 		incrementPhase();
-		return (char)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_CELLS))>>F_BITS) & (NUM_CELLS - 1)));
+		return (char)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))>>F_BITS) & (NUM_TABLE_CELLS - 1)));
 	}
 
 	/** Set the frequency using 24n8 fixed-point number format. Note: use with caution
@@ -94,7 +94,7 @@ public:
 	{
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
-			phase_increment_fractional = ((freq * NUM_CELLS)/UPDATE_RATE) << (F_BITS-8);
+			phase_increment_fractional = ((freq * NUM_TABLE_CELLS)/UPDATE_RATE) << (F_BITS-8);
 		}
 	}
 
@@ -109,7 +109,7 @@ public:
 	{
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
-			phase_increment_fractional = (((unsigned long)freq * NUM_CELLS)/UPDATE_RATE) << F_BITS; // Obvious but slow
+			phase_increment_fractional = (((unsigned long)freq * NUM_TABLE_CELLS)/UPDATE_RATE) << F_BITS; // Obvious but slow
 		}
 	}
 
@@ -122,7 +122,7 @@ public:
 	{ // 1 us
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
-			phase_increment_fractional = (unsigned long)((((float)NUM_CELLS * freq)/UPDATE_RATE) * F_BITS_AS_MULTIPLIER);
+			phase_increment_fractional = (unsigned long)((((float)NUM_TABLE_CELLS * freq)/UPDATE_RATE) * F_BITS_AS_MULTIPLIER);
 		}
 	}
 
@@ -131,10 +131,10 @@ public:
 	inline
 	char atIndex(unsigned int index)
 	{
-		return (char)pgm_read_byte_near(table + (index & (NUM_CELLS - 1)));
+		return (char)pgm_read_byte_near(table + (index & (NUM_TABLE_CELLS - 1)));
 	}
 
-	/** phaseIncFromFreq and setPhaseInc are for saving processor time when sliding
+	/** phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding
 	between frequencies. Instead of recalculating the phase increment for each
 	frequency in between, you can just calculate each end and use a Line to
 	interpolate. (Note: I should really profile this with the oscilloscope to see if
@@ -143,10 +143,10 @@ public:
 	inline
 	unsigned long phaseIncFromFreq(unsigned int freq)
 	{
-		return (((unsigned long)freq * NUM_CELLS)/UPDATE_RATE) << F_BITS;
+		return (((unsigned long)freq * NUM_TABLE_CELLS)/UPDATE_RATE) << F_BITS;
 	}
 
-	/** See phaseIncFromFreq.
+	/** See phaseIncFromFreq().
 	 */
 	inline
 	void setPhaseInc(unsigned long phaseinc_fractional)
@@ -173,7 +173,7 @@ private:
 	inline
 	char readTable()
 	{
-		return (char)pgm_read_byte_near(table + ((phase_fractional >> F_BITS) & (NUM_CELLS - 1)));
+		return (char)pgm_read_byte_near(table + ((phase_fractional >> F_BITS) & (NUM_TABLE_CELLS - 1)));
 	}
 
 	unsigned long phase_fractional;

@@ -5,21 +5,21 @@
  *
  *  Circuit: Audio output on digital pin 9.
  *
- *  sweatsonics@sweatsonics.com 2012.
+ *  unbackwards@gmail.com 2012.
  *  This example code is in the public domain.
  */
 
 #include <CuttlefishGuts.h>
-#include <Oscil.h> 
+#include <Oscil.h>
 #include <tables/triangle_analogue512_int8.h> // wavetable
 #include <tables/cos8192_int8.h> // wavetable
-#include <DelayFeedback.h> 
+#include <DelayFeedback.h>
 #include <utils.c> // for mtof
 
 #define CONTROL_RATE 128 // powers of 2 please
 
-Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, AUDIO_RATE> aTriangle(TRIANGLE_ANALOGUE512_DATA);
-Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kDelSamps(COS8192_DATA);
+Oscil<TRIANGLE_ANALOGUE512_NUM_TABLE_CELLS, AUDIO_RATE> aTriangle(TRIANGLE_ANALOGUE512_DATA);
+Oscil<COS8192_NUM_TABLE_CELLS, CONTROL_RATE> kDelSamps(COS8192_DATA);
 
 DelayFeedback <128> aDel;
 unsigned char del_samps;

@@ -3,10 +3,10 @@
 
 #include "Arduino.h"
 #include <avr/pgmspace.h>
- 
+
 #define COS8192_NUM_CELLS 8192
-#define COS8192_SAMPLERATE 8192 
- 
+#define COS8192_SAMPLERATE 8192
+
 prog_char COS8192_DATA [] PROGMEM = {-128, -128, -128, -128, -128, -128, -128,
 -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128,
 -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128,

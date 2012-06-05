@@ -1,7 +1,7 @@
 /*
  * Line.h
  *
- * Copyright 2012 sweatsonics@sweatsonics.com.
+ * Copyright 2012 unbackwards@gmail.com.
  *
  * This file is part of Cuttlefish.
  *

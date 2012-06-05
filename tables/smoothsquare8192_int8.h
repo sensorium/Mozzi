@@ -1,12 +1,12 @@
 #ifndef SMOOTHSQUARE8192_H_
 #define SMOOTHSQUARE8192_H_
- 
+
 #include "Arduino.h"
 #include <avr/pgmspace.h>
- 
+
 #define SMOOTHSQUARE8192_NUM_CELLS 8192
 #define SMOOTHSQUARE8192_SAMPLERATE 8192
- 
+
 prog_char SMOOTHSQUARE8192_DATA [] PROGMEM = {-1, 0, -1, 0, -1, 0, 0, 0, -1, 0,
 -1, 0, -1, 0, 0, -1, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, -1, 0,
 -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, -1, 0, 0, -1, 0, -1, 0, -1, 0, -1,
@@ -551,5 +551,5 @@ prog_char SMOOTHSQUARE8192_DATA [] PROGMEM = {-1, 0, -1, 0, -1, 0, 0, 0, -1, 0,
 -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128,
 -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128,
 -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, };
- 
+
  #endif /* SMOOTHSQUARE8192_H_ */

@@ -1,11 +1,10 @@
 /*
  * Ead.h
  *
- * Adapted from extlib_util.h:
- * Prototypes for utility functions used in pd externals
+ * Adapted from ead~.c puredata external (creb library)
  * Copyright (c) 2000-2003 by Tom Schouten
  *
- * Copyright 2012 sweatsonics@sweatsonics.com, 2000-2003 Tom Schouten
+ * Copyright 2012 Tim Barrass unbackwards@gmail.com, 2000-2003 Tom Schouten
  *
  * This file is part of Cuttlefish.
  *
@@ -28,104 +27,109 @@
 #define EAD_H_
 
 #include "math.h"
-#include <fixed8n8.h>
+#include <fixedMath.h>
+#include "Arduino.h"
 
-/** Exponential attack decay envelope.
+
+/** Exponential attack decay envelope. This produces a natural sounding
+envelope. It calculates a new value each time next() is called, which can be
+used to change the amplitude or timbre of a sound.  The equations used are:
+ attack: y = a*pow((1+r),x)
+ decay: y = a*pow((1-r),x)
 */
+
 class Ead
 {
 
 public:
+
+	/** Constructor.
+	UPDATE_RATE would usually be CONTROL_RATE or AUDIO_RATE, unless
+	you design another scheme for updating, for instance by taking turns for various
+	control changes in a rotating schedule to spread out calculations made in
+	successive updateControl() routines. */
 	Ead(const unsigned int UPDATE_RATE);
 
 
+	/** Set the Q8n8attack time in milliseconds. The Q8n8attack time means how long it takes
+	for the values returned by successive calls of the next() method to change from
+	0 to 1. */
 	inline
 	void setAttack(unsigned int milliseconds)
 	{
-		attack = float2fix(milliseconds_2_one_minus_realpole(milliseconds));
+		Q8n8attack = Q8n8_float2fix(millisToOneMinusRealPole(milliseconds));
 	}
 
 
+	/** Set the Q8n8decay time in milliseconds. The Q8n8decay time means how long
+	the Q8n8decay phase takes to change from 1 to 0. */
 	inline
 	void setDecay(unsigned int milliseconds)
 	{
-		decay = float2fix(milliseconds_2_one_minus_realpole(milliseconds));
+		Q8n8decay = Q8n8_float2fix(millisToOneMinusRealPole(milliseconds));
 	}
 
 
+	/** Set Q8n8attack and Q8n8decay times in milliseconds. */
 	inline
-	void set(unsigned int attackms,unsigned int decayms)
+	void set(unsigned int attackms, unsigned int decayms)
 	{
 		setAttack(attackms);
 		setDecay(decayms);
 	}
 
 
+	/** Start the envelope from the beginning. This can be used at any
+	time, even if the previous envelope is not finished. */
 	inline
 	void start()
 	{
-		state = 0;
-		target = true;
+		Q8n24state = 0;
+		attack_phase = true;
 	}
 
 
+	/** Calculate and return the next envelope value, in the range -128 to 127 */
+
+	// 5us
 	inline
-	unsigned int next()
+	unsigned char next()
 	{
-		switch(target)
+		switch(attack_phase)
 		{
 		case true: /* attack phase */
-			state += attack * (float2fix(1) - state);
-			target = (state <= ENVELOPE_MAX);
+			// signed multiply A(a1,b1) * A(a2,b2)=A(a1 +a2 +1,b1 +b2)
+			Q8n24state += ((Q8n24_FIX1 - Q8n24state) * Q8n8attack) >> 8; // Q8n24, shifts all back into n24
+			if (Q8n24state >= Q8n24_FIX1-256)
+			{
+				Q8n24state = Q8n24_FIX1-256;
+				attack_phase = false;
+			}
 			break;
 		default: /* decay phase */
-			state -= decay*state;
+			Q8n24state -= (Q8n24state * Q8n8decay)>>8;
 			break;
 		}
-		return state; // 8n8
+		return Q8n24_to_Q0n8(Q8n24state);
 	}
-
-
-
-	inline
-	unsigned int  getAttack()
-	{
-		return attack;
-	}
-
-	inline
-	unsigned int  getDecay()
-	{
-		return decay;
-	}
-
-	inline
-	unsigned int  getState()
-	{
-		return state;
-	}
-
 
 private:
-	unsigned int  attack;
-	unsigned int  decay;
-	unsigned int state; // fixed 8n8 format
-	bool target;
+
+	Q8n8 Q8n8attack;
+	Q8n8 Q8n8decay;
+	Q8n24 Q8n24state;
+	bool attack_phase;
 	const unsigned int UPDATE_RATE;
+
 
 	/* convert milliseconds to 1-p, with p a real pole */
 	inline
-	float milliseconds_2_one_minus_realpole(unsigned int milliseconds)
+	float millisToOneMinusRealPole(unsigned int milliseconds)
 	{
-		float r;
-
-		//if (milliseconds < 0) milliseconds = 0;
-		r = -expm1(1000.0f * log(ENVELOPE_RANGE) / (UPDATE_RATE * milliseconds));
-		if (!(r < 1.0f))
-			r = 1.0f;
-
-		return r;
+		static const float NUMERATOR = 1000.0f * log(0.001f);
+		return  -expm1(NUMERATOR / ((float)UPDATE_RATE * milliseconds));
 	}
+
 
 	// Compute exp(x) - 1 without loss of precision for small values of x.
 	inline
@@ -141,9 +145,6 @@ private:
 		}
 	}
 
-	/* exponential range for envelopes is ??dB */
-	static const unsigned char ENVELOPE_RANGE; // use #define instead?
-	static const unsigned int ENVELOPE_MAX;
 };
 
 #endif /* EAD_H_ */

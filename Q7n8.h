@@ -1,15 +1,27 @@
-#ifndef FIXED8_H_
-#define FIXED8_H_
+#ifndef Q7n8_H_
+#define Q7n8_H_
+
+
+// types
+#define Q7n8 int
+//#define Q0n16 unsigned int
+
+
+// macros to save runtime calculations
+#define Q7n8_FIX1 256
+//#define Q0n16_FIX1 65535
+
 
 // Type conversions:
-#define int2fix(a)   (((int)(a))<<8)            //Convert char to fix. a is a char
-#define fix2int(a)   ((signed char)((a)>>8))    //Convert fix to char. a is an int
-#define float2fix(a) ((int)((a)*256.0))         //Convert float to fix. a is a float
-#define fix2float(a) ((float)(a)/256.0)         //Convert fix to float. a is an int
+#define Q7n8_int2fix(a)   (((int)(a))<<8)            //Convert char to fix. a is a char
+#define Q7n8_fix2int(a)   ((signed char)((a)>>8))    //Convert fix to char. a is an int
+#define Q7n8_float2fix(a) ((int)((a)*256.f))         //Convert float to fix. a is a float
+#define Q7n8_fix2float(a) ((float)(a)/256.f)         //Convert fix to float. a is an int
 
+//#define Q7n8_keepFixedInRange(a) (a>>8) // shift into range after multiplying
 
 // Fast fixed point multiply
-#define multfix(a,b)          	  \
+#define Q7n8_multfix(a,b)          	  \
 ({                                \
 int prod, val1=a, val2=b ;        \
 __asm__ __volatile__ (            \
@@ -229,4 +241,4 @@ end
     oscillators[c].phaseStep=multipliedCounter;
 
     */
-#endif /* FIXED8_H_ */
+#endif /* Q7n8_H_ */

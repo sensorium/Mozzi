@@ -3,10 +3,10 @@
 
 #include "Arduino.h"
 #include <avr/pgmspace.h>
- 
+
 #define SIN256_NUM_CELLS 256
-#define SIN256_SAMPLERATE 256 
- 
+#define SIN256_SAMPLERATE 256
+
 prog_char SIN256_DATA [] PROGMEM = {-1, 3, 6, 9, 12, 15, 18, 21, 24, 28,
 31, 34, 37, 40, 43, 46, 48, 51, 54, 57, 60, 63, 65, 68, 71, 73, 76, 78, 81, 83,
 85, 88, 90, 92, 94, 96, 98, 100, 102, 104, 106, 108, 109, 111, 112, 114, 115,

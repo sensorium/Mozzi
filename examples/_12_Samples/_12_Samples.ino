@@ -1,13 +1,13 @@
 /*  Example of playing sampled sounds,
  *  using Cuttlefish sonification library.
  *
- *  Demonstrates one-shot samples scheduled 
- *  with Timebomb, and use of xorshift96(),
+ *  Demonstrates one-shot samples scheduled
+ *  with DelayCuttlefish, and use of xorshift96(),
  *  a random number generator.
  *
  *  Circuit: Audio output on digital pin 9.
  *
- *  sweatsonics@sweatsonics.com 2012.
+ *  unbackwards@gmail.com 2012.
  *  This example code is in the public domain.
  */
 
@@ -16,26 +16,26 @@
 #include <tables/bamboo1_1024_int8.h> // wavetable data
 #include <tables/bamboo2_1024_int8.h> // wavetable data
 #include <tables/bamboo3_2048_int8.h> // wavetable data
-#include <Timebomb.h>
+#include <DelayCuttlefish.h>
 #include <utils.c> // for xorshift96() random number generator
 
 #define CONTROL_RATE 64
 
-// use: Sample <table_size, update_rate> SampleName (wavetable)
-Sample <BAMBOO1_1024_NUM_CELLS, AUDIO_RATE> aBamboo1(BAMBOO1_1024_DATA);
-Sample <BAMBOO2_1024_NUM_CELLS, AUDIO_RATE> aBamboo2(BAMBOO2_1024_DATA);
-Sample <BAMBOO3_2048_NUM_CELLS, AUDIO_RATE> aBamboo3(BAMBOO3_2048_DATA);
+// use: Sample <table_size, UPDATE_RATE> SampleName (wavetable)
+Sample <BAMBOO1_1024_NUM_TABLE_CELLS, AUDIO_RATE> aBamboo1(BAMBOO1_1024_DATA);
+Sample <BAMBOO2_1024_NUM_TABLE_CELLS, AUDIO_RATE> aBamboo2(BAMBOO2_1024_DATA);
+Sample <BAMBOO3_2048_NUM_TABLE_CELLS, AUDIO_RATE> aBamboo3(BAMBOO3_2048_DATA);
 
 // for scheduling audio gain changes
-Timebomb kBoom(CONTROL_RATE);
+DelayCuttlefish kBoom(CONTROL_RATE);
 
 void setup(){
   startCuttlefish(CONTROL_RATE);
-  aBamboo1.setFreq((float) BAMBOO1_1024_SAMPLERATE / (float) BAMBOO1_1024_NUM_CELLS); // play at the speed it was recorded at
-  aBamboo2.setFreq((float) BAMBOO2_1024_SAMPLERATE / (float) BAMBOO2_1024_NUM_CELLS);
-  aBamboo3.setFreq((float) BAMBOO3_2048_SAMPLERATE / (float) BAMBOO3_2048_NUM_CELLS);
-  kBoom.store(111); // countdown ms, within resolution of CONTROL_RATE
-  
+  aBamboo1.setFreq((float) BAMBOO1_1024_SAMPLERATE / (float) BAMBOO1_1024_NUM_TABLE_CELLS); // play at the speed it was recorded at
+  aBamboo2.setFreq((float) BAMBOO2_1024_SAMPLERATE / (float) BAMBOO2_1024_NUM_TABLE_CELLS);
+  aBamboo3.setFreq((float) BAMBOO3_2048_SAMPLERATE / (float) BAMBOO3_2048_NUM_TABLE_CELLS);
+  kBoom.set(111); // countdown ms, within resolution of CONTROL_RATE
+
 }
 
 
@@ -55,7 +55,7 @@ struct gainstruct{
 gains;
 
 void updateControl(){
-  if(kBoom.boom()){
+  if(kBoom.ready()){
     switch(byteMod(lowByte(xorshift96()), 3)) {
     case 0:
       gains.gain1 = randomGain();
@@ -70,14 +70,14 @@ void updateControl(){
       aBamboo3.start();
       break;
     }
-    kBoom.reset();
+    kBoom.start();
   }
-} 
+}
 
 
 int updateAudio(){
-  int asig= (int) ((long) aBamboo1.next()*gains.gain1 + 
-    aBamboo2.next()*gains.gain2 + 
+  int asig= (int) ((long) aBamboo1.next()*gains.gain1 +
+    aBamboo2.next()*gains.gain2 +
     aBamboo3.next()*gains.gain3)/16;
   //clip
   if (asig > 243) asig = 243;

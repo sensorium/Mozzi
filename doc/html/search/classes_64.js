@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['delay',['Delay',['../class_delay.html',1,'']]],
-  ['delayfeedback',['DelayFeedback',['../class_delay_feedback.html',1,'']]]
+  ['delaycuttlefish',['DelayCuttlefish',['../class_delay_cuttlefish.html',1,'']]]
 ];

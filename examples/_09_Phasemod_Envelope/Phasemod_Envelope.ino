@@ -3,9 +3,9 @@
  *
  *
  *  Demonstrates phase modulation and modifying
- *  the volume of a sound with an envelope stored in a table.
+ *  the volume of a sound with an envelope setd in a table.
  *
- *  sweatsonics@sweatsonics.com 2012.
+ *  unbackwards@gmail.com 2012.
  *  This example code is in the public domain.
  */
 
@@ -16,13 +16,13 @@
 
 #define CONTROL_RATE 512 // quite fast, keeps modulation smooth
 
-// use: Oscil <table_size, update_rate> oscilName (wavetable)
-Oscil <COS8192_NUM_CELLS, AUDIO_RATE> aCarrier(COS8192_DATA);
-Oscil <COS8192_NUM_CELLS, AUDIO_RATE> aModulator(COS8192_DATA);
-Oscil <COS8192_NUM_CELLS, AUDIO_RATE> aModWidth(COS8192_DATA);
-Oscil <COS8192_NUM_CELLS, CONTROL_RATE> kModFreq1(COS8192_DATA);
-Oscil <COS8192_NUM_CELLS, CONTROL_RATE> kModFreq2(COS8192_DATA);
-Oscil <ENVELOP2048_NUM_CELLS, AUDIO_RATE> aEnvelop(ENVELOP2048_DATA);
+// use: Oscil <table_size, UPDATE_RATE> oscilName (wavetable)
+Oscil <COS8192_NUM_TABLE_CELLS, AUDIO_RATE> aCarrier(COS8192_DATA);
+Oscil <COS8192_NUM_TABLE_CELLS, AUDIO_RATE> aModulator(COS8192_DATA);
+Oscil <COS8192_NUM_TABLE_CELLS, AUDIO_RATE> aModWidth(COS8192_DATA);
+Oscil <COS8192_NUM_TABLE_CELLS, CONTROL_RATE> kModFreq1(COS8192_DATA);
+Oscil <COS8192_NUM_TABLE_CELLS, CONTROL_RATE> kModFreq2(COS8192_DATA);
+Oscil <ENVELOP2048_NUM_TABLE_CELLS, AUDIO_RATE> aEnvelop(ENVELOP2048_DATA);
 
 
 void setup() {
@@ -35,7 +35,7 @@ void setup() {
 }
 
 
-void updateControl() { 
+void updateControl() {
   aModulator.setFreq(277.0f + 0.4313f*kModFreq1.next() + kModFreq2.next());
 }
 

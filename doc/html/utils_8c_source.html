@@ -104,7 +104,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00016"></a>00016 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> xorshift96() {          <span class="comment">//period 2^96-1</span>
 <a name="l00017"></a>00017         <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> x=123456789, y=362436069, z=521288629;
 <a name="l00018"></a>00018         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> t;
-<a name="l00019"></a>00019         
+<a name="l00019"></a>00019 
 <a name="l00020"></a>00020     x ^= x &lt;&lt; 16;
 <a name="l00021"></a>00021     x ^= x &gt;&gt; 5;
 <a name="l00022"></a>00022     x ^= x &lt;&lt; 1;
@@ -121,9 +121,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00033"></a>00033 <span class="comment">//TB2012 changed names to not interfere with arduino compilation</span>
 <a name="l00034"></a>00034 <span class="comment">//Fast integer math</span>
 <a name="l00035"></a>00035 <span class="comment">//</span>
-<a name="l00036"></a>00036 <span class="comment">//If you need to include arithmetic operations in you code but you don&#39;t need </span>
-<a name="l00037"></a>00037 <span class="comment">//floating point operations, you could use boolean operations instead of arithmetic </span>
-<a name="l00038"></a>00038 <span class="comment">//operations, or use smaller data types and custom functions instead of stdlib functions </span>
+<a name="l00036"></a>00036 <span class="comment">//If you need to include arithmetic operations in you code but you don&#39;t need</span>
+<a name="l00037"></a>00037 <span class="comment">//floating point operations, you could use boolean operations instead of arithmetic</span>
+<a name="l00038"></a>00038 <span class="comment">//operations, or use smaller data types and custom functions instead of stdlib functions</span>
 <a name="l00039"></a>00039 <span class="comment">//or C operators (expecially / and %).</span>
 <a name="l00040"></a>00040 <span class="comment">//Look at IntegerCodeSnippets, http://code.google.com/p/ht1632c/wiki/IntegerCodeSnippets</span>
 <a name="l00041"></a>00041 <span class="comment">//</span>
@@ -161,22 +161,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00073"></a>00073 
 <a name="l00074"></a>00074 <span class="comment">//end of snip from http://code.google.com/p/ht1632c/wiki/Optimizations</span>
 <a name="l00075"></a>00075 
-<a name="l00076"></a>00076 
-<a name="l00077"></a>00077 <span class="keywordtype">void</span> setupFastADC() {
-<a name="l00078"></a>00078     <span class="comment">/*</span>
-<a name="l00079"></a>00079 <span class="comment">    * Make analogRead() faster than the standard arduino version, see:</span>
-<a name="l00080"></a>00080 <span class="comment">    * http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11</span>
-<a name="l00081"></a>00081 <span class="comment">    * FASTADC set in guts.h</span>
-<a name="l00082"></a>00082 <span class="comment">    */</span>
-<a name="l00083"></a>00083     sbi(ADCSRA,ADPS2);
-<a name="l00084"></a>00084     cbi(ADCSRA,ADPS1);
-<a name="l00085"></a>00085     cbi(ADCSRA,ADPS0);
-<a name="l00086"></a>00086 }
+<a name="l00076"></a>00076 <span class="keywordtype">void</span> setupFastADC() {
+<a name="l00077"></a>00077     <span class="comment">/*</span>
+<a name="l00078"></a>00078 <span class="comment">    * Make analogRead() faster than the standard arduino version, see:</span>
+<a name="l00079"></a>00079 <span class="comment">    * http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11</span>
+<a name="l00080"></a>00080 <span class="comment">    * FASTADC set in guts.h</span>
+<a name="l00081"></a>00081 <span class="comment">    */</span>
+<a name="l00082"></a>00082     sbi(ADCSRA,ADPS2);
+<a name="l00083"></a>00083     cbi(ADCSRA,ADPS1);
+<a name="l00084"></a>00084     cbi(ADCSRA,ADPS0);
+<a name="l00085"></a>00085 }
+<a name="l00086"></a>00086 
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 31 2012 13:12:17 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jun 4 2012 01:13:34 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

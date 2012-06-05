@@ -1,19 +1,19 @@
 ##    raw2cuttle.py
-##    Created 2010-12 by sweatsonics@sweatsonics.com
+##    Created 2010-12 by unbackwards@gmail.com
 ##
 ##    raw2cuttle converts raw 8 bit sound data to wavetables for Cuttlefish.                                                                                                       ##
-##                                                                                                               
+##
 ##    use: raw2cuttle(infilename, outfilename, tablename, samplerate)
 ##
 ##    There's an example at the end of this file, copy and modify it
-## 
+##
 ##    To use Audacity to produce wavetables for Arduino:
-##    Set your Audacity project sample rate.  For repeating waveforms like sine or 
+##    Set your Audacity project sample rate.  For repeating waveforms like sine or
 ##    sawtooth, set the project rate to the size of the wavetable you wish to create,
-##    which must be a power of two (eg. 8192), and set the selection format (beneath the editing window) 
+##    which must be a power of two (eg. 8192), and set the selection format (beneath the editing window)
 ##    to samples.  Then you can generate and save 1 second of a waveform and it will fit your table length.
 ##    For a one-shot audio sample such as a recorded sound, set the
-##    project rate to the Cuttlefish AUDIO_RATE (16384 in the current 
+##    project rate to the Cuttlefish AUDIO_RATE (16384 in the current
 ##    version).  Then edit your sounds to a power-of-two number of samples.
 ##
 ##    Save by exporting with the format set to "Other uncompressed formats", with
@@ -28,14 +28,14 @@ import textwrap
 def raw2cuttle(infilename, outfilename, tablename, samplerate):
     fin = open(os.path.expanduser(infilename), "rb")
     print "opened " + infilename
-    bytestoread = os.path.getsize(os.path.expanduser(infilename))
-    ##print bytestoread
+    bytesetad = os.path.getsize(os.path.expanduser(infilename))
+    ##print bytesetad
     valuesfromfile = array.array('b') # array of signed char ints
     try:
-        valuesfromfile.fromfile(fin, bytestoread)
+        valuesfromfile.fromfile(fin, bytesetad)
     finally:
         fin.close()
-        
+
     values=valuesfromfile.tolist()
 ##    print values[0]
 ##    print values[len(values)-1]
@@ -45,12 +45,12 @@ def raw2cuttle(infilename, outfilename, tablename, samplerate):
     fout.write('#define ' + tablename + '_H_' + '\n \n')
     fout.write('#include "Arduino.h"'+'\n')
     fout.write('#include <avr/pgmspace.h>'+'\n \n')
-    fout.write('#define ' + tablename + '_NUM_CELLS '+ str(len(values))+'\n')
+    fout.write('#define ' + tablename + '_NUM_TABLE_CELLS '+ str(len(values))+'\n')
     fout.write('#define ' + tablename + '_SAMPLERATE '+ str(samplerate)+'\n \n')
     outstring = 'prog_char ' + tablename + '_DATA [] PROGMEM = {'
     try:
         for num in values:
-            outstring += str(num) + ", " 
+            outstring += str(num) + ", "
     finally:
         outstring +=  "};"
         outstring = textwrap.fill(outstring, 80)
@@ -60,7 +60,7 @@ def raw2cuttle(infilename, outfilename, tablename, samplerate):
         print "wrote " + outfilename
 
 ############################################################
-       
+
 ##example (tested on osx):
 ##raw2cuttle("~/Desktop/sin4096_int8.raw", "~/Desktop/sin4096_int8.h", "SIN4096","4096")
 ##raw2cuttle("~/Desktop/organ8192_int8.raw", "~/Desktop/organ8192_int8.h", "ORGAN8192","8192")

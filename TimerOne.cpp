@@ -8,7 +8,7 @@
  *  - Add (long) assignments and casts to TimerOne::read() to ensure calculations involving tmp, ICR1 and TCNT1 aren't truncated
  *  - Ensure 16 bit registers accesses are atomic - run with interrupts disabled when accessing
  *  - Remove global enable of interrupts (sei())- could be running within an interrupt routine)
- *  - Disable interrupts whilst TCTN1 == 0.  Datasheet vague on this, but experiment shows that overflow interrupt 
+ *  - Disable interrupts whilst TCTN1 == 0.  Datasheet vague on this, but experiment shows that overflow interrupt
  *    flag gets set whilst TCNT1 == 0, resulting in a phantom interrupt.  Could just set to 1, but gets inaccurate
  *    at very short durations
  *  - startBottom() added to start counter at 0 and handle all interrupt enabling.
@@ -41,7 +41,7 @@
 
 TimerOne Timer1;              // preinstatiate
 
-ISR(TIMER1_OVF_vect) 
+ISR(TIMER1_OVF_vect)
 // NO NO NOTB2012 ISR_NOBLOCK to reduce interruption to audio output by control from timer 2
 // ISR(TIMER1_OVF_vect,ISR_NOBLOCK)          // interrupt service routine that wraps a user defined function supplied by attachInterrupt
 {
@@ -53,7 +53,7 @@ ISR(TIMER1_OVF_vect)
 
 void TimerOne::initialize(long microseconds)
 {
-  TCCR1A = 0;                 // clear control register A 
+  TCCR1A = 0;                 // clear control register A
   TCCR1B = _BV(WGM13);        // set mode 8: phase and frequency correct pwm, stop the timer
   setPeriod(microseconds);
   //TB2012 for testing timing
@@ -63,7 +63,7 @@ void TimerOne::initialize(long microseconds)
 
 void TimerOne::setPeriod(long microseconds)		// AR modified for atomic access
 {
-  
+
   long cycles = (F_CPU / 2000000) * microseconds;                                // the counter runs backwards after TOP, interrupt is at BOTTOM so divide microseconds by 2
   if(cycles < RESOLUTION)              clockSelectBits = _BV(CS10);              // no prescale, full xtal
   else if((cycles >>= 3) < RESOLUTION) clockSelectBits = _BV(CS11);              // prescale by /8
@@ -71,23 +71,23 @@ void TimerOne::setPeriod(long microseconds)		// AR modified for atomic access
   else if((cycles >>= 2) < RESOLUTION) clockSelectBits = _BV(CS12);              // prescale by /256
   else if((cycles >>= 2) < RESOLUTION) clockSelectBits = _BV(CS12) | _BV(CS10);  // prescale by /1024
   else        cycles = RESOLUTION - 1, clockSelectBits = _BV(CS12) | _BV(CS10);  // request was out of bounds, set as maximum
-  
-  oldSREG = SREG;				
+
+  oldSREG = SREG;
   cli();							// Disable interrupts for 16 bit register access
   ICR1 = pwmPeriod = cycles;                                          // ICR1 is TOP in p & f correct pwm mode
   SREG = oldSREG;
-  
+
   TCCR1B &= ~(_BV(CS10) | _BV(CS11) | _BV(CS12));
-  TCCR1B |= clockSelectBits;                                          // reset clock select register, and starts the clock
+  TCCR1B |= clockSelectBits;                                          // start clock select register, and starts the clock
 }
 
 void TimerOne::setPwmDuty(char pin, int duty)
 {
   unsigned long dutyCycle = pwmPeriod;
-  
+
   dutyCycle *= duty;
   dutyCycle >>= 10;
-  
+
   oldSREG = SREG;
   cli();
   if(pin == 1 || pin == 9)       OCR1A = dutyCycle;
@@ -129,38 +129,38 @@ void TimerOne::attachInterrupt(void (*isr)(), long microseconds)
 
 void TimerOne::detachInterrupt()
 {
-  TIMSK1 &= ~_BV(TOIE1);                                   // clears the timer overflow interrupt enable bit 
+  TIMSK1 &= ~_BV(TOIE1);                                   // clears the timer overflow interrupt enable bit
 }
 
 void TimerOne::resume()				// AR suggested
-{ 
+{
   TCCR1B |= clockSelectBits;
 }
 
 void TimerOne::restart()		// Depricated - Public interface to start at zero - Lex 10/9/2011
 {
-	start();				
+	start();
 }
 
 void TimerOne::start()	// AR addition, renamed by Lex to reflect it's actual role
 {
   unsigned int tcnt1;
-  
-  TIMSK1 &= ~_BV(TOIE1);        // AR added 
-  GTCCR |= _BV(PSRSYNC);   		// AR added - reset prescaler (NB: shared with all 16 bit timers);
+
+  TIMSK1 &= ~_BV(TOIE1);        // AR added
+  GTCCR |= _BV(PSRSYNC);   		// AR added - start prescaler (NB: shared with all 16 bit timers);
 
   oldSREG = SREG;				// AR - save status register
   cli();						// AR - Disable interrupts
-  TCNT1 = 0;                	
-  SREG = oldSREG;          		// AR - Restore status register
+  TCNT1 = 0;
+  SREG = oldSREG;          		// AR - Reset status register
 
   do {	// Nothing -- wait until timer moved on from zero - otherwise get a phantom interrupt
 	oldSREG = SREG;
 	cli();
 	tcnt1 = TCNT1;
 	SREG = oldSREG;
-  } while (tcnt1==0); 
- 
+  } while (tcnt1==0);
+
 //  TIFR1 = 0xff;              		// AR - Clear interrupt flags
 //  TIMSK1 = _BV(TOIE1);              // sets the timer overflow interrupt enable bit
 }
@@ -176,8 +176,8 @@ unsigned long TimerOne::read()		//returns the value of the timer in microseconds
   	unsigned int tcnt1;				// AR added
 
 	oldSREG= SREG;
-  	cli();							
-  	tmp=TCNT1;    					
+  	cli();
+  	tmp=TCNT1;
 	SREG = oldSREG;
 
 	char scale=0;
@@ -199,7 +199,7 @@ unsigned long TimerOne::read()		//returns the value of the timer in microseconds
 		scale=10;
 		break;
 	}
-	
+
 	do {	// Nothing -- max delay here is ~1023 cycles.  AR modified
 		oldSREG = SREG;
 		cli();

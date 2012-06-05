@@ -3,10 +3,10 @@
 
 #include "Arduino.h"
 #include <avr/pgmspace.h>
- 
+
 #define ENVELOP2048_NUM_CELLS 2048
 #define ENVELOP2048_SAMPLERATE 2048
- 
+
 prog_char ENVELOP2048_DATA [] PROGMEM = {0, 1, 5, 8, 13, 22, 36, 53, 69, 82, 91,
 97, 103, 107, 113, 119, 128, 139, 151, 162, 171, 177, 181, 184, 186, 189, 192,
 195, 199, 203, 208, 212, 217, 221, 225, 228, 232, 236, 240, 242, 241, 238, 232,

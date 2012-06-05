@@ -1,5 +1,5 @@
 README for Cuttlefish, a sound synthesis library for Arduino.
-sweatsonics@sweatsonics.com 2010-12
+Tim Barrass unbackwards@gmail.com 2010-12
 
 
 Cuttlefish is a sound synthesis library for Arduino.
@@ -24,7 +24,7 @@ FEATURES
 INSTALLATION
 Put Cuttlefish into your libraries folder.  Restart Arduino so it can find Cuttlefish.
 
-CAVEAT 
+CAVEAT
 This code has been tested on Arduino Dumemilanove ATmega328.
 Feedback about performance on other Arduinos welcome.
 
@@ -62,7 +62,7 @@ AUDIO OUTPUT
 
 HINTS AND TIPS
 Cuttlefish doesn't play nice with  Arduino time functions millis(), micros(), delay(), delayMicroseconds().
-Instead, you can use TimeBomb for scheduling.  See the Timebomb example.
+Instead, you can use TimeBomb for scheduling.  See the DelayCuttlefish example.
 
 A computer line-in works well for listening, and you can record and examine your
 sounds with Audacity (http://audacity.sourceforge.net/) and

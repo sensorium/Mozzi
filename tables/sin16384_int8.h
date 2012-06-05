@@ -3,10 +3,10 @@
 
 #include "Arduino.h"
 #include <avr/pgmspace.h>
- 
+
 #define SIN16384_NUM_CELLS 16384
-#define SIN16384_SAMPLERATE 16384 
- 
+#define SIN16384_SAMPLERATE 16384
+
 prog_char SIN16384_DATA [] PROGMEM = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3,

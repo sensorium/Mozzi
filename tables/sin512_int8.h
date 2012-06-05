@@ -3,10 +3,10 @@
 
 #include "Arduino.h"
 #include <avr/pgmspace.h>
- 
+
 #define SIN512_NUM_CELLS 512
-#define SIN512_SAMPLERATE 512 
- 
+#define SIN512_SAMPLERATE 512
+
 prog_char SIN512_DATA [] PROGMEM = {0, 1, 2, 4, 5, 7, 8, 9, 11, 12, 14, 15, 16,
 18, 19, 21, 22, 23, 25, 26, 27, 29, 30, 32, 33, 34, 36, 37, 38, 40, 41, 42, 44,
 45, 46, 47, 49, 50, 51, 53, 54, 55, 56, 58, 59, 60, 61, 62, 64, 65, 66, 67, 68,

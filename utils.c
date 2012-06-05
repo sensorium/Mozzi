@@ -1,6 +1,6 @@
 #include "utils.h"
 
-/** Converts midi note number to frequency.  Code borrowed rom AF_precision_synthesis sketch.  
+/** Converts midi note number to frequency.  Code borrowed rom AF_precision_synthesis sketch.
  *  Like mtof object in Pd, midi values can have fractions.
  */
 float mtof(float x) {
@@ -9,14 +9,14 @@ float mtof(float x) {
 
 
 /** Fast random function which returns a 32 bit integer.
- *  This code comes from 
+ *  This code comes from
  *  Based on Marsaglia, George. (2003). Xorshift RNGs. http://www.jstatsoft.org/v08/i14/xorshift.pdf
  */
- 
+
 unsigned long xorshift96() {          //period 2^96-1
 	static unsigned long x=123456789, y=362436069, z=521288629;
 	unsigned long t;
-	
+
     x ^= x << 16;
     x ^= x >> 5;
     x ^= x << 1;
@@ -33,9 +33,9 @@ unsigned long xorshift96() {          //period 2^96-1
 //TB2012 changed names to not interfere with arduino compilation
 //Fast integer math
 //
-//If you need to include arithmetic operations in you code but you don't need 
-//floating point operations, you could use boolean operations instead of arithmetic 
-//operations, or use smaller data types and custom functions instead of stdlib functions 
+//If you need to include arithmetic operations in you code but you don't need
+//floating point operations, you could use boolean operations instead of arithmetic
+//operations, or use smaller data types and custom functions instead of stdlib functions
 //or C operators (expecially / and %).
 //Look at IntegerCodeSnippets, http://code.google.com/p/ht1632c/wiki/IntegerCodeSnippets
 //
@@ -73,7 +73,6 @@ byte byteRnd(byte min, byte max)
 
 //end of snip from http://code.google.com/p/ht1632c/wiki/Optimizations
 
-
 void setupFastADC() {
     /*
     * Make analogRead() faster than the standard arduino version, see:
@@ -84,3 +83,4 @@ void setupFastADC() {
     cbi(ADCSRA,ADPS1);
     cbi(ADCSRA,ADPS0);
 }
+

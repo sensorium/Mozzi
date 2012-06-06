@@ -123,10 +123,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3b2ea7727b2ec911957b3862dbb6a8ec"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a3b2ea7727b2ec911957b3862dbb6a8ec">atIndex</a> (unsigned int index)</td></tr>
 <tr class="memdesc:a3b2ea7727b2ec911957b3862dbb6a8ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sample at the given table index between 0 and the table size.The index rolls back around to 0 if it's larger than the table size.  <a href="#a3b2ea7727b2ec911957b3862dbb6a8ec"></a><br/></td></tr>
 <tr class="memitem:abc6040c5484c0ce7b9a6c3011336fd13"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#abc6040c5484c0ce7b9a6c3011336fd13">phaseIncFromFreq</a> (unsigned int freq)</td></tr>
-<tr class="memdesc:abc6040c5484c0ce7b9a6c3011336fd13"><td class="mdescLeft">&#160;</td><td class="mdescRight">phaseIncFromFreq and setPhaseInc are for saving processor time when sliding between frequencies.  <a href="#abc6040c5484c0ce7b9a6c3011336fd13"></a><br/></td></tr>
+<tr class="memdesc:abc6040c5484c0ce7b9a6c3011336fd13"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_oscil.html#abc6040c5484c0ce7b9a6c3011336fd13" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a> and <a class="el" href="class_oscil.html#a2ff9bfcc57e07bf0df2ed7db186ecff7" title="See phaseIncFromFreq().">setPhaseInc()</a> are for saving processor time when sliding between frequencies.  <a href="#abc6040c5484c0ce7b9a6c3011336fd13"></a><br/></td></tr>
 <tr class="memitem:a2ff9bfcc57e07bf0df2ed7db186ecff7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2ff9bfcc57e07bf0df2ed7db186ecff7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a2ff9bfcc57e07bf0df2ed7db186ecff7">setPhaseInc</a> (unsigned long phaseinc_fractional)</td></tr>
-<tr class="memdesc:a2ff9bfcc57e07bf0df2ed7db186ecff7"><td class="mdescLeft">&#160;</td><td class="mdescRight">See phaseIncFromFreq. <br/></td></tr>
+<tr class="memdesc:a2ff9bfcc57e07bf0df2ed7db186ecff7"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_oscil.html#abc6040c5484c0ce7b9a6c3011336fd13" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a>. <br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt;<br/>
@@ -155,7 +155,8 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <div class="memdoc">
 
 <p><a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> is a template class, declared in a sketch as follows, with NUM_TABLE_CELLS and UPDATE_RATE replaced by your own values: <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> &lt;NUM_TABLE_CELLS, UPDATE_RATE&gt; myoscil(tablename); It's important that NUM_TABLE_CELLS and UPDATE_RATE are both literal integers, directly stated as numbers (eg. </p>
-<p>"8192") or as predefined macros. AUDIO_RATE is a defined literal used by Cuttlefish. It's useful to define CONTROL_RATE in your sketches ("eg. #define CONTROL_RATE 128"), to configure startCuttlefish(CONTROL_RATE) in setup() and to sync your control calculations using the same value in updateControl(). </p>
+<p>"8192") or as predefined macros. AUDIO_RATE is a defined literal used by Cuttlefish. It's useful to define CONTROL_RATE in your sketches ("eg.
+&lt;h1&gt;define CONTROL_RATE 128"), to configure startCuttlefish(CONTROL_RATE) in setup() and to sync your control calculations using the same value in updateControl(). </p>
 
 <p>Definition at line <a class="el" href="_oscil_8h_source.html#l00058">58</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
@@ -225,7 +226,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>phaseIncFromFreq and setPhaseInc are for saving processor time when sliding between frequencies. </p>
+<p><a class="el" href="class_oscil.html#abc6040c5484c0ce7b9a6c3011336fd13" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a> and <a class="el" href="class_oscil.html#a2ff9bfcc57e07bf0df2ed7db186ecff7" title="See phaseIncFromFreq().">setPhaseInc()</a> are for saving processor time when sliding between frequencies. </p>
 <p>Instead of recalculating the phase increment for each frequency in between, you can just calculate each end and use a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> to interpolate. (Note: I should really profile this with the oscilloscope to see if it's worth the extra confusion.) </p>
 
 <p>Definition at line <a class="el" href="_oscil_8h_source.html#l00144">144</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
@@ -335,7 +336,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 4 2012 01:13:34 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jun 7 2012 00:12:30 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

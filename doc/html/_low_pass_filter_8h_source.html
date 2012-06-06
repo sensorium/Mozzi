@@ -94,263 +94,122 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">LowPassFilter.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef LOWPASSFILTER_H_</span>
-<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define LOWPASSFILTER_H_</span>
-<a name="l00003"></a>00003 <span class="preprocessor"></span>
-<a name="l00004"></a>00004 <span class="preprocessor">#include &quot;Arduino.h&quot;</span>
-<a name="l00005"></a>00005 
-<a name="l00006"></a>00006 <span class="comment">//#include &quot;CuttlefishGuts.h&quot;</span>
-<a name="l00007"></a>00007 
-<a name="l00008"></a>00008 <span class="comment">// adapted from Joe Marshall&#39;s 2011</span>
-<a name="l00009"></a>00009 <span class="comment">//  low pass filter based on the one from MeeBlip (http://meeblip.noisepages.com)</span>
-<a name="l00010"></a>00010 <span class="comment">// used in Joe&#39;s OCTOSynth-0.2 http://www.cs.nott.ac.uk/~jqm/?p=605</span>
-<a name="l00011"></a>00011 
-<a name="l00012"></a>00012 <span class="comment">// a += f*((in-a)+ q*(a-b)</span>
-<a name="l00013"></a>00013 <span class="comment">// b+= f* (a-b)</span>
-<a name="l00014"></a>00014 
-<a name="l00015"></a>00015 <span class="comment">// log table for 128 filter cutoffs</span>
-<a name="l00016"></a>00016 <span class="keyword">static</span> prog_uchar logCutoffs[128] PROGMEM = {0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x03,0x04,0x04,0x04,0x04,0x04,0x05,0x05,0x05,0x05,0x06,0x06,0x06,0x06,0x06,0x06,0x07,0x08,0x08,0x08,0x09,0x09,0x0A,0x0A,0x0A,0x0A,0x0B,0x0C,0x0C,0x0C,0x0C,0x0D,0x0E,0x0F,0x10,0x11,0x12,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,0x1A,0x1B,0x1C,0x1E,0x20,0x21,0x22,0x23,0x24,0x26,0x28,0x2A,0x2C,0x2E,0x30,0x32,0x34,0x36,0x38,0x3A,0x40,0x42,0x44,0x48,0x4C,0x4F,0x52,0x55,0x58,0x5D,0x61,0x65,0x68,0x6C,0x70,0x76,0x7E,0x85,0x8A,0x90,0x96,0x9D,0xA4,0xAB,0xB0,0xBA,0xC4,0xCE,0xD8,0xE0,0xE8,0xF4,0xFF};
-<a name="l00017"></a>00017 
-<a name="l00018"></a><a class="code" href="class_low_pass_filter.html">00018</a> <span class="keyword">class </span><a class="code" href="class_low_pass_filter.html">LowPassFilter</a>
-<a name="l00019"></a>00019 {
-<a name="l00020"></a>00020 
-<a name="l00021"></a>00021 <span class="keyword">public</span>:
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<a name="l00002"></a>00002 <span class="comment"> * LowPassFilter.h</span>
+<a name="l00003"></a>00003 <span class="comment"> *</span>
+<a name="l00004"></a>00004 <span class="comment"> * Copyright 2012 Tim Barrass unbackwards@gmail.com</span>
+<a name="l00005"></a>00005 <span class="comment"> *</span>
+<a name="l00006"></a>00006 <span class="comment"> * This file is part of Cuttlefish.</span>
+<a name="l00007"></a>00007 <span class="comment"> *</span>
+<a name="l00008"></a>00008 <span class="comment"> * Cuttlefish is free software: you can redistribute it and/or modify</span>
+<a name="l00009"></a>00009 <span class="comment"> * it under the terms of the GNU General Public License as published by</span>
+<a name="l00010"></a>00010 <span class="comment"> * the Free Software Foundation, either version 3 of the License, or</span>
+<a name="l00011"></a>00011 <span class="comment"> * (at your option) any later version.</span>
+<a name="l00012"></a>00012 <span class="comment"> *</span>
+<a name="l00013"></a>00013 <span class="comment"> * Cuttlefish is distributed in the hope that it will be useful,</span>
+<a name="l00014"></a>00014 <span class="comment"> * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<a name="l00015"></a>00015 <span class="comment"> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<a name="l00016"></a>00016 <span class="comment"> * GNU General Public License for more details.</span>
+<a name="l00017"></a>00017 <span class="comment"> *</span>
+<a name="l00018"></a>00018 <span class="comment"> * You should have received a copy of the GNU General Public License</span>
+<a name="l00019"></a>00019 <span class="comment"> * along with Cuttlefish.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<a name="l00020"></a>00020 <span class="comment"> *</span>
+<a name="l00021"></a>00021 <span class="comment"> */</span>
 <a name="l00022"></a>00022 
-<a name="l00023"></a>00023         <a class="code" href="class_low_pass_filter.html">LowPassFilter</a>();
-<a name="l00024"></a>00024 
-<a name="l00025"></a>00025 
-<a name="l00026"></a>00026         <span class="keyword">inline</span>
-<a name="l00027"></a>00027         <span class="keywordtype">void</span> setFilterRaw(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> filterF, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> resonance)
-<a name="l00028"></a>00028         {
-<a name="l00029"></a>00029                 <span class="keyword">volatile</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> tempReg=0,tempReg2=0;
-<a name="l00030"></a>00030                 <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;ldi %[tempReg], 0xff&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00031"></a>00031                              <span class="stringliteral">&quot;sub %[tempReg],%[filtF] &quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00032"></a>00032                              <span class="stringliteral">&quot;lsr %[tempReg]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00033"></a>00033                              <span class="stringliteral">&quot;ldi %[tempReg2],0x04&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00034"></a>00034                              <span class="stringliteral">&quot;add %[tempReg],%[tempReg2]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00035"></a>00035                              <span class="stringliteral">&quot;sub %[reso],%[tempReg]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00036"></a>00036                              <span class="stringliteral">&quot;brcc Res_Overflow%=&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00037"></a>00037                              <span class="stringliteral">&quot;ldi %[reso],0x00&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00038"></a>00038                              <span class="stringliteral">&quot;Res_Overflow%=:&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00039"></a>00039                              <span class="stringliteral">&quot;mov %[filtQ],%[reso]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00040"></a>00040              :[tempReg] <span class="stringliteral">&quot;=&amp;d&quot;</span> (tempReg),[tempReg2] <span class="stringliteral">&quot;=&amp;d&quot;</span> (tempReg2),[filtQ] <span class="stringliteral">&quot;=&amp;d&quot;</span> (filterQ): [reso] <span class="stringliteral">&quot;d&quot;</span> (resonance), [filtF] <span class="stringliteral">&quot;d&quot;</span> (filterF) );
-<a name="l00041"></a>00041         }
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043 
-<a name="l00044"></a>00044         <span class="keyword">inline</span>
-<a name="l00045"></a>00045         <span class="keywordtype">void</span> setFilter(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> f, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> resonance)
-<a name="l00046"></a>00046         {
-<a name="l00047"></a>00047                 <span class="keywordflow">if</span>(f&gt;127)
-<a name="l00048"></a>00048                         f=127;
-<a name="l00049"></a>00049                 filterF=logCutoffs[f];
-<a name="l00050"></a>00050                 setFilterRaw(filterF,resonance);
-<a name="l00051"></a>00051         }
-<a name="l00052"></a>00052 
-<a name="l00053"></a>00053 
-<a name="l00056"></a>00056         <span class="keyword">inline</span>
-<a name="l00057"></a><a class="code" href="class_low_pass_filter.html#a01e97fc32f09ba6b9f528a4cb516d86d">00057</a>         <span class="keywordtype">char</span> <a class="code" href="class_low_pass_filter.html#a01e97fc32f09ba6b9f528a4cb516d86d" title="Filters inValue according to the current frequency and resonance settings.">next</a>(<span class="keywordtype">char</span> inValue)
-<a name="l00058"></a>00058         {
-<a name="l00059"></a>00059                 <span class="comment">// TB the input to the filter is a char * 63 (vol),  ie. -8192 to +8191</span>
-<a name="l00060"></a>00060                 outValue = (int) inValue * 64;
-<a name="l00061"></a>00061                 <span class="comment">// at this point outValue = oscillator value</span>
-<a name="l00062"></a>00062                 <span class="comment">// it is currently maxed to full volume / 4</span>
-<a name="l00063"></a>00063                 <span class="comment">// to allow some headroom for filtering</span>
-<a name="l00064"></a>00064                 <span class="comment">//  outValue&gt;&gt;=3;</span>
-<a name="l00065"></a>00065                 <span class="comment">// started at 4700</span>
-<a name="l00066"></a>00066                 <span class="comment">// 4686</span>
-<a name="l00067"></a>00067 
-<a name="l00068"></a>00068                 <span class="comment">// TB make these class vars.. so they don&#39;t get allocated space every time this runs?</span>
-<a name="l00069"></a>00069                 <span class="keyword">volatile</span> <span class="keywordtype">int</span> tempReg,tempReg2=0;
-<a name="l00070"></a>00070                 <span class="keyword">volatile</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> zeroRegFilt=0;
-<a name="l00071"></a>00071 
-<a name="l00072"></a>00072                 <span class="comment">// de-volatilisati</span>
-<a name="l00073"></a>00073                 <span class="comment">//TB2012 make these class vars?</span>
-<a name="l00074"></a>00074                 <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> filtF=filterF;
-<a name="l00075"></a>00075                 <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> filtQ=filterQ;
-<a name="l00076"></a>00076                 <span class="comment">//TB2012 and do this:</span>
-<a name="l00077"></a>00077                 <span class="comment">//filtF=filterF;</span>
-<a name="l00078"></a>00078                 <span class="comment">//filtQ=filterQ;</span>
-<a name="l00079"></a>00079 
-<a name="l00080"></a>00080                 <span class="keyword">asm</span> <span class="keyword">volatile</span>(
-<a name="l00081"></a>00081 
-<a name="l00082"></a>00082                         <span class="stringliteral">&quot;sub %A[outVal],%A[filtA]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00083"></a>00083                         <span class="stringliteral">&quot;sbc %B[outVal],%B[filtA]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00084"></a>00084                         <span class="stringliteral">&quot;brvc No_overflow1%=&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00085"></a>00085                         <span class="stringliteral">&quot;ldi %A[outVal],0b00000001&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00086"></a>00086                         <span class="stringliteral">&quot;ldi %B[outVal],0b10000000&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00087"></a>00087                         <span class="stringliteral">&quot;No_overflow1%=:&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00088"></a>00088                         <span class="comment">// outVal = (in - filtA), or -1</span>
-<a name="l00089"></a>00089                         <span class="stringliteral">&quot;mov %A[tempReg],%A[filtA]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00090"></a>00090                         <span class="stringliteral">&quot;mov %B[tempReg],%B[filtA]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00091"></a>00091                         <span class="stringliteral">&quot;sub %A[tempReg],%A[filtB]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00092"></a>00092                         <span class="stringliteral">&quot;sbc %B[tempReg],%B[filtB]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00093"></a>00093                         <span class="stringliteral">&quot;brvc No_overflow3%=&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00094"></a>00094                         <span class="stringliteral">&quot;ldi %A[tempReg],0b00000001&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00095"></a>00095                         <span class="stringliteral">&quot;ldi %B[tempReg],0b10000000&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00096"></a>00096                         <span class="stringliteral">&quot;No_overflow3%=:&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00097"></a>00097                         <span class="comment">// tempReg = (a-b) , or -1</span>
-<a name="l00098"></a>00098                         <span class="stringliteral">&quot;mulsu %B[tempReg],%[filtQ]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00099"></a>00099                         <span class="stringliteral">&quot;movw %A[tempReg2],r0&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00100"></a>00100                         <span class="comment">// tempReg2 = (HIBYTE(a-b))*Q</span>
-<a name="l00101"></a>00101                         <span class="stringliteral">&quot;mul %A[tempReg],%[filtQ]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00102"></a>00102                         <span class="stringliteral">&quot;add %A[tempReg2],r1&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00103"></a>00103                         <span class="stringliteral">&quot;adc %B[tempReg2],%[ZERO]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00104"></a>00104                         <span class="stringliteral">&quot;rol r0&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00105"></a>00105                         <span class="stringliteral">&quot;brcc No_Round1%=&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00106"></a>00106                         <span class="stringliteral">&quot;inc %A[tempReg2]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00107"></a>00107                         <span class="stringliteral">&quot;No_Round1%=:&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00108"></a>00108                         <span class="comment">// at this point tempReg2 = (a-b)*Q (shifted appropriately and rounded)</span>
-<a name="l00109"></a>00109                         <span class="comment">//      &quot;clc&quot; &quot;\n\t&quot;</span>
-<a name="l00110"></a>00110                         <span class="stringliteral">&quot;lsl %A[tempReg2]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00111"></a>00111                         <span class="stringliteral">&quot;rol %B[tempReg2]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00112"></a>00112                         <span class="comment">//     &quot;clc&quot; &quot;\n\t&quot;</span>
-<a name="l00113"></a>00113                         <span class="stringliteral">&quot;lsl %A[tempReg2]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00114"></a>00114                         <span class="stringliteral">&quot;rol %B[tempReg2]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00115"></a>00115                         <span class="comment">// tempReg2 = (a-b)*Q*4</span>
-<a name="l00116"></a>00116                         <span class="stringliteral">&quot;add %A[outVal],%A[tempReg2]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00117"></a>00117                         <span class="stringliteral">&quot;adc %B[outVal],%B[tempReg2]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00118"></a>00118                         <span class="stringliteral">&quot;brvc No_overflow4%=&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00119"></a>00119                         <span class="stringliteral">&quot;ldi %A[outVal],0b11111111&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00120"></a>00120                         <span class="stringliteral">&quot;ldi %B[outVal],0b01111111&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00121"></a>00121                         <span class="stringliteral">&quot;No_overflow4%=:&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00122"></a>00122                         <span class="comment">// outVal = ((in-a) + (a-b)*(Q&gt;&gt;8)*4) - clipped etc</span>
-<a name="l00123"></a>00123                         <span class="stringliteral">&quot;mulsu %B[outVal],%[filtF]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00124"></a>00124                         <span class="stringliteral">&quot;movw %A[tempReg],r0&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00125"></a>00125                         <span class="stringliteral">&quot;mul %A[outVal],%[filtF]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00126"></a>00126                         <span class="stringliteral">&quot;add %A[tempReg],r1&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00127"></a>00127                         <span class="stringliteral">&quot;adc %B[tempReg],%[ZERO]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00128"></a>00128                         <span class="stringliteral">&quot;rol r0&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00129"></a>00129                         <span class="stringliteral">&quot;brcc No_Round2%=&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00130"></a>00130                         <span class="stringliteral">&quot;inc %A[tempReg]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00131"></a>00131                         <span class="comment">// tempReg = f* ((in-a) + (a-b)*(Q&gt;&gt;8)*4)</span>
-<a name="l00132"></a>00132                         <span class="stringliteral">&quot;No_Round2%=:&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00133"></a>00133                         <span class="stringliteral">&quot;add %A[filtA],%A[tempReg]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00134"></a>00134                         <span class="stringliteral">&quot;adc %B[filtA],%B[tempReg]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00135"></a>00135                         <span class="comment">// A= A+ f* ((in-a) + (a-b)*(Q&gt;&gt;8)*4)</span>
-<a name="l00136"></a>00136                         <span class="stringliteral">&quot;brvc No_overflow5%=&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00137"></a>00137                         <span class="stringliteral">&quot;ldi %A[outVal],0b11111111&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00138"></a>00138                         <span class="stringliteral">&quot;ldi %B[outVal],0b01111111&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00139"></a>00139                         <span class="stringliteral">&quot;No_overflow5%=:&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00140"></a>00140                         <span class="comment">// now calculate B= f* (a - b)</span>
-<a name="l00141"></a>00141 
-<a name="l00142"></a>00142                         <span class="stringliteral">&quot;mov %A[tempReg],%A[filtA]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00143"></a>00143                         <span class="stringliteral">&quot;mov %B[tempReg],%B[filtA]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00144"></a>00144                         <span class="stringliteral">&quot;sub %A[tempReg],%A[filtB]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00145"></a>00145                         <span class="stringliteral">&quot;sbc %B[tempReg],%B[filtB]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00146"></a>00146                         <span class="stringliteral">&quot;brvc No_overflow6%=&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00147"></a>00147                         <span class="stringliteral">&quot;ldi %A[tempReg],0b00000001&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00148"></a>00148                         <span class="stringliteral">&quot;ldi %B[tempReg],0b10000000&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00149"></a>00149                         <span class="stringliteral">&quot;No_overflow6%=:&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00150"></a>00150                         <span class="comment">// tempReg = (a-b)</span>
-<a name="l00151"></a>00151                         <span class="stringliteral">&quot;mulsu %B[tempReg],%[filtF]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00152"></a>00152                         <span class="stringliteral">&quot;movw %A[tempReg2],r0&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00153"></a>00153                         <span class="stringliteral">&quot;mul %A[tempReg],%[filtF]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00154"></a>00154                         <span class="stringliteral">&quot;add %A[tempReg2],r1&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00155"></a>00155                         <span class="stringliteral">&quot;adc %B[tempReg2],%[ZERO]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00156"></a>00156                         <span class="comment">// tempReg2 = f*(a-b)</span>
-<a name="l00157"></a>00157                         <span class="stringliteral">&quot;add %A[filtB],%A[tempReg2]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00158"></a>00158                         <span class="stringliteral">&quot;adc %B[filtB],%B[tempReg2]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00159"></a>00159                         <span class="stringliteral">&quot;brvc No_overflow7%=&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00160"></a>00160                         <span class="stringliteral">&quot;ldi %A[filtB],0b11111111&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00161"></a>00161                         <span class="stringliteral">&quot;ldi %B[filtB],0b01111111&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00162"></a>00162                         <span class="stringliteral">&quot;No_overflow7%=:&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00163"></a>00163                         <span class="comment">// now b= b+f*(a-b)</span>
-<a name="l00164"></a>00164                         <span class="stringliteral">&quot;mov %A[outVal],%A[filtB]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00165"></a>00165                         <span class="stringliteral">&quot;mov %B[outVal],%B[filtB]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00166"></a>00166 
-<a name="l00167"></a>00167                         <span class="comment">// multiply outval by 4 and clip</span>
-<a name="l00168"></a>00168                         <span class="stringliteral">&quot;add %A[outVal],%A[filtB]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00169"></a>00169                         <span class="stringliteral">&quot;adc %B[outVal],%B[filtB]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00170"></a>00170                         <span class="stringliteral">&quot;brbs 3, Overflow_End%=&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00171"></a>00171 
-<a name="l00172"></a>00172                         <span class="stringliteral">&quot;add %A[outVal],%A[filtB]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00173"></a>00173                         <span class="stringliteral">&quot;adc %B[outVal],%B[filtB]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00174"></a>00174                         <span class="stringliteral">&quot;brbs 3, Overflow_End%=&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00175"></a>00175 
-<a name="l00176"></a>00176                         <span class="stringliteral">&quot;add %A[outVal],%A[filtB]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00177"></a>00177                         <span class="stringliteral">&quot;adc %B[outVal],%B[filtB]&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00178"></a>00178                         <span class="stringliteral">&quot;brbs 3, Overflow_End%=&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00179"></a>00179                         <span class="stringliteral">&quot;rjmp No_overflow%=&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00180"></a>00180                         <span class="stringliteral">&quot;Overflow_End%=:&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00181"></a>00181                         <span class="stringliteral">&quot;brbs 2,Overflow_High%=&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00182"></a>00182                         <span class="stringliteral">&quot;ldi %A[outVal],0b00000001&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00183"></a>00183                         <span class="stringliteral">&quot;ldi %B[outVal],0b10000000&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00184"></a>00184                         <span class="stringliteral">&quot;rjmp No_overflow%=&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00185"></a>00185                         <span class="stringliteral">&quot;Overflow_High%=:&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00186"></a>00186                         <span class="stringliteral">&quot;ldi %A[outVal],0b11111111&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00187"></a>00187                         <span class="stringliteral">&quot;ldi %B[outVal],0b01111111&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00188"></a>00188                         <span class="stringliteral">&quot;No_overflow%=:&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span>
-<a name="l00189"></a>00189 
-<a name="l00190"></a>00190                         <span class="comment">// TB we aren&#39;t sending it to the pwm yet so skip these lines:</span>
-<a name="l00191"></a>00191                         <span class="comment">//char valOut=((unsigned int)(outValue))&gt;&gt;8;</span>
-<a name="l00192"></a>00192                         <span class="comment">//valOut+=128;</span>
-<a name="l00193"></a>00193                         <span class="comment">// OCR2A=(byte)valOut;</span>
-<a name="l00194"></a>00194                         <span class="comment">//&quot;subi %B[outVal],0x80&quot; &quot;\n\t&quot;</span>
-<a name="l00195"></a>00195                         <span class="comment">//&quot;sts 0x00b3,%B[outVal]&quot; &quot;\n\t&quot;</span>
-<a name="l00196"></a>00196 
-<a name="l00197"></a>00197                         <span class="comment">// uncomment the lines below to see the register allocations</span>
-<a name="l00198"></a>00198                         <span class="comment">/*</span>
-<a name="l00199"></a>00199 <span class="comment">                        &quot;lds %A[filtA],0x01&quot; &quot;\n\t&quot;</span>
-<a name="l00200"></a>00200 <span class="comment">                        &quot;lds %B[filtA],0x02&quot; &quot;\n\t&quot;</span>
-<a name="l00201"></a>00201 <span class="comment">                        &quot;lds %A[filtB],0x03&quot; &quot;\n\t&quot;</span>
-<a name="l00202"></a>00202 <span class="comment">                        &quot;lds %B[filtB],0x04&quot; &quot;\n\t&quot;</span>
-<a name="l00203"></a>00203 <span class="comment">                        &quot;lds %[filtQ],0x05&quot; &quot;\n\t&quot;</span>
-<a name="l00204"></a>00204 <span class="comment">                        &quot;lds %[filtF],0x06&quot; &quot;\n\t&quot;</span>
-<a name="l00205"></a>00205 <span class="comment">                        &quot;lds %A[outVal],0x07&quot; &quot;\n\t&quot;</span>
-<a name="l00206"></a>00206 <span class="comment">                        &quot;lds %B[outVal],0x08&quot; &quot;\n\t&quot;</span>
-<a name="l00207"></a>00207 <span class="comment">                        &quot;lds %A[tempReg],0x09&quot; &quot;\n\t&quot;</span>
-<a name="l00208"></a>00208 <span class="comment">                        &quot;lds %B[tempReg],0x0a&quot; &quot;\n\t&quot;</span>
-<a name="l00209"></a>00209 <span class="comment">                        &quot;lds %A[tempReg2],0x0b&quot; &quot;\n\t&quot;</span>
-<a name="l00210"></a>00210 <span class="comment">                        &quot;lds %B[tempReg2],0x0c&quot; &quot;\n\t&quot;</span>
-<a name="l00211"></a>00211 <span class="comment">                        &quot;lds %[ZERO],0x0d&quot; &quot;\n\t&quot;</span>
-<a name="l00212"></a>00212 <span class="comment">                        */</span>
-<a name="l00213"></a>00213 
-<a name="l00214"></a>00214                         <span class="comment">// outputs / read/write arguments</span>
-<a name="l00215"></a>00215         : [filtA] <span class="stringliteral">&quot;+&amp;w&quot;</span> (filterA),
-<a name="l00216"></a>00216                         [filtB] <span class="stringliteral">&quot;+&amp;w&quot;</span> (filterB),
-<a name="l00217"></a>00217                         [tempReg] <span class="stringliteral">&quot;=&amp;a&quot;</span> (tempReg),
-<a name="l00218"></a>00218                         [tempReg2] <span class="stringliteral">&quot;=&amp;d&quot;</span> (tempReg2)
-<a name="l00219"></a>00219                                         :
-<a name="l00220"></a>00220                                         [filtQ] <span class="stringliteral">&quot;a&quot;</span> (filtQ),
-<a name="l00221"></a>00221                                         [filtF] <span class="stringliteral">&quot;a&quot;</span> (filtF),
-<a name="l00222"></a>00222                                         [outVal] <span class="stringliteral">&quot;a&quot;</span> (outValue),
-<a name="l00223"></a>00223                                         [ZERO] <span class="stringliteral">&quot;d&quot;</span> (zeroRegFilt)
-<a name="l00224"></a>00224                                         <span class="comment">// inputs</span>
-<a name="l00225"></a>00225                                         : <span class="stringliteral">&quot;r1&quot;</span>);
-<a name="l00226"></a>00226 
-<a name="l00227"></a>00227 
-<a name="l00228"></a>00228                 <span class="comment">/*</span>
-<a name="l00229"></a>00229 <span class="comment">                        outValue*=4;</span>
-<a name="l00230"></a>00230 <span class="comment">                        // at this point, outValue is a 16 bit signed version of what we want ie. 0 -&gt; 32767, then -32768 -&gt; -1 (0xffff)</span>
-<a name="l00231"></a>00231 <span class="comment">                        // we want 0-&gt;32767 to go to 32768-65535 and -32768 -&gt; -1 to go to 0-32767, then we want only the top byte</span>
-<a name="l00232"></a>00232 <span class="comment">                        // take top byte, then add 128, then cast to unsigned. The (unsigned int) in the below is to avoid having to shift (ie.just takes top byte)</span>
-<a name="l00233"></a>00233 <span class="comment">                                        */</span>
-<a name="l00234"></a>00234                 <span class="comment">//char valOut=((unsigned int)(outValue))&gt;&gt;8;</span>
-<a name="l00235"></a>00235                 <span class="comment">//return highByte(outValue);</span>
-<a name="l00236"></a>00236                 <span class="comment">//return (char) lowByte(((unsigned int)outValue&gt;&gt;8)); // unsigned to also shift the sign bit</span>
-<a name="l00237"></a>00237                 <span class="keywordflow">return</span> highByte(outValue);
-<a name="l00238"></a>00238         }
-<a name="l00239"></a>00239 
-<a name="l00240"></a>00240 <span class="keyword">private</span>:
-<a name="l00241"></a>00241 
-<a name="l00242"></a>00242         <span class="keyword">volatile</span> <span class="keywordtype">int</span> outValue;
-<a name="l00243"></a>00243         <span class="keywordtype">int</span> filterA;
-<a name="l00244"></a>00244         <span class="keywordtype">int</span> filterB;
-<a name="l00245"></a>00245         <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> filterQ;
-<a name="l00246"></a>00246         <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> filterF;
-<a name="l00247"></a>00247         <span class="comment">//unsigned char filtF;</span>
-<a name="l00248"></a>00248         <span class="comment">//unsigned char filtQ;</span>
-<a name="l00249"></a>00249         <span class="comment">//int tempReg,tempReg2;//=0;</span>
-<a name="l00250"></a>00250         <span class="comment">//unsigned char zeroRegFilt;//=0;</span>
-<a name="l00251"></a>00251 
-<a name="l00252"></a>00252 };
-<a name="l00253"></a>00253 
-<a name="l00254"></a>00254 <span class="preprocessor">#endif </span><span class="comment">/* LOWPASSFILTER_H_ */</span>
+<a name="l00023"></a>00023 <span class="preprocessor">#ifndef LOWPASS_H_</span>
+<a name="l00024"></a>00024 <span class="preprocessor"></span><span class="preprocessor">#define LOWPASS_H_</span>
+<a name="l00025"></a>00025 <span class="preprocessor"></span>
+<a name="l00026"></a>00026 <span class="comment">/*</span>
+<a name="l00027"></a>00027 <span class="comment">simple resonant filter posted to musicdsp.org by Paul Kellett http://www.musicdsp.org/archive.php?classid=3#259</span>
+<a name="l00028"></a>00028 <span class="comment"></span>
+<a name="l00029"></a>00029 <span class="comment">// set feedback amount given f and q between 0 and 1</span>
+<a name="l00030"></a>00030 <span class="comment">fb = q + q/(1.0 - f);</span>
+<a name="l00031"></a>00031 <span class="comment"></span>
+<a name="l00032"></a>00032 <span class="comment">// for each sample...</span>
+<a name="l00033"></a>00033 <span class="comment">buf0 = buf0 + f * (in - buf0 + fb * (buf0 - buf1));</span>
+<a name="l00034"></a>00034 <span class="comment">buf1 = buf1 + f * (buf0 - buf1);</span>
+<a name="l00035"></a>00035 <span class="comment">out = buf1;</span>
+<a name="l00036"></a>00036 <span class="comment"></span>
+<a name="l00037"></a>00037 <span class="comment">fixed point version of the filter</span>
+<a name="l00038"></a>00038 <span class="comment">&quot;dave&#39;s blog of art and programming&quot; http://www.pawfal.org/dave/blog/2011/09/</span>
+<a name="l00039"></a>00039 <span class="comment">*/</span>
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042 <span class="comment">// we are using .n fixed point (n bits for the fractional part)</span>
+<a name="l00043"></a>00043 <span class="preprocessor">#define FX_SHIFT 8</span>
+<a name="l00044"></a>00044 <span class="preprocessor"></span>
+<a name="l00045"></a><a class="code" href="class_low_pass_filter.html">00045</a> <span class="keyword">class </span><a class="code" href="class_low_pass_filter.html">LowPassFilter</a>
+<a name="l00046"></a>00046 {
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048 <span class="keyword">public</span>:
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050         <a class="code" href="class_low_pass_filter.html">LowPassFilter</a>();
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052         <span class="keywordtype">void</span> setCutoffFreq(<span class="keywordtype">int</span> cutoff)
+<a name="l00053"></a>00053         {
+<a name="l00054"></a>00054                 f = cutoff;
+<a name="l00055"></a>00055                 setFeedback(cutoff);
+<a name="l00056"></a>00056         }
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059         <span class="keywordtype">void</span> setResonance(<span class="keywordtype">int</span> qq)
+<a name="l00060"></a>00060         {
+<a name="l00061"></a>00061                 q = qq;
+<a name="l00062"></a>00062         }
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064 
+<a name="l00065"></a>00065         <span class="comment">//16us</span>
+<a name="l00066"></a>00066         <span class="keyword">inline</span>
+<a name="l00067"></a>00067         <span class="keywordtype">int</span> next(<span class="keywordtype">int</span> in)
+<a name="l00068"></a>00068         {
+<a name="l00069"></a>00069                 buf0+=fxmul(f,  ((in - buf0) + fxmul(fb, buf0-buf1)));
+<a name="l00070"></a>00070                 buf1+=fxmul(f, buf0-buf1);
+<a name="l00071"></a>00071                 <span class="keywordflow">return</span> buf1;
+<a name="l00072"></a>00072         }
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075 <span class="keyword">private</span>:
+<a name="l00076"></a>00076         <span class="keywordtype">int</span> f;
+<a name="l00077"></a>00077         <span class="keywordtype">long</span> fb;
+<a name="l00078"></a>00078         <span class="keywordtype">int</span> q;
+<a name="l00079"></a>00079         <span class="keywordtype">int</span> buf0,buf1;
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081         <span class="keyword">inline</span>
+<a name="l00082"></a>00082         <span class="keywordtype">void</span> setFeedback(<span class="keywordtype">int</span> f)
+<a name="l00083"></a>00083         {
+<a name="l00084"></a>00084                 fb = q+fxmul(q, fx(1) - f);
+<a name="l00085"></a>00085         }
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087         <span class="comment">// convert an int into to its fixed representation</span>
+<a name="l00088"></a>00088         <span class="keyword">inline</span>
+<a name="l00089"></a>00089         <span class="keywordtype">long</span> fx(<span class="keywordtype">int</span> i)
+<a name="l00090"></a>00090         {
+<a name="l00091"></a>00091                 <span class="keywordflow">return</span> i&lt;&lt;FX_SHIFT;
+<a name="l00092"></a>00092         }
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094 
+<a name="l00095"></a>00095         <span class="comment">// // multiply two fixed point numbers (returns fixed point)</span>
+<a name="l00096"></a>00096         <span class="comment">// inline</span>
+<a name="l00097"></a>00097         <span class="comment">// long fxmul(long a, long b)</span>
+<a name="l00098"></a>00098         <span class="comment">// {</span>
+<a name="l00099"></a>00099         <span class="comment">//      return (a*b)&gt;&gt;FX_SHIFT;</span>
+<a name="l00100"></a>00100         <span class="comment">// }</span>
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102         <span class="comment">// multiply two fixed point numbers (returns fixed point)</span>
+<a name="l00103"></a>00103         <span class="keyword">inline</span>
+<a name="l00104"></a>00104         <span class="keywordtype">long</span> fxmul(<span class="keywordtype">long</span> a, <span class="keywordtype">int</span> b)
+<a name="l00105"></a>00105         {
+<a name="l00106"></a>00106                 <span class="keywordflow">return</span> (a*b)&gt;&gt;FX_SHIFT;
+<a name="l00107"></a>00107         }
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109 };
+<a name="l00110"></a>00110 
+<a name="l00111"></a>00111 <span class="preprocessor">#endif </span><span class="comment">/* LOWPASS_H_ */</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 4 2012 01:13:34 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jun 7 2012 00:12:30 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

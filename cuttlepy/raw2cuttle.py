@@ -1,38 +1,45 @@
 ##    raw2cuttle.py
-##    Created 2010-12 by unbackwards@gmail.com
+##    Created 2010-12 by Tim Barrass unbackwards@gmail.com
 ##
-##    raw2cuttle converts raw 8 bit sound data to wavetables for Cuttlefish.                                                                                                       ##
+##    raw2cuttle.py converts raw 8 bit sound data to wavetables for Cuttlefish.                                                                                                       ##
 ##
-##    use: raw2cuttle(infilename, outfilename, tablename, samplerate)
+##    use: python raw2cuttle.py infilename outfilename tablename samplerate
 ##
-##    There's an example at the end of this file, copy and modify it
+##    Using Audacity to prepare raw sound files for converting:
 ##
-##    To use Audacity to produce wavetables for Arduino:
-##    Set your Audacity project sample rate.  For repeating waveforms like sine or
-##    sawtooth, set the project rate to the size of the wavetable you wish to create,
-##    which must be a power of two (eg. 8192), and set the selection format (beneath the editing window)
-##    to samples.  Then you can generate and save 1 second of a waveform and it will fit your table length.
-##    For a one-shot audio sample such as a recorded sound, set the
-##    project rate to the Cuttlefish AUDIO_RATE (16384 in the current
-##    version).  Then edit your sounds to a power-of-two number of samples.
+##    Set your Audacity project sample rate:
 ##
-##    Save by exporting with the format set to "Other uncompressed formats", with
-##    options set to "RAW(headerless)" and "Encoding 8 bit signed PCM".
+##		For generated waveforms like sine or sawtooth, set the project
+##		rate to the size of the wavetable you wish to create, which must
+##		be a power of two (eg. 8192), and set the selection format
+##		(beneath the editing window) to samples. Then you can generate
+##		and save 1 second of a waveform and it will fit your table
+##		length.
+##
+##		For a recorded audio sample, set the project rate to the
+##		Cuttlefish AUDIO_RATE (16384 in the current version). Then edit
+##		your sounds to a power-of-two number of samples.
+##
+##	Save by exporting with the format set to "Other uncompressed formats",
+##	options set to "RAW(headerless)" and "Encoding 8 bit signed PCM".
 
 
+import sys, array, os, textwrap
 
-import array
-import os
-import textwrap
+if len(sys.argv) != 5:
+        print 'Usage: raw2cuttle.py <infilename outfilename tablename samplerate>'
+        sys.exit(1)
+
+[infilename, outfilename, tablename, samplerate] = sys.argv[1:]
 
 def raw2cuttle(infilename, outfilename, tablename, samplerate):
     fin = open(os.path.expanduser(infilename), "rb")
     print "opened " + infilename
-    bytesetad = os.path.getsize(os.path.expanduser(infilename))
-    ##print bytesetad
+    bytestoread = os.path.getsize(os.path.expanduser(infilename))
+    ##print bytestoread
     valuesfromfile = array.array('b') # array of signed char ints
     try:
-        valuesfromfile.fromfile(fin, bytesetad)
+        valuesfromfile.fromfile(fin, bytestoread)
     finally:
         fin.close()
 
@@ -59,17 +66,4 @@ def raw2cuttle(infilename, outfilename, tablename, samplerate):
         fout.close()
         print "wrote " + outfilename
 
-############################################################
-
-##example (tested on osx):
-##raw2cuttle("~/Desktop/sin4096_int8.raw", "~/Desktop/sin4096_int8.h", "SIN4096","4096")
-##raw2cuttle("~/Desktop/organ8192_int8.raw", "~/Desktop/organ8192_int8.h", "ORGAN8192","8192")
-##raw2cuttle("~/Desktop/smoothsquare8192_int8.raw", "~/Desktop/smoothsquare8192_int8.h", "SMOOTHSQUARE8192","8192")
-##raw2cuttle("~/Desktop/sin2048_int8.raw", "~/Desktop/sin2048_int8.h", "SIN2048","2048")
-##raw2cuttle("~/Desktop/bamboo1_1024_int8.raw", "~/Desktop/bamboo1_1024_int8.h", "BAMBOO1_1024","1024")
-##raw2cuttle("~/Desktop/bamboo2_1024_int8.raw", "~/Desktop/bamboo2_1024_int8.h", "BAMBOO2_1024","1024")
-##raw2cuttle("~/Desktop/bamboo3_2048_int8.raw", "~/Desktop/bamboo3_2048_int8.h", "BAMBOO3_2048","2048")
-##raw2cuttle("~/Desktop/static1_16384_int8.raw", "~/Desktop/noise_static_1_16384_int8.h", "NOISE_STATIC_1_16384","16384")
-##raw2cuttle("~/Desktop/whitenoise8192.raw", "~/Desktop/WHITENOISE8192_int8.h", "WHITENOISE8192","8192")
-##raw2cuttle("~/Desktop/brownnoise8192.raw", "~/DesktopBROWNNOISE8192_int8.h", "BROWNNOISE8192","8192")
-raw2cuttle("~/Desktop/pinknoise8192.raw", "~/Desktop/PINKNOISE8192_int8.h", "PINKNOISE8192","8192")
+raw2cuttle(infilename, outfilename, tablename, samplerate)

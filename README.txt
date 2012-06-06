@@ -74,4 +74,5 @@ Cuttlefish makes use of the following code:
 Under GPL3:
 TimerOne library - See Google Code project http://code.google.com/p/arduino-timerone/ for latest
 TimerTwo library - Downloaded from https://bitbucket.org/johnmccombs, 4/2/2012, but unable to find original author.  Please contact us if this is yours!
-
+Under GPL2:
+Ead - adapted from ead~.c puredata external (creb library) Copyright (c) 2000-2003 by Tom Schouten

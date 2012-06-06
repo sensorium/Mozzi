@@ -28,7 +28,6 @@
 
 #include "math.h"
 #include <fixedMath.h>
-#include "Arduino.h"
 
 
 /** Exponential attack decay envelope. This produces a natural sounding

@@ -27,8 +27,8 @@ void setup(){
   startCuttlefish(CONTROL_RATE);
   // cast to float because the resulting freq will be small
   aNoise.setFreq((float)AUDIO_RATE/WHITENOISE8192_SAMPLERATE);
-  int attack = 20;
-  int decay = 600;
+  int attack = 30;
+  int decay = 1000;
   kEnvelope.set(attack,decay+100);
   kDelay.set(attack+decay);
 }

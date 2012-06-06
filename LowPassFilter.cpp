@@ -1,11 +1,29 @@
-
-// adapted from Joe Marshall's 2011
-//  low pass filter based on the one from MeeBlip (http://meeblip.noisepages.com)
-// used in Joe's OCTOSynth-0.2 http://www.cs.nott.ac.uk/~jqm/?p=605
-
+/*
+ * LowPassFilter.cpp
+ *
+ * Copyright 2012 Tim Barrass unbackwards@gmail.com
+ *
+ * This file is part of Cuttlefish.
+ *
+ * Cuttlefish is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Cuttlefish is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Cuttlefish.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 
 #include "LowPassFilter.h"
 
 
-LowPassFilter::LowPassFilter(): filterA(0),filterB(0),filterQ(0),filterF(127)
-{}
+LowPassFilter::LowPassFilter()
+{
+	;
+}

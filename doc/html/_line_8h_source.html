@@ -125,40 +125,40 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00035"></a><a class="code" href="class_line.html">00035</a> <span class="keyword">class </span><a class="code" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a>
 <a name="l00036"></a>00036 {
 <a name="l00037"></a>00037 <span class="keyword">private</span>:
-<a name="l00038"></a>00038         numType current_value;
-<a name="l00039"></a>00039         numType step_size;
+<a name="l00038"></a>00038                 numType current_value;
+<a name="l00039"></a>00039                 numType step_size;
 <a name="l00040"></a>00040 
 <a name="l00041"></a>00041 <span class="keyword">public</span>:
-<a name="l00045"></a><a class="code" href="class_line.html#aabadbe424b45cf279a69b8057f7a2e9e">00045</a>         <a class="code" href="class_line.html#aabadbe424b45cf279a69b8057f7a2e9e" title="Instantiates a Line.">Line</a> ()
-<a name="l00046"></a>00046         {
-<a name="l00047"></a>00047                 ;
-<a name="l00048"></a>00048         }
+<a name="l00045"></a><a class="code" href="class_line.html#aabadbe424b45cf279a69b8057f7a2e9e">00045</a>                 <a class="code" href="class_line.html#aabadbe424b45cf279a69b8057f7a2e9e" title="Instantiates a Line.">Line</a> ()
+<a name="l00046"></a>00046                 {
+<a name="l00047"></a>00047                                 ;
+<a name="l00048"></a>00048                 }
 <a name="l00049"></a>00049 
-<a name="l00052"></a>00052         <span class="keyword">inline</span>
-<a name="l00053"></a><a class="code" href="class_line.html#ad1ac0f6c99cce099e68f0a2998139567">00053</a>         numType <a class="code" href="class_line.html#ad1ac0f6c99cce099e68f0a2998139567" title="Increments one step along the line, returning the next value.">next</a>()
-<a name="l00054"></a>00054         {
-<a name="l00055"></a>00055                 current_value += step_size;
-<a name="l00056"></a>00056                 <span class="keywordflow">return</span> current_value;
-<a name="l00057"></a>00057         }
+<a name="l00052"></a>00052                 <span class="keyword">inline</span>
+<a name="l00053"></a><a class="code" href="class_line.html#ad1ac0f6c99cce099e68f0a2998139567">00053</a>                 numType <a class="code" href="class_line.html#ad1ac0f6c99cce099e68f0a2998139567" title="Increments one step along the line, returning the next value.">next</a>()
+<a name="l00054"></a>00054                 {
+<a name="l00055"></a>00055                                 current_value += step_size;
+<a name="l00056"></a>00056                                 <span class="keywordflow">return</span> current_value;
+<a name="l00057"></a>00057                 }
 <a name="l00058"></a>00058 
-<a name="l00062"></a>00062         <span class="keyword">inline</span>
-<a name="l00063"></a><a class="code" href="class_line.html#a794c5ca6cfb9056e43b8035a5edb9fd2">00063</a>         <span class="keywordtype">void</span> <span class="keyword">set</span>(numType value)
-<a name="l00064"></a>00064         {
-<a name="l00065"></a>00065                 current_value=value;
-<a name="l00066"></a>00066         }
+<a name="l00062"></a>00062                 <span class="keyword">inline</span>
+<a name="l00063"></a><a class="code" href="class_line.html#a794c5ca6cfb9056e43b8035a5edb9fd2">00063</a>                 <span class="keywordtype">void</span> <span class="keyword">set</span>(numType value)
+<a name="l00064"></a>00064                 {
+<a name="l00065"></a>00065                                 current_value=value;
+<a name="l00066"></a>00066                 }
 <a name="l00067"></a>00067 
-<a name="l00071"></a>00071         <span class="keyword">inline</span>
-<a name="l00072"></a><a class="code" href="class_line.html#abd55e704e42ec69ef15cc9fdd2e5af39">00072</a>         <span class="keywordtype">void</span> <span class="keyword">set</span>(numType targetvalue, numType num_steps)
-<a name="l00073"></a>00073         {
-<a name="l00074"></a>00074                 step_size=(numType)(((<span class="keywordtype">float</span>)(targetvalue-current_value)/num_steps));
-<a name="l00075"></a>00075         }
+<a name="l00071"></a>00071                 <span class="keyword">inline</span>
+<a name="l00072"></a><a class="code" href="class_line.html#abd55e704e42ec69ef15cc9fdd2e5af39">00072</a>                 <span class="keywordtype">void</span> <span class="keyword">set</span>(numType targetvalue, numType num_steps)
+<a name="l00073"></a>00073                 {
+<a name="l00074"></a>00074                                 step_size=(numType)(((<span class="keywordtype">float</span>)(targetvalue-current_value)/num_steps));
+<a name="l00075"></a>00075                 }
 <a name="l00076"></a>00076 
-<a name="l00080"></a>00080         <span class="keyword">inline</span>
-<a name="l00081"></a><a class="code" href="class_line.html#a02aa6a6d645fe9276921b89ea18f45d7">00081</a>         <span class="keywordtype">void</span> <span class="keyword">set</span>(numType startvalue, numType targetvalue, numType num_steps)
-<a name="l00082"></a>00082         {
-<a name="l00083"></a>00083                 <span class="keyword">set</span>(startvalue);
-<a name="l00084"></a>00084                 <span class="keyword">set</span>(targetvalue, num_steps);
-<a name="l00085"></a>00085         }
+<a name="l00080"></a>00080                 <span class="keyword">inline</span>
+<a name="l00081"></a><a class="code" href="class_line.html#a02aa6a6d645fe9276921b89ea18f45d7">00081</a>                 <span class="keywordtype">void</span> <span class="keyword">set</span>(numType startvalue, numType targetvalue, numType num_steps)
+<a name="l00082"></a>00082                 {
+<a name="l00083"></a>00083                                 <span class="keyword">set</span>(startvalue);
+<a name="l00084"></a>00084                                 <span class="keyword">set</span>(targetvalue, num_steps);
+<a name="l00085"></a>00085                 }
 <a name="l00086"></a>00086 };
 <a name="l00087"></a>00087 
 <a name="l00088"></a>00088 <span class="preprocessor">#endif </span><span class="comment">/* LINE_H_ */</span>
@@ -168,7 +168,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 7 2012 00:12:30 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 8 2012 01:21:16 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

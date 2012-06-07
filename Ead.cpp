@@ -26,7 +26,7 @@
 #include "Ead.h"
 
 
-Ead::Ead(const unsigned int update_rate) : UPDATE_RATE(update_rate)
+Ead::Ead(unsigned int update_rate) : UPDATE_RATE(update_rate)
 {
 	;
 }

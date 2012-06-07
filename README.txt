@@ -62,7 +62,7 @@ AUDIO OUTPUT
 
 HINTS AND TIPS
 Cuttlefish doesn't play nice with  Arduino time functions millis(), micros(), delay(), delayMicroseconds().
-Instead, you can use TimeBomb for scheduling.  See the DelayCuttlefish example.
+Instead, you can use TimeBomb for scheduling.  See the EventDelay example.
 
 A computer line-in works well for listening, and you can record and examine your
 sounds with Audacity (http://audacity.sourceforge.net/) and

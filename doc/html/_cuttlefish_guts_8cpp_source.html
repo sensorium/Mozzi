@@ -133,15 +133,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00048"></a>00048 <span class="keywordtype">void</span> startCuttlefish(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> control_rate_hz)
 <a name="l00049"></a>00049 {
 <a name="l00050"></a>00050 
-<a name="l00051"></a>00051         <span class="comment">// audio</span>
-<a name="l00052"></a>00052         pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);           <span class="comment">// set pin to output for audio</span>
-<a name="l00053"></a>00053         Timer1.initialize(1000000/AUDIO_RATE);      <span class="comment">// set period</span>
-<a name="l00054"></a>00054         Timer1.pwm(AUDIO_CHANNEL_1_PIN, 512);       <span class="comment">// pwm pin, 50% duty cycle</span>
-<a name="l00055"></a>00055         Timer1.attachInterrupt(outputAudio);            <span class="comment">// call outputAudio() on each interrupt</span>
+<a name="l00051"></a>00051                 <span class="comment">// audio</span>
+<a name="l00052"></a>00052                 pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);                           <span class="comment">// set pin to output for audio</span>
+<a name="l00053"></a>00053                 Timer1.initialize(1000000/AUDIO_RATE);      <span class="comment">// set period</span>
+<a name="l00054"></a>00054                 Timer1.pwm(AUDIO_CHANNEL_1_PIN, 512);       <span class="comment">// pwm pin, 50% duty cycle</span>
+<a name="l00055"></a>00055                 Timer1.attachInterrupt(outputAudio);                            <span class="comment">// call outputAudio() on each interrupt</span>
 <a name="l00056"></a>00056 
-<a name="l00057"></a>00057         <span class="comment">// control</span>
-<a name="l00058"></a>00058         TimerTwo::init(1000000/control_rate_hz,updateControl); <span class="comment">// set period, attach updateControl()</span>
-<a name="l00059"></a>00059         TimerTwo::start();
+<a name="l00057"></a>00057                 <span class="comment">// control</span>
+<a name="l00058"></a>00058                 TimerTwo::init(1000000/control_rate_hz,updateControl); <span class="comment">// set period, attach updateControl()</span>
+<a name="l00059"></a>00059                 TimerTwo::start();
 <a name="l00060"></a>00060 
 <a name="l00061"></a>00061 }
 <a name="l00062"></a>00062 
@@ -154,19 +154,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00069"></a>00069 <span class="keywordtype">void</span> audioHook()
 <a name="l00070"></a>00070 {
 <a name="l00071"></a>00071 
-<a name="l00072"></a>00072         <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> in_pos = 0;
-<a name="l00073"></a>00073         <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> num_in = 0;
-<a name="l00074"></a>00074         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> gap;
-<a name="l00075"></a>00075         ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-<a name="l00076"></a>00076         { <span class="comment">// because 16bit access to num_out which can be changed in Buffer::out() used in audio interrupt</span>
-<a name="l00077"></a>00077                 gap = num_in - num_out; <span class="comment">// wraps to a big number if it&#39;s negative</span>
-<a name="l00078"></a>00078         }
-<a name="l00079"></a>00079         <span class="keywordflow">if</span> (gap &lt; BUFFER_NUM_TABLE_CELLS)
-<a name="l00080"></a>00080         {
-<a name="l00081"></a>00081                 in_pos++;
-<a name="l00082"></a>00082                 num_in++;
-<a name="l00083"></a>00083                 bufarray[in_pos] = updateAudio() + AUDIO_BIAS;
-<a name="l00084"></a>00084         }
+<a name="l00072"></a>00072                 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> in_pos = 0;
+<a name="l00073"></a>00073                 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> num_in = 0;
+<a name="l00074"></a>00074                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> gap;
+<a name="l00075"></a>00075                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+<a name="l00076"></a>00076                 { <span class="comment">// because 16bit access to num_out which can be changed in Buffer::out() used in audio interrupt</span>
+<a name="l00077"></a>00077                                 gap = num_in - num_out; <span class="comment">// wraps to a big number if it&#39;s negative</span>
+<a name="l00078"></a>00078                 }
+<a name="l00079"></a>00079                 <span class="keywordflow">if</span> (gap &lt; BUFFER_NUM_TABLE_CELLS)
+<a name="l00080"></a>00080                 {
+<a name="l00081"></a>00081                                 in_pos++;
+<a name="l00082"></a>00082                                 num_in++;
+<a name="l00083"></a>00083                                 bufarray[in_pos] = updateAudio() + AUDIO_BIAS;
+<a name="l00084"></a>00084                 }
 <a name="l00085"></a>00085 
 <a name="l00086"></a>00086 }
 <a name="l00087"></a>00087 
@@ -174,10 +174,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00089"></a>00089 <span class="keyword">inline</span>
 <a name="l00090"></a>00090 <span class="keyword">static</span> <span class="keywordtype">void</span> outputAudio()
 <a name="l00091"></a>00091 { <span class="comment">// takes 1-2 us, and doesn&#39;t appear to get interrupted by control on scope</span>
-<a name="l00092"></a>00092         <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> out_pos;
-<a name="l00093"></a>00093         out_pos++;
-<a name="l00094"></a>00094         num_out++;
-<a name="l00095"></a>00095         AUDIO_CHANNEL_1_OUTPUT_REGISTER =  bufarray[out_pos];
+<a name="l00092"></a>00092                 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> out_pos;
+<a name="l00093"></a>00093                 out_pos++;
+<a name="l00094"></a>00094                 num_out++;
+<a name="l00095"></a>00095                 AUDIO_CHANNEL_1_OUTPUT_REGISTER =  bufarray[out_pos];
 <a name="l00096"></a>00096 }
 <a name="l00097"></a>00097 
 <a name="l00098"></a>00098 
@@ -185,7 +185,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 7 2012 00:12:30 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 8 2012 01:21:16 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

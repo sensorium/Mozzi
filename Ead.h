@@ -42,39 +42,47 @@ class Ead
 
 public:
 
-	/** Constructor.
-	UPDATE_RATE would usually be CONTROL_RATE or AUDIO_RATE, unless
-	you design another scheme for updating, for instance by taking turns for various
-	control changes in a rotating schedule to spread out calculations made in
-	successive updateControl() routines. */
-	Ead(const unsigned int UPDATE_RATE);
+	/** Constructor
+	@param update_rate
+	Usually this will be CONTROL_RATE or AUDIO_RATE, unless you
+	design another scheme for updating. One such alternative scheme could take turns
+	for various control changes in a rotating schedule to spread out calculations
+	made in successive updateControl() routines. */
+
+	Ead(unsigned int update_rate);
 
 
-	/** Set the Q8n8attack time in milliseconds. The Q8n8attack time means how long it takes
-	for the values returned by successive calls of the next() method to change from
-	0 to 1. */
+	/** Set the attack time in milliseconds.
+	@param attack_ms The time taken for values returned by successive calls of
+	the next() method to change from 0 to 255. */
 	inline
-	void setAttack(unsigned int milliseconds)
+	void setAttack(unsigned int attack_ms)
 	{
-		Q8n8attack = Q8n8_float2fix(millisToOneMinusRealPole(milliseconds));
+		Q8n8attack = Q8n8_float2fix(millisToOneMinusRealPole(attack_ms));
 	}
 
 
-	/** Set the Q8n8decay time in milliseconds. The Q8n8decay time means how long
-	the Q8n8decay phase takes to change from 1 to 0. */
+	/** Set the decay time in milliseconds.
+	@param decay_ms The time taken for values returned by successive calls of
+	the next() method to change from 255 to 0. */
 	inline
-	void setDecay(unsigned int milliseconds)
+	void setDecay(unsigned int decay_ms)
 	{
-		Q8n8decay = Q8n8_float2fix(millisToOneMinusRealPole(milliseconds));
+		Q8n8decay = Q8n8_float2fix(millisToOneMinusRealPole(decay_ms));
 	}
 
 
-	/** Set Q8n8attack and Q8n8decay times in milliseconds. */
+	/** Set attack and decay times in milliseconds
+	@param attack_ms The time taken for values returned by successive calls of
+	the next() method to change from 0 to 255.
+	@param decay_ms The time taken for values returned by successive calls of
+	the next() method to change from 255 to 0.
+	*/
 	inline
-	void set(unsigned int attackms, unsigned int decayms)
+	void set(unsigned int attack_ms, unsigned int decay_ms)
 	{
-		setAttack(attackms);
-		setDecay(decayms);
+		setAttack(attack_ms);
+		setDecay(decay_ms);
 	}
 
 

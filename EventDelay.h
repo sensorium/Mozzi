@@ -1,5 +1,5 @@
 /*
- * DelayCuttlefish.h
+ * EventDelay.h
  *
  * Copyright 2012 unbackwards@gmail.com.
  *
@@ -20,10 +20,47 @@
  *
  */
 
-#include "DelayCuttlefish.h"
+#ifndef DELAY_CUTTLEFISH_H_
+#define DELAY_CUTTLEFISH_H_
 
-DelayCuttlefish::DelayCuttlefish(unsigned int UPDATE_RATE): micros_per_update(1000000/UPDATE_RATE),counter(0)
+#include "Arduino.h"
+
+class EventDelay
 {
-	;
-}
 
+public:
+
+	EventDelay(unsigned int UPDATE_RATE);
+
+
+	inline
+	void set(unsigned int millisToWait)
+	{
+		counter_start_value = ((long)millisToWait*1000)/micros_per_update;
+	}
+
+
+	inline
+	void start()
+	{
+		counter = counter_start_value;
+	}
+
+
+	inline
+	boolean ready()
+	{
+		return --counter<0;
+	}
+
+
+private:
+
+	long counter; // long so even at a control rate of 2048 you can have >15seconds
+	long counter_start_value;
+	const unsigned int micros_per_update;
+
+};
+
+
+#endif /* DELAY_CUTTLEFISH_H_ */

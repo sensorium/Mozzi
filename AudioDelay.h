@@ -29,7 +29,8 @@ NUM_BUFFER_SAMPLES is the length of the delay buffer in samples, and should
 be a power of two. The largest delay you'll fit in an atmega328 will be 512
 cells, which at 16384 Hz sample rate is 31 milliseconds. More of a flanger or a
 doubler than an echo. This version doesn't have feedback, for that use
-AudioDelayFeedback instead. */
+AudioDelayFeedback instead.
+*/
 
 template <unsigned int NUM_BUFFER_SAMPLES>
 class AudioDelay

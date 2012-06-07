@@ -2,7 +2,7 @@
  *  with Cuttlefish sonification library.
  *
  *  Demonstrates the audible quality of different length tables
- *  played with Oscil and scheduling with DelayCuttlefish.
+ *  played with Oscil and scheduling with EventDelay.
  *
  *  unbackwards@gmail.com 2012.
  *  This example code is in the public domain.
@@ -16,7 +16,7 @@
 #include <tables/sin2048_int8.h>
 #include <tables/sin4096_int8.h>
 #include <tables/sin8192_int8.h>
-#include <DelayCuttlefish.h> // for scheduling events
+#include <EventDelay.h> // for scheduling events
 #include <Line.h>
 
 #define CONTROL_RATE 64
@@ -33,7 +33,7 @@ Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin3(SIN2048_DATA); // no audible improve
 Oscil <SIN4096_NUM_CELLS, AUDIO_RATE> aSin4(SIN4096_DATA); // for 45 year old loud sound damaged ears
 Oscil <SIN8192_NUM_CELLS, AUDIO_RATE> aSin5(SIN8192_DATA);
 
-DelayCuttlefish kWhoseTurnDelay(CONTROL_RATE);
+EventDelay kWhoseTurnDelay(CONTROL_RATE);
 
 const unsigned char NUM_OSCILS = 6;
 unsigned char gain[NUM_OSCILS] = {0,0,0,0,0,0}; // gain for each oscil

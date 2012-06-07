@@ -102,20 +102,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Exponential attack decay envelope.  
  <a href="class_ead.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_ead_8h_source.html">Ead.h</a>&gt;</code></p>
-
 <p><a href="class_ead-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad4a7024c97db25fbe0dff6034221cbf9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ead.html#ad4a7024c97db25fbe0dff6034221cbf9">Ead</a> (const unsigned int UPDATE_RATE)</td></tr>
-<tr class="memdesc:ad4a7024c97db25fbe0dff6034221cbf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#ad4a7024c97db25fbe0dff6034221cbf9"></a><br/></td></tr>
-<tr class="memitem:a84d8c80906cd16822ef238693099e94b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ead.html#a84d8c80906cd16822ef238693099e94b">setAttack</a> (unsigned int milliseconds)</td></tr>
-<tr class="memdesc:a84d8c80906cd16822ef238693099e94b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Q8n8attack time in milliseconds.  <a href="#a84d8c80906cd16822ef238693099e94b"></a><br/></td></tr>
-<tr class="memitem:a9e6a5b1b9685bee4364a1a5cc613f59d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ead.html#a9e6a5b1b9685bee4364a1a5cc613f59d">setDecay</a> (unsigned int milliseconds)</td></tr>
-<tr class="memdesc:a9e6a5b1b9685bee4364a1a5cc613f59d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Q8n8decay time in milliseconds.  <a href="#a9e6a5b1b9685bee4364a1a5cc613f59d"></a><br/></td></tr>
-<tr class="memitem:a95c29b3252990fb3c0ea6280228609fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ead.html#a95c29b3252990fb3c0ea6280228609fd">set</a> (unsigned int attackms, unsigned int decayms)</td></tr>
-<tr class="memdesc:a95c29b3252990fb3c0ea6280228609fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set Q8n8attack and Q8n8decay times in milliseconds.  <a href="#a95c29b3252990fb3c0ea6280228609fd"></a><br/></td></tr>
+<tr class="memitem:a4862282805c2ac3255a34a99a31564d5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ead.html#a4862282805c2ac3255a34a99a31564d5">Ead</a> (unsigned int update_rate)</td></tr>
+<tr class="memdesc:a4862282805c2ac3255a34a99a31564d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a4862282805c2ac3255a34a99a31564d5"></a><br/></td></tr>
+<tr class="memitem:a6bae0e92e6709c3fcd31fccd41212bac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ead.html#a6bae0e92e6709c3fcd31fccd41212bac">setAttack</a> (unsigned int attack_ms)</td></tr>
+<tr class="memdesc:a6bae0e92e6709c3fcd31fccd41212bac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the attack time in milliseconds.  <a href="#a6bae0e92e6709c3fcd31fccd41212bac"></a><br/></td></tr>
+<tr class="memitem:aa99e6dc2d5448b4de0764c6208e5c2fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ead.html#aa99e6dc2d5448b4de0764c6208e5c2fc">setDecay</a> (unsigned int decay_ms)</td></tr>
+<tr class="memdesc:aa99e6dc2d5448b4de0764c6208e5c2fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the decay time in milliseconds.  <a href="#aa99e6dc2d5448b4de0764c6208e5c2fc"></a><br/></td></tr>
+<tr class="memitem:af203c82721ab832c653a23ff219c040e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ead.html#af203c82721ab832c653a23ff219c040e">set</a> (unsigned int attack_ms, unsigned int decay_ms)</td></tr>
+<tr class="memdesc:af203c82721ab832c653a23ff219c040e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set attack and decay times in milliseconds.  <a href="#af203c82721ab832c653a23ff219c040e"></a><br/></td></tr>
 <tr class="memitem:ac385679b58e2f9755029b7da7405b233"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ead.html#ac385679b58e2f9755029b7da7405b233">start</a> ()</td></tr>
 <tr class="memdesc:ac385679b58e2f9755029b7da7405b233"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the envelope from the beginning.  <a href="#ac385679b58e2f9755029b7da7405b233"></a><br/></td></tr>
 <tr class="memitem:a32d3e3cf3848e4dbab6a3b2030d7e4ba"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a32d3e3cf3848e4dbab6a3b2030d7e4ba"></a>
@@ -128,15 +126,15 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 
 <p>Definition at line <a class="el" href="_ead_8h_source.html#l00040">40</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ad4a7024c97db25fbe0dff6034221cbf9"></a>
+<a class="anchor" id="a4862282805c2ac3255a34a99a31564d5"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_ead.html#ad4a7024c97db25fbe0dff6034221cbf9">Ead::Ead</a> </td>
+          <td class="memname"><a class="el" href="class_ead.html#a4862282805c2ac3255a34a99a31564d5">Ead::Ead</a> </td>
           <td>(</td>
-          <td class="paramtype">const unsigned int&#160;</td>
-          <td class="paramname"><em>UPDATE_RATE</em></td><td>)</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>update_rate</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -144,28 +142,33 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <div class="memdoc">
 
 <p>Constructor. </p>
-<p>UPDATE_RATE would usually be CONTROL_RATE or AUDIO_RATE, unless you design another scheme for updating, for instance by taking turns for various control changes in a rotating schedule to spread out calculations made in successive updateControl() routines. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">update_rate</td><td>Usually this will be CONTROL_RATE or AUDIO_RATE, unless you design another scheme for updating. One such alternative scheme could take turns for various control changes in a rotating schedule to spread out calculations made in successive updateControl() routines. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Definition at line <a class="el" href="_ead_8cpp_source.html#l00029">29</a> of file <a class="el" href="_ead_8cpp_source.html">Ead.cpp</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a95c29b3252990fb3c0ea6280228609fd"></a>
+<a class="anchor" id="af203c82721ab832c653a23ff219c040e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_ead.html#a95c29b3252990fb3c0ea6280228609fd">Ead::set</a> </td>
+          <td class="memname">void <a class="el" href="class_ead.html#af203c82721ab832c653a23ff219c040e">Ead::set</a> </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>attackms</em>, </td>
+          <td class="paramname"><em>attack_ms</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>decayms</em>&#160;</td>
+          <td class="paramname"><em>decay_ms</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -176,53 +179,70 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 </div>
 <div class="memdoc">
 
-<p>Set Q8n8attack and Q8n8decay times in milliseconds. </p>
+<p>Set attack and decay times in milliseconds. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">attack_ms</td><td>The time taken for values returned by successive calls of the <a class="el" href="class_ead.html#a32d3e3cf3848e4dbab6a3b2030d7e4ba" title="Calculate and return the next envelope value, in the range -128 to 127.">next()</a> method to change from 0 to 255. </td></tr>
+    <tr><td class="paramname">decay_ms</td><td>The time taken for values returned by successive calls of the <a class="el" href="class_ead.html#a32d3e3cf3848e4dbab6a3b2030d7e4ba" title="Calculate and return the next envelope value, in the range -128 to 127.">next()</a> method to change from 255 to 0. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_ead_8h_source.html#l00074">74</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
+<p>Definition at line <a class="el" href="_ead_8h_source.html#l00082">82</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a84d8c80906cd16822ef238693099e94b"></a>
+<a class="anchor" id="a6bae0e92e6709c3fcd31fccd41212bac"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_ead.html#a84d8c80906cd16822ef238693099e94b">Ead::setAttack</a> </td>
+          <td class="memname">void <a class="el" href="class_ead.html#a6bae0e92e6709c3fcd31fccd41212bac">Ead::setAttack</a> </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>milliseconds</em></td><td>)</td>
+          <td class="paramname"><em>attack_ms</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Set the Q8n8attack time in milliseconds. </p>
-<p>The Q8n8attack time means how long it takes for the values returned by successive calls of the <a class="el" href="class_ead.html#a32d3e3cf3848e4dbab6a3b2030d7e4ba" title="Calculate and return the next envelope value, in the range -128 to 127.">next()</a> method to change from 0 to 1. </p>
+<p>Set the attack time in milliseconds. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">attack_ms</td><td>The time taken for values returned by successive calls of the <a class="el" href="class_ead.html#a32d3e3cf3848e4dbab6a3b2030d7e4ba" title="Calculate and return the next envelope value, in the range -128 to 127.">next()</a> method to change from 0 to 255. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_ead_8h_source.html#l00057">57</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
+<p>Definition at line <a class="el" href="_ead_8h_source.html#l00059">59</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a9e6a5b1b9685bee4364a1a5cc613f59d"></a>
+<a class="anchor" id="aa99e6dc2d5448b4de0764c6208e5c2fc"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_ead.html#a9e6a5b1b9685bee4364a1a5cc613f59d">Ead::setDecay</a> </td>
+          <td class="memname">void <a class="el" href="class_ead.html#aa99e6dc2d5448b4de0764c6208e5c2fc">Ead::setDecay</a> </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>milliseconds</em></td><td>)</td>
+          <td class="paramname"><em>decay_ms</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Set the Q8n8decay time in milliseconds. </p>
-<p>The Q8n8decay time means how long the Q8n8decay phase takes to change from 1 to 0. </p>
+<p>Set the decay time in milliseconds. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">decay_ms</td><td>The time taken for values returned by successive calls of the <a class="el" href="class_ead.html#a32d3e3cf3848e4dbab6a3b2030d7e4ba" title="Calculate and return the next envelope value, in the range -128 to 127.">next()</a> method to change from 255 to 0. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_ead_8h_source.html#l00066">66</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
+<p>Definition at line <a class="el" href="_ead_8h_source.html#l00069">69</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
 
 </div>
 </div>
@@ -243,7 +263,7 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <p>Start the envelope from the beginning. </p>
 <p>This can be used at any time, even if the previous envelope is not finished. </p>
 
-<p>Definition at line <a class="el" href="_ead_8h_source.html#l00084">84</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
+<p>Definition at line <a class="el" href="_ead_8h_source.html#l00092">92</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
 
 </div>
 </div>
@@ -255,7 +275,7 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 7 2012 00:12:30 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 8 2012 01:21:16 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

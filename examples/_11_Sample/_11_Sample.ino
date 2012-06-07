@@ -2,7 +2,7 @@
  *  using Cuttlefish sonification library.
  *
  *  Demonstrates one-shot samples scheduled
- *  with DelayCuttlefish.
+ *  with EventDelay.
  *
  *  Circuit: Audio output on digital pin 9.
  *
@@ -13,7 +13,7 @@
 #include <CuttlefishGuts.h>
 #include <Sample.h> // Samplelator template
 #include <tables/bamboo1_1024_int8.h> // sine table for Samplelator
-#include <DelayCuttlefish.h>
+#include <EventDelay.h>
 
 #define CONTROL_RATE 64
 
@@ -21,7 +21,7 @@
 Sample <BAMBOO1_1024_NUM_CELLS, AUDIO_RATE> aBamboo1(BAMBOO1_1024_DATA);
 
 // for scheduling audio gain changes
-DelayCuttlefish kTriggerDelay(CONTROL_RATE);
+EventDelay kTriggerDelay(CONTROL_RATE);
 
 char gain = 1;
 

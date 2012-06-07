@@ -131,101 +131,101 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00042"></a>00042 
 <a name="l00043"></a>00043 <span class="keyword">public</span>:
 <a name="l00044"></a>00044 
-<a name="l00050"></a>00050         <a class="code" href="class_ead.html#ad4a7024c97db25fbe0dff6034221cbf9" title="Constructor.">Ead</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> UPDATE_RATE);
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052 
-<a name="l00056"></a>00056         <span class="keyword">inline</span>
-<a name="l00057"></a><a class="code" href="class_ead.html#a84d8c80906cd16822ef238693099e94b">00057</a>         <span class="keywordtype">void</span> <a class="code" href="class_ead.html#a84d8c80906cd16822ef238693099e94b" title="Set the Q8n8attack time in milliseconds.">setAttack</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> milliseconds)
-<a name="l00058"></a>00058         {
-<a name="l00059"></a>00059                 Q8n8attack = Q8n8_float2fix(millisToOneMinusRealPole(milliseconds));
-<a name="l00060"></a>00060         }
-<a name="l00061"></a>00061 
-<a name="l00062"></a>00062 
-<a name="l00065"></a>00065         <span class="keyword">inline</span>
-<a name="l00066"></a><a class="code" href="class_ead.html#a9e6a5b1b9685bee4364a1a5cc613f59d">00066</a>         <span class="keywordtype">void</span> <a class="code" href="class_ead.html#a9e6a5b1b9685bee4364a1a5cc613f59d" title="Set the Q8n8decay time in milliseconds.">setDecay</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> milliseconds)
-<a name="l00067"></a>00067         {
-<a name="l00068"></a>00068                 Q8n8decay = Q8n8_float2fix(millisToOneMinusRealPole(milliseconds));
-<a name="l00069"></a>00069         }
-<a name="l00070"></a>00070 
-<a name="l00071"></a>00071 
-<a name="l00073"></a>00073         <span class="keyword">inline</span>
-<a name="l00074"></a><a class="code" href="class_ead.html#a95c29b3252990fb3c0ea6280228609fd">00074</a>         <span class="keywordtype">void</span> <span class="keyword">set</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> attackms, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> decayms)
-<a name="l00075"></a>00075         {
-<a name="l00076"></a>00076                 <a class="code" href="class_ead.html#a84d8c80906cd16822ef238693099e94b" title="Set the Q8n8attack time in milliseconds.">setAttack</a>(attackms);
-<a name="l00077"></a>00077                 <a class="code" href="class_ead.html#a9e6a5b1b9685bee4364a1a5cc613f59d" title="Set the Q8n8decay time in milliseconds.">setDecay</a>(decayms);
-<a name="l00078"></a>00078         }
-<a name="l00079"></a>00079 
-<a name="l00080"></a>00080 
-<a name="l00083"></a>00083         <span class="keyword">inline</span>
-<a name="l00084"></a><a class="code" href="class_ead.html#ac385679b58e2f9755029b7da7405b233">00084</a>         <span class="keywordtype">void</span> <a class="code" href="class_ead.html#ac385679b58e2f9755029b7da7405b233" title="Start the envelope from the beginning.">start</a>()
-<a name="l00085"></a>00085         {
-<a name="l00086"></a>00086                 Q8n24state = 0;
-<a name="l00087"></a>00087                 attack_phase = <span class="keyword">true</span>;
-<a name="l00088"></a>00088         }
-<a name="l00089"></a>00089 
-<a name="l00090"></a>00090 
-<a name="l00093"></a>00093         <span class="comment">// 5us</span>
-<a name="l00094"></a>00094         <span class="keyword">inline</span>
-<a name="l00095"></a><a class="code" href="class_ead.html#a32d3e3cf3848e4dbab6a3b2030d7e4ba">00095</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="class_ead.html#a32d3e3cf3848e4dbab6a3b2030d7e4ba" title="Calculate and return the next envelope value, in the range -128 to 127.">next</a>()
-<a name="l00096"></a>00096         {
-<a name="l00097"></a>00097                 <span class="keywordflow">switch</span>(attack_phase)
-<a name="l00098"></a>00098                 {
-<a name="l00099"></a>00099                 <span class="keywordflow">case</span> <span class="keyword">true</span>: <span class="comment">/* attack phase */</span>
-<a name="l00100"></a>00100                         <span class="comment">// signed multiply A(a1,b1) * A(a2,b2)=A(a1 +a2 +1,b1 +b2)</span>
-<a name="l00101"></a>00101                         Q8n24state += ((Q8n24_FIX1 - Q8n24state) * Q8n8attack) &gt;&gt; 8; <span class="comment">// Q8n24, shifts all back into n24</span>
-<a name="l00102"></a>00102                         <span class="keywordflow">if</span> (Q8n24state &gt;= Q8n24_FIX1-256)
-<a name="l00103"></a>00103                         {
-<a name="l00104"></a>00104                                 Q8n24state = Q8n24_FIX1-256;
-<a name="l00105"></a>00105                                 attack_phase = <span class="keyword">false</span>;
-<a name="l00106"></a>00106                         }
-<a name="l00107"></a>00107                         <span class="keywordflow">break</span>;
-<a name="l00108"></a>00108                 <span class="keywordflow">default</span>: <span class="comment">/* decay phase */</span>
-<a name="l00109"></a>00109                         Q8n24state -= (Q8n24state * Q8n8decay)&gt;&gt;8;
-<a name="l00110"></a>00110                         <span class="keywordflow">break</span>;
-<a name="l00111"></a>00111                 }
-<a name="l00112"></a>00112                 <span class="keywordflow">return</span> Q8n24_to_Q0n8(Q8n24state);
-<a name="l00113"></a>00113         }
-<a name="l00114"></a>00114 
-<a name="l00115"></a>00115 <span class="keyword">private</span>:
-<a name="l00116"></a>00116 
-<a name="l00117"></a>00117         Q8n8 Q8n8attack;
-<a name="l00118"></a>00118         Q8n8 Q8n8decay;
-<a name="l00119"></a>00119         Q8n24 Q8n24state;
-<a name="l00120"></a>00120         <span class="keywordtype">bool</span> attack_phase;
-<a name="l00121"></a>00121         <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> UPDATE_RATE;
+<a name="l00052"></a>00052                 <a class="code" href="class_ead.html#a4862282805c2ac3255a34a99a31564d5" title="Constructor.">Ead</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> update_rate);
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054 
+<a name="l00058"></a>00058                 <span class="keyword">inline</span>
+<a name="l00059"></a><a class="code" href="class_ead.html#a6bae0e92e6709c3fcd31fccd41212bac">00059</a>                 <span class="keywordtype">void</span> <a class="code" href="class_ead.html#a6bae0e92e6709c3fcd31fccd41212bac" title="Set the attack time in milliseconds.">setAttack</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> attack_ms)
+<a name="l00060"></a>00060                 {
+<a name="l00061"></a>00061                                 Q8n8attack = Q8n8_float2fix(millisToOneMinusRealPole(attack_ms));
+<a name="l00062"></a>00062                 }
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064 
+<a name="l00068"></a>00068                 <span class="keyword">inline</span>
+<a name="l00069"></a><a class="code" href="class_ead.html#aa99e6dc2d5448b4de0764c6208e5c2fc">00069</a>                 <span class="keywordtype">void</span> <a class="code" href="class_ead.html#aa99e6dc2d5448b4de0764c6208e5c2fc" title="Set the decay time in milliseconds.">setDecay</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> decay_ms)
+<a name="l00070"></a>00070                 {
+<a name="l00071"></a>00071                                 Q8n8decay = Q8n8_float2fix(millisToOneMinusRealPole(decay_ms));
+<a name="l00072"></a>00072                 }
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074 
+<a name="l00081"></a>00081                 <span class="keyword">inline</span>
+<a name="l00082"></a><a class="code" href="class_ead.html#af203c82721ab832c653a23ff219c040e">00082</a>                 <span class="keywordtype">void</span> <span class="keyword">set</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> attack_ms, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> decay_ms)
+<a name="l00083"></a>00083                 {
+<a name="l00084"></a>00084                                 <a class="code" href="class_ead.html#a6bae0e92e6709c3fcd31fccd41212bac" title="Set the attack time in milliseconds.">setAttack</a>(attack_ms);
+<a name="l00085"></a>00085                                 <a class="code" href="class_ead.html#aa99e6dc2d5448b4de0764c6208e5c2fc" title="Set the decay time in milliseconds.">setDecay</a>(decay_ms);
+<a name="l00086"></a>00086                 }
+<a name="l00087"></a>00087 
+<a name="l00088"></a>00088 
+<a name="l00091"></a>00091                 <span class="keyword">inline</span>
+<a name="l00092"></a><a class="code" href="class_ead.html#ac385679b58e2f9755029b7da7405b233">00092</a>                 <span class="keywordtype">void</span> <a class="code" href="class_ead.html#ac385679b58e2f9755029b7da7405b233" title="Start the envelope from the beginning.">start</a>()
+<a name="l00093"></a>00093                 {
+<a name="l00094"></a>00094                                 Q8n24state = 0;
+<a name="l00095"></a>00095                                 attack_phase = <span class="keyword">true</span>;
+<a name="l00096"></a>00096                 }
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098 
+<a name="l00101"></a>00101                 <span class="comment">// 5us</span>
+<a name="l00102"></a>00102                 <span class="keyword">inline</span>
+<a name="l00103"></a><a class="code" href="class_ead.html#a32d3e3cf3848e4dbab6a3b2030d7e4ba">00103</a>                 <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="class_ead.html#a32d3e3cf3848e4dbab6a3b2030d7e4ba" title="Calculate and return the next envelope value, in the range -128 to 127.">next</a>()
+<a name="l00104"></a>00104                 {
+<a name="l00105"></a>00105                                 <span class="keywordflow">switch</span>(attack_phase)
+<a name="l00106"></a>00106                                 {
+<a name="l00107"></a>00107                                 <span class="keywordflow">case</span> <span class="keyword">true</span>: <span class="comment">/* attack phase */</span>
+<a name="l00108"></a>00108                                                 <span class="comment">// signed multiply A(a1,b1) * A(a2,b2)=A(a1 +a2 +1,b1 +b2)</span>
+<a name="l00109"></a>00109                                                 Q8n24state += ((Q8n24_FIX1 - Q8n24state) * Q8n8attack) &gt;&gt; 8; <span class="comment">// Q8n24, shifts all back into n24</span>
+<a name="l00110"></a>00110                                                 <span class="keywordflow">if</span> (Q8n24state &gt;= Q8n24_FIX1-256)
+<a name="l00111"></a>00111                                                 {
+<a name="l00112"></a>00112                                                                 Q8n24state = Q8n24_FIX1-256;
+<a name="l00113"></a>00113                                                                 attack_phase = <span class="keyword">false</span>;
+<a name="l00114"></a>00114                                                 }
+<a name="l00115"></a>00115                                                 <span class="keywordflow">break</span>;
+<a name="l00116"></a>00116                                 <span class="keywordflow">default</span>: <span class="comment">/* decay phase */</span>
+<a name="l00117"></a>00117                                                 Q8n24state -= (Q8n24state * Q8n8decay)&gt;&gt;8;
+<a name="l00118"></a>00118                                                 <span class="keywordflow">break</span>;
+<a name="l00119"></a>00119                                 }
+<a name="l00120"></a>00120                                 <span class="keywordflow">return</span> Q8n24_to_Q0n8(Q8n24state);
+<a name="l00121"></a>00121                 }
 <a name="l00122"></a>00122 
-<a name="l00123"></a>00123 
-<a name="l00124"></a>00124         <span class="comment">/* convert milliseconds to 1-p, with p a real pole */</span>
-<a name="l00125"></a>00125         <span class="keyword">inline</span>
-<a name="l00126"></a>00126         <span class="keywordtype">float</span> millisToOneMinusRealPole(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> milliseconds)
-<a name="l00127"></a>00127         {
-<a name="l00128"></a>00128                 <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">float</span> NUMERATOR = 1000.0f * log(0.001f);
-<a name="l00129"></a>00129                 <span class="keywordflow">return</span>  -expm1(NUMERATOR / ((<span class="keywordtype">float</span>)UPDATE_RATE * milliseconds));
-<a name="l00130"></a>00130         }
+<a name="l00123"></a>00123 <span class="keyword">private</span>:
+<a name="l00124"></a>00124 
+<a name="l00125"></a>00125                 Q8n8 Q8n8attack;
+<a name="l00126"></a>00126                 Q8n8 Q8n8decay;
+<a name="l00127"></a>00127                 Q8n24 Q8n24state;
+<a name="l00128"></a>00128                 <span class="keywordtype">bool</span> attack_phase;
+<a name="l00129"></a>00129                 <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> UPDATE_RATE;
+<a name="l00130"></a>00130 
 <a name="l00131"></a>00131 
-<a name="l00132"></a>00132 
-<a name="l00133"></a>00133         <span class="comment">// Compute exp(x) - 1 without loss of precision for small values of x.</span>
-<a name="l00134"></a>00134         <span class="keyword">inline</span>
-<a name="l00135"></a>00135         <span class="keywordtype">float</span> expm1(<span class="keywordtype">float</span> x)
-<a name="l00136"></a>00136         {
-<a name="l00137"></a>00137                 <span class="keywordflow">if</span> (fabs(x) &lt; 1e-5)
-<a name="l00138"></a>00138                 {
-<a name="l00139"></a>00139                         <span class="keywordflow">return</span> x + 0.5*x*x;
-<a name="l00140"></a>00140                 }
-<a name="l00141"></a>00141                 <span class="keywordflow">else</span>
-<a name="l00142"></a>00142                 {
-<a name="l00143"></a>00143                         <span class="keywordflow">return</span> exp(x) - 1.0;
-<a name="l00144"></a>00144                 }
-<a name="l00145"></a>00145         }
-<a name="l00146"></a>00146 
-<a name="l00147"></a>00147 };
-<a name="l00148"></a>00148 
-<a name="l00149"></a>00149 <span class="preprocessor">#endif </span><span class="comment">/* EAD_H_ */</span>
+<a name="l00132"></a>00132                 <span class="comment">/* convert milliseconds to 1-p, with p a real pole */</span>
+<a name="l00133"></a>00133                 <span class="keyword">inline</span>
+<a name="l00134"></a>00134                 <span class="keywordtype">float</span> millisToOneMinusRealPole(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> milliseconds)
+<a name="l00135"></a>00135                 {
+<a name="l00136"></a>00136                                 <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">float</span> NUMERATOR = 1000.0f * log(0.001f);
+<a name="l00137"></a>00137                                 <span class="keywordflow">return</span>  -expm1(NUMERATOR / ((<span class="keywordtype">float</span>)UPDATE_RATE * milliseconds));
+<a name="l00138"></a>00138                 }
+<a name="l00139"></a>00139 
+<a name="l00140"></a>00140 
+<a name="l00141"></a>00141                 <span class="comment">// Compute exp(x) - 1 without loss of precision for small values of x.</span>
+<a name="l00142"></a>00142                 <span class="keyword">inline</span>
+<a name="l00143"></a>00143                 <span class="keywordtype">float</span> expm1(<span class="keywordtype">float</span> x)
+<a name="l00144"></a>00144                 {
+<a name="l00145"></a>00145                                 <span class="keywordflow">if</span> (fabs(x) &lt; 1e-5)
+<a name="l00146"></a>00146                                 {
+<a name="l00147"></a>00147                                                 <span class="keywordflow">return</span> x + 0.5*x*x;
+<a name="l00148"></a>00148                                 }
+<a name="l00149"></a>00149                                 <span class="keywordflow">else</span>
+<a name="l00150"></a>00150                                 {
+<a name="l00151"></a>00151                                                 <span class="keywordflow">return</span> exp(x) - 1.0;
+<a name="l00152"></a>00152                                 }
+<a name="l00153"></a>00153                 }
+<a name="l00154"></a>00154 
+<a name="l00155"></a>00155 };
+<a name="l00156"></a>00156 
+<a name="l00157"></a>00157 <span class="preprocessor">#endif </span><span class="comment">/* EAD_H_ */</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 7 2012 00:12:30 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 8 2012 01:21:16 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

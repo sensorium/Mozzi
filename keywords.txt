@@ -33,7 +33,7 @@ increment	KEYWORD2
 next	KEYWORD2
 set	KEYWORD2
 
-DelayCuttlefish	KEYWORD1
+EventDelay	KEYWORD1
 set	KEYWORD2
 start	KEYWORD2
 ready	KEYWORD2

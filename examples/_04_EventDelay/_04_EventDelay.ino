@@ -1,8 +1,8 @@
 /*  Example of a sound being toggled on an off,
  *  using Cuttlefish sonification library.
  *
- *  Demonstrates scheduling with DelayCuttlefish.
- *  DelayCuttlefish is a way to make non-blocking
+ *  Demonstrates scheduling with EventDelay.
+ *  EventDelay is a way to make non-blocking
  *  time delays for events.  Use this instead of
  *  the Arduino delay() function, which doesn't
  *  work with Cuttlefish.
@@ -16,7 +16,7 @@
 #include <CuttlefishGuts.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin8192_int8.h> // sine table for oscillator
-#include <DelayCuttlefish.h>
+#include <EventDelay.h>
 
 #define CONTROL_RATE 64
 
@@ -24,7 +24,7 @@
 Oscil <SIN8192_NUM_CELLS, AUDIO_RATE> aSin(SIN8192_DATA);
 
 // for scheduling audio gain changes
-DelayCuttlefish kGainChangeDelay(CONTROL_RATE);
+EventDelay kGainChangeDelay(CONTROL_RATE);
 
 char gain = 1;
 

@@ -2,7 +2,7 @@
  *  using Cuttlefish sonification library.
  *
  *  Demonstrates one-shot samples scheduled
- *  with DelayCuttlefish(), and uses xorshift96(),
+ *  with EventDelay(), and uses xorshift96(),
  *  a random number generator which is faster
  *  than Arduino random(), to vary the gain of each sample.
  *
@@ -17,7 +17,7 @@
 #include <tables/bamboo1_1024_int8.h> // wavetable data
 #include <tables/bamboo2_1024_int8.h> // wavetable data
 #include <tables/bamboo3_2048_int8.h> // wavetable data
-#include <DelayCuttlefish.h>
+#include <EventDelay.h>
 #include <utils.c> // for xorshift96() random number generator
 
 #define CONTROL_RATE 64
@@ -28,7 +28,7 @@ Sample <BAMBOO2_1024_NUM_CELLS, AUDIO_RATE> aBamboo2(BAMBOO2_1024_DATA);
 Sample <BAMBOO3_2048_NUM_CELLS, AUDIO_RATE> aBamboo3(BAMBOO3_2048_DATA);
 
 // for scheduling audio gain changes
-DelayCuttlefish kTriggerDelay(CONTROL_RATE);
+EventDelay kTriggerDelay(CONTROL_RATE);
 
 void setup(){
   startCuttlefish(CONTROL_RATE);

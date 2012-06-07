@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['timebomb',['DelayCuttlefish',['../class_timebomb.html',1,'']]]
+  ['timebomb',['EventDelay',['../class_timebomb.html',1,'']]]
 ];

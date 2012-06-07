@@ -12,7 +12,7 @@
 #include <CuttlefishGuts.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin8192_int8.h> // sine table for oscillator
-#include <DelayCuttlefish.h>
+#include <EventDelay.h>
 #include <Smooth.h>
 
 #define CONTROL_RATE 512
@@ -21,7 +21,7 @@
 Oscil <SIN8192_NUM_CELLS, AUDIO_RATE> aSin(SIN8192_DATA);
 
 // for scheduling audio gain changes
-DelayCuttlefish kGainChangeDelay(CONTROL_RATE);
+EventDelay kGainChangeDelay(CONTROL_RATE);
 
 Smooth <int> kSmoothGain(0.95f); // for smoothing kGainChangeDelay
 int smooth_gain; // for conveying kSmoothGain to updateAudio

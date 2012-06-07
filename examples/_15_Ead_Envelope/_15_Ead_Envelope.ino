@@ -13,12 +13,12 @@
 #include <Oscil.h> // oscillator template
 #include <tables/whitenoise8192_int8.h>
 #include <Ead.h> // exponential attack decay
-#include <DelayCuttlefish.h>
+#include <EventDelay.h>
 
 #define CONTROL_RATE 256 // powers of 2 please
 
 Oscil <WHITENOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(WHITENOISE8192_DATA); // audio noise
-DelayCuttlefish kDelay(CONTROL_RATE); // for triggering envelope start
+EventDelay kDelay(CONTROL_RATE); // for triggering envelope start
 Ead kEnvelope(CONTROL_RATE); // resolution will be CONTROL_RATE
 
 int gain;

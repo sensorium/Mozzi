@@ -125,28 +125,28 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00036"></a><a class="code" href="class_smooth.html">00036</a> <span class="keyword">class </span><a class="code" href="class_smooth.html" title="A simple low pass filter for smoothing control signals.">Smooth</a>
 <a name="l00037"></a>00037 {
 <a name="l00038"></a>00038 <span class="keyword">private</span>:
-<a name="l00039"></a>00039         numType last_out;
-<a name="l00040"></a>00040         <span class="keywordtype">float</span> a;
+<a name="l00039"></a>00039                 numType last_out;
+<a name="l00040"></a>00040                 <span class="keywordtype">float</span> a;
 <a name="l00041"></a>00041 
 <a name="l00042"></a>00042 <span class="keyword">public</span>:
-<a name="l00049"></a><a class="code" href="class_smooth.html#a2b54bc15e0eaff8ae7c9183401f4f866">00049</a>         <a class="code" href="class_smooth.html#a2b54bc15e0eaff8ae7c9183401f4f866" title="Instantiates a Smooth.">Smooth</a>(<span class="keywordtype">float</span> smoothness): a(1.f-smoothness)
-<a name="l00050"></a>00050         {
-<a name="l00051"></a>00051                 ;
-<a name="l00052"></a>00052         }
+<a name="l00049"></a><a class="code" href="class_smooth.html#a2b54bc15e0eaff8ae7c9183401f4f866">00049</a>                 <a class="code" href="class_smooth.html#a2b54bc15e0eaff8ae7c9183401f4f866" title="Instantiates a Smooth.">Smooth</a>(<span class="keywordtype">float</span> smoothness): a(1.f-smoothness)
+<a name="l00050"></a>00050                 {
+<a name="l00051"></a>00051                                 ;
+<a name="l00052"></a>00052                 }
 <a name="l00053"></a>00053 
-<a name="l00056"></a>00056         <span class="keyword">inline</span>
-<a name="l00057"></a><a class="code" href="class_smooth.html#a5f8be410c3c832adf718a0e5d5d81ade">00057</a>         numType <a class="code" href="class_smooth.html#a5f8be410c3c832adf718a0e5d5d81ade" title="Filters the input and returns the filtered value.">next</a>(numType in)
-<a name="l00058"></a>00058         {
-<a name="l00059"></a>00059                 numType out = (numType)((a * (in - last_out)) + last_out);
-<a name="l00060"></a>00060                 last_out = out;
-<a name="l00061"></a>00061                 <span class="keywordflow">return</span> out;
-<a name="l00062"></a>00062         }
+<a name="l00056"></a>00056                 <span class="keyword">inline</span>
+<a name="l00057"></a><a class="code" href="class_smooth.html#a5f8be410c3c832adf718a0e5d5d81ade">00057</a>                 numType <a class="code" href="class_smooth.html#a5f8be410c3c832adf718a0e5d5d81ade" title="Filters the input and returns the filtered value.">next</a>(numType in)
+<a name="l00058"></a>00058                 {
+<a name="l00059"></a>00059                                 numType out = (numType)((a * (in - last_out)) + last_out);
+<a name="l00060"></a>00060                                 last_out = out;
+<a name="l00061"></a>00061                                 <span class="keywordflow">return</span> out;
+<a name="l00062"></a>00062                 }
 <a name="l00063"></a>00063 
-<a name="l00067"></a>00067         <span class="keyword">inline</span>
-<a name="l00068"></a><a class="code" href="class_smooth.html#af63450a3a7289cf90e673d61671dad3c">00068</a>         <span class="keywordtype">void</span> <a class="code" href="class_smooth.html#af63450a3a7289cf90e673d61671dad3c" title="Sets how much smoothing the filter will apply to its input.">setSmoothness</a>(<span class="keywordtype">float</span> value)
-<a name="l00069"></a>00069         {
-<a name="l00070"></a>00070                 a=1.f-value;
-<a name="l00071"></a>00071         }
+<a name="l00067"></a>00067                 <span class="keyword">inline</span>
+<a name="l00068"></a><a class="code" href="class_smooth.html#af63450a3a7289cf90e673d61671dad3c">00068</a>                 <span class="keywordtype">void</span> <a class="code" href="class_smooth.html#af63450a3a7289cf90e673d61671dad3c" title="Sets how much smoothing the filter will apply to its input.">setSmoothness</a>(<span class="keywordtype">float</span> value)
+<a name="l00069"></a>00069                 {
+<a name="l00070"></a>00070                                 a=1.f-value;
+<a name="l00071"></a>00071                 }
 <a name="l00072"></a>00072 
 <a name="l00073"></a>00073 };
 <a name="l00074"></a>00074 
@@ -155,7 +155,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 7 2012 00:12:30 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 8 2012 01:21:16 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

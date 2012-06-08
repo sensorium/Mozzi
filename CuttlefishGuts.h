@@ -1,7 +1,7 @@
 /*
  * CuttlefishGuts.h
  *
- * Copyright 2012 unbackwards@gmail.com.
+ * Copyright 2012 Tim Barrass.
  *
  * This file is part of Cuttlefish.
  *
@@ -27,6 +27,8 @@
 #include "TimerOne.h"
 #include "TimerTwo.h"
 
+/** @mainpage welcome
+*/
 
 #define AUDIO_CHANNEL_1_PIN 9 /**< Digital pin 9 is the pwm audio output pin.  For now there is only one channel. */
 #define AUDIO_CHANNEL_1_OUTPUT_REGISTER OCR1A /**< Used internally.  If there was a channel 2, it would be OCR1B.*/
@@ -70,8 +72,7 @@ an oscilloscope with setPin13High() and setPin13Low() around you test code.
 #define FIXMATH_OPTIMIZE_8BIT /** libfixmath option */
 
 
-void startCuttlefish(unsigned int control_rate_hz)
-;
+void startCuttlefish(unsigned int control_rate_hz);
 void updateControl();
 int updateAudio();
 void audioHook();

@@ -1,5 +1,5 @@
 README for Cuttlefish, a sound synthesis library for Arduino.
-Tim Barrass unbackwards@gmail.com 2010-12
+Tim Barrass 2010-12
 
 
 Cuttlefish is a sound synthesis library for Arduino.

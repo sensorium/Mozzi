@@ -1,7 +1,7 @@
 /*
  * EventDelay.h
  *
- * Copyright 2012 unbackwards@gmail.com.
+ * Copyright 2012 Tim Barrass.
  *
  * This file is part of Cuttlefish.
  *
@@ -20,26 +20,37 @@
  *
  */
 
-#ifndef DELAY_CUTTLEFISH_H_
-#define DELAY_CUTTLEFISH_H_
+#ifndef EVENTDELAY_H_
+#define EVENTDELAY_H_
 
 #include "Arduino.h"
+
+/** A non-blocking replacement for Arduino's delay() function (which is disabled by Cuttlefish). EventDelay can be
+set() to wait for a number of milliseconds, then after calling start(), calling ready() will return true when the time is up.*/
 
 class EventDelay
 {
 
 public:
+	/** Constructor.
+	@param update rate is how frequently you'll check if the EventDelay is ready().
+	This would be CONTROL_RATE if ready() is used simply in updateControl().
+	*/
+	EventDelay(unsigned int update_rate);
 
-	EventDelay(unsigned int UPDATE_RATE);
 
-
+	/** Set the delay time.  This setting is persistent, until you change it by using set() again.
+	@param delay_milliseconds delay time in milliseconds.
+	*/
 	inline
-	void set(unsigned int millisToWait)
+	void set(unsigned int delay_milliseconds)
 	{
-		counter_start_value = ((long)millisToWait*1000)/micros_per_update;
+		counter_start_value = ((long)delay_milliseconds*1000)/micros_per_update;
 	}
 
 
+	/** Start the delay.
+	*/
 	inline
 	void start()
 	{
@@ -47,6 +58,9 @@ public:
 	}
 
 
+	/** Call this in updateControl() or updateAudio() to check if the delay time is up.
+	@return true if the time is up.
+	*/
 	inline
 	boolean ready()
 	{
@@ -63,4 +77,4 @@ private:
 };
 
 
-#endif /* DELAY_CUTTLEFISH_H_ */
+#endif /* EVENTDELAY_H_ */

@@ -1,7 +1,7 @@
 /*
  * LowPassFilter.cpp
  *
- * Copyright 2012 Tim Barrass unbackwards@gmail.com
+ * Copyright 2012 Tim Barrass
  *
  * This file is part of Cuttlefish.
  *

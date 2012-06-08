@@ -1,7 +1,7 @@
 /*
  * EventDelay.h
  *
- * Copyright 2012 unbackwards@gmail.com.
+ * Copyright 2012 Tim Barrass.
  *
  * This file is part of Cuttlefish.
  *
@@ -22,7 +22,7 @@
 
 #include "EventDelay.h"
 
-EventDelay::EventDelay(unsigned int UPDATE_RATE): micros_per_update(1000000/UPDATE_RATE),counter(0)
+EventDelay::EventDelay(unsigned int update_rate): micros_per_update(1000000/update_rate),counter(0)
 {
 	;
 }

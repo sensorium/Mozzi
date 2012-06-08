@@ -1,7 +1,7 @@
 /*
  * Line.h
  *
- * Copyright 2012 unbackwards@gmail.com.
+ * Copyright 2012 Tim Barrass.
  *
  * This file is part of Cuttlefish.
  *
@@ -25,21 +25,23 @@
 
 #include "Arduino.h"
 
-/** For linear changes with a minimum of calculation at each step. For instance, you
-can use Line to make an oscillator glide from one frequency to another,
+/** For linear changes with a minimum of calculation at each step. For instance,
+you can use Line to make an oscillator glide from one frequency to another,
 pre-calculating the required phase increments for each end and then letting your
 Line change the phase increment with only a simple addition at each step.
+@tparam T the type of numbers to use. For example, Line <int> myline; makes a
+Line which uses ints.
 */
 
-template <class numType>
+template <class T>
 class Line
 {
 private:
-	numType current_value;
-	numType step_size;
+	T current_value;
+	T step_size;
 
 public:
-	/** Instantiates a Line. Use the template parameter to set the type of numbers you
+	/** Constructor. Use the template parameter to set the type of numbers you
 	want to use. For example, Line <int> myline; makes a Line which uses ints.
 	 */
 	Line ()
@@ -47,10 +49,11 @@ public:
 		;
 	}
 
-	/** Increments one step along the line, returning the next value.
+	/** Increments one step along the line.
+	@return the next value.
 	 */
 	inline
-	numType next()
+	T next()
 	{
 		current_value += step_size;
 		return current_value;
@@ -60,7 +63,7 @@ public:
 	value using any previously calculated step size.
 	 */
 	inline
-	void set(numType value)
+	void set(T value)
 	{
 		current_value=value;
 	}
@@ -69,16 +72,16 @@ public:
 	the step size needed to get there from the current value.
 	 */
 	inline
-	void set(numType targetvalue, numType num_steps)
+	void set(T targetvalue, T num_steps)
 	{
-		step_size=(numType)(((float)(targetvalue-current_value)/num_steps));
+		step_size=(T)(((float)(targetvalue-current_value)/num_steps));
 	}
 
 	/** Given a new starting value, target value and the number of steps to take on the way,
 	this sets the step size needed to get there.
 	 */
 	inline
-	void set(numType startvalue, numType targetvalue, numType num_steps)
+	void set(T startvalue, T targetvalue, T num_steps)
 	{
 		set(startvalue);
 		set(targetvalue, num_steps);

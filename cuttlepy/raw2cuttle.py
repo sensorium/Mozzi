@@ -1,5 +1,5 @@
 ##    raw2cuttle.py
-##    Created 2010-12 by Tim Barrass unbackwards@gmail.com
+##    Created 2010-12 by Tim Barrass
 ##
 ##    raw2cuttle.py converts raw 8 bit sound data to wavetables for Cuttlefish.                                                                                                       ##
 ##

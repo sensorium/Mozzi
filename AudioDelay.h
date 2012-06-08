@@ -1,7 +1,7 @@
 /*
  * AudioDelay.h
  *
- * Copyright 2012 unbackwards@gmail.com.
+ * Copyright 2012 Tim Barrass.
  *
  * This file is part of Cuttlefish.
  *
@@ -24,7 +24,7 @@
 #define AUDIODELAY_H_
 
 
-/** An audio delay line for comb filter, flange, chorus and short echo effects.
+/** Audio delay line for comb filter, flange, chorus and short echo effects.
 NUM_BUFFER_SAMPLES is the length of the delay buffer in samples, and should
 be a power of two. The largest delay you'll fit in an atmega328 will be 512
 cells, which at 16384 Hz sample rate is 31 milliseconds. More of a flanger or a

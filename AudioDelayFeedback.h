@@ -3,7 +3,7 @@
 
 #include "Arduino.h"
 
-/** An audio delay line with feedback for comb filter, flange, chorus and short echo effects.
+/** Audio delay line with feedback for comb filter, flange, chorus and short echo effects.
 NUM_BUFFER_SAMPLES is the length of the delay buffer in samples, and should be a power
 of two. The delay length is half that of a plain AudioDelay object, in this case
 256 cells, or about 15 milliseconds. AudioDelayFeedback uses int sized cells to

@@ -8,7 +8,7 @@
  *
  *  Circuit: Audio output on digital pin 9.
  *
- *  unbackwards@gmail.com 2012.
+ *  Tim Barrass 2012.
  *  This example code is in the public domain.
  */
 

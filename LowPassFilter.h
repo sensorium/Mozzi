@@ -1,7 +1,7 @@
 /*
  * LowPassFilter.h
  *
- * Copyright 2012 Tim Barrass unbackwards@gmail.com
+ * Copyright 2012 Tim Barrass
  *
  * This file is part of Cuttlefish.
  *
@@ -25,15 +25,15 @@
 
 /*
 simple resonant filter posted to musicdsp.org by Paul Kellett http://www.musicdsp.org/archive.php?classid=3#259
-
+ 
 // set feedback amount given f and q between 0 and 1
 fb = q + q/(1.0 - f);
-
+ 
 // for each sample...
 buf0 = buf0 + f * (in - buf0 + fb * (buf0 - buf1));
 buf1 = buf1 + f * (buf0 - buf1);
 out = buf1;
-
+ 
 fixed point version of the filter
 "dave's blog of art and programming" http://www.pawfal.org/dave/blog/2011/09/
 */
@@ -41,27 +41,44 @@ fixed point version of the filter
 
 // we are using .n fixed point (n bits for the fractional part)
 #define FX_SHIFT 8
+#define SHIFTED_1 256
 
+/** A resonant low pass filter for audio signals.
+*/
 class LowPassFilter
 {
 
 public:
 
+
+	/** Constructor.
+	*/
 	LowPassFilter();
 
-	void setCutoffFreq(int cutoff)
+
+	/** Set the cut off frequency,
+	@param cutoff use the range 0-255 to represent 0-8192 Hz (AUDIO_RATE/2).
+	Be careful of distortion at the lower end, especially with high resonance.
+	*/
+	void setCutoffFreq(unsigned char cutoff)
 	{
 		f = cutoff;
-		setFeedback(cutoff);
+		setFeedback((int)cutoff);
 	}
 
 
-	void setResonance(int qq)
+	/** Set the resonance.  If you hear unwanted distortion, back off the resonance.
+	@param resonance in the range 0-255.
+	*/
+	void setResonance(unsigned char resonance)
 	{
-		q = qq;
+		q = resonance;
 	}
 
-
+	/** Calculate the next sample, given an input signal.
+	@param in the signal input.
+	@return the signal output.
+	*/
 	//16us
 	inline
 	int next(int in)
@@ -81,7 +98,7 @@ private:
 	inline
 	void setFeedback(int f)
 	{
-		fb = q+fxmul(q, fx(1) - f);
+		fb = q+fxmul(q, (int)SHIFTED_1 - f);
 	}
 
 	// convert an int into to its fixed representation
@@ -105,6 +122,7 @@ private:
 	{
 		return (a*b)>>FX_SHIFT;
 	}
+
 
 };
 

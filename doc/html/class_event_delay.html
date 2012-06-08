@@ -72,7 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
-      <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -99,23 +98,107 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
+<p>A non-blocking replacement for Arduino's delay() function (which is disabled by Cuttlefish).  
+ <a href="class_event_delay.html#details">More...</a></p>
+
 <p><a href="class_event_delay-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa9fe9260468f45e68b0b37a91266935f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa9fe9260468f45e68b0b37a91266935f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>EventDelay</b> (unsigned int UPDATE_RATE)</td></tr>
-<tr class="memitem:aa61828c6cf06eea09b1590e52d5819a7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa61828c6cf06eea09b1590e52d5819a7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set</b> (unsigned int millisToWait)</td></tr>
+<tr class="memitem:a726075823b832ddf616fb44ae920782c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event_delay.html#a726075823b832ddf616fb44ae920782c">EventDelay</a> (unsigned int update_rate)</td></tr>
+<tr class="memdesc:a726075823b832ddf616fb44ae920782c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a726075823b832ddf616fb44ae920782c"></a><br/></td></tr>
+<tr class="memitem:a937c86f3b05ccb6138ff7927713820da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event_delay.html#a937c86f3b05ccb6138ff7927713820da">set</a> (unsigned int delay_milliseconds)</td></tr>
+<tr class="memdesc:a937c86f3b05ccb6138ff7927713820da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the delay time.  <a href="#a937c86f3b05ccb6138ff7927713820da"></a><br/></td></tr>
 <tr class="memitem:a97a07c9371040d6388b8369352b08d83"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a97a07c9371040d6388b8369352b08d83"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>start</b> ()</td></tr>
-<tr class="memitem:aac805388ab4087f56b350dde40aeccbe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aac805388ab4087f56b350dde40aeccbe"></a>
-boolean&#160;</td><td class="memItemRight" valign="bottom"><b>ready</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event_delay.html#a97a07c9371040d6388b8369352b08d83">start</a> ()</td></tr>
+<tr class="memdesc:a97a07c9371040d6388b8369352b08d83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the delay. <br/></td></tr>
+<tr class="memitem:aac805388ab4087f56b350dde40aeccbe"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event_delay.html#aac805388ab4087f56b350dde40aeccbe">ready</a> ()</td></tr>
+<tr class="memdesc:aac805388ab4087f56b350dde40aeccbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call this in updateControl() or updateAudio() to check if the delay time is up.  <a href="#aac805388ab4087f56b350dde40aeccbe"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="_event_delay_8h_source.html#l00028">28</a> of file <a class="el" href="_event_delay_8h_source.html">EventDelay.h</a>.</p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+<div class="textblock"><p>A non-blocking replacement for Arduino's delay() function (which is disabled by Cuttlefish). </p>
+<p><a class="el" href="class_event_delay.html" title="A non-blocking replacement for Arduino&#39;s delay() function (which is disabled by Cuttlefish).">EventDelay</a> can be <a class="el" href="class_event_delay.html#a937c86f3b05ccb6138ff7927713820da" title="Set the delay time.">set()</a> to wait for a number of milliseconds, then after calling <a class="el" href="class_event_delay.html#a97a07c9371040d6388b8369352b08d83" title="Start the delay.">start()</a>, calling <a class="el" href="class_event_delay.html#aac805388ab4087f56b350dde40aeccbe" title="Call this in updateControl() or updateAudio() to check if the delay time is up.">ready()</a> will return true when the time is up. </p>
+
+<p>Definition at line <a class="el" href="_event_delay_8h_source.html#l00031">31</a> of file <a class="el" href="_event_delay_8h_source.html">EventDelay.h</a>.</p>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a726075823b832ddf616fb44ae920782c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_event_delay.html#a726075823b832ddf616fb44ae920782c">EventDelay::EventDelay</a> </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>update_rate</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">update</td><td>rate is how frequently you'll check if the <a class="el" href="class_event_delay.html" title="A non-blocking replacement for Arduino&#39;s delay() function (which is disabled by Cuttlefish).">EventDelay</a> is <a class="el" href="class_event_delay.html#aac805388ab4087f56b350dde40aeccbe" title="Call this in updateControl() or updateAudio() to check if the delay time is up.">ready()</a>. This would be CONTROL_RATE if <a class="el" href="class_event_delay.html#aac805388ab4087f56b350dde40aeccbe" title="Call this in updateControl() or updateAudio() to check if the delay time is up.">ready()</a> is used simply in updateControl(). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_event_delay_8cpp_source.html#l00025">25</a> of file <a class="el" href="_event_delay_8cpp_source.html">EventDelay.cpp</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="aac805388ab4087f56b350dde40aeccbe"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean <a class="el" href="class_event_delay.html#aac805388ab4087f56b350dde40aeccbe">EventDelay::ready</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Call this in updateControl() or updateAudio() to check if the delay time is up. </p>
+<dl class="section return"><dt>Returns:</dt><dd>true if the time is up. </dd></dl>
+
+<p>Definition at line <a class="el" href="_event_delay_8h_source.html#l00065">65</a> of file <a class="el" href="_event_delay_8h_source.html">EventDelay.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a937c86f3b05ccb6138ff7927713820da"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_event_delay.html#a937c86f3b05ccb6138ff7927713820da">EventDelay::set</a> </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>delay_milliseconds</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set the delay time. </p>
+<p>This setting is persistent, until you change it by using <a class="el" href="class_event_delay.html#a937c86f3b05ccb6138ff7927713820da" title="Set the delay time.">set()</a> again. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delay_milliseconds</td><td>delay time in milliseconds. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_event_delay_8h_source.html#l00046">46</a> of file <a class="el" href="_event_delay_8h_source.html">EventDelay.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_event_delay_8h_source.html">EventDelay.h</a></li>
 <li><a class="el" href="_event_delay_8cpp_source.html">EventDelay.cpp</a></li>
 </ul>
@@ -123,7 +206,7 @@ boolean&#160;</td><td class="memItemRight" valign="bottom"><b>ready</b> ()</td><
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 8 2012 01:21:16 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 9 2012 01:21:59 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

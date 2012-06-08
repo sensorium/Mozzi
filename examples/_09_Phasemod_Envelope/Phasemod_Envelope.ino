@@ -5,7 +5,7 @@
  *  Demonstrates phase modulation and modifying
  *  the volume of a sound with an envelope setd in a table.
  *
- *  unbackwards@gmail.com 2012.
+ *  Tim Barrass 2012.
  *  This example code is in the public domain.
  */
 

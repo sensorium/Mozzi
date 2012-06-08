@@ -4,7 +4,7 @@
  * Adapted from ead~.c puredata external (creb library)
  * Copyright (c) 2000-2003 by Tom Schouten
  *
- * Copyright 2012 Tim Barrass unbackwards@gmail.com, 2000-2003 Tom Schouten
+ * Copyright 2012 Tim Barrass, 2000-2003 Tom Schouten
  *
  * This file is part of Cuttlefish.
  *
@@ -32,9 +32,7 @@
 
 /** Exponential attack decay envelope. This produces a natural sounding
 envelope. It calculates a new value each time next() is called, which can be
-used to change the amplitude or timbre of a sound.  The equations used are:
- attack: y = a*pow((1+r),x)
- decay: y = a*pow((1-r),x)
+mapped to other parameters to change the amplitude or timbre of a sound.
 */
 
 class Ead

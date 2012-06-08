@@ -4,7 +4,7 @@
 * Adapted from ead~.c puredata external (creb library)
  * Copyright (c) 2000-2003 by Tom Schouten
  *
- * Copyright 2012 Tim Barrass unbackwards@gmail.com, 2000-2003 Tom Schouten
+ * Copyright 2012 Tim Barrass, 2000-2003 Tom Schouten
  *
  * This file is part of Cuttlefish.
  *

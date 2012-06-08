@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Cuttlefish: Line&lt; numType &gt; Class Template Reference</title>
+<title>Cuttlefish: Line&lt; T &gt; Class Template Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -72,7 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
-      <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -95,7 +94,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Line&lt; numType &gt; Class Template Reference</div>  </div>
+<div class="title">Line&lt; T &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -106,37 +105,42 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aabadbe424b45cf279a69b8057f7a2e9e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_line.html#aabadbe424b45cf279a69b8057f7a2e9e">Line</a> ()</td></tr>
-<tr class="memdesc:aabadbe424b45cf279a69b8057f7a2e9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiates a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a>.  <a href="#aabadbe424b45cf279a69b8057f7a2e9e"></a><br/></td></tr>
-<tr class="memitem:ad1ac0f6c99cce099e68f0a2998139567"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad1ac0f6c99cce099e68f0a2998139567"></a>
-numType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_line.html#ad1ac0f6c99cce099e68f0a2998139567">next</a> ()</td></tr>
-<tr class="memdesc:ad1ac0f6c99cce099e68f0a2998139567"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increments one step along the line, returning the next value. <br/></td></tr>
-<tr class="memitem:a794c5ca6cfb9056e43b8035a5edb9fd2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_line.html#a794c5ca6cfb9056e43b8035a5edb9fd2">set</a> (numType value)</td></tr>
-<tr class="memdesc:a794c5ca6cfb9056e43b8035a5edb9fd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the current value of the line.  <a href="#a794c5ca6cfb9056e43b8035a5edb9fd2"></a><br/></td></tr>
-<tr class="memitem:abd55e704e42ec69ef15cc9fdd2e5af39"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abd55e704e42ec69ef15cc9fdd2e5af39"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_line.html#abd55e704e42ec69ef15cc9fdd2e5af39">set</a> (numType targetvalue, numType num_steps)</td></tr>
-<tr class="memdesc:abd55e704e42ec69ef15cc9fdd2e5af39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a target value and the number of steps to take on the way, this calculates the step size needed to get there from the current value. <br/></td></tr>
-<tr class="memitem:a02aa6a6d645fe9276921b89ea18f45d7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a02aa6a6d645fe9276921b89ea18f45d7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_line.html#a02aa6a6d645fe9276921b89ea18f45d7">set</a> (numType startvalue, numType targetvalue, numType num_steps)</td></tr>
-<tr class="memdesc:a02aa6a6d645fe9276921b89ea18f45d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a new starting value, target value and the number of steps to take on the way, this sets the step size needed to get there. <br/></td></tr>
+<tr class="memitem:aa6a80df90da15782ca88889ef9c8dd51"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51">Line</a> ()</td></tr>
+<tr class="memdesc:aa6a80df90da15782ca88889ef9c8dd51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#aa6a80df90da15782ca88889ef9c8dd51"></a><br/></td></tr>
+<tr class="memitem:a413f620b2824c6996b3346ee54351849"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_line.html#a413f620b2824c6996b3346ee54351849">next</a> ()</td></tr>
+<tr class="memdesc:a413f620b2824c6996b3346ee54351849"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increments one step along the line.  <a href="#a413f620b2824c6996b3346ee54351849"></a><br/></td></tr>
+<tr class="memitem:a6bad32d527e0d931c99e9b72c2a75c80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80">set</a> (T value)</td></tr>
+<tr class="memdesc:a6bad32d527e0d931c99e9b72c2a75c80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the current value of the line.  <a href="#a6bad32d527e0d931c99e9b72c2a75c80"></a><br/></td></tr>
+<tr class="memitem:a7378d526cf07c42c0792868c749dee6e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7378d526cf07c42c0792868c749dee6e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_line.html#a7378d526cf07c42c0792868c749dee6e">set</a> (T targetvalue, T num_steps)</td></tr>
+<tr class="memdesc:a7378d526cf07c42c0792868c749dee6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a target value and the number of steps to take on the way, this calculates the step size needed to get there from the current value. <br/></td></tr>
+<tr class="memitem:a24ad85c17562e97b6823a010a5ba04c6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a24ad85c17562e97b6823a010a5ba04c6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_line.html#a24ad85c17562e97b6823a010a5ba04c6">set</a> (T startvalue, T targetvalue, T num_steps)</td></tr>
+<tr class="memdesc:a24ad85c17562e97b6823a010a5ba04c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a new starting value, target value and the number of steps to take on the way, this sets the step size needed to get there. <br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class numType&gt;<br/>
-class Line&lt; numType &gt;</h3>
+<div class="textblock"><h3>template&lt;class T&gt;<br/>
+class Line&lt; T &gt;</h3>
 
 <p>For linear changes with a minimum of calculation at each step. </p>
 <p>For instance, you can use <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> to make an oscillator glide from one frequency to another, pre-calculating the required phase increments for each end and then letting your <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> change the phase increment with only a simple addition at each step. </p>
+<dl class=""><dt><b>Template Parameters:</b></dt><dd>
+  <table class="">
+    <tr><td class="paramname">T</td><td>the type of numbers to use. For example, <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> &lt;int&gt; myline; makes a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> which uses ints. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_line_8h_source.html#l00035">35</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+<p>Definition at line <a class="el" href="_line_8h_source.html#l00037">37</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="aabadbe424b45cf279a69b8057f7a2e9e"></a>
+<a class="anchor" id="aa6a80df90da15782ca88889ef9c8dd51"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class numType &gt; </div>
+template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_line.html">Line</a>&lt; numType &gt;::<a class="el" href="class_line.html">Line</a> </td>
+          <td class="memname"><a class="el" href="class_line.html">Line</a>&lt; T &gt;::<a class="el" href="class_line.html">Line</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [inline]</code></td>
@@ -145,24 +149,47 @@ template&lt;class numType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Instantiates a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a>. </p>
+<p>Constructor. </p>
 <p>Use the template parameter to set the type of numbers you want to use. For example, <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> &lt;int&gt; myline; makes a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> which uses ints. </p>
 
-<p>Definition at line <a class="el" href="_line_8h_source.html#l00045">45</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+<p>Definition at line <a class="el" href="_line_8h_source.html#l00047">47</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a794c5ca6cfb9056e43b8035a5edb9fd2"></a>
+<a class="anchor" id="a413f620b2824c6996b3346ee54351849"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class numType &gt; </div>
+template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_line.html">Line</a>&lt; numType &gt;::<a class="el" href="class_line.html#a794c5ca6cfb9056e43b8035a5edb9fd2">set</a> </td>
+          <td class="memname">T <a class="el" href="class_line.html">Line</a>&lt; T &gt;::<a class="el" href="class_line.html#a413f620b2824c6996b3346ee54351849">next</a> </td>
           <td>(</td>
-          <td class="paramtype">numType&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Increments one step along the line. </p>
+<dl class="section return"><dt>Returns:</dt><dd>the next value. </dd></dl>
+
+<p>Definition at line <a class="el" href="_line_8h_source.html#l00056">56</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6bad32d527e0d931c99e9b72c2a75c80"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_line.html">Line</a>&lt; T &gt;::<a class="el" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80">set</a> </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
@@ -173,7 +200,7 @@ template&lt;class numType &gt; </div>
 <p>Set the current value of the line. </p>
 <p>The <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> will continue incrementing from this value using any previously calculated step size. </p>
 
-<p>Definition at line <a class="el" href="_line_8h_source.html#l00063">63</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+<p>Definition at line <a class="el" href="_line_8h_source.html#l00066">66</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
 
 </div>
 </div>
@@ -184,7 +211,7 @@ template&lt;class numType &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 8 2012 01:21:16 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 9 2012 01:21:59 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

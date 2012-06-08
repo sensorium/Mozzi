@@ -2,7 +2,7 @@
 Downloaded from https://bitbucket.org/johnmccombs, 4/2/2012
 John's site says only open source licensed libraries are included there.
 John doesn't have a record of where it came from, and it doesn't show up in a google search.
-Please contact unbackwards@gmail.com if this is your code and you would like attribution
+Please contact Tim Barrass if this is your code and you would like attribution
 or would prefer we use another library.
 */
 

@@ -30,19 +30,20 @@ from http://en.wikipedia.org/wiki/Low-pass_filter: y[i] := y[i-1] + α * (x[i] -
 y[i-1]), translated as out = last_out + a * (in - last_out). It's not calibrated
 to any real-world update rate, so if you use it at CONTROL_RATE and you change
 CONTROL_RATE, you'll need to adjust the smoothness value to suit.
- */
+@tparam set the type of numbers you want to use. For example, Smooth <int> mySmooth;
+makes a Smooth which works with ints.
+*/
 
-template <class numType>
+template <class T>
 class Smooth
 {
 private:
-	numType last_out;
+	T last_out;
 	float a;
 
 public:
-	/** Instantiates a Smooth. Use the template parameter to set the type of numbers you
-	want to use. For example, Smooth <int> mySmooth; makes a Smooth which works with
-	ints. The smoothness parameter sets how much smoothing the filter will apply to
+	/** Constructor.
+	@param smoothness sets how much smoothing the filter will apply to
 	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
 	very smooth;
 	 */
@@ -52,22 +53,26 @@ public:
 	}
 
 	/** Filters the input and returns the filtered value.
+	@param in the signal to be smoothed.
+	@return the filtered signal.
 	 */
 	inline
-	numType next(numType in)
+	T next(T in)
 	{
-		numType out = (numType)((a * (in - last_out)) + last_out);
+		T out = (T)((a * (in - last_out)) + last_out);
 		last_out = out;
 		return out;
 	}
 
-	/** Sets how much smoothing the filter will apply to its input. Use a float in the
-	range 0~1, where 0 is not very smooth and 0.99 is very smooth;
+	/** Sets how much smoothing the filter will apply to its input.
+	@param smoothness sets how much smoothing the filter will apply to
+	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
+	very smooth;
 	 */
 	inline
-	void setSmoothness(float value)
+	void setSmoothness(float smoothness)
 	{
-		a=1.f-value;
+		a=1.f-smoothness;
 	}
 
 };

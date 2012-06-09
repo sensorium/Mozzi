@@ -49,6 +49,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -106,35 +107,41 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae54c3d783d775fdae5ec93457df574e3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ae54c3d783d775fdae5ec93457df574e3">Sample</a> (prog_char *TABLE_NAME)</td></tr>
-<tr class="memdesc:ae54c3d783d775fdae5ec93457df574e3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> is a template class, declared in a sketch as follows, with NUM_TABLE_CELLS and UPDATE_RATE replaced by your own values: <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> &lt;NUM_TABLE_CELLS, UPDATE_RATE&gt; mysample(tablename); It's important that NUM_TABLE_CELLS and UPDATE_RATE are both literal integers, directly stated as numbers (eg.  <a href="#ae54c3d783d775fdae5ec93457df574e3"></a><br/></td></tr>
+<tr class="memdesc:ae54c3d783d775fdae5ec93457df574e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#ae54c3d783d775fdae5ec93457df574e3"></a><br/></td></tr>
 <tr class="memitem:a57307ee93ef0fcff36d543596eb79b72"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a57307ee93ef0fcff36d543596eb79b72"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a57307ee93ef0fcff36d543596eb79b72">start</a> ()</td></tr>
 <tr class="memdesc:a57307ee93ef0fcff36d543596eb79b72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the phase (the playhead) to the beginning of the table. <br/></td></tr>
 <tr class="memitem:a6b94fc8a8042f498fbd8693d9bce9719"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a6b94fc8a8042f498fbd8693d9bce9719">next</a> ()</td></tr>
-<tr class="memdesc:a6b94fc8a8042f498fbd8693d9bce9719"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next sample.  <a href="#a6b94fc8a8042f498fbd8693d9bce9719"></a><br/></td></tr>
+<tr class="memdesc:a6b94fc8a8042f498fbd8693d9bce9719"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the phase according to the current frequency and returns the sample at the new phase position, or 0 when the phase overshoots the end of the table.  <a href="#a6b94fc8a8042f498fbd8693d9bce9719"></a><br/></td></tr>
 <tr class="memitem:a13ff9d4206b5e14e2f030ef9ced8a7d0"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a13ff9d4206b5e14e2f030ef9ced8a7d0">phMod</a> (long phmod_proportion)</td></tr>
 <tr class="memdesc:a13ff9d4206b5e14e2f030ef9ced8a7d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next sample given a phase modulation value.  <a href="#a13ff9d4206b5e14e2f030ef9ced8a7d0"></a><br/></td></tr>
-<tr class="memitem:a68ad6a694e7435b193915376fe8ad36c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a68ad6a694e7435b193915376fe8ad36c">setFreq_n8</a> (unsigned long freq)</td></tr>
-<tr class="memdesc:a68ad6a694e7435b193915376fe8ad36c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the frequency using 24n8 fixed-point number format.  <a href="#a68ad6a694e7435b193915376fe8ad36c"></a><br/></td></tr>
-<tr class="memitem:aff64a090696fe361b6402081c5043f2c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#aff64a090696fe361b6402081c5043f2c">setFreq</a> (unsigned int freq)</td></tr>
-<tr class="memdesc:aff64a090696fe361b6402081c5043f2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the samplelator frequency with an unsigned int.  <a href="#aff64a090696fe361b6402081c5043f2c"></a><br/></td></tr>
-<tr class="memitem:afcad65457e66a538f88f1c7d8c0a5ab7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#afcad65457e66a538f88f1c7d8c0a5ab7">setFreq</a> (float freq)</td></tr>
-<tr class="memdesc:afcad65457e66a538f88f1c7d8c0a5ab7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the samplelator frequency with a float.  <a href="#afcad65457e66a538f88f1c7d8c0a5ab7"></a><br/></td></tr>
+<tr class="memitem:ac98d74f6b80f514e6114204bfa56d351"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ac98d74f6b80f514e6114204bfa56d351">setFreq_n8</a> (unsigned long frequency)</td></tr>
+<tr class="memdesc:ac98d74f6b80f514e6114204bfa56d351"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the frequency using Q24n8 fixed-point number format.  <a href="#ac98d74f6b80f514e6114204bfa56d351"></a><br/></td></tr>
+<tr class="memitem:ad6aa28642c1e219d24144501c7cfcabc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ad6aa28642c1e219d24144501c7cfcabc">setFreq</a> (unsigned int frequency)</td></tr>
+<tr class="memdesc:ad6aa28642c1e219d24144501c7cfcabc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the oscillator frequency with an unsigned int.  <a href="#ad6aa28642c1e219d24144501c7cfcabc"></a><br/></td></tr>
+<tr class="memitem:a11a7948a655bea79ddd67059c2186816"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a11a7948a655bea79ddd67059c2186816">setFreq</a> (float frequency)</td></tr>
+<tr class="memdesc:a11a7948a655bea79ddd67059c2186816"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the oscillator frequency with a float.  <a href="#a11a7948a655bea79ddd67059c2186816"></a><br/></td></tr>
 <tr class="memitem:ad5c4e048c4aa7a36710e58466caabc94"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ad5c4e048c4aa7a36710e58466caabc94">atIndex</a> (unsigned int index)</td></tr>
-<tr class="memdesc:ad5c4e048c4aa7a36710e58466caabc94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sample at the given table index between 0 and the table size.The index rolls back around to 0 if it's larger than the table size.  <a href="#ad5c4e048c4aa7a36710e58466caabc94"></a><br/></td></tr>
-<tr class="memitem:a1b07b4aa97c40bf10c3c422d73de7b4f"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a1b07b4aa97c40bf10c3c422d73de7b4f">phaseIncFromFreq</a> (unsigned int freq)</td></tr>
-<tr class="memdesc:a1b07b4aa97c40bf10c3c422d73de7b4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">phaseIncFromFreq and setPhaseInc are for saving processor time when sliding between frequencies.  <a href="#a1b07b4aa97c40bf10c3c422d73de7b4f"></a><br/></td></tr>
-<tr class="memitem:a95735f0b10eb0fa50402c47d0cd5d871"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a95735f0b10eb0fa50402c47d0cd5d871"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a95735f0b10eb0fa50402c47d0cd5d871">setPhaseInc</a> (unsigned long phaseinc_fractional)</td></tr>
-<tr class="memdesc:a95735f0b10eb0fa50402c47d0cd5d871"><td class="mdescLeft">&#160;</td><td class="mdescRight">See phaseIncFromFreq. <br/></td></tr>
+<tr class="memdesc:ad5c4e048c4aa7a36710e58466caabc94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sample at the given table index.  <a href="#ad5c4e048c4aa7a36710e58466caabc94"></a><br/></td></tr>
+<tr class="memitem:a7dfbdfca35b7bbf074e24e62a1d53309"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a7dfbdfca35b7bbf074e24e62a1d53309">phaseIncFromFreq</a> (unsigned int frequency)</td></tr>
+<tr class="memdesc:a7dfbdfca35b7bbf074e24e62a1d53309"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_sample.html#a7dfbdfca35b7bbf074e24e62a1d53309" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a> and <a class="el" href="class_sample.html#a95735f0b10eb0fa50402c47d0cd5d871" title="Set a specific phase increment.">setPhaseInc()</a> are for saving processor time when sliding between frequencies.  <a href="#a7dfbdfca35b7bbf074e24e62a1d53309"></a><br/></td></tr>
+<tr class="memitem:a95735f0b10eb0fa50402c47d0cd5d871"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a95735f0b10eb0fa50402c47d0cd5d871">setPhaseInc</a> (unsigned long phaseinc_fractional)</td></tr>
+<tr class="memdesc:a95735f0b10eb0fa50402c47d0cd5d871"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a specific phase increment.  <a href="#a95735f0b10eb0fa50402c47d0cd5d871"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt;<br/>
 class Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</h3>
 
 <p><a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> is like <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>, it plays a wavetable, but defaults to playing once through, from start to finish. </p>
+<dl class=""><dt><b>Template Parameters:</b></dt><dd>
+  <table class="">
+    <tr><td class="paramname">NUM_TABLE_CELLS</td><td>This is defined in the table ".h" file the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> will be using. It's important that it's either a literal number (eg. "8192") or a defined macro, rather than a const or int, for the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> to run fast enough. </td></tr>
+    <tr><td class="paramname">UPDATE_RATE</td><td>This will be AUDIO_RATE if the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> is updated in <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio()</a>, or CONTROL_RATE if it's updated each time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> is called. It could also be a fraction of CONTROL_RATE if you are doing some kind of cyclic updating in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, for example, to spread out the processor load. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00042">42</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00051">51</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ae54c3d783d775fdae5ec93457df574e3"></a>
 <div class="memitem">
@@ -153,10 +160,15 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </div>
 <div class="memdoc">
 
-<p><a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> is a template class, declared in a sketch as follows, with NUM_TABLE_CELLS and UPDATE_RATE replaced by your own values: <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> &lt;NUM_TABLE_CELLS, UPDATE_RATE&gt; mysample(tablename); It's important that NUM_TABLE_CELLS and UPDATE_RATE are both literal integers, directly stated as numbers (eg. </p>
-<p>"8192") or as predefined macros. AUDIO_RATE is a defined literal used by Cuttlefish. It's useful to define CONTROL_RATE in your sketches ("eg. #define CONTROL_RATE 128"), to configure startCuttlefish(CONTROL_RATE) in setup() and to sync your control calculations using the same value in updateControl(). </p>
+<p>Constructor. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TABLE_NAME</td><td>the name of the array the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> will be using. This can be found in the table ".h" file if you are using a table made for Cuttlefish by the rawtocuttle.py python script in Cuttlefish's cuttle py folder. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00057">57</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00061">61</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -178,9 +190,16 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Returns the sample at the given table index between 0 and the table size.The index rolls back around to 0 if it's larger than the table size. </p>
+<p>Returns the sample at the given table index. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">atIndex</td><td>table index between 0 and the table size.The index rolls back around to 0 if it's larger than the table size. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>the sample at the given table index. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00148">148</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00157">157</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -200,34 +219,41 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Returns the next sample. </p>
 <p>Updates the phase according to the current frequency and returns the sample at the new phase position, or 0 when the phase overshoots the end of the table. </p>
+<dl class="section return"><dt>Returns:</dt><dd>the next sample value from the table, or 0 if it's finished playing. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00076">76</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00080">80</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a1b07b4aa97c40bf10c3c422d73de7b4f"></a>
+<a class="anchor" id="a7dfbdfca35b7bbf074e24e62a1d53309"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">unsigned long <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#a1b07b4aa97c40bf10c3c422d73de7b4f">phaseIncFromFreq</a> </td>
+          <td class="memname">unsigned long <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#a7dfbdfca35b7bbf074e24e62a1d53309">phaseIncFromFreq</a> </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>freq</em></td><td>)</td>
+          <td class="paramname"><em>frequency</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>phaseIncFromFreq and setPhaseInc are for saving processor time when sliding between frequencies. </p>
-<p>Instead of recalculating the phase increment for each frequency in between, you can just calculate each end and use a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> to interpolate. (Note: I should really profile this with the sampleloscope to see if it's worth the extra confusion.) </p>
+<p><a class="el" href="class_sample.html#a7dfbdfca35b7bbf074e24e62a1d53309" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a> and <a class="el" href="class_sample.html#a95735f0b10eb0fa50402c47d0cd5d871" title="Set a specific phase increment.">setPhaseInc()</a> are for saving processor time when sliding between frequencies. </p>
+<p>Instead of recalculating the phase increment for each frequency in between, you can just calculate the phase increment for each end frequency with <a class="el" href="class_sample.html#a7dfbdfca35b7bbf074e24e62a1d53309" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a>, then use a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> to interpolate on the fly and use <a class="el" href="class_sample.html#a95735f0b10eb0fa50402c47d0cd5d871" title="Set a specific phase increment.">setPhaseInc()</a> to set the phase increment at each step. (Note: I should really profile this with the oscilloscope to see if it's worth the extra confusion!) </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frequency</td><td>for which you want to calculate a phase increment value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>the phase increment value which will produce a given frequency. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00162">162</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00173">173</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -249,81 +275,135 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <div class="memdoc">
 
 <p>Returns the next sample given a phase modulation value. </p>
-<p>The modulation is given as a proportion of the wave. The phmod_proportion parameter is a Q15n16 fixed-point number where to fractional n16 part is -1 to 1, modulating the phase by one whole table length in each direction. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>phase modulation value given as a proportion of the wave. The phmod_proportion parameter is a Q15n16 fixed-point number where to fractional n16 part represents -1 to 1, modulating the phase by one whole table length in each direction. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>a sample from the table. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00092">92</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00098">98</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aff64a090696fe361b6402081c5043f2c"></a>
+<a class="anchor" id="ad6aa28642c1e219d24144501c7cfcabc"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#aff64a090696fe361b6402081c5043f2c">setFreq</a> </td>
+          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#ad6aa28642c1e219d24144501c7cfcabc">setFreq</a> </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>freq</em></td><td>)</td>
+          <td class="paramname"><em>frequency</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Set the samplelator frequency with an unsigned int. </p>
+<p>Set the oscillator frequency with an unsigned int. </p>
 <p>This is faster than using a float, so it's useful when processor time is tight, but it can be tricky with low and high frequencies, depending on the size of the wavetable being used. If you're not getting the results you expect, try explicitly using a float, or try setFreq_n8. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frequency</td><td>to play the wave table. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00122">122</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00129">129</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="afcad65457e66a538f88f1c7d8c0a5ab7"></a>
+<a class="anchor" id="a11a7948a655bea79ddd67059c2186816"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#aff64a090696fe361b6402081c5043f2c">setFreq</a> </td>
+          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#ad6aa28642c1e219d24144501c7cfcabc">setFreq</a> </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>freq</em></td><td>)</td>
+          <td class="paramname"><em>frequency</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Set the samplelator frequency with a float. </p>
-<p>Using a float is the most reliable way to set frequencies, Might be slower than using an int but you need either this or setFreq_n8 for fractional frequencies. </p>
+<p>Set the oscillator frequency with a float. </p>
+<p>Using a float is the most reliable way to set frequencies, -Might- be slower than using an int but you need either this or setFreq_n8 for fractional frequencies. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frequency</td><td>to play the wave table. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00136">136</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00143">143</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a68ad6a694e7435b193915376fe8ad36c"></a>
+<a class="anchor" id="ac98d74f6b80f514e6114204bfa56d351"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#a68ad6a694e7435b193915376fe8ad36c">setFreq_n8</a> </td>
+          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#ac98d74f6b80f514e6114204bfa56d351">setFreq_n8</a> </td>
           <td>(</td>
           <td class="paramtype">unsigned long&#160;</td>
-          <td class="paramname"><em>freq</em></td><td>)</td>
+          <td class="paramname"><em>frequency</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Set the frequency using 24n8 fixed-point number format. </p>
-<p>Note: use with caution because it's prone to overflow with higher frequencies and larger table sizes. This might be faster than the float version for setting low frequencies such as 1.5 Hz, or others which may not work well with your table size. An n8 representation of 1.5 is 384 (ie. 1.5 * 256). </p>
+<p>Set the frequency using Q24n8 fixed-point number format. </p>
+<p>This might be faster than the float version for setting low frequencies such as 1.5 Hz, or other values which may not work well with your table size. Note: use with caution because it's prone to overflow with higher frequencies and larger table sizes. An Q24n8 representation of 1.5 is 384 (ie. 1.5 * 256). </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frequency</td><td>in Q24n8 fixed-point number format. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00106">106</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00113">113</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a95735f0b10eb0fa50402c47d0cd5d871"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#a95735f0b10eb0fa50402c47d0cd5d871">setPhaseInc</a> </td>
+          <td>(</td>
+          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramname"><em>phaseinc_fractional</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set a specific phase increment. </p>
+<p>See <a class="el" href="class_sample.html#a7dfbdfca35b7bbf074e24e62a1d53309" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a>. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">phaseinc_fractional</td><td>a phase increment value as calculated by <a class="el" href="class_sample.html#a7dfbdfca35b7bbf074e24e62a1d53309" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00182">182</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -334,7 +414,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 9 2012 01:21:59 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jun 10 2012 01:41:00 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

@@ -1,7 +1,7 @@
 /*
  * Sample.h
  *
- * Copyright 2012 Tim Barrass.
+ * Copyright 2012 unbackwards@gmail.com.
  *
  * This file is part of Cuttlefish.
  *
@@ -35,8 +35,17 @@
 // the fractional part and the sign bit
 #define SAMPLE_PHMOD_BITS 16
 
+// TODO: try to make Sample inherit Oscil to avoid code duplication
 
-/** Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finish.
+/** Sample is like Oscil, it plays a wavetable, but defaults to playing once through,
+from start to finish.
+@tparam NUM_TABLE_CELLS This is defined in the table ".h" file the Sample will be
+using. It's important that it's either a literal number (eg. "8192") or a
+defined macro, rather than a const or int, for the Sample to run fast enough.
+@tparam UPDATE_RATE This will be AUDIO_RATE if the Sample is updated in
+updateAudio(), or CONTROL_RATE if it's updated each time updateControl() is
+called. It could also be a fraction of CONTROL_RATE if you are doing some kind
+of cyclic updating in updateControl(), for example, to spread out the processor load.
 */
 template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE>
 class Sample
@@ -44,16 +53,11 @@ class Sample
 
 public:
 
-	/** Sample is a template class, declared in a sketch as follows, with
-	NUM_TABLE_CELLS and UPDATE_RATE replaced by your own values: Sample
-	<NUM_TABLE_CELLS, UPDATE_RATE> mysample(tablename); It's important that
-	NUM_TABLE_CELLS and UPDATE_RATE are both literal integers, directly
-	stated as numbers (eg. "8192") or as predefined macros. AUDIO_RATE is a
-	defined literal used by Cuttlefish. It's useful to define CONTROL_RATE
-	in your sketches ("eg. #define CONTROL_RATE 128"), to configure
-	startCuttlefish(CONTROL_RATE) in setup() and to sync your control
-	calculations using the same value in updateControl().
-	*/
+	/** Constructor.
+	@param TABLE_NAME the name of the array the Sample will be using. This
+	can be found in the table ".h" file if you are using a table made for
+	Cuttlefish by the rawtocuttle.py python script in Cuttlefish's cuttle py
+	folder.*/
 	Sample(prog_char * TABLE_NAME):table(TABLE_NAME)
 	{}
 
@@ -68,9 +72,9 @@ public:
 	}
 
 
-	/** Returns the next sample. Updates the phase according to the current frequency
-	and returns the sample at the new phase position, or 0 when the phase
-	overshoots the end of the table.
+	/** Updates the phase according to the current frequency and returns the sample at
+	the new phase position, or 0 when the phase overshoots the end of the table.
+	@return the next sample value from the table, or 0 if it's finished playing.
 	*/
 	inline
 	char next()
@@ -83,10 +87,12 @@ public:
 	}
 
 
-	/** Returns the next sample given a phase modulation value. The modulation is given
-	as a proportion of the wave. The phmod_proportion parameter is a Q15n16
-	fixed-point number where to fractional n16 part is -1 to 1, modulating the phase
-	by one whole table length in each direction.
+	/** Returns the next sample given a phase modulation value.
+	@param a phase modulation value given as a proportion of the wave. The
+	phmod_proportion parameter is a Q15n16 fixed-point number where to fractional
+	n16 part represents -1 to 1, modulating the phase by one whole table length in
+	each direction.
+	@return a sample from the table.
 	*/
 	inline
 	char phMod(long phmod_proportion)
@@ -95,79 +101,83 @@ public:
 		return (char)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))>>SAMPLE_F_BITS) & (NUM_TABLE_CELLS - 1)));
 	}
 
-
-	/** Set the frequency using 24n8 fixed-point number format. Note: use with caution
-	because it's prone to overflow with higher frequencies and larger table sizes.
-	This might be faster than the float version for setting low frequencies such as
-	1.5 Hz, or others which may not work well with your table size. An n8
-	representation of 1.5 is 384 (ie. 1.5 * 256).
+	/** Set the frequency using Q24n8 fixed-point number format.
+	This might be faster than the float version for setting low frequencies
+	such as 1.5 Hz, or other values which may not work well with your table
+	size. Note: use with caution because it's prone to overflow with higher
+	frequencies and larger table sizes. An Q24n8 representation of 1.5 is 384
+	(ie. 1.5 * 256).
+	@param frequency in Q24n8 fixed-point number format.
 	*/
 	inline
-	void setFreq_n8(unsigned long freq)
+	void setFreq_n8(unsigned long frequency)
 	{
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
-			phase_increment_fractional = ((freq * NUM_TABLE_CELLS)/UPDATE_RATE) << (SAMPLE_F_BITS-8);
+			phase_increment_fractional = ((frequency * NUM_TABLE_CELLS)/UPDATE_RATE) << (SAMPLE_F_BITS-8);
 		}
 	}
 
-
-	/** Set the samplelator frequency with an unsigned int. This is faster than using a
+	/** Set the oscillator frequency with an unsigned int. This is faster than using a
 	float, so it's useful when processor time is tight, but it can be tricky with
 	low and high frequencies, depending on the size of the wavetable being used. If
 	you're not getting the results you expect, try explicitly using a float, or try
 	setFreq_n8.
+	@param frequency to play the wave table.
 	*/
 	inline
-	void setFreq(unsigned int freq)
+	void setFreq(unsigned int frequency)
 	{
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
-			phase_increment_fractional = (((unsigned long)freq * NUM_TABLE_CELLS)/UPDATE_RATE) << SAMPLE_F_BITS; // Obvious but slow
+			phase_increment_fractional = (((unsigned long)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) << SAMPLE_F_BITS; // Obvious but slow
 		}
 	}
 
-
-	/** Set the samplelator frequency with a float. Using a float is the most reliable
-	way to set frequencies, Might be slower than using an int but you need either
+	/** Set the oscillator frequency with a float. Using a float is the most reliable
+	way to set frequencies, -Might- be slower than using an int but you need either
 	this or setFreq_n8 for fractional frequencies.
-	*/
+	@param frequency to play the wave table.
+	 */
 	inline
-	void setFreq(float freq)
-	{ // 1 us
+	void setFreq(float frequency)
+	{ // 1 us - using float doesn't seem to incur measurable overhead with the oscilloscope
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
-			phase_increment_fractional = (unsigned long)((((float)NUM_TABLE_CELLS * freq)/UPDATE_RATE) * SAMPLE_F_BITS_AS_MULTIPLIER);
+			phase_increment_fractional = (unsigned long)((((float)NUM_TABLE_CELLS * frequency)/UPDATE_RATE) * SAMPLE_F_BITS_AS_MULTIPLIER);
 		}
 	}
 
-
-	/**  Returns the sample at the given table index between 0 and the table size.The
-	index rolls back around to 0 if it's larger than the table size. */
+	/**  Returns the sample at the given table index.
+	@param atIndex table index between 0 and the table size.The
+	index rolls back around to 0 if it's larger than the table size.
+	@return the sample at the given table index.
+	*/
 	inline
 	char atIndex(unsigned int index)
 	{
 		return (char)pgm_read_byte_near(table + (index & (NUM_TABLE_CELLS - 1)));
 	}
 
-
-	/**
-	phaseIncFromFreq and setPhaseInc are for saving processor time when sliding
+	/** phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding
 	between frequencies. Instead of recalculating the phase increment for each
-	frequency in between, you can just calculate each end and use a Line to
-	interpolate. (Note: I should really profile this with the sampleloscope to see if
-	it's worth the extra confusion.)
+	frequency in between, you can just calculate the phase increment for each end
+	frequency with phaseIncFromFreq(), then use a Line to interpolate on the fly and
+	use setPhaseInc() to set the phase increment at each step. (Note: I should
+	really profile this with the oscilloscope to see if it's worth the extra
+	confusion!)
+	@param frequency for which you want to calculate a phase increment value.
+	@return the phase increment value which will produce a given frequency.
 	*/
 	inline
-	unsigned long phaseIncFromFreq(unsigned int freq)
+	unsigned long phaseIncFromFreq(unsigned int frequency)
 	{
-		return (((unsigned long)freq * NUM_TABLE_CELLS)/UPDATE_RATE) << SAMPLE_F_BITS;
+		return (((unsigned long)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) << SAMPLE_F_BITS;
 	}
 
-
-	/**
-	See phaseIncFromFreq.
-	*/
+	/** Set a specific phase increment.  See phaseIncFromFreq().
+	@param phaseinc_fractional a phase increment value as calculated by phaseIncFromFreq().
+	 */
 	inline
 	void setPhaseInc(unsigned long phaseinc_fractional)
 	{
@@ -180,19 +190,16 @@ public:
 
 private:
 
-	/**
-	Increments the phase of the samplelator without returning a sample.
-	*/
+	/** Increments the phase of the oscillator without returning a sample.
+	 */
 	inline
 	void incrementPhase()
 	{
 		phase_fractional += phase_increment_fractional;
 	}
 
-
-	/**
-	Returns the current sample.
-	*/
+	/** Returns the current sample.
+	 */
 	inline
 	char readTable()
 	{

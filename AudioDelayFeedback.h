@@ -4,14 +4,14 @@
 #include "Arduino.h"
 
 /** Audio delay line with feedback for comb filter, flange, chorus and short echo effects.
-NUM_BUFFER_SAMPLES is the length of the delay buffer in samples, and should be a power
-of two. The delay length is half that of a plain AudioDelay object, in this case
-256 cells, or about 15 milliseconds. AudioDelayFeedback uses int sized cells to
-accomodate the higher amplitude of direct input to the delay as well as the
-feedback, without losing precision. Output is only the delay line signal. If you
-want to mix the delay with the input, do it in your sketch.  AudioDelayFeedback
-uses more processing than a plain AudioDelay, but allows for more dramatic
-effects with feedback.
+@tparam NUM_BUFFER_SAMPLES is the length of the delay buffer in samples, and should be a
+power of two. The maximum delay length which will fit in an atmega328 is half
+that of a plain AudioDelay object, in this case 256 cells, or about 15
+milliseconds. AudioDelayFeedback uses int sized cells to accomodate the higher
+amplitude of direct input to the delay as well as the feedback, without losing
+precision. Output is only the delay line signal. If you want to mix the delay
+with the input, do it in your sketch. AudioDelayFeedback uses more processing
+than a plain AudioDelay, but allows for more dramatic effects with feedback.
 */
 
 template <unsigned int NUM_BUFFER_SAMPLES>
@@ -24,14 +24,14 @@ private:
 	char feedback_level;
 
 public:
-	/** Constructor.  Doesn't take any parameters itself, but needs the delay length in samples to
-	be set in the template parameter, for example:
-	AudioDelayFeedback <128> myAudioDelay();
+	/** Constructor.
 	*/
 	AudioDelayFeedback(): write_pos(0), feedback_level(0)
 	{}
 
 	/** Input a value to the delay and retrieve the signal in the delay line at the position delay_cells.
+	@param in_value the signal input.
+	@param delay_cells sets the delay time in terms of cells in the delay buffer.
 	*/
 	inline
 	int next(char in_value, unsigned int delay_cells)
@@ -46,10 +46,13 @@ public:
 		return delay_sig;
 	}
 
+	/**  Set the feedback gain.
+	@param gain is the feedback level from -128 to 127 (representing -1 to 1).
+	*/
 	inline
-	void setFeedbackLevel(char fbl)
+	void setFeedbackGain(char gain)
 	{
-		feedback_level = fbl;
+		feedback_level = gain;
 	}
 
 };

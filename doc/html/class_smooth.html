@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Cuttlefish: Smooth&lt; numType &gt; Class Template Reference</title>
+<title>Cuttlefish: Smooth&lt; T &gt; Class Template Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -49,6 +49,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -94,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Smooth&lt; numType &gt; Class Template Reference</div>  </div>
+<div class="title">Smooth&lt; T &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -105,31 +106,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2b54bc15e0eaff8ae7c9183401f4f866"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smooth.html#a2b54bc15e0eaff8ae7c9183401f4f866">Smooth</a> (float smoothness)</td></tr>
-<tr class="memdesc:a2b54bc15e0eaff8ae7c9183401f4f866"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiates a <a class="el" href="class_smooth.html" title="A simple low pass filter for smoothing control signals.">Smooth</a>.  <a href="#a2b54bc15e0eaff8ae7c9183401f4f866"></a><br/></td></tr>
-<tr class="memitem:a5f8be410c3c832adf718a0e5d5d81ade"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5f8be410c3c832adf718a0e5d5d81ade"></a>
-numType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smooth.html#a5f8be410c3c832adf718a0e5d5d81ade">next</a> (numType in)</td></tr>
-<tr class="memdesc:a5f8be410c3c832adf718a0e5d5d81ade"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filters the input and returns the filtered value. <br/></td></tr>
-<tr class="memitem:af63450a3a7289cf90e673d61671dad3c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smooth.html#af63450a3a7289cf90e673d61671dad3c">setSmoothness</a> (float value)</td></tr>
-<tr class="memdesc:af63450a3a7289cf90e673d61671dad3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets how much smoothing the filter will apply to its input.  <a href="#af63450a3a7289cf90e673d61671dad3c"></a><br/></td></tr>
+<tr class="memitem:ac6626aae94eb7a22024e2054c1bbbb26"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26">Smooth</a> (float smoothness)</td></tr>
+<tr class="memdesc:ac6626aae94eb7a22024e2054c1bbbb26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#ac6626aae94eb7a22024e2054c1bbbb26"></a><br/></td></tr>
+<tr class="memitem:ab7c809b6b5217771832a3e829695f8d5"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smooth.html#ab7c809b6b5217771832a3e829695f8d5">next</a> (T in)</td></tr>
+<tr class="memdesc:ab7c809b6b5217771832a3e829695f8d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filters the input and returns the filtered value.  <a href="#ab7c809b6b5217771832a3e829695f8d5"></a><br/></td></tr>
+<tr class="memitem:aac44bbf7a9bc6b9bae80eecc1be6e188"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smooth.html#aac44bbf7a9bc6b9bae80eecc1be6e188">setSmoothness</a> (float smoothness)</td></tr>
+<tr class="memdesc:aac44bbf7a9bc6b9bae80eecc1be6e188"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets how much smoothing the filter will apply to its input.  <a href="#aac44bbf7a9bc6b9bae80eecc1be6e188"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class numType&gt;<br/>
-class Smooth&lt; numType &gt;</h3>
+<div class="textblock"><h3>template&lt;class T&gt;<br/>
+class Smooth&lt; T &gt;</h3>
 
 <p>A simple low pass filter for smoothing control signals. </p>
 <p>This algorithm comes from <a href="http://en.wikipedia.org/wiki/Low-pass_filter:">http://en.wikipedia.org/wiki/Low-pass_filter:</a> y[i] := y[i-1] + α * (x[i] - y[i-1]), translated as out = last_out + a * (in - last_out). It's not calibrated to any real-world update rate, so if you use it at CONTROL_RATE and you change CONTROL_RATE, you'll need to adjust the smoothness value to suit. </p>
+<dl class=""><dt><b>Template Parameters:</b></dt><dd>
+  <table class="">
+    <tr><td class="paramname">set</td><td>the type of numbers you want to use. For example, <a class="el" href="class_smooth.html" title="A simple low pass filter for smoothing control signals.">Smooth</a> &lt;int&gt; mySmooth; makes a <a class="el" href="class_smooth.html" title="A simple low pass filter for smoothing control signals.">Smooth</a> which works with ints. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00036">36</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
+<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00038">38</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a2b54bc15e0eaff8ae7c9183401f4f866"></a>
+<a class="anchor" id="ac6626aae94eb7a22024e2054c1bbbb26"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class numType &gt; </div>
+template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_smooth.html">Smooth</a>&lt; numType &gt;::<a class="el" href="class_smooth.html">Smooth</a> </td>
+          <td class="memname"><a class="el" href="class_smooth.html">Smooth</a>&lt; T &gt;::<a class="el" href="class_smooth.html">Smooth</a> </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>smoothness</em></td><td>)</td>
@@ -139,25 +145,60 @@ template&lt;class numType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Instantiates a <a class="el" href="class_smooth.html" title="A simple low pass filter for smoothing control signals.">Smooth</a>. </p>
-<p>Use the template parameter to set the type of numbers you want to use. For example, <a class="el" href="class_smooth.html" title="A simple low pass filter for smoothing control signals.">Smooth</a> &lt;int&gt; mySmooth; makes a <a class="el" href="class_smooth.html" title="A simple low pass filter for smoothing control signals.">Smooth</a> which works with ints. The smoothness parameter sets how much smoothing the filter will apply to its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is very smooth; </p>
+<p>Constructor. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">smoothness</td><td>sets how much smoothing the filter will apply to its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is very smooth; </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00049">49</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
+<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00050">50</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="af63450a3a7289cf90e673d61671dad3c"></a>
+<a class="anchor" id="ab7c809b6b5217771832a3e829695f8d5"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class numType &gt; </div>
+template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_smooth.html">Smooth</a>&lt; numType &gt;::<a class="el" href="class_smooth.html#af63450a3a7289cf90e673d61671dad3c">setSmoothness</a> </td>
+          <td class="memname">T <a class="el" href="class_smooth.html">Smooth</a>&lt; T &gt;::<a class="el" href="class_smooth.html#ab7c809b6b5217771832a3e829695f8d5">next</a> </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>in</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Filters the input and returns the filtered value. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in</td><td>the signal to be smoothed. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>the filtered signal. </dd></dl>
+
+<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00060">60</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aac44bbf7a9bc6b9bae80eecc1be6e188"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_smooth.html">Smooth</a>&lt; T &gt;::<a class="el" href="class_smooth.html#aac44bbf7a9bc6b9bae80eecc1be6e188">setSmoothness</a> </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
+          <td class="paramname"><em>smoothness</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
       </table>
@@ -165,9 +206,14 @@ template&lt;class numType &gt; </div>
 <div class="memdoc">
 
 <p>Sets how much smoothing the filter will apply to its input. </p>
-<p>Use a float in the range 0~1, where 0 is not very smooth and 0.99 is very smooth; </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">smoothness</td><td>sets how much smoothing the filter will apply to its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is very smooth; </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00068">68</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
+<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00073">73</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
 
 </div>
 </div>
@@ -178,7 +224,7 @@ template&lt;class numType &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 9 2012 01:21:59 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jun 10 2012 01:41:00 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

@@ -34,17 +34,19 @@
 // interfere with the audio interrupt.
 
 
-/** startCuttlefish sets up the timers for audio and control rate processes.
- *  It goes in your sketch's setup() routine.  You need to specify a control rate in
- *  Hz, which can be any power of 2 above and including 64.
- *  The practical upper limit for control is about 512 Hz.
- * 	It starts audio interrupts on Timer 1 and control interrupts on Timer 2.
- *  The audio rate is currently fixed at 16384 Hz.  The control rate is 64 Hz,
- *  but you can set any power of 2 above and including 64.
- *  The practical upper limit for control is about 512 Hz or even as low as 128 Hz,
- *  depending on how much you try to do in your updateControl() routine.
+/** @ingroup core
+Sets up the timers for audio and control rate processes. It goes in your
+sketch's setup() routine. startCuttlefish() starts audio interrupts on Timer 1
+and control interrupts on Timer 2. The audio rate is currently fixed at 16384
+Hz.
+@param control_rate_hz Sets how often updateControl() is called. It can be any
+power of 2 above and including 64. The practical upper limit for control rate
+depends on how busy the processor is, and you might need to do some tests to
+find the best setting. Its' strongly recommended to define CONTROL_RATE in your
+sketches (eg. "#define CONTROL_RATE 128") because the literal numeric value is
+necessary for Oscils to work properly, and it also helps to keep your
+calculations clear.
  */
-
 void startCuttlefish(unsigned int control_rate_hz)
 {
 
@@ -62,10 +64,15 @@ void startCuttlefish(unsigned int control_rate_hz)
 
 
 #define BUFFER_NUM_TABLE_CELLS 256
-static int bufarray[BUFFER_NUM_TABLE_CELLS];
+static int output_buffer[BUFFER_NUM_TABLE_CELLS];
 static volatile unsigned int num_out;
 
 
+/** @ingroup core
+This is required in Arduino's loop().
+It puts the sound calculated by updateAudio()
+into Cuttlefish's output buffer.
+*/
 void audioHook()
 {
 
@@ -80,19 +87,24 @@ void audioHook()
 	{
 		in_pos++;
 		num_in++;
-		bufarray[in_pos] = updateAudio() + AUDIO_BIAS;
+		output_buffer[in_pos] = updateAudio() + AUDIO_BIAS;
 	}
 
 }
 
 
+/* This is the callback routine attached to the Timer1 audio interrupt. It
+moves sound data from the output buffer to the Arduino output register, running
+at AUDIO_RATE.
+*/
 inline
 static void outputAudio()
 { // takes 1-2 us, and doesn't appear to get interrupted by control on scope
 	static unsigned char out_pos;
 	out_pos++;
 	num_out++;
-	AUDIO_CHANNEL_1_OUTPUT_REGISTER =  bufarray[out_pos];
+	AUDIO_CHANNEL_1_OUTPUT_REGISTER =  output_buffer[out_pos];
 }
+
 
 

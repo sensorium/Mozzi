@@ -33,7 +33,7 @@ class EventDelay
 
 public:
 	/** Constructor.
-	@param update rate is how frequently you'll check if the EventDelay is ready().
+	@param update_rate is how frequently you'll check if the EventDelay is ready().
 	This would be CONTROL_RATE if ready() is used simply in updateControl().
 	*/
 	EventDelay(unsigned int update_rate);

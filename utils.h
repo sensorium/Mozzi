@@ -5,6 +5,9 @@
 
 #include "Arduino.h" // for pow function
 
+/** @defgroup util Cuttlefish utility functions
+*/
+
 // macros for setting and clearing register bits
 #ifndef cbi
 #define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))

@@ -28,7 +28,7 @@ void setup(){
   startCuttlefish(CONTROL_RATE);
   aTriangle.setFreq(mtof(48.f));
   kDelSamps.setFreq(.163f);
-  aDel.setFeedbackLevel(-101);
+  aDel.setFeedbackGain(-101);
 }
 
 void loop(){

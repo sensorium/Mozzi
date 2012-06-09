@@ -49,6 +49,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -96,87 +97,87 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#include &quot;utils.h&quot;</span>
 <a name="l00002"></a>00002 
-<a name="l00006"></a>00006 <span class="keywordtype">float</span> mtof(<span class="keywordtype">float</span> x) {
-<a name="l00007"></a>00007   <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)(8.1757989156 * pow(2.0, x/12.0));
-<a name="l00008"></a>00008 }
-<a name="l00009"></a>00009 
-<a name="l00010"></a>00010 
-<a name="l00016"></a>00016 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> xorshift96() {          <span class="comment">//period 2^96-1</span>
-<a name="l00017"></a>00017                 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> x=123456789, y=362436069, z=521288629;
-<a name="l00018"></a>00018                 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> t;
-<a name="l00019"></a>00019 
-<a name="l00020"></a>00020     x ^= x &lt;&lt; 16;
-<a name="l00021"></a>00021     x ^= x &gt;&gt; 5;
-<a name="l00022"></a>00022     x ^= x &lt;&lt; 1;
-<a name="l00023"></a>00023 
-<a name="l00024"></a>00024    t = x;
-<a name="l00025"></a>00025    x = y;
-<a name="l00026"></a>00026    y = z;
-<a name="l00027"></a>00027    z = t ^ x ^ y;
-<a name="l00028"></a>00028 
-<a name="l00029"></a>00029   <span class="keywordflow">return</span> z;
-<a name="l00030"></a>00030 }
-<a name="l00031"></a>00031 
-<a name="l00032"></a>00032 <span class="comment">//Snipped from http://code.google.com/p/ht1632c/wiki/Optimizations</span>
-<a name="l00033"></a>00033 <span class="comment">//TB2012 changed names to not interfere with arduino compilation</span>
-<a name="l00034"></a>00034 <span class="comment">//Fast integer math</span>
-<a name="l00035"></a>00035 <span class="comment">//</span>
-<a name="l00036"></a>00036 <span class="comment">//If you need to include arithmetic operations in you code but you don&#39;t need</span>
-<a name="l00037"></a>00037 <span class="comment">//floating point operations, you could use boolean operations instead of arithmetic</span>
-<a name="l00038"></a>00038 <span class="comment">//operations, or use smaller data types and custom functions instead of stdlib functions</span>
-<a name="l00039"></a>00039 <span class="comment">//or C operators (expecially / and %).</span>
-<a name="l00040"></a>00040 <span class="comment">//Look at IntegerCodeSnippets, http://code.google.com/p/ht1632c/wiki/IntegerCodeSnippets</span>
-<a name="l00041"></a>00041 <span class="comment">//</span>
-<a name="l00042"></a>00042 <span class="comment">//Here is some ready to use fast integer 1 byte wide math functions (from ht1632c library).</span>
-<a name="l00043"></a>00043 
-<a name="l00044"></a>00044 <span class="comment">/* fast integer (1 byte) modulus */</span>
-<a name="l00045"></a>00045 byte byteMod(byte n, byte d)
-<a name="l00046"></a>00046 {
-<a name="l00047"></a>00047   <span class="keywordflow">while</span>(n &gt;= d)
-<a name="l00048"></a>00048     n -= d;
-<a name="l00049"></a>00049 
-<a name="l00050"></a>00050   <span class="keywordflow">return</span> n;
-<a name="l00051"></a>00051 }
-<a name="l00052"></a>00052 
-<a name="l00053"></a>00053 <span class="comment">/* fast integer (1 byte) division */</span>
-<a name="l00054"></a>00054 byte byteDiv(byte n, byte d)
-<a name="l00055"></a>00055 {
-<a name="l00056"></a>00056   byte q = 0;
-<a name="l00057"></a>00057   <span class="keywordflow">while</span>(n &gt;= d)
-<a name="l00058"></a>00058   {
-<a name="l00059"></a>00059     n -= d;
-<a name="l00060"></a>00060     q++;
-<a name="l00061"></a>00061   }
-<a name="l00062"></a>00062   <span class="keywordflow">return</span> q;
-<a name="l00063"></a>00063 }
-<a name="l00064"></a>00064 
-<a name="l00065"></a>00065 <span class="comment">/* fast integer (1 byte) PRNG */</span>
-<a name="l00066"></a>00066 byte byteRnd(byte min, byte max)
-<a name="l00067"></a>00067 {
-<a name="l00068"></a>00068   <span class="keyword">static</span> byte seed;
-<a name="l00069"></a>00069   seed = (21 * seed + 21);
-<a name="l00070"></a>00070   <span class="keywordflow">return</span> min + byteMod(seed, --max);
-<a name="l00071"></a>00071 }
-<a name="l00072"></a>00072 <span class="comment">//WARNING: don&#39;t use this byteRnd() function for cryptography!</span>
-<a name="l00073"></a>00073 
-<a name="l00074"></a>00074 <span class="comment">//end of snip from http://code.google.com/p/ht1632c/wiki/Optimizations</span>
-<a name="l00075"></a>00075 
-<a name="l00076"></a>00076 <span class="keywordtype">void</span> setupFastADC() {
-<a name="l00077"></a>00077     <span class="comment">/*</span>
-<a name="l00078"></a>00078 <span class="comment">    * Make analogRead() faster than the standard arduino version, see:</span>
-<a name="l00079"></a>00079 <span class="comment">    * http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11</span>
-<a name="l00080"></a>00080 <span class="comment">    * FASTADC set in guts.h</span>
-<a name="l00081"></a>00081 <span class="comment">    */</span>
-<a name="l00082"></a>00082     sbi(ADCSRA,ADPS2);
-<a name="l00083"></a>00083     cbi(ADCSRA,ADPS1);
-<a name="l00084"></a>00084     cbi(ADCSRA,ADPS0);
-<a name="l00085"></a>00085 }
-<a name="l00086"></a>00086 
+<a name="l00008"></a>00008 <span class="comment">// code from AF_precision_synthesis sketch, copyright 2009, Adrian Freed.</span>
+<a name="l00009"></a><a class="code" href="group__util.html#gafacb8849f96270644ea79184fde7db37">00009</a> <span class="keywordtype">float</span> <a class="code" href="group__util.html#gafacb8849f96270644ea79184fde7db37" title="Converts midi note number to frequency.">mtof</a>(<span class="keywordtype">float</span> midival)
+<a name="l00010"></a>00010 {
+<a name="l00011"></a>00011                 <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)(8.1757989156 * pow(2.0, midival/12.0));
+<a name="l00012"></a>00012 }
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014 
+<a name="l00021"></a>00021 <span class="comment">// Based on Marsaglia, George. (2003). Xorshift RNGs. http://www.jstatsoft.org/v08/i14/xorshift.pdf</span>
+<a name="l00022"></a><a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6">00022</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()
+<a name="l00023"></a>00023 {          <span class="comment">//period 2^96-1</span>
+<a name="l00024"></a>00024                 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> x=123456789, y=362436069, z=521288629;
+<a name="l00025"></a>00025                 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> t;
+<a name="l00026"></a>00026 
+<a name="l00027"></a>00027                 x ^= x &lt;&lt; 16;
+<a name="l00028"></a>00028                 x ^= x &gt;&gt; 5;
+<a name="l00029"></a>00029                 x ^= x &lt;&lt; 1;
+<a name="l00030"></a>00030 
+<a name="l00031"></a>00031                 t = x;
+<a name="l00032"></a>00032                 x = y;
+<a name="l00033"></a>00033                 y = z;
+<a name="l00034"></a>00034                 z = t ^ x ^ y;
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036                 <span class="keywordflow">return</span> z;
+<a name="l00037"></a>00037 }
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039 <span class="comment">//Snipped from http://code.google.com/p/ht1632c/wiki/Optimizations</span>
+<a name="l00040"></a>00040 <span class="comment">//TB2012 changed names to not interfere with arduino compilation</span>
+<a name="l00041"></a>00041 <span class="comment">//Fast integer math</span>
+<a name="l00042"></a>00042 <span class="comment">//</span>
+<a name="l00043"></a>00043 <span class="comment">//If you need to include arithmetic operations in you code but you don&#39;t need</span>
+<a name="l00044"></a>00044 <span class="comment">//floating point operations, you could use boolean operations instead of arithmetic</span>
+<a name="l00045"></a>00045 <span class="comment">//operations, or use smaller data types and custom functions instead of stdlib functions</span>
+<a name="l00046"></a>00046 <span class="comment">//or C operators (expecially / and %).</span>
+<a name="l00047"></a>00047 <span class="comment">//Look at IntegerCodeSnippets, http://code.google.com/p/ht1632c/wiki/IntegerCodeSnippets</span>
+<a name="l00048"></a>00048 <span class="comment">//</span>
+<a name="l00049"></a>00049 <span class="comment">//Here is some ready to use fast integer 1 byte wide math functions (from ht1632c library).</span>
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051 <span class="comment">/* fast integer (1 byte) modulus */</span>
+<a name="l00052"></a>00052 byte byteMod(byte n, byte d)
+<a name="l00053"></a>00053 {
+<a name="l00054"></a>00054                 <span class="keywordflow">while</span>(n &gt;= d)
+<a name="l00055"></a>00055                                 n -= d;
+<a name="l00056"></a>00056                 <span class="keywordflow">return</span> n;
+<a name="l00057"></a>00057 }
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059 <span class="comment">/* fast integer (1 byte) division */</span>
+<a name="l00060"></a>00060 byte byteDiv(byte n, byte d)
+<a name="l00061"></a>00061 {
+<a name="l00062"></a>00062                 byte q = 0;
+<a name="l00063"></a>00063                 <span class="keywordflow">while</span>(n &gt;= d)
+<a name="l00064"></a>00064                 {
+<a name="l00065"></a>00065                                 n -= d;
+<a name="l00066"></a>00066                                 q++;
+<a name="l00067"></a>00067                 }
+<a name="l00068"></a>00068                 <span class="keywordflow">return</span> q;
+<a name="l00069"></a>00069 }
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071 <span class="comment">/* fast integer (1 byte) PRNG */</span>
+<a name="l00072"></a>00072 byte byteRnd(byte min, byte max)
+<a name="l00073"></a>00073 {
+<a name="l00074"></a>00074                 <span class="keyword">static</span> byte seed;
+<a name="l00075"></a>00075                 seed = (21 * seed + 21);
+<a name="l00076"></a>00076                 <span class="keywordflow">return</span> min + byteMod(seed, --max);
+<a name="l00077"></a>00077 }
+<a name="l00078"></a>00078 <span class="comment">//WARNING: don&#39;t use this byteRnd() function for cryptography!</span>
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080 <span class="comment">//end of snip from http://code.google.com/p/ht1632c/wiki/Optimizations</span>
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082 
+<a name="l00088"></a><a class="code" href="group__util.html#gac8bcacf360d020b9b8ab0d96b8528b13">00088</a> <span class="keywordtype">void</span> <a class="code" href="group__util.html#gac8bcacf360d020b9b8ab0d96b8528b13" title="Make analogRead() faster than the standard Arduino version.">setupFastADC</a>()
+<a name="l00089"></a>00089 {
+<a name="l00090"></a>00090                 sbi(ADCSRA,ADPS2);
+<a name="l00091"></a>00091                 cbi(ADCSRA,ADPS1);
+<a name="l00092"></a>00092                 cbi(ADCSRA,ADPS0);
+<a name="l00093"></a>00093 }
+<a name="l00094"></a>00094 
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 9 2012 01:21:59 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jun 10 2012 01:40:59 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

@@ -1,32 +1,39 @@
 #include "utils.h"
 
-/** Converts midi note number to frequency.  Code borrowed rom AF_precision_synthesis sketch.
- *  Like mtof object in Pd, midi values can have fractions.
+/** @ingroup util
+Converts midi note number to frequency.
+@param midival a midi note number.  Like the mtof object in Pd, midi values can have fractions.
+@return the frequency represented by the input midi note number..
  */
-float mtof(float x) {
-  return (float)(8.1757989156 * pow(2.0, x/12.0));
+// code from AF_precision_synthesis sketch, copyright 2009, Adrian Freed.
+float mtof(float midival)
+{
+	return (float)(8.1757989156 * pow(2.0, midival/12.0));
 }
 
 
-/** Fast random function which returns a 32 bit integer.
- *  This code comes from
- *  Based on Marsaglia, George. (2003). Xorshift RNGs. http://www.jstatsoft.org/v08/i14/xorshift.pdf
+/** @ingroup util
+Random number generator.
+A faster replacement for Arduino's random function,
+which is too slow to use with Cuttlefish.
+@return a random 32 bit integer.
  */
-
-unsigned long xorshift96() {          //period 2^96-1
+// Based on Marsaglia, George. (2003). Xorshift RNGs. http://www.jstatsoft.org/v08/i14/xorshift.pdf
+unsigned long xorshift96()
+{          //period 2^96-1
 	static unsigned long x=123456789, y=362436069, z=521288629;
 	unsigned long t;
 
-    x ^= x << 16;
-    x ^= x >> 5;
-    x ^= x << 1;
+	x ^= x << 16;
+	x ^= x >> 5;
+	x ^= x << 1;
 
-   t = x;
-   x = y;
-   y = z;
-   z = t ^ x ^ y;
+	t = x;
+	x = y;
+	y = z;
+	z = t ^ x ^ y;
 
-  return z;
+	return z;
 }
 
 //Snipped from http://code.google.com/p/ht1632c/wiki/Optimizations
@@ -44,43 +51,44 @@ unsigned long xorshift96() {          //period 2^96-1
 /* fast integer (1 byte) modulus */
 byte byteMod(byte n, byte d)
 {
-  while(n >= d)
-    n -= d;
-
-  return n;
+	while(n >= d)
+		n -= d;
+	return n;
 }
 
 /* fast integer (1 byte) division */
 byte byteDiv(byte n, byte d)
 {
-  byte q = 0;
-  while(n >= d)
-  {
-    n -= d;
-    q++;
-  }
-  return q;
+	byte q = 0;
+	while(n >= d)
+	{
+		n -= d;
+		q++;
+	}
+	return q;
 }
 
 /* fast integer (1 byte) PRNG */
 byte byteRnd(byte min, byte max)
 {
-  static byte seed;
-  seed = (21 * seed + 21);
-  return min + byteMod(seed, --max);
+	static byte seed;
+	seed = (21 * seed + 21);
+	return min + byteMod(seed, --max);
 }
 //WARNING: don't use this byteRnd() function for cryptography!
 
 //end of snip from http://code.google.com/p/ht1632c/wiki/Optimizations
 
-void setupFastADC() {
-    /*
-    * Make analogRead() faster than the standard arduino version, see:
-    * http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11
-    * FASTADC set in guts.h
-    */
-    sbi(ADCSRA,ADPS2);
-    cbi(ADCSRA,ADPS1);
-    cbi(ADCSRA,ADPS0);
+
+/** @ingroup util
+Make analogRead() faster than the standard Arduino version. Put this in setup()
+if you intend to use analogRead() with Cuttlefish, to avoid glitches. See:
+http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11
+*/
+void setupFastADC()
+{
+	sbi(ADCSRA,ADPS2);
+	cbi(ADCSRA,ADPS1);
+	cbi(ADCSRA,ADPS0);
 }
 

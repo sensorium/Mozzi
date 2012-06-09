@@ -25,7 +25,7 @@
 
 
 /** Audio delay line for comb filter, flange, chorus and short echo effects.
-NUM_BUFFER_SAMPLES is the length of the delay buffer in samples, and should
+@tparam  NUM_BUFFER_SAMPLES is the length of the delay buffer in samples.  This should
 be a power of two. The largest delay you'll fit in an atmega328 will be 512
 cells, which at 16384 Hz sample rate is 31 milliseconds. More of a flanger or a
 doubler than an echo. This version doesn't have feedback, for that use
@@ -43,16 +43,15 @@ private:
 
 public:
 
-	/** Constructor. The length of the delay in samples is set in the
-	template parameter, for example:
-	AudioDelay <128> myAudioDelay();
+	/** Constructor.
 	*/
-
 	AudioDelay(): write_pos(0)
 	{}
 
 
 	/** Input a value to the delay and retrieve the signal in the delay line at the position delay_cells.
+	@param in_value the signal input.
+	@param delay_cells sets the delay time in terms of cells in the delay buffer.
 	*/
 	inline
 	char next(char in_value, unsigned int delay_cells)

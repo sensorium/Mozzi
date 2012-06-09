@@ -37,19 +37,18 @@ void loop(){
 void updateControl(){
   // change the modulation frequency now and then
   if (lowByte(xorshift96()) < 5){
-      kFilterMod.setFreq((float)lowByte(xorshift96())/64);
+    kFilterMod.setFreq((float)lowByte(xorshift96())/64);
   }
-  // map the modulation to the filter range (0-255)
-  int cutoff_freq = 100 + kFilterMod.next()/2;
+  // map the modulation into the filter range (0-255)
+  unsigned char cutoff_freq = 100 + kFilterMod.next()/2;
   lpf.setCutoffFreq(cutoff_freq);
 }
 
 int updateAudio(){
-  SET_PIN13_HIGH;
   char asig = lpf.next(aTriangle.next());
-  SET_PIN13_LOW;
   return (int) asig;
 }
+
 
 
 

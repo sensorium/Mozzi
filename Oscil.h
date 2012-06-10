@@ -1,7 +1,9 @@
 /*
  * Oscil.h
  *
- * Copyright 2012 Tim Barrass.
+ * Oscil.h owes much to AF_precision_synthesis.pde, 2009, Adrian Freed.
+ *
+ * Copyright 2012 Tim Barrass, 2009 Adrian Freed.
  *
  * This file is part of Cuttlefish.
  *

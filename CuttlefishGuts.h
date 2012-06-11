@@ -28,7 +28,15 @@
 #include "TimerTwo.h"
 
 /** @mainpage Welcome
-@section forkme Fork me on github and help to improve the documentation!
+Here's a brief description of each section:
+
+@section Modules
+Cuttlefish core definitions and functions, which are used in any Cuttlefish sketch.
+
+Utility functions which are generally useful.
+
+@section Classes
+The Classes used to generate control and audio signals.
 */
 
 /** @defgroup core Cuttlefish core definitions and functions
@@ -41,15 +49,6 @@ Digital pin 9 is the pwm audio output pin.  For now there is only one channel.*/
 /* Used internally.  If there was a channel 2, it would be OCR1B.*/
 #define AUDIO_CHANNEL_1_OUTPUT_REGISTER OCR1A
 
-/** @ingroup core
-Set digital pin 13 to output for testing timing with an oscilloscope.*/
-#define SET_PIN13_OUT	(DDRB = DDRB | B00100000)
-/** @ingroup core
-Set pin 13 high for testing timing with an oscilloscope.*/
-#define SET_PIN13_HIGH 	(PORTB = PORTB | B00100000)
-/** @ingroup core
-Set pin 13 low for testing timing with an oscilloscope.*/
-#define SET_PIN13_LOW	(PORTB = B00000000)
 
 /** @ingroup core
 AUDIO_RATE is fixed at 16384 Hz for now.

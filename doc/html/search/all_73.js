@@ -2,9 +2,9 @@ var searchData=
 [
   ['sample',['Sample',['../class_sample.html',1,'Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;'],['../class_sample.html#ae54c3d783d775fdae5ec93457df574e3',1,'Sample::Sample()']]],
   ['set',['set',['../class_ead.html#af203c82721ab832c653a23ff219c040e',1,'Ead::set()'],['../class_event_delay.html#a937c86f3b05ccb6138ff7927713820da',1,'EventDelay::set()'],['../class_line.html#a6bad32d527e0d931c99e9b72c2a75c80',1,'Line::set(T value)'],['../class_line.html#a7378d526cf07c42c0792868c749dee6e',1,'Line::set(T targetvalue, T num_steps)'],['../class_line.html#a24ad85c17562e97b6823a010a5ba04c6',1,'Line::set(T startvalue, T targetvalue, T num_steps)']]],
-  ['set_5fpin13_5fhigh',['SET_PIN13_HIGH',['../group__core.html#gae4cefe7c89f383a53aa741f6596772f0',1,'CuttlefishGuts.h']]],
-  ['set_5fpin13_5flow',['SET_PIN13_LOW',['../group__core.html#ga69750c745cee49651f48f15e9e63bc5b',1,'CuttlefishGuts.h']]],
-  ['set_5fpin13_5fout',['SET_PIN13_OUT',['../group__core.html#ga93a192d2f0b378bf26f1ef552b743d74',1,'CuttlefishGuts.h']]],
+  ['set_5fpin13_5fhigh',['SET_PIN13_HIGH',['../group__util.html#gae4cefe7c89f383a53aa741f6596772f0',1,'utils.h']]],
+  ['set_5fpin13_5flow',['SET_PIN13_LOW',['../group__util.html#ga69750c745cee49651f48f15e9e63bc5b',1,'utils.h']]],
+  ['set_5fpin13_5fout',['SET_PIN13_OUT',['../group__util.html#ga93a192d2f0b378bf26f1ef552b743d74',1,'utils.h']]],
   ['setattack',['setAttack',['../class_ead.html#a6bae0e92e6709c3fcd31fccd41212bac',1,'Ead']]],
   ['setcutofffreq',['setCutoffFreq',['../class_low_pass_filter.html#ad7958bf53ac1c24b5653861ed521ed14',1,'LowPassFilter']]],
   ['setdecay',['setDecay',['../class_ead.html#aa99e6dc2d5448b4de0764c6208e5c2fc',1,'Ead']]],

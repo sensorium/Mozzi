@@ -87,12 +87,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="summary">
+<a href="#define-members">Defines</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Cuttlefish utility functions</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="define-members"></a>
+Defines</h2></td></tr>
+<tr class="memitem:ga93a192d2f0b378bf26f1ef552b743d74"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga93a192d2f0b378bf26f1ef552b743d74">SET_PIN13_OUT</a>&#160;&#160;&#160;(DDRB = DDRB | B00100000)</td></tr>
+<tr class="memdesc:ga93a192d2f0b378bf26f1ef552b743d74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set digital pin 13 to output for testing timing with an oscilloscope.  <a href="#ga93a192d2f0b378bf26f1ef552b743d74"></a><br/></td></tr>
+<tr class="memitem:gae4cefe7c89f383a53aa741f6596772f0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gae4cefe7c89f383a53aa741f6596772f0">SET_PIN13_HIGH</a>&#160;&#160;&#160;(PORTB = PORTB | B00100000)</td></tr>
+<tr class="memdesc:gae4cefe7c89f383a53aa741f6596772f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set pin 13 high for testing timing with an oscilloscope.  <a href="#gae4cefe7c89f383a53aa741f6596772f0"></a><br/></td></tr>
+<tr class="memitem:ga69750c745cee49651f48f15e9e63bc5b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga69750c745cee49651f48f15e9e63bc5b">SET_PIN13_LOW</a>&#160;&#160;&#160;(PORTB = B00000000)</td></tr>
+<tr class="memdesc:ga69750c745cee49651f48f15e9e63bc5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set pin 13 low for testing timing with an oscilloscope.  <a href="#ga69750c745cee49651f48f15e9e63bc5b"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:gafacb8849f96270644ea79184fde7db37"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gafacb8849f96270644ea79184fde7db37">mtof</a> (float midival)</td></tr>
@@ -102,6 +111,58 @@ Functions</h2></td></tr>
 <tr class="memitem:gac8bcacf360d020b9b8ab0d96b8528b13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gac8bcacf360d020b9b8ab0d96b8528b13">setupFastADC</a> ()</td></tr>
 <tr class="memdesc:gac8bcacf360d020b9b8ab0d96b8528b13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make analogRead() faster than the standard Arduino version.  <a href="#gac8bcacf360d020b9b8ab0d96b8528b13"></a><br/></td></tr>
 </table>
+<hr/><h2>Define Documentation</h2>
+<a class="anchor" id="gae4cefe7c89f383a53aa741f6596772f0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define <a class="el" href="group__util.html#gae4cefe7c89f383a53aa741f6596772f0">SET_PIN13_HIGH</a>&#160;&#160;&#160;(PORTB = PORTB | B00100000)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set pin 13 high for testing timing with an oscilloscope. </p>
+
+<p>Definition at line <a class="el" href="utils_8h_source.html#l00016">16</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga69750c745cee49651f48f15e9e63bc5b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define <a class="el" href="group__util.html#ga69750c745cee49651f48f15e9e63bc5b">SET_PIN13_LOW</a>&#160;&#160;&#160;(PORTB = B00000000)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set pin 13 low for testing timing with an oscilloscope. </p>
+
+<p>Definition at line <a class="el" href="utils_8h_source.html#l00019">19</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga93a192d2f0b378bf26f1ef552b743d74"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define <a class="el" href="group__util.html#ga93a192d2f0b378bf26f1ef552b743d74">SET_PIN13_OUT</a>&#160;&#160;&#160;(DDRB = DDRB | B00100000)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set digital pin 13 to output for testing timing with an oscilloscope. </p>
+
+<p>Definition at line <a class="el" href="utils_8h_source.html#l00013">13</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+
+</div>
+</div>
 <hr/><h2>Function Documentation</h2>
 <a class="anchor" id="gafacb8849f96270644ea79184fde7db37"></a>
 <div class="memitem">
@@ -178,7 +239,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 10 2012 01:40:59 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jun 12 2012 01:27:40 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

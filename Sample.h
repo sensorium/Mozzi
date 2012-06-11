@@ -48,6 +48,11 @@ defined macro, rather than a const or int, for the Sample to run fast enough.
 updateAudio(), or CONTROL_RATE if it's updated each time updateControl() is
 called. It could also be a fraction of CONTROL_RATE if you are doing some kind
 of cyclic updating in updateControl(), for example, to spread out the processor load.
+@section raw2cuttle
+Converting soundfiles for Cuttlefish.
+There is a python script called raw2cuttle.py in the Cuttlefish/python folder.
+The usage is:
+python raw2cuttle.py infilename outfilename tablename samplerate
 */
 template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE>
 class Sample

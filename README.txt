@@ -64,7 +64,7 @@ Here's a minimal template for an empty Mozzi sketch:
 
 	void loop() {
 		audioHook();
-		}
+	}
 
 	int updateAudio(){
 		// your audio code which returns an int between -244 and 243

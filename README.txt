@@ -24,17 +24,20 @@ Mozzi is a development of research into Mobile Sonification in the
 SweatSonics Project. (http://stephenbarrass.wordpress.com/tag/sweatsonics/)
 
 FEATURES
--    16384 Hz, 8-bit audio output. (Actually, nearly 9 bit resolution, -244 to 243).
+-    16384 Hz, 8-bit audio output. (Actually, nearly 9 bit resolution,
+      -244 to 243).
 -    Variable control rate from 64 Hz upwards.
--    Useful basic audio toolkit: oscillators, samples, lines, envelopes, scheduling, filtering.
--    Fast ADC and other cpu-efficient code utilities to help keep audio running smoothly.
+-    Useful basic audio toolkit: oscillators, samples, lines, envelopes,
+     scheduling, filtering.
+-    Fast ADC and other cpu-efficient code utilities to help keep audio
+     running smoothly.
 -    Example sketches for easy modification.
 -    Readymade wavetables and a script to convert your own soundfiles for Mozzi.
 
 
 INSTALLATION
 Download Mozzi and unzip it. It will probably have a name like
-"fairyland-Mozzi-2bee818". Rename the unzipped folder "Mozzi". Then,
+"sensorium-Mozzi-2bee818". Rename the unzipped folder "Mozzi". Then,
 following the instructions from the Arduino libraries page: Open your Arduino
 sketchbook folder. If there is already a folder there called libraries, place
 the library folder in there. If not, create a folder called libraries in the
@@ -75,11 +78,11 @@ Here's a minimal template for an empty Mozzi sketch:
 
 DOCUMENTATION
 There's documentation in the doc folder in the Mozzi download
-and online. (http://fairyland.github.com/Mozzi/doc/html/index.html) There
+and online. (http://sensorium.github.com/Mozzi/doc/html/index.html) There
 are hints and tips and more help on the Mozzi wiki.
-(https://github.com/fairyland/Mozzi/wiki/Hints-and-Tips) Also, feel free to
+(https://github.com/sensorium/Mozzi/wiki/Hints-and-Tips) Also, feel free to
 submit any issues on the GitHub Mozzi site
-(https://github.com/fairyland/Mozzi/issues)
+(https://github.com/sensorium/Mozzi/issues)
 
 CAVEATS
 This code has been tested on Arduino Dumemilanove ATmega328. Feedback

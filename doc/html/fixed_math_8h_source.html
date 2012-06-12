@@ -121,16 +121,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00024"></a>00024 <span class="comment">// Type conversions:</span>
 <a name="l00025"></a>00025 <span class="comment">/*</span>
 <a name="l00026"></a>00026 <span class="comment">Float to Q</span>
-<a name="l00027"></a>00027 <span class="comment"> </span>
+<a name="l00027"></a>00027 <span class="comment"></span>
 <a name="l00028"></a>00028 <span class="comment">To convert a number from floating point to Qm.n format:</span>
-<a name="l00029"></a>00029 <span class="comment"> </span>
+<a name="l00029"></a>00029 <span class="comment"></span>
 <a name="l00030"></a>00030 <span class="comment">  Multiply the floating point number by 2^n</span>
 <a name="l00031"></a>00031 <span class="comment">  Round to the nearest integer</span>
-<a name="l00032"></a>00032 <span class="comment"> </span>
+<a name="l00032"></a>00032 <span class="comment"></span>
 <a name="l00033"></a>00033 <span class="comment">Q to float</span>
-<a name="l00034"></a>00034 <span class="comment"> </span>
+<a name="l00034"></a>00034 <span class="comment"></span>
 <a name="l00035"></a>00035 <span class="comment">To convert a number from Qm.n format to floating point:</span>
-<a name="l00036"></a>00036 <span class="comment"> </span>
+<a name="l00036"></a>00036 <span class="comment"></span>
 <a name="l00037"></a>00037 <span class="comment">  Convert the number to floating point as if it were an integer</span>
 <a name="l00038"></a>00038 <span class="comment">  Multiply by 2^-n</span>
 <a name="l00039"></a>00039 <span class="comment">*/</span>
@@ -201,50 +201,50 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00110"></a>00110 <span class="comment">  count = 0;</span>
 <a name="l00111"></a>00111 <span class="comment">  neg = 0 ;</span>
 <a name="l00112"></a>00112 <span class="comment">  d = dd ;</span>
-<a name="l00113"></a>00113 <span class="comment"> </span>
+<a name="l00113"></a>00113 <span class="comment"></span>
 <a name="l00114"></a>00114 <span class="comment">  // only works with + numbers</span>
 <a name="l00115"></a>00115 <span class="comment">  if (d &amp; 0x8000)</span>
 <a name="l00116"></a>00116 <span class="comment">  begin</span>
 <a name="l00117"></a>00117 <span class="comment">    neg = 1;</span>
 <a name="l00118"></a>00118 <span class="comment">    d = -d ;</span>
 <a name="l00119"></a>00119 <span class="comment">  end</span>
-<a name="l00120"></a>00120 <span class="comment"> </span>
+<a name="l00120"></a>00120 <span class="comment"></span>
 <a name="l00121"></a>00121 <span class="comment">  // range reduction</span>
 <a name="l00122"></a>00122 <span class="comment">  while (d&gt;0x0100)</span>
 <a name="l00123"></a>00123 <span class="comment">  begin</span>
 <a name="l00124"></a>00124 <span class="comment">    --count ;</span>
 <a name="l00125"></a>00125 <span class="comment">    d &gt;&gt;= 1 ;</span>
 <a name="l00126"></a>00126 <span class="comment">  end</span>
-<a name="l00127"></a>00127 <span class="comment"> </span>
+<a name="l00127"></a>00127 <span class="comment"></span>
 <a name="l00128"></a>00128 <span class="comment">  while (d&lt;0x0080)</span>
 <a name="l00129"></a>00129 <span class="comment">  begin</span>
 <a name="l00130"></a>00130 <span class="comment">    ++count ;</span>
 <a name="l00131"></a>00131 <span class="comment">    d &lt;&lt;= 1 ;</span>
 <a name="l00132"></a>00132 <span class="comment">  end</span>
-<a name="l00133"></a>00133 <span class="comment"> </span>
+<a name="l00133"></a>00133 <span class="comment"></span>
 <a name="l00134"></a>00134 <span class="comment">  // Newton interation</span>
 <a name="l00135"></a>00135 <span class="comment">  x = 0x02ea - (d&lt;&lt;1) ;</span>
 <a name="l00136"></a>00136 <span class="comment">  x = multfix(x, 0x0200-multfix(d,x));</span>
 <a name="l00137"></a>00137 <span class="comment">  //x = multfix(x, 0x0200-multfix(d,x));</span>
-<a name="l00138"></a>00138 <span class="comment"> </span>
-<a name="l00139"></a>00139 <span class="comment"> </span>
+<a name="l00138"></a>00138 <span class="comment"></span>
+<a name="l00139"></a>00139 <span class="comment"></span>
 <a name="l00140"></a>00140 <span class="comment">  // range expansion</span>
 <a name="l00141"></a>00141 <span class="comment">  if (count&gt;0)  x = x&lt;&lt;count ;</span>
 <a name="l00142"></a>00142 <span class="comment">  else if (count&lt;0) x = x&gt;&gt;(-count) ;</span>
-<a name="l00143"></a>00143 <span class="comment"> </span>
+<a name="l00143"></a>00143 <span class="comment"></span>
 <a name="l00144"></a>00144 <span class="comment">  // fix sign</span>
 <a name="l00145"></a>00145 <span class="comment">  if (neg==1) x=-x;</span>
-<a name="l00146"></a>00146 <span class="comment"> </span>
+<a name="l00146"></a>00146 <span class="comment"></span>
 <a name="l00147"></a>00147 <span class="comment">  //form ratio</span>
 <a name="l00148"></a>00148 <span class="comment">  x = multfix(x,nn) ;</span>
-<a name="l00149"></a>00149 <span class="comment"> </span>
+<a name="l00149"></a>00149 <span class="comment"></span>
 <a name="l00150"></a>00150 <span class="comment">  return x ;</span>
 <a name="l00151"></a>00151 <span class="comment">end</span>
-<a name="l00152"></a>00152 <span class="comment"> </span>
+<a name="l00152"></a>00152 <span class="comment"></span>
 <a name="l00153"></a>00153 <span class="comment">//========================================================</span>
 <a name="l00154"></a>00154 <span class="comment">int sqrtfix(int aa)</span>
 <a name="l00155"></a>00155 <span class="comment">begin</span>
-<a name="l00156"></a>00156 <span class="comment"> </span>
+<a name="l00156"></a>00156 <span class="comment"></span>
 <a name="l00157"></a>00157 <span class="comment">  int a;</span>
 <a name="l00158"></a>00158 <span class="comment">  char nextbit, ahigh;</span>
 <a name="l00159"></a>00159 <span class="comment">  int root, p ;</span>
@@ -339,8 +339,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00248"></a>00248 <span class="comment">end</span>
 <a name="l00249"></a>00249 <span class="comment">*/</span>
 <a name="l00250"></a>00250 <span class="comment">/*</span>
-<a name="l00251"></a>00251 <span class="comment">//from octosynth:</span>
-<a name="l00252"></a>00252 <span class="comment"> </span>
+<a name="l00251"></a>00251 <span class="comment">// from octosynth, Joe Marshall 2011:</span>
+<a name="l00252"></a>00252 <span class="comment"></span>
 <a name="l00253"></a>00253 <span class="comment">  // multiply 2 16 bit numbers together and shift 8 without precision loss</span>
 <a name="l00254"></a>00254 <span class="comment">  // requires assembler really</span>
 <a name="l00255"></a>00255 <span class="comment">  volatile unsigned char zeroReg=0;</span>
@@ -373,14 +373,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00282"></a>00282 <span class="comment">  :&quot;r1&quot;,&quot;r0&quot;</span>
 <a name="l00283"></a>00283 <span class="comment">  );</span>
 <a name="l00284"></a>00284 <span class="comment">  oscillators[c].phaseStep=multipliedCounter;</span>
-<a name="l00285"></a>00285 <span class="comment"> </span>
+<a name="l00285"></a>00285 <span class="comment"></span>
 <a name="l00286"></a>00286 <span class="comment">  */</span>
 <a name="l00287"></a>00287 <span class="preprocessor">#endif </span><span class="comment">/* FIXEDMATH_H_ */</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 12 2012 21:33:32 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jun 12 2012 23:31:11 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

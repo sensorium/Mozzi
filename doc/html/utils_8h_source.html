@@ -95,43 +95,42 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">utils.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">// this file seems pointless since it only works if .c file is also included</span>
-<a name="l00002"></a>00002 
-<a name="l00003"></a>00003 <span class="preprocessor">#ifndef UTILS_H_</span>
-<a name="l00004"></a>00004 <span class="preprocessor"></span><span class="preprocessor">#define UTILS_H_</span>
-<a name="l00005"></a>00005 <span class="preprocessor"></span>
-<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;Arduino.h&quot;</span> <span class="comment">// for pow function</span>
-<a name="l00007"></a>00007 
-<a name="l00013"></a><a class="code" href="group__util.html#ga93a192d2f0b378bf26f1ef552b743d74">00013</a> <span class="preprocessor">#define SET_PIN13_OUT           (DDRB = DDRB | B00100000)</span>
-<a name="l00014"></a>00014 <span class="preprocessor"></span>
-<a name="l00016"></a><a class="code" href="group__util.html#gae4cefe7c89f383a53aa741f6596772f0">00016</a> <span class="preprocessor">#define SET_PIN13_HIGH          (PORTB = PORTB | B00100000)</span>
-<a name="l00017"></a>00017 <span class="preprocessor"></span>
-<a name="l00019"></a><a class="code" href="group__util.html#ga69750c745cee49651f48f15e9e63bc5b">00019</a> <span class="preprocessor">#define SET_PIN13_LOW           (PORTB = B00000000)</span>
-<a name="l00020"></a>00020 <span class="preprocessor"></span>
-<a name="l00021"></a>00021 <span class="comment">// macros for setting and clearing register bits</span>
-<a name="l00022"></a>00022 <span class="preprocessor">#ifndef cbi</span>
-<a name="l00023"></a>00023 <span class="preprocessor"></span><span class="preprocessor">#define cbi(sfr, bit) (_SFR_BYTE(sfr) &amp;= ~_BV(bit))</span>
-<a name="l00024"></a>00024 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00025"></a>00025 <span class="preprocessor"></span><span class="preprocessor">#ifndef sbi</span>
-<a name="l00026"></a>00026 <span class="preprocessor"></span><span class="preprocessor">#define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))</span>
-<a name="l00027"></a>00027 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00028"></a>00028 <span class="preprocessor"></span>
-<a name="l00029"></a>00029 <span class="keywordtype">float</span> <a class="code" href="group__util.html#gafacb8849f96270644ea79184fde7db37" title="Converts midi note number to frequency.">mtof</a>(<span class="keywordtype">float</span> x);
-<a name="l00030"></a>00030 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>();
-<a name="l00031"></a>00031 
-<a name="l00032"></a>00032 byte _mod(byte n, byte d);
-<a name="l00033"></a>00033 byte _div(byte n, byte d);
-<a name="l00034"></a>00034 byte _rnd(byte min, byte max);
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036 <span class="keywordtype">void</span> <a class="code" href="group__util.html#gac8bcacf360d020b9b8ab0d96b8528b13" title="Make analogRead() faster than the standard Arduino version.">setupFastADC</a>();
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00002"></a>00002 <span class="preprocessor">#ifndef UTILS_H_</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span><span class="preprocessor">#define UTILS_H_</span>
+<a name="l00004"></a>00004 <span class="preprocessor"></span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &quot;Arduino.h&quot;</span> <span class="comment">// for pow function</span>
+<a name="l00006"></a>00006 
+<a name="l00012"></a><a class="code" href="group__util.html#ga93a192d2f0b378bf26f1ef552b743d74">00012</a> <span class="preprocessor">#define SET_PIN13_OUT           (DDRB = DDRB | B00100000)</span>
+<a name="l00013"></a>00013 <span class="preprocessor"></span>
+<a name="l00015"></a><a class="code" href="group__util.html#gae4cefe7c89f383a53aa741f6596772f0">00015</a> <span class="preprocessor">#define SET_PIN13_HIGH          (PORTB = PORTB | B00100000)</span>
+<a name="l00016"></a>00016 <span class="preprocessor"></span>
+<a name="l00018"></a><a class="code" href="group__util.html#ga69750c745cee49651f48f15e9e63bc5b">00018</a> <span class="preprocessor">#define SET_PIN13_LOW           (PORTB = B00000000)</span>
+<a name="l00019"></a>00019 <span class="preprocessor"></span>
+<a name="l00020"></a>00020 <span class="comment">// macros for setting and clearing register bits</span>
+<a name="l00021"></a>00021 <span class="preprocessor">#ifndef cbi</span>
+<a name="l00022"></a>00022 <span class="preprocessor"></span><span class="preprocessor">#define cbi(sfr, bit) (_SFR_BYTE(sfr) &amp;= ~_BV(bit))</span>
+<a name="l00023"></a>00023 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00024"></a>00024 <span class="preprocessor"></span><span class="preprocessor">#ifndef sbi</span>
+<a name="l00025"></a>00025 <span class="preprocessor"></span><span class="preprocessor">#define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))</span>
+<a name="l00026"></a>00026 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00027"></a>00027 <span class="preprocessor"></span>
+<a name="l00028"></a>00028 <span class="keywordtype">float</span> <a class="code" href="group__util.html#gafacb8849f96270644ea79184fde7db37" title="Converts midi note number to frequency.">mtof</a>(<span class="keywordtype">float</span> x);
+<a name="l00029"></a>00029 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>();
+<a name="l00030"></a>00030 
+<a name="l00031"></a>00031 byte _mod(byte n, byte d);
+<a name="l00032"></a>00032 byte _div(byte n, byte d);
+<a name="l00033"></a>00033 byte _rnd(byte min, byte max);
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035 <span class="keywordtype">void</span> <a class="code" href="group__util.html#gac8bcacf360d020b9b8ab0d96b8528b13" title="Make analogRead() faster than the standard Arduino version.">setupFastADC</a>();
+<a name="l00036"></a>00036 
 <a name="l00037"></a>00037 
-<a name="l00038"></a>00038 
-<a name="l00039"></a>00039 <span class="preprocessor">#endif </span><span class="comment">/* UTILS_H_ */</span>
+<a name="l00038"></a>00038 <span class="preprocessor">#endif </span><span class="comment">/* UTILS_H_ */</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 12 2012 21:33:32 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jun 12 2012 23:31:11 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

@@ -20,8 +20,8 @@
 ##		Mozzi AUDIO_RATE (16384 in the current version). Then edit
 ##		your sounds to a power-of-two number of samples.
 ##
-##	Save by exporting with the format set to "Other uncompressed formats",
-##	options set to "RAW(headerless)" and "Encoding 8 bit signed PCM".
+##    Save by exporting with the format set to "Other uncompressed formats",
+##    options set to "RAW(headerless)" and "Encoding 8 bit signed PCM".
 
 
 import sys, array, os, textwrap

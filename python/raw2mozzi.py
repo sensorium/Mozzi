@@ -1,7 +1,7 @@
 ##    raw2mozzi.py
 ##    Created 2010-12 by Tim Barrass
 ##
-##    raw2mozzi.py converts raw 8 bit sound data to wavetables for Mozzi.                                                                                                       ##
+##    raw2mozzi.py converts raw 8 bit sound data to wavetables for Mozzi.
 ##
 ##    use: python raw2mozzi.py infilename outfilename tablename samplerate
 ##

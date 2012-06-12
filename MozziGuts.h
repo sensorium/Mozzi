@@ -37,6 +37,13 @@ Utility functions which are generally useful.
 
 @section Classes
 The Classes used to generate control and audio signals.
+
+@section  Soundtables
+There is a collection of ready-to-use wave tables in the Mozzi/tables folder.
+
+You can convert your own sounds to tables with a script called raw2mozzi.py, in Mozzi/python.
+
+Read the raw2mozzi.py file for instructions.
 */
 
 /** @defgroup core Mozzi core definitions and functions

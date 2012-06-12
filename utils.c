@@ -15,7 +15,7 @@ float mtof(float midival)
 /** @ingroup util
 Random number generator.
 A faster replacement for Arduino's random function,
-which is too slow to use with Cuttlefish.
+which is too slow to use with Mozzi.
 @return a random 32 bit integer.
  */
 // Based on Marsaglia, George. (2003). Xorshift RNGs. http://www.jstatsoft.org/v08/i14/xorshift.pdf
@@ -82,7 +82,7 @@ byte byteRnd(byte min, byte max)
 
 /** @ingroup util
 Make analogRead() faster than the standard Arduino version. Put this in setup()
-if you intend to use analogRead() with Cuttlefish, to avoid glitches. See:
+if you intend to use analogRead() with Mozzi, to avoid glitches. See:
 http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11
 */
 void setupFastADC()

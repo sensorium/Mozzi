@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Cuttlefish: Cuttlefish core definitions and functions</title>
+<title>Mozzi: Mozzi core definitions and functions</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -25,14 +25,14 @@
  <tbody>
  <tr style="height: 56px;">
   
-  <td id="projectlogo"><img alt="Logo" src="cuttle-smaller-clear-light.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="mozzi_smooth_courier_rotated_small_flying_light.png"/></td>
   
   
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Cuttlefish
+   <div id="projectname">Mozzi
    &#160;<span id="projectnumber">alpha 0.01</span>
    </div>
-   <div id="projectbrief">Sonic tentacles for Arduino</div>
+   <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
   
   
@@ -90,7 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#define-members">Defines</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Cuttlefish core definitions and functions</div>  </div>
+<div class="title">Mozzi core definitions and functions</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
@@ -104,8 +104,8 @@ Defines</h2></td></tr>
 <tr class="memdesc:gacec43f46095112fe36129fbb46ed5762"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the maximum sample resolution.  <a href="#gacec43f46095112fe36129fbb46ed5762"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga436228ce535b93110783bf478774004f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga436228ce535b93110783bf478774004f">startCuttlefish</a> (unsigned int control_rate_hz)</td></tr>
-<tr class="memdesc:ga436228ce535b93110783bf478774004f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the timers for audio and control rate processes.  <a href="#ga436228ce535b93110783bf478774004f"></a><br/></td></tr>
+<tr class="memitem:gaedc83c89280eccc3b7fdb3115daab573"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573">startMozzi</a> (unsigned int control_rate_hz)</td></tr>
+<tr class="memdesc:gaedc83c89280eccc3b7fdb3115daab573"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the timers for audio and control rate processes.  <a href="#gaedc83c89280eccc3b7fdb3115daab573"></a><br/></td></tr>
 <tr class="memitem:ga2fca37b988ab369e2f3c3108c683e59d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d">audioHook</a> ()</td></tr>
 <tr class="memdesc:ga2fca37b988ab369e2f3c3108c683e59d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is required in Arduino's loop().  <a href="#ga2fca37b988ab369e2f3c3108c683e59d"></a><br/></td></tr>
 <tr class="memitem:ga59d187b915b2e366c88489e52801951a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a">updateControl</a> ()</td></tr>
@@ -128,7 +128,7 @@ Functions</h2></td></tr>
 <p>Digital pin 9 is the pwm audio output pin. </p>
 <p>For now there is only one channel. </p>
 
-<p>Definition at line <a class="el" href="_cuttlefish_guts_8h_source.html#l00050">50</a> of file <a class="el" href="_cuttlefish_guts_8h_source.html">CuttlefishGuts.h</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00047">47</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -144,9 +144,9 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>This is the maximum sample resolution. </p>
-<p>8 bit (ie. 256) is usually fine but there might be times where the extra headroom is useful. Use powers of two in audio calculations and use right shifts for divisions where possible. Also, in tests while writing Cuttlefish, shifts on byte boundaries seem to work fastest. For example, &gt;&gt; 8 is faster than &gt;&gt; 4. Test your timings where possible, using an oscilloscope with setPin13High() and setPin13Low() around you test code. </p>
+<p>8 bit (ie. 256) is usually fine but there might be times where the extra headroom is useful. Use powers of two in audio calculations and use right shifts for divisions where possible. Also, in tests while writing Mozzi, shifts on byte boundaries seem to work fastest. For example, &gt;&gt; 8 is faster than &gt;&gt; 4. Test your timings where possible, using an oscilloscope with setPin13High() and setPin13Low() around you test code. </p>
 
-<p>Definition at line <a class="el" href="_cuttlefish_guts_8h_source.html#l00082">82</a> of file <a class="el" href="_cuttlefish_guts_8h_source.html">CuttlefishGuts.h</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00079">79</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -164,7 +164,7 @@ Functions</h2></td></tr>
 <p>AUDIO_RATE is fixed at 16384 Hz for now. </p>
 <p>This is a compromise between the sample rate (interrupt rate) and sample bitdepth (pwm width), which are interdependent due to the way pulse wave modulation is used to generate the sound output. With the AUDIO_RATE at 16384, the sample resolution is 488, which provides some headroom above the 8bit table resolution currently used by the oscillators. You can look at the TimerOne library for more info about how interrupt rate and pwm resolution relate. </p>
 
-<p>Definition at line <a class="el" href="_cuttlefish_guts_8h_source.html#l00067">67</a> of file <a class="el" href="_cuttlefish_guts_8h_source.html">CuttlefishGuts.h</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00064">64</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -184,18 +184,18 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>This is required in Arduino's loop(). </p>
-<p>It puts the sound calculated by <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio()</a> into Cuttlefish's output buffer. </p>
+<p>It puts the sound calculated by <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio()</a> into Mozzi's output buffer. </p>
 
-<p>Definition at line <a class="el" href="_cuttlefish_guts_8cpp_source.html#l00076">76</a> of file <a class="el" href="_cuttlefish_guts_8cpp_source.html">CuttlefishGuts.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00076">76</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ga436228ce535b93110783bf478774004f"></a>
+<a class="anchor" id="gaedc83c89280eccc3b7fdb3115daab573"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="group__core.html#ga436228ce535b93110783bf478774004f">startCuttlefish</a> </td>
+          <td class="memname">void <a class="el" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573">startMozzi</a> </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>control_rate_hz</em></td><td>)</td>
@@ -206,7 +206,7 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Sets up the timers for audio and control rate processes. </p>
-<p>It goes in your sketch's setup() routine. <a class="el" href="group__core.html#ga436228ce535b93110783bf478774004f" title="Sets up the timers for audio and control rate processes.">startCuttlefish()</a> starts audio interrupts on Timer 1 and control interrupts on Timer 2. The audio rate is currently fixed at 16384 Hz. </p>
+<p>It goes in your sketch's setup() routine. <a class="el" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573" title="Sets up the timers for audio and control rate processes.">startMozzi()</a> starts audio interrupts on Timer 1 and control interrupts on Timer 2. The audio rate is currently fixed at 16384 Hz. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">control_rate_hz</td><td>Sets how often <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> is called. It can be any power of 2 above and including 64. The practical upper limit for control rate depends on how busy the processor is, and you might need to do some tests to find the best setting. Its' strongly recommended to define CONTROL_RATE in your sketches (eg. "#define CONTROL_RATE 128") because the literal numeric value is necessary for Oscils to work properly, and it also helps to keep your calculations clear. </td></tr>
@@ -214,7 +214,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_cuttlefish_guts_8cpp_source.html#l00050">50</a> of file <a class="el" href="_cuttlefish_guts_8cpp_source.html">CuttlefishGuts.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00050">50</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -253,7 +253,7 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>This is where you put your control code. </p>
-<p>You need <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> somewhere in your sketch, even if it's empty. <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> is called at the control rate you set in <a class="el" href="group__core.html#ga436228ce535b93110783bf478774004f" title="Sets up the timers for audio and control rate processes.">startCuttlefish()</a>. To save processor load, avoid any calculations here which could be done in setup(). </p>
+<p>You need <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> somewhere in your sketch, even if it's empty. <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> is called at the control rate you set in <a class="el" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573" title="Sets up the timers for audio and control rate processes.">startMozzi()</a>. To save processor load, avoid any calculations here which could be done in setup(). </p>
 
 </div>
 </div>
@@ -261,7 +261,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 12 2012 01:27:40 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jun 12 2012 18:00:26 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

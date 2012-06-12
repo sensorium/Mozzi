@@ -14,5 +14,5 @@ var searchData=
   ['setupfastadc',['setupFastADC',['../group__util.html#gac8bcacf360d020b9b8ab0d96b8528b13',1,'setupFastADC():&#160;utils.c'],['../group__util.html#gac8bcacf360d020b9b8ab0d96b8528b13',1,'setupFastADC():&#160;utils.c']]],
   ['smooth',['Smooth',['../class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26',1,'Smooth']]],
   ['start',['start',['../class_ead.html#ac385679b58e2f9755029b7da7405b233',1,'Ead::start()'],['../class_event_delay.html#a97a07c9371040d6388b8369352b08d83',1,'EventDelay::start()'],['../class_sample.html#a57307ee93ef0fcff36d543596eb79b72',1,'Sample::start()']]],
-  ['startcuttlefish',['startCuttlefish',['../group__core.html#ga436228ce535b93110783bf478774004f',1,'startCuttlefish(unsigned int control_rate_hz):&#160;CuttlefishGuts.cpp'],['../group__core.html#ga436228ce535b93110783bf478774004f',1,'startCuttlefish(unsigned int control_rate_hz):&#160;CuttlefishGuts.cpp']]]
+  ['startmozzi',['startMozzi',['../group__core.html#gaedc83c89280eccc3b7fdb3115daab573',1,'startMozzi(unsigned int control_rate_hz):&#160;MozziGuts.cpp'],['../group__core.html#gaedc83c89280eccc3b7fdb3115daab573',1,'startMozzi(unsigned int control_rate_hz):&#160;MozziGuts.cpp']]]
 ];

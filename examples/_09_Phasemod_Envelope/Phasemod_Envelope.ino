@@ -1,5 +1,5 @@
 /*  Example of a modulating timbre with a rhythmic
- *  volume envelope, using Cuttlefish sonification library.
+ *  volume envelope, using Mozzi sonification library.
  *
  *
  *  Demonstrates phase modulation and modifying
@@ -9,7 +9,7 @@
  *  This example code is in the public domain.
  */
 
-#include <CuttlefishGuts.h>
+#include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/cos8192_int8.h>
 #include <tables/envelop2048_uint8.h>
@@ -26,7 +26,7 @@ Oscil <ENVELOP2048_NUM_CELLS, AUDIO_RATE> aEnvelop(ENVELOP2048_DATA);
 
 
 void setup() {
-  startCuttlefish(CONTROL_RATE);
+  startMozzi(CONTROL_RATE);
   aCarrier.setFreq(220u);
   kModFreq1.setFreq(1.78f);
   kModFreq2.setFreq(0.1757f);

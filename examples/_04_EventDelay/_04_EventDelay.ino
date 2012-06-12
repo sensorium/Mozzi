@@ -1,11 +1,11 @@
 /*  Example of a sound being toggled on an off,
- *  using Cuttlefish sonification library.
+ *  using Mozzi sonification library.
  *
  *  Demonstrates scheduling with EventDelay.
  *  EventDelay is a way to make non-blocking
  *  time delays for events.  Use this instead of
  *  the Arduino delay() function, which doesn't
- *  work with Cuttlefish.
+ *  work with Mozzi.
  *
  *  Circuit: Audio output on digital pin 9.
  *
@@ -13,7 +13,7 @@
  *  This example code is in the public domain.
  */
 
-#include <CuttlefishGuts.h>
+#include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin8192_int8.h> // sine table for oscillator
 #include <EventDelay.h>
@@ -29,7 +29,7 @@ EventDelay kGainChangeDelay(CONTROL_RATE);
 char gain = 1;
 
 void setup(){
-  startCuttlefish(CONTROL_RATE);
+  startMozzi(CONTROL_RATE);
   aSin.setFreq(330u); // set the frequency, using an unsigned int or a float
   kGainChangeDelay.set(1000); // 1 second countdown, within resolution of CONTROL_RATE
 }

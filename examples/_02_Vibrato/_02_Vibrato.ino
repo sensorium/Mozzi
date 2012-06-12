@@ -1,5 +1,5 @@
 /*  Example playing a sinewave with vibrato,
- *  using Cuttlefish sonification library.
+ *  using Mozzi sonification library.
  *
  *  Demonstrates simple FM using phase modulation.
  *
@@ -9,7 +9,7 @@
  *  This example code is in the public domain.
  */
 
-#include <CuttlefishGuts.h>
+#include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/cos8192_int8.h> // table for Oscils to play
 #include <utils.c> // for mtof
@@ -22,7 +22,7 @@ Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aVibrato(COS8192_DATA);
  const long intensity = 300;
 
 void setup(){
-  startCuttlefish(CONTROL_RATE);
+  startMozzi(CONTROL_RATE);
   aCos.setFreq(mtof(84.f));
   aVibrato.setFreq(15.f);
 }

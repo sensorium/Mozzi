@@ -1,5 +1,5 @@
 /*  Example playing sine tables of different sizes
- *  with Cuttlefish sonification library.
+ *  with Mozzi sonification library.
  *
  *  Demonstrates the audible quality of different length tables
  *  played with Oscil and scheduling with EventDelay.
@@ -8,7 +8,7 @@
  *  This example code is in the public domain.
  */
 
-#include <CuttlefishGuts.h>
+#include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/sin256_int8.h>
 #include <tables/sin512_int8.h>
@@ -46,7 +46,7 @@ const unsigned int MILLIS_PER_CONTROL = 1000u / CONTROL_RATE;
 const unsigned long CONTROL_STEPS_PER_SWEEP = (unsigned long) MILLIS_PER_SWEEP / MILLIS_PER_CONTROL;
 
 void setup(){
-  startCuttlefish(CONTROL_RATE);
+  startMozzi(CONTROL_RATE);
   kWhoseTurnDelay.set(MILLIS_PER_SWEEP);
   kSweep.set(0.f, 8192.f, CONTROL_STEPS_PER_SWEEP);
 }

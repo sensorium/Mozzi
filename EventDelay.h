@@ -3,20 +3,20 @@
  *
  * Copyright 2012 Tim Barrass.
  *
- * This file is part of Cuttlefish.
+ * This file is part of Mozzi.
  *
- * Cuttlefish is free software: you can redistribute it and/or modify
+ * Mozzi is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Cuttlefish is distributed in the hope that it will be useful,
+ * Mozzi is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Cuttlefish.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Mozzi.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
 
@@ -25,7 +25,7 @@
 
 #include "Arduino.h"
 
-/** A non-blocking replacement for Arduino's delay() function (which is disabled by Cuttlefish). EventDelay can be
+/** A non-blocking replacement for Arduino's delay() function (which is disabled by Mozzi). EventDelay can be
 set() to wait for a number of milliseconds, then after calling start(), calling ready() will return true when the time is up.*/
 
 class EventDelay

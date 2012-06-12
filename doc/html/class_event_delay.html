@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Cuttlefish: EventDelay Class Reference</title>
+<title>Mozzi: EventDelay Class Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -25,14 +25,14 @@
  <tbody>
  <tr style="height: 56px;">
   
-  <td id="projectlogo"><img alt="Logo" src="cuttle-smaller-clear-light.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="mozzi_smooth_courier_rotated_small_flying_light.png"/></td>
   
   
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Cuttlefish
+   <div id="projectname">Mozzi
    &#160;<span id="projectnumber">alpha 0.01</span>
    </div>
-   <div id="projectbrief">Sonic tentacles for Arduino</div>
+   <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
   
   
@@ -99,7 +99,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>A non-blocking replacement for Arduino's delay() function (which is disabled by Cuttlefish).  
+<p>A non-blocking replacement for Arduino's delay() function (which is disabled by Mozzi).  
  <a href="class_event_delay.html#details">More...</a></p>
 
 <p><a href="class_event_delay-members.html">List of all members.</a></p>
@@ -117,8 +117,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:aac805388ab4087f56b350dde40aeccbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call this in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> or <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio()</a> to check if the delay time is up.  <a href="#aac805388ab4087f56b350dde40aeccbe"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>A non-blocking replacement for Arduino's delay() function (which is disabled by Cuttlefish). </p>
-<p><a class="el" href="class_event_delay.html" title="A non-blocking replacement for Arduino&#39;s delay() function (which is disabled by Cuttlefish).">EventDelay</a> can be <a class="el" href="class_event_delay.html#a937c86f3b05ccb6138ff7927713820da" title="Set the delay time.">set()</a> to wait for a number of milliseconds, then after calling <a class="el" href="class_event_delay.html#a97a07c9371040d6388b8369352b08d83" title="Start the delay.">start()</a>, calling <a class="el" href="class_event_delay.html#aac805388ab4087f56b350dde40aeccbe" title="Call this in updateControl() or updateAudio() to check if the delay time is up.">ready()</a> will return true when the time is up. </p>
+<div class="textblock"><p>A non-blocking replacement for Arduino's delay() function (which is disabled by Mozzi). </p>
+<p><a class="el" href="class_event_delay.html" title="A non-blocking replacement for Arduino&#39;s delay() function (which is disabled by Mozzi).">EventDelay</a> can be <a class="el" href="class_event_delay.html#a937c86f3b05ccb6138ff7927713820da" title="Set the delay time.">set()</a> to wait for a number of milliseconds, then after calling <a class="el" href="class_event_delay.html#a97a07c9371040d6388b8369352b08d83" title="Start the delay.">start()</a>, calling <a class="el" href="class_event_delay.html#aac805388ab4087f56b350dde40aeccbe" title="Call this in updateControl() or updateAudio() to check if the delay time is up.">ready()</a> will return true when the time is up. </p>
 
 <p>Definition at line <a class="el" href="_event_delay_8h_source.html#l00031">31</a> of file <a class="el" href="_event_delay_8h_source.html">EventDelay.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
@@ -140,7 +140,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>Constructor. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">update_rate</td><td>is how frequently you'll check if the <a class="el" href="class_event_delay.html" title="A non-blocking replacement for Arduino&#39;s delay() function (which is disabled by Cuttlefish).">EventDelay</a> is <a class="el" href="class_event_delay.html#aac805388ab4087f56b350dde40aeccbe" title="Call this in updateControl() or updateAudio() to check if the delay time is up.">ready()</a>. This would be CONTROL_RATE if <a class="el" href="class_event_delay.html#aac805388ab4087f56b350dde40aeccbe" title="Call this in updateControl() or updateAudio() to check if the delay time is up.">ready()</a> is used simply in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>. </td></tr>
+    <tr><td class="paramname">update_rate</td><td>is how frequently you'll check if the <a class="el" href="class_event_delay.html" title="A non-blocking replacement for Arduino&#39;s delay() function (which is disabled by Mozzi).">EventDelay</a> is <a class="el" href="class_event_delay.html#aac805388ab4087f56b350dde40aeccbe" title="Call this in updateControl() or updateAudio() to check if the delay time is up.">ready()</a>. This would be CONTROL_RATE if <a class="el" href="class_event_delay.html#aac805388ab4087f56b350dde40aeccbe" title="Call this in updateControl() or updateAudio() to check if the delay time is up.">ready()</a> is used simply in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -207,7 +207,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 12 2012 01:27:40 for Cuttlefish by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jun 12 2012 18:00:26 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

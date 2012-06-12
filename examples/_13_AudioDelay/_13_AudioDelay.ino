@@ -1,5 +1,5 @@
 /*  Example of filtering a triangle wave,
- *  using Cuttlefish sonification library.
+ *  using Mozzi sonification library.
  *
  *  Demonstrates AudioDelay.
  *
@@ -9,7 +9,7 @@
  *  This example code is in the public domain.
  */
 
-#include <CuttlefishGuts.h>
+#include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/triangle_analogue512_int8.h> // wavetable
 #include <tables/cos8192_int8.h> // wavetable
@@ -25,7 +25,7 @@ AudioDelay <256> aDel;
 int del_samps;
 
 void setup(){
-  startCuttlefish(CONTROL_RATE);
+  startMozzi(CONTROL_RATE);
   aTriangle.setFreq(mtof(60.f));
   kFreq.setFreq(.63f);
 }

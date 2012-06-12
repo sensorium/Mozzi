@@ -1,5 +1,5 @@
 /*  Example playing a sinewave at a set frequency,
- *  using Cuttlefish sonification library.
+ *  using Mozzi sonification library.
  *
  *  Demonstrates the use of Oscil to play a wavetable.
  *
@@ -9,7 +9,7 @@
  *  This example code is in the public domain.
  */
 
-#include <CuttlefishGuts.h>
+#include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin8192_int8.h> // sine table for oscillator
 
@@ -21,7 +21,7 @@ Oscil <SIN8192_NUM_CELLS, AUDIO_RATE> aSin(SIN8192_DATA);
 
 
 void setup(){
-  startCuttlefish(CONTROL_RATE); // set a control rate of 64 (powers of 2 please)
+  startMozzi(CONTROL_RATE); // set a control rate of 64 (powers of 2 please)
   aSin.setFreq(440u); // set the frequency with an unsigned int or a float
 }
 

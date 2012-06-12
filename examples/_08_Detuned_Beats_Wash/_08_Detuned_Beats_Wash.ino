@@ -12,7 +12,7 @@
  *  This example code is in the public domain.
  */
 
-#include <CuttlefishGuts.h>
+#include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/cos8192_int8.h>
 #include <utils.c> // for mtof and xorshift96() fastish random number generator
@@ -40,7 +40,7 @@ unsigned long f1,f2,f3,f4,f5,f6,f7;
 
 
 void setup(){
-  startCuttlefish(64); // a literal control rate here
+  startMozzi(64); // a literal control rate here
 
   // select harmonic frequencies
   f1 = (unsigned long) (mtof(48.f) * 256);

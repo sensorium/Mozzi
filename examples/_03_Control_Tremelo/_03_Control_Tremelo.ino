@@ -1,5 +1,5 @@
 /*  Example of amplitude modulation (as tremelo),
- *  using Cuttlefish sonification library.
+ *  using Mozzi sonification library.
  *
  *  Demonstrates audio and control rate updates.
  *  The tremelo oscillator is updated at control rate,
@@ -15,7 +15,7 @@
  *  This example code is in the public domain.
  */
 
-#include <CuttlefishGuts.h>
+#include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/cos8192_int8.h> // table for Oscils to play
 #include <utils.c> // for mtof
@@ -29,7 +29,7 @@ Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kTremelo(COS8192_DATA);
 char gain;
 
 void setup(){
-  startCuttlefish(CONTROL_RATE);
+  startMozzi(CONTROL_RATE);
   aSig.setFreq(mtof(60.f));
   kTremelo.setFreq(3.5f);
 }
@@ -43,6 +43,6 @@ void updateControl(){
 }
 
 int updateAudio(){
-  // Cuttlefish limits output to -244 to 243 range (almost 9 bits)
+  // Mozzi limits output to -244 to 243 range (almost 9 bits)
   return ((int) aSig.next() * gain) >> 8; // shift back to 8 bit audio output range after multiplying
 }

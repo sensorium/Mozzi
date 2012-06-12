@@ -1,5 +1,5 @@
 /*  Example playing an enveloped noise source
- *  using Cuttlefish sonification library.
+ *  using Mozzi sonification library.
  *
  *  Demonstrates Ead (exponential attack decay).
  *
@@ -9,7 +9,7 @@
  *  This example code is in the public domain.
  */
 
-#include <CuttlefishGuts.h>
+#include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
 #include <tables/whitenoise8192_int8.h>
 #include <Ead.h> // exponential attack decay
@@ -24,7 +24,7 @@ Ead kEnvelope(CONTROL_RATE); // resolution will be CONTROL_RATE
 int gain;
 
 void setup(){
-  startCuttlefish(CONTROL_RATE);
+  startMozzi(CONTROL_RATE);
   // cast to float because the resulting freq will be small
   aNoise.setFreq((float)AUDIO_RATE/WHITENOISE8192_SAMPLERATE);
   int attack = 30;

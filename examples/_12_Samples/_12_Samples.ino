@@ -1,5 +1,5 @@
 /*  Example of playing sampled sounds,
- *  using Cuttlefish sonification library.
+ *  using Mozzi sonification library.
  *
  *  Demonstrates one-shot samples scheduled
  *  with EventDelay(), and uses xorshift96(),
@@ -12,7 +12,7 @@
  *  This example code is in the public domain.
  */
 
-#include <CuttlefishGuts.h>
+#include <MozziGuts.h>
 #include <Sample.h> // Sample template
 #include <tables/bamboo1_1024_int8.h> // wavetable data
 #include <tables/bamboo2_1024_int8.h> // wavetable data
@@ -31,7 +31,7 @@ Sample <BAMBOO3_2048_NUM_CELLS, AUDIO_RATE> aBamboo3(BAMBOO3_2048_DATA);
 EventDelay kTriggerDelay(CONTROL_RATE);
 
 void setup(){
-  startCuttlefish(CONTROL_RATE);
+  startMozzi(CONTROL_RATE);
   aBamboo1.setFreq((float) BAMBOO1_1024_SAMPLERATE / (float) BAMBOO1_1024_NUM_CELLS); // play at the speed it was recorded at
   aBamboo2.setFreq((float) BAMBOO2_1024_SAMPLERATE / (float) BAMBOO2_1024_NUM_CELLS);
   aBamboo3.setFreq((float) BAMBOO3_2048_SAMPLERATE / (float) BAMBOO3_2048_NUM_CELLS);

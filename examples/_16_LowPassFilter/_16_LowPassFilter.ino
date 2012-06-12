@@ -1,5 +1,5 @@
 /*  Example of filtering a wave,
- *  using Cuttlefish sonification library.
+ *  using Mozzi sonification library.
  *
  *  Demonstrates LowPassFilter.
  *
@@ -9,7 +9,7 @@
  *  This example code is in the public domain.
  */
 
-#include <CuttlefishGuts.h>
+#include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/chum9_int8.h> // recorded audio wavetable
 #include <tables/cos8192_int8.h> // for filter modulation
@@ -24,7 +24,7 @@ Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kFilterMod(COS8192_DATA);
 LowPassFilter lpf;
 
 void setup(){
-  startCuttlefish(CONTROL_RATE);
+  startMozzi(CONTROL_RATE);
   aTriangle.setFreq(2.f);
   kFilterMod.setFreq(1.3f);
   lpf.setResonance(200);

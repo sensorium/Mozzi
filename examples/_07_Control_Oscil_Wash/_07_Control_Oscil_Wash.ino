@@ -1,5 +1,5 @@
 /*  Plays a fluctuating ambient wash,
- *  using Cuttlefish sonification library.
+ *  using Mozzi sonification library.
  *
  *  Demonstrates audio and control rate updates.
  *  There are 8 oscillators updated at control rate to set
@@ -14,7 +14,7 @@
  *  This example code is in the public domain.
  */
 
-#include <CuttlefishGuts.h>
+#include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/cos8192_int8.h>
 #include <tables/square_no_alias512_int8.h>
@@ -46,7 +46,7 @@ Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kVol8(COS8192_DATA);
 char v1,v2,v3,v4,v5,v6,v7,v8;
 
 void setup(){
-  startCuttlefish(CONTROL_RATE);
+  startMozzi(CONTROL_RATE);
 
   // set harmonic frequencies
   aCos1.setFreq(mtof(60.f));

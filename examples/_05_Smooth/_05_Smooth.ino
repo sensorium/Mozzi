@@ -1,5 +1,5 @@
 /*  Example toggling a sound on an off without obvious clicks,
- *  using Cuttlefish sonification library.
+ *  using Mozzi sonification library.
  *
  *  Demonstrates using Smooth to filter a control signal.
  *
@@ -9,7 +9,7 @@
  *  This example code is in the public domain.
  */
 
-#include <CuttlefishGuts.h>
+#include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin8192_int8.h> // sine table for oscillator
 #include <EventDelay.h>
@@ -29,7 +29,7 @@ int smooth_gain; // for conveying kSmoothGain to updateAudio
 char gain = 1;
 
 void setup(){
-  startCuttlefish(CONTROL_RATE);
+  startMozzi(CONTROL_RATE);
   aSin.setFreq(330u); // set the frequency, using an unsigned int or a float
   kGainChangeDelay.set(1000); // 1 second countdown, within resolution of CONTROL_RATE
 }

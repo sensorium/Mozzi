@@ -5,20 +5,20 @@
  *
  * Copyright 2012 Tim Barrass, 2009 Adrian Freed.
  *
- * This file is part of Cuttlefish.
+ * This file is part of Mozzi.
  *
- * Cuttlefish is free software: you can redistribute it and/or modify
+ * Mozzi is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Cuttlefish is distributed in the hope that it will be useful,
+ * Mozzi is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Cuttlefish.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Mozzi.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
 
@@ -26,7 +26,7 @@
 #define SAMPLE_H_
 
 #include "Arduino.h"
-#include "CuttlefishGuts.h"
+#include "MozziGuts.h"
 #include <util/atomic.h>
 
 // fractional bits for samplelator index precision
@@ -48,11 +48,11 @@ defined macro, rather than a const or int, for the Sample to run fast enough.
 updateAudio(), or CONTROL_RATE if it's updated each time updateControl() is
 called. It could also be a fraction of CONTROL_RATE if you are doing some kind
 of cyclic updating in updateControl(), for example, to spread out the processor load.
-@section raw2cuttle
-Converting soundfiles for Cuttlefish.
-There is a python script called raw2cuttle.py in the Cuttlefish/python folder.
+@section raw2mozzi
+Converting soundfiles for Mozzi.
+There is a python script called raw2mozzi.py in the Mozzi/python folder.
 The usage is:
-python raw2cuttle.py infilename outfilename tablename samplerate
+python raw2mozzi.py infilename outfilename tablename samplerate
 */
 template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE>
 class Sample
@@ -63,7 +63,7 @@ public:
 	/** Constructor.
 	@param TABLE_NAME the name of the array the Sample will be using. This
 	can be found in the table ".h" file if you are using a table made for
-	Cuttlefish by the rawtocuttle.py python script in Cuttlefish's cuttle py
+	Mozzi by the rawtomozzi.py python script in Mozzi's mozzi py
 	folder.*/
 	Sample(prog_char * TABLE_NAME):table(TABLE_NAME)
 	{}

@@ -1,6 +1,6 @@
 /*  Example of sliding smoothly
  *  between oscillator frequencies,
- *  using Cuttlefish sonification library.
+ *  using Mozzi sonification library.
  *
  *  Demonstrates using a Line to change the
  *  frequency of an oscillator.
@@ -11,7 +11,7 @@
  *  This example code is in the public domain.
  */
 
-#include <CuttlefishGuts.h>
+#include <MozziGuts.h>
 #include <Line.h> // for smooth transitions
 #include <Oscil.h> // oscillator template
 #include <tables/triangle_warm8192_int8.h> // triangle table for oscillator
@@ -36,7 +36,7 @@ unsigned char  gliss_offset_max = 36;
 
 
 void setup(){
-  startCuttlefish(CONTROL_RATE); // optional control rate parameter
+  startMozzi(CONTROL_RATE); // optional control rate parameter
 }
 
 

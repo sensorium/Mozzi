@@ -5,7 +5,7 @@
 
 #include "Arduino.h" // for pow function
 
-/** @defgroup util Cuttlefish utility functions
+/** @defgroup util Mozzi utility functions
 */
 
 /** @ingroup util

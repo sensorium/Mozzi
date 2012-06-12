@@ -23,7 +23,9 @@ Fork it to contribute directly to future developments.
 Mozzi is a development of research into Mobile Sonification in the
 SweatSonics Project. (http://stephenbarrass.wordpress.com/tag/sweatsonics/)
 
+
 FEATURES
+
 -    16384 Hz, 8-bit audio output. (Actually, nearly 9 bit resolution,
       -244 to 243).
 -    Variable control rate from 64 Hz upwards.
@@ -45,14 +47,18 @@ libraries in the sketchbook folder, and drop the Mozzi folder in there. Then
 re-start the Arduino programming environment, and you should see Mozzi in the
 Sketch > Import Library menu.
 
+
 QUICK START
+
 To hear Mozzi, connect a 3.5mm audio jack with the centre wire to the PWM
 output on Digital pin 9 on Arduino, and the black ground to the Ground on the
 Arduino. Use this as a line out which you can plug into your computer and listen
 to with a sound program like Audacity. Try some examples. They are in your
 File > Examples > Mozzi menu.
 
+
 USING CUTTLEFISH
+
 Here's a template for an empty Mozzi sketch:
 
 	#include <MozziGuts.h>         // at the top of your sketch
@@ -77,22 +83,31 @@ Here's a template for an empty Mozzi sketch:
 
 
 DOCUMENTATION
+
 There's documentation in the doc folder in the Mozzi download
 and online. (http://sensorium.github.com/Mozzi/doc/html/index.html)
+
 There are hints and tips and more help on the Mozzi wiki.
 (https://github.com/sensorium/Mozzi/wiki/Hints-and-Tips)
-Also, feel free to submit any issues on the GitHub Mozzi site
+
+Also, feel free to submit any issues on the GitHub Mozzi site.
 (https://github.com/sensorium/Mozzi/issues)
-How about sharing Mozzi code snippets?
+
+Share code snippets:
 (https://github.com/sensorium/Mozzi/wiki/Code-Snippets-to-Share)
 
+
 CAVEATS
+
 This code has been tested on Arduino Dumemilanove ATmega328. Feedback
-about performance on other Arduinos welcome. Mozzi doesn't play nice with
-Arduino time functions millis(), micros(), delay(), delayMicroseconds().
-Instead, you can use Mozzi's EventDelay() for scheduling.
+about performance on other Arduinos welcome.
+
+Mozzi doesn't play nice with Arduino time functions millis(), micros(), delay(),
+delayMicroseconds(). Instead, you can use Mozzi's EventDelay() for scheduling.
+
 
 CONTRIBUTIONS / INCLUDED DEPENDENCIES
+
 Mozzi makes use of the following code:
 
 Under GPL3:

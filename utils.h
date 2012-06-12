@@ -1,4 +1,3 @@
-// this file seems pointless since it only works if .c file is also included
 
 #ifndef UTILS_H_
 #define UTILS_H_

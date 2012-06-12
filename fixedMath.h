@@ -24,16 +24,16 @@
 // Type conversions:
 /*
 Float to Q
- 
+
 To convert a number from floating point to Qm.n format:
- 
+
   Multiply the floating point number by 2^n
   Round to the nearest integer
- 
+
 Q to float
- 
+
 To convert a number from Qm.n format to floating point:
- 
+
   Convert the number to floating point as if it were an integer
   Multiply by 2^-n
 */
@@ -110,50 +110,50 @@ begin
   count = 0;
   neg = 0 ;
   d = dd ;
- 
+
   // only works with + numbers
   if (d & 0x8000)
   begin
     neg = 1;
     d = -d ;
   end
- 
+
   // range reduction
   while (d>0x0100)
   begin
     --count ;
     d >>= 1 ;
   end
- 
+
   while (d<0x0080)
   begin
     ++count ;
     d <<= 1 ;
   end
- 
+
   // Newton interation
   x = 0x02ea - (d<<1) ;
   x = multfix(x, 0x0200-multfix(d,x));
   //x = multfix(x, 0x0200-multfix(d,x));
- 
- 
+
+
   // range expansion
   if (count>0)  x = x<<count ;
   else if (count<0) x = x>>(-count) ;
- 
+
   // fix sign
   if (neg==1) x=-x;
- 
+
   //form ratio
   x = multfix(x,nn) ;
- 
+
   return x ;
 end
- 
+
 //========================================================
 int sqrtfix(int aa)
 begin
- 
+
   int a;
   char nextbit, ahigh;
   int root, p ;
@@ -248,8 +248,8 @@ begin
 end
 */
 /*
-//from octosynth:
- 
+// from octosynth, Joe Marshall 2011:
+
   // multiply 2 16 bit numbers together and shift 8 without precision loss
   // requires assembler really
   volatile unsigned char zeroReg=0;
@@ -282,6 +282,6 @@ end
   :"r1","r0"
   );
   oscillators[c].phaseStep=multipliedCounter;
- 
+
   */
 #endif /* FIXEDMATH_H_ */

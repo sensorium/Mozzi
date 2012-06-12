@@ -110,12 +110,17 @@ CONTRIBUTIONS / INCLUDED DEPENDENCIES
 
 Mozzi makes use of the following code:
 
-Under GPL3:
-TimerOne library - http://code.google.com/p/arduino-timerone/ for latest
-TimerTwo library - Downloaded from https://bitbucket.org/johnmccombs, 4/2/2012, but unable to find
-original author. Please contact us if this is yours!
+TimerOne library - http://code.google.com/p/arduino-timerone/ (GPL3)
+TimerTwo library - https://bitbucket.org/johnmccombs (author unknown: is it you?)
 
 Mozzi has also drawn on and been influenced by:
+
 ead~.c puredata external (creb library) Copyright (c) 2000-2003 by Tom Schouten (GPL2)
+
 AF_precision_synthesis.pde by Adrian Freed, 2009.
 (http://adrianfreed.com/content/arduino-sketch-high-frequency-precision-sine-wave-tone-sound-synthesis)
+
+Resonant filter posted to musicdsp.org by Paul Kellett
+http://www.musicdsp.org/archive.php?classid=3#259,
+and fixed point version of the filter on "dave's blog of art and programming"
+http://www.pawfal.org/dave/blog/2011/09/

@@ -55,7 +55,7 @@ File > Examples > Mozzi menu.
 USING CUTTLEFISH
 Here's a minimal template for an empty Mozzi sketch:
 
-	#include <Mozzi.h> // at the top of your sketch
+	#include <MozziGuts.h>         // at the top of your sketch
 	#define CONTROL_RATE 64 // or some other power of 2
 
 	void setup() {

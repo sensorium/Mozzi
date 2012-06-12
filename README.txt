@@ -17,7 +17,7 @@ Mozzi is designed to be easy to use, open source and extendable.
 
 If you enjoy using Mozzi for a project, or have extended it, we would be
 pleased to hear about it and provide support wherever possible. Contribute
-suggestions, improvements and bug fixes to the Mozzi forum on Github, or
+suggestions, improvements and bug fixes to the Mozzi wiki on Github, or
 Fork it to contribute directly to future developments.
 
 Mozzi is a development of research into Mobile Sonification in the
@@ -37,12 +37,12 @@ FEATURES
 
 INSTALLATION
 Download Mozzi and unzip it. It will probably have a name like
-"sensorium-Mozzi-2bee818". Rename the unzipped folder "Mozzi". Then,
-following the instructions from the Arduino libraries page: Open your Arduino
-sketchbook folder. If there is already a folder there called libraries, place
-the library folder in there. If not, create a folder called libraries in the
-sketchbook folder, and drop the library folder in there. Then re-start the
-Arduino programming environment, and you should see your new library in the
+"sensorium-Mozzi-2bee818". Rename the unzipped folder "Mozzi".
+Then, following the instructions from the Arduino libraries page:
+Open your Arduino sketchbook folder. If there is already a folder there called
+libraries, place the library folder in there. If not, create a folder called
+libraries in the sketchbook folder, and drop the Mozzi folder in there. Then
+re-start the Arduino programming environment, and you should see Mozzi in the
 Sketch > Import Library menu.
 
 QUICK START

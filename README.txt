@@ -53,7 +53,7 @@ to with a sound program like Audacity. Try some examples. They are in your
 File > Examples > Mozzi menu.
 
 USING CUTTLEFISH
-Here's a minimal template for an empty Mozzi sketch:
+Here's a template for an empty Mozzi sketch:
 
 	#include <MozziGuts.h>         // at the top of your sketch
 	#define CONTROL_RATE 64 // or some other power of 2
@@ -78,11 +78,13 @@ Here's a minimal template for an empty Mozzi sketch:
 
 DOCUMENTATION
 There's documentation in the doc folder in the Mozzi download
-and online. (http://sensorium.github.com/Mozzi/doc/html/index.html) There
-are hints and tips and more help on the Mozzi wiki.
-(https://github.com/sensorium/Mozzi/wiki/Hints-and-Tips) Also, feel free to
-submit any issues on the GitHub Mozzi site
+and online. (http://sensorium.github.com/Mozzi/doc/html/index.html)
+There are hints and tips and more help on the Mozzi wiki.
+(https://github.com/sensorium/Mozzi/wiki/Hints-and-Tips)
+Also, feel free to submit any issues on the GitHub Mozzi site
 (https://github.com/sensorium/Mozzi/issues)
+How about sharing Mozzi code snippets?
+(https://github.com/sensorium/Mozzi/wiki/Code-Snippets-to-Share)
 
 CAVEATS
 This code has been tested on Arduino Dumemilanove ATmega328. Feedback

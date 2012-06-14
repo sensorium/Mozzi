@@ -111,6 +111,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a57307ee93ef0fcff36d543596eb79b72"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a57307ee93ef0fcff36d543596eb79b72"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a57307ee93ef0fcff36d543596eb79b72">start</a> ()</td></tr>
 <tr class="memdesc:a57307ee93ef0fcff36d543596eb79b72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the phase (the playhead) to the beginning of the table. <br/></td></tr>
+<tr class="memitem:a7f937c15daf469260c6bba84016e9c99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a7f937c15daf469260c6bba84016e9c99">start</a> (unsigned int offset)</td></tr>
+<tr class="memdesc:a7f937c15daf469260c6bba84016e9c99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the phase (the playhead) to an offset position.  <a href="#a7f937c15daf469260c6bba84016e9c99"></a><br/></td></tr>
 <tr class="memitem:a6b94fc8a8042f498fbd8693d9bce9719"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a6b94fc8a8042f498fbd8693d9bce9719">next</a> ()</td></tr>
 <tr class="memdesc:a6b94fc8a8042f498fbd8693d9bce9719"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the phase according to the current frequency and returns the sample at the new phase position, or 0 when the phase overshoots the end of the table.  <a href="#a6b94fc8a8042f498fbd8693d9bce9719"></a><br/></td></tr>
 <tr class="memitem:a13ff9d4206b5e14e2f030ef9ced8a7d0"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a13ff9d4206b5e14e2f030ef9ced8a7d0">phMod</a> (long phmod_proportion)</td></tr>
@@ -166,7 +168,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <p>Constructor. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">TABLE_NAME</td><td>the name of the array the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> will be using. This can be found in the table ".h" file if you are using a table made for Mozzi by the rawtomozzi.py python script in Mozzi's mozzi py folder. </td></tr>
+    <tr><td class="paramname">TABLE_NAME</td><td>the name of the array the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> will be using. This can be found in the table ".h" file if you are using a table made for Mozzi by the <a class="el" href="raw2mozzi_8py_source.html">raw2mozzi.py</a> python script in Mozzi's python folder. </td></tr>
   </table>
   </dd>
 </dl>
@@ -202,7 +204,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>the sample at the given table index. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00164">164</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00173">173</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -225,7 +227,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <p>Updates the phase according to the current frequency and returns the sample at the new phase position, or 0 when the phase overshoots the end of the table. </p>
 <dl class="section return"><dt>Returns:</dt><dd>the next sample value from the table, or 0 if it's finished playing. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00087">87</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00096">96</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -256,7 +258,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>the phase increment value which will produce a given frequency. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00180">180</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00189">189</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -286,7 +288,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>a sample from the table. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00105">105</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00114">114</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -316,7 +318,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00136">136</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00145">145</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -346,7 +348,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00150">150</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00159">159</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -376,7 +378,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00120">120</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00129">129</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -406,7 +408,36 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00189">189</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00198">198</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7f937c15daf469260c6bba84016e9c99"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#a57307ee93ef0fcff36d543596eb79b72">start</a> </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>offset</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Sets the phase (the playhead) to an offset position. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">offset</td><td>position in samples. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00085">85</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -417,7 +448,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 12 2012 23:31:11 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jun 14 2012 22:28:33 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

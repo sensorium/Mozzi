@@ -118,7 +118,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00021"></a>00021 <span class="comment"> */</span>
 <a name="l00022"></a>00022 
 <a name="l00023"></a>00023 
-<a name="l00024"></a>00024 <span class="preprocessor">#include &quot;Mozziguts.h&quot;</span>
+<a name="l00024"></a>00024 <span class="preprocessor">#include &quot;MozziGuts.h&quot;</span>
 <a name="l00025"></a>00025 <span class="preprocessor">#include &lt;util/atomic.h&gt;</span>
 <a name="l00026"></a>00026 
 <a name="l00027"></a>00027 <span class="comment">// Interrupts:</span>
@@ -129,69 +129,71 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00032"></a>00032 <span class="comment">// Ideally we&#39;d use Timer0 for control because it has lowest priority, but Arduino uses</span>
 <a name="l00033"></a>00033 <span class="comment">// it for time and delay functions, so we use Timer 2 for control and hope it won&#39;t</span>
 <a name="l00034"></a>00034 <span class="comment">// interfere with the audio interrupt.</span>
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036 
-<a name="l00050"></a><a class="code" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573">00050</a> <span class="keywordtype">void</span> <a class="code" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573" title="Sets up the timers for audio and control rate processes.">startMozzi</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> control_rate_hz)
-<a name="l00051"></a>00051 {
-<a name="l00052"></a>00052 
-<a name="l00053"></a>00053                 <span class="comment">// audio</span>
-<a name="l00054"></a>00054                 pinMode(<a class="code" href="group__core.html#ga4a4f0dc9e1f5947ac6b5336b5cf14d4f" title="Digital pin 9 is the pwm audio output pin.">AUDIO_CHANNEL_1_PIN</a>, OUTPUT);                           <span class="comment">// set pin to output for audio</span>
-<a name="l00055"></a>00055                 Timer1.initialize(1000000/<a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298" title="AUDIO_RATE is fixed at 16384 Hz for now.">AUDIO_RATE</a>);      <span class="comment">// set period</span>
-<a name="l00056"></a>00056                 Timer1.pwm(<a class="code" href="group__core.html#ga4a4f0dc9e1f5947ac6b5336b5cf14d4f" title="Digital pin 9 is the pwm audio output pin.">AUDIO_CHANNEL_1_PIN</a>, 512);       <span class="comment">// pwm pin, 50% duty cycle</span>
-<a name="l00057"></a>00057                 Timer1.attachInterrupt(outputAudio);                            <span class="comment">// call outputAudio() on each interrupt</span>
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059                 <span class="comment">// control</span>
-<a name="l00060"></a>00060                 TimerTwo::init(1000000/control_rate_hz,<a class="code" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl</a>); <span class="comment">// set period, attach updateControl()</span>
-<a name="l00061"></a>00061                 TimerTwo::start();
-<a name="l00062"></a>00062 
-<a name="l00063"></a>00063 }
+<a name="l00035"></a>00035 <span class="comment">// TODO: Timer0 is messed up anyway, it seems, so maybe it&#39;s better to</span>
+<a name="l00036"></a>00036 <span class="comment">// use it for control and leave Timer2 available for other things?</span>
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038 
+<a name="l00052"></a><a class="code" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573">00052</a> <span class="keywordtype">void</span> <a class="code" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573" title="Sets up the timers for audio and control rate processes.">startMozzi</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> control_rate_hz)
+<a name="l00053"></a>00053 {
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055                 <span class="comment">// audio</span>
+<a name="l00056"></a>00056                 pinMode(<a class="code" href="group__core.html#ga4a4f0dc9e1f5947ac6b5336b5cf14d4f" title="Digital pin 9 is the pwm audio output pin.">AUDIO_CHANNEL_1_PIN</a>, OUTPUT);                           <span class="comment">// set pin to output for audio</span>
+<a name="l00057"></a>00057                 Timer1.initialize(1000000/<a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298" title="AUDIO_RATE is fixed at 16384 Hz for now.">AUDIO_RATE</a>);      <span class="comment">// set period</span>
+<a name="l00058"></a>00058                 Timer1.pwm(<a class="code" href="group__core.html#ga4a4f0dc9e1f5947ac6b5336b5cf14d4f" title="Digital pin 9 is the pwm audio output pin.">AUDIO_CHANNEL_1_PIN</a>, 512);       <span class="comment">// pwm pin, 50% duty cycle</span>
+<a name="l00059"></a>00059                 Timer1.attachInterrupt(outputAudio);                            <span class="comment">// call outputAudio() on each interrupt</span>
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061                 <span class="comment">// control</span>
+<a name="l00062"></a>00062                 TimerTwo::init(1000000/control_rate_hz,<a class="code" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl</a>); <span class="comment">// set period, attach updateControl()</span>
+<a name="l00063"></a>00063                 TimerTwo::start();
 <a name="l00064"></a>00064 
-<a name="l00065"></a>00065 
-<a name="l00066"></a>00066 <span class="preprocessor">#define BUFFER_NUM_TABLE_CELLS 256</span>
-<a name="l00067"></a>00067 <span class="preprocessor"></span><span class="keyword">static</span> <span class="keywordtype">int</span> output_buffer[BUFFER_NUM_TABLE_CELLS];
-<a name="l00068"></a>00068 <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> num_out;
-<a name="l00069"></a>00069 
-<a name="l00070"></a>00070 
-<a name="l00076"></a><a class="code" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d">00076</a> <span class="keywordtype">void</span> <a class="code" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook</a>()
-<a name="l00077"></a>00077 {
-<a name="l00078"></a>00078 
-<a name="l00079"></a>00079                 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> in_pos = 0;
-<a name="l00080"></a>00080                 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> num_in = 0;
-<a name="l00081"></a>00081                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> gap;
-<a name="l00082"></a>00082                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-<a name="l00083"></a>00083                 { <span class="comment">// because 16bit access to num_out which can be changed in Buffer::out() used in audio interrupt</span>
-<a name="l00084"></a>00084                                 gap = num_in - num_out; <span class="comment">// wraps to a big number if it&#39;s negative</span>
-<a name="l00085"></a>00085                 }
-<a name="l00086"></a>00086                 <span class="keywordflow">if</span> (gap &lt; BUFFER_NUM_TABLE_CELLS)
-<a name="l00087"></a>00087                 {
-<a name="l00088"></a>00088                                 in_pos++;
-<a name="l00089"></a>00089                                 num_in++;
-<a name="l00090"></a>00090                                 output_buffer[in_pos] = <a class="code" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio</a>() + AUDIO_BIAS;
-<a name="l00091"></a>00091                 }
-<a name="l00092"></a>00092 
-<a name="l00093"></a>00093 }
+<a name="l00065"></a>00065 }
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068 <span class="preprocessor">#define BUFFER_NUM_TABLE_CELLS 256</span>
+<a name="l00069"></a>00069 <span class="preprocessor"></span><span class="keyword">static</span> <span class="keywordtype">int</span> output_buffer[BUFFER_NUM_TABLE_CELLS];
+<a name="l00070"></a>00070 <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> num_out;
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072 
+<a name="l00078"></a><a class="code" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d">00078</a> <span class="keywordtype">void</span> <a class="code" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook</a>()
+<a name="l00079"></a>00079 {
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081                 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> in_pos = 0;
+<a name="l00082"></a>00082                 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> num_in = 0;
+<a name="l00083"></a>00083                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> gap;
+<a name="l00084"></a>00084                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+<a name="l00085"></a>00085                 { <span class="comment">// because 16bit access to num_out which can be changed in Buffer::out() used in audio interrupt</span>
+<a name="l00086"></a>00086                                 gap = num_in - num_out; <span class="comment">// wraps to a big number if it&#39;s negative</span>
+<a name="l00087"></a>00087                 }
+<a name="l00088"></a>00088                 <span class="keywordflow">if</span> (gap &lt; BUFFER_NUM_TABLE_CELLS)
+<a name="l00089"></a>00089                 {
+<a name="l00090"></a>00090                                 in_pos++;
+<a name="l00091"></a>00091                                 num_in++;
+<a name="l00092"></a>00092                                 output_buffer[in_pos] = <a class="code" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio</a>() + AUDIO_BIAS;
+<a name="l00093"></a>00093                 }
 <a name="l00094"></a>00094 
-<a name="l00095"></a>00095 
-<a name="l00096"></a>00096 <span class="comment">/* This is the callback routine attached to the Timer1 audio interrupt. It</span>
-<a name="l00097"></a>00097 <span class="comment">moves sound data from the output buffer to the Arduino output register, running</span>
-<a name="l00098"></a>00098 <span class="comment">at AUDIO_RATE.</span>
-<a name="l00099"></a>00099 <span class="comment">*/</span>
-<a name="l00100"></a>00100 <span class="keyword">inline</span>
-<a name="l00101"></a>00101 <span class="keyword">static</span> <span class="keywordtype">void</span> outputAudio()
-<a name="l00102"></a>00102 { <span class="comment">// takes 1-2 us, and doesn&#39;t appear to get interrupted by control on scope</span>
-<a name="l00103"></a>00103                 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> out_pos;
-<a name="l00104"></a>00104                 out_pos++;
-<a name="l00105"></a>00105                 num_out++;
-<a name="l00106"></a>00106                 AUDIO_CHANNEL_1_OUTPUT_REGISTER =  output_buffer[out_pos];
-<a name="l00107"></a>00107 }
-<a name="l00108"></a>00108 
-<a name="l00109"></a>00109 
+<a name="l00095"></a>00095 }
+<a name="l00096"></a>00096 
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098 <span class="comment">/* This is the callback routine attached to the Timer1 audio interrupt. It</span>
+<a name="l00099"></a>00099 <span class="comment">moves sound data from the output buffer to the Arduino output register, running</span>
+<a name="l00100"></a>00100 <span class="comment">at AUDIO_RATE.</span>
+<a name="l00101"></a>00101 <span class="comment">*/</span>
+<a name="l00102"></a>00102 <span class="keyword">inline</span>
+<a name="l00103"></a>00103 <span class="keyword">static</span> <span class="keywordtype">void</span> outputAudio()
+<a name="l00104"></a>00104 { <span class="comment">// takes 1-2 us, and doesn&#39;t appear to get interrupted by control on scope</span>
+<a name="l00105"></a>00105                 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> out_pos;
+<a name="l00106"></a>00106                 out_pos++;
+<a name="l00107"></a>00107                 num_out++;
+<a name="l00108"></a>00108                 AUDIO_CHANNEL_1_OUTPUT_REGISTER =  output_buffer[out_pos];
+<a name="l00109"></a>00109 }
 <a name="l00110"></a>00110 
+<a name="l00111"></a>00111 
+<a name="l00112"></a>00112 
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 12 2012 23:31:11 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jun 14 2012 22:28:32 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

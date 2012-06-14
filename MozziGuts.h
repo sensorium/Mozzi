@@ -28,7 +28,10 @@
 #include "TimerTwo.h"
 
 /** @mainpage Welcome
-Here's a brief description of each section:
+
+The latest version of Mozzi and this documentation are at the <a href="http://sensorium.github.com/Mozzi/">Mozzi home page.</a>
+
+Here's a brief description of each section of this documentation:
 
 @section Modules
 Mozzi core definitions and functions, which are used in any Mozzi sketch.

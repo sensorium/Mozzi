@@ -128,7 +128,7 @@ Functions</h2></td></tr>
 <p>Digital pin 9 is the pwm audio output pin. </p>
 <p>For now there is only one channel. </p>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00054">54</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00057">57</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -146,7 +146,7 @@ Functions</h2></td></tr>
 <p>This is the maximum sample resolution. </p>
 <p>8 bit (ie. 256) is usually fine but there might be times where the extra headroom is useful. Use powers of two in audio calculations and use right shifts for divisions where possible. Also, in tests while writing Mozzi, shifts on byte boundaries seem to work fastest. For example, &gt;&gt; 8 is faster than &gt;&gt; 4. Test your timings where possible, using an oscilloscope with setPin13High() and setPin13Low() around you test code. </p>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00086">86</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00089">89</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -164,7 +164,7 @@ Functions</h2></td></tr>
 <p>AUDIO_RATE is fixed at 16384 Hz for now. </p>
 <p>This is a compromise between the sample rate (interrupt rate) and sample bitdepth (pwm width), which are interdependent due to the way pulse wave modulation is used to generate the sound output. With the AUDIO_RATE at 16384, the sample resolution is 488, which provides some headroom above the 8bit table resolution currently used by the oscillators. You can look at the TimerOne library for more info about how interrupt rate and pwm resolution relate. </p>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00071">71</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00074">74</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -261,7 +261,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 14 2012 22:28:32 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jun 14 2012 22:50:36 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

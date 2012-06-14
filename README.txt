@@ -38,6 +38,7 @@ FEATURES
 
 
 INSTALLATION
+
 Download Mozzi and unzip it. It will probably have a name like
 "sensorium-Mozzi-2bee818". Rename the unzipped folder "Mozzi".
 Then, following the instructions from the Arduino libraries page:

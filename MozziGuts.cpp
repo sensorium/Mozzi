@@ -32,6 +32,8 @@
 // Ideally we'd use Timer0 for control because it has lowest priority, but Arduino uses
 // it for time and delay functions, so we use Timer 2 for control and hope it won't
 // interfere with the audio interrupt.
+// TODO: Timer0 is messed up anyway, it seems, so maybe it's better to
+// use it for control and leave Timer2 available for other things?
 
 
 /** @ingroup core

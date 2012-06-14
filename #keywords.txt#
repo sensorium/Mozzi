@@ -16,7 +16,7 @@ mtof	KEYWORD2
 xorshift96	KEYWORD2
 setupFastADC	KEYWORD2
 
-LowPassFilter	KEYWORD1
+LowPassFilter	 KEYWORD1
 setCutoffFreq	KEYWORD2
 setResonance	KEYWORD2
 next	KEYWORD2

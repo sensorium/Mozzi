@@ -57,7 +57,7 @@ to with a sound program like Audacity. Try some examples. They are in your
 File > Examples > Mozzi menu.
 
 
-USING CUTTLEFISH
+USING MOZZI
 
 Here's a template for an empty Mozzi sketch:
 

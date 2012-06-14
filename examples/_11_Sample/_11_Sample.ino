@@ -11,8 +11,8 @@
  */
 
 #include <MozziGuts.h>
-#include <Sample.h> // Samplelator template
-#include <tables/bamboo1_1024_int8.h> // sine table for Samplelator
+#include <Sample.h> // Sample template
+#include <tables/bamboo1_1024_int8.h> // table for Sample
 #include <EventDelay.h>
 
 #define CONTROL_RATE 64

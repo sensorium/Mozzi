@@ -62,7 +62,7 @@ public:
 	/** Constructor.
 	@param TABLE_NAME the name of the array the Oscil will be using. This
 	can be found in the table ".h" file if you are using a table made for
-	Mozzi by the rawtomozzi.py python script in Mozzi's mozzi py
+	Mozzi by the raw2mozzi.py python script in Mozzi's python
 	folder.*/
 	Oscil(prog_char * TABLE_NAME):table(TABLE_NAME)
 	{}

@@ -63,7 +63,7 @@ public:
 	/** Constructor.
 	@param TABLE_NAME the name of the array the Sample will be using. This
 	can be found in the table ".h" file if you are using a table made for
-	Mozzi by the rawtomozzi.py python script in Mozzi's mozzi py
+	Mozzi by the raw2mozzi.py python script in Mozzi's python
 	folder.*/
 	Sample(prog_char * TABLE_NAME):table(TABLE_NAME)
 	{}
@@ -76,6 +76,15 @@ public:
 	void start()
 	{
 		phase_fractional = 0;
+	}
+
+	/** Sets the phase (the playhead) to an offset position.
+	@param offset position in samples.
+	*/
+	inline
+	void start(unsigned int offset)
+	{
+		phase_fractional = (unsigned long) offset<<SAMPLE_F_BITS;
 	}
 
 

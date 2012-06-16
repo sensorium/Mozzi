@@ -18,7 +18,7 @@
 #include <Oscil.h>
 #include <tables/cos8192_int8.h>
 #include <tables/square_no_alias512_int8.h>
-#include <utils.c> // for mtof
+#include <utils.h> // for mtof
 
 const unsigned char CONTROL_RATE = 128; // powers of 2 please, default is 64 Hz
 

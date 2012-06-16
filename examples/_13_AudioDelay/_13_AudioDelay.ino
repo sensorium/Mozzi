@@ -14,7 +14,7 @@
 #include <tables/triangle_analogue512_int8.h> // wavetable
 #include <tables/cos8192_int8.h> // wavetable
 #include <AudioDelay.h>
-#include <utils.c> // for mtof
+#include <utils.h> // for mtof
 
 #define CONTROL_RATE 256 // powers of 2 please
 

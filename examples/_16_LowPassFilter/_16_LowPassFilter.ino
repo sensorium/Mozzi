@@ -14,7 +14,7 @@
 #include <tables/chum9_int8.h> // recorded audio wavetable
 #include <tables/cos8192_int8.h> // for filter modulation
 #include <LowPassFilter.h>
-#include <utils.c> // for xorshift96() random number generator
+#include <utils.h> // for xorshift96() random number generator
 
 #define CONTROL_RATE 64 // powers of 2 please
 

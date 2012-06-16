@@ -18,7 +18,7 @@
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/cos8192_int8.h> // table for Oscils to play
-#include <utils.c> // for mtof
+#include <utils.h> // for mtof
 
 #define CONTROL_RATE 2048 // powers of 2 please
 

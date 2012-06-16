@@ -16,7 +16,6 @@
 #include <Oscil.h> // oscillator template
 #include <tables/triangle_warm8192_int8.h> // triangle table for oscillator
 #include <utils.h>
-#include <utils.c>
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable)
 Oscil <TRIANGLE_WARM8192_NUM_CELLS, AUDIO_RATE> aTriangle(TRIANGLE_WARM8192_DATA);

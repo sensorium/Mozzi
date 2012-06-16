@@ -28,9 +28,9 @@ Set pin 13 low for testing timing with an oscilloscope.*/
 float mtof(float x);
 unsigned long xorshift96();
 
-byte _mod(byte n, byte d);
-byte _div(byte n, byte d);
-byte _rnd(byte min, byte max);
+byte byteMod(byte n, byte d);
+byte byteDiv(byte n, byte d);
+byte byteRnd(byte min, byte max);
 
 void setupFastADC();
 

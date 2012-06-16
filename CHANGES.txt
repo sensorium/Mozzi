@@ -1,0 +1,7 @@
+Mozzi sound synthesis library for Arduino
+
+CHANGES
+
+Version 0.01.1
+
+- Changed utils.c to utils.cpp and changed all examples from #include utils.c to #include utils.h.

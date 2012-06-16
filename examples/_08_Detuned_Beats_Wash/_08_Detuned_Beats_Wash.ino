@@ -15,7 +15,7 @@
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/cos8192_int8.h>
-#include <utils.c> // for mtof and xorshift96() fastish random number generator
+#include <utils.h> // for mtof and xorshift96() fastish random number generator
 
 // harmonics
 Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos1(COS8192_DATA);

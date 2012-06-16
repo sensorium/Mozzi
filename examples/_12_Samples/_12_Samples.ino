@@ -18,7 +18,7 @@
 #include <tables/bamboo2_1024_int8.h> // wavetable data
 #include <tables/bamboo3_2048_int8.h> // wavetable data
 #include <EventDelay.h>
-#include <utils.c> // for xorshift96() random number generator
+#include <utils.h> // for xorshift96() random number generator
 
 #define CONTROL_RATE 64
 

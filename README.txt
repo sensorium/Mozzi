@@ -1,4 +1,5 @@
 README for Mozzi, a sound synthesis library for Arduino.
+Version 0.01.1
 Tim Barrass 2010-12
 
 
@@ -96,6 +97,8 @@ Also, feel free to submit any issues on the GitHub Mozzi site.
 
 Share code snippets:
 (https://github.com/sensorium/Mozzi/wiki/Code-Snippets-to-Share)
+
+Check for code and usage changes in CHANGES.txt.
 
 
 CAVEATS

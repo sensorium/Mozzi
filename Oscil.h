@@ -76,6 +76,9 @@ public:
 	{}
 
 
+	/** Change the sound table which will be played by the Oscil.
+	@param TABLE_NAME is the name of the array in the table ".h" file you're using.
+	*/
 	void setTable(prog_char * TABLE_NAME){
 		table = TABLE_NAME;
 	}

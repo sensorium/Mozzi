@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Mozzi: Welcome</title>
+<title>Mozzi: tables/halfsin256_uint8.h Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -48,10 +48,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </script>
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
-      <li><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -68,6 +68,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           </span>
         </div>
       </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
     </ul>
   </div>
 </div>
@@ -87,24 +92,37 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Welcome </div>  </div>
+<div class="title">tables/halfsin256_uint8.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The latest version of Mozzi and this documentation are at the <a href="http://sensorium.github.com/Mozzi/">Mozzi home page.</a></p>
-<p>Here's a brief description of each section of this documentation:</p>
-<h2><a class="anchor" id="Modules"></a>
-Modules</h2>
-<p>Mozzi core definitions and functions, which are used in any Mozzi sketch.</p>
-<p>Utility functions which are generally useful.</p>
-<h2><a class="anchor" id="Classes"></a>
-Classes</h2>
-<p>The Classes used to generate control and audio signals.</p>
-<h2><a class="anchor" id="Files"></a>
-Files</h2>
-<p>Files lists ready-to-use wave tables which are in the Mozzi/tables folder.</p>
-<p>You can also convert your own sounds to tables with a script called <a class="el" href="raw2mozzi_8py_source.html">raw2mozzi.py</a>, in Mozzi/python.</p>
-<p>Read the <a class="el" href="raw2mozzi_8py_source.html">raw2mozzi.py</a> file for instructions. </p>
-</div></div><!-- contents -->
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef HALFSIN256_H_</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define HALFSIN256_H_</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span> 
+<a name="l00004"></a>00004 <span class="preprocessor">#include &quot;Arduino.h&quot;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;avr/pgmspace.h&gt;</span>
+<a name="l00006"></a>00006  
+<a name="l00007"></a>00007 <span class="preprocessor">#define HALFSIN256_NUM_TABLE_CELLS 256</span>
+<a name="l00008"></a>00008 <span class="preprocessor"></span><span class="preprocessor">#define HALFSIN256_SAMPLERATE 256</span>
+<a name="l00009"></a>00009 <span class="preprocessor"></span> 
+<a name="l00010"></a>00010 prog_char HALFSIN256_DATA [] PROGMEM = {0, 3, 6, 9, 13, 16, 19, 22, 25, 28, 31,
+<a name="l00011"></a>00011 34, 38, 41, 44, 47, 50, 53, 56, 59, 62, 65, 68, 71, 74, 77, 80, 83, 86, 89, 92,
+<a name="l00012"></a>00012 95, 98, 101, 104, 107, 109, 112, 115, 118, 121, 123, 126, 129, 132, 134, 137,
+<a name="l00013"></a>00013 140, 142, 145, 147, 150, 152, 155, 157, 160, 162, 165, 167, 170, 172, 174, 177,
+<a name="l00014"></a>00014 179, 181, 183, 185, 188, 190, 192, 194, 196, 198, 200, 202, 204, 206, 207, 209,
+<a name="l00015"></a>00015 211, 213, 215, 216, 218, 220, 221, 223, 224, 226, 227, 229, 230, 231, 233, 234,
+<a name="l00016"></a>00016 235, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 248, 249, 250,
+<a name="l00017"></a>00017 250, 251, 252, 252, 253, 253, 254, 254, 254, 255, 255, 255, 256, 256, 256, 256,
+<a name="l00018"></a>00018 256, 256, 256, 256, 256, 256, 256, 255, 255, 255, 254, 254, 254, 253, 253, 252,
+<a name="l00019"></a>00019 252, 251, 250, 250, 249, 248, 248, 247, 246, 245, 244, 243, 242, 241, 240, 239,
+<a name="l00020"></a>00020 238, 237, 235, 234, 233, 231, 230, 229, 227, 226, 224, 223, 221, 220, 218, 216,
+<a name="l00021"></a>00021 215, 213, 211, 209, 207, 206, 204, 202, 200, 198, 196, 194, 192, 190, 188, 185,
+<a name="l00022"></a>00022 183, 181, 179, 177, 174, 172, 170, 167, 165, 162, 160, 157, 155, 152, 150, 147,
+<a name="l00023"></a>00023 145, 142, 140, 137, 134, 132, 129, 126, 123, 121, 118, 115, 112, 109, 107, 104,
+<a name="l00024"></a>00024 101, 98, 95, 92, 89, 86, 83, 80, 77, 74, 71, 68, 65, 62, 59, 56, 53, 50, 47, 44,
+<a name="l00025"></a>00025 41, 38, 34, 31, 28, 25, 22, 19, 16, 13, 9, 6, 3, };
+<a name="l00026"></a>00026  
+<a name="l00027"></a>00027 <span class="preprocessor"> #endif </span><span class="comment">/* HALFSIN256_H_ */</span>
+</pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>

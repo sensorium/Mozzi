@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01</span>
+   &#160;<span id="projectnumber">alpha 0.01.1</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -112,9 +112,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <tr><td class="indexkey"><b>Oscil.h</b> <a href="_oscil_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey"><b>Sample.h</b> <a href="_sample_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey"><b>Smooth.h</b> <a href="_smooth_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
-  <tr><td class="indexkey"><b>utils.c</b> <a href="utils_8c_source.html">[code]</a></td><td class="indexvalue"></td></tr>
+  <tr><td class="indexkey"><b>utils.cpp</b> <a href="utils_8cpp_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey"><b>utils.h</b> <a href="utils_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey">python/<b>raw2mozzi.py</b> <a href="raw2mozzi_8py_source.html">[code]</a></td><td class="indexvalue"></td></tr>
+  <tr><td class="indexkey">python/<b>raw_float_to_arduino_uint8.py</b> <a href="raw__float__to__arduino__uint8_8py_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey">tables/<b>bamboo1_1024_int8.h</b> <a href="bamboo1__1024__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey">tables/<b>bamboo2_1024_int8.h</b> <a href="bamboo2__1024__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey">tables/<b>bamboo3_2048_int8.h</b> <a href="bamboo3__2048__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
@@ -123,16 +124,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <tr><td class="indexkey">tables/<b>chum9_int8.h</b> <a href="chum9__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey">tables/<b>cos8192_int8.h</b> <a href="cos8192__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey">tables/<b>envelop2048_uint8.h</b> <a href="envelop2048__uint8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
+  <tr><td class="indexkey">tables/<b>halfsin256_uint8.h</b> <a href="halfsin256__uint8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey">tables/<b>noise_static_1_16384_int8.h</b> <a href="noise__static__1__16384__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey">tables/<b>phasor256_int8.h</b> <a href="phasor256__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey">tables/<b>phasor256_uint8.h</b> <a href="phasor256__uint8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
-  <tr><td class="indexkey">tables/<b>phasor8192_int8.h</b> <a href="phasor8192__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
-  <tr><td class="indexkey">tables/<b>phasor8192_uint8.h</b> <a href="phasor8192__uint8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey">tables/<b>pinknoise8192_int8.h</b> <a href="pinknoise8192__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey">tables/<b>saw256_int8.h</b> <a href="saw256__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey">tables/<b>saw512_int8.h</b> <a href="saw512__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey">tables/<b>saw_analogue512_int8.h</b> <a href="saw__analogue512__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
-  <tr><td class="indexkey">tables/<b>saw_warm256_int8.h</b> <a href="saw__warm256__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey">tables/<b>sin1024_int8.h</b> <a href="sin1024__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey">tables/<b>sin16384_int8.h</b> <a href="sin16384__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey">tables/<b>sin2048_int8.h</b> <a href="sin2048__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
@@ -145,14 +144,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <tr><td class="indexkey">tables/<b>square_no_alias512_int8.h</b> <a href="square__no__alias512__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey">tables/<b>triangle_analogue512_int8.h</b> <a href="triangle__analogue512__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey">tables/<b>triangle_warm8192_int8.h</b> <a href="triangle__warm8192__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
-  <tr><td class="indexkey">tables/<b>whitenoise1024_int8.h</b> <a href="whitenoise1024__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey">tables/<b>whitenoise8192_int8.h</b> <a href="whitenoise8192__int8_8h_source.html">[code]</a></td><td class="indexvalue"></td></tr>
 </table>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 14 2012 22:50:36 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jun 17 2012 22:56:16 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

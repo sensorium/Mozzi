@@ -69,6 +69,18 @@ public:
 	{}
 
 
+
+	/** Constructor.
+	Declare a Sample with template TABLE_NUM_CELLS and UPDATE_RATE parameters, without specifying a particular wave table for it to play.
+	The table can be set or changed on the fly with setTable().
+	*/
+	Sample()
+	{}
+
+
+	/** Change the sound table which will be played by the Sample.
+	@param TABLE_NAME is the name of the array in the table ".h" file you're using.
+	*/
 	void setTable(prog_char * TABLE_NAME){
 		table = TABLE_NAME;
 	}

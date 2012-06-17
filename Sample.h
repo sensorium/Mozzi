@@ -69,6 +69,10 @@ public:
 	{}
 
 
+	void setTable(prog_char * TABLE_NAME){
+		table = TABLE_NAME;
+	}
+
 
 	/** Resets the phase (the playhead) to the beginning of the table.
 	*/
@@ -77,6 +81,7 @@ public:
 	{
 		phase_fractional = 0;
 	}
+
 
 	/** Sets the phase (the playhead) to an offset position.
 	@param offset position in samples.

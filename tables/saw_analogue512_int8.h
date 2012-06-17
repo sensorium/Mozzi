@@ -1,10 +1,14 @@
+#ifndef SAW_ANALOGUE512_INT8_H_
+#define SAW_ANALOGUE512_INT8_H_
+
 #include "Arduino.h"
 #include <avr/pgmspace.h>
- 
-unsigned int saw_analogue512_LUTsize=512; 
-unsigned int saw_analogue512_samplerate=512; 
- 
-prog_char saw_analogue512_data [] PROGMEM = {23, 68, 102, 119, 120, 111, 100,
+
+#define SAW_ANALOGUE512_NUM_CELLS 512
+#define SAW_ANALOGUE512_SAMPLERATE 512
+
+prog_char SAW_ANALOGUE512_DATA [] PROGMEM =
+{23, 68, 102, 119, 120, 111, 100,
 92, 91, 95, 101, 106, 106, 102, 97, 93, 92, 94, 97, 100, 100, 97, 94, 91, 90,
 91, 93, 95, 95, 93, 91, 89, 88, 88, 90, 91, 91, 90, 87, 86, 85, 85, 86, 87, 87,
 86, 84, 82, 82, 82, 83, 83, 83, 82, 81, 79, 78, 78, 79, 80, 80, 79, 77, 76, 75,
@@ -33,3 +37,5 @@ prog_char saw_analogue512_data [] PROGMEM = {23, 68, 102, 119, 120, 111, 100,
 -71, -73, -73, -73, -73, -72, -72, -72, -74, -75, -76, -76, -75, -74, -74, -75,
 -76, -78, -79, -79, -78, -77, -76, -76, -78, -80, -82, -82, -80, -78, -77, -78,
 -80, -84, -86, -86, -83, -79, -76, -77, -82, -89, -95, -95, -83, -59, -22, };
+
+#endif	/* SAW_ANALOGUE512_INT8_H_ */

@@ -68,6 +68,19 @@ public:
 	{}
 
 
+	/** Constructor.
+	Declare an Oscil with template TABLE_NUM_CELLS and UPDATE_RATE parameters, without specifying a particular wave table for it to play.
+	The table can be set or changed on the fly with setTable().
+	*/
+	Oscil()
+	{}
+
+
+	void setTable(prog_char * TABLE_NAME){
+		table = TABLE_NAME;
+	}
+
+
 	/** Updates the phase according to the current frequency
 	and returns the sample at the new phase position.
 	@return the next sample.

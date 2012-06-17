@@ -92,6 +92,9 @@ and online. (http://sensorium.github.com/Mozzi/doc/html/index.html)
 There are hints and tips and more help on the Mozzi wiki.
 (https://github.com/sensorium/Mozzi/wiki/Hints-and-Tips)
 
+Start or look up a topic on the Mozzi users forum.
+(https://groups.google.com/forum/#!forum/mozzi-users)
+
 Also, feel free to submit any issues on the GitHub Mozzi site.
 (https://github.com/sensorium/Mozzi/issues)
 

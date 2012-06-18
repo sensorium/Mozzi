@@ -11,6 +11,7 @@ var searchData=
   ['setfeedbackgain',['setFeedbackGain',['../class_audio_delay_feedback.html#a2493a9379eb1127a9bf2d238e45e7325',1,'AudioDelayFeedback']]],
   ['setfreq',['setFreq',['../class_oscil.html#a3f7e26147e99bc1c60d33a1312005313',1,'Oscil::setFreq(unsigned int frequency)'],['../class_oscil.html#aa342e74f8e73edda0b0f042770e3fba4',1,'Oscil::setFreq(float frequency)'],['../class_sample.html#ad6aa28642c1e219d24144501c7cfcabc',1,'Sample::setFreq(unsigned int frequency)'],['../class_sample.html#a11a7948a655bea79ddd67059c2186816',1,'Sample::setFreq(float frequency)']]],
   ['setfreq_5fn8',['setFreq_n8',['../class_oscil.html#a84445f04aa7850912ec28b704252fc3e',1,'Oscil::setFreq_n8()'],['../class_sample.html#ac98d74f6b80f514e6114204bfa56d351',1,'Sample::setFreq_n8()']]],
+  ['setphase',['setPhase',['../class_oscil.html#ab7b740eec56740426a47508562ed4dd5',1,'Oscil']]],
   ['setphaseinc',['setPhaseInc',['../class_oscil.html#a2ff9bfcc57e07bf0df2ed7db186ecff7',1,'Oscil::setPhaseInc()'],['../class_sample.html#a95735f0b10eb0fa50402c47d0cd5d871',1,'Sample::setPhaseInc()']]],
   ['setresonance',['setResonance',['../class_low_pass_filter.html#aa804e9162a1b855380c6f48d00de2c32',1,'LowPassFilter']]],
   ['setsmoothness',['setSmoothness',['../class_smooth.html#aac44bbf7a9bc6b9bae80eecc1be6e188',1,'Smooth']]],

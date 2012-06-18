@@ -95,7 +95,7 @@ public:
 	}
 
 
-	/** Sets the phase (the playhead) to an offset position.
+	/** Sets the phase (the playhead) to an offset position.  This does the same thing as Oscil::setPhase(phase).  Just different ways of thinking about samples and oscillators.
 	@param offset position in samples.
 	*/
 	inline

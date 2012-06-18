@@ -76,14 +76,6 @@ public:
 	{}
 
 
-	/** Change the sound table which will be played by the Oscil.
-	@param TABLE_NAME is the name of the array in the table ".h" file you're using.
-	*/
-	void setTable(prog_char * TABLE_NAME){
-		table = TABLE_NAME;
-	}
-
-
 	/** Updates the phase according to the current frequency
 	and returns the sample at the new phase position.
 	@return the next sample.
@@ -93,6 +85,25 @@ public:
 	{
 		incrementPhase();
 		return readTable();
+	}
+
+
+	/** Change the sound table which will be played by the Oscil.
+	@param TABLE_NAME is the name of the array in the table ".h" file you're using.
+	*/
+	void setTable(prog_char * TABLE_NAME){
+		table = TABLE_NAME;
+	}
+
+
+	/** Set the phase of the Oscil.  This does the same thing as Sample::start(offset).  Just different ways of thinking about oscillators and samples.
+	@param phase a position in the wavetable.
+	*/
+	void setPhase(unsigned int phase) {
+		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+		{
+			phase_fractional = (unsigned long)phase << F_BITS;
+		}
 	}
 
 

@@ -26,6 +26,7 @@ Set pin 13 low for testing timing with an oscilloscope.*/
 #endif
 
 float mtof(float x);
+unsigned char randomMidi();
 unsigned long xorshift96();
 
 byte byteMod(byte n, byte d);

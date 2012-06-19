@@ -138,14 +138,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00056"></a>00056                 <span class="keyword">inline</span>
 <a name="l00057"></a><a class="code" href="class_ead.html#a6bae0e92e6709c3fcd31fccd41212bac">00057</a>                 <span class="keywordtype">void</span> <a class="code" href="class_ead.html#a6bae0e92e6709c3fcd31fccd41212bac" title="Set the attack time in milliseconds.">setAttack</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> attack_ms)
 <a name="l00058"></a>00058                 {
-<a name="l00059"></a>00059                                 Q8n8attack = Q8n8_float2fix(millisToOneMinusRealPole(attack_ms));
+<a name="l00059"></a>00059                                 Q8n8attack = <a class="code" href="group__fixed_math.html#gad7b8a7cde449a9f6a3281abf7c158031" title="Convert float to Q8n8 fix.">Q8n8_float2fix</a>(millisToOneMinusRealPole(attack_ms));
 <a name="l00060"></a>00060                 }
 <a name="l00061"></a>00061 
 <a name="l00062"></a>00062 
 <a name="l00066"></a>00066                 <span class="keyword">inline</span>
 <a name="l00067"></a><a class="code" href="class_ead.html#aa99e6dc2d5448b4de0764c6208e5c2fc">00067</a>                 <span class="keywordtype">void</span> <a class="code" href="class_ead.html#aa99e6dc2d5448b4de0764c6208e5c2fc" title="Set the decay time in milliseconds.">setDecay</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> decay_ms)
 <a name="l00068"></a>00068                 {
-<a name="l00069"></a>00069                                 Q8n8decay = Q8n8_float2fix(millisToOneMinusRealPole(decay_ms));
+<a name="l00069"></a>00069                                 Q8n8decay = <a class="code" href="group__fixed_math.html#gad7b8a7cde449a9f6a3281abf7c158031" title="Convert float to Q8n8 fix.">Q8n8_float2fix</a>(millisToOneMinusRealPole(decay_ms));
 <a name="l00070"></a>00070                 }
 <a name="l00071"></a>00071 
 <a name="l00072"></a>00072 
@@ -173,10 +173,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00104"></a>00104                                 {
 <a name="l00105"></a>00105                                 <span class="keywordflow">case</span> <span class="keyword">true</span>: <span class="comment">/* attack phase */</span>
 <a name="l00106"></a>00106                                                 <span class="comment">// signed multiply A(a1,b1) * A(a2,b2)=A(a1 +a2 +1,b1 +b2)</span>
-<a name="l00107"></a>00107                                                 Q8n24state += ((Q8n24_FIX1 - Q8n24state) * Q8n8attack) &gt;&gt; 8; <span class="comment">// Q8n24, shifts all back into n24</span>
-<a name="l00108"></a>00108                                                 <span class="keywordflow">if</span> (Q8n24state &gt;= Q8n24_FIX1-256)
+<a name="l00107"></a>00107                                                 Q8n24state += ((<a class="code" href="group__fixed_math.html#ga5083b2bbeeb968258e2da31d3af26a25" title="1 in Q8n24 format">Q8n24_FIX1</a> - Q8n24state) * Q8n8attack) &gt;&gt; 8; <span class="comment">// Q8n24, shifts all back into n24</span>
+<a name="l00108"></a>00108                                                 <span class="keywordflow">if</span> (Q8n24state &gt;= <a class="code" href="group__fixed_math.html#ga5083b2bbeeb968258e2da31d3af26a25" title="1 in Q8n24 format">Q8n24_FIX1</a>-256)
 <a name="l00109"></a>00109                                                 {
-<a name="l00110"></a>00110                                                                 Q8n24state = Q8n24_FIX1-256;
+<a name="l00110"></a>00110                                                                 Q8n24state = <a class="code" href="group__fixed_math.html#ga5083b2bbeeb968258e2da31d3af26a25" title="1 in Q8n24 format">Q8n24_FIX1</a>-256;
 <a name="l00111"></a>00111                                                                 attack_phase = <span class="keyword">false</span>;
 <a name="l00112"></a>00112                                                 }
 <a name="l00113"></a>00113                                                 <span class="keywordflow">break</span>;
@@ -184,14 +184,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00115"></a>00115                                                 Q8n24state -= (Q8n24state * Q8n8decay)&gt;&gt;8;
 <a name="l00116"></a>00116                                                 <span class="keywordflow">break</span>;
 <a name="l00117"></a>00117                                 }
-<a name="l00118"></a>00118                                 <span class="keywordflow">return</span> Q8n24_to_Q0n8(Q8n24state);
+<a name="l00118"></a>00118                                 <span class="keywordflow">return</span> <a class="code" href="group__fixed_math.html#gae8b10847d6104a817b5e042c8b9ed5c7" title="Convert Q8n24 fixed to Q0n8 unsigned char.">Q8n24_to_Q0n8</a>(Q8n24state);
 <a name="l00119"></a>00119                 }
 <a name="l00120"></a>00120 
 <a name="l00121"></a>00121 <span class="keyword">private</span>:
 <a name="l00122"></a>00122 
-<a name="l00123"></a>00123                 Q8n8 Q8n8attack;
-<a name="l00124"></a>00124                 Q8n8 Q8n8decay;
-<a name="l00125"></a>00125                 Q8n24 Q8n24state;
+<a name="l00123"></a>00123                 <a class="code" href="group__fixed_math.html#ga62375fc44e52be9958e3bdaf1cdd86d3" title="unsigned fractional number using 8 integer bits and 8 fractional bits, represents 0 to 255...">Q8n8</a> Q8n8attack;
+<a name="l00124"></a>00124                 <a class="code" href="group__fixed_math.html#ga62375fc44e52be9958e3bdaf1cdd86d3" title="unsigned fractional number using 8 integer bits and 8 fractional bits, represents 0 to 255...">Q8n8</a> Q8n8decay;
+<a name="l00125"></a>00125                 <a class="code" href="group__fixed_math.html#ga5fec2c6ee5043a271c9476ef16d5d084" title="signed fractional number using 8 integer bits and 24 fractional bits, represents 0 to 255...">Q8n24</a> Q8n24state;
 <a name="l00126"></a>00126                 <span class="keywordtype">bool</span> attack_phase;
 <a name="l00127"></a>00127                 <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> UPDATE_RATE;
 <a name="l00128"></a>00128 
@@ -226,7 +226,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 19 2012 00:26:48 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 20 2012 00:05:33 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

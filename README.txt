@@ -67,7 +67,7 @@ Here's a template for an empty Mozzi sketch:
 	#define CONTROL_RATE 64 // or some other power of 2
 
 	void setup() {
-		StartMozzi(CONTROL_RATE);
+		startMozzi(CONTROL_RATE);
 	}
 
 	void loop() {

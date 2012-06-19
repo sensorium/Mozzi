@@ -106,6 +106,8 @@ Defines</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:gafacb8849f96270644ea79184fde7db37"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gafacb8849f96270644ea79184fde7db37">mtof</a> (float midival)</td></tr>
 <tr class="memdesc:gafacb8849f96270644ea79184fde7db37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts midi note number to frequency.  <a href="#gafacb8849f96270644ea79184fde7db37"></a><br/></td></tr>
+<tr class="memitem:ga9884e17c95a10e988e90d60c9f3aab2b"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga9884e17c95a10e988e90d60c9f3aab2b">randomMidi</a> ()</td></tr>
+<tr class="memdesc:ga9884e17c95a10e988e90d60c9f3aab2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a random number in the range for midi notes.  <a href="#ga9884e17c95a10e988e90d60c9f3aab2b"></a><br/></td></tr>
 <tr class="memitem:gaf2deee83847f1fcee2c859d97bd072f6"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6">xorshift96</a> ()</td></tr>
 <tr class="memdesc:gaf2deee83847f1fcee2c859d97bd072f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Random number generator.  <a href="#gaf2deee83847f1fcee2c859d97bd072f6"></a><br/></td></tr>
 <tr class="memitem:gac8bcacf360d020b9b8ab0d96b8528b13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gac8bcacf360d020b9b8ab0d96b8528b13">setupFastADC</a> ()</td></tr>
@@ -192,6 +194,27 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga9884e17c95a10e988e90d60c9f3aab2b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char <a class="el" href="group__util.html#ga9884e17c95a10e988e90d60c9f3aab2b">randomMidi</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Generates a random number in the range for midi notes. </p>
+<dl class="section return"><dt>Returns:</dt><dd>a random value between 0 and 127 inclusive </dd></dl>
+
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00018">18</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="gac8bcacf360d020b9b8ab0d96b8528b13"></a>
 <div class="memitem">
 <div class="memproto">
@@ -209,7 +232,7 @@ Functions</h2></td></tr>
 <p>Make analogRead() faster than the standard Arduino version. </p>
 <p>Put this in setup() if you intend to use analogRead() with Mozzi, to avoid glitches. See: <a href="http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11">http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11</a> </p>
 
-<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00088">88</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00096">96</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -231,7 +254,7 @@ Functions</h2></td></tr>
 <p>A faster replacement for Arduino's random function, which is too slow to use with Mozzi. </p>
 <dl class="section return"><dt>Returns:</dt><dd>a random 32 bit integer. </dd></dl>
 
-<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00022">22</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00030">30</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -239,7 +262,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 19 2012 00:26:50 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 20 2012 00:05:33 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

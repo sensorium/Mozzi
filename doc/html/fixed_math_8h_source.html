@@ -98,289 +98,291 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef FIXEDMATH_H_</span>
 <a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define FIXEDMATH_H_</span>
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
-<a name="l00004"></a>00004 
-<a name="l00005"></a>00005 <span class="comment">// types</span>
-<a name="l00006"></a>00006 <span class="preprocessor">#define Q0n7 char</span>
-<a name="l00007"></a>00007 <span class="preprocessor"></span><span class="preprocessor">#define Q0n8 unsigned char</span>
-<a name="l00008"></a>00008 <span class="preprocessor"></span><span class="preprocessor">#define Q7n8 int</span>
-<a name="l00009"></a>00009 <span class="preprocessor"></span><span class="preprocessor">#define Q8n8 unsigned int</span>
-<a name="l00010"></a>00010 <span class="preprocessor"></span><span class="preprocessor">#define Q1n14 int</span>
-<a name="l00011"></a>00011 <span class="preprocessor"></span><span class="preprocessor">#define Q1n15 unsigned int</span>
-<a name="l00012"></a>00012 <span class="preprocessor"></span><span class="preprocessor">#define Q8n24 unsigned long</span>
-<a name="l00013"></a>00013 <span class="preprocessor"></span>
-<a name="l00014"></a>00014 
-<a name="l00015"></a>00015 <span class="comment">// macros to save runtime calculations for representations of 1</span>
-<a name="l00016"></a>00016 <span class="preprocessor">#define Q7n8_FIX1 ((Q0n7) 127)</span>
-<a name="l00017"></a>00017 <span class="preprocessor"></span><span class="preprocessor">#define Q8n8_FIX1 ((Q8n8) 256)</span>
-<a name="l00018"></a>00018 <span class="preprocessor"></span><span class="preprocessor">#define Q1n14_FIX1 ((Q1n14) 16384)</span>
-<a name="l00019"></a>00019 <span class="preprocessor"></span><span class="preprocessor">#define Q1n15_FIX1 ((Q1n15) 32768)</span>
-<a name="l00020"></a>00020 <span class="preprocessor"></span><span class="preprocessor">#define Q8n24_FIX1 ((Q8n24) 16777216)</span>
-<a name="l00021"></a>00021 <span class="preprocessor"></span>
-<a name="l00022"></a>00022 <span class="preprocessor">#define low15bits ((Q1n15) 32767)</span>
-<a name="l00023"></a>00023 <span class="preprocessor"></span>
-<a name="l00024"></a>00024 <span class="comment">// Type conversions:</span>
-<a name="l00025"></a>00025 <span class="comment">/*</span>
-<a name="l00026"></a>00026 <span class="comment">Float to Q</span>
-<a name="l00027"></a>00027 <span class="comment"></span>
-<a name="l00028"></a>00028 <span class="comment">To convert a number from floating point to Qm.n format:</span>
-<a name="l00029"></a>00029 <span class="comment"></span>
-<a name="l00030"></a>00030 <span class="comment">  Multiply the floating point number by 2^n</span>
-<a name="l00031"></a>00031 <span class="comment">  Round to the nearest integer</span>
-<a name="l00032"></a>00032 <span class="comment"></span>
-<a name="l00033"></a>00033 <span class="comment">Q to float</span>
+<a name="l00010"></a>00010 <span class="comment">// types</span>
+<a name="l00011"></a><a class="code" href="group__fixed_math.html#ga5bc7bc305987974b29bcbc2c9c31bce2">00011</a> <span class="preprocessor">#define Q0n7 char                                               </span>
+<a name="l00012"></a><a class="code" href="group__fixed_math.html#ga375bc832b01f5b4beb9277bc5fad43a0">00012</a> <span class="preprocessor">#define Q0n8 unsigned char  </span>
+<a name="l00013"></a><a class="code" href="group__fixed_math.html#gaed42123f9769acaecc293836e0796e8f">00013</a> <span class="preprocessor">#define Q7n8 int                                                </span>
+<a name="l00014"></a><a class="code" href="group__fixed_math.html#ga62375fc44e52be9958e3bdaf1cdd86d3">00014</a> <span class="preprocessor">#define Q8n8 unsigned int        </span>
+<a name="l00015"></a><a class="code" href="group__fixed_math.html#gab039899891f524364336d99e783a3308">00015</a> <span class="preprocessor">#define Q1n14 int                                               </span>
+<a name="l00016"></a><a class="code" href="group__fixed_math.html#ga8ce7ff532d9c890892a38551479fb52a">00016</a> <span class="preprocessor">#define Q1n15 unsigned int      </span>
+<a name="l00017"></a><a class="code" href="group__fixed_math.html#ga5fec2c6ee5043a271c9476ef16d5d084">00017</a> <span class="preprocessor">#define Q8n24 unsigned long     </span>
+<a name="l00018"></a><a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3">00018</a> <span class="preprocessor">#define Q16n16 unsigned long    </span>
+<a name="l00020"></a>00020 <span class="preprocessor">// macros to save runtime calculations for representations of 1</span>
+<a name="l00021"></a><a class="code" href="group__fixed_math.html#ga42c55269acbc41ca1fbcbb7aea5e8767">00021</a> <span class="preprocessor"></span><span class="preprocessor">#define Q0n7_FIX1 ((Q0n7) 127)                                  </span>
+<a name="l00022"></a><a class="code" href="group__fixed_math.html#ga1a04e29b3420231fc54039caf460a88c">00022</a> <span class="preprocessor">#define Q7n8_FIX1 ((Q7n8) 256)                                  </span>
+<a name="l00023"></a><a class="code" href="group__fixed_math.html#ga00d3299412f5460cae3af8f0c58b2db1">00023</a> <span class="preprocessor">#define Q8n8_FIX1 ((Q8n8) 256)                                  </span>
+<a name="l00024"></a><a class="code" href="group__fixed_math.html#ga6f99802ebadd6b1b3ee707892e36cab9">00024</a> <span class="preprocessor">#define Q1n14_FIX1 ((Q1n14) 16384)                              </span>
+<a name="l00025"></a><a class="code" href="group__fixed_math.html#ga8124fb8d1bcb111532f22726dbf3e5cc">00025</a> <span class="preprocessor">#define Q1n15_FIX1 ((Q1n15) 32768)                              </span>
+<a name="l00026"></a><a class="code" href="group__fixed_math.html#ga5083b2bbeeb968258e2da31d3af26a25">00026</a> <span class="preprocessor">#define Q8n24_FIX1 ((Q8n24) 16777216)           </span>
+<a name="l00027"></a><a class="code" href="group__fixed_math.html#gaa4538a17e7e75b14a5826405ad06acef">00027</a> <span class="preprocessor">#define Q16n16_FIX1 ((Q16n16) 65536)                            </span>
+<a name="l00029"></a><a class="code" href="group__fixed_math.html#gac357561cf7360f82a264d90096d0126b">00029</a> <span class="preprocessor">#define low15bits ((Q1n15) 32767) </span>
+<a name="l00031"></a>00031 <span class="preprocessor">// Type conversions:</span>
+<a name="l00032"></a>00032 <span class="preprocessor"></span><span class="comment">/*</span>
+<a name="l00033"></a>00033 <span class="comment">Float to Q</span>
 <a name="l00034"></a>00034 <span class="comment"></span>
-<a name="l00035"></a>00035 <span class="comment">To convert a number from Qm.n format to floating point:</span>
+<a name="l00035"></a>00035 <span class="comment">To convert a number from floating point to Qm.n format:</span>
 <a name="l00036"></a>00036 <span class="comment"></span>
-<a name="l00037"></a>00037 <span class="comment">  Convert the number to floating point as if it were an integer</span>
-<a name="l00038"></a>00038 <span class="comment">  Multiply by 2^-n</span>
-<a name="l00039"></a>00039 <span class="comment">*/</span>
-<a name="l00040"></a>00040 <span class="preprocessor">#define Q7n8_char2fix(a) (((int)(a))&lt;&lt;8)                                                        </span>
-<a name="l00041"></a>00041 <span class="preprocessor">#define Q7n8_fix2char(a) ((signed char)((a)&gt;&gt;8))                                </span>
-<a name="l00042"></a>00042 <span class="preprocessor">#define Q7n8_float2fix(a) ((int)((a)*256.f))                                    </span>
-<a name="l00043"></a>00043 <span class="preprocessor">#define Q7n8_fix2float(a) ((float)(a)/256.f)                                    </span>
-<a name="l00045"></a>00045 <span class="preprocessor">#define Q8n8_uchar2fix(a) (((Q8n8)(a))&lt;&lt;8)                                      </span>
-<a name="l00046"></a>00046 <span class="preprocessor">#define Q8n8_fix2uchar(a) ((unsigned char)((a)&gt;&gt;8))             </span>
-<a name="l00047"></a>00047 <span class="preprocessor">#define Q8n8_float2fix(a) ((Q8n8)((a)*256.f))                                   </span>
-<a name="l00048"></a>00048 <span class="preprocessor">#define Q8n8_fix2float(a) ((float)(a)/256.f)                                    </span>
-<a name="l00050"></a>00050 <span class="preprocessor">#define Q0n7_to_Q1n14(a) (((Q1n14)(a))&lt;&lt;7)                      </span>
-<a name="l00051"></a>00051 <span class="preprocessor">#define Q1n14_to_Q0n7(a) ((Q0n7)((a)&gt;&gt;7))                                       </span>
-<a name="l00052"></a>00052 <span class="preprocessor">#define Q1n14_float2fix(a) ((Q1n14)((a)*32767.f))                               </span>
-<a name="l00053"></a>00053 <span class="preprocessor">#define Q1n14_fix2float(a) ((float)(a)/32767.f)                                 </span>
-<a name="l00055"></a>00055 <span class="preprocessor">#define Q0n8_to_Q1n15(a) (((Q1n15)(a))&lt;&lt;7)                      </span>
-<a name="l00056"></a>00056 <span class="preprocessor">#define Q1n15_to_Q0n8(a) ((Q0n8)((a)&gt;&gt;7))                                       </span>
-<a name="l00057"></a>00057 <span class="preprocessor">#define Q1n15_float2fix(a) ((Q1n15)((a)*32768.f))                               </span>
-<a name="l00058"></a>00058 <span class="preprocessor">#define Q1n15_fix2float(a) ((float)(a)*0.000030517578125f)      </span>
-<a name="l00060"></a>00060 <span class="preprocessor">#define Q0n8_to_Q8n24(a) (((Q8n24)(a))&lt;&lt;16)                     </span>
-<a name="l00061"></a>00061 <span class="preprocessor">#define Q8n24_to_Q0n8(a) ((Q0n8)((a)&gt;&gt;16))                                      </span>
-<a name="l00062"></a>00062 <span class="preprocessor">#define Q8n24_float2fix(a) ((Q8n24)((a)*16777216.f))                            </span>
-<a name="l00063"></a>00063 <span class="preprocessor">#define Q8n24_fix2float(a) ((float)(a)*0.000000059604645f)      </span>
-<a name="l00066"></a>00066 <span class="preprocessor">// Fast fixed point multiply</span>
-<a name="l00067"></a>00067 <span class="preprocessor"></span><span class="preprocessor">#define Q7n8_multfix(a,b)         \</span>
-<a name="l00068"></a>00068 <span class="preprocessor">({            \</span>
-<a name="l00069"></a>00069 <span class="preprocessor">int prod, val1=a, val2=b ;    \</span>
-<a name="l00070"></a>00070 <span class="preprocessor">__asm__ __volatile__ (    \</span>
-<a name="l00071"></a>00071 <span class="preprocessor">                &quot;muls %B1, %B2  \n\t&quot;   \</span>
-<a name="l00072"></a>00072 <span class="preprocessor">                &quot;mov %B0, r0 \n\t&quot;                 \</span>
-<a name="l00073"></a>00073 <span class="preprocessor">                &quot;mul %A1, %A2\n\t&quot;                 \</span>
-<a name="l00074"></a>00074 <span class="preprocessor">                &quot;mov %A0, r1 \n\t&quot;   \</span>
-<a name="l00075"></a>00075 <span class="preprocessor">                &quot;mulsu %B1, %A2 \n\t&quot;   \</span>
-<a name="l00076"></a>00076 <span class="preprocessor">                &quot;add %A0, r0  \n\t&quot;     \</span>
-<a name="l00077"></a>00077 <span class="preprocessor">                &quot;adc %B0, r1 \n\t&quot;     \</span>
-<a name="l00078"></a>00078 <span class="preprocessor">                &quot;mulsu %B2, %A1 \n\t&quot;   \</span>
-<a name="l00079"></a>00079 <span class="preprocessor">                &quot;add %A0, r0 \n\t&quot;     \</span>
-<a name="l00080"></a>00080 <span class="preprocessor">                &quot;adc %B0, r1  \n\t&quot;    \</span>
-<a name="l00081"></a>00081 <span class="preprocessor">                &quot;clr r1  \n\t&quot;                     \</span>
-<a name="l00082"></a>00082 <span class="preprocessor">                : &quot;=&amp;d&quot; (prod)     \</span>
-<a name="l00083"></a>00083 <span class="preprocessor">                : &quot;a&quot; (val1), &quot;a&quot; (val2)  \</span>
-<a name="l00084"></a>00084 <span class="preprocessor">                  );        \</span>
-<a name="l00085"></a>00085 <span class="preprocessor">  prod;        \</span>
-<a name="l00086"></a>00086 <span class="preprocessor">})</span>
-<a name="l00087"></a>00087 <span class="preprocessor"></span>
-<a name="l00088"></a>00088 <span class="comment">// based on:</span>
-<a name="l00089"></a>00089 <span class="comment">/*</span>
-<a name="l00090"></a>00090 <span class="comment">#define FMULS8(v1, v2)      \</span>
-<a name="l00091"></a>00091 <span class="comment">({            \</span>
-<a name="l00092"></a>00092 <span class="comment">  uint8_t res;        \</span>
-<a name="l00093"></a>00093 <span class="comment">  uint8_t val1 = v1;      \</span>
-<a name="l00094"></a>00094 <span class="comment">  uint8_t val2 = v2;      \</span>
-<a name="l00095"></a>00095 <span class="comment">  __asm__ __volatile__      \</span>
-<a name="l00096"></a>00096 <span class="comment">  (           \</span>
-<a name="l00097"></a>00097 <span class="comment">    &quot;fmuls $1, $2&quot;   &quot;\n\t&quot; \</span>
-<a name="l00098"></a>00098 <span class="comment">    &quot;mov $0, r1&quot;     &quot;\n\t&quot; \</span>
-<a name="l00099"></a>00099 <span class="comment">    &quot;clr r1&quot;     &quot;\n\t&quot; \</span>
-<a name="l00100"></a>00100 <span class="comment">    : &quot;=&amp;d&quot; (res)       \</span>
-<a name="l00101"></a>00101 <span class="comment">    : &quot;a&quot; (val1), &quot;a&quot; (val2)  \</span>
-<a name="l00102"></a>00102 <span class="comment">  );            \</span>
-<a name="l00103"></a>00103 <span class="comment">  res;          \</span>
-<a name="l00104"></a>00104 <span class="comment">}) */</span>
-<a name="l00105"></a>00105 <span class="comment">/*</span>
-<a name="l00106"></a>00106 <span class="comment">int divfix(int nn, int dd)</span>
-<a name="l00107"></a>00107 <span class="comment">begin</span>
-<a name="l00108"></a>00108 <span class="comment">  int x, d ;</span>
-<a name="l00109"></a>00109 <span class="comment">  signed char count, neg ;</span>
-<a name="l00110"></a>00110 <span class="comment">  count = 0;</span>
-<a name="l00111"></a>00111 <span class="comment">  neg = 0 ;</span>
-<a name="l00112"></a>00112 <span class="comment">  d = dd ;</span>
-<a name="l00113"></a>00113 <span class="comment"></span>
-<a name="l00114"></a>00114 <span class="comment">  // only works with + numbers</span>
-<a name="l00115"></a>00115 <span class="comment">  if (d &amp; 0x8000)</span>
-<a name="l00116"></a>00116 <span class="comment">  begin</span>
-<a name="l00117"></a>00117 <span class="comment">    neg = 1;</span>
-<a name="l00118"></a>00118 <span class="comment">    d = -d ;</span>
-<a name="l00119"></a>00119 <span class="comment">  end</span>
-<a name="l00120"></a>00120 <span class="comment"></span>
-<a name="l00121"></a>00121 <span class="comment">  // range reduction</span>
-<a name="l00122"></a>00122 <span class="comment">  while (d&gt;0x0100)</span>
-<a name="l00123"></a>00123 <span class="comment">  begin</span>
-<a name="l00124"></a>00124 <span class="comment">    --count ;</span>
-<a name="l00125"></a>00125 <span class="comment">    d &gt;&gt;= 1 ;</span>
-<a name="l00126"></a>00126 <span class="comment">  end</span>
-<a name="l00127"></a>00127 <span class="comment"></span>
-<a name="l00128"></a>00128 <span class="comment">  while (d&lt;0x0080)</span>
-<a name="l00129"></a>00129 <span class="comment">  begin</span>
-<a name="l00130"></a>00130 <span class="comment">    ++count ;</span>
-<a name="l00131"></a>00131 <span class="comment">    d &lt;&lt;= 1 ;</span>
-<a name="l00132"></a>00132 <span class="comment">  end</span>
-<a name="l00133"></a>00133 <span class="comment"></span>
-<a name="l00134"></a>00134 <span class="comment">  // Newton interation</span>
-<a name="l00135"></a>00135 <span class="comment">  x = 0x02ea - (d&lt;&lt;1) ;</span>
-<a name="l00136"></a>00136 <span class="comment">  x = multfix(x, 0x0200-multfix(d,x));</span>
-<a name="l00137"></a>00137 <span class="comment">  //x = multfix(x, 0x0200-multfix(d,x));</span>
-<a name="l00138"></a>00138 <span class="comment"></span>
-<a name="l00139"></a>00139 <span class="comment"></span>
-<a name="l00140"></a>00140 <span class="comment">  // range expansion</span>
-<a name="l00141"></a>00141 <span class="comment">  if (count&gt;0)  x = x&lt;&lt;count ;</span>
-<a name="l00142"></a>00142 <span class="comment">  else if (count&lt;0) x = x&gt;&gt;(-count) ;</span>
-<a name="l00143"></a>00143 <span class="comment"></span>
-<a name="l00144"></a>00144 <span class="comment">  // fix sign</span>
-<a name="l00145"></a>00145 <span class="comment">  if (neg==1) x=-x;</span>
-<a name="l00146"></a>00146 <span class="comment"></span>
-<a name="l00147"></a>00147 <span class="comment">  //form ratio</span>
-<a name="l00148"></a>00148 <span class="comment">  x = multfix(x,nn) ;</span>
-<a name="l00149"></a>00149 <span class="comment"></span>
-<a name="l00150"></a>00150 <span class="comment">  return x ;</span>
-<a name="l00151"></a>00151 <span class="comment">end</span>
-<a name="l00152"></a>00152 <span class="comment"></span>
-<a name="l00153"></a>00153 <span class="comment">//========================================================</span>
-<a name="l00154"></a>00154 <span class="comment">int sqrtfix(int aa)</span>
-<a name="l00155"></a>00155 <span class="comment">begin</span>
-<a name="l00156"></a>00156 <span class="comment"></span>
-<a name="l00157"></a>00157 <span class="comment">  int a;</span>
-<a name="l00158"></a>00158 <span class="comment">  char nextbit, ahigh;</span>
-<a name="l00159"></a>00159 <span class="comment">  int root, p ;</span>
-<a name="l00160"></a>00160 <span class="comment">  a = aa;</span>
-<a name="l00161"></a>00161 <span class="comment">  ahigh = a&gt;&gt;8 ;</span>
-<a name="l00162"></a>00162 <span class="comment">  //</span>
-<a name="l00163"></a>00163 <span class="comment">  // range sort to get integer part and to</span>
-<a name="l00164"></a>00164 <span class="comment">  // check for weird bits near the top of the range</span>
-<a name="l00165"></a>00165 <span class="comment">  if (ahigh &gt;= 0x40)   //bigger than 64?</span>
-<a name="l00166"></a>00166 <span class="comment">  begin</span>
-<a name="l00167"></a>00167 <span class="comment">    if (a &gt; 0x7e8f)  //&gt;=126.562 = 11.25^2</span>
-<a name="l00168"></a>00168 <span class="comment">    begin</span>
-<a name="l00169"></a>00169 <span class="comment">    root = 0x0b40;  // 11</span>
-<a name="l00170"></a>00170 <span class="comment">    nextbit = 0x10 ;</span>
-<a name="l00171"></a>00171 <span class="comment">    end</span>
-<a name="l00172"></a>00172 <span class="comment">    else if (ahigh &gt;= 0x79)  //&gt;=121</span>
-<a name="l00173"></a>00173 <span class="comment">    begin</span>
-<a name="l00174"></a>00174 <span class="comment">    root = 0x0b00;  // 11</span>
-<a name="l00175"></a>00175 <span class="comment">    nextbit = 0x40 ;</span>
-<a name="l00176"></a>00176 <span class="comment">    end</span>
-<a name="l00177"></a>00177 <span class="comment">    else if (ahigh &gt;= 0x64)  //&gt;=100</span>
-<a name="l00178"></a>00178 <span class="comment">    begin</span>
-<a name="l00179"></a>00179 <span class="comment">    root = 0x0a00;  // 10</span>
-<a name="l00180"></a>00180 <span class="comment">    nextbit = 0x80 ;</span>
-<a name="l00181"></a>00181 <span class="comment">    end</span>
-<a name="l00182"></a>00182 <span class="comment">    else if (ahigh &gt;= 0x51)  //&gt;=81</span>
+<a name="l00037"></a>00037 <span class="comment">  Multiply the floating point number by 2^n</span>
+<a name="l00038"></a>00038 <span class="comment">  Round to the nearest integer</span>
+<a name="l00039"></a>00039 <span class="comment"></span>
+<a name="l00040"></a>00040 <span class="comment">Q to float</span>
+<a name="l00041"></a>00041 <span class="comment"></span>
+<a name="l00042"></a>00042 <span class="comment">To convert a number from Qm.n format to floating point:</span>
+<a name="l00043"></a>00043 <span class="comment"></span>
+<a name="l00044"></a>00044 <span class="comment">  Convert the number to floating point as if it were an integer</span>
+<a name="l00045"></a>00045 <span class="comment">  Multiply by 2^-n</span>
+<a name="l00046"></a>00046 <span class="comment">*/</span>
+<a name="l00047"></a><a class="code" href="group__fixed_math.html#ga1ec890e4f1bff216175613d2e6cb84ac">00047</a> <span class="preprocessor">#define Q7n8_char2fix(a) (((int)(a))&lt;&lt;8)                                                        </span>
+<a name="l00048"></a><a class="code" href="group__fixed_math.html#ga34b6ad2d24cabe39247ed58e16af042d">00048</a> <span class="preprocessor">#define Q7n8_fix2char(a) ((signed char)((a)&gt;&gt;8))                                </span>
+<a name="l00049"></a><a class="code" href="group__fixed_math.html#ga0388d4a2386bf65ddfc01e5f52633f2d">00049</a> <span class="preprocessor">#define Q7n8_float2fix(a) ((int)((a)*256.f))                                    </span>
+<a name="l00050"></a><a class="code" href="group__fixed_math.html#ga44abefcb2211f36ffbcc3fe240a271df">00050</a> <span class="preprocessor">#define Q7n8_fix2float(a) ((float)(a)/256.f)                                    </span>
+<a name="l00052"></a><a class="code" href="group__fixed_math.html#ga96ecdd273abaf8668e9654e794ebb87e">00052</a> <span class="preprocessor">#define Q8n8_uchar2fix(a) (((Q8n8)(a))&lt;&lt;8)                                      </span>
+<a name="l00053"></a><a class="code" href="group__fixed_math.html#ga36c71d1c7d6d07d86bed89d56ea64b86">00053</a> <span class="preprocessor">#define Q8n8_fix2uchar(a) ((unsigned char)((a)&gt;&gt;8))             </span>
+<a name="l00054"></a><a class="code" href="group__fixed_math.html#gad7b8a7cde449a9f6a3281abf7c158031">00054</a> <span class="preprocessor">#define Q8n8_float2fix(a) ((Q8n8)((a)*256.f))                                   </span>
+<a name="l00055"></a><a class="code" href="group__fixed_math.html#ga88c63db0a3c06724a82e0256dbb5bcd9">00055</a> <span class="preprocessor">#define Q8n8_fix2float(a) ((float)(a)/256.f)                                    </span>
+<a name="l00057"></a><a class="code" href="group__fixed_math.html#gac6ae995f951a7454498fbe85cabe4b84">00057</a> <span class="preprocessor">#define Q0n7_to_Q1n14(a) (((Q1n14)(a))&lt;&lt;7)                      </span>
+<a name="l00058"></a><a class="code" href="group__fixed_math.html#ga2e236ea9565cf89fa7a676d058b30356">00058</a> <span class="preprocessor">#define Q1n14_to_Q0n7(a) ((Q0n7)((a)&gt;&gt;7))                                       </span>
+<a name="l00059"></a><a class="code" href="group__fixed_math.html#ga95ff3f21b7324d46345af5ba8e44da7a">00059</a> <span class="preprocessor">#define Q1n14_float2fix(a) ((Q1n14)((a)*32767.f))                               </span>
+<a name="l00060"></a><a class="code" href="group__fixed_math.html#ga2b17e15f5c5535f1a1f3bd1d11718a45">00060</a> <span class="preprocessor">#define Q1n14_fix2float(a) ((float)(a)/32767.f)                                 </span>
+<a name="l00062"></a><a class="code" href="group__fixed_math.html#ga186f41ebf1ae5d8c9f48c6c952256064">00062</a> <span class="preprocessor">#define Q0n8_to_Q1n15(a) (((Q1n15)(a))&lt;&lt;7)                      </span>
+<a name="l00063"></a><a class="code" href="group__fixed_math.html#ga9358b9ca0c1861bf68e794793a444a46">00063</a> <span class="preprocessor">#define Q1n15_to_Q0n8(a) ((Q0n8)((a)&gt;&gt;7))                                       </span>
+<a name="l00064"></a><a class="code" href="group__fixed_math.html#ga06616ad2b8b8c7f1610b3a1f88546e4e">00064</a> <span class="preprocessor">#define Q1n15_float2fix(a) ((Q1n15)((a)*32768.f))                               </span>
+<a name="l00065"></a><a class="code" href="group__fixed_math.html#ga5ae7536490b97f5a7645afd4862b7deb">00065</a> <span class="preprocessor">#define Q1n15_fix2float(a) ((float)(a)*0.000030517578125f)      </span>
+<a name="l00067"></a><a class="code" href="group__fixed_math.html#gaf8d3dc38bbbb409e3aa44a17a00c69b2">00067</a> <span class="preprocessor">#define Q0n8_to_Q8n24(a) (((Q8n24)(a))&lt;&lt;16)                     </span>
+<a name="l00068"></a><a class="code" href="group__fixed_math.html#gae8b10847d6104a817b5e042c8b9ed5c7">00068</a> <span class="preprocessor">#define Q8n24_to_Q0n8(a) ((Q0n8)((a)&gt;&gt;16))                                      </span>
+<a name="l00069"></a><a class="code" href="group__fixed_math.html#ga0d48f852ff6423e0db85916abdbb5a91">00069</a> <span class="preprocessor">#define Q8n24_float2fix(a) ((Q8n24)((a)*16777216.f))                            </span>
+<a name="l00070"></a><a class="code" href="group__fixed_math.html#gae86a0f6694d81c5cc6c1883e875df339">00070</a> <span class="preprocessor">#define Q8n24_fix2float(a) ((float)(a)*0.000000059604645f)      </span>
+<a name="l00072"></a><a class="code" href="group__fixed_math.html#gac014ecb51ddf1ffaede809e78742e6b9">00072</a> <span class="preprocessor">#define Q0n8_to_Q16n16(a) (((Q16n16)(a))&lt;&lt;8)                    </span>
+<a name="l00073"></a><a class="code" href="group__fixed_math.html#ga0e384f143bf94f60585770668fa65afe">00073</a> <span class="preprocessor">#define Q16n16_to_Q0n8(a) ((Q0n8)((a)&gt;&gt;8))                                      </span>
+<a name="l00074"></a><a class="code" href="group__fixed_math.html#gab0d6ded4c13bbf71d8f8e561ddbb838a">00074</a> <span class="preprocessor">#define Q16n16_float2fix(a) ((Q16n16)((a)*65536.f))                             </span>
+<a name="l00075"></a><a class="code" href="group__fixed_math.html#gae1b1fee1d4039261e01e9bf70d6fa870">00075</a> <span class="preprocessor">#define Q16n16_fix2float(a) ((float)(a)*0.000015258789063)      </span>
+<a name="l00082"></a><a class="code" href="group__fixed_math.html#ga4628b6ab7962076cb9e176a3d9739ac6">00082</a> <span class="preprocessor">#define Q7n8_multfix(a,b)         \</span>
+<a name="l00083"></a>00083 <span class="preprocessor">({            \</span>
+<a name="l00084"></a>00084 <span class="preprocessor">int prod, val1=a, val2=b ;    \</span>
+<a name="l00085"></a>00085 <span class="preprocessor">__asm__ __volatile__ (    \</span>
+<a name="l00086"></a>00086 <span class="preprocessor">                &quot;muls %B1, %B2  \n\t&quot;   \</span>
+<a name="l00087"></a>00087 <span class="preprocessor">                &quot;mov %B0, r0 \n\t&quot;                 \</span>
+<a name="l00088"></a>00088 <span class="preprocessor">                &quot;mul %A1, %A2\n\t&quot;                 \</span>
+<a name="l00089"></a>00089 <span class="preprocessor">                &quot;mov %A0, r1 \n\t&quot;   \</span>
+<a name="l00090"></a>00090 <span class="preprocessor">                &quot;mulsu %B1, %A2 \n\t&quot;   \</span>
+<a name="l00091"></a>00091 <span class="preprocessor">                &quot;add %A0, r0  \n\t&quot;     \</span>
+<a name="l00092"></a>00092 <span class="preprocessor">                &quot;adc %B0, r1 \n\t&quot;     \</span>
+<a name="l00093"></a>00093 <span class="preprocessor">                &quot;mulsu %B2, %A1 \n\t&quot;   \</span>
+<a name="l00094"></a>00094 <span class="preprocessor">                &quot;add %A0, r0 \n\t&quot;     \</span>
+<a name="l00095"></a>00095 <span class="preprocessor">                &quot;adc %B0, r1  \n\t&quot;    \</span>
+<a name="l00096"></a>00096 <span class="preprocessor">                &quot;clr r1  \n\t&quot;                     \</span>
+<a name="l00097"></a>00097 <span class="preprocessor">                : &quot;=&amp;d&quot; (prod)     \</span>
+<a name="l00098"></a>00098 <span class="preprocessor">                : &quot;a&quot; (val1), &quot;a&quot; (val2)  \</span>
+<a name="l00099"></a>00099 <span class="preprocessor">                  );        \</span>
+<a name="l00100"></a>00100 <span class="preprocessor">  prod;        \</span>
+<a name="l00101"></a>00101 <span class="preprocessor">})</span>
+<a name="l00102"></a>00102 <span class="preprocessor"></span>
+<a name="l00103"></a>00103 <span class="comment">// based on:</span>
+<a name="l00104"></a>00104 <span class="comment">/*</span>
+<a name="l00105"></a>00105 <span class="comment">#define FMULS8(v1, v2)      \</span>
+<a name="l00106"></a>00106 <span class="comment">({            \</span>
+<a name="l00107"></a>00107 <span class="comment">  uint8_t res;        \</span>
+<a name="l00108"></a>00108 <span class="comment">  uint8_t val1 = v1;      \</span>
+<a name="l00109"></a>00109 <span class="comment">  uint8_t val2 = v2;      \</span>
+<a name="l00110"></a>00110 <span class="comment">  __asm__ __volatile__      \</span>
+<a name="l00111"></a>00111 <span class="comment">  (           \</span>
+<a name="l00112"></a>00112 <span class="comment">    &quot;fmuls $1, $2&quot;   &quot;\n\t&quot; \</span>
+<a name="l00113"></a>00113 <span class="comment">    &quot;mov $0, r1&quot;     &quot;\n\t&quot; \</span>
+<a name="l00114"></a>00114 <span class="comment">    &quot;clr r1&quot;     &quot;\n\t&quot; \</span>
+<a name="l00115"></a>00115 <span class="comment">    : &quot;=&amp;d&quot; (res)       \</span>
+<a name="l00116"></a>00116 <span class="comment">    : &quot;a&quot; (val1), &quot;a&quot; (val2)  \</span>
+<a name="l00117"></a>00117 <span class="comment">  );            \</span>
+<a name="l00118"></a>00118 <span class="comment">  res;          \</span>
+<a name="l00119"></a>00119 <span class="comment">}) */</span>
+<a name="l00120"></a>00120 <span class="comment">/*</span>
+<a name="l00121"></a>00121 <span class="comment">int divfix(int nn, int dd)</span>
+<a name="l00122"></a>00122 <span class="comment">begin</span>
+<a name="l00123"></a>00123 <span class="comment">  int x, d ;</span>
+<a name="l00124"></a>00124 <span class="comment">  signed char count, neg ;</span>
+<a name="l00125"></a>00125 <span class="comment">  count = 0;</span>
+<a name="l00126"></a>00126 <span class="comment">  neg = 0 ;</span>
+<a name="l00127"></a>00127 <span class="comment">  d = dd ;</span>
+<a name="l00128"></a>00128 <span class="comment"></span>
+<a name="l00129"></a>00129 <span class="comment">  // only works with + numbers</span>
+<a name="l00130"></a>00130 <span class="comment">  if (d &amp; 0x8000)</span>
+<a name="l00131"></a>00131 <span class="comment">  begin</span>
+<a name="l00132"></a>00132 <span class="comment">    neg = 1;</span>
+<a name="l00133"></a>00133 <span class="comment">    d = -d ;</span>
+<a name="l00134"></a>00134 <span class="comment">  end</span>
+<a name="l00135"></a>00135 <span class="comment"></span>
+<a name="l00136"></a>00136 <span class="comment">  // range reduction</span>
+<a name="l00137"></a>00137 <span class="comment">  while (d&gt;0x0100)</span>
+<a name="l00138"></a>00138 <span class="comment">  begin</span>
+<a name="l00139"></a>00139 <span class="comment">    --count ;</span>
+<a name="l00140"></a>00140 <span class="comment">    d &gt;&gt;= 1 ;</span>
+<a name="l00141"></a>00141 <span class="comment">  end</span>
+<a name="l00142"></a>00142 <span class="comment"></span>
+<a name="l00143"></a>00143 <span class="comment">  while (d&lt;0x0080)</span>
+<a name="l00144"></a>00144 <span class="comment">  begin</span>
+<a name="l00145"></a>00145 <span class="comment">    ++count ;</span>
+<a name="l00146"></a>00146 <span class="comment">    d &lt;&lt;= 1 ;</span>
+<a name="l00147"></a>00147 <span class="comment">  end</span>
+<a name="l00148"></a>00148 <span class="comment"></span>
+<a name="l00149"></a>00149 <span class="comment">  // Newton interation</span>
+<a name="l00150"></a>00150 <span class="comment">  x = 0x02ea - (d&lt;&lt;1) ;</span>
+<a name="l00151"></a>00151 <span class="comment">  x = multfix(x, 0x0200-multfix(d,x));</span>
+<a name="l00152"></a>00152 <span class="comment">  //x = multfix(x, 0x0200-multfix(d,x));</span>
+<a name="l00153"></a>00153 <span class="comment"></span>
+<a name="l00154"></a>00154 <span class="comment"></span>
+<a name="l00155"></a>00155 <span class="comment">  // range expansion</span>
+<a name="l00156"></a>00156 <span class="comment">  if (count&gt;0)  x = x&lt;&lt;count ;</span>
+<a name="l00157"></a>00157 <span class="comment">  else if (count&lt;0) x = x&gt;&gt;(-count) ;</span>
+<a name="l00158"></a>00158 <span class="comment"></span>
+<a name="l00159"></a>00159 <span class="comment">  // fix sign</span>
+<a name="l00160"></a>00160 <span class="comment">  if (neg==1) x=-x;</span>
+<a name="l00161"></a>00161 <span class="comment"></span>
+<a name="l00162"></a>00162 <span class="comment">  //form ratio</span>
+<a name="l00163"></a>00163 <span class="comment">  x = multfix(x,nn) ;</span>
+<a name="l00164"></a>00164 <span class="comment"></span>
+<a name="l00165"></a>00165 <span class="comment">  return x ;</span>
+<a name="l00166"></a>00166 <span class="comment">end</span>
+<a name="l00167"></a>00167 <span class="comment"></span>
+<a name="l00168"></a>00168 <span class="comment">//========================================================</span>
+<a name="l00169"></a>00169 <span class="comment">int sqrtfix(int aa)</span>
+<a name="l00170"></a>00170 <span class="comment">begin</span>
+<a name="l00171"></a>00171 <span class="comment"></span>
+<a name="l00172"></a>00172 <span class="comment">  int a;</span>
+<a name="l00173"></a>00173 <span class="comment">  char nextbit, ahigh;</span>
+<a name="l00174"></a>00174 <span class="comment">  int root, p ;</span>
+<a name="l00175"></a>00175 <span class="comment">  a = aa;</span>
+<a name="l00176"></a>00176 <span class="comment">  ahigh = a&gt;&gt;8 ;</span>
+<a name="l00177"></a>00177 <span class="comment">  //</span>
+<a name="l00178"></a>00178 <span class="comment">  // range sort to get integer part and to</span>
+<a name="l00179"></a>00179 <span class="comment">  // check for weird bits near the top of the range</span>
+<a name="l00180"></a>00180 <span class="comment">  if (ahigh &gt;= 0x40)   //bigger than 64?</span>
+<a name="l00181"></a>00181 <span class="comment">  begin</span>
+<a name="l00182"></a>00182 <span class="comment">    if (a &gt; 0x7e8f)  //&gt;=126.562 = 11.25^2</span>
 <a name="l00183"></a>00183 <span class="comment">    begin</span>
-<a name="l00184"></a>00184 <span class="comment">    root = 0x0900;  // 9</span>
-<a name="l00185"></a>00185 <span class="comment">    nextbit = 0x80 ;</span>
+<a name="l00184"></a>00184 <span class="comment">    root = 0x0b40;  // 11</span>
+<a name="l00185"></a>00185 <span class="comment">    nextbit = 0x10 ;</span>
 <a name="l00186"></a>00186 <span class="comment">    end</span>
-<a name="l00187"></a>00187 <span class="comment">    else //64</span>
+<a name="l00187"></a>00187 <span class="comment">    else if (ahigh &gt;= 0x79)  //&gt;=121</span>
 <a name="l00188"></a>00188 <span class="comment">    begin</span>
-<a name="l00189"></a>00189 <span class="comment">    root = 0x0800;  //8</span>
-<a name="l00190"></a>00190 <span class="comment">    nextbit = 0x80 ;</span>
+<a name="l00189"></a>00189 <span class="comment">    root = 0x0b00;  // 11</span>
+<a name="l00190"></a>00190 <span class="comment">    nextbit = 0x40 ;</span>
 <a name="l00191"></a>00191 <span class="comment">    end</span>
-<a name="l00192"></a>00192 <span class="comment">  end</span>
-<a name="l00193"></a>00193 <span class="comment">  else if  (ahigh &gt;= 0x10)  //16  //smaller than 64 and bigger then 16</span>
-<a name="l00194"></a>00194 <span class="comment">  begin</span>
-<a name="l00195"></a>00195 <span class="comment">    if (ahigh &gt;= 0x31)  //49</span>
-<a name="l00196"></a>00196 <span class="comment">    begin</span>
-<a name="l00197"></a>00197 <span class="comment">    root = 0x0700;  //7</span>
-<a name="l00198"></a>00198 <span class="comment">    nextbit = 0x80 ;</span>
-<a name="l00199"></a>00199 <span class="comment">    end</span>
-<a name="l00200"></a>00200 <span class="comment">    else if (ahigh &gt;= 0x24)  //36</span>
-<a name="l00201"></a>00201 <span class="comment">    begin</span>
-<a name="l00202"></a>00202 <span class="comment">    root = 0x0600;  //6</span>
-<a name="l00203"></a>00203 <span class="comment">    nextbit = 0x80 ;</span>
-<a name="l00204"></a>00204 <span class="comment">    end</span>
-<a name="l00205"></a>00205 <span class="comment">    else if (ahigh &gt;= 0x19)  //25</span>
-<a name="l00206"></a>00206 <span class="comment">    begin</span>
-<a name="l00207"></a>00207 <span class="comment">    root = 0x0500;  //5</span>
-<a name="l00208"></a>00208 <span class="comment">    nextbit = 0x80 ;</span>
-<a name="l00209"></a>00209 <span class="comment">    end</span>
-<a name="l00210"></a>00210 <span class="comment">    else //16</span>
+<a name="l00192"></a>00192 <span class="comment">    else if (ahigh &gt;= 0x64)  //&gt;=100</span>
+<a name="l00193"></a>00193 <span class="comment">    begin</span>
+<a name="l00194"></a>00194 <span class="comment">    root = 0x0a00;  // 10</span>
+<a name="l00195"></a>00195 <span class="comment">    nextbit = 0x80 ;</span>
+<a name="l00196"></a>00196 <span class="comment">    end</span>
+<a name="l00197"></a>00197 <span class="comment">    else if (ahigh &gt;= 0x51)  //&gt;=81</span>
+<a name="l00198"></a>00198 <span class="comment">    begin</span>
+<a name="l00199"></a>00199 <span class="comment">    root = 0x0900;  // 9</span>
+<a name="l00200"></a>00200 <span class="comment">    nextbit = 0x80 ;</span>
+<a name="l00201"></a>00201 <span class="comment">    end</span>
+<a name="l00202"></a>00202 <span class="comment">    else //64</span>
+<a name="l00203"></a>00203 <span class="comment">    begin</span>
+<a name="l00204"></a>00204 <span class="comment">    root = 0x0800;  //8</span>
+<a name="l00205"></a>00205 <span class="comment">    nextbit = 0x80 ;</span>
+<a name="l00206"></a>00206 <span class="comment">    end</span>
+<a name="l00207"></a>00207 <span class="comment">  end</span>
+<a name="l00208"></a>00208 <span class="comment">  else if  (ahigh &gt;= 0x10)  //16  //smaller than 64 and bigger then 16</span>
+<a name="l00209"></a>00209 <span class="comment">  begin</span>
+<a name="l00210"></a>00210 <span class="comment">    if (ahigh &gt;= 0x31)  //49</span>
 <a name="l00211"></a>00211 <span class="comment">    begin</span>
-<a name="l00212"></a>00212 <span class="comment">    root = 0x0400;  //4</span>
+<a name="l00212"></a>00212 <span class="comment">    root = 0x0700;  //7</span>
 <a name="l00213"></a>00213 <span class="comment">    nextbit = 0x80 ;</span>
 <a name="l00214"></a>00214 <span class="comment">    end</span>
-<a name="l00215"></a>00215 <span class="comment">  end</span>
-<a name="l00216"></a>00216 <span class="comment">  else   //smaller than 16</span>
-<a name="l00217"></a>00217 <span class="comment">  begin</span>
-<a name="l00218"></a>00218 <span class="comment">   if (ahigh &gt;= 0x09)  //9</span>
-<a name="l00219"></a>00219 <span class="comment">    begin</span>
-<a name="l00220"></a>00220 <span class="comment">    root = 0x0300;  //3</span>
-<a name="l00221"></a>00221 <span class="comment">    nextbit = 0x80 ;</span>
-<a name="l00222"></a>00222 <span class="comment">    end</span>
-<a name="l00223"></a>00223 <span class="comment">    else if (ahigh &gt;= 0x04)  //4</span>
-<a name="l00224"></a>00224 <span class="comment">    begin</span>
-<a name="l00225"></a>00225 <span class="comment">    root = 0x0200;  //2</span>
-<a name="l00226"></a>00226 <span class="comment">    nextbit = 0x80 ;</span>
-<a name="l00227"></a>00227 <span class="comment">    end</span>
-<a name="l00228"></a>00228 <span class="comment">    else if (ahigh &gt;= 0x01)  //1</span>
-<a name="l00229"></a>00229 <span class="comment">    begin</span>
-<a name="l00230"></a>00230 <span class="comment">    root = 0x0100;  //1</span>
-<a name="l00231"></a>00231 <span class="comment">    nextbit = 0x80 ;</span>
-<a name="l00232"></a>00232 <span class="comment">    end</span>
-<a name="l00233"></a>00233 <span class="comment">    else   //less than one</span>
+<a name="l00215"></a>00215 <span class="comment">    else if (ahigh &gt;= 0x24)  //36</span>
+<a name="l00216"></a>00216 <span class="comment">    begin</span>
+<a name="l00217"></a>00217 <span class="comment">    root = 0x0600;  //6</span>
+<a name="l00218"></a>00218 <span class="comment">    nextbit = 0x80 ;</span>
+<a name="l00219"></a>00219 <span class="comment">    end</span>
+<a name="l00220"></a>00220 <span class="comment">    else if (ahigh &gt;= 0x19)  //25</span>
+<a name="l00221"></a>00221 <span class="comment">    begin</span>
+<a name="l00222"></a>00222 <span class="comment">    root = 0x0500;  //5</span>
+<a name="l00223"></a>00223 <span class="comment">    nextbit = 0x80 ;</span>
+<a name="l00224"></a>00224 <span class="comment">    end</span>
+<a name="l00225"></a>00225 <span class="comment">    else //16</span>
+<a name="l00226"></a>00226 <span class="comment">    begin</span>
+<a name="l00227"></a>00227 <span class="comment">    root = 0x0400;  //4</span>
+<a name="l00228"></a>00228 <span class="comment">    nextbit = 0x80 ;</span>
+<a name="l00229"></a>00229 <span class="comment">    end</span>
+<a name="l00230"></a>00230 <span class="comment">  end</span>
+<a name="l00231"></a>00231 <span class="comment">  else   //smaller than 16</span>
+<a name="l00232"></a>00232 <span class="comment">  begin</span>
+<a name="l00233"></a>00233 <span class="comment">   if (ahigh &gt;= 0x09)  //9</span>
 <a name="l00234"></a>00234 <span class="comment">    begin</span>
-<a name="l00235"></a>00235 <span class="comment">    root = 0;</span>
+<a name="l00235"></a>00235 <span class="comment">    root = 0x0300;  //3</span>
 <a name="l00236"></a>00236 <span class="comment">    nextbit = 0x80 ;</span>
 <a name="l00237"></a>00237 <span class="comment">    end</span>
-<a name="l00238"></a>00238 <span class="comment">  end</span>
-<a name="l00239"></a>00239 <span class="comment">  // now get the low order bits</span>
-<a name="l00240"></a>00240 <span class="comment">  while (nextbit)</span>
-<a name="l00241"></a>00241 <span class="comment">  begin</span>
-<a name="l00242"></a>00242 <span class="comment">                                root = nextbit + root;</span>
-<a name="l00243"></a>00243 <span class="comment">                                p =  multfix(root,root);</span>
-<a name="l00244"></a>00244 <span class="comment">    if (p &gt;= a) root = root - nextbit ;</span>
-<a name="l00245"></a>00245 <span class="comment">                nextbit = nextbit&gt;&gt;1 ;</span>
-<a name="l00246"></a>00246 <span class="comment">  end</span>
-<a name="l00247"></a>00247 <span class="comment">  return root ;</span>
-<a name="l00248"></a>00248 <span class="comment">end</span>
-<a name="l00249"></a>00249 <span class="comment">*/</span>
-<a name="l00250"></a>00250 <span class="comment">/*</span>
-<a name="l00251"></a>00251 <span class="comment">// from octosynth, Joe Marshall 2011:</span>
-<a name="l00252"></a>00252 <span class="comment"></span>
-<a name="l00253"></a>00253 <span class="comment">  // multiply 2 16 bit numbers together and shift 8 without precision loss</span>
-<a name="l00254"></a>00254 <span class="comment">  // requires assembler really</span>
-<a name="l00255"></a>00255 <span class="comment">  volatile unsigned char zeroReg=0;</span>
-<a name="l00256"></a>00256 <span class="comment">  volatile unsigned int multipliedCounter=oscillators[c].phaseStep;</span>
-<a name="l00257"></a>00257 <span class="comment">  asm volatile</span>
-<a name="l00258"></a>00258 <span class="comment">  (</span>
-<a name="l00259"></a>00259 <span class="comment">  // high bytes mult together = high  byte</span>
-<a name="l00260"></a>00260 <span class="comment">  &quot;ldi %A[outVal],0&quot; &quot;\n\t&quot;</span>
-<a name="l00261"></a>00261 <span class="comment">  &quot;mul %B[phaseStep],%B[pitchBend]&quot; &quot;\n\t&quot;</span>
-<a name="l00262"></a>00262 <span class="comment">  &quot;mov %B[outVal],r0&quot; &quot;\n\t&quot;</span>
-<a name="l00263"></a>00263 <span class="comment">  // ignore overflow into r1 (should never overflow)</span>
-<a name="l00264"></a>00264 <span class="comment">  // low byte * high byte -&gt; both bytes</span>
-<a name="l00265"></a>00265 <span class="comment">  &quot;mul %A[phaseStep],%B[pitchBend]&quot; &quot;\n\t&quot;</span>
-<a name="l00266"></a>00266 <span class="comment">  &quot;add %A[outVal],r0&quot; &quot;\n\t&quot;</span>
-<a name="l00267"></a>00267 <span class="comment">  // carry into high byte</span>
-<a name="l00268"></a>00268 <span class="comment">  &quot;adc %B[outVal],r1&quot; &quot;\n\t&quot;</span>
-<a name="l00269"></a>00269 <span class="comment">  // high byte* low byte -&gt; both bytes</span>
-<a name="l00270"></a>00270 <span class="comment">  &quot;mul %B[phaseStep],%A[pitchBend]&quot; &quot;\n\t&quot;</span>
-<a name="l00271"></a>00271 <span class="comment">  &quot;add %A[outVal],r0&quot; &quot;\n\t&quot;</span>
-<a name="l00272"></a>00272 <span class="comment">  // carry into high byte</span>
-<a name="l00273"></a>00273 <span class="comment">  &quot;adc %B[outVal],r1&quot; &quot;\n\t&quot;</span>
-<a name="l00274"></a>00274 <span class="comment">  // low byte * low byte -&gt; round</span>
-<a name="l00275"></a>00275 <span class="comment">  &quot;mul %A[phaseStep],%A[pitchBend]&quot; &quot;\n\t&quot;</span>
-<a name="l00276"></a>00276 <span class="comment">  // the adc below is to round up based on high bit of low*low:</span>
-<a name="l00277"></a>00277 <span class="comment">  &quot;adc %A[outVal],r1&quot; &quot;\n\t&quot;</span>
-<a name="l00278"></a>00278 <span class="comment">  &quot;adc %B[outVal],%[ZERO]&quot; &quot;\n\t&quot;</span>
-<a name="l00279"></a>00279 <span class="comment">  &quot;clr r1&quot; &quot;\n\t&quot;</span>
-<a name="l00280"></a>00280 <span class="comment">  :[outVal] &quot;=&amp;d&quot; (multipliedCounter)</span>
-<a name="l00281"></a>00281 <span class="comment">  :[phaseStep] &quot;d&quot; (oscillators[c].phaseStep),[pitchBend] &quot;d&quot;( pitchBendMultiplier),[ZERO] &quot;d&quot; (zeroReg)</span>
-<a name="l00282"></a>00282 <span class="comment">  :&quot;r1&quot;,&quot;r0&quot;</span>
-<a name="l00283"></a>00283 <span class="comment">  );</span>
-<a name="l00284"></a>00284 <span class="comment">  oscillators[c].phaseStep=multipliedCounter;</span>
-<a name="l00285"></a>00285 <span class="comment"></span>
-<a name="l00286"></a>00286 <span class="comment">  */</span>
-<a name="l00287"></a>00287 <span class="preprocessor">#endif </span><span class="comment">/* FIXEDMATH_H_ */</span>
+<a name="l00238"></a>00238 <span class="comment">    else if (ahigh &gt;= 0x04)  //4</span>
+<a name="l00239"></a>00239 <span class="comment">    begin</span>
+<a name="l00240"></a>00240 <span class="comment">    root = 0x0200;  //2</span>
+<a name="l00241"></a>00241 <span class="comment">    nextbit = 0x80 ;</span>
+<a name="l00242"></a>00242 <span class="comment">    end</span>
+<a name="l00243"></a>00243 <span class="comment">    else if (ahigh &gt;= 0x01)  //1</span>
+<a name="l00244"></a>00244 <span class="comment">    begin</span>
+<a name="l00245"></a>00245 <span class="comment">    root = 0x0100;  //1</span>
+<a name="l00246"></a>00246 <span class="comment">    nextbit = 0x80 ;</span>
+<a name="l00247"></a>00247 <span class="comment">    end</span>
+<a name="l00248"></a>00248 <span class="comment">    else   //less than one</span>
+<a name="l00249"></a>00249 <span class="comment">    begin</span>
+<a name="l00250"></a>00250 <span class="comment">    root = 0;</span>
+<a name="l00251"></a>00251 <span class="comment">    nextbit = 0x80 ;</span>
+<a name="l00252"></a>00252 <span class="comment">    end</span>
+<a name="l00253"></a>00253 <span class="comment">  end</span>
+<a name="l00254"></a>00254 <span class="comment">  // now get the low order bits</span>
+<a name="l00255"></a>00255 <span class="comment">  while (nextbit)</span>
+<a name="l00256"></a>00256 <span class="comment">  begin</span>
+<a name="l00257"></a>00257 <span class="comment">                                root = nextbit + root;</span>
+<a name="l00258"></a>00258 <span class="comment">                                p =  multfix(root,root);</span>
+<a name="l00259"></a>00259 <span class="comment">    if (p &gt;= a) root = root - nextbit ;</span>
+<a name="l00260"></a>00260 <span class="comment">                nextbit = nextbit&gt;&gt;1 ;</span>
+<a name="l00261"></a>00261 <span class="comment">  end</span>
+<a name="l00262"></a>00262 <span class="comment">  return root ;</span>
+<a name="l00263"></a>00263 <span class="comment">end</span>
+<a name="l00264"></a>00264 <span class="comment">*/</span>
+<a name="l00265"></a>00265 <span class="comment">/*</span>
+<a name="l00266"></a>00266 <span class="comment">// from octosynth, Joe Marshall 2011:</span>
+<a name="l00267"></a>00267 <span class="comment"></span>
+<a name="l00268"></a>00268 <span class="comment">  // multiply 2 16 bit numbers together and shift 8 without precision loss</span>
+<a name="l00269"></a>00269 <span class="comment">  // requires assembler really</span>
+<a name="l00270"></a>00270 <span class="comment">  volatile unsigned char zeroReg=0;</span>
+<a name="l00271"></a>00271 <span class="comment">  volatile unsigned int multipliedCounter=oscillators[c].phaseStep;</span>
+<a name="l00272"></a>00272 <span class="comment">  asm volatile</span>
+<a name="l00273"></a>00273 <span class="comment">  (</span>
+<a name="l00274"></a>00274 <span class="comment">  // high bytes mult together = high  byte</span>
+<a name="l00275"></a>00275 <span class="comment">  &quot;ldi %A[outVal],0&quot; &quot;\n\t&quot;</span>
+<a name="l00276"></a>00276 <span class="comment">  &quot;mul %B[phaseStep],%B[pitchBend]&quot; &quot;\n\t&quot;</span>
+<a name="l00277"></a>00277 <span class="comment">  &quot;mov %B[outVal],r0&quot; &quot;\n\t&quot;</span>
+<a name="l00278"></a>00278 <span class="comment">  // ignore overflow into r1 (should never overflow)</span>
+<a name="l00279"></a>00279 <span class="comment">  // low byte * high byte -&gt; both bytes</span>
+<a name="l00280"></a>00280 <span class="comment">  &quot;mul %A[phaseStep],%B[pitchBend]&quot; &quot;\n\t&quot;</span>
+<a name="l00281"></a>00281 <span class="comment">  &quot;add %A[outVal],r0&quot; &quot;\n\t&quot;</span>
+<a name="l00282"></a>00282 <span class="comment">  // carry into high byte</span>
+<a name="l00283"></a>00283 <span class="comment">  &quot;adc %B[outVal],r1&quot; &quot;\n\t&quot;</span>
+<a name="l00284"></a>00284 <span class="comment">  // high byte* low byte -&gt; both bytes</span>
+<a name="l00285"></a>00285 <span class="comment">  &quot;mul %B[phaseStep],%A[pitchBend]&quot; &quot;\n\t&quot;</span>
+<a name="l00286"></a>00286 <span class="comment">  &quot;add %A[outVal],r0&quot; &quot;\n\t&quot;</span>
+<a name="l00287"></a>00287 <span class="comment">  // carry into high byte</span>
+<a name="l00288"></a>00288 <span class="comment">  &quot;adc %B[outVal],r1&quot; &quot;\n\t&quot;</span>
+<a name="l00289"></a>00289 <span class="comment">  // low byte * low byte -&gt; round</span>
+<a name="l00290"></a>00290 <span class="comment">  &quot;mul %A[phaseStep],%A[pitchBend]&quot; &quot;\n\t&quot;</span>
+<a name="l00291"></a>00291 <span class="comment">  // the adc below is to round up based on high bit of low*low:</span>
+<a name="l00292"></a>00292 <span class="comment">  &quot;adc %A[outVal],r1&quot; &quot;\n\t&quot;</span>
+<a name="l00293"></a>00293 <span class="comment">  &quot;adc %B[outVal],%[ZERO]&quot; &quot;\n\t&quot;</span>
+<a name="l00294"></a>00294 <span class="comment">  &quot;clr r1&quot; &quot;\n\t&quot;</span>
+<a name="l00295"></a>00295 <span class="comment">  :[outVal] &quot;=&amp;d&quot; (multipliedCounter)</span>
+<a name="l00296"></a>00296 <span class="comment">  :[phaseStep] &quot;d&quot; (oscillators[c].phaseStep),[pitchBend] &quot;d&quot;( pitchBendMultiplier),[ZERO] &quot;d&quot; (zeroReg)</span>
+<a name="l00297"></a>00297 <span class="comment">  :&quot;r1&quot;,&quot;r0&quot;</span>
+<a name="l00298"></a>00298 <span class="comment">  );</span>
+<a name="l00299"></a>00299 <span class="comment">  oscillators[c].phaseStep=multipliedCounter;</span>
+<a name="l00300"></a>00300 <span class="comment"></span>
+<a name="l00301"></a>00301 <span class="comment">  */</span>
+<a name="l00302"></a>00302 
+<a name="l00306"></a>00306 <span class="preprocessor">#endif </span><span class="comment">/* FIXEDMATH_H_ */</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 19 2012 00:26:49 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 20 2012 00:05:33 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

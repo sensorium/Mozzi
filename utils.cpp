@@ -11,6 +11,14 @@ float mtof(float midival)
 	return (float)(8.1757989156 * pow(2.0, midival/12.0));
 }
 
+/** @ingroup util
+Generates a random number in the range for midi notes.
+@return a random value between 0 and 127 inclusive
+*/
+unsigned char randomMidi(){
+  lowByte(xorshift96())>>1;
+}
+
 
 /** @ingroup util
 Random number generator.

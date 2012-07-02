@@ -1,13 +1,12 @@
 ## for converting 32 bit float raw files from Audacity, with values > 0, to 0-255 uint8 Mozzi table
-import array
-import os
-import textwrap
-import math
 
-def rawToArduino(infilename, outfilename, tablename,samplerate):
+import sys, array, os, textwrap, math
+
+def float2mozzi_uint8(infilename, outfilename, tablename,samplerate):
     fin = open(os.path.expanduser(infilename), "rb")
     print "opened " + infilename
     valuesetad = os.path.getsize(os.path.expanduser(infilename))/4 ## adjust for number format
+
     ##print valuesetad
     valuesfromfile = array.array('f')## array of floats
     try:
@@ -24,7 +23,7 @@ def rawToArduino(infilename, outfilename, tablename,samplerate):
     fout.write('#define ' + tablename + '_H_' + '\n \n')
     fout.write('#include "Arduino.h"'+'\n')
     fout.write('#include <avr/pgmspace.h>'+'\n \n')
-    fout.write('#define ' + tablename + '_NUM_TABLE_CELLS '+ str(len(values))+'\n')
+    fout.write('#define ' + tablename + '_NUM_CELLS '+ str(len(values))+'\n')
     fout.write('#define ' + tablename + '_SAMPLERATE '+ str(samplerate)+'\n \n')
     outstring = 'prog_char ' + tablename + '_DATA [] PROGMEM = {'
     try:
@@ -40,4 +39,4 @@ def rawToArduino(infilename, outfilename, tablename,samplerate):
         fout.close()
         print "wrote " + outfilename
 
-rawToArduino("~/Desktop/halfsin_float.raw", "~/Desktop/halfsin256_uint8.h", "HALFSIN256","256")
+float2mozzi_uint8(infilename, outfilename, tablename, samplerate)

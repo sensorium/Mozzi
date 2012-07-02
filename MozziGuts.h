@@ -28,24 +28,26 @@
 #include "TimerTwo.h"
 
 /** @mainpage Welcome
-
+ 
 The latest version of Mozzi and this documentation are at the <a href="http://sensorium.github.com/Mozzi/">Mozzi home page.</a>
-
+ 
 Here's a brief description of each section of this documentation:
-
+ 
 @section Modules
-Mozzi core definitions and functions, which are used in any Mozzi sketch.
-
-Utility functions which are generally useful.
-
+Fixed point number types, macros and functions for fast fractional maths.
+ 
+Mozzi core definitions and functions, which are used in every Mozzi sketch.
+ 
+Utility functions which are generally useful, including midi note to frequency conversion.
+ 
 @section Classes
 The Classes used to generate control and audio signals.
-
+ 
 @section  Files
 Files lists ready-to-use wave tables which are in the Mozzi/tables folder.
-
+ 
 You can also convert your own sounds to tables with a script called raw2mozzi.py, in Mozzi/python.
-
+ 
 Read the raw2mozzi.py file for instructions.
 */
 

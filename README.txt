@@ -1,5 +1,5 @@
 README for Mozzi, a sound synthesis library for Arduino.
-Version 0.01.1
+Version 0.01.1b
 Tim Barrass 2010-12
 
 

@@ -52,7 +52,7 @@ def raw2mozzi(infilename, outfilename, tablename, samplerate):
     fout.write('#define ' + tablename + '_H_' + '\n \n')
     fout.write('#include "Arduino.h"'+'\n')
     fout.write('#include <avr/pgmspace.h>'+'\n \n')
-    fout.write('#define ' + tablename + '_NUM_TABLE_CELLS '+ str(len(values))+'\n')
+    fout.write('#define ' + tablename + '_NUM_CELLS '+ str(len(values))+'\n')
     fout.write('#define ' + tablename + '_SAMPLERATE '+ str(samplerate)+'\n \n')
     outstring = 'prog_char ' + tablename + '_DATA [] PROGMEM = {'
     try:

@@ -1,12 +1,12 @@
 #ifndef HALFSIN256_H_
 #define HALFSIN256_H_
- 
+
 #include "Arduino.h"
 #include <avr/pgmspace.h>
- 
-#define HALFSIN256_NUM_TABLE_CELLS 256
+
+#define HALFSIN256_NUM_CELLS 256
 #define HALFSIN256_SAMPLERATE 256
- 
+
 prog_char HALFSIN256_DATA [] PROGMEM = {0, 3, 6, 9, 13, 16, 19, 22, 25, 28, 31,
 34, 38, 41, 44, 47, 50, 53, 56, 59, 62, 65, 68, 71, 74, 77, 80, 83, 86, 89, 92,
 95, 98, 101, 104, 107, 109, 112, 115, 118, 121, 123, 126, 129, 132, 134, 137,
@@ -23,5 +23,5 @@ prog_char HALFSIN256_DATA [] PROGMEM = {0, 3, 6, 9, 13, 16, 19, 22, 25, 28, 31,
 145, 142, 140, 137, 134, 132, 129, 126, 123, 121, 118, 115, 112, 109, 107, 104,
 101, 98, 95, 92, 89, 86, 83, 80, 77, 74, 71, 68, 65, 62, 59, 56, 53, 50, 47, 44,
 41, 38, 34, 31, 28, 25, 22, 19, 16, 13, 9, 6, 3, };
- 
+
  #endif /* HALFSIN256_H_ */

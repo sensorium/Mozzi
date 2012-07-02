@@ -4,7 +4,7 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
-#define PHASOR256_NUM_TABLE_CELLS 256
+#define PHASOR256_NUM_CELLS 256
 #define PHASOR256_SAMPLERATE 256
 
 prog_char PHASOR256_DATA [] PROGMEM = {-128, -127, -127, -126, -124, -124, -122,

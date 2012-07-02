@@ -2,7 +2,7 @@
 #ifndef UTILS_H_
 #define UTILS_H_
 
-#include "Arduino.h" // for pow function
+#include "fixedMath.h"
 
 /** @defgroup util Mozzi utility functions
 */
@@ -25,15 +25,18 @@ Set pin 13 low for testing timing with an oscilloscope.*/
 #define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
 #endif
 
+
+
+//extern Q16n16 midiToFreq[128];
 float mtof(float x);
+//Q16n16 Q16n16_m2f(float midival);
+Q16n16 Q16n16_mtofLookup(Q16n16 midival);
+Q16n16 Q16n16_mtof(Q16n16 midival);
 unsigned char randomMidi();
 unsigned long xorshift96();
 
-byte byteMod(byte n, byte d);
-byte byteDiv(byte n, byte d);
-byte byteRnd(byte min, byte max);
 
-void setupFastADC();
+void setupFastAnalogRead();
 
 
 #endif /* UTILS_H_ */

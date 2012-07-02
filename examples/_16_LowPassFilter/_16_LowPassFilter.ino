@@ -18,7 +18,7 @@
 
 #define CONTROL_RATE 64 // powers of 2 please
 
-Oscil<CHUM9_NUM_TABLE_CELLS, AUDIO_RATE> aTriangle(CHUM9_DATA);
+Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aTriangle(CHUM9_DATA);
 Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kFilterMod(COS8192_DATA);
 
 LowPassFilter lpf;

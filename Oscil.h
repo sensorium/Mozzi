@@ -27,6 +27,7 @@
 
 #include "Arduino.h"
 #include "MozziGuts.h"
+#include "fixedMath.h"
 #include <util/atomic.h>
 
 // fractional bits for oscillator index precision
@@ -91,7 +92,8 @@ public:
 	/** Change the sound table which will be played by the Oscil.
 	@param TABLE_NAME is the name of the array in the table ".h" file you're using.
 	*/
-	void setTable(prog_char * TABLE_NAME){
+	void setTable(prog_char * TABLE_NAME)
+	{
 		table = TABLE_NAME;
 	}
 
@@ -99,7 +101,8 @@ public:
 	/** Set the phase of the Oscil.  This does the same thing as Sample::start(offset).  Just different ways of thinking about oscillators and samples.
 	@param phase a position in the wavetable.
 	*/
-	void setPhase(unsigned int phase) {
+	void setPhase(unsigned int phase)
+	{
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
 			phase_fractional = (unsigned long)phase << F_BITS;
@@ -121,28 +124,46 @@ public:
 		return (char)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))>>F_BITS) & (NUM_TABLE_CELLS - 1)));
 	}
 
+
 	/** Set the frequency using Q24n8 fixed-point number format.
-	This might be faster than the float version for setting low frequencies
-	such as 1.5 Hz, or other values which may not work well with your table
-	size. Note: use with caution because it's prone to overflow with higher
-	frequencies and larger table sizes. An Q24n8 representation of 1.5 is 384
-	(ie. 1.5 * 256).
+	This might be faster than the float version for setting low frequencies such as
+	1.5 Hz, or other values which may not work well with your table size. A Q24n8
+	representation of 1.5 is 384 (ie. 1.5 * 256). Can't be used with UPDATE_RATE
+	less than 64 Hz.
 	@param frequency in Q24n8 fixed-point number format.
 	*/
 	inline
-	void setFreq_n8(unsigned long frequency)
+	void setFreq_Q24n8(Q24n8 frequency)
 	{
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
-			phase_increment_fractional = ((frequency * NUM_TABLE_CELLS)/UPDATE_RATE) << (F_BITS-8);
+			phase_increment_fractional = (frequency* (NUM_TABLE_CELLS>>3)/(UPDATE_RATE>>6)) << (F_BITS-(8-3+6));
 		}
 	}
+
+
+	/** Set the frequency using Q16n16 fixed-point number format. This is useful in
+	combination with Q16n16_mtof(), a fast alternative to mtof(), using Q16n16
+	fixed-point format instead of floats.  Note: this should work OK with tables 2048 cells or smaller and
+	frequencies up to 4096 Hz.  Can't be used with UPDATE_RATE
+	less than 64 Hz.
+	@param frequency in Q16n16 fixed-point number format.
+	*/
+	inline
+	void setFreq_Q16n16(Q16n16 frequency)
+	{
+		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+		{
+			phase_increment_fractional = ((frequency * (NUM_TABLE_CELLS>>7))/(UPDATE_RATE>>6)) << (F_BITS-16+1);
+		}
+	}
+
 
 	/** Set the oscillator frequency with an unsigned int. This is faster than using a
 	float, so it's useful when processor time is tight, but it can be tricky with
 	low and high frequencies, depending on the size of the wavetable being used. If
 	you're not getting the results you expect, try explicitly using a float, or try
-	setFreq_n8.
+	setFreq_Q24n8() or or setFreq_Q16n16().
 	@param frequency to play the wave table.
 	*/
 	inline
@@ -150,13 +171,14 @@ public:
 	{
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
-			phase_increment_fractional = (((unsigned long)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) << F_BITS; // Obvious but slow
+			phase_increment_fractional = (((unsigned long)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) << F_BITS;
 		}
 	}
 
+
 	/** Set the oscillator frequency with a float. Using a float is the most reliable
 	way to set frequencies, -Might- be slower than using an int but you need either
-	this or setFreq_n8 for fractional frequencies.
+	this, setFreq_Q24n8() or setFreq_Q16n16() for fractional frequencies.
 	@param frequency to play the wave table.
 	 */
 	inline
@@ -168,6 +190,7 @@ public:
 		}
 	}
 
+
 	/**  Returns the sample at the given table index.
 	@param atIndex table index between 0 and the table size.The
 	index rolls back around to 0 if it's larger than the table size.
@@ -178,6 +201,7 @@ public:
 	{
 		return (char)pgm_read_byte_near(table + (index & (NUM_TABLE_CELLS - 1)));
 	}
+
 
 	/** phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding
 	between frequencies. Instead of recalculating the phase increment for each
@@ -194,6 +218,7 @@ public:
 	{
 		return (((unsigned long)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) << F_BITS;
 	}
+
 
 	/** Set a specific phase increment.  See phaseIncFromFreq().
 	@param phaseinc_fractional a phase increment value as calculated by phaseIncFromFreq().
@@ -217,6 +242,7 @@ private:
 	{
 		phase_fractional += phase_increment_fractional;
 	}
+
 
 	/** Returns the current sample.
 	 */

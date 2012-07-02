@@ -1,12 +1,23 @@
 Mozzi sound synthesis library for Arduino
 
-News for Version 0.01.2
-
-- Oscil.h: Added a setPhase() method to play a table from any position.
+NEWS
 
 
+Version 0.01.1b
 
-Changes in Version 0.01.1
+- Oscil.h:
+	- added a setPhase() method to play a table from any position.
+	- added setFreq_Q16n16() for setting frequency using Q16n16 fixed-point numbers
+- _09_PhaseMod_Envelope example wasn't showing up in Arduino, fixed the name so it can be found.
+- added triangle, saw and cos tables in sizes 256, 512, 1024, 2048, 4096 and 8192
+- added a float2mozzi_uint8.py, renamed the other wave converter scripts and made them more uniform
+- utils.h/utils.cpp:
+	- added Q16n16_mtofLookup(), a fast (but less accurate for non-integer midi note numbers) fixed point alternative to mtof().
+	- added Q16n16_mtof(), a faster (but less accurate overall) fixed point alternative to mtof().
+	- changed setupFastADC() to setupFastAnalogRead()
+- replaced TABLE_NUM_CELLS with NUM_CELLS in tables
+
+Version 0.01.1
 
 - Changed utils.c to utils.cpp and changed all examples from #include utils.c to #include utils.h.
 - Changed and capitalised names in saw_analogue512_int8.h

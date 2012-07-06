@@ -1,7 +1,7 @@
 /*  Example of filtering a wave,
  *  using Mozzi sonification library.
  *
- *  Demonstrates LowPassFilter.
+ *  Demonstrates LowPassFilter().
  *
  *  Circuit: Audio output on digital pin 9.
  *

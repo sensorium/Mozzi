@@ -49,6 +49,8 @@ defined macro, rather than a const or int, for the Oscil to run fast enough.
 updateAudio(), or CONTROL_RATE if it's updated each time updateControl() is
 called. It could also be a fraction of CONTROL_RATE if you are doing some kind
 of cyclic updating in updateControl(), for example, to spread out the processor load.
+@todo Use conditional compilation to optimise setFreq() variations for different table
+sizes.
 @section raw2mozzi
 Converting soundfiles for Mozzi
 There is a python script called raw2mozzi.py in the Mozzi/python folder.
@@ -70,8 +72,10 @@ public:
 
 
 	/** Constructor.
-	Declare an Oscil with template TABLE_NUM_CELLS and UPDATE_RATE parameters, without specifying a particular wave table for it to play.
-	The table can be set or changed on the fly with setTable().
+	Declare an Oscil with template TABLE_NUM_CELLS and UPDATE_RATE
+	parameters, without specifying a particular wave table for it to play.
+	The table can be set or changed on the fly with setTable(). Any tables
+	used by the Oscil must be the same size.
 	*/
 	Oscil()
 	{}

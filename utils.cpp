@@ -6,6 +6,7 @@ microseconds to run. It can seriously mess up the audio output if you use it in
 updateControl() or updateAudio(). This is a good choice in setup(), or where you
 need precise midi-pitch conversion and aren't doing much other audio
 calculation.
+@note Timing: ~350 us
 @param midival a midi note number.  Like the mtof object in Pd, midi values can have fractions.
 @return the frequency represented by the input midi note number..
  */
@@ -49,6 +50,7 @@ good choice if you're using whole note values. Q16n16_mtof() uses cheap linear
 interpolation between whole midi-note frequency equivalents stored in a lookup
 table, so is less accurate than the float version, mtof(), for non-whole midi
 values.
+@note Timing: ~14 us.
 @param midival a midi note number in Q16n16 format, for fractional values.
 @return the frequency represented by the input midi note number, in Q16n16
 fixed point fractional integer format, where the lower word is a fractional value.
@@ -81,9 +83,11 @@ calculates the frequency using fixed point maths and the results are quite
 inaccurate in the higher ranges. However, if you don't need note-perfect pitch,
 this is a good choice to get a reasonable approximation of frequency from a
 fractional midi value.
+@note Timing: ~55 us
 @param midival a midi note number in Q16n16 format, for fractional values.
 @return the frequency represented by the input midi note number, in Q16n16
 fixed point fractional integer format, where the lower word is a fractional value.
+@todo Rewrite to change div by constant to multiply by inverse.
 */
 Q16n16  Q16n16_mtof(Q16n16 Q16n16_midival)
 {

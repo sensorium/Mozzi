@@ -29,8 +29,8 @@ void setup(){
   aNoise.setFreq((float)AUDIO_RATE/WHITENOISE8192_SAMPLERATE);
   int attack = 30;
   int decay = 1000;
-  kEnvelope.set(attack,decay+100);
-  kDelay.set(attack+decay);
+  kEnvelope.set(attack,decay);
+  kDelay.set(attack+decay+100);
 }
 
 

@@ -30,8 +30,10 @@ from http://en.wikipedia.org/wiki/Low-pass_filter: y[i] := y[i-1] + α * (x[i] -
 y[i-1]), translated as out = last_out + a * (in - last_out). It's not calibrated
 to any real-world update rate, so if you use it at CONTROL_RATE and you change
 CONTROL_RATE, you'll need to adjust the smoothness value to suit.
-@tparam set the type of numbers you want to use. For example, Smooth <int> mySmooth;
-makes a Smooth which works with ints.
+@tparam set the type of numbers you want to use, as long as it's signed, ie. char, int
+or long. Unsigned types don't work.  Smooth <int> mySmooth; makes a
+Smooth which works with ints.
+@todo Check timing and possibly make a fixed point version if it's worthwhile.
 */
 
 template <class T>

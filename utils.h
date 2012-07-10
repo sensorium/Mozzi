@@ -36,7 +36,7 @@ unsigned char randomMidi();
 unsigned long xorshift96();
 
 
-void setupFastAnalogRead(char riskyness);
+void setupFastAnalogRead(char riskyness  = 0);
 
 
 #endif /* UTILS_H_ */

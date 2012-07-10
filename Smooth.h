@@ -24,15 +24,16 @@
 #define SMOOTH_H_
 
 #include "Arduino.h"
+#include "fixedMath.h"
 
 /** A simple low pass filter for smoothing control signals. This algorithm comes
 from http://en.wikipedia.org/wiki/Low-pass_filter: y[i] := y[i-1] + α * (x[i] -
 y[i-1]), translated as out = last_out + a * (in - last_out). It's not calibrated
 to any real-world update rate, so if you use it at CONTROL_RATE and you change
 CONTROL_RATE, you'll need to adjust the smoothness value to suit.
-@tparam set the type of numbers you want to use, as long as it's signed, ie. char, int
-or long. Unsigned types don't work.  Smooth <int> mySmooth; makes a
-Smooth which works with ints.
+@tparam T the type of numbers being smoothed; valid types are char, unsigned char, int
+and unsigned int. long numbers will overflow the internal calculations.
+@note Timing: ~5us for 16 bit types, ~1us for 8 bit types.
 @todo Check timing and possibly make a fixed point version if it's worthwhile.
 */
 
@@ -41,7 +42,7 @@ class Smooth
 {
 private:
 	T last_out;
-	float a;
+	Q0n16 a;
 
 public:
 	/** Constructor.
@@ -49,9 +50,9 @@ public:
 	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
 	very smooth;
 	 */
-	Smooth(float smoothness): a(1.f-smoothness)
+	Smooth(float smoothness)
 	{
-		;
+		setSmoothness(smoothness);
 	}
 
 	/** Filters the input and returns the filtered value.
@@ -61,7 +62,7 @@ public:
 	inline
 	T next(T in)
 	{
-		T out = (T)((a * (in - last_out)) + last_out);
+		T out = (T)(((((long)in - last_out) * a)>>16) + last_out);
 		last_out = out;
 		return out;
 	}
@@ -74,9 +75,185 @@ public:
 	inline
 	void setSmoothness(float smoothness)
 	{
-		a=1.f-smoothness;
+		a=Q0n16_float2fix(1.f-smoothness);
 	}
 
 };
+
+// class template specialization:
+template <>
+class Smooth <unsigned char>
+{
+private:
+	unsigned char last_out;
+	unsigned char a;
+
+public:
+	/** Constructor.
+	@param smoothness sets how much smoothing the filter will apply to
+	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
+	very smooth;
+	 */
+	Smooth(float smoothness)
+	{
+		setSmoothness(smoothness);
+	}
+
+	/** Filters the input and returns the filtered value.
+	@param in the signal to be smoothed.
+	@return the filtered signal.
+	 */
+	inline
+	unsigned char next(unsigned char in)
+	{
+		unsigned char out = (unsigned char)((((int) a * (in - last_out))>>8) + last_out);
+		last_out = out;
+		return out;
+	}
+
+	/** Sets how much smoothing the filter will apply to its input.
+	@param smoothness sets how much smoothing the filter will apply to
+	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
+	very smooth;
+	 */
+	inline
+	void setSmoothness(float smoothness)
+	{
+		a=Q0n8_float2fix(1.f-smoothness);
+	}
+
+};
+
+
+template <>
+class Smooth <char>
+{
+private:
+	char last_out;
+	unsigned char a;
+
+public:
+	/** Constructor.
+	@param smoothness sets how much smoothing the filter will apply to
+	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
+	very smooth;
+	 */
+	Smooth(float smoothness)
+	{
+		setSmoothness(smoothness);
+	}
+
+	/** Filters the input and returns the filtered value.
+	@param in the signal to be smoothed.
+	@return the filtered signal.
+	 */
+	inline
+	char next(char in)
+	{
+		char out = (char)((((int) a * (in - last_out))>>8) + last_out);
+		last_out = out;
+		return out;
+	}
+
+	/** Sets how much smoothing the filter will apply to its input.
+	@param smoothness sets how much smoothing the filter will apply to
+	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
+	very smooth;
+	 */
+	inline
+	void setSmoothness(float smoothness)
+	{
+		a=Q0n8_float2fix(1.f-smoothness);
+	}
+
+};
+
+
+// template <>
+// class Smooth <unsigned int>
+// {
+// private:
+// 	unsigned int last_out;
+// 	unsigned int a;
+
+// public:
+// 	/** Constructor.
+// 	@param smoothness sets how much smoothing the filter will apply to
+// 	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
+// 	very smooth;
+// 	 */
+// 	Smooth(float smoothness)
+// 	{
+// 		setSmoothness(smoothness);
+// 	}
+
+// 	/** Filters the input and returns the filtered value.
+// 	@param in the signal to be smoothed.
+// 	@return the filtered signal.
+// 	 */
+// 	inline
+// 	unsigned int next(unsigned int in)
+// 	{
+// 		unsigned int out = (unsigned int)((((long) a * (in - last_out))>>16) + last_out);
+// 		last_out = out;
+// 		return out;
+// 	}
+
+// 	/** Sets how much smoothing the filter will apply to its input.
+// 	@param smoothness sets how much smoothing the filter will apply to
+// 	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
+// 	very smooth;
+// 	 */
+// 	inline
+// 	void setSmoothness(float smoothness)
+// 	{
+// 		a=Q0n16_float2fix(1.f-smoothness);
+// 	}
+
+// };
+
+
+// template <>
+// class Smooth <int>
+// {
+// private:
+// 	int last_out;
+// 	unsigned int a;
+
+// public:
+// 	/** Constructor.
+// 	@param smoothness sets how much smoothing the filter will apply to
+// 	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
+// 	very smooth;
+// 	 */
+// 	Smooth(float smoothness)
+// 	{
+// 		setSmoothness(smoothness);
+// 	}
+
+// 	/** Filters the input and returns the filtered value.
+// 	@param in the signal to be smoothed.
+// 	@return the filtered signal.
+// 	 */
+// 	inline
+// 	int next(int in)
+// 	{
+// 		int out = (int)((((long) a * (in - last_out))>>16) + last_out);
+// 		last_out = out;
+// 		return out;
+// 	}
+
+// 	/** Sets how much smoothing the filter will apply to its input.
+// 	@param smoothness sets how much smoothing the filter will apply to
+// 	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
+// 	very smooth;
+// 	 */
+// 	inline
+// 	void setSmoothness(float smoothness)
+// 	{
+// 		a=Q0n16_float2fix(1.f-smoothness);
+// 	}
+
+// };
 
 #endif /* SMOOTH_H_ */

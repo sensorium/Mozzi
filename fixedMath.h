@@ -11,7 +11,9 @@
 */
 // types
 #define Q0n7 char 				/**< signed fractional number using 7 fractional bits, represents -0.5 to 0.496*/
-#define Q0n8 unsigned char  		/**< unsigned fractional number using 0 fractional bits, represents 0.0 to 0.996*/
+#define Q0n8 unsigned char  		/**< unsigned fractional number using 8 fractional bits, represents 0.0 to 0.996*/
+
+#define Q0n16 unsigned int  		/**< unsigned fractional number using 16 fractional bits, represents 0.0 to 0.999*/
 
 #define Q7n8 int 				/**< signed fractional number using 7 integer bits and 8 fractional bits, represents -127.996 to 127.996*/
 #define Q1n14 int				/**< signed fractional number using 1 integer bit and 14 fractional bits, represents -1.999 to 1.999*/
@@ -39,6 +41,7 @@
 #define Q1n14_FIX1 ((Q1n14) 16384)		/**< 1 in Q1n14 format*/
 #define Q1n15_FIX1 ((Q1n15) 32768)		/**< 1 in Q1n15 format*/
 #define Q16n16_FIX1 ((Q16n16) 65536)		/**< 1 in Q16n16 format*/
+#define Q0n16_FIX1 ((Q0n16) 65535)		/**< 0.999 in Q0n16 format*/
 #define Q15n16_FIX1 ((Q15n16) 65536)		/**< 1 in Q15n16 format*/
 #define Q8n24_FIX1 ((Q8n24) 16777216)	/**< 1 in Q8n24 format*/
 #define Q0n32_FIX1 ((Q0n32) 4294967295)	/**< 0.999999999767169 in Q0n32 format*/
@@ -66,6 +69,9 @@ To convert a number from Qm.n format to floating point:
 
 #define Q0n7_float2fix(a) ((char)((a)*256))			/**<Convert float to Q0n7 fix. @param a is a float*/
 #define Q0n7_fix2float(a) ((float)(a)/256)				/**<Convert Q0n7 fix to float. @param a is a Q0n7 char*/
+
+#define Q0n8_float2fix(a) ((char)((a)*256))			/**<Convert float to Q0n8 fix. @param a is a float*/
+#define Q0n8_fix2float(a) ((float)(a)/256)				/**<Convert Q0n8 fix to float. @param a is a Q0n8 unsigned char*/
 
 #define Q7n8_char2fix(a) (((int)(a))<<8)				/**<Convert char to Q7n8 fix. @param a is a char*/
 #define Q7n8_fix2char(a) ((signed char)((a)>>8))		/**<Convert Q7n8 fix to char. @param a is a Q7n8 int*/
@@ -112,6 +118,9 @@ To convert a number from Qm.n format to floating point:
 #define Q16n16_to_Q0n8(a) ((Q0n8)((a)>>8))			/**<Convert Q16n16 fixed to Q0n8 unsigned char. @param a is a Q16n16 unsigned long*/
 #define Q16n16_float2fix(a) ((Q16n16)((a)*65536.f))		/**<Convert float to Q16n16 fix. @param a is a float*/
 #define Q16n16_fix2float(a) ((float)a*0.000015258789063)	/**<Convert fix to float. @param a is a Q16n16 unsigned long*/
+
+#define Q0n16_float2fix(a) ((Q0n16)((a)*65536.f))		/**<Convert float to Q0n16 fix. @param a is a float*/
+#define Q0n16_fix2float(a) ((float)a/65536)			/**<Convert fix to float. @param a is a Q0n16 unsigned int*/
 
 #define Q16n0_to_Q15n16(a) (((Q15n16)(a))<<16)		/**<Convert Q16n0 unsigned int to Q15n16 fix. @param a is a Q16n0 unsigned int */
 #define Q0n8_to_Q15n16(a) (((Q15n16)(a))<<8)		/**<Convert Q0n8 unsigned char to Q15n16 fix. @param a is a Q0n8 unsigned char */

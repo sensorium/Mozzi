@@ -27,16 +27,14 @@ Set pin 13 low for testing timing with an oscilloscope.*/
 
 
 
-//extern Q16n16 midiToFreq[128];
 float mtof(float x);
-//Q16n16 Q16n16_m2f(float midival);
 Q16n16 Q16n16_mtofLookup(Q16n16 midival);
 Q16n16 Q16n16_mtof(Q16n16 midival);
 unsigned char randomMidi();
 unsigned long xorshift96();
 
 
-void setupFastAnalogRead(char riskyness  = 0);
+void setupFastAnalogRead();
 
 
 #endif /* UTILS_H_ */

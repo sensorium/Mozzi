@@ -3,6 +3,12 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1c
+- Smooth.h: increased speed from about 400 us to between 1-5 us, depending on
+number type, by changing floating to fixed point in internal calculations. Types
+are now restricted to char, unsigned char, int and unsigned int.
+- fixedMath.h: added some types and fixed some mistakes
+
 Version 0.01.1b
 
 - Oscil.h:

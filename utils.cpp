@@ -134,40 +134,18 @@ unsigned long xorshift96()
 
 /** @ingroup util
 Make analogRead() faster than the standard Arduino version, changing the
-duration from about 105 in unmodified Arduino to 16 microseconds for a
+duration from about 105 in unmodified Arduino to 15 microseconds for a
 dependable analogRead(). Put this in setup() if you intend to use analogRead()
 with Mozzi, to avoid glitches.
 See: http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11
-@param riskyness A value of 0 gives ~16us per analogRead(), and is the fastest rate for
-which the behaviour is defined in the Atmel documentation. If you want to take a
-risk, 1 gives ~8us, and 2 gives ~4us, so you might get faster response at the
-possible cost of undefined behaviour.
+ 
 */
-void setupFastAnalogRead(char riskyness)
+void setupFastAnalogRead()
 {
-	switch (riskyness)
-	{
-	case 0:
-		// fastest predivided rate (divide by 16, giving 1Mhz) for which behaviour is defined (~16us per sample)
-		sbi(ADCSRA,ADPS2);
-		cbi(ADCSRA,ADPS1);
-		cbi(ADCSRA,ADPS0);
-		break;
-
-	case 1:
-		// div by 8, giving 2Mz (~8us per sample) - behaviour undefined but seems OK
-		cbi(ADCSRA,ADPS2);
-		sbi(ADCSRA,ADPS1);
-		sbi(ADCSRA,ADPS0);
-		break;
-
-	case 2:
-		// div by 4, giving 4Mz (~4us per sample) - behaviour undefined but seems OK
-		cbi(ADCSRA,ADPS2);
-		sbi(ADCSRA,ADPS1);
-		cbi(ADCSRA,ADPS0);
-		break;
-	}
+	// fastest predivided rate (divide by 16, giving 1Mhz) for which behaviour is defined (~16us per sample)
+	sbi(ADCSRA,ADPS2);
+	cbi(ADCSRA,ADPS1);
+	cbi(ADCSRA,ADPS0);
 }
 
 

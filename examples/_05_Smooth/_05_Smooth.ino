@@ -29,8 +29,7 @@ unsigned char smoothed_gain; // for conveying kSmoothGain to updateAudio
 unsigned char target_gain = 0;
 
 void setup(){
-  SET_PIN13_OUT;
-  aSin.setFreq(330u); // set the frequency, using an unsigned int or a float
+  aSin.setFreq(330u); // set the frequency with an unsigned int
   kGainChangeDelay.set(500); // 500ms countdown, within resolution of CONTROL_RATE
   startMozzi(CONTROL_RATE);
 }
@@ -45,9 +44,7 @@ void updateControl(){
     }
     kGainChangeDelay.start();
   }
-  SET_PIN13_HIGH;
   smoothed_gain = kSmoothGain.next(target_gain);
-  SET_PIN13_LOW;
 }
 
 

@@ -75,7 +75,7 @@ values.
 @return the frequency represented by the input midi note number, in Q16n16
 fixed point fractional integer format, where the lower word is a fractional value.
 */
-Q16n16  Q16n16_mtofLookup(Q16n16 midival_fractional)
+Q16n16  Q16n16_mtof(Q16n16 midival_fractional)
 {
 	Q16n16 diff_fraction;
 	unsigned char index = midival_fractional >> 16;
@@ -94,27 +94,28 @@ Q16n16  Q16n16_mtofLookup(Q16n16 midival_fractional)
 	return (Q16n16) (freq1+ diff_fraction);
 }
 
-#define Q8n8_8point1757989156  ((Q8n8)2093)
-#define Q0n16_1twelfth ((Q0n16)5461)
-/** @ingroup util
-Converts midi note number to frequency. Q16n16_mtof() is a fast alternative to
-mtof(), using Q16n16 fixed-point format instead of floats. Q16n16_mtof()
-calculates the frequency using fixed point maths and the results are quite
-inaccurate in the higher ranges. However, if you don't need note-perfect pitch,
-this is a good choice to get a reasonable approximation of frequency from a
-fractional midi value.
-@note Timing: ~55 us
-@param midival a midi note number in Q16n16 format, for fractional values.
-@return the frequency represented by the input midi note number, in Q16n16
-fixed point fractional integer format, where the lower word is a fractional value.
-@todo Rewrite to change div by constant to multiply by inverse.
-*/
-Q16n16  Q16n16_mtof(Q8n8 Q8n8_midival)
-{
-	//Q8n8_midival/12 = Q8n8_midival * 1/12
-	//1/12 = 0.083333333333333 = 5461 >> 16
-	return ((Q16n16) Q8n8_8point1757989156 * (Q16n16_pow2(((unsigned long)Q8n8_midival*Q0n16_1twelfth)>>16)>>8));
-}
+
+// #define Q8n8_8point1757989156  ((Q8n8)2093)
+// #define Q0n16_1twelfth ((Q0n16)5461)
+// /** @ingroup util
+// Converts midi note number to frequency. Q16n16_mtof() is a fast alternative to
+// mtof(), using Q16n16 fixed-point format instead of floats. Q16n16_mtof()
+// calculates the frequency using fixed point maths and the results are quite
+// inaccurate in the higher ranges. However, if you don't need note-perfect pitch,
+// this is a good choice to get a reasonable approximation of frequency from a
+// fractional midi value.
+// @note Timing: ~15 us
+// @param midival a midi note number in Q16n16 format, for fractional values.
+// @return the frequency represented by the input midi note number, in Q16n16
+// fixed point fractional integer format, where the lower word is a fractional value.
+// @todo Rewrite to change div by constant to multiply by inverse.
+// */
+// Q16n16  Q16n16_mtof(Q8n8 Q8n8_midival)
+// {
+// 	//Q8n8_midival/12 = Q8n8_midival * 1/12
+// 	//1/12 = 0.083333333333333 = 5461 >> 16
+// 	return ((Q16n16) Q8n8_8point1757989156 * (Q16n16_pow2(((unsigned long)Q8n8_midival*Q0n16_1twelfth)>>16)>>8));
+// }
 
 
 /** @ingroup util

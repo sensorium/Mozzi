@@ -1,4 +1,4 @@
-/*  Example of filtering a triangle wave,
+/*  Example of modulating a delayed_10_Table_Resolution triangle wave,
  *  using Mozzi sonification library.
  *
  *  Demonstrates AudioDelay.

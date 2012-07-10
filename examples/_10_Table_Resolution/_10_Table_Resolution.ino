@@ -21,10 +21,6 @@
 
 #define CONTROL_RATE 64
 
-// It would be great to have the oscillators in an array, but being template classes,
-// each using a different sized table makes them different types, with the table length compiled in as
-// a literal value (helps speed).  We can't have an array of different types, and pointers have to be
-// cast to different types so there's not really any advantage there.  Any suggestions?
 // use: Oscil <table_size, update_rate> oscilName (wavetable)
 Oscil <SIN256_NUM_CELLS, AUDIO_RATE> aSin0(SIN256_DATA); // can hear significant aliasing noise
 Oscil <SIN512_NUM_CELLS, AUDIO_RATE> aSin1(SIN512_DATA); // noise still there but less noticeable

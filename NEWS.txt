@@ -8,7 +8,11 @@ Version 0.01.1c
 number type, by changing floating to fixed point in internal calculations. Types
 are now restricted to char, unsigned char, int and unsigned int.
 - fixedMath.h: changed *_float2fix names to float_to* , added some types and fixed some mistakes
-- utils.h: hardcoded midiToFreq[] array to progmem instead of generating on startup
+- utils.h:
+	-hardcoded midiToFreq[] array to progmem instead of generating on startup
+	-removed old Q16n16_mtof() and renamed Q16n16_mtofLookup() to Q16n16_mtof().
+	The old Q16n16_mtof() was slower and less accurate than the lookup version.
+- fixed example _08_Detuned_Beats_Wash to work with new midi, fixed-point and Oscil setFreq_Q16n16 code.
 
 Version 0.01.1b
 

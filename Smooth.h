@@ -75,7 +75,7 @@ public:
 	inline
 	void setSmoothness(float smoothness)
 	{
-		a=Q0n16_float2fix(1.f-smoothness);
+		a=float_to_Q0n16(1.f-smoothness);
 	}
 
 };
@@ -120,7 +120,7 @@ public:
 	inline
 	void setSmoothness(float smoothness)
 	{
-		a=Q0n8_float2fix(1.f-smoothness);
+		a=float_to_Q0n8(1.f-smoothness);
 	}
 
 };
@@ -164,7 +164,7 @@ public:
 	inline
 	void setSmoothness(float smoothness)
 	{
-		a=Q0n8_float2fix(1.f-smoothness);
+		a=float_to_Q0n8(1.f-smoothness);
 	}
 
 };

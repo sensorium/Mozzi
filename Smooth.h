@@ -80,7 +80,7 @@ public:
 
 };
 
-
+/** unsigned char specialisation of Smooth template*/
 // class template specialization:
 template <>
 class Smooth <unsigned char>
@@ -125,7 +125,7 @@ public:
 
 };
 
-
+/** char specialisation of Smooth template*/
 template <>
 class Smooth <char>
 {

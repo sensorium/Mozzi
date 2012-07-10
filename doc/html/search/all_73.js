@@ -16,10 +16,12 @@ var searchData=
   ['setphase',['setPhase',['../class_oscil.html#ab7b740eec56740426a47508562ed4dd5',1,'Oscil']]],
   ['setphaseinc',['setPhaseInc',['../class_oscil.html#a2ff9bfcc57e07bf0df2ed7db186ecff7',1,'Oscil::setPhaseInc()'],['../class_sample.html#a95735f0b10eb0fa50402c47d0cd5d871',1,'Sample::setPhaseInc()']]],
   ['setresonance',['setResonance',['../class_low_pass_filter.html#aa804e9162a1b855380c6f48d00de2c32',1,'LowPassFilter']]],
-  ['setsmoothness',['setSmoothness',['../class_smooth.html#aac44bbf7a9bc6b9bae80eecc1be6e188',1,'Smooth']]],
+  ['setsmoothness',['setSmoothness',['../class_smooth.html#aac44bbf7a9bc6b9bae80eecc1be6e188',1,'Smooth::setSmoothness()'],['../class_smooth_3_01unsigned_01char_01_4.html#a4ca2370b54c719edc60a95f30d6d4f97',1,'Smooth&lt; unsigned char &gt;::setSmoothness()'],['../class_smooth_3_01char_01_4.html#ac94cf0cc43dd5bac276d2312114f5f0f',1,'Smooth&lt; char &gt;::setSmoothness()']]],
   ['settable',['setTable',['../class_oscil.html#ac0700f90c5d9c507ee77b1d3ee25f2d3',1,'Oscil::setTable()'],['../class_sample.html#a047fc4db44c4f2acbc44d4dccf248c83',1,'Sample::setTable()']]],
   ['setupfastanalogread',['setupFastAnalogRead',['../group__util.html#gaf46803d06aa1d839192cc6125e39ff01',1,'setupFastAnalogRead():&#160;utils.cpp'],['../group__util.html#gaf46803d06aa1d839192cc6125e39ff01',1,'setupFastAnalogRead():&#160;utils.cpp']]],
-  ['smooth',['Smooth',['../class_smooth.html',1,'Smooth&lt; T &gt;'],['../class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26',1,'Smooth::Smooth()']]],
+  ['smooth',['Smooth',['../class_smooth.html',1,'Smooth&lt; T &gt;'],['../class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26',1,'Smooth::Smooth()'],['../class_smooth_3_01unsigned_01char_01_4.html#aae502f9ef23f3041712a9843b0e37371',1,'Smooth&lt; unsigned char &gt;::Smooth()'],['../class_smooth_3_01char_01_4.html#a6fd26fec8c9e85e58358b6d6d4bcd226',1,'Smooth&lt; char &gt;::Smooth()']]],
+  ['smooth_3c_20char_20_3e',['Smooth< char >',['../class_smooth_3_01char_01_4.html',1,'']]],
+  ['smooth_3c_20unsigned_20char_20_3e',['Smooth< unsigned char >',['../class_smooth_3_01unsigned_01char_01_4.html',1,'']]],
   ['start',['start',['../class_ead.html#ac385679b58e2f9755029b7da7405b233',1,'Ead::start()'],['../class_event_delay.html#a97a07c9371040d6388b8369352b08d83',1,'EventDelay::start()'],['../class_sample.html#a57307ee93ef0fcff36d543596eb79b72',1,'Sample::start()'],['../class_sample.html#a7f937c15daf469260c6bba84016e9c99',1,'Sample::start(unsigned int offset)']]],
   ['startmozzi',['startMozzi',['../group__core.html#gaedc83c89280eccc3b7fdb3115daab573',1,'startMozzi(unsigned int control_rate_hz):&#160;MozziGuts.cpp'],['../group__core.html#gaedc83c89280eccc3b7fdb3115daab573',1,'startMozzi(unsigned int control_rate_hz):&#160;MozziGuts.cpp']]]
 ];

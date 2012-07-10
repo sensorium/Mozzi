@@ -7,7 +7,7 @@ Version 0.01.1c
 - Smooth.h: increased speed from about 400 us to between 1-5 us, depending on
 number type, by changing floating to fixed point in internal calculations. Types
 are now restricted to char, unsigned char, int and unsigned int.
-- fixedMath.h: added some types and fixed some mistakes
+- fixedMath.h: changed *_float2fix names to float_to* , added some types and fixed some mistakes
 - utils.h: hardcoded midiToFreq[] array to progmem instead of generating on startup
 
 Version 0.01.1b

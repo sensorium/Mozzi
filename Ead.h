@@ -56,7 +56,7 @@ public:
 	inline
 	void setAttack(unsigned int attack_ms)
 	{
-		Q8n8attack = Q8n8_float2fix(millisToOneMinusRealPole(attack_ms));
+		Q8n8attack = float_to_Q8n8(millisToOneMinusRealPole(attack_ms));
 	}
 
 
@@ -66,7 +66,7 @@ public:
 	inline
 	void setDecay(unsigned int decay_ms)
 	{
-		Q8n8decay = Q8n8_float2fix(millisToOneMinusRealPole(decay_ms));
+		Q8n8decay = float_to_Q8n8(millisToOneMinusRealPole(decay_ms));
 	}
 
 

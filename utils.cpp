@@ -19,7 +19,7 @@ float mtof(float midival)
 
 // static Q16n16 Q16n16_m2f(float midival)
 // {
-// 	return Q16n16_float2fix(mtof(midival));
+// 	return float_to_Q16n16(mtof(midival));
 // }
 
 //static Q16n16 midiToFreq[128] =
@@ -70,13 +70,11 @@ good choice if you're using whole note values. Q16n16_mtof() uses cheap linear
 interpolation between whole midi-note frequency equivalents stored in a lookup
 table, so is less accurate than the float version, mtof(), for non-whole midi
 values.
-@note Timing: ~14 us.
+@note Timing: ~8 us.
 @param midival a midi note number in Q16n16 format, for fractional values.
 @return the frequency represented by the input midi note number, in Q16n16
 fixed point fractional integer format, where the lower word is a fractional value.
 */
-
-
 Q16n16  Q16n16_mtofLookup(Q16n16 midival_fractional)
 {
 	Q16n16 diff_fraction;
@@ -97,6 +95,7 @@ Q16n16  Q16n16_mtofLookup(Q16n16 midival_fractional)
 }
 
 #define Q8n8_8point1757989156  ((Q8n8)2093)
+#define Q0n16_1twelfth ((Q0n16)5461)
 /** @ingroup util
 Converts midi note number to frequency. Q16n16_mtof() is a fast alternative to
 mtof(), using Q16n16 fixed-point format instead of floats. Q16n16_mtof()
@@ -110,9 +109,11 @@ fractional midi value.
 fixed point fractional integer format, where the lower word is a fractional value.
 @todo Rewrite to change div by constant to multiply by inverse.
 */
-Q16n16  Q16n16_mtof(Q16n16 Q16n16_midival)
+Q16n16  Q16n16_mtof(Q8n8 Q8n8_midival)
 {
-	return ((Q16n16) Q8n8_8point1757989156 * (Q16n16_pow2((Q8n8) ((Q16n16_midival/12)>>8))>>8));
+	//Q8n8_midival/12 = Q8n8_midival * 1/12
+	//1/12 = 0.083333333333333 = 5461 >> 16
+	return ((Q16n16) Q8n8_8point1757989156 * (Q16n16_pow2(((unsigned long)Q8n8_midival*Q0n16_1twelfth)>>16)>>8));
 }
 
 
@@ -159,7 +160,7 @@ duration from about 105 in unmodified Arduino to 15 microseconds for a
 dependable analogRead(). Put this in setup() if you intend to use analogRead()
 with Mozzi, to avoid glitches.
 See: http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11
- 
+
 */
 void setupFastAnalogRead()
 {

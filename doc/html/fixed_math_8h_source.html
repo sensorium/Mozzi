@@ -24,19 +24,19 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  
+
   <td id="projectlogo"><img alt="Logo" src="mozzi_smooth_courier_rotated_small_flying_light.png"/></td>
-  
-  
+
+
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
    &#160;<span id="projectnumber">alpha 0.01.1b</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
-  
-  
-  
+
+
+
  </tr>
  </tbody>
 </table>
@@ -61,8 +61,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
                onmouseout="return searchBox.OnSearchSelectHide()"
                alt=""/>
           <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onfocus="searchBox.OnSearchFieldFocus(true)"
+               onblur="searchBox.OnSearchFieldFocus(false)"
                onkeyup="searchBox.OnSearchFieldChange(event)"/>
           </span><span class="right">
             <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
@@ -86,7 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
+<iframe src="javascript:void(0)" frameborder="0"
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -100,7 +100,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define FIXEDMATH_H_</span>
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
 <a name="l00004"></a>00004 <span class="preprocessor">#include &quot;Arduino.h&quot;</span> <span class="comment">// for &quot;byte&quot; - but is this depreciated?</span>
-<a name="l00005"></a>00005 
+<a name="l00005"></a>00005
 <a name="l00012"></a>00012 <span class="comment">// types</span>
 <a name="l00013"></a><a class="code" href="group__fixed_math.html#ga5bc7bc305987974b29bcbc2c9c31bce2">00013</a> <span class="preprocessor">#define Q0n7 char                                                               </span>
 <a name="l00014"></a><a class="code" href="group__fixed_math.html#ga375bc832b01f5b4beb9277bc5fad43a0">00014</a> <span class="preprocessor">#define Q0n8 unsigned char                      </span>
@@ -144,31 +144,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00061"></a>00061 <span class="comment">  Convert the number to floating point as if it were an integer</span>
 <a name="l00062"></a>00062 <span class="comment">  Multiply by 2^-n</span>
 <a name="l00063"></a>00063 <span class="comment">*/</span>
-<a name="l00064"></a>00064 
+<a name="l00064"></a>00064
 <a name="l00065"></a><a class="code" href="group__fixed_math.html#ga31f62f9911a8438c5c4c8364fde66266">00065</a> <span class="preprocessor">#define Q0n7_float2fix(a) ((char)((a)*128.f))                                   </span>
-<a name="l00066"></a><a class="code" href="group__fixed_math.html#ga4ea0c8699623a2658d1e27ff9a5f6382">00066</a> <span class="preprocessor">#define Q0n7_fix2float(a) ((float)(a)*0.0078125f)                               </span>
+<a name="l00066"></a><a class="code" href="group__fixed_math.html#ga4ea0c8699623a2658d1e27ff9a5f6382">00066</a> <span class="preprocessor">#define Q0n7_to_float(a) ((float)(a)*0.0078125f)                               </span>
 <a name="l00068"></a><a class="code" href="group__fixed_math.html#ga1ec890e4f1bff216175613d2e6cb84ac">00068</a> <span class="preprocessor">#define Q7n8_char2fix(a) (((int)(a))&lt;&lt;8)                                                        </span>
 <a name="l00069"></a><a class="code" href="group__fixed_math.html#ga34b6ad2d24cabe39247ed58e16af042d">00069</a> <span class="preprocessor">#define Q7n8_fix2char(a) ((signed char)((a)&gt;&gt;8))                                </span>
 <a name="l00070"></a><a class="code" href="group__fixed_math.html#ga0388d4a2386bf65ddfc01e5f52633f2d">00070</a> <span class="preprocessor">#define Q7n8_float2fix(a) ((int)((a)*256.f))                                    </span>
-<a name="l00071"></a><a class="code" href="group__fixed_math.html#ga44abefcb2211f36ffbcc3fe240a271df">00071</a> <span class="preprocessor">#define Q7n8_fix2float(a) ((float)(a)/256.f)                                    </span>
+<a name="l00071"></a><a class="code" href="group__fixed_math.html#ga44abefcb2211f36ffbcc3fe240a271df">00071</a> <span class="preprocessor">#define Q7n8_to_float(a) ((float)(a)/256.f)                                    </span>
 <a name="l00073"></a><a class="code" href="group__fixed_math.html#ga96ecdd273abaf8668e9654e794ebb87e">00073</a> <span class="preprocessor">#define Q8n8_uchar2fix(a) (((Q8n8)(a))&lt;&lt;8)                                      </span>
 <a name="l00074"></a><a class="code" href="group__fixed_math.html#ga36c71d1c7d6d07d86bed89d56ea64b86">00074</a> <span class="preprocessor">#define Q8n8_fix2uchar(a) ((unsigned char)((a)&gt;&gt;8))             </span>
-<a name="l00075"></a><a class="code" href="group__fixed_math.html#gad7b8a7cde449a9f6a3281abf7c158031">00075</a> <span class="preprocessor">#define Q8n8_float2fix(a) ((Q8n8)((a)*256.f))                                   </span>
-<a name="l00076"></a><a class="code" href="group__fixed_math.html#ga88c63db0a3c06724a82e0256dbb5bcd9">00076</a> <span class="preprocessor">#define Q8n8_fix2float(a) ((float)(a)/256.f)                                    </span>
+<a name="l00075"></a><a class="code" href="group__fixed_math.html#gad7b8a7cde449a9f6a3281abf7c158031">00075</a> <span class="preprocessor">#define float_to_Q8n8(a) ((Q8n8)((a)*256.f))                                   </span>
+<a name="l00076"></a><a class="code" href="group__fixed_math.html#ga88c63db0a3c06724a82e0256dbb5bcd9">00076</a> <span class="preprocessor">#define Q8n8_to_float(a) ((float)(a)/256.f)                                    </span>
 <a name="l00078"></a><a class="code" href="group__fixed_math.html#gac6ae995f951a7454498fbe85cabe4b84">00078</a> <span class="preprocessor">#define Q0n7_to_Q1n14(a) (((Q1n14)(a))&lt;&lt;7)                                      </span>
 <a name="l00079"></a><a class="code" href="group__fixed_math.html#ga2e236ea9565cf89fa7a676d058b30356">00079</a> <span class="preprocessor">#define Q1n14_to_Q0n7(a) ((Q0n7)((a)&gt;&gt;7))                                       </span>
 <a name="l00080"></a><a class="code" href="group__fixed_math.html#ga95ff3f21b7324d46345af5ba8e44da7a">00080</a> <span class="preprocessor">#define Q1n14_float2fix(a) ((Q1n14)((a)*16384.f))                               </span>
-<a name="l00081"></a><a class="code" href="group__fixed_math.html#ga2b17e15f5c5535f1a1f3bd1d11718a45">00081</a> <span class="preprocessor">#define Q1n14_fix2float(a) ((float)(a)/16384.f)                                 </span>
+<a name="l00081"></a><a class="code" href="group__fixed_math.html#ga2b17e15f5c5535f1a1f3bd1d11718a45">00081</a> <span class="preprocessor">#define Q1n14_to_float(a) ((float)(a)/16384.f)                                 </span>
 <a name="l00083"></a><a class="code" href="group__fixed_math.html#ga186f41ebf1ae5d8c9f48c6c952256064">00083</a> <span class="preprocessor">#define Q0n8_to_Q1n15(a) (((Q1n15)(a))&lt;&lt;7)                                      </span>
 <a name="l00084"></a><a class="code" href="group__fixed_math.html#ga9358b9ca0c1861bf68e794793a444a46">00084</a> <span class="preprocessor">#define Q1n15_to_Q0n8(a) ((Q0n8)((a)&gt;&gt;7))                                       </span>
 <a name="l00085"></a><a class="code" href="group__fixed_math.html#ga06616ad2b8b8c7f1610b3a1f88546e4e">00085</a> <span class="preprocessor">#define Q1n15_float2fix(a) ((Q1n15)((a)*32768.f))                               </span>
-<a name="l00086"></a><a class="code" href="group__fixed_math.html#ga5ae7536490b97f5a7645afd4862b7deb">00086</a> <span class="preprocessor">#define Q1n15_fix2float(a) ((float)(a)*0.000030517578125f)      </span>
+<a name="l00086"></a><a class="code" href="group__fixed_math.html#ga5ae7536490b97f5a7645afd4862b7deb">00086</a> <span class="preprocessor">#define Q1n15_to_float(a) ((float)(a)*0.000030517578125f)      </span>
 <a name="l00089"></a><a class="code" href="group__fixed_math.html#gaf8d3dc38bbbb409e3aa44a17a00c69b2">00089</a> <span class="preprocessor">#define Q0n8_to_Q8n24(a) (((Q8n24)(a))&lt;&lt;16)                     </span>
 <a name="l00090"></a><a class="code" href="group__fixed_math.html#gae8b10847d6104a817b5e042c8b9ed5c7">00090</a> <span class="preprocessor">#define Q8n24_to_Q0n8(a) ((Q0n8)((a)&gt;&gt;16))                                      </span>
 <a name="l00091"></a><a class="code" href="group__fixed_math.html#ga0d48f852ff6423e0db85916abdbb5a91">00091</a> <span class="preprocessor">#define Q8n24_float2fix(a) ((Q8n24)((a)*16777216.f))                            </span>
-<a name="l00092"></a><a class="code" href="group__fixed_math.html#gae86a0f6694d81c5cc6c1883e875df339">00092</a> <span class="preprocessor">#define Q8n24_fix2float(a) ((float)(a)*0.000000059604645f)      </span>
+<a name="l00092"></a><a class="code" href="group__fixed_math.html#gae86a0f6694d81c5cc6c1883e875df339">00092</a> <span class="preprocessor">#define Q8n24_to_float(a) ((float)(a)*0.000000059604645f)      </span>
 <a name="l00094"></a><a class="code" href="group__fixed_math.html#ga4bbdc060be26f82672e05b6b61164cd7">00094</a> <span class="preprocessor">#define Q23n8_float2fix(a) ((Q23n8)((a)*256.f))                 </span>
-<a name="l00095"></a><a class="code" href="group__fixed_math.html#ga25e5766dcd2314406af9c96735002e4e">00095</a> <span class="preprocessor">#define Q23n8_fix2float(a) ((float)(a*0.00390625))                              </span>
+<a name="l00095"></a><a class="code" href="group__fixed_math.html#ga25e5766dcd2314406af9c96735002e4e">00095</a> <span class="preprocessor">#define Q23n8_to_float(a) ((float)(a*0.00390625))                              </span>
 <a name="l00096"></a><a class="code" href="group__fixed_math.html#ga64b2db1254a31bf5c3a71bd6fde65d8b">00096</a> <span class="preprocessor">#define Q23n8_to_Q31n0(a) ((Q31n0)((a)&gt;&gt;8))                     </span>
 <a name="l00097"></a><a class="code" href="group__fixed_math.html#ga2294aca476887cfedae37ee8eeba93f0">00097</a> <span class="preprocessor">#define Q23n8_to_Q16n0(a) ((Q16n0)((a)&gt;&gt;8))                     </span>
 <a name="l00098"></a><a class="code" href="group__fixed_math.html#gaa7ee547ff219597916e1caa2cde455e5">00098</a> <span class="preprocessor">#define Q23n8_to_Q15n0(a) ((Q15n0)((a)&gt;&gt;8))                     </span>
@@ -176,20 +176,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00102"></a><a class="code" href="group__fixed_math.html#ga73c0e604718493391b2261a50a333b43">00102</a> <span class="preprocessor">#define Q0n8_to_Q24n8(a) (((Q24n8)(a)))                                         </span>
 <a name="l00103"></a><a class="code" href="group__fixed_math.html#gadf13187d4b21adfebd6a4ab2c0069d31">00103</a> <span class="preprocessor">#define Q24n8_to_Q0n8(a) ((Q0n8)((a)))                                                          </span>
 <a name="l00104"></a><a class="code" href="group__fixed_math.html#ga85ed92c0f24e659b68f504338012a57b">00104</a> <span class="preprocessor">#define Q24n8_float2fix(a) ((Q24n8)((a)*256.f))                 </span>
-<a name="l00105"></a><a class="code" href="group__fixed_math.html#gac5c748ef17cbe028fc32e4037799d607">00105</a> <span class="preprocessor">#define Q24n8_fix2float(a) ((float)(a*0.00390625))                              </span>
+<a name="l00105"></a><a class="code" href="group__fixed_math.html#gac5c748ef17cbe028fc32e4037799d607">00105</a> <span class="preprocessor">#define Q24n8_to_float(a) ((float)(a*0.00390625))                              </span>
 <a name="l00106"></a><a class="code" href="group__fixed_math.html#gaf9c2e8e7799166864b53b8271a76662b">00106</a> <span class="preprocessor">#define Q24n8_to_Q32n0(a) ((Q32n0)((a)&gt;&gt;8))                     </span>
 <a name="l00108"></a><a class="code" href="group__fixed_math.html#gaea8a55e91d0f362996c2cac950b742b7">00108</a> <span class="preprocessor">#define Q8n0_to_Q16n16(a) (((Q16n16)(a))&lt;&lt;16)                   </span>
 <a name="l00109"></a><a class="code" href="group__fixed_math.html#gac014ecb51ddf1ffaede809e78742e6b9">00109</a> <span class="preprocessor">#define Q0n8_to_Q16n16(a) (((Q16n16)(a))&lt;&lt;8)                    </span>
 <a name="l00110"></a><a class="code" href="group__fixed_math.html#ga0e384f143bf94f60585770668fa65afe">00110</a> <span class="preprocessor">#define Q16n16_to_Q0n8(a) ((Q0n8)((a)&gt;&gt;8))                                      </span>
-<a name="l00111"></a><a class="code" href="group__fixed_math.html#gab0d6ded4c13bbf71d8f8e561ddbb838a">00111</a> <span class="preprocessor">#define Q16n16_float2fix(a) ((Q16n16)((a)*65536.f))                             </span>
-<a name="l00112"></a><a class="code" href="group__fixed_math.html#gae1b1fee1d4039261e01e9bf70d6fa870">00112</a> <span class="preprocessor">#define Q16n16_fix2float(a) ((float)a*0.000015258789063)        </span>
+<a name="l00111"></a><a class="code" href="group__fixed_math.html#gab0d6ded4c13bbf71d8f8e561ddbb838a">00111</a> <span class="preprocessor">#define float_to_Q16n16(a) ((Q16n16)((a)*65536.f))                             </span>
+<a name="l00112"></a><a class="code" href="group__fixed_math.html#gae1b1fee1d4039261e01e9bf70d6fa870">00112</a> <span class="preprocessor">#define Q16n16_to_float(a) ((float)a*0.000015258789063)        </span>
 <a name="l00114"></a><a class="code" href="group__fixed_math.html#gadc268ddaf8e0d16cf6edd51744b30ca7">00114</a> <span class="preprocessor">#define Q16n0_to_Q15n16(a) (((Q15n16)(a))&lt;&lt;16)                  </span>
 <a name="l00115"></a><a class="code" href="group__fixed_math.html#ga7ad616cd598311dad51fe36c8873d3aa">00115</a> <span class="preprocessor">#define Q0n8_to_Q15n16(a) (((Q15n16)(a))&lt;&lt;8)                    </span>
 <a name="l00116"></a><a class="code" href="group__fixed_math.html#gab1e5667823464bedf0f3bfe98a90ad0c">00116</a> <span class="preprocessor">#define Q0n7_to_Q15n16(a) (((Q15n16)(a))&lt;&lt;8)                    </span>
 <a name="l00117"></a><a class="code" href="group__fixed_math.html#ga26f8f60d78413beea505b28d161acc5f">00117</a> <span class="preprocessor">#define Q15n16_to_Q0n8(a) ((Q0n8)((a)&gt;&gt;8))                                      </span>
 <a name="l00118"></a><a class="code" href="group__fixed_math.html#ga20b59d2e5425553e722000d6b52ea4dc">00118</a> <span class="preprocessor">#define Q15n16_to_Q15n0(a) ((Q15n0)((a)&gt;&gt;16))                                   </span>
 <a name="l00119"></a><a class="code" href="group__fixed_math.html#ga0017a1c8d6b34ba36929fbce34b50b5b">00119</a> <span class="preprocessor">#define Q15n16_float2fix(a) ((Q15n16)((a)*65536.f))                             </span>
-<a name="l00120"></a><a class="code" href="group__fixed_math.html#ga290016f045dc71731683feda73c6ceb5">00120</a> <span class="preprocessor">#define Q15n16_fix2float(a) ((float)(a)*0.000015258789063)      </span>
+<a name="l00120"></a><a class="code" href="group__fixed_math.html#ga290016f045dc71731683feda73c6ceb5">00120</a> <span class="preprocessor">#define Q15n16_to_float(a) ((float)(a)*0.000015258789063)      </span>
 <a name="l00127"></a><a class="code" href="group__fixed_math.html#ga4628b6ab7962076cb9e176a3d9739ac6">00127</a> <span class="preprocessor">#define Q7n8_multfix(a,b)         \</span>
 <a name="l00128"></a>00128 <span class="preprocessor">({            \</span>
 <a name="l00129"></a>00129 <span class="preprocessor">int prod, val1=a, val2=b ;    \</span>
@@ -410,21 +410,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00344"></a>00344 <span class="comment">  oscillators[c].phaseStep=multipliedCounter;</span>
 <a name="l00345"></a>00345 <span class="comment"> </span>
 <a name="l00346"></a>00346 <span class="comment">  */</span>
-<a name="l00347"></a>00347 
-<a name="l00348"></a>00348 
+<a name="l00347"></a>00347
+<a name="l00348"></a>00348
 <a name="l00349"></a>00349 <span class="comment">// dangerous overflow-prone  int power function</span>
 <a name="l00350"></a>00350 <span class="keywordtype">int</span> ipow(<span class="keywordtype">int</span> base, <span class="keywordtype">int</span> exp);
-<a name="l00351"></a>00351 
-<a name="l00352"></a>00352 
-<a name="l00353"></a>00353 
+<a name="l00351"></a>00351
+<a name="l00352"></a>00352
+<a name="l00353"></a>00353
 <a name="l00354"></a>00354 <span class="comment">// Base 2 power, using fixed-point exponent</span>
 <a name="l00355"></a>00355 <a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> <a class="code" href="group__fixed_math.html#ga2e1d9d0fe4ba7edb9830efb7887c36bd" title="This is a fast replacement for pow(2,x), where x is a fractional number in Q8n8 fixed-point exponent...">Q16n16_pow2</a>(<a class="code" href="group__fixed_math.html#ga62375fc44e52be9958e3bdaf1cdd86d3" title="unsigned fractional number using 8 integer bits and 8 fractional bits, represents 0 to 255...">Q8n8</a> exponent);
-<a name="l00356"></a>00356 
-<a name="l00357"></a>00357 
+<a name="l00356"></a>00356
+<a name="l00357"></a>00357
 <a name="l00358"></a>00358 byte byteMod(byte n, byte d);
 <a name="l00359"></a>00359 byte byteDiv(byte n, byte d);
 <a name="l00360"></a>00360 byte byteRnd(byte min, byte max);
-<a name="l00361"></a>00361 
+<a name="l00361"></a>00361
 <a name="l00365"></a>00365 <span class="preprocessor">#endif </span><span class="comment">/* FIXEDMATH_H_ */</span>
 </pre></div></div><!-- contents -->
 

@@ -24,19 +24,19 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  
+
   <td id="projectlogo"><img alt="Logo" src="mozzi_smooth_courier_rotated_small_flying_light.png"/></td>
-  
-  
+
+
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
    &#160;<span id="projectnumber">alpha 0.01.1b</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
-  
-  
-  
+
+
+
  </tr>
  </tbody>
 </table>
@@ -61,8 +61,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
                onmouseout="return searchBox.OnSearchSelectHide()"
                alt=""/>
           <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onfocus="searchBox.OnSearchFieldFocus(true)"
+               onblur="searchBox.OnSearchFieldFocus(false)"
                onkeyup="searchBox.OnSearchFieldChange(event)"/>
           </span><span class="right">
             <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
@@ -81,7 +81,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
+<iframe src="javascript:void(0)" frameborder="0"
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -169,7 +169,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="memdesc:gac357561cf7360f82a264d90096d0126b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Useful for keeping the lower 15 bits of a Q1n15 number, using &amp;. <br/></td></tr>
 <tr class="memitem:ga31f62f9911a8438c5c4c8364fde66266"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga31f62f9911a8438c5c4c8364fde66266">Q0n7_float2fix</a>(a)&#160;&#160;&#160;((char)((a)*128.f))</td></tr>
 <tr class="memdesc:ga31f62f9911a8438c5c4c8364fde66266"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert float to Q0n7 fix.  <a href="#ga31f62f9911a8438c5c4c8364fde66266"></a><br/></td></tr>
-<tr class="memitem:ga4ea0c8699623a2658d1e27ff9a5f6382"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga4ea0c8699623a2658d1e27ff9a5f6382">Q0n7_fix2float</a>(a)&#160;&#160;&#160;((float)(a)*0.0078125f)</td></tr>
+<tr class="memitem:ga4ea0c8699623a2658d1e27ff9a5f6382"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga4ea0c8699623a2658d1e27ff9a5f6382">Q0n7_to_float</a>(a)&#160;&#160;&#160;((float)(a)*0.0078125f)</td></tr>
 <tr class="memdesc:ga4ea0c8699623a2658d1e27ff9a5f6382"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q0n7 fix to float.  <a href="#ga4ea0c8699623a2658d1e27ff9a5f6382"></a><br/></td></tr>
 <tr class="memitem:ga1ec890e4f1bff216175613d2e6cb84ac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga1ec890e4f1bff216175613d2e6cb84ac">Q7n8_char2fix</a>(a)&#160;&#160;&#160;(((int)(a))&lt;&lt;8)</td></tr>
 <tr class="memdesc:ga1ec890e4f1bff216175613d2e6cb84ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert char to Q7n8 fix.  <a href="#ga1ec890e4f1bff216175613d2e6cb84ac"></a><br/></td></tr>
@@ -177,15 +177,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="memdesc:ga34b6ad2d24cabe39247ed58e16af042d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q7n8 fix to char.  <a href="#ga34b6ad2d24cabe39247ed58e16af042d"></a><br/></td></tr>
 <tr class="memitem:ga0388d4a2386bf65ddfc01e5f52633f2d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga0388d4a2386bf65ddfc01e5f52633f2d">Q7n8_float2fix</a>(a)&#160;&#160;&#160;((int)((a)*256.f))</td></tr>
 <tr class="memdesc:ga0388d4a2386bf65ddfc01e5f52633f2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert float to Q7n8 fix.  <a href="#ga0388d4a2386bf65ddfc01e5f52633f2d"></a><br/></td></tr>
-<tr class="memitem:ga44abefcb2211f36ffbcc3fe240a271df"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga44abefcb2211f36ffbcc3fe240a271df">Q7n8_fix2float</a>(a)&#160;&#160;&#160;((float)(a)/256.f)</td></tr>
+<tr class="memitem:ga44abefcb2211f36ffbcc3fe240a271df"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga44abefcb2211f36ffbcc3fe240a271df">Q7n8_to_float</a>(a)&#160;&#160;&#160;((float)(a)/256.f)</td></tr>
 <tr class="memdesc:ga44abefcb2211f36ffbcc3fe240a271df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q7n8 fix to float.  <a href="#ga44abefcb2211f36ffbcc3fe240a271df"></a><br/></td></tr>
 <tr class="memitem:ga96ecdd273abaf8668e9654e794ebb87e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga96ecdd273abaf8668e9654e794ebb87e">Q8n8_uchar2fix</a>(a)&#160;&#160;&#160;(((<a class="el" href="group__fixed_math.html#ga62375fc44e52be9958e3bdaf1cdd86d3">Q8n8</a>)(a))&lt;&lt;8)</td></tr>
 <tr class="memdesc:ga96ecdd273abaf8668e9654e794ebb87e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert unsigned char to Q8n8 fix.  <a href="#ga96ecdd273abaf8668e9654e794ebb87e"></a><br/></td></tr>
 <tr class="memitem:ga36c71d1c7d6d07d86bed89d56ea64b86"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga36c71d1c7d6d07d86bed89d56ea64b86">Q8n8_fix2uchar</a>(a)&#160;&#160;&#160;((unsigned char)((a)&gt;&gt;8))</td></tr>
 <tr class="memdesc:ga36c71d1c7d6d07d86bed89d56ea64b86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q8n8 fix to unsigned char.  <a href="#ga36c71d1c7d6d07d86bed89d56ea64b86"></a><br/></td></tr>
-<tr class="memitem:gad7b8a7cde449a9f6a3281abf7c158031"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#gad7b8a7cde449a9f6a3281abf7c158031">Q8n8_float2fix</a>(a)&#160;&#160;&#160;((<a class="el" href="group__fixed_math.html#ga62375fc44e52be9958e3bdaf1cdd86d3">Q8n8</a>)((a)*256.f))</td></tr>
+<tr class="memitem:gad7b8a7cde449a9f6a3281abf7c158031"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#gad7b8a7cde449a9f6a3281abf7c158031">float_to_Q8n8</a>(a)&#160;&#160;&#160;((<a class="el" href="group__fixed_math.html#ga62375fc44e52be9958e3bdaf1cdd86d3">Q8n8</a>)((a)*256.f))</td></tr>
 <tr class="memdesc:gad7b8a7cde449a9f6a3281abf7c158031"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert float to Q8n8 fix.  <a href="#gad7b8a7cde449a9f6a3281abf7c158031"></a><br/></td></tr>
-<tr class="memitem:ga88c63db0a3c06724a82e0256dbb5bcd9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga88c63db0a3c06724a82e0256dbb5bcd9">Q8n8_fix2float</a>(a)&#160;&#160;&#160;((float)(a)/256.f)</td></tr>
+<tr class="memitem:ga88c63db0a3c06724a82e0256dbb5bcd9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga88c63db0a3c06724a82e0256dbb5bcd9">Q8n8_to_float</a>(a)&#160;&#160;&#160;((float)(a)/256.f)</td></tr>
 <tr class="memdesc:ga88c63db0a3c06724a82e0256dbb5bcd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q8n8 fix to float.  <a href="#ga88c63db0a3c06724a82e0256dbb5bcd9"></a><br/></td></tr>
 <tr class="memitem:gac6ae995f951a7454498fbe85cabe4b84"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#gac6ae995f951a7454498fbe85cabe4b84">Q0n7_to_Q1n14</a>(a)&#160;&#160;&#160;(((<a class="el" href="group__fixed_math.html#gab039899891f524364336d99e783a3308">Q1n14</a>)(a))&lt;&lt;7)</td></tr>
 <tr class="memdesc:gac6ae995f951a7454498fbe85cabe4b84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q0n7 char to Q1n14 fix.  <a href="#gac6ae995f951a7454498fbe85cabe4b84"></a><br/></td></tr>
@@ -193,7 +193,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="memdesc:ga2e236ea9565cf89fa7a676d058b30356"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q1n14 fixed to Q0n7 char.  <a href="#ga2e236ea9565cf89fa7a676d058b30356"></a><br/></td></tr>
 <tr class="memitem:ga95ff3f21b7324d46345af5ba8e44da7a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga95ff3f21b7324d46345af5ba8e44da7a">Q1n14_float2fix</a>(a)&#160;&#160;&#160;((<a class="el" href="group__fixed_math.html#gab039899891f524364336d99e783a3308">Q1n14</a>)((a)*16384.f))</td></tr>
 <tr class="memdesc:ga95ff3f21b7324d46345af5ba8e44da7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert float to fix.  <a href="#ga95ff3f21b7324d46345af5ba8e44da7a"></a><br/></td></tr>
-<tr class="memitem:ga2b17e15f5c5535f1a1f3bd1d11718a45"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga2b17e15f5c5535f1a1f3bd1d11718a45">Q1n14_fix2float</a>(a)&#160;&#160;&#160;((float)(a)/16384.f)</td></tr>
+<tr class="memitem:ga2b17e15f5c5535f1a1f3bd1d11718a45"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga2b17e15f5c5535f1a1f3bd1d11718a45">Q1n14_to_float</a>(a)&#160;&#160;&#160;((float)(a)/16384.f)</td></tr>
 <tr class="memdesc:ga2b17e15f5c5535f1a1f3bd1d11718a45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert fix to float.  <a href="#ga2b17e15f5c5535f1a1f3bd1d11718a45"></a><br/></td></tr>
 <tr class="memitem:ga186f41ebf1ae5d8c9f48c6c952256064"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga186f41ebf1ae5d8c9f48c6c952256064">Q0n8_to_Q1n15</a>(a)&#160;&#160;&#160;(((<a class="el" href="group__fixed_math.html#ga8ce7ff532d9c890892a38551479fb52a">Q1n15</a>)(a))&lt;&lt;7)</td></tr>
 <tr class="memdesc:ga186f41ebf1ae5d8c9f48c6c952256064"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q0n8 unsigned char to Q1n15 fix.  <a href="#ga186f41ebf1ae5d8c9f48c6c952256064"></a><br/></td></tr>
@@ -201,7 +201,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="memdesc:ga9358b9ca0c1861bf68e794793a444a46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q1n15 fixed to Q0n8 unsigned char.  <a href="#ga9358b9ca0c1861bf68e794793a444a46"></a><br/></td></tr>
 <tr class="memitem:ga06616ad2b8b8c7f1610b3a1f88546e4e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga06616ad2b8b8c7f1610b3a1f88546e4e">Q1n15_float2fix</a>(a)&#160;&#160;&#160;((<a class="el" href="group__fixed_math.html#ga8ce7ff532d9c890892a38551479fb52a">Q1n15</a>)((a)*32768.f))</td></tr>
 <tr class="memdesc:ga06616ad2b8b8c7f1610b3a1f88546e4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert float to Q1n15 fix.  <a href="#ga06616ad2b8b8c7f1610b3a1f88546e4e"></a><br/></td></tr>
-<tr class="memitem:ga5ae7536490b97f5a7645afd4862b7deb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga5ae7536490b97f5a7645afd4862b7deb">Q1n15_fix2float</a>(a)&#160;&#160;&#160;((float)(a)*0.000030517578125f)</td></tr>
+<tr class="memitem:ga5ae7536490b97f5a7645afd4862b7deb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga5ae7536490b97f5a7645afd4862b7deb">Q1n15_to_float</a>(a)&#160;&#160;&#160;((float)(a)*0.000030517578125f)</td></tr>
 <tr class="memdesc:ga5ae7536490b97f5a7645afd4862b7deb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert fix to float.  <a href="#ga5ae7536490b97f5a7645afd4862b7deb"></a><br/></td></tr>
 <tr class="memitem:gaf8d3dc38bbbb409e3aa44a17a00c69b2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#gaf8d3dc38bbbb409e3aa44a17a00c69b2">Q0n8_to_Q8n24</a>(a)&#160;&#160;&#160;(((<a class="el" href="group__fixed_math.html#ga5fec2c6ee5043a271c9476ef16d5d084">Q8n24</a>)(a))&lt;&lt;16)</td></tr>
 <tr class="memdesc:gaf8d3dc38bbbb409e3aa44a17a00c69b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q0n8 unsigned char to Q8n24 fix.  <a href="#gaf8d3dc38bbbb409e3aa44a17a00c69b2"></a><br/></td></tr>
@@ -209,11 +209,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="memdesc:gae8b10847d6104a817b5e042c8b9ed5c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q8n24 fixed to Q0n8 unsigned char.  <a href="#gae8b10847d6104a817b5e042c8b9ed5c7"></a><br/></td></tr>
 <tr class="memitem:ga0d48f852ff6423e0db85916abdbb5a91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga0d48f852ff6423e0db85916abdbb5a91">Q8n24_float2fix</a>(a)&#160;&#160;&#160;((<a class="el" href="group__fixed_math.html#ga5fec2c6ee5043a271c9476ef16d5d084">Q8n24</a>)((a)*16777216.f))</td></tr>
 <tr class="memdesc:ga0d48f852ff6423e0db85916abdbb5a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert float to Q8n24 fix.  <a href="#ga0d48f852ff6423e0db85916abdbb5a91"></a><br/></td></tr>
-<tr class="memitem:gae86a0f6694d81c5cc6c1883e875df339"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#gae86a0f6694d81c5cc6c1883e875df339">Q8n24_fix2float</a>(a)&#160;&#160;&#160;((float)(a)*0.000000059604645f)</td></tr>
+<tr class="memitem:gae86a0f6694d81c5cc6c1883e875df339"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#gae86a0f6694d81c5cc6c1883e875df339">Q8n24_to_float</a>(a)&#160;&#160;&#160;((float)(a)*0.000000059604645f)</td></tr>
 <tr class="memdesc:gae86a0f6694d81c5cc6c1883e875df339"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert fix to float.  <a href="#gae86a0f6694d81c5cc6c1883e875df339"></a><br/></td></tr>
 <tr class="memitem:ga4bbdc060be26f82672e05b6b61164cd7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga4bbdc060be26f82672e05b6b61164cd7">Q23n8_float2fix</a>(a)&#160;&#160;&#160;((<a class="el" href="group__fixed_math.html#gaec83dd858aa3a36d36043cbf336da128">Q23n8</a>)((a)*256.f))</td></tr>
 <tr class="memdesc:ga4bbdc060be26f82672e05b6b61164cd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert float to Q23n8 fix.  <a href="#ga4bbdc060be26f82672e05b6b61164cd7"></a><br/></td></tr>
-<tr class="memitem:ga25e5766dcd2314406af9c96735002e4e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga25e5766dcd2314406af9c96735002e4e">Q23n8_fix2float</a>(a)&#160;&#160;&#160;((float)(a*0.00390625))</td></tr>
+<tr class="memitem:ga25e5766dcd2314406af9c96735002e4e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga25e5766dcd2314406af9c96735002e4e">Q23n8_to_float</a>(a)&#160;&#160;&#160;((float)(a*0.00390625))</td></tr>
 <tr class="memdesc:ga25e5766dcd2314406af9c96735002e4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert fix to float.  <a href="#ga25e5766dcd2314406af9c96735002e4e"></a><br/></td></tr>
 <tr class="memitem:ga64b2db1254a31bf5c3a71bd6fde65d8b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga64b2db1254a31bf5c3a71bd6fde65d8b">Q23n8_to_Q31n0</a>(a)&#160;&#160;&#160;((<a class="el" href="group__fixed_math.html#gaa8e330ca549c00e7d7ba2667c352da48">Q31n0</a>)((a)&gt;&gt;8))</td></tr>
 <tr class="memdesc:ga64b2db1254a31bf5c3a71bd6fde65d8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q23n8 fixed to Q31n0 long.  <a href="#ga64b2db1254a31bf5c3a71bd6fde65d8b"></a><br/></td></tr>
@@ -229,7 +229,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="memdesc:gadf13187d4b21adfebd6a4ab2c0069d31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q24n8 fixed to Q0n8 unsigned char.  <a href="#gadf13187d4b21adfebd6a4ab2c0069d31"></a><br/></td></tr>
 <tr class="memitem:ga85ed92c0f24e659b68f504338012a57b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga85ed92c0f24e659b68f504338012a57b">Q24n8_float2fix</a>(a)&#160;&#160;&#160;((<a class="el" href="group__fixed_math.html#gabd39053dd8fc51470c26025a33a1fa63">Q24n8</a>)((a)*256.f))</td></tr>
 <tr class="memdesc:ga85ed92c0f24e659b68f504338012a57b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert float to Q24n8 fix.  <a href="#ga85ed92c0f24e659b68f504338012a57b"></a><br/></td></tr>
-<tr class="memitem:gac5c748ef17cbe028fc32e4037799d607"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#gac5c748ef17cbe028fc32e4037799d607">Q24n8_fix2float</a>(a)&#160;&#160;&#160;((float)(a*0.00390625))</td></tr>
+<tr class="memitem:gac5c748ef17cbe028fc32e4037799d607"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#gac5c748ef17cbe028fc32e4037799d607">Q24n8_to_float</a>(a)&#160;&#160;&#160;((float)(a*0.00390625))</td></tr>
 <tr class="memdesc:gac5c748ef17cbe028fc32e4037799d607"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert fix to float.  <a href="#gac5c748ef17cbe028fc32e4037799d607"></a><br/></td></tr>
 <tr class="memitem:gaf9c2e8e7799166864b53b8271a76662b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#gaf9c2e8e7799166864b53b8271a76662b">Q24n8_to_Q32n0</a>(a)&#160;&#160;&#160;((<a class="el" href="group__fixed_math.html#gacd3b9e7899f1d85d6003881a76521504">Q32n0</a>)((a)&gt;&gt;8))</td></tr>
 <tr class="memdesc:gaf9c2e8e7799166864b53b8271a76662b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q24n8 fixed to Q32n0 unsigned long.  <a href="#gaf9c2e8e7799166864b53b8271a76662b"></a><br/></td></tr>
@@ -239,9 +239,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="memdesc:gac014ecb51ddf1ffaede809e78742e6b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q0n8 unsigned char to Q16n16 fix.  <a href="#gac014ecb51ddf1ffaede809e78742e6b9"></a><br/></td></tr>
 <tr class="memitem:ga0e384f143bf94f60585770668fa65afe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga0e384f143bf94f60585770668fa65afe">Q16n16_to_Q0n8</a>(a)&#160;&#160;&#160;((<a class="el" href="group__fixed_math.html#ga375bc832b01f5b4beb9277bc5fad43a0">Q0n8</a>)((a)&gt;&gt;8))</td></tr>
 <tr class="memdesc:ga0e384f143bf94f60585770668fa65afe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q16n16 fixed to Q0n8 unsigned char.  <a href="#ga0e384f143bf94f60585770668fa65afe"></a><br/></td></tr>
-<tr class="memitem:gab0d6ded4c13bbf71d8f8e561ddbb838a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#gab0d6ded4c13bbf71d8f8e561ddbb838a">Q16n16_float2fix</a>(a)&#160;&#160;&#160;((<a class="el" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3">Q16n16</a>)((a)*65536.f))</td></tr>
+<tr class="memitem:gab0d6ded4c13bbf71d8f8e561ddbb838a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#gab0d6ded4c13bbf71d8f8e561ddbb838a">float_to_Q16n16</a>(a)&#160;&#160;&#160;((<a class="el" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3">Q16n16</a>)((a)*65536.f))</td></tr>
 <tr class="memdesc:gab0d6ded4c13bbf71d8f8e561ddbb838a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert float to Q16n16 fix.  <a href="#gab0d6ded4c13bbf71d8f8e561ddbb838a"></a><br/></td></tr>
-<tr class="memitem:gae1b1fee1d4039261e01e9bf70d6fa870"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#gae1b1fee1d4039261e01e9bf70d6fa870">Q16n16_fix2float</a>(a)&#160;&#160;&#160;((float)a*0.000015258789063)</td></tr>
+<tr class="memitem:gae1b1fee1d4039261e01e9bf70d6fa870"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#gae1b1fee1d4039261e01e9bf70d6fa870">Q16n16_to_float</a>(a)&#160;&#160;&#160;((float)a*0.000015258789063)</td></tr>
 <tr class="memdesc:gae1b1fee1d4039261e01e9bf70d6fa870"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert fix to float.  <a href="#gae1b1fee1d4039261e01e9bf70d6fa870"></a><br/></td></tr>
 <tr class="memitem:gadc268ddaf8e0d16cf6edd51744b30ca7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#gadc268ddaf8e0d16cf6edd51744b30ca7">Q16n0_to_Q15n16</a>(a)&#160;&#160;&#160;(((<a class="el" href="group__fixed_math.html#gaef218dcc6d8bcfae8ddee859e41461db">Q15n16</a>)(a))&lt;&lt;16)</td></tr>
 <tr class="memdesc:gadc268ddaf8e0d16cf6edd51744b30ca7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q16n0 unsigned int to Q15n16 fix.  <a href="#gadc268ddaf8e0d16cf6edd51744b30ca7"></a><br/></td></tr>
@@ -255,7 +255,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="memdesc:ga20b59d2e5425553e722000d6b52ea4dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q15n16 fixed to Q15n0 signed int.  <a href="#ga20b59d2e5425553e722000d6b52ea4dc"></a><br/></td></tr>
 <tr class="memitem:ga0017a1c8d6b34ba36929fbce34b50b5b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga0017a1c8d6b34ba36929fbce34b50b5b">Q15n16_float2fix</a>(a)&#160;&#160;&#160;((<a class="el" href="group__fixed_math.html#gaef218dcc6d8bcfae8ddee859e41461db">Q15n16</a>)((a)*65536.f))</td></tr>
 <tr class="memdesc:ga0017a1c8d6b34ba36929fbce34b50b5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert float to Q15n16 fix.  <a href="#ga0017a1c8d6b34ba36929fbce34b50b5b"></a><br/></td></tr>
-<tr class="memitem:ga290016f045dc71731683feda73c6ceb5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga290016f045dc71731683feda73c6ceb5">Q15n16_fix2float</a>(a)&#160;&#160;&#160;((float)(a)*0.000015258789063)</td></tr>
+<tr class="memitem:ga290016f045dc71731683feda73c6ceb5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga290016f045dc71731683feda73c6ceb5">Q15n16_to_float</a>(a)&#160;&#160;&#160;((float)(a)*0.000015258789063)</td></tr>
 <tr class="memdesc:ga290016f045dc71731683feda73c6ceb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert fix to float.  <a href="#ga290016f045dc71731683feda73c6ceb5"></a><br/></td></tr>
 <tr class="memitem:ga4628b6ab7962076cb9e176a3d9739ac6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga4628b6ab7962076cb9e176a3d9739ac6">Q7n8_multfix</a>(a, b)</td></tr>
 <tr class="memdesc:ga4628b6ab7962076cb9e176a3d9739ac6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fast fixed point multiply for Q7n8 fractional numbers.  <a href="#ga4628b6ab7962076cb9e176a3d9739ac6"></a><br/></td></tr>
@@ -276,7 +276,7 @@ byte&#160;</td><td class="memItemRight" valign="bottom"><b>byteRnd</b> (byte min
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="group__fixed_math.html#ga4ea0c8699623a2658d1e27ff9a5f6382">Q0n7_fix2float</a></td>
+          <td class="memname">#define <a class="el" href="group__fixed_math.html#ga4ea0c8699623a2658d1e27ff9a5f6382">Q0n7_to_float</a></td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">a</td><td>)</td>
@@ -519,7 +519,7 @@ byte&#160;</td><td class="memItemRight" valign="bottom"><b>byteRnd</b> (byte min
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="group__fixed_math.html#ga290016f045dc71731683feda73c6ceb5">Q15n16_fix2float</a></td>
+          <td class="memname">#define <a class="el" href="group__fixed_math.html#ga290016f045dc71731683feda73c6ceb5">Q15n16_to_float</a></td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">a</td><td>)</td>
@@ -682,7 +682,7 @@ byte&#160;</td><td class="memItemRight" valign="bottom"><b>byteRnd</b> (byte min
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="group__fixed_math.html#gae1b1fee1d4039261e01e9bf70d6fa870">Q16n16_fix2float</a></td>
+          <td class="memname">#define <a class="el" href="group__fixed_math.html#gae1b1fee1d4039261e01e9bf70d6fa870">Q16n16_to_float</a></td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">a</td><td>)</td>
@@ -709,7 +709,7 @@ byte&#160;</td><td class="memItemRight" valign="bottom"><b>byteRnd</b> (byte min
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="group__fixed_math.html#gab0d6ded4c13bbf71d8f8e561ddbb838a">Q16n16_float2fix</a></td>
+          <td class="memname">#define <a class="el" href="group__fixed_math.html#gab0d6ded4c13bbf71d8f8e561ddbb838a">float_to_Q16n16</a></td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">a</td><td>)</td>
@@ -763,7 +763,7 @@ byte&#160;</td><td class="memItemRight" valign="bottom"><b>byteRnd</b> (byte min
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="group__fixed_math.html#ga2b17e15f5c5535f1a1f3bd1d11718a45">Q1n14_fix2float</a></td>
+          <td class="memname">#define <a class="el" href="group__fixed_math.html#ga2b17e15f5c5535f1a1f3bd1d11718a45">Q1n14_to_float</a></td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">a</td><td>)</td>
@@ -844,7 +844,7 @@ byte&#160;</td><td class="memItemRight" valign="bottom"><b>byteRnd</b> (byte min
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="group__fixed_math.html#ga5ae7536490b97f5a7645afd4862b7deb">Q1n15_fix2float</a></td>
+          <td class="memname">#define <a class="el" href="group__fixed_math.html#ga5ae7536490b97f5a7645afd4862b7deb">Q1n15_to_float</a></td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">a</td><td>)</td>
@@ -926,7 +926,7 @@ byte&#160;</td><td class="memItemRight" valign="bottom"><b>byteRnd</b> (byte min
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="group__fixed_math.html#ga25e5766dcd2314406af9c96735002e4e">Q23n8_fix2float</a></td>
+          <td class="memname">#define <a class="el" href="group__fixed_math.html#ga25e5766dcd2314406af9c96735002e4e">Q23n8_to_float</a></td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">a</td><td>)</td>
@@ -1062,7 +1062,7 @@ byte&#160;</td><td class="memItemRight" valign="bottom"><b>byteRnd</b> (byte min
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="group__fixed_math.html#gac5c748ef17cbe028fc32e4037799d607">Q24n8_fix2float</a></td>
+          <td class="memname">#define <a class="el" href="group__fixed_math.html#gac5c748ef17cbe028fc32e4037799d607">Q24n8_to_float</a></td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">a</td><td>)</td>
@@ -1224,7 +1224,7 @@ byte&#160;</td><td class="memItemRight" valign="bottom"><b>byteRnd</b> (byte min
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="group__fixed_math.html#ga44abefcb2211f36ffbcc3fe240a271df">Q7n8_fix2float</a></td>
+          <td class="memname">#define <a class="el" href="group__fixed_math.html#ga44abefcb2211f36ffbcc3fe240a271df">Q7n8_to_float</a></td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">a</td><td>)</td>
@@ -1362,7 +1362,7 @@ __asm__ __volatile__ (    \
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="group__fixed_math.html#gae86a0f6694d81c5cc6c1883e875df339">Q8n24_fix2float</a></td>
+          <td class="memname">#define <a class="el" href="group__fixed_math.html#gae86a0f6694d81c5cc6c1883e875df339">Q8n24_to_float</a></td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">a</td><td>)</td>
@@ -1443,7 +1443,7 @@ __asm__ __volatile__ (    \
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="group__fixed_math.html#ga88c63db0a3c06724a82e0256dbb5bcd9">Q8n8_fix2float</a></td>
+          <td class="memname">#define <a class="el" href="group__fixed_math.html#ga88c63db0a3c06724a82e0256dbb5bcd9">Q8n8_to_float</a></td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">a</td><td>)</td>
@@ -1497,7 +1497,7 @@ __asm__ __volatile__ (    \
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="group__fixed_math.html#gad7b8a7cde449a9f6a3281abf7c158031">Q8n8_float2fix</a></td>
+          <td class="memname">#define <a class="el" href="group__fixed_math.html#gad7b8a7cde449a9f6a3281abf7c158031">float_to_Q8n8</a></td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">a</td><td>)</td>

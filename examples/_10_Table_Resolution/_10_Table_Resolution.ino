@@ -4,6 +4,9 @@
  *  Demonstrates the audible quality of different length tables
  *  played with Oscil and scheduling with EventDelay.
  *
+ *  Mozzi help/discussion/announcements:
+ *  https://groups.google.com/forum/#!forum/mozzi-users
+ *
  *  Tim Barrass 2012.
  *  This example code is in the public domain.
  */

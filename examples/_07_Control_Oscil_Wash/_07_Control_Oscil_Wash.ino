@@ -10,6 +10,9 @@
  *
  *  Circuit: Audio output on digital pin 9.
  *
+ *  Mozzi help/discussion/announcements:
+ *  https://groups.google.com/forum/#!forum/mozzi-users
+ *
  *  Tim Barrass 2012.
  *  This example code is in the public domain.
  */

@@ -9,8 +9,11 @@
  *  Demonstrates the use of fixed-point Q16n16
  *  format numbers, mtof() for converting midi note
  *  values to frequency, and xorshift96() for random numbers.
- *  
+ *
  *  Circuit: Audio output on digital pin 9.
+ *
+ *  Mozzi help/discussion/announcements:
+ *  https://groups.google.com/forum/#!forum/mozzi-users
  *
  *  Tim Barrass 2012.
  *  This example code is in the public domain.
@@ -82,7 +85,7 @@ void loop(){
 
 
 Q16n16 variation() {
-  // 32 random bits & with 524287 (b111 1111 1111 1111 1111) 
+  // 32 random bits & with 524287 (b111 1111 1111 1111 1111)
   // gives between 0-8 in Q16n16 format
   return  (Q16n16) (xorshift96() & 524287UL);
 }

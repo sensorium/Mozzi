@@ -5,6 +5,9 @@
  *  Demonstrates phase modulation and modifying
  *  the volume of a sound with an envelope setd in a table.
  *
+ *  Mozzi help/discussion/announcements:
+ *  https://groups.google.com/forum/#!forum/mozzi-users
+ *
  *  Tim Barrass 2012.
  *  This example code is in the public domain.
  */

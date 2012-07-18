@@ -23,5 +23,6 @@ var searchData=
   ['smooth_3c_20char_20_3e',['Smooth< char >',['../class_smooth_3_01char_01_4.html',1,'']]],
   ['smooth_3c_20unsigned_20char_20_3e',['Smooth< unsigned char >',['../class_smooth_3_01unsigned_01char_01_4.html',1,'']]],
   ['start',['start',['../class_ead.html#ac385679b58e2f9755029b7da7405b233',1,'Ead::start()'],['../class_event_delay.html#a97a07c9371040d6388b8369352b08d83',1,'EventDelay::start()'],['../class_sample.html#a57307ee93ef0fcff36d543596eb79b72',1,'Sample::start()'],['../class_sample.html#a7f937c15daf469260c6bba84016e9c99',1,'Sample::start(unsigned int offset)']]],
+  ['startanalogread',['startAnalogRead',['../group__util.html#gaa479c0dd53bfeceeac25d12dfdc5b690',1,'startAnalogRead(uint8_t pin):&#160;utils.cpp'],['../group__util.html#gaa479c0dd53bfeceeac25d12dfdc5b690',1,'startAnalogRead(uint8_t pin):&#160;utils.cpp']]],
   ['startmozzi',['startMozzi',['../group__core.html#gaedc83c89280eccc3b7fdb3115daab573',1,'startMozzi(unsigned int control_rate_hz):&#160;MozziGuts.cpp'],['../group__core.html#gaedc83c89280eccc3b7fdb3115daab573',1,'startMozzi(unsigned int control_rate_hz):&#160;MozziGuts.cpp']]]
 ];

@@ -257,6 +257,7 @@ private:
 	}
 
 	unsigned long phase_fractional;
+	/** @todo  does Oscil::phase_increment_fractional really need to be declared volatile?*/
 	volatile unsigned long phase_increment_fractional;
 	prog_char * table;
 

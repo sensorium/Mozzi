@@ -139,7 +139,6 @@ duration from about 105 in unmodified Arduino to 15 microseconds for a
 dependable analogRead(). Put this in setup() if you intend to use analogRead()
 with Mozzi, to avoid glitches.
 See: http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11
-
 */
 void setupFastAnalogRead()
 {
@@ -149,4 +148,89 @@ void setupFastAnalogRead()
 	cbi(ADCSRA,ADPS0);
 }
 
+static uint8_t analog_reference = DEFAULT;
+
+/** @ingroup util
+Starts an analog-to-digital conversion of the voltage at a specified pin.  Unlike
+Arduino's analogRead() function which waits until a conversion is complete before
+returning, startAnalogRead() only sets the conversion to begin, so you can use
+the cpu for other things and call for the result later with receiveAnalogRead().
+This works well in updateControl(), where you can call startAnalogRead() and
+get the result with receiveAnalogRead() the next time the updateControl()
+interrupt runs.  Fantastic.
+@param pin is the analog pin number to sample from, A0 to A5
+(or whatever your board goes up to).
+@note Timing: about 1us when used in updateControl() with CONTROL_RATE 64.
+*/
+
+// basically analogRead() chopped in half so the ADC conversion
+// can be started in one function and received in another.
+void startAnalogRead(uint8_t pin)
+{
+
+#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
+	if (pin >= 54) pin -= 54; // allow for channel or pin numbers
+#elif defined(__AVR_ATmega32U4__)
+	if (pin >= 18) pin -= 18; // allow for channel or pin numbers
+#elif defined(__AVR_ATmega1284__)
+	if (pin >= 24) pin -= 24; // allow for channel or pin numbers
+#else
+	if (pin >= 14) pin -= 14; // allow for channel or pin numbers
+#endif
+
+#if defined(__AVR_ATmega32U4__)
+	pin = analogPinToChannel(pin);
+	ADCSRB = (ADCSRB & ~(1 << MUX5)) | (((pin >> 3) & 0x01) << MUX5);
+#elif defined(ADCSRB) && defined(MUX5)
+	// the MUX5 bit of ADCSRB selects whether we're reading from channels
+	// 0 to 7 (MUX5 low) or 8 to 15 (MUX5 high).
+	ADCSRB = (ADCSRB & ~(1 << MUX5)) | (((pin >> 3) & 0x01) << MUX5);
+#endif
+
+	// set the analog reference (high two bits of ADMUX) and select the
+	// channel (low 4 bits).  this also sets ADLAR (left-adjust result)
+	// to 0 (the default).
+#if defined(ADMUX)
+	ADMUX = (analog_reference << 6) | (pin & 0x07);
+#endif
+
+	// without a delay, we seem to read from the wrong channel
+	//delay(1);
+
+#if defined(ADCSRA) && defined(ADCL)
+	// start the conversion
+	sbi(ADCSRA, ADSC);
+#endif
+}
+
+/** @ingroup util
+Waits for the result of the most recent startAnalogRead().  If used as the first function
+of updateControl(), to receive the result of startAnalogRead() from the end of the last
+updateControl(), there will probably be no waiting time, as the ADC conversion will
+have happened in between interrupts.  This is a big time-saver, since you don't have to
+waste time waiting for analogRead() to return (1us here vs 105 us for standard Arduino).
+@return The resut of the most recent startAnalogRead().
+@note Timing: about 1us when used in updateControl() with CONTROL_RATE 64.
+*/
+int receiveAnalogRead(){
+	uint8_t low, high;
+#if defined(ADCSRA) && defined(ADCL)
+	// ADSC is cleared when the conversion finishes
+	while (bit_is_set(ADCSRA, ADSC));
+
+	// we have to read ADCL first; doing so locks both ADCL
+	// and ADCH until ADCH is read.  reading ADCL second would
+	// cause the results of each conversion to be discarded,
+	// as ADCL and ADCH would be locked when it completed.
+	low  = ADCL;
+	high = ADCH;
+#else
+	// we dont have an ADC, return 0
+	low  = 0;
+	high = 0;
+#endif
+
+	// combine the two bytes
+	return (high << 8) | low;
+}
 

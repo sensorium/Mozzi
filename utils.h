@@ -3,6 +3,7 @@
 #define UTILS_H_
 
 #include "fixedMath.h"
+#include "Arduino.h"
 
 /** @defgroup util Mozzi utility functions
 */
@@ -34,6 +35,6 @@ unsigned long xorshift96();
 
 
 void setupFastAnalogRead();
-
-
+void startAnalogRead(uint8_t pin);
+int receiveAnalogRead();
 #endif /* UTILS_H_ */

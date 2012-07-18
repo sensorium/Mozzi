@@ -3,6 +3,13 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1d
+
+-utils.h: added startAnalogRead() and receiveAnalogRead(), so conversion can
+	happen in the background instead of hogging the cpu in Arduino's analogRead().
+- fixedMath.h: tweaks and additions
+
+
 Version 0.01.1c
 - Smooth.h: increased speed from about 400 us to between 1-5 us, depending on
 number type, by changing floating to fixed point in internal calculations. Types
@@ -13,6 +20,7 @@ are now restricted to char, unsigned char, int and unsigned int.
 	-removed old Q16n16_mtof() and renamed Q16n16_mtofLookup() to Q16n16_mtof().
 	The old Q16n16_mtof() was slower and less accurate than the lookup version.
 - fixed example _08_Detuned_Beats_Wash to work with new midi, fixed-point and Oscil setFreq_Q16n16 code.
+
 
 Version 0.01.1b
 
@@ -27,6 +35,7 @@ Version 0.01.1b
 	- added Q16n16_mtof(), a faster (but less accurate overall) fixed point alternative to mtof().
 	- changed setupFastADC() to setupFastAnalogRead()
 - replaced TABLE_NUM_CELLS with NUM_CELLS in tables
+
 
 Version 0.01.1
 

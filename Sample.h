@@ -53,6 +53,7 @@ Converting soundfiles for Mozzi.
 There is a python script called raw2mozzi.py in the Mozzi/python folder.
 The usage is:
 python raw2mozzi.py infilename outfilename tablename samplerate
+@todo Make Sample a descendant of Oscil.
 */
 template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE>
 class Sample

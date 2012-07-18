@@ -14,6 +14,7 @@ Take care when converting that the important bits of your numbers will fit in th
 // types
 #define Q0n7 char 				/**< signed fractional number using 7 fractional bits, represents -0.5 to 0.496*/
 #define Q0n8 unsigned char  		/**< unsigned fractional number using 8 fractional bits, represents 0.0 to 0.996*/
+#define Q8n0 unsigned char  		/**< normal unsigned char with 0 fractional bits, represents 0.0 to 255.0*/
 #define Q0n16 unsigned int  		/**< unsigned fractional number using 16 fractional bits, represents 0.0 to 0.999*/
 #define Q7n8 int 				/**< signed fractional number using 7 integer bits and 8 fractional bits, represents -127.996 to 127.996*/
 #define Q1n14 int				/**< signed fractional number using 1 integer bit and 14 fractional bits, represents -1.999 to 1.999*/
@@ -50,16 +51,16 @@ Take care when converting that the important bits of your numbers will fit in th
 // Type conversions:
 /*
 Float to Q
- 
+
 To convert a number from floating point to Qm.n format:
- 
+
   Multiply the floating point number by 2^n
   Round to the nearest integer
- 
+
 Q to float
- 
+
 To convert a number from Qm.n format to floating point:
- 
+
   Convert the number to floating point as if it were an integer
   Multiply by 2^-n
 */
@@ -109,6 +110,7 @@ To convert a number from Qm.n format to floating point:
 
 #define Q16n0_to_Q15n16(a) (((Q15n16)(a))<<16)		/**<Convert Q16n0 unsigned int to Q15n16 fix. @param a is a Q16n0 unsigned int */
 #define Q16n0_to_Q23n8(a) (((Q23n8)(a))<<8)		/**<Convert Q16n0 unsigned int to Q23n8 fixed point signed long. @param a is a Q16n0 unsigned int*/
+#define Q16n0_to_Q24n8(a) (((Q24n8)(a))<<8)		/**<Convert Q16n0 unsigned int to Q24n8 fixed point unsigned long. @param a is a Q16n0 unsigned int*/
 #define Q16n0_to_Q16n16(a) (((Q16n16)(a))<<16)		/**<Convert Q16n0 unsigned int to Q16n16 fixed point unsigned long. @param a is a Q16n0 unsigned int*/
 #define Q16n0_to_float(a) (((float)(a))/65536)			/**<Convert Q16n0 unsigned int to float. @param a is a Q16n0 unsigned int*/
 
@@ -130,6 +132,7 @@ To convert a number from Qm.n format to floating point:
 
 #define Q16n16_to_Q0n8(a) ((Q0n8)((a)>>8))			/**<Convert Q16n16 fixed to Q0n8 unsigned char. @param a is a Q16n16 unsigned long*/
 #define Q16n16_to_Q16n0(a) ((Q16n0)((a)>>16))		/**<Convert Q16n16 fixed to Q16n0 unsigned int. @param a is a Q16n16 unsigned long*/
+#define Q16n16_to_Q24n8(a) ((Q24n8)((a)>>8))		/**<Convert Q16n16 fixed to Q24n8 unsigned long. @param a is a Q16n16 unsigned long*/
 #define Q16n16_to_float(a) (((float)(a))/65536)		/**<Convert fix to float. @param a is a Q16n16 unsigned long*/
 
 
@@ -183,50 +186,50 @@ begin
   count = 0;
   neg = 0 ;
   d = dd ;
- 
+
   // only works with + numbers
   if (d & 0x8000)
   begin
     neg = 1;
     d = -d ;
   end
- 
+
   // range reduction
   while (d>0x0100)
   begin
     --count ;
     d >>= 1 ;
   end
- 
+
   while (d<0x0080)
   begin
     ++count ;
     d <<= 1 ;
   end
- 
+
   // Newton interation
   x = 0x02ea - (d<<1) ;
   x = multfix(x, 0x0200-multfix(d,x));
   //x = multfix(x, 0x0200-multfix(d,x));
- 
- 
+
+
   // range expansion
   if (count>0)  x = x<<count ;
   else if (count<0) x = x>>(-count) ;
- 
+
   // fix sign
   if (neg==1) x=-x;
- 
+
   //form ratio
   x = multfix(x,nn) ;
- 
+
   return x ;
 end
- 
+
 //========================================================
 int sqrtfix(int aa)
 begin
- 
+
   int a;
   char nextbit, ahigh;
   int root, p ;
@@ -322,7 +325,7 @@ end
 */
 /*
 // from octosynth, Joe Marshall 2011:
- 
+
   // multiply 2 16 bit numbers together and shift 8 without precision loss
   // requires assembler really
   volatile unsigned char zeroReg=0;
@@ -355,7 +358,7 @@ end
   :"r1","r0"
   );
   oscillators[c].phaseStep=multipliedCounter;
- 
+
   */
 
 

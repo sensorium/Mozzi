@@ -17,6 +17,8 @@ Q16n16_mtofLookup	KEYWORD2
 Q16n16_mtof	KEYWORD2
 xorshift96	KEYWORD2
 setupFastAnalogRead	KEYWORD2
+startAnalogRead	KEYWORD2
+receiveAnalogRead	KEYWORD2
 randomMidi	KEYWORD2
 Q16n16_pow2	KEYWORD2
 

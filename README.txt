@@ -101,7 +101,7 @@ Also, feel free to submit any issues on the GitHub Mozzi site.
 Share code snippets:
 (https://github.com/sensorium/Mozzi/wiki/Code-Snippets-to-Share)
 
-Check for code and usage changes in CHANGES.txt.
+Check for code and usage changes in NEWS.txt.
 
 
 CAVEATS

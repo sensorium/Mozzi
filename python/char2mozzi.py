@@ -1,9 +1,9 @@
-##    raw2mozzi.py
+##    char2mozzi.py
 ##    Created 2010-12 by Tim Barrass
 ##
-##    raw2mozzi.py converts raw 8 bit sound data to wavetables for Mozzi.
+##    char2mozzi.py converts raw 8 bit sound data to wavetables for Mozzi.
 ##
-##    use: python raw2mozzi.py infilename outfilename tablename samplerate
+##    Usage: char2mozzi.py <infilename outfilename "tablename" "samplerate">
 ##
 ##    Using Audacity to prepare raw sound files for converting:
 ##
@@ -27,12 +27,12 @@
 import sys, array, os, textwrap
 
 if len(sys.argv) != 5:
-        print 'Usage: raw2mozzi.py <infilename outfilename tablename samplerate>'
+        print 'Usage: char2mozzi.py <infilename outfilename "tablename" "samplerate">'
         sys.exit(1)
 
 [infilename, outfilename, tablename, samplerate] = sys.argv[1:]
 
-def raw2mozzi(infilename, outfilename, tablename, samplerate):
+def char2mozzi(infilename, outfilename, tablename, samplerate):
     fin = open(os.path.expanduser(infilename), "rb")
     print "opened " + infilename
     bytestoread = os.path.getsize(os.path.expanduser(infilename))
@@ -66,4 +66,4 @@ def raw2mozzi(infilename, outfilename, tablename, samplerate):
         fout.close()
         print "wrote " + outfilename
 
-raw2mozzi(infilename, outfilename, tablename, samplerate)
+char2mozzi(infilename, outfilename, tablename, samplerate)

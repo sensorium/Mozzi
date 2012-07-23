@@ -116,13 +116,16 @@ public:
 
 	/** Returns the next sample given a phase modulation value.
 	@param a phase modulation value given as a proportion of the wave. The
-	phmod_proportion parameter is a Q15n16 fixed-point number where to fractional
+	phmod_proportion parameter is a Q15n16 fixed-point number where the fractional
 	n16 part represents -1 to 1, modulating the phase by one whole table length in
 	each direction.
 	@return a sample from the table.
 	*/
+	// PM: cos((angle += incr) + change)
+	// FM: cos(angle += (incr + change))
+	// The ratio of deviation to modulation frequency is called the "index of modulation". ( I = d / Fm )
 	inline
-	char phMod(long phmod_proportion)
+	char phMod(Q15n16 phmod_proportion)
 	{
 		incrementPhase();
 		return (char)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))>>F_BITS) & (NUM_TABLE_CELLS - 1)));

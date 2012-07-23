@@ -31,8 +31,10 @@ from http://en.wikipedia.org/wiki/Low-pass_filter: y[i] := y[i-1] + α * (x[i] -
 y[i-1]), translated as out = last_out + a * (in - last_out). It's not calibrated
 to any real-world update rate, so if you use it at CONTROL_RATE and you change
 CONTROL_RATE, you'll need to adjust the smoothness value to suit.
-@tparam T the type of numbers being smoothed; valid types are char, unsigned char, int
-and unsigned int.  No floats or longs.
+@tparam T the type of numbers being smoothed.  Watch out for numbers overflowing the
+internal calcualtions. Also, the resolution of the number type chosen has an
+effect on whether Smooth is able to reach its target with a specific smoothness
+value. Some experimentation is recommended.
 @note Timing: ~5us for 16 bit types, ~1us for 8 bit types.
 @todo Check timing and possibly make a fixed point version if it's worthwhile.
 */
@@ -48,7 +50,7 @@ public:
 	/** Constructor.
 	@param smoothness sets how much smoothing the filter will apply to
 	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
-	very smooth;
+	very smooth.
 	 */
 	Smooth(float smoothness)
 	{

@@ -5,7 +5,6 @@ NEWS
 
 Version 0.01.1e
 - added LowPass1stOrder.h, an alternative to Smooth which can handle long numbers.
-- added example for LowPass1stOrder, smoothing gain
 - fixed a bug in Smooth.h which stopped high smoothness values working properly.
 - added another example for Smooth, changing freqency.
 - fixed errors in fixedMath.h

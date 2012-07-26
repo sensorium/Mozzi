@@ -12,6 +12,8 @@ Version 0.01.1e
 - fixed a naming problem in char2mozzi.py
 - added _02b_FMsynth example
 - added _03b_AMsynth example
+- added _05b_Smooth2 example
+- added _05c_LowPass1stOrder example
 
 
 Version 0.01.1d

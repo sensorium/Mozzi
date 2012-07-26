@@ -18,6 +18,7 @@ var searchData=
   ['q0n8_5fto_5fq24n8',['Q0n8_to_Q24n8',['../group__fixed_math.html#ga73c0e604718493391b2261a50a333b43',1,'fixedMath.h']]],
   ['q0n8_5fto_5fq8n24',['Q0n8_to_Q8n24',['../group__fixed_math.html#gaf8d3dc38bbbb409e3aa44a17a00c69b2',1,'fixedMath.h']]],
   ['q15n0',['Q15n0',['../group__fixed_math.html#gaeecc0857561835d273a84836766d848f',1,'fixedMath.h']]],
+  ['q15n0_5fto_5fq15n16',['Q15n0_to_Q15n16',['../group__fixed_math.html#ga68fd149bbd7c2a3b6b701fb941ccdd69',1,'fixedMath.h']]],
   ['q15n16',['Q15n16',['../group__fixed_math.html#gaef218dcc6d8bcfae8ddee859e41461db',1,'fixedMath.h']]],
   ['q15n16_5ffix1',['Q15n16_FIX1',['../group__fixed_math.html#ga7933033ba3cd84a4d09c0bd652378a38',1,'fixedMath.h']]],
   ['q15n16_5fto_5ffloat',['Q15n16_to_float',['../group__fixed_math.html#gab52268f7ace265280f1e04f0ef77812c',1,'fixedMath.h']]],
@@ -65,6 +66,7 @@ var searchData=
   ['q7n8_5fto_5fq7n0',['Q7n8_to_Q7n0',['../group__fixed_math.html#ga2d17f37faff071b5364393f589cecce5',1,'fixedMath.h']]],
   ['q8n0',['Q8n0',['../group__fixed_math.html#gafb921fbfa67275cfa23dd026fcde315e',1,'fixedMath.h']]],
   ['q8n0_5fto_5fq16n16',['Q8n0_to_Q16n16',['../group__fixed_math.html#gaea8a55e91d0f362996c2cac950b742b7',1,'fixedMath.h']]],
+  ['q8n0_5fto_5fq7n8',['Q8n0_to_Q7n8',['../group__fixed_math.html#gaed33aa038b06b67b676d8d7a50ac1955',1,'fixedMath.h']]],
   ['q8n0_5fto_5fq8n8',['Q8n0_to_Q8n8',['../group__fixed_math.html#ga2994f93672313e08cb860e3cf8b0fa5a',1,'fixedMath.h']]],
   ['q8n24',['Q8n24',['../group__fixed_math.html#ga5fec2c6ee5043a271c9476ef16d5d084',1,'fixedMath.h']]],
   ['q8n24_5ffix1',['Q8n24_FIX1',['../group__fixed_math.html#ga5083b2bbeeb968258e2da31d3af26a25',1,'fixedMath.h']]],
@@ -73,5 +75,6 @@ var searchData=
   ['q8n8',['Q8n8',['../group__fixed_math.html#ga62375fc44e52be9958e3bdaf1cdd86d3',1,'fixedMath.h']]],
   ['q8n8_5ffix1',['Q8n8_FIX1',['../group__fixed_math.html#ga00d3299412f5460cae3af8f0c58b2db1',1,'fixedMath.h']]],
   ['q8n8_5fto_5ffloat',['Q8n8_to_float',['../group__fixed_math.html#gafc0010c0574d17a3011dcd33c2258061',1,'fixedMath.h']]],
+  ['q8n8_5fto_5fq16n16',['Q8n8_to_Q16n16',['../group__fixed_math.html#ga23903f8c6126fb05333d952fb3a4ccdf',1,'fixedMath.h']]],
   ['q8n8_5fto_5fq8n0',['Q8n8_to_Q8n0',['../group__fixed_math.html#ga704493cfec9f284dba91c5af0ef9924d',1,'fixedMath.h']]]
 ];

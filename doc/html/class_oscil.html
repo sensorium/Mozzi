@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1d</span>
+   &#160;<span id="projectnumber">alpha 0.01.1e</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -117,8 +117,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ac0700f90c5d9c507ee77b1d3ee25f2d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the sound table which will be played by the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>.  <a href="#ac0700f90c5d9c507ee77b1d3ee25f2d3"></a><br/></td></tr>
 <tr class="memitem:ab7b740eec56740426a47508562ed4dd5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#ab7b740eec56740426a47508562ed4dd5">setPhase</a> (unsigned int phase)</td></tr>
 <tr class="memdesc:ab7b740eec56740426a47508562ed4dd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the phase of the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>.  <a href="#ab7b740eec56740426a47508562ed4dd5"></a><br/></td></tr>
-<tr class="memitem:ac773e94198dafcd0799216e113272512"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#ac773e94198dafcd0799216e113272512">phMod</a> (long phmod_proportion)</td></tr>
-<tr class="memdesc:ac773e94198dafcd0799216e113272512"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next sample given a phase modulation value.  <a href="#ac773e94198dafcd0799216e113272512"></a><br/></td></tr>
+<tr class="memitem:abe39f0740f318c0ecfb405cfac641a13"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#abe39f0740f318c0ecfb405cfac641a13">phMod</a> (<a class="el" href="group__fixed_math.html#gaef218dcc6d8bcfae8ddee859e41461db">Q15n16</a> phmod_proportion)</td></tr>
+<tr class="memdesc:abe39f0740f318c0ecfb405cfac641a13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next sample given a phase modulation value.  <a href="#abe39f0740f318c0ecfb405cfac641a13"></a><br/></td></tr>
 <tr class="memitem:abc8a4ee236f7fd45dda9dece7292b6e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#abc8a4ee236f7fd45dda9dece7292b6e7">setFreq_Q24n8</a> (<a class="el" href="group__fixed_math.html#gabd39053dd8fc51470c26025a33a1fa63">Q24n8</a> frequency)</td></tr>
 <tr class="memdesc:abc8a4ee236f7fd45dda9dece7292b6e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the frequency using Q24n8 fixed-point number format.  <a href="#abc8a4ee236f7fd45dda9dece7292b6e7"></a><br/></td></tr>
 <tr class="memitem:a73b52741178ed490463d9ff471cebef3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a73b52741178ed490463d9ff471cebef3">setFreq_Q16n16</a> (<a class="el" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3">Q16n16</a> frequency)</td></tr>
@@ -147,7 +147,7 @@ class Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</h3>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Use conditional compilation to optimise <a class="el" href="class_oscil.html#a3f7e26147e99bc1c60d33a1312005313" title="Set the oscillator frequency with an unsigned int.">setFreq()</a> variations for different table sizes. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Use conditional compilation to optimise <a class="el" href="class_oscil.html#a3f7e26147e99bc1c60d33a1312005313" title="Set the oscillator frequency with an unsigned int.">setFreq()</a> variations for different table sizes. </dd></dl>
 <h2><a class="anchor" id="raw2mozzi"></a>
 raw2mozzi</h2>
 <p>Converting soundfiles for Mozzi There is a python script called raw2mozzi.py in the Mozzi/python folder. The usage is: python raw2mozzi.py infilename outfilename tablename samplerate </p>
@@ -233,7 +233,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>the sample at the given table index. </dd></dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00204">204</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00207">207</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -287,20 +287,20 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>the phase increment value which will produce a given frequency. </dd></dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00221">221</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00224">224</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ac773e94198dafcd0799216e113272512"></a>
+<a class="anchor" id="abe39f0740f318c0ecfb405cfac641a13"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">char <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html#ac773e94198dafcd0799216e113272512">phMod</a> </td>
+          <td class="memname">char <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html#abe39f0740f318c0ecfb405cfac641a13">phMod</a> </td>
           <td>(</td>
-          <td class="paramtype">long&#160;</td>
+          <td class="paramtype"><a class="el" href="group__fixed_math.html#gaef218dcc6d8bcfae8ddee859e41461db">Q15n16</a>&#160;</td>
           <td class="paramname"><em>phmod_proportion</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
@@ -311,13 +311,13 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <p>Returns the next sample given a phase modulation value. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">a</td><td>phase modulation value given as a proportion of the wave. The phmod_proportion parameter is a Q15n16 fixed-point number where to fractional n16 part represents -1 to 1, modulating the phase by one whole table length in each direction. </td></tr>
+    <tr><td class="paramname">a</td><td>phase modulation value given as a proportion of the wave. The phmod_proportion parameter is a Q15n16 fixed-point number where the fractional n16 part represents -1 to 1, modulating the phase by one whole table length in each direction. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>a sample from the table. </dd></dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00125">125</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00128">128</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -347,7 +347,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00174">174</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00177">177</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -377,7 +377,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00189">189</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00192">192</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -407,7 +407,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00157">157</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00160">160</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -437,7 +437,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00140">140</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00143">143</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -497,7 +497,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00231">231</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00234">234</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -537,7 +537,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 19 2012 00:51:32 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jul 27 2012 00:44:01 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

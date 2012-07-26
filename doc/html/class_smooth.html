@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1d</span>
+   &#160;<span id="projectnumber">alpha 0.01.1e</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -122,12 +122,11 @@ class Smooth&lt; T &gt;</h3>
 <p>This algorithm comes from <a href="http://en.wikipedia.org/wiki/Low-pass_filter:">http://en.wikipedia.org/wiki/Low-pass_filter:</a> y[i] := y[i-1] + α * (x[i] - y[i-1]), translated as out = last_out + a * (in - last_out). It's not calibrated to any real-world update rate, so if you use it at CONTROL_RATE and you change CONTROL_RATE, you'll need to adjust the smoothness value to suit. </p>
 <dl class=""><dt><b>Template Parameters:</b></dt><dd>
   <table class="">
-    <tr><td class="paramname">T</td><td>the type of numbers being smoothed; valid types are char, unsigned char, int and unsigned int. No floats or longs. </td></tr>
+    <tr><td class="paramname">T</td><td>the type of numbers being smoothed. Watch out for numbers overflowing the internal calculations. Some experimentation is recommended. If this can't be overcome using different settings or values, <a class="el" href="class_low_pass1st_order.html" title="Low-pass filter suited for smoothing control signals.">LowPass1stOrder</a> may be another option. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section note"><dt>Note:</dt><dd>Timing: ~5us for 16 bit types, ~1us for 8 bit types. </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>Check timing and possibly make a fixed point version if it's worthwhile. </dd></dl>
 
 <p>Definition at line <a class="el" href="_smooth_8h_source.html#l00041">41</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
@@ -151,7 +150,7 @@ template&lt;class T &gt; </div>
 <p>Constructor. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">smoothness</td><td>sets how much smoothing the filter will apply to its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is very smooth; </td></tr>
+    <tr><td class="paramname">smoothness</td><td>sets how much smoothing the filter will apply to its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is very smooth. </td></tr>
   </table>
   </dd>
 </dl>
@@ -211,7 +210,7 @@ template&lt;class T &gt; </div>
 <p>Sets how much smoothing the filter will apply to its input. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">smoothness</td><td>sets how much smoothing the filter will apply to its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is very smooth; </td></tr>
+    <tr><td class="paramname">smoothness</td><td>sets how much smoothing the filter will apply to its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is very smooth. </td></tr>
   </table>
   </dd>
 </dl>
@@ -227,7 +226,7 @@ template&lt;class T &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 19 2012 00:51:32 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jul 27 2012 00:44:01 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

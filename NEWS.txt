@@ -3,6 +3,17 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1e
+- added LowPass1stOrder.h, an alternative to Smooth which can handle long numbers.
+- added example for LowPass1stOrder, smoothing gain
+- fixed a bug in Smooth.h which stopped high smoothness values working properly.
+- added another example for Smooth, changing freqency.
+- fixed errors in fixedMath.h
+- fixed a naming problem in char2mozzi.py
+- added _02b_FMsynth example
+- added _03b_AMsynth example
+
+
 Version 0.01.1d
 
 -utils.h: added startAnalogRead() and receiveAnalogRead(), so conversion can

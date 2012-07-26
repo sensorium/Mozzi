@@ -91,13 +91,15 @@ To convert a number from Qm.n format to floating point:
 
 #define Q7n0_to_Q7n8(a) (((Q7n8)(a))<<8)			/**<Convert char to Q7n8 fix. @param a is a char*/
 
-#define Q8n0_to_Q8n8(a) (((Q8n8)(a))<<8)		/**<Convert unsigned char to Q8n8 fix. @param a is a Q0n8 unsigned char*/
-#define Q8n0_to_Q16n16(a) (((Q16n16)(a))<<16)	/**<Convert Q8n0 unsigned char to Q16n16 fix. @param a is a Q8n0 unsigned char */
+#define Q8n0_to_Q7n8(a) (((Q7n8)(a))<<8)			/**<Convert Q8n0 unsigned char to Q7n8 fix. @param a is a Q8n0 unsigned char*/
+#define Q8n0_to_Q8n8(a) (((Q8n8)(a))<<8)			/**<Convert unsigned char to Q8n8 fix. @param a is a Q8n0 unsigned char*/
+#define Q8n0_to_Q16n16(a) (((Q16n16)(a))<<16)		/**<Convert Q8n0 unsigned char to Q16n16 fix. @param a is a Q8n0 unsigned char */
 
-#define Q7n8_to_Q7n0(a) ((char)((a)>>8))		/**<Convert Q7n8 fix to char. @param a is a Q7n8 int*/
+#define Q7n8_to_Q7n0(a) ((char)((a)>>8))			/**<Convert Q7n8 fix to char. @param a is a Q7n8 int*/
 #define Q7n8_to_float(a) (((float)(a))/256)			/**<Convert Q7n8 fix to float. @param a is a Q7n8 int*/
 
-#define Q8n8_to_Q8n0(a) ((unsigned char)((a)>>8))	/**<Convert Q8n8 fix to unsigned char. @param a is a Q8n8 unsigned int*/
+#define Q8n8_to_Q8n0(a) ((Q8n0)((a)>>8))			/**<Convert Q8n8 fix to Q8n0 unsigned char. @param a is a Q8n8 unsigned int*/
+#define Q8n8_to_Q16n16(a) (((Q16n16)(a))<<8)		/**<Convert Q8n8 fix to Q16n16 unsigned long. @param a is a Q8n8 unsigned int*/
 #define Q8n8_to_float(a) (((float)(a))/256)			/**<Convert Q8n8 fix to float. @param a is a Q8n8 unsigned int*/
 
 #define Q1n14_to_Q0n7(a) ((Q0n7)((a)>>7))			/**<Convert Q1n14 fixed to Q0n7 char. @param a is a Q1n14 int*/

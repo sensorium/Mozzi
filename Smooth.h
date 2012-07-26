@@ -32,19 +32,17 @@ y[i-1]), translated as out = last_out + a * (in - last_out). It's not calibrated
 to any real-world update rate, so if you use it at CONTROL_RATE and you change
 CONTROL_RATE, you'll need to adjust the smoothness value to suit.
 @tparam T the type of numbers being smoothed.  Watch out for numbers overflowing the
-internal calcualtions. Also, the resolution of the number type chosen has an
-effect on whether Smooth is able to reach its target with a specific smoothness
-value. Some experimentation is recommended.
+internal calculations. Some experimentation is recommended.
+If this can't be overcome using different settings or values, LowPass1stOrder may be another option.
 @note Timing: ~5us for 16 bit types, ~1us for 8 bit types.
-@todo Check timing and possibly make a fixed point version if it's worthwhile.
 */
 
 template <class T>
 class Smooth
 {
 private:
-	T last_out;
-	Q0n16 a;
+	long last_out;
+	Q0n8 a;
 
 public:
 	/** Constructor.
@@ -64,23 +62,24 @@ public:
 	inline
 	T next(T in)
 	{
-		T out = (T)(((((long)in - last_out) * a)>>16) + last_out);
+		long out = (((((long)in - (last_out>>8)) * a)) + last_out);
 		last_out = out;
-		return out;
+		return (T)(out>>8);
 	}
 
 	/** Sets how much smoothing the filter will apply to its input.
 	@param smoothness sets how much smoothing the filter will apply to
 	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
-	very smooth;
+	very smooth.
 	 */
 	inline
 	void setSmoothness(float smoothness)
 	{
-		a=float_to_Q0n16(1.f-smoothness);
+		a=float_to_Q0n8(1.f-smoothness);
 	}
 
 };
+
 
 /** unsigned char specialisation of Smooth template*/
 // class template specialization:
@@ -88,14 +87,14 @@ template <>
 class Smooth <unsigned char>
 {
 private:
-	unsigned char last_out;
-	unsigned char a;
+	unsigned int last_out;
+	Q0n8 a;
 
 public:
 	/** Constructor.
 	@param smoothness sets how much smoothing the filter will apply to
 	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
-	very smooth;
+	very smooth.
 	 */
 	Smooth(float smoothness)
 	{
@@ -109,15 +108,15 @@ public:
 	inline
 	unsigned char next(unsigned char in)
 	{
-		unsigned char out = (unsigned char)((((int) a * (in - last_out))>>8) + last_out);
+		unsigned int out = (((((int)in - (last_out>>8)) * a)) + last_out);
 		last_out = out;
-		return out;
+		return (unsigned char)(out>>8);
 	}
 
 	/** Sets how much smoothing the filter will apply to its input.
 	@param smoothness sets how much smoothing the filter will apply to
 	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
-	very smooth;
+	very smooth.
 	 */
 	inline
 	void setSmoothness(float smoothness)
@@ -128,18 +127,19 @@ public:
 };
 
 /** char specialisation of Smooth template*/
+// class template specialization:
 template <>
 class Smooth <char>
 {
 private:
-	char last_out;
-	unsigned char a;
+	int last_out;
+	Q0n8 a;
 
 public:
 	/** Constructor.
 	@param smoothness sets how much smoothing the filter will apply to
 	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
-	very smooth;
+	very smooth.
 	 */
 	Smooth(float smoothness)
 	{
@@ -153,15 +153,15 @@ public:
 	inline
 	char next(char in)
 	{
-		char out = (char)((((int) a * (in - last_out))>>8) + last_out);
+		int out = (((((int)in - (last_out>>8)) * a)) + last_out);
 		last_out = out;
-		return out;
+		return (char)(out>>8);
 	}
 
 	/** Sets how much smoothing the filter will apply to its input.
 	@param smoothness sets how much smoothing the filter will apply to
 	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
-	very smooth;
+	very smooth.
 	 */
 	inline
 	void setSmoothness(float smoothness)

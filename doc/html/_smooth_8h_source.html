@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1d</span>
+   &#160;<span id="projectnumber">alpha 0.01.1e</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -128,8 +128,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00041"></a><a class="code" href="class_smooth.html">00041</a> <span class="keyword">class </span><a class="code" href="class_smooth.html" title="A simple low pass filter for smoothing control signals.">Smooth</a>
 <a name="l00042"></a>00042 {
 <a name="l00043"></a>00043 <span class="keyword">private</span>:
-<a name="l00044"></a>00044                 T last_out;
-<a name="l00045"></a>00045                 <a class="code" href="group__fixed_math.html#gaa67ea605d7850f719c7e502ce4f84abf" title="unsigned fractional number using 16 fractional bits, represents 0.0 to 0.999">Q0n16</a> a;
+<a name="l00044"></a>00044                 <span class="keywordtype">long</span> last_out;
+<a name="l00045"></a>00045                 <a class="code" href="group__fixed_math.html#ga375bc832b01f5b4beb9277bc5fad43a0" title="unsigned fractional number using 8 fractional bits, represents 0.0 to 0.996">Q0n8</a> a;
 <a name="l00046"></a>00046 
 <a name="l00047"></a>00047 <span class="keyword">public</span>:
 <a name="l00053"></a><a class="code" href="class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26">00053</a>                 <a class="code" href="class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26" title="Constructor.">Smooth</a>(<span class="keywordtype">float</span> smoothness)
@@ -140,84 +140,86 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00062"></a>00062                 <span class="keyword">inline</span>
 <a name="l00063"></a><a class="code" href="class_smooth.html#ab7c809b6b5217771832a3e829695f8d5">00063</a>                 T <a class="code" href="class_smooth.html#ab7c809b6b5217771832a3e829695f8d5" title="Filters the input and returns the filtered value.">next</a>(T in)
 <a name="l00064"></a>00064                 {
-<a name="l00065"></a>00065                                 T out = (T)(((((<span class="keywordtype">long</span>)in - last_out) * a)&gt;&gt;16) + last_out);
+<a name="l00065"></a>00065                                 <span class="keywordtype">long</span> out = (((((long)in - (last_out&gt;&gt;8)) * a)) + last_out);
 <a name="l00066"></a>00066                                 last_out = out;
-<a name="l00067"></a>00067                                 <span class="keywordflow">return</span> out;
+<a name="l00067"></a>00067                                 <span class="keywordflow">return</span> (T)(out&gt;&gt;8);
 <a name="l00068"></a>00068                 }
 <a name="l00069"></a>00069 
 <a name="l00075"></a>00075                 <span class="keyword">inline</span>
 <a name="l00076"></a><a class="code" href="class_smooth.html#aac44bbf7a9bc6b9bae80eecc1be6e188">00076</a>                 <span class="keywordtype">void</span> <a class="code" href="class_smooth.html#aac44bbf7a9bc6b9bae80eecc1be6e188" title="Sets how much smoothing the filter will apply to its input.">setSmoothness</a>(<span class="keywordtype">float</span> smoothness)
 <a name="l00077"></a>00077                 {
-<a name="l00078"></a>00078                                 a=<a class="code" href="group__fixed_math.html#ga896c776f007043de0c1676459f4201c2" title="Convert float to Q0n16 fix.">float_to_Q0n16</a>(1.f-smoothness);
+<a name="l00078"></a>00078                                 a=<a class="code" href="group__fixed_math.html#gae08fc7945f098d2ba33f077050d0fcc9" title="Convert float to Q0n8 fix.">float_to_Q0n8</a>(1.f-smoothness);
 <a name="l00079"></a>00079                 }
 <a name="l00080"></a>00080 
 <a name="l00081"></a>00081 };
 <a name="l00082"></a>00082 
-<a name="l00084"></a>00084 <span class="comment">// class template specialization:</span>
-<a name="l00085"></a>00085 <span class="keyword">template</span> &lt;&gt;
-<a name="l00086"></a><a class="code" href="class_smooth_3_01unsigned_01char_01_4.html">00086</a> <span class="keyword">class </span><a class="code" href="class_smooth.html" title="A simple low pass filter for smoothing control signals.">Smooth</a> &lt;unsigned char&gt;
-<a name="l00087"></a>00087 {
-<a name="l00088"></a>00088 <span class="keyword">private</span>:
-<a name="l00089"></a>00089                 <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> last_out;
-<a name="l00090"></a>00090                 <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> a;
-<a name="l00091"></a>00091 
-<a name="l00092"></a>00092 <span class="keyword">public</span>:
-<a name="l00098"></a><a class="code" href="class_smooth_3_01unsigned_01char_01_4.html#aae502f9ef23f3041712a9843b0e37371">00098</a>                 <a class="code" href="class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26" title="Constructor.">Smooth</a>(<span class="keywordtype">float</span> smoothness)
-<a name="l00099"></a>00099                 {
-<a name="l00100"></a>00100                                 <a class="code" href="class_smooth.html#aac44bbf7a9bc6b9bae80eecc1be6e188" title="Sets how much smoothing the filter will apply to its input.">setSmoothness</a>(smoothness);
-<a name="l00101"></a>00101                 }
-<a name="l00102"></a>00102 
-<a name="l00107"></a>00107                 <span class="keyword">inline</span>
-<a name="l00108"></a><a class="code" href="class_smooth_3_01unsigned_01char_01_4.html#af68724bd25433c7c911f1c06cc27bdfd">00108</a>                 <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="class_smooth.html#ab7c809b6b5217771832a3e829695f8d5" title="Filters the input and returns the filtered value.">next</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> in)
-<a name="l00109"></a>00109                 {
-<a name="l00110"></a>00110                                 <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> out = (<span class="keywordtype">unsigned</span> char)((((<span class="keywordtype">int</span>) a * (in - last_out))&gt;&gt;8) + last_out);
-<a name="l00111"></a>00111                                 last_out = out;
-<a name="l00112"></a>00112                                 <span class="keywordflow">return</span> out;
-<a name="l00113"></a>00113                 }
-<a name="l00114"></a>00114 
-<a name="l00120"></a>00120                 <span class="keyword">inline</span>
-<a name="l00121"></a><a class="code" href="class_smooth_3_01unsigned_01char_01_4.html#a4ca2370b54c719edc60a95f30d6d4f97">00121</a>                 <span class="keywordtype">void</span> <a class="code" href="class_smooth.html#aac44bbf7a9bc6b9bae80eecc1be6e188" title="Sets how much smoothing the filter will apply to its input.">setSmoothness</a>(<span class="keywordtype">float</span> smoothness)
-<a name="l00122"></a>00122                 {
-<a name="l00123"></a>00123                                 a=<a class="code" href="group__fixed_math.html#gae08fc7945f098d2ba33f077050d0fcc9" title="Convert float to Q0n8 fix.">float_to_Q0n8</a>(1.f-smoothness);
-<a name="l00124"></a>00124                 }
-<a name="l00125"></a>00125 
-<a name="l00126"></a>00126 };
-<a name="l00127"></a>00127 
-<a name="l00129"></a>00129 <span class="keyword">template</span> &lt;&gt;
-<a name="l00130"></a><a class="code" href="class_smooth_3_01char_01_4.html">00130</a> <span class="keyword">class </span><a class="code" href="class_smooth.html" title="A simple low pass filter for smoothing control signals.">Smooth</a> &lt;char&gt;
-<a name="l00131"></a>00131 {
-<a name="l00132"></a>00132 <span class="keyword">private</span>:
-<a name="l00133"></a>00133                 <span class="keywordtype">char</span> last_out;
-<a name="l00134"></a>00134                 <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> a;
-<a name="l00135"></a>00135 
-<a name="l00136"></a>00136 <span class="keyword">public</span>:
-<a name="l00142"></a><a class="code" href="class_smooth_3_01char_01_4.html#a6fd26fec8c9e85e58358b6d6d4bcd226">00142</a>                 <a class="code" href="class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26" title="Constructor.">Smooth</a>(<span class="keywordtype">float</span> smoothness)
-<a name="l00143"></a>00143                 {
-<a name="l00144"></a>00144                                 <a class="code" href="class_smooth.html#aac44bbf7a9bc6b9bae80eecc1be6e188" title="Sets how much smoothing the filter will apply to its input.">setSmoothness</a>(smoothness);
-<a name="l00145"></a>00145                 }
-<a name="l00146"></a>00146 
-<a name="l00151"></a>00151                 <span class="keyword">inline</span>
-<a name="l00152"></a><a class="code" href="class_smooth_3_01char_01_4.html#af07603d3f71b5ace2ac93444041d2ec3">00152</a>                 <span class="keywordtype">char</span> <a class="code" href="class_smooth.html#ab7c809b6b5217771832a3e829695f8d5" title="Filters the input and returns the filtered value.">next</a>(<span class="keywordtype">char</span> in)
-<a name="l00153"></a>00153                 {
-<a name="l00154"></a>00154                                 <span class="keywordtype">char</span> out = (char)((((<span class="keywordtype">int</span>) a * (in - last_out))&gt;&gt;8) + last_out);
-<a name="l00155"></a>00155                                 last_out = out;
-<a name="l00156"></a>00156                                 <span class="keywordflow">return</span> out;
-<a name="l00157"></a>00157                 }
-<a name="l00158"></a>00158 
-<a name="l00164"></a>00164                 <span class="keyword">inline</span>
-<a name="l00165"></a><a class="code" href="class_smooth_3_01char_01_4.html#ac94cf0cc43dd5bac276d2312114f5f0f">00165</a>                 <span class="keywordtype">void</span> <a class="code" href="class_smooth.html#aac44bbf7a9bc6b9bae80eecc1be6e188" title="Sets how much smoothing the filter will apply to its input.">setSmoothness</a>(<span class="keywordtype">float</span> smoothness)
-<a name="l00166"></a>00166                 {
-<a name="l00167"></a>00167                                 a=<a class="code" href="group__fixed_math.html#gae08fc7945f098d2ba33f077050d0fcc9" title="Convert float to Q0n8 fix.">float_to_Q0n8</a>(1.f-smoothness);
-<a name="l00168"></a>00168                 }
-<a name="l00169"></a>00169 
-<a name="l00170"></a>00170 };
+<a name="l00083"></a>00083 
+<a name="l00085"></a>00085 <span class="comment">// class template specialization:</span>
+<a name="l00086"></a>00086 <span class="keyword">template</span> &lt;&gt;
+<a name="l00087"></a><a class="code" href="class_smooth_3_01unsigned_01char_01_4.html">00087</a> <span class="keyword">class </span><a class="code" href="class_smooth.html" title="A simple low pass filter for smoothing control signals.">Smooth</a> &lt;unsigned char&gt;
+<a name="l00088"></a>00088 {
+<a name="l00089"></a>00089 <span class="keyword">private</span>:
+<a name="l00090"></a>00090                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> last_out;
+<a name="l00091"></a>00091                 <a class="code" href="group__fixed_math.html#ga375bc832b01f5b4beb9277bc5fad43a0" title="unsigned fractional number using 8 fractional bits, represents 0.0 to 0.996">Q0n8</a> a;
+<a name="l00092"></a>00092 
+<a name="l00093"></a>00093 <span class="keyword">public</span>:
+<a name="l00099"></a><a class="code" href="class_smooth_3_01unsigned_01char_01_4.html#aae502f9ef23f3041712a9843b0e37371">00099</a>                 <a class="code" href="class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26" title="Constructor.">Smooth</a>(<span class="keywordtype">float</span> smoothness)
+<a name="l00100"></a>00100                 {
+<a name="l00101"></a>00101                                 <a class="code" href="class_smooth.html#aac44bbf7a9bc6b9bae80eecc1be6e188" title="Sets how much smoothing the filter will apply to its input.">setSmoothness</a>(smoothness);
+<a name="l00102"></a>00102                 }
+<a name="l00103"></a>00103 
+<a name="l00108"></a>00108                 <span class="keyword">inline</span>
+<a name="l00109"></a><a class="code" href="class_smooth_3_01unsigned_01char_01_4.html#af68724bd25433c7c911f1c06cc27bdfd">00109</a>                 <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="class_smooth.html#ab7c809b6b5217771832a3e829695f8d5" title="Filters the input and returns the filtered value.">next</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> in)
+<a name="l00110"></a>00110                 {
+<a name="l00111"></a>00111                                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> out = (((((int)in - (last_out&gt;&gt;8)) * a)) + last_out);
+<a name="l00112"></a>00112                                 last_out = out;
+<a name="l00113"></a>00113                                 <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)(out&gt;&gt;8);
+<a name="l00114"></a>00114                 }
+<a name="l00115"></a>00115 
+<a name="l00121"></a>00121                 <span class="keyword">inline</span>
+<a name="l00122"></a><a class="code" href="class_smooth_3_01unsigned_01char_01_4.html#a4ca2370b54c719edc60a95f30d6d4f97">00122</a>                 <span class="keywordtype">void</span> <a class="code" href="class_smooth.html#aac44bbf7a9bc6b9bae80eecc1be6e188" title="Sets how much smoothing the filter will apply to its input.">setSmoothness</a>(<span class="keywordtype">float</span> smoothness)
+<a name="l00123"></a>00123                 {
+<a name="l00124"></a>00124                                 a=<a class="code" href="group__fixed_math.html#gae08fc7945f098d2ba33f077050d0fcc9" title="Convert float to Q0n8 fix.">float_to_Q0n8</a>(1.f-smoothness);
+<a name="l00125"></a>00125                 }
+<a name="l00126"></a>00126 
+<a name="l00127"></a>00127 };
+<a name="l00128"></a>00128 
+<a name="l00130"></a>00130 <span class="comment">// class template specialization:</span>
+<a name="l00131"></a>00131 <span class="keyword">template</span> &lt;&gt;
+<a name="l00132"></a><a class="code" href="class_smooth_3_01char_01_4.html">00132</a> <span class="keyword">class </span><a class="code" href="class_smooth.html" title="A simple low pass filter for smoothing control signals.">Smooth</a> &lt;char&gt;
+<a name="l00133"></a>00133 {
+<a name="l00134"></a>00134 <span class="keyword">private</span>:
+<a name="l00135"></a>00135                 <span class="keywordtype">int</span> last_out;
+<a name="l00136"></a>00136                 <a class="code" href="group__fixed_math.html#ga375bc832b01f5b4beb9277bc5fad43a0" title="unsigned fractional number using 8 fractional bits, represents 0.0 to 0.996">Q0n8</a> a;
+<a name="l00137"></a>00137 
+<a name="l00138"></a>00138 <span class="keyword">public</span>:
+<a name="l00144"></a><a class="code" href="class_smooth_3_01char_01_4.html#a6fd26fec8c9e85e58358b6d6d4bcd226">00144</a>                 <a class="code" href="class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26" title="Constructor.">Smooth</a>(<span class="keywordtype">float</span> smoothness)
+<a name="l00145"></a>00145                 {
+<a name="l00146"></a>00146                                 <a class="code" href="class_smooth.html#aac44bbf7a9bc6b9bae80eecc1be6e188" title="Sets how much smoothing the filter will apply to its input.">setSmoothness</a>(smoothness);
+<a name="l00147"></a>00147                 }
+<a name="l00148"></a>00148 
+<a name="l00153"></a>00153                 <span class="keyword">inline</span>
+<a name="l00154"></a><a class="code" href="class_smooth_3_01char_01_4.html#af07603d3f71b5ace2ac93444041d2ec3">00154</a>                 <span class="keywordtype">char</span> <a class="code" href="class_smooth.html#ab7c809b6b5217771832a3e829695f8d5" title="Filters the input and returns the filtered value.">next</a>(<span class="keywordtype">char</span> in)
+<a name="l00155"></a>00155                 {
+<a name="l00156"></a>00156                                 <span class="keywordtype">int</span> out = (((((int)in - (last_out&gt;&gt;8)) * a)) + last_out);
+<a name="l00157"></a>00157                                 last_out = out;
+<a name="l00158"></a>00158                                 <span class="keywordflow">return</span> (<span class="keywordtype">char</span>)(out&gt;&gt;8);
+<a name="l00159"></a>00159                 }
+<a name="l00160"></a>00160 
+<a name="l00166"></a>00166                 <span class="keyword">inline</span>
+<a name="l00167"></a><a class="code" href="class_smooth_3_01char_01_4.html#ac94cf0cc43dd5bac276d2312114f5f0f">00167</a>                 <span class="keywordtype">void</span> <a class="code" href="class_smooth.html#aac44bbf7a9bc6b9bae80eecc1be6e188" title="Sets how much smoothing the filter will apply to its input.">setSmoothness</a>(<span class="keywordtype">float</span> smoothness)
+<a name="l00168"></a>00168                 {
+<a name="l00169"></a>00169                                 a=<a class="code" href="group__fixed_math.html#gae08fc7945f098d2ba33f077050d0fcc9" title="Convert float to Q0n8 fix.">float_to_Q0n8</a>(1.f-smoothness);
+<a name="l00170"></a>00170                 }
 <a name="l00171"></a>00171 
-<a name="l00172"></a>00172 <span class="preprocessor">#endif </span><span class="comment">/* SMOOTH_H_ */</span>
+<a name="l00172"></a>00172 };
+<a name="l00173"></a>00173 
+<a name="l00174"></a>00174 <span class="preprocessor">#endif </span><span class="comment">/* SMOOTH_H_ */</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 19 2012 00:51:31 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jul 27 2012 00:44:01 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

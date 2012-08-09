@@ -32,6 +32,14 @@ float mtof(float x);
 Q16n16 Q16n16_mtof(Q16n16 midival);
 unsigned char randomMidi();
 unsigned long xorshift96();
+char rand(char minval, char maxval);
+unsigned char rand(unsigned char minval, unsigned char maxval);
+int rand( int minval,  int maxval);
+unsigned int rand(unsigned int minval, unsigned int maxval);
+char rand(char maxval);
+unsigned char rand(unsigned char maxval);
+int rand(int maxval);
+unsigned int rand(unsigned int maxval);
 
 
 void setupFastAnalogRead();

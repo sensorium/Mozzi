@@ -86,7 +86,9 @@ there might be times where the extra headroom is useful. Use powers of two in
 audio calculations and use right shifts for divisions where possible. Also, in
 tests while writing Mozzi, shifts on byte boundaries seem to work fastest.
 For example, >> 8 is faster than >> 4. Test your timings where possible, using
-an oscilloscope with setPin13High() and setPin13Low() around you test code.
+an oscilloscope.  To test timing, include utils.h in your sketch, put SET_PIN13_OUT
+in setup(), then SET_PIN13_HIGH and SET_PIN13_LOW around your test code
+(see <a href="group__util.html">Mozzi utility functions</a>).
 */
 
 #define AUDIO_PWM_RESOLUTION 488 // from Timer1.pwmPeriod calculated for interrupt rate 16384

@@ -3,7 +3,24 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1f
+
+- added WaveShaper(), a table-based waveshaping object suited for audio synthesis,
+	with an example sketch,  _18_WaveShaper.
+- added tables for use with WaveShaper(), including Chebyshev polynomial curves and sigmoid curves.
+- utils.h: added rand(), a fast ranged random number generator using xorshift96(),
+	for signed and unsigned chars and ints, in rand(min,max) for values
+	between min and max-1, and rand(max) for 0 to max-1.
+	Much easier to use than xorshift() on its own.
+- added a folder of bamboo percussion sample tables - is it possible
+	to get clean sounding samples at 8-bit 16384Hz resolution?
+	Looking at old Amiga sample archives for hints.
+- added _16b_LowPassFilter_AnalogRead_Control example
+- lots of typos
+
+
 Version 0.01.1e
+
 - added LowPass1stOrder.h, an alternative to Smooth which can handle long numbers.
 - fixed a bug in Smooth.h which stopped high smoothness values working properly.
 - added another example for Smooth, changing freqency.
@@ -23,6 +40,7 @@ Version 0.01.1d
 
 
 Version 0.01.1c
+
 - Smooth.h: increased speed from about 400 us to between 1-5 us, depending on
 number type, by changing floating to fixed point in internal calculations. Types
 are now restricted to char, unsigned char, int and unsigned int.

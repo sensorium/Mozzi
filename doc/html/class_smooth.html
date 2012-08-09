@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1e</span>
+   &#160;<span id="projectnumber">alpha 0.01</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -49,7 +49,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -122,13 +121,12 @@ class Smooth&lt; T &gt;</h3>
 <p>This algorithm comes from <a href="http://en.wikipedia.org/wiki/Low-pass_filter:">http://en.wikipedia.org/wiki/Low-pass_filter:</a> y[i] := y[i-1] + α * (x[i] - y[i-1]), translated as out = last_out + a * (in - last_out). It's not calibrated to any real-world update rate, so if you use it at CONTROL_RATE and you change CONTROL_RATE, you'll need to adjust the smoothness value to suit. </p>
 <dl class=""><dt><b>Template Parameters:</b></dt><dd>
   <table class="">
-    <tr><td class="paramname">T</td><td>the type of numbers being smoothed. Watch out for numbers overflowing the internal calculations. Some experimentation is recommended. If this can't be overcome using different settings or values, <a class="el" href="class_low_pass1st_order.html" title="Low-pass filter suited for smoothing control signals.">LowPass1stOrder</a> may be another option. </td></tr>
+    <tr><td class="paramname">set</td><td>the type of numbers you want to use. For example, <a class="el" href="class_smooth.html" title="A simple low pass filter for smoothing control signals.">Smooth</a> &lt;int&gt; mySmooth; makes a <a class="el" href="class_smooth.html" title="A simple low pass filter for smoothing control signals.">Smooth</a> which works with ints. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note:</dt><dd>Timing: ~5us for 16 bit types, ~1us for 8 bit types. </dd></dl>
 
-<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00041">41</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
+<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00038">38</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ac6626aae94eb7a22024e2054c1bbbb26"></a>
 <div class="memitem">
@@ -150,12 +148,12 @@ template&lt;class T &gt; </div>
 <p>Constructor. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">smoothness</td><td>sets how much smoothing the filter will apply to its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is very smooth. </td></tr>
+    <tr><td class="paramname">smoothness</td><td>sets how much smoothing the filter will apply to its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is very smooth; </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00053">53</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
+<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00050">50</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
 
 </div>
 </div>
@@ -186,7 +184,7 @@ template&lt;class T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>the filtered signal. </dd></dl>
 
-<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00063">63</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
+<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00060">60</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
 
 </div>
 </div>
@@ -210,12 +208,12 @@ template&lt;class T &gt; </div>
 <p>Sets how much smoothing the filter will apply to its input. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">smoothness</td><td>sets how much smoothing the filter will apply to its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is very smooth. </td></tr>
+    <tr><td class="paramname">smoothness</td><td>sets how much smoothing the filter will apply to its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is very smooth; </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00076">76</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
+<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00073">73</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
 
 </div>
 </div>
@@ -226,7 +224,7 @@ template&lt;class T &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jul 27 2012 00:44:01 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jun 12 2012 18:54:55 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

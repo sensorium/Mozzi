@@ -15,20 +15,20 @@
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/chum9_int8.h> // recorded audio wavetable
-#include <tables/cos8192_int8.h> // for filter modulation
+#include <tables/cos2048_int8.h> // for filter modulation
 #include <LowPassFilter.h>
 #include <utils.h> // for xorshift96() random number generator
 
 #define CONTROL_RATE 64 // powers of 2 please
 
-Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aTriangle(CHUM9_DATA);
-Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kFilterMod(COS8192_DATA);
+Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound(CHUM9_DATA);
+Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFilterMod(COS2048_DATA);
 
 LowPassFilter lpf;
 
 void setup(){
   startMozzi(CONTROL_RATE);
-  aTriangle.setFreq(2.f);
+  aCrunchySound.setFreq(2.f);
   kFilterMod.setFreq(1.3f);
   lpf.setResonance(200);
 }
@@ -48,7 +48,7 @@ void updateControl(){
 }
 
 int updateAudio(){
-  char asig = lpf.next(aTriangle.next());
+  char asig = lpf.next(aCrunchySound.next());
   return (int) asig;
 }
 

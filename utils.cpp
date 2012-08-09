@@ -116,6 +116,7 @@ which is too slow to use with Mozzi.
 unsigned long xorshift96()
 {          //period 2^96-1
 	static unsigned long x=123456789, y=362436069, z=521288629;
+	//static unsigned long x=123456789, y=362436069, z=analogRead(0);
 	unsigned long t;
 
 	x ^= x << 16;
@@ -130,6 +131,97 @@ unsigned long xorshift96()
 	return z;
 }
 
+
+/** @ingroup util
+Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.
+@param minval the minimum signed byte value of the range to be chosen from.  Minval will be the minimum value possibly returned by the function.
+@param maxval the maximum signed byte value of the range to be chosen from.  Maxval-1 will be the largest value  possibly returned by the function.
+@return a random char between minval and maxval-1 inclusive.
+*/
+char rand(char minval, char maxval)
+{
+	return (char) ((((int) (lowByte(xorshift96()))) * (maxval-minval))/256) + minval;
+}
+
+
+/** @ingroup util
+Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.
+@param minval the minimum unsigned byte value of the range to be chosen from.  Minval will be the minimum value possibly returned by the function.
+@param maxval the maximum unsigned byte value of the range to be chosen from.  Maxval-1 will be the largest value possibly returned by the function.
+@return a random unsigned char between minval and maxval-1 inclusive.
+*/
+unsigned char rand(unsigned char minval, unsigned char maxval)
+{
+	return (unsigned char) ((((unsigned int) (lowByte(xorshift96()))) * (maxval-minval))/256) + minval;
+}
+
+
+/** @ingroup util
+Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.
+@param minval the minimum signed int value of the range to be chosen from.  Minval will be the minimum value possibly returned by the function.
+@param maxval the maximum signed int value of the range to be chosen from.  Maxval-1 will be the largest value possibly returned by the function.
+@return a random int between minval and maxval-1 inclusive.
+*/
+int rand( int minval,  int maxval)
+{
+	return (int) ((((xorshift96()>>16) * (maxval-minval))>>16) + minval);
+}
+
+
+/** @ingroup util
+Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.
+@param minval the minimum unsigned int value of the range to be chosen from.  Minval will be the minimum value possibly returned by the function.
+@param maxval the maximum unsigned int value of the range to be chosen from.  Maxval-1 will be the largest value possibly returned by the function.
+@return a random unsigned int between minval and maxval-1 inclusive.
+*/
+unsigned int rand(unsigned int minval, unsigned int maxval)
+{
+	return (unsigned int) ((((xorshift96()>>16) * (maxval-minval))>>16) + minval);
+}
+
+
+/** @ingroup util
+Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.
+@param maxval the maximum signed byte value of the range to be chosen from.  Maxval-1 will be the largest value  possibly returned by the function.
+@return a random char between 0 and maxval-1 inclusive.
+*/
+char rand(char maxval)
+{
+	return (char) ((((int) (lowByte(xorshift96()))) * maxval)/256);
+}
+
+
+/** @ingroup util
+Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.
+@param maxval the maximum unsigned byte value of the range to be chosen from.  Maxval-1 will be the largest value possibly returned by the function.
+@return a random unsigned char between 0 and maxval-1 inclusive.
+*/
+unsigned char rand(unsigned char maxval)
+{
+	return (unsigned char) ((((unsigned int) (lowByte(xorshift96()))) * maxval)/256);
+}
+
+
+/** @ingroup util
+Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.
+@param maxval the maximum signed int value of the range to be chosen from.  Maxval-1 will be the largest value possibly returned by the function.
+@return a random int between 0 and maxval-1 inclusive.
+*/
+int rand(int maxval)
+{
+	return (int) (((xorshift96()>>16) * maxval)>>16);
+}
+
+
+/** @ingroup util
+Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.
+@param maxval the maximum unsigned int value of the range to be chosen from.  Maxval-1 will be the largest value possibly returned by the function.
+@return a random unsigned int between 0 and maxval-1 inclusive.
+*/
+unsigned int rand(unsigned int maxval)
+{
+	return (unsigned int) (((xorshift96()>>16) * maxval)>>16);
+}
 
 
 
@@ -169,16 +261,24 @@ void startAnalogRead(uint8_t pin)
 {
 
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
-	if (pin >= 54) pin -= 54; // allow for channel or pin numbers
+	if (pin >= 54)
+		pin -= 54; // allow for channel or pin numbers
 #elif defined(__AVR_ATmega32U4__)
-	if (pin >= 18) pin -= 18; // allow for channel or pin numbers
+
+	if (pin >= 18)
+		pin -= 18; // allow for channel or pin numbers
 #elif defined(__AVR_ATmega1284__)
-	if (pin >= 24) pin -= 24; // allow for channel or pin numbers
+
+	if (pin >= 24)
+		pin -= 24; // allow for channel or pin numbers
 #else
-	if (pin >= 14) pin -= 14; // allow for channel or pin numbers
+
+	if (pin >= 14)
+		pin -= 14; // allow for channel or pin numbers
 #endif
 
 #if defined(__AVR_ATmega32U4__)
+
 	pin = analogPinToChannel(pin);
 	ADCSRB = (ADCSRB & ~(1 << MUX5)) | (((pin >> 3) & 0x01) << MUX5);
 #elif defined(ADCSRB) && defined(MUX5)
@@ -191,6 +291,7 @@ void startAnalogRead(uint8_t pin)
 	// channel (low 4 bits).  this also sets ADLAR (left-adjust result)
 	// to 0 (the default).
 #if defined(ADMUX)
+
 	ADMUX = (analog_reference << 6) | (pin & 0x07);
 #endif
 
@@ -212,11 +313,13 @@ waste time waiting for analogRead() to return (1us here vs 105 us for standard A
 @return The resut of the most recent startAnalogRead().
 @note Timing: about 1us when used in updateControl() with CONTROL_RATE 64.
 */
-int receiveAnalogRead(){
+int receiveAnalogRead()
+{
 	uint8_t low, high;
 #if defined(ADCSRA) && defined(ADCL)
 	// ADSC is cleared when the conversion finishes
-	while (bit_is_set(ADCSRA, ADSC));
+	while (bit_is_set(ADCSRA, ADSC))
+		;
 
 	// we have to read ADCL first; doing so locks both ADCL
 	// and ADCH until ADCH is read.  reading ADCL second would

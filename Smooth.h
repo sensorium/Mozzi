@@ -81,8 +81,9 @@ public:
 };
 
 
+/** @cond */ // doxygen can ignore the specialisations
+
 /** unsigned char specialisation of Smooth template*/
-// class template specialization:
 template <>
 class Smooth <unsigned char>
 {
@@ -126,8 +127,8 @@ public:
 
 };
 
+
 /** char specialisation of Smooth template*/
-// class template specialization:
 template <>
 class Smooth <char>
 {
@@ -170,5 +171,7 @@ public:
 	}
 
 };
+
+/** @endcond */
 
 #endif /* SMOOTH_H_ */

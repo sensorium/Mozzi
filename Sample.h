@@ -37,7 +37,6 @@
 // the fractional part and the sign bit
 #define SAMPLE_PHMOD_BITS 16
 
-// TODO: try to make Sample inherit Oscil to avoid code duplication
 
 /** Sample is like Oscil, it plays a wavetable, but defaults to playing once through,
 from start to finish.
@@ -53,7 +52,7 @@ Converting soundfiles for Mozzi.
 There is a python script called raw2mozzi.py in the Mozzi/python folder.
 The usage is:
 python raw2mozzi.py infilename outfilename tablename samplerate
-@todo Make Sample a descendant of Oscil.
+@todo Make Sample a descendent of Oscil.
 */
 template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE>
 class Sample

@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01</span>
+   &#160;<span id="projectnumber">alpha 0.01.1f</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -49,6 +49,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -106,10 +107,34 @@ Defines</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:gafacb8849f96270644ea79184fde7db37"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gafacb8849f96270644ea79184fde7db37">mtof</a> (float midival)</td></tr>
 <tr class="memdesc:gafacb8849f96270644ea79184fde7db37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts midi note number to frequency.  <a href="#gafacb8849f96270644ea79184fde7db37"></a><br/></td></tr>
+<tr class="memitem:ga45bd3f3abd7ae5fa509eac3d3931a5b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3">Q16n16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2">Q16n16_mtof</a> (<a class="el" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3">Q16n16</a> midival_fractional)</td></tr>
+<tr class="memdesc:ga45bd3f3abd7ae5fa509eac3d3931a5b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts midi note number to frequency.  <a href="#ga45bd3f3abd7ae5fa509eac3d3931a5b2"></a><br/></td></tr>
+<tr class="memitem:ga9884e17c95a10e988e90d60c9f3aab2b"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga9884e17c95a10e988e90d60c9f3aab2b">randomMidi</a> ()</td></tr>
+<tr class="memdesc:ga9884e17c95a10e988e90d60c9f3aab2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a random number in the range for midi notes.  <a href="#ga9884e17c95a10e988e90d60c9f3aab2b"></a><br/></td></tr>
 <tr class="memitem:gaf2deee83847f1fcee2c859d97bd072f6"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6">xorshift96</a> ()</td></tr>
 <tr class="memdesc:gaf2deee83847f1fcee2c859d97bd072f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Random number generator.  <a href="#gaf2deee83847f1fcee2c859d97bd072f6"></a><br/></td></tr>
-<tr class="memitem:gac8bcacf360d020b9b8ab0d96b8528b13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gac8bcacf360d020b9b8ab0d96b8528b13">setupFastADC</a> ()</td></tr>
-<tr class="memdesc:gac8bcacf360d020b9b8ab0d96b8528b13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make analogRead() faster than the standard Arduino version.  <a href="#gac8bcacf360d020b9b8ab0d96b8528b13"></a><br/></td></tr>
+<tr class="memitem:gacd4bfc9e040d0090b9321f43a6297e21"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21">rand</a> (char minval, char maxval)</td></tr>
+<tr class="memdesc:gacd4bfc9e040d0090b9321f43a6297e21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.  <a href="#gacd4bfc9e040d0090b9321f43a6297e21"></a><br/></td></tr>
+<tr class="memitem:ga91590455565d619314812a7f95fcd9e7"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga91590455565d619314812a7f95fcd9e7">rand</a> (unsigned char minval, unsigned char maxval)</td></tr>
+<tr class="memdesc:ga91590455565d619314812a7f95fcd9e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.  <a href="#ga91590455565d619314812a7f95fcd9e7"></a><br/></td></tr>
+<tr class="memitem:ga4c69deb53afb886b26c76b343513b340"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga4c69deb53afb886b26c76b343513b340">rand</a> (int minval, int maxval)</td></tr>
+<tr class="memdesc:ga4c69deb53afb886b26c76b343513b340"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.  <a href="#ga4c69deb53afb886b26c76b343513b340"></a><br/></td></tr>
+<tr class="memitem:ga95de742b529d5965461f1d3f6f576e18"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga95de742b529d5965461f1d3f6f576e18">rand</a> (unsigned int minval, unsigned int maxval)</td></tr>
+<tr class="memdesc:ga95de742b529d5965461f1d3f6f576e18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.  <a href="#ga95de742b529d5965461f1d3f6f576e18"></a><br/></td></tr>
+<tr class="memitem:gaa0c23ec434d09717e1fe2e8363e689bc"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gaa0c23ec434d09717e1fe2e8363e689bc">rand</a> (char maxval)</td></tr>
+<tr class="memdesc:gaa0c23ec434d09717e1fe2e8363e689bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.  <a href="#gaa0c23ec434d09717e1fe2e8363e689bc"></a><br/></td></tr>
+<tr class="memitem:ga4bfcc7c200e26fff41a2af61c9ea1a9f"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga4bfcc7c200e26fff41a2af61c9ea1a9f">rand</a> (unsigned char maxval)</td></tr>
+<tr class="memdesc:ga4bfcc7c200e26fff41a2af61c9ea1a9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.  <a href="#ga4bfcc7c200e26fff41a2af61c9ea1a9f"></a><br/></td></tr>
+<tr class="memitem:ga1182cb74988d9c8510959149adc63762"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga1182cb74988d9c8510959149adc63762">rand</a> (int maxval)</td></tr>
+<tr class="memdesc:ga1182cb74988d9c8510959149adc63762"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.  <a href="#ga1182cb74988d9c8510959149adc63762"></a><br/></td></tr>
+<tr class="memitem:ga4ad4ab94c8b0e8a4d4be925490378733"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga4ad4ab94c8b0e8a4d4be925490378733">rand</a> (unsigned int maxval)</td></tr>
+<tr class="memdesc:ga4ad4ab94c8b0e8a4d4be925490378733"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.  <a href="#ga4ad4ab94c8b0e8a4d4be925490378733"></a><br/></td></tr>
+<tr class="memitem:gaf46803d06aa1d839192cc6125e39ff01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gaf46803d06aa1d839192cc6125e39ff01">setupFastAnalogRead</a> ()</td></tr>
+<tr class="memdesc:gaf46803d06aa1d839192cc6125e39ff01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in unmodified Arduino to 15 microseconds for a dependable analogRead().  <a href="#gaf46803d06aa1d839192cc6125e39ff01"></a><br/></td></tr>
+<tr class="memitem:gaa479c0dd53bfeceeac25d12dfdc5b690"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gaa479c0dd53bfeceeac25d12dfdc5b690">startAnalogRead</a> (uint8_t pin)</td></tr>
+<tr class="memdesc:gaa479c0dd53bfeceeac25d12dfdc5b690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts an analog-to-digital conversion of the voltage at a specified pin.  <a href="#gaa479c0dd53bfeceeac25d12dfdc5b690"></a><br/></td></tr>
+<tr class="memitem:ga215a0653b8dabc35731d7115d1140757"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga215a0653b8dabc35731d7115d1140757">receiveAnalogRead</a> ()</td></tr>
+<tr class="memdesc:ga215a0653b8dabc35731d7115d1140757"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for the result of the most recent <a class="el" href="group__util.html#gaa479c0dd53bfeceeac25d12dfdc5b690" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a>.  <a href="#ga215a0653b8dabc35731d7115d1140757"></a><br/></td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
 <a class="anchor" id="gae4cefe7c89f383a53aa741f6596772f0"></a>
@@ -180,6 +205,8 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Converts midi note number to frequency. </p>
+<p>Caution: this can take up to 400 microseconds to run. It can seriously mess up the audio output if you use it in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> or <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio()</a>. This is a good choice in setup(), or where you need precise midi-pitch conversion and aren't doing much other audio calculation. </p>
+<dl class="section note"><dt>Note:</dt><dd>Timing: ~350 us </dd></dl>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">midival</td><td>a midi note number. Like the mtof object in Pd, midi values can have fractions. </td></tr>
@@ -188,16 +215,314 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>the frequency represented by the input midi note number.. </dd></dl>
 
-<p>Definition at line <a class="el" href="utils_8c_source.html#l00009">9</a> of file <a class="el" href="utils_8c_source.html">utils.c</a>.</p>
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00014">14</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="gac8bcacf360d020b9b8ab0d96b8528b13"></a>
+<a class="anchor" id="ga45bd3f3abd7ae5fa509eac3d3931a5b2"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="group__util.html#gac8bcacf360d020b9b8ab0d96b8528b13">setupFastADC</a> </td>
+          <td class="memname"><a class="el" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3">Q16n16</a> <a class="el" href="group__util.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2">Q16n16_mtof</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3">Q16n16</a>&#160;</td>
+          <td class="paramname"><em>midival_fractional</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Converts midi note number to frequency. </p>
+<p>Q16n16_mtofLookup() is a fast alternative to <a class="el" href="group__util.html#gafacb8849f96270644ea79184fde7db37" title="Converts midi note number to frequency.">mtof()</a>, using Q16n16 fixed-point format instead of floats. It's a good choice if you're using whole note values. <a class="el" href="group__util.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2" title="Converts midi note number to frequency.">Q16n16_mtof()</a> uses cheap linear interpolation between whole midi-note frequency equivalents stored in a lookup table, so is less accurate than the float version, <a class="el" href="group__util.html#gafacb8849f96270644ea79184fde7db37" title="Converts midi note number to frequency.">mtof()</a>, for non-whole midi values. </p>
+<dl class="section note"><dt>Note:</dt><dd>Timing: ~8 us. </dd></dl>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">midival</td><td>a midi note number in Q16n16 format, for fractional values. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>the frequency represented by the input midi note number, in Q16n16 fixed point fractional integer format, where the lower word is a fractional value. </dd></dl>
+
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00078">78</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gacd4bfc9e040d0090b9321f43a6297e21"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char <a class="el" href="group__util.html#ga4ad4ab94c8b0e8a4d4be925490378733">rand</a> </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>minval</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>maxval</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">minval</td><td>the minimum signed byte value of the range to be chosen from. Minval will be the minimum value possibly returned by the function. </td></tr>
+    <tr><td class="paramname">maxval</td><td>the maximum signed byte value of the range to be chosen from. Maxval-1 will be the largest value possibly returned by the function. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>a random char between minval and maxval-1 inclusive. </dd></dl>
+
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00141">141</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga91590455565d619314812a7f95fcd9e7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char <a class="el" href="group__util.html#ga4ad4ab94c8b0e8a4d4be925490378733">rand</a> </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>minval</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>maxval</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">minval</td><td>the minimum unsigned byte value of the range to be chosen from. Minval will be the minimum value possibly returned by the function. </td></tr>
+    <tr><td class="paramname">maxval</td><td>the maximum unsigned byte value of the range to be chosen from. Maxval-1 will be the largest value possibly returned by the function. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>a random unsigned char between minval and maxval-1 inclusive. </dd></dl>
+
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00153">153</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga4c69deb53afb886b26c76b343513b340"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="group__util.html#ga4ad4ab94c8b0e8a4d4be925490378733">rand</a> </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>minval</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxval</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">minval</td><td>the minimum signed int value of the range to be chosen from. Minval will be the minimum value possibly returned by the function. </td></tr>
+    <tr><td class="paramname">maxval</td><td>the maximum signed int value of the range to be chosen from. Maxval-1 will be the largest value possibly returned by the function. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>a random int between minval and maxval-1 inclusive. </dd></dl>
+
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00165">165</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga95de742b529d5965461f1d3f6f576e18"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int <a class="el" href="group__util.html#ga4ad4ab94c8b0e8a4d4be925490378733">rand</a> </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>minval</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>maxval</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">minval</td><td>the minimum unsigned int value of the range to be chosen from. Minval will be the minimum value possibly returned by the function. </td></tr>
+    <tr><td class="paramname">maxval</td><td>the maximum unsigned int value of the range to be chosen from. Maxval-1 will be the largest value possibly returned by the function. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>a random unsigned int between minval and maxval-1 inclusive. </dd></dl>
+
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00177">177</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gaa0c23ec434d09717e1fe2e8363e689bc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char <a class="el" href="group__util.html#ga4ad4ab94c8b0e8a4d4be925490378733">rand</a> </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>maxval</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maxval</td><td>the maximum signed byte value of the range to be chosen from. Maxval-1 will be the largest value possibly returned by the function. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>a random char between 0 and maxval-1 inclusive. </dd></dl>
+
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00188">188</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga4bfcc7c200e26fff41a2af61c9ea1a9f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char <a class="el" href="group__util.html#ga4ad4ab94c8b0e8a4d4be925490378733">rand</a> </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>maxval</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maxval</td><td>the maximum unsigned byte value of the range to be chosen from. Maxval-1 will be the largest value possibly returned by the function. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>a random unsigned char between 0 and maxval-1 inclusive. </dd></dl>
+
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00199">199</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga1182cb74988d9c8510959149adc63762"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="group__util.html#ga4ad4ab94c8b0e8a4d4be925490378733">rand</a> </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxval</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maxval</td><td>the maximum signed int value of the range to be chosen from. Maxval-1 will be the largest value possibly returned by the function. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>a random int between 0 and maxval-1 inclusive. </dd></dl>
+
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00210">210</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga4ad4ab94c8b0e8a4d4be925490378733"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int <a class="el" href="group__util.html#ga4ad4ab94c8b0e8a4d4be925490378733">rand</a> </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>maxval</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maxval</td><td>the maximum unsigned int value of the range to be chosen from. Maxval-1 will be the largest value possibly returned by the function. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>a random unsigned int between 0 and maxval-1 inclusive. </dd></dl>
+
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00221">221</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga9884e17c95a10e988e90d60c9f3aab2b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char <a class="el" href="group__util.html#ga9884e17c95a10e988e90d60c9f3aab2b">randomMidi</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -206,10 +531,83 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Make analogRead() faster than the standard Arduino version. </p>
+<p>Generates a random number in the range for midi notes. </p>
+<dl class="section return"><dt>Returns:</dt><dd>a random value between 0 and 127 inclusive </dd></dl>
+
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00103">103</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga215a0653b8dabc35731d7115d1140757"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="group__util.html#ga215a0653b8dabc35731d7115d1140757">receiveAnalogRead</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Waits for the result of the most recent <a class="el" href="group__util.html#gaa479c0dd53bfeceeac25d12dfdc5b690" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a>. </p>
+<p>If used as the first function of <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, to receive the result of <a class="el" href="group__util.html#gaa479c0dd53bfeceeac25d12dfdc5b690" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a> from the end of the last <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, there will probably be no waiting time, as the ADC conversion will have happened in between interrupts. This is a big time-saver, since you don't have to waste time waiting for analogRead() to return (1us here vs 105 us for standard Arduino). </p>
+<dl class="section return"><dt>Returns:</dt><dd>The resut of the most recent <a class="el" href="group__util.html#gaa479c0dd53bfeceeac25d12dfdc5b690" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a>. </dd></dl>
+<dl class="section note"><dt>Note:</dt><dd>Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> with CONTROL_RATE 64. </dd></dl>
+
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00316">316</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gaf46803d06aa1d839192cc6125e39ff01"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="group__util.html#gaf46803d06aa1d839192cc6125e39ff01">setupFastAnalogRead</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in unmodified Arduino to 15 microseconds for a dependable analogRead(). </p>
 <p>Put this in setup() if you intend to use analogRead() with Mozzi, to avoid glitches. See: <a href="http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11">http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11</a> </p>
 
-<p>Definition at line <a class="el" href="utils_8c_source.html#l00088">88</a> of file <a class="el" href="utils_8c_source.html">utils.c</a>.</p>
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00235">235</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gaa479c0dd53bfeceeac25d12dfdc5b690"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="group__util.html#gaa479c0dd53bfeceeac25d12dfdc5b690">startAnalogRead</a> </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Starts an analog-to-digital conversion of the voltage at a specified pin. </p>
+<p>Unlike Arduino's analogRead() function which waits until a conversion is complete before returning, <a class="el" href="group__util.html#gaa479c0dd53bfeceeac25d12dfdc5b690" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a> only sets the conversion to begin, so you can use the cpu for other things and call for the result later with <a class="el" href="group__util.html#ga215a0653b8dabc35731d7115d1140757" title="Waits for the result of the most recent startAnalogRead().">receiveAnalogRead()</a>. This works well in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, where you can call <a class="el" href="group__util.html#gaa479c0dd53bfeceeac25d12dfdc5b690" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a> and get the result with <a class="el" href="group__util.html#ga215a0653b8dabc35731d7115d1140757" title="Waits for the result of the most recent startAnalogRead().">receiveAnalogRead()</a> the next time the <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> interrupt runs. Fantastic. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td>is the analog pin number to sample from, A0 to A5 (or whatever your board goes up to). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note:</dt><dd>Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> with CONTROL_RATE 64. </dd></dl>
+
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00260">260</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -231,7 +629,7 @@ Functions</h2></td></tr>
 <p>A faster replacement for Arduino's random function, which is too slow to use with Mozzi. </p>
 <dl class="section return"><dt>Returns:</dt><dd>a random 32 bit integer. </dd></dl>
 
-<p>Definition at line <a class="el" href="utils_8c_source.html#l00022">22</a> of file <a class="el" href="utils_8c_source.html">utils.c</a>.</p>
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00116">116</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -239,7 +637,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 12 2012 18:54:55 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 9 2012 23:07:50 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

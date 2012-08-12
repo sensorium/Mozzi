@@ -91,7 +91,10 @@ public:
 	inline
 	void start()
 	{
-		phase_fractional = 0;
+		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+		{
+			phase_fractional = 0;
+		}
 	}
 
 
@@ -101,7 +104,10 @@ public:
 	inline
 	void start(unsigned int offset)
 	{
-		phase_fractional = (unsigned long) offset<<SAMPLE_F_BITS;
+		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+		{
+			phase_fractional = (unsigned long) offset<<SAMPLE_F_BITS;
+		}
 	}
 
 
@@ -113,9 +119,10 @@ public:
 	char next()
 	{
 		char out = 0;
-		incrementPhase();
-		if (phase_fractional < (unsigned long) NUM_TABLE_CELLS<<SAMPLE_F_BITS )
+		if (phase_fractional < (unsigned long) NUM_TABLE_CELLS<<SAMPLE_F_BITS ){
+			incrementPhase();
 			out = readTable();
+		}
 		return out;
 	}
 

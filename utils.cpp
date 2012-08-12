@@ -106,6 +106,35 @@ unsigned char randomMidi()
 }
 
 
+// moved these out of xorshift96() so xorshift96() can be reseeded manually
+static unsigned long x=123456789, y=362436069, z=521288629;
+
+/** @ingroup util
+Initialises Mozzi's (pseudo)random number generator xorshift96(), which is used
+in Mozzi's rand() function. This can be useful if you want random sequences to
+be different on each run of a sketch, by seeding with fairly random input, such
+as analogRead() on an unconnected pin (as explained in the Arduino documentation
+for randomSeed(). randSeed is the same as xorshift96Seed(), but easier to
+remember.
+@param seed an int to use as a seed.
+*/
+void randSeed(int seed){
+	x=seed;
+}
+
+
+/** @ingroup util
+Initialises Mozzi's (pseudo)random number generator xorshift96(). This can be
+useful if you want random sequences to be different on each run of a sketch, by
+seeding with fairly random input, such as analogRead() on an unconnected pin (as
+explained in the Arduino documentation for randomSeed().
+@param seed an int to use as a seed.
+*/
+void xorshiftSeed(int seed){
+	x=seed;
+}
+
+
 /** @ingroup util
 Random number generator.
 A faster replacement for Arduino's random function,
@@ -115,7 +144,7 @@ which is too slow to use with Mozzi.
 // Based on Marsaglia, George. (2003). Xorshift RNGs. http://www.jstatsoft.org/v08/i14/xorshift.pdf
 unsigned long xorshift96()
 {          //period 2^96-1
-	static unsigned long x=123456789, y=362436069, z=521288629;
+	// static unsigned long x=123456789, y=362436069, z=521288629;
 	//static unsigned long x=123456789, y=362436069, z=analogRead(0);
 	unsigned long t;
 

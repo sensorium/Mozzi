@@ -118,7 +118,6 @@ CONTRIBUTIONS / INCLUDED DEPENDENCIES
 Mozzi makes use of the following code:
 
 TimerOne library - http://code.google.com/p/arduino-timerone/ (GPL3)
-TimerTwo library - https://bitbucket.org/johnmccombs (author unknown: is it you?)
 
 Mozzi has also drawn on and been influenced by:
 

@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1f</span>
+   &#160;<span id="projectnumber">alpha 0.01.1g</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -129,7 +129,7 @@ Functions</h2></td></tr>
 <p>Digital pin 9 is the pwm audio output pin. </p>
 <p>For now there is only one channel. </p>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00060">60</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00062">62</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -147,7 +147,7 @@ Functions</h2></td></tr>
 <p>This is the maximum sample resolution. </p>
 <p>8 bit (ie. 256) is usually fine but there might be times where the extra headroom is useful. Use powers of two in audio calculations and use right shifts for divisions where possible. Also, in tests while writing Mozzi, shifts on byte boundaries seem to work fastest. For example, &gt;&gt; 8 is faster than &gt;&gt; 4. Test your timings where possible, using an oscilloscope. To test timing, include <a class="el" href="utils_8h_source.html">utils.h</a> in your sketch, put SET_PIN13_OUT in setup(), then SET_PIN13_HIGH and SET_PIN13_LOW around your test code (see <a href="group__util.html">Mozzi utility functions</a>). </p>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00094">94</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00097">97</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -165,7 +165,7 @@ Functions</h2></td></tr>
 <p>AUDIO_RATE is fixed at 16384 Hz for now. </p>
 <p>This is a compromise between the sample rate (interrupt rate) and sample bitdepth (pwm width), which are interdependent due to the way pulse wave modulation is used to generate the sound output. With the AUDIO_RATE at 16384, the sample resolution is 488, which provides some headroom above the 8bit table resolution currently used by the oscillators. You can look at the TimerOne library for more info about how interrupt rate and pwm resolution relate. </p>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00077">77</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00079">79</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -187,7 +187,7 @@ Functions</h2></td></tr>
 <p>This is required in Arduino's loop(). </p>
 <p>It puts the sound calculated by <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio()</a> into Mozzi's output buffer. </p>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00078">78</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00092">92</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -210,7 +210,7 @@ Functions</h2></td></tr>
 <p>It goes in your sketch's setup() routine. <a class="el" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573" title="Sets up the timers for audio and control rate processes.">startMozzi()</a> starts audio interrupts on Timer 1 and control interrupts on Timer 2. The audio rate is currently fixed at 16384 Hz. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">control_rate_hz</td><td>Sets how often <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> is called. It can be any power of 2 above and including 64. The practical upper limit for control rate depends on how busy the processor is, and you might need to do some tests to find the best setting. Its' strongly recommended to define CONTROL_RATE in your sketches (eg. "#define CONTROL_RATE 128") because the literal numeric value is necessary for Oscils to work properly, and it also helps to keep your calculations clear. </td></tr>
+    <tr><td class="paramname">control_rate_hz</td><td>Sets how often <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> is called. It can be any power of 2 above and including 64. The practical upper limit for control rate depends on how busy the processor is, and you might need to do some tests to find the best setting. It's good to define CONTROL_RATE in your sketches (eg. "#define CONTROL_RATE 128") because the literal numeric value is necessary for Oscils to work properly, and it also helps to keep the calculations in your sketch clear. </td></tr>
   </table>
   </dd>
 </dl>
@@ -262,7 +262,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 9 2012 23:13:27 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Aug 14 2012 22:16:45 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

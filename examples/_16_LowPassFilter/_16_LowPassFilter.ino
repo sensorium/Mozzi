@@ -17,7 +17,7 @@
 #include <tables/chum9_int8.h> // recorded audio wavetable
 #include <tables/cos2048_int8.h> // for filter modulation
 #include <LowPassFilter.h>
-#include <utils.h> // for xorshift96() random number generator
+#include <utils.h> // for rand()
 
 #define CONTROL_RATE 64 // powers of 2 please
 
@@ -39,7 +39,8 @@ void loop(){
 
 void updateControl(){
   // change the modulation frequency now and then
-  if (lowByte(xorshift96()) < 5){
+  //if (lowByte(xorshift96()) < 5){
+  if (rand((byte)CONTROL_RATE/2) == 0){ // about once every half second
     kFilterMod.setFreq((float)lowByte(xorshift96())/64);
   }
   // map the modulation into the filter range (0-255)

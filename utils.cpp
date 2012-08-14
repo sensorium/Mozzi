@@ -269,7 +269,7 @@ void setupFastAnalogRead()
 	cbi(ADCSRA,ADPS0);
 }
 
-static uint8_t analog_reference = DEFAULT;
+static unsigned char analog_reference = DEFAULT;
 
 /** @ingroup util
 Starts an analog-to-digital conversion of the voltage at a specified pin.  Unlike
@@ -286,7 +286,7 @@ interrupt runs.  Fantastic.
 
 // basically analogRead() chopped in half so the ADC conversion
 // can be started in one function and received in another.
-void startAnalogRead(uint8_t pin)
+void startAnalogRead(unsigned char pin)
 {
 
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
@@ -344,7 +344,7 @@ waste time waiting for analogRead() to return (1us here vs 105 us for standard A
 */
 int receiveAnalogRead()
 {
-	uint8_t low, high;
+	unsigned char low, high;
 #if defined(ADCSRA) && defined(ADCL)
 	// ADSC is cleared when the conversion finishes
 	while (bit_is_set(ADCSRA, ADSC))

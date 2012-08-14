@@ -10,7 +10,7 @@ def generate(outfilename, tablename, tablelength, samplerate):
     fout.write('#include <avr/pgmspace.h>'+'\n \n')
     fout.write('#define ' + tablename + '_NUM_CELLS '+ str(len(values))+'\n')
     fout.write('#define ' + tablename + '_SAMPLERATE '+ str(samplerate)+'\n \n')
-    outstring = 'prog_char ' + tablename + '_DATA [] PROGMEM = {'
+    outstring = 'const char __attribute__((progmem)) ' + tablename + '_DATA [] = {'
     try:
         for num in range(tablelength):
             outstring += str(num/32) + ", "  ## for saw line, or put your own generating code here
@@ -22,4 +22,4 @@ def generate(outfilename, tablename, tablelength, samplerate):
         fout.close()
         print "wrote " + outfilename
 
-generate("~/Desktop/phasor8192_uint8.h", "phasor8192",8192,"8192")
+generate("~/Desktop/phasor8192_uint8.h", "phasor8192", 8192, "8192")

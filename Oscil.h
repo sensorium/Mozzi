@@ -67,7 +67,7 @@ public:
 	can be found in the table ".h" file if you are using a table made for
 	Mozzi by the raw2mozzi.py python script in Mozzi's python
 	folder.*/
-	Oscil(prog_char * TABLE_NAME):table(TABLE_NAME)
+	Oscil(const char * TABLE_NAME):table(TABLE_NAME)
 	{}
 
 
@@ -96,7 +96,7 @@ public:
 	/** Change the sound table which will be played by the Oscil.
 	@param TABLE_NAME is the name of the array in the table ".h" file you're using.
 	*/
-	void setTable(prog_char * TABLE_NAME)
+	void setTable(const char * TABLE_NAME)
 	{
 		table = TABLE_NAME;
 	}
@@ -262,7 +262,7 @@ private:
 	unsigned long phase_fractional;
 	/** @todo  does Oscil::phase_increment_fractional really need to be declared volatile?*/
 	volatile unsigned long phase_increment_fractional;
-	prog_char * table;
+	const char * table;
 
 };
 

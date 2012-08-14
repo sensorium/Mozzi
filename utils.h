@@ -45,6 +45,6 @@ unsigned int rand(unsigned int maxval);
 
 
 void setupFastAnalogRead();
-void startAnalogRead(uint8_t pin);
+void startAnalogRead(unsigned char pin);
 int receiveAnalogRead();
 #endif /* UTILS_H_ */

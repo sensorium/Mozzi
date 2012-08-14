@@ -46,7 +46,7 @@ public:
 	example, WaveShaper <int> myWaveShaper; makes a WaveShaper which uses ints.
 	@tparam TABLE_NAME the name of the table being used, which can be found in the
 	".h" file containing the table. */
-	WaveShaper(int8_t  * TABLE_NAME):table(TABLE_NAME)
+	WaveShaper(const char  * TABLE_NAME):table(TABLE_NAME)
 	{
 		;
 	}
@@ -66,7 +66,7 @@ public:
 	}
 
 private:
-	int8_t  * table;
+	const char  * table;
 };
 
 
@@ -81,7 +81,7 @@ public:
 	example, WaveShaper <int> myWaveShaper; makes a WaveShaper which uses ints.
 	@tparam TABLE_NAME the name of the table being used, which can be found in the
 	".h" file containing the table. */
-	WaveShaper(int16_t __attribute__((progmem)) * TABLE_NAME):table(TABLE_NAME)
+	WaveShaper(const int __attribute__((progmem)) * TABLE_NAME):table(TABLE_NAME)
 	{
 		;
 	}
@@ -104,7 +104,7 @@ public:
 	}
 
 private:
-	int16_t __attribute__((progmem)) * table;
+	const int __attribute__((progmem)) * table;
 };
 
 

@@ -20,35 +20,37 @@
  *
  */
 
-#ifndef CUTTLEFISHGUTS_H_
-#define CUTTLEFISHGUTS_H_
+#ifndef MOZZIGUTS_H_
+#define MOZZIGUTS_H_
 
 #include "Arduino.h"
 #include "TimerOne.h"
-#include "TimerTwo.h"
+#include "TimerZero.h"
+
+
 
 /** @mainpage Welcome
-
+ 
 The latest version of Mozzi and this documentation are at the <a href="http://sensorium.github.com/Mozzi/">Mozzi home page.</a>
-
+ 
 Here's a brief description of each section of this documentation:
-
+ 
 @section Modules
 Fixed point number types, macros and functions for fast fractional maths.
-
+ 
 Mozzi core definitions and functions, which are used in every Mozzi sketch.
-
+ 
 Utility functions which are generally useful, including midi note to frequency conversion.
-
+ 
 @section Classes
 The Classes used to generate control and audio signals.
-
+ 
 @section  Files
 Files lists ready-to-use wave tables which are in the Mozzi/tables folder.
-
+ 
 You can also convert your own sounds from a program like
 Audacity to tables for Mozzi with a script called char2mozzi.py, in Mozzi/python.
-
+ 
 Read the char2mozzi.py file for instructions.
 */
 
@@ -79,6 +81,7 @@ library for more info about how interrupt rate and pwm resolution relate.
 #if AUDIO_RATE == 16384
 /* Used internally for audio-rate optimisation.*/
 #define AUDIO_RATE_AS_LSHIFT 14
+
 
 /** @ingroup core
 This is the maximum sample resolution. 8 bit (ie. 256) is usually fine but
@@ -122,4 +125,4 @@ calculations here which could be done in setup() or updateControl().
 int updateAudio();
 
 
-#endif /* CUTTLEFISHGUTS_H_ */
+#endif /* MOZZIGUTS_H_ */

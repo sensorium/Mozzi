@@ -10,7 +10,7 @@
 
 #include <MozziGuts.h>
 #include <Oscil.h>
-#include <EventDelay.h> //
+#include <EventDelay.h>
 
 // tables need to be the same size
 #include <tables/sin512_int8.h> 
@@ -26,11 +26,13 @@ EventDelay kSwapTablesDelay(CONTROL_RATE);
 
 boolean using_sin = true;
 
+
 void setup(){
   startMozzi(CONTROL_RATE);
   kSwapTablesDelay.set(1000); // 1 second countdown, within resolution of CONTROL_RATE
   aOscil.setFreq(110.f);
 }
+
 
 void updateControl(){
     if(kSwapTablesDelay.ready()){
@@ -44,6 +46,7 @@ void updateControl(){
       kSwapTablesDelay.start();
     }
 } 
+
 
 int updateAudio(){
   return aOscil.next();

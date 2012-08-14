@@ -1,4 +1,4 @@
-/*  Example of modulating a delayed_10_Table_Resolution triangle wave,
+/*  Example of modulating a signal by using a variable delay,
  *  using Mozzi sonification library.
  *
  *  Demonstrates AudioDelay.
@@ -15,22 +15,22 @@
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/triangle_analogue512_int8.h> // wavetable
-#include <tables/cos8192_int8.h> // wavetable
+#include <tables/cos2048_int8.h> // wavetable
 #include <AudioDelay.h>
 #include <utils.h> // for mtof
 
 #define CONTROL_RATE 256 // powers of 2 please
 
 Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, AUDIO_RATE> aTriangle(TRIANGLE_ANALOGUE512_DATA);
-Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kFreq(COS8192_DATA);
+Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFreq(COS2048_DATA);
 
 AudioDelay <256> aDel;
 int del_samps;
 
 void setup(){
-  startMozzi(CONTROL_RATE);
   aTriangle.setFreq(mtof(60.f));
   kFreq.setFreq(.63f);
+  startMozzi(CONTROL_RATE);
 }
 
 void loop(){

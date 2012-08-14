@@ -2,9 +2,8 @@
  *  using Mozzi sonification library.
  *
  *  Demonstrates one-shot samples scheduled
- *  with EventDelay(), and uses xorshift96(),
- *  a random number generator which is faster
- *  than Arduino random(), to vary the gain of each sample.
+ *  with EventDelay(), and fast random numbers with 
+ *  xorshift96() and rand(), a more friendly wrapper for xorshift96().
  *
  *  Circuit: Audio output on digital pin 9.
  *
@@ -43,19 +42,23 @@ void setup(){
 
 
 unsigned char randomByte(){
-  return lowByte(xorshift96());
+  return highByte(xorshift96());
 }
 
 unsigned char randomGain(){
-  return lowByte(xorshift96())<<1;
+  //return lowByte(xorshift96())<<1;
+  return rand(200) + 55;
 }
 
+// referencing members from a struct is meant to be a bit faster than seperately
+// ....haven't actually tested it here...
 struct gainstruct{
   unsigned char gain1;
   unsigned char gain2;
   unsigned char gain3;
 }
 gains;
+
 
 void updateControl(){
   if(kTriggerDelay.ready()){

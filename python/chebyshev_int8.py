@@ -22,12 +22,12 @@ def generate(outfilename, tablename, tablelength, curvenum):
     fout.write('#include "Arduino.h"'+'\n')
     fout.write('#include <avr/pgmspace.h>'+'\n \n')
     fout.write('#define ' + tablename + '_NUM_CELLS '+ str(tablelength) +'\n')
-    outstring = 'int8_t __attribute__((progmem)) ' + tablename + '_DATA [] = {'
+    outstring = 'char __attribute__((progmem)) ' + tablename + '_DATA [] = {'
     try:
         for num in range(tablelength):
             ## range between -1 and 1 first
             x = 2*(float(num-(tablelength/2)))/tablelength
-            
+
             if curvenum == 3:
                 t_x = 4*pow(x,3)-3*x
             elif curvenum == 4:
@@ -36,10 +36,10 @@ def generate(outfilename, tablename, tablelength, curvenum):
                 t_x = 16*pow(x,5)-20*pow(x,3)+5*x
             elif curvenum == 6:
                 t_x = 32*pow(x,6)-48*pow(x,4)+18*pow(x,2)-1
-                
+
             scaled = int(math.floor(t_x*127.999))
-            
-            outstring += str(scaled) + ", "  
+
+            outstring += str(scaled) + ", "
     finally:
         outstring +=  "};"
         outstring = textwrap.fill(outstring, 80)
@@ -48,7 +48,7 @@ def generate(outfilename, tablename, tablelength, curvenum):
         fout.close()
         print "wrote " + outfilename
 
-        
+
 generate("~/Desktop/waveshaper_chebyshev_3rd_256_int8.h", "CHEBYSHEV_3RD_256", 256, 3)
 generate("~/Desktop/waveshaper_chebyshev_4th_256_int8.h", "CHEBYSHEV_4TH_256", 256, 4)
 generate("~/Desktop/waveshaper_chebyshev_5th_256_int8.h", "CHEBYSHEV_5TH_256", 256, 5)

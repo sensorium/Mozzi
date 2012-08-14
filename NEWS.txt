@@ -3,6 +3,20 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1g
+
+- changed control interrupts to Timer0 to test compatibility on atmega32u4 - (Leonardo/Teeny).
+	Timer0 is used by Arduino IDE, but Mozzi clobbered it already,
+	has EventDelay() to replace delay(), and this now leaves Timer2
+	(Timer4 on atmega32u4) free.
+- replaced: prog_char with: const char __attribute__((progmem))
+	to test compatibility with atmega32u4 (Leonardo/Teeny).
+	Changed tables and python scripts to match.
+- added example _12c_Samples_Tables_Arrays, showing a way to use
+	Samples and sound tables in arrays, and using a small number of Sample players
+	to play many sound tables.
+
+
 Version 0.01.1f
 
 - added WaveShaper(), a table-based waveshaping object suited for audio synthesis,

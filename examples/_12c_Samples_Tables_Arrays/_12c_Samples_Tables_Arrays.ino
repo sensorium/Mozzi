@@ -1,10 +1,10 @@
 /*  Example of a polyphonic sketch in which 
- *  sound tables are shared between 4 voices,
+ *  11 sound tables are shared between 3 voices,
  *  using Mozzi sonification library.
  *
  *  Demonstrates use of Sample() objects as players, 
  *  using setTable() to share many sound tables between 
- *  a few players.
+ *  a few players, to minimise processing in updateAudio().
  *  Shows how to use Samples and sound tables in arrays,
  *  EventDelay() for scheduling, and rand() to select 
  *  sound tables and vary the gain of each player.
@@ -43,17 +43,17 @@ EventDelay kTriggerSlowDelay(CONTROL_RATE);
 
 byte ms_per_note = 111; // subject to CONTROL_RATE
 
-const byte NUM_PLAYERS = 4;
+const byte NUM_PLAYERS = 3; // 3 seems to be enough
 const byte NUM_TABLES = 11;
 
 Sample <BAMBOO_00_2048_NUM_CELLS, AUDIO_RATE> aSample[NUM_PLAYERS] ={
   Sample <BAMBOO_00_2048_NUM_CELLS, AUDIO_RATE> (BAMBOO_00_2048_DATA),
   Sample <BAMBOO_01_2048_NUM_CELLS, AUDIO_RATE> (BAMBOO_01_2048_DATA),
   Sample <BAMBOO_02_2048_NUM_CELLS, AUDIO_RATE> (BAMBOO_02_2048_DATA),
-  Sample <BAMBOO_03_2048_NUM_CELLS, AUDIO_RATE> (BAMBOO_03_2048_DATA),
 };
 
-prog_char * tables[NUM_TABLES] ={
+// watch out - tables are const (but you can choose which ones you reference)
+const char * tables[NUM_TABLES] ={
   BAMBOO_00_2048_DATA,
   BAMBOO_01_2048_DATA,
   BAMBOO_02_2048_DATA,
@@ -67,6 +67,7 @@ prog_char * tables[NUM_TABLES] ={
   BAMBOO_10_2048_DATA
 };
 
+// gains for each sample player
 byte gain[NUM_PLAYERS];
 
 

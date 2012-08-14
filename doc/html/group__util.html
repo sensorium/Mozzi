@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1f</span>
+   &#160;<span id="projectnumber">alpha 0.01.1g</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -111,6 +111,10 @@ Functions</h2></td></tr>
 <tr class="memdesc:ga45bd3f3abd7ae5fa509eac3d3931a5b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts midi note number to frequency.  <a href="#ga45bd3f3abd7ae5fa509eac3d3931a5b2"></a><br/></td></tr>
 <tr class="memitem:ga9884e17c95a10e988e90d60c9f3aab2b"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga9884e17c95a10e988e90d60c9f3aab2b">randomMidi</a> ()</td></tr>
 <tr class="memdesc:ga9884e17c95a10e988e90d60c9f3aab2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a random number in the range for midi notes.  <a href="#ga9884e17c95a10e988e90d60c9f3aab2b"></a><br/></td></tr>
+<tr class="memitem:gaabf15745802887c60ca752896a976fea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gaabf15745802887c60ca752896a976fea">randSeed</a> (int seed)</td></tr>
+<tr class="memdesc:gaabf15745802887c60ca752896a976fea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises Mozzi's (pseudo)random number generator <a class="el" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96()</a>, which is used in Mozzi's <a class="el" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand()</a> function.  <a href="#gaabf15745802887c60ca752896a976fea"></a><br/></td></tr>
+<tr class="memitem:gad7ff7865d9f26fe6fd804e4b7309981c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gad7ff7865d9f26fe6fd804e4b7309981c">xorshiftSeed</a> (int seed)</td></tr>
+<tr class="memdesc:gad7ff7865d9f26fe6fd804e4b7309981c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises Mozzi's (pseudo)random number generator <a class="el" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96()</a>.  <a href="#gad7ff7865d9f26fe6fd804e4b7309981c"></a><br/></td></tr>
 <tr class="memitem:gaf2deee83847f1fcee2c859d97bd072f6"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6">xorshift96</a> ()</td></tr>
 <tr class="memdesc:gaf2deee83847f1fcee2c859d97bd072f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Random number generator.  <a href="#gaf2deee83847f1fcee2c859d97bd072f6"></a><br/></td></tr>
 <tr class="memitem:gacd4bfc9e040d0090b9321f43a6297e21"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21">rand</a> (char minval, char maxval)</td></tr>
@@ -131,10 +135,10 @@ Functions</h2></td></tr>
 <tr class="memdesc:ga4ad4ab94c8b0e8a4d4be925490378733"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.  <a href="#ga4ad4ab94c8b0e8a4d4be925490378733"></a><br/></td></tr>
 <tr class="memitem:gaf46803d06aa1d839192cc6125e39ff01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gaf46803d06aa1d839192cc6125e39ff01">setupFastAnalogRead</a> ()</td></tr>
 <tr class="memdesc:gaf46803d06aa1d839192cc6125e39ff01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in unmodified Arduino to 15 microseconds for a dependable analogRead().  <a href="#gaf46803d06aa1d839192cc6125e39ff01"></a><br/></td></tr>
-<tr class="memitem:gaa479c0dd53bfeceeac25d12dfdc5b690"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gaa479c0dd53bfeceeac25d12dfdc5b690">startAnalogRead</a> (uint8_t pin)</td></tr>
-<tr class="memdesc:gaa479c0dd53bfeceeac25d12dfdc5b690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts an analog-to-digital conversion of the voltage at a specified pin.  <a href="#gaa479c0dd53bfeceeac25d12dfdc5b690"></a><br/></td></tr>
+<tr class="memitem:ga485c51c54fdca43480b38e7c2ded07c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga485c51c54fdca43480b38e7c2ded07c4">startAnalogRead</a> (unsigned char pin)</td></tr>
+<tr class="memdesc:ga485c51c54fdca43480b38e7c2ded07c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts an analog-to-digital conversion of the voltage at a specified pin.  <a href="#ga485c51c54fdca43480b38e7c2ded07c4"></a><br/></td></tr>
 <tr class="memitem:ga215a0653b8dabc35731d7115d1140757"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga215a0653b8dabc35731d7115d1140757">receiveAnalogRead</a> ()</td></tr>
-<tr class="memdesc:ga215a0653b8dabc35731d7115d1140757"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for the result of the most recent <a class="el" href="group__util.html#gaa479c0dd53bfeceeac25d12dfdc5b690" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a>.  <a href="#ga215a0653b8dabc35731d7115d1140757"></a><br/></td></tr>
+<tr class="memdesc:ga215a0653b8dabc35731d7115d1140757"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for the result of the most recent <a class="el" href="group__util.html#ga485c51c54fdca43480b38e7c2ded07c4" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a>.  <a href="#ga215a0653b8dabc35731d7115d1140757"></a><br/></td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
 <a class="anchor" id="gae4cefe7c89f383a53aa741f6596772f0"></a>
@@ -284,7 +288,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>a random char between minval and maxval-1 inclusive. </dd></dl>
 
-<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00141">141</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00170">170</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -323,7 +327,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>a random unsigned char between minval and maxval-1 inclusive. </dd></dl>
 
-<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00153">153</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00182">182</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -362,7 +366,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>a random int between minval and maxval-1 inclusive. </dd></dl>
 
-<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00165">165</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00194">194</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -401,7 +405,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>a random unsigned int between minval and maxval-1 inclusive. </dd></dl>
 
-<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00177">177</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00206">206</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -429,7 +433,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>a random char between 0 and maxval-1 inclusive. </dd></dl>
 
-<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00188">188</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00217">217</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -457,7 +461,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>a random unsigned char between 0 and maxval-1 inclusive. </dd></dl>
 
-<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00199">199</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00228">228</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -485,7 +489,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>a random int between 0 and maxval-1 inclusive. </dd></dl>
 
-<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00210">210</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00239">239</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -513,7 +517,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>a random unsigned int between 0 and maxval-1 inclusive. </dd></dl>
 
-<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00221">221</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00250">250</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -538,6 +542,34 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="gaabf15745802887c60ca752896a976fea"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="group__util.html#gaabf15745802887c60ca752896a976fea">randSeed</a> </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>seed</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Initialises Mozzi's (pseudo)random number generator <a class="el" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96()</a>, which is used in Mozzi's <a class="el" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand()</a> function. </p>
+<p>This can be useful if you want random sequences to be different on each run of a sketch, by seeding with fairly random input, such as analogRead() on an unconnected pin (as explained in the Arduino documentation for randomSeed(). randSeed is the same as xorshift96Seed(), but easier to remember. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">seed</td><td>an int to use as a seed. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00121">121</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ga215a0653b8dabc35731d7115d1140757"></a>
 <div class="memitem">
 <div class="memproto">
@@ -552,12 +584,12 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Waits for the result of the most recent <a class="el" href="group__util.html#gaa479c0dd53bfeceeac25d12dfdc5b690" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a>. </p>
-<p>If used as the first function of <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, to receive the result of <a class="el" href="group__util.html#gaa479c0dd53bfeceeac25d12dfdc5b690" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a> from the end of the last <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, there will probably be no waiting time, as the ADC conversion will have happened in between interrupts. This is a big time-saver, since you don't have to waste time waiting for analogRead() to return (1us here vs 105 us for standard Arduino). </p>
-<dl class="section return"><dt>Returns:</dt><dd>The resut of the most recent <a class="el" href="group__util.html#gaa479c0dd53bfeceeac25d12dfdc5b690" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a>. </dd></dl>
+<p>Waits for the result of the most recent <a class="el" href="group__util.html#ga485c51c54fdca43480b38e7c2ded07c4" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a>. </p>
+<p>If used as the first function of <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, to receive the result of <a class="el" href="group__util.html#ga485c51c54fdca43480b38e7c2ded07c4" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a> from the end of the last <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, there will probably be no waiting time, as the ADC conversion will have happened in between interrupts. This is a big time-saver, since you don't have to waste time waiting for analogRead() to return (1us here vs 105 us for standard Arduino). </p>
+<dl class="section return"><dt>Returns:</dt><dd>The resut of the most recent <a class="el" href="group__util.html#ga485c51c54fdca43480b38e7c2ded07c4" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a>. </dd></dl>
 <dl class="section note"><dt>Note:</dt><dd>Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> with CONTROL_RATE 64. </dd></dl>
 
-<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00316">316</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00345">345</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -578,18 +610,18 @@ Functions</h2></td></tr>
 <p>Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in unmodified Arduino to 15 microseconds for a dependable analogRead(). </p>
 <p>Put this in setup() if you intend to use analogRead() with Mozzi, to avoid glitches. See: <a href="http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11">http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11</a> </p>
 
-<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00235">235</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00264">264</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="gaa479c0dd53bfeceeac25d12dfdc5b690"></a>
+<a class="anchor" id="ga485c51c54fdca43480b38e7c2ded07c4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="group__util.html#gaa479c0dd53bfeceeac25d12dfdc5b690">startAnalogRead</a> </td>
+          <td class="memname">void <a class="el" href="group__util.html#ga485c51c54fdca43480b38e7c2ded07c4">startAnalogRead</a> </td>
           <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramtype">unsigned char&#160;</td>
           <td class="paramname"><em>pin</em></td><td>)</td>
           <td></td>
         </tr>
@@ -598,7 +630,7 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Starts an analog-to-digital conversion of the voltage at a specified pin. </p>
-<p>Unlike Arduino's analogRead() function which waits until a conversion is complete before returning, <a class="el" href="group__util.html#gaa479c0dd53bfeceeac25d12dfdc5b690" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a> only sets the conversion to begin, so you can use the cpu for other things and call for the result later with <a class="el" href="group__util.html#ga215a0653b8dabc35731d7115d1140757" title="Waits for the result of the most recent startAnalogRead().">receiveAnalogRead()</a>. This works well in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, where you can call <a class="el" href="group__util.html#gaa479c0dd53bfeceeac25d12dfdc5b690" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a> and get the result with <a class="el" href="group__util.html#ga215a0653b8dabc35731d7115d1140757" title="Waits for the result of the most recent startAnalogRead().">receiveAnalogRead()</a> the next time the <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> interrupt runs. Fantastic. </p>
+<p>Unlike Arduino's analogRead() function which waits until a conversion is complete before returning, <a class="el" href="group__util.html#ga485c51c54fdca43480b38e7c2ded07c4" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a> only sets the conversion to begin, so you can use the cpu for other things and call for the result later with <a class="el" href="group__util.html#ga215a0653b8dabc35731d7115d1140757" title="Waits for the result of the most recent startAnalogRead().">receiveAnalogRead()</a>. This works well in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, where you can call <a class="el" href="group__util.html#ga485c51c54fdca43480b38e7c2ded07c4" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a> and get the result with <a class="el" href="group__util.html#ga215a0653b8dabc35731d7115d1140757" title="Waits for the result of the most recent startAnalogRead().">receiveAnalogRead()</a> the next time the <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> interrupt runs. Fantastic. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">pin</td><td>is the analog pin number to sample from, A0 to A5 (or whatever your board goes up to). </td></tr>
@@ -607,7 +639,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section note"><dt>Note:</dt><dd>Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> with CONTROL_RATE 64. </dd></dl>
 
-<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00260">260</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00289">289</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -629,7 +661,35 @@ Functions</h2></td></tr>
 <p>A faster replacement for Arduino's random function, which is too slow to use with Mozzi. </p>
 <dl class="section return"><dt>Returns:</dt><dd>a random 32 bit integer. </dd></dl>
 
-<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00116">116</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00145">145</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gad7ff7865d9f26fe6fd804e4b7309981c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="group__util.html#gad7ff7865d9f26fe6fd804e4b7309981c">xorshiftSeed</a> </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>seed</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Initialises Mozzi's (pseudo)random number generator <a class="el" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96()</a>. </p>
+<p>This can be useful if you want random sequences to be different on each run of a sketch, by seeding with fairly random input, such as analogRead() on an unconnected pin (as explained in the Arduino documentation for randomSeed(). </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">seed</td><td>an int to use as a seed. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="utils_8cpp_source.html#l00133">133</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -637,7 +697,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 9 2012 23:13:27 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Aug 14 2012 22:16:45 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

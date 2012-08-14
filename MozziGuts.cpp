@@ -25,7 +25,7 @@
 #include <util/atomic.h>
 
 // Interrupts:
-// Timer2 has highest priority, but you can't have a flexible interrupt rate as well as pwm.
+// Timer2 has highest priority (on a 328), but you can't have a flexible interrupt rate as well as pwm.
 // The TimerOne library is more flexible and allows both pwm and interrupts,
 // by using ICR1 for interrupt rate and OCR1A (pin 9) (or OCR1B pin 10) for pwm level
 // So we use Timer1 for audio.
@@ -44,27 +44,42 @@ Hz.
 @param control_rate_hz Sets how often updateControl() is called. It can be any
 power of 2 above and including 64. The practical upper limit for control rate
 depends on how busy the processor is, and you might need to do some tests to
-find the best setting. Its' strongly recommended to define CONTROL_RATE in your
+find the best setting. It's good to define CONTROL_RATE in your
 sketches (eg. "#define CONTROL_RATE 128") because the literal numeric value is
-necessary for Oscils to work properly, and it also helps to keep your
-calculations clear.
+necessary for Oscils to work properly, and it also helps to keep the
+calculations in your sketch clear.
  */
 void startMozzi(unsigned int control_rate_hz)
 {
 
 	// audio
-	pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);		// set pin to output for audio
-	Timer1.initialize(1000000/AUDIO_RATE);      // set period
-	Timer1.pwm(AUDIO_CHANNEL_1_PIN, 512);       // pwm pin, 50% duty cycle
-	Timer1.attachInterrupt(outputAudio);		// call outputAudio() on each interrupt
+	pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);	// set pin to output for audio
+	Timer1.initialize(1000000/AUDIO_RATE);		// set period
+	Timer1.pwm(AUDIO_CHANNEL_1_PIN, 512);		// pwm pin, 50% duty cycle
+	Timer1.attachInterrupt(outputAudio);			// call outputAudio() on each interrupt
 
 	// control
-	TimerTwo::init(1000000/control_rate_hz,updateControl); // set period, attach updateControl()
-	TimerTwo::start();
+	TimerZero::init(1000000/control_rate_hz,updateControl); // set period, attach updateControl()
+	TimerZero::start();
 
+	// control
+	//FlexiTimer2::set(1000000/control_rate_hz,updateControl); // set period, attach updateControl()
+	//FlexiTimer2::start();
+	//void set(unsigned long units, double resolution, void (*f)());
+	//FlexiTimer2::set(1000000UL/control_rate_hz,(double)0.000001,updateControl); // set period, attach updateControl()
+	//void set(unsigned long ms, void (*f)());
+	// this works but goes faster
+	//FlexiTimer2::set(1000UL/control_rate_hz,updateControl); // set period, attach updateControl()
+	//FlexiTimer2::start();
+	// Flexitimer uses polling at each interrupt, so there is overhead,
+	// it sets an interrupt rate at "resolution", and then polls for a counter overflowing, manually
+	// it would be best to calculate the resolution (the interrupt timing) and get rid of polling
+	//FlexiTimer2::set(1, 1.0/control_rate_hz, updateControl); // set period, attach updateControl()
+	//FlexiTimer2::start();
 }
 
 
+// ring buffer for audio output
 #define BUFFER_NUM_CELLS 256
 static int output_buffer[BUFFER_NUM_CELLS];
 static volatile unsigned int num_out;
@@ -72,8 +87,7 @@ static volatile unsigned int num_out;
 
 /** @ingroup core
 This is required in Arduino's loop().
-It puts the sound calculated by updateAudio()
-into Mozzi's output buffer.
+It puts the sound calculated by updateAudio() into Mozzi's output buffer.
 */
 void audioHook()
 {
@@ -82,7 +96,7 @@ void audioHook()
 	static unsigned int num_in = 0;
 	unsigned int gap;
 	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-	{ // because 16bit access to num_out which can be changed in Buffer::out() used in audio interrupt
+	{ // atomic access to 16 bit num_out, which is changed in outputAudio(), called in the audio interrupt
 		gap = num_in - num_out; // wraps to a big number if it's negative
 	}
 	if (gap < BUFFER_NUM_CELLS)
@@ -95,9 +109,9 @@ void audioHook()
 }
 
 
-/* This is the callback routine attached to the Timer1 audio interrupt. It
-moves sound data from the output buffer to the Arduino output register, running
-at AUDIO_RATE.
+/* This is the callback routine attached to the Timer1 audio interrupt.
+It moves sound data from the output buffer to the Arduino output register,
+running at AUDIO_RATE.
 */
 inline
 static void outputAudio()

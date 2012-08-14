@@ -169,9 +169,9 @@ __asm__ __volatile__ (    \
 /*
 #define FMULS8(v1, v2)      \
 ({            \
-  uint8_t res;        \
-  uint8_t val1 = v1;      \
-  uint8_t val2 = v2;      \
+  unsigned char res;        \
+  unsigned char val1 = v1;      \
+  unsigned char val2 = v2;      \
   __asm__ __volatile__      \
   (           \
     "fmuls $1, $2"   "\n\t" \

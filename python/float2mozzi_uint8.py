@@ -25,7 +25,7 @@ def float2mozzi_uint8(infilename, outfilename, tablename,samplerate):
     fout.write('#include <avr/pgmspace.h>'+'\n \n')
     fout.write('#define ' + tablename + '_NUM_CELLS '+ str(len(values))+'\n')
     fout.write('#define ' + tablename + '_SAMPLERATE '+ str(samplerate)+'\n \n')
-    outstring = 'prog_char ' + tablename + '_DATA [] PROGMEM = {'
+    outstring = 'const char __attribute__((progmem)) ' + tablename + '_DATA [] = {'
     try:
         for num in values:
             outstring += str(math.trunc((num*256)+0.5)) + ", "

@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1f</span>
+   &#160;<span id="projectnumber">alpha 0.01.1g</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -107,12 +107,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae54c3d783d775fdae5ec93457df574e3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ae54c3d783d775fdae5ec93457df574e3">Sample</a> (prog_char *TABLE_NAME)</td></tr>
-<tr class="memdesc:ae54c3d783d775fdae5ec93457df574e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#ae54c3d783d775fdae5ec93457df574e3"></a><br/></td></tr>
+<tr class="memitem:a9b95b8797648288b1c3698beda1dd34a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a9b95b8797648288b1c3698beda1dd34a">Sample</a> (const char *TABLE_NAME)</td></tr>
+<tr class="memdesc:a9b95b8797648288b1c3698beda1dd34a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a9b95b8797648288b1c3698beda1dd34a"></a><br/></td></tr>
 <tr class="memitem:af2ce86342a595a3571ce2e9a38e96a96"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#af2ce86342a595a3571ce2e9a38e96a96">Sample</a> ()</td></tr>
 <tr class="memdesc:af2ce86342a595a3571ce2e9a38e96a96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#af2ce86342a595a3571ce2e9a38e96a96"></a><br/></td></tr>
-<tr class="memitem:a047fc4db44c4f2acbc44d4dccf248c83"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a047fc4db44c4f2acbc44d4dccf248c83">setTable</a> (prog_char *TABLE_NAME)</td></tr>
-<tr class="memdesc:a047fc4db44c4f2acbc44d4dccf248c83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the sound table which will be played by the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a>.  <a href="#a047fc4db44c4f2acbc44d4dccf248c83"></a><br/></td></tr>
+<tr class="memitem:a9911f53f66a5413a923b73f3d890abd4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a9911f53f66a5413a923b73f3d890abd4">setTable</a> (const char *TABLE_NAME)</td></tr>
+<tr class="memdesc:a9911f53f66a5413a923b73f3d890abd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the sound table which will be played by the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a>.  <a href="#a9911f53f66a5413a923b73f3d890abd4"></a><br/></td></tr>
 <tr class="memitem:a57307ee93ef0fcff36d543596eb79b72"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a57307ee93ef0fcff36d543596eb79b72"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a57307ee93ef0fcff36d543596eb79b72">start</a> ()</td></tr>
 <tr class="memdesc:a57307ee93ef0fcff36d543596eb79b72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the phase (the playhead) to the beginning of the table. <br/></td></tr>
@@ -154,7 +154,7 @@ raw2mozzi</h2>
 
 <p>Definition at line <a class="el" href="_sample_8h_source.html#l00058">58</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ae54c3d783d775fdae5ec93457df574e3"></a>
+<a class="anchor" id="a9b95b8797648288b1c3698beda1dd34a"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -163,7 +163,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html">Sample</a> </td>
           <td>(</td>
-          <td class="paramtype">prog_char *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>TABLE_NAME</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
@@ -200,7 +200,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <div class="memdoc">
 
 <p>Constructor. </p>
-<p>Declare a <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> with template TABLE_NUM_CELLS and UPDATE_RATE parameters, without specifying a particular wave table for it to play. The table can be set or changed on the fly with <a class="el" href="class_sample.html#a047fc4db44c4f2acbc44d4dccf248c83" title="Change the sound table which will be played by the Sample.">setTable()</a>. </p>
+<p>Declare a <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> with template TABLE_NUM_CELLS and UPDATE_RATE parameters, without specifying a particular wave table for it to play. The table can be set or changed on the fly with <a class="el" href="class_sample.html#a9911f53f66a5413a923b73f3d890abd4" title="Change the sound table which will be played by the Sample.">setTable()</a>. </p>
 
 <p>Definition at line <a class="el" href="_sample_8h_source.html#l00077">77</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
@@ -233,7 +233,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>the sample at the given table index. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00190">190</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00199">199</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -256,7 +256,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <p>Updates the phase according to the current frequency and returns the sample at the new phase position, or 0 when the phase overshoots the end of the table. </p>
 <dl class="section return"><dt>Returns:</dt><dd>the next sample value from the table, or 0 if it's finished playing. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00113">113</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00120">120</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -287,7 +287,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>the phase increment value which will produce a given frequency. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00206">206</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00215">215</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -317,7 +317,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>a sample from the table. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00131">131</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00140">140</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -347,7 +347,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00162">162</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00171">171</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -377,7 +377,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00176">176</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00185">185</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -407,7 +407,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00146">146</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00155">155</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -437,20 +437,20 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00215">215</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00224">224</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a047fc4db44c4f2acbc44d4dccf248c83"></a>
+<a class="anchor" id="a9911f53f66a5413a923b73f3d890abd4"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#a047fc4db44c4f2acbc44d4dccf248c83">setTable</a> </td>
+          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#a9911f53f66a5413a923b73f3d890abd4">setTable</a> </td>
           <td>(</td>
-          <td class="paramtype">prog_char *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>TABLE_NAME</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
@@ -496,7 +496,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00102">102</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00106">106</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -507,7 +507,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 9 2012 23:13:28 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Aug 14 2012 22:16:46 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

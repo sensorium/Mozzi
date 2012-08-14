@@ -65,7 +65,7 @@ public:
 	can be found in the table ".h" file if you are using a table made for
 	Mozzi by the raw2mozzi.py python script in Mozzi's python
 	folder.*/
-	Sample(prog_char * TABLE_NAME):table(TABLE_NAME)
+	Sample(const char * TABLE_NAME):table(TABLE_NAME)
 	{}
 
 
@@ -81,7 +81,8 @@ public:
 	/** Change the sound table which will be played by the Sample.
 	@param TABLE_NAME is the name of the array in the table ".h" file you're using.
 	*/
-	void setTable(prog_char * TABLE_NAME){
+	void setTable(const char * TABLE_NAME)
+	{
 		table = TABLE_NAME;
 	}
 
@@ -119,7 +120,8 @@ public:
 	char next()
 	{
 		char out = 0;
-		if (phase_fractional < (unsigned long) NUM_TABLE_CELLS<<SAMPLE_F_BITS ){
+		if (phase_fractional < (unsigned long) NUM_TABLE_CELLS<<SAMPLE_F_BITS )
+		{
 			incrementPhase();
 			out = readTable();
 		}
@@ -248,7 +250,7 @@ private:
 
 	unsigned long phase_fractional;
 	volatile unsigned long phase_increment_fractional;
-	prog_char * table;
+	const char * table;
 
 };
 

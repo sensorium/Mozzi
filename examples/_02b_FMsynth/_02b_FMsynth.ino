@@ -59,7 +59,7 @@ void setup(){
   kNoteChangeDelay.set(768); // ms countdown, taylored to resolution of CONTROL_RATE
   kModIndex.setFreq(.768f); // sync with kNoteChangeDelay
   target_note = note0;
-  note_change_step = Q7n0_to_Q7n8(2);
+  note_change_step = Q7n0_to_Q7n8(3);
   note_upper_limit = Q7n0_to_Q7n8(50);
   note_lower_limit = Q7n0_to_Q7n8(32);
   note0 = note_lower_limit;
@@ -88,8 +88,8 @@ void updateControl(){
     }
 
     // change direction
-    if(note0>note_upper_limit) note_change_step = Q7n0_to_Q7n8(-2);
-    if(note0<note_lower_limit) note_change_step = Q7n0_to_Q7n8(2);
+    if(note0>note_upper_limit) note_change_step = Q7n0_to_Q7n8(-3);
+    if(note0<note_lower_limit) note_change_step = Q7n0_to_Q7n8(3);
     
     // reset eventdelay
     kNoteChangeDelay.start();

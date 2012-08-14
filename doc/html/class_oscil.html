@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1f</span>
+   &#160;<span id="projectnumber">alpha 0.01.1g</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -107,14 +107,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae78d76f58ea60bd367753bd73838c4e2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#ae78d76f58ea60bd367753bd73838c4e2">Oscil</a> (prog_char *TABLE_NAME)</td></tr>
-<tr class="memdesc:ae78d76f58ea60bd367753bd73838c4e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#ae78d76f58ea60bd367753bd73838c4e2"></a><br/></td></tr>
+<tr class="memitem:ac43b3d870a5c6da90cafa9d678829593"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#ac43b3d870a5c6da90cafa9d678829593">Oscil</a> (const char *TABLE_NAME)</td></tr>
+<tr class="memdesc:ac43b3d870a5c6da90cafa9d678829593"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#ac43b3d870a5c6da90cafa9d678829593"></a><br/></td></tr>
 <tr class="memitem:ab7dc5f97742d841fff6a4dca6d7242f3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#ab7dc5f97742d841fff6a4dca6d7242f3">Oscil</a> ()</td></tr>
 <tr class="memdesc:ab7dc5f97742d841fff6a4dca6d7242f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#ab7dc5f97742d841fff6a4dca6d7242f3"></a><br/></td></tr>
 <tr class="memitem:a2a76960954a19c7b24dfb7524b740c8f"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a2a76960954a19c7b24dfb7524b740c8f">next</a> ()</td></tr>
 <tr class="memdesc:a2a76960954a19c7b24dfb7524b740c8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the phase according to the current frequency and returns the sample at the new phase position.  <a href="#a2a76960954a19c7b24dfb7524b740c8f"></a><br/></td></tr>
-<tr class="memitem:ac0700f90c5d9c507ee77b1d3ee25f2d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#ac0700f90c5d9c507ee77b1d3ee25f2d3">setTable</a> (prog_char *TABLE_NAME)</td></tr>
-<tr class="memdesc:ac0700f90c5d9c507ee77b1d3ee25f2d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the sound table which will be played by the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>.  <a href="#ac0700f90c5d9c507ee77b1d3ee25f2d3"></a><br/></td></tr>
+<tr class="memitem:a59e9b132ad0770030d7339c6aa260925"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a59e9b132ad0770030d7339c6aa260925">setTable</a> (const char *TABLE_NAME)</td></tr>
+<tr class="memdesc:a59e9b132ad0770030d7339c6aa260925"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the sound table which will be played by the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>.  <a href="#a59e9b132ad0770030d7339c6aa260925"></a><br/></td></tr>
 <tr class="memitem:ab7b740eec56740426a47508562ed4dd5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#ab7b740eec56740426a47508562ed4dd5">setPhase</a> (unsigned int phase)</td></tr>
 <tr class="memdesc:ab7b740eec56740426a47508562ed4dd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the phase of the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>.  <a href="#ab7b740eec56740426a47508562ed4dd5"></a><br/></td></tr>
 <tr class="memitem:abe39f0740f318c0ecfb405cfac641a13"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#abe39f0740f318c0ecfb405cfac641a13">phMod</a> (<a class="el" href="group__fixed_math.html#gaef218dcc6d8bcfae8ddee859e41461db">Q15n16</a> phmod_proportion)</td></tr>
@@ -154,7 +154,7 @@ raw2mozzi</h2>
 
 <p>Definition at line <a class="el" href="_oscil_8h_source.html#l00061">61</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ae78d76f58ea60bd367753bd73838c4e2"></a>
+<a class="anchor" id="ac43b3d870a5c6da90cafa9d678829593"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -163,7 +163,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html">Oscil</a> </td>
           <td>(</td>
-          <td class="paramtype">prog_char *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>TABLE_NAME</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
@@ -200,7 +200,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <div class="memdoc">
 
 <p>Constructor. </p>
-<p>Declare an <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> with template TABLE_NUM_CELLS and UPDATE_RATE parameters, without specifying a particular wave table for it to play. The table can be set or changed on the fly with <a class="el" href="class_oscil.html#ac0700f90c5d9c507ee77b1d3ee25f2d3" title="Change the sound table which will be played by the Oscil.">setTable()</a>. Any tables used by the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> must be the same size. </p>
+<p>Declare an <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> with template TABLE_NUM_CELLS and UPDATE_RATE parameters, without specifying a particular wave table for it to play. The table can be set or changed on the fly with <a class="el" href="class_oscil.html#a59e9b132ad0770030d7339c6aa260925" title="Change the sound table which will be played by the Oscil.">setTable()</a>. Any tables used by the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> must be the same size. </p>
 
 <p>Definition at line <a class="el" href="_oscil_8h_source.html#l00080">80</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
@@ -501,16 +501,16 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ac0700f90c5d9c507ee77b1d3ee25f2d3"></a>
+<a class="anchor" id="a59e9b132ad0770030d7339c6aa260925"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html#ac0700f90c5d9c507ee77b1d3ee25f2d3">setTable</a> </td>
+          <td class="memname">void <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_oscil.html#a59e9b132ad0770030d7339c6aa260925">setTable</a> </td>
           <td>(</td>
-          <td class="paramtype">prog_char *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>TABLE_NAME</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
@@ -537,7 +537,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 9 2012 23:13:28 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Aug 14 2012 22:16:45 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

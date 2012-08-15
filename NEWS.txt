@@ -3,6 +3,10 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1h
+- more Leonardo/Teeny compatibilty fixes, thanks to massi on mozzi users list.
+
+
 Version 0.01.1g
 
 - changed control interrupts to Timer0 to test compatibility on atmega32u4 - (Leonardo/Teeny).

@@ -22,7 +22,7 @@ def generate(outfilename, tablename, tablelength, curvenum):
     fout.write('#include "Arduino.h"'+'\n')
     fout.write('#include <avr/pgmspace.h>'+'\n \n')
     fout.write('#define ' + tablename + '_NUM_CELLS '+ str(tablelength) +'\n')
-    outstring = 'char __attribute__((progmem)) ' + tablename + '_DATA [] = {'
+    outstring = 'const char __attribute__((progmem)) ' + tablename + '_DATA [] = {'
     try:
         for num in range(tablelength):
             ## range between -1 and 1 first

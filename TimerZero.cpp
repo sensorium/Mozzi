@@ -1,7 +1,7 @@
 /*
  * TimerZero.cpp
  *
- * Copyright 2012 Tim Barrass, ???? John McCombs.
+ * Copyright 2012 Tim Barrass
  *
  * This file is part of TimerZero, a library for Arduino.
  *
@@ -20,6 +20,9 @@
  *
  */
 
+// Based on TimerTwo,
+// downloaded from https://bitbucket.org/johnmccombs, 4/2/2012
+//
 // TB2012 added Arduino.h include
 // TB2012 replaced Timer 2 prescale factors with ones for Timer 0
 // TB2012 replaced all Timer 2 register names with ones for timer 0
@@ -48,74 +51,84 @@
 #define PS1024  (1 << CS02) | (1 << CS00)
 
 // table by prescale = 2^n where n is the table index
-static unsigned char preScale[] PROGMEM =
-  {PS1, 0, 0, PS8, 0, 0, PS64, 0, PS256, 0, PS1024};
+static const unsigned char __attribute__((progmem)) preScale[] =
+        {
+                PS1, 0, 0, PS8, 0, 0, PS64, 0, PS256, 0, PS1024
+        };
 
 bool TimerZero::reset_;
 void (*TimerZero::f_)();
 unsigned TimerZero::period_;
 //------------------------------------------------------------------------------
 // initialize timer 0
-unsigned char TimerZero::init(unsigned usec, void (*f)(), bool reset) {
-  f_ = f;
-  reset_ = reset;
-  // assume F_CPU is a multiple of 1000000
-  // number of clock ticks to delay usec microseconds
-  unsigned long ticks = usec * (F_CPU/1000000);
-  // determine prescale factor and TOP/OCR2A value
-  // use minimum prescale factor
-  unsigned char ps, i;
-  for (i = 0; i < sizeof(preScale); i++) {
-    ps = pgm_read_byte(&preScale[i]);
-    if (ps && (ticks >> i) <= 256) break;
-  }
-  //return error if usec is too large
-  if (i == sizeof(preScale)) return false;
-  period_ = ((long)(ticks >> i) * (1 << i))/ (F_CPU /1000000);
-//  Serial.println(i, DEC);
-  // disable timer 0 interrupts
-  TIMSK0 = 0;
-  // use system clock (clkI/O). TB only relevant for timer 2?
-  //ASSR &= ~(1 << AS2);
-  // Clear Timer on Compare Match (CTC) mode
-  TCCR0A = (1 << WGM01);
+unsigned char TimerZero::init(unsigned usec, void (*f)(), bool reset)
+{
+	f_ = f;
+	reset_ = reset;
+	// assume F_CPU is a multiple of 1000000
+	// number of clock ticks to delay usec microseconds
+	unsigned long ticks = usec * (F_CPU/1000000);
+	// determine prescale factor and TOP/OCR2A value
+	// use minimum prescale factor
+	unsigned char ps, i;
+	for (i = 0; i < sizeof(preScale); i++)
+	{
+		ps = pgm_read_byte(&preScale[i]);
+		if (ps && (ticks >> i) <= 256)
+			break;
+	}
+	//return error if usec is too large
+	if (i == sizeof(preScale))
+		return false;
+	period_ = ((long)(ticks >> i) * (1 << i))/ (F_CPU /1000000);
+	//  Serial.println(i, DEC);
+	// disable timer 0 interrupts
+	TIMSK0 = 0;
+	// use system clock (clkI/O). TB only relevant for timer 2?
+	//ASSR &= ~(1 << AS2);
+	// Clear Timer on Compare Match (CTC) mode
+	TCCR0A = (1 << WGM01);
 
-  // only need prescale bits in TCCR0B
-  TCCR0B = ps;
+	// only need prescale bits in TCCR0B
+	TCCR0B = ps;
 
-  // set TOP so timer period is (ticks >> i)
-  OCR0A = (ticks >> i) - 1;
-  return true;
+	// set TOP so timer period is (ticks >> i)
+	OCR0A = (ticks >> i) - 1;
+	return true;
 }
 //------------------------------------------------------------------------------
 // Start timer zero interrupts
-void TimerZero::start() {
-  TIMSK0 |= (1 << OCIE0A);
+void TimerZero::start()
+{
+	TIMSK0 |= (1 << OCIE0A);
 }
 //------------------------------------------------------------------------------
 // Stop timer 2 interrupts
-void TimerZero::stop() {
-  TIMSK0 = 0;
+void TimerZero::stop()
+{
+	TIMSK0 = 0;
 }
 //------------------------------------------------------------------------------
 // ISR for timer 0 Compare A interrupt
 // TB2012 added ISR_NOBLOCK so it can be interrupted by Timer 1 (audio)
-ISR(TIMER0_COMPA_vect,ISR_NOBLOCK) {
-  // disable timer 0 interrupts
-  TIMSK0 = 0;
-  // call user function
+ISR(TIMER0_COMPA_vect,ISR_NOBLOCK)
+{
+	// disable timer 0 interrupts
+	TIMSK0 = 0;
+	// call user function
 	(*TimerZero::f_)();
-  // in case f_ enabled interrupts
+	// in case f_ enabled interrupts
 	cli();
 	// clear counter if reset_ is true
-	if (TimerZero::reset_) {
-	  // reset counter
-    TCNT0 = 0;
-    // clear possible pending interrupt
-    TIFR0 |= (1 << OCF0A);
-  }
+	if (TimerZero::reset_)
+	{
+		// reset counter
+		TCNT0 = 0;
+		// clear possible pending interrupt
+		TIFR0 |= (1 << OCF0A);
+	}
 	// enable timer 2 COMPA interrupt
-  TIMSK0 |= (1 << OCIE0A);
+	TIMSK0 |= (1 << OCIE0A);
 }
 
 

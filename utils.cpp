@@ -22,7 +22,7 @@ float mtof(float midival)
 // 	return float_to_Q16n16(mtof(midival));
 // }
 
-//static Q16n16 midiToFreq[128] =
+//static const Q16n16 __attribute__((progmem)) midiToFreq[128] =
 // {
 //         Q16n16_m2f(0), Q16n16_m2f(1), Q16n16_m2f(2),Q16n16_m2f(3), Q16n16_m2f(4), Q16n16_m2f(5), Q16n16_m2f(6), Q16n16_m2f(7),
 //         Q16n16_m2f(8),Q16n16_m2f(9), Q16n16_m2f(10), Q16n16_m2f(11), Q16n16_m2f(12), Q16n16_m2f(13), Q16n16_m2f(14), Q16n16_m2f(15),
@@ -43,7 +43,7 @@ float mtof(float midival)
 // };
 
 
-static uint32_t __attribute__((progmem)) midiToFreq[128] =
+static const uint32_t __attribute__((progmem)) midiToFreq[128] =
         {
                 535809, 567670, 601425, 637188, 675077, 715219, 757748, 802806, 850544, 901120,
                 954703, 1011473, 1071618, 1135340, 1202851, 1274376, 1350154, 1430438, 1515497,
@@ -118,7 +118,8 @@ for randomSeed(). randSeed is the same as xorshift96Seed(), but easier to
 remember.
 @param seed an int to use as a seed.
 */
-void randSeed(int seed){
+void randSeed(int seed)
+{
 	x=seed;
 }
 
@@ -130,7 +131,8 @@ seeding with fairly random input, such as analogRead() on an unconnected pin (as
 explained in the Arduino documentation for randomSeed().
 @param seed an int to use as a seed.
 */
-void xorshiftSeed(int seed){
+void xorshiftSeed(int seed)
+{
 	x=seed;
 }
 

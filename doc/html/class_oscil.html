@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1h</span>
+   &#160;<span id="projectnumber">alpha 0.01.1i</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -148,11 +148,12 @@ class Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</h3>
   </dd>
 </dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Use conditional compilation to optimise <a class="el" href="class_oscil.html#a3f7e26147e99bc1c60d33a1312005313" title="Set the oscillator frequency with an unsigned int.">setFreq()</a> variations for different table sizes. </dd></dl>
-<h2><a class="anchor" id="raw2mozzi"></a>
-raw2mozzi</h2>
-<p>Converting soundfiles for Mozzi There is a python script called raw2mozzi.py in the Mozzi/python folder. The usage is: python raw2mozzi.py infilename outfilename tablename samplerate </p>
+<dl class="section note"><dt>Note:</dt><dd>If you #define DITHER_OSCIL_PHASE before you #include &lt;<a class="el" href="_oscil_8h_source.html">Oscil.h</a>&gt;, the phase increments will be dithered, which reduces spurious frequency spurs in the audio output, at the cost of some extra processing and memory. </dd></dl>
+<h2><a class="anchor" id="char2mozzi"></a>
+char2mozzi</h2>
+<p>Converting soundfiles for Mozzi There is a python script called <a class="el" href="char2mozzi_8py_source.html">char2mozzi.py</a> in the Mozzi/python folder. The usage is: python <a class="el" href="char2mozzi_8py_source.html">char2mozzi.py</a> infilename outfilename tablename samplerate </p>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00061">61</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00067">67</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ac43b3d870a5c6da90cafa9d678829593"></a>
 <div class="memitem">
@@ -174,12 +175,12 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <p>Constructor. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">TABLE_NAME</td><td>the name of the array the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> will be using. This can be found in the table ".h" file if you are using a table made for Mozzi by the raw2mozzi.py python script in Mozzi's python folder. </td></tr>
+    <tr><td class="paramname">TABLE_NAME</td><td>the name of the array the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> will be using. This can be found in the table ".h" file if you are using a table made for Mozzi by the <a class="el" href="char2mozzi_8py_source.html">char2mozzi.py</a> python script in Mozzi's python folder. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00070">70</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00076">76</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -202,7 +203,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <p>Constructor. </p>
 <p>Declare an <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> with template TABLE_NUM_CELLS and UPDATE_RATE parameters, without specifying a particular wave table for it to play. The table can be set or changed on the fly with <a class="el" href="class_oscil.html#a59e9b132ad0770030d7339c6aa260925" title="Change the sound table which will be played by the Oscil.">setTable()</a>. Any tables used by the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> must be the same size. </p>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00080">80</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00086">86</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -233,7 +234,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>the sample at the given table index. </dd></dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00207">207</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00217">217</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -256,7 +257,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <p>Updates the phase according to the current frequency and returns the sample at the new phase position. </p>
 <dl class="section return"><dt>Returns:</dt><dd>the next sample. </dd></dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00089">89</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00095">95</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -287,7 +288,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>the phase increment value which will produce a given frequency. </dd></dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00224">224</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00234">234</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -317,7 +318,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>a sample from the table. </dd></dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00128">128</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00138">138</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -347,7 +348,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00177">177</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00187">187</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -377,7 +378,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00192">192</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00202">202</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -407,7 +408,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00160">160</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00170">170</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -437,7 +438,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00143">143</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00153">153</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -466,8 +467,9 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </table>
   </dd>
 </dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>Test commenting out ATOMIC_BLOCK in <a class="el" href="class_oscil.html#ab7b740eec56740426a47508562ed4dd5" title="Set the phase of the Oscil.">setPhase()</a>, <a class="el" href="class_oscil.html#a3f7e26147e99bc1c60d33a1312005313" title="Set the oscillator frequency with an unsigned int.">setFreq()</a>, etc. </dd></dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00108">108</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00118">118</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -497,7 +499,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00234">234</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00244">244</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -526,7 +528,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00099">99</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00105">105</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -537,7 +539,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 15 2012 12:03:30 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 2 2012 23:20:33 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

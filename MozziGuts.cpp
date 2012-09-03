@@ -23,6 +23,7 @@
 
 #include "MozziGuts.h"
 #include <util/atomic.h>
+#include "utils.h"
 
 // Interrupts:
 // Timer2 has highest priority (on a 328), but you can't have a flexible interrupt rate as well as pwm.
@@ -54,40 +55,33 @@ void startMozzi(unsigned int control_rate_hz)
 
 	// audio
 	pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);	// set pin to output for audio
-	Timer1.initialize(1000000/AUDIO_RATE);		// set period
-	Timer1.pwm(AUDIO_CHANNEL_1_PIN, 512);		// pwm pin, 50% duty cycle
+	Timer1.initialize(1000000UL/AUDIO_RATE);		// set period
+	Timer1.pwm(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);		// pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
 	Timer1.attachInterrupt(outputAudio);			// call outputAudio() on each interrupt
 
 	// control
 	TimerZero::init(1000000/control_rate_hz,updateControl); // set period, attach updateControl()
 	TimerZero::start();
 
-	// control
-	//FlexiTimer2::set(1000000/control_rate_hz,updateControl); // set period, attach updateControl()
-	//FlexiTimer2::start();
-	//void set(unsigned long units, double resolution, void (*f)());
-	//FlexiTimer2::set(1000000UL/control_rate_hz,(double)0.000001,updateControl); // set period, attach updateControl()
-	//void set(unsigned long ms, void (*f)());
-	// this works but goes faster
-	//FlexiTimer2::set(1000UL/control_rate_hz,updateControl); // set period, attach updateControl()
-	//FlexiTimer2::start();
-	// Flexitimer uses polling at each interrupt, so there is overhead,
-	// it sets an interrupt rate at "resolution", and then polls for a counter overflowing, manually
-	// it would be best to calculate the resolution (the interrupt timing) and get rid of polling
-	//FlexiTimer2::set(1, 1.0/control_rate_hz, updateControl); // set period, attach updateControl()
-	//FlexiTimer2::start();
+	//MozziTimer2::set(1000000/control_rate_hz,updateControl); // set period, attach updateControl()
+	//MozziTimer2::start();
+
+	// FrequencyTimer2::setPeriod(2000000UL/control_rate_hz); // would use 1000000, but FrequencyTimer2 sets the period as half
+	// FrequencyTimer2::setOnOverflow(updateControl);
+	// FrequencyTimer2::enable();
+
 }
 
 
 // ring buffer for audio output
 #define BUFFER_NUM_CELLS 256
 static int output_buffer[BUFFER_NUM_CELLS];
-static volatile unsigned int num_out;
+static volatile unsigned int num_out; // shared by audioHook() (in loop()), and outputAudio() (in audio interrupt), where it is changed
 
 
 /** @ingroup core
 This is required in Arduino's loop().
-It puts the sound calculated by updateAudio() into Mozzi's output buffer.
+It calls updateAudio() and puts the result into Mozzi's output buffer.
 */
 void audioHook()
 {
@@ -95,8 +89,11 @@ void audioHook()
 	static unsigned char in_pos = 0;
 	static unsigned int num_in = 0;
 	unsigned int gap;
+	// Upon entering the block the Global Interrupt Status flag in SREG is disabled, and re-enabled upon exiting the block
 	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-	{ // atomic access to 16 bit num_out, which is changed in outputAudio(), called in the audio interrupt
+	{
+		// Atomic access to 16 bit num_out, which is changed in outputAudio(), called in the audio interrupt.
+		// It's atomic because we don't want num_out to change half-way through reading it.
 		gap = num_in - num_out; // wraps to a big number if it's negative
 	}
 	if (gap < BUFFER_NUM_CELLS)
@@ -114,13 +111,22 @@ It moves sound data from the output buffer to the Arduino output register,
 running at AUDIO_RATE.
 */
 inline
-static void outputAudio()
+void outputAudio()
 { // takes 1-2 us, and doesn't appear to get interrupted by control on scope
+	//SET_PIN13_HIGH;
 	static unsigned char out_pos;
 	out_pos++;
 	num_out++;
 	AUDIO_CHANNEL_1_OUTPUT_REGISTER =  output_buffer[out_pos];
+	//SET_PIN13_LOW;
 }
 
+// Unmodified TimerOne.cpp has TIMER3_OVF_vect.
+// Watch out if you update the library file.
+// The symptom will be no sound.
+// ISR(TIMER1_OVF_vect)
+// {
+// 	Timer1.isrCallback();
+// }
 
 

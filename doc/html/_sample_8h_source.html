@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1h</span>
+   &#160;<span id="projectnumber">alpha 0.01.1i</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -136,142 +136,142 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00038"></a>00038 <span class="preprocessor">#define SAMPLE_PHMOD_BITS 16</span>
 <a name="l00039"></a>00039 <span class="preprocessor"></span>
 <a name="l00040"></a>00040 
-<a name="l00057"></a>00057 <span class="keyword">template</span> &lt;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> NUM_TABLE_CELLS, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> UPDATE_RATE&gt;
-<a name="l00058"></a><a class="code" href="class_sample.html">00058</a> <span class="keyword">class </span><a class="code" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a>
-<a name="l00059"></a>00059 {
-<a name="l00060"></a>00060 
-<a name="l00061"></a>00061 <span class="keyword">public</span>:
-<a name="l00062"></a>00062 
-<a name="l00068"></a><a class="code" href="class_sample.html#a9b95b8797648288b1c3698beda1dd34a">00068</a>                 <a class="code" href="class_sample.html#af2ce86342a595a3571ce2e9a38e96a96" title="Constructor.">Sample</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * TABLE_NAME):table(TABLE_NAME)
-<a name="l00069"></a>00069                 {}
-<a name="l00070"></a>00070 
+<a name="l00058"></a>00058 <span class="keyword">template</span> &lt;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> NUM_TABLE_CELLS, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> UPDATE_RATE&gt;
+<a name="l00059"></a><a class="code" href="class_sample.html">00059</a> <span class="keyword">class </span><a class="code" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a>
+<a name="l00060"></a>00060 {
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062 <span class="keyword">public</span>:
+<a name="l00063"></a>00063 
+<a name="l00069"></a><a class="code" href="class_sample.html#a9b95b8797648288b1c3698beda1dd34a">00069</a>                 <a class="code" href="class_sample.html#af2ce86342a595a3571ce2e9a38e96a96" title="Constructor.">Sample</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * TABLE_NAME):table(TABLE_NAME)
+<a name="l00070"></a>00070                 {}
 <a name="l00071"></a>00071 
 <a name="l00072"></a>00072 
-<a name="l00077"></a><a class="code" href="class_sample.html#af2ce86342a595a3571ce2e9a38e96a96">00077</a>                 <a class="code" href="class_sample.html#af2ce86342a595a3571ce2e9a38e96a96" title="Constructor.">Sample</a>()
-<a name="l00078"></a>00078                 {}
-<a name="l00079"></a>00079 
+<a name="l00073"></a>00073 
+<a name="l00078"></a><a class="code" href="class_sample.html#af2ce86342a595a3571ce2e9a38e96a96">00078</a>                 <a class="code" href="class_sample.html#af2ce86342a595a3571ce2e9a38e96a96" title="Constructor.">Sample</a>()
+<a name="l00079"></a>00079                 {}
 <a name="l00080"></a>00080 
-<a name="l00084"></a><a class="code" href="class_sample.html#a9911f53f66a5413a923b73f3d890abd4">00084</a>                 <span class="keywordtype">void</span> <a class="code" href="class_sample.html#a9911f53f66a5413a923b73f3d890abd4" title="Change the sound table which will be played by the Sample.">setTable</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * TABLE_NAME)
-<a name="l00085"></a>00085                 {
-<a name="l00086"></a>00086                                 table = TABLE_NAME;
-<a name="l00087"></a>00087                 }
-<a name="l00088"></a>00088 
+<a name="l00081"></a>00081 
+<a name="l00085"></a><a class="code" href="class_sample.html#a9911f53f66a5413a923b73f3d890abd4">00085</a>                 <span class="keywordtype">void</span> <a class="code" href="class_sample.html#a9911f53f66a5413a923b73f3d890abd4" title="Change the sound table which will be played by the Sample.">setTable</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * TABLE_NAME)
+<a name="l00086"></a>00086                 {
+<a name="l00087"></a>00087                                 table = TABLE_NAME;
+<a name="l00088"></a>00088                 }
 <a name="l00089"></a>00089 
-<a name="l00092"></a>00092                 <span class="keyword">inline</span>
-<a name="l00093"></a><a class="code" href="class_sample.html#a57307ee93ef0fcff36d543596eb79b72">00093</a>                 <span class="keywordtype">void</span> <a class="code" href="class_sample.html#a57307ee93ef0fcff36d543596eb79b72" title="Resets the phase (the playhead) to the beginning of the table.">start</a>()
-<a name="l00094"></a>00094                 {
-<a name="l00095"></a>00095                                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-<a name="l00096"></a>00096                                 {
-<a name="l00097"></a>00097                                                 phase_fractional = 0;
-<a name="l00098"></a>00098                                 }
-<a name="l00099"></a>00099                 }
-<a name="l00100"></a>00100 
+<a name="l00090"></a>00090 
+<a name="l00093"></a>00093                 <span class="keyword">inline</span>
+<a name="l00094"></a><a class="code" href="class_sample.html#a57307ee93ef0fcff36d543596eb79b72">00094</a>                 <span class="keywordtype">void</span> <a class="code" href="class_sample.html#a57307ee93ef0fcff36d543596eb79b72" title="Resets the phase (the playhead) to the beginning of the table.">start</a>()
+<a name="l00095"></a>00095                 {
+<a name="l00096"></a>00096                                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+<a name="l00097"></a>00097                                 {
+<a name="l00098"></a>00098                                                 phase_fractional = 0;
+<a name="l00099"></a>00099                                 }
+<a name="l00100"></a>00100                 }
 <a name="l00101"></a>00101 
-<a name="l00105"></a>00105                 <span class="keyword">inline</span>
-<a name="l00106"></a><a class="code" href="class_sample.html#a7f937c15daf469260c6bba84016e9c99">00106</a>                 <span class="keywordtype">void</span> <a class="code" href="class_sample.html#a57307ee93ef0fcff36d543596eb79b72" title="Resets the phase (the playhead) to the beginning of the table.">start</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> offset)
-<a name="l00107"></a>00107                 {
-<a name="l00108"></a>00108                                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-<a name="l00109"></a>00109                                 {
-<a name="l00110"></a>00110                                                 phase_fractional = (<span class="keywordtype">unsigned</span> long) offset&lt;&lt;SAMPLE_F_BITS;
-<a name="l00111"></a>00111                                 }
-<a name="l00112"></a>00112                 }
-<a name="l00113"></a>00113 
+<a name="l00102"></a>00102 
+<a name="l00106"></a>00106                 <span class="keyword">inline</span>
+<a name="l00107"></a><a class="code" href="class_sample.html#a7f937c15daf469260c6bba84016e9c99">00107</a>                 <span class="keywordtype">void</span> <a class="code" href="class_sample.html#a57307ee93ef0fcff36d543596eb79b72" title="Resets the phase (the playhead) to the beginning of the table.">start</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> offset)
+<a name="l00108"></a>00108                 {
+<a name="l00109"></a>00109                                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+<a name="l00110"></a>00110                                 {
+<a name="l00111"></a>00111                                                 phase_fractional = (<span class="keywordtype">unsigned</span> long) offset&lt;&lt;SAMPLE_F_BITS;
+<a name="l00112"></a>00112                                 }
+<a name="l00113"></a>00113                 }
 <a name="l00114"></a>00114 
-<a name="l00119"></a>00119                 <span class="keyword">inline</span>
-<a name="l00120"></a><a class="code" href="class_sample.html#a6b94fc8a8042f498fbd8693d9bce9719">00120</a>                 <span class="keywordtype">char</span> <a class="code" href="class_sample.html#a6b94fc8a8042f498fbd8693d9bce9719" title="Updates the phase according to the current frequency and returns the sample at the new phase position...">next</a>()
-<a name="l00121"></a>00121                 {
-<a name="l00122"></a>00122                                 <span class="keywordtype">char</span> out = 0;
-<a name="l00123"></a>00123                                 <span class="keywordflow">if</span> (phase_fractional &lt; (<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>) NUM_TABLE_CELLS&lt;&lt;SAMPLE_F_BITS )
-<a name="l00124"></a>00124                                 {
-<a name="l00125"></a>00125                                                 incrementPhase();
-<a name="l00126"></a>00126                                                 out = readTable();
-<a name="l00127"></a>00127                                 }
-<a name="l00128"></a>00128                                 <span class="keywordflow">return</span> out;
-<a name="l00129"></a>00129                 }
-<a name="l00130"></a>00130 
+<a name="l00115"></a>00115 
+<a name="l00120"></a>00120                 <span class="keyword">inline</span>
+<a name="l00121"></a><a class="code" href="class_sample.html#a6b94fc8a8042f498fbd8693d9bce9719">00121</a>                 <span class="keywordtype">char</span> <a class="code" href="class_sample.html#a6b94fc8a8042f498fbd8693d9bce9719" title="Updates the phase according to the current frequency and returns the sample at the new phase position...">next</a>()
+<a name="l00122"></a>00122                 {
+<a name="l00123"></a>00123                                 <span class="keywordtype">char</span> out = 0;
+<a name="l00124"></a>00124                                 <span class="keywordflow">if</span> (phase_fractional &lt; (<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>) NUM_TABLE_CELLS&lt;&lt;SAMPLE_F_BITS )
+<a name="l00125"></a>00125                                 {
+<a name="l00126"></a>00126                                                 incrementPhase();
+<a name="l00127"></a>00127                                                 out = readTable();
+<a name="l00128"></a>00128                                 }
+<a name="l00129"></a>00129                                 <span class="keywordflow">return</span> out;
+<a name="l00130"></a>00130                 }
 <a name="l00131"></a>00131 
-<a name="l00139"></a>00139                 <span class="keyword">inline</span>
-<a name="l00140"></a><a class="code" href="class_sample.html#a13ff9d4206b5e14e2f030ef9ced8a7d0">00140</a>                 <span class="keywordtype">char</span> <a class="code" href="class_sample.html#a13ff9d4206b5e14e2f030ef9ced8a7d0" title="Returns the next sample given a phase modulation value.">phMod</a>(<span class="keywordtype">long</span> phmod_proportion)
-<a name="l00141"></a>00141                 {
-<a name="l00142"></a>00142                                 incrementPhase();
-<a name="l00143"></a>00143                                 <span class="keywordflow">return</span> (<span class="keywordtype">char</span>)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))&gt;&gt;SAMPLE_F_BITS) &amp; (NUM_TABLE_CELLS - 1)));
-<a name="l00144"></a>00144                 }
-<a name="l00145"></a>00145 
-<a name="l00154"></a>00154                 <span class="keyword">inline</span>
-<a name="l00155"></a><a class="code" href="class_sample.html#ac98d74f6b80f514e6114204bfa56d351">00155</a>                 <span class="keywordtype">void</span> <a class="code" href="class_sample.html#ac98d74f6b80f514e6114204bfa56d351" title="Set the frequency using Q24n8 fixed-point number format.">setFreq_n8</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> frequency)
-<a name="l00156"></a>00156                 {
-<a name="l00157"></a>00157                                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-<a name="l00158"></a>00158                                 {
-<a name="l00159"></a>00159                                                 phase_increment_fractional = ((frequency * NUM_TABLE_CELLS)/UPDATE_RATE) &lt;&lt; (SAMPLE_F_BITS-8);
-<a name="l00160"></a>00160                                 }
-<a name="l00161"></a>00161                 }
-<a name="l00162"></a>00162 
-<a name="l00170"></a>00170                 <span class="keyword">inline</span>
-<a name="l00171"></a><a class="code" href="class_sample.html#ad6aa28642c1e219d24144501c7cfcabc">00171</a>                 <span class="keywordtype">void</span> <a class="code" href="class_sample.html#ad6aa28642c1e219d24144501c7cfcabc" title="Set the oscillator frequency with an unsigned int.">setFreq</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> frequency)
-<a name="l00172"></a>00172                 {
-<a name="l00173"></a>00173                                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-<a name="l00174"></a>00174                                 {
-<a name="l00175"></a>00175                                                 phase_increment_fractional = (((<span class="keywordtype">unsigned</span> long)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) &lt;&lt; SAMPLE_F_BITS; <span class="comment">// Obvious but slow</span>
-<a name="l00176"></a>00176                                 }
-<a name="l00177"></a>00177                 }
-<a name="l00178"></a>00178 
-<a name="l00184"></a>00184                 <span class="keyword">inline</span>
-<a name="l00185"></a><a class="code" href="class_sample.html#a11a7948a655bea79ddd67059c2186816">00185</a>                 <span class="keywordtype">void</span> <a class="code" href="class_sample.html#ad6aa28642c1e219d24144501c7cfcabc" title="Set the oscillator frequency with an unsigned int.">setFreq</a>(<span class="keywordtype">float</span> frequency)
-<a name="l00186"></a>00186                 { <span class="comment">// 1 us - using float doesn&#39;t seem to incur measurable overhead with the oscilloscope</span>
-<a name="l00187"></a>00187                                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-<a name="l00188"></a>00188                                 {
-<a name="l00189"></a>00189                                                 phase_increment_fractional = (<span class="keywordtype">unsigned</span> long)((((<span class="keywordtype">float</span>)NUM_TABLE_CELLS * frequency)/UPDATE_RATE) * SAMPLE_F_BITS_AS_MULTIPLIER);
-<a name="l00190"></a>00190                                 }
-<a name="l00191"></a>00191                 }
-<a name="l00192"></a>00192 
-<a name="l00198"></a>00198                 <span class="keyword">inline</span>
-<a name="l00199"></a><a class="code" href="class_sample.html#ad5c4e048c4aa7a36710e58466caabc94">00199</a>                 <span class="keywordtype">char</span> <a class="code" href="class_sample.html#ad5c4e048c4aa7a36710e58466caabc94" title="Returns the sample at the given table index.">atIndex</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> index)
-<a name="l00200"></a>00200                 {
-<a name="l00201"></a>00201                                 <span class="keywordflow">return</span> (<span class="keywordtype">char</span>)pgm_read_byte_near(table + (index &amp; (NUM_TABLE_CELLS - 1)));
-<a name="l00202"></a>00202                 }
-<a name="l00203"></a>00203 
-<a name="l00214"></a>00214                 <span class="keyword">inline</span>
-<a name="l00215"></a><a class="code" href="class_sample.html#a7dfbdfca35b7bbf074e24e62a1d53309">00215</a>                 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_sample.html#a7dfbdfca35b7bbf074e24e62a1d53309" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> frequency)
-<a name="l00216"></a>00216                 {
-<a name="l00217"></a>00217                                 <span class="keywordflow">return</span> (((<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) &lt;&lt; SAMPLE_F_BITS;
-<a name="l00218"></a>00218                 }
-<a name="l00219"></a>00219 
-<a name="l00223"></a>00223                 <span class="keyword">inline</span>
-<a name="l00224"></a><a class="code" href="class_sample.html#a95735f0b10eb0fa50402c47d0cd5d871">00224</a>                 <span class="keywordtype">void</span> <a class="code" href="class_sample.html#a95735f0b10eb0fa50402c47d0cd5d871" title="Set a specific phase increment.">setPhaseInc</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> phaseinc_fractional)
-<a name="l00225"></a>00225                 {
-<a name="l00226"></a>00226                                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-<a name="l00227"></a>00227                                 {
-<a name="l00228"></a>00228                                                 phase_increment_fractional = phaseinc_fractional;
-<a name="l00229"></a>00229                                 }
-<a name="l00230"></a>00230                 }
-<a name="l00231"></a>00231 
+<a name="l00132"></a>00132 
+<a name="l00140"></a>00140                 <span class="keyword">inline</span>
+<a name="l00141"></a><a class="code" href="class_sample.html#a13ff9d4206b5e14e2f030ef9ced8a7d0">00141</a>                 <span class="keywordtype">char</span> <a class="code" href="class_sample.html#a13ff9d4206b5e14e2f030ef9ced8a7d0" title="Returns the next sample given a phase modulation value.">phMod</a>(<span class="keywordtype">long</span> phmod_proportion)
+<a name="l00142"></a>00142                 {
+<a name="l00143"></a>00143                                 incrementPhase();
+<a name="l00144"></a>00144                                 <span class="keywordflow">return</span> (<span class="keywordtype">char</span>)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))&gt;&gt;SAMPLE_F_BITS) &amp; (NUM_TABLE_CELLS - 1)));
+<a name="l00145"></a>00145                 }
+<a name="l00146"></a>00146 
+<a name="l00155"></a>00155                 <span class="keyword">inline</span>
+<a name="l00156"></a><a class="code" href="class_sample.html#ac98d74f6b80f514e6114204bfa56d351">00156</a>                 <span class="keywordtype">void</span> <a class="code" href="class_sample.html#ac98d74f6b80f514e6114204bfa56d351" title="Set the frequency using Q24n8 fixed-point number format.">setFreq_n8</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> frequency)
+<a name="l00157"></a>00157                 {
+<a name="l00158"></a>00158                                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+<a name="l00159"></a>00159                                 {
+<a name="l00160"></a>00160                                                 phase_increment_fractional = ((frequency * NUM_TABLE_CELLS)/UPDATE_RATE) &lt;&lt; (SAMPLE_F_BITS-8);
+<a name="l00161"></a>00161                                 }
+<a name="l00162"></a>00162                 }
+<a name="l00163"></a>00163 
+<a name="l00171"></a>00171                 <span class="keyword">inline</span>
+<a name="l00172"></a><a class="code" href="class_sample.html#ad6aa28642c1e219d24144501c7cfcabc">00172</a>                 <span class="keywordtype">void</span> <a class="code" href="class_sample.html#ad6aa28642c1e219d24144501c7cfcabc" title="Set the oscillator frequency with an unsigned int.">setFreq</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> frequency)
+<a name="l00173"></a>00173                 {
+<a name="l00174"></a>00174                                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+<a name="l00175"></a>00175                                 {
+<a name="l00176"></a>00176                                                 phase_increment_fractional = (((<span class="keywordtype">unsigned</span> long)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) &lt;&lt; SAMPLE_F_BITS; <span class="comment">// Obvious but slow</span>
+<a name="l00177"></a>00177                                 }
+<a name="l00178"></a>00178                 }
+<a name="l00179"></a>00179 
+<a name="l00185"></a>00185                 <span class="keyword">inline</span>
+<a name="l00186"></a><a class="code" href="class_sample.html#a11a7948a655bea79ddd67059c2186816">00186</a>                 <span class="keywordtype">void</span> <a class="code" href="class_sample.html#ad6aa28642c1e219d24144501c7cfcabc" title="Set the oscillator frequency with an unsigned int.">setFreq</a>(<span class="keywordtype">float</span> frequency)
+<a name="l00187"></a>00187                 { <span class="comment">// 1 us - using float doesn&#39;t seem to incur measurable overhead with the oscilloscope</span>
+<a name="l00188"></a>00188                                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+<a name="l00189"></a>00189                                 {
+<a name="l00190"></a>00190                                                 phase_increment_fractional = (<span class="keywordtype">unsigned</span> long)((((<span class="keywordtype">float</span>)NUM_TABLE_CELLS * frequency)/UPDATE_RATE) * SAMPLE_F_BITS_AS_MULTIPLIER);
+<a name="l00191"></a>00191                                 }
+<a name="l00192"></a>00192                 }
+<a name="l00193"></a>00193 
+<a name="l00199"></a>00199                 <span class="keyword">inline</span>
+<a name="l00200"></a><a class="code" href="class_sample.html#ad5c4e048c4aa7a36710e58466caabc94">00200</a>                 <span class="keywordtype">char</span> <a class="code" href="class_sample.html#ad5c4e048c4aa7a36710e58466caabc94" title="Returns the sample at the given table index.">atIndex</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> index)
+<a name="l00201"></a>00201                 {
+<a name="l00202"></a>00202                                 <span class="keywordflow">return</span> (<span class="keywordtype">char</span>)pgm_read_byte_near(table + (index &amp; (NUM_TABLE_CELLS - 1)));
+<a name="l00203"></a>00203                 }
+<a name="l00204"></a>00204 
+<a name="l00215"></a>00215                 <span class="keyword">inline</span>
+<a name="l00216"></a><a class="code" href="class_sample.html#a7dfbdfca35b7bbf074e24e62a1d53309">00216</a>                 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_sample.html#a7dfbdfca35b7bbf074e24e62a1d53309" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> frequency)
+<a name="l00217"></a>00217                 {
+<a name="l00218"></a>00218                                 <span class="keywordflow">return</span> (((<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) &lt;&lt; SAMPLE_F_BITS;
+<a name="l00219"></a>00219                 }
+<a name="l00220"></a>00220 
+<a name="l00224"></a>00224                 <span class="keyword">inline</span>
+<a name="l00225"></a><a class="code" href="class_sample.html#a95735f0b10eb0fa50402c47d0cd5d871">00225</a>                 <span class="keywordtype">void</span> <a class="code" href="class_sample.html#a95735f0b10eb0fa50402c47d0cd5d871" title="Set a specific phase increment.">setPhaseInc</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> phaseinc_fractional)
+<a name="l00226"></a>00226                 {
+<a name="l00227"></a>00227                                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+<a name="l00228"></a>00228                                 {
+<a name="l00229"></a>00229                                                 phase_increment_fractional = phaseinc_fractional;
+<a name="l00230"></a>00230                                 }
+<a name="l00231"></a>00231                 }
 <a name="l00232"></a>00232 
-<a name="l00233"></a>00233 <span class="keyword">private</span>:
-<a name="l00234"></a>00234 
-<a name="l00237"></a>00237                 <span class="keyword">inline</span>
-<a name="l00238"></a>00238                 <span class="keywordtype">void</span> incrementPhase()
-<a name="l00239"></a>00239                 {
-<a name="l00240"></a>00240                                 phase_fractional += phase_increment_fractional;
-<a name="l00241"></a>00241                 }
-<a name="l00242"></a>00242 
-<a name="l00245"></a>00245                 <span class="keyword">inline</span>
-<a name="l00246"></a>00246                 <span class="keywordtype">char</span> readTable()
-<a name="l00247"></a>00247                 {
-<a name="l00248"></a>00248                                 <span class="keywordflow">return</span> (<span class="keywordtype">char</span>)pgm_read_byte_near(table + ((phase_fractional &gt;&gt; SAMPLE_F_BITS) &amp; (NUM_TABLE_CELLS - 1)));
-<a name="l00249"></a>00249                 }
-<a name="l00250"></a>00250 
-<a name="l00251"></a>00251                 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> phase_fractional;
-<a name="l00252"></a>00252                 <span class="keyword">volatile</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> phase_increment_fractional;
-<a name="l00253"></a>00253                 <span class="keyword">const</span> <span class="keywordtype">char</span> * table;
-<a name="l00254"></a>00254 
-<a name="l00255"></a>00255 };
-<a name="l00256"></a>00256 
-<a name="l00257"></a>00257 <span class="preprocessor">#endif </span><span class="comment">/* SAMPLE_H_ */</span>
+<a name="l00233"></a>00233 
+<a name="l00234"></a>00234 <span class="keyword">private</span>:
+<a name="l00235"></a>00235 
+<a name="l00238"></a>00238                 <span class="keyword">inline</span>
+<a name="l00239"></a>00239                 <span class="keywordtype">void</span> incrementPhase()
+<a name="l00240"></a>00240                 {
+<a name="l00241"></a>00241                                 phase_fractional += phase_increment_fractional;
+<a name="l00242"></a>00242                 }
+<a name="l00243"></a>00243 
+<a name="l00246"></a>00246                 <span class="keyword">inline</span>
+<a name="l00247"></a>00247                 <span class="keywordtype">char</span> readTable()
+<a name="l00248"></a>00248                 {
+<a name="l00249"></a>00249                                 <span class="keywordflow">return</span> (<span class="keywordtype">char</span>)pgm_read_byte_near(table + ((phase_fractional &gt;&gt; SAMPLE_F_BITS) &amp; (NUM_TABLE_CELLS - 1)));
+<a name="l00250"></a>00250                 }
+<a name="l00251"></a>00251 
+<a name="l00252"></a>00252                 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> phase_fractional;
+<a name="l00253"></a>00253                 <span class="keyword">volatile</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> phase_increment_fractional;
+<a name="l00254"></a>00254                 <span class="keyword">const</span> <span class="keywordtype">char</span> * table;
+<a name="l00255"></a>00255 
+<a name="l00256"></a>00256 };
+<a name="l00257"></a>00257 
+<a name="l00258"></a>00258 <span class="preprocessor">#endif </span><span class="comment">/* SAMPLE_H_ */</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 15 2012 12:03:29 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 2 2012 23:20:33 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

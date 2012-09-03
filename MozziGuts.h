@@ -23,34 +23,39 @@
 #ifndef MOZZIGUTS_H_
 #define MOZZIGUTS_H_
 
+#if F_CPU != 16000000
+#error Mozzi requires a cpu clock speed of 16MHz!
+#endif
+
 #include "Arduino.h"
 #include "TimerOne.h"
 #include "TimerZero.h"
-
+//#include "MozziTimer2.h"
+//#include "FrequencyTimer2.h"
 
 
 /** @mainpage Welcome
- 
+
 The latest version of Mozzi and this documentation are at the <a href="http://sensorium.github.com/Mozzi/">Mozzi home page.</a>
- 
+
 Here's a brief description of each section of this documentation:
- 
+
 @section Modules
 Fixed point number types, macros and functions for fast fractional maths.
- 
+
 Mozzi core definitions and functions, which are used in every Mozzi sketch.
- 
+
 Utility functions which are generally useful, including midi note to frequency conversion.
- 
+
 @section Classes
 The Classes used to generate control and audio signals.
- 
+
 @section  Files
 Files lists ready-to-use wave tables which are in the Mozzi/tables folder.
- 
+
 You can also convert your own sounds from a program like
 Audacity to tables for Mozzi with a script called char2mozzi.py, in Mozzi/python.
- 
+
 Read the char2mozzi.py file for instructions.
 */
 
@@ -59,11 +64,12 @@ Read the char2mozzi.py file for instructions.
 
 /**@ingroup core
 Digital pin 9 is the pwm audio output pin.  For now there is only one channel.*/
-#define AUDIO_CHANNEL_1_PIN 9
+//#define AUDIO_CHANNEL_1_PIN 9
+#define AUDIO_CHANNEL_1_PIN TIMER1_A_PIN // defined in TimerOne/config/known_16bit_timers.h
+
 
 /* Used internally.  If there was a channel 2, it would be OCR1B.*/
 #define AUDIO_CHANNEL_1_OUTPUT_REGISTER OCR1A
-
 
 /** @ingroup core
 AUDIO_RATE is fixed at 16384 Hz for now.
@@ -98,7 +104,6 @@ in setup(), then SET_PIN13_HIGH and SET_PIN13_LOW around your test code
 /* Used internally to put the 0-biased generated audio into the right range for PWM output.*/
 #define AUDIO_BIAS 244
 #endif
-
 
 #define FIXMATH_OPTIMIZE_8BIT /* libfixmath option */
 

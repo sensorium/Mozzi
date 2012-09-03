@@ -47,12 +47,13 @@ defined macro, rather than a const or int, for the Sample to run fast enough.
 updateAudio(), or CONTROL_RATE if it's updated each time updateControl() is
 called. It could also be a fraction of CONTROL_RATE if you are doing some kind
 of cyclic updating in updateControl(), for example, to spread out the processor load.
-@section raw2mozzi
+@section char2mozzi
 Converting soundfiles for Mozzi.
-There is a python script called raw2mozzi.py in the Mozzi/python folder.
-The usage is:
-python raw2mozzi.py infilename outfilename tablename samplerate
+There is a python script called char2mozzi.py in the Mozzi/python folder.
+The script converts raw sound data saved from a program like Audacity.
+Instructions are in the char2mozzi.py file.
 @todo Make Sample a descendent of Oscil.
+@todo See if ATOMIC_BLOCK can be commented out everywhere.
 */
 template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE>
 class Sample
@@ -63,7 +64,7 @@ public:
 	/** Constructor.
 	@param TABLE_NAME the name of the array the Sample will be using. This
 	can be found in the table ".h" file if you are using a table made for
-	Mozzi by the raw2mozzi.py python script in Mozzi's python
+	Mozzi by the char2mozzi.py python script in Mozzi's python
 	folder.*/
 	Sample(const char * TABLE_NAME):table(TABLE_NAME)
 	{}

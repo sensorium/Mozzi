@@ -29,7 +29,7 @@ Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 EventDelay kFreqChangeDelay(CONTROL_RATE);
 
 Smooth <int> kSmoothFreq(0.975f);
-int target_freq, target_freq1, target_freq2, smoothed_freq;
+int target_freq, target_freq1, target_freq2;
 
 
 void setup(){
@@ -51,7 +51,7 @@ void updateControl(){
     kFreqChangeDelay.start();
   }
 
-  smoothed_freq = kSmoothFreq.next(target_freq);
+  int smoothed_freq = kSmoothFreq.next(target_freq);
   aSin.setFreq((unsigned int)smoothed_freq);
 }
 

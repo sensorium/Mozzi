@@ -142,6 +142,7 @@ Random number generator.
 A faster replacement for Arduino's random function,
 which is too slow to use with Mozzi.
 @return a random 32 bit integer.
+@todo check timing of xorshift96(), rand() and other PRNG candidates.
  */
 // Based on Marsaglia, George. (2003). Xorshift RNGs. http://www.jstatsoft.org/v08/i14/xorshift.pdf
 unsigned long xorshift96()

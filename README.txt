@@ -1,5 +1,5 @@
 README for Mozzi, a sound synthesis library for Arduino.
-Version 0.01.1h
+Version 0.01.1i
 Tim Barrass 2010-12
 
 
@@ -53,10 +53,24 @@ Sketch > Import Library menu.
 QUICK START
 
 To hear Mozzi, connect a 3.5mm audio jack with the centre wire to the PWM
-output on Digital pin 9 on Arduino, and the black ground to the Ground on the
+output on Digital Pin 9* on Arduino, and the black ground to the Ground on the
 Arduino. Use this as a line out which you can plug into your computer and listen
-to with a sound program like Audacity. Try some examples. They are in your
+to with a sound program like Audacity. Try some examples from the
 File > Examples > Mozzi menu.
+
+* Below is a list of the pins Mozzi uses for audio out on different boards.
+Those which are currently known to work have an asterix.
+Feedback about others is welcome.
+
+	pin	board
+*	9	Arduino Duemilanove
+*	9	Arduino Nano
+	9	Arduino Leonardo
+	14	Teensy
+*	25	Teensy++
+	11	Arduino Mega
+	13	Sanguino
+
 
 
 USING MOZZI
@@ -109,7 +123,7 @@ CAVEATS
 This code has been tested on Arduino Dumemilanove ATmega328. Feedback
 about performance on other Arduinos welcome.
 
-Mozzi doesn't play nice with Arduino time functions millis(), micros(), delay(),
+Mozzi disables Arduino time functions millis(), micros(), delay(),
 delayMicroseconds(). Instead, you can use Mozzi's EventDelay() for scheduling.
 
 
@@ -117,7 +131,8 @@ CONTRIBUTIONS / INCLUDED DEPENDENCIES
 
 Mozzi makes use of the following code:
 
-TimerOne library - http://code.google.com/p/arduino-timerone/ (GPL3)
+TimerOne library - http://www.pjrc.com/teensy/td_libs_TimerOne.html
+
 
 Mozzi has also drawn on and been influenced by:
 

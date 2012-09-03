@@ -3,8 +3,21 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1i
+
+- newer version of TimerOne library from http://www.pjrc.com.  Teensy2++ works,
+	Arduino Mega and others should also be OK, noting audiio out pin differences in README Quick Start section.
+- added option for dithering oscillator phase, which can reduce spurious frequencies.  Add it like this:
+	#define DITHER_OSCIL_PHASE
+	#include <oscil.h>
+- added Phasor.h, a high resolution repeating ramp generator, much better for some synth calculations
+	than using an 8-bit saw wave oscil.
+
+
+
 Version 0.01.1h
-- more Leonardo/Teeny compatibilty fixes, thanks to massi on mozzi users list.
+
+- more Leonardo/Teensy compatibilty fixes, thanks to massi on mozzi users list.
 
 
 Version 0.01.1g

@@ -29,6 +29,9 @@
 #include "MozziGuts.h"
 #include "fixedMath.h"
 #include <util/atomic.h>
+#ifdef DITHER_OSCIL_PHASE
+#include "utils.h"
+#endif
 
 // fractional bits for oscillator index precision
 #define F_BITS 16
@@ -51,11 +54,14 @@ called. It could also be a fraction of CONTROL_RATE if you are doing some kind
 of cyclic updating in updateControl(), for example, to spread out the processor load.
 @todo Use conditional compilation to optimise setFreq() variations for different table
 sizes.
-@section raw2mozzi
+@note If you #define DITHER_OSCIL_PHASE before you #include <Oscil.h>,
+the phase increments will be dithered, which reduces spurious frequency spurs
+in the audio output, at the cost of some extra processing and memory.
+@section char2mozzi
 Converting soundfiles for Mozzi
-There is a python script called raw2mozzi.py in the Mozzi/python folder.
+There is a python script called char2mozzi.py in the Mozzi/python folder.
 The usage is:
-python raw2mozzi.py infilename outfilename tablename samplerate
+python char2mozzi.py infilename outfilename tablename samplerate
 */
 template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE>
 class Oscil
@@ -65,7 +71,7 @@ public:
 	/** Constructor.
 	@param TABLE_NAME the name of the array the Oscil will be using. This
 	can be found in the table ".h" file if you are using a table made for
-	Mozzi by the raw2mozzi.py python script in Mozzi's python
+	Mozzi by the char2mozzi.py python script in Mozzi's python
 	folder.*/
 	Oscil(const char * TABLE_NAME):table(TABLE_NAME)
 	{}
@@ -104,7 +110,11 @@ public:
 
 	/** Set the phase of the Oscil.  This does the same thing as Sample::start(offset).  Just different ways of thinking about oscillators and samples.
 	@param phase a position in the wavetable.
+	@todo Test commenting out ATOMIC_BLOCK in setPhase(), setFreq(), etc.
 	*/
+	// This could be called in the control interrupt, so phase_fractional should really be volatile,
+	// but that could limit optimisation.  Since phase_fractional gets changed often in updateAudio()
+	// (in loop()), it's probably worth keeping it nonvolatile until it causes problems
 	void setPhase(unsigned int phase)
 	{
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
@@ -242,11 +252,13 @@ public:
 
 private:
 
+
 	/** Increments the phase of the oscillator without returning a sample.
 	 */
 	inline
 	void incrementPhase()
 	{
+		//phase_fractional += (phase_increment_fractional | 1); // odd phase inc attempt to reduce spurs
 		phase_fractional += phase_increment_fractional;
 	}
 
@@ -256,11 +268,17 @@ private:
 	inline
 	char readTable()
 	{
+#ifdef DITHER_OSCIL_PHASE
+		return (char)pgm_read_byte_near(table + (((phase_fractional + ((int)(xorshift96()>>16))) >> F_BITS) & (NUM_TABLE_CELLS - 1)));
+#else
 		return (char)pgm_read_byte_near(table + ((phase_fractional >> F_BITS) & (NUM_TABLE_CELLS - 1)));
+#endif
+		//return (char)pgm_read_byte_near(table + (((phase_fractional >> F_BITS) | 1 ) & (NUM_TABLE_CELLS - 1))); odd phase attempt to reduce frequency spurs
 	}
 
+
 	unsigned long phase_fractional;
-	/** @todo  does Oscil::phase_increment_fractional really need to be declared volatile?*/
+	// volatile with atomic access because it can be set in updateControl() interrupt and used in updateAudio() (outside the interrupt)
 	volatile unsigned long phase_increment_fractional;
 	const char * table;
 

@@ -3,68 +3,208 @@
  *  Original code by Jesse Tane for http://labs.ideo.com August 2008
  *  Modified March 2009 by Jérôme Despatis and Jesse Tane for ATmega328 support
  *  Modified June 2009 by Michael Polli and Jesse Tane to fix a bug in setPeriod() which caused the timer to stop
- *  Modified June 2011 by Lex Talionis to add a function to read the timer
- *  Modified Oct 2011 by Andrew Richards to avoid certain problems:
- *  - Add (long) assignments and casts to TimerOne::read() to ensure calculations involving tmp, ICR1 and TCNT1 aren't truncated
- *  - Ensure 16 bit registers accesses are atomic - run with interrupts disabled when accessing
- *  - Remove global enable of interrupts (sei())- could be running within an interrupt routine)
- *  - Disable interrupts whilst TCTN1 == 0.  Datasheet vague on this, but experiment shows that overflow interrupt 
- *    flag gets set whilst TCNT1 == 0, resulting in a phantom interrupt.  Could just set to 1, but gets inaccurate
- *    at very short durations
- *  - startBottom() added to start counter at 0 and handle all interrupt enabling.
- *  - start() amended to enable interrupts
- *  - restart() amended to point at startBottom()
- * Modiied 7:26 PM Sunday, October 09, 2011 by Lex Talionis
- *  - renamed start() to resume() to reflect it's actual role
- *  - renamed startBottom() to start(). This breaks some old code that expects start to continue counting where it left off
+ *  Modified April 2012 by Paul Stoffregen - portable to other AVR chips, use inline functions
  *
- *  This program is free software: you can redistribute it and/or modify
- *	it under the terms of the GNU General Public License as published by
- *	the Free Software Foundation, either version 3 of the License, or
- *	(at your option) any later version.
+ *  This is free software. You can redistribute it and/or modify it under
+ *  the terms of Creative Commons Attribution 3.0 United States License.
+ *  To view a copy of this license, visit http://creativecommons.org/licenses/by/3.0/us/
+ *  or send a letter to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
  *
- *	This program is distributed in the hope that it will be useful,
- *	but WITHOUT ANY WARRANTY; without even the implied warranty of
- *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *	GNU General Public License for more details.
- *
- *	You should have received a copy of the GNU General Public License
- *	along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *  See Google Code project http://code.google.com/p/arduino-timerone/ for latest
  */
-#ifndef TIMERONE_h
-#define TIMERONE_h
 
-#include <avr/io.h>
-#include <avr/interrupt.h>
+#ifndef TimerOne_h_
+#define TimerOne_h_
 
-#define RESOLUTION 65536    // Timer1 is 16 bit
+#if defined(ARDUINO) && ARDUINO >= 100
+#include "Arduino.h"
+#else
+#include "WProgram.h"
+#endif
+
+#include "config/known_16bit_timers.h"
+
+#define TIMER1_RESOLUTION 65536UL  // Timer1 is 16 bit
+
+
+// Placing nearly all the code in this .h file allows the functions to be
+// inlined by the compiler.  In the very common case with constant values
+// the compiler will perform all calculations and simply write constants
+// to the hardware registers (for example, setPeriod).
+
 
 class TimerOne
 {
-  public:
-  
-    // properties
-    unsigned int pwmPeriod;
-    unsigned char clockSelectBits;
-	char oldSREG;					// To hold Status Register while ints disabled
+public:
+	//****************************
+	//  Configuration
+	//****************************
+	void initialize(unsigned long microseconds=1000000) __attribute__((always_inline))
+	{
+		TCCR1B = _BV(WGM13);        // set mode as phase and frequency correct pwm, stop the timer
+		TCCR1A = 0;                 // clear control register A
+		setPeriod(microseconds);
+	}
+	void setPeriod(unsigned long microseconds) __attribute__((always_inline))
+	{
+		const unsigned long cycles = (F_CPU / 2000000) * microseconds;
+		if (cycles < TIMER1_RESOLUTION)
+		{
+			clockSelectBits = _BV(CS10);
+			pwmPeriod = cycles;
+		}
+		else
+			if (cycles < TIMER1_RESOLUTION * 8)
+			{
+				clockSelectBits = _BV(CS11);
+				pwmPeriod = cycles / 8;
+			}
+			else
+				if (cycles < TIMER1_RESOLUTION * 64)
+				{
+					clockSelectBits = _BV(CS11) | _BV(CS10);
+					pwmPeriod = cycles / 64;
+				}
+				else
+					if (cycles < TIMER1_RESOLUTION * 256)
+					{
+						clockSelectBits = _BV(CS12);
+						pwmPeriod = cycles / 256;
+					}
+					else
+						if (cycles < TIMER1_RESOLUTION * 1024)
+						{
+							clockSelectBits = _BV(CS12) | _BV(CS10);
+							pwmPeriod = cycles / 1024;
+						}
+						else
+						{
+							clockSelectBits = _BV(CS12) | _BV(CS10);
+							pwmPeriod = TIMER1_RESOLUTION - 1;
+						}
+		ICR1 = pwmPeriod;
+		TCCR1B = _BV(WGM13) | clockSelectBits;
+	}
 
-    // methods
-    void initialize(long microseconds=1000000);
-    void start();
-    void stop();
-    void restart();
-	void resume();
-	unsigned long read();
-    void pwm(char pin, int duty, long microseconds=-1);
-    void disablePwm(char pin);
-    void attachInterrupt(void (*isr)(), long microseconds=-1);
-    void detachInterrupt();
-    void setPeriod(long microseconds);
-    void setPwmDuty(char pin, int duty);
-    void (*isrCallback)();
+	//****************************
+	//  Run Control
+	//****************************
+	void start() __attribute__((always_inline))
+	{
+		TCCR1B = 0;
+		TCNT1 = 0;		// TODO: does this cause an undesired interrupt?
+		TCCR1B = _BV(WGM13) | clockSelectBits;
+	}
+	void stop() __attribute__((always_inline))
+	{
+		TCCR1B = _BV(WGM13);
+	}
+	void restart() __attribute__((always_inline))
+	{
+		TCCR1B = 0;
+		TCNT1 = 0;
+		TCCR1B = _BV(WGM13) | clockSelectBits;
+	}
+	void resume() __attribute__((always_inline))
+	{
+		TCCR1B = _BV(WGM13) | clockSelectBits;
+	}
+
+	//****************************
+	//  PWM outputs
+	//****************************
+	void setPwmDuty(char pin, unsigned int duty) __attribute__((always_inline))
+	{
+		unsigned long dutyCycle = pwmPeriod;
+		dutyCycle *= duty;
+		dutyCycle >>= 10;
+		if (pin == TIMER1_A_PIN)
+			OCR1A = dutyCycle;
+#ifdef TIMER1_B_PIN
+
+		else if (pin == TIMER1_B_PIN)
+			OCR1B = dutyCycle;
+#endif
+	#ifdef TIMER1_C_PIN
+
+		else if (pin == TIMER1_C_PIN)
+			OCR1C = dutyCycle;
+#endif
+
+	}
+	void pwm(char pin, unsigned int duty) __attribute__((always_inline))
+	{
+		if (pin == TIMER1_A_PIN)
+		{
+			pinMode(TIMER1_A_PIN, OUTPUT);
+			TCCR1A |= _BV(COM1A1);
+		}
+#ifdef TIMER1_B_PIN
+		else if (pin == TIMER1_B_PIN)
+		{
+			pinMode(TIMER1_B_PIN, OUTPUT);
+			TCCR1A |= _BV(COM1B1);
+		}
+#endif
+	#ifdef TIMER1_C_PIN
+		else if (pin == TIMER1_C_PIN)
+		{
+			pinMode(TIMER1_C_PIN, OUTPUT);
+			TCCR1A |= _BV(COM1C1);
+		}
+#endif
+		setPwmDuty(pin, duty);
+		TCCR1B = _BV(WGM13) | clockSelectBits;
+	}
+	void pwm(char pin, unsigned int duty, unsigned long microseconds) __attribute__((always_inline))
+	{
+		if (microseconds > 0)
+			setPeriod(microseconds);
+		pwm(pin, duty);
+	}
+	void disablePwm(char pin) __attribute__((always_inline))
+	{
+		if (pin == TIMER1_A_PIN)
+			TCCR1A &= ~_BV(COM1A1);
+#ifdef TIMER1_B_PIN
+
+		else if (pin == TIMER1_B_PIN)
+			TCCR1A &= ~_BV(COM1B1);
+#endif
+	#ifdef TIMER1_C_PIN
+
+		else if (pin == TIMER1_C_PIN)
+			TCCR1A &= ~_BV(COM1C1);
+#endif
+
+	}
+
+	//****************************
+	//  Interrupt Function
+	//****************************
+	void attachInterrupt(void (*isr)()) __attribute__((always_inline))
+	{
+		isrCallback = isr;
+		TIMSK1 = _BV(TOIE1);
+	}
+	void attachInterrupt(void (*isr)(), unsigned long microseconds) __attribute__((always_inline))
+	{
+		if(microseconds > 0)
+			setPeriod(microseconds);
+		attachInterrupt(isr);
+	}
+	void detachInterrupt() __attribute__((always_inline))
+	{
+		TIMSK1 = 0;
+	}
+	void (*isrCallback)();
+
+protected:
+	// properties
+	static unsigned int pwmPeriod;
+	static unsigned char clockSelectBits;
 };
 
 extern TimerOne Timer1;
+
 #endif
+

@@ -3,6 +3,11 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1j
+
+- Fixed Phasor docs.
+
+
 Version 0.01.1i
 
 - newer version of TimerOne library from http://www.pjrc.com.  Teensy2++ works,
@@ -12,7 +17,7 @@ Version 0.01.1i
 	#include <oscil.h>
 - added Phasor.h, a high resolution repeating ramp generator, much better for some synth calculations
 	than using an 8-bit saw wave oscil.
-
+- lots of typos, etc.
 
 
 Version 0.01.1h

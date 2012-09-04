@@ -24,12 +24,14 @@
 #define PHASOR_H_
 
 #include "Arduino.h"
+#include "fixedMath.h"
 
 /** Phasor repeatedly generates a ramp at a set frequency. The output of
 Phasor.next() is an unsigned number between 0 and the maximum that can be
 expressed by the template parameter number type T.
 @tparam T the type of numbers to use. For example,
-"Phasor <unsigned int> myphasor;" makes a Phasor which uses unsigned ints.
+"Phasor <unsigned int, AUDIO_RATE> myphasor;" makes a Phasor which uses unsigned ints,
+counts from 0 to 65535 and updates at AUDIO_RATE.
 */
 
 template <class T, unsigned int UPDATE_RATE>
@@ -42,8 +44,8 @@ private:
 
 public:
 	/** Constructor. Use the template parameter to set the type of numbers you want to
-	use. For example, "Phasor <unsigned int> myphasor;" makes a Phasor which uses
-	unsigned ints and counts from 0 to 65535.
+	use. For example, "Phasor <unsigned int, AUDIO_RATE> myphasor;" makes a Phasor which uses
+	unsigned ints, counts from 0 to 65535 and updates at AUDIO_RATE.
 	*/
 	Phasor ():MAX_VALUE((T)4294967295) // b1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 gets truncated for any T
 	{
@@ -80,6 +82,7 @@ public:
 		step_size = (T)((frequency*(MAX_VALUE/UPDATE_RATE))>>16);
 	}
 
+
 	/** Set the Phasor frequency with a Q24n8 fractional value.
 	@param frequency is how many times per second to count from 0 to maximum.
 	 */
@@ -88,6 +91,7 @@ public:
 	{
 		step_size = (T)((frequency*(MAX_VALUE/UPDATE_RATE))>>8);
 	}
+
 
 	/** Set the Phasor frequency with an unsigned int.
 	@param frequency is how many times per second to count from 0 to maximum.

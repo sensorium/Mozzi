@@ -5,7 +5,7 @@ NEWS
 
 Version 0.01.1j
 
-- Fixed Phasor docs.
+- Fixed Phasor and docs.
 
 
 Version 0.01.1i

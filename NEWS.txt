@@ -3,6 +3,12 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1k
+
+- Tested and working on Leonardo board.
+
+
+
 Version 0.01.1j
 
 - Fixed Phasor and docs.
@@ -11,7 +17,7 @@ Version 0.01.1j
 Version 0.01.1i
 
 - newer version of TimerOne library from http://www.pjrc.com.  Teensy2++ works,
-	Arduino Mega and others should also be OK, noting audiio out pin differences in README Quick Start section.
+	Arduino Mega and others should also be OK, noting audio out pin differences in README Quick Start section.
 - added option for dithering oscillator phase, which can reduce spurious frequencies.  Add it like this:
 	#define DITHER_OSCIL_PHASE
 	#include <oscil.h>

@@ -1,5 +1,9 @@
 #ifndef known_16bit_timers_header_
 #define known_16bit_timers_header_
+/*
+Part of TimerOne library, modified by Paul S. for Teensy boards.
+TB2012 added Leonardo section.
+*/
 
 // Wiring-S
 //
@@ -19,6 +23,13 @@
   #define TIMER1_CLK_PIN 11
   #define TIMER3_A_PIN   9
   #define TIMER3_ICP_PIN 10
+
+
+// Leonardo - Make sure this is after the (__AVR_ATmega32U4__) && defined(CORE_TEENSY) entry
+  #elif defined(__AVR_ATmega32U4__)
+  #define TIMER1_A_PIN   9
+  #define TIMER1_B_PIN   10
+  #define TIMER1_C_PIN   11
 
 
 // Teensy++ 2.0

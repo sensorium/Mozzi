@@ -118,7 +118,7 @@ for randomSeed(). randSeed is the same as xorshift96Seed(), but easier to
 remember.
 @param seed an int to use as a seed.
 */
-void randSeed(int seed)
+void randSeed(unsigned long seed)
 {
 	x=seed;
 }
@@ -131,7 +131,7 @@ seeding with fairly random input, such as analogRead() on an unconnected pin (as
 explained in the Arduino documentation for randomSeed().
 @param seed an int to use as a seed.
 */
-void xorshiftSeed(int seed)
+void xorshiftSeed(unsigned long seed)
 {
 	x=seed;
 }

@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1j</span>
+   &#160;<span id="projectnumber">alpha 0.01.1l</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -1633,6 +1633,7 @@ __asm__ __volatile__ (    \
 })
 </pre></div>
 <p>Fast fixed point multiply for Q7n8 fractional numbers. </p>
+<p>Interesting: this is slower than doing ((long)a*b)&gt;&gt;16. Timing with an oscilloscope shows: p = <a class="el" href="group__fixed_math.html#ga4628b6ab7962076cb9e176a3d9739ac6" title="Fast fixed point multiply for Q7n8 fractional numbers.">Q7n8_multfix(a,b)</a>; // 1.52ms p = ((long)a*b)&gt;&gt;16; // 560 to 640 us </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">a</td><td>Q7n8 format multiplicand </td></tr>
@@ -1640,8 +1641,9 @@ __asm__ __volatile__ (    \
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns:</dt><dd>a Q7n8 format product </dd></dl>
 
-<p>Definition at line <a class="el" href="fixed_math_8h_source.html#l00147">147</a> of file <a class="el" href="fixed_math_8h_source.html">fixedMath.h</a>.</p>
+<p>Definition at line <a class="el" href="fixed_math_8h_source.html#l00152">152</a> of file <a class="el" href="fixed_math_8h_source.html">fixedMath.h</a>.</p>
 
 </div>
 </div>
@@ -1950,7 +1952,7 @@ __asm__ __volatile__ (    \
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 4 2012 22:37:32 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 13 2012 22:32:01 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

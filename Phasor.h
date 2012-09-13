@@ -25,30 +25,29 @@
 
 #include "Arduino.h"
 #include "fixedMath.h"
+#include <util/atomic.h>
 
-/** Phasor repeatedly generates a ramp at a set frequency. The output of
-Phasor.next() is an unsigned number between 0 and the maximum that can be
-expressed by the template parameter number type T.
-@tparam T the type of numbers to use. For example,
-"Phasor <unsigned int, AUDIO_RATE> myphasor;" makes a Phasor which uses unsigned ints,
-counts from 0 to 65535 and updates at AUDIO_RATE.
+#define PHASOR_MAX_VALUE_UL 4294967295UL
+
+/** Phasor repeatedly generates a high resolution ramp at a variable frequency.
+The output of Phasor.next() is an unsigned number between 0 and 4294967295, the
+maximum that can be expressed by an unsigned long.
+@tparam UPDATE_RATE the rate at which the Phasor will be updated,
+usually CONTROL_RATE or AUDIO_RATE.
 */
 
-template <class T, unsigned int UPDATE_RATE>
+template <unsigned int UPDATE_RATE>
 class Phasor
 {
 private:
-	T current_value;
-	T step_size;
-	const T MAX_VALUE;
+	unsigned long current_value;
+	volatile unsigned long step_size;
 
 public:
-	/** Constructor. Use the template parameter to set the type of numbers you want to
-	use. For example, "Phasor <unsigned int, AUDIO_RATE> myphasor;" makes a Phasor which uses
-	unsigned ints, counts from 0 to 65535 and updates at AUDIO_RATE.
+	/** Constructor. "Phasor <AUDIO_RATE> myphasor;"
+	makes a Phasor which updates at AUDIO_RATE.
 	*/
-	Phasor ():MAX_VALUE((T)4294967295) // b1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 gets truncated for any T
-	{
+	Phasor (){
 		;
 	}
 
@@ -56,9 +55,12 @@ public:
 	@return the next value.
 	 */
 	inline
-	T next()
+	unsigned long next()
 	{
-		current_value += step_size; // will wrap
+		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+		{
+			current_value += step_size; // will wrap
+		}
 		return current_value;
 	}
 
@@ -66,54 +68,34 @@ public:
 	value using any previously calculated step size.
 	 */
 	inline
-	void set(T value)
+	void set(unsigned long value)
 	{
 		current_value=value;
 	}
 
 
-
-	/** Set the Phasor frequency with a Q16n16 fractional value.
-	@param frequency is how many times per second to count from 0 to maximum.
-	 */
-	inline
-	void setFreq_Q16n16(Q16n16 frequency)
-	{
-		step_size = (T)((frequency*(MAX_VALUE/UPDATE_RATE))>>16);
-	}
-
-
-	/** Set the Phasor frequency with a Q24n8 fractional value.
-	@param frequency is how many times per second to count from 0 to maximum.
-	 */
-	inline
-	void setFreq_Q24n8(Q24n8 frequency)
-	{
-		step_size = (T)((frequency*(MAX_VALUE/UPDATE_RATE))>>8);
-	}
-
-
 	/** Set the Phasor frequency with an unsigned int.
-	@param frequency is how many times per second to count from 0 to maximum.
+	@param frequency is how many times per second to count from
+	0 to the maximum unsigned long value 4294967295.
 	 */
 	inline
 	void setFreq(unsigned int frequency)
 	{
-		step_size = (T)((unsigned long)frequency*(MAX_VALUE/UPDATE_RATE));
+		step_size = ((((unsigned long)((PHASOR_MAX_VALUE_UL>>8)+1))/(UPDATE_RATE))*frequency)<<8;
 	}
 
 
-	/** Set the Phasor frequency with a float. Using a float is the most reliable
-	way to set frequencies, -Might- be slower than using an int but you need either
-	this, setFreq_Q24n8() or setFreq_Q16n16() for fractional frequencies.
-	@param frequency is  how many times per second to count from 0 to maximum.
+	/** Set the Phasor frequency with a float.
+	@param frequency is  how many times per second to count from
+	0 to the maximum unsigned long value 4294967295.
 	 */
 	inline
 	void setFreq(float frequency)
 	{ // 1 us - using float doesn't seem to incur measurable overhead with the oscilloscope
 		//ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		//{
-		step_size = (T)(((float)MAX_VALUE * frequency)/UPDATE_RATE);
+		step_size = ((unsigned long)((((unsigned long)((PHASOR_MAX_VALUE_UL>>8)+1))/(UPDATE_RATE))*frequency))<<8;
+
 		//}
 	}
 };

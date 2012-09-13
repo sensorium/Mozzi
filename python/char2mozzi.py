@@ -3,7 +3,7 @@
 ##
 ##    char2mozzi.py converts raw 8 bit sound data to wavetables for Mozzi.
 ##
-##    Usage: char2mozzi.py <infilename outfilename "tablename" "samplerate">
+##    Usage: python char2mozzi.py <infilename outfilename "tablename" "samplerate">
 ##
 ##    Using Audacity to prepare raw sound files for converting:
 ##

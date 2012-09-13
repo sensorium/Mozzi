@@ -1,5 +1,5 @@
 README for Mozzi, a sound synthesis library for Arduino.
-Version 0.01.1k
+Version 0.01.1l
 Tim Barrass 2010-12
 
 
@@ -120,8 +120,9 @@ Check for code and usage changes in NEWS.txt.
 
 CAVEATS
 
-This code has been tested on Arduino Dumemilanove ATmega328. Feedback
-about performance on other Arduinos welcome.
+This code has been tested on Arduino Duemilanove ATmega328,
+Arduino Nano ATmega328, Arduino Leonardo, and Teensy2++.
+Feedback about performance on other Arduinos welcome.
 
 Mozzi disables Arduino time functions millis(), micros(), delay(),
 delayMicroseconds(). Instead, you can use Mozzi's EventDelay() for scheduling.
@@ -134,7 +135,7 @@ Mozzi makes use of the following code:
 TimerOne library - http://www.pjrc.com/teensy/td_libs_TimerOne.html
 
 
-Mozzi has also drawn on and been influenced by:
+Mozzi has also drawn on and been influenced by (among many others):
 
 ead~.c puredata external (creb library) Copyright (c) 2000-2003 by Tom Schouten (GPL2)
 

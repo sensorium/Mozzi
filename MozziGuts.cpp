@@ -76,7 +76,9 @@ void startMozzi(unsigned int control_rate_hz)
 // ring buffer for audio output
 #define BUFFER_NUM_CELLS 256
 static int output_buffer[BUFFER_NUM_CELLS];
-static volatile unsigned int num_out; // shared by audioHook() (in loop()), and outputAudio() (in audio interrupt), where it is changed
+
+//static volatile unsigned int num_out; // shared by audioHook() (in loop()), and outputAudio() (in audio interrupt), where it is changed
+static volatile unsigned char num_out; // shared by audioHook() (in loop()), and outputAudio() (in audio interrupt), where it is changed // test
 
 
 /** @ingroup core
@@ -86,21 +88,14 @@ It calls updateAudio() and puts the result into Mozzi's output buffer.
 void audioHook()
 {
 
-	static unsigned char in_pos = 0;
-	static unsigned int num_in = 0;
-	unsigned int gap;
-	// Upon entering the block the Global Interrupt Status flag in SREG is disabled, and re-enabled upon exiting the block
-	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+	/// try pre-decrement positions and swap gap calc around
+
+	static unsigned char num_in = 0;
+	unsigned int gap = num_in - num_out; // wraps to a big number if it's negative
+
+	if (gap < BUFFER_NUM_CELLS) // prevent writing over cells which haven't been output yet
 	{
-		// Atomic access to 16 bit num_out, which is changed in outputAudio(), called in the audio interrupt.
-		// It's atomic because we don't want num_out to change half-way through reading it.
-		gap = num_in - num_out; // wraps to a big number if it's negative
-	}
-	if (gap < BUFFER_NUM_CELLS)
-	{
-		in_pos++;
-		num_in++;
-		output_buffer[in_pos] = updateAudio() + AUDIO_BIAS;
+		output_buffer[num_in++] = updateAudio() + AUDIO_BIAS;
 	}
 
 }
@@ -111,13 +106,10 @@ It moves sound data from the output buffer to the Arduino output register,
 running at AUDIO_RATE.
 */
 inline
-void outputAudio()
-{ // takes 1-2 us, and doesn't appear to get interrupted by control on scope
+static void outputAudio()
+{ // takes 1 us or shorter, digital scope seems to have trouble catching it
 	//SET_PIN13_HIGH;
-	static unsigned char out_pos;
-	out_pos++;
-	num_out++;
-	AUDIO_CHANNEL_1_OUTPUT_REGISTER =  output_buffer[out_pos];
+	AUDIO_CHANNEL_1_OUTPUT_REGISTER =  output_buffer[num_out++];
 	//SET_PIN13_LOW;
 }
 

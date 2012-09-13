@@ -84,7 +84,7 @@ unsigned char TimerZero::init(unsigned usec, void (*f)(), bool reset)
 	//  Serial.println(i, DEC);
 	// disable timer 0 interrupts
 	TIMSK0 = 0;
-	// use system clock (clkI/O). TB only relevant for timer 2?
+	// use system clock (clkI/O)
 	//ASSR &= ~(1 << AS2);
 	// Clear Timer on Compare Match (CTC) mode
 	TCCR0A = (1 << WGM01);
@@ -111,7 +111,7 @@ void TimerZero::stop()
 //------------------------------------------------------------------------------
 // ISR for timer 0 Compare A interrupt
 // TB2012 added ISR_NOBLOCK so it can be interrupted by Timer 1 (audio)
-ISR(TIMER0_COMPA_vect,ISR_NOBLOCK)
+ISR(TIMER0_COMPA_vect, ISR_NOBLOCK)
 {
 	// disable timer 0 interrupts
 	TIMSK0 = 0;

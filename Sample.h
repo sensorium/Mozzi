@@ -29,7 +29,8 @@
 #include "MozziGuts.h"
 #include <util/atomic.h>
 
-// fractional bits for samplelator index precision
+
+// fractional bits for sample index precision
 #define SAMPLE_F_BITS 16
 #define SAMPLE_F_BITS_AS_MULTIPLIER 65536
 
@@ -38,10 +39,13 @@
 #define SAMPLE_PHMOD_BITS 16
 
 
-/** Sample is like Oscil, it plays a wavetable, but defaults to playing once through,
-from start to finish.
+/** Sample is like Oscil, it plays a wavetable.  However, Sample can be
+set to play once through only, with variable start and end points,
+or can loop, also with variable start and end points.
+It defaults to playing once through the whole sound table, from start to finish.
 @tparam NUM_TABLE_CELLS This is defined in the table ".h" file the Sample will be
-using. It's important that it's either a literal number (eg. "8192") or a
+using.  The sound table can be arbitrary length for Sample.
+It's important that NUM_TABLE_CELLS is either a literal number (eg. "8192") or a
 defined macro, rather than a const or int, for the Sample to run fast enough.
 @tparam UPDATE_RATE This will be AUDIO_RATE if the Sample is updated in
 updateAudio(), or CONTROL_RATE if it's updated each time updateControl() is
@@ -52,8 +56,6 @@ Converting soundfiles for Mozzi.
 There is a python script called char2mozzi.py in the Mozzi/python folder.
 The script converts raw sound data saved from a program like Audacity.
 Instructions are in the char2mozzi.py file.
-@todo Make Sample a descendent of Oscil.
-@todo See if ATOMIC_BLOCK can be commented out everywhere.
 */
 template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE>
 class Sample
@@ -65,9 +67,13 @@ public:
 	@param TABLE_NAME the name of the array the Sample will be using. This
 	can be found in the table ".h" file if you are using a table made for
 	Mozzi by the char2mozzi.py python script in Mozzi's python
-	folder.*/
+	folder.  Sound tables can be of arbitrary lengths for Sample().
+	*/
 	Sample(const char * TABLE_NAME):table(TABLE_NAME)
-	{}
+	{
+		setLoopingOff();
+		rangeWholeSample();
+	}
 
 
 
@@ -76,73 +82,135 @@ public:
 	The table can be set or changed on the fly with setTable().
 	*/
 	Sample()
-	{}
+	{
+		setLoopingOff();
+		rangeWholeSample();
+	}
 
 
 	/** Change the sound table which will be played by the Sample.
 	@param TABLE_NAME is the name of the array in the table ".h" file you're using.
 	*/
+	inline
 	void setTable(const char * TABLE_NAME)
 	{
 		table = TABLE_NAME;
 	}
 
 
-	/** Resets the phase (the playhead) to the beginning of the table.
+	/** Sets the starting position in samples.
+	@param offset position in samples.
+	*/
+	inline
+	void setStart(unsigned int start)
+	{
+		startpos_fractional = (unsigned long) start << SAMPLE_F_BITS;
+	}
+
+
+	/** Resets the phase (the playhead) to the start position, which will be 0 unless set to another value with setStart();
 	*/
 	inline
 	void start()
 	{
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
-			phase_fractional = 0;
+			phase_fractional = startpos_fractional;
 		}
 	}
 
 
-	/** Sets the phase (the playhead) to an offset position.  This does the same thing as Oscil::setPhase(phase).  Just different ways of thinking about samples and oscillators.
-	@param offset position in samples.
+	/** Sets the a new start position and sets the phase (the playhead) to that position.
+	@param start position in samples from the beginning of the sound.
 	*/
 	inline
-	void start(unsigned int offset)
+	void start(unsigned int startpos)
 	{
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			phase_fractional = (unsigned long) offset<<SAMPLE_F_BITS;
-		}
+		setStart(startpos);
+		start();
 	}
 
 
-	/** Updates the phase according to the current frequency and returns the sample at
-	the new phase position, or 0 when the phase overshoots the end of the table.
+	/** Sets the end position in samples from the beginning of the sound..
+	@param end position in samples.
+	*/
+	inline
+	void setEnd(unsigned int end)
+	{
+		endpos_fractional = (unsigned long) end << SAMPLE_F_BITS;
+	}
+
+
+	/** Sets the start and end points to include the range of the whole sound table.
+	*/
+	inline
+	void rangeWholeSample()
+	{
+		endpos_fractional = 0;
+		endpos_fractional = (unsigned long) NUM_TABLE_CELLS << SAMPLE_F_BITS;
+	}
+
+
+	/** Turns looping on, with the whole sample length as the loop range.
+	*/
+	inline
+	void setLoopingOn()
+	{
+		looping=true;
+	}
+
+
+	/** Turns looping off.
+	*/
+	inline
+	void setLoopingOff()
+	{
+		looping=false;
+	}
+
+
+	/**
+	Returns the sample at the current phase position, or 0 if looping is off
+	and the phase overshoots the end of the sample. Updates the phase
+	according to the current frequency.
 	@return the next sample value from the table, or 0 if it's finished playing.
 	*/
 	inline
-	char next()
+	char next() // 4us
 	{
+		incrementPhase();
 		char out = 0;
-		if (phase_fractional < (unsigned long) NUM_TABLE_CELLS<<SAMPLE_F_BITS )
+		if (!looping)
 		{
-			incrementPhase();
-			out = readTable();
+			if (phase_fractional<endpos_fractional)
+				out = (char)pgm_read_byte_near(table + (phase_fractional >> SAMPLE_F_BITS));
+		}
+		else
+		{
+			if (phase_fractional>endpos_fractional)
+				phase_fractional = startpos_fractional + (phase_fractional - endpos_fractional);
+			out = (char)pgm_read_byte_near(table + (phase_fractional >> SAMPLE_F_BITS));
 		}
 		return out;
 	}
 
 
-	/** Returns the next sample given a phase modulation value.
-	@param a phase modulation value given as a proportion of the wave. The
-	phmod_proportion parameter is a Q15n16 fixed-point number where to fractional
-	n16 part represents -1 to 1, modulating the phase by one whole table length in
-	each direction.
-	@return a sample from the table.
-	*/
-	inline
-	char phMod(long phmod_proportion)
-	{
-		incrementPhase();
-		return (char)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))>>SAMPLE_F_BITS) & (NUM_TABLE_CELLS - 1)));
-	}
+	// Not readjusted for arbitrary table length yet
+	//
+	// /** Returns the next sample given a phase modulation value.
+	// @param a phase modulation value given as a proportion of the wave. The
+	// phmod_proportion parameter is a Q15n16 fixed-point number where to fractional
+	// n16 part represents -1 to 1, modulating the phase by one whole table length in
+	// each direction.
+	// @return a sample from the table.
+	// */
+	// inline
+	// char phMod(long phmod_proportion)
+	// {
+	// 	incrementPhase();
+	// 	return (char)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))>>SAMPLE_F_BITS) & (NUM_TABLE_CELLS - 1)));
+	// }
+
 
 	/** Set the frequency using Q24n8 fixed-point number format.
 	This might be faster than the float version for setting low frequencies
@@ -161,6 +229,7 @@ public:
 		}
 	}
 
+
 	/** Set the oscillator frequency with an unsigned int. This is faster than using a
 	float, so it's useful when processor time is tight, but it can be tricky with
 	low and high frequencies, depending on the size of the wavetable being used. If
@@ -177,6 +246,7 @@ public:
 		}
 	}
 
+
 	/** Set the oscillator frequency with a float. Using a float is the most reliable
 	way to set frequencies, -Might- be slower than using an int but you need either
 	this or setFreq_n8 for fractional frequencies.
@@ -191,6 +261,7 @@ public:
 		}
 	}
 
+
 	/**  Returns the sample at the given table index.
 	@param atIndex table index between 0 and the table size.The
 	index rolls back around to 0 if it's larger than the table size.
@@ -201,6 +272,7 @@ public:
 	{
 		return (char)pgm_read_byte_near(table + (index & (NUM_TABLE_CELLS - 1)));
 	}
+
 
 	/** phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding
 	between frequencies. Instead of recalculating the phase increment for each
@@ -217,6 +289,7 @@ public:
 	{
 		return (((unsigned long)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) << SAMPLE_F_BITS;
 	}
+
 
 	/** Set a specific phase increment.  See phaseIncFromFreq().
 	@param phaseinc_fractional a phase increment value as calculated by phaseIncFromFreq().
@@ -241,18 +314,12 @@ private:
 		phase_fractional += phase_increment_fractional;
 	}
 
-	/** Returns the current sample.
-	 */
-	inline
-	char readTable()
-	{
-		return (char)pgm_read_byte_near(table + ((phase_fractional >> SAMPLE_F_BITS) & (NUM_TABLE_CELLS - 1)));
-	}
 
-	unsigned long phase_fractional;
+	volatile unsigned long phase_fractional;
 	volatile unsigned long phase_increment_fractional;
 	const char * table;
-
+	bool looping;
+	unsigned long startpos_fractional, endpos_fractional;
 };
 
 #endif /* SAMPLE_H_ */

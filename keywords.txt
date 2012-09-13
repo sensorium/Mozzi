@@ -53,6 +53,12 @@ phaseIncFromFreq	KEYWORD2
 setPhaseInc	KEYWORD2
 setTable	KEYWORD2
 start	KEYWORD2
+setLoopingOn	KEYWORD2
+setLoopingOff	KEYWORD2
+rangeWholeSample	KEYWORD2
+setStart	KEYWORD2
+setEnd	KEYWORD2
+
 
 Line	KEYWORD1
 increment	KEYWORD2

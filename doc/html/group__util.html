@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1j</span>
+   &#160;<span id="projectnumber">alpha 0.01.1l</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -111,10 +111,10 @@ Functions</h2></td></tr>
 <tr class="memdesc:ga45bd3f3abd7ae5fa509eac3d3931a5b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts midi note number to frequency.  <a href="#ga45bd3f3abd7ae5fa509eac3d3931a5b2"></a><br/></td></tr>
 <tr class="memitem:ga9884e17c95a10e988e90d60c9f3aab2b"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga9884e17c95a10e988e90d60c9f3aab2b">randomMidi</a> ()</td></tr>
 <tr class="memdesc:ga9884e17c95a10e988e90d60c9f3aab2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a random number in the range for midi notes.  <a href="#ga9884e17c95a10e988e90d60c9f3aab2b"></a><br/></td></tr>
-<tr class="memitem:gaabf15745802887c60ca752896a976fea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gaabf15745802887c60ca752896a976fea">randSeed</a> (int seed)</td></tr>
-<tr class="memdesc:gaabf15745802887c60ca752896a976fea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises Mozzi's (pseudo)random number generator <a class="el" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96()</a>, which is used in Mozzi's <a class="el" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand()</a> function.  <a href="#gaabf15745802887c60ca752896a976fea"></a><br/></td></tr>
-<tr class="memitem:gad7ff7865d9f26fe6fd804e4b7309981c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gad7ff7865d9f26fe6fd804e4b7309981c">xorshiftSeed</a> (int seed)</td></tr>
-<tr class="memdesc:gad7ff7865d9f26fe6fd804e4b7309981c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises Mozzi's (pseudo)random number generator <a class="el" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96()</a>.  <a href="#gad7ff7865d9f26fe6fd804e4b7309981c"></a><br/></td></tr>
+<tr class="memitem:ga8a9592250ee294a64c6d133e20520651"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga8a9592250ee294a64c6d133e20520651">randSeed</a> (unsigned long seed)</td></tr>
+<tr class="memdesc:ga8a9592250ee294a64c6d133e20520651"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises Mozzi's (pseudo)random number generator <a class="el" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96()</a>, which is used in Mozzi's <a class="el" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand()</a> function.  <a href="#ga8a9592250ee294a64c6d133e20520651"></a><br/></td></tr>
+<tr class="memitem:ga34956c2687a09ae6e3e7b9e632a09f18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga34956c2687a09ae6e3e7b9e632a09f18">xorshiftSeed</a> (unsigned long seed)</td></tr>
+<tr class="memdesc:ga34956c2687a09ae6e3e7b9e632a09f18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises Mozzi's (pseudo)random number generator <a class="el" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96()</a>.  <a href="#ga34956c2687a09ae6e3e7b9e632a09f18"></a><br/></td></tr>
 <tr class="memitem:gaf2deee83847f1fcee2c859d97bd072f6"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6">xorshift96</a> ()</td></tr>
 <tr class="memdesc:gaf2deee83847f1fcee2c859d97bd072f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Random number generator.  <a href="#gaf2deee83847f1fcee2c859d97bd072f6"></a><br/></td></tr>
 <tr class="memitem:gacd4bfc9e040d0090b9321f43a6297e21"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21">rand</a> (char minval, char maxval)</td></tr>
@@ -542,14 +542,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gaabf15745802887c60ca752896a976fea"></a>
+<a class="anchor" id="ga8a9592250ee294a64c6d133e20520651"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="group__util.html#gaabf15745802887c60ca752896a976fea">randSeed</a> </td>
+          <td class="memname">void <a class="el" href="group__util.html#ga8a9592250ee294a64c6d133e20520651">randSeed</a> </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">unsigned long&#160;</td>
           <td class="paramname"><em>seed</em></td><td>)</td>
           <td></td>
         </tr>
@@ -660,20 +660,20 @@ Functions</h2></td></tr>
 <p>Random number generator. </p>
 <p>A faster replacement for Arduino's random function, which is too slow to use with Mozzi. </p>
 <dl class="section return"><dt>Returns:</dt><dd>a random 32 bit integer. </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd>check timing of <a class="el" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96()</a>, <a class="el" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand()</a> and other PRNG candidates. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>check timing of <a class="el" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96()</a>, <a class="el" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand()</a> and other PRNG candidates. </dd></dl>
 
 <p>Definition at line <a class="el" href="utils_8cpp_source.html#l00148">148</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="gad7ff7865d9f26fe6fd804e4b7309981c"></a>
+<a class="anchor" id="ga34956c2687a09ae6e3e7b9e632a09f18"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="group__util.html#gad7ff7865d9f26fe6fd804e4b7309981c">xorshiftSeed</a> </td>
+          <td class="memname">void <a class="el" href="group__util.html#ga34956c2687a09ae6e3e7b9e632a09f18">xorshiftSeed</a> </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">unsigned long&#160;</td>
           <td class="paramname"><em>seed</em></td><td>)</td>
           <td></td>
         </tr>
@@ -698,7 +698,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 4 2012 22:37:32 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 13 2012 22:32:01 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

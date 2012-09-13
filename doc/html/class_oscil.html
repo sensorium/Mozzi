@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1j</span>
+   &#160;<span id="projectnumber">alpha 0.01.1l</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -142,7 +142,7 @@ class Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</h3>
 <p>The frequency of the signal can be set or changed with <a class="el" href="class_oscil.html#a3f7e26147e99bc1c60d33a1312005313" title="Set the oscillator frequency with an unsigned int.">setFreq()</a>, and the output of an <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> can be produced with <a class="el" href="class_oscil.html#a2a76960954a19c7b24dfb7524b740c8f" title="Updates the phase according to the current frequency and returns the sample at the new phase position...">next()</a> for a simple cycling oscillator, or <a class="el" href="class_oscil.html#a3b2ea7727b2ec911957b3862dbb6a8ec" title="Returns the sample at the given table index.">atIndex()</a> for a particular sample in the table. </p>
 <dl class=""><dt><b>Template Parameters:</b></dt><dd>
   <table class="">
-    <tr><td class="paramname">NUM_TABLE_CELLS</td><td>This is defined in the table ".h" file the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> will be using. It's important that it's either a literal number (eg. "8192") or a defined macro, rather than a const or int, for the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> to run fast enough. </td></tr>
+    <tr><td class="paramname">NUM_TABLE_CELLS</td><td>This is defined in the table ".h" file the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> will be using. It's important that it's a power of 2, and either a literal number (eg. "8192") or a defined macro, rather than a const or int, for the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> to run fast enough. </td></tr>
     <tr><td class="paramname">UPDATE_RATE</td><td>This will be AUDIO_RATE if the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> is updated in <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio()</a>, or CONTROL_RATE if it's updated each time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> is called. It could also be a fraction of CONTROL_RATE if you are doing some kind of cyclic updating in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, for example, to spread out the processor load. </td></tr>
   </table>
   </dd>
@@ -539,7 +539,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 4 2012 22:37:32 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 13 2012 22:32:01 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

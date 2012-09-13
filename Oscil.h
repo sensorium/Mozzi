@@ -46,7 +46,7 @@ control signal. The frequency of the signal can be set or changed with
 setFreq(), and the output of an Oscil can be produced with next() for a simple
 cycling oscillator, or atIndex() for a particular sample in the table.
 @tparam NUM_TABLE_CELLS This is defined in the table ".h" file the Oscil will be
-using. It's important that it's either a literal number (eg. "8192") or a
+using. It's important that it's a power of 2, and either a literal number (eg. "8192") or a
 defined macro, rather than a const or int, for the Oscil to run fast enough.
 @tparam UPDATE_RATE This will be AUDIO_RATE if the Oscil is updated in
 updateAudio(), or CONTROL_RATE if it's updated each time updateControl() is

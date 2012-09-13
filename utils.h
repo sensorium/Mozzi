@@ -31,8 +31,8 @@ Set pin 13 low for testing timing with an oscilloscope.*/
 float mtof(float x);
 Q16n16 Q16n16_mtof(Q16n16 midival);
 unsigned char randomMidi();
-void randSeed();
-void xorshiftSeed();
+void randSeed(unsigned long seed);
+void xorshiftSeed(unsigned long seed);
 unsigned long xorshift96();
 char rand(char minval, char maxval);
 unsigned char rand(unsigned char minval, unsigned char maxval);

@@ -3,10 +3,21 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1l
+
+- fixed randSeed() and xorshift96Seed();
+- Sample()
+	- added looping parameters
+	- changed the internals of next - slower at 4us but more flexible
+	- now wave tables can be arbitrary lengths, no more power-of-2 restriction
+	- added example _11b_Sample_Loop_Points
+- Phasor is now set to output only unsigned longs.  Fixed bad bugs.
+- Add example _19_PWM_Phasing, demonstrating Phasor() as an audio generator.
+
+
 Version 0.01.1k
 
 - Tested and working on Leonardo board.
-
 
 
 Version 0.01.1j

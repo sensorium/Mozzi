@@ -141,8 +141,13 @@ To convert a number from Qm.n format to floating point:
 
 
 /** Fast fixed point multiply for Q7n8 fractional numbers.
+Interesting: this is slower than doing ((long)a*b)>>16.
+Timing with an oscilloscope shows:
+p = Q7n8_multfix(a,b); // 1.52ms
+p = ((long)a*b)>>16;  // 560 to 640 us
 @param a Q7n8 format multiplicand
 @param b Q7n8 format multiplier
+@return a Q7n8 format product
 */
 #define Q7n8_multfix(a,b)    	  \
 ({            \

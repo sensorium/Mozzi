@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1j</span>
+   &#160;<span id="projectnumber">alpha 0.01.1l</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -100,7 +100,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> is like <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>, it plays a wavetable, but defaults to playing once through, from start to finish.  
+<p><a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> is like <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>, it plays a wavetable.  
  <a href="class_sample.html#details">More...</a></p>
 
 <p><a href="class_sample-members.html">List of all members.</a></p>
@@ -112,18 +112,29 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af2ce86342a595a3571ce2e9a38e96a96"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#af2ce86342a595a3571ce2e9a38e96a96">Sample</a> ()</td></tr>
 <tr class="memdesc:af2ce86342a595a3571ce2e9a38e96a96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#af2ce86342a595a3571ce2e9a38e96a96"></a><br/></td></tr>
 <tr class="memitem:a9911f53f66a5413a923b73f3d890abd4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a9911f53f66a5413a923b73f3d890abd4">setTable</a> (const char *TABLE_NAME)</td></tr>
-<tr class="memdesc:a9911f53f66a5413a923b73f3d890abd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the sound table which will be played by the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a>.  <a href="#a9911f53f66a5413a923b73f3d890abd4"></a><br/></td></tr>
+<tr class="memdesc:a9911f53f66a5413a923b73f3d890abd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the sound table which will be played by the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a>.  <a href="#a9911f53f66a5413a923b73f3d890abd4"></a><br/></td></tr>
+<tr class="memitem:a5f140e3168f5edb7708dff8b9df6e8f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a5f140e3168f5edb7708dff8b9df6e8f8">setStart</a> (unsigned int <a class="el" href="class_sample.html#a57307ee93ef0fcff36d543596eb79b72">start</a>)</td></tr>
+<tr class="memdesc:a5f140e3168f5edb7708dff8b9df6e8f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the starting position in samples.  <a href="#a5f140e3168f5edb7708dff8b9df6e8f8"></a><br/></td></tr>
 <tr class="memitem:a57307ee93ef0fcff36d543596eb79b72"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a57307ee93ef0fcff36d543596eb79b72"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a57307ee93ef0fcff36d543596eb79b72">start</a> ()</td></tr>
-<tr class="memdesc:a57307ee93ef0fcff36d543596eb79b72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the phase (the playhead) to the beginning of the table. <br/></td></tr>
-<tr class="memitem:a7f937c15daf469260c6bba84016e9c99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a7f937c15daf469260c6bba84016e9c99">start</a> (unsigned int offset)</td></tr>
-<tr class="memdesc:a7f937c15daf469260c6bba84016e9c99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the phase (the playhead) to an offset position.  <a href="#a7f937c15daf469260c6bba84016e9c99"></a><br/></td></tr>
+<tr class="memdesc:a57307ee93ef0fcff36d543596eb79b72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the phase (the playhead) to the start position, which will be 0 unless set to another value with <a class="el" href="class_sample.html#a5f140e3168f5edb7708dff8b9df6e8f8" title="Sets the starting position in samples.">setStart()</a>;. <br/></td></tr>
+<tr class="memitem:ad2dbae6c05040fd0381653f1a102e6ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ad2dbae6c05040fd0381653f1a102e6ee">start</a> (unsigned int startpos)</td></tr>
+<tr class="memdesc:ad2dbae6c05040fd0381653f1a102e6ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the a new start position and sets the phase (the playhead) to that position.  <a href="#ad2dbae6c05040fd0381653f1a102e6ee"></a><br/></td></tr>
+<tr class="memitem:a2e82144fde95ab74fb7525f33f3fe4d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a2e82144fde95ab74fb7525f33f3fe4d6">setEnd</a> (unsigned int end)</td></tr>
+<tr class="memdesc:a2e82144fde95ab74fb7525f33f3fe4d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the end position in samples from the beginning of the sound.  <a href="#a2e82144fde95ab74fb7525f33f3fe4d6"></a><br/></td></tr>
+<tr class="memitem:a79cb13998692fdff715c7b6b1beb991a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a79cb13998692fdff715c7b6b1beb991a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a79cb13998692fdff715c7b6b1beb991a">rangeWholeSample</a> ()</td></tr>
+<tr class="memdesc:a79cb13998692fdff715c7b6b1beb991a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the start and end points to include the range of the whole sound table. <br/></td></tr>
+<tr class="memitem:aaa2257099a1269445651145e46de5bed"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaa2257099a1269445651145e46de5bed"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#aaa2257099a1269445651145e46de5bed">setLoopingOn</a> ()</td></tr>
+<tr class="memdesc:aaa2257099a1269445651145e46de5bed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns looping on, with the whole sample length as the loop range. <br/></td></tr>
+<tr class="memitem:ab1b29e0ccaee2c13e55ed9aa2202812e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab1b29e0ccaee2c13e55ed9aa2202812e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ab1b29e0ccaee2c13e55ed9aa2202812e">setLoopingOff</a> ()</td></tr>
+<tr class="memdesc:ab1b29e0ccaee2c13e55ed9aa2202812e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns looping off. <br/></td></tr>
 <tr class="memitem:a6b94fc8a8042f498fbd8693d9bce9719"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a6b94fc8a8042f498fbd8693d9bce9719">next</a> ()</td></tr>
-<tr class="memdesc:a6b94fc8a8042f498fbd8693d9bce9719"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the phase according to the current frequency and returns the sample at the new phase position, or 0 when the phase overshoots the end of the table.  <a href="#a6b94fc8a8042f498fbd8693d9bce9719"></a><br/></td></tr>
-<tr class="memitem:a13ff9d4206b5e14e2f030ef9ced8a7d0"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a13ff9d4206b5e14e2f030ef9ced8a7d0">phMod</a> (long phmod_proportion)</td></tr>
-<tr class="memdesc:a13ff9d4206b5e14e2f030ef9ced8a7d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next sample given a phase modulation value.  <a href="#a13ff9d4206b5e14e2f030ef9ced8a7d0"></a><br/></td></tr>
+<tr class="memdesc:a6b94fc8a8042f498fbd8693d9bce9719"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sample at the current phase position, or 0 if looping is off and the phase overshoots the end of the sample.  <a href="#a6b94fc8a8042f498fbd8693d9bce9719"></a><br/></td></tr>
 <tr class="memitem:ac98d74f6b80f514e6114204bfa56d351"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ac98d74f6b80f514e6114204bfa56d351">setFreq_n8</a> (unsigned long frequency)</td></tr>
-<tr class="memdesc:ac98d74f6b80f514e6114204bfa56d351"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the frequency using Q24n8 fixed-point number format.  <a href="#ac98d74f6b80f514e6114204bfa56d351"></a><br/></td></tr>
+<tr class="memdesc:ac98d74f6b80f514e6114204bfa56d351"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next sample given a phase modulation value.  <a href="#ac98d74f6b80f514e6114204bfa56d351"></a><br/></td></tr>
 <tr class="memitem:ad6aa28642c1e219d24144501c7cfcabc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ad6aa28642c1e219d24144501c7cfcabc">setFreq</a> (unsigned int frequency)</td></tr>
 <tr class="memdesc:ad6aa28642c1e219d24144501c7cfcabc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the oscillator frequency with an unsigned int.  <a href="#ad6aa28642c1e219d24144501c7cfcabc"></a><br/></td></tr>
 <tr class="memitem:a11a7948a655bea79ddd67059c2186816"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a11a7948a655bea79ddd67059c2186816">setFreq</a> (float frequency)</td></tr>
@@ -139,22 +150,20 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <div class="textblock"><h3>template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt;<br/>
 class Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</h3>
 
-<p><a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> is like <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>, it plays a wavetable, but defaults to playing once through, from start to finish. </p>
+<p><a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> is like <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>, it plays a wavetable. </p>
+<p>However, <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> can be set to play once through only, with variable start and end points, or can loop, also with variable start and end points. It defaults to playing once through the whole sound table, from start to finish. </p>
 <dl class=""><dt><b>Template Parameters:</b></dt><dd>
   <table class="">
-    <tr><td class="paramname">NUM_TABLE_CELLS</td><td>This is defined in the table ".h" file the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> will be using. It's important that it's either a literal number (eg. "8192") or a defined macro, rather than a const or int, for the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> to run fast enough. </td></tr>
-    <tr><td class="paramname">UPDATE_RATE</td><td>This will be AUDIO_RATE if the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> is updated in <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio()</a>, or CONTROL_RATE if it's updated each time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> is called. It could also be a fraction of CONTROL_RATE if you are doing some kind of cyclic updating in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, for example, to spread out the processor load. </td></tr>
+    <tr><td class="paramname">NUM_TABLE_CELLS</td><td>This is defined in the table ".h" file the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> will be using. The sound table can be arbitrary length for <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a>. It's important that NUM_TABLE_CELLS is either a literal number (eg. "8192") or a defined macro, rather than a const or int, for the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> to run fast enough. </td></tr>
+    <tr><td class="paramname">UPDATE_RATE</td><td>This will be AUDIO_RATE if the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> is updated in <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio()</a>, or CONTROL_RATE if it's updated each time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> is called. It could also be a fraction of CONTROL_RATE if you are doing some kind of cyclic updating in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, for example, to spread out the processor load. </td></tr>
   </table>
   </dd>
 </dl>
 <h2><a class="anchor" id="char2mozzi"></a>
 char2mozzi</h2>
 <p>Converting soundfiles for Mozzi. There is a python script called <a class="el" href="char2mozzi_8py_source.html">char2mozzi.py</a> in the Mozzi/python folder. The script converts raw sound data saved from a program like Audacity. Instructions are in the <a class="el" href="char2mozzi_8py_source.html">char2mozzi.py</a> file. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd><p class="startdd">Make <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> a descendent of <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>. </p>
-<p class="enddd">See if ATOMIC_BLOCK can be commented out everywhere. </p>
-</dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00059">59</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00061">61</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a9b95b8797648288b1c3698beda1dd34a"></a>
 <div class="memitem">
@@ -176,12 +185,12 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <p>Constructor. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">TABLE_NAME</td><td>the name of the array the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> will be using. This can be found in the table ".h" file if you are using a table made for Mozzi by the <a class="el" href="char2mozzi_8py_source.html">char2mozzi.py</a> python script in Mozzi's python folder. </td></tr>
+    <tr><td class="paramname">TABLE_NAME</td><td>the name of the array the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> will be using. This can be found in the table ".h" file if you are using a table made for Mozzi by the <a class="el" href="char2mozzi_8py_source.html">char2mozzi.py</a> python script in Mozzi's python folder. Sound tables can be of arbitrary lengths for <a class="el" href="class_sample.html#af2ce86342a595a3571ce2e9a38e96a96" title="Constructor.">Sample()</a>. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00069">69</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00072">72</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -202,9 +211,9 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <div class="memdoc">
 
 <p>Constructor. </p>
-<p>Declare a <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a> with template TABLE_NUM_CELLS and UPDATE_RATE parameters, without specifying a particular wave table for it to play. The table can be set or changed on the fly with <a class="el" href="class_sample.html#a9911f53f66a5413a923b73f3d890abd4" title="Change the sound table which will be played by the Sample.">setTable()</a>. </p>
+<p>Declare a <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> with template TABLE_NUM_CELLS and UPDATE_RATE parameters, without specifying a particular wave table for it to play. The table can be set or changed on the fly with <a class="el" href="class_sample.html#a9911f53f66a5413a923b73f3d890abd4" title="Change the sound table which will be played by the Sample.">setTable()</a>. </p>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00078">78</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00084">84</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -235,7 +244,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>the sample at the given table index. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00200">200</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00271">271</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -255,10 +264,11 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Updates the phase according to the current frequency and returns the sample at the new phase position, or 0 when the phase overshoots the end of the table. </p>
+<p>Returns the sample at the current phase position, or 0 if looping is off and the phase overshoots the end of the sample. </p>
+<p>Updates the phase according to the current frequency. </p>
 <dl class="section return"><dt>Returns:</dt><dd>the next sample value from the table, or 0 if it's finished playing. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00121">121</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00179">179</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -289,37 +299,36 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>the phase increment value which will produce a given frequency. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00216">216</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00288">288</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a13ff9d4206b5e14e2f030ef9ced8a7d0"></a>
+<a class="anchor" id="a2e82144fde95ab74fb7525f33f3fe4d6"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">char <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#a13ff9d4206b5e14e2f030ef9ced8a7d0">phMod</a> </td>
+          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#a2e82144fde95ab74fb7525f33f3fe4d6">setEnd</a> </td>
           <td>(</td>
-          <td class="paramtype">long&#160;</td>
-          <td class="paramname"><em>phmod_proportion</em></td><td>)</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>end</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Returns the next sample given a phase modulation value. </p>
+<p>Sets the end position in samples from the beginning of the sound. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">a</td><td>phase modulation value given as a proportion of the wave. The phmod_proportion parameter is a Q15n16 fixed-point number where to fractional n16 part represents -1 to 1, modulating the phase by one whole table length in each direction. </td></tr>
+    <tr><td class="paramname">end</td><td>position in samples. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns:</dt><dd>a sample from the table. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00141">141</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00138">138</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -349,7 +358,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00172">172</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00241">241</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -379,7 +388,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00186">186</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00256">256</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -400,8 +409,14 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Set the frequency using Q24n8 fixed-point number format. </p>
-<p>This might be faster than the float version for setting low frequencies such as 1.5 Hz, or other values which may not work well with your table size. Note: use with caution because it's prone to overflow with higher frequencies and larger table sizes. An Q24n8 representation of 1.5 is 384 (ie. 1.5 * 256). </p>
+<p>Returns the next sample given a phase modulation value. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>phase modulation value given as a proportion of the wave. The phmod_proportion parameter is a Q15n16 fixed-point number where to fractional n16 part represents -1 to 1, modulating the phase by one whole table length in each direction. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>a sample from the table. Set the frequency using Q24n8 fixed-point number format. This might be faster than the float version for setting low frequencies such as 1.5 Hz, or other values which may not work well with your table size. Note: use with caution because it's prone to overflow with higher frequencies and larger table sizes. An Q24n8 representation of 1.5 is 384 (ie. 1.5 * 256). </dd></dl>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">frequency</td><td>in Q24n8 fixed-point number format. </td></tr>
@@ -409,7 +424,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00156">156</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00224">224</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -439,7 +454,36 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00225">225</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00298">298</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5f140e3168f5edb7708dff8b9df6e8f8"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#a5f140e3168f5edb7708dff8b9df6e8f8">setStart</a> </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>start</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Sets the starting position in samples. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">offset</td><td>position in samples. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00105">105</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -460,7 +504,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Change the sound table which will be played by the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable, but defaults to playing once through, from start to finis...">Sample</a>. </p>
+<p>Change the sound table which will be played by the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a>. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">TABLE_NAME</td><td>is the name of the array in the table ".h" file you're using. </td></tr>
@@ -468,11 +512,11 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00085">85</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00095">95</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a7f937c15daf469260c6bba84016e9c99"></a>
+<a class="anchor" id="ad2dbae6c05040fd0381653f1a102e6ee"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -482,23 +526,22 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
           <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#a57307ee93ef0fcff36d543596eb79b72">start</a> </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>offset</em></td><td>)</td>
+          <td class="paramname"><em>startpos</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Sets the phase (the playhead) to an offset position. </p>
-<p>This does the same thing as Oscil::setPhase(phase). Just different ways of thinking about samples and oscillators. </p>
+<p>Sets the a new start position and sets the phase (the playhead) to that position. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">offset</td><td>position in samples. </td></tr>
+    <tr><td class="paramname">start</td><td>position in samples from the beginning of the sound. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00107">107</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00127">127</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -509,7 +552,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 4 2012 22:37:32 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 13 2012 22:32:01 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

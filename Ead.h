@@ -27,7 +27,7 @@
 #define EAD_H_
 
 #include "math.h"
-#include <fixedMath.h>
+#include "fixedMath.h"
 
 
 /** Exponential attack decay envelope. This produces a natural sounding
@@ -94,9 +94,10 @@ public:
 	}
 
 
-	/** Calculate and return the next envelope value, in the range -128 to 127 */
+	/** Calculate and return the next envelope value, in the range -128 to 127 
+	@note Timing: 5us
+	*/
 
-	// 5us
 	inline
 	unsigned char next()
 	{
@@ -117,6 +118,7 @@ public:
 		}
 		return Q8n24_to_Q0n8(Q8n24state);
 	}
+
 
 private:
 

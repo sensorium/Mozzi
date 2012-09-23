@@ -23,7 +23,6 @@
 #ifndef EVENTDELAY_H_
 #define EVENTDELAY_H_
 
-#include "Arduino.h"
 
 /** A non-blocking replacement for Arduino's delay() function (which is disabled by Mozzi). EventDelay can be
 set() to wait for a number of milliseconds, then after calling start(), calling ready() will return true when the time is up.*/
@@ -36,8 +35,10 @@ public:
 	@param update_rate is how frequently you'll check if the EventDelay is ready().
 	This would be CONTROL_RATE if ready() is used simply in updateControl().
 	*/
-	EventDelay(unsigned int update_rate);
-
+	EventDelay(unsigned int update_rate): micros_per_update(1000000/update_rate),counter(0)
+	{
+		;
+	}
 
 	/** Set the delay time.  This setting is persistent, until you change it by using set() again.
 	@param delay_milliseconds delay time in milliseconds.
@@ -62,9 +63,9 @@ public:
 	@return true if the time is up.
 	*/
 	inline
-	boolean ready()
+	bool ready()
 	{
-		return --counter<0;
+		return (--counter<0);
 	}
 
 

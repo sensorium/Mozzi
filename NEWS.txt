@@ -44,7 +44,7 @@ Version 0.01.1h
 
 Version 0.01.1g
 
-- changed control interrupts to Timer0 to test compatibility on atmega32u4 - (Leonardo/Teeny).
+- changed control interrupts to Timer0 to test compatibility on atmega32u4 - (Leonardo/Teensy).
 	Timer0 is used by Arduino IDE, but Mozzi clobbered it already,
 	has EventDelay() to replace delay(), and this now leaves Timer2
 	(Timer4 on atmega32u4) free.

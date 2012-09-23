@@ -51,16 +51,16 @@ Take care when converting that the important bits of your numbers will fit in th
 // Type conversions:
 /*
 Float to Q
-
+ 
 To convert a number from floating point to Qm.n format:
-
+ 
   Multiply the floating point number by 2^n
   Round to the nearest integer
-
+ 
 Q to float
-
+ 
 To convert a number from Qm.n format to floating point:
-
+ 
   Convert the number to floating point as if it were an integer
   Multiply by 2^-n
 */
@@ -195,50 +195,50 @@ begin
   count = 0;
   neg = 0 ;
   d = dd ;
-
+ 
   // only works with + numbers
   if (d & 0x8000)
   begin
     neg = 1;
     d = -d ;
   end
-
+ 
   // range reduction
   while (d>0x0100)
   begin
     --count ;
     d >>= 1 ;
   end
-
+ 
   while (d<0x0080)
   begin
     ++count ;
     d <<= 1 ;
   end
-
+ 
   // Newton interation
   x = 0x02ea - (d<<1) ;
   x = multfix(x, 0x0200-multfix(d,x));
   //x = multfix(x, 0x0200-multfix(d,x));
-
-
+ 
+ 
   // range expansion
   if (count>0)  x = x<<count ;
   else if (count<0) x = x>>(-count) ;
-
+ 
   // fix sign
   if (neg==1) x=-x;
-
+ 
   //form ratio
   x = multfix(x,nn) ;
-
+ 
   return x ;
 end
-
+ 
 //========================================================
 int sqrtfix(int aa)
 begin
-
+ 
   int a;
   char nextbit, ahigh;
   int root, p ;
@@ -334,29 +334,29 @@ end
 */
 /*
 // from octosynth, Joe Marshall 2011:
-
+ 
   // multiply 2 16 bit numbers together and shift 8 without precision loss
   // requires assembler really
   volatile unsigned char zeroReg=0;
   volatile unsigned int multipliedCounter=oscillators[c].phaseStep;
   asm volatile
   (
-  // high bytes mult together = high  byte
+  // high unsigned chars mult together = high  unsigned char
   "ldi %A[outVal],0" "\n\t"
   "mul %B[phaseStep],%B[pitchBend]" "\n\t"
   "mov %B[outVal],r0" "\n\t"
   // ignore overflow into r1 (should never overflow)
-  // low byte * high byte -> both bytes
+  // low unsigned char * high unsigned char -> both unsigned chars
   "mul %A[phaseStep],%B[pitchBend]" "\n\t"
   "add %A[outVal],r0" "\n\t"
-  // carry into high byte
+  // carry into high unsigned char
   "adc %B[outVal],r1" "\n\t"
-  // high byte* low byte -> both bytes
+  // high unsigned char* low unsigned char -> both unsigned chars
   "mul %B[phaseStep],%A[pitchBend]" "\n\t"
   "add %A[outVal],r0" "\n\t"
-  // carry into high byte
+  // carry into high unsigned char
   "adc %B[outVal],r1" "\n\t"
-  // low byte * low byte -> round
+  // low unsigned char * low unsigned char -> round
   "mul %A[phaseStep],%A[pitchBend]" "\n\t"
   // the adc below is to round up based on high bit of low*low:
   "adc %A[outVal],r1" "\n\t"
@@ -367,7 +367,7 @@ end
   :"r1","r0"
   );
   oscillators[c].phaseStep=multipliedCounter;
-
+ 
   */
 
 
@@ -380,9 +380,9 @@ int ipow(int base, int exp);
 Q16n16 Q16n16_pow2(Q8n8 exponent);
 
 
-byte byteMod(byte n, byte d);
-byte byteDiv(byte n, byte d);
-byte byteRnd(byte min, byte max);
+unsigned char charMod(unsigned char n, unsigned char d);
+unsigned char charDiv(unsigned char n, unsigned char d);
+unsigned char charRnd(unsigned char min, unsigned char max);
 
 /** @}
 */

@@ -93,5 +93,5 @@ Q16n16 Q16n16_pow2(Q8n8 exponent)
 	unsigned char Q = (unsigned char)((Q8n8)exponent>>8); // integer part
 	unsigned char n = (unsigned char) exponent; // fractional part
 	// f = 2^x * (y + 1)
-	return ((Q16n16)Q8n8_FIX1 << Q) * (Q8n8_FIX1 + n);
+	return (((Q16n16)Q8n8_FIX1 << Q) * (Q8n8_FIX1 + n));
 }

@@ -105,7 +105,7 @@ private:
 	inline
 	long fx(int i)
 	{
-		return i<<FX_SHIFT;
+		return (i<<FX_SHIFT);
 	}
 
 
@@ -120,7 +120,7 @@ private:
 	inline
 	long fxmul(long a, int b)
 	{
-		return (a*b)>>FX_SHIFT;
+		return ((a*b)>>FX_SHIFT);
 	}
 
 

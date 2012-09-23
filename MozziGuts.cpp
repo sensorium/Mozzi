@@ -30,11 +30,9 @@
 // The TimerOne library is more flexible and allows both pwm and interrupts,
 // by using ICR1 for interrupt rate and OCR1A (pin 9) (or OCR1B pin 10) for pwm level
 // So we use Timer1 for audio.
-// Ideally we'd use Timer0 for control because it has lowest priority, but Arduino uses
-// it for time and delay functions, so we use Timer 2 for control and hope it won't
-// interfere with the audio interrupt.
-// TODO: Timer0 is messed up anyway, it seems, so maybe it's better to
-// use it for control and leave Timer2 available for other things?
+// Using Timer0 for control, which disables Arduino's time functions
+// but also saves on the interrupts and blocking action of those functions.
+// May add a config option for Using Timer2 instead if needed.
 
 
 /** @ingroup core
@@ -77,27 +75,28 @@ void startMozzi(unsigned int control_rate_hz)
 #define BUFFER_NUM_CELLS 256
 static int output_buffer[BUFFER_NUM_CELLS];
 
-//static volatile unsigned int num_out; // shared by audioHook() (in loop()), and outputAudio() (in audio interrupt), where it is changed
 static volatile unsigned char num_out; // shared by audioHook() (in loop()), and outputAudio() (in audio interrupt), where it is changed // test
 
 
 /** @ingroup core
-This is required in Arduino's loop().
-It calls updateAudio() and puts the result into Mozzi's output buffer.
+This is required in Arduino's loop(). If there is room in Mozzi's output buffer,
+audioHook() calls updateAudio() once and puts the result into the output
+buffer,. If other functions are called in loop() along with audioHook(), see if
+they can be moved into updateControl(). Otherwise it may be most efficient to
+calculate a block of samples at a time by putting audioHook() in a loop of its
+own, rather than calculating only 1 sample for each time your other functions
+are called.
+@todo try pre-decrement positions and swap gap calc around
 */
 void audioHook()
 {
-
-	/// try pre-decrement positions and swap gap calc around
-
 	static unsigned char num_in = 0;
 	unsigned int gap = num_in - num_out; // wraps to a big number if it's negative
 
-	if (gap < BUFFER_NUM_CELLS) // prevent writing over cells which haven't been output yet
+	if(gap < BUFFER_NUM_CELLS) // prevent writing over cells which haven't been output yet
 	{
 		output_buffer[num_in++] = updateAudio() + AUDIO_BIAS;
 	}
-
 }
 
 

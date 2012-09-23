@@ -3,6 +3,11 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1m
+
+- Removed EventDelay.cpp, EventDelay() is all in the .h file so all inline now.
+
+
 Version 0.01.1l
 
 - fixed randSeed() and xorshift96Seed();

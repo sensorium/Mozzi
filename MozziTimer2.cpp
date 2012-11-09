@@ -6,8 +6,8 @@
   This file is part of Mozzi.
 
   Combines the hardware compatibility of Flexitimer2/MsTimer2 with the
-  precision and efficiency of TimerTwo library, with other tweaks.
-  (unknown, from https://bitbucket.org/johnmccombs, 4/2/2012).
+  precision and efficiency of TimerTwo library (unknown, from https://bitbucket.org/johnmccombs, 4/2/2012), 
+  with other tweaks.
 
   FlexiTimer2
   Wim Leers <work@wimleers.com>
@@ -17,7 +17,7 @@
 
   History:
     25/Aug/2012 (TB) - Replaced scheme for setting up timers with
-    	one based on TImerTwo library.
+    	one based on TimerTwo library.
   	Kept precompiler directives selecting processor models.
     16/Dec/2011 - Added Teensy/Teensy++ support (bperrybap)
 		note: teensy uses timer4 instead of timer2
@@ -41,9 +41,6 @@
 #include <MozziTimer2.h>
 #include <stdlib.h>
 
-#if F_CPU != 16000000
-#error Mozzi requires a cpu clock speed of 16MHz!
-#endif
 
 bool MozziTimer2::start_;
 void (*MozziTimer2::f_)();
@@ -104,12 +101,25 @@ unsigned char MozziTimer2::set(unsigned int usec, void (*f)(), bool start)
 
 	// use system clock (clkI/O).
 	ASSR &= ~(1 << AS2);
-
+/* real
 	// Clear Timer on Compare Match (CTC) mode
 	TCCR2A = (1 << WGM21);
-
+	*/
+	// test
+		//TCCR2B = _BV(WGM23);        // set mode as phase and frequency correct pwm, stop the timer
+		//TCCR2A = 0;                 // clear control register A
+	 // TCCR2A = _BV(COM2B1) | _BV(WGM20) | _BV(WGM22);// | _BV(COM2A1); // fast pwm, Clear OC2B on Compare Match when up-counting. Set OC2B on Compare Match when down-counting. TOP = OCRA.  PWM pin cleared on 
+	 // TCCR2B = ps;
+	// ken sherriff  
+  TCCR2A = _BV(COM2A0) | _BV(COM2B1) | _BV(WGM20);
+  TCCR2B = _BV(WGM22) | _BV(CS22);
+	  // end test
+	  /*
 	// only need prescale bits in TCCR2B
 	TCCR2B = ps;
+*/
+
+
 
 	// set TOP so timer period is (ticks >> i)
 	OCR2A = (ticks >> i) - 1;
@@ -329,6 +339,13 @@ void MozziTimer2::stop()
 
 #if defined (__AVR_ATmega168__) || defined (__AVR_ATmega48__) || defined (__AVR_ATmega88__) || defined (__AVR_ATmega328P__) || defined (__AVR_ATmega1280__) || defined(__AVR_ATmega2560__) || defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB1286__)
 
+// interrupt service routine that wraps a user defined function supplied by attachInterrupt
+ISR(TIMER2_OVF_vect, ISR_NOBLOCK)
+{
+	  (*MozziTimer2::f_)();
+}
+
+/*
 ISR(TIMER2_COMPA_vect, ISR_NOBLOCK) // ISR_NOBLOCK so it can be interrupted by Timer 1 (audio)
 {
 	// disable timer 2 interrupts
@@ -349,7 +366,7 @@ ISR(TIMER2_COMPA_vect, ISR_NOBLOCK) // ISR_NOBLOCK so it can be interrupted by T
 	TIMSK2 |= (1 << OCIE2A);
 }
 
-
+*/
 #elif defined (__AVR_ATmega8__) || (__AVR_ATmega128__)
 
 ISR(TIMER2_COMP_vect, ISR_NOBLOCK)

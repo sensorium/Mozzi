@@ -35,6 +35,9 @@ CONTROL_RATE, you'll need to adjust the smoothness value to suit.
 internal calculations. Some experimentation is recommended.
 If this can't be overcome using different settings or values, LowPass1stOrder may be another option.
 @note Timing: ~5us for 16 bit types, ~1us for 8 bit types.
+@todo Check if 8 bit templates can work efficiently with a higher res smoothness -
+	as is they don't have enough resolution to work well at audio rate.  See if Line might be
+	more useful in most cases.
 */
 
 template <class T>
@@ -42,7 +45,7 @@ class Smooth
 {
 private:
 	long last_out;
-	Q0n8 a;
+	Q0n16 a;
 
 public:
 	/** Constructor.
@@ -62,7 +65,7 @@ public:
 	inline
 	T next(T in)
 	{
-		long out = (((((long)in - (last_out>>8)) * a)) + last_out);
+		long out = ((((((long)in - (last_out>>8)) * a))>>8) + last_out);
 		last_out = out;
 		return (T)(out>>8);
 	}
@@ -75,7 +78,7 @@ public:
 	inline
 	void setSmoothness(float smoothness)
 	{
-		a=float_to_Q0n8(1.f-smoothness);
+		a=float_to_Q0n16(1.f-smoothness);
 	}
 
 };

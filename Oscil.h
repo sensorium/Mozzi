@@ -29,18 +29,21 @@
 #include "MozziGuts.h"
 #include "fixedMath.h"
 #include <util/atomic.h>
-#ifdef DITHER_OSCIL_PHASE
+
+#ifdef OSCIL_DITHER_PHASE
 #include "utils.h"
 #endif
 
 // fractional bits for oscillator index precision
-#define F_BITS 16
-#define F_BITS_AS_MULTIPLIER 65536
+#define OSCIL_F_BITS 16
+#define OSCIL_F_BITS_AS_MULTIPLIER 65536
 
 // phmod_proportion is an 1n15 fixed-point number only using
 // the fractional part and the sign bit
-#define PHMOD_BITS 16
+#define OSCIL_PHMOD_BITS 16
 
+
+	
 /** Oscil plays a wavetable, cycling through the table to generate an audio or
 control signal. The frequency of the signal can be set or changed with
 setFreq(), and the output of an Oscil can be produced with next() for a simple
@@ -54,7 +57,7 @@ called. It could also be a fraction of CONTROL_RATE if you are doing some kind
 of cyclic updating in updateControl(), for example, to spread out the processor load.
 @todo Use conditional compilation to optimise setFreq() variations for different table
 sizes.
-@note If you #define DITHER_OSCIL_PHASE before you #include <Oscil.h>,
+@note If you #define OSCIL_DITHER_PHASE before you #include <Oscil.h>,
 the phase increments will be dithered, which reduces spurious frequency spurs
 in the audio output, at the cost of some extra processing and memory.
 @section char2mozzi
@@ -63,10 +66,12 @@ There is a python script called char2mozzi.py in the Mozzi/python folder.
 The usage is:
 python char2mozzi.py infilename outfilename tablename samplerate
 */
+//template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, bool DITHER_PHASE=false>
 template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE>
 class Oscil
 {
-
+	
+	
 public:
 	/** Constructor.
 	@param TABLE_NAME the name of the array the Oscil will be using. This
@@ -119,7 +124,7 @@ public:
 	{
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
-			phase_fractional = (unsigned long)phase << F_BITS;
+			phase_fractional = (unsigned long)phase << OSCIL_F_BITS;
 		}
 	}
 
@@ -138,10 +143,41 @@ public:
 	char phMod(Q15n16 phmod_proportion)
 	{
 		incrementPhase();
-		return (char)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))>>F_BITS) & (NUM_TABLE_CELLS - 1)));
+		return (char)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))>>OSCIL_F_BITS) & (NUM_TABLE_CELLS - 1)));
 	}
 
-
+	
+	/** Set the oscillator frequency with an unsigned int. This is faster than using a
+	float, so it's useful when processor time is tight, but it can be tricky with
+	low and high frequencies, depending on the size of the wavetable being used. If
+	you're not getting the results you expect, try explicitly using a float, or try
+	setFreq_Q24n8() or or setFreq_Q16n16().
+	@param frequency to play the wave table.
+	*/
+	inline
+	void setFreq (unsigned int frequency) {
+		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+		{
+			phase_increment_fractional = ((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)*frequency)/UPDATE_RATE) << (OSCIL_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS);
+		}
+	}
+	
+	
+	/** Set the oscillator frequency with a float. Using a float is the most reliable
+	way to set frequencies, -Might- be slower than using an int but you need either
+	this, setFreq_Q24n8() or setFreq_Q16n16() for fractional frequencies.
+	@param frequency to play the wave table.
+	 */
+	inline
+	void setFreq(float frequency)
+	{ // 1 us - using float doesn't seem to incur measurable overhead with the oscilloscope
+		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+		{
+			phase_increment_fractional = (unsigned long)((((float)NUM_TABLE_CELLS * frequency)/UPDATE_RATE) * OSCIL_F_BITS_AS_MULTIPLIER);
+		}
+	}
+	
+	
 	/** Set the frequency using Q24n8 fixed-point number format.
 	This might be faster than the float version for setting low frequencies such as
 	1.5 Hz, or other values which may not work well with your table size. A Q24n8
@@ -154,7 +190,9 @@ public:
 	{
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
-			phase_increment_fractional = (frequency* (NUM_TABLE_CELLS>>3)/(UPDATE_RATE>>6)) << (F_BITS-(8-3+6));
+			//phase_increment_fractional = (frequency* (NUM_TABLE_CELLS>>3)/(UPDATE_RATE>>6)) << (F_BITS-(8-3+6));
+			phase_increment_fractional = (((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)>>3)*frequency)/(UPDATE_RATE>>6)) 
+				<< (OSCIL_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS - (8-3+6));
 		}
 	}
 
@@ -162,8 +200,7 @@ public:
 	/** Set the frequency using Q16n16 fixed-point number format. This is useful in
 	combination with Q16n16_mtof(), a fast alternative to mtof(), using Q16n16
 	fixed-point format instead of floats.  Note: this should work OK with tables 2048 cells or smaller and
-	frequencies up to 4096 Hz.  Can't be used with UPDATE_RATE
-	less than 64 Hz.
+	frequencies up to 4096 Hz.  Can't be used with UPDATE_RATE less than 64 Hz.
 	@param frequency in Q16n16 fixed-point number format.
 	*/
 	inline
@@ -171,39 +208,10 @@ public:
 	{
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
-			phase_increment_fractional = ((frequency * (NUM_TABLE_CELLS>>7))/(UPDATE_RATE>>6)) << (F_BITS-16+1);
-		}
-	}
+			//phase_increment_fractional = ((frequency * (NUM_TABLE_CELLS>>7))/(UPDATE_RATE>>6)) << (F_BITS-16+1);
+			phase_increment_fractional = (((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)>>7)*frequency)/(UPDATE_RATE>>6)) 
+				<< (OSCIL_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS - 16 + 1);
 
-
-	/** Set the oscillator frequency with an unsigned int. This is faster than using a
-	float, so it's useful when processor time is tight, but it can be tricky with
-	low and high frequencies, depending on the size of the wavetable being used. If
-	you're not getting the results you expect, try explicitly using a float, or try
-	setFreq_Q24n8() or or setFreq_Q16n16().
-	@param frequency to play the wave table.
-	*/
-	inline
-	void setFreq(unsigned int frequency)
-	{
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			phase_increment_fractional = (((unsigned long)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) << F_BITS;
-		}
-	}
-
-
-	/** Set the oscillator frequency with a float. Using a float is the most reliable
-	way to set frequencies, -Might- be slower than using an int but you need either
-	this, setFreq_Q24n8() or setFreq_Q16n16() for fractional frequencies.
-	@param frequency to play the wave table.
-	 */
-	inline
-	void setFreq(float frequency)
-	{ // 1 us - using float doesn't seem to incur measurable overhead with the oscilloscope
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			phase_increment_fractional = (unsigned long)((((float)NUM_TABLE_CELLS * frequency)/UPDATE_RATE) * F_BITS_AS_MULTIPLIER);
 		}
 	}
 
@@ -233,7 +241,7 @@ public:
 	inline
 	unsigned long phaseIncFromFreq(unsigned int frequency)
 	{
-		return (((unsigned long)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) << F_BITS;
+		return (((unsigned long)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) << OSCIL_F_BITS;
 	}
 
 
@@ -249,16 +257,22 @@ public:
 		}
 	}
 
-
+	
+	
 private:
 
 
+	/** Used for shift arithmetic in setFreq() and its variations.
+	*/
+	static const unsigned char ADJUST_FOR_NUM_TABLE_CELLS = (NUM_TABLE_CELLS<2048) ? 8 : 0;
+	
+	
 	/** Increments the phase of the oscillator without returning a sample.
 	 */
 	inline
 	void incrementPhase()
 	{
-		//phase_fractional += (phase_increment_fractional | 1); // odd phase inc attempt to reduce spurs
+		//phase_fractional += (phase_increment_fractional | 1); // odd phase incr, attempt to reduce frequency spurs in output
 		phase_fractional += phase_increment_fractional;
 	}
 
@@ -268,18 +282,20 @@ private:
 	inline
 	char readTable()
 	{
-#ifdef DITHER_OSCIL_PHASE
-		return (char)pgm_read_byte_near(table + (((phase_fractional + ((int)(xorshift96()>>16))) >> F_BITS) & (NUM_TABLE_CELLS - 1)));
+#ifdef OSCIL_DITHER_PHASE
+		return (char)pgm_read_byte_near(table + (((phase_fractional + ((int)(xorshift96()>>16))) >> OSCIL_F_BITS) & (NUM_TABLE_CELLS - 1)));
 #else
-		return (char)pgm_read_byte_near(table + ((phase_fractional >> F_BITS) & (NUM_TABLE_CELLS - 1)));
+		return (char)pgm_read_byte_near(table + ((phase_fractional >> OSCIL_F_BITS) & (NUM_TABLE_CELLS - 1)));
+		//return (char)pgm_read_byte_near(table + (((phase_fractional >> OSCIL_F_BITS) | 1 ) & (NUM_TABLE_CELLS - 1))); odd phase, attempt to reduce frequency spurs in output
 #endif
-		//return (char)pgm_read_byte_near(table + (((phase_fractional >> F_BITS) | 1 ) & (NUM_TABLE_CELLS - 1))); odd phase attempt to reduce frequency spurs
 	}
 
 
 	unsigned long phase_fractional;
-	// volatile with atomic access because it can be set in updateControl() interrupt and used in updateAudio() (outside the interrupt)
-	volatile unsigned long phase_increment_fractional;
+	volatile unsigned long phase_increment_fractional; // volatile with atomic access because it can 
+																											// be set in the updateControl() interrupt and 
+																											// used in updateAudio(), which is outside the 
+																											// interrupt.
 	const char * table;
 
 };

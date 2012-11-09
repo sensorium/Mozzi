@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1l</span>
+   &#160;<span id="projectnumber">alpha 0.01.1m</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -185,8 +185,8 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>This is required in Arduino's loop(). </p>
-<p>It calls <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio()</a> and puts the result into Mozzi's output buffer. </p>
-<p>try pre-decrement positions and swap gap calc around </p>
+<p>If there is room in Mozzi's output buffer, <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook()</a> calls <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio()</a> once and puts the result into the output buffer,. If other functions are called in loop() along with <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook()</a>, see if they can be moved into <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>. Otherwise it may be most efficient to calculate a block of samples at a time by putting <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook()</a> in a loop of its own, rather than calculating only 1 sample for each time your other functions are called. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>try pre-decrement positions and swap gap calc around </dd></dl>
 
 <p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00088">88</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
@@ -208,7 +208,7 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Sets up the timers for audio and control rate processes. </p>
-<p>It goes in your sketch's setup() routine. <a class="el" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573" title="Sets up the timers for audio and control rate processes.">startMozzi()</a> starts audio interrupts on Timer 1 and control interrupts on Timer 2. The audio rate is currently fixed at 16384 Hz. </p>
+<p>It goes in your sketch's setup() routine. <a class="el" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573" title="Sets up the timers for audio and control rate processes.">startMozzi()</a> starts audio interrupts on Timer 1 and control interrupts on Timer 0. The audio rate is currently fixed at 16384 Hz. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">control_rate_hz</td><td>Sets how often <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> is called. It can be any power of 2 above and including 64. The practical upper limit for control rate depends on how busy the processor is, and you might need to do some tests to find the best setting. It's good to define CONTROL_RATE in your sketches (eg. "#define CONTROL_RATE 128") because the literal numeric value is necessary for Oscils to work properly, and it also helps to keep the calculations in your sketch clear. </td></tr>
@@ -216,7 +216,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00053">53</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00045">45</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -238,6 +238,8 @@ Functions</h2></td></tr>
 <p><a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio()</a> has to keep up with the AUDIO_RATE of 16384 Hz, so to keep things running smoothly, avoid doing any calculations here which could be done in setup() or <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>. </p>
 <dl class="section return"><dt>Returns:</dt><dd>an audio sample, between -244 and 243 inclusive. </dd></dl>
 
+<p>Definition at line <a class="el" href="__02b___f_msynth_8cpp_source.html#l00109">109</a> of file <a class="el" href="__02b___f_msynth_8cpp_source.html">_02b_FMsynth.cpp</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="ga59d187b915b2e366c88489e52801951a"></a>
@@ -257,13 +259,15 @@ Functions</h2></td></tr>
 <p>This is where you put your control code. </p>
 <p>You need <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> somewhere in your sketch, even if it's empty. <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> is called at the control rate you set in <a class="el" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573" title="Sets up the timers for audio and control rate processes.">startMozzi()</a>. To save processor load, avoid any calculations here which could be done in setup(). </p>
 
+<p>Definition at line <a class="el" href="__02b___f_msynth_8cpp_source.html#l00079">79</a> of file <a class="el" href="__02b___f_msynth_8cpp_source.html">_02b_FMsynth.cpp</a>.</p>
+
 </div>
 </div>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 13 2012 22:32:01 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 9 2012 22:43:00 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

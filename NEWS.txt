@@ -5,8 +5,18 @@ NEWS
 
 Version 0.01.1m
 
+- Oscil - fixed inaccurate results for small table sizes in setFreq().
 - Removed EventDelay.cpp, EventDelay() is all in the .h file so all inline now.
-
+- Moved all sample tables into "samples" folder, now in top level Mozzi folder.
+- Added example _18b_Waveshaper_Difference_Tone.
+- Removed examples_recordings folder, each example has its recordings inside in the folder with the example sketch.
+- Wrote an automated build and record script to check all examples work for each release.
+- Line - fixed a bug which caused incorrect step calculation for unsigned types.
+- _03_Control_Tremelo example - added audio-rate linear interpolation to amplitude-control.
+- Smooth - increased internal smoothness resolution from Q0n8 to Q0n16 for template parameter types larger than char.
+- _05_Smooth example - changed to do smoothing in updateAudio().
+- Various examples slightly modified/fixed (more needs doing).
+	
 
 Version 0.01.1l
 

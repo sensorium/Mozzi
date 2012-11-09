@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1l</span>
+   &#160;<span id="projectnumber">alpha 0.01.1m</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -133,12 +133,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:ab1b29e0ccaee2c13e55ed9aa2202812e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns looping off. <br/></td></tr>
 <tr class="memitem:a6b94fc8a8042f498fbd8693d9bce9719"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a6b94fc8a8042f498fbd8693d9bce9719">next</a> ()</td></tr>
 <tr class="memdesc:a6b94fc8a8042f498fbd8693d9bce9719"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sample at the current phase position, or 0 if looping is off and the phase overshoots the end of the sample.  <a href="#a6b94fc8a8042f498fbd8693d9bce9719"></a><br/></td></tr>
-<tr class="memitem:ac98d74f6b80f514e6114204bfa56d351"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ac98d74f6b80f514e6114204bfa56d351">setFreq_n8</a> (unsigned long frequency)</td></tr>
-<tr class="memdesc:ac98d74f6b80f514e6114204bfa56d351"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next sample given a phase modulation value.  <a href="#ac98d74f6b80f514e6114204bfa56d351"></a><br/></td></tr>
 <tr class="memitem:ad6aa28642c1e219d24144501c7cfcabc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ad6aa28642c1e219d24144501c7cfcabc">setFreq</a> (unsigned int frequency)</td></tr>
-<tr class="memdesc:ad6aa28642c1e219d24144501c7cfcabc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the oscillator frequency with an unsigned int.  <a href="#ad6aa28642c1e219d24144501c7cfcabc"></a><br/></td></tr>
+<tr class="memdesc:ad6aa28642c1e219d24144501c7cfcabc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next sample given a phase modulation value.  <a href="#ad6aa28642c1e219d24144501c7cfcabc"></a><br/></td></tr>
 <tr class="memitem:a11a7948a655bea79ddd67059c2186816"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a11a7948a655bea79ddd67059c2186816">setFreq</a> (float frequency)</td></tr>
-<tr class="memdesc:a11a7948a655bea79ddd67059c2186816"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the oscillator frequency with a float.  <a href="#a11a7948a655bea79ddd67059c2186816"></a><br/></td></tr>
+<tr class="memdesc:a11a7948a655bea79ddd67059c2186816"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the sample frequency with a float.  <a href="#a11a7948a655bea79ddd67059c2186816"></a><br/></td></tr>
+<tr class="memitem:aa2086deef68e43620d7502dd8bb78678"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#aa2086deef68e43620d7502dd8bb78678">setFreq_Q24n8</a> (<a class="el" href="group__fixed_math.html#gabd39053dd8fc51470c26025a33a1fa63">Q24n8</a> frequency)</td></tr>
+<tr class="memdesc:aa2086deef68e43620d7502dd8bb78678"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the frequency using Q24n8 fixed-point number format.  <a href="#aa2086deef68e43620d7502dd8bb78678"></a><br/></td></tr>
 <tr class="memitem:ad5c4e048c4aa7a36710e58466caabc94"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ad5c4e048c4aa7a36710e58466caabc94">atIndex</a> (unsigned int index)</td></tr>
 <tr class="memdesc:ad5c4e048c4aa7a36710e58466caabc94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sample at the given table index.  <a href="#ad5c4e048c4aa7a36710e58466caabc94"></a><br/></td></tr>
 <tr class="memitem:a7dfbdfca35b7bbf074e24e62a1d53309"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a7dfbdfca35b7bbf074e24e62a1d53309">phaseIncFromFreq</a> (unsigned int frequency)</td></tr>
@@ -163,7 +163,7 @@ class Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</h3>
 char2mozzi</h2>
 <p>Converting soundfiles for Mozzi. There is a python script called <a class="el" href="char2mozzi_8py_source.html">char2mozzi.py</a> in the Mozzi/python folder. The script converts raw sound data saved from a program like Audacity. Instructions are in the <a class="el" href="char2mozzi_8py_source.html">char2mozzi.py</a> file. </p>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00061">61</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00062">62</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a9b95b8797648288b1c3698beda1dd34a"></a>
 <div class="memitem">
@@ -190,7 +190,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00072">72</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00073">73</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -213,7 +213,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <p>Constructor. </p>
 <p>Declare a <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> with template TABLE_NUM_CELLS and UPDATE_RATE parameters, without specifying a particular wave table for it to play. The table can be set or changed on the fly with <a class="el" href="class_sample.html#a9911f53f66a5413a923b73f3d890abd4" title="Change the sound table which will be played by the Sample.">setTable()</a>. </p>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00084">84</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00085">85</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -244,7 +244,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>the sample at the given table index. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00271">271</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00274">274</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -268,7 +268,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <p>Updates the phase according to the current frequency. </p>
 <dl class="section return"><dt>Returns:</dt><dd>the next sample value from the table, or 0 if it's finished playing. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00179">179</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00180">180</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -299,7 +299,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>the phase increment value which will produce a given frequency. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00288">288</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00291">291</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -328,7 +328,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00138">138</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00139">139</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -349,8 +349,14 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Set the oscillator frequency with an unsigned int. </p>
-<p>This is faster than using a float, so it's useful when processor time is tight, but it can be tricky with low and high frequencies, depending on the size of the wavetable being used. If you're not getting the results you expect, try explicitly using a float, or try setFreq_n8. </p>
+<p>Returns the next sample given a phase modulation value. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>phase modulation value given as a proportion of the wave. The phmod_proportion parameter is a Q15n16 fixed-point number where to fractional n16 part represents -1 to 1, modulating the phase by one whole table length in each direction. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>a sample from the table. Set the oscillator frequency with an unsigned int. This is faster than using a float, so it's useful when processor time is tight, but it can be tricky with low and high frequencies, depending on the size of the wavetable being used. If you're not getting the results you expect, try explicitly using a float, or try setFreq_Q24n8. </dd></dl>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">frequency</td><td>to play the wave table. </td></tr>
@@ -358,7 +364,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00241">241</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00225">225</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -379,8 +385,8 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Set the oscillator frequency with a float. </p>
-<p>Using a float is the most reliable way to set frequencies, -Might- be slower than using an int but you need either this or setFreq_n8 for fractional frequencies. </p>
+<p>Set the sample frequency with a float. </p>
+<p>Using a float is the most reliable way to set frequencies, -Might- be slower than using an int but you need either this or setFreq_Q24n8 for fractional frequencies. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">frequency</td><td>to play the wave table. </td></tr>
@@ -388,20 +394,20 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00256">256</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00239">239</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ac98d74f6b80f514e6114204bfa56d351"></a>
+<a class="anchor" id="aa2086deef68e43620d7502dd8bb78678"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#ac98d74f6b80f514e6114204bfa56d351">setFreq_n8</a> </td>
+          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#aa2086deef68e43620d7502dd8bb78678">setFreq_Q24n8</a> </td>
           <td>(</td>
-          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramtype"><a class="el" href="group__fixed_math.html#gabd39053dd8fc51470c26025a33a1fa63">Q24n8</a>&#160;</td>
           <td class="paramname"><em>frequency</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
@@ -409,14 +415,8 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Returns the next sample given a phase modulation value. </p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">a</td><td>phase modulation value given as a proportion of the wave. The phmod_proportion parameter is a Q15n16 fixed-point number where to fractional n16 part represents -1 to 1, modulating the phase by one whole table length in each direction. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns:</dt><dd>a sample from the table. Set the frequency using Q24n8 fixed-point number format. This might be faster than the float version for setting low frequencies such as 1.5 Hz, or other values which may not work well with your table size. Note: use with caution because it's prone to overflow with higher frequencies and larger table sizes. An Q24n8 representation of 1.5 is 384 (ie. 1.5 * 256). </dd></dl>
+<p>Set the frequency using Q24n8 fixed-point number format. </p>
+<p>This might be faster than the float version for setting low frequencies such as 1.5 Hz, or other values which may not work well with your table size. Note: use with caution because it's prone to overflow with higher frequencies and larger table sizes. An Q24n8 representation of 1.5 is 384 (ie. 1.5 * 256). </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">frequency</td><td>in Q24n8 fixed-point number format. </td></tr>
@@ -424,7 +424,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00224">224</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00257">257</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -454,7 +454,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00298">298</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00301">301</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -483,7 +483,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00105">105</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00106">106</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -512,7 +512,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00095">95</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00096">96</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -541,7 +541,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00127">127</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00128">128</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -552,7 +552,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 13 2012 22:32:01 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 9 2012 22:43:00 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

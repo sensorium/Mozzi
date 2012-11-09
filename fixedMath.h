@@ -380,9 +380,9 @@ int ipow(int base, int exp);
 Q16n16 Q16n16_pow2(Q8n8 exponent);
 
 
-unsigned char charMod(unsigned char n, unsigned char d);
-unsigned char charDiv(unsigned char n, unsigned char d);
-unsigned char charRnd(unsigned char min, unsigned char max);
+unsigned char byteMod(unsigned char n, unsigned char d);
+unsigned char byteDiv(unsigned char n, unsigned char d);
+unsigned char byteRnd(unsigned char min, unsigned char max);
 
 /** @}
 */

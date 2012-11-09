@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1l</span>
+   &#160;<span id="projectnumber">alpha 0.01.1m</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -92,22 +92,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><dl class="reflist">
+<dt><a class="anchor" id="_todo000003"></a>Member <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d">audioHook</a>  ()</dt>
+<dd>try pre-decrement positions and swap gap calc around  </dd>
 <dt><a class="anchor" id="_todo000002"></a>Class <a class="el" href="class_low_pass1st_order.html">LowPass1stOrder&lt; T, LENGTH &gt;</a>  </dt>
 <dd>Find out if there is a way to calculate and predict the output range for a particular input range and filter length, whether it can be used precisely or requires experimenting to find useful values in each application. Specialise templates for unsigned types.  </dd>
-<dt><a class="anchor" id="_todo000003"></a>Class <a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>  </dt>
+<dt><a class="anchor" id="_todo000004"></a>Class <a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>  </dt>
 <dd>Use conditional compilation to optimise setFreq() variations for different table sizes.  </dd>
-<dt><a class="anchor" id="_todo000004"></a>Member <a class="el" href="class_oscil.html#ab7b740eec56740426a47508562ed4dd5">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setPhase</a>  (unsigned int phase)</dt>
+<dt><a class="anchor" id="_todo000005"></a>Member <a class="el" href="class_oscil.html#ab7b740eec56740426a47508562ed4dd5">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setPhase</a>  (unsigned int phase)</dt>
 <dd>Test commenting out ATOMIC_BLOCK in setPhase(), setFreq(), etc.  </dd>
 <dt><a class="anchor" id="_todo000001"></a>Member <a class="el" href="group__fixed_math.html#ga2e1d9d0fe4ba7edb9830efb7887c36bd">Q16n16_pow2</a>  (Q8n8 exponent)</dt>
 <dd><a class="el" href="group__fixed_math.html#ga2e1d9d0fe4ba7edb9830efb7887c36bd" title="This is a fast replacement for pow(2,x), where x is a fractional number in Q8n8 fixed-point exponent...">Q16n16_pow2()</a> accuracy needs more attention.  </dd>
-<dt><a class="anchor" id="_todo000005"></a>Member <a class="el" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6">xorshift96</a>  ()</dt>
+<dt><a class="anchor" id="_todo000006"></a>Class <a class="el" href="class_smooth.html">Smooth&lt; T &gt;</a>  </dt>
+<dd>Check if 8 bit templates can work efficiently with a higher res smoothness - as is they don't have enough resolution to work well at audio rate. See if <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> might be more useful in most cases.  </dd>
+<dt><a class="anchor" id="_todo000007"></a>Member <a class="el" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6">xorshift96</a>  ()</dt>
 <dd>check timing of <a class="el" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96()</a>, <a class="el" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand()</a> and other PRNG candidates. </dd>
 </dl>
 </div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 13 2012 22:32:01 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 9 2012 22:43:00 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

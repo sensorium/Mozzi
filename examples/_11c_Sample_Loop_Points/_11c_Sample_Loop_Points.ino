@@ -18,7 +18,7 @@
 
 #include <MozziGuts.h>
 #include <Sample.h> // Sample template
-#include <tables/samples/abomb16384_int8.h> // table for Sample
+#include <samples/abomb16384_int8.h> // table for Sample
 #include <EventDelay.h>
 #include <utils.h>
 
@@ -45,10 +45,12 @@ const unsigned int full = (int) (1000.f/playspeed) - 23; // adjustment approx fo
 //unsigned char beat_counter = 0;
 
 void setup(){
-  startMozzi(CONTROL_RATE);
+  long seed = analogRead(A0); // a fresh random start
+  randSeed(seed*seed);
   aSample.setFreq(playspeed*((float) ABOMB_SAMPLERATE / (float) ABOMB_NUM_CELLS));
   kTriggerDelay.set(full); 
   aSample.setLoopingOn();
+  startMozzi(CONTROL_RATE);
 }
 
 
@@ -68,8 +70,8 @@ unsigned int chooseEnd(unsigned int startpos){
 
 
 void chooseSpeedMod(){
-  if (rand((unsigned char)4) == 0){
-    speedchange = (float)rand((char)-100,(char)100)/10000;
+  if (rand((unsigned char)3) == 0){
+    speedchange = (float)rand((char)-100,(char)100)/8000;
     float startspeed = (float)rand((char)-100,(char)100)/100;
     playspeedmod = playspeed + startspeed;
   }

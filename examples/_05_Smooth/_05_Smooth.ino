@@ -1,7 +1,9 @@
-/*  Example toggling a sound on an off without obvious clicks,
+/*  Example of a sound changing volume with and without
+ *  smoothing of the control signal to remove obvious clicks,
  *  using Mozzi sonification library.
  *
- *  Demonstrates using Smooth to filter a control signal.
+ *  Demonstrates using Smooth to filter a control signal at audio rate,
+ *  EventDelay to schedule changes and rand() to choose random volumes.
  *
  *  Circuit: Audio output on digital pin 9.
  *
@@ -19,46 +21,64 @@
 #include <Smooth.h>
 #include <utils.h>
 
-#define CONTROL_RATE 512
+#define CONTROL_RATE 128
 
-// use: Oscil <table_size, update_rate> oscilName (wavetable)
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
 // for scheduling audio gain changes
 EventDelay kGainChangeDelay(CONTROL_RATE);
+const unsigned int gainChangeMsec = 200;
 
-Smooth <unsigned char> kSmoothGain(0.975f);
-unsigned char smoothed_gain; // for conveying kSmoothGain to updateAudio
-unsigned char target_gain = 0;
+//  for scheduling turning smoothing on and off
+EventDelay kSmoothOnOff(CONTROL_RATE);
+const unsigned int smoothOnOffMsec = 2000;
+
+float smoothness = 0.9975f;
+Smooth <long> aSmoothGain(smoothness);
+boolean smoothIsOn=true;
+long target_gain = 0;
+
 
 void setup(){
-  aSin.setFreq(330u); // set the frequency with an unsigned int
-  kGainChangeDelay.set(500); // 500ms countdown, within resolution of CONTROL_RATE
+  aSin.setFreq(330u); // audio oscil set freq with unsigned int
+  kGainChangeDelay.set(gainChangeMsec);
+  kSmoothOnOff.set(smoothOnOffMsec);
   startMozzi(CONTROL_RATE);
 }
 
 
 void updateControl(){
-  if(kGainChangeDelay.ready()){
-    if (target_gain == 0) {
-      target_gain = 255;
-    }else{
-      target_gain = 0;
+  // switch smoothing on and off to show the difference
+  if(kSmoothOnOff.ready()){
+    if (smoothIsOn) {
+      aSmoothGain.setSmoothness(0.f);
+      smoothIsOn = false;
     }
+    else{
+      aSmoothGain.setSmoothness(smoothness);
+      smoothIsOn = true;
+    }
+    kSmoothOnOff.start();
+  }
+
+  // random volume changes
+  if(kGainChangeDelay.ready()){
+    target_gain = rand((unsigned char) 255);
     kGainChangeDelay.start();
   }
-  smoothed_gain = kSmoothGain.next(target_gain);
+
 }
 
 
 int updateAudio(){
-  return ((int)aSin.next() * smoothed_gain)>>8;
+  return (int)(aSmoothGain.next(target_gain) * aSin.next()) >> 8; // shift back to char precision after multiply
 }
 
 
 void loop(){
   audioHook();
 }
+
 
 
 

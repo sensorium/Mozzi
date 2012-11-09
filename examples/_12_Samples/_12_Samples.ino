@@ -16,9 +16,9 @@
 
 #include <MozziGuts.h>
 #include <Sample.h> // Sample template
-#include <tables/bamboo1_1024_int8.h> // wavetable data
-#include <tables/bamboo2_1024_int8.h> // wavetable data
-#include <tables/bamboo3_2048_int8.h> // wavetable data
+#include <samples/bamboo1/bamboo1_1024_int8.h> // wavetable data
+#include <samples/bamboo1/bamboo2_1024_int8.h> // wavetable data
+#include <samples/bamboo1/bamboo3_2048_int8.h> // wavetable data
 #include <EventDelay.h>
 #include <utils.h> // for xorshift96() random number generator
 
@@ -62,7 +62,7 @@ gains;
 
 void updateControl(){
   if(kTriggerDelay.ready()){
-    switch(byteMod(lowByte(xorshift96()), 3)) {
+    switch(rand(0, 3)) {
     case 0:
       gains.gain1 = randomGain();
       aBamboo1.start();

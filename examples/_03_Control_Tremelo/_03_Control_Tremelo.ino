@@ -3,11 +3,10 @@
  *
  *  Demonstrates audio and control rate updates.
  *  The tremelo oscillator is updated at control rate,
- *  saving processor time by incrementing the gain
- *  2048 times per second (quite a lot!) rather than at the
- *  audio rate of 16384 Hz.  The control rate is set high
- *  to avoid "zipper noise" when changing
- *  the audio gain by steps.
+ *  and a Line is used to interpolate the control updates
+ *  at audio rate, to remove zipper noise.
+ *  A bit contrived and probably less efficient than just 
+ *  using an audio-rate tremelo oscillator, but hey it's a demo!
  *
  *  Circuit: Audio output on digital pin 9.
  *
@@ -20,32 +19,37 @@
 
 #include <MozziGuts.h>
 #include <Oscil.h>
-#include <tables/cos8192_int8.h> // table for Oscils to play
+#include <tables/triangle_valve_2048_int8.h>
+#include <tables/sin2048_int8.h>
+#include <Line.h>
 #include <utils.h> // for mtof
 
-#define CONTROL_RATE 2048 // powers of 2 please
+#define CONTROL_RATE 64 // powers of 2 please
 
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aSig(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kTremelo(COS8192_DATA);
+// audio oscillator
+Oscil<TRIANGLE_VALVE_2048_NUM_CELLS, AUDIO_RATE> aSig(TRIANGLE_VALVE_2048_DATA);
+// control oscillator for tremelo
+Oscil<SIN2048_NUM_CELLS, CONTROL_RATE> kTremelo(SIN2048_DATA);
+// a line to interpolate control tremolo at audio rate
+Line <unsigned int> aGain;
 
-// updated by kTremelo and reused in updateAudio until next control step
-char gain;
 
 void setup(){
+  aSig.setFreq(mtof(65.f));
+  kTremelo.setFreq(5.5f);
   startMozzi(CONTROL_RATE);
-  aSig.setFreq(mtof(60.f));
-  kTremelo.setFreq(3.5f);
+}
+
+void updateControl(){
+  // gain shifted up to give enough range for line's internal steps
+   unsigned int gain = (128u+kTremelo.next())<<8;
+   aGain.set(gain, AUDIO_RATE / CONTROL_RATE);
+}
+
+int updateAudio(){
+  return (((long) aSig.next() * aGain.next()) >> 16); // shifted back to audio range after multiply
 }
 
 void loop(){
   audioHook();
-}
-
-void updateControl(){
-   gain = kTremelo.next();
-}
-
-int updateAudio(){
-  // Mozzi limits output to -244 to 243 range (almost 9 bits)
-  return ((int) aSig.next() * gain) >> 8; // shift back to 8 bit audio output range after multiplying
 }

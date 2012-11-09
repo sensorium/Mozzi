@@ -35,7 +35,7 @@ public:
 	@param update_rate is how frequently you'll check if the EventDelay is ready().
 	This would be CONTROL_RATE if ready() is used simply in updateControl().
 	*/
-	EventDelay(unsigned int update_rate): micros_per_update(1000000/update_rate),counter(0)
+	EventDelay(unsigned int update_rate): counter(0), micros_per_update(1000000/update_rate)
 	{
 		;
 	}

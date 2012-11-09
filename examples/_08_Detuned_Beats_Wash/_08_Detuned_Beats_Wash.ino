@@ -47,6 +47,13 @@ Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos7b(COS8192_DATA);
 Q16n16 f1,f2,f3,f4,f5,f6,f7;
 
 
+Q16n16 variation() {
+  // 32 random bits & with 524287 (b111 1111 1111 1111 1111)
+  // gives between 0-8 in Q16n16 format
+  return  (Q16n16) (xorshift96() & 524287UL);
+}
+
+
 void setup(){
   startMozzi(64); // a literal control rate here
 
@@ -81,13 +88,6 @@ void setup(){
 
 void loop(){
   audioHook();
-}
-
-
-Q16n16 variation() {
-  // 32 random bits & with 524287 (b111 1111 1111 1111 1111)
-  // gives between 0-8 in Q16n16 format
-  return  (Q16n16) (xorshift96() & 524287UL);
 }
 
 

@@ -44,6 +44,14 @@ int rand(int maxval);
 unsigned int rand(unsigned int maxval);
 
 
+
+// hack for Teensy 2 (32u4), pasted from hardware/arduino/variants/leonardo/pins_arduino.h
+#if defined(__AVR_ATmega32U4__)
+//	__AVR_ATmega32U4__ has an unusual mapping of pins to channels
+extern const uint8_t PROGMEM analog_pin_to_channel_PGM[];
+#define analogPinToChannel(P)  ( pgm_read_byte( analog_pin_to_channel_PGM + (P) ) )
+#endif
+
 void setupFastAnalogRead();
 void startAnalogRead(unsigned char pin);
 int receiveAnalogRead();

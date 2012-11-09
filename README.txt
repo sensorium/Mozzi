@@ -1,5 +1,5 @@
 README for Mozzi, a sound synthesis library for Arduino.
-Version 0.01.1l
+Version 0.01.1m
 Tim Barrass 2010-12
 
 
@@ -63,11 +63,12 @@ Those which are currently known to work have an asterix.
 Feedback about others is welcome.
 
 	pin	board
+*	9	Arduino Uno
 *	9	Arduino Duemilanove
 *	9	Arduino Nano
-	9	Arduino Leonardo
+*	9	Arduino Leonardo
 	14	Teensy
-*	25	Teensy++
+*	25	Teensy2++
 	11	Arduino Mega
 	13	Sanguino
 

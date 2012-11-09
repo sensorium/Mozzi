@@ -25,20 +25,14 @@
 #include <util/atomic.h>
 #include "utils.h"
 
-// Interrupts:
-// Timer2 has highest priority (on a 328), but you can't have a flexible interrupt rate as well as pwm.
-// The TimerOne library is more flexible and allows both pwm and interrupts,
-// by using ICR1 for interrupt rate and OCR1A (pin 9) (or OCR1B pin 10) for pwm level
-// So we use Timer1 for audio.
-// Using Timer0 for control, which disables Arduino's time functions
-// but also saves on the interrupts and blocking action of those functions.
-// May add a config option for Using Timer2 instead if needed.
+
+
 
 
 /** @ingroup core
 Sets up the timers for audio and control rate processes. It goes in your
 sketch's setup() routine. startMozzi() starts audio interrupts on Timer 1
-and control interrupts on Timer 2. The audio rate is currently fixed at 16384
+and control interrupts on Timer 0. The audio rate is currently fixed at 16384
 Hz.
 @param control_rate_hz Sets how often updateControl() is called. It can be any
 power of 2 above and including 64. The practical upper limit for control rate
@@ -58,6 +52,9 @@ void startMozzi(unsigned int control_rate_hz)
 	Timer1.attachInterrupt(outputAudio);			// call outputAudio() on each interrupt
 
 	// control
+	// Using Timer0 for control disables Arduino's time functions
+	// but also saves on the interrupts and blocking action of those functions.
+	// May add a config option for Using Timer2 instead if needed.
 	TimerZero::init(1000000/control_rate_hz,updateControl); // set period, attach updateControl()
 	TimerZero::start();
 

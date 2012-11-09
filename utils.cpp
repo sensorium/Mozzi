@@ -107,7 +107,10 @@ unsigned char randomMidi()
 
 
 // moved these out of xorshift96() so xorshift96() can be reseeded manually
-static unsigned long x=123456789, y=362436069, z=521288629;
+static unsigned long x=132456789, y=362436069, z=521288629;
+// static unsigned long x= analogRead(A0)+123456789;
+// static unsigned long y= analogRead(A1)+362436069;
+// static unsigned long z= analogRead(A2)+521288629;
 
 /** @ingroup util
 Initialises Mozzi's (pseudo)random number generator xorshift96(), which is used

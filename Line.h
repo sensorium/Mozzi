@@ -74,7 +74,7 @@ public:
 	inline
 	void set(T targetvalue, T num_steps)
 	{
-		step_size=(T)(((float)(targetvalue-current_value)/num_steps));
+		step_size=(T)((((float)targetvalue-current_value)/num_steps));
 	}
 
 	/** Given a new starting value, target value and the number of steps to take on the way,

@@ -27,6 +27,7 @@
 
 #include "Arduino.h"
 #include "MozziGuts.h"
+#include "fixedMath.h"
 #include <util/atomic.h>
 
 
@@ -208,48 +209,30 @@ public:
 	// char phMod(long phmod_proportion)
 	// {
 	// 	incrementPhase();
-	// 	return (char)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))>>SAMPLE_F_BITS) & (NUM_TABLE_CELLS - 1)));
+	// 	return (char)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))>>SAMPLE_SAMPLE_F_BITS) & (NUM_TABLE_CELLS - 1)));
 	// }
 
-
-	/** Set the frequency using Q24n8 fixed-point number format.
-	This might be faster than the float version for setting low frequencies
-	such as 1.5 Hz, or other values which may not work well with your table
-	size. Note: use with caution because it's prone to overflow with higher
-	frequencies and larger table sizes. An Q24n8 representation of 1.5 is 384
-	(ie. 1.5 * 256).
-	@param frequency in Q24n8 fixed-point number format.
-	*/
-	inline
-	void setFreq_n8(unsigned long frequency)
-	{
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			phase_increment_fractional = ((frequency * NUM_TABLE_CELLS)/UPDATE_RATE) << (SAMPLE_F_BITS-8);
-		}
-	}
 
 
 	/** Set the oscillator frequency with an unsigned int. This is faster than using a
 	float, so it's useful when processor time is tight, but it can be tricky with
 	low and high frequencies, depending on the size of the wavetable being used. If
 	you're not getting the results you expect, try explicitly using a float, or try
-	setFreq_n8.
+	setFreq_Q24n8.
 	@param frequency to play the wave table.
 	*/
 	inline
-	void setFreq(unsigned int frequency)
-	{
+	void setFreq (unsigned int frequency) {
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
-			phase_increment_fractional = (((unsigned long)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) << SAMPLE_F_BITS; // Obvious but slow
+			phase_increment_fractional = ((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)*frequency)/UPDATE_RATE) << (SAMPLE_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS);
 		}
 	}
 
 
-	/** Set the oscillator frequency with a float. Using a float is the most reliable
+	/** Set the sample frequency with a float. Using a float is the most reliable
 	way to set frequencies, -Might- be slower than using an int but you need either
-	this or setFreq_n8 for fractional frequencies.
+	this or setFreq_Q24n8 for fractional frequencies.
 	@param frequency to play the wave table.
 	 */
 	inline
@@ -261,7 +244,27 @@ public:
 		}
 	}
 
-
+	
+	/** Set the frequency using Q24n8 fixed-point number format.
+	This might be faster than the float version for setting low frequencies
+	such as 1.5 Hz, or other values which may not work well with your table
+	size. Note: use with caution because it's prone to overflow with higher
+	frequencies and larger table sizes. An Q24n8 representation of 1.5 is 384
+	(ie. 1.5 * 256).
+	@param frequency in Q24n8 fixed-point number format.
+	*/
+	inline
+	void setFreq_Q24n8(Q24n8 frequency)
+	{
+		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+		{
+			//phase_increment_fractional = (frequency* (NUM_TABLE_CELLS>>3)/(UPDATE_RATE>>6)) << (F_BITS-(8-3+6));
+			phase_increment_fractional = (((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)>>3)*frequency)/(UPDATE_RATE>>6)) 
+				<< (SAMPLE_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS - (8-3+6));
+		}
+	}
+	
+	
 	/**  Returns the sample at the given table index.
 	@param atIndex table index between 0 and the table size.The
 	index rolls back around to 0 if it's larger than the table size.
@@ -306,6 +309,12 @@ public:
 
 private:
 
+	
+	/** Used for shift arithmetic in setFreq() and its variations.
+	*/
+	static const unsigned char ADJUST_FOR_NUM_TABLE_CELLS = (NUM_TABLE_CELLS<2048) ? 8 : 0;
+
+	
 	/** Increments the phase of the oscillator without returning a sample.
 	 */
 	inline

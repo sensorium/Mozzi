@@ -22,17 +22,17 @@
 #include <Sample.h>
 #include <EventDelay.h>
 #include <utils.h> // for rand()
-#include <tables/bamboo/bamboo_00_2048_int8.h> // wavetable data
-#include <tables/bamboo/bamboo_01_2048_int8.h> // wavetable data
-#include <tables/bamboo/bamboo_02_2048_int8.h> // wavetable data
-#include <tables/bamboo/bamboo_03_2048_int8.h> // wavetable data
-#include <tables/bamboo/bamboo_04_2048_int8.h> // wavetable data
-#include <tables/bamboo/bamboo_05_2048_int8.h> // wavetable data
-#include <tables/bamboo/bamboo_06_2048_int8.h> // wavetable data
-#include <tables/bamboo/bamboo_07_2048_int8.h> // wavetable data
-#include <tables/bamboo/bamboo_08_2048_int8.h> // wavetable data
-#include <tables/bamboo/bamboo_09_2048_int8.h> // wavetable data
-#include <tables/bamboo/bamboo_10_2048_int8.h> // wavetable data
+#include <samples/bamboo/bamboo_00_2048_int8.h> // wavetable data
+#include <samples/bamboo/bamboo_01_2048_int8.h> // wavetable data
+#include <samples/bamboo/bamboo_02_2048_int8.h> // wavetable data
+#include <samples/bamboo/bamboo_03_2048_int8.h> // wavetable data
+#include <samples/bamboo/bamboo_04_2048_int8.h> // wavetable data
+#include <samples/bamboo/bamboo_05_2048_int8.h> // wavetable data
+#include <samples/bamboo/bamboo_06_2048_int8.h> // wavetable data
+#include <samples/bamboo/bamboo_07_2048_int8.h> // wavetable data
+#include <samples/bamboo/bamboo_08_2048_int8.h> // wavetable data
+#include <samples/bamboo/bamboo_09_2048_int8.h> // wavetable data
+#include <samples/bamboo/bamboo_10_2048_int8.h> // wavetable data
 
 
 #define CONTROL_RATE 64

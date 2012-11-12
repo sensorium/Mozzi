@@ -2,9 +2,9 @@
  *  using Mozzi sonification library.
  *
  *  Demonstrates modulating the gain of one oscillator
- *  by the instantaneous amplitude of another oscillator,
+ *  by the instantaneous amplitude of another,
  *  shows the use of fixed-point numbers to express fractional
- *  values, random numbers with xorshift96(), and EventDelay()
+ *  values, random numbers with rand(), and EventDelay()
  *  for scheduling.
  *
  *  Circuit: Audio output on digital pin 9.
@@ -28,14 +28,10 @@
 // audio oscils
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCarrier(COS2048_DATA);
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aModulator(COS2048_DATA);
-
-// control oscil
-Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kCarrierFreqSweeper(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aModDepth(COS2048_DATA);
 
 // for scheduling note changes in updateControl()
-EventDelay kChangeNoteDelay(CONTROL_RATE);
-
-unsigned char mod_depth = 256;
+EventDelay kNoteChangeDelay(CONTROL_RATE);
 
 // synthesis parameters in fixed point formats
 Q8n8 ratio; // unsigned int with 8 integer bits and 8 fractional bits
@@ -46,38 +42,70 @@ Q24n8 mod_freq; // unsigned long with 24 integer bits and 8 fractional bits
 Q8n0 octave_start_note = 42;
 
 void setup(){
-  ratio = float_to_Q8n8(2.0f); // define ratio in float and convert to fixed-point
-  kCarrierFreqSweeper.setFreq(0.1f);
-  kChangeNoteDelay.set(200); // note duration ms, within resolution of CONTROL_RATE
-
+  ratio = float_to_Q8n8(3.0f);   // define modulation ratio in float and convert to fixed-point
+  kNoteChangeDelay.set(200); // note duration ms, within resolution of CONTROL_RATE
+  aModDepth.setFreq(13.f);     // vary mod depth to highlight am effects
+  randSeed((unsigned long) analogRead(A0)*analogRead(A1)); // reseed the random generator with some noise
   startMozzi(CONTROL_RATE);
 }
 
 void updateControl(){
-  if(kChangeNoteDelay.ready()){
-    if(lowByte(xorshift96())>200){
-      // change base note of sequence to midi 36 or any of 3 octaves above
-      octave_start_note = ((lowByte(xorshift96())>>6)*12)+36;
+  static Q16n16 last_note = octave_start_note;
+
+  if(kNoteChangeDelay.ready()){
+
+    // change octave now and then
+    if(rand((unsigned char)5)==0){
+      last_note = 36+(rand((unsigned char)6)*12);
     }
-    Q8n0 random0to15 = lowByte(xorshift96())>>4;
-    Q16n16 midi_note = Q8n0_to_Q16n16(octave_start_note+random0to15);
+
+    // change step up or down a semitone occasionally
+    if(rand((unsigned char)13)==0){
+      last_note += 1-rand((unsigned char)3);
+    }
+
+    // change modulation ratio now and then
+    if(rand((unsigned char)5)==0){
+      ratio = ((Q8n8) 1+ rand((unsigned char)5)) <<8;
+    }
+
+    // sometimes add a fractionto the ratio
+    if(rand((unsigned char)5)==0){
+      ratio += rand((unsigned char)255);
+    }
+
+    // step up or down 3 semitones (or 0)
+    last_note += 3 * (1-rand((unsigned char)3));
+
+    // convert midi to frequency
+    Q16n16 midi_note = Q8n0_to_Q16n16(last_note); 
     carrier_freq = Q16n16_to_Q24n8(Q16n16_mtof(midi_note));
+
+    // calculate modulation frequency to stay in ratio with carrier
     mod_freq = (carrier_freq * ratio)>>8; // (Q24n8 * Q8n8) >> 8 = Q24n8
+
+      // set frequencies of the oscillators
     aCarrier.setFreq_Q24n8(carrier_freq);
     aModulator.setFreq_Q24n8(mod_freq);
-    kChangeNoteDelay.start();
+
+    // reset the note scheduler
+    kNoteChangeDelay.start();
   }
 
 
 }
 
 int updateAudio(){
-  int out = ((int)aCarrier.next() * ((unsigned char)128+ aModulator.next()))>>8;
+  long mod = (128u+ aModulator.next()) * ((unsigned char)128+ aModDepth.next());
+  int out = (mod * aCarrier.next())>>16;
   return out;
 }
+
 
 void loop(){
   audioHook();
 }
+
+
 
 

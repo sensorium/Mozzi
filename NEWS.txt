@@ -3,6 +3,11 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1n
+- _03c_AMSynth - more detailed, and far more irritating example.
+
+
+
 Version 0.01.1m
 
 - Oscil - fixed inaccurate results for small table sizes in setFreq().

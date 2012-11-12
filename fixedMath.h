@@ -83,11 +83,12 @@ To convert a number from Qm.n format to floating point:
 #define Q0n7_to_float(a) (((float)(a))/256)		/**<Convert Q0n7 fix to float. @param a is a Q0n7 char*/
 
 #define Q0n8_to_Q1n15(a) (((Q1n15)(a))<<7)		/**<Convert Q0n8 unsigned char to Q1n15 fix. @param a is a Q0n8 unsigned char */
+#define Q0n8_to_Q8n8(a) (((Q8n8)(a))<<8)			/**<Convert Q0n8 unsigned char to Q8n8 fix. @param a is a Q0n8 unsigned char */
 #define Q0n8_to_Q8n24(a) (((Q8n24)(a))<<16)	/**<Convert Q0n8 unsigned char to Q8n24 fix. @param a is a Q0n8 unsigned char */
-#define Q0n8_to_Q24n8(a) ((Q24n8)(a))			/**<Convert Q0n8 unsigned char to Q24n8 fix. @param a is a Q0n8 unsigned char */
+#define Q0n8_to_Q24n8(a) ((Q24n8)(a))				/**<Convert Q0n8 unsigned char to Q24n8 fix. @param a is a Q0n8 unsigned char */
 #define Q0n8_to_Q15n16(a) (((Q15n16)(a))<<8)	/**<Convert Q0n8 unsigned char to Q15n16 fix. @param a is a Q0n8 unsigned char */
 #define Q0n8_to_Q16n16(a) (((Q16n16)(a))<<8)	/**<Convert Q0n8 unsigned char to Q16n16 fix. @param a is a Q0n8 unsigned char */
-#define Q0n8_to_float(a) (((float)(a))/256)			/**<Convert Q0n8 fix to float. @param a is a Q0n8 unsigned char*/
+#define Q0n8_to_float(a) (((float)(a))/256)	/**<Convert Q0n8 fix to float. @param a is a Q0n8 unsigned char*/
 
 #define Q7n0_to_Q7n8(a) (((Q7n8)(a))<<8)			/**<Convert char to Q7n8 fix. @param a is a char*/
 

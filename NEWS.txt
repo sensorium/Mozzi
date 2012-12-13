@@ -4,7 +4,31 @@ NEWS
 
 
 Version 0.01.1n
+
+- EventDelay() 
+	- IMPORTANT! this will break old sketches.
+	
+	  Constructor syntax changed from:
+
+		EventDelay MyEventDelay(UPDATE_RATE);
+		to 
+		EventDelay <UPDATE_RATE> MyEventDelay();
+		
+		The change makes it possible to declare arrays of pointers to EventDelays, eg.
+		EventDelay <CONTROL_RATE> * kStartEnv = new EventDelay<CONTROL_RATE>[NUM_OSCILS];
+		
+	- added start(unsigned int delay_milliseconds), sets and starts the delay in one go.
+		
 - _03c_AMSynth - more detailed, and far more irritating example.
+- hack for Teensy 2 (32u4), pasted from hardware/arduino/variants/leonardo/pins_arduino.h (actually included in previous version)
+- Sample - fixed bug where phase was incrememted even if looping was off and the sample was past the loop point, which caused
+	unintentional looping when phase wrapped.
+- example _07_Control_Oscil_Wash - modified volume controls to range 0-255 instead of centred around 0, tinkered with frequencies.
+- example _08_Detuned_Beats_Wash changed xorshift stuff to rand.
+- AudioDelay() - added option to set delaytime_cells in constructor.
+- AudioDelayFeedback() - added options to set delaytime_cells and feedback_level in constructor.
+- added prime number generator inspired by Inspired by PrimeSieve by Paul Badger 2009 http://playground.arduino.cc/Main/PrimeSieve
+- Line() - fixed some bugs by using ATOMIC_BLOCK and volatile for a variable which could be changed in different interrupts within a sketch.
 
 
 

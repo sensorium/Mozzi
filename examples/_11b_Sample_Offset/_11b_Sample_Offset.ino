@@ -25,7 +25,7 @@
 Sample <HORSE_LIPS_8192_NUM_CELLS, AUDIO_RATE> aSample(HORSE_LIPS_8192_DATA);
 
 // for scheduling audio gain changes
-EventDelay kTriggerDelay(CONTROL_RATE);
+EventDelay <CONTROL_RATE>  kTriggerDelay;
 
 char gain = 1;
 unsigned int offset =0;

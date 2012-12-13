@@ -34,7 +34,7 @@ Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin2(SIN2048_DATA); // sine wave sound so
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aGain(SIN2048_DATA); // to fade audio signal in and out before waveshaping
 
 // for scheduling note changes
-EventDelay kChangeNoteDelay(CONTROL_RATE);
+EventDelay <CONTROL_RATE>  kChangeNoteDelay;
 
 // audio frequency as Q16n16 fractional number
 Q16n16 freq1 = Q8n0_to_Q16n16(300); 

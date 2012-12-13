@@ -175,22 +175,26 @@ public:
 	and the phase overshoots the end of the sample. Updates the phase
 	according to the current frequency.
 	@return the next sample value from the table, or 0 if it's finished playing.
+	@todo in next(), incrementPhase() happens in a different position than for Oscil - check if it can be standardised
 	*/
 	inline
 	char next() // 4us
 	{
-		incrementPhase();
 		char out = 0;
 		if (!looping)
 		{
-			if (phase_fractional<endpos_fractional)
-				out = (char)pgm_read_byte_near(table + (phase_fractional >> SAMPLE_F_BITS));
+			if (phase_fractional<endpos_fractional){
+				out = (char)pgm_read_byte_near(table + (phase_fractional >> SAMPLE_F_BITS)); 
+				incrementPhase();
+			}
 		}
 		else
 		{
 			if (phase_fractional>endpos_fractional)
 				phase_fractional = startpos_fractional + (phase_fractional - endpos_fractional);
+			
 			out = (char)pgm_read_byte_near(table + (phase_fractional >> SAMPLE_F_BITS));
+			incrementPhase();
 		}
 		return out;
 	}

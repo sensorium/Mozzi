@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1m</span>
+   &#160;<span id="projectnumber">alpha 0.01.1n</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -110,10 +110,24 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aea9a4e6210291b6de1120cd218c1fa65"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aea9a4e6210291b6de1120cd218c1fa65"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#aea9a4e6210291b6de1120cd218c1fa65">AudioDelayFeedback</a> ()</td></tr>
 <tr class="memdesc:aea9a4e6210291b6de1120cd218c1fa65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br/></td></tr>
-<tr class="memitem:a4e6f98977e5dbc4c798caa31ac760d76"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a4e6f98977e5dbc4c798caa31ac760d76">next</a> (char in_value, unsigned int delay_cells)</td></tr>
-<tr class="memdesc:a4e6f98977e5dbc4c798caa31ac760d76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay and retrieve the signal in the delay line at the position delay_cells.  <a href="#a4e6f98977e5dbc4c798caa31ac760d76"></a><br/></td></tr>
-<tr class="memitem:a2493a9379eb1127a9bf2d238e45e7325"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a2493a9379eb1127a9bf2d238e45e7325">setFeedbackGain</a> (char gain)</td></tr>
-<tr class="memdesc:a2493a9379eb1127a9bf2d238e45e7325"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the feedback gain.  <a href="#a2493a9379eb1127a9bf2d238e45e7325"></a><br/></td></tr>
+<tr class="memitem:a67f12f1de6fece38cc7017bbb9dad3fa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a67f12f1de6fece38cc7017bbb9dad3fa">AudioDelayFeedback</a> (unsigned int delaytime_cells)</td></tr>
+<tr class="memdesc:a67f12f1de6fece38cc7017bbb9dad3fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a67f12f1de6fece38cc7017bbb9dad3fa"></a><br/></td></tr>
+<tr class="memitem:a8ab093a6c2eb128354bf41da35a0bc1b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a8ab093a6c2eb128354bf41da35a0bc1b">AudioDelayFeedback</a> (unsigned int delaytime_cells, char feedback_level)</td></tr>
+<tr class="memdesc:a8ab093a6c2eb128354bf41da35a0bc1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a8ab093a6c2eb128354bf41da35a0bc1b"></a><br/></td></tr>
+<tr class="memitem:a8402a7a13a08a2876d057abd06f52ea5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a8402a7a13a08a2876d057abd06f52ea5">next</a> (char in_value)</td></tr>
+<tr class="memdesc:a8402a7a13a08a2876d057abd06f52ea5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay and retrieve the signal in the delay line at the position delaytime_cells.  <a href="#a8402a7a13a08a2876d057abd06f52ea5"></a><br/></td></tr>
+<tr class="memitem:a7aa5a3ce6644db1347533555d40192e0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a7aa5a3ce6644db1347533555d40192e0">next</a> (char in_value, unsigned int delaytime_cells)</td></tr>
+<tr class="memdesc:a7aa5a3ce6644db1347533555d40192e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay and retrieve the signal in the delay line at the position delaytime_cells, updating all positions and feedback from the output to the input.  <a href="#a7aa5a3ce6644db1347533555d40192e0"></a><br/></td></tr>
+<tr class="memitem:a9dde51552427eae6df699c43b3a43e44"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a9dde51552427eae6df699c43b3a43e44">write</a> (char in_value)</td></tr>
+<tr class="memdesc:a9dde51552427eae6df699c43b3a43e44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay but don't change the read position or retrieve the output signal.  <a href="#a9dde51552427eae6df699c43b3a43e44"></a><br/></td></tr>
+<tr class="memitem:a8c9b3bfb75aba7a5c27500f5657c149c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a8c9b3bfb75aba7a5c27500f5657c149c">read</a> (unsigned int delaytime_cells)</td></tr>
+<tr class="memdesc:a8c9b3bfb75aba7a5c27500f5657c149c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the signal in the delay line at the position delaytime_cells.  <a href="#a8c9b3bfb75aba7a5c27500f5657c149c"></a><br/></td></tr>
+<tr class="memitem:a084f0b10bd6682cf30b248d5f2c60754"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a084f0b10bd6682cf30b248d5f2c60754">read</a> ()</td></tr>
+<tr class="memdesc:a084f0b10bd6682cf30b248d5f2c60754"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the signal in the delay line at the current delaytime_cells.  <a href="#a084f0b10bd6682cf30b248d5f2c60754"></a><br/></td></tr>
+<tr class="memitem:a61240cea2dbfa6fd0e491c00b59ab63f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a61240cea2dbfa6fd0e491c00b59ab63f">setDelayTimeCells</a> (unsigned int delaytime_cells)</td></tr>
+<tr class="memdesc:a61240cea2dbfa6fd0e491c00b59ab63f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set delay time expressed in samples.  <a href="#a61240cea2dbfa6fd0e491c00b59ab63f"></a><br/></td></tr>
+<tr class="memitem:a0b172d8c45859e0458c13c96cfdae36e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a0b172d8c45859e0458c13c96cfdae36e">setFeedbackLevel</a> (char feedback_level)</td></tr>
+<tr class="memdesc:a0b172d8c45859e0458c13c96cfdae36e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the feedback gain.  <a href="#a0b172d8c45859e0458c13c96cfdae36e"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;unsigned int NUM_BUFFER_SAMPLES&gt;<br/>
@@ -128,24 +142,53 @@ class AudioDelayFeedback&lt; NUM_BUFFER_SAMPLES &gt;</h3>
 </dl>
 
 <p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00018">18</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
-</div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a4e6f98977e5dbc4c798caa31ac760d76"></a>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a67f12f1de6fece38cc7017bbb9dad3fa"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;unsigned int NUM_BUFFER_SAMPLES&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES &gt;::<a class="el" href="class_audio_delay_feedback.html#a4e6f98977e5dbc4c798caa31ac760d76">next</a> </td>
+          <td class="memname"><a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES &gt;::<a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a> </td>
           <td>(</td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>in_value</em>, </td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>delaytime_cells</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delaytime_cells</td><td>delay time expressed in cells. For example, 128 cells delay at AUDIO_RATE would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms Put another way, num_cells = delay_seconds * AUDIO_RATE. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00039">39</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8ab093a6c2eb128354bf41da35a0bc1b"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int NUM_BUFFER_SAMPLES&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES &gt;::<a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a> </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>delaytime_cells</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>delay_cells</em>&#160;</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>feedback_level</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -156,30 +199,183 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Input a value to the delay and retrieve the signal in the delay line at the position delay_cells. </p>
+<p>Constructor. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">in_value</td><td>the signal input. </td></tr>
-    <tr><td class="paramname">delay_cells</td><td>sets the delay time in terms of cells in the delay buffer. </td></tr>
+    <tr><td class="paramname">delaytime_cells</td><td>delay time expressed in cells. For example, 128 cells delay at AUDIO_RATE would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms Put another way, num_cells = delay_seconds * AUDIO_RATE. </td></tr>
+    <tr><td class="paramname">feedback_level</td><td>is the feedback level from -128 to 127 (representing -1 to 1). </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00037">37</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00049">49</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a2493a9379eb1127a9bf2d238e45e7325"></a>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a8402a7a13a08a2876d057abd06f52ea5"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;unsigned int NUM_BUFFER_SAMPLES&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES &gt;::<a class="el" href="class_audio_delay_feedback.html#a2493a9379eb1127a9bf2d238e45e7325">setFeedbackGain</a> </td>
+          <td class="memname">int <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES &gt;::<a class="el" href="class_audio_delay_feedback.html#a8402a7a13a08a2876d057abd06f52ea5">next</a> </td>
           <td>(</td>
           <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>gain</em></td><td>)</td>
+          <td class="paramname"><em>in_value</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Input a value to the delay and retrieve the signal in the delay line at the position delaytime_cells. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in_value</td><td>the signal input. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00058">58</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7aa5a3ce6644db1347533555d40192e0"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int NUM_BUFFER_SAMPLES&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES &gt;::<a class="el" href="class_audio_delay_feedback.html#a8402a7a13a08a2876d057abd06f52ea5">next</a> </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>in_value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>delaytime_cells</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Input a value to the delay and retrieve the signal in the delay line at the position delaytime_cells, updating all positions and feedback from the output to the input. </p>
+<p>This is the simplest way to use <a class="el" href="class_audio_delay_feedback.html#aea9a4e6210291b6de1120cd218c1fa65" title="Constructor.">AudioDelayFeedback()</a>, like an effects box with no extra fancy holes or controls. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in_value</td><td>the signal input. </td></tr>
+    <tr><td class="paramname">delaytime_cells</td><td>indicates the delay time in terms of cells in the delay buffer. It doesn't change the stored internal value of _delaytime_cells. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00080">80</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8c9b3bfb75aba7a5c27500f5657c149c"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int NUM_BUFFER_SAMPLES&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES &gt;::<a class="el" href="class_audio_delay_feedback.html#a8c9b3bfb75aba7a5c27500f5657c149c">read</a> </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>delaytime_cells</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieve the signal in the delay line at the position delaytime_cells. </p>
+<p>It doesn't change the stored internal value of _delaytime_cells or feedback the output to the input. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delaytime_cells</td><td>indicates the delay time in terms of cells in the delay buffer. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00108">108</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a084f0b10bd6682cf30b248d5f2c60754"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int NUM_BUFFER_SAMPLES&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES &gt;::<a class="el" href="class_audio_delay_feedback.html#a8c9b3bfb75aba7a5c27500f5657c149c">read</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieve the signal in the delay line at the current delaytime_cells. </p>
+<p>It doesn't change the stored internal value of _delaytime_cells or feedback the output to the input. </p>
+
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00122">122</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a61240cea2dbfa6fd0e491c00b59ab63f"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int NUM_BUFFER_SAMPLES&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES &gt;::<a class="el" href="class_audio_delay_feedback.html#a61240cea2dbfa6fd0e491c00b59ab63f">setDelayTimeCells</a> </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>delaytime_cells</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set delay time expressed in samples. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delaytime_cells</td><td>delay time expressed in cells, with each cell played per tick of AUDIO_RATE. For example, 128 cells delay at AUDIO_RATE would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms Put another way, num_cells = delay_seconds * AUDIO_RATE. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00138">138</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0b172d8c45859e0458c13c96cfdae36e"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int NUM_BUFFER_SAMPLES&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES &gt;::<a class="el" href="class_audio_delay_feedback.html#a0b172d8c45859e0458c13c96cfdae36e">setFeedbackLevel</a> </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>feedback_level</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
       </table>
@@ -189,12 +385,41 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES&gt; </div>
 <p>Set the feedback gain. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">gain</td><td>is the feedback level from -128 to 127 (representing -1 to 1). </td></tr>
+    <tr><td class="paramname">feedback_level</td><td>is the feedback level from -128 to 127 (representing -1 to 1). </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00053">53</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00148">148</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9dde51552427eae6df699c43b3a43e44"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int NUM_BUFFER_SAMPLES&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES &gt;::<a class="el" href="class_audio_delay_feedback.html#a9dde51552427eae6df699c43b3a43e44">write</a> </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>in_value</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Input a value to the delay but don't change the read position or retrieve the output signal. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in_value</td><td>the signal input. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00097">97</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
@@ -205,7 +430,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 9 2012 22:43:00 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 14 2012 00:15:22 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

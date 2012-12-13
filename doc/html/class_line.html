@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1m</span>
+   &#160;<span id="projectnumber">alpha 0.01.1n</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -113,12 +113,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a413f620b2824c6996b3346ee54351849"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increments one step along the line.  <a href="#a413f620b2824c6996b3346ee54351849"></a><br/></td></tr>
 <tr class="memitem:a6bad32d527e0d931c99e9b72c2a75c80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80">set</a> (T value)</td></tr>
 <tr class="memdesc:a6bad32d527e0d931c99e9b72c2a75c80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the current value of the line.  <a href="#a6bad32d527e0d931c99e9b72c2a75c80"></a><br/></td></tr>
-<tr class="memitem:a7378d526cf07c42c0792868c749dee6e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7378d526cf07c42c0792868c749dee6e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_line.html#a7378d526cf07c42c0792868c749dee6e">set</a> (T targetvalue, T num_steps)</td></tr>
-<tr class="memdesc:a7378d526cf07c42c0792868c749dee6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a target value and the number of steps to take on the way, this calculates the step size needed to get there from the current value. <br/></td></tr>
-<tr class="memitem:a24ad85c17562e97b6823a010a5ba04c6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a24ad85c17562e97b6823a010a5ba04c6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_line.html#a24ad85c17562e97b6823a010a5ba04c6">set</a> (T startvalue, T targetvalue, T num_steps)</td></tr>
-<tr class="memdesc:a24ad85c17562e97b6823a010a5ba04c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a new starting value, target value and the number of steps to take on the way, this sets the step size needed to get there. <br/></td></tr>
+<tr class="memitem:a7378d526cf07c42c0792868c749dee6e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_line.html#a7378d526cf07c42c0792868c749dee6e">set</a> (T targetvalue, T num_steps)</td></tr>
+<tr class="memdesc:a7378d526cf07c42c0792868c749dee6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a target value and the number of steps to take on the way, this calculates the step size needed to get there from the current value.  <a href="#a7378d526cf07c42c0792868c749dee6e"></a><br/></td></tr>
+<tr class="memitem:a24ad85c17562e97b6823a010a5ba04c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_line.html#a24ad85c17562e97b6823a010a5ba04c6">set</a> (T startvalue, T targetvalue, T num_steps)</td></tr>
+<tr class="memdesc:a24ad85c17562e97b6823a010a5ba04c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a new starting value, target value and the number of steps to take on the way, this sets the step size needed to get there.  <a href="#a24ad85c17562e97b6823a010a5ba04c6"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class T&gt;<br/>
@@ -128,12 +126,12 @@ class Line&lt; T &gt;</h3>
 <p>For instance, you can use <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> to make an oscillator glide from one frequency to another, pre-calculating the required phase increments for each end and then letting your <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> change the phase increment with only a simple addition at each step. </p>
 <dl class=""><dt><b>Template Parameters:</b></dt><dd>
   <table class="">
-    <tr><td class="paramname">T</td><td>the type of numbers to use. For example, <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> &lt;int&gt; myline; makes a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> which uses ints. </td></tr>
+    <tr><td class="paramname">T</td><td>the type of numbers to use. For example, <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> &lt;int&gt; myline; makes a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> which uses ints. If <a class="el" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51" title="Constructor.">Line()</a> is initialised to use non-float types (for speed, it's usually good to avoid floats), the internal step_size will get truncated to 0 when it's less than 1, so the <a class="el" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51" title="Constructor.">Line()</a> output won't change. You can fix this with Mozzi's fixed-point number types in <a class="el" href="fixed_math_8h_source.html">fixedMath.h</a>, which enable you to represent fractional numbers. Google "fixed point arithmetic" if this is new to you. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_line_8h_source.html#l00037">37</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+<p>Definition at line <a class="el" href="_line_8h_source.html#l00042">42</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aa6a80df90da15782ca88889ef9c8dd51"></a>
 <div class="memitem">
@@ -154,7 +152,7 @@ template&lt;class T &gt; </div>
 <p>Constructor. </p>
 <p>Use the template parameter to set the type of numbers you want to use. For example, <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> &lt;int&gt; myline; makes a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> which uses ints. </p>
 
-<p>Definition at line <a class="el" href="_line_8h_source.html#l00047">47</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+<p>Definition at line <a class="el" href="_line_8h_source.html#l00052">52</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
 
 </div>
 </div>
@@ -178,7 +176,7 @@ template&lt;class T &gt; </div>
 <p>Increments one step along the line. </p>
 <dl class="section return"><dt>Returns:</dt><dd>the next value. </dd></dl>
 
-<p>Definition at line <a class="el" href="_line_8h_source.html#l00056">56</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+<p>Definition at line <a class="el" href="_line_8h_source.html#l00061">61</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
 
 </div>
 </div>
@@ -201,8 +199,101 @@ template&lt;class T &gt; </div>
 
 <p>Set the current value of the line. </p>
 <p>The <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> will continue incrementing from this value using any previously calculated step size. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>the number to set the <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a>'s current_value to. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_line_8h_source.html#l00066">66</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+<p>Definition at line <a class="el" href="_line_8h_source.html#l00077">77</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7378d526cf07c42c0792868c749dee6e"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_line.html">Line</a>&lt; T &gt;::<a class="el" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80">set</a> </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>targetvalue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>num_steps</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Given a target value and the number of steps to take on the way, this calculates the step size needed to get there from the current value. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">targetvalue</td><td>the value to move towards. </td></tr>
+    <tr><td class="paramname">num_steps</td><td>how many steps to take to reach the target. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_line_8h_source.html#l00093">93</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a24ad85c17562e97b6823a010a5ba04c6"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_line.html">Line</a>&lt; T &gt;::<a class="el" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80">set</a> </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>startvalue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>targetvalue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>num_steps</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Given a new starting value, target value and the number of steps to take on the way, this sets the step size needed to get there. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>the number to set the <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a>'s current_value to. </td></tr>
+    <tr><td class="paramname">targetvalue</td><td>the value to move towards. </td></tr>
+    <tr><td class="paramname">num_steps</td><td>how many steps to take to reach the target. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_line_8h_source.html#l00105">105</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
 
 </div>
 </div>
@@ -213,7 +304,7 @@ template&lt;class T &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 9 2012 22:43:00 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 14 2012 00:15:22 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

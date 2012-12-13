@@ -14,13 +14,13 @@
 
 #include <MozziGuts.h>
 #include <Oscil.h>
-#include <tables/cos8192_int8.h> // table for Oscils to play
+#include <tables/cos2048_int8.h> // table for Oscils to play
 #include <utils.h> // for mtof
 
 #define CONTROL_RATE 64 // powers of 2 please
 
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aVibrato(COS8192_DATA);
+Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCos(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aVibrato(COS2048_DATA);
 
  const long intensity = 300;
 

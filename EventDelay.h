@@ -25,20 +25,25 @@
 
 
 /** A non-blocking replacement for Arduino's delay() function (which is disabled by Mozzi). EventDelay can be
-set() to wait for a number of milliseconds, then after calling start(), calling ready() will return true when the time is up.*/
-
+set() to wait for a number of milliseconds, then after calling start(), calling ready() will return true when the time is up.
+@tparam update_rate is how frequently you'll check if the EventDelay is ready().
+This would be CONTROL_RATE if ready() is used simply in updateControl().
+*/
+template <unsigned int UPDATE_RATE>
 class EventDelay
 {
 
 public:
 	/** Constructor.
-	@param update_rate is how frequently you'll check if the EventDelay is ready().
+	Declare an EventDelay object with UPDATE_RATE template parameter.
+	UPDATE_RATE is how frequently you'll check if the EventDelay is ready().
 	This would be CONTROL_RATE if ready() is used simply in updateControl().
 	*/
-	EventDelay(unsigned int update_rate): counter(0), micros_per_update(1000000/update_rate)
+	EventDelay(): counter(0), micros_per_update(1000000/UPDATE_RATE)
 	{
 		;
-	}
+	}	
+	
 
 	/** Set the delay time.  This setting is persistent, until you change it by using set() again.
 	@param delay_milliseconds delay time in milliseconds.
@@ -55,6 +60,17 @@ public:
 	inline
 	void start()
 	{
+		counter = counter_start_value;
+	}
+	
+	
+	/** Set the delay time and start the delay.
+	@param delay_milliseconds delay time in milliseconds.
+	*/
+	inline
+	void start(unsigned int delay_milliseconds)
+	{
+		set(delay_milliseconds);
 		counter = counter_start_value;
 	}
 

@@ -59,16 +59,19 @@ to with a sound program like Audacity. Try some examples from the
 File > Examples > Mozzi menu.
 
 * Below is a list of the pins Mozzi uses for audio out on different boards.
-Those which are currently known to work have an asterix.
+Those which have been tested and reported to work have an asterix.
 Feedback about others is welcome.
 
 	pin	board
-*	9	Arduino Uno
-*	9	Arduino Duemilanove
-*	9	Arduino Nano
-*	9	Arduino Leonardo
+*	 9	Arduino Uno
+*	 9	Arduino Duemilanove
+*	 9	Arduino Nano
+*	 9	Arduino Leonardo
+*	 9  Ardweeny
+*	11  Freetronics EtherMega (doesn't load tables bigger than 1024 bytes)
 	14	Teensy
-*	25	Teensy2++
+*	B5  Teensy2
+*	B5(25) Teensy2++
 	11	Arduino Mega
 	13	Sanguino
 

@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1m</span>
+   &#160;<span id="projectnumber">alpha 0.01.1n</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -147,7 +147,7 @@ Functions</h2></td></tr>
 <p>This is the maximum sample resolution. </p>
 <p>8 bit (ie. 256) is usually fine but there might be times where the extra headroom is useful. Use powers of two in audio calculations and use right shifts for divisions where possible. Also, in tests while writing Mozzi, shifts on byte boundaries seem to work fastest. For example, &gt;&gt; 8 is faster than &gt;&gt; 4. Test your timings where possible, using an oscilloscope. To test timing, include <a class="el" href="utils_8h_source.html">utils.h</a> in your sketch, put SET_PIN13_OUT in setup(), then SET_PIN13_HIGH and SET_PIN13_LOW around your test code (see <a href="group__util.html">Mozzi utility functions</a>). </p>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00103">103</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00108">108</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -164,8 +164,9 @@ Functions</h2></td></tr>
 
 <p>AUDIO_RATE is fixed at 16384 Hz for now. </p>
 <p>This is a compromise between the sample rate (interrupt rate) and sample bitdepth (pwm width), which are interdependent due to the way pulse wave modulation is used to generate the sound output. With the AUDIO_RATE at 16384, the sample resolution is 488, which provides some headroom above the 8bit table resolution currently used by the oscillators. You can look at the TimerOne library for more info about how interrupt rate and pwm resolution relate. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>Possible option for output to R/2R DAC circuit, like <a href="http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/">http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/</a> This would limit dynamic range to 8 bit, but would remove the 16384Hz pwm carrier frequency noise which can be a problem in some applications, requiring filtering to remove (see the Mozzi wiki for filter schematics). </dd></dl>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00085">85</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00090">90</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -238,8 +239,6 @@ Functions</h2></td></tr>
 <p><a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio()</a> has to keep up with the AUDIO_RATE of 16384 Hz, so to keep things running smoothly, avoid doing any calculations here which could be done in setup() or <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>. </p>
 <dl class="section return"><dt>Returns:</dt><dd>an audio sample, between -244 and 243 inclusive. </dd></dl>
 
-<p>Definition at line <a class="el" href="__02b___f_msynth_8cpp_source.html#l00109">109</a> of file <a class="el" href="__02b___f_msynth_8cpp_source.html">_02b_FMsynth.cpp</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="ga59d187b915b2e366c88489e52801951a"></a>
@@ -259,15 +258,13 @@ Functions</h2></td></tr>
 <p>This is where you put your control code. </p>
 <p>You need <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> somewhere in your sketch, even if it's empty. <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> is called at the control rate you set in <a class="el" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573" title="Sets up the timers for audio and control rate processes.">startMozzi()</a>. To save processor load, avoid any calculations here which could be done in setup(). </p>
 
-<p>Definition at line <a class="el" href="__02b___f_msynth_8cpp_source.html#l00079">79</a> of file <a class="el" href="__02b___f_msynth_8cpp_source.html">_02b_FMsynth.cpp</a>.</p>
-
 </div>
 </div>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 9 2012 22:43:00 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 14 2012 00:15:22 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

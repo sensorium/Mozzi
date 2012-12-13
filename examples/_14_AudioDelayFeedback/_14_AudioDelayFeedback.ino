@@ -31,7 +31,7 @@ void setup(){
   startMozzi(CONTROL_RATE);
   aTriangle.setFreq(mtof(48.f));
   kDelSamps.setFreq(.163f);
-  aDel.setFeedbackGain(-101);
+  aDel.setFeedbackLevel(-101);
 }
 
 void loop(){

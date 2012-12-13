@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1m</span>
+   &#160;<span id="projectnumber">alpha 0.01.1n</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -110,8 +110,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7bce7bdebe504936c83c1a866968416b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7bce7bdebe504936c83c1a866968416b"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay.html#a7bce7bdebe504936c83c1a866968416b">AudioDelay</a> ()</td></tr>
 <tr class="memdesc:a7bce7bdebe504936c83c1a866968416b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br/></td></tr>
-<tr class="memitem:aefbd7401ae75f64c072a73b82b0e1ead"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay.html#aefbd7401ae75f64c072a73b82b0e1ead">next</a> (char in_value, unsigned int delay_cells)</td></tr>
-<tr class="memdesc:aefbd7401ae75f64c072a73b82b0e1ead"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay and retrieve the signal in the delay line at the position delay_cells.  <a href="#aefbd7401ae75f64c072a73b82b0e1ead"></a><br/></td></tr>
+<tr class="memitem:a14760742100d03313891f67fe65aec34"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay.html#a14760742100d03313891f67fe65aec34">AudioDelay</a> (unsigned int delaytime_cells)</td></tr>
+<tr class="memdesc:a14760742100d03313891f67fe65aec34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a14760742100d03313891f67fe65aec34"></a><br/></td></tr>
+<tr class="memitem:ab0f3309a47352d3514a7a0b614670210"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay.html#ab0f3309a47352d3514a7a0b614670210">next</a> (char in_value, unsigned int delaytime_cells)</td></tr>
+<tr class="memdesc:ab0f3309a47352d3514a7a0b614670210"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay and retrieve the signal in the delay line at the position delaytime_cells.  <a href="#ab0f3309a47352d3514a7a0b614670210"></a><br/></td></tr>
+<tr class="memitem:a0013f640df2b64cfdb6807343e27ae5c"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay.html#a0013f640df2b64cfdb6807343e27ae5c">next</a> (char in_value)</td></tr>
+<tr class="memdesc:a0013f640df2b64cfdb6807343e27ae5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay and retrieve the signal in the delay line at the position delaytime_cells.  <a href="#a0013f640df2b64cfdb6807343e27ae5c"></a><br/></td></tr>
+<tr class="memitem:a1aa369072df78e96cd2c7c33a4f53a5f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1aa369072df78e96cd2c7c33a4f53a5f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set</b> (unsigned int delaytime_cells)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;unsigned int NUM_BUFFER_SAMPLES&gt;<br/>
@@ -120,21 +126,51 @@ class AudioDelay&lt; NUM_BUFFER_SAMPLES &gt;</h3>
 <p>Audio delay line for comb filter, flange, chorus and short echo effects. </p>
 <dl class=""><dt><b>Template Parameters:</b></dt><dd>
   <table class="">
-    <tr><td class="paramname">NUM_BUFFER_SAMPLES</td><td>is the length of the delay buffer in samples. This should be a power of two. The largest delay you'll fit in an atmega328 will be 512 cells, which at 16384 Hz sample rate is 31 milliseconds. More of a flanger or a doubler than an echo. This version doesn't have feedback, for that use <a class="el" href="class_audio_delay_feedback.html" title="Audio delay line with feedback for comb filter, flange, chorus and short echo effects.">AudioDelayFeedback</a> instead. </td></tr>
+    <tr><td class="paramname">NUM_BUFFER_SAMPLES</td><td>is the length of the delay buffer in samples. This should be a power of two. The largest delay you'll fit in an atmega328 will be 512 cells, which at 16384 Hz sample rate is 31 milliseconds. More of a flanger or a doubler than an echo. THe amount of memory for delays on other chips will vary. <a class="el" href="class_audio_delay.html#a7bce7bdebe504936c83c1a866968416b" title="Constructor.">AudioDelay()</a> doesn't have feedback. If you want feedback, use AudioDelayFeedback(). </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00036">36</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
-</div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="aefbd7401ae75f64c072a73b82b0e1ead"></a>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a14760742100d03313891f67fe65aec34"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;unsigned int NUM_BUFFER_SAMPLES&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">char <a class="el" href="class_audio_delay.html">AudioDelay</a>&lt; NUM_BUFFER_SAMPLES &gt;::<a class="el" href="class_audio_delay.html#aefbd7401ae75f64c072a73b82b0e1ead">next</a> </td>
+          <td class="memname"><a class="el" href="class_audio_delay.html">AudioDelay</a>&lt; NUM_BUFFER_SAMPLES &gt;::<a class="el" href="class_audio_delay.html">AudioDelay</a> </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>delaytime_cells</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delay</td><td>time expressed in cells. For example, 128 cells delay at AUDIO_RATE would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms Put another way, num_cells = delay_seconds * AUDIO_RATE. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00058">58</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="ab0f3309a47352d3514a7a0b614670210"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int NUM_BUFFER_SAMPLES&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">char <a class="el" href="class_audio_delay.html">AudioDelay</a>&lt; NUM_BUFFER_SAMPLES &gt;::<a class="el" href="class_audio_delay.html#ab0f3309a47352d3514a7a0b614670210">next</a> </td>
           <td>(</td>
           <td class="paramtype">char&#160;</td>
           <td class="paramname"><em>in_value</em>, </td>
@@ -143,7 +179,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>delay_cells</em>&#160;</td>
+          <td class="paramname"><em>delaytime_cells</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -154,16 +190,45 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Input a value to the delay and retrieve the signal in the delay line at the position delay_cells. </p>
+<p>Input a value to the delay and retrieve the signal in the delay line at the position delaytime_cells. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">in_value</td><td>the signal input. </td></tr>
-    <tr><td class="paramname">delay_cells</td><td>sets the delay time in terms of cells in the delay buffer. </td></tr>
+    <tr><td class="paramname">delaytime_cells</td><td>sets the delay time in terms of cells in the delay buffer. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00057">57</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
+<p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00068">68</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0013f640df2b64cfdb6807343e27ae5c"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int NUM_BUFFER_SAMPLES&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">char <a class="el" href="class_audio_delay.html">AudioDelay</a>&lt; NUM_BUFFER_SAMPLES &gt;::<a class="el" href="class_audio_delay.html#ab0f3309a47352d3514a7a0b614670210">next</a> </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>in_value</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Input a value to the delay and retrieve the signal in the delay line at the position delaytime_cells. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in_value</td><td>the signal input. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00086">86</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
 
 </div>
 </div>
@@ -174,7 +239,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 9 2012 22:43:00 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 14 2012 00:15:22 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

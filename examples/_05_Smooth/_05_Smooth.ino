@@ -26,11 +26,11 @@
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
 // for scheduling audio gain changes
-EventDelay kGainChangeDelay(CONTROL_RATE);
+EventDelay <CONTROL_RATE>  kGainChangeDelay;
 const unsigned int gainChangeMsec = 200;
 
 //  for scheduling turning smoothing on and off
-EventDelay kSmoothOnOff(CONTROL_RATE);
+EventDelay <CONTROL_RATE>  kSmoothOnOff;
 const unsigned int smoothOnOffMsec = 2000;
 
 float smoothness = 0.9975f;

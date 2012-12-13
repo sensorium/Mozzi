@@ -28,7 +28,7 @@
 Sample <ABOMB_NUM_CELLS, AUDIO_RATE> aSample(ABOMB_DATA);
 
 // for scheduling changes
-EventDelay kTriggerDelay(CONTROL_RATE);
+EventDelay <CONTROL_RATE>  kTriggerDelay;
 
 unsigned int gain;
 

@@ -32,7 +32,7 @@ Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin3(SIN2048_DATA); // no audible improve
 Oscil <SIN4096_NUM_CELLS, AUDIO_RATE> aSin4(SIN4096_DATA); // for 45 year old loud sound damaged ears
 Oscil <SIN8192_NUM_CELLS, AUDIO_RATE> aSin5(SIN8192_DATA);
 
-EventDelay kWhoseTurnDelay(CONTROL_RATE);
+EventDelay <CONTROL_RATE>  kWhoseTurnDelay;
 
 const unsigned char NUM_OSCILS = 6;
 unsigned char gain[NUM_OSCILS] = {0,0,0,0,0,0}; // gain for each oscil

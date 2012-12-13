@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1m</span>
+   &#160;<span id="projectnumber">alpha 0.01.1n</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -104,255 +104,291 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00016"></a>00016                 <span class="keywordflow">return</span> 8.1757989156 * pow(2.0, midival/12.0);
 <a name="l00017"></a>00017 }
 <a name="l00018"></a>00018 
-<a name="l00019"></a>00019 
-<a name="l00020"></a>00020 <span class="comment">// static Q16n16 Q16n16_m2f(float midival)</span>
-<a name="l00021"></a>00021 <span class="comment">// {</span>
-<a name="l00022"></a>00022 <span class="comment">//              return float_to_Q16n16(mtof(midival));</span>
-<a name="l00023"></a>00023 <span class="comment">// }</span>
-<a name="l00024"></a>00024 
-<a name="l00025"></a>00025 <span class="comment">//static const Q16n16 __attribute__((progmem)) midiToFreq[128] =</span>
-<a name="l00026"></a>00026 <span class="comment">// {</span>
-<a name="l00027"></a>00027 <span class="comment">//         Q16n16_m2f(0), Q16n16_m2f(1), Q16n16_m2f(2),Q16n16_m2f(3), Q16n16_m2f(4), Q16n16_m2f(5), Q16n16_m2f(6), Q16n16_m2f(7),</span>
-<a name="l00028"></a>00028 <span class="comment">//         Q16n16_m2f(8),Q16n16_m2f(9), Q16n16_m2f(10), Q16n16_m2f(11), Q16n16_m2f(12), Q16n16_m2f(13), Q16n16_m2f(14), Q16n16_m2f(15),</span>
-<a name="l00029"></a>00029 <span class="comment">//         Q16n16_m2f(16), Q16n16_m2f(17), Q16n16_m2f(18), Q16n16_m2f(19), Q16n16_m2f(20), Q16n16_m2f(21), Q16n16_m2f(22), Q16n16_m2f(23),</span>
-<a name="l00030"></a>00030 <span class="comment">//         Q16n16_m2f(24), Q16n16_m2f(25), Q16n16_m2f(26), Q16n16_m2f(27), Q16n16_m2f(28), Q16n16_m2f(29), Q16n16_m2f(30), Q16n16_m2f(31),</span>
-<a name="l00031"></a>00031 <span class="comment">//         Q16n16_m2f(32), Q16n16_m2f(33), Q16n16_m2f(34), Q16n16_m2f(35), Q16n16_m2f(36), Q16n16_m2f(37), Q16n16_m2f(38), Q16n16_m2f(39),</span>
-<a name="l00032"></a>00032 <span class="comment">//         Q16n16_m2f(40), Q16n16_m2f(41), Q16n16_m2f(42), Q16n16_m2f(43), Q16n16_m2f(44), Q16n16_m2f(45), Q16n16_m2f(46), Q16n16_m2f(47),</span>
-<a name="l00033"></a>00033 <span class="comment">//         Q16n16_m2f(48), Q16n16_m2f(49), Q16n16_m2f(50), Q16n16_m2f(51), Q16n16_m2f(52), Q16n16_m2f(53), Q16n16_m2f(54), Q16n16_m2f(55),</span>
-<a name="l00034"></a>00034 <span class="comment">//         Q16n16_m2f(56), Q16n16_m2f(57), Q16n16_m2f(58), Q16n16_m2f(59), Q16n16_m2f(60), Q16n16_m2f(61), Q16n16_m2f(62), Q16n16_m2f(63),</span>
-<a name="l00035"></a>00035 <span class="comment">//         Q16n16_m2f(64), Q16n16_m2f(65), Q16n16_m2f(66), Q16n16_m2f(67), Q16n16_m2f(68), Q16n16_m2f(69), Q16n16_m2f(70), Q16n16_m2f(71),</span>
-<a name="l00036"></a>00036 <span class="comment">//         Q16n16_m2f(72), Q16n16_m2f(73), Q16n16_m2f(74), Q16n16_m2f(75), Q16n16_m2f(76), Q16n16_m2f(77), Q16n16_m2f(78), Q16n16_m2f(79),</span>
-<a name="l00037"></a>00037 <span class="comment">//         Q16n16_m2f(80), Q16n16_m2f(81), Q16n16_m2f(82), Q16n16_m2f(83), Q16n16_m2f(84), Q16n16_m2f(85), Q16n16_m2f(86), Q16n16_m2f(87),</span>
-<a name="l00038"></a>00038 <span class="comment">//         Q16n16_m2f(88), Q16n16_m2f(89), Q16n16_m2f(90), Q16n16_m2f(91), Q16n16_m2f(92), Q16n16_m2f(93), Q16n16_m2f(94), Q16n16_m2f(95),</span>
-<a name="l00039"></a>00039 <span class="comment">//         Q16n16_m2f(96),Q16n16_m2f(97), Q16n16_m2f(98), Q16n16_m2f(99), Q16n16_m2f(100), Q16n16_m2f(101), Q16n16_m2f(102), Q16n16_m2f(103),</span>
-<a name="l00040"></a>00040 <span class="comment">//         Q16n16_m2f(104),Q16n16_m2f(105), Q16n16_m2f(106), Q16n16_m2f(107), Q16n16_m2f(108), Q16n16_m2f(109), Q16n16_m2f(110), Q16n16_m2f(111),</span>
-<a name="l00041"></a>00041 <span class="comment">//         Q16n16_m2f(112),Q16n16_m2f(113), Q16n16_m2f(114), Q16n16_m2f(115), Q16n16_m2f(116), Q16n16_m2f(117), Q16n16_m2f(118), Q16n16_m2f(119),</span>
-<a name="l00042"></a>00042 <span class="comment">//         Q16n16_m2f(120), Q16n16_m2f(121), Q16n16_m2f(122), Q16n16_m2f(123), Q16n16_m2f(124), Q16n16_m2f(125), Q16n16_m2f(126), Q16n16_m2f(127)</span>
-<a name="l00043"></a>00043 <span class="comment">// };</span>
-<a name="l00044"></a>00044 
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046 <span class="keyword">static</span> <span class="keyword">const</span> uint32_t __attribute__((progmem)) midiToFreq[128] =
-<a name="l00047"></a>00047         {
-<a name="l00048"></a>00048                 535809, 567670, 601425, 637188, 675077, 715219, 757748, 802806, 850544, 901120,
-<a name="l00049"></a>00049                 954703, 1011473, 1071618, 1135340, 1202851, 1274376, 1350154, 1430438, 1515497,
-<a name="l00050"></a>00050                 1605613, 1701088, 1802240, 1909406, 2022946, 2143236, 2270680, 2405702, 2548752,
-<a name="l00051"></a>00051                 2700309, 2860877, 3030994, 3211226, 3402176, 3604479, 3818813, 4045892, 4286472,
-<a name="l00052"></a>00052                 4541359, 4811404, 5097504, 5400618, 5721756, 6061988, 6422452, 6804352, 7208959,
-<a name="l00053"></a>00053                 7637627, 8091785, 8572945, 9082719, 9622808, 10195009, 10801235, 11443507,
-<a name="l00054"></a>00054                 12123974, 12844905, 13608704, 14417917, 15275252, 16183563, 17145888, 18165438,
-<a name="l00055"></a>00055                 19245616, 20390018, 21602470, 22887014, 24247948, 25689810, 27217408, 28835834,
-<a name="l00056"></a>00056                 30550514, 32367136, 34291776, 36330876, 38491212, 40780036, 43204940, 45774028,
-<a name="l00057"></a>00057                 48495912, 51379620, 54434816, 57671668, 61101028, 64734272, 68583552, 72661752,
-<a name="l00058"></a>00058                 76982424, 81560072, 86409880, 91548056, 96991792, 102759240, 108869632,
-<a name="l00059"></a>00059                 115343336, 122202056, 129468544, 137167104, 145323504, 153964848, 163120144,
-<a name="l00060"></a>00060                 172819760, 183096224, 193983648, 205518336, 217739200, 230686576, 244403840,
-<a name="l00061"></a>00061                 258937008, 274334112, 290647008, 307929696, 326240288, 345639520, 366192448,
-<a name="l00062"></a>00062                 387967040, 411036672, 435478400, 461373152, 488807680, 517874016, 548668224,
-<a name="l00063"></a>00063                 581294016, 615859392, 652480576, 691279040, 732384896, 775934592, 822073344
-<a name="l00064"></a>00064         };
-<a name="l00065"></a>00065 
-<a name="l00078"></a><a class="code" href="group__util.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2">00078</a> <a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a>  <a class="code" href="group__util.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2" title="Converts midi note number to frequency.">Q16n16_mtof</a>(<a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> midival_fractional)
-<a name="l00079"></a>00079 {
-<a name="l00080"></a>00080                 <a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> diff_fraction;
-<a name="l00081"></a>00081                 <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> index = midival_fractional &gt;&gt; 16;
-<a name="l00082"></a>00082                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> fraction = (<span class="keywordtype">unsigned</span> int) midival_fractional; <span class="comment">// keeps low word</span>
-<a name="l00083"></a>00083                 <a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> freq1 = (<a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a>) pgm_read_dword(midiToFreq + index);
-<a name="l00084"></a>00084                 <a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> freq2 = (<a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a>) pgm_read_dword(midiToFreq + (index+1));
-<a name="l00085"></a>00085                 <a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> difference = freq2 - freq1;
-<a name="l00086"></a>00086                 <span class="keywordflow">if</span> (difference&gt;=65536)
-<a name="l00087"></a>00087                 {
-<a name="l00088"></a>00088                                 diff_fraction = ((difference&gt;&gt;8) * fraction) &gt;&gt; 8;
-<a name="l00089"></a>00089                 }
-<a name="l00090"></a>00090                 <span class="keywordflow">else</span>
-<a name="l00091"></a>00091                 {
-<a name="l00092"></a>00092                                 diff_fraction = (difference * fraction) &gt;&gt; 16;
-<a name="l00093"></a>00093                 }
-<a name="l00094"></a>00094                 <span class="keywordflow">return</span> (<a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a>) (freq1+ diff_fraction);
-<a name="l00095"></a>00095 }
-<a name="l00096"></a>00096 
-<a name="l00097"></a>00097 
-<a name="l00098"></a>00098 
-<a name="l00103"></a><a class="code" href="group__util.html#ga9884e17c95a10e988e90d60c9f3aab2b">00103</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="group__util.html#ga9884e17c95a10e988e90d60c9f3aab2b" title="Generates a random number in the range for midi notes.">randomMidi</a>()
-<a name="l00104"></a>00104 {
-<a name="l00105"></a>00105                 <span class="keywordflow">return</span> lowByte(<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>())&gt;&gt;1;
-<a name="l00106"></a>00106 }
-<a name="l00107"></a>00107 
-<a name="l00108"></a>00108 
-<a name="l00109"></a>00109 <span class="comment">// moved these out of xorshift96() so xorshift96() can be reseeded manually</span>
-<a name="l00110"></a>00110 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> x=132456789, y=362436069, z=521288629;
-<a name="l00111"></a>00111 <span class="comment">// static unsigned long x= analogRead(A0)+123456789;</span>
-<a name="l00112"></a>00112 <span class="comment">// static unsigned long y= analogRead(A1)+362436069;</span>
-<a name="l00113"></a>00113 <span class="comment">// static unsigned long z= analogRead(A2)+521288629;</span>
-<a name="l00114"></a>00114 
-<a name="l00124"></a><a class="code" href="group__util.html#ga8a9592250ee294a64c6d133e20520651">00124</a> <span class="keywordtype">void</span> <a class="code" href="group__util.html#ga8a9592250ee294a64c6d133e20520651" title="Initialises Mozzi&#39;s (pseudo)random number generator xorshift96(), which is used in Mozzi&#39;s rand() fun...">randSeed</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed)
-<a name="l00125"></a>00125 {
-<a name="l00126"></a>00126                 x=seed;
-<a name="l00127"></a>00127 }
-<a name="l00128"></a>00128 
-<a name="l00129"></a>00129 
-<a name="l00137"></a><a class="code" href="group__util.html#ga34956c2687a09ae6e3e7b9e632a09f18">00137</a> <span class="keywordtype">void</span> <a class="code" href="group__util.html#ga34956c2687a09ae6e3e7b9e632a09f18" title="Initialises Mozzi&#39;s (pseudo)random number generator xorshift96().">xorshiftSeed</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed)
-<a name="l00138"></a>00138 {
-<a name="l00139"></a>00139                 x=seed;
-<a name="l00140"></a>00140 }
-<a name="l00141"></a>00141 
-<a name="l00142"></a>00142 
-<a name="l00150"></a>00150 <span class="comment">// Based on Marsaglia, George. (2003). Xorshift RNGs. http://www.jstatsoft.org/v08/i14/xorshift.pdf</span>
-<a name="l00151"></a><a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6">00151</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()
-<a name="l00152"></a>00152 {          <span class="comment">//period 2^96-1</span>
-<a name="l00153"></a>00153                 <span class="comment">// static unsigned long x=123456789, y=362436069, z=521288629;</span>
-<a name="l00154"></a>00154                 <span class="comment">//static unsigned long x=123456789, y=362436069, z=analogRead(0);</span>
-<a name="l00155"></a>00155                 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> t;
-<a name="l00156"></a>00156 
-<a name="l00157"></a>00157                 x ^= x &lt;&lt; 16;
-<a name="l00158"></a>00158                 x ^= x &gt;&gt; 5;
-<a name="l00159"></a>00159                 x ^= x &lt;&lt; 1;
-<a name="l00160"></a>00160 
-<a name="l00161"></a>00161                 t = x;
-<a name="l00162"></a>00162                 x = y;
-<a name="l00163"></a>00163                 y = z;
-<a name="l00164"></a>00164                 z = t ^ x ^ y;
+<a name="l00019"></a>00019 <span class="keyword">static</span> <span class="keywordtype">float</span> ucmtof(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> midival)
+<a name="l00020"></a>00020 {
+<a name="l00021"></a>00021                 <span class="keywordflow">return</span> 8.1757989156 * pow(2.0, (<span class="keywordtype">float</span>)midival/12.0);
+<a name="l00022"></a>00022 }
+<a name="l00023"></a>00023 
+<a name="l00024"></a>00024 <span class="comment">// static const float __attribute__(()) fmidiToFreq[128] =</span>
+<a name="l00025"></a>00025  <span class="comment">// {</span>
+<a name="l00026"></a>00026          <span class="comment">// ucmtof(0), ucmtof(1), ucmtof(2),ucmtof(3), ucmtof(4), ucmtof(5), ucmtof(6), ucmtof(7),</span>
+<a name="l00027"></a>00027          <span class="comment">// ucmtof(8),ucmtof(9), ucmtof(10), ucmtof(11), ucmtof(12), ucmtof(13), ucmtof(14), ucmtof(15),</span>
+<a name="l00028"></a>00028          <span class="comment">// ucmtof(16), ucmtof(17), ucmtof(18), ucmtof(19), ucmtof(20), ucmtof(21), ucmtof(22), ucmtof(23),</span>
+<a name="l00029"></a>00029          <span class="comment">// ucmtof(24), ucmtof(25), ucmtof(26), ucmtof(27), ucmtof(28), ucmtof(29), ucmtof(30), ucmtof(31),</span>
+<a name="l00030"></a>00030          <span class="comment">// ucmtof(32), ucmtof(33), ucmtof(34), ucmtof(35), ucmtof(36), ucmtof(37), ucmtof(38), ucmtof(39),</span>
+<a name="l00031"></a>00031          <span class="comment">// ucmtof(40), ucmtof(41), ucmtof(42), ucmtof(43), ucmtof(44), ucmtof(45), ucmtof(46), ucmtof(47),</span>
+<a name="l00032"></a>00032          <span class="comment">// ucmtof(48), ucmtof(49), ucmtof(50), ucmtof(51), ucmtof(52), ucmtof(53), ucmtof(54), ucmtof(55),</span>
+<a name="l00033"></a>00033          <span class="comment">// ucmtof(56), ucmtof(57), ucmtof(58), ucmtof(59), ucmtof(60), ucmtof(61), ucmtof(62), ucmtof(63),</span>
+<a name="l00034"></a>00034          <span class="comment">// ucmtof(64), ucmtof(65), ucmtof(66), ucmtof(67), ucmtof(68), ucmtof(69), ucmtof(70), ucmtof(71),</span>
+<a name="l00035"></a>00035          <span class="comment">// ucmtof(72), ucmtof(73), ucmtof(74), ucmtof(75), ucmtof(76), ucmtof(77), ucmtof(78), ucmtof(79),</span>
+<a name="l00036"></a>00036          <span class="comment">// ucmtof(80), ucmtof(81), ucmtof(82), ucmtof(83), ucmtof(84), ucmtof(85), ucmtof(86), ucmtof(87),</span>
+<a name="l00037"></a>00037          <span class="comment">// ucmtof(88), ucmtof(89), ucmtof(90), ucmtof(91), ucmtof(92), ucmtof(93), ucmtof(94), ucmtof(95),</span>
+<a name="l00038"></a>00038          <span class="comment">// ucmtof(96),ucmtof(97), ucmtof(98), ucmtof(99), ucmtof(100), ucmtof(101), ucmtof(102), ucmtof(103),</span>
+<a name="l00039"></a>00039          <span class="comment">// ucmtof(104),ucmtof(105), ucmtof(106), ucmtof(107), ucmtof(108), ucmtof(109), ucmtof(110), ucmtof(111),</span>
+<a name="l00040"></a>00040          <span class="comment">// ucmtof(112),ucmtof(113), ucmtof(114), ucmtof(115), ucmtof(116), ucmtof(117), ucmtof(118), ucmtof(119),</span>
+<a name="l00041"></a>00041          <span class="comment">// ucmtof(120), ucmtof(121), ucmtof(122), ucmtof(123), ucmtof(124), ucmtof(125), ucmtof(126), ucmtof(127)</span>
+<a name="l00042"></a>00042  <span class="comment">// };</span>
+<a name="l00043"></a>00043 <span class="comment">// </span>
+<a name="l00044"></a>00044  <span class="comment">// /** @ingroup util</span>
+<a name="l00045"></a>00045 <span class="comment">// Converts midi note number to frequency.  Fast, but only accepts whole note values, no fractions.</span>
+<a name="l00046"></a>00046 <span class="comment">// @param midival a midi note number.  Unlike the mtof object in Pd, midi values can have fractions.  Use mtof() or </span>
+<a name="l00047"></a>00047 <span class="comment">// Q16n16_mtof() if you want to convert fractional midi values.</span>
+<a name="l00048"></a>00048 <span class="comment">// @return the frequency represented by the input midi note number.</span>
+<a name="l00049"></a>00049 <span class="comment">// @todo hard-code fmidiToFreq table instead of generating at startup, and add an interpolating m2f which returns a float.</span>
+<a name="l00050"></a>00050 <span class="comment">// */</span>
+<a name="l00051"></a>00051 <span class="comment">// float m2f(unsigned char midival)</span>
+<a name="l00052"></a>00052 <span class="comment">// {</span>
+<a name="l00053"></a>00053                 <span class="comment">// return (float) pgm_read_float(fmidiToFreq+midival);</span>
+<a name="l00054"></a>00054 <span class="comment">// }</span>
+<a name="l00055"></a>00055 
+<a name="l00056"></a>00056 <span class="comment">// static Q16n16 Q16n16_m2f(float midival)</span>
+<a name="l00057"></a>00057 <span class="comment">// {</span>
+<a name="l00058"></a>00058 <span class="comment">//              return float_to_Q16n16(mtof(midival));</span>
+<a name="l00059"></a>00059 <span class="comment">// }</span>
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061 <span class="comment">//static const Q16n16 __attribute__((progmem)) midiToFreq[128] =</span>
+<a name="l00062"></a>00062 <span class="comment">// {</span>
+<a name="l00063"></a>00063 <span class="comment">//         Q16n16_m2f(0), Q16n16_m2f(1), Q16n16_m2f(2),Q16n16_m2f(3), Q16n16_m2f(4), Q16n16_m2f(5), Q16n16_m2f(6), Q16n16_m2f(7),</span>
+<a name="l00064"></a>00064 <span class="comment">//         Q16n16_m2f(8),Q16n16_m2f(9), Q16n16_m2f(10), Q16n16_m2f(11), Q16n16_m2f(12), Q16n16_m2f(13), Q16n16_m2f(14), Q16n16_m2f(15),</span>
+<a name="l00065"></a>00065 <span class="comment">//         Q16n16_m2f(16), Q16n16_m2f(17), Q16n16_m2f(18), Q16n16_m2f(19), Q16n16_m2f(20), Q16n16_m2f(21), Q16n16_m2f(22), Q16n16_m2f(23),</span>
+<a name="l00066"></a>00066 <span class="comment">//         Q16n16_m2f(24), Q16n16_m2f(25), Q16n16_m2f(26), Q16n16_m2f(27), Q16n16_m2f(28), Q16n16_m2f(29), Q16n16_m2f(30), Q16n16_m2f(31),</span>
+<a name="l00067"></a>00067 <span class="comment">//         Q16n16_m2f(32), Q16n16_m2f(33), Q16n16_m2f(34), Q16n16_m2f(35), Q16n16_m2f(36), Q16n16_m2f(37), Q16n16_m2f(38), Q16n16_m2f(39),</span>
+<a name="l00068"></a>00068 <span class="comment">//         Q16n16_m2f(40), Q16n16_m2f(41), Q16n16_m2f(42), Q16n16_m2f(43), Q16n16_m2f(44), Q16n16_m2f(45), Q16n16_m2f(46), Q16n16_m2f(47),</span>
+<a name="l00069"></a>00069 <span class="comment">//         Q16n16_m2f(48), Q16n16_m2f(49), Q16n16_m2f(50), Q16n16_m2f(51), Q16n16_m2f(52), Q16n16_m2f(53), Q16n16_m2f(54), Q16n16_m2f(55),</span>
+<a name="l00070"></a>00070 <span class="comment">//         Q16n16_m2f(56), Q16n16_m2f(57), Q16n16_m2f(58), Q16n16_m2f(59), Q16n16_m2f(60), Q16n16_m2f(61), Q16n16_m2f(62), Q16n16_m2f(63),</span>
+<a name="l00071"></a>00071 <span class="comment">//         Q16n16_m2f(64), Q16n16_m2f(65), Q16n16_m2f(66), Q16n16_m2f(67), Q16n16_m2f(68), Q16n16_m2f(69), Q16n16_m2f(70), Q16n16_m2f(71),</span>
+<a name="l00072"></a>00072 <span class="comment">//         Q16n16_m2f(72), Q16n16_m2f(73), Q16n16_m2f(74), Q16n16_m2f(75), Q16n16_m2f(76), Q16n16_m2f(77), Q16n16_m2f(78), Q16n16_m2f(79),</span>
+<a name="l00073"></a>00073 <span class="comment">//         Q16n16_m2f(80), Q16n16_m2f(81), Q16n16_m2f(82), Q16n16_m2f(83), Q16n16_m2f(84), Q16n16_m2f(85), Q16n16_m2f(86), Q16n16_m2f(87),</span>
+<a name="l00074"></a>00074 <span class="comment">//         Q16n16_m2f(88), Q16n16_m2f(89), Q16n16_m2f(90), Q16n16_m2f(91), Q16n16_m2f(92), Q16n16_m2f(93), Q16n16_m2f(94), Q16n16_m2f(95),</span>
+<a name="l00075"></a>00075 <span class="comment">//         Q16n16_m2f(96),Q16n16_m2f(97), Q16n16_m2f(98), Q16n16_m2f(99), Q16n16_m2f(100), Q16n16_m2f(101), Q16n16_m2f(102), Q16n16_m2f(103),</span>
+<a name="l00076"></a>00076 <span class="comment">//         Q16n16_m2f(104),Q16n16_m2f(105), Q16n16_m2f(106), Q16n16_m2f(107), Q16n16_m2f(108), Q16n16_m2f(109), Q16n16_m2f(110), Q16n16_m2f(111),</span>
+<a name="l00077"></a>00077 <span class="comment">//         Q16n16_m2f(112),Q16n16_m2f(113), Q16n16_m2f(114), Q16n16_m2f(115), Q16n16_m2f(116), Q16n16_m2f(117), Q16n16_m2f(118), Q16n16_m2f(119),</span>
+<a name="l00078"></a>00078 <span class="comment">//         Q16n16_m2f(120), Q16n16_m2f(121), Q16n16_m2f(122), Q16n16_m2f(123), Q16n16_m2f(124), Q16n16_m2f(125), Q16n16_m2f(126), Q16n16_m2f(127)</span>
+<a name="l00079"></a>00079 <span class="comment">// };</span>
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082 <span class="keyword">static</span> <span class="keyword">const</span> uint32_t __attribute__((progmem)) midiToFreq[128] =
+<a name="l00083"></a>00083         {
+<a name="l00084"></a>00084                 535809, 567670, 601425, 637188, 675077, 715219, 757748, 802806, 850544, 901120,
+<a name="l00085"></a>00085                 954703, 1011473, 1071618, 1135340, 1202851, 1274376, 1350154, 1430438, 1515497,
+<a name="l00086"></a>00086                 1605613, 1701088, 1802240, 1909406, 2022946, 2143236, 2270680, 2405702, 2548752,
+<a name="l00087"></a>00087                 2700309, 2860877, 3030994, 3211226, 3402176, 3604479, 3818813, 4045892, 4286472,
+<a name="l00088"></a>00088                 4541359, 4811404, 5097504, 5400618, 5721756, 6061988, 6422452, 6804352, 7208959,
+<a name="l00089"></a>00089                 7637627, 8091785, 8572945, 9082719, 9622808, 10195009, 10801235, 11443507,
+<a name="l00090"></a>00090                 12123974, 12844905, 13608704, 14417917, 15275252, 16183563, 17145888, 18165438,
+<a name="l00091"></a>00091                 19245616, 20390018, 21602470, 22887014, 24247948, 25689810, 27217408, 28835834,
+<a name="l00092"></a>00092                 30550514, 32367136, 34291776, 36330876, 38491212, 40780036, 43204940, 45774028,
+<a name="l00093"></a>00093                 48495912, 51379620, 54434816, 57671668, 61101028, 64734272, 68583552, 72661752,
+<a name="l00094"></a>00094                 76982424, 81560072, 86409880, 91548056, 96991792, 102759240, 108869632,
+<a name="l00095"></a>00095                 115343336, 122202056, 129468544, 137167104, 145323504, 153964848, 163120144,
+<a name="l00096"></a>00096                 172819760, 183096224, 193983648, 205518336, 217739200, 230686576, 244403840,
+<a name="l00097"></a>00097                 258937008, 274334112, 290647008, 307929696, 326240288, 345639520, 366192448,
+<a name="l00098"></a>00098                 387967040, 411036672, 435478400, 461373152, 488807680, 517874016, 548668224,
+<a name="l00099"></a>00099                 581294016, 615859392, 652480576, 691279040, 732384896, 775934592, 822073344
+<a name="l00100"></a>00100         };
+<a name="l00101"></a>00101 
+<a name="l00114"></a><a class="code" href="group__util.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2">00114</a> <a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a>  <a class="code" href="group__util.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2" title="Converts midi note number to frequency.">Q16n16_mtof</a>(<a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> midival_fractional)
+<a name="l00115"></a>00115 {
+<a name="l00116"></a>00116                 <a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> diff_fraction;
+<a name="l00117"></a>00117                 <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> index = midival_fractional &gt;&gt; 16;
+<a name="l00118"></a>00118                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> fraction = (<span class="keywordtype">unsigned</span> int) midival_fractional; <span class="comment">// keeps low word</span>
+<a name="l00119"></a>00119                 <a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> freq1 = (<a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a>) pgm_read_dword(midiToFreq + index);
+<a name="l00120"></a>00120                 <a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> freq2 = (<a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a>) pgm_read_dword(midiToFreq + (index+1));
+<a name="l00121"></a>00121                 <a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> difference = freq2 - freq1;
+<a name="l00122"></a>00122                 <span class="keywordflow">if</span> (difference&gt;=65536)
+<a name="l00123"></a>00123                 {
+<a name="l00124"></a>00124                                 diff_fraction = ((difference&gt;&gt;8) * fraction) &gt;&gt; 8;
+<a name="l00125"></a>00125                 }
+<a name="l00126"></a>00126                 <span class="keywordflow">else</span>
+<a name="l00127"></a>00127                 {
+<a name="l00128"></a>00128                                 diff_fraction = (difference * fraction) &gt;&gt; 16;
+<a name="l00129"></a>00129                 }
+<a name="l00130"></a>00130                 <span class="keywordflow">return</span> (<a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a>) (freq1+ diff_fraction);
+<a name="l00131"></a>00131 }
+<a name="l00132"></a>00132 
+<a name="l00133"></a>00133 
+<a name="l00134"></a>00134 
+<a name="l00139"></a><a class="code" href="group__util.html#ga9884e17c95a10e988e90d60c9f3aab2b">00139</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="group__util.html#ga9884e17c95a10e988e90d60c9f3aab2b" title="Generates a random number in the range for midi notes.">randomMidi</a>()
+<a name="l00140"></a>00140 {
+<a name="l00141"></a>00141                 <span class="keywordflow">return</span> lowByte(<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>())&gt;&gt;1;
+<a name="l00142"></a>00142 }
+<a name="l00143"></a>00143 
+<a name="l00144"></a>00144 
+<a name="l00145"></a>00145 <span class="comment">// moved these out of xorshift96() so xorshift96() can be reseeded manually</span>
+<a name="l00146"></a>00146 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> x=132456789, y=362436069, z=521288629;
+<a name="l00147"></a>00147 <span class="comment">// static unsigned long x= analogRead(A0)+123456789;</span>
+<a name="l00148"></a>00148 <span class="comment">// static unsigned long y= analogRead(A1)+362436069;</span>
+<a name="l00149"></a>00149 <span class="comment">// static unsigned long z= analogRead(A2)+521288629;</span>
+<a name="l00150"></a>00150 
+<a name="l00160"></a><a class="code" href="group__util.html#ga8a9592250ee294a64c6d133e20520651">00160</a> <span class="keywordtype">void</span> <a class="code" href="group__util.html#ga8a9592250ee294a64c6d133e20520651" title="Initialises Mozzi&#39;s (pseudo)random number generator xorshift96(), which is used in Mozzi&#39;s rand() fun...">randSeed</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed)
+<a name="l00161"></a>00161 {
+<a name="l00162"></a>00162                 x=seed;
+<a name="l00163"></a>00163 }
+<a name="l00164"></a>00164 
 <a name="l00165"></a>00165 
-<a name="l00166"></a>00166                 <span class="keywordflow">return</span> z;
-<a name="l00167"></a>00167 }
-<a name="l00168"></a>00168 
-<a name="l00169"></a>00169 
-<a name="l00176"></a><a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21">00176</a> <span class="keywordtype">char</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">char</span> minval, <span class="keywordtype">char</span> maxval)
-<a name="l00177"></a>00177 {
-<a name="l00178"></a>00178                 <span class="keywordflow">return</span> (<span class="keywordtype">char</span>) ((((int) (lowByte(<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()))) * (maxval-minval))/256) + minval;
-<a name="l00179"></a>00179 }
-<a name="l00180"></a>00180 
-<a name="l00181"></a>00181 
-<a name="l00188"></a><a class="code" href="group__util.html#ga91590455565d619314812a7f95fcd9e7">00188</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> minval, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> maxval)
-<a name="l00189"></a>00189 {
-<a name="l00190"></a>00190                 <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>) ((((<span class="keywordtype">unsigned</span> int) (lowByte(<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()))) * (maxval-minval))/256) + minval;
-<a name="l00191"></a>00191 }
+<a name="l00173"></a><a class="code" href="group__util.html#ga34956c2687a09ae6e3e7b9e632a09f18">00173</a> <span class="keywordtype">void</span> <a class="code" href="group__util.html#ga34956c2687a09ae6e3e7b9e632a09f18" title="Initialises Mozzi&#39;s (pseudo)random number generator xorshift96().">xorshiftSeed</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed)
+<a name="l00174"></a>00174 {
+<a name="l00175"></a>00175                 x=seed;
+<a name="l00176"></a>00176 }
+<a name="l00177"></a>00177 
+<a name="l00178"></a>00178 
+<a name="l00186"></a>00186 <span class="comment">// Based on Marsaglia, George. (2003). Xorshift RNGs. http://www.jstatsoft.org/v08/i14/xorshift.pdf</span>
+<a name="l00187"></a><a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6">00187</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()
+<a name="l00188"></a>00188 {          <span class="comment">//period 2^96-1</span>
+<a name="l00189"></a>00189                 <span class="comment">// static unsigned long x=123456789, y=362436069, z=521288629;</span>
+<a name="l00190"></a>00190                 <span class="comment">//static unsigned long x=123456789, y=362436069, z=analogRead(0);</span>
+<a name="l00191"></a>00191                 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> t;
 <a name="l00192"></a>00192 
-<a name="l00193"></a>00193 
-<a name="l00200"></a><a class="code" href="group__util.html#ga4c69deb53afb886b26c76b343513b340">00200</a> <span class="keywordtype">int</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>( <span class="keywordtype">int</span> minval,  <span class="keywordtype">int</span> maxval)
-<a name="l00201"></a>00201 {
-<a name="l00202"></a>00202                 <span class="keywordflow">return</span> (<span class="keywordtype">int</span>) ((((<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()&gt;&gt;16) * (maxval-minval))&gt;&gt;16) + minval);
+<a name="l00193"></a>00193                 x ^= x &lt;&lt; 16;
+<a name="l00194"></a>00194                 x ^= x &gt;&gt; 5;
+<a name="l00195"></a>00195                 x ^= x &lt;&lt; 1;
+<a name="l00196"></a>00196 
+<a name="l00197"></a>00197                 t = x;
+<a name="l00198"></a>00198                 x = y;
+<a name="l00199"></a>00199                 y = z;
+<a name="l00200"></a>00200                 z = t ^ x ^ y;
+<a name="l00201"></a>00201 
+<a name="l00202"></a>00202                 <span class="keywordflow">return</span> z;
 <a name="l00203"></a>00203 }
 <a name="l00204"></a>00204 
 <a name="l00205"></a>00205 
-<a name="l00212"></a><a class="code" href="group__util.html#ga95de742b529d5965461f1d3f6f576e18">00212</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> minval, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> maxval)
+<a name="l00212"></a><a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21">00212</a> <span class="keywordtype">char</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">char</span> minval, <span class="keywordtype">char</span> maxval)
 <a name="l00213"></a>00213 {
-<a name="l00214"></a>00214                 <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>) ((((<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()&gt;&gt;16) * (maxval-minval))&gt;&gt;16) + minval);
+<a name="l00214"></a>00214                 <span class="keywordflow">return</span> (<span class="keywordtype">char</span>) ((((int) (lowByte(<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()))) * (maxval-minval))/256) + minval;
 <a name="l00215"></a>00215 }
 <a name="l00216"></a>00216 
 <a name="l00217"></a>00217 
-<a name="l00223"></a><a class="code" href="group__util.html#gaa0c23ec434d09717e1fe2e8363e689bc">00223</a> <span class="keywordtype">char</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">char</span> maxval)
-<a name="l00224"></a>00224 {
-<a name="l00225"></a>00225                 <span class="keywordflow">return</span> (<span class="keywordtype">char</span>) ((((int) (lowByte(<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()))) * maxval)/256);
-<a name="l00226"></a>00226 }
-<a name="l00227"></a>00227 
+<a name="l00224"></a><a class="code" href="group__util.html#ga91590455565d619314812a7f95fcd9e7">00224</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> minval, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> maxval)
+<a name="l00225"></a>00225 {
+<a name="l00226"></a>00226                 <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>) ((((<span class="keywordtype">unsigned</span> int) (lowByte(<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()))) * (maxval-minval))/256) + minval;
+<a name="l00227"></a>00227 }
 <a name="l00228"></a>00228 
-<a name="l00234"></a><a class="code" href="group__util.html#ga4bfcc7c200e26fff41a2af61c9ea1a9f">00234</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> maxval)
-<a name="l00235"></a>00235 {
-<a name="l00236"></a>00236                 <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>) ((((<span class="keywordtype">unsigned</span> int) (lowByte(<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()))) * maxval)/256);
-<a name="l00237"></a>00237 }
-<a name="l00238"></a>00238 
-<a name="l00239"></a>00239 
-<a name="l00245"></a><a class="code" href="group__util.html#ga1182cb74988d9c8510959149adc63762">00245</a> <span class="keywordtype">int</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">int</span> maxval)
-<a name="l00246"></a>00246 {
-<a name="l00247"></a>00247                 <span class="keywordflow">return</span> (<span class="keywordtype">int</span>) (((<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()&gt;&gt;16) * maxval)&gt;&gt;16);
-<a name="l00248"></a>00248 }
-<a name="l00249"></a>00249 
-<a name="l00250"></a>00250 
-<a name="l00256"></a><a class="code" href="group__util.html#ga4ad4ab94c8b0e8a4d4be925490378733">00256</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> maxval)
-<a name="l00257"></a>00257 {
-<a name="l00258"></a>00258                 <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>) (((<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()&gt;&gt;16) * maxval)&gt;&gt;16);
-<a name="l00259"></a>00259 }
-<a name="l00260"></a>00260 
-<a name="l00261"></a>00261 
-<a name="l00262"></a>00262 
-<a name="l00270"></a><a class="code" href="group__util.html#gaf46803d06aa1d839192cc6125e39ff01">00270</a> <span class="keywordtype">void</span> <a class="code" href="group__util.html#gaf46803d06aa1d839192cc6125e39ff01" title="Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in u...">setupFastAnalogRead</a>()
+<a name="l00229"></a>00229 
+<a name="l00236"></a><a class="code" href="group__util.html#ga4c69deb53afb886b26c76b343513b340">00236</a> <span class="keywordtype">int</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>( <span class="keywordtype">int</span> minval,  <span class="keywordtype">int</span> maxval)
+<a name="l00237"></a>00237 {
+<a name="l00238"></a>00238                 <span class="keywordflow">return</span> (<span class="keywordtype">int</span>) ((((<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()&gt;&gt;16) * (maxval-minval))&gt;&gt;16) + minval);
+<a name="l00239"></a>00239 }
+<a name="l00240"></a>00240 
+<a name="l00241"></a>00241 
+<a name="l00248"></a><a class="code" href="group__util.html#ga95de742b529d5965461f1d3f6f576e18">00248</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> minval, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> maxval)
+<a name="l00249"></a>00249 {
+<a name="l00250"></a>00250                 <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>) ((((<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()&gt;&gt;16) * (maxval-minval))&gt;&gt;16) + minval);
+<a name="l00251"></a>00251 }
+<a name="l00252"></a>00252 
+<a name="l00253"></a>00253 
+<a name="l00259"></a><a class="code" href="group__util.html#gaa0c23ec434d09717e1fe2e8363e689bc">00259</a> <span class="keywordtype">char</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">char</span> maxval)
+<a name="l00260"></a>00260 {
+<a name="l00261"></a>00261                 <span class="keywordflow">return</span> (<span class="keywordtype">char</span>) ((((int) (lowByte(<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()))) * maxval)/256);
+<a name="l00262"></a>00262 }
+<a name="l00263"></a>00263 
+<a name="l00264"></a>00264 
+<a name="l00270"></a><a class="code" href="group__util.html#ga4bfcc7c200e26fff41a2af61c9ea1a9f">00270</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> maxval)
 <a name="l00271"></a>00271 {
-<a name="l00272"></a>00272                 <span class="comment">// fastest predivided rate (divide by 16, giving 1Mhz) for which behaviour is defined (~16us per sample)</span>
-<a name="l00273"></a>00273                 sbi(ADCSRA,ADPS2);
-<a name="l00274"></a>00274                 cbi(ADCSRA,ADPS1);
-<a name="l00275"></a>00275                 cbi(ADCSRA,ADPS0);
-<a name="l00276"></a>00276 }
-<a name="l00277"></a>00277 
-<a name="l00278"></a>00278 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> analog_reference = DEFAULT;
-<a name="l00279"></a>00279 
-<a name="l00293"></a>00293 <span class="comment">// basically analogRead() chopped in half so the ADC conversion</span>
-<a name="l00294"></a>00294 <span class="comment">// can be started in one function and received in another.</span>
-<a name="l00295"></a><a class="code" href="group__util.html#ga485c51c54fdca43480b38e7c2ded07c4">00295</a> <span class="keywordtype">void</span> <a class="code" href="group__util.html#ga485c51c54fdca43480b38e7c2ded07c4" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> pin)
-<a name="l00296"></a>00296 {
+<a name="l00272"></a>00272                 <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>) ((((<span class="keywordtype">unsigned</span> int) (lowByte(<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()))) * maxval)/256);
+<a name="l00273"></a>00273 }
+<a name="l00274"></a>00274 
+<a name="l00275"></a>00275 
+<a name="l00281"></a><a class="code" href="group__util.html#ga1182cb74988d9c8510959149adc63762">00281</a> <span class="keywordtype">int</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">int</span> maxval)
+<a name="l00282"></a>00282 {
+<a name="l00283"></a>00283                 <span class="keywordflow">return</span> (<span class="keywordtype">int</span>) (((<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()&gt;&gt;16) * maxval)&gt;&gt;16);
+<a name="l00284"></a>00284 }
+<a name="l00285"></a>00285 
+<a name="l00286"></a>00286 
+<a name="l00292"></a><a class="code" href="group__util.html#ga4ad4ab94c8b0e8a4d4be925490378733">00292</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> maxval)
+<a name="l00293"></a>00293 {
+<a name="l00294"></a>00294                 <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>) (((<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()&gt;&gt;16) * maxval)&gt;&gt;16);
+<a name="l00295"></a>00295 }
+<a name="l00296"></a>00296 
 <a name="l00297"></a>00297 
-<a name="l00298"></a>00298 <span class="preprocessor">#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)</span>
-<a name="l00299"></a>00299 <span class="preprocessor"></span>                <span class="keywordflow">if</span> (pin &gt;= 54)
-<a name="l00300"></a>00300                                 pin -= 54; <span class="comment">// allow for channel or pin numbers</span>
-<a name="l00301"></a>00301 <span class="preprocessor">#elif defined(__AVR_ATmega32U4__)</span>
-<a name="l00302"></a>00302 <span class="preprocessor"></span>
-<a name="l00303"></a>00303                 <span class="keywordflow">if</span> (pin &gt;= 18)
-<a name="l00304"></a>00304                                 pin -= 18; <span class="comment">// allow for channel or pin numbers</span>
-<a name="l00305"></a>00305 <span class="preprocessor">#elif defined(__AVR_ATmega1284__)</span>
-<a name="l00306"></a>00306 <span class="preprocessor"></span>
-<a name="l00307"></a>00307                 <span class="keywordflow">if</span> (pin &gt;= 24)
-<a name="l00308"></a>00308                                 pin -= 24; <span class="comment">// allow for channel or pin numbers</span>
-<a name="l00309"></a>00309 <span class="preprocessor">#else</span>
-<a name="l00310"></a>00310 <span class="preprocessor"></span>
-<a name="l00311"></a>00311                 <span class="keywordflow">if</span> (pin &gt;= 14)
-<a name="l00312"></a>00312                                 pin -= 14; <span class="comment">// allow for channel or pin numbers</span>
-<a name="l00313"></a>00313 <span class="preprocessor">#endif</span>
-<a name="l00314"></a>00314 <span class="preprocessor"></span>
-<a name="l00315"></a>00315 <span class="preprocessor">#if defined(__AVR_ATmega32U4__)</span>
-<a name="l00316"></a>00316 <span class="preprocessor"></span>
-<a name="l00317"></a>00317                 pin = analogPinToChannel(pin);
-<a name="l00318"></a>00318                 ADCSRB = (ADCSRB &amp; ~(1 &lt;&lt; MUX5)) | (((pin &gt;&gt; 3) &amp; 0x01) &lt;&lt; MUX5);
-<a name="l00319"></a>00319 <span class="preprocessor">#elif defined(ADCSRB) &amp;&amp; defined(MUX5)</span>
-<a name="l00320"></a>00320 <span class="preprocessor"></span>                <span class="comment">// the MUX5 bit of ADCSRB selects whether we&#39;re reading from channels</span>
-<a name="l00321"></a>00321                 <span class="comment">// 0 to 7 (MUX5 low) or 8 to 15 (MUX5 high).</span>
-<a name="l00322"></a>00322                 ADCSRB = (ADCSRB &amp; ~(1 &lt;&lt; MUX5)) | (((pin &gt;&gt; 3) &amp; 0x01) &lt;&lt; MUX5);
-<a name="l00323"></a>00323 <span class="preprocessor">#endif</span>
-<a name="l00324"></a>00324 <span class="preprocessor"></span>
-<a name="l00325"></a>00325                 <span class="comment">// set the analog reference (high two bits of ADMUX) and select the</span>
-<a name="l00326"></a>00326                 <span class="comment">// channel (low 4 bits).  this also sets ADLAR (left-adjust result)</span>
-<a name="l00327"></a>00327                 <span class="comment">// to 0 (the default).</span>
-<a name="l00328"></a>00328 <span class="preprocessor">#if defined(ADMUX)</span>
-<a name="l00329"></a>00329 <span class="preprocessor"></span>
-<a name="l00330"></a>00330                 ADMUX = (analog_reference &lt;&lt; 6) | (pin &amp; 0x07);
-<a name="l00331"></a>00331 <span class="preprocessor">#endif</span>
-<a name="l00332"></a>00332 <span class="preprocessor"></span>
-<a name="l00333"></a>00333                 <span class="comment">// without a delay, we seem to read from the wrong channel</span>
-<a name="l00334"></a>00334                 <span class="comment">//delay(1);</span>
-<a name="l00335"></a>00335 
-<a name="l00336"></a>00336 <span class="preprocessor">#if defined(ADCSRA) &amp;&amp; defined(ADCL)</span>
-<a name="l00337"></a>00337 <span class="preprocessor"></span>                <span class="comment">// start the conversion</span>
-<a name="l00338"></a>00338                 sbi(ADCSRA, ADSC);
-<a name="l00339"></a>00339 <span class="preprocessor">#endif</span>
-<a name="l00340"></a>00340 <span class="preprocessor"></span>}
-<a name="l00341"></a>00341 
-<a name="l00351"></a><a class="code" href="group__util.html#ga215a0653b8dabc35731d7115d1140757">00351</a> <span class="keywordtype">int</span> <a class="code" href="group__util.html#ga215a0653b8dabc35731d7115d1140757" title="Waits for the result of the most recent startAnalogRead().">receiveAnalogRead</a>()
-<a name="l00352"></a>00352 {
-<a name="l00353"></a>00353                 <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> low, high;
-<a name="l00354"></a>00354 <span class="preprocessor">#if defined(ADCSRA) &amp;&amp; defined(ADCL)</span>
-<a name="l00355"></a>00355 <span class="preprocessor"></span>                <span class="comment">// ADSC is cleared when the conversion finishes</span>
-<a name="l00356"></a>00356                 <span class="keywordflow">while</span> (bit_is_set(ADCSRA, ADSC))
-<a name="l00357"></a>00357                                 ;
-<a name="l00358"></a>00358 
-<a name="l00359"></a>00359                 <span class="comment">// we have to read ADCL first; doing so locks both ADCL</span>
-<a name="l00360"></a>00360                 <span class="comment">// and ADCH until ADCH is read.  reading ADCL second would</span>
-<a name="l00361"></a>00361                 <span class="comment">// cause the results of each conversion to be discarded,</span>
-<a name="l00362"></a>00362                 <span class="comment">// as ADCL and ADCH would be locked when it completed.</span>
-<a name="l00363"></a>00363                 low  = ADCL;
-<a name="l00364"></a>00364                 high = ADCH;
-<a name="l00365"></a>00365 <span class="preprocessor">#else</span>
-<a name="l00366"></a>00366 <span class="preprocessor"></span>                <span class="comment">// we dont have an ADC, return 0</span>
-<a name="l00367"></a>00367                 low  = 0;
-<a name="l00368"></a>00368                 high = 0;
-<a name="l00369"></a>00369 <span class="preprocessor">#endif</span>
-<a name="l00370"></a>00370 <span class="preprocessor"></span>
-<a name="l00371"></a>00371                 <span class="comment">// combine the two bytes</span>
-<a name="l00372"></a>00372                 <span class="keywordflow">return</span> (high &lt;&lt; 8) | low;
-<a name="l00373"></a>00373 }
-<a name="l00374"></a>00374 
+<a name="l00298"></a>00298 
+<a name="l00306"></a><a class="code" href="group__util.html#gaf46803d06aa1d839192cc6125e39ff01">00306</a> <span class="keywordtype">void</span> <a class="code" href="group__util.html#gaf46803d06aa1d839192cc6125e39ff01" title="Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in u...">setupFastAnalogRead</a>()
+<a name="l00307"></a>00307 {
+<a name="l00308"></a>00308                 <span class="comment">// fastest predivided rate (divide by 16, giving 1Mhz) for which behaviour is defined (~16us per sample)</span>
+<a name="l00309"></a>00309                 sbi(ADCSRA,ADPS2);
+<a name="l00310"></a>00310                 cbi(ADCSRA,ADPS1);
+<a name="l00311"></a>00311                 cbi(ADCSRA,ADPS0);
+<a name="l00312"></a>00312 }
+<a name="l00313"></a>00313 
+<a name="l00314"></a>00314 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> analog_reference = DEFAULT;
+<a name="l00315"></a>00315 
+<a name="l00329"></a>00329 <span class="comment">// basically analogRead() chopped in half so the ADC conversion</span>
+<a name="l00330"></a>00330 <span class="comment">// can be started in one function and received in another.</span>
+<a name="l00331"></a><a class="code" href="group__util.html#ga485c51c54fdca43480b38e7c2ded07c4">00331</a> <span class="keywordtype">void</span> <a class="code" href="group__util.html#ga485c51c54fdca43480b38e7c2ded07c4" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> pin)
+<a name="l00332"></a>00332 {
+<a name="l00333"></a>00333 
+<a name="l00334"></a>00334 <span class="preprocessor">#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)</span>
+<a name="l00335"></a>00335 <span class="preprocessor"></span>                <span class="keywordflow">if</span> (pin &gt;= 54)
+<a name="l00336"></a>00336                                 pin -= 54; <span class="comment">// allow for channel or pin numbers</span>
+<a name="l00337"></a>00337 <span class="preprocessor">#elif defined(__AVR_ATmega32U4__)</span>
+<a name="l00338"></a>00338 <span class="preprocessor"></span>
+<a name="l00339"></a>00339                 <span class="keywordflow">if</span> (pin &gt;= 18)
+<a name="l00340"></a>00340                                 pin -= 18; <span class="comment">// allow for channel or pin numbers</span>
+<a name="l00341"></a>00341 <span class="preprocessor">#elif defined(__AVR_ATmega1284__)</span>
+<a name="l00342"></a>00342 <span class="preprocessor"></span>
+<a name="l00343"></a>00343                 <span class="keywordflow">if</span> (pin &gt;= 24)
+<a name="l00344"></a>00344                                 pin -= 24; <span class="comment">// allow for channel or pin numbers</span>
+<a name="l00345"></a>00345 <span class="preprocessor">#else</span>
+<a name="l00346"></a>00346 <span class="preprocessor"></span>
+<a name="l00347"></a>00347                 <span class="keywordflow">if</span> (pin &gt;= 14)
+<a name="l00348"></a>00348                                 pin -= 14; <span class="comment">// allow for channel or pin numbers</span>
+<a name="l00349"></a>00349 <span class="preprocessor">#endif</span>
+<a name="l00350"></a>00350 <span class="preprocessor"></span>
+<a name="l00351"></a>00351 <span class="preprocessor">#if defined(__AVR_ATmega32U4__)</span>
+<a name="l00352"></a>00352 <span class="preprocessor"></span>
+<a name="l00353"></a>00353                 pin = analogPinToChannel(pin);
+<a name="l00354"></a>00354                 ADCSRB = (ADCSRB &amp; ~(1 &lt;&lt; MUX5)) | (((pin &gt;&gt; 3) &amp; 0x01) &lt;&lt; MUX5);
+<a name="l00355"></a>00355 <span class="preprocessor">#elif defined(ADCSRB) &amp;&amp; defined(MUX5)</span>
+<a name="l00356"></a>00356 <span class="preprocessor"></span>                <span class="comment">// the MUX5 bit of ADCSRB selects whether we&#39;re reading from channels</span>
+<a name="l00357"></a>00357                 <span class="comment">// 0 to 7 (MUX5 low) or 8 to 15 (MUX5 high).</span>
+<a name="l00358"></a>00358                 ADCSRB = (ADCSRB &amp; ~(1 &lt;&lt; MUX5)) | (((pin &gt;&gt; 3) &amp; 0x01) &lt;&lt; MUX5);
+<a name="l00359"></a>00359 <span class="preprocessor">#endif</span>
+<a name="l00360"></a>00360 <span class="preprocessor"></span>
+<a name="l00361"></a>00361                 <span class="comment">// set the analog reference (high two bits of ADMUX) and select the</span>
+<a name="l00362"></a>00362                 <span class="comment">// channel (low 4 bits).  this also sets ADLAR (left-adjust result)</span>
+<a name="l00363"></a>00363                 <span class="comment">// to 0 (the default).</span>
+<a name="l00364"></a>00364 <span class="preprocessor">#if defined(ADMUX)</span>
+<a name="l00365"></a>00365 <span class="preprocessor"></span>
+<a name="l00366"></a>00366                 ADMUX = (analog_reference &lt;&lt; 6) | (pin &amp; 0x07);
+<a name="l00367"></a>00367 <span class="preprocessor">#endif</span>
+<a name="l00368"></a>00368 <span class="preprocessor"></span>
+<a name="l00369"></a>00369                 <span class="comment">// without a delay, we seem to read from the wrong channel</span>
+<a name="l00370"></a>00370                 <span class="comment">//delay(1);</span>
+<a name="l00371"></a>00371 
+<a name="l00372"></a>00372 <span class="preprocessor">#if defined(ADCSRA) &amp;&amp; defined(ADCL)</span>
+<a name="l00373"></a>00373 <span class="preprocessor"></span>                <span class="comment">// start the conversion</span>
+<a name="l00374"></a>00374                 sbi(ADCSRA, ADSC);
+<a name="l00375"></a>00375 <span class="preprocessor">#endif</span>
+<a name="l00376"></a>00376 <span class="preprocessor"></span>}
+<a name="l00377"></a>00377 
+<a name="l00387"></a><a class="code" href="group__util.html#ga215a0653b8dabc35731d7115d1140757">00387</a> <span class="keywordtype">int</span> <a class="code" href="group__util.html#ga215a0653b8dabc35731d7115d1140757" title="Waits for the result of the most recent startAnalogRead().">receiveAnalogRead</a>()
+<a name="l00388"></a>00388 {
+<a name="l00389"></a>00389                 <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> low, high;
+<a name="l00390"></a>00390 <span class="preprocessor">#if defined(ADCSRA) &amp;&amp; defined(ADCL)</span>
+<a name="l00391"></a>00391 <span class="preprocessor"></span>                <span class="comment">// ADSC is cleared when the conversion finishes</span>
+<a name="l00392"></a>00392                 <span class="keywordflow">while</span> (bit_is_set(ADCSRA, ADSC))
+<a name="l00393"></a>00393                                 ;
+<a name="l00394"></a>00394 
+<a name="l00395"></a>00395                 <span class="comment">// we have to read ADCL first; doing so locks both ADCL</span>
+<a name="l00396"></a>00396                 <span class="comment">// and ADCH until ADCH is read.  reading ADCL second would</span>
+<a name="l00397"></a>00397                 <span class="comment">// cause the results of each conversion to be discarded,</span>
+<a name="l00398"></a>00398                 <span class="comment">// as ADCL and ADCH would be locked when it completed.</span>
+<a name="l00399"></a>00399                 low  = ADCL;
+<a name="l00400"></a>00400                 high = ADCH;
+<a name="l00401"></a>00401 <span class="preprocessor">#else</span>
+<a name="l00402"></a>00402 <span class="preprocessor"></span>                <span class="comment">// we dont have an ADC, return 0</span>
+<a name="l00403"></a>00403                 low  = 0;
+<a name="l00404"></a>00404                 high = 0;
+<a name="l00405"></a>00405 <span class="preprocessor">#endif</span>
+<a name="l00406"></a>00406 <span class="preprocessor"></span>
+<a name="l00407"></a>00407                 <span class="comment">// combine the two bytes</span>
+<a name="l00408"></a>00408                 <span class="keywordflow">return</span> (high &lt;&lt; 8) | low;
+<a name="l00409"></a>00409 }
+<a name="l00410"></a>00410 
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 9 2012 22:43:00 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 14 2012 00:15:22 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

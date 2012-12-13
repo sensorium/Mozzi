@@ -25,7 +25,7 @@
 Phasor <AUDIO_RATE> aPhasor1;
 Phasor <AUDIO_RATE> aPhasor2;
 
-float freq = 330.f;
+float freq = 55.f;
 
 void setup(){
   aPhasor1.setFreq(freq);

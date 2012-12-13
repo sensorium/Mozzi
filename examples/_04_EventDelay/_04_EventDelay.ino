@@ -27,7 +27,7 @@
 Oscil <SIN8192_NUM_CELLS, AUDIO_RATE> aSin(SIN8192_DATA);
 
 // for scheduling audio gain changes
-EventDelay kGainChangeDelay(CONTROL_RATE);
+EventDelay <CONTROL_RATE>  kGainChangeDelay;
 
 char gain = 1;
 

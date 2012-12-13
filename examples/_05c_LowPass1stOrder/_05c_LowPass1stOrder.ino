@@ -25,7 +25,7 @@
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
 // for scheduling audio gain changes
-EventDelay kGainChangeDelay(CONTROL_RATE);
+EventDelay <CONTROL_RATE>  kGainChangeDelay;
 
 LowPass1stOrder <int, 128> kSmoothGain;
 int smoothed_gain; // for conveying kSmoothGain to updateAudio

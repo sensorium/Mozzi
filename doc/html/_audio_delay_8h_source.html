@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1m</span>
+   &#160;<span id="projectnumber">alpha 0.01.1n</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -129,36 +129,63 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00039"></a>00039 <span class="keyword">private</span>:
 <a name="l00040"></a>00040 
 <a name="l00041"></a>00041                 <span class="keywordtype">char</span> delay_array[NUM_BUFFER_SAMPLES];
-<a name="l00042"></a>00042                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> write_pos;
-<a name="l00043"></a>00043 
-<a name="l00044"></a>00044 <span class="keyword">public</span>:
-<a name="l00045"></a>00045 
-<a name="l00048"></a><a class="code" href="class_audio_delay.html#a7bce7bdebe504936c83c1a866968416b">00048</a>                 <a class="code" href="class_audio_delay.html#a7bce7bdebe504936c83c1a866968416b" title="Constructor.">AudioDelay</a>(): write_pos(0)
-<a name="l00049"></a>00049                 {}
-<a name="l00050"></a>00050 
-<a name="l00051"></a>00051 
-<a name="l00056"></a>00056                 <span class="keyword">inline</span>
-<a name="l00057"></a><a class="code" href="class_audio_delay.html#aefbd7401ae75f64c072a73b82b0e1ead">00057</a>                 <span class="keywordtype">char</span> <a class="code" href="class_audio_delay.html#aefbd7401ae75f64c072a73b82b0e1ead" title="Input a value to the delay and retrieve the signal in the delay line at the position delay_cells...">next</a>(<span class="keywordtype">char</span> in_value, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> delay_cells)
-<a name="l00058"></a>00058                 {
-<a name="l00059"></a>00059                                 ++write_pos &amp;= (NUM_BUFFER_SAMPLES - 1);
-<a name="l00060"></a>00060                                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> read_pos = (write_pos - delay_cells) &amp; (NUM_BUFFER_SAMPLES - 1);
-<a name="l00061"></a>00061 
-<a name="l00062"></a>00062                                 <span class="comment">// why does delay jump if I read it before writing?</span>
-<a name="l00063"></a>00063                                 delay_array[write_pos] = in_value;                                              <span class="comment">// write to buffer</span>
-<a name="l00064"></a>00064                                 <span class="keywordtype">char</span> delay_sig = delay_array[read_pos] ;        <span class="comment">// read the delay buffer</span>
-<a name="l00065"></a>00065 
-<a name="l00066"></a>00066                                 <span class="keywordflow">return</span> (<span class="keywordtype">char</span>)(((int) in_value + delay_sig)&gt;&gt;1);
-<a name="l00067"></a>00067                 }
-<a name="l00068"></a>00068 
-<a name="l00069"></a>00069 };
-<a name="l00070"></a>00070 
-<a name="l00071"></a>00071 <span class="preprocessor">#endif        //  #ifndef AUDIODELAY_H_</span>
-<a name="l00072"></a>00072 <span class="preprocessor"></span>
+<a name="l00042"></a>00042                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> _write_pos;
+<a name="l00043"></a>00043                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> _delaytime_cells;
+<a name="l00044"></a>00044                 
+<a name="l00045"></a>00045 <span class="keyword">public</span>:
+<a name="l00046"></a>00046 
+<a name="l00049"></a><a class="code" href="class_audio_delay.html#a7bce7bdebe504936c83c1a866968416b">00049</a>                 <a class="code" href="class_audio_delay.html#a7bce7bdebe504936c83c1a866968416b" title="Constructor.">AudioDelay</a>(): _write_pos(0)
+<a name="l00050"></a>00050                 {}
+<a name="l00051"></a>00051                 
+<a name="l00052"></a>00052                 
+<a name="l00058"></a><a class="code" href="class_audio_delay.html#a14760742100d03313891f67fe65aec34">00058</a>                 <a class="code" href="class_audio_delay.html#a7bce7bdebe504936c83c1a866968416b" title="Constructor.">AudioDelay</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> delaytime_cells): _write_pos(0), _delaytime_cells(delaytime_cells)
+<a name="l00059"></a>00059                 {}
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061                 
+<a name="l00062"></a>00062 
+<a name="l00067"></a>00067                 <span class="keyword">inline</span>
+<a name="l00068"></a><a class="code" href="class_audio_delay.html#ab0f3309a47352d3514a7a0b614670210">00068</a>                 <span class="keywordtype">char</span> <a class="code" href="class_audio_delay.html#ab0f3309a47352d3514a7a0b614670210" title="Input a value to the delay and retrieve the signal in the delay line at the position delaytime_cells...">next</a>(<span class="keywordtype">char</span> in_value, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> delaytime_cells)
+<a name="l00069"></a>00069                 {
+<a name="l00070"></a>00070                                 ++_write_pos &amp;= (NUM_BUFFER_SAMPLES - 1);
+<a name="l00071"></a>00071                                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> read_pos = (_write_pos - delaytime_cells) &amp; (NUM_BUFFER_SAMPLES - 1);
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073                                 <span class="comment">// why does delay jump if I read it before writing?</span>
+<a name="l00074"></a>00074                                 delay_array[_write_pos] = in_value;                                             <span class="comment">// write to buffer</span>
+<a name="l00075"></a>00075                                 <span class="keywordtype">char</span> delay_sig = delay_array[read_pos] ;        <span class="comment">// read the delay buffer</span>
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077                                 <span class="keywordflow">return</span> (<span class="keywordtype">char</span>)(((int) in_value + delay_sig)&gt;&gt;1);
+<a name="l00078"></a>00078                 }
+<a name="l00079"></a>00079                 
+<a name="l00080"></a>00080                 
+<a name="l00081"></a>00081                 
+<a name="l00085"></a>00085                 <span class="keyword">inline</span>
+<a name="l00086"></a><a class="code" href="class_audio_delay.html#a0013f640df2b64cfdb6807343e27ae5c">00086</a>                 <span class="keywordtype">char</span> <a class="code" href="class_audio_delay.html#ab0f3309a47352d3514a7a0b614670210" title="Input a value to the delay and retrieve the signal in the delay line at the position delaytime_cells...">next</a>(<span class="keywordtype">char</span> in_value)
+<a name="l00087"></a>00087                 {
+<a name="l00088"></a>00088                                 ++_write_pos &amp;= (NUM_BUFFER_SAMPLES - 1);
+<a name="l00089"></a>00089                                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> read_pos = (_write_pos - _delaytime_cells) &amp; (NUM_BUFFER_SAMPLES - 1);
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091                                 <span class="comment">// why does delay jump if I read it before writing?</span>
+<a name="l00092"></a>00092                                 delay_array[_write_pos] = in_value;                                             <span class="comment">// write to buffer</span>
+<a name="l00093"></a>00093                                 <span class="keywordtype">char</span> delay_sig = delay_array[read_pos] ;        <span class="comment">// read the delay buffer</span>
+<a name="l00094"></a>00094 
+<a name="l00095"></a>00095                                 <span class="keywordflow">return</span> (<span class="keywordtype">char</span>)(((int) in_value + delay_sig)&gt;&gt;1);
+<a name="l00096"></a>00096                 }
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098                 
+<a name="l00099"></a>00099                 <span class="keyword">inline</span>
+<a name="l00100"></a>00100                 <span class="keywordtype">void</span> <span class="keyword">set</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> delaytime_cells){
+<a name="l00101"></a>00101                                 _delaytime_cells = delaytime_cells;
+<a name="l00102"></a>00102                 }
+<a name="l00103"></a>00103 
+<a name="l00104"></a>00104 };
+<a name="l00105"></a>00105 
+<a name="l00106"></a>00106 <span class="preprocessor">#endif        //  #ifndef AUDIODELAY_H_</span>
+<a name="l00107"></a>00107 <span class="preprocessor"></span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 9 2012 22:42:59 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 14 2012 00:15:22 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

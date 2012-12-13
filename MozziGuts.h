@@ -24,7 +24,7 @@
 #define MOZZIGUTS_H_
 
 #if F_CPU != 16000000
-#error Mozzi requires a cpu clock speed of 16MHz!
+#error Mozzi expects a cpu clock speed of 16MHz!
 #endif
 
 #include "Arduino.h"
@@ -72,13 +72,18 @@ Digital pin 9 is the pwm audio output pin.  For now there is only one channel.*/
 #define AUDIO_CHANNEL_1_OUTPUT_REGISTER OCR1A
 
 /** @ingroup core
-AUDIO_RATE is fixed at 16384 Hz for now.
+AUDIO_RATE is fixed at 16384 Hz for now. 
 This is a compromise between the sample rate (interrupt rate) and sample
 bitdepth (pwm width), which are interdependent due to the way pulse wave
 modulation is used to generate the sound output. With the AUDIO_RATE at 16384,
 the sample resolution is 488, which provides some headroom above the 8bit table
 resolution currently used by the oscillators. You can look at the TimerOne
-library for more info about how interrupt rate and pwm resolution relate.
+library for more info about how interrupt rate and pwm resolution relate. 
+@todo Possible option for output to R/2R DAC circuit, like
+http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/ This would limit
+dynamic range to 8 bit, but would remove the 16384Hz pwm carrier frequency noise
+which can be a problem in some applications, requiring filtering to remove (see
+the Mozzi wiki for filter schematics).
 */
 
 // maybe 20,24 or 28k-ish later with combos of pow2
@@ -105,7 +110,7 @@ in setup(), then SET_PIN13_HIGH and SET_PIN13_LOW around your test code
 #define AUDIO_BIAS 244
 #endif
 
-#define FIXMATH_OPTIMIZE_8BIT /* libfixmath option */
+// #define FIXMATH_OPTIMIZE_8BIT /* libfixmath option - it's an external library not used at the moment */
 
 // these are documented in .cpp file
 void startMozzi(unsigned int control_rate_hz);
@@ -128,6 +133,11 @@ calculations here which could be done in setup() or updateControl().
 @return an audio sample, between -244 and 243 inclusive.
 */
 int updateAudio();
+
+// common abbreviations
+typedef unsigned char uchar;
+typedef unsigned int uint;
+typedef unsigned long ulong;
 
 
 #endif /* MOZZIGUTS_H_ */

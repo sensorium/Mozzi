@@ -65,18 +65,18 @@ Those which have been tested and reported to work have an asterix.
 Feedback about others is welcome.
 
 <p>
-*	 9	Arduino Uno
-*	 9	Arduino Duemilanove
-*	 9	Arduino Nano
-*	 9	Arduino Leonardo
-*	 9  Ardweeny
-*	11  Freetronics EtherMega
-	14	Teensy
-*	B5  Teensy2
-*	B5(25) Teensy2++
-*	11	Arduino Mega
-	13	Sanguino
-*	 9  Boarduino
+*	 9	Arduino Uno </br>
+*	 9	Arduino Duemilanove </br>
+*	 9	Arduino Nano </br>
+*	 9	Arduino Leonardo </br>
+*	 9  Ardweeny </br>
+*	11  Freetronics EtherMega </br>
+	14	Teensy </br>
+*	B5  Teensy2 </br>
+*	B5(25) Teensy2++ </br>
+*	11	Arduino Mega </br>
+	13	Sanguino </br>
+*	 9  Boarduino </br>
 </p>
 
 

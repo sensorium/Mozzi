@@ -70,11 +70,11 @@ x	 9	Arduino Nano
 x	 9	Arduino Leonardo  
 x	 9  Ardweeny  
 x	11  Freetronics EtherMega  
-  14	Teensy  
+..14	Teensy  
 x	B5  Teensy2  
 x	B5(25) Teensy2++  
 x	11	Arduino Mega  
-  13	Sanguino  
+..13	Sanguino  
 x	 9  Boarduino  
 
 

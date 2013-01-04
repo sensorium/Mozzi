@@ -1,12 +1,6 @@
 /*
  * StateVariable.h
  *
- * State Variable Filter (approximation of Chamberlin version)
- * Informed by pseudocode at http://www.musicdsp.org/showone.php?id=23 and http://www.musicdsp.org/showone.php?id=142.
- * References : 
- * Hal Chamberlin, "Musical Applications of Microprocessors," 2nd Ed, Hayden Book Company 1985. pp 490-492.
- * Effect Deisgn Part 1, Jon Dattorro, J. Audio Eng. Soc., Vol 45, No. 9, 1997 September
- *
  * This implementation copyright 2012 Tim Barrass.
  *
  * This file is part of Mozzi.
@@ -28,16 +22,11 @@
 
 
 /**
-based on http://www.musicdsp.org/showone.php?id=23
- 
-State variable filter: Digital approximation of Chamberlin two-pole low pass. 
-Type : 12db resonant low, high, notch or bandpass
-References : Effect Design Part 1, Jon Dattorro, J. Audio Eng. Soc., Vol 45, No. 9, 1997 September
-
-
-//cutoff: 20 - 4096Hz;
-//qvalue: 1 - 255;
-
+State Variable Filter (approximation of Chamberlin version)
+Informed by pseudocode at http://www.musicdsp.org/showone.php?id=23 and http://www.musicdsp.org/showone.php?id=142.
+References : 
+Hal Chamberlin, Musical Applications of Microprocessors, 2nd Ed, Hayden Book Company 1985. pp 490-492.
+Jon Dattorro, Effect Design Part 1, J. Audio Eng. Soc., Vol 45, No. 9, 1997 September
 */
 
 #ifndef STATEVARIABLE_H_

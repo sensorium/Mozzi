@@ -106,20 +106,15 @@ Here's a template for an empty Mozzi sketch:
 ### Documentation
 
 There's documentation in the doc folder in the Mozzi download
-and [online] (http://sensorium.github.com/Mozzi/doc/html/index.html).
-
+and [online] (http://sensorium.github.com/Mozzi/doc/html/index.html).  
 There are hints and tips and more help on the Mozzi [wiki]
-(https://github.com/sensorium/Mozzi/wiki/Hints-and-Tips).
-
+(https://github.com/sensorium/Mozzi/wiki/Hints-and-Tips).  
 Start or look up a topic on the Mozzi [users forum]
-(https://groups.google.com/forum/#!forum/mozzi-users).
-
+(https://groups.google.com/forum/#!forum/mozzi-users).  
 Also, feel free to submit any issues on the [GitHub Mozzi site]
-(https://github.com/sensorium/Mozzi/issues).
-
+(https://github.com/sensorium/Mozzi/issues).  
 Share [code snippets]
-(https://github.com/sensorium/Mozzi/wiki/Code-Snippets-to-Share).
-
+(https://github.com/sensorium/Mozzi/wiki/Code-Snippets-to-Share).  
 Check for code and usage changes in NEWS.txt.
 
 
@@ -133,18 +128,16 @@ delayMicroseconds(). Instead, you can use Mozzi's EventDelay() for scheduling.
 
 Mozzi makes use of the following code:
 
-[TimerOne library] (http://www.pjrc.com/teensy/td_libs_TimerOne.html)
-
+[TimerOne library] (http://www.pjrc.com/teensy/td_libs_TimerOne.html)  
 [xorshift] (http://www.jstatsoft.org/v08/i14/xorshift.pdf) random number generator, George Marsaglia, (2003)
 
 
 Mozzi has also drawn on and been influenced by (among many others):
 
-ead~.c puredata external (creb library) Copyright (c) 2000-2003 by Tom Schouten (GPL2)
-
+ead~.c puredata external (creb library) Copyright (c) 2000-2003 by Tom Schouten (GPL2)  
 [AF_precision_synthesis](http://adrianfreed.com/content/arduino-sketch-high-frequency-precision-sine-wave-tone-sound-synthesis)
-by Adrian Freed, 2009.
-
+by Adrian Freed, 2009.  
 [Resonant filter](http://www.musicdsp.org/archive.php?classid=3#259) posted to musicdsp.org by Paul Kellett,
 and fixed point version of the filter on [dave's blog of art and programming]
 (http://www.pawfal.org/dave/blog/2011/09/)
+State Variable filter pseudocode at http://www.musicdsp.org/showone.php?id=23 and http://www.musicdsp.org/showone.php?id=142.

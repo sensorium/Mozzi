@@ -64,6 +64,7 @@ Below is a list of the Digital Pins used by Mozzi for audio out on different boa
 Those which have been tested and reported to work have an asterix.
 Feedback about others is welcome.
 
+<p>
 *	 9	Arduino Uno
 *	 9	Arduino Duemilanove
 *	 9	Arduino Nano
@@ -76,7 +77,7 @@ Feedback about others is welcome.
 *	11	Arduino Mega
 	13	Sanguino
 *	 9  Boarduino
-
+</p>
 
 
 ### Using Mozzi

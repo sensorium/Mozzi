@@ -65,8 +65,10 @@ Those which have been tested and reported to work have an asterix.
 Feedback about others is welcome.
 
 <p>
-*	 9	Arduino Uno </br>
-*	 9	Arduino Duemilanove </br>
+*	 9	Arduino Uno 
+</br>
+*	 9	Arduino Duemilanove 
+</br>
 *	 9	Arduino Nano </br>
 *	 9	Arduino Leonardo </br>
 *	 9  Ardweeny </br>

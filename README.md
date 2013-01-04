@@ -61,25 +61,21 @@ to with a sound program like Audacity. Try some examples from the
 File > Examples > Mozzi menu.
 
 Below is a list of the Digital Pins used by Mozzi for audio out on different boards.
-Those which have been tested and reported to work have an asterix.
+Those which have been tested and reported to work have an x.
 Feedback about others is welcome.
 
-<p>
-*	 9	Arduino Uno 
-</br>
-*	 9	Arduino Duemilanove 
-</br>
-*	 9	Arduino Nano </br>
-*	 9	Arduino Leonardo </br>
-*	 9  Ardweeny </br>
-*	11  Freetronics EtherMega </br>
-	14	Teensy </br>
-*	B5  Teensy2 </br>
-*	B5(25) Teensy2++ </br>
-*	11	Arduino Mega </br>
-	13	Sanguino </br>
-*	 9  Boarduino </br>
-</p>
+x	 9	Arduino Uno  
+x	 9	Arduino Duemilanove  
+x	 9	Arduino Nano  
+x	 9	Arduino Leonardo  
+x	 9  Ardweeny  
+x	11  Freetronics EtherMega  
+	14	Teensy  
+x	B5  Teensy2  
+x	B5(25) Teensy2++  
+x	11	Arduino Mega  
+	13	Sanguino  
+x	 9  Boarduino  
 
 
 ### Using Mozzi

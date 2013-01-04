@@ -33,6 +33,8 @@
 /** Exponential attack decay envelope. This produces a natural sounding
 envelope. It calculates a new value each time next() is called, which can be
 mapped to other parameters to change the amplitude or timbre of a sound.
+@note Currently doesn't work at audio rate... may need larger number 
+types for Q8n8attack and Q8n8decay ?
 */
 
 class Ead
@@ -70,7 +72,7 @@ public:
 	}
 
 
-	/** Set attack and decay times in milliseconds
+	/** Set attack and decay times in milliseconds.
 	@param attack_ms The time taken for values returned by successive calls of
 	the next() method to change from 0 to 255.
 	@param decay_ms The time taken for values returned by successive calls of
@@ -94,16 +96,32 @@ public:
 	}
 
 
-	/** Calculate and return the next envelope value, in the range -128 to 127 
+	/** Set attack and decay times in milliseconds, and start the envelope from
+	the beginning. This can be used at any time, even if the previous envelope
+	is not finished. 
+	@param attack_ms The time taken for values returned by successive calls of
+	the next() method to change from 0 to 255.
+	@param decay_ms The time taken for values returned by successive calls of
+	the next() method to change from 255 to 0.
+	*/
+	inline
+	void start(unsigned int attack_ms, unsigned int decay_ms)
+	{
+		set(attack_ms, decay_ms);
+		Q8n24state = 0;
+		attack_phase = true;
+	}
+
+
+	/** Calculate and return the next envelope value, in the range -128 to 127
 	@note Timing: 5us
 	*/
 
 	inline
 	unsigned char next()
 	{
-		switch(attack_phase)
+		if(attack_phase)
 		{
-		case true: /* attack phase */
 			// signed multiply A(a1,b1) * A(a2,b2)=A(a1 +a2 +1,b1 +b2)
 			Q8n24state += ((Q8n24_FIX1 - Q8n24state) * Q8n8attack) >> 8; // Q8n24, shifts all back into n24
 			if (Q8n24state >= Q8n24_FIX1-256)
@@ -111,10 +129,8 @@ public:
 				Q8n24state = Q8n24_FIX1-256;
 				attack_phase = false;
 			}
-			break;
-		default: /* decay phase */
+		}else{ /* decay phase */
 			Q8n24state -= (Q8n24state * Q8n8decay)>>8;
-			break;
 		}
 		return Q8n24_to_Q0n8(Q8n24state);
 	}

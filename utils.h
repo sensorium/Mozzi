@@ -54,6 +54,8 @@ extern const uint8_t PROGMEM analog_pin_to_channel_PGM[];
 #endif
 
 void setupFastAnalogRead();
+void setAnalogInChannel(byte channel_num);
+void unSetAnalogInChannel(byte channel_num);
 void startAnalogRead(unsigned char pin);
 int receiveAnalogRead();
 #endif /* UTILS_H_ */

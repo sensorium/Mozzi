@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1n</span>
+   &#160;<span id="projectnumber">alpha 0.01.1o</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -220,175 +220,187 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00148"></a>00148 <span class="comment">// static unsigned long y= analogRead(A1)+362436069;</span>
 <a name="l00149"></a>00149 <span class="comment">// static unsigned long z= analogRead(A2)+521288629;</span>
 <a name="l00150"></a>00150 
-<a name="l00160"></a><a class="code" href="group__util.html#ga8a9592250ee294a64c6d133e20520651">00160</a> <span class="keywordtype">void</span> <a class="code" href="group__util.html#ga8a9592250ee294a64c6d133e20520651" title="Initialises Mozzi&#39;s (pseudo)random number generator xorshift96(), which is used in Mozzi&#39;s rand() fun...">randSeed</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed)
-<a name="l00161"></a>00161 {
-<a name="l00162"></a>00162                 x=seed;
-<a name="l00163"></a>00163 }
-<a name="l00164"></a>00164 
-<a name="l00165"></a>00165 
-<a name="l00173"></a><a class="code" href="group__util.html#ga34956c2687a09ae6e3e7b9e632a09f18">00173</a> <span class="keywordtype">void</span> <a class="code" href="group__util.html#ga34956c2687a09ae6e3e7b9e632a09f18" title="Initialises Mozzi&#39;s (pseudo)random number generator xorshift96().">xorshiftSeed</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed)
-<a name="l00174"></a>00174 {
-<a name="l00175"></a>00175                 x=seed;
-<a name="l00176"></a>00176 }
-<a name="l00177"></a>00177 
-<a name="l00178"></a>00178 
-<a name="l00186"></a>00186 <span class="comment">// Based on Marsaglia, George. (2003). Xorshift RNGs. http://www.jstatsoft.org/v08/i14/xorshift.pdf</span>
-<a name="l00187"></a><a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6">00187</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()
-<a name="l00188"></a>00188 {          <span class="comment">//period 2^96-1</span>
-<a name="l00189"></a>00189                 <span class="comment">// static unsigned long x=123456789, y=362436069, z=521288629;</span>
-<a name="l00190"></a>00190                 <span class="comment">//static unsigned long x=123456789, y=362436069, z=analogRead(0);</span>
-<a name="l00191"></a>00191                 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> t;
-<a name="l00192"></a>00192 
-<a name="l00193"></a>00193                 x ^= x &lt;&lt; 16;
-<a name="l00194"></a>00194                 x ^= x &gt;&gt; 5;
-<a name="l00195"></a>00195                 x ^= x &lt;&lt; 1;
-<a name="l00196"></a>00196 
-<a name="l00197"></a>00197                 t = x;
-<a name="l00198"></a>00198                 x = y;
-<a name="l00199"></a>00199                 y = z;
-<a name="l00200"></a>00200                 z = t ^ x ^ y;
-<a name="l00201"></a>00201 
-<a name="l00202"></a>00202                 <span class="keywordflow">return</span> z;
-<a name="l00203"></a>00203 }
-<a name="l00204"></a>00204 
-<a name="l00205"></a>00205 
-<a name="l00212"></a><a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21">00212</a> <span class="keywordtype">char</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">char</span> minval, <span class="keywordtype">char</span> maxval)
-<a name="l00213"></a>00213 {
-<a name="l00214"></a>00214                 <span class="keywordflow">return</span> (<span class="keywordtype">char</span>) ((((int) (lowByte(<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()))) * (maxval-minval))/256) + minval;
-<a name="l00215"></a>00215 }
-<a name="l00216"></a>00216 
-<a name="l00217"></a>00217 
-<a name="l00224"></a><a class="code" href="group__util.html#ga91590455565d619314812a7f95fcd9e7">00224</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> minval, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> maxval)
-<a name="l00225"></a>00225 {
-<a name="l00226"></a>00226                 <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>) ((((<span class="keywordtype">unsigned</span> int) (lowByte(<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()))) * (maxval-minval))/256) + minval;
-<a name="l00227"></a>00227 }
-<a name="l00228"></a>00228 
-<a name="l00229"></a>00229 
-<a name="l00236"></a><a class="code" href="group__util.html#ga4c69deb53afb886b26c76b343513b340">00236</a> <span class="keywordtype">int</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>( <span class="keywordtype">int</span> minval,  <span class="keywordtype">int</span> maxval)
-<a name="l00237"></a>00237 {
-<a name="l00238"></a>00238                 <span class="keywordflow">return</span> (<span class="keywordtype">int</span>) ((((<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()&gt;&gt;16) * (maxval-minval))&gt;&gt;16) + minval);
-<a name="l00239"></a>00239 }
-<a name="l00240"></a>00240 
-<a name="l00241"></a>00241 
-<a name="l00248"></a><a class="code" href="group__util.html#ga95de742b529d5965461f1d3f6f576e18">00248</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> minval, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> maxval)
-<a name="l00249"></a>00249 {
-<a name="l00250"></a>00250                 <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>) ((((<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()&gt;&gt;16) * (maxval-minval))&gt;&gt;16) + minval);
-<a name="l00251"></a>00251 }
-<a name="l00252"></a>00252 
-<a name="l00253"></a>00253 
-<a name="l00259"></a><a class="code" href="group__util.html#gaa0c23ec434d09717e1fe2e8363e689bc">00259</a> <span class="keywordtype">char</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">char</span> maxval)
-<a name="l00260"></a>00260 {
-<a name="l00261"></a>00261                 <span class="keywordflow">return</span> (<span class="keywordtype">char</span>) ((((int) (lowByte(<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()))) * maxval)/256);
-<a name="l00262"></a>00262 }
-<a name="l00263"></a>00263 
-<a name="l00264"></a>00264 
-<a name="l00270"></a><a class="code" href="group__util.html#ga4bfcc7c200e26fff41a2af61c9ea1a9f">00270</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> maxval)
-<a name="l00271"></a>00271 {
-<a name="l00272"></a>00272                 <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>) ((((<span class="keywordtype">unsigned</span> int) (lowByte(<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()))) * maxval)/256);
-<a name="l00273"></a>00273 }
-<a name="l00274"></a>00274 
-<a name="l00275"></a>00275 
-<a name="l00281"></a><a class="code" href="group__util.html#ga1182cb74988d9c8510959149adc63762">00281</a> <span class="keywordtype">int</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">int</span> maxval)
-<a name="l00282"></a>00282 {
-<a name="l00283"></a>00283                 <span class="keywordflow">return</span> (<span class="keywordtype">int</span>) (((<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()&gt;&gt;16) * maxval)&gt;&gt;16);
-<a name="l00284"></a>00284 }
-<a name="l00285"></a>00285 
-<a name="l00286"></a>00286 
-<a name="l00292"></a><a class="code" href="group__util.html#ga4ad4ab94c8b0e8a4d4be925490378733">00292</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> maxval)
-<a name="l00293"></a>00293 {
-<a name="l00294"></a>00294                 <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>) (((<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()&gt;&gt;16) * maxval)&gt;&gt;16);
-<a name="l00295"></a>00295 }
-<a name="l00296"></a>00296 
-<a name="l00297"></a>00297 
-<a name="l00298"></a>00298 
-<a name="l00306"></a><a class="code" href="group__util.html#gaf46803d06aa1d839192cc6125e39ff01">00306</a> <span class="keywordtype">void</span> <a class="code" href="group__util.html#gaf46803d06aa1d839192cc6125e39ff01" title="Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in u...">setupFastAnalogRead</a>()
-<a name="l00307"></a>00307 {
-<a name="l00308"></a>00308                 <span class="comment">// fastest predivided rate (divide by 16, giving 1Mhz) for which behaviour is defined (~16us per sample)</span>
-<a name="l00309"></a>00309                 sbi(ADCSRA,ADPS2);
-<a name="l00310"></a>00310                 cbi(ADCSRA,ADPS1);
-<a name="l00311"></a>00311                 cbi(ADCSRA,ADPS0);
-<a name="l00312"></a>00312 }
-<a name="l00313"></a>00313 
-<a name="l00314"></a>00314 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> analog_reference = DEFAULT;
-<a name="l00315"></a>00315 
-<a name="l00329"></a>00329 <span class="comment">// basically analogRead() chopped in half so the ADC conversion</span>
-<a name="l00330"></a>00330 <span class="comment">// can be started in one function and received in another.</span>
-<a name="l00331"></a><a class="code" href="group__util.html#ga485c51c54fdca43480b38e7c2ded07c4">00331</a> <span class="keywordtype">void</span> <a class="code" href="group__util.html#ga485c51c54fdca43480b38e7c2ded07c4" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> pin)
-<a name="l00332"></a>00332 {
-<a name="l00333"></a>00333 
-<a name="l00334"></a>00334 <span class="preprocessor">#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)</span>
-<a name="l00335"></a>00335 <span class="preprocessor"></span>                <span class="keywordflow">if</span> (pin &gt;= 54)
-<a name="l00336"></a>00336                                 pin -= 54; <span class="comment">// allow for channel or pin numbers</span>
-<a name="l00337"></a>00337 <span class="preprocessor">#elif defined(__AVR_ATmega32U4__)</span>
-<a name="l00338"></a>00338 <span class="preprocessor"></span>
-<a name="l00339"></a>00339                 <span class="keywordflow">if</span> (pin &gt;= 18)
-<a name="l00340"></a>00340                                 pin -= 18; <span class="comment">// allow for channel or pin numbers</span>
-<a name="l00341"></a>00341 <span class="preprocessor">#elif defined(__AVR_ATmega1284__)</span>
-<a name="l00342"></a>00342 <span class="preprocessor"></span>
-<a name="l00343"></a>00343                 <span class="keywordflow">if</span> (pin &gt;= 24)
-<a name="l00344"></a>00344                                 pin -= 24; <span class="comment">// allow for channel or pin numbers</span>
-<a name="l00345"></a>00345 <span class="preprocessor">#else</span>
-<a name="l00346"></a>00346 <span class="preprocessor"></span>
-<a name="l00347"></a>00347                 <span class="keywordflow">if</span> (pin &gt;= 14)
-<a name="l00348"></a>00348                                 pin -= 14; <span class="comment">// allow for channel or pin numbers</span>
-<a name="l00349"></a>00349 <span class="preprocessor">#endif</span>
-<a name="l00350"></a>00350 <span class="preprocessor"></span>
-<a name="l00351"></a>00351 <span class="preprocessor">#if defined(__AVR_ATmega32U4__)</span>
-<a name="l00352"></a>00352 <span class="preprocessor"></span>
-<a name="l00353"></a>00353                 pin = analogPinToChannel(pin);
-<a name="l00354"></a>00354                 ADCSRB = (ADCSRB &amp; ~(1 &lt;&lt; MUX5)) | (((pin &gt;&gt; 3) &amp; 0x01) &lt;&lt; MUX5);
-<a name="l00355"></a>00355 <span class="preprocessor">#elif defined(ADCSRB) &amp;&amp; defined(MUX5)</span>
-<a name="l00356"></a>00356 <span class="preprocessor"></span>                <span class="comment">// the MUX5 bit of ADCSRB selects whether we&#39;re reading from channels</span>
-<a name="l00357"></a>00357                 <span class="comment">// 0 to 7 (MUX5 low) or 8 to 15 (MUX5 high).</span>
-<a name="l00358"></a>00358                 ADCSRB = (ADCSRB &amp; ~(1 &lt;&lt; MUX5)) | (((pin &gt;&gt; 3) &amp; 0x01) &lt;&lt; MUX5);
-<a name="l00359"></a>00359 <span class="preprocessor">#endif</span>
-<a name="l00360"></a>00360 <span class="preprocessor"></span>
-<a name="l00361"></a>00361                 <span class="comment">// set the analog reference (high two bits of ADMUX) and select the</span>
-<a name="l00362"></a>00362                 <span class="comment">// channel (low 4 bits).  this also sets ADLAR (left-adjust result)</span>
-<a name="l00363"></a>00363                 <span class="comment">// to 0 (the default).</span>
-<a name="l00364"></a>00364 <span class="preprocessor">#if defined(ADMUX)</span>
+<a name="l00155"></a><a class="code" href="group__util.html#ga8a9592250ee294a64c6d133e20520651">00155</a> <span class="keywordtype">void</span> <a class="code" href="group__util.html#ga8a9592250ee294a64c6d133e20520651" title="Initialises Mozzi&#39;s (pseudo)random number generator xorshift96(), which is used in Mozzi&#39;s rand() fun...">randSeed</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed)
+<a name="l00156"></a>00156 {
+<a name="l00157"></a>00157                 x=seed;
+<a name="l00158"></a>00158 }
+<a name="l00159"></a>00159 
+<a name="l00160"></a>00160 
+<a name="l00168"></a><a class="code" href="group__util.html#ga34956c2687a09ae6e3e7b9e632a09f18">00168</a> <span class="keywordtype">void</span> <a class="code" href="group__util.html#ga34956c2687a09ae6e3e7b9e632a09f18" title="Initialises Mozzi&#39;s (pseudo)random number generator xorshift96().">xorshiftSeed</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed)
+<a name="l00169"></a>00169 {
+<a name="l00170"></a>00170                 x=seed;
+<a name="l00171"></a>00171 }
+<a name="l00172"></a>00172 
+<a name="l00173"></a>00173 
+<a name="l00180"></a>00180 <span class="comment">// Based on Marsaglia, George. (2003). Xorshift RNGs. http://www.jstatsoft.org/v08/i14/xorshift.pdf</span>
+<a name="l00181"></a><a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6">00181</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()
+<a name="l00182"></a>00182 {          <span class="comment">//period 2^96-1</span>
+<a name="l00183"></a>00183                 <span class="comment">// static unsigned long x=123456789, y=362436069, z=521288629;</span>
+<a name="l00184"></a>00184                 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> t;
+<a name="l00185"></a>00185 
+<a name="l00186"></a>00186                 x ^= x &lt;&lt; 16;
+<a name="l00187"></a>00187                 x ^= x &gt;&gt; 5;
+<a name="l00188"></a>00188                 x ^= x &lt;&lt; 1;
+<a name="l00189"></a>00189 
+<a name="l00190"></a>00190                 t = x;
+<a name="l00191"></a>00191                 x = y;
+<a name="l00192"></a>00192                 y = z;
+<a name="l00193"></a>00193                 z = t ^ x ^ y;
+<a name="l00194"></a>00194 
+<a name="l00195"></a>00195                 <span class="keywordflow">return</span> z;
+<a name="l00196"></a>00196 }
+<a name="l00197"></a>00197 
+<a name="l00198"></a>00198 
+<a name="l00205"></a><a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21">00205</a> <span class="keywordtype">char</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">char</span> minval, <span class="keywordtype">char</span> maxval)
+<a name="l00206"></a>00206 {
+<a name="l00207"></a>00207                 <span class="keywordflow">return</span> (<span class="keywordtype">char</span>) ((((int) (lowByte(<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()))) * (maxval-minval))/256) + minval;
+<a name="l00208"></a>00208 }
+<a name="l00209"></a>00209 
+<a name="l00210"></a>00210 
+<a name="l00217"></a><a class="code" href="group__util.html#ga91590455565d619314812a7f95fcd9e7">00217</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> minval, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> maxval)
+<a name="l00218"></a>00218 {
+<a name="l00219"></a>00219                 <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>) ((((<span class="keywordtype">unsigned</span> int) (lowByte(<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()))) * (maxval-minval))/256) + minval;
+<a name="l00220"></a>00220 }
+<a name="l00221"></a>00221 
+<a name="l00222"></a>00222 
+<a name="l00229"></a><a class="code" href="group__util.html#ga4c69deb53afb886b26c76b343513b340">00229</a> <span class="keywordtype">int</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>( <span class="keywordtype">int</span> minval,  <span class="keywordtype">int</span> maxval)
+<a name="l00230"></a>00230 {
+<a name="l00231"></a>00231                 <span class="keywordflow">return</span> (<span class="keywordtype">int</span>) ((((<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()&gt;&gt;16) * (maxval-minval))&gt;&gt;16) + minval);
+<a name="l00232"></a>00232 }
+<a name="l00233"></a>00233 
+<a name="l00234"></a>00234 
+<a name="l00241"></a><a class="code" href="group__util.html#ga95de742b529d5965461f1d3f6f576e18">00241</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> minval, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> maxval)
+<a name="l00242"></a>00242 {
+<a name="l00243"></a>00243                 <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>) ((((<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()&gt;&gt;16) * (maxval-minval))&gt;&gt;16) + minval);
+<a name="l00244"></a>00244 }
+<a name="l00245"></a>00245 
+<a name="l00246"></a>00246 
+<a name="l00252"></a><a class="code" href="group__util.html#gaa0c23ec434d09717e1fe2e8363e689bc">00252</a> <span class="keywordtype">char</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">char</span> maxval)
+<a name="l00253"></a>00253 {
+<a name="l00254"></a>00254                 <span class="keywordflow">return</span> (<span class="keywordtype">char</span>) ((((int) (lowByte(<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()))) * maxval)/256);
+<a name="l00255"></a>00255 }
+<a name="l00256"></a>00256 
+<a name="l00257"></a>00257 
+<a name="l00263"></a><a class="code" href="group__util.html#ga4bfcc7c200e26fff41a2af61c9ea1a9f">00263</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> maxval)
+<a name="l00264"></a>00264 {
+<a name="l00265"></a>00265                 <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>) ((((<span class="keywordtype">unsigned</span> int) (lowByte(<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()))) * maxval)/256);
+<a name="l00266"></a>00266 }
+<a name="l00267"></a>00267 
+<a name="l00268"></a>00268 
+<a name="l00274"></a><a class="code" href="group__util.html#ga1182cb74988d9c8510959149adc63762">00274</a> <span class="keywordtype">int</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">int</span> maxval)
+<a name="l00275"></a>00275 {
+<a name="l00276"></a>00276                 <span class="keywordflow">return</span> (<span class="keywordtype">int</span>) (((<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()&gt;&gt;16) * maxval)&gt;&gt;16);
+<a name="l00277"></a>00277 }
+<a name="l00278"></a>00278 
+<a name="l00279"></a>00279 
+<a name="l00285"></a><a class="code" href="group__util.html#ga4ad4ab94c8b0e8a4d4be925490378733">00285</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="group__util.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> maxval)
+<a name="l00286"></a>00286 {
+<a name="l00287"></a>00287                 <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>) (((<a class="code" href="group__util.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>()&gt;&gt;16) * maxval)&gt;&gt;16);
+<a name="l00288"></a>00288 }
+<a name="l00289"></a>00289 
+<a name="l00290"></a>00290 
+<a name="l00291"></a>00291 
+<a name="l00300"></a><a class="code" href="group__util.html#gaf46803d06aa1d839192cc6125e39ff01">00300</a> <span class="keywordtype">void</span> <a class="code" href="group__util.html#gaf46803d06aa1d839192cc6125e39ff01" title="Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in u...">setupFastAnalogRead</a>()
+<a name="l00301"></a>00301 {
+<a name="l00302"></a>00302                 <span class="comment">// fastest predivided rate (divide by 16, giving 1Mhz) for which behaviour is defined (~16us per sample)</span>
+<a name="l00303"></a>00303                 sbi(ADCSRA,ADPS2);
+<a name="l00304"></a>00304                 cbi(ADCSRA,ADPS1);
+<a name="l00305"></a>00305                 cbi(ADCSRA,ADPS0);
+<a name="l00306"></a>00306 }
+<a name="l00307"></a>00307 
+<a name="l00308"></a>00308 
+<a name="l00309"></a>00309 
+<a name="l00325"></a><a class="code" href="group__util.html#gac2ef69cb0de05285209866371b33af45">00325</a> <span class="keywordtype">void</span> <a class="code" href="group__util.html#gac2ef69cb0de05285209866371b33af45" title="Prepare an analog input channel by turning off its digital input buffer.">setAnalogInChannel</a>(byte channel_num){
+<a name="l00326"></a>00326                 DIDR0 |= 1&lt;&lt;channel_num;
+<a name="l00327"></a>00327 }
+<a name="l00328"></a>00328 
+<a name="l00329"></a>00329 
+<a name="l00330"></a>00330 
+<a name="l00336"></a><a class="code" href="group__util.html#gab882096e438e52cee6a1f858ec7707f7">00336</a> <span class="keywordtype">void</span> <a class="code" href="group__util.html#gab882096e438e52cee6a1f858ec7707f7" title="Reconnect the digital input buffer for an analog input channel which has been set for analog input wi...">unSetAnalogInChannel</a>(byte channel_num){
+<a name="l00337"></a>00337                 DIDR0 &amp;= ~(1&lt;&lt;channel_num);
+<a name="l00338"></a>00338 }
+<a name="l00339"></a>00339 
+<a name="l00340"></a>00340 
+<a name="l00341"></a>00341 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> analog_reference = DEFAULT;
+<a name="l00342"></a>00342 
+<a name="l00356"></a>00356 <span class="comment">// basically analogRead() chopped in half so the ADC conversion</span>
+<a name="l00357"></a>00357 <span class="comment">// can be started in one function and received in another.</span>
+<a name="l00358"></a><a class="code" href="group__util.html#ga485c51c54fdca43480b38e7c2ded07c4">00358</a> <span class="keywordtype">void</span> <a class="code" href="group__util.html#ga485c51c54fdca43480b38e7c2ded07c4" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> pin)
+<a name="l00359"></a>00359 {
+<a name="l00360"></a>00360 
+<a name="l00361"></a>00361 <span class="preprocessor">#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)</span>
+<a name="l00362"></a>00362 <span class="preprocessor"></span>                <span class="keywordflow">if</span> (pin &gt;= 54)
+<a name="l00363"></a>00363                                 pin -= 54; <span class="comment">// allow for channel or pin numbers</span>
+<a name="l00364"></a>00364 <span class="preprocessor">#elif defined(__AVR_ATmega32U4__)</span>
 <a name="l00365"></a>00365 <span class="preprocessor"></span>
-<a name="l00366"></a>00366                 ADMUX = (analog_reference &lt;&lt; 6) | (pin &amp; 0x07);
-<a name="l00367"></a>00367 <span class="preprocessor">#endif</span>
-<a name="l00368"></a>00368 <span class="preprocessor"></span>
-<a name="l00369"></a>00369                 <span class="comment">// without a delay, we seem to read from the wrong channel</span>
-<a name="l00370"></a>00370                 <span class="comment">//delay(1);</span>
-<a name="l00371"></a>00371 
-<a name="l00372"></a>00372 <span class="preprocessor">#if defined(ADCSRA) &amp;&amp; defined(ADCL)</span>
-<a name="l00373"></a>00373 <span class="preprocessor"></span>                <span class="comment">// start the conversion</span>
-<a name="l00374"></a>00374                 sbi(ADCSRA, ADSC);
-<a name="l00375"></a>00375 <span class="preprocessor">#endif</span>
-<a name="l00376"></a>00376 <span class="preprocessor"></span>}
-<a name="l00377"></a>00377 
-<a name="l00387"></a><a class="code" href="group__util.html#ga215a0653b8dabc35731d7115d1140757">00387</a> <span class="keywordtype">int</span> <a class="code" href="group__util.html#ga215a0653b8dabc35731d7115d1140757" title="Waits for the result of the most recent startAnalogRead().">receiveAnalogRead</a>()
-<a name="l00388"></a>00388 {
-<a name="l00389"></a>00389                 <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> low, high;
-<a name="l00390"></a>00390 <span class="preprocessor">#if defined(ADCSRA) &amp;&amp; defined(ADCL)</span>
-<a name="l00391"></a>00391 <span class="preprocessor"></span>                <span class="comment">// ADSC is cleared when the conversion finishes</span>
-<a name="l00392"></a>00392                 <span class="keywordflow">while</span> (bit_is_set(ADCSRA, ADSC))
-<a name="l00393"></a>00393                                 ;
-<a name="l00394"></a>00394 
-<a name="l00395"></a>00395                 <span class="comment">// we have to read ADCL first; doing so locks both ADCL</span>
-<a name="l00396"></a>00396                 <span class="comment">// and ADCH until ADCH is read.  reading ADCL second would</span>
-<a name="l00397"></a>00397                 <span class="comment">// cause the results of each conversion to be discarded,</span>
-<a name="l00398"></a>00398                 <span class="comment">// as ADCL and ADCH would be locked when it completed.</span>
-<a name="l00399"></a>00399                 low  = ADCL;
-<a name="l00400"></a>00400                 high = ADCH;
-<a name="l00401"></a>00401 <span class="preprocessor">#else</span>
-<a name="l00402"></a>00402 <span class="preprocessor"></span>                <span class="comment">// we dont have an ADC, return 0</span>
-<a name="l00403"></a>00403                 low  = 0;
-<a name="l00404"></a>00404                 high = 0;
-<a name="l00405"></a>00405 <span class="preprocessor">#endif</span>
-<a name="l00406"></a>00406 <span class="preprocessor"></span>
-<a name="l00407"></a>00407                 <span class="comment">// combine the two bytes</span>
-<a name="l00408"></a>00408                 <span class="keywordflow">return</span> (high &lt;&lt; 8) | low;
-<a name="l00409"></a>00409 }
-<a name="l00410"></a>00410 
+<a name="l00366"></a>00366                 <span class="keywordflow">if</span> (pin &gt;= 18)
+<a name="l00367"></a>00367                                 pin -= 18; <span class="comment">// allow for channel or pin numbers</span>
+<a name="l00368"></a>00368 <span class="preprocessor">#elif defined(__AVR_ATmega1284__)</span>
+<a name="l00369"></a>00369 <span class="preprocessor"></span>
+<a name="l00370"></a>00370                 <span class="keywordflow">if</span> (pin &gt;= 24)
+<a name="l00371"></a>00371                                 pin -= 24; <span class="comment">// allow for channel or pin numbers</span>
+<a name="l00372"></a>00372 <span class="preprocessor">#else</span>
+<a name="l00373"></a>00373 <span class="preprocessor"></span>
+<a name="l00374"></a>00374                 <span class="keywordflow">if</span> (pin &gt;= 14)
+<a name="l00375"></a>00375                                 pin -= 14; <span class="comment">// allow for channel or pin numbers</span>
+<a name="l00376"></a>00376 <span class="preprocessor">#endif</span>
+<a name="l00377"></a>00377 <span class="preprocessor"></span>
+<a name="l00378"></a>00378 <span class="preprocessor">#if defined(__AVR_ATmega32U4__)</span>
+<a name="l00379"></a>00379 <span class="preprocessor"></span>
+<a name="l00380"></a>00380                 pin = analogPinToChannel(pin);
+<a name="l00381"></a>00381                 ADCSRB = (ADCSRB &amp; ~(1 &lt;&lt; MUX5)) | (((pin &gt;&gt; 3) &amp; 0x01) &lt;&lt; MUX5);
+<a name="l00382"></a>00382 <span class="preprocessor">#elif defined(ADCSRB) &amp;&amp; defined(MUX5)</span>
+<a name="l00383"></a>00383 <span class="preprocessor"></span>                <span class="comment">// the MUX5 bit of ADCSRB selects whether we&#39;re reading from channels</span>
+<a name="l00384"></a>00384                 <span class="comment">// 0 to 7 (MUX5 low) or 8 to 15 (MUX5 high).</span>
+<a name="l00385"></a>00385                 ADCSRB = (ADCSRB &amp; ~(1 &lt;&lt; MUX5)) | (((pin &gt;&gt; 3) &amp; 0x01) &lt;&lt; MUX5);
+<a name="l00386"></a>00386 <span class="preprocessor">#endif</span>
+<a name="l00387"></a>00387 <span class="preprocessor"></span>
+<a name="l00388"></a>00388                 <span class="comment">// set the analog reference (high two bits of ADMUX) and select the</span>
+<a name="l00389"></a>00389                 <span class="comment">// channel (low 4 bits).  this also sets ADLAR (left-adjust result)</span>
+<a name="l00390"></a>00390                 <span class="comment">// to 0 (the default).</span>
+<a name="l00391"></a>00391 <span class="preprocessor">#if defined(ADMUX)</span>
+<a name="l00392"></a>00392 <span class="preprocessor"></span>
+<a name="l00393"></a>00393                 ADMUX = (analog_reference &lt;&lt; 6) | (pin &amp; 0x07);
+<a name="l00394"></a>00394 <span class="preprocessor">#endif</span>
+<a name="l00395"></a>00395 <span class="preprocessor"></span>
+<a name="l00396"></a>00396                 <span class="comment">// without a delay, we seem to read from the wrong channel</span>
+<a name="l00397"></a>00397                 <span class="comment">//delay(1);</span>
+<a name="l00398"></a>00398 
+<a name="l00399"></a>00399 <span class="preprocessor">#if defined(ADCSRA) &amp;&amp; defined(ADCL)</span>
+<a name="l00400"></a>00400 <span class="preprocessor"></span>                <span class="comment">// start the conversion</span>
+<a name="l00401"></a>00401                 sbi(ADCSRA, ADSC);
+<a name="l00402"></a>00402 <span class="preprocessor">#endif</span>
+<a name="l00403"></a>00403 <span class="preprocessor"></span>}
+<a name="l00404"></a>00404 
+<a name="l00414"></a><a class="code" href="group__util.html#ga215a0653b8dabc35731d7115d1140757">00414</a> <span class="keywordtype">int</span> <a class="code" href="group__util.html#ga215a0653b8dabc35731d7115d1140757" title="Waits for the result of the most recent startAnalogRead().">receiveAnalogRead</a>()
+<a name="l00415"></a>00415 {
+<a name="l00416"></a>00416                 <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> low, high;
+<a name="l00417"></a>00417 <span class="preprocessor">#if defined(ADCSRA) &amp;&amp; defined(ADCL)</span>
+<a name="l00418"></a>00418 <span class="preprocessor"></span>                <span class="comment">// ADSC is cleared when the conversion finishes</span>
+<a name="l00419"></a>00419                 <span class="keywordflow">while</span> (bit_is_set(ADCSRA, ADSC))
+<a name="l00420"></a>00420                                 ;
+<a name="l00421"></a>00421 
+<a name="l00422"></a>00422                 <span class="comment">// we have to read ADCL first; doing so locks both ADCL</span>
+<a name="l00423"></a>00423                 <span class="comment">// and ADCH until ADCH is read.  reading ADCL second would</span>
+<a name="l00424"></a>00424                 <span class="comment">// cause the results of each conversion to be discarded,</span>
+<a name="l00425"></a>00425                 <span class="comment">// as ADCL and ADCH would be locked when it completed.</span>
+<a name="l00426"></a>00426                 low  = ADCL;
+<a name="l00427"></a>00427                 high = ADCH;
+<a name="l00428"></a>00428 <span class="preprocessor">#else</span>
+<a name="l00429"></a>00429 <span class="preprocessor"></span>                <span class="comment">// we dont have an ADC, return 0</span>
+<a name="l00430"></a>00430                 low  = 0;
+<a name="l00431"></a>00431                 high = 0;
+<a name="l00432"></a>00432 <span class="preprocessor">#endif</span>
+<a name="l00433"></a>00433 <span class="preprocessor"></span>
+<a name="l00434"></a>00434                 <span class="comment">// combine the two bytes</span>
+<a name="l00435"></a>00435                 <span class="keywordflow">return</span> (high &lt;&lt; 8) | low;
+<a name="l00436"></a>00436 }
+<a name="l00437"></a>00437 
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 14 2012 00:15:22 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 5 2013 00:56:59 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

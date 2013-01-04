@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1n</span>
+   &#160;<span id="projectnumber">alpha 0.01.1o</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -122,7 +122,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00024"></a>00024 <span class="comment">##    options set to &quot;RAW(headerless)&quot; and &quot;Encoding 8 bit signed PCM&quot;.</span>
 <a name="l00025"></a>00025 
 <a name="l00026"></a>00026 
-<a name="l00027"></a>00027 <span class="keyword">import</span> sys, array, os, textwrap
+<a name="l00027"></a>00027 <span class="keyword">import</span> sys, array, os, textwrap, random
 <a name="l00028"></a>00028 
 <a name="l00029"></a>00029 <span class="keywordflow">if</span> len(sys.argv) != 5:
 <a name="l00030"></a>00030         <span class="keywordflow">print</span> <span class="stringliteral">&#39;Usage: char2mozzi.py &lt;infilename outfilename &quot;tablename&quot; &quot;samplerate&quot;&gt;&#39;</span>
@@ -154,22 +154,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00056"></a>00056     fout.write(<span class="stringliteral">&#39;#define &#39;</span> + tablename + <span class="stringliteral">&#39;_SAMPLERATE &#39;</span>+ str(samplerate)+<span class="stringliteral">&#39;\n \n&#39;</span>)
 <a name="l00057"></a>00057     outstring = <span class="stringliteral">&#39;const char __attribute__((progmem)) &#39;</span> + tablename + <span class="stringliteral">&#39;_DATA [] = {&#39;</span>
 <a name="l00058"></a>00058     <span class="keywordflow">try</span>:
-<a name="l00059"></a>00059         <span class="keywordflow">for</span> num <span class="keywordflow">in</span> values:
-<a name="l00060"></a>00060             outstring += str(num) + <span class="stringliteral">&quot;, &quot;</span>
-<a name="l00061"></a>00061     <span class="keywordflow">finally</span>:
-<a name="l00062"></a>00062         outstring +=  <span class="stringliteral">&quot;};&quot;</span>
-<a name="l00063"></a>00063         outstring = textwrap.fill(outstring, 80)
-<a name="l00064"></a>00064         fout.write(outstring)
-<a name="l00065"></a>00065         fout.write(<span class="stringliteral">&#39;\n \n #endif /* &#39;</span> + tablename + <span class="stringliteral">&#39;_H_ */\n&#39;</span>)
-<a name="l00066"></a>00066         fout.close()
-<a name="l00067"></a>00067         <span class="keywordflow">print</span> <span class="stringliteral">&quot;wrote &quot;</span> + outfilename
-<a name="l00068"></a>00068 
-<a name="l00069"></a>00069 <a class="code" href="namespacechar2mozzi.html">char2mozzi</a>(infilename, outfilename, tablename, samplerate)
+<a name="l00059"></a>00059         <span class="keywordflow">for</span> i <span class="keywordflow">in</span> range(len(values)):
+<a name="l00060"></a>00060                 <span class="comment">## mega2560 boards won&#39;t upload if there is 33, 33, 33 in the array, so dither the 3rd 33 if there is one</span>
+<a name="l00061"></a>00061                 <span class="keywordflow">if</span> (values[i] == 33) <span class="keywordflow">and</span> (values[i+1] == 33) <span class="keywordflow">and</span> (values[i+2] == 33):
+<a name="l00062"></a>00062                         values[i+2] = random.choice([32, 34])
+<a name="l00063"></a>00063                 outstring += str(values[i]) + <span class="stringliteral">&quot;, &quot;</span>
+<a name="l00064"></a>00064     <span class="keywordflow">finally</span>:
+<a name="l00065"></a>00065         outstring +=  <span class="stringliteral">&quot;};&quot;</span>
+<a name="l00066"></a>00066         outstring = textwrap.fill(outstring, 80)
+<a name="l00067"></a>00067         fout.write(outstring)
+<a name="l00068"></a>00068         fout.write(<span class="stringliteral">&#39;\n \n #endif /* &#39;</span> + tablename + <span class="stringliteral">&#39;_H_ */\n&#39;</span>)
+<a name="l00069"></a>00069         fout.close()
+<a name="l00070"></a>00070         <span class="keywordflow">print</span> <span class="stringliteral">&quot;wrote &quot;</span> + outfilename
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072 <a class="code" href="namespacechar2mozzi.html">char2mozzi</a>(infilename, outfilename, tablename, samplerate)
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 14 2012 00:15:22 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 5 2013 00:56:59 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

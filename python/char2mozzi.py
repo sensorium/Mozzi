@@ -24,7 +24,7 @@
 ##    options set to "RAW(headerless)" and "Encoding 8 bit signed PCM".
 
 
-import sys, array, os, textwrap
+import sys, array, os, textwrap, random
 
 if len(sys.argv) != 5:
         print 'Usage: char2mozzi.py <infilename outfilename "tablename" "samplerate">'
@@ -56,8 +56,11 @@ def char2mozzi(infilename, outfilename, tablename, samplerate):
     fout.write('#define ' + tablename + '_SAMPLERATE '+ str(samplerate)+'\n \n')
     outstring = 'const char __attribute__((progmem)) ' + tablename + '_DATA [] = {'
     try:
-        for num in values:
-            outstring += str(num) + ", "
+        for i in range(len(values)):
+                ## mega2560 boards won't upload if there is 33, 33, 33 in the array, so dither the 3rd 33 if there is one
+                if (values[i] == 33) and (values[i+1] == 33) and (values[i+2] == 33):
+                        values[i+2] = random.choice([32, 34])
+                outstring += str(values[i]) + ", "
     finally:
         outstring +=  "};"
         outstring = textwrap.fill(outstring, 80)

@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1n</span>
+   &#160;<span id="projectnumber">alpha 0.01.1o</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -117,14 +117,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:af203c82721ab832c653a23ff219c040e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set attack and decay times in milliseconds.  <a href="#af203c82721ab832c653a23ff219c040e"></a><br/></td></tr>
 <tr class="memitem:ac385679b58e2f9755029b7da7405b233"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ead.html#ac385679b58e2f9755029b7da7405b233">start</a> ()</td></tr>
 <tr class="memdesc:ac385679b58e2f9755029b7da7405b233"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the envelope from the beginning.  <a href="#ac385679b58e2f9755029b7da7405b233"></a><br/></td></tr>
+<tr class="memitem:a146b205e70f4b2293e643ea063f2b38f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ead.html#a146b205e70f4b2293e643ea063f2b38f">start</a> (unsigned int attack_ms, unsigned int decay_ms)</td></tr>
+<tr class="memdesc:a146b205e70f4b2293e643ea063f2b38f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set attack and decay times in milliseconds, and start the envelope from the beginning.  <a href="#a146b205e70f4b2293e643ea063f2b38f"></a><br/></td></tr>
 <tr class="memitem:a32d3e3cf3848e4dbab6a3b2030d7e4ba"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ead.html#a32d3e3cf3848e4dbab6a3b2030d7e4ba">next</a> ()</td></tr>
 <tr class="memdesc:a32d3e3cf3848e4dbab6a3b2030d7e4ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate and return the next envelope value, in the range -128 to 127.  <a href="#a32d3e3cf3848e4dbab6a3b2030d7e4ba"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Exponential attack decay envelope. </p>
 <p>This produces a natural sounding envelope. It calculates a new value each time <a class="el" href="class_ead.html#a32d3e3cf3848e4dbab6a3b2030d7e4ba" title="Calculate and return the next envelope value, in the range -128 to 127.">next()</a> is called, which can be mapped to other parameters to change the amplitude or timbre of a sound. </p>
+<dl class="section note"><dt>Note:</dt><dd>Currently doesn't work at audio rate... may need larger number types for Q8n8attack and Q8n8decay ? </dd></dl>
 
-<p>Definition at line <a class="el" href="_ead_8h_source.html#l00038">38</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
+<p>Definition at line <a class="el" href="_ead_8h_source.html#l00040">40</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a4862282805c2ac3255a34a99a31564d5"></a>
 <div class="memitem">
@@ -171,7 +174,7 @@ Public Member Functions</h2></td></tr>
 <p>Calculate and return the next envelope value, in the range -128 to 127. </p>
 <dl class="section note"><dt>Note:</dt><dd>Timing: 5us </dd></dl>
 
-<p>Definition at line <a class="el" href="_ead_8h_source.html#l00102">102</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
+<p>Definition at line <a class="el" href="_ead_8h_source.html#l00121">121</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
 
 </div>
 </div>
@@ -209,7 +212,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_ead_8h_source.html#l00080">80</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
+<p>Definition at line <a class="el" href="_ead_8h_source.html#l00082">82</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
 
 </div>
 </div>
@@ -236,7 +239,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_ead_8h_source.html#l00057">57</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
+<p>Definition at line <a class="el" href="_ead_8h_source.html#l00059">59</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
 
 </div>
 </div>
@@ -263,7 +266,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_ead_8h_source.html#l00067">67</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
+<p>Definition at line <a class="el" href="_ead_8h_source.html#l00069">69</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
 
 </div>
 </div>
@@ -284,7 +287,46 @@ Public Member Functions</h2></td></tr>
 <p>Start the envelope from the beginning. </p>
 <p>This can be used at any time, even if the previous envelope is not finished. </p>
 
-<p>Definition at line <a class="el" href="_ead_8h_source.html#l00090">90</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
+<p>Definition at line <a class="el" href="_ead_8h_source.html#l00092">92</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a146b205e70f4b2293e643ea063f2b38f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_ead.html#ac385679b58e2f9755029b7da7405b233">Ead::start</a> </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>attack_ms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>decay_ms</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set attack and decay times in milliseconds, and start the envelope from the beginning. </p>
+<p>This can be used at any time, even if the previous envelope is not finished. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">attack_ms</td><td>The time taken for values returned by successive calls of the <a class="el" href="class_ead.html#a32d3e3cf3848e4dbab6a3b2030d7e4ba" title="Calculate and return the next envelope value, in the range -128 to 127.">next()</a> method to change from 0 to 255. </td></tr>
+    <tr><td class="paramname">decay_ms</td><td>The time taken for values returned by successive calls of the <a class="el" href="class_ead.html#a32d3e3cf3848e4dbab6a3b2030d7e4ba" title="Calculate and return the next envelope value, in the range -128 to 127.">next()</a> method to change from 255 to 0. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_ead_8h_source.html#l00108">108</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
 
 </div>
 </div>
@@ -296,7 +338,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 14 2012 00:15:22 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 5 2013 00:56:59 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

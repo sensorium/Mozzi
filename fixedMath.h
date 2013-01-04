@@ -16,9 +16,11 @@ Take care when converting that the important bits of your numbers will fit in th
 #define Q0n8 unsigned char  		/**< unsigned fractional number using 8 fractional bits, represents 0.0 to 0.996*/
 #define Q8n0 unsigned char  		/**< normal unsigned char with 0 fractional bits, represents 0.0 to 255.0*/
 #define Q0n16 unsigned int  		/**< unsigned fractional number using 16 fractional bits, represents 0.0 to 0.999*/
+#define Q0n31 unsigned long				/**< signed number using 0 integer bits and 31 fractional bits, represents -32768 to 32767*/
 #define Q7n8 int 				/**< signed fractional number using 7 integer bits and 8 fractional bits, represents -127.996 to 127.996*/
+#define Q3n13 unsigned int /**< unsigned fractional number using 3 integer bits and 13 fractional bits, represents 0 to 7.999*/
 #define Q1n14 int				/**< signed fractional number using 1 integer bit and 14 fractional bits, represents -1.999 to 1.999*/
-#define Q15n0 int				/**< signed number using 15 integer bits and 0 fractional bits, represents -32768 to 32767*/
+#define Q15n0 int				/**< signed number using 15 integer bits and 0 fractional bits, represents -2147483648 to 2147483647*/
 #define Q8n8 unsigned int		/**< unsigned fractional number using 8 integer bits and 8 fractional bits, represents 0 to 255.996*/
 #define Q1n15 unsigned int		/**< unsigned fractional number using 1 integer bit and 15 fractional bits, represents 0 to 1.999*/
 #define Q16n0 unsigned int		/**< unsigned number using 16 integer bits and 0 fractional bits, represents 0 to 65536.0*/
@@ -39,12 +41,14 @@ Take care when converting that the important bits of your numbers will fit in th
 #define Q1n14_FIX1 ((Q1n14) 16384)		/**< 1 in Q1n14 format*/
 #define Q1n15_FIX1 ((Q1n15) 32768)		/**< 1 in Q1n15 format*/
 #define Q16n16_FIX1 ((Q16n16) 65536)		/**< 1 in Q16n16 format*/
+#define Q0n15_FIX1 ((Q0n15) 32767)		/**< 0.999 in Q0n15 format*/
 #define Q0n16_FIX1 ((Q0n16) 65535)		/**< 0.999 in Q0n16 format*/
 #define Q15n16_FIX1 ((Q15n16) 65536)		/**< 1 in Q15n16 format*/
 #define Q8n24_FIX1 ((Q8n24) 16777216)	/**< 1 in Q8n24 format*/
 #define Q0n32_FIX1 ((Q0n32) 4294967295)	/**< 0.999999999767169 in Q0n32 format*/
 
-
+#define Q3n13_2PI ((Q3n13) 411775)		/**< 2*PI in Q3n13 format*/
+#define Q16n16_2PI ((Q16n16) 411775)		/**< 2*PI in Q16n16 format*/
 
 #define low15bits ((Q1n15) 32767) /**< Useful for keeping the lower 15 bits of a Q1n15 number, using &*/
 
@@ -127,6 +131,8 @@ To convert a number from Qm.n format to floating point:
 #define Q23n8_to_Q31n0(a) ((Q31n0)((a)>>8))		/**<Convert Q23n8 fixed to Q31n0 long. @param a is a Q23n8 long*/
 #define Q23n8_to_Q16n0(a) ((Q16n0)((a)>>8))		/**<Convert Q23n8 fixed to Q16n0 unsigned int. Positive values only. @param a is a Q23n8 long*/
 #define Q23n8_to_Q15n0(a) ((Q15n0)((a)>>8))		/**<Convert Q23n8 fixed to Q15n0 signed int. @param a is a Q23n8 long*/
+#define Q23n8_to_Q7n8(a) ((Q7n8)((a)))			/**<Convert Q23n8 fixed to Q7n8 signed int, losing most significant bits. @param a is a Q23n8 signed long.*/
+
 #define Q23n8_to_float(a) (((float)(a))/256)			/**<Convert fix to float. @param a is a Q23n8 signed long*/
 
 #define Q24n8_to_Q0n8(a) ((Q0n8)(a))				/**<Convert Q24n8 fixed to Q0n8 unsigned char. @param a is a Q24n8 unsigned long*/
@@ -135,6 +141,7 @@ To convert a number from Qm.n format to floating point:
 
 #define Q15n16_to_Q0n8(a) ((Q0n8)((a)>>8))			/**<Convert Q15n16 fixed to Q0n8 unsigned char.  Only for  positive values!  @param a is a Q15n16 signed long*/
 #define Q15n16_to_Q15n0(a) ((Q15n0)((a)>>16))		/**<Convert Q15n16 fixed to Q15n0 signed int. @param a is a Q15n16 signed long*/
+#define Q15n16_to_Q7n8(a) ((Q7n8)((a)>>8))			/**<Convert Q15n16 fixed to Q7n8 signed int, keeping middle bits only. @param a is a Q15n16 signed long.*/
 #define Q15n16_to_float(a) (((float)(a))/65536)		/**<Convert fix to float. @param a is a Q15n16 signed long*/
 
 #define Q16n16_to_Q0n8(a) ((Q0n8)((a)>>8))			/**<Convert Q16n16 fixed to Q0n8 unsigned char. @param a is a Q16n16 unsigned long*/

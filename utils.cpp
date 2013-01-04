@@ -149,12 +149,7 @@ static unsigned long x=132456789, y=362436069, z=521288629;
 // static unsigned long z= analogRead(A2)+521288629;
 
 /** @ingroup util
-Initialises Mozzi's (pseudo)random number generator xorshift96(), which is used
-in Mozzi's rand() function. This can be useful if you want random sequences to
-be different on each run of a sketch, by seeding with fairly random input, such
-as analogRead() on an unconnected pin (as explained in the Arduino documentation
-for randomSeed(). randSeed is the same as xorshift96Seed(), but easier to
-remember.
+Initialises Mozzi's (pseudo)random number generator xorshift96(), which is used in Mozzi's rand() function. This can be useful if you want random sequences to be different on each run of a sketch, by seeding with fairly random input, such as analogRead() on an unconnected pin (as explained in the Arduino documentation for randomSeed(). randSeed is the same as xorshift96Seed(), but easier to remember.
 @param seed an int to use as a seed.
 */
 void randSeed(unsigned long seed)
@@ -177,8 +172,7 @@ void xorshiftSeed(unsigned long seed)
 
 
 /** @ingroup util
-Random number generator.
-A faster replacement for Arduino's random function,
+Random number generator. A faster replacement for Arduino's random function,
 which is too slow to use with Mozzi.
 @return a random 32 bit integer.
 @todo check timing of xorshift96(), rand() and other PRNG candidates.
@@ -187,7 +181,6 @@ which is too slow to use with Mozzi.
 unsigned long xorshift96()
 {          //period 2^96-1
 	// static unsigned long x=123456789, y=362436069, z=521288629;
-	//static unsigned long x=123456789, y=362436069, z=analogRead(0);
 	unsigned long t;
 
 	x ^= x << 16;
@@ -204,9 +197,9 @@ unsigned long xorshift96()
 
 
 /** @ingroup util
-Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.
-@param minval the minimum signed byte value of the range to be chosen from.  Minval will be the minimum value possibly returned by the function.
-@param maxval the maximum signed byte value of the range to be chosen from.  Maxval-1 will be the largest value  possibly returned by the function.
+Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi. 
+@param minval the minimum signed byte value of the range to be chosen from. Minval will be the minimum value possibly returned by the function. 
+@param maxval the maximum signed byte value of the range to be chosen from. Maxval-1 will be the largest value possibly returned by the function. 
 @return a random char between minval and maxval-1 inclusive.
 */
 char rand(char minval, char maxval)
@@ -301,7 +294,8 @@ Make analogRead() faster than the standard Arduino version, changing the
 duration from about 105 in unmodified Arduino to 15 microseconds for a
 dependable analogRead(). Put this in setup() if you intend to use analogRead()
 with Mozzi, to avoid glitches.
-See: http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11
+See: http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11, and
+http://www.marulaberry.co.za/index.php/tutorials/code/arduino-adc/
 */
 void setupFastAnalogRead()
 {
@@ -310,6 +304,39 @@ void setupFastAnalogRead()
 	cbi(ADCSRA,ADPS1);
 	cbi(ADCSRA,ADPS0);
 }
+
+
+
+/**  @ingroup util
+Prepare an analog input channel by turning off its digital input buffer.
+This helps to reduce noise, increase analog reading speed, and save power.
+
+Here's more detail from http://www.openmusiclabs.com/learning/digital/atmega-adc/:
+
+The DIDR (Data Input Disable Register) disconnects the digital inputs from whichever ADC channels you are using.  This is important for 2 reasons. First off, an analog input will be floating all over the place, and causing the digital input to constantly toggle high and low. This creates excessive noise near the ADC, and burns extra power. Secondly, the digital input and associated DIDR switch have a capacitance associated with them which will slow down your input signal if you are sampling a highly resistive load.
+
+And from the ATmega328p datasheet, p266:
+
+When an analog signal is applied to the ADC5..0 pin and the digital input from
+this pin is not needed, this bit should be written logic one to reduce power
+consumption in the digital input buffer. Note that ADC pins ADC7 and ADC6 do not have digital input buffers, and therefore do not require Digital Input Disable bits.
+@param channel_num the analog input channel you wish to use.
+*/
+void setAnalogInChannel(byte channel_num){
+	DIDR0 |= 1<<channel_num;
+}
+
+
+
+/** @ingroup util
+Reconnect the digital input buffer for an analog input channel which has
+been set for analog input with setAnalogInChannel().
+@param channel_num the analog input channel you wish to reconnect.
+*/
+void unSetAnalogInChannel(byte channel_num){
+	DIDR0 &= ~(1<<channel_num);
+}
+
 
 static unsigned char analog_reference = DEFAULT;
 

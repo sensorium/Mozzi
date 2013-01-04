@@ -3,6 +3,26 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1o
+
+- Mega2650 boards should now work properly.  Stephen Scutt identified a bug at upload time,
+	if the compiler sees 3 !!! exclamation marks in a row (or 33, 33, 33 in decimal) 
+	it enters serial mode and the board freezes.  All tables now have occurrences of 33, 33, 33 dithered.
+- python/char2mozzi.py, the python script for converting raw data to sound tables now
+	changes every 3rd 33 in a row to 32 or 34 (random).
+- Examples are renamed, so they are now prefixed with m_##_, eg. m_01_Sinewave, and given a sequential 
+	numerical order without the "a", "b" etc.  The renaming has to do with a script for a generating web
+	page for the code and audio recordings of sketches.
+- Ead.h - added function, start(unsigned int attack_ms, unsigned int decay_ms), to set and start a new envelope.
+		Changed from switch..case to if..else for checking envelope phase in next().
+- Example m_24_Ead_Envelope updated to generate random envelopes, to demonstrate variations.
+- Added StateVariable.h, a resonant audio filter with lowpass, bandpass, highpass and notch modes.  This works well.
+- m_30_StateVariable_Filter example added.
+- removed fastSqrt.h - it's about 25 times slower than avr-lib sqrt()!  Hat tip to the oscilloscope.
+- utils.h - added setAnalogInChannel(), which disables digital input for a selected analog input pin, 
+		improving noise and speed.  Also added unSetAnalogInChannel(), to reconnect digital input. 
+
+
 Version 0.01.1n
 
 - EventDelay() 

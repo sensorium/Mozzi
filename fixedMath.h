@@ -150,7 +150,7 @@ To convert a number from Qm.n format to floating point:
 #define Q16n16_to_float(a) (((float)(a))/65536)		/**<Convert fix to float. @param a is a Q16n16 unsigned long*/
 
 
-/** Fast fixed point multiply for Q7n8 fractional numbers.
+/** Fast (?) fixed point multiply for Q7n8 fractional numbers.
 Interesting: this is slower than doing ((long)a*b)>>16.
 Timing with an oscilloscope shows:
 p = Q7n8_multfix(a,b); // 1.52ms

@@ -21,7 +21,7 @@
 #include <MozziGuts.h>
 #include <Sample.h>
 #include <EventDelay.h>
-#include <utils.h> // for rand()
+#include <mozzi_rand.h> // for rand()
 #include <samples/bamboo/bamboo_00_2048_int8.h> // wavetable data
 #include <samples/bamboo/bamboo_01_2048_int8.h> // wavetable data
 #include <samples/bamboo/bamboo_02_2048_int8.h> // wavetable data

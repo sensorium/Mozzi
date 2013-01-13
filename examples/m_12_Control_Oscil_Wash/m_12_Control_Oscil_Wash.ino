@@ -20,7 +20,7 @@
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/cos8192_int8.h>
-#include <utils.h> // for mtof
+#include <mozzi_midi.h>
 
 const unsigned char CONTROL_RATE = 128; // powers of 2 please, default is 64 Hz
 

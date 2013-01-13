@@ -37,7 +37,7 @@ var searchData=
   ['q16n16',['Q16n16',['../group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3',1,'fixedMath.h']]],
   ['q16n16_5f2pi',['Q16n16_2PI',['../group__fixed_math.html#ga4bf1124c7bdac767263b2037211933e3',1,'fixedMath.h']]],
   ['q16n16_5ffix1',['Q16n16_FIX1',['../group__fixed_math.html#gaa4538a17e7e75b14a5826405ad06acef',1,'fixedMath.h']]],
-  ['q16n16_5fmtof',['Q16n16_mtof',['../group__util.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2',1,'Q16n16_mtof(Q16n16 midival_fractional):&#160;utils.cpp'],['../group__util.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2',1,'Q16n16_mtof(Q16n16 midival):&#160;utils.cpp']]],
+  ['q16n16_5fmtof',['Q16n16_mtof',['../group__midi.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2',1,'Q16n16_mtof(Q16n16 midival_fractional):&#160;mozzi_midi.cpp'],['../group__midi.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2',1,'Q16n16_mtof(Q16n16 midival):&#160;mozzi_midi.cpp']]],
   ['q16n16_5fpow2',['Q16n16_pow2',['../group__fixed_math.html#ga2e1d9d0fe4ba7edb9830efb7887c36bd',1,'fixedMath.cpp']]],
   ['q16n16_5fto_5ffloat',['Q16n16_to_float',['../group__fixed_math.html#ga655f1998b2b707c6cfcfe8f05c3aabd1',1,'fixedMath.h']]],
   ['q16n16_5fto_5fq0n8',['Q16n16_to_Q0n8',['../group__fixed_math.html#ga0e384f143bf94f60585770668fa65afe',1,'fixedMath.h']]],

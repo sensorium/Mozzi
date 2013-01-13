@@ -19,7 +19,7 @@
 #include <tables/sin2048_int8.h> // sine table for oscillator
 #include <EventDelay.h>
 #include <Smooth.h>
-#include <utils.h>
+#include <mozzi_rand.h>
 
 #define CONTROL_RATE 128
 

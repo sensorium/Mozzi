@@ -22,7 +22,8 @@
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/cos8192_int8.h>
-#include <utils.h> // for mtof and xorshift96() fastish random number generator
+#include <mozzi_rand.h>
+#include <mozzi_midi.h>
 #include <fixedMath.h> // for Q16n16 fixed-point fractional number type
 
 // harmonics

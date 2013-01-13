@@ -18,7 +18,8 @@
 #include <Line.h> // for smooth transitions
 #include <Oscil.h> // oscillator template
 #include <tables/triangle_warm8192_int8.h> // triangle table for oscillator
-#include <utils.h>
+#include <mozzi_rand.h>
+#include <mozzi_midi.h>
 #include <fixedMath.h>
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable)
@@ -43,7 +44,6 @@ unsigned char  gliss_offset_max = 36;
 
 
 void setup() {
-  SET_PIN13_OUT;
   xorshiftSeed((unsigned long)analogRead(0));
   pinMode(0,OUTPUT); // without this, updateControl() gets interrupted ........??
   startMozzi(CONTROL_RATE); // optional control rate parameter
@@ -62,7 +62,6 @@ long variation(){
 
 void updateControl(){ // 900 us floats vs 160 fixed
   if (--counter <= 0){
-    SET_PIN13_HIGH;
 
     gliss_offset += gliss_offset_step;
     
@@ -84,7 +83,6 @@ void updateControl(){ // 900 us floats vs 160 fixed
     aGliss1.set(gliss_start, gliss_end, audio_steps_per_gliss);
     aGliss2.set(gliss_start+(variation()*gliss_offset), gliss_end+(variation()*gliss_offset), audio_steps_per_gliss);
     counter = control_steps_per_gliss;
-    SET_PIN13_LOW;
   }
 }
 

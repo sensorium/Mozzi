@@ -21,7 +21,7 @@
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/cos2048_int8.h> // table for Oscils to play
-#include <utils.h>
+#include <mozzi_midi.h>
 #include <fixedMath.h>
 #include <EventDelay.h>
 #include <Smooth.h>

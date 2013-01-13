@@ -16,18 +16,6 @@ utils	KEYWORD1
 SET_PIN13_OUT	LITERAL1
 SET_PIN13_HIGH	LITERAL1
 SET_PIN13_LOW	LITERAL1
-mtof	KEYWORD2
-Q16n16_mtofLookup	KEYWORD2
-Q16n16_mtof	KEYWORD2
-xorshift96	KEYWORD2
-setupFastAnalogRead	KEYWORD2
-setAnalogInChannel	KEYWORD2
-unSetAnalogInChannel	KEYWORD2
-startAnalogRead	KEYWORD2
-receiveAnalogRead	KEYWORD2
-randomMidi	KEYWORD2
-Q16n16_pow2	KEYWORD2
-rand	KEYWORD2
 
 
 LowPassFilter	KEYWORD1
@@ -221,5 +209,28 @@ Q16n16_to_Q16n0	KEYWORD2
 Q16n16_to_Q24n8	KEYWORD2
 Q16n16_to_float	KEYWORD2
 
-
 Q7n8_multfix	KEYWORD2
+Q16n16_pow2	KEYWORD2
+
+mozzi_analog	KEYWORD1
+initADC	KEYWORD2
+startRead	KEYWORD2
+getSensor	KEYWORD2
+setupFastAnalogRead	KEYWORD2
+setAnalogInChannel	KEYWORD2
+unSetAnalogInChannel	KEYWORD2
+startAnalogRead	KEYWORD2
+receiveAnalogRead	KEYWORD2
+
+
+mozzi_rand	KEYWORD1
+xorshift96	KEYWORD2
+rand	KEYWORD2
+randomMidi	KEYWORD2
+
+
+mozzi_midi	KEYWORD1
+float mtof	KEYWORD2
+Q16n16_mtof	KEYWORD2
+
+

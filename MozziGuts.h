@@ -45,7 +45,7 @@ Fixed point number types, macros and functions for fast fractional maths.
 
 Mozzi core definitions and functions, which are used in every Mozzi sketch.
 
-Utility functions which are generally useful, including midi note to frequency conversion.
+Utility functions which are generally useful, including midi note to frequency conversion, efficient asynchronous analog input and random functions.
 
 @section Classes
 The Classes used to generate control and audio signals.
@@ -63,7 +63,24 @@ Read the char2mozzi.py file for instructions.
 */
 
 /**@ingroup core
-Digital pin 9 is the pwm audio output pin.  For now there is only one channel.*/
+PWM audio output pin.  For now there is only one channel in the mainstream version.
+Below is a list of the Digital Pins used by Mozzi for PWM audio out on different boards.
+Those which have been tested and reported to work have an x.
+Feedback about others is welcome.
+
+x	 9	Arduino Uno \n
+x	 9	Arduino Duemilanove \n 
+x	 9	Arduino Nano  \n
+x	 9	Arduino Leonardo  \n
+x	 9  Ardweeny  \n
+x	11  Freetronics EtherMega  \n
+..14	Teensy  \n
+x	B5  Teensy2  \n
+x	B5(25) Teensy2++  \n
+x	11	Arduino Mega  \n
+..13	Sanguino  \n
+x	 9  Boarduino  \n 
+*/
 //#define AUDIO_CHANNEL_1_PIN 9
 #define AUDIO_CHANNEL_1_PIN TIMER1_A_PIN // defined in TimerOne/config/known_16bit_timers.h
 

@@ -3,8 +3,8 @@ Mozzi
 sound synthesis library for Arduino
 ------------------------------------
 
-Version 0.01.1o
-Tim Barrass 2010-12
+Version 0.01.1p
+Tim Barrass 2010-13
 
 
 Currently your Arduino can only beep like a microwave oven. Mozzi brings

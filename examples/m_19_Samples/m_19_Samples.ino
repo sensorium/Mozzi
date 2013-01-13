@@ -20,7 +20,7 @@
 #include <samples/bamboo1/bamboo2_1024_int8.h> // wavetable data
 #include <samples/bamboo1/bamboo3_2048_int8.h> // wavetable data
 #include <EventDelay.h>
-#include <utils.h> // for xorshift96() random number generator
+#include <mozzi_rand.h>
 
 #define CONTROL_RATE 64
 

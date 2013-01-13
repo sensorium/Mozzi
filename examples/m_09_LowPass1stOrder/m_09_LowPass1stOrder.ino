@@ -17,7 +17,7 @@
 #include <tables/sin2048_int8.h> // sine table for oscillator
 #include <EventDelay.h>
 #include <LowPass1stOrder.h>
-#include <utils.h>
+#include <mozzi_midi.h>
 
 #define CONTROL_RATE 512
 

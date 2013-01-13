@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['get',['get',['../class_test.html#ab85c5ffc5291cc67fbe513bf0692a4ad',1,'Test']]]
+  ['getsensor',['getSensor',['../group__analog.html#ga720bf7cf527ba071bfe2e4263f16fa9d',1,'getSensor(unsigned char channel_num):&#160;mozzi_analog.cpp'],['../group__analog.html#ga720bf7cf527ba071bfe2e4263f16fa9d',1,'getSensor(unsigned char channel_num):&#160;mozzi_analog.cpp']]]
 ];

@@ -47,6 +47,8 @@ enum filter_types {LOWPASS,BANDPASS,HIGHPASS,NOTCH};
 @note To save processing time, this version of the filter does not saturate internally, 
 so any resonant peaks are unceremoniously truncated.  It may be worth adding code to
 constrain the internal variables to enable resonant saturating effects.
+@todo Try adding code to constrain the internal variables to enable resonant
+saturating effects.
 */
 template <char FILTER_TYPE>
 class StateVariable
@@ -74,10 +76,10 @@ public:
 		// qvalue goes from 255 to 0, representing .999 to 0 in fixed point
 		// lower q, more resonance
 		q = resonance;
-				ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
+		//ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+		//{
 		scale = (Q0n8)sqrt((unsigned int) resonance<<8);
-		}
+		//}
 	}
 
 
@@ -98,13 +100,14 @@ public:
 		}
 	}
 */
-		void setCentreFreq(unsigned int centre_freq){
+	void setCentreFreq(unsigned int centre_freq){
 		// simple frequency tuning with error towards nyquist
 		// F is the filter's center frequency
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			f = (Q1n15)(((Q16n16_2PI*centre_freq)>>AUDIO_RATE_AS_LSHIFT)>>1);
-		}
+		//ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+		//{
+			//f = (Q1n15)(((Q16n16_2PI*centre_freq)>>AUDIO_RATE_AS_LSHIFT)>>1);
+			f = (Q1n15)((Q16n16_2PI*centre_freq)>>(AUDIO_RATE_AS_LSHIFT+1));
+		//}
 	}
 
 
@@ -128,7 +131,7 @@ public:
 private:
 	int low, band;
 	Q0n8 q,scale;
-	Q1n15 f;
+	volatile Q1n15 f;
 
 
 	/** Calculate the next sample, given an input signal.

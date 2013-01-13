@@ -17,7 +17,7 @@
 #include <tables/triangle_analogue512_int8.h> // wavetable
 #include <tables/cos8192_int8.h> // wavetable
 #include <AudioDelayFeedback.h>
-#include <utils.h> // for mtof
+#include <mozzi_midi.h> // for mtof
 
 #define CONTROL_RATE 128 // powers of 2 please
 

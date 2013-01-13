@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1o</span>
+   &#160;<span id="projectnumber">alpha 0.01.1p</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -131,9 +131,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00046"></a>00046 {
 <a name="l00047"></a>00047 
 <a name="l00048"></a>00048                 <span class="comment">// audio</span>
-<a name="l00049"></a>00049                 pinMode(<a class="code" href="group__core.html#ga4a4f0dc9e1f5947ac6b5336b5cf14d4f" title="Digital pin 9 is the pwm audio output pin.">AUDIO_CHANNEL_1_PIN</a>, OUTPUT);           <span class="comment">// set pin to output for audio</span>
+<a name="l00049"></a>00049                 pinMode(<a class="code" href="group__core.html#ga4a4f0dc9e1f5947ac6b5336b5cf14d4f" title="PWM audio output pin.">AUDIO_CHANNEL_1_PIN</a>, OUTPUT);           <span class="comment">// set pin to output for audio</span>
 <a name="l00050"></a>00050                 Timer1.initialize(1000000UL/<a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298" title="AUDIO_RATE is fixed at 16384 Hz for now.">AUDIO_RATE</a>);                        <span class="comment">// set period</span>
-<a name="l00051"></a>00051                 Timer1.pwm(<a class="code" href="group__core.html#ga4a4f0dc9e1f5947ac6b5336b5cf14d4f" title="Digital pin 9 is the pwm audio output pin.">AUDIO_CHANNEL_1_PIN</a>, AUDIO_BIAS);                    <span class="comment">// pwm pin, 50% of Mozzi&#39;s duty cycle, ie. 0 signal</span>
+<a name="l00051"></a>00051                 Timer1.pwm(<a class="code" href="group__core.html#ga4a4f0dc9e1f5947ac6b5336b5cf14d4f" title="PWM audio output pin.">AUDIO_CHANNEL_1_PIN</a>, AUDIO_BIAS);                    <span class="comment">// pwm pin, 50% of Mozzi&#39;s duty cycle, ie. 0 signal</span>
 <a name="l00052"></a>00052                 Timer1.attachInterrupt(outputAudio);                                            <span class="comment">// call outputAudio() on each interrupt</span>
 <a name="l00053"></a>00053 
 <a name="l00054"></a>00054                 <span class="comment">// control</span>
@@ -197,7 +197,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 5 2013 00:56:59 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 13 2013 20:16:07 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

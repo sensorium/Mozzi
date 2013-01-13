@@ -3,6 +3,23 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+
+Version 0.01.1p
+
+
+- Introduced mozzi_analog.h and mozzi_analog.cpp for new asynchronous analog input functions, much better than the old way.
+	- Inserted example m_26_getSensor_LowPassFilter to show the new way of reading analog inputs, bumped numbers of 
+		other examples to make room.
+	- Moved old analog stuff to from utils to the new files.
+	- Renamed setAnalogInChannel() and unSetAnalogInChannel() to disconnectDigitalIn() and reconnectDigitalIn().  Can't 
+		tell if disconnectDigitalIn() really makes any difference to analog readings despite the rationale of reducing noise.
+- Moved random number generator functions from utils to mozzi_rand.h and mozzi_rand.cpp, adjusted examples.
+- Fixed a show-stopping typo in StateVariable.
+- Moved midi note-to-frequency conversion functions to mozzi_midi.h and mozzi.midi.cpp.
+			
+
+
+
 Version 0.01.1o
 
 - Mega2650 boards should now work properly.  Stephen Scutt identified a bug at upload time,

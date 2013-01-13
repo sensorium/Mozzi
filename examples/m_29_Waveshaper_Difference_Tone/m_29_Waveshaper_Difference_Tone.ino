@@ -17,7 +17,8 @@
 #include <Oscil.h>
 #include <WaveShaper.h>
 #include <EventDelay.h>
-#include <utils.h>
+#include <mozzi_rand.h>
+#include <mozzi_midi.h>
 #include <Smooth.h>
 #include <tables/sin2048_int8.h>
 #include <tables/waveshape_chebyshev_3rd_256_int8.h>

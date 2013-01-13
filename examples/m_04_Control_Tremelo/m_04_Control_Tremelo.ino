@@ -22,7 +22,7 @@
 #include <tables/triangle_valve_2048_int8.h>
 #include <tables/sin2048_int8.h>
 #include <Line.h>
-#include <utils.h> // for mtof
+#include <mozzi_midi.h>
 
 #define CONTROL_RATE 64 // powers of 2 please
 

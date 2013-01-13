@@ -17,7 +17,8 @@
 #include <Oscil.h>
 #include <WaveShaper.h>
 #include <EventDelay.h>
-#include <utils.h>
+#include <mozzi_rand.h>
+#include <mozzi_midi.h>
 #include <Smooth.h>
 #include <tables/sin2048_int8.h>
 #include <tables/waveshape_chebyshev_3rd_256_int8.h>
@@ -52,6 +53,8 @@ int target_freq, smoothed_freq;
 
 void setup(){
   startMozzi(CONTROL_RATE); // set a control rate of 64 (powers of 2 please)
+  // start with a fresh random seed
+  randSeed(analogRead(A0)*analogRead(A0));
   aSin.setFreq(110u); // set the frequency with an unsigned int or a float
   aGain1.setFreq(2.f); // use a float for low frequencies, in setup it doesn't need to be fast
   aGain2.setFreq(.4f);

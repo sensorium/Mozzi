@@ -2,11 +2,6 @@
  *  using Mozzi sonification library.
  *
  *  Demonstrates Ead (exponential attack decay).
- *  Varying the parameters shows the character of this
- *  envelope, that the fade-in always sounds relatively fast,
- *  and levels out to an unchanging level until the decay starts, 
- *  even though the programmed attack time lasts 
- *  the whole while till the decay.
  *
  *  Circuit: Audio output on digital pin 9.
  *
@@ -22,7 +17,7 @@
 #include <tables/whitenoise8192_int8.h>
 #include <Ead.h> // exponential attack decay
 #include <EventDelay.h>
-#include <utils.h>
+#include <mozzi_rand.h>
 
 #define CONTROL_RATE 256 // powers of 2 please
 
@@ -41,7 +36,7 @@ void setup(){
   startMozzi(CONTROL_RATE);
   // start with a fresh random seed
   randSeed(analogRead(A0)*analogRead(A0));
-  // cast freq to float because the resulting freq will be small
+  // use float to set freq because it will be small and fractional
   aNoise.setFreq((float)AUDIO_RATE/WHITENOISE8192_SAMPLERATE);
   kDelay.start(1000);
 }
@@ -53,8 +48,8 @@ void updateControl(){
   
   if(kDelay.ready()){
     // set random parameters
-    unsigned int duration = rand(500u)+250;
-    unsigned int attack = rand(duration);
+    unsigned int duration = rand(500u)+200;
+    unsigned int attack = rand(75);
     unsigned int decay = duration - attack;
     kEnvelope.start(attack,decay);
     kDelay.start(duration+500);

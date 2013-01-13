@@ -17,7 +17,7 @@
 #include <tables/sin2048_int8.h> // sine table for oscillator
 #include <EventDelay.h>
 #include <Smooth.h>
-#include <utils.h>
+#include <mozzi_midi.h>
 
 // this is a high value to avoid zipper noise
 #define CONTROL_RATE 1024 

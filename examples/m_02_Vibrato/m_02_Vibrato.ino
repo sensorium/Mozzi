@@ -15,7 +15,7 @@
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/cos2048_int8.h> // table for Oscils to play
-#include <utils.h> // for mtof
+#include <mozzi_midi.h> // for mtof
 
 #define CONTROL_RATE 64 // powers of 2 please
 

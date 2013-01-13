@@ -17,7 +17,7 @@
 #include <tables/whitenoise8192_int8.h>
 #include <tables/cos2048_int8.h> // for filter modulation
 #include <StateVariable.h>
-#include <utils.h> // for rand()
+#include <mozzi_rand.h> // for rand()
 
 #define CONTROL_RATE 64 // powers of 2 please
 
@@ -29,12 +29,11 @@ StateVariable <NOTCH> svf;
 void setup(){
   startMozzi(CONTROL_RATE);
   Serial.begin(115200);
-  // cast to float because the resulting freq will be small
+  // cast to float because the resulting freq will be small and fractional
   aNoise.setFreq((float)AUDIO_RATE/WHITENOISE8192_SAMPLERATE);
   kFilterMod.setFreq(1.3f);
   svf.setResonance(25.f);
   svf.setCentreFreq(1200.f);
-  SET_PIN13_OUT;
 }
 
 void loop(){

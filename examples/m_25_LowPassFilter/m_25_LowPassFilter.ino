@@ -17,7 +17,7 @@
 #include <tables/chum9_int8.h> // recorded audio wavetable
 #include <tables/cos2048_int8.h> // for filter modulation
 #include <LowPassFilter.h>
-#include <utils.h> // for rand()
+#include <mozzi_rand.h> // for rand()
 
 #define CONTROL_RATE 64 // powers of 2 please
 

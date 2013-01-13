@@ -20,7 +20,7 @@
 #include <Sample.h> // Sample template
 #include <samples/abomb16384_int8.h> // table for Sample
 #include <EventDelay.h>
-#include <utils.h>
+#include <mozzi_rand.h>
 
 #define CONTROL_RATE 128
 

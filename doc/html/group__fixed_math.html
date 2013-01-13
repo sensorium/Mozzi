@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1o</span>
+   &#160;<span id="projectnumber">alpha 0.01.1p</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -323,7 +323,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="memitem:ga655f1998b2b707c6cfcfe8f05c3aabd1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga655f1998b2b707c6cfcfe8f05c3aabd1">Q16n16_to_float</a>(a)&#160;&#160;&#160;(((float)(a))/65536)</td></tr>
 <tr class="memdesc:ga655f1998b2b707c6cfcfe8f05c3aabd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert fix to float.  <a href="#ga655f1998b2b707c6cfcfe8f05c3aabd1"></a><br/></td></tr>
 <tr class="memitem:ga4628b6ab7962076cb9e176a3d9739ac6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga4628b6ab7962076cb9e176a3d9739ac6">Q7n8_multfix</a>(a, b)</td></tr>
-<tr class="memdesc:ga4628b6ab7962076cb9e176a3d9739ac6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fast fixed point multiply for Q7n8 fractional numbers.  <a href="#ga4628b6ab7962076cb9e176a3d9739ac6"></a><br/></td></tr>
+<tr class="memdesc:ga4628b6ab7962076cb9e176a3d9739ac6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fast (?) fixed point multiply for Q7n8 fractional numbers.  <a href="#ga4628b6ab7962076cb9e176a3d9739ac6"></a><br/></td></tr>
 <tr class="memitem:ga5daaf7f37651029de2abf8ad375b6850"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga5daaf7f37651029de2abf8ad375b6850"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>ipow</b> (int base, int exp)</td></tr>
 <tr class="memitem:ga2e1d9d0fe4ba7edb9830efb7887c36bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3">Q16n16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixed_math.html#ga2e1d9d0fe4ba7edb9830efb7887c36bd">Q16n16_pow2</a> (<a class="el" href="group__fixed_math.html#ga62375fc44e52be9958e3bdaf1cdd86d3">Q8n8</a> exponent)</td></tr>
@@ -1767,8 +1767,8 @@ __asm__ __volatile__ (    \
   prod;        \
 })
 </pre></div>
-<p>Fast fixed point multiply for Q7n8 fractional numbers. </p>
-<p>Interesting: this is slower than doing ((long)a*b)&gt;&gt;16. Timing with an oscilloscope shows: p = <a class="el" href="group__fixed_math.html#ga4628b6ab7962076cb9e176a3d9739ac6" title="Fast fixed point multiply for Q7n8 fractional numbers.">Q7n8_multfix(a,b)</a>; // 1.52ms p = ((long)a*b)&gt;&gt;16; // 560 to 640 us </p>
+<p>Fast (?) fixed point multiply for Q7n8 fractional numbers. </p>
+<p>Interesting: this is slower than doing ((long)a*b)&gt;&gt;16. Timing with an oscilloscope shows: p = <a class="el" href="group__fixed_math.html#ga4628b6ab7962076cb9e176a3d9739ac6" title="Fast (?) fixed point multiply for Q7n8 fractional numbers.">Q7n8_multfix(a,b)</a>; // 1.52ms p = ((long)a*b)&gt;&gt;16; // 560 to 640 us </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">a</td><td>Q7n8 format multiplicand </td></tr>
@@ -2087,7 +2087,7 @@ __asm__ __volatile__ (    \
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 5 2013 00:56:59 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 13 2013 20:16:10 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['adsr',['ADSR',['../class_a_d_s_r.html',1,'ADSR&lt; CONTROL_UPDATE_RATE &gt;'],['../class_a_d_s_r.html#ab22c9416a8073d7674ea890a75f97b15',1,'ADSR::ADSR()']]],
   ['atindex',['atIndex',['../class_oscil.html#a3b2ea7727b2ec911957b3862dbb6a8ec',1,'Oscil::atIndex()'],['../class_sample.html#ad5c4e048c4aa7a36710e58466caabc94',1,'Sample::atIndex()']]],
   ['audio_5fchannel_5f1_5fpin',['AUDIO_CHANNEL_1_PIN',['../group__core.html#ga4a4f0dc9e1f5947ac6b5336b5cf14d4f',1,'MozziGuts.h']]],
   ['audio_5fpwm_5fresolution',['AUDIO_PWM_RESOLUTION',['../group__core.html#gacec43f46095112fe36129fbb46ed5762',1,'MozziGuts.h']]],

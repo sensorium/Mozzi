@@ -233,4 +233,18 @@ mozzi_midi	KEYWORD1
 float mtof	KEYWORD2
 Q16n16_mtof	KEYWORD2
 
-
+ADSR	KEYWORD1
+next	KEYWORD2
+update	KEYWORD2
+noteOn	KEYWORD2
+noteOff	KEYWORD2
+setAttackLevel	KEYWORD2
+setDecayLevel	KEYWORD2
+setSustainLevel	KEYWORD2
+setReleaseLevel	KEYWORD2
+setADLevels	KEYWORD2
+setAttackTime	KEYWORD2
+setDecayTime	KEYWORD2
+setSustainTime	KEYWORD2
+setReleaseTime	KEYWORD2
+setTimes	KEYWORD2

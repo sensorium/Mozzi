@@ -3,6 +3,12 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+
+Version 0.01.1r
+- Fixed example m_26_getSensor_LowPassFilter, user Doctroid noticed a mistake in the circuit pinout.
+
+
+
 Version 0.01.1q
 - Added ADSR.h, a simple envelope generator, and an example m_32_ADSR_Envelope.
 - Added m_33_Teensy_USB_MIDI_Input example, playing ADSR enveloped notes from a midi source.

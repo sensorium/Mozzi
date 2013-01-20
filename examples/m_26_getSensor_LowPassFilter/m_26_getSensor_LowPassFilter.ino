@@ -7,7 +7,7 @@
  *  
  *  Circuit: Audio output on digital pin 9.
  *  3 10k Potentiometers with wipers (middle terminals) 
- *  connected to analog pins A2, A3 and A4, and
+ *  connected to analog pins 0, 1 and 2, and
  *  outside leads to ground and +5V.  
  *
  *  Mozzi help/discussion/announcements:

@@ -33,13 +33,71 @@ unsigned long xorshift96()
 
 
 /** @ingroup random
-Initialises Mozzi's (pseudo)random number generator xorshift96(), which is used in Mozzi's rand() function. This can be useful if you want random sequences to be different on each run of a sketch, by seeding with fairly random input, such as analogRead() on an unconnected pin (as explained in the Arduino documentation for randomSeed(). randSeed is the same as xorshift96Seed(), but easier to remember.
+Initialises Mozzi's (pseudo)random number generator xorshift96(), which is used
+in Mozzi's rand() function. This can be useful if you want random sequences to
+be different on each run of a sketch, by seeding with fairly random input, such
+as analogRead() on an unconnected pin (as explained in the Arduino documentation
+for randomSeed(). randSeed is the same as xorshift96Seed(), but easier to
+remember. 
 @param seed an int to use as a seed.
 */
 void randSeed(unsigned long seed)
 {
 	x=seed;
 }
+
+
+#if !defined (__AVR_ATmega644P__)
+/*
+longRandom(), used as a seed generator, comes from:
+http://arduino.cc/forum/index.php/topic,38091.0.html
+//  AUTHOR: Rob Tillaart
+// PURPOSE: Simple Random functions based upon unreliable internal temp sensor
+// VERSION: 0.1
+//       DATE: 2011-05-01
+//
+// Released to the public domain, use at own risk
+//
+*/
+static long longRandom()
+{
+  analogReference(INTERNAL);
+  unsigned long rv = 0;
+  for (byte i=0; i< 32; i++) rv |= (analogRead(8) & 1L) << i;
+  return rv;
+}
+#else
+// a less fancy version for gizduino (__AVR_ATmega644P__) which doesn't know INTERNAL
+static long longRandom()
+{
+  return (long)analogRead(0)*analogRead(1);
+}
+#endif
+
+
+/** @ingroup random
+Initialises Mozzi's (pseudo)random number generator xorshift96(), which is used
+in Mozzi's rand() function. This can be useful if you want random sequences to
+be different on each run of a sketch, by seeding with a fairly random input.
+randSeed() called without a parameter uses noise from reading the Arduino's
+internal temperature as the seed, a technique discussed at
+http://arduino.cc/forum/index.php/topic,38091.0.html, borrowing code put there
+by Rob Tillaart.
+@note IMPORTANT!!!  Make sure you set analogReference() to suit your sketch after calling randSeed().  
+randSeed() sets analogReference to DEFAULT.  Sorry about that.
+@note This is quite slow, so best to call it only in setup().
+@note It's not perfect, as discussed in the forum thread, but probably a pretty good option.
+@note It might only work with some processors: (from the thread)
+"...ATmega328P in DIP, possibly others but the duemilanove and uno will do it at least."
+So far, gizduino's __AVR_ATmega644P__ chip doesn't like it, so we use (long)analogRead(0)*analogRead(1) for that instead. 
+*/
+void randSeed() {
+	x=longRandom();
+	y=longRandom();
+	z=longRandom();
+	analogReference(DEFAULT);
+}
+
 
 
 /** @ingroup random

@@ -7,7 +7,8 @@
  *  values, random numbers with rand(), and EventDelay()
  *  for scheduling.
  *
- *  Circuit: Audio output on digital pin 9.
+ *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+ *  check the README or http://sensorium.github.com/Mozzi/
  *
  *  Mozzi help/discussion/announcements:
  *  https://groups.google.com/forum/#!forum/mozzi-users
@@ -48,7 +49,7 @@ void setup(){
   ratio = float_to_Q8n8(3.0f);   // define modulation ratio in float and convert to fixed-point
   kNoteChangeDelay.set(200); // note duration ms, within resolution of CONTROL_RATE
   aModDepth.setFreq(13.f);     // vary mod depth to highlight am effects
-  randSeed((unsigned long) analogRead(A0)*analogRead(A1)); // reseed the random generator with some noise
+  randSeed(); // reseed the random generator for different results each time the sketch runs
   startMozzi(CONTROL_RATE);
 }
 

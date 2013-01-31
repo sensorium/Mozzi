@@ -8,7 +8,8 @@
  *
  *  Demonstrates Phasor().
  *
- *  Circuit: Audio output on digital pin 9.
+ *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+ *  check the README or http://sensorium.github.com/Mozzi/
  *
  *  Mozzi help/discussion/announcements:
  *  https://groups.google.com/forum/#!forum/mozzi-users

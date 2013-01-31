@@ -5,7 +5,8 @@
  *  Demonstrates using Smooth to filter a control signal at audio rate,
  *  EventDelay to schedule changes and rand() to choose random volumes.
  *
- *  Circuit: Audio output on digital pin 9.
+ *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+ *  your board check the README or http://sensorium.github.com/Mozzi/
  *
  *  Mozzi help/discussion/announcements:
  *  https://groups.google.com/forum/#!forum/mozzi-users

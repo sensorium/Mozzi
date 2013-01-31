@@ -7,7 +7,8 @@
  *  changes to loop and frequency parameters
  *  scheduled with EventDelay.
  *
- *  Circuit: Audio output on digital pin 9.
+ *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+ *  check the README or http://sensorium.github.com/Mozzi/
  *
  *  Mozzi help/discussion/announcements:
  *  https://groups.google.com/forum/#!forum/mozzi-users
@@ -45,8 +46,7 @@ const unsigned int full = (int) (1000.f/playspeed) - 23; // adjustment approx fo
 //unsigned char beat_counter = 0;
 
 void setup(){
-  long seed = analogRead(A0); // a fresh random start
-  randSeed(seed*seed);
+  randSeed(); // reseed the random generator for different results each time the sketch runs
   aSample.setFreq(playspeed*((float) ABOMB_SAMPLERATE / (float) ABOMB_NUM_CELLS));
   kTriggerDelay.set(full); 
   aSample.setLoopingOn();

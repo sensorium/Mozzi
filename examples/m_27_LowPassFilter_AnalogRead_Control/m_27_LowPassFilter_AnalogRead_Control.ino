@@ -16,7 +16,8 @@
  *  blocking other processes.  
  *  (Though in most cases the asynchronous getSensor() method is probably simpler and better).
  *
- *  Circuit: Audio output on digital pin 9.
+ *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+ *  check the README or http://sensorium.github.com/Mozzi/
  *  3 10k Potentiometers with wipers (middle terminals) 
  *  connected to analog pins A2, A3 and A4, and
  *  outside leads to ground and +5V.  

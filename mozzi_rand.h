@@ -10,6 +10,7 @@ unsigned long xorshift96();
 
 void xorshiftSeed(unsigned long seed);
 void randSeed(unsigned long seed);
+void randSeed();
 
 char rand(char minval, char maxval);
 char rand(char maxval);

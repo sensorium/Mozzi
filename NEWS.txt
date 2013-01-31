@@ -3,6 +3,14 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1s
+- Added randSeed() with no parameters, which seeds the random generator with 
+	noise from reading the Arduino's internal temperature.  This randSeed() leaves analogReference() set to DEFAULT.
+	Watch out for that.
+- Modified examples m_10_Line_Gliss and m_11_Line_Gliss_Double to be easier to read, with more comments.
+- Added experimental compatibility for ATmega644P based boards (gizduino, sanguino), waiting for (anyone?) testers to report.
+
+
 
 Version 0.01.1r
 - Fixed example m_26_getSensor_LowPassFilter, user Doctroid noticed a mistake in the circuit pinout.
@@ -28,8 +36,6 @@ Version 0.01.1p
 - Moved random number generator functions from utils to mozzi_rand.h and mozzi_rand.cpp, adjusted examples.
 - Moved midi note-to-frequency conversion functions to mozzi_midi.h and mozzi.midi.cpp.
 - Fixed a show-stopping typo in StateVariable.
-
-			
 
 
 

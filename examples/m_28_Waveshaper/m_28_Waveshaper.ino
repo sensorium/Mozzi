@@ -4,7 +4,8 @@
  *  Demonstrates the use of WaveShaper(), EventDelay(), Smooth(),
  *  rand(), and fixed-point numbers.
  *
- *  Circuit: Audio output on digital pin 9.
+ *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+ *  check the README or http://sensorium.github.com/Mozzi/
  *
  *  Mozzi help/discussion/announcements:
  *  https://groups.google.com/forum/#!forum/mozzi-users
@@ -53,8 +54,7 @@ int target_freq, smoothed_freq;
 
 void setup(){
   startMozzi(CONTROL_RATE); // set a control rate of 64 (powers of 2 please)
-  // start with a fresh random seed
-  randSeed(analogRead(A0)*analogRead(A0));
+  randSeed(); // reseed the random generator for different results each time the sketch runs
   aSin.setFreq(110u); // set the frequency with an unsigned int or a float
   aGain1.setFreq(2.f); // use a float for low frequencies, in setup it doesn't need to be fast
   aGain2.setFreq(.4f);

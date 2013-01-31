@@ -3,7 +3,8 @@
  *
  *  Demonstrates Ead (exponential attack decay).
  *
- *  Circuit: Audio output on digital pin 9.
+ *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+ *  check the README or http://sensorium.github.com/Mozzi/
  *
  *  Mozzi help/discussion/announcements:
  *  https://groups.google.com/forum/#!forum/mozzi-users
@@ -34,8 +35,7 @@ void initRandomEnvelope(){
 
 void setup(){
   startMozzi(CONTROL_RATE);
-  // start with a fresh random seed
-  randSeed(analogRead(A0)*analogRead(A0));
+  randSeed(); // reseed the random generator for different results each time the sketch runs
   // use float to set freq because it will be small and fractional
   aNoise.setFreq((float)AUDIO_RATE/WHITENOISE8192_SAMPLERATE);
   kDelay.start(1000);

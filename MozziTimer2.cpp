@@ -16,6 +16,8 @@
   Javier Valencia <javiervalencia80@gmail.com>
 
   History:
+    31/Jan/2013 (TB) - added " || defined(__AVR_ATmega644P__)" 
+    	wherever __AVR_ATmega328P__ is included in a list
     25/Aug/2012 (TB) - Replaced scheme for setting up timers with
     	one based on TimerTwo library.
   	Kept precompiler directives selecting processor models.
@@ -57,7 +59,7 @@ unsigned char MozziTimer2::set(unsigned int usec, void (*f)(), bool start)
 
 	unsigned char num_prescale_factors;
 
-#if defined (__AVR_ATmega168__) || defined (__AVR_ATmega48__) || defined (__AVR_ATmega88__) || defined (__AVR_ATmega328P__) || defined (__AVR_ATmega1280__) || defined (__AVR_ATmega2560__) || defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB1286__)
+#if defined (__AVR_ATmega168__) || defined (__AVR_ATmega48__) || defined (__AVR_ATmega88__) || defined (__AVR_ATmega328P__) || defined (__AVR_ATmega1280__) || defined (__AVR_ATmega2560__) || defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB1286__) || defined(__AVR_ATmega644P__)
 
 	// table by prescale = 2^n where n is the table index
 	num_prescale_factors = 11;
@@ -302,7 +304,7 @@ unsigned char MozziTimer2::set(unsigned int usec, void (*f)(), bool start)
 
 void MozziTimer2::start()
 {
-#if defined (__AVR_ATmega168__) || defined (__AVR_ATmega48__) || defined (__AVR_ATmega88__) || defined (__AVR_ATmega328P__) || defined (__AVR_ATmega1280__) || defined(__AVR_ATmega2560__) || defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB1286__)
+#if defined (__AVR_ATmega168__) || defined (__AVR_ATmega48__) || defined (__AVR_ATmega88__) || defined (__AVR_ATmega328P__) || defined (__AVR_ATmega1280__) || defined(__AVR_ATmega2560__) || defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB1286__) || defined(__AVR_ATmega644P__)
 
 	TIMSK2 |= (1 << OCIE2A);
 
@@ -321,7 +323,7 @@ void MozziTimer2::start()
 
 void MozziTimer2::stop()
 {
-#if defined (__AVR_ATmega168__) || defined (__AVR_ATmega48__) || defined (__AVR_ATmega88__) || defined (__AVR_ATmega328P__) || defined (__AVR_ATmega1280__) || defined(__AVR_ATmega2560__) || defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB1286__)
+#if defined (__AVR_ATmega168__) || defined (__AVR_ATmega48__) || defined (__AVR_ATmega88__) || defined (__AVR_ATmega328P__) || defined (__AVR_ATmega1280__) || defined(__AVR_ATmega2560__) || defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB1286__) || defined(__AVR_ATmega644P__)
 
 	TIMSK2 &=  ~(1 << OCIE2A);
 
@@ -337,7 +339,7 @@ void MozziTimer2::stop()
 }
 
 
-#if defined (__AVR_ATmega168__) || defined (__AVR_ATmega48__) || defined (__AVR_ATmega88__) || defined (__AVR_ATmega328P__) || defined (__AVR_ATmega1280__) || defined(__AVR_ATmega2560__) || defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB1286__)
+#if defined (__AVR_ATmega168__) || defined (__AVR_ATmega48__) || defined (__AVR_ATmega88__) || defined (__AVR_ATmega328P__) || defined (__AVR_ATmega1280__) || defined(__AVR_ATmega2560__) || defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB1286__) || defined(__AVR_ATmega644P__)
 
 // interrupt service routine that wraps a user defined function supplied by attachInterrupt
 ISR(TIMER2_OVF_vect, ISR_NOBLOCK)

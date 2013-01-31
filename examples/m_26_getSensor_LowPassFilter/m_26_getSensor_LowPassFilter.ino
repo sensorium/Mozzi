@@ -5,7 +5,8 @@
  *  updated in the background while audio generation continues,
  *  and the most recent readings can be read anytime from an array.
  *  
- *  Circuit: Audio output on digital pin 9.
+ *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+ *  check the README or http://sensorium.github.com/Mozzi/
  *  3 10k Potentiometers with wipers (middle terminals) 
  *  connected to analog pins 0, 1 and 2, and
  *  outside leads to ground and +5V.  

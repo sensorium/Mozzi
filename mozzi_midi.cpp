@@ -145,3 +145,13 @@ A good choice if you're using whole note values, want speed and simplicity, and 
 unsigned int mtof(unsigned char midi_note){
 	return (unsigned int) (pgm_read_dword(midiToFreq + midi_note) >> 16);
 }
+
+
+/** @ingroup midi
+A good choice if you're using whole note values, want speed and simplicity, and accuracy isn't important.
+@param midi_note a midi note number.
+@return an integer approximation of the midi note's frequency.
+*/
+unsigned int mtof(int midi_note){
+	return (unsigned int) (pgm_read_dword(midiToFreq + midi_note) >> 16);
+}

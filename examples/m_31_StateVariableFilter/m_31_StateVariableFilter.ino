@@ -1,7 +1,7 @@
 /*  Example of filtering a wave,
  *  using Mozzi sonification library.
  *
- *  Demonstrates LowPassFilter().
+ *  Demonstrates StateVariable().
  *
  *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
  *  check the README or http://sensorium.github.com/Mozzi/

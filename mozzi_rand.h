@@ -3,7 +3,7 @@
 
 #include "Arduino.h"
 
-/** @defgroup random random number generator functions
+/** @defgroup random fast random number generator functions
 */
 
 unsigned long xorshift96();

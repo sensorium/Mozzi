@@ -3,6 +3,17 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1t
+- Added Portamento.h, in response to ajax on mozzi-users - easier to make a new unit than to do it in a sketch.
+- Added example m_34_Teensy_USB_MIDI_portamento.
+- Removed MozziTimer2.cpp and MozziTimer2.h, they're not used.  Removed commented references to them in MozziGuts.cpp and MozziGuts.h.
+- Removed the commented out references to FrequencyTimer2.cpp and FrequencyTimer2.h in MozziGuts.cpp and MozziGuts.h.
+- Online documentation was long out of date, now up to date (I forgot I had to do it manually).  Why can't github follow symlinks?
+- Oscil.h - added getPhaseFractional() and setPhaseFractional() for experiments with using addition of out-of-phase oscils to adjust gain instead of using multiplies.
+- fixedMath.h - rewrote #define types as typedefs and conversion macros as inline functions containing static_cast for better compile-time error checking.
+- Smooth.h - added a template for floats.  Aah that feels better.
+
+
 Version 0.01.1s
 - Added randSeed() with no parameters, which seeds the random generator with 
 	noise from reading the Arduino's internal temperature.  This randSeed() leaves analogReference() set to DEFAULT.

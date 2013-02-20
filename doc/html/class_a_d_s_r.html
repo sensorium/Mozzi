@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1s</span>
+   &#160;<span id="projectnumber">alpha 0.01.1t</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -82,7 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -148,8 +148,9 @@ Public Member Functions</h2></td></tr>
 class ADSR&lt; CONTROL_UPDATE_RATE &gt;</h3>
 
 <p>A simple <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator.">ADSR</a> envelope generator. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Test whether using the template parameter makes any difference to speed, and rationalise which units which do and don't need them. Template objects are messy when you try to use pointers to them, you have to include the whole template shebang in the pointer handling. </dd></dl>
 
-<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00034">34</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00038">38</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 </div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="aef63b6554045bd61f77d028ad76f1730"></a>
 <div class="memitem">
@@ -171,7 +172,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE&gt; </div>
 <p>Call this in <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio()</a>. </p>
 <dl class="section return"><dt>Returns:</dt><dd>the next value, as an unsigned int. </dd></dl>
 
-<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00145">145</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00149">149</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -192,9 +193,9 @@ template&lt;unsigned int CONTROL_UPDATE_RATE&gt; </div>
 <div class="memdoc">
 
 <p>Start the release phase of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator.">ADSR</a>. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>fix release for rate rather than steps (time), so it releases at the same rate whatever the current level. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>fix release for rate rather than steps (time), so it releases at the same rate whatever the current level. </dd></dl>
 
-<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00165">165</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00169">169</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -217,7 +218,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE&gt; </div>
 <p>Start the attack phase of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator.">ADSR</a>. </p>
 <p>THis will restart the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator.">ADSR</a> no matter what phase it is up to. </p>
 
-<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00155">155</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00159">159</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -258,7 +259,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00222">222</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00226">226</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -287,7 +288,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00177">177</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00181">181</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -317,7 +318,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00241">241</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00245">245</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -346,7 +347,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00188">188</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00192">192</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -376,7 +377,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00252">252</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00256">256</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -406,7 +407,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00209">209</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00213">213</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -436,7 +437,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00276">276</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00280">280</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -465,7 +466,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00199">199</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00203">203</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -495,7 +496,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00264">264</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00268">268</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -550,7 +551,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00291">291</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00295">295</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -573,7 +574,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE&gt; </div>
 <p>Updates the internal controls of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator.">ADSR</a>. </p>
 <p>Call this in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>. </p>
 
-<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00117">117</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p>Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00121">121</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -584,7 +585,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 31 2013 18:51:03 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 21 2013 00:07:27 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

@@ -36,6 +36,8 @@ phaseIncFromFreq	KEYWORD2
 setPhaseInc	KEYWORD2
 setTable	KEYWORD2
 setPhase	KEYWORD2
+setPhaseFractional	KEYWORD2
+getPhaseFractional	KEYWORD2
 
 Sample	KEYWORD1
 incrementPhase	KEYWORD2
@@ -197,6 +199,7 @@ Q23n8_to_float	KEYWORD2
 
 Q24n8_to_Q0n8	KEYWORD2
 Q24n8_to_Q32n0	KEYWORD2
+Q24n8_to_Q16n16	KEYWORD2
 Q24n8_to_float	KEYWORD2
 
 Q15n16_to_Q0n8	KEYWORD2
@@ -248,3 +251,9 @@ setDecayTime	KEYWORD2
 setSustainTime	KEYWORD2
 setReleaseTime	KEYWORD2
 setTimes	KEYWORD2
+
+
+Portamento KEYWORD1
+setTime	KEYWORD2
+start	KEYWORD2
+next	KEYWORD2

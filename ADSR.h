@@ -29,6 +29,10 @@
 #include "fixedMath.h"
 
 /** A simple ADSR envelope generator.
+@todo Test whether using the template parameter makes any difference to speed, 
+and rationalise which units which do and don't need them.  
+Template objects are messy when you try to use pointers to them, 
+you have to include the whole template shebang in the pointer handling.
 */
 template <unsigned int CONTROL_UPDATE_RATE>
 class ADSR

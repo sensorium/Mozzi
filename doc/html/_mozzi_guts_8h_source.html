@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1s</span>
+   &#160;<span id="projectnumber">alpha 0.01.1t</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -82,7 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -128,54 +128,62 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00030"></a>00030 <span class="preprocessor">#include &quot;Arduino.h&quot;</span>
 <a name="l00031"></a>00031 <span class="preprocessor">#include &quot;TimerOne.h&quot;</span>
 <a name="l00032"></a>00032 <span class="preprocessor">#include &quot;TimerZero.h&quot;</span>
-<a name="l00033"></a>00033 <span class="comment">//#include &quot;MozziTimer2.h&quot;</span>
-<a name="l00034"></a>00034 <span class="comment">//#include &quot;FrequencyTimer2.h&quot;</span>
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036 
-<a name="l00084"></a>00084 <span class="comment">//#define AUDIO_CHANNEL_1_PIN 9</span>
-<a name="l00085"></a><a class="code" href="group__core.html#ga4a4f0dc9e1f5947ac6b5336b5cf14d4f">00085</a> <span class="preprocessor">#define AUDIO_CHANNEL_1_PIN TIMER1_A_PIN // defined in TimerOne/config/known_16bit_timers.h</span>
-<a name="l00086"></a>00086 <span class="preprocessor"></span>
-<a name="l00087"></a>00087 
-<a name="l00088"></a>00088 <span class="comment">/* Used internally.  If there was a channel 2, it would be OCR1B.*/</span>
-<a name="l00089"></a>00089 <span class="preprocessor">#define AUDIO_CHANNEL_1_OUTPUT_REGISTER OCR1A</span>
-<a name="l00090"></a>00090 <span class="preprocessor"></span>
-<a name="l00106"></a>00106 <span class="comment">// maybe 20,24 or 28k-ish later with combos of pow2</span>
-<a name="l00107"></a><a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298">00107</a> <span class="preprocessor">#define AUDIO_RATE 16384</span>
-<a name="l00108"></a>00108 <span class="preprocessor"></span>
-<a name="l00109"></a>00109 <span class="preprocessor">#if AUDIO_RATE == 16384</span>
-<a name="l00110"></a>00110 <span class="preprocessor"></span><span class="comment">/* Used internally for audio-rate optimisation.*/</span>
-<a name="l00111"></a>00111 <span class="preprocessor">#define AUDIO_RATE_AS_LSHIFT 14</span>
-<a name="l00112"></a>00112 <span class="preprocessor"></span>
-<a name="l00113"></a>00113 
-<a name="l00125"></a><a class="code" href="group__core.html#gacec43f46095112fe36129fbb46ed5762">00125</a> <span class="preprocessor">#define AUDIO_PWM_RESOLUTION 488 // from Timer1.pwmPeriod calculated for interrupt rate 16384</span>
-<a name="l00126"></a>00126 <span class="preprocessor"></span><span class="comment">/* Used internally to put the 0-biased generated audio into the right range for PWM output.*/</span>
-<a name="l00127"></a>00127 <span class="preprocessor">#define AUDIO_BIAS 244</span>
-<a name="l00128"></a>00128 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00129"></a>00129 <span class="preprocessor"></span>
-<a name="l00130"></a>00130 <span class="comment">// #define FIXMATH_OPTIMIZE_8BIT /* libfixmath option - it&#39;s an external library not used at the moment */</span>
-<a name="l00131"></a>00131 
-<a name="l00132"></a>00132 <span class="comment">// these are documented in .cpp file</span>
-<a name="l00133"></a>00133 <span class="keywordtype">void</span> <a class="code" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573" title="Sets up the timers for audio and control rate processes.">startMozzi</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> control_rate_hz);
-<a name="l00134"></a>00134 <span class="keywordtype">void</span> <a class="code" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook</a>();
-<a name="l00135"></a>00135 <span class="keyword">static</span> <span class="keywordtype">void</span> outputAudio();
-<a name="l00136"></a>00136 
-<a name="l00143"></a>00143 <span class="keywordtype">void</span> <a class="code" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl</a>();
-<a name="l00144"></a>00144 
-<a name="l00145"></a>00145 
-<a name="l00152"></a>00152 <span class="keywordtype">int</span> <a class="code" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio</a>();
-<a name="l00153"></a>00153 
-<a name="l00154"></a>00154 <span class="comment">// common abbreviations</span>
-<a name="l00155"></a>00155 <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> uchar;
-<a name="l00156"></a>00156 <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uint;
-<a name="l00157"></a>00157 <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> ulong;
-<a name="l00158"></a>00158 
-<a name="l00159"></a>00159 
-<a name="l00160"></a>00160 <span class="preprocessor">#endif </span><span class="comment">/* MOZZIGUTS_H_ */</span>
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034 
+<a name="l00084"></a><a class="code" href="group__core.html#ga4a4f0dc9e1f5947ac6b5336b5cf14d4f">00084</a> <span class="preprocessor">#define AUDIO_CHANNEL_1_PIN TIMER1_A_PIN // defined in TimerOne/config/known_16bit_timers.h</span>
+<a name="l00085"></a>00085 <span class="preprocessor"></span>
+<a name="l00086"></a>00086 <span class="comment">// #define MOZZI_AC_OUTPUT 1</span>
+<a name="l00087"></a>00087 <span class="comment">// see notes in MozziGuts.cpp</span>
+<a name="l00088"></a>00088 <span class="preprocessor">#ifdef MOZZI_AC_OUTPUT</span>
+<a name="l00089"></a>00089 <span class="preprocessor"></span><span class="preprocessor">#define AUDIO_CHANNEL_1_AC_PIN TIMER1_B_PIN // defined in TimerOne/config/known_16bit_timers.h</span>
+<a name="l00090"></a>00090 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00091"></a>00091 <span class="preprocessor"></span>
+<a name="l00092"></a>00092 <span class="comment">// Used internally.  If there was a channel 2, it would be OCR1B.</span>
+<a name="l00093"></a>00093 <span class="preprocessor">#define AUDIO_CHANNEL_1_OUTPUT_REGISTER OCR1A</span>
+<a name="l00094"></a>00094 <span class="preprocessor"></span>
+<a name="l00095"></a>00095 <span class="comment">// see notes in MozziGuts.cpp</span>
+<a name="l00096"></a>00096 <span class="preprocessor">#ifdef MOZZI_AC_OUTPUT</span>
+<a name="l00097"></a>00097 <span class="preprocessor"></span><span class="preprocessor">#define AUDIO_CHANNEL_1_AC_OUTPUT_REGISTER OCR1B</span>
+<a name="l00098"></a>00098 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00099"></a>00099 <span class="preprocessor"></span>
+<a name="l00100"></a>00100 
+<a name="l00116"></a>00116 <span class="comment">// maybe 20,24 or 28k-ish later with combos of pow2</span>
+<a name="l00117"></a><a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298">00117</a> <span class="preprocessor">#define AUDIO_RATE 16384</span>
+<a name="l00118"></a>00118 <span class="preprocessor"></span>
+<a name="l00119"></a>00119 <span class="preprocessor">#if AUDIO_RATE == 16384</span>
+<a name="l00120"></a>00120 <span class="preprocessor"></span><span class="comment">/* Used internally for audio-rate optimisation.*/</span>
+<a name="l00121"></a>00121 <span class="preprocessor">#define AUDIO_RATE_AS_LSHIFT 14</span>
+<a name="l00122"></a>00122 <span class="preprocessor"></span>
+<a name="l00123"></a>00123 
+<a name="l00141"></a><a class="code" href="group__core.html#gacec43f46095112fe36129fbb46ed5762">00141</a> <span class="preprocessor">#define AUDIO_PWM_RESOLUTION 488</span>
+<a name="l00142"></a>00142 <span class="preprocessor"></span><span class="comment">/* Used internally to put the 0-biased generated audio into the right range for PWM output.*/</span>
+<a name="l00143"></a>00143 <span class="preprocessor">#define AUDIO_BIAS 244</span>
+<a name="l00144"></a>00144 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00145"></a>00145 <span class="preprocessor"></span>
+<a name="l00146"></a>00146 <span class="comment">// #define FIXMATH_OPTIMIZE_8BIT /* libfixmath option - it&#39;s an external library not used at the moment */</span>
+<a name="l00147"></a>00147 
+<a name="l00148"></a>00148 <span class="comment">// these are documented in .cpp file</span>
+<a name="l00149"></a>00149 <span class="keywordtype">void</span> <a class="code" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573" title="Sets up the timers for audio and control rate processes.">startMozzi</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> control_rate_hz);
+<a name="l00150"></a>00150 <span class="keywordtype">void</span> <a class="code" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook</a>();
+<a name="l00151"></a>00151 <span class="keyword">static</span> <span class="keywordtype">void</span> outputAudio();
+<a name="l00152"></a>00152 
+<a name="l00159"></a>00159 <span class="keywordtype">void</span> <a class="code" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl</a>();
+<a name="l00160"></a>00160 
+<a name="l00161"></a>00161 
+<a name="l00168"></a>00168 <span class="keywordtype">int</span> <a class="code" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio</a>();
+<a name="l00169"></a>00169 
+<a name="l00170"></a>00170 <span class="comment">// common abbreviations</span>
+<a name="l00171"></a>00171 <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> uchar;
+<a name="l00172"></a>00172 <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uint;
+<a name="l00173"></a>00173 <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> ulong;
+<a name="l00174"></a>00174 
+<a name="l00175"></a>00175 
+<a name="l00176"></a>00176 <span class="preprocessor">#endif </span><span class="comment">/* MOZZIGUTS_H_ */</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 31 2013 18:51:03 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 21 2013 00:07:27 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

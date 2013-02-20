@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1s</span>
+   &#160;<span id="projectnumber">alpha 0.01.1t</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -82,7 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -126,224 +126,224 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00028"></a>00028 <span class="preprocessor">#include &quot;Line.h&quot;</span>
 <a name="l00029"></a>00029 <span class="preprocessor">#include &quot;fixedMath.h&quot;</span>
 <a name="l00030"></a>00030 
-<a name="l00033"></a>00033 <span class="keyword">template</span> &lt;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> CONTROL_UPDATE_RATE&gt;
-<a name="l00034"></a><a class="code" href="class_a_d_s_r.html">00034</a> <span class="keyword">class </span><a class="code" href="class_a_d_s_r.html" title="A simple ADSR envelope generator.">ADSR</a>
-<a name="l00035"></a>00035 {
-<a name="l00036"></a>00036 <span class="keyword">private</span>:
-<a name="l00037"></a>00037 
-<a name="l00038"></a>00038                 <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> AUDIO_TICKS_PER_CONTROL;
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> phase_control_step_counter;
-<a name="l00041"></a>00041                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> phase_num_control_steps;
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043                 <span class="keyword">enum</span> {ATTACK,DECAY,SUSTAIN,RELEASE,IDLE};
-<a name="l00044"></a>00044                 
-<a name="l00045"></a>00045                 
-<a name="l00046"></a>00046                 <span class="keyword">struct </span>phase{
-<a name="l00047"></a>00047                                 byte phase_type;
-<a name="l00048"></a>00048                                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> control_steps;
-<a name="l00049"></a>00049                                 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> audio_steps;
-<a name="l00050"></a>00050                                 <a class="code" href="group__fixed_math.html#gafb921fbfa67275cfa23dd026fcde315e" title="normal unsigned char with 0 fractional bits, represents 0.0 to 255.0">Q8n0</a> level;
-<a name="l00051"></a>00051                 }attack,decay,sustain,release,idle;
-<a name="l00052"></a>00052                 
-<a name="l00053"></a>00053                 phase * current_phase;
-<a name="l00054"></a>00054                 
-<a name="l00055"></a>00055                 <span class="comment">// Linear audio rate transitions for envelope</span>
-<a name="l00056"></a>00056                 <a class="code" href="class_line.html">Line &lt;unsigned long&gt;</a> transition;
-<a name="l00057"></a>00057 
-<a name="l00058"></a>00058                 <span class="keyword">inline</span>
-<a name="l00059"></a>00059                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> convertMsecToControlSteps(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> msec){
-<a name="l00060"></a>00060                                 <span class="keywordflow">return</span> (uint) (((ulong)msec*CONTROL_UPDATE_RATE)&gt;&gt;10); <span class="comment">// approximate /1000 with shift</span>
-<a name="l00061"></a>00061                 }
-<a name="l00062"></a>00062 
-<a name="l00063"></a>00063                 <span class="keyword">inline</span>
-<a name="l00064"></a>00064                 <span class="keywordtype">void</span> setPhase(phase * next_phase) {
-<a name="l00065"></a>00065                                 phase_control_step_counter = 0;
-<a name="l00066"></a>00066                                 phase_num_control_steps = next_phase-&gt;control_steps;
-<a name="l00067"></a>00067                                 transition.<a class="code" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80" title="Set the current value of the line.">set</a>(<a class="code" href="group__fixed_math.html#gaea8a55e91d0f362996c2cac950b742b7" title="Convert Q8n0 unsigned char to Q16n16 fix.">Q8n0_to_Q16n16</a>(next_phase-&gt;level),next_phase-&gt;audio_steps);
-<a name="l00068"></a>00068                                 current_phase = next_phase;
-<a name="l00069"></a>00069                 }
-<a name="l00070"></a>00070                 
-<a name="l00071"></a>00071                 
-<a name="l00072"></a>00072                 
-<a name="l00073"></a>00073                 <span class="keyword">inline</span>
-<a name="l00074"></a>00074                 <span class="keywordtype">void</span> checkForAndSetNextPhase(phase * next_phase) {
-<a name="l00075"></a>00075                                 <span class="keywordflow">if</span> (++phase_control_step_counter &gt;= phase_num_control_steps){
-<a name="l00076"></a>00076                                                 setPhase(next_phase);
-<a name="l00077"></a>00077                                 }
-<a name="l00078"></a>00078                 }
-<a name="l00079"></a>00079                                                                 
-<a name="l00080"></a>00080                 
-<a name="l00081"></a>00081                 <span class="keyword">inline</span>
-<a name="l00082"></a>00082                 <span class="keywordtype">void</span> checkForAndSetIdle() {
-<a name="l00083"></a>00083                                 <span class="keywordflow">if</span> (++phase_control_step_counter &gt;= phase_num_control_steps){
-<a name="l00084"></a>00084                                                 transition.<a class="code" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80" title="Set the current value of the line.">set</a>(0,0,1);
-<a name="l00085"></a>00085                                                 current_phase = &amp;idle;
-<a name="l00086"></a>00086                                 }
-<a name="l00087"></a>00087                 }
-<a name="l00088"></a>00088                 
-<a name="l00089"></a>00089                 
-<a name="l00090"></a>00090                 
-<a name="l00091"></a>00091 <span class="keyword">inline</span>
-<a name="l00092"></a>00092                 <span class="keywordtype">void</span> setTime(phase * p, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> msec)
-<a name="l00093"></a>00093                 {
-<a name="l00094"></a>00094                                 p-&gt;control_steps=convertMsecToControlSteps(msec);
-<a name="l00095"></a>00095                                 p-&gt;audio_steps = (ulong) p-&gt;control_steps * AUDIO_TICKS_PER_CONTROL;
-<a name="l00096"></a>00096                 }
-<a name="l00097"></a>00097                 
-<a name="l00098"></a>00098                 
-<a name="l00099"></a>00099 <span class="keyword">public</span>:
-<a name="l00100"></a>00100 
-<a name="l00103"></a><a class="code" href="class_a_d_s_r.html#ab22c9416a8073d7674ea890a75f97b15">00103</a>                 <a class="code" href="class_a_d_s_r.html#ab22c9416a8073d7674ea890a75f97b15" title="Constructor.">ADSR</a>():AUDIO_TICKS_PER_CONTROL(<a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298" title="AUDIO_RATE is fixed at 16384 Hz for now.">AUDIO_RATE</a>/CONTROL_UPDATE_RATE)
-<a name="l00104"></a>00104                 {
-<a name="l00105"></a>00105                                 attack.phase_type = ATTACK;
-<a name="l00106"></a>00106                                 decay.phase_type = DECAY;
-<a name="l00107"></a>00107                                 sustain.phase_type = SUSTAIN;
-<a name="l00108"></a>00108                                 release.phase_type = RELEASE;
-<a name="l00109"></a>00109                                 idle.phase_type = IDLE;
-<a name="l00110"></a>00110                                 release.level = 0;
-<a name="l00111"></a>00111                 }
-<a name="l00112"></a>00112 
-<a name="l00113"></a>00113 
-<a name="l00117"></a><a class="code" href="class_a_d_s_r.html#a5ffeb0baf5e308515ca36cb7af802c31">00117</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#a5ffeb0baf5e308515ca36cb7af802c31" title="Updates the internal controls of the ADSR.">update</a>(){ <span class="comment">// control rate</span>
-<a name="l00118"></a>00118                                 
-<a name="l00119"></a>00119                                 <span class="keywordflow">switch</span>(current_phase-&gt;phase_type) {
-<a name="l00120"></a>00120                                                 
-<a name="l00121"></a>00121                                                 <span class="keywordflow">case</span> ATTACK:
-<a name="l00122"></a>00122                                                                 checkForAndSetNextPhase(&amp;decay);
-<a name="l00123"></a>00123                                                                 <span class="keywordflow">break</span>;
-<a name="l00124"></a>00124 
-<a name="l00125"></a>00125                                                 <span class="keywordflow">case</span> DECAY:
-<a name="l00126"></a>00126                                                                                 checkForAndSetNextPhase(&amp;sustain);
+<a name="l00037"></a>00037 <span class="keyword">template</span> &lt;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> CONTROL_UPDATE_RATE&gt;
+<a name="l00038"></a><a class="code" href="class_a_d_s_r.html">00038</a> <span class="keyword">class </span><a class="code" href="class_a_d_s_r.html" title="A simple ADSR envelope generator.">ADSR</a>
+<a name="l00039"></a>00039 {
+<a name="l00040"></a>00040 <span class="keyword">private</span>:
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042                 <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> AUDIO_TICKS_PER_CONTROL;
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> phase_control_step_counter;
+<a name="l00045"></a>00045                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> phase_num_control_steps;
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047                 <span class="keyword">enum</span> {ATTACK,DECAY,SUSTAIN,RELEASE,IDLE};
+<a name="l00048"></a>00048                 
+<a name="l00049"></a>00049                 
+<a name="l00050"></a>00050                 <span class="keyword">struct </span>phase{
+<a name="l00051"></a>00051                                 byte phase_type;
+<a name="l00052"></a>00052                                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> control_steps;
+<a name="l00053"></a>00053                                 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> audio_steps;
+<a name="l00054"></a>00054                                 <a class="code" href="group__fixed_math.html#gaac3e4cab960e285ec7e2d8afd54a9dd9" title="normal unsigned char with 0 fractional bits, represents 0.0 to 255.0">Q8n0</a> level;
+<a name="l00055"></a>00055                 }attack,decay,sustain,release,idle;
+<a name="l00056"></a>00056                 
+<a name="l00057"></a>00057                 phase * current_phase;
+<a name="l00058"></a>00058                 
+<a name="l00059"></a>00059                 <span class="comment">// Linear audio rate transitions for envelope</span>
+<a name="l00060"></a>00060                 <a class="code" href="class_line.html">Line &lt;unsigned long&gt;</a> transition;
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062                 <span class="keyword">inline</span>
+<a name="l00063"></a>00063                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> convertMsecToControlSteps(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> msec){
+<a name="l00064"></a>00064                                 <span class="keywordflow">return</span> (uint) (((ulong)msec*CONTROL_UPDATE_RATE)&gt;&gt;10); <span class="comment">// approximate /1000 with shift</span>
+<a name="l00065"></a>00065                 }
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067                 <span class="keyword">inline</span>
+<a name="l00068"></a>00068                 <span class="keywordtype">void</span> setPhase(phase * next_phase) {
+<a name="l00069"></a>00069                                 phase_control_step_counter = 0;
+<a name="l00070"></a>00070                                 phase_num_control_steps = next_phase-&gt;control_steps;
+<a name="l00071"></a>00071                                 transition.<a class="code" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80" title="Set the current value of the line.">set</a>(<a class="code" href="group__fixed_math.html#ga589b5c022b59a72fc3fb39061048d193" title="Convert Q8n0 unsigned char to Q16n16 fix.">Q8n0_to_Q16n16</a>(next_phase-&gt;level),next_phase-&gt;audio_steps);
+<a name="l00072"></a>00072                                 current_phase = next_phase;
+<a name="l00073"></a>00073                 }
+<a name="l00074"></a>00074                 
+<a name="l00075"></a>00075                 
+<a name="l00076"></a>00076                 
+<a name="l00077"></a>00077                 <span class="keyword">inline</span>
+<a name="l00078"></a>00078                 <span class="keywordtype">void</span> checkForAndSetNextPhase(phase * next_phase) {
+<a name="l00079"></a>00079                                 <span class="keywordflow">if</span> (++phase_control_step_counter &gt;= phase_num_control_steps){
+<a name="l00080"></a>00080                                                 setPhase(next_phase);
+<a name="l00081"></a>00081                                 }
+<a name="l00082"></a>00082                 }
+<a name="l00083"></a>00083                                                                 
+<a name="l00084"></a>00084                 
+<a name="l00085"></a>00085                 <span class="keyword">inline</span>
+<a name="l00086"></a>00086                 <span class="keywordtype">void</span> checkForAndSetIdle() {
+<a name="l00087"></a>00087                                 <span class="keywordflow">if</span> (++phase_control_step_counter &gt;= phase_num_control_steps){
+<a name="l00088"></a>00088                                                 transition.<a class="code" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80" title="Set the current value of the line.">set</a>(0,0,1);
+<a name="l00089"></a>00089                                                 current_phase = &amp;idle;
+<a name="l00090"></a>00090                                 }
+<a name="l00091"></a>00091                 }
+<a name="l00092"></a>00092                 
+<a name="l00093"></a>00093                 
+<a name="l00094"></a>00094                 
+<a name="l00095"></a>00095 <span class="keyword">inline</span>
+<a name="l00096"></a>00096                 <span class="keywordtype">void</span> setTime(phase * p, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> msec)
+<a name="l00097"></a>00097                 {
+<a name="l00098"></a>00098                                 p-&gt;control_steps=convertMsecToControlSteps(msec);
+<a name="l00099"></a>00099                                 p-&gt;audio_steps = (ulong) p-&gt;control_steps * AUDIO_TICKS_PER_CONTROL;
+<a name="l00100"></a>00100                 }
+<a name="l00101"></a>00101                 
+<a name="l00102"></a>00102                 
+<a name="l00103"></a>00103 <span class="keyword">public</span>:
+<a name="l00104"></a>00104 
+<a name="l00107"></a><a class="code" href="class_a_d_s_r.html#ab22c9416a8073d7674ea890a75f97b15">00107</a>                 <a class="code" href="class_a_d_s_r.html#ab22c9416a8073d7674ea890a75f97b15" title="Constructor.">ADSR</a>():AUDIO_TICKS_PER_CONTROL(<a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298" title="AUDIO_RATE is fixed at 16384 Hz for now.">AUDIO_RATE</a>/CONTROL_UPDATE_RATE)
+<a name="l00108"></a>00108                 {
+<a name="l00109"></a>00109                                 attack.phase_type = ATTACK;
+<a name="l00110"></a>00110                                 decay.phase_type = DECAY;
+<a name="l00111"></a>00111                                 sustain.phase_type = SUSTAIN;
+<a name="l00112"></a>00112                                 release.phase_type = RELEASE;
+<a name="l00113"></a>00113                                 idle.phase_type = IDLE;
+<a name="l00114"></a>00114                                 release.level = 0;
+<a name="l00115"></a>00115                 }
+<a name="l00116"></a>00116 
+<a name="l00117"></a>00117 
+<a name="l00121"></a><a class="code" href="class_a_d_s_r.html#a5ffeb0baf5e308515ca36cb7af802c31">00121</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#a5ffeb0baf5e308515ca36cb7af802c31" title="Updates the internal controls of the ADSR.">update</a>(){ <span class="comment">// control rate</span>
+<a name="l00122"></a>00122                                 
+<a name="l00123"></a>00123                                 <span class="keywordflow">switch</span>(current_phase-&gt;phase_type) {
+<a name="l00124"></a>00124                                                 
+<a name="l00125"></a>00125                                                 <span class="keywordflow">case</span> ATTACK:
+<a name="l00126"></a>00126                                                                 checkForAndSetNextPhase(&amp;decay);
 <a name="l00127"></a>00127                                                                 <span class="keywordflow">break</span>;
-<a name="l00128"></a>00128                                                                                 
-<a name="l00129"></a>00129                                                 <span class="keywordflow">case</span> SUSTAIN:
-<a name="l00130"></a>00130                                                                                 checkForAndSetNextPhase(&amp;release);                                                                                                                                                              
+<a name="l00128"></a>00128 
+<a name="l00129"></a>00129                                                 <span class="keywordflow">case</span> DECAY:
+<a name="l00130"></a>00130                                                                                 checkForAndSetNextPhase(&amp;sustain);
 <a name="l00131"></a>00131                                                                 <span class="keywordflow">break</span>;
 <a name="l00132"></a>00132                                                                                 
-<a name="l00133"></a>00133                                                 <span class="keywordflow">case</span> RELEASE:
-<a name="l00134"></a>00134                                                                                 checkForAndSetIdle();                                                                                                           
+<a name="l00133"></a>00133                                                 <span class="keywordflow">case</span> SUSTAIN:
+<a name="l00134"></a>00134                                                                                 checkForAndSetNextPhase(&amp;release);                                                                                                                                                              
 <a name="l00135"></a>00135                                                                 <span class="keywordflow">break</span>;
-<a name="l00136"></a>00136 
-<a name="l00137"></a>00137                                 }               
-<a name="l00138"></a>00138                 }
-<a name="l00139"></a>00139 
-<a name="l00144"></a>00144                 <span class="keyword">inline</span>
-<a name="l00145"></a><a class="code" href="class_a_d_s_r.html#aef63b6554045bd61f77d028ad76f1730">00145</a>                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_a_d_s_r.html#aef63b6554045bd61f77d028ad76f1730" title="Advances one audio step along the ADSR and returns the level.">next</a>()
-<a name="l00146"></a>00146                 {
-<a name="l00147"></a>00147                                 <span class="keywordflow">return</span> <a class="code" href="group__fixed_math.html#gad70f8c60cc8388ab0eba969acd9f145c" title="Convert Q16n16 fixed to Q16n0 unsigned int.">Q16n16_to_Q16n0</a>(transition.<a class="code" href="class_line.html#a413f620b2824c6996b3346ee54351849" title="Increments one step along the line.">next</a>());
-<a name="l00148"></a>00148                 }
-<a name="l00149"></a>00149 
-<a name="l00150"></a>00150 
-<a name="l00151"></a>00151 
-<a name="l00154"></a>00154                 <span class="keyword">inline</span>
-<a name="l00155"></a><a class="code" href="class_a_d_s_r.html#a52091df7bf95f9e34fb51d9707547092">00155</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#a52091df7bf95f9e34fb51d9707547092" title="Start the attack phase of the ADSR.">noteOn</a>(){
-<a name="l00156"></a>00156                                 setPhase(&amp;attack);
-<a name="l00157"></a>00157                 }
-<a name="l00158"></a>00158 
-<a name="l00159"></a>00159 
-<a name="l00160"></a>00160 
-<a name="l00164"></a>00164                 <span class="keyword">inline</span>
-<a name="l00165"></a><a class="code" href="class_a_d_s_r.html#af6cac55fb97760fffc885507f5d969d2">00165</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#af6cac55fb97760fffc885507f5d969d2" title="Start the release phase of the ADSR.">noteOff</a>(){                                 
-<a name="l00166"></a>00166                                 setPhase(&amp;release);
-<a name="l00167"></a>00167                 }
-<a name="l00168"></a>00168 
-<a name="l00169"></a>00169 
-<a name="l00170"></a>00170 
-<a name="l00171"></a>00171 
+<a name="l00136"></a>00136                                                                                 
+<a name="l00137"></a>00137                                                 <span class="keywordflow">case</span> RELEASE:
+<a name="l00138"></a>00138                                                                                 checkForAndSetIdle();                                                                                                           
+<a name="l00139"></a>00139                                                                 <span class="keywordflow">break</span>;
+<a name="l00140"></a>00140 
+<a name="l00141"></a>00141                                 }               
+<a name="l00142"></a>00142                 }
+<a name="l00143"></a>00143 
+<a name="l00148"></a>00148                 <span class="keyword">inline</span>
+<a name="l00149"></a><a class="code" href="class_a_d_s_r.html#aef63b6554045bd61f77d028ad76f1730">00149</a>                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_a_d_s_r.html#aef63b6554045bd61f77d028ad76f1730" title="Advances one audio step along the ADSR and returns the level.">next</a>()
+<a name="l00150"></a>00150                 {
+<a name="l00151"></a>00151                                 <span class="keywordflow">return</span> <a class="code" href="group__fixed_math.html#ga89bdabdfd59a8ec3f06aedbbab087527" title="Convert Q16n16 fixed to Q16n0 unsigned int.">Q16n16_to_Q16n0</a>(transition.<a class="code" href="class_line.html#a413f620b2824c6996b3346ee54351849" title="Increments one step along the line.">next</a>());
+<a name="l00152"></a>00152                 }
+<a name="l00153"></a>00153 
+<a name="l00154"></a>00154 
+<a name="l00155"></a>00155 
+<a name="l00158"></a>00158                 <span class="keyword">inline</span>
+<a name="l00159"></a><a class="code" href="class_a_d_s_r.html#a52091df7bf95f9e34fb51d9707547092">00159</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#a52091df7bf95f9e34fb51d9707547092" title="Start the attack phase of the ADSR.">noteOn</a>(){
+<a name="l00160"></a>00160                                 setPhase(&amp;attack);
+<a name="l00161"></a>00161                 }
+<a name="l00162"></a>00162 
+<a name="l00163"></a>00163 
+<a name="l00164"></a>00164 
+<a name="l00168"></a>00168                 <span class="keyword">inline</span>
+<a name="l00169"></a><a class="code" href="class_a_d_s_r.html#af6cac55fb97760fffc885507f5d969d2">00169</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#af6cac55fb97760fffc885507f5d969d2" title="Start the release phase of the ADSR.">noteOff</a>(){                                 
+<a name="l00170"></a>00170                                 setPhase(&amp;release);
+<a name="l00171"></a>00171                 }
 <a name="l00172"></a>00172 
-<a name="l00176"></a>00176                 <span class="keyword">inline</span>
-<a name="l00177"></a><a class="code" href="class_a_d_s_r.html#aa7fe43c0a91006b5f72013bb5b25fcbb">00177</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#aa7fe43c0a91006b5f72013bb5b25fcbb" title="Set the attack level of the ADSR.">setAttackLevel</a>(byte value)
-<a name="l00178"></a>00178                 {
-<a name="l00179"></a>00179                                 attack.level=value;
-<a name="l00180"></a>00180                 }
-<a name="l00181"></a>00181 
-<a name="l00182"></a>00182 
-<a name="l00183"></a>00183 
-<a name="l00187"></a>00187                 <span class="keyword">inline</span>
-<a name="l00188"></a><a class="code" href="class_a_d_s_r.html#a152312b577df53f02cf92cf4d3b3a4e2">00188</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#a152312b577df53f02cf92cf4d3b3a4e2" title="Set the decay level of the ADSR.">setDecayLevel</a>(byte value)
-<a name="l00189"></a>00189                 {
-<a name="l00190"></a>00190                                 decay.level=value;
-<a name="l00191"></a>00191                 }
-<a name="l00192"></a>00192 
-<a name="l00193"></a>00193 
-<a name="l00198"></a>00198                 <span class="keyword">inline</span>
-<a name="l00199"></a><a class="code" href="class_a_d_s_r.html#a9f81971a62aa3abb66245b7ef25ae3c2">00199</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#a9f81971a62aa3abb66245b7ef25ae3c2" title="Set the sustain level of the ADSR.">setSustainLevel</a>(byte value)
-<a name="l00200"></a>00200                 {
-<a name="l00201"></a>00201                                 sustain.level=value;
-<a name="l00202"></a>00202                 }
-<a name="l00203"></a>00203                 
-<a name="l00208"></a>00208                 <span class="keyword">inline</span>
-<a name="l00209"></a><a class="code" href="class_a_d_s_r.html#aa577c32f8758e1ecda44b4410c1c103d">00209</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#aa577c32f8758e1ecda44b4410c1c103d" title="Set the release level of the ADSR.">setReleaseLevel</a>(byte value)
-<a name="l00210"></a>00210                 {
-<a name="l00211"></a>00211                                 release.level=value;
-<a name="l00212"></a>00212                 }
-<a name="l00213"></a>00213                 
-<a name="l00214"></a>00214                 
-<a name="l00215"></a>00215                 
-<a name="l00221"></a>00221                 <span class="keyword">inline</span>
-<a name="l00222"></a><a class="code" href="class_a_d_s_r.html#abfb4aaa169920beadb67570e0360f23f">00222</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#abfb4aaa169920beadb67570e0360f23f" title="Set the attack and decay levels of the ADSR.">setADLevels</a>(byte attack, byte decay)
-<a name="l00223"></a>00223                 {
-<a name="l00224"></a>00224                                 <a class="code" href="class_a_d_s_r.html#aa7fe43c0a91006b5f72013bb5b25fcbb" title="Set the attack level of the ADSR.">setAttackLevel</a>(attack);
-<a name="l00225"></a>00225                                 <a class="code" href="class_a_d_s_r.html#a152312b577df53f02cf92cf4d3b3a4e2" title="Set the decay level of the ADSR.">setDecayLevel</a>(decay);
-<a name="l00226"></a>00226                                 <a class="code" href="class_a_d_s_r.html#a9f81971a62aa3abb66245b7ef25ae3c2" title="Set the sustain level of the ADSR.">setSustainLevel</a>(decay);
-<a name="l00227"></a>00227                                 <a class="code" href="class_a_d_s_r.html#aa577c32f8758e1ecda44b4410c1c103d" title="Set the release level of the ADSR.">setReleaseLevel</a>(0);
-<a name="l00228"></a>00228                 }
-<a name="l00229"></a>00229                 
-<a name="l00230"></a>00230 
-<a name="l00231"></a>00231 
-<a name="l00232"></a>00232                 
+<a name="l00173"></a>00173 
+<a name="l00174"></a>00174 
+<a name="l00175"></a>00175 
+<a name="l00176"></a>00176 
+<a name="l00180"></a>00180                 <span class="keyword">inline</span>
+<a name="l00181"></a><a class="code" href="class_a_d_s_r.html#aa7fe43c0a91006b5f72013bb5b25fcbb">00181</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#aa7fe43c0a91006b5f72013bb5b25fcbb" title="Set the attack level of the ADSR.">setAttackLevel</a>(byte value)
+<a name="l00182"></a>00182                 {
+<a name="l00183"></a>00183                                 attack.level=value;
+<a name="l00184"></a>00184                 }
+<a name="l00185"></a>00185 
+<a name="l00186"></a>00186 
+<a name="l00187"></a>00187 
+<a name="l00191"></a>00191                 <span class="keyword">inline</span>
+<a name="l00192"></a><a class="code" href="class_a_d_s_r.html#a152312b577df53f02cf92cf4d3b3a4e2">00192</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#a152312b577df53f02cf92cf4d3b3a4e2" title="Set the decay level of the ADSR.">setDecayLevel</a>(byte value)
+<a name="l00193"></a>00193                 {
+<a name="l00194"></a>00194                                 decay.level=value;
+<a name="l00195"></a>00195                 }
+<a name="l00196"></a>00196 
+<a name="l00197"></a>00197 
+<a name="l00202"></a>00202                 <span class="keyword">inline</span>
+<a name="l00203"></a><a class="code" href="class_a_d_s_r.html#a9f81971a62aa3abb66245b7ef25ae3c2">00203</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#a9f81971a62aa3abb66245b7ef25ae3c2" title="Set the sustain level of the ADSR.">setSustainLevel</a>(byte value)
+<a name="l00204"></a>00204                 {
+<a name="l00205"></a>00205                                 sustain.level=value;
+<a name="l00206"></a>00206                 }
+<a name="l00207"></a>00207                 
+<a name="l00212"></a>00212                 <span class="keyword">inline</span>
+<a name="l00213"></a><a class="code" href="class_a_d_s_r.html#aa577c32f8758e1ecda44b4410c1c103d">00213</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#aa577c32f8758e1ecda44b4410c1c103d" title="Set the release level of the ADSR.">setReleaseLevel</a>(byte value)
+<a name="l00214"></a>00214                 {
+<a name="l00215"></a>00215                                 release.level=value;
+<a name="l00216"></a>00216                 }
+<a name="l00217"></a>00217                 
+<a name="l00218"></a>00218                 
+<a name="l00219"></a>00219                 
+<a name="l00225"></a>00225                 <span class="keyword">inline</span>
+<a name="l00226"></a><a class="code" href="class_a_d_s_r.html#abfb4aaa169920beadb67570e0360f23f">00226</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#abfb4aaa169920beadb67570e0360f23f" title="Set the attack and decay levels of the ADSR.">setADLevels</a>(byte attack, byte decay)
+<a name="l00227"></a>00227                 {
+<a name="l00228"></a>00228                                 <a class="code" href="class_a_d_s_r.html#aa7fe43c0a91006b5f72013bb5b25fcbb" title="Set the attack level of the ADSR.">setAttackLevel</a>(attack);
+<a name="l00229"></a>00229                                 <a class="code" href="class_a_d_s_r.html#a152312b577df53f02cf92cf4d3b3a4e2" title="Set the decay level of the ADSR.">setDecayLevel</a>(decay);
+<a name="l00230"></a>00230                                 <a class="code" href="class_a_d_s_r.html#a9f81971a62aa3abb66245b7ef25ae3c2" title="Set the sustain level of the ADSR.">setSustainLevel</a>(decay);
+<a name="l00231"></a>00231                                 <a class="code" href="class_a_d_s_r.html#aa577c32f8758e1ecda44b4410c1c103d" title="Set the release level of the ADSR.">setReleaseLevel</a>(0);
+<a name="l00232"></a>00232                 }
 <a name="l00233"></a>00233                 
-<a name="l00234"></a>00234                 
-<a name="l00235"></a>00235                 
-<a name="l00240"></a>00240                 <span class="keyword">inline</span>
-<a name="l00241"></a><a class="code" href="class_a_d_s_r.html#ac8e63a0de672b4a91e2123bead6a465b">00241</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#ac8e63a0de672b4a91e2123bead6a465b" title="Set the attack time of the ADSR in milliseconds.">setAttackTime</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> msec)
-<a name="l00242"></a>00242                 {
-<a name="l00243"></a>00243                                 setTime(&amp;attack, msec);
-<a name="l00244"></a>00244                 }
-<a name="l00245"></a>00245 
-<a name="l00246"></a>00246 
-<a name="l00251"></a>00251                 <span class="keyword">inline</span>
-<a name="l00252"></a><a class="code" href="class_a_d_s_r.html#a1ef68b47f7cdafeab75f0142834e3473">00252</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#a1ef68b47f7cdafeab75f0142834e3473" title="Set the decay time of the ADSR in milliseconds.">setDecayTime</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> msec)
-<a name="l00253"></a>00253                 {
-<a name="l00254"></a>00254                                 setTime(&amp;decay, msec);
-<a name="l00255"></a>00255                 }
-<a name="l00256"></a>00256 
-<a name="l00257"></a>00257                 
-<a name="l00263"></a>00263                 <span class="keyword">inline</span>
-<a name="l00264"></a><a class="code" href="class_a_d_s_r.html#a5c79838b081aba5a396aa9ea26394051">00264</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#a5c79838b081aba5a396aa9ea26394051" title="Set the sustain time of the ADSR in milliseconds.">setSustainTime</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> msec)
-<a name="l00265"></a>00265                 {
-<a name="l00266"></a>00266                                 setTime(&amp;sustain, msec);
-<a name="l00267"></a>00267                 }
-<a name="l00268"></a>00268                 
-<a name="l00269"></a>00269                 
-<a name="l00270"></a>00270 
-<a name="l00275"></a>00275                 <span class="keyword">inline</span>
-<a name="l00276"></a><a class="code" href="class_a_d_s_r.html#ab76efe021a258b65da9bc5ec85da2f34">00276</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#ab76efe021a258b65da9bc5ec85da2f34" title="Set the release time of the ADSR in milliseconds.">setReleaseTime</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> msec)
-<a name="l00277"></a>00277                 {
-<a name="l00278"></a>00278                                 setTime(&amp;release, msec);
-<a name="l00279"></a>00279                 }
-<a name="l00280"></a>00280                 
-<a name="l00281"></a>00281 
-<a name="l00282"></a>00282 
-<a name="l00290"></a>00290                 <span class="keyword">inline</span>
-<a name="l00291"></a><a class="code" href="class_a_d_s_r.html#af656b88fdfddd521c3a30fe9b06b524b">00291</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#af656b88fdfddd521c3a30fe9b06b524b" title="Set the attack, decay and release times of the ADSR in milliseconds.">setTimes</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> attack_ms, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> decay_ms, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> sustain_ms, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> release_ms)
-<a name="l00292"></a>00292                 {
-<a name="l00293"></a>00293                                 <a class="code" href="class_a_d_s_r.html#ac8e63a0de672b4a91e2123bead6a465b" title="Set the attack time of the ADSR in milliseconds.">setAttackTime</a>(attack_ms);
-<a name="l00294"></a>00294                                 <a class="code" href="class_a_d_s_r.html#a1ef68b47f7cdafeab75f0142834e3473" title="Set the decay time of the ADSR in milliseconds.">setDecayTime</a>(decay_ms);
-<a name="l00295"></a>00295                                 <a class="code" href="class_a_d_s_r.html#a5c79838b081aba5a396aa9ea26394051" title="Set the sustain time of the ADSR in milliseconds.">setSustainTime</a>(sustain_ms);
-<a name="l00296"></a>00296                                 <a class="code" href="class_a_d_s_r.html#ab76efe021a258b65da9bc5ec85da2f34" title="Set the release time of the ADSR in milliseconds.">setReleaseTime</a>(release_ms);
-<a name="l00297"></a>00297                 }
-<a name="l00298"></a>00298 
-<a name="l00299"></a>00299 
-<a name="l00300"></a>00300 };
-<a name="l00301"></a>00301 
-<a name="l00302"></a>00302 <span class="preprocessor">#endif </span><span class="comment">/* ADSR_H_ */</span>
+<a name="l00234"></a>00234 
+<a name="l00235"></a>00235 
+<a name="l00236"></a>00236                 
+<a name="l00237"></a>00237                 
+<a name="l00238"></a>00238                 
+<a name="l00239"></a>00239                 
+<a name="l00244"></a>00244                 <span class="keyword">inline</span>
+<a name="l00245"></a><a class="code" href="class_a_d_s_r.html#ac8e63a0de672b4a91e2123bead6a465b">00245</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#ac8e63a0de672b4a91e2123bead6a465b" title="Set the attack time of the ADSR in milliseconds.">setAttackTime</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> msec)
+<a name="l00246"></a>00246                 {
+<a name="l00247"></a>00247                                 setTime(&amp;attack, msec);
+<a name="l00248"></a>00248                 }
+<a name="l00249"></a>00249 
+<a name="l00250"></a>00250 
+<a name="l00255"></a>00255                 <span class="keyword">inline</span>
+<a name="l00256"></a><a class="code" href="class_a_d_s_r.html#a1ef68b47f7cdafeab75f0142834e3473">00256</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#a1ef68b47f7cdafeab75f0142834e3473" title="Set the decay time of the ADSR in milliseconds.">setDecayTime</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> msec)
+<a name="l00257"></a>00257                 {
+<a name="l00258"></a>00258                                 setTime(&amp;decay, msec);
+<a name="l00259"></a>00259                 }
+<a name="l00260"></a>00260 
+<a name="l00261"></a>00261                 
+<a name="l00267"></a>00267                 <span class="keyword">inline</span>
+<a name="l00268"></a><a class="code" href="class_a_d_s_r.html#a5c79838b081aba5a396aa9ea26394051">00268</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#a5c79838b081aba5a396aa9ea26394051" title="Set the sustain time of the ADSR in milliseconds.">setSustainTime</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> msec)
+<a name="l00269"></a>00269                 {
+<a name="l00270"></a>00270                                 setTime(&amp;sustain, msec);
+<a name="l00271"></a>00271                 }
+<a name="l00272"></a>00272                 
+<a name="l00273"></a>00273                 
+<a name="l00274"></a>00274 
+<a name="l00279"></a>00279                 <span class="keyword">inline</span>
+<a name="l00280"></a><a class="code" href="class_a_d_s_r.html#ab76efe021a258b65da9bc5ec85da2f34">00280</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#ab76efe021a258b65da9bc5ec85da2f34" title="Set the release time of the ADSR in milliseconds.">setReleaseTime</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> msec)
+<a name="l00281"></a>00281                 {
+<a name="l00282"></a>00282                                 setTime(&amp;release, msec);
+<a name="l00283"></a>00283                 }
+<a name="l00284"></a>00284                 
+<a name="l00285"></a>00285 
+<a name="l00286"></a>00286 
+<a name="l00294"></a>00294                 <span class="keyword">inline</span>
+<a name="l00295"></a><a class="code" href="class_a_d_s_r.html#af656b88fdfddd521c3a30fe9b06b524b">00295</a>                 <span class="keywordtype">void</span> <a class="code" href="class_a_d_s_r.html#af656b88fdfddd521c3a30fe9b06b524b" title="Set the attack, decay and release times of the ADSR in milliseconds.">setTimes</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> attack_ms, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> decay_ms, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> sustain_ms, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> release_ms)
+<a name="l00296"></a>00296                 {
+<a name="l00297"></a>00297                                 <a class="code" href="class_a_d_s_r.html#ac8e63a0de672b4a91e2123bead6a465b" title="Set the attack time of the ADSR in milliseconds.">setAttackTime</a>(attack_ms);
+<a name="l00298"></a>00298                                 <a class="code" href="class_a_d_s_r.html#a1ef68b47f7cdafeab75f0142834e3473" title="Set the decay time of the ADSR in milliseconds.">setDecayTime</a>(decay_ms);
+<a name="l00299"></a>00299                                 <a class="code" href="class_a_d_s_r.html#a5c79838b081aba5a396aa9ea26394051" title="Set the sustain time of the ADSR in milliseconds.">setSustainTime</a>(sustain_ms);
+<a name="l00300"></a>00300                                 <a class="code" href="class_a_d_s_r.html#ab76efe021a258b65da9bc5ec85da2f34" title="Set the release time of the ADSR in milliseconds.">setReleaseTime</a>(release_ms);
+<a name="l00301"></a>00301                 }
+<a name="l00302"></a>00302 
+<a name="l00303"></a>00303 
+<a name="l00304"></a>00304 };
+<a name="l00305"></a>00305 
+<a name="l00306"></a>00306 <span class="preprocessor">#endif </span><span class="comment">/* ADSR_H_ */</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 31 2013 18:51:03 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 21 2013 00:07:27 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

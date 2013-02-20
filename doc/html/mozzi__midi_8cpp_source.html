@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1s</span>
+   &#160;<span id="projectnumber">alpha 0.01.1t</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -82,7 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -194,14 +194,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00106"></a>00106 
 <a name="l00107"></a>00107   
 <a name="l00108"></a>00108   
-<a name="l00121"></a><a class="code" href="group__midi.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2">00121</a> <a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a>  <a class="code" href="group__midi.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2" title="Converts midi note number to frequency with speed and accuracy.">Q16n16_mtof</a>(<a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> midival_fractional)
+<a name="l00121"></a><a class="code" href="group__midi.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2">00121</a> <a class="code" href="group__fixed_math.html#ga20ef71528ee7583bbf60586448b12caf" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a>  <a class="code" href="group__midi.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2" title="Converts midi note number to frequency with speed and accuracy.">Q16n16_mtof</a>(<a class="code" href="group__fixed_math.html#ga20ef71528ee7583bbf60586448b12caf" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> midival_fractional)
 <a name="l00122"></a>00122 {
-<a name="l00123"></a>00123                 <a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> diff_fraction;
+<a name="l00123"></a>00123                 <a class="code" href="group__fixed_math.html#ga20ef71528ee7583bbf60586448b12caf" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> diff_fraction;
 <a name="l00124"></a>00124                 <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> index = midival_fractional &gt;&gt; 16;
 <a name="l00125"></a>00125                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> fraction = (<span class="keywordtype">unsigned</span> int) midival_fractional; <span class="comment">// keeps low word</span>
-<a name="l00126"></a>00126                 <a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> freq1 = (<a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a>) pgm_read_dword(midiToFreq + index);
-<a name="l00127"></a>00127                 <a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> freq2 = (<a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a>) pgm_read_dword(midiToFreq + (index+1));
-<a name="l00128"></a>00128                 <a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> difference = freq2 - freq1;
+<a name="l00126"></a>00126                 <a class="code" href="group__fixed_math.html#ga20ef71528ee7583bbf60586448b12caf" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> freq1 = (<a class="code" href="group__fixed_math.html#ga20ef71528ee7583bbf60586448b12caf" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a>) pgm_read_dword(midiToFreq + index);
+<a name="l00127"></a>00127                 <a class="code" href="group__fixed_math.html#ga20ef71528ee7583bbf60586448b12caf" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> freq2 = (<a class="code" href="group__fixed_math.html#ga20ef71528ee7583bbf60586448b12caf" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a>) pgm_read_dword(midiToFreq + (index+1));
+<a name="l00128"></a>00128                 <a class="code" href="group__fixed_math.html#ga20ef71528ee7583bbf60586448b12caf" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> difference = freq2 - freq1;
 <a name="l00129"></a>00129                 <span class="keywordflow">if</span> (difference&gt;=65536)
 <a name="l00130"></a>00130                 {
 <a name="l00131"></a>00131                                 diff_fraction = ((difference&gt;&gt;8) * fraction) &gt;&gt; 8;
@@ -210,7 +210,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00134"></a>00134                 {
 <a name="l00135"></a>00135                                 diff_fraction = (difference * fraction) &gt;&gt; 16;
 <a name="l00136"></a>00136                 }
-<a name="l00137"></a>00137                 <span class="keywordflow">return</span> (<a class="code" href="group__fixed_math.html#ga2ec5a96172f61150497ef78d7eb348a3" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a>) (freq1+ diff_fraction);
+<a name="l00137"></a>00137                 <span class="keywordflow">return</span> (<a class="code" href="group__fixed_math.html#ga20ef71528ee7583bbf60586448b12caf" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a>) (freq1+ diff_fraction);
 <a name="l00138"></a>00138 }
 <a name="l00139"></a>00139 
 <a name="l00145"></a><a class="code" href="group__midi.html#ga1acfdfdb13a82ffd95281a78ceea9c66">00145</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="group__midi.html#gafacb8849f96270644ea79184fde7db37" title="Converts midi note number to frequency.">mtof</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> midi_note){
@@ -225,7 +225,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 31 2013 18:51:03 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 21 2013 00:07:27 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

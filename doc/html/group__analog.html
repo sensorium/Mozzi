@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1s</span>
+   &#160;<span id="projectnumber">alpha 0.01.1t</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -77,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -142,7 +142,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00141">141</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00148">148</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -168,9 +168,11 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note:</dt><dd>The InitADC(), <a class="el" href="group__analog.html#ga2fb6cbd3d3abf25782d51457ab157b24" title="Call startRead() at the end of each updateControl() and the reading will happen in the background...">startRead()</a>, <a class="el" href="group__analog.html#ga720bf7cf527ba071bfe2e4263f16fa9d" title="This returns the current analog reading for the specified channel.">getSensor()</a> approach is currently set to work with channels 0 through to 5. The number of channels to use can be changed in <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a> by editing NUM_ANALOG_INPUTS to suit your hardware and software. </dd></dl>
+<dl class="section note"><dt>Note:</dt><dd>The InitADC(), <a class="el" href="group__analog.html#ga2fb6cbd3d3abf25782d51457ab157b24" title="Call startRead() at the end of each updateControl() and the reading will happen in the background...">startRead()</a>, <a class="el" href="group__analog.html#ga720bf7cf527ba071bfe2e4263f16fa9d" title="This returns the current analog reading for the specified channel.">getSensor()</a> approach is currently set to work with channels 0 through to 5. The number of channels to use can be changed in <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a> by editing NUM_ANALOG_INPUTS to suit your hardware and software. </dd>
+<dd>
+In some cases this method can cause glitches which may have to do with the ADC interrupt interfering with the audio or control interrupts. </dd></dl>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00101">101</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00108">108</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -190,9 +192,11 @@ Functions</h2></td></tr>
 
 <p>Call this in setup() to enable reading analog inputs in the background while audio generating continues. </p>
 <p>Then call <a class="el" href="group__analog.html#ga2fb6cbd3d3abf25782d51457ab157b24" title="Call startRead() at the end of each updateControl() and the reading will happen in the background...">startRead()</a> at the end of each <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> and the results for each analog channel will be available by calling getSensor(channel_num) next time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> runs. </p>
-<dl class="section note"><dt>Note:</dt><dd>This method using <a class="el" href="group__analog.html#gab3166bd1ba3160d3bac85daddb12f947" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">initADC()</a>, <a class="el" href="group__analog.html#ga2fb6cbd3d3abf25782d51457ab157b24" title="Call startRead() at the end of each updateControl() and the reading will happen in the background...">startRead()</a> and <a class="el" href="group__analog.html#ga720bf7cf527ba071bfe2e4263f16fa9d" title="This returns the current analog reading for the specified channel.">getSensor()</a> is the easiest and most efficient way to read analog inputs while generating sound with Mozzi. For many sketches, however, simply putting <a class="el" href="group__analog.html#gaf46803d06aa1d839192cc6125e39ff01" title="Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in u...">setupFastAnalogRead()</a> in setup() and calling Arduino's usual analogRead() will work fast enough. </dd></dl>
+<dl class="section note"><dt>Note:</dt><dd>This method using <a class="el" href="group__analog.html#gab3166bd1ba3160d3bac85daddb12f947" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">initADC()</a>, <a class="el" href="group__analog.html#ga2fb6cbd3d3abf25782d51457ab157b24" title="Call startRead() at the end of each updateControl() and the reading will happen in the background...">startRead()</a> and <a class="el" href="group__analog.html#ga720bf7cf527ba071bfe2e4263f16fa9d" title="This returns the current analog reading for the specified channel.">getSensor()</a> is an easy and efficient way to read analog inputs while generating sound with Mozzi. For many sketches, however, simply putting <a class="el" href="group__analog.html#gaf46803d06aa1d839192cc6125e39ff01" title="Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in u...">setupFastAnalogRead()</a> in setup() and calling Arduino's usual analogRead() will work fast enough. </dd>
+<dd>
+In some cases this method can cause glitches which may have to do with the ADC interrupt interfering with the audio or control interrupts. If this occurs, use the <a class="el" href="group__analog.html#ga485c51c54fdca43480b38e7c2ded07c4" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a>, <a class="el" href="group__analog.html#ga215a0653b8dabc35731d7115d1140757" title="Waits for the result of the most recent startAnalogRead().">receiveAnalogRead()</a> methods instead. </dd></dl>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00031">31</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00034">34</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -213,11 +217,11 @@ Functions</h2></td></tr>
 <p>Waits for the result of the most recent <a class="el" href="group__analog.html#ga485c51c54fdca43480b38e7c2ded07c4" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a>. </p>
 <p>If used as the first function of <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, to receive the result of <a class="el" href="group__analog.html#ga485c51c54fdca43480b38e7c2ded07c4" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a> from the end of the last <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, there will probably be no waiting time, as the ADC conversion will have happened in between interrupts. This is a big time-saver, since you don't have to waste time waiting for analogRead() to return (1us here vs 105 us for standard Arduino). </p>
 <dl class="section return"><dt>Returns:</dt><dd>The resut of the most recent <a class="el" href="group__analog.html#ga485c51c54fdca43480b38e7c2ded07c4" title="Starts an analog-to-digital conversion of the voltage at a specified pin.">startAnalogRead()</a>. </dd></dl>
-<dl class="section note"><dt>Note:</dt><dd>This does not require <a class="el" href="group__analog.html#gab3166bd1ba3160d3bac85daddb12f947" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">initADC()</a>, but it is messier to use than the the <a class="el" href="group__analog.html#gab3166bd1ba3160d3bac85daddb12f947" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">initADC()</a>, <a class="el" href="group__analog.html#ga2fb6cbd3d3abf25782d51457ab157b24" title="Call startRead() at the end of each updateControl() and the reading will happen in the background...">startRead()</a>, <a class="el" href="group__analog.html#ga720bf7cf527ba071bfe2e4263f16fa9d" title="This returns the current analog reading for the specified channel.">getSensor()</a> way. </dd>
+<dl class="section note"><dt>Note:</dt><dd>This is the most audio-friendly way to read analog inputs, but can be messier in your program than the the <a class="el" href="group__analog.html#gab3166bd1ba3160d3bac85daddb12f947" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">initADC()</a>, <a class="el" href="group__analog.html#ga2fb6cbd3d3abf25782d51457ab157b24" title="Call startRead() at the end of each updateControl() and the reading will happen in the background...">startRead()</a>, <a class="el" href="group__analog.html#ga720bf7cf527ba071bfe2e4263f16fa9d" title="This returns the current analog reading for the specified channel.">getSensor()</a> way. </dd>
 <dd>
 Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> with CONTROL_RATE 64. </dd></dl>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00234">234</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00241">241</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -244,7 +248,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00152">152</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00159">159</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -265,7 +269,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
 <p>Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in unmodified Arduino to 15 microseconds for a dependable analogRead(). </p>
 <p>Put this in setup() if you intend to use analogRead() with Mozzi, to avoid glitches. See: <a href="http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11,">http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11,</a> and <a href="http://www.marulaberry.co.za/index.php/tutorials/code/arduino-adc/">http://www.marulaberry.co.za/index.php/tutorials/code/arduino-adc/</a> </p>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00116">116</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00123">123</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -292,11 +296,11 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note:</dt><dd>This does not require <a class="el" href="group__analog.html#gab3166bd1ba3160d3bac85daddb12f947" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">initADC()</a>, but it is messier to use than the the <a class="el" href="group__analog.html#gab3166bd1ba3160d3bac85daddb12f947" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">initADC()</a>, <a class="el" href="group__analog.html#ga2fb6cbd3d3abf25782d51457ab157b24" title="Call startRead() at the end of each updateControl() and the reading will happen in the background...">startRead()</a>, <a class="el" href="group__analog.html#ga720bf7cf527ba071bfe2e4263f16fa9d" title="This returns the current analog reading for the specified channel.">getSensor()</a> way. </dd>
+<dl class="section note"><dt>Note:</dt><dd>This is the most audio-friendly way to read analog inputs, but can be messier in your program than the the <a class="el" href="group__analog.html#gab3166bd1ba3160d3bac85daddb12f947" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">initADC()</a>, <a class="el" href="group__analog.html#ga2fb6cbd3d3abf25782d51457ab157b24" title="Call startRead() at the end of each updateControl() and the reading will happen in the background...">startRead()</a>, <a class="el" href="group__analog.html#ga720bf7cf527ba071bfe2e4263f16fa9d" title="This returns the current analog reading for the specified channel.">getSensor()</a> way. </dd>
 <dd>
 Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> with CONTROL_RATE 64. </dd></dl>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00176">176</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00183">183</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -317,8 +321,9 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
 <p>Call <a class="el" href="group__analog.html#ga2fb6cbd3d3abf25782d51457ab157b24" title="Call startRead() at the end of each updateControl() and the reading will happen in the background...">startRead()</a> at the end of each <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> and the reading will happen in the background, using a minimum of processor time and without blocking other code. </p>
 <p>The results for each analog channel are available by calling getSensor(channel_num) next time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> runs.</p>
 <p>More detail: <a class="el" href="group__analog.html#ga2fb6cbd3d3abf25782d51457ab157b24" title="Call startRead() at the end of each updateControl() and the reading will happen in the background...">startRead()</a> starts an initial conversion which triggers an interrupt when it's complete. The interrupt code stores the result in an array, changes to the next channel and starts another conversion. When all the channels have been sampled, the ISR doesn't start a new conversion, so it doesn't re-trigger itself or use processor time until <a class="el" href="group__analog.html#ga2fb6cbd3d3abf25782d51457ab157b24" title="Call startRead() at the end of each updateControl() and the reading will happen in the background...">startRead()</a> is called again. At any time the latest conversion result for each channel is available by calling getSensor(channel_num). </p>
+<dl class="section note"><dt>Note:</dt><dd>In some cases this method can cause glitches which may have to do with the ADC interrupt interfering with the audio or control interrupts. </dd></dl>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00051">51</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00056">56</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -326,7 +331,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 31 2013 18:51:03 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 21 2013 00:07:27 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

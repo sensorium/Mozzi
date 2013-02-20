@@ -56,6 +56,8 @@ public:
 
 
 	/** Start the delay.
+	@todo have a parameter to set whether it's single or repeating, so start doesn't have to be called for repeats.  
+	Pro: simpler user programming. Con: would require an if..then every time ready() is called.
 	*/
 	inline
 	void start()
@@ -71,7 +73,7 @@ public:
 	void start(unsigned int delay_milliseconds)
 	{
 		set(delay_milliseconds);
-		counter = counter_start_value;
+		start();
 	}
 
 

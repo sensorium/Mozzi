@@ -80,8 +80,8 @@ public:
 	folder.*/
 	Oscil(const char * TABLE_NAME):table(TABLE_NAME)
 	{}
-
-
+	
+	
 	/** Constructor.
 	Declare an Oscil with template TABLE_NUM_CELLS and UPDATE_RATE
 	parameters, without specifying a particular wave table for it to play.
@@ -127,6 +127,34 @@ public:
 			phase_fractional = (unsigned long)phase << OSCIL_F_BITS;
 		}
 	}
+	
+	/** Set the phase of the Oscil.  Might be useful with getPhaseFractional().
+	@param phase a position in the wavetable.
+	@todo Test commenting out ATOMIC_BLOCK in setPhase(), setFreq(), etc.
+	*/
+	// This could be called in the control interrupt, so phase_fractional should really be volatile,
+	// but that could limit optimisation.  Since phase_fractional gets changed often in updateAudio()
+	// (in loop()), it's probably worth keeping it nonvolatile until it causes problems
+	void setPhaseFractional(unsigned long phase)
+	{
+		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+		{
+			phase_fractional = phase;
+		}
+	}
+	
+	
+	/** Get the phase of the Oscil in fractional format.  
+	@param phase a position in the wavetable.
+	*/
+	unsigned long getPhaseFractional()
+	{
+		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+		{
+			return phase_fractional;;
+		}
+	}
+	
 
 
 	/** Returns the next sample given a phase modulation value.
@@ -239,6 +267,7 @@ public:
 	@return the phase increment value which will produce a given frequency.
 	*/
 	inline
+	//const 
 	unsigned long phaseIncFromFreq(unsigned int frequency)
 	{
 		return (((unsigned long)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) << OSCIL_F_BITS;

@@ -24,9 +24,12 @@ static volatile boolean readComplete = false;
 Call this in setup() to enable reading analog inputs in the background while audio generating continues.
 Then call startRead() at the end of each updateControl() and the results for each analog channel will be
 available by calling getSensor(channel_num) next time updateControl() runs.
-@note This method using initADC(), startRead() and getSensor() is the easiest and most efficient way to read
+@note This method using initADC(), startRead() and getSensor() is an easy and efficient way to read
 analog inputs while generating sound with Mozzi.  For many sketches, however, simply putting setupFastAnalogRead()
 in setup() and calling Arduino's usual analogRead() will work fast enough.
+@note In some cases this method can cause glitches which may have to do with the ADC interrupt
+interfering with the audio or control interrupts.  
+If this occurs, use the startAnalogRead(), receiveAnalogRead() methods instead.
 */
 void initADC(){
 // The only difference between this and vanilla arduino is ADIE, enable ADC interrupt.
@@ -47,6 +50,8 @@ starts another conversion.  When all the channels have been sampled, the ISR doe
 start a new conversion, so it doesn't re-trigger itself or use processor time until
 startRead() is called again.  At any time the latest conversion result for each channel is
 available by calling getSensor(channel_num).
+@note In some cases this method can cause glitches which may have to do with the ADC interrupt
+interfering with the audio or control interrupts.  
 */
 void startRead(){
   current_adc = 0;
@@ -97,6 +102,8 @@ which Arduino maps to different numbers depending on the board being used.
 channels 0 through to 5. The number of channels to use can be changed in
 mozzi_analog.cpp by editing NUM_ANALOG_INPUTS to suit your hardware and
 software.
+@note In some cases this method can cause glitches which may have to do with the ADC interrupt
+interfering with the audio or control interrupts.  
 */
 int getSensor(unsigned char channel_num){
 	return sensors[channel_num];
@@ -166,8 +173,8 @@ get the result with receiveAnalogRead() the next time the updateControl()
 interrupt runs.
 @param pin is the analog pin number to sample from, A0 to A5
 (or whatever your board goes up to).
-@note This does not require initADC(), but it is messier to use than the
-the initADC(), startRead(), getSensor() way.
+@note This is the most audio-friendly way to read analog inputs,
+but can be messier in your program than the the initADC(), startRead(), getSensor() way.
 @note Timing: about 1us when used in updateControl() with CONTROL_RATE 64.
 */
 
@@ -227,8 +234,8 @@ updateControl(), there will probably be no waiting time, as the ADC conversion w
 have happened in between interrupts.  This is a big time-saver, since you don't have to
 waste time waiting for analogRead() to return (1us here vs 105 us for standard Arduino).
 @return The resut of the most recent startAnalogRead().
-@note This does not require initADC(), but it is messier to use than the
-the initADC(), startRead(), getSensor() way.
+@note This is the most audio-friendly way to read analog inputs,
+but can be messier in your program than the the initADC(), startRead(), getSensor() way.
 @note Timing: about 1us when used in updateControl() with CONTROL_RATE 64.
 */
 int receiveAnalogRead()

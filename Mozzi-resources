@@ -10,8 +10,11 @@ Synthesis - ways to use or extend Mozzi
 General information/background
 - Laboratory for Experimental Computer Science at the Academy of Media Arts Cologne - http://interface.khm.de/index.php/lab/experiments/
 	Good arduino audio dsp explanations, and hardware output filter schematics (though they need to be adjusted for Mozzi sample rate)
-
+- CSound
 
 Hardware
 - RC Low-pass Filter Design Tool for PWM - http://sim.okawa-denshi.jp/en/PWMtool.php
 - Notch Filter Design Tool at same site.
+
+
+Programming and Optimisation

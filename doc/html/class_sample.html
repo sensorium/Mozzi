@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1s</span>
+   &#160;<span id="projectnumber">alpha 0.01.1t</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -82,7 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -137,7 +137,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:ad6aa28642c1e219d24144501c7cfcabc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next sample given a phase modulation value.  <a href="#ad6aa28642c1e219d24144501c7cfcabc"></a><br/></td></tr>
 <tr class="memitem:a11a7948a655bea79ddd67059c2186816"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a11a7948a655bea79ddd67059c2186816">setFreq</a> (float frequency)</td></tr>
 <tr class="memdesc:a11a7948a655bea79ddd67059c2186816"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the sample frequency with a float.  <a href="#a11a7948a655bea79ddd67059c2186816"></a><br/></td></tr>
-<tr class="memitem:aa2086deef68e43620d7502dd8bb78678"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#aa2086deef68e43620d7502dd8bb78678">setFreq_Q24n8</a> (<a class="el" href="group__fixed_math.html#gabd39053dd8fc51470c26025a33a1fa63">Q24n8</a> frequency)</td></tr>
+<tr class="memitem:aa2086deef68e43620d7502dd8bb78678"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#aa2086deef68e43620d7502dd8bb78678">setFreq_Q24n8</a> (<a class="el" href="group__fixed_math.html#gaa8e579259244eb60e7f70576c8e61cbd">Q24n8</a> frequency)</td></tr>
 <tr class="memdesc:aa2086deef68e43620d7502dd8bb78678"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the frequency using Q24n8 fixed-point number format.  <a href="#aa2086deef68e43620d7502dd8bb78678"></a><br/></td></tr>
 <tr class="memitem:ad5c4e048c4aa7a36710e58466caabc94"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ad5c4e048c4aa7a36710e58466caabc94">atIndex</a> (unsigned int index)</td></tr>
 <tr class="memdesc:ad5c4e048c4aa7a36710e58466caabc94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sample at the given table index.  <a href="#ad5c4e048c4aa7a36710e58466caabc94"></a><br/></td></tr>
@@ -267,7 +267,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <p>Returns the sample at the current phase position, or 0 if looping is off and the phase overshoots the end of the sample. </p>
 <p>Updates the phase according to the current frequency. </p>
 <dl class="section return"><dt>Returns:</dt><dd>the next sample value from the table, or 0 if it's finished playing. </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000010">Todo:</a></b></dt><dd>in <a class="el" href="class_sample.html#a6b94fc8a8042f498fbd8693d9bce9719" title="Returns the sample at the current phase position, or 0 if looping is off and the phase overshoots the...">next()</a>, incrementPhase() happens in a different position than for <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> - check if it can be standardised </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000014">Todo:</a></b></dt><dd>in <a class="el" href="class_sample.html#a6b94fc8a8042f498fbd8693d9bce9719" title="Returns the sample at the current phase position, or 0 if looping is off and the phase overshoots the...">next()</a>, incrementPhase() happens in a different position than for <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> - check if it can be standardised </dd></dl>
 
 <p>Definition at line <a class="el" href="_sample_8h_source.html#l00181">181</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
@@ -408,7 +408,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#aa2086deef68e43620d7502dd8bb78678">setFreq_Q24n8</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__fixed_math.html#gabd39053dd8fc51470c26025a33a1fa63">Q24n8</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__fixed_math.html#gaa8e579259244eb60e7f70576c8e61cbd">Q24n8</a>&#160;</td>
           <td class="paramname"><em>frequency</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
@@ -553,7 +553,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 31 2013 18:51:04 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 21 2013 00:07:27 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

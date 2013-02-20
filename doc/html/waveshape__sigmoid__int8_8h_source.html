@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1s</span>
+   &#160;<span id="projectnumber">alpha 0.01.1t</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -82,7 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -102,39 +102,39 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00004"></a>00004 <span class="preprocessor">#include &quot;Arduino.h&quot;</span>
 <a name="l00005"></a>00005 <span class="preprocessor">#include &lt;avr/pgmspace.h&gt;</span>
 <a name="l00006"></a>00006 
-<a name="l00007"></a>00007 <span class="preprocessor">#define WAVESHAPE_SIGMOID_NUM_CELLS 256</span>
-<a name="l00008"></a>00008 <span class="preprocessor"></span>
-<a name="l00009"></a>00009 <span class="keyword">const</span> <span class="keywordtype">char</span> __attribute__((progmem)) WAVESHAPE_SIGMOID_DATA [256] =
-<a name="l00010"></a>00010         {
-<a name="l00011"></a>00011                 -127, -127, -127, -127, -127, -127, -127, -127, -127, -127, -127,
-<a name="l00012"></a>00012                 -127, -127, -127, -127, -127, -127, -127, -127, -126, -126, -126,
-<a name="l00013"></a>00013                 -126, -126, -126, -126, -126, -126, -126, -126, -125, -125, -125,
-<a name="l00014"></a>00014                 -125, -125, -125, -125, -124, -124, -124, -124, -124, -124, -123,
-<a name="l00015"></a>00015                 -123, -123, -123, -122, -122, -122, -122, -121, -121, -121, -120,
-<a name="l00016"></a>00016                 -120, -120, -119, -119, -118, -118, -117, -117, -116, -116, -115,
-<a name="l00017"></a>00017                 -115, -114, -113, -113, -112, -111, -111, -110, -109, -108, -107,
-<a name="l00018"></a>00018                 -107, -106, -105, -104, -103, -101, -100, -99, -98, -97, -95, -94,
-<a name="l00019"></a>00019                 -93, -91, -90, -88, -86, -85, -83, -81, -79, -78, -76, -74, -72,
-<a name="l00020"></a>00020                 -70, -67, -65, -63, -61, -58, -56, -54, -51, -48, -46, -43, -41,
-<a name="l00021"></a>00021                 -38, -35, -32, -29, -27, -24, -21, -18, -15, -12, -9, -6, -3, 0, 3
-<a name="l00022"></a>00022                 , 6, 9, 12, 15, 18, 21, 24, 27, 29, 32, 35, 38, 41, 43, 46, 48,
-<a name="l00023"></a>00023                 51, 54, 56, 58, 61, 63, 65, 67, 70, 72, 74, 76, 78, 79, 81, 83,
-<a name="l00024"></a>00024                 85, 86, 88, 90, 91, 93, 94, 95, 97, 98, 99, 100, 101, 103, 104,
-<a name="l00025"></a>00025                 105, 106, 107, 107, 108, 109, 110, 111, 111, 112, 113, 113, 114,
-<a name="l00026"></a>00026                 115, 115, 116, 116, 117, 117, 118, 118, 119, 119, 120, 120, 120,
-<a name="l00027"></a>00027                 121, 121, 121, 122, 122, 122, 122, 123, 123, 123, 123, 124, 124,
-<a name="l00028"></a>00028                 124, 124, 124, 124, 125, 125, 125, 125, 125, 125, 125, 126, 126,
-<a name="l00029"></a>00029                 126, 126, 126, 126, 126, 126, 126, 126, 126, 127, 127, 127, 127,
-<a name="l00030"></a>00030                 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,
-<a name="l00031"></a>00031                 127
-<a name="l00032"></a>00032         };
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034 <span class="preprocessor">#endif </span><span class="comment">/* WAVESHAPE_SIGMOID_H_ */</span>
+<a name="l00012"></a><a class="code" href="group__tables.html#ga4781d8e558797b58eccc12d3d8dc52f1">00012</a> <span class="preprocessor">#define WAVESHAPE_SIGMOID_NUM_CELLS 256</span>
+<a name="l00013"></a>00013 <span class="preprocessor"></span>
+<a name="l00014"></a>00014 <span class="keyword">const</span> <span class="keywordtype">char</span> __attribute__((progmem)) WAVESHAPE_SIGMOID_DATA [256] =
+<a name="l00015"></a>00015         {
+<a name="l00016"></a>00016                 -127, -127, -127, -127, -127, -127, -127, -127, -127, -127, -127,
+<a name="l00017"></a>00017                 -127, -127, -127, -127, -127, -127, -127, -127, -126, -126, -126,
+<a name="l00018"></a>00018                 -126, -126, -126, -126, -126, -126, -126, -126, -125, -125, -125,
+<a name="l00019"></a>00019                 -125, -125, -125, -125, -124, -124, -124, -124, -124, -124, -123,
+<a name="l00020"></a>00020                 -123, -123, -123, -122, -122, -122, -122, -121, -121, -121, -120,
+<a name="l00021"></a>00021                 -120, -120, -119, -119, -118, -118, -117, -117, -116, -116, -115,
+<a name="l00022"></a>00022                 -115, -114, -113, -113, -112, -111, -111, -110, -109, -108, -107,
+<a name="l00023"></a>00023                 -107, -106, -105, -104, -103, -101, -100, -99, -98, -97, -95, -94,
+<a name="l00024"></a>00024                 -93, -91, -90, -88, -86, -85, -83, -81, -79, -78, -76, -74, -72,
+<a name="l00025"></a>00025                 -70, -67, -65, -63, -61, -58, -56, -54, -51, -48, -46, -43, -41,
+<a name="l00026"></a>00026                 -38, -35, -32, -29, -27, -24, -21, -18, -15, -12, -9, -6, -3, 0, 3
+<a name="l00027"></a>00027                 , 6, 9, 12, 15, 18, 21, 24, 27, 29, 32, 35, 38, 41, 43, 46, 48,
+<a name="l00028"></a>00028                 51, 54, 56, 58, 61, 63, 65, 67, 70, 72, 74, 76, 78, 79, 81, 83,
+<a name="l00029"></a>00029                 85, 86, 88, 90, 91, 93, 94, 95, 97, 98, 99, 100, 101, 103, 104,
+<a name="l00030"></a>00030                 105, 106, 107, 107, 108, 109, 110, 111, 111, 112, 113, 113, 114,
+<a name="l00031"></a>00031                 115, 115, 116, 116, 117, 117, 118, 118, 119, 119, 120, 120, 120,
+<a name="l00032"></a>00032                 121, 121, 121, 122, 122, 122, 122, 123, 123, 123, 123, 124, 124,
+<a name="l00033"></a>00033                 124, 124, 124, 124, 125, 125, 125, 125, 125, 125, 125, 126, 126,
+<a name="l00034"></a>00034                 126, 126, 126, 126, 126, 126, 126, 126, 126, 127, 127, 127, 127,
+<a name="l00035"></a>00035                 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,
+<a name="l00036"></a>00036                 127
+<a name="l00037"></a>00037         };
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039 <span class="preprocessor">#endif </span><span class="comment">/* WAVESHAPE_SIGMOID_H_ */</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 31 2013 18:51:03 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 21 2013 00:07:27 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

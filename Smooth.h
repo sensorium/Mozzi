@@ -175,6 +175,52 @@ public:
 
 };
 
+/** float specialisation of Smooth template*/
+template <>
+class Smooth <float>
+{
+private:
+	float last_out;
+	float a;
+
+public:
+	/** Constructor.
+	@param smoothness sets how much smoothing the filter will apply to
+	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
+	very smooth.
+	 */
+	Smooth(float smoothness)
+	{
+		setSmoothness(smoothness);
+	}
+
+	/** Filters the input and returns the filtered value.
+	@param in the signal to be smoothed.
+	@return the filtered signal.
+	 */
+	inline
+	float next(float in)
+	{
+		float out = last_out + a * (in - last_out);
+		//float out = (in - last_out * a) + last_out;
+		last_out = out;
+		return out;
+	}
+
+	/** Sets how much smoothing the filter will apply to its input.
+	@param smoothness sets how much smoothing the filter will apply to
+	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
+	very smooth.
+	 */
+	inline
+	void setSmoothness(float smoothness)
+	{
+		a=1.f-smoothness;
+	}
+
+};
+
+
 /** @endcond */
 
 #endif /* SMOOTH_H_ */

@@ -31,12 +31,14 @@ you can use Line to make an oscillator glide from one frequency to another,
 pre-calculating the required phase increments for each end and then letting your
 Line change the phase increment with only a simple addition at each step.
 @tparam T the type of numbers to use. For example, Line <int> myline; makes a
-Line which uses ints. If Line() is initialised to use non-float types (for
-speed, it's usually good to avoid floats), the internal step_size will get
-truncated to 0 when it's less than 1, so the Line() output won't change. You can
-fix this with Mozzi's fixed-point number types in fixedMath.h, which enable
-you to represent fractional numbers. Google "fixed point arithmetic" if this is
-new to you. */
+Line which uses ints. 
+@note Watch out for underflows in the internal calcualtion of Line() if you're not
+using floats (avoid floats, they're too slow!). If it seems like the Line() is
+not working, there's a good chance you need to scale up the numbers you're
+using, so internal calculations don't get truncated away. Use Mozzi's
+fixed-point number types in fixedMath.h, which enable you to represent
+fractional numbers. Google "fixed point arithmetic" if this is new to you.
+*/
 
 template <class T>
 class Line

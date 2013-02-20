@@ -30,8 +30,6 @@
 #include "Arduino.h"
 #include "TimerOne.h"
 #include "TimerZero.h"
-//#include "MozziTimer2.h"
-//#include "FrequencyTimer2.h"
 
 
 /** @mainpage Welcome
@@ -60,6 +58,7 @@ Read the char2mozzi.py file for instructions.
 */
 
 /** @defgroup core Mozzi core definitions and functions
+	@defgroup tables Mozzi look-up-tables for audio waveforms, waveshaping, and control functions.
 */
 
 /**@ingroup core
@@ -81,12 +80,23 @@ x	11	Arduino Mega  \n
 ..13	Sanguino  \n
 x	 9  Boarduino  \n 
 */
-//#define AUDIO_CHANNEL_1_PIN 9
+
 #define AUDIO_CHANNEL_1_PIN TIMER1_A_PIN // defined in TimerOne/config/known_16bit_timers.h
 
+// #define MOZZI_AC_OUTPUT 1
+// see notes in MozziGuts.cpp
+#ifdef MOZZI_AC_OUTPUT
+#define AUDIO_CHANNEL_1_AC_PIN TIMER1_B_PIN // defined in TimerOne/config/known_16bit_timers.h
+#endif
 
-/* Used internally.  If there was a channel 2, it would be OCR1B.*/
+// Used internally.  If there was a channel 2, it would be OCR1B.
 #define AUDIO_CHANNEL_1_OUTPUT_REGISTER OCR1A
+
+// see notes in MozziGuts.cpp
+#ifdef MOZZI_AC_OUTPUT
+#define AUDIO_CHANNEL_1_AC_OUTPUT_REGISTER OCR1B
+#endif
+
 
 /** @ingroup core
 AUDIO_RATE is fixed at 16384 Hz for now. 
@@ -122,7 +132,13 @@ in setup(), then SET_PIN13_HIGH and SET_PIN13_LOW around your test code
 (see <a href="group__util.html">Mozzi utility functions</a>).
 */
 
-#define AUDIO_PWM_RESOLUTION 488 // from Timer1.pwmPeriod calculated for interrupt rate 16384
+
+/** @ingroup core
+This is the dynamic range of Mozzi's audio output, equal to Timer1.pwmPeriod calculated for interrupt rate 16384.
+@todo Can both timer one pwm pins be used together to increase the dynamic range?  
+See toneAC http://code.google.com/p/arduino-tone-ac/
+*/
+#define AUDIO_PWM_RESOLUTION 488
 /* Used internally to put the 0-biased generated audio into the right range for PWM output.*/
 #define AUDIO_BIAS 244
 #endif

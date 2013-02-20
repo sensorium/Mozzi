@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1s</span>
+   &#160;<span id="projectnumber">alpha 0.01.1t</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -82,7 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -111,9 +111,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a2bbfe6ab34ffb17c2600ef1b14d84c9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a2bbfe6ab34ffb17c2600ef1b14d84c9f"></a><br/></td></tr>
 <tr class="memitem:adb1ea3351d63b51c6c5270eff1de4cb8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event_delay.html#adb1ea3351d63b51c6c5270eff1de4cb8">set</a> (unsigned int delay_milliseconds)</td></tr>
 <tr class="memdesc:adb1ea3351d63b51c6c5270eff1de4cb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the delay time.  <a href="#adb1ea3351d63b51c6c5270eff1de4cb8"></a><br/></td></tr>
-<tr class="memitem:aa2a731ceb05f95cac1798089448c6aed"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa2a731ceb05f95cac1798089448c6aed"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event_delay.html#aa2a731ceb05f95cac1798089448c6aed">start</a> ()</td></tr>
-<tr class="memdesc:aa2a731ceb05f95cac1798089448c6aed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the delay. <br/></td></tr>
+<tr class="memitem:aa2a731ceb05f95cac1798089448c6aed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event_delay.html#aa2a731ceb05f95cac1798089448c6aed">start</a> ()</td></tr>
+<tr class="memdesc:aa2a731ceb05f95cac1798089448c6aed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the delay.  <a href="#aa2a731ceb05f95cac1798089448c6aed"></a><br/></td></tr>
 <tr class="memitem:a85de9021676dadaba68edd6c5d5afa0e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event_delay.html#a85de9021676dadaba68edd6c5d5afa0e">start</a> (unsigned int delay_milliseconds)</td></tr>
 <tr class="memdesc:a85de9021676dadaba68edd6c5d5afa0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the delay time and start the delay.  <a href="#a85de9021676dadaba68edd6c5d5afa0e"></a><br/></td></tr>
 <tr class="memitem:a723a61a4670ffed732b1d8eb9e5bfd56"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event_delay.html#a723a61a4670ffed732b1d8eb9e5bfd56">ready</a> ()</td></tr>
@@ -177,7 +176,7 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
 <p>Call this in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> or <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio()</a> to check if the delay time is up. </p>
 <dl class="section return"><dt>Returns:</dt><dd>true if the time is up. </dd></dl>
 
-<p>Definition at line <a class="el" href="_event_delay_8h_source.html#l00082">82</a> of file <a class="el" href="_event_delay_8h_source.html">EventDelay.h</a>.</p>
+<p>Definition at line <a class="el" href="_event_delay_8h_source.html#l00084">84</a> of file <a class="el" href="_event_delay_8h_source.html">EventDelay.h</a>.</p>
 
 </div>
 </div>
@@ -211,6 +210,29 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="aa2a731ceb05f95cac1798089448c6aed"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int UPDATE_RATE&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_event_delay.html">EventDelay</a>&lt; UPDATE_RATE &gt;::<a class="el" href="class_event_delay.html#aa2a731ceb05f95cac1798089448c6aed">start</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Start the delay. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>have a parameter to set whether it's single or repeating, so start doesn't have to be called for repeats. Pro: simpler user programming. Con: would require an if..then every time <a class="el" href="class_event_delay.html#a723a61a4670ffed732b1d8eb9e5bfd56" title="Call this in updateControl() or updateAudio() to check if the delay time is up.">ready()</a> is called. </dd></dl>
+
+<p>Definition at line <a class="el" href="_event_delay_8h_source.html#l00063">63</a> of file <a class="el" href="_event_delay_8h_source.html">EventDelay.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a85de9021676dadaba68edd6c5d5afa0e"></a>
 <div class="memitem">
 <div class="memproto">
@@ -236,7 +258,7 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_event_delay_8h_source.html#l00071">71</a> of file <a class="el" href="_event_delay_8h_source.html">EventDelay.h</a>.</p>
+<p>Definition at line <a class="el" href="_event_delay_8h_source.html#l00073">73</a> of file <a class="el" href="_event_delay_8h_source.html">EventDelay.h</a>.</p>
 
 </div>
 </div>
@@ -247,7 +269,7 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 31 2013 18:51:03 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 21 2013 00:07:27 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

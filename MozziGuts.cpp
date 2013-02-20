@@ -49,24 +49,36 @@ void startMozzi(unsigned int control_rate_hz)
 	pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);	// set pin to output for audio
 	Timer1.initialize(1000000UL/AUDIO_RATE);		// set period
 	Timer1.pwm(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);		// pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
+
+	#ifdef MOZZI_AC_OUTPUT
+	// alternative audio technique from "toneAC.cpp" by Tim Eckel - teckel@leethost.com
+	// Copyright 2013 License: GNU GPL v3 http://www.gnu.org/licenses/gpl-3.0.html
+	// to get louder output form a speaker by using two out of phase pins in push/pull fashion
+	//TCCR1A = _BV(COM1A1) | _BV(COM1B1) | _BV(COM1B0); // Inverted/none-inverted mode (AC).
+	Timer1.pwm(AUDIO_CHANNEL_1_AC_PIN, AUDIO_BIAS);  // AC pin
+	TCCR1A |= _BV(COM1B0); // Invert AC pin output
+	#endif
+
+	// TB 15-2-2013 Replaced this line with the ISR below
 	Timer1.attachInterrupt(outputAudio);			// call outputAudio() on each interrupt
 
 	// control
 	// Using Timer0 for control disables Arduino's time functions
 	// but also saves on the interrupts and blocking action of those functions.
 	// May add a config option for Using Timer2 instead if needed.
+	// (MozziTimer2 can be re-introduced for that).
 	TimerZero::init(1000000/control_rate_hz,updateControl); // set period, attach updateControl()
 	TimerZero::start();
 
-	//MozziTimer2::set(1000000/control_rate_hz,updateControl); // set period, attach updateControl()
-	//MozziTimer2::start();
-
-	// FrequencyTimer2::setPeriod(2000000UL/control_rate_hz); // would use 1000000, but FrequencyTimer2 sets the period as half
-	// FrequencyTimer2::setOnOverflow(updateControl);
-	// FrequencyTimer2::enable();
-
 }
 
+/*
+// interrupt service routine
+ISR(TIMER1_OVF_vect)
+{
+	outputAudio();
+}
+*/
 
 // ring buffer for audio output
 #define BUFFER_NUM_CELLS 256
@@ -78,7 +90,7 @@ static volatile unsigned char num_out; // shared by audioHook() (in loop()), and
 /** @ingroup core
 This is required in Arduino's loop(). If there is room in Mozzi's output buffer,
 audioHook() calls updateAudio() once and puts the result into the output
-buffer,. If other functions are called in loop() along with audioHook(), see if
+buffer. If other functions are called in loop() along with audioHook(), see if
 they can be moved into updateControl(). Otherwise it may be most efficient to
 calculate a block of samples at a time by putting audioHook() in a loop of its
 own, rather than calculating only 1 sample for each time your other functions
@@ -105,7 +117,11 @@ inline
 static void outputAudio()
 { // takes 1 us or shorter, digital scope seems to have trouble catching it
 	//SET_PIN13_HIGH;
+	#ifdef MOZZI_AC_OUTPUT
+	AUDIO_CHANNEL_1_OUTPUT_REGISTER =  AUDIO_CHANNEL_1_AC_OUTPUT_REGISTER = output_buffer[num_out++];
+	#else
 	AUDIO_CHANNEL_1_OUTPUT_REGISTER =  output_buffer[num_out++];
+	#endif
 	//SET_PIN13_LOW;
 }
 
@@ -116,5 +132,3 @@ static void outputAudio()
 // {
 // 	Timer1.isrCallback();
 // }
-
-

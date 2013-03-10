@@ -28,57 +28,65 @@
 
 // ring buffer for audio output
 #define BUFFER_NUM_CELLS 256
-static int output_buffer[BUFFER_NUM_CELLS];
+static unsigned int output_buffer[BUFFER_NUM_CELLS];
 
 // shared by audioHook() (in loop()), and outputAudio() (in audio interrupt), where it is changed
 static volatile unsigned char num_out;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 #if (STANDARD_9_BIT_PWM)
 
-static void startAudio(){
+static void startAudioStandard9bitPwm(){
 	pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);	// set pin to output for audio
 	Timer1.initialize(1000000UL/AUDIO_RATE);		// set period
 	Timer1.pwm(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);		// pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
 	//Timer1.attachInterrupt(outputAudio); // TB 15-2-2013 Replaced this line with the ISR, saves some processor time
-	TIMSK1 = _BV(TOIE1); 	// starts the interrupt (when not using Timer1.attachInterrupt())
+	TIMSK1 = _BV(TOIE1); 	// Overflow Interrupt Enable (when not using Timer1.attachInterrupt())
 }
 
-/* Interrupt service routine moves sound data from the output buffer to the
-Arduino output register, running at AUDIO_RATE. */
-ISR(TIMER1_OVF_vect, ISR_BLOCK)
-{
+
+inline
+static void outputAudioStandard9bitPwm(){
 	AUDIO_CHANNEL_1_OUTPUT_REGISTER =  output_buffer[num_out++];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 #elif (LOW_SPEED_16_BIT_PWM)
 
-static void startAudio()
-{
+static void startAudioLowSpeed16bitPwm(){
 	pinMode(AUDIO_CHANNEL_1_LOWBYTE_PIN, OUTPUT);	// set pin to output for audio
 	pinMode(AUDIO_CHANNEL_1_HIGHBYTE_PIN, OUTPUT);	// set pin to output for audio
 	Timer1.initialize(1000000UL/AUDIO_RATE);		// set period
-	Timer1.pwm(AUDIO_CHANNEL_1_LOWBYTE_PIN, lowByte(AUDIO_BIAS));		// pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
-	Timer1.pwm(AUDIO_CHANNEL_1_HIGHBYTE_PIN, highByte(AUDIO_BIAS));		// pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
-	TIMSK1 = _BV(TOIE1); // start the interrupt
+	Timer1.pwm(AUDIO_CHANNEL_1_LOWBYTE_PIN, lowByte(0));		// pwm pin, 0% of Mozzi's duty cycle, ie. 0 signal
+	Timer1.pwm(AUDIO_CHANNEL_1_HIGHBYTE_PIN, highByte(0));		// pwm pin, 0% of Mozzi's duty cycle, ie. 0 signal
+	TIMSK1 = _BV(TOIE1); // Overflow Interrupt Enable (when not using Timer1.attachInterrupt())
 }
 
-// interrupt service routine
-ISR(TIMER1_OVF_vect, ISR_BLOCK)
-{
+int count = 0;
+inline
+static void outputAudioLowSpeed16bitPwm(){
 	// unsigned int out = output_buffer[num_out++];
 	// AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out>>8;
 	// AUDIO_CHANNEL_1_LOWBYTE_REGISTER = (unsigned int) lowByte(out);
 	//AUDIO_CHANNEL_1_LOWBYTE_REGISTER = (unsigned int) lowByte(out);
-	int out = output_buffer[num_out++];
-	
+	unsigned int out = output_buffer[num_out++];
+	// the period is 488, so the values need to be adjusted to centre at the top end of the low byte of the output value
 	// this from http://wiki.openmusiclabs.com/wiki/MiniArDSP
-	AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = (out + 0x8000) >> 8; // convert to unsigned and output high byte
-	AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out; // output the bottom byte
+	AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 8; // convert to unsigned and output high byte
+	AUDIO_CHANNEL_1_LOWBYTE_REGISTER = lowByte(out); // output the bottom byte, offset to match at 0 crossover
+	/*
+	if (count++ > 1000){
+		//low
+		//Serial.println(out);
+		//Serial.println(lowByte(out));
+		//Serial.println((int)(out-AUDIO_BIAS));
+		//Serial.println((int)((char)lowByte(out)));
+		//high
+		Serial.println(out>>8);
+		 count = 0;
+	}
+	*/
 }
 
 // void TIM16_WriteOCR1A( unsigned int i ) {
@@ -92,12 +100,6 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK)
 // }
 
 #endif
-
-
-
-
-
-
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -116,9 +118,9 @@ static void startControl(unsigned int control_rate_hz)
 
 /** @ingroup core
 Sets up the timers for audio and control rate processes. It goes in your
-sketch's setup() routine. startMozzi() starts audio interrupts on Timer 1
-and control interrupts on Timer 0. The audio rate is currently fixed at 16384
-Hz.
+sketch's setup() routine. Control interrupts use Timer 0 (disabling Arduino
+delay(), millis(), micros()). For standard almost-9-bit pwm, startMozzi() starts
+audio interrupts on Timer 1. The audio rate is currently fixed at 16384 Hz.
 @param control_rate_hz Sets how often updateControl() is called. It can be any
 power of 2 above and including 64. The practical upper limit for control rate
 depends on how busy the processor is, and you might need to do some tests to
@@ -134,7 +136,24 @@ calculations in your sketch clear.
 void startMozzi(unsigned int control_rate_hz)
 {
 	startControl(control_rate_hz);
-	startAudio();
+#if (STANDARD_9_BIT_PWM)
+	startAudioStandard9bitPwm();
+#elif (LOW_SPEED_16_BIT_PWM)
+	startAudioLowSpeed16bitPwm();
+#endif
+}
+
+
+/* Interrupt service routine moves sound data from the output buffer to the
+Arduino output register, running at AUDIO_RATE. */
+ISR(TIMER1_OVF_vect, ISR_BLOCK) {
+	//setPin13High();
+#if (STANDARD_9_BIT_PWM)
+outputAudioStandard9bitPwm(); // ~500ns
+#elif (LOW_SPEED_16_BIT_PWM)
+outputAudioLowSpeed16bitPwm(); // ~1us
+#endif
+	//setPin13Low();
 }
 
 
@@ -155,10 +174,9 @@ void audioHook()
 
 	if(gap < BUFFER_NUM_CELLS) // prevent writing over cells which haven't been output yet
 	{
-		output_buffer[num_in++] = updateAudio() + AUDIO_BIAS;
+		output_buffer[num_in++] = (unsigned int) AUDIO_BIAS + updateAudio();
 	}
 }
-
 
 
 // Unmodified TimerOne.cpp has TIMER3_OVF_vect.

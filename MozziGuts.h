@@ -80,14 +80,17 @@ x	11	Arduino Mega  \n
 ..13	Sanguino  \n
 x	 9  Boarduino  \n 
 */
+//#define LOW_SPEED_16_BIT_PWM 1
+#define HI_SPEED_16_BIT_PWM 1
 
-
-/** Original Mozzi output configuration.
+#if !(STANDARD_9_BIT_PWM | LOW_SPEED_16_BIT_PWM | HI_SPEED_16BIT_PWM)
+/** Original Mozzi output configuration.  Make this the default if no other configs have been defined in the sketch.
 Almost 9 bit sound at 16384 Hz and 16384 kHz pwm rate
 Timer 1: outputs samples at AUDIO_RATE 16384 Hz, by setting Timer 1 pwm level 
 Output on Timer1, Pin 9.
 */
 #define STANDARD_9_BIT_PWM 1
+#endif
 
 /** 16 bit sound at 16384 Hz and16384 Hz pwm rate
 Timer 1: outputs samples at AUDIO_RATE 16384 Hz, by setting Timer 1 pwm level 
@@ -97,7 +100,7 @@ Use 1% or better resistors.
 As found on http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
 Also, higher quality output circuits are on the site.
 */
-#define LOW_SPEED_16_BIT_PWM 0
+//#define LOW_SPEED_16_BIT_PWM 0
 
 
 #if (STANDARD_9_BIT_PWM) 

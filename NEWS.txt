@@ -3,6 +3,18 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1v
+- Introduced alternative output options.  The one used to date, 16384Hz nearly 9bit on pin 9 is still the default.
+
+Version 0.01.1u
+- moved audio Timer 1 ISR to MozziGuts.cpp, so outputAudio() can be inlined, saving about 16ms/s (1.6%, not much!)
+- utils.h rewrote macros as inline functions, now setPin13Out(), setPin13Low() and setPin13High().  That'll break a few sketches!
+- Oscil.h - fixed bug which stopped OSCIL_DITHER_PHASE option finding xorshift96().
+- fixed some broken links on the github wiki.
+- removed LowPass1stOrder.h - it provided linear interpolation which can be done better with Line().
+- removed examples/m_09_LowPass1stOrder
+
+
 Version 0.01.1t
 - Added Portamento.h, in response to ajax on mozzi-users - easier to make a new unit than to do it in a sketch.
 - Added example m_34_Teensy_USB_MIDI_portamento.

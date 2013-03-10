@@ -30,8 +30,9 @@
 #include "fixedMath.h"
 #include <util/atomic.h>
 
+
 #ifdef OSCIL_DITHER_PHASE
-#include "utils.h"
+#include "mozzi_rand.h"
 #endif
 
 // fractional bits for oscillator index precision

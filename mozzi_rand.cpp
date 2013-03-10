@@ -47,7 +47,15 @@ void randSeed(unsigned long seed)
 }
 
 
-#if !defined (__AVR_ATmega644P__)
+#if defined (__AVR_ATmega644P__)
+
+// a less fancy version for gizduino (__AVR_ATmega644P__) which doesn't know INTERNAL
+static long longRandom()
+{
+  return (long)analogRead(0)*analogRead(1);
+}
+
+#elif defined (__AVR_ATmega2560__)
 /*
 longRandom(), used as a seed generator, comes from:
 http://arduino.cc/forum/index.php/topic,38091.0.html
@@ -61,17 +69,23 @@ http://arduino.cc/forum/index.php/topic,38091.0.html
 */
 static long longRandom()
 {
+  analogReference(INTERNAL2V56);
+  unsigned long rv = 0;
+  for (byte i=0; i< 32; i++) rv |= (analogRead(8) & 1L) << i;
+  return rv;
+}
+
+#else
+
+static long longRandom()
+{
   analogReference(INTERNAL);
   unsigned long rv = 0;
   for (byte i=0; i< 32; i++) rv |= (analogRead(8) & 1L) << i;
   return rv;
 }
-#else
-// a less fancy version for gizduino (__AVR_ATmega644P__) which doesn't know INTERNAL
-static long longRandom()
-{
-  return (long)analogRead(0)*analogRead(1);
-}
+
+
 #endif
 
 

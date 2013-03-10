@@ -26,11 +26,14 @@
 #include "Arduino.h"
 #include "fixedMath.h"
 
-/** A simple low pass filter for smoothing control signals. This algorithm comes
-from http://en.wikipedia.org/wiki/Low-pass_filter: y[i] := y[i-1] + α * (x[i] -
-y[i-1]), translated as out = last_out + a * (in - last_out). It's not calibrated
-to any real-world update rate, so if you use it at CONTROL_RATE and you change
-CONTROL_RATE, you'll need to adjust the smoothness value to suit.
+/** A simple infinite impulse response low pass filter for smoothing control signals. 
+This algorithm comes from http://en.wikipedia.org/wiki/Low-pass_filter: 
+y[i] := y[i-1] + α * (x[i] - y[i-1]), 
+translated as 
+out = last_out + a * (in - last_out). 
+It's not calibrated to any real-world update rate, so if you use it at
+CONTROL_RATE and you change CONTROL_RATE, you'll need to adjust the smoothness
+value to suit.
 @tparam T the type of numbers being smoothed.  Watch out for numbers overflowing the
 internal calculations. Some experimentation is recommended.
 If this can't be overcome using different settings or values, LowPass1stOrder may be another option.

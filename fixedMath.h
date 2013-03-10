@@ -3,7 +3,7 @@
 
 #include "Arduino.h" // for "byte" - but is this depreciated?
 
-/** @defgroup fixedMath Mozzi fixed point maths functions
+/** @defgroup fixedMath Mozzi fixed point fractional number types and conversion routines
 Take care when converting that the important bits of your numbers will fit in the types you choose!
 @note Timing: converting between fixed and float 10-12us, converting between fixed types about 1us.
 @{

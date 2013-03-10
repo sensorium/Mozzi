@@ -63,8 +63,12 @@ void startRead(){
 }
 
 
+// TB25-02-13 added ISR_NOBLOCK to see if it helps with glitches
+// maybe need ATOMIC around int parts too?
+// or a way to spread out the reads so the interrupt doesn't get called 
+// NUM_ANALOG_INPUTS times, quick in a row 
 
-ISR(ADC_vect){
+ISR(ADC_vect, ISR_NOBLOCK){
   static boolean secondRead = false;
  
   //Only record the second read on each channel

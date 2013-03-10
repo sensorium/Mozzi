@@ -22,11 +22,11 @@ unsigned char TimerOne::clockSelectBits = 0;
 
 // TB 15-2-2013 removed this and added the more direct version in MozziGuts.cpp
 // saves about 1us per ISR, at 16384Hz that's 16ms per second saved.  Seems worth it.
-
+/*
 // interrupt service routine that wraps a user defined function supplied by attachInterrupt
 ISR(TIMER1_OVF_vect)
 {  //SET_PIN13_HIGH;
 	Timer1.isrCallback();
 	//SET_PIN13_LOW; // 2us
 }
-
+*/

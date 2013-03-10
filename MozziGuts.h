@@ -87,7 +87,7 @@ Almost 9 bit sound at 16384 Hz and 16384 kHz pwm rate
 Timer 1: outputs samples at AUDIO_RATE 16384 Hz, by setting Timer 1 pwm level 
 Output on Timer1, Pin 9.
 */
-#define STANDARD_9_BIT_PWM 0
+#define STANDARD_9_BIT_PWM 1
 
 /** 16 bit sound at 16384 Hz and16384 Hz pwm rate
 Timer 1: outputs samples at AUDIO_RATE 16384 Hz, by setting Timer 1 pwm level 
@@ -97,7 +97,7 @@ Use 1% or better resistors.
 As found on http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
 Also, higher quality output circuits are on the site.
 */
-#define LOW_SPEED_16_BIT_PWM 1
+#define LOW_SPEED_16_BIT_PWM 0
 
 
 #if (STANDARD_9_BIT_PWM) 
@@ -121,14 +121,10 @@ Also, higher quality output circuits are on the site.
 #endif */
 
 
-
-
-// #define FIXMATH_OPTIMIZE_8BIT /* libfixmath option - it's an external library not used at the moment */
-
 // these are documented in .cpp file
 void startMozzi(unsigned int control_rate_hz);
 void audioHook();
-static void outputAudio();
+
 
 /** @ingroup core
 This is where you put your control code. You need updateControl() somewhere in

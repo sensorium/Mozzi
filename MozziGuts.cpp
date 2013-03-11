@@ -46,8 +46,9 @@ static void startAudioStandard9bitPwm(){
 }
 
 
-inline
-static void outputAudioStandard9bitPwm(){
+/* Interrupt service routine moves sound data from the output buffer to the
+Arduino output register, running at AUDIO_RATE. */
+ISR(TIMER1_OVF_vect, ISR_BLOCK) {
 	AUDIO_CHANNEL_1_OUTPUT_REGISTER =  output_buffer[num_out++];
 }
 
@@ -64,8 +65,9 @@ static void startAudioLowSpeed16bitPwm(){
 }
 
 int count = 0;
-inline
-static void outputAudioLowSpeed16bitPwm(){
+/* Interrupt service routine moves sound data from the output buffer to the
+Arduino output register, running at AUDIO_RATE. */
+ISR(TIMER1_OVF_vect, ISR_BLOCK) {
 	// unsigned int out = output_buffer[num_out++];
 	// AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out>>8;
 	// AUDIO_CHANNEL_1_LOWBYTE_REGISTER = (unsigned int) lowByte(out);
@@ -98,7 +100,38 @@ static void outputAudioLowSpeed16bitPwm(){
 // OCR1A = i;
 // /* Restore global interrupt flag */ SREG = sreg;
 // }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#elif (HI_SPEED_16_BIT_PWM)
 
+void setTimer1DualPwmLevels(){
+	//setPin13High();
+	unsigned int out = output_buffer[num_out++];
+	// the period is 488, so the values need to be adjusted to centre at the top end of the low byte of the output value
+	// this from http://wiki.openmusiclabs.com/wiki/MiniArDSP
+	AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 8; // convert to unsigned and output high byte
+	AUDIO_CHANNEL_1_LOWBYTE_REGISTER = lowByte(out); // output the bottom byte, offset to match at 0 crossover
+	//setPin13Low();
+}
+
+static void startAudioHiSpeed16bitPwm(){
+	// pwm on timer 1, so output is pins 9 and 10
+	pinMode(AUDIO_CHANNEL_1_LOWBYTE_PIN, OUTPUT);	// set pin to output for audio
+	pinMode(AUDIO_CHANNEL_1_HIGHBYTE_PIN, OUTPUT);	// set pin to output for audio
+	Timer1.initialize(1000000UL/62500);		// set period for 62500 Hz pwm
+	Timer1.pwm(AUDIO_CHANNEL_1_LOWBYTE_PIN, 0);		// pwm pin, 0% of Mozzi's duty cycle, ie. 0 signal
+	Timer1.pwm(AUDIO_CHANNEL_1_HIGHBYTE_PIN, 0);		// pwm pin, 0% of Mozzi's duty cycle, ie. 0 signal
+	
+	// audio interrupt on timer 2, sets the pwm
+	 FrequencyTimer2::setPeriod(2000000UL/16384); // gives a period half of what's provided
+	 FrequencyTimer2::enable();
+	 FrequencyTimer2::setOnOverflow(setTimer1DualPwmLevels);
+}
+
+
+	
+	
+	
+	
 #endif
 
 
@@ -140,21 +173,11 @@ void startMozzi(unsigned int control_rate_hz)
 	startAudioStandard9bitPwm();
 #elif (LOW_SPEED_16_BIT_PWM)
 	startAudioLowSpeed16bitPwm();
+#elif (HI_SPEED_16_BIT_PWM)
+	startAudioHiSpeed16bitPwm();
 #endif
 }
 
-
-/* Interrupt service routine moves sound data from the output buffer to the
-Arduino output register, running at AUDIO_RATE. */
-ISR(TIMER1_OVF_vect, ISR_BLOCK) {
-	//setPin13High();
-#if (STANDARD_9_BIT_PWM)
-outputAudioStandard9bitPwm(); // ~500ns
-#elif (LOW_SPEED_16_BIT_PWM)
-outputAudioLowSpeed16bitPwm(); // ~1us
-#endif
-	//setPin13Low();
-}
 
 
 /** @ingroup core

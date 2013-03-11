@@ -30,7 +30,7 @@
 #include "Arduino.h"
 #include "TimerOne.h"
 #include "TimerZero.h"
-
+#include <FrequencyTimer2.h>
 
 /** @mainpage Welcome
 
@@ -83,7 +83,7 @@ x	 9  Boarduino  \n
 //#define LOW_SPEED_16_BIT_PWM 1
 #define HI_SPEED_16_BIT_PWM 1
 
-#if !(STANDARD_9_BIT_PWM | LOW_SPEED_16_BIT_PWM | HI_SPEED_16BIT_PWM)
+#if !(STANDARD_9_BIT_PWM | LOW_SPEED_16_BIT_PWM | HI_SPEED_16_BIT_PWM)
 /** Original Mozzi output configuration.  Make this the default if no other configs have been defined in the sketch.
 Almost 9 bit sound at 16384 Hz and 16384 kHz pwm rate
 Timer 1: outputs samples at AUDIO_RATE 16384 Hz, by setting Timer 1 pwm level 
@@ -107,6 +107,8 @@ Also, higher quality output circuits are on the site.
 #include "AudioConfigStandard9bitPwm.h"
 #elif (LOW_SPEED_16_BIT_PWM)
 #include "AudioConfigLowSpeed16bitPwm.h"
+#elif (HI_SPEED_16_BIT_PWM)
+#include "AudioConfigHiSpeed16bitPwm.h"
 #endif
 
 

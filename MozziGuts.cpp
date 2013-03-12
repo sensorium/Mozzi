@@ -25,6 +25,23 @@
 #include <util/atomic.h>
 #include "utils.h"
 
+/*
+Section 12.7.4:
+The dual-slope operation [of phase correct pwm] has lower maximum operation
+frequency than single slope operation. However, due to the symmetric feature
+of the dual-slope PWM modes, these modes are preferred for motor control
+applications.
+Due to the single-slope operation, the operating frequency of the
+fast PWM mode can be twice as high as the phase correct PWM mode that use
+dual-slope operation. This high frequency makes the fast PWM mode well suited
+for power regulation, rectification, and DAC applications. High frequency allows
+physically small sized external components (coils, capacitors)..
+
+DAC, that's us!  Fast PWM.
+*/
+
+
+
 
 // ring buffer for audio output
 #define BUFFER_NUM_CELLS 256
@@ -52,55 +69,7 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK) {
 	AUDIO_CHANNEL_1_OUTPUT_REGISTER =  output_buffer[num_out++];
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#elif (LOW_SPEED_16_BIT_PWM)
-
-static void startAudioLowSpeed16bitPwm(){
-	pinMode(AUDIO_CHANNEL_1_LOWBYTE_PIN, OUTPUT);	// set pin to output for audio
-	pinMode(AUDIO_CHANNEL_1_HIGHBYTE_PIN, OUTPUT);	// set pin to output for audio
-	Timer1.initialize(1000000UL/AUDIO_RATE);		// set period
-	Timer1.pwm(AUDIO_CHANNEL_1_LOWBYTE_PIN, lowByte(0));		// pwm pin, 0% of Mozzi's duty cycle, ie. 0 signal
-	Timer1.pwm(AUDIO_CHANNEL_1_HIGHBYTE_PIN, highByte(0));		// pwm pin, 0% of Mozzi's duty cycle, ie. 0 signal
-	TIMSK1 = _BV(TOIE1); // Overflow Interrupt Enable (when not using Timer1.attachInterrupt())
-}
-
-int count = 0;
-/* Interrupt service routine moves sound data from the output buffer to the
-Arduino output register, running at AUDIO_RATE. */
-ISR(TIMER1_OVF_vect, ISR_BLOCK) {
-	// unsigned int out = output_buffer[num_out++];
-	// AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out>>8;
-	// AUDIO_CHANNEL_1_LOWBYTE_REGISTER = (unsigned int) lowByte(out);
-	//AUDIO_CHANNEL_1_LOWBYTE_REGISTER = (unsigned int) lowByte(out);
-	unsigned int out = output_buffer[num_out++];
-	// the period is 488, so the values need to be adjusted to centre at the top end of the low byte of the output value
-	// this from http://wiki.openmusiclabs.com/wiki/MiniArDSP
-	AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 8; // convert to unsigned and output high byte
-	AUDIO_CHANNEL_1_LOWBYTE_REGISTER = lowByte(out); // output the bottom byte, offset to match at 0 crossover
-	/*
-	if (count++ > 1000){
-		//low
-		//Serial.println(out);
-		//Serial.println(lowByte(out));
-		//Serial.println((int)(out-AUDIO_BIAS));
-		//Serial.println((int)((char)lowByte(out)));
-		//high
-		Serial.println(out>>8);
-		 count = 0;
-	}
-	*/
-}
-
-// void TIM16_WriteOCR1A( unsigned int i ) {
-// unsigned char sreg;
-// /* Save global interrupt flag */ sreg = SREG;
-// /* Disable interrupts */
-// _CLI();
-// /* Set TCNT1 to i */
-// OCR1A = i;
-// /* Restore global interrupt flag */ SREG = sreg;
-// }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #elif (HI_SPEED_16_BIT_PWM)
 
 void setTimer1DualPwmLevels(){
@@ -197,8 +166,6 @@ void startMozzi(unsigned int control_rate_hz)
 	startControl(control_rate_hz);
 #if (STANDARD_9_BIT_PWM)
 	startAudioStandard9bitPwm();
-#elif (LOW_SPEED_16_BIT_PWM)
-	startAudioLowSpeed16bitPwm();
 #elif (HI_SPEED_16_BIT_PWM)
 	startAudioHiSpeed16bitPwm();
 #endif
@@ -223,7 +190,7 @@ void audioHook()
 
 	if(gap < BUFFER_NUM_CELLS) // prevent writing over cells which haven't been output yet
 	{
-		output_buffer[num_in++] = (unsigned int) AUDIO_BIAS + updateAudio();
+		output_buffer[num_in++] = (unsigned int) (updateAudio() + AUDIO_BIAS);
 	}
 }
 /*

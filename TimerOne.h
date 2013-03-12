@@ -31,6 +31,13 @@
 // the compiler will perform all calculations and simply write constants
 // to the hardware registers (for example, setPeriod).
 
+// Modes are in ATmega48P/88P/168P/328P technical notes, Table 13-4
+// PWM, Phase and Frequency Correct, TOP is ICR1
+//#define TCCR1B_PWM_MODE_BITS  _BV(WGM13)
+
+// Fast PWM, PWM, TOP is ICR1 ( this should go twice as fast
+#define TCCR1B_PWM_MODE_BITS _BV(WGM13) | _BV(WGM12)
+#define TCCR1A_PWM_MODE_BITS _BV(WGM11)
 
 class TimerOne
 {
@@ -40,7 +47,7 @@ public:
 	//****************************
 	void initialize(unsigned long microseconds=1000000) __attribute__((always_inline))
 	{
-		TCCR1B = _BV(WGM13);        // set mode as phase and frequency correct pwm, stop the timer
+		TCCR1B = TCCR1B_PWM_MODE_BITS;        // set mode as phase and frequency correct pwm, stop the timer
 		TCCR1A = 0;                 // clear control register A
 		setPeriod(microseconds);
 	}
@@ -82,7 +89,7 @@ public:
 							pwmPeriod = TIMER1_RESOLUTION - 1;
 						}
 		ICR1 = pwmPeriod;
-		TCCR1B = _BV(WGM13) | clockSelectBits;
+		TCCR1B = TCCR1B_PWM_MODE_BITS | clockSelectBits;
 	}
 
 	//****************************
@@ -92,21 +99,21 @@ public:
 	{
 		TCCR1B = 0;
 		TCNT1 = 0;		// TODO: does this cause an undesired interrupt?
-		TCCR1B = _BV(WGM13) | clockSelectBits;
+		TCCR1B = TCCR1B_PWM_MODE_BITS | clockSelectBits;
 	}
 	void stop() __attribute__((always_inline))
 	{
-		TCCR1B = _BV(WGM13);
+		TCCR1B = TCCR1B_PWM_MODE_BITS;
 	}
 	void restart() __attribute__((always_inline))
 	{
 		TCCR1B = 0;
 		TCNT1 = 0;
-		TCCR1B = _BV(WGM13) | clockSelectBits;
+		TCCR1B = TCCR1B_PWM_MODE_BITS | clockSelectBits;
 	}
 	void resume() __attribute__((always_inline))
 	{
-		TCCR1B = _BV(WGM13) | clockSelectBits;
+		TCCR1B = TCCR1B_PWM_MODE_BITS | clockSelectBits;
 	}
 
 	//****************************
@@ -136,24 +143,24 @@ public:
 		if (pin == TIMER1_A_PIN)
 		{
 			pinMode(TIMER1_A_PIN, OUTPUT);
-			TCCR1A |= _BV(COM1A1);
+			TCCR1A |= _BV(COM1A1) | TCCR1A_PWM_MODE_BITS;
 		}
 #ifdef TIMER1_B_PIN
 		else if (pin == TIMER1_B_PIN)
 		{
 			pinMode(TIMER1_B_PIN, OUTPUT);
-			TCCR1A |= _BV(COM1B1);
+			TCCR1A |= _BV(COM1B1) | TCCR1A_PWM_MODE_BITS;
 		}
 #endif
 	#ifdef TIMER1_C_PIN
 		else if (pin == TIMER1_C_PIN)
 		{
 			pinMode(TIMER1_C_PIN, OUTPUT);
-			TCCR1A |= _BV(COM1C1);
+			TCCR1A |= _BV(COM1C1) | TCCR1A_PWM_MODE_BITS;
 		}
 #endif
 		setPwmDuty(pin, duty);
-		TCCR1B = _BV(WGM13) | clockSelectBits;
+		TCCR1B = TCCR1B_PWM_MODE_BITS | clockSelectBits;
 	}
 	void pwm(char pin, unsigned int duty, unsigned long microseconds) __attribute__((always_inline))
 	{
@@ -163,17 +170,20 @@ public:
 	}
 	void disablePwm(char pin) __attribute__((always_inline))
 	{
-		if (pin == TIMER1_A_PIN)
+		if (pin == TIMER1_A_PIN) {
 			TCCR1A &= ~_BV(COM1A1);
+		TCCR1A &= ~TCCR1A_PWM_MODE_BITS; }
 #ifdef TIMER1_B_PIN
 
-		else if (pin == TIMER1_B_PIN)
+		else if (pin == TIMER1_B_PIN) {
 			TCCR1A &= ~_BV(COM1B1);
+		TCCR1A &= ~TCCR1A_PWM_MODE_BITS; }
 #endif
 	#ifdef TIMER1_C_PIN
 
-		else if (pin == TIMER1_C_PIN)
+		else if (pin == TIMER1_C_PIN) {
 			TCCR1A &= ~_BV(COM1C1);
+		TCCR1A &= ~TCCR1A_PWM_MODE_BITS; }
 #endif
 
 	}

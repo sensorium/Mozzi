@@ -101,8 +101,8 @@ static void startAudioHiSpeed16bitPwm(){
 	pinMode(AUDIO_CHANNEL_1_LOWBYTE_PIN, OUTPUT);	// set pin to output for audio, use 1M resistor
 
 	//Timer1.initialize(1000000UL/31250);		// set period for 31250 Hz pwm carrier frequency = 16 bits, audible aliasing
-	//Timer1.initialize(1000000UL/62500);		// set period for 62500 Hz pwm carrier frequency = 14 bits, audible aliasing
-	Timer1.initialize(1000000UL/65536);	// almost 14 bit
+	Timer1.initialize(1000000UL/62500);		// set period for 62500 Hz pwm carrier frequency = 14 bits, audible aliasing
+	//Timer1.initialize(1000000UL/65536);	// almost 14 bit
 	//Timer1.initialize(1000000UL/131072);	// almost 12 bit
 	//Timer1.initialize(1000000UL/125000);		// set period for 125000 Hz pwm carrier frequency = 12 bits
 	//Timer1.initialize(1000000UL/250000);		// set period for 250000 Hz pwm carrier frequency = 10 bits

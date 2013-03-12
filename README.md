@@ -128,7 +128,8 @@ delayMicroseconds(). Instead, you can use Mozzi's EventDelay() for scheduling.
 
 Mozzi makes use of the following code:
 
-[TimerOne library] (http://www.pjrc.com/teensy/td_libs_TimerOne.html)  
+[TimerOne library] (http://www.pjrc.com/teensy/td_libs_TimerOne.html)
+[FrequencyTimer2 library] (http://www.pjrc.com/teensy/td_libs_FrequencyTimer2.html) 
 [xorshift] (http://www.jstatsoft.org/v08/i14/xorshift.pdf) random number generator, George Marsaglia, (2003)
 
 

@@ -106,25 +106,51 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK) {
 void setTimer1DualPwmLevels(){
 	//setPin13High();
 	unsigned int out = output_buffer[num_out++];
-	// the period is 488, so the values need to be adjusted to centre at the top end of the low byte of the output value
-	// this from http://wiki.openmusiclabs.com/wiki/MiniArDSP
-	AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 8; // convert to unsigned and output high byte
-	AUDIO_CHANNEL_1_LOWBYTE_REGISTER = lowByte(out); // output the bottom byte, offset to match at 0 crossover
+	// read about dual pwm at http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
+	// sketches at http://wiki.openmusiclabs.com/wiki/PWMDAC,  http://wiki.openmusiclabs.com/wiki/MiniArDSP
+	// 16 bit
+	//AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out>>8; //  output high byte, converted to unsigned
+	//AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out; // output the bottom byte, offset to match at 0 crossover
+	
+	// 14 bit
+	AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 7; // B11111110000000 becomes B1111111
+	AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 127; // B001111111
+	
+	// 12 bit
+	//AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 6; 	// B111111000000 becomes B1111111
+	//AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 63; 	// B000111111
+	
+	// 10 bit
+	//AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 5; // B1111100000 becomes B11111
+	//AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 31; // B0000011111
 	//setPin13Low();
 }
 
 static void startAudioHiSpeed16bitPwm(){
-	// pwm on timer 1, so output is pins 9 and 10
-	pinMode(AUDIO_CHANNEL_1_LOWBYTE_PIN, OUTPUT);	// set pin to output for audio
-	pinMode(AUDIO_CHANNEL_1_HIGHBYTE_PIN, OUTPUT);	// set pin to output for audio
-	Timer1.initialize(1000000UL/62500);		// set period for 62500 Hz pwm
-	Timer1.pwm(AUDIO_CHANNEL_1_LOWBYTE_PIN, 0);		// pwm pin, 0% of Mozzi's duty cycle, ie. 0 signal
-	Timer1.pwm(AUDIO_CHANNEL_1_HIGHBYTE_PIN, 0);		// pwm pin, 0% of Mozzi's duty cycle, ie. 0 signal
-	
-	// audio interrupt on timer 2, sets the pwm
-	 FrequencyTimer2::setPeriod(2000000UL/16384); // gives a period half of what's provided
+	// pwm on timer 1
+	pinMode(AUDIO_CHANNEL_1_HIGHBYTE_PIN, OUTPUT);	// set pin to output for audio, use 3.9k resistor
+	pinMode(AUDIO_CHANNEL_1_LOWBYTE_PIN, OUTPUT);	// set pin to output for audio, use 1M resistor
+
+	//Timer1.initialize(1000000UL/31250);		// set period for 31250 Hz pwm carrier frequency = 16 bits, audible aliasing
+	//Timer1.initialize(1000000UL/62500);		// set period for 62500 Hz pwm carrier frequency = 14 bits, audible aliasing
+	Timer1.initialize(1000000UL/65536);	// almost 14 bit
+	//Timer1.initialize(1000000UL/131072);	// almost 12 bit
+	//Timer1.initialize(1000000UL/125000);		// set period for 125000 Hz pwm carrier frequency = 12 bits
+	//Timer1.initialize(1000000UL/250000);		// set period for 250000 Hz pwm carrier frequency = 10 bits
+	Timer1.pwm(AUDIO_CHANNEL_1_HIGHBYTE_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
+	Timer1.pwm(AUDIO_CHANNEL_1_LOWBYTE_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
+
+	// audio output interrupt on timer 2, sets the pwm levels of timer 1
+	 FrequencyTimer2::setPeriod(2000000UL/16384); // gives a period half of what's provided, for some reason
+	 //FrequencyTimer2::setPeriod(2000000UL/32768); // gives a period half of what's provided, for some reason
 	 FrequencyTimer2::enable();
 	 FrequencyTimer2::setOnOverflow(setTimer1DualPwmLevels);
+	 
+	 // sync timers http://www.openmusiclabs.com/learning/digital/synchronizing-timers/
+	//GTCCR = (1<<TSM)|(1<<PSRASY)|(1<<PSRSYNC); // halt all timers
+	//TCNT1 = 0; 
+	//TCNT2 = 1; // offset of 1 for OCRA as TOP timer
+	//GTCCR = 0; // restart timers
 }
 
 
@@ -200,7 +226,16 @@ void audioHook()
 		output_buffer[num_in++] = (unsigned int) AUDIO_BIAS + updateAudio();
 	}
 }
+/*
+0000 0000 0111 1111		127
+0111 1111 0000 0000		127<<8=32512
+1111 1111 0000 0000		32512+32768=65280 uint = -128 int
 
+1111 1111 1000 0000		-128 int
+1000 0000 0000 0000		-128<<8=32768u, int = -32768 int
+0000 0001 0000 0000		-128*256=256
+0111 1111 1000 0000		-128+32768=32640
+*/
 
 // Unmodified TimerOne.cpp has TIMER3_OVF_vect.
 // Watch out if you update the library file.

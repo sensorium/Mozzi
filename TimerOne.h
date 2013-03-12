@@ -36,8 +36,10 @@
 //#define TCCR1B_PWM_MODE_BITS  _BV(WGM13)
 
 // Fast PWM, PWM, TOP is ICR1 ( this should go twice as fast
-#define TCCR1B_PWM_MODE_BITS _BV(WGM13) | _BV(WGM12)
-#define TCCR1A_PWM_MODE_BITS _BV(WGM11)
+//#define TCCR1B_PWM_MODE_BITS _BV(WGM13) | _BV(WGM12)
+//#define TCCR1A_PWM_MODE_BITS _BV(WGM11)
+const unsigned char TCCR1B_PWM_MODE_BITS = _BV(WGM13) | _BV(WGM12);
+const unsigned char TCCR1A_PWM_MODE_BITS = _BV(WGM11);
 
 class TimerOne
 {
@@ -53,7 +55,10 @@ public:
 	}
 	void setPeriod(unsigned long microseconds) __attribute__((always_inline))
 	{
-		const unsigned long cycles = (F_CPU / 2000000) * microseconds;
+		//const unsigned long cycles = (F_CPU / 2000000) * microseconds;
+		// TB2013
+		const unsigned long cycles = (F_CPU / 1000000) * microseconds; // adjusted for fast pwm
+		// end TB2013
 		if (cycles < TIMER1_RESOLUTION)
 		{
 			clockSelectBits = _BV(CS10);

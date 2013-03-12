@@ -31,9 +31,9 @@ Lower pwm rates allow greater bit depths, but because the
 // 16 bit
 //#define AUDIO_BIAS 0x8000
 // 14 bit
-#define AUDIO_BIAS ((unsigned int) 0x2000) // get period or count midpoint for the power of 2 pwm rates?, won't be so tidy
+//#define AUDIO_BIAS ((unsigned int) 0x2000) // get period or count midpoint for the power of 2 pwm rates?, won't be so tidy
 // 12 bit
-//#define AUDIO_BIAS 0x800
+#define AUDIO_BIAS 0x800
 // 10 bit
 //#define AUDIO_BIAS 0x200
 

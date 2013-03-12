@@ -81,13 +81,13 @@ void setTimer1DualPwmLevels(){
 	//AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out>>8; //  output high byte, converted to unsigned
 	//AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out; // output the bottom byte, offset to match at 0 crossover
 	
-	// 14 bit
-	AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 7; // B11111110000000 becomes B1111111
-	AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 127; // B001111111
+	// 14 bit - this sounds better than 12 bit, it's cleaner, less bitty, don't notice aliasing
+	//AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 7; // B11111110000000 becomes B1111111
+	//AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 127; // B001111111
 	
-	// 12 bit
-	//AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 6; 	// B111111000000 becomes B1111111
-	//AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 63; 	// B000111111
+	// 12 bit - slightly grainy, more disturbing than potential aliasing improvement over 14 bit
+	AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 6; 	// B111111000000 becomes B1111111
+	AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 63; 	// B000111111
 	
 	// 10 bit
 	//AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 5; // B1111100000 becomes B11111
@@ -101,11 +101,12 @@ static void startAudioHiSpeed16bitPwm(){
 	pinMode(AUDIO_CHANNEL_1_LOWBYTE_PIN, OUTPUT);	// set pin to output for audio, use 1M resistor
 
 	//Timer1.initialize(1000000UL/31250);		// set period for 31250 Hz pwm carrier frequency = 16 bits, audible aliasing
-	Timer1.initialize(1000000UL/62500);		// set period for 62500 Hz pwm carrier frequency = 14 bits, audible aliasing
+	//Timer1.initialize(1000000UL/125000);		// set period for 125000 Hz fast pwm carrier frequency = 14 bits, audible aliasing
 	//Timer1.initialize(1000000UL/65536);	// almost 14 bit
 	//Timer1.initialize(1000000UL/131072);	// almost 12 bit
-	//Timer1.initialize(1000000UL/125000);		// set period for 125000 Hz pwm carrier frequency = 12 bits
-	//Timer1.initialize(1000000UL/250000);		// set period for 250000 Hz pwm carrier frequency = 10 bits
+
+	Timer1.initialize(1000000UL/250000);		// set period for 250000 Hz fast pwm carrier frequency = 12 bits
+	//Timer1.initialize(1000000UL/500000);		// set period for 500000 Hz fast pwm carrier frequency = 10 bits
 	Timer1.pwm(AUDIO_CHANNEL_1_HIGHBYTE_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
 	Timer1.pwm(AUDIO_CHANNEL_1_LOWBYTE_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
 

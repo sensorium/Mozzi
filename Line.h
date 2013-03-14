@@ -33,11 +33,12 @@ Line change the phase increment with only a simple addition at each step.
 @tparam T the type of numbers to use. For example, Line <int> myline; makes a
 Line which uses ints. 
 @note Watch out for underflows in the internal calcualtion of Line() if you're not
-using floats (avoid floats, they're too slow!). If it seems like the Line() is
-not working, there's a good chance you need to scale up the numbers you're
-using, so internal calculations don't get truncated away. Use Mozzi's
-fixed-point number types in fixedMath.h, which enable you to represent
-fractional numbers. Google "fixed point arithmetic" if this is new to you.
+using floats (but on the other hand try to avoid lots of floats, they're too slow!). 
+If it seems like the Line() is not working, there's a good chance you need to
+scale up the numbers you're using, so internal calculations don't get truncated
+away. Use Mozzi's fixed-point number types in fixedMath.h, which enable you to
+represent fractional numbers. Google "fixed point arithmetic" if this is new to
+you.
 */
 
 template <class T>

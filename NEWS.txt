@@ -5,6 +5,7 @@ NEWS
 
 Version 0.01.1v
 - Introduced alternative output options.  The one used to date, 16384Hz nearly 9bit on pin 9 is still the default.
+- made LowPassFilter and AudioDelayFeedback examples more sane, with comments.
 
 Version 0.01.1u
 - moved audio Timer 1 ISR to MozziGuts.cpp, so outputAudio() can be inlined, saving about 16ms/s (1.6%, not much!)

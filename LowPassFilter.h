@@ -41,7 +41,7 @@ fixed point version of the filter
 
 // we are using .n fixed point (n bits for the fractional part)
 #define FX_SHIFT 8
-#define SHIFTED_1 256
+#define SHIFTED_1 ((unsigned char) 255)
 
 /** A resonant low pass filter for audio signals.
 */
@@ -63,7 +63,7 @@ public:
 	void setCutoffFreq(unsigned char cutoff)
 	{
 		f = cutoff;
-		setFeedback((int)cutoff);
+		fb = q+ucfxmul(q, SHIFTED_1 - cutoff);
 	}
 
 
@@ -90,23 +90,10 @@ public:
 
 
 private:
-	int f;
-	long fb;
-	int q;
+	unsigned char q;
+	unsigned char f;
+	unsigned int fb;
 	int buf0,buf1;
-
-	inline
-	void setFeedback(int f)
-	{
-		fb = q+fxmul(q, (int)SHIFTED_1 - f);
-	}
-
-	// convert an int into to its fixed representation
-	inline
-	long fx(int i)
-	{
-		return (i<<FX_SHIFT);
-	}
 
 
 	// // multiply two fixed point numbers (returns fixed point)
@@ -116,6 +103,13 @@ private:
 	// 	return (a*b)>>FX_SHIFT;
 	// }
 
+	// multiply two fixed point numbers (returns fixed point)
+	inline
+	unsigned int ucfxmul(unsigned char a, unsigned char b)
+	{
+		return (((unsigned int)a*b)>>FX_SHIFT);
+	}
+	
 	// multiply two fixed point numbers (returns fixed point)
 	inline
 	long fxmul(long a, int b)

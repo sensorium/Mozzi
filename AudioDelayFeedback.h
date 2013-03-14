@@ -12,6 +12,7 @@ amplitude of direct input to the delay as well as the feedback, without losing
 precision. Output is only the delay line signal. If you want to mix the delay
 with the input, do it in your sketch. AudioDelayFeedback uses more processing
 than a plain AudioDelay, but allows for more dramatic effects with feedback.
+@todo have sub-sample delay times, just using linear interpolation of adacent cells
 */
 
 template <unsigned int NUM_BUFFER_SAMPLES>

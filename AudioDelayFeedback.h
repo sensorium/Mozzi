@@ -2,6 +2,7 @@
 #define AUDIODELAY_FEEDBACK_H_
 
 #include "Arduino.h"
+#include "utils.h"
 
 /** Audio delay line with feedback for comb filter, flange, chorus and short echo effects.
 @tparam NUM_BUFFER_SAMPLES is the length of the delay buffer in samples, and should be a
@@ -12,7 +13,7 @@ amplitude of direct input to the delay as well as the feedback, without losing
 precision. Output is only the delay line signal. If you want to mix the delay
 with the input, do it in your sketch. AudioDelayFeedback uses more processing
 than a plain AudioDelay, but allows for more dramatic effects with feedback.
-@todo have sub-sample delay times, just using linear interpolation of adacent cells
+@todo sub-sample delay times, just using linear interpolation of adacent cells
 */
 
 template <unsigned int NUM_BUFFER_SAMPLES>
@@ -77,16 +78,22 @@ public:
 	@param delaytime_cells indicates the delay time in terms of cells in the delay buffer.
 	It doesn't change the stored internal value of _delaytime_cells.
 	*/
+	// 4us 
+
 	inline
 	int next(char in_value, unsigned int delaytime_cells)
 	{
+		//setPin13High();
 		++write_pos &= (NUM_BUFFER_SAMPLES - 1);
 		unsigned int read_pos = (write_pos - delaytime_cells) & (NUM_BUFFER_SAMPLES - 1);
-
+		// < 1us to here
 		int delay_sig = delay_array[read_pos];								// read the delay buffer
-		char feedback_sig = (char) min(max(((delay_sig * _feedback_level)/128),-128),127); // feedback clipped
+		// with this line, the method takes 18us
+		//char feedback_sig = (char) min(max(((delay_sig * _feedback_level)/128),-128),127); // feedback clipped
+		// this line, the whole method takes 4us... Compiler doesn't optimise pow2 divides.  Why?
+		char feedback_sig = (char) min(max(((delay_sig * _feedback_level)>>7),-128),127); // feedback clipped
 		delay_array[write_pos] = (int) in_value + feedback_sig;					// write to buffer
-
+		//setPin13Low();
 		return delay_sig;
 	}
 

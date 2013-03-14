@@ -22,6 +22,7 @@
 
 #ifndef LOWPASS_H_
 #define LOWPASS_H_
+//#include "utils.h" // for testing timing
 
 /*
 simple resonant filter posted to musicdsp.org by Paul Kellett http://www.musicdsp.org/archive.php?classid=3#259
@@ -78,13 +79,16 @@ public:
 	/** Calculate the next sample, given an input signal.
 	@param in the signal input.
 	@return the signal output.
+	@note Timing: about 11us.
 	*/
-	//16us
+	//	10.5 to 12.5 us, mostly 10.5 us (was 14us)
 	inline
 	int next(int in)
 	{
-		buf0+=fxmul(f,  ((in - buf0) + fxmul(fb, buf0-buf1)));
-		buf1+=fxmul(f, buf0-buf1);
+		//setPin13High();
+		buf0+=fxmul(((in - buf0) + fxmul(fb, buf0-buf1)), f);
+		buf1+=ifxmul(buf0-buf1, f); // could overflow if input changes fast
+		//setPin13Low();
 		return buf1;
 	}
 
@@ -108,6 +112,13 @@ private:
 	unsigned int ucfxmul(unsigned char a, unsigned char b)
 	{
 		return (((unsigned int)a*b)>>FX_SHIFT);
+	}
+	
+		// multiply two fixed point numbers (returns fixed point)
+	inline
+	int ifxmul(int a, unsigned char b)
+	{
+		return ((a*b)>>FX_SHIFT);
 	}
 	
 	// multiply two fixed point numbers (returns fixed point)

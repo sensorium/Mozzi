@@ -90,7 +90,7 @@ Use 1% or better resistors.
 As found on http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
 Also, higher quality output circuits are on the site.
 */
-//#define HI_SPEED_16_BIT_PWM 1
+#define HI_SPEED_16_BIT_PWM 1
 
 #if !(STANDARD_9_BIT_PWM | HI_SPEED_16_BIT_PWM)
 /** Original Mozzi output configuration.  Make this the default if no other configs have been defined in the sketch.

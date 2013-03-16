@@ -1,0 +1,3 @@
+15 March 2013
+- Included FrequencyTimer2 and used it at AUDIO_RATE to drive Timer1 doing high speed PWM.  
+- Modified FrequecyTimer2.cpp, moved ISR to MozziGuts.

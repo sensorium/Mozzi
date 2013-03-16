@@ -11,27 +11,27 @@
 /** @ingroup util
 Set digital pin 13 to output for testing timing with an oscilloscope.*/
 inline
-void setPin13Out() //__attribute__((always_inline)) // needs to be a method for this
+void setPin13Out()
 {	
-		DDRB = DDRB | B00100000;
+		DDRB |= B00100000;
 }
 
 
 /** @ingroup util
 Set pin 13 high for testing timing with an oscilloscope.*/
 inline
-void setPin13High() //__attribute__((always_inline))
+void setPin13High()
 {	
- 	PORTB = PORTB | B00100000;
+ 	PORTB |= B00100000;
 }
 
 
 /** @ingroup util
 Set pin 13 low for testing timing with an oscilloscope.*/
 inline
-void setPin13Low() //__attribute__((always_inline))
+void setPin13Low()
 {		
-	PORTB = B00000000;
+	PORTB &= B11011111;
 }
 
 // macros for setting and clearing register bits

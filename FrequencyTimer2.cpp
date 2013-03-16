@@ -30,7 +30,7 @@
 
 void (*FrequencyTimer2::onOverflow)() = 0;
 uint8_t FrequencyTimer2::enabled = 0;
-
+/*
 #if defined(TIMER2_COMPA_vect)
 ISR(TIMER2_COMPA_vect)
 #elif defined(TIMER2_COMP_vect)
@@ -48,7 +48,7 @@ void dummy_function(void)
 	inHandler = 0;
     }
 }
-
+*/
 void FrequencyTimer2::setOnOverflow( void (*func)() )
 {
     FrequencyTimer2::onOverflow = func;

@@ -124,6 +124,23 @@ static void startAudioHiSpeed16bitPwm(){
 }
 
 
+#if defined(TIMER2_COMPA_vect)
+ISR(TIMER2_COMPA_vect)
+#elif defined(TIMER2_COMP_vect)
+ISR(TIMER2_COMP_vect)
+#else
+#error "This board does not have a hardware timer which is compatible with FrequencyTimer2"
+void dummy_function(void)
+#endif
+{
+	unsigned int out = output_buffer[num_out++];
+	// read about dual pwm at http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
+	// sketches at http://wiki.openmusiclabs.com/wiki/PWMDAC,  http://wiki.openmusiclabs.com/wiki/MiniArDSP
+
+	// 14 bit - this sounds better than 12 bit, it's cleaner, less bitty, don't notice aliasing
+	AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 7; // B11111110000000 becomes B1111111
+	AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 127; // B001111111
+}
 	
 	
 	

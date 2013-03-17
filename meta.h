@@ -22,4 +22,31 @@ struct Int2Type
     value = I      };
 };
 
+
+/*
+//from http://en.wikibooks.org/wiki/C%2B%2B_Programming/Templates/Template_Meta-Programming#Compile-time_programming
+
+//First, the general (unspecialized) template says that factorial<n>::value is given by n*factorial<n-1>::value:
+template <unsigned n>
+struct factorial
+{
+  enum { value = n * factorial<n-1>::value };
+};
+
+
+//Next, the specialization for zero says that factorial<0>::value evaluates to 1:
+template <>
+struct factorial<0>
+{
+  enum { value = 1 };
+};
+
+
+//And now some code that "calls" the factorial template at compile-time:
+// Because calculations are done at compile-time, they can be
+// used for things such as array sizes, eg.
+//  int array[ factorial<7>::value ];
+
+*/
+  
 #endif /* META_H_ */

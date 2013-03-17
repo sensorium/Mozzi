@@ -82,33 +82,35 @@ x	 9  Boarduino  \n
 */
 
 
-/** 16 bit sound at 16384 Hz and16384 Hz pwm rate
-Timer 1: outputs samples at AUDIO_RATE 16384 Hz, by setting Timer 1 pwm level 
-Output on Timer1, low byte on Pin 9, and high byte on Pin 10
-Add signals through a 1M resistor on low byte pin 9 and a 3.9k resistor on high byte pin 10.
-Use 1% or better resistors.
-As found on http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
-Also, higher quality output circuits are on the site.
-*/
-#define HI_SPEED_16_BIT_PWM 1
+//#include "config.h"
+enum audio_modes {STANDARD_9_BIT_PWM, HI_SPEED_14_BIT_PWM, HI_SPEED_9_BIT_PWM};
 
-#if !(STANDARD_9_BIT_PWM | HI_SPEED_16_BIT_PWM)
-/** Original Mozzi output configuration.  Make this the default if no other configs have been defined in the sketch.
-Almost 9 bit sound at 16384 Hz and 16384 kHz pwm rate
-Timer 1: outputs samples at AUDIO_RATE 16384 Hz, by setting Timer 1 pwm level 
-Output on Timer1, Pin 9.
-*/
-#define STANDARD_9_BIT_PWM 1
-#endif
+//#define AUDIO_MODE STANDARD_9_BIT_PWM
+//#define AUDIO_MODE HI_SPEED_14_BIT_PWM
+const unsigned char AUDIO_MODE = HI_SPEED_9_BIT_PWM;
+
+// #if !((AUDIO_MODE == STANDARD_9_BIT_PWM) | (AUDIO_MODE == HI_SPEED_14_BIT_PWM) | (AUDIO_MODE == HI_SPEED_9_BIT_PWM))
+// /** Original Mozzi output configuration.  Make this the default if no other configs have been defined in the sketch.
+// Almost 9 bit sound at 16384 Hz and 16384 kHz pwm rate
+// Timer 1: outputs samples at AUDIO_RATE 16384 Hz, by setting Timer 1 pwm level 
+// Output on Timer1, Pin 9.
+// */
+// #define AUDIO_MODE STANDARD_9_BIT_PWM
+// #endif
 
 
-#if (STANDARD_9_BIT_PWM) 
+#if 0//(AUDIO_MODE == STANDARD_9_BIT_PWM) 
 #include "AudioConfigStandard9bitPwm.h"
-#elif (HI_SPEED_16_BIT_PWM)
-#include "AudioConfigHiSpeed16bitPwm.h"
+#elif 0//(AUDIO_MODE == HI_SPEED_14_BIT_PWM)
+#include "AudioConfigHiSpeed14bitPwm.h"
+#elif 1//(AUDIO_MODE == HI_SPEED_9_BIT_PWM)
+#include "AudioConfigHiSpeed9bitPwm.h"
 #endif
 
-
+// common abbreviations
+typedef unsigned char uchar;
+typedef unsigned int uint;
+typedef unsigned long ulong;
 
 /* //See toneAC http://code.google.com/p/arduino-tone-ac/
 // #define MOZZI_AC_OUTPUT 1
@@ -123,7 +125,12 @@ Output on Timer1, Pin 9.
 #endif */
 
 
+//template <unsigned int CONTROL_RATE, unsigned char AUDIO_MODE = STANDARD_9_BIT_PWM>
+//class Mozzi
+//{
+//public:
 // these are documented in .cpp file
+//void start(unsigned int control_rate_hz = CONTROL_RATE);
 void startMozzi(unsigned int control_rate_hz);
 //template <unsigned int OUTPUT_OPTION>
 //void startMozzi(unsigned int control_rate_hz);
@@ -148,10 +155,11 @@ calculations here which could be done in setup() or updateControl().
 */
 int updateAudio();
 
-// common abbreviations
-typedef unsigned char uchar;
-typedef unsigned int uint;
-typedef unsigned long ulong;
+//};
+
+//extern Mozzi Mozzi1;
+
+
 
 
 #endif /* MOZZIGUTS_H_ */

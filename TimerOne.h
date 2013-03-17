@@ -213,6 +213,10 @@ public:
 	}
 	void (*isrCallback)();
 
+	unsigned int getPeriod(){
+		return pwmPeriod;
+	}
+	
 protected:
 	// properties
 	static unsigned int pwmPeriod;

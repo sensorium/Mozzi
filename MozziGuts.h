@@ -31,6 +31,10 @@
 #include "TimerOne.h"
 #include "TimerZero.h"
 #include <FrequencyTimer2.h>
+// audio modes
+#define STANDARD 0
+#define HIFI 1
+#include "config.h" // change config file to set audio mode
 
 /** @mainpage Welcome
 
@@ -81,30 +85,39 @@ x	11	Arduino Mega  \n
 x	 9  Boarduino  \n 
 */
 
+/** @ingroup core
+AUDIO_RATE is fixed at 16384 Hz for now. For Mozzi's original audio mode, now
+called STANDARD, this was a compromise between the sample rate (interrupt rate)
+and sample bitdepth (pwm width), which are interdependent due to the way pulse
+wave modulation is used to generate the sound output. 
+Another factor which is important for Mozzi's operation is that with AUDIO_RATE
+being a power of two, some internal calculations can be highly optimised for
+speed.
+In STANDARD mode and with AUDIO_RATE at 16384, the sample resolution is 488,
+which provides some headroom above the 8bit table resolution currently used by
+the oscillators. You can look at the TimerOne library for more info about how
+interrupt rate and pwm resolution relate.
+@todo Possible option for output to R/2R DAC circuit, like
+http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/ This would limit
+dynamic range to 8 bit, but would remove the 16384Hz pwm carrier frequency noise
+which can be a problem in some applications, requiring filtering to remove (see
+the Mozzi wiki for filter schematics).
+(Later) For much higher quality output which combines signals from pins 9 and 10, 
+edit Mozzi/config.h to contain #define AUDIO_MODE HIFI.
+*/
 
-//#include "config.h"
-enum audio_modes {STANDARD_9_BIT_PWM, HI_SPEED_14_BIT_PWM, HI_SPEED_9_BIT_PWM};
 
-//#define AUDIO_MODE STANDARD_9_BIT_PWM
-//#define AUDIO_MODE HI_SPEED_14_BIT_PWM
-const unsigned char AUDIO_MODE = HI_SPEED_9_BIT_PWM;
+#define AUDIO_RATE 16384
+//#define AUDIO_RATE 32768
 
-// #if !((AUDIO_MODE == STANDARD_9_BIT_PWM) | (AUDIO_MODE == HI_SPEED_14_BIT_PWM) | (AUDIO_MODE == HI_SPEED_9_BIT_PWM))
-// /** Original Mozzi output configuration.  Make this the default if no other configs have been defined in the sketch.
-// Almost 9 bit sound at 16384 Hz and 16384 kHz pwm rate
-// Timer 1: outputs samples at AUDIO_RATE 16384 Hz, by setting Timer 1 pwm level 
-// Output on Timer1, Pin 9.
-// */
-// #define AUDIO_MODE STANDARD_9_BIT_PWM
-// #endif
+/* Used internally for audio-rate optimisation.*/
+#define AUDIO_RATE_AS_LSHIFT 14
+//#define AUDIO_RATE_AS_LSHIFT 15
 
-
-#if 0//(AUDIO_MODE == STANDARD_9_BIT_PWM) 
+#if AUDIO_MODE == STANDARD
 #include "AudioConfigStandard9bitPwm.h"
-#elif 0//(AUDIO_MODE == HI_SPEED_14_BIT_PWM)
+#elif AUDIO_MODE == HIFI
 #include "AudioConfigHiSpeed14bitPwm.h"
-#elif 1//(AUDIO_MODE == HI_SPEED_9_BIT_PWM)
-#include "AudioConfigHiSpeed9bitPwm.h"
 #endif
 
 // common abbreviations
@@ -125,7 +138,7 @@ typedef unsigned long ulong;
 #endif */
 
 
-//template <unsigned int CONTROL_RATE, unsigned char AUDIO_MODE = STANDARD_9_BIT_PWM>
+//template <unsigned int CONTROL_RATE, unsigned char AUDIO_MODE = STANDARD>
 //class Mozzi
 //{
 //public:
@@ -133,7 +146,6 @@ typedef unsigned long ulong;
 //void start(unsigned int control_rate_hz = CONTROL_RATE);
 void startMozzi(unsigned int control_rate_hz);
 //template <unsigned int OUTPUT_OPTION>
-//void startMozzi(unsigned int control_rate_hz);
 
 void audioHook();
 

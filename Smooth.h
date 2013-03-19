@@ -36,7 +36,6 @@ CONTROL_RATE and you change CONTROL_RATE, you'll need to adjust the smoothness
 value to suit.
 @tparam T the type of numbers being smoothed.  Watch out for numbers overflowing the
 internal calculations. Some experimentation is recommended.
-If this can't be overcome using different settings or values, LowPass1stOrder may be another option.
 @note Timing: ~5us for 16 bit types, ~1us for 8 bit types.
 @todo Check if 8 bit templates can work efficiently with a higher res smoothness -
 	as is they don't have enough resolution to work well at audio rate.  See if Line might be

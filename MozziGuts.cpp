@@ -39,6 +39,13 @@ for power regulation, rectification, and DAC applications. High frequency allows
 physically small sized external components (coils, capacitors)..
 
 DAC, that's us!  Fast PWM.
+
+PWM frequency tests
+62500Hz, single 8 or dual 16 bits, bad aliasing
+125000Hz dual 14 bits, sweet
+250000Hz dual 12 bits, gritty, if you're gonna have 2 pins, have 14 bits
+500000Hz dual 10 bits, grittier
+16384Hz single nearly 9 bits (original mode) not bad for a single pin, but carrier freq noise can be an issue
 */
 
 
@@ -62,27 +69,18 @@ static void setupTimer2(){
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#if 0//(AUDIO_MODE == STANDARD_9_BIT_PWM)
+#if (AUDIO_MODE == STANDARD)
 
 static void startAudioStandard9bitPwm(){
 	pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);	// set pin to output for audio
 	Timer1.initialize(1000000UL/AUDIO_RATE);		// set period
-	Serial.print("STANDARD_9_BIT_PWM Timer 1 period = ");
+	Serial.print("STANDARD Timer 1 period = ");
 	Serial.println(Timer1.getPeriod()); // 976
-	Serial.println(AUDIO_MODE);
-	Serial.println(STANDARD_9_BIT_PWM);
-	Serial.println(HI_SPEED_14_BIT_PWM);
-	Serial.println(HI_SPEED_9_BIT_PWM);
-	Serial.println();
-	Serial.println(AUDIO_MODE == STANDARD_9_BIT_PWM);
-		Serial.println(AUDIO_MODE == HI_SPEED_14_BIT_PWM);
-			Serial.println(AUDIO_MODE == HI_SPEED_9_BIT_PWM);
 	
 	Timer1.pwm(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);		// pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
 	//Timer1.attachInterrupt(outputAudio); // TB 15-2-2013 Replaced this line with the ISR, saves some processor time
 	TIMSK1 = _BV(TOIE1); 	// Overflow Interrupt Enable (when not using Timer1.attachInterrupt())
 }
-
 
 /* Interrupt service routine moves sound data from the output buffer to the
 Arduino output register, running at AUDIO_RATE. */
@@ -93,59 +91,23 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK) {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#elif 0//(AUDIO_MODE == HI_SPEED_14_BIT_PWM)
-
-/*
-void setTimer1DualPwmLevels(){
-	//setPin13High();
-	unsigned int out = output_buffer[num_out++];
-	// read about dual pwm at http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
-	// sketches at http://wiki.openmusiclabs.com/wiki/PWMDAC,  http://wiki.openmusiclabs.com/wiki/MiniArDSP
-	// 16 bit
-	//AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out>>8; //  output high byte, converted to unsigned
-	//AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out; // output the bottom byte, offset to match at 0 crossover
-	
-	// 14 bit - this sounds better than 12 bit, it's cleaner, less bitty, don't notice aliasing
-	AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 7; // B11111110000000 becomes B1111111
-	AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 127; // B001111111
-	
-	// 12 bit - slightly grainy, more disturbing than potential aliasing improvement over 14 bit
-	//AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 6; 	// B111111000000 becomes B1111111
-	//AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 63; 	// B000111111
-	
-	// 10 bit
-	//AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 5; // B1111100000 becomes B11111
-	//AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 31; // B0000011111
-	//setPin13Low();
-}
-*/
-
-void dummy(){}
+#elif (AUDIO_MODE == HIFI)
 
 static void startAudioHiSpeed14bitPwm(){
 	// pwm on timer 1
 	pinMode(AUDIO_CHANNEL_1_HIGHBYTE_PIN, OUTPUT);	// set pin to output for audio, use 3.9k resistor
 	pinMode(AUDIO_CHANNEL_1_LOWBYTE_PIN, OUTPUT);	// set pin to output for audio, use 1M resistor
 
-	//Timer1.initialize(1000000UL/62500);		// set period for 62500 Hz pwm carrier frequency = 16 bits, audible aliasing
 	Timer1.initialize(1000000UL/125000);		// set period for 125000 Hz fast pwm carrier frequency = 14 bits
 	
-	Serial.print("HI_SPEED_14_BIT_PWM Timer 1 period = ");
+	Serial.print("HIFI Timer 1 period = ");
 	Serial.println(Timer1.getPeriod());
-	
-	//Timer1.initialize(1000000UL/250000);		// set period for 250000 Hz fast pwm carrier frequency = 12 bits
-	//Timer1.initialize(1000000UL/500000);		// set period for 500000 Hz fast pwm carrier frequency = 10 bits
+
 	Timer1.pwm(AUDIO_CHANNEL_1_HIGHBYTE_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
 	Timer1.pwm(AUDIO_CHANNEL_1_LOWBYTE_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
 
 	// audio output interrupt on timer 2, sets the pwm levels of timer 1
 	 setupTimer2();
-	 
-	 // sync timers http://www.openmusiclabs.com/learning/digital/synchronizing-timers/
-	//GTCCR = (1<<TSM)|(1<<PSRASY)|(1<<PSRSYNC); // halt all timers
-	//TCNT1 = 0; 
-	//TCNT2 = 1; // offset of 1 for OCRA as TOP timer
-	//GTCCR = 0; // restart timers
 }
 
 
@@ -166,38 +128,6 @@ void dummy_function(void)
 	AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 7; // B11111110000000 becomes B1111111
 	AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 127; // B001111111
 }
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#elif 1//(AUDIO_MODE == HI_SPEED_9_BIT_PWM)
-
-
-
-static void startAudioHiSpeed9bitPwm(){
-	pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);	// set pin to output for audio
-	Timer1.initialize(1000000UL/31250);		// set period for 31250 Hz fast pwm carrier frequency =  9 bits single channel
-	Timer1.pwm(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);		// pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
-	Serial.print("HI_SPEED_9_BIT_PWM Timer 1 period = ");
-	Serial.println(Timer1.getPeriod());
-	
-	// audio output interrupt on timer 2, sets the pwm levels of timer 1
-	 setupTimer2();
-}
-	
-
-#if defined(TIMER2_COMPA_vect)
-ISR(TIMER2_COMPA_vect)
-#elif defined(TIMER2_COMP_vect)
-ISR(TIMER2_COMP_vect)
-#else
-#error "This board does not have a hardware timer which is compatible with FrequencyTimer2"
-void dummy_function(void)
-#endif
-{
-	setPin13High();
-	AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer[num_out++];
-	setPin13Low();
-}
-
 
 
 #endif
@@ -237,12 +167,10 @@ calculations in your sketch clear.
 void startMozzi(unsigned int control_rate_hz)
 {
 	startControl(control_rate_hz);
-#if 0//(AUDIO_MODE == STANDARD_9_BIT_PWM)
+#if (AUDIO_MODE == STANDARD)
 	startAudioStandard9bitPwm();
-#elif 0//(AUDIO_MODE == HI_SPEED_14_BIT_PWM)
+#elif (AUDIO_MODE == HIFI)
 	startAudioHiSpeed14bitPwm();
-#elif	1//(AUDIO_MODE == HI_SPEED_9_BIT_PWM)
-	startAudioHiSpeed9bitPwm();
 #endif
 }
 
@@ -268,16 +196,7 @@ void audioHook()
 		output_buffer[num_in++] = (unsigned int) (updateAudio() + AUDIO_BIAS);
 	}
 }
-/*
-0000 0000 0111 1111		127
-0111 1111 0000 0000		127<<8=32512
-1111 1111 0000 0000		32512+32768=65280 uint = -128 int
 
-1111 1111 1000 0000		-128 int
-1000 0000 0000 0000		-128<<8=32768u, int = -32768 int
-0000 0001 0000 0000		-128*256=256
-0111 1111 1000 0000		-128+32768=32640
-*/
 
 // Unmodified TimerOne.cpp has TIMER3_OVF_vect.
 // Watch out if you update the library file.

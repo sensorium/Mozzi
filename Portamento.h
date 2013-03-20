@@ -24,7 +24,7 @@
 #define PORTAMENTO_H_
 
 #include "mozzi_midi.h"
-#include "fixedMath.h"
+#include "mozzi_fixmath.h"
 #include "Line.h"
 
 /** A simple portamento (pitch slide from one note to the next) effect, useful for note-based applications.

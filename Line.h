@@ -36,7 +36,7 @@ Line which uses ints.
 using floats (but on the other hand try to avoid lots of floats, they're too slow!). 
 If it seems like the Line() is not working, there's a good chance you need to
 scale up the numbers you're using, so internal calculations don't get truncated
-away. Use Mozzi's fixed-point number types in fixedMath.h, which enable you to
+away. Use Mozzi's fixed-point number types in mozzi_fixmath.h, which enable you to
 represent fractional numbers. Google "fixed point arithmetic" if this is new to
 you.
 */

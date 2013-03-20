@@ -3,7 +3,7 @@
 - Modified FrequecyTimer2.cpp, moved ISR to MozziGuts.
 - Modified TimerOne.h to operate in Fast PWM mode rather than Phase and Frequency Correct mode.
 - mozzi_analog: 
-	used startAnalogRead() in the ISR which fills the adc array accessed in getSensor, so different boards are adjusted for.
+	used startAnalogRead() in the ISR which fills the adc array accessed in getSensor(), so different boards are adjusted for.
 	NUM_ANALOG_INPUTS is already defined in Arduino hardware files - 
 	so allow that definition to work so mozzi automatically fills all available analog ins.
 	Might be more time consuming, but users can modify if speed is an issue.

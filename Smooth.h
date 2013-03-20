@@ -24,7 +24,7 @@
 #define SMOOTH_H_
 
 #include "Arduino.h"
-#include "fixedMath.h"
+#include "mozzi_fixmath.h"
 
 /** A simple infinite impulse response low pass filter for smoothing control signals. 
 This algorithm comes from http://en.wikipedia.org/wiki/Low-pass_filter: 

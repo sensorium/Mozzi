@@ -23,7 +23,7 @@
 
 #include "MozziGuts.h"
 #include <util/atomic.h>
-//#include "mozzi_utils.h"
+//#include "mozzi_mozzi_utils.h"
 
 //Mozzi Mozzi1; // preinstatiate
 /*

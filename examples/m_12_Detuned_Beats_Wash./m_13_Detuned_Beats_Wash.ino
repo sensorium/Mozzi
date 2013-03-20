@@ -25,7 +25,7 @@
 #include <tables/cos8192_int8.h>
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
-#include <fixedMath.h> // for Q16n16 fixed-point fractional number type
+#include <mozzi_fixmath.h> // for Q16n16 fixed-point fractional number type
 
 // harmonics
 Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos1(COS8192_DATA);

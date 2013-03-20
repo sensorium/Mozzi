@@ -27,7 +27,7 @@
 #define EAD_H_
 
 #include "math.h"
-#include "fixedMath.h"
+#include "mozzi_fixmath.h"
 
 
 /** Exponential attack decay envelope. This produces a natural sounding

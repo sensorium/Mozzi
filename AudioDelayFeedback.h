@@ -2,7 +2,7 @@
 #define AUDIODELAY_FEEDBACK_H_
 
 #include "Arduino.h"
-#include "utils.h"
+#include "mozzi_utils.h"
 
 /** Audio delay line with feedback for comb filter, flange, chorus and short echo effects.
 @tparam NUM_BUFFER_SAMPLES is the length of the delay buffer in samples, and should be a

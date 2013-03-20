@@ -1,7 +1,7 @@
 #ifndef MOZZI_MIDI_H_
 #define MOZZI_MIDI_H_
 
-#include "fixedMath.h"
+#include "mozzi_fixmath.h"
 
 /** @defgroup midi midi note number to frequency conversions
 */

@@ -37,7 +37,7 @@
 #include <tables/cos2048_int8.h> // for filter modulation
 #include <LowPassFilter.h>
 #include <mozzi_analog.h>
-#include <fixedMath.h> // for fractional modulation frequency
+#include <mozzi_fixmath.h> // for fractional modulation frequency
 
 #define CONTROL_RATE 64 // powers of 2 please
 

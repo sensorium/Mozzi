@@ -24,7 +24,7 @@
 #define PHASOR_H_
 
 #include "Arduino.h"
-#include "fixedMath.h"
+#include "mozzi_fixmath.h"
 #include <util/atomic.h>
 
 #define PHASOR_MAX_VALUE_UL 4294967295UL

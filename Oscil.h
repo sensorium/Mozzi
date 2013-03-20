@@ -27,7 +27,7 @@
 
 #include "Arduino.h"
 #include "MozziGuts.h"
-#include "fixedMath.h"
+#include "mozzi_fixmath.h"
 #include <util/atomic.h>
 
 

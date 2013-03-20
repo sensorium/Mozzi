@@ -27,7 +27,7 @@
 #include <tables/sin2048_int8.h> // sine table for oscillator
 #include <mozzi_midi.h>
 #include <ADSR.h>
-#include <fixedMath.h>
+#include <mozzi_fixmath.h>
 
 
 // use #define for CONTROL_RATE, not a constant

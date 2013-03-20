@@ -8,7 +8,7 @@
  */
 
 #include <MozziGuts.h>
-#include <utils.h>
+#include <mozzi_utils.h>
 #include <mozzi_analog.h>
 
 #define CONTROL_RATE 64 // powers of 2 please

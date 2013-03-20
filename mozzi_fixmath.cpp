@@ -1,4 +1,4 @@
-#include "fixedMath.h"
+#include "mozzi_fixmath.h"
 
 //Snipped from http://code.google.com/p/ht1632c/wiki/Optimizations
 //TB2012 changed names to not interfere with arduino compilation

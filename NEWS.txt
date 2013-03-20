@@ -22,14 +22,15 @@ Version 0.01.1v
 - Made LowPassFilter and AudioDelayFeedback examples more sane, with comments.
 - Added LowPassFilter_X_2 and AudioDelayFeedback_X_2 examples with 2 each of these 
 	units running together.
-- Renamed utils.h to mozzi_utils.h.  Sorry for the inconvenience.
-- Renamed fixedMath.h and fixedMath.cpp to mozzi_fixmath.h and mozzi_fixmath.cpp.  Sorry for the inconvenience.
+- Renamed mozzi_utils.h to mozzi_mozzi_utils.h.  Sorry for the inconvenience.
+- Renamed mozzi_fixmath.h and mozzi_fixmath.cpp to mozzi_fixmath.h and mozzi_fixmath.cpp.  Sorry for the inconvenience.
+- Renumbered all the examples.  Sorry for the inconvenience.
 
 
 
 Version 0.01.1u
 - moved audio Timer 1 ISR to MozziGuts.cpp, so outputAudio() can be inlined, saving about 16ms/s (1.6%, not much!)
-- utils.h rewrote macros as inline functions, now setPin13Out(), setPin13Low() and setPin13High().  That'll break a few sketches!
+- mozzi_utils.h rewrote macros as inline functions, now setPin13Out(), setPin13Low() and setPin13High().  That'll break a few sketches!
 - Oscil.h - fixed bug which stopped OSCIL_DITHER_PHASE option finding xorshift96().
 - fixed some broken links on the github wiki.
 - removed LowPass1stOrder.h - it provided linear interpolation which can be done better with Line().
@@ -43,7 +44,7 @@ Version 0.01.1t
 - Removed the commented out references to FrequencyTimer2.cpp and FrequencyTimer2.h in MozziGuts.cpp and MozziGuts.h.
 - Online documentation was long out of date, now up to date (I forgot I had to do it manually).  Why can't github follow symlinks?
 - Oscil.h - added getPhaseFractional() and setPhaseFractional() for experiments with using addition of out-of-phase oscils to adjust gain instead of using multiplies.
-- fixedMath.h - rewrote #define types as typedefs and conversion macros as inline functions containing static_cast for better compile-time error checking.
+- mozzi_fixmath.h - rewrote #define types as typedefs and conversion macros as inline functions containing static_cast for better compile-time error checking.
 - Smooth.h - added a template for floats.  Aah that feels better.
 
 
@@ -99,7 +100,7 @@ Version 0.01.1o
 - Added StateVariable.h, a resonant audio filter with lowpass, bandpass, highpass and notch modes.  This works well.
 - m_30_StateVariable_Filter example added.
 - removed fastSqrt.h - it's about 25 times slower than avr-lib sqrt()!  Hat tip to the oscilloscope.
-- utils.h - added setAnalogInChannel(), which disables digital input for a selected analog input pin, 
+- mozzi_utils.h - added setAnalogInChannel(), which disables digital input for a selected analog input pin, 
 		improving noise and speed.  Also added unSetAnalogInChannel(), to reconnect digital input. 
 
 
@@ -202,7 +203,7 @@ Version 0.01.1f
 - added WaveShaper(), a table-based waveshaping object suited for audio synthesis,
 	with an example sketch,  _18_WaveShaper.
 - added tables for use with WaveShaper(), including Chebyshev polynomial curves and sigmoid curves.
-- utils.h: added rand(), a fast ranged random number generator using xorshift96(),
+- mozzi_utils.h: added rand(), a fast ranged random number generator using xorshift96(),
 	for signed and unsigned chars and ints, in rand(min,max) for values
 	between min and max-1, and rand(max) for 0 to max-1.
 	Much easier to use than xorshift() on its own.
@@ -218,7 +219,7 @@ Version 0.01.1e
 - added LowPass1stOrder.h, an alternative to Smooth which can handle long numbers.
 - fixed a bug in Smooth.h which stopped high smoothness values working properly.
 - added another example for Smooth, changing freqency.
-- fixed errors in fixedMath.h
+- fixed errors in mozzi_fixmath.h
 - fixed a naming problem in char2mozzi.py
 - added _02b_FMsynth example
 - added _03b_AMsynth example
@@ -228,9 +229,9 @@ Version 0.01.1e
 
 Version 0.01.1d
 
--utils.h: added startAnalogRead() and receiveAnalogRead(), so conversion can
+-mozzi_utils.h: added startAnalogRead() and receiveAnalogRead(), so conversion can
 	happen in the background instead of hogging the cpu in Arduino's analogRead().
-- fixedMath.h: tweaks and additions
+- mozzi_fixmath.h: tweaks and additions
 
 
 Version 0.01.1c
@@ -238,8 +239,8 @@ Version 0.01.1c
 - Smooth.h: increased speed from about 400 us to between 1-5 us, depending on
 number type, by changing floating to fixed point in internal calculations. Types
 are now restricted to char, unsigned char, int and unsigned int.
-- fixedMath.h: changed *_float2fix names to float_to* , added some types and fixed some mistakes
-- utils.h:
+- mozzi_fixmath.h: changed *_float2fix names to float_to* , added some types and fixed some mistakes
+- mozzi_utils.h:
 	-hardcoded midiToFreq[] array to progmem instead of generating on startup
 	-removed old Q16n16_mtof() and renamed Q16n16_mtofLookup() to Q16n16_mtof().
 	The old Q16n16_mtof() was slower and less accurate than the lookup version.
@@ -254,7 +255,7 @@ Version 0.01.1b
 - _09_PhaseMod_Envelope example wasn't showing up in Arduino, fixed the name so it can be found.
 - added triangle, saw and cos tables in sizes 256, 512, 1024, 2048, 4096 and 8192
 - added a float2mozzi_uint8.py, renamed the other wave converter scripts and made them more uniform
-- utils.h/utils.cpp:
+- mozzi_utils.h/utils.cpp:
 	- added Q16n16_mtofLookup(), a fast (but less accurate for non-integer midi note numbers) fixed point alternative to mtof().
 	- added Q16n16_mtof(), a faster (but less accurate overall) fixed point alternative to mtof().
 	- changed setupFastADC() to setupFastAnalogRead()
@@ -263,7 +264,7 @@ Version 0.01.1b
 
 Version 0.01.1
 
-- Changed utils.c to utils.cpp and changed all examples from #include utils.c to #include utils.h.
+- Changed utils.c to utils.cpp and changed all examples from #include utils.c to #include mozzi_utils.h.
 - Changed and capitalised names in saw_analogue512_int8.h
 - Removed some wavetables which were too short. (should make more 1024 & 2048 tables)
 - Oscil.h and Sample.h, added a constructor for declaring without a table, and a setTable() method, prompted by "konsumer' on mozzi-users

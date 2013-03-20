@@ -1,12 +1,13 @@
-// TB2013 code from AudioCodecNew, from:
-// http://www.openmusiclabs.com/projects/codec-shield/
 
-// guest openmusiclabs 6.8.11
-// taken from http://mekonik.wordpress.com/2009/03/18/arduino-avr-gcc-multiplication/
-// added MultiSU16XConst8toH16
-// although the constant multiplies arent any faster
-// than just creating a local variable equal to your constant
-// added MultiU16x8toH16
+/*
+Norbert Pozar 2009
+http://mekonik.wordpress.com/2009/03/18/arduino-avr-gcc-multiplication/
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.*/
 
 // multiplies 16 bit X 8 bit
 // stores lower 16 bits
@@ -42,29 +43,6 @@ asm volatile ( \
 "M" (int8In) \
 :\
 "r22"\
-)
-
-// multiplies 16 bit number X 8 bit constant
-// saves higher 16 bit
-// 8 cycles
-#define MultiSU16XConst8toH16(intRes, int16In, int8In) \
-asm volatile ( \
-"clr r26 \n\t"\
-"ldi r22, %2 \n\t"\
-"mulsu %B1, r22 \n\t"\
-"movw %A0, r0 \n\t"\
-"mul %A1, r22 \n\t"\
-"add %A0, r1 \n\t"\
-"adc %B0, r26 \n\t"\
-"clr r1 \n\t"\
-: \
-"=&r" (intRes) \
-: \
-"a" (int16In), \
-"M" (int8In) \
-:\
-"r22", \
-"r26"\
 )
 
 // multiplies 16 bit number X 8 bit and stores 2 high bytes
@@ -108,24 +86,3 @@ asm volatile ( \
 :\
 "r26"\
 )
-
-// multiplies 16 bit number X 8 bit and stores 2 high bytes
-#define MultiU16X8toH16(intRes, int16In, int8In) \
-asm volatile ( \
-"clr r26 \n\t"\
-"mul %B1, %A2 \n\t"\
-"movw %A0, r0 \n\t"\
-"mul %A1, %A2 \n\t"\
-"add %A0, r1 \n\t"\
-"adc %B0, r26 \n\t"\
-"clr r1 \n\t"\
-: \
-"=&r" (intRes) \
-: \
-"a" (int16In), \
-"a" (int8In) \
-:\
-"r26"\
-)
-
-

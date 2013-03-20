@@ -23,7 +23,7 @@
 #include <tables/chum9_int8.h> // recorded audio wavetable
 #include <tables/cos2048_int8.h> // for filter modulation
 #include <LowPassFilter.h>
-#include <fixedMath.h> // for fractional modulation speed
+#include <mozzi_fixmath.h> // for fractional modulation speed
 #include <mozzi_analog.h>
 
 #define CONTROL_RATE 64 // powers of 2 please

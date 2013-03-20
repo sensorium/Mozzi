@@ -26,7 +26,7 @@
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/sin2048_int8.h> // sine table for oscillator
-#include <fixedMath.h>
+#include <mozzi_fixmath.h>
 #include <Line.h>
 #include <Smooth.h>
 #include <mozzi_analog.h>

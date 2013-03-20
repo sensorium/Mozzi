@@ -26,7 +26,7 @@
 #include "Arduino.h"
 //#include <util/atomic.h>
 #include "Line.h"
-#include "fixedMath.h"
+#include "mozzi_fixmath.h"
 
 /** A simple ADSR envelope generator.
 @todo Test whether using the template parameter makes any difference to speed, 

@@ -34,9 +34,9 @@ Jon Dattorro, Effect Design Part 1, J. Audio Eng. Soc., Vol 45, No. 9, 1997 Sept
 
 #include "Arduino.h"
 #include "util/atomic.h"
-#include "fixedMath.h"
+#include "mozzi_fixmath.h"
 #include "math.h"
-#include "utils.h"
+#include "mozzi_utils.h"
 #include "meta.h"
 
 

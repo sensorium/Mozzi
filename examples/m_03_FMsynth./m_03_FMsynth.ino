@@ -23,7 +23,7 @@
 #include <Oscil.h>
 #include <tables/cos2048_int8.h> // table for Oscils to play
 #include <mozzi_midi.h>
-#include <fixedMath.h>
+#include <mozzi_fixmath.h>
 #include <EventDelay.h>
 #include <Smooth.h>
 

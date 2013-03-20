@@ -30,7 +30,7 @@
 #include <tables/triangle_warm8192_int8.h> // triangle table for oscillator
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
-#include <fixedMath.h>
+#include <mozzi_fixmath.h>
 
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable)

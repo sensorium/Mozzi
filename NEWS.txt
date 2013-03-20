@@ -22,7 +22,7 @@ Version 0.01.1v
 - Made LowPassFilter and AudioDelayFeedback examples more sane, with comments.
 - Added LowPassFilter_X_2 and AudioDelayFeedback_X_2 examples with 2 each of these 
 	units running together.
-- Renamed mozzi_utils.h to mozzi_mozzi_utils.h.  Sorry for the inconvenience.
+- Renamed mozzi_utils.h to mozzi_utils.h.  Sorry for the inconvenience.
 - Renamed mozzi_fixmath.h and mozzi_fixmath.cpp to mozzi_fixmath.h and mozzi_fixmath.cpp.  Sorry for the inconvenience.
 - Renumbered all the examples.  Sorry for the inconvenience.
 

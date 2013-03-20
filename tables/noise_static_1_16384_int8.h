@@ -4,6 +4,9 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
+/* static noise from needle on old record
+*/
+
 #define NOISE_STATIC_1_16384_NUM_CELLS 16384
 #define NOISE_STATIC_1_16384_SAMPLERATE 16384
 

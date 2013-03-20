@@ -4,6 +4,9 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
+/* generated "analogue"  square wave from Audacity
+*/
+
 #define SQUARE_ANALOGUE512_NUM_CELLS 512
 #define SQUARE_ANALOGUE512_SAMPLERATE 512
 

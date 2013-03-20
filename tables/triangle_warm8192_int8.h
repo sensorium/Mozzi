@@ -4,6 +4,9 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
+/* triangle wave with "warmth" from Audacity
+*/
+
 #define TRIANGLE_WARM8192_NUM_CELLS 8192
 #define TRIANGLE_WARM8192_SAMPLERATE 8192
 

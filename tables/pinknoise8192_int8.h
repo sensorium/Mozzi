@@ -4,6 +4,9 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
+/* generated pink noise
+*/
+
 #define PINKNOISE8192_NUM_CELLS 8192
 #define PINKNOISE8192_SAMPLERATE 8192
 

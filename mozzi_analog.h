@@ -2,7 +2,7 @@
 #define MOZZI_ANALOG_H_
 
 #include "Arduino.h"
-#include "utils.h"
+#include "mozzi_utils.h"
 
 /** @defgroup analog Mozzi analog input functions
 */

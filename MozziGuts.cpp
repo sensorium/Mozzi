@@ -23,7 +23,7 @@
 
 #include "MozziGuts.h"
 #include <util/atomic.h>
-//#include "utils.h"
+//#include "mozzi_utils.h"
 
 //Mozzi Mozzi1; // preinstatiate
 /*
@@ -84,9 +84,7 @@ static void startAudioStandard9bitPwm(){
 /* Interrupt service routine moves sound data from the output buffer to the
 Arduino output register, running at AUDIO_RATE. */
 ISR(TIMER1_OVF_vect, ISR_BLOCK) {
-	setPin13High();
 	AUDIO_CHANNEL_1_OUTPUT_REGISTER =  output_buffer[num_out++];
-	setPin13Low();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

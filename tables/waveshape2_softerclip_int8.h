@@ -4,6 +4,9 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
+/* table for waveshaper to impose softer clipping
+*/
+
 #define WAVESHAPE2_SOFTERCLIP_NUM_CELLS 256
 #define WAVESHAPE2_SOFTERCLIP_SAMPLERATE 256
 

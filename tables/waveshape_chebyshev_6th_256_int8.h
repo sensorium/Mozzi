@@ -4,6 +4,9 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
+/* table for waveshaper using chebyshev polynomials
+*/
+
 #define CHEBYSHEV_6TH_256_NUM_CELLS 256
 const char __attribute__((progmem)) CHEBYSHEV_6TH_256_DATA [] =
         {

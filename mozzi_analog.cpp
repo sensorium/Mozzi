@@ -11,6 +11,27 @@ range has to be divided between them.
 */
 #include "mozzi_analog.h"
 
+
+/** @ingroup analog
+Make analogRead() faster than the standard Arduino version, changing the
+duration from about 105 in unmodified Arduino to 15 microseconds for a
+dependable analogRead(). Put this in setup() if you intend to use analogRead()
+with Mozzi, to avoid glitches.
+Don't use it with the initADC(), startRead(), getSensor() approach, it may contribute to glitches.
+See: http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11, and
+http://www.marulaberry.co.za/index.php/tutorials/code/arduino-adc/
+*/
+void setupFastAnalogRead()
+{
+	// fastest predivided rate (divide by 16, giving 1Mhz) for which behaviour is defined (~16us per sample)
+	sbi(ADCSRA,ADPS2);
+	cbi(ADCSRA,ADPS1);
+	cbi(ADCSRA,ADPS0);
+}
+
+
+///approach 1: initADC(), startRead(), getSensor() //////////////////////////////////////////////////////////////////////////////////
+
 static volatile int sensors[NUM_ANALOG_INPUTS];
 static volatile byte current_adc = 0;
 static volatile boolean readComplete = false; 
@@ -19,12 +40,13 @@ static volatile boolean readComplete = false;
 Call this in setup() to enable reading analog inputs in the background while audio generating continues.
 Then call startRead() at the end of each updateControl() and the results for each analog channel will be
 available by calling getSensor(channel_num) next time updateControl() runs.
-@note This method using initADC(), startRead() and getSensor() is an easy and efficient way to read
-analog inputs while generating sound with Mozzi.  For many sketches, however, simply putting setupFastAnalogRead()
-in setup() and calling Arduino's usual analogRead() will work fast enough.
-@note In some cases this method can cause glitches which may have to do with the ADC interrupt
-interfering with the audio or control interrupts.  
-If this occurs, use the startAnalogRead(), receiveAnalogRead() methods instead.
+@note This method using initADC(), startRead() and getSensor() is an easy and
+efficient way to read analog inputs while generating sound with Mozzi. For many
+sketches, however, simply putting setupFastAnalogRead() in setup() and calling
+Arduino's usual analogRead() will work fast enough.
+@note In some cases this method can cause glitches which may have to do with the ADC
+interrupt interfering with the audio or control interrupts. If this occurs, use
+the startAnalogRead(), receiveAnalogRead() methods instead.
 */
 void initADC(){
 // The only difference between this and vanilla arduino is ADIE, enable ADC interrupt.
@@ -98,9 +120,10 @@ ISR(ADC_vect, ISR_NOBLOCK){
 
 
 /** @ingroup analog
-This returns the current analog reading for the specified channel.
-@param channel_num The channels are plain numbers 0 to 5, not the pin labels A0 to A5
-which Arduino maps to different numbers depending on the board being used.
+This returns the most recent analog reading for the specified channel.
+@param channel_num The channels are plain numbers 0 to whatever your board goes up to, not the pin
+labels A0 to A... which Arduino maps to different numbers depending on the board
+being used.
 @note The InitADC(), startRead(), getSensor() approach is currently set to work with
 all channels on each kind of board. You can change the number of channels to use in
 mozzi_analog.cpp by editing NUM_ANALOG_INPUTS if desired.
@@ -111,24 +134,10 @@ int getSensor(unsigned char channel_num){
 	return sensors[channel_num];
 }
 
+///method 1: read all channels in background////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-/** @ingroup analog
-Make analogRead() faster than the standard Arduino version, changing the
-duration from about 105 in unmodified Arduino to 15 microseconds for a
-dependable analogRead(). Put this in setup() if you intend to use analogRead()
-with Mozzi, to avoid glitches.
-See: http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11, and
-http://www.marulaberry.co.za/index.php/tutorials/code/arduino-adc/
-*/
-void setupFastAnalogRead()
-{
-	// fastest predivided rate (divide by 16, giving 1Mhz) for which behaviour is defined (~16us per sample)
-	sbi(ADCSRA,ADPS2);
-	cbi(ADCSRA,ADPS1);
-	cbi(ADCSRA,ADPS0);
-}
 
 
 
@@ -162,6 +171,7 @@ void reconnectDigitalIn(byte channel_num){
 	DIDR0 &= ~(1<<channel_num);
 }
 
+///approach 3: startAnalogRead(), receiveAnalogRead() //////////////////////////////////////////////////////////////////////////////////
 
 static unsigned char analog_reference = DEFAULT;
 
@@ -173,8 +183,8 @@ the cpu for other things and call for the result later with receiveAnalogRead().
 This works well in updateControl(), where you can call startAnalogRead() and
 get the result with receiveAnalogRead() the next time the updateControl()
 interrupt runs.
-@param pin is the analog pin number to sample from, A0 to A5
-(or whatever your board goes up to).
+This technique should also be suitable for audio-rate sampling of a single channel in updateAudio() calls.
+@param pin is the analog pin number (A0 to A...) or the channel number (0 to ....) to read.
 @note This is the most audio-friendly way to read analog inputs,
 but can be messier in your program than the the initADC(), startRead(), getSensor() way.
 @note Timing: about 1us when used in updateControl() with CONTROL_RATE 64.

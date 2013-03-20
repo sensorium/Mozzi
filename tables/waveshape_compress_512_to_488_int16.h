@@ -4,6 +4,9 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
+/* table for waveshaper to impart compression
+*/
+
 #define WAVESHAPE_COMPRESS_512_TO_488_NUM_CELLS 512
 
 const int __attribute__((progmem)) WAVESHAPE_COMPRESS_512_TO_488_DATA [512] =

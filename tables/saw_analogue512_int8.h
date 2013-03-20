@@ -4,6 +4,9 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
+/* generated "analogue" saw wave from Audacity
+*/
+
 #define SAW_ANALOGUE512_NUM_CELLS 512
 #define SAW_ANALOGUE512_SAMPLERATE 512
 

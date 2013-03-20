@@ -4,12 +4,13 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
+#define WAVESHAPE_SIGMOID_NUM_CELLS 256
+
 /** @ingroup tables
 A sigmoid squashing function (sort of like an s-shape or cursive f-shape).  
 Useful for waveshaping audio compression/distortion sounds, or emphasising changes in
 controls around 0 and making them less sensitive in higher (or lower) ranges.
 */
-#define WAVESHAPE_SIGMOID_NUM_CELLS 256
 
 const char __attribute__((progmem)) WAVESHAPE_SIGMOID_DATA [256] =
         {

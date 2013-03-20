@@ -4,6 +4,9 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
+/* square wave with rounded corners from Audacity
+*/
+
 #define SQUARE_NO_ALIAS512_NUM_CELLS 512
 #define SQUARE_NO_ALIAS512_SAMPLERATE 512
 

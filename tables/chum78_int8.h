@@ -4,6 +4,9 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
+/* A sampled guitar sound
+*/
+
 #define CHUM78_NUM_CELLS 8193
 #define CHUM78_SAMPLERATE 16384
 

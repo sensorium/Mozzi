@@ -4,6 +4,9 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
+/* triangle wave with distortion from Audacity
+*/
+
 #define TRIANGLE_DIST_SQUARED_2048_NUM_CELLS 2048
 #define TRIANGLE_DIST_SQUARED_2048_SAMPLERATE 2048
 

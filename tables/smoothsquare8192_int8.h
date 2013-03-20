@@ -4,6 +4,9 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
+/* hand-drawn square wave with rounded corners from Audacity
+*/
+
 #define SMOOTHSQUARE8192_NUM_CELLS 8192
 #define SMOOTHSQUARE8192_SAMPLERATE 8192
 

@@ -4,6 +4,9 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
+/* cos out-of-phase
+*/
+
 #define COSPHASE256_NUM_CELLS 256
 #define COSPHASE256_SAMPLERATE 256
 

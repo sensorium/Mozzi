@@ -6,6 +6,12 @@
 
 #define WAVESHAPE_TANH_NUM_CELLS 256
 
+/** @ingroup tables
+A tanh squashing function (sort of like an s-shape or cursive f-shape).  
+Useful for waveshaping audio compression/distortion sounds, or emphasising changes in
+controls around 0 and making them less sensitive in higher (or lower) ranges.
+*/
+
 const char __attribute__((progmem))  WAVESHAPE_TANH_DATA [256]  =
         {
                 -127, -127, -127, -127, -127, -127, -127, -127, -127, -127, -127, -127, -127,

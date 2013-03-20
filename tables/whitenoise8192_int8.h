@@ -7,6 +7,10 @@
 #define WHITENOISE8192_NUM_CELLS 8192
 #define WHITENOISE8192_SAMPLERATE 8192
 
+/** @ingroup tables
+White noise table.
+*/
+
 const char __attribute__((progmem)) WHITENOISE8192_DATA []  =
         {
                 22, -14, 108, 2, -80, -99, 62, -62,

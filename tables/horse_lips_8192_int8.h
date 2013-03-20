@@ -4,6 +4,9 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
+/* sound of a horse eating
+*/
+
 #define HORSE_LIPS_8192_NUM_CELLS 8192
 #define HORSE_LIPS_8192_SAMPLERATE 16384
 

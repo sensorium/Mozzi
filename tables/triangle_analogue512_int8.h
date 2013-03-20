@@ -4,6 +4,9 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
+/* generated "analogue" triangle wave from Audacity
+*/
+
 #define TRIANGLE_ANALOGUE512_NUM_CELLS 512
 #define TRIANGLE_ANALOGUE512_SAMPLERATE 512
 

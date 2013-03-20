@@ -4,6 +4,9 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
+/* a hand-drawn envelope with fast attack and slow decay
+*/
+
 #define ENVELOP2048_NUM_CELLS 2048
 #define ENVELOP2048_SAMPLERATE 2048
 

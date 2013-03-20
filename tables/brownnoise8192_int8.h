@@ -4,6 +4,9 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
+/* generated brown noise
+*/
+
 #define BROWNNOISE8192_NUM_CELLS 8192
 #define BROWNNOISE8192_SAMPLERATE 8192
 

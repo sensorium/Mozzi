@@ -30,11 +30,9 @@
 #include "Arduino.h"
 #include "TimerOne.h"
 #include "TimerZero.h"
-#include <FrequencyTimer2.h>
-// audio modes
-#define STANDARD 0
-#define HIFI 1
-#include "config.h" // change config file to set audio mode
+#include "FrequencyTimer2.h"
+#include "config.h" // User can change the config file to set audio mode
+
 
 /** @mainpage Welcome
 
@@ -65,48 +63,118 @@ Read the char2mozzi.py file for instructions.
 	@defgroup tables Mozzi look-up-tables for audio waveforms, waveshaping, and control functions.
 */
 
-/**@ingroup core
-PWM audio output pin.  For now there is only one channel in the mainstream version.
-Below is a list of the Digital Pins used by Mozzi for PWM audio out on different boards.
+/** @ingroup core
+The STANDARD word is used in Mozzi/config.h to select Mozzi's original audio
+output configuration, which is nearly 9 bit sound (-244 to 243) at 16384 Hz and
+16384 Hz pwm rate. It uses Timer 1 to output samples at AUDIO_RATE 16384 Hz,
+with an interrupt being called once every PWM cycle to set the timer's own pwm
+level.
+
+Advantages: Only uses one timer for audio, and one output pin
+Disadvantages: low dynamic range, some people can hear pwm carrier frequency, may need simple hardware filter.
+
+Below is a list of the Digital Pins used by Mozzi for STANDARD mode PWM audio out on different boards.
 Those which have been tested and reported to work have an x.
 Feedback about others is welcome.
 
-x	 9	Arduino Uno \n
-x	 9	Arduino Duemilanove \n 
-x	 9	Arduino Nano  \n
-x	 9	Arduino Leonardo  \n
-x	 9  Ardweeny  \n
-x	11  Freetronics EtherMega  \n
-..14	Teensy  \n
-x	B5  Teensy2  \n
-x	B5(25) Teensy2++  \n
-x	11	Arduino Mega  \n
-..13	Sanguino  \n
-x	 9  Boarduino  \n 
+x....9........Arduino Uno \n
+x....9........Arduino Duemilanove \n 
+x....9........Arduino Nano  \n
+x....9........Arduino Leonardo  \n
+x....9........Ardweeny  \n
+x....9........Boarduino  \n 
+x...11.......Freetronics EtherMega  \n
+x...11.......Arduino Mega  \n
+....14........Teensy  \n
+x..B5........Teensy2  \n
+x..B5(25)..Teensy2++  \n
+....13	.......Sanguino  \n
 */
+#define STANDARD 0
+
+
+
+/** @ingroup core
+HIFI can be used in Mozzi/config.h to set the audio mode.  
+HIFI enables Mozzi to output 14 bit sound at 16384 Hz sample rate and 125kHz PWM rate.
+The high PWM rate of HIFI mode places the carrier frequency beyond audible range, 
+overcoming one of the disadvantages of STANDARD mode.
+
+Also, 14 bits of dynamic range in HIFI mode provides more definition than the nearly 9 bits in STANDARD mode.
+HIFI mode takes about the same amount of processing time as STANDARD mode, and sounds clearer and brighter.
+However, it requires an extra timer to be used on the Arduino, which could increase the chances of 
+conflicts with other libraries or processes if they rely on Timer 2.
+
+Timer 1 is used to provide the PWM output at 125kHz.
+Timer 2 generates an interrupt at AUDIO_RATE 16384 Hz, which sets the Timer1 PWM levels.
+HIFI mode uses 2 output pins, and sums their outputs with resistors, so is slightly less convenient for 
+rapid prototyping where you could listen to STANDARD mode by connecting the single output pin 
+directly to a speaker or audio input (though a resistor of about 100 ohms is recommended).
+
+The resistors needed for HIFI output are 3.9k and 1M, with 1% or better tolerance.
+Use a multimeter to test a group of 1% resistors to find the most accurate.
+
+On 328 based Arduino boards, output is on Timer1, with the low byte on Pin 10 and high byte on Pin 9.
+Add the signals through a 3.9k resistor on high byte pin (9) and 1M resistor on low byte pin (10).
+Also, a 4.7nF capacitor is recommended between the summing junction of the resistors and ground.
+
+This dual PWM technique is discussed on http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
+Also, there are higher quality output circuits are on the site.
+
+Advantages: higher qulaity sound than STANDARD mode.  Doesn't need a notch filter on 
+the audio signal because the carrier frequency is out of hearing range.
+
+Disadvantages: requires 2 pins, 2 resistors and a capacitor, so it's not so quick to set up compared 
+to a rough, direct single-pin output in STANDARD mode.
+ 
+Pins and where to put the resistors on various boards for HIFI mode.  
+Boards tested in HIFI mode have an x, though most of these have been tested in STANDARD mode
+and there's no reason for them not to work in HIFI (unless the pin number is wrong or something).
+Any reports are welcome. \n
+
+resistor.....3.9k......1M \n
+x................9..........10...............Arduino Uno \n
+x................9..........10...............Arduino Duemilanove \n 
+x................9..........10...............Arduino Nano  \n
+..................9..........10...............Arduino Leonardo  \n
+x................9..........10...............Ardweeny  \n
+x................9..........10...............Boarduino  \n 
+.................11.........12...............Freetronics EtherMega  \n
+.................11.........12...............Arduino Mega  \n
+.................14.........15...............Teensy  \n
+...............B5(14)...B6(15)...........Teensy2  \n
+...............B5(25)...B6(26)...........Teensy2++  \n
+.................13.........12...............Sanguino  \n
+
+*/
+#define HIFI 1
+
 
 /** @ingroup core
 AUDIO_RATE is fixed at 16384 Hz for now. For Mozzi's original audio mode, now
 called STANDARD, this was a compromise between the sample rate (interrupt rate)
 and sample bitdepth (pwm width), which are interdependent due to the way pulse
-wave modulation is used to generate the sound output. 
+wave modulation is used to generate the sound output.
+
 Another factor which is important for Mozzi's operation is that with AUDIO_RATE
 being a power of two, some internal calculations can be highly optimised for
 speed.
+
 In STANDARD mode and with AUDIO_RATE at 16384, the sample resolution is 488,
-which provides some headroom above the 8bit table resolution currently used by
+which provides some headroom above the 8 bit table resolution currently used by
 the oscillators. You can look at the TimerOne library for more info about how
 interrupt rate and pwm resolution relate.
+
+For much higher quality output which combines signals from pins 9 and 10, 
+edit Mozzi/config.h to contain #define AUDIO_MODE HIFI.
+
 @todo Possible option for output to R/2R DAC circuit, like
 http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/ This would limit
 dynamic range to 8 bit, but would remove the 16384Hz pwm carrier frequency noise
 which can be a problem in some applications, requiring filtering to remove (see
 the Mozzi wiki for filter schematics).
-(Later) For much higher quality output which combines signals from pins 9 and 10, 
-edit Mozzi/config.h to contain #define AUDIO_MODE HIFI.
+@todo Test 32768Hz audio rate option properly
 */
-
-
 #define AUDIO_RATE 16384
 //#define AUDIO_RATE 32768
 

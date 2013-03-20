@@ -7,6 +7,9 @@
 
   Version 2 - updated by Paul Stoffregen, paul@pjrc.com
   for compatibility with newer hardware and Arduino 1.0
+  
+  Modified for Mozzi by Tim Barrass 2013, 
+  commented out ISR so it could be defined in Mozzi code directly.
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public

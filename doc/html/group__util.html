@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Mozzi: Mozzi utility macros and definitions</title>
+<title>Mozzi: Mozzi utility functions</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1t</span>
+   &#160;<span id="projectnumber">alpha 0.01.1v</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -89,9 +89,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Defines</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Mozzi utility macros and definitions</div>  </div>
+<div class="title">Mozzi utility functions</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
@@ -99,22 +99,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_int2_type.html">Int2Type&lt; I &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables you to instantiate a template based on an integer value.  <a href="struct_int2_type.html#details">More...</a><br/></td></tr>
-<tr><td colspan="2"><h2><a name="define-members"></a>
-Defines</h2></td></tr>
-<tr class="memitem:ga93a192d2f0b378bf26f1ef552b743d74"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga93a192d2f0b378bf26f1ef552b743d74">SET_PIN13_OUT</a>&#160;&#160;&#160;(DDRB = DDRB | B00100000)</td></tr>
-<tr class="memdesc:ga93a192d2f0b378bf26f1ef552b743d74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set digital pin 13 to output for testing timing with an oscilloscope.  <a href="#ga93a192d2f0b378bf26f1ef552b743d74"></a><br/></td></tr>
-<tr class="memitem:gae4cefe7c89f383a53aa741f6596772f0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gae4cefe7c89f383a53aa741f6596772f0">SET_PIN13_HIGH</a>&#160;&#160;&#160;(PORTB = PORTB | B00100000)</td></tr>
-<tr class="memdesc:gae4cefe7c89f383a53aa741f6596772f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set pin 13 high for testing timing with an oscilloscope.  <a href="#gae4cefe7c89f383a53aa741f6596772f0"></a><br/></td></tr>
-<tr class="memitem:ga69750c745cee49651f48f15e9e63bc5b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga69750c745cee49651f48f15e9e63bc5b">SET_PIN13_LOW</a>&#160;&#160;&#160;(PORTB = B00000000)</td></tr>
-<tr class="memdesc:ga69750c745cee49651f48f15e9e63bc5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set pin 13 low for testing timing with an oscilloscope.  <a href="#ga69750c745cee49651f48f15e9e63bc5b"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:gad1725ef17b234c4df9cc64a9bf561435"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gad1725ef17b234c4df9cc64a9bf561435">setPin13Out</a> ()</td></tr>
+<tr class="memdesc:gad1725ef17b234c4df9cc64a9bf561435"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set digital pin 13 to output for testing timing with an oscilloscope.  <a href="#gad1725ef17b234c4df9cc64a9bf561435"></a><br/></td></tr>
+<tr class="memitem:gaea7ee11e335eb2d6b891b886c5f3f942"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gaea7ee11e335eb2d6b891b886c5f3f942">setPin13High</a> ()</td></tr>
+<tr class="memdesc:gaea7ee11e335eb2d6b891b886c5f3f942"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set pin 13 high for testing timing with an oscilloscope.  <a href="#gaea7ee11e335eb2d6b891b886c5f3f942"></a><br/></td></tr>
+<tr class="memitem:ga4c87d0211135fd33a8697350235b50b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#ga4c87d0211135fd33a8697350235b50b4">setPin13Low</a> ()</td></tr>
+<tr class="memdesc:ga4c87d0211135fd33a8697350235b50b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set pin 13 low for testing timing with an oscilloscope.  <a href="#ga4c87d0211135fd33a8697350235b50b4"></a><br/></td></tr>
 </table>
-<hr/><h2>Define Documentation</h2>
-<a class="anchor" id="gae4cefe7c89f383a53aa741f6596772f0"></a>
+<hr/><h2>Function Documentation</h2>
+<a class="anchor" id="gaea7ee11e335eb2d6b891b886c5f3f942"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="group__util.html#gae4cefe7c89f383a53aa741f6596772f0">SET_PIN13_HIGH</a>&#160;&#160;&#160;(PORTB = PORTB | B00100000)</td>
+          <td class="memname">void <a class="el" href="group__util.html#gaea7ee11e335eb2d6b891b886c5f3f942">setPin13High</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -122,16 +125,19 @@ Defines</h2></td></tr>
 
 <p>Set pin 13 high for testing timing with an oscilloscope. </p>
 
-<p>Definition at line <a class="el" href="utils_8h_source.html#l00016">16</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+<p>Definition at line <a class="el" href="utils_8h_source.html#l00023">23</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ga69750c745cee49651f48f15e9e63bc5b"></a>
+<a class="anchor" id="ga4c87d0211135fd33a8697350235b50b4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="group__util.html#ga69750c745cee49651f48f15e9e63bc5b">SET_PIN13_LOW</a>&#160;&#160;&#160;(PORTB = B00000000)</td>
+          <td class="memname">void <a class="el" href="group__util.html#ga4c87d0211135fd33a8697350235b50b4">setPin13Low</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -139,16 +145,19 @@ Defines</h2></td></tr>
 
 <p>Set pin 13 low for testing timing with an oscilloscope. </p>
 
-<p>Definition at line <a class="el" href="utils_8h_source.html#l00019">19</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+<p>Definition at line <a class="el" href="utils_8h_source.html#l00032">32</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ga93a192d2f0b378bf26f1ef552b743d74"></a>
+<a class="anchor" id="gad1725ef17b234c4df9cc64a9bf561435"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="group__util.html#ga93a192d2f0b378bf26f1ef552b743d74">SET_PIN13_OUT</a>&#160;&#160;&#160;(DDRB = DDRB | B00100000)</td>
+          <td class="memname">void <a class="el" href="group__util.html#gad1725ef17b234c4df9cc64a9bf561435">setPin13Out</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -156,7 +165,7 @@ Defines</h2></td></tr>
 
 <p>Set digital pin 13 to output for testing timing with an oscilloscope. </p>
 
-<p>Definition at line <a class="el" href="utils_8h_source.html#l00013">13</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+<p>Definition at line <a class="el" href="utils_8h_source.html#l00014">14</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 
 </div>
 </div>
@@ -164,7 +173,7 @@ Defines</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 21 2013 00:07:27 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 20 2013 17:25:43 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

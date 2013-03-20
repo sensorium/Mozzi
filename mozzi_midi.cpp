@@ -6,14 +6,24 @@ microseconds to run. It can seriously mess up the audio output if you use it in
 updateControl() or updateAudio(). This is a good choice in setup(), or where you
 need precise midi-pitch conversion and aren't doing much other audio
 calculation.
+@note Beware this returns an invalid result for midi note 0.
 @note Timing: ~350 us
-@param midival a midi note number.  Like the mtof object in Pd, midi values can have fractions.
+@param midival a midi note number, 1.0 or greater.  Like the mtof object in Pd, midi values can have fractions.
 @return the frequency represented by the input midi note number..
  */
-// code from AF_precision_synthesis sketch, copyright 2009, Adrian Freed.
+
+
+
 float mtof(float midival)
 {
-	return 8.1757989156 * pow(2.0, midival/12.0);
+	 // http://en.wikipedia.org/wiki/Note
+	 // f = pow(2,(p-69/12) * 440Hz
+	 // return pow(2.0,(midival-69.0/12.0) * 440.0;
+	 
+	// code from AF_precision_synthesis sketch, copyright 2009, Adrian Freed.
+	float f = 0.0;
+	if(midival) f = 8.1757989156 * pow(2.0, midival/12.0);
+	return f;
 }
 
 
@@ -86,7 +96,7 @@ static float ucmtof(unsigned char midival)
 
 static const uint32_t __attribute__((progmem)) midiToFreq[128] =
   {
-    535809, 567670, 601425, 637188, 675077, 715219, 757748, 802806, 850544, 901120,
+    0, 567670, 601425, 637188, 675077, 715219, 757748, 802806, 850544, 901120,
     954703, 1011473, 1071618, 1135340, 1202851, 1274376, 1350154, 1430438, 1515497,
     1605613, 1701088, 1802240, 1909406, 2022946, 2143236, 2270680, 2405702, 2548752,
     2700309, 2860877, 3030994, 3211226, 3402176, 3604479, 3818813, 4045892, 4286472,

@@ -5,7 +5,7 @@
 
 #include "Arduino.h"
 
-/** @defgroup util Mozzi utility macros and definitions
+/** @defgroup util Mozzi utility functions
 */
 
 /** @ingroup util

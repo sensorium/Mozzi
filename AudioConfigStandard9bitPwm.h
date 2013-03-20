@@ -2,18 +2,13 @@
 #define AUDIOCONFIGSTANDARD9BITPWM_H
 
 
-/** Original Mozzi output configuration.
-Almost 9 bit sound at 16384 Hz and 16384 kHz pwm rate
-Timer 1: outputs samples at AUDIO_RATE 16384 Hz, by setting Timer 1 pwm level 
-Output on Timer1, Pin 9.
-*/
-
-
 /** @ingroup core
 This is the dynamic range of Mozzi's audio output in STANDARD mode.
-It is equal to Timer1.pwmPeriod calculated for interrupt rate 16384.  
+It is equal to Timer1.pwmPeriod calculated for interrupt rate 16384.
+It's included in the documentation because it's a slightly unusual number and useful to know 
+about when you're writing sketches.
 */
-#define AUDIO_PWM_RESOLUTION 488
+#define STANDARD_PWM_RESOLUTION 488
 
 /* Used internally to put the 0-biased generated audio into the right range for PWM output.*/
 #define AUDIO_BIAS ((unsigned char) 244)

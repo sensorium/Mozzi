@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1t</span>
+   &#160;<span id="projectnumber">alpha 0.01.1v</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -124,62 +124,62 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00026"></a>00026 <span class="preprocessor">#include &quot;Arduino.h&quot;</span>
 <a name="l00027"></a>00027 <span class="preprocessor">#include &lt;util/atomic.h&gt;</span>
 <a name="l00028"></a>00028 
-<a name="l00043"></a>00043 <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;
-<a name="l00044"></a><a class="code" href="class_line.html">00044</a> <span class="keyword">class </span><a class="code" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a>
-<a name="l00045"></a>00045 {
-<a name="l00046"></a>00046 <span class="keyword">private</span>:
-<a name="l00047"></a>00047                 <span class="keyword">volatile</span> T current_value; <span class="comment">// volatile because it could be set in control interrupt and updated in audio</span>
-<a name="l00048"></a>00048                 T step_size;
-<a name="l00049"></a>00049 
-<a name="l00050"></a>00050 <span class="keyword">public</span>:
-<a name="l00054"></a><a class="code" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51">00054</a>                 <a class="code" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51" title="Constructor.">Line</a> ()
-<a name="l00055"></a>00055                 {
-<a name="l00056"></a>00056                                 ;
-<a name="l00057"></a>00057                 }
-<a name="l00058"></a>00058 
-<a name="l00062"></a>00062                 <span class="keyword">inline</span>
-<a name="l00063"></a><a class="code" href="class_line.html#a413f620b2824c6996b3346ee54351849">00063</a>                 T <a class="code" href="class_line.html#a413f620b2824c6996b3346ee54351849" title="Increments one step along the line.">next</a>()
-<a name="l00064"></a>00064                 {
-<a name="l00065"></a>00065                                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-<a name="l00066"></a>00066                                 {
-<a name="l00067"></a>00067                                                 current_value += step_size;
-<a name="l00068"></a>00068                                 }
-<a name="l00069"></a>00069                                 <span class="keywordflow">return</span> current_value;
-<a name="l00070"></a>00070                 }
-<a name="l00071"></a>00071 
+<a name="l00044"></a>00044 <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;
+<a name="l00045"></a><a class="code" href="class_line.html">00045</a> <span class="keyword">class </span><a class="code" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a>
+<a name="l00046"></a>00046 {
+<a name="l00047"></a>00047 <span class="keyword">private</span>:
+<a name="l00048"></a>00048                 <span class="keyword">volatile</span> T current_value; <span class="comment">// volatile because it could be set in control interrupt and updated in audio</span>
+<a name="l00049"></a>00049                 T step_size;
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051 <span class="keyword">public</span>:
+<a name="l00055"></a><a class="code" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51">00055</a>                 <a class="code" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51" title="Constructor.">Line</a> ()
+<a name="l00056"></a>00056                 {
+<a name="l00057"></a>00057                                 ;
+<a name="l00058"></a>00058                 }
+<a name="l00059"></a>00059 
+<a name="l00063"></a>00063                 <span class="keyword">inline</span>
+<a name="l00064"></a><a class="code" href="class_line.html#a413f620b2824c6996b3346ee54351849">00064</a>                 T <a class="code" href="class_line.html#a413f620b2824c6996b3346ee54351849" title="Increments one step along the line.">next</a>()
+<a name="l00065"></a>00065                 {
+<a name="l00066"></a>00066                                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+<a name="l00067"></a>00067                                 {
+<a name="l00068"></a>00068                                                 current_value += step_size;
+<a name="l00069"></a>00069                                 }
+<a name="l00070"></a>00070                                 <span class="keywordflow">return</span> current_value;
+<a name="l00071"></a>00071                 }
 <a name="l00072"></a>00072 
 <a name="l00073"></a>00073 
-<a name="l00078"></a>00078                 <span class="keyword">inline</span>
-<a name="l00079"></a><a class="code" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80">00079</a>                 <span class="keywordtype">void</span> <span class="keyword">set</span>(T value)
-<a name="l00080"></a>00080                 {
-<a name="l00081"></a>00081                                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-<a name="l00082"></a>00082                                 {
-<a name="l00083"></a>00083                                                 current_value=value;
-<a name="l00084"></a>00084                                 }
-<a name="l00085"></a>00085                 }
-<a name="l00086"></a>00086 
+<a name="l00074"></a>00074 
+<a name="l00079"></a>00079                 <span class="keyword">inline</span>
+<a name="l00080"></a><a class="code" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80">00080</a>                 <span class="keywordtype">void</span> <span class="keyword">set</span>(T value)
+<a name="l00081"></a>00081                 {
+<a name="l00082"></a>00082                                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+<a name="l00083"></a>00083                                 {
+<a name="l00084"></a>00084                                                 current_value=value;
+<a name="l00085"></a>00085                                 }
+<a name="l00086"></a>00086                 }
 <a name="l00087"></a>00087 
 <a name="l00088"></a>00088 
-<a name="l00094"></a>00094                 <span class="keyword">inline</span>
-<a name="l00095"></a><a class="code" href="class_line.html#a7378d526cf07c42c0792868c749dee6e">00095</a>                 <span class="keywordtype">void</span> <span class="keyword">set</span>(T targetvalue, T num_steps)
-<a name="l00096"></a>00096                 {
-<a name="l00097"></a>00097                                 step_size=(T)((((<span class="keywordtype">float</span>)targetvalue-current_value)/num_steps));
-<a name="l00098"></a>00098                 }
-<a name="l00099"></a>00099 
-<a name="l00106"></a>00106                 <span class="keyword">inline</span>
-<a name="l00107"></a><a class="code" href="class_line.html#a24ad85c17562e97b6823a010a5ba04c6">00107</a>                 <span class="keywordtype">void</span> <span class="keyword">set</span>(T startvalue, T targetvalue, T num_steps)
-<a name="l00108"></a>00108                 {
-<a name="l00109"></a>00109                                 <span class="keyword">set</span>(startvalue);
-<a name="l00110"></a>00110                                 <span class="keyword">set</span>(targetvalue, num_steps);
-<a name="l00111"></a>00111                 }
-<a name="l00112"></a>00112 };
-<a name="l00113"></a>00113 
-<a name="l00114"></a>00114 <span class="preprocessor">#endif </span><span class="comment">/* LINE_H_ */</span>
+<a name="l00089"></a>00089 
+<a name="l00095"></a>00095                 <span class="keyword">inline</span>
+<a name="l00096"></a><a class="code" href="class_line.html#a7378d526cf07c42c0792868c749dee6e">00096</a>                 <span class="keywordtype">void</span> <span class="keyword">set</span>(T targetvalue, T num_steps)
+<a name="l00097"></a>00097                 {
+<a name="l00098"></a>00098                                 step_size=(T)((((<span class="keywordtype">float</span>)targetvalue-current_value)/num_steps));
+<a name="l00099"></a>00099                 }
+<a name="l00100"></a>00100 
+<a name="l00107"></a>00107                 <span class="keyword">inline</span>
+<a name="l00108"></a><a class="code" href="class_line.html#a24ad85c17562e97b6823a010a5ba04c6">00108</a>                 <span class="keywordtype">void</span> <span class="keyword">set</span>(T startvalue, T targetvalue, T num_steps)
+<a name="l00109"></a>00109                 {
+<a name="l00110"></a>00110                                 <span class="keyword">set</span>(startvalue);
+<a name="l00111"></a>00111                                 <span class="keyword">set</span>(targetvalue, num_steps);
+<a name="l00112"></a>00112                 }
+<a name="l00113"></a>00113 };
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115 <span class="preprocessor">#endif </span><span class="comment">/* LINE_H_ */</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 21 2013 00:07:27 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 20 2013 17:25:43 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

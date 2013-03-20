@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1t</span>
+   &#160;<span id="projectnumber">alpha 0.01.1v</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -100,7 +100,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>A simple low pass filter for smoothing control signals.  
+<p>A simple infinite impulse response low pass filter for smoothing control signals.  
  <a href="class_smooth.html#details">More...</a></p>
 
 <p><a href="class_smooth-members.html">List of all members.</a></p>
@@ -118,18 +118,18 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><h3>template&lt;class T&gt;<br/>
 class Smooth&lt; T &gt;</h3>
 
-<p>A simple low pass filter for smoothing control signals. </p>
+<p>A simple infinite impulse response low pass filter for smoothing control signals. </p>
 <p>This algorithm comes from <a href="http://en.wikipedia.org/wiki/Low-pass_filter:">http://en.wikipedia.org/wiki/Low-pass_filter:</a> y[i] := y[i-1] + α * (x[i] - y[i-1]), translated as out = last_out + a * (in - last_out). It's not calibrated to any real-world update rate, so if you use it at CONTROL_RATE and you change CONTROL_RATE, you'll need to adjust the smoothness value to suit. </p>
 <dl class=""><dt><b>Template Parameters:</b></dt><dd>
   <table class="">
-    <tr><td class="paramname">T</td><td>the type of numbers being smoothed. Watch out for numbers overflowing the internal calculations. Some experimentation is recommended. If this can't be overcome using different settings or values, <a class="el" href="class_low_pass1st_order.html" title="Low-pass filter suited for smoothing control signals.">LowPass1stOrder</a> may be another option. </td></tr>
+    <tr><td class="paramname">T</td><td>the type of numbers being smoothed. Watch out for numbers overflowing the internal calculations. Some experimentation is recommended. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section note"><dt>Note:</dt><dd>Timing: ~5us for 16 bit types, ~1us for 8 bit types. </dd></dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000015">Todo:</a></b></dt><dd>Check if 8 bit templates can work efficiently with a higher res smoothness - as is they don't have enough resolution to work well at audio rate. See if <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> might be more useful in most cases. </dd></dl>
 
-<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00044">44</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
+<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00046">46</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ac6626aae94eb7a22024e2054c1bbbb26"></a>
 <div class="memitem">
@@ -156,7 +156,7 @@ template&lt;class T &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00056">56</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
+<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00058">58</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
 
 </div>
 </div>
@@ -187,7 +187,7 @@ template&lt;class T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>the filtered signal. </dd></dl>
 
-<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00066">66</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
+<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00068">68</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
 
 </div>
 </div>
@@ -216,7 +216,7 @@ template&lt;class T &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00079">79</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
+<p>Definition at line <a class="el" href="_smooth_8h_source.html#l00081">81</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
 
 </div>
 </div>
@@ -227,7 +227,7 @@ template&lt;class T &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 21 2013 00:07:27 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 20 2013 17:25:43 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

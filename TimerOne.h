@@ -4,7 +4,7 @@
  *  Modified March 2009 by Jérôme Despatis and Jesse Tane for ATmega328 support
  *  Modified June 2009 by Michael Polli and Jesse Tane to fix a bug in setPeriod() which caused the timer to stop
  *  Modified April 2012 by Paul Stoffregen - portable to other AVR chips, use inline functions
- *
+ *  Modified March 2013 by Tim Barrass to use fast PWM for Mozzi, instead of phase and frequency correct.
  *  This is free software. You can redistribute it and/or modify it under
  *  the terms of Creative Commons Attribution 3.0 United States License.
  *  To view a copy of this license, visit http://creativecommons.org/licenses/by/3.0/us/
@@ -31,6 +31,7 @@
 // the compiler will perform all calculations and simply write constants
 // to the hardware registers (for example, setPeriod).
 
+// TB2013
 // Modes are in ATmega48P/88P/168P/328P technical notes, Table 13-4
 // PWM, Phase and Frequency Correct, TOP is ICR1
 //#define TCCR1B_PWM_MODE_BITS  _BV(WGM13)
@@ -40,6 +41,8 @@
 //#define TCCR1A_PWM_MODE_BITS _BV(WGM11)
 const unsigned char TCCR1B_PWM_MODE_BITS = _BV(WGM13) | _BV(WGM12);
 const unsigned char TCCR1A_PWM_MODE_BITS = _BV(WGM11);
+// TB2013 todo (to improve the Library): make the mode set-able instead of hard-coded
+
 
 class TimerOne
 {

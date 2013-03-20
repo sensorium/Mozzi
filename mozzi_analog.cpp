@@ -11,14 +11,9 @@ range has to be divided between them.
 */
 #include "mozzi_analog.h"
 
-
-#define NUM_ANALOG_INPUTS 6 
-
-
 static volatile int sensors[NUM_ANALOG_INPUTS];
 static volatile byte current_adc = 0;
 static volatile boolean readComplete = false; 
-
 
 /** @ingroup analog
 Call this in setup() to enable reading analog inputs in the background while audio generating continues.
@@ -55,11 +50,13 @@ interfering with the audio or control interrupts.
 */
 void startRead(){
   current_adc = 0;
- 
+ /*
   //Set MUX channel
   ADMUX = (1 << REFS0) | current_adc;
   //Start A2D Conversions
   ADCSRA |= (1 << ADSC);
+  */
+  startAnalogRead(current_adc);
 }
 
 
@@ -83,9 +80,11 @@ ISR(ADC_vect, ISR_NOBLOCK){
     }
     else{
       //Switch to next channel
+      /*
       ADMUX = (1 << REFS0) | current_adc;
       ADCSRA |= (1 << ADSC);
-     
+     */
+     startAnalogRead(current_adc);
     }
     secondRead = false;
   }
@@ -103,9 +102,8 @@ This returns the current analog reading for the specified channel.
 @param channel_num The channels are plain numbers 0 to 5, not the pin labels A0 to A5
 which Arduino maps to different numbers depending on the board being used.
 @note The InitADC(), startRead(), getSensor() approach is currently set to work with
-channels 0 through to 5. The number of channels to use can be changed in
-mozzi_analog.cpp by editing NUM_ANALOG_INPUTS to suit your hardware and
-software.
+all channels on each kind of board. You can change the number of channels to use in
+mozzi_analog.cpp by editing NUM_ANALOG_INPUTS if desired.
 @note In some cases this method can cause glitches which may have to do with the ADC interrupt
 interfering with the audio or control interrupts.  
 */
@@ -146,7 +144,7 @@ And from the ATmega328p datasheet, p266:
 
 When an analog signal is applied to the ADC5..0 pin and the digital input from
 this pin is not needed, this bit should be written logic one to reduce power
-consumption in the digital input buffer. Note that ADC pins ADC7 and ADC6 do not have digital input buffers, and therefore do not require Digital Input Disable bits.
+consumption in the digital input buffer. Note that ADC named_pins ADC7 and ADC6 do not have digital input buffers, and therefore do not require Digital Input Disable bits.
 @param channel_num the analog input channel you wish to use.
 */
 void disconnectDigitalIn(byte channel_num){

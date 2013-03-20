@@ -23,7 +23,7 @@
 
 #include "MozziGuts.h"
 #include <util/atomic.h>
-#include "utils.h"
+//#include "utils.h"
 
 //Mozzi Mozzi1; // preinstatiate
 /*
@@ -74,8 +74,7 @@ static void setupTimer2(){
 static void startAudioStandard9bitPwm(){
 	pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);	// set pin to output for audio
 	Timer1.initialize(1000000UL/AUDIO_RATE);		// set period
-	Serial.print("STANDARD Timer 1 period = ");
-	Serial.println(Timer1.getPeriod()); // 976
+	//Serial.print("STANDARD Timer 1 period = "); Serial.println(Timer1.getPeriod()); // 976
 	
 	Timer1.pwm(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);		// pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
 	//Timer1.attachInterrupt(outputAudio); // TB 15-2-2013 Replaced this line with the ISR, saves some processor time
@@ -99,9 +98,7 @@ static void startAudioHiSpeed14bitPwm(){
 	pinMode(AUDIO_CHANNEL_1_LOWBYTE_PIN, OUTPUT);	// set pin to output for audio, use 1M resistor
 
 	Timer1.initialize(1000000UL/125000);		// set period for 125000 Hz fast pwm carrier frequency = 14 bits
-	
-	Serial.print("HIFI Timer 1 period = ");
-	Serial.println(Timer1.getPeriod());
+	// Serial.print("HIFI Timer 1 period = "); Serial.println(Timer1.getPeriod());
 
 	Timer1.pwm(AUDIO_CHANNEL_1_HIGHBYTE_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
 	Timer1.pwm(AUDIO_CHANNEL_1_LOWBYTE_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
@@ -149,20 +146,28 @@ static void startControl(unsigned int control_rate_hz)
 
 /** @ingroup core
 Sets up the timers for audio and control rate processes. It goes in your
-sketch's setup() routine. Control interrupts use Timer 0 (disabling Arduino
-delay(), millis(), micros()). For standard almost-9-bit pwm, startMozzi() starts
-audio interrupts on Timer 1. The audio rate is currently fixed at 16384 Hz.
+sketch's setup() routine. 
+
+In STANDARD and HIFI modes, Mozzi uses Timer 0 for control interrupts 0, disabling Arduino
+delay(), millis(), micros() and delayMicroseconds. 
+For delaying events, you can use Mozzi's EventDelay() unit instead (not to be confused with AudioDelay()). 
+
+In STANDARD mode, startMozzi() starts Timer 1 for PWM output and audio output interrupts,
+and in HIFI mode, Mozzi uses Timer 1 for PWM and Timer2 for audio interrupts. 
+
+The audio rate is currently fixed at 16384 Hz.
+
 @param control_rate_hz Sets how often updateControl() is called. It can be any
 power of 2 above and including 64. The practical upper limit for control rate
 depends on how busy the processor is, and you might need to do some tests to
-find the best setting. It's good to define CONTROL_RATE in your
+find the best setting. 
+
+It's good to define CONTROL_RATE in your
 sketches (eg. "#define CONTROL_RATE 128") because the literal numeric value is
 necessary for Oscils to work properly, and it also helps to keep the
 calculations in your sketch clear.
-@todo Revisit output possibilities:
-- an audio interrupt which sets the level on a pwm pin which runs much faster than the sample rate (uses 2 timers)
-- 16 bit output using 2 x 8 bit pwm pins and 2 0.5% toleranced resistors, gives lower noise floor, see http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
-- use full port, without pwm, requires a resistor ladder (maybe use readymade resistor networks)
+
+@todo See if there is any advantage to using 8 bit full port, without pwm, with a resistor ladder (maybe use readymade resistor networks).
 */
 void startMozzi(unsigned int control_rate_hz)
 {
@@ -184,7 +189,7 @@ they can be moved into updateControl(). Otherwise it may be most efficient to
 calculate a block of samples at a time by putting audioHook() in a loop of its
 own, rather than calculating only 1 sample for each time your other functions
 are called.
-@todo try pre-decrement positions and swap gap calc around
+@todo Try pre-decrement positions and swap gap calc around
 */
 void audioHook()
 {

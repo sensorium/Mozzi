@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1t</span>
+   &#160;<span id="projectnumber">alpha 0.01.1v</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -130,9 +130,9 @@ class Line&lt; T &gt;</h3>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note:</dt><dd>Watch out for underflows in the internal calcualtion of <a class="el" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51" title="Constructor.">Line()</a> if you're not using floats (avoid floats, they're too slow!). If it seems like the <a class="el" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51" title="Constructor.">Line()</a> is not working, there's a good chance you need to scale up the numbers you're using, so internal calculations don't get truncated away. Use Mozzi's fixed-point number types in <a class="el" href="fixed_math_8h_source.html">fixedMath.h</a>, which enable you to represent fractional numbers. Google "fixed point arithmetic" if this is new to you. </dd></dl>
+<dl class="section note"><dt>Note:</dt><dd>Watch out for underflows in the internal calcualtion of <a class="el" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51" title="Constructor.">Line()</a> if you're not using floats (but on the other hand try to avoid lots of floats, they're too slow!). If it seems like the <a class="el" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51" title="Constructor.">Line()</a> is not working, there's a good chance you need to scale up the numbers you're using, so internal calculations don't get truncated away. Use Mozzi's fixed-point number types in <a class="el" href="fixed_math_8h_source.html">fixedMath.h</a>, which enable you to represent fractional numbers. Google "fixed point arithmetic" if this is new to you. </dd></dl>
 
-<p>Definition at line <a class="el" href="_line_8h_source.html#l00044">44</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+<p>Definition at line <a class="el" href="_line_8h_source.html#l00045">45</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aa6a80df90da15782ca88889ef9c8dd51"></a>
 <div class="memitem">
@@ -153,7 +153,7 @@ template&lt;class T&gt; </div>
 <p>Constructor. </p>
 <p>Use the template parameter to set the type of numbers you want to use. For example, <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> &lt;int&gt; myline; makes a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> which uses ints. </p>
 
-<p>Definition at line <a class="el" href="_line_8h_source.html#l00054">54</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+<p>Definition at line <a class="el" href="_line_8h_source.html#l00055">55</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
 
 </div>
 </div>
@@ -177,7 +177,7 @@ template&lt;class T&gt; </div>
 <p>Increments one step along the line. </p>
 <dl class="section return"><dt>Returns:</dt><dd>the next value. </dd></dl>
 
-<p>Definition at line <a class="el" href="_line_8h_source.html#l00063">63</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+<p>Definition at line <a class="el" href="_line_8h_source.html#l00064">64</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
 
 </div>
 </div>
@@ -207,7 +207,7 @@ template&lt;class T&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_line_8h_source.html#l00079">79</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+<p>Definition at line <a class="el" href="_line_8h_source.html#l00080">80</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
 
 </div>
 </div>
@@ -247,7 +247,7 @@ template&lt;class T&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_line_8h_source.html#l00095">95</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+<p>Definition at line <a class="el" href="_line_8h_source.html#l00096">96</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
 
 </div>
 </div>
@@ -294,7 +294,7 @@ template&lt;class T&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_line_8h_source.html#l00107">107</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+<p>Definition at line <a class="el" href="_line_8h_source.html#l00108">108</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
 
 </div>
 </div>
@@ -305,7 +305,7 @@ template&lt;class T&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 21 2013 00:07:27 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 20 2013 17:25:43 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

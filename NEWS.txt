@@ -4,8 +4,22 @@ NEWS
 
 
 Version 0.01.1v
-- Introduced alternative output options.  The one used to date, 16384Hz nearly 9bit on pin 9 is still the default.
+- Introduced alternative output options, STANDARD and HIFI.  STANDARD is set by default and is the
+	original Mozzi output, 16384Hz, nearly 9 bit PWM on pin 9.  
+	HIFI is 16384Hz, 14 bits and has a high PWM carrier frequency of 125kHz which
+	puts it out of hearing range, addressing an issue where some people have
+	problems with a high pitched whine from the original 16kHz carrier frequency.
+	HIFI is a big improvement in the sound quality. The cost is that it uses an
+	extra timer (Timer2) and uses 2 output pins, 2 resistors and a capacitor to hear
+	the output, where STANDARD mode is ready to go without any external parts 
+	(but can need filters which are more complicated than the HIFI parts).
+- Fixed mtof() so midi note 0 now returns a frequency of 0.
+- AudioDelayFeedback() now runs 4.5 times faster, taking 4us instead of 18us per sample.
+- LowPassFilter()'s performance is improved from 14us to 10.5us per sample.
 - made LowPassFilter and AudioDelayFeedback examples more sane, with comments.
+- added LowPassFilter_X_2 and AudioDelayFeedback_X_2 examples with 2 each of these 
+	units running together.
+
 
 Version 0.01.1u
 - moved audio Timer 1 ISR to MozziGuts.cpp, so outputAudio() can be inlined, saving about 16ms/s (1.6%, not much!)

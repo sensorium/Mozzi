@@ -32,7 +32,7 @@ Mozzi is a development of research into Mobile Sonification in the
 
 ### Features
 
--    16384 Hz, 8-bit audio output. (Actually, nearly 9 bit resolution, -244 to 243).
+-    16384 Hz sample rate, with 8 bit or 14 bit audio output modes. 
 -    Variable control rate from 64 Hz upwards.
 -    Useful basic audio toolkit: oscillators, samples, lines, envelopes, scheduling, filtering.
 -    Fast ADC and other cpu-efficient code utilities to help keep audio running smoothly.

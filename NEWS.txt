@@ -15,15 +15,15 @@ Version 0.01.1v
 	(but can need filters which are more complicated than the HIFI parts).
 	For HIFI sketches, you probably want to adjust the output from your 
 	updateAudio() functions to use the full 14 bits of resolution.
-	Check README.md or the documentation of the Mozzi core module for hardware set-up and more detail.
+	Check the documentation of the Mozzi core module for hardware set-up and more detail.
 - Fixed mtof() so midi note 0 now returns a frequency of 0.
 - AudioDelayFeedback() now runs 4.5 times faster, taking 4us instead of 18us per sample.
 - LowPassFilter()'s performance is improved from 14us to 10.5us per sample.
 - Made LowPassFilter and AudioDelayFeedback examples more sane, with comments.
 - Added LowPassFilter_X_2 and AudioDelayFeedback_X_2 examples with 2 each of these 
 	units running together.
-- Renamed mozzi_utils.h to mozzi_utils.h.  Sorry for the inconvenience.
-- Renamed mozzi_fixmath.h and mozzi_fixmath.cpp to mozzi_fixmath.h and mozzi_fixmath.cpp.  Sorry for the inconvenience.
+- Renamed fixedMath.h and fixedMath.cpp to mozzi_fixmath.h and mozzi_fixmath.cpp.  Sorry for the inconvenience.
+- Renumbered all the examples.  Sorry for the inconvenience.
 - Renumbered all the examples.  Sorry for the inconvenience.
 
 

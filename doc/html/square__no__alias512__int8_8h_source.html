@@ -102,16 +102,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00004"></a>00004 <span class="preprocessor">#include &quot;Arduino.h&quot;</span>
 <a name="l00005"></a>00005 <span class="preprocessor">#include &lt;avr/pgmspace.h&gt;</span>
 <a name="l00006"></a>00006 
-<a name="l00007"></a>00007 <span class="preprocessor">#define SQUARE_NO_ALIAS512_NUM_CELLS 512</span>
-<a name="l00008"></a>00008 <span class="preprocessor"></span><span class="preprocessor">#define SQUARE_NO_ALIAS512_SAMPLERATE 512</span>
-<a name="l00009"></a>00009 <span class="preprocessor"></span>
-<a name="l00010"></a>00010 <span class="keyword">const</span> <span class="keywordtype">char</span> __attribute__((progmem)) SQUARE_NO_ALIAS512_DATA []  =
-<a name="l00011"></a>00011         {
-<a name="l00012"></a>00012                 -1, 93, 117, 114, 115,
-<a name="l00013"></a>00013                 114, 115, 115, 114, 115, 114, 115, 115, 114, 115, 115, 115, 115, 115, 115, 115,
-<a name="l00014"></a>00014                 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115,
-<a name="l00015"></a>00015                 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115,
-<a name="l00016"></a>00016                 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115,
+<a name="l00007"></a>00007 <span class="comment">/* square wave with rounded corners from Audacity</span>
+<a name="l00008"></a>00008 <span class="comment">*/</span>
+<a name="l00009"></a>00009 
+<a name="l00010"></a>00010 <span class="preprocessor">#define SQUARE_NO_ALIAS512_NUM_CELLS 512</span>
+<a name="l00011"></a>00011 <span class="preprocessor"></span><span class="preprocessor">#define SQUARE_NO_ALIAS512_SAMPLERATE 512</span>
+<a name="l00012"></a>00012 <span class="preprocessor"></span>
+<a name="l00013"></a>00013 <span class="keyword">const</span> <span class="keywordtype">char</span> <a class="code" href="group__tables.html#gab503f643246e96541de7a3acff0402c3" title="A sigmoid squashing function (sort of like an s-shape or cursive f-shape).">__attribute__</a>((progmem)) SQUARE_NO_ALIAS512_DATA []  =
+<a name="l00014"></a>00014         {
+<a name="l00015"></a>00015                 -1, 93, 117, 114, 115,
+<a name="l00016"></a>00016                 114, 115, 115, 114, 115, 114, 115, 115, 114, 115, 115, 115, 115, 115, 115, 115,
 <a name="l00017"></a>00017                 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115,
 <a name="l00018"></a>00018                 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115,
 <a name="l00019"></a>00019                 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115,
@@ -122,12 +122,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00024"></a>00024                 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115,
 <a name="l00025"></a>00025                 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115,
 <a name="l00026"></a>00026                 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115,
-<a name="l00027"></a>00027                 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 114, 115,
-<a name="l00028"></a>00028                 115, 114, 115, 114, 115, 115, 114, 115, 114, 117, 93, 0, -94, -118, -115, -116,
-<a name="l00029"></a>00029                 -115, -116, -116, -115, -116, -115, -116, -116, -115, -116, -116, -116, -116,
-<a name="l00030"></a>00030                 -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116,
-<a name="l00031"></a>00031                 -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116,
-<a name="l00032"></a>00032                 -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116,
+<a name="l00027"></a>00027                 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115,
+<a name="l00028"></a>00028                 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115,
+<a name="l00029"></a>00029                 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115,
+<a name="l00030"></a>00030                 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 114, 115,
+<a name="l00031"></a>00031                 115, 114, 115, 114, 115, 115, 114, 115, 114, 117, 93, 0, -94, -118, -115, -116,
+<a name="l00032"></a>00032                 -115, -116, -116, -115, -116, -115, -116, -116, -115, -116, -116, -116, -116,
 <a name="l00033"></a>00033                 -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116,
 <a name="l00034"></a>00034                 -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116,
 <a name="l00035"></a>00035                 -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116,
@@ -142,16 +142,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00044"></a>00044                 -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116,
 <a name="l00045"></a>00045                 -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116,
 <a name="l00046"></a>00046                 -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116,
-<a name="l00047"></a>00047                 -116, -116, -116, -116, -115, -116, -116, -116, -116, -115, -116, -116, -115,
-<a name="l00048"></a>00048                 -116, -115, -118, -94,
-<a name="l00049"></a>00049         };
-<a name="l00050"></a>00050 
-<a name="l00051"></a>00051 <span class="preprocessor">#endif </span><span class="comment">/* SQUARE_NO_ALIAS512_INT8_H_ */</span>
+<a name="l00047"></a>00047                 -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116,
+<a name="l00048"></a>00048                 -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116,
+<a name="l00049"></a>00049                 -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116, -116,
+<a name="l00050"></a>00050                 -116, -116, -116, -116, -115, -116, -116, -116, -116, -115, -116, -116, -115,
+<a name="l00051"></a>00051                 -116, -115, -118, -94,
+<a name="l00052"></a>00052         };
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054 <span class="preprocessor">#endif </span><span class="comment">/* SQUARE_NO_ALIAS512_INT8_H_ */</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 20 2013 17:25:43 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Mar 21 2013 15:40:21 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

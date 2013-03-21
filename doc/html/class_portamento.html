@@ -114,9 +114,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:af19c3b3c189e111079f54211ff5a4ebe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set how long it will take to slide from note to note, in milliseconds.  <a href="#af19c3b3c189e111079f54211ff5a4ebe"></a><br/></td></tr>
 <tr class="memitem:af93c2b0ab1efa88d4e15f919401c2337"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_portamento.html#af93c2b0ab1efa88d4e15f919401c2337">start</a> (unsigned char note)</td></tr>
 <tr class="memdesc:af93c2b0ab1efa88d4e15f919401c2337"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call this at note-on, it initialises the portamento.  <a href="#af93c2b0ab1efa88d4e15f919401c2337"></a><br/></td></tr>
-<tr class="memitem:af70701abfdd9f3d788f3b313e38017d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_portamento.html#af70701abfdd9f3d788f3b313e38017d0">start</a> (<a class="el" href="group__fixed_math.html#ga20ef71528ee7583bbf60586448b12caf">Q16n16</a> note)</td></tr>
+<tr class="memitem:af70701abfdd9f3d788f3b313e38017d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_portamento.html#af70701abfdd9f3d788f3b313e38017d0">start</a> (<a class="el" href="group__mozzi__fixmath.html#ga20ef71528ee7583bbf60586448b12caf">Q16n16</a> note)</td></tr>
 <tr class="memdesc:af70701abfdd9f3d788f3b313e38017d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call this at note-on, it initialises the portamento.  <a href="#af70701abfdd9f3d788f3b313e38017d0"></a><br/></td></tr>
-<tr class="memitem:ad39101f5275c433713df7699214638bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__fixed_math.html#ga20ef71528ee7583bbf60586448b12caf">Q16n16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_portamento.html#ad39101f5275c433713df7699214638bc">next</a> ()</td></tr>
+<tr class="memitem:ad39101f5275c433713df7699214638bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mozzi__fixmath.html#ga20ef71528ee7583bbf60586448b12caf">Q16n16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_portamento.html#ad39101f5275c433713df7699214638bc">next</a> ()</td></tr>
 <tr class="memdesc:ad39101f5275c433713df7699214638bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use this in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> to provide a frequency to the oscillator it's controlling, for example: myOscil.setFreq_Q16n16(myPortamento.next());.  <a href="#ad39101f5275c433713df7699214638bc"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
@@ -134,7 +134,7 @@ class Portamento&lt; CONTROL_UPDATE_RATE &gt;</h3>
 template&lt;unsigned int CONTROL_UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__fixed_math.html#ga20ef71528ee7583bbf60586448b12caf">Q16n16</a> <a class="el" href="class_portamento.html">Portamento</a>&lt; CONTROL_UPDATE_RATE &gt;::<a class="el" href="class_portamento.html#ad39101f5275c433713df7699214638bc">next</a> </td>
+          <td class="memname"><a class="el" href="group__mozzi__fixmath.html#ga20ef71528ee7583bbf60586448b12caf">Q16n16</a> <a class="el" href="class_portamento.html">Portamento</a>&lt; CONTROL_UPDATE_RATE &gt;::<a class="el" href="class_portamento.html#ad39101f5275c433713df7699214638bc">next</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [inline]</code></td>
@@ -217,7 +217,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="class_portamento.html">Portamento</a>&lt; CONTROL_UPDATE_RATE &gt;::<a class="el" href="class_portamento.html#af93c2b0ab1efa88d4e15f919401c2337">start</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__fixed_math.html#ga20ef71528ee7583bbf60586448b12caf">Q16n16</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__mozzi__fixmath.html#ga20ef71528ee7583bbf60586448b12caf">Q16n16</a>&#160;</td>
           <td class="paramname"><em>note</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
@@ -244,7 +244,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 20 2013 17:25:43 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Mar 21 2013 15:40:21 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

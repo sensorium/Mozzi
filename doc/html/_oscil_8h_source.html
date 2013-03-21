@@ -209,7 +209,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00169"></a>00169                 <span class="comment">// FM: cos(angle += (incr + change))</span>
 <a name="l00170"></a>00170                 <span class="comment">// The ratio of deviation to modulation frequency is called the &quot;index of modulation&quot;. ( I = d / Fm )</span>
 <a name="l00171"></a>00171                 <span class="keyword">inline</span>
-<a name="l00172"></a><a class="code" href="class_oscil.html#abe39f0740f318c0ecfb405cfac641a13">00172</a>                 <span class="keywordtype">char</span> <a class="code" href="class_oscil.html#abe39f0740f318c0ecfb405cfac641a13" title="Returns the next sample given a phase modulation value.">phMod</a>(<a class="code" href="group__fixed_math.html#ga27c6ece00a166ba3285bf7302c325e2e" title="signed fractional number using 15 integer bits and 16 fractional bits, represents -32767...">Q15n16</a> phmod_proportion)
+<a name="l00172"></a><a class="code" href="class_oscil.html#abe39f0740f318c0ecfb405cfac641a13">00172</a>                 <span class="keywordtype">char</span> <a class="code" href="class_oscil.html#abe39f0740f318c0ecfb405cfac641a13" title="Returns the next sample given a phase modulation value.">phMod</a>(<a class="code" href="group__mozzi__fixmath.html#ga27c6ece00a166ba3285bf7302c325e2e" title="signed fractional number using 15 integer bits and 16 fractional bits, represents -32767...">Q15n16</a> phmod_proportion)
 <a name="l00173"></a>00173                 {
 <a name="l00174"></a>00174                                 incrementPhase();
 <a name="l00175"></a>00175                                 <span class="keywordflow">return</span> (<span class="keywordtype">char</span>)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))&gt;&gt;OSCIL_F_BITS) &amp; (NUM_TABLE_CELLS - 1)));
@@ -236,7 +236,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00208"></a>00208                 
 <a name="l00209"></a>00209                 
 <a name="l00217"></a>00217                 <span class="keyword">inline</span>
-<a name="l00218"></a><a class="code" href="class_oscil.html#abc8a4ee236f7fd45dda9dece7292b6e7">00218</a>                 <span class="keywordtype">void</span> <a class="code" href="class_oscil.html#abc8a4ee236f7fd45dda9dece7292b6e7" title="Set the frequency using Q24n8 fixed-point number format.">setFreq_Q24n8</a>(<a class="code" href="group__fixed_math.html#gaa8e579259244eb60e7f70576c8e61cbd" title="unsigned fractional number using 24 integer bits and 8 fractional bits, represents 0 to 16777215...">Q24n8</a> frequency)
+<a name="l00218"></a><a class="code" href="class_oscil.html#abc8a4ee236f7fd45dda9dece7292b6e7">00218</a>                 <span class="keywordtype">void</span> <a class="code" href="class_oscil.html#abc8a4ee236f7fd45dda9dece7292b6e7" title="Set the frequency using Q24n8 fixed-point number format.">setFreq_Q24n8</a>(<a class="code" href="group__mozzi__fixmath.html#gaa8e579259244eb60e7f70576c8e61cbd" title="unsigned fractional number using 24 integer bits and 8 fractional bits, represents 0 to 16777215...">Q24n8</a> frequency)
 <a name="l00219"></a>00219                 {
 <a name="l00220"></a>00220                                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 <a name="l00221"></a>00221                                 {
@@ -248,7 +248,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00227"></a>00227 
 <a name="l00228"></a>00228 
 <a name="l00235"></a>00235                 <span class="keyword">inline</span>
-<a name="l00236"></a><a class="code" href="class_oscil.html#a73b52741178ed490463d9ff471cebef3">00236</a>                 <span class="keywordtype">void</span> <a class="code" href="class_oscil.html#a73b52741178ed490463d9ff471cebef3" title="Set the frequency using Q16n16 fixed-point number format.">setFreq_Q16n16</a>(<a class="code" href="group__fixed_math.html#ga20ef71528ee7583bbf60586448b12caf" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> frequency)
+<a name="l00236"></a><a class="code" href="class_oscil.html#a73b52741178ed490463d9ff471cebef3">00236</a>                 <span class="keywordtype">void</span> <a class="code" href="class_oscil.html#a73b52741178ed490463d9ff471cebef3" title="Set the frequency using Q16n16 fixed-point number format.">setFreq_Q16n16</a>(<a class="code" href="group__mozzi__fixmath.html#ga20ef71528ee7583bbf60586448b12caf" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> frequency)
 <a name="l00237"></a>00237                 {
 <a name="l00238"></a>00238                                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 <a name="l00239"></a>00239                                 {
@@ -327,7 +327,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 20 2013 17:25:43 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Mar 21 2013 15:40:21 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

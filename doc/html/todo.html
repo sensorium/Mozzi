@@ -102,7 +102,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </dd>
 <dt><a class="anchor" id="_todo000003"></a>Class <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback&lt; NUM_BUFFER_SAMPLES &gt;</a>  </dt>
 <dd>sub-sample delay times, just using linear interpolation of adacent cells  </dd>
-<dt><a class="anchor" id="_todo000009"></a>Member <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d">audioHook</a>  ()</dt>
+<dt><a class="anchor" id="_todo000008"></a>Member <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d">audioHook</a>  ()</dt>
 <dd>Try pre-decrement positions and swap gap calc around  </dd>
 <dt><a class="anchor" id="_todo000004"></a>Member <a class="el" href="class_event_delay.html#aa2a731ceb05f95cac1798089448c6aed">EventDelay&lt; UPDATE_RATE &gt;::start</a>  ()</dt>
 <dd>have a parameter to set whether it's single or repeating, so start doesn't have to be called for repeats. Pro: simpler user programming. Con: would require an if..then every time ready() is called.  </dd>
@@ -112,13 +112,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <dd>Test commenting out ATOMIC_BLOCK in setPhase(), setFreq(), etc.  </dd>
 <dt><a class="anchor" id="_todo000013"></a>Member <a class="el" href="class_oscil.html#afc77bfc5a1ad5926ad8df37725d480d7">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setPhaseFractional</a>  (unsigned long phase)</dt>
 <dd>Test commenting out ATOMIC_BLOCK in setPhase(), setFreq(), etc.  </dd>
-<dt><a class="anchor" id="_todo000005"></a>Member <a class="el" href="group__fixed_math.html#ga2e1d9d0fe4ba7edb9830efb7887c36bd">Q16n16_pow2</a>  (Q8n8 exponent)</dt>
-<dd><a class="el" href="group__fixed_math.html#ga2e1d9d0fe4ba7edb9830efb7887c36bd" title="This is a fast replacement for pow(2,x), where x is a fractional number in Q8n8 fixed-point exponent...">Q16n16_pow2()</a> accuracy needs more attention.  </dd>
+<dt><a class="anchor" id="_todo000005"></a>Member <a class="el" href="group__mozzi__fixmath.html#ga2e1d9d0fe4ba7edb9830efb7887c36bd">Q16n16_pow2</a>  (Q8n8 exponent)</dt>
+<dd><a class="el" href="group__mozzi__fixmath.html#ga2e1d9d0fe4ba7edb9830efb7887c36bd" title="This is a fast replacement for pow(2,x), where x is a fractional number in Q8n8 fixed-point exponent...">Q16n16_pow2()</a> accuracy needs more attention.  </dd>
 <dt><a class="anchor" id="_todo000014"></a>Member <a class="el" href="class_sample.html#a6b94fc8a8042f498fbd8693d9bce9719">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::next</a>  ()</dt>
 <dd>in next(), incrementPhase() happens in a different position than for <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> - check if it can be standardised  </dd>
 <dt><a class="anchor" id="_todo000015"></a>Class <a class="el" href="class_smooth.html">Smooth&lt; T &gt;</a>  </dt>
 <dd>Check if 8 bit templates can work efficiently with a higher res smoothness - as is they don't have enough resolution to work well at audio rate. See if <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> might be more useful in most cases.  </dd>
-<dt><a class="anchor" id="_todo000008"></a>Member <a class="el" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573">startMozzi</a>  (unsigned int control_rate_hz)</dt>
+<dt><a class="anchor" id="_todo000009"></a>Member <a class="el" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573">startMozzi</a>  (unsigned int control_rate_hz)</dt>
 <dd>See if there is any advantage to using 8 bit full port, without pwm, with a resistor ladder (maybe use readymade resistor networks).  </dd>
 <dt><a class="anchor" id="_todo000016"></a>Class <a class="el" href="class_state_variable.html">StateVariable&lt; FILTER_TYPE &gt;</a>  </dt>
 <dd>Try adding code to constrain the internal variables to enable resonant saturating effects.  </dd>
@@ -129,7 +129,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 20 2013 17:25:43 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Mar 21 2013 15:40:21 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

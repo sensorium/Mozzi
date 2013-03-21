@@ -143,7 +143,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00051"></a>00051                                 byte phase_type;
 <a name="l00052"></a>00052                                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> control_steps;
 <a name="l00053"></a>00053                                 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> audio_steps;
-<a name="l00054"></a>00054                                 <a class="code" href="group__fixed_math.html#gaac3e4cab960e285ec7e2d8afd54a9dd9" title="normal unsigned char with 0 fractional bits, represents 0.0 to 255.0">Q8n0</a> level;
+<a name="l00054"></a>00054                                 <a class="code" href="group__mozzi__fixmath.html#gaac3e4cab960e285ec7e2d8afd54a9dd9" title="normal unsigned char with 0 fractional bits, represents 0.0 to 255.0">Q8n0</a> level;
 <a name="l00055"></a>00055                 }attack,decay,sustain,release,idle;
 <a name="l00056"></a>00056                 
 <a name="l00057"></a>00057                 phase * current_phase;
@@ -160,7 +160,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00068"></a>00068                 <span class="keywordtype">void</span> setPhase(phase * next_phase) {
 <a name="l00069"></a>00069                                 phase_control_step_counter = 0;
 <a name="l00070"></a>00070                                 phase_num_control_steps = next_phase-&gt;control_steps;
-<a name="l00071"></a>00071                                 transition.<a class="code" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80" title="Set the current value of the line.">set</a>(<a class="code" href="group__fixed_math.html#ga589b5c022b59a72fc3fb39061048d193" title="Convert Q8n0 unsigned char to Q16n16 fix.">Q8n0_to_Q16n16</a>(next_phase-&gt;level),next_phase-&gt;audio_steps);
+<a name="l00071"></a>00071                                 transition.<a class="code" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80" title="Set the current value of the line.">set</a>(<a class="code" href="group__mozzi__fixmath.html#ga589b5c022b59a72fc3fb39061048d193" title="Convert Q8n0 unsigned char to Q16n16 fix.">Q8n0_to_Q16n16</a>(next_phase-&gt;level),next_phase-&gt;audio_steps);
 <a name="l00072"></a>00072                                 current_phase = next_phase;
 <a name="l00073"></a>00073                 }
 <a name="l00074"></a>00074                 
@@ -231,7 +231,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00148"></a>00148                 <span class="keyword">inline</span>
 <a name="l00149"></a><a class="code" href="class_a_d_s_r.html#aef63b6554045bd61f77d028ad76f1730">00149</a>                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_a_d_s_r.html#aef63b6554045bd61f77d028ad76f1730" title="Advances one audio step along the ADSR and returns the level.">next</a>()
 <a name="l00150"></a>00150                 {
-<a name="l00151"></a>00151                                 <span class="keywordflow">return</span> <a class="code" href="group__fixed_math.html#ga89bdabdfd59a8ec3f06aedbbab087527" title="Convert Q16n16 fixed to Q16n0 unsigned int.">Q16n16_to_Q16n0</a>(transition.<a class="code" href="class_line.html#a413f620b2824c6996b3346ee54351849" title="Increments one step along the line.">next</a>());
+<a name="l00151"></a>00151                                 <span class="keywordflow">return</span> <a class="code" href="group__mozzi__fixmath.html#ga89bdabdfd59a8ec3f06aedbbab087527" title="Convert Q16n16 fixed to Q16n0 unsigned int.">Q16n16_to_Q16n0</a>(transition.<a class="code" href="class_line.html#a413f620b2824c6996b3346ee54351849" title="Increments one step along the line.">next</a>());
 <a name="l00152"></a>00152                 }
 <a name="l00153"></a>00153 
 <a name="l00154"></a>00154 
@@ -343,7 +343,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 20 2013 17:25:43 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Mar 21 2013 15:40:21 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

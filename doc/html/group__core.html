@@ -110,14 +110,14 @@ Defines</h2></td></tr>
 <tr class="memdesc:ga5b972bafb3267e820993812beca1b298"><td class="mdescLeft">&#160;</td><td class="mdescRight">AUDIO_RATE is fixed at 16384 Hz for now.  <a href="#ga5b972bafb3267e820993812beca1b298"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gaedc83c89280eccc3b7fdb3115daab573"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573">startMozzi</a> (unsigned int control_rate_hz)</td></tr>
-<tr class="memdesc:gaedc83c89280eccc3b7fdb3115daab573"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the timers for audio and control rate processes.  <a href="#gaedc83c89280eccc3b7fdb3115daab573"></a><br/></td></tr>
 <tr class="memitem:ga2fca37b988ab369e2f3c3108c683e59d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d">audioHook</a> ()</td></tr>
 <tr class="memdesc:ga2fca37b988ab369e2f3c3108c683e59d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is required in Arduino's loop().  <a href="#ga2fca37b988ab369e2f3c3108c683e59d"></a><br/></td></tr>
-<tr class="memitem:ga59d187b915b2e366c88489e52801951a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a">updateControl</a> ()</td></tr>
-<tr class="memdesc:ga59d187b915b2e366c88489e52801951a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is where you put your control code.  <a href="#ga59d187b915b2e366c88489e52801951a"></a><br/></td></tr>
+<tr class="memitem:gaedc83c89280eccc3b7fdb3115daab573"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573">startMozzi</a> (unsigned int control_rate_hz)</td></tr>
+<tr class="memdesc:gaedc83c89280eccc3b7fdb3115daab573"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the timers for audio and control rate processes.  <a href="#gaedc83c89280eccc3b7fdb3115daab573"></a><br/></td></tr>
 <tr class="memitem:gaab0d2c840c1aac4bb5f9b8ef5df30f6a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a">updateAudio</a> ()</td></tr>
 <tr class="memdesc:gaab0d2c840c1aac4bb5f9b8ef5df30f6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is where you put your audio code.  <a href="#gaab0d2c840c1aac4bb5f9b8ef5df30f6a"></a><br/></td></tr>
+<tr class="memitem:ga59d187b915b2e366c88489e52801951a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a">updateControl</a> ()</td></tr>
+<tr class="memdesc:ga59d187b915b2e366c88489e52801951a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is where you put your control code.  <a href="#ga59d187b915b2e366c88489e52801951a"></a><br/></td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
 <a class="anchor" id="ga5b972bafb3267e820993812beca1b298"></a>
@@ -178,7 +178,7 @@ Functions</h2></td></tr>
  .................14.........15...............Teensy <br/>
  ...............B5(14)...B6(15)...........Teensy2 <br/>
  ...............B5(25)...B6(26)...........Teensy2++ <br/>
- .................13.........12................Sanguino <br/>
+ .................13.........12...............Sanguino <br/>
  </p>
 
 <p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00150">150</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
@@ -211,7 +211,7 @@ Functions</h2></td></tr>
  ....14........Teensy <br/>
  x..B5........Teensy2 <br/>
  x..B5(25)..Teensy2++ <br/>
- ....13 .........Sanguino <br/>
+ ....13 .......Sanguino <br/>
  </p>
 
 <p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00093">93</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
@@ -253,9 +253,9 @@ Functions</h2></td></tr>
 
 <p>This is required in Arduino's loop(). </p>
 <p>If there is room in Mozzi's output buffer, <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook()</a> calls <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio()</a> once and puts the result into the output buffer. If other functions are called in loop() along with <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook()</a>, see if they can be moved into <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>. Otherwise it may be most efficient to calculate a block of samples at a time by putting <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook()</a> in a loop of its own, rather than calculating only 1 sample for each time your other functions are called. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000009">Todo:</a></b></dt><dd>Try pre-decrement positions and swap gap calc around </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000008">Todo:</a></b></dt><dd>Try pre-decrement positions and swap gap calc around </dd></dl>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00194">194</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00071">71</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -286,9 +286,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <p>It's good to define CONTROL_RATE in your sketches (eg. "#define CONTROL_RATE 128") because the literal numeric value is necessary for Oscils to work properly, and it also helps to keep the calculations in your sketch clear.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000008">Todo:</a></b></dt><dd>See if there is any advantage to using 8 bit full port, without pwm, with a resistor ladder (maybe use readymade resistor networks). </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000009">Todo:</a></b></dt><dd>See if there is any advantage to using 8 bit full port, without pwm, with a resistor ladder (maybe use readymade resistor networks). </dd></dl>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00172">172</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00191">191</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -308,7 +308,7 @@ Functions</h2></td></tr>
 
 <p>This is where you put your audio code. </p>
 <p><a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio()</a> has to keep up with the AUDIO_RATE of 16384 Hz, so to keep things running smoothly, avoid doing any calculations here which could be done in setup() or <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>. </p>
-<dl class="section return"><dt>Returns:</dt><dd>an audio sample, between -244 and 243 inclusive. </dd></dl>
+<dl class="section return"><dt>Returns:</dt><dd>an audio sample. In STANDARD mode this is between -244 and 243 inclusive. In HIFI mode, it's a 14 bit number between -16384 and 16383 inclusive. </dd></dl>
 
 </div>
 </div>
@@ -335,7 +335,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 20 2013 17:25:43 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Mar 21 2013 15:40:21 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

@@ -52,7 +52,7 @@ void randSeed(unsigned long seed)
 // a less fancy version for gizduino (__AVR_ATmega644P__) which doesn't know INTERNAL
 static long longRandom()
 {
-  return (long)analogRead(0)*analogRead(1);
+	return ((long)analogRead(0)+63)*(analogRead(1)+97); // added offsets in case analogRead is 0
 }
 
 #elif defined (__AVR_ATmega2560__)
@@ -69,20 +69,20 @@ http://arduino.cc/forum/index.php/topic,38091.0.html
 */
 static long longRandom()
 {
-  analogReference(INTERNAL2V56);
-  unsigned long rv = 0;
-  for (byte i=0; i< 32; i++) rv |= (analogRead(8) & 1L) << i;
-  return rv;
+	//analogReference(INTERNAL2V56);
+	unsigned long rv = 0;
+	for (byte i=0; i< 32; i++) rv |= ((analogRead(8)+94) & 1L) << i; // added 94 in case analogRead is 0
+	return rv;
 }
 
 #else
 
 static long longRandom()
 {
-  analogReference(INTERNAL);
-  unsigned long rv = 0;
-  for (byte i=0; i< 32; i++) rv |= (analogRead(8) & 1L) << i;
-  return rv;
+	//analogReference(INTERNAL);
+	unsigned long rv = 0;
+	for (byte i=0; i< 32; i++) rv |= ((analogRead(8)+71) & 1L) << i; // added 71 in case analogRead is 0
+	return rv;
 }
 
 
@@ -228,5 +228,3 @@ unsigned char randMidiNote()
 {
 	return lowByte(xorshift96())>>1;
 }
-
-

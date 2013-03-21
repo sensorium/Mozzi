@@ -39,10 +39,11 @@
 // Fast PWM, PWM, TOP is ICR1 ( this should go twice as fast
 //#define TCCR1B_PWM_MODE_BITS _BV(WGM13) | _BV(WGM12)
 //#define TCCR1A_PWM_MODE_BITS _BV(WGM11)
-const unsigned char TCCR1B_PWM_MODE_BITS = _BV(WGM13) | _BV(WGM12);
-const unsigned char TCCR1A_PWM_MODE_BITS = _BV(WGM11);
+//const unsigned char TCCR1B_PWM_MODE_BITS = _BV(WGM13) | _BV(WGM12);
+//const unsigned char TCCR1A_PWM_MODE_BITS = _BV(WGM11);
 // TB2013 todo (to improve the Library): make the mode set-able instead of hard-coded
-
+#define FAST 0
+#define PHASE_FREQ_CORRECT 1
 
 class TimerOne
 {
@@ -50,18 +51,33 @@ public:
 	//****************************
 	//  Configuration
 	//****************************
-	void initialize(unsigned long microseconds=1000000) __attribute__((always_inline))
+	void initialize(unsigned long microseconds=1000000, unsigned char mode = PHASE_FREQ_CORRECT) __attribute__((always_inline))
 	{
-		TCCR1B = TCCR1B_PWM_MODE_BITS;        // set mode as phase and frequency correct pwm, stop the timer
-		TCCR1A = 0;                 // clear control register A
+		//TB2013
+		_mode = mode;
+		if (_mode == FAST){
+			TCCR1B_PWM_MODE_BITS = _BV(WGM13) | _BV(WGM12);
+			TCCR1A_PWM_MODE_BITS = _BV(WGM11);
+		}else if (_mode == PHASE_FREQ_CORRECT){
+			TCCR1B_PWM_MODE_BITS  = _BV(WGM13);
+			TCCR1A_PWM_MODE_BITS = 0;
+		}
+		TCCR1B = TCCR1B_PWM_MODE_BITS;        // set mode as fast or phase and frequency correct pwm, stop the timer
+		TCCR1A = TCCR1A_PWM_MODE_BITS;        // set control register A
+		// end TB2013
 		setPeriod(microseconds);
 	}
 	void setPeriod(unsigned long microseconds) __attribute__((always_inline))
 	{
-		//const unsigned long cycles = (F_CPU / 2000000) * microseconds;
+		unsigned long cycles;
 		// TB2013
-		const unsigned long cycles = (F_CPU / 1000000) * microseconds; // adjusted for fast pwm
+		if (_mode == FAST){
+			cycles = (F_CPU / 1000000) * microseconds; // adjusted for fast pwm
+		}else if (_mode == PHASE_FREQ_CORRECT){
+			cycles = (F_CPU / 2000000) * microseconds;
+		}
 		// end TB2013
+		
 		if (cycles < TIMER1_RESOLUTION)
 		{
 			clockSelectBits = _BV(CS10);
@@ -180,18 +196,18 @@ public:
 	{
 		if (pin == TIMER1_A_PIN) {
 			TCCR1A &= ~_BV(COM1A1);
-		TCCR1A &= ~TCCR1A_PWM_MODE_BITS; }
+			TCCR1A &= ~TCCR1A_PWM_MODE_BITS; }
 #ifdef TIMER1_B_PIN
 
 		else if (pin == TIMER1_B_PIN) {
 			TCCR1A &= ~_BV(COM1B1);
-		TCCR1A &= ~TCCR1A_PWM_MODE_BITS; }
+			TCCR1A &= ~TCCR1A_PWM_MODE_BITS; }
 #endif
 	#ifdef TIMER1_C_PIN
 
 		else if (pin == TIMER1_C_PIN) {
 			TCCR1A &= ~_BV(COM1C1);
-		TCCR1A &= ~TCCR1A_PWM_MODE_BITS; }
+			TCCR1A &= ~TCCR1A_PWM_MODE_BITS; }
 #endif
 
 	}
@@ -224,6 +240,10 @@ protected:
 	// properties
 	static unsigned int pwmPeriod;
 	static unsigned char clockSelectBits;
+	// TB2013
+	unsigned char _mode;
+	unsigned char TCCR1B_PWM_MODE_BITS;
+	unsigned char TCCR1A_PWM_MODE_BITS;
 };
 
 extern TimerOne Timer1;

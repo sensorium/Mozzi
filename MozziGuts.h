@@ -206,16 +206,16 @@ typedef unsigned long ulong;
 #endif */
 
 
-//template <unsigned int CONTROL_RATE, unsigned char AUDIO_MODE = STANDARD>
-//class Mozzi
-//{
-//public:
-// these are documented in .cpp file
-//void start(unsigned int control_rate_hz = CONTROL_RATE);
 void startMozzi(unsigned int control_rate_hz);
-//template <unsigned int OUTPUT_OPTION>
 
-void audioHook();
+/** @ingroup core
+This is where you put your audio code. updateAudio() has to keep up with the
+AUDIO_RATE of 16384 Hz, so to keep things running smoothly, avoid doing any
+calculations here which could be done in setup() or updateControl().
+@return an audio sample.  In STANDARD mode this is between -244 and 243 inclusive.
+In HIFI mode, it's a 14 bit number between -16384 and 16383 inclusive.
+*/
+int updateAudio();
 
 
 /** @ingroup core
@@ -227,19 +227,7 @@ which could be done in setup().
 void updateControl();
 
 
-/** @ingroup core
-This is where you put your audio code. updateAudio() has to keep up with the
-AUDIO_RATE of 16384 Hz, so to keep things running smoothly, avoid doing any
-calculations here which could be done in setup() or updateControl().
-@return an audio sample, between -244 and 243 inclusive.
-*/
-int updateAudio();
-
-//};
-
-//extern Mozzi Mozzi1;
-
-
-
+// see notes in MozziGuts.cpp
+void audioHook();
 
 #endif /* MOZZIGUTS_H_ */

@@ -25,7 +25,6 @@
 #include <util/atomic.h>
 //#include "mozzi_utils.h"
 
-//Mozzi Mozzi1; // preinstatiate
 /*
 Section 12.7.4:
 The dual-slope operation [of phase correct pwm] has lower maximum operation
@@ -48,8 +47,6 @@ PWM frequency tests
 16384Hz single nearly 9 bits (original mode) not bad for a single pin, but carrier freq noise can be an issue
 */
 
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ring buffer for audio output
 #define BUFFER_NUM_CELLS 256
@@ -59,13 +56,27 @@ static unsigned int output_buffer[BUFFER_NUM_CELLS];
 static volatile unsigned char num_out;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/* set up Timer 2 using modified FrequencyTimer2 library */
-void dummy(){}
-static void setupTimer2(){
-	// audio output interrupt on timer 2, sets the pwm levels of timer 1
-	 FrequencyTimer2::setPeriod(2000000UL/16384); // gives a period half of what's provided, for some reason
-	 FrequencyTimer2::enable();
-	 FrequencyTimer2::setOnOverflow(dummy);
+
+/** @ingroup core
+This is required in Arduino's loop(). If there is room in Mozzi's output buffer,
+audioHook() calls updateAudio() once and puts the result into the output
+buffer. If other functions are called in loop() along with audioHook(), see if
+they can be moved into updateControl(). Otherwise it may be most efficient to
+calculate a block of samples at a time by putting audioHook() in a loop of its
+own, rather than calculating only 1 sample for each time your other functions
+are called.
+@todo Try pre-decrement positions and swap gap calc around
+*/
+
+void audioHook()
+{
+	static unsigned char num_in = 0;
+	unsigned int gap = num_in - num_out; // wraps to a big number if it's negative
+
+	if(gap < BUFFER_NUM_CELLS) // prevent writing over cells which haven't been output yet
+	{
+		output_buffer[num_in++] = (unsigned int) (updateAudio() + AUDIO_BIAS);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -73,7 +84,7 @@ static void setupTimer2(){
 
 static void startAudioStandard9bitPwm(){
 	pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);	// set pin to output for audio
-	Timer1.initialize(1000000UL/AUDIO_RATE);		// set period
+	Timer1.initialize(1000000UL/AUDIO_RATE, PHASE_FREQ_CORRECT);		// set period, phase and frequency correct
 	//Serial.print("STANDARD Timer 1 period = "); Serial.println(Timer1.getPeriod()); // 976
 	
 	Timer1.pwm(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);		// pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
@@ -90,12 +101,22 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #elif (AUDIO_MODE == HIFI)
 
+/* set up Timer 2 using modified FrequencyTimer2 library */
+void dummy(){}
+static void setupTimer2(){
+	// audio output interrupt on timer 2, sets the pwm levels of timer 1
+	 FrequencyTimer2::setPeriod(2000000UL/16384); // gives a period half of what's provided, for some reason
+	 FrequencyTimer2::enable();
+	 FrequencyTimer2::setOnOverflow(dummy);
+}
+
+
 static void startAudioHiSpeed14bitPwm(){
 	// pwm on timer 1
 	pinMode(AUDIO_CHANNEL_1_HIGHBYTE_PIN, OUTPUT);	// set pin to output for audio, use 3.9k resistor
 	pinMode(AUDIO_CHANNEL_1_LOWBYTE_PIN, OUTPUT);	// set pin to output for audio, use 1M resistor
 
-	Timer1.initialize(1000000UL/125000);		// set period for 125000 Hz fast pwm carrier frequency = 14 bits
+	Timer1.initialize(1000000UL/125000, FAST);		// set period for 125000 Hz fast pwm carrier frequency = 14 bits
 	// Serial.print("HIFI Timer 1 period = "); Serial.println(Timer1.getPeriod());
 
 	Timer1.pwm(AUDIO_CHANNEL_1_HIGHBYTE_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
@@ -175,29 +196,6 @@ void startMozzi(unsigned int control_rate_hz)
 #elif (AUDIO_MODE == HIFI)
 	startAudioHiSpeed14bitPwm();
 #endif
-}
-
-
-
-/** @ingroup core
-This is required in Arduino's loop(). If there is room in Mozzi's output buffer,
-audioHook() calls updateAudio() once and puts the result into the output
-buffer. If other functions are called in loop() along with audioHook(), see if
-they can be moved into updateControl(). Otherwise it may be most efficient to
-calculate a block of samples at a time by putting audioHook() in a loop of its
-own, rather than calculating only 1 sample for each time your other functions
-are called.
-@todo Try pre-decrement positions and swap gap calc around
-*/
-void audioHook()
-{
-	static unsigned char num_in = 0;
-	unsigned int gap = num_in - num_out; // wraps to a big number if it's negative
-
-	if(gap < BUFFER_NUM_CELLS) // prevent writing over cells which haven't been output yet
-	{
-		output_buffer[num_in++] = (unsigned int) (updateAudio() + AUDIO_BIAS);
-	}
 }
 
 

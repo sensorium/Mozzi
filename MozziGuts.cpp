@@ -54,8 +54,8 @@ static unsigned int output_buffer[BUFFER_NUM_CELLS];
 
 // shared by audioHook() (in loop()), and outputAudio() (in audio interrupt), where it is changed
 static volatile unsigned char num_out;
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 /** @ingroup core
 This is required in Arduino's loop(). If there is room in Mozzi's output buffer,
@@ -79,6 +79,36 @@ void audioHook()
 	}
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#if USING_AUDIO_INPUT
+// ring buffer for audio input
+static unsigned int input_buffer[BUFFER_NUM_CELLS]; // same as output buffer
+// to be used in updateAudio() (which is wrapped in) audioHook() (in loop()), and outputAudio() (in audio interrupt), where it is changed
+//static volatile unsigned char num_out;
+
+// no protection for overwriting buffer
+static void audioInputToBuffer()
+{
+	static unsigned char num_in = 0;
+	input_buffer[num_in++] = (unsigned int) receiveAnalogRead(); // num_in wraps around 255 bufer length
+	startAnalogRead(0);
+}
+
+// no protection for wrapping around and taking out old values... because it would only stuff the timing?
+// or does it need a null or -1 output if there is nothing in the buffer?
+// which would stop updateAudio() putting anything in the output buffer until there is something in the buffer
+// problem is that once it gets so low, outputAudio or ISR's can't go any faster to put new values in
+// so it becomes 1 for one, as if there was no buffer
+// may as well just have a "if it sounds bad, there must be nothing in the buffer" hint
+unsigned int getAudioInputFromBuffer()
+{
+	static unsigned char input_buffer_num_out;
+	return input_buffer[input_buffer_num_out++];
+}
+
+#endif
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #if (AUDIO_MODE == STANDARD)
 
@@ -95,7 +125,10 @@ static void startAudioStandard9bitPwm(){
 /* Interrupt service routine moves sound data from the output buffer to the
 Arduino output register, running at AUDIO_RATE. */
 ISR(TIMER1_OVF_vect, ISR_BLOCK) {
-	AUDIO_CHANNEL_1_OUTPUT_REGISTER =  output_buffer[num_out++];
+	AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer[num_out++];
+#if USING_AUDIO_INPUT
+	audioInputToBuffer();
+#endif
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -143,6 +176,9 @@ void dummy_function(void)
 	// 14 bit - this sounds better than 12 bit, it's cleaner, less bitty, don't notice aliasing
 	AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 7; // B11111110000000 becomes B1111111
 	AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 127; // B001111111
+#if USING_AUDIO_INPUT
+	audioInputToBuffer();
+#endif
 }
 
 

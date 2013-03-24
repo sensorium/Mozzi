@@ -19,6 +19,7 @@
 #include <tables/cos2048_int8.h> // for filter modulation
 #include <LowPassFilter.h>
 #include <mozzi_rand.h> // for rand()
+#include <utils.h>
 
 #define CONTROL_RATE 64 // powers of 2 please
 
@@ -28,10 +29,11 @@ Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFilterMod(COS2048_DATA);
 LowPassFilter lpf;
 
 void setup(){
-  startMozzi(CONTROL_RATE);
+  setPin13Out();
   aCrunchySound.setFreq(2.f);
   kFilterMod.setFreq(1.3f);
   lpf.setResonance(200);
+  startMozzi(CONTROL_RATE);
 }
 
 void loop(){

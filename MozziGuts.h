@@ -32,7 +32,9 @@
 #include "TimerZero.h"
 #include "FrequencyTimer2.h"
 #include "config.h" // User can change the config file to set audio mode
-
+#if USING_AUDIO_INPUT
+#include "mozzi_analog.h"
+#endif
 
 /** @mainpage Welcome
 
@@ -229,5 +231,7 @@ void updateControl();
 
 // see notes in MozziGuts.cpp
 void audioHook();
+
+unsigned int getAudioInputFromBuffer();
 
 #endif /* MOZZIGUTS_H_ */

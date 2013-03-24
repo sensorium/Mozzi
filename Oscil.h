@@ -164,6 +164,7 @@ public:
 	n16 part represents -1 to 1, modulating the phase by one whole table length in
 	each direction.
 	@return a sample from the table.
+	@todo does the phmod_proportion param need to be Q15n16, why not Q0n15 and cast to long for multiply?
 	*/
 	// PM: cos((angle += incr) + change)
 	// FM: cos(angle += (incr + change))

@@ -3,7 +3,7 @@
  *
  *  This method of reading analog input is now depreciated in Mozzi.
  *  A better way to read analog is to use the asynchronous method
- *  shown in the m_26_getSensor_LowPassFilter example.
+ *  shown in the m_26_adcGetChannel_LowPassFilter example.
  *
  *  Still, there may be a situation where this is useful...
  *  Demonstrates LowPassFilter(), fixed point fractional number use,
@@ -14,7 +14,7 @@
  *  Mozzi also provides startAnalogRead() and receiveAnalogRead(),
  *  which enable reading analog input one channel at a time without 
  *  blocking other processes.  
- *  (Though in most cases the asynchronous getSensor() method is probably simpler and better).
+ *  (Though in most cases the asynchronous adcGetChannel() method is probably simpler and better).
  *
  *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
  *  check the README or http://sensorium.github.com/Mozzi/

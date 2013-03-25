@@ -1,8 +1,8 @@
 /*
   Demonstrates asynchronous analog input 
- using initADC(), getSensor() and startRead().
- getSensor() fetches the most recent inputs from an array which
- is updated in the background when startRead() is called.
+ using adcEnableInterrupt(), adcGetChannel() and adcReadAllChannels().
+ adcGetChannel() fetches the most recent inputs from an array which
+ is updated in the background when adcReadAllChannels() is called.
  Tested with different combinations of pins on a Nano w/ 328
  and etherMega2560.
  */
@@ -16,25 +16,25 @@
 void setup() {
   Serial.begin(115200);
   startMozzi(CONTROL_RATE);
-  initADC();
+  adcEnableInterrupt();
 }
 
 
 void updateControl(){
-  // getSensor(n) gets the most recent reading for analog channel n
-  Serial.print(getSensor(0));
+  // adcGetChannel(n) gets the most recent reading for analog channel n
+  Serial.print(adcGetChannel(0));
   Serial.print("   ");
 
-  Serial.print(getSensor(1));
+  Serial.print(adcGetChannel(1));
   Serial.print("   ");
 
-  Serial.print(getSensor(2));
+  Serial.print(adcGetChannel(2));
   Serial.print("   ");
 
-  Serial.println(getSensor(3));
+  Serial.println(adcGetChannel(3));
 
   // start the next read cycle in the background
-  startRead();
+  adcReadAllChannels();
 }
 
 

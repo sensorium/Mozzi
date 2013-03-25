@@ -216,9 +216,9 @@ Q7n8_multfix	KEYWORD2
 Q16n16_pow2	KEYWORD2
 
 mozzi_analog	KEYWORD1
-initADC	KEYWORD2
-startRead	KEYWORD2
-getSensor	KEYWORD2
+adcEnableInterrupt	KEYWORD2
+adcReadAllChannels	KEYWORD2
+adcGetChannel	KEYWORD2
 setupFastAnalogRead	KEYWORD2
 setAnalogInChannel	KEYWORD2
 unSetAnalogInChannel	KEYWORD2

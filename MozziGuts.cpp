@@ -95,9 +95,9 @@ static void audioInputToBuffer()
 	startAnalogRead(0);
 }
 
-// no protection for wrapping around and taking out old values... because it would only stuff the timing?
+// no protection for wrapping around and taking out old values... because it would only stuff the timing
 // or does it need a null or -1 output if there is nothing in the buffer?
-// which would stop updateAudio() putting anything in the output buffer until there is something in the buffer
+// which would stop updateAudio() putting anything in the output buffer until there is something in the input buffer
 // problem is that once it gets so low, outputAudio or ISR's can't go any faster to put new values in
 // so it becomes 1 for one, as if there was no buffer
 // may as well just have a "if it sounds bad, there must be nothing in the buffer" hint

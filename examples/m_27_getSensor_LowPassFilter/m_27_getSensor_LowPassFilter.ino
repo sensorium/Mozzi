@@ -43,18 +43,18 @@ void setup(){
   startMozzi(CONTROL_RATE);
   aCrunchySound.setFreq(2.f);
   lpf.setResonance(200);
-  initADC();
+  adcEnableInterrupt();
 }
 
 
 void updateControl(){
 
-  unsigned char centre_freq = (unsigned char) (getSensor(CENTRE_FREQ_ANALOG_IN)>>2); // 0 to 255
+  unsigned char centre_freq = (unsigned char) (adcGetChannel(CENTRE_FREQ_ANALOG_IN)>>2); // 0 to 255
 
-  Q16n16 modulation_speed = ((Q16n16)getSensor(MOD_SPEED_ANALOG_IN)<<10); // range 0 to 15, Q16n16 fractional
+  Q16n16 modulation_speed = ((Q16n16)adcGetChannel(MOD_SPEED_ANALOG_IN)<<10); // range 0 to 15, Q16n16 fractional
   kFilterMod.setFreq_Q16n16(modulation_speed);
 
-  unsigned char modulation_width = (unsigned char) (getSensor(MOD_WIDTH_ANALOG_IN)>>4); // 0 to 63
+  unsigned char modulation_width = (unsigned char) (adcGetChannel(MOD_WIDTH_ANALOG_IN)>>4); // 0 to 63
   char modulation = ((int) kFilterMod.next() * modulation_width)>>8; // -32 to 31 
 
   // add centre_freq to modulation, and constrain into the filter range (0-255)
@@ -62,7 +62,7 @@ void updateControl(){
 
   lpf.setCutoffFreq(cutoff_freq);
 
-  startRead();
+  adcReadAllChannels();
 }
 
 

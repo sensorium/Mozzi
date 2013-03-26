@@ -31,7 +31,7 @@
 #include "TimerOne.h"
 #include "TimerZero.h"
 #include "FrequencyTimer2.h"
-#include "config.h" // User can change the config file to set audio mode
+#include "mozzi_config.h" // User can change the config file to set audio mode
 #if USING_AUDIO_INPUT
 #include "mozzi_analog.h"
 #endif

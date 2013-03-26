@@ -91,6 +91,12 @@ void adcReadAllChannels(){
 // NUM_ANALOG_INPUTS times, quick in a row
 #if USING_AUDIO_INPUT
 /*
+// not trying this yet
+// have flags to say the adc is busy with audio or control
+// if audio is using it, control should wait till it's finished 2nd audio reading(flag will get changed in adc isr return)
+// for audio, if control is using it, wait till 1st conversion is finished, ignore it, and start audio one asap.
+// when control collects reading, it should reset mux channel to audio channel to save time in audio routine
+// if using adcReadAll approach, keep track of which channels have been read so the others get a chance in between audio readings
 ISR(ADC_vect, ISR_NOBLOCK){
 	static boolean secondRead = false;
 	static unsigned char num_in = 0;

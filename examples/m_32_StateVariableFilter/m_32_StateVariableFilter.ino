@@ -25,11 +25,10 @@
 Oscil <WHITENOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(WHITENOISE8192_DATA); // audio noise
 Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFilterMod(COS2048_DATA);
 
-StateVariable <NOTCH> svf;
+StateVariable <NOTCH> svf; // can be LOWPASS, BANDPASS, HIGHPASS or NOTCH
 
 void setup(){
   startMozzi(CONTROL_RATE);
-  Serial.begin(115200);
   // cast to float because the resulting freq will be small and fractional
   aNoise.setFreq((float)AUDIO_RATE/WHITENOISE8192_SAMPLERATE);
   kFilterMod.setFreq(1.3f);
@@ -42,9 +41,8 @@ void loop(){
 }
 
 void updateControl(){
-  // change the modulation frequency now and then
-  if (rand((byte)CONTROL_RATE/2) == 0){ // about once every half second
-    kFilterMod.setFreq((float)lowByte(xorshift96())/64);
+  if (rand(CONTROL_RATE/2) == 0){ // about once every half second
+    kFilterMod.setFreq((float)rand(255)/64);  // choose a new modulation frequency
   }
   float cutoff_freq = 2200.f + kFilterMod.next()*12;
   svf.setCentreFreq(cutoff_freq);

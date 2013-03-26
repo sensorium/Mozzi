@@ -90,8 +90,8 @@ static unsigned int input_buffer[BUFFER_NUM_CELLS]; // same as output buffer
 // no protection for overwriting buffer
 static void audioInputToBuffer()
 {
-	static unsigned char num_in = 0;
-	input_buffer[num_in++] = (unsigned int) receiveAnalogRead(); // num_in wraps around 255 bufer length
+	static unsigned char input_buffer_head = 0; // starts writing a full buffer length behind tail
+	input_buffer[input_buffer_head++] = (unsigned int) receiveAnalogRead(); // num_in wraps around 255 bufer length
 	startAnalogRead(0);
 }
 
@@ -101,10 +101,16 @@ static void audioInputToBuffer()
 // problem is that once it gets so low, outputAudio or ISR's can't go any faster to put new values in
 // so it becomes 1 for one, as if there was no buffer
 // may as well just have a "if it sounds bad, there must be nothing in the buffer" hint
+
+//the protection is that in buffer and out buffer are the same size.  updateAudio only gets called when there is room in the outbuffer
+// so it getAudioInputFromBuffer will never get called more than 256 times more than audioInputToBuffer
+// only prob here is if the isrs start before loop has time to call updateAudio and getAudioInputFromBuffer
+// how to stop that?
+
 unsigned int getAudioInputFromBuffer()
 {
-	static unsigned char input_buffer_num_out;
-	return input_buffer[input_buffer_num_out++];
+	static unsigned char input_buffer_tail = 1; // starts reading a full buffer length ahead of tail
+	return input_buffer[input_buffer_tail++];
 }
 
 #endif

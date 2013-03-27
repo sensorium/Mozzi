@@ -6,7 +6,7 @@ NEWS
 Version 0.01.1w
 - mozzi_analog.h, .cpp 
 	- Renamed adcReadAllChannels() to adcReadAllChannels().
-	- Renamed getSensor() to adcGetChannel().
+	- Renamed getSensor() to adcGetResult().
 	- Renamed initADC() adcEnableInterrupt().
 	- Added adcDisconnectAllDigitalIns() which helps to reduce analog noise, 
 	increase  reading speed, and save power by turning off all analog pins' digital input buffers.
@@ -69,7 +69,7 @@ Version 0.01.1s
 
 
 Version 0.01.1r
-- Fixed example m_26_adcGetChannel_LowPassFilter, user Doctroid noticed a mistake in the circuit pinout.
+- Fixed example m_26_adcGetResult_LowPassFilter, user Doctroid noticed a mistake in the circuit pinout.
 
 
 
@@ -84,7 +84,7 @@ Version 0.01.1p
 - Moved midi, random and analog input code from utils each into their own files as described below.  
 	THIS WILL BREAK OLD SKETCHES but is easy to fix by #including the appropriate new *.h files.
 - Introduced mozzi_analog.h and mozzi_analog.cpp for new asynchronous analog input functions, much better than the old way.
-	- Inserted example m_26_adcGetChannel_LowPassFilter to show the new way of reading analog inputs, bumped numbers of 
+	- Inserted example m_26_adcGetResult_LowPassFilter to show the new way of reading analog inputs, bumped numbers of 
 		other examples to make room.
 	- Moved old analog stuff to from utils to the new files.
 	- Renamed setAnalogInChannel() and unSetAnalogInChannel() to disconnectDigitalIn() and reconnectDigitalIn().  Can't 

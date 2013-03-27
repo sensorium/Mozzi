@@ -17,7 +17,7 @@ In Mozzi/config.h, comment one of these options in and the other out to set the 
 \#define this as true in mozzi_config.h to enable audio input on analog pin 0,
 otherwise make it false, to save resources.
 */
-#define USING_AUDIO_INPUT  false
+#define USING_AUDIO_INPUT  true
 
 #endif        //  #ifndef CONFIG_H
 

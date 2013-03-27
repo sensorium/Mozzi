@@ -9,7 +9,7 @@
 
 void adcEnableInterrupt();
 void adcReadAllChannels();
-int adcGetChannel(unsigned char channel_num);
+int adcGetResult(unsigned char channel_num);
 
 
 // hack for Teensy 2 (32u4), pasted from hardware/arduino/variants/leonardo/pins_arduino.h
@@ -24,6 +24,8 @@ void disconnectDigitalIn(byte channel_num);
 void reconnectDigitalIn(byte channel_num);
 void adcDisconnectAllDigitalIns();
 void adcReconnectAllDigitalIns();
+void adcSetChannel(unsigned char pin);
+void adcStartConversion();
 void startAnalogRead(unsigned char pin);
 int receiveAnalogRead();
 

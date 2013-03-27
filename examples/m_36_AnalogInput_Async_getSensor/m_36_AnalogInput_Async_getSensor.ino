@@ -1,7 +1,7 @@
 /*
   Demonstrates asynchronous analog input 
- using adcEnableInterrupt(), adcGetChannel() and adcReadAllChannels().
- adcGetChannel() fetches the most recent inputs from an array which
+ using adcEnableInterrupt(), adcGetResult() and adcReadAllChannels().
+ adcGetResult() fetches the most recent inputs from an array which
  is updated in the background when adcReadAllChannels() is called.
  Tested with different combinations of pins on a Nano w/ 328
  and etherMega2560.
@@ -21,17 +21,17 @@ void setup() {
 
 
 void updateControl(){
-  // adcGetChannel(n) gets the most recent reading for analog channel n
-  Serial.print(adcGetChannel(0));
+  // adcGetResult(n) gets the most recent reading for analog channel n
+  Serial.print(adcGetResult(0));
   Serial.print("   ");
 
-  Serial.print(adcGetChannel(1));
+  Serial.print(adcGetResult(1));
   Serial.print("   ");
 
-  Serial.print(adcGetChannel(2));
+  Serial.print(adcGetResult(2));
   Serial.print("   ");
 
-  Serial.println(adcGetChannel(3));
+  Serial.println(adcGetResult(3));
 
   // start the next read cycle in the background
   adcReadAllChannels();

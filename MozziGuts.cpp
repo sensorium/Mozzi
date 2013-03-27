@@ -85,27 +85,27 @@ void audioHook()
 //static unsigned int input_buffer[BUFFER_NUM_CELLS]; // same as output buffer
 // to be used in updateAudio() (which is wrapped in) audioHook() (in loop()), and outputAudio() (in audio interrupt), where it is changed
 
-// modified from Paul Stoffergen's buffer example, he knows what he's doing
+// based on Paul Stoffergen's buffer example, he knows what he's doing
 // http://www.pjrc.com/teensy/adc.html
 
-static volatile uint8_t head, tail;
+static volatile uint8_t head, tail = 0;
 static volatile int16_t buffer[BUFFER_NUM_CELLS];
 
-static void audioInputToBuffer()
+static void audioInputToBuffer() // 4us
 {
-	//static unsigned char input_buffer_head = 0; // starts writing a full buffer length ahead of tail
 	uint8_t h;
 	int16_t val;
-	// it is the user's responsibility to make sure the audio input is centred around reference_voltage/2
-	val = receiveAnalogRead() - AUDIO_BIAS;                      // grab new reading from ADC
+
+	val = receiveAnalogRead();                      // grab new reading from ADC
 	h = head + 1;
-	// if (h >= BUFFER_NUM_CELLS) h = 0; // not required when BUFFER_NUM_CELLS is 256
+	//if (h >= BUFFER_NUM_CELLS) h = 0; // not required when BUFFER_NUM_CELLS is 256
 	if (h != tail) {                // if the buffer isn't full
 		buffer[h] = val;            // put new data into buffer
 		head = h;
 	}
-	//input_buffer[input_buffer_head++] = (unsigned int) receiveAnalogRead(); // num_in wraps around 255 bufer length
-	startAnalogRead(0);
+
+	adcStartConversion(); // this way reduces timing by about 0.5 us - not worth keeping if other considerations arise
+	//startAnalogRead(0);
 }
 
 // no protection for wrapping around and taking out old values... because it would only stuff the timing
@@ -129,7 +129,7 @@ int getAudioInputFromBuffer()
 		h = head;
 		t = tail;                   // wait for data in buffer
 	} while (h == t);
-	//if (++t >= BUFFER_NUM_CELLS) t = 0; // not required when BUFFER_NUM_CELLS is 256
+	if (++t >= BUFFER_NUM_CELLS) t = 0; // not required when BUFFER_NUM_CELLS is 256
 	val = buffer[t];                // remove 1 sample from buffer
 	tail = t;
 	return val;
@@ -156,19 +156,20 @@ static void startAudioStandard9bitPwm(){
 	
 #if USING_AUDIO_INPUT
 	setupFastAnalogRead();
+	adcSetChannel(0);
 #endif
 }
 
 /* Interrupt service routine moves sound data from the output buffer to the
 Arduino output register, running at AUDIO_RATE. */
 ISR(TIMER1_OVF_vect, ISR_BLOCK) {
-	//setPin13High();
-	AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer[num_out++];
 	
+	AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer[num_out++]; // 1us
+	setPin13High();
 #if USING_AUDIO_INPUT
-	audioInputToBuffer();
+	audioInputToBuffer(); // 4us
 #endif
-	//setPin13Low();
+	setPin13Low();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

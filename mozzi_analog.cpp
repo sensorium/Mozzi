@@ -10,7 +10,7 @@ Make analogRead() faster than the standard Arduino version, changing the
 duration from about 105 in unmodified Arduino to 15 microseconds for a
 dependable analogRead(). Put this in setup() if you intend to use analogRead()
 with Mozzi, to avoid glitches.
-Don't use it with the adcEnableInterrupt(), adcReadAllChannels(), adcGetChannel() approach, it may contribute to glitches.
+Don't use it with the adcEnableInterrupt(), adcReadAllChannels(), adcGetResult() approach, it may contribute to glitches.
 See: http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11, and
 http://www.marulaberry.co.za/index.php/tutorials/code/arduino-adc/
 */
@@ -23,7 +23,7 @@ void setupFastAnalogRead()
 }
 
 
-///approach 2: adcEnableInterrupt(), adcReadAllChannels(), adcGetChannel(), read all channels in background //////////////////////////////
+///approach 2: adcEnableInterrupt(), adcReadAllChannels(), adcGetResult(), read all channels in background //////////////////////////////
 /*
 This code is based on discussion between jRaskell, bobgardner, theusch, Koshchi, and code by jRaskell. 
 http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=789581
@@ -40,8 +40,8 @@ static volatile boolean readComplete = false;
 /** @ingroup analog
 Call this in setup() to enable reading analog inputs in the background while audio generating continues.
 Then call adcReadAllChannels() at the end of each updateControl() and the results for each analog channel will be
-available by calling adcGetChannel(channel_num) next time updateControl() runs.
-@note This method using adcEnableInterrupt(), adcReadAllChannels() and adcGetChannel() is an easy and
+available by calling adcGetResult(channel_num) next time updateControl() runs.
+@note This method using adcEnableInterrupt(), adcReadAllChannels() and adcGetResult() is an easy and
 efficient way to read analog inputs while generating sound with Mozzi. For many
 sketches, however, simply putting setupFastAnalogRead() in setup() and calling
 Arduino's usual analogRead() will work fast enough.
@@ -62,14 +62,14 @@ void adcEnableInterrupt(){
 /** @ingroup analog
 Call adcReadAllChannels() at the end of each updateControl() and the reading will happen in the background, 
 using a minimum of processor time and without blocking other code.
-The results for each analog channel are available by calling adcGetChannel(channel_num) next time updateControl() runs.
+The results for each analog channel are available by calling adcGetResult(channel_num) next time updateControl() runs.
 
 More detail: adcReadAllChannels() starts an initial conversion which triggers an interrupt when it's complete.
 The interrupt code stores the result in an array, changes to the next channel and
 starts another conversion.  When all the channels have been sampled, the ISR doesn't
 start a new conversion, so it doesn't re-trigger itself or use processor time until
 adcReadAllChannels() is called again.  At any time the latest conversion result for each channel is
-available by calling adcGetChannel(channel_num).
+available by calling adcGetResult(channel_num).
 @note In some cases this method can cause glitches which may have to do with the ADC interrupt
 interfering with the audio or control interrupts.  
 */
@@ -155,19 +155,64 @@ This returns the most recent analog reading for the specified channel.
 @param channel_num The channels are plain numbers 0 to whatever your board goes up to, not the pin
 labels A0 to A... which Arduino maps to different numbers depending on the board
 being used.
-@note The InitADC(), adcReadAllChannels(), adcGetChannel() approach is currently set to work with
+@note The InitADC(), adcReadAllChannels(), adcGetResult() approach is currently set to work with
 all channels on each kind of board. You can change the number of channels to use in
 mozzi_analog.cpp by editing NUM_ANALOG_INPUTS if desired.
 @note In some cases this method can cause glitches which may have to do with the ADC interrupt
 interfering with the audio or control interrupts.  
 */
-int adcGetChannel(unsigned char channel_num){
+int adcGetResult(unsigned char channel_num){
 	return sensors[channel_num];
 }
 
 
 ///approach 3: startAnalogRead(), receiveAnalogRead(), read one channel at a time in the background///////
 
+
+
+/** @ingroup analog
+Set the channel or pin for the next analog input to be read from.
+@param channel or pin number.  If pin number is provided, adcSetChannel will convert it to the channel number.
+*/
+
+void adcSetChannel(unsigned char pin)
+{
+
+#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
+	if (pin >= 54)
+		pin -= 54; // allow for channel or pin numbers
+#elif defined(__AVR_ATmega32U4__)
+
+	if (pin >= 18)
+		pin -= 18; // allow for channel or pin numbers
+#elif defined(__AVR_ATmega1284__)
+
+	if (pin >= 24)
+		pin -= 24; // allow for channel or pin numbers
+#else
+
+	if (pin >= 14)
+		pin -= 14; // allow for channel or pin numbers
+#endif
+
+#if defined(__AVR_ATmega32U4__)
+
+	pin = analogPinToChannel(pin);
+	ADCSRB = (ADCSRB & ~(1 << MUX5)) | (((pin >> 3) & 0x01) << MUX5);
+#elif defined(ADCSRB) && defined(MUX5)
+	// the MUX5 bit of ADCSRB selects whether we're reading from channels
+	// 0 to 7 (MUX5 low) or 8 to 15 (MUX5 high).
+	ADCSRB = (ADCSRB & ~(1 << MUX5)) | (((pin >> 3) & 0x01) << MUX5);
+#endif
+
+	// set the analog reference (high two bits of ADMUX) and select the
+	// channel (low 4 bits).  this also sets ADLAR (left-adjust result)
+	// to 0 (the default).
+#if defined(ADMUX)
+
+	ADMUX = (analog_reference << 6) | (pin & 0x07);
+#endif
+}
 
 /** @ingroup analog
 Starts an analog-to-digital conversion of the voltage at a specified pin.  Unlike
@@ -180,7 +225,7 @@ interrupt runs.
 This technique should also be suitable for audio-rate sampling of a single channel in updateAudio() calls.
 @param pin is the analog pin number (A0 to A...) or the channel number (0 to ....) to read.
 @note This is the most audio-friendly way to read analog inputs,
-but can be messier in your program than the the adcEnableInterrupt(), adcReadAllChannels(), adcGetChannel() way.
+but can be messier in your program than the the adcEnableInterrupt(), adcReadAllChannels(), adcGetResult() way.
 @note Timing: about 1us when used in updateControl() with CONTROL_RATE 64.
 */
 
@@ -234,6 +279,15 @@ void startAnalogRead(unsigned char pin)
 }
 
 /** @ingroup analog
+Starts the analog conversion on whichever pin was most recently set using adcSetChannel();
+*/
+void adcStartConversion()
+{
+	sbi(ADCSRA, ADSC);
+}
+
+
+/** @ingroup analog
 Waits for the result of the most recent startAnalogRead().  If used as the first function
 of updateControl(), to receive the result of startAnalogRead() from the end of the last
 updateControl(), there will probably be no waiting time, as the ADC conversion will
@@ -241,7 +295,7 @@ have happened in between interrupts.  This is a big time-saver, since you don't 
 waste time waiting for analogRead() to return (1us here vs 105 us for standard Arduino).
 @return The resut of the most recent startAnalogRead().
 @note This is the most audio-friendly way to read analog inputs,
-but can be messier in your program than the the adcEnableInterrupt(), adcReadAllChannels(), adcGetChannel() way.
+but can be messier in your program than the the adcEnableInterrupt(), adcReadAllChannels(), adcGetResult() way.
 @note Timing: about 1us when used in updateControl() with CONTROL_RATE 64.
 */
 int receiveAnalogRead()

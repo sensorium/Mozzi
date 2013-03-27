@@ -56,7 +56,6 @@ static unsigned int output_buffer[BUFFER_NUM_CELLS];
 static volatile unsigned char num_out;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 /** @ingroup core
 This is required in Arduino's loop(). If there is room in Mozzi's output buffer,
 audioHook() calls updateAudio() once and puts the result into the output
@@ -83,15 +82,29 @@ void audioHook()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #if USING_AUDIO_INPUT
 // ring buffer for audio input
-static unsigned int input_buffer[BUFFER_NUM_CELLS]; // same as output buffer
+//static unsigned int input_buffer[BUFFER_NUM_CELLS]; // same as output buffer
 // to be used in updateAudio() (which is wrapped in) audioHook() (in loop()), and outputAudio() (in audio interrupt), where it is changed
-//static volatile unsigned char num_out;
 
-// no protection for overwriting buffer
+// modified from Paul Stoffergen's buffer example, he knows what he's doing
+// http://www.pjrc.com/teensy/adc.html
+
+static volatile uint8_t head, tail;
+static volatile int16_t buffer[BUFFER_NUM_CELLS];
+
 static void audioInputToBuffer()
 {
-	static unsigned char input_buffer_head = 0; // starts writing a full buffer length behind tail
-	input_buffer[input_buffer_head++] = (unsigned int) receiveAnalogRead(); // num_in wraps around 255 bufer length
+	//static unsigned char input_buffer_head = 0; // starts writing a full buffer length ahead of tail
+	uint8_t h;
+	int16_t val;
+	// it is the user's responsibility to make sure the audio input is centred around reference_voltage/2
+	val = receiveAnalogRead() - AUDIO_BIAS;                      // grab new reading from ADC
+	h = head + 1;
+	// if (h >= BUFFER_NUM_CELLS) h = 0; // not required when BUFFER_NUM_CELLS is 256
+	if (h != tail) {                // if the buffer isn't full
+		buffer[h] = val;            // put new data into buffer
+		head = h;
+	}
+	//input_buffer[input_buffer_head++] = (unsigned int) receiveAnalogRead(); // num_in wraps around 255 bufer length
 	startAnalogRead(0);
 }
 
@@ -107,10 +120,24 @@ static void audioInputToBuffer()
 // only prob here is if the isrs start before loop has time to call updateAudio and getAudioInputFromBuffer
 // how to stop that?
 
-unsigned int getAudioInputFromBuffer()
+int getAudioInputFromBuffer()
 {
-	static unsigned char input_buffer_tail = 1; // starts reading a full buffer length ahead of tail
-	return input_buffer[input_buffer_tail++];
+	uint8_t h, t;
+	int16_t val;
+
+	do {
+		h = head;
+		t = tail;                   // wait for data in buffer
+	} while (h == t);
+	//if (++t >= BUFFER_NUM_CELLS) t = 0; // not required when BUFFER_NUM_CELLS is 256
+	val = buffer[t];                // remove 1 sample from buffer
+	tail = t;
+	return val;
+	//static unsigned char input_buffer_tail = 1; // starts reading a full buffer length behind head
+	//	int gap = input_buffer_tail - input_buffer_head; // wraps to a big number if it's negative
+	//	if(gap > 0) // prevent re-reading cells which haven't been refilled yet
+	//{
+	//return input_buffer[input_buffer_tail++];
 }
 
 #endif
@@ -122,19 +149,26 @@ static void startAudioStandard9bitPwm(){
 	pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);	// set pin to output for audio
 	Timer1.initialize(1000000UL/AUDIO_RATE, PHASE_FREQ_CORRECT);		// set period, phase and frequency correct
 	//Serial.print("STANDARD Timer 1 period = "); Serial.println(Timer1.getPeriod()); // 976
-	
+
 	Timer1.pwm(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);		// pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
 	//Timer1.attachInterrupt(outputAudio); // TB 15-2-2013 Replaced this line with the ISR, saves some processor time
 	TIMSK1 = _BV(TOIE1); 	// Overflow Interrupt Enable (when not using Timer1.attachInterrupt())
+	
+#if USING_AUDIO_INPUT
+	setupFastAnalogRead();
+#endif
 }
 
 /* Interrupt service routine moves sound data from the output buffer to the
 Arduino output register, running at AUDIO_RATE. */
 ISR(TIMER1_OVF_vect, ISR_BLOCK) {
+	//setPin13High();
 	AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer[num_out++];
+	
 #if USING_AUDIO_INPUT
 	audioInputToBuffer();
 #endif
+	//setPin13Low();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -144,9 +178,9 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK) {
 void dummy(){}
 static void setupTimer2(){
 	// audio output interrupt on timer 2, sets the pwm levels of timer 1
-	 FrequencyTimer2::setPeriod(2000000UL/16384); // gives a period half of what's provided, for some reason
-	 FrequencyTimer2::enable();
-	 FrequencyTimer2::setOnOverflow(dummy);
+	FrequencyTimer2::setPeriod(2000000UL/16384); // gives a period half of what's provided, for some reason
+	FrequencyTimer2::enable();
+	FrequencyTimer2::setOnOverflow(dummy);
 }
 
 
@@ -162,7 +196,7 @@ static void startAudioHiSpeed14bitPwm(){
 	Timer1.pwm(AUDIO_CHANNEL_1_LOWBYTE_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
 
 	// audio output interrupt on timer 2, sets the pwm levels of timer 1
-	 setupTimer2();
+	setupTimer2();
 }
 
 

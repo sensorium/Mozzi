@@ -32,8 +32,8 @@
 #include "TimerZero.h"
 #include "FrequencyTimer2.h"
 #include "mozzi_config.h" // User can change the config file to set audio mode
-#if USING_AUDIO_INPUT
-#include "mozzi_analog.h"
+#if USING_AUDIO_INPUT 	// Set this to true in mozzi_config.h to enable audio input on analog pin 0
+#include "mozzi_analog.h"					// otherwise set it false, to save resources
 #endif
 
 /** @mainpage Welcome
@@ -168,7 +168,7 @@ the oscillators. You can look at the TimerOne library for more info about how
 interrupt rate and pwm resolution relate.
 
 For much higher quality output which combines signals from pins 9 and 10, 
-edit Mozzi/config.h to contain #define AUDIO_MODE HIFI.
+edit Mozzi/mozzi_config.h to contain #define AUDIO_MODE HIFI.
 
 @todo Possible option for output to R/2R DAC circuit, like
 http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/ This would limit
@@ -232,6 +232,6 @@ void updateControl();
 // see notes in MozziGuts.cpp
 void audioHook();
 
-unsigned int getAudioInputFromBuffer();
+int getAudioInputFromBuffer();
 
 #endif /* MOZZIGUTS_H_ */

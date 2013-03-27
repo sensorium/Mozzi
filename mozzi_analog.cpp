@@ -84,66 +84,69 @@ void adcReadAllChannels(){
 	startAnalogRead(current_adc);
 }
 
-
-// TB25-02-13 added ISR_NOBLOCK to see if it helps with glitches
-// maybe need ATOMIC around int parts too?
-// or a way to spread out the reads so the interrupt doesn't get called
-// NUM_ANALOG_INPUTS times, quick in a row
-#if USING_AUDIO_INPUT
-/*
 // not trying this yet
 // have flags to say the adc is busy with audio or control
 // if audio is using it, control should wait till it's finished 2nd audio reading(flag will get changed in adc isr return)
 // for audio, if control is using it, wait till 1st conversion is finished, ignore it, and start audio one asap.
 // when control collects reading, it should reset mux channel to audio channel to save time in audio routine
 // if using adcReadAll approach, keep track of which channels have been read so the others get a chance in between audio readings
-ISR(ADC_vect, ISR_NOBLOCK){
-	static boolean secondRead = false;
-	static unsigned char num_in = 0;
-	//Only record the second read
-	if(secondRead){
-		input_buffer[num_in++] = ADCL | (ADCH << 8); // copy data to buffer
-		secondRead = false;
-	}
-	else{
-		secondRead = true;
-		ADCSRA |= (1 << ADSC); // start read
-	}
 
-}
-*/
-#else
 
-ISR(ADC_vect, ISR_NOBLOCK){
-	static boolean secondRead = false;
+// TB25-02-13 added ISR_NOBLOCK to see if it helps with glitches
+// maybe need ATOMIC around int parts too?
+// or a way to spread out the reads so the interrupt doesn't get called
+// NUM_ANALOG_INPUTS times, quick in a row
 
-	//Only record the second read on each channel
-	if(secondRead){
-		sensors[current_adc] = ADCL | (ADCH << 8);
-		//bobgardner: ..The compiler is clever enough to read the 10 bit value like this: val=ADC;
-		//sensors[current_adc] = ADC;
-		current_adc++;
-		if(current_adc > NUM_ANALOG_INPUTS){
-			//Sequence complete.  Stop A2D conversions
-			readComplete = true;
-		}
-		else{
-			//Switch to next channel
-			/*
-			ADMUX = (1 << REFS0) | current_adc;
-			ADCSRA |= (1 << ADSC);
-			*/
-			startAnalogRead(current_adc);
-		}
-		secondRead = false;
-	}
-	else{
-		secondRead = true;
-		ADCSRA |= (1 << ADSC);
-	}
 
-}
-#endif
+// #if USING_AUDIO_INPUT
+// 
+// ISR(ADC_vect, ISR_NOBLOCK){
+// 
+	// /*
+	// static boolean secondRead = false;
+	// static unsigned char num_in = 0;
+	// //Only record the second read
+	// if(secondRead){
+		// input_buffer[num_in++] = ADCL | (ADCH << 8); // copy data to buffer
+		// secondRead = false;
+	// }
+	// else{
+		// secondRead = true;
+		// ADCSRA |= (1 << ADSC); // start read
+	// }
+	// */
+// }
+// 
+// #else
+// 
+ ISR(ADC_vect, ISR_NOBLOCK){
+	 static boolean secondRead = false;
+	 //Only record the second read on each channel
+	 if(secondRead){
+		 //sensors[current_adc] = ADCL | (ADCH << 8);
+		 //bobgardner: ..The compiler is clever enough to read the 10 bit value like this: val=ADC;
+		 sensors[current_adc] = ADC;
+		 current_adc++;
+		 if(current_adc > NUM_ANALOG_INPUTS){
+			 //Sequence complete.  Stop A2D conversions
+			 readComplete = true;
+		 }
+		 else{
+			 //Switch to next channel
+			 /*
+			 ADMUX = (1 << REFS0) | current_adc;
+			 ADCSRA |= (1 << ADSC);
+			 */
+			 startAnalogRead(current_adc);
+		 }
+		 secondRead = false;
+	 }
+	 else{
+		 secondRead = true;
+		 ADCSRA |= (1 << ADSC);
+	 }
+ }
+// #endif
 
 
 
@@ -243,7 +246,8 @@ but can be messier in your program than the the adcEnableInterrupt(), adcReadAll
 */
 int receiveAnalogRead()
 {
-	unsigned char low, high;
+	//unsigned char low, high;
+	int out;
 #if defined(ADCSRA) && defined(ADCL)
 	// ADSC is cleared when the conversion finishes
 	while (bit_is_set(ADCSRA, ADSC))
@@ -253,16 +257,19 @@ int receiveAnalogRead()
 	// and ADCH until ADCH is read.  reading ADCL second would
 	// cause the results of each conversion to be discarded,
 	// as ADCL and ADCH would be locked when it completed.
-	low  = ADCL;
-	high = ADCH;
+	//low  = ADCL;
+	//high = ADCH;
+	out = ADC;
 #else
 	// we dont have an ADC, return 0
-	low  = 0;
-	high = 0;
+	//low  = 0;
+	//high = 0;
+	out = 0;
 #endif
 
 	// combine the two bytes
-	return (high << 8) | low;
+	//return (high << 8) | low;
+	return out;
 }
 
 

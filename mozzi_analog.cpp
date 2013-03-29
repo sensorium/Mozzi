@@ -58,7 +58,7 @@ void adcEnableInterrupt(){
 }
 
 
-
+#if !USING_AUDIO_INPUT
 /** @ingroup analog
 Call adcReadAllChannels() at the end of each updateControl() and the reading will happen in the background, 
 using a minimum of processor time and without blocking other code.
@@ -118,35 +118,6 @@ void adcReadAllChannels(){
 // }
 // 
 // #else
-// 
- ISR(ADC_vect, ISR_NOBLOCK){
-	 static boolean secondRead = false;
-	 //Only record the second read on each channel
-	 if(secondRead){
-		 //sensors[current_adc] = ADCL | (ADCH << 8);
-		 //bobgardner: ..The compiler is clever enough to read the 10 bit value like this: val=ADC;
-		 sensors[current_adc] = ADC;
-		 current_adc++;
-		 if(current_adc > NUM_ANALOG_INPUTS){
-			 //Sequence complete.  Stop A2D conversions
-			 readComplete = true;
-		 }
-		 else{
-			 //Switch to next channel
-			 /*
-			 ADMUX = (1 << REFS0) | current_adc;
-			 ADCSRA |= (1 << ADSC);
-			 */
-			 startAnalogRead(current_adc);
-		 }
-		 secondRead = false;
-	 }
-	 else{
-		 secondRead = true;
-		 ADCSRA |= (1 << ADSC);
-	 }
- }
-// #endif
 
 
 
@@ -165,6 +136,7 @@ int adcGetResult(unsigned char channel_num){
 	return sensors[channel_num];
 }
 
+#endif
 
 ///approach 3: startAnalogRead(), receiveAnalogRead(), read one channel at a time in the background///////
 

@@ -47,12 +47,42 @@ PWM frequency tests
 16384Hz single nearly 9 bits (original mode) not bad for a single pin, but carrier freq noise can be an issue
 */
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ring buffer for audio output
 #define BUFFER_NUM_CELLS 256
 static unsigned int output_buffer[BUFFER_NUM_CELLS];
-static volatile unsigned long num_out; // shared by audioHook() (in loop()), and outputAudio() (in audio interrupt), where it is changed
+static volatile unsigned long output_buffer_tail; // shared by audioHook() (in loop()), and outputAudio() (in audio interrupt), where it is changed
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#if USING_AUDIO_INPUT
+
+static void adcSetupAudioInput(){
+	adcEnableInterrupt();
+	setupFastAnalogRead();
+	adcSetChannel(0);
+}
+
+static volatile long input_gap;
+static volatile unsigned long input_buffer_head;
+static volatile int buffer[BUFFER_NUM_CELLS];
+static boolean do_update_audio;
+static int audio_input; // holds the latest audio from the input buffer
+
+/** @ingroup analog
+This returns audio input from the input buffer, if 
+"/#define USING_AUDIO_INPUT true" is in the mozzi_config.h file.
+@return audio input from the input buffer
+*/
+int getAudioInput()
+{
+	return audio_input;
+}
+
+#endif
+
+
 
 /** @ingroup core
 This is required in Arduino's loop(). If there is room in Mozzi's output buffer,
@@ -67,64 +97,44 @@ are called.
 
 void audioHook() // 2us excluding updateAudio()
 {
-	static unsigned long num_in = 0;
+	static unsigned long output_buffer_head = 0;
+	long output_gap = output_buffer_head - output_buffer_tail; // wraps to a big number if it's negative, and will take a long time to wrap
 
-	unsigned long gap = num_in - num_out; // wraps to a big number if it's negative, and will take a long time to wrap
-	if(gap < BUFFER_NUM_CELLS) // prevent writing over cells which haven't been output yet
+#if USING_AUDIO_INPUT // 3us
+
+	static unsigned long input_buffer_tail =0;
+	input_gap = input_buffer_head - input_buffer_tail; // wraps to a big number if it's negative, and will take a long time to wrap
+	if ((output_gap < BUFFER_NUM_CELLS) && do_update_audio) {
+		input_buffer_tail++;
+		audio_input = buffer[input_buffer_tail & (BUFFER_NUM_CELLS-1)];
+
+#else
+
+	if(output_gap < BUFFER_NUM_CELLS) // prevent writing over cells which haven't been output yet
 	{
-		num_in++;
-		output_buffer[(unsigned char)num_in & (unsigned char)(BUFFER_NUM_CELLS-1)] = (unsigned int) (updateAudio() + AUDIO_BIAS);
-	}
-
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#if USING_AUDIO_INPUT
-
-
-static void adcSetupAudioInput(){
-	adcEnableInterrupt();
-	setupFastAnalogRead();
-	adcSetChannel(0);
-}
-
-// ring buffer for audio input
-// based initially on Paul Stoffergen's buffer example, http://www.pjrc.com/teensy/adc.html
-
-
-// should use adc isr so that when the buffer is empty it will put something there in time for updateAudio to work on it
-// befor next output isr
-
-// the buffer will always be empty if updateAudio runs faster than output isr
-// which means no input buffering
-// and also no output buffering becuase output relies on the input being there
-
-// would it be better to work with chunks like pd instead of ring buffers?
-
-static volatile uint8_t head, tail = 0;
-static volatile int16_t buffer[BUFFER_NUM_CELLS];
-
-int getAudioInputFromBuffer()
-{
-	//static unsigned char tail;
-
-	unsigned char h;
-	do {
-		h = head;
-	} while (h == tail); // wait for data in buffer
-
-	return buffer[tail++];
-}
-
+		
 #endif
+		output_buffer_head++;
+		output_buffer[(unsigned char)output_buffer_head & (unsigned char)(BUFFER_NUM_CELLS-1)] = (unsigned int) (updateAudio() + AUDIO_BIAS);
+	}
+	
+
+}
 
 //static void audioInputToBuffer() // 1.5us
 ISR(ADC_vect, ISR_BLOCK)
 {
-#if USING_AUDIO_INPUT
-	//buffer[head++] = ADCL | (ADCH << 8);
-	buffer[head++] = ADC; // put new data into buffer, don't worry about overwriting old, as guarding would also cause a glitch
+#if USING_AUDIO_INPUT // 4us
+
+ // gets here about 16us after being set audio output isr
+	input_buffer_head++;
+	buffer[input_buffer_head & (BUFFER_NUM_CELLS-1)] = ADC; // put new data into buffer, don't worry about overwriting old, as guarding would also cause a glitch
+	if (input_gap > (BUFFER_NUM_CELLS/2)) {
+		do_update_audio = true;
+	}else{
+		do_update_audio = false;
+	}
+
 #else
 	static boolean secondRead = false;
 	//Only record the second read on each channel
@@ -139,10 +149,10 @@ ISR(ADC_vect, ISR_BLOCK)
 		}
 		else{
 			//Switch to next channel
-			/*
-			ADMUX = (1 << REFS0) | current_adc;
-			ADCSRA |= (1 << ADSC);
-			*/
+			
+			//ADMUX = (1 << REFS0) | current_adc;
+			//ADCSRA |= (1 << ADSC);
+			
 			startAnalogRead(current_adc);
 		}
 		secondRead = false;
@@ -154,43 +164,6 @@ ISR(ADC_vect, ISR_BLOCK)
 
 #endif
 }
-
-/*
-static void audioInputToBuffer() // 4us
-{
-	uint8_t h;
-	int16_t val;
-	//val =receiveAnalogRead();   // grab new reading from ADC
-	val = ADC; // calling this at 16384Hz with no other analog ins and setupFastAnalogRead requires no checking         
-	h = head + 1;
-	//if (h >= BUFFER_NUM_CELLS) h = 0; // not required when BUFFER_NUM_CELLS is 256
-	// below will cause glitches as much as overwriting old values
-	if (h != tail) {                // if the buffer isn't full
-		buffer[h] = val;            // put new data into buffer
-		head = h;
-	}
-
-	adcStartConversion(); // this way reduces timing by about 0.5 us - not worth keeping if other considerations arise
-	//startAnalogRead(0);
-}
-*/
-
-/*
-int getAudioInputFromBuffer()
-{
-	uint8_t h, t;
-	int16_t val;
-
-	do {
-		h = head;
-		t = tail;                   // wait for data in buffer
-	} while (h == t);
-	if (++t >= BUFFER_NUM_CELLS) t = 0; // not required when BUFFER_NUM_CELLS is 256
-	val = buffer[t];                // remove 1 sample from buffer
-	tail = t;
-	return val;
-}
-*/
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -210,18 +183,18 @@ static void startAudioStandard9bitPwm(){
 #endif
 }
 
+
 /* Interrupt service routine moves sound data from the output buffer to the
 Arduino output register, running at AUDIO_RATE. */
 ISR(TIMER1_OVF_vect, ISR_BLOCK) {
 #if USING_AUDIO_INPUT
-	sbi(ADCSRA, ADSC);				// start next conversion
+	sbi(ADCSRA, ADSC);				// start next adc conversion
 	// audioInputToBuffer(); // 1.5us
 #endif
-	num_out++;
-	AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer[(unsigned char)num_out & (unsigned char)(BUFFER_NUM_CELLS-1)]; // 1us, 2.5us with longs
-//AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer[(unsigned char)num_out & (unsigned char)(BUFFER_NUM_CELLS-1)]; // 1us, 2.5us with longs
-
+	output_buffer_tail++;
+	AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer[(unsigned char)output_buffer_tail & (unsigned char)(BUFFER_NUM_CELLS-1)]; // 1us, 2.5us with longs
 }
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #elif (AUDIO_MODE == HIFI)

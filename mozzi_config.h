@@ -18,6 +18,7 @@ In Mozzi/config.h, comment one of these options in and the other out to set the 
 otherwise make it false, to save resources.
 */
 #define USING_AUDIO_INPUT  true
+//#define USING_AUDIO_INPUT  false
 
 #endif        //  #ifndef CONFIG_H
 

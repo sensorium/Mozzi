@@ -232,6 +232,6 @@ void updateControl();
 // see notes in MozziGuts.cpp
 void audioHook();
 
-int getAudioInputFromBuffer();
+int getAudioInput();
 
 #endif /* MOZZIGUTS_H_ */

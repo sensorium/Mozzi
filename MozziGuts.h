@@ -32,7 +32,7 @@
 #include "TimerZero.h"
 #include "FrequencyTimer2.h"
 #include "mozzi_config.h" // User can change the config file to set audio mode
-#if USING_AUDIO_INPUT 	// Set this to true in mozzi_config.h to enable audio input on analog pin 0
+#if USE_AUDIO_INPUT 	// Set this to true in mozzi_config.h to enable audio input on analog pin 0
 #include "mozzi_analog.h"					// otherwise set it false, to save resources
 #endif
 

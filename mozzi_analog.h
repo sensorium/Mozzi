@@ -1,11 +1,12 @@
 #ifndef MOZZI_ANALOG_H_
 #define MOZZI_ANALOG_H_
 
-#include "Arduino.h"
+
 #include "mozzi_utils.h"
 
-/** @defgroup analog Mozzi analog input functions
+/** @defgroup analog Mozzi analog input functions for sensors and audio 
 */
+
 
 void adcEnableInterrupt();
 void adcReadAllChannels();

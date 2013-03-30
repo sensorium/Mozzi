@@ -57,6 +57,8 @@ static volatile unsigned long output_buffer_tail; // shared by audioHook() (in l
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #if USING_AUDIO_INPUT
+#include "Arduino.h"
+#include "mozzi_analog.h"
 
 static void adcSetupAudioInput(){
 	adcEnableInterrupt();
@@ -66,18 +68,42 @@ static void adcSetupAudioInput(){
 
 static volatile long input_gap;
 static volatile unsigned long input_buffer_head;
-static volatile int buffer[BUFFER_NUM_CELLS];
+static volatile int input_buffer[BUFFER_NUM_CELLS];
 static boolean do_update_audio;
-static int audio_input; // holds the latest audio from the input buffer
+static int audio_input; // holds the latest audio from input_buffer
 
 /** @ingroup analog
 This returns audio input from the input buffer, if 
-"/#define USING_AUDIO_INPUT true" is in the mozzi_config.h file.
-@return audio input from the input buffer
+"/#define USING_AUDIO_INPUT true" is in the Mozzi/mozzi_config.h file.
+Audio input is currently restricted to analog pin 0 (this may change in future).
+The audio signal needs to be in the range 0 to 5 volts.  
+Circuits and discussions about biasing a signal
+in the middle of this range can be found at 
+http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal 
+and
+http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/ .
+A circuit and instructions for amplifying and biasing a microphone signal can be found at
+http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS
+@return audio data from the input buffer
 */
 int getAudioInput()
 {
 	return audio_input;
+}
+
+
+/* Audio ISR. This is called with when the adc finishes a conversion.
+*/
+ISR(ADC_vect, ISR_BLOCK)
+{
+ // gets here about 16us after being set audio output isr
+	input_buffer_head++;
+	input_buffer[input_buffer_head & (BUFFER_NUM_CELLS-1)] = ADC; // put new data into input_buffer, don't worry about overwriting old, as guarding would also cause a glitch
+	if (input_gap > (BUFFER_NUM_CELLS/2)) {
+		do_update_audio = true;
+	}else{
+		do_update_audio = false;
+	}
 }
 
 #endif
@@ -87,8 +113,12 @@ int getAudioInput()
 /** @ingroup core
 This is required in Arduino's loop(). If there is room in Mozzi's output buffer,
 audioHook() calls updateAudio() once and puts the result into the output
-buffer. If other functions are called in loop() along with audioHook(), see if
-they can be moved into updateControl(). Otherwise it may be most efficient to
+buffer.  Also, if /#define USE_AUDIO_INPUT true is in Mozzi/mozzi_config.h,
+audioHook() takes care of moving audio input from the input buffer so it can be
+accessed with getAudioInput() in your updateAudio() routine.
+If other functions are called in loop() along with audioHook(), see if
+they can be called less often by moving them into updateControl(), 
+to save processing power. Otherwise it may be most efficient to
 calculate a block of samples at a time by putting audioHook() in a loop of its
 own, rather than calculating only 1 sample for each time your other functions
 are called.
@@ -106,7 +136,7 @@ void audioHook() // 2us excluding updateAudio()
 	input_gap = input_buffer_head - input_buffer_tail; // wraps to a big number if it's negative, and will take a long time to wrap
 	if ((output_gap < BUFFER_NUM_CELLS) && do_update_audio) {
 		input_buffer_tail++;
-		audio_input = buffer[input_buffer_tail & (BUFFER_NUM_CELLS-1)];
+		audio_input = input_buffer[input_buffer_tail & (BUFFER_NUM_CELLS-1)];
 
 #else
 
@@ -119,50 +149,6 @@ void audioHook() // 2us excluding updateAudio()
 	}
 	
 
-}
-
-//static void audioInputToBuffer() // 1.5us
-ISR(ADC_vect, ISR_BLOCK)
-{
-#if USING_AUDIO_INPUT // 4us
-
- // gets here about 16us after being set audio output isr
-	input_buffer_head++;
-	buffer[input_buffer_head & (BUFFER_NUM_CELLS-1)] = ADC; // put new data into buffer, don't worry about overwriting old, as guarding would also cause a glitch
-	if (input_gap > (BUFFER_NUM_CELLS/2)) {
-		do_update_audio = true;
-	}else{
-		do_update_audio = false;
-	}
-
-#else
-	static boolean secondRead = false;
-	//Only record the second read on each channel
-	if(secondRead){
-		//sensors[current_adc] = ADCL | (ADCH << 8);
-		//bobgardner: ..The compiler is clever enough to read the 10 bit value like this: val=ADC;
-		sensors[current_adc] = ADC;
-		current_adc++;
-		if(current_adc > NUM_ANALOG_INPUTS){
-			//Sequence complete.  Stop A2D conversions
-			readComplete = true;
-		}
-		else{
-			//Switch to next channel
-			
-			//ADMUX = (1 << REFS0) | current_adc;
-			//ADCSRA |= (1 << ADSC);
-			
-			startAnalogRead(current_adc);
-		}
-		secondRead = false;
-	}
-	else{
-		secondRead = true;
-		ADCSRA |= (1 << ADSC);
-	}
-
-#endif
 }
 
 
@@ -189,7 +175,6 @@ Arduino output register, running at AUDIO_RATE. */
 ISR(TIMER1_OVF_vect, ISR_BLOCK) {
 #if USING_AUDIO_INPUT
 	sbi(ADCSRA, ADSC);				// start next adc conversion
-	// audioInputToBuffer(); // 1.5us
 #endif
 	output_buffer_tail++;
 	AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer[(unsigned char)output_buffer_tail & (unsigned char)(BUFFER_NUM_CELLS-1)]; // 1us, 2.5us with longs
@@ -224,7 +209,7 @@ static void startAudioHiSpeed14bitPwm(){
 	setupTimer2();
 
 #if USING_AUDIO_INPUT
-	adcSetupAudioInput()
+	adcSetupAudioInput();
 #endif
 }
 
@@ -238,6 +223,9 @@ ISR(TIMER2_COMP_vect)
 void dummy_function(void)
 #endif
 {
+#if USING_AUDIO_INPUT
+	sbi(ADCSRA, ADSC);				// start next adc conversion
+#endif
 	unsigned int out = output_buffer[num_out++];
 	// read about dual pwm at http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
 	// sketches at http://wiki.openmusiclabs.com/wiki/PWMDAC,  http://wiki.openmusiclabs.com/wiki/MiniArDSP

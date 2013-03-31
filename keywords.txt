@@ -216,14 +216,22 @@ Q7n8_multfix	KEYWORD2
 Q16n16_pow2	KEYWORD2
 
 mozzi_analog	KEYWORD1
+setupFastAnalogRead	KEYWORD2
 adcEnableInterrupt	KEYWORD2
 adcReadAllChannels	KEYWORD2
 adcGetResult	KEYWORD2
-setupFastAnalogRead	KEYWORD2
-setAnalogInChannel	KEYWORD2
-unSetAnalogInChannel	KEYWORD2
-startAnalogRead	KEYWORD2
-receiveAnalogRead	KEYWORD2
+adcSetChannel	KEYWORD2
+
+//startAnalogRead	KEYWORD2
+//receiveAnalogRead	KEYWORD2
+
+adcSetChannel	KEYWORD2
+adcStartConversion	KEYWORD2
+
+disconnectDigitalIn	KEYWORD2
+reconnectDigitalIn	KEYWORD2
+adcDisconnectAllDigitalIns	KEYWORD2
+adcReconnectAllDigitalIns	KEYWORD2
 
 
 mozzi_rand	KEYWORD1

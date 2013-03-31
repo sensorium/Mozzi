@@ -5,15 +5,20 @@ NEWS
 
 Version 0.01.1w
 - mozzi_analog.h, .cpp 
-	- Renamed adcReadAllChannels() to adcReadAllChannels().
-	- Renamed getSensor() to adcGetResult().
-	- Renamed initADC() adcEnableInterrupt().
+	- Renamed startRead() to adcReadAllChannels(), more descriptive of what it does.
+	- Renamed getSensor() to adcGetResult(), because the ADC conversions are already done, stored in an array.
+	- Renamed initADC() adcEnableInterrupt().  It's just better.
 	- Added adcDisconnectAllDigitalIns() which helps to reduce analog noise, 
 	increase  reading speed, and save power by turning off all analog pins' digital input buffers.
 	(Just  a loop with disconnectDigitalIn() for each pin).
 	- Added adcReconnectAllDigitalIns().
 	- Added slightly more sanity to m_32_StateVariable and m_25_LowPassFilter examples.
+- MozziGuts.cpp 
+	- Fixed a bug in the output buffer code which would have been causing frequent inaccuracies in audio output
+	- Added an input buffer for audio on analog pin 0.  Audio input can be enabled by putting 
+	"#define USE_AUDIO_INPUT true" in Mozzi/mozzi_config.h.
 
+	
 Version 0.01.1v
 - Introduced alternative output options, STANDARD and HIFI.  STANDARD is set by default and is the
 	original Mozzi output, 16384Hz, nearly 9 bit PWM on pin 9.  

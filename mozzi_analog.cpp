@@ -45,42 +45,6 @@ void adcEnableInterrupt(){
 }
 
 
-// not trying this yet
-// have flags to say the adc is busy with audio or control
-// if audio is using it, control should wait till it's finished 2nd audio reading(flag will get changed in adc isr return)
-// for audio, if control is using it, wait till 1st conversion is finished, ignore it, and start audio one asap.
-// when control collects reading, it should reset mux channel to audio channel to save time in audio routine
-// if using adcReadAll approach, keep track of which channels have been read so the others get a chance in between audio readings
-
-
-// TB25-02-13 added ISR_NOBLOCK to see if it helps with glitches
-// maybe need ATOMIC around int parts too?
-// or a way to spread out the reads so the interrupt doesn't get called
-// NUM_ANALOG_INPUTS times, quick in a row
-
-
-
-
-// #if USING_AUDIO_INPUT
-// 
-// ISR(ADC_vect, ISR_NOBLOCK){
-// 
-	// /*
-	// static boolean secondRead = false;
-	// static unsigned char num_in = 0;
-	// //Only record the second read
-	// if(secondRead){
-		// input_buffer[num_in++] = ADCL | (ADCH << 8); // copy data to buffer
-		// secondRead = false;
-	// }
-	// else{
-		// secondRead = true;
-		// ADCSRA |= (1 << ADSC); // start read
-	// }
-	// */
-// }
-// 
-
 ///approach 3: startAnalogRead(), receiveAnalogRead(), read one channel at a time in the background///////
 
 /** @ingroup analog
@@ -144,7 +108,7 @@ but can be messier in your program than the the adcEnableInterrupt(), adcReadAll
 
 // basically analogRead() chopped in half so the ADC conversion
 // can be started in one function and received in another.
-void startAnalogRead(unsigned char pin)
+void adcStartConversion(unsigned char pin)
 {
 
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
@@ -192,7 +156,7 @@ void startAnalogRead(unsigned char pin)
 }
 
 /** @ingroup analog
-Starts the analog conversion on whichever pin was most recently set using adcSetChannel();
+Starts the analog conversion on the pin or channel most recently set with adcSetChannel();
 */
 void adcStartConversion()
 {
@@ -208,10 +172,11 @@ have happened in between interrupts.  This is a big time-saver, since you don't 
 waste time waiting for analogRead() to return (1us here vs 105 us for standard Arduino).
 @return The resut of the most recent startAnalogRead().
 @note This is the most audio-friendly way to read analog inputs,
-but can be messier in your program than the the adcEnableInterrupt(), adcReadAllChannels(), adcGetResult() way.
+but can be messier in your program than the the adcEnableInterrupt(), adcReadAllChannels(), adcGetResult(byte) way.
 @note Timing: about 1us when used in updateControl() with CONTROL_RATE 64.
 */
-int receiveAnalogRead()
+//int receiveAnalogRead()
+int adcGetResult()
 {
 	//unsigned char low, high;
 	int out;

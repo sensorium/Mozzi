@@ -60,7 +60,7 @@ Use this as a line out which you can plug into your computer and listen
 to with a sound program like Audacity. Try some examples from the
 File > Examples > Mozzi menu.
 
-Below is a list of the Digital Pins used by Mozzi for audio out on different boards.
+Below is a list of the Digital Pins used by Mozzi for STANDARD mode PWM audio out on different boards.
 Those which have been tested and reported to work have an x.
 Feedback about others is welcome.
 
@@ -77,6 +77,7 @@ x	11	Arduino Mega
 ..13	Sanguino  
 x	 9  Boarduino  
 
+For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4).
 
 ### Using Mozzi
 

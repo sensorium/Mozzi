@@ -56,7 +56,7 @@ static volatile unsigned long output_buffer_tail; // shared by audioHook() (in l
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#if USING_AUDIO_INPUT
+#if USE_AUDIO_INPUT
 #include "Arduino.h"
 #include "mozzi_analog.h"
 
@@ -74,7 +74,7 @@ static int audio_input; // holds the latest audio from input_buffer
 
 /** @ingroup analog
 This returns audio input from the input buffer, if 
-"/#define USING_AUDIO_INPUT true" is in the Mozzi/mozzi_config.h file.
+"/#define USE_AUDIO_INPUT true" is in the Mozzi/mozzi_config.h file.
 Audio input is currently restricted to analog pin 0 (this may change in future).
 The audio signal needs to be in the range 0 to 5 volts.  
 Circuits and discussions about biasing a signal
@@ -130,7 +130,7 @@ void audioHook() // 2us excluding updateAudio()
 	static unsigned long output_buffer_head = 0;
 	long output_gap = output_buffer_head - output_buffer_tail; // wraps to a big number if it's negative, and will take a long time to wrap
 
-#if USING_AUDIO_INPUT // 3us
+#if USE_AUDIO_INPUT // 3us
 
 	static unsigned long input_buffer_tail =0;
 	input_gap = input_buffer_head - input_buffer_tail; // wraps to a big number if it's negative, and will take a long time to wrap
@@ -164,7 +164,7 @@ static void startAudioStandard9bitPwm(){
 	//Timer1.attachInterrupt(outputAudio); // TB 15-2-2013 Replaced this line with the ISR, saves some processor time
 	TIMSK1 = _BV(TOIE1); 	// Overflow Interrupt Enable (when not using Timer1.attachInterrupt())
 
-#if USING_AUDIO_INPUT
+#if USE_AUDIO_INPUT
 	adcSetupAudioInput();
 #endif
 }
@@ -173,7 +173,7 @@ static void startAudioStandard9bitPwm(){
 /* Interrupt service routine moves sound data from the output buffer to the
 Arduino output register, running at AUDIO_RATE. */
 ISR(TIMER1_OVF_vect, ISR_BLOCK) {
-#if USING_AUDIO_INPUT
+#if USE_AUDIO_INPUT
 	sbi(ADCSRA, ADSC);				// start next adc conversion
 #endif
 	output_buffer_tail++;
@@ -208,7 +208,7 @@ static void startAudioHiSpeed14bitPwm(){
 	// audio output interrupt on timer 2, sets the pwm levels of timer 1
 	setupTimer2();
 
-#if USING_AUDIO_INPUT
+#if USE_AUDIO_INPUT
 	adcSetupAudioInput();
 #endif
 }
@@ -223,7 +223,7 @@ ISR(TIMER2_COMP_vect)
 void dummy_function(void)
 #endif
 {
-#if USING_AUDIO_INPUT
+#if USE_AUDIO_INPUT
 	sbi(ADCSRA, ADSC);				// start next adc conversion
 #endif
 	unsigned int out = output_buffer[num_out++];
@@ -233,7 +233,7 @@ void dummy_function(void)
 	// 14 bit - this sounds better than 12 bit, it's cleaner, less bitty, don't notice aliasing
 	AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 7; // B11111110000000 becomes B1111111
 	AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 127; // B001111111
-	// #if USING_AUDIO_INPUT
+	// #if USE_AUDIO_INPUT
 	// audioInputToBuffer();
 	// #endif
 }

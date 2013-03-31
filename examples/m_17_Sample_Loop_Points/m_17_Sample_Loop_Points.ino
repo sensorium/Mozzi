@@ -31,7 +31,7 @@ Sample <ABOMB_NUM_CELLS, AUDIO_RATE> aSample(ABOMB_DATA);
 // for scheduling changes
 EventDelay <CONTROL_RATE>  kTriggerDelay;
 
-unsigned int gain;
+//unsigned int gain;
 
 const float playspeed = 1.3;
 float playspeedmod = 0;
@@ -53,10 +53,10 @@ void setup(){
   startMozzi(CONTROL_RATE);
 }
 
-
-void choosegain(){
-  gain = rand((unsigned int) 300,(unsigned int) 450);
-}
+//
+//void choosegain(){
+//  gain = rand((unsigned int) 300,(unsigned int) 450);
+//}
 
 
 unsigned int chooseStart(){
@@ -100,7 +100,7 @@ void chooseStartEnd(){
 void updateControl(){
   if(kTriggerDelay.ready()){
     chooseStartEnd();
-    choosegain();
+    //choosegain();
     chooseSpeedMod();
     kTriggerDelay.start();
   }
@@ -110,7 +110,8 @@ void updateControl(){
 
 
 int updateAudio(){
-  return (int)(((long) aSample.next()*gain)>>8);
+  //return (int)(((long) aSample.next()*gain)>>8);
+  return (int)aSample.next();
 }
 
 

@@ -31,7 +31,7 @@ Version 0.01.1w
 - Added AudioDelFbLInterp.h, like AudioDelayFeedback but with linear interpolation for smoother sounding delay transitions.
 - AudioDelayFeedback - added an alternative next(char in_value, Q16n16 delaytime_cells) function for fractional, linear interpolated delays.
 - Added example m_22b_AudioDelayFeedback_Linear_Interp.
-
+- Moved some documentation into .h files to work around conditional compilation hiding documentation from doxygen.
 	
 Version 0.01.1v
 - Introduced alternative output options, STANDARD and HIFI.  STANDARD is set by default and is the

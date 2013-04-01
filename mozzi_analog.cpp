@@ -1,20 +1,29 @@
-
+/*
+ * mozzi_analog.cpp
+ *
+ * Copyright 2012 Tim Barrass.
+ *
+ * This file is part of Mozzi.
+ *
+ * Mozzi is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Mozzi is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Mozzi.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+ 
 #include "mozzi_analog.h"
 #include "Arduino.h"
 
-//static unsigned char analog_reference = DEFAULT;
 
-//approach 1: just make analogRead faster //------------------------------------------------------------------------
-
-/** @ingroup analog
-Make analogRead() faster than the standard Arduino version, changing the
-duration from about 105 in unmodified Arduino to 15 microseconds for a
-dependable analogRead(). Put this in setup() if you intend to use analogRead()
-with Mozzi, to avoid glitches.
-Don't use it with the adcEnableInterrupt(), adcReadAllChannels(), adcGetResult() approach, it may contribute to glitches.
-See: http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11, and
-http://www.marulaberry.co.za/index.php/tutorials/code/arduino-adc/
-*/
 void setupFastAnalogRead()
 {
 	// fastest predivided rate (divide by 16, giving 1Mhz) for which behaviour is defined (~16us per sample)
@@ -24,20 +33,6 @@ void setupFastAnalogRead()
 }
 
 
-/** @ingroup analog
-Call this in setup() to enable reading analog inputs in the background while audio generating continues.
-Then call adcReadAllChannels() at the end of each updateControl() and the results for each analog channel will be
-available by calling adcGetResult(channel_num) next time updateControl() runs.
-@note This method using adcEnableInterrupt(), adcReadAllChannels() and adcGetResult() is an easy and
-efficient way to read analog inputs while generating sound with Mozzi. For many
-sketches, however, simply putting setupFastAnalogRead() in setup() and calling
-Arduino's usual analogRead() will work fast enough.
-@note Don't use setupFastAnalogRead() with adcEnableInterrupt().
-It may cause the ADC process to hog the processor, causing audio glitches.
-@note In some cases this method can cause glitches which may have to do with the ADC
-interrupt interfering with the audio or control interrupts. If this occurs, use
-the adcStartConversion(), adcGetResult() methods instead.
-*/
 void adcEnableInterrupt(){
 	// The only difference between this and vanilla arduino is ADIE, enable ADC interrupt.
 	// Enable a2d conversions | Enable ADC Interrupt | Set a2d prescale factor to 128
@@ -47,11 +42,6 @@ void adcEnableInterrupt(){
 
 //-----------------------------------------------------------------------------------------------------------------
 //approach2: adcStartConversion(), adcGetResult(), read one channel at a time in the background
-
-/** @ingroup analog
-Set the channel or pin for the next analog input to be read from.
-@param channel or pin number.  If pin number is provided, adcSetChannel() will convert it to the channel number.
-*/
 
 void adcSetChannel(unsigned char pin)
 {
@@ -92,19 +82,7 @@ void adcSetChannel(unsigned char pin)
 #endif
 }
 
-/** @ingroup analog
-Starts an analog to digital conversion of the voltage at a specified pin.  Unlike
-Arduino's analogRead() function which waits until a conversion is complete before
-returning, adcStartConversion() only sets the conversion to begin, so you can use
-the cpu for other things and call for the result later with adcGetResult().
-This works well in updateControl(), where you can call adcStartConversion() and
-get the result with adcGetResult() the next time the updateControl()
-interrupt runs.
-@param pin is the analog pin number (A0 to A...) or the channel number (0 to ....) to read.
-@note This is the most audio-friendly way to read analog inputs,
-but can be messier in your program than the the adcEnableInterrupt(), adcReadAllChannels(), adcGetResult() way.
-@note Timing: about 1us when used in updateControl() with CONTROL_RATE 64.
-*/
+
 
 // basically analogRead() chopped in half so the ADC conversion
 // can be started in one function and received in another.
@@ -155,26 +133,15 @@ void adcStartConversion(unsigned char pin)
 #endif
 }
 
-/** @ingroup analog
-Starts the analog conversion on the pin or channel most recently set with adcSetChannel();
-*/
+
+
 void adcStartConversion()
 {
 	sbi(ADCSRA, ADSC);
 }
 
 
-/** @ingroup analog
-Waits for the result of the most recent adcStartConversion().  If used as the first function
-of updateControl(), to receive the result of adcStartConversion() from the end of the last
-updateControl(), there will probably be no waiting time, as the ADC conversion will
-have happened in between interrupts.  This is a big time-saver, since you don't have to
-waste time waiting for analogRead() to return (1us here vs 105 us for standard Arduino).
-@return The resut of the most recent adcStartConversion().
-@note This is the most audio-friendly way to read analog inputs,
-but can be messier in your program than the the adcEnableInterrupt(), adcReadAllChannels(), adcGetResult(byte) way.
-@note Timing: about 1us when used in updateControl() with CONTROL_RATE 64.
-*/
+
 int adcGetResult()
 {
 	//unsigned char low, high;
@@ -204,61 +171,25 @@ int adcGetResult()
 }
 
 
-//useful for all approaches////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------
 
-/**  @ingroup analog
-Prepare an analog input channel by turning off its digital input buffer.
-This helps to reduce noise, increase analog reading speed, and save power.
-
-Here's more detail from http://www.openmusiclabs.com/learning/digital/atmega-adc/:
-
-The DIDR (Data Input Disable Register) disconnects the digital inputs from
-whichever ADC channels you are using. This is important for 2 reasons. First
-off, an analog input will be floating all over the place, and causing the
-digital input to constantly toggle high and low. This creates excessive noise
-near the ADC, and burns extra power. Secondly, the digital input and associated
-DIDR switch have a capacitance associated with them which will slow down your
-input signal if you are sampling a highly resistive load.
-
-And from the ATmega328p datasheet, p266:
-
-When an analog signal is applied to the ADC pin and the digital input from
-this pin is not needed, this bit should be written logic one to reduce power
-consumption in the digital input buffer. Note that ADC named_pins ADC7 
-and ADC6 do not have digital input buffers, and therefore do not require 
-Digital Input Disable bits.
-@param channel_num the analog input channel you wish to use.
-*/
 void disconnectDigitalIn(byte channel_num){
 	DIDR0 |= 1<<channel_num;
 }
 
 
-/** @ingroup analog
-Reconnect the digital input buffer for an analog input channel which has
-been set for analog input with disconnectDigitalIn().
-@param channel_num the analog input channel you wish to reconnect.
-*/
 void reconnectDigitalIn(byte channel_num){
 	DIDR0 &= ~(1<<channel_num);
 }
 
 
-/**  @ingroup analog
-Prepare all analog input channels by turning off their digital input buffers.
-This helps to reduce noise, increase analog reading speed, and save power.
-*/
 void adcDisconnectAllDigitalIns(){
 	for (unsigned char i = 0; i<NUM_ANALOG_INPUTS; i++){
 		DIDR0 |= 1<<i;
 	}
-}
+}                     
 
 
-/** @ingroup analog
-Reconnect the digital input buffers for analog input channels which have
-been set for analog input with disconnectDigitalIn().
-*/
 void adcReconnectAllDigitalIns(){
 	for (unsigned char i = 0; i<NUM_ANALOG_INPUTS; i++){
 		DIDR0 &= ~(1<<i);

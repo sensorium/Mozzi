@@ -1,9 +1,0 @@
-15 March 2013
-- Included FrequencyTimer2 and used it at AUDIO_RATE to drive Timer1 doing high speed PWM.  
-- Modified FrequecyTimer2.cpp, moved ISR to MozziGuts.
-- Modified TimerOne.h to operate in Fast PWM mode rather than Phase and Frequency Correct mode.
-- mozzi_analog: 
-	used adcStartConversion() in the ISR which fills the adc array accessed in adcGetResult(), so different boards are adjusted for.
-	NUM_ANALOG_INPUTS is already defined in Arduino hardware files - 
-	so allow that definition to work so mozzi automatically fills all available analog ins.
-	Might be more time consuming, but users can modify if speed is an issue.

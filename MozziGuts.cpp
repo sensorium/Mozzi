@@ -72,20 +72,7 @@ static volatile int input_buffer[BUFFER_NUM_CELLS];
 static boolean do_update_audio;
 static int audio_input; // holds the latest audio from input_buffer
 
-/** @ingroup analog
-This returns audio input from the input buffer, if 
-"#define USE_AUDIO_INPUT true" is in the Mozzi/mozzi_config.h file.
-Audio input is currently restricted to analog pin 0 (this may change in future).
-The audio signal needs to be in the range 0 to 5 volts.  
-Circuits and discussions about biasing a signal
-in the middle of this range can be found at 
-http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal 
-and
-http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/ .
-A circuit and instructions for amplifying and biasing a microphone signal can be found at
-http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS
-@return audio data from the input buffer
-*/
+
 int getAudioInput()
 {
 	return audio_input;
@@ -109,21 +96,6 @@ ISR(ADC_vect, ISR_BLOCK)
 #endif
 
 
-
-/** @ingroup core
-This is required in Arduino's loop(). If there is room in Mozzi's output buffer,
-audioHook() calls updateAudio() once and puts the result into the output
-buffer.  Also, if \#define USE_AUDIO_INPUT true is in Mozzi/mozzi_config.h,
-audioHook() takes care of moving audio input from the input buffer so it can be
-accessed with getAudioInput() in your updateAudio() routine.
-If other functions are called in loop() along with audioHook(), see if
-they can be called less often by moving them into updateControl(), 
-to save processing power. Otherwise it may be most efficient to
-calculate a block of samples at a time by putting audioHook() in a loop of its
-own, rather than calculating only 1 sample for each time your other functions
-are called.
-@todo Try pre-decrement positions and swap gap calc around
-*/
 
 void audioHook() // 2us excluding updateAudio()
 {
@@ -256,31 +228,6 @@ static void startControl(unsigned int control_rate_hz)
 }
 
 
-/** @ingroup core
-Sets up the timers for audio and control rate processes. It goes in your
-sketch's setup() routine. 
-
-In STANDARD and HIFI modes, Mozzi uses Timer 0 for control interrupts 0, disabling Arduino
-delay(), millis(), micros() and delayMicroseconds. 
-For delaying events, you can use Mozzi's EventDelay() unit instead (not to be confused with AudioDelay()). 
-
-In STANDARD mode, startMozzi() starts Timer 1 for PWM output and audio output interrupts,
-and in HIFI mode, Mozzi uses Timer 1 for PWM and Timer2 for audio interrupts. 
-
-The audio rate is currently fixed at 16384 Hz.
-
-@param control_rate_hz Sets how often updateControl() is called. It can be any
-power of 2 above and including 64. The practical upper limit for control rate
-depends on how busy the processor is, and you might need to do some tests to
-find the best setting. 
-
-It's good to define CONTROL_RATE in your
-sketches (eg. \#define CONTROL_RATE 128) because the literal numeric value is
-necessary for Oscils to work properly, and it also helps to keep the
-calculations in your sketch clear.
-
-@todo See if there is any advantage to using 8 bit port, without pwm, with a resistor ladder (maybe use readymade resistor networks).
-*/
 void startMozzi(unsigned int control_rate_hz)
 {
 	startControl(control_rate_hz);

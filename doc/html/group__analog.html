@@ -96,23 +96,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga829091330473b48a8b9236d0be4b8755"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755">adcReadAllChannels</a> ()</td></tr>
-<tr class="memdesc:ga829091330473b48a8b9236d0be4b8755"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Call adcReadAllChannels() in updateControl() and the results for each channel will be available by ca...">adcReadAllChannels()</a> in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> and the results for each channel will be available by calling adcGetResult(channel_num) next time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> runs.  <a href="#ga829091330473b48a8b9236d0be4b8755"></a><br/></td></tr>
-<tr class="memitem:ga1d1ee9fa143c3a0505e76b41fc2af09f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga1d1ee9fa143c3a0505e76b41fc2af09f">adcGetResult</a> (unsigned char channel_num)</td></tr>
-<tr class="memdesc:ga1d1ee9fa143c3a0505e76b41fc2af09f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This returns the most recent analog reading for the specified channel.  <a href="#ga1d1ee9fa143c3a0505e76b41fc2af09f"></a><br/></td></tr>
-<tr class="memitem:gaf46803d06aa1d839192cc6125e39ff01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gaf46803d06aa1d839192cc6125e39ff01">setupFastAnalogRead</a> ()</td></tr>
-<tr class="memdesc:gaf46803d06aa1d839192cc6125e39ff01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in unmodified Arduino to 15 microseconds for a dependable analogRead().  <a href="#gaf46803d06aa1d839192cc6125e39ff01"></a><br/></td></tr>
 <tr class="memitem:gac9b066c792d2b822dcf518eef19a7c3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e">adcEnableInterrupt</a> ()</td></tr>
 <tr class="memdesc:gac9b066c792d2b822dcf518eef19a7c3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call this in setup() to enable reading analog inputs in the background while audio generating continues.  <a href="#gac9b066c792d2b822dcf518eef19a7c3e"></a><br/></td></tr>
-<tr class="memitem:gae0d3533acb5fd56db8f7317e24bea6b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gae0d3533acb5fd56db8f7317e24bea6b5">adcSetChannel</a> (unsigned char pin)</td></tr>
-<tr class="memdesc:gae0d3533acb5fd56db8f7317e24bea6b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the channel or pin for the next analog input to be read from.  <a href="#gae0d3533acb5fd56db8f7317e24bea6b5"></a><br/></td></tr>
-<tr class="memitem:ga8e081d7e359e219b7dce35538fcf3e39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39">adcStartConversion</a> (unsigned char pin)</td></tr>
-<tr class="memdesc:ga8e081d7e359e219b7dce35538fcf3e39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts an analog to digital conversion of the voltage at a specified pin.  <a href="#ga8e081d7e359e219b7dce35538fcf3e39"></a><br/></td></tr>
-<tr class="memitem:gac3d2277d3d3823c6d5c727067571aab3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac3d2277d3d3823c6d5c727067571aab3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gac3d2277d3d3823c6d5c727067571aab3">adcStartConversion</a> ()</td></tr>
-<tr class="memdesc:gac3d2277d3d3823c6d5c727067571aab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the analog conversion on the pin or channel most recently set with <a class="el" href="group__analog.html#gae0d3533acb5fd56db8f7317e24bea6b5" title="Set the channel or pin for the next analog input to be read from.">adcSetChannel()</a>;. <br/></td></tr>
-<tr class="memitem:gaaf4320d2621e15ea704900ea26a8aa07"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07">adcGetResult</a> ()</td></tr>
-<tr class="memdesc:gaaf4320d2621e15ea704900ea26a8aa07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for the result of the most recent <a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion()</a>.  <a href="#gaaf4320d2621e15ea704900ea26a8aa07"></a><br/></td></tr>
+<tr class="memitem:gaf46803d06aa1d839192cc6125e39ff01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gaf46803d06aa1d839192cc6125e39ff01">setupFastAnalogRead</a> ()</td></tr>
+<tr class="memdesc:gaf46803d06aa1d839192cc6125e39ff01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in unmodified Arduino to 15 microseconds for a dependable analogRead().  <a href="#gaf46803d06aa1d839192cc6125e39ff01"></a><br/></td></tr>
 <tr class="memitem:gad4433797b75fedd473250e9aa414dcae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gad4433797b75fedd473250e9aa414dcae">disconnectDigitalIn</a> (byte channel_num)</td></tr>
 <tr class="memdesc:gad4433797b75fedd473250e9aa414dcae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepare an analog input channel by turning off its digital input buffer.  <a href="#gad4433797b75fedd473250e9aa414dcae"></a><br/></td></tr>
 <tr class="memitem:gacd83735876cf223916ea4925ec4efd4a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gacd83735876cf223916ea4925ec4efd4a">reconnectDigitalIn</a> (byte channel_num)</td></tr>
@@ -122,6 +109,19 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <tr class="memitem:gabad497d1f8c8026e81849be0b65bf38f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gabad497d1f8c8026e81849be0b65bf38f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gabad497d1f8c8026e81849be0b65bf38f">adcReconnectAllDigitalIns</a> ()</td></tr>
 <tr class="memdesc:gabad497d1f8c8026e81849be0b65bf38f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reconnect the digital input buffers for analog input channels which have been set for analog input with <a class="el" href="group__analog.html#gad4433797b75fedd473250e9aa414dcae" title="Prepare an analog input channel by turning off its digital input buffer.">disconnectDigitalIn()</a>. <br/></td></tr>
+<tr class="memitem:gae0d3533acb5fd56db8f7317e24bea6b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gae0d3533acb5fd56db8f7317e24bea6b5">adcSetChannel</a> (unsigned char pin)</td></tr>
+<tr class="memdesc:gae0d3533acb5fd56db8f7317e24bea6b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the channel or pin for the next analog input to be read from.  <a href="#gae0d3533acb5fd56db8f7317e24bea6b5"></a><br/></td></tr>
+<tr class="memitem:ga8e081d7e359e219b7dce35538fcf3e39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39">adcStartConversion</a> (unsigned char pin)</td></tr>
+<tr class="memdesc:ga8e081d7e359e219b7dce35538fcf3e39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts an analog to digital conversion of the voltage at a specified pin.  <a href="#ga8e081d7e359e219b7dce35538fcf3e39"></a><br/></td></tr>
+<tr class="memitem:gac3d2277d3d3823c6d5c727067571aab3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac3d2277d3d3823c6d5c727067571aab3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gac3d2277d3d3823c6d5c727067571aab3">adcStartConversion</a> ()</td></tr>
+<tr class="memdesc:gac3d2277d3d3823c6d5c727067571aab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the analog conversion on the pin or channel most recently set with <a class="el" href="group__analog.html#gae0d3533acb5fd56db8f7317e24bea6b5" title="Set the channel or pin for the next analog input to be read from.">adcSetChannel()</a>;. <br/></td></tr>
+<tr class="memitem:gaaf4320d2621e15ea704900ea26a8aa07"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07">adcGetResult</a> ()</td></tr>
+<tr class="memdesc:gaaf4320d2621e15ea704900ea26a8aa07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for the result of the most recent <a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion()</a>.  <a href="#gaaf4320d2621e15ea704900ea26a8aa07"></a><br/></td></tr>
+<tr class="memitem:ga1d1ee9fa143c3a0505e76b41fc2af09f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga1d1ee9fa143c3a0505e76b41fc2af09f">adcGetResult</a> (unsigned char channel_num)</td></tr>
+<tr class="memdesc:ga1d1ee9fa143c3a0505e76b41fc2af09f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This returns the most recent analog reading for the specified channel.  <a href="#ga1d1ee9fa143c3a0505e76b41fc2af09f"></a><br/></td></tr>
+<tr class="memitem:ga829091330473b48a8b9236d0be4b8755"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755">adcReadAllChannels</a> ()</td></tr>
+<tr class="memdesc:ga829091330473b48a8b9236d0be4b8755"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Call adcReadAllChannels() in updateControl() and the results for each channel will be available by ca...">adcReadAllChannels()</a> in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> and the results for each channel will be available by calling adcGetResult(channel_num) next time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> runs.  <a href="#ga829091330473b48a8b9236d0be4b8755"></a><br/></td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
 <a class="anchor" id="ga5042e7c576dd0307be38eb70efdb69fe"></a>
@@ -141,7 +141,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <p>Prepare all analog input channels by turning off their digital input buffers. </p>
 <p>This helps to reduce noise, increase analog reading speed, and save power. </p>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00251">251</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00186">186</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -167,7 +167,32 @@ Don't use <a class="el" href="group__analog.html#gaf46803d06aa1d839192cc6125e39f
 <dd>
 In some cases this method can cause glitches which may have to do with the ADC interrupt interfering with the audio or control interrupts. If this occurs, use the <a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion()</a>, <a class="el" href="group__analog.html#ga1d1ee9fa143c3a0505e76b41fc2af09f" title="This returns the most recent analog reading for the specified channel.">adcGetResult()</a> methods instead. </dd></dl>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00041">41</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00036">36</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gaaf4320d2621e15ea704900ea26a8aa07"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="group__analog.html#ga1d1ee9fa143c3a0505e76b41fc2af09f">adcGetResult</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Waits for the result of the most recent <a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion()</a>. </p>
+<p>If used as the first function of <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, to receive the result of <a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion()</a> from the end of the last <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, there will probably be no waiting time, as the ADC conversion will have happened in between interrupts. This is a big time-saver, since you don't have to waste time waiting for analogRead() to return (1us here vs 105 us for standard Arduino). </p>
+<dl class="section return"><dt>Returns:</dt><dd>The resut of the most recent <a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion()</a>. </dd></dl>
+<dl class="section note"><dt>Note:</dt><dd>This is the most audio-friendly way to read analog inputs, but can be messier in your program than the the <a class="el" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">adcEnableInterrupt()</a>, <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Call adcReadAllChannels() in updateControl() and the results for each channel will be available by ca...">adcReadAllChannels()</a>, adcGetResult(byte) way. </dd>
+<dd>
+Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> with CONTROL_RATE 64. </dd></dl>
+
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00145">145</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -193,36 +218,11 @@ In some cases this method can cause glitches which may have to do with the ADC i
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note:</dt><dd>The adcEnableInterrupt(), <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Call adcReadAllChannels() in updateControl() and the results for each channel will be available by ca...">adcReadAllChannels()</a>, <a class="el" href="group__analog.html#ga1d1ee9fa143c3a0505e76b41fc2af09f" title="This returns the most recent analog reading for the specified channel.">adcGetResult()</a> approach is currently set to work with all channels on each kind of board. You can change the number of channels to use in <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a> by editing NUM_ANALOG_INPUTS if desired. </dd>
+<dl class="section note"><dt>Note:</dt><dd>The <a class="el" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">adcEnableInterrupt()</a>, <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Call adcReadAllChannels() in updateControl() and the results for each channel will be available by ca...">adcReadAllChannels()</a>, <a class="el" href="group__analog.html#ga1d1ee9fa143c3a0505e76b41fc2af09f" title="This returns the most recent analog reading for the specified channel.">adcGetResult()</a> approach is currently set to work with all channels on each kind of board. You can change the number of channels to use in <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a> by editing NUM_ANALOG_INPUTS if desired. </dd>
 <dd>
 In some cases this method can cause glitches which may have to do with the ADC interrupt interfering with the audio or control interrupts. </dd></dl>
 
 <p>Definition at line <a class="el" href="adc__all__channels_8cpp_source.html#l00066">66</a> of file <a class="el" href="adc__all__channels_8cpp_source.html">adc_all_channels.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="gaaf4320d2621e15ea704900ea26a8aa07"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int <a class="el" href="group__analog.html#ga1d1ee9fa143c3a0505e76b41fc2af09f">adcGetResult</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Waits for the result of the most recent <a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion()</a>. </p>
-<p>If used as the first function of <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, to receive the result of <a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion()</a> from the end of the last <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, there will probably be no waiting time, as the ADC conversion will have happened in between interrupts. This is a big time-saver, since you don't have to waste time waiting for analogRead() to return (1us here vs 105 us for standard Arduino). </p>
-<dl class="section return"><dt>Returns:</dt><dd>The resut of the most recent <a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion()</a>. </dd></dl>
-<dl class="section note"><dt>Note:</dt><dd>This is the most audio-friendly way to read analog inputs, but can be messier in your program than the the <a class="el" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">adcEnableInterrupt()</a>, <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Call adcReadAllChannels() in updateControl() and the results for each channel will be available by ca...">adcReadAllChannels()</a>, adcGetResult(byte) way. </dd>
-<dd>
-Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> with CONTROL_RATE 64. </dd></dl>
-
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00178">178</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -245,7 +245,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
 <p>More detail: <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Call adcReadAllChannels() in updateControl() and the results for each channel will be available by ca...">adcReadAllChannels()</a> starts an initial conversion which triggers an interrupt when it's complete. The interrupt code stores the result in an array, changes to the next channel and starts another conversion. When all the channels have been sampled, the ISR doesn't start a new conversion, so it doesn't re-trigger itself or use processor time until <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Call adcReadAllChannels() in updateControl() and the results for each channel will be available by ca...">adcReadAllChannels()</a> is called again. At any time the latest conversion result for each channel is available by calling adcGetResult(channel_num). </p>
 <dl class="section note"><dt>Note:</dt><dd>In some cases this method can cause glitches which may have to do with the ADC interrupt interfering with the audio or control interrupts. </dd></dl>
 
-<p>Definition at line <a class="el" href="adc__all__channels_8cpp_source.html#l00044">44</a> of file <a class="el" href="adc__all__channels_8cpp_source.html">adc_all_channels.cpp</a>.</p>
+<p>Definition at line <a class="el" href="adc__all__channels_8cpp_source.html#l00054">54</a> of file <a class="el" href="adc__all__channels_8cpp_source.html">adc_all_channels.cpp</a>.</p>
 
 </div>
 </div>
@@ -272,7 +272,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00056">56</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00046">46</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -281,7 +281,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39">adcStartConversion</a> </td>
+          <td class="memname">void <a class="el" href="group__analog.html#gac3d2277d3d3823c6d5c727067571aab3">adcStartConversion</a> </td>
           <td>(</td>
           <td class="paramtype">unsigned char&#160;</td>
           <td class="paramname"><em>pin</em></td><td>)</td>
@@ -303,7 +303,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
 <dd>
 Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> with CONTROL_RATE 64. </dd></dl>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00111">111</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00089">89</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -335,7 +335,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00232">232</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00176">176</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -362,7 +362,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00242">242</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00181">181</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -383,7 +383,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
 <p>Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in unmodified Arduino to 15 microseconds for a dependable analogRead(). </p>
 <p>Put this in setup() if you intend to use analogRead() with Mozzi, to avoid glitches. Don't use it with the <a class="el" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">adcEnableInterrupt()</a>, <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Call adcReadAllChannels() in updateControl() and the results for each channel will be available by ca...">adcReadAllChannels()</a>, <a class="el" href="group__analog.html#ga1d1ee9fa143c3a0505e76b41fc2af09f" title="This returns the most recent analog reading for the specified channel.">adcGetResult()</a> approach, it may contribute to glitches. See: <a href="http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11,">http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11,</a> and <a href="http://www.marulaberry.co.za/index.php/tutorials/code/arduino-adc/">http://www.marulaberry.co.za/index.php/tutorials/code/arduino-adc/</a> </p>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00018">18</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00027">27</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -391,7 +391,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 1 2013 15:27:40 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 1 2013 21:29:19 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

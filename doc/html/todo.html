@@ -96,11 +96,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <dd>Test whether using the template parameter makes any difference to speed, and rationalise which units which do and don't need them. Template objects are messy when you try to use pointers to them, you have to include the whole template shebang in the pointer handling.  </dd>
 <dt><a class="anchor" id="_todo000002"></a>Member <a class="el" href="class_a_d_s_r.html#af6cac55fb97760fffc885507f5d969d2">ADSR&lt; CONTROL_UPDATE_RATE &gt;::noteOff</a>  ()</dt>
 <dd>fix release for rate rather than steps (time), so it releases at the same rate whatever the current level.  </dd>
-<dt><a class="anchor" id="_todo000009"></a>Member <a class="el" href="group__core.html#ga5b972bafb3267e820993812beca1b298">AUDIO_RATE</a>  </dt>
+<dt><a class="anchor" id="_todo000007"></a>Member <a class="el" href="group__core.html#ga5b972bafb3267e820993812beca1b298">AUDIO_RATE</a>  </dt>
 <dd><p class="startdd">Possible option for output to R/2R DAC circuit, like <a href="http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/">http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/</a> This would limit dynamic range to 8 bit, but would remove the 16384Hz pwm carrier frequency noise which can be a problem in some applications, requiring filtering to remove (see the Mozzi wiki for filter schematics). </p>
 <p class="enddd">Test 32768Hz audio rate option properly  </p>
 </dd>
-<dt><a class="anchor" id="_todo000007"></a>Member <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d">audioHook</a>  ()</dt>
+<dt><a class="anchor" id="_todo000009"></a>Member <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d">audioHook</a>  ()</dt>
 <dd>Try pre-decrement positions and swap gap calc around  </dd>
 <dt><a class="anchor" id="_todo000003"></a>Member <a class="el" href="class_event_delay.html#aa2a731ceb05f95cac1798089448c6aed">EventDelay&lt; UPDATE_RATE &gt;::start</a>  ()</dt>
 <dd>have a parameter to set whether it's single or repeating, so start doesn't have to be called for repeats. Pro: simpler user programming. Con: would require an if..then every time ready() is called.  </dd>
@@ -129,7 +129,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 1 2013 15:27:40 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 1 2013 21:29:19 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

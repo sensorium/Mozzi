@@ -35,7 +35,6 @@ class WaveShaper
 ;
 
 
-
 /** char specialisation of WaveShaper template*/
 template <>
 class WaveShaper < char>
@@ -44,7 +43,8 @@ class WaveShaper < char>
 public:
 	/** Constructor. Use the template parameter to set type of numbers being mapped. For
 	example, WaveShaper <int> myWaveShaper; makes a WaveShaper which uses ints.
-	@tparam TABLE_NAME the name of the table being used, which can be found in the
+	@tparam T the type of numbers being input to be shaped, chosen to match the table.
+	@param TABLE_NAME the name of the table being used, which can be found in the
 	".h" file containing the table. */
 	WaveShaper(const char  * TABLE_NAME):table(TABLE_NAME)
 	{
@@ -53,8 +53,8 @@ public:
 
 
 	/** Maps input to output, transforming it according to the table being used.
-	@tparam in the input signal. For flexibility, it's up to you to give the correct offset
-	to your input signal. So if you'r mapping a signed 8-bit signal (such as the output of
+	@param in the input signal. For flexibility, it's up to you to give the correct offset
+	to your input signal. So if you're mapping a signed 8-bit signal (such as the output of
 	an Oscil) into a 256 cell table centred around cell 128, add 128 to offset the
 	input value.
 	@return the shaped signal.
@@ -79,7 +79,8 @@ class WaveShaper <int>
 public:
 	/** Constructor. Use the template parameter to set type of numbers being mapped. For
 	example, WaveShaper <int> myWaveShaper; makes a WaveShaper which uses ints.
-	@tparam TABLE_NAME the name of the table being used, which can be found in the
+	@tparam T the type of numbers being input to be shaped, chosen to match the table.
+	@param TABLE_NAME the name of the table being used, which can be found in the
 	".h" file containing the table. */
 	WaveShaper(const int __attribute__((progmem)) * TABLE_NAME):table(TABLE_NAME)
 	{
@@ -88,8 +89,8 @@ public:
 
 
 	/** Maps input to output, transforming it according to the table being used.
-	@tparam in the input signal. For flexibility, it's up to you to give the
-	correct offset to your input signal. So if you'r mapping a signed 9-bit signal
+	@param in the input signal. For flexibility, it's up to you to give the
+	correct offset to your input signal. So if you're mapping a signed 9-bit signal
 	(such as the sum of 2 8-bit Oscils) into a 512 cell table centred around
 	cell 256, add 256 to offset the input value. With a sigmoid table, this
 	may be useful for compressing a bigger signal into the -244 to 243

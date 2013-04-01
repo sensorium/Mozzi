@@ -36,6 +36,9 @@
 #include "mozzi_analog.h"					// otherwise set it false, to save resources
 #endif
 
+// this makes doxygen document the #defines in this file
+/** @file */
+
 /** @mainpage Welcome
 
 The latest version of Mozzi and this documentation are at the <a href="http://sensorium.github.com/Mozzi/">Mozzi home page.</a>
@@ -153,6 +156,7 @@ x................9..........10...............Boarduino  \n
 
 
 /** @ingroup core
+\def AUDIO_RATE
 AUDIO_RATE is fixed at 16384 Hz for now. For Mozzi's original audio mode, now
 called STANDARD, this was a compromise between the sample rate (interrupt rate)
 and sample bitdepth (pwm width), which are interdependent due to the way pulse

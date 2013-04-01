@@ -26,7 +26,7 @@
 //#include "mozzi_utils.h"
 
 /*
-Section 12.7.4:
+ATmega328 technical manual, Section 12.7.4:
 The dual-slope operation [of phase correct pwm] has lower maximum operation
 frequency than single slope operation. However, due to the symmetric feature
 of the dual-slope PWM modes, these modes are preferred for motor control
@@ -48,13 +48,13 @@ PWM frequency tests
 */
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------
 // ring buffer for audio output
 #define BUFFER_NUM_CELLS 256
 static unsigned int output_buffer[BUFFER_NUM_CELLS];
 static volatile unsigned long output_buffer_tail; // shared by audioHook() (in loop()), and outputAudio() (in audio interrupt), where it is changed
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------
 
 #if USE_AUDIO_INPUT
 #include "Arduino.h"
@@ -74,7 +74,7 @@ static int audio_input; // holds the latest audio from input_buffer
 
 /** @ingroup analog
 This returns audio input from the input buffer, if 
-"/#define USE_AUDIO_INPUT true" is in the Mozzi/mozzi_config.h file.
+"#define USE_AUDIO_INPUT true" is in the Mozzi/mozzi_config.h file.
 Audio input is currently restricted to analog pin 0 (this may change in future).
 The audio signal needs to be in the range 0 to 5 volts.  
 Circuits and discussions about biasing a signal
@@ -113,7 +113,7 @@ ISR(ADC_vect, ISR_BLOCK)
 /** @ingroup core
 This is required in Arduino's loop(). If there is room in Mozzi's output buffer,
 audioHook() calls updateAudio() once and puts the result into the output
-buffer.  Also, if /#define USE_AUDIO_INPUT true is in Mozzi/mozzi_config.h,
+buffer.  Also, if \#define USE_AUDIO_INPUT true is in Mozzi/mozzi_config.h,
 audioHook() takes care of moving audio input from the input buffer so it can be
 accessed with getAudioInput() in your updateAudio() routine.
 If other functions are called in loop() along with audioHook(), see if
@@ -152,7 +152,7 @@ void audioHook() // 2us excluding updateAudio()
 }
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------
 #if (AUDIO_MODE == STANDARD)
 
 static void startAudioStandard9bitPwm(){
@@ -181,7 +181,7 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK) {
 }
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------
 #elif (AUDIO_MODE == HIFI)
 
 /* set up Timer 2 using modified FrequencyTimer2 library */
@@ -242,7 +242,7 @@ void dummy_function(void)
 #endif
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------
 
 /* Sets up Timer 0 for control interrupts. This is the same for all output
 options Using Timer0 for control disables Arduino's time functions but also
@@ -275,11 +275,11 @@ depends on how busy the processor is, and you might need to do some tests to
 find the best setting. 
 
 It's good to define CONTROL_RATE in your
-sketches (eg. "#define CONTROL_RATE 128") because the literal numeric value is
+sketches (eg. \#define CONTROL_RATE 128) because the literal numeric value is
 necessary for Oscils to work properly, and it also helps to keep the
 calculations in your sketch clear.
 
-@todo See if there is any advantage to using 8 bit full port, without pwm, with a resistor ladder (maybe use readymade resistor networks).
+@todo See if there is any advantage to using 8 bit port, without pwm, with a resistor ladder (maybe use readymade resistor networks).
 */
 void startMozzi(unsigned int control_rate_hz)
 {

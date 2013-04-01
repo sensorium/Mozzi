@@ -11,7 +11,7 @@
  *  setupFastAnalogRead() is enough to prevent
  *  glitching during analogRead().
  *
- *  Mozzi also provides startAnalogRead() and receiveAnalogRead(),
+ *  Mozzi also provides adcStartConversion() and adcGetResult(),
  *  which enable reading analog input one channel at a time without 
  *  blocking other processes.  
  *  (Though in most cases the asynchronous adcGetResult() method is probably simpler and better).

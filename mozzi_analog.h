@@ -20,8 +20,6 @@ void adcReconnectAllDigitalIns();
 void adcSetChannel(unsigned char pin);
 void adcStartConversion();
 void adcStartConversion(unsigned char pin);
-//void startAnalogRead(unsigned char pin);
-//int receiveAnalogRead();
 int adcGetResult();
 
 /*
@@ -35,10 +33,13 @@ operation). There is a fork of Mozzi on github (posted on the mozzi-users list)
 which includes a 2-wire async serial adaptation. It would be good eventually to
 merge that with the main repo.
 */
-#if !USE_AUDIO_INPUT
+// these are in adc_all_channels.cpp with the ISR(ADC_vect) they work with.  The ISR needs to
+// hide from the compiler if USE_AUDIO_INPUT is true, which also uses ISR(ADC_vect).
+// They could have been conditionally compiled together in the one ISR, but this is slightly 
+// less messy and allows for some static variables which would otherwise have had to have been global.
 void adcReadAllChannels();
 int adcGetResult(unsigned char channel_num);
-#endif
+
 
 
 // hack for Teensy 2 (32u4), pasted from hardware/arduino/variants/leonardo/pins_arduino.h

@@ -222,8 +222,8 @@ adcReadAllChannels	KEYWORD2
 adcGetResult	KEYWORD2
 adcSetChannel	KEYWORD2
 
-//startAnalogRead	KEYWORD2
-//receiveAnalogRead	KEYWORD2
+//adcStartConversion	KEYWORD2
+//adcGetResult	KEYWORD2
 
 adcSetChannel	KEYWORD2
 adcStartConversion	KEYWORD2

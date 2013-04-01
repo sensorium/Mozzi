@@ -2,9 +2,9 @@
 #include "mozzi_analog.h"
 #include "Arduino.h"
 
-static unsigned char analog_reference = DEFAULT;
+//static unsigned char analog_reference = DEFAULT;
 
-///approach 1: just make analogRead faster //////////////////////////////////////////////////////////////////////////////////
+//approach 1: just make analogRead faster //------------------------------------------------------------------------
 
 /** @ingroup analog
 Make analogRead() faster than the standard Arduino version, changing the
@@ -32,11 +32,11 @@ available by calling adcGetResult(channel_num) next time updateControl() runs.
 efficient way to read analog inputs while generating sound with Mozzi. For many
 sketches, however, simply putting setupFastAnalogRead() in setup() and calling
 Arduino's usual analogRead() will work fast enough.
-@note DON"T USE setupFastAnalogRead() with adcEnableInterrupt.
+@note Don't use setupFastAnalogRead() with adcEnableInterrupt().
 It may cause the ADC process to hog the processor, causing audio glitches.
 @note In some cases this method can cause glitches which may have to do with the ADC
 interrupt interfering with the audio or control interrupts. If this occurs, use
-the startAnalogRead(), receiveAnalogRead() methods instead.
+the adcStartConversion(), adcGetResult() methods instead.
 */
 void adcEnableInterrupt(){
 	// The only difference between this and vanilla arduino is ADIE, enable ADC interrupt.
@@ -45,11 +45,12 @@ void adcEnableInterrupt(){
 }
 
 
-///approach 3: startAnalogRead(), receiveAnalogRead(), read one channel at a time in the background///////
+//-----------------------------------------------------------------------------------------------------------------
+//approach2: adcStartConversion(), adcGetResult(), read one channel at a time in the background
 
 /** @ingroup analog
 Set the channel or pin for the next analog input to be read from.
-@param channel or pin number.  If pin number is provided, adcSetChannel will convert it to the channel number.
+@param channel or pin number.  If pin number is provided, adcSetChannel() will convert it to the channel number.
 */
 
 void adcSetChannel(unsigned char pin)
@@ -87,19 +88,18 @@ void adcSetChannel(unsigned char pin)
 	// to 0 (the default).
 #if defined(ADMUX)
 
-	ADMUX = (analog_reference << 6) | (pin & 0x07);
+	ADMUX = (1 << REFS0) | (pin & 0x07);
 #endif
 }
 
 /** @ingroup analog
-Starts an analog-to-digital conversion of the voltage at a specified pin.  Unlike
+Starts an analog to digital conversion of the voltage at a specified pin.  Unlike
 Arduino's analogRead() function which waits until a conversion is complete before
-returning, startAnalogRead() only sets the conversion to begin, so you can use
-the cpu for other things and call for the result later with receiveAnalogRead().
-This works well in updateControl(), where you can call startAnalogRead() and
-get the result with receiveAnalogRead() the next time the updateControl()
+returning, adcStartConversion() only sets the conversion to begin, so you can use
+the cpu for other things and call for the result later with adcGetResult().
+This works well in updateControl(), where you can call adcStartConversion() and
+get the result with adcGetResult() the next time the updateControl()
 interrupt runs.
-This technique should also be suitable for audio-rate sampling of a single channel in updateAudio() calls.
 @param pin is the analog pin number (A0 to A...) or the channel number (0 to ....) to read.
 @note This is the most audio-friendly way to read analog inputs,
 but can be messier in your program than the the adcEnableInterrupt(), adcReadAllChannels(), adcGetResult() way.
@@ -143,7 +143,7 @@ void adcStartConversion(unsigned char pin)
 	// to 0 (the default).
 #if defined(ADMUX)
 
-	ADMUX = (analog_reference << 6) | (pin & 0x07);
+	ADMUX = (1 << REFS0) | (pin & 0x07);
 #endif
 
 	// without a delay, we seem to read from the wrong channel
@@ -165,17 +165,16 @@ void adcStartConversion()
 
 
 /** @ingroup analog
-Waits for the result of the most recent startAnalogRead().  If used as the first function
-of updateControl(), to receive the result of startAnalogRead() from the end of the last
+Waits for the result of the most recent adcStartConversion().  If used as the first function
+of updateControl(), to receive the result of adcStartConversion() from the end of the last
 updateControl(), there will probably be no waiting time, as the ADC conversion will
 have happened in between interrupts.  This is a big time-saver, since you don't have to
 waste time waiting for analogRead() to return (1us here vs 105 us for standard Arduino).
-@return The resut of the most recent startAnalogRead().
+@return The resut of the most recent adcStartConversion().
 @note This is the most audio-friendly way to read analog inputs,
 but can be messier in your program than the the adcEnableInterrupt(), adcReadAllChannels(), adcGetResult(byte) way.
 @note Timing: about 1us when used in updateControl() with CONTROL_RATE 64.
 */
-//int receiveAnalogRead()
 int adcGetResult()
 {
 	//unsigned char low, high;
@@ -205,7 +204,7 @@ int adcGetResult()
 }
 
 
-///useful for all approaches////////////////////////////////////////////////////////////////////////////////////////////
+//useful for all approaches////////////////////////////////////////////////////////////////////////////////////////////
 
 /**  @ingroup analog
 Prepare an analog input channel by turning off its digital input buffer.

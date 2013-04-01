@@ -1,12 +1,14 @@
 #include "mozzi_analog.h"
 
-#if ADC_ALL_CHANNELS
-#include "Arduino.h"
+//approach 3: adcEnableInterrupt(), adcReadAllChannels(), adcGetResult(), read all channels in background
+
 /*
 Programming note:
-This is a separate file from mozzi_analog
+This is a separate file from mozzi_analog to avoid multiple definitions of the ISR(ADC_vect),
+which is also in Mozziguts.cpp to handle audio input buffering.  It's an untidy solution.
+Could the modules be better organised as classes?
 */
-///approach 2: adcEnableInterrupt(), adcReadAllChannels(), adcGetResult(), read all channels in background //////////////////////////////
+
 /*
 This code is based on discussion between jRaskell, bobgardner, theusch, Koshchi, and code by jRaskell. 
 http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=789581
@@ -24,10 +26,10 @@ static volatile boolean readComplete = false;
 
 
 /** @ingroup analog
-Call adcReadAllChannels() in updateControl() and the reading will happen in the
-background, using a minimum of processor time and without blocking other code.
-The results for each analog channel are available by calling
-adcGetResult(channel_num) next time updateControl() runs.
+Call adcReadAllChannels() in updateControl() and the results for each channel
+will be available by calling adcGetResult(channel_num) next time updateControl()
+runs. Reading will happen in the background, using a minimum of processor time
+and without blocking other code.
 
 More detail: adcReadAllChannels() starts an initial conversion which triggers an
 interrupt when it's complete. The interrupt code stores the result in an array,
@@ -48,7 +50,6 @@ void adcReadAllChannels(){
 	 ADCSRA |= (1 << ADSC);
 	 */
 	adcStartConversion(current_adc);
-	//startAnalogRead(current_adc);
 }
 
 /** @ingroup analog
@@ -56,7 +57,7 @@ This returns the most recent analog reading for the specified channel.
 @param channel_num The channels are plain numbers 0 to whatever your board goes up to, not the pin
 labels A0 to A... which Arduino maps to different numbers depending on the board
 being used.
-@note The InitADC(), adcReadAllChannels(), adcGetResult() approach is currently set to work with
+@note The adcEnableInterrupt(), adcReadAllChannels(), adcGetResult() approach is currently set to work with
 all channels on each kind of board. You can change the number of channels to use in
 mozzi_analog.cpp by editing NUM_ANALOG_INPUTS if desired.
 @note In some cases this method can cause glitches which may have to do with the ADC interrupt
@@ -66,7 +67,8 @@ int adcGetResult(unsigned char channel_num){
 	return sensors[channel_num];
 }
 
-
+#if ADC_ALL_CHANNELS
+#include "Arduino.h"
 /* This is called with when the adc finishes a conversion.
 It puts the new reading into the sensors array and starts a new reading on the next channel.
 */
@@ -90,7 +92,6 @@ ISR(ADC_vect, ISR_BLOCK)
 			//ADCSRA |= (1 << ADSC);
 			
 			adcStartConversion(current_adc);
-			//startAnalogRead(current_adc);
 		}
 		secondRead = false;
 	}
@@ -99,5 +100,6 @@ ISR(ADC_vect, ISR_BLOCK)
 		ADCSRA |= (1 << ADSC);
 	}
 }
+
 #endif
 

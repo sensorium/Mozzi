@@ -13,7 +13,8 @@ amplitude of direct input to the delay as well as the feedback, without losing
 precision. Output is only the delay line signal. If you want to mix the delay
 with the input, do it in your sketch. AudioDelayFeedback uses more processing
 than a plain AudioDelay, but allows for more dramatic effects with feedback.
-@todo sub-sample delay times, just using linear interpolation of adacent cells
+For smoother transitions between delay times, use AudioDelFbLInterp, which is
+like AudioDelayFeedback with the addition of linear interpolation between delay times.
 */
 
 template <unsigned int NUM_BUFFER_SAMPLES>
@@ -97,6 +98,43 @@ public:
 		return delay_sig;
 	}
 
+	
+	
+	/** Input a value to the delay and retrieve the signal in the delay line at the fractional position delaytime_cells,
+	updating all positions and feedback from the output to the input.
+	@param in_value the signal input.
+	@param delaytime_cells is a fractional number to set the delay time in terms of cells
+	or partial cells in the delay buffer. It doesn't change the stored internal
+	value of _delaytime_cells.
+	*/
+	// 4us 
+
+	inline
+	int next(char in_value, Q16n16 delaytime_cells)
+	{
+		//setPin13High();
+		++write_pos &= (NUM_BUFFER_SAMPLES - 1);
+		unsigned int index = delaytime_cells >> 16;
+		unsigned int fraction = (unsigned int) delaytime_cells; // keeps low word
+
+		unsigned int read_pos1 = (write_pos - index) & (NUM_BUFFER_SAMPLES - 1);
+		int delay_sig1 = delay_array[read_pos1];								// read the delay buffer
+
+		unsigned int read_pos2 = (write_pos - (index+1)) & (NUM_BUFFER_SAMPLES - 1);
+		int delay_sig2 = delay_array[read_pos2];								// read the delay buffer
+		
+		int difference = delay_sig2 - delay_sig1;
+		int delay_sig_fraction = ((long) fraction * difference) >> 16;
+		
+		int delay_sig = delay_sig1+delay_sig_fraction;
+
+		char feedback_sig = (char) min(max(((delay_sig * _feedback_level)>>7),-128),127); // feedback clipped
+		delay_array[write_pos] = (int) in_value + feedback_sig;					// write to buffer
+		//setPin13Low();
+		return delay_sig;
+	}
+
+	
 	
 	/** Input a value to the delay but don't change the read position or retrieve the output signal.
 	@param in_value the signal input.

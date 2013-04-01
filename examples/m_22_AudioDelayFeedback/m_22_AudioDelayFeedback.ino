@@ -38,18 +38,26 @@ void setup(){
 }
 
 
+Q16n16 deltime;
+
+
 void updateControl(){
   // delay time range from 0 to 127 samples, @ 16384 samps per sec = 0 to 7 milliseconds
   //del_samps = 64+kDelSamps.next();
   
   // delay time range from 1 to 33 samples, @ 16384 samps per sec = 0 to 2 milliseconds
-  del_samps = 17+kDelSamps.next()/8; 
+  //del_samps = 17+kDelSamps.next()/8;
+  
+  deltime = Q8n0_to_Q16n16(17) + ((long)kDelSamps.next()<<12); 
+  
 }
+
 
 int updateAudio(){
   char asig = aTriangle.next(); // get this so it can be used twice without calling next() again
-  return asig/8 + aDel.next(asig, del_samps); // mix some straignt signal with the delayed signal
+  //return asig/8 + aDel.next(asig, del_samps); // mix some straignt signal with the delayed signal
   //return aDel.next(aTriangle.next(), del_samps); // instead of the previous 2 lines for only the delayed signal
+  return asig/8 + aDel.next(asig, deltime); // mix some straignt signal with the delayed signal
 }
 
 

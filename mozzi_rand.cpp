@@ -39,9 +39,9 @@ be different on each run of a sketch, by seeding with fairly random input, such
 as analogRead() on an unconnected pin (as explained in the Arduino documentation
 for randomSeed(). randSeed is the same as xorshift96Seed(), but easier to
 remember. 
-@param seed an int to use as a seed.
+@param seed a number to use as a seed.
 */
-void randSeed(unsigned long seed)
+void randSeed(long seed)
 {
 	x=seed;
 }
@@ -119,9 +119,9 @@ Initialises Mozzi's (pseudo)random number generator xorshift96(). This can be
 useful if you want random sequences to be different on each run of a sketch, by
 seeding with fairly random input, such as analogRead() on an unconnected pin (as
 explained in the Arduino documentation for randomSeed().
-@param seed an int to use as a seed.
+@param seed a number to use as a seed.
 */
-void xorshiftSeed(unsigned long seed)
+void xorshiftSeed(long seed)
 {
 	x=seed;
 }

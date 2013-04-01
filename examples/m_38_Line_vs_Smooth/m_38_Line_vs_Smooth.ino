@@ -61,7 +61,7 @@ Smooth <unsigned int> aSmooth(smoothness); // to smooth frequency for aSin1
 void setup(){
   aSin0.setFreq(660.f);
   aSin1.setFreq(220.f);
-  initADC(); // initialises an efficient way to read analog ins with getSensor() and startRead()
+  adcEnableInterrupt(); // initialises an efficient way to read analog ins with adcGetResult() and adcReadAllChannels()
   startMozzi(CONTROL_RATE);
 }
 
@@ -69,13 +69,13 @@ void setup(){
 volatile unsigned int freq1;  // global so it can be used in updateAudio, volatile to stop it getting changed while being used
 
 void updateControl(){
-  Q16n16 freq0 = Q16n0_to_Q16n16(getSensor(0)); // 0 to 1023, scaled up to Q16n16 format
-  freq1 = (unsigned int) getSensor(1); // 0 to 1023
-  startRead(); // go and collect new analog readings in the background, for next time around
+  Q16n16 freq0 = Q16n0_to_Q16n16(adcGetResult(0)); // 0 to 1023, scaled up to Q16n16 format
+  freq1 = (unsigned int) adcGetResult(1); // 0 to 1023
+  adcReadAllChannels(); // go and collect new analog readings in the background, for next time around
   aInterpolate.set(freq0, AUDIO_STEPS_PER_CONTROL);
 }
 
-int counter = 500;
+
 int updateAudio(){
   Q16n16 interpolatedFreq = aInterpolate.next(); // get the next linear interpolated freq
   aSin0.setFreq_Q16n16(interpolatedFreq); 

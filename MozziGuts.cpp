@@ -26,7 +26,7 @@
 //#include "mozzi_utils.h"
 
 /*
-Section 12.7.4:
+ATmega328 technical manual, Section 12.7.4:
 The dual-slope operation [of phase correct pwm] has lower maximum operation
 frequency than single slope operation. However, due to the symmetric feature
 of the dual-slope PWM modes, these modes are preferred for motor control
@@ -47,67 +47,122 @@ PWM frequency tests
 16384Hz single nearly 9 bits (original mode) not bad for a single pin, but carrier freq noise can be an issue
 */
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//-----------------------------------------------------------------------------------------------------------------
 // ring buffer for audio output
 #define BUFFER_NUM_CELLS 256
 static unsigned int output_buffer[BUFFER_NUM_CELLS];
+static volatile unsigned long output_buffer_tail; // shared by audioHook() (in loop()), and outputAudio() (in audio interrupt), where it is changed
 
-// shared by audioHook() (in loop()), and outputAudio() (in audio interrupt), where it is changed
-static volatile unsigned char num_out;
+//-----------------------------------------------------------------------------------------------------------------
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#if USE_AUDIO_INPUT
+#include "Arduino.h"
+#include "mozzi_analog.h"
 
-/** @ingroup core
-This is required in Arduino's loop(). If there is room in Mozzi's output buffer,
-audioHook() calls updateAudio() once and puts the result into the output
-buffer. If other functions are called in loop() along with audioHook(), see if
-they can be moved into updateControl(). Otherwise it may be most efficient to
-calculate a block of samples at a time by putting audioHook() in a loop of its
-own, rather than calculating only 1 sample for each time your other functions
-are called.
-@todo Try pre-decrement positions and swap gap calc around
-*/
+static void adcSetupAudioInput(){
+	adcEnableInterrupt();
+	setupFastAnalogRead();
+	adcSetChannel(0);
+}
 
-void audioHook()
+static volatile long input_gap;
+static volatile unsigned long input_buffer_head;
+static volatile int input_buffer[BUFFER_NUM_CELLS];
+static boolean do_update_audio;
+static int audio_input; // holds the latest audio from input_buffer
+
+
+int getAudioInput()
 {
-	static unsigned char num_in = 0;
-	unsigned int gap = num_in - num_out; // wraps to a big number if it's negative
+	return audio_input;
+}
 
-	if(gap < BUFFER_NUM_CELLS) // prevent writing over cells which haven't been output yet
-	{
-		output_buffer[num_in++] = (unsigned int) (updateAudio() + AUDIO_BIAS);
+
+/* Audio ISR. This is called with when the adc finishes a conversion.
+*/
+ISR(ADC_vect, ISR_BLOCK)
+{
+ // gets here about 16us after being set audio output isr
+	input_buffer_head++;
+	input_buffer[input_buffer_head & (BUFFER_NUM_CELLS-1)] = ADC; // put new data into input_buffer, don't worry about overwriting old, as guarding would also cause a glitch
+	if (input_gap > (BUFFER_NUM_CELLS/2)) {
+		do_update_audio = true;
+	}else{
+		do_update_audio = false;
 	}
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#endif
+
+
+
+void audioHook() // 2us excluding updateAudio()
+{
+	static unsigned long output_buffer_head = 0;
+	long output_gap = output_buffer_head - output_buffer_tail; // wraps to a big number if it's negative, and will take a long time to wrap
+
+#if USE_AUDIO_INPUT // 3us
+
+	static unsigned long input_buffer_tail =0;
+	input_gap = input_buffer_head - input_buffer_tail; // wraps to a big number if it's negative, and will take a long time to wrap
+	if ((output_gap < BUFFER_NUM_CELLS) && do_update_audio) {
+		input_buffer_tail++;
+		audio_input = input_buffer[input_buffer_tail & (BUFFER_NUM_CELLS-1)];
+
+#else
+
+	if(output_gap < BUFFER_NUM_CELLS) // prevent writing over cells which haven't been output yet
+	{
+		
+#endif
+		output_buffer_head++;
+		output_buffer[(unsigned char)output_buffer_head & (unsigned char)(BUFFER_NUM_CELLS-1)] = (unsigned int) (updateAudio() + AUDIO_BIAS);
+	}
+	
+
+}
+
+
+//-----------------------------------------------------------------------------------------------------------------
 #if (AUDIO_MODE == STANDARD)
 
 static void startAudioStandard9bitPwm(){
 	pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);	// set pin to output for audio
 	Timer1.initialize(1000000UL/AUDIO_RATE, PHASE_FREQ_CORRECT);		// set period, phase and frequency correct
 	//Serial.print("STANDARD Timer 1 period = "); Serial.println(Timer1.getPeriod()); // 976
-	
+
 	Timer1.pwm(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);		// pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
 	//Timer1.attachInterrupt(outputAudio); // TB 15-2-2013 Replaced this line with the ISR, saves some processor time
 	TIMSK1 = _BV(TOIE1); 	// Overflow Interrupt Enable (when not using Timer1.attachInterrupt())
+
+#if USE_AUDIO_INPUT
+	adcSetupAudioInput();
+#endif
 }
+
 
 /* Interrupt service routine moves sound data from the output buffer to the
 Arduino output register, running at AUDIO_RATE. */
 ISR(TIMER1_OVF_vect, ISR_BLOCK) {
-	AUDIO_CHANNEL_1_OUTPUT_REGISTER =  output_buffer[num_out++];
+#if USE_AUDIO_INPUT
+	sbi(ADCSRA, ADSC);				// start next adc conversion
+#endif
+	output_buffer_tail++;
+	AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer[(unsigned char)output_buffer_tail & (unsigned char)(BUFFER_NUM_CELLS-1)]; // 1us, 2.5us with longs
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//-----------------------------------------------------------------------------------------------------------------
 #elif (AUDIO_MODE == HIFI)
 
 /* set up Timer 2 using modified FrequencyTimer2 library */
 void dummy(){}
 static void setupTimer2(){
 	// audio output interrupt on timer 2, sets the pwm levels of timer 1
-	 FrequencyTimer2::setPeriod(2000000UL/16384); // gives a period half of what's provided, for some reason
-	 FrequencyTimer2::enable();
-	 FrequencyTimer2::setOnOverflow(dummy);
+	FrequencyTimer2::setPeriod(2000000UL/16384); // gives a period half of what's provided, for some reason
+	FrequencyTimer2::enable();
+	FrequencyTimer2::setOnOverflow(dummy);
 }
 
 
@@ -123,7 +178,11 @@ static void startAudioHiSpeed14bitPwm(){
 	Timer1.pwm(AUDIO_CHANNEL_1_LOWBYTE_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
 
 	// audio output interrupt on timer 2, sets the pwm levels of timer 1
-	 setupTimer2();
+	setupTimer2();
+
+#if USE_AUDIO_INPUT
+	adcSetupAudioInput();
+#endif
 }
 
 
@@ -136,6 +195,9 @@ ISR(TIMER2_COMP_vect)
 void dummy_function(void)
 #endif
 {
+#if USE_AUDIO_INPUT
+	sbi(ADCSRA, ADSC);				// start next adc conversion
+#endif
 	unsigned int out = output_buffer[num_out++];
 	// read about dual pwm at http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
 	// sketches at http://wiki.openmusiclabs.com/wiki/PWMDAC,  http://wiki.openmusiclabs.com/wiki/MiniArDSP
@@ -143,13 +205,16 @@ void dummy_function(void)
 	// 14 bit - this sounds better than 12 bit, it's cleaner, less bitty, don't notice aliasing
 	AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 7; // B11111110000000 becomes B1111111
 	AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 127; // B001111111
+	// #if USE_AUDIO_INPUT
+	// audioInputToBuffer();
+	// #endif
 }
 
 
 #endif
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------
 
 /* Sets up Timer 0 for control interrupts. This is the same for all output
 options Using Timer0 for control disables Arduino's time functions but also
@@ -163,31 +228,6 @@ static void startControl(unsigned int control_rate_hz)
 }
 
 
-/** @ingroup core
-Sets up the timers for audio and control rate processes. It goes in your
-sketch's setup() routine. 
-
-In STANDARD and HIFI modes, Mozzi uses Timer 0 for control interrupts 0, disabling Arduino
-delay(), millis(), micros() and delayMicroseconds. 
-For delaying events, you can use Mozzi's EventDelay() unit instead (not to be confused with AudioDelay()). 
-
-In STANDARD mode, startMozzi() starts Timer 1 for PWM output and audio output interrupts,
-and in HIFI mode, Mozzi uses Timer 1 for PWM and Timer2 for audio interrupts. 
-
-The audio rate is currently fixed at 16384 Hz.
-
-@param control_rate_hz Sets how often updateControl() is called. It can be any
-power of 2 above and including 64. The practical upper limit for control rate
-depends on how busy the processor is, and you might need to do some tests to
-find the best setting. 
-
-It's good to define CONTROL_RATE in your
-sketches (eg. "#define CONTROL_RATE 128") because the literal numeric value is
-necessary for Oscils to work properly, and it also helps to keep the
-calculations in your sketch clear.
-
-@todo See if there is any advantage to using 8 bit full port, without pwm, with a resistor ladder (maybe use readymade resistor networks).
-*/
 void startMozzi(unsigned int control_rate_hz)
 {
 	startControl(control_rate_hz);

@@ -32,6 +32,12 @@
 #include "TimerZero.h"
 #include "FrequencyTimer2.h"
 #include "mozzi_config.h" // User can change the config file to set audio mode
+<<<<<<< HEAD
+=======
+#if USE_AUDIO_INPUT 	// Set this to true in mozzi_config.h to enable audio input on analog pin 0
+#include "mozzi_analog.h"					// otherwise set it false, to save resources
+#endif
+>>>>>>> experiment
 
 
 /** @mainpage Welcome
@@ -60,11 +66,11 @@ Read the char2mozzi.py file for instructions.
 */
 
 /** @defgroup core Mozzi core definitions and functions
-	@defgroup tables Mozzi look-up-tables for audio waveforms, waveshaping, and control functions.
 */
+//@defgroup tables Mozzi look-up-tables for audio waveforms, waveshaping, and control functions.
 
 /** @ingroup core
-The STANDARD word is used in Mozzi/config.h to select Mozzi's original audio
+Use \#define AUDIO_MODE STANDARD in Mozzi/config.h to select Mozzi's original audio
 output configuration, which is nearly 9 bit sound (-244 to 243) at 16384 Hz and
 16384 Hz pwm rate. It uses Timer 1 to output samples at AUDIO_RATE 16384 Hz,
 with an interrupt being called once every PWM cycle to set the timer's own pwm
@@ -95,7 +101,7 @@ x..B5(25)..Teensy2++  \n
 
 
 /** @ingroup core
-HIFI can be used in Mozzi/config.h to set the audio mode.  
+Use \#define AUDIO_MODE HIFI in Mozzi/config.h to set the audio mode.  
 HIFI enables Mozzi to output 14 bit sound at 16384 Hz sample rate and 125kHz PWM rate.
 The high PWM rate of HIFI mode places the carrier frequency beyond audible range, 
 overcoming one of the disadvantages of STANDARD mode.
@@ -121,7 +127,7 @@ Also, a 4.7nF capacitor is recommended between the summing junction of the resis
 This dual PWM technique is discussed on http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
 Also, there are higher quality output circuits are on the site.
 
-Advantages: higher qulaity sound than STANDARD mode.  Doesn't need a notch filter on 
+Advantages: higher quality sound than STANDARD mode.  Doesn't need a notch filter on 
 the audio signal because the carrier frequency is out of hearing range.
 
 Disadvantages: requires 2 pins, 2 resistors and a capacitor, so it's not so quick to set up compared 
@@ -166,7 +172,7 @@ the oscillators. You can look at the TimerOne library for more info about how
 interrupt rate and pwm resolution relate.
 
 For much higher quality output which combines signals from pins 9 and 10, 
-edit Mozzi/config.h to contain #define AUDIO_MODE HIFI.
+edit Mozzi/mozzi_config.h to contain #define AUDIO_MODE HIFI.
 
 @todo Possible option for output to R/2R DAC circuit, like
 http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/ This would limit
@@ -206,6 +212,31 @@ typedef unsigned long ulong;
 #endif */
 
 
+/** @ingroup core
+Sets up the timers for audio and control rate processes. It goes in your
+sketch's setup() routine. 
+
+In STANDARD and HIFI modes, Mozzi uses Timer 0 for control interrupts 0, disabling Arduino
+delay(), millis(), micros() and delayMicroseconds. 
+For delaying events, you can use Mozzi's EventDelay() unit instead (not to be confused with AudioDelay()). 
+
+In STANDARD mode, startMozzi() starts Timer 1 for PWM output and audio output interrupts,
+and in HIFI mode, Mozzi uses Timer 1 for PWM and Timer2 for audio interrupts. 
+
+The audio rate is currently fixed at 16384 Hz.
+
+@param control_rate_hz Sets how often updateControl() is called. It can be any
+power of 2 above and including 64. The practical upper limit for control rate
+depends on how busy the processor is, and you might need to do some tests to
+find the best setting. 
+
+It's good to define CONTROL_RATE in your
+sketches (eg. \#define CONTROL_RATE 128) because the literal numeric value is
+necessary for Oscils to work properly, and it also helps to keep the
+calculations in your sketch clear.
+
+@todo See if there is any advantage to using 8 bit port, without pwm, with a resistor ladder (maybe use readymade resistor networks).
+*/
 void startMozzi(unsigned int control_rate_hz);
 
 /** @ingroup core
@@ -227,7 +258,39 @@ which could be done in setup().
 void updateControl();
 
 
-// see notes in MozziGuts.cpp
+/** @ingroup core
+This is required in Arduino's loop(). If there is room in Mozzi's output buffer,
+audioHook() calls updateAudio() once and puts the result into the output
+buffer.  Also, if \#define USE_AUDIO_INPUT true is in Mozzi/mozzi_config.h,
+audioHook() takes care of moving audio input from the input buffer so it can be
+accessed with getAudioInput() in your updateAudio() routine.
+If other functions are called in loop() along with audioHook(), see if
+they can be called less often by moving them into updateControl(), 
+to save processing power. Otherwise it may be most efficient to
+calculate a block of samples at a time by putting audioHook() in a loop of its
+own, rather than calculating only 1 sample for each time your other functions
+are called.
+@todo Try pre-decrement positions and swap gap calc around
+*/
 void audioHook();
+
+
+/** @ingroup analog
+This returns audio input from the input buffer, if 
+\#define USE_AUDIO_INPUT true is in the Mozzi/mozzi_config.h file.
+Audio input is currently restricted to analog pin 0 (this may change in future).
+The audio signal needs to be in the range 0 to 5 volts.  
+Circuits and discussions about biasing a signal
+in the middle of this range can be found at 
+http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal 
+and
+http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/ .
+A circuit and instructions for amplifying and biasing a microphone signal can be found at
+http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS
+@return audio data from the input buffer
+*/
+#if USE_AUDIO_INPUT
+int getAudioInput();
+#endif
 
 #endif /* MOZZIGUTS_H_ */

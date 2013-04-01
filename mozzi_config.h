@@ -13,6 +13,12 @@ In Mozzi/config.h, comment one of these options in and the other out to set the 
 #define AUDIO_MODE STANDARD
 //#define AUDIO_MODE HIFI
 
+/** @ingroup core
+Put \#define USE_AUDIO_INPUT true in mozzi_config.h to enable audio input on analog pin 0,
+otherwise make it false, to save resources.  When audio input is used, don't read 
+other analog channels as they'll interfere with the audio sampling.
+*/
+#define USE_AUDIO_INPUT  false
 
 
 #endif        //  #ifndef CONFIG_H

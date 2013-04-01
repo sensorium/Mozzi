@@ -31,19 +31,12 @@ Sample <ABOMB_NUM_CELLS, AUDIO_RATE> aSample(ABOMB_DATA);
 // for scheduling changes
 EventDelay <CONTROL_RATE>  kTriggerDelay;
 
-unsigned int gain;
 
 const float playspeed = 1.3;
 float playspeedmod = 0;
 float speedchange = 0;
 
-// ms times for beats
 const unsigned int full = (int) (1000.f/playspeed) - 23; // adjustment approx for CONTROL_RATE difference
-//unsigned int half = full/2;
-//unsigned int quarter = full/4;
-//unsigned int eighth = full/8;
-
-//unsigned char beat_counter = 0;
 
 void setup(){
   randSeed(); // reseed the random generator for different results each time the sketch runs
@@ -51,11 +44,6 @@ void setup(){
   kTriggerDelay.set(full); 
   aSample.setLoopingOn();
   startMozzi(CONTROL_RATE);
-}
-
-
-void choosegain(){
-  gain = rand((unsigned int) 300,(unsigned int) 450);
 }
 
 
@@ -100,7 +88,6 @@ void chooseStartEnd(){
 void updateControl(){
   if(kTriggerDelay.ready()){
     chooseStartEnd();
-    choosegain();
     chooseSpeedMod();
     kTriggerDelay.start();
   }
@@ -110,7 +97,7 @@ void updateControl(){
 
 
 int updateAudio(){
-  return (int)(((long) aSample.next()*gain)>>8);
+  return (int)aSample.next();
 }
 
 

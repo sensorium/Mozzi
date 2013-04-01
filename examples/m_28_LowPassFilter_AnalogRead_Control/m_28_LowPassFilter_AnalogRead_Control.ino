@@ -3,7 +3,7 @@
  *
  *  This method of reading analog input is now depreciated in Mozzi.
  *  A better way to read analog is to use the asynchronous method
- *  shown in the m_26_getSensor_LowPassFilter example.
+ *  shown in the m_26_adcGetResult_LowPassFilter example.
  *
  *  Still, there may be a situation where this is useful...
  *  Demonstrates LowPassFilter(), fixed point fractional number use,
@@ -11,10 +11,10 @@
  *  setupFastAnalogRead() is enough to prevent
  *  glitching during analogRead().
  *
- *  Mozzi also provides startAnalogRead() and receiveAnalogRead(),
+ *  Mozzi also provides adcStartConversion() and adcGetResult(),
  *  which enable reading analog input one channel at a time without 
  *  blocking other processes.  
- *  (Though in most cases the asynchronous getSensor() method is probably simpler and better).
+ *  (Though in most cases the asynchronous adcGetResult() method is probably simpler and better).
  *
  *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
  *  check the README or http://sensorium.github.com/Mozzi/
@@ -52,10 +52,11 @@ LowPassFilter lpf;
 
 
 void setup(){
-  startMozzi(CONTROL_RATE);
+  Serial.begin(115200);
   aCrunchySound.setFreq(2.f);
   lpf.setResonance(200);
   setupFastAnalogRead();
+  startMozzi(CONTROL_RATE);
 }
 
 
@@ -71,8 +72,8 @@ void updateControl(){
   char modulation = ((int) kFilterMod.next() * modulation_width)>>8; // -32 to 31 
 
   // add centre_freq and modulation, and constrain into the filter range (0-255)
-  unsigned char cutoff_freq = constrain(centre_freq + modulation, 0, 255);
-
+  unsigned char cutoff_freq = constrain(centre_freq + modulation, 0, 240);
+Serial.println((int)cutoff_freq);
   lpf.setCutoffFreq(cutoff_freq);
 
 }

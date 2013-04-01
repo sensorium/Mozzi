@@ -33,8 +33,8 @@ AudioDelayFeedback <128> aDel1;
 AudioDelayFeedback <128> aDel2;
 
 // the delay time, measured in samples, updated in updateControl, and used in updateAudio 
-unsigned char del_samps1;
-unsigned char del_samps2;
+unsigned int del_samps1;
+unsigned int del_samps2;
 
 
 void setup(){
@@ -65,9 +65,7 @@ int updateAudio(){
 
   char asig2 = aTriangle2.next(); // get this so it can be used twice without calling next() again
   int aflange2 = (asig2>>3) + aDel2.next(asig2, del_samps2); // mix some straignt signal with the delayed signal
-  //return aDel.next(aTriangle.next(), del_samps); // instead of the previous 2 lines for only the delayed signal
   return (aflange1 + aflange2)>>1;
-  //return asig1b;
 }
 
 

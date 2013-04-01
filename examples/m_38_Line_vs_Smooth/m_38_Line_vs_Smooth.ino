@@ -75,7 +75,7 @@ void updateControl(){
   aInterpolate.set(freq0, AUDIO_STEPS_PER_CONTROL);
 }
 
-int counter = 500;
+
 int updateAudio(){
   Q16n16 interpolatedFreq = aInterpolate.next(); // get the next linear interpolated freq
   aSin0.setFreq_Q16n16(interpolatedFreq); 

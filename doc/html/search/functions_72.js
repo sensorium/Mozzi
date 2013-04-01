@@ -4,7 +4,7 @@ var searchData=
   ['randmidinote',['randMidiNote',['../group__random.html#ga5c14e59f9bdf24917b6db63be89a2180',1,'mozzi_rand.cpp']]],
   ['randprime',['randPrime',['../group__random.html#gab6c2b444d462461b82997e04105d0398',1,'primes.h']]],
   ['randprimeupto',['randPrimeUpTo',['../group__random.html#gaead8db89e2403d5ef7842f894552c629',1,'primes.h']]],
-  ['randseed',['randSeed',['../group__random.html#ga8a9592250ee294a64c6d133e20520651',1,'randSeed(unsigned long seed):&#160;mozzi_rand.cpp'],['../group__random.html#ga83ff6b4e38c84713e0d67aa1ec06af66',1,'randSeed():&#160;mozzi_rand.cpp'],['../group__random.html#ga8a9592250ee294a64c6d133e20520651',1,'randSeed(unsigned long seed):&#160;mozzi_rand.cpp'],['../group__random.html#ga83ff6b4e38c84713e0d67aa1ec06af66',1,'randSeed():&#160;mozzi_rand.cpp']]],
+  ['randseed',['randSeed',['../group__random.html#ga84c58d758e238208eb82fc8ae2330b66',1,'randSeed(long seed):&#160;mozzi_rand.cpp'],['../group__random.html#ga83ff6b4e38c84713e0d67aa1ec06af66',1,'randSeed():&#160;mozzi_rand.cpp'],['../group__random.html#ga83ff6b4e38c84713e0d67aa1ec06af66',1,'randSeed():&#160;mozzi_rand.cpp']]],
   ['rangewholesample',['rangeWholeSample',['../class_sample.html#a79cb13998692fdff715c7b6b1beb991a',1,'Sample']]],
   ['rcpoll',['RCpoll',['../class_r_cpoll.html#a44673505bbfbac288ec994dd48017e83',1,'RCpoll']]],
   ['read',['read',['../class_audio_delay_feedback.html#a8c9b3bfb75aba7a5c27500f5657c149c',1,'AudioDelayFeedback::read(unsigned int delaytime_cells)'],['../class_audio_delay_feedback.html#a084f0b10bd6682cf30b248d5f2c60754',1,'AudioDelayFeedback::read()']]],

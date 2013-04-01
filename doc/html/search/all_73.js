@@ -36,7 +36,6 @@ var searchData=
   ['settime',['setTime',['../class_portamento.html#af19c3b3c189e111079f54211ff5a4ebe',1,'Portamento']]],
   ['settimes',['setTimes',['../class_a_d_s_r.html#af656b88fdfddd521c3a30fe9b06b524b',1,'ADSR']]],
   ['setupfastanalogread',['setupFastAnalogRead',['../group__analog.html#gaf46803d06aa1d839192cc6125e39ff01',1,'setupFastAnalogRead():&#160;mozzi_analog.cpp'],['../group__analog.html#gaf46803d06aa1d839192cc6125e39ff01',1,'setupFastAnalogRead():&#160;mozzi_analog.cpp']]],
-  ['sin1024_5fuint8_5fnum_5fcells',['SIN1024_UINT8_NUM_CELLS',['../group__tables.html#ga21ce13d8dcde06abbe0c3c8efd15f445',1,'sin1024_uint8.h']]],
   ['smooth',['Smooth',['../class_smooth.html',1,'Smooth&lt; T &gt;'],['../class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26',1,'Smooth::Smooth()']]],
   ['standard',['STANDARD',['../group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1',1,'MozziGuts.h']]],
   ['standard_5fpwm_5fresolution',['STANDARD_PWM_RESOLUTION',['../group__core.html#ga800c094e0a14fc31d87a360b3807a1b8',1,'AudioConfigStandard9bitPwm.h']]],

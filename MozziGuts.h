@@ -63,8 +63,8 @@ Read the char2mozzi.py file for instructions.
 */
 
 /** @defgroup core Mozzi core definitions and functions
-	@defgroup tables Mozzi look-up-tables for audio waveforms, waveshaping, and control functions.
 */
+//@defgroup tables Mozzi look-up-tables for audio waveforms, waveshaping, and control functions.
 
 /** @ingroup core
 Use \#define AUDIO_MODE STANDARD in Mozzi/config.h to select Mozzi's original audio

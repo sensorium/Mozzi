@@ -52,10 +52,11 @@ LowPassFilter lpf;
 
 
 void setup(){
-  startMozzi(CONTROL_RATE);
+  Serial.begin(115200);
   aCrunchySound.setFreq(2.f);
   lpf.setResonance(200);
   setupFastAnalogRead();
+  startMozzi(CONTROL_RATE);
 }
 
 
@@ -71,8 +72,8 @@ void updateControl(){
   char modulation = ((int) kFilterMod.next() * modulation_width)>>8; // -32 to 31 
 
   // add centre_freq and modulation, and constrain into the filter range (0-255)
-  unsigned char cutoff_freq = constrain(centre_freq + modulation, 0, 255);
-
+  unsigned char cutoff_freq = constrain(centre_freq + modulation, 0, 240);
+Serial.println((int)cutoff_freq);
   lpf.setCutoffFreq(cutoff_freq);
 
 }

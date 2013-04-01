@@ -3,7 +3,7 @@
  *
  *  This method of reading analog input is now depreciated in Mozzi.
  *  A better way to read analog is to use the asynchronous method
- *  shown in the m_26_adcGetResult_LowPassFilter example.
+ *  shown in the m_27_adcReadAllChannels_LowPassFilter example.
  *
  *  Still, there may be a situation where this is useful...
  *  Demonstrates LowPassFilter(), fixed point fractional number use,

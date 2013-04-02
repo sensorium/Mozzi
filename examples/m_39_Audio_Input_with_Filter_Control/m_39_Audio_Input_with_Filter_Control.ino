@@ -45,9 +45,9 @@ void updateControl(){
 
 
 int updateAudio(){
-  // subtracting AUDIO_BIAS moves the unsigned audio data into 0-centred, 
+  // subtracting 512 moves the unsigned audio data into 0-centred, 
   // signed range required by all Mozzi units
-  int asig = (getAudioInput()>>2) - AUDIO_BIAS;
+  int asig = getAudioInput()-512;
   asig = lpf.next(asig);
   return asig;
 }

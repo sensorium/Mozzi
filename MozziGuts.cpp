@@ -20,9 +20,9 @@
  *
  */
 
-
+#include "mozzi_config.h" // at the top of all MozziGuts and analog files
 #include "MozziGuts.h"
-#include <util/atomic.h>
+//#include <util/atomic.h>
 //#include "mozzi_utils.h"
 
 /*
@@ -57,7 +57,7 @@ static volatile unsigned long output_buffer_tail; // shared by audioHook() (in l
 //-----------------------------------------------------------------------------------------------------------------
 
 #if USE_AUDIO_INPUT
-#include "Arduino.h"
+//#include "Arduino.h"
 #include "mozzi_analog.h"
 
 static void adcSetupAudioInput(){
@@ -205,9 +205,6 @@ void dummy_function(void)
 	// 14 bit - this sounds better than 12 bit, it's cleaner, less bitty, don't notice aliasing
 	AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 7; // B11111110000000 becomes B1111111
 	AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 127; // B001111111
-	// #if USE_AUDIO_INPUT
-	// audioInputToBuffer();
-	// #endif
 }
 
 

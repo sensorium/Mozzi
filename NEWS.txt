@@ -3,6 +3,13 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1x
+
+- fixed (I hope) mozzi_config.h being loaded after other things which depend on it,
+	which caused multiple definitions of the ISR(ADC_vect).
+	Now the analog and audio input sketches should behave as configured.
+
+
 Version 0.01.1w
 Lots of changes which will probably require some search and replace to maintain sketches written with earlier versions:
 

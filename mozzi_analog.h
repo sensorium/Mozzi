@@ -23,6 +23,8 @@
 #ifndef MOZZI_ANALOG_H_
 #define MOZZI_ANALOG_H_
 
+#include "mozzi_config.h"
+#include "Arduino.h"
 #include "mozzi_utils.h"
 
 #if USE_AUDIO_INPUT

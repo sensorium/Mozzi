@@ -231,7 +231,8 @@ calculations in your sketch clear.
 
 @todo See if there is any advantage to using 8 bit port, without pwm, with a resistor ladder (maybe use readymade resistor networks).
 */
-void startMozzi(unsigned int control_rate_hz);
+void startMozzi(int control_rate_hz = CONTROL_RATE);
+
 
 /** @ingroup core
 This is where you put your audio code. updateAudio() has to keep up with the

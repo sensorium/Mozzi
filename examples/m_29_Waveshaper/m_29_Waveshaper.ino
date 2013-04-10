@@ -55,7 +55,7 @@ int target_freq, smoothed_freq;
 void setup(){
   startMozzi(CONTROL_RATE); // set a control rate of 64 (powers of 2 please)
   randSeed(); // reseed the random generator for different results each time the sketch runs
-  aSin.setFreq(110u); // set the frequency with an unsigned int or a float
+  aSin.setFreq(110); // set the frequency
   aGain1.setFreq(2.f); // use a float for low frequencies, in setup it doesn't need to be fast
   aGain2.setFreq(.4f);
   kChangeNoteDelay.set(4000); // note duration ms, within resolution of CONTROL_RATE
@@ -94,7 +94,7 @@ void updateControl(){
     kChangeNoteDelay.start();
   }
   smoothed_freq = kSmoothFreq.next(target_freq*4); // temporarily scale up target_freq to get better int smoothing at low values
-  aSin.setFreq((unsigned int)smoothed_freq/4); // then scale it back down after it's smoothed
+  aSin.setFreq(smoothed_freq/4); // then scale it back down after it's smoothed
 }
 
 

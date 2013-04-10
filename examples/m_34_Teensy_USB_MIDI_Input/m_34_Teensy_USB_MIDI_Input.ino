@@ -66,7 +66,7 @@ void setup() {
   envelope.setADLevels(255,64);
   envelope.setTimes(50,200,10000,200); // 10000 is so the note will sustain 10 seconds unless a noteOff comes
 
-  aSin.setFreq(440u); // default frequency
+  aSin.setFreq(440); // default frequency
   startMozzi(CONTROL_RATE); 
 }
 

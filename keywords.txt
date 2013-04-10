@@ -10,9 +10,7 @@ uchar	KEYWORD1
 uint	KEYWORD1
 ulong	KEYWORD1
 
-mozzi_fixmath	KEYWORD1
-
-utils	KEYWORD1
+mozzi_utils	KEYWORD1
 setPin13Out	KEYWORD2
 setPin13High	KEYWORD2
 setPin13Low	KEYWORD2
@@ -103,6 +101,8 @@ setCentreFreq	KEYWORD2
 setResonance	KEYWORD2
 next	KEYWORD2
 
+
+mozzi_fixmath	KEYWORD1
 Q0n7	KEYWORD2
 Q0n8	KEYWORD2
 Q8n0	KEYWORD2

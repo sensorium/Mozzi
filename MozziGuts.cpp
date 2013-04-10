@@ -198,7 +198,9 @@ void dummy_function(void)
 #if USE_AUDIO_INPUT
 	sbi(ADCSRA, ADSC);				// start next adc conversion
 #endif
-	unsigned int out = output_buffer[num_out++];
+	output_buffer_tail++;
+	unsigned int out = output_buffer[(unsigned char)output_buffer_tail & (unsigned char)(BUFFER_NUM_CELLS-1)]; // 1us, 2.5us with longs
+
 	// read about dual pwm at http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
 	// sketches at http://wiki.openmusiclabs.com/wiki/PWMDAC,  http://wiki.openmusiclabs.com/wiki/MiniArDSP
 
@@ -225,7 +227,7 @@ static void startControl(unsigned int control_rate_hz)
 }
 
 
-void startMozzi(unsigned int control_rate_hz)
+void startMozzi(int control_rate_hz)
 {
 	startControl(control_rate_hz);
 #if (AUDIO_MODE == STANDARD)

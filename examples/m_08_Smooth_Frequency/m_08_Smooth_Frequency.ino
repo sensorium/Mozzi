@@ -53,7 +53,7 @@ void updateControl(){
   }
 
   int smoothed_freq = kSmoothFreq.next(target_freq);
-  aSin.setFreq((unsigned int)smoothed_freq);
+  aSin.setFreq(smoothed_freq);
 }
 
 

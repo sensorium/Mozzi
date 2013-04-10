@@ -34,7 +34,7 @@ char gain = 1;
 
 void setup(){
   startMozzi(CONTROL_RATE);
-  aSin.setFreq(330u); // set the frequency, using an unsigned int or a float
+  aSin.setFreq(330); // set the frequency
   kGainChangeDelay.set(1000); // 1 second countdown, within resolution of CONTROL_RATE
 }
 

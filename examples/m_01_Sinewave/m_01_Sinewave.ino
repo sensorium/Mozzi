@@ -26,7 +26,7 @@ Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
 void setup(){
   startMozzi(CONTROL_RATE); // set a control rate of 64 (powers of 2 please)
-  aSin.setFreq(440u); // set the frequency with an unsigned int or a float
+  aSin.setFreq(440); // set the frequency
 }
 
 

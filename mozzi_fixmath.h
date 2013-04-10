@@ -161,12 +161,14 @@ float Q0n8_to_float(Q0n8 a) { return (static_cast<float>(a))/256; }	/**<Convert 
 inline
 Q7n8 Q7n0_to_Q7n8(Q7n0 a) { return (static_cast<Q7n8>(a))<<8; }			/**<Convert Q7n0 char to Q7n8 fix. @param a is a char*/
 
-
 inline
-Q7n8 Q8n0_to_Q7n8(Q8n0 a) { return (static_cast<Q7n8>(a))<<8; }		/**<Convert Q8n0 unsigned char to Q7n8 fix. @param a is a Q8n0 unsigned char*/
+Q7n8 Q8n0_to_Q7n8(Q8n0 a) { return (static_cast<Q7n8>(a))<<8; }		/**<Convert Q8n0 unsigned char to Q7n8 fix. @param a is a Q8n0 unsigned char*.  Beware of overflow. */
 
 inline
 Q8n8 Q8n0_to_Q8n8(Q8n0 a) { return (static_cast<Q8n8>(a))<<8; }			/**<Convert unsigned char to Q8n8 fix. @param a is a Q8n0 unsigned char*/
+
+inline
+Q15n16 Q8n0_to_Q15n16(Q8n0 a) { return (static_cast<Q15n16>(a))<<16; }			/**<Convert Q8n0 unsigned char to Q15n16 fix. @param a is a Q8n0 unsigned char */
 
 inline
 Q16n16 Q8n0_to_Q16n16(Q8n0 a) { return (static_cast<Q16n16>(a))<<16; }			/**<Convert Q8n0 unsigned char to Q16n16 fix. @param a is a Q8n0 unsigned char */
@@ -188,13 +190,11 @@ Q16n16 Q8n8_to_Q16n16(Q8n8 a) { return (static_cast<Q16n16>(a))<<8; }			/**<Conv
 inline
 float Q8n8_to_float(Q8n8 a) { return (static_cast<float>(a))/256; }				/**<Convert Q8n8 fix to float. @param a is a Q8n8 unsigned int*/
 
-
 inline
 Q0n7 Q1n14_to_Q0n7(Q1n14 a) { return static_cast<Q0n7>(a>>7); }			/**<Convert Q1n14 fixed to Q0n7 char. @param a is a Q1n14 int*/
 
 inline
 float Q1n14_to_float(Q1n14 a) { return (static_cast<float>(a))/16384; }			/**<Convert fix to float. @param a is an int*/
-
 
 inline
 Q0n8 Q1n15_to_Q0n8(Q1n15 a) { return static_cast<Q0n8>(a>>7); }			/**<Convert Q1n15 fixed to Q0n8 unsigned char. Only for  positive values! @param a is a Q1n15 unsigned int*/
@@ -202,14 +202,11 @@ Q0n8 Q1n15_to_Q0n8(Q1n15 a) { return static_cast<Q0n8>(a>>7); }			/**<Convert Q1
 inline
 float Q1n15_to_float(Q1n15 a) { return (static_cast<float>(a))/32768; }			/**<Convert fix to float. @param a is a Q1n15 unsigned int*/
 
-
 inline
 float Q0n16_to_float(Q0n16 a) { return (static_cast<float>(a))/65536; }			/**<Convert fix to float. @param a is a Q0n16 unsigned int*/
 
-
 inline
 Q15n16 Q15n0_to_Q15n16(Q15n0 a) { return (static_cast<Q15n16>(a))<<16; }		/**<Convert Q15n0 int to Q15n16 fix. @param a is a Q15n0 int */
-
 
 inline
 Q15n16 Q16n0_to_Q15n16(Q16n0 a) { return (static_cast<Q15n16>(a))<<16; }			/**<Convert Q16n0 unsigned int to Q15n16 fix. @param a is a Q16n0 unsigned int */

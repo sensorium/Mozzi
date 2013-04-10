@@ -185,7 +185,7 @@ public:
 	@param frequency to play the wave table.
 	*/
 	inline
-	void setFreq (unsigned int frequency) {
+	void setFreq (int frequency) {
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
 			phase_increment_fractional = ((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)*frequency)/UPDATE_RATE) << (OSCIL_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS);
@@ -270,7 +270,7 @@ public:
 	*/
 	inline
 	//const 
-	unsigned long phaseIncFromFreq(unsigned int frequency)
+	unsigned long phaseIncFromFreq(int frequency)
 	{
 		return (((unsigned long)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) << OSCIL_F_BITS;
 	}

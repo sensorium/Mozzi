@@ -3,6 +3,23 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1y
+
+Important: sketches written before this version of Mozzi will need updating to remove 
+	(unsigned int) casts or "u" after integer arguments to:
+	- Oscil::setFreq(unsigned int) changed to setFreq(int)
+	- Sample::setFreq(unsigned int) changed to setFreq(int)
+- fixed a compile error for HIFI mode (thanks to Thomas for pointing this out)
+- Added HIFI tests m_01b_Sinewave_HIFI, m_03b_FMsynth_HIFI and m_05b_AMsynth_HIFI.
+	The AMsynth example is the only one which actually has higher resolution than its STANDARD version.
+- CONTROL_RATE is now set to a default value of 64 in Mozzi/mozzi_config.h.  
+	You can still define it in your sketch, or you change the default in the config file.
+- StartMozzi() can now be used without an argument.  It will use the default CONTROL_RATE 
+	defined in Mozzi/mozzi_config.h, which is 64 unless you change it there.
+	You can still define CONTROL_RATE in your sketch and provide it as an argument to startMozzi, as before.
+- fixmath.h Added Q8n0_to_Q15n16(Q8n0 a)
+
+	
 Version 0.01.1x
 
 - fixed (I hope) mozzi_config.h being loaded after other things which depend on it,

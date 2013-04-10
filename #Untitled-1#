@@ -1,6 +1,0 @@
-#define USE_AUDIO_INPUT  false
-adc_ReadAllChannels good
-
-
-#define USE_AUDIO_INPUT  true
-adc_ReadAllChannels : 2 vectors

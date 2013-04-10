@@ -30,7 +30,7 @@ Oscil <ENVELOP2048_NUM_CELLS, AUDIO_RATE> aEnvelop(ENVELOP2048_DATA);
 
 void setup() {
   startMozzi(CONTROL_RATE);
-  aCarrier.setFreq(220u);
+  aCarrier.setFreq(220);
   kModFreq1.setFreq(1.78f);
   kModFreq2.setFreq(0.1757f);
   aModWidth.setFreq(0.1434f);

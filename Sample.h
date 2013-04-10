@@ -180,22 +180,14 @@ public:
 	inline
 	char next() // 4us
 	{
-		char out = 0;
-		if (!looping)
-		{
-			if (phase_fractional<endpos_fractional){
-				out = (char)pgm_read_byte_near(table + (phase_fractional >> SAMPLE_F_BITS)); 
-				incrementPhase();
-			}
-		}
-		else
-		{
-			if (phase_fractional>endpos_fractional)
+		if (looping) {
+			if (phase_fractional>endpos_fractional){
 				phase_fractional = startpos_fractional + (phase_fractional - endpos_fractional);
-			
-			out = (char)pgm_read_byte_near(table + (phase_fractional >> SAMPLE_F_BITS));
-			incrementPhase();
-		}
+			} else if (phase_fractional<startpos_fractional){ phase_fractional = startpos_fractional + phase_fractional + endpos_fractional);
+			}
+		char out = (char)pgm_read_byte_near(table + (phase_fractional >> SAMPLE_F_BITS)); 
+		incrementPhase();
+
 		return out;
 	}
 
@@ -226,10 +218,10 @@ public:
 	@param frequency to play the wave table.
 	*/
 	inline
-	void setFreq (unsigned int frequency) {
+	void setFreq (int frequency) {
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
-			phase_increment_fractional = ((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)*frequency)/UPDATE_RATE) << (SAMPLE_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS);
+			phase_increment_fractional = (((( long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)*frequency)/UPDATE_RATE) << (SAMPLE_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS);
 		}
 	}
 
@@ -244,7 +236,7 @@ public:
 	{ // 1 us - using float doesn't seem to incur measurable overhead with the oscilloscope
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
-			phase_increment_fractional = (unsigned long)((((float)NUM_TABLE_CELLS * frequency)/UPDATE_RATE) * SAMPLE_F_BITS_AS_MULTIPLIER);
+			phase_increment_fractional = ( long)((((float)NUM_TABLE_CELLS * frequency)/UPDATE_RATE) * SAMPLE_F_BITS_AS_MULTIPLIER);
 		}
 	}
 
@@ -263,7 +255,7 @@ public:
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
 			//phase_increment_fractional = (frequency* (NUM_TABLE_CELLS>>3)/(UPDATE_RATE>>6)) << (F_BITS-(8-3+6));
-			phase_increment_fractional = (((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)>>3)*frequency)/(UPDATE_RATE>>6)) 
+			phase_increment_fractional = ((((( long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)>>3)*frequency)/(UPDATE_RATE>>6)) 
 				<< (SAMPLE_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS - (8-3+6));
 		}
 	}
@@ -292,7 +284,7 @@ public:
 	@return the phase increment value which will produce a given frequency.
 	*/
 	inline
-	unsigned long phaseIncFromFreq(unsigned int frequency)
+	unsigned long phaseIncFromFreq( int frequency)
 	{
 		return (((unsigned long)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) << SAMPLE_F_BITS;
 	}
@@ -302,7 +294,7 @@ public:
 	@param phaseinc_fractional a phase increment value as calculated by phaseIncFromFreq().
 	 */
 	inline
-	void setPhaseInc(unsigned long phaseinc_fractional)
+	void setPhaseInc(long phaseinc_fractional)
 	{
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
@@ -328,8 +320,8 @@ private:
 	}
 
 
-	volatile unsigned long phase_fractional;
-	volatile unsigned long phase_increment_fractional;
+	volatile long phase_fractional;
+	volatile long phase_increment_fractional;
 	const char * table;
 	bool looping;
 	unsigned long startpos_fractional, endpos_fractional;

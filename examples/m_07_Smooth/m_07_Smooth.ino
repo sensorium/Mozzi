@@ -41,7 +41,7 @@ long target_gain = 0;
 
 
 void setup(){
-  aSin.setFreq(330u); // audio oscil set freq with unsigned int
+  aSin.setFreq(330); // set the frequency
   kGainChangeDelay.set(gainChangeMsec);
   kSmoothOnOff.set(smoothOnOffMsec);
   startMozzi(CONTROL_RATE);

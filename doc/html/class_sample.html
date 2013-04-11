@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1w</span>
+   &#160;<span id="projectnumber">alpha 0.01.1y</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -133,8 +133,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:ab1b29e0ccaee2c13e55ed9aa2202812e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns looping off. <br/></td></tr>
 <tr class="memitem:a6b94fc8a8042f498fbd8693d9bce9719"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a6b94fc8a8042f498fbd8693d9bce9719">next</a> ()</td></tr>
 <tr class="memdesc:a6b94fc8a8042f498fbd8693d9bce9719"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sample at the current phase position, or 0 if looping is off and the phase overshoots the end of the sample.  <a href="#a6b94fc8a8042f498fbd8693d9bce9719"></a><br/></td></tr>
-<tr class="memitem:ad6aa28642c1e219d24144501c7cfcabc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ad6aa28642c1e219d24144501c7cfcabc">setFreq</a> (unsigned int frequency)</td></tr>
-<tr class="memdesc:ad6aa28642c1e219d24144501c7cfcabc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next sample given a phase modulation value.  <a href="#ad6aa28642c1e219d24144501c7cfcabc"></a><br/></td></tr>
+<tr class="memitem:a3fe56b93df218ff887eb25b7f694fb8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a3fe56b93df218ff887eb25b7f694fb8a">setFreq</a> (int frequency)</td></tr>
+<tr class="memdesc:a3fe56b93df218ff887eb25b7f694fb8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next sample given a phase modulation value.  <a href="#a3fe56b93df218ff887eb25b7f694fb8a"></a><br/></td></tr>
 <tr class="memitem:a11a7948a655bea79ddd67059c2186816"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a11a7948a655bea79ddd67059c2186816">setFreq</a> (float frequency)</td></tr>
 <tr class="memdesc:a11a7948a655bea79ddd67059c2186816"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the sample frequency with a float.  <a href="#a11a7948a655bea79ddd67059c2186816"></a><br/></td></tr>
 <tr class="memitem:aa2086deef68e43620d7502dd8bb78678"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#aa2086deef68e43620d7502dd8bb78678">setFreq_Q24n8</a> (<a class="el" href="group__mozzi__fixmath.html#gaa8e579259244eb60e7f70576c8e61cbd">Q24n8</a> frequency)</td></tr>
@@ -333,16 +333,16 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ad6aa28642c1e219d24144501c7cfcabc"></a>
+<a class="anchor" id="a3fe56b93df218ff887eb25b7f694fb8a"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#ad6aa28642c1e219d24144501c7cfcabc">setFreq</a> </td>
+          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#a3fe56b93df218ff887eb25b7f694fb8a">setFreq</a> </td>
           <td>(</td>
-          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>frequency</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
@@ -376,7 +376,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#ad6aa28642c1e219d24144501c7cfcabc">setFreq</a> </td>
+          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html#a3fe56b93df218ff887eb25b7f694fb8a">setFreq</a> </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>frequency</em></td><td>)</td>
@@ -553,7 +553,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 2 2013 18:21:23 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Apr 11 2013 10:34:47 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

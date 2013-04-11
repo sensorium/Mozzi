@@ -95,8 +95,7 @@ x..B5(25)..Teensy2++  \n
 
 
 /** @ingroup core
-Use \#define AUDIO_MODE HIFI in Mozzi/config.h to set the audio mode.  
-HIFI enables Mozzi to output 14 bit sound at 16384 Hz sample rate and 125kHz PWM rate.
+Use \#define AUDIO_MODE HIFI in Mozzi/config.h to set the audio mode to HIFI for output 14 bit sound at 16384 Hz sample rate and 125kHz PWM rate.
 The high PWM rate of HIFI mode places the carrier frequency beyond audible range, 
 overcoming one of the disadvantages of STANDARD mode.
 

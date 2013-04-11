@@ -23,7 +23,7 @@
 #include <tables/cos8192_int8.h>
 #include <mozzi_midi.h>
 
-const unsigned char CONTROL_RATE = 128; // powers of 2 please, default is 64 Hz
+#define CONTROL_RATE 128
 
 // harmonics
 Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos1(COS8192_DATA);

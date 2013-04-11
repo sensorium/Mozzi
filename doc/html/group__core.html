@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1w</span>
+   &#160;<span id="projectnumber">alpha 0.01.1y</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -101,19 +101,21 @@ Defines</h2></td></tr>
 <tr class="memdesc:ga800c094e0a14fc31d87a360b3807a1b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the dynamic range of Mozzi's audio output in STANDARD mode.  <a href="#ga800c094e0a14fc31d87a360b3807a1b8"></a><br/></td></tr>
 <tr class="memitem:ga9c4a39187db1d0a1ad0fa6981920f383"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga9c4a39187db1d0a1ad0fa6981920f383"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga9c4a39187db1d0a1ad0fa6981920f383">AUDIO_MODE</a>&#160;&#160;&#160;<a class="el" href="group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1">STANDARD</a></td></tr>
-<tr class="memdesc:ga9c4a39187db1d0a1ad0fa6981920f383"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select STANDARD or HIFI audio output mode in the Mozzi/config.h file with either #define AUDIO_MODE STANDARD or #define AUDIO_MODE HIFI In Mozzi/config.h, comment one of these options in and the other out to set the audio mode. <br/></td></tr>
+<tr class="memdesc:ga9c4a39187db1d0a1ad0fa6981920f383"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select STANDARD or HIFI audio output mode in the <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> file with either #define AUDIO_MODE STANDARD or #define AUDIO_MODE HIFI In Mozzi/config.h, comment one of these options in and the other out to set the audio mode. <br/></td></tr>
 <tr class="memitem:ga3417fc0b453af798a70340c912a4b657"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga3417fc0b453af798a70340c912a4b657">USE_AUDIO_INPUT</a>&#160;&#160;&#160;false</td></tr>
-<tr class="memdesc:ga3417fc0b453af798a70340c912a4b657"><td class="mdescLeft">&#160;</td><td class="mdescRight">Put #define USE_AUDIO_INPUT true in <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a> to enable audio input on analog pin 0, otherwise make it false, to save resources.  <a href="#ga3417fc0b453af798a70340c912a4b657"></a><br/></td></tr>
+<tr class="memdesc:ga3417fc0b453af798a70340c912a4b657"><td class="mdescLeft">&#160;</td><td class="mdescRight">Put #define USE_AUDIO_INPUT true in <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> to enable audio input on analog pin 0, otherwise make it false, to save resources.  <a href="#ga3417fc0b453af798a70340c912a4b657"></a><br/></td></tr>
+<tr class="memitem:gae5d737db8bc97ecf08d2ea3121782d26"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#gae5d737db8bc97ecf08d2ea3121782d26">CONTROL_RATE</a>&#160;&#160;&#160;64</td></tr>
+<tr class="memdesc:gae5d737db8bc97ecf08d2ea3121782d26"><td class="mdescLeft">&#160;</td><td class="mdescRight">CONTROL_RATE is #defined as 64 by default.  <a href="#gae5d737db8bc97ecf08d2ea3121782d26"></a><br/></td></tr>
 <tr class="memitem:ga0b8ca8ad62b88c01b639bad62eafcbf1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1">STANDARD</a>&#160;&#160;&#160;0</td></tr>
 <tr class="memdesc:ga0b8ca8ad62b88c01b639bad62eafcbf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use #define AUDIO_MODE STANDARD in Mozzi/config.h to select Mozzi's original audio output configuration, which is nearly 9 bit sound (-244 to 243) at 16384 Hz and 16384 Hz pwm rate.  <a href="#ga0b8ca8ad62b88c01b639bad62eafcbf1"></a><br/></td></tr>
 <tr class="memitem:gae99eb43cb29bb03d862ae829999916c4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#gae99eb43cb29bb03d862ae829999916c4">HIFI</a>&#160;&#160;&#160;1</td></tr>
-<tr class="memdesc:gae99eb43cb29bb03d862ae829999916c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use #define AUDIO_MODE HIFI in Mozzi/config.h to set the audio mode.  <a href="#gae99eb43cb29bb03d862ae829999916c4"></a><br/></td></tr>
+<tr class="memdesc:gae99eb43cb29bb03d862ae829999916c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use #define AUDIO_MODE HIFI in Mozzi/config.h to set the audio mode to HIFI for output 14 bit sound at 16384 Hz sample rate and 125kHz PWM rate.  <a href="#gae99eb43cb29bb03d862ae829999916c4"></a><br/></td></tr>
 <tr class="memitem:ga5b972bafb3267e820993812beca1b298"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga5b972bafb3267e820993812beca1b298">AUDIO_RATE</a>&#160;&#160;&#160;16384</td></tr>
 <tr class="memdesc:ga5b972bafb3267e820993812beca1b298"><td class="mdescLeft">&#160;</td><td class="mdescRight">AUDIO_RATE is fixed at 16384 Hz for now.  <a href="#ga5b972bafb3267e820993812beca1b298"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gaedc83c89280eccc3b7fdb3115daab573"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573">startMozzi</a> (unsigned int control_rate_hz)</td></tr>
-<tr class="memdesc:gaedc83c89280eccc3b7fdb3115daab573"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the timers for audio and control rate processes.  <a href="#gaedc83c89280eccc3b7fdb3115daab573"></a><br/></td></tr>
+<tr class="memitem:ga75aa9f4a501f4b167343b8caac8c6837"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837">startMozzi</a> (int control_rate_hz=<a class="el" href="group__core.html#gae5d737db8bc97ecf08d2ea3121782d26">CONTROL_RATE</a>)</td></tr>
+<tr class="memdesc:ga75aa9f4a501f4b167343b8caac8c6837"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the timers for audio and control rate processes.  <a href="#ga75aa9f4a501f4b167343b8caac8c6837"></a><br/></td></tr>
 <tr class="memitem:gaab0d2c840c1aac4bb5f9b8ef5df30f6a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a">updateAudio</a> ()</td></tr>
 <tr class="memdesc:gaab0d2c840c1aac4bb5f9b8ef5df30f6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is where you put your audio code.  <a href="#gaab0d2c840c1aac4bb5f9b8ef5df30f6a"></a><br/></td></tr>
 <tr class="memitem:ga59d187b915b2e366c88489e52801951a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a">updateControl</a> ()</td></tr>
@@ -142,7 +144,25 @@ Functions</h2></td></tr>
 <p class="enddd">Test 32768Hz audio rate option properly </p>
 </dd></dl>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00178">178</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00177">177</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gae5d737db8bc97ecf08d2ea3121782d26"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define <a class="el" href="group__core.html#gae5d737db8bc97ecf08d2ea3121782d26">CONTROL_RATE</a>&#160;&#160;&#160;64</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>CONTROL_RATE is #defined as 64 by default. </p>
+<p>You can change it in <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> or in your sketch. </p>
+
+<p>Definition at line <a class="el" href="mozzi__config_8h_source.html#l00026">26</a> of file <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a>.</p>
 
 </div>
 </div>
@@ -157,8 +177,8 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Use #define AUDIO_MODE HIFI in Mozzi/config.h to set the audio mode. </p>
-<p>HIFI enables Mozzi to output 14 bit sound at 16384 Hz sample rate and 125kHz PWM rate. The high PWM rate of HIFI mode places the carrier frequency beyond audible range, overcoming one of the disadvantages of STANDARD mode.</p>
+<p>Use #define AUDIO_MODE HIFI in Mozzi/config.h to set the audio mode to HIFI for output 14 bit sound at 16384 Hz sample rate and 125kHz PWM rate. </p>
+<p>The high PWM rate of HIFI mode places the carrier frequency beyond audible range, overcoming one of the disadvantages of STANDARD mode.</p>
 <p>Also, 14 bits of dynamic range in HIFI mode provides more definition than the nearly 9 bits in STANDARD mode. HIFI mode takes about the same amount of processing time as STANDARD mode, and sounds clearer and brighter. However, it requires an extra timer to be used on the Arduino, which could increase the chances of conflicts with other libraries or processes if they rely on Timer 2.</p>
 <p>Timer 1 is used to provide the PWM output at 125kHz. Timer 2 generates an interrupt at AUDIO_RATE 16384 Hz, which sets the Timer1 PWM levels. HIFI mode uses 2 output pins, and sums their outputs with resistors, so is slightly less convenient for rapid prototyping where you could listen to STANDARD mode by connecting the single output pin directly to a speaker or audio input (though a resistor of about 100 ohms is recommended).</p>
 <p>The resistors needed for HIFI output are 3.9k and 1M, with 1% or better tolerance. Use a multimeter to test a group of 1% resistors to find the most accurate.</p>
@@ -183,7 +203,7 @@ Functions</h2></td></tr>
  .................13.........12...............Sanguino <br/>
  </p>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00150">150</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00149">149</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -249,7 +269,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Put #define USE_AUDIO_INPUT true in <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a> to enable audio input on analog pin 0, otherwise make it false, to save resources. </p>
+<p>Put #define USE_AUDIO_INPUT true in <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> to enable audio input on analog pin 0, otherwise make it false, to save resources. </p>
 <p>When audio input is used, don't read other analog channels as they'll interfere with the audio sampling. </p>
 
 <p>Definition at line <a class="el" href="mozzi__config_8h_source.html#l00021">21</a> of file <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a>.</p>
@@ -279,15 +299,15 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gaedc83c89280eccc3b7fdb3115daab573"></a>
+<a class="anchor" id="ga75aa9f4a501f4b167343b8caac8c6837"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573">startMozzi</a> </td>
+          <td class="memname">void <a class="el" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837">startMozzi</a> </td>
           <td>(</td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>control_rate_hz</em></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>control_rate_hz</em> = <code><a class="el" href="group__core.html#gae5d737db8bc97ecf08d2ea3121782d26">CONTROL_RATE</a></code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -297,7 +317,7 @@ Functions</h2></td></tr>
 <p>Sets up the timers for audio and control rate processes. </p>
 <p>It goes in your sketch's setup() routine.</p>
 <p>In STANDARD and HIFI modes, Mozzi uses Timer 0 for control interrupts 0, disabling Arduino delay(), millis(), micros() and delayMicroseconds. For delaying events, you can use Mozzi's EventDelay() unit instead (not to be confused with AudioDelay()).</p>
-<p>In STANDARD mode, <a class="el" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573" title="Sets up the timers for audio and control rate processes.">startMozzi()</a> starts Timer 1 for PWM output and audio output interrupts, and in HIFI mode, Mozzi uses Timer 1 for PWM and Timer2 for audio interrupts.</p>
+<p>In STANDARD mode, <a class="el" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837" title="Sets up the timers for audio and control rate processes.">startMozzi()</a> starts Timer 1 for PWM output and audio output interrupts, and in HIFI mode, Mozzi uses Timer 1 for PWM and Timer2 for audio interrupts.</p>
 <p>The audio rate is currently fixed at 16384 Hz.</p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
@@ -308,7 +328,7 @@ Functions</h2></td></tr>
 <p>It's good to define CONTROL_RATE in your sketches (eg. #define CONTROL_RATE 128) because the literal numeric value is necessary for Oscils to work properly, and it also helps to keep the calculations in your sketch clear.</p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000008">Todo:</a></b></dt><dd>See if there is any advantage to using 8 bit port, without pwm, with a resistor ladder (maybe use readymade resistor networks). </dd></dl>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00228">228</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00230">230</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -347,7 +367,7 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>This is where you put your control code. </p>
-<p>You need <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> somewhere in your sketch, even if it's empty. <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> is called at the control rate you set in <a class="el" href="group__core.html#gaedc83c89280eccc3b7fdb3115daab573" title="Sets up the timers for audio and control rate processes.">startMozzi()</a>. To save processor load, avoid any calculations here which could be done in setup(). </p>
+<p>You need <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> somewhere in your sketch, even if it's empty. <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> is called at the control rate you set in <a class="el" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837" title="Sets up the timers for audio and control rate processes.">startMozzi()</a>. To save processor load, avoid any calculations here which could be done in setup(). </p>
 
 </div>
 </div>
@@ -355,7 +375,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 2 2013 18:21:23 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Apr 11 2013 10:34:47 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

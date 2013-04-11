@@ -16,7 +16,7 @@
  *  Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
  *  Check the Mozzi core module documentation for others and more detail
  *
- *                   3.9k
+ *                   3.9k 
  *   pin 9  ---WWWW-----|-----output
  *                     1M           |
  *   pin 10 ---WWWW---- |
@@ -24,6 +24,9 @@
  *                           4.7n  ==
  *                                     |
  *                                 ground
+ *
+ *  Resistors are ±0.5%  Measure and choose the most precise 
+ *  from a batch of whatever you can get.
  *
  *
  *  Mozzi help/discussion/announcements:

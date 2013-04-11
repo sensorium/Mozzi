@@ -43,6 +43,7 @@ var searchData=
   ['q7n0_5fto_5fq7n8',['Q7n0_to_Q7n8',['../group__mozzi__fixmath.html#ga81b0b1f295a6a724c100e600d6b4ce28',1,'mozzi_fixmath.h']]],
   ['q7n8_5fto_5ffloat',['Q7n8_to_float',['../group__mozzi__fixmath.html#gaad3cbbc6a772d246d26fd98b5a079382',1,'mozzi_fixmath.h']]],
   ['q7n8_5fto_5fq7n0',['Q7n8_to_Q7n0',['../group__mozzi__fixmath.html#gaa8be90cc674fc9ac72a2faafb11d6a5e',1,'mozzi_fixmath.h']]],
+  ['q8n0_5fto_5fq15n16',['Q8n0_to_Q15n16',['../group__mozzi__fixmath.html#gac0b4678c510db93302efb15497911907',1,'mozzi_fixmath.h']]],
   ['q8n0_5fto_5fq16n16',['Q8n0_to_Q16n16',['../group__mozzi__fixmath.html#ga589b5c022b59a72fc3fb39061048d193',1,'mozzi_fixmath.h']]],
   ['q8n0_5fto_5fq7n8',['Q8n0_to_Q7n8',['../group__mozzi__fixmath.html#ga4baa8569c241630ddd25d798d0a89b3d',1,'mozzi_fixmath.h']]],
   ['q8n0_5fto_5fq8n8',['Q8n0_to_Q8n8',['../group__mozzi__fixmath.html#ga90a5d59d5a529f4caaf408730230a156',1,'mozzi_fixmath.h']]],

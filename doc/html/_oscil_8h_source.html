@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1w</span>
+   &#160;<span id="projectnumber">alpha 0.01.1y</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -217,7 +217,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00178"></a>00178 
 <a name="l00179"></a>00179                 
 <a name="l00187"></a>00187                 <span class="keyword">inline</span>
-<a name="l00188"></a><a class="code" href="class_oscil.html#a3f7e26147e99bc1c60d33a1312005313">00188</a>                 <span class="keywordtype">void</span> <a class="code" href="class_oscil.html#a3f7e26147e99bc1c60d33a1312005313" title="Set the oscillator frequency with an unsigned int.">setFreq</a> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> frequency) {
+<a name="l00188"></a><a class="code" href="class_oscil.html#a23121f22ea447918088a79c7f9748b3d">00188</a>                 <span class="keywordtype">void</span> <a class="code" href="class_oscil.html#a23121f22ea447918088a79c7f9748b3d" title="Set the oscillator frequency with an unsigned int.">setFreq</a> (<span class="keywordtype">int</span> frequency) {
 <a name="l00189"></a>00189                                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 <a name="l00190"></a>00190                                 {
 <a name="l00191"></a>00191                                                 phase_increment_fractional = ((((<span class="keywordtype">unsigned</span> long)NUM_TABLE_CELLS&lt;&lt;ADJUST_FOR_NUM_TABLE_CELLS)*frequency)/UPDATE_RATE) &lt;&lt; (OSCIL_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS);
@@ -226,7 +226,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00194"></a>00194                 
 <a name="l00195"></a>00195                 
 <a name="l00201"></a>00201                 <span class="keyword">inline</span>
-<a name="l00202"></a><a class="code" href="class_oscil.html#aa342e74f8e73edda0b0f042770e3fba4">00202</a>                 <span class="keywordtype">void</span> <a class="code" href="class_oscil.html#a3f7e26147e99bc1c60d33a1312005313" title="Set the oscillator frequency with an unsigned int.">setFreq</a>(<span class="keywordtype">float</span> frequency)
+<a name="l00202"></a><a class="code" href="class_oscil.html#aa342e74f8e73edda0b0f042770e3fba4">00202</a>                 <span class="keywordtype">void</span> <a class="code" href="class_oscil.html#a23121f22ea447918088a79c7f9748b3d" title="Set the oscillator frequency with an unsigned int.">setFreq</a>(<span class="keywordtype">float</span> frequency)
 <a name="l00203"></a>00203                 { <span class="comment">// 1 us - using float doesn&#39;t seem to incur measurable overhead with the oscilloscope</span>
 <a name="l00204"></a>00204                                 ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 <a name="l00205"></a>00205                                 {
@@ -269,7 +269,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00260"></a>00260 
 <a name="l00271"></a>00271                 <span class="keyword">inline</span>
 <a name="l00272"></a>00272                 <span class="comment">//const </span>
-<a name="l00273"></a><a class="code" href="class_oscil.html#a7945fe18a67a52f36b3aa3f72f9d1f5c">00273</a>                 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_oscil.html#a7945fe18a67a52f36b3aa3f72f9d1f5c" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> frequency)
+<a name="l00273"></a><a class="code" href="class_oscil.html#a184110cb1901d2742a6016b46cbea027">00273</a>                 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_oscil.html#a184110cb1901d2742a6016b46cbea027" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq</a>(<span class="keywordtype">int</span> frequency)
 <a name="l00274"></a>00274                 {
 <a name="l00275"></a>00275                                 <span class="keywordflow">return</span> (((<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) &lt;&lt; OSCIL_F_BITS;
 <a name="l00276"></a>00276                 }
@@ -327,7 +327,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 2 2013 18:21:22 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Apr 11 2013 10:34:47 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

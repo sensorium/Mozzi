@@ -80,7 +80,7 @@ int updateAudio(){
   Q16n16 interpolatedFreq = aInterpolate.next(); // get the next linear interpolated freq
   aSin0.setFreq_Q16n16(interpolatedFreq); 
 
-  unsigned int smoothedFreq = aSmooth.next(freq1); // get the next filtered frequency
+  int smoothedFreq = aSmooth.next(freq1); // get the next filtered frequency
   aSin1.setFreq(smoothedFreq);
   
   return (int) (aSin0.next() + aSin1.next())>>1; // >>1 is like /2 but faster (the compiler doesn't seem to optimise it automatically)

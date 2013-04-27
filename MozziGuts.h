@@ -32,8 +32,6 @@
 #include "TimerZero.h"
 #include "FrequencyTimer2.h"
 
-
-
 /** @mainpage Welcome
 
 The latest version of Mozzi and this documentation are at the <a href="http://sensorium.github.com/Mozzi/">Mozzi home page.</a>
@@ -174,12 +172,22 @@ which can be a problem in some applications, requiring filtering to remove (see
 the Mozzi wiki for filter schematics).
 @todo Test 32768Hz audio rate option properly
 */
-#define AUDIO_RATE 16384
+//#define AUDIO_RATE 16384
 //#define AUDIO_RATE 32768
 
 /* Used internally for audio-rate optimisation.*/
-#define AUDIO_RATE_AS_LSHIFT 14
+//#define AUDIO_RATE_AS_LSHIFT 14
 //#define AUDIO_RATE_AS_LSHIFT 15
+
+#if (AUDIO_MODE == STANDARD) && (AUDIO_RATE == 32768)
+#error AUDIO_RATE 32768 does not work when AUDIO_MODE is STANDARD, check settings in Mozzi/mozzi_config.h
+#endif
+
+#if AUDIO_RATE == 16384
+#define AUDIO_RATE_AS_LSHIFT 14
+#elif AUDIO_RATE == 32768
+#define AUDIO_RATE_AS_LSHIFT 15
+#endif
 
 #if AUDIO_MODE == STANDARD
 #include "AudioConfigStandard9bitPwm.h"
@@ -206,8 +214,9 @@ typedef unsigned long ulong;
 
 
 /** @ingroup core
-Sets up the timers for audio and control rate processes. It goes in your
-sketch's setup() routine. 
+Sets up the timers for audio and control rate processes, storing the timer
+registers so they can be restored when Mozzi stops. startMozzi() goes in your sketch's
+setup() routine.
 
 In STANDARD and HIFI modes, Mozzi uses Timer 0 for control interrupts 0, disabling Arduino
 delay(), millis(), micros() and delayMicroseconds. 
@@ -228,10 +237,40 @@ sketches (eg. \#define CONTROL_RATE 128) because the literal numeric value is
 necessary for Oscils to work properly, and it also helps to keep the
 calculations in your sketch clear.
 
-@todo See if there is any advantage to using 8 bit port, without pwm, with a resistor ladder (maybe use readymade resistor networks).
+@todo See if there is any advantage to using 8 bit port, without pwm, with a resistor ladder 
+(maybe use readymade resistor networks).
 */
 void startMozzi(int control_rate_hz = CONTROL_RATE);
 
+
+
+/** @ingroup core
+Stops audio and control interrupts and restores the timers to the values they
+had before Mozzi was started. This will enable the standard Arduino time
+functions millis(), micros(), delay(), and delayMicroseconds(). This could be
+useful when using sensor libraries which depend on the same timers as Mozzi. 
+
+A potentially better option for resolving timer conflicts involves using
+non-blocking methods, such as demonstrated by the twowire_nonblock code in the
+forked version of Mozzi on github, so sound production can continue while
+reading sensors.
+
+As it is, pauseMozzi restores all the Timers used by Mozzi to their previous
+settings. Another scenario which could be easily hacked in MozziGuts.cpp could
+involve individually saving and restoring particular Timer registers depending
+on which one(s) are required for other tasks, so for example the control
+interrupt (Timer 0) could be suspended while audio continues.*/
+void pauseMozzi();
+
+
+
+/** @ingroup core
+Restores Mozzi audio and control interrupts, if they have been temporarily
+disabled with pauseMozzi(). This once more takes over Timer 0, and stops the
+Arduino time functions millis(), micros(), delay(), and delayMicroseconds() from
+working.
+*/
+void unPauseMozzi();
 
 /** @ingroup core
 This is where you put your audio code. updateAudio() has to keep up with the
@@ -286,5 +325,14 @@ http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS
 #if USE_AUDIO_INPUT
 int getAudioInput();
 #endif
+
+/**
+A replacement for Arduino micros() which is disabled by Mozzi which takes over Timer 0 for control interrupts.
+May be a useful hack for replacing micros() in time-related sensor libraries.
+Will also incorporate for a more accurate EventDelay().
+@return the approximate number of microseconds since the program began.
+*/
+unsigned long mozziMicros();
+
 
 #endif /* MOZZIGUTS_H_ */

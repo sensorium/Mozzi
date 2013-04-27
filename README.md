@@ -3,7 +3,7 @@ Mozzi
 sound synthesis library for Arduino
 ------------------------------------
 
-Version 0.01.1x
+Version 0.01.1z
 Tim Barrass 2010-13
 
 
@@ -121,8 +121,10 @@ Check for code and usage changes in NEWS.txt.
 
 ### Caveats
 
-Mozzi disables Arduino time functions millis(), micros(), delay(), and
-delayMicroseconds(). Instead, you can use Mozzi's EventDelay() for scheduling.
+While Mozzi is running, the Arduino time functions millis(), micros(), delay(), and
+delayMicroseconds() are disabled. Mozzi provides EventDelay() for scheduling, or sound production 
+can be suspended if the Arduino timers are required for reading sensors or other processes which 
+depend on timer functions.
 
 
 ###Contributions / Included Dependencies

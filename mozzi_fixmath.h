@@ -63,6 +63,7 @@ typedef unsigned long Q16n16;	/**< unsigned fractional number using 16 integer b
 #define Q16n16_FIX1 ((Q16n16) 65536)		/**< 1 in Q16n16 format*/
 #define Q0n15_FIX1 ((Q0n15) 32767)		/**< 0.999 in Q0n15 format*/
 #define Q0n16_FIX1 ((Q0n16) 65535)		/**< 0.999 in Q0n16 format*/
+#define Q15n0_FIX1  ((Q15n0) 16384)		/**< 1 in Q15n0 format*/
 #define Q15n16_FIX1 ((Q15n16) 65536)		/**< 1 in Q15n16 format*/
 #define Q8n24_FIX1 ((Q8n24) 16777216)	/**< 1 in Q8n24 format*/
 #define Q0n32_FIX1 ((Q0n32) 4294967295)	/**< 0.999999999767169 in Q0n32 format*/
@@ -252,6 +253,11 @@ float Q23n8_to_float(Q23n8 a) { return (static_cast<float>(a))/256; }			/**<Conv
 inline
 Q0n8 Q24n8_to_Q0n8(Q24n8 a) { return static_cast<Q0n8>(a); }			/**<Convert Q24n8 fixed to Q0n8 unsigned char. @param a is a Q24n8 unsigned long*/
 
+
+inline
+Q16n16 Q24n8_to_Q16n0(Q24n8 a) { return (static_cast<Q16n0>(a))>>8; }			/**<Convert Q24n8 fixed to Q16n0 unsigned int. @param a is a Q24n8 unsigned long*/
+
+
 inline
 Q32n0 Q24n8_to_Q32n0(Q24n8 a) { return static_cast<Q32n0>(a>>8); }		/**<Convert Q24n8 fixed to Q32n0 unsigned long. @param a is a Q24n8 unsigned long*/
 
@@ -270,6 +276,9 @@ Q15n0 Q15n16_to_Q15n0(Q15n16 a) { return static_cast<Q15n0>(a>>16); }		/**<Conve
 
 inline
 Q7n8 Q15n16_to_Q7n8(Q15n16 a) { return static_cast<Q7n8>(a>>8); }			/**<Convert Q15n16 fixed to Q7n8 signed int, keeping middle bits only. @param a is a Q15n16 signed long.*/
+
+inline
+Q23n8 Q15n16_to_Q23n8(Q15n16 a) { return static_cast<Q23n8>(a>>8); }			/**<Convert Q15n16 fixed to Q23n8 signed long. @param a is a Q15n16 signed long.*/
 
 inline
 float Q15n16_to_float(Q15n16 a) { return (static_cast<float>(a))/65536; }			/**<Convert fix to float. @param a is a Q15n16 signed long*/

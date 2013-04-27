@@ -79,7 +79,7 @@ public:
 	can be found in the table ".h" file if you are using a table made for
 	Mozzi by the char2mozzi.py python script in Mozzi's python
 	folder.*/
-	Oscil(const char * TABLE_NAME):table(TABLE_NAME)
+	Oscil(const char * TABLE_NAME):ADJUST_FOR_NUM_TABLE_CELLS((NUM_TABLE_CELLS<2048) ? 8 : 0),table(TABLE_NAME)
 	{}
 	
 	
@@ -89,7 +89,7 @@ public:
 	The table can be set or changed on the fly with setTable(). Any tables
 	used by the Oscil must be the same size.
 	*/
-	Oscil()
+	Oscil():ADJUST_FOR_NUM_TABLE_CELLS((NUM_TABLE_CELLS<2048) ? 8 : 0)
 	{}
 
 
@@ -221,7 +221,7 @@ public:
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
 			//phase_increment_fractional = (frequency* (NUM_TABLE_CELLS>>3)/(UPDATE_RATE>>6)) << (F_BITS-(8-3+6));
-			phase_increment_fractional = (((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)>>3)*frequency)/(UPDATE_RATE>>6)) 
+			phase_increment_fractional = ((((unsigned long)NUM_TABLE_CELLS<<(ADJUST_FOR_NUM_TABLE_CELLS-3))*frequency)/(UPDATE_RATE>>6)) 
 				<< (OSCIL_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS - (8-3+6));
 		}
 	}
@@ -229,7 +229,8 @@ public:
 
 	/** Set the frequency using Q16n16 fixed-point number format. This is useful in
 	combination with Q16n16_mtof(), a fast alternative to mtof(), using Q16n16
-	fixed-point format instead of floats.  Note: this should work OK with tables 2048 cells or smaller and
+	fixed-point format instead of floats.
+	@note This should work OK with tables 2048 cells or smaller and
 	frequencies up to 4096 Hz.  Can't be used with UPDATE_RATE less than 64 Hz.
 	@param frequency in Q16n16 fixed-point number format.
 	*/
@@ -239,7 +240,7 @@ public:
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
 			//phase_increment_fractional = ((frequency * (NUM_TABLE_CELLS>>7))/(UPDATE_RATE>>6)) << (F_BITS-16+1);
-			phase_increment_fractional = (((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)>>7)*frequency)/(UPDATE_RATE>>6)) 
+			phase_increment_fractional = ((((unsigned long)NUM_TABLE_CELLS<<(ADJUST_FOR_NUM_TABLE_CELLS-7))*frequency)/(UPDATE_RATE>>6)) 
 				<< (OSCIL_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS - 16 + 1);
 
 		}
@@ -295,8 +296,7 @@ private:
 
 	/** Used for shift arithmetic in setFreq() and its variations.
 	*/
-	static const unsigned char ADJUST_FOR_NUM_TABLE_CELLS = (NUM_TABLE_CELLS<2048) ? 8 : 0;
-	
+	const unsigned char ADJUST_FOR_NUM_TABLE_CELLS; 
 	
 	/** Increments the phase of the oscillator without returning a sample.
 	 */

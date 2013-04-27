@@ -22,7 +22,6 @@
 
 #ifndef LOWPASS_H_
 #define LOWPASS_H_
-//#include "mozzi_utils.h" // for testing timing
 
 /*
 simple resonant filter posted to musicdsp.org by Paul Kellett http://www.musicdsp.org/archive.php?classid=3#259
@@ -54,7 +53,8 @@ public:
 
 	/** Constructor.
 	*/
-	LowPassFilter();
+	LowPassFilter(){;
+	}
 
 
 	/** Set the cut off frequency,

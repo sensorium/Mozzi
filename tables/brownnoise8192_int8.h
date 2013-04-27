@@ -4,7 +4,7 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
-/* generated brown noise
+/* Brown noise generated in Audacity
 */
 
 #define BROWNNOISE8192_NUM_CELLS 8192

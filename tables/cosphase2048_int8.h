@@ -4,12 +4,19 @@
 #include "Arduino.h"
 #include <avr/pgmspace.h>
 
-/* cos out-of-phase
+/** Cosine wave, out-of-phase so it starts at 127, cycles to -128 and ends at 127
 */
 
+/** The number of entries in the table.
+*/
 #define COSPHASE2048_NUM_CELLS 2048
+
+/** A samplerate attribute which is useful for sample tables.
+*/
 #define COSPHASE2048_SAMPLERATE 2048
 
+/** The table data, stored in progmem.
+*/
 const char __attribute__((progmem)) COSPHASE2048_DATA []  =
         {
                 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,

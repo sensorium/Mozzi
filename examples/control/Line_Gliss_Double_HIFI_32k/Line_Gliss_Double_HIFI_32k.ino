@@ -14,8 +14,32 @@
  *  Also shows how to use random offsets between the oscillators'
  *  frequencies to produce a chorusing/doubling effect.
  *
- *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
- *  check the README or http://sensorium.github.com/Mozzi/
+ *  IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
+ *  be changed from STANDARD mode to HIFI.
+ *  In Mozz/mozzi_config.h, change
+ *  #define AUDIO_MODE STANDARD
+ *  //#define AUDIO_MODE HIFI
+ *  to
+ *  //#define AUDIO_MODE STANDARD
+ *  #define AUDIO_MODE HIFI
+ *
+ *  Also, AUDIO_RATE can be changed from 16384 to 32768 in mozzi_config.h,
+ *  to try out the higher sample rate.
+ *
+ *  Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
+ *  Check the Mozzi core module documentation for others and more detail
+ *
+ *                   3.9k 
+ *   pin 9  ---WWWW-----|-----output
+ *                     1M           |
+ *   pin 10 ---WWWW---- |
+ *                                     |
+ *                           4.7n  ==
+ *                                     |
+ *                                 ground
+ *
+ *  Resistors are ±0.5%  Measure and choose the most precise 
+ *  from a batch of whatever you can get.
  *
  *  Mozzi help/discussion/announcements:
  *  https://groups.google.com/forum/#!forum/mozzi-users

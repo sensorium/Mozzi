@@ -29,8 +29,9 @@ Version 0.01.1z
 	- added optional template parameters for LINEAR (default) or ALLPASS interpolation.
 	- added examples/delays/AudioFeedbackDelayAllpass example.
 - Added WavePacket.h, a synthesis unit based on Miller Puckette's wavepacket example in Pure Data.
-	- added examples/synthesis/WavePacket_Double_HIFI example
-
+	- added examples/synthesis/WavePacket_Double and WavePacket_Single examples
+- changed Sample_Offset example - now much more irritating!
+	
 
 Version 0.01.1y
 

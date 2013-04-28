@@ -69,17 +69,9 @@ public:
 	inline
 	void set(int fundamental, int bandwidth, int centrefreq)
 	{
-		aPhasor.setFreq(fundamental);
-		invFreq = Q8n24_FIX1 / fundamental;
-
-		Q15n16 bw = invFreq*bandwidth;
-		bw >>= 9;
-		bw = max(bw, Q15n16_FIX1>>3);
-		aBandwidth.set(bw, AUDIO_STEPS_PER_CONTROL);
-
-		Q15n16 cf = invFreq * centrefreq;
-		cf >>= 11;
-		aCentrefreq.set(cf, AUDIO_STEPS_PER_CONTROL);
+		setFundamental(fundamental);
+		setBandwidth(bandwidth);
+		setCentreFreq(centrefreq);
 	}
 
 
@@ -121,7 +113,7 @@ public:
 	void setCentreFreq(int centrefreq)
 	{
 		Q15n16 cf = invFreq * centrefreq;
-		cf >>= 11;
+		cf >>= 3;
 		aCentrefreq.set(cf, AUDIO_STEPS_PER_CONTROL);
 	}
 
@@ -179,7 +171,7 @@ private:
 
 		if(phase<param.previous_phase)
 		{
-			param.centrefreq = gcentrefreq;
+			param.centrefreq = gcentrefreq>>8;
 			param.bandwidth = Q15n16_to_Q23n8(gbandwidth);
 		}
 		param.previous_phase = phase;

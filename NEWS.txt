@@ -4,9 +4,6 @@ NEWS
 
 
 Version 0.01.1z
-- AUDIO_RATE is now a configuration option which can be defined as 16384 (default) or 32768.
-	16384 obviously allows more time for each sample to be calculated, but the higher rate may 
-	be useful in some situations.
 - Phasor - changed setFreq(unsigned int) to setFreq(int), old sketches will need updating
 - Reorganised examples into topic subdirectories and removed numbers
 - MozziGuts.cpp 
@@ -14,6 +11,14 @@ Version 0.01.1z
 	This will re-enable the Arduino time functions delay() and delayMicroseconds() while paused.
 	- Added unPauseMozzi(), allowing Mozzi to continue again after being paused.
 	- added mozziMicros(), a replacement for Arduino micros().
+- mozzi_config.h - AUDIO_RATE is now a configuration option which can be defined as 16384 (default) or 32768.
+	16384 obviously allows more time for each sample to be calculated, but the higher rate may 
+	be useful in some situations (experimental).
+	- AudioDelayFeedback.h 
+	- added optional template parameters for LINEAR (default) or ALLPASS interpolation.
+	- added examples/delays/AudioFeedbackDelayAllpass example.
+- Added WavePacket.h, a synthesis unit based on Miller Puckette's wavepacket example in Pure Data.
+	- added examples/synthesis/WavePacket_Double and WavePacket_Single examples
 - mozzi_fixmath.h 
 	- added Q24n8_to_Q16n0(Q24n8 a)
 	- added Q15n16_to_Q23n8(Q15n16 a)
@@ -25,12 +30,8 @@ Version 0.01.1z
 - Added DCfilter.h, a DC-blocking filter useful for highlighting changes in control signals, and added m_42_DCfilter example.
 - Oscil.h - consolidated some shift values together in setFreq_Q16n16 and setFreq_Q24n8
 - Merged LowPassFilter.cpp into LowPassFilter.h
-- AudioDelayFeedback.h 
-	- added optional template parameters for LINEAR (default) or ALLPASS interpolation.
-	- added examples/delays/AudioFeedbackDelayAllpass example.
-- Added WavePacket.h, a synthesis unit based on Miller Puckette's wavepacket example in Pure Data.
-	- added examples/synthesis/WavePacket_Double and WavePacket_Single examples
 - changed Sample_Offset example - now much more irritating!
+
 	
 
 Version 0.01.1y

@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1y</span>
+   &#160;<span id="projectnumber">alpha 0.01.1z</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -49,7 +49,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -113,10 +112,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a08ab94aeb466450173bd486fbf8eb823"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increments one step along the phase.  <a href="#a08ab94aeb466450173bd486fbf8eb823"></a><br/></td></tr>
 <tr class="memitem:a509e4a782a36cb9e913da170d6707421"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phasor.html#a509e4a782a36cb9e913da170d6707421">set</a> (unsigned long value)</td></tr>
 <tr class="memdesc:a509e4a782a36cb9e913da170d6707421"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the current value of the phasor.  <a href="#a509e4a782a36cb9e913da170d6707421"></a><br/></td></tr>
-<tr class="memitem:abd1eb9e6fdfa4362fdf188d2746e5c22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phasor.html#abd1eb9e6fdfa4362fdf188d2746e5c22">setFreq</a> (unsigned int frequency)</td></tr>
-<tr class="memdesc:abd1eb9e6fdfa4362fdf188d2746e5c22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency.">Phasor</a> frequency with an unsigned int.  <a href="#abd1eb9e6fdfa4362fdf188d2746e5c22"></a><br/></td></tr>
+<tr class="memitem:afc6106c648bddb5f2f084b8f34216b0f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phasor.html#afc6106c648bddb5f2f084b8f34216b0f">setFreq</a> (int frequency)</td></tr>
+<tr class="memdesc:afc6106c648bddb5f2f084b8f34216b0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency.">Phasor</a> frequency with an unsigned int.  <a href="#afc6106c648bddb5f2f084b8f34216b0f"></a><br/></td></tr>
 <tr class="memitem:a81f1976ebb4a91f66f26674efca52072"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phasor.html#a81f1976ebb4a91f66f26674efca52072">setFreq</a> (float frequency)</td></tr>
 <tr class="memdesc:a81f1976ebb4a91f66f26674efca52072"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency.">Phasor</a> frequency with a float.  <a href="#a81f1976ebb4a91f66f26674efca52072"></a><br/></td></tr>
+<tr class="memitem:a9b5992b53fa7e449fec950df00c46230"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230">phaseIncFromFreq</a> (int frequency)</td></tr>
+<tr class="memdesc:a9b5992b53fa7e449fec950df00c46230"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a> and <a class="el" href="class_phasor.html#aa3d62bdf762247b2523c0a625caeedd7" title="Set a specific phase increment.">setPhaseInc()</a> are for saving processor time when sliding between frequencies.  <a href="#a9b5992b53fa7e449fec950df00c46230"></a><br/></td></tr>
+<tr class="memitem:aa3d62bdf762247b2523c0a625caeedd7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phasor.html#aa3d62bdf762247b2523c0a625caeedd7">setPhaseInc</a> (unsigned long stepsize)</td></tr>
+<tr class="memdesc:aa3d62bdf762247b2523c0a625caeedd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a specific phase increment.  <a href="#aa3d62bdf762247b2523c0a625caeedd7"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;unsigned int UPDATE_RATE&gt;<br/>
@@ -180,6 +183,37 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a9b5992b53fa7e449fec950df00c46230"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int UPDATE_RATE&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="class_phasor.html">Phasor</a>&lt; UPDATE_RATE &gt;::<a class="el" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230">phaseIncFromFreq</a> </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>frequency</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p><a class="el" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a> and <a class="el" href="class_phasor.html#aa3d62bdf762247b2523c0a625caeedd7" title="Set a specific phase increment.">setPhaseInc()</a> are for saving processor time when sliding between frequencies. </p>
+<p>Instead of recalculating the phase increment for each frequency in between, you can just calculate the phase increment for each end frequency with <a class="el" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a>, then use a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> to interpolate on the fly and use <a class="el" href="class_phasor.html#aa3d62bdf762247b2523c0a625caeedd7" title="Set a specific phase increment.">setPhaseInc()</a> to set the phase increment at each step. (Note: I should really profile this with the oscilloscope to see if it's worth the extra confusion!) </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frequency</td><td>for which you want to calculate a phase increment value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>the phase increment value which will produce a given frequency. </dd></dl>
+
+<p>Definition at line <a class="el" href="_phasor_8h_source.html#l00114">114</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a509e4a782a36cb9e913da170d6707421"></a>
 <div class="memitem">
 <div class="memproto">
@@ -204,16 +238,16 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="abd1eb9e6fdfa4362fdf188d2746e5c22"></a>
+<a class="anchor" id="afc6106c648bddb5f2f084b8f34216b0f"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_phasor.html">Phasor</a>&lt; UPDATE_RATE &gt;::<a class="el" href="class_phasor.html#abd1eb9e6fdfa4362fdf188d2746e5c22">setFreq</a> </td>
+          <td class="memname">void <a class="el" href="class_phasor.html">Phasor</a>&lt; UPDATE_RATE &gt;::<a class="el" href="class_phasor.html#afc6106c648bddb5f2f084b8f34216b0f">setFreq</a> </td>
           <td>(</td>
-          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>frequency</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
@@ -228,8 +262,9 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note:</dt><dd>Timing 8us </dd></dl>
 
-<p>Definition at line <a class="el" href="_phasor_8h_source.html#l00082">82</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
+<p>Definition at line <a class="el" href="_phasor_8h_source.html#l00083">83</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
 
 </div>
 </div>
@@ -240,7 +275,7 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
 template&lt;unsigned int UPDATE_RATE&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_phasor.html">Phasor</a>&lt; UPDATE_RATE &gt;::<a class="el" href="class_phasor.html#abd1eb9e6fdfa4362fdf188d2746e5c22">setFreq</a> </td>
+          <td class="memname">void <a class="el" href="class_phasor.html">Phasor</a>&lt; UPDATE_RATE &gt;::<a class="el" href="class_phasor.html#afc6106c648bddb5f2f084b8f34216b0f">setFreq</a> </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>frequency</em></td><td>)</td>
@@ -258,7 +293,37 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_phasor_8h_source.html#l00093">93</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
+<p>Definition at line <a class="el" href="_phasor_8h_source.html#l00094">94</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa3d62bdf762247b2523c0a625caeedd7"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int UPDATE_RATE&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_phasor.html">Phasor</a>&lt; UPDATE_RATE &gt;::<a class="el" href="class_phasor.html#aa3d62bdf762247b2523c0a625caeedd7">setPhaseInc</a> </td>
+          <td>(</td>
+          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramname"><em>stepsize</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set a specific phase increment. </p>
+<p>See <a class="el" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a>. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stepsize</td><td>a phase increment value as calculated by <a class="el" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_phasor_8h_source.html#l00124">124</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
 
 </div>
 </div>
@@ -269,7 +334,7 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 11 2013 10:34:47 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 28 2013 21:00:56 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

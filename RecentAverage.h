@@ -34,7 +34,7 @@
 
 
 /**
-  RecentAverage reads repeatedly from an input, calculating a running average over a 
+  Calculates a running average over a 
   specified number of the most recent readings.  
   Like Smooth(), this is good for smoothing analog inputs in updateControl().
 */

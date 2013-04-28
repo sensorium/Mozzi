@@ -11,14 +11,14 @@ y[n] = x[n] - x[n-1] + a * y[n-1]
 Where y[n] is the output at the current time n, and x[n] is the input at the current time n. 
  */
  
-/** @ingroup util
+/**
 A DC-blocking filter useful for highlighting changes in control signals.
 The output of the filter settles to 0 if the incoming signal stays constant.  If the input changes, the
 filter output swings to track the change and eventually settles back to 0.
 */
 class DCfilter {
 public:
-/** @ingroup util
+/** 
 Instantiate a DC-blocking filter.
 @param pole sets the responsiveness of the filter, 
 how long it takes to settle to 0 if the input signal levels out at a constant value.
@@ -45,7 +45,7 @@ how long it takes to settle to 0 if the input signal levels out at a constant va
 	}
 	*/
 
-	/** @ingroup util
+	/** 
 	Filter the incoming value and return the result.
 	@param x the value to filter
 	@return filtered signal

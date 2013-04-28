@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1y</span>
+   &#160;<span id="projectnumber">alpha 0.01.1z</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -49,7 +49,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
@@ -120,35 +119,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00022"></a>00022 
 <a name="l00023"></a>00023 <span class="preprocessor">#ifndef LOWPASS_H_</span>
 <a name="l00024"></a>00024 <span class="preprocessor"></span><span class="preprocessor">#define LOWPASS_H_</span>
-<a name="l00025"></a>00025 <span class="preprocessor"></span><span class="comment">//#include &quot;mozzi_utils.h&quot; // for testing timing</span>
-<a name="l00026"></a>00026 
-<a name="l00027"></a>00027 <span class="comment">/*</span>
-<a name="l00028"></a>00028 <span class="comment">simple resonant filter posted to musicdsp.org by Paul Kellett http://www.musicdsp.org/archive.php?classid=3#259</span>
-<a name="l00029"></a>00029 <span class="comment"></span>
-<a name="l00030"></a>00030 <span class="comment">// set feedback amount given f and q between 0 and 1</span>
-<a name="l00031"></a>00031 <span class="comment">fb = q + q/(1.0 - f);</span>
-<a name="l00032"></a>00032 <span class="comment"></span>
-<a name="l00033"></a>00033 <span class="comment">// for each sample...</span>
-<a name="l00034"></a>00034 <span class="comment">buf0 = buf0 + f * (in - buf0 + fb * (buf0 - buf1));</span>
-<a name="l00035"></a>00035 <span class="comment">buf1 = buf1 + f * (buf0 - buf1);</span>
-<a name="l00036"></a>00036 <span class="comment">out = buf1;</span>
-<a name="l00037"></a>00037 <span class="comment"></span>
-<a name="l00038"></a>00038 <span class="comment">fixed point version of the filter</span>
-<a name="l00039"></a>00039 <span class="comment">&quot;dave&#39;s blog of art and programming&quot; http://www.pawfal.org/dave/blog/2011/09/</span>
-<a name="l00040"></a>00040 <span class="comment">*/</span>
+<a name="l00025"></a>00025 <span class="preprocessor"></span>
+<a name="l00026"></a>00026 <span class="comment">/*</span>
+<a name="l00027"></a>00027 <span class="comment">simple resonant filter posted to musicdsp.org by Paul Kellett http://www.musicdsp.org/archive.php?classid=3#259</span>
+<a name="l00028"></a>00028 <span class="comment"></span>
+<a name="l00029"></a>00029 <span class="comment">// set feedback amount given f and q between 0 and 1</span>
+<a name="l00030"></a>00030 <span class="comment">fb = q + q/(1.0 - f);</span>
+<a name="l00031"></a>00031 <span class="comment"></span>
+<a name="l00032"></a>00032 <span class="comment">// for each sample...</span>
+<a name="l00033"></a>00033 <span class="comment">buf0 = buf0 + f * (in - buf0 + fb * (buf0 - buf1));</span>
+<a name="l00034"></a>00034 <span class="comment">buf1 = buf1 + f * (buf0 - buf1);</span>
+<a name="l00035"></a>00035 <span class="comment">out = buf1;</span>
+<a name="l00036"></a>00036 <span class="comment"></span>
+<a name="l00037"></a>00037 <span class="comment">fixed point version of the filter</span>
+<a name="l00038"></a>00038 <span class="comment">&quot;dave&#39;s blog of art and programming&quot; http://www.pawfal.org/dave/blog/2011/09/</span>
+<a name="l00039"></a>00039 <span class="comment">*/</span>
+<a name="l00040"></a>00040 
 <a name="l00041"></a>00041 
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043 <span class="comment">// we are using .n fixed point (n bits for the fractional part)</span>
-<a name="l00044"></a>00044 <span class="preprocessor">#define FX_SHIFT 8</span>
-<a name="l00045"></a>00045 <span class="preprocessor"></span><span class="preprocessor">#define SHIFTED_1 ((unsigned char) 255)</span>
-<a name="l00046"></a>00046 <span class="preprocessor"></span>
-<a name="l00049"></a><a class="code" href="class_low_pass_filter.html">00049</a> <span class="keyword">class </span><a class="code" href="class_low_pass_filter.html" title="A resonant low pass filter for audio signals.">LowPassFilter</a>
-<a name="l00050"></a>00050 {
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052 <span class="keyword">public</span>:
+<a name="l00042"></a>00042 <span class="comment">// we are using .n fixed point (n bits for the fractional part)</span>
+<a name="l00043"></a>00043 <span class="preprocessor">#define FX_SHIFT 8</span>
+<a name="l00044"></a>00044 <span class="preprocessor"></span><span class="preprocessor">#define SHIFTED_1 ((unsigned char) 255)</span>
+<a name="l00045"></a>00045 <span class="preprocessor"></span>
+<a name="l00048"></a><a class="code" href="class_low_pass_filter.html">00048</a> <span class="keyword">class </span><a class="code" href="class_low_pass_filter.html" title="A resonant low pass filter for audio signals.">LowPassFilter</a>
+<a name="l00049"></a>00049 {
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051 <span class="keyword">public</span>:
+<a name="l00052"></a>00052 
 <a name="l00053"></a>00053 
-<a name="l00054"></a>00054 
-<a name="l00057"></a>00057                 <a class="code" href="class_low_pass_filter.html#a6d6538d3dfe603cce18711c990b85a03" title="Constructor.">LowPassFilter</a>();
+<a name="l00056"></a><a class="code" href="class_low_pass_filter.html#a6d6538d3dfe603cce18711c990b85a03">00056</a>                 <a class="code" href="class_low_pass_filter.html#a6d6538d3dfe603cce18711c990b85a03" title="Constructor.">LowPassFilter</a>(){;
+<a name="l00057"></a>00057                 }
 <a name="l00058"></a>00058 
 <a name="l00059"></a>00059 
 <a name="l00064"></a><a class="code" href="class_low_pass_filter.html#ad7958bf53ac1c24b5653861ed521ed14">00064</a>                 <span class="keywordtype">void</span> <a class="code" href="class_low_pass_filter.html#ad7958bf53ac1c24b5653861ed521ed14" title="Set the cut off frequency,.">setCutoffFreq</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> cutoff)
@@ -218,7 +217,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 11 2013 10:34:47 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 28 2013 21:00:56 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

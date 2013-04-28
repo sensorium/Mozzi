@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1y</span>
+   &#160;<span id="projectnumber">alpha 0.01.1z</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -96,40 +96,42 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <dd>Test whether using the template parameter makes any difference to speed, and rationalise which units which do and don't need them. Template objects are messy when you try to use pointers to them, you have to include the whole template shebang in the pointer handling.  </dd>
 <dt><a class="anchor" id="_todo000002"></a>Member <a class="el" href="class_a_d_s_r.html#af6cac55fb97760fffc885507f5d969d2">ADSR&lt; CONTROL_UPDATE_RATE &gt;::noteOff</a>  ()</dt>
 <dd>fix release for rate rather than steps (time), so it releases at the same rate whatever the current level.  </dd>
-<dt><a class="anchor" id="_todo000007"></a>Member <a class="el" href="group__core.html#ga5b972bafb3267e820993812beca1b298">AUDIO_RATE</a>  </dt>
+<dt><a class="anchor" id="_todo000004"></a>Member <a class="el" href="group__core.html#ga5b972bafb3267e820993812beca1b298">AUDIO_RATE</a>  </dt>
+<dd>Possible option for output to R/2R DAC circuit, like <a href="http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/">http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/</a> . Mozzi-users list has a thread on this.  </dd>
+<dt><a class="anchor" id="_todo000008"></a>Member <a class="el" href="group__core.html#ga4185aa30186b5d63775b5e1d50df1df9">AUDIO_RATE_AS_LSHIFT</a>  </dt>
 <dd><p class="startdd">Possible option for output to R/2R DAC circuit, like <a href="http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/">http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/</a> This would limit dynamic range to 8 bit, but would remove the 16384Hz pwm carrier frequency noise which can be a problem in some applications, requiring filtering to remove (see the Mozzi wiki for filter schematics). </p>
 <p class="enddd">Test 32768Hz audio rate option properly  </p>
 </dd>
-<dt><a class="anchor" id="_todo000009"></a>Member <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d">audioHook</a>  ()</dt>
+<dt><a class="anchor" id="_todo000010"></a>Member <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d">audioHook</a>  ()</dt>
 <dd>Try pre-decrement positions and swap gap calc around  </dd>
 <dt><a class="anchor" id="_todo000003"></a>Member <a class="el" href="class_event_delay.html#aa2a731ceb05f95cac1798089448c6aed">EventDelay&lt; UPDATE_RATE &gt;::start</a>  ()</dt>
 <dd>have a parameter to set whether it's single or repeating, so start doesn't have to be called for repeats. Pro: simpler user programming. Con: would require an if..then every time ready() is called.  </dd>
-<dt><a class="anchor" id="_todo000010"></a>Class <a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>  </dt>
+<dt><a class="anchor" id="_todo000011"></a>Class <a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>  </dt>
 <dd>Use conditional compilation to optimise setFreq() variations for different table sizes.  </dd>
-<dt><a class="anchor" id="_todo000013"></a>Member <a class="el" href="class_oscil.html#abe39f0740f318c0ecfb405cfac641a13">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::phMod</a>  (Q15n16 phmod_proportion)</dt>
+<dt><a class="anchor" id="_todo000014"></a>Member <a class="el" href="class_oscil.html#abe39f0740f318c0ecfb405cfac641a13">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::phMod</a>  (Q15n16 phmod_proportion)</dt>
 <dd>does the phmod_proportion param need to be Q15n16, why not Q0n15 and cast to long for multiply?  </dd>
-<dt><a class="anchor" id="_todo000011"></a>Member <a class="el" href="class_oscil.html#ab7b740eec56740426a47508562ed4dd5">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setPhase</a>  (unsigned int phase)</dt>
+<dt><a class="anchor" id="_todo000012"></a>Member <a class="el" href="class_oscil.html#ab7b740eec56740426a47508562ed4dd5">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setPhase</a>  (unsigned int phase)</dt>
 <dd>Test commenting out ATOMIC_BLOCK in setPhase(), setFreq(), etc.  </dd>
-<dt><a class="anchor" id="_todo000012"></a>Member <a class="el" href="class_oscil.html#afc77bfc5a1ad5926ad8df37725d480d7">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setPhaseFractional</a>  (unsigned long phase)</dt>
+<dt><a class="anchor" id="_todo000013"></a>Member <a class="el" href="class_oscil.html#afc77bfc5a1ad5926ad8df37725d480d7">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setPhaseFractional</a>  (unsigned long phase)</dt>
 <dd>Test commenting out ATOMIC_BLOCK in setPhase(), setFreq(), etc.  </dd>
-<dt><a class="anchor" id="_todo000004"></a>Member <a class="el" href="group__mozzi__fixmath.html#ga2e1d9d0fe4ba7edb9830efb7887c36bd">Q16n16_pow2</a>  (Q8n8 exponent)</dt>
+<dt><a class="anchor" id="_todo000005"></a>Member <a class="el" href="group__mozzi__fixmath.html#ga2e1d9d0fe4ba7edb9830efb7887c36bd">Q16n16_pow2</a>  (Q8n8 exponent)</dt>
 <dd><a class="el" href="group__mozzi__fixmath.html#ga2e1d9d0fe4ba7edb9830efb7887c36bd" title="This is a fast replacement for pow(2,x), where x is a fractional number in Q8n8 fixed-point exponent...">Q16n16_pow2()</a> accuracy needs more attention.  </dd>
-<dt><a class="anchor" id="_todo000014"></a>Member <a class="el" href="class_sample.html#a6b94fc8a8042f498fbd8693d9bce9719">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::next</a>  ()</dt>
+<dt><a class="anchor" id="_todo000015"></a>Member <a class="el" href="class_sample.html#a6b94fc8a8042f498fbd8693d9bce9719">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::next</a>  ()</dt>
 <dd>in next(), incrementPhase() happens in a different position than for <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> - check if it can be standardised  </dd>
-<dt><a class="anchor" id="_todo000015"></a>Class <a class="el" href="class_smooth.html">Smooth&lt; T &gt;</a>  </dt>
+<dt><a class="anchor" id="_todo000016"></a>Class <a class="el" href="class_smooth.html">Smooth&lt; T &gt;</a>  </dt>
 <dd>Check if 8 bit templates can work efficiently with a higher res smoothness - as is they don't have enough resolution to work well at audio rate. See if <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> might be more useful in most cases.  </dd>
-<dt><a class="anchor" id="_todo000008"></a>Member <a class="el" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837">startMozzi</a>  (int control_rate_hz=CONTROL_RATE)</dt>
+<dt><a class="anchor" id="_todo000009"></a>Member <a class="el" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837">startMozzi</a>  (int control_rate_hz=CONTROL_RATE)</dt>
 <dd>See if there is any advantage to using 8 bit port, without pwm, with a resistor ladder (maybe use readymade resistor networks).  </dd>
-<dt><a class="anchor" id="_todo000016"></a>Class <a class="el" href="class_state_variable.html">StateVariable&lt; FILTER_TYPE &gt;</a>  </dt>
+<dt><a class="anchor" id="_todo000017"></a>Class <a class="el" href="class_state_variable.html">StateVariable&lt; FILTER_TYPE &gt;</a>  </dt>
 <dd>Try adding code to constrain the internal variables to enable resonant saturating effects.  </dd>
-<dt><a class="anchor" id="_todo000006"></a>Member <a class="el" href="group__random.html#gaf2deee83847f1fcee2c859d97bd072f6">xorshift96</a>  ()</dt>
+<dt><a class="anchor" id="_todo000007"></a>Member <a class="el" href="group__random.html#gaf2deee83847f1fcee2c859d97bd072f6">xorshift96</a>  ()</dt>
 <dd>check timing of <a class="el" href="group__random.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96()</a>, <a class="el" href="group__random.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand()</a> and other PRNG candidates. </dd>
 </dl>
 </div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 11 2013 10:34:47 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 28 2013 18:27:56 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

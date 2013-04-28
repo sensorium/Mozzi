@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1y</span>
+   &#160;<span id="projectnumber">alpha 0.01.1z</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -49,7 +49,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -100,7 +99,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="textblock">Here are the classes, structs, unions and interfaces with brief descriptions:</div><table>
   <tr><td class="indexkey"><a class="el" href="class_a_d_s_r.html">ADSR&lt; CONTROL_UPDATE_RATE &gt;</a></td><td class="indexvalue">A simple <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator.">ADSR</a> envelope generator </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_audio_delay.html">AudioDelay&lt; NUM_BUFFER_SAMPLES &gt;</a></td><td class="indexvalue">Audio delay line for comb filter, flange, chorus and short echo effects </td></tr>
-  <tr><td class="indexkey"><a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback&lt; NUM_BUFFER_SAMPLES &gt;</a></td><td class="indexvalue">Audio delay line with feedback for comb filter, flange, chorus and short echo effects </td></tr>
+  <tr><td class="indexkey"><a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;</a></td><td class="indexvalue">Audio delay line with feedback for comb filter, flange, chorus and short echo effects </td></tr>
+  <tr><td class="indexkey"><a class="el" href="class_d_cfilter.html">DCfilter</a></td><td class="indexvalue">A DC-blocking filter useful for highlighting changes in control signals </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_ead.html">Ead</a></td><td class="indexvalue">Exponential attack decay envelope </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_event_delay.html">EventDelay&lt; UPDATE_RATE &gt;</a></td><td class="indexvalue">A non-blocking replacement for Arduino's delay() function (which is disabled by Mozzi) </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_line.html">Line&lt; T &gt;</a></td><td class="indexvalue">For linear changes with a minimum of calculation at each step </td></tr>
@@ -109,18 +109,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <tr><td class="indexkey"><a class="el" href="class_phasor.html">Phasor&lt; UPDATE_RATE &gt;</a></td><td class="indexvalue"><a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency.">Phasor</a> repeatedly generates a high resolution ramp at a variable frequency </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_portamento.html">Portamento&lt; CONTROL_UPDATE_RATE &gt;</a></td><td class="indexvalue">A simple portamento (pitch slide from one note to the next) effect, useful for note-based applications </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_r_cpoll.html">RCpoll&lt; SENSOR_PIN &gt;</a></td><td class="indexvalue">A class for reading voltage on a digital pin, derived from <a href="http://arduino.cc/en/Tutorial/RCtime">http://arduino.cc/en/Tutorial/RCtime</a> </td></tr>
+  <tr><td class="indexkey"><a class="el" href="class_recent_average.html">RecentAverage&lt; T, NUM_READINGS &gt;</a></td><td class="indexvalue">Calculates a running average over a specified number of the most recent readings </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_sample.html">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="indexvalue"><a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> is like <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>, it plays a wavetable </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_smooth.html">Smooth&lt; T &gt;</a></td><td class="indexvalue">A simple infinite impulse response low pass filter for smoothing control signals </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_state_variable.html">StateVariable&lt; FILTER_TYPE &gt;</a></td><td class="indexvalue">A State Variable filter which offers 12db resonant low, high, bandpass and notch modes </td></tr>
+  <tr><td class="indexkey"><a class="el" href="class_wave_packet.html">WavePacket&lt; ALGORITHM &gt;</a></td><td class="indexvalue">Wavepacket synthesis, with two overlapping streams of wave packets </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_wave_shaper.html">WaveShaper&lt; T &gt;</a></td><td class="indexvalue"><a class="el" href="class_wave_shaper.html" title="WaveShaper maps values from its input to values in a table, which are returned as output...">WaveShaper</a> maps values from its input to values in a table, which are returned as output </td></tr>
-  <tr><td class="indexkey"><a class="el" href="class_wave_shaper_3_01char_01_4.html">WaveShaper&lt; char &gt;</a></td><td class="indexvalue">Char specialisation of <a class="el" href="class_wave_shaper.html" title="WaveShaper maps values from its input to values in a table, which are returned as output...">WaveShaper</a> template </td></tr>
-  <tr><td class="indexkey"><a class="el" href="class_wave_shaper_3_01int_01_4.html">WaveShaper&lt; int &gt;</a></td><td class="indexvalue">Int specialisation of <a class="el" href="class_wave_shaper.html" title="WaveShaper maps values from its input to values in a table, which are returned as output...">WaveShaper</a> template </td></tr>
 </table>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 11 2013 10:34:47 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 28 2013 21:00:56 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

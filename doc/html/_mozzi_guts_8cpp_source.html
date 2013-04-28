@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1y</span>
+   &#160;<span id="projectnumber">alpha 0.01.1z</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -49,7 +49,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
@@ -153,201 +152,310 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00055"></a>00055 <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> output_buffer_tail; <span class="comment">// shared by audioHook() (in loop()), and outputAudio() (in audio interrupt), where it is changed</span>
 <a name="l00056"></a>00056 
 <a name="l00057"></a>00057 <span class="comment">//-----------------------------------------------------------------------------------------------------------------</span>
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059 <span class="preprocessor">#if USE_AUDIO_INPUT</span>
-<a name="l00060"></a>00060 <span class="preprocessor"></span><span class="comment">//#include &quot;Arduino.h&quot;</span>
-<a name="l00061"></a>00061 <span class="preprocessor">#include &quot;mozzi_analog.h&quot;</span>
+<a name="l00058"></a>00058 <span class="comment">// to store backups of timer registers so Mozzi can be stopped and pre_mozzi timer values can be restored</span>
+<a name="l00059"></a>00059 <span class="keyword">static</span> byte pre_mozzi_TCCR0A, pre_mozzi_TCCR0B, pre_mozzi_OCR0A, pre_mozzi_TIMSK0;
+<a name="l00060"></a>00060 <span class="keyword">static</span> byte pre_mozzi_TCCR1A, pre_mozzi_TCCR1B, pre_mozzi_OCR1A, pre_mozzi_TIMSK1;
+<a name="l00061"></a>00061 <span class="keyword">static</span> byte pre_mozzi_TCCR2A, pre_mozzi_TCCR2B, pre_mozzi_OCR2A, pre_mozzi_TIMSK2;
 <a name="l00062"></a>00062 
-<a name="l00063"></a>00063 <span class="keyword">static</span> <span class="keywordtype">void</span> adcSetupAudioInput(){
-<a name="l00064"></a>00064                 <a class="code" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">adcEnableInterrupt</a>();
-<a name="l00065"></a>00065                 <a class="code" href="group__analog.html#gaf46803d06aa1d839192cc6125e39ff01" title="Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in u...">setupFastAnalogRead</a>();
-<a name="l00066"></a>00066                 <a class="code" href="group__analog.html#gae0d3533acb5fd56db8f7317e24bea6b5" title="Set the channel or pin for the next analog input to be read from.">adcSetChannel</a>(0);
-<a name="l00067"></a>00067 }
-<a name="l00068"></a>00068 
-<a name="l00069"></a>00069 <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keywordtype">long</span> input_gap;
-<a name="l00070"></a>00070 <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> input_buffer_head;
-<a name="l00071"></a>00071 <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keywordtype">int</span> input_buffer[BUFFER_NUM_CELLS];
-<a name="l00072"></a>00072 <span class="keyword">static</span> <span class="keywordtype">boolean</span> do_update_audio;
-<a name="l00073"></a>00073 <span class="keyword">static</span> <span class="keywordtype">int</span> audio_input; <span class="comment">// holds the latest audio from input_buffer</span>
-<a name="l00074"></a>00074 
-<a name="l00075"></a>00075 
-<a name="l00076"></a>00076 <span class="keywordtype">int</span> getAudioInput()
-<a name="l00077"></a>00077 {
-<a name="l00078"></a>00078                 <span class="keywordflow">return</span> audio_input;
-<a name="l00079"></a>00079 }
-<a name="l00080"></a>00080 
-<a name="l00081"></a>00081 
-<a name="l00082"></a>00082 <span class="comment">/* Audio ISR. This is called with when the adc finishes a conversion.</span>
-<a name="l00083"></a>00083 <span class="comment">*/</span>
-<a name="l00084"></a>00084 ISR(ADC_vect, ISR_BLOCK)
-<a name="l00085"></a>00085 {
-<a name="l00086"></a>00086  <span class="comment">// gets here about 16us after being set audio output isr</span>
-<a name="l00087"></a>00087                 input_buffer_head++;
-<a name="l00088"></a>00088                 input_buffer[input_buffer_head &amp; (BUFFER_NUM_CELLS-1)] = ADC; <span class="comment">// put new data into input_buffer, don&#39;t worry about overwriting old, as guarding would also cause a glitch</span>
-<a name="l00089"></a>00089                 <span class="keywordflow">if</span> (input_gap &gt; (BUFFER_NUM_CELLS/2)) {
-<a name="l00090"></a>00090                                 do_update_audio = <span class="keyword">true</span>;
-<a name="l00091"></a>00091                 }<span class="keywordflow">else</span>{
-<a name="l00092"></a>00092                                 do_update_audio = <span class="keyword">false</span>;
-<a name="l00093"></a>00093                 }
-<a name="l00094"></a>00094 }
-<a name="l00095"></a>00095 
-<a name="l00096"></a>00096 <span class="preprocessor">#endif</span>
-<a name="l00097"></a>00097 <span class="preprocessor"></span>
-<a name="l00098"></a>00098 
-<a name="l00099"></a>00099 
-<a name="l00100"></a><a class="code" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d">00100</a> <span class="keywordtype">void</span> <a class="code" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook</a>() <span class="comment">// 2us excluding updateAudio()</span>
-<a name="l00101"></a>00101 {
-<a name="l00102"></a>00102                 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> output_buffer_head = 0;
-<a name="l00103"></a>00103                 <span class="keywordtype">long</span> output_gap = output_buffer_head - output_buffer_tail; <span class="comment">// wraps to a big number if it&#39;s negative, and will take a long time to wrap</span>
+<a name="l00063"></a>00063 <span class="comment">// to store backups of mozzi&#39;s changes to timer registers so Mozzi can be paused and unPaused</span>
+<a name="l00064"></a>00064 <span class="keyword">static</span> byte mozzi_TCCR0A, mozzi_TCCR0B, mozzi_OCR0A, mozzi_TIMSK0;
+<a name="l00065"></a>00065 <span class="keyword">static</span> byte mozzi_TCCR1A, mozzi_TCCR1B, mozzi_OCR1A, mozzi_TIMSK1;
+<a name="l00066"></a>00066 <span class="keyword">static</span> byte mozzi_TCCR2A, mozzi_TCCR2B, mozzi_OCR2A, mozzi_TIMSK2;
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068 <span class="preprocessor">#if USE_AUDIO_INPUT</span>
+<a name="l00069"></a>00069 <span class="preprocessor"></span><span class="comment">//#include &quot;Arduino.h&quot;</span>
+<a name="l00070"></a>00070 <span class="preprocessor">#include &quot;mozzi_analog.h&quot;</span>
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072 <span class="keyword">static</span> <span class="keywordtype">void</span> adcSetupAudioInput(){
+<a name="l00073"></a>00073                 <a class="code" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">adcEnableInterrupt</a>();
+<a name="l00074"></a>00074                 <a class="code" href="group__analog.html#gaf46803d06aa1d839192cc6125e39ff01" title="Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in u...">setupFastAnalogRead</a>();
+<a name="l00075"></a>00075                 <a class="code" href="group__analog.html#gae0d3533acb5fd56db8f7317e24bea6b5" title="Set the channel or pin for the next analog input to be read from.">adcSetChannel</a>(0);
+<a name="l00076"></a>00076 }
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078 <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keywordtype">long</span> input_gap;
+<a name="l00079"></a>00079 <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> input_buffer_head;
+<a name="l00080"></a>00080 <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keywordtype">int</span> input_buffer[BUFFER_NUM_CELLS];
+<a name="l00081"></a>00081 <span class="keyword">static</span> <span class="keywordtype">boolean</span> do_update_audio;
+<a name="l00082"></a>00082 <span class="keyword">static</span> <span class="keywordtype">int</span> audio_input; <span class="comment">// holds the latest audio from input_buffer</span>
+<a name="l00083"></a>00083 
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085 <span class="keywordtype">int</span> getAudioInput()
+<a name="l00086"></a>00086 {
+<a name="l00087"></a>00087                 <span class="keywordflow">return</span> audio_input;
+<a name="l00088"></a>00088 }
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091 <span class="comment">/* Audio ISR. This is called with when the adc finishes a conversion.</span>
+<a name="l00092"></a>00092 <span class="comment">*/</span>
+<a name="l00093"></a>00093 ISR(ADC_vect, ISR_BLOCK)
+<a name="l00094"></a>00094 {
+<a name="l00095"></a>00095                 <span class="comment">// gets here about 16us after being set audio output isr</span>
+<a name="l00096"></a>00096                 input_buffer_head++;
+<a name="l00097"></a>00097                 input_buffer[input_buffer_head &amp; (BUFFER_NUM_CELLS-1)] = ADC; <span class="comment">// put new data into input_buffer, don&#39;t worry about overwriting old, as guarding would also cause a glitch</span>
+<a name="l00098"></a>00098                 <span class="keywordflow">if</span> (input_gap &gt; (BUFFER_NUM_CELLS/2)) {
+<a name="l00099"></a>00099                                 do_update_audio = <span class="keyword">true</span>;
+<a name="l00100"></a>00100                 }<span class="keywordflow">else</span>{
+<a name="l00101"></a>00101                                 do_update_audio = <span class="keyword">false</span>;
+<a name="l00102"></a>00102                 }
+<a name="l00103"></a>00103 }
 <a name="l00104"></a>00104 
-<a name="l00105"></a>00105 <span class="preprocessor">#if USE_AUDIO_INPUT // 3us</span>
+<a name="l00105"></a>00105 <span class="preprocessor">#endif</span>
 <a name="l00106"></a>00106 <span class="preprocessor"></span>
-<a name="l00107"></a>00107                 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> input_buffer_tail =0;
-<a name="l00108"></a>00108                 input_gap = input_buffer_head - input_buffer_tail; <span class="comment">// wraps to a big number if it&#39;s negative, and will take a long time to wrap</span>
-<a name="l00109"></a>00109                 <span class="keywordflow">if</span> ((output_gap &lt; BUFFER_NUM_CELLS) &amp;&amp; do_update_audio) {
-<a name="l00110"></a>00110                                 input_buffer_tail++;
-<a name="l00111"></a>00111                                 audio_input = input_buffer[input_buffer_tail &amp; (BUFFER_NUM_CELLS-1)];
-<a name="l00112"></a>00112 
-<a name="l00113"></a>00113 <span class="preprocessor">#else</span>
-<a name="l00114"></a>00114 <span class="preprocessor"></span>
-<a name="l00115"></a>00115                 <span class="keywordflow">if</span>(output_gap &lt; BUFFER_NUM_CELLS) <span class="comment">// prevent writing over cells which haven&#39;t been output yet</span>
-<a name="l00116"></a>00116                 {
-<a name="l00117"></a>00117                                 
-<a name="l00118"></a>00118 <span class="preprocessor">#endif</span>
-<a name="l00119"></a>00119 <span class="preprocessor"></span>                                output_buffer_head++;
-<a name="l00120"></a>00120                                 output_buffer[(<span class="keywordtype">unsigned</span> char)output_buffer_head &amp; (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)(BUFFER_NUM_CELLS-1)] = (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>) (<a class="code" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio</a>() + AUDIO_BIAS);
-<a name="l00121"></a>00121                 }
-<a name="l00122"></a>00122                 
-<a name="l00123"></a>00123 
-<a name="l00124"></a>00124 }
-<a name="l00125"></a>00125 
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108 
+<a name="l00109"></a><a class="code" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d">00109</a> <span class="keywordtype">void</span> <a class="code" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook</a>() <span class="comment">// 2us excluding updateAudio()</span>
+<a name="l00110"></a>00110 {
+<a name="l00111"></a>00111                 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> output_buffer_head = 0;
+<a name="l00112"></a>00112                 <span class="keywordtype">long</span> output_gap = output_buffer_head - output_buffer_tail; <span class="comment">// wraps to a big number if it&#39;s negative, and will take a long time to wrap</span>
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114 <span class="preprocessor">#if USE_AUDIO_INPUT // 3us</span>
+<a name="l00115"></a>00115 <span class="preprocessor"></span>
+<a name="l00116"></a>00116                 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> input_buffer_tail =0;
+<a name="l00117"></a>00117                 input_gap = input_buffer_head - input_buffer_tail; <span class="comment">// wraps to a big number if it&#39;s negative, and will take a long time to wrap</span>
+<a name="l00118"></a>00118                 <span class="keywordflow">if</span> ((output_gap &lt; BUFFER_NUM_CELLS) &amp;&amp; do_update_audio) {
+<a name="l00119"></a>00119                                 input_buffer_tail++;
+<a name="l00120"></a>00120                                 audio_input = input_buffer[input_buffer_tail &amp; (BUFFER_NUM_CELLS-1)];
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122 <span class="preprocessor">#else</span>
+<a name="l00123"></a>00123 <span class="preprocessor"></span>
+<a name="l00124"></a>00124                                 <span class="keywordflow">if</span>(output_gap &lt; BUFFER_NUM_CELLS) <span class="comment">// prevent writing over cells which haven&#39;t been output yet</span>
+<a name="l00125"></a>00125                                 {
 <a name="l00126"></a>00126 
-<a name="l00127"></a>00127 <span class="comment">//-----------------------------------------------------------------------------------------------------------------</span>
-<a name="l00128"></a>00128 <span class="preprocessor">#if (AUDIO_MODE == STANDARD)</span>
-<a name="l00129"></a>00129 <span class="preprocessor"></span>
-<a name="l00130"></a>00130 <span class="keyword">static</span> <span class="keywordtype">void</span> startAudioStandard9bitPwm(){
-<a name="l00131"></a>00131                 pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);           <span class="comment">// set pin to output for audio</span>
-<a name="l00132"></a>00132                 Timer1.initialize(1000000UL/<a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298" title="AUDIO_RATE is fixed at 16384 Hz for now.">AUDIO_RATE</a>, PHASE_FREQ_CORRECT);                    <span class="comment">// set period, phase and frequency correct</span>
-<a name="l00133"></a>00133                 <span class="comment">//Serial.print(&quot;STANDARD Timer 1 period = &quot;); Serial.println(Timer1.getPeriod()); // 976</span>
+<a name="l00127"></a>00127 <span class="preprocessor">#endif</span>
+<a name="l00128"></a>00128 <span class="preprocessor"></span>                                                output_buffer_head++;
+<a name="l00129"></a>00129                                                 output_buffer[(<span class="keywordtype">unsigned</span> char)output_buffer_head &amp; (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)(BUFFER_NUM_CELLS-1)] = (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>) (<a class="code" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio</a>() + AUDIO_BIAS);
+<a name="l00130"></a>00130                                 }
+<a name="l00131"></a>00131 
+<a name="l00132"></a>00132 
+<a name="l00133"></a>00133                 }
 <a name="l00134"></a>00134 
-<a name="l00135"></a>00135                 Timer1.pwm(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);                    <span class="comment">// pwm pin, 50% of Mozzi&#39;s duty cycle, ie. 0 signal</span>
-<a name="l00136"></a>00136                 <span class="comment">//Timer1.attachInterrupt(outputAudio); // TB 15-2-2013 Replaced this line with the ISR, saves some processor time</span>
-<a name="l00137"></a>00137                 TIMSK1 = _BV(TOIE1);            <span class="comment">// Overflow Interrupt Enable (when not using Timer1.attachInterrupt())</span>
-<a name="l00138"></a>00138 
-<a name="l00139"></a>00139 <span class="preprocessor">#if USE_AUDIO_INPUT</span>
-<a name="l00140"></a>00140 <span class="preprocessor"></span>                adcSetupAudioInput();
-<a name="l00141"></a>00141 <span class="preprocessor">#endif</span>
-<a name="l00142"></a>00142 <span class="preprocessor"></span>}
-<a name="l00143"></a>00143 
-<a name="l00144"></a>00144 
-<a name="l00145"></a>00145 <span class="comment">/* Interrupt service routine moves sound data from the output buffer to the</span>
-<a name="l00146"></a>00146 <span class="comment">Arduino output register, running at AUDIO_RATE. */</span>
-<a name="l00147"></a>00147 ISR(TIMER1_OVF_vect, ISR_BLOCK) {
-<a name="l00148"></a>00148 <span class="preprocessor">#if USE_AUDIO_INPUT</span>
-<a name="l00149"></a>00149 <span class="preprocessor"></span>                sbi(ADCSRA, ADSC);                                                              <span class="comment">// start next adc conversion</span>
-<a name="l00150"></a>00150 <span class="preprocessor">#endif</span>
-<a name="l00151"></a>00151 <span class="preprocessor"></span>                output_buffer_tail++;
-<a name="l00152"></a>00152                 AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer[(<span class="keywordtype">unsigned</span> char)output_buffer_tail &amp; (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)(BUFFER_NUM_CELLS-1)]; <span class="comment">// 1us, 2.5us with longs</span>
-<a name="l00153"></a>00153 }
-<a name="l00154"></a>00154 
-<a name="l00155"></a>00155 
-<a name="l00156"></a>00156 <span class="comment">//-----------------------------------------------------------------------------------------------------------------</span>
-<a name="l00157"></a>00157 <span class="preprocessor">#elif (AUDIO_MODE == HIFI)</span>
-<a name="l00158"></a>00158 <span class="preprocessor"></span>
-<a name="l00159"></a>00159 <span class="comment">/* set up Timer 2 using modified FrequencyTimer2 library */</span>
-<a name="l00160"></a>00160 <span class="keywordtype">void</span> dummy(){}
-<a name="l00161"></a>00161 <span class="keyword">static</span> <span class="keywordtype">void</span> setupTimer2(){
-<a name="l00162"></a>00162                 <span class="comment">// audio output interrupt on timer 2, sets the pwm levels of timer 1</span>
-<a name="l00163"></a>00163                 FrequencyTimer2::setPeriod(2000000UL/16384); <span class="comment">// gives a period half of what&#39;s provided, for some reason</span>
-<a name="l00164"></a>00164                 FrequencyTimer2::enable();
-<a name="l00165"></a>00165                 FrequencyTimer2::setOnOverflow(dummy);
-<a name="l00166"></a>00166 }
-<a name="l00167"></a>00167 
-<a name="l00168"></a>00168 
-<a name="l00169"></a>00169 <span class="keyword">static</span> <span class="keywordtype">void</span> startAudioHiSpeed14bitPwm(){
-<a name="l00170"></a>00170                 <span class="comment">// pwm on timer 1</span>
-<a name="l00171"></a>00171                 pinMode(AUDIO_CHANNEL_1_HIGHBYTE_PIN, OUTPUT);  <span class="comment">// set pin to output for audio, use 3.9k resistor</span>
-<a name="l00172"></a>00172                 pinMode(AUDIO_CHANNEL_1_LOWBYTE_PIN, OUTPUT);   <span class="comment">// set pin to output for audio, use 1M resistor</span>
-<a name="l00173"></a>00173 
-<a name="l00174"></a>00174                 Timer1.initialize(1000000UL/125000, FAST);                      <span class="comment">// set period for 125000 Hz fast pwm carrier frequency = 14 bits</span>
-<a name="l00175"></a>00175                 <span class="comment">// Serial.print(&quot;HIFI Timer 1 period = &quot;); Serial.println(Timer1.getPeriod());</span>
+<a name="l00135"></a>00135 
+<a name="l00136"></a>00136                 <span class="comment">//-----------------------------------------------------------------------------------------------------------------</span>
+<a name="l00137"></a>00137 <span class="preprocessor">#if (AUDIO_MODE == STANDARD)</span>
+<a name="l00138"></a>00138 <span class="preprocessor"></span>
+<a name="l00139"></a>00139                 <span class="keyword">static</span> <span class="keywordtype">void</span> startAudioStandard9bitPwm(){
+<a name="l00140"></a>00140                                 <span class="comment">// backup pre-mozzi register values</span>
+<a name="l00141"></a>00141                                 pre_mozzi_TCCR1A = TCCR1A;
+<a name="l00142"></a>00142                                 pre_mozzi_TCCR1B = TCCR1B;
+<a name="l00143"></a>00143                                 pre_mozzi_OCR1A = OCR1A;
+<a name="l00144"></a>00144                                 pre_mozzi_TIMSK1 = TIMSK1;
+<a name="l00145"></a>00145                                 
+<a name="l00146"></a>00146                                 pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);           <span class="comment">// set pin to output for audio</span>
+<a name="l00147"></a>00147                                 Timer1.initialize(1000000UL/<a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298" title="AUDIO_RATE can be #defined as 16384 or 32768 Hertz in Mozzi/mozzi_config.h.">AUDIO_RATE</a>, PHASE_FREQ_CORRECT);                    <span class="comment">// set period, phase and frequency correct</span>
+<a name="l00148"></a>00148                                 <span class="comment">//Serial.print(&quot;STANDARD Timer 1 period = &quot;); Serial.println(Timer1.getPeriod()); // 976</span>
+<a name="l00149"></a>00149 
+<a name="l00150"></a>00150                                 Timer1.pwm(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);                    <span class="comment">// pwm pin, 50% of Mozzi&#39;s duty cycle, ie. 0 signal</span>
+<a name="l00151"></a>00151                                 <span class="comment">//Timer1.attachInterrupt(outputAudio); // TB 15-2-2013 Replaced this line with the ISR, saves some processor time</span>
+<a name="l00152"></a>00152                                 TIMSK1 = _BV(TOIE1);            <span class="comment">// Overflow Interrupt Enable (when not using Timer1.attachInterrupt())</span>
+<a name="l00153"></a>00153 
+<a name="l00154"></a>00154                                 <span class="comment">// backup mozzi register values for unpausing later</span>
+<a name="l00155"></a>00155                                 mozzi_TCCR1A = TCCR1A;
+<a name="l00156"></a>00156                                 mozzi_TCCR1B = TCCR1B;
+<a name="l00157"></a>00157                                 mozzi_OCR1A = OCR1A;
+<a name="l00158"></a>00158                                 mozzi_TIMSK1 = TIMSK1;
+<a name="l00159"></a>00159                                 
+<a name="l00160"></a>00160 <span class="preprocessor">#if USE_AUDIO_INPUT</span>
+<a name="l00161"></a>00161 <span class="preprocessor"></span>                                adcSetupAudioInput();
+<a name="l00162"></a>00162 <span class="preprocessor">#endif</span>
+<a name="l00163"></a>00163 <span class="preprocessor"></span>                }
+<a name="l00164"></a>00164 
+<a name="l00165"></a>00165 
+<a name="l00166"></a>00166                 <span class="comment">/* Interrupt service routine moves sound data from the output buffer to the</span>
+<a name="l00167"></a>00167 <span class="comment">                Arduino output register, running at AUDIO_RATE. */</span>
+<a name="l00168"></a>00168                 ISR(TIMER1_OVF_vect, ISR_BLOCK) {
+<a name="l00169"></a>00169 <span class="preprocessor">#if USE_AUDIO_INPUT</span>
+<a name="l00170"></a>00170 <span class="preprocessor"></span>                                sbi(ADCSRA, ADSC);                                                              <span class="comment">// start next adc conversion</span>
+<a name="l00171"></a>00171 <span class="preprocessor">#endif</span>
+<a name="l00172"></a>00172 <span class="preprocessor"></span>                                output_buffer_tail++;
+<a name="l00173"></a>00173                                 AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer[(<span class="keywordtype">unsigned</span> char)output_buffer_tail &amp; (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)(BUFFER_NUM_CELLS-1)]; <span class="comment">// 1us, 2.5us with longs</span>
+<a name="l00174"></a>00174                 }
+<a name="l00175"></a>00175 
 <a name="l00176"></a>00176 
-<a name="l00177"></a>00177                 Timer1.pwm(AUDIO_CHANNEL_1_HIGHBYTE_PIN, 0);                    <span class="comment">// pwm pin, 0% duty cycle, ie. 0 signal</span>
-<a name="l00178"></a>00178                 Timer1.pwm(AUDIO_CHANNEL_1_LOWBYTE_PIN, 0);                     <span class="comment">// pwm pin, 0% duty cycle, ie. 0 signal</span>
-<a name="l00179"></a>00179 
-<a name="l00180"></a>00180                 <span class="comment">// audio output interrupt on timer 2, sets the pwm levels of timer 1</span>
-<a name="l00181"></a>00181                 setupTimer2();
-<a name="l00182"></a>00182 
-<a name="l00183"></a>00183 <span class="preprocessor">#if USE_AUDIO_INPUT</span>
-<a name="l00184"></a>00184 <span class="preprocessor"></span>                adcSetupAudioInput();
-<a name="l00185"></a>00185 <span class="preprocessor">#endif</span>
-<a name="l00186"></a>00186 <span class="preprocessor"></span>}
-<a name="l00187"></a>00187 
-<a name="l00188"></a>00188 
-<a name="l00189"></a>00189 <span class="preprocessor">#if defined(TIMER2_COMPA_vect)</span>
-<a name="l00190"></a>00190 <span class="preprocessor"></span>ISR(TIMER2_COMPA_vect)
-<a name="l00191"></a>00191 <span class="preprocessor">#elif defined(TIMER2_COMP_vect)</span>
-<a name="l00192"></a>00192 <span class="preprocessor"></span>ISR(TIMER2_COMP_vect)
-<a name="l00193"></a>00193 <span class="preprocessor">#else</span>
-<a name="l00194"></a>00194 <span class="preprocessor"></span><span class="preprocessor">#error &quot;This board does not have a hardware timer which is compatible with FrequencyTimer2&quot;</span>
-<a name="l00195"></a>00195 <span class="preprocessor"></span><span class="keywordtype">void</span> dummy_function(<span class="keywordtype">void</span>)
-<a name="l00196"></a>00196 <span class="preprocessor">#endif</span>
-<a name="l00197"></a>00197 <span class="preprocessor"></span>{
-<a name="l00198"></a>00198 <span class="preprocessor">#if USE_AUDIO_INPUT</span>
-<a name="l00199"></a>00199 <span class="preprocessor"></span>                sbi(ADCSRA, ADSC);                                                              <span class="comment">// start next adc conversion</span>
-<a name="l00200"></a>00200 <span class="preprocessor">#endif</span>
-<a name="l00201"></a>00201 <span class="preprocessor"></span>                output_buffer_tail++;
-<a name="l00202"></a>00202                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> out = output_buffer[(<span class="keywordtype">unsigned</span> char)output_buffer_tail &amp; (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)(BUFFER_NUM_CELLS-1)]; <span class="comment">// 1us, 2.5us with longs</span>
-<a name="l00203"></a>00203 
-<a name="l00204"></a>00204                 <span class="comment">// read about dual pwm at http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/</span>
-<a name="l00205"></a>00205                 <span class="comment">// sketches at http://wiki.openmusiclabs.com/wiki/PWMDAC,  http://wiki.openmusiclabs.com/wiki/MiniArDSP</span>
-<a name="l00206"></a>00206 
-<a name="l00207"></a>00207                 <span class="comment">// 14 bit - this sounds better than 12 bit, it&#39;s cleaner, less bitty, don&#39;t notice aliasing</span>
-<a name="l00208"></a>00208                 AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out &gt;&gt; 7; <span class="comment">// B11111110000000 becomes B1111111</span>
-<a name="l00209"></a>00209                 AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out &amp; 127; <span class="comment">// B001111111</span>
-<a name="l00210"></a>00210 }
-<a name="l00211"></a>00211 
+<a name="l00177"></a>00177                 <span class="comment">//-----------------------------------------------------------------------------------------------------------------</span>
+<a name="l00178"></a>00178 <span class="preprocessor">#elif (AUDIO_MODE == HIFI)</span>
+<a name="l00179"></a>00179 <span class="preprocessor"></span>
+<a name="l00180"></a>00180                 <span class="comment">/* set up Timer 2 using modified FrequencyTimer2 library */</span>
+<a name="l00181"></a>00181                 <span class="keywordtype">void</span> dummy(){}
+<a name="l00182"></a>00182                 <span class="keyword">static</span> <span class="keywordtype">void</span> setupTimer2(){
+<a name="l00183"></a>00183                                 <span class="comment">//backup Timer2 register values</span>
+<a name="l00184"></a>00184                                 pre_mozzi_TCCR2A = TCCR2A;
+<a name="l00185"></a>00185                                 pre_mozzi_TCCR2B = TCCR2B;
+<a name="l00186"></a>00186                                 pre_mozzi_OCR2A = OCR2A;
+<a name="l00187"></a>00187                                 pre_mozzi_TIMSK2 = TIMSK2;
+<a name="l00188"></a>00188                                 
+<a name="l00189"></a>00189                                 <span class="comment">// audio output interrupt on timer 2, sets the pwm levels of timer 1</span>
+<a name="l00190"></a>00190                                 FrequencyTimer2::setPeriod(2000000UL/<a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298" title="AUDIO_RATE can be #defined as 16384 or 32768 Hertz in Mozzi/mozzi_config.h.">AUDIO_RATE</a>); <span class="comment">// gives a period half of what&#39;s provided, for some reason</span>
+<a name="l00191"></a>00191                                 FrequencyTimer2::enable();
+<a name="l00192"></a>00192                                 FrequencyTimer2::setOnOverflow(dummy);
+<a name="l00193"></a>00193                                 
+<a name="l00194"></a>00194                                 <span class="comment">// backup mozzi register values for unpausing later</span>
+<a name="l00195"></a>00195                                 mozzi_TCCR2A = TCCR2A;
+<a name="l00196"></a>00196                                 mozzi_TCCR2B = TCCR2B;
+<a name="l00197"></a>00197                                 mozzi_OCR2A = OCR2A;
+<a name="l00198"></a>00198                                 mozzi_TIMSK2 = TIMSK2;
+<a name="l00199"></a>00199                 }
+<a name="l00200"></a>00200 
+<a name="l00201"></a>00201 
+<a name="l00202"></a>00202                 <span class="keyword">static</span> <span class="keywordtype">void</span> startAudioHiSpeed14bitPwm(){
+<a name="l00203"></a>00203                                 <span class="comment">// backup pre-mozzi register values</span>
+<a name="l00204"></a>00204                                 pre_mozzi_TCCR1A = TCCR1A;
+<a name="l00205"></a>00205                                 pre_mozzi_TCCR1B = TCCR1B;
+<a name="l00206"></a>00206                                 pre_mozzi_OCR1A = OCR1A;
+<a name="l00207"></a>00207                                 pre_mozzi_TIMSK1 = TIMSK1;
+<a name="l00208"></a>00208                                 
+<a name="l00209"></a>00209                                 <span class="comment">// pwm on timer 1</span>
+<a name="l00210"></a>00210                                 pinMode(AUDIO_CHANNEL_1_HIGHBYTE_PIN, OUTPUT);  <span class="comment">// set pin to output for audio, use 3.9k resistor</span>
+<a name="l00211"></a>00211                                 pinMode(AUDIO_CHANNEL_1_LOWBYTE_PIN, OUTPUT);   <span class="comment">// set pin to output for audio, use 1M resistor</span>
 <a name="l00212"></a>00212 
-<a name="l00213"></a>00213 <span class="preprocessor">#endif</span>
-<a name="l00214"></a>00214 <span class="preprocessor"></span>
+<a name="l00213"></a>00213                                 Timer1.initialize(1000000UL/125000, FAST);                      <span class="comment">// set period for 125000 Hz fast pwm carrier frequency = 14 bits</span>
+<a name="l00214"></a>00214                                 <span class="comment">// Serial.print(&quot;HIFI Timer 1 period = &quot;); Serial.println(Timer1.getPeriod());</span>
 <a name="l00215"></a>00215 
-<a name="l00216"></a>00216 <span class="comment">//-----------------------------------------------------------------------------------------------------------------</span>
-<a name="l00217"></a>00217 
-<a name="l00218"></a>00218 <span class="comment">/* Sets up Timer 0 for control interrupts. This is the same for all output</span>
-<a name="l00219"></a>00219 <span class="comment">options Using Timer0 for control disables Arduino&#39;s time functions but also</span>
-<a name="l00220"></a>00220 <span class="comment">saves on the interrupts and blocking action of those functions. May add a config</span>
-<a name="l00221"></a>00221 <span class="comment">option for Using Timer2 instead if needed. (MozziTimer2 can be re-introduced for</span>
-<a name="l00222"></a>00222 <span class="comment">that). */</span>
-<a name="l00223"></a>00223 <span class="keyword">static</span> <span class="keywordtype">void</span> startControl(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> control_rate_hz)
-<a name="l00224"></a>00224 {
-<a name="l00225"></a>00225                 TimerZero::init(1000000/control_rate_hz,<a class="code" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl</a>); <span class="comment">// set period, attach updateControl()</span>
-<a name="l00226"></a>00226                 TimerZero::start();
-<a name="l00227"></a>00227 }
-<a name="l00228"></a>00228 
-<a name="l00229"></a>00229 
-<a name="l00230"></a><a class="code" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837">00230</a> <span class="keywordtype">void</span> <a class="code" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837" title="Sets up the timers for audio and control rate processes.">startMozzi</a>(<span class="keywordtype">int</span> control_rate_hz)
-<a name="l00231"></a>00231 {
-<a name="l00232"></a>00232                 startControl(control_rate_hz);
-<a name="l00233"></a>00233 <span class="preprocessor">#if (AUDIO_MODE == STANDARD)</span>
-<a name="l00234"></a>00234 <span class="preprocessor"></span>                startAudioStandard9bitPwm();
-<a name="l00235"></a>00235 <span class="preprocessor">#elif (AUDIO_MODE == HIFI)</span>
-<a name="l00236"></a>00236 <span class="preprocessor"></span>                startAudioHiSpeed14bitPwm();
-<a name="l00237"></a>00237 <span class="preprocessor">#endif</span>
-<a name="l00238"></a>00238 <span class="preprocessor"></span>}
-<a name="l00239"></a>00239 
-<a name="l00240"></a>00240 
-<a name="l00241"></a>00241 <span class="comment">// Unmodified TimerOne.cpp has TIMER3_OVF_vect.</span>
-<a name="l00242"></a>00242 <span class="comment">// Watch out if you update the library file.</span>
-<a name="l00243"></a>00243 <span class="comment">// The symptom will be no sound.</span>
-<a name="l00244"></a>00244 <span class="comment">// ISR(TIMER1_OVF_vect)</span>
-<a name="l00245"></a>00245 <span class="comment">// {</span>
-<a name="l00246"></a>00246 <span class="comment">//              Timer1.isrCallback();</span>
-<a name="l00247"></a>00247 <span class="comment">// }</span>
+<a name="l00216"></a>00216                                 Timer1.pwm(AUDIO_CHANNEL_1_HIGHBYTE_PIN, 0);                    <span class="comment">// pwm pin, 0% duty cycle, ie. 0 signal</span>
+<a name="l00217"></a>00217                                 Timer1.pwm(AUDIO_CHANNEL_1_LOWBYTE_PIN, 0);                     <span class="comment">// pwm pin, 0% duty cycle, ie. 0 signal</span>
+<a name="l00218"></a>00218 
+<a name="l00219"></a>00219                                 <span class="comment">// backup mozzi register values for unpausing later</span>
+<a name="l00220"></a>00220                                 mozzi_TCCR1A = TCCR1A;
+<a name="l00221"></a>00221                                 mozzi_TCCR1B = TCCR1B;
+<a name="l00222"></a>00222                                 mozzi_OCR1A = OCR1A;
+<a name="l00223"></a>00223                                 mozzi_TIMSK1 = TIMSK1;
+<a name="l00224"></a>00224                                 
+<a name="l00225"></a>00225                                 <span class="comment">// audio output interrupt on timer 2, sets the pwm levels of timer 1</span>
+<a name="l00226"></a>00226                                 setupTimer2();
+<a name="l00227"></a>00227 
+<a name="l00228"></a>00228 <span class="preprocessor">#if USE_AUDIO_INPUT</span>
+<a name="l00229"></a>00229 <span class="preprocessor"></span>                                adcSetupAudioInput();
+<a name="l00230"></a>00230 <span class="preprocessor">#endif</span>
+<a name="l00231"></a>00231 <span class="preprocessor"></span>                }
+<a name="l00232"></a>00232 
+<a name="l00233"></a>00233 
+<a name="l00234"></a>00234 <span class="preprocessor">#if defined(TIMER2_COMPA_vect)</span>
+<a name="l00235"></a>00235 <span class="preprocessor"></span>                ISR(TIMER2_COMPA_vect)
+<a name="l00236"></a>00236 <span class="preprocessor">#elif defined(TIMER2_COMP_vect)</span>
+<a name="l00237"></a>00237 <span class="preprocessor"></span>                ISR(TIMER2_COMP_vect)
+<a name="l00238"></a>00238 <span class="preprocessor">#else</span>
+<a name="l00239"></a>00239 <span class="preprocessor"></span><span class="preprocessor">#error &quot;This board does not have a hardware timer which is compatible with FrequencyTimer2&quot;</span>
+<a name="l00240"></a>00240 <span class="preprocessor"></span>                <span class="keywordtype">void</span> dummy_function(<span class="keywordtype">void</span>)
+<a name="l00241"></a>00241 <span class="preprocessor">#endif</span>
+<a name="l00242"></a>00242 <span class="preprocessor"></span>                {
+<a name="l00243"></a>00243 <span class="preprocessor">#if USE_AUDIO_INPUT</span>
+<a name="l00244"></a>00244 <span class="preprocessor"></span>                                sbi(ADCSRA, ADSC);                                                              <span class="comment">// start next adc conversion</span>
+<a name="l00245"></a>00245 <span class="preprocessor">#endif</span>
+<a name="l00246"></a>00246 <span class="preprocessor"></span>                                output_buffer_tail++;
+<a name="l00247"></a>00247                                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> out = output_buffer[(<span class="keywordtype">unsigned</span> char)output_buffer_tail &amp; (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)(BUFFER_NUM_CELLS-1)]; <span class="comment">// 1us, 2.5us with longs</span>
+<a name="l00248"></a>00248 
+<a name="l00249"></a>00249                                 <span class="comment">// read about dual pwm at http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/</span>
+<a name="l00250"></a>00250                                 <span class="comment">// sketches at http://wiki.openmusiclabs.com/wiki/PWMDAC,  http://wiki.openmusiclabs.com/wiki/MiniArDSP</span>
+<a name="l00251"></a>00251 
+<a name="l00252"></a>00252                                 <span class="comment">// 14 bit - this sounds better than 12 bit, it&#39;s cleaner, less bitty, don&#39;t notice aliasing</span>
+<a name="l00253"></a>00253                                 AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out &gt;&gt; 7; <span class="comment">// B11111110000000 becomes B1111111</span>
+<a name="l00254"></a>00254                                 AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out &amp; 127; <span class="comment">// B001111111</span>
+<a name="l00255"></a>00255                 }
+<a name="l00256"></a>00256 
+<a name="l00257"></a>00257 
+<a name="l00258"></a>00258 <span class="preprocessor">#endif</span>
+<a name="l00259"></a>00259 <span class="preprocessor"></span>
+<a name="l00260"></a>00260 
+<a name="l00261"></a>00261                 <span class="comment">//-----------------------------------------------------------------------------------------------------------------</span>
+<a name="l00262"></a>00262 
+<a name="l00263"></a>00263                 <span class="comment">/* Sets up Timer 0 for control interrupts. This is the same for all output</span>
+<a name="l00264"></a>00264 <span class="comment">                options Using Timer0 for control disables Arduino&#39;s time functions but also</span>
+<a name="l00265"></a>00265 <span class="comment">                saves on the interrupts and blocking action of those functions. May add a config</span>
+<a name="l00266"></a>00266 <span class="comment">                option for Using Timer2 instead if needed. (MozziTimer2 can be re-introduced for</span>
+<a name="l00267"></a>00267 <span class="comment">                that). */</span>
+<a name="l00268"></a>00268                 <span class="keyword">static</span> <span class="keywordtype">void</span> startControl(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> control_rate_hz)
+<a name="l00269"></a>00269                 {
+<a name="l00270"></a>00270                                 <span class="comment">// backup pre-mozzi register values</span>
+<a name="l00271"></a>00271                                 pre_mozzi_TCCR0A = TCCR0A;
+<a name="l00272"></a>00272                                 pre_mozzi_TCCR0B = TCCR0B;
+<a name="l00273"></a>00273                                 pre_mozzi_OCR0A = OCR0A;
+<a name="l00274"></a>00274                                 pre_mozzi_TIMSK0 = TIMSK0;
+<a name="l00275"></a>00275 
+<a name="l00276"></a>00276                                 TimerZero::init(1000000/control_rate_hz,<a class="code" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl</a>); <span class="comment">// set period, attach updateControl()</span>
+<a name="l00277"></a>00277                                 TimerZero::start();
+<a name="l00278"></a>00278                                 
+<a name="l00279"></a>00279                                 <span class="comment">// backup mozzi register values for unpausing later</span>
+<a name="l00280"></a>00280                                 mozzi_TCCR0A = TCCR0A;
+<a name="l00281"></a>00281                                 mozzi_TCCR0B = TCCR0B;
+<a name="l00282"></a>00282                                 mozzi_OCR0A = OCR0A;
+<a name="l00283"></a>00283                                 mozzi_TIMSK0 = TIMSK0;
+<a name="l00284"></a>00284                 }
+<a name="l00285"></a>00285 
+<a name="l00286"></a>00286 
+<a name="l00287"></a><a class="code" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837">00287</a>                 <span class="keywordtype">void</span> <a class="code" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837" title="Sets up the timers for audio and control rate processes, storing the timer registers so they can be r...">startMozzi</a>(<span class="keywordtype">int</span> control_rate_hz)
+<a name="l00288"></a>00288                 {
+<a name="l00289"></a>00289                                 startControl(control_rate_hz);
+<a name="l00290"></a>00290 <span class="preprocessor">#if (AUDIO_MODE == STANDARD)</span>
+<a name="l00291"></a>00291 <span class="preprocessor"></span>                                startAudioStandard9bitPwm();
+<a name="l00292"></a>00292 <span class="preprocessor">#elif (AUDIO_MODE == HIFI)</span>
+<a name="l00293"></a>00293 <span class="preprocessor"></span>                                startAudioHiSpeed14bitPwm();
+<a name="l00294"></a>00294 <span class="preprocessor">#endif</span>
+<a name="l00295"></a>00295 <span class="preprocessor"></span>                }
+<a name="l00296"></a>00296 
+<a name="l00297"></a>00297 
+<a name="l00298"></a><a class="code" href="group__core.html#ga0dc2dc3b2c20b081df4d55ad039f64e5">00298</a>                 <span class="keywordtype">void</span> <a class="code" href="group__core.html#ga0dc2dc3b2c20b081df4d55ad039f64e5" title="Stops audio and control interrupts and restores the timers to the values they had before Mozzi was st...">pauseMozzi</a>(){
+<a name="l00299"></a>00299                                 <span class="comment">// restore backed up register values</span>
+<a name="l00300"></a>00300                                 TCCR0A = pre_mozzi_TCCR0A;
+<a name="l00301"></a>00301                                 TCCR0B = pre_mozzi_TCCR0B;
+<a name="l00302"></a>00302                                 OCR0A = pre_mozzi_OCR0A;
+<a name="l00303"></a>00303                                 TIMSK0 = pre_mozzi_TIMSK0;
+<a name="l00304"></a>00304 
+<a name="l00305"></a>00305                                 TCCR1A = pre_mozzi_TCCR1A;
+<a name="l00306"></a>00306                                 TCCR1B = pre_mozzi_TCCR1B;
+<a name="l00307"></a>00307                                 OCR1A = pre_mozzi_OCR1A;
+<a name="l00308"></a>00308                                 TIMSK1 = pre_mozzi_TIMSK1;
+<a name="l00309"></a>00309 
+<a name="l00310"></a>00310 <span class="preprocessor">#if (AUDIO_MODE == HIFI)</span>
+<a name="l00311"></a>00311 <span class="preprocessor"></span>                                TCCR2A = pre_mozzi_TCCR2A;
+<a name="l00312"></a>00312                                 TCCR2B = pre_mozzi_TCCR2B;
+<a name="l00313"></a>00313                                 OCR2A = pre_mozzi_OCR2A;
+<a name="l00314"></a>00314                                 TIMSK2 = pre_mozzi_TIMSK2;
+<a name="l00315"></a>00315 <span class="preprocessor">#endif                                          </span>
+<a name="l00316"></a>00316 <span class="preprocessor"></span>                }
+<a name="l00317"></a>00317                 
+<a name="l00318"></a>00318                 
+<a name="l00319"></a><a class="code" href="group__core.html#ga1718c5f0bbb56cc4b2db55702750f43f">00319</a> <span class="keywordtype">void</span> <a class="code" href="group__core.html#ga1718c5f0bbb56cc4b2db55702750f43f" title="Restores Mozzi audio and control interrupts, if they have been temporarily disabled with pauseMozzi()...">unPauseMozzi</a>(){
+<a name="l00320"></a>00320                                 <span class="comment">// restore backed up register values</span>
+<a name="l00321"></a>00321                                 TCCR0A = mozzi_TCCR0A;
+<a name="l00322"></a>00322                                 TCCR0B = mozzi_TCCR0B;
+<a name="l00323"></a>00323                                 OCR0A = mozzi_OCR0A;
+<a name="l00324"></a>00324                                 TIMSK0 = mozzi_TIMSK0;
+<a name="l00325"></a>00325 
+<a name="l00326"></a>00326                                 TCCR1A = mozzi_TCCR1A;
+<a name="l00327"></a>00327                                 TCCR1B = mozzi_TCCR1B;
+<a name="l00328"></a>00328                                 OCR1A = mozzi_OCR1A;
+<a name="l00329"></a>00329                                 TIMSK1 = mozzi_TIMSK1;
+<a name="l00330"></a>00330 
+<a name="l00331"></a>00331 <span class="preprocessor">#if (AUDIO_MODE == HIFI)</span>
+<a name="l00332"></a>00332 <span class="preprocessor"></span>                                TCCR2A = mozzi_TCCR2A;
+<a name="l00333"></a>00333                                 TCCR2B = mozzi_TCCR2B;
+<a name="l00334"></a>00334                                 OCR2A = mozzi_OCR2A;
+<a name="l00335"></a>00335                                 TIMSK2 = mozzi_TIMSK2;
+<a name="l00336"></a>00336 <span class="preprocessor">#endif                                          </span>
+<a name="l00337"></a>00337 <span class="preprocessor"></span>}
+<a name="l00338"></a>00338 
+<a name="l00339"></a>00339 
+<a name="l00340"></a>00340 <span class="preprocessor">#if AUDIO_RATE == 16384</span>
+<a name="l00341"></a>00341 <span class="preprocessor"></span><span class="preprocessor">#define MICROS_PER_AUDIO_TICK 61 // 1000000 / 16384 = 61.035, ...* 256 = 15625</span>
+<a name="l00342"></a>00342 <span class="preprocessor"></span><span class="preprocessor">#elif AUDIO_RATE == 32768 </span>
+<a name="l00343"></a>00343 <span class="preprocessor"></span><span class="preprocessor">#define MICROS_PER_AUDIO_TICK 31 // = 1000000 / 32768 = 30.518, ...* 256 = 7812.6</span>
+<a name="l00344"></a>00344 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00345"></a>00345 <span class="preprocessor"></span>
+<a name="l00346"></a><a class="code" href="group__analog.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe">00346</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="group__analog.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe" title="This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the Mozzi/mozzi...">mozziMicros</a>(){
+<a name="l00347"></a>00347                 <span class="keywordflow">return</span> output_buffer_tail / MICROS_PER_AUDIO_TICK;
+<a name="l00348"></a>00348 }
+<a name="l00349"></a>00349 
+<a name="l00350"></a>00350                 <span class="comment">// Unmodified TimerOne.cpp has TIMER3_OVF_vect.</span>
+<a name="l00351"></a>00351                 <span class="comment">// Watch out if you update the library file.</span>
+<a name="l00352"></a>00352                 <span class="comment">// The symptom will be no sound.</span>
+<a name="l00353"></a>00353                 <span class="comment">// ISR(TIMER1_OVF_vect)</span>
+<a name="l00354"></a>00354                 <span class="comment">// {</span>
+<a name="l00355"></a>00355                 <span class="comment">//              Timer1.isrCallback();</span>
+<a name="l00356"></a>00356                 <span class="comment">// }</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 11 2013 10:34:47 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 28 2013 21:00:56 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

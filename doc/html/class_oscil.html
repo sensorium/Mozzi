@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1y</span>
+   &#160;<span id="projectnumber">alpha 0.01.1z</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -49,7 +49,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -151,7 +150,6 @@ class Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</h3>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000010">Todo:</a></b></dt><dd>Use conditional compilation to optimise <a class="el" href="class_oscil.html#a23121f22ea447918088a79c7f9748b3d" title="Set the oscillator frequency with an unsigned int.">setFreq()</a> variations for different table sizes. </dd></dl>
 <dl class="section note"><dt>Note:</dt><dd>If you #define OSCIL_DITHER_PHASE before you #include &lt;<a class="el" href="_oscil_8h_source.html">Oscil.h</a>&gt;, the phase increments will be dithered, which reduces spurious frequency spurs in the audio output, at the cost of some extra processing and memory. </dd></dl>
 <h2><a class="anchor" id="char2mozzi"></a>
 char2mozzi</h2>
@@ -238,7 +236,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>the sample at the given table index. </dd></dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00255">255</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00256">256</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -320,7 +318,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>the phase increment value which will produce a given frequency. </dd></dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00273">273</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00274">274</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -347,8 +345,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
             n16 part represents -1 to 1, modulating the phase by one whole table length in
             each direction.
             @return a sample from the table.
-</pre></div> <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000013">Todo:</a></b></dt><dd>does the phmod_proportion param need to be Q15n16, why not Q0n15 and cast to long for multiply? </dd></dl>
-
+</pre></div>  
 <p>Definition at line <a class="el" href="_oscil_8h_source.html#l00173">173</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
@@ -431,7 +428,8 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <div class="memdoc">
 
 <p>Set the frequency using Q16n16 fixed-point number format. </p>
-<p>This is useful in combination with <a class="el" href="group__midi.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2" title="Converts midi note number to frequency with speed and accuracy.">Q16n16_mtof()</a>, a fast alternative to <a class="el" href="group__midi.html#gafacb8849f96270644ea79184fde7db37" title="Converts midi note number to frequency.">mtof()</a>, using Q16n16 fixed-point format instead of floats. Note: this should work OK with tables 2048 cells or smaller and frequencies up to 4096 Hz. Can't be used with UPDATE_RATE less than 64 Hz. </p>
+<p>This is useful in combination with <a class="el" href="group__midi.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2" title="Converts midi note number to frequency with speed and accuracy.">Q16n16_mtof()</a>, a fast alternative to <a class="el" href="group__midi.html#gafacb8849f96270644ea79184fde7db37" title="Converts midi note number to frequency.">mtof()</a>, using Q16n16 fixed-point format instead of floats. </p>
+<dl class="section note"><dt>Note:</dt><dd>This should work OK with tables 2048 cells or smaller and frequencies up to 4096 Hz. Can't be used with UPDATE_RATE less than 64 Hz. </dd></dl>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">frequency</td><td>in Q16n16 fixed-point number format. </td></tr>
@@ -439,7 +437,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00237">237</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00238">238</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -498,7 +496,6 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000011">Todo:</a></b></dt><dd>Test commenting out ATOMIC_BLOCK in <a class="el" href="class_oscil.html#ab7b740eec56740426a47508562ed4dd5" title="Set the phase of the Oscil.">setPhase()</a>, <a class="el" href="class_oscil.html#a23121f22ea447918088a79c7f9748b3d" title="Set the oscillator frequency with an unsigned int.">setFreq()</a>, etc. </dd></dl>
 
 <p>Definition at line <a class="el" href="_oscil_8h_source.html#l00124">124</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
@@ -529,7 +526,6 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000012">Todo:</a></b></dt><dd>Test commenting out ATOMIC_BLOCK in <a class="el" href="class_oscil.html#ab7b740eec56740426a47508562ed4dd5" title="Set the phase of the Oscil.">setPhase()</a>, <a class="el" href="class_oscil.html#a23121f22ea447918088a79c7f9748b3d" title="Set the oscillator frequency with an unsigned int.">setFreq()</a>, etc. </dd></dl>
 
 <p>Definition at line <a class="el" href="_oscil_8h_source.html#l00139">139</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
@@ -561,7 +557,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00283">283</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p>Definition at line <a class="el" href="_oscil_8h_source.html#l00284">284</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -601,7 +597,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 11 2013 10:34:47 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 28 2013 21:00:56 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

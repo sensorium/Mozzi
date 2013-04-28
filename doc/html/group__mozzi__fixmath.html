@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1y</span>
+   &#160;<span id="projectnumber">alpha 0.01.1z</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -49,7 +49,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -128,6 +127,9 @@ Defines</h2></td></tr>
 <tr class="memitem:gaa1e02cbcdc65171103653df03fec3b76"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa1e02cbcdc65171103653df03fec3b76"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mozzi__fixmath.html#gaa1e02cbcdc65171103653df03fec3b76">Q0n16_FIX1</a>&#160;&#160;&#160;((<a class="el" href="group__mozzi__fixmath.html#ga6c7bab361e1738f385e3af1c8157eefb">Q0n16</a>) 65535)</td></tr>
 <tr class="memdesc:gaa1e02cbcdc65171103653df03fec3b76"><td class="mdescLeft">&#160;</td><td class="mdescRight">0.999 in Q0n16 format <br/></td></tr>
+<tr class="memitem:gafa16db677f958c243a826695b2c14c3c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gafa16db677f958c243a826695b2c14c3c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mozzi__fixmath.html#gafa16db677f958c243a826695b2c14c3c">Q15n0_FIX1</a>&#160;&#160;&#160;((<a class="el" href="group__mozzi__fixmath.html#ga5b744a37ff9e070a302fa8f28950250e">Q15n0</a>) 16384)</td></tr>
+<tr class="memdesc:gafa16db677f958c243a826695b2c14c3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">1 in Q15n0 format <br/></td></tr>
 <tr class="memitem:ga7933033ba3cd84a4d09c0bd652378a38"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga7933033ba3cd84a4d09c0bd652378a38"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mozzi__fixmath.html#ga7933033ba3cd84a4d09c0bd652378a38">Q15n16_FIX1</a>&#160;&#160;&#160;((<a class="el" href="group__mozzi__fixmath.html#ga27c6ece00a166ba3285bf7302c325e2e">Q15n16</a>) 65536)</td></tr>
 <tr class="memdesc:ga7933033ba3cd84a4d09c0bd652378a38"><td class="mdescLeft">&#160;</td><td class="mdescRight">1 in Q15n16 format <br/></td></tr>
@@ -317,6 +319,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:ga47738704056a272968e80b399e06e82b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert fix to float.  <a href="#ga47738704056a272968e80b399e06e82b"></a><br/></td></tr>
 <tr class="memitem:ga94dd6fe8594b171881ade98431dfda28"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mozzi__fixmath.html#ga8a02d4dea10140847682e78ba4bd6367">Q0n8</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mozzi__fixmath.html#ga94dd6fe8594b171881ade98431dfda28">Q24n8_to_Q0n8</a> (<a class="el" href="group__mozzi__fixmath.html#gaa8e579259244eb60e7f70576c8e61cbd">Q24n8</a> a)</td></tr>
 <tr class="memdesc:ga94dd6fe8594b171881ade98431dfda28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q24n8 fixed to Q0n8 unsigned char.  <a href="#ga94dd6fe8594b171881ade98431dfda28"></a><br/></td></tr>
+<tr class="memitem:gaefdfa391a9fef0f17d1f9df16fd9a9f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mozzi__fixmath.html#ga20ef71528ee7583bbf60586448b12caf">Q16n16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mozzi__fixmath.html#gaefdfa391a9fef0f17d1f9df16fd9a9f0">Q24n8_to_Q16n0</a> (<a class="el" href="group__mozzi__fixmath.html#gaa8e579259244eb60e7f70576c8e61cbd">Q24n8</a> a)</td></tr>
+<tr class="memdesc:gaefdfa391a9fef0f17d1f9df16fd9a9f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q24n8 fixed to Q16n0 unsigned int.  <a href="#gaefdfa391a9fef0f17d1f9df16fd9a9f0"></a><br/></td></tr>
 <tr class="memitem:ga9f28b2310c92ecac72960d9bd0aff80f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mozzi__fixmath.html#ga8b7a6c03378536458f1b55774a8d38c2">Q32n0</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mozzi__fixmath.html#ga9f28b2310c92ecac72960d9bd0aff80f">Q24n8_to_Q32n0</a> (<a class="el" href="group__mozzi__fixmath.html#gaa8e579259244eb60e7f70576c8e61cbd">Q24n8</a> a)</td></tr>
 <tr class="memdesc:ga9f28b2310c92ecac72960d9bd0aff80f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q24n8 fixed to Q32n0 unsigned long.  <a href="#ga9f28b2310c92ecac72960d9bd0aff80f"></a><br/></td></tr>
 <tr class="memitem:ga2b445681d56f8693c3d98d5ff19b51d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mozzi__fixmath.html#ga20ef71528ee7583bbf60586448b12caf">Q16n16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mozzi__fixmath.html#ga2b445681d56f8693c3d98d5ff19b51d4">Q24n8_to_Q16n16</a> (<a class="el" href="group__mozzi__fixmath.html#gaa8e579259244eb60e7f70576c8e61cbd">Q24n8</a> a)</td></tr>
@@ -329,6 +333,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:gaa2ec03187910e9c6418298ef55655c36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q15n16 fixed to Q15n0 signed int.  <a href="#gaa2ec03187910e9c6418298ef55655c36"></a><br/></td></tr>
 <tr class="memitem:ga21d72d50bd41022755514c96c2d11901"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mozzi__fixmath.html#gac16a505e3f62bbfd9160e1d6bf83fa98">Q7n8</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mozzi__fixmath.html#ga21d72d50bd41022755514c96c2d11901">Q15n16_to_Q7n8</a> (<a class="el" href="group__mozzi__fixmath.html#ga27c6ece00a166ba3285bf7302c325e2e">Q15n16</a> a)</td></tr>
 <tr class="memdesc:ga21d72d50bd41022755514c96c2d11901"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q15n16 fixed to Q7n8 signed int, keeping middle bits only.  <a href="#ga21d72d50bd41022755514c96c2d11901"></a><br/></td></tr>
+<tr class="memitem:ga67b0f3ae70755ed8891e510b02813c08"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mozzi__fixmath.html#ga0ac052d4a789286894814bb69638d04b">Q23n8</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mozzi__fixmath.html#ga67b0f3ae70755ed8891e510b02813c08">Q15n16_to_Q23n8</a> (<a class="el" href="group__mozzi__fixmath.html#ga27c6ece00a166ba3285bf7302c325e2e">Q15n16</a> a)</td></tr>
+<tr class="memdesc:ga67b0f3ae70755ed8891e510b02813c08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q15n16 fixed to Q23n8 signed long.  <a href="#ga67b0f3ae70755ed8891e510b02813c08"></a><br/></td></tr>
 <tr class="memitem:ga4096449c3f0598a1534255de789d2ee5"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mozzi__fixmath.html#ga4096449c3f0598a1534255de789d2ee5">Q15n16_to_float</a> (<a class="el" href="group__mozzi__fixmath.html#ga27c6ece00a166ba3285bf7302c325e2e">Q15n16</a> a)</td></tr>
 <tr class="memdesc:ga4096449c3f0598a1534255de789d2ee5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert fix to float.  <a href="#ga4096449c3f0598a1534255de789d2ee5"></a><br/></td></tr>
 <tr class="memitem:ga1315b4f68a57d26fbedc88d5b30a44d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mozzi__fixmath.html#ga8a02d4dea10140847682e78ba4bd6367">Q0n8</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mozzi__fixmath.html#ga1315b4f68a57d26fbedc88d5b30a44d8">Q16n16_to_Q0n8</a> (<a class="el" href="group__mozzi__fixmath.html#ga20ef71528ee7583bbf60586448b12caf">Q16n16</a> a)</td></tr>
@@ -409,7 +415,7 @@ __asm__ __volatile__ (    \
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>a Q7n8 format product </dd></dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00300">300</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00309">309</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -437,7 +443,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00123">123</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00124">124</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -464,7 +470,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00093">93</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00094">94</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -491,7 +497,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00096">96</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00097">97</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -518,7 +524,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00126">126</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00127">127</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -545,7 +551,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00120">120</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00121">121</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -572,7 +578,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00105">105</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00106">106</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -599,7 +605,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00108">108</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00109">109</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -626,7 +632,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00114">114</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00115">115</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -653,7 +659,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00117">117</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00118">118</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -680,7 +686,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00099">99</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00100">100</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -707,7 +713,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00111">111</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00112">112</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -734,7 +740,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00102">102</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00103">103</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -761,7 +767,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00206">206</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00207">207</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -788,7 +794,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00136">136</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00137">137</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -815,7 +821,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00133">133</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00134">134</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -842,7 +848,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00130">130</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00131">131</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -869,7 +875,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00158">158</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00159">159</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -896,7 +902,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00152">152</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00153">153</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -923,7 +929,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00155">155</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00156">156</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -950,7 +956,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00140">140</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00141">141</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -977,7 +983,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00149">149</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00150">150</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1004,7 +1010,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00146">146</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00147">147</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1031,7 +1037,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00143">143</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00144">144</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1058,7 +1064,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00209">209</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00210">210</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1085,7 +1091,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00275">275</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00284">284</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1113,7 +1119,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00266">266</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00272">272</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1140,7 +1146,34 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00269">269</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00275">275</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga67b0f3ae70755ed8891e510b02813c08"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__mozzi__fixmath.html#ga0ac052d4a789286894814bb69638d04b">Q23n8</a> <a class="el" href="group__mozzi__fixmath.html#ga67b0f3ae70755ed8891e510b02813c08">Q15n16_to_Q23n8</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__mozzi__fixmath.html#ga27c6ece00a166ba3285bf7302c325e2e">Q15n16</a>&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Convert Q15n16 fixed to Q23n8 signed long. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>is a Q15n16 signed long. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00281">281</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1167,7 +1200,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00272">272</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00278">278</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1194,7 +1227,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00224">224</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00225">225</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1221,7 +1254,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00212">212</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00213">213</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1248,7 +1281,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00221">221</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00222">222</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1275,7 +1308,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00215">215</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00216">216</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1302,7 +1335,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00218">218</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00219">219</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1330,7 +1363,6 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>pow(2,x) in Q16n16 format. </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd><a class="el" href="group__mozzi__fixmath.html#ga2e1d9d0fe4ba7edb9830efb7887c36bd" title="This is a fast replacement for pow(2,x), where x is a fractional number in Q8n8 fixed-point exponent...">Q16n16_pow2()</a> accuracy needs more attention. </dd></dl>
 
 <p>Definition at line <a class="el" href="mozzi__fixmath_8cpp_source.html#l00089">89</a> of file <a class="el" href="mozzi__fixmath_8cpp_source.html">mozzi_fixmath.cpp</a>.</p>
 
@@ -1359,7 +1391,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00288">288</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00297">297</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1386,7 +1418,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00279">279</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00288">288</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1413,7 +1445,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00282">282</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00291">291</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1440,7 +1472,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00285">285</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00294">294</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1467,7 +1499,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00197">197</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00198">198</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1494,7 +1526,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00194">194</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00195">195</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1521,7 +1553,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00203">203</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00204">204</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1549,7 +1581,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00200">200</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00201">201</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1576,7 +1608,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00249">249</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00250">250</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1603,7 +1635,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00242">242</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00243">243</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1631,7 +1663,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00239">239</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00240">240</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1658,7 +1690,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00236">236</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00237">237</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1685,7 +1717,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00245">245</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00246">246</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1712,7 +1744,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00262">262</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00268">268</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1739,7 +1771,34 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00253">253</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00254">254</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gaefdfa391a9fef0f17d1f9df16fd9a9f0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__mozzi__fixmath.html#ga20ef71528ee7583bbf60586448b12caf">Q16n16</a> <a class="el" href="group__mozzi__fixmath.html#gaefdfa391a9fef0f17d1f9df16fd9a9f0">Q24n8_to_Q16n0</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__mozzi__fixmath.html#gaa8e579259244eb60e7f70576c8e61cbd">Q24n8</a>&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Convert Q24n8 fixed to Q16n0 unsigned int. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>is a Q24n8 unsigned long </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00258">258</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1766,7 +1825,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00259">259</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00265">265</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1793,7 +1852,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00256">256</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00262">262</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1820,7 +1879,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00162">162</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00163">163</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1847,7 +1906,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00181">181</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00182">182</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1874,7 +1933,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00178">178</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00179">179</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1901,7 +1960,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00171">171</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00172">172</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1928,7 +1987,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00174">174</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00175">175</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1955,7 +2014,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00165">165</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00166">166</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1982,7 +2041,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00168">168</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00169">169</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2009,7 +2068,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00232">232</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00233">233</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2036,7 +2095,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00229">229</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00230">230</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2063,7 +2122,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00191">191</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00192">192</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2090,7 +2149,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00188">188</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00189">189</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2117,7 +2176,7 @@ __asm__ __volatile__ (    \
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00185">185</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00186">186</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2125,7 +2184,7 @@ __asm__ __volatile__ (    \
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 11 2013 10:34:47 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 28 2013 21:00:56 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

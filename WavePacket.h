@@ -37,13 +37,11 @@
 enum algorithms {SINGLE,DOUBLE};
 
 /**
-Wavepacket synthesis, drawing on Miller Puckette's Pure Data example,
-F14.wave.packet.pd, with two overlapping streams of wave packets. Each packet is
-an enveloped grain of a sin (or cos) wave. The frequency of the wave, the width
-of the envelopes and the rate of release of envelopes are the parameters which
-can be changed.
-
-IMPORTANT: this unit is designed to work in HIFI mode.
+Wavepacket synthesis, with two overlapping streams of wave packets. Draws on
+Miller Puckette's Pure Data example, F14.wave.packet.pd. Each packet is an
+enveloped grain of a sin (or cos) wave. The frequency of the wave, the width of
+the envelopes and the rate of release of envelopes are the parameters which can
+be changed.
 */
 template <char ALGORITHM>
 class WavePacket

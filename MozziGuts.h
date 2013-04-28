@@ -147,31 +147,6 @@ x................9..........10...............Boarduino  \n
 #define HIFI 1
 
 
-/** @ingroup core
-AUDIO_RATE is fixed at 16384 Hz for now. For Mozzi's original audio mode, now
-called STANDARD, this was a compromise between the sample rate (interrupt rate)
-and sample bitdepth (pwm width), which are interdependent due to the way pulse
-wave modulation is used to generate the sound output.
-
-Another factor which is important for Mozzi's operation is that with AUDIO_RATE
-being a power of two, some internal calculations can be highly optimised for
-speed.
-
-In STANDARD mode and with AUDIO_RATE at 16384, the sample resolution is 488,
-which provides some headroom above the 8 bit table resolution currently used by
-the oscillators. You can look at the TimerOne library for more info about how
-interrupt rate and pwm resolution relate.
-
-For much higher quality output which combines signals from pins 9 and 10, 
-edit Mozzi/mozzi_config.h to contain #define AUDIO_MODE HIFI.
-
-@todo Possible option for output to R/2R DAC circuit, like
-http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/ This would limit
-dynamic range to 8 bit, but would remove the 16384Hz pwm carrier frequency noise
-which can be a problem in some applications, requiring filtering to remove (see
-the Mozzi wiki for filter schematics).
-@todo Test 32768Hz audio rate option properly
-*/
 //#define AUDIO_RATE 16384
 //#define AUDIO_RATE 32768
 

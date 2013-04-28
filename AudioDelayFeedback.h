@@ -15,10 +15,10 @@ that of a plain AudioDelay object, in this case 256 cells, or about 15
 milliseconds. AudioDelayFeedback uses int sized cells to accomodate the higher
 amplitude of direct input to the delay as well as the feedback, without losing
 precision. Output is only the delay line signal. If you want to mix the delay
-with the input, do it in your sketch. AudioDelayFeedback uses more processing
+with the input, do it in your sketch. AudioDelayFeedback uses more processing and memory
 than a plain AudioDelay, but allows for more dramatic effects with feedback.
-For smoother transitions between delay times, use AudioDelFbLInterp, which is
-like AudioDelayFeedback with the addition of linear interpolation between delay times.
+@tparam INTERP_TYPE a choice of LINEAR (default) or ALLPASS interpolation.  LINEAR is better
+for sweeping delay times, ALLPASS may be better for reverb-like effects.
 */
 
 template <unsigned int NUM_BUFFER_SAMPLES, char INTERP_TYPE = LINEAR>
@@ -34,7 +34,7 @@ public:
 
 	/** Constructor.
 	@param delaytime_cells delay time expressed in cells.  
-	For example, 128 cells delay at AUDIO_RATE would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms
+	For example, 128 cells delay at AUDIO_RATE 16384 would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms
 	Put another way, num_cells = delay_seconds * AUDIO_RATE.
 	*/
 	AudioDelayFeedback(unsigned int delaytime_cells): write_pos(0), _feedback_level(0), _delaytime_cells(delaytime_cells)
@@ -43,13 +43,15 @@ public:
 
 	/** Constructor.
 	@param delaytime_cells delay time expressed in cells.  
-	For example, 128 cells delay at AUDIO_RATE would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms
+	For example, 128 cells delay at AUDIO_RATE 16384 would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms
 	Put another way, num_cells = delay_seconds * AUDIO_RATE.
 	@param feedback_level is the feedback level from -128 to 127 (representing -1 to 1).
 	*/
 	AudioDelayFeedback(unsigned int delaytime_cells, char feedback_level): write_pos(0),  _feedback_level(feedback_level), _delaytime_cells(delaytime_cells)
 	{}
 
+	
+	
 	/** Input a value to the delay and retrieve the signal in the delay line at the position delaytime_cells.
 	@param input the signal input.
 	*/
@@ -62,8 +64,10 @@ public:
 		return next(input, Int2Type<INTERP_TYPE>());
 	}
 	
-	/** Input a value to the delay and retrieve the signal in the delay line at the position delaytime_cells,
-	update the write position and add feedback from the output to the input.
+	
+	
+	/**  Input a value to the delay, retrieve the signal in the delay line at the position delaytime_cells, 
+	and add feedback from the output to the input.
 	@param input the signal input.
 	@param delaytime_cells indicates the delay time in terms of cells in the delay buffer.
 	It doesn't change the stored internal value of _delaytime_cells.
@@ -88,8 +92,8 @@ public:
 	
 	
 
-	/** Input a value to the delay and retrieve the signal in the delay line at the fractional position delaytime_cells,
-	updating the write position and adding feedback from the output to the input.
+	/** Input a value to the delay, retrieve the signal in the delay line at the interpolated fractional position delaytime_cells, 
+	and add feedback from the output to the input.
 	@param input the signal input.
 	@param delaytime_cells is a fractional number to set the delay time in terms of cells
 	or partial cells in the delay buffer. It doesn't change the stored internal
@@ -132,24 +136,9 @@ public:
 	{
 		++write_pos &= (NUM_BUFFER_SAMPLES - 1);
 	}
-
 	
 	
-	/** Retrieve the signal in the delay line at the position delaytime_cells.
-	It doesn't change the stored internal value of _delaytime_cells or feedback the output to the input.
-	@param delaytime_cells indicates the delay time in terms of cells in the delay buffer.
-	*/
-	inline
-	int read(unsigned int delaytime_cells, Int2Type<LINEAR>)
-	{
-		unsigned int read_pos = (write_pos - delaytime_cells) & (NUM_BUFFER_SAMPLES - 1);
-		int delay_sig = delay_array[read_pos];								// read the delay buffer
-
-		return delay_sig;
-	}
-	
-	
-	/** Retrieve the signal in the delay line at the position delaytime_cells.
+	/** Retrieve the signal in the delay line at the interpolated fractional position delaytime_cells.
 	It doesn't change the stored internal value of _delaytime_cells or feedback the output to the input.
 	@param delaytime_cells indicates the delay time in terms of cells in the delay buffer.
 	*/
@@ -160,7 +149,7 @@ public:
 	}
 
 	
-	/** Retrieve the signal in the delay line at the current delaytime_cells.
+	/** Retrieve the signal in the delay line at the current stored delaytime_cells.
 	It doesn't change the stored internal value of _delaytime_cells or feedback the output to the input.
 	*/
 	inline
@@ -289,7 +278,6 @@ private:
 	inline
 	void setDelayTimeCells(float delaytime_cells, Int2Type<ALLPASS>)
 	{
-	setPin13High();
 	//coeff = (1-d)/(1+d)
 	_delaytime_cells = (unsigned int) delaytime_cells;
 
@@ -312,7 +300,20 @@ private:
 }
 
 
-	/** Retrieve the signal in the delay line at the position delaytime_cells.
+	// /** Retrieve the signal in the delay line at the position delaytime_cells.
+	// It doesn't change the stored internal value of _delaytime_cells or feedback the output to the input.
+	// @param delaytime_cells indicates the delay time in terms of cells in the delay buffer.
+	// */
+	// inline
+	// int read(unsigned int delaytime_cells, Int2Type<LINEAR>)
+	// {
+		// unsigned int read_pos = (write_pos - delaytime_cells) & (NUM_BUFFER_SAMPLES - 1);
+		// int delay_sig = delay_array[read_pos];								// read the delay buffer
+// 
+		// return delay_sig;
+	// }
+	
+	/** Retrieve the signal in the delay line at the interpolated fractional position delaytime_cells.
 	It doesn't change the stored internal value of _delaytime_cells or feedback the output to the input.
 	@param delaytime_cells indicates the delay time in terms of cells in the delay buffer.
 	*/

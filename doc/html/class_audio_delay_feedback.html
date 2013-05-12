@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1z</span>
+   &#160;<span id="projectnumber">alpha 0.01.1zz</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -121,6 +121,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a289944628d46d1e0ee1c57112a2a9570"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay, retrieve the signal in the delay line at the interpolated fractional position delaytime_cells, and add feedback from the output to the input.  <a href="#a289944628d46d1e0ee1c57112a2a9570"></a><br/></td></tr>
 <tr class="memitem:a1be5de09206e7ac673c6526e0b083175"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a1be5de09206e7ac673c6526e0b083175">write</a> (char input)</td></tr>
 <tr class="memdesc:a1be5de09206e7ac673c6526e0b083175"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay but don't change the delay time or retrieve the output signal.  <a href="#a1be5de09206e7ac673c6526e0b083175"></a><br/></td></tr>
+<tr class="memitem:a3e6fc70018e407eb01dbf3cf591ebcc3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a3e6fc70018e407eb01dbf3cf591ebcc3">writeFeedback</a> (char input)</td></tr>
+<tr class="memdesc:a3e6fc70018e407eb01dbf3cf591ebcc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay but don't advance the write position, change the delay time or retrieve the output signal.  <a href="#a3e6fc70018e407eb01dbf3cf591ebcc3"></a><br/></td></tr>
+<tr class="memitem:ac8773caec44e20289bf9cfb5ec452343"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#ac8773caec44e20289bf9cfb5ec452343">write</a> (char input, unsigned int offset)</td></tr>
+<tr class="memdesc:ac8773caec44e20289bf9cfb5ec452343"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay at an offset from the current write position.  <a href="#ac8773caec44e20289bf9cfb5ec452343"></a><br/></td></tr>
 <tr class="memitem:a6ab80a097738c10bd6b6a04614ab2aa6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a6ab80a097738c10bd6b6a04614ab2aa6">read</a> (<a class="el" href="group__mozzi__fixmath.html#ga20ef71528ee7583bbf60586448b12caf">Q16n16</a> delaytime_cells)</td></tr>
 <tr class="memdesc:a6ab80a097738c10bd6b6a04614ab2aa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the signal in the delay line at the interpolated fractional position delaytime_cells.  <a href="#a6ab80a097738c10bd6b6a04614ab2aa6"></a><br/></td></tr>
 <tr class="memitem:a269c793a5fd4b0242d885ca29e03779e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a269c793a5fd4b0242d885ca29e03779e">read</a> ()</td></tr>
@@ -243,8 +247,9 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, char INTERP_TYPE = LINEAR&gt; </div
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note:</dt><dd>slower than <a class="el" href="class_audio_delay_feedback.html#ae8f4605361bc77e55c5426e2d9adc0eb" title="Input a value to the delay, retrieve the signal in the delay line at the position delaytime_cells...">next(char input, unsigned int delaytime_cells)</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00059">59</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00060">60</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
@@ -285,7 +290,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, char INTERP_TYPE = LINEAR&gt; </div
 </dl>
 <dl class="section note"><dt>Note:</dt><dd>Timing: 4us </dd></dl>
 
-<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00077">77</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00078">78</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
@@ -325,7 +330,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, char INTERP_TYPE = LINEAR&gt; </div
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00103">103</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00104">104</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
@@ -355,7 +360,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, char INTERP_TYPE = LINEAR&gt; </div
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00146">146</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00172">172</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
@@ -378,7 +383,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, char INTERP_TYPE = LINEAR&gt; </div
 <p>Retrieve the signal in the delay line at the current stored delaytime_cells. </p>
 <p>It doesn't change the stored internal value of _delaytime_cells or feedback the output to the input. </p>
 
-<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00156">156</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00182">182</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
@@ -407,7 +412,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, char INTERP_TYPE = LINEAR&gt; </div
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00168">168</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00194">194</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
@@ -436,7 +441,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, char INTERP_TYPE = LINEAR&gt; </div
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00180">180</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00206">206</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
@@ -465,7 +470,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, char INTERP_TYPE = LINEAR&gt; </div
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00192">192</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00218">218</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
@@ -494,7 +499,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, char INTERP_TYPE = LINEAR&gt; </div
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00202">202</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00228">228</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
@@ -523,7 +528,78 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, char INTERP_TYPE = LINEAR&gt; </div
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00135">135</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00136">136</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac8773caec44e20289bf9cfb5ec452343"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int NUM_BUFFER_SAMPLES, char INTERP_TYPE = LINEAR&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;::<a class="el" href="class_audio_delay_feedback.html#a1be5de09206e7ac673c6526e0b083175">write</a> </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Input a value to the delay at an offset from the current write position. </p>
+<p>Don't advance the main write position or change the stored delay time or retrieve the output signal. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>the signal input. </td></tr>
+    <tr><td class="paramname">offset</td><td>the number of cells behind the ordinary write position where the input will be written. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00160">160</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3e6fc70018e407eb01dbf3cf591ebcc3"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int NUM_BUFFER_SAMPLES, char INTERP_TYPE = LINEAR&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;::<a class="el" href="class_audio_delay_feedback.html#a3e6fc70018e407eb01dbf3cf591ebcc3">writeFeedback</a> </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>input</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Input a value to the delay but don't advance the write position, change the delay time or retrieve the output signal. </p>
+<p>This can be useful for manually adding feedback to the delay line, "behind" the advancing write head. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>the signal input. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00148">148</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
@@ -534,7 +610,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, char INTERP_TYPE = LINEAR&gt; </div
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 28 2013 21:00:56 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun May 12 2013 22:36:29 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

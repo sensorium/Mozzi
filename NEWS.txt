@@ -3,6 +3,16 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1zz
+- Added ReverbTank, a reverb which sounds like the inside of a tin can, and an example ReverbTank_STANDARD
+- AudioDelay 
+	- added template parameter for signal type, to allow ints as well as the default char type.
+	- next() now returns only delayed signal, so mixing can be flexible and is done in the sketch
+- AudioDelayFeedback 
+	- repaired a few bugs. (I hope)
+	- added next(char input) which was missing for LINEAR interpolated delays
+	
+	
 Version 0.01.1z
 - Phasor - changed setFreq(unsigned int) to setFreq(int), old sketches will need updating
 - Reorganised examples into topic subdirectories and removed numbers

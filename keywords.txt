@@ -77,6 +77,9 @@ next	KEYWORD2
 AudioDelayFeedback	KEYWORD1
 next	KEYWORD2
 setFeedbackLevel	KEYWORD2
+setDelayTimeCells	KEYWORD2
+read	KEYWORD2
+write	KEYWORD2
 LINEAR	LITERAL1
 ALLPASS	LITERAL1
 
@@ -249,7 +252,7 @@ mozzi_rand	KEYWORD1
 xorshift96	KEYWORD2
 rand	KEYWORD2
 randomMidi	KEYWORD2
-
+randSeed	KEYWORD2
 
 mozzi_midi	KEYWORD1
 float mtof	KEYWORD2
@@ -283,8 +286,15 @@ DCfilter	KEYWORD1
 next KEYWORD2
 
 
-RecentAverage
-next
+RecentAverage	KEYWORD1
+next	KEYWORD2
+
+
+ReverbTank	KEYWORD1
+next	KEYWORD2
+setEarlyReflections	KEYWORD2
+setLoopDelays	KEYWORD2
+setFeebackLevel	KEYWORD2
 
 
 WavePacket	KEYWORD1

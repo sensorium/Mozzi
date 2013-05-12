@@ -30,15 +30,17 @@ be a power of two. The largest delay you'll fit in an atmega328 will be 512
 cells, which at 16384 Hz sample rate is 31 milliseconds. More of a flanger or a
 doubler than an echo. THe amount of memory available for delays on other chips will vary.
 AudioDelay() doesn't have feedback.  If you want feedback, use AudioDelayFeedback().
+@tparam the type of numbers to use for the signal in the delay.  The default is char, but int could be useful
+when adding manual feedback.  When using int, the input should be limited to 15 bits width, ie. -16384 to 16383.
 */
 
-template <unsigned int NUM_BUFFER_SAMPLES>
+template <unsigned int NUM_BUFFER_SAMPLES, class T = char>
 class AudioDelay
 {
 
 private:
 
-	char delay_array[NUM_BUFFER_SAMPLES];
+	T delay_array[NUM_BUFFER_SAMPLES];
 	unsigned int _write_pos;
 	unsigned int _delaytime_cells;
 	
@@ -65,7 +67,7 @@ public:
 	@param delaytime_cells sets the delay time in terms of cells in the delay buffer.
 	*/
 	inline
-	char next(char in_value, unsigned int delaytime_cells)
+	T next(T in_value, unsigned int delaytime_cells)
 	{
 		++_write_pos &= (NUM_BUFFER_SAMPLES - 1);
 		unsigned int read_pos = (_write_pos - delaytime_cells) & (NUM_BUFFER_SAMPLES - 1);
@@ -74,7 +76,7 @@ public:
 		delay_array[_write_pos] = in_value;			// write to buffer
 		char delay_sig = delay_array[read_pos] ;	// read the delay buffer
 
-		return (char)(((int) in_value + delay_sig)>>1);
+		return (T)delay_sig;
 	}
 	
 	
@@ -83,16 +85,16 @@ public:
 	@param in_value the signal input.
 	*/
 	inline
-	char next(char in_value)
+	T next(T in_value)
 	{
 		++_write_pos &= (NUM_BUFFER_SAMPLES - 1);
 		unsigned int read_pos = (_write_pos - _delaytime_cells) & (NUM_BUFFER_SAMPLES - 1);
 
 		// why does delay jump if I read it before writing?
 		delay_array[_write_pos] = in_value;			// write to buffer
-		char delay_sig = delay_array[read_pos] ;	// read the delay buffer
+		T delay_sig = delay_array[read_pos] ;	// read the delay buffer
 
-		return (char)(((int) in_value + delay_sig)>>1);
+		return delay_sig;
 	}
 
 	
@@ -101,6 +103,29 @@ public:
 		_delaytime_cells = delaytime_cells;
 	}
 
+	
+	/** Retrieve the signal in the delay line at the position delaytime_cells.
+	It doesn't change the stored internal value of _delaytime_cells.
+	@param delaytime_cells indicates the delay time in terms of cells in the delay buffer.
+	*/
+	inline
+	T read(unsigned int delaytime_cells)
+	{
+		unsigned int read_pos = (_write_pos - delaytime_cells) & (NUM_BUFFER_SAMPLES - 1);
+		return delay_array[read_pos];
+	}
+	
+	
+	// /** Input a value to the delay but don't advance the write position, change the delay time or retrieve the output signal.
+	// This can be useful for manually adding feedback to the delay line, "behind" the advancing write head.
+	// @param input the signal input.
+	// */
+	// inline
+	// void writeFeedback(T input)
+	// {
+		// delay_array[_write_pos] = input;
+	// }
+	
 };
 
 #endif        //  #ifndef AUDIODELAY_H_

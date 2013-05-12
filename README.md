@@ -3,7 +3,7 @@ Mozzi
 sound synthesis library for Arduino
 ------------------------------------
 
-Version 0.01.1z
+Version 0.01.1zz
 Tim Barrass 2010-13
 
 
@@ -32,7 +32,7 @@ Mozzi is a development of research into Mobile Sonification in the
 
 ### Features
 
--    16384 Hz sample rate, with 8 bit or 14 bit audio output modes. 
+-    16384 Hz sample rate, with 8 bit or 14 bit audio output modes.
 -    Variable control rate from 64 Hz upwards.
 -    Useful basic audio toolkit: oscillators, samples, lines, envelopes, scheduling, filtering.
 -    Fast ADC and other cpu-efficient code utilities to help keep audio running smoothly.
@@ -67,15 +67,17 @@ Feedback about others is welcome.
 x	 9	Arduino Uno  
 x	 9	Arduino Duemilanove  
 x	 9	Arduino Nano  
-x	 9	Arduino Leonardo  
-x	 9  Ardweeny  
+x	 9	Arduino Pro Mini  
+x	 9	Arduino Leonardo
+x	11	Arduino Mega  
 x	11  Freetronics EtherMega  
+x	 9  Ardweeny  
+x	 9  Boarduino
 ..14	Teensy  
 x	B5  Teensy2  
 x	B5(25) Teensy2++  
-x	11	Arduino Mega  
 ..13	Sanguino  
-x	 9  Boarduino  
+
 
 For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4).
 
@@ -106,17 +108,13 @@ Here's a template for an empty Mozzi sketch:
 
 ### Documentation
 
-There's documentation in the doc folder in the Mozzi download
-and [online] (http://sensorium.github.com/Mozzi/doc/html/index.html).  
-There are hints and tips and more help on the Mozzi [wiki]
-(https://github.com/sensorium/Mozzi/wiki/Hints-and-Tips).  
-Start or look up a topic on the Mozzi [users forum]
-(https://groups.google.com/forum/#!forum/mozzi-users).  
-Also, feel free to submit any issues on the [GitHub Mozzi site]
-(https://github.com/sensorium/Mozzi/issues).  
-Share [code snippets]
-(https://github.com/sensorium/Mozzi/wiki/Code-Snippets-to-Share).  
+There's documentation in the doc folder in the Mozzi download and [online] (http://sensorium.github.com/Mozzi/doc/html/index.html).  
+There are hints and tips and more help on the Mozzi [wiki] (https://github.com/sensorium/Mozzi/wiki/Hints-and-Tips).  
+Start or look up a topic on the Mozzi [users forum] (https://groups.google.com/forum/#!forum/mozzi-users).  
+Also, feel free to submit any issues on the [GitHub Mozzi site] (https://github.com/sensorium/Mozzi/issues).  
+Share [code snippets] (https://github.com/sensorium/Mozzi/wiki/Code-Snippets-to-Share).  
 Check for code and usage changes in NEWS.txt.
+Also, there are recordings of the examples inside their sketch folders.
 
 
 ### Caveats
@@ -142,6 +140,7 @@ ead~.c puredata external (creb library) Copyright (c) 2000-2003 by Tom Schouten 
 [AF_precision_synthesis](http://adrianfreed.com/content/arduino-sketch-high-frequency-precision-sine-wave-tone-sound-synthesis)
 by Adrian Freed, 2009.  
 [Resonant filter](http://www.musicdsp.org/archive.php?classid=3#259) posted to musicdsp.org by Paul Kellett,
-and fixed point version of the filter on [dave's blog of art and programming]
-(http://www.pawfal.org/dave/blog/2011/09/)
-State Variable filter pseudocode at http://www.musicdsp.org/showone.php?id=23 and http://www.musicdsp.org/showone.php?id=142.
+and fixed point version of the filter on [dave's blog of art and programming] (http://www.pawfal.org/dave/blog/2011/09/)
+State Variable filter pseudocode at [musicdsp.org] (http://www.musicdsp.org/showone.php?id=23 and http://www.musicdsp.org/showone.php?id=142).
+Various examples from Pure Data by Miller Puckette.
+Practical synthesis tutorials by [Andy Farnell] (http://www.obiwannabe.co.uk/)

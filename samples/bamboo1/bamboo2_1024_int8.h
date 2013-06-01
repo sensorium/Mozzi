@@ -1,7 +1,11 @@
 #ifndef BAMBOO2_1024_H_
 #define BAMBOO2_1024_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 #define BAMBOO2_1024_NUM_CELLS 1024

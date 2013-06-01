@@ -1,7 +1,11 @@
 #ifndef ENVELOP2048_INT8_H_
 #define ENVELOP2048_INT8_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 /* a hand-drawn envelope with fast attack and slow decay

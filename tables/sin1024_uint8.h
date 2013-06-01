@@ -7,7 +7,11 @@ Made with python/sin1024_uint8.py to use for a volume envelope.
 #ifndef SIN1024_UINT8_H_
 #define SIN1024_UINT8_H_
  
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
  
 #define SIN1024_UINT8_NUM_CELLS 1024

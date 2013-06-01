@@ -1,7 +1,11 @@
 #ifndef TRIANGLE_VALVE_2048_H_
 #define TRIANGLE_VALVE_2048_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 /* triangle wave with distortion from Audacity

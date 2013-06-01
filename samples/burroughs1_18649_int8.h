@@ -1,7 +1,11 @@
 #ifndef BURROUGHS1_18649_H_
 #define BURROUGHS1_18649_H_
  
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
  
 #define BURROUGHS1_18649_NUM_CELLS 18649

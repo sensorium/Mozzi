@@ -24,7 +24,11 @@
 #define MOZZI_ANALOG_H_
 
 #include "mozzi_config.h"
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include "mozzi_utils.h"
 
 #if USE_AUDIO_INPUT

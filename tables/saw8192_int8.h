@@ -1,7 +1,11 @@
 #ifndef SAW8192_H_
 #define SAW8192_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 #define SAW8192_NUM_CELLS 8192

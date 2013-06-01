@@ -23,7 +23,11 @@
 #ifndef LINE_H_
 #define LINE_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <util/atomic.h>
 
 /** For linear changes with a minimum of calculation at each step. For instance,

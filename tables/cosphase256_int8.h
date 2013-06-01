@@ -1,7 +1,11 @@
 #ifndef COSPHASE256_H_
 #define COSPHASE256_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 /* cos out-of-phase

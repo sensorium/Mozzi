@@ -10,7 +10,11 @@ def generate(outfilename, tablename, tablelength, samplerate):
     fout = open(os.path.expanduser(outfilename), "w")
     fout.write('#ifndef ' + tablename + '_H_' + '\n')
     fout.write('#define ' + tablename + '_H_' + '\n \n')
+    fout.write('#if ARDUINO >= 100'+'\n')
     fout.write('#include "Arduino.h"'+'\n')
+    fout.write('#else'+'\n')
+    fout.write('#include "WProgram.h"'+'\n')
+     fout.write('#endif'+'\n')   
     fout.write('#include <avr/pgmspace.h>'+'\n \n')
     fout.write('#define ' + tablename + '_NUM_CELLS '+ str(tablelength)+'\n')
     fout.write('#define ' + tablename + '_SAMPLERATE '+ str(samplerate)+'\n \n')
@@ -35,4 +39,5 @@ def generate(outfilename, tablename, tablelength, samplerate):
         fout.close()
         print "wrote " + outfilename
 
-generate("~/Desktop/sin1024_uint8.h", "sin1024_uint", 1024, "1024")
+## generate("~/Desktop/sin1024_uint8.h", "sin1024_uint", 1024, "1024")
+generate("~/Desktop/sin8192_uint8.h", "sin8192_uint", 8192, "8192")

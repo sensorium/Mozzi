@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1zz</span>
+   &#160;<span id="projectnumber">alpha 0.01.1zzz</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -103,28 +103,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00006"></a>00006     fout = open(os.path.expanduser(outfilename), <span class="stringliteral">&quot;w&quot;</span>)
 <a name="l00007"></a>00007     fout.write(<span class="stringliteral">&#39;#ifndef &#39;</span> + tablename + <span class="stringliteral">&#39;_H_&#39;</span> + <span class="stringliteral">&#39;\n&#39;</span>)
 <a name="l00008"></a>00008     fout.write(<span class="stringliteral">&#39;#define &#39;</span> + tablename + <span class="stringliteral">&#39;_H_&#39;</span> + <span class="stringliteral">&#39;\n \n&#39;</span>)
-<a name="l00009"></a>00009     fout.write(<span class="stringliteral">&#39;#include &quot;Arduino.h&quot;&#39;</span>+<span class="stringliteral">&#39;\n&#39;</span>)
-<a name="l00010"></a>00010     fout.write(<span class="stringliteral">&#39;#include &lt;avr/pgmspace.h&gt;&#39;</span>+<span class="stringliteral">&#39;\n \n&#39;</span>)
-<a name="l00011"></a>00011     fout.write(<span class="stringliteral">&#39;#define &#39;</span> + tablename + <span class="stringliteral">&#39;_NUM_CELLS &#39;</span>+ str(len(values))+<span class="stringliteral">&#39;\n&#39;</span>)
-<a name="l00012"></a>00012     fout.write(<span class="stringliteral">&#39;#define &#39;</span> + tablename + <span class="stringliteral">&#39;_SAMPLERATE &#39;</span>+ str(samplerate)+<span class="stringliteral">&#39;\n \n&#39;</span>)
-<a name="l00013"></a>00013     outstring = <span class="stringliteral">&#39;const char __attribute__((progmem)) &#39;</span> + tablename + <span class="stringliteral">&#39;_DATA [] = {&#39;</span>
-<a name="l00014"></a>00014     <span class="keywordflow">try</span>:
-<a name="l00015"></a>00015         <span class="keywordflow">for</span> num <span class="keywordflow">in</span> range(tablelength):
-<a name="l00016"></a>00016             outstring += str(num/32) + <span class="stringliteral">&quot;, &quot;</span>  <span class="comment">## for saw line, or put your own generating code here</span>
-<a name="l00017"></a>00017     <span class="keywordflow">finally</span>:
-<a name="l00018"></a>00018         outstring +=  <span class="stringliteral">&quot;};&quot;</span>
-<a name="l00019"></a>00019         outstring = textwrap.fill(outstring, 80)
-<a name="l00020"></a>00020         fout.write(outstring)
-<a name="l00021"></a>00021         fout.write(<span class="stringliteral">&#39;\n \n #endif /* &#39;</span> + tablename + <span class="stringliteral">&#39;_H_ */\n&#39;</span>)
-<a name="l00022"></a>00022         fout.close()
-<a name="l00023"></a>00023         <span class="keywordflow">print</span> <span class="stringliteral">&quot;wrote &quot;</span> + outfilename
-<a name="l00024"></a>00024 
-<a name="l00025"></a>00025 generate(<span class="stringliteral">&quot;~/Desktop/phasor8192_uint8.h&quot;</span>, <span class="stringliteral">&quot;phasor8192&quot;</span>, 8192, <span class="stringliteral">&quot;8192&quot;</span>)
+<a name="l00009"></a>00009     fout.write(<span class="stringliteral">&#39;#if ARDUINO &gt;= 100&#39;</span>+<span class="stringliteral">&#39;\n&#39;</span>)
+<a name="l00010"></a>00010     fout.write(<span class="stringliteral">&#39;#include &quot;Arduino.h&quot;&#39;</span>+<span class="stringliteral">&#39;\n&#39;</span>)
+<a name="l00011"></a>00011     fout.write(<span class="stringliteral">&#39;#else&#39;</span>+<span class="stringliteral">&#39;\n&#39;</span>)
+<a name="l00012"></a>00012     fout.write(<span class="stringliteral">&#39;#include &quot;WProgram.h&quot;&#39;</span>+<span class="stringliteral">&#39;\n&#39;</span>)
+<a name="l00013"></a>00013      fout.write(<span class="stringliteral">&#39;#endif&#39;</span>+<span class="stringliteral">&#39;\n&#39;</span>)   
+<a name="l00014"></a>00014     fout.write(<span class="stringliteral">&#39;#include &lt;avr/pgmspace.h&gt;&#39;</span>+<span class="stringliteral">&#39;\n \n&#39;</span>)
+<a name="l00015"></a>00015     fout.write(<span class="stringliteral">&#39;#define &#39;</span> + tablename + <span class="stringliteral">&#39;_NUM_CELLS &#39;</span>+ str(len(values))+<span class="stringliteral">&#39;\n&#39;</span>)
+<a name="l00016"></a>00016     fout.write(<span class="stringliteral">&#39;#define &#39;</span> + tablename + <span class="stringliteral">&#39;_SAMPLERATE &#39;</span>+ str(samplerate)+<span class="stringliteral">&#39;\n \n&#39;</span>)
+<a name="l00017"></a>00017     outstring = <span class="stringliteral">&#39;const char __attribute__((progmem)) &#39;</span> + tablename + <span class="stringliteral">&#39;_DATA [] = {&#39;</span>
+<a name="l00018"></a>00018     <span class="keywordflow">try</span>:
+<a name="l00019"></a>00019         <span class="keywordflow">for</span> num <span class="keywordflow">in</span> range(tablelength):
+<a name="l00020"></a>00020             outstring += str(num/32) + <span class="stringliteral">&quot;, &quot;</span>  <span class="comment">## for saw line, or put your own generating code here</span>
+<a name="l00021"></a>00021     <span class="keywordflow">finally</span>:
+<a name="l00022"></a>00022         outstring +=  <span class="stringliteral">&quot;};&quot;</span>
+<a name="l00023"></a>00023         outstring = textwrap.fill(outstring, 80)
+<a name="l00024"></a>00024         fout.write(outstring)
+<a name="l00025"></a>00025         fout.write(<span class="stringliteral">&#39;\n \n #endif /* &#39;</span> + tablename + <span class="stringliteral">&#39;_H_ */\n&#39;</span>)
+<a name="l00026"></a>00026         fout.close()
+<a name="l00027"></a>00027         <span class="keywordflow">print</span> <span class="stringliteral">&quot;wrote &quot;</span> + outfilename
+<a name="l00028"></a>00028 
+<a name="l00029"></a>00029 generate(<span class="stringliteral">&quot;~/Desktop/phasor8192_uint8.h&quot;</span>, <span class="stringliteral">&quot;phasor8192&quot;</span>, 8192, <span class="stringliteral">&quot;8192&quot;</span>)
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 12 2013 22:36:29 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 1 2013 15:49:37 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

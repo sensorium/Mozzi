@@ -23,7 +23,11 @@
 #ifndef FIXEDMATH_H_
 #define FIXEDMATH_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 
 /** @defgroup mozzi_fixmath Mozzi fixed point fractional number types and conversion routines
 Take care when converting that the important bits of your numbers will fit in the types you choose!

@@ -1,7 +1,11 @@
 #ifndef SIN8192_INT8_H_
 #define SIN8192_INT8_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 #define SIN8192_NUM_CELLS 8192

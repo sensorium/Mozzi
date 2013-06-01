@@ -3,10 +3,11 @@
 
 
 /**  @ingroup core
-Select STANDARD or HIFI audio output mode in the Mozzi/mozzi_config.h file with either
+Select STANDARD or HIFI audio output mode in the Mozzi/mozzi_config.h file with
 \#define AUDIO_MODE STANDARD
 or 
 \#define AUDIO_MODE HIFI
+
 In Mozzi/config.h, comment one of these options in and the other out to set the audio mode.
 */
 
@@ -17,12 +18,12 @@ In Mozzi/config.h, comment one of these options in and the other out to set the 
 /** @ingroup core
 AUDIO_RATE can be \#defined as 16384 or 32768 Hertz in Mozzi/mozzi_config.h. 
 
-Mozzi's original audio mode, now called STANDARD, uses 16384 Hz,
-chosen as a compromise between the sample rate (interrupt rate) and sample
-bitdepth (pwm width), which are interdependent due to the way pulse wave
-modulation is used to generate the sound output.  An AUDIO_RATE of 32768 Hz in 
-STANDARD mode doesn't work because it doesn't give enough
-time for the full pwm resolution to be reached in each cycle.
+Mozzi's original audio mode, now called STANDARD, uses 16384 Hz, chosen as a
+compromise between the sample rate (interrupt rate) and sample bitdepth (pwm
+width), which are interdependent due to the way pulse wave modulation is used to
+generate the sound output. An AUDIO_RATE of 32768 Hz only works in HIFI mode,
+not in STANDARD mode because it doesn't give enough time for the full pwm
+resolution to be reached in each cycle.
 
 Another factor which is important for Mozzi's operation is that with AUDIO_RATE
 being a power of two, some internal calculations can be highly optimised for

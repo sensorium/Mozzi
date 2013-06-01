@@ -1,7 +1,11 @@
 #ifndef SAW2048_H_
 #define SAW2048_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 #define SAW2048_NUM_CELLS 2048

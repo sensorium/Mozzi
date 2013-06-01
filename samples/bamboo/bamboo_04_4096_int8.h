@@ -1,7 +1,11 @@
 #ifndef BAMBOO_04_4096_H_
 #define BAMBOO_04_4096_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 #define BAMBOO_04_4096_NUM_CELLS 4096

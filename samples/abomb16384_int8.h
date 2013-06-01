@@ -1,7 +1,11 @@
 #ifndef ABOMB_H_
 #define ABOMB_H_
  
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
  
 #define ABOMB_NUM_CELLS 16384

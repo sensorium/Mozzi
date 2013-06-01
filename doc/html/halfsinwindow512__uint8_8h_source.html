@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1zz</span>
+   &#160;<span id="projectnumber">alpha 0.01.1zzz</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -98,48 +98,52 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef HALFSINWINDOW512_H_</span>
 <a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define HALFSINWINDOW512_H_</span>
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
-<a name="l00004"></a>00004 <span class="preprocessor">#include &quot;Arduino.h&quot;</span>
-<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;avr/pgmspace.h&gt;</span>
-<a name="l00006"></a>00006 
-<a name="l00007"></a>00007 <span class="comment">// this is the top half of a sin, used as a rough envelope for a cycling fade-in, fade-out with empty space in between.</span>
-<a name="l00008"></a>00008 
-<a name="l00009"></a>00009 <span class="preprocessor">#define HALFSINWINDOW512_NUM_CELLS 512</span>
-<a name="l00010"></a>00010 <span class="preprocessor"></span><span class="preprocessor">#define HALFSINWINDOW512_SAMPLERATE 512</span>
-<a name="l00011"></a>00011 <span class="preprocessor"></span>
-<a name="l00012"></a>00012 <span class="keyword">const</span> <span class="keywordtype">char</span> __attribute__((progmem)) HALFSINWINDOW512_DATA []  =
-<a name="l00013"></a>00013         {
-<a name="l00014"></a>00014                 1, 3, 6, 9, 13, 16, 19, 22, 25, 28, 31,
-<a name="l00015"></a>00015                 34, 38, 41, 44, 47, 50, 53, 56, 59, 62, 65, 68, 71, 74, 77, 80, 83, 86, 89, 92,
-<a name="l00016"></a>00016                 95, 98, 101, 104, 107, 109, 112, 115, 118, 121, 123, 126, 129, 132, 134, 137,
-<a name="l00017"></a>00017                 140, 142, 145, 147, 150, 152, 155, 157, 160, 162, 165, 167, 170, 172, 174, 177,
-<a name="l00018"></a>00018                 179, 181, 183, 185, 188, 190, 192, 194, 196, 198, 200, 202, 204, 206, 207, 209,
-<a name="l00019"></a>00019                 211, 213, 215, 216, 218, 220, 221, 223, 224, 226, 227, 229, 230, 231, 233, 234,
-<a name="l00020"></a>00020                 235, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 248, 249, 250,
-<a name="l00021"></a>00021                 250, 251, 252, 252, 253, 253, 254, 254, 254, 255, 255, 255, 255, 255, 255, 255,
-<a name="l00022"></a>00022                 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 254, 254, 254, 253, 253, 252,
-<a name="l00023"></a>00023                 252, 251, 250, 250, 249, 248, 248, 247, 246, 245, 244, 243, 242, 241, 240, 239,
-<a name="l00024"></a>00024                 238, 237, 235, 234, 233, 231, 230, 229, 227, 226, 224, 223, 221, 220, 218, 216,
-<a name="l00025"></a>00025                 215, 213, 211, 209, 207, 206, 204, 202, 200, 198, 196, 194, 192, 190, 188, 185,
-<a name="l00026"></a>00026                 183, 181, 179, 177, 174, 172, 170, 167, 165, 162, 160, 157, 155, 152, 150, 147,
-<a name="l00027"></a>00027                 145, 142, 140, 137, 134, 132, 129, 126, 123, 121, 118, 115, 112, 109, 107, 104,
-<a name="l00028"></a>00028                 101, 98, 95, 92, 89, 86, 83, 80, 77, 74, 71, 68, 65, 62, 59, 56, 53, 50, 47, 44,
-<a name="l00029"></a>00029                 41, 38, 34, 31, 28, 25, 22, 19, 16, 13, 9, 6, 3,
-<a name="l00030"></a>00030                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-<a name="l00031"></a>00031                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-<a name="l00032"></a>00032                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-<a name="l00033"></a>00033                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+<a name="l00004"></a>00004 <span class="preprocessor">#if ARDUINO &gt;= 100</span>
+<a name="l00005"></a>00005 <span class="preprocessor"></span><span class="preprocessor"> #include &quot;Arduino.h&quot;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#else</span>
+<a name="l00007"></a>00007 <span class="preprocessor"></span><span class="preprocessor"> #include &quot;WProgram.h&quot;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#endif</span>
+<a name="l00009"></a>00009 <span class="preprocessor"></span><span class="preprocessor">#include &lt;avr/pgmspace.h&gt;</span>
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011 <span class="comment">// this is the top half of a sin, used as a rough envelope for a cycling fade-in, fade-out with empty space in between.</span>
+<a name="l00012"></a>00012 
+<a name="l00013"></a>00013 <span class="preprocessor">#define HALFSINWINDOW512_NUM_CELLS 512</span>
+<a name="l00014"></a>00014 <span class="preprocessor"></span><span class="preprocessor">#define HALFSINWINDOW512_SAMPLERATE 512</span>
+<a name="l00015"></a>00015 <span class="preprocessor"></span>
+<a name="l00016"></a>00016 <span class="keyword">const</span> <span class="keywordtype">char</span> __attribute__((progmem)) HALFSINWINDOW512_DATA []  =
+<a name="l00017"></a>00017         {
+<a name="l00018"></a>00018                 1, 3, 6, 9, 13, 16, 19, 22, 25, 28, 31,
+<a name="l00019"></a>00019                 34, 38, 41, 44, 47, 50, 53, 56, 59, 62, 65, 68, 71, 74, 77, 80, 83, 86, 89, 92,
+<a name="l00020"></a>00020                 95, 98, 101, 104, 107, 109, 112, 115, 118, 121, 123, 126, 129, 132, 134, 137,
+<a name="l00021"></a>00021                 140, 142, 145, 147, 150, 152, 155, 157, 160, 162, 165, 167, 170, 172, 174, 177,
+<a name="l00022"></a>00022                 179, 181, 183, 185, 188, 190, 192, 194, 196, 198, 200, 202, 204, 206, 207, 209,
+<a name="l00023"></a>00023                 211, 213, 215, 216, 218, 220, 221, 223, 224, 226, 227, 229, 230, 231, 233, 234,
+<a name="l00024"></a>00024                 235, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 248, 249, 250,
+<a name="l00025"></a>00025                 250, 251, 252, 252, 253, 253, 254, 254, 254, 255, 255, 255, 255, 255, 255, 255,
+<a name="l00026"></a>00026                 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 254, 254, 254, 253, 253, 252,
+<a name="l00027"></a>00027                 252, 251, 250, 250, 249, 248, 248, 247, 246, 245, 244, 243, 242, 241, 240, 239,
+<a name="l00028"></a>00028                 238, 237, 235, 234, 233, 231, 230, 229, 227, 226, 224, 223, 221, 220, 218, 216,
+<a name="l00029"></a>00029                 215, 213, 211, 209, 207, 206, 204, 202, 200, 198, 196, 194, 192, 190, 188, 185,
+<a name="l00030"></a>00030                 183, 181, 179, 177, 174, 172, 170, 167, 165, 162, 160, 157, 155, 152, 150, 147,
+<a name="l00031"></a>00031                 145, 142, 140, 137, 134, 132, 129, 126, 123, 121, 118, 115, 112, 109, 107, 104,
+<a name="l00032"></a>00032                 101, 98, 95, 92, 89, 86, 83, 80, 77, 74, 71, 68, 65, 62, 59, 56, 53, 50, 47, 44,
+<a name="l00033"></a>00033                 41, 38, 34, 31, 28, 25, 22, 19, 16, 13, 9, 6, 3,
 <a name="l00034"></a>00034                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 <a name="l00035"></a>00035                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 <a name="l00036"></a>00036                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 <a name="l00037"></a>00037                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-<a name="l00038"></a>00038         };
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040 <span class="preprocessor">#endif </span><span class="comment">/* HALFSINWINDOW512_H_ */</span>
+<a name="l00038"></a>00038                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+<a name="l00039"></a>00039                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+<a name="l00040"></a>00040                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+<a name="l00041"></a>00041                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+<a name="l00042"></a>00042         };
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044 <span class="preprocessor">#endif </span><span class="comment">/* HALFSINWINDOW512_H_ */</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 12 2013 22:36:29 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 1 2013 15:49:38 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

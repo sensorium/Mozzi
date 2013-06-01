@@ -55,7 +55,7 @@ setLoopingOff	KEYWORD2
 rangeWholeSample	KEYWORD2
 setStart	KEYWORD2
 setEnd	KEYWORD2
-
+isPlaying	KEYWORD2
 
 Line	KEYWORD1
 increment	KEYWORD2
@@ -305,3 +305,7 @@ setBandwidth	KEYWORD2
 setCentreFreq	KEYWORD2
 SINGLE	LITERAL1
 DOUBLE	LITERAL1
+
+
+RCpoll	KEYWORD1
+next	KEYWORD2

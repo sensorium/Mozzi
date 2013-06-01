@@ -29,6 +29,7 @@
 #include "WProgram.h"
 #endif
 
+/*
 // Arduino Mega
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
 #define FREQUENCYTIMER2_PIN  10
@@ -45,7 +46,7 @@
 #else
 #define FREQUENCYTIMER2_PIN  11
 #endif
-
+*/
 
 
 class FrequencyTimer2

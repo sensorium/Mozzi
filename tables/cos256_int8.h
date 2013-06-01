@@ -1,7 +1,11 @@
 #ifndef COS256_H_
 #define COS256_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 #define COS256_NUM_CELLS 256

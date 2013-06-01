@@ -1,7 +1,11 @@
 #ifndef CHEBYSHEV_6TH_256_H_
 #define CHEBYSHEV_6TH_256_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 /* table for waveshaper using chebyshev polynomials

@@ -1,7 +1,11 @@
 #ifndef SIN2048_H_
 #define SIN2048_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 #define SIN2048_NUM_CELLS 2048

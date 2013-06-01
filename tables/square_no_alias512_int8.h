@@ -1,7 +1,11 @@
 #ifndef SQUARE_NO_ALIAS512_INT8_H_
 #define SQUARE_NO_ALIAS512_INT8_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 /* square wave with rounded corners from Audacity

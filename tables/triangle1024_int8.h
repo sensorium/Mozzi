@@ -1,7 +1,11 @@
 #ifndef TRIANGLE1024_H_
 #define TRIANGLE1024_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 #define TRIANGLE1024_NUM_CELLS 1024

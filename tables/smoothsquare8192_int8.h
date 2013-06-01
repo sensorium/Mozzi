@@ -1,7 +1,11 @@
 #ifndef SMOOTHSQUARE8192_H_
 #define SMOOTHSQUARE8192_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 /* hand-drawn square wave with rounded corners from Audacity

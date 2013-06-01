@@ -23,7 +23,11 @@
 #ifndef ADSR_H_
 #define ADSR_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 //#include <util/atomic.h>
 #include "Line.h"
 #include "mozzi_fixmath.h"

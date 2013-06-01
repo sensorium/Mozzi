@@ -1,7 +1,11 @@
 #ifndef SAW256_H_
 #define SAW256_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 #define SAW256_NUM_CELLS 256

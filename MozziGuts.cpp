@@ -23,7 +23,8 @@
 #include "mozzi_config.h" // at the top of all MozziGuts and analog files
 #include "MozziGuts.h"
 //#include <util/atomic.h>
-//#include "mozzi_utils.h"
+#include "mozzi_utils.h"
+
 
 /*
 ATmega328 technical manual, Section 12.7.4:
@@ -55,18 +56,57 @@ static unsigned int output_buffer[BUFFER_NUM_CELLS];
 static volatile unsigned long output_buffer_tail; // shared by audioHook() (in loop()), and outputAudio() (in audio interrupt), where it is changed
 
 //-----------------------------------------------------------------------------------------------------------------
+
 // to store backups of timer registers so Mozzi can be stopped and pre_mozzi timer values can be restored
 static byte pre_mozzi_TCCR0A, pre_mozzi_TCCR0B, pre_mozzi_OCR0A, pre_mozzi_TIMSK0;
 static byte pre_mozzi_TCCR1A, pre_mozzi_TCCR1B, pre_mozzi_OCR1A, pre_mozzi_TIMSK1;
+
+#if (AUDIO_MODE == HIFI)
+#if defined(TCCR2A)
 static byte pre_mozzi_TCCR2A, pre_mozzi_TCCR2B, pre_mozzi_OCR2A, pre_mozzi_TIMSK2;
+#elif defined(TCCR2)
+static byte pre_mozzi_TCCR2, pre_mozzi_OCR2, pre_mozzi_TIMSK;
+#elif defined(TCCR4A)
+static byte pre_mozzi_TCCR4A, pre_mozzi_TCCR4B, pre_mozzi_TCCR4C, pre_mozzi_TCCR4D, pre_mozzi_TCCR4E, pre_mozzi_OCR4C, pre_mozzi_TIMSK4;
+#endif
+#endif
+
+static void backupPreMozziTimer1(){
+	// backup pre-mozzi register values for pausing later
+	pre_mozzi_TCCR1A = TCCR1A;
+	pre_mozzi_TCCR1B = TCCR1B;
+	pre_mozzi_OCR1A = OCR1A;
+	pre_mozzi_TIMSK1 = TIMSK1;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
 
 // to store backups of mozzi's changes to timer registers so Mozzi can be paused and unPaused
 static byte mozzi_TCCR0A, mozzi_TCCR0B, mozzi_OCR0A, mozzi_TIMSK0;
 static byte mozzi_TCCR1A, mozzi_TCCR1B, mozzi_OCR1A, mozzi_TIMSK1;
+
+#if (AUDIO_MODE == HIFI)
+#if defined(TCCR2A)
 static byte mozzi_TCCR2A, mozzi_TCCR2B, mozzi_OCR2A, mozzi_TIMSK2;
+#elif defined(TCCR2)
+static byte mozzi_TCCR2, mozzi_OCR2, mozzi_TIMSK;
+#elif defined(TCCR4A)
+static byte mozzi_TCCR4A, mozzi_TCCR4B, mozzi_TCCR4C, mozzi_TCCR4D, mozzi_TCCR4E, mozzi_OCR4C, mozzi_TIMSK4;
+#endif
+#endif
+
+static void backupMozziTimer1(){
+	// backup mozzi register values for unpausing later
+	mozzi_TCCR1A = TCCR1A;
+	mozzi_TCCR1B = TCCR1B;
+	mozzi_OCR1A = OCR1A;
+	mozzi_TIMSK1 = TIMSK1;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
 
 #if USE_AUDIO_INPUT
-//#include "Arduino.h"
+
 #include "mozzi_analog.h"
 
 static void adcSetupAudioInput(){
@@ -129,34 +169,22 @@ void audioHook() // 2us excluding updateAudio()
 			output_buffer[(unsigned char)output_buffer_head & (unsigned char)(BUFFER_NUM_CELLS-1)] = (unsigned int) (updateAudio() + AUDIO_BIAS);
 		}
 
-
 	}
 
 
 	//-----------------------------------------------------------------------------------------------------------------
 #if (AUDIO_MODE == STANDARD)
 
-	static void startAudioStandard9bitPwm(){
-		// backup pre-mozzi register values
-		pre_mozzi_TCCR1A = TCCR1A;
-		pre_mozzi_TCCR1B = TCCR1B;
-		pre_mozzi_OCR1A = OCR1A;
-		pre_mozzi_TIMSK1 = TIMSK1;
-		
+	static void startAudioStandard(){
+		backupPreMozziTimer1();
+
 		pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);	// set pin to output for audio
 		Timer1.initialize(1000000UL/AUDIO_RATE, PHASE_FREQ_CORRECT);		// set period, phase and frequency correct
-		//Serial.print("STANDARD Timer 1 period = "); Serial.println(Timer1.getPeriod()); // 976
-
 		Timer1.pwm(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);		// pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
-		//Timer1.attachInterrupt(outputAudio); // TB 15-2-2013 Replaced this line with the ISR, saves some processor time
 		TIMSK1 = _BV(TOIE1); 	// Overflow Interrupt Enable (when not using Timer1.attachInterrupt())
 
-		// backup mozzi register values for unpausing later
-		mozzi_TCCR1A = TCCR1A;
-		mozzi_TCCR1B = TCCR1B;
-		mozzi_OCR1A = OCR1A;
-		mozzi_TIMSK1 = TIMSK1;
-		
+		backupMozziTimer1();
+
 #if USE_AUDIO_INPUT
 		adcSetupAudioInput();
 #endif
@@ -173,55 +201,25 @@ void audioHook() // 2us excluding updateAudio()
 		AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer[(unsigned char)output_buffer_tail & (unsigned char)(BUFFER_NUM_CELLS-1)]; // 1us, 2.5us with longs
 	}
 
+	// end STANDARD
 
 	//-----------------------------------------------------------------------------------------------------------------
 #elif (AUDIO_MODE == HIFI)
 
-	/* set up Timer 2 using modified FrequencyTimer2 library */
-	void dummy(){}
-	static void setupTimer2(){
-		//backup Timer2 register values
-		pre_mozzi_TCCR2A = TCCR2A;
-		pre_mozzi_TCCR2B = TCCR2B;
-		pre_mozzi_OCR2A = OCR2A;
-		pre_mozzi_TIMSK2 = TIMSK2;
-		
-		// audio output interrupt on timer 2, sets the pwm levels of timer 1
-		FrequencyTimer2::setPeriod(2000000UL/AUDIO_RATE); // gives a period half of what's provided, for some reason
-		FrequencyTimer2::enable();
-		FrequencyTimer2::setOnOverflow(dummy);
-		
-		// backup mozzi register values for unpausing later
-		mozzi_TCCR2A = TCCR2A;
-		mozzi_TCCR2B = TCCR2B;
-		mozzi_OCR2A = OCR2A;
-		mozzi_TIMSK2 = TIMSK2;
-	}
+	static void startAudioHiFi(){
+		backupPreMozziTimer1();
 
-
-	static void startAudioHiSpeed14bitPwm(){
-		// backup pre-mozzi register values
-		pre_mozzi_TCCR1A = TCCR1A;
-		pre_mozzi_TCCR1B = TCCR1B;
-		pre_mozzi_OCR1A = OCR1A;
-		pre_mozzi_TIMSK1 = TIMSK1;
-		
 		// pwm on timer 1
 		pinMode(AUDIO_CHANNEL_1_HIGHBYTE_PIN, OUTPUT);	// set pin to output for audio, use 3.9k resistor
 		pinMode(AUDIO_CHANNEL_1_LOWBYTE_PIN, OUTPUT);	// set pin to output for audio, use 1M resistor
 
 		Timer1.initialize(1000000UL/125000, FAST);		// set period for 125000 Hz fast pwm carrier frequency = 14 bits
-		// Serial.print("HIFI Timer 1 period = "); Serial.println(Timer1.getPeriod());
 
 		Timer1.pwm(AUDIO_CHANNEL_1_HIGHBYTE_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
 		Timer1.pwm(AUDIO_CHANNEL_1_LOWBYTE_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
 
-		// backup mozzi register values for unpausing later
-		mozzi_TCCR1A = TCCR1A;
-		mozzi_TCCR1B = TCCR1B;
-		mozzi_OCR1A = OCR1A;
-		mozzi_TIMSK1 = TIMSK1;
-		
+		backupMozziTimer1();
+
 		// audio output interrupt on timer 2, sets the pwm levels of timer 1
 		setupTimer2();
 
@@ -230,11 +228,63 @@ void audioHook() // 2us excluding updateAudio()
 #endif
 	}
 
+	/* set up Timer 2 using modified FrequencyTimer2 library */
+	void dummy(){}
 
-#if defined(TIMER2_COMPA_vect)
+	static void setupTimer2(){
+		//backup Timer2 register values
+#if defined(TCCR2A)
+		pre_mozzi_TCCR2A = TCCR2A;
+		pre_mozzi_TCCR2B = TCCR2B;
+		pre_mozzi_OCR2A = OCR2A;
+		pre_mozzi_TIMSK2 = TIMSK2;
+#elif defined(TCCR2)
+		pre_mozzi_TCCR2 = TCCR2;
+		pre_mozzi_OCR2 = OCR2;
+		pre_mozzi_TIMSK = TIMSK;
+#elif defined(TCCR4A)
+		pre_mozzi_TCCR4B = TCCR4A;
+		pre_mozzi_TCCR4B = TCCR4B;
+		pre_mozzi_TCCR4B = TCCR4C;
+		pre_mozzi_TCCR4B = TCCR4D;
+		pre_mozzi_TCCR4B = TCCR4E;
+		pre_mozzi_OCR4C = OCR4C;
+		pre_mozzi_TIMSK4 = TIMSK4;
+#endif
+
+		// audio output interrupt on timer 2 (or 4 on ATMEGA32U4 cpu), sets the pwm levels of timer 1
+
+		FrequencyTimer2::setPeriod(2000000UL/AUDIO_RATE); // gives a period half of what's provided, for some reason
+		FrequencyTimer2::setOnOverflow(dummy);
+		FrequencyTimer2::enable();
+
+		// backup mozzi register values for unpausing later
+#if defined(TCCR2A)
+		mozzi_TCCR2A = TCCR2A;
+		mozzi_TCCR2B = TCCR2B;
+		mozzi_OCR2A = OCR2A;
+		mozzi_TIMSK2 = TIMSK2;
+#elif defined(TCCR2)
+		mozzi_TCCR2 = TCCR2;
+		mozzi_OCR2 = OCR2;
+		mozzi_TIMSK = TIMSK;
+#elif defined(TCCR4A)
+		mozzi_TCCR4B = TCCR4A;
+		mozzi_TCCR4B = TCCR4B;
+		mozzi_TCCR4B = TCCR4C;
+		mozzi_TCCR4B = TCCR4D;
+		mozzi_TCCR4B = TCCR4E;
+		mozzi_OCR4C = OCR4C;
+		mozzi_TIMSK4 = TIMSK4;
+#endif
+	}
+
+	#if defined(TIMER2_COMPA_vect)
 	ISR(TIMER2_COMPA_vect)
 #elif defined(TIMER2_COMP_vect)
 	ISR(TIMER2_COMP_vect)
+#elif defined(TIMER4_COMPA_vect)
+	ISR(TIMER4_COMPA_vect)
 #else
 #error "This board does not have a hardware timer which is compatible with FrequencyTimer2"
 	void dummy_function(void)
@@ -243,6 +293,7 @@ void audioHook() // 2us excluding updateAudio()
 #if USE_AUDIO_INPUT
 		sbi(ADCSRA, ADSC);				// start next adc conversion
 #endif
+
 		output_buffer_tail++;
 		unsigned int out = output_buffer[(unsigned char)output_buffer_tail & (unsigned char)(BUFFER_NUM_CELLS-1)]; // 1us, 2.5us with longs
 
@@ -252,8 +303,10 @@ void audioHook() // 2us excluding updateAudio()
 		// 14 bit - this sounds better than 12 bit, it's cleaner, less bitty, don't notice aliasing
 		AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 7; // B11111110000000 becomes B1111111
 		AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 127; // B001111111
+
 	}
 
+	//  end of HIFI
 
 #endif
 
@@ -275,7 +328,7 @@ void audioHook() // 2us excluding updateAudio()
 
 		TimerZero::init(1000000/control_rate_hz,updateControl); // set period, attach updateControl()
 		TimerZero::start();
-		
+
 		// backup mozzi register values for unpausing later
 		mozzi_TCCR0A = TCCR0A;
 		mozzi_TCCR0B = TCCR0B;
@@ -288,9 +341,9 @@ void audioHook() // 2us excluding updateAudio()
 	{
 		startControl(control_rate_hz);
 #if (AUDIO_MODE == STANDARD)
-		startAudioStandard9bitPwm();
+		startAudioStandard();
 #elif (AUDIO_MODE == HIFI)
-		startAudioHiSpeed14bitPwm();
+		startAudioHiFi();
 #endif
 	}
 
@@ -308,15 +361,29 @@ void audioHook() // 2us excluding updateAudio()
 		TIMSK1 = pre_mozzi_TIMSK1;
 
 #if (AUDIO_MODE == HIFI)
+#if defined(TCCR2A)
 		TCCR2A = pre_mozzi_TCCR2A;
 		TCCR2B = pre_mozzi_TCCR2B;
 		OCR2A = pre_mozzi_OCR2A;
 		TIMSK2 = pre_mozzi_TIMSK2;
+#elif defined(TCCR2)
+		TCCR2 = pre_mozzi_TCCR2;
+		OCR2 = pre_mozzi_OCR2;
+		TIMSK = pre_mozzi_TIMSK;
+#elif defined(TCCR4A)
+		TCCR4B = pre_mozzi_TCCR4A;
+		TCCR4B = pre_mozzi_TCCR4B;
+		TCCR4B = pre_mozzi_TCCR4C;
+		TCCR4B = pre_mozzi_TCCR4D;
+		TCCR4B = pre_mozzi_TCCR4E;
+		OCR4C = pre_mozzi_OCR4C;
+		TIMSK4 = pre_mozzi_TIMSK4;
+#endif
 #endif			
 	}
-	
-	
-void unPauseMozzi(){
+
+
+	void unPauseMozzi(){
 		// restore backed up register values
 		TCCR0A = mozzi_TCCR0A;
 		TCCR0B = mozzi_TCCR0B;
@@ -329,23 +396,31 @@ void unPauseMozzi(){
 		TIMSK1 = mozzi_TIMSK1;
 
 #if (AUDIO_MODE == HIFI)
+#if defined(TCCR2A)
 		TCCR2A = mozzi_TCCR2A;
 		TCCR2B = mozzi_TCCR2B;
 		OCR2A = mozzi_OCR2A;
 		TIMSK2 = mozzi_TIMSK2;
-#endif			
-}
-
-
-#if AUDIO_RATE == 16384
-#define MICROS_PER_AUDIO_TICK 61 // 1000000 / 16384 = 61.035, ...* 256 = 15625
-#elif AUDIO_RATE == 32768 
-#define MICROS_PER_AUDIO_TICK 31 // = 1000000 / 32768 = 30.518, ...* 256 = 7812.6
+#elif defined(TCCR2)
+		TCCR2 = mozzi_TCCR2;
+		OCR2 = mozzi_OCR2;
+		TIMSK = mozzi_TIMSK;
+#elif defined(TCCR4A)
+		TCCR4B = mozzi_TCCR4A;
+		TCCR4B = mozzi_TCCR4B;
+		TCCR4B = mozzi_TCCR4C;
+		TCCR4B = mozzi_TCCR4D;
+		TCCR4B = mozzi_TCCR4E;
+		OCR4C = mozzi_OCR4C;
+		TIMSK4 = mozzi_TIMSK4;
 #endif
+#endif			
+	}
+	
 
-unsigned long mozziMicros(){
-	return output_buffer_tail / MICROS_PER_AUDIO_TICK;
-}
+	unsigned long mozziMicros(){
+		return output_buffer_tail / MICROS_PER_AUDIO_TICK;
+	}
 
 	// Unmodified TimerOne.cpp has TIMER3_OVF_vect.
 	// Watch out if you update the library file.

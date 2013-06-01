@@ -1,7 +1,11 @@
 #ifndef WAVESHAPE_COMPRESS_512_TO_488_H_
 #define WAVESHAPE_COMPRESS_512_TO_488_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 /* table for waveshaper to impart compression

@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1zz</span>
+   &#160;<span id="projectnumber">alpha 0.01.1zzz</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -98,41 +98,45 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef PHASOR256_H_</span>
 <a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define PHASOR256_H_</span>
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
-<a name="l00004"></a>00004 <span class="preprocessor">#include &quot;Arduino.h&quot;</span>
-<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;avr/pgmspace.h&gt;</span>
-<a name="l00006"></a>00006 
-<a name="l00007"></a>00007 <span class="comment">/* ramp</span>
-<a name="l00008"></a>00008 <span class="comment">*/</span>
-<a name="l00009"></a>00009 
-<a name="l00010"></a>00010 <span class="preprocessor">#define PHASOR256_NUM_CELLS 256</span>
-<a name="l00011"></a>00011 <span class="preprocessor"></span><span class="preprocessor">#define PHASOR256_SAMPLERATE 256</span>
-<a name="l00012"></a>00012 <span class="preprocessor"></span>
-<a name="l00013"></a>00013 <span class="keyword">const</span> <span class="keywordtype">char</span> __attribute__((progmem)) PHASOR256_DATA []  =
-<a name="l00014"></a>00014         {
-<a name="l00015"></a>00015                 -128, -127, -127, -126, -124, -124, -122,
-<a name="l00016"></a>00016                 -122, -120, -120, -118, -118, -116, -115, -115, -113, -113, -111, -110, -110,
-<a name="l00017"></a>00017                 -108, -108, -106, -105, -105, -103, -103, -101, -101, -99, -99, -97, -97, -95,
-<a name="l00018"></a>00018                 -95, -93, -93, -91, -91, -89, -89, -87, -87, -85, -84, -83, -82, -82, -80, -79,
-<a name="l00019"></a>00019                 -78, -77, -76, -76, -74, -74, -72, -72, -70, -69, -69, -67, -67, -65, -65, -63,
-<a name="l00020"></a>00020                 -62, -61, -60, -60, -58, -57, -56, -55, -54, -54, -52, -51, -51, -49, -49, -47,
-<a name="l00021"></a>00021                 -46, -45, -45, -43, -43, -41, -41, -39, -39, -37, -37, -35, -34, -33, -33, -31,
-<a name="l00022"></a>00022                 -31, -29, -29, -27, -26, -26, -24, -24, -22, -21, -21, -19, -18, -18, -16, -16,
-<a name="l00023"></a>00023                 -14, -13, -13, -11, -11, -9, -8, -8, -6, -5, -5, -3, -3, -1, -1, 1, 1, 3, 3, 5,
-<a name="l00024"></a>00024                 5, 6, 8, 8, 10, 10, 11, 13, 13, 15, 16, 16, 18, 18, 20, 20, 22, 23, 23, 25, 26,
-<a name="l00025"></a>00025                 26, 28, 28, 30, 31, 31, 33, 33, 35, 35, 37, 38, 39, 39, 41, 41, 43, 44, 44, 46,
-<a name="l00026"></a>00026                 47, 47, 49, 49, 51, 52, 52, 54, 54, 56, 57, 57, 59, 59, 61, 61, 63, 63, 65, 66,
-<a name="l00027"></a>00027                 66, 68, 69, 69, 71, 71, 72, 74, 74, 76, 76, 78, 78, 80, 80, 82, 82, 84, 84, 86,
-<a name="l00028"></a>00028                 86, 88, 88, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104,
-<a name="l00029"></a>00029                 105, 105, 107, 108, 109, 110, 110, 112, 112, 114, 114, 116, 117, 117, 119, 119,
-<a name="l00030"></a>00030                 121, 121, 123, 123, 125, 126, 126,
-<a name="l00031"></a>00031         };
-<a name="l00032"></a>00032 
-<a name="l00033"></a>00033 <span class="preprocessor">#endif </span><span class="comment">/* PHASOR256_H_ */</span>
+<a name="l00004"></a>00004 <span class="preprocessor">#if ARDUINO &gt;= 100</span>
+<a name="l00005"></a>00005 <span class="preprocessor"></span><span class="preprocessor"> #include &quot;Arduino.h&quot;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#else</span>
+<a name="l00007"></a>00007 <span class="preprocessor"></span><span class="preprocessor"> #include &quot;WProgram.h&quot;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#endif</span>
+<a name="l00009"></a>00009 <span class="preprocessor"></span><span class="preprocessor">#include &lt;avr/pgmspace.h&gt;</span>
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011 <span class="comment">/* ramp</span>
+<a name="l00012"></a>00012 <span class="comment">*/</span>
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014 <span class="preprocessor">#define PHASOR256_NUM_CELLS 256</span>
+<a name="l00015"></a>00015 <span class="preprocessor"></span><span class="preprocessor">#define PHASOR256_SAMPLERATE 256</span>
+<a name="l00016"></a>00016 <span class="preprocessor"></span>
+<a name="l00017"></a>00017 <span class="keyword">const</span> <span class="keywordtype">char</span> __attribute__((progmem)) PHASOR256_DATA []  =
+<a name="l00018"></a>00018         {
+<a name="l00019"></a>00019                 -128, -127, -127, -126, -124, -124, -122,
+<a name="l00020"></a>00020                 -122, -120, -120, -118, -118, -116, -115, -115, -113, -113, -111, -110, -110,
+<a name="l00021"></a>00021                 -108, -108, -106, -105, -105, -103, -103, -101, -101, -99, -99, -97, -97, -95,
+<a name="l00022"></a>00022                 -95, -93, -93, -91, -91, -89, -89, -87, -87, -85, -84, -83, -82, -82, -80, -79,
+<a name="l00023"></a>00023                 -78, -77, -76, -76, -74, -74, -72, -72, -70, -69, -69, -67, -67, -65, -65, -63,
+<a name="l00024"></a>00024                 -62, -61, -60, -60, -58, -57, -56, -55, -54, -54, -52, -51, -51, -49, -49, -47,
+<a name="l00025"></a>00025                 -46, -45, -45, -43, -43, -41, -41, -39, -39, -37, -37, -35, -34, -33, -33, -31,
+<a name="l00026"></a>00026                 -31, -29, -29, -27, -26, -26, -24, -24, -22, -21, -21, -19, -18, -18, -16, -16,
+<a name="l00027"></a>00027                 -14, -13, -13, -11, -11, -9, -8, -8, -6, -5, -5, -3, -3, -1, -1, 1, 1, 3, 3, 5,
+<a name="l00028"></a>00028                 5, 6, 8, 8, 10, 10, 11, 13, 13, 15, 16, 16, 18, 18, 20, 20, 22, 23, 23, 25, 26,
+<a name="l00029"></a>00029                 26, 28, 28, 30, 31, 31, 33, 33, 35, 35, 37, 38, 39, 39, 41, 41, 43, 44, 44, 46,
+<a name="l00030"></a>00030                 47, 47, 49, 49, 51, 52, 52, 54, 54, 56, 57, 57, 59, 59, 61, 61, 63, 63, 65, 66,
+<a name="l00031"></a>00031                 66, 68, 69, 69, 71, 71, 72, 74, 74, 76, 76, 78, 78, 80, 80, 82, 82, 84, 84, 86,
+<a name="l00032"></a>00032                 86, 88, 88, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104,
+<a name="l00033"></a>00033                 105, 105, 107, 108, 109, 110, 110, 112, 112, 114, 114, 116, 117, 117, 119, 119,
+<a name="l00034"></a>00034                 121, 121, 123, 123, 125, 126, 126,
+<a name="l00035"></a>00035         };
+<a name="l00036"></a>00036 
+<a name="l00037"></a>00037 <span class="preprocessor">#endif </span><span class="comment">/* PHASOR256_H_ */</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 12 2013 22:36:29 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 1 2013 15:49:38 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

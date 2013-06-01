@@ -1,7 +1,11 @@
 #ifndef SAW4096_H_
 #define SAW4096_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 #define SAW4096_NUM_CELLS 4096

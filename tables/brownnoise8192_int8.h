@@ -1,7 +1,11 @@
 #ifndef BROWNNOISE8192_H_
 #define BROWNNOISE8192_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 /* Brown noise generated in Audacity

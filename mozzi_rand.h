@@ -1,7 +1,11 @@
 #ifndef MOZZI_RAND_H_
 #define MOZZI_RAND_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 
 /** @defgroup random fast random number generator functions
 */

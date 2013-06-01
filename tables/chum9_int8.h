@@ -1,7 +1,11 @@
 #ifndef CHUM9_H_
 #define CHUM9_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 /* A sampled guitar sound

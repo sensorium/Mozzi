@@ -1,7 +1,11 @@
 #ifndef HALFSINWINDOW512_H_
 #define HALFSINWINDOW512_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 // this is the top half of a sin, used as a rough envelope for a cycling fade-in, fade-out with empty space in between.

@@ -1,7 +1,11 @@
 #ifndef SIN1024_INT8_H_
 #define SIN1024_INT8_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 #define SIN1024_NUM_CELLS 1024

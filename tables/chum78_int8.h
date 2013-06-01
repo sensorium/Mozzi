@@ -1,7 +1,11 @@
 #ifndef CHUM78_H_
 #define CHUM78_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 /* A sampled guitar sound

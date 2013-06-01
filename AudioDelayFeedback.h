@@ -1,7 +1,11 @@
 #ifndef AUDIODELAY_FEEDBACK_H_
 #define AUDIODELAY_FEEDBACK_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include "mozzi_utils.h"
 #include "meta.h"
 
@@ -344,6 +348,7 @@ private:
 		_coeff = float_to_Q15n16((1.f-alpha_)/(1.f+alpha_));
 	}
 
+	
 
 	// /** Retrieve the signal in the delay line at the position delaytime_cells.
 	// It doesn't change the stored internal value of _delaytime_cells or feedback the output to the input.

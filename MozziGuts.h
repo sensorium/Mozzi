@@ -133,36 +133,33 @@ resistor.....3.9k......1M \n
 x................9..........10...............Arduino Uno \n
 x................9..........10...............Arduino Duemilanove \n 
 x................9..........10...............Arduino Nano  \n
-..................9..........10...............Arduino Leonardo  \n
+x................9..........10...............Arduino Leonardo  \n
 x................9..........10...............Ardweeny  \n
 x................9..........10...............Boarduino  \n 
-.................11.........12...............Freetronics EtherMega  \n
+x...............11.........12...............Freetronics EtherMega  \n
 .................11.........12...............Arduino Mega  \n
 .................14.........15...............Teensy  \n
-...............B5(14)...B6(15)...........Teensy2  \n
-...............B5(25)...B6(26)...........Teensy2++  \n
+.............B5(14)...B6(15)...........Teensy2  \n
+x...........B5(25)...B6(26)...........Teensy2++  \n
 .................13.........12...............Sanguino  \n
 
 */
 #define HIFI 1
 
 
-//#define AUDIO_RATE 16384
-//#define AUDIO_RATE 32768
-
-/* Used internally for audio-rate optimisation.*/
-//#define AUDIO_RATE_AS_LSHIFT 14
-//#define AUDIO_RATE_AS_LSHIFT 15
-
 #if (AUDIO_MODE == STANDARD) && (AUDIO_RATE == 32768)
 #error AUDIO_RATE 32768 does not work when AUDIO_MODE is STANDARD, check settings in Mozzi/mozzi_config.h
 #endif
 
+
 #if AUDIO_RATE == 16384
 #define AUDIO_RATE_AS_LSHIFT 14
+#define MICROS_PER_AUDIO_TICK 61 // 1000000 / 16384 = 61.035, ...* 256 = 15625
 #elif AUDIO_RATE == 32768
 #define AUDIO_RATE_AS_LSHIFT 15
+#define MICROS_PER_AUDIO_TICK 31 // = 1000000 / 32768 = 30.518, ...* 256 = 7812.6
 #endif
+
 
 #if AUDIO_MODE == STANDARD
 #include "AudioConfigStandard9bitPwm.h"
@@ -175,17 +172,7 @@ typedef unsigned char uchar;
 typedef unsigned int uint;
 typedef unsigned long ulong;
 
-/* //See toneAC http://code.google.com/p/arduino-tone-ac/
-// #define MOZZI_AC_OUTPUT 1
-// see notes in MozziGuts.cpp
-#ifdef MOZZI_AC_OUTPUT
-#define AUDIO_CHANNEL_1_AC_PIN TIMER1_B_PIN // defined in TimerOne/config/known_16bit_timers.h
-#endif
 
-// see notes in MozziGuts.cpp
-#ifdef MOZZI_AC_OUTPUT
-#define AUDIO_CHANNEL_1_AC_OUTPUT_REGISTER OCR1B
-#endif */
 
 
 /** @ingroup core
@@ -309,5 +296,7 @@ Will also incorporate for a more accurate EventDelay().
 */
 unsigned long mozziMicros();
 
+// internal use
+static void setupTimer2();
 
 #endif /* MOZZIGUTS_H_ */

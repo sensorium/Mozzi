@@ -23,7 +23,11 @@
 #ifndef PHASOR_H_
 #define PHASOR_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include "mozzi_fixmath.h"
 #include <util/atomic.h>
 

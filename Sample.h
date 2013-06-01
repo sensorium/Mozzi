@@ -70,10 +70,10 @@ public:
 	Mozzi by the char2mozzi.py python script in Mozzi's python
 	folder.  Sound tables can be of arbitrary lengths for Sample().
 	*/
-	Sample(const char * TABLE_NAME):table(TABLE_NAME)
+	Sample(const char * TABLE_NAME):table(TABLE_NAME),endpos_fractional((unsigned long) NUM_TABLE_CELLS << SAMPLE_F_BITS) // so isPlaying() will work
 	{
 		setLoopingOff();
-		rangeWholeSample();
+		//rangeWholeSample();
 	}
 
 
@@ -82,10 +82,10 @@ public:
 	Declare a Sample with template TABLE_NUM_CELLS and UPDATE_RATE parameters, without specifying a particular wave table for it to play.
 	The table can be set or changed on the fly with setTable().
 	*/
-	Sample()
+	Sample():endpos_fractional(4294967295UL) // biggest UL number so isPlaying() will work
 	{
 		setLoopingOff();
-		rangeWholeSample();
+		//rangeWholeSample();
 	}
 
 
@@ -147,7 +147,7 @@ public:
 	inline
 	void rangeWholeSample()
 	{
-		endpos_fractional = 0;
+		startpos_fractional = 0;
 		endpos_fractional = (unsigned long) NUM_TABLE_CELLS << SAMPLE_F_BITS;
 	}
 
@@ -184,7 +184,7 @@ public:
 		if (!looping)
 		{
 			if (phase_fractional<endpos_fractional){
-				out = (char)pgm_read_byte_near(table + (phase_fractional >> SAMPLE_F_BITS)); 
+				out = (char)pgm_read_byte_near(table + (phase_fractional >> SAMPLE_F_BITS));
 				incrementPhase();
 			}
 		}
@@ -192,11 +192,20 @@ public:
 		{
 			if (phase_fractional>endpos_fractional)
 				phase_fractional = startpos_fractional + (phase_fractional - endpos_fractional);
-			
+
 			out = (char)pgm_read_byte_near(table + (phase_fractional >> SAMPLE_F_BITS));
 			incrementPhase();
 		}
 		return out;
+	}
+
+
+	/** Checks if the sample is playing by seeing if the phase is within the limits of its end position.
+	@return true if the sample is playing
+	*/
+	inline
+	boolean isPlaying(){
+		return phase_fractional<endpos_fractional;
 	}
 
 
@@ -248,7 +257,7 @@ public:
 		}
 	}
 
-	
+
 	/** Set the frequency using Q24n8 fixed-point number format.
 	This might be faster than the float version for setting low frequencies
 	such as 1.5 Hz, or other values which may not work well with your table
@@ -263,12 +272,12 @@ public:
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
 			//phase_increment_fractional = (frequency* (NUM_TABLE_CELLS>>3)/(UPDATE_RATE>>6)) << (F_BITS-(8-3+6));
-			phase_increment_fractional = (((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)>>3)*frequency)/(UPDATE_RATE>>6)) 
-				<< (SAMPLE_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS - (8-3+6));
+			phase_increment_fractional = (((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)>>3)*frequency)/(UPDATE_RATE>>6))
+			                             << (SAMPLE_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS - (8-3+6));
 		}
 	}
-	
-	
+
+
 	/**  Returns the sample at the given table index.
 	@param atIndex table index between 0 and the table size.The
 	index rolls back around to 0 if it's larger than the table size.
@@ -313,12 +322,12 @@ public:
 
 private:
 
-	
+
 	/** Used for shift arithmetic in setFreq() and its variations.
 	*/
-	static const unsigned char ADJUST_FOR_NUM_TABLE_CELLS = (NUM_TABLE_CELLS<2048) ? 8 : 0;
+static const unsigned char ADJUST_FOR_NUM_TABLE_CELLS = (NUM_TABLE_CELLS<2048) ? 8 : 0;
 
-	
+
 	/** Increments the phase of the oscillator without returning a sample.
 	 */
 	inline

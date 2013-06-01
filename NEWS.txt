@@ -3,6 +3,18 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1zzz
+- Modified Flexitimer2.cpp so ATMEGA32U4 processor based boards work again (Leonardo,Teensy2.0).
+- Included twi_nonblock.h and twi_nonblock.cpp, non-blocking two wire I2C code by Marije Baalman, 
+	with Examples>Mozzi>Communication>TwoWire_Read_ADXL345.  Not documented yet.
+- Sample.h 
+	- added isPlaying(), true if the sample is playing
+	- fixed rangeWholeSample() so startpos = 0
+- changed all instances of #include Arduino.h to conditional include WProgram.h for older versions of the IDE..not tested
+- Added Examples>Mozzi>communication>Mozzi_Processing_Serial, 
+	demonstrates the sending data from the computer to the Arduino board.
+- Added Examples>Mozzi>control>RCpoll, demonstrates reading a resistive sensor on digital pin without blocking audio.
+
 Version 0.01.1zz
 - Added ReverbTank, a reverb which sounds like the inside of a tin can, and an example ReverbTank_STANDARD
 - AudioDelay 
@@ -24,7 +36,7 @@ Version 0.01.1z
 - mozzi_config.h - AUDIO_RATE is now a configuration option which can be defined as 16384 (default) or 32768.
 	16384 obviously allows more time for each sample to be calculated, but the higher rate may 
 	be useful in some situations (experimental).
-	- AudioDelayFeedback.h 
+- AudioDelayFeedback.h 
 	- added optional template parameters for LINEAR (default) or ALLPASS interpolation.
 	- added examples/delays/AudioFeedbackDelayAllpass example.
 - Added WavePacket.h, a synthesis unit based on Miller Puckette's wavepacket example in Pure Data.

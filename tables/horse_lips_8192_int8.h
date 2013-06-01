@@ -1,7 +1,11 @@
 #ifndef HORSE_LIPS_8192_H_
 #define HORSE_LIPS_8192_H_
 
-#include "Arduino.h"
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 #include <avr/pgmspace.h>
 
 /* sound of a horse eating

@@ -21,6 +21,8 @@ public:
 	}
 
 	/** Checks whether the capacitor has charged, and returns how long it took for the most recent charge.
+	This would preferably be called in updateControl(), but if the resolution isn't fine enough or the 
+	pin charges too fast for updateControl() to catch, try it in updateAudio().
 	@return the sensor value, reflected in how many checking cycles it took to charge the capacitor.
 	 */
 	inline
@@ -36,8 +38,8 @@ public:
 		else{
 			output = result;
 			result = 0;
-			pinMode(SENSOR_PIN, OUTPUT);       // make pin OUTPUT
-			digitalWrite(SENSOR_PIN, HIGH);    // make pin HIGH to discharge capacitor - study the schematic
+			pinMode(SENSOR_PIN, OUTPUT);  // make pin OUTPUT
+			digitalWrite(SENSOR_PIN, HIGH);    // make pin HIGH to discharge capacitor - see the schematic
 			rc_cued = true;
 		}
 		return output;

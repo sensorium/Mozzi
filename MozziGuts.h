@@ -49,7 +49,8 @@ Utility functions which are generally useful, including midi note to frequency c
 The Classes used to generate control and audio signals.
 
 @section  Files
-Files lists ready-to-use wave tables which are in the Mozzi/tables folder.
+Files includes ready-to-use wave tables and samples which are in the Mozzi/tables and Mozzi/samples folders.
+See the sample files themselves for documentation.
 
 You can also convert your own sounds from a program like
 Audacity to tables for Mozzi with a script called char2mozzi.py, in Mozzi/python.

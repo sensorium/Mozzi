@@ -3,6 +3,16 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.1zzzz
+- fixed indent error in all python scripts (error introduced in last release)
+- removed a wierd file link which stopped installation working
+- added some samples from a collection of analog bass samples by T.J.Baker,
+	from Amiga aminet archive sample disk TJBAnalogDisk.lha.  
+	Samples are in Mozzi/samples/TJBAnalogDisk.  
+	There are wav files to audition and converted versions for Mozzi.  
+	More of the like to come...
+
+
 Version 0.01.1zzz
 - Modified Flexitimer2.cpp so ATMEGA32U4 processor based boards work again (Leonardo,Teensy2.0).
 - Included twi_nonblock.h and twi_nonblock.cpp, non-blocking two wire I2C code by Marije Baalman, 
@@ -15,6 +25,8 @@ Version 0.01.1zzz
 	demonstrates the sending data from the computer to the Arduino board.
 - Added Examples>Mozzi>control>RCpoll, demonstrates reading a resistive sensor on digital pin without blocking audio.
 
+
+
 Version 0.01.1zz
 - Added ReverbTank, a reverb which sounds like the inside of a tin can, and an example ReverbTank_STANDARD
 - AudioDelay 
@@ -23,6 +35,7 @@ Version 0.01.1zz
 - AudioDelayFeedback 
 	- repaired a few bugs. (I hope)
 	- added next(char input) which was missing for LINEAR interpolated delays
+	
 	
 	
 Version 0.01.1z

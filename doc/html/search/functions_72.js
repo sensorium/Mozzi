@@ -11,6 +11,5 @@ var searchData=
   ['ready',['ready',['../class_event_delay.html#a723a61a4670ffed732b1d8eb9e5bfd56',1,'EventDelay']]],
   ['recentaverage',['RecentAverage',['../class_recent_average.html#a75bd636f24d01b516c063bfd69c97810',1,'RecentAverage']]],
   ['reconnectdigitalin',['reconnectDigitalIn',['../group__analog.html#gacd83735876cf223916ea4925ec4efd4a',1,'reconnectDigitalIn(byte channel_num):&#160;mozzi_analog.cpp'],['../group__analog.html#gacd83735876cf223916ea4925ec4efd4a',1,'reconnectDigitalIn(byte channel_num):&#160;mozzi_analog.cpp']]],
-  ['reverb',['Reverb',['../class_recent_average.html#a33455a78d41f47a2e5703c276239eab7',1,'RecentAverage']]],
   ['reverbtank',['ReverbTank',['../class_reverb_tank.html#a2b413e10d5d3688f2066624e5a8ae324',1,'ReverbTank']]]
 ];

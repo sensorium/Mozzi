@@ -16,7 +16,7 @@ def generate(outfilename, tablename, tablelength, numtables):
     fout.write('#include "Arduino.h"'+'\n')
     fout.write('#else'+'\n')
     fout.write('#include "WProgram.h"'+'\n')
-     fout.write('#endif'+'\n')   
+    fout.write('#endif'+'\n')   
     fout.write('#include <avr/pgmspace.h>'+'\n \n')
     fout.write('#define ' + tablename + '_NUM_CELLS '+ str(tablelength) +'\n')
     fout.write('const char __attribute__((progmem)) ' + tablename + '_DATA [] = { \n')

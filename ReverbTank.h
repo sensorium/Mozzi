@@ -1,5 +1,5 @@
-#ifndef REVERBSMALL_H
-#define REVERBSMALL_H
+#ifndef REVERBTANK_H
+#define REVERBTANK_H
 
 /*
  * ReverbTank.h
@@ -135,4 +135,4 @@ private:
 	AudioDelay <256,int> aLoopDel2; // 7 metres
 
 };
-#endif        //  #ifndef REVERBSMALL_H
+#endif        //  #ifndef REVERBTANK_H

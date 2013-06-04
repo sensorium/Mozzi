@@ -54,7 +54,7 @@ def char2mozzi(infilename, outfilename, tablename, samplerate):
     fout.write('#include "Arduino.h"'+'\n')
     fout.write('#else'+'\n')
     fout.write('#include "WProgram.h"'+'\n')
-     fout.write('#endif'+'\n')   
+    fout.write('#endif'+'\n')   
     fout.write('#include <avr/pgmspace.h>'+'\n \n')
     fout.write('#define ' + tablename + '_NUM_CELLS '+ str(len(values))+'\n')
     fout.write('#define ' + tablename + '_SAMPLERATE '+ str(samplerate)+'\n \n')

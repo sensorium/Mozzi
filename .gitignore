@@ -1,3 +1,7 @@
+images
+doxygen*
+Makefile*
+tags
 user_guide.md
 notes.txt
 FAQ.md

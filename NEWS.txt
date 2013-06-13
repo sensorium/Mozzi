@@ -3,6 +3,14 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.2a
+- Added Examples>Mozzi>communication>Sinewave_HIFI_PWM_leds, to show 
+	non-blocking pwm for any pins without disprupting audio.
+- Added Examples>Mozzi>sensors directory with several basic examples 
+	for modifiying sound with light dependent resistors, potentiometers, piezos and switches.
+	These go with a tutorial on the main Mozzi site http://sensorium.github.io/Mozzi/Mozzi_Introductory_Tutorial.pdf
+
+
 Version 0.01.1zzzz
 - fixed indent error in all python scripts (error introduced in last release)
 - removed a wierd file link which stopped installation working

@@ -36,7 +36,6 @@
  *  This example code is in the public domain.
  */
  
-#define AUDIO_MODE HIFI
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator

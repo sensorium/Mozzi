@@ -4,13 +4,22 @@
 
   Demonstrates the use of Oscil to play a wavetable, and analog input for control.
 
+  This example goes with a tutorial on the Mozzi site:
+  http://sensorium.github.io/Mozzi/Mozzi_Introductory_Tutorial.pdf
+  
   The circuit:
   *  Audio output on digital pin 9 (on a Uno or similar), or 
      check the README or http://sensorium.github.com/Mozzi/
 
-  *  Potentiometer connected to analog pin 0.
+  Potentiometer connected to analog pin 0:
   *  Center pin of the potentiometer goes to the analog pin.
   *  Side pins of the potentiometer go to +5V and ground
+
+ +5V ---|
+              /    
+  A0 ----\  potentiometer 
+              /    
+ GND ---|
 
   Mozzi help/discussion/announcements:
   https://groups.google.com/forum/#!forum/mozzi-users
@@ -27,13 +36,14 @@
 // use: Oscil <table_size, update_rate> oscilName (wavetable)
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
-const int INPUT_PIN = 0; // set the input for the Light Dependent Resistor to analog pin 0
+const char INPUT_PIN = 0; // set the input for the knob to analog pin 0
 
+// to convey the volume level from updateControl() to updateAudio()
 unsigned char volume;
 
 
 void setup(){
-  Serial.begin(115200); // set up the Serial output so we can look at the light level
+  Serial.begin(115200); // set up the Serial output so we can look at the input values
   setupFastAnalogRead(); // increases the speed of reading the analog input
   aSin.setFreq(440);
   startMozzi(); // :))
@@ -41,7 +51,7 @@ void setup(){
 
 
 void updateControl(){
-  // read the light dependent resistor
+  // read the variable resistor for volume
   int sensor_value = analogRead(INPUT_PIN); // value is 0-1023
   
   // map it to an 8 bit range for efficient calculations in updateAudio

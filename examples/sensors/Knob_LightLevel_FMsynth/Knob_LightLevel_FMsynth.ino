@@ -1,11 +1,14 @@
 /* 
   Example using a light dependent resistor (LDR) to change 
-  an FM synthesis parameter, and a knob for volume,
+  an FM synthesis parameter, and a knob for fundamental frequency,
   using Mozzi sonification library.
 
   Demonstrates analog input, audio oscillators, and phase modulation.
   There might be clicks in the audio from rapid control changes, which
   could be smoothed with Line or Smooth objects.
+  
+  This example goes with a tutorial on the Mozzi site:
+  http://sensorium.github.io/Mozzi/Mozzi_Introductory_Tutorial.pdf
   
     The circuit:
   *  Audio output on digital pin 9 (on a Uno or similar), or 
@@ -15,6 +18,10 @@
   *  Center pin of the potentiometer goes to the analog pin.
   *  Side pins of the potentiometer go to +5V and ground
  
+   Light dependent resistor (LDR) and 5.1k resistor on analog pin 1:
+  * LDR from analog pin to +5V
+  * 5.1k resistor from analog pin to ground
+  
   Mozzi help/discussion/announcements:
   https://groups.google.com/forum/#!forum/mozzi-users
 
@@ -28,54 +35,56 @@
 #include <mozzi_analog.h> // fast functions for reading analog inputs 
 
 const int KNOB_PIN = 0; // set the input for the knob to analog pin 0
-const int LDR_PIN = 1; // set the input for the Light Dependent Resistor to analog pin 1
+const int LDR_PIN = 1; // set the input for the LDR to analog pin 1
 
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCarrier(COS2048_DATA);
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aModulator(COS2048_DATA);
 
-int carrier_freq = 55; // fundamental frequency
-int mod_ratio = 6; // harmonics
-int mod_freq = carrier_freq * mod_ratio;
-long deviation; // carries control info from updateControl to updateAudio
+int mod_ratio = 3; // harmonics
+long fm_intensity; // carries control info from updateControl() to updateAudio()
 
-unsigned char volume;
 
 void setup(){
-  Serial.begin(115200); // set up the Serial output so we can look at the light level
+  Serial.begin(115200); // set up the Serial output for debugging
   setupFastAnalogRead(); // one way of increasing the speed of reading the input
-  aCarrier.setFreq(carrier_freq); 
-  aModulator.setFreq(mod_freq);
   startMozzi(); // :))
 }
 
 
 void updateControl(){
-    // read the light dependent resistor
+  // read the knob
   int knob_value = analogRead(KNOB_PIN); // value is 0-1023
   
-  // map it to an 8 bit range (0-255) for efficient calculations in updateAudio
-  volume = knob_value>> 2; // shift right by 2 is a fast way to divide by 4
+  // map the knob to carrier frequency
+  int carrier_freq = map(knob_value, 0, 1023, 22, 440);
+  
+  //calculate the modulation frequency to stay in ratio
+  int mod_freq = carrier_freq * mod_ratio;
+  
+  // set the FM oscillator frequencies to the calculated values
+  aCarrier.setFreq(carrier_freq); 
+  aModulator.setFreq(mod_freq);
   
   // read the light dependent resistor on the Analog input pin
-  unsigned int light_level= analogRead(LDR_PIN); // value is 0-1024
+  int light_level= analogRead(LDR_PIN); // value is 0-1023
+  
   // print the value to the Serial monitor for debugging
-  Serial.print("Light level = "); 
+  Serial.print("light_level = "); 
   Serial.print(light_level); 
-
-  deviation = light_level - 400; // calibrate for sensor
-  //Serial.print("   deviation = ");
-  //Serial.print(deviation);
+  Serial.print("\t"); // prints a tab
+  
+  fm_intensity = map(light_level,350,800,700,10); // calibrate sensor
+  
+  Serial.print("fm_intensity = ");
+  Serial.print(fm_intensity);
   Serial.println(); // print a carraige return for the next line of debugging info
 
 }
 
 
 int updateAudio(){
-  // cast deviation to long to make room for int * char multiply
-  long modulation = (long)deviation * aModulator.next(); 
-  char out = aCarrier.phMod(modulation);
-  // change the volume and shift back into 8 bit range after multiply
-  return ((int)out * volume)>>8; 
+  long modulation = fm_intensity * aModulator.next(); 
+  return aCarrier.phMod(modulation); // phMod does the FM
 }
 
 

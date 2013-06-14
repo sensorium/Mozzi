@@ -8,10 +8,10 @@
 #endif
 #include <avr/pgmspace.h>
  
-#define THUMBPIANO2_NUM_CELLS 8193
+#define THUMBPIANO2_NUM_CELLS 8192
 #define THUMBPIANO2_SAMPLERATE 16384
  
-const char __attribute__((progmem)) THUMBPIANO2_DATA [] = {0, 0, -1, -1, -1, -2,
+const char __attribute__((progmem)) THUMBPIANO2_DATA [] = {0, -1, -1, -1, -2,
 -1, -4, -2, -11, -28, -14, 2, 1, -6, -11, -3, 17, 20, 18, 25, 12, 15, 26, 13,
 14, 3, 3, 25, 10, 11, 35, 11, 13, 14, -13, 12, 3, -40, -35, -33, -30, -30, -54,
 -33, -18, -43, -36, -46, -66, -45, -54, -43, -6, -45, -27, 3, -34, -3, 12, -2,

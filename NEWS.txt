@@ -3,6 +3,11 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.2b
+- fixed some docs
+- added thumbpiano samples
+
+
 Version 0.01.2a
 - Added Examples>Mozzi>communication>Sinewave_HIFI_PWM_leds, to show 
 	non-blocking pwm for any pins without disprupting audio.

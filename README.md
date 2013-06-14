@@ -142,5 +142,5 @@ by Adrian Freed, 2009
 [Resonant filter](http://www.musicdsp.org/archive.php?classid=3#259) posted to musicdsp.org by Paul Kellett,
 and fixed point version of the filter on [dave's blog of art and programming] (http://www.pawfal.org/dave/blog/2011/09/)  
 State Variable filter pseudocode at [musicdsp.org] (http://www.musicdsp.org/showone.php?id=23 and http://www.musicdsp.org/showone.php?id=142)  
-Various examples from Pure Data by Miller Puckette  
+Various examples from [Pure Data](http://puredata.info/) by Miller Puckette  
 Practical synthesis tutorials by [Andy Farnell] (http://www.obiwannabe.co.uk/)  

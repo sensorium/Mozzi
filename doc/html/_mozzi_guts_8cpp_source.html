@@ -219,7 +219,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00122"></a>00122 <span class="keyword">static</span> <span class="keywordtype">int</span> audio_input; <span class="comment">// holds the latest audio from input_buffer</span>
 <a name="l00123"></a>00123 
 <a name="l00124"></a>00124 
-<a name="l00125"></a>00125 <span class="keywordtype">int</span> getAudioInput()
+<a name="l00125"></a>00125 <span class="keywordtype">int</span> <a class="code" href="group__analog.html#ga3f15eb8d6694020d170ebcbedb645de7" title="This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the Mozzi/mozzi...">getAudioInput</a>()
 <a name="l00126"></a>00126 {
 <a name="l00127"></a>00127                 <span class="keywordflow">return</span> audio_input;
 <a name="l00128"></a>00128 }
@@ -515,7 +515,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00418"></a>00418 <span class="preprocessor"></span>                }
 <a name="l00419"></a>00419                 
 <a name="l00420"></a>00420 
-<a name="l00421"></a><a class="code" href="group__core.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe">00421</a>                 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="group__core.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe" title="This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the Mozzi/mozzi...">mozziMicros</a>(){
+<a name="l00421"></a><a class="code" href="group__core.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe">00421</a>                 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="group__core.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe" title="A replacement for Arduino micros() which is disabled by Mozzi which takes over Timer 0 for control in...">mozziMicros</a>(){
 <a name="l00422"></a>00422                                 <span class="keywordflow">return</span> output_buffer_tail / MICROS_PER_AUDIO_TICK;
 <a name="l00423"></a>00423                 }
 <a name="l00424"></a>00424 
@@ -530,7 +530,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 14 2013 21:59:27 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 14 2013 22:05:30 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

@@ -271,6 +271,7 @@ are called.
 void audioHook();
 
 
+
 /** @ingroup analog
 This returns audio input from the input buffer, if 
 \#define USE_AUDIO_INPUT true is in the Mozzi/mozzi_config.h file.
@@ -285,9 +286,10 @@ A circuit and instructions for amplifying and biasing a microphone signal can be
 http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS
 @return audio data from the input buffer
 */
-#if USE_AUDIO_INPUT
+#if (USE_AUDIO_INPUT == true)
 int getAudioInput();
 #endif
+
 
 /** @ingroup core
 A replacement for Arduino micros() which is disabled by Mozzi which takes over Timer 0 for control interrupts.

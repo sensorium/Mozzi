@@ -185,21 +185,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00271"></a>00271 <span class="keywordtype">void</span> <a class="code" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook</a>();
 <a name="l00272"></a>00272 
 <a name="l00273"></a>00273 
-<a name="l00288"></a>00288 <span class="preprocessor">#if USE_AUDIO_INPUT</span>
-<a name="l00289"></a>00289 <span class="preprocessor"></span><span class="keywordtype">int</span> getAudioInput();
-<a name="l00290"></a>00290 <span class="preprocessor">#endif</span>
-<a name="l00291"></a>00291 <span class="preprocessor"></span>
-<a name="l00298"></a>00298 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="group__core.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe" title="This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the Mozzi/mozzi...">mozziMicros</a>();
-<a name="l00299"></a>00299 
-<a name="l00300"></a>00300 <span class="comment">// internal use</span>
-<a name="l00301"></a>00301 <span class="keyword">static</span> <span class="keywordtype">void</span> setupTimer2();
-<a name="l00302"></a>00302 
-<a name="l00303"></a>00303 <span class="preprocessor">#endif </span><span class="comment">/* MOZZIGUTS_H_ */</span>
+<a name="l00274"></a>00274 
+<a name="l00289"></a>00289 <span class="preprocessor">#if (USE_AUDIO_INPUT == true)</span>
+<a name="l00290"></a>00290 <span class="preprocessor"></span><span class="keywordtype">int</span> <a class="code" href="group__analog.html#ga3f15eb8d6694020d170ebcbedb645de7" title="This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the Mozzi/mozzi...">getAudioInput</a>();
+<a name="l00291"></a>00291 <span class="preprocessor">#endif</span>
+<a name="l00292"></a>00292 <span class="preprocessor"></span>
+<a name="l00293"></a>00293 
+<a name="l00300"></a>00300 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="group__core.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe" title="A replacement for Arduino micros() which is disabled by Mozzi which takes over Timer 0 for control in...">mozziMicros</a>();
+<a name="l00301"></a>00301 
+<a name="l00302"></a>00302 <span class="comment">// internal use</span>
+<a name="l00303"></a>00303 <span class="keyword">static</span> <span class="keywordtype">void</span> setupTimer2();
+<a name="l00304"></a>00304 
+<a name="l00305"></a>00305 <span class="preprocessor">#endif </span><span class="comment">/* MOZZIGUTS_H_ */</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 14 2013 21:59:27 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 14 2013 22:05:30 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

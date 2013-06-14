@@ -51,7 +51,6 @@ http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/ .
 Mozzi-users list has a thread on this.
 */
 #define AUDIO_RATE 16384
-
 //#define AUDIO_RATE 32768
 
 
@@ -61,6 +60,7 @@ otherwise make it false, to save resources.  When audio input is used, don't rea
 other analog channels as they'll interfere with the audio sampling.
 */
 #define USE_AUDIO_INPUT  false
+
 
 /** @ingroup core
 CONTROL_RATE is \#defined as 64 by default.  You can change it in Mozzi/mozzi_config.h or in your sketch.

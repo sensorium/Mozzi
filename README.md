@@ -130,7 +130,7 @@ depend on timer functions.
 Mozzi makes use of the following code:
 
 [TimerOne library] (http://www.pjrc.com/teensy/td_libs_TimerOne.html)  
-[FrequencyTimer2 library] (http://www.pjrc.com/teensy/td_libs_FrequencyTimer2.html) (now a [fork]https://github.com/sensorium/FrequencyTimer2) with support for ATmega32u4 processors)  
+[FrequencyTimer2 library] (http://www.pjrc.com/teensy/td_libs_FrequencyTimer2.html) - now a [fork]https://github.com/sensorium/FrequencyTimer2) with support for ATmega32u4 processors 
 [xorshift] (http://www.jstatsoft.org/v08/i14/xorshift.pdf) random number generator, George Marsaglia, (2003)  
 
 

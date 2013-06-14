@@ -9,6 +9,7 @@ Version 0.01.2a
 - Added Examples>Mozzi>sensors directory with several basic examples 
 	for modifiying sound with light dependent resistors, potentiometers, piezos and switches.
 	These go with a tutorial on the main Mozzi site http://sensorium.github.io/Mozzi/Mozzi_Introductory_Tutorial.pdf
+	Updated from previous unannounced inclusion which had lots of errors...
 
 
 Version 0.01.1zzzz

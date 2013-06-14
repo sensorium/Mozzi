@@ -48,7 +48,6 @@
 #endif
 */
 
-
 class FrequencyTimer2
 {
   private:

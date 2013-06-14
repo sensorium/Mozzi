@@ -8,10 +8,10 @@
   Version 2 - updated by Paul Stoffregen, paul@pjrc.com
   for compatibility with newer hardware and Arduino 1.0
   
-  Modified for Mozzi by Tim Barrass 2013, 
-  -commented out ISR so it could be defined in Mozzi code directly.
+  Modified by Tim Barrass 2013, 
   -added support for ATMEGA32U4 processors (Leonardo,Teensy2.0)
   	using Timer 4 instead of Timer 2
+  - commented out ISR for use with Mozzi which defines its own
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
@@ -35,6 +35,7 @@
 
 void (*FrequencyTimer2::onOverflow)() = 0;
 uint8_t FrequencyTimer2::enabled = 0;
+
 /*
 #if defined(TIMER2_COMPA_vect)
 ISR(TIMER2_COMPA_vect)
@@ -56,6 +57,7 @@ void dummy_function(void)
     }
 }
 */
+
 void FrequencyTimer2::setOnOverflow( void (*func)() )
 {
 	FrequencyTimer2::onOverflow = func;

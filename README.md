@@ -129,9 +129,9 @@ depend on timer functions.
 
 Mozzi makes use of the following code:
 
-[TimerOne library] (http://www.pjrc.com/teensy/td_libs_TimerOne.html)
-[FrequencyTimer2 library] (http://www.pjrc.com/teensy/td_libs_FrequencyTimer2.html) 
-[xorshift] (http://www.jstatsoft.org/v08/i14/xorshift.pdf) random number generator, George Marsaglia, (2003)
+[TimerOne library] (http://www.pjrc.com/teensy/td_libs_TimerOne.html)  
+[FrequencyTimer2 library] (http://www.pjrc.com/teensy/td_libs_FrequencyTimer2.html)  
+[xorshift] (http://www.jstatsoft.org/v08/i14/xorshift.pdf) random number generator, George Marsaglia, (2003)  
 
 
 Mozzi has also drawn on and been influenced by (among many others):
@@ -140,7 +140,7 @@ ead~.c puredata external (creb library) Copyright (c) 2000-2003 by Tom Schouten 
 [AF_precision_synthesis](http://adrianfreed.com/content/arduino-sketch-high-frequency-precision-sine-wave-tone-sound-synthesis)
 by Adrian Freed, 2009.  
 [Resonant filter](http://www.musicdsp.org/archive.php?classid=3#259) posted to musicdsp.org by Paul Kellett,
-and fixed point version of the filter on [dave's blog of art and programming] (http://www.pawfal.org/dave/blog/2011/09/)
-State Variable filter pseudocode at [musicdsp.org] (http://www.musicdsp.org/showone.php?id=23 and http://www.musicdsp.org/showone.php?id=142).
-Various examples from Pure Data by Miller Puckette.
-Practical synthesis tutorials by [Andy Farnell] (http://www.obiwannabe.co.uk/)
+and fixed point version of the filter on [dave's blog of art and programming] (http://www.pawfal.org/dave/blog/2011/09/)  
+State Variable filter pseudocode at [musicdsp.org] (http://www.musicdsp.org/showone.php?id=23 and http://www.musicdsp.org/showone.php?id=142)  
+Various examples from Pure Data by Miller Puckette  
+Practical synthesis tutorials by [Andy Farnell] (http://www.obiwannabe.co.uk/)  

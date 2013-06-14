@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.2a</span>
+   &#160;<span id="projectnumber">alpha 0.01.2b</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -293,7 +293,7 @@ Functions</h2></td></tr>
 <p>Put #define USE_AUDIO_INPUT true in <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> to enable audio input on analog pin 0, otherwise make it false, to save resources. </p>
 <p>When audio input is used, don't read other analog channels as they'll interfere with the audio sampling. </p>
 
-<p>Definition at line <a class="el" href="mozzi__config_8h_source.html#l00063">63</a> of file <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__config_8h_source.html#l00062">62</a> of file <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a>.</p>
 
 </div>
 </div>
@@ -334,7 +334,7 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>A replacement for Arduino micros() which is disabled by Mozzi which takes over Timer 0 for control interrupts. </p>
-<p>May be a useful hack for replacing micros() in time-related sensor libraries. Will also incorporate for a more accurate EventDelay(). </p>
+<p>mozziMicros has a resolution of 61 microseconds. May be a useful hack for replacing micros() in time-related sensor libraries. </p>
 <dl class="section return"><dt>Returns:</dt><dd>the approximate number of microseconds since the program began. </dd></dl>
 
 <p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00421">421</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
@@ -460,7 +460,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 14 2013 22:05:30 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 14 2013 22:21:22 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

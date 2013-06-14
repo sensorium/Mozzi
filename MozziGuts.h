@@ -293,9 +293,10 @@ int getAudioInput();
 
 /** @ingroup core
 A replacement for Arduino micros() which is disabled by Mozzi which takes over Timer 0 for control interrupts.
+mozziMicros has a resolution of 61 microseconds.
 May be a useful hack for replacing micros() in time-related sensor libraries.
-Will also incorporate for a more accurate EventDelay().
 @return the approximate number of microseconds since the program began.
+@todo  incorporate mozziMicros() in a more accurate EventDelay()?
 */
 unsigned long mozziMicros();
 

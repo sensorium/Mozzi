@@ -143,4 +143,4 @@ by Adrian Freed, 2009
 and fixed point version of the filter on [dave's blog of art and programming] (http://www.pawfal.org/dave/blog/2011/09/)  
 State Variable filter pseudocode at [musicdsp.org] (http://www.musicdsp.org/showone.php?id=23 and http://www.musicdsp.org/showone.php?id=142)  
 Various examples from [Pure Data](http://puredata.info/) by Miller Puckette  
-Practical synthesis tutorials by [Andy Farnell] (http://www.obiwannabe.co.uk/)  
+[Practical synthesis tutorials](http://www.obiwannabe.co.uk/) by Andy Farnell  

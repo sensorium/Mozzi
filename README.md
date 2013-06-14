@@ -120,9 +120,8 @@ Also, there are recordings of the examples inside their sketch folders.
 ### Caveats
 
 While Mozzi is running, the Arduino time functions millis(), micros(), delay(), and
-delayMicroseconds() are disabled. Mozzi provides EventDelay() for scheduling, or sound production 
-can be suspended if the Arduino timers are required for reading sensors or other processes which 
-depend on timer functions.
+delayMicroseconds() are disabled. Instead, Mozzi provides mozziMicros() for timing, with 61us resolution (in STANDARD mode), and
+EventDelay() for scheduling.  Also, Mozzi can be paused (pauseMozzi()/unpauseMozzi()) if the Arduino timers are required for other things.
 
 
 ###Contributions / Included Dependencies

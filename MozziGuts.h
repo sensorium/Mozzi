@@ -289,7 +289,7 @@ http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS
 int getAudioInput();
 #endif
 
-/**
+/** @ingroup core
 A replacement for Arduino micros() which is disabled by Mozzi which takes over Timer 0 for control interrupts.
 May be a useful hack for replacing micros() in time-related sensor libraries.
 Will also incorporate for a more accurate EventDelay().

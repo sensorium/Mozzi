@@ -30,7 +30,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.1zzzz</span>
+   &#160;<span id="projectnumber">alpha 0.01.2a</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -121,8 +121,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <tr class="memdesc:ga1d1ee9fa143c3a0505e76b41fc2af09f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This returns the most recent analog reading for the specified channel.  <a href="#ga1d1ee9fa143c3a0505e76b41fc2af09f"></a><br/></td></tr>
 <tr class="memitem:ga829091330473b48a8b9236d0be4b8755"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755">adcReadAllChannels</a> ()</td></tr>
 <tr class="memdesc:ga829091330473b48a8b9236d0be4b8755"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Call adcReadAllChannels() in updateControl() and the results for each channel will be available by ca...">adcReadAllChannels()</a> in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> and the results for each channel will be available by calling adcGetResult(channel_num) next time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> runs.  <a href="#ga829091330473b48a8b9236d0be4b8755"></a><br/></td></tr>
-<tr class="memitem:gaaa6a42d80c5297407a45ca8bf3c1c7fe"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe">mozziMicros</a> ()</td></tr>
-<tr class="memdesc:gaaa6a42d80c5297407a45ca8bf3c1c7fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> file.  <a href="#gaaa6a42d80c5297407a45ca8bf3c1c7fe"></a><br/></td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
 <a class="anchor" id="ga5042e7c576dd0307be38eb70efdb69fe"></a>
@@ -340,30 +338,6 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
 
 </div>
 </div>
-<a class="anchor" id="gaaa6a42d80c5297407a45ca8bf3c1c7fe"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned long <a class="el" href="group__analog.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe">mozziMicros</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> file. </p>
-<p>Audio input is currently restricted to analog pin 0 (this may change in future). The audio signal needs to be in the range 0 to 5 volts. Circuits and discussions about biasing a signal in the middle of this range can be found at <a href="http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal">http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal</a> and <a href="http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/">http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/</a> . A circuit and instructions for amplifying and biasing a microphone signal can be found at <a href="http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS">http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS</a> </p>
-<dl class="section return"><dt>Returns:</dt><dd>audio data from the input buffer A replacement for Arduino micros() which is disabled by Mozzi which takes over Timer 0 for control interrupts. May be a useful hack for replacing micros() in time-related sensor libraries. Will also incorporate for a more accurate EventDelay(). </dd>
-<dd>
-the approximate number of microseconds since the program began. </dd></dl>
-
-<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00421">421</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="gacd83735876cf223916ea4925ec4efd4a"></a>
 <div class="memitem">
 <div class="memproto">
@@ -416,7 +390,7 @@ the approximate number of microseconds since the program began. </dd></dl>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 4 2013 13:00:00 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 14 2013 21:59:28 for Mozzi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

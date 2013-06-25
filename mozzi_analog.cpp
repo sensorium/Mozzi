@@ -27,9 +27,15 @@
 void setupFastAnalogRead()
 {
 	// fastest predivided rate (divide by 16, giving 1Mhz) for which behaviour is defined (~16us per sample)
+	/*
 	sbi(ADCSRA,ADPS2);
 	cbi(ADCSRA,ADPS1);
 	cbi(ADCSRA,ADPS0);
+	*/
+	// testing
+	ADCSRA |= (1 << ADPS2);
+	ADCSRA &= ~(1 << ADPS1);
+	ADCSRA &= ~(1 << ADPS0);
 }
 
 
@@ -64,7 +70,6 @@ void adcSetChannel(unsigned char pin)
 #endif
 
 #if defined(__AVR_ATmega32U4__)
-
 	pin = analogPinToChannel(pin);
 	ADCSRB = (ADCSRB & ~(1 << MUX5)) | (((pin >> 3) & 0x01) << MUX5);
 #elif defined(ADCSRB) && defined(MUX5)
@@ -81,6 +86,7 @@ void adcSetChannel(unsigned char pin)
 	ADMUX = (1 << REFS0) | (pin & 0x07);
 #endif
 }
+
 
 
 
@@ -107,7 +113,6 @@ void adcStartConversion(unsigned char pin)
 #endif
 
 #if defined(__AVR_ATmega32U4__)
-
 	pin = analogPinToChannel(pin);
 	ADCSRB = (ADCSRB & ~(1 << MUX5)) | (((pin >> 3) & 0x01) << MUX5);
 #elif defined(ADCSRB) && defined(MUX5)
@@ -129,15 +134,18 @@ void adcStartConversion(unsigned char pin)
 
 #if defined(ADCSRA) && defined(ADCL)
 	// start the conversion
-	sbi(ADCSRA, ADSC);
+	//sbi(ADCSRA, ADSC);
+	//testing
+	ADCSRA != (1 << ADSC);
 #endif
 }
 
 
-
 void adcStartConversion()
 {
-	sbi(ADCSRA, ADSC);
+	//sbi(ADCSRA, ADSC);
+	//testing
+	ADCSRA != (1 << ADSC);
 }
 
 

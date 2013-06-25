@@ -136,7 +136,7 @@ Ranged random number generator, faster than Arduino's built-in random function, 
 */
 char rand(char minval, char maxval)
 {
-	return (char) ((((int) (lowByte(xorshift96()))) * (maxval-minval))/256) + minval;
+	return (char) ((((int) (lowByte(xorshift96()))) * (maxval-minval))>>8) + minval;
 }
 
 
@@ -148,7 +148,7 @@ Ranged random number generator, faster than Arduino's built-in random function, 
 */
 unsigned char rand(unsigned char minval, unsigned char maxval)
 {
-	return (unsigned char) ((((unsigned int) (lowByte(xorshift96()))) * (maxval-minval))/256) + minval;
+	return (unsigned char) ((((unsigned int) (lowByte(xorshift96()))) * (maxval-minval))>>8) + minval;
 }
 
 
@@ -160,7 +160,7 @@ Ranged random number generator, faster than Arduino's built-in random function, 
 */
 int rand( int minval,  int maxval)
 {
-	return (int) ((((xorshift96()>>16) * (maxval-minval))>>16) + minval);
+	return (int) ((((xorshift96() & 0xFFFF) * (maxval-minval))>>16) + minval);
 }
 
 
@@ -172,7 +172,7 @@ Ranged random number generator, faster than Arduino's built-in random function, 
 */
 unsigned int rand(unsigned int minval, unsigned int maxval)
 {
-	return (unsigned int) ((((xorshift96()>>16) * (maxval-minval))>>16) + minval);
+	return (unsigned int) ((((xorshift96() & 0xFFFF) * (maxval-minval))>>16) + minval);
 }
 
 
@@ -183,7 +183,7 @@ Ranged random number generator, faster than Arduino's built-in random function, 
 */
 char rand(char maxval)
 {
-	return (char) ((((int) (lowByte(xorshift96()))) * maxval)/256);
+	return (char) ((((int) (lowByte(xorshift96()))) * maxval)>>8);
 }
 
 
@@ -194,7 +194,7 @@ Ranged random number generator, faster than Arduino's built-in random function, 
 */
 unsigned char rand(unsigned char maxval)
 {
-	return (unsigned char) ((((unsigned int) (lowByte(xorshift96()))) * maxval)/256);
+	return (unsigned char) ((((unsigned int) (lowByte(xorshift96()))) * maxval)>>8);
 }
 
 
@@ -205,7 +205,7 @@ Ranged random number generator, faster than Arduino's built-in random function, 
 */
 int rand(int maxval)
 {
-	return (int) (((xorshift96()>>16) * maxval)>>16);
+	return (int) (((xorshift96() & 0xFFFF) * maxval)>>16);
 }
 
 
@@ -216,7 +216,7 @@ Ranged random number generator, faster than Arduino's built-in random function, 
 */
 unsigned int rand(unsigned int maxval)
 {
-	return (unsigned int) (((xorshift96()>>16) * maxval)>>16);
+	return (unsigned int) (((xorshift96() & 0xFFFF) * maxval)>>16);
 }
 
 

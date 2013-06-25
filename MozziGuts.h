@@ -300,7 +300,10 @@ May be a useful hack for replacing micros() in time-related sensor libraries.
 */
 unsigned long mozziMicros();
 
+
 // internal use
+#if (AUDIO_MODE == HIFI)
 static void setupTimer2();
+#endif
 
 #endif /* MOZZIGUTS_H_ */

@@ -47,14 +47,17 @@ public:
 	Usually this will be CONTROL_RATE or AUDIO_RATE, unless you
 	design another scheme for updating. One such alternative scheme could take turns
 	for various control changes in a rotating schedule to spread out calculations
-	made in successive updateControl() routines. */
-
-	Ead(unsigned int update_rate);
-
+	made in successive updateControl() routines. 
+	*/
+	Ead(unsigned int update_rate) : UPDATE_RATE(update_rate)
+	{
+		;
+	}
 
 	/** Set the attack time in milliseconds.
 	@param attack_ms The time taken for values returned by successive calls of
-	the next() method to change from 0 to 255. */
+	the next() method to change from 0 to 255.
+	*/
 	inline
 	void setAttack(unsigned int attack_ms)
 	{
@@ -64,7 +67,8 @@ public:
 
 	/** Set the decay time in milliseconds.
 	@param decay_ms The time taken for values returned by successive calls of
-	the next() method to change from 255 to 0. */
+	the next() method to change from 255 to 0. 
+	*/
 	inline
 	void setDecay(unsigned int decay_ms)
 	{
@@ -87,7 +91,8 @@ public:
 
 
 	/** Start the envelope from the beginning. This can be used at any
-	time, even if the previous envelope is not finished. */
+	time, even if the previous envelope is not finished. 
+	*/
 	inline
 	void start()
 	{

@@ -38,6 +38,7 @@ void setPin13Low()
 	PORTB &= B11011111;
 }
 
+
 // macros for setting and clearing register bits
 #ifndef cbi
 #define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))

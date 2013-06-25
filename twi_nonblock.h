@@ -77,12 +77,12 @@ uint8_t twowire_endTransmission(void);
 
 /// non-blocking functions:
 uint8_t twi_initiateReadFrom(uint8_t address, uint8_t length);
-uint8_t twi_continueReadFrom();
+void twi_continueReadFrom();
 
 uint8_t twi_readMasterBuffer( uint8_t* data, uint8_t length );
 
 uint8_t twi_initiateWriteTo(uint8_t address, uint8_t* data, uint8_t length );
-uint8_t twi_continueWriteTo();
+void twi_continueWriteTo();
 
 
 void twi_reply(uint8_t ack);

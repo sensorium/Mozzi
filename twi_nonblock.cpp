@@ -185,7 +185,10 @@ uint8_t twi_readFromBlocking(uint8_t address, uint8_t* data, uint8_t length)
 }
 
 
+
 /// ---------- non-blocking version ----------
+
+
 uint8_t twi_initiateReadFrom(uint8_t address, uint8_t length)
 {
 
@@ -202,9 +205,19 @@ uint8_t twi_initiateReadFrom(uint8_t address, uint8_t length)
   } else {
     twi_state = TWI_PRE_MRX;
   }
+  if (twi_error == 0xFF)
+    return 0;	// success
+  else if (twi_error == TW_MT_SLA_NACK)
+    return 2;	// error: address send, nack received
+  else if (twi_error == TW_MT_DATA_NACK)
+    return 3;	// error: data send, nack received
+  else
+    return 4;	// other twi error
 }
 
-uint8_t twi_continueReadFrom(){
+
+
+void twi_continueReadFrom(){
     
   twi_state = TWI_MRX;
   // reset error state (0xFF.. no error occured)
@@ -227,6 +240,8 @@ uint8_t twi_continueReadFrom(){
   TWCR = _BV(TWEN) | _BV(TWIE) | _BV(TWEA) | _BV(TWINT) | _BV(TWSTA);
 }
 
+
+
 uint8_t twi_readMasterBuffer( uint8_t* data, uint8_t length ){
   uint8_t i;
   if (twi_masterBufferIndex < length)
@@ -239,6 +254,8 @@ uint8_t twi_readMasterBuffer( uint8_t* data, uint8_t length ){
 	
   return length;
 }
+
+
 
 /// ----end------ non-blocking version ----------
 
@@ -307,7 +324,11 @@ uint8_t twi_writeToBlocking(uint8_t address, uint8_t* data, uint8_t length, uint
     return 4;	// other twi error
 }
 
+
+
 /// ----------------- non-blocking ---------
+
+
 uint8_t twi_initiateWriteTo(uint8_t address, uint8_t* data, uint8_t length )
 {
   // ensure data will fit into buffer
@@ -323,9 +344,19 @@ uint8_t twi_initiateWriteTo(uint8_t address, uint8_t* data, uint8_t length )
   } else {
     twi_state = TWI_PRE_MTX;
   }
+  if (twi_error == 0xFF)
+    return 0;	// success
+  else if (twi_error == TW_MT_SLA_NACK)
+    return 2;	// error: address send, nack received
+  else if (twi_error == TW_MT_DATA_NACK)
+    return 3;	// error: data send, nack received
+  else
+    return 4;	// other twi error
 }
 
-uint8_t twi_continueWriteTo(){
+
+
+void twi_continueWriteTo(){
   uint8_t i;
   // wait until twi is ready, become master transmitter
 //   while(TWI_READY != twi_state){
@@ -354,6 +385,9 @@ uint8_t twi_continueWriteTo(){
 }
 
 
+// -----------end non-blocking --------------------
+
+
 /* 
  * Function twi_reply
  * Desc     sends byte or readys receive line
@@ -369,6 +403,8 @@ void twi_reply(uint8_t ack)
     TWCR = _BV(TWEN) | _BV(TWIE) | _BV(TWINT);
   }
 }
+
+
 
 /* 
  * Function twi_stop
@@ -396,6 +432,8 @@ void twi_stop(void)
       twi_continueReadFrom();
   }
 }
+
+
 
 /* 
  * Function twi_releaseBus

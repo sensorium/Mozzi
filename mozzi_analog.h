@@ -29,7 +29,26 @@
 #else
  #include "WProgram.h"
 #endif
-#include "mozzi_utils.h"
+
+//#include "mozzi_utils.h"
+
+
+// hack for Teensy 2 (ATmega32U4), which has "adc_mapping" instead of "analog_pin_to_channel_PGM"
+#if defined(__AVR_ATmega32U4__) && defined(CORE_TEENSY) 
+//pasted from hardware/arduino/variants/leonardo/pins_arduino.h, doesn't work as of mozzi 0.01.2a
+//	__AVR_ATmega32U4__ has an unusual mapping of pins to channels
+//extern const uint8_t PROGMEM analog_pin_to_channel_PGM[];
+//#define analogPinToChannel(P)  ( pgm_read_byte( analog_pin_to_channel_PGM + (P) ) )
+
+// look at Arduino.app/Contents/Resources/Java/hardware/teensy/cores/teensy/pins_teensy.c - analogRead
+// adc_mapping is already declared in pins_teensy.c, but it's static there
+extern  const uint8_t PROGMEM adc_mapping[] = {
+// 0, 1, 4, 5, 6, 7, 13, 12, 11, 10, 9, 8
+   0, 1, 4, 5, 6, 7, 13, 12, 11, 10, 9, 8, 10, 11, 12, 13, 7, 6, 5, 4, 1, 0, 8 
+};
+#define analogPinToChannel(P)  ( pgm_read_byte( adc_mapping + (P) ) )
+#endif
+
 
 #if USE_AUDIO_INPUT
 #warning "Using analog pin 0 for audio input.  No other analog channels are available while using audio."
@@ -211,15 +230,6 @@ calling adcGetResult(channel_num).
 interfering with the audio or control interrupts.  
 */
 void adcReadAllChannels();
-
-
-
-// hack for Teensy 2 (32u4), pasted from hardware/arduino/variants/leonardo/pins_arduino.h
-#if defined(__AVR_ATmega32U4__)
-//	__AVR_ATmega32U4__ has an unusual mapping of pins to channels
-extern const uint8_t PROGMEM analog_pin_to_channel_PGM[];
-#define analogPinToChannel(P)  ( pgm_read_byte( analog_pin_to_channel_PGM + (P) ) )
-#endif
 
 
 #endif /* MOZZI_ANALOG_H_ */

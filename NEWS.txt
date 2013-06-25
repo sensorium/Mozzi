@@ -3,6 +3,17 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.2c
+- removed Ead.cpp, condensed to Ead.h
+- mozzi_analog.h changed all xorshift96()>>16's to xorshift96() & 0xFFFF and all /256's to >>8
+- added ControlDelay(), the same as AudioDelay() but for control values.
+- added AutoRange(), for keeping a running calculation of sensor input range (should also have a variable timespan/fading memory).
+- tweaked twi_nonblock.cpp and twi_nonblock.h to get rid of some compile warnings about return values.
+	Madetwi_initiateReadFrom() and twi_initiateWriteFrom() return their error states 
+	and made twi_continueReadFrom() and twi_continueWriteFrom() return void.
+- added Examples > analog_input > Audio_Input, a minimal test of Mozzi audio input.
+	
+
 Version 0.01.2b
 - fixed some docs
 - added thumbpiano samples

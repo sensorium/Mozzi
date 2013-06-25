@@ -11,8 +11,9 @@ Version 0.01.2c
 - tweaked twi_nonblock.cpp and twi_nonblock.h to get rid of some compile warnings about return values.
 	Madetwi_initiateReadFrom() and twi_initiateWriteFrom() return their error states 
 	and made twi_continueReadFrom() and twi_continueWriteFrom() return void.
-- added Examples > analog_input > Audio_Input, a minimal test of Mozzi audio input.
-	
+- numbered the Examples category folders to give more sense of organisation and progression
+- added Examples > _04_analog_input > Audio_Input, a minimal test of Mozzi audio input.
+
 
 Version 0.01.2b
 - fixed some docs

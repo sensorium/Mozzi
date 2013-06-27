@@ -98,6 +98,9 @@ public:
 	}
 
 	
+	/** Set the delay time, measured in cells.
+	@param delaytime_cells how many cells to delay the input signal by.
+	*/
 	inline
 	void set(unsigned int delaytime_cells){
 		_delaytime_cells = delaytime_cells;
@@ -128,5 +131,9 @@ public:
 	
 };
 
+/**
+@example _09_delays/AudioDelay/AudioDelay.ino
+This is an example of how to use the AudioDelay class.
+*/
 #endif        //  #ifndef AUDIODELAY_H_
 

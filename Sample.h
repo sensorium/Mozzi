@@ -100,10 +100,10 @@ public:
 
 
 	/** Sets the starting position in samples.
-	@param offset position in samples.
+	@param startpos offset position in samples.
 	*/
 	inline
-	void setStart(unsigned int start)
+	void setStart(unsigned int startpos)
 	{
 		startpos_fractional = (unsigned long) start << SAMPLE_F_BITS;
 	}
@@ -122,7 +122,7 @@ public:
 
 
 	/** Sets the a new start position and sets the phase (the playhead) to that position.
-	@param start position in samples from the beginning of the sound.
+	@param startpos position in samples from the beginning of the sound.
 	*/
 	inline
 	void start(unsigned int startpos)
@@ -132,7 +132,7 @@ public:
 	}
 
 
-	/** Sets the end position in samples from the beginning of the sound..
+	/** Sets the end position in samples from the beginning of the sound.
 	@param end position in samples.
 	*/
 	inline
@@ -211,13 +211,13 @@ public:
 
 	// Not readjusted for arbitrary table length yet
 	//
-	// /** Returns the next sample given a phase modulation value.
-	// @param a phase modulation value given as a proportion of the wave. The
+	//  Returns the next sample given a phase modulation value.
+	// @param phmod_proportion phase modulation value given as a proportion of the wave. The
 	// phmod_proportion parameter is a Q15n16 fixed-point number where to fractional
 	// n16 part represents -1 to 1, modulating the phase by one whole table length in
 	// each direction.
 	// @return a sample from the table.
-	// */
+	// 
 	// inline
 	// char phMod(long phmod_proportion)
 	// {
@@ -227,15 +227,15 @@ public:
 
 
 
-	/** Set the oscillator frequency with an unsigned int. This is faster than using a
-	float, so it's useful when processor time is tight, but it can be tricky with
-	low and high frequencies, depending on the size of the wavetable being used. If
-	you're not getting the results you expect, try explicitly using a float, or try
-	setFreq_Q24n8.
+	/** Set the oscillator frequency with an unsigned int. 
+	This is faster than using a float, so it's useful when processor time is tight,
+	but it can be tricky with low and high frequencies, depending on the size of the
+	wavetable being used. If you're not getting the results you expect, try
+	explicitly using a float, or try setFreq_Q24n8.
 	@param frequency to play the wave table.
 	*/
 	inline
-	void setFreq ( int frequency) {
+	void setFreq (int frequency) {
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
 			phase_increment_fractional = ((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)*frequency)/UPDATE_RATE) << (SAMPLE_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS);
@@ -247,7 +247,7 @@ public:
 	way to set frequencies, -Might- be slower than using an int but you need either
 	this or setFreq_Q24n8 for fractional frequencies.
 	@param frequency to play the wave table.
-	 */
+	*/
 	inline
 	void setFreq(float frequency)
 	{ // 1 us - using float doesn't seem to incur measurable overhead with the oscilloscope
@@ -279,7 +279,7 @@ public:
 
 
 	/**  Returns the sample at the given table index.
-	@param atIndex table index between 0 and the table size.The
+	@param index between 0 and the table size.The
 	index rolls back around to 0 if it's larger than the table size.
 	@return the sample at the given table index.
 	*/

@@ -92,7 +92,7 @@ public:
 
 
 	/** Give the average of the last NUM_READINGS.
-	@param a control signal such as an analog input which needs smoothing.
+	@param input a control signal such as an analog input which needs smoothing.
 	@return the smoothed result.
 	*/
 	T next(T input)

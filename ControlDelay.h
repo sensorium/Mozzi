@@ -25,8 +25,10 @@
 
 #include "AudioDelay.h"
 
-/** Control delay line for delaying control signals, for instance to allow oone voice to follow the dynamics of another, a bit later.
-Good for echo-like effects using multiple instances of the same voice, when AudioDelay would be too short.
+/** Control-rate delay line for delaying control signals.
+For example, this could be used to produce echo-like effects using multiple
+instances of the same voice, when AudioDelay would be too short for an actual
+audio echo.  See AudioDelay for documentation, as this is just a wrapper of the same code.
 @tparam  NUM_BUFFER_SAMPLES is the length of the delay buffer in samples.  This should
 be a power of two.
 @tparam the type of numbers to use for the signal in the delay.  The default is char, but int could be useful
@@ -38,6 +40,11 @@ class ControlDelay: public AudioDelay<NUM_BUFFER_SAMPLES, T>
 {
 	;
 };
+
+/**
+@example _02_control/Control_Echo_Theremin/Control_Echo_Theremin.ino
+This is an example of how to use the ControlDelay class.
+*/
 
 #endif        //  #ifndef CONTROLDELAY_H_
 

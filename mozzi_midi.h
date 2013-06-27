@@ -3,7 +3,8 @@
 
 #include "mozzi_fixmath.h"
 
-/** @defgroup midi midi note number to frequency conversions
+/** @defgroup midi Midi note number to frequency conversions
+Useful if you like playing notes in tune.
 */
 
 float mtof(float x);

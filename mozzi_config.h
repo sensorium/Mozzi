@@ -1,5 +1,9 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+#ifndef MOZZI_CONFIG_H
+#define MOZZI_CONFIG_H
+
+/*
+Edit this file if you want to choose your own configuration options.
+*/
 
 
 /**  @ingroup core
@@ -62,14 +66,5 @@ other analog channels as they'll interfere with the audio sampling.
 #define USE_AUDIO_INPUT  false
 
 
-/** @ingroup core
-CONTROL_RATE is \#defined as 64 by default.  You can change it in Mozzi/mozzi_config.h or in your sketch.
-*/
-#define CONTROL_RATE 64
-
-
-
-
-
-#endif        //  #ifndef CONFIG_H
+#endif        //  #ifndef MOZZI_CONFIG_H
 

@@ -23,7 +23,7 @@
 #ifndef MOZZI_ANALOG_H_
 #define MOZZI_ANALOG_H_
 
-#include "mozzi_config.h"
+
 #if ARDUINO >= 100
  #include "Arduino.h"
 #else
@@ -41,8 +41,8 @@
 //#define analogPinToChannel(P)  ( pgm_read_byte( analog_pin_to_channel_PGM + (P) ) )
 
 // look at Arduino.app/Contents/Resources/Java/hardware/teensy/cores/teensy/pins_teensy.c - analogRead
-// adc_mapping is already declared in pins_teensy.c, but it's static there
-extern  const uint8_t PROGMEM adc_mapping[] = {
+// adc_mapping is already declared in pins_teensy.c, but it's static there so we can't access it
+static const uint8_t PROGMEM adc_mapping[] = {
 // 0, 1, 4, 5, 6, 7, 13, 12, 11, 10, 9, 8
    0, 1, 4, 5, 6, 7, 13, 12, 11, 10, 9, 8, 10, 11, 12, 13, 7, 6, 5, 4, 1, 0, 8 
 };
@@ -54,7 +54,8 @@ extern  const uint8_t PROGMEM adc_mapping[] = {
 #warning "Using analog pin 0 for audio input.  No other analog channels are available while using audio."
 #endif
 
-/** @defgroup analog Mozzi analog input functions for sensors and audio 
+/** @defgroup analog Mozzi fast analog input functions for sensors and audio 
+Glitch-free audio by speeding up analog input functions which normally block processing.
 */
 
 

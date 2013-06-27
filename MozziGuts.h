@@ -27,9 +27,10 @@
 #error Mozzi expects a cpu clock speed of 16MHz!
 #endif
 
+
 #include "mozzi_config.h" // User can change the config file to set audio mode
-#include "TimerOne.h"
 #include "TimerZero.h"
+#include "TimerOne.h"
 #include "FrequencyTimer2.h"
 
 /** @mainpage Welcome
@@ -48,19 +49,45 @@ Utility functions which are generally useful, including midi note to frequency c
 @section Classes
 The Classes used to generate control and audio signals.
 
-@section  Files
-Files includes ready-to-use wave tables and samples which are in the Mozzi/tables and Mozzi/samples folders.
-See the sample files themselves for documentation.
 
-You can also convert your own sounds from a program like
-Audacity to tables for Mozzi with a script called char2mozzi.py, in Mozzi/python.
+@section  Soundtables
+Includes ready-to-use wave tables and a few example samples which are in
+the Mozzi/tables and Mozzi/samples folders.
 
-Read the char2mozzi.py file for instructions.
+You can convert your own sounds from a program like Audacity to tables for Mozzi
+with a script called char2mozzi.py, in Mozzi/python.  Read the char2mozzi.py file for instructions.
 */
+
+
+/** @defgroup Soundtables
+Look-up-tables for audio waveforms, waveshaping, and control functions, and
+python scripts to generate or convert them. Includes ready-to-use wave tables
+and a few example samples which are in the Mozzi/tables and Mozzi/samples
+folders. You can convert your own sounds from a program like Audacity to tables
+for Mozzi with a script called char2mozzi.py, in Mozzi/python. Read the
+char2mozzi.py file for instructions.  Also check out the other scripts in the python 
+folder for templates to use if you want to do your own thing.
+*/
+
 
 /** @defgroup core Mozzi core definitions and functions
+The bones of every Mozzi sketch.
 */
-//@defgroup tables Mozzi look-up-tables for audio waveforms, waveshaping, and control functions.
+
+
+/** @ingroup core
+Mozzi's CONTROL_RATE sets how many times per second updateControl() is called.
+It can be any power of 2 greater than 64, and the largest value where it starts to
+become impractical is around 1024.  64, 128, 256 and sometimes 512 are all usable values.
+Try to keep it as low as you can, for efficiency, though higher rates can sometimes give smoother results,
+avoiding the need to interpolate sensitive variables at audio rate in updateAudio().
+CONTROL_RATE has a default of 64 Hz, but it can be changed at the top of your sketch, 
+after the \#includes, for example:
+\#define CONTROL_RATE 256 
+*/
+#define CONTROL_RATE 64
+
+
 
 /** @ingroup core
 Use \#define AUDIO_MODE STANDARD in Mozzi/config.h to select Mozzi's original audio

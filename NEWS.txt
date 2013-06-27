@@ -12,9 +12,16 @@ Version 0.01.2c
 	Madetwi_initiateReadFrom() and twi_initiateWriteFrom() return their error states 
 	and made twi_continueReadFrom() and twi_continueWriteFrom() return void.
 - numbered the Examples category folders to give more sense of organisation and progression
-- added Examples > _04_analog_input > Audio_Input, a minimal test of Mozzi audio input.
+- added Examples > Mozzi > _04_analog_input > Audio_Input, a minimal test of Mozzi audio input.
+- added Examples  > Mozzi > _02_control > Control_Echo_Theremin, demonstrating ControlDelay()
+- repaired hack for Teensy 2 in mozzi_analog.h so it compiles again
+- moved default CONTROL_RATE definition to MozziGuts.h, it doesn't need to be in 
+    a config file if you can change it in a sketch.
+- changed sin1024_int8.h table to use full range signed 8 bit values - it was scaled down slightly for a forgotten project
+- removed samples/TJBAnalogDisk and samples/thumbpiano, these will be available as a separate "Mozzi_Extras" download.
+- removed samples/Bamboo1 and changed samples/Samples sketch to use samples/bamboo
 
-
+    
 Version 0.01.2b
 - fixed some docs
 - added thumbpiano samples

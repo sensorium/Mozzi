@@ -1,27 +1,29 @@
 ##    char2mozzi.py
 ##    Created 2010-12 by Tim Barrass
-##
-##    char2mozzi.py converts raw 8 bit sound data to wavetables for Mozzi.
-##
-##    Usage: python char2mozzi.py <infilename outfilename "tablename" "samplerate">
-##
-##    Using Audacity to prepare raw sound files for converting:
-##
-##    Set your Audacity project sample rate:
-##
-##		For generated waveforms like sine or sawtooth, set the project
-##		rate to the size of the wavetable you wish to create, which must
-##		be a power of two (eg. 8192), and set the selection format
-##		(beneath the editing window) to samples. Then you can generate
-##		and save 1 second of a waveform and it will fit your table
-##		length.
-##
-##		For a recorded audio sample, set the project rate to the
-##		Mozzi AUDIO_RATE (16384 in the current version). Then edit
-##		your sounds to a power-of-two number of samples.
-##
-##    Save by exporting with the format set to "Other uncompressed formats",
-##    options set to "RAW(headerless)" and "Encoding 8 bit signed PCM".
+
+##@ingroup Soundtables
+#	@brief  char2mozzi.py converts raw 8 bit sound data to wavetables for Mozzi.
+#
+#    Usage: python char2mozzi.py <infilename outfilename "tablename" "samplerate">
+#
+#    Using Audacity to prepare raw sound files for converting:
+#
+#    Set your Audacity project sample rate:
+#
+#		For generated waveforms like sine or sawtooth, set the project
+#		rate to the size of the wavetable you wish to create, which must
+#		be a power of two (eg. 8192), and set the selection format
+#		(beneath the editing window) to samples. Then you can generate
+#		and save 1 second of a waveform and it will fit your table
+#		length.
+#
+#		For a recorded audio sample, set the project rate to the
+#		Mozzi AUDIO_RATE (16384 in the current version). Then edit
+#		your sounds to a power-of-two number of samples.
+#
+#     Save by exporting with the format set to "Other uncompressed formats",
+#     options set to "RAW(headerless)" and "Encoding 8 bit signed PCM".
+
 
 
 import sys, array, os, textwrap, random

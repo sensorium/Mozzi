@@ -10,6 +10,7 @@
 #endif
 
 /** @defgroup util Mozzi utility functions
+Useful for debugging and profiling high frequency code with an oscilloscope, when serial is too slow.
 */
 
 /** @ingroup util

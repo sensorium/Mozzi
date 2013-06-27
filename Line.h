@@ -34,7 +34,7 @@
 you can use Line to make an oscillator glide from one frequency to another,
 pre-calculating the required phase increments for each end and then letting your
 Line change the phase increment with only a simple addition at each step.
-@tparam T the type of numbers to use. For example, Line <int> myline; makes a
+@tparam T the type of numbers to use. For example, Line \<int\> myline; makes a
 Line which uses ints. 
 @note Watch out for underflows in the internal calcualtion of Line() if you're not
 using floats (but on the other hand try to avoid lots of floats, they're too slow!). 
@@ -54,7 +54,7 @@ private:
 
 public:
 	/** Constructor. Use the template parameter to set the type of numbers you
-	want to use. For example, Line <int> myline; makes a Line which uses ints.
+	want to use. For example, Line \<int\> myline; makes a Line which uses ints.
 	 */
 	Line ()
 	{
@@ -104,7 +104,7 @@ public:
 
 	/** Given a new starting value, target value and the number of steps to take on the way,
 	this sets the step size needed to get there.
-	@param value the number to set the Line's current_value to.
+	@param startvalue the number to set the Line's current_value to.
 	@param targetvalue the value to move towards.
 	@param num_steps how many steps to take to reach the target.
 	 */

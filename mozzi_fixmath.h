@@ -29,8 +29,9 @@
  #include "WProgram.h"
 #endif
 
-/** @defgroup mozzi_fixmath Mozzi fixed point fractional number types and conversion routines
-Take care when converting that the important bits of your numbers will fit in the types you choose!
+/** @defgroup mozzi_fixmath Mozzi fixed point fractional number types and conversion routines.
+Fixed point is often best for fast audio code for Arduino, and these can ease some of the pain.
+@note Take care when converting that the important bits of your numbers will fit in the types you choose!
 @note Timing: converting between fixed and float 10-12us, converting between fixed types about 1us.
 @{
 */

@@ -49,7 +49,8 @@
 
 
 
-/** Oscil plays a wavetable, cycling through the table to generate an audio or
+/** 
+Oscil plays a wavetable, cycling through the table to generate an audio or
 control signal. The frequency of the signal can be set or changed with
 setFreq(), and the output of an Oscil can be produced with next() for a simple
 cycling oscillator, or atIndex() for a particular sample in the table.
@@ -150,20 +151,20 @@ public:
 
 
 	/** Get the phase of the Oscil in fractional format.
-	@param phase a position in the wavetable.
+	@return position in the wavetable, shifted left by OSCIL_F_BITS (which is 16 when this was written).
 	*/
 	unsigned long getPhaseFractional()
 	{
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
-			return phase_fractional;;
+			return phase_fractional;
 		}
 	}
 
 
 
 	/** Returns the next sample given a phase modulation value.
-	@param a phase modulation value given as a proportion of the wave. The
+	@param phmod_proportion a phase modulation value given as a proportion of the wave. The
 	phmod_proportion parameter is a Q15n16 fixed-point number where the fractional
 	n16 part represents -1 to 1, modulating the phase by one whole table length in
 	each direction.
@@ -256,7 +257,7 @@ public:
 	}
 */
 	/**  Returns the sample at the given table index.
-	@param atIndex table index between 0 and the table size.The
+	@param index between 0 and the table size.The
 	index rolls back around to 0 if it's larger than the table size.
 	@return the sample at the given table index.
 	*/

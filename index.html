@@ -101,7 +101,7 @@
   <li><a href="/Mozzi/">Home</a></li>
   <li><a href="/Mozzi/examples/">Examples</a></li>
   <li><a href="/Mozzi/learn/">Learn</a></li>
-  <!-- <li><a href="/Mozzi/gallery/">Gallery</a></li> -->
+  <li><a href="https://github.com/sensorium/Mozzi/wiki/Projects-made-with-Mozzi">Gallery</a></li>
   <!-- <li><a href="/Mozzi/resources/">Resources</a></li>   -->
   <!-- <li><a href="/Mozzi/faq/">FAQ</a></li>  -->
   <!-- <li><a href="/Mozzi/blog/">Blog</a></li> -->
@@ -173,7 +173,7 @@ Fork it to contribute directly to future developments.</p>
 <p>Mozzi is a development of research into Mobile Sonification in the
 <a href="http://stephenbarrass.wordpress.com/tag/sweatsonics/">SweatSonics</a> project.</p>
 
-<h3>Features</h3>
+<h2>Features</h2>
 
 <ul>
 <li> 16384 Hz sample rate, with 8 bit or 14 bit audio output modes.</li>
@@ -185,7 +185,7 @@ Fork it to contribute directly to future developments.</p>
 </ul>
 
 
-<h3>Installation</h3>
+<h2>Installation</h2>
 
 <p>Download Mozzi from the top of this page and unzip it. It will probably have a
 name like &#8220;sensorium-Mozzi-2bee818&#8221;. Rename the unzipped folder &#8220;Mozzi&#8221;. Then,
@@ -196,7 +196,7 @@ down list, select the option to <strong>Add Library</strong>. Return to the <str
 You should now see the library at the bottom of the drop-down
 menu. It is ready to be used in your sketch.</p>
 
-<h3>Quick Start</h3>
+<h2>Quick Start</h2>
 
 <p>To hear Mozzi, connect a 3.5mm audio jack with the centre wire to the PWM output
 on Digital Pin 9* on Arduino, and the ground to the Ground on the Arduino.
@@ -207,7 +207,7 @@ Try some examples from the <strong>File > Examples > Mozzi</strong> menu.<br/>
 
 <p>For details about HIFI mode, read the <a href="http://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/">Mozzi core module documentation</a>.</p>
 
-<h3>Using Mozzi</h3>
+<h2>Using Mozzi</h2>
 
 <p>Here&#8217;s a template for an empty Mozzi sketch:</p>
 
@@ -248,21 +248,21 @@ Try some examples from the <strong>File > Examples > Mozzi</strong> menu.<br/>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h3>Documentation</h3>
+<h2>Documentation</h2>
 
 <p>There&#8217;s documentation in the doc folder in the Mozzi download and <a href="http://sensorium.github.com/Mozzi/doc/html/index.html">online</a>.<br/>
-There are hints and tips and more help on the Mozzi <a href="https://github.com/sensorium/Mozzi/wiki/Hints-and-Tips/">wiki</a>.<br/>
+There are <a href="https://github.com/sensorium/Mozzi/wiki/Hints-and-Tips-%28*-this-has-content%29">hints and tips</a> and more help on the Mozzi <a href="https://github.com/sensorium/Mozzi/wiki/_pages">wiki</a>.<br/>
 Start or look up a topic on the Mozzi <a href="https://groups.google.com/forum/#!forum/mozzi-users/">users forum</a>.<br/>
 Also, feel free to submit any issues on the <a href="https://github.com/sensorium/Mozzi/issues/">GitHub Mozzi site</a>.<br/>
 Look for code and usage changes <a href="https://github.com/sensorium/Mozzi/blob/master/NEWS.txt">here</a>.</p>
 
-<h3>Caveats</h3>
+<h2>Caveats</h2>
 
 <p>While Mozzi is running, the Arduino time functions <strong>millis()</strong>, <strong>micros()</strong>, <strong>delay()</strong>, and
 <strong>delayMicroseconds()</strong> are disabled. Instead, Mozzi provides <strong>mozziMicros()</strong> for timing, with 61us resolution (in STANDARD mode), and
 <strong>EventDelay()</strong> for scheduling.  Also, Mozzi can be paused (<strong>pauseMozzi()</strong>/<strong>unpauseMozzi()</strong>) if the Arduino timers are required for other things.</p>
 
-<h3>Contributions / Included Dependencies</h3>
+<h2>Contributions / Included Dependencies</h2>
 
 <p>Modified versions of the following libraries are included in the Mozzi download:</p>
 

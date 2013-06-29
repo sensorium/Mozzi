@@ -3,6 +3,10 @@ Mozzi sound synthesis library for Arduino
 NEWS
 
 
+Version 0.01.2d
+- testing
+
+
 Version 0.01.2c
 - removed Ead.cpp, condensed to Ead.h
 - mozzi_analog.h changed all xorshift96()>>16's to xorshift96() & 0xFFFF and all /256's to >>8

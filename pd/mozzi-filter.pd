@@ -1,0 +1,19 @@
+#N canvas 0 22 500 301 10;
+#X obj 79 98 adc~;
+#X obj 80 248 dac~;
+#X obj 80 224 *~ 5;
+#X obj 80 146 lop~ 4000;
+#X obj 80 173 lop~ 4000;
+#X obj 80 200 lop~ 4000;
+#X text 78 75 input from arduino via line in;
+#X text 76 271 out to audacity via jack \, soundflower or similar;
+#X text 77 17 Filter for Arduino/Mozzi to remove PWM artifacts when
+recording in another audio program \, so you can see a clearer version
+of what you're trying to synthesise.;
+#X obj 80 122 lop~ 4000;
+#X connect 0 0 9 0;
+#X connect 2 0 1 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 5 0 2 0;
+#X connect 9 0 3 0;

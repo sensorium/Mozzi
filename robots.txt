@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: 
-
-Sitemap: http://sensorium.github.com/Mozzi/sitemap.xml 

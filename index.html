@@ -163,15 +163,7 @@ Your browser does not support the audio element. </audio></p>
 <source type="audio/ogg" src="https://github.com/sensorium/Mozzi/blob/master/examples/_08_samples/Samples_Tables_Arrays/Samples_Tables_Arrays.ogg?raw=true" preload="auto"></source>
 Your browser does not support the audio element. </audio></p>
 
-<p>Mozzi is designed to be easy to use, open source and extendable.</p>
-
-<p>If you enjoy using Mozzi for a project, or have extended it, we would be
-pleased to hear about it and provide support wherever possible. Contribute
-suggestions, improvements and bug fixes to the Mozzi wiki on Github, or
-Fork it to contribute directly to future developments.</p>
-
-<p>Mozzi is a development of research into Mobile Sonification in the
-<a href="http://stephenbarrass.wordpress.com/tag/sweatsonics/">SweatSonics</a> project.</p>
+<hr />
 
 <h1>Features</h1>
 
@@ -182,8 +174,11 @@ Fork it to contribute directly to future developments.</p>
 <li> Fast ADC and other cpu-efficient code utilities to help keep audio running smoothly.</li>
 <li> Example sketches for easy modification.</li>
 <li> Readymade wavetables and a script to convert your own soundfiles for Mozzi.</li>
+<li> Mozzi is designed to be easy to use, open source and extendable.</li>
 </ul>
 
+
+<hr />
 
 <h1>Installation</h1>
 
@@ -196,6 +191,8 @@ down list, select the option to <strong>Add Library</strong>. Return to the <str
 You should now see the library at the bottom of the drop-down
 menu. It is ready to be used in your sketch.</p>
 
+<hr />
+
 <h1>Quick Start</h1>
 
 <p>To hear Mozzi, connect a 3.5mm audio jack with the centre wire to the PWM output
@@ -206,6 +203,8 @@ Try some examples from the <strong>File > Examples > Mozzi</strong> menu.<br/>
 * See the README for audio output pins on different boards.</p>
 
 <p>For details about HIFI mode, read the <a href="http://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/">Mozzi core module documentation</a>.</p>
+
+<hr />
 
 <h1>Using Mozzi</h1>
 
@@ -256,11 +255,25 @@ Start or look up a topic on the Mozzi <a href="https://groups.google.com/forum/#
 Also, feel free to submit any issues on the <a href="https://github.com/sensorium/Mozzi/issues/">GitHub Mozzi site</a>.<br/>
 Look for code and usage changes <a href="https://github.com/sensorium/Mozzi/blob/master/NEWS.txt">here</a>.</p>
 
+<hr />
+
 <h1>Caveats</h1>
 
 <p>While Mozzi is running, the Arduino time functions <strong>millis()</strong>, <strong>micros()</strong>, <strong>delay()</strong>, and
 <strong>delayMicroseconds()</strong> are disabled. Instead, Mozzi provides <strong>mozziMicros()</strong> for timing, with 61us resolution (in STANDARD mode), and
 <strong>EventDelay()</strong> for scheduling.  Also, Mozzi can be paused (<strong>pauseMozzi()</strong>/<strong>unpauseMozzi()</strong>) if the Arduino timers are required for other things.</p>
+
+<hr />
+
+<p>If you enjoy using Mozzi for a project, or have extended it, we would be
+pleased to hear about it and provide support wherever possible. Contribute
+suggestions, improvements and bug fixes to the Mozzi wiki on Github, or
+Fork it to contribute directly to future developments.</p>
+
+<p>Mozzi is a development of research into Mobile Sonification in the
+<a href="http://stephenbarrass.wordpress.com/tag/sweatsonics/">SweatSonics</a> project.</p>
+
+<hr />
 
 <h1>Contributions / Included Dependencies</h1>
 

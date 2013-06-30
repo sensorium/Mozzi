@@ -1,4 +1,4 @@
-Mozzi inherits the concepts of separate audio and control rate processes directly from Csound[7] and Pure Data[8].  The interface between Mozzi and the Arduino environment consists of four main functions.  These are startMozzi(), updateAudio(), updateControl() and audioHook(), visible in the “User space” section of Figure 1.  All four are required for a Mozzi sketch to compile.
+Mozzi inherits the concepts of separate audio and control rate processes directly from Csound[7] and Pure Data[8].  The interface between Mozzi and the Arduino environment consists of four main functions.  These are startMozzi(), updateAudio(), updateControl() and audioHook(), visible in the ‚ÄúUser space‚Äù section of Figure 1.  All four are required for a Mozzi sketch to compile.
 
 startMozzi(control_rate) goes in Arduino's setup(). It starts the control and audio output timers, given the requested control rate in Hz as a parameter.
 

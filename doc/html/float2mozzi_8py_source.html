@@ -107,15 +107,15 @@ $(document).ready(function(){initNavTree('float2mozzi_8py_source.html','');});
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">import</span> sys, array, os, textwrap, math</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    <span class="keywordflow">if</span> len(sys.argv) != 5:</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;        <span class="keywordflow">print</span> <span class="stringliteral">&#39;Usage: float2mozzi.py &lt;infilename outfilename tablename samplerate&gt;&#39;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;        <span class="keywordflow">print</span> <span class="stringliteral">&#39;Usage: float2mozzi.py &lt;infile outfile tablename samplerate&gt;&#39;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;        sys.exit(1)</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;[infilename, outfilename, tablename, samplerate] = sys.argv[1:]</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;[infile, outfile, tablename, samplerate] = sys.argv[1:]</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="code" href="namespacefloat2mozzi.html#ab3585ce6ced72bfd3d2497e93d9614c4">   11</a></span>&#160;<span class="keyword">def </span><a class="code" href="namespacefloat2mozzi.html#ab3585ce6ced72bfd3d2497e93d9614c4">float2mozzi</a>(infilename, outfilename, tablename,samplerate):</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    fin = open(os.path.expanduser(infilename), <span class="stringliteral">&quot;rb&quot;</span>)</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordflow">print</span> <span class="stringliteral">&quot;opened &quot;</span> + infilename</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    valuesetad = os.path.getsize(os.path.expanduser(infilename))/4 <span class="comment">## adjust for number format</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="code" href="namespacefloat2mozzi.html#ab3585ce6ced72bfd3d2497e93d9614c4">   11</a></span>&#160;<span class="keyword">def </span><a class="code" href="namespacefloat2mozzi.html#ab3585ce6ced72bfd3d2497e93d9614c4">float2mozzi</a>(infile, outfile, tablename,samplerate):</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    fin = open(os.path.expanduser(infile), <span class="stringliteral">&quot;rb&quot;</span>)</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordflow">print</span> <span class="stringliteral">&quot;opened &quot;</span> + infile</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    valuesetad = os.path.getsize(os.path.expanduser(infile))/4 <span class="comment">## adjust for number format</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="comment">##print valuesetad</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    valuesfromfile = array.array(<span class="stringliteral">&#39;f&#39;</span>)<span class="comment">## array of floats</span></div>
@@ -128,7 +128,7 @@ $(document).ready(function(){initNavTree('float2mozzi_8py_source.html','');});
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">##    print values[0]</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">##    print values[len(values)-1]</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">##    print len(values)</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="code" href="namespacefloat2mozzi.html#a7a708578a599e6c5c0a7487edea9f775">   27</a></span>&#160;    fout = open(os.path.expanduser(outfilename), <span class="stringliteral">&quot;w&quot;</span>)</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="code" href="namespacefloat2mozzi.html#a7a708578a599e6c5c0a7487edea9f775">   27</a></span>&#160;    fout = open(os.path.expanduser(outfile), <span class="stringliteral">&quot;w&quot;</span>)</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    fout.write(<span class="stringliteral">&#39;#ifndef &#39;</span> + tablename + <span class="stringliteral">&#39;_H_&#39;</span> + <span class="stringliteral">&#39;\n&#39;</span>)</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    fout.write(<span class="stringliteral">&#39;#define &#39;</span> + tablename + <span class="stringliteral">&#39;_H_&#39;</span> + <span class="stringliteral">&#39;\n \n&#39;</span>)</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    fout.write(<span class="stringliteral">&#39;#if ARDUINO &gt;= 100&#39;</span>+<span class="stringliteral">&#39;\n&#39;</span>)</div>
@@ -151,16 +151,16 @@ $(document).ready(function(){initNavTree('float2mozzi_8py_source.html','');});
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        fout.write(outstring)</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        fout.write(<span class="stringliteral">&#39;\n \n #endif /* &#39;</span> + tablename + <span class="stringliteral">&#39;_H_ */\n&#39;</span>)</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        fout.close()</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">print</span> <span class="stringliteral">&quot;wrote &quot;</span> + outfilename</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">print</span> <span class="stringliteral">&quot;wrote &quot;</span> + outfile</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<a class="code" href="namespacefloat2mozzi.html">float2mozzi</a>(infilename, outfilename, tablename, samplerate)</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<a class="code" href="namespacefloat2mozzi.html">float2mozzi</a>(infile, outfile, tablename, samplerate)</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_7837fde3ab9c1fb2fc5be7b717af8d79.html">python</a></li><li class="navelem"><b>float2mozzi.py</b></li>
-    <li class="footer">Generated on Sun Jun 30 2013 19:48:15 for Mozzi by
+    <li class="footer">Generated on Mon Jul 1 2013 00:19:19 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

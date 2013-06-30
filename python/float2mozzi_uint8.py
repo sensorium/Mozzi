@@ -2,10 +2,10 @@
 
 import sys, array, os, textwrap, math
 
-def float2mozzi_uint8(infilename, outfilename, tablename,samplerate):
-    fin = open(os.path.expanduser(infilename), "rb")
-    print "opened " + infilename
-    valuesetad = os.path.getsize(os.path.expanduser(infilename))/4 ## adjust for number format
+def float2mozzi_uint8(infile, outfile, tablename,samplerate):
+    fin = open(os.path.expanduser(infile), "rb")
+    print "opened " + infile
+    valuesetad = os.path.getsize(os.path.expanduser(infile))/4 ## adjust for number format
 
     ##print valuesetad
     valuesfromfile = array.array('f')## array of floats
@@ -18,7 +18,7 @@ def float2mozzi_uint8(infilename, outfilename, tablename,samplerate):
 ##    print values[0]
 ##    print values[len(values)-1]
 ##    print len(values)
-    fout = open(os.path.expanduser(outfilename), "w")
+    fout = open(os.path.expanduser(outfile), "w")
     fout.write('#ifndef ' + tablename + '_H_' + '\n')
     fout.write('#define ' + tablename + '_H_' + '\n \n')
     fout.write('#if ARDUINO >= 100'+'\n')
@@ -41,6 +41,6 @@ def float2mozzi_uint8(infilename, outfilename, tablename,samplerate):
         fout.write(outstring)
         fout.write('\n \n #endif /* ' + tablename + '_H_ */\n')
         fout.close()
-        print "wrote " + outfilename
+        print "wrote " + outfile
 
-float2mozzi_uint8(infilename, outfilename, tablename, samplerate)
+float2mozzi_uint8(infile, outfile, tablename, samplerate)

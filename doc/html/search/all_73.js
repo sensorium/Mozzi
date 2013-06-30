@@ -41,7 +41,6 @@ var searchData=
   ['setupfastanalogread',['setupFastAnalogRead',['../group__analog.html#gaf46803d06aa1d839192cc6125e39ff01',1,'setupFastAnalogRead():&#160;mozzi_analog.cpp'],['../group__analog.html#gaf46803d06aa1d839192cc6125e39ff01',1,'setupFastAnalogRead():&#160;mozzi_analog.cpp']]],
   ['sin1024_5fint8',['sin1024_int8',['../namespacesin1024__int8.html',1,'']]],
   ['sin8192_5fuint8',['sin8192_uint8',['../namespacesin8192__uint8.html',1,'']]],
-  ['sin_5flevels_5fint8',['sin_levels_int8',['../namespacesin__levels__int8.html',1,'']]],
   ['sin_5fmulti_5flevels_5fint8',['sin_multi_levels_int8',['../namespacesin__multi__levels__int8.html',1,'']]],
   ['smooth',['Smooth',['../class_smooth.html',1,'Smooth&lt; T &gt;'],['../class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26',1,'Smooth::Smooth()']]],
   ['standard',['STANDARD',['../group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1',1,'MozziGuts.h']]],

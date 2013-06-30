@@ -110,8 +110,8 @@ $(document).ready(function(){initNavTree('sin1024__int8_8py_source.html','');});
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">import</span> textwrap</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">import</span> math</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="code" href="namespacesin1024__int8.html#a707ae7fcd93169b46d51ba6235858502">    9</a></span>&#160;<span class="keyword">def </span><a class="code" href="namespacesin1024__int8.html#a707ae7fcd93169b46d51ba6235858502">generate</a>(outfilename, tablename, tablelength, samplerate):</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    fout = open(os.path.expanduser(outfilename), <span class="stringliteral">&quot;w&quot;</span>)</div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="code" href="namespacesin1024__int8.html#a707ae7fcd93169b46d51ba6235858502">    9</a></span>&#160;<span class="keyword">def </span><a class="code" href="namespacesin1024__int8.html#a707ae7fcd93169b46d51ba6235858502">generate</a>(outfile, tablename, tablelength, samplerate):</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    fout = open(os.path.expanduser(outfile), <span class="stringliteral">&quot;w&quot;</span>)</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    fout.write(<span class="stringliteral">&#39;#ifndef &#39;</span> + tablename + <span class="stringliteral">&#39;_H_&#39;</span> + <span class="stringliteral">&#39;\n&#39;</span>)</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    fout.write(<span class="stringliteral">&#39;#define &#39;</span> + tablename + <span class="stringliteral">&#39;_H_&#39;</span> + <span class="stringliteral">&#39;\n \n&#39;</span>)</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    fout.write(<span class="stringliteral">&#39;#if ARDUINO &gt;= 100&#39;</span>+<span class="stringliteral">&#39;\n&#39;</span>)</div>
@@ -139,7 +139,7 @@ $(document).ready(function(){initNavTree('sin1024__int8_8py_source.html','');});
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        outstring += <span class="stringliteral">&#39;\n }; \n \n #endif /* &#39;</span> + tablename + <span class="stringliteral">&#39;_H_ */\n&#39;</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        fout.write(outstring)</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        fout.close()</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordflow">print</span> <span class="stringliteral">&quot;wrote &quot;</span> + outfilename</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordflow">print</span> <span class="stringliteral">&quot;wrote &quot;</span> + outfile</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<a class="code" href="namespacesin1024__int8.html#a707ae7fcd93169b46d51ba6235858502">generate</a>(<span class="stringliteral">&quot;~/Desktop/sin1024_int8.h&quot;</span>, <span class="stringliteral">&quot;SIN1024&quot;</span>, 1024, <span class="stringliteral">&quot;1024&quot;</span>)</div>
 </div><!-- fragment --></div><!-- contents -->
@@ -148,7 +148,7 @@ $(document).ready(function(){initNavTree('sin1024__int8_8py_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_7837fde3ab9c1fb2fc5be7b717af8d79.html">python</a></li><li class="navelem"><b>sin1024_int8.py</b></li>
-    <li class="footer">Generated on Sun Jun 30 2013 19:48:15 for Mozzi by
+    <li class="footer">Generated on Mon Jul 1 2013 00:19:19 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

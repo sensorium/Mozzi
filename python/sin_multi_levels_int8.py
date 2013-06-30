@@ -5,8 +5,8 @@ import array,os,textwrap,math
 
 
 
-def generate(outfilename, tablename, tablelength, numtables):
-    fout = open(os.path.expanduser(outfilename), "w")
+def generate(outfile, tablename, tablelength, numtables):
+    fout = open(os.path.expanduser(outfile), "w")
 
 
     
@@ -42,7 +42,7 @@ def generate(outfilename, tablename, tablelength, numtables):
 
         fout.write('}; \n \n #endif /* ' + tablename + '_H_ */\n')
         fout.close()
-        print "wrote " + outfilename
+        print "wrote " + outfile
 
 
 generate("~/Desktop/sin_64level_int8.h", "SIN_64LEVEL", 256, 64)

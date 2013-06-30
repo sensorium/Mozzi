@@ -14,6 +14,6 @@ var searchData=
   ['float_5fto_5fq7n8',['float_to_Q7n8',['../group__mozzi__fixmath.html#ga2a28dc262b3e79e0f67e4089cccaab45',1,'mozzi_fixmath.h']]],
   ['float_5fto_5fq8n24',['float_to_Q8n24',['../group__mozzi__fixmath.html#ga33ecb8a512f7d4eff5047d4ad65f5423',1,'mozzi_fixmath.h']]],
   ['float_5fto_5fq8n8',['float_to_Q8n8',['../group__mozzi__fixmath.html#ga36132b5f8f95223749b410ca235eef16',1,'mozzi_fixmath.h']]],
-  ['fout',['fout',['../namespacechar2mozzi-old.html#af9ae0b8d82b0863b17b139f3cf82fcba',1,'char2mozzi-old.fout()'],['../namespacechar2mozzi.html#a49f9e73e4f3c413deccdd1b26634c8aa',1,'char2mozzi.fout()'],['../namespacefloat2mozzi.html#a7a708578a599e6c5c0a7487edea9f775',1,'float2mozzi.fout()'],['../namespacefloat2mozzi__uint8.html#afbf031e2d208adca1f9794f5985789c1',1,'float2mozzi_uint8.fout()']]],
+  ['fout',['fout',['../namespacechar2mozzi.html#a49f9e73e4f3c413deccdd1b26634c8aa',1,'char2mozzi.fout()'],['../namespacefloat2mozzi.html#a7a708578a599e6c5c0a7487edea9f775',1,'float2mozzi.fout()'],['../namespacefloat2mozzi__uint8.html#afbf031e2d208adca1f9794f5985789c1',1,'float2mozzi_uint8.fout()']]],
   ['fast_20random_20number_20generator_20functions',['Fast random number generator functions',['../group__random.html',1,'']]]
 ];

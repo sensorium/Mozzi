@@ -6,8 +6,8 @@ import os
 import textwrap
 import math
 
-def generate(outfilename, tablename, tablelength, samplerate):
-    fout = open(os.path.expanduser(outfilename), "w")
+def generate(outfile, tablename, tablelength, samplerate):
+    fout = open(os.path.expanduser(outfile), "w")
     fout.write('#ifndef ' + tablename + '_H_' + '\n')
     fout.write('#define ' + tablename + '_H_' + '\n \n')
     fout.write('#if ARDUINO >= 100'+'\n')
@@ -38,7 +38,7 @@ def generate(outfilename, tablename, tablelength, samplerate):
         outstring += '\n }; \n \n #endif /* ' + tablename + '_H_ */\n'
         fout.write(outstring)
         fout.close()
-        print "wrote " + outfilename
+        print "wrote " + outfile
 
 ## generate("~/Desktop/sin1024_uint8.h", "sin1024_uint", 1024, "1024")
 generate("~/Desktop/sin8192_uint8.h", "sin8192_uint", 8192, "8192")

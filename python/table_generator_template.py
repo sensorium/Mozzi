@@ -2,8 +2,8 @@ import array
 import os
 import textwrap
 
-def generate(outfilename, tablename, tablelength, samplerate):
-    fout = open(os.path.expanduser(outfilename), "w")
+def generate(outfile, tablename, tablelength, samplerate):
+    fout = open(os.path.expanduser(outfile), "w")
     fout.write('#ifndef ' + tablename + '_H_' + '\n')
     fout.write('#define ' + tablename + '_H_' + '\n \n')
     fout.write('#if ARDUINO >= 100'+'\n')
@@ -24,6 +24,6 @@ def generate(outfilename, tablename, tablelength, samplerate):
         fout.write(outstring)
         fout.write('\n \n #endif /* ' + tablename + '_H_ */\n')
         fout.close()
-        print "wrote " + outfilename
+        print "wrote " + outfile
 
 generate("~/Desktop/phasor8192_uint8.h", "phasor8192", 8192, "8192")

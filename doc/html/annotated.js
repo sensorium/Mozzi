@@ -1,13 +1,11 @@
 var annotated =
 [
     [ "char2mozzi", "namespacechar2mozzi.html", null ],
-    [ "char2mozzi-old", "namespacechar2mozzi-old.html", null ],
     [ "chebyshev_int8", "namespacechebyshev__int8.html", null ],
     [ "float2mozzi", "namespacefloat2mozzi.html", null ],
     [ "float2mozzi_uint8", "namespacefloat2mozzi__uint8.html", null ],
     [ "sin1024_int8", "namespacesin1024__int8.html", null ],
     [ "sin8192_uint8", "namespacesin8192__uint8.html", null ],
-    [ "sin_levels_int8", "namespacesin__levels__int8.html", null ],
     [ "sin_multi_levels_int8", "namespacesin__multi__levels__int8.html", null ],
     [ "table_generator_template", "namespacetable__generator__template.html", null ],
     [ "ADSR", "class_a_d_s_r.html", "class_a_d_s_r" ],

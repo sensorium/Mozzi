@@ -118,7 +118,7 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a49f9e73e4f3c413deccdd1b26634c8aa"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacechar2mozzi.html#a49f9e73e4f3c413deccdd1b26634c8aa">fout</a> = open(os.path.expanduser(outfilename), &quot;w&quot;)</td></tr>
+<tr class="memitem:a49f9e73e4f3c413deccdd1b26634c8aa"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacechar2mozzi.html#a49f9e73e4f3c413deccdd1b26634c8aa">fout</a> = open(os.path.expanduser(outfile), &quot;w&quot;)</td></tr>
 <tr class="memdesc:a49f9e73e4f3c413deccdd1b26634c8aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">print values[0] print values[len(values)-1] print len(values)  <a href="#a49f9e73e4f3c413deccdd1b26634c8aa">More...</a><br/></td></tr>
 <tr class="separator:a49f9e73e4f3c413deccdd1b26634c8aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7855d4d6cf842c9331da1f53c65bf133"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacechar2mozzi.html#a7855d4d6cf842c9331da1f53c65bf133">outstring</a> = 'const char __attribute__((progmem)) '</td></tr>
@@ -134,13 +134,13 @@ Variables</h2></td></tr>
           <td class="memname">def char2mozzi.char2mozzi </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>infilename</em>, </td>
+          <td class="paramname"><em>infile</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>outfilename</em>, </td>
+          <td class="paramname"><em>outfile</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -161,8 +161,36 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<pre class="fragment">char2mozzi.py converts raw 8 bit sound data to wavetables for Mozzi.
 
-<p>Definition at line <a class="el" href="char2mozzi_8py_source.html#l00037">37</a> of file <a class="el" href="char2mozzi_8py_source.html">char2mozzi.py</a>.</p>
+Usage: python char2mozzi.py &lt;infile outfile "tablename" "samplerate"&gt;
+
+Using Audacity to prepare raw sound files for converting:
+
+Set your Audacity project sample rate:
+
+For generated waveforms like sine or sawtooth, set the project
+rate to the size of the wavetable you wish to create, which must
+be a power of two (eg. 8192), and set the selection format
+(beneath the editing window) to samples. Then you can generate
+and save 1 second of a waveform and it will fit your table
+length.
+
+For a recorded audio sample, set the project rate to the
+Mozzi AUDIO_RATE (16384 in the current version). 
+Samples can be any length, as long as they fit in your Arduino.
+
+Save by exporting with the format set to "Other uncompressed formats",
+options set to "RAW(headerless)" and "Encoding 8 bit signed PCM".
+
+Now use the file you just exported, as the "infile" to convert.
+
+Args:
+        infile: The file to convert.
+        outfile:                The file to save as output.
+        tablename:              The name to give the table of converted data in the new file.
+        samplerate:             The samplerate the sound was recorded at.  Choose what make sense for you, if it's not a normal recorded sample.</pre> 
+<p>Definition at line <a class="el" href="char2mozzi_8py_source.html#l00012">12</a> of file <a class="el" href="char2mozzi_8py_source.html">char2mozzi.py</a>.</p>
 
 </div>
 </div>
@@ -172,12 +200,12 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">tuple char2mozzi.fout = open(os.path.expanduser(outfilename), &quot;w&quot;)</td>
+          <td class="memname">tuple char2mozzi.fout = open(os.path.expanduser(outfile), &quot;w&quot;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="char2mozzi_8py_source.html#l00052">52</a> of file <a class="el" href="char2mozzi_8py_source.html">char2mozzi.py</a>.</p>
+<p>Definition at line <a class="el" href="char2mozzi_8py_source.html#l00060">60</a> of file <a class="el" href="char2mozzi_8py_source.html">char2mozzi.py</a>.</p>
 
 </div>
 </div>
@@ -191,7 +219,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="char2mozzi_8py_source.html#l00063">63</a> of file <a class="el" href="char2mozzi_8py_source.html">char2mozzi.py</a>.</p>
+<p>Definition at line <a class="el" href="char2mozzi_8py_source.html#l00071">71</a> of file <a class="el" href="char2mozzi_8py_source.html">char2mozzi.py</a>.</p>
 
 </div>
 </div>
@@ -201,7 +229,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacechar2mozzi.html">char2mozzi</a></li>
-    <li class="footer">Generated on Sun Jun 30 2013 19:48:17 for Mozzi by
+    <li class="footer">Generated on Mon Jul 1 2013 00:19:19 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

@@ -2,21 +2,39 @@
 
 import array,os,textwrap,math
 
-##resources:
-##http://www.obiwannabe.co.uk/html/music/6SS/six-waveshaper.html
-##http://mathworld.wolfram.com/ChebyshevPolynomialoftheFirstKind.html
-##The first few Chebyshev polynomials of the first kind are
-##T_0(x)	=	1
-##T_1(x)	=	x
-##T_2(x)	=	2x^2-1
-##T_3(x)	=	4x^3-3x
-##T_4(x)	=	8x^4-8x^2+1
-##T_5(x)	=	16x^5-20x^3+5x
-##T_6(x)	=	32x^6-48x^4+18x^2-1
 
-
-def generate(outfilename, tablename, tablelength, curvenum):
-    fout = open(os.path.expanduser(outfilename), "w")
+def chebyTable(outfile, tablename, tablelength, curvenum):
+	
+	"""
+	Generates chebyshev polynomial curve tables for WaveShaper.
+	
+	Args:
+        outfile:   	The file to save as output.
+        tablename:	The name to give the table of converted data in the new file.
+        tablelength:	Use a power of two.
+        curvenum:  	The chebyshev polynomial curve number to chebyTable.
+	
+	Examples:
+		chebyTable("~/Desktop/waveshaper_chebyshev_3rd_256_int8.h", "CHEBYSHEV_3RD_256", 256, 3)
+		chebyTable("~/Desktop/waveshaper_chebyshev_4th_256_int8.h", "CHEBYSHEV_4TH_256", 256, 4)
+		chebyTable("~/Desktop/waveshaper_chebyshev_5th_256_int8.h", "CHEBYSHEV_5TH_256", 256, 5)
+		chebyTable("~/Desktop/waveshaper_chebyshev_6th_256_int8.h", "CHEBYSHEV_6TH_256", 256, 6)
+        
+	Resources:
+		http://www.obiwannabe.co.uk/html/music/6SS/six-waveshaper.html
+		http://mathworld.wolfram.com/ChebyshevPolynomialoftheFirstKind.html
+		The first few Chebyshev polynomials of the first kind are
+		T_0(x)	=	1
+		T_1(x)	=	x
+		T_2(x)	=	2x^2-1
+		T_3(x)	=	4x^3-3x
+		T_4(x)	=	8x^4-8x^2+1
+		T_5(x)	=	16x^5-20x^3+5x
+		T_6(x)	=	32x^6-48x^4+18x^2-1
+		
+	"""
+	
+    fout = open(os.path.expanduser(outfile), "w")
     fout.write('#ifndef ' + tablename + '_H_' + '\n')
     fout.write('#define ' + tablename + '_H_' + '\n \n')
     fout.write('#if ARDUINO >= 100'+'\n')
@@ -50,10 +68,5 @@ def generate(outfilename, tablename, tablelength, curvenum):
         fout.write(outstring)
         fout.write('\n \n #endif /* ' + tablename + '_H_ */\n')
         fout.close()
-        print "wrote " + outfilename
+        print "wrote " + outfile
 
-
-generate("~/Desktop/waveshaper_chebyshev_3rd_256_int8.h", "CHEBYSHEV_3RD_256", 256, 3)
-generate("~/Desktop/waveshaper_chebyshev_4th_256_int8.h", "CHEBYSHEV_4TH_256", 256, 4)
-generate("~/Desktop/waveshaper_chebyshev_5th_256_int8.h", "CHEBYSHEV_5TH_256", 256, 5)
-generate("~/Desktop/waveshaper_chebyshev_6th_256_int8.h", "CHEBYSHEV_6TH_256", 256, 6)

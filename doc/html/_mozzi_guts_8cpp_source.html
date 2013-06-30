@@ -88,7 +88,7 @@ $(document).ready(function(){initNavTree('_mozzi_guts_8cpp_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -283,7 +283,7 @@ $(document).ready(function(){initNavTree('_mozzi_guts_8cpp_source.html','');});
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                                backupPreMozziTimer1();</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                                pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);           <span class="comment">// set pin to output for audio</span></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                                Timer1.initialize(1000000UL/<a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298" title="AUDIO_RATE can be #defined as 16384 or 32768 Hertz in Mozzi/mozzi_config.h. ">AUDIO_RATE</a>, PHASE_FREQ_CORRECT);                    <span class="comment">// set period, phase and frequency correct</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                                Timer1.initialize(1000000UL/<a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298" title="Holds the audio rate setting. ">AUDIO_RATE</a>, PHASE_FREQ_CORRECT);                    <span class="comment">// set period, phase and frequency correct</span></div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                                Timer1.pwm(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);                    <span class="comment">// pwm pin, 50% of Mozzi&#39;s duty cycle, ie. 0 signal</span></div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                                TIMSK1 = _BV(TOIE1);            <span class="comment">// Overflow Interrupt Enable (when not using Timer1.attachInterrupt())</span></div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;</div>
@@ -358,7 +358,7 @@ $(document).ready(function(){initNavTree('_mozzi_guts_8cpp_source.html','');});
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                                <span class="comment">// audio output interrupt on timer 2 (or 4 on ATMEGA32U4 cpu), sets the pwm levels of timer 1</span></div>
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                                FrequencyTimer2::setPeriod(2000000UL/<a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298" title="AUDIO_RATE can be #defined as 16384 or 32768 Hertz in Mozzi/mozzi_config.h. ">AUDIO_RATE</a>); <span class="comment">// gives a period half of what&#39;s provided, for some reason</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                                FrequencyTimer2::setPeriod(2000000UL/<a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298" title="Holds the audio rate setting. ">AUDIO_RATE</a>); <span class="comment">// gives a period half of what&#39;s provided, for some reason</span></div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                                FrequencyTimer2::setOnOverflow(dummy);</div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                                FrequencyTimer2::enable();</div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;</div>
@@ -539,7 +539,7 @@ $(document).ready(function(){initNavTree('_mozzi_guts_8cpp_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>MozziGuts.cpp</b></li>
-    <li class="footer">Generated on Thu Jun 27 2013 23:51:40 for Mozzi by
+    <li class="footer">Generated on Sun Jun 30 2013 19:48:14 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

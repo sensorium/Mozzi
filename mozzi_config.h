@@ -7,11 +7,9 @@ Edit this file if you want to choose your own configuration options.
 
 
 /**  @ingroup core
+AUDIO_MODE holds the audio mode setting.
 Select STANDARD or HIFI audio output mode in the Mozzi/mozzi_config.h file with
-\#define AUDIO_MODE STANDARD
-or 
-\#define AUDIO_MODE HIFI
-
+\#define AUDIO_MODE STANDARD or \#define AUDIO_MODE HIFI
 In Mozzi/config.h, comment one of these options in and the other out to set the audio mode.
 */
 
@@ -20,6 +18,7 @@ In Mozzi/config.h, comment one of these options in and the other out to set the 
 
 
 /** @ingroup core
+Holds the audio rate setting.
 AUDIO_RATE can be \#defined as 16384 or 32768 Hertz in Mozzi/mozzi_config.h. 
 
 Mozzi's original audio mode, now called STANDARD, uses 16384 Hz, chosen as a
@@ -59,6 +58,7 @@ Mozzi-users list has a thread on this.
 
 
 /** @ingroup core
+Whether or not to use audio input.
 Put \#define USE_AUDIO_INPUT true in Mozzi/mozzi_config.h to enable audio input on analog pin 0,
 otherwise make it false, to save resources.  When audio input is used, don't read 
 other analog channels as they'll interfere with the audio sampling.

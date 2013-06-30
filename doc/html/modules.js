@@ -5,6 +5,6 @@ var modules =
     [ "Midi note number to frequency conversions", "group__midi.html", "group__midi" ],
     [ "Fast random number generator functions", "group__random.html", "group__random" ],
     [ "Mozzi utility functions", "group__util.html", "group__util" ],
-    [ "Soundtables", "group___soundtables.html", null ],
+    [ "Look-up-tables and python scripts to generate tables or convert sounds.", "group__soundtables.html", null ],
     [ "Mozzi core definitions and functions", "group__core.html", "group__core" ]
 ];

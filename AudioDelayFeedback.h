@@ -1,3 +1,25 @@
+/*
+ * AudioDelayFeedback.h
+ *
+ * Copyright 2012 Tim Barrass.
+ *
+ * This file is part of Mozzi.
+ *
+ * Mozzi is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Mozzi is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Mozzi.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+ 
 #ifndef AUDIODELAY_FEEDBACK_H_
 #define AUDIODELAY_FEEDBACK_H_
 
@@ -12,7 +34,8 @@
 enum interpolation_types {LINEAR,ALLPASS};
 
 
-/** Audio delay line with feedback for comb filter, flange, chorus and short echo effects.
+/** 
+@brief Audio delay line with feedback for comb filter, flange, chorus and short echo effects.
 @tparam NUM_BUFFER_SAMPLES is the length of the delay buffer in samples, and should be a
 power of two. The maximum delay length which will fit in an atmega328 is half
 that of a plain AudioDelay object, in this case 256 cells, or about 15
@@ -348,12 +371,10 @@ private:
 		_coeff = float_to_Q15n16((1.f-alpha_)/(1.f+alpha_));
 	}
 
-	
-
-	// /** Retrieve the signal in the delay line at the position delaytime_cells.
+	//  Retrieve the signal in the delay line at the position delaytime_cells.
 	// It doesn't change the stored internal value of _delaytime_cells or feedback the output to the input.
-	// @param delaytime_cells indicates the delay time in terms of cells in the delay buffer.
-	// */
+	// param delaytime_cells indicates the delay time in terms of cells in the delay buffer.
+	// 
 	// inline
 	// int read(unsigned int delaytime_cells, Int2Type<LINEAR>)
 	// {

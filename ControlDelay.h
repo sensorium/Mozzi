@@ -28,7 +28,7 @@
 /** Control-rate delay line for delaying control signals.
 For example, this could be used to produce echo-like effects using multiple
 instances of the same voice, when AudioDelay would be too short for an actual
-audio echo.  See AudioDelay for documentation, as this is just a wrapper of the same code.
+audio echo.  This is in fact just a wrapper of the AudioDelay code.
 @tparam  NUM_BUFFER_SAMPLES is the length of the delay buffer in samples.  This should
 be a power of two.
 @tparam the type of numbers to use for the signal in the delay.  The default is char, but int could be useful

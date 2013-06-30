@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('class_phasor.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -145,7 +145,6 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><h3>template&lt;unsigned int UPDATE_RATE&gt;<br/>
 class Phasor&lt; UPDATE_RATE &gt;</h3>
 
-<p><a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency. ">Phasor</a> repeatedly generates a high resolution ramp at a variable frequency. </p>
 <p>The output of <a class="el" href="class_phasor.html#a08ab94aeb466450173bd486fbf8eb823" title="Increments one step along the phase. ">Phasor.next()</a> is an unsigned number between 0 and 4294967295, the maximum that can be expressed by an unsigned long. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -178,8 +177,6 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Constructor. </p>
 <p>"Phasor &lt;AUDIO_RATE&gt; myphasor;" makes a <a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency. ">Phasor</a> which updates at AUDIO_RATE. </p>
 
 <p>Definition at line <a class="el" href="_phasor_8h_source.html#l00054">54</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
@@ -209,8 +206,6 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Increments one step along the phase. </p>
 <dl class="section return"><dt>Returns</dt><dd>the next value. </dd></dl>
 
 <p>Definition at line <a class="el" href="_phasor_8h_source.html#l00062">62</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
@@ -240,9 +235,6 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><pre class="fragment">                phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding
-</pre><p> between frequencies. </p>
 <p>Instead of recalculating the phase increment for each frequency in between, you can just calculate the phase increment for each end frequency with <a class="el" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230" title="                phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding  betw...">phaseIncFromFreq()</a>, then use a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step. ">Line</a> to interpolate on the fly and use <a class="el" href="class_phasor.html#aa3d62bdf762247b2523c0a625caeedd7" title="Set a specific phase increment. ">setPhaseInc()</a> to set the phase increment at each step. (Note: I should really profile this with the oscilloscope to see if it's worth the extra confusion!) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -279,8 +271,6 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Set the current value of the phasor. </p>
 <p>The <a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency. ">Phasor</a> will continue incrementing from this value using any previously calculated step size. </p>
 
 <p>Definition at line <a class="el" href="_phasor_8h_source.html#l00075">75</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
@@ -310,8 +300,6 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Set the <a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency. ">Phasor</a> frequency with an unsigned int. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">frequency</td><td>is how many times per second to count from 0 to the maximum unsigned long value 4294967295. </td></tr>
@@ -347,8 +335,6 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Set the <a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency. ">Phasor</a> frequency with a float. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">frequency</td><td>is how many times per second to count from 0 to the maximum unsigned long value 4294967295. </td></tr>
@@ -383,8 +369,6 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Set a specific phase increment. </p>
 <p>See <a class="el" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230" title="                phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding  betw...">phaseIncFromFreq()</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -406,7 +390,7 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_phasor.html">Phasor</a></li>
-    <li class="footer">Generated on Thu Jun 27 2013 23:51:40 for Mozzi by
+    <li class="footer">Generated on Sun Jun 30 2013 19:48:16 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

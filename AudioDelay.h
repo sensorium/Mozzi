@@ -24,11 +24,12 @@
 #define AUDIODELAY_H_
 
 
-/** Audio delay line for comb filter, flange, chorus and short echo effects.
+/** 
+@brief Audio delay line for comb filter, flange, chorus and short echo effects.
 @tparam  NUM_BUFFER_SAMPLES is the length of the delay buffer in samples.  This should
 be a power of two. The largest delay you'll fit in an atmega328 will be 512
 cells, which at 16384 Hz sample rate is 31 milliseconds. More of a flanger or a
-doubler than an echo. THe amount of memory available for delays on other chips will vary.
+doubler than an echo. The amount of memory available for delays on other chips will vary.
 AudioDelay() doesn't have feedback.  If you want feedback, use AudioDelayFeedback().
 @tparam the type of numbers to use for the signal in the delay.  The default is char, but int could be useful
 when adding manual feedback.  When using int, the input should be limited to 15 bits width, ie. -16384 to 16383.
@@ -53,7 +54,7 @@ public:
 	
 	
 	/** Constructor.
-	@param delay time expressed in cells.  
+	@param delaytime_cells delay time expressed in cells.  
 	For example, 128 cells delay at AUDIO_RATE would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms
 	Put another way, num_cells = delay_seconds * AUDIO_RATE.
 	*/
@@ -128,12 +129,13 @@ public:
 	// {
 		// delay_array[_write_pos] = input;
 	// }
-	
+
 };
 
 /**
 @example _09_delays/AudioDelay/AudioDelay.ino
 This is an example of how to use the AudioDelay class.
 */
+
 #endif        //  #ifndef AUDIODELAY_H_
 

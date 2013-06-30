@@ -50,9 +50,9 @@ This uses a stored array of primes, which takes about 2.5k of progmem.
 @param n the maximum index in the series of primes up to which numbers will be returned.  
 The maximum is 1128.
 @return random prime number between 0 and n-1th index in the series of primes.
-@note This isn't included automatically with mozzi_utils.h, 
+@note This isn't included automatically with mozzi_rand.h, 
 because it takes up memory which might be needed for other things.
-You need to "#include <primes.h>" separately to mozzi_utils.h.
+You need to "#include <primes.h>" separately to mozzi_rand.h.
 */
 inline
 unsigned int randPrime(unsigned int n){

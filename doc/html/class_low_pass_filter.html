@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('class_low_pass_filter.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -114,13 +114,12 @@ $(document).ready(function(){initNavTree('class_low_pass_filter.html','');});
 <div class="contents">
 
 <p>A resonant low pass filter for audio signals.  
- <a href="class_low_pass_filter.html#details">More...</a></p>
+</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6d6538d3dfe603cce18711c990b85a03"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6d6538d3dfe603cce18711c990b85a03"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_low_pass_filter.html#a6d6538d3dfe603cce18711c990b85a03">LowPassFilter</a> ()</td></tr>
-<tr class="memdesc:a6d6538d3dfe603cce18711c990b85a03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br/></td></tr>
+<tr class="memitem:a6d6538d3dfe603cce18711c990b85a03"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_low_pass_filter.html#a6d6538d3dfe603cce18711c990b85a03">LowPassFilter</a> ()</td></tr>
+<tr class="memdesc:a6d6538d3dfe603cce18711c990b85a03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a6d6538d3dfe603cce18711c990b85a03">More...</a><br/></td></tr>
 <tr class="separator:a6d6538d3dfe603cce18711c990b85a03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7958bf53ac1c24b5653861ed521ed14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_low_pass_filter.html#ad7958bf53ac1c24b5653861ed521ed14">setCutoffFreq</a> (unsigned char cutoff)</td></tr>
 <tr class="memdesc:ad7958bf53ac1c24b5653861ed521ed14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the cut off frequency,.  <a href="#ad7958bf53ac1c24b5653861ed521ed14">More...</a><br/></td></tr>
@@ -133,10 +132,35 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a393f154ec729419747c5dd630327b852"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A resonant low pass filter for audio signals. </p>
-
+<div class="textblock">
 <p>Definition at line <a class="el" href="_low_pass_filter_8h_source.html#l00048">48</a> of file <a class="el" href="_low_pass_filter_8h_source.html">LowPassFilter.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a6d6538d3dfe603cce18711c990b85a03"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">LowPassFilter::LowPassFilter </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_low_pass_filter_8h_source.html#l00056">56</a> of file <a class="el" href="_low_pass_filter_8h_source.html">LowPassFilter.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a393f154ec729419747c5dd630327b852"></a>
 <div class="memitem">
 <div class="memproto">
@@ -158,8 +182,6 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Calculate the next sample, given an input signal. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">in</td><td>the signal input. </td></tr>
@@ -194,8 +216,6 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Set the cut off frequency,. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cutoff</td><td>use the range 0-255 to represent 0-8192 Hz (AUDIO_RATE/2). Be careful of distortion at the lower end, especially with high resonance. </td></tr>
@@ -228,8 +248,6 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Set the resonance. </p>
 <p>If you hear unwanted distortion, back off the resonance. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -251,7 +269,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_low_pass_filter.html">LowPassFilter</a></li>
-    <li class="footer">Generated on Thu Jun 27 2013 23:51:40 for Mozzi by
+    <li class="footer">Generated on Sun Jun 30 2013 19:48:16 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

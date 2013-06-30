@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['float2mozzi',['float2mozzi',['../namespacefloat2mozzi.html#ab3585ce6ced72bfd3d2497e93d9614c4',1,'float2mozzi']]],
+  ['float2mozzi_5fuint8',['float2mozzi_uint8',['../namespacefloat2mozzi__uint8.html#a6ec919908e7b23451963c2c355cde68e',1,'float2mozzi_uint8']]],
   ['float_5fto_5fq0n16',['float_to_Q0n16',['../group__mozzi__fixmath.html#ga4d20591828f0189963f1190f7197ba68',1,'mozzi_fixmath.h']]],
   ['float_5fto_5fq0n7',['float_to_Q0n7',['../group__mozzi__fixmath.html#ga1e0eab490ffe9a47fd78bcc449e3b995',1,'mozzi_fixmath.h']]],
   ['float_5fto_5fq0n8',['float_to_Q0n8',['../group__mozzi__fixmath.html#ga00e21c6b9d75ed26cd3bf1b9f4f9482e',1,'mozzi_fixmath.h']]],

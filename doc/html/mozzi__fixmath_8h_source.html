@@ -88,7 +88,7 @@ $(document).ready(function(){initNavTree('mozzi__fixmath_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -540,7 +540,7 @@ $(document).ready(function(){initNavTree('mozzi__fixmath_8h_source.html','');});
 <div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;</div>
 <div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;</div>
 <div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;<span class="comment">// dangerous overflow-prone  int power function</span></div>
-<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;<span class="keywordtype">int</span> ipow(<span class="keywordtype">int</span> base, <span class="keywordtype">int</span> exp);</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__mozzi__fixmath.html#ga5daaf7f37651029de2abf8ad375b6850">ipow</a>(<span class="keywordtype">int</span> base, <span class="keywordtype">int</span> exp);</div>
 <div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;</div>
 <div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;</div>
 <div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;</div>
@@ -548,9 +548,9 @@ $(document).ready(function(){initNavTree('mozzi__fixmath_8h_source.html','');});
 <div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;<a class="code" href="group__mozzi__fixmath.html#ga20ef71528ee7583bbf60586448b12caf" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> <a class="code" href="group__mozzi__fixmath.html#ga2e1d9d0fe4ba7edb9830efb7887c36bd" title="This is a fast replacement for pow(2,x), where x is a fractional number in Q8n8  fixed-point exponent...">Q16n16_pow2</a>(<a class="code" href="group__mozzi__fixmath.html#ga5ae84c3845de6126c16295e05599c163" title="unsigned fractional number using 8 integer bits and 8 fractional bits, represents 0 to 255...">Q8n8</a> exponent);</div>
 <div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;</div>
 <div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;</div>
-<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> byteMod(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> n, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> d);</div>
-<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> byteDiv(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> n, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> d);</div>
-<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> byteRnd(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> min, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> max);</div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="group__mozzi__fixmath.html#ga92853d82934fc5f363a2b005159f497e">byteMod</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> n, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> d);</div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="group__mozzi__fixmath.html#ga2fd5059a2a33bb5af84e4aa1913164f0">byteDiv</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> n, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> d);</div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="group__mozzi__fixmath.html#gabf67580ab264b89b6c38438ddbdf1839">byteRnd</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> min, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> max);</div>
 <div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;</div>
 <div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* FIXEDMATH_H_ */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -559,7 +559,7 @@ $(document).ready(function(){initNavTree('mozzi__fixmath_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>mozzi_fixmath.h</b></li>
-    <li class="footer">Generated on Thu Jun 27 2013 23:51:40 for Mozzi by
+    <li class="footer">Generated on Sun Jun 30 2013 19:48:14 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

@@ -88,7 +88,7 @@ $(document).ready(function(){initNavTree('mozzi__fixmath_8cpp_source.html','');}
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -117,7 +117,7 @@ $(document).ready(function(){initNavTree('mozzi__fixmath_8cpp_source.html','');}
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//Here is some ready to use fast integer 1 byte wide math functions (from ht1632c library).</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">/* fast integer (1 byte) modulus */</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;byte byteMod(byte n, byte d)</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;byte <a class="code" href="group__mozzi__fixmath.html#ga92853d82934fc5f363a2b005159f497e">byteMod</a>(byte n, byte d)</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;                <span class="keywordflow">while</span>(n &gt;= d)</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;                                n -= d;</div>
@@ -125,7 +125,7 @@ $(document).ready(function(){initNavTree('mozzi__fixmath_8cpp_source.html','');}
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">/* fast integer (1 byte) division */</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;byte byteDiv(byte n, byte d)</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;byte <a class="code" href="group__mozzi__fixmath.html#ga2fd5059a2a33bb5af84e4aa1913164f0">byteDiv</a>(byte n, byte d)</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                byte q = 0;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                <span class="keywordflow">while</span>(n &gt;= d)</div>
@@ -137,11 +137,11 @@ $(document).ready(function(){initNavTree('mozzi__fixmath_8cpp_source.html','');}
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">/* fast integer (1 byte) PRNG */</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;byte byteRnd(byte min, byte max)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;byte <a class="code" href="group__mozzi__fixmath.html#gabf67580ab264b89b6c38438ddbdf1839">byteRnd</a>(byte min, byte max)</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                <span class="keyword">static</span> byte seed;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                seed = (21 * seed + 21);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                <span class="keywordflow">return</span> min + byteMod(seed, --max);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                <span class="keywordflow">return</span> min + <a class="code" href="group__mozzi__fixmath.html#ga92853d82934fc5f363a2b005159f497e">byteMod</a>(seed, --max);</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">//WARNING: don&#39;t use this byteRnd() function for cryptography!</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
@@ -151,7 +151,7 @@ $(document).ready(function(){initNavTree('mozzi__fixmath_8cpp_source.html','');}
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">// Exponentiation by squaring.</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">// from http://stackoverflow.com/questions/101439/the-most-efficient-way-to-implement-an-integer-based-power-function-powint-int</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordtype">int</span> ipow(<span class="keywordtype">int</span> base, <span class="keywordtype">int</span> exp)</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="code" href="group__mozzi__fixmath.html#ga5daaf7f37651029de2abf8ad375b6850">   50</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__mozzi__fixmath.html#ga5daaf7f37651029de2abf8ad375b6850">ipow</a>(<span class="keywordtype">int</span> base, <span class="keywordtype">int</span> exp)</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;{</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                <span class="keywordtype">int</span> result = 1;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                <span class="keywordflow">while</span> (exp)</div>
@@ -198,7 +198,7 @@ $(document).ready(function(){initNavTree('mozzi__fixmath_8cpp_source.html','');}
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>mozzi_fixmath.cpp</b></li>
-    <li class="footer">Generated on Thu Jun 27 2013 23:51:40 for Mozzi by
+    <li class="footer">Generated on Sun Jun 30 2013 19:48:14 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

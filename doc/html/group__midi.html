@@ -88,7 +88,7 @@ $(document).ready(function(){initNavTree('group__midi.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -124,7 +124,6 @@ Functions</h2></td></tr>
 <tr class="separator:ga3d63d1bf049f14ba73a21475d3aa339c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Useful if you like playing notes in tune. </p>
 <h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="gafacb8849f96270644ea79184fde7db37"></a>
 <div class="memitem">
@@ -139,8 +138,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Converts midi note number to frequency. </p>
 <p>Caution: this can take up to 400 microseconds to run. It can seriously mess up the audio output if you use it in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> or <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code. ">updateAudio()</a>. This is a good choice in setup(), or where you need precise midi-pitch conversion and aren't doing much other audio calculation. </p>
 <dl class="section note"><dt>Note</dt><dd>Beware this returns an invalid result for midi note 0. </dd>
 <dd>
@@ -171,8 +168,6 @@ Timing: ~350 us </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>A good choice if you're using whole note values, want speed and simplicity, and accuracy isn't important. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">midi_note</td><td>a midi note number. </td></tr>
@@ -198,8 +193,6 @@ Timing: ~350 us </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>A good choice if you're using whole note values, want speed and simplicity, and accuracy isn't important. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">midi_note</td><td>a midi note number. </td></tr>
@@ -225,8 +218,6 @@ Timing: ~350 us </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Converts midi note number to frequency with speed and accuracy. </p>
 <p>Q16n16_mtofLookup() is a fast alternative to (float) <a class="el" href="group__midi.html#gafacb8849f96270644ea79184fde7db37" title="Converts midi note number to frequency. ">mtof()</a>, and more accurate than (unsigned char) <a class="el" href="group__midi.html#gafacb8849f96270644ea79184fde7db37" title="Converts midi note number to frequency. ">mtof()</a>, using Q16n16 fixed-point format instead of floats or byte values. <a class="el" href="group__midi.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2" title="Converts midi note number to frequency with speed and accuracy. ">Q16n16_mtof()</a> uses cheap linear interpolation between whole midi-note frequency equivalents stored in a lookup table, so is less accurate than the float version, <a class="el" href="group__midi.html#gafacb8849f96270644ea79184fde7db37" title="Converts midi note number to frequency. ">mtof()</a>, for non-whole midi values. </p>
 <dl class="section note"><dt>Note</dt><dd>Timing: ~8 us. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -246,7 +237,7 @@ Timing: ~350 us </dd></dl>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jun 27 2013 23:51:40 for Mozzi by
+    <li class="footer">Generated on Sun Jun 30 2013 19:48:16 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

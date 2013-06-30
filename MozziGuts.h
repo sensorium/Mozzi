@@ -33,7 +33,8 @@
 #include "TimerOne.h"
 #include "FrequencyTimer2.h"
 
-/** @mainpage Welcome
+/** 
+@mainpage Welcome
 
 The latest version of Mozzi and this documentation are at the <a href="http://sensorium.github.com/Mozzi/">Mozzi home page.</a>
 
@@ -59,9 +60,8 @@ with a script called char2mozzi.py, in Mozzi/python.  Read the char2mozzi.py fil
 */
 
 
-/** @defgroup Soundtables
-Look-up-tables for audio waveforms, waveshaping, and control functions, and
-python scripts to generate or convert them. Includes ready-to-use wave tables
+/** @defgroup soundtables Look-up-tables and python scripts to generate tables or convert sounds. 
+Includes ready-to-use wave tables
 and a few example samples which are in the Mozzi/tables and Mozzi/samples
 folders. You can convert your own sounds from a program like Audacity to tables
 for Mozzi with a script called char2mozzi.py, in Mozzi/python. Read the
@@ -76,6 +76,7 @@ The bones of every Mozzi sketch.
 
 
 /** @ingroup core
+Control rate setting.
 Mozzi's CONTROL_RATE sets how many times per second updateControl() is called.
 It can be any power of 2 greater than 64, and the largest value where it starts to
 become impractical is around 1024.  64, 128, 256 and sometimes 512 are all usable values.
@@ -90,6 +91,7 @@ after the \#includes, for example:
 
 
 /** @ingroup core
+Used to set AUDIO_MODE to STANDARD.
 Use \#define AUDIO_MODE STANDARD in Mozzi/config.h to select Mozzi's original audio
 output configuration, which is nearly 9 bit sound (-244 to 243) at 16384 Hz and
 16384 Hz pwm rate. It uses Timer 1 to output samples at AUDIO_RATE 16384 Hz,
@@ -121,6 +123,7 @@ x..B5(25)..Teensy2++  \n
 
 
 /** @ingroup core
+Used to set AUDIO_MODE to HIFI.
 Use \#define AUDIO_MODE HIFI in Mozzi/config.h to set the audio mode to HIFI for output 14 bit sound at 16384 Hz sample rate and 125kHz PWM rate.
 The high PWM rate of HIFI mode places the carrier frequency beyond audible range, 
 overcoming one of the disadvantages of STANDARD mode.

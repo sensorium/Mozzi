@@ -7,12 +7,18 @@ var NAVTREE =
       [ "Soundtables", "index.html#Soundtables", null ]
     ] ],
     [ "Modules", "modules.html", "modules" ],
+    [ "Namespace Members", "namespacemembers.html", [
+      [ "All", "namespacemembers.html", null ],
+      [ "Functions", "namespacemembers_func.html", null ],
+      [ "Variables", "namespacemembers_vars.html", null ]
+    ] ],
     [ "Classes", null, [
       [ "Class List", "annotated.html", "annotated" ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
-        [ "Functions", "functions_func.html", null ]
+        [ "Functions", "functions_func.html", null ],
+        [ "Variables", "functions_vars.html", null ]
       ] ]
     ] ],
     [ "Examples", "examples.html", "examples" ]
@@ -22,7 +28,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_02_control_2_control__echo__theremin_2_control__echo__theremin_8ino-example.html",
-"group__mozzi__fixmath.html#gaa8e579259244eb60e7f70576c8e61cbd"
+"group__mozzi__fixmath.html#gaa1e02cbcdc65171103653df03fec3b76"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('class_ead.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -142,8 +142,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a32d3e3cf3848e4dbab6a3b2030d7e4ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Exponential attack decay envelope. </p>
-<p>This produces a natural sounding envelope. It calculates a new value each time <a class="el" href="class_ead.html#a32d3e3cf3848e4dbab6a3b2030d7e4ba" title="Calculate and return the next envelope value, in the range -128 to 127. ">next()</a> is called, which can be mapped to other parameters to change the amplitude or timbre of a sound. </p>
+<div class="textblock"><p>This produces a natural sounding envelope. It calculates a new value each time <a class="el" href="class_ead.html#a32d3e3cf3848e4dbab6a3b2030d7e4ba" title="Calculate and return the next envelope value, in the range -128 to 127. ">next()</a> is called, which can be mapped to other parameters to change the amplitude or timbre of a sound. </p>
 <dl class="section note"><dt>Note</dt><dd>Currently doesn't work at audio rate... may need larger number types for Q8n8attack and Q8n8decay ? </dd></dl>
 
 <p>Definition at line <a class="el" href="_ead_8h_source.html#l00040">40</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
@@ -169,8 +168,6 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">update_rate</td><td>Usually this will be CONTROL_RATE or AUDIO_RATE, unless you design another scheme for updating. One such alternative scheme could take turns for various control changes in a rotating schedule to spread out calculations made in successive <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> routines. </td></tr>
@@ -203,8 +200,6 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Calculate and return the next envelope value, in the range -128 to 127. </p>
 <dl class="section note"><dt>Note</dt><dd>Timing: 5us </dd></dl>
 
 <p>Definition at line <a class="el" href="_ead_8h_source.html#l00126">126</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
@@ -242,8 +237,6 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Set attack and decay times in milliseconds. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">attack_ms</td><td>The time taken for values returned by successive calls of the <a class="el" href="class_ead.html#a32d3e3cf3848e4dbab6a3b2030d7e4ba" title="Calculate and return the next envelope value, in the range -128 to 127. ">next()</a> method to change from 0 to 255. </td></tr>
@@ -277,8 +270,6 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Set the attack time in milliseconds. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">attack_ms</td><td>The time taken for values returned by successive calls of the <a class="el" href="class_ead.html#a32d3e3cf3848e4dbab6a3b2030d7e4ba" title="Calculate and return the next envelope value, in the range -128 to 127. ">next()</a> method to change from 0 to 255. </td></tr>
@@ -311,8 +302,6 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Set the decay time in milliseconds. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">decay_ms</td><td>The time taken for values returned by successive calls of the <a class="el" href="class_ead.html#a32d3e3cf3848e4dbab6a3b2030d7e4ba" title="Calculate and return the next envelope value, in the range -128 to 127. ">next()</a> method to change from 255 to 0. </td></tr>
@@ -344,8 +333,6 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Start the envelope from the beginning. </p>
 <p>This can be used at any time, even if the previous envelope is not finished. </p>
 
 <p>Definition at line <a class="el" href="_ead_8h_source.html#l00097">97</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
@@ -383,9 +370,6 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><pre class="fragment">Set attack and decay times in milliseconds, and start the envelope from
-</pre><p> the beginning. </p>
 <p>This can be used at any time, even if the previous envelope is not finished. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -408,7 +392,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_ead.html">Ead</a></li>
-    <li class="footer">Generated on Thu Jun 27 2013 23:51:40 for Mozzi by
+    <li class="footer">Generated on Mon Jul 1 2013 00:19:19 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

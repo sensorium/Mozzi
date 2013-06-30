@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('class_control_delay.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -106,6 +106,7 @@ $(document).ready(function(){initNavTree('class_control_delay.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="class_control_delay-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ControlDelay&lt; NUM_BUFFER_SAMPLES, T &gt; Class Template Reference</div>  </div>
@@ -117,35 +118,26 @@ $(document).ready(function(){initNavTree('class_control_delay.html','');});
 
 <p>Inherits <a class="el" href="class_audio_delay.html">AudioDelay&lt; NUM_BUFFER_SAMPLES, T &gt;</a>.</p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_methods_class_audio_delay"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_audio_delay')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_audio_delay.html">AudioDelay&lt; NUM_BUFFER_SAMPLES, T &gt;</a></td></tr>
-<tr class="memitem:a688f69088f96bf3976a8555d3026365f inherit pub_methods_class_audio_delay"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a688f69088f96bf3976a8555d3026365f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay.html#a688f69088f96bf3976a8555d3026365f">AudioDelay</a> ()</td></tr>
-<tr class="memdesc:a688f69088f96bf3976a8555d3026365f inherit pub_methods_class_audio_delay"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br/></td></tr>
-<tr class="separator:a688f69088f96bf3976a8555d3026365f inherit pub_methods_class_audio_delay"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79be253fcb5709624c8fb708e54f069f inherit pub_methods_class_audio_delay"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay.html#a79be253fcb5709624c8fb708e54f069f">AudioDelay</a> (unsigned int delaytime_cells)</td></tr>
-<tr class="memdesc:a79be253fcb5709624c8fb708e54f069f inherit pub_methods_class_audio_delay"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a79be253fcb5709624c8fb708e54f069f">More...</a><br/></td></tr>
-<tr class="separator:a79be253fcb5709624c8fb708e54f069f inherit pub_methods_class_audio_delay"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19258636609d83a2bab11849e17b5294 inherit pub_methods_class_audio_delay"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay.html#a19258636609d83a2bab11849e17b5294">next</a> (T in_value, unsigned int delaytime_cells)</td></tr>
-<tr class="memdesc:a19258636609d83a2bab11849e17b5294 inherit pub_methods_class_audio_delay"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay and retrieve the signal in the delay line at the position delaytime_cells.  <a href="#a19258636609d83a2bab11849e17b5294">More...</a><br/></td></tr>
-<tr class="separator:a19258636609d83a2bab11849e17b5294 inherit pub_methods_class_audio_delay"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41c09b5cc9e817d8eaf111b0f74c9a0b inherit pub_methods_class_audio_delay"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay.html#a41c09b5cc9e817d8eaf111b0f74c9a0b">next</a> (T in_value)</td></tr>
-<tr class="memdesc:a41c09b5cc9e817d8eaf111b0f74c9a0b inherit pub_methods_class_audio_delay"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay and retrieve the signal in the delay line at the position delaytime_cells.  <a href="#a41c09b5cc9e817d8eaf111b0f74c9a0b">More...</a><br/></td></tr>
-<tr class="separator:a41c09b5cc9e817d8eaf111b0f74c9a0b inherit pub_methods_class_audio_delay"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bd0a07f7803afda1a71b50e3f66827b inherit pub_methods_class_audio_delay"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay.html#a7bd0a07f7803afda1a71b50e3f66827b">set</a> (unsigned int delaytime_cells)</td></tr>
-<tr class="memdesc:a7bd0a07f7803afda1a71b50e3f66827b inherit pub_methods_class_audio_delay"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the delay time, measured in cells.  <a href="#a7bd0a07f7803afda1a71b50e3f66827b">More...</a><br/></td></tr>
-<tr class="separator:a7bd0a07f7803afda1a71b50e3f66827b inherit pub_methods_class_audio_delay"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26b409fbfc322ae527ba23680c56e3a9 inherit pub_methods_class_audio_delay"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay.html#a26b409fbfc322ae527ba23680c56e3a9">read</a> (unsigned int delaytime_cells)</td></tr>
-<tr class="memdesc:a26b409fbfc322ae527ba23680c56e3a9 inherit pub_methods_class_audio_delay"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the signal in the delay line at the position delaytime_cells.  <a href="#a26b409fbfc322ae527ba23680c56e3a9">More...</a><br/></td></tr>
-<tr class="separator:a26b409fbfc322ae527ba23680c56e3a9 inherit pub_methods_class_audio_delay"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a19258636609d83a2bab11849e17b5294"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay.html#a19258636609d83a2bab11849e17b5294">next</a> (T in_value, unsigned int delaytime_cells)</td></tr>
+<tr class="memdesc:a19258636609d83a2bab11849e17b5294"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay and retrieve the signal in the delay line at the position delaytime_cells.  <a href="#a19258636609d83a2bab11849e17b5294">More...</a><br/></td></tr>
+<tr class="separator:a19258636609d83a2bab11849e17b5294"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41c09b5cc9e817d8eaf111b0f74c9a0b"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay.html#a41c09b5cc9e817d8eaf111b0f74c9a0b">next</a> (T in_value)</td></tr>
+<tr class="memdesc:a41c09b5cc9e817d8eaf111b0f74c9a0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay and retrieve the signal in the delay line at the position delaytime_cells.  <a href="#a41c09b5cc9e817d8eaf111b0f74c9a0b">More...</a><br/></td></tr>
+<tr class="separator:a41c09b5cc9e817d8eaf111b0f74c9a0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bd0a07f7803afda1a71b50e3f66827b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay.html#a7bd0a07f7803afda1a71b50e3f66827b">set</a> (unsigned int delaytime_cells)</td></tr>
+<tr class="memdesc:a7bd0a07f7803afda1a71b50e3f66827b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the delay time, measured in cells.  <a href="#a7bd0a07f7803afda1a71b50e3f66827b">More...</a><br/></td></tr>
+<tr class="separator:a7bd0a07f7803afda1a71b50e3f66827b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26b409fbfc322ae527ba23680c56e3a9"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay.html#a26b409fbfc322ae527ba23680c56e3a9">read</a> (unsigned int delaytime_cells)</td></tr>
+<tr class="memdesc:a26b409fbfc322ae527ba23680c56e3a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the signal in the delay line at the position delaytime_cells.  <a href="#a26b409fbfc322ae527ba23680c56e3a9">More...</a><br/></td></tr>
+<tr class="separator:a26b409fbfc322ae527ba23680c56e3a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt;<br/>
 class ControlDelay&lt; NUM_BUFFER_SAMPLES, T &gt;</h3>
 
-<p>Control-rate delay line for delaying control signals. </p>
-<p>For example, this could be used to produce echo-like effects using multiple instances of the same voice, when <a class="el" href="class_audio_delay.html" title="Audio delay line for comb filter, flange, chorus and short echo effects. ">AudioDelay</a> would be too short for an actual audio echo. See <a class="el" href="class_audio_delay.html" title="Audio delay line for comb filter, flange, chorus and short echo effects. ">AudioDelay</a> for documentation, as this is just a wrapper of the same code. </p>
+<p>For example, this could be used to produce echo-like effects using multiple instances of the same voice, when <a class="el" href="class_audio_delay.html" title="Audio delay line for comb filter, flange, chorus and short echo effects. ">AudioDelay</a> would be too short for an actual audio echo. This is in fact just a wrapper of the <a class="el" href="class_audio_delay.html" title="Audio delay line for comb filter, flange, chorus and short echo effects. ">AudioDelay</a> code. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">NUM_BUFFER_SAMPLES</td><td>is the length of the delay buffer in samples. This should be a power of two. </td></tr>
@@ -156,7 +148,156 @@ class ControlDelay&lt; NUM_BUFFER_SAMPLES, T &gt;</h3>
 <dl><dt><b>Examples: </b></dt><dd><a class="el" href="_02_control_2_control__echo__theremin_2_control__echo__theremin_8ino-example.html#_a0">_02_control/Control_Echo_Theremin/Control_Echo_Theremin.ino</a>.</dd>
 </dl>
 <p>Definition at line <a class="el" href="_control_delay_8h_source.html#l00039">39</a> of file <a class="el" href="_control_delay_8h_source.html">ControlDelay.h</a>.</p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a19258636609d83a2bab11849e17b5294"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="class_audio_delay.html">AudioDelay</a>&lt; NUM_BUFFER_SAMPLES, T &gt;::next </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>in_value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>delaytime_cells</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in_value</td><td>the signal input. </td></tr>
+    <tr><td class="paramname">delaytime_cells</td><td>sets the delay time in terms of cells in the delay buffer. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00071">71</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a41c09b5cc9e817d8eaf111b0f74c9a0b"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="class_audio_delay.html">AudioDelay</a>&lt; NUM_BUFFER_SAMPLES, T &gt;::next </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>in_value</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in_value</td><td>the signal input. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00089">89</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a26b409fbfc322ae527ba23680c56e3a9"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="class_audio_delay.html">AudioDelay</a>&lt; NUM_BUFFER_SAMPLES, T &gt;::read </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>delaytime_cells</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>It doesn't change the stored internal value of _delaytime_cells. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delaytime_cells</td><td>indicates the delay time in terms of cells in the delay buffer. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00116">116</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7bd0a07f7803afda1a71b50e3f66827b"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_audio_delay.html">AudioDelay</a>&lt; NUM_BUFFER_SAMPLES, T &gt;::set </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>delaytime_cells</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delaytime_cells</td><td>how many cells to delay the input signal by. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00106">106</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="_control_delay_8h_source.html">ControlDelay.h</a></li>
 </ul>
 </div><!-- contents -->
@@ -165,7 +306,7 @@ class ControlDelay&lt; NUM_BUFFER_SAMPLES, T &gt;</h3>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_control_delay.html">ControlDelay</a></li>
-    <li class="footer">Generated on Thu Jun 27 2013 23:51:40 for Mozzi by
+    <li class="footer">Generated on Mon Jul 1 2013 00:19:19 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

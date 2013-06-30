@@ -88,7 +88,7 @@ $(document).ready(function(){initNavTree('sin__levels__int8_8py_source.html','')
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -102,13 +102,13 @@ $(document).ready(function(){initNavTree('sin__levels__int8_8py_source.html','')
 <div class="title">sin_levels_int8.py</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">## generates a set of sin waves at different amplitudes</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno"><a class="code" href="namespacesin__levels__int8.html">    1</a></span>&#160;<span class="comment">## generates a set of sin waves at different amplitudes</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">import</span> array,os,textwrap,math</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">def </span>generate(outfilename, tablename, tablelength, numtables):</div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="code" href="namespacesin__levels__int8.html#ad78209098dc1af72f025a4aa4b1a7b20">    7</a></span>&#160;<span class="keyword">def </span><a class="code" href="namespacesin__levels__int8.html#ad78209098dc1af72f025a4aa4b1a7b20">generate</a>(outfilename, tablename, tablelength, numtables):</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    fout = open(os.path.expanduser(outfilename), <span class="stringliteral">&quot;w&quot;</span>)</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    fout.write(<span class="stringliteral">&#39;#ifndef &#39;</span> + tablename + <span class="stringliteral">&#39;_H_&#39;</span> + <span class="stringliteral">&#39;\n&#39;</span>)</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    fout.write(<span class="stringliteral">&#39;#define &#39;</span> + tablename + <span class="stringliteral">&#39;_H_&#39;</span> + <span class="stringliteral">&#39;\n \n&#39;</span>)</div>
@@ -143,14 +143,14 @@ $(document).ready(function(){initNavTree('sin__levels__int8_8py_source.html','')
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">print</span> <span class="stringliteral">&quot;wrote &quot;</span> + outfilename</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;generate(<span class="stringliteral">&quot;~/Desktop/test_int8.h&quot;</span>, <span class="stringliteral">&quot;TEST_256&quot;</span>, 256, 1)</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<a class="code" href="namespacesin__levels__int8.html#ad78209098dc1af72f025a4aa4b1a7b20">generate</a>(<span class="stringliteral">&quot;~/Desktop/test_int8.h&quot;</span>, <span class="stringliteral">&quot;TEST_256&quot;</span>, 256, 1)</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_7837fde3ab9c1fb2fc5be7b717af8d79.html">python</a></li><li class="navelem"><b>sin_levels_int8.py</b></li>
-    <li class="footer">Generated on Thu Jun 27 2013 23:51:40 for Mozzi by
+    <li class="footer">Generated on Sun Jun 30 2013 23:46:07 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

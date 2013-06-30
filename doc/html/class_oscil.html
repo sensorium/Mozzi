@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('class_oscil.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -170,7 +170,6 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><h3>template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt;<br/>
 class Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</h3>
 
-<p><a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> plays a wavetable, cycling through the table to generate an audio or control signal. </p>
 <p>The frequency of the signal can be set or changed with <a class="el" href="class_oscil.html#a23121f22ea447918088a79c7f9748b3d" title="Set the oscillator frequency with an unsigned int. ">setFreq()</a>, and the output of an <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> can be produced with <a class="el" href="class_oscil.html#a2a76960954a19c7b24dfb7524b740c8f" title="Updates the phase according to the current frequency  and returns the sample at the new phase positio...">next()</a> for a simple cycling oscillator, or <a class="el" href="class_oscil.html#a3b2ea7727b2ec911957b3862dbb6a8ec" title="Returns the sample at the given table index. ">atIndex()</a> for a particular sample in the table. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -210,8 +209,6 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">TABLE_NAME</td><td>the name of the array the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> will be using. This can be found in the table ".h" file if you are using a table made for Mozzi by the <a class="el" href="char2mozzi_8py_source.html">char2mozzi.py</a> python script in Mozzi's python folder. </td></tr>
@@ -245,8 +242,6 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Constructor. </p>
 <p>Declare an <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> with template TABLE_NUM_CELLS and UPDATE_RATE parameters, without specifying a particular wave table for it to play. The table can be set or changed on the fly with <a class="el" href="class_oscil.html#a59e9b132ad0770030d7339c6aa260925" title="Change the sound table which will be played by the Oscil. ">setTable()</a>. Any tables used by the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> must be the same size. </p>
 
 <p>Definition at line <a class="el" href="_oscil_8h_source.html#l00097">97</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
@@ -277,8 +272,6 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Returns the sample at the given table index. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">index</td><td>between 0 and the table size.The index rolls back around to 0 if it's larger than the table size. </td></tr>
@@ -313,8 +306,6 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Get the phase of the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> in fractional format. </p>
 <dl class="section return"><dt>Returns</dt><dd>position in the wavetable, shifted left by OSCIL_F_BITS (which is 16 when this was written). </dd></dl>
 
 <p>Definition at line <a class="el" href="_oscil_8h_source.html#l00156">156</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
@@ -343,9 +334,6 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><pre class="fragment">Updates the phase according to the current frequency
-</pre><p> and returns the sample at the new phase position. </p>
 <dl class="section return"><dt>Returns</dt><dd>the next sample. </dd></dl>
 
 <p>Definition at line <a class="el" href="_oscil_8h_source.html#l00106">106</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
@@ -375,9 +363,6 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><pre class="fragment">phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding
-</pre><p> between frequencies. </p>
 <p>Instead of recalculating the phase increment for each frequency in between, you can just calculate the phase increment for each end frequency with <a class="el" href="class_oscil.html#a184110cb1901d2742a6016b46cbea027" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding  between frequencies...">phaseIncFromFreq()</a>, then use a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step. ">Line</a> to interpolate on the fly and use <a class="el" href="class_oscil.html#a2ff9bfcc57e07bf0df2ed7db186ecff7" title="Set a specific phase increment. ">setPhaseInc()</a> to set the phase increment at each step. (Note: I should really profile this with the oscilloscope to see if it's worth the extra confusion!) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -414,8 +399,6 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Returns the next sample given a phase modulation value. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">phmod_proportion</td><td>a phase modulation value given as a proportion of the wave. The phmod_proportion parameter is a Q15n16 fixed-point number where the fractional n16 part represents -1 to 1, modulating the phase by one whole table length in each direction. </td></tr>
@@ -451,8 +434,6 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Set the oscillator frequency with an unsigned int. </p>
 <p>This is faster than using a float, so it's useful when processor time is tight, but it can be tricky with low and high frequencies, depending on the size of the wavetable being used. If you're not getting the results you expect, try explicitly using a float, or try <a class="el" href="class_oscil.html#abc8a4ee236f7fd45dda9dece7292b6e7" title="Set the frequency using Q24n8 fixed-point number format. ">setFreq_Q24n8()</a> or or <a class="el" href="class_oscil.html#a73b52741178ed490463d9ff471cebef3" title="Set the frequency using Q16n16 fixed-point number format. ">setFreq_Q16n16()</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -488,8 +469,6 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Set the oscillator frequency with a float. </p>
 <p>Using a float is the most reliable way to set frequencies, -Might- be slower than using an int but you need either this, <a class="el" href="class_oscil.html#abc8a4ee236f7fd45dda9dece7292b6e7" title="Set the frequency using Q24n8 fixed-point number format. ">setFreq_Q24n8()</a> or <a class="el" href="class_oscil.html#a73b52741178ed490463d9ff471cebef3" title="Set the frequency using Q16n16 fixed-point number format. ">setFreq_Q16n16()</a> for fractional frequencies. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -525,8 +504,6 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Set the frequency using Q16n16 fixed-point number format. </p>
 <p>This is useful in combination with <a class="el" href="group__midi.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2" title="Converts midi note number to frequency with speed and accuracy. ">Q16n16_mtof()</a>, a fast alternative to <a class="el" href="group__midi.html#gafacb8849f96270644ea79184fde7db37" title="Converts midi note number to frequency. ">mtof()</a>, using Q16n16 fixed-point format instead of floats. </p>
 <dl class="section note"><dt>Note</dt><dd>This should work OK with tables 2048 cells or smaller and frequencies up to 4096 Hz. Can't be used with UPDATE_RATE less than 64 Hz. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -563,8 +540,6 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Set the frequency using Q24n8 fixed-point number format. </p>
 <p>This might be faster than the float version for setting low frequencies such as 1.5 Hz, or other values which may not work well with your table size. A Q24n8 representation of 1.5 is 384 (ie. 1.5 * 256). Can't be used with UPDATE_RATE less than 64 Hz. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -600,8 +575,6 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Set the phase of the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>. </p>
 <p>This does the same thing as Sample::start(offset). Just different ways of thinking about oscillators and samples. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -637,8 +610,6 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Set the phase of the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>. </p>
 <p>Might be useful with <a class="el" href="class_oscil.html#aa774ef68b06f9652e6ac23d4e9332554" title="Get the phase of the Oscil in fractional format. ">getPhaseFractional()</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -674,8 +645,6 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Set a specific phase increment. </p>
 <p>See <a class="el" href="class_oscil.html#a184110cb1901d2742a6016b46cbea027" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding  between frequencies...">phaseIncFromFreq()</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -711,8 +680,6 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Change the sound table which will be played by the <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">TABLE_NAME</td><td>is the name of the array in the table ".h" file you're using. </td></tr>
@@ -733,7 +700,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_oscil.html">Oscil</a></li>
-    <li class="footer">Generated on Thu Jun 27 2013 23:51:40 for Mozzi by
+    <li class="footer">Generated on Mon Jul 1 2013 00:19:19 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

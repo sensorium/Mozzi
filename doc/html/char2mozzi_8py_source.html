@@ -88,7 +88,7 @@ $(document).ready(function(){initNavTree('char2mozzi_8py_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -102,91 +102,99 @@ $(document).ready(function(){initNavTree('char2mozzi_8py_source.html','');});
 <div class="title">char2mozzi.py</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">##    char2mozzi.py</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno"><a class="code" href="namespacechar2mozzi.html">    1</a></span>&#160;<span class="comment">##    char2mozzi.py</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">##    Created 2010-12 by Tim Barrass</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">##@ingroup Soundtables</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">#               @brief  char2mozzi.py converts raw 8 bit sound data to wavetables for Mozzi.</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">#</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">#    Usage: python char2mozzi.py &lt;infilename outfilename &quot;tablename&quot; &quot;samplerate&quot;&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">#</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">#    Using Audacity to prepare raw sound files for converting:</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">#</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">#    Set your Audacity project sample rate:</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">#</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">#                               For generated waveforms like sine or sawtooth, set the project</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">#                               rate to the size of the wavetable you wish to create, which must</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">#                               be a power of two (eg. 8192), and set the selection format</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">#                               (beneath the editing window) to samples. Then you can generate</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">#                               and save 1 second of a waveform and it will fit your table</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">#                               length.</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">#</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">#                               For a recorded audio sample, set the project rate to the</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">#                               Mozzi AUDIO_RATE (16384 in the current version). Then edit</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">#                               your sounds to a power-of-two number of samples.</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">#</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">#     Save by exporting with the format set to &quot;Other uncompressed formats&quot;,</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">#     options set to &quot;RAW(headerless)&quot; and &quot;Encoding 8 bit signed PCM&quot;.</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">import</span> sys, array, os, textwrap, random</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordflow">if</span> len(sys.argv) != 5:</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">print</span> <span class="stringliteral">&#39;Usage: char2mozzi.py &lt;infilename outfilename &quot;tablename&quot; &quot;samplerate&quot;&gt;&#39;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        sys.exit(1)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;[infilename, outfilename, tablename, samplerate] = sys.argv[1:]</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">def </span><a class="code" href="namespacechar2mozzi.html">char2mozzi</a>(infilename, outfilename, tablename, samplerate):</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    fin = open(os.path.expanduser(infilename), <span class="stringliteral">&quot;rb&quot;</span>)</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">print</span> <span class="stringliteral">&quot;opened &quot;</span> + infilename</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    bytestoread = os.path.getsize(os.path.expanduser(infilename))</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">##print bytestoread</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    valuesfromfile = array.array(<span class="stringliteral">&#39;b&#39;</span>) <span class="comment"># array of signed char ints</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">try</span>:</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        valuesfromfile.fromfile(fin, bytestoread)</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">finally</span>:</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        fin.close()</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    values=valuesfromfile.tolist()</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">##    print values[0]</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">##    print values[len(values)-1]</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">##    print len(values)</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    fout = open(os.path.expanduser(outfilename), <span class="stringliteral">&quot;w&quot;</span>)</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    fout.write(<span class="stringliteral">&#39;#ifndef &#39;</span> + tablename + <span class="stringliteral">&#39;_H_&#39;</span> + <span class="stringliteral">&#39;\n&#39;</span>)</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    fout.write(<span class="stringliteral">&#39;#define &#39;</span> + tablename + <span class="stringliteral">&#39;_H_&#39;</span> + <span class="stringliteral">&#39;\n \n&#39;</span>)</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    fout.write(<span class="stringliteral">&#39;#if ARDUINO &gt;= 100&#39;</span>+<span class="stringliteral">&#39;\n&#39;</span>)</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    fout.write(<span class="stringliteral">&#39;#include &quot;Arduino.h&quot;&#39;</span>+<span class="stringliteral">&#39;\n&#39;</span>)</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    fout.write(<span class="stringliteral">&#39;#else&#39;</span>+<span class="stringliteral">&#39;\n&#39;</span>)</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    fout.write(<span class="stringliteral">&#39;#include &quot;WProgram.h&quot;&#39;</span>+<span class="stringliteral">&#39;\n&#39;</span>)</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    fout.write(<span class="stringliteral">&#39;#endif&#39;</span>+<span class="stringliteral">&#39;\n&#39;</span>)   </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    fout.write(<span class="stringliteral">&#39;#include &lt;avr/pgmspace.h&gt;&#39;</span>+<span class="stringliteral">&#39;\n \n&#39;</span>)</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    fout.write(<span class="stringliteral">&#39;#define &#39;</span> + tablename + <span class="stringliteral">&#39;_NUM_CELLS &#39;</span>+ str(len(values))+<span class="stringliteral">&#39;\n&#39;</span>)</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    fout.write(<span class="stringliteral">&#39;#define &#39;</span> + tablename + <span class="stringliteral">&#39;_SAMPLERATE &#39;</span>+ str(samplerate)+<span class="stringliteral">&#39;\n \n&#39;</span>)</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    outstring = <span class="stringliteral">&#39;const char __attribute__((progmem)) &#39;</span> + tablename + <span class="stringliteral">&#39;_DATA [] = {&#39;</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">try</span>:</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> range(len(values)):</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                <span class="comment">## mega2560 boards won&#39;t upload if there is 33, 33, 33 in the array, so dither the 3rd 33 if there is one</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                <span class="keywordflow">if</span> (values[i] == 33) <span class="keywordflow">and</span> (values[i+1] == 33) <span class="keywordflow">and</span> (values[i+2] == 33):</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                        values[i+2] = random.choice([32, 34])</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                outstring += str(values[i]) + <span class="stringliteral">&quot;, &quot;</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">finally</span>:</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        outstring +=  <span class="stringliteral">&quot;};&quot;</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        outstring = textwrap.fill(outstring, 80)</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        fout.write(outstring)</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        fout.write(<span class="stringliteral">&#39;\n \n #endif /* &#39;</span> + tablename + <span class="stringliteral">&#39;_H_ */\n&#39;</span>)</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        fout.close()</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">print</span> <span class="stringliteral">&quot;wrote &quot;</span> + outfilename</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<a class="code" href="namespacechar2mozzi.html">char2mozzi</a>(infilename, outfilename, tablename, samplerate)</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">import</span> sys, array, os, textwrap, random</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keywordflow">if</span> len(sys.argv) != 5:</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;        <span class="keywordflow">print</span> <span class="stringliteral">&#39;Usage: char2mozzi.py &lt;infile outfile &quot;tablename&quot; &quot;samplerate&quot;&gt;&#39;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        sys.exit(1)</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;[infile, outfile, tablename, samplerate] = sys.argv[1:]</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="code" href="namespacechar2mozzi.html#a61b2b967d3c7374f1f6f5296471cc45c">   12</a></span>&#160;<span class="keyword">def </span><a class="code" href="namespacechar2mozzi.html#a61b2b967d3c7374f1f6f5296471cc45c">char2mozzi</a>(infile, outfile, tablename, samplerate):</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;                <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="stringliteral">                char2mozzi.py converts raw 8 bit sound data to wavetables for Mozzi.</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="stringliteral"></span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="stringliteral">                Usage: python char2mozzi.py &lt;infile outfile &quot;tablename&quot; &quot;samplerate&quot;&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="stringliteral">                </span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="stringliteral">                Using Audacity to prepare raw sound files for converting:</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="stringliteral">                </span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="stringliteral">                Set your Audacity project sample rate:</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="stringliteral">                </span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="stringliteral">                For generated waveforms like sine or sawtooth, set the project</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="stringliteral">                rate to the size of the wavetable you wish to create, which must</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="stringliteral">                be a power of two (eg. 8192), and set the selection format</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="stringliteral">                (beneath the editing window) to samples. Then you can generate</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="stringliteral">                and save 1 second of a waveform and it will fit your table</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="stringliteral">                length.</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="stringliteral">                </span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="stringliteral">                For a recorded audio sample, set the project rate to the</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="stringliteral">                Mozzi AUDIO_RATE (16384 in the current version). </span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="stringliteral">                Samples can be any length, as long as they fit in your Arduino.</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="stringliteral">                </span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="stringliteral">                Save by exporting with the format set to &quot;Other uncompressed formats&quot;,</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="stringliteral">                options set to &quot;RAW(headerless)&quot; and &quot;Encoding 8 bit signed PCM&quot;.</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="stringliteral">                </span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="stringliteral">                Now use the file you just exported, as the &quot;infile&quot; to convert.</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="stringliteral">                </span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="stringliteral">                Args:</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="stringliteral">        infile: The file to convert.</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="stringliteral">        outfile:                The file to save as output.</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="stringliteral">        tablename:              The name to give the table of converted data in the new file.</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="stringliteral">        samplerate:             The samplerate the sound was recorded at.  Choose what make sense for you, if it&#39;s not a normal recorded sample.</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="stringliteral">        </span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="stringliteral">                &quot;&quot;&quot;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    fin = open(os.path.expanduser(infile), <span class="stringliteral">&quot;rb&quot;</span>)</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">print</span> <span class="stringliteral">&quot;opened &quot;</span> + infile</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    bytestoread = os.path.getsize(os.path.expanduser(infile))</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">##print bytestoread</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    valuesfromfile = array.array(<span class="stringliteral">&#39;b&#39;</span>) <span class="comment"># array of signed char ints</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">try</span>:</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        valuesfromfile.fromfile(fin, bytestoread)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">finally</span>:</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        fin.close()</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    values=valuesfromfile.tolist()</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">##    print values[0]</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">##    print values[len(values)-1]</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">##    print len(values)</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="code" href="namespacechar2mozzi.html#a49f9e73e4f3c413deccdd1b26634c8aa">   60</a></span>&#160;    fout = open(os.path.expanduser(outfile), <span class="stringliteral">&quot;w&quot;</span>)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    fout.write(<span class="stringliteral">&#39;#ifndef &#39;</span> + tablename + <span class="stringliteral">&#39;_H_&#39;</span> + <span class="stringliteral">&#39;\n&#39;</span>)</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    fout.write(<span class="stringliteral">&#39;#define &#39;</span> + tablename + <span class="stringliteral">&#39;_H_&#39;</span> + <span class="stringliteral">&#39;\n \n&#39;</span>)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    fout.write(<span class="stringliteral">&#39;#if ARDUINO &gt;= 100&#39;</span>+<span class="stringliteral">&#39;\n&#39;</span>)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    fout.write(<span class="stringliteral">&#39;#include &quot;Arduino.h&quot;&#39;</span>+<span class="stringliteral">&#39;\n&#39;</span>)</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    fout.write(<span class="stringliteral">&#39;#else&#39;</span>+<span class="stringliteral">&#39;\n&#39;</span>)</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    fout.write(<span class="stringliteral">&#39;#include &quot;WProgram.h&quot;&#39;</span>+<span class="stringliteral">&#39;\n&#39;</span>)</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    fout.write(<span class="stringliteral">&#39;#endif&#39;</span>+<span class="stringliteral">&#39;\n&#39;</span>)   </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    fout.write(<span class="stringliteral">&#39;#include &lt;avr/pgmspace.h&gt;&#39;</span>+<span class="stringliteral">&#39;\n \n&#39;</span>)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    fout.write(<span class="stringliteral">&#39;#define &#39;</span> + tablename + <span class="stringliteral">&#39;_NUM_CELLS &#39;</span>+ str(len(values))+<span class="stringliteral">&#39;\n&#39;</span>)</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    fout.write(<span class="stringliteral">&#39;#define &#39;</span> + tablename + <span class="stringliteral">&#39;_SAMPLERATE &#39;</span>+ str(samplerate)+<span class="stringliteral">&#39;\n \n&#39;</span>)</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="code" href="namespacechar2mozzi.html#a7855d4d6cf842c9331da1f53c65bf133">   71</a></span>&#160;    outstring = <span class="stringliteral">&#39;const char __attribute__((progmem)) &#39;</span> + tablename + <span class="stringliteral">&#39;_DATA [] = {&#39;</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">try</span>:</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> range(len(values)):</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                <span class="comment">## mega2560 boards won&#39;t upload if there is 33, 33, 33 in the array, so dither the 3rd 33 if there is one</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                <span class="keywordflow">if</span> (values[i] == 33) <span class="keywordflow">and</span> (values[i+1] == 33) <span class="keywordflow">and</span> (values[i+2] == 33):</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                        values[i+2] = random.choice([32, 34])</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                outstring += str(values[i]) + <span class="stringliteral">&quot;, &quot;</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">finally</span>:</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        outstring +=  <span class="stringliteral">&quot;};&quot;</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        outstring = textwrap.fill(outstring, 80)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        fout.write(outstring)</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        fout.write(<span class="stringliteral">&#39;\n \n #endif /* &#39;</span> + tablename + <span class="stringliteral">&#39;_H_ */\n&#39;</span>)</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        fout.close()</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">print</span> <span class="stringliteral">&quot;wrote &quot;</span> + outfile</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<a class="code" href="namespacechar2mozzi.html">char2mozzi</a>(infile, outfile, tablename, samplerate)</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_7837fde3ab9c1fb2fc5be7b717af8d79.html">python</a></li><li class="navelem"><b>char2mozzi.py</b></li>
-    <li class="footer">Generated on Thu Jun 27 2013 23:51:40 for Mozzi by
+    <li class="footer">Generated on Mon Jul 1 2013 00:19:19 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

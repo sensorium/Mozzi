@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>learn - MOZZI</title>
+  <title>output - MOZZI</title>
   <meta name="author" content="Tim Barrass">
   
   
@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sensorium.github.io/Mozzi//learn">
+  <link rel="canonical" href="http://sensorium.github.io/Mozzi//learn/output">
   <link href="/Mozzi/favicon.png" rel="icon">
   <link href="/Mozzi/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/Mozzi/atom.xml" rel="alternate" title="MOZZI" type="application/atom+xml">
@@ -118,18 +118,99 @@
 <article role="article">
   
   <header>
-    <h1 class="entry-title">Learn</h1>
+    <h1 class="entry-title">Output</h1>
     
   </header>
   
-  <p><a href="Mozzi_Introductory_Tutorial.pdf">Mozzi, an Introductory Tutorial</a><br/>
-This shows how to set up an Arduino with Mozzi from scratch and use analog inputs
-to make sounds using a knob, light sensing, pressure, and a switch (on a digital input).
-<a href="Mozzi_Introductory_Tutorial.pdf">Wow, let&#8217;s go!</a></p>
+  <h2>Output circuit for HIFI mode</h2>
 
-<p><a href="output/">Output Circuits</a><br/>
-Shows how to connect Mozzi for audio output, including a schematic for HIFI mode using only 3 components,
-and a filters for reducing carrier frequency noise which some people can hear in STANDARD mode.</p>
+<p>Mozzi&#8217;s HIFI audio mode combines the output of 2 pins in a technique called dual PWM, which is explained in detail at [Open Music Labs] (http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/).</p>
+
+<p>Here&#8217;s the circuit for Mozzi, based on the Open Music Labs article.</p>
+
+<p><img src="http://farm9.staticflickr.com/8387/8637632152_f18272647e.jpg" alt="Mozzi output circuit for HIFI audio mode" /></p>
+
+<h4>Advantages of HIFI mode</h4>
+
+<ul>
+<li>Higher resolution sound than STANDARD mode.</li>
+<li>Doesn&#8217;t need a notch filter on the audio signal because the carrier frequency is out of hearing range.</li>
+</ul>
+
+
+<h4>Disadvantages</h4>
+
+<ul>
+<li>Requires 2 pins, 2 resistors and a capacitor, so it&#8217;s not so quick to set up compared to a rough, direct single-pin output in STANDARD mode.</li>
+</ul>
+
+
+<h4>Pins and where to put the resistors on various boards for HIFI mode</h4>
+
+<p>Boards tested in HIFI mode have an x, though most of these have been tested in STANDARD mode
+and there&#8217;s no reason for them not to work in HIFI (unless the pin number is wrong or something).
+Any reports are welcome.</p>
+
+<p>resistor&#8230;..3.9k&#8230;&#8230;1M<br/>
+x&#8230;&#8230;&#8230;&#8230;&#8230;.9&#8230;&#8230;&#8230;.10&#8230;&#8230;&#8230;&#8230;&#8230;Arduino Uno<br/>
+x&#8230;&#8230;&#8230;&#8230;&#8230;.9&#8230;&#8230;&#8230;.10&#8230;&#8230;&#8230;&#8230;&#8230;Arduino Duemilanove<br/>
+x&#8230;&#8230;&#8230;&#8230;&#8230;.9&#8230;&#8230;&#8230;.10&#8230;&#8230;&#8230;&#8230;&#8230;Arduino Nano<br/>
+&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;9&#8230;&#8230;&#8230;.10&#8230;&#8230;&#8230;&#8230;&#8230;Arduino Leonardo<br/>
+x&#8230;&#8230;&#8230;&#8230;&#8230;.9&#8230;&#8230;&#8230;.10&#8230;&#8230;&#8230;&#8230;&#8230;Ardweeny<br/>
+x&#8230;&#8230;&#8230;&#8230;&#8230;.9&#8230;&#8230;&#8230;.10&#8230;&#8230;&#8230;&#8230;&#8230;Boarduino<br/>
+x&#8230;&#8230;&#8230;&#8230;&#8230;.11&#8230;&#8230;&#8230;12&#8230;&#8230;&#8230;&#8230;&#8230;Freetronics EtherMega<br/>
+&#8230;&#8230;&#8230;&#8230;&#8230;..11&#8230;&#8230;&#8230;12&#8230;&#8230;&#8230;&#8230;&#8230;Arduino Mega<br/>
+&#8230;&#8230;&#8230;&#8230;&#8230;..14&#8230;&#8230;&#8230;15&#8230;&#8230;&#8230;&#8230;&#8230;Teensy<br/>
+&#8230;&#8230;&#8230;&#8230;&#8230;B5(14)&#8230;B6(15)&#8230;&#8230;&#8230;..Teensy2<br/>
+x&#8230;&#8230;&#8230;&#8230;..B5(25)&#8230;B6(26)&#8230;&#8230;&#8230;..Teensy2++<br/>
+&#8230;&#8230;&#8230;&#8230;&#8230;..13&#8230;&#8230;&#8230;12&#8230;&#8230;&#8230;&#8230;&#8230;Sanguino</p>
+
+<h3>Low pass audio filter</h3>
+
+<p>Mozzi&#8217;s sound output can be filtered to reduce aliasing at high frequencies.
+Here&#8217;s some info about low pass <a href="http://electronics.stackexchange.com/questions/34843/how-determine-the-rc-time-constant-in-pwm-digital-to-analog-low-pass-filter">RC filters</a> and a <a href="http://sim.okawa-denshi.jp/en/PWMtool.php">calculator</a> to help choose components.
+For Mozzi, an RC filter with a roll-off frequency of just under 6kHz works well, using a 270 Ω resistor and a 100n capacitor, as shown below.   In HIFI mode, this would be on the combined audio output signal rather than straight from pin 9.</p>
+
+<p><img src="http://farm9.staticflickr.com/8317/7934584004_096300ef0d.jpg" alt="RC circuit" /></p>
+
+<h3>Notch filter for STANDARD mode carrier frequency</h3>
+
+<p>This may still be useful if you need to use STANDARD mode for some reason, for instance if you need Timer 2 for another process.  Otherwise HIFI mode is simpler and better.<br/>
+The 16384 Hz pwm carrier frequency can also be uncomfortably audible for some people, depending on your hearing.<br/>
+<a href="http://www.phys.unsw.edu.au/jw/hearing.html">Here&#8217;s a hearing test.</a></p>
+
+<p>People who have used Mozzi with children report that kids find the carrier frequency particularly irritating, however adults are often unable to perceive it at any level!  Many thanks to Andrew McPherson, who sent a schematic and equation for a twin-T notch filter which he used successfully to remove the offending frequency.</p>
+
+<p><img src="http://farm9.staticflickr.com/8470/8124196839_6f3e506525.jpg" alt="Twin-T Notch Filter" />
+<img src="http://farm9.staticflickr.com/8472/8124196815_6c02f4fb86.jpg" alt="equation" /></p>
+
+<p>Here&#8217;s a design tool for calculating <a href="http://sim.okawa-denshi.jp/en/TwinTCRtool.php">Twin-T notch filters.</a></p>
+
+<p>Andrew also reported that the low-pass and notch filter described here can be used together in series without any problems.</p>
+
+<p>Here&#8217;s a schematic for the 6kHz low pass and the notch filter using commonly available parts chosen to exactly match Mozzi&#8217;s 16384Hz carrier frequency, using the notch filter design tool.</p>
+
+<p><img src="http://farm9.staticflickr.com/8209/8210496070_4a1b21f8c1_c.jpg" alt="Schematic" /></p>
+
+<h3>Download</h3>
+
+<p>Download a Fritzing file with breadboard, schematic and circuit board layouts <a href="https://docs.google.com/file/d/0B_eOzePFYDZaSEo4bVJ6NlJnSXM/edit?usp=sharing">here</a>.</p>
+
+<h3>Plots</h3>
+
+<p>Below are plots of Mozzi playing white noise without filtering, with the notch filter, and with the low pass as well as the notch filter.  You can see the 16kHz spike clearly - at about -7dB before filtering, -54dB after the notch alone (also notice the foldover frequencies above the spike), and -50dB with the addition of low pass before the notch.  That&#8217;s interesting!  The spike is higher with the low pass! (though I couldn&#8217;t hear it).  It didn&#8217;t occur to me to try the low pass after the notch.  That might be better.</p>
+
+<p>White noise, no hardware filter:</p>
+
+<p><img src="http://farm9.staticflickr.com/8060/8209318951_a6ec01ee43.jpg" alt="No filtering" /></p>
+
+<p>White noise after 16384 Hz notch filter:</p>
+
+<p><img src="http://farm9.staticflickr.com/8197/8210408472_1475517fd8.jpg" alt="After notch" /></p>
+
+<p>White noise after 6kHz low pass and 16384 Hz notch filter:</p>
+
+<p><img src="http://farm9.staticflickr.com/8210/8210408422_e03380fd8d.jpg" alt="Low pass and notch" /></p>
 
   
     <footer>
@@ -137,7 +218,7 @@ and a filters for reducing carrier frequency noise which some people can hear in
       
         <div class="sharing">
   
-  <a href="/Mozzi//twitter.com/share" class="twitter-share-button" data-url="http://sensorium.github.io/Mozzi//learn/index.html" data-via="nothingperson" data-counturl="http://sensorium.github.io/Mozzi//learn/index.html" >Tweet</a>
+  <a href="/Mozzi//twitter.com/share" class="twitter-share-button" data-url="http://sensorium.github.io/Mozzi//learn/output/index.html" data-via="nothingperson" data-counturl="http://sensorium.github.io/Mozzi//learn/output/index.html" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>

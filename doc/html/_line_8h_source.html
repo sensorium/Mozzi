@@ -21,6 +21,7 @@
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom_stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -28,10 +29,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="mozzi_smooth_courier_rotated_small_flying_light.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.2c</span>
+   &#160;<span id="projectnumber">0.01.2c alpha</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -49,6 +50,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li><a href="examples.html"><span>Examples</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -66,6 +68,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           </span>
         </div>
       </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -88,7 +96,7 @@ $(document).ready(function(){initNavTree('_line_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -102,7 +110,7 @@ $(document).ready(function(){initNavTree('_line_8h_source.html','');});
 <div class="title">Line.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<a href="_line_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Line.h</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Copyright 2012 Tim Barrass.</span></div>
@@ -124,74 +132,110 @@ $(document).ready(function(){initNavTree('_line_8h_source.html','');});
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#ifndef LINE_H_</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LINE_H_</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#if ARDUINO &gt;= 100</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor"></span><span class="preprocessor"> #include &quot;Arduino.h&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor"></span><span class="preprocessor"> #include &quot;WProgram.h&quot;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &lt;util/atomic.h&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">ifndef</span> <span class="preprocessor">LINE_H_</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">LINE_H_</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">if</span> <span class="preprocessor">ARDUINO</span> <span class="preprocessor">&gt;=</span> 100</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; <span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="stringliteral">&quot;Arduino.h&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">else</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; <span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;WProgram.h&quot;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">util</span><span class="preprocessor">/</span><span class="preprocessor">atomic</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/** For linear changes with a minimum of calculation at each step. For instance,</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">you can use Line to make an oscillator glide from one frequency to another,</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">pre-calculating the required phase increments for each end and then letting your</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">Line change the phase increment with only a simple addition at each step.</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">@tparam T the type of numbers to use. For example, Line &lt;int&gt; myline; makes a</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">Line which uses ints. </span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">@note Watch out for underflows in the internal calcualtion of Line() if you&#39;re not</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">using floats (but on the other hand try to avoid lots of floats, they&#39;re too slow!). </span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">If it seems like the Line() is not working, there&#39;s a good chance you need to</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">scale up the numbers you&#39;re using, so internal calculations don&#39;t get truncated</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">away. Use Mozzi&#39;s fixed-point number types in mozzi_fixmath.h, which enable you to</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">represent fractional numbers. Google &quot;fixed point arithmetic&quot; if this is new to</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">you.</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="code" href="class_line.html">   49</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_line.html" title="For linear changes with a minimum of calculation at each step. ">Line</a></div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="code" href="class_line.html">   49</a></span>&#160;<span class="keyword">class</span> <a class="code" href="class_line.html" title="For linear changes with a minimum of calculation at each step. ">Line</a></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;{</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                <span class="keyword">volatile</span> T current_value; <span class="comment">// volatile because it could be set in control interrupt and updated in audio</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                T step_size;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">volatile</span> T current_value; <span class="comment">// volatile because it could be set in control interrupt and updated in audio</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    T step_size;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="code" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51">   59</a></span>&#160;                <a class="code" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51" title="Constructor. ">Line</a> ()</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                                ;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">/** Constructor. Use the template parameter to set the type of numbers you</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">    want to use. For example, Line &lt;int&gt; myline; makes a Line which uses ints.</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="code" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51">   59</a></span>&#160;    <a class="code" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51" title="Constructor. ">Line</a> ()</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        ;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    }</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                <span class="keyword">inline</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="code" href="class_line.html#a413f620b2824c6996b3346ee54351849">   68</a></span>&#160;                T <a class="code" href="class_line.html#a413f620b2824c6996b3346ee54351849" title="Increments one step along the line. ">next</a>()</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                                ATOMIC_BLOCK(ATOMIC_RESTORESTATE)</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                                {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                                                current_value += step_size;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                                }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                                <span class="keywordflow">return</span> current_value;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">/** Increments one step along the line.</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">    @return the next value.</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">inline</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="code" href="class_line.html#a413f620b2824c6996b3346ee54351849">   68</a></span>&#160;    T <a class="code" href="class_line.html#a413f620b2824c6996b3346ee54351849" title="Increments one step along the line. ">next</a>()</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        ATOMIC_BLOCK(ATOMIC_RESTORESTATE)</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            current_value += step_size;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">return</span> current_value;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    }</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                <span class="keyword">inline</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno"><a class="code" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80">   84</a></span>&#160;                <span class="keywordtype">void</span> <a class="code" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80" title="Set the current value of the line. ">set</a>(T value)</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                {</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                                ATOMIC_BLOCK(ATOMIC_RESTORESTATE)</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                                {</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                                                current_value=value;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                                }</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="comment">/** Set the current value of the line. The Line will continue incrementing from this</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">    value using any previously calculated step size.</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">    @param value the number to set the Line&#39;s current_value to.</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keyword">inline</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="code" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80">   84</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80" title="Set the current value of the line. ">set</a>(T value)</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        ATOMIC_BLOCK(ATOMIC_RESTORESTATE)</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            current_value=value;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    }</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                <span class="keyword">inline</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno"><a class="code" href="class_line.html#a7378d526cf07c42c0792868c749dee6e">  100</a></span>&#160;                <span class="keywordtype">void</span> <a class="code" href="class_line.html#a7378d526cf07c42c0792868c749dee6e" title="Given a target value and the number of steps to take on the way, this calculates  the step size neede...">set</a>(T targetvalue, T num_steps)</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                {</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                                step_size=(T)((((<span class="keywordtype">float</span>)targetvalue-current_value)/num_steps));</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                }</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="comment">/** Given a target value and the number of steps to take on the way, this calculates</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">    the step size needed to get there from the current value.</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">    @param targetvalue the value to move towards.</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">    @param num_steps how many steps to take to reach the target.</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">inline</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="code" href="class_line.html#a7378d526cf07c42c0792868c749dee6e">  100</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_line.html#a7378d526cf07c42c0792868c749dee6e" title="Given a target value and the number of steps to take on the way, this calculates  the step size neede...">set</a>(T targetvalue, T num_steps)</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    {</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        step_size=(T)((((<span class="keywordtype">float</span>)targetvalue-current_value)/num_steps));</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    }</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                <span class="keyword">inline</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno"><a class="code" href="class_line.html#a24ad85c17562e97b6823a010a5ba04c6">  112</a></span>&#160;                <span class="keywordtype">void</span> <a class="code" href="class_line.html#a24ad85c17562e97b6823a010a5ba04c6" title="Given a new starting value, target value and the number of steps to take on the way,  this sets the step size needed to get there. ">set</a>(T startvalue, T targetvalue, T num_steps)</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                {</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                                <a class="code" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80" title="Set the current value of the line. ">set</a>(startvalue);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                                <a class="code" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80" title="Set the current value of the line. ">set</a>(targetvalue, num_steps);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="comment">/** Given a new starting value, target value and the number of steps to take on the way,</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">    this sets the step size needed to get there.</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">    @param startvalue the number to set the Line&#39;s current_value to.</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">    @param targetvalue the value to move towards.</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">    @param num_steps how many steps to take to reach the target.</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keyword">inline</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="code" href="class_line.html#a24ad85c17562e97b6823a010a5ba04c6">  112</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_line.html#a24ad85c17562e97b6823a010a5ba04c6" title="Given a new starting value, target value and the number of steps to take on the way,  this sets the step size needed to get there. ">set</a>(T startvalue, T targetvalue, T num_steps)</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    {</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        set(startvalue);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        set(targetvalue, num_steps);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    }</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;};</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* LINE_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">endif</span> <span class="comment">/* LINE_H_ */</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>Line.h</b></li>
-    <li class="footer">Generated on Mon Jul 1 2013 00:19:19 for Mozzi by
+    <li class="navelem"><a class="el" href="dir_f396504afdc959660871b003fa10164d.html">Documents</a></li><li class="navelem"><a class="el" href="dir_1ff56a8542c5da85d9f5c9ecf90c3ea3.html">Arduino</a></li><li class="navelem"><a class="el" href="dir_9e0d9c2503aad25b459a272009aa8c8a.html">libraries</a></li><li class="navelem"><a class="el" href="dir_894eb6377fca7653903e7e316f8780ba.html">Mozzi</a></li><li class="navelem"><a class="el" href="_line_8h.html">Line.h</a></li>
+    <li class="footer">Generated on Tue Jul 2 2013 22:37:20 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

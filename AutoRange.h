@@ -25,7 +25,7 @@
 
 
 /**
-  Keeps a running calculation of the range of the input values it receives.
+Keeps a running calculation of the range of the input values it receives.
 */
 template <class T>
 class

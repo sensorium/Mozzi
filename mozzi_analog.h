@@ -54,10 +54,6 @@ static const uint8_t PROGMEM adc_mapping[] = {
 #warning "Using analog pin 0 for audio input.  No other analog channels are available while using audio."
 #endif
 
-/** @defgroup analog Mozzi fast analog input functions for sensors and audio 
-Glitch-free audio by speeding up analog input functions which normally block processing.
-*/
-
 
 /** @ingroup analog
 Call this in setup() to enable reading analog inputs in the background while audio generating continues.
@@ -139,7 +135,7 @@ void adcReconnectAllDigitalIns();
 
 /** @ingroup analog
 Set the channel or pin for the next analog input to be read from.
-@param channel or pin number.  If pin number is provided, adcSetChannel() will convert it to the channel number.
+@param pin channel or pin number.  If pin number is provided, adcSetChannel() will convert it to the channel number.
 */
 void adcSetChannel(unsigned char pin);
 

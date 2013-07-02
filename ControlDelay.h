@@ -25,7 +25,8 @@
 
 #include "AudioDelay.h"
 
-/** Control-rate delay line for delaying control signals.
+/** 
+@brief Control-rate delay line for delaying control signals.
 For example, this could be used to produce echo-like effects using multiple
 instances of the same voice, when AudioDelay would be too short for an actual
 audio echo.  This is in fact just a wrapper of the AudioDelay code.

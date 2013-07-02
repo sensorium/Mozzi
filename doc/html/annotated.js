@@ -1,13 +1,6 @@
 var annotated =
 [
     [ "char2mozzi", "namespacechar2mozzi.html", null ],
-    [ "chebyshev_int8", "namespacechebyshev__int8.html", null ],
-    [ "float2mozzi", "namespacefloat2mozzi.html", null ],
-    [ "float2mozzi_uint8", "namespacefloat2mozzi__uint8.html", null ],
-    [ "sin1024_int8", "namespacesin1024__int8.html", null ],
-    [ "sin8192_uint8", "namespacesin8192__uint8.html", null ],
-    [ "sin_multi_levels_int8", "namespacesin__multi__levels__int8.html", null ],
-    [ "table_generator_template", "namespacetable__generator__template.html", null ],
     [ "ADSR", "class_a_d_s_r.html", "class_a_d_s_r" ],
     [ "AudioDelay", "class_audio_delay.html", "class_audio_delay" ],
     [ "AutoRange", "class_auto_range.html", "class_auto_range" ],
@@ -24,6 +17,7 @@ var annotated =
     [ "RecentAverage", "class_recent_average.html", "class_recent_average" ],
     [ "ReverbTank", "class_reverb_tank.html", "class_reverb_tank" ],
     [ "Sample", "class_sample.html", "class_sample" ],
+    [ "sintest", "classsintest.html", null ],
     [ "Smooth", "class_smooth.html", "class_smooth" ],
     [ "StateVariable", "class_state_variable.html", "class_state_variable" ],
     [ "WavePacket", "class_wave_packet.html", "class_wave_packet" ],

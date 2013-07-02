@@ -100,8 +100,8 @@
     display: none;
     position: absolute;
     left: 0; top: 0;
-    border: 1px solid #9483D0;
-    background-color: #F9F8FC;
+    border: 1px solid #B3ACAB;
+    background-color: #FBFAFA;
     z-index: 1;
     padding-top: 4px;
     padding-bottom: 4px;
@@ -145,7 +145,7 @@ a.SelectItem:active {
 
 a.SelectItem:hover {
     color: #FFFFFF;
-    background-color: #453287;
+    background-color: #696060;
     outline-style: none;
     text-decoration: none;
     cursor: pointer;
@@ -164,7 +164,7 @@ iframe#MSearchResults {
     position: absolute;
     left: 0; top: 0;
     border: 1px solid #000;
-    background-color: #EEEBF7;
+    background-color: #F3F2F2;
 }
 
 /* ----------------------------------- */
@@ -199,7 +199,7 @@ body.SRPage {
 
 .SRSymbol {
     font-weight: bold; 
-    color: #4B3793;
+    color: #716867;
     font-family: Arial, Verdana, sans-serif;
     text-decoration: none;
     outline: none;
@@ -207,7 +207,7 @@ body.SRPage {
 
 a.SRScope {
     display: block;
-    color: #4B3793; 
+    color: #716867; 
     font-family: Arial, Verdana, sans-serif;
     text-decoration: none;
     outline: none;
@@ -240,7 +240,7 @@ DIV.searchresults {
 /*---------------- External search page results */
 
 .searchresult {
-    background-color: #F0EEF8;
+    background-color: #F5F4F4;
 }
 
 .pages b {

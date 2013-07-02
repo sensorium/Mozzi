@@ -25,6 +25,7 @@ var hierarchy =
     [ "RecentAverage< T, NUM_READINGS >", "class_recent_average.html", null ],
     [ "ReverbTank", "class_reverb_tank.html", null ],
     [ "Sample< NUM_TABLE_CELLS, UPDATE_RATE >", "class_sample.html", null ],
+    [ "sintest", "classsintest.html", null ],
     [ "Smooth< T >", "class_smooth.html", null ],
     [ "StateVariable< FILTER_TYPE >", "class_state_variable.html", null ],
     [ "WavePacket< ALGORITHM >", "class_wave_packet.html", null ],

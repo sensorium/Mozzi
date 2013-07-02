@@ -1,0 +1,9 @@
+digraph "samples/bamboo" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_6f9635d4fbfa321d4c00f29df5cd540c {
+    graph [ bgcolor="#ddddee", pencolor="black", label="samples" fontname="Helvetica", fontsize="10", URL="dir_6f9635d4fbfa321d4c00f29df5cd540c.html"]
+  dir_112f3ba1b16e25834edeb1f9f1ac63ae [shape=box, label="bamboo", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_112f3ba1b16e25834edeb1f9f1ac63ae.html"];
+  }
+}

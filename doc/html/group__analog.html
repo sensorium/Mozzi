@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.4"/>
-<title>Mozzi: Mozzi fast analog input functions for sensors and audio</title>
+<title>Mozzi: Analog</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,6 +21,7 @@
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom_stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -28,10 +29,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="mozzi_smooth_courier_rotated_small_flying_light.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.2c</span>
+   &#160;<span id="projectnumber">0.01.2c alpha</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -49,6 +50,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
       <li><a href="examples.html"><span>Examples</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -88,7 +90,7 @@ $(document).ready(function(){initNavTree('group__analog.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -101,11 +103,11 @@ $(document).ready(function(){initNavTree('group__analog.html','');});
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Mozzi fast analog input functions for sensors and audio</div>  </div>
+<div class="title">Analog</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Glitch-free audio by speeding up analog input functions which normally block processing.  
+<p>Fast analog input functions for sensors and audio Glitch-free audio by speeding up analog input functions which normally block processing.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -147,7 +149,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:ga829091330473b48a8b9236d0be4b8755"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Call adcReadAllChannels() in updateControl() and the results for each channel will be available by ca...">adcReadAllChannels()</a> in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> and the results for each channel will be available by calling adcGetResult(channel_num) next time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> runs.  <a href="#ga829091330473b48a8b9236d0be4b8755">More...</a><br/></td></tr>
 <tr class="separator:ga829091330473b48a8b9236d0be4b8755"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3f15eb8d6694020d170ebcbedb645de7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga3f15eb8d6694020d170ebcbedb645de7">getAudioInput</a> ()</td></tr>
-<tr class="memdesc:ga3f15eb8d6694020d170ebcbedb645de7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> file.  <a href="#ga3f15eb8d6694020d170ebcbedb645de7">More...</a><br/></td></tr>
+<tr class="memdesc:ga3f15eb8d6694020d170ebcbedb645de7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the <a class="el" href="mozzi__config_8h.html">Mozzi/mozzi_config.h</a> file.  <a href="#ga3f15eb8d6694020d170ebcbedb645de7">More...</a><br/></td></tr>
 <tr class="separator:ga3f15eb8d6694020d170ebcbedb645de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -234,7 +236,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>The <a class="el" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">adcEnableInterrupt()</a>, <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Call adcReadAllChannels() in updateControl() and the results for each channel will be available by ca...">adcReadAllChannels()</a>, <a class="el" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07" title="Waits for the result of the most recent adcStartConversion(). ">adcGetResult()</a> approach is currently set to work with all channels on each kind of board. You can change the number of channels to use in <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a> by editing NUM_ANALOG_INPUTS if desired. </dd>
+<dl class="section note"><dt>Note</dt><dd>The <a class="el" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">adcEnableInterrupt()</a>, <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Call adcReadAllChannels() in updateControl() and the results for each channel will be available by ca...">adcReadAllChannels()</a>, <a class="el" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07" title="Waits for the result of the most recent adcStartConversion(). ">adcGetResult()</a> approach is currently set to work with all channels on each kind of board. You can change the number of channels to use in <a class="el" href="mozzi__analog_8cpp.html">mozzi_analog.cpp</a> by editing NUM_ANALOG_INPUTS if desired. </dd>
 <dd>
 In some cases this method can cause glitches which may have to do with the ADC interrupt interfering with the audio or control interrupts. </dd></dl>
 
@@ -294,7 +296,7 @@ In some cases this method can cause glitches which may have to do with the ADC i
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">channel</td><td>or pin number. If pin number is provided, <a class="el" href="group__analog.html#gae0d3533acb5fd56db8f7317e24bea6b5" title="Set the channel or pin for the next analog input to be read from. ">adcSetChannel()</a> will convert it to the channel number. </td></tr>
+    <tr><td class="paramname">pin</td><td>channel or pin number. If pin number is provided, <a class="el" href="group__analog.html#gae0d3533acb5fd56db8f7317e24bea6b5" title="Set the channel or pin for the next analog input to be read from. ">adcSetChannel()</a> will convert it to the channel number. </td></tr>
   </table>
   </dd>
 </dl>
@@ -441,7 +443,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Jul 1 2013 00:19:19 for Mozzi by
+    <li class="footer">Generated on Tue Jul 2 2013 22:37:22 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

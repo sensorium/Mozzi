@@ -7,9 +7,6 @@
  #include "WProgram.h"
 #endif
 
-/** @defgroup random Fast random number generator functions
-These replace Arduino random() which is so slow it will stop your audio.  They can even be used to generate audio noise.
-*/
 
 unsigned long xorshift96();
 

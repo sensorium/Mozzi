@@ -180,44 +180,44 @@ public:
 
 
 	/** Set the attack level of the ADSR.
-	@param value the attack level.
+	@param attack the attack level.
 	 */
 	inline
-	void setAttackLevel(byte value)
+	void setAttackLevel(byte attack)
 	{
-		attack.level=value;
+		attack.level=attack;
 	}
 
 
 
 	/** Set the decay level of the ADSR.
-	@param value the decay level.
+	@param decay the decay level.
 	*/
 	inline
-	void setDecayLevel(byte value)
+	void setDecayLevel(byte decay)
 	{
-		decay.level=value;
+		decay.level=decay;
 	}
 
 
 	/** Set the sustain level of the ADSR.
-	@param value the sustain level.  Usually the same as the decay level, 
+	@param sustain the sustain level.  Usually the same as the decay level, 
 	for a steady sustained note.
 	*/
 	inline
-	void setSustainLevel(byte value)
+	void setSustainLevel(byte sustain)
 	{
-		sustain.level=value;
+		sustain.level=sustain;
 	}
 	
 	/** Set the release level of the ADSR.  Normally you'd make this 0, 
 	but you have the option of some other value.
-	@param value the release level (normally 0).
+	@param release the release level (normally 0).
 	*/
 	inline
-	void setReleaseLevel(byte value)
+	void setReleaseLevel(byte release)
 	{
-		release.level=value;
+		release.level=release;
 	}
 	
 	
@@ -225,7 +225,7 @@ public:
 	/** Set the attack and decay levels of the ADSR.  This assumes a conventional 
 	ADSR where the sustain continues at the same level as the decay, till the release ramps to 0.
 	@param attack the new attack level.
-	@param value the new sustain level.
+	@param decay the new sustain level.
 	*/
 	inline
 	void setADLevels(byte attack, byte decay)
@@ -244,7 +244,7 @@ public:
 	
 	/** Set the attack time of the ADSR in milliseconds.
 	The actual time taken will be resolved within the resolution of CONTROL_RATE.
-	@param value the unsigned int attack time in milliseconds.
+	@param msec the unsigned int attack time in milliseconds.
 	 */
 	inline
 	void setAttackTime(unsigned int msec)
@@ -255,7 +255,7 @@ public:
 
 	/** Set the decay time of the ADSR in milliseconds.
 	The actual time taken will be resolved within the resolution of CONTROL_RATE.
-	@param value the unsigned int decay time in milliseconds.
+	@param msec the unsigned int decay time in milliseconds.
 	*/
 	inline
 	void setDecayTime(unsigned int msec)
@@ -267,7 +267,7 @@ public:
 	/** Set the sustain time of the ADSR in milliseconds.
 	The actual time taken will be resolved within the resolution of CONTROL_RATE.
 	The sustain phase will finish if the ADSR recieves a noteOff().
-	@param value the unsigned int sustain time in milliseconds.
+	@param msec the unsigned int sustain time in milliseconds.
 	*/
 	inline
 	void setSustainTime(unsigned int msec)
@@ -279,7 +279,7 @@ public:
 
 	/** Set the release time of the ADSR in milliseconds.
 	The actual time taken will be resolved within the resolution of CONTROL_RATE.
-	@param value the unsigned int release time in milliseconds.
+	@param msec the unsigned int release time in milliseconds.
 	*/
 	inline
 	void setReleaseTime(unsigned int msec)
@@ -293,7 +293,7 @@ public:
 	The actual times will be resolved within the resolution of CONTROL_RATE.
 	@param attack_ms the new attack time in milliseconds.
 	@param decay_ms the new decay time in milliseconds.
-	@param decay_ms the new sustain time in milliseconds.
+	@param sustain_ms the new sustain time in milliseconds.
 	@param release_ms the new release time in milliseconds.
 	*/
 	inline

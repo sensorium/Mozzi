@@ -1,0 +1,6 @@
+digraph "tables" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  dir_c14d9bf81a1758ecfa63ad49c7d2ec2e [shape=box, label="tables", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_c14d9bf81a1758ecfa63ad49c7d2ec2e.html"];
+}

@@ -1,24 +1,32 @@
 var NAVTREE =
 [
   [ "Mozzi", "index.html", [
-    [ "Welcome", "index.html", [
-      [ "Modules", "index.html#Modules", null ],
-      [ "Classes", "index.html#Classes", null ],
-      [ "Soundtables", "index.html#Soundtables", null ]
-    ] ],
+    [ "Welcome", "index.html", null ],
     [ "Modules", "modules.html", "modules" ],
     [ "Namespace Members", "namespacemembers.html", [
       [ "All", "namespacemembers.html", null ],
-      [ "Functions", "namespacemembers_func.html", null ],
-      [ "Variables", "namespacemembers_vars.html", null ]
+      [ "Functions", "namespacemembers_func.html", null ]
     ] ],
     [ "Classes", null, [
       [ "Class List", "annotated.html", "annotated" ],
+      [ "Class Index", "classes.html", null ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
         [ "Functions", "functions_func.html", null ],
         [ "Variables", "functions_vars.html", null ]
+      ] ]
+    ] ],
+    [ "Files", null, [
+      [ "File List", "files.html", "files" ],
+      [ "File Members", "globals.html", [
+        [ "All", "globals.html", "globals_dup" ],
+        [ "Functions", "globals_func.html", "globals_func" ],
+        [ "Variables", "globals_vars.html", null ],
+        [ "Typedefs", "globals_type.html", null ],
+        [ "Enumerations", "globals_enum.html", null ],
+        [ "Enumerator", "globals_eval.html", null ],
+        [ "Macros", "globals_defs.html", "globals_defs" ]
       ] ]
     ] ],
     [ "Examples", "examples.html", "examples" ]
@@ -28,7 +36,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_02_control_2_control__echo__theremin_2_control__echo__theremin_8ino-example.html",
-"group__mozzi__fixmath.html#gaa1e02cbcdc65171103653df03fec3b76"
+"class_d_cfilter.html",
+"group__core.html#gae5d737db8bc97ecf08d2ea3121782d26",
+"mozzi__fixmath_8h.html#ga7933033ba3cd84a4d09c0bd652378a38",
+"triangle512__int8_8h.html#a1b2acb084c1e3db4faa2d714217d2aaf"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

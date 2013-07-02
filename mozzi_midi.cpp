@@ -124,7 +124,7 @@ uses cheap linear interpolation between whole midi-note frequency equivalents
 stored in a lookup table, so is less accurate than the float version, mtof(),
 for non-whole midi values.
 @note Timing: ~8 us.
-@param midival a midi note number in Q16n16 format, for fractional values.
+@param midival_fractional a midi note number in Q16n16 format, for fractional values.
 @return the frequency represented by the input midi note number, in Q16n16
 fixed point fractional integer format, where the lower word is a fractional value.
 */

@@ -35,7 +35,7 @@ enum interpolation_types {LINEAR,ALLPASS};
 
 
 /** 
-@brief Audio delay line with feedback for comb filter, flange, chorus and short echo effects.
+Audio delay line with feedback for comb filter, flange, chorus and short echo effects.
 @tparam NUM_BUFFER_SAMPLES is the length of the delay buffer in samples, and should be a
 power of two. The maximum delay length which will fit in an atmega328 is half
 that of a plain AudioDelay object, in this case 256 cells, or about 15

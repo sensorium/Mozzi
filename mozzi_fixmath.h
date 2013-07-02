@@ -29,10 +29,7 @@
  #include "WProgram.h"
 #endif
 
-/** @defgroup mozzi_fixmath Mozzi fixed point fractional number types and conversion routines.
-Fixed point is often best for fast audio code for Arduino, and these can ease some of the pain.
-@note Take care when converting that the important bits of your numbers will fit in the types you choose!
-@note Timing: converting between fixed and float 10-12us, converting between fixed types about 1us.
+/**@ingroup fixmath
 @{
 */
 // types
@@ -57,7 +54,11 @@ typedef unsigned long	Q0n32;		/**< unsigned (normal unsigned long int) number us
 typedef unsigned long	Q8n24;		/**< signed fractional number using 8 integer bits and 24 fractional bits, represents 0 to 255.999*/
 typedef unsigned long Q24n8;		/**< unsigned fractional number using 24 integer bits and 8 fractional bits, represents 0 to  16777215*/
 typedef unsigned long Q16n16;	/**< unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535.999*/
+/** @}*/
 
+/** @ingroup fixmath
+@{
+*/
 // macros to save runtime calculations for representations of 1
 #define Q0n7_FIX1 ((Q0n7) 127)			/**< 0.992 in Q0n7 format*/
 #define Q7n8_FIX1 ((Q7n8) 256)			/**< 1 in Q7n8 format*/
@@ -77,10 +78,11 @@ typedef unsigned long Q16n16;	/**< unsigned fractional number using 16 integer b
 #define Q16n16_2PI ((Q16n16) 411775)		/**< 2*PI in Q16n16 format*/
 
 #define low15bits ((Q1n15) 32767) /**< Useful for keeping the lower 15 bits of a Q1n15 number, using &*/
+/** @}*/
 
-// Type conversions:
+
 /*
-Float to Q
+Type conversions: Float to Q
  
 To convert a number from floating point to Qm.n format:
  
@@ -94,10 +96,11 @@ To convert a number from Qm.n format to floating point:
   Convert the number to floating point as if it were an integer
   Multiply by 2^-n
 */
-
+/** @ingroup fixmath
+@{
+*/
 inline
 Q0n7 float_to_Q0n7(float a) { return static_cast<Q0n7>(a*256); } 		/**<Convert float to Q0n7 fix. @param a is a float*/
-
 inline
 Q0n8 float_to_Q0n8(float a) { return static_cast<Q0n8>(a*256); }		/**<Convert float to Q0n8 fix. @param a is a float*/
 
@@ -131,7 +134,6 @@ Q0n16 float_to_Q0n16(float a) { return static_cast<Q0n16>(a*65536); }	/**<Conver
 inline
 Q15n16 float_to_Q15n16(float a) { return static_cast<Q15n16>(a*65536); }	/**<Convert float to Q15n16 fix. @param a is a float*/
 
-
 inline
 Q1n14 Q0n7_to_Q1n14(Q0n7 a) { return (static_cast<Q1n14>(a))<<7; }		/**<Convert Q0n7 char to Q1n14 fix. @param a is a Q0n7 char */
 
@@ -140,7 +142,6 @@ Q15n16 Q0n7_to_Q15n16(Q0n7 a) { return (static_cast<Q15n16>(a))<<8; }		/**<Conve
 
 inline
 float Q0n7_to_float(Q0n7 a) { return (static_cast<float>(a))/256; }		/**<Convert Q0n7 fix to float. @param a is a Q0n7 char*/
-
 
 inline
 Q1n15 Q0n8_to_Q1n15(Q0n8 a) { return (static_cast<Q1n15>(a))<<7; }			/**<Convert Q0n8 unsigned char to Q1n15 fix. @param a is a Q0n8 unsigned char */
@@ -163,7 +164,6 @@ Q16n16 Q0n8_to_Q16n16(Q0n8 a) { return (static_cast<Q16n16>(a))<<8; }		/**<Conve
 inline
 float Q0n8_to_float(Q0n8 a) { return (static_cast<float>(a))/256; }	/**<Convert Q0n8 fix to float. @param a is a Q0n8 unsigned char*/
 
-
 inline
 Q7n8 Q7n0_to_Q7n8(Q7n0 a) { return (static_cast<Q7n8>(a))<<8; }			/**<Convert Q7n0 char to Q7n8 fix. @param a is a char*/
 
@@ -179,13 +179,11 @@ Q15n16 Q8n0_to_Q15n16(Q8n0 a) { return (static_cast<Q15n16>(a))<<16; }			/**<Con
 inline
 Q16n16 Q8n0_to_Q16n16(Q8n0 a) { return (static_cast<Q16n16>(a))<<16; }			/**<Convert Q8n0 unsigned char to Q16n16 fix. @param a is a Q8n0 unsigned char */
 
-
 inline
 Q7n0 Q7n8_to_Q7n0(Q7n8 a) { return static_cast<Q7n0>(a>>8); }			/**<Convert Q7n8 fix to Q7n0. @param a is a Q7n8 int*/
 
 inline
 float Q7n8_to_float(Q7n8 a) { return (static_cast<float>(a))/256; }			/**<Convert Q7n8 fix to float. @param a is a Q7n8 int*/
-
 
 inline
 Q8n0 Q8n8_to_Q8n0(Q8n8 a) { return static_cast<Q8n0>(a>>8); }			/**<Convert Q8n8 fix to Q8n0 unsigned char. @param a is a Q8n8 unsigned int*/
@@ -228,8 +226,6 @@ Q16n16 Q16n0_to_Q16n16(Q16n0 a) { return (static_cast<Q16n16>(a))<<16; }			/**<C
 
 inline
 float Q16n0_to_float(Q16n0 a) { return (static_cast<float>(a)); }					/**<Convert Q16n0 unsigned int to float. @param a is a Q16n0 unsigned int*/
-
-
 
 inline
 Q0n8 Q8n24_to_Q0n8(Q8n24 a) { return static_cast<Q0n8>(a>>16); }		/**<Convert Q8n24 fixed to Q0n8 unsigned char. @param a is a Q8n24 unsigned long*/
@@ -300,9 +296,10 @@ Q24n8 Q16n16_to_Q24n8(Q16n16 a) { return static_cast<Q24n8>(a>>8); }		/**<Conver
 
 inline
 float Q16n16_to_float(Q16n16 a) { return (static_cast<float>(a))/65536; }		/**<Convert fix to float. @param a is a Q16n16 unsigned long*/
+/** @}*/
 
-
-/** Fast (?) fixed point multiply for Q7n8 fractional numbers.
+/** @ingroup fixmath
+Fast (?) fixed point multiply for Q7n8 fractional numbers.
 Interesting: this is slower than doing ((long)a*b)>>16.
 Timing with an oscilloscope shows:
 p = Q7n8_multfix(a,b); // 1.52ms
@@ -331,6 +328,7 @@ __asm__ __volatile__ (    \
 	  );        \
   prod;        \
 })
+
 
 // based on:
 /*
@@ -533,20 +531,16 @@ end
   */
 
 
-// dangerous overflow-prone  int power function
-int ipow(int base, int exp);
+/** @ingroup fixmath
+@{ 
+*/
+int ipow(int base, int exp); /**< dangerous overflow-prone  int power function */
 
-
-
-// Base 2 power, using fixed-point exponent
-Q16n16 Q16n16_pow2(Q8n8 exponent);
-
+Q16n16 Q16n16_pow2(Q8n8 exponent); /**< Base 2 power, using fixed-point exponent */
 
 unsigned char byteMod(unsigned char n, unsigned char d);
 unsigned char byteDiv(unsigned char n, unsigned char d);
 unsigned char byteRnd(unsigned char min, unsigned char max);
-
-/** @}
-*/
+/** @} */
 
 #endif /* FIXEDMATH_H_ */

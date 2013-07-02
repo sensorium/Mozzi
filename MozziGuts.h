@@ -33,58 +33,17 @@
 #include "TimerOne.h"
 #include "FrequencyTimer2.h"
 
-/** 
-@mainpage Welcome
-
-The latest version of Mozzi and this documentation are at the <a href="http://sensorium.github.com/Mozzi/">Mozzi home page.</a>
-
-Here's a brief description of each section of this documentation:
-
-@section Modules
-Fixed point number types, macros and functions for fast fractional maths.
-
-Mozzi core definitions and functions, which are used in every Mozzi sketch.
-
-Utility functions which are generally useful, including midi note to frequency conversion, efficient asynchronous analog input and random functions.
-
-@section Classes
-The Classes used to generate control and audio signals.
-
-
-@section  Soundtables
-Includes ready-to-use wave tables and a few example samples which are in
-the Mozzi/tables and Mozzi/samples folders.
-
-You can convert your own sounds from a program like Audacity to tables for Mozzi
-with a script called char2mozzi.py, in Mozzi/python.  Read the char2mozzi.py file for instructions.
-*/
-
-
-/** @defgroup soundtables Look-up-tables and python scripts to generate tables or convert sounds. 
-Includes ready-to-use wave tables
-and a few example samples which are in the Mozzi/tables and Mozzi/samples
-folders. You can convert your own sounds from a program like Audacity to tables
-for Mozzi with a script called char2mozzi.py, in Mozzi/python. Read the
-char2mozzi.py file for instructions.  Also check out the other scripts in the python 
-folder for templates to use if you want to do your own thing.
-*/
-
-
-/** @defgroup core Mozzi core definitions and functions
-The bones of every Mozzi sketch.
-*/
-
 
 /** @ingroup core
 Control rate setting.
 Mozzi's CONTROL_RATE sets how many times per second updateControl() is called.
-It can be any power of 2 greater than 64, and the largest value where it starts to
-become impractical is around 1024.  64, 128, 256 and sometimes 512 are all usable values.
-Try to keep it as low as you can, for efficiency, though higher rates can sometimes give smoother results,
-avoiding the need to interpolate sensitive variables at audio rate in updateAudio().
-CONTROL_RATE has a default of 64 Hz, but it can be changed at the top of your sketch, 
-after the \#includes, for example:
-\#define CONTROL_RATE 256 
+It can be any power of 2 greater than 64, and the largest value where it starts
+to become impractical is around 1024. 64, 128, 256 and sometimes 512 are all
+usable values. Try to keep it as low as you can, for efficiency, though higher
+rates can sometimes give smoother results, avoiding the need to interpolate
+sensitive variables at audio rate in updateAudio(). CONTROL_RATE has a default
+of 64 Hz, but it can be changed at the top of your sketch, after the \#includes,
+for example: \#define CONTROL_RATE 256
 */
 #define CONTROL_RATE 64
 
@@ -322,9 +281,10 @@ int getAudioInput();
 
 
 /** @ingroup core
-A replacement for Arduino micros() which is disabled by Mozzi which takes over Timer 0 for control interrupts.
-mozziMicros has a resolution of 61 microseconds.
-May be a useful hack for replacing micros() in time-related sensor libraries.
+A replacement for Arduino micros() which is disabled by Mozzi which takes over
+Timer 0 for control interrupts. mozziMicros is updated each time an audio sample
+is output, so the resolution is 1/AUDIO_RATE (61 microseconds when AUDIO_RATE is
+16384 Hz).
 @return the approximate number of microseconds since the program began.
 @todo  incorporate mozziMicros() in a more accurate EventDelay()?
 */

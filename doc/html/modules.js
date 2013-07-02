@@ -1,10 +1,10 @@
 var modules =
 [
-    [ "Mozzi fast analog input functions for sensors and audio", "group__analog.html", "group__analog" ],
-    [ "Mozzi fixed point fractional number types and conversion routines.", "group__mozzi__fixmath.html", "group__mozzi__fixmath" ],
-    [ "Midi note number to frequency conversions", "group__midi.html", "group__midi" ],
-    [ "Fast random number generator functions", "group__random.html", "group__random" ],
-    [ "Mozzi utility functions", "group__util.html", "group__util" ],
-    [ "Look-up-tables and python scripts to generate tables or convert sounds.", "group__soundtables.html", null ],
-    [ "Mozzi core definitions and functions", "group__core.html", "group__core" ]
+    [ "Core", "group__core.html", "group__core" ],
+    [ "Analog", "group__analog.html", "group__analog" ],
+    [ "Fixmath", "group__fixmath.html", "group__fixmath" ],
+    [ "Midi", "group__midi.html", "group__midi" ],
+    [ "Random", "group__random.html", "group__random" ],
+    [ "Util", "group__util.html", "group__util" ],
+    [ "Soundtables", "group__soundtables.html", null ]
 ];

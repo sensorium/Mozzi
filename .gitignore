@@ -5,6 +5,7 @@ tags
 user_guide.md
 notes.txt
 FAQ.md
+*.dox
 *~
 *.o
 *.lo

@@ -25,7 +25,7 @@
 
 
 /** 
-@brief Audio delay line for comb filter, flange, chorus and short echo effects.
+Audio delay line for comb filter, flange, chorus and short echo effects.
 @tparam  NUM_BUFFER_SAMPLES is the length of the delay buffer in samples.  This should
 be a power of two. The largest delay you'll fit in an atmega328 will be 512
 cells, which at 16384 Hz sample rate is 31 milliseconds. More of a flanger or a

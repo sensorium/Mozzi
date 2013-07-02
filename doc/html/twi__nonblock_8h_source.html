@@ -21,6 +21,7 @@
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom_stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -28,10 +29,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="mozzi_smooth_courier_rotated_small_flying_light.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.2c</span>
+   &#160;<span id="projectnumber">0.01.2c alpha</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -49,6 +50,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li><a href="examples.html"><span>Examples</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -66,6 +68,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           </span>
         </div>
       </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -88,7 +96,7 @@ $(document).ready(function(){initNavTree('twi__nonblock_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -102,7 +110,7 @@ $(document).ready(function(){initNavTree('twi__nonblock_8h_source.html','');});
 <div class="title">twi_nonblock.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<a href="twi__nonblock_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * twi_nonblock.h</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Copyright 2012 Marije Baalman.</span></div>
@@ -120,90 +128,92 @@ $(document).ready(function(){initNavTree('twi__nonblock_8h_source.html','');});
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> * You should have received a copy of the GNU General Public License</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifndef TWI_NONBLOCK_H_</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define TWI_NONBLOCK_H_</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;Arduino.h&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">ifndef</span> <span class="preprocessor">TWI_NONBLOCK_H_</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">TWI_NONBLOCK_H_</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;Arduino.h&quot;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;compat/twi.h&gt;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">compat</span><span class="preprocessor">/</span><span class="preprocessor">twi</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#define cbi(sfr, bit) (_SFR_BYTE(sfr) &amp;= ~_BV(bit))</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="code" href="twi__nonblock_8h.html#ae70baf5399951da1e7ad45a0ed890832">   27</a></span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">cbi</span><span class="preprocessor">(</span><span class="preprocessor">sfr</span><span class="preprocessor">,</span> <span class="preprocessor">bit</span><span class="preprocessor">)</span> <span class="preprocessor">(</span><span class="preprocessor">_SFR_BYTE</span><span class="preprocessor">(</span><span class="preprocessor">sfr</span><span class="preprocessor">)</span> <span class="preprocessor">&amp;=</span> <span class="preprocessor">~</span><span class="preprocessor">_BV</span><span class="preprocessor">(</span><span class="preprocessor">bit</span><span class="preprocessor">)</span><span class="preprocessor">)</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="code" href="twi__nonblock_8h.html#ac4a5536d9bf092116f88b94797ddc882">   28</a></span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">sbi</span><span class="preprocessor">(</span><span class="preprocessor">sfr</span><span class="preprocessor">,</span> <span class="preprocessor">bit</span><span class="preprocessor">)</span> <span class="preprocessor">(</span><span class="preprocessor">_SFR_BYTE</span><span class="preprocessor">(</span><span class="preprocessor">sfr</span><span class="preprocessor">)</span> <span class="preprocessor">|=</span> <span class="preprocessor">_BV</span><span class="preprocessor">(</span><span class="preprocessor">bit</span><span class="preprocessor">)</span><span class="preprocessor">)</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">// --- twi reading variables</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">  #ifndef TWI_FREQ</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor"></span><span class="preprocessor">  #define TWI_FREQ 100000L</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor"></span><span class="preprocessor">  #endif</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">  #ifndef TWI_BUFFER_LENGTH</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor"></span><span class="preprocessor">  #define TWI_BUFFER_LENGTH 32</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor"></span><span class="preprocessor">  #endif</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">  #define TWI_READY 0</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor"></span><span class="preprocessor">  #define TWI_PRE_MRX   1</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor"></span><span class="preprocessor">  #define TWI_MRX   2</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor"></span><span class="preprocessor">  #define TWI_PRE_MTX   3</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor"></span><span class="preprocessor">  #define TWI_MTX   4</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor"></span><span class="preprocessor">  #define TWI_SRX   5</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor"></span><span class="preprocessor">  #define TWI_STX   6</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="preprocessor">#</span><span class="preprocessor">ifndef</span> <span class="preprocessor">TWI_FREQ</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="code" href="twi__nonblock_8h.html#a3e79c6425e8cc6a0ce853eb49a45e5b9">   32</a></span>&#160;  <span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">TWI_FREQ</span> 100000L</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="preprocessor">#</span><span class="preprocessor">ifndef</span> <span class="preprocessor">TWI_BUFFER_LENGTH</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="code" href="twi__nonblock_8h.html#a18f2336f01cb5b7f479e65ee78020c76">   36</a></span>&#160;  <span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">TWI_BUFFER_LENGTH</span> 32</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="code" href="twi__nonblock_8h.html#a78f8e40420d26b512b064b1902f5d559">   39</a></span>&#160;  <span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">TWI_READY</span> 0</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="code" href="twi__nonblock_8h.html#a170e028f798920121e883edf6cca963c">   40</a></span>&#160;  <span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">TWI_PRE_MRX</span>   1</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="code" href="twi__nonblock_8h.html#a4e51cef0c946abc25dca6e7edaa1653b">   41</a></span>&#160;  <span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">TWI_MRX</span>   2</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="code" href="twi__nonblock_8h.html#af3bfd9af98c4e29dc9d813b3bf4fa68c">   42</a></span>&#160;  <span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">TWI_PRE_MTX</span>   3</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="code" href="twi__nonblock_8h.html#a18bbad08828cae8d1e9fd9b8105e3ebc">   43</a></span>&#160;  <span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">TWI_MTX</span>   4</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="code" href="twi__nonblock_8h.html#a0c36c496c84490bf65979fcc79e5e1b4">   44</a></span>&#160;  <span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">TWI_SRX</span>   5</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="code" href="twi__nonblock_8h.html#afa37d05db1b20f3567371ef9e7bbbc48">   45</a></span>&#160;  <span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">TWI_STX</span>   6</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">static</span> <span class="keyword">volatile</span> uint8_t twi_state;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">static</span> <span class="keyword">volatile</span> uint8_t twi_oldstate;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">// static uint8_t twiint_masrw;</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">static</span> uint8_t twi_slarw;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">static</span> uint8_t twi_masterBuffer[TWI_BUFFER_LENGTH];</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">static</span> uint8_t twi_masterBuffer[<a class="code" href="twi__nonblock_8h.html#a18f2336f01cb5b7f479e65ee78020c76">TWI_BUFFER_LENGTH</a>];</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">static</span> <span class="keyword">volatile</span> uint8_t twi_masterBufferIndex;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">static</span> uint8_t twi_masterBufferLength;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">static</span> <span class="keyword">volatile</span> uint8_t twi_error;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#define BUFFER_LENGTH 32</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor"></span><span class="keyword">static</span> uint8_t rxBuffer[BUFFER_LENGTH];</div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="code" href="twi__nonblock_8h.html#af7b7dc9a200cb1404c280bd500fd1551">   58</a></span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">BUFFER_LENGTH</span> 32</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">static</span> uint8_t rxBuffer[<a class="code" href="twi__nonblock_8h.html#af7b7dc9a200cb1404c280bd500fd1551">BUFFER_LENGTH</a>];</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">static</span> uint8_t rxBufferIndex = 0;</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">static</span> uint8_t rxBufferLength = 0;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">static</span> uint8_t txAddress = 0;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">static</span> uint8_t txBuffer[BUFFER_LENGTH];</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">static</span> uint8_t txBuffer[<a class="code" href="twi__nonblock_8h.html#af7b7dc9a200cb1404c280bd500fd1551">BUFFER_LENGTH</a>];</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">static</span> uint8_t txBufferIndex = 0;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">static</span> uint8_t txBufferLength = 0;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">static</span> uint8_t transmitting;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">void</span> initialize_twi_nonblock();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">void</span> <a class="code" href="twi__nonblock_8h.html#af181de038aef868afdc2add729c0bbb5">initialize_twi_nonblock</a>();</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;uint8_t twowire_requestFrom(uint8_t address, uint8_t quantity);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keywordtype">void</span> twowire_beginTransmission( uint8_t address );</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordtype">void</span> twowire_send( uint8_t data );</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;uint8_t twowire_endTransmission(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<a class="code" href="twi__nonblock_8h.html#a69979f17267b69788d66e195eb20125e">uint8_t</a> <a class="code" href="twi__nonblock_8h.html#a69979f17267b69788d66e195eb20125e">twowire_requestFrom</a>(<a class="code" href="twi__nonblock_8h.html#a69979f17267b69788d66e195eb20125e">uint8_t</a> <a class="code" href="twi__nonblock_8h.html#a69979f17267b69788d66e195eb20125e">address</a>, <a class="code" href="twi__nonblock_8h.html#a69979f17267b69788d66e195eb20125e">uint8_t</a> <a class="code" href="twi__nonblock_8h.html#a69979f17267b69788d66e195eb20125e">quantity</a>);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keywordtype">void</span> <a class="code" href="twi__nonblock_8h.html#af903bddac63f885f3182a322eb825439">twowire_beginTransmission</a>( uint8_t address );</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordtype">void</span> <a class="code" href="twi__nonblock_8h.html#a3502e282ddd534ba143095e0d1e6153f">twowire_send</a>( uint8_t data );</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<a class="code" href="twi__nonblock_8h.html#a3aa463df29bfc6f3ef887a53294c2e44">uint8_t</a> <a class="code" href="twi__nonblock_8h.html#a3aa463df29bfc6f3ef887a53294c2e44">twowire_endTransmission</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;uint8_t twi_initiateReadFrom(uint8_t address, uint8_t length);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keywordtype">void</span> twi_continueReadFrom();</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">/// non-blocking functions:</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<a class="code" href="twi__nonblock_8h.html#a2d3c2b5761e61ce7b6da0bf582157e64" title="non-blocking functions: ">uint8_t</a> <a class="code" href="twi__nonblock_8h.html#a2d3c2b5761e61ce7b6da0bf582157e64" title="non-blocking functions: ">twi_initiateReadFrom</a>(<a class="code" href="twi__nonblock_8h.html#a2d3c2b5761e61ce7b6da0bf582157e64" title="non-blocking functions: ">uint8_t</a> <a class="code" href="twi__nonblock_8h.html#a2d3c2b5761e61ce7b6da0bf582157e64" title="non-blocking functions: ">address</a>, <a class="code" href="twi__nonblock_8h.html#a2d3c2b5761e61ce7b6da0bf582157e64" title="non-blocking functions: ">uint8_t</a> <a class="code" href="twi__nonblock_8h.html#a2d3c2b5761e61ce7b6da0bf582157e64" title="non-blocking functions: ">length</a>);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keywordtype">void</span> <a class="code" href="twi__nonblock_8h.html#a024f9a641b67863de23a45cea1a49d35">twi_continueReadFrom</a>();</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;uint8_t twi_readMasterBuffer( uint8_t* data, uint8_t length );</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<a class="code" href="twi__nonblock_8h.html#a1d70026061f6fadd1e3724239b8e5bc2">uint8_t</a> <a class="code" href="twi__nonblock_8h.html#a1d70026061f6fadd1e3724239b8e5bc2">twi_readMasterBuffer</a>( <a class="code" href="twi__nonblock_8h.html#a1d70026061f6fadd1e3724239b8e5bc2">uint8_t</a>* <a class="code" href="twi__nonblock_8h.html#a1d70026061f6fadd1e3724239b8e5bc2">data</a>, <a class="code" href="twi__nonblock_8h.html#a1d70026061f6fadd1e3724239b8e5bc2">uint8_t</a> <a class="code" href="twi__nonblock_8h.html#a1d70026061f6fadd1e3724239b8e5bc2">length</a> );</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;uint8_t twi_initiateWriteTo(uint8_t address, uint8_t* data, uint8_t length );</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keywordtype">void</span> twi_continueWriteTo();</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<a class="code" href="twi__nonblock_8h.html#ac8f66f76ece44f2726190477727ce01c" title="--------------— non-blocking ------— ">uint8_t</a> <a class="code" href="twi__nonblock_8h.html#ac8f66f76ece44f2726190477727ce01c" title="--------------— non-blocking ------— ">twi_initiateWriteTo</a>(<a class="code" href="twi__nonblock_8h.html#ac8f66f76ece44f2726190477727ce01c" title="--------------— non-blocking ------— ">uint8_t</a> <a class="code" href="twi__nonblock_8h.html#ac8f66f76ece44f2726190477727ce01c" title="--------------— non-blocking ------— ">address</a>, <a class="code" href="twi__nonblock_8h.html#ac8f66f76ece44f2726190477727ce01c" title="--------------— non-blocking ------— ">uint8_t</a>* <a class="code" href="twi__nonblock_8h.html#ac8f66f76ece44f2726190477727ce01c" title="--------------— non-blocking ------— ">data</a>, <a class="code" href="twi__nonblock_8h.html#ac8f66f76ece44f2726190477727ce01c" title="--------------— non-blocking ------— ">uint8_t</a> <a class="code" href="twi__nonblock_8h.html#ac8f66f76ece44f2726190477727ce01c" title="--------------— non-blocking ------— ">length</a> );</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keywordtype">void</span> <a class="code" href="twi__nonblock_8h.html#a5443fa2d7cdb3dcca731ffbeb3b025e1">twi_continueWriteTo</a>();</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keywordtype">void</span> twi_reply(uint8_t ack);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">void</span> twi_stop(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keywordtype">void</span> twi_releaseBus(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keywordtype">void</span> <a class="code" href="twi__nonblock_8h.html#a19f62ca29970133e675862b58d2f3ac3">twi_reply</a>(uint8_t ack);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">void</span> <a class="code" href="twi__nonblock_8h.html#acf52d6c93df110dee6d402b389e5042e">twi_stop</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keywordtype">void</span> <a class="code" href="twi__nonblock_8h.html#a7f830793058786f5597ddd1d80b885ae">twi_releaseBus</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;uint8_t twi_readFromBlocking(uint8_t address, uint8_t* data, uint8_t length);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;uint8_t twi_writeToBlocking(uint8_t address, uint8_t* data, uint8_t length, uint8_t wait);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">/// blocking versions:</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<a class="code" href="twi__nonblock_8h.html#a1fa89bb0f151e2e194cab9b2ef795ec7" title="blocking versions: ">uint8_t</a> <a class="code" href="twi__nonblock_8h.html#a1fa89bb0f151e2e194cab9b2ef795ec7" title="blocking versions: ">twi_readFromBlocking</a>(<a class="code" href="twi__nonblock_8h.html#a1fa89bb0f151e2e194cab9b2ef795ec7" title="blocking versions: ">uint8_t</a> <a class="code" href="twi__nonblock_8h.html#a1fa89bb0f151e2e194cab9b2ef795ec7" title="blocking versions: ">address</a>, <a class="code" href="twi__nonblock_8h.html#a1fa89bb0f151e2e194cab9b2ef795ec7" title="blocking versions: ">uint8_t</a>* <a class="code" href="twi__nonblock_8h.html#a1fa89bb0f151e2e194cab9b2ef795ec7" title="blocking versions: ">data</a>, <a class="code" href="twi__nonblock_8h.html#a1fa89bb0f151e2e194cab9b2ef795ec7" title="blocking versions: ">uint8_t</a> <a class="code" href="twi__nonblock_8h.html#a1fa89bb0f151e2e194cab9b2ef795ec7" title="blocking versions: ">length</a>);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<a class="code" href="twi__nonblock_8h.html#a59f5035172d7bd0dfa20bd29e15075fb" title="-—end—— non-blocking version ----—— ">uint8_t</a> <a class="code" href="twi__nonblock_8h.html#a59f5035172d7bd0dfa20bd29e15075fb" title="-—end—— non-blocking version ----—— ">twi_writeToBlocking</a>(<a class="code" href="twi__nonblock_8h.html#a59f5035172d7bd0dfa20bd29e15075fb" title="-—end—— non-blocking version ----—— ">uint8_t</a> <a class="code" href="twi__nonblock_8h.html#a59f5035172d7bd0dfa20bd29e15075fb" title="-—end—— non-blocking version ----—— ">address</a>, <a class="code" href="twi__nonblock_8h.html#a59f5035172d7bd0dfa20bd29e15075fb" title="-—end—— non-blocking version ----—— ">uint8_t</a>* <a class="code" href="twi__nonblock_8h.html#a59f5035172d7bd0dfa20bd29e15075fb" title="-—end—— non-blocking version ----—— ">data</a>, <a class="code" href="twi__nonblock_8h.html#a59f5035172d7bd0dfa20bd29e15075fb" title="-—end—— non-blocking version ----—— ">uint8_t</a> <a class="code" href="twi__nonblock_8h.html#a59f5035172d7bd0dfa20bd29e15075fb" title="-—end—— non-blocking version ----—— ">length</a>, <a class="code" href="twi__nonblock_8h.html#a59f5035172d7bd0dfa20bd29e15075fb" title="-—end—— non-blocking version ----—— ">uint8_t</a> <a class="code" href="twi__nonblock_8h.html#a59f5035172d7bd0dfa20bd29e15075fb" title="-—end—— non-blocking version ----—— ">wait</a>);</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>twi_nonblock.h</b></li>
-    <li class="footer">Generated on Mon Jul 1 2013 00:19:19 for Mozzi by
+    <li class="navelem"><a class="el" href="dir_f396504afdc959660871b003fa10164d.html">Documents</a></li><li class="navelem"><a class="el" href="dir_1ff56a8542c5da85d9f5c9ecf90c3ea3.html">Arduino</a></li><li class="navelem"><a class="el" href="dir_9e0d9c2503aad25b459a272009aa8c8a.html">libraries</a></li><li class="navelem"><a class="el" href="dir_894eb6377fca7653903e7e316f8780ba.html">Mozzi</a></li><li class="navelem"><a class="el" href="twi__nonblock_8h.html">twi_nonblock.h</a></li>
+    <li class="footer">Generated on Tue Jul 2 2013 22:37:19 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

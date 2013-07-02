@@ -1,0 +1,49 @@
+/* Mozzi extra CSS for doxygen 1.8.3.1 */
+
+#projectlogo
+{
+	text-align: center;
+	vertical-align: bottom;
+	border-collapse: separate;
+}
+ 
+#projectlogo img
+{ 
+	max-width: 50%;
+	margin: 10%;
+	border: 0px none;
+}
+ 
+#projectname
+{
+	color: white;
+	font: 300% Tahoma, Arial,sans-serif;
+	margin: 0px;
+	padding: 2px 0px;
+}
+    
+#projectbrief
+{
+	color: white;
+	font: 120% Tahoma, Arial,sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+
+#projectnumber
+{
+	color: white;
+	font: 50% Tahoma, Arial,sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+
+#titlearea
+{
+	background-color: #766C6B;
+	padding: 5px;
+	margin: 0px;
+	width: 100%;
+	border-bottom: 1px solid #5373B4;
+}
+

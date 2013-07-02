@@ -21,6 +21,7 @@
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom_stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -28,10 +29,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="mozzi_smooth_courier_rotated_small_flying_light.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">alpha 0.01.2c</span>
+   &#160;<span id="projectnumber">0.01.2c alpha</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -49,6 +50,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
       <li><a href="examples.html"><span>Examples</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -71,6 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
+      <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
       <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
@@ -95,7 +98,7 @@ $(document).ready(function(){initNavTree('class_sample.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -115,6 +118,8 @@ $(document).ready(function(){initNavTree('class_sample.html','');});
 
 <p><a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable. ">Sample</a> is like <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>, it plays a wavetable.  
  <a href="class_sample.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_sample_8h_source.html">Sample.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -160,7 +165,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a11a7948a655bea79ddd67059c2186816"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a11a7948a655bea79ddd67059c2186816">setFreq</a> (float frequency)</td></tr>
 <tr class="memdesc:a11a7948a655bea79ddd67059c2186816"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the sample frequency with a float.  <a href="#a11a7948a655bea79ddd67059c2186816">More...</a><br/></td></tr>
 <tr class="separator:a11a7948a655bea79ddd67059c2186816"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2086deef68e43620d7502dd8bb78678"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#aa2086deef68e43620d7502dd8bb78678">setFreq_Q24n8</a> (<a class="el" href="group__mozzi__fixmath.html#gaa8e579259244eb60e7f70576c8e61cbd">Q24n8</a> frequency)</td></tr>
+<tr class="memitem:aa2086deef68e43620d7502dd8bb78678"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#aa2086deef68e43620d7502dd8bb78678">setFreq_Q24n8</a> (<a class="el" href="group__fixmath.html#gaa8e579259244eb60e7f70576c8e61cbd">Q24n8</a> frequency)</td></tr>
 <tr class="memdesc:aa2086deef68e43620d7502dd8bb78678"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the frequency using Q24n8 fixed-point number format.  <a href="#aa2086deef68e43620d7502dd8bb78678">More...</a><br/></td></tr>
 <tr class="separator:aa2086deef68e43620d7502dd8bb78678"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5c4e048c4aa7a36710e58466caabc94"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ad5c4e048c4aa7a36710e58466caabc94">atIndex</a> (unsigned int index)</td></tr>
@@ -188,7 +193,7 @@ class Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</h3>
 </dl>
 <h1><a class="anchor" id="char2mozzi"></a>
 char2mozzi</h1>
-<p>Converting soundfiles for Mozzi. There is a python script called <a class="el" href="char2mozzi_8py_source.html">char2mozzi.py</a> in the Mozzi/python folder. The script converts raw sound data saved from a program like Audacity. Instructions are in the <a class="el" href="char2mozzi_8py_source.html">char2mozzi.py</a> file. </p>
+<p>Converting soundfiles for Mozzi. There is a python script called <a class="el" href="char2mozzi_8py.html" title="A script for converting raw 8 bit sound data files to wavetables for Mozzi. ">char2mozzi.py</a> in the Mozzi/python folder. The script converts raw sound data saved from a program like Audacity. Instructions are in the <a class="el" href="char2mozzi_8py.html" title="A script for converting raw 8 bit sound data files to wavetables for Mozzi. ">char2mozzi.py</a> file. </p>
 
 <p>Definition at line <a class="el" href="_sample_8h_source.html#l00062">62</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -217,7 +222,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">TABLE_NAME</td><td>the name of the array the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable. ">Sample</a> will be using. This can be found in the table ".h" file if you are using a table made for Mozzi by the <a class="el" href="char2mozzi_8py_source.html">char2mozzi.py</a> python script in Mozzi's python folder. Sound tables can be of arbitrary lengths for <a class="el" href="class_sample.html#af2ce86342a595a3571ce2e9a38e96a96" title="Constructor. ">Sample()</a>. </td></tr>
+    <tr><td class="paramname">TABLE_NAME</td><td>the name of the array the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable. ">Sample</a> will be using. This can be found in the table ".h" file if you are using a table made for Mozzi by the <a class="el" href="char2mozzi_8py.html" title="A script for converting raw 8 bit sound data files to wavetables for Mozzi. ">char2mozzi.py</a> python script in Mozzi's python folder. Sound tables can be of arbitrary lengths for <a class="el" href="class_sample.html#af2ce86342a595a3571ce2e9a38e96a96" title="Constructor. ">Sample()</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -526,7 +531,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setFreq_Q24n8 </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__mozzi__fixmath.html#gaa8e579259244eb60e7f70576c8e61cbd">Q24n8</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__fixmath.html#gaa8e579259244eb60e7f70576c8e61cbd">Q24n8</a>&#160;</td>
           <td class="paramname"><em>frequency</em>)</td><td></td>
           <td></td>
         </tr>
@@ -767,16 +772,13 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="_sample_8h_source.html">Sample.h</a></li>
-</ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_sample.html">Sample</a></li>
-    <li class="footer">Generated on Mon Jul 1 2013 00:19:19 for Mozzi by
+    <li class="footer">Generated on Tue Jul 2 2013 22:37:22 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

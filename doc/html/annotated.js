@@ -17,7 +17,6 @@ var annotated =
     [ "RecentAverage", "class_recent_average.html", "class_recent_average" ],
     [ "ReverbTank", "class_reverb_tank.html", "class_reverb_tank" ],
     [ "Sample", "class_sample.html", "class_sample" ],
-    [ "sintest", "classsintest.html", null ],
     [ "Smooth", "class_smooth.html", "class_smooth" ],
     [ "StateVariable", "class_state_variable.html", "class_state_variable" ],
     [ "WavePacket", "class_wave_packet.html", "class_wave_packet" ],

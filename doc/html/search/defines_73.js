@@ -3,7 +3,6 @@ var searchData=
   ['sample_5ff_5fbits',['SAMPLE_F_BITS',['../_sample_8h.html#a8eba4424fc276faa39413faf92670505',1,'Sample.h']]],
   ['sample_5ff_5fbits_5fas_5fmultiplier',['SAMPLE_F_BITS_AS_MULTIPLIER',['../_sample_8h.html#acb82d9d796d11da458308b170beca908',1,'Sample.h']]],
   ['sample_5fphmod_5fbits',['SAMPLE_PHMOD_BITS',['../_sample_8h.html#a6fccc0a5a1ba5aab43138c6ca0c4b194',1,'Sample.h']]],
-  ['samplerate',['SAMPLERATE',['../sintest__int8_8h.html#a538e0cad3acb787a49e16b1e53787610',1,'sintest_int8.h']]],
   ['saw1024_5fnum_5fcells',['SAW1024_NUM_CELLS',['../saw1024__int8_8h.html#a8f20bcd37b911edaf99053075fca9daa',1,'saw1024_int8.h']]],
   ['saw1024_5fsamplerate',['SAW1024_SAMPLERATE',['../saw1024__int8_8h.html#ac6dd58b3e37999eac0e3f81e1675a321',1,'saw1024_int8.h']]],
   ['saw2048_5fnum_5fcells',['SAW2048_NUM_CELLS',['../saw2048__int8_8h.html#aff46751cb267881bf250e3dce5badd55',1,'saw2048_int8.h']]],

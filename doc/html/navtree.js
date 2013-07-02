@@ -37,9 +37,9 @@ var NAVTREEINDEX =
 [
 "_02_control_2_control__echo__theremin_2_control__echo__theremin_8ino-example.html",
 "class_d_cfilter.html",
-"group__core.html#gae5d737db8bc97ecf08d2ea3121782d26",
-"mozzi__fixmath_8h.html#ga7933033ba3cd84a4d09c0bd652378a38",
-"triangle512__int8_8h.html#a1b2acb084c1e3db4faa2d714217d2aaf"
+"group__core.html#gae99eb43cb29bb03d862ae829999916c4",
+"mozzi__fixmath_8h.html#ga7cef68582c1933cc8249364720f848f1",
+"triangle__analogue512__int8_8h.html#a2d6d82e03b98557fc0e3277bf0f50266"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -112,7 +112,6 @@ var files =
     [ "sin512_int8.h", "sin512__int8_8h.html", "sin512__int8_8h" ],
     [ "sin8192_int8.h", "sin8192__int8_8h.html", "sin8192__int8_8h" ],
     [ "sin8192_uint8.h", "sin8192__uint8_8h.html", "sin8192__uint8_8h" ],
-    [ "sintest_int8.h", "sintest__int8_8h.html", "sintest__int8_8h" ],
     [ "Smooth.h", "_smooth_8h.html", [
       [ "Smooth", "class_smooth.html", "class_smooth" ]
     ] ],

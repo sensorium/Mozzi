@@ -1,6 +1,5 @@
 var NAVTREEINDEX2 =
 {
-"group__core.html#gae5d737db8bc97ecf08d2ea3121782d26":[1,0,2],
 "group__core.html#gae99eb43cb29bb03d862ae829999916c4":[1,0,3],
 "group__fixmath.html":[1,2],
 "group__fixmath.html#ga00d3299412f5460cae3af8f0c58b2db1":[1,2,16],
@@ -249,5 +248,6 @@ var NAVTREEINDEX2 =
 "mozzi__fixmath_8h.html#ga720cdc234e4d0979753e5aef22a93e11":[4,0,53,72],
 "mozzi__fixmath_8h.html#ga755c5617a3e7b057740ad5c3e24be00e":[4,0,53,32],
 "mozzi__fixmath_8h.html#ga779f365fbc3378a0e8cc167d44fd7aad":[4,0,53,75],
-"mozzi__fixmath_8h.html#ga77edd2a4cd49df42e7145da9bdb799ae":[4,0,53,62]
+"mozzi__fixmath_8h.html#ga77edd2a4cd49df42e7145da9bdb799ae":[4,0,53,62],
+"mozzi__fixmath_8h.html#ga7933033ba3cd84a4d09c0bd652378a38":[4,0,53,6]
 };

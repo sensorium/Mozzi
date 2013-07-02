@@ -16,7 +16,6 @@ var searchData=
   ['sin512_5fint8_2eh',['sin512_int8.h',['../sin512__int8_8h.html',1,'']]],
   ['sin8192_5fint8_2eh',['sin8192_int8.h',['../sin8192__int8_8h.html',1,'']]],
   ['sin8192_5fuint8_2eh',['sin8192_uint8.h',['../sin8192__uint8_8h.html',1,'']]],
-  ['sintest_5fint8_2eh',['sintest_int8.h',['../sintest__int8_8h.html',1,'']]],
   ['smooth_2eh',['Smooth.h',['../_smooth_8h.html',1,'']]],
   ['smoothsquare8192_5fint8_2eh',['smoothsquare8192_int8.h',['../smoothsquare8192__int8_8h.html',1,'']]],
   ['square_5fanalogue512_5fint8_2eh',['square_analogue512_int8.h',['../square__analogue512__int8_8h.html',1,'']]],

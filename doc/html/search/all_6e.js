@@ -6,6 +6,5 @@ var searchData=
   ['noise_5fstatic_5f1_5f16384_5fsamplerate',['NOISE_STATIC_1_16384_SAMPLERATE',['../noise__static__1__16384__int8_8h.html#add156eaf787603e4f47900693bf5e6ec',1,'noise_static_1_16384_int8.h']]],
   ['notch',['NOTCH',['../_state_variable_8h.html#a6fc9fcb59c5ae9d9cd6af2c7aa71061fad0682496c50c56ab8dc39c36724aa97a',1,'StateVariable.h']]],
   ['noteoff',['noteOff',['../class_a_d_s_r.html#af6cac55fb97760fffc885507f5d969d2',1,'ADSR']]],
-  ['noteon',['noteOn',['../class_a_d_s_r.html#a52091df7bf95f9e34fb51d9707547092',1,'ADSR']]],
-  ['num_5fcells',['NUM_CELLS',['../sintest__int8_8h.html#a4e0a9a72c12d3d6f6648b55b5f714583',1,'sintest_int8.h']]]
+  ['noteon',['noteOn',['../class_a_d_s_r.html#a52091df7bf95f9e34fb51d9707547092',1,'ADSR']]]
 ];

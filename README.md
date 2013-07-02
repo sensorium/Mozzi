@@ -18,17 +18,6 @@ performance, or make interactive sonifications of sensors, on a small, modular
 and super cheap Arduino, without the need for additional shields, message
 passing or external synths.
 
-Mozzi is designed to be easy to use, open source and extendable.
-
-If you enjoy using Mozzi for a project, or have extended it, we would be
-pleased to hear about it and provide support wherever possible. Contribute
-suggestions, improvements and bug fixes to the Mozzi wiki on Github, or
-Fork it to contribute directly to future developments.
-
-Mozzi is a development of research into Mobile Sonification in the
-[SweatSonics](http://stephenbarrass.wordpress.com/tag/sweatsonics/) project.
-
-
 
 ### Features
 
@@ -37,19 +26,20 @@ Mozzi is a development of research into Mobile Sonification in the
 -    Useful basic audio toolkit: oscillators, samples, lines, envelopes, scheduling, filtering.
 -    Fast ADC and other cpu-efficient code utilities to help keep audio running smoothly.
 -    Example sketches for easy modification.
--    Readymade wavetables and a script to convert your own soundfiles for Mozzi.
+-    Readymade wavetables and a script to convert your own soundfiles for Mozzi.  
+-	 Mozzi is designed to be easy to use, open source and extendable.
 
 
 ### Installation
 
-Download Mozzi and unzip it. It will probably have a name like
-"sensorium-Mozzi-2bee818". Rename the unzipped folder "Mozzi".
-Then, following the instructions from the Arduino libraries page:
-Open your Arduino sketchbook folder. If there is already a folder there called
-libraries, place the library folder in there. If not, create a folder called
-libraries in the sketchbook folder, and drop the Mozzi folder in there. Then
-re-start the Arduino programming environment, and you should see Mozzi in the
-Sketch > Import Library menu.
+Download Mozzi from the top of this page and unzip it. It will probably have a
+name like "sensorium-Mozzi-2bee818". Rename the unzipped folder "Mozzi". Then,
+following the instructions from the [Arduino libraries guide](http://arduino.cc/en/Guide/Libraries):  
+
+In the Arduino IDE, navigate to __Sketch > Import Library__. At the top of the drop
+down list, select the option to __Add Library__. Return to the __Sketch > Import Library__ menu. 
+You should now see the library at the bottom of the drop-down
+menu. It is ready to be used in your sketch.
 
 
 ### Quick Start
@@ -78,41 +68,40 @@ x	B5  Teensy2
 x	B5(25) Teensy2++  
 ..13	Sanguino  
 
-
 For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4).
+
 
 ### Using Mozzi
 
 Here's a template for an empty Mozzi sketch:
 
-	#include <MozziGuts.h>         // at the top of your sketch
-	#define CONTROL_RATE 64 // or some other power of 2
+`
+#include <MozziGuts.h>   // at the top of your sketch
 
-	void setup() {
-		startMozzi(CONTROL_RATE);
-	}
+void setup() {
+	startMozzi();
+}
 
-	void loop() {
-		audioHook();
-	}
+void updateControl(){
+	// your control code
+}
 
-	int updateAudio(){
-		// your audio code which returns an int between -244 and 243
-		// actually, a char is fine
-	}
+int updateAudio(){
+	// your audio code which returns an int between -244 and 243
+}
 
-	void updateControl(){
-		// your control code
-	}
+void loop() {
+	audioHook();
+}
+`
 
 
 ### Documentation
 
-There's documentation in the doc folder in the Mozzi download and [online] (http://sensorium.github.com/Mozzi/doc/html/index.html).  
-There are hints and tips and more help on the Mozzi [wiki] (https://github.com/sensorium/Mozzi/wiki/Hints-and-Tips).  
-Start or look up a topic on the Mozzi [users forum] (https://groups.google.com/forum/#!forum/mozzi-users).  
-Also, feel free to submit any issues on the [GitHub Mozzi site] (https://github.com/sensorium/Mozzi/issues).  
-Share [code snippets] (https://github.com/sensorium/Mozzi/wiki/Code-Snippets-to-Share).  
+There's documentation in the doc folder in the Mozzi download and [online](http://sensorium.github.com/Mozzi/doc/html/index.html).  
+There are [hints and tips](https://github.com/sensorium/Mozzi/wiki/Hints-and-Tips-%28*-this-has-content%29) and more help on the Mozzi [wiki](https://github.com/sensorium/Mozzi/wiki/_pages).  
+Start or look up a topic on the Mozzi [users forum](https://groups.google.com/forum/#!forum/mozzi-users/).  
+Also, feel free to submit any issues on the [GitHub Mozzi site](https://github.com/sensorium/Mozzi/issues/).  
 Check for code and usage changes in NEWS.txt.
 Also, there are recordings of the examples inside their sketch folders.
 

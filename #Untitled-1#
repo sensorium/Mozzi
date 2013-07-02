@@ -1,0 +1,141 @@
+Currently your Arduino can only beep like a microwave oven. Mozzi brings
+your Arduino to life by allowing it to produce much more complex and interesting
+growls, sweeps and chorusing atmospherics. These sounds can be quickly and easily
+constructed from familiar synthesis units like oscillators, delays, filters and
+envelopes.
+
+You can use Mozzi to generate algorithmic music for an installation or
+performance, or make interactive sonifications of sensors, on a small, modular
+and super cheap Arduino, without the need for additional shields, message
+passing or external synths.
+
+Here are some sounds of the example sketches which come with Mozzi:
+
+Using a "Line" to sweep frequency:  
+
+<audio controls>
+<source type="audio/ogg" src="https://github.com/sensorium/Mozzi/blob/master/examples/_02_control/Line_Gliss_Double_32k_HIFI/Line_Gliss_Double_32k_HIFI.ogg?raw=true" preload="auto"></source>                
+<source type="audio/mp3" src="https://github.com/sensorium/Mozzi/blob/master/examples/_02_control/Line_Gliss_Double_32k_HIFI/Line_Gliss_Double_32k_HIFI.mp3?raw=true" preload="auto"></source>
+Your browser does not support the audio element. </audio>
+
+Phase and amplitude modulation, with reverb:  
+
+<audio controls>
+<source type="audio/ogg" src="https://github.com/sensorium/Mozzi/blob/master/examples/_09_delays/ReverbTank_STANDARD/ReverbTank_STANDARD.ogg?raw=true" preload="auto"></source>                      
+<source type="audio/mp3" src="https://github.com/sensorium/Mozzi/blob/master/examples/_09_delays/ReverbTank_STANDARD/ReverbTank_STANDARD.mp3?raw=true" preload="auto"></source>
+Your browser does not support the audio element. </audio>
+
+A chordal wash of detuned oscillator pairs:  
+
+<audio  controls="controls">
+<source type="audio/ogg" src="https://github.com/sensorium/Mozzi/blob/master/examples/_06_synthesis/Detuned_Beats_Wash/Detuned_Beats_Wash.ogg?raw=true" preload="auto"></source>
+<source type="audio/mp3" src="https://github.com/sensorium/Mozzi/blob/master/examples/_06_synthesis/Detuned_Beats_Wash/Detuned_Beats_Wash.mp3?raw=true" preload="auto"></source>
+Your browser does not support the audio element. </audio>
+
+Waveshaping:  
+
+<audio  controls="controls">
+<source type="audio/ogg" src="https://github.com/sensorium/Mozzi/blob/master/examples/_06_synthesis/Waveshaper/Waveshaper.ogg?raw=true" preload="auto"></source>
+<source type="audio/mp3" src="https://github.com/sensorium/Mozzi/blob/master/examples/_06_synthesis/Waveshaper/Waveshaper.mp3?raw=true" preload="auto"></source>
+Your browser does not support the audio element. </audio>
+
+Samples sequenced on the fly:  
+
+<audio controls>
+<source type="audio/ogg" src="https://github.com/sensorium/Mozzi/blob/master/examples/_08_samples/Samples_Tables_Arrays/Samples_Tables_Arrays.ogg?raw=true" preload="auto"></source>
+<source type="audio/mp3" src="https://github.com/sensorium/Mozzi/blob/master/examples/_08_samples/Samples_Tables_Arrays/Samples_Tables_Arrays.mp3?raw=true" preload="auto"></source>
+Your browser does not support the audio element. </audio> 
+
+***
+
+# Features  
+-    16384 Hz sample rate, with 8 bit or 14 bit audio output modes.
+-    Variable control rate from 64 Hz upwards.
+-    Useful basic audio toolkit: oscillators, samples, lines, envelopes, scheduling, filtering.
+-    Fast ADC and other cpu-efficient code utilities to help keep audio running smoothly.
+-    Example sketches for easy modification.
+-    Readymade wavetables and a script to convert your own soundfiles for Mozzi.  
+-	 Mozzi is designed to be easy to use, open source and extendable.
+
+***
+
+# Installation  
+Download Mozzi from the top of this page and unzip it. It will probably have a
+name like "sensorium-Mozzi-2bee818". Rename the unzipped folder "Mozzi". Then,
+following the instructions from the [Arduino libraries guide](http://arduino.cc/en/Guide/Libraries):  
+
+In the Arduino IDE, navigate to __Sketch > Import Library__. At the top of the drop
+down list, select the option to __Add Library__. Return to the __Sketch > Import Library__ menu. 
+You should now see the library at the bottom of the drop-down
+menu. It is ready to be used in your sketch.
+
+***
+
+# Quick Start  
+To hear Mozzi, connect a 3.5mm audio jack with the centre wire to the PWM output
+on Digital Pin 9\* on Arduino, and the ground to the Ground on the Arduino.
+Use this as a line out which you can plug into your computer and listen to with
+a sound program like [Audacity](http://audacity.sourceforge.net/). 
+Try some examples from the __File > Examples > Mozzi__ menu.  
+* See the README for audio output pins on different boards. 
+
+For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).  
+
+***
+
+# Using Mozzi  
+Here's a template for an empty Mozzi sketch:
+``` c Mozzi Skeleton
+#include <MozziGuts.h>   // at the top of your sketch
+
+void setup() {
+	startMozzi();
+}
+
+void updateControl(){
+	// your control code
+}
+
+int updateAudio(){
+	// your audio code which returns an int between -244 and 243
+}
+
+void loop() {
+	audioHook();
+}
+```
+
+***
+
+# Documentation  
+There's documentation in the doc folder in the Mozzi download and [online](http://sensorium.github.com/Mozzi/doc/html/index.html).  
+There are [hints and tips](https://github.com/sensorium/Mozzi/wiki/Hints-and-Tips-%28*-this-has-content%29) and more help on the Mozzi [wiki](https://github.com/sensorium/Mozzi/wiki/_pages).  
+Start or look up a topic on the Mozzi [users forum](https://groups.google.com/forum/#!forum/mozzi-users/).  
+Also, feel free to submit any issues on the [GitHub Mozzi site](https://github.com/sensorium/Mozzi/issues/).  
+Look for code and usage changes [here](https://github.com/sensorium/Mozzi/blob/master/NEWS.txt).  
+
+***
+
+# Caveats  
+While Mozzi is running, the Arduino time functions __millis()__, __micros()__, __delay()__, and
+__delayMicroseconds()__ are disabled. Instead, Mozzi provides __mozziMicros()__ for timing, and
+__EventDelay()__ for scheduling.  
+Also, Mozzi can be paused (__pauseMozzi()__/__unpauseMozzi()__) if the Arduino timers are required for other things.  
+
+***
+
+If you enjoy using Mozzi for a project, or have extended it, we would be
+pleased to hear about it and provide support wherever possible. Contribute
+suggestions, improvements and bug fixes to the Mozzi wiki on Github, or
+Fork it to contribute directly to future developments.
+
+Mozzi is a development of research into Mobile Sonification in the
+[SweatSonics](http://stephenbarrass.wordpress.com/tag/sweatsonics/) project. 
+
+***
+
+#Contributions / Included Dependencies  
+Modified versions of the following libraries are included in the Mozzi download: 
+
+[TimerOne library](http://www.pjrc.com/teensy/td_libs_TimerOne.html)  
+[FrequencyTimer2 library](http://www.pjrc.com/teensy/td_libs_FrequencyTimer2.html) - now a [fork with support for ATmega32u4 processors](https://github.com/sensorium/FrequencyTimer2/)   

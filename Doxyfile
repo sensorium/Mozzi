@@ -45,7 +45,7 @@ PROJECT_BRIEF          = "sound synthesis library for Arduino"
 # exceed 55 pixels and the maximum width should not exceed 200 pixels. 
 # Doxygen will copy the logo to the output directory.
 
-PROJECT_LOGO           = /Users/timbarrass/Documents/Arduino/libraries/Mozzi/doxygen-style/mozzi-circle.png
+PROJECT_LOGO           = doxygen-style/mozzi-circle.png
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) 
 # base path where the generated documentation will be put. 
@@ -971,7 +971,7 @@ HTML_STYLESHEET        =
 # robust against future updates. Doxygen will copy the style sheet file to 
 # the output directory.
 
-HTML_EXTRA_STYLESHEET  = ../Documents/Arduino/libraries/Mozzi/doxygen-style/custom_stylesheet.css
+HTML_EXTRA_STYLESHEET  = doxygen-style/custom_stylesheet.css
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or 
 # other source files which should be copied to the HTML output directory. Note 

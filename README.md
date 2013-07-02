@@ -86,7 +86,7 @@ Also, there are recordings of the examples inside their sketch folders.
 While Mozzi is running, the Arduino time functions __millis()__, __micros()__, __delay()__, and
 __delayMicroseconds()__ are disabled. Instead, Mozzi provides __mozziMicros()__ for timing, and
 __EventDelay()__ for scheduling.  
-Also, Mozzi can be paused (__pauseMozzi()/unpauseMozzi()__) if the Arduino timers are required for other things.  
+Also, Mozzi can be paused ( __pauseMozzi()__ / __unpauseMozzi()__ ) if the Arduino timers are required for other things.  
 
 
 ###Contributions / Included Dependencies

@@ -1,9 +1,9 @@
 Mozzi
 =====
-sound synthesis library for Arduino
+###sound synthesis library for Arduino
 ------------------------------------
 
-Version 0.01.2c
+Version 0.01.2c  
 Tim Barrass 2010-13
 
 
@@ -71,31 +71,6 @@ x	B5(25) Teensy2++
 For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4).
 
 
-### Using Mozzi
-
-Here's a template for an empty Mozzi sketch:
-
-`
-#include <MozziGuts.h>   // at the top of your sketch
-
-void setup() {
-	startMozzi();
-}
-
-void updateControl(){
-	// your control code
-}
-
-int updateAudio(){
-	// your audio code which returns an int between -244 and 243
-}
-
-void loop() {
-	audioHook();
-}
-`
-
-
 ### Documentation
 
 There's documentation in the doc folder in the Mozzi download and [online](http://sensorium.github.com/Mozzi/doc/html/index.html).  
@@ -108,9 +83,10 @@ Also, there are recordings of the examples inside their sketch folders.
 
 ### Caveats
 
-While Mozzi is running, the Arduino time functions millis(), micros(), delay(), and
-delayMicroseconds() are disabled. Instead, Mozzi provides mozziMicros() for timing, with 61us resolution (in STANDARD mode), and
-EventDelay() for scheduling.  Also, Mozzi can be paused (pauseMozzi()/unpauseMozzi()) if the Arduino timers are required for other things.
+While Mozzi is running, the Arduino time functions __millis()__, __micros()__, __delay()__, and
+__delayMicroseconds()__ are disabled. Instead, Mozzi provides __mozziMicros()__ for timing, and
+__EventDelay()__ for scheduling.  
+Also, Mozzi can be paused (__pauseMozzi()__/__unpauseMozzi()__) if the Arduino timers are required for other things.  
 
 
 ###Contributions / Included Dependencies

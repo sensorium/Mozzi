@@ -1,0 +1,514 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Writing a mozzi sketch - MOZZI</title>
+  <meta name="author" content="Tim Barrass">
+  
+  
+  <meta name="description" content="Mozzi is a sound synthesis software library for Arduino." />
+
+  
+  <meta name="keywords" content="Applications : sound, music, audio, synthesis, sound art, electronic music, sonification, media art, performance, installation, electronic art, creative art, interactive art, Software: library, arduino, open source, extendable, free, Audience: artists, scientists, teachers, learners, students, hobby, do it yourself, diy, makers, creators, musicians, engineers, collaborators" />
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sensorium.github.io/Mozzi//learn/a-simple-sketch">
+  <link href="/Mozzi/favicon.png" rel="icon">
+  <link href="/Mozzi/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/Mozzi/atom.xml" rel="alternate" title="MOZZI" type="application/atom+xml">
+  <script src="/Mozzi/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/Mozzi/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+<link href='http://fonts.googleapis.com/css?family=Londrina+Solid&text=MOZZI' rel='stylesheet' type='text/css'>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32577259-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner">
+<div id="header_wrap">
+	
+	<hgroup>
+		<h1><a href="/Mozzi/">MOZZI</a></h1>
+		
+		
+			<h2>sound synthesis library for Arduino</h2>
+		
+	</hgroup>
+	
+	<img src="/Mozzi/images/mozzi-circle.gif" id="mozzi_logo"/> 
+	<img src="/Mozzi/images/lee.gif" id="lee"/>
+
+	<section id="header_links_section">
+		<p>
+			<a  class="header_link" href="https://github.com/sensorium/Mozzi"> 
+				<span id="header_small_label">View on <i class="icon-github icon-2x"></i> GitHub</span>
+			</a>
+		</p>
+		<p>
+			<a class="header_link" href="https://github.com/sensorium/Mozzi/zipball/master">
+				download<br>
+				<i class="icon-download icon-4x"></i><br>
+				<span id="header_small_label">version 0.01.2c</span>
+			</a>
+		</p>
+	</section> 
+
+</div>
+
+
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/Mozzi/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <!-- <input type="hidden" name="q" value="site:sensorium.github.io/Mozzi/" /> -->
+    <input type="hidden" name="q" value="http://sensorium.github.io/Mozzi/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/Mozzi/">Home</a></li>
+  <li><a href="/Mozzi/examples/">Examples</a></li>
+  <li><a href="/Mozzi/learn/">Learn</a></li>
+  <li><a href="/Mozzi/gallery/">Gallery</a></li>
+  <li><a href="https://groups.google.com/forum/#!forum/mozzi-users/">Forum</a></li>
+  <li><a href="http://sensorium.github.com/Mozzi/doc/html/index.html">API</a></li>
+  <!-- <li><a href="/Mozzi/blog/">Blog</a></li> -->
+  <!-- <li><a href="/Mozzi/resources/">Resources</a></li>   -->
+  <!-- <li><a href="/Mozzi/faq/">FAQ</a></li>  -->
+  <!-- <li><a href="/Mozzi/blog/archives/">Archives</a></li>
+  <li><a href="/Mozzi/about/">About</a></li> -->
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Writing a Mozzi Sketch</h1>
+    
+  </header>
+  
+  <p>Here&#8217;s a detailed explanation of the parts in a Mozzi sketch. We&#8217;ll start by
+generating audio to produce a plain sine wave, then add control to the sketch to
+change the sine wave&#8217;s frequency and produce vibrato.</p>
+
+<h2>Bare bones example: playing a sine wave</h2>
+
+<p>Let&#8217;s make a minimal Mozzi sketch step by step. The sketch plays a sine wave at
+a specified frequency. No great feat, and you can find lots of other Arduino
+sketches doing it without Mozzi, but it illustrates the structure and gist of a
+bare-bones Mozzi sketch. You don&#8217;t need much experience with
+Arduino or programming.</p>
+
+<p>First <code>#include MozziGuts.h</code>. This is always required, as are headers for any
+other Mozzi classes, modules or tables used in the sketch. In this case an
+oscillator will be used, and a wavetable for the oscillator to play:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;  </span>
+</span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;  </span>
+</span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt;  </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next, we need an oscillator, using the <code>Oscil</code> class.  Here is the structure and
+the parameters used to instantiate an <code>Oscil</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">table_size</span><span class="p">,</span> <span class="n">update_rate</span><span class="o">&gt;</span> <span class="n">name</span><span class="p">(</span><span class="n">table_data</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The oscillator needs to be instantiated using literal numeric values as template
+parameters (inside the <code>&lt; &gt;</code> brackets). This allows the compiler to do some
+calculations at compile time instead of slowing down execution by repeating the
+same operations over and over while the program runs.</p>
+
+<p>The table used by an <code>Oscil</code> needs to be a power of two, typically at least 256
+cells and preferably longer for lower aliasing noise. This Oscil will be
+operating as an audio generator, so the update rate will be <code>AUDIO_RATE</code>. The
+<code>table_data</code> is an array which you can find the name of in the table file included
+at the top of the sketch.  If you look in Mozzi/tables/sin2048_int8.h, you&#8217;ll find <code>SIN2048_DATA</code>.</p>
+
+<p>So, an audio sine tone oscillator for our sketch is created like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="mi">2048</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aSin</span><span class="p">(</span><span class="n">SIN2048_DATA</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>CONTROL_RATE</code> has a default value of 64, but you can change it if you want
+control updates to happen more frequently. Like the audio rate, it must be a
+literal number and power of two to allow Mozzi to optimise internal calculations
+for run-time speed.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#define CONTROL_RATE 128</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now to the program functions.  In Arduino&#8217;s <code>setup()</code> routine goes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This sets up one timer to call <code>updateControl()</code> at the rate chosen and another
+timer which works behind the scenes to send audio samples to the output pin at
+the fixed rate of 16384 Hz.</p>
+
+<p>The oscillator frequency can be set in a range of ways, but we&#8217;ll use an integer:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">aSin</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="mi">440</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now Arduino&#8217;s <code>setup()</code> function looks like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">void</span> <span class="nf">setup</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">aSin</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="mi">440</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The next parts of the sketch are <code>updateControl()</code> and <code>updateAudio()</code>, which
+are both required. In this example the frequency has already been set and the
+oscillator just needs to be run in <code>updateAudio()</code>, using the Oscil&#8217;s <code>next()</code>
+method which returns a signed 8 bit value from the oscillator&#8217;s wavetable. The
+<code>int</code> return value of <code>updateAudio()</code> must be in the range -244 to 243 in Mozzi&#8217;s
+default <code>STANDARD</code> audio mode.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">void</span> <span class="nf">updateControl</span><span class="p">(){</span>
+</span><span class='line'>  <span class="c1">// no controls being changed</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">updateAudio</span><span class="p">(){</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">aSin</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Finally, <code>audioHook()</code> goes in Arduino&#8217;s <code>loop()</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">void</span> <span class="nf">loop</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">audioHook</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is where the sound actually gets synthesised, running as fast as possible
+to fill the output buffer which gets steadily emptied at Mozzi&#8217;s audio rate. For
+this reason, it&#8217;s usually best to avoid placing any other code in <code>loop()</code>.</p>
+
+<p>It&#8217;s important to design a sketch with efficiency in mind in terms of what can
+be processed in <code>updateAudio()</code>, <code>updateControl()</code> and <code>setup()</code>. Keep <code>updateAudio()</code>
+lean, put slow changing values in <code>updateControl()</code>, and pre-calculate as much as
+possible in <code>setup()</code>. Control values which directly modify audio synthesis can be
+efficiently interpolated with a <code>Line</code> object in <code>updateAudio()</code> if necessary.</p>
+
+<p>Here&#8217;s the whole sketch:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define CONTROL_RATE 128</span>
+</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="mi">2048</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aSin</span><span class="p">(</span><span class="n">SIN2048_DATA</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="nf">setup</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">aSin</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="mi">440</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="nf">updateControl</span><span class="p">(){</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">updateAudio</span><span class="p">(){</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">aSin</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="nf">loop</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">audioHook</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>Adding a control signal: vibrato</h2>
+
+<p>Vibrato can be added to the sketch by periodically changing the frequency of the
+audio wave with a low frequency oscillator. The new oscillator can use the same
+wave table but this time it&#8217;s set up to update at control rate. The
+naming convention of using a prefix of <code>k</code> for control and <code>a</code> for audio rate units
+is a personal mnemonic, influenced by Csound.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="mi">2048</span><span class="p">,</span> <span class="n">CONTROL_RATE</span><span class="o">&gt;</span> <span class="n">kVib</span><span class="p">(</span><span class="n">SIN2048_DATA</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This time the frequency can be set with a floating point value:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">kVib</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="mf">6.5f</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, using variables for depth and centre frequency, the vibrato oscillator can
+modulate the frequency of the audio oscillator in <code>updateControl()</code>.  <code>kVib.next()</code>
+returns a signed byte between -128 to 127 from the wave table, so <code>depth</code> has to
+be set proportionately.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">void</span> <span class="nf">updateControl</span><span class="p">(){</span>
+</span><span class='line'>  <span class="kt">float</span> <span class="n">vibrato</span> <span class="o">=</span> <span class="n">depth</span> <span class="o">*</span> <span class="n">kVib</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+</span><span class='line'>  <span class="n">aSin</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">centre_freq</span><span class="o">+</span><span class="n">vibrato</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here&#8217;s the modified sketch complete with vibrato:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define CONTROL_RATE 128</span>
+</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="mi">2048</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aSin</span><span class="p">(</span><span class="n">SIN2048_DATA</span><span class="p">);</span>
+</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="mi">2048</span><span class="p">,</span> <span class="n">CONTROL_RATE</span><span class="o">&gt;</span> <span class="n">kVib</span><span class="p">(</span><span class="n">SIN2048_DATA</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">float</span> <span class="n">centre_freq</span> <span class="o">=</span> <span class="mf">440.0</span><span class="p">;</span>
+</span><span class='line'><span class="kt">float</span> <span class="n">depth</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="nf">setup</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">kVib</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="mf">6.5f</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="nf">updateControl</span><span class="p">(){</span>
+</span><span class='line'>  <span class="kt">float</span> <span class="n">vibrato</span> <span class="o">=</span> <span class="n">depth</span> <span class="o">*</span> <span class="n">kVib</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+</span><span class='line'>  <span class="n">aSin</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">centre_freq</span><span class="o">+</span><span class="n">vibrato</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">updateAudio</span><span class="p">(){</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">aSin</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="nf">loop</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">audioHook</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>While this example uses floating point numbers, it is best to avoid their use
+for intensive audio code which needs to run fast, especially in <code>updateAudio()</code>.
+When the speed of integer maths is required along with fractional precision, it
+is better to use fixed point fractional arithmetic. Mozzi&#8217;s <code>fixmath</code> module has
+number types and conversion functions which assist in keeping track of precision
+through complex calculations.</p>
+
+  
+    <footer>
+      
+      
+        <div class="sharing">
+  
+  <a href="/Mozzi//twitter.com/share" class="twitter-share-button" data-url="http://sensorium.github.io/Mozzi//learn/a-simple-sketch/index.html" data-via="nothingperson" data-counturl="http://sensorium.github.io/Mozzi//learn/a-simple-sketch/index.html" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/Mozzi/blog/2013/05/14/icad2013-workshop-announcement/">ICAD2013 Workshop Announcement</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Mozzi/blog/2013/05/13/music-hack-day-barcelona-workshop-announcement/">Music Hack Day Barcelona Workshop Announcement</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Mozzi/blog/2013/04/11/isea2013-workshop-announcement/">ISEA2013 Workshop Announcement</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Tim Barrass -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <span class="credit">Published with <a href="http://pages.github.com">GitHub Pages</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

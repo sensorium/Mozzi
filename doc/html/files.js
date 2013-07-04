@@ -9,7 +9,7 @@ var files =
     [ "AudioDelay.h", "_audio_delay_8h.html", [
       [ "AudioDelay", "class_audio_delay.html", "class_audio_delay" ]
     ] ],
-    [ "AudioDelayFeedback.h", "_audio_delay_feedback_8h.html", null ],
+    [ "AudioDelayFeedback.h", "_audio_delay_feedback_8h.html", "_audio_delay_feedback_8h" ],
     [ "AutoRange.h", "_auto_range_8h.html", "_auto_range_8h" ],
     [ "bamboo_00_2048_int8.h", "bamboo__00__2048__int8_8h.html", "bamboo__00__2048__int8_8h" ],
     [ "bamboo_00_4096_int8.h", "bamboo__00__4096__int8_8h.html", "bamboo__00__4096__int8_8h" ],
@@ -87,6 +87,7 @@ var files =
       [ "Portamento", "class_portamento.html", "class_portamento" ]
     ] ],
     [ "primes.h", "primes_8h.html", "primes_8h" ],
+    [ "raven_arh_int8.h", "raven__arh__int8_8h.html", "raven__arh__int8_8h" ],
     [ "RCpoll.h", "_r_cpoll_8h.html", [
       [ "RCpoll", "class_r_cpoll.html", "class_r_cpoll" ]
     ] ],
@@ -133,6 +134,9 @@ var files =
     [ "twi_nonblock.h", "twi__nonblock_8h.html", "twi__nonblock_8h" ],
     [ "uphasor256_uint8.h", "uphasor256__uint8_8h.html", "uphasor256__uint8_8h" ],
     [ "WavePacket.h", "_wave_packet_8h.html", "_wave_packet_8h" ],
+    [ "WavePacketSample.h", "_wave_packet_sample_8h.html", [
+      [ "WavePacketSample", "class_wave_packet_sample.html", "class_wave_packet_sample" ]
+    ] ],
     [ "waveshape1_softclip_int8.h", "waveshape1__softclip__int8_8h.html", "waveshape1__softclip__int8_8h" ],
     [ "waveshape2_softerclip_int8.h", "waveshape2__softerclip__int8_8h.html", "waveshape2__softerclip__int8_8h" ],
     [ "waveshape_chebyshev_3rd_256_int8.h", "waveshape__chebyshev__3rd__256__int8_8h.html", "waveshape__chebyshev__3rd__256__int8_8h" ],

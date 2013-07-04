@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">0.01.2c alpha</span>
+   &#160;<span id="projectnumber">0.01.2d alpha</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -431,7 +431,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p><a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code. ">updateAudio()</a> has to keep up with the AUDIO_RATE of 16384 Hz, so to keep things running smoothly, avoid doing any calculations here which could be done in setup() or <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>an audio sample. In STANDARD mode this is between -244 and 243 inclusive. In HIFI mode, it's a 14 bit number between -16384 and 16383 inclusive. </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="_02_control_2_control__echo__theremin_2_control__echo__theremin_8ino-example.html#a9">_02_control/Control_Echo_Theremin/Control_Echo_Theremin.ino</a>, and <a class="el" href="_09_delays_2_audio_delay_2_audio_delay_8ino-example.html#a7">_09_delays/AudioDelay/AudioDelay.ino</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="_02_control_2_control__echo__theremin_2_control__echo__theremin_8ino-example.html#a9">_02_control/Control_Echo_Theremin/Control_Echo_Theremin.ino</a>, <a class="el" href="_06_synthesis_2_wave_packet__sample_2_wave_packet__sample_8ino-example.html#a10">_06_synthesis/WavePacket_Sample/WavePacket_Sample.ino</a>, and <a class="el" href="_09_delays_2_audio_delay_2_audio_delay_8ino-example.html#a7">_09_delays/AudioDelay/AudioDelay.ino</a>.</dd>
 </dl>
 </div>
 </div>
@@ -448,7 +448,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>You need <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> somewhere in your sketch, even if it's empty. <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> is called at the control rate you set in <a class="el" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837" title="Sets up the timers for audio and control rate processes, storing the timer registers so they can be r...">startMozzi()</a>. To save processor load, avoid any calculations here which could be done in setup(). </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="_02_control_2_control__echo__theremin_2_control__echo__theremin_8ino-example.html#a5">_02_control/Control_Echo_Theremin/Control_Echo_Theremin.ino</a>, and <a class="el" href="_09_delays_2_audio_delay_2_audio_delay_8ino-example.html#a6">_09_delays/AudioDelay/AudioDelay.ino</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="_02_control_2_control__echo__theremin_2_control__echo__theremin_8ino-example.html#a5">_02_control/Control_Echo_Theremin/Control_Echo_Theremin.ino</a>, <a class="el" href="_06_synthesis_2_wave_packet__sample_2_wave_packet__sample_8ino-example.html#a5">_06_synthesis/WavePacket_Sample/WavePacket_Sample.ino</a>, and <a class="el" href="_09_delays_2_audio_delay_2_audio_delay_8ino-example.html#a6">_09_delays/AudioDelay/AudioDelay.ino</a>.</dd>
 </dl>
 </div>
 </div>
@@ -457,7 +457,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jul 2 2013 23:26:23 for Mozzi by
+    <li class="footer">Generated on Thu Jul 4 2013 19:18:09 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

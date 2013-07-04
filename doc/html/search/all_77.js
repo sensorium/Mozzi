@@ -3,6 +3,8 @@ var searchData=
   ['welcome',['Welcome',['../index.html',1,'']]],
   ['wavepacket',['WavePacket',['../class_wave_packet.html',1,'WavePacket&lt; ALGORITHM &gt;'],['../class_wave_packet.html#a09afa3b26d61c97e24ccbae9cba2fd57',1,'WavePacket::WavePacket()']]],
   ['wavepacket_2eh',['WavePacket.h',['../_wave_packet_8h.html',1,'']]],
+  ['wavepacketsample',['WavePacketSample',['../class_wave_packet_sample.html',1,'']]],
+  ['wavepacketsample_2eh',['WavePacketSample.h',['../_wave_packet_sample_8h.html',1,'']]],
   ['waveshape1_5fsoftclip_5fint8_2eh',['waveshape1_softclip_int8.h',['../waveshape1__softclip__int8_8h.html',1,'']]],
   ['waveshape1_5fsoftclip_5fnum_5fcells',['WAVESHAPE1_SOFTCLIP_NUM_CELLS',['../waveshape1__softclip__int8_8h.html#a5a2589c27493abc06a686d16a1be94c2',1,'waveshape1_softclip_int8.h']]],
   ['waveshape1_5fsoftclip_5fsamplerate',['WAVESHAPE1_SOFTCLIP_SAMPLERATE',['../waveshape1__softclip__int8_8h.html#af85cc81596306ecfa2195c48463d067e',1,'waveshape1_softclip_int8.h']]],
@@ -23,5 +25,7 @@ var searchData=
   ['waveshaper_2eh',['WaveShaper.h',['../_wave_shaper_8h.html',1,'']]],
   ['whitenoise8192_5fint8_2eh',['whitenoise8192_int8.h',['../whitenoise8192__int8_8h.html',1,'']]],
   ['whitenoise8192_5fnum_5fcells',['WHITENOISE8192_NUM_CELLS',['../whitenoise8192__int8_8h.html#a6f6d1e2943cbf174e87cb61b3b28f25b',1,'whitenoise8192_int8.h']]],
-  ['whitenoise8192_5fsamplerate',['WHITENOISE8192_SAMPLERATE',['../whitenoise8192__int8_8h.html#a840781260fe545ec62bee8b8eb0b88e2',1,'whitenoise8192_int8.h']]]
+  ['whitenoise8192_5fsamplerate',['WHITENOISE8192_SAMPLERATE',['../whitenoise8192__int8_8h.html#a840781260fe545ec62bee8b8eb0b88e2',1,'whitenoise8192_int8.h']]],
+  ['write',['write',['../class_audio_delay_feedback.html#a1be5de09206e7ac673c6526e0b083175',1,'AudioDelayFeedback::write(char input)'],['../class_audio_delay_feedback.html#ac8773caec44e20289bf9cfb5ec452343',1,'AudioDelayFeedback::write(char input, unsigned int offset)']]],
+  ['writefeedback',['writeFeedback',['../class_audio_delay_feedback.html#a3e6fc70018e407eb01dbf3cf591ebcc3',1,'AudioDelayFeedback']]]
 ];

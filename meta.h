@@ -6,7 +6,6 @@ Template meta-programming extras.
 #ifndef META_H_
 #define META_H_
 
-/** @cond */ // doxygen can ignore this
 
 /** @ingroup util
 Enables you to instantiate a template based on an integer value.

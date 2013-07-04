@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">0.01.2c alpha</span>
+   &#160;<span id="projectnumber">0.01.2d alpha</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -121,6 +121,17 @@ $(document).ready(function(){initNavTree('class_wave_packet.html','');});
  <a href="class_wave_packet.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for WavePacket&lt; ALGORITHM &gt;:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="class_wave_packet.png" usemap="#WavePacket&lt; ALGORITHM &gt;_map" alt=""/>
+  <map id="WavePacket&lt; ALGORITHM &gt;_map" name="WavePacket&lt; ALGORITHM &gt;_map">
+<area href="class_wave_packet_sample.html" title="A WavePacket which allows a custom table to be set as the audio source for the wavepackets (or grains..." alt="WavePacketSample&lt; ALGORITHM &gt;" shape="rect" coords="0,56,220,80"/>
+</map>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -148,8 +159,14 @@ Public Member Functions</h2></td></tr>
 class WavePacket&lt; ALGORITHM &gt;</h3>
 
 <p>Draws on Miller Puckette's Pure Data example, F14.wave.packet.pd. Each packet is an enveloped grain of a sin (or cos) wave. The frequency of the wave, the width of the envelopes and the rate of release of envelopes are the parameters which can be changed. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ALGORITHM</td><td>options are SINGLE or DOUBLE, for a single non-overlapping stream of packets or a double, overlapping stream. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00047">47</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
+<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00048">48</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a09afa3b26d61c97e24ccbae9cba2fd57"></a>
 <div class="memitem">
@@ -174,7 +191,7 @@ template&lt;char ALGORITHM&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00053">53</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
+<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00054">54</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
 
 </div>
 </div>
@@ -203,7 +220,7 @@ template&lt;char ALGORITHM&gt; </div>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>a full-scale 16 bit value, which needs to be scaled to suit your sketch. If you're using it straight as the sketch output, then that will be yourThing.next()&gt;&gt;2 for HIFI 14 bit output, or &gt;&gt;8 for STANDARD 8+ bit output. </dd></dl>
 
-<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00124">124</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
+<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00125">125</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
 
 </div>
 </div>
@@ -256,7 +273,7 @@ template&lt;char ALGORITHM&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00068">68</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
+<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00069">69</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
 
 </div>
 </div>
@@ -291,7 +308,7 @@ template&lt;char ALGORITHM&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00096">96</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
+<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00097">97</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
 
 </div>
 </div>
@@ -326,7 +343,7 @@ template&lt;char ALGORITHM&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00111">111</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
+<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00112">112</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
 
 </div>
 </div>
@@ -361,7 +378,7 @@ template&lt;char ALGORITHM&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00081">81</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
+<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00082">82</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
 
 </div>
 </div>
@@ -371,7 +388,7 @@ template&lt;char ALGORITHM&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_wave_packet.html">WavePacket</a></li>
-    <li class="footer">Generated on Tue Jul 2 2013 23:26:23 for Mozzi by
+    <li class="footer">Generated on Thu Jul 4 2013 19:18:09 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

@@ -28,14 +28,14 @@
 #else
  #include "WProgram.h"
 #endif
+
 #include "mozzi_utils.h"
 #include "meta.h"
 
 enum interpolation_types {LINEAR,ALLPASS};
 
 
-/** 
-Audio delay line with feedback for comb filter, flange, chorus and short echo effects.
+/** Audio delay line with feedback for comb filter, flange, chorus and short echo effects.
 @tparam NUM_BUFFER_SAMPLES is the length of the delay buffer in samples, and should be a
 power of two. The maximum delay length which will fit in an atmega328 is half
 that of a plain AudioDelay object, in this case 256 cells, or about 15
@@ -47,7 +47,6 @@ than a plain AudioDelay, but allows for more dramatic effects with feedback.
 @tparam INTERP_TYPE a choice of LINEAR (default) or ALLPASS interpolation.  LINEAR is better
 for sweeping delay times, ALLPASS may be better for reverb-like effects.
 */
-
 template <unsigned int NUM_BUFFER_SAMPLES, char INTERP_TYPE = LINEAR>
 class AudioDelayFeedback
 {
@@ -94,8 +93,7 @@ public:
 
 
 
-	/**  Input a value to the delay, retrieve the signal in the delay line at the position delaytime_cells,
-	and add feedback from the output to the input.
+	/**  Input a value to the delay, retrieve the signal in the delay line at the position delaytime_cells, and add feedback from the output to the input.
 	@param input the signal input.
 	@param delaytime_cells indicates the delay time in terms of cells in the delay buffer.
 	It doesn't change the stored internal value of _delaytime_cells.
@@ -120,8 +118,7 @@ public:
 
 
 
-	/** Input a value to the delay, retrieve the signal in the delay line at the interpolated fractional position delaytime_cells,
-	and add feedback from the output to the input.
+	/** Input a value to the delay, retrieve the signal in the delay line at the interpolated fractional position delaytime_cells, and add feedback from the output to the input.
 	@param input the signal input.
 	@param delaytime_cells is a fractional number to set the delay time in terms of cells
 	or partial cells in the delay buffer. It doesn't change the stored internal

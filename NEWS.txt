@@ -4,7 +4,10 @@ NEWS
 
 
 Version 0.01.2d
-- testing
+- mozzi_analog.cpp - fixed show-stopping typo (!= instead of |=)in adcStartConversion() and adcStartConversion(pin).
+- added WavePacketSample.h, a WavePacket which allows a custom table for audio source (limited at the moment to 8192 samples)
+- lots of minor documentation fixes, new layout.
+- re-arranged website with some docs more easy to find.
 
 
 Version 0.01.2c

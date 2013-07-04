@@ -138,7 +138,7 @@ void adcStartConversion(unsigned char pin)
 	// start the conversion
 	//sbi(ADCSRA, ADSC);
 	//testing
-	ADCSRA != (1 << ADSC);
+	ADCSRA |= (1 << ADSC);
 #endif
 }
 
@@ -147,7 +147,7 @@ void adcStartConversion()
 {
 	//sbi(ADCSRA, ADSC);
 	//testing
-	ADCSRA != (1 << ADSC);
+	ADCSRA |= (1 << ADSC);
 }
 
 

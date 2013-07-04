@@ -8,7 +8,7 @@ var searchData=
   ['randseed',['randSeed',['../group__random.html#ga84c58d758e238208eb82fc8ae2330b66',1,'randSeed(long seed):&#160;mozzi_rand.cpp'],['../group__random.html#ga83ff6b4e38c84713e0d67aa1ec06af66',1,'randSeed():&#160;mozzi_rand.cpp'],['../mozzi__rand_8h.html#a8a9592250ee294a64c6d133e20520651',1,'randSeed(unsigned long seed):&#160;mozzi_rand.h'],['../group__random.html#ga83ff6b4e38c84713e0d67aa1ec06af66',1,'randSeed():&#160;mozzi_rand.cpp']]],
   ['rangewholesample',['rangeWholeSample',['../class_sample.html#a79cb13998692fdff715c7b6b1beb991a',1,'Sample']]],
   ['rcpoll',['RCpoll',['../class_r_cpoll.html#a44673505bbfbac288ec994dd48017e83',1,'RCpoll']]],
-  ['read',['read',['../class_audio_delay.html#a26b409fbfc322ae527ba23680c56e3a9',1,'AudioDelay']]],
+  ['read',['read',['../class_audio_delay.html#a26b409fbfc322ae527ba23680c56e3a9',1,'AudioDelay::read()'],['../class_audio_delay_feedback.html#a6ab80a097738c10bd6b6a04614ab2aa6',1,'AudioDelayFeedback::read(Q16n16 delaytime_cells)'],['../class_audio_delay_feedback.html#a269c793a5fd4b0242d885ca29e03779e',1,'AudioDelayFeedback::read()']]],
   ['ready',['ready',['../class_event_delay.html#a723a61a4670ffed732b1d8eb9e5bfd56',1,'EventDelay']]],
   ['recentaverage',['RecentAverage',['../class_recent_average.html#a75bd636f24d01b516c063bfd69c97810',1,'RecentAverage']]],
   ['reconnectdigitalin',['reconnectDigitalIn',['../group__analog.html#gacd83735876cf223916ea4925ec4efd4a',1,'reconnectDigitalIn(byte channel_num):&#160;mozzi_analog.cpp'],['../group__analog.html#gacd83735876cf223916ea4925ec4efd4a',1,'reconnectDigitalIn(byte channel_num):&#160;mozzi_analog.cpp']]],

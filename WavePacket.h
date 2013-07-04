@@ -42,6 +42,7 @@ Miller Puckette's Pure Data example, F14.wave.packet.pd. Each packet is an
 enveloped grain of a sin (or cos) wave. The frequency of the wave, the width of
 the envelopes and the rate of release of envelopes are the parameters which can
 be changed.
+@tparam ALGORITHM options are SINGLE or DOUBLE, for a single non-overlapping stream of packets or a double, overlapping stream.
 */
 template <char ALGORITHM>
 class WavePacket

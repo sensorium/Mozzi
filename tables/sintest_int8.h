@@ -1,6 +1,7 @@
+
 #ifndef SINTEST_H_
 #define SINTEST_H_
- 
+ /*
 #if ARDUINO >= 100
 #include "Arduino.h"
 #else
@@ -8,12 +9,18 @@
 #endif
 #include <avr/pgmspace.h>
 
-class sintest
-{
-#define NUM_CELLS 1024
-#define SAMPLERATE 1024
- 
-const char __attribute__((progmem)) SIN1024_DATA [] = {-128, -128, -128, -128,
+template <int N>
+struct TableStruct {
+    static const int length = N;
+    const char __attribute__((progmem))  values[N];
+};
+
+template <int N>
+const int getLength(const TestStruct<N> &ts) { 
+    return ts.length;
+}
+
+TableStruct<1024> Sintest = {{-128, -128, -128, -128,
 -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128,
 -128, -128, -128, -128, -127, -127, -127, -127, -127, -127, -127, -127, -126,
 -126, -126, -126, -126, -126, -126, -125, -125, -125, -125, -125, -124, -124,
@@ -76,7 +83,17 @@ const char __attribute__((progmem)) SIN1024_DATA [] = {-128, -128, -128, -128,
 -123, -123, -123, -123, -124, -124, -124, -124, -124, -125, -125, -125, -125,
 -125, -126, -126, -126, -126, -126, -126, -126, -127, -127, -127, -127, -127,
 -127, -127, -127, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128,
--128, -128, -128, -128, -128, -128, -128, -128, -128, -128,
- }; 
+-128, -128, -128, -128, -128, -128, -128, -128, -128, -128}};
+ */
+/*
+template <class T>
+const int getLength(const T &ts) { 
+    return ts.length;
 }
+*/
+/*
+	//friend inline Sintest NUM_CELLS () { return Sintest (1024); }
+	//friend inline Sintest SAMPLERATE () { return Sintest (1024); }
+*/
  #endif /* SINTEST_H_ */
+

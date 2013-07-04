@@ -54,8 +54,8 @@ public:
 	{
 		aCos.setTable(COS8192_DATA);
 	}
-
-
+	
+	
 	/** Set all the parameters for the synthesis.
 	The function is designed so that usable ranges for parameters can come from analog inputs, ie. 0-1023.
 	@param fundamental the rate at which packets are produced.
@@ -133,7 +133,8 @@ then that will be yourThing.next()>>2 for HIFI 14 bit output, or >>8 for STANDAR
 		}
 	}
 
-
+	
+	
 private:
 	//Q15n16 fundamental; // range 4 to 6271 in pd patch, 13 integer bits
 	Q8n24 invFreq;

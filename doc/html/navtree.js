@@ -14,7 +14,8 @@ var NAVTREE =
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
         [ "Functions", "functions_func.html", null ],
-        [ "Variables", "functions_vars.html", null ]
+        [ "Variables", "functions_vars.html", null ],
+        [ "Enumerator", "functions_eval.html", null ]
       ] ]
     ] ],
     [ "Files", null, [
@@ -36,10 +37,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_02_control_2_control__echo__theremin_2_control__echo__theremin_8ino-example.html",
-"class_d_cfilter.html",
-"group__core.html#gae99eb43cb29bb03d862ae829999916c4",
-"mozzi__fixmath_8h.html#ga7cef68582c1933cc8249364720f848f1",
-"triangle__analogue512__int8_8h.html#a2d6d82e03b98557fc0e3277bf0f50266"
+"class_audio_delay_feedback.html#a269c793a5fd4b0242d885ca29e03779e",
+"globals_func_0x78.html",
+"mozzi__fixmath_8h.html#ga2fd5059a2a33bb5af84e4aa1913164f0",
+"sin8192__int8_8h.html#ab17cb46526724afc7ed987fe9f0646e2"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

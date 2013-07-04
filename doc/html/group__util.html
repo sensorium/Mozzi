@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">0.01.2c alpha</span>
+   &#160;<span id="projectnumber">0.01.2d alpha</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -101,6 +101,7 @@ $(document).ready(function(){initNavTree('group__util.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Util</div>  </div>
@@ -110,6 +111,12 @@ $(document).ready(function(){initNavTree('group__util.html','');});
 <p>Utility functions.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:struct_int2_type"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#struct_int2_type">Int2Type&lt; I &gt;</a></td></tr>
+<tr class="memdesc:struct_int2_type"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables you to instantiate a template based on an integer value.  <a href="group__util.html#struct_int2_type">More...</a><br/></td></tr>
+<tr class="separator:struct_int2_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:gad1725ef17b234c4df9cc64a9bf561435"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#gad1725ef17b234c4df9cc64a9bf561435">setPin13Out</a> ()</td></tr>
@@ -124,6 +131,52 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Useful for debugging and profiling high frequency code with an oscilloscope, when serial is too slow. </p>
+<hr/><h2 class="groupheader">Class Documentation</h2>
+<a name="struct_int2_type" id="struct_int2_type"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct Int2Type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"><h3>template&lt;int I&gt;<br/>
+struct Int2Type&lt; I &gt;</h3>
+
+<p>For example, this is used in <a class="el" href="_state_variable_8h.html">StateVariable.h</a> to choose a different next() function for each kind of filter, LOWPASS, BANDPASS, HIGHPASS or NOTCH, which are simple integer values 0,1,2,3 provided to the <a class="el" href="class_state_variable.html" title="A State Variable filter which offers 12db resonant low, high, bandpass and notch modes. ">StateVariable</a> template on instantiation. Fantastic! It's in C++11, but not yet available in avr-gcc. See "c++ enable_if" </p>
+
+<p>Definition at line <a class="el" href="meta_8h_source.html#l00020">20</a> of file <a class="el" href="meta_8h_source.html">meta.h</a>.</p>
+</div><table class="memberdecls">
+<tr><td colspan="2"><h3>Public Types</h3></td></tr>
+<tr class="memitem:a21bb06a1d9872a32b8729c961ae30eb0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <a class="el" href="group__util.html#a21bb06a1d9872a32b8729c961ae30eb0afc88b5b34784bb728b4172d2551fbfb4">value</a> = I
+ }</td></tr>
+<tr class="separator:a21bb06a1d9872a32b8729c961ae30eb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h4 class="groupheader">Member Enumeration Documentation</h4>
+<a class="anchor" id="a21bb06a1d9872a32b8729c961ae30eb0"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int I&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">anonymous enum</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><em><a class="anchor" id="a21bb06a1d9872a32b8729c961ae30eb0afc88b5b34784bb728b4172d2551fbfb4"></a>value</em>&nbsp;</td><td class="fielddoc">
+</td></tr>
+</table>
+
+<p>Definition at line <a class="el" href="meta_8h_source.html#l00022">22</a> of file <a class="el" href="meta_8h_source.html">meta.h</a>.</p>
+
+</div>
+</div>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="gaea7ee11e335eb2d6b891b886c5f3f942"></a>
 <div class="memitem">
@@ -205,7 +258,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jul 2 2013 23:26:23 for Mozzi by
+    <li class="footer">Generated on Thu Jul 4 2013 19:25:46 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

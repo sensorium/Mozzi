@@ -1,6 +1,7 @@
 var searchData=
 [
   ['wavepacket_2eh',['WavePacket.h',['../_wave_packet_8h.html',1,'']]],
+  ['wavepacketsample_2eh',['WavePacketSample.h',['../_wave_packet_sample_8h.html',1,'']]],
   ['waveshape1_5fsoftclip_5fint8_2eh',['waveshape1_softclip_int8.h',['../waveshape1__softclip__int8_8h.html',1,'']]],
   ['waveshape2_5fsofterclip_5fint8_2eh',['waveshape2_softerclip_int8.h',['../waveshape2__softerclip__int8_8h.html',1,'']]],
   ['waveshape_5fchebyshev_5f3rd_5f256_5fint8_2eh',['waveshape_chebyshev_3rd_256_int8.h',['../waveshape__chebyshev__3rd__256__int8_8h.html',1,'']]],

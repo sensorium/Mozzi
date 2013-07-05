@@ -10,7 +10,12 @@ var files =
       [ "AudioDelay", "class_audio_delay.html", "class_audio_delay" ]
     ] ],
     [ "AudioDelayFeedback.h", "_audio_delay_feedback_8h.html", "_audio_delay_feedback_8h" ],
-    [ "AutoRange.h", "_auto_range_8h.html", "_auto_range_8h" ],
+    [ "AutoMap.h", "_auto_map_8h.html", [
+      [ "AutoMap", "class_auto_map.html", "class_auto_map" ]
+    ] ],
+    [ "AutoRange.h", "_auto_range_8h.html", [
+      [ "AutoRange", "class_auto_range.html", "class_auto_range" ]
+    ] ],
     [ "bamboo_00_2048_int8.h", "bamboo__00__2048__int8_8h.html", "bamboo__00__2048__int8_8h" ],
     [ "bamboo_00_4096_int8.h", "bamboo__00__4096__int8_8h.html", "bamboo__00__4096__int8_8h" ],
     [ "bamboo_01_2048_int8.h", "bamboo__01__2048__int8_8h.html", "bamboo__01__2048__int8_8h" ],
@@ -57,6 +62,9 @@ var files =
     ] ],
     [ "halfsin256_uint8.h", "halfsin256__uint8_8h.html", "halfsin256__uint8_8h" ],
     [ "halfsinwindow512_uint8.h", "halfsinwindow512__uint8_8h.html", "halfsinwindow512__uint8_8h" ],
+    [ "IntMap.h", "_int_map_8h.html", [
+      [ "IntMap", "class_int_map.html", "class_int_map" ]
+    ] ],
     [ "known_16bit_timers.h", "known__16bit__timers_8h.html", null ],
     [ "Line.h", "_line_8h.html", [
       [ "Line", "class_line.html", "class_line" ]

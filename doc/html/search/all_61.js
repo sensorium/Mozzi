@@ -16,7 +16,7 @@ var searchData=
   ['allpass',['ALLPASS',['../_audio_delay_feedback_8h.html#a2067e59c44131f14125dd8a472b5146fa0adb45579631d25170df04e65b8b84e4',1,'AudioDelayFeedback.h']]],
   ['analog',['Analog',['../group__analog.html',1,'']]],
   ['atindex',['atIndex',['../class_oscil.html#a3b2ea7727b2ec911957b3862dbb6a8ec',1,'Oscil::atIndex()'],['../class_sample.html#ad5c4e048c4aa7a36710e58466caabc94',1,'Sample::atIndex()']]],
-  ['audio_5fbias',['AUDIO_BIAS',['../_audio_config_standard9bit_pwm_8h.html#aa2b18130c536085943a5768146fcb8bb',1,'AUDIO_BIAS():&#160;AudioConfigStandard9bitPwm.h'],['../_audio_config_hi_speed14bit_pwm_8h.html#aa2b18130c536085943a5768146fcb8bb',1,'AUDIO_BIAS():&#160;AudioConfigHiSpeed14bitPwm.h']]],
+  ['audio_5fbias',['AUDIO_BIAS',['../_audio_config_hi_speed14bit_pwm_8h.html#aa2b18130c536085943a5768146fcb8bb',1,'AUDIO_BIAS():&#160;AudioConfigHiSpeed14bitPwm.h'],['../_audio_config_standard9bit_pwm_8h.html#aa2b18130c536085943a5768146fcb8bb',1,'AUDIO_BIAS():&#160;AudioConfigStandard9bitPwm.h']]],
   ['audio_5fchannel_5f1_5fhighbyte_5fpin',['AUDIO_CHANNEL_1_HIGHBYTE_PIN',['../_audio_config_hi_speed14bit_pwm_8h.html#af907b5e2bf79ae514ec38f0ad687f320',1,'AudioConfigHiSpeed14bitPwm.h']]],
   ['audio_5fchannel_5f1_5fhighbyte_5fregister',['AUDIO_CHANNEL_1_HIGHBYTE_REGISTER',['../_audio_config_hi_speed14bit_pwm_8h.html#a8f8ac5be3f490a05eae13008b7391144',1,'AudioConfigHiSpeed14bitPwm.h']]],
   ['audio_5fchannel_5f1_5flowbyte_5fpin',['AUDIO_CHANNEL_1_LOWBYTE_PIN',['../_audio_config_hi_speed14bit_pwm_8h.html#a924a602a1618a3829d35a4e2e9ff512f',1,'AudioConfigHiSpeed14bitPwm.h']]],
@@ -36,6 +36,9 @@ var searchData=
   ['audiodelayfeedback',['AudioDelayFeedback',['../class_audio_delay_feedback.html',1,'AudioDelayFeedback&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;'],['../class_audio_delay_feedback.html#a6e6352413ac4ee9b2bc03684b072fdc7',1,'AudioDelayFeedback::AudioDelayFeedback()'],['../class_audio_delay_feedback.html#a0900519217117e6c7b425faba3399720',1,'AudioDelayFeedback::AudioDelayFeedback(unsigned int delaytime_cells)'],['../class_audio_delay_feedback.html#a6f45674d12ed7cda228ccaa86ac71f71',1,'AudioDelayFeedback::AudioDelayFeedback(unsigned int delaytime_cells, char feedback_level)']]],
   ['audiodelayfeedback_2eh',['AudioDelayFeedback.h',['../_audio_delay_feedback_8h.html',1,'']]],
   ['audiohook',['audioHook',['../group__core.html#ga2fca37b988ab369e2f3c3108c683e59d',1,'audioHook():&#160;MozziGuts.cpp'],['../group__core.html#ga2fca37b988ab369e2f3c3108c683e59d',1,'audioHook():&#160;MozziGuts.cpp']]],
+  ['automap',['AutoMap',['../class_auto_map.html',1,'AutoMap'],['../class_auto_map.html#aec125f071bd83180ff0d0a71446725f3',1,'AutoMap::AutoMap()']]],
+  ['automap_2eh',['AutoMap.h',['../_auto_map_8h.html',1,'']]],
   ['autorange',['AutoRange',['../class_auto_range.html',1,'AutoRange&lt; T &gt;'],['../class_auto_range.html#a2f0638f4d8e2937080b67fc0614c8d6d',1,'AutoRange::AutoRange()']]],
-  ['autorange_2eh',['AutoRange.h',['../_auto_range_8h.html',1,'']]]
+  ['autorange_2eh',['AutoRange.h',['../_auto_range_8h.html',1,'']]],
+  ['autorange_3c_20int_20_3e',['AutoRange&lt; int &gt;',['../class_auto_range.html',1,'']]]
 ];

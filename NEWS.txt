@@ -1,11 +1,20 @@
 Mozzi sound synthesis library for Arduino
 
 NEWS
+get the latest version from http://sensorium.github.io/Mozzi/
+
+Version 0.01.2e
+- should have tested properly!  
+- Fixed ADSR compile problem due to mistakes while editing docs.
+- Fixed Table_Resolution compile prob due to sin table error
+- Added AutoMap.h, for mapping unpredictable sensor input ranges to a set output range 
+	- demos of AutoMap in examples/sensors/Knob_LDR_x2_WavePacket and a couple of others in sensors/
 
 
 Version 0.01.2d
 - mozzi_analog.cpp - fixed show-stopping typo (!= instead of |=)in adcStartConversion() and adcStartConversion(pin).
 - added WavePacketSample.h, a WavePacket which allows a custom table for audio source (limited at the moment to 8192 samples)
+	- added samples/raven_arh_int8.h to test WavePacketSample with.
 - lots of minor documentation fixes, new layout.
 - re-arranged website with some docs more easy to find.
 

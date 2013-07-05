@@ -310,4 +310,17 @@ DOUBLE	LITERAL1
 RCpoll	KEYWORD1
 next	KEYWORD2
 
+
 ControlDelay	KEYWORD1
+
+
+AutoRange	KEYWORD1
+next	KEYWORD2
+
+AutoMap	KEYWORD1
+next	KEYWORD2
+
+WavePacketSample	KEYWORD1
+setTable	KEYWORD2
+
+

@@ -180,44 +180,44 @@ public:
 
 
 	/** Set the attack level of the ADSR.
-	@param attack the attack level.
+	@param value the attack level.
 	 */
 	inline
-	void setAttackLevel(byte attack)
+	void setAttackLevel(byte value)
 	{
-		attack.level=attack;
+		attack.level=value;
 	}
 
 
 
 	/** Set the decay level of the ADSR.
-	@param decay the decay level.
+	@param value the decay level.
 	*/
 	inline
-	void setDecayLevel(byte decay)
+	void setDecayLevel(byte value)
 	{
-		decay.level=decay;
+		decay.level=value;
 	}
 
 
 	/** Set the sustain level of the ADSR.
-	@param sustain the sustain level.  Usually the same as the decay level, 
+	@param value the sustain level.  Usually the same as the decay level, 
 	for a steady sustained note.
 	*/
 	inline
-	void setSustainLevel(byte sustain)
+	void setSustainLevel(byte value)
 	{
-		sustain.level=sustain;
+		sustain.level=value;
 	}
 	
 	/** Set the release level of the ADSR.  Normally you'd make this 0, 
 	but you have the option of some other value.
-	@param release the release level (normally 0).
+	@param value the release level (normally 0).
 	*/
 	inline
-	void setReleaseLevel(byte release)
+	void setReleaseLevel(byte value)
 	{
-		release.level=release;
+		release.level=value;
 	}
 	
 	

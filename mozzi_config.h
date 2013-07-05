@@ -13,8 +13,8 @@ Select STANDARD or HIFI audio output mode in the Mozzi/mozzi_config.h file with
 In Mozzi/config.h, comment one of these options in and the other out to set the audio mode.
 */
 
-#define AUDIO_MODE STANDARD
-//#define AUDIO_MODE HIFI
+//#define AUDIO_MODE STANDARD
+#define AUDIO_MODE HIFI
 
 
 /** @ingroup core

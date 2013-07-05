@@ -7,6 +7,7 @@
   Demonstrates WavePacket, non-blocking analog reads using
   adcReadAllChannels() and adcGetResult(), and smoothing
   control signals with RecentAverage.
+  Also demonstrates AutoMap, which maps unpredictable inputs to a set range.
   
   This example goes with a tutorial on the Mozzi site:
   http://sensorium.github.io/Mozzi/Mozzi_Introductory_Tutorial.pdf
@@ -37,38 +38,61 @@
  #include <mozzi_analog.h>
  #include <WavePacket.h>
  #include <RecentAverage.h>
+ #include <AutoMap.h>
  
 const int KNOB_PIN = 0; // set the input for the knob to analog pin 0
 const int LDR1_PIN=1; // set the analog input for fm_intensity to pin 1
 const int LDR2_PIN=2; // set the analog input for mod rate to pin 2
 
+// min and max values of synth parameters to map AutoRanged analog inputs to
+const int MIN_F = 5;
+const int MAX_F = 100;
+
+const int MIN_BW = 1;
+const int MAX_BW = 1000;
+
+const int MIN_CF = 60;
+const int MAX_CF = 2000;
+
+
 // for smoothing the control signals
 // use: RecentAverage <number_type, how_many_to_average> myThing
-RecentAverage <int, 32> kAverageF;
-RecentAverage <int, 32> kAverageBw;
-RecentAverage <int, 32> kAverageCf;
+RecentAverage <int, 16> kAverageF;
+RecentAverage <int, 16> kAverageBw;
+RecentAverage <int, 16> kAverageCf;
+AutoMap kMapF(0,1023,MIN_F,MAX_F);
+AutoMap kMapBw(0,1023,MIN_BW,MAX_BW);
+AutoMap kMapCf(0,1023,MIN_CF,MAX_CF);
 
 WavePacket <DOUBLE> wavey; // DOUBLE selects 2 overlapping streams
 
 
 void setup(){
+  Serial.begin(115200);
   // set up async analog reading for adcReadAllChannels() and adcGetResult()
   adcEnableInterrupt();
+  // request initial read
+  adcReadAllChannels();
+  // wait before starting Mozzi to receive analog reads, so AutoRange will not get 0
+  delay(200);
   startMozzi();
 }
 
 
 void updateControl(){
   int fundamental = adcGetResult(KNOB_PIN)+1;
-  fundamental = kAverageF.next(fundamental);
-
+  Serial.print(fundamental);
+  Serial.print("  ");
+  fundamental = kMapF(fundamental);
+  Serial.print(fundamental);
+  Serial.println();
+  
   int bandwidth = adcGetResult(LDR1_PIN);
-  bandwidth = map(bandwidth,300,600,0,1023); // calibrate for sensor
-  bandwidth = kAverageBw.next(bandwidth);
-
+  bandwidth = kMapBw(bandwidth);
+  
   int centre_freq = adcGetResult(LDR2_PIN);
-  centre_freq = map(centre_freq,300,600,0,2047); // calibrate for sensor
-  centre_freq = kAverageBw.next(centre_freq);
+  centre_freq = kMapCf(centre_freq);
+
   
   wavey.set(fundamental, bandwidth, centre_freq);
   adcReadAllChannels();

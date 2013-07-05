@@ -5,6 +5,7 @@
 
   Demonstrates analog input, audio and control oscillators, phase modulation
   and smoothing a control signal at audio rate to avoid clicks.
+  Also demonstrates AutoMap, which maps unpredictable inputs to a set range.
   
   This example goes with a tutorial on the Mozzi site:
   http://sensorium.github.io/Mozzi/Mozzi_Introductory_Tutorial.pdf
@@ -37,6 +38,23 @@
 #include <tables/cos2048_int8.h> // table for Oscils to play
 #include <mozzi_analog.h> // fast functions for reading analog inputs 
 #include <Smooth.h>
+#include <AutoMap.h> // maps unpredictable inputs to a range
+ 
+// desired carrier frequency max and min, for AutoMap
+const int MIN_CARRIER_FREQ = 22;
+const int MAX_CARRIER_FREQ = 440;
+
+// desired intensity max and min, for AutoMap, note they're inverted for reverse dynamics
+const int MIN_INTENSITY = 700;
+const int MAX_INTENSITY = 10;
+
+// desired mod speed max and min, for AutoMap, note they're inverted for reverse dynamics
+const int MIN_MOD_SPEED = 10000;
+const int MAX_MOD_SPEED = 1;
+
+AutoMap kMapCarrierFreq(0,1023,MIN_CARRIER_FREQ,MAX_CARRIER_FREQ);
+AutoMap kMapIntensity(0,1023,MIN_INTENSITY,MAX_INTENSITY);
+AutoMap kMapModSpeed(0,1023,MIN_MOD_SPEED,MAX_MOD_SPEED);
 
 const int KNOB_PIN = 0; // set the input for the knob to analog pin 0
 const int LDR1_PIN=1; // set the analog input for fm_intensity to pin 1
@@ -65,8 +83,8 @@ void updateControl(){
   // read the knob
   int knob_value = analogRead(KNOB_PIN); // value is 0-1023
   
-  // map knob to carrier frequency
-  int carrier_freq = map(knob_value, 0, 1023, 22, 440);
+  // map the knob to carrier frequency
+  int carrier_freq = kMapCarrierFreq(knob_value);
   
   //calculate the modulation frequency to stay in ratio
   int mod_freq = carrier_freq * mod_ratio;
@@ -82,7 +100,7 @@ void updateControl(){
   Serial.print(LDR1_value);
   Serial.print("\t"); // prints a tab
 
-  int LDR1_calibrated = map(LDR1_value,350,800,700,10); // calibrate for sensor
+  int LDR1_calibrated = kMapIntensity(LDR1_value);
   Serial.print("LDR1_calibrated = ");
   Serial.print(LDR1_calibrated);
   Serial.print("\t"); // prints a tab
@@ -100,7 +118,7 @@ void updateControl(){
   Serial.print("\t"); // prints a tab
   
   // use a float here for low frequencies
-  float mod_speed = (float)map(LDR2_value,600,800,10000,1)/1000; // calibrate for sensor
+  float mod_speed = (float)kMapModSpeed(LDR2_value)/1000;
   Serial.print("   mod_speed = ");
   Serial.print(mod_speed);
   kIntensityMod.setFreq(mod_speed);

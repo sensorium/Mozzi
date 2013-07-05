@@ -9,10 +9,14 @@ var hierarchy =
     [ "AudioDelay< 256, int >", "class_audio_delay.html", null ],
     [ "AudioDelayFeedback< NUM_BUFFER_SAMPLES, INTERP_TYPE >", "class_audio_delay_feedback.html", null ],
     [ "AutoRange< T >", "class_auto_range.html", null ],
+    [ "AutoRange< int >", "class_auto_range.html", [
+      [ "AutoMap", "class_auto_map.html", null ]
+    ] ],
     [ "DCfilter", "class_d_cfilter.html", null ],
     [ "Ead", "class_ead.html", null ],
     [ "EventDelay< UPDATE_RATE >", "class_event_delay.html", null ],
     [ "Int2Type< I >", "group__util.html#struct_int2_type", null ],
+    [ "IntMap", "class_int_map.html", null ],
     [ "Line< T >", "class_line.html", null ],
     [ "Line< Q15n16 >", "class_line.html", null ],
     [ "Line< Q16n16 >", "class_line.html", null ],

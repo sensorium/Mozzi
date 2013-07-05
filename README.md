@@ -3,7 +3,7 @@ Mozzi
 ###sound synthesis library for Arduino
 ------------------------------------
 
-Version 0.01.2d
+Version 0.01.2e
 Tim Barrass 2010-13
 
 

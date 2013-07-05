@@ -4,9 +4,10 @@
   using Mozzi sonification library.
 
   Demonstrates analog input, audio oscillators, and phase modulation.
+  Also demonstrates AutoMap, which maps unpredictable inputs to a set range.
   There might be clicks in the audio from rapid control changes, which
   could be smoothed with Line or Smooth objects.
-  
+    
   This example goes with a tutorial on the Mozzi site:
   http://sensorium.github.io/Mozzi/Mozzi_Introductory_Tutorial.pdf
   
@@ -33,6 +34,18 @@
 #include <Oscil.h> // oscillator 
 #include <tables/cos2048_int8.h> // table for Oscils to play
 #include <mozzi_analog.h> // fast functions for reading analog inputs 
+ #include <AutoMap.h> // maps unpredictable inputs to a range
+ 
+// desired carrier frequency max and min, for AutoMap
+const int MIN_CARRIER_FREQ = 22;
+const int MAX_CARRIER_FREQ = 440;
+
+// desired intensity max and min, for AutoMap, note they're inverted for reverse dynamics
+const int MIN_INTENSITY = 700;
+const int MAX_INTENSITY = 10;
+
+AutoMap kMapCarrierFreq(0,1023,MIN_CARRIER_FREQ,MAX_CARRIER_FREQ);
+AutoMap kMapIntensity(0,1023,MIN_INTENSITY,MAX_INTENSITY);
 
 const int KNOB_PIN = 0; // set the input for the knob to analog pin 0
 const int LDR_PIN = 1; // set the input for the LDR to analog pin 1
@@ -54,9 +67,9 @@ void setup(){
 void updateControl(){
   // read the knob
   int knob_value = analogRead(KNOB_PIN); // value is 0-1023
-  
+
   // map the knob to carrier frequency
-  int carrier_freq = map(knob_value, 0, 1023, 22, 440);
+  int carrier_freq = kMapCarrierFreq(knob_value);
   
   //calculate the modulation frequency to stay in ratio
   int mod_freq = carrier_freq * mod_ratio;
@@ -73,7 +86,7 @@ void updateControl(){
   Serial.print(light_level); 
   Serial.print("\t"); // prints a tab
   
-  fm_intensity = map(light_level,350,800,700,10); // calibrate sensor
+  fm_intensity = kMapIntensity(light_level);
   
   Serial.print("fm_intensity = ");
   Serial.print(fm_intensity);

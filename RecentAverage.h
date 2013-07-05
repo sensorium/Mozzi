@@ -50,7 +50,7 @@ public:
 	@tparam NUM_READINGS the number of readings to keep track of. It must be a power of two (unless
 	you're averaging floats). The higher the number, the more the readings will be
 	smoothed, but the slower the output will respond to the input.
-	@note Watch out for overflows if you are averaging a long number types!
+	@note Watch out for overflows!
 	*/
 	RecentAverage():index(0),total(0)
 	{

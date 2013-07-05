@@ -105,7 +105,7 @@ public:
 	inline
 	void setStart(unsigned int startpos)
 	{
-		startpos_fractional = (unsigned long) start << SAMPLE_F_BITS;
+		startpos_fractional = (unsigned long) startpos << SAMPLE_F_BITS;
 	}
 
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: workshops | MOZZI]]></title>
   <link href="http://sensorium.github.io/Mozzi//blog/categories/workshops/atom.xml" rel="self"/>
   <link href="http://sensorium.github.io/Mozzi//"/>
-  <updated>2013-07-06T10:57:35+10:00</updated>
+  <updated>2013-07-06T11:06:17+10:00</updated>
   <id>http://sensorium.github.io/Mozzi//</id>
   <author>
     <name><![CDATA[Tim Barrass]]></name>
@@ -36,7 +36,7 @@
     <link href="http://sensorium.github.io/Mozzi//blog/2013/04/11/isea2013-workshop-announcement/"/>
     <updated>2013-04-11T18:09:00+10:00</updated>
     <id>http://sensorium.github.io/Mozzi//blog/2013/04/11/isea2013-workshop-announcement</id>
-    <content type="html"><![CDATA[<p><img class="left" src="/images/mozzi_poster_tiny.png" title="Mozzi poster" >
+    <content type="html"><![CDATA[<p>{% img left /images/mozzi_poster_tiny.png Mozzi poster %}
 Mozzi workshop at <a href="http://www.isea2013.org/event-category/workshops/">international Symposium on Electonic Art</a>, June 8-9, 2013 in Sydney.<br/>
 Through guided making, participants will learn to use Mozzi and Arduino to combine sensors with synthesis
 to make complex, reactive sounds. By the end of the workshop everyone will have created and customised

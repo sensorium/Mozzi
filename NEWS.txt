@@ -4,7 +4,7 @@ NEWS
 get the latest version from http://sensorium.github.io/Mozzi/
 
 Version 0.01.2e
-- should have tested properly!  
+- bugfixes.  Should have tested properly!  
 - Fixed ADSR compile problem due to mistakes while editing docs.
 - Fixed Table_Resolution compile prob due to sin table error
 - Added AutoMap.h, for mapping unpredictable sensor input ranges to a set output range 

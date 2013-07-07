@@ -1,5 +1,6 @@
 var NAVTREEINDEX2 =
 {
+"globals_func_0x61.html":[4,1,1,1],
 "globals_func_0x62.html":[4,1,1,2],
 "globals_func_0x64.html":[4,1,1,3],
 "globals_func_0x66.html":[4,1,1,4],
@@ -248,6 +249,5 @@ var NAVTREEINDEX2 =
 "mozzi__fixmath_8h.html#ga07cdd6c75045759d9d11116f5caea4bf":[4,0,55,64],
 "mozzi__fixmath_8h.html#ga0ac052d4a789286894814bb69638d04b":[4,0,55,28],
 "mozzi__fixmath_8h.html#ga0c5065bc7c71ac750acde1c7ce216d87":[4,0,55,103],
-"mozzi__fixmath_8h.html#ga0e76f24ef8dfe0fa7510c4eea2608d5c":[4,0,55,44],
-"mozzi__fixmath_8h.html#ga1315b4f68a57d26fbedc88d5b30a44d8":[4,0,55,78]
+"mozzi__fixmath_8h.html#ga0e76f24ef8dfe0fa7510c4eea2608d5c":[4,0,55,44]
 };

@@ -36,10 +36,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_02_control_2_control__echo__theremin_2_control__echo__theremin_8ino-example.html",
-"class_audio_delay_feedback.html#a1be5de09206e7ac673c6526e0b083175",
-"globals_func_0x62.html",
-"mozzi__fixmath_8h.html#ga17dd8cb80ef87b6573926e411618105a",
-"sin4096__int8_8h.html#a0e5d5a33cda05ce3ad49bfe1611e97a6"
+"class_audio_delay_feedback.html#a0900519217117e6c7b425faba3399720",
+"globals_func_0x61.html",
+"mozzi__fixmath_8h.html#ga1315b4f68a57d26fbedc88d5b30a44d8",
+"sin4096__int8_8h.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

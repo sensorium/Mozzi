@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>faq - MOZZI</title>
+  <title>frequently asked questions - MOZZI</title>
   <meta name="author" content="Tim Barrass">
   
   
@@ -74,7 +74,7 @@
 			<a class="header_link" href="https://github.com/sensorium/Mozzi/zipball/master">
 				download<br>
 				<i class="icon-download icon-4x"></i><br>
-				<span id="header_small_label">version 2013-07-06-22:36</span>
+				<span id="header_small_label">version 2013-07-07-17:51</span>
 			</a>
 		</p>
 	</section> 
@@ -102,11 +102,11 @@
   <li><a href="/Mozzi/examples/">Examples</a></li>
   <li><a href="/Mozzi/learn/">Learn</a></li>
   <li><a href="/Mozzi/gallery/">Gallery</a></li>
+  <li><a href="/Mozzi/faq/">FAQ</a></li>
   <li><a href="https://groups.google.com/forum/#!forum/mozzi-users/">Forum</a></li>
   <li><a href="http://sensorium.github.com/Mozzi/doc/html/index.html">API</a></li>
   <!-- <li><a href="/Mozzi/blog/">Blog</a></li> -->
   <!-- <li><a href="/Mozzi/resources/">Resources</a></li>   -->
-  <!-- <li><a href="/Mozzi/faq/">FAQ</a></li>  -->
   <!-- <li><a href="/Mozzi/blog/archives/">Archives</a></li>
   <li><a href="/Mozzi/about/">About</a></li> -->
 </ul>
@@ -118,43 +118,68 @@
 <article role="article">
   
   <header>
-    <h1 class="entry-title">Faq</h1>
-    <p class="meta">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-24T15:38:00+10:00" pubdate data-updated="true">Jun 24<span>th</span>, 2013</time></p>
+    <h1 class="entry-title">Frequently Asked Questions</h1>
+    
   </header>
   
-  
+  <h2>Everything sounds glitchy, including the examples.</h2>
+
+<p>Maybe you&#8217;re listening to a <code>STANDARD</code> sketch, but <code>AUDIO_MODE</code> is set to <code>HIFI</code>.
+Check the file <strong>Mozzi/mozzi_config.h</strong>.  Look for:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#define AUDIO_MODE STANDARD</span>
+</span><span class='line'><span class="c1">//#define AUDIO_MODE HIFI</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For <code>STANDARD</code> mode, the lines should appear as above,
+with the <code>HIFI</code> line commented out.  Most of the examples work in
+<code>STANDARD</code> mode, unless they say otherwise.</p>
+
+<hr />
+
+<h2>Everything sounds too quiet.</h2>
+
+<p>Check if you&#8217;re listening to a <code>HIFI</code> sketch in <code>STANDARD</code> mode.  See the previous answer.</p>
+
+<hr />
+
+<h2>My patch was working and now it sounds horrible!</h2>
+
+<ul>
+<li>Has the <code>AUDIO_MODE</code> changed in <strong>Mozzi/mozzi_config.h</strong>?</li>
+<li>Is the processor having trouble keeping up with the amount of calculations it&#8217;s doing?</li>
+<li>Has a signed or unsigned variable been cast to the wrong sign?</li>
+<li>Is there a data type overflowing somewhere?</li>
+<li>Are there <code>Serial.print()</code> statements slowing things down?</li>
+</ul>
+
+
+<hr />
+
+<h2>How can I optimise my code to get the most out of Mozzi?</h2>
+
+<p>Read this: <a href="www.atmel.com/Images/doc8453.pdf">Atmel AVR4027: Tips and Tricks to Optimize. Your C Code for 8-bit AVR Microcontrollers</a>.<br/>
+And there are a few hints <a href="/Mozzi/learn/hints/">here</a> on the Mozzi site.</p>
+
+<hr />
+
+<h2>How can I extend Mozzi?</h2>
+
+<p>It&#8217;s easy!  I usually copy the simplest class.h file I can find in the Mozzi folder and base the next thing on that.
+Usually it&#8217;ll have a <code>next()</code> method, maybe a couple of <code>set()</code> methods and whetever else you decide on.
+It might make use of <code>AUDIO_RATE</code> or <code>CONTROL_RATE</code>.
+It seems self-explanatory to me, but then I haven&#8217;t ever explained it to anyone.</p>
+
+<hr />
+
+<p>To be continued&#8230;</p>
 
   
     <footer>
-      <p class="meta">
-        
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-24T15:38:00+10:00" pubdate data-updated="true">Jun 24<span>th</span>, 2013</time>
-        
-      </p>
+      
       
         <div class="sharing">
   

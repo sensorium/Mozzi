@@ -74,7 +74,7 @@
 			<a class="header_link" href="https://github.com/sensorium/Mozzi/zipball/master">
 				download<br>
 				<i class="icon-download icon-4x"></i><br>
-				<span id="header_small_label">version 2013-07-06-22:36</span>
+				<span id="header_small_label">version 2013-07-07-17:51</span>
 			</a>
 		</p>
 	</section> 
@@ -102,11 +102,11 @@
   <li><a href="/Mozzi/examples/">Examples</a></li>
   <li><a href="/Mozzi/learn/">Learn</a></li>
   <li><a href="/Mozzi/gallery/">Gallery</a></li>
+  <li><a href="/Mozzi/faq/">FAQ</a></li>
   <li><a href="https://groups.google.com/forum/#!forum/mozzi-users/">Forum</a></li>
   <li><a href="http://sensorium.github.com/Mozzi/doc/html/index.html">API</a></li>
   <!-- <li><a href="/Mozzi/blog/">Blog</a></li> -->
   <!-- <li><a href="/Mozzi/resources/">Resources</a></li>   -->
-  <!-- <li><a href="/Mozzi/faq/">FAQ</a></li>  -->
   <!-- <li><a href="/Mozzi/blog/archives/">Archives</a></li>
   <li><a href="/Mozzi/about/">About</a></li> -->
 </ul>
@@ -126,7 +126,8 @@
 
 <ul>
 <li><p>Writing speed-efficient code can be tricky, because the Arduino IDE sets
-the compiler for small code size rather than speed!</p></li>
+the compiler for small code size rather than speed!  Here&#8217;s a great read ; )<br/>
+<a href="www.atmel.com/Images/doc8453.pdf">Atmel AVR4027: Tips and Tricks to Optimize. Your C Code for 8-bit AVR Microcontrollers</a></p></li>
 <li><p>Pre-calculate where possible. Do as much as you can in <code>setup()</code> and
 <code>updateControl()</code>, and keep <code>updateAudio()</code> lean.</p></li>
 <li><p>Avoid division! Use powers of two for numbers where you can, and use
@@ -146,7 +147,7 @@ Shifting by 8 or 16 is faster than other amounts.</p></li>
 <li><p>Take care declaring and casting variables - this can affect speed and also be <strong>a source of unexpected sounds</strong>.</p></li>
 <li><p>Use integer and fixed point maths, and avoid floating point, particularly in
 <code>updateAudio()</code>. Mozzi has a collection of fixed-point number types and
-conversion functions in <code>mozzi_fixmath.h</code>. These are often much faster than
+conversion functions in <strong>mozzi_fixmath.h</strong>. These are often much faster than
 floating point, but they can over - or under - flow if you&#8217;re not careful.</p></li>
 </ul>
 

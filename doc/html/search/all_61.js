@@ -16,7 +16,7 @@ var searchData=
   ['allpass',['ALLPASS',['../_audio_delay_feedback_8h.html#a2067e59c44131f14125dd8a472b5146fa0adb45579631d25170df04e65b8b84e4',1,'AudioDelayFeedback.h']]],
   ['analog',['Analog',['../group__analog.html',1,'']]],
   ['atindex',['atIndex',['../class_oscil.html#a3b2ea7727b2ec911957b3862dbb6a8ec',1,'Oscil::atIndex()'],['../class_sample.html#ad5c4e048c4aa7a36710e58466caabc94',1,'Sample::atIndex()']]],
-  ['audio_5fbias',['AUDIO_BIAS',['../_audio_config_standard9bit_pwm_8h.html#aa2b18130c536085943a5768146fcb8bb',1,'AUDIO_BIAS():&#160;AudioConfigStandard9bitPwm.h'],['../_audio_config_hi_speed14bit_pwm_8h.html#aa2b18130c536085943a5768146fcb8bb',1,'AUDIO_BIAS():&#160;AudioConfigHiSpeed14bitPwm.h']]],
+  ['audio_5fbias',['AUDIO_BIAS',['../_audio_config_hi_speed14bit_pwm_8h.html#aa2b18130c536085943a5768146fcb8bb',1,'AUDIO_BIAS():&#160;AudioConfigHiSpeed14bitPwm.h'],['../_audio_config_standard9bit_pwm_8h.html#aa2b18130c536085943a5768146fcb8bb',1,'AUDIO_BIAS():&#160;AudioConfigStandard9bitPwm.h']]],
   ['audio_5fchannel_5f1_5fhighbyte_5fpin',['AUDIO_CHANNEL_1_HIGHBYTE_PIN',['../_audio_config_hi_speed14bit_pwm_8h.html#af907b5e2bf79ae514ec38f0ad687f320',1,'AudioConfigHiSpeed14bitPwm.h']]],
   ['audio_5fchannel_5f1_5fhighbyte_5fregister',['AUDIO_CHANNEL_1_HIGHBYTE_REGISTER',['../_audio_config_hi_speed14bit_pwm_8h.html#a8f8ac5be3f490a05eae13008b7391144',1,'AudioConfigHiSpeed14bitPwm.h']]],
   ['audio_5fchannel_5f1_5flowbyte_5fpin',['AUDIO_CHANNEL_1_LOWBYTE_PIN',['../_audio_config_hi_speed14bit_pwm_8h.html#a924a602a1618a3829d35a4e2e9ff512f',1,'AudioConfigHiSpeed14bitPwm.h']]],

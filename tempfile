@@ -1,0 +1,25 @@
+#!/bin/bash
+cd ~/Mozzi/
+MAJOR=4
+MINOR=0
+STATE="beta"
+POINT=9
+VERSION=$MAJOR.$MINOR$STATE$POINT
+NEXT_VERSION=$MAJOR.$MINOR$STATE$((POINT +1 ))
+
+echo "Next version is $NEXT_VERSION"
+cp ~/bin/update_version.sh tempfile
+tempfile=$( ./tempfile -d . )
+sed -re "s/POINT=[0-9]+/POINT=$(( ++POINT ))/" $0 > $tempfile
+chmod +x $tempfile
+mv $tempfile $0
+# other release stuff here 
+
+#mv VERSION.txt VERSION_old.txt
+#awk '/Version 0.01.[0-9]+/ { printf "Version %d\n", $2+1 }' < VERSION_old.txt > VERSION.txt
+#awk -F. -v OFS=. 'NF==1{print ++$NF}; NF>1{if(length($NF+1)>length($NF))$(NF-1)++; $NF=sprintf("%0*d", length($NF), ($NF+1)%(10^length($NF))); print}' < VERSION_old.txt > VERSION.txt
+#mv Doxyfile Doxyfile_old
+#awk -F. -v OFS=. 'NF==1{print ++$NF}; NF>1{if(length($NF+1)>length($NF))$(NF-1)++; $NF=sprintf("%0*d", length($NF), ($NF+1)%(10^length($NF))); print}' < Doxyfile_old > Doxyfile
+
+#mv ~/mozzi-octopress/source/_includes/header.html ~/mozzi-octopress/source/_includes/header_old.html 
+#more ~/mozzi-octopress/source/_includes/header_old.html | awk -F. -v OFS=. 'NF==1{print ++$NF}; NF>1{if(length($NF+1)>length($NF))$(NF-1)++; $NF=sprintf("%0*d", length($NF), ($NF+1)%(10^length($NF))); print}' > ~/mozzi-octopress/source/_includes/header.html

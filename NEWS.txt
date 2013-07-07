@@ -3,7 +3,11 @@ Mozzi sound synthesis library for Arduino
 NEWS
 get the latest version from http://sensorium.github.io/Mozzi/
 
-Version 0.01.2e
+
+version 2013-07-06-22:36
+version_2013-07-06-21:24
+
+_Version 0.01.2e_
 - bugfixes.  Should have tested properly!  
 - Fixed ADSR compile problem due to mistakes while editing docs.
 - Fixed Table_Resolution compile prob due to sin table error

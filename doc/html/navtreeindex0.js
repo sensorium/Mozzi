@@ -46,13 +46,14 @@ var NAVTREEINDEX0 =
 "_low_pass_filter_8h.html#a9636ab99608c6d1d88c6da7075d4a67b":[4,0,49,1],
 "_low_pass_filter_8h_source.html":[4,0,49],
 "_mozzi_guts_8cpp.html":[4,0,61],
+"_mozzi_guts_8cpp.html#a100d09f9a57d44745299c28c63c98745":[4,0,61,2],
+"_mozzi_guts_8cpp.html#ac0d4c2a99f2e90d864a74293d935e857":[4,0,61,3],
 "_mozzi_guts_8cpp.html#ae0ff2ce3329f62bb39166d246475e8a3":[4,0,61,0],
-"_mozzi_guts_8cpp.html#ae4bb889d011ea82c5218b8d671716f51":[4,0,61,2],
-"_mozzi_guts_8cpp.html#ga0dc2dc3b2c20b081df4d55ad039f64e5":[4,0,61,4],
-"_mozzi_guts_8cpp.html#ga1718c5f0bbb56cc4b2db55702750f43f":[4,0,61,6],
+"_mozzi_guts_8cpp.html#ga0dc2dc3b2c20b081df4d55ad039f64e5":[4,0,61,5],
+"_mozzi_guts_8cpp.html#ga1718c5f0bbb56cc4b2db55702750f43f":[4,0,61,7],
 "_mozzi_guts_8cpp.html#ga2fca37b988ab369e2f3c3108c683e59d":[4,0,61,1],
-"_mozzi_guts_8cpp.html#ga75aa9f4a501f4b167343b8caac8c6837":[4,0,61,5],
-"_mozzi_guts_8cpp.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe":[4,0,61,3],
+"_mozzi_guts_8cpp.html#ga75aa9f4a501f4b167343b8caac8c6837":[4,0,61,6],
+"_mozzi_guts_8cpp.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe":[4,0,61,4],
 "_mozzi_guts_8cpp_source.html":[4,0,61],
 "_mozzi_guts_8h.html":[4,0,62],
 "_mozzi_guts_8h.html#a25f09c512cd3a187d19eb7fd1d54d558":[4,0,62,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "class_audio_delay.html#a688f69088f96bf3976a8555d3026365f":[3,0,2,0],
 "class_audio_delay.html#a79be253fcb5709624c8fb708e54f069f":[3,0,2,1],
 "class_audio_delay.html#a7bd0a07f7803afda1a71b50e3f66827b":[3,0,2,5],
-"class_audio_delay_feedback.html":[3,0,3],
-"class_audio_delay_feedback.html#a0900519217117e6c7b425faba3399720":[3,0,3,1]
+"class_audio_delay_feedback.html":[3,0,3]
 };

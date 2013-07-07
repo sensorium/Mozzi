@@ -4,8 +4,11 @@ NEWS
 get the latest version from http://sensorium.github.io/Mozzi/
 
 
-version 2013-07-06-22:36
-version_2013-07-06-21:24
+version_2013-07-07-17:51
+- had #define AUDIO_MODE HIFI as default - changed back to #define AUDIO_MODE STANDARD,
+	it would have made most examples sound bad without any warning.  sorry
+- new versioning: a timestamp
+
 
 _Version 0.01.2e_
 - bugfixes.  Should have tested properly!  

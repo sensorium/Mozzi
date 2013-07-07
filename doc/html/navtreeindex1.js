@@ -1,6 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"class_audio_delay_feedback.html#a0900519217117e6c7b425faba3399720":[3,0,3,1],
 "class_audio_delay_feedback.html#a1be5de09206e7ac673c6526e0b083175":[3,0,3,12],
 "class_audio_delay_feedback.html#a269c793a5fd4b0242d885ca29e03779e":[3,0,3,7],
 "class_audio_delay_feedback.html#a27bda5033d985d1e453a15520f388dc3":[3,0,3,8],
@@ -248,6 +247,7 @@ var NAVTREEINDEX1 =
 "globals_defs_0x77.html":[4,1,6,16],
 "globals_enum.html":[4,1,4],
 "globals_eval.html":[4,1,5],
+"globals_func.html":[4,1,1,0],
 "globals_func.html":[4,1,1],
-"globals_func.html":[4,1,1,0]
+"globals_func_0x61.html":[4,1,1,1]
 };

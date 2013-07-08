@@ -256,8 +256,8 @@ Try some examples from the <strong>File > Examples > Mozzi</strong> menu.<br/>
 <h1>Documentation</h1>
 
 <p>There&#8217;s documentation in the doc folder in the Mozzi download and <a href="http://sensorium.github.com/Mozzi/doc/html/index.html">online</a>.<br/>
-There are <a href="https://github.com/sensorium/Mozzi/wiki/Hints-and-Tips-%28*-this-has-content%29">hints and tips</a> and more help on the Mozzi <a href="https://github.com/sensorium/Mozzi/wiki/_pages">wiki</a>.<br/>
-Start or look up a topic on the Mozzi <a href="https://groups.google.com/forum/#!forum/mozzi-users/">users&#8217; forum</a>.<br/>
+There is practical help on the <a href="/Mozzi/learn/">learn</a> page on the Mozzi site.
+Start or look up a topic on the <a href="https://groups.google.com/forum/#!forum/mozzi-users/">users forum</a>.<br/>
 Also, feel free to submit any issues on the <a href="https://github.com/sensorium/Mozzi/issues/">GitHub Mozzi site</a>.<br/>
 Look for code and usage changes <a href="https://github.com/sensorium/Mozzi/blob/master/NEWS.txt">here</a>.</p>
 
@@ -265,10 +265,9 @@ Look for code and usage changes <a href="https://github.com/sensorium/Mozzi/blob
 
 <h1>Caveats</h1>
 
-<p>While Mozzi is running, the Arduino time functions <strong>millis()</strong>, <strong>micros()</strong>, <strong>delay()</strong>, and
-<strong>delayMicroseconds()</strong> are disabled. Instead, Mozzi provides <strong>mozziMicros()</strong> for timing, and
-<strong>EventDelay()</strong> for scheduling.<br/>
-Also, Mozzi can be paused (<strong>pauseMozzi()</strong>/<strong>unpauseMozzi()</strong>) if the Arduino timers are required for other things.</p>
+<p>While Mozzi is running, the Arduino time functions <code>millis()</code>, <code>micros()</code>, <code>delay()</code>, and
+<code>delayMicroseconds()</code> are disabled. Instead, Mozzi provides <code>mozziMicros()</code> for timing, with 61us resolution (in <code>STANDARD</code> mode), and
+<code>EventDelay()</code> for scheduling.  Also, there&#8217;s <code>pauseMozzi()</code> and <code>unpauseMozzi()</code> if the Arduino timers are required for other things.</p>
 
 <hr />
 

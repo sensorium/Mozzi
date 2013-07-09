@@ -1,3 +1,8 @@
+[7. What's the difference between STANDARD and HIFI modes?](#7)
+<a id="q7"></a>
+##What's the difference between STANDARD and HIFI modes? {% render_partial _partials/link-to-top.markdown %}
+
+
 ##Why can't I use the Arduino time functions?
 
 ##I don't get it

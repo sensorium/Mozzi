@@ -9,7 +9,7 @@
   could be smoothed with Line or Smooth objects.
     
   This example goes with a tutorial on the Mozzi site:
-  http://sensorium.github.io/Mozzi/Mozzi_Introductory_Tutorial.pdf
+  http://sensorium.github.io/Mozzi/learn/Mozzi_Introductory_Tutorial.pdf
   
     The circuit:
   *  Audio output on digital pin 9 (on a Uno or similar), or 

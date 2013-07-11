@@ -34,7 +34,6 @@ class WaveShaper
 	{}
 ;
 
-/** @cond */ // doxygen can ignore the specialisations
 
 /** char specialisation of WaveShaper template*/
 template <>

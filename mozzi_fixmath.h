@@ -330,7 +330,7 @@ __asm__ __volatile__ (    \
 })
 
 
-// based on:
+
 /*
 #define FMULS8(v1, v2)      \
 ({            \
@@ -347,9 +347,51 @@ __asm__ __volatile__ (    \
   );            \
   res;          \
 }) */
+
+
 /*
+https://instruct1.cit.cornell.edu/courses/ee476/Math/GCC644/fixedPt/multASM.S
+;******************************************************************************
+;*
+;* FUNCTION
+;*	muls16x16
+;* DECRIPTION
+;*	Signed multiply of two 16bits numbers with 16 bits result.
+;* USAGE
+;*	r25:r24 = r23:r22 * r25:r24
+;******************************************************************************
+;int multfix(int a,int b)
+
+.global multfix
+multfix:
+	;input parameters are in r23:r22(hi:lo) and r25:r24
+	  
+  	;b aready in right place -- 2nd parameter is in r22:23											
+
+    mov  r20,r24 ;load a -- first parameter is in r24:25 
+	mov  r21,r25											
+
+	muls r23, r21	; (signed)ah * (signed)bh		
+	mov	 r25, r0         ;r18, r0"						
+	mul	 r22, r20		; al * bl"						
+	mov  r24, r1      ;movw	r17:r16, r1:r0"		
+											
+	mulsu r23, r20	; (signed)ah * bl				
+	add	 r24, r0         ;r17, r0"						
+	adc	 r25, r1         ;r18, r1"	
+						
+	mulsu r21, r22	; (signed)bh * al				
+	add	 r24, r0         ;r17, r0"					
+	adc	 r25, r1         ;r18, r1"						
+											
+	clr  r1   			; required by GCC								
+	
+	;return values are in 25:r24 (hi:lo)		 								
+ 	ret
+ 	
+// https://instruct1.cit.cornell.edu/courses/ee476/Math/GCC644/fixedPt/FixedPtOps.c
 int divfix(int nn, int dd)
-begin
+{
   int x, d ;
   signed char count, neg ;
   count = 0;
@@ -358,23 +400,23 @@ begin
  
   // only works with + numbers
   if (d & 0x8000)
-  begin
+  {
     neg = 1;
     d = -d ;
-  end
+  }
  
   // range reduction
   while (d>0x0100)
-  begin
+  {
     --count ;
     d >>= 1 ;
-  end
+  }
  
   while (d<0x0080)
-  begin
+  {
     ++count ;
     d <<= 1 ;
-  end
+  }
  
   // Newton interation
   x = 0x02ea - (d<<1) ;
@@ -393,105 +435,12 @@ begin
   x = multfix(x,nn) ;
  
   return x ;
-end
+}
+ */
  
 //========================================================
-int sqrtfix(int aa)
-begin
- 
-  int a;
-  char nextbit, ahigh;
-  int root, p ;
-  a = aa;
-  ahigh = a>>8 ;
-  //
-  // range sort to get integer part and to
-  // check for weird bits near the top of the range
-  if (ahigh >= 0x40)   //bigger than 64?
-  begin
-    if (a > 0x7e8f)  //>=126.562 = 11.25^2
-    begin
-    root = 0x0b40;  // 11
-    nextbit = 0x10 ;
-    end
-    else if (ahigh >= 0x79)  //>=121
-    begin
-    root = 0x0b00;  // 11
-    nextbit = 0x40 ;
-    end
-    else if (ahigh >= 0x64)  //>=100
-    begin
-    root = 0x0a00;  // 10
-    nextbit = 0x80 ;
-    end
-    else if (ahigh >= 0x51)  //>=81
-    begin
-    root = 0x0900;  // 9
-    nextbit = 0x80 ;
-    end
-    else //64
-    begin
-    root = 0x0800;  //8
-    nextbit = 0x80 ;
-    end
-  end
-  else if  (ahigh >= 0x10)  //16  //smaller than 64 and bigger then 16
-  begin
-    if (ahigh >= 0x31)  //49
-    begin
-    root = 0x0700;  //7
-    nextbit = 0x80 ;
-    end
-    else if (ahigh >= 0x24)  //36
-    begin
-    root = 0x0600;  //6
-    nextbit = 0x80 ;
-    end
-    else if (ahigh >= 0x19)  //25
-    begin
-    root = 0x0500;  //5
-    nextbit = 0x80 ;
-    end
-    else //16
-    begin
-    root = 0x0400;  //4
-    nextbit = 0x80 ;
-    end
-  end
-  else   //smaller than 16
-  begin
-   if (ahigh >= 0x09)  //9
-    begin
-    root = 0x0300;  //3
-    nextbit = 0x80 ;
-    end
-    else if (ahigh >= 0x04)  //4
-    begin
-    root = 0x0200;  //2
-    nextbit = 0x80 ;
-    end
-    else if (ahigh >= 0x01)  //1
-    begin
-    root = 0x0100;  //1
-    nextbit = 0x80 ;
-    end
-    else   //less than one
-    begin
-    root = 0;
-    nextbit = 0x80 ;
-    end
-  end
-  // now get the low order bits
-  while (nextbit)
-  begin
-		root = nextbit + root;
-		p =  multfix(root,root);
-    if (p >= a) root = root - nextbit ;
-  	nextbit = nextbit>>1 ;
-  end
-  return root ;
-end
-*/
+
+
 /*
 // from octosynth, Joe Marshall 2011:
  
@@ -503,44 +452,43 @@ end
   (
   // high unsigned chars mult together = high  unsigned char
   "ldi %A[outVal],0" "\n\t"
-  "mul %B[phaseStep],%B[pitchBend]" "\n\t"
+  "mul %B[phaseStep],%B[pitchB}]" "\n\t"
   "mov %B[outVal],r0" "\n\t"
   // ignore overflow into r1 (should never overflow)
   // low unsigned char * high unsigned char -> both unsigned chars
-  "mul %A[phaseStep],%B[pitchBend]" "\n\t"
+  "mul %A[phaseStep],%B[pitchB}]" "\n\t"
   "add %A[outVal],r0" "\n\t"
   // carry into high unsigned char
   "adc %B[outVal],r1" "\n\t"
   // high unsigned char* low unsigned char -> both unsigned chars
-  "mul %B[phaseStep],%A[pitchBend]" "\n\t"
+  "mul %B[phaseStep],%A[pitchB}]" "\n\t"
   "add %A[outVal],r0" "\n\t"
   // carry into high unsigned char
   "adc %B[outVal],r1" "\n\t"
   // low unsigned char * low unsigned char -> round
-  "mul %A[phaseStep],%A[pitchBend]" "\n\t"
+  "mul %A[phaseStep],%A[pitchB}]" "\n\t"
   // the adc below is to round up based on high bit of low*low:
   "adc %A[outVal],r1" "\n\t"
   "adc %B[outVal],%[ZERO]" "\n\t"
   "clr r1" "\n\t"
   :[outVal] "=&d" (multipliedCounter)
-  :[phaseStep] "d" (oscillators[c].phaseStep),[pitchBend] "d"( pitchBendMultiplier),[ZERO] "d" (zeroReg)
+  :[phaseStep] "d" (oscillators[c].phaseStep),[pitchB}] "d"( pitchB}Multiplier),[ZERO] "d" (zeroReg)
   :"r1","r0"
   );
   oscillators[c].phaseStep=multipliedCounter;
  
   */
 
-
-/** @ingroup fixmath
-@{ 
-*/
+  
 int ipow(int base, int exp); /**< dangerous overflow-prone  int power function */
 
-Q16n16 Q16n16_pow2(Q8n8 exponent); /**< Base 2 power, using fixed-point exponent */
-
+Q16n16 Q16n16_pow2(Q8n8 exponent);
+Q8n8 Q8n8_div(Q8n8 nn, Q8n8 dd);
+Q8n8 Q8n8_sqrt(Q8n8 aa);
+//Q6n10 Q10n6_sqrt(Q10n6 aa); // this would be better than Q8n8 for sensor inputs
 unsigned char byteMod(unsigned char n, unsigned char d);
 unsigned char byteDiv(unsigned char n, unsigned char d);
 unsigned char byteRnd(unsigned char min, unsigned char max);
-/** @} */
+
 
 #endif /* FIXEDMATH_H_ */

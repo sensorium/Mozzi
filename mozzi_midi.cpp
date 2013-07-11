@@ -94,7 +94,7 @@ static float ucmtof(unsigned char midival)
 // };
 
 
-static const uint32_t __attribute__((progmem)) midiToFreq[128] =
+static const uint32_t __attribute__((section(".progmem.data"))) midiToFreq[128] =
   {
     0, 567670, 601425, 637188, 675077, 715219, 757748, 802806, 850544, 901120,
     954703, 1011473, 1071618, 1135340, 1202851, 1274376, 1350154, 1430438, 1515497,

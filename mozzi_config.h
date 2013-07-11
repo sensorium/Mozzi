@@ -9,12 +9,20 @@ Edit this file if you want to choose your own configuration options.
 /**  @ingroup core
 AUDIO_MODE holds the audio mode setting.
 Select STANDARD or HIFI audio output mode in the Mozzi/mozzi_config.h file with
-\#define AUDIO_MODE STANDARD or \#define AUDIO_MODE HIFI
+\#define AUDIO_MODE STANDARD or \#define AUDIO_MODE HIFI.
 In Mozzi/config.h, comment one of these options in and the other out to set the audio mode.
 */
 
 #define AUDIO_MODE STANDARD
 //#define AUDIO_MODE HIFI
+
+
+// Print warning/reminder about the AUDIO_MODE setting to the arduino console while compiling
+#if (AUDIO_MODE==STANDARD)
+#warning "AUDIO_MODE is set to STANDARD in mozzi_config.h.  If things sound wrong, check if STANDARD is the correct AUDIO_MODE for your sketch, and edit mozzi_config.h if necessary."
+#elif (AUDIO_MODE==HIFI)
+#warning "AUDIO_MODE is set to HIFI in mozzi_config.h.  If things sound wrong, check if HIFI is the correct AUDIO_MODE for your sketch, and edit mozzi_config.h if necessary."
+#endif
 
 
 /** @ingroup core

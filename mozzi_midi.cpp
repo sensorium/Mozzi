@@ -73,7 +73,7 @@ static float ucmtof(unsigned char midival)
 // 	return float_to_Q16n16(mtof(midival));
 // }
 
-//static const Q16n16 __attribute__((progmem)) midiToFreq[128] =
+//static const Q16n16 __attribute__((section(".progmem.data"))) midiToFreq[128] =
 // {
 //         Q16n16_m2f(0), Q16n16_m2f(1), Q16n16_m2f(2),Q16n16_m2f(3), Q16n16_m2f(4), Q16n16_m2f(5), Q16n16_m2f(6), Q16n16_m2f(7),
 //         Q16n16_m2f(8),Q16n16_m2f(9), Q16n16_m2f(10), Q16n16_m2f(11), Q16n16_m2f(12), Q16n16_m2f(13), Q16n16_m2f(14), Q16n16_m2f(15),

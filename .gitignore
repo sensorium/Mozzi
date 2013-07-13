@@ -1,3 +1,5 @@
+sonar-project.properties
+*.bak
 *#*
 images
 doxygen*

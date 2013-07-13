@@ -20,8 +20,9 @@
  *
  */
 
-#include "mozzi_config.h" // at the top of all MozziGuts and analog files
+
 #include "MozziGuts.h"
+#include "mozzi_config.h" // at the top of all MozziGuts and analog files
 //#include <util/atomic.h>
 #include "mozzi_utils.h"
 

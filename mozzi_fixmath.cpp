@@ -111,9 +111,34 @@ Q16n16 Q16n16_pow2(Q8n8 exponent)
 
 
 
+
+
 // from divfix https://instruct1.cit.cornell.edu/courses/ee476/Math/GCC644/fixedPt/FixedPtOps.c
 // replaced  begin and end with { and }
-// replaced int with Q7n8 (signed)
+// replaced int with Q7n8
+
+//#define Q7N8_MULT(a,b) ((int)((((long)(a))*(b))>>8)) // fast when defined in a sketch, but 4 times slower for Q7n8_div
+
+#define Q7N8_MULT(a,b)    	  \
+({            \
+int prod, val1=a, val2=b ;    \
+__asm__ __volatile__ (    \
+	"muls %B1, %B2	\n\t"   \
+	"mov %B0, r0 \n\t"	   \
+	"mul %A1, %A2\n\t"	   \
+	"mov %A0, r1 \n\t"   \
+	"mulsu %B1, %A2	\n\t"   \
+	"add %A0, r0  \n\t"     \
+	"adc %B0, r1 \n\t"     \
+	"mulsu %B2, %A1	\n\t"   \
+	"add %A0, r0 \n\t"     \
+	"adc %B0, r1  \n\t"    \
+	"clr r1  \n\t" 		   \
+	: "=&d" (prod)     \
+	: "a" (val1), "a" (val2)  \
+	  );        	\
+  prod;        	\
+})
 
 /** Fast Q7n8 fixed point division.
 @param nn numerator
@@ -150,15 +175,8 @@ Q7n8 Q7n8_div(Q7n8 nn, Q7n8 dd)
      
     // Newton interation
     x = 0x02ea - (d<<1) ;
-    //x = multfix(x, 0x0200-multfix(d,x));
-    //x = multfix(x, 0x0200-multfix(d,x)); 
-    // TB2013 should test this vs above for speed
-    int tmp;
-    tmp = (int)0x0200- (int)(((long)d*x)>>16);
-	x = ((long)x*tmp)>>16;
-	tmp = (int)0x0200- (int)(((long)d*x)>>16);
-	x = ((long)x*tmp)>>16;
-
+    x = Q7N8_MULT(x, 0x0200-Q7N8_MULT(d,x));
+    x = Q7N8_MULT(x, 0x0200-Q7N8_MULT(d,x)); 
     
     // range expansion
     if (count>0)  x = x<<count ;
@@ -168,9 +186,7 @@ Q7n8 Q7n8_div(Q7n8 nn, Q7n8 dd)
     if (neg==1) x=-x;
     
     //form ratio
-    //x = multfix(x,nn) ;
-	// TB2013 should test this vs above for speed
-	x = ((long)x*nn)>>16;
+    x = Q7N8_MULT(x,nn) ;
      
     return x ;  
 }
@@ -180,106 +196,103 @@ Q7n8 Q7n8_div(Q7n8 nn, Q7n8 dd)
 // replaced begin and end with { and }
 // replaced int with 8n8 (unsigned)
 
-/** Fast Q8n8 fixed point square root.
+/** Fast Q7n8 fixed point square root.
 @param aa number to find the root of
 @return square root
 */
 Q8n8 Q8n8_sqrt(Q8n8 aa) {
+   
+    unsigned int a;
+    unsigned char nextbit, ahigh;
+    unsigned int root, p ; 
+    a = aa; 
+    ahigh = a>>8 ;
+    //
+    // range sort to get integer part and to
+    // check for weird bits near the top of the range
+    if (ahigh >= 0x40)     //bigger than 64?
+    {
+        if (a > 0x7e8f)    //>=126.562 = 11.25^2
+        {
+            root = 0x0b40;  // 11
+            nextbit = 0x10 ;
+        } 
+        else if (ahigh >= 0x79)    //>=121
+        {
+            root = 0x0b00;  // 11
+            nextbit = 0x40 ;
+        }
+        else if (ahigh >= 0x64)    //>=100
+        {
+            root = 0x0a00;  // 10
+            nextbit = 0x80 ;
+        }  
+        else if (ahigh >= 0x51)    //>=81
+        {
+            root = 0x0900;  // 9
+            nextbit = 0x80 ;
+        } 
+        else   //64
+        {
+            root = 0x0800;      //8
+            nextbit = 0x80 ; 
+        } 
+    }
+    else if  (ahigh >= 0x10)  //16    //smaller than 64 and bigger then 16
+    { 
+        if (ahigh >= 0x31)  //49
+        {
+            root = 0x0700;      //7
+            nextbit = 0x80 ; 
+        }
+        else if (ahigh >= 0x24)  //36
+        {
+            root = 0x0600;      //6
+            nextbit = 0x80 ; 
+        }
+        else if (ahigh >= 0x19)  //25
+        {
+            root = 0x0500;      //5
+            nextbit = 0x80 ; 
+        }   
+        else //16
+        {
+            root = 0x0400;      //4
+            nextbit = 0x80 ; 
+        }
+    }  
+    else       //smaller than 16
+    { 
+         if (ahigh >= 0x09)  //9
+        {
+            root = 0x0300;      //3
+            nextbit = 0x80 ; 
+        } 
+        else if (ahigh >= 0x04)  //4
+        {
+            root = 0x0200;      //2
+            nextbit = 0x80 ; 
+        }
+        else if (ahigh >= 0x01)  //1
+        {
+            root = 0x0100;      //1
+            nextbit = 0x80 ; 
+        }  
+        else     //less than one
+        {
+            root = 0;
+            nextbit = 0x80 ;  
+        }
+    }
 
-	Q8n8 a;
-	char nextbit, ahigh;
-	Q8n8 root, p ;
-	a = aa;
-	ahigh = a>>8 ;
-	//
-	// range sort to get integer part and to
-	// check for weird bits near the top of the range
-	if (ahigh >= 0x40)   //bigger than 64?
-	{
-		if (a > 0x7e8f)  //>=126.562 = 11.25^2
-		{
-			root = 0x0b40;  // 11
-			nextbit = 0x10 ;
-		}
-		else if (ahigh >= 0x79)  //>=121
-		{
-			root = 0x0b00;  // 11
-			nextbit = 0x40 ;
-		}
-		else if (ahigh >= 0x64)  //>=100
-		{
-			root = 0x0a00;  // 10
-			nextbit = 0x80 ;
-		}
-		else if (ahigh >= 0x51)  //>=81
-		{
-			root = 0x0900;  // 9
-			nextbit = 0x80 ;
-		}
-		else //64
-		{
-			root = 0x0800;  //8
-			nextbit = 0x80 ;
-		}
+    // now get the low order bits  
+    while (nextbit) {
+		root += nextbit; 
+		p =  Q7N8_MULT(root,root); 
+		if (p >= a) root -= nextbit ;
+       	nextbit = nextbit>>1 ;
 	}
-	else if  (ahigh >= 0x10)  //16  //smaller than 64 and bigger then 16
-	{
-		if (ahigh >= 0x31)  //49
-		{
-			root = 0x0700;  //7
-			nextbit = 0x80 ;
-		}
-		else if (ahigh >= 0x24)  //36
-		{
-			root = 0x0600;  //6
-			nextbit = 0x80 ;
-		}
-		else if (ahigh >= 0x19)  //25
-		{
-			root = 0x0500;  //5
-			nextbit = 0x80 ;
-		}
-		else //16
-		{
-			root = 0x0400;  //4
-			nextbit = 0x80 ;
-		}
-	}
-	else   //smaller than 16
-	{
-		if (ahigh >= 0x09)  //9
-		{
-			root = 0x0300;  //3
-			nextbit = 0x80 ;
-		}
-		else if (ahigh >= 0x04)  //4
-		{
-			root = 0x0200;  //2
-			nextbit = 0x80 ;
-		}
-		else if (ahigh >= 0x01)  //1
-		{
-			root = 0x0100;  //1
-			nextbit = 0x80 ;
-		}
-		else   //less than one
-		{
-			root = 0;
-			nextbit = 0x80 ;
-		}
-	}
-	// now get the low order bits
-	while (nextbit)
-	{
-		root = nextbit + root;
-		//p =  multfix(root,root);
-		// TB2013 should test this vs above for speed
-		p = ((unsigned long)root*root)>>16;
-		//
-		if (p >= a) root = root - nextbit ;
-		nextbit = nextbit>>1 ;
-	}
-	return root ;
+    return root ;  
 }
 
 /** @} */

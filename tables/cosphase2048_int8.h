@@ -21,7 +21,7 @@
 
 /** The table data, stored in progmem.
 */
-const char __attribute__((progmem)) COSPHASE2048_DATA []  =
+const char __attribute__((section(".progmem.data"))) COSPHASE2048_DATA []  =
         {
                 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,
                 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,

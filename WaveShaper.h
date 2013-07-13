@@ -82,7 +82,7 @@ public:
 	@tparam T the type of numbers being input to be shaped, chosen to match the table.
 	@param TABLE_NAME the name of the table being used, which can be found in the
 	".h" file containing the table. */
-	WaveShaper(const int __attribute__((progmem)) * TABLE_NAME):table(TABLE_NAME)
+	WaveShaper(const int * TABLE_NAME):table(TABLE_NAME)
 	{
 		;
 	}
@@ -105,7 +105,7 @@ public:
 	}
 
 private:
-	const int __attribute__((progmem)) * table;
+	const int * table;
 };
 
 

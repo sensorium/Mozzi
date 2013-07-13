@@ -12,7 +12,7 @@
 template <int N>
 struct TableStruct {
     static const int length = N;
-    const char __attribute__((progmem))  values[N];
+    const char __attribute__((section(".progmem.data")))  values[N];
 };
 
 template <int N>

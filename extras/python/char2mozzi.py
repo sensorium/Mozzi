@@ -63,7 +63,7 @@ def char2mozzi(infile, outfile, tablename, samplerate):
 	fout.write('#include <avr/pgmspace.h>'+'\n \n')
 	fout.write('#define ' + tablename + '_NUM_CELLS '+ str(len(values))+'\n')
 	fout.write('#define ' + tablename + '_SAMPLERATE '+ str(samplerate)+'\n \n')
-	outstring = 'const char __attribute__((progmem)) ' + tablename + '_DATA [] = {'
+	outstring = 'const char __attribute__((section(".progmem.data"))) ' + tablename + '_DATA [] = {'
 	try:
 		for i in range(len(values)):
 			## mega2560 boards won't upload if there is 33, 33, 33 in the array, so dither the 3rd 33 if there is one

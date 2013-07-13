@@ -19,7 +19,7 @@ def generate(outfile, tablename, tablelength, numtables):
     fout.write('#endif'+'\n')   
     fout.write('#include <avr/pgmspace.h>'+'\n \n')
     fout.write('#define ' + tablename + '_NUM_CELLS '+ str(tablelength) +'\n')
-    fout.write('const char __attribute__((progmem)) ' + tablename + '_DATA [] = { \n')
+    fout.write('const char __attribute__((section(".progmem.data"))) ' + tablename + '_DATA [] = { \n')
 
     try:
         for tablenum in range(numtables):

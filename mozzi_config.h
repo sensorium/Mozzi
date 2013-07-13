@@ -17,14 +17,6 @@ In Mozzi/config.h, comment one of these options in and the other out to set the 
 //#define AUDIO_MODE HIFI
 
 
-// Print warning/reminder about the AUDIO_MODE setting to the arduino console while compiling
-#if (AUDIO_MODE==STANDARD)
-#warning "AUDIO_MODE is set to STANDARD in mozzi_config.h.  If things sound wrong, check if STANDARD is the correct AUDIO_MODE for your sketch, and edit mozzi_config.h if necessary."
-#elif (AUDIO_MODE==HIFI)
-#warning "AUDIO_MODE is set to HIFI in mozzi_config.h.  If things sound wrong, check if HIFI is the correct AUDIO_MODE for your sketch, and edit mozzi_config.h if necessary."
-#endif
-
-
 /** @ingroup core
 Holds the audio rate setting.
 AUDIO_RATE can be \#defined as 16384 or 32768 Hertz in Mozzi/mozzi_config.h. 

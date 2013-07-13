@@ -115,7 +115,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00018"></a>00018     fout.write(<span class="stringliteral">&#39;#include &lt;avr/pgmspace.h&gt;&#39;</span>+<span class="stringliteral">&#39;\n \n&#39;</span>)
 <a name="l00019"></a>00019     fout.write(<span class="stringliteral">&#39;#define &#39;</span> + tablename + <span class="stringliteral">&#39;_NUM_CELLS &#39;</span>+ str(tablelength)+<span class="stringliteral">&#39;\n&#39;</span>)
 <a name="l00020"></a>00020     fout.write(<span class="stringliteral">&#39;#define &#39;</span> + tablename + <span class="stringliteral">&#39;_SAMPLERATE &#39;</span>+ str(samplerate)+<span class="stringliteral">&#39;\n \n&#39;</span>)
-<a name="l00021"></a>00021     outstring = <span class="stringliteral">&#39;const char __attribute__((progmem)) &#39;</span> + tablename + <span class="stringliteral">&#39;_DATA [] = {&#39;</span>
+<a name="l00021"></a>00021     outstring = <span class="stringliteral">&#39;const char __attribute__((section(".progmem.data"))) &#39;</span> + tablename + <span class="stringliteral">&#39;_DATA [] = {&#39;</span>
 <a name="l00022"></a>00022     halftable = tablelength/2
 <a name="l00023"></a>00023     <span class="keywordflow">try</span>:
 <a name="l00024"></a>00024         <span class="keywordflow">for</span> num <span class="keywordflow">in</span> range(halftable):

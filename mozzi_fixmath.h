@@ -168,6 +168,9 @@ inline
 Q7n8 Q7n0_to_Q7n8(Q7n0 a) { return (static_cast<Q7n8>(a))<<8; }			/**<Convert Q7n0 char to Q7n8 fix. @param a is a char*/
 
 inline
+Q15n16 Q7n0_to_Q15n16(Q7n0 a) { return (static_cast<Q15n16>(a))<<16; }			/**<Convert Q7n0 char to Q15n16 fix. @param a is a char*/
+
+inline
 Q7n8 Q8n0_to_Q7n8(Q8n0 a) { return (static_cast<Q7n8>(a))<<8; }		/**<Convert Q8n0 unsigned char to Q7n8 fix. @param a is a Q8n0 unsigned char*.  Beware of overflow. */
 
 inline
@@ -181,6 +184,9 @@ Q16n16 Q8n0_to_Q16n16(Q8n0 a) { return (static_cast<Q16n16>(a))<<16; }			/**<Con
 
 inline
 Q7n0 Q7n8_to_Q7n0(Q7n8 a) { return static_cast<Q7n0>(a>>8); }			/**<Convert Q7n8 fix to Q7n0. @param a is a Q7n8 int*/
+
+inline
+Q15n16 Q7n8_to_Q15n16(Q7n8 a) { return (static_cast<Q15n16>(a))<<8; }			/**<Convert Q7n8 fix to Q15n16. @param a is a Q7n8 int*/
 
 inline
 float Q7n8_to_float(Q7n8 a) { return (static_cast<float>(a))/256; }			/**<Convert Q7n8 fix to float. @param a is a Q7n8 int*/
@@ -298,17 +304,15 @@ inline
 float Q16n16_to_float(Q16n16 a) { return (static_cast<float>(a))/65536; }		/**<Convert fix to float. @param a is a Q16n16 unsigned long*/
 /** @}*/
 
-/** @ingroup fixmath
+/* @ingroup fixmath
 Fast (?) fixed point multiply for Q7n8 fractional numbers.
-Interesting: this is slower than doing ((long)a*b)>>16.
-Timing with an oscilloscope shows:
-p = Q7n8_multfix(a,b); // 1.52ms
-p = ((long)a*b)>>16;  // 560 to 640 us
+The c  version below is 3 times faster, and not subject to the same overflow limitations (+-3.99, or +-2048)
 @param a Q7n8 format multiplicand
 @param b Q7n8 format multiplier
 @return a Q7n8 format product
 */
-#define Q7n8_multfix(a,b)    	  \
+/*
+#define Q7n8_mult(a,b)    	  \
 ({            \
 int prod, val1=a, val2=b ;    \
 __asm__ __volatile__ (    \
@@ -325,10 +329,21 @@ __asm__ __volatile__ (    \
 	"clr r1  \n\t" 		   \
 	: "=&d" (prod)     \
 	: "a" (val1), "a" (val2)  \
-	  );        \
-  prod;        \
+	  );        	\
+  prod;        	\
 })
+*/
 
+/** @ingroup fixmath
+Fast fixed point multiply for Q7n8 fractional numbers.
+@param a Q7n8 format multiplicand
+@param b Q7n8 format multiplier
+@return a Q7n8 format product
+*/
+inline
+Q7n8 Q7n8_mult(Q7n8 a, Q7n8 b) {
+  return ((int)((((long)(a))*(b))>>8));
+}
 
 
 /*
@@ -347,98 +362,6 @@ __asm__ __volatile__ (    \
   );            \
   res;          \
 }) */
-
-
-/*
-https://instruct1.cit.cornell.edu/courses/ee476/Math/GCC644/fixedPt/multASM.S
-;******************************************************************************
-;*
-;* FUNCTION
-;*	muls16x16
-;* DECRIPTION
-;*	Signed multiply of two 16bits numbers with 16 bits result.
-;* USAGE
-;*	r25:r24 = r23:r22 * r25:r24
-;******************************************************************************
-;int multfix(int a,int b)
-
-.global multfix
-multfix:
-	;input parameters are in r23:r22(hi:lo) and r25:r24
-	  
-  	;b aready in right place -- 2nd parameter is in r22:23											
-
-    mov  r20,r24 ;load a -- first parameter is in r24:25 
-	mov  r21,r25											
-
-	muls r23, r21	; (signed)ah * (signed)bh		
-	mov	 r25, r0         ;r18, r0"						
-	mul	 r22, r20		; al * bl"						
-	mov  r24, r1      ;movw	r17:r16, r1:r0"		
-											
-	mulsu r23, r20	; (signed)ah * bl				
-	add	 r24, r0         ;r17, r0"						
-	adc	 r25, r1         ;r18, r1"	
-						
-	mulsu r21, r22	; (signed)bh * al				
-	add	 r24, r0         ;r17, r0"					
-	adc	 r25, r1         ;r18, r1"						
-											
-	clr  r1   			; required by GCC								
-	
-	;return values are in 25:r24 (hi:lo)		 								
- 	ret
- 	
-// https://instruct1.cit.cornell.edu/courses/ee476/Math/GCC644/fixedPt/FixedPtOps.c
-int divfix(int nn, int dd)
-{
-  int x, d ;
-  signed char count, neg ;
-  count = 0;
-  neg = 0 ;
-  d = dd ;
- 
-  // only works with + numbers
-  if (d & 0x8000)
-  {
-    neg = 1;
-    d = -d ;
-  }
- 
-  // range reduction
-  while (d>0x0100)
-  {
-    --count ;
-    d >>= 1 ;
-  }
- 
-  while (d<0x0080)
-  {
-    ++count ;
-    d <<= 1 ;
-  }
- 
-  // Newton interation
-  x = 0x02ea - (d<<1) ;
-  x = multfix(x, 0x0200-multfix(d,x));
-  //x = multfix(x, 0x0200-multfix(d,x));
- 
- 
-  // range expansion
-  if (count>0)  x = x<<count ;
-  else if (count<0) x = x>>(-count) ;
- 
-  // fix sign
-  if (neg==1) x=-x;
- 
-  //form ratio
-  x = multfix(x,nn) ;
- 
-  return x ;
-}
- */
- 
-//========================================================
 
 
 /*
@@ -483,7 +406,8 @@ int divfix(int nn, int dd)
 int ipow(int base, int exp); /**< dangerous overflow-prone  int power function */
 
 Q16n16 Q16n16_pow2(Q8n8 exponent);
-Q8n8 Q8n8_div(Q8n8 nn, Q8n8 dd);
+
+Q7n8 Q7n8_div(Q7n8 nn, Q7n8 dd);
 Q8n8 Q8n8_sqrt(Q8n8 aa);
 //Q6n10 Q10n6_sqrt(Q10n6 aa); // this would be better than Q8n8 for sensor inputs
 unsigned char byteMod(unsigned char n, unsigned char d);

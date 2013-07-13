@@ -27,8 +27,6 @@
 #error Mozzi expects a cpu clock speed of 16MHz!
 #endif
 
-
-#include "mozzi_config.h" // User can change the config file to set audio mode
 #include "TimerZero.h"
 #include "TimerOne.h"
 #include "FrequencyTimer2.h"
@@ -135,6 +133,15 @@ x...........B5(25)...B6(26)...........Teensy2++  \n
 
 */
 #define HIFI 1
+
+#include "mozzi_config.h" // User can change the config file to set audio mode
+
+// Print warning/reminder about the AUDIO_MODE setting to the arduino console while compiling
+#if AUDIO_MODE == STANDARD
+#warning "AUDIO_MODE is set to STANDARD in mozzi_config.h.  If things sound wrong, check if STANDARD is the correct AUDIO_MODE for your sketch."
+#elif AUDIO_MODE == HIFI
+#warning "AUDIO_MODE is set to HIFI in mozzi_config.h.  If things sound wrong, check if HIFI is the correct AUDIO_MODE for your sketch."
+#endif
 
 
 #if (AUDIO_MODE == STANDARD) && (AUDIO_RATE == 32768)

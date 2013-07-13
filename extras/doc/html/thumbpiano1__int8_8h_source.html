@@ -108,7 +108,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00011"></a>00011 <span class="preprocessor">#define THUMBPIANO1_NUM_CELLS 8192</span>
 <a name="l00012"></a>00012 <span class="preprocessor"></span><span class="preprocessor">#define THUMBPIANO1_SAMPLERATE 16384</span>
 <a name="l00013"></a>00013 <span class="preprocessor"></span> 
-<a name="l00014"></a>00014 <span class="keyword">const</span> <span class="keywordtype">char</span> __attribute__((progmem)) THUMBPIANO1_DATA [] = {0, -1, 0, -1, 0,
+<a name="l00014"></a>00014 <span class="keyword">const</span> <span class="keywordtype">char</span> __attribute__((section(".progmem.data"))) THUMBPIANO1_DATA [] = {0, -1, 0, -1, 0,
 <a name="l00015"></a>00015 -1, 0, -1, -4, 5, -16, -37, -18, 18, 16, -9, -6, -1, 31, 49, 34, 12, 4, 44, 41,
 <a name="l00016"></a>00016 21, -5, 6, 26, 10, 17, 17, -7, -47, -45, -25, 6, -29, -64, -73, -84, -57, -41,
 <a name="l00017"></a>00017 -35, -68, -72, -46, -40, -38, -35, -29, -10, 16, 30, 50, 36, 45, 92, 97, 75, 64,

@@ -45,7 +45,7 @@ boolean triggered = false;
 
 void setup(){
   Serial.begin(115200); // set up the Serial output so we can look at the piezo values
-  setupFastAnalogRead(); // one way of increasing the speed of reading the input
+  setupFastAnalogRead(); // speed up analog reads (Mozzi also has other faster ways)
   startMozzi(); // :))
 }
 

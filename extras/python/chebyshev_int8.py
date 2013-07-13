@@ -44,7 +44,7 @@ def chebyTable(outfile, tablename, tablelength, curvenum):
     fout.write('#endif'+'\n')   
     fout.write('#include <avr/pgmspace.h>'+'\n \n')
     fout.write('#define ' + tablename + '_NUM_CELLS '+ str(tablelength) +'\n')
-    outstring = 'const char __attribute__((progmem)) ' + tablename + '_DATA [] = {'
+    outstring = 'const char __attribute__((section(".progmem.data"))) ' + tablename + '_DATA [] = {'
     try:
         for num in range(tablelength):
             ## range between -1 and 1 first

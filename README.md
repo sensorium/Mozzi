@@ -126,7 +126,7 @@ Mozzi is a development of research into Mobile Sonification in the
 
 ***
 
-#Contributions / Included Dependencies  
+##Contributions / Included Dependencies  
 Modified versions of the following libraries are included in the Mozzi download:  
 
 [TimerOne library](http://www.pjrc.com/teensy/td_libs_TimerOne.html)  

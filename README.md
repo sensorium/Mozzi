@@ -1,7 +1,7 @@
 #Mozzi  
-============================
-##sound synthesis library for Arduino  
---------------------------------------------------
+
+###sound synthesis library for Arduino  
+
 
 Tim Barrass  
 version 2013-07-13-17:27  

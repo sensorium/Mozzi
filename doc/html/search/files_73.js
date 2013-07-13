@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['sample_2eh',['Sample.h',['../_sample_8h.html',1,'']]],
+  ['saw1024_5fint8_2eh',['saw1024_int8.h',['../saw1024__int8_8h.html',1,'']]],
+  ['saw2048_5fint8_2eh',['saw2048_int8.h',['../saw2048__int8_8h.html',1,'']]],
+  ['saw256_5fint8_2eh',['saw256_int8.h',['../saw256__int8_8h.html',1,'']]],
+  ['saw4096_5fint8_2eh',['saw4096_int8.h',['../saw4096__int8_8h.html',1,'']]],
+  ['saw512_5fint8_2eh',['saw512_int8.h',['../saw512__int8_8h.html',1,'']]],
+  ['saw8192_5fint8_2eh',['saw8192_int8.h',['../saw8192__int8_8h.html',1,'']]],
+  ['saw_5fanalogue512_5fint8_2eh',['saw_analogue512_int8.h',['../saw__analogue512__int8_8h.html',1,'']]],
+  ['sin1024_5fint8_2eh',['sin1024_int8.h',['../sin1024__int8_8h.html',1,'']]],
+  ['sin1024_5fuint8_2eh',['sin1024_uint8.h',['../sin1024__uint8_8h.html',1,'']]],
+  ['sin2048_5fint8_2eh',['sin2048_int8.h',['../sin2048__int8_8h.html',1,'']]],
+  ['sin256_5fint8_2eh',['sin256_int8.h',['../sin256__int8_8h.html',1,'']]],
+  ['sin4096_5fint8_2eh',['sin4096_int8.h',['../sin4096__int8_8h.html',1,'']]],
+  ['sin512_5fint8_2eh',['sin512_int8.h',['../sin512__int8_8h.html',1,'']]],
+  ['sin8192_5fint8_2eh',['sin8192_int8.h',['../sin8192__int8_8h.html',1,'']]],
+  ['sin8192_5fuint8_2eh',['sin8192_uint8.h',['../sin8192__uint8_8h.html',1,'']]],
+  ['smooth_2eh',['Smooth.h',['../_smooth_8h.html',1,'']]],
+  ['smoothsquare8192_5fint8_2eh',['smoothsquare8192_int8.h',['../smoothsquare8192__int8_8h.html',1,'']]],
+  ['square_5fanalogue512_5fint8_2eh',['square_analogue512_int8.h',['../square__analogue512__int8_8h.html',1,'']]],
+  ['square_5fno_5falias512_5fint8_2eh',['square_no_alias512_int8.h',['../square__no__alias512__int8_8h.html',1,'']]],
+  ['statevariable_2eh',['StateVariable.h',['../_state_variable_8h.html',1,'']]]
+];

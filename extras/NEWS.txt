@@ -3,7 +3,7 @@ Mozzi sound synthesis library for Arduino
 NEWS
 get the latest version from http://sensorium.github.io/Mozzi/
 
-version 2013-07-07-17:51
+version 2013-07-13-16:22
 
 - Added extras folder and moved non-code files to there.  
 - Tried migrating code into a src folder structure for new library spec 1.5, but doesn't work yet so moved it back to top folder.

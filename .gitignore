@@ -1,3 +1,5 @@
+*.ogg
+*.mp3
 sonar-project.properties
 *.bak
 *#*

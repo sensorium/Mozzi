@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-07-07-17:51</span>
+   &#160;<span id="projectnumber">version 2013-07-13-16:31</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -165,7 +165,7 @@ $(document).ready(function(){initNavTree('_wave_packet_8h_source.html','');});
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">    */</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno"><a class="code" href="class_wave_packet.html#a09afa3b26d61c97e24ccbae9cba2fd57">   54</a></span>&#160;    <a class="code" href="class_wave_packet.html#a09afa3b26d61c97e24ccbae9cba2fd57" title="Constructor. ">WavePacket</a>():AUDIO_STEPS_PER_CONTROL(<a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298" title="Holds the audio rate setting. ">AUDIO_RATE</a> / <a class="code" href="group__core.html#gae5d737db8bc97ecf08d2ea3121782d26" title="Control rate setting. ">CONTROL_RATE</a>)</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        aCos.setTable(COS8192_DATA);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        aCos<a class="code" href="class_oscil.html#a59e9b132ad0770030d7339c6aa260925" title="Change the sound table which will be played by the Oscil. ">.</a><a class="code" href="class_oscil.html#a59e9b132ad0770030d7339c6aa260925" title="Change the sound table which will be played by the Oscil. ">setTable</a><a class="code" href="class_oscil.html#a59e9b132ad0770030d7339c6aa260925" title="Change the sound table which will be played by the Oscil. ">(</a><a class="code" href="cos8192__int8_8h.html#ae72eb3a3dafc6fdd14d7107556712449">COS8192_DATA</a><a class="code" href="class_oscil.html#a59e9b132ad0770030d7339c6aa260925" title="Change the sound table which will be played by the Oscil. ">)</a>;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
@@ -271,7 +271,7 @@ $(document).ready(function(){initNavTree('_wave_packet_8h_source.html','');});
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="comment">// the number of audio steps the line has to take to reach the next control value</span></div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> AUDIO_STEPS_PER_CONTROL;</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <a class="code" href="class_wave_packet.html" title="Wavepacket synthesis, with two overlapping streams of wave packets. ">Oscil</a> &lt;<a class="code" href="class_wave_packet.html" title="Wavepacket synthesis, with two overlapping streams of wave packets. ">COS8192_NUM_CELLS</a>, <a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298" title="Holds the audio rate setting. ">AUDIO_RATE</a>&gt; aCos;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <a class="code" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> &lt;<a class="code" href="cos8192__int8_8h.html#a63e06518e96491b0ec14232ecdcf353d">COS8192_NUM_CELLS</a>, <a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298" title="Holds the audio rate setting. ">AUDIO_RATE</a>&gt; aCos;</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <a class="code" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency. ">Phasor</a> &lt;<a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298" title="Holds the audio rate setting. ">AUDIO_RATE</a>&gt; aPhasor;</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;</div>
@@ -291,15 +291,15 @@ $(document).ready(function(){initNavTree('_wave_packet_8h_source.html','');});
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        <span class="comment">// oscillation</span></div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        index = (param.centrefreq * phase)&gt;&gt;16;</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        <span class="comment">// hack to make peak in middle of packet, otherwise it centres around a zero-crossing.. </span></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        index += COS8192_NUM_CELLS&gt;&gt;1;</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        index &amp;= COS8192_NUM_CELLS-1;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        <span class="keywordtype">char</span> sig1 = aCos.atIndex(index);</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        index += <a class="code" href="cos8192__int8_8h.html#a63e06518e96491b0ec14232ecdcf353d">COS8192_NUM_CELLS</a>&gt;&gt;1;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        index &amp;= <a class="code" href="cos8192__int8_8h.html#a63e06518e96491b0ec14232ecdcf353d">COS8192_NUM_CELLS</a>-1;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        <span class="keywordtype">char</span> sig1 = aCos<a class="code" href="class_oscil.html#a3b2ea7727b2ec911957b3862dbb6a8ec" title="Returns the sample at the given table index. ">.</a><a class="code" href="class_oscil.html#a3b2ea7727b2ec911957b3862dbb6a8ec" title="Returns the sample at the given table index. ">atIndex</a><a class="code" href="class_oscil.html#a3b2ea7727b2ec911957b3862dbb6a8ec" title="Returns the sample at the given table index. ">(</a>index<a class="code" href="class_oscil.html#a3b2ea7727b2ec911957b3862dbb6a8ec" title="Returns the sample at the given table index. ">)</a>;</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        <span class="comment">// packet envelope</span></div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        Q23n8 bwphase = (param.bandwidth * phase)&gt;&gt;8;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        bwphase += COS8192_NUM_CELLS&gt;&gt;1;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        index = constrain(bwphase, 0, (COS8192_NUM_CELLS-1));</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> packet_width = 128 + aCos.atIndex(index);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        bwphase += <a class="code" href="cos8192__int8_8h.html#a63e06518e96491b0ec14232ecdcf353d">COS8192_NUM_CELLS</a>&gt;&gt;1;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        index = constrain(bwphase, 0, (<a class="code" href="cos8192__int8_8h.html#a63e06518e96491b0ec14232ecdcf353d">COS8192_NUM_CELLS</a>-1));</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> packet_width = 128 + aCos<a class="code" href="class_oscil.html#a3b2ea7727b2ec911957b3862dbb6a8ec" title="Returns the sample at the given table index. ">.</a><a class="code" href="class_oscil.html#a3b2ea7727b2ec911957b3862dbb6a8ec" title="Returns the sample at the given table index. ">atIndex</a><a class="code" href="class_oscil.html#a3b2ea7727b2ec911957b3862dbb6a8ec" title="Returns the sample at the given table index. ">(</a>index<a class="code" href="class_oscil.html#a3b2ea7727b2ec911957b3862dbb6a8ec" title="Returns the sample at the given table index. ">)</a>;</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        <span class="comment">// if (AUDIO_MODE == HIFI){</span></div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            <span class="comment">// return ((int) sig1 * packet_width)&gt;&gt;3; // scaled to fit HIFI updateAudio output</span></div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        <span class="comment">// }else{</span></div>
@@ -317,8 +317,8 @@ $(document).ready(function(){initNavTree('_wave_packet_8h_source.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_wave_packet_8h.html">WavePacket.h</a></li>
-    <li class="footer">Generated on Tue Jul 9 2013 14:09:32 for Mozzi by
+    <li class="navelem"><a class="el" href="_wave_packet_8h.html">WavePacket.h</a></li>
+    <li class="footer">Generated on Sat Jul 13 2013 16:35:16 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

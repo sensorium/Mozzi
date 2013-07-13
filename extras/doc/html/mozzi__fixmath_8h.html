@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-07-07-17:51</span>
+   &#160;<span id="projectnumber">version 2013-07-13-16:31</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('mozzi__fixmath_8h.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">mozzi_fixmath.h File Reference</div>  </div>
 </div><!--header-->
@@ -118,9 +118,6 @@ $(document).ready(function(){initNavTree('mozzi__fixmath_8h.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ga4628b6ab7962076cb9e176a3d9739ac6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga4628b6ab7962076cb9e176a3d9739ac6">Q7n8_multfix</a>(a, b)</td></tr>
-<tr class="memdesc:ga4628b6ab7962076cb9e176a3d9739ac6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fast (?) fixed point multiply for Q7n8 fractional numbers.  <a href="group__fixmath.html#ga4628b6ab7962076cb9e176a3d9739ac6">More...</a><br/></td></tr>
-<tr class="separator:ga4628b6ab7962076cb9e176a3d9739ac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:ga42c55269acbc41ca1fbcbb7aea5e8767"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga42c55269acbc41ca1fbcbb7aea5e8767">Q0n7_FIX1</a>&#160;&#160;&#160;((<a class="el" href="group__fixmath.html#ga63ce3e8c0ab9757dd79f53811f6fed9c">Q0n7</a>) 127)</td></tr>
 <tr class="memdesc:ga42c55269acbc41ca1fbcbb7aea5e8767"><td class="mdescLeft">&#160;</td><td class="mdescRight">0.992 in Q0n7 format  <a href="group__fixmath.html#ga42c55269acbc41ca1fbcbb7aea5e8767">More...</a><br/></td></tr>
@@ -240,6 +237,28 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ga306932c4fb32b1352c24b7602a696fee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__fixmath.html#gac16a505e3f62bbfd9160e1d6bf83fa98">Q7n8</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga306932c4fb32b1352c24b7602a696fee">Q7n8_mult</a> (<a class="el" href="group__fixmath.html#gac16a505e3f62bbfd9160e1d6bf83fa98">Q7n8</a> a, <a class="el" href="group__fixmath.html#gac16a505e3f62bbfd9160e1d6bf83fa98">Q7n8</a> b)</td></tr>
+<tr class="memdesc:ga306932c4fb32b1352c24b7602a696fee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fast fixed point multiply for Q7n8 fractional numbers.  <a href="group__fixmath.html#ga306932c4fb32b1352c24b7602a696fee">More...</a><br/></td></tr>
+<tr class="separator:ga306932c4fb32b1352c24b7602a696fee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5daaf7f37651029de2abf8ad375b6850"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mozzi__fixmath_8h.html#a5daaf7f37651029de2abf8ad375b6850">ipow</a> (int base, int exp)</td></tr>
+<tr class="memdesc:a5daaf7f37651029de2abf8ad375b6850"><td class="mdescLeft">&#160;</td><td class="mdescRight">dangerous overflow-prone int power function  <a href="#a5daaf7f37651029de2abf8ad375b6850">More...</a><br/></td></tr>
+<tr class="separator:a5daaf7f37651029de2abf8ad375b6850"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e1d9d0fe4ba7edb9830efb7887c36bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__fixmath.html#ga20ef71528ee7583bbf60586448b12caf">Q16n16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mozzi__fixmath_8h.html#a2e1d9d0fe4ba7edb9830efb7887c36bd">Q16n16_pow2</a> (<a class="el" href="group__fixmath.html#ga5ae84c3845de6126c16295e05599c163">Q8n8</a> exponent)</td></tr>
+<tr class="memdesc:a2e1d9d0fe4ba7edb9830efb7887c36bd"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment">This is a fast replacement for pow(2,x), where x is a fractional number in Q8n8
+</pre><p> fixed-point exponent.  <a href="#a2e1d9d0fe4ba7edb9830efb7887c36bd">More...</a><br/></td></tr>
+<tr class="separator:a2e1d9d0fe4ba7edb9830efb7887c36bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a437e66f3e482b62a9e836b813c676c19"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__fixmath.html#gac16a505e3f62bbfd9160e1d6bf83fa98">Q7n8</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mozzi__fixmath_8h.html#a437e66f3e482b62a9e836b813c676c19">Q7n8_div</a> (<a class="el" href="group__fixmath.html#gac16a505e3f62bbfd9160e1d6bf83fa98">Q7n8</a> nn, <a class="el" href="group__fixmath.html#gac16a505e3f62bbfd9160e1d6bf83fa98">Q7n8</a> dd)</td></tr>
+<tr class="memdesc:a437e66f3e482b62a9e836b813c676c19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fast Q7n8 fixed point division.  <a href="#a437e66f3e482b62a9e836b813c676c19">More...</a><br/></td></tr>
+<tr class="separator:a437e66f3e482b62a9e836b813c676c19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c4b3039059808144737acde898abd00"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__fixmath.html#ga5ae84c3845de6126c16295e05599c163">Q8n8</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mozzi__fixmath_8h.html#a8c4b3039059808144737acde898abd00">Q8n8_sqrt</a> (<a class="el" href="group__fixmath.html#ga5ae84c3845de6126c16295e05599c163">Q8n8</a> aa)</td></tr>
+<tr class="memdesc:a8c4b3039059808144737acde898abd00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fast Q7n8 fixed point square root.  <a href="#a8c4b3039059808144737acde898abd00">More...</a><br/></td></tr>
+<tr class="separator:a8c4b3039059808144737acde898abd00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92853d82934fc5f363a2b005159f497e"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mozzi__fixmath_8h.html#a92853d82934fc5f363a2b005159f497e">byteMod</a> (unsigned char n, unsigned char d)</td></tr>
+<tr class="separator:a92853d82934fc5f363a2b005159f497e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fd5059a2a33bb5af84e4aa1913164f0"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mozzi__fixmath_8h.html#a2fd5059a2a33bb5af84e4aa1913164f0">byteDiv</a> (unsigned char n, unsigned char d)</td></tr>
+<tr class="separator:a2fd5059a2a33bb5af84e4aa1913164f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf67580ab264b89b6c38438ddbdf1839"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mozzi__fixmath_8h.html#abf67580ab264b89b6c38438ddbdf1839">byteRnd</a> (unsigned char min, unsigned char max)</td></tr>
+<tr class="separator:abf67580ab264b89b6c38438ddbdf1839"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:ga1e0eab490ffe9a47fd78bcc449e3b995"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__fixmath.html#ga63ce3e8c0ab9757dd79f53811f6fed9c">Q0n7</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga1e0eab490ffe9a47fd78bcc449e3b995">float_to_Q0n7</a> (float a)</td></tr>
 <tr class="memdesc:ga1e0eab490ffe9a47fd78bcc449e3b995"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert float to Q0n7 fix.  <a href="group__fixmath.html#ga1e0eab490ffe9a47fd78bcc449e3b995">More...</a><br/></td></tr>
@@ -310,6 +329,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga81b0b1f295a6a724c100e600d6b4ce28"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__fixmath.html#gac16a505e3f62bbfd9160e1d6bf83fa98">Q7n8</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga81b0b1f295a6a724c100e600d6b4ce28">Q7n0_to_Q7n8</a> (<a class="el" href="group__fixmath.html#ga54e54f703dd3d1f7aa38d930885ac549">Q7n0</a> a)</td></tr>
 <tr class="memdesc:ga81b0b1f295a6a724c100e600d6b4ce28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q7n0 char to Q7n8 fix.  <a href="group__fixmath.html#ga81b0b1f295a6a724c100e600d6b4ce28">More...</a><br/></td></tr>
 <tr class="separator:ga81b0b1f295a6a724c100e600d6b4ce28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga64d943b21ef783f34135630a5c80be46"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__fixmath.html#ga27c6ece00a166ba3285bf7302c325e2e">Q15n16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga64d943b21ef783f34135630a5c80be46">Q7n0_to_Q15n16</a> (<a class="el" href="group__fixmath.html#ga54e54f703dd3d1f7aa38d930885ac549">Q7n0</a> a)</td></tr>
+<tr class="memdesc:ga64d943b21ef783f34135630a5c80be46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q7n0 char to Q15n16 fix.  <a href="group__fixmath.html#ga64d943b21ef783f34135630a5c80be46">More...</a><br/></td></tr>
+<tr class="separator:ga64d943b21ef783f34135630a5c80be46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4baa8569c241630ddd25d798d0a89b3d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__fixmath.html#gac16a505e3f62bbfd9160e1d6bf83fa98">Q7n8</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga4baa8569c241630ddd25d798d0a89b3d">Q8n0_to_Q7n8</a> (<a class="el" href="group__fixmath.html#gaac3e4cab960e285ec7e2d8afd54a9dd9">Q8n0</a> a)</td></tr>
 <tr class="memdesc:ga4baa8569c241630ddd25d798d0a89b3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q8n0 unsigned char to Q7n8 fix.  <a href="group__fixmath.html#ga4baa8569c241630ddd25d798d0a89b3d">More...</a><br/></td></tr>
 <tr class="separator:ga4baa8569c241630ddd25d798d0a89b3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -325,6 +347,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gaa8be90cc674fc9ac72a2faafb11d6a5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__fixmath.html#ga54e54f703dd3d1f7aa38d930885ac549">Q7n0</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#gaa8be90cc674fc9ac72a2faafb11d6a5e">Q7n8_to_Q7n0</a> (<a class="el" href="group__fixmath.html#gac16a505e3f62bbfd9160e1d6bf83fa98">Q7n8</a> a)</td></tr>
 <tr class="memdesc:gaa8be90cc674fc9ac72a2faafb11d6a5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q7n8 fix to Q7n0.  <a href="group__fixmath.html#gaa8be90cc674fc9ac72a2faafb11d6a5e">More...</a><br/></td></tr>
 <tr class="separator:gaa8be90cc674fc9ac72a2faafb11d6a5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga958d671aeefb66c2492b84bf299f8d13"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__fixmath.html#ga27c6ece00a166ba3285bf7302c325e2e">Q15n16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga958d671aeefb66c2492b84bf299f8d13">Q7n8_to_Q15n16</a> (<a class="el" href="group__fixmath.html#gac16a505e3f62bbfd9160e1d6bf83fa98">Q7n8</a> a)</td></tr>
+<tr class="memdesc:ga958d671aeefb66c2492b84bf299f8d13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q7n8 fix to Q15n16.  <a href="group__fixmath.html#ga958d671aeefb66c2492b84bf299f8d13">More...</a><br/></td></tr>
+<tr class="separator:ga958d671aeefb66c2492b84bf299f8d13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaad3cbbc6a772d246d26fd98b5a079382"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#gaad3cbbc6a772d246d26fd98b5a079382">Q7n8_to_float</a> (<a class="el" href="group__fixmath.html#gac16a505e3f62bbfd9160e1d6bf83fa98">Q7n8</a> a)</td></tr>
 <tr class="memdesc:gaad3cbbc6a772d246d26fd98b5a079382"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Q7n8 fix to float.  <a href="group__fixmath.html#gaad3cbbc6a772d246d26fd98b5a079382">More...</a><br/></td></tr>
 <tr class="separator:gaad3cbbc6a772d246d26fd98b5a079382"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -433,27 +458,208 @@ Functions</h2></td></tr>
 <tr class="memitem:gafcb57f2d0fdcce65b60401f47b871d14"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#gafcb57f2d0fdcce65b60401f47b871d14">Q16n16_to_float</a> (<a class="el" href="group__fixmath.html#ga20ef71528ee7583bbf60586448b12caf">Q16n16</a> a)</td></tr>
 <tr class="memdesc:gafcb57f2d0fdcce65b60401f47b871d14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert fix to float.  <a href="group__fixmath.html#gafcb57f2d0fdcce65b60401f47b871d14">More...</a><br/></td></tr>
 <tr class="separator:gafcb57f2d0fdcce65b60401f47b871d14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:ga5daaf7f37651029de2abf8ad375b6850"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga5daaf7f37651029de2abf8ad375b6850">ipow</a> (int base, int exp)</td></tr>
-<tr class="memdesc:ga5daaf7f37651029de2abf8ad375b6850"><td class="mdescLeft">&#160;</td><td class="mdescRight">dangerous overflow-prone int power function  <a href="group__fixmath.html#ga5daaf7f37651029de2abf8ad375b6850">More...</a><br/></td></tr>
-<tr class="separator:ga5daaf7f37651029de2abf8ad375b6850"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2e1d9d0fe4ba7edb9830efb7887c36bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__fixmath.html#ga20ef71528ee7583bbf60586448b12caf">Q16n16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga2e1d9d0fe4ba7edb9830efb7887c36bd">Q16n16_pow2</a> (<a class="el" href="group__fixmath.html#ga5ae84c3845de6126c16295e05599c163">Q8n8</a> exponent)</td></tr>
-<tr class="memdesc:ga2e1d9d0fe4ba7edb9830efb7887c36bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base 2 power, using fixed-point exponent.  <a href="group__fixmath.html#ga2e1d9d0fe4ba7edb9830efb7887c36bd">More...</a><br/></td></tr>
-<tr class="separator:ga2e1d9d0fe4ba7edb9830efb7887c36bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga92853d82934fc5f363a2b005159f497e"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga92853d82934fc5f363a2b005159f497e">byteMod</a> (unsigned char n, unsigned char d)</td></tr>
-<tr class="separator:ga92853d82934fc5f363a2b005159f497e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2fd5059a2a33bb5af84e4aa1913164f0"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga2fd5059a2a33bb5af84e4aa1913164f0">byteDiv</a> (unsigned char n, unsigned char d)</td></tr>
-<tr class="separator:ga2fd5059a2a33bb5af84e4aa1913164f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabf67580ab264b89b6c38438ddbdf1839"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#gabf67580ab264b89b6c38438ddbdf1839">byteRnd</a> (unsigned char min, unsigned char max)</td></tr>
-<tr class="separator:gabf67580ab264b89b6c38438ddbdf1839"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a2fd5059a2a33bb5af84e4aa1913164f0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char byteDiv </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>d</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a92853d82934fc5f363a2b005159f497e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char byteMod </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>d</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abf67580ab264b89b6c38438ddbdf1839"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char byteRnd </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5daaf7f37651029de2abf8ad375b6850"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ipow </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>base</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>exp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="mozzi__fixmath_8cpp_source.html#l00063">63</a> of file <a class="el" href="mozzi__fixmath_8cpp_source.html">mozzi_fixmath.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2e1d9d0fe4ba7edb9830efb7887c36bd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__fixmath.html#ga20ef71528ee7583bbf60586448b12caf">Q16n16</a> Q16n16_pow2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__fixmath.html#ga5ae84c3845de6126c16295e05599c163">Q8n8</a>&#160;</td>
+          <td class="paramname"><em>exponent</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>It's less accurate than pow(2,x), but useful where a tradeoff between accuracy and speed is required to keep audio from glitching. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">exponent</td><td>in Q8n8 format. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>pow(2,x) in Q16n16 format. </dd></dl>
+
+<p>Definition at line <a class="el" href="mozzi__fixmath_8cpp_source.html#l00102">102</a> of file <a class="el" href="mozzi__fixmath_8cpp_source.html">mozzi_fixmath.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a437e66f3e482b62a9e836b813c676c19"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__fixmath.html#gac16a505e3f62bbfd9160e1d6bf83fa98">Q7n8</a> Q7n8_div </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__fixmath.html#gac16a505e3f62bbfd9160e1d6bf83fa98">Q7n8</a>&#160;</td>
+          <td class="paramname"><em>nn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__fixmath.html#gac16a505e3f62bbfd9160e1d6bf83fa98">Q7n8</a>&#160;</td>
+          <td class="paramname"><em>dd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nn</td><td>numerator </td></tr>
+    <tr><td class="paramname">dd</td><td>denominator </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>quotient </dd></dl>
+
+<p>Definition at line <a class="el" href="mozzi__fixmath_8cpp_source.html#l00148">148</a> of file <a class="el" href="mozzi__fixmath_8cpp_source.html">mozzi_fixmath.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8c4b3039059808144737acde898abd00"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__fixmath.html#ga5ae84c3845de6126c16295e05599c163">Q8n8</a> Q8n8_sqrt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__fixmath.html#ga5ae84c3845de6126c16295e05599c163">Q8n8</a>&#160;</td>
+          <td class="paramname"><em>aa</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aa</td><td>number to find the root of </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>square root </dd></dl>
+
+<p>Definition at line <a class="el" href="mozzi__fixmath_8cpp_source.html#l00203">203</a> of file <a class="el" href="mozzi__fixmath_8cpp_source.html">mozzi_fixmath.cpp</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="mozzi__fixmath_8h.html">mozzi_fixmath.h</a></li>
-    <li class="footer">Generated on Tue Jul 9 2013 14:09:32 for Mozzi by
+    <li class="navelem"><a class="el" href="mozzi__fixmath_8h.html">mozzi_fixmath.h</a></li>
+    <li class="footer">Generated on Sat Jul 13 2013 16:35:16 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

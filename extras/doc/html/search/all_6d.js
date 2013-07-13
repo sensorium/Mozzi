@@ -2,6 +2,7 @@ var searchData=
 [
   ['mainpage_2edox',['mainpage.dox',['../mainpage_8dox.html',1,'']]],
   ['meta_2eh',['meta.h',['../meta_8h.html',1,'']]],
+  ['micros_5fper_5faudio_5ftick',['MICROS_PER_AUDIO_TICK',['../_mozzi_guts_8h.html#a25f09c512cd3a187d19eb7fd1d54d558',1,'MozziGuts.h']]],
   ['midi',['Midi',['../group__midi.html',1,'']]],
   ['mozzi_5fanalog_2ecpp',['mozzi_analog.cpp',['../mozzi__analog_8cpp.html',1,'']]],
   ['mozzi_5fanalog_2eh',['mozzi_analog.h',['../mozzi__analog_8h.html',1,'']]],

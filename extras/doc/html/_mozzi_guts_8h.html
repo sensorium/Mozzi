@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-07-07-17:51</span>
+   &#160;<span id="projectnumber">version 2013-07-13-16:31</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -114,10 +114,10 @@ $(document).ready(function(){initNavTree('_mozzi_guts_8h.html','');});
 <div class="title">MozziGuts.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a>&quot;</code><br/>
-<code>#include &quot;TimerZero.h&quot;</code><br/>
+<div class="textblock"><code>#include &quot;TimerZero.h&quot;</code><br/>
 <code>#include &quot;TimerOne.h&quot;</code><br/>
 <code>#include &quot;FrequencyTimer2.h&quot;</code><br/>
+<code>#include &quot;<a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_audio_config_standard9bit_pwm_8h_source.html">AudioConfigStandard9bitPwm.h</a>&quot;</code><br/>
 </div>
 <p><a href="_mozzi_guts_8h_source.html">Go to the source code of this file.</a></p>
@@ -133,6 +133,10 @@ Macros</h2></td></tr>
 <tr class="memitem:gae99eb43cb29bb03d862ae829999916c4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#gae99eb43cb29bb03d862ae829999916c4">HIFI</a>&#160;&#160;&#160;1</td></tr>
 <tr class="memdesc:gae99eb43cb29bb03d862ae829999916c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to set AUDIO_MODE to HIFI.  <a href="group__core.html#gae99eb43cb29bb03d862ae829999916c4">More...</a><br/></td></tr>
 <tr class="separator:gae99eb43cb29bb03d862ae829999916c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4185aa30186b5d63775b5e1d50df1df9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_mozzi_guts_8h.html#a4185aa30186b5d63775b5e1d50df1df9">AUDIO_RATE_AS_LSHIFT</a>&#160;&#160;&#160;14</td></tr>
+<tr class="separator:a4185aa30186b5d63775b5e1d50df1df9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25f09c512cd3a187d19eb7fd1d54d558"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_mozzi_guts_8h.html#a25f09c512cd3a187d19eb7fd1d54d558">MICROS_PER_AUDIO_TICK</a>&#160;&#160;&#160;61</td></tr>
+<tr class="separator:a25f09c512cd3a187d19eb7fd1d54d558"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -164,12 +168,41 @@ Functions</h2></td></tr>
 <tr class="memdesc:ga2fca37b988ab369e2f3c3108c683e59d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is required in Arduino's loop().  <a href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d">More...</a><br/></td></tr>
 <tr class="separator:ga2fca37b988ab369e2f3c3108c683e59d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3f15eb8d6694020d170ebcbedb645de7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga3f15eb8d6694020d170ebcbedb645de7">getAudioInput</a> ()</td></tr>
-<tr class="memdesc:ga3f15eb8d6694020d170ebcbedb645de7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the Mozzi/mozzi_config.h file.  <a href="group__analog.html#ga3f15eb8d6694020d170ebcbedb645de7">More...</a><br/></td></tr>
+<tr class="memdesc:ga3f15eb8d6694020d170ebcbedb645de7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the <a class="el" href="mozzi__config_8h.html">Mozzi/mozzi_config.h</a> file.  <a href="group__analog.html#ga3f15eb8d6694020d170ebcbedb645de7">More...</a><br/></td></tr>
 <tr class="separator:ga3f15eb8d6694020d170ebcbedb645de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaaa6a42d80c5297407a45ca8bf3c1c7fe"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe">mozziMicros</a> ()</td></tr>
 <tr class="memdesc:gaaa6a42d80c5297407a45ca8bf3c1c7fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">A replacement for Arduino micros() which is disabled by Mozzi which takes over Timer 0 for control interrupts.  <a href="group__core.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe">More...</a><br/></td></tr>
 <tr class="separator:gaaa6a42d80c5297407a45ca8bf3c1c7fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="a4185aa30186b5d63775b5e1d50df1df9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define AUDIO_RATE_AS_LSHIFT&#160;&#160;&#160;14</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00153">153</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a25f09c512cd3a187d19eb7fd1d54d558"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MICROS_PER_AUDIO_TICK&#160;&#160;&#160;61</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00154">154</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a class="anchor" id="a65f85814a8290f9797005d3b28e7e5fc"></a>
 <div class="memitem">
@@ -181,7 +214,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00161">161</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00168">168</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -195,7 +228,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00162">162</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00169">169</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -209,7 +242,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00163">163</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00170">170</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -218,8 +251,8 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_70d5e250c66d001b18da37689179cade.html">arch</a></li><li class="navelem"><a class="el" href="dir_ee0b29e3071d3eb7e6327064e3c37af7.html">avr</a></li><li class="navelem"><a class="el" href="_mozzi_guts_8h.html">MozziGuts.h</a></li>
-    <li class="footer">Generated on Tue Jul 9 2013 14:09:32 for Mozzi by
+    <li class="navelem"><a class="el" href="_mozzi_guts_8h.html">MozziGuts.h</a></li>
+    <li class="footer">Generated on Sat Jul 13 2013 16:35:16 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

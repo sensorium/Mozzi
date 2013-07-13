@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-07-07-17:51</span>
+   &#160;<span id="projectnumber">version 2013-07-13-16:31</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -105,75 +105,12 @@ $(document).ready(function(){initNavTree('_06_synthesis_2_wave_packet__sample_2_
 </div><!--header-->
 <div class="contents">
 <p>This is an example of how to use the <a class="el" href="class_wave_packet_sample.html" title="A WavePacket which allows a custom table to be set as the audio source for the wavepackets (or grains...">WavePacketSample</a> class.</p>
-<div class="fragment"><div class="line"><span class="comment">/*  Example of Wavepacket synthesis, using Mozzi sonification library.</span></div>
-<div class="line"><span class="comment"> *  This sketch draws on Miller Puckette&#39;s </span></div>
-<div class="line"><span class="comment"> *  Pure Data example, F14.wave.packet.pd, with</span></div>
-<div class="line"><span class="comment"> *  two overlapping streams of wave packets.</span></div>
-<div class="line"><span class="comment"> *  </span></div>
-<div class="line"><span class="comment"> *  Demonstrates the WavePacketSample object, which enables a</span></div>
-<div class="line"><span class="comment"> *  custom sound table to be used as the audio source for wavepackets.</span></div>
-<div class="line"><span class="comment"> *</span></div>
-<div class="line"><span class="comment"> *  Circuit: Audio output on digital pin 9 (for STANDARD mode on a Uno or similar), or </span></div>
-<div class="line"><span class="comment"> *  check the README or http://sensorium.github.com/Mozzi/</span></div>
-<div class="line"><span class="comment"> *</span></div>
-<div class="line"><span class="comment"> *  Mozzi help/discussion/announcements:</span></div>
-<div class="line"><span class="comment"> *  https://groups.google.com/forum/#!forum/mozzi-users</span></div>
-<div class="line"><span class="comment"> *</span></div>
-<div class="line"><span class="comment"> *  Tim Barrass 2013.</span></div>
-<div class="line"><span class="comment"> *  This example code is in the public domain.</span></div>
-<div class="line"><span class="comment"> */</span></div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="mozzi__analog_8h.html">mozzi_analog.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_wave_packet_sample_8h.html">WavePacketSample.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_recent_average_8h.html">RecentAverage.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;samples/raven_arh_int8.h&gt;</span></div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#define FUNDAMENTAL_PIN 0</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define BANDWIDTH_PIN 1</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define CENTREFREQ_PIN 2</span></div>
-<div class="line"><span class="preprocessor"></span></div>
-<div class="line"><span class="comment">// for smoothing the control signals</span></div>
-<div class="line"><span class="comment">// use: RecentAverage &lt;number_type, how_many_to_average&gt; myThing</span></div>
-<div class="line"><a name="_a0"></a><a class="code" href="class_recent_average.html" title="Calculates a running average over a specified number of the most recent readings. ...">RecentAverage &lt;int, 32&gt;</a> kAverageF;</div>
-<div class="line"><a class="code" href="class_recent_average.html" title="Calculates a running average over a specified number of the most recent readings. ...">RecentAverage &lt;int, 32&gt;</a> kAverageBw;</div>
-<div class="line"><a class="code" href="class_recent_average.html" title="Calculates a running average over a specified number of the most recent readings. ...">RecentAverage &lt;int, 32&gt;</a> kAverageCf;</div>
-<div class="line"></div>
-<div class="line"><a name="_a1"></a><a class="code" href="class_wave_packet_sample.html" title="A WavePacket which allows a custom table to be set as the audio source for the wavepackets (or grains...">WavePacketSample &lt;DOUBLE&gt;</a> wavey; <span class="comment">// DOUBLE selects 2 overlapping streams</span></div>
-<div class="line"></div>
-<div class="line"></div>
-<div class="line"><span class="keywordtype">void</span> setup(){</div>
-<div class="line">  wavey.<a name="a2"></a><a class="code" href="class_wave_packet_sample.html#a69ae33a0540773b090e83d7fa884489e" title="Change the sound table which will be played. ">setTable</a>(RAVEN_ARH_DATA);</div>
-<div class="line">  pinMode(11,OUTPUT);</div>
-<div class="line">  digitalWrite(11,LOW);</div>
-<div class="line">  <a name="a3"></a><a class="code" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837" title="Sets up the timers for audio and control rate processes, storing the timer registers so they can be r...">startMozzi</a>();</div>
-<div class="line">  <a name="a4"></a><a class="code" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">adcEnableInterrupt</a>();</div>
-<div class="line">}</div>
-<div class="line"></div>
-<div class="line"></div>
-<div class="line"><span class="keywordtype">void</span> <a name="a5"></a><a class="code" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl</a>(){</div>
-<div class="line">  <span class="keywordtype">int</span> f = kAverageF.<a name="a6"></a><a class="code" href="class_recent_average.html#a92de648c74ea40c061e3081b5f9637ce" title="Give the average of the last NUM_READINGS. ">next</a>(<a name="a7"></a><a class="code" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07" title="Waits for the result of the most recent adcStartConversion(). ">adcGetResult</a>(FUNDAMENTAL_PIN))+1;</div>
-<div class="line">  <span class="keywordtype">int</span> b = kAverageBw.<a class="code" href="class_recent_average.html#a92de648c74ea40c061e3081b5f9637ce" title="Give the average of the last NUM_READINGS. ">next</a>(<a class="code" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07" title="Waits for the result of the most recent adcStartConversion(). ">adcGetResult</a>(BANDWIDTH_PIN));</div>
-<div class="line">  <span class="keywordtype">int</span> cf = kAverageCf.<a class="code" href="class_recent_average.html#a92de648c74ea40c061e3081b5f9637ce" title="Give the average of the last NUM_READINGS. ">next</a>(2*<a class="code" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07" title="Waits for the result of the most recent adcStartConversion(). ">adcGetResult</a>(CENTREFREQ_PIN));</div>
-<div class="line">  wavey.<a name="a8"></a><a class="code" href="class_wave_packet.html#ac693b3d676b583584a8cfc6b9cc0f37f" title="Set all the parameters for the synthesis. ">set</a>(f, b, cf);</div>
-<div class="line">  <a name="a9"></a><a class="code" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Call adcReadAllChannels() in updateControl() and the results for each channel will be available by ca...">adcReadAllChannels</a>();</div>
-<div class="line">}</div>
-<div class="line"></div>
-<div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> <a name="a10"></a><a class="code" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code. ">updateAudio</a>(){</div>
-<div class="line">  <span class="keywordflow">return</span> wavey.<a name="a11"></a><a class="code" href="class_wave_packet.html#ab4e35082b60d3ccc29c86d09078329bd" title="Calculate the next synthesised sample. ">next</a>()&gt;&gt;8; <span class="comment">// &gt;&gt;8 for AUDIO_MODE STANDARD</span></div>
-<div class="line">}</div>
-<div class="line"></div>
-<div class="line"></div>
-<div class="line"><span class="keywordtype">void</span> loop(){</div>
-<div class="line">  <a name="a12"></a><a class="code" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop(). ">audioHook</a>(); <span class="comment">// required here</span></div>
-<div class="line">}</div>
-<div class="line"></div>
-</div><!-- fragment --> </div><!-- contents -->
+<div class="fragment"></div><!-- fragment --> </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jul 9 2013 14:09:32 for Mozzi by
+    <li class="footer">Generated on Sat Jul 13 2013 16:35:13 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

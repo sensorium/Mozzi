@@ -1,5 +1,8 @@
 var searchData=
 [
+  ['abomb16384_5fint8_2eh',['abomb16384_int8.h',['../abomb16384__int8_8h.html',1,'']]],
+  ['abomb_5fnum_5fcells',['ABOMB_NUM_CELLS',['../abomb16384__int8_8h.html#aaae29e69acec708e11157a5b1e7d28a8',1,'abomb16384_int8.h']]],
+  ['abomb_5fsamplerate',['ABOMB_SAMPLERATE',['../abomb16384__int8_8h.html#a134a2a270dfd96ffbb9ee85bd36ffcbf',1,'abomb16384_int8.h']]],
   ['adcdisconnectalldigitalins',['adcDisconnectAllDigitalIns',['../group__analog.html#ga5042e7c576dd0307be38eb70efdb69fe',1,'adcDisconnectAllDigitalIns():&#160;mozzi_analog.cpp'],['../group__analog.html#ga5042e7c576dd0307be38eb70efdb69fe',1,'adcDisconnectAllDigitalIns():&#160;mozzi_analog.cpp']]],
   ['adcenableinterrupt',['adcEnableInterrupt',['../group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e',1,'adcEnableInterrupt():&#160;mozzi_analog.cpp'],['../group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e',1,'adcEnableInterrupt():&#160;mozzi_analog.cpp']]],
   ['adcgetresult',['adcGetResult',['../group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07',1,'adcGetResult():&#160;mozzi_analog.cpp'],['../group__analog.html#ga1d1ee9fa143c3a0505e76b41fc2af09f',1,'adcGetResult(unsigned char channel_num):&#160;mozzi_analog.cpp'],['../group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07',1,'adcGetResult():&#160;mozzi_analog.cpp'],['../group__analog.html#ga1d1ee9fa143c3a0505e76b41fc2af09f',1,'adcGetResult(unsigned char channel_num):&#160;mozzi_analog.cpp']]],
@@ -22,6 +25,7 @@ var searchData=
   ['audio_5fchannel_5f1_5fpin',['AUDIO_CHANNEL_1_PIN',['../_audio_config_standard9bit_pwm_8h.html#a4a4f0dc9e1f5947ac6b5336b5cf14d4f',1,'AudioConfigStandard9bitPwm.h']]],
   ['audio_5fmode',['AUDIO_MODE',['../group__core.html#ga9c4a39187db1d0a1ad0fa6981920f383',1,'mozzi_config.h']]],
   ['audio_5frate',['AUDIO_RATE',['../group__core.html#ga5b972bafb3267e820993812beca1b298',1,'mozzi_config.h']]],
+  ['audio_5frate_5fas_5flshift',['AUDIO_RATE_AS_LSHIFT',['../_mozzi_guts_8h.html#a4185aa30186b5d63775b5e1d50df1df9',1,'MozziGuts.h']]],
   ['audioconfighispeed14bitpwm_2eh',['AudioConfigHiSpeed14bitPwm.h',['../_audio_config_hi_speed14bit_pwm_8h.html',1,'']]],
   ['audioconfigstandard9bitpwm_2eh',['AudioConfigStandard9bitPwm.h',['../_audio_config_standard9bit_pwm_8h.html',1,'']]],
   ['audiodelay',['AudioDelay',['../class_audio_delay.html',1,'AudioDelay&lt; NUM_BUFFER_SAMPLES, T &gt;'],['../class_audio_delay.html#a688f69088f96bf3976a8555d3026365f',1,'AudioDelay::AudioDelay()'],['../class_audio_delay.html#a79be253fcb5709624c8fb708e54f069f',1,'AudioDelay::AudioDelay(unsigned int delaytime_cells)']]],

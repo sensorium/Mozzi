@@ -1,7 +1,9 @@
 var _mozzi_guts_8h =
 [
+    [ "AUDIO_RATE_AS_LSHIFT", "_mozzi_guts_8h.html#a4185aa30186b5d63775b5e1d50df1df9", null ],
     [ "CONTROL_RATE", "_mozzi_guts_8h.html#gae5d737db8bc97ecf08d2ea3121782d26", null ],
     [ "HIFI", "_mozzi_guts_8h.html#gae99eb43cb29bb03d862ae829999916c4", null ],
+    [ "MICROS_PER_AUDIO_TICK", "_mozzi_guts_8h.html#a25f09c512cd3a187d19eb7fd1d54d558", null ],
     [ "STANDARD", "_mozzi_guts_8h.html#ga0b8ca8ad62b88c01b639bad62eafcbf1", null ],
     [ "uchar", "_mozzi_guts_8h.html#a65f85814a8290f9797005d3b28e7e5fc", null ],
     [ "uint", "_mozzi_guts_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14", null ],

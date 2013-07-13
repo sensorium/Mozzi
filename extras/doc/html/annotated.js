@@ -20,6 +20,7 @@ var annotated =
     [ "RCpoll", "class_r_cpoll.html", "class_r_cpoll" ],
     [ "RecentAverage", "class_recent_average.html", "class_recent_average" ],
     [ "ReverbTank", "class_reverb_tank.html", "class_reverb_tank" ],
+    [ "RunningStat", "class_running_stat.html", "class_running_stat" ],
     [ "Sample", "class_sample.html", "class_sample" ],
     [ "Smooth", "class_smooth.html", "class_smooth" ],
     [ "StateVariable", "class_state_variable.html", "class_state_variable" ],

@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-07-07-17:51</span>
+   &#160;<span id="projectnumber">version 2013-07-13-16:31</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -139,283 +139,290 @@ $(document).ready(function(){initNavTree('_mozzi_guts_8h_source.html','');});
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">error</span> <span class="preprocessor">Mozzi</span> <span class="preprocessor">expects</span> <span class="preprocessor">a</span> <span class="preprocessor">cpu</span> <span class="preprocessor">clock</span> <span class="preprocessor">speed</span> <span class="preprocessor">of</span> 16MHz<span class="preprocessor">!</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <a class="code" href="mozzi__config_8h.html">&quot;mozzi_config.h&quot;</a>                 <span class="comment">// User can change the config file to set audio mode</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;TimerZero.h&quot;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;TimerOne.h&quot;</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;FrequencyTimer2.h&quot;</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">/** @ingroup core</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">Control rate setting.</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">Mozzi&#39;s CONTROL_RATE sets how many times per second updateControl() is called.</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">It can be any power of 2 greater than 64, and the largest value where it starts</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">to become impractical is around 1024. 64, 128, 256 and sometimes 512 are all</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">usable values. Try to keep it as low as you can, for efficiency, though higher</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">rates can sometimes give smoother results, avoiding the need to interpolate</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">sensitive variables at audio rate in updateAudio(). CONTROL_RATE has a default</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">of 64 Hz, but it can be changed at the top of your sketch, after the \#includes,</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">for example: \#define CONTROL_RATE 256</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="code" href="group__core.html#gae5d737db8bc97ecf08d2ea3121782d26">   48</a></span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">CONTROL_RATE</span> 64</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;TimerZero.h&quot;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;TimerOne.h&quot;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;FrequencyTimer2.h&quot;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">/** @ingroup core</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">Control rate setting.</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">Mozzi&#39;s CONTROL_RATE sets how many times per second updateControl() is called.</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">It can be any power of 2 greater than 64, and the largest value where it starts</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">to become impractical is around 1024. 64, 128, 256 and sometimes 512 are all</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">usable values. Try to keep it as low as you can, for efficiency, though higher</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">rates can sometimes give smoother results, avoiding the need to interpolate</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">sensitive variables at audio rate in updateAudio(). CONTROL_RATE has a default</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">of 64 Hz, but it can be changed at the top of your sketch, after the \#includes,</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">for example: \#define CONTROL_RATE 256</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="code" href="group__core.html#gae5d737db8bc97ecf08d2ea3121782d26">   46</a></span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">CONTROL_RATE</span> 64</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">/** @ingroup core</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">Used to set AUDIO_MODE to STANDARD.</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">Use \#define AUDIO_MODE STANDARD in Mozzi/config.h to select Mozzi&#39;s original audio</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">output configuration, which is nearly 9 bit sound (-244 to 243) at 16384 Hz and</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">16384 Hz pwm rate. It uses Timer 1 to output samples at AUDIO_RATE 16384 Hz,</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">with an interrupt being called once every PWM cycle to set the timer&#39;s own pwm</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">level.</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">Advantages: Only uses one timer for audio, and one output pin</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">Disadvantages: low dynamic range, some people can hear pwm carrier frequency, may need simple hardware filter.</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">Below is a list of the Digital Pins used by Mozzi for STANDARD mode PWM audio out on different boards.</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">Those which have been tested and reported to work have an x.</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">Feedback about others is welcome.</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">x....9........Arduino Uno \n</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">x....9........Arduino Duemilanove \n </span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">x....9........Arduino Nano  \n</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">x....9........Arduino Leonardo  \n</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">x....9........Ardweeny  \n</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">x....9........Boarduino  \n </span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">x...11.......Freetronics EtherMega  \n</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">x...11.......Arduino Mega  \n</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">....14........Teensy  \n</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">x..B5........Teensy2  \n</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">x..B5(25)..Teensy2++  \n</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">....13  .......Sanguino  \n</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno"><a class="code" href="group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1">   80</a></span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">STANDARD</span> 0</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">/** @ingroup core</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">Used to set AUDIO_MODE to STANDARD.</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">Use \#define AUDIO_MODE STANDARD in Mozzi/config.h to select Mozzi&#39;s original audio</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">output configuration, which is nearly 9 bit sound (-244 to 243) at 16384 Hz and</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">16384 Hz pwm rate. It uses Timer 1 to output samples at AUDIO_RATE 16384 Hz,</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">with an interrupt being called once every PWM cycle to set the timer&#39;s own pwm</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">level.</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">Advantages: Only uses one timer for audio, and one output pin</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">Disadvantages: low dynamic range, some people can hear pwm carrier frequency, may need simple hardware filter.</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">Below is a list of the Digital Pins used by Mozzi for STANDARD mode PWM audio out on different boards.</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">Those which have been tested and reported to work have an x.</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">Feedback about others is welcome.</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">x....9........Arduino Uno \n</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">x....9........Arduino Duemilanove \n </span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">x....9........Arduino Nano  \n</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">x....9........Arduino Leonardo  \n</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">x....9........Ardweeny  \n</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">x....9........Boarduino  \n </span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">x...11.......Freetronics EtherMega  \n</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">x...11.......Arduino Mega  \n</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">....14........Teensy  \n</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">x..B5........Teensy2  \n</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">x..B5(25)..Teensy2++  \n</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">....13  .......Sanguino  \n</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="code" href="group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1">   78</a></span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">STANDARD</span> 0</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">/** @ingroup core</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">Used to set AUDIO_MODE to HIFI.</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">Use \#define AUDIO_MODE HIFI in Mozzi/config.h to set the audio mode to HIFI for output 14 bit sound at 16384 Hz sample rate and 125kHz PWM rate.</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">The high PWM rate of HIFI mode places the carrier frequency beyond audible range, </span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">overcoming one of the disadvantages of STANDARD mode.</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">Also, 14 bits of dynamic range in HIFI mode provides more definition than the nearly 9 bits in STANDARD mode.</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">HIFI mode takes about the same amount of processing time as STANDARD mode, and sounds clearer and brighter.</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">However, it requires an extra timer to be used on the Arduino, which could increase the chances of </span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">conflicts with other libraries or processes if they rely on Timer 2.</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">Timer 1 is used to provide the PWM output at 125kHz.</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">Timer 2 generates an interrupt at AUDIO_RATE 16384 Hz, which sets the Timer1 PWM levels.</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">HIFI mode uses 2 output pins, and sums their outputs with resistors, so is slightly less convenient for </span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">rapid prototyping where you could listen to STANDARD mode by connecting the single output pin </span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">directly to a speaker or audio input (though a resistor of about 100 ohms is recommended).</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">The resistors needed for HIFI output are 3.9k and 1M, with 1% or better tolerance.</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">Use a multimeter to test a group of 1% resistors to find the most accurate.</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">On 328 based Arduino boards, output is on Timer1, with the low byte on Pin 10 and high byte on Pin 9.</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">Add the signals through a 3.9k resistor on high byte pin (9) and 1M resistor on low byte pin (10).</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">Also, a 4.7nF capacitor is recommended between the summing junction of the resistors and ground.</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">This dual PWM technique is discussed on http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">Also, there are higher quality output circuits are on the site.</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">Advantages: higher quality sound than STANDARD mode.  Doesn&#39;t need a notch filter on </span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">the audio signal because the carrier frequency is out of hearing range.</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">Disadvantages: requires 2 pins, 2 resistors and a capacitor, so it&#39;s not so quick to set up compared </span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">to a rough, direct single-pin output in STANDARD mode.</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">Pins and where to put the resistors on various boards for HIFI mode.  </span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">Boards tested in HIFI mode have an x, though most of these have been tested in STANDARD mode</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">and there&#39;s no reason for them not to work in HIFI (unless the pin number is wrong or something).</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">Any reports are welcome. \n</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">resistor.....3.9k......1M \n</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">x................9..........10...............Arduino Uno \n</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">x................9..........10...............Arduino Duemilanove \n </span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">x................9..........10...............Arduino Nano  \n</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">x................9..........10...............Arduino Leonardo  \n</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">x................9..........10...............Ardweeny  \n</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">x................9..........10...............Boarduino  \n </span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">x...............11.........12...............Freetronics EtherMega  \n</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">.................11.........12...............Arduino Mega  \n</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">.................14.........15...............Teensy  \n</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">.............B5(14)...B6(15)...........Teensy2  \n</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">x...........B5(25)...B6(26)...........Teensy2++  \n</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">.................13.........12...............Sanguino  \n</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00137"></a><span class="lineno"><a class="code" href="group__core.html#gae99eb43cb29bb03d862ae829999916c4">  137</a></span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">HIFI</span> 1</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">/** @ingroup core</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">Used to set AUDIO_MODE to HIFI.</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">Use \#define AUDIO_MODE HIFI in Mozzi/config.h to set the audio mode to HIFI for output 14 bit sound at 16384 Hz sample rate and 125kHz PWM rate.</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">The high PWM rate of HIFI mode places the carrier frequency beyond audible range, </span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">overcoming one of the disadvantages of STANDARD mode.</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">Also, 14 bits of dynamic range in HIFI mode provides more definition than the nearly 9 bits in STANDARD mode.</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">HIFI mode takes about the same amount of processing time as STANDARD mode, and sounds clearer and brighter.</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">However, it requires an extra timer to be used on the Arduino, which could increase the chances of </span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">conflicts with other libraries or processes if they rely on Timer 2.</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">Timer 1 is used to provide the PWM output at 125kHz.</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">Timer 2 generates an interrupt at AUDIO_RATE 16384 Hz, which sets the Timer1 PWM levels.</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">HIFI mode uses 2 output pins, and sums their outputs with resistors, so is slightly less convenient for </span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">rapid prototyping where you could listen to STANDARD mode by connecting the single output pin </span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">directly to a speaker or audio input (though a resistor of about 100 ohms is recommended).</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">The resistors needed for HIFI output are 3.9k and 1M, with 1% or better tolerance.</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">Use a multimeter to test a group of 1% resistors to find the most accurate.</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">On 328 based Arduino boards, output is on Timer1, with the low byte on Pin 10 and high byte on Pin 9.</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">Add the signals through a 3.9k resistor on high byte pin (9) and 1M resistor on low byte pin (10).</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">Also, a 4.7nF capacitor is recommended between the summing junction of the resistors and ground.</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">This dual PWM technique is discussed on http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">Also, there are higher quality output circuits are on the site.</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">Advantages: higher quality sound than STANDARD mode.  Doesn&#39;t need a notch filter on </span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">the audio signal because the carrier frequency is out of hearing range.</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">Disadvantages: requires 2 pins, 2 resistors and a capacitor, so it&#39;s not so quick to set up compared </span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">to a rough, direct single-pin output in STANDARD mode.</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">Pins and where to put the resistors on various boards for HIFI mode.  </span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">Boards tested in HIFI mode have an x, though most of these have been tested in STANDARD mode</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">and there&#39;s no reason for them not to work in HIFI (unless the pin number is wrong or something).</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">Any reports are welcome. \n</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">resistor.....3.9k......1M \n</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">x................9..........10...............Arduino Uno \n</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">x................9..........10...............Arduino Duemilanove \n </span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">x................9..........10...............Arduino Nano  \n</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">x................9..........10...............Arduino Leonardo  \n</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">x................9..........10...............Ardweeny  \n</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">x................9..........10...............Boarduino  \n </span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">x...............11.........12...............Freetronics EtherMega  \n</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">.................11.........12...............Arduino Mega  \n</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">.................14.........15...............Teensy  \n</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">.............B5(14)...B6(15)...........Teensy2  \n</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">x...........B5(25)...B6(26)...........Teensy2++  \n</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">.................13.........12...............Sanguino  \n</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno"><a class="code" href="group__core.html#gae99eb43cb29bb03d862ae829999916c4">  135</a></span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">HIFI</span> 1</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <a class="code" href="mozzi__config_8h.html">&quot;mozzi_config.h&quot;</a>                 <span class="comment">// User can change the config file to set audio mode</span></div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">if</span> <span class="preprocessor">(</span><a class="code" href="group__core.html#ga9c4a39187db1d0a1ad0fa6981920f383" title="AUDIO_MODE holds the audio mode setting. ">AUDIO_MODE</a> <span class="preprocessor">==</span> <a class="code" href="group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1" title="Used to set AUDIO_MODE to STANDARD. ">STANDARD</a><span class="preprocessor">)</span> <span class="preprocessor">&amp;&amp;</span> <span class="preprocessor">(</span><a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298" title="Holds the audio rate setting. ">AUDIO_RATE</a> <span class="preprocessor">==</span> 32768<span class="preprocessor">)</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">error</span> <span class="preprocessor">AUDIO_RATE</span> 32768 <span class="preprocessor">does</span> <span class="preprocessor">not</span> <span class="preprocessor">work</span> <span class="preprocessor">when</span> <span class="preprocessor">AUDIO_MODE</span> <span class="preprocessor">is</span> <span class="preprocessor">STANDARD</span><span class="preprocessor">,</span> <span class="preprocessor">check</span> <span class="preprocessor">settings</span> <span class="preprocessor">in</span> <span class="preprocessor">Mozzi</span><span class="preprocessor">/</span><span class="preprocessor">mozzi_config</span><span class="preprocessor">.</span><span class="preprocessor">h</span></div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">if</span> <a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298" title="Holds the audio rate setting. ">AUDIO_RATE</a> <span class="preprocessor">==</span> 16384</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">AUDIO_RATE_AS_LSHIFT</span> 14</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">MICROS_PER_AUDIO_TICK</span> 61 <span class="comment">// 1000000 / 16384 = 61.035, ...* 256 = 15625</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">elif</span> <span class="preprocessor">AUDIO_RATE</span> <span class="preprocessor">==</span> 32768</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">AUDIO_RATE_AS_LSHIFT</span> 15</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">MICROS_PER_AUDIO_TICK</span> 31 <span class="comment">// = 1000000 / 32768 = 30.518, ...* 256 = 7812.6</span></div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">if</span> <a class="code" href="group__core.html#ga9c4a39187db1d0a1ad0fa6981920f383" title="AUDIO_MODE holds the audio mode setting. ">AUDIO_MODE</a> <span class="preprocessor">==</span> <a class="code" href="group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1" title="Used to set AUDIO_MODE to STANDARD. ">STANDARD</a></div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <a class="code" href="_audio_config_standard9bit_pwm_8h.html">&quot;AudioConfigStandard9bitPwm.h&quot;</a></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">elif</span> <span class="preprocessor">AUDIO_MODE</span> <span class="preprocessor">==</span> <span class="preprocessor">HIFI</span></div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="stringliteral">&quot;AudioConfigHiSpeed14bitPwm.h&quot;</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">// Print warning/reminder about the AUDIO_MODE setting to the arduino console while compiling</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">if</span> <a class="code" href="group__core.html#ga9c4a39187db1d0a1ad0fa6981920f383" title="AUDIO_MODE holds the audio mode setting. ">AUDIO_MODE</a> <span class="preprocessor">==</span> <a class="code" href="group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1" title="Used to set AUDIO_MODE to STANDARD. ">STANDARD</a></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">warning</span> <span class="stringliteral">&quot;AUDIO_MODE is set to STANDARD in mozzi_config.h.  If things sound wrong, check if STANDARD is the correct AUDIO_MODE for your sketch.&quot;</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">elif</span> <span class="preprocessor">AUDIO_MODE</span> <span class="preprocessor">==</span> <span class="preprocessor">HIFI</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">warning</span> <span class="stringliteral">&quot;AUDIO_MODE is set to HIFI in mozzi_config.h.  If things sound wrong, check if HIFI is the correct AUDIO_MODE for your sketch.&quot;</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">if</span> <span class="preprocessor">(</span><a class="code" href="group__core.html#ga9c4a39187db1d0a1ad0fa6981920f383" title="AUDIO_MODE holds the audio mode setting. ">AUDIO_MODE</a> <span class="preprocessor">==</span> <a class="code" href="group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1" title="Used to set AUDIO_MODE to STANDARD. ">STANDARD</a><span class="preprocessor">)</span> <span class="preprocessor">&amp;&amp;</span> <span class="preprocessor">(</span><a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298" title="Holds the audio rate setting. ">AUDIO_RATE</a> <span class="preprocessor">==</span> 32768<span class="preprocessor">)</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">error</span> <span class="preprocessor">AUDIO_RATE</span> 32768 <span class="preprocessor">does</span> <span class="preprocessor">not</span> <span class="preprocessor">work</span> <span class="preprocessor">when</span> <span class="preprocessor">AUDIO_MODE</span> <span class="preprocessor">is</span> <span class="preprocessor">STANDARD</span><span class="preprocessor">,</span> <span class="preprocessor">check</span> <span class="preprocessor">settings</span> <span class="preprocessor">in</span> <span class="preprocessor">Mozzi</span><span class="preprocessor">/</span><span class="preprocessor">mozzi_config</span><span class="preprocessor">.</span><span class="preprocessor">h</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">if</span> <a class="code" href="group__core.html#ga5b972bafb3267e820993812beca1b298" title="Holds the audio rate setting. ">AUDIO_RATE</a> <span class="preprocessor">==</span> 16384</div>
+<div class="line"><a name="l00153"></a><span class="lineno"><a class="code" href="_mozzi_guts_8h.html#a4185aa30186b5d63775b5e1d50df1df9">  153</a></span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">AUDIO_RATE_AS_LSHIFT</span> 14</div>
+<div class="line"><a name="l00154"></a><span class="lineno"><a class="code" href="_mozzi_guts_8h.html#a25f09c512cd3a187d19eb7fd1d54d558">  154</a></span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">MICROS_PER_AUDIO_TICK</span> 61 <span class="comment">// 1000000 / 16384 = 61.035, ...* 256 = 15625</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">elif</span> <span class="preprocessor">AUDIO_RATE</span> <span class="preprocessor">==</span> 32768</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">AUDIO_RATE_AS_LSHIFT</span> 15</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">MICROS_PER_AUDIO_TICK</span> 31 <span class="comment">// = 1000000 / 32768 = 30.518, ...* 256 = 7812.6</span></div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">// common abbreviations</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno"><a class="code" href="_mozzi_guts_8h.html#a65f85814a8290f9797005d3b28e7e5fc">  161</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="_mozzi_guts_8h.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a>;</div>
-<div class="line"><a name="l00162"></a><span class="lineno"><a class="code" href="_mozzi_guts_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">  162</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="_mozzi_guts_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a>;</div>
-<div class="line"><a name="l00163"></a><span class="lineno"><a class="code" href="_mozzi_guts_8h.html#a718b4eb2652c286f4d42dc18a8e71a1a">  163</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="_mozzi_guts_8h.html#a718b4eb2652c286f4d42dc18a8e71a1a">ulong</a>;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">if</span> <a class="code" href="group__core.html#ga9c4a39187db1d0a1ad0fa6981920f383" title="AUDIO_MODE holds the audio mode setting. ">AUDIO_MODE</a> <span class="preprocessor">==</span> <a class="code" href="group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1" title="Used to set AUDIO_MODE to STANDARD. ">STANDARD</a></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <a class="code" href="_audio_config_standard9bit_pwm_8h.html">&quot;AudioConfigStandard9bitPwm.h&quot;</a></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">elif</span> <span class="preprocessor">AUDIO_MODE</span> <span class="preprocessor">==</span> <span class="preprocessor">HIFI</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="stringliteral">&quot;AudioConfigHiSpeed14bitPwm.h&quot;</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment">/** @ingroup core</span></div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">Sets up the timers for audio and control rate processes, storing the timer</span></div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">registers so they can be restored when Mozzi stops. startMozzi() goes in your sketch&#39;s</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">setup() routine.</span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">In STANDARD and HIFI modes, Mozzi uses Timer 0 for control interrupts 0, disabling Arduino</span></div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">delay(), millis(), micros() and delayMicroseconds. </span></div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">For delaying events, you can use Mozzi&#39;s EventDelay() unit instead (not to be confused with AudioDelay()). </span></div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment">In STANDARD mode, startMozzi() starts Timer 1 for PWM output and audio output interrupts,</span></div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">and in HIFI mode, Mozzi uses Timer 1 for PWM and Timer2 for audio interrupts. </span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">// common abbreviations</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno"><a class="code" href="_mozzi_guts_8h.html#a65f85814a8290f9797005d3b28e7e5fc">  168</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="_mozzi_guts_8h.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a>;</div>
+<div class="line"><a name="l00169"></a><span class="lineno"><a class="code" href="_mozzi_guts_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">  169</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="_mozzi_guts_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a>;</div>
+<div class="line"><a name="l00170"></a><span class="lineno"><a class="code" href="_mozzi_guts_8h.html#a718b4eb2652c286f4d42dc18a8e71a1a">  170</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="_mozzi_guts_8h.html#a718b4eb2652c286f4d42dc18a8e71a1a">ulong</a>;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">/** @ingroup core</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment">Sets up the timers for audio and control rate processes, storing the timer</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment">registers so they can be restored when Mozzi stops. startMozzi() goes in your sketch&#39;s</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">setup() routine.</span></div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">The audio rate is currently fixed at 16384 Hz.</span></div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">@param control_rate_hz Sets how often updateControl() is called. It can be any</span></div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">power of 2 above and including 64. The practical upper limit for control rate</span></div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">depends on how busy the processor is, and you might need to do some tests to</span></div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment">find the best setting. </span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">In STANDARD and HIFI modes, Mozzi uses Timer 0 for control interrupts 0, disabling Arduino</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment">delay(), millis(), micros() and delayMicroseconds. </span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">For delaying events, you can use Mozzi&#39;s EventDelay() unit instead (not to be confused with AudioDelay()). </span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">In STANDARD mode, startMozzi() starts Timer 1 for PWM output and audio output interrupts,</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment">and in HIFI mode, Mozzi uses Timer 1 for PWM and Timer2 for audio interrupts. </span></div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">It&#39;s good to define CONTROL_RATE in your</span></div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">sketches (eg. \#define CONTROL_RATE 128) because the literal numeric value is</span></div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">necessary for Oscils to work properly, and it also helps to keep the</span></div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">calculations in your sketch clear.</span></div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">@todo See if there is any advantage to using 8 bit port, without pwm, with a resistor ladder </span></div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">(maybe use readymade resistor networks).</span></div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837" title="Sets up the timers for audio and control rate processes, storing the timer registers so they can be r...">startMozzi</a>(<span class="keywordtype">int</span> control_rate_hz = <a class="code" href="group__core.html#gae5d737db8bc97ecf08d2ea3121782d26" title="Control rate setting. ">CONTROL_RATE</a>);</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment">/** @ingroup core</span></div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">Stops audio and control interrupts and restores the timers to the values they</span></div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">had before Mozzi was started. This will enable the standard Arduino time</span></div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">functions millis(), micros(), delay(), and delayMicroseconds(). This could be</span></div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment">useful when using sensor libraries which depend on the same timers as Mozzi. </span></div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">A potentially better option for resolving timer conflicts involves using</span></div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">non-blocking methods, such as demonstrated by the twowire_nonblock code in the</span></div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment">forked version of Mozzi on github, so sound production can continue while</span></div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">reading sensors.</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">As it is, pauseMozzi restores all the Timers used by Mozzi to their previous</span></div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment">settings. Another scenario which could be easily hacked in MozziGuts.cpp could</span></div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment">involve individually saving and restoring particular Timer registers depending</span></div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">on which one(s) are required for other tasks, so for example the control</span></div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">interrupt (Timer 0) could be suspended while audio continues.*/</span></div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__core.html#ga0dc2dc3b2c20b081df4d55ad039f64e5" title="Stops audio and control interrupts and restores the timers to the values they had before Mozzi was st...">pauseMozzi</a>();</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment">/** @ingroup core</span></div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment">Restores Mozzi audio and control interrupts, if they have been temporarily</span></div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">disabled with pauseMozzi(). This once more takes over Timer 0, and stops the</span></div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment">Arduino time functions millis(), micros(), delay(), and delayMicroseconds() from</span></div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment">working.</span></div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__core.html#ga1718c5f0bbb56cc4b2db55702750f43f" title="Restores Mozzi audio and control interrupts, if they have been temporarily disabled with pauseMozzi()...">unPauseMozzi</a>();</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment">/** @ingroup core</span></div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment">This is where you put your audio code. updateAudio() has to keep up with the</span></div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment">AUDIO_RATE of 16384 Hz, so to keep things running smoothly, avoid doing any</span></div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">calculations here which could be done in setup() or updateControl().</span></div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">@return an audio sample.  In STANDARD mode this is between -244 and 243 inclusive.</span></div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">In HIFI mode, it&#39;s a 14 bit number between -16384 and 16383 inclusive.</span></div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code. ">updateAudio</a>();</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">/** @ingroup core</span></div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">This is where you put your control code. You need updateControl() somewhere in</span></div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">your sketch, even if it&#39;s empty. updateControl() is called at the control rate</span></div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">you set in startMozzi(). To save processor load, avoid any calculations here</span></div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">which could be done in setup().</span></div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl</a>();</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">/** @ingroup core</span></div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment">This is required in Arduino&#39;s loop(). If there is room in Mozzi&#39;s output buffer,</span></div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">audioHook() calls updateAudio() once and puts the result into the output</span></div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">buffer.  Also, if \#define USE_AUDIO_INPUT true is in Mozzi/mozzi_config.h,</span></div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">audioHook() takes care of moving audio input from the input buffer so it can be</span></div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">accessed with getAudioInput() in your updateAudio() routine.</span></div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">If other functions are called in loop() along with audioHook(), see if</span></div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">they can be called less often by moving them into updateControl(), </span></div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">to save processing power. Otherwise it may be most efficient to</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">calculate a block of samples at a time by putting audioHook() in a loop of its</span></div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">own, rather than calculating only 1 sample for each time your other functions</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">are called.</span></div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">@todo Try pre-decrement positions and swap gap calc around</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop(). ">audioHook</a>();</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">/** @ingroup analog</span></div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">This returns audio input from the input buffer, if </span></div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">\#define USE_AUDIO_INPUT true is in the Mozzi/mozzi_config.h file.</span></div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">Audio input is currently restricted to analog pin 0 (this may change in future).</span></div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">The audio signal needs to be in the range 0 to 5 volts.  </span></div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">Circuits and discussions about biasing a signal</span></div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">in the middle of this range can be found at </span></div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment">http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal </span></div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">and</span></div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/ .</span></div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">A circuit and instructions for amplifying and biasing a microphone signal can be found at</span></div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS</span></div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">@return audio data from the input buffer</span></div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">if</span> <span class="preprocessor">(</span><a class="code" href="group__core.html#ga3417fc0b453af798a70340c912a4b657" title="Whether or not to use audio input. ">USE_AUDIO_INPUT</a> <span class="preprocessor">==</span> <span class="preprocessor">true</span><span class="preprocessor">)</span></div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="keywordtype">int</span> getAudioInput();</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="comment">/** @ingroup core</span></div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment">A replacement for Arduino micros() which is disabled by Mozzi which takes over</span></div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="comment">Timer 0 for control interrupts. mozziMicros is updated each time an audio sample</span></div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="comment">is output, so the resolution is 1/AUDIO_RATE (61 microseconds when AUDIO_RATE is</span></div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment">16384 Hz).</span></div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="comment">@return the approximate number of microseconds since the program began.</span></div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment">@todo  incorporate mozziMicros() in a more accurate EventDelay()?</span></div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="group__core.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe" title="A replacement for Arduino micros() which is disabled by Mozzi which takes over Timer 0 for control in...">mozziMicros</a>();</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">// internal use</span></div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">if</span> <span class="preprocessor">(</span><a class="code" href="group__core.html#ga9c4a39187db1d0a1ad0fa6981920f383" title="AUDIO_MODE holds the audio mode setting. ">AUDIO_MODE</a> <span class="preprocessor">==</span> <a class="code" href="group__core.html#gae99eb43cb29bb03d862ae829999916c4" title="Used to set AUDIO_MODE to HIFI. ">HIFI</a><span class="preprocessor">)</span></div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span> setupTimer2();</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">endif</span> <span class="comment">/* MOZZIGUTS_H_ */</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">The audio rate is currently fixed at 16384 Hz.</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">@param control_rate_hz Sets how often updateControl() is called. It can be any</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">power of 2 above and including 64. The practical upper limit for control rate</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">depends on how busy the processor is, and you might need to do some tests to</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">find the best setting. </span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">It&#39;s good to define CONTROL_RATE in your</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment">sketches (eg. \#define CONTROL_RATE 128) because the literal numeric value is</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment">necessary for Oscils to work properly, and it also helps to keep the</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">calculations in your sketch clear.</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment">@todo See if there is any advantage to using 8 bit port, without pwm, with a resistor ladder </span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">(maybe use readymade resistor networks).</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837" title="Sets up the timers for audio and control rate processes, storing the timer registers so they can be r...">startMozzi</a>(<span class="keywordtype">int</span> control_rate_hz = <a class="code" href="group__core.html#gae5d737db8bc97ecf08d2ea3121782d26" title="Control rate setting. ">CONTROL_RATE</a>);</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">/** @ingroup core</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment">Stops audio and control interrupts and restores the timers to the values they</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">had before Mozzi was started. This will enable the standard Arduino time</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment">functions millis(), micros(), delay(), and delayMicroseconds(). This could be</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">useful when using sensor libraries which depend on the same timers as Mozzi. </span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment">A potentially better option for resolving timer conflicts involves using</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">non-blocking methods, such as demonstrated by the twowire_nonblock code in the</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">forked version of Mozzi on github, so sound production can continue while</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">reading sensors.</span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment">As it is, pauseMozzi restores all the Timers used by Mozzi to their previous</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment">settings. Another scenario which could be easily hacked in MozziGuts.cpp could</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment">involve individually saving and restoring particular Timer registers depending</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment">on which one(s) are required for other tasks, so for example the control</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">interrupt (Timer 0) could be suspended while audio continues.*/</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__core.html#ga0dc2dc3b2c20b081df4d55ad039f64e5" title="Stops audio and control interrupts and restores the timers to the values they had before Mozzi was st...">pauseMozzi</a>();</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment">/** @ingroup core</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment">Restores Mozzi audio and control interrupts, if they have been temporarily</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment">disabled with pauseMozzi(). This once more takes over Timer 0, and stops the</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment">Arduino time functions millis(), micros(), delay(), and delayMicroseconds() from</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">working.</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__core.html#ga1718c5f0bbb56cc4b2db55702750f43f" title="Restores Mozzi audio and control interrupts, if they have been temporarily disabled with pauseMozzi()...">unPauseMozzi</a>();</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">/** @ingroup core</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">This is where you put your audio code. updateAudio() has to keep up with the</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">AUDIO_RATE of 16384 Hz, so to keep things running smoothly, avoid doing any</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">calculations here which could be done in setup() or updateControl().</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">@return an audio sample.  In STANDARD mode this is between -244 and 243 inclusive.</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">In HIFI mode, it&#39;s a 14 bit number between -16384 and 16383 inclusive.</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code. ">updateAudio</a>();</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">/** @ingroup core</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">This is where you put your control code. You need updateControl() somewhere in</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">your sketch, even if it&#39;s empty. updateControl() is called at the control rate</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment">you set in startMozzi(). To save processor load, avoid any calculations here</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">which could be done in setup().</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl</a>();</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">/** @ingroup core</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">This is required in Arduino&#39;s loop(). If there is room in Mozzi&#39;s output buffer,</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">audioHook() calls updateAudio() once and puts the result into the output</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">buffer.  Also, if \#define USE_AUDIO_INPUT true is in Mozzi/mozzi_config.h,</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">audioHook() takes care of moving audio input from the input buffer so it can be</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">accessed with getAudioInput() in your updateAudio() routine.</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment">If other functions are called in loop() along with audioHook(), see if</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment">they can be called less often by moving them into updateControl(), </span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment">to save processing power. Otherwise it may be most efficient to</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">calculate a block of samples at a time by putting audioHook() in a loop of its</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment">own, rather than calculating only 1 sample for each time your other functions</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">are called.</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">@todo Try pre-decrement positions and swap gap calc around</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop(). ">audioHook</a>();</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment">/** @ingroup analog</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">This returns audio input from the input buffer, if </span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">\#define USE_AUDIO_INPUT true is in the Mozzi/mozzi_config.h file.</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">Audio input is currently restricted to analog pin 0 (this may change in future).</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">The audio signal needs to be in the range 0 to 5 volts.  </span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">Circuits and discussions about biasing a signal</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">in the middle of this range can be found at </span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment">http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal </span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment">and</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment">http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/ .</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment">A circuit and instructions for amplifying and biasing a microphone signal can be found at</span></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="comment">http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="comment">@return audio data from the input buffer</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">if</span> <span class="preprocessor">(</span><a class="code" href="group__core.html#ga3417fc0b453af798a70340c912a4b657" title="Whether or not to use audio input. ">USE_AUDIO_INPUT</a> <span class="preprocessor">==</span> <span class="preprocessor">true</span><span class="preprocessor">)</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="keywordtype">int</span> getAudioInput();</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment">/** @ingroup core</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment">A replacement for Arduino micros() which is disabled by Mozzi which takes over</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment">Timer 0 for control interrupts. mozziMicros is updated each time an audio sample</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">is output, so the resolution is 1/AUDIO_RATE (61 microseconds when AUDIO_RATE is</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">16384 Hz).</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">@return the approximate number of microseconds since the program began.</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">@todo  incorporate mozziMicros() in a more accurate EventDelay()?</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="group__core.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe" title="A replacement for Arduino micros() which is disabled by Mozzi which takes over Timer 0 for control in...">mozziMicros</a>();</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment">// internal use</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">if</span> <span class="preprocessor">(</span><a class="code" href="group__core.html#ga9c4a39187db1d0a1ad0fa6981920f383" title="AUDIO_MODE holds the audio mode setting. ">AUDIO_MODE</a> <span class="preprocessor">==</span> <a class="code" href="group__core.html#gae99eb43cb29bb03d862ae829999916c4" title="Used to set AUDIO_MODE to HIFI. ">HIFI</a><span class="preprocessor">)</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span> setupTimer2();</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">endif</span> <span class="comment">/* MOZZIGUTS_H_ */</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_70d5e250c66d001b18da37689179cade.html">arch</a></li><li class="navelem"><a class="el" href="dir_ee0b29e3071d3eb7e6327064e3c37af7.html">avr</a></li><li class="navelem"><a class="el" href="_mozzi_guts_8h.html">MozziGuts.h</a></li>
-    <li class="footer">Generated on Tue Jul 9 2013 14:09:32 for Mozzi by
+    <li class="navelem"><a class="el" href="_mozzi_guts_8h.html">MozziGuts.h</a></li>
+    <li class="footer">Generated on Sat Jul 13 2013 16:35:13 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

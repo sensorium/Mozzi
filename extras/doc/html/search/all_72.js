@@ -8,6 +8,9 @@ var searchData=
   ['randprimeupto',['randPrimeUpTo',['../group__random.html#gaead8db89e2403d5ef7842f894552c629',1,'primes.h']]],
   ['randseed',['randSeed',['../group__random.html#ga84c58d758e238208eb82fc8ae2330b66',1,'randSeed(long seed):&#160;mozzi_rand.cpp'],['../group__random.html#ga83ff6b4e38c84713e0d67aa1ec06af66',1,'randSeed():&#160;mozzi_rand.cpp'],['../mozzi__rand_8h.html#a8a9592250ee294a64c6d133e20520651',1,'randSeed(unsigned long seed):&#160;mozzi_rand.h'],['../group__random.html#ga83ff6b4e38c84713e0d67aa1ec06af66',1,'randSeed():&#160;mozzi_rand.cpp']]],
   ['rangewholesample',['rangeWholeSample',['../class_sample.html#a79cb13998692fdff715c7b6b1beb991a',1,'Sample']]],
+  ['raven_5farh_5fint8_2eh',['raven_arh_int8.h',['../raven__arh__int8_8h.html',1,'']]],
+  ['raven_5farh_5fnum_5fcells',['RAVEN_ARH_NUM_CELLS',['../raven__arh__int8_8h.html#aefcccf71962f240b630759b2479d3a6c',1,'raven_arh_int8.h']]],
+  ['raven_5farh_5fsamplerate',['RAVEN_ARH_SAMPLERATE',['../raven__arh__int8_8h.html#a3b16dd8b6c367199a528da91a8213548',1,'raven_arh_int8.h']]],
   ['rcpoll',['RCpoll',['../class_r_cpoll.html',1,'RCpoll&lt; SENSOR_PIN &gt;'],['../class_r_cpoll.html#a44673505bbfbac288ec994dd48017e83',1,'RCpoll::RCpoll()']]],
   ['rcpoll_2eh',['RCpoll.h',['../_r_cpoll_8h.html',1,'']]],
   ['read',['read',['../class_audio_delay.html#a26b409fbfc322ae527ba23680c56e3a9',1,'AudioDelay::read()'],['../class_audio_delay_feedback.html#a6ab80a097738c10bd6b6a04614ab2aa6',1,'AudioDelayFeedback::read(Q16n16 delaytime_cells)'],['../class_audio_delay_feedback.html#a269c793a5fd4b0242d885ca29e03779e',1,'AudioDelayFeedback::read()']]],
@@ -16,5 +19,7 @@ var searchData=
   ['recentaverage_2eh',['RecentAverage.h',['../_recent_average_8h.html',1,'']]],
   ['reconnectdigitalin',['reconnectDigitalIn',['../group__analog.html#gacd83735876cf223916ea4925ec4efd4a',1,'reconnectDigitalIn(byte channel_num):&#160;mozzi_analog.cpp'],['../group__analog.html#gacd83735876cf223916ea4925ec4efd4a',1,'reconnectDigitalIn(byte channel_num):&#160;mozzi_analog.cpp']]],
   ['reverbtank',['ReverbTank',['../class_reverb_tank.html',1,'ReverbTank'],['../class_reverb_tank.html#a2b413e10d5d3688f2066624e5a8ae324',1,'ReverbTank::ReverbTank()']]],
-  ['reverbtank_2eh',['ReverbTank.h',['../_reverb_tank_8h.html',1,'']]]
+  ['reverbtank_2eh',['ReverbTank.h',['../_reverb_tank_8h.html',1,'']]],
+  ['runningstat',['RunningStat',['../class_running_stat.html',1,'RunningStat'],['../class_running_stat.html#a24145a9a58fe40a174ba3b3a1fc7884e',1,'RunningStat::RunningStat()']]],
+  ['runningstat_2eh',['RunningStat.h',['../_running_stat_8h.html',1,'']]]
 ];

@@ -21,12 +21,12 @@ var NAVTREE =
       [ "File List", "files.html", "files" ],
       [ "File Members", "globals.html", [
         [ "All", "globals.html", "globals_dup" ],
-        [ "Functions", "globals_func.html", null ],
+        [ "Functions", "globals_func.html", "globals_func" ],
         [ "Variables", "globals_vars.html", null ],
         [ "Typedefs", "globals_type.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
         [ "Enumerator", "globals_eval.html", null ],
-        [ "Macros", "globals_defs.html", null ]
+        [ "Macros", "globals_defs.html", "globals_defs" ]
       ] ]
     ] ],
     [ "Examples", "examples.html", "examples" ]
@@ -36,9 +36,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_02_control_2_control__echo__theremin_2_control__echo__theremin_8ino-example.html",
-"class_sample.html#a7dfbdfca35b7bbf074e24e62a1d53309",
-"mozzi__analog_8cpp.html#ga5042e7c576dd0307be38eb70efdb69fe",
-"twi__nonblock_8h.html#a18bbad08828cae8d1e9fd9b8105e3ebc"
+"class_audio_delay_feedback.html",
+"globals_defs_0x6d.html",
+"mozzi__fixmath_8cpp.html#a5daaf7f37651029de2abf8ad375b6850",
+"sin1024__int8_8h.html#a0849da9a001336d212e4e1184044ad97"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

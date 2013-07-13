@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-07-07-17:51</span>
+   &#160;<span id="projectnumber">version 2013-07-13-16:31</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -88,6 +88,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow4" class="tabs3">
     <ul class="tablist">
       <li><a href="#index_a"><span>a</span></a></li>
+      <li><a href="#index_c"><span>c</span></a></li>
       <li><a href="#index_d"><span>d</span></a></li>
       <li><a href="#index_e"><span>e</span></a></li>
       <li><a href="#index_g"><span>g</span></a></li>
@@ -158,6 +159,13 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </ul>
 
 
+<h3><a class="anchor" id="index_c"></a>- c -</h3><ul>
+<li>clear()
+: <a class="el" href="class_running_stat.html#ac020c721de1b71b121dbe89ad537a525">RunningStat</a>
+</li>
+</ul>
+
+
 <h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
 <li>DCfilter()
 : <a class="el" href="class_d_cfilter.html#ab55e871fc9d11dfb9231e44627181c2c">DCfilter</a>
@@ -179,6 +187,9 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <li>getMax()
 : <a class="el" href="class_auto_range.html#a4d27e5fe43f9b376b537def88ac74119">AutoRange&lt; T &gt;</a>
 </li>
+<li>getMean()
+: <a class="el" href="class_running_stat.html#ac6e1741c79d52e93061441525dcf77e1">RunningStat</a>
+</li>
 <li>getMin()
 : <a class="el" href="class_auto_range.html#acd1dae6e6ffb288efc1618e2453ad5ef">AutoRange&lt; T &gt;</a>
 </li>
@@ -187,6 +198,9 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </li>
 <li>getRange()
 : <a class="el" href="class_auto_range.html#a75c842b27ad3917be6d29e3d35b485f3">AutoRange&lt; T &gt;</a>
+</li>
+<li>getVariance()
+: <a class="el" href="class_running_stat.html#a2f2435fd57901ebf69c146f71f6f388e">RunningStat</a>
 </li>
 </ul>
 
@@ -294,6 +308,9 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </li>
 <li>ReverbTank()
 : <a class="el" href="class_reverb_tank.html#a2b413e10d5d3688f2066624e5a8ae324">ReverbTank</a>
+</li>
+<li>RunningStat()
+: <a class="el" href="class_running_stat.html#a24145a9a58fe40a174ba3b3a1fc7884e">RunningStat</a>
 </li>
 </ul>
 
@@ -416,9 +433,9 @@ $(document).ready(function(){initNavTree('functions.html','');});
 : <a class="el" href="class_a_d_s_r.html#a5c79838b081aba5a396aa9ea26394051">ADSR&lt; CONTROL_UPDATE_RATE &gt;</a>
 </li>
 <li>setTable()
-: <a class="el" href="class_sample.html#a9911f53f66a5413a923b73f3d890abd4">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
-, <a class="el" href="class_wave_packet_sample.html#a69ae33a0540773b090e83d7fa884489e">WavePacketSample&lt; ALGORITHM &gt;</a>
+: <a class="el" href="class_wave_packet_sample.html#a69ae33a0540773b090e83d7fa884489e">WavePacketSample&lt; ALGORITHM &gt;</a>
 , <a class="el" href="class_oscil.html#a59e9b132ad0770030d7339c6aa260925">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+, <a class="el" href="class_sample.html#a9911f53f66a5413a923b73f3d890abd4">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
 </li>
 <li>setTime()
 : <a class="el" href="class_portamento.html#af19c3b3c189e111079f54211ff5a4ebe">Portamento&lt; CONTROL_UPDATE_RATE &gt;</a>
@@ -429,13 +446,17 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <li>Smooth()
 : <a class="el" href="class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26">Smooth&lt; T &gt;</a>
 </li>
+<li>StandardDeviation()
+: <a class="el" href="class_running_stat.html#a38230cbce0f7b9662727cd432559f7c4">RunningStat</a>
+</li>
 <li>start()
-: <a class="el" href="class_sample.html#a57307ee93ef0fcff36d543596eb79b72">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
-, <a class="el" href="class_portamento.html#af93c2b0ab1efa88d4e15f919401c2337">Portamento&lt; CONTROL_UPDATE_RATE &gt;</a>
-, <a class="el" href="class_event_delay.html#a85de9021676dadaba68edd6c5d5afa0e">EventDelay&lt; UPDATE_RATE &gt;</a>
+: <a class="el" href="class_event_delay.html#aa2a731ceb05f95cac1798089448c6aed">EventDelay&lt; UPDATE_RATE &gt;</a>
+, <a class="el" href="class_sample.html#ad2dbae6c05040fd0381653f1a102e6ee">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
 , <a class="el" href="class_ead.html#ac385679b58e2f9755029b7da7405b233">Ead</a>
+, <a class="el" href="class_portamento.html#af93c2b0ab1efa88d4e15f919401c2337">Portamento&lt; CONTROL_UPDATE_RATE &gt;</a>
+, <a class="el" href="class_sample.html#a57307ee93ef0fcff36d543596eb79b72">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
 , <a class="el" href="class_portamento.html#af70701abfdd9f3d788f3b313e38017d0">Portamento&lt; CONTROL_UPDATE_RATE &gt;</a>
-, <a class="el" href="class_event_delay.html#aa2a731ceb05f95cac1798089448c6aed">EventDelay&lt; UPDATE_RATE &gt;</a>
+, <a class="el" href="class_event_delay.html#a85de9021676dadaba68edd6c5d5afa0e">EventDelay&lt; UPDATE_RATE &gt;</a>
 , <a class="el" href="class_ead.html#a146b205e70f4b2293e643ea063f2b38f">Ead</a>
 </li>
 <li>StateVariable()
@@ -447,6 +468,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <h3><a class="anchor" id="index_u"></a>- u -</h3><ul>
 <li>update()
 : <a class="el" href="class_a_d_s_r.html#a5ffeb0baf5e308515ca36cb7af802c31">ADSR&lt; CONTROL_UPDATE_RATE &gt;</a>
+, <a class="el" href="class_running_stat.html#a1c5c4855665796efbf30aa765d34470d">RunningStat</a>
 </li>
 </ul>
 
@@ -464,7 +486,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </li>
 <li>WaveShaper()
 : <a class="el" href="class_wave_shaper_3_01char_01_4.html#a0516cf5c7a3b827b1822480b46af132a">WaveShaper&lt; char &gt;</a>
-, <a class="el" href="class_wave_shaper_3_01int_01_4.html#a525265947dad0fc29c2c020d2620fcc3">WaveShaper&lt; int &gt;</a>
+, <a class="el" href="class_wave_shaper_3_01int_01_4.html#ad6a18a771345b6da7af8855fe69640d4">WaveShaper&lt; int &gt;</a>
 </li>
 <li>write()
 : <a class="el" href="class_audio_delay_feedback.html#a1be5de09206e7ac673c6526e0b083175">AudioDelayFeedback&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;</a>
@@ -478,7 +500,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jul 9 2013 14:09:33 for Mozzi by
+    <li class="footer">Generated on Sat Jul 13 2013 16:35:17 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

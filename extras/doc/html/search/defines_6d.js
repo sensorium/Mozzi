@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['micros_5fper_5faudio_5ftick',['MICROS_PER_AUDIO_TICK',['../_mozzi_guts_8h.html#a25f09c512cd3a187d19eb7fd1d54d558',1,'MozziGuts.h']]],
   ['multis16x16to32',['MultiS16X16to32',['../mult16x16_8h.html#a424b6b583c883c5aefb2f19ff983e218',1,'mult16x16.h']]],
   ['multis16x16toh16',['MultiS16X16toH16',['../mult16x16_8h.html#a7ce2d800b9d9a6f1074c49118079eba4',1,'mult16x16.h']]],
   ['multisu16x16to32',['MultiSU16X16to32',['../mult16x16_8h.html#a7c329adf52f0c8aae5d15d6a9784fc12',1,'mult16x16.h']]],

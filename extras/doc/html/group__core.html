@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-07-07-17:51</span>
+   &#160;<span id="projectnumber">version 2013-07-13-16:31</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -171,7 +171,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Select STANDARD or HIFI audio output mode in the Mozzi/mozzi_config.h file with #define AUDIO_MODE STANDARD or #define AUDIO_MODE HIFI In Mozzi/config.h, comment one of these options in and the other out to set the audio mode. </p>
+<p>Select STANDARD or HIFI audio output mode in the <a class="el" href="mozzi__config_8h.html">Mozzi/mozzi_config.h</a> file with #define AUDIO_MODE STANDARD or #define AUDIO_MODE HIFI. In Mozzi/config.h, comment one of these options in and the other out to set the audio mode. </p>
 
 <p>Definition at line <a class="el" href="mozzi__config_8h_source.html#l00016">16</a> of file <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a>.</p>
 
@@ -186,13 +186,13 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>AUDIO_RATE can be #defined as 16384 or 32768 Hertz in Mozzi/mozzi_config.h.</p>
+<p>AUDIO_RATE can be #defined as 16384 or 32768 Hertz in <a class="el" href="mozzi__config_8h.html">Mozzi/mozzi_config.h</a>.</p>
 <p>Mozzi's original audio mode, now called STANDARD, uses 16384 Hz, chosen as a compromise between the sample rate (interrupt rate) and sample bitdepth (pwm width), which are interdependent due to the way pulse wave modulation is used to generate the sound output. An AUDIO_RATE of 32768 Hz only works in HIFI mode, not in STANDARD mode because it doesn't give enough time for the full pwm resolution to be reached in each cycle.</p>
 <p>Another factor which is important for Mozzi's operation is that with AUDIO_RATE being a power of two, some internal calculations can be highly optimised for speed.</p>
 <p>In STANDARD mode and with AUDIO_RATE at 16384, the sample resolution is 488, which provides some headroom above the 8 bit table resolution currently used by the oscillators. You can look at the TimerOne library for more info about how interrupt rate and pwm resolution relate.</p>
-<p>HIFI audio mode enables much higher quality output by combining signals from pins 9 and 10. For HIFI mode, edit Mozzi/mozzi_config.h to contain #define AUDIO_MODE HIFI, and comment out #define AUDIO_MODE STANDARD.</p>
+<p>HIFI audio mode enables much higher quality output by combining signals from pins 9 and 10. For HIFI mode, edit <a class="el" href="mozzi__config_8h.html">Mozzi/mozzi_config.h</a> to contain #define AUDIO_MODE HIFI, and comment out #define AUDIO_MODE STANDARD.</p>
 <p>HIFI mode also enables the choice of using a 32768 Hz audio rate. Of course, doubling the sample rate (more than) halves the amount of time available to calculate the audio synthesis, so it may only be useful for relatively simple sketches. The increased frequency response can also make unwanted artefacts of low resolution synthesis calculations more apparent, so it's not always a bonus.</p>
-<p>AUDIO_RATE is set in Mozzi/mozzi_config.h, where you can comment in or out the relevant lines, choosing either #define AUDIO_RATE 16384 or #define AUDIO_RATE 32768.</p>
+<p>AUDIO_RATE is set in <a class="el" href="mozzi__config_8h.html">Mozzi/mozzi_config.h</a>, where you can comment in or out the relevant lines, choosing either #define AUDIO_RATE 16384 or #define AUDIO_RATE 32768.</p>
 
 <p>Definition at line <a class="el" href="mozzi__config_8h_source.html#l00056">56</a> of file <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a>.</p>
 
@@ -208,9 +208,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Mozzi's CONTROL_RATE sets how many times per second <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> is called. It can be any power of 2 greater than 64, and the largest value where it starts to become impractical is around 1024. 64, 128, 256 and sometimes 512 are all usable values. Try to keep it as low as you can, for efficiency, though higher rates can sometimes give smoother results, avoiding the need to interpolate sensitive variables at audio rate in <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code. ">updateAudio()</a>. CONTROL_RATE has a default of 64 Hz, but it can be changed at the top of your sketch, after the #includes, for example: #define CONTROL_RATE 256 </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="_09_delays_2_audio_delay_2_audio_delay_8ino-example.html#a4">_09_delays/AudioDelay/AudioDelay.ino</a>.</dd>
-</dl>
-<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00048">48</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00046">46</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -248,7 +247,7 @@ Functions</h2></td></tr>
  .................13.........12...............Sanguino <br/>
  </p>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00137">137</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00135">135</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -278,7 +277,7 @@ Functions</h2></td></tr>
  ....13 .......Sanguino <br/>
  </p>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00080">80</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00078">78</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -306,7 +305,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Put #define USE_AUDIO_INPUT true in Mozzi/mozzi_config.h to enable audio input on analog pin 0, otherwise make it false, to save resources. When audio input is used, don't read other analog channels as they'll interfere with the audio sampling. </p>
+<p>Put #define USE_AUDIO_INPUT true in <a class="el" href="mozzi__config_8h.html">Mozzi/mozzi_config.h</a> to enable audio input on analog pin 0, otherwise make it false, to save resources. When audio input is used, don't read other analog channels as they'll interfere with the audio sampling. </p>
 
 <p>Definition at line <a class="el" href="mozzi__config_8h_source.html#l00066">66</a> of file <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a>.</p>
 
@@ -325,9 +324,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>If there is room in Mozzi's output buffer, <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop(). ">audioHook()</a> calls <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code. ">updateAudio()</a> once and puts the result into the output buffer. Also, if #define USE_AUDIO_INPUT true is in Mozzi/mozzi_config.h, <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop(). ">audioHook()</a> takes care of moving audio input from the input buffer so it can be accessed with <a class="el" href="group__analog.html#ga3f15eb8d6694020d170ebcbedb645de7" title="This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the Mozzi/mozzi...">getAudioInput()</a> in your <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code. ">updateAudio()</a> routine. If other functions are called in loop() along with <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop(). ">audioHook()</a>, see if they can be called less often by moving them into <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>, to save processing power. Otherwise it may be most efficient to calculate a block of samples at a time by putting <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop(). ">audioHook()</a> in a loop of its own, rather than calculating only 1 sample for each time your other functions are called.  </p>
+<p>If there is room in Mozzi's output buffer, <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop(). ">audioHook()</a> calls <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code. ">updateAudio()</a> once and puts the result into the output buffer. Also, if #define USE_AUDIO_INPUT true is in <a class="el" href="mozzi__config_8h.html">Mozzi/mozzi_config.h</a>, <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop(). ">audioHook()</a> takes care of moving audio input from the input buffer so it can be accessed with <a class="el" href="group__analog.html#ga3f15eb8d6694020d170ebcbedb645de7" title="This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the Mozzi/mozzi...">getAudioInput()</a> in your <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code. ">updateAudio()</a> routine. If other functions are called in loop() along with <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop(). ">audioHook()</a>, see if they can be called less often by moving them into <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>, to save processing power. Otherwise it may be most efficient to calculate a block of samples at a time by putting <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop(). ">audioHook()</a> in a loop of its own, rather than calculating only 1 sample for each time your other functions are called.  </p>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00149">149</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00150">150</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -346,7 +345,7 @@ Functions</h2></td></tr>
 <p>mozziMicros is updated each time an audio sample is output, so the resolution is 1/AUDIO_RATE (61 microseconds when AUDIO_RATE is 16384 Hz). </p>
 <dl class="section return"><dt>Returns</dt><dd>the approximate number of microseconds since the program began. </dd></dl>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00421">421</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00422">422</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -366,7 +365,7 @@ Functions</h2></td></tr>
 <p>A potentially better option for resolving timer conflicts involves using non-blocking methods, such as demonstrated by the twowire_nonblock code in the forked version of Mozzi on github, so sound production can continue while reading sensors.</p>
 <p>As it is, pauseMozzi restores all the Timers used by Mozzi to their previous settings. Another scenario which could be easily hacked in <a class="el" href="_mozzi_guts_8cpp.html">MozziGuts.cpp</a> could involve individually saving and restoring particular Timer registers depending on which one(s) are required for other tasks, so for example the control interrupt (Timer 0) could be suspended while audio continues. </p>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00351">351</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00352">352</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -395,7 +394,7 @@ Functions</h2></td></tr>
 </dl>
 <p>It's good to define CONTROL_RATE in your sketches (eg. #define CONTROL_RATE 128) because the literal numeric value is necessary for Oscils to work properly, and it also helps to keep the calculations in your sketch clear.</p>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00340">340</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00341">341</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -413,7 +412,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>This once more takes over Timer 0, and stops the Arduino time functions millis(), micros(), delay(), and delayMicroseconds() from working. </p>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00386">386</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00387">387</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -431,8 +430,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p><a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code. ">updateAudio()</a> has to keep up with the AUDIO_RATE of 16384 Hz, so to keep things running smoothly, avoid doing any calculations here which could be done in setup() or <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>an audio sample. In STANDARD mode this is between -244 and 243 inclusive. In HIFI mode, it's a 14 bit number between -16384 and 16383 inclusive. </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="_02_control_2_control__echo__theremin_2_control__echo__theremin_8ino-example.html#a9">_02_control/Control_Echo_Theremin/Control_Echo_Theremin.ino</a>, <a class="el" href="_06_synthesis_2_wave_packet__sample_2_wave_packet__sample_8ino-example.html#a10">_06_synthesis/WavePacket_Sample/WavePacket_Sample.ino</a>, and <a class="el" href="_09_delays_2_audio_delay_2_audio_delay_8ino-example.html#a7">_09_delays/AudioDelay/AudioDelay.ino</a>.</dd>
-</dl>
+
 </div>
 </div>
 <a class="anchor" id="ga59d187b915b2e366c88489e52801951a"></a>
@@ -448,8 +446,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>You need <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> somewhere in your sketch, even if it's empty. <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> is called at the control rate you set in <a class="el" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837" title="Sets up the timers for audio and control rate processes, storing the timer registers so they can be r...">startMozzi()</a>. To save processor load, avoid any calculations here which could be done in setup(). </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="_02_control_2_control__echo__theremin_2_control__echo__theremin_8ino-example.html#a5">_02_control/Control_Echo_Theremin/Control_Echo_Theremin.ino</a>, <a class="el" href="_06_synthesis_2_wave_packet__sample_2_wave_packet__sample_8ino-example.html#a5">_06_synthesis/WavePacket_Sample/WavePacket_Sample.ino</a>, and <a class="el" href="_09_delays_2_audio_delay_2_audio_delay_8ino-example.html#a6">_09_delays/AudioDelay/AudioDelay.ino</a>.</dd>
-</dl>
+
 </div>
 </div>
 </div><!-- contents -->
@@ -457,7 +454,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jul 9 2013 14:09:32 for Mozzi by
+    <li class="footer">Generated on Sat Jul 13 2013 16:35:16 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

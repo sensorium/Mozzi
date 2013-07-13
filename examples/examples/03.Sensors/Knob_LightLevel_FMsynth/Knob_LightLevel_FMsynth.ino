@@ -59,7 +59,7 @@ long fm_intensity; // carries control info from updateControl() to updateAudio()
 
 void setup(){
   Serial.begin(115200); // set up the Serial output for debugging
-  setupFastAnalogRead(); // one way of increasing the speed of reading the input
+  setupFastAnalogRead(); // speed up analog reads (Mozzi also has other faster ways)
   startMozzi(); // :))
 }
 

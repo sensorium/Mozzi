@@ -41,7 +41,7 @@ Sample <BURROUGHS1_18649_NUM_CELLS, AUDIO_RATE> burroughs(BURROUGHS1_18649_DATA)
 
 void setup(){
   Serial.begin(115200); // set up the Serial output so we can look at the piezo values
-  setupFastAnalogRead(); // one way of increasing the speed of reading the input
+  setupFastAnalogRead(); // speed up analog reads (Mozzi also has other faster ways)
   burroughs.setFreq((float) BURROUGHS1_18649_SAMPLERATE / (float) BURROUGHS1_18649_NUM_CELLS); // play at the speed it was recorded  
   startMozzi(); // :))
 }

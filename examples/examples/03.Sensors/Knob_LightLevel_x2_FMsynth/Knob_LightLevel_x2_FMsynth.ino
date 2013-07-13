@@ -74,7 +74,7 @@ Smooth <long> aSmoothIntensity(smoothness);
 
 void setup(){
   Serial.begin(115200); // set up the Serial output so we can look at the light level
-  setupFastAnalogRead(); // one way of increasing the speed of reading the input
+  setupFastAnalogRead(); // speed up analog reads (Mozzi also has other faster ways)
   startMozzi(); // :))
 }
 

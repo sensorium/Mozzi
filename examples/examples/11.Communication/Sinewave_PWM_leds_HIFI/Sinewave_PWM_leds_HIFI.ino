@@ -38,8 +38,8 @@
  *
  *  LEDs:
  *  Red led from pin 3 through a 1.5k resistor to ground
- *  Green led from pin 3 through a 1.5k resistor to ground
- *  Blue led from pin 3 through a 1.5k resistor to ground
+ *  Green led from pin 4 through a 1.5k resistor to ground
+ *  Blue led from pin 5 through a 1.5k resistor to ground
  *
  *  Mozzi help/discussion/announcements:
  *  https://groups.google.com/forum/#!forum/mozzi-users

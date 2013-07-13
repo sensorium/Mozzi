@@ -54,7 +54,7 @@
 <div id="header_wrap">
 	
 	<hgroup>
-		<h1><a href="/Mozzi/">MOZZI</a></h1>
+		<h1 id="banner_main_title"><a href="/Mozzi/">MOZZI</a></h1>
 		
 		
 			<h2>sound synthesis library for Arduino</h2>
@@ -74,7 +74,7 @@
 			<a class="header_link" href="https://github.com/sensorium/Mozzi/zipball/master">
 				download<br>
 				<i class="icon-download icon-4x"></i><br>
-				<span id="header_small_label">version 2013-07-07-17:51</span>
+				<span id="header_small_label">version 2013-07-13-16:36</span>
 			</a>
 		</p>
 	</section> 
@@ -130,25 +130,25 @@ change the sine wave&#8217;s frequency and produce vibrato.</p>
 
 <p>Let&#8217;s make a minimal Mozzi sketch step by step. The sketch plays a sine wave at
 a specified frequency. No great feat, and you can find lots of other Arduino
-sketches doing it without Mozzi, but it illustrates the structure and gist of a
-bare-bones Mozzi sketch. You don&#8217;t need much experience with
+sketches doing it without Mozzi, but it gives the gist of how a
+Mozzi sketch works. You don&#8217;t need much experience with
 Arduino or programming.</p>
 
-<p>First <code>#include MozziGuts.h</code>. This is always required, as are headers for any
-other Mozzi classes, modules or tables used in the sketch. In this case an
-oscillator will be used, and a wavetable for the oscillator to play:</p>
+<p>First <code>#include MozziGuts.h</code>. You always need this, as well as headers for any
+Mozzi classes, modules or tables used in the sketch.  This time we&#8217;ll have an oscillator
+and a wavetable for the oscillator to play:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;  </span>
-</span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;  </span>
-</span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt;  </span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt; </span><span class="c1">// this makes everything work </span>
+</span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;  </span><span class="c1">// a template for an oscillator</span>
+</span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt;  </span><span class="c1">// a wavetable holding a sine wave</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Next, we need an oscillator, using the <code>Oscil</code> class.  Here is the structure and
-the parameters used to instantiate an <code>Oscil</code>.</p>
+<p>Next, instantiate the oscillator, using the <code>Oscil</code> class just included.  Here is the structure and
+the parameters used to declare an <code>Oscil</code>.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">table_size</span><span class="p">,</span> <span class="n">update_rate</span><span class="o">&gt;</span> <span class="n">name</span><span class="p">(</span><span class="n">table_data</span><span class="p">);</span>

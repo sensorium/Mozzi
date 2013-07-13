@@ -2,7 +2,7 @@ var searchData=
 [
   ['abomb_5fnum_5fcells',['ABOMB_NUM_CELLS',['../abomb16384__int8_8h.html#aaae29e69acec708e11157a5b1e7d28a8',1,'abomb16384_int8.h']]],
   ['abomb_5fsamplerate',['ABOMB_SAMPLERATE',['../abomb16384__int8_8h.html#a134a2a270dfd96ffbb9ee85bd36ffcbf',1,'abomb16384_int8.h']]],
-  ['audio_5fbias',['AUDIO_BIAS',['../_audio_config_standard9bit_pwm_8h.html#aa2b18130c536085943a5768146fcb8bb',1,'AUDIO_BIAS():&#160;AudioConfigStandard9bitPwm.h'],['../_audio_config_hi_speed14bit_pwm_8h.html#aa2b18130c536085943a5768146fcb8bb',1,'AUDIO_BIAS():&#160;AudioConfigHiSpeed14bitPwm.h']]],
+  ['audio_5fbias',['AUDIO_BIAS',['../_audio_config_hi_speed14bit_pwm_8h.html#aa2b18130c536085943a5768146fcb8bb',1,'AUDIO_BIAS():&#160;AudioConfigHiSpeed14bitPwm.h'],['../_audio_config_standard9bit_pwm_8h.html#aa2b18130c536085943a5768146fcb8bb',1,'AUDIO_BIAS():&#160;AudioConfigStandard9bitPwm.h']]],
   ['audio_5fchannel_5f1_5fhighbyte_5fpin',['AUDIO_CHANNEL_1_HIGHBYTE_PIN',['../_audio_config_hi_speed14bit_pwm_8h.html#af907b5e2bf79ae514ec38f0ad687f320',1,'AudioConfigHiSpeed14bitPwm.h']]],
   ['audio_5fchannel_5f1_5fhighbyte_5fregister',['AUDIO_CHANNEL_1_HIGHBYTE_REGISTER',['../_audio_config_hi_speed14bit_pwm_8h.html#a8f8ac5be3f490a05eae13008b7391144',1,'AudioConfigHiSpeed14bitPwm.h']]],
   ['audio_5fchannel_5f1_5flowbyte_5fpin',['AUDIO_CHANNEL_1_LOWBYTE_PIN',['../_audio_config_hi_speed14bit_pwm_8h.html#a924a602a1618a3829d35a4e2e9ff512f',1,'AudioConfigHiSpeed14bitPwm.h']]],

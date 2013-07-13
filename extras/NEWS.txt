@@ -3,18 +3,23 @@ Mozzi sound synthesis library for Arduino
 NEWS
 get the latest version from http://sensorium.github.io/Mozzi/
 
-version 2013-07-13-16:31
+
+version 2013-07-13-17:13
+
+
+version_2013-07-13-16:36
 
 - Added extras folder and moved non-code files to there.  
 - Tried migrating code into a src folder structure for new library spec 1.5, but doesn't work yet so moved it back to top folder.
 - Fixed circuit description in Sinewave_PWM_leds_HIFI example.
-- Replaced ((progmem)) everywhere with ((section(".progmem.data"))) to work around bogus compiler warning,
+- Replaced ((progmem)) in tables and samples with ((section(".progmem.data"))) to work around bogus compiler warning,
 	see http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&t=100009
 	If Arduino's version of avr-gcc advances, this will eventually become unnecessary.
 - Added compiler warning to remind whether AUDIO_MODE is STANDARD or HIFI, might help debugging.
 - mozzi_fixmath.h 
 	- added Q7n0_to_Q15n16(Q7n0 a), Convert Q7n0 char to Q15n16 fixed point.
 	- added Q7n8_to_Q15n16(Q7n8 a), Convert Q7n8 fix to Q15n16.
+	- added Q7n8_mult(Q7n8 a, Q7n8 b)
 	
 
 version_2013-07-07-17:51

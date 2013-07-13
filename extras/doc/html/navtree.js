@@ -38,8 +38,8 @@ var NAVTREEINDEX =
 "_02_control_2_control__echo__theremin_2_control__echo__theremin_8ino-example.html",
 "class_audio_delay_feedback.html",
 "globals_defs_0x6d.html",
-"mozzi__fixmath_8cpp.html#a5daaf7f37651029de2abf8ad375b6850",
-"sin1024__int8_8h.html#a0849da9a001336d212e4e1184044ad97"
+"mozzi__fixmath_8cpp.html#ga004d96a59215139e911b92907c37fc22",
+"sin1024__int8_8h.html#a0b0951563c3b5f792b3a0f1f917aa25b"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -1,6 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"sin1024__int8_8h.html#a0849da9a001336d212e4e1184044ad97":[4,0,86,1],
 "sin1024__int8_8h.html#a0b0951563c3b5f792b3a0f1f917aa25b":[4,0,86,0],
 "sin1024__int8_8h.html#a3d6417ee0bfed14a87c378fd263c6513":[4,0,86,2],
 "sin1024__int8_8h_source.html":[4,0,86],

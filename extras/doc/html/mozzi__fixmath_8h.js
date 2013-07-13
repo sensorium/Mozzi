@@ -96,7 +96,6 @@ var mozzi__fixmath_8h =
     [ "Q24n8_to_Q32n0", "mozzi__fixmath_8h.html#ga9f28b2310c92ecac72960d9bd0aff80f", null ],
     [ "Q7n0_to_Q15n16", "mozzi__fixmath_8h.html#ga64d943b21ef783f34135630a5c80be46", null ],
     [ "Q7n0_to_Q7n8", "mozzi__fixmath_8h.html#ga81b0b1f295a6a724c100e600d6b4ce28", null ],
-    [ "Q7n8_div", "mozzi__fixmath_8h.html#a437e66f3e482b62a9e836b813c676c19", null ],
     [ "Q7n8_mult", "mozzi__fixmath_8h.html#ga306932c4fb32b1352c24b7602a696fee", null ],
     [ "Q7n8_to_float", "mozzi__fixmath_8h.html#gaad3cbbc6a772d246d26fd98b5a079382", null ],
     [ "Q7n8_to_Q15n16", "mozzi__fixmath_8h.html#ga958d671aeefb66c2492b84bf299f8d13", null ],
@@ -107,7 +106,6 @@ var mozzi__fixmath_8h =
     [ "Q8n0_to_Q8n8", "mozzi__fixmath_8h.html#ga90a5d59d5a529f4caaf408730230a156", null ],
     [ "Q8n24_to_float", "mozzi__fixmath_8h.html#ga6f0e36938a7dfae4ab399f17642c2bcd", null ],
     [ "Q8n24_to_Q0n8", "mozzi__fixmath_8h.html#ga0c5065bc7c71ac750acde1c7ce216d87", null ],
-    [ "Q8n8_sqrt", "mozzi__fixmath_8h.html#a8c4b3039059808144737acde898abd00", null ],
     [ "Q8n8_to_float", "mozzi__fixmath_8h.html#gabc9c251c25fa7a239d704ea3998e7e39", null ],
     [ "Q8n8_to_Q16n16", "mozzi__fixmath_8h.html#gab88fd86b4f226f0e2614b0ac813e4cad", null ],
     [ "Q8n8_to_Q8n0", "mozzi__fixmath_8h.html#gad68e3b4d1bf65e997d5e709eb4153572", null ]

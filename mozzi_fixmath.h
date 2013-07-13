@@ -407,9 +407,6 @@ int ipow(int base, int exp); /**< dangerous overflow-prone  int power function *
 
 Q16n16 Q16n16_pow2(Q8n8 exponent);
 
-Q7n8 Q7n8_div(Q7n8 nn, Q7n8 dd);
-Q8n8 Q8n8_sqrt(Q8n8 aa);
-//Q6n10 Q10n6_sqrt(Q10n6 aa); // this would be better than Q8n8 for sensor inputs
 unsigned char byteMod(unsigned char n, unsigned char d);
 unsigned char byteDiv(unsigned char n, unsigned char d);
 unsigned char byteRnd(unsigned char min, unsigned char max);

@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-07-29-17:44</span>
+   &#160;<span id="projectnumber">version 2013-07-29-18:09</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -80,7 +80,7 @@ $(document).ready(function(){initNavTree('group__analog.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -105,10 +105,10 @@ Functions</h2></td></tr>
 <tr class="memitem:gac9b066c792d2b822dcf518eef19a7c3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e">adcEnableInterrupt</a> ()</td></tr>
 <tr class="memdesc:gac9b066c792d2b822dcf518eef19a7c3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call this in setup() to enable reading analog inputs in the background while audio generating continues.  <a href="#gac9b066c792d2b822dcf518eef19a7c3e">More...</a><br/></td></tr>
 <tr class="separator:gac9b066c792d2b822dcf518eef19a7c3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8741756d32609ad6dec641943fa99af9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga8741756d32609ad6dec641943fa99af9">setupFastAnalogRead</a> (char speed=<a class="el" href="mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2afe3cbac5740676dc7d2cdec6240c7103">FAST_ADC</a>)</td></tr>
+<tr class="memitem:ga8741756d32609ad6dec641943fa99af9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga8741756d32609ad6dec641943fa99af9">setupFastAnalogRead</a> (char speed=FAST_ADC)</td></tr>
 <tr class="memdesc:ga8741756d32609ad6dec641943fa99af9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in unmodified Arduino to about 16 microseconds for a dependable analogRead() with the default speed parameter FAST_ADC.  <a href="#ga8741756d32609ad6dec641943fa99af9">More...</a><br/></td></tr>
 <tr class="separator:ga8741756d32609ad6dec641943fa99af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaffeb925f6aca20f179cc46e1734c04ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gaffeb925f6aca20f179cc46e1734c04ad">setupMozziADC</a> (char speed=<a class="el" href="mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2afe3cbac5740676dc7d2cdec6240c7103">FAST_ADC</a>)</td></tr>
+<tr class="memitem:gaffeb925f6aca20f179cc46e1734c04ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gaffeb925f6aca20f179cc46e1734c04ad">setupMozziADC</a> (char speed=FAST_ADC)</td></tr>
 <tr class="memdesc:gaffeb925f6aca20f179cc46e1734c04ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up for asynchronous analog input, which enables analog reads to take place in the background without blocking the processor.  <a href="#gaffeb925f6aca20f179cc46e1734c04ad">More...</a><br/></td></tr>
 <tr class="separator:gaffeb925f6aca20f179cc46e1734c04ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad4433797b75fedd473250e9aa414dcae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gad4433797b75fedd473250e9aa414dcae">disconnectDigitalIn</a> (byte channel_num)</td></tr>
@@ -120,8 +120,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga5042e7c576dd0307be38eb70efdb69fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga5042e7c576dd0307be38eb70efdb69fe">adcDisconnectAllDigitalIns</a> ()</td></tr>
 <tr class="memdesc:ga5042e7c576dd0307be38eb70efdb69fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepare all analog input channels by turning off their digital input buffers.  <a href="#ga5042e7c576dd0307be38eb70efdb69fe">More...</a><br/></td></tr>
 <tr class="separator:ga5042e7c576dd0307be38eb70efdb69fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabad497d1f8c8026e81849be0b65bf38f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gabad497d1f8c8026e81849be0b65bf38f">adcReconnectAllDigitalIns</a> ()</td></tr>
-<tr class="memdesc:gabad497d1f8c8026e81849be0b65bf38f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reconnect the digital input buffers for analog input channels which have been set for analog input with <a class="el" href="group__analog.html#gad4433797b75fedd473250e9aa414dcae" title="Prepare an analog input channel by turning off its digital input buffer.">disconnectDigitalIn()</a>.  <a href="#gabad497d1f8c8026e81849be0b65bf38f">More...</a><br/></td></tr>
+<tr class="memitem:gabad497d1f8c8026e81849be0b65bf38f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gabad497d1f8c8026e81849be0b65bf38f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gabad497d1f8c8026e81849be0b65bf38f">adcReconnectAllDigitalIns</a> ()</td></tr>
+<tr class="memdesc:gabad497d1f8c8026e81849be0b65bf38f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reconnect the digital input buffers for analog input channels which have been set for analog input with <a class="el" href="group__analog.html#gad4433797b75fedd473250e9aa414dcae" title="Prepare an analog input channel by turning off its digital input buffer.">disconnectDigitalIn()</a>. <br/></td></tr>
 <tr class="separator:gabad497d1f8c8026e81849be0b65bf38f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae0d3533acb5fd56db8f7317e24bea6b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gae0d3533acb5fd56db8f7317e24bea6b5">adcSetChannel</a> (unsigned char pin)</td></tr>
 <tr class="memdesc:gae0d3533acb5fd56db8f7317e24bea6b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the channel or pin for the next analog input to be read from.  <a href="#gae0d3533acb5fd56db8f7317e24bea6b5">More...</a><br/></td></tr>
@@ -129,8 +130,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga8e081d7e359e219b7dce35538fcf3e39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39">adcStartConversion</a> (unsigned char pin)</td></tr>
 <tr class="memdesc:ga8e081d7e359e219b7dce35538fcf3e39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts an analog to digital conversion of the voltage at a specified pin.  <a href="#ga8e081d7e359e219b7dce35538fcf3e39">More...</a><br/></td></tr>
 <tr class="separator:ga8e081d7e359e219b7dce35538fcf3e39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac3d2277d3d3823c6d5c727067571aab3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gac3d2277d3d3823c6d5c727067571aab3">adcStartConversion</a> ()</td></tr>
-<tr class="memdesc:gac3d2277d3d3823c6d5c727067571aab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the analog conversion on the pin or channel most recently set with <a class="el" href="group__analog.html#gae0d3533acb5fd56db8f7317e24bea6b5" title="Set the channel or pin for the next analog input to be read from.">adcSetChannel()</a>;.  <a href="#gac3d2277d3d3823c6d5c727067571aab3">More...</a><br/></td></tr>
+<tr class="memitem:gac3d2277d3d3823c6d5c727067571aab3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac3d2277d3d3823c6d5c727067571aab3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gac3d2277d3d3823c6d5c727067571aab3">adcStartConversion</a> ()</td></tr>
+<tr class="memdesc:gac3d2277d3d3823c6d5c727067571aab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the analog conversion on the pin or channel most recently set with <a class="el" href="group__analog.html#gae0d3533acb5fd56db8f7317e24bea6b5" title="Set the channel or pin for the next analog input to be read from.">adcSetChannel()</a>;. <br/></td></tr>
 <tr class="separator:gac3d2277d3d3823c6d5c727067571aab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaaf4320d2621e15ea704900ea26a8aa07"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07">adcGetResult</a> ()</td></tr>
 <tr class="memdesc:gaaf4320d2621e15ea704900ea26a8aa07"><td class="mdescLeft">&#160;</td><td class="mdescRight">DEPRECIATED.  <a href="#gaaf4320d2621e15ea704900ea26a8aa07">More...</a><br/></td></tr>
@@ -142,7 +144,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:ga829091330473b48a8b9236d0be4b8755"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels()</a> in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> and the results for each channel will be available by calling adcGetResult(channel_num) next time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> runs.  <a href="#ga829091330473b48a8b9236d0be4b8755">More...</a><br/></td></tr>
 <tr class="separator:ga829091330473b48a8b9236d0be4b8755"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3f15eb8d6694020d170ebcbedb645de7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga3f15eb8d6694020d170ebcbedb645de7">getAudioInput</a> ()</td></tr>
-<tr class="memdesc:ga3f15eb8d6694020d170ebcbedb645de7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the <a class="el" href="mozzi__config_8h.html">Mozzi/mozzi_config.h</a> file.  <a href="#ga3f15eb8d6694020d170ebcbedb645de7">More...</a><br/></td></tr>
+<tr class="memdesc:ga3f15eb8d6694020d170ebcbedb645de7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> file.  <a href="#ga3f15eb8d6694020d170ebcbedb645de7">More...</a><br/></td></tr>
 <tr class="separator:ga3f15eb8d6694020d170ebcbedb645de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -237,7 +239,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>The <a class="el" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">adcEnableInterrupt()</a>, <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels()</a>, <a class="el" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07" title="DEPRECIATED.">adcGetResult()</a> approach is currently set to work with all channels on each kind of board. You can change the number of channels to use in <a class="el" href="mozzi__analog_8cpp.html">mozzi_analog.cpp</a> by editing NUM_ANALOG_INPUTS if desired. </dd>
+<dl class="section note"><dt>Note</dt><dd>The <a class="el" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">adcEnableInterrupt()</a>, <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels()</a>, <a class="el" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07" title="DEPRECIATED.">adcGetResult()</a> approach is currently set to work with all channels on each kind of board. You can change the number of channels to use in <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a> by editing NUM_ANALOG_INPUTS if desired. </dd>
 <dd>
 In some cases this method can cause glitches which may have to do with the ADC interrupt interfering with the audio or control interrupts. </dd></dl>
 
@@ -266,25 +268,6 @@ In some cases this method can cause glitches which may have to do with the ADC i
 <p>This pushes all the other analog channel numbers onto a stack to be read consecutively, one each time the analog read interrupt returns, until the stack is empty. When USE_AUDIO_INPUT=true, the sequence will start when it is triggered by the return of the next audio analog input interrupt. When USE_AUDIO_INPUT=false, <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels()</a> starts the first conversion itself and the rest are triggered automatically. </p>
 
 <p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00192">192</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="gabad497d1f8c8026e81849be0b65bf38f"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void adcReconnectAllDigitalIns </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Reconnect the digital input buffers for analog input channels which have been set for analog input with <a class="el" href="group__analog.html#gad4433797b75fedd473250e9aa414dcae" title="Prepare an analog input channel by turning off its digital input buffer.">disconnectDigitalIn()</a>. </p>
-
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00156">156</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -344,25 +327,6 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
 
 </div>
 </div>
-<a class="anchor" id="gac3d2277d3d3823c6d5c727067571aab3"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void adcStartConversion </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Starts the analog conversion on the pin or channel most recently set with <a class="el" href="group__analog.html#gae0d3533acb5fd56db8f7317e24bea6b5" title="Set the channel or pin for the next analog input to be read from.">adcSetChannel()</a>;. </p>
-
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00114">114</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="gad4433797b75fedd473250e9aa414dcae"></a>
 <div class="memitem">
 <div class="memproto">
@@ -407,7 +371,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
       </table>
 </div><div class="memdoc">
 
-<p>This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the <a class="el" href="mozzi__config_8h.html">Mozzi/mozzi_config.h</a> file. </p>
+<p>This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> file. </p>
 <p>Audio input is currently restricted to analog pin 0 (this may change in future). The audio signal needs to be in the range 0 to 5 volts. Circuits and discussions about biasing a signal in the middle of this range can be found at <a href="http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal">http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal</a> and <a href="http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/">http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/</a> . A circuit and instructions for amplifying and biasing a microphone signal can be found at <a href="http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS">http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS</a> </p>
 <dl class="section return"><dt>Returns</dt><dd>audio data from the input buffer </dd></dl>
 
@@ -449,7 +413,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
           <td class="memname">void setupFastAnalogRead </td>
           <td>(</td>
           <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>speed</em> = <code><a class="el" href="mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2afe3cbac5740676dc7d2cdec6240c7103">FAST_ADC</a></code></td><td>)</td>
+          <td class="paramname"><em>speed</em> = <code>FAST_ADC</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -476,14 +440,14 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
           <td class="memname">void setupMozziADC </td>
           <td>(</td>
           <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>speed</em> = <code><a class="el" href="mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2afe3cbac5740676dc7d2cdec6240c7103">FAST_ADC</a></code></td><td>)</td>
+          <td class="paramname"><em>speed</em> = <code>FAST_ADC</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Set up for asynchronous analog input, which enables analog reads to take place in the background without blocking the processor. </p>
-<p>This goes in setup(), but if /#define USE_AUDIO_INPUT true is in <a class="el" href="mozzi__config_8h.html">mozzi_config.h</a>, you don't need <a class="el" href="group__analog.html#gaffeb925f6aca20f179cc46e1734c04ad" title="Set up for asynchronous analog input, which enables analog reads to take place in the background with...">setupMozziADC()</a> because it's called automatically to enable the audio input. If you want to use the standard Arduino analogRead(), don't use <a class="el" href="group__analog.html#gaffeb925f6aca20f179cc46e1734c04ad" title="Set up for asynchronous analog input, which enables analog reads to take place in the background with...">setupMozziADC()</a>, but do put <a class="el" href="group__analog.html#ga8741756d32609ad6dec641943fa99af9" title="Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in u...">setupFastAnalogRead()</a> in setup() if you want to reduce the chance of audio glitches. </p>
+<p>This goes in setup(), but if /#define USE_AUDIO_INPUT true is in <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a>, you don't need <a class="el" href="group__analog.html#gaffeb925f6aca20f179cc46e1734c04ad" title="Set up for asynchronous analog input, which enables analog reads to take place in the background with...">setupMozziADC()</a> because it's called automatically to enable the audio input. If you want to use the standard Arduino analogRead(), don't use <a class="el" href="group__analog.html#gaffeb925f6aca20f179cc46e1734c04ad" title="Set up for asynchronous analog input, which enables analog reads to take place in the background with...">setupMozziADC()</a>, but do put <a class="el" href="group__analog.html#ga8741756d32609ad6dec641943fa99af9" title="Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in u...">setupFastAnalogRead()</a> in setup() if you want to reduce the chance of audio glitches. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">speed</td><td>FAST_ADC, FASTER_ADC or FASTEST_ADC. See <a class="el" href="group__analog.html#ga8741756d32609ad6dec641943fa99af9" title="Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in u...">setupFastAnalogRead()</a>; </td></tr>
@@ -500,7 +464,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Jul 29 2013 17:44:20 for Mozzi by
+    <li class="footer">Generated on Mon Jul 29 2013 18:09:18 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

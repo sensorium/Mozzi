@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 ##@file char2mozzi.py
+#  @ingroup util
 #	A script for converting raw 8 bit sound data files to wavetables for Mozzi.
 #
 #	Usage: 

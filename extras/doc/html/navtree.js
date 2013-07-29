@@ -3,30 +3,16 @@ var NAVTREE =
   [ "Mozzi", "index.html", [
     [ "Welcome", "index.html", null ],
     [ "Modules", "modules.html", "modules" ],
-    [ "Namespace Members", "namespacemembers.html", [
-      [ "All", "namespacemembers.html", null ],
-      [ "Functions", "namespacemembers_func.html", null ]
-    ] ],
     [ "Classes", null, [
       [ "Class List", "annotated.html", "annotated" ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
-        [ "Functions", "functions_func.html", null ],
-        [ "Enumerator", "functions_eval.html", null ]
+        [ "Functions", "functions_func.html", null ]
       ] ]
     ] ],
     [ "Files", null, [
-      [ "File List", "files.html", "files" ],
-      [ "File Members", "globals.html", [
-        [ "All", "globals.html", "globals_dup" ],
-        [ "Functions", "globals_func.html", "globals_func" ],
-        [ "Variables", "globals_vars.html", null ],
-        [ "Typedefs", "globals_type.html", null ],
-        [ "Enumerations", "globals_enum.html", null ],
-        [ "Enumerator", "globals_eval.html", null ],
-        [ "Macros", "globals_defs.html", null ]
-      ] ]
+      [ "File List", "files.html", "files" ]
     ] ],
     [ "Examples", "examples.html", "examples" ]
   ] ]
@@ -35,9 +21,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_02_control_2_control__echo__theremin_2_control__echo__theremin_8ino-example.html",
-"class_rolling_average.html#a23c4b93258faace0c7ee60eb395d2c4b",
-"group__fixmath.html#gac0b4678c510db93302efb15497911907",
-"mozzi__rand_8cpp_source.html"
+"group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

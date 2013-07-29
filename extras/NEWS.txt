@@ -4,7 +4,7 @@ NEWS
 get the latest version from http://sensorium.github.io/Mozzi/
 
 
-version 2013-07-29-17:44
+version 2013-07-29-18:09
 
 - IMPORTANT: renamed RecentAverage.h to RollingAverage.h.  Update sketches accordingly.
 - mozzi_analog.h  
@@ -19,7 +19,8 @@ version 2013-07-29-17:44
 - added audioTicks(), returns how many audio samples have been played since the program started - this will overflow less often than mozziMicros().
 - mozziMicros() was wrong, audioticks/us-per-tick... fixed, now audioticks*us-per-tick
 - added Stack.h, a simple stack class used internally for reading analog control inputs via adcReadAllChannels().
-- added RollingStat.h, which calculates an approximation of the variance and standard deviation for a window of recent inputs, for doing things with sensor inputs.
+- added RollingStat.h, which calculates an approximation of the variance and standard deviation for a window of recent inputs, 
+	for doing things with sensor inputs.
 
 
 version_2013-07-13-16:36

@@ -1,6 +1,5 @@
 var annotated =
 [
-    [ "char2mozzi", "namespacechar2mozzi.html", null ],
     [ "ADSR", "class_a_d_s_r.html", "class_a_d_s_r" ],
     [ "AudioDelay", "class_audio_delay.html", "class_audio_delay" ],
     [ "AudioDelayFeedback", "class_audio_delay_feedback.html", "class_audio_delay_feedback" ],

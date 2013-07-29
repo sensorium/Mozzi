@@ -1,11 +1,6 @@
 var searchData=
 [
   ['sample',['Sample',['../class_sample.html',1,'Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;'],['../class_sample.html#a9b95b8797648288b1c3698beda1dd34a',1,'Sample::Sample(const char *TABLE_NAME)'],['../class_sample.html#af2ce86342a595a3571ce2e9a38e96a96',1,'Sample::Sample()']]],
-  ['sample_2eh',['Sample.h',['../_sample_8h.html',1,'']]],
-  ['sample_5ff_5fbits',['SAMPLE_F_BITS',['../_sample_8h.html#a8eba4424fc276faa39413faf92670505',1,'Sample.h']]],
-  ['sample_5ff_5fbits_5fas_5fmultiplier',['SAMPLE_F_BITS_AS_MULTIPLIER',['../_sample_8h.html#acb82d9d796d11da458308b170beca908',1,'Sample.h']]],
-  ['sample_5fphmod_5fbits',['SAMPLE_PHMOD_BITS',['../_sample_8h.html#a6fccc0a5a1ba5aab43138c6ca0c4b194',1,'Sample.h']]],
-  ['sbi',['sbi',['../mozzi__utils_8h.html#ac4a5536d9bf092116f88b94797ddc882',1,'sbi():&#160;mozzi_utils.h'],['../twi__nonblock_8h.html#ac4a5536d9bf092116f88b94797ddc882',1,'sbi():&#160;twi_nonblock.h']]],
   ['set',['set',['../class_audio_delay.html#a7bd0a07f7803afda1a71b50e3f66827b',1,'AudioDelay::set()'],['../class_ead.html#af203c82721ab832c653a23ff219c040e',1,'Ead::set()'],['../class_event_delay.html#adb1ea3351d63b51c6c5270eff1de4cb8',1,'EventDelay::set()'],['../class_line.html#a6bad32d527e0d931c99e9b72c2a75c80',1,'Line::set(T value)'],['../class_line.html#a7378d526cf07c42c0792868c749dee6e',1,'Line::set(T targetvalue, T num_steps)'],['../class_line.html#a24ad85c17562e97b6823a010a5ba04c6',1,'Line::set(T startvalue, T targetvalue, T num_steps)'],['../class_phasor.html#a509e4a782a36cb9e913da170d6707421',1,'Phasor::set()'],['../class_wave_packet.html#ac693b3d676b583584a8cfc6b9cc0f37f',1,'WavePacket::set()']]],
   ['setadlevels',['setADLevels',['../class_a_d_s_r.html#abfb4aaa169920beadb67570e0360f23f',1,'ADSR']]],
   ['setattack',['setAttack',['../class_ead.html#a6bae0e92e6709c3fcd31fccd41212bac',1,'Ead']]],
@@ -47,21 +42,12 @@ var searchData=
   ['settimes',['setTimes',['../class_a_d_s_r.html#af656b88fdfddd521c3a30fe9b06b524b',1,'ADSR']]],
   ['setupfastanalogread',['setupFastAnalogRead',['../group__analog.html#ga8741756d32609ad6dec641943fa99af9',1,'setupFastAnalogRead(char speed):&#160;mozzi_analog.cpp'],['../group__analog.html#ga8741756d32609ad6dec641943fa99af9',1,'setupFastAnalogRead(char speed=FAST_ADC):&#160;mozzi_analog.cpp']]],
   ['setupmozziadc',['setupMozziADC',['../group__analog.html#gaffeb925f6aca20f179cc46e1734c04ad',1,'setupMozziADC(char speed):&#160;mozzi_analog.cpp'],['../group__analog.html#gaffeb925f6aca20f179cc46e1734c04ad',1,'setupMozziADC(char speed=FAST_ADC):&#160;mozzi_analog.cpp']]],
-  ['shifted_5f1',['SHIFTED_1',['../_low_pass_filter_8h.html#a5a34c652d5f67554323e1bb4d2cd9190',1,'LowPassFilter.h']]],
-  ['single',['SINGLE',['../_wave_packet_8h.html#ad28a1b6c64625a10e04b25f75d2e7b51a3388f7110f6f25a54e215eb75d5d7516',1,'WavePacket.h']]],
   ['smooth',['Smooth',['../class_smooth.html',1,'Smooth&lt; T &gt;'],['../class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26',1,'Smooth::Smooth()']]],
-  ['smooth_2eh',['Smooth.h',['../_smooth_8h.html',1,'']]],
   ['soundtables',['Soundtables',['../group__soundtables.html',1,'']]],
-  ['sqrtbit',['sqrtBit',['../cogl__sqrti_8h.html#aca3bbf89b1bd005b18c4f2bc72c529cb',1,'cogl_sqrti.h']]],
-  ['squareroot',['SquareRoot',['../cogl__sqrti_8h.html#aad40b92bf119565d9d83330b1282b64e',1,'cogl_sqrti.h']]],
   ['stack',['Stack',['../class_stack.html',1,'Stack&lt; T, NUM_ITEMS &gt;'],['../class_stack.html#ab034b819e2382f80d952cf8527dc6e6c',1,'Stack::Stack()']]],
-  ['stack_2eh',['Stack.h',['../_stack_8h.html',1,'']]],
   ['standard',['STANDARD',['../group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1',1,'MozziGuts.h']]],
   ['standard_5fpwm_5fresolution',['STANDARD_PWM_RESOLUTION',['../group__core.html#ga800c094e0a14fc31d87a360b3807a1b8',1,'AudioConfigStandard9bitPwm.h']]],
   ['start',['start',['../class_ead.html#ac385679b58e2f9755029b7da7405b233',1,'Ead::start()'],['../class_ead.html#a146b205e70f4b2293e643ea063f2b38f',1,'Ead::start(unsigned int attack_ms, unsigned int decay_ms)'],['../class_event_delay.html#aa2a731ceb05f95cac1798089448c6aed',1,'EventDelay::start()'],['../class_event_delay.html#a85de9021676dadaba68edd6c5d5afa0e',1,'EventDelay::start(unsigned int delay_milliseconds)'],['../class_portamento.html#af93c2b0ab1efa88d4e15f919401c2337',1,'Portamento::start(unsigned char note)'],['../class_portamento.html#af70701abfdd9f3d788f3b313e38017d0',1,'Portamento::start(Q16n16 note)'],['../class_sample.html#a57307ee93ef0fcff36d543596eb79b72',1,'Sample::start()'],['../class_sample.html#ad2dbae6c05040fd0381653f1a102e6ee',1,'Sample::start(unsigned int startpos)']]],
-  ['startfirstcontroladc',['startFirstControlADC',['../mozzi__analog_8cpp.html#ae82f0803beb919de0a21477ca1bee4c0',1,'startFirstControlADC():&#160;mozzi_analog.cpp'],['../mozzi__analog_8h.html#ae82f0803beb919de0a21477ca1bee4c0',1,'startFirstControlADC():&#160;mozzi_analog.cpp']]],
   ['startmozzi',['startMozzi',['../group__core.html#ga75aa9f4a501f4b167343b8caac8c6837',1,'startMozzi(int control_rate_hz):&#160;MozziGuts.cpp'],['../group__core.html#ga75aa9f4a501f4b167343b8caac8c6837',1,'startMozzi(int control_rate_hz=CONTROL_RATE):&#160;MozziGuts.cpp']]],
-  ['startsecondcontroladc',['startSecondControlADC',['../mozzi__analog_8cpp.html#a149a93bff1cc2db06797027e6b1a9a18',1,'startSecondControlADC():&#160;mozzi_analog.cpp'],['../mozzi__analog_8h.html#a149a93bff1cc2db06797027e6b1a9a18',1,'startSecondControlADC():&#160;mozzi_analog.cpp']]],
-  ['statevariable',['StateVariable',['../class_state_variable.html',1,'StateVariable&lt; FILTER_TYPE &gt;'],['../class_state_variable.html#a9950b71a16f63654552d3e15774d6638',1,'StateVariable::StateVariable()']]],
-  ['statevariable_2eh',['StateVariable.h',['../_state_variable_8h.html',1,'']]]
+  ['statevariable',['StateVariable',['../class_state_variable.html',1,'StateVariable&lt; FILTER_TYPE &gt;'],['../class_state_variable.html#a9950b71a16f63654552d3e15774d6638',1,'StateVariable::StateVariable()']]]
 ];

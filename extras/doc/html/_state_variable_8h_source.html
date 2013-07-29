@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-07-29-17:44</span>
+   &#160;<span id="projectnumber">version 2013-07-29-18:09</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -80,7 +80,7 @@ $(document).ready(function(){initNavTree('_state_variable_8h_source.html','');})
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('_state_variable_8h_source.html','');})
 <div class="title">StateVariable.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_state_variable_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * StateVariable.h</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * This implementation copyright 2012 Tim Barrass.</span></div>
@@ -122,13 +122,13 @@ $(document).ready(function(){initNavTree('_state_variable_8h_source.html','');})
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &quot;Arduino.h&quot;</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &quot;util/atomic.h&quot;</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="mozzi__fixmath_8h.html">mozzi_fixmath.h</a>&quot;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &quot;mozzi_fixmath.h&quot;</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;math.h&quot;</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="mozzi__utils_8h.html">mozzi_utils.h</a>&quot;</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="meta_8h.html">meta.h</a>&quot;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &quot;mozzi_utils.h&quot;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &quot;meta.h&quot;</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="code" href="_state_variable_8h.html#a6fc9fcb59c5ae9d9cd6af2c7aa71061fad0682496c50c56ab8dc39c36724aa97a">   43</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="_state_variable_8h.html#a6fc9fcb59c5ae9d9cd6af2c7aa71061f" title="State Variable Filter (approximation of Chamberlin version) Informed by pseudocode at http://www...">filter_types</a> {<a class="code" href="_state_variable_8h.html#a6fc9fcb59c5ae9d9cd6af2c7aa71061fa0f056d1892baa220efdb9afeca443025">LOWPASS</a>,<a class="code" href="_state_variable_8h.html#a6fc9fcb59c5ae9d9cd6af2c7aa71061fa60d0e520c793b6739bad2b1c2470ee47">BANDPASS</a>,<a class="code" href="_state_variable_8h.html#a6fc9fcb59c5ae9d9cd6af2c7aa71061fa2ef4633b5cfe5eacaff1e7cef80a56e8">HIGHPASS</a>,<a class="code" href="_state_variable_8h.html#a6fc9fcb59c5ae9d9cd6af2c7aa71061fad0682496c50c56ab8dc39c36724aa97a">NOTCH</a>};</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">enum</span> filter_types {LOWPASS,BANDPASS,HIGHPASS,NOTCH};</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">char</span> FILTER_TYPE&gt;</div>
 <div class="line"><a name="l00054"></a><span class="lineno"><a class="code" href="class_state_variable.html">   54</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_state_variable.html" title="A State Variable filter which offers 12db resonant low, high, bandpass and notch modes.">StateVariable</a></div>
@@ -171,7 +171,7 @@ $(document).ready(function(){initNavTree('_state_variable_8h_source.html','');})
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="comment">//ATOMIC_BLOCK(ATOMIC_RESTORESTATE)</span></div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="comment">//{</span></div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="comment">//f = (Q1n15)(((Q16n16_2PI*centre_freq)&gt;&gt;AUDIO_RATE_AS_LSHIFT)&gt;&gt;1);</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            f = (<a class="code" href="group__fixmath.html#ga3e68ac7668fca01f7281a00cdecbc7ba" title="unsigned fractional number using 1 integer bit and 15 fractional bits, represents 0 to 1...">Q1n15</a>)((<a class="code" href="group__fixmath.html#ga4bf1124c7bdac767263b2037211933e3" title="2*PI in Q16n16 format">Q16n16_2PI</a>*centre_freq)&gt;&gt;(<a class="code" href="_mozzi_guts_8h.html#a4185aa30186b5d63775b5e1d50df1df9">AUDIO_RATE_AS_LSHIFT</a>+1));</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            f = (<a class="code" href="group__fixmath.html#ga3e68ac7668fca01f7281a00cdecbc7ba" title="unsigned fractional number using 1 integer bit and 15 fractional bits, represents 0 to 1...">Q1n15</a>)((<a class="code" href="group__fixmath.html#ga4bf1124c7bdac767263b2037211933e3" title="2*PI in Q16n16 format">Q16n16_2PI</a>*centre_freq)&gt;&gt;(AUDIO_RATE_AS_LSHIFT+1));</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="comment">//}</span></div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    }</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
@@ -255,8 +255,8 @@ $(document).ready(function(){initNavTree('_state_variable_8h_source.html','');})
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="_state_variable_8h.html">StateVariable.h</a></li>
-    <li class="footer">Generated on Mon Jul 29 2013 17:44:20 for Mozzi by
+    <li class="navelem"><b>StateVariable.h</b></li>
+    <li class="footer">Generated on Mon Jul 29 2013 18:09:18 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

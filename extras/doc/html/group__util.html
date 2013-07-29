@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-07-29-17:44</span>
+   &#160;<span id="projectnumber">version 2013-07-29-18:09</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -80,7 +80,7 @@ $(document).ready(function(){initNavTree('group__util.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -91,6 +91,7 @@ $(document).ready(function(){initNavTree('group__util.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#files">Files</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -101,6 +102,12 @@ $(document).ready(function(){initNavTree('group__util.html','');});
 <p>Utility functions.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
+Files</h2></td></tr>
+<tr class="memitem:char2mozzi_8py"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="char2mozzi_8py.html">char2mozzi.py</a></td></tr>
+<tr class="memdesc:char2mozzi_8py"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment">A script for converting raw 8 bit sound data files to wavetables for Mozzi.</pre> <br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:struct_int2_type"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util.html#struct_int2_type">Int2Type&lt; I &gt;</a></td></tr>
@@ -124,7 +131,7 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Utility functions. </p>
-<p>Useful for debugging and profiling high frequency code with an oscilloscope, when serial is too slow. </p>
+<p>Includes functions for debugging and profiling high frequency code with an oscilloscope when serial is too slow, some miscellaneous functions used internally by Mozzi, and python scripts for converting or generating sound tables. </p>
 <hr/><h2 class="groupheader">Class Documentation</h2>
 <a name="struct_int2_type" id="struct_int2_type"></a>
 <div class="memitem">
@@ -139,36 +146,15 @@ Functions</h2></td></tr>
 struct Int2Type&lt; I &gt;</h3>
 
 <p>Enables you to instantiate a template based on an integer value. </p>
-<p>For example, this is used in <a class="el" href="_state_variable_8h.html">StateVariable.h</a> to choose a different next() function for each kind of filter, LOWPASS, BANDPASS, HIGHPASS or NOTCH, which are simple integer values 0,1,2,3 provided to the <a class="el" href="class_state_variable.html" title="A State Variable filter which offers 12db resonant low, high, bandpass and notch modes.">StateVariable</a> template on instantiation. Fantastic! It's in C++11, but not yet available in avr-gcc. See "c++ enable_if" </p>
+<p>For example, this is used in <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a> to choose a different next() function for each kind of filter, LOWPASS, BANDPASS, HIGHPASS or NOTCH, which are simple integer values 0,1,2,3 provided to the <a class="el" href="class_state_variable.html" title="A State Variable filter which offers 12db resonant low, high, bandpass and notch modes.">StateVariable</a> template on instantiation. Fantastic! It's in C++11, but not yet available in avr-gcc. See "c++ enable_if" </p>
 
 <p>Definition at line <a class="el" href="meta_8h_source.html#l00020">20</a> of file <a class="el" href="meta_8h_source.html">meta.h</a>.</p>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h3>Public Types</h3></td></tr>
-<tr class="memitem:a21bb06a1d9872a32b8729c961ae30eb0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <a class="el" href="group__util.html#a21bb06a1d9872a32b8729c961ae30eb0afc88b5b34784bb728b4172d2551fbfb4">value</a> = I
+<tr class="memitem:a21bb06a1d9872a32b8729c961ae30eb0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <b>value</b> = I
  }</td></tr>
 <tr class="separator:a21bb06a1d9872a32b8729c961ae30eb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h4 class="groupheader">Member Enumeration Documentation</h4>
-<a class="anchor" id="a21bb06a1d9872a32b8729c961ae30eb0"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;int I&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">anonymous enum</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><em><a class="anchor" id="a21bb06a1d9872a32b8729c961ae30eb0afc88b5b34784bb728b4172d2551fbfb4"></a>value</em>&nbsp;</td><td class="fielddoc">
-</td></tr>
-</table>
-
-<p>Definition at line <a class="el" href="meta_8h_source.html#l00022">22</a> of file <a class="el" href="meta_8h_source.html">meta.h</a>.</p>
-
-</div>
-</div>
 
 </div>
 </div>
@@ -286,7 +272,7 @@ template&lt;int I&gt; </div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Jul 29 2013 17:44:20 for Mozzi by
+    <li class="footer">Generated on Mon Jul 29 2013 18:09:18 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

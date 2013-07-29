@@ -7,6 +7,5 @@ var searchData=
   ['getphasefractional',['getPhaseFractional',['../class_oscil.html#aa774ef68b06f9652e6ac23d4e9332554',1,'Oscil']]],
   ['getrange',['getRange',['../class_auto_range.html#a75c842b27ad3917be6d29e3d35b485f3',1,'AutoRange']]],
   ['getstandarddeviation',['getStandardDeviation',['../class_rolling_stat.html#ade29f8eea338da4879fa692ea2b28bc3',1,'RollingStat::getStandardDeviation()'],['../class_rolling_stat_3_01float_00_01_w_i_n_d_o_w___l_e_n_g_t_h_01_4.html#a8f42b8fb42febcded2d9c303ea7cfd06',1,'RollingStat&lt; float, WINDOW_LENGTH &gt;::getStandardDeviation()']]],
-  ['getvariance',['getVariance',['../class_rolling_stat.html#a9d145736669d070194b8149eec084bc0',1,'RollingStat::getVariance()'],['../class_rolling_stat_3_01float_00_01_w_i_n_d_o_w___l_e_n_g_t_h_01_4.html#a21a604a585c2dec367d2b817f431a591',1,'RollingStat&lt; float, WINDOW_LENGTH &gt;::getVariance()']]],
-  ['groups_2edox',['groups.dox',['../groups_8dox.html',1,'']]]
+  ['getvariance',['getVariance',['../class_rolling_stat.html#a9d145736669d070194b8149eec084bc0',1,'RollingStat::getVariance()'],['../class_rolling_stat_3_01float_00_01_w_i_n_d_o_w___l_e_n_g_t_h_01_4.html#a21a604a585c2dec367d2b817f431a591',1,'RollingStat&lt; float, WINDOW_LENGTH &gt;::getVariance()']]]
 ];

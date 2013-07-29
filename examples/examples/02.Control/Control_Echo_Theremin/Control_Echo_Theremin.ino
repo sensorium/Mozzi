@@ -4,7 +4,7 @@
 
   Demonstrates ControlDelay() for echoing control values,
   and smoothing an analog input from a sensor
-  signal with RecentAverage().
+  signal with RollingAverage().
 
   The circuit: 
  
@@ -25,7 +25,7 @@
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator
-#include <RecentAverage.h>
+#include <RollingAverage.h>
 #include <ControlDelay.h>
 
 #define INPUT_PIN 0 // analog control input
@@ -43,8 +43,8 @@ Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin1(SIN2048_DATA);
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin2(SIN2048_DATA);
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin3(SIN2048_DATA);
 
-// use: RecentAverage <number_type, how_many_to_average> myThing
-RecentAverage <int, 32> kAverage; // how_many_to_average has to be power of 2
+// use: RollingAverage <number_type, how_many_to_average> myThing
+RollingAverage <int, 32> kAverage; // how_many_to_average has to be power of 2
 int averaged;
 
 void setup(){

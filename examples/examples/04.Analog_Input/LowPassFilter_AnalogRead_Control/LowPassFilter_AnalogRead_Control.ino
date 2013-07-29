@@ -3,7 +3,7 @@
  *
  *  This method of reading analog input is now depreciated in Mozzi.
  *  A better way to read analog is to use the asynchronous method
- *  shown in the m_27_adcReadAllChannels_LowPassFilter example.
+ *  shown in the adcReadAllChannels_LowPassFilter example.
  *
  *  Still, there may be a situation where this is useful...
  *  Demonstrates LowPassFilter(), fixed point fractional number use,
@@ -11,7 +11,7 @@
  *  setupFastAnalogRead() is enough to prevent
  *  glitching during analogRead().
  *
- *  Mozzi also provides adcStartConversion() and adcGetResult(),
+ *  Mozzi also provides adcStartConversion() and adcGetResult(unsigned char),
  *  which enable reading analog input one channel at a time without 
  *  blocking other processes.  
  *  (Though in most cases the asynchronous adcGetResult() method is probably simpler and better).
@@ -39,7 +39,6 @@
 #include <mozzi_analog.h>
 #include <mozzi_fixmath.h> // for fractional modulation frequency
 
-#define CONTROL_RATE 64 // powers of 2 please
 
 Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound(CHUM9_DATA);
 Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFilterMod(COS2048_DATA);
@@ -55,14 +54,14 @@ void setup(){
   aCrunchySound.setFreq(2.f);
   lpf.setResonance(200);
   setupFastAnalogRead();
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 
 void updateControl(){
   // change any of the ranges here to suit your inputs, etc.
   
-  unsigned char centre_freq = (unsigned char) (analogRead(CENTRE_FREQ_PIN)>>2); // 0 to 255
+  unsigned char centre_freq = (unsigned char) (analogRead(CENTRE_FREQ_PIN)>>3)+20; // 20 to 157
 
   Q16n16 modulation_speed = ((Q16n16)analogRead(MOD_SPEED_PIN)<<10); // range 0 to 15, Q16n16 fractional
   kFilterMod.setFreq_Q16n16(modulation_speed);

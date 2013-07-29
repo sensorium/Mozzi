@@ -26,8 +26,6 @@
 #include <mozzi_fixmath.h> // for fractional modulation speed
 #include <mozzi_analog.h>
 
-#define CONTROL_RATE 64 // powers of 2 please
-
 Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound(CHUM9_DATA);
 Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFilterMod(COS2048_DATA);
 
@@ -42,14 +40,15 @@ LowPassFilter lpf;
 void setup(){
   aCrunchySound.setFreq(2.f);
   lpf.setResonance(200);
-  adcEnableInterrupt(); // enables the ADC interrupt which gets triggered by adcReadAllChannels()
-  startMozzi(CONTROL_RATE);
+  setupMozziADC(); // for when you're not using Arduino's analogRead()
+  startMozzi();
+
 }
 
 
 void updateControl(){
 
-  unsigned char centre_freq = (unsigned char) (adcGetResult(CENTRE_FREQ_ANALOG_IN)>>2); // 0 to 255
+  unsigned char centre_freq = (unsigned char) (adcGetResult(CENTRE_FREQ_ANALOG_IN)>>3)+20; // 20 to 157
 
   Q16n16 modulation_speed = ((Q16n16)adcGetResult(MOD_SPEED_ANALOG_IN)<<10); // range 0 to 15, Q16n16 fractional
   kFilterMod.setFreq_Q16n16(modulation_speed);

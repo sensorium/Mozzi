@@ -6,6 +6,8 @@
  *  and a way to do PWM on digital pins without disrupting audio.
  *  Control oscillators are used here to modulate the brightness of the leds
  *  between 0-255.
+ *  The technique is explained here:
+ *   http://playground.arduino.cc/Main/PWMallPins
  *  With AUDIO_RATE at 16384 Hz, this gives a 64 Hz pwm duty cycle.
  *  If there is visible flicker, the resolution of the pwm could be made lower,
  *  or the AUDIO_RATE could be increased to 32768 Hz, if the

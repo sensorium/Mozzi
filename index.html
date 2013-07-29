@@ -71,10 +71,11 @@
 			</a>
 		</p>
 		<p>
-			<a class="header_link" href="https://github.com/sensorium/Mozzi/zipball/master">
+			<!-- <a class="header_link" href="https://github.com/sensorium/Mozzi/zipball/master"> -->
+			<a class="header_link" href="http://www.users.on.net/~tim.barrass/mozzi/Mozzi.zip">
 				download<br>
 				<i class="icon-download icon-4x"></i><br>
-				<span id="header_small_label">version 2013-07-13-17:27</span>
+				<span id="header_small_label">version 2013-07-29-18:09</span>
 			</a>
 		</p>
 	</section> 
@@ -263,11 +264,28 @@ Look for code and usage changes <a href="https://github.com/sensorium/Mozzi/blob
 
 <hr />
 
-<h1>Caveats</h1>
+<h1>Caveats and Workarounds</h1>
 
-<p>While Mozzi is running, the Arduino time functions <code>millis()</code>, <code>micros()</code>, <code>delay()</code>, and
-<code>delayMicroseconds()</code> are disabled. Instead, Mozzi provides <code>mozziMicros()</code> for timing, with 61us resolution (in <code>STANDARD</code> mode), and
-<code>EventDelay()</code> for scheduling.  Also, there&#8217;s <code>pauseMozzi()</code> and <code>unpauseMozzi()</code> if the Arduino timers are required for other things.</p>
+<ul>
+<li>Mozzi disables Arduino <code>millis()</code> <code>micros()</code> <code>delay()</code> and <code>delayMicroseconds()</code>.</li>
+</ul>
+
+
+<p>Instead, use <code>EventDelay()</code> for scheduling and <code>mozziMicros()</code> for timing.</p>
+
+<ul>
+<li>Mozzi disables <code>analogWrite()</code> on pins <strong>5</strong> and <strong>6</strong> (Timer 0), <strong>9</strong> and <strong>10</strong> (Timer 1) in <code>STANDARD</code> mode.
+In <code>HIFI</code> mode, pins <strong>3</strong> and <strong>11</strong> (Timer 2) are also out.  Pin numbers vary between boards.</li>
+</ul>
+
+
+<p>You can do PWM on any digital pins by following
+<a href="/Mozzi/downloads/code/examples/11.Communication/Sinewave_PWM_pins_HIFI/Sinewave_PWM_pins_HIFI.ino">this example</a></p>
+
+<h3>Pause Mozzi</h3>
+
+<p>To restore Arduino time and PWM functions, you can use <code>pauseMozzi()</code> to suspend audio and
+control interrupts.  Start again with <code>unpauseMozzi()</code>.</p>
 
 <hr />
 

@@ -39,7 +39,6 @@ var group__fixmath =
     [ "Q8n8", "group__fixmath.html#ga5ae84c3845de6126c16295e05599c163", null ],
     [ "byteDiv", "group__fixmath.html#ga0c6fd804408a6789f49d3f5e07340eb0", null ],
     [ "byteMod", "group__fixmath.html#gaba3a1d38c23a4499cfb219412d0b115b", null ],
-    [ "byteRnd", "group__fixmath.html#ga004d96a59215139e911b92907c37fc22", null ],
     [ "float_to_Q0n16", "group__fixmath.html#ga4d20591828f0189963f1190f7197ba68", null ],
     [ "float_to_Q0n7", "group__fixmath.html#ga1e0eab490ffe9a47fd78bcc449e3b995", null ],
     [ "float_to_Q0n8", "group__fixmath.html#ga00e21c6b9d75ed26cd3bf1b9f4f9482e", null ],

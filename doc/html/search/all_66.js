@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['filter_5ftypes',['filter_types',['../_state_variable_8h.html#a6fc9fcb59c5ae9d9cd6af2c7aa71061f',1,'StateVariable.h']]],
   ['fixmath',['Fixmath',['../group__fixmath.html',1,'']]],
   ['float_5fto_5fq0n16',['float_to_Q0n16',['../group__fixmath.html#ga4d20591828f0189963f1190f7197ba68',1,'mozzi_fixmath.h']]],
   ['float_5fto_5fq0n7',['float_to_Q0n7',['../group__fixmath.html#ga1e0eab490ffe9a47fd78bcc449e3b995',1,'mozzi_fixmath.h']]],
@@ -13,6 +12,5 @@ var searchData=
   ['float_5fto_5fq24n8',['float_to_Q24n8',['../group__fixmath.html#gaf91bc6123ecaff1441660d3abb20bf2e',1,'mozzi_fixmath.h']]],
   ['float_5fto_5fq7n8',['float_to_Q7n8',['../group__fixmath.html#ga2a28dc262b3e79e0f67e4089cccaab45',1,'mozzi_fixmath.h']]],
   ['float_5fto_5fq8n24',['float_to_Q8n24',['../group__fixmath.html#ga33ecb8a512f7d4eff5047d4ad65f5423',1,'mozzi_fixmath.h']]],
-  ['float_5fto_5fq8n8',['float_to_Q8n8',['../group__fixmath.html#ga36132b5f8f95223749b410ca235eef16',1,'mozzi_fixmath.h']]],
-  ['fx_5fshift',['FX_SHIFT',['../_low_pass_filter_8h.html#a9636ab99608c6d1d88c6da7075d4a67b',1,'LowPassFilter.h']]]
+  ['float_5fto_5fq8n8',['float_to_Q8n8',['../group__fixmath.html#ga36132b5f8f95223749b410ca235eef16',1,'mozzi_fixmath.h']]]
 ];

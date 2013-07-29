@@ -71,10 +71,11 @@
 			</a>
 		</p>
 		<p>
-			<a class="header_link" href="https://github.com/sensorium/Mozzi/zipball/master">
+			<!-- <a class="header_link" href="https://github.com/sensorium/Mozzi/zipball/master"> -->
+			<a class="header_link" href="http://www.users.on.net/~tim.barrass/mozzi/Mozzi.zip">
 				download<br>
 				<i class="icon-download icon-4x"></i><br>
-				<span id="header_small_label">version 2013-07-13-17:27</span>
+				<span id="header_small_label">version 2013-07-29-18:09</span>
 			</a>
 		</p>
 	</section> 
@@ -986,7 +987,7 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 </span><span class='line'>
 </span><span class='line'><span class="cm">  Demonstrates ControlDelay() for echoing control values,</span>
 </span><span class='line'><span class="cm">  and smoothing an analog input from a sensor</span>
-</span><span class='line'><span class="cm">  signal with RecentAverage().</span>
+</span><span class='line'><span class="cm">  signal with RollingAverage().</span>
 </span><span class='line'>
 </span><span class='line'><span class="cm">  The circuit: </span>
 </span><span class='line'><span class="cm"> </span>
@@ -1007,7 +1008,7 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator template</span>
 </span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt; </span><span class="c1">// sine table for oscillator</span>
-</span><span class='line'><span class="cp">#include &lt;RecentAverage.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;RollingAverage.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;ControlDelay.h&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="cp">#define INPUT_PIN 0 </span><span class="c1">// analog control input</span>
@@ -1025,8 +1026,8 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 </span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">SIN2048_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aSin2</span><span class="p">(</span><span class="n">SIN2048_DATA</span><span class="p">);</span>
 </span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">SIN2048_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aSin3</span><span class="p">(</span><span class="n">SIN2048_DATA</span><span class="p">);</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">// use: RecentAverage &lt;number_type, how_many_to_average&gt; myThing</span>
-</span><span class='line'><span class="n">RecentAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverage</span><span class="p">;</span> <span class="c1">// how_many_to_average has to be power of 2</span>
+</span><span class='line'><span class="c1">// use: RollingAverage &lt;number_type, how_many_to_average&gt; myThing</span>
+</span><span class='line'><span class="n">RollingAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverage</span><span class="p">;</span> <span class="c1">// how_many_to_average has to be power of 2</span>
 </span><span class='line'><span class="kt">int</span> <span class="n">averaged</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
@@ -2151,123 +2152,6 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 
 <hr />
 
-<p>RCpoll <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
-
-<p>&#8230;(no recording of this one)</p>
-
-<p><button type='button' id='RCpollexpand' onclick='javascript:toggleDisplay(RCpoll, RCpollexpand, RCpollcollapse)'>show sketch</button>
-<button id='RCpollcollapse' style='display:none' onclick='javascript:toggleDisplay(RCpoll, RCpollexpand, RCpollcollapse)'>hide sketch</button></p>
-
-<div id='RCpoll' style='display:none'>
-<figure class='code'><figcaption><span> (RCpoll.ino)</span> <a href='/Mozzi/downloads/code/examples/02.Control/RCpoll/RCpoll.ino'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Sets the frequency of an oscillator with a resistive sensor on a digital pin,</span>
-</span><span class='line'><span class="cm"> *  using Mozzi sonification library.</span>
-</span><span class='line'><span class="cm"> *</span>
-</span><span class='line'><span class="cm"> *  Demonstrates RCpoll to read a resistive sensor on a digital pin,</span>
-</span><span class='line'><span class="cm"> *  without blocking audio output. </span>
-</span><span class='line'><span class="cm"> *  </span>
-</span><span class='line'><span class="cm"> *  Control circuit: http://arduino.cc/en/Tutorial/RCtime</span>
-</span><span class='line'><span class="cm"> *  Values for components which work with this sketch are:</span>
-</span><span class='line'><span class="cm"> *  Sensing Capacitor .1uf (104)</span>
-</span><span class='line'><span class="cm"> *  Variable resistor 1 MegaOhm</span>
-</span><span class='line'><span class="cm"> *  Input resistor 470 Ohms</span>
-</span><span class='line'><span class="cm"> *</span>
-</span><span class='line'><span class="cm"> *  Mozzi help/discussion/announcements:</span>
-</span><span class='line'><span class="cm"> *  https://groups.google.com/forum/#!forum/mozzi-users</span>
-</span><span class='line'><span class="cm"> </span>
-</span><span class='line'><span class="cm"> */</span>
-</span><span class='line'>
-</span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt; </span><span class="c1">// sine table for oscillator</span>
-</span><span class='line'><span class="cp">#include &lt;RCpoll.h&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="cp">#define CONTROL_RATE 128 </span><span class="c1">// powers of 2 please</span>
-</span><span class='line'><span class="cp">#define SENSOR_PIN 4            </span><span class="c1">// digital pin for sensor input</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">SIN2048_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aSin</span><span class="p">(</span><span class="n">SIN2048_DATA</span><span class="p">);</span>
-</span><span class='line'><span class="n">RCpoll</span> <span class="o">&lt;</span><span class="n">SENSOR_PIN</span><span class="o">&gt;</span> <span class="n">kNob</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
-</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">freq</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">kNob</span><span class="p">.</span><span class="n">next</span><span class="p">();</span> <span class="c1">// kNob ranges about 0 to 13</span>
-</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">freq</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">aSin</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">freq</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="kt">int</span> <span class="n">updateAudio</span><span class="p">(){</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">aSin</span><span class="p">.</span><span class="n">next</span><span class="p">();</span> <span class="c1">// 8 bits scaled up to 14 bits</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
-</span><span class='line'>  <span class="n">audioHook</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-</div>
-
-
-<hr />
-
 <h2 class=target_without_link><a id='03.Sensors'>
 03.Sensors</a></h2>
 
@@ -2402,8 +2286,8 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 </span><span class='line'><span class="cm">  using Mozzi sonification library.</span>
 </span><span class='line'>
 </span><span class='line'><span class="cm">  Demonstrates WavePacket, non-blocking analog reads using</span>
-</span><span class='line'><span class="cm">  adcReadAllChannels() and adcGetResult(), and smoothing</span>
-</span><span class='line'><span class="cm">  control signals with RecentAverage.</span>
+</span><span class='line'><span class="cm">  adcReadAllChannels() and adcGetResult(unsigned char), and smoothing</span>
+</span><span class='line'><span class="cm">  control signals with RollingAverage.</span>
 </span><span class='line'><span class="cm">  Also demonstrates AutoMap, which maps unpredictable inputs to a set range.</span>
 </span><span class='line'><span class="cm">  </span>
 </span><span class='line'><span class="cm">  This example goes with a tutorial on the Mozzi site:</span>
@@ -2434,7 +2318,7 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 </span><span class='line'>
 </span><span class='line'> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">mozzi_analog</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
 </span><span class='line'> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">WavePacket</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
-</span><span class='line'> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">RecentAverage</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span><span class='line'> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">RollingAverage</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
 </span><span class='line'> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">AutoMap</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="k">const</span> <span class="kt">int</span> <span class="n">KNOB_PIN</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// set the input for the knob to analog pin 0</span>
@@ -2453,10 +2337,10 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="c1">// for smoothing the control signals</span>
-</span><span class='line'><span class="c1">// use: RecentAverage &lt;number_type, how_many_to_average&gt; myThing</span>
-</span><span class='line'><span class="n">RecentAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">16</span><span class="o">&gt;</span> <span class="n">kAverageF</span><span class="p">;</span>
-</span><span class='line'><span class="n">RecentAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">16</span><span class="o">&gt;</span> <span class="n">kAverageBw</span><span class="p">;</span>
-</span><span class='line'><span class="n">RecentAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">16</span><span class="o">&gt;</span> <span class="n">kAverageCf</span><span class="p">;</span>
+</span><span class='line'><span class="c1">// use: RollingAverage &lt;number_type, how_many_to_average&gt; myThing</span>
+</span><span class='line'><span class="n">RollingAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">16</span><span class="o">&gt;</span> <span class="n">kAverageF</span><span class="p">;</span>
+</span><span class='line'><span class="n">RollingAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">16</span><span class="o">&gt;</span> <span class="n">kAverageBw</span><span class="p">;</span>
+</span><span class='line'><span class="n">RollingAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">16</span><span class="o">&gt;</span> <span class="n">kAverageCf</span><span class="p">;</span>
 </span><span class='line'><span class="n">AutoMap</span> <span class="n">kMapF</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1023</span><span class="p">,</span><span class="n">MIN_F</span><span class="p">,</span><span class="n">MAX_F</span><span class="p">);</span>
 </span><span class='line'><span class="n">AutoMap</span> <span class="n">kMapBw</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1023</span><span class="p">,</span><span class="n">MIN_BW</span><span class="p">,</span><span class="n">MAX_BW</span><span class="p">);</span>
 </span><span class='line'><span class="n">AutoMap</span> <span class="n">kMapCf</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1023</span><span class="p">,</span><span class="n">MIN_CF</span><span class="p">,</span><span class="n">MAX_CF</span><span class="p">);</span>
@@ -2466,7 +2350,7 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 </span><span class='line'>
 </span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
 </span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
-</span><span class='line'>  <span class="c1">// set up async analog reading for adcReadAllChannels() and adcGetResult()</span>
+</span><span class='line'>  <span class="c1">// set up async analog reading for adcReadAllChannels() and adcGetResult(unsigned char)</span>
 </span><span class='line'>  <span class="n">adcEnableInterrupt</span><span class="p">();</span>
 </span><span class='line'>  <span class="c1">// request initial read</span>
 </span><span class='line'>  <span class="n">adcReadAllChannels</span><span class="p">();</span>
@@ -4263,16 +4147,16 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 
 <hr />
 
-<p>Audio_Input_with_Filter_Control <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
+<p>Audio_Input_with_Knob_Filter <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
 
 <p><audio controls>
-<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/04.Analog_Input/Audio_Input_with_Filter_Control/Audio_Input_with_Filter_Control.ogg?raw=true' preload='auto'></source>
-<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/04.Analog_Input/Audio_Input_with_Filter_Control/Audio_Input_with_Filter_Control.mp3?raw=true' preload='auto'></source> echo Your browser does not support the audio element.</audio><br/>
-<button type='button' id='Audio_Input_with_Filter_Controlexpand' onclick='javascript:toggleDisplay(Audio_Input_with_Filter_Control, Audio_Input_with_Filter_Controlexpand, Audio_Input_with_Filter_Controlcollapse)'>show sketch</button>
-<button id='Audio_Input_with_Filter_Controlcollapse' style='display:none' onclick='javascript:toggleDisplay(Audio_Input_with_Filter_Control, Audio_Input_with_Filter_Controlexpand, Audio_Input_with_Filter_Controlcollapse)'>hide sketch</button></p>
+<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/04.Analog_Input/Audio_Input_with_Knob_Filter/Audio_Input_with_Knob_Filter.ogg?raw=true' preload='auto'></source>
+<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/04.Analog_Input/Audio_Input_with_Knob_Filter/Audio_Input_with_Knob_Filter.mp3?raw=true' preload='auto'></source> echo Your browser does not support the audio element.</audio><br/>
+<button type='button' id='Audio_Input_with_Knob_Filterexpand' onclick='javascript:toggleDisplay(Audio_Input_with_Knob_Filter, Audio_Input_with_Knob_Filterexpand, Audio_Input_with_Knob_Filtercollapse)'>show sketch</button>
+<button id='Audio_Input_with_Knob_Filtercollapse' style='display:none' onclick='javascript:toggleDisplay(Audio_Input_with_Knob_Filter, Audio_Input_with_Knob_Filterexpand, Audio_Input_with_Knob_Filtercollapse)'>hide sketch</button></p>
 
-<div id='Audio_Input_with_Filter_Control' style='display:none'>
-<figure class='code'><figcaption><span> (Audio_Input_with_Filter_Control.ino)</span> <a href='/Mozzi/downloads/code/examples/04.Analog_Input/Audio_Input_with_Filter_Control/Audio_Input_with_Filter_Control.ino'>download</a></figcaption>
+<div id='Audio_Input_with_Knob_Filter' style='display:none'>
+<figure class='code'><figcaption><span> (Audio_Input_with_Knob_Filter.ino)</span> <a href='/Mozzi/downloads/code/examples/04.Analog_Input/Audio_Input_with_Knob_Filter/Audio_Input_with_Knob_Filter.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -4331,48 +4215,48 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 <span class='line-number'>56</span>
 <span class='line-number'>57</span>
 <span class='line-number'>58</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Test of audio input and processing</span>
-</span><span class='line'><span class="cm"> *  using Mozzi sonification library.</span>
-</span><span class='line'><span class="cm"> *</span>
-</span><span class='line'><span class="cm"> *  Configuration: requires &quot;#define USE_AUDIO_INPUT true&quot; to be in</span>
-</span><span class='line'><span class="cm"> *  Mozzi/mozzi_config.h file.</span>
-</span><span class='line'><span class="cm"> *</span>
-</span><span class='line'><span class="cm"> *  Audio Circuit: Audio input on pin 0, output on digital pin 9 (on a Uno or similar), or</span>
-</span><span class='line'><span class="cm"> *  check the README or http://sensorium.github.com/Mozzi/</span>
-</span><span class='line'><span class="cm"> *  </span>
-</span><span class='line'><span class="cm"> *  Control circuit: http://arduino.cc/en/Tutorial/RCtime</span>
-</span><span class='line'><span class="cm"> *  Values for components which work with this sketch are:</span>
-</span><span class='line'><span class="cm"> *  Sensing Capacitor .1uf (104)</span>
-</span><span class='line'><span class="cm"> *  Variable resistor 1 MegaOhm</span>
-</span><span class='line'><span class="cm"> *  Input resistor 470 Ohms</span>
-</span><span class='line'><span class="cm"> *</span>
-</span><span class='line'><span class="cm"> *  Mozzi help/discussion/announcements:</span>
-</span><span class='line'><span class="cm"> *  https://groups.google.com/forum/#!forum/mozzi-users</span>
-</span><span class='line'><span class="cm"> </span>
-</span><span class='line'><span class="cm"> */</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  </span>
+</span><span class='line'><span class="cm">  Test of audio input and processing with control input,</span>
+</span><span class='line'><span class="cm">  using Mozzi sonification library.</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">  Configuration: requires &quot;#define USE_AUDIO_INPUT true&quot; to be in</span>
+</span><span class='line'><span class="cm">  Mozzi/mozzi_config.h file.</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">  Circuit: </span>
+</span><span class='line'><span class="cm">  * Audio input on pin 0</span>
+</span><span class='line'><span class="cm">  * output on digital pin 9 (on a Uno or similar), or</span>
+</span><span class='line'><span class="cm">    check the README or http://sensorium.github.com/Mozzi/</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">  *  Potentiometer connected to analog pin A1.</span>
+</span><span class='line'><span class="cm">  *  Center pin of the potentiometer goes to the analog pin.</span>
+</span><span class='line'><span class="cm">  *  Side pins of the potentiometer go to +5V and ground</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">  Mozzi help/discussion/announcements:</span>
+</span><span class='line'><span class="cm">  https://groups.google.com/forum/#!forum/mozzi-users</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;LowPassFilter.h&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;RCpoll.h&gt; </span><span class="c1">// enables </span>
+</span><span class='line'><span class="cp">#include &lt;mozzi_analog.h&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="cp">#define CONTROL_RATE 128 </span><span class="c1">// powers of 2 please</span>
-</span><span class='line'><span class="cp">#define AUDIO_PIN 0              </span><span class="c1">// analog pin for audio input</span>
-</span><span class='line'><span class="cp">#define SENSOR_PIN 4            </span><span class="c1">// digital pin for sensor input</span>
+</span><span class='line'><span class="cp">#define KNOB_PIN 1</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">LowPassFilter</span> <span class="n">lpf</span><span class="p">;</span>
-</span><span class='line'><span class="n">RCpoll</span> <span class="o">&lt;</span><span class="n">SENSOR_PIN</span><span class="o">&gt;</span> <span class="n">kNob</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'>
+</span><span class='line'><span class="c1">// no special setup required for analog input if USE_AUDIO_INPUT=true in mozzi_config.h</span>
 </span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
-</span><span class='line'>  <span class="n">pinMode</span><span class="p">(</span><span class="n">AUDIO_PIN</span><span class="p">,</span><span class="n">INPUT</span><span class="p">);</span>
 </span><span class='line'>  <span class="n">lpf</span><span class="p">.</span><span class="n">setResonance</span><span class="p">(</span><span class="mi">220</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">startMozzi</span><span class="p">();</span>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span>
-</span><span class='line'>  <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">cutoff_freq</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">kNob</span><span class="p">.</span><span class="n">next</span><span class="p">();</span> <span class="c1">// kNob ranges about 0 to 13</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">knob</span> <span class="o">=</span> <span class="n">adcGetResult</span><span class="p">(</span><span class="n">KNOB_PIN</span><span class="p">);</span> <span class="c1">// gets whatever the last conversion was</span>
+</span><span class='line'>  <span class="n">adcReadAllChannels</span><span class="p">();</span> <span class="c1">// for next time through</span>
+</span><span class='line'>  <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">cutoff_freq</span> <span class="o">=</span> <span class="n">knob</span><span class="o">&gt;&gt;</span><span class="mi">2</span><span class="p">;</span> <span class="c1">// range 0-255</span>
 </span><span class='line'>  <span class="n">lpf</span><span class="p">.</span><span class="n">setCutoffFreq</span><span class="p">(</span><span class="n">cutoff_freq</span><span class="p">);</span>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
@@ -4381,7 +4265,142 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 </span><span class='line'>  <span class="c1">// subtracting 512 moves the unsigned audio data into 0-centred, </span>
 </span><span class='line'>  <span class="c1">// signed range required by all Mozzi units</span>
 </span><span class='line'>  <span class="kt">int</span> <span class="n">asig</span> <span class="o">=</span> <span class="n">getAudioInput</span><span class="p">()</span><span class="o">-</span><span class="mi">512</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">asig</span> <span class="o">=</span> <span class="n">lpf</span><span class="p">.</span><span class="n">next</span><span class="p">(</span><span class="n">asig</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">asig</span> <span class="o">=</span> <span class="n">lpf</span><span class="p">.</span><span class="n">next</span><span class="p">(</span><span class="n">asig</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">asig</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">audioHook</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+</div>
+
+
+<hr />
+
+<p>Audio_and_Control_Input <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
+
+<p>&#8230;(no recording of this one)</p>
+
+<p><button type='button' id='Audio_and_Control_Inputexpand' onclick='javascript:toggleDisplay(Audio_and_Control_Input, Audio_and_Control_Inputexpand, Audio_and_Control_Inputcollapse)'>show sketch</button>
+<button id='Audio_and_Control_Inputcollapse' style='display:none' onclick='javascript:toggleDisplay(Audio_and_Control_Input, Audio_and_Control_Inputexpand, Audio_and_Control_Inputcollapse)'>hide sketch</button></p>
+
+<div id='Audio_and_Control_Input' style='display:none'>
+<figure class='code'><figcaption><span> (Audio_and_Control_Input.ino)</span> <a href='/Mozzi/downloads/code/examples/04.Analog_Input/Audio_and_Control_Input/Audio_and_Control_Input.ino'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Test of audio and control rate analog input using Mozzi sonification library.</span>
+</span><span class='line'><span class="cm"> </span>
+</span><span class='line'><span class="cm"> An audio input using the range between 0 to 5V on analog pin A0</span>
+</span><span class='line'><span class="cm"> is sampled and output on digital pin 9.  </span>
+</span><span class='line'><span class="cm"> All the other analog channels are sampled at control rate and printed to Serial.</span>
+</span><span class='line'><span class="cm"> </span>
+</span><span class='line'><span class="cm"> Configuration: requires &quot;#define USE_AUDIO_INPUT true&quot; to be in</span>
+</span><span class='line'><span class="cm"> Mozzi/mozzi_config.h file.</span>
+</span><span class='line'><span class="cm"> </span>
+</span><span class='line'><span class="cm"> Circuit: </span>
+</span><span class='line'><span class="cm"> Audio cable centre wire on pin A0, outer shielding to Arduino Ground.</span>
+</span><span class='line'><span class="cm"> Audio output on digital pin 9 (on a Uno or similar), or</span>
+</span><span class='line'><span class="cm"> check the README or http://sensorium.github.com/Mozzi/</span>
+</span><span class='line'><span class="cm"> Analog sensor inputs on any other analog input pins.</span>
+</span><span class='line'><span class="cm"> The serial printing might cause glitches, so try commenting </span>
+</span><span class='line'><span class="cm"> them out to test if this is a problem.</span>
+</span><span class='line'><span class="cm"> </span>
+</span><span class='line'><span class="cm"> Mozzi help/discussion/announcements:</span>
+</span><span class='line'><span class="cm"> https://groups.google.com/forum/#!forum/mozzi-users</span>
+</span><span class='line'><span class="cm"> </span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;mozzi_analog.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;num_analog_inputs &quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">NUM_ANALOG_INPUTS</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">startMozzi</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">NUM_ANALOG_INPUTS</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span> <span class="c1">// channel 0 is used for audio</span>
+</span><span class='line'>    <span class="c1">// adcGetResult(n) gets the most recent reading for analog channel n</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">adcGetResult</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="c1">// tab</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// start the next read cycle in the background</span>
+</span><span class='line'>  <span class="n">adcReadAllChannels</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">updateAudio</span><span class="p">(){</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">asig</span> <span class="o">=</span> <span class="n">getAudioInput</span><span class="p">();</span> <span class="c1">// range 0-1023</span>
+</span><span class='line'>  <span class="n">asig</span> <span class="o">=</span> <span class="n">asig</span> <span class="o">-</span> <span class="mi">512</span><span class="p">;</span> <span class="c1">// now range is -512 to 511</span>
+</span><span class='line'>  <span class="c1">// output range in STANDARD mode is -244 to 243, </span>
+</span><span class='line'>  <span class="c1">// so you might need to adjust your signal to suit</span>
 </span><span class='line'>  <span class="k">return</span> <span class="n">asig</span><span class="p">;</span>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
@@ -4492,13 +4511,12 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 <span class='line-number'>85</span>
 <span class='line-number'>86</span>
 <span class='line-number'>87</span>
-<span class='line-number'>88</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of filtering a wave, with analog inputs for control,</span>
 </span><span class='line'><span class="cm"> *  using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm"> *</span>
 </span><span class='line'><span class="cm"> *  This method of reading analog input is now depreciated in Mozzi.</span>
 </span><span class='line'><span class="cm"> *  A better way to read analog is to use the asynchronous method</span>
-</span><span class='line'><span class="cm"> *  shown in the m_27_adcReadAllChannels_LowPassFilter example.</span>
+</span><span class='line'><span class="cm"> *  shown in the adcReadAllChannels_LowPassFilter example.</span>
 </span><span class='line'><span class="cm"> *</span>
 </span><span class='line'><span class="cm"> *  Still, there may be a situation where this is useful...</span>
 </span><span class='line'><span class="cm"> *  Demonstrates LowPassFilter(), fixed point fractional number use,</span>
@@ -4506,7 +4524,7 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 </span><span class='line'><span class="cm"> *  setupFastAnalogRead() is enough to prevent</span>
 </span><span class='line'><span class="cm"> *  glitching during analogRead().</span>
 </span><span class='line'><span class="cm"> *</span>
-</span><span class='line'><span class="cm"> *  Mozzi also provides adcStartConversion() and adcGetResult(),</span>
+</span><span class='line'><span class="cm"> *  Mozzi also provides adcStartConversion() and adcGetResult(unsigned char),</span>
 </span><span class='line'><span class="cm"> *  which enable reading analog input one channel at a time without </span>
 </span><span class='line'><span class="cm"> *  blocking other processes.  </span>
 </span><span class='line'><span class="cm"> *  (Though in most cases the asynchronous adcGetResult() method is probably simpler and better).</span>
@@ -4534,7 +4552,6 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 </span><span class='line'><span class="cp">#include &lt;mozzi_analog.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;mozzi_fixmath.h&gt; </span><span class="c1">// for fractional modulation frequency</span>
 </span><span class='line'>
-</span><span class='line'><span class="cp">#define CONTROL_RATE 64 </span><span class="c1">// powers of 2 please</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">Oscil</span><span class="o">&lt;</span><span class="n">CHUM9_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aCrunchySound</span><span class="p">(</span><span class="n">CHUM9_DATA</span><span class="p">);</span>
 </span><span class='line'><span class="n">Oscil</span><span class="o">&lt;</span><span class="n">COS2048_NUM_CELLS</span><span class="p">,</span> <span class="n">CONTROL_RATE</span><span class="o">&gt;</span> <span class="n">kFilterMod</span><span class="p">(</span><span class="n">COS2048_DATA</span><span class="p">);</span>
@@ -4550,14 +4567,14 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 </span><span class='line'>  <span class="n">aCrunchySound</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="mf">2.f</span><span class="p">);</span>
 </span><span class='line'>  <span class="n">lpf</span><span class="p">.</span><span class="n">setResonance</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
 </span><span class='line'>  <span class="n">setupFastAnalogRead</span><span class="p">();</span>
-</span><span class='line'>  <span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">startMozzi</span><span class="p">();</span>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span>
 </span><span class='line'>  <span class="c1">// change any of the ranges here to suit your inputs, etc.</span>
 </span><span class='line'>
-</span><span class='line'>  <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">centre_freq</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span> <span class="p">(</span><span class="n">analogRead</span><span class="p">(</span><span class="n">CENTRE_FREQ_PIN</span><span class="p">)</span><span class="o">&gt;&gt;</span><span class="mi">2</span><span class="p">);</span> <span class="c1">// 0 to 255</span>
+</span><span class='line'>  <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">centre_freq</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span> <span class="p">(</span><span class="n">analogRead</span><span class="p">(</span><span class="n">CENTRE_FREQ_PIN</span><span class="p">)</span><span class="o">&gt;&gt;</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="mi">20</span><span class="p">;</span> <span class="c1">// 20 to 157</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="n">Q16n16</span> <span class="n">modulation_speed</span> <span class="o">=</span> <span class="p">((</span><span class="n">Q16n16</span><span class="p">)</span><span class="n">analogRead</span><span class="p">(</span><span class="n">MOD_SPEED_PIN</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="mi">10</span><span class="p">);</span> <span class="c1">// range 0 to 15, Q16n16 fractional</span>
 </span><span class='line'>  <span class="n">kFilterMod</span><span class="p">.</span><span class="n">setFreq_Q16n16</span><span class="p">(</span><span class="n">modulation_speed</span><span class="p">);</span>
@@ -4802,7 +4819,6 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 <span class='line-number'>74</span>
 <span class='line-number'>75</span>
 <span class='line-number'>76</span>
-<span class='line-number'>77</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of reading analog inputs to control a filter,</span>
 </span><span class='line'><span class="cm"> *  using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm"> *</span>
@@ -4831,8 +4847,6 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 </span><span class='line'><span class="cp">#include &lt;mozzi_fixmath.h&gt; </span><span class="c1">// for fractional modulation speed</span>
 </span><span class='line'><span class="cp">#include &lt;mozzi_analog.h&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="cp">#define CONTROL_RATE 64 </span><span class="c1">// powers of 2 please</span>
-</span><span class='line'>
 </span><span class='line'><span class="n">Oscil</span><span class="o">&lt;</span><span class="n">CHUM9_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aCrunchySound</span><span class="p">(</span><span class="n">CHUM9_DATA</span><span class="p">);</span>
 </span><span class='line'><span class="n">Oscil</span><span class="o">&lt;</span><span class="n">COS2048_NUM_CELLS</span><span class="p">,</span> <span class="n">CONTROL_RATE</span><span class="o">&gt;</span> <span class="n">kFilterMod</span><span class="p">(</span><span class="n">COS2048_DATA</span><span class="p">);</span>
 </span><span class='line'>
@@ -4847,14 +4861,15 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 </span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
 </span><span class='line'>  <span class="n">aCrunchySound</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="mf">2.f</span><span class="p">);</span>
 </span><span class='line'>  <span class="n">lpf</span><span class="p">.</span><span class="n">setResonance</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">adcEnableInterrupt</span><span class="p">();</span> <span class="c1">// enables the ADC interrupt which gets triggered by adcReadAllChannels()</span>
-</span><span class='line'>  <span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">setupMozziADC</span><span class="p">();</span> <span class="c1">// for when you&#39;re not using Arduino&#39;s analogRead()</span>
+</span><span class='line'>  <span class="n">startMozzi</span><span class="p">();</span>
+</span><span class='line'>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span>
 </span><span class='line'>
-</span><span class='line'>  <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">centre_freq</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span> <span class="p">(</span><span class="n">adcGetResult</span><span class="p">(</span><span class="n">CENTRE_FREQ_ANALOG_IN</span><span class="p">)</span><span class="o">&gt;&gt;</span><span class="mi">2</span><span class="p">);</span> <span class="c1">// 0 to 255</span>
+</span><span class='line'>  <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">centre_freq</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span> <span class="p">(</span><span class="n">adcGetResult</span><span class="p">(</span><span class="n">CENTRE_FREQ_ANALOG_IN</span><span class="p">)</span><span class="o">&gt;&gt;</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="mi">20</span><span class="p">;</span> <span class="c1">// 20 to 157</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="n">Q16n16</span> <span class="n">modulation_speed</span> <span class="o">=</span> <span class="p">((</span><span class="n">Q16n16</span><span class="p">)</span><span class="n">adcGetResult</span><span class="p">(</span><span class="n">MOD_SPEED_ANALOG_IN</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="mi">10</span><span class="p">);</span> <span class="c1">// range 0 to 15, Q16n16 fractional</span>
 </span><span class='line'>  <span class="n">kFilterMod</span><span class="p">.</span><span class="n">setFreq_Q16n16</span><span class="p">(</span><span class="n">modulation_speed</span><span class="p">);</span>
@@ -5027,9 +5042,10 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 
 <p>DCfilter <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
 
-<p>&#8230;(no recording of this one)</p>
-
-<p><button type='button' id='DCfilterexpand' onclick='javascript:toggleDisplay(DCfilter, DCfilterexpand, DCfiltercollapse)'>show sketch</button>
+<p><audio controls>
+<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/05.Control_Filters/DCfilter/DCfilter.ogg?raw=true' preload='auto'></source>
+<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/05.Control_Filters/DCfilter/DCfilter.mp3?raw=true' preload='auto'></source> echo Your browser does not support the audio element.</audio><br/>
+<button type='button' id='DCfilterexpand' onclick='javascript:toggleDisplay(DCfilter, DCfilterexpand, DCfiltercollapse)'>show sketch</button>
 <button id='DCfiltercollapse' style='display:none' onclick='javascript:toggleDisplay(DCfilter, DCfilterexpand, DCfiltercollapse)'>hide sketch</button></p>
 
 <div id='DCfilter' style='display:none'>
@@ -5310,16 +5326,16 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 
 <hr />
 
-<p>RecentAverage <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
+<p>RollingAverage <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
 
 <p><audio controls>
-<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/05.Control_Filters/RecentAverage/RecentAverage.ogg?raw=true' preload='auto'></source>
-<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/05.Control_Filters/RecentAverage/RecentAverage.mp3?raw=true' preload='auto'></source> echo Your browser does not support the audio element.</audio><br/>
-<button type='button' id='RecentAverageexpand' onclick='javascript:toggleDisplay(RecentAverage, RecentAverageexpand, RecentAveragecollapse)'>show sketch</button>
-<button id='RecentAveragecollapse' style='display:none' onclick='javascript:toggleDisplay(RecentAverage, RecentAverageexpand, RecentAveragecollapse)'>hide sketch</button></p>
+<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/05.Control_Filters/RollingAverage/RollingAverage.ogg?raw=true' preload='auto'></source>
+<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/05.Control_Filters/RollingAverage/RollingAverage.mp3?raw=true' preload='auto'></source> echo Your browser does not support the audio element.</audio><br/>
+<button type='button' id='RollingAverageexpand' onclick='javascript:toggleDisplay(RollingAverage, RollingAverageexpand, RollingAveragecollapse)'>show sketch</button>
+<button id='RollingAveragecollapse' style='display:none' onclick='javascript:toggleDisplay(RollingAverage, RollingAverageexpand, RollingAveragecollapse)'>hide sketch</button></p>
 
-<div id='RecentAverage' style='display:none'>
-<figure class='code'><figcaption><span> (RecentAverage.ino)</span> <a href='/Mozzi/downloads/code/examples/05.Control_Filters/RecentAverage/RecentAverage.ino'>download</a></figcaption>
+<div id='RollingAverage' style='display:none'>
+<figure class='code'><figcaption><span> (RollingAverage.ino)</span> <a href='/Mozzi/downloads/code/examples/05.Control_Filters/RollingAverage/RollingAverage.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -5375,13 +5391,19 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 <span class='line-number'>53</span>
 <span class='line-number'>54</span>
 <span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example changing the frequency of 2 sinewaves with 1 analog input,</span>
-</span><span class='line'><span class="cm"> *  using RecentAverage() to filter one of the control signals </span>
+</span><span class='line'><span class="cm"> *  using RollingAverage() to filter one of the control signals </span>
 </span><span class='line'><span class="cm"> *  and the other one unfiltered,</span>
 </span><span class='line'><span class="cm"> *  using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm"> *</span>
 </span><span class='line'><span class="cm"> *  Demonstrates the difference between a raw control</span>
-</span><span class='line'><span class="cm"> *  signal and one smoothed with RecentAverage().</span>
+</span><span class='line'><span class="cm"> *  signal and one smoothed with RollingAverage().</span>
 </span><span class='line'><span class="cm"> *</span>
 </span><span class='line'><span class="cm"> *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or </span>
 </span><span class='line'><span class="cm"> *  check the README or http://sensorium.github.com/Mozzi/</span>
@@ -5396,19 +5418,20 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator template</span>
 </span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt; </span><span class="c1">// sine table for oscillator</span>
-</span><span class='line'><span class="cp">#include &lt;RecentAverage.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;RollingAverage.h&gt;</span>
 </span><span class='line'>
-</span><span class='line'> <span class="err">#</span><span class="n">define</span> <span class="n">INPUT_PIN</span> <span class="mi">0</span> <span class="c1">// analog control input</span>
+</span><span class='line'><span class="cp">#define INPUT_PIN 0 </span><span class="c1">// analog control input</span>
 </span><span class='line'>
-</span><span class='line'> <span class="c1">// oscils to compare bumpy to averaged control input</span>
-</span><span class='line'> <span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">SIN2048_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aSin0</span><span class="p">(</span><span class="n">SIN2048_DATA</span><span class="p">);</span>
-</span><span class='line'> <span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">SIN2048_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aSin1</span><span class="p">(</span><span class="n">SIN2048_DATA</span><span class="p">);</span>
+</span><span class='line'><span class="c1">// oscils to compare bumpy to averaged control input</span>
+</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">SIN2048_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aSin0</span><span class="p">(</span><span class="n">SIN2048_DATA</span><span class="p">);</span>
+</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">SIN2048_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aSin1</span><span class="p">(</span><span class="n">SIN2048_DATA</span><span class="p">);</span>
 </span><span class='line'>
-</span><span class='line'> <span class="c1">// use: RecentAverage &lt;number_type, how_many_to_average&gt; myThing</span>
-</span><span class='line'><span class="n">RecentAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverage</span><span class="p">;</span> <span class="c1">// how_many_to_average has to be power of 2</span>
+</span><span class='line'><span class="c1">// use: RollingAverage &lt;number_type, how_many_to_average&gt; myThing</span>
+</span><span class='line'><span class="n">RollingAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverage</span><span class="p">;</span> <span class="c1">// how_many_to_average has to be power of 2</span>
 </span><span class='line'><span class="kt">int</span> <span class="n">averaged</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
 </span><span class='line'>  <span class="n">startMozzi</span><span class="p">();</span>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
@@ -5416,6 +5439,11 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 </span><span class='line'><span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span>
 </span><span class='line'>  <span class="kt">int</span> <span class="n">bumpy_input</span> <span class="o">=</span> <span class="n">analogRead</span><span class="p">(</span><span class="n">INPUT_PIN</span><span class="p">);</span>
 </span><span class='line'>  <span class="n">averaged</span> <span class="o">=</span> <span class="n">kAverage</span><span class="p">.</span><span class="n">next</span><span class="p">(</span><span class="n">bumpy_input</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;bumpy </span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">bumpy_input</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s"> averaged </span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">averaged</span><span class="p">);</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="n">aSin0</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">bumpy_input</span><span class="p">);</span>
 </span><span class='line'>  <span class="n">aSin1</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">averaged</span><span class="p">);</span>
@@ -7545,17 +7573,17 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 </span><span class='line'>
 </span><span class='line'> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">mozzi_analog</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
 </span><span class='line'> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">WavePacket</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
-</span><span class='line'> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">RecentAverage</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span><span class='line'> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">RollingAverage</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="cp">#define FUNDAMENTAL_PIN 0</span>
 </span><span class='line'><span class="cp">#define BANDWIDTH_PIN 1</span>
 </span><span class='line'><span class="cp">#define CENTREFREQ_PIN 2</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">// for smoothing the control signals</span>
-</span><span class='line'><span class="c1">// use: RecentAverage &lt;number_type, how_many_to_average&gt; myThing</span>
-</span><span class='line'><span class="n">RecentAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverageF</span><span class="p">;</span>
-</span><span class='line'><span class="n">RecentAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverageBw</span><span class="p">;</span>
-</span><span class='line'><span class="n">RecentAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverageCf</span><span class="p">;</span>
+</span><span class='line'><span class="c1">// use: RollingAverage &lt;number_type, how_many_to_average&gt; myThing</span>
+</span><span class='line'><span class="n">RollingAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverageF</span><span class="p">;</span>
+</span><span class='line'><span class="n">RollingAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverageBw</span><span class="p">;</span>
+</span><span class='line'><span class="n">RollingAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverageCf</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">WavePacket</span> <span class="o">&lt;</span><span class="n">DOUBLE</span><span class="o">&gt;</span> <span class="n">wavey</span><span class="p">;</span> <span class="c1">// DOUBLE selects 2 overlapping streams</span>
 </span><span class='line'>
@@ -7682,7 +7710,7 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 </span><span class='line'>
 </span><span class='line'><span class="cp">#include &lt;mozzi_analog.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;WavePacketSample.h&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;RecentAverage.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;RollingAverage.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;samples/raven_arh_int8.h&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="cp">#define FUNDAMENTAL_PIN 0</span>
@@ -7690,10 +7718,10 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 </span><span class='line'><span class="cp">#define CENTREFREQ_PIN 2</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">// for smoothing the control signals</span>
-</span><span class='line'><span class="c1">// use: RecentAverage &lt;number_type, how_many_to_average&gt; myThing</span>
-</span><span class='line'><span class="n">RecentAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverageF</span><span class="p">;</span>
-</span><span class='line'><span class="n">RecentAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverageBw</span><span class="p">;</span>
-</span><span class='line'><span class="n">RecentAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverageCf</span><span class="p">;</span>
+</span><span class='line'><span class="c1">// use: RollingAverage &lt;number_type, how_many_to_average&gt; myThing</span>
+</span><span class='line'><span class="n">RollingAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverageF</span><span class="p">;</span>
+</span><span class='line'><span class="n">RollingAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverageBw</span><span class="p">;</span>
+</span><span class='line'><span class="n">RollingAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverageCf</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">WavePacketSample</span> <span class="o">&lt;</span><span class="n">DOUBLE</span><span class="o">&gt;</span> <span class="n">wavey</span><span class="p">;</span> <span class="c1">// DOUBLE selects 2 overlapping streams</span>
 </span><span class='line'>
@@ -7813,17 +7841,17 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 </span><span class='line'>
 </span><span class='line'> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">mozzi_analog</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
 </span><span class='line'> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">WavePacket</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
-</span><span class='line'> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">RecentAverage</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span><span class='line'> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">RollingAverage</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="cp">#define FUNDAMENTAL_PIN 0</span>
 </span><span class='line'><span class="cp">#define BANDWIDTH_PIN 1</span>
 </span><span class='line'><span class="cp">#define CENTREFREQ_PIN 2</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">// for smoothing the control signals</span>
-</span><span class='line'><span class="c1">// use: RecentAverage &lt;number_type, how_many_to_average&gt; myThing</span>
-</span><span class='line'><span class="n">RecentAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverageF</span><span class="p">;</span>
-</span><span class='line'><span class="n">RecentAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverageBw</span><span class="p">;</span>
-</span><span class='line'><span class="n">RecentAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverageCf</span><span class="p">;</span>
+</span><span class='line'><span class="c1">// use: RollingAverage &lt;number_type, how_many_to_average&gt; myThing</span>
+</span><span class='line'><span class="n">RollingAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverageF</span><span class="p">;</span>
+</span><span class='line'><span class="n">RollingAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverageBw</span><span class="p">;</span>
+</span><span class='line'><span class="n">RollingAverage</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">32</span><span class="o">&gt;</span> <span class="n">kAverageCf</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">WavePacket</span> <span class="o">&lt;</span><span class="n">SINGLE</span><span class="o">&gt;</span> <span class="n">wavey</span><span class="p">;</span> <span class="c1">// SINGLE selects 1 non-overlapping stream</span>
 </span><span class='line'>
@@ -11367,10 +11395,9 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 
 <p>Sinewave_PWM_leds_HIFI <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
 
-<p><audio controls>
-<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/11.Communication/Sinewave_PWM_leds_HIFI/Sinewave_PWM_leds_HIFI.ogg?raw=true' preload='auto'></source>
-<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/11.Communication/Sinewave_PWM_leds_HIFI/Sinewave_PWM_leds_HIFI.mp3?raw=true' preload='auto'></source> echo Your browser does not support the audio element.</audio><br/>
-<button type='button' id='Sinewave_PWM_leds_HIFIexpand' onclick='javascript:toggleDisplay(Sinewave_PWM_leds_HIFI, Sinewave_PWM_leds_HIFIexpand, Sinewave_PWM_leds_HIFIcollapse)'>show sketch</button>
+<p>&#8230;(no recording of this one)</p>
+
+<p><button type='button' id='Sinewave_PWM_leds_HIFIexpand' onclick='javascript:toggleDisplay(Sinewave_PWM_leds_HIFI, Sinewave_PWM_leds_HIFIexpand, Sinewave_PWM_leds_HIFIcollapse)'>show sketch</button>
 <button id='Sinewave_PWM_leds_HIFIcollapse' style='display:none' onclick='javascript:toggleDisplay(Sinewave_PWM_leds_HIFI, Sinewave_PWM_leds_HIFIexpand, Sinewave_PWM_leds_HIFIcollapse)'>hide sketch</button></p>
 
 <div id='Sinewave_PWM_leds_HIFI' style='display:none'>
@@ -11490,6 +11517,8 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 <span class='line-number'>113</span>
 <span class='line-number'>114</span>
 <span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example playing a sinewave </span>
 </span><span class='line'><span class="cm"> *  and changing the brightness of 3 leds</span>
 </span><span class='line'><span class="cm"> *  using Mozzi sonification library.</span>
@@ -11498,6 +11527,8 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 </span><span class='line'><span class="cm"> *  and a way to do PWM on digital pins without disrupting audio.</span>
 </span><span class='line'><span class="cm"> *  Control oscillators are used here to modulate the brightness of the leds</span>
 </span><span class='line'><span class="cm"> *  between 0-255.</span>
+</span><span class='line'><span class="cm"> *  The technique is explained here:</span>
+</span><span class='line'><span class="cm"> *   http://playground.arduino.cc/Main/PWMallPins</span>
 </span><span class='line'><span class="cm"> *  With AUDIO_RATE at 16384 Hz, this gives a 64 Hz pwm duty cycle.</span>
 </span><span class='line'><span class="cm"> *  If there is visible flicker, the resolution of the pwm could be made lower,</span>
 </span><span class='line'><span class="cm"> *  or the AUDIO_RATE could be increased to 32768 Hz, if the</span>

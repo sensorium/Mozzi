@@ -15,17 +15,17 @@
  
  #include <mozzi_analog.h>
  #include <WavePacket.h>
- #include <RecentAverage.h>
+ #include <RollingAverage.h>
  
 #define FUNDAMENTAL_PIN 0
 #define BANDWIDTH_PIN 1
 #define CENTREFREQ_PIN 2
 
 // for smoothing the control signals
-// use: RecentAverage <number_type, how_many_to_average> myThing
-RecentAverage <int, 32> kAverageF;
-RecentAverage <int, 32> kAverageBw;
-RecentAverage <int, 32> kAverageCf;
+// use: RollingAverage <number_type, how_many_to_average> myThing
+RollingAverage <int, 32> kAverageF;
+RollingAverage <int, 32> kAverageBw;
+RollingAverage <int, 32> kAverageCf;
 
 WavePacket <SINGLE> wavey; // SINGLE selects 1 non-overlapping stream
 

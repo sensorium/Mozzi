@@ -5,8 +5,8 @@
   using Mozzi sonification library.
 
   Demonstrates WavePacket, non-blocking analog reads using
-  adcReadAllChannels() and adcGetResult(), and smoothing
-  control signals with RecentAverage.
+  adcReadAllChannels() and adcGetResult(unsigned char), and smoothing
+  control signals with RollingAverage.
   Also demonstrates AutoMap, which maps unpredictable inputs to a set range.
   
   This example goes with a tutorial on the Mozzi site:
@@ -37,7 +37,7 @@
  
  #include <mozzi_analog.h>
  #include <WavePacket.h>
- #include <RecentAverage.h>
+ #include <RollingAverage.h>
  #include <AutoMap.h>
  
 const int KNOB_PIN = 0; // set the input for the knob to analog pin 0
@@ -56,10 +56,10 @@ const int MAX_CF = 2000;
 
 
 // for smoothing the control signals
-// use: RecentAverage <number_type, how_many_to_average> myThing
-RecentAverage <int, 16> kAverageF;
-RecentAverage <int, 16> kAverageBw;
-RecentAverage <int, 16> kAverageCf;
+// use: RollingAverage <number_type, how_many_to_average> myThing
+RollingAverage <int, 16> kAverageF;
+RollingAverage <int, 16> kAverageBw;
+RollingAverage <int, 16> kAverageCf;
 AutoMap kMapF(0,1023,MIN_F,MAX_F);
 AutoMap kMapBw(0,1023,MIN_BW,MAX_BW);
 AutoMap kMapCf(0,1023,MIN_CF,MAX_CF);
@@ -69,7 +69,7 @@ WavePacket <DOUBLE> wavey; // DOUBLE selects 2 overlapping streams
 
 void setup(){
   Serial.begin(115200);
-  // set up async analog reading for adcReadAllChannels() and adcGetResult()
+  // set up async analog reading for adcReadAllChannels() and adcGetResult(unsigned char)
   adcEnableInterrupt();
   // request initial read
   adcReadAllChannels();

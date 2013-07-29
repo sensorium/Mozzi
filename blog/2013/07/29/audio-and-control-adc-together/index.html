@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>hints - MOZZI</title>
+  <title>Audio and Control ADC together - MOZZI</title>
   <meta name="author" content="Tim Barrass">
   
   
@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sensorium.github.io/Mozzi//learn/hints">
+  <link rel="canonical" href="http://sensorium.github.io/Mozzi//blog/2013/07/29/audio-and-control-adc-together">
   <link href="/Mozzi/favicon.png" rel="icon">
   <link href="/Mozzi/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/Mozzi/atom.xml" rel="alternate" title="MOZZI" type="application/atom+xml">
@@ -116,104 +116,107 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Hints</h1>
+    
+      <h1 class="entry-title">Audio and Control ADC Together</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-29T18:24:00+10:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
+        
+      </p>
     
   </header>
-  
-  <h2>Efficient code for smooth audio</h2>
+
+
+<div class="entry-content"><p>Version 2013-07-29-18:09 enables audio and control rate analog inputs to work at the same time.
+Audio input is on analog pin A0.  Each time an audio sample is output, the audio input is sampled.
+For each audio input sample, one control input is also converted, by changing the input channel and
+triggering two conversions in a row using the ADC interrupt, keeping the second reading because the first
+is unreliable, then switching the channel back to 0 again for audio input and starting another audio conversion, which
+is also discarded.  Then the cycle goes again with the next audio output triggering a second, usable, audio input sample.
+Each time, one control input is stored, until the list of analog channels waiting to be sampled is empty.
+The audio samples continue alone until the next control interrupt, when a sketch has adcReadAllChannels() in updateControl().</p>
+
+<p>You can test it with examples/04.Analog_Input/Audio_and_Control_Input and examples/04.Analog_Input/Audio_Input_with_Knob_Filter.</p>
+
+<p>Also, now the Mozzi library downloads as Mozzi.zip and unzips as Mozzi, instead of sensorium-Mozzi-r4783rth43t or whatever.</p>
+
+<p>The NEWS.txt entry for this release is:</p>
 
 <ul>
-<li><p>Writing speed-efficient code can be tricky, because the Arduino IDE sets
-the compiler for small code size rather than speed!  Here&#8217;s a great read ; )<br/>
-<a href="www.atmel.com/Images/doc8453.pdf">Atmel AVR4027: Tips and Tricks to Optimize. Your C Code for 8-bit AVR Microcontrollers</a></p></li>
-<li><p>Pre-calculate where possible. Do as much as you can in <code>setup()</code> and
-<code>updateControl()</code>, and keep <code>updateAudio()</code> lean.</p></li>
-<li><p>Avoid division! Use powers of two for numbers where you can, and use
-<a href="http://arduino.cc/en/Reference/Bitshift">bit-shifting arithmetic</a> instead of
-multiplication and division where possible.
-Shifting by 8 or 16 is faster than other amounts.</p></li>
-</ul>
-
-
-<hr />
-
-<h2>Number types</h2>
+<li>IMPORTANT: renamed RecentAverage.h to RollingAverage.h.  Update sketches accordingly.</li>
+<li>mozzi_analog.h
 
 <ul>
-<li><p>For speed, use the smallest data types you can, and unsigned where possible.</p></li>
-<li><p><strong>Make sure there&#8217;s room for intermediate results!</strong></p></li>
-<li><p>Take care declaring and casting variables - this can affect speed and also be <strong>a source of unexpected sounds</strong>.</p></li>
-<li><p>Use integer and fixed point maths, and avoid floating point, particularly in
-<code>updateAudio()</code>. Mozzi has a collection of fixed-point number types and
-conversion functions in <strong>mozzi_fixmath.h</strong>. These are often much faster than
-floating point, but they can over - or under - flow if you&#8217;re not careful.</p></li>
+<li>added the ability to sample audio and control rate analog inputs at the same time</li>
+<li>added options for setupFastAnalogRead(), default is FAST (adc clock div main clock by 16, same as previously),
+  and setupFastAnalogRead(FASTER) and FASTEST for divide by 8 and divide by 4.  These faster rates risk being less accurate
+(see docs for setupFastAnalogRead), but FASTER (or FASTEST) is required for audio input with control inputs at the same time.</li>
+</ul>
+</li>
+<li>added examples/04.Analog_Input/Audio_and_Control_Input</li>
+<li>added examples/04.Analog_Input/Audio_Input_with_Knob_Filter</li>
+<li>removed examples/04.Analog_Input/Audio_Input_with_Filter_Control</li>
+<li>RollingAverage.h - change unsigned char index to unsigned int and same for num_readings_as_rshift, so more than 255 items can be averaged</li>
+<li>added audioTicks(), returns how many audio samples have been played since the program started - this will overflow less often than mozziMicros().</li>
+<li>mozziMicros() was wrong, audioticks/us-per-tick&#8230; fixed, now audioticks*us-per-tick</li>
+<li>added Stack.h, a simple stack class used internally for reading analog control inputs via adcReadAllChannels().</li>
+<li>added RollingStat.h, which calculates an approximation of the variance and standard deviation for a window of recent inputs,
+  for doing things with sensor inputs.</li>
 </ul>
 
-
-<hr />
-
-<h2>Debugging</h2>
-
-<ul>
-<li><p>Printing to the Arduino Serial monitor is a useful tool for debugging, but
-beware of trying to print too much or your whole computer might freeze! It&#8217;s
-mostly OK to print from <code>updateControl()</code> with a <code>CONTROL_RATE</code> of 64, and it
-works well with a baud rate of 115200, ie. <code>Serial.begin(115200)</code>. Remember to
-set it in the monitor window too. Notice that using Serial adds size to your
-sketch and can often disrupt audio, so check if you&#8217;ve got print statements
-interfering if you&#8217;re hearing audio clicks.</p></li>
-<li><p>To print audio rate debugging info, don&#8217;t use the Arduino serial monitor, try
-<a href="http://freeware.the-meiers.org/">CoolTerm</a>, it&#8217;s a great application which
-performs much better and can capture incoming data to a file.</p></li>
-<li><p>An oscilloscope is useful for timing your code. Mozzi has fast code to flip
-digital pin 13 without interfering much with the audio timing. Put <code>#include
-mozzi_utils.h</code> in your sketch and <code>setPin13Out()</code> in <code>setup()</code>, then use
-<code>setPin13High()</code> and <code>setPin13Low()</code> around the code you want to time.</p></li>
-</ul>
+</div>
 
 
-<hr />
-
-<h2>Listening and analysing</h2>
-
-<ul>
-<li><p>A computer line-in works well for listening, and some good tools to record or
-examine your sounds are <a href="http://audacity.sourceforge.net/">Audacity</a>,
-<a href="http://www.baudline.com/">Baudline</a> signal analyser, and
-<a href="http://www.faberacoustical.com/products/signalscope/">SignalScope</a>.</p></li>
-<li><p>In Audacity, set the Project Rate to Mozzi&#8217;s audio rate of 16384 Hz before
-recording. This will make the PWM artifacts disappear and the waves will look
-like normal, non-PWM sound. You need to adjust the recording level by ear,
-because the sound distorts at a lower level than expected even though the levels
-in the window look OK.</p></li>
-<li><p>If you&#8217;re stuck with a fixed recording rate and you need to see what&#8217;s
-happening in your synthesis, filtering makes a big difference. There&#8217;s a Pure
-Data patch in Mozzi/pd with 4 4000Hz filters in series which can be used with a
-utility like Jack or Soundflower to filter the audio before it gets to your
-sound program. This allows you to check what&#8217;s happening in real time.</p></li>
-</ul>
-
-
-<hr />
-
-<h2>Keep up to date!</h2>
-
-<ul>
-<li>Mozzi is actively developing, so make sure you&#8217;ve got the latest version,
-and the <a href="https://groups.google.com/forum/#!forum/mozzi-users/">users&#8217; forum</a> is there to help.</li>
-</ul>
-
-
-  
-    <footer>
+  <footer>
+    <p class="meta">
       
-      
-        <div class="sharing">
   
-  <a href="/Mozzi//twitter.com/share" class="twitter-share-button" data-url="http://sensorium.github.io/Mozzi//learn/hints/index.html" data-via="nothingperson" data-counturl="http://sensorium.github.io/Mozzi//learn/hints/index.html" >Tweet</a>
+
+<span class="byline author vcard">Posted by <span class="fn">Tim Barrass</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-29T18:24:00+10:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/Mozzi/blog/categories/adc/'>adc</a>, <a class='category' href='/Mozzi/blog/categories/updates/'>updates</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="/Mozzi//twitter.com/share" class="twitter-share-button" data-url="http://sensorium.github.io/Mozzi//blog/2013/07/29/audio-and-control-adc-together/" data-via="nothingperson" data-counturl="http://sensorium.github.io/Mozzi//blog/2013/07/29/audio-and-control-adc-together/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -223,9 +226,14 @@ and the <a href="https://groups.google.com/forum/#!forum/mozzi-users/">users&#82
   
 </div>
 
+    
+    <p class="meta">
       
-    </footer>
-  
+        <a class="basic-alignment left" href="/Mozzi/blog/2013/05/14/icad2013-workshop-announcement/" title="Previous Post: ICAD2013 workshop announcement">&laquo; ICAD2013 workshop announcement</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>

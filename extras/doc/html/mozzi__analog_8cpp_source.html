@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-07-29-16:35</span>
+   &#160;<span id="projectnumber">version 2013-07-29-17:44</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -274,7 +274,7 @@ $(document).ready(function(){initNavTree('mozzi__analog_8cpp_source.html','');})
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keywordtype">int</span> sensors[NUM_ANALOG_INPUTS];</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="keyword">static</span> <a class="code" href="class_stack.html">Stack &lt;volatile char,NUM_ANALOG_INPUTS&gt;</a> adc_channels_to_read; <span class="comment">// note analog 0 is for audio when enabled</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="keyword">static</span> <a class="code" href="class_stack.html" title="A simple stack, used internally for keeping track of analog input channels as they are read...">Stack &lt;volatile char,NUM_ANALOG_INPUTS&gt;</a> adc_channels_to_read; <span class="comment">// note analog 0 is for audio when enabled</span></div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="keyword">volatile</span> <span class="keyword">static</span> <span class="keywordtype">char</span> current_adc = -1; <span class="comment">// accessed in control and adc ISRs</span></div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="keyword">static</span> <span class="keywordtype">bool</span> first = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;</div>
@@ -282,9 +282,9 @@ $(document).ready(function(){initNavTree('mozzi__analog_8cpp_source.html','');})
 <div class="line"><a name="l00192"></a><span class="lineno"><a class="code" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755">  192</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels</a>(){</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keywordflow">if</span> (current_adc == -1) {</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="preprocessor">#if (USE_AUDIO_INPUT == true)</span></div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="preprocessor"></span>        <span class="keywordflow">for</span>(<span class="keywordtype">char</span> i=1;i&lt;NUM_ANALOG_INPUTS;i++)  adc_channels_to_read.<a class="code" href="class_stack.html#af67739d9b82966da46f7496f4c1fc801">push</a>(i); <span class="comment">// analog 0 is for audio</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="preprocessor"></span>        <span class="keywordflow">for</span>(<span class="keywordtype">char</span> i=1;i&lt;NUM_ANALOG_INPUTS;i++)  adc_channels_to_read.<a class="code" href="class_stack.html#af67739d9b82966da46f7496f4c1fc801" title="Put an item on the stack.">push</a>(i); <span class="comment">// analog 0 is for audio</span></div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="preprocessor"></span>        <span class="keywordflow">for</span>(<span class="keywordtype">char</span> i=0;i&lt;NUM_ANALOG_INPUTS;i++)  adc_channels_to_read.<a class="code" href="class_stack.html#af67739d9b82966da46f7496f4c1fc801">push</a>(i);</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="preprocessor"></span>        <span class="keywordflow">for</span>(<span class="keywordtype">char</span> i=0;i&lt;NUM_ANALOG_INPUTS;i++)  adc_channels_to_read.<a class="code" href="class_stack.html#af67739d9b82966da46f7496f4c1fc801" title="Put an item on the stack.">push</a>(i);</div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        <a class="code" href="mozzi__analog_8cpp.html#ae82f0803beb919de0a21477ca1bee4c0">startFirstControlADC</a>();</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        first = <span class="keyword">true</span>;       </div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="preprocessor">#endif</span></div>
@@ -299,7 +299,7 @@ $(document).ready(function(){initNavTree('mozzi__analog_8cpp_source.html','');})
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment">/* gets the next channel to read off the stack, and if there is a channel there, it changes to that channel and startsa conversion.</span></div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00211"></a><span class="lineno"><a class="code" href="mozzi__analog_8h.html#ae82f0803beb919de0a21477ca1bee4c0">  211</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="mozzi__analog_8cpp.html#ae82f0803beb919de0a21477ca1bee4c0">startFirstControlADC</a>() {</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    current_adc = adc_channels_to_read.<a class="code" href="class_stack.html#afa9a35e13b68d9b59999227218a34d0a">pop</a>();</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    current_adc = adc_channels_to_read.<a class="code" href="class_stack.html#afa9a35e13b68d9b59999227218a34d0a" title="Get the item on top of the stack.">pop</a>();</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <span class="keywordflow">if</span>(current_adc != -1) <a class="code" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion</a>(current_adc);</div>
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;}</div>
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;</div>
@@ -348,7 +348,7 @@ $(document).ready(function(){initNavTree('mozzi__analog_8cpp_source.html','');})
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="mozzi__analog_8cpp.html">mozzi_analog.cpp</a></li>
-    <li class="footer">Generated on Mon Jul 29 2013 16:35:46 for Mozzi by
+    <li class="footer">Generated on Mon Jul 29 2013 17:44:20 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

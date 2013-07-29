@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-07-29-16:35</span>
+   &#160;<span id="projectnumber">version 2013-07-29-17:44</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -98,23 +98,38 @@ $(document).ready(function(){initNavTree('class_stack.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>A simple stack, used internally for keeping track of analog input channels as they are read.  
+ <a href="class_stack.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_stack_8h_source.html">Stack.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab034b819e2382f80d952cf8527dc6e6c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stack.html#ab034b819e2382f80d952cf8527dc6e6c">Stack</a> ()</td></tr>
+<tr class="memdesc:ab034b819e2382f80d952cf8527dc6e6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#ab034b819e2382f80d952cf8527dc6e6c">More...</a><br/></td></tr>
 <tr class="separator:ab034b819e2382f80d952cf8527dc6e6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af67739d9b82966da46f7496f4c1fc801"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stack.html#af67739d9b82966da46f7496f4c1fc801">push</a> (T item)</td></tr>
+<tr class="memdesc:af67739d9b82966da46f7496f4c1fc801"><td class="mdescLeft">&#160;</td><td class="mdescRight">Put an item on the stack.  <a href="#af67739d9b82966da46f7496f4c1fc801">More...</a><br/></td></tr>
 <tr class="separator:af67739d9b82966da46f7496f4c1fc801"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa9a35e13b68d9b59999227218a34d0a"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stack.html#afa9a35e13b68d9b59999227218a34d0a">pop</a> ()</td></tr>
+<tr class="memdesc:afa9a35e13b68d9b59999227218a34d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the item on top of the stack.  <a href="#afa9a35e13b68d9b59999227218a34d0a">More...</a><br/></td></tr>
 <tr class="separator:afa9a35e13b68d9b59999227218a34d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class T, int NUM_ITEMS&gt;<br/>
 class Stack&lt; T, NUM_ITEMS &gt;</h3>
 
+<p>A simple stack, used internally for keeping track of analog input channels as they are read. </p>
+<p>This stack is really just an array with a pointer to the most recent item, and memory is allocated at compile time. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>the kind of numbers (or other things) to store. </td></tr>
+    <tr><td class="paramname">NUM_ITEMS</td><td>the maximum number of items the stack will need to hold. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_stack_8h_source.html#l00024">24</a> of file <a class="el" href="_stack_8h_source.html">Stack.h</a>.</p>
+<p>Definition at line <a class="el" href="_stack_8h_source.html#l00029">29</a> of file <a class="el" href="_stack_8h_source.html">Stack.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ab034b819e2382f80d952cf8527dc6e6c"></a>
 <div class="memitem">
@@ -139,7 +154,9 @@ template&lt;class T, int NUM_ITEMS&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_stack_8h_source.html#l00031">31</a> of file <a class="el" href="_stack_8h_source.html">Stack.h</a>.</p>
+<p>Constructor. </p>
+
+<p>Definition at line <a class="el" href="_stack_8h_source.html#l00038">38</a> of file <a class="el" href="_stack_8h_source.html">Stack.h</a>.</p>
 
 </div>
 </div>
@@ -167,7 +184,10 @@ template&lt;class T, int NUM_ITEMS&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_stack_8h_source.html#l00045">45</a> of file <a class="el" href="_stack_8h_source.html">Stack.h</a>.</p>
+<p>Get the item on top of the stack. </p>
+<dl class="section return"><dt>Returns</dt><dd>T the item </dd></dl>
+
+<p>Definition at line <a class="el" href="_stack_8h_source.html#l00056">56</a> of file <a class="el" href="_stack_8h_source.html">Stack.h</a>.</p>
 
 </div>
 </div>
@@ -195,7 +215,15 @@ template&lt;class T, int NUM_ITEMS&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_stack_8h_source.html#l00036">36</a> of file <a class="el" href="_stack_8h_source.html">Stack.h</a>.</p>
+<p>Put an item on the stack. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">item</td><td>the thing you want to put on the stack. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_stack_8h_source.html#l00045">45</a> of file <a class="el" href="_stack_8h_source.html">Stack.h</a>.</p>
 
 </div>
 </div>
@@ -205,7 +233,7 @@ template&lt;class T, int NUM_ITEMS&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_stack.html">Stack</a></li>
-    <li class="footer">Generated on Mon Jul 29 2013 16:35:46 for Mozzi by
+    <li class="footer">Generated on Mon Jul 29 2013 17:44:20 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

@@ -35,9 +35,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_02_control_2_control__echo__theremin_2_control__echo__theremin_8ino-example.html",
-"class_reverb_tank.html",
-"group__fixmath.html#gaa6a3087e0119ed233a3256f8fa25e146",
-"mozzi__midi_8h_source.html"
+"class_rolling_average.html#a23c4b93258faace0c7ee60eb395d2c4b",
+"group__fixmath.html#gac0b4678c510db93302efb15497911907",
+"mozzi__rand_8cpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

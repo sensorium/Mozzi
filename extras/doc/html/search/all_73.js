@@ -5,7 +5,6 @@ var searchData=
   ['sample_5ff_5fbits',['SAMPLE_F_BITS',['../_sample_8h.html#a8eba4424fc276faa39413faf92670505',1,'Sample.h']]],
   ['sample_5ff_5fbits_5fas_5fmultiplier',['SAMPLE_F_BITS_AS_MULTIPLIER',['../_sample_8h.html#acb82d9d796d11da458308b170beca908',1,'Sample.h']]],
   ['sample_5fphmod_5fbits',['SAMPLE_PHMOD_BITS',['../_sample_8h.html#a6fccc0a5a1ba5aab43138c6ca0c4b194',1,'Sample.h']]],
-  ['samplehuffman_2eh',['SampleHuffman.h',['../_sample_huffman_8h.html',1,'']]],
   ['sbi',['sbi',['../mozzi__utils_8h.html#ac4a5536d9bf092116f88b94797ddc882',1,'sbi():&#160;mozzi_utils.h'],['../twi__nonblock_8h.html#ac4a5536d9bf092116f88b94797ddc882',1,'sbi():&#160;twi_nonblock.h']]],
   ['set',['set',['../class_audio_delay.html#a7bd0a07f7803afda1a71b50e3f66827b',1,'AudioDelay::set()'],['../class_ead.html#af203c82721ab832c653a23ff219c040e',1,'Ead::set()'],['../class_event_delay.html#adb1ea3351d63b51c6c5270eff1de4cb8',1,'EventDelay::set()'],['../class_line.html#a6bad32d527e0d931c99e9b72c2a75c80',1,'Line::set(T value)'],['../class_line.html#a7378d526cf07c42c0792868c749dee6e',1,'Line::set(T targetvalue, T num_steps)'],['../class_line.html#a24ad85c17562e97b6823a010a5ba04c6',1,'Line::set(T startvalue, T targetvalue, T num_steps)'],['../class_phasor.html#a509e4a782a36cb9e913da170d6707421',1,'Phasor::set()'],['../class_wave_packet.html#ac693b3d676b583584a8cfc6b9cc0f37f',1,'WavePacket::set()']]],
   ['setadlevels',['setADLevels',['../class_a_d_s_r.html#abfb4aaa169920beadb67570e0360f23f',1,'ADSR']]],

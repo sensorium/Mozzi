@@ -70,11 +70,7 @@ var files =
       [ "RollingStat", "class_rolling_stat.html", "class_rolling_stat" ],
       [ "RollingStat< float, WINDOW_LENGTH >", "class_rolling_stat_3_01float_00_01_w_i_n_d_o_w___l_e_n_g_t_h_01_4.html", "class_rolling_stat_3_01float_00_01_w_i_n_d_o_w___l_e_n_g_t_h_01_4" ]
     ] ],
-    [ "RunningStat.h", "_running_stat_8h.html", [
-      [ "RunningStat", "class_running_stat.html", "class_running_stat" ]
-    ] ],
     [ "Sample.h", "_sample_8h.html", "_sample_8h" ],
-    [ "SampleHuffman.h", "_sample_huffman_8h.html", "_sample_huffman_8h" ],
     [ "Smooth.h", "_smooth_8h.html", [
       [ "Smooth", "class_smooth.html", "class_smooth" ]
     ] ],

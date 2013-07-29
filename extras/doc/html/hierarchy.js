@@ -33,7 +33,6 @@ var hierarchy =
     [ "RollingAverage< float, WINDOW_LENGTH >", "class_rolling_average.html", null ],
     [ "RollingStat< T, WINDOW_LENGTH >", "class_rolling_stat.html", null ],
     [ "RollingStat< float, WINDOW_LENGTH >", "class_rolling_stat_3_01float_00_01_w_i_n_d_o_w___l_e_n_g_t_h_01_4.html", null ],
-    [ "RunningStat< T >", "class_running_stat.html", null ],
     [ "Sample< NUM_TABLE_CELLS, UPDATE_RATE >", "class_sample.html", null ],
     [ "Smooth< T >", "class_smooth.html", null ],
     [ "Stack< T, NUM_ITEMS >", "class_stack.html", null ],

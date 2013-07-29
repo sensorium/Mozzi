@@ -20,7 +20,5 @@ var searchData=
   ['rollingaverage_3c_20float_2c_20window_5flength_20_3e',['RollingAverage&lt; float, WINDOW_LENGTH &gt;',['../class_rolling_average.html',1,'']]],
   ['rollingstat',['RollingStat',['../class_rolling_stat.html',1,'RollingStat&lt; T, WINDOW_LENGTH &gt;'],['../class_rolling_stat.html#a98c3f767391db80b8ad59ca53c1e6a94',1,'RollingStat::RollingStat()'],['../class_rolling_stat_3_01float_00_01_w_i_n_d_o_w___l_e_n_g_t_h_01_4.html#a7dc63d2c65dbadbafe785b3d0e2a7167',1,'RollingStat&lt; float, WINDOW_LENGTH &gt;::RollingStat()']]],
   ['rollingstat_2eh',['RollingStat.h',['../_rolling_stat_8h.html',1,'']]],
-  ['rollingstat_3c_20float_2c_20window_5flength_20_3e',['RollingStat&lt; float, WINDOW_LENGTH &gt;',['../class_rolling_stat_3_01float_00_01_w_i_n_d_o_w___l_e_n_g_t_h_01_4.html',1,'']]],
-  ['runningstat',['RunningStat',['../class_running_stat.html',1,'RunningStat&lt; T &gt;'],['../class_running_stat.html#a2f723eef65c3de7f8e570ff862b78471',1,'RunningStat::RunningStat()']]],
-  ['runningstat_2eh',['RunningStat.h',['../_running_stat_8h.html',1,'']]]
+  ['rollingstat_3c_20float_2c_20window_5flength_20_3e',['RollingStat&lt; float, WINDOW_LENGTH &gt;',['../class_rolling_stat_3_01float_00_01_w_i_n_d_o_w___l_e_n_g_t_h_01_4.html',1,'']]]
 ];

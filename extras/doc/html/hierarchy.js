@@ -28,12 +28,15 @@ var hierarchy =
     [ "Phasor< UPDATE_RATE >", "class_phasor.html", null ],
     [ "Phasor< AUDIO_RATE >", "class_phasor.html", null ],
     [ "Portamento< CONTROL_UPDATE_RATE >", "class_portamento.html", null ],
-    [ "RCpoll< SENSOR_PIN >", "class_r_cpoll.html", null ],
-    [ "RecentAverage< T, NUM_READINGS >", "class_recent_average.html", null ],
     [ "ReverbTank", "class_reverb_tank.html", null ],
-    [ "RunningStat", "class_running_stat.html", null ],
+    [ "RollingAverage< T, WINDOW_LENGTH >", "class_rolling_average.html", null ],
+    [ "RollingAverage< float, WINDOW_LENGTH >", "class_rolling_average.html", null ],
+    [ "RollingStat< T, WINDOW_LENGTH >", "class_rolling_stat.html", null ],
+    [ "RollingStat< float, WINDOW_LENGTH >", "class_rolling_stat_3_01float_00_01_w_i_n_d_o_w___l_e_n_g_t_h_01_4.html", null ],
+    [ "RunningStat< T >", "class_running_stat.html", null ],
     [ "Sample< NUM_TABLE_CELLS, UPDATE_RATE >", "class_sample.html", null ],
     [ "Smooth< T >", "class_smooth.html", null ],
+    [ "Stack< T, NUM_ITEMS >", "class_stack.html", null ],
     [ "StateVariable< FILTER_TYPE >", "class_state_variable.html", null ],
     [ "WavePacket< ALGORITHM >", "class_wave_packet.html", [
       [ "WavePacketSample< ALGORITHM >", "class_wave_packet_sample.html", null ]

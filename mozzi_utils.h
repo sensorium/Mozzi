@@ -9,6 +9,14 @@
  #include "WProgram.h"
 #endif
 
+// macros for setting and clearing register bits
+#ifndef cbi
+#define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
+#endif
+#ifndef sbi
+#define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
+#endif
+
 
 /** @ingroup util
 Set digital pin 13 to output for testing timing with an oscilloscope.*/
@@ -37,13 +45,7 @@ void setPin13Low()
 }
 
 
-// macros for setting and clearing register bits
-#ifndef cbi
-#define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
-#endif
-#ifndef sbi
-#define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
-#endif
+long trailingZeros(unsigned long v);
 
 
 #endif /* UTILS_H_ */

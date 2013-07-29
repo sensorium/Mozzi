@@ -11,6 +11,11 @@ var mozzi__analog_8cpp =
     [ "adcStartConversion", "mozzi__analog_8cpp.html#gac3d2277d3d3823c6d5c727067571aab3", null ],
     [ "disconnectDigitalIn", "mozzi__analog_8cpp.html#gad4433797b75fedd473250e9aa414dcae", null ],
     [ "ISR", "mozzi__analog_8cpp.html#a4ff48c11864f6a45d87a4619c31f14f2", null ],
+    [ "receiveFirstControlADC", "mozzi__analog_8cpp.html#a240bc25914022874ddee69d50c770dd9", null ],
+    [ "receiveSecondControlADC", "mozzi__analog_8cpp.html#af971815245bb39f8caa4fed3d9763ff0", null ],
     [ "reconnectDigitalIn", "mozzi__analog_8cpp.html#gacd83735876cf223916ea4925ec4efd4a", null ],
-    [ "setupFastAnalogRead", "mozzi__analog_8cpp.html#gaf46803d06aa1d839192cc6125e39ff01", null ]
+    [ "setupFastAnalogRead", "mozzi__analog_8cpp.html#ga8741756d32609ad6dec641943fa99af9", null ],
+    [ "setupMozziADC", "mozzi__analog_8cpp.html#gaffeb925f6aca20f179cc46e1734c04ad", null ],
+    [ "startFirstControlADC", "mozzi__analog_8cpp.html#ae82f0803beb919de0a21477ca1bee4c0", null ],
+    [ "startSecondControlADC", "mozzi__analog_8cpp.html#a149a93bff1cc2db06797027e6b1a9a18", null ]
 ];

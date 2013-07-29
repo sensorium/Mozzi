@@ -18,7 +18,7 @@
 
 #include <mozzi_analog.h>
 #include <WavePacketSample.h>
-#include <RecentAverage.h>
+#include <RollingAverage.h>
 #include <samples/raven_arh_int8.h>
 
 #define FUNDAMENTAL_PIN 0
@@ -26,10 +26,10 @@
 #define CENTREFREQ_PIN 2
 
 // for smoothing the control signals
-// use: RecentAverage <number_type, how_many_to_average> myThing
-RecentAverage <int, 32> kAverageF;
-RecentAverage <int, 32> kAverageBw;
-RecentAverage <int, 32> kAverageCf;
+// use: RollingAverage <number_type, how_many_to_average> myThing
+RollingAverage <int, 32> kAverageF;
+RollingAverage <int, 32> kAverageBw;
+RollingAverage <int, 32> kAverageCf;
 
 WavePacketSample <DOUBLE> wavey; // DOUBLE selects 2 overlapping streams
 

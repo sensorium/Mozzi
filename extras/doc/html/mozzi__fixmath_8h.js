@@ -53,6 +53,8 @@ var mozzi__fixmath_8h =
     [ "float_to_Q8n24", "mozzi__fixmath_8h.html#ga33ecb8a512f7d4eff5047d4ad65f5423", null ],
     [ "float_to_Q8n8", "mozzi__fixmath_8h.html#ga36132b5f8f95223749b410ca235eef16", null ],
     [ "ipow", "mozzi__fixmath_8h.html#a5daaf7f37651029de2abf8ad375b6850", null ],
+    [ "isqrt16", "mozzi__fixmath_8h.html#a7b2eaf5cb05524b521309dd1b3b4698e", null ],
+    [ "isqrt32", "mozzi__fixmath_8h.html#a4e7fb79f81cdfca085c50eda0a02e3ff", null ],
     [ "Q0n16_to_float", "mozzi__fixmath_8h.html#ga0440dbc7692a88dca7b1173f020c9b0d", null ],
     [ "Q0n7_to_float", "mozzi__fixmath_8h.html#ga8b01eb695e8d8c197e4e83a76d391a6a", null ],
     [ "Q0n7_to_Q15n16", "mozzi__fixmath_8h.html#gac8b6733abac81f36cf8075a4d3c04e49", null ],

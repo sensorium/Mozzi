@@ -9,7 +9,6 @@ var NAVTREE =
     ] ],
     [ "Classes", null, [
       [ "Class List", "annotated.html", "annotated" ],
-      [ "Class Index", "classes.html", null ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
@@ -26,7 +25,7 @@ var NAVTREE =
         [ "Typedefs", "globals_type.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
         [ "Enumerator", "globals_eval.html", null ],
-        [ "Macros", "globals_defs.html", "globals_defs" ]
+        [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ],
     [ "Examples", "examples.html", "examples" ]
@@ -36,10 +35,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_02_control_2_control__echo__theremin_2_control__echo__theremin_8ino-example.html",
-"class_audio_delay_feedback.html",
-"globals_defs_0x6d.html",
-"mozzi__fixmath_8cpp.html#ga004d96a59215139e911b92907c37fc22",
-"sin1024__int8_8h.html#a0b0951563c3b5f792b3a0f1f917aa25b"
+"class_reverb_tank.html",
+"group__fixmath.html#gaa6a3087e0119ed233a3256f8fa25e146",
+"mozzi__midi_8h_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

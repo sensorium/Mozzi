@@ -24,7 +24,7 @@
 #include "MozziGuts.h"
 #include "mozzi_config.h" // at the top of all MozziGuts and analog files
 //#include <util/atomic.h>
-#include "mozzi_utils.h"
+//#include "mozzi_utils.h"
 
 
 /*
@@ -106,21 +106,20 @@ static void backupMozziTimer1(){
 
 //-----------------------------------------------------------------------------------------------------------------
 
-#if USE_AUDIO_INPUT
+#if (USE_AUDIO_INPUT==true)
+
+volatile bool doing_audio_adc;
+volatile bool first_audio_read;
 
 #include "mozzi_analog.h"
-
-static void adcSetupAudioInput(){
-	adcEnableInterrupt();
-	setupFastAnalogRead();
-	adcSetChannel(0);
-}
 
 static volatile long input_gap;
 static volatile unsigned long input_buffer_head;
 static volatile int input_buffer[BUFFER_NUM_CELLS];
-static boolean do_update_audio;
+static boolean audio_input_is_available;
 static int audio_input; // holds the latest audio from input_buffer
+unsigned char adc_count = 0;
+
 
 
 int getAudioInput()
@@ -129,20 +128,103 @@ int getAudioInput()
 }
 
 
-/* Audio ISR. This is called with when the adc finishes a conversion.
-*/
-ISR(ADC_vect, ISR_BLOCK)
-{
-	// gets here about 16us after being set audio output isr
+static void startFirstAudioADC() {
+	adcStartConversion(0);
+}
+
+
+static void receiveFirstAudioADC() {
+	// nothing
+}
+
+
+static void startSecondAudioADC() {
+	ADCSRA |= (1 << ADSC); // start a second conversion on the current channel
+}
+
+
+static void receiveSecondAudioADC() {
 	input_buffer_head++;
 	input_buffer[input_buffer_head & (BUFFER_NUM_CELLS-1)] = ADC; // put new data into input_buffer, don't worry about overwriting old, as guarding would also cause a glitch
-	if (input_gap > (BUFFER_NUM_CELLS/2)) {
-		do_update_audio = true;
+	if (input_gap > (BUFFER_NUM_CELLS>>1)) { // input buffer less full than than half of output buffer size
+		audio_input_is_available = true;
 	}else{
-		do_update_audio = false;
+		audio_input_is_available = false;
 	}
 }
 
+//setPin13High();
+//setPin13Low();	
+/*
+static int count;
+if(count++==1000) {
+	Serial.println((int)adc_count);
+	count=0;
+}
+*/
+/* ADC ISR. This is called when the adc finishes a conversion.
+*/
+/*
+ISR(ADC_vect, ISR_BLOCK) {
+	switch (adc_count){
+		case 0:
+		//receiveFirstAudioADC();
+		startSecondAudioADC();
+      	break;
+
+      	case 1:
+      	// 6us	
+      	receiveSecondAudioADC();
+		startFirstControlADC();
+      	break;
+      	
+      	case 2:
+      	//<1us
+      	//receiveFirstControlADC();
+      	startSecondControlADC();
+      	break;
+      	
+      	case 3:
+      	// 3us
+      	receiveSecondControlADC();
+      	break;
+
+	}
+	adc_count++;
+}
+*/
+
+ISR(ADC_vect, ISR_BLOCK) {
+	switch (adc_count){
+		case 0:
+		// 6us	      		      	
+		receiveSecondAudioADC();
+		startFirstControlADC();
+      	break;
+
+      	case 1:
+      	// <2us, <1us w/o receive
+      	//receiveFirstControlADC();
+      	startSecondControlADC();
+      	break;
+      	
+      	case 2:
+      	// 3us
+      	receiveSecondControlADC();
+      	startFirstAudioADC();
+      	break;
+      	
+
+//      	case 3:
+      	// invisible
+//      	receiveFirstAudioADC();
+//      	break;
+
+	}
+	adc_count++;
+}
+  
+  
 #endif
 
 
@@ -152,11 +234,11 @@ void audioHook() // 2us excluding updateAudio()
 	static unsigned long output_buffer_head = 0;
 	long output_gap = output_buffer_head - output_buffer_tail; // wraps to a big number if it's negative, and will take a long time to wrap
 
-#if USE_AUDIO_INPUT // 3us
+#if (USE_AUDIO_INPUT==true) // 3us
 
 	static unsigned long input_buffer_tail =0;
 	input_gap = input_buffer_head - input_buffer_tail; // wraps to a big number if it's negative, and will take a long time to wrap
-	if ((output_gap < BUFFER_NUM_CELLS) && do_update_audio) {
+	if ((output_gap < BUFFER_NUM_CELLS) && audio_input_is_available) {
 		input_buffer_tail++;
 		audio_input = input_buffer[input_buffer_tail & (BUFFER_NUM_CELLS-1)];
 
@@ -185,18 +267,26 @@ void audioHook() // 2us excluding updateAudio()
 		TIMSK1 = _BV(TOIE1); 	// Overflow Interrupt Enable (when not using Timer1.attachInterrupt())
 
 		backupMozziTimer1();
-
-#if USE_AUDIO_INPUT
-		adcSetupAudioInput();
-#endif
 	}
 
 
 	/* Interrupt service routine moves sound data from the output buffer to the
 	Arduino output register, running at AUDIO_RATE. */
 	ISR(TIMER1_OVF_vect, ISR_BLOCK) {
-#if USE_AUDIO_INPUT
-		sbi(ADCSRA, ADSC);				// start next adc conversion
+#if (USE_AUDIO_INPUT==true)
+
+		adc_count = 0;
+	    startSecondAudioADC();
+	    //startFirstAudioADC();
+		// change channel could be left out if no control inputs are used
+		//set analog in to channel 0 and start a converson
+		//adcStartConversion(0);
+		//ADCSRB = ADCSRB & ~(1 << MUX5); //reading from channels 0 to 7 (MUX5 low) 
+		//ADMUX = (1 << REFS0); 	// set the analog reference (high two bits of ADMUX) and select the
+													// channel (low 4 bits).  this also sets ADLAR (left-adjust result) to 0 (the default).
+		//ADCSRA |= (1 << ADSC); // start next adc conversion
+		//doing_audio_adc = true;
+		//first_audio_read = true;
 #endif
 		output_buffer_tail++;
 		AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer[(unsigned char)output_buffer_tail & (unsigned char)(BUFFER_NUM_CELLS-1)]; // 1us, 2.5us with longs
@@ -224,9 +314,6 @@ void audioHook() // 2us excluding updateAudio()
 		// audio output interrupt on timer 2, sets the pwm levels of timer 1
 		setupTimer2();
 
-#if USE_AUDIO_INPUT
-		adcSetupAudioInput();
-#endif
 	}
 
 	/* set up Timer 2 using modified FrequencyTimer2 library */
@@ -291,8 +378,10 @@ void audioHook() // 2us excluding updateAudio()
 	void dummy_function(void)
 #endif
 	{
-#if USE_AUDIO_INPUT
-		sbi(ADCSRA, ADSC);				// start next adc conversion
+#if (USE_AUDIO_INPUT==true)
+		adc_count = 0;
+	    startSecondAudioADC();
+	    //startFirstAudioADC();
 #endif
 
 		output_buffer_tail++;
@@ -345,6 +434,10 @@ void audioHook() // 2us excluding updateAudio()
 		startAudioStandard();
 #elif (AUDIO_MODE == HIFI)
 		startAudioHiFi();
+#endif
+
+#if(USE_AUDIO_INPUT==true)
+	setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST in setup() if desired
 #endif
 	}
 
@@ -418,10 +511,18 @@ void audioHook() // 2us excluding updateAudio()
 #endif			
 	}
 	
+	
+unsigned long audioTicks(){
+	return output_buffer_tail;
+}
 
-	unsigned long mozziMicros(){
-		return output_buffer_tail / MICROS_PER_AUDIO_TICK;
-	}
+
+unsigned long mozziMicros(){
+	return output_buffer_tail * MICROS_PER_AUDIO_TICK;
+}
+	
+
+
 
 	// Unmodified TimerOne.cpp has TIMER3_OVF_vect.
 	// Watch out if you update the library file.

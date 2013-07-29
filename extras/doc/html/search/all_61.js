@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['abomb16384_5fint8_2eh',['abomb16384_int8.h',['../abomb16384__int8_8h.html',1,'']]],
-  ['abomb_5fnum_5fcells',['ABOMB_NUM_CELLS',['../abomb16384__int8_8h.html#aaae29e69acec708e11157a5b1e7d28a8',1,'abomb16384_int8.h']]],
-  ['abomb_5fsamplerate',['ABOMB_SAMPLERATE',['../abomb16384__int8_8h.html#a134a2a270dfd96ffbb9ee85bd36ffcbf',1,'abomb16384_int8.h']]],
+  ['adc_5fcount',['adc_count',['../_mozzi_guts_8cpp.html#af8e48d3e827939f56ebe8fc9e88e55e9',1,'MozziGuts.cpp']]],
   ['adcdisconnectalldigitalins',['adcDisconnectAllDigitalIns',['../group__analog.html#ga5042e7c576dd0307be38eb70efdb69fe',1,'adcDisconnectAllDigitalIns():&#160;mozzi_analog.cpp'],['../group__analog.html#ga5042e7c576dd0307be38eb70efdb69fe',1,'adcDisconnectAllDigitalIns():&#160;mozzi_analog.cpp']]],
   ['adcenableinterrupt',['adcEnableInterrupt',['../group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e',1,'adcEnableInterrupt():&#160;mozzi_analog.cpp'],['../group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e',1,'adcEnableInterrupt():&#160;mozzi_analog.cpp']]],
   ['adcgetresult',['adcGetResult',['../group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07',1,'adcGetResult():&#160;mozzi_analog.cpp'],['../group__analog.html#ga1d1ee9fa143c3a0505e76b41fc2af09f',1,'adcGetResult(unsigned char channel_num):&#160;mozzi_analog.cpp'],['../group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07',1,'adcGetResult():&#160;mozzi_analog.cpp'],['../group__analog.html#ga1d1ee9fa143c3a0505e76b41fc2af09f',1,'adcGetResult(unsigned char channel_num):&#160;mozzi_analog.cpp']]],
@@ -15,6 +13,7 @@ var searchData=
   ['algorithms',['algorithms',['../_wave_packet_8h.html#ad28a1b6c64625a10e04b25f75d2e7b51',1,'WavePacket.h']]],
   ['allpass',['ALLPASS',['../_audio_delay_feedback_8h.html#a2067e59c44131f14125dd8a472b5146fa0adb45579631d25170df04e65b8b84e4',1,'AudioDelayFeedback.h']]],
   ['analog',['Analog',['../group__analog.html',1,'']]],
+  ['analog_5fread_5fspeed',['ANALOG_READ_SPEED',['../mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2',1,'mozzi_analog.h']]],
   ['atindex',['atIndex',['../class_oscil.html#a3b2ea7727b2ec911957b3862dbb6a8ec',1,'Oscil::atIndex()'],['../class_sample.html#ad5c4e048c4aa7a36710e58466caabc94',1,'Sample::atIndex()']]],
   ['audio_5fbias',['AUDIO_BIAS',['../_audio_config_hi_speed14bit_pwm_8h.html#aa2b18130c536085943a5768146fcb8bb',1,'AUDIO_BIAS():&#160;AudioConfigHiSpeed14bitPwm.h'],['../_audio_config_standard9bit_pwm_8h.html#aa2b18130c536085943a5768146fcb8bb',1,'AUDIO_BIAS():&#160;AudioConfigStandard9bitPwm.h']]],
   ['audio_5fchannel_5f1_5fhighbyte_5fpin',['AUDIO_CHANNEL_1_HIGHBYTE_PIN',['../_audio_config_hi_speed14bit_pwm_8h.html#af907b5e2bf79ae514ec38f0ad687f320',1,'AudioConfigHiSpeed14bitPwm.h']]],
@@ -36,6 +35,7 @@ var searchData=
   ['audiodelayfeedback',['AudioDelayFeedback',['../class_audio_delay_feedback.html',1,'AudioDelayFeedback&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;'],['../class_audio_delay_feedback.html#a6e6352413ac4ee9b2bc03684b072fdc7',1,'AudioDelayFeedback::AudioDelayFeedback()'],['../class_audio_delay_feedback.html#a0900519217117e6c7b425faba3399720',1,'AudioDelayFeedback::AudioDelayFeedback(unsigned int delaytime_cells)'],['../class_audio_delay_feedback.html#a6f45674d12ed7cda228ccaa86ac71f71',1,'AudioDelayFeedback::AudioDelayFeedback(unsigned int delaytime_cells, char feedback_level)']]],
   ['audiodelayfeedback_2eh',['AudioDelayFeedback.h',['../_audio_delay_feedback_8h.html',1,'']]],
   ['audiohook',['audioHook',['../group__core.html#ga2fca37b988ab369e2f3c3108c683e59d',1,'audioHook():&#160;MozziGuts.cpp'],['../group__core.html#ga2fca37b988ab369e2f3c3108c683e59d',1,'audioHook():&#160;MozziGuts.cpp']]],
+  ['audioticks',['audioTicks',['../group__core.html#ga55fa9d48f327b646c2f71cef7da7b8f0',1,'audioTicks():&#160;MozziGuts.cpp'],['../group__core.html#ga55fa9d48f327b646c2f71cef7da7b8f0',1,'audioTicks():&#160;MozziGuts.cpp']]],
   ['automap',['AutoMap',['../class_auto_map.html',1,'AutoMap'],['../class_auto_map.html#aec125f071bd83180ff0d0a71446725f3',1,'AutoMap::AutoMap()']]],
   ['automap_2eh',['AutoMap.h',['../_auto_map_8h.html',1,'']]],
   ['autorange',['AutoRange',['../class_auto_range.html',1,'AutoRange&lt; T &gt;'],['../class_auto_range.html#a2f0638f4d8e2937080b67fc0614c8d6d',1,'AutoRange::AutoRange()']]],

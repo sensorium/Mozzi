@@ -24,6 +24,7 @@
 #define MOZZI_ANALOG_H_
 
 
+
 #if ARDUINO >= 100
  #include "Arduino.h"
 #else
@@ -32,6 +33,17 @@
 
 //#include "mozzi_utils.h"
 
+
+#if (USE_AUDIO_INPUT==true)
+#warning "Using analog pin 0 for audio input."
+#endif
+
+//void doControlADC();
+//void prepareControlADC();
+void startFirstControlADC();
+void receiveFirstControlADC();
+void startSecondControlADC();
+void receiveSecondControlADC();
 
 // hack for Teensy 2 (ATmega32U4), which has "adc_mapping" instead of "analog_pin_to_channel_PGM"
 #if defined(__AVR_ATmega32U4__) && defined(CORE_TEENSY) 
@@ -49,10 +61,6 @@ static const uint8_t PROGMEM adc_mapping[] = {
 #define analogPinToChannel(P)  ( pgm_read_byte( adc_mapping + (P) ) )
 #endif
 
-
-#if USE_AUDIO_INPUT
-#warning "Using analog pin 0 for audio input.  No other analog channels are available while using audio."
-#endif
 
 
 /** @ingroup analog
@@ -72,16 +80,42 @@ the adcStartConversion(), adcGetResult() methods instead.
 void adcEnableInterrupt();
 
 
-/** @ingroup analog
+// for setupFastAnalogRead()
+enum ANALOG_READ_SPEED {FAST_ADC,FASTER_ADC,FASTEST_ADC};
+
+/** 
+@ingroup analog
 Make analogRead() faster than the standard Arduino version, changing the
-duration from about 105 in unmodified Arduino to 15 microseconds for a
-dependable analogRead(). Put this in setup() if you intend to use analogRead()
-with Mozzi, to avoid glitches.
-Don't use it with the adcEnableInterrupt(), adcReadAllChannels(), adcGetResult() approach, it may contribute to glitches.
+duration from about 105 in unmodified Arduino to about 16 microseconds for a
+dependable analogRead() with the default speed parameter FAST_ADC.
+To avoid audio glitches, put this in setup() if you use analogRead()
+with Mozzi.
 See: http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11, and
 http://www.marulaberry.co.za/index.php/tutorials/code/arduino-adc/
+@param speed FAST_ADC, FASTER_ADC or FASTEST_ADC. If no parameter is supplied, the default is FAST_ADC, 
+which sets the analog conversion clock predivide rate to 16, giving 1Mhz on a
+16MHz board, the fastest rate for which behaviour is defined (~16us per sample).
+However, divisors of 8 and 4 also show usable results in the graphs in this
+paper:
+http://dam.mellis.org/Mellis%20-%20Sensor%20Library%20for%20Arduino%20-%20Paper.pdf,
+so you can also try FASTER_ADC or FASTEST_ADC for divide rates of 8 or 4, giving times
+of about 8us or 4us per sample.    Beware, reliable results will depend on the sort of input you use.  
+Only use FASTER_ADC or FASTEST_ADC if you know what you're doing.
 */
-void setupFastAnalogRead();
+void setupFastAnalogRead(char speed=FAST_ADC);
+
+
+
+/**  @ingroup analog
+Set up for asynchronous analog input, which enables analog reads to take 
+place in the background without blocking the processor.
+This goes in setup(), but if  /#define USE_AUDIO_INPUT true is in mozzi_config.h, 
+you don't need setupMozziADC() because it's called automatically to enable the audio input.
+If you want to use the standard Arduino analogRead(), don't use setupMozziADC(), but do put 
+setupFastAnalogRead() in setup() if you want to reduce the chance of audio glitches.
+@param speed FAST_ADC, FASTER_ADC or FASTEST_ADC.  See setupFastAnalogRead();
+*/
+void setupMozziADC(char speed=FAST_ADC);
 
 
 
@@ -165,6 +199,7 @@ void adcStartConversion();
 
 
 /** @ingroup analog
+DEPRECIATED.
 Waits for the result of the most recent adcStartConversion().  If used as the first function
 of updateControl(), to receive the result of adcStartConversion() from the end of the last
 updateControl(), there will probably be no waiting time, as the ADC conversion will

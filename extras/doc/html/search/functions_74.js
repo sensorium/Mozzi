@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['trailingzeros',['trailingZeros',['../group__util.html#gaf45df8dbf0bc86752d8fc697e2381cc3',1,'trailingZeros(const unsigned long v):&#160;mozzi_utils.cpp'],['../group__util.html#gaf45df8dbf0bc86752d8fc697e2381cc3',1,'trailingZeros(unsigned long v):&#160;mozzi_utils.cpp']]],
   ['twi_5fcontinuereadfrom',['twi_continueReadFrom',['../twi__nonblock_8cpp.html#a024f9a641b67863de23a45cea1a49d35',1,'twi_continueReadFrom():&#160;twi_nonblock.cpp'],['../twi__nonblock_8h.html#a024f9a641b67863de23a45cea1a49d35',1,'twi_continueReadFrom():&#160;twi_nonblock.cpp']]],
   ['twi_5fcontinuewriteto',['twi_continueWriteTo',['../twi__nonblock_8cpp.html#a5443fa2d7cdb3dcca731ffbeb3b025e1',1,'twi_continueWriteTo():&#160;twi_nonblock.cpp'],['../twi__nonblock_8h.html#a5443fa2d7cdb3dcca731ffbeb3b025e1',1,'twi_continueWriteTo():&#160;twi_nonblock.cpp']]],
   ['twi_5finitiatereadfrom',['twi_initiateReadFrom',['../twi__nonblock_8cpp.html#a2d3c2b5761e61ce7b6da0bf582157e64',1,'twi_initiateReadFrom(uint8_t address, uint8_t length):&#160;twi_nonblock.cpp'],['../twi__nonblock_8h.html#a2d3c2b5761e61ce7b6da0bf582157e64',1,'twi_initiateReadFrom(uint8_t address, uint8_t length):&#160;twi_nonblock.cpp']]],

@@ -110,4 +110,62 @@ Q16n16 Q16n16_pow2(Q8n8 exponent)
 }
 
 
+
+
+//http://www.codecodex.com/wiki/Calculate_an_integer_square_root
+//see Integer Square Roots by Jack W. Crenshaw, figure 2, http://www.embedded.com/electronics-blogs/programmer-s-toolbox/4219659/Integer-Square-Roots
+
+uint32_t  // OR uint16 OR uint8_t
+isqrt32 (uint32_t n) // OR isqrt16 ( uint16_t n ) OR  isqrt8 ( uint8_t n ) - respectively [ OR overloaded as isqrt (uint?? n) in C++ ]
+{
+	register uint32_t // OR register uint16_t OR register uint8_t - respectively
+	root, remainder, place;
+
+	root = 0;
+	remainder = n;
+	place = 0x40000000; // OR place = 0x4000; OR place = 0x40; - respectively
+
+	while (place > remainder)
+		place = place >> 2;
+	while (place)
+	{
+		if (remainder >= root + place)
+		{
+			remainder = remainder - root - place;
+			root = root + (place << 1);
+		}
+		root = root >> 1;
+		place = place >> 2;
+	}
+	return root;
+}
+
+
+//http://www.codecodex.com/wiki/Calculate_an_integer_square_root
+uint16_t  // OR uint16_t OR uint8_t
+isqrt16 (uint16_t n) // OR isqrt16 ( uint16_t n ) OR  isqrt8 ( uint8_t n ) - respectively [ OR overloaded as isqrt (uint?? n) in C++ ]
+{
+	register uint16_t // OR register uint16_t OR register uint8_t - respectively
+	root, remainder, place;
+
+	root = 0;
+	remainder = n;
+	place = 0x4000; // OR place = 0x4000; OR place = 0x40; - respectively
+
+	while (place > remainder)
+		place = place >> 2;
+	while (place)
+	{
+		if (remainder >= root + place)
+		{
+			remainder = remainder - root - place;
+			root = root + (place << 1);
+		}
+		root = root >> 1;
+		place = place >> 2;
+	}
+	return root;
+}
+
+
 /** @} */

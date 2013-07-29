@@ -4,7 +4,7 @@
 
 
 Tim Barrass  
-version 2013-07-13-17:27  
+version 2013-07-29-16:23  
 
 Currently your Arduino can only beep like a microwave oven. Mozzi brings
 your Arduino to life by allowing it to produce much more complex and interesting
@@ -109,13 +109,26 @@ Look for code and usage changes [here](extras/NEWS.txt).
 
 ***
 
-## Caveats
+## Caveats and Workarounds
 
-While Mozzi is running, the Arduino time functions `millis()`, `micros()`, `delay()`, and
-`delayMicroseconds()` are disabled. Instead, Mozzi provides `mozziMicros()` for timing, with 61us resolution (in `STANDARD` mode), and
-`EventDelay()` for scheduling.  Also, there's `pauseMozzi()` and `unpauseMozzi()` if the Arduino timers are required for other things.  
+* While Mozzi is running, the Arduino time functions `millis()`, `micros()`, `delay()`, and
+`delayMicroseconds()` are disabled.  
+
+Mozzi provides `EventDelay()` for scheduling instead of `delay`, and `mozziMicros()` for timing, with 61us resolution (in `STANDARD` mode).  
+
+* Mozzi interferes with `analogWrite()`.  In `STANDARD` audio mode, Mozzi takes over Timer0 (pins 5 and 6) and 
+Timer1 (pins 9 and 10), but you can use the Timer2 pins, 3 and 11 (your board may differ).  In `HIFI` mode, 
+Mozzi uses Timer0, Timer1 (or Timer4 on some boards), and Timer2, so pins 3 and 11 are also out.  
+
+If you need PWM output (`analogWrite()`), you can do it on any digital pins using the technique in 
+Mozzi>examples>11.Communication>Sinewave_PWM_pins_HIFI.  
+
+####Last Resort
+The timers can be made available with `pauseMozzi()`, which suspends audio and 
+control interrupts until you call `unpauseMozzi()`.  
 
 ***
+
 If you enjoy using Mozzi for a project, or have extended it, we would be
 pleased to hear about it and provide support wherever possible. Contribute
 suggestions, improvements and bug fixes to the Mozzi wiki on Github, or

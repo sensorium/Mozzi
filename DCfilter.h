@@ -31,6 +31,8 @@ http://www.dspguru.com/book/export/html/126
 y[n] = x[n] - x[n-1] + a * y[n-1]
 
 Where y[n] is the output at the current time n, and x[n] is the input at the current time n. 
+
+also, see DC Blocker Algorithms, http://www.ingelec.uns.edu.ar/pds2803/materiales/articulos/04472252.pdf
  */
  
 /**

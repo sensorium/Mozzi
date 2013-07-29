@@ -101,6 +101,7 @@ To convert a number from Qm.n format to floating point:
 */
 inline
 Q0n7 float_to_Q0n7(float a) { return static_cast<Q0n7>(a*256); } 		/**<Convert float to Q0n7 fix. @param a is a float*/
+
 inline
 Q0n8 float_to_Q0n8(float a) { return static_cast<Q0n8>(a*256); }		/**<Convert float to Q0n8 fix. @param a is a float*/
 
@@ -256,14 +257,11 @@ Q7n8 Q23n8_to_Q7n8(Q23n8 a) { return static_cast<Q7n8>(a); }				/**<Convert Q23n
 inline
 float Q23n8_to_float(Q23n8 a) { return (static_cast<float>(a))/256; }			/**<Convert fix to float. @param a is a Q23n8 signed long*/
 
-
 inline
 Q0n8 Q24n8_to_Q0n8(Q24n8 a) { return static_cast<Q0n8>(a); }			/**<Convert Q24n8 fixed to Q0n8 unsigned char. @param a is a Q24n8 unsigned long*/
 
-
 inline
 Q16n16 Q24n8_to_Q16n0(Q24n8 a) { return (static_cast<Q16n0>(a))>>8; }			/**<Convert Q24n8 fixed to Q16n0 unsigned int. @param a is a Q24n8 unsigned long*/
-
 
 inline
 Q32n0 Q24n8_to_Q32n0(Q24n8 a) { return static_cast<Q32n0>(a>>8); }		/**<Convert Q24n8 fixed to Q32n0 unsigned long. @param a is a Q24n8 unsigned long*/
@@ -273,7 +271,6 @@ Q16n16 Q24n8_to_Q16n16(Q24n8 a) { return (static_cast<Q16n16>(a))<<8; }			/**<Co
 
 inline
 float Q24n8_to_float(Q24n8 a) { return (static_cast<float>(a))/256; }				/**<Convert fix to float. @param a is a Q24n8 unsigned long*/
-
 
 inline
 Q0n8 Q15n16_to_Q0n8(Q15n16 a) { return static_cast<Q0n8>(a>>8); }			/**<Convert Q15n16 fixed to Q0n8 unsigned char.  Only for  positive values!  @param a is a Q15n16 signed long*/
@@ -289,7 +286,6 @@ Q23n8 Q15n16_to_Q23n8(Q15n16 a) { return static_cast<Q23n8>(a>>8); }			/**<Conve
 
 inline
 float Q15n16_to_float(Q15n16 a) { return (static_cast<float>(a))/65536; }			/**<Convert fix to float. @param a is a Q15n16 signed long*/
-
 
 inline
 Q0n8 Q16n16_to_Q0n8(Q16n16 a) { return static_cast<Q0n8>(a>>8); }			/**<Convert Q16n16 fixed to Q0n8 unsigned char. @param a is a Q16n16 unsigned long*/
@@ -402,7 +398,8 @@ Q7n8 Q7n8_mult(Q7n8 a, Q7n8 b) {
  
   */
 
-  
+
+
 int ipow(int base, int exp); /**< dangerous overflow-prone  int power function */
 
 Q16n16 Q16n16_pow2(Q8n8 exponent);
@@ -410,6 +407,7 @@ Q16n16 Q16n16_pow2(Q8n8 exponent);
 unsigned char byteMod(unsigned char n, unsigned char d);
 unsigned char byteDiv(unsigned char n, unsigned char d);
 unsigned char byteRnd(unsigned char min, unsigned char max);
-
+uint16_t isqrt16(uint16_t n);
+uint32_t isqrt32(uint32_t n);
 
 #endif /* FIXEDMATH_H_ */

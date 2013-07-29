@@ -16,7 +16,7 @@ mozzi_utils	KEYWORD1
 setPin13Out	KEYWORD2
 setPin13High	KEYWORD2
 setPin13Low	KEYWORD2
-
+trailingZeros	KEYWORD2
 
 LowPassFilter	KEYWORD1
 setCutoffFreq	KEYWORD2
@@ -235,6 +235,7 @@ Q16n16_pow2	KEYWORD2
 
 mozzi_analog	KEYWORD1
 setupFastAnalogRead	KEYWORD2
+setupMozziADC	KEYWORD2
 adcEnableInterrupt	KEYWORD2
 adcReadAllChannels	KEYWORD2
 adcGetResult	KEYWORD2
@@ -288,7 +289,7 @@ DCfilter	KEYWORD1
 next KEYWORD2
 
 
-RecentAverage	KEYWORD1
+RollingAverage	KEYWORD1
 next	KEYWORD2
 
 
@@ -309,6 +310,10 @@ SINGLE	LITERAL1
 DOUBLE	LITERAL1
 
 
+WavePacketSample	KEYWORD1
+setTable	KEYWORD2
+
+
 RCpoll	KEYWORD1
 next	KEYWORD2
 
@@ -322,7 +327,12 @@ next	KEYWORD2
 AutoMap	KEYWORD1
 next	KEYWORD2
 
-WavePacketSample	KEYWORD1
-setTable	KEYWORD2
+RollingStat	KEYWORD1
+update	KEYWORD2
+getMean	KEYWORD2
+getVariance	KEYWORD2
+getStandardDeviation	KEYWORD2
+
+
 
 

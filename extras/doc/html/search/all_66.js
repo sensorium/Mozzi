@@ -1,6 +1,10 @@
 var searchData=
 [
+  ['fast_5fadc',['FAST_ADC',['../mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2afe3cbac5740676dc7d2cdec6240c7103',1,'mozzi_analog.h']]],
+  ['faster_5fadc',['FASTER_ADC',['../mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2a1f7f03bbffd87c7f00639bd226d62259',1,'mozzi_analog.h']]],
+  ['fastest_5fadc',['FASTEST_ADC',['../mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2ab86fb324e76284548797eff7d6ac6dc3',1,'mozzi_analog.h']]],
   ['filter_5ftypes',['filter_types',['../_state_variable_8h.html#a6fc9fcb59c5ae9d9cd6af2c7aa71061f',1,'StateVariable.h']]],
+  ['first_5faudio_5fread',['first_audio_read',['../_mozzi_guts_8cpp.html#a8c2398d17a1e1ce4bef3bd54fc2c99ec',1,'MozziGuts.cpp']]],
   ['fixmath',['Fixmath',['../group__fixmath.html',1,'']]],
   ['float_5fto_5fq0n16',['float_to_Q0n16',['../group__fixmath.html#ga4d20591828f0189963f1190f7197ba68',1,'mozzi_fixmath.h']]],
   ['float_5fto_5fq0n7',['float_to_Q0n7',['../group__fixmath.html#ga1e0eab490ffe9a47fd78bcc449e3b995',1,'mozzi_fixmath.h']]],

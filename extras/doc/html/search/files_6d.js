@@ -11,6 +11,7 @@ var searchData=
   ['mozzi_5fmidi_2eh',['mozzi_midi.h',['../mozzi__midi_8h.html',1,'']]],
   ['mozzi_5frand_2ecpp',['mozzi_rand.cpp',['../mozzi__rand_8cpp.html',1,'']]],
   ['mozzi_5frand_2eh',['mozzi_rand.h',['../mozzi__rand_8h.html',1,'']]],
+  ['mozzi_5futils_2ecpp',['mozzi_utils.cpp',['../mozzi__utils_8cpp.html',1,'']]],
   ['mozzi_5futils_2eh',['mozzi_utils.h',['../mozzi__utils_8h.html',1,'']]],
   ['mozziguts_2ecpp',['MozziGuts.cpp',['../_mozzi_guts_8cpp.html',1,'']]],
   ['mozziguts_2eh',['MozziGuts.h',['../_mozzi_guts_8h.html',1,'']]],

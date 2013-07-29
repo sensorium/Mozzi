@@ -44,7 +44,8 @@ public:
 	*/
 	AutoMap(int min_expected, int max_expected, int map_to_min, int map_to_max) 
 		: inherited(min_expected,max_expected),map_min(map_to_min), map_max(map_to_max)
-	{}
+	{
+	}
 	
 	
 	/** Process the next value and return it mapped to the range which was set in the constructor.

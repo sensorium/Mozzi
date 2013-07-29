@@ -288,6 +288,18 @@ int getAudioInput();
 
 
 /** @ingroup core
+An alternative for Arduino time funcitions like micros() which are disabled by Mozzi when it takes over
+Timer 0 for control interrupts. audioTicks() is updated each time an audio sample
+is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when AUDIO_RATE is
+16384 Hz).
+@return the number of audio ticks since the program began.
+@todo  incorporate audioTicks() in a more accurate EventDelay()?
+*/
+unsigned long audioTicks();
+
+
+
+/** @ingroup core
 A replacement for Arduino micros() which is disabled by Mozzi which takes over
 Timer 0 for control interrupts. mozziMicros is updated each time an audio sample
 is output, so the resolution is 1/AUDIO_RATE (61 microseconds when AUDIO_RATE is
@@ -298,9 +310,12 @@ is output, so the resolution is 1/AUDIO_RATE (61 microseconds when AUDIO_RATE is
 unsigned long mozziMicros();
 
 
+
+
 // internal use
 #if (AUDIO_MODE == HIFI)
 static void setupTimer2();
 #endif
+
 
 #endif /* MOZZIGUTS_H_ */

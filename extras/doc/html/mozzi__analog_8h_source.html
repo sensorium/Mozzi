@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-07-29-16:23</span>
+   &#160;<span id="projectnumber">version 2013-07-29-16:35</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -159,78 +159,78 @@ $(document).ready(function(){initNavTree('mozzi__analog_8h_source.html','');});
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">adcEnableInterrupt</a>();</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">// for setupFastAnalogRead()</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno"><a class="code" href="mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2ab86fb324e76284548797eff7d6ac6dc3">   84</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2">ANALOG_READ_SPEED</a> {<a class="code" href="mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2afe3cbac5740676dc7d2cdec6240c7103">FAST_ADC</a>,<a class="code" href="mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2a1f7f03bbffd87c7f00639bd226d62259">FASTER_ADC</a>,<a class="code" href="mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2ab86fb324e76284548797eff7d6ac6dc3">FASTEST_ADC</a>};</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#ga8741756d32609ad6dec641943fa99af9" title="Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in u...">setupFastAnalogRead</a>(<span class="keywordtype">char</span> speed=<a class="code" href="mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2afe3cbac5740676dc7d2cdec6240c7103">FAST_ADC</a>);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">adcEnableInterrupt</a>();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">// for setupFastAnalogRead()</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="code" href="mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2ab86fb324e76284548797eff7d6ac6dc3">   82</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2">ANALOG_READ_SPEED</a> {<a class="code" href="mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2afe3cbac5740676dc7d2cdec6240c7103">FAST_ADC</a>,<a class="code" href="mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2a1f7f03bbffd87c7f00639bd226d62259">FASTER_ADC</a>,<a class="code" href="mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2ab86fb324e76284548797eff7d6ac6dc3">FASTEST_ADC</a>};</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#ga8741756d32609ad6dec641943fa99af9" title="Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in u...">setupFastAnalogRead</a>(<span class="keywordtype">char</span> speed=<a class="code" href="mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2afe3cbac5740676dc7d2cdec6240c7103">FAST_ADC</a>);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#gaffeb925f6aca20f179cc46e1734c04ad" title="Set up for asynchronous analog input, which enables analog reads to take place in the background with...">setupMozziADC</a>(<span class="keywordtype">char</span> speed=<a class="code" href="mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2afe3cbac5740676dc7d2cdec6240c7103">FAST_ADC</a>);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#gaffeb925f6aca20f179cc46e1734c04ad" title="Set up for asynchronous analog input, which enables analog reads to take place in the background with...">setupMozziADC</a>(<span class="keywordtype">char</span> speed=<a class="code" href="mozzi__analog_8h.html#a7e4ced591f961c948a6c7feed8e7bdc2afe3cbac5740676dc7d2cdec6240c7103">FAST_ADC</a>);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#gad4433797b75fedd473250e9aa414dcae" title="Prepare an analog input channel by turning off its digital input buffer.">disconnectDigitalIn</a>(byte channel_num);</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#gacd83735876cf223916ea4925ec4efd4a" title="Reconnect the digital input buffer for an analog input channel which has been set for analog input wi...">reconnectDigitalIn</a>(byte channel_num);</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#ga5042e7c576dd0307be38eb70efdb69fe" title="Prepare all analog input channels by turning off their digital input buffers.">adcDisconnectAllDigitalIns</a>();</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#gabad497d1f8c8026e81849be0b65bf38f" title="Reconnect the digital input buffers for analog input channels which have been set for analog input wi...">adcReconnectAllDigitalIns</a>();</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#gae0d3533acb5fd56db8f7317e24bea6b5" title="Set the channel or pin for the next analog input to be read from.">adcSetChannel</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> pin);</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> pin);</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#gad4433797b75fedd473250e9aa414dcae" title="Prepare an analog input channel by turning off its digital input buffer.">disconnectDigitalIn</a>(byte channel_num);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#gacd83735876cf223916ea4925ec4efd4a" title="Reconnect the digital input buffer for an analog input channel which has been set for analog input wi...">reconnectDigitalIn</a>(byte channel_num);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#ga5042e7c576dd0307be38eb70efdb69fe" title="Prepare all analog input channels by turning off their digital input buffers.">adcDisconnectAllDigitalIns</a>();</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#gabad497d1f8c8026e81849be0b65bf38f" title="Reconnect the digital input buffers for analog input channels which have been set for analog input wi...">adcReconnectAllDigitalIns</a>();</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#gae0d3533acb5fd56db8f7317e24bea6b5" title="Set the channel or pin for the next analog input to be read from.">adcSetChannel</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> pin);</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> pin);</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion</a>();</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion</a>();</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;</div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07" title="DEPRECIATED.">adcGetResult</a>();</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07" title="DEPRECIATED.">adcGetResult</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> channel_num);</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07" title="DEPRECIATED.">adcGetResult</a>();</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07" title="DEPRECIATED.">adcGetResult</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> channel_num);</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">Currently, if audio input is enabled it uses analog input channel 0 and doesn&#39;t</span></div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">allow other channels to be used, to avoid interference between the strict audio</span></div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">rate sampling and any control analog conversions which could be in progress when</span></div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">the audio needs to be sampled. This might be solved in future, but workable</span></div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">solutions for control inputs include RC circuits on digital pins, switches, or</span></div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">serial connections (which also may require extra solutions for asynchronous</span></div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">operation). There is a fork of Mozzi on github (posted on the mozzi-users list)</span></div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">which includes a 2-wire async serial adaptation. It would be good eventually to</span></div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">merge that with the main repo.</span></div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">// these are in adc_all_channels.cpp with the ISR(ADC_vect) they work with.  The ISR needs to</span></div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">// hide from the compiler if USE_AUDIO_INPUT is true, which also uses ISR(ADC_vect).</span></div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">// They could have been conditionally compiled together in the one ISR, but this is slightly </span></div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">// less messy and allows for some static variables which would otherwise have had to have been global.</span></div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels</a>();</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* MOZZI_ANALOG_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">Currently, if audio input is enabled it uses analog input channel 0 and doesn&#39;t</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">allow other channels to be used, to avoid interference between the strict audio</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">rate sampling and any control analog conversions which could be in progress when</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">the audio needs to be sampled. This might be solved in future, but workable</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">solutions for control inputs include RC circuits on digital pins, switches, or</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">serial connections (which also may require extra solutions for asynchronous</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">operation). There is a fork of Mozzi on github (posted on the mozzi-users list)</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">which includes a 2-wire async serial adaptation. It would be good eventually to</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">merge that with the main repo.</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">// these are in adc_all_channels.cpp with the ISR(ADC_vect) they work with.  The ISR needs to</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">// hide from the compiler if USE_AUDIO_INPUT is true, which also uses ISR(ADC_vect).</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">// They could have been conditionally compiled together in the one ISR, but this is slightly </span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">// less messy and allows for some static variables which would otherwise have had to have been global.</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels</a>();</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* MOZZI_ANALOG_H_ */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="mozzi__analog_8h.html">mozzi_analog.h</a></li>
-    <li class="footer">Generated on Mon Jul 29 2013 16:23:55 for Mozzi by
+    <li class="footer">Generated on Mon Jul 29 2013 16:35:46 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

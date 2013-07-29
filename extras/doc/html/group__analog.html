@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-07-29-16:23</span>
+   &#160;<span id="projectnumber">version 2013-07-29-16:35</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -97,7 +97,7 @@ $(document).ready(function(){initNavTree('group__analog.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Fast analog input functions for sensors and audio Glitch-free audio by speeding up analog input functions which normally block processing.  
+<p>Fast analog input functions for sensors and audio.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -146,7 +146,8 @@ Functions</h2></td></tr>
 <tr class="separator:ga3f15eb8d6694020d170ebcbedb645de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Fast analog input functions for sensors and audio Glitch-free audio by speeding up analog input functions which normally block processing. </p>
+<p>Fast analog input functions for sensors and audio. </p>
+<p>Helps produce glitch-free audio by speeding up analog input functions which normally block processing. </p>
 <h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="ga5042e7c576dd0307be38eb70efdb69fe"></a>
 <div class="memitem">
@@ -164,7 +165,7 @@ Functions</h2></td></tr>
 <p>Prepare all analog input channels by turning off their digital input buffers. </p>
 <p>This helps to reduce noise, increase analog reading speed, and save power. </p>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00148">148</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00149">149</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -185,9 +186,7 @@ Functions</h2></td></tr>
 <p>Then call <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels()</a> at the end of each <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> and the results for each analog channel will be available by calling adcGetResult(channel_num) next time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> runs. </p>
 <dl class="section note"><dt>Note</dt><dd>This method using <a class="el" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">adcEnableInterrupt()</a>, <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels()</a> and <a class="el" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07" title="DEPRECIATED.">adcGetResult()</a> is an easy and efficient way to read analog inputs while generating sound with Mozzi. For many sketches, however, simply putting <a class="el" href="group__analog.html#ga8741756d32609ad6dec641943fa99af9" title="Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in u...">setupFastAnalogRead()</a> in setup() and calling Arduino's usual analogRead() will work fast enough. </dd>
 <dd>
-Don't use <a class="el" href="group__analog.html#ga8741756d32609ad6dec641943fa99af9" title="Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in u...">setupFastAnalogRead()</a> with <a class="el" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">adcEnableInterrupt()</a>. It may cause the ADC process to hog the processor, causing audio glitches. </dd>
-<dd>
-In some cases this method can cause glitches which may have to do with the ADC interrupt interfering with the audio or control interrupts. If this occurs, use the <a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion()</a>, <a class="el" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07" title="DEPRECIATED.">adcGetResult()</a> methods instead. </dd></dl>
+In some cases this method can cause glitches which may have to do with the ADC interrupt interfering with the audio or control interrupts. If this occurs, try the <a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion()</a>, <a class="el" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07" title="DEPRECIATED.">adcGetResult()</a> methods instead. </dd></dl>
 
 <p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00048">48</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
@@ -213,7 +212,7 @@ In some cases this method can cause glitches which may have to do with the ADC i
 <dd>
 Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> with CONTROL_RATE 64. </dd></dl>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00120">120</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00121">121</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -242,7 +241,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
 <dd>
 In some cases this method can cause glitches which may have to do with the ADC interrupt interfering with the audio or control interrupts. </dd></dl>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00204">204</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00205">205</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -266,7 +265,7 @@ In some cases this method can cause glitches which may have to do with the ADC i
 <p>Call <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels()</a> in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> and the results for each channel will be available by calling adcGetResult(channel_num) next time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> runs.</p>
 <p>This pushes all the other analog channel numbers onto a stack to be read consecutively, one each time the analog read interrupt returns, until the stack is empty. When USE_AUDIO_INPUT=true, the sequence will start when it is triggered by the return of the next audio analog input interrupt. When USE_AUDIO_INPUT=false, <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels()</a> starts the first conversion itself and the rest are triggered automatically. </p>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00191">191</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00192">192</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -285,7 +284,7 @@ In some cases this method can cause glitches which may have to do with the ADC i
 
 <p>Reconnect the digital input buffers for analog input channels which have been set for analog input with <a class="el" href="group__analog.html#gad4433797b75fedd473250e9aa414dcae" title="Prepare an analog input channel by turning off its digital input buffer.">disconnectDigitalIn()</a>. </p>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00155">155</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00156">156</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -311,7 +310,7 @@ In some cases this method can cause glitches which may have to do with the ADC i
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00064">64</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00065">65</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -341,7 +340,7 @@ In some cases this method can cause glitches which may have to do with the ADC i
 <dd>
 Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> with CONTROL_RATE 64. </dd></dl>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00104">104</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00105">105</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -360,7 +359,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
 
 <p>Starts the analog conversion on the pin or channel most recently set with <a class="el" href="group__analog.html#gae0d3533acb5fd56db8f7317e24bea6b5" title="Set the channel or pin for the next analog input to be read from.">adcSetChannel()</a>;. </p>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00113">113</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00114">114</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -391,7 +390,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00138">138</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00139">139</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -438,7 +437,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00143">143</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00144">144</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -501,7 +500,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Jul 29 2013 16:23:56 for Mozzi by
+    <li class="footer">Generated on Mon Jul 29 2013 16:35:46 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

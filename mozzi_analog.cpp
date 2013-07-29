@@ -54,6 +54,7 @@ void adcEnableInterrupt(){
 void setupMozziADC(char speed) {
 	adcEnableInterrupt();
 	setupFastAnalogRead(speed);
+	adcDisconnectAllDigitalIns();
 	adcReadAllChannels();
 }
 

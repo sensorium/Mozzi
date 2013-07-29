@@ -71,10 +71,8 @@ available by calling adcGetResult(channel_num) next time updateControl() runs.
 efficient way to read analog inputs while generating sound with Mozzi. For many
 sketches, however, simply putting setupFastAnalogRead() in setup() and calling
 Arduino's usual analogRead() will work fast enough.
-@note Don't use setupFastAnalogRead() with adcEnableInterrupt().
-It may cause the ADC process to hog the processor, causing audio glitches.
 @note In some cases this method can cause glitches which may have to do with the ADC
-interrupt interfering with the audio or control interrupts. If this occurs, use
+interrupt interfering with the audio or control interrupts. If this occurs, try
 the adcStartConversion(), adcGetResult() methods instead.
 */
 void adcEnableInterrupt();

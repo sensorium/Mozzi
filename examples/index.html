@@ -72,7 +72,7 @@
 		</p>
 		<p>
 			<!-- <a class="header_link" href="https://github.com/sensorium/Mozzi/zipball/master"> -->
-			<a class="header_link" href="http://www.users.on.net/~tim.barrass/mozzi/Mozzi.zip">
+			<a class="header_link" href="http://tinyurl.com/mozzilib/Mozzi.zip">
 				download<br>
 				<i class="icon-download icon-4x"></i><br>
 				<span id="header_small_label">version 2013-07-29-18:09</span>
@@ -9103,128 +9103,7 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 <button id='Sample_Offsetcollapse' style='display:none' onclick='javascript:toggleDisplay(Sample_Offset, Sample_Offsetexpand, Sample_Offsetcollapse)'>hide sketch</button></p>
 
 <div id='Sample_Offset' style='display:none'>
-<figure class='code'><figcaption><span> (Sample_Offset.ino)</span> <a href='/Mozzi/downloads/code/examples/08.Samples/Sample_Offset/Sample_Offset.ino'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of crude &quot;scraping&quot; through a sampled sound</span>
-</span><span class='line'><span class="cm"> *  using Mozzi sonification library.</span>
-</span><span class='line'><span class="cm"> *</span>
-</span><span class='line'><span class="cm"> *  Demonstrates starting a sample with an offset.</span>
-</span><span class='line'><span class="cm"> *  </span>
-</span><span class='line'><span class="cm"> *  todo: use a window function to do it smoothly</span>
-</span><span class='line'><span class="cm"> *</span>
-</span><span class='line'><span class="cm"> *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or </span>
-</span><span class='line'><span class="cm"> *  check the README or http://sensorium.github.com/Mozzi/</span>
-</span><span class='line'><span class="cm"> *</span>
-</span><span class='line'><span class="cm"> *  Mozzi help/discussion/announcements:</span>
-</span><span class='line'><span class="cm"> *  https://groups.google.com/forum/#!forum/mozzi-users</span>
-</span><span class='line'><span class="cm"> *</span>
-</span><span class='line'><span class="cm"> *  Tim Barrass 2012.</span>
-</span><span class='line'><span class="cm"> *  This example code is in the public domain.</span>
-</span><span class='line'><span class="cm"> */</span>
-</span><span class='line'>
-</span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;Sample.h&gt; </span><span class="c1">// Sample template</span>
-</span><span class='line'><span class="cp">#include &lt;samples/burroughs1_18649_int8.h&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;mozzi_rand.h&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="cp">#define CONTROL_RATE 512</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// use: Sample &lt;table_size, update_rate&gt; SampleName (wavetable)</span>
-</span><span class='line'><span class="n">Sample</span> <span class="o">&lt;</span><span class="n">BURROUGHS1_18649_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aSample</span><span class="p">(</span><span class="n">BURROUGHS1_18649_DATA</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">int</span> <span class="n">offset</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="kt">int</span> <span class="n">offset_advance</span> <span class="o">=</span><span class="mi">4</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
-</span><span class='line'>  <span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">aSample</span><span class="p">.</span><span class="n">setFreq</span><span class="p">((</span><span class="kt">float</span><span class="p">)</span> <span class="n">BURROUGHS1_18649_SAMPLERATE</span> <span class="o">/</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span> <span class="n">BURROUGHS1_18649_NUM_CELLS</span><span class="p">);</span> <span class="c1">// play at the speed it was recorded</span>
-</span><span class='line'>  <span class="n">aSample</span><span class="p">.</span><span class="n">setLoopingOn</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span>
-</span><span class='line'>  <span class="n">offset</span> <span class="o">+=</span> <span class="n">offset_advance</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">// keep offset in range</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">offset</span> <span class="o">&gt;=</span> <span class="n">BURROUGHS1_18649_NUM_CELLS</span><span class="p">)</span> <span class="n">offset</span> <span class="o">-=</span> <span class="n">BURROUGHS1_18649_NUM_CELLS</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">offset</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">offset</span> <span class="o">+=</span> <span class="n">BURROUGHS1_18649_NUM_CELLS</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">// choose a new offfset_advance amount now and again</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">offset_advance</span> <span class="o">=</span> <span class="mi">2</span><span class="o">+</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="n">offset_advance</span> <span class="o">=</span> <span class="o">-</span><span class="n">offset_advance</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="n">aSample</span><span class="p">.</span><span class="n">start</span><span class="p">(</span><span class="n">offset</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="kt">int</span> <span class="n">updateAudio</span><span class="p">(){</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">aSample</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
-</span><span class='line'>  <span class="n">audioHook</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+File /Users/timbarrass/mozzi-octopress/source/downloads/code/examples/08.Samples/Sample_Offset/Sample_Offset.ino could not be found
 </div>
 
 

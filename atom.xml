@@ -4,7 +4,7 @@
   <title><![CDATA[MOZZI]]></title>
   <link href="http://sensorium.github.io/Mozzi//atom.xml" rel="self"/>
   <link href="http://sensorium.github.io/Mozzi//"/>
-  <updated>2013-08-06T12:19:21+10:00</updated>
+  <updated>2013-08-06T17:42:51+10:00</updated>
   <id>http://sensorium.github.io/Mozzi//</id>
   <author>
     <name><![CDATA[Tim Barrass]]></name>
@@ -12,6 +12,16 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Upcoming Mozzi talk at ICMC2013 in Perth]]></title>
+    <link href="http://sensorium.github.io/Mozzi//blog/2013/08/06/upcoming-mozzi-talk-at-icmc2013-in-perth/"/>
+    <updated>2013-08-06T17:34:00+10:00</updated>
+    <id>http://sensorium.github.io/Mozzi//blog/2013/08/06/upcoming-mozzi-talk-at-icmc2013-in-perth</id>
+    <content type="html"><![CDATA[<p>There&#8217;ll be a conference presentation about Mozzi as part of <a href="http://icmc2013.com.au/program/">ICMC</a> in Perth
+on Thursday 15 August, 14:15 – 16:15, State Theatre Centre – Studio Underground.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Audio and Control ADC together]]></title>

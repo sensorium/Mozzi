@@ -201,11 +201,69 @@ It is ready to be used in your sketch.</p>
 <p>To hear Mozzi, connect a 3.5mm audio jack with the centre wire to the PWM output
 on Digital Pin 9* on Arduino, and the ground to the Ground on the Arduino.
 Use this as a line out which you can plug into your computer and listen to with
-a sound program like <a href="http://audacity.sourceforge.net/">Audacity</a>.
+a sound program like <a href="http://audacity.sourceforge.net/">Audacity</a>. <br/>
 Try some examples from the <strong>File > Examples > Mozzi</strong> menu.<br/>
-* See the README for audio output pins on different boards.</p>
+* The pin used by Mozzi for audio output depends on which board you have.
+These boards have been tested:</p>
 
-<p>For details about HIFI mode, read the <a href="http://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/">Mozzi core module documentation</a>.</p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>Board</strong>             </th>
+<th align="right"> <strong>Output Pin</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Arduino Uno           </td>
+<td align="right"> &#8230;9</td>
+</tr>
+<tr>
+<td align="left">Arduino Duemilanove   </td>
+<td align="right"> &#8230;9  </td>
+</tr>
+<tr>
+<td align="left">Arduino Nano          </td>
+<td align="right"> &#8230;9  </td>
+</tr>
+<tr>
+<td align="left">Arduino Pro Mini      </td>
+<td align="right"> &#8230;9  </td>
+</tr>
+<tr>
+<td align="left">Arduino Leonardo      </td>
+<td align="right"> &#8230;9  </td>
+</tr>
+<tr>
+<td align="left">Ardweeny              </td>
+<td align="right"> &#8230;9  </td>
+</tr>
+<tr>
+<td align="left">Boarduino             </td>
+<td align="right"> &#8230;9  </td>
+</tr>
+<tr>
+<td align="left">Arduino Mega          </td>
+<td align="right"> &#8230;11  </td>
+</tr>
+<tr>
+<td align="left">Freetronics EtherMega </td>
+<td align="right"> &#8230;11   </td>
+</tr>
+<tr>
+<td align="left">Teensy2               </td>
+<td align="right"> &#8230;B5</td>
+</tr>
+<tr>
+<td align="left">Teensy2++             </td>
+<td align="right"> &#8230;B5(25)  </td>
+</tr>
+</tbody>
+</table>
+
+
+<p></br>
+For more about audio output, including HIFI mode, read the <a href="http://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/">Mozzi core module documentation</a>.</p>
 
 <hr />
 

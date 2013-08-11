@@ -4,7 +4,7 @@
   <title><![CDATA[Category: updates | MOZZI]]></title>
   <link href="http://sensorium.github.io/Mozzi//blog/categories/updates/atom.xml" rel="self"/>
   <link href="http://sensorium.github.io/Mozzi//"/>
-  <updated>2013-08-06T17:42:51+10:00</updated>
+  <updated>2013-08-11T22:40:07+08:00</updated>
   <id>http://sensorium.github.io/Mozzi//</id>
   <author>
     <name><![CDATA[Tim Barrass]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Audio and Control ADC together]]></title>
     <link href="http://sensorium.github.io/Mozzi//blog/2013/07/29/audio-and-control-adc-together/"/>
-    <updated>2013-07-29T18:24:00+10:00</updated>
+    <updated>2013-07-29T18:24:00+08:00</updated>
     <id>http://sensorium.github.io/Mozzi//blog/2013/07/29/audio-and-control-adc-together</id>
     <content type="html"><![CDATA[<p>Version 2013-07-29-18:09 enables audio and control rate analog inputs to work at the same time.
 Audio input is on analog pin A0.  Each time an audio sample is output, the audio input is sampled.

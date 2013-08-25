@@ -408,6 +408,12 @@ private:
 		return delay_sig;
 	}
 
+	
 };
+
+/**
+@example 09.Delays/AudioDelayFeedback/AudioDelayFeedback.ino
+This is an example of how to use the AudioDelayFeedback class.
+*/
 
 #endif        //  #ifndef AUDIODELAY_FEEDBACK_H_

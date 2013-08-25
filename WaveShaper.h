@@ -108,7 +108,9 @@ private:
 	const int * table;
 };
 
-
+/** @example 06.Synthesis/WaveShaper/WaveShaper.ino
+This is an example of how to use the WaveShaper class.
+*/
 #endif /* WAVESHAPER_H_ */
 
 

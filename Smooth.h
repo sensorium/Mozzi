@@ -26,7 +26,7 @@
 #include "Arduino.h"
 #include "mozzi_fixmath.h"
 
-/** A simple infinite impulse response low pass filter for smoothing control signals. 
+/** A simple infinite impulse response low pass filter for smoothing control or audio signals. 
 This algorithm comes from http://en.wikipedia.org/wiki/Low-pass_filter: 
 y[i] := y[i-1] + α * (x[i] - y[i-1]), 
 translated as 
@@ -60,7 +60,7 @@ public:
 		setSmoothness(smoothness);
 	}
 
-	/** Filters the input and returns the filtered value.
+	/** Filters the input and returns the filtered value.  You can also use the operator() function, eg. something like mySmoother(input-value).
 	@param in the signal to be smoothed.
 	@return the filtered signal.
 	 */
@@ -72,6 +72,17 @@ public:
 		return (T)(out>>8);
 	}
 
+	
+	/** Filters the input and returns the filtered value.  Same as next(input-value).
+	@param in the signal to be smoothed.
+	@return the filtered signal.
+	 */
+	inline
+	T operator()(T n) {
+		return next(n);
+	}
+	
+	
 	/** Sets how much smoothing the filter will apply to its input.
 	@param smoothness sets how much smoothing the filter will apply to
 	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
@@ -107,7 +118,7 @@ public:
 		setSmoothness(smoothness);
 	}
 
-	/** Filters the input and returns the filtered value.
+	/** Filters the input and returns the filtered value.  You can also use the operator() function, eg. something like mySmoother(input-value).
 	@param in the signal to be smoothed.
 	@return the filtered signal.
 	 */
@@ -119,6 +130,17 @@ public:
 		return (unsigned char)(out>>8);
 	}
 
+	
+	/** Filters the input and returns the filtered value.  Same as next(input-value).
+	@param in the signal to be smoothed.
+	@return the filtered signal.
+	 */
+	inline
+	unsigned char  operator()(unsigned char  n) {
+		return next(n);
+	}
+	
+	
 	/** Sets how much smoothing the filter will apply to its input.
 	@param smoothness sets how much smoothing the filter will apply to
 	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
@@ -152,7 +174,8 @@ public:
 		setSmoothness(smoothness);
 	}
 
-	/** Filters the input and returns the filtered value.
+	
+	/** Filters the input and returns the filtered value.  You can also use the operator() function, eg. something like mySmoother(input-value).
 	@param in the signal to be smoothed.
 	@return the filtered signal.
 	 */
@@ -164,6 +187,17 @@ public:
 		return (char)(out>>8);
 	}
 
+	
+	/** Filters the input and returns the filtered value.  Same as next(input-value).
+	@param in the signal to be smoothed.
+	@return the filtered signal.
+	 */
+	inline
+	char operator()(char n) {
+		return next(n);
+	}
+	
+	
 	/** Sets how much smoothing the filter will apply to its input.
 	@param smoothness sets how much smoothing the filter will apply to
 	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
@@ -196,7 +230,7 @@ public:
 		setSmoothness(smoothness);
 	}
 
-	/** Filters the input and returns the filtered value.
+	/** Filters the input and returns the filtered value.  You can also use the operator() function, eg. something like mySmoother(input-value).
 	@param in the signal to be smoothed.
 	@return the filtered signal.
 	 */
@@ -209,6 +243,17 @@ public:
 		return out;
 	}
 
+	
+	/** Filters the input and returns the filtered value.  Same as next(input-value).
+	@param in the signal to be smoothed.
+	@return the filtered signal.
+	 */
+	inline
+	float operator()(float n) {
+		return next(n);
+	}
+	
+	
 	/** Sets how much smoothing the filter will apply to its input.
 	@param smoothness sets how much smoothing the filter will apply to
 	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
@@ -224,5 +269,10 @@ public:
 
 
 /** @endcond */
+
+/**
+@example 05.Control_Filters/Smooth/Smooth.ino
+This example demonstrates the Smooth class.
+*/
 
 #endif /* SMOOTH_H_ */

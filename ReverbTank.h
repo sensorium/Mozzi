@@ -135,4 +135,10 @@ private:
 	AudioDelay <256,int> aLoopDel2; // 7 metres
 
 };
+
+/**
+@example 09.Delays/ReverbTank_STANDARD/ReverbTank_STANDARD.ino
+This example demonstrates the ReverbTank class.
+*/
+
 #endif        //  #ifndef REVERBTANK_H

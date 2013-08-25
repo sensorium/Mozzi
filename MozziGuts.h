@@ -24,13 +24,13 @@
 #define MOZZIGUTS_H_
 
 #if F_CPU != 16000000
-#error Mozzi expects a cpu clock speed of 16MHz!
+#error "Mozzi expects a cpu clock speed of 16MHz!  You can try on boards with other clock speeds by removing this line in MozziGuts.h, but, well.....good luck!"
 #endif
 
 #include "TimerZero.h"
 #include "TimerOne.h"
 #include "FrequencyTimer2.h"
-
+#include "mozzi_analog.h"
 
 /** @ingroup core
 Control rate setting.
@@ -96,10 +96,10 @@ HIFI mode uses 2 output pins, and sums their outputs with resistors, so is sligh
 rapid prototyping where you could listen to STANDARD mode by connecting the single output pin 
 directly to a speaker or audio input (though a resistor of about 100 ohms is recommended).
 
-The resistors needed for HIFI output are 3.9k and 1M, with 1% or better tolerance.
-Use a multimeter to test a group of 1% resistors to find the most accurate.
+The resistors needed for HIFI output are 3.9k and 1M, with 0.5% or better tolerance.
+If you can only get 1% resistors, use a multimeter to find the most accurate.
 
-On 328 based Arduino boards, output is on Timer1, with the low byte on Pin 10 and high byte on Pin 9.
+On 328 based Arduino boards, output is on Timer1, with the high byte on Pin 9 and low byte on Pin 10.
 Add the signals through a 3.9k resistor on high byte pin (9) and 1M resistor on low byte pin (10).
 Also, a 4.7nF capacitor is recommended between the summing junction of the resistors and ground.
 

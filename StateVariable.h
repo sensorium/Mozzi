@@ -209,4 +209,9 @@ private:
 
 };
 
+/**
+@example 11.Audio_Filters/StateVariableFilter/StateVariableFilter.ino
+This example demonstrates the StateVariable class.
+*/
+
 #endif /* STATEVARIABLE_H_ */

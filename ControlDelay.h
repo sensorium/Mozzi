@@ -43,7 +43,7 @@ class ControlDelay: public AudioDelay<NUM_BUFFER_SAMPLES, T>
 };
 
 /**
-@example _02_control/Control_Echo_Theremin/Control_Echo_Theremin.ino
+@example 02.Control/Control_Echo_Theremin/Control_Echo_Theremin.ino
 This is an example of how to use the ControlDelay class.
 */
 

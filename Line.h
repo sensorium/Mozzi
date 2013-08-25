@@ -116,4 +116,10 @@ public:
 	}
 };
 
+
+/**
+@example 02.Control/Control_Tremelo/Control_Tremelo.ino
+This example demonstrates the Line class.
+*/
+
 #endif /* LINE_H_ */

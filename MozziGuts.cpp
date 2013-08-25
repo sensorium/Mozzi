@@ -23,6 +23,7 @@
 
 #include "MozziGuts.h"
 #include "mozzi_config.h" // at the top of all MozziGuts and analog files
+
 //#include <util/atomic.h>
 //#include "mozzi_utils.h"
 
@@ -108,10 +109,6 @@ static void backupMozziTimer1(){
 
 #if (USE_AUDIO_INPUT==true)
 
-volatile bool doing_audio_adc;
-volatile bool first_audio_read;
-
-#include "mozzi_analog.h"
 
 static volatile long input_gap;
 static volatile unsigned long input_buffer_head;
@@ -129,14 +126,14 @@ int getAudioInput()
 
 
 static void startFirstAudioADC() {
-	adcStartConversion(0);
+	adcStartConversion(adcPinToChannelNum(AUDIO_INPUT_PIN));
 }
 
-
+/*
 static void receiveFirstAudioADC() {
 	// nothing
 }
-
+*/
 
 static void startSecondAudioADC() {
 	ADCSRA |= (1 << ADSC); // start a second conversion on the current channel
@@ -153,53 +150,14 @@ static void receiveSecondAudioADC() {
 	}
 }
 
-//setPin13High();
-//setPin13Low();	
-/*
-static int count;
-if(count++==1000) {
-	Serial.println((int)adc_count);
-	count=0;
-}
-*/
-/* ADC ISR. This is called when the adc finishes a conversion.
-*/
-/*
-ISR(ADC_vect, ISR_BLOCK) {
-	switch (adc_count){
-		case 0:
-		//receiveFirstAudioADC();
-		startSecondAudioADC();
-      	break;
 
-      	case 1:
-      	// 6us	
-      	receiveSecondAudioADC();
-		startFirstControlADC();
-      	break;
-      	
-      	case 2:
-      	//<1us
-      	//receiveFirstControlADC();
-      	startSecondControlADC();
-      	break;
-      	
-      	case 3:
-      	// 3us
-      	receiveSecondControlADC();
-      	break;
-
-	}
-	adc_count++;
-}
-*/
 
 ISR(ADC_vect, ISR_BLOCK) {
 	switch (adc_count){
 		case 0:
 		// 6us	      		      	
 		receiveSecondAudioADC();
-		startFirstControlADC();
+		adcReadSelectedChannels();
       	break;
 
       	case 1:
@@ -277,16 +235,7 @@ void audioHook() // 2us excluding updateAudio()
 
 		adc_count = 0;
 	    startSecondAudioADC();
-	    //startFirstAudioADC();
-		// change channel could be left out if no control inputs are used
-		//set analog in to channel 0 and start a converson
-		//adcStartConversion(0);
-		//ADCSRB = ADCSRB & ~(1 << MUX5); //reading from channels 0 to 7 (MUX5 low) 
-		//ADMUX = (1 << REFS0); 	// set the analog reference (high two bits of ADMUX) and select the
-													// channel (low 4 bits).  this also sets ADLAR (left-adjust result) to 0 (the default).
-		//ADCSRA |= (1 << ADSC); // start next adc conversion
-		//doing_audio_adc = true;
-		//first_audio_read = true;
+
 #endif
 		output_buffer_tail++;
 		AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer[(unsigned char)output_buffer_tail & (unsigned char)(BUFFER_NUM_CELLS-1)]; // 1us, 2.5us with longs
@@ -381,7 +330,6 @@ void audioHook() // 2us excluding updateAudio()
 #if (USE_AUDIO_INPUT==true)
 		adc_count = 0;
 	    startSecondAudioADC();
-	    //startFirstAudioADC();
 #endif
 
 		output_buffer_tail++;
@@ -403,6 +351,13 @@ void audioHook() // 2us excluding updateAudio()
 
 	//-----------------------------------------------------------------------------------------------------------------
 
+	static void updateControlWithAutoADC()
+	{
+		updateControl();
+		adcStartReadCycle();
+	}
+	
+	
 	/* Sets up Timer 0 for control interrupts. This is the same for all output
 	options Using Timer0 for control disables Arduino's time functions but also
 	saves on the interrupts and blocking action of those functions. May add a config
@@ -416,7 +371,7 @@ void audioHook() // 2us excluding updateAudio()
 		pre_mozzi_OCR0A = OCR0A;
 		pre_mozzi_TIMSK0 = TIMSK0;
 
-		TimerZero::init(1000000/control_rate_hz,updateControl); // set period, attach updateControl()
+		TimerZero::init(1000000/control_rate_hz,updateControlWithAutoADC); // set period, attach updateControlWithAutoADC()
 		TimerZero::start();
 
 		// backup mozzi register values for unpausing later
@@ -429,15 +384,13 @@ void audioHook() // 2us excluding updateAudio()
 
 	void startMozzi(int control_rate_hz)
 	{
+		setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST in setup() if desired
+		// delay(200); // so AutoRange doesn't read 0 to start with
 		startControl(control_rate_hz);
 #if (AUDIO_MODE == STANDARD)
 		startAudioStandard();
 #elif (AUDIO_MODE == HIFI)
 		startAudioHiFi();
-#endif
-
-#if(USE_AUDIO_INPUT==true)
-	setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST in setup() if desired
 #endif
 	}
 

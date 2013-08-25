@@ -132,7 +132,7 @@ public:
 };
 
 /**
-@example _09_delays/AudioDelay/AudioDelay.ino
+@example 09.Delays/AudioDelay/AudioDelay.ino
 This is an example of how to use the AudioDelay class.
 */
 

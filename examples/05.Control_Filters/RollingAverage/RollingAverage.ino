@@ -1,20 +1,20 @@
 /*  Example changing the frequency of 2 sinewaves with 1 analog input,
- *  using RollingAverage() to filter one of the control signals 
- *  and the other one unfiltered,
- *  using Mozzi sonification library.
- *
- *  Demonstrates the difference between a raw control
- *  signal and one smoothed with RollingAverage().
- *
- *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
- *  check the README or http://sensorium.github.com/Mozzi/
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2013.
- *  This example code is in the public domain.
- */
+    using RollingAverage() to filter one of the control signals 
+    and the other one unfiltered,
+    using Mozzi sonification library.
+  
+    Demonstrates the difference between a raw control
+    signal and one smoothed with RollingAverage().
+  
+    Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+    check the README or http://sensorium.github.com/Mozzi/
+  
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Tim Barrass 2013.
+    This example code is in the public domain.
+*/
 
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
@@ -38,7 +38,7 @@ void setup(){
 
 
 void updateControl(){
-  int bumpy_input = analogRead(INPUT_PIN);
+  int bumpy_input = mozziAnalogRead(INPUT_PIN);
   averaged = kAverage.next(bumpy_input);
 
   Serial.print("bumpy \t");

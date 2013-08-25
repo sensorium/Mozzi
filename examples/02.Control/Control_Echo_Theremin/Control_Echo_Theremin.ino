@@ -8,19 +8,19 @@
 
   The circuit: 
  
-   * Audio output on digital pin 9 (on a Uno or similar), or 
+     Audio output on digital pin 9 (on a Uno or similar), or 
      check the README or http://sensorium.github.com/Mozzi/
 
   Light dependent resistor (LDR) and 5.1k resistor on analog pin 1:
-  *  LDR from analog pin to +5V
-  *  5.1k resistor from analog pin to ground
+     LDR from analog pin to +5V
+     5.1k resistor from analog pin to ground
   
   Mozzi help/discussion/announcements:
   https://groups.google.com/forum/#!forum/mozzi-users
 
   Tim Barrass 2013.
   This example code is in the public domain.
- */
+*/
 
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
@@ -54,7 +54,7 @@ void setup(){
 
 
 void updateControl(){
-  int bumpy_input = analogRead(INPUT_PIN);
+  int bumpy_input = mozziAnalogRead(INPUT_PIN);
   averaged = kAverage.next(bumpy_input);
   aSin0.setFreq(averaged);
   aSin1.setFreq(kDelay.next(averaged));

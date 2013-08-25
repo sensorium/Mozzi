@@ -91,6 +91,10 @@ private:
 	int prev_x, prev_y,A;
 };
 
+/**
+@example 05.Control_Filters/DCFilter/DCFilter.ino
+This example demonstrates the DCFilter class.
+*/
 
 #endif        //  #ifndef DCFILTER_H
 

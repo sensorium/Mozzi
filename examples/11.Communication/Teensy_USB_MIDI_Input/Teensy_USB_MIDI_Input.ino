@@ -1,23 +1,23 @@
 /*  Example of a sound being triggered by MIDI input.
- *
- *  Demonstrates playing notes with Mozzi in response to MIDI input,
- *  using the version of the Arduino MIDI library which
- *  works with Teensy boards (http://www.pjrc.com/teensy/td_midi.html).  
- *  Tested on a Teensy2++, which can be used as a MIDI device 
- *  without any extra parts.  
- *  The sketch would be almost the same with the mainstream
- *  MIDI library (using MIDI as a prefix to calls instead of usbMIDI).
- *  This sketch won't compile on the Teensy2++ if you also 
- *  have the mainstream MIDI library installed.
- *
- *  Circuit: On the Teensy2++, audio output is on pin B5.  Midi input on usb.
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2013.
- *  This example code is in the public domain.
- */
+  
+    Demonstrates playing notes with Mozzi in response to MIDI input,
+    using the version of the Arduino MIDI library which
+    works with Teensy boards (http://www.pjrc.com/teensy/td_midi.html).  
+    Tested on a Teensy2++, which can be used as a MIDI device 
+    without any extra parts.  
+    The sketch would be almost the same with the mainstream
+    MIDI library (using MIDI as a prefix to calls instead of usbMIDI).
+    This sketch won't compile on the Teensy2++ if you also 
+    have the mainstream MIDI library installed.
+  
+    Circuit: On the Teensy2++, audio output is on pin B5.  Midi input on usb.
+  
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Tim Barrass 2013.
+    This example code is in the public domain.
+*/
 
 
 #include <MIDI.h>

@@ -97,28 +97,28 @@ randSeed() called without a parameter uses noise from reading the Arduino's
 internal temperature as the seed, a technique discussed at
 http://arduino.cc/forum/index.php/topic,38091.0.html, borrowing code put there
 by Rob Tillaart.
-@note IMPORTANT!!!  Make sure you set analogReference() to suit your sketch after calling randSeed().  
-randSeed() sets analogReference to DEFAULT.  Sorry about that.
-@note This is quite slow, so best to call it only in setup().
-@note It's not perfect, as discussed in the forum thread, but probably a pretty good option.
-@note It might only work with some processors: (from the thread)
+@note It's not perfect, as discussed in the forum thread.
+It might only work with some processors: (from the thread)
 "...ATmega328P in DIP, possibly others but the duemilanove and uno will do it at least."
 So far, gizduino's __AVR_ATmega644P__ chip doesn't like it, so we use (long)analogRead(0)*analogRead(1) for that instead. 
 */
 void randSeed() {
+	ADCSRA &= ~ (1 << ADIE); // adc Disable Interrupt, re-enable at end
+	// this attempt at remembering analog_reference stops it working 
+	// maybe needs a delay after changing analog reference in longRandom (Arduino reference suggests this)
+	// because the analog reads return 0
+	//uint8_t analog_reference_orig = ADMUX&192; // analog_reference is high 2 bits of ADMUX, store this because longRandom sets it to internal
 	x=longRandom();
 	y=longRandom();
 	z=longRandom();
-	analogReference(DEFAULT);
+	//analogReference(analog_reference_orig); // change back to original
+	ADCSRA |= (1 << ADIE); // adc re-Enable Interrupt
 }
 
 
 
 /** @ingroup random
-Initialises Mozzi's (pseudo)random number generator xorshift96(). This can be
-useful if you want random sequences to be different on each run of a sketch, by
-seeding with fairly random input, such as analogRead() on an unconnected pin (as
-explained in the Arduino documentation for randomSeed().
+Initialises Mozzi's (pseudo)random number generator xorshift96() with a chosen seed number.
 @param seed a number to use as a seed.
 */
 void xorshiftSeed(long seed)

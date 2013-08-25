@@ -1,26 +1,26 @@
 /*  Example of sliding smoothly
- *  between oscillator frequencies,
- *  using Mozzi sonification library.
- *
- *  Demonstrates using a Line to efficiently change the
- *  frequency of an oscillator at audio rate.   Calculating
- *  a new frequency for every step of a slide is a lot to
- *  do for every single sample, so instead this sketch works out the 
- *  start and end frequencies for each control period and
- *  the phase increments (size of the steps through the sound table)
- *  required for the audio oscillator to generate those frequencies.
- *  Then, a computationally cheap Line() is used to slide between the
- *  different phase increments smoothly at audio rate.
- *
- *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
- *  check the README or http://sensorium.github.com/Mozzi/
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2012.
- *  This example code is in the public domain.
- */
+    between oscillator frequencies,
+    using Mozzi sonification library.
+  
+    Demonstrates using a Line to efficiently change the
+    frequency of an oscillator at audio rate.   Calculating
+    a new frequency for every step of a slide is a lot to
+    do for every single sample, so instead this sketch works out the 
+    start and end frequencies for each control period and
+    the phase increments (size of the steps through the sound table)
+    required for the audio oscillator to generate those frequencies.
+    Then, a computationally cheap Line() is used to slide between the
+    different phase increments smoothly at audio rate.
+  
+    Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+    check the README or http://sensorium.github.com/Mozzi/
+  
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Tim Barrass 2012.
+    This example code is in the public domain.
+*/
 
 #include <MozziGuts.h>
 #include <Line.h> // for smooth transitions
@@ -28,7 +28,7 @@
 #include <tables/triangle_warm8192_int8.h> // triangle table for oscillator
 #include <mozzi_midi.h>
 
-// use: Oscil <table_size, update_rate> oscilName (wavetable)
+// use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <TRIANGLE_WARM8192_NUM_CELLS, AUDIO_RATE> aTriangle(TRIANGLE_WARM8192_DATA);
 
 // use: Line <type> lineName

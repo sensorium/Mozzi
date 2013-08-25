@@ -29,7 +29,7 @@
 #include "MozziGuts.h"
 #include "mozzi_fixmath.h"
 #include <util/atomic.h>
-
+#include "mozzi_utils.h"
 
 // fractional bits for sample index precision
 #define SAMPLE_F_BITS 16
@@ -39,6 +39,7 @@
 // the fractional part and the sign bit
 #define SAMPLE_PHMOD_BITS 16
 
+enum interpolation {INTERP_NONE, INTERP_LINEAR};
 
 /** Sample is like Oscil, it plays a wavetable.  However, Sample can be
 set to play once through only, with variable start and end points,
@@ -58,7 +59,7 @@ There is a python script called char2mozzi.py in the Mozzi/python folder.
 The script converts raw sound data saved from a program like Audacity.
 Instructions are in the char2mozzi.py file.
 */
-template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE>
+template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned char INTERP=INTERP_NONE>
 class Sample
 {
 
@@ -170,6 +171,7 @@ public:
 	}
 
 
+
 	/**
 	Returns the sample at the current phase position, or 0 if looping is off
 	and the phase overshoots the end of the sample. Updates the phase
@@ -178,24 +180,29 @@ public:
 	@todo in next(), incrementPhase() happens in a different position than for Oscil - check if it can be standardised
 	*/
 	inline
-	char next() // 4us
-	{
-		char out = 0;
-		if (!looping)
-		{
-			if (phase_fractional<endpos_fractional){
-				out = (char)pgm_read_byte_near(table + (phase_fractional >> SAMPLE_F_BITS));
-				incrementPhase();
+	char next() { // 4us
+	setPin13High();
+		
+		if (phase_fractional>endpos_fractional){
+			if (looping) {
+				phase_fractional = startpos_fractional + (phase_fractional - endpos_fractional);
+			}else{
+				return 0;
 			}
 		}
-		else
-		{
-			if (phase_fractional>endpos_fractional)
-				phase_fractional = startpos_fractional + (phase_fractional - endpos_fractional);
-
+		char out;
+		if(INTERP==INTERP_LINEAR){
+			// WARNNG this is hard coded for when SAMPLE_F_BITS is 16
+			unsigned int index = phase_fractional >> SAMPLE_F_BITS;
+			out = (char)pgm_read_byte_near(table + index);
+			char difference = (char)pgm_read_byte_near((table + 1) + index) - out;
+			char diff_fraction = (char)(((((unsigned int) phase_fractional)>>8)*difference)>>8); // (unsigned int) phase_fractional keeps low word, then>> for only 8 bit precision
+			out += diff_fraction;
+		}else{
 			out = (char)pgm_read_byte_near(table + (phase_fractional >> SAMPLE_F_BITS));
-			incrementPhase();
 		}
+		incrementPhase();
+			setPin13Low();
 		return out;
 	}
 
@@ -279,14 +286,13 @@ public:
 
 
 	/**  Returns the sample at the given table index.
-	@param index between 0 and the table size.The
-	index rolls back around to 0 if it's larger than the table size.
+	@param index between 0 and the table size.
 	@return the sample at the given table index.
 	*/
 	inline
 	char atIndex(unsigned int index)
 	{
-		return (char)pgm_read_byte_near(table + (index & (NUM_TABLE_CELLS - 1)));
+		return (char)pgm_read_byte_near(table + index);
 	}
 
 
@@ -343,5 +349,11 @@ static const unsigned char ADJUST_FOR_NUM_TABLE_CELLS = (NUM_TABLE_CELLS<2048) ?
 	bool looping;
 	unsigned long startpos_fractional, endpos_fractional;
 };
+
+
+/**
+@example 08.Samples/Sample/Sample.ino
+This example demonstrates the Sample class.
+*/
 
 #endif /* SAMPLE_H_ */

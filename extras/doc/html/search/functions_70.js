@@ -1,7 +1,7 @@
 var searchData=
 [
   ['pausemozzi',['pauseMozzi',['../group__core.html#ga0dc2dc3b2c20b081df4d55ad039f64e5',1,'pauseMozzi():&#160;MozziGuts.cpp'],['../group__core.html#ga0dc2dc3b2c20b081df4d55ad039f64e5',1,'pauseMozzi():&#160;MozziGuts.cpp']]],
-  ['phaseincfromfreq',['phaseIncFromFreq',['../class_oscil.html#a184110cb1901d2742a6016b46cbea027',1,'Oscil::phaseIncFromFreq()'],['../class_phasor.html#a9b5992b53fa7e449fec950df00c46230',1,'Phasor::phaseIncFromFreq()'],['../class_sample.html#a7dfbdfca35b7bbf074e24e62a1d53309',1,'Sample::phaseIncFromFreq()']]],
+  ['phaseincfromfreq',['phaseIncFromFreq',['../class_oscil.html#a184110cb1901d2742a6016b46cbea027',1,'Oscil::phaseIncFromFreq()'],['../class_phasor.html#a9b5992b53fa7e449fec950df00c46230',1,'Phasor::phaseIncFromFreq()'],['../class_sample.html#a18e72ecdb7bac8d41038b785d6deba58',1,'Sample::phaseIncFromFreq()']]],
   ['phasor',['Phasor',['../class_phasor.html#a147c4c3aa7506c3da800e6cc77deb4ac',1,'Phasor']]],
   ['phmod',['phMod',['../class_oscil.html#abe39f0740f318c0ecfb405cfac641a13',1,'Oscil']]],
   ['pop',['pop',['../class_stack.html#afa9a35e13b68d9b59999227218a34d0a',1,'Stack']]],

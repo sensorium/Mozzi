@@ -3,8 +3,9 @@
  An audio input using the range between 0 to 5V on analog pin A0
  is sampled and output on digital pin 9.
  
- Configuration: requires "#define USE_AUDIO_INPUT true" to be in
- Mozzi/mozzi_config.h file.
+  Configuration: requires these lines in the Mozzi/mozzi_config.h file:
+  #define USE_AUDIO_INPUT true
+  #define AUDIO_INPUT_PIN 0
  
  Circuit: 
  Audio cable centre wire on pin A0, outer shielding to Arduino Ground.
@@ -12,9 +13,11 @@
  check the README or http://sensorium.github.com/Mozzi/
  
  Mozzi help/discussion/announcements:
- https://groups.google.com/forum/#!forum/mozzi-users
- 
- */
+  https://groups.google.com/forum/#!forum/mozzi-users
+
+  Tim Barrass 2013.
+  This example code is in the public domain.
+*/
 
 #include <MozziGuts.h>
 

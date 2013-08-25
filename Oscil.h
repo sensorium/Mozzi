@@ -342,4 +342,9 @@ static const unsigned char ADJUST_FOR_NUM_TABLE_CELLS = (NUM_TABLE_CELLS<2048) ?
 };
 
 
+/**
+@example 01.Basics/Vibrato/Vibrato.ino
+This is an example using Oscil::phMod to produce vibrato using phase modulation.
+*/
+
 #endif /* OSCIL_H_ */

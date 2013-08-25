@@ -1,19 +1,19 @@
 /*  Example reading an ADXL345 accelerometer
- *  using I2C communication without blocking audio synthesis,
- *  using Mozzi sonification library.
- *
- *  Demonstrates use of twi_nonblock functions
- *  to replace processor-blocking Wire methods.
- *
- *  Circuit: Audio output on digital pin 9.
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Marije Baalman 2012.
- *  Small modifications by TIm Barrass to retain Mozzi compatibility.
- *  This example code is in the public domain.
- */
+    using I2C communication without blocking audio synthesis,
+    using Mozzi sonification library.
+  
+    Demonstrates use of twi_nonblock functions
+    to replace processor-blocking Wire methods.
+  
+    Circuit: Audio output on digital pin 9.
+  
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Marije Baalman 2012.
+    Small modifications by TIm Barrass to retain Mozzi compatibility.
+    This example code is in the public domain.
+*/
 
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
@@ -23,7 +23,7 @@
 
 #define CONTROL_RATE 128 // powers of 2 please
 
-// use: Oscil <table_size, update_rate> oscilName (wavetable)
+// use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 Ead kEnvelope(CONTROL_RATE); // resolution will be CONTROL_RATE
 

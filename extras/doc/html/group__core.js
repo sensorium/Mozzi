@@ -1,5 +1,6 @@
 var group__core =
 [
+    [ "AUDIO_INPUT_PIN", "group__core.html#gad6f503b77ed0c93394363460509f5cbd", null ],
     [ "AUDIO_MODE", "group__core.html#ga9c4a39187db1d0a1ad0fa6981920f383", null ],
     [ "AUDIO_RATE", "group__core.html#ga5b972bafb3267e820993812beca1b298", null ],
     [ "CONTROL_RATE", "group__core.html#gae5d737db8bc97ecf08d2ea3121782d26", null ],

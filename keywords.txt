@@ -56,6 +56,8 @@ rangeWholeSample	KEYWORD2
 setStart	KEYWORD2
 setEnd	KEYWORD2
 isPlaying	KEYWORD2
+INTERP_NONE	LITERAL1
+INTERP_LINEAR	LITERAL1
 
 Line	KEYWORD1
 increment	KEYWORD2
@@ -235,16 +237,7 @@ Q16n16_pow2	KEYWORD2
 
 mozzi_analog	KEYWORD1
 setupFastAnalogRead	KEYWORD2
-setupMozziADC	KEYWORD2
-adcEnableInterrupt	KEYWORD2
-adcReadAllChannels	KEYWORD2
-adcGetResult	KEYWORD2
-adcSetChannel	KEYWORD2
-
-
-adcSetChannel	KEYWORD2
-adcStartConversion	KEYWORD2
-
+mozziAnalogRead	KEYWORD2
 disconnectDigitalIn	KEYWORD2
 reconnectDigitalIn	KEYWORD2
 adcDisconnectAllDigitalIns	KEYWORD2
@@ -254,7 +247,7 @@ adcReconnectAllDigitalIns	KEYWORD2
 mozzi_rand	KEYWORD1
 xorshift96	KEYWORD2
 rand	KEYWORD2
-randomMidi	KEYWORD2
+randMidiNote	KEYWORD2
 randSeed	KEYWORD2
 
 mozzi_midi	KEYWORD1

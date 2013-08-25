@@ -108,4 +108,9 @@ public:
 
 };
 
+/**
+@example 05.Control_Filters/Teensy_USB_MIDI_portamento/Teensy_USB_MIDI_portamento.ino
+This example demonstrates the Portamento class.
+*/
+
 #endif /* PORTAMENTO_H_ */

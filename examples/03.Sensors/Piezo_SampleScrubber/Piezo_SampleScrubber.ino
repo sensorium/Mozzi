@@ -1,15 +1,16 @@
 /*
-   Example using a piezo to scrub crudely through an audio sample,
-  using Mozzi sonification library.
+   Example of simple "scrubbing" through a sampled sound with a knob
+     using Mozzi sonification library.
  
-   Demonstrates playing a sample at an offset from the beginning,
-   and analog input.
+     Demonstrates getting audio samples from a table using a Line to
+     slide between different indexes.
+     Also demonstrates mozziAnalogRead(pin), a non-blocking replacement for mozziAnalogRead
  
    This example goes with a tutorial on the Mozzi site:
    http://sensorium.github.io/Mozzi/learn/Mozzi_Introductory_Tutorial.pdf
   
    The circuit:
-   * Audio output on digital pin 9 (on a Uno or similar), or 
+     Audio output on digital pin 9 (on a Uno or similar), or 
      check the README or http://sensorium.github.com/Mozzi/
  
    Piezo on analog pin A3:
@@ -22,53 +23,57 @@
  
    Tim Barrass 2013.
    This example code is in the public domain.
- */
+*/
 
 #include <MozziGuts.h>
 #include <Sample.h> // Sample template
-#include <samples/burroughs1_18649_int8.h> // a converted audio sample included in the Mozzi download
-#include <mozzi_analog.h> // fast functions for reading analog inputs 
+#include "blahblah4b_int8.h"
+#include <Line.h>
 #include <Smooth.h>
 
-const int PIEZO_PIN = 3;  // set the analog input pin for the piezo 
 
-// this is to smooth the piezo signal so the scrub moves relatively smoothly
-float smoothness = 0.99f;
-Smooth <unsigned int> kSmooth(smoothness);
+// use this smooth out the wandering/jumping rate of scrubbing, gives more convincing reverses
+Smooth <int> kSmoothOffset(0.85f);
 
-// use: Sample <table_size, update_rate> SampleName (wavetable)
-Sample <BURROUGHS1_18649_NUM_CELLS, AUDIO_RATE> burroughs(BURROUGHS1_18649_DATA);
+
+// use: Sample <table_size, update_rate, interpolation > SampleName (wavetable)
+Sample <BLAHBLAH4B_NUM_CELLS, AUDIO_RATE, INTERP_LINEAR> aSample(BLAHBLAH4B_DATA);
+
+//Line to scrub through sample at audio rate, Line target is set at control rate
+Line <Q16n16> scrub; // Q16n16 fixed point for high precision
+
+// the number of audio steps the line has to take to reach the next offset
+const unsigned int AUDIO_STEPS_PER_CONTROL = AUDIO_RATE / CONTROL_RATE;
+
+
+#define INPUT_PIN 3 
+
 
 void setup(){
-  Serial.begin(115200); // set up the Serial output so we can look at the piezo values
-  setupFastAnalogRead(); // speed up analog reads (Mozzi also has other faster ways)
-  burroughs.setFreq((float) BURROUGHS1_18649_SAMPLERATE / (float) BURROUGHS1_18649_NUM_CELLS); // play at the speed it was recorded  
-  startMozzi(); // :))
+  aSample.setLoopingOn();
+  startMozzi();
 }
 
 
 void updateControl(){
-  // read the piezo
-  int piezo_value = analogRead(PIEZO_PIN); // value is 0-1023
 
-  // print the value to the Serial monitor for debugging
-  Serial.print("piezo value = ");
-  Serial.print(piezo_value);
+  // read the pot
+  int sensor_value = mozziAnalogRead(INPUT_PIN); // value is 0-1023
 
-  unsigned int start_point = piezo_value *400; // calibrate here
-  burroughs.start(kSmooth.next(start_point));
+  // map it to an 8 bit range for efficient calculations in updateAudio
+  int target = ((long) sensor_value * BLAHBLAH4B_NUM_CELLS) >> 10; //  / 1024
+  int smooth_offset = kSmoothOffset.next(target);
 
-  Serial.println(); // next line
+  // set new target for interpolating line to scrub to
+  scrub.set(Q16n0_to_Q16n16(smooth_offset), AUDIO_STEPS_PER_CONTROL);
 }
 
 
 int updateAudio(){
-  return burroughs.next();
+  return aSample.atIndex(Q16n16_to_Q16n0(scrub.next()));
 }
 
 
 void loop(){
   audioHook();
 }
-
-

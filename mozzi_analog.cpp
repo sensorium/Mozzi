@@ -44,97 +44,19 @@ void setupFastAnalogRead(char speed)
 	}
 }
 
-
+/*
 void adcEnableInterrupt(){
-	// Enable ADC Interrupt
 	ADCSRA |= (1 << ADIE);
 }
-
+*/
 
 void setupMozziADC(char speed) {
-	adcEnableInterrupt();
+	ADCSRA |= (1 << ADIE); // adc Enable Interrupt
 	setupFastAnalogRead(speed);
 	adcDisconnectAllDigitalIns();
-	adcReadAllChannels();
-}
-
-//-----------------------------------------------------------------------------------------------------------------
-// DEPRECIATED
-//approach2: adcStartConversion(), adcGetResult(), read one channel at a time in the background
-
-void adcSetChannel(unsigned char pin) {
-#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
-	if (pin >= 54)
-		pin -= 54; // allow for channel or pin numbers
-#elif defined(__AVR_ATmega32U4__)
-
-	if (pin >= 18)
-		pin -= 18; // allow for channel or pin numbers
-#elif defined(__AVR_ATmega1284__)
-
-	if (pin >= 24)
-		pin -= 24; // allow for channel or pin numbers
-#else
-
-	if (pin >= 14)
-		pin -= 14; // allow for channel or pin numbers
-#endif
-
-#if defined(__AVR_ATmega32U4__)
-	pin = analogPinToChannel(pin);
-	ADCSRB = (ADCSRB & ~(1 << MUX5)) | (((pin >> 3) & 0x01) << MUX5);
-#elif defined(ADCSRB) && defined(MUX5)
-	// the MUX5 bit of ADCSRB selects whether we're reading from channels
-	// 0 to 7 (MUX5 low) or 8 to 15 (MUX5 high).
-	ADCSRB = (ADCSRB & ~(1 << MUX5)) | (((pin >> 3) & 0x01) << MUX5);
-#endif
-
-	// set the analog reference (high two bits of ADMUX) and select the
-	// channel (low 4 bits).  this also sets ADLAR (left-adjust result)
-	// to 0 (the default).
-#if defined(ADMUX)
-	ADMUX = (1 << REFS0) | (pin & 0x07);
-#endif
 }
 
 
-
-
-// basically analogRead() chopped in half so the ADC conversion
-// can be started here and received by another function.
-void adcStartConversion(unsigned char pin) {
-	adcSetChannel(pin);
-#if defined(ADCSRA) && defined(ADCL)
-	// start the conversion
-	ADCSRA |= (1 << ADSC);
-#endif
-}
-
-
-void adcStartConversion() {
-	ADCSRA |= (1 << ADSC);
-}
-
-
-// DEPRECIATED
-
-int adcGetResult()
-{
-	int out;
-#if defined(ADCSRA) && defined(ADCL)
-	// ADSC is cleared when the conversion finishes
-	while (bit_is_set(ADCSRA, ADSC))
-		;
-	out = ADC;
-#else
-	// we dont have an ADC, return 0
-	out = 0;
-#endif
-	return out;
-}
-
-
-//-----------------------------------------------------------------------------------------------------------------
 
 void disconnectDigitalIn(byte channel_num){
 	DIDR0 |= 1<<channel_num;
@@ -160,64 +82,102 @@ void adcReconnectAllDigitalIns(){
 }
 
 
-//-----------------------------------------------------------------------------------------------------
+unsigned char adcPinToChannelNum(unsigned char pin) {
+#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
+	if (pin >= 54) pin -= 54; // allow for channel or pin numbers
+#elif defined(__AVR_ATmega32U4__)
+	if (pin >= 18) pin -= 18; // allow for channel or pin numbers
+	pin = analogPinToChannel(pin); // moved from extra #if which was below in Arduino code, and redefined in mozzi_analog.h, with notes
+#elif defined(__AVR_ATmega1284__)
+	if (pin >= 24) pin -= 24; // allow for channel or pin numbers
+#else
+	if (pin >= 14) pin -= 14; // allow for channel or pin numbers
+#endif
+	
+	return pin;
+}
 
 
-//approach 3: adcEnableInterrupt(), adcReadAllChannels(), adcGetResult(), read all channels in background
+// assumes channel is correct, not pin number, pin number would be converted first with adcPinToChannelNum
+static void adcSetChannel(unsigned char channel) {
+#if defined(__AVR_ATmega32U4__)
+	ADCSRB = (ADCSRB & ~(1 << MUX5)) | (((channel >> 3) & 0x01) << MUX5);
+#elif defined(ADCSRB) && defined(MUX5)
+	// the MUX5 bit of ADCSRB selects whether we're reading from channels
+	// 0 to 7 (MUX5 low) or 8 to 15 (MUX5 high).
+	ADCSRB = (ADCSRB & ~(1 << MUX5)) | (((channel >> 3) & 0x01) << MUX5);
+#endif
+
+	// set the analog reference (high two bits of ADMUX) and select the
+	// channel (low 4 bits).  this also sets ADLAR (left-adjust result)
+	// to 0 (the default).
+#if defined(ADMUX)
+	ADMUX = (1 << REFS0) | (channel & 0x07);
+#endif
+}
+
+
+
+
+// basically analogRead() chopped in half so the ADC conversion
+// can be started here and received by another function.
+void adcStartConversion(unsigned char channel) {
+	adcSetChannel(channel);
+#if defined(ADCSRA) && defined(ADCL)
+	// start the conversion
+	ADCSRA |= (1 << ADSC);
+#endif
+}
+
 
 
 /*
-This code was initially based on a discussion between jRaskell, bobgardner, theusch, Koshchi, and code by jRaskell. 
+The code below was informed initially by a discussion between 
+jRaskell, bobgardner, theusch, Koshchi, and code by jRaskell. 
 http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=789581
-
-Another approach discussed on the same page is to use free running mode on one channel only,
-with (eg. 4) two resistor voltage dividers to define each input pseudo-channel.
-The drawback there is lower resolution for each input because the 10-bit input 
-range has to be divided between them.
 */
 
 
-static volatile int sensors[NUM_ANALOG_INPUTS];
-static Stack <volatile char,NUM_ANALOG_INPUTS> adc_channels_to_read; // note analog 0 is for audio when enabled
-volatile static char current_adc = -1; // accessed in control and adc ISRs
+static volatile int analog_readings[NUM_ANALOG_INPUTS];
+static Stack <volatile char,NUM_ANALOG_INPUTS> adc_channels_to_read;
+volatile static char current_channel = -1; // volatile because accessed in control and adc ISRs
 static bool first = true;
 
 
-/** Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_config.h).
-This pushes all the other analog channel numbers onto a stack to be read consecutively, 
-one each time the analog read interrupt returns, until the stack is empty.  
-When USE_AUDIO_INPUT=true, the sequence will start when it is triggered by the return of the next audio analog input interrupt. 
-When  USE_AUDIO_INPUT=false, adcReadAllChannels() starts the first conversion itself and the rest are triggered automatically.
-*/
-void adcReadAllChannels(){
-	if (current_adc == -1) {
+void adcStartReadCycle(){
+	if (current_channel == -1) {
 #if (USE_AUDIO_INPUT == true)
-		for(char i=1;i<NUM_ANALOG_INPUTS;i++)  adc_channels_to_read.push(i); // analog 0 is for audio
+		adc_channels_to_read.push(0); // analog 0 is for audio
 #else
-		for(char i=0;i<NUM_ANALOG_INPUTS;i++)  adc_channels_to_read.push(i);
-		startFirstControlADC();
+		adcReadSelectedChannels();
 		first = true;		
 #endif
 	}
 }
 
 
-int adcGetResult(unsigned char channel_num){
-	return sensors[channel_num];
+
+int mozziAnalogRead(unsigned char pin) {
+	//analogPinToChannel<pin>;
+	pin = adcPinToChannelNum(pin); // allow for channel or pin numbers
+	adc_channels_to_read.push(pin);
+	return analog_readings[pin];
 }
+
+
 
 /* gets the next channel to read off the stack, and if there is a channel there, it changes to that channel and startsa conversion.
 */
-void startFirstControlADC() {
-	current_adc = adc_channels_to_read.pop();
-	if(current_adc != -1) adcStartConversion(current_adc);
+void adcReadSelectedChannels() {
+	current_channel = adc_channels_to_read.pop();
+	if(current_channel != -1) adcStartConversion(current_channel);
 }
 
-
+/*
 void receiveFirstControlADC(){
 	// do nothing
 }
-
+*/
 
 void startSecondControlADC() {
 	ADCSRA |= (1 << ADSC); // start a second conversion on the current channel
@@ -225,7 +185,7 @@ void startSecondControlADC() {
 
 
 void receiveSecondControlADC(){
-	sensors[current_adc] = ADC; // officially (ADCL | (ADCH << 8)) but the compiler works it out
+	analog_readings[current_channel] = ADC; // officially (ADCL | (ADCH << 8)) but the compiler works it out
 }
 
 
@@ -243,7 +203,7 @@ ISR(ADC_vect, ISR_BLOCK) {
   	}else{	
   		// 3us
       	receiveSecondControlADC();
-      	startFirstControlADC();
+      	adcReadSelectedChannels();
       	first=true;
 	}
 }

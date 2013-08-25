@@ -1,12 +1,12 @@
 /*  Example swapping between sounds played by a single Oscil
- *  with Mozzi sonification library.
- *
- *  Demonstrates declaring an Oscil without a table,
- *  and Oscil::setTable() method.
- *
- *  Created by Tim Barrass 2012.
- *  This example code is in the public domain.
- */
+    with Mozzi sonification library.
+  
+    Demonstrates declaring an Oscil without a table,
+    and Oscil::setTable() method.
+  
+    Created by Tim Barrass 2012.
+    This example code is in the public domain.
+*/
 
 #include <MozziGuts.h>
 #include <Oscil.h>

@@ -24,7 +24,7 @@ private:
 		Oscil <8192, AUDIO_RATE> aWav;
 };
 
-/** @example _06_synthesis/WavePacket_Sample/WavePacket_Sample.ino
+/** @example 06.Synthesis/WavePacket_Sample/WavePacket_Sample.ino
 This is an example of how to use the WavePacketSample class.
 */
 #endif        //  #ifndef WAVEPACKETSAMPLE_H

@@ -135,4 +135,9 @@ public:
 	
 };
 
+/**
+@example 06.Synthesis/PWM_Phasing/PWM_Phasing.ino
+This example demonstrates the Phasor class.
+*/
+
 #endif /* PHASOR_H_ */

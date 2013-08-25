@@ -1,17 +1,17 @@
 /*  Example playing a sinewave with vibrato,
- *  using Mozzi sonification library.
- *
- *  Demonstrates simple FM using phase modulation.
- *
- *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
- *  check the README or http://sensorium.github.com/Mozzi/
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2012.
- *  This example code is in the public domain.
- */
+    using Mozzi sonification library.
+  
+    Demonstrates simple FM using phase modulation.
+  
+    Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+    check the README or http://sensorium.github.com/Mozzi/
+  
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Tim Barrass 2012.
+    This example code is in the public domain.
+*/
 
 #include <MozziGuts.h>
 #include <Oscil.h>
@@ -40,5 +40,5 @@ void updateControl(){
 
 int updateAudio(){
     long vibrato = intensity * aVibrato.next();
-    return (int)aCos.phMod(vibrato);
+    return aCos.phMod(vibrato); // phase modulation to modulate frequency
 }

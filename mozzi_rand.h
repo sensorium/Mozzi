@@ -26,6 +26,6 @@ int rand(int maxval);
 unsigned int rand(unsigned int minval, unsigned int maxval);
 unsigned int rand(unsigned int maxval);
 
-unsigned char randomMidiNote();
+unsigned char randMidiNote();
 
 #endif /* MOZZI_RAND_H_ */

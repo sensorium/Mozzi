@@ -1,26 +1,20 @@
 /*  Example of a sound being triggered by MIDI input, with portamento.
- *
- *  Demonstrates playing notes with Mozzi in response to MIDI input.
- *  Also demonstrates Portamento(), a traditional portamento with a 
- *  duration which can be set.
- *  
- *  Uses the version of the Arduino MIDI library which
- *  works with Teensy boards (http://www.pjrc.com/teensy/td_midi.html).  
- *  Tested on a Teensy2++, which can be used as a MIDI device 
- *  without any extra parts.  
- *  The sketch would be almost the same with the mainstream
- *  MIDI library (using MIDI as a prefix to calls instead of usbMIDI).
- *  This sketch won't compile on the Teensy2++ if you also 
- *  have the mainstream MIDI library installed.
- *
- *  Circuit: On the Teensy2++, audio output is on pin B5.  Midi input on usb.
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2013.
- *  This example code is in the public domain.
- */
+  
+    Demonstrates playing notes with Mozzi in response to MIDI input.
+    Also demonstrates Portamento(), a traditional portamento with a 
+    duration which can be set.
+  
+    Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+    check the README or http://sensorium.github.com/Mozzi/
+  
+    Check the Arduino MIDI library for MIDI set up info.
+    
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Tim Barrass 2013.
+    This example code is in the public domain.
+*/
 
 
 #include <MIDI.h>
@@ -44,7 +38,7 @@ ADSR <CONTROL_RATE> envelope;
 
 Portamento <CONTROL_RATE>aPortamento;
 
-#define LED 6 // 6 on Teensy++ 2.0, 11 on Teensy 2.0, to see if MIDI is being recieved
+#define LED 13
 
 
 void HandleNoteOn(byte channel, byte note, byte velocity) {
@@ -65,12 +59,12 @@ void HandleNoteOff(byte channel, byte note, byte velocity) {
 void setup() {
   pinMode(LED, OUTPUT);
 
-  // Initiate MIDI communications, listen to all channels (not needed with Teensy usbMIDI)
-  //MIDI.begin(MIDI_CHANNEL_OMNI);    
+  // Initiate MIDI communications, listen to all channels
+  MIDI.begin(MIDI_CHANNEL_OMNI);    
 
   // Connect the HandleNoteOn function to the library, so it is called upon reception of a NoteOn.
-  usbMIDI.setHandleNoteOn(HandleNoteOn);  // Put only the name of the function
-  usbMIDI.setHandleNoteOff(HandleNoteOff);  // Put only the name of the function
+  MIDI.setHandleNoteOn(HandleNoteOn);  // Put only the name of the function
+  MIDI.setHandleNoteOff(HandleNoteOff);  // Put only the name of the function
 
   envelope.setADLevels(255,64);
   envelope.setTimes(50,200,10000,300); // 10000 is so the note will sustain 10 seconds unless a noteOff comes
@@ -82,7 +76,7 @@ void setup() {
 
 
 void updateControl(){
-  usbMIDI.read();
+  MIDI.read();
   envelope.update();
   aSin.setFreq_Q16n16(aPortamento.next());
 }

@@ -175,4 +175,9 @@ private:
 
 };
 
+/**
+@example 07.Envelopes/Ead_Envelope/Ead_Envelope.ino
+This is an example of how to use the Ead class.
+*/
+
 #endif /* EAD_H_ */

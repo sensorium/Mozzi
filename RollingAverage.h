@@ -204,4 +204,9 @@ private:
 
 /** @endcond // no need to show the specialisations */
 
+/**
+@example 03.Sensors/Knob_LDR_x2_WavePacket/Knob_LDR_x2_WavePacket.ino
+This example demonstrates the RollingAverage class.
+*/
+
 #endif        //  #ifndef ROLLINGAVERAGE_H

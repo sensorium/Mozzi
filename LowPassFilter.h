@@ -128,7 +128,11 @@ private:
 		return ((a*b)>>FX_SHIFT);
 	}
 
-
 };
+
+/**
+@example 10.Audio_Filters/LowPassFilter/LowPassFilter.ino
+This example demonstrates the LowPassFilter class.
+*/
 
 #endif /* LOWPASS_H_ */

@@ -308,4 +308,9 @@ public:
 
 };
 
+
+/** @example 07.Envelopes/ADSR_Envelope/ADSR_Envelope.ino
+This is an example of how to use the ADSR class.
+*/
+
 #endif /* ADSR_H_ */

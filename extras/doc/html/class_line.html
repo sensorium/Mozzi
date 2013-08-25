@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-07-29-18:09</span>
+   &#160;<span id="projectnumber">version 2013-08-25-18:13</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -136,7 +136,8 @@ class Line&lt; T &gt;</h3>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>Watch out for underflows in the internal calcualtion of <a class="el" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51" title="Constructor.">Line()</a> if you're not using floats (but on the other hand try to avoid lots of floats, they're too slow!). If it seems like the <a class="el" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51" title="Constructor.">Line()</a> is not working, there's a good chance you need to scale up the numbers you're using, so internal calculations don't get truncated away. Use Mozzi's fixed-point number types in <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>, which enable you to represent fractional numbers. Google "fixed point arithmetic" if this is new to you. </dd></dl>
-
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="02_8_control_2_control__tremelo_2_control__tremelo_8ino-example.html#_a1">02.Control/Control_Tremelo/Control_Tremelo.ino</a>.</dd>
+</dl>
 <p>Definition at line <a class="el" href="_line_8h_source.html#l00049">49</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aa6a80df90da15782ca88889ef9c8dd51"></a>
@@ -346,7 +347,7 @@ template&lt;class T&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_line.html">Line</a></li>
-    <li class="footer">Generated on Mon Jul 29 2013 18:09:18 for Mozzi by
+    <li class="footer">Generated on Sun Aug 25 2013 18:13:58 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

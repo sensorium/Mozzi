@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>Mozzi: Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt; Class Template Reference</title>
+<title>Mozzi: Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-07-29-18:09</span>
+   &#160;<span id="projectnumber">version 2013-08-25-18:13</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('class_sample.html','');});
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="class_sample-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt; Class Template Reference</div>  </div>
+<div class="title">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -105,69 +105,69 @@ $(document).ready(function(){initNavTree('class_sample.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9b95b8797648288b1c3698beda1dd34a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a9b95b8797648288b1c3698beda1dd34a">Sample</a> (const char *TABLE_NAME)</td></tr>
-<tr class="memdesc:a9b95b8797648288b1c3698beda1dd34a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a9b95b8797648288b1c3698beda1dd34a">More...</a><br/></td></tr>
-<tr class="separator:a9b95b8797648288b1c3698beda1dd34a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2ce86342a595a3571ce2e9a38e96a96"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#af2ce86342a595a3571ce2e9a38e96a96">Sample</a> ()</td></tr>
-<tr class="memdesc:af2ce86342a595a3571ce2e9a38e96a96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#af2ce86342a595a3571ce2e9a38e96a96">More...</a><br/></td></tr>
-<tr class="separator:af2ce86342a595a3571ce2e9a38e96a96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9911f53f66a5413a923b73f3d890abd4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a9911f53f66a5413a923b73f3d890abd4">setTable</a> (const char *TABLE_NAME)</td></tr>
-<tr class="memdesc:a9911f53f66a5413a923b73f3d890abd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the sound table which will be played by the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a>.  <a href="#a9911f53f66a5413a923b73f3d890abd4">More...</a><br/></td></tr>
-<tr class="separator:a9911f53f66a5413a923b73f3d890abd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fb19ee79276c6663c521ea2b17ea079"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a9fb19ee79276c6663c521ea2b17ea079">setStart</a> (unsigned int startpos)</td></tr>
-<tr class="memdesc:a9fb19ee79276c6663c521ea2b17ea079"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the starting position in samples.  <a href="#a9fb19ee79276c6663c521ea2b17ea079">More...</a><br/></td></tr>
-<tr class="separator:a9fb19ee79276c6663c521ea2b17ea079"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57307ee93ef0fcff36d543596eb79b72"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a57307ee93ef0fcff36d543596eb79b72"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a57307ee93ef0fcff36d543596eb79b72">start</a> ()</td></tr>
-<tr class="memdesc:a57307ee93ef0fcff36d543596eb79b72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the phase (the playhead) to the start position, which will be 0 unless set to another value with <a class="el" href="class_sample.html#a9fb19ee79276c6663c521ea2b17ea079" title="Sets the starting position in samples.">setStart()</a>;. <br/></td></tr>
-<tr class="separator:a57307ee93ef0fcff36d543596eb79b72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2dbae6c05040fd0381653f1a102e6ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ad2dbae6c05040fd0381653f1a102e6ee">start</a> (unsigned int startpos)</td></tr>
-<tr class="memdesc:ad2dbae6c05040fd0381653f1a102e6ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the a new start position and sets the phase (the playhead) to that position.  <a href="#ad2dbae6c05040fd0381653f1a102e6ee">More...</a><br/></td></tr>
-<tr class="separator:ad2dbae6c05040fd0381653f1a102e6ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e82144fde95ab74fb7525f33f3fe4d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a2e82144fde95ab74fb7525f33f3fe4d6">setEnd</a> (unsigned int end)</td></tr>
-<tr class="memdesc:a2e82144fde95ab74fb7525f33f3fe4d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the end position in samples from the beginning of the sound.  <a href="#a2e82144fde95ab74fb7525f33f3fe4d6">More...</a><br/></td></tr>
-<tr class="separator:a2e82144fde95ab74fb7525f33f3fe4d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79cb13998692fdff715c7b6b1beb991a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a79cb13998692fdff715c7b6b1beb991a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a79cb13998692fdff715c7b6b1beb991a">rangeWholeSample</a> ()</td></tr>
-<tr class="memdesc:a79cb13998692fdff715c7b6b1beb991a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the start and end points to include the range of the whole sound table. <br/></td></tr>
-<tr class="separator:a79cb13998692fdff715c7b6b1beb991a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa2257099a1269445651145e46de5bed"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaa2257099a1269445651145e46de5bed"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#aaa2257099a1269445651145e46de5bed">setLoopingOn</a> ()</td></tr>
-<tr class="memdesc:aaa2257099a1269445651145e46de5bed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns looping on, with the whole sample length as the loop range. <br/></td></tr>
-<tr class="separator:aaa2257099a1269445651145e46de5bed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1b29e0ccaee2c13e55ed9aa2202812e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab1b29e0ccaee2c13e55ed9aa2202812e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ab1b29e0ccaee2c13e55ed9aa2202812e">setLoopingOff</a> ()</td></tr>
-<tr class="memdesc:ab1b29e0ccaee2c13e55ed9aa2202812e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns looping off. <br/></td></tr>
-<tr class="separator:ab1b29e0ccaee2c13e55ed9aa2202812e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b94fc8a8042f498fbd8693d9bce9719"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a6b94fc8a8042f498fbd8693d9bce9719">next</a> ()</td></tr>
-<tr class="memdesc:a6b94fc8a8042f498fbd8693d9bce9719"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sample at the current phase position, or 0 if looping is off and the phase overshoots the end of the sample.  <a href="#a6b94fc8a8042f498fbd8693d9bce9719">More...</a><br/></td></tr>
-<tr class="separator:a6b94fc8a8042f498fbd8693d9bce9719"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf9901db9aaee9240d6342a2204a6ce2"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#abf9901db9aaee9240d6342a2204a6ce2">isPlaying</a> ()</td></tr>
-<tr class="memdesc:abf9901db9aaee9240d6342a2204a6ce2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the sample is playing by seeing if the phase is within the limits of its end position.  <a href="#abf9901db9aaee9240d6342a2204a6ce2">More...</a><br/></td></tr>
-<tr class="separator:abf9901db9aaee9240d6342a2204a6ce2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fe56b93df218ff887eb25b7f694fb8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a3fe56b93df218ff887eb25b7f694fb8a">setFreq</a> (int frequency)</td></tr>
-<tr class="memdesc:a3fe56b93df218ff887eb25b7f694fb8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the oscillator frequency with an unsigned int.  <a href="#a3fe56b93df218ff887eb25b7f694fb8a">More...</a><br/></td></tr>
-<tr class="separator:a3fe56b93df218ff887eb25b7f694fb8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11a7948a655bea79ddd67059c2186816"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a11a7948a655bea79ddd67059c2186816">setFreq</a> (float frequency)</td></tr>
-<tr class="memdesc:a11a7948a655bea79ddd67059c2186816"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the sample frequency with a float.  <a href="#a11a7948a655bea79ddd67059c2186816">More...</a><br/></td></tr>
-<tr class="separator:a11a7948a655bea79ddd67059c2186816"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2086deef68e43620d7502dd8bb78678"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#aa2086deef68e43620d7502dd8bb78678">setFreq_Q24n8</a> (<a class="el" href="group__fixmath.html#gaa8e579259244eb60e7f70576c8e61cbd">Q24n8</a> frequency)</td></tr>
-<tr class="memdesc:aa2086deef68e43620d7502dd8bb78678"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the frequency using Q24n8 fixed-point number format.  <a href="#aa2086deef68e43620d7502dd8bb78678">More...</a><br/></td></tr>
-<tr class="separator:aa2086deef68e43620d7502dd8bb78678"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5c4e048c4aa7a36710e58466caabc94"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ad5c4e048c4aa7a36710e58466caabc94">atIndex</a> (unsigned int index)</td></tr>
-<tr class="memdesc:ad5c4e048c4aa7a36710e58466caabc94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sample at the given table index.  <a href="#ad5c4e048c4aa7a36710e58466caabc94">More...</a><br/></td></tr>
-<tr class="separator:ad5c4e048c4aa7a36710e58466caabc94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7dfbdfca35b7bbf074e24e62a1d53309"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a7dfbdfca35b7bbf074e24e62a1d53309">phaseIncFromFreq</a> (unsigned int frequency)</td></tr>
-<tr class="memdesc:a7dfbdfca35b7bbf074e24e62a1d53309"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment">phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding
-</pre><p> between frequencies.  <a href="#a7dfbdfca35b7bbf074e24e62a1d53309">More...</a><br/></td></tr>
-<tr class="separator:a7dfbdfca35b7bbf074e24e62a1d53309"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95735f0b10eb0fa50402c47d0cd5d871"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a95735f0b10eb0fa50402c47d0cd5d871">setPhaseInc</a> (unsigned long phaseinc_fractional)</td></tr>
-<tr class="memdesc:a95735f0b10eb0fa50402c47d0cd5d871"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a specific phase increment.  <a href="#a95735f0b10eb0fa50402c47d0cd5d871">More...</a><br/></td></tr>
-<tr class="separator:a95735f0b10eb0fa50402c47d0cd5d871"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace5a0c50fa2135c54d4cd37e001d8ed5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ace5a0c50fa2135c54d4cd37e001d8ed5">Sample</a> (const char *TABLE_NAME)</td></tr>
+<tr class="memdesc:ace5a0c50fa2135c54d4cd37e001d8ed5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#ace5a0c50fa2135c54d4cd37e001d8ed5">More...</a><br/></td></tr>
+<tr class="separator:ace5a0c50fa2135c54d4cd37e001d8ed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9a043d47ab143f7a4d9370cf9f2f02d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ac9a043d47ab143f7a4d9370cf9f2f02d">Sample</a> ()</td></tr>
+<tr class="memdesc:ac9a043d47ab143f7a4d9370cf9f2f02d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#ac9a043d47ab143f7a4d9370cf9f2f02d">More...</a><br/></td></tr>
+<tr class="separator:ac9a043d47ab143f7a4d9370cf9f2f02d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03cb0ce7df128a179f4dc3b8cc9ff459"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a03cb0ce7df128a179f4dc3b8cc9ff459">setTable</a> (const char *TABLE_NAME)</td></tr>
+<tr class="memdesc:a03cb0ce7df128a179f4dc3b8cc9ff459"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the sound table which will be played by the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a>.  <a href="#a03cb0ce7df128a179f4dc3b8cc9ff459">More...</a><br/></td></tr>
+<tr class="separator:a03cb0ce7df128a179f4dc3b8cc9ff459"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01836f7624ea574e966e775377d5bf11"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a01836f7624ea574e966e775377d5bf11">setStart</a> (unsigned int startpos)</td></tr>
+<tr class="memdesc:a01836f7624ea574e966e775377d5bf11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the starting position in samples.  <a href="#a01836f7624ea574e966e775377d5bf11">More...</a><br/></td></tr>
+<tr class="separator:a01836f7624ea574e966e775377d5bf11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49ab98acdfb4f81a8860ad21876bdc18"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a49ab98acdfb4f81a8860ad21876bdc18"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a49ab98acdfb4f81a8860ad21876bdc18">start</a> ()</td></tr>
+<tr class="memdesc:a49ab98acdfb4f81a8860ad21876bdc18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the phase (the playhead) to the start position, which will be 0 unless set to another value with <a class="el" href="class_sample.html#a01836f7624ea574e966e775377d5bf11" title="Sets the starting position in samples.">setStart()</a>;. <br/></td></tr>
+<tr class="separator:a49ab98acdfb4f81a8860ad21876bdc18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb7084b95a6141843ede8025cdd726ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#abb7084b95a6141843ede8025cdd726ac">start</a> (unsigned int startpos)</td></tr>
+<tr class="memdesc:abb7084b95a6141843ede8025cdd726ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the a new start position and sets the phase (the playhead) to that position.  <a href="#abb7084b95a6141843ede8025cdd726ac">More...</a><br/></td></tr>
+<tr class="separator:abb7084b95a6141843ede8025cdd726ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9713e2d38b94e629c06916a7543ef48f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a9713e2d38b94e629c06916a7543ef48f">setEnd</a> (unsigned int end)</td></tr>
+<tr class="memdesc:a9713e2d38b94e629c06916a7543ef48f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the end position in samples from the beginning of the sound.  <a href="#a9713e2d38b94e629c06916a7543ef48f">More...</a><br/></td></tr>
+<tr class="separator:a9713e2d38b94e629c06916a7543ef48f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a012ae52ee028222118f6bba5c7fb33"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a012ae52ee028222118f6bba5c7fb33"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a8a012ae52ee028222118f6bba5c7fb33">rangeWholeSample</a> ()</td></tr>
+<tr class="memdesc:a8a012ae52ee028222118f6bba5c7fb33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the start and end points to include the range of the whole sound table. <br/></td></tr>
+<tr class="separator:a8a012ae52ee028222118f6bba5c7fb33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40e76011d841b84d2d54bf2cec6c4d5f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a40e76011d841b84d2d54bf2cec6c4d5f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a40e76011d841b84d2d54bf2cec6c4d5f">setLoopingOn</a> ()</td></tr>
+<tr class="memdesc:a40e76011d841b84d2d54bf2cec6c4d5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns looping on, with the whole sample length as the loop range. <br/></td></tr>
+<tr class="separator:a40e76011d841b84d2d54bf2cec6c4d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accfdc762cd47425824179bff4cd2a78f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="accfdc762cd47425824179bff4cd2a78f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#accfdc762cd47425824179bff4cd2a78f">setLoopingOff</a> ()</td></tr>
+<tr class="memdesc:accfdc762cd47425824179bff4cd2a78f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns looping off. <br/></td></tr>
+<tr class="separator:accfdc762cd47425824179bff4cd2a78f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dde6bdd473ed6f33091bba67a45bffb"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a3dde6bdd473ed6f33091bba67a45bffb">next</a> ()</td></tr>
+<tr class="memdesc:a3dde6bdd473ed6f33091bba67a45bffb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sample at the current phase position, or 0 if looping is off and the phase overshoots the end of the sample.  <a href="#a3dde6bdd473ed6f33091bba67a45bffb">More...</a><br/></td></tr>
+<tr class="separator:a3dde6bdd473ed6f33091bba67a45bffb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4fa817151691ece9d2a91a0c0c03007"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ae4fa817151691ece9d2a91a0c0c03007">isPlaying</a> ()</td></tr>
+<tr class="memdesc:ae4fa817151691ece9d2a91a0c0c03007"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the sample is playing by seeing if the phase is within the limits of its end position.  <a href="#ae4fa817151691ece9d2a91a0c0c03007">More...</a><br/></td></tr>
+<tr class="separator:ae4fa817151691ece9d2a91a0c0c03007"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0c37457f99def5c7036c6b6d9ee43fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#aa0c37457f99def5c7036c6b6d9ee43fc">setFreq</a> (int frequency)</td></tr>
+<tr class="memdesc:aa0c37457f99def5c7036c6b6d9ee43fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the oscillator frequency with an unsigned int.  <a href="#aa0c37457f99def5c7036c6b6d9ee43fc">More...</a><br/></td></tr>
+<tr class="separator:aa0c37457f99def5c7036c6b6d9ee43fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d5840157e98024537ae10cd27ff9f9e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a4d5840157e98024537ae10cd27ff9f9e">setFreq</a> (float frequency)</td></tr>
+<tr class="memdesc:a4d5840157e98024537ae10cd27ff9f9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the sample frequency with a float.  <a href="#a4d5840157e98024537ae10cd27ff9f9e">More...</a><br/></td></tr>
+<tr class="separator:a4d5840157e98024537ae10cd27ff9f9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a903c2d634b10ac531c3c9f6a35fcb046"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a903c2d634b10ac531c3c9f6a35fcb046">setFreq_Q24n8</a> (<a class="el" href="group__fixmath.html#gaa8e579259244eb60e7f70576c8e61cbd">Q24n8</a> frequency)</td></tr>
+<tr class="memdesc:a903c2d634b10ac531c3c9f6a35fcb046"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the frequency using Q24n8 fixed-point number format.  <a href="#a903c2d634b10ac531c3c9f6a35fcb046">More...</a><br/></td></tr>
+<tr class="separator:a903c2d634b10ac531c3c9f6a35fcb046"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac04f0709f2c6c86dac6e0c11353715d6"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ac04f0709f2c6c86dac6e0c11353715d6">atIndex</a> (unsigned int index)</td></tr>
+<tr class="memdesc:ac04f0709f2c6c86dac6e0c11353715d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sample at the given table index.  <a href="#ac04f0709f2c6c86dac6e0c11353715d6">More...</a><br/></td></tr>
+<tr class="separator:ac04f0709f2c6c86dac6e0c11353715d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18e72ecdb7bac8d41038b785d6deba58"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a18e72ecdb7bac8d41038b785d6deba58">phaseIncFromFreq</a> (unsigned int frequency)</td></tr>
+<tr class="memdesc:a18e72ecdb7bac8d41038b785d6deba58"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment">phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding
+</pre><p> between frequencies.  <a href="#a18e72ecdb7bac8d41038b785d6deba58">More...</a><br/></td></tr>
+<tr class="separator:a18e72ecdb7bac8d41038b785d6deba58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaff03b2a14f8f0f79c13840948151a1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#aaff03b2a14f8f0f79c13840948151a1d">setPhaseInc</a> (unsigned long phaseinc_fractional)</td></tr>
+<tr class="memdesc:aaff03b2a14f8f0f79c13840948151a1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a specific phase increment.  <a href="#aaff03b2a14f8f0f79c13840948151a1d">More...</a><br/></td></tr>
+<tr class="separator:aaff03b2a14f8f0f79c13840948151a1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt;<br/>
-class Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</h3>
+<div class="textblock"><h3>template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned char INTERP = INTERP_NONE&gt;<br/>
+class Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</h3>
 
 <p><a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> is like <a class="el" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>, it plays a wavetable. </p>
 <p>However, <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> can be set to play once through only, with variable start and end points, or can loop, also with variable start and end points. It defaults to playing once through the whole sound table, from start to finish. </p>
@@ -181,20 +181,21 @@ class Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</h3>
 <h1><a class="anchor" id="char2mozzi"></a>
 char2mozzi</h1>
 <p>Converting soundfiles for Mozzi. There is a python script called <a class="el" href="char2mozzi_8py.html" title="A script for converting raw 8 bit sound data files to wavetables for Mozzi.">char2mozzi.py</a> in the Mozzi/python folder. The script converts raw sound data saved from a program like Audacity. Instructions are in the <a class="el" href="char2mozzi_8py.html" title="A script for converting raw 8 bit sound data files to wavetables for Mozzi.">char2mozzi.py</a> file. </p>
-
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00062">62</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="08_8_samples_2_sample_2_sample_8ino-example.html#_a0">08.Samples/Sample/Sample.ino</a>.</dd>
+</dl>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00063">63</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a9b95b8797648288b1c3698beda1dd34a"></a>
+<a class="anchor" id="ace5a0c50fa2135c54d4cd37e001d8ed5"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned char INTERP = INTERP_NONE&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html">Sample</a> </td>
+          <td class="memname"><a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;::<a class="el" href="class_sample.html">Sample</a> </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>TABLE_NAME</em></td><td>)</td>
@@ -211,26 +212,26 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <p>Constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">TABLE_NAME</td><td>the name of the array the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> will be using. This can be found in the table ".h" file if you are using a table made for Mozzi by the <a class="el" href="char2mozzi_8py.html" title="A script for converting raw 8 bit sound data files to wavetables for Mozzi.">char2mozzi.py</a> python script in Mozzi's python folder. Sound tables can be of arbitrary lengths for <a class="el" href="class_sample.html#af2ce86342a595a3571ce2e9a38e96a96" title="Constructor.">Sample()</a>. </td></tr>
+    <tr><td class="paramname">TABLE_NAME</td><td>the name of the array the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> will be using. This can be found in the table ".h" file if you are using a table made for Mozzi by the <a class="el" href="char2mozzi_8py.html" title="A script for converting raw 8 bit sound data files to wavetables for Mozzi.">char2mozzi.py</a> python script in Mozzi's python folder. Sound tables can be of arbitrary lengths for <a class="el" href="class_sample.html#ac9a043d47ab143f7a4d9370cf9f2f02d" title="Constructor.">Sample()</a>. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00073">73</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00074">74</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="af2ce86342a595a3571ce2e9a38e96a96"></a>
+<a class="anchor" id="ac9a043d47ab143f7a4d9370cf9f2f02d"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned char INTERP = INTERP_NONE&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::<a class="el" href="class_sample.html">Sample</a> </td>
+          <td class="memname"><a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;::<a class="el" href="class_sample.html">Sample</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -244,24 +245,24 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </div><div class="memdoc">
 
 <p>Constructor. </p>
-<p>Declare a <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> with template TABLE_NUM_CELLS and UPDATE_RATE parameters, without specifying a particular wave table for it to play. The table can be set or changed on the fly with <a class="el" href="class_sample.html#a9911f53f66a5413a923b73f3d890abd4" title="Change the sound table which will be played by the Sample.">setTable()</a>. </p>
+<p>Declare a <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> with template TABLE_NUM_CELLS and UPDATE_RATE parameters, without specifying a particular wave table for it to play. The table can be set or changed on the fly with <a class="el" href="class_sample.html#a03cb0ce7df128a179f4dc3b8cc9ff459" title="Change the sound table which will be played by the Sample.">setTable()</a>. </p>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00085">85</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00086">86</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ad5c4e048c4aa7a36710e58466caabc94"></a>
+<a class="anchor" id="ac04f0709f2c6c86dac6e0c11353715d6"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned char INTERP = INTERP_NONE&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">char <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::atIndex </td>
+          <td class="memname">char <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;::atIndex </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>index</em></td><td>)</td>
@@ -278,27 +279,27 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <p>Returns the sample at the given table index. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">index</td><td>between 0 and the table size.The index rolls back around to 0 if it's larger than the table size. </td></tr>
+    <tr><td class="paramname">index</td><td>between 0 and the table size. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the sample at the given table index. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00287">287</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00293">293</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="abf9901db9aaee9240d6342a2204a6ce2"></a>
+<a class="anchor" id="ae4fa817151691ece9d2a91a0c0c03007"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned char INTERP = INTERP_NONE&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">boolean <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::isPlaying </td>
+          <td class="memname">boolean <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;::isPlaying </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -314,21 +315,21 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <p>Checks if the sample is playing by seeing if the phase is within the limits of its end position. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if the sample is playing </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00207">207</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00214">214</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a6b94fc8a8042f498fbd8693d9bce9719"></a>
+<a class="anchor" id="a3dde6bdd473ed6f33091bba67a45bffb"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned char INTERP = INTERP_NONE&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">char <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::next </td>
+          <td class="memname">char <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;::next </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -345,21 +346,21 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <p>Updates the phase according to the current frequency. </p>
 <dl class="section return"><dt>Returns</dt><dd>the next sample value from the table, or 0 if it's finished playing. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00181">181</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00183">183</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a7dfbdfca35b7bbf074e24e62a1d53309"></a>
+<a class="anchor" id="a18e72ecdb7bac8d41038b785d6deba58"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned char INTERP = INTERP_NONE&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned long <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::phaseIncFromFreq </td>
+          <td class="memname">unsigned long <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;::phaseIncFromFreq </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>frequency</em></td><td>)</td>
@@ -375,7 +376,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 
 <p><pre class="fragment">phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding
 </pre><p> between frequencies. </p>
-<p>Instead of recalculating the phase increment for each frequency in between, you can just calculate the phase increment for each end frequency with <a class="el" href="class_sample.html#a7dfbdfca35b7bbf074e24e62a1d53309" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding  between frequencies...">phaseIncFromFreq()</a>, then use a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> to interpolate on the fly and use <a class="el" href="class_sample.html#a95735f0b10eb0fa50402c47d0cd5d871" title="Set a specific phase increment.">setPhaseInc()</a> to set the phase increment at each step. (Note: I should really profile this with the oscilloscope to see if it's worth the extra confusion!) </p>
+<p>Instead of recalculating the phase increment for each frequency in between, you can just calculate the phase increment for each end frequency with <a class="el" href="class_sample.html#a18e72ecdb7bac8d41038b785d6deba58" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding  between frequencies...">phaseIncFromFreq()</a>, then use a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> to interpolate on the fly and use <a class="el" href="class_sample.html#aaff03b2a14f8f0f79c13840948151a1d" title="Set a specific phase increment.">setPhaseInc()</a> to set the phase increment at each step. (Note: I should really profile this with the oscilloscope to see if it's worth the extra confusion!) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">frequency</td><td>for which you want to calculate a phase increment value. </td></tr>
@@ -384,21 +385,21 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the phase increment value which will produce a given frequency. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00304">304</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00310">310</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a2e82144fde95ab74fb7525f33f3fe4d6"></a>
+<a class="anchor" id="a9713e2d38b94e629c06916a7543ef48f"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned char INTERP = INTERP_NONE&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setEnd </td>
+          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;::setEnd </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>end</em></td><td>)</td>
@@ -420,21 +421,21 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00139">139</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00140">140</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a3fe56b93df218ff887eb25b7f694fb8a"></a>
+<a class="anchor" id="aa0c37457f99def5c7036c6b6d9ee43fc"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned char INTERP = INTERP_NONE&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setFreq </td>
+          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;::setFreq </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>frequency</em></td><td>)</td>
@@ -457,21 +458,21 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00238">238</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00245">245</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a11a7948a655bea79ddd67059c2186816"></a>
+<a class="anchor" id="a4d5840157e98024537ae10cd27ff9f9e"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned char INTERP = INTERP_NONE&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setFreq </td>
+          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;::setFreq </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>frequency</em></td><td>)</td>
@@ -494,21 +495,21 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00252">252</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00259">259</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aa2086deef68e43620d7502dd8bb78678"></a>
+<a class="anchor" id="a903c2d634b10ac531c3c9f6a35fcb046"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned char INTERP = INTERP_NONE&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setFreq_Q24n8 </td>
+          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;::setFreq_Q24n8 </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__fixmath.html#gaa8e579259244eb60e7f70576c8e61cbd">Q24n8</a>&#160;</td>
           <td class="paramname"><em>frequency</em></td><td>)</td>
@@ -531,21 +532,21 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00270">270</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00277">277</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a95735f0b10eb0fa50402c47d0cd5d871"></a>
+<a class="anchor" id="aaff03b2a14f8f0f79c13840948151a1d"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned char INTERP = INTERP_NONE&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setPhaseInc </td>
+          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;::setPhaseInc </td>
           <td>(</td>
           <td class="paramtype">unsigned long&#160;</td>
           <td class="paramname"><em>phaseinc_fractional</em></td><td>)</td>
@@ -560,29 +561,29 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 </div><div class="memdoc">
 
 <p>Set a specific phase increment. </p>
-<p>See <a class="el" href="class_sample.html#a7dfbdfca35b7bbf074e24e62a1d53309" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding  between frequencies...">phaseIncFromFreq()</a>. </p>
+<p>See <a class="el" href="class_sample.html#a18e72ecdb7bac8d41038b785d6deba58" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding  between frequencies...">phaseIncFromFreq()</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">phaseinc_fractional</td><td>a phase increment value as calculated by <a class="el" href="class_sample.html#a7dfbdfca35b7bbf074e24e62a1d53309" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding  between frequencies...">phaseIncFromFreq()</a>. </td></tr>
+    <tr><td class="paramname">phaseinc_fractional</td><td>a phase increment value as calculated by <a class="el" href="class_sample.html#a18e72ecdb7bac8d41038b785d6deba58" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding  between frequencies...">phaseIncFromFreq()</a>. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00314">314</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00320">320</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a9fb19ee79276c6663c521ea2b17ea079"></a>
+<a class="anchor" id="a01836f7624ea574e966e775377d5bf11"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned char INTERP = INTERP_NONE&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setStart </td>
+          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;::setStart </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>startpos</em></td><td>)</td>
@@ -604,21 +605,21 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00106">106</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00107">107</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a9911f53f66a5413a923b73f3d890abd4"></a>
+<a class="anchor" id="a03cb0ce7df128a179f4dc3b8cc9ff459"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned char INTERP = INTERP_NONE&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setTable </td>
+          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;::setTable </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>TABLE_NAME</em></td><td>)</td>
@@ -640,21 +641,21 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00096">96</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00097">97</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ad2dbae6c05040fd0381653f1a102e6ee"></a>
+<a class="anchor" id="abb7084b95a6141843ede8025cdd726ac"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
+template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned char INTERP = INTERP_NONE&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::start </td>
+          <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;::start </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>startpos</em></td><td>)</td>
@@ -676,7 +677,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sample_8h_source.html#l00128">128</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+<p>Definition at line <a class="el" href="_sample_8h_source.html#l00129">129</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
 
 </div>
 </div>
@@ -686,7 +687,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_sample.html">Sample</a></li>
-    <li class="footer">Generated on Mon Jul 29 2013 18:09:18 for Mozzi by
+    <li class="footer">Generated on Sun Aug 25 2013 18:13:58 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

@@ -1,22 +1,22 @@
 /*  Example of pulse width modulation,
- *  using Mozzi sonification library.
- *   
- *  Based Miller Puckette's j03.pulse.width.mod example 
- *  in the Pure Data documentation, subtracting 2 sawtooth 
- *  waves with slightly different tunings to produce a 
- *  varying phase difference.
- *
- *  Demonstrates Phasor().
- *
- *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
- *  check the README or http://sensorium.github.com/Mozzi/
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2012.
- *  This example code is in the public domain.
- */
+    using Mozzi sonification library.
+     
+    Based Miller Puckette's j03.pulse.width.mod example 
+    in the Pure Data documentation, subtracting 2 sawtooth 
+    waves with slightly different tunings to produce a 
+    varying phase difference.
+  
+    Demonstrates Phasor().
+  
+    Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+    check the README or http://sensorium.github.com/Mozzi/
+  
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Tim Barrass 2012.
+    This example code is in the public domain.
+*/
 
 #include <MozziGuts.h>
 #include <Phasor.h>

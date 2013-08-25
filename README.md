@@ -4,7 +4,7 @@
 
 
 Tim Barrass  
-version 2013-07-29-18:09  
+version 2013-08-25-18:13  
 
 Currently your Arduino can only beep like a microwave oven. Mozzi brings
 your Arduino to life by allowing it to produce much more complex and interesting
@@ -48,7 +48,6 @@ on Digital Pin 9\* on Arduino, and the ground to the Ground on the Arduino.
 Use this as a line out which you can plug into your computer and listen to with
 a sound program like [Audacity](http://audacity.sourceforge.net/). 
 Try some examples from the __File > Examples > Mozzi__ menu.  
-* See the README for audio output pins on different boards. 
 
 Below is a list of the Digital Pins used by Mozzi for STANDARD mode PWM audio out on different boards.
 Those which have been tested and reported to work have an x.

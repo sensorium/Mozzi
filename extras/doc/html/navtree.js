@@ -20,8 +20,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_02_control_2_control__echo__theremin_2_control__echo__theremin_8ino-example.html",
-"group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1"
+"01_8_basics_2_vibrato_2_vibrato_8ino-example.html",
+"class_wave_shaper_3_01char_01_4.html#a8b6327480538c938c846829687ae300f"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

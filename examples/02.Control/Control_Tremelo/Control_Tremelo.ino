@@ -1,22 +1,22 @@
 /*  Example of amplitude modulation (as tremelo),
- *  using Mozzi sonification library.
- *
- *  Demonstrates audio and control rate updates.
- *  The tremelo oscillator is updated at control rate,
- *  and a Line is used to interpolate the control updates
- *  at audio rate, to remove zipper noise.
- *  A bit contrived and probably less efficient than just 
- *  using an audio-rate tremelo oscillator, but hey it's a demo!
- *
- *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
- *  check the README or http://sensorium.github.com/Mozzi/
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2012.
- *  This example code is in the public domain.
- */
+    using Mozzi sonification library.
+  
+    Demonstrates audio and control rate updates.
+    The tremelo oscillator is updated at control rate,
+    and a Line is used to interpolate the control updates
+    at audio rate, to remove zipper noise.
+    A bit contrived and probably less efficient than just 
+    using an audio-rate tremelo oscillator, but hey it's a demo!
+  
+    Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+    check the README or http://sensorium.github.com/Mozzi/
+  
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Tim Barrass 2012.
+    This example code is in the public domain.
+*/
 
 #include <MozziGuts.h>
 #include <Oscil.h>

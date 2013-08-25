@@ -95,5 +95,9 @@ private:
 
 };
 
+/**
+@example 02.Control/EventDelay/EventDelay.ino
+This example shows how to use the EventDelay class.
+*/
 
 #endif /* EVENTDELAY_H_ */

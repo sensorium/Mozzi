@@ -1,52 +1,52 @@
 /*  Example of a pair of detuned oscillators 
- *  sliding smoothly between frequencies,
- *  using Mozzi sonification library.
- *
- *  Demonstrates using Lines to efficiently change the
- *  frequency of each oscillator at audio rate.   Calculating
- *  a new frequency for every step of a slide is a lot to
- *  do for every single sample, so instead this sketch works out the 
- *  start and end frequencies for each control period and
- *  the phase increments (size of the steps through the sound table)
- *  required for the audio oscillators to generate those frequencies.
- *  Then, computationally cheap Lines are used to slide between the
- *  different phase increments smoothly at audio rate.
- *  Also shows how to use random offsets between the oscillators'
- *  frequencies to produce a chorusing/doubling effect.
- *
- *  IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
- *  be changed from STANDARD mode to HIFI.
- *  In Mozz/mozzi_config.h, change
- *  #define AUDIO_MODE STANDARD
- *  //#define AUDIO_MODE HIFI
- *  to
- *  //#define AUDIO_MODE STANDARD
- *  #define AUDIO_MODE HIFI
- *
- *  Also, AUDIO_RATE can be changed from 16384 to 32768 in mozzi_config.h,
- *  to try out the higher sample rate.
- *
- *  Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
- *  Check the Mozzi core module documentation for others and more detail
- *
- *                   3.9k 
- *   pin 9  ---WWWW-----|-----output
- *                     1M           |
- *   pin 10 ---WWWW---- |
- *                                     |
- *                           4.7n  ==
- *                                     |
- *                                 ground
- *
- *  Resistors are ±0.5%  Measure and choose the most precise 
- *  from a batch of whatever you can get.
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2012.
- *  This example code is in the public domain.
- */
+    sliding smoothly between frequencies,
+    using Mozzi sonification library.
+  
+    Demonstrates using Lines to efficiently change the
+    frequency of each oscillator at audio rate.   Calculating
+    a new frequency for every step of a slide is a lot to
+    do for every single sample, so instead this sketch works out the 
+    start and end frequencies for each control period and
+    the phase increments (size of the steps through the sound table)
+    required for the audio oscillators to generate those frequencies.
+    Then, computationally cheap Lines are used to slide between the
+    different phase increments smoothly at audio rate.
+    Also shows how to use random offsets between the oscillators'
+    frequencies to produce a chorusing/doubling effect.
+  
+    IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
+    be changed from STANDARD mode to HIFI.
+    In Mozz/mozzi_config.h, change
+    #define AUDIO_MODE STANDARD
+    //#define AUDIO_MODE HIFI
+    to
+    //#define AUDIO_MODE STANDARD
+    #define AUDIO_MODE HIFI
+  
+    Also, AUDIO_RATE can be changed from 16384 to 32768 in mozzi_config.h,
+    to try out the higher sample rate.
+  
+    Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
+    Check the Mozzi core module documentation for others and more detail
+  
+                     3.9k 
+     pin 9  ---WWWW-----|-----output
+                       1M           |
+     pin 10 ---WWWW---- |
+                                       |
+                             4.7n  ==
+                                       |
+                                   ground
+  
+    Resistors are ±0.5%  Measure and choose the most precise 
+    from a batch of whatever you can get.
+  
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Tim Barrass 2012.
+    This example code is in the public domain.
+*/
 
 #include <MozziGuts.h>
 #include <Line.h> // for smooth transitions
@@ -57,7 +57,7 @@
 #include <mozzi_fixmath.h>
 
 
-// use: Oscil <table_size, update_rate> oscilName (wavetable)
+// use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <TRIANGLE_WARM8192_NUM_CELLS, AUDIO_RATE> aTriangle1(TRIANGLE_WARM8192_DATA);
 Oscil <TRIANGLE_WARM8192_NUM_CELLS, AUDIO_RATE> aTriangle2(TRIANGLE_WARM8192_DATA);
 

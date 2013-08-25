@@ -31,8 +31,7 @@
 #include <Phasor.h>
 #include <Line.h>
 #include <meta.h>
-//#include <mozzi_utils.h>
-//#include <mozzi_analog.h>
+
 
 enum algorithms {SINGLE,DOUBLE};
 
@@ -198,5 +197,9 @@ private:
 	}
 
 };
+
+/** @example 06.Synthesis/WavePacket/WavePacket.ino
+This is an example of how to use the WavePacket class.
+*/
 
 #endif        //  #ifndef WAVEPACKET_H

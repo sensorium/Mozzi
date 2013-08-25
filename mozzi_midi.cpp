@@ -134,7 +134,7 @@ Q16n16  Q16n16_mtof(Q16n16 midival_fractional)
 	unsigned char index = midival_fractional >> 16;
 	unsigned int fraction = (unsigned int) midival_fractional; // keeps low word
 	Q16n16 freq1 = (Q16n16) pgm_read_dword(midiToFreq + index);
-	Q16n16 freq2 = (Q16n16) pgm_read_dword(midiToFreq + (index+1));
+	Q16n16 freq2 = (Q16n16) pgm_read_dword((midiToFreq + 1) + index);
 	Q16n16 difference = freq2 - freq1;
 	if (difference>=65536)
 	{
@@ -152,8 +152,8 @@ A good choice if you're using whole note values, want speed and simplicity, and 
 @param midi_note a midi note number.
 @return an integer approximation of the midi note's frequency.
 */
-unsigned int mtof(unsigned char midi_note){
-	return (unsigned int) (pgm_read_dword(midiToFreq + midi_note) >> 16);
+int mtof(unsigned char midi_note){
+	return (int) (pgm_read_dword(midiToFreq + midi_note) >> 16);
 }
 
 
@@ -162,6 +162,6 @@ A good choice if you're using whole note values, want speed and simplicity, and 
 @param midi_note a midi note number.
 @return an integer approximation of the midi note's frequency.
 */
-unsigned int mtof(int midi_note){
-	return (unsigned int) (pgm_read_dword(midiToFreq + midi_note) >> 16);
+int mtof(int midi_note){
+	return (int) (pgm_read_dword(midiToFreq + midi_note) >> 16);
 }

@@ -19,11 +19,12 @@
  
  http://www.arduino.cc/en/Tutorial/Dimmer
  
- */
+*/
+
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator
 
-// use: Oscil <table_size, update_rate> oscilName (wavetable)
+// use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
 void setup(){
@@ -87,7 +88,7 @@ void loop(){
  // a single byte
  port.write(mouseX);
  }
- */
+*/
 
 /* Max/MSP v5 patch for this example
  
@@ -116,4 +117,4 @@ D6YmX6fMznaF7kdczmJXwm.XSOOrdoHhNA7GMiZYLZZR.+4lconMaJP6JOZ8
 ftCs1YWHZI3o.sIXezX5ihMSuXzZtk3ai1mXRSczoCS32hAydeyXNEu5SHyS
 xqZqbd3ZLdera1iPqYxOm++v7SUSz
 -----------end_max5_patcher-----------
- */
+*/

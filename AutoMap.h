@@ -75,5 +75,10 @@ private:
 };
 
 
+/**
+@example 03.Sensors/Knob_LDR_x2_WavePacket/Knob_LDR_x2_WavePacket.ino
+This example demonstrates the AutoMap class.
+*/
+
 #endif        //  #ifndef AUTOMAP_H_
 

@@ -21,6 +21,7 @@ var annotated =
     [ "RollingStat", "class_rolling_stat.html", "class_rolling_stat" ],
     [ "RollingStat< float, WINDOW_LENGTH >", "class_rolling_stat_3_01float_00_01_w_i_n_d_o_w___l_e_n_g_t_h_01_4.html", "class_rolling_stat_3_01float_00_01_w_i_n_d_o_w___l_e_n_g_t_h_01_4" ],
     [ "Sample", "class_sample.html", "class_sample" ],
+    [ "SampleHuffman", "class_sample_huffman.html", "class_sample_huffman" ],
     [ "Smooth", "class_smooth.html", "class_smooth" ],
     [ "Stack", "class_stack.html", "class_stack" ],
     [ "StateVariable", "class_state_variable.html", "class_state_variable" ],

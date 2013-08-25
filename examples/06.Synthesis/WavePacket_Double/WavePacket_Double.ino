@@ -1,17 +1,17 @@
 /*  Example of Wavepacket synthesis, using Mozzi sonification library.
- *  This sketch draws on Miller Puckette's 
- *  Pure Data example, F14.wave.packet.pd, with
- *  two overlapping streams of wave packets.
- *
- *  Circuit: Audio output on digital pin 9 (for STANDARD mode on a Uno or similar), or 
- *  check the README or http://sensorium.github.com/Mozzi/
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2013.
- *  This example code is in the public domain.
- */
+    This sketch draws on Miller Puckette's 
+    Pure Data example, F14.wave.packet.pd, with
+    two overlapping streams of wave packets.
+  
+    Circuit: Audio output on digital pin 9 (for STANDARD mode on a Uno or similar), or 
+    check the README or http://sensorium.github.com/Mozzi/
+  
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Tim Barrass 2013.
+    This example code is in the public domain.
+*/
  
  #include <mozzi_analog.h>
  #include <WavePacket.h>
@@ -32,15 +32,13 @@ WavePacket <DOUBLE> wavey; // DOUBLE selects 2 overlapping streams
 
 void setup(){
   startMozzi();
-  adcEnableInterrupt();
 }
 
 
 void updateControl(){
-  wavey.set(kAverageF.next(adcGetResult(FUNDAMENTAL_PIN))+1, 
-    kAverageBw.next(adcGetResult(BANDWIDTH_PIN)), 
-    kAverageCf.next(2*adcGetResult(CENTREFREQ_PIN)));
-  adcReadAllChannels();
+  wavey.set(kAverageF.next(mozziAnalogRead(FUNDAMENTAL_PIN))+1, 
+    kAverageBw.next(mozziAnalogRead(BANDWIDTH_PIN)), 
+    kAverageCf.next(2*mozziAnalogRead(CENTREFREQ_PIN)));
 }
 
 

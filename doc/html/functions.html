@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-07-29-18:09</span>
+   &#160;<span id="projectnumber">version 2013-08-25-18:38</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </li>
 <li>atIndex()
 : <a class="el" href="class_oscil.html#a3b2ea7727b2ec911957b3862dbb6a8ec">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
-, <a class="el" href="class_sample.html#ad5c4e048c4aa7a36710e58466caabc94">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+, <a class="el" href="class_sample.html#ac04f0709f2c6c86dac6e0c11353715d6">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 </li>
 <li>AudioDelay()
 : <a class="el" href="class_audio_delay.html#a688f69088f96bf3976a8555d3026365f">AudioDelay&lt; NUM_BUFFER_SAMPLES, T &gt;</a>
@@ -138,7 +138,6 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </li>
 <li>getMean()
 : <a class="el" href="class_rolling_stat.html#aed85e98ab32f0a731dc12f9f1c4da398">RollingStat&lt; T, WINDOW_LENGTH &gt;</a>
-, <a class="el" href="class_rolling_stat_3_01float_00_01_w_i_n_d_o_w___l_e_n_g_t_h_01_4.html#acf7318ccc4fe908d10caa0fe7e96e2c5">RollingStat&lt; float, WINDOW_LENGTH &gt;</a>
 </li>
 <li>getMin()
 : <a class="el" href="class_auto_range.html#acd1dae6e6ffb288efc1618e2453ad5ef">AutoRange&lt; T &gt;</a>
@@ -151,11 +150,9 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </li>
 <li>getStandardDeviation()
 : <a class="el" href="class_rolling_stat.html#ade29f8eea338da4879fa692ea2b28bc3">RollingStat&lt; T, WINDOW_LENGTH &gt;</a>
-, <a class="el" href="class_rolling_stat_3_01float_00_01_w_i_n_d_o_w___l_e_n_g_t_h_01_4.html#a8f42b8fb42febcded2d9c303ea7cfd06">RollingStat&lt; float, WINDOW_LENGTH &gt;</a>
 </li>
 <li>getVariance()
 : <a class="el" href="class_rolling_stat.html#a9d145736669d070194b8149eec084bc0">RollingStat&lt; T, WINDOW_LENGTH &gt;</a>
-, <a class="el" href="class_rolling_stat_3_01float_00_01_w_i_n_d_o_w___l_e_n_g_t_h_01_4.html#a21a604a585c2dec367d2b817f431a591">RollingStat&lt; float, WINDOW_LENGTH &gt;</a>
 </li>
 </ul>
 
@@ -165,7 +162,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 : <a class="el" href="class_int_map.html#a36ab6e0137254909f44ae909dfe44a8a">IntMap</a>
 </li>
 <li>isPlaying()
-: <a class="el" href="class_sample.html#abf9901db9aaee9240d6342a2204a6ce2">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+: <a class="el" href="class_sample.html#ae4fa817151691ece9d2a91a0c0c03007">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 </li>
 </ul>
 
@@ -190,7 +187,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 , <a class="el" href="class_wave_packet.html#ab4e35082b60d3ccc29c86d09078329bd">WavePacket&lt; ALGORITHM &gt;</a>
 , <a class="el" href="class_state_variable.html#a14cb100c22e4a33025665ef3620ca2b8">StateVariable&lt; FILTER_TYPE &gt;</a>
 , <a class="el" href="class_smooth.html#ab7c809b6b5217771832a3e829695f8d5">Smooth&lt; T &gt;</a>
-, <a class="el" href="class_sample.html#a6b94fc8a8042f498fbd8693d9bce9719">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+, <a class="el" href="class_sample.html#a3dde6bdd473ed6f33091bba67a45bffb">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 , <a class="el" href="class_auto_range.html#a788fca4c9f1e6699eb1990582015c0e3">AutoRange&lt; T &gt;</a>
 , <a class="el" href="class_reverb_tank.html#a4930ae7a871dba610fb141d7ab83d827">ReverbTank</a>
 , <a class="el" href="class_portamento.html#ad39101f5275c433713df7699214638bc">Portamento&lt; CONTROL_UPDATE_RATE &gt;</a>
@@ -218,6 +215,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <li>operator()()
 : <a class="el" href="class_auto_map.html#afd49885d3f05ca0a2f417199a9e7cf10">AutoMap</a>
 , <a class="el" href="class_int_map.html#af37387773185e7539457e4908ea73663">IntMap</a>
+, <a class="el" href="class_smooth.html#a24eb02e4c4bfe9401f24ed0399b1e392">Smooth&lt; T &gt;</a>
 </li>
 <li>Oscil()
 : <a class="el" href="class_oscil.html#ac43b3d870a5c6da90cafa9d678829593">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
@@ -229,7 +227,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <li>phaseIncFromFreq()
 : <a class="el" href="class_oscil.html#a184110cb1901d2742a6016b46cbea027">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
 , <a class="el" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230">Phasor&lt; UPDATE_RATE &gt;</a>
-, <a class="el" href="class_sample.html#a7dfbdfca35b7bbf074e24e62a1d53309">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+, <a class="el" href="class_sample.html#a18e72ecdb7bac8d41038b785d6deba58">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 </li>
 <li>Phasor()
 : <a class="el" href="class_phasor.html#a147c4c3aa7506c3da800e6cc77deb4ac">Phasor&lt; UPDATE_RATE &gt;</a>
@@ -251,7 +249,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 
 <h3><a class="anchor" id="index_r"></a>- r -</h3><ul>
 <li>rangeWholeSample()
-: <a class="el" href="class_sample.html#a79cb13998692fdff715c7b6b1beb991a">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+: <a class="el" href="class_sample.html#a8a012ae52ee028222118f6bba5c7fb33">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 </li>
 <li>read()
 : <a class="el" href="class_audio_delay.html#a26b409fbfc322ae527ba23680c56e3a9">AudioDelay&lt; NUM_BUFFER_SAMPLES, T &gt;</a>
@@ -268,14 +266,13 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </li>
 <li>RollingStat()
 : <a class="el" href="class_rolling_stat.html#a98c3f767391db80b8ad59ca53c1e6a94">RollingStat&lt; T, WINDOW_LENGTH &gt;</a>
-, <a class="el" href="class_rolling_stat_3_01float_00_01_w_i_n_d_o_w___l_e_n_g_t_h_01_4.html#a7dc63d2c65dbadbafe785b3d0e2a7167">RollingStat&lt; float, WINDOW_LENGTH &gt;</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
 <li>Sample()
-: <a class="el" href="class_sample.html#a9b95b8797648288b1c3698beda1dd34a">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+: <a class="el" href="class_sample.html#ace5a0c50fa2135c54d4cd37e001d8ed5">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 </li>
 <li>set()
 : <a class="el" href="class_ead.html#af203c82721ab832c653a23ff219c040e">Ead</a>
@@ -324,7 +321,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 : <a class="el" href="class_reverb_tank.html#aeaa523c4fae743ef7ded87d4902af3d7">ReverbTank</a>
 </li>
 <li>setEnd()
-: <a class="el" href="class_sample.html#a2e82144fde95ab74fb7525f33f3fe4d6">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+: <a class="el" href="class_sample.html#a9713e2d38b94e629c06916a7543ef48f">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 </li>
 <li>setFeebackLevel()
 : <a class="el" href="class_reverb_tank.html#a25ce51abfcaccb316007edc77446520b">ReverbTank</a>
@@ -334,7 +331,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </li>
 <li>setFreq()
 : <a class="el" href="class_phasor.html#a81f1976ebb4a91f66f26674efca52072">Phasor&lt; UPDATE_RATE &gt;</a>
-, <a class="el" href="class_sample.html#a3fe56b93df218ff887eb25b7f694fb8a">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+, <a class="el" href="class_sample.html#aa0c37457f99def5c7036c6b6d9ee43fc">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 , <a class="el" href="class_oscil.html#a23121f22ea447918088a79c7f9748b3d">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
 , <a class="el" href="class_phasor.html#afc6106c648bddb5f2f084b8f34216b0f">Phasor&lt; UPDATE_RATE &gt;</a>
 </li>
@@ -343,7 +340,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </li>
 <li>setFreq_Q24n8()
 : <a class="el" href="class_oscil.html#abc8a4ee236f7fd45dda9dece7292b6e7">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
-, <a class="el" href="class_sample.html#aa2086deef68e43620d7502dd8bb78678">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+, <a class="el" href="class_sample.html#a903c2d634b10ac531c3c9f6a35fcb046">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 </li>
 <li>setFundamental()
 : <a class="el" href="class_wave_packet.html#af87c37ffd274eee91aa93c0f7d560be2">WavePacket&lt; ALGORITHM &gt;</a>
@@ -352,10 +349,10 @@ $(document).ready(function(){initNavTree('functions.html','');});
 : <a class="el" href="class_reverb_tank.html#a6c19a84c7bc1f068871551891011a89c">ReverbTank</a>
 </li>
 <li>setLoopingOff()
-: <a class="el" href="class_sample.html#ab1b29e0ccaee2c13e55ed9aa2202812e">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+: <a class="el" href="class_sample.html#accfdc762cd47425824179bff4cd2a78f">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 </li>
 <li>setLoopingOn()
-: <a class="el" href="class_sample.html#aaa2257099a1269445651145e46de5bed">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+: <a class="el" href="class_sample.html#a40e76011d841b84d2d54bf2cec6c4d5f">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 </li>
 <li>setPhase()
 : <a class="el" href="class_oscil.html#ab7b740eec56740426a47508562ed4dd5">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
@@ -366,7 +363,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <li>setPhaseInc()
 : <a class="el" href="class_oscil.html#a2ff9bfcc57e07bf0df2ed7db186ecff7">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
 , <a class="el" href="class_phasor.html#aa3d62bdf762247b2523c0a625caeedd7">Phasor&lt; UPDATE_RATE &gt;</a>
-, <a class="el" href="class_sample.html#a95735f0b10eb0fa50402c47d0cd5d871">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+, <a class="el" href="class_sample.html#aaff03b2a14f8f0f79c13840948151a1d">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 </li>
 <li>setReleaseLevel()
 : <a class="el" href="class_a_d_s_r.html#aa577c32f8758e1ecda44b4410c1c103d">ADSR&lt; CONTROL_UPDATE_RATE &gt;</a>
@@ -382,7 +379,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 : <a class="el" href="class_smooth.html#aac44bbf7a9bc6b9bae80eecc1be6e188">Smooth&lt; T &gt;</a>
 </li>
 <li>setStart()
-: <a class="el" href="class_sample.html#a9fb19ee79276c6663c521ea2b17ea079">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+: <a class="el" href="class_sample.html#a01836f7624ea574e966e775377d5bf11">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 </li>
 <li>setSustainLevel()
 : <a class="el" href="class_a_d_s_r.html#a9f81971a62aa3abb66245b7ef25ae3c2">ADSR&lt; CONTROL_UPDATE_RATE &gt;</a>
@@ -393,7 +390,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <li>setTable()
 : <a class="el" href="class_wave_packet_sample.html#a69ae33a0540773b090e83d7fa884489e">WavePacketSample&lt; ALGORITHM &gt;</a>
 , <a class="el" href="class_oscil.html#a59e9b132ad0770030d7339c6aa260925">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
-, <a class="el" href="class_sample.html#a9911f53f66a5413a923b73f3d890abd4">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+, <a class="el" href="class_sample.html#a03cb0ce7df128a179f4dc3b8cc9ff459">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 </li>
 <li>setTime()
 : <a class="el" href="class_portamento.html#af19c3b3c189e111079f54211ff5a4ebe">Portamento&lt; CONTROL_UPDATE_RATE &gt;</a>
@@ -409,10 +406,10 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </li>
 <li>start()
 : <a class="el" href="class_event_delay.html#aa2a731ceb05f95cac1798089448c6aed">EventDelay&lt; UPDATE_RATE &gt;</a>
-, <a class="el" href="class_sample.html#ad2dbae6c05040fd0381653f1a102e6ee">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+, <a class="el" href="class_sample.html#abb7084b95a6141843ede8025cdd726ac">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 , <a class="el" href="class_ead.html#ac385679b58e2f9755029b7da7405b233">Ead</a>
 , <a class="el" href="class_portamento.html#af93c2b0ab1efa88d4e15f919401c2337">Portamento&lt; CONTROL_UPDATE_RATE &gt;</a>
-, <a class="el" href="class_sample.html#a57307ee93ef0fcff36d543596eb79b72">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+, <a class="el" href="class_sample.html#a49ab98acdfb4f81a8860ad21876bdc18">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 , <a class="el" href="class_portamento.html#af70701abfdd9f3d788f3b313e38017d0">Portamento&lt; CONTROL_UPDATE_RATE &gt;</a>
 , <a class="el" href="class_event_delay.html#a85de9021676dadaba68edd6c5d5afa0e">EventDelay&lt; UPDATE_RATE &gt;</a>
 , <a class="el" href="class_ead.html#a146b205e70f4b2293e643ea063f2b38f">Ead</a>
@@ -426,7 +423,6 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <h3><a class="anchor" id="index_u"></a>- u -</h3><ul>
 <li>update()
 : <a class="el" href="class_a_d_s_r.html#a5ffeb0baf5e308515ca36cb7af802c31">ADSR&lt; CONTROL_UPDATE_RATE &gt;</a>
-, <a class="el" href="class_rolling_stat_3_01float_00_01_w_i_n_d_o_w___l_e_n_g_t_h_01_4.html#a85408761740659f6a14b1a2f0e1d543d">RollingStat&lt; float, WINDOW_LENGTH &gt;</a>
 , <a class="el" href="class_rolling_stat.html#afdc3f385aebe68492514f41129065aa5">RollingStat&lt; T, WINDOW_LENGTH &gt;</a>
 </li>
 </ul>
@@ -452,7 +448,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Jul 29 2013 18:09:18 for Mozzi by
+    <li class="footer">Generated on Sun Aug 25 2013 18:38:45 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

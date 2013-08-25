@@ -1,21 +1,21 @@
 /*  Example of a sound being toggled on an off,
- *  using Mozzi sonification library.
- *
- *  Demonstrates scheduling with EventDelay.
- *  EventDelay is a way to make non-blocking
- *  time delays for events.  Use this instead of
- *  the Arduino delay() function, which doesn't
- *  work with Mozzi.
- *
- *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
- *  check the README or http://sensorium.github.com/Mozzi/
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2012.
- *  This example code is in the public domain.
- */
+    using Mozzi sonification library.
+  
+    Demonstrates scheduling with EventDelay.
+    EventDelay is a way to make non-blocking
+    time delays for events.  Use this instead of
+    the Arduino delay() function, which doesn't
+    work with Mozzi.
+  
+    Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+    check the README or http://sensorium.github.com/Mozzi/
+  
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Tim Barrass 2012.
+    This example code is in the public domain.
+*/
 
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
@@ -24,7 +24,7 @@
 
 #define CONTROL_RATE 64
 
-// use: Oscil <table_size, update_rate> oscilName (wavetable)
+// use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <SIN8192_NUM_CELLS, AUDIO_RATE> aSin(SIN8192_DATA);
 
 // for scheduling audio gain changes

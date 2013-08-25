@@ -1,16 +1,16 @@
 /*  Example of a modulating timbre with a rhythmic
- *  volume envelope, using Mozzi sonification library.
- *
- *
- *  Demonstrates phase modulation and modifying
- *  the volume of a sound with an envelope setd in a table.
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2012.
- *  This example code is in the public domain.
- */
+    volume envelope, using Mozzi sonification library.
+  
+  
+    Demonstrates phase modulation and modifying
+    the volume of a sound with an envelope setd in a table.
+  
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Tim Barrass 2012.
+    This example code is in the public domain.
+*/
 
 #include <MozziGuts.h>
 #include <Oscil.h>
@@ -19,7 +19,7 @@
 
 #define CONTROL_RATE 512 // quite fast, keeps modulation smooth
 
-// use: Oscil <table_size, update_rate> oscilName (wavetable)
+// use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <COS8192_NUM_CELLS, AUDIO_RATE> aCarrier(COS8192_DATA);
 Oscil <COS8192_NUM_CELLS, AUDIO_RATE> aModulator(COS8192_DATA);
 Oscil <COS8192_NUM_CELLS, AUDIO_RATE> aModWidth(COS8192_DATA);

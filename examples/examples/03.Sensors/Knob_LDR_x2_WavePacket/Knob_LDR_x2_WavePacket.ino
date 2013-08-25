@@ -5,7 +5,7 @@
   using Mozzi sonification library.
 
   Demonstrates WavePacket, non-blocking analog reads using
-  adcReadAllChannels() and adcGetResult(unsigned char), and smoothing
+  mozziAnalogRead(pin), and smoothing
   control signals with RollingAverage.
   Also demonstrates AutoMap, which maps unpredictable inputs to a set range.
   
@@ -13,29 +13,29 @@
   http://sensorium.github.io/Mozzi/learn/Mozzi_Introductory_Tutorial.pdf
   
     The circuit:
-  *  Audio output on digital pin 9 (on a Uno or similar), or 
+     Audio output on digital pin 9 (on a Uno or similar), or 
      check the README or http://sensorium.github.com/Mozzi/
 
-  *  Potentiometer connected to analog pin 0.
-  *  Center pin of the potentiometer goes to the analog pin.
-  *  Side pins of the potentiometer go to +5V and ground
+     Potentiometer connected to analog pin 0.
+     Center pin of the potentiometer goes to the analog pin.
+     Side pins of the potentiometer go to +5V and ground
   
   Light dependent resistor (LDR) and 5.1k resistor on analog pin 1:
-  * LDR from analog pin to +5V
-  * 5.1k resistor from analog pin to ground
+    LDR from analog pin to +5V
+    5.1k resistor from analog pin to ground
 
    Light dependent resistor (LDR) and 5.1k resistor on analog pin 2:
-  * LDR from analog pin to +5V
-  * 5.1k resistor from analog pin to ground
+    LDR from analog pin to +5V
+    5.1k resistor from analog pin to ground
   
   Mozzi help/discussion/announcements:
   https://groups.google.com/forum/#!forum/mozzi-users
 
   Tim Barrass 2013.
   This example code is in the public domain.
- */
+*/
  
- #include <mozzi_analog.h>
+
  #include <WavePacket.h>
  #include <RollingAverage.h>
  #include <AutoMap.h>
@@ -69,10 +69,6 @@ WavePacket <DOUBLE> wavey; // DOUBLE selects 2 overlapping streams
 
 void setup(){
   Serial.begin(115200);
-  // set up async analog reading for adcReadAllChannels() and adcGetResult(unsigned char)
-  adcEnableInterrupt();
-  // request initial read
-  adcReadAllChannels();
   // wait before starting Mozzi to receive analog reads, so AutoRange will not get 0
   delay(200);
   startMozzi();
@@ -80,22 +76,21 @@ void setup(){
 
 
 void updateControl(){
-  int fundamental = adcGetResult(KNOB_PIN)+1;
+  int fundamental = mozziAnalogRead(KNOB_PIN)+1;
   Serial.print(fundamental);
   Serial.print("  ");
   fundamental = kMapF(fundamental);
   Serial.print(fundamental);
   Serial.println();
   
-  int bandwidth = adcGetResult(LDR1_PIN);
+  int bandwidth = mozziAnalogRead(LDR1_PIN);
   bandwidth = kMapBw(bandwidth);
   
-  int centre_freq = adcGetResult(LDR2_PIN);
+  int centre_freq = mozziAnalogRead(LDR2_PIN);
   centre_freq = kMapCf(centre_freq);
 
   
   wavey.set(fundamental, bandwidth, centre_freq);
-  adcReadAllChannels();
 }
 
 

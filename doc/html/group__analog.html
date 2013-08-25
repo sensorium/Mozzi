@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-07-29-18:09</span>
+   &#160;<span id="projectnumber">version 2013-08-25-18:38</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -97,20 +97,14 @@ $(document).ready(function(){initNavTree('group__analog.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Fast analog input functions for sensors and audio.  
+<p>Efficient analog input functions for sensors and audio.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gac9b066c792d2b822dcf518eef19a7c3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e">adcEnableInterrupt</a> ()</td></tr>
-<tr class="memdesc:gac9b066c792d2b822dcf518eef19a7c3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call this in setup() to enable reading analog inputs in the background while audio generating continues.  <a href="#gac9b066c792d2b822dcf518eef19a7c3e">More...</a><br/></td></tr>
-<tr class="separator:gac9b066c792d2b822dcf518eef19a7c3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8741756d32609ad6dec641943fa99af9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga8741756d32609ad6dec641943fa99af9">setupFastAnalogRead</a> (char speed=FAST_ADC)</td></tr>
-<tr class="memdesc:ga8741756d32609ad6dec641943fa99af9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in unmodified Arduino to about 16 microseconds for a dependable analogRead() with the default speed parameter FAST_ADC.  <a href="#ga8741756d32609ad6dec641943fa99af9">More...</a><br/></td></tr>
+<tr class="memdesc:ga8741756d32609ad6dec641943fa99af9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is automatically called in startMozzi.  <a href="#ga8741756d32609ad6dec641943fa99af9">More...</a><br/></td></tr>
 <tr class="separator:ga8741756d32609ad6dec641943fa99af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaffeb925f6aca20f179cc46e1734c04ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gaffeb925f6aca20f179cc46e1734c04ad">setupMozziADC</a> (char speed=FAST_ADC)</td></tr>
-<tr class="memdesc:gaffeb925f6aca20f179cc46e1734c04ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up for asynchronous analog input, which enables analog reads to take place in the background without blocking the processor.  <a href="#gaffeb925f6aca20f179cc46e1734c04ad">More...</a><br/></td></tr>
-<tr class="separator:gaffeb925f6aca20f179cc46e1734c04ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad4433797b75fedd473250e9aa414dcae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gad4433797b75fedd473250e9aa414dcae">disconnectDigitalIn</a> (byte channel_num)</td></tr>
 <tr class="memdesc:gad4433797b75fedd473250e9aa414dcae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepare an analog input channel by turning off its digital input buffer.  <a href="#gad4433797b75fedd473250e9aa414dcae">More...</a><br/></td></tr>
 <tr class="separator:gad4433797b75fedd473250e9aa414dcae"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -124,32 +118,16 @@ Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gabad497d1f8c8026e81849be0b65bf38f">adcReconnectAllDigitalIns</a> ()</td></tr>
 <tr class="memdesc:gabad497d1f8c8026e81849be0b65bf38f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reconnect the digital input buffers for analog input channels which have been set for analog input with <a class="el" href="group__analog.html#gad4433797b75fedd473250e9aa414dcae" title="Prepare an analog input channel by turning off its digital input buffer.">disconnectDigitalIn()</a>. <br/></td></tr>
 <tr class="separator:gabad497d1f8c8026e81849be0b65bf38f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae0d3533acb5fd56db8f7317e24bea6b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gae0d3533acb5fd56db8f7317e24bea6b5">adcSetChannel</a> (unsigned char pin)</td></tr>
-<tr class="memdesc:gae0d3533acb5fd56db8f7317e24bea6b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the channel or pin for the next analog input to be read from.  <a href="#gae0d3533acb5fd56db8f7317e24bea6b5">More...</a><br/></td></tr>
-<tr class="separator:gae0d3533acb5fd56db8f7317e24bea6b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8e081d7e359e219b7dce35538fcf3e39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39">adcStartConversion</a> (unsigned char pin)</td></tr>
-<tr class="memdesc:ga8e081d7e359e219b7dce35538fcf3e39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts an analog to digital conversion of the voltage at a specified pin.  <a href="#ga8e081d7e359e219b7dce35538fcf3e39">More...</a><br/></td></tr>
-<tr class="separator:ga8e081d7e359e219b7dce35538fcf3e39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac3d2277d3d3823c6d5c727067571aab3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac3d2277d3d3823c6d5c727067571aab3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gac3d2277d3d3823c6d5c727067571aab3">adcStartConversion</a> ()</td></tr>
-<tr class="memdesc:gac3d2277d3d3823c6d5c727067571aab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the analog conversion on the pin or channel most recently set with <a class="el" href="group__analog.html#gae0d3533acb5fd56db8f7317e24bea6b5" title="Set the channel or pin for the next analog input to be read from.">adcSetChannel()</a>;. <br/></td></tr>
-<tr class="separator:gac3d2277d3d3823c6d5c727067571aab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaaf4320d2621e15ea704900ea26a8aa07"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07">adcGetResult</a> ()</td></tr>
-<tr class="memdesc:gaaf4320d2621e15ea704900ea26a8aa07"><td class="mdescLeft">&#160;</td><td class="mdescRight">DEPRECIATED.  <a href="#gaaf4320d2621e15ea704900ea26a8aa07">More...</a><br/></td></tr>
-<tr class="separator:gaaf4320d2621e15ea704900ea26a8aa07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1d1ee9fa143c3a0505e76b41fc2af09f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga1d1ee9fa143c3a0505e76b41fc2af09f">adcGetResult</a> (unsigned char channel_num)</td></tr>
-<tr class="memdesc:ga1d1ee9fa143c3a0505e76b41fc2af09f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This returns the most recent analog reading for the specified channel.  <a href="#ga1d1ee9fa143c3a0505e76b41fc2af09f">More...</a><br/></td></tr>
-<tr class="separator:ga1d1ee9fa143c3a0505e76b41fc2af09f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga829091330473b48a8b9236d0be4b8755"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755">adcReadAllChannels</a> ()</td></tr>
-<tr class="memdesc:ga829091330473b48a8b9236d0be4b8755"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels()</a> in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> and the results for each channel will be available by calling adcGetResult(channel_num) next time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> runs.  <a href="#ga829091330473b48a8b9236d0be4b8755">More...</a><br/></td></tr>
-<tr class="separator:ga829091330473b48a8b9236d0be4b8755"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga860bfe1e9172d1f5bb8eb08c324cd6c9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga860bfe1e9172d1f5bb8eb08c324cd6c9">mozziAnalogRead</a> (unsigned char pin)</td></tr>
+<tr class="memdesc:ga860bfe1e9172d1f5bb8eb08c324cd6c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the analog input of a chosen channel, without blocking other operations from running.  <a href="#ga860bfe1e9172d1f5bb8eb08c324cd6c9">More...</a><br/></td></tr>
+<tr class="separator:ga860bfe1e9172d1f5bb8eb08c324cd6c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3f15eb8d6694020d170ebcbedb645de7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga3f15eb8d6694020d170ebcbedb645de7">getAudioInput</a> ()</td></tr>
 <tr class="memdesc:ga3f15eb8d6694020d170ebcbedb645de7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> file.  <a href="#ga3f15eb8d6694020d170ebcbedb645de7">More...</a><br/></td></tr>
 <tr class="separator:ga3f15eb8d6694020d170ebcbedb645de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Fast analog input functions for sensors and audio. </p>
-<p>Helps produce glitch-free audio by speeding up analog input functions which normally block processing. </p>
+<p>Efficient analog input functions for sensors and audio. </p>
+<p>Helps produce glitch-free audio by allowing analog input functions which normally block processing to be performed in the background. </p>
 <h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="ga5042e7c576dd0307be38eb70efdb69fe"></a>
 <div class="memitem">
@@ -167,163 +145,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <p>Prepare all analog input channels by turning off their digital input buffers. </p>
 <p>This helps to reduce noise, increase analog reading speed, and save power. </p>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00149">149</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="gac9b066c792d2b822dcf518eef19a7c3e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void adcEnableInterrupt </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Call this in setup() to enable reading analog inputs in the background while audio generating continues. </p>
-<p>Then call <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels()</a> at the end of each <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> and the results for each analog channel will be available by calling adcGetResult(channel_num) next time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> runs. </p>
-<dl class="section note"><dt>Note</dt><dd>This method using <a class="el" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">adcEnableInterrupt()</a>, <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels()</a> and <a class="el" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07" title="DEPRECIATED.">adcGetResult()</a> is an easy and efficient way to read analog inputs while generating sound with Mozzi. For many sketches, however, simply putting <a class="el" href="group__analog.html#ga8741756d32609ad6dec641943fa99af9" title="Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in u...">setupFastAnalogRead()</a> in setup() and calling Arduino's usual analogRead() will work fast enough. </dd>
-<dd>
-In some cases this method can cause glitches which may have to do with the ADC interrupt interfering with the audio or control interrupts. If this occurs, try the <a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion()</a>, <a class="el" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07" title="DEPRECIATED.">adcGetResult()</a> methods instead. </dd></dl>
-
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00048">48</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="gaaf4320d2621e15ea704900ea26a8aa07"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int adcGetResult </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>DEPRECIATED. </p>
-<p>Waits for the result of the most recent <a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion()</a>. If used as the first function of <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, to receive the result of <a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion()</a> from the end of the last <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, there will probably be no waiting time, as the ADC conversion will have happened in between interrupts. This is a big time-saver, since you don't have to waste time waiting for analogRead() to return (1us here vs 105 us for standard Arduino). </p>
-<dl class="section return"><dt>Returns</dt><dd>The resut of the most recent <a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion()</a>. </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>This is the most audio-friendly way to read analog inputs, but can be messier in your program than the the <a class="el" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">adcEnableInterrupt()</a>, <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels()</a>, adcGetResult(byte) way. </dd>
-<dd>
-Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> with CONTROL_RATE 64. </dd></dl>
-
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00121">121</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga1d1ee9fa143c3a0505e76b41fc2af09f"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int adcGetResult </td>
-          <td>(</td>
-          <td class="paramtype">unsigned char&#160;</td>
-          <td class="paramname"><em>channel_num</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This returns the most recent analog reading for the specified channel. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">channel_num</td><td>The channels are plain numbers 0 to whatever your board goes up to, not the pin labels A0 to A... which Arduino maps to different numbers depending on the board being used. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>The <a class="el" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">adcEnableInterrupt()</a>, <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels()</a>, <a class="el" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07" title="DEPRECIATED.">adcGetResult()</a> approach is currently set to work with all channels on each kind of board. You can change the number of channels to use in <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a> by editing NUM_ANALOG_INPUTS if desired. </dd>
-<dd>
-In some cases this method can cause glitches which may have to do with the ADC interrupt interfering with the audio or control interrupts. </dd></dl>
-
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00205">205</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga829091330473b48a8b9236d0be4b8755"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void adcReadAllChannels </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Call <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels()</a> in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> and the results for each channel will be available by calling adcGetResult(channel_num) next time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> runs. </p>
-<p>Reading will happen in the background, using a minimum of processor time and without blocking other code.</p>
-<p>More detail: <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels()</a> starts an initial conversion which triggers an interrupt when it's complete. The interrupt code stores the result in an array, changes to the next channel and starts another conversion. When all the channels have been sampled, the ISR doesn't start a new conversion, so it doesn't re-trigger itself or use processor time until <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels()</a> is called again. At any time the latest conversion result for each channel is available by calling adcGetResult(channel_num). </p>
-<dl class="section note"><dt>Note</dt><dd>In some cases this method can cause glitches which may have to do with the ADC interrupt interfering with the audio or control interrupts.</dd></dl>
-<p>Call <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels()</a> in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> and the results for each channel will be available by calling adcGetResult(channel_num) next time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> runs.</p>
-<p>This pushes all the other analog channel numbers onto a stack to be read consecutively, one each time the analog read interrupt returns, until the stack is empty. When USE_AUDIO_INPUT=true, the sequence will start when it is triggered by the return of the next audio analog input interrupt. When USE_AUDIO_INPUT=false, <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels()</a> starts the first conversion itself and the rest are triggered automatically. </p>
-
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00192">192</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="gae0d3533acb5fd56db8f7317e24bea6b5"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void adcSetChannel </td>
-          <td>(</td>
-          <td class="paramtype">unsigned char&#160;</td>
-          <td class="paramname"><em>pin</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set the channel or pin for the next analog input to be read from. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pin</td><td>channel or pin number. If pin number is provided, <a class="el" href="group__analog.html#gae0d3533acb5fd56db8f7317e24bea6b5" title="Set the channel or pin for the next analog input to be read from.">adcSetChannel()</a> will convert it to the channel number. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00065">65</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga8e081d7e359e219b7dce35538fcf3e39"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void adcStartConversion </td>
-          <td>(</td>
-          <td class="paramtype">unsigned char&#160;</td>
-          <td class="paramname"><em>pin</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Starts an analog to digital conversion of the voltage at a specified pin. </p>
-<p>Unlike Arduino's analogRead() function which waits until a conversion is complete before returning, <a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion()</a> only sets the conversion to begin, so you can use the cpu for other things and call for the result later with <a class="el" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07" title="DEPRECIATED.">adcGetResult()</a>. This works well in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, where you can call <a class="el" href="group__analog.html#ga8e081d7e359e219b7dce35538fcf3e39" title="Starts an analog to digital conversion of the voltage at a specified pin.">adcStartConversion()</a> and get the result with <a class="el" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07" title="DEPRECIATED.">adcGetResult()</a> the next time the <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> interrupt runs. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pin</td><td>is the analog pin number (A0 to A...) or the channel number (0 to ....) to read. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>This is the most audio-friendly way to read analog inputs, but can be messier in your program than the the <a class="el" href="group__analog.html#gac9b066c792d2b822dcf518eef19a7c3e" title="Call this in setup() to enable reading analog inputs in the background while audio generating continu...">adcEnableInterrupt()</a>, <a class="el" href="group__analog.html#ga829091330473b48a8b9236d0be4b8755" title="Request to read all analog input channels (except A0, audio, when USE_AUDIO_INPUT=true in mozzi_confi...">adcReadAllChannels()</a>, <a class="el" href="group__analog.html#gaaf4320d2621e15ea704900ea26a8aa07" title="DEPRECIATED.">adcGetResult()</a> way. </dd>
-<dd>
-Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> with CONTROL_RATE 64. </dd></dl>
-
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00105">105</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00071">71</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -354,7 +176,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00139">139</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00061">61</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -372,10 +194,38 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
 </div><div class="memdoc">
 
 <p>This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> file. </p>
-<p>Audio input is currently restricted to analog pin 0 (this may change in future). The audio signal needs to be in the range 0 to 5 volts. Circuits and discussions about biasing a signal in the middle of this range can be found at <a href="http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal">http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal</a> and <a href="http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/">http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/</a> . A circuit and instructions for amplifying and biasing a microphone signal can be found at <a href="http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS">http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS</a> </p>
+<p>The pin used for audio input is set in <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> with #define AUDIO_INPUT_PIN 0 (or other analog input pin). The audio signal needs to be in the range 0 to 5 volts. Circuits and discussions about biasing a signal in the middle of this range can be found at <a href="http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal">http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal</a> and <a href="http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/">http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/</a> . A circuit and instructions for amplifying and biasing a microphone signal can be found at <a href="http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS">http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS</a> </p>
 <dl class="section return"><dt>Returns</dt><dd>audio data from the input buffer </dd></dl>
 
-<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00125">125</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00122">122</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga860bfe1e9172d1f5bb8eb08c324cd6c9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int mozziAnalogRead </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reads the analog input of a chosen channel, without blocking other operations from running. </p>
+<p>It actually returns the most recent analog reading and puts the chosen pin or channel on the stack of channels to be read in the background before the next control interrupt. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin_or_channel</td><td>the analog pin or channel number. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the digitised value of the voltage on the chosen channel, in the range 0-1023. </dd></dl>
+
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00160">160</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -401,7 +251,7 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00144">144</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00066">66</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
 
 </div>
 </div>
@@ -419,11 +269,11 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
       </table>
 </div><div class="memdoc">
 
-<p>Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in unmodified Arduino to about 16 microseconds for a dependable analogRead() with the default speed parameter FAST_ADC. </p>
-<p>To avoid audio glitches, put this in setup() if you use analogRead() with Mozzi. See: <a href="http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11,">http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11,</a> and <a href="http://www.marulaberry.co.za/index.php/tutorials/code/arduino-adc/">http://www.marulaberry.co.za/index.php/tutorials/code/arduino-adc/</a> </p>
+<p>This is automatically called in startMozzi. </p>
+<p>It makes <a class="el" href="group__analog.html#ga860bfe1e9172d1f5bb8eb08c324cd6c9" title="Reads the analog input of a chosen channel, without blocking other operations from running...">mozziAnalogRead()</a> happen faster than the standard Arduino analogRead(), changing the duration from about 105 in unmodified Arduino to about 16 microseconds for a dependable read with the default speed parameter FAST_ADC. If you want to set on of the faster modes (see params) you can call this after <a class="el" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837" title="Sets up the timers for audio and control rate processes, storing the timer registers so they can be r...">startMozzi()</a>. See: <a href="http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11,">http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11,</a> and <a href="http://www.marulaberry.co.za/index.php/tutorials/code/arduino-adc/">http://www.marulaberry.co.za/index.php/tutorials/code/arduino-adc/</a> </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">speed</td><td>FAST_ADC, FASTER_ADC or FASTEST_ADC. If no parameter is supplied, the default is FAST_ADC, which sets the analog conversion clock predivide rate to 16, giving 1Mhz on a 16MHz board, the fastest rate for which behaviour is defined (~16us per sample). However, divisors of 8 and 4 also show usable results in the graphs in this paper: <a href="http://dam.mellis.org/Mellis%20-%20Sensor%20Library%20for%20Arduino%20-%20Paper.pdf,">http://dam.mellis.org/Mellis%20-%20Sensor%20Library%20for%20Arduino%20-%20Paper.pdf,</a> so you can also try FASTER_ADC or FASTEST_ADC for divide rates of 8 or 4, giving times of about 8us or 4us per sample. Beware, reliable results will depend on the sort of input you use. Only use FASTER_ADC or FASTEST_ADC if you know what you're doing. </td></tr>
+    <tr><td class="paramname">speed</td><td>FAST_ADC, FASTER_ADC or FASTEST_ADC. If no parameter is supplied, the default is FAST_ADC, which sets the analog conversion clock predivide rate to 16, giving 1Mhz on a 16MHz board, the fastest rate for which behaviour is defined (~16us per sample). However, divisors of 8 and 4 also show usable results in the graphs in this paper: <a href="http://dam.mellis.org/Mellis%20-%20Sensor%20Library%20for%20Arduino%20-%20Paper.pdf,">http://dam.mellis.org/Mellis%20-%20Sensor%20Library%20for%20Arduino%20-%20Paper.pdf,</a> so you can also try FASTER_ADC or FASTEST_ADC for divide rates of 8 or 4, giving times of about 8us or 4us per sample. Beware, reliable results will depend on the sort of input signal you have. Only use FASTER_ADC or FASTEST_ADC if you know what you're doing. </td></tr>
   </table>
   </dd>
 </dl>
@@ -432,39 +282,12 @@ Timing: about 1us when used in <a class="el" href="group__core.html#ga59d187b915
 
 </div>
 </div>
-<a class="anchor" id="gaffeb925f6aca20f179cc46e1734c04ad"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setupMozziADC </td>
-          <td>(</td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>speed</em> = <code>FAST_ADC</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set up for asynchronous analog input, which enables analog reads to take place in the background without blocking the processor. </p>
-<p>This goes in setup(), but if /#define USE_AUDIO_INPUT true is in <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a>, you don't need <a class="el" href="group__analog.html#gaffeb925f6aca20f179cc46e1734c04ad" title="Set up for asynchronous analog input, which enables analog reads to take place in the background with...">setupMozziADC()</a> because it's called automatically to enable the audio input. If you want to use the standard Arduino analogRead(), don't use <a class="el" href="group__analog.html#gaffeb925f6aca20f179cc46e1734c04ad" title="Set up for asynchronous analog input, which enables analog reads to take place in the background with...">setupMozziADC()</a>, but do put <a class="el" href="group__analog.html#ga8741756d32609ad6dec641943fa99af9" title="Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in u...">setupFastAnalogRead()</a> in setup() if you want to reduce the chance of audio glitches. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">speed</td><td>FAST_ADC, FASTER_ADC or FASTEST_ADC. See <a class="el" href="group__analog.html#ga8741756d32609ad6dec641943fa99af9" title="Make analogRead() faster than the standard Arduino version, changing the duration from about 105 in u...">setupFastAnalogRead()</a>; </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00054">54</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Jul 29 2013 18:09:18 for Mozzi by
+    <li class="footer">Generated on Sun Aug 25 2013 18:38:45 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

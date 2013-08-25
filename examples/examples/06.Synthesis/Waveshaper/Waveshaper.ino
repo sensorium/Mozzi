@@ -1,18 +1,18 @@
 /*  Example using waveshaping to modify the spectrum of an audio signal
- *  using Mozzi sonification library.
- *
- *  Demonstrates the use of WaveShaper(), EventDelay(), Smooth(),
- *  rand(), and fixed-point numbers.
- *
- *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
- *  check the README or http://sensorium.github.com/Mozzi/
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2012.
- *  This example code is in the public domain.
- */
+    using Mozzi sonification library.
+  
+    Demonstrates the use of WaveShaper(), EventDelay(), Smooth(),
+    rand(), and fixed-point numbers.
+  
+    Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+    check the README or http://sensorium.github.com/Mozzi/
+  
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Tim Barrass 2012.
+    This example code is in the public domain.
+*/
 
 #include <MozziGuts.h>
 #include <Oscil.h>
@@ -30,7 +30,7 @@
 // use #define for CONTROL_RATE, not a constant
 #define CONTROL_RATE 64 // powers of 2 please
 
-// use: Oscil <table_size, update_rate> oscilName (wavetable)
+// use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA); // sine wave sound source
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aGain1(SIN2048_DATA); // to fade sine wave in and out before waveshaping
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aGain2(SIN2048_DATA); // to fade sine wave in and out before waveshaping

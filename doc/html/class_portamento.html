@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-07-29-18:09</span>
+   &#160;<span id="projectnumber">version 2013-08-25-18:38</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -119,8 +119,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:af70701abfdd9f3d788f3b313e38017d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call this at note-on, it initialises the portamento.  <a href="#af70701abfdd9f3d788f3b313e38017d0">More...</a><br/></td></tr>
 <tr class="separator:af70701abfdd9f3d788f3b313e38017d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad39101f5275c433713df7699214638bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__fixmath.html#ga20ef71528ee7583bbf60586448b12caf">Q16n16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_portamento.html#ad39101f5275c433713df7699214638bc">next</a> ()</td></tr>
-<tr class="memdesc:ad39101f5275c433713df7699214638bc"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment">Use this in updateControl() to provide a frequency to the oscillator it's controlling, for example: 
-</pre><p> myOscil.setFreq_Q16n16(myPortamento.next());  <a href="#ad39101f5275c433713df7699214638bc">More...</a><br/></td></tr>
+<tr class="memdesc:ad39101f5275c433713df7699214638bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use this in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> to provide a frequency to the oscillator it's controlling.  <a href="#ad39101f5275c433713df7699214638bc">More...</a><br/></td></tr>
 <tr class="separator:ad39101f5275c433713df7699214638bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -154,11 +153,11 @@ template&lt;unsigned int CONTROL_UPDATE_RATE&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p><pre class="fragment">Use this in updateControl() to provide a frequency to the oscillator it's controlling, for example: 
-</pre><p> myOscil.setFreq_Q16n16(myPortamento.next()); </p>
+<p>Use this in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> to provide a frequency to the oscillator it's controlling. </p>
+<p>For example: myOscil.setFreq_Q16n16(myPortamento.next()); </p>
 <dl class="section return"><dt>Returns</dt><dd>a Q16n16 fractional frequency value, progressing smoothly between successive notes. </dd></dl>
 
-<p>Definition at line <a class="el" href="_portamento_8h_source.html#l00082">82</a> of file <a class="el" href="_portamento_8h_source.html">Portamento.h</a>.</p>
+<p>Definition at line <a class="el" href="_portamento_8h_source.html#l00083">83</a> of file <a class="el" href="_portamento_8h_source.html">Portamento.h</a>.</p>
 
 </div>
 </div>
@@ -276,7 +275,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_portamento.html">Portamento</a></li>
-    <li class="footer">Generated on Mon Jul 29 2013 18:09:18 for Mozzi by
+    <li class="footer">Generated on Sun Aug 25 2013 18:38:45 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

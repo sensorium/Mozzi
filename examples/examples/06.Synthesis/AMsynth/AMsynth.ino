@@ -1,21 +1,21 @@
 /*  Example of Amplitude Modulation synthesis
- *  using Mozzi sonification library.
- *
- *  Demonstrates modulating the gain of one oscillator
- *  by the instantaneous amplitude of another,
- *  shows the use of fixed-point numbers to express fractional
- *  values, random numbers with rand(), and EventDelay()
- *  for scheduling.
- *
- *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
- *  check the README or http://sensorium.github.com/Mozzi/
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2012.
- *  This example code is in the public domain.
- */
+    using Mozzi sonification library.
+  
+    Demonstrates modulating the gain of one oscillator
+    by the instantaneous amplitude of another,
+    shows the use of fixed-point numbers to express fractional
+    values, random numbers with rand(), and EventDelay()
+    for scheduling.
+  
+    Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+    check the README or http://sensorium.github.com/Mozzi/
+  
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Tim Barrass 2012.
+    This example code is in the public domain.
+*/
 
 #include <MozziGuts.h>
 #include <Oscil.h>
@@ -86,7 +86,7 @@ void updateControl(){
     carrier_freq = Q16n16_to_Q24n8(Q16n16_mtof(midi_note));
 
     // calculate modulation frequency to stay in ratio with carrier
-    mod_freq = (carrier_freq * ratio)>>8; // (Q24n8 * Q8n8) >> 8 = Q24n8
+    mod_freq = (carrier_freq * ratio)>>8; // (Q24n8   Q8n8) >> 8 = Q24n8
 
       // set frequencies of the oscillators
     aCarrier.setFreq_Q24n8(carrier_freq);

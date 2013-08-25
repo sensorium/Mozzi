@@ -1,19 +1,19 @@
 /*  Example of a sound changing volume with and without
- *  smoothing of the control signal to remove obvious clicks,
- *  using Mozzi sonification library.
- *
- *  Demonstrates using Smooth to filter a control signal at audio rate,
- *  EventDelay to schedule changes and rand() to choose random volumes.
- *
- *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
- *  your board check the README or http://sensorium.github.com/Mozzi/
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2012.
- *  This example code is in the public domain.
- */
+    smoothing of the control signal to remove obvious clicks,
+    using Mozzi sonification library.
+  
+    Demonstrates using Smooth to filter a control signal at audio rate,
+    EventDelay to schedule changes and rand() to choose random volumes.
+  
+    Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+    your board check the README or http://sensorium.github.com/Mozzi/
+  
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Tim Barrass 2012.
+    This example code is in the public domain.
+*/
 
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
@@ -72,7 +72,7 @@ void updateControl(){
 
 
 int updateAudio(){
-  return (int)(aSmoothGain.next(target_gain) * aSin.next()) >> 8; // shift back to char precision after multiply
+  return (aSmoothGain.next(target_gain) * aSin.next()) >> 8; // shift back to char precision after multiply
 }
 
 

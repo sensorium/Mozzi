@@ -1,27 +1,27 @@
 /*  Example of 2 different ways to smooth analog inputs,
- *  using Mozzi sonification library.  The inputs are used 
- *  to control the frequencies of two oscillators.
- *
- *  Demonstrates how to read analog inputs asynchronously, so values are
- *  updated in the background while audio generation continues,
- *  and the most recent readings can be read anytime from an array.
- *  Also demonstrates linear interpolation with Line(),
- *  filtering with Smooth(), and fixed point numbers.
- *  
- *  Circuit: Audio output on digital pin 9 
- *  (for standard output on a Uno or similar), or 
- *  check the README or http://sensorium.github.com/Mozzi/
- *  Your choice of analog sesnsors, or
- *  2 10k Potentiometers with wipers (middle terminals) 
- *  connected to analog pins 0, 1 and 2, and
- *  outside leads to ground and +5V.  
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2013.
- *  This example code is in the public domain.
- */
+    using Mozzi sonification library.  The inputs are used 
+    to control the frequencies of two oscillators.
+  
+    Demonstrates how to read analog inputs asynchronously, so values are
+    updated in the background while audio generation continues,
+    and the most recent readings can be read anytime from an array.
+    Also demonstrates linear interpolation with Line(),
+    filtering with Smooth(), and fixed point numbers.
+    
+    Circuit: Audio output on digital pin 9 
+    (for standard output on a Uno or similar), or 
+    check the README or http://sensorium.github.com/Mozzi/
+    Your choice of analog sesnsors, or
+    2 10k Potentiometers with wipers (middle terminals) 
+    connected to analog pins 0, 1 and 2, and
+    outside leads to ground and +5V.  
+  
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Tim Barrass 2013.
+    This example code is in the public domain.
+*/
 
 #include <MozziGuts.h>
 #include <Oscil.h>
@@ -61,7 +61,6 @@ Smooth <unsigned int> aSmooth(smoothness); // to smooth frequency for aSin1
 void setup(){
   aSin0.setFreq(660.f);
   aSin1.setFreq(220.f);
-  adcEnableInterrupt(); // initialises an efficient way to read analog ins with adcGetResult() and adcReadAllChannels()
   startMozzi(CONTROL_RATE);
 }
 
@@ -69,10 +68,9 @@ void setup(){
 volatile unsigned int freq1;  // global so it can be used in updateAudio, volatile to stop it getting changed while being used
 
 void updateControl(){
-  Q16n16 freq0 = Q16n0_to_Q16n16(adcGetResult(0)); // 0 to 1023, scaled up to Q16n16 format
-  freq1 = (unsigned int) adcGetResult(1); // 0 to 1023
-  adcReadAllChannels(); // go and collect new analog readings in the background, for next time around
-  aInterpolate.set(freq0, AUDIO_STEPS_PER_CONTROL);
+  Q16n16 freq0 = Q16n0_to_Q16n16(mozziAnalogRead(0)); // 0 to 1023, scaled up to Q16n16 format
+  freq1 = (unsigned int) mozziAnalogRead(1); // 0 to 1023
+   aInterpolate.set(freq0, AUDIO_STEPS_PER_CONTROL);
 }
 
 

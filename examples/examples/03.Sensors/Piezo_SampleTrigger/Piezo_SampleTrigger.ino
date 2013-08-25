@@ -4,17 +4,17 @@
    with Mozzi sonification library.
  
    Demonstrates one-shot samples and analog input for control.
- 
+   
    This example goes with a tutorial on the Mozzi site:
    http://sensorium.github.io/Mozzi/learn/Mozzi_Introductory_Tutorial.pdf
   
     The circuit:
-  *  Audio output on digital pin 9 (on a Uno or similar), or 
+     Audio output on digital pin 9 (on a Uno or similar), or 
      check the README or http://sensorium.github.com/Mozzi/
 
-  *  Potentiometer connected to analog pin 0.
-  *  Center pin of the potentiometer goes to the analog pin.
-  *  Side pins of the potentiometer go to +5V and ground
+     Potentiometer connected to analog pin 0.
+     Center pin of the potentiometer goes to the analog pin.
+     Side pins of the potentiometer go to +5V and ground
  
    Piezo on analog pin 3:
    + connection of the piezo attached to the analog pin
@@ -26,12 +26,11 @@
  
    Tim Barrass 2013.
    This example code is in the public domain.
- */
+*/
 
 #include <MozziGuts.h>
 #include <Sample.h> // Sample template
 #include <samples/burroughs1_18649_int8.h> // a converted audio sample included in the Mozzi download
-#include <mozzi_analog.h> // fast functions for reading analog inputs 
 
 const char KNOB_PIN = 0;  // set the analog input pin for the knob
 const char PIEZO_PIN = 3;  // set the analog input pin for the piezo 
@@ -45,14 +44,13 @@ boolean triggered = false;
 
 void setup(){
   Serial.begin(115200); // set up the Serial output so we can look at the piezo values
-  setupFastAnalogRead(); // speed up analog reads (Mozzi also has other faster ways)
   startMozzi(); // :))
 }
 
 
 void updateControl(){
   // read the knob
-  int knob_value = analogRead(KNOB_PIN); // value is 0-1023
+  int knob_value = mozziAnalogRead(KNOB_PIN); // value is 0-1023
   
   // 0.1 to double recorded pitch
   float pitch = (recorded_pitch * (float) knob_value / 512.f) + 0.1f; 
@@ -61,7 +59,7 @@ void updateControl(){
   aSample.setFreq(pitch);
   
   // read the piezo
-  int piezo_value = analogRead(PIEZO_PIN); // value is 0-1023
+  int piezo_value = mozziAnalogRead(PIEZO_PIN); // value is 0-1023
 
   // print the value to the Serial monitor for debugging
   Serial.print("piezo value = ");
@@ -82,7 +80,7 @@ void updateControl(){
 
 
 int updateAudio(){
-  return (int) aSample.next();
+  return aSample.next();
 }
 
 

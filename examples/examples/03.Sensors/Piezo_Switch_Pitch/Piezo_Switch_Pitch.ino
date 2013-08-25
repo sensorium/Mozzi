@@ -10,7 +10,7 @@
  http://sensorium.github.io/Mozzi/learn/Mozzi_Introductory_Tutorial.pdf
  
  The circuit:
- * Audio output on digital pin 9 (on a Uno or similar), or 
+   Audio output on digital pin 9 (on a Uno or similar), or 
  check the README or http://sensorium.github.com/Mozzi/
  
  Piezo on analog pin A3:
@@ -19,20 +19,19 @@
  1-megOhm resistor attached from the analog pin to ground
  
  Pushbutton on digital pin D4
- *  button from the digital pin to +5V
- * 10K resistor from the digital pin to ground
+    button from the digital pin to +5V
+   10K resistor from the digital pin to ground
  
  Mozzi help/discussion/announcements:
  https://groups.google.com/forum/#!forum/mozzi-users
  
  Tim Barrass 2013.
  This example code is in the public domain.
- */
+*/
 
 #include <MozziGuts.h>
 #include <Sample.h> // Sample template
 #include <samples/burroughs1_18649_int8.h> // a converted audio sample included in the Mozzi download
-#include <mozzi_analog.h> // fast functions for reading analog inputs 
 
 const int PIEZO_PIN = 3;  // set the analog input pin for the piezo 
 const int threshold = 80;  // threshold value to decide when the detected signal is a knock or not
@@ -50,7 +49,6 @@ float pitch, pitch_change;
 
 void setup(){
   Serial.begin(115200); // set up the Serial output so we can look at the piezo values
-  setupFastAnalogRead(); // speed up analog reads (Mozzi also has other faster ways)
   startMozzi(); // :))
 }
 
@@ -64,10 +62,10 @@ void buttonChangePitch(){
 
     // if the latest change was a press, pitch up, else pitch down
     if (button_state == HIGH) {
-      pitch = 2.f *recorded_pitch;
+      pitch = 2.f * recorded_pitch;
     } 
     else {
-      pitch = 0.5f *recorded_pitch;
+      pitch = 0.5f * recorded_pitch;
     }
   }
   previous_button_state = button_state;
@@ -77,7 +75,7 @@ void buttonChangePitch(){
 
 void updateControl(){
   // read the piezo
-  int piezo_value = analogRead(PIEZO_PIN); // value is 0-1023
+  int piezo_value = mozziAnalogRead(PIEZO_PIN); // value is 0-1023
 
   // print the value to the Serial monitor for debugging
   Serial.print("piezo value = ");

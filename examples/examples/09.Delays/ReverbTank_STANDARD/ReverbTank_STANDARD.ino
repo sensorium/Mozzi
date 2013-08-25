@@ -1,24 +1,24 @@
 /*  Example of reverb on a synthesised sound
- *  using Mozzi sonification library.
- *
- *  Demonstrates ReverbTank, a reverb small enough to fit on
- *  the Arduino Nano, which for some reason wasn't able to fit a larger version
- *  which did fit on other 328 based boards.
- *  It's a pretty horrible reverb which sounds like the inside of a tin can.
- *  For simplicity, ReverbTank has hardcoded maximum delay sizes
- *  but also has default delay times which can be changed in the constructor
- *  or by setting during run time to allow live tweaking.
- *  The synthesised sound comes from the phasemod synth example.
- *
- *  Circuit: Audio output on digital pin 9 for STANDARD output on a Uno or similar, or
- *  see the readme.md file for others.
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2013.
- *  This example code is in the public domain.
- */
+    using Mozzi sonification library.
+  
+    Demonstrates ReverbTank, a reverb small enough to fit on
+    the Arduino Nano, which for some reason wasn't able to fit a larger version
+    which did fit on other 328 based boards.
+    It's a pretty horrible reverb which sounds like the inside of a tin can.
+    For simplicity, ReverbTank has hardcoded maximum delay sizes
+    but also has default delay times which can be changed in the constructor
+    or by setting during run time to allow live tweaking.
+    The synthesised sound comes from the phasemod synth example.
+  
+    Circuit: Audio output on digital pin 9 for STANDARD output on a Uno or similar, or
+    see the readme.md file for others.
+  
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Tim Barrass 2013.
+    This example code is in the public domain.
+*/
 
 #include <MozziGuts.h>
 #include <ReverbTank.h>

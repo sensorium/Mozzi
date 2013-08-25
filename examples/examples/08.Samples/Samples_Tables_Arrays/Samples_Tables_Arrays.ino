@@ -1,23 +1,23 @@
 /*  Example of a polyphonic sketch in which 
- *  11 sound tables are shared between 3 voices,
- *  using Mozzi sonification library.
- *
- *  Demonstrates use of Sample() objects as players, 
- *  using setTable() to share many sound tables between 
- *  a few players, to minimise processing in updateAudio().
- *  Shows how to use Samples and sound tables in arrays,
- *  EventDelay() for scheduling, and rand() to select 
- *  sound tables and vary the gain of each player.
- *
- *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
- *  check the README or http://sensorium.github.com/Mozzi/
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2012.
- *  This example code is in the public domain.
- */
+    11 sound tables are shared between 3 voices,
+    using Mozzi sonification library.
+  
+    Demonstrates use of Sample() objects as players, 
+    using setTable() to share many sound tables between 
+    a few players, to minimise processing in updateAudio().
+    Shows how to use Samples and sound tables in arrays,
+    EventDelay() for scheduling, and rand() to select 
+    sound tables and vary the gain of each player.
+  
+    Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+    check the README or http://sensorium.github.com/Mozzi/
+  
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Tim Barrass 2012.
+    This example code is in the public domain.
+*/
 
 #include <MozziGuts.h>
 #include <Sample.h>

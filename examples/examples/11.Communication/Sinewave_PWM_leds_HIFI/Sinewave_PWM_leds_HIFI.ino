@@ -1,54 +1,54 @@
 /*  Example playing a sinewave 
- *  and changing the brightness of 3 leds
- *  using Mozzi sonification library.
- *
- *  Demonstrates the use of Oscil for audio and control,
- *  and a way to do PWM on digital pins without disrupting audio.
- *  Control oscillators are used here to modulate the brightness of the leds
- *  between 0-255.
- *  The technique is explained here:
- *   http://playground.arduino.cc/Main/PWMallPins
- *  With AUDIO_RATE at 16384 Hz, this gives a 64 Hz pwm duty cycle.
- *  If there is visible flicker, the resolution of the pwm could be made lower,
- *  or the AUDIO_RATE could be increased to 32768 Hz, if the
- *  cpu isn't too busy.
- *
- *  IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
- *  be changed from STANDARD mode to HIFI.
- *  In Mozz/mozzi_config.h, change
- *  #define AUDIO_MODE STANDARD
- *  //#define AUDIO_MODE HIFI
- *  to
- *  //#define AUDIO_MODE STANDARD
- *  #define AUDIO_MODE HIFI
- *
- *
- *  Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
- *  Check the Mozzi core module documentation for others and more detail
- *
- *                   3.9k 
- *   pin 9  ---WWWW-----|-----output
- *                     1M           |
- *   pin 10 ---WWWW---- |
- *                                     |
- *                           4.7n  ==
- *                                     |
- *                                 ground
- *
- *  Resistors are ±0.5%  Measure and choose the most precise 
- *  from a batch of whatever you can get.
- *
- *  LEDs:
- *  Red led from pin 3 through a 1.5k resistor to ground
- *  Green led from pin 4 through a 1.5k resistor to ground
- *  Blue led from pin 5 through a 1.5k resistor to ground
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2012-13.
- *  This example code is in the public domain.
- */
+    and changing the brightness of 3 leds
+    using Mozzi sonification library.
+  
+    Demonstrates the use of Oscil for audio and control,
+    and a way to do PWM on digital pins without disrupting audio.
+    Control oscillators are used here to modulate the brightness of the leds
+    between 0-255.
+    The technique is explained here:
+     http://playground.arduino.cc/Main/PWMallPins
+    With AUDIO_RATE at 16384 Hz, this gives a 64 Hz pwm duty cycle for the LEDs.
+    If there is visible flicker, the resolution of the pwm could be made lower,
+    or the AUDIO_RATE could be increased to 32768 Hz, if the
+    cpu isn't too busy.
+  
+    IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
+    be changed from STANDARD mode to HIFI.
+    In Mozz/mozzi_config.h, change
+    #define AUDIO_MODE STANDARD
+    //#define AUDIO_MODE HIFI
+    to
+    //#define AUDIO_MODE STANDARD
+    #define AUDIO_MODE HIFI
+  
+  
+    Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
+    Check the Mozzi core module documentation for others and more detail
+  
+                     3.9k 
+     pin 9  ---WWWW-----|-----output
+                       1M           |
+     pin 10 ---WWWW---- |
+                                       |
+                             4.7n  ==
+                                       |
+                                   ground
+  
+    Resistors are ±0.5%  Measure and choose the most precise 
+    from a batch of whatever you can get.
+  
+    LEDs:
+    Red led from pin 3 through a 1.5k resistor to ground
+    Green led from pin 4 through a 1.5k resistor to ground
+    Blue led from pin 5 through a 1.5k resistor to ground
+  
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Tim Barrass 2012-13.
+    This example code is in the public domain.
+*/
 
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template

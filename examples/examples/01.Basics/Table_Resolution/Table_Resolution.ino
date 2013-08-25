@@ -1,15 +1,15 @@
 /*  Example playing sine tables of different sizes
- *  with Mozzi sonification library.
- *
- *  Demonstrates the audible quality of different length tables
- *  played with Oscil and scheduling with EventDelay.
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2012.
- *  This example code is in the public domain.
- */
+    with Mozzi sonification library.
+  
+    Demonstrates the audible quality of different length tables
+    played with Oscil and scheduling with EventDelay.
+  
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Tim Barrass 2012.
+    This example code is in the public domain.
+*/
 
 #include <MozziGuts.h>
 #include <Oscil.h>
@@ -24,7 +24,7 @@
 
 #define CONTROL_RATE 64
 
-// use: Oscil <table_size, update_rate> oscilName (wavetable)
+// use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <SIN256_NUM_CELLS, AUDIO_RATE> aSin0(SIN256_DATA); // can hear significant aliasing noise
 Oscil <SIN512_NUM_CELLS, AUDIO_RATE> aSin1(SIN512_DATA); // noise still there but less noticeable
 Oscil <SIN1024_NUM_CELLS, AUDIO_RATE> aSin2(SIN1024_DATA); // borderline, hardly there if at all

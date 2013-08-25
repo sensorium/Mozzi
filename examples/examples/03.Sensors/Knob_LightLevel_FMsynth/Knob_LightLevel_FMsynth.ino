@@ -12,29 +12,28 @@
   http://sensorium.github.io/Mozzi/learn/Mozzi_Introductory_Tutorial.pdf
   
     The circuit:
-  *  Audio output on digital pin 9 (on a Uno or similar), or 
+     Audio output on digital pin 9 (on a Uno or similar), or 
      check the README or http://sensorium.github.com/Mozzi/
 
-  *  Potentiometer connected to analog pin 0.
-  *  Center pin of the potentiometer goes to the analog pin.
-  *  Side pins of the potentiometer go to +5V and ground
+     Potentiometer connected to analog pin 0.
+     Center pin of the potentiometer goes to the analog pin.
+     Side pins of the potentiometer go to +5V and ground
  
    Light dependent resistor (LDR) and 5.1k resistor on analog pin 1:
-  * LDR from analog pin to +5V
-  * 5.1k resistor from analog pin to ground
+    LDR from analog pin to +5V
+    5.1k resistor from analog pin to ground
   
   Mozzi help/discussion/announcements:
   https://groups.google.com/forum/#!forum/mozzi-users
 
   Tim Barrass 2013.
   This example code is in the public domain.
- */
+*/
 
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator 
 #include <tables/cos2048_int8.h> // table for Oscils to play
-#include <mozzi_analog.h> // fast functions for reading analog inputs 
- #include <AutoMap.h> // maps unpredictable inputs to a range
+#include <AutoMap.h> // maps unpredictable inputs to a range
  
 // desired carrier frequency max and min, for AutoMap
 const int MIN_CARRIER_FREQ = 22;
@@ -59,14 +58,13 @@ long fm_intensity; // carries control info from updateControl() to updateAudio()
 
 void setup(){
   Serial.begin(115200); // set up the Serial output for debugging
-  setupFastAnalogRead(); // speed up analog reads (Mozzi also has other faster ways)
   startMozzi(); // :))
 }
 
 
 void updateControl(){
   // read the knob
-  int knob_value = analogRead(KNOB_PIN); // value is 0-1023
+  int knob_value = mozziAnalogRead(KNOB_PIN); // value is 0-1023
 
   // map the knob to carrier frequency
   int carrier_freq = kMapCarrierFreq(knob_value);
@@ -79,7 +77,7 @@ void updateControl(){
   aModulator.setFreq(mod_freq);
   
   // read the light dependent resistor on the Analog input pin
-  int light_level= analogRead(LDR_PIN); // value is 0-1023
+  int light_level= mozziAnalogRead(LDR_PIN); // value is 0-1023
   
   // print the value to the Serial monitor for debugging
   Serial.print("light_level = "); 

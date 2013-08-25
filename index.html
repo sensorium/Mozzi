@@ -332,13 +332,14 @@ Look for code and usage changes <a href="https://github.com/sensorium/Mozzi/blob
 <p>Instead, use <code>EventDelay()</code> for scheduling and <code>mozziMicros()</code> for timing.</p>
 
 <ul>
-<li>Mozzi disables <code>analogWrite()</code> on pins <strong>5</strong> and <strong>6</strong> (Timer 0), <strong>9</strong> and <strong>10</strong> (Timer 1) in <code>STANDARD</code> mode.
-In <code>HIFI</code> mode, pins <strong>3</strong> and <strong>11</strong> (Timer 2) are also out.  Pin numbers vary between boards.</li>
+<li><p><code>analogRead()</code> is disabled, replaced by <code>mozziAnalogRead()</code>, which works in the background instead of blocking the processor.</p></li>
+<li><p>Mozzi disables <code>analogWrite()</code> on pins <strong>5</strong> and <strong>6</strong> (Timer 0), <strong>9</strong> and <strong>10</strong> (Timer 1) in <code>STANDARD</code> mode.
+In <code>HIFI</code> mode, pins <strong>3</strong> and <strong>11</strong> (Timer 2) are also out.  Pin numbers vary between boards.</p></li>
 </ul>
 
 
-<p>You can do PWM on any digital pins by following
-<a href="/Mozzi/downloads/code/examples/11.Communication/Sinewave_PWM_pins_HIFI/Sinewave_PWM_pins_HIFI.ino">this example</a></p>
+<p>You can do PWM (analog write) on any digital pins by following
+<a href="/Mozzi/downloads/code/examples/11.Communication/Sinewave_PWM_pins_HIFI/Sinewave_PWM_pins_HIFI.ino">this example</a>.</p>
 
 <h3>Pause Mozzi</h3>
 

@@ -76,7 +76,8 @@ public:
 
 
 
-	/** Set the current value of the line. The Line will continue incrementing from this
+	/** Set the current value of the line. 
+	The Line will continue incrementing from this
 	value using any previously calculated step size.
 	@param value the number to set the Line's current_value to.
 	 */
@@ -91,8 +92,7 @@ public:
 
 
 
-	/** Given a target value and the number of steps to take on the way, this calculates
-	the step size needed to get there from the current value.
+	/** Given a target value and the number of steps to take on the way, this calculates the step size needed to get there from the current value.
 	@param targetvalue the value to move towards.
 	@param num_steps how many steps to take to reach the target.
 	 */
@@ -102,8 +102,7 @@ public:
 		step_size=(T)((((float)targetvalue-current_value)/num_steps));
 	}
 
-	/** Given a new starting value, target value and the number of steps to take on the way,
-	this sets the step size needed to get there.
+	/** Given a new starting value, target value and the number of steps to take on the way, this sets the step size needed to get there.
 	@param startvalue the number to set the Line's current_value to.
 	@param targetvalue the value to move towards.
 	@param num_steps how many steps to take to reach the target.

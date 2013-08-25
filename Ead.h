@@ -90,8 +90,8 @@ public:
 	}
 
 
-	/** Start the envelope from the beginning. This can be used at any
-	time, even if the previous envelope is not finished. 
+	/** Start the envelope from the beginning. 
+	This can be used at any time, even if the previous envelope is not finished. 
 	*/
 	inline
 	void start()
@@ -101,9 +101,8 @@ public:
 	}
 
 
-	/** Set attack and decay times in milliseconds, and start the envelope from
-	the beginning. This can be used at any time, even if the previous envelope
-	is not finished. 
+	/** Set attack and decay times in milliseconds, and start the envelope from the beginning. 
+	This can be used at any time, even if the previous envelope is not finished. 
 	@param attack_ms The time taken for values returned by successive calls of
 	the next() method to change from 0 to 255.
 	@param decay_ms The time taken for values returned by successive calls of

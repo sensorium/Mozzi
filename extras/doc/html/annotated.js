@@ -20,7 +20,6 @@ var annotated =
     [ "RollingAverage", "class_rolling_average.html", "class_rolling_average" ],
     [ "RollingStat", "class_rolling_stat.html", "class_rolling_stat" ],
     [ "Sample", "class_sample.html", "class_sample" ],
-    [ "SampleHuffman", "class_sample_huffman.html", "class_sample_huffman" ],
     [ "Smooth", "class_smooth.html", "class_smooth" ],
     [ "Stack", "class_stack.html", "class_stack" ],
     [ "StateVariable", "class_state_variable.html", "class_state_variable" ],

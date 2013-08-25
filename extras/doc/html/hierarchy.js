@@ -32,7 +32,6 @@ var hierarchy =
     [ "RollingAverage< T, WINDOW_LENGTH >", "class_rolling_average.html", null ],
     [ "RollingStat< T, WINDOW_LENGTH >", "class_rolling_stat.html", null ],
     [ "Sample< NUM_TABLE_CELLS, UPDATE_RATE, INTERP >", "class_sample.html", null ],
-    [ "SampleHuffman< sounddata_bits, UPDATE_RATE >", "class_sample_huffman.html", null ],
     [ "Smooth< T >", "class_smooth.html", null ],
     [ "Stack< T, NUM_ITEMS >", "class_stack.html", null ],
     [ "StateVariable< FILTER_TYPE >", "class_state_variable.html", null ],

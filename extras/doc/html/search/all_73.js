@@ -1,7 +1,6 @@
 var searchData=
 [
   ['sample',['Sample',['../class_sample.html',1,'Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;'],['../class_sample.html#ace5a0c50fa2135c54d4cd37e001d8ed5',1,'Sample::Sample(const char *TABLE_NAME)'],['../class_sample.html#ac9a043d47ab143f7a4d9370cf9f2f02d',1,'Sample::Sample()']]],
-  ['samplehuffman',['SampleHuffman',['../class_sample_huffman.html',1,'SampleHuffman&lt; sounddata_bits, UPDATE_RATE &gt;'],['../class_sample_huffman.html#a4e6d5ee30972d3bdba872a29c2cf3371',1,'SampleHuffman::SampleHuffman()']]],
   ['set',['set',['../class_audio_delay.html#a7bd0a07f7803afda1a71b50e3f66827b',1,'AudioDelay::set()'],['../class_ead.html#af203c82721ab832c653a23ff219c040e',1,'Ead::set()'],['../class_event_delay.html#adb1ea3351d63b51c6c5270eff1de4cb8',1,'EventDelay::set()'],['../class_line.html#a6bad32d527e0d931c99e9b72c2a75c80',1,'Line::set(T value)'],['../class_line.html#a7378d526cf07c42c0792868c749dee6e',1,'Line::set(T targetvalue, T num_steps)'],['../class_line.html#a24ad85c17562e97b6823a010a5ba04c6',1,'Line::set(T startvalue, T targetvalue, T num_steps)'],['../class_phasor.html#a509e4a782a36cb9e913da170d6707421',1,'Phasor::set()'],['../class_wave_packet.html#ac693b3d676b583584a8cfc6b9cc0f37f',1,'WavePacket::set()']]],
   ['setadlevels',['setADLevels',['../class_a_d_s_r.html#abfb4aaa169920beadb67570e0360f23f',1,'ADSR']]],
   ['setattack',['setAttack',['../class_ead.html#a6bae0e92e6709c3fcd31fccd41212bac',1,'Ead']]],
@@ -23,8 +22,8 @@ var searchData=
   ['setfreq_5fq24n8',['setFreq_Q24n8',['../class_oscil.html#abc8a4ee236f7fd45dda9dece7292b6e7',1,'Oscil::setFreq_Q24n8()'],['../class_sample.html#a903c2d634b10ac531c3c9f6a35fcb046',1,'Sample::setFreq_Q24n8()']]],
   ['setfundamental',['setFundamental',['../class_wave_packet.html#af87c37ffd274eee91aa93c0f7d560be2',1,'WavePacket']]],
   ['setloopdelays',['setLoopDelays',['../class_reverb_tank.html#a6c19a84c7bc1f068871551891011a89c',1,'ReverbTank']]],
-  ['setloopingoff',['setLoopingOff',['../class_sample.html#accfdc762cd47425824179bff4cd2a78f',1,'Sample::setLoopingOff()'],['../class_sample_huffman.html#a56c2dc94fe39cfc88cd9530137134c45',1,'SampleHuffman::setLoopingOff()']]],
-  ['setloopingon',['setLoopingOn',['../class_sample.html#a40e76011d841b84d2d54bf2cec6c4d5f',1,'Sample::setLoopingOn()'],['../class_sample_huffman.html#ae8955fd78d5996d8141005826614f829',1,'SampleHuffman::setLoopingOn()']]],
+  ['setloopingoff',['setLoopingOff',['../class_sample.html#accfdc762cd47425824179bff4cd2a78f',1,'Sample']]],
+  ['setloopingon',['setLoopingOn',['../class_sample.html#a40e76011d841b84d2d54bf2cec6c4d5f',1,'Sample']]],
   ['setphase',['setPhase',['../class_oscil.html#ab7b740eec56740426a47508562ed4dd5',1,'Oscil']]],
   ['setphasefractional',['setPhaseFractional',['../class_oscil.html#afc77bfc5a1ad5926ad8df37725d480d7',1,'Oscil']]],
   ['setphaseinc',['setPhaseInc',['../class_oscil.html#a2ff9bfcc57e07bf0df2ed7db186ecff7',1,'Oscil::setPhaseInc()'],['../class_phasor.html#aa3d62bdf762247b2523c0a625caeedd7',1,'Phasor::setPhaseInc()'],['../class_sample.html#aaff03b2a14f8f0f79c13840948151a1d',1,'Sample::setPhaseInc()']]],

@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-08-25-18:32</span>
+   &#160;<span id="projectnumber">version 2013-08-25-18:38</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -274,16 +274,13 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <li>Sample()
 : <a class="el" href="class_sample.html#ace5a0c50fa2135c54d4cd37e001d8ed5">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 </li>
-<li>SampleHuffman()
-: <a class="el" href="class_sample_huffman.html#a4e6d5ee30972d3bdba872a29c2cf3371">SampleHuffman&lt; sounddata_bits, UPDATE_RATE &gt;</a>
-</li>
 <li>set()
-: <a class="el" href="class_audio_delay.html#a7bd0a07f7803afda1a71b50e3f66827b">AudioDelay&lt; NUM_BUFFER_SAMPLES, T &gt;</a>
-, <a class="el" href="class_line.html#a7378d526cf07c42c0792868c749dee6e">Line&lt; T &gt;</a>
-, <a class="el" href="class_ead.html#af203c82721ab832c653a23ff219c040e">Ead</a>
+: <a class="el" href="class_ead.html#af203c82721ab832c653a23ff219c040e">Ead</a>
+, <a class="el" href="class_line.html#a24ad85c17562e97b6823a010a5ba04c6">Line&lt; T &gt;</a>
 , <a class="el" href="class_phasor.html#a509e4a782a36cb9e913da170d6707421">Phasor&lt; UPDATE_RATE &gt;</a>
-, <a class="el" href="class_wave_packet.html#ac693b3d676b583584a8cfc6b9cc0f37f">WavePacket&lt; ALGORITHM &gt;</a>
 , <a class="el" href="class_event_delay.html#adb1ea3351d63b51c6c5270eff1de4cb8">EventDelay&lt; UPDATE_RATE &gt;</a>
+, <a class="el" href="class_wave_packet.html#ac693b3d676b583584a8cfc6b9cc0f37f">WavePacket&lt; ALGORITHM &gt;</a>
+, <a class="el" href="class_audio_delay.html#a7bd0a07f7803afda1a71b50e3f66827b">AudioDelay&lt; NUM_BUFFER_SAMPLES, T &gt;</a>
 , <a class="el" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80">Line&lt; T &gt;</a>
 </li>
 <li>setADLevels()
@@ -333,9 +330,10 @@ $(document).ready(function(){initNavTree('functions.html','');});
 : <a class="el" href="class_audio_delay_feedback.html#a2cf5958f6d39f41eefd0955090a9618d">AudioDelayFeedback&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;</a>
 </li>
 <li>setFreq()
-: <a class="el" href="class_phasor.html#afc6106c648bddb5f2f084b8f34216b0f">Phasor&lt; UPDATE_RATE &gt;</a>
+: <a class="el" href="class_phasor.html#a81f1976ebb4a91f66f26674efca52072">Phasor&lt; UPDATE_RATE &gt;</a>
 , <a class="el" href="class_sample.html#aa0c37457f99def5c7036c6b6d9ee43fc">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 , <a class="el" href="class_oscil.html#a23121f22ea447918088a79c7f9748b3d">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+, <a class="el" href="class_phasor.html#afc6106c648bddb5f2f084b8f34216b0f">Phasor&lt; UPDATE_RATE &gt;</a>
 </li>
 <li>setFreq_Q16n16()
 : <a class="el" href="class_oscil.html#a73b52741178ed490463d9ff471cebef3">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
@@ -352,11 +350,9 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </li>
 <li>setLoopingOff()
 : <a class="el" href="class_sample.html#accfdc762cd47425824179bff4cd2a78f">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
-, <a class="el" href="class_sample_huffman.html#a56c2dc94fe39cfc88cd9530137134c45">SampleHuffman&lt; sounddata_bits, UPDATE_RATE &gt;</a>
 </li>
 <li>setLoopingOn()
 : <a class="el" href="class_sample.html#a40e76011d841b84d2d54bf2cec6c4d5f">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
-, <a class="el" href="class_sample_huffman.html#ae8955fd78d5996d8141005826614f829">SampleHuffman&lt; sounddata_bits, UPDATE_RATE &gt;</a>
 </li>
 <li>setPhase()
 : <a class="el" href="class_oscil.html#ab7b740eec56740426a47508562ed4dd5">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
@@ -365,9 +361,9 @@ $(document).ready(function(){initNavTree('functions.html','');});
 : <a class="el" href="class_oscil.html#afc77bfc5a1ad5926ad8df37725d480d7">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
 </li>
 <li>setPhaseInc()
-: <a class="el" href="class_phasor.html#aa3d62bdf762247b2523c0a625caeedd7">Phasor&lt; UPDATE_RATE &gt;</a>
+: <a class="el" href="class_oscil.html#a2ff9bfcc57e07bf0df2ed7db186ecff7">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+, <a class="el" href="class_phasor.html#aa3d62bdf762247b2523c0a625caeedd7">Phasor&lt; UPDATE_RATE &gt;</a>
 , <a class="el" href="class_sample.html#aaff03b2a14f8f0f79c13840948151a1d">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
-, <a class="el" href="class_oscil.html#a2ff9bfcc57e07bf0df2ed7db186ecff7">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
 </li>
 <li>setReleaseLevel()
 : <a class="el" href="class_a_d_s_r.html#aa577c32f8758e1ecda44b4410c1c103d">ADSR&lt; CONTROL_UPDATE_RATE &gt;</a>
@@ -392,9 +388,9 @@ $(document).ready(function(){initNavTree('functions.html','');});
 : <a class="el" href="class_a_d_s_r.html#a5c79838b081aba5a396aa9ea26394051">ADSR&lt; CONTROL_UPDATE_RATE &gt;</a>
 </li>
 <li>setTable()
-: <a class="el" href="class_sample.html#a03cb0ce7df128a179f4dc3b8cc9ff459">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
+: <a class="el" href="class_wave_packet_sample.html#a69ae33a0540773b090e83d7fa884489e">WavePacketSample&lt; ALGORITHM &gt;</a>
 , <a class="el" href="class_oscil.html#a59e9b132ad0770030d7339c6aa260925">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
-, <a class="el" href="class_wave_packet_sample.html#a69ae33a0540773b090e83d7fa884489e">WavePacketSample&lt; ALGORITHM &gt;</a>
+, <a class="el" href="class_sample.html#a03cb0ce7df128a179f4dc3b8cc9ff459">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 </li>
 <li>setTime()
 : <a class="el" href="class_portamento.html#af19c3b3c189e111079f54211ff5a4ebe">Portamento&lt; CONTROL_UPDATE_RATE &gt;</a>
@@ -409,14 +405,14 @@ $(document).ready(function(){initNavTree('functions.html','');});
 : <a class="el" href="class_stack.html#ab034b819e2382f80d952cf8527dc6e6c">Stack&lt; T, NUM_ITEMS &gt;</a>
 </li>
 <li>start()
-: <a class="el" href="class_event_delay.html#a85de9021676dadaba68edd6c5d5afa0e">EventDelay&lt; UPDATE_RATE &gt;</a>
-, <a class="el" href="class_sample.html#a49ab98acdfb4f81a8860ad21876bdc18">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
+: <a class="el" href="class_event_delay.html#aa2a731ceb05f95cac1798089448c6aed">EventDelay&lt; UPDATE_RATE &gt;</a>
+, <a class="el" href="class_sample.html#abb7084b95a6141843ede8025cdd726ac">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 , <a class="el" href="class_ead.html#ac385679b58e2f9755029b7da7405b233">Ead</a>
 , <a class="el" href="class_portamento.html#af93c2b0ab1efa88d4e15f919401c2337">Portamento&lt; CONTROL_UPDATE_RATE &gt;</a>
-, <a class="el" href="class_event_delay.html#aa2a731ceb05f95cac1798089448c6aed">EventDelay&lt; UPDATE_RATE &gt;</a>
-, <a class="el" href="class_ead.html#a146b205e70f4b2293e643ea063f2b38f">Ead</a>
+, <a class="el" href="class_sample.html#a49ab98acdfb4f81a8860ad21876bdc18">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 , <a class="el" href="class_portamento.html#af70701abfdd9f3d788f3b313e38017d0">Portamento&lt; CONTROL_UPDATE_RATE &gt;</a>
-, <a class="el" href="class_sample.html#abb7084b95a6141843ede8025cdd726ac">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
+, <a class="el" href="class_event_delay.html#a85de9021676dadaba68edd6c5d5afa0e">EventDelay&lt; UPDATE_RATE &gt;</a>
+, <a class="el" href="class_ead.html#a146b205e70f4b2293e643ea063f2b38f">Ead</a>
 </li>
 <li>StateVariable()
 : <a class="el" href="class_state_variable.html#a9950b71a16f63654552d3e15774d6638">StateVariable&lt; FILTER_TYPE &gt;</a>
@@ -452,7 +448,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Aug 25 2013 18:32:28 for Mozzi by
+    <li class="footer">Generated on Sun Aug 25 2013 18:38:45 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

@@ -98,8 +98,7 @@ public:
 	{}
 
 
-	/** Updates the phase according to the current frequency
-	and returns the sample at the new phase position.
+	/** Updates the phase according to the current frequency and returns the sample at the new phase position.
 	@return the next sample.
 	*/
 	inline
@@ -268,8 +267,8 @@ public:
 	}
 
 
-	/** phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding
-	between frequencies. Instead of recalculating the phase increment for each
+	/** phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies. 
+	Instead of recalculating the phase increment for each
 	frequency in between, you can just calculate the phase increment for each end
 	frequency with phaseIncFromFreq(), then use a Line to interpolate on the fly and
 	use setPhaseInc() to set the phase increment at each step. (Note: I should

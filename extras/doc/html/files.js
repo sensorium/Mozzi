@@ -43,7 +43,6 @@ var files =
     [ "RollingAverage.h", "_rolling_average_8h_source.html", null ],
     [ "RollingStat.h", "_rolling_stat_8h_source.html", null ],
     [ "Sample.h", "_sample_8h_source.html", null ],
-    [ "SampleHuffman.h", "_sample_huffman_8h_source.html", null ],
     [ "Smooth.h", "_smooth_8h_source.html", null ],
     [ "Stack.h", "_stack_8h_source.html", null ],
     [ "StateVariable.h", "_state_variable_8h_source.html", null ],

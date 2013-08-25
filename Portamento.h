@@ -74,7 +74,8 @@ public:
 	}
 	
 
-	/** Use this in updateControl() to provide a frequency to the oscillator it's controlling, for example: 
+	/** Use this in updateControl() to provide a frequency to the oscillator it's controlling. 
+	For example: 
 	myOscil.setFreq_Q16n16(myPortamento.next());
 	@return a Q16n16 fractional frequency value, progressing smoothly between successive notes.
 	*/

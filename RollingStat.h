@@ -95,6 +95,8 @@ private:
 	const unsigned char WINDOW_LENGTH_AS_RSHIFT;
 };
 
+// no need to show the specialisations
+/** @cond  */
 
 /** float specialisation of RollingStat template */
 template <int WINDOW_LENGTH>
@@ -149,6 +151,8 @@ private:
 	const unsigned char WINDOW_LENGTH_AS_RSHIFT;
 };
 
+// no need to show the specialisations
+/** @endcond  */
 
 #endif        //  #ifndef ROLLINGSTAT_H
 

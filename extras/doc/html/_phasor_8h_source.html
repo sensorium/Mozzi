@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-08-25-18:20</span>
+   &#160;<span id="projectnumber">version 2013-08-25-18:32</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -163,8 +163,8 @@ $(document).ready(function(){initNavTree('_phasor_8h_source.html','');});
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    {</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        step_size = ((((<span class="keywordtype">unsigned</span> long)((PHASOR_MAX_VALUE_UL&gt;&gt;8)+1))/(UPDATE_RATE))*frequency)&lt;&lt;8;</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    }</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">inline</span></div>
 <div class="line"><a name="l00098"></a><span class="lineno"><a class="code" href="class_phasor.html#a81f1976ebb4a91f66f26674efca52072">   98</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_phasor.html#afc6106c648bddb5f2f084b8f34216b0f" title="Set the Phasor frequency with an unsigned int.">setFreq</a>(<span class="keywordtype">float</span> frequency)</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    { <span class="comment">// 1 us - using float doesn&#39;t seem to incur measurable overhead with the oscilloscope</span></div>
@@ -174,33 +174,33 @@ $(document).ready(function(){initNavTree('_phasor_8h_source.html','');});
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="comment">//}</span></div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keyword">inline</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno"><a class="code" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230">  118</a></span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230" title="    phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding  between frequenc...">phaseIncFromFreq</a>(<span class="keywordtype">int</span> frequency)</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    {</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordflow">return</span> ((((<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>)((PHASOR_MAX_VALUE_UL&gt;&gt;8)+1))/(UPDATE_RATE))*frequency)&lt;&lt;8;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    }</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keyword">inline</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="code" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230">  117</a></span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq</a>(<span class="keywordtype">int</span> frequency)</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    {</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="keywordflow">return</span> ((((<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>)((PHASOR_MAX_VALUE_UL&gt;&gt;8)+1))/(UPDATE_RATE))*frequency)&lt;&lt;8;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    }</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keyword">inline</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno"><a class="code" href="class_phasor.html#aa3d62bdf762247b2523c0a625caeedd7">  128</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_phasor.html#aa3d62bdf762247b2523c0a625caeedd7" title="Set a specific phase increment.">setPhaseInc</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> stepsize)</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    {</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        ATOMIC_BLOCK(ATOMIC_RESTORESTATE)</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        {</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            step_size = stepsize;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        }</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    }</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    </div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;};</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PHASOR_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keyword">inline</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="code" href="class_phasor.html#aa3d62bdf762247b2523c0a625caeedd7">  127</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_phasor.html#aa3d62bdf762247b2523c0a625caeedd7" title="Set a specific phase increment.">setPhaseInc</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> stepsize)</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    {</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        ATOMIC_BLOCK(ATOMIC_RESTORESTATE)</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        {</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            step_size = stepsize;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        }</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    }</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;};</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PHASOR_H_ */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>Phasor.h</b></li>
-    <li class="footer">Generated on Sun Aug 25 2013 18:20:38 for Mozzi by
+    <li class="footer">Generated on Sun Aug 25 2013 18:32:27 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

@@ -12,7 +12,5 @@ var searchData=
   ['reconnectdigitalin',['reconnectDigitalIn',['../group__analog.html#gacd83735876cf223916ea4925ec4efd4a',1,'reconnectDigitalIn(byte channel_num):&#160;mozzi_analog.cpp'],['../group__analog.html#gacd83735876cf223916ea4925ec4efd4a',1,'reconnectDigitalIn(byte channel_num):&#160;mozzi_analog.cpp']]],
   ['reverbtank',['ReverbTank',['../class_reverb_tank.html',1,'ReverbTank'],['../class_reverb_tank.html#a2b413e10d5d3688f2066624e5a8ae324',1,'ReverbTank::ReverbTank()']]],
   ['rollingaverage',['RollingAverage',['../class_rolling_average.html',1,'RollingAverage&lt; T, WINDOW_LENGTH &gt;'],['../class_rolling_average.html#a11cf7b9e1278648b1eb10e5534fe3e29',1,'RollingAverage::RollingAverage()']]],
-  ['rollingaverage_3c_20float_2c_20window_5flength_20_3e',['RollingAverage&lt; float, WINDOW_LENGTH &gt;',['../class_rolling_average.html',1,'']]],
-  ['rollingstat',['RollingStat',['../class_rolling_stat.html',1,'RollingStat&lt; T, WINDOW_LENGTH &gt;'],['../class_rolling_stat.html#a98c3f767391db80b8ad59ca53c1e6a94',1,'RollingStat::RollingStat()'],['../class_rolling_stat_3_01float_00_01_w_i_n_d_o_w___l_e_n_g_t_h_01_4.html#a7dc63d2c65dbadbafe785b3d0e2a7167',1,'RollingStat&lt; float, WINDOW_LENGTH &gt;::RollingStat()']]],
-  ['rollingstat_3c_20float_2c_20window_5flength_20_3e',['RollingStat&lt; float, WINDOW_LENGTH &gt;',['../class_rolling_stat_3_01float_00_01_w_i_n_d_o_w___l_e_n_g_t_h_01_4.html',1,'']]]
+  ['rollingstat',['RollingStat',['../class_rolling_stat.html',1,'RollingStat&lt; T, WINDOW_LENGTH &gt;'],['../class_rolling_stat.html#a98c3f767391db80b8ad59ca53c1e6a94',1,'RollingStat::RollingStat()']]]
 ];

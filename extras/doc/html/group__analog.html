@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-08-25-18:20</span>
+   &#160;<span id="projectnumber">version 2013-08-25-18:32</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -97,7 +97,7 @@ $(document).ready(function(){initNavTree('group__analog.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Fast analog input functions for sensors and audio.  
+<p>Efficient analog input functions for sensors and audio.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -126,8 +126,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <tr class="separator:ga3f15eb8d6694020d170ebcbedb645de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Fast analog input functions for sensors and audio. </p>
-<p>Helps produce glitch-free audio by speeding up analog input functions which normally block processing. </p>
+<p>Efficient analog input functions for sensors and audio. </p>
+<p>Helps produce glitch-free audio by allowing analog input functions which normally block processing to be performed in the background. </p>
 <h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="ga5042e7c576dd0307be38eb70efdb69fe"></a>
 <div class="memitem">
@@ -194,7 +194,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 </div><div class="memdoc">
 
 <p>This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> file. </p>
-<p>Audio input is currently restricted to analog pin 0 (this may change in future). The audio signal needs to be in the range 0 to 5 volts. Circuits and discussions about biasing a signal in the middle of this range can be found at <a href="http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal">http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal</a> and <a href="http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/">http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/</a> . A circuit and instructions for amplifying and biasing a microphone signal can be found at <a href="http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS">http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS</a> </p>
+<p>The pin used for audio input is set in <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> with #define AUDIO_INPUT_PIN 0 (or other analog input pin). The audio signal needs to be in the range 0 to 5 volts. Circuits and discussions about biasing a signal in the middle of this range can be found at <a href="http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal">http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal</a> and <a href="http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/">http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/</a> . A circuit and instructions for amplifying and biasing a microphone signal can be found at <a href="http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS">http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS</a> </p>
 <dl class="section return"><dt>Returns</dt><dd>audio data from the input buffer </dd></dl>
 
 <p>Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00122">122</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
@@ -287,7 +287,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Aug 25 2013 18:20:38 for Mozzi by
+    <li class="footer">Generated on Sun Aug 25 2013 18:32:27 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

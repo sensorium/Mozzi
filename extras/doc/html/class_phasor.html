@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-08-25-18:20</span>
+   &#160;<span id="projectnumber">version 2013-08-25-18:32</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -121,8 +121,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a81f1976ebb4a91f66f26674efca52072"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency.">Phasor</a> frequency with a float.  <a href="#a81f1976ebb4a91f66f26674efca52072">More...</a><br/></td></tr>
 <tr class="separator:a81f1976ebb4a91f66f26674efca52072"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b5992b53fa7e449fec950df00c46230"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230">phaseIncFromFreq</a> (int frequency)</td></tr>
-<tr class="memdesc:a9b5992b53fa7e449fec950df00c46230"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment">    phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding
-</pre><p> between frequencies.  <a href="#a9b5992b53fa7e449fec950df00c46230">More...</a><br/></td></tr>
+<tr class="memdesc:a9b5992b53fa7e449fec950df00c46230"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a> and <a class="el" href="class_phasor.html#aa3d62bdf762247b2523c0a625caeedd7" title="Set a specific phase increment.">setPhaseInc()</a> are for saving processor time when sliding between frequencies.  <a href="#a9b5992b53fa7e449fec950df00c46230">More...</a><br/></td></tr>
 <tr class="separator:a9b5992b53fa7e449fec950df00c46230"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3d62bdf762247b2523c0a625caeedd7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phasor.html#aa3d62bdf762247b2523c0a625caeedd7">setPhaseInc</a> (unsigned long stepsize)</td></tr>
 <tr class="memdesc:aa3d62bdf762247b2523c0a625caeedd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a specific phase increment.  <a href="#aa3d62bdf762247b2523c0a625caeedd7">More...</a><br/></td></tr>
@@ -228,9 +227,8 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p><pre class="fragment">    phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding
-</pre><p> between frequencies. </p>
-<p>Instead of recalculating the phase increment for each frequency in between, you can just calculate the phase increment for each end frequency with <a class="el" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230" title="    phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding  between frequenc...">phaseIncFromFreq()</a>, then use a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> to interpolate on the fly and use <a class="el" href="class_phasor.html#aa3d62bdf762247b2523c0a625caeedd7" title="Set a specific phase increment.">setPhaseInc()</a> to set the phase increment at each step. (Note: I should really profile this with the oscilloscope to see if it's worth the extra confusion!) </p>
+<p><a class="el" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a> and <a class="el" href="class_phasor.html#aa3d62bdf762247b2523c0a625caeedd7" title="Set a specific phase increment.">setPhaseInc()</a> are for saving processor time when sliding between frequencies. </p>
+<p>Instead of recalculating the phase increment for each frequency in between, you can just calculate the phase increment for each end frequency with <a class="el" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a>, then use a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line</a> to interpolate on the fly and use <a class="el" href="class_phasor.html#aa3d62bdf762247b2523c0a625caeedd7" title="Set a specific phase increment.">setPhaseInc()</a> to set the phase increment at each step. (Note: I should really profile this with the oscilloscope to see if it's worth the extra confusion!) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">frequency</td><td>for which you want to calculate a phase increment value. </td></tr>
@@ -239,7 +237,7 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the phase increment value which will produce a given frequency. </dd></dl>
 
-<p>Definition at line <a class="el" href="_phasor_8h_source.html#l00118">118</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
+<p>Definition at line <a class="el" href="_phasor_8h_source.html#l00117">117</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
 
 </div>
 </div>
@@ -372,15 +370,15 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
 </div><div class="memdoc">
 
 <p>Set a specific phase increment. </p>
-<p>See <a class="el" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230" title="    phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding  between frequenc...">phaseIncFromFreq()</a>. </p>
+<p>See <a class="el" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">stepsize</td><td>a phase increment value as calculated by <a class="el" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230" title="    phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding  between frequenc...">phaseIncFromFreq()</a>. </td></tr>
+    <tr><td class="paramname">stepsize</td><td>a phase increment value as calculated by <a class="el" href="class_phasor.html#a9b5992b53fa7e449fec950df00c46230" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a>. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_phasor_8h_source.html#l00128">128</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
+<p>Definition at line <a class="el" href="_phasor_8h_source.html#l00127">127</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
 
 </div>
 </div>
@@ -390,7 +388,7 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_phasor.html">Phasor</a></li>
-    <li class="footer">Generated on Sun Aug 25 2013 18:20:38 for Mozzi by
+    <li class="footer">Generated on Sun Aug 25 2013 18:32:28 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

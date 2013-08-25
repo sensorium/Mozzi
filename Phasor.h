@@ -88,8 +88,8 @@ public:
 	{
 		step_size = ((((unsigned long)((PHASOR_MAX_VALUE_UL>>8)+1))/(UPDATE_RATE))*frequency)<<8;
 	}
-	
-	
+
+
 	/** Set the Phasor frequency with a float.
 	@param frequency is  how many times per second to count from
 	0 to the maximum unsigned long value 4294967295.
@@ -103,14 +103,13 @@ public:
 
 		//}
 	}
-	
-		/** phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding
-	between frequencies. Instead of recalculating the phase increment for each
-	frequency in between, you can just calculate the phase increment for each end
-	frequency with phaseIncFromFreq(), then use a Line to interpolate on the fly and
-	use setPhaseInc() to set the phase increment at each step. (Note: I should
-	really profile this with the oscilloscope to see if it's worth the extra
-	confusion!)
+
+	/** phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies.
+	Instead of recalculating the phase increment for each frequency in between, you
+	can just calculate the phase increment for each end frequency with
+	phaseIncFromFreq(), then use a Line to interpolate on the fly and use
+	setPhaseInc() to set the phase increment at each step. (Note: I should really
+	profile this with the oscilloscope to see if it's worth the extra confusion!)
 	@param frequency for which you want to calculate a phase increment value.
 	@return the phase increment value which will produce a given frequency.
 	*/
@@ -132,7 +131,7 @@ public:
 			step_size = stepsize;
 		}
 	}
-	
+
 };
 
 /**

@@ -271,7 +271,8 @@ void audioHook();
 /** @ingroup analog
 This returns audio input from the input buffer, if 
 \#define USE_AUDIO_INPUT true is in the Mozzi/mozzi_config.h file.
-Audio input is currently restricted to analog pin 0 (this may change in future).
+The pin used for audio input is set in Mozzi/mozzi_config.h with 
+\#define AUDIO_INPUT_PIN 0 (or other analog input pin).
 The audio signal needs to be in the range 0 to 5 volts.  
 Circuits and discussions about biasing a signal
 in the middle of this range can be found at 

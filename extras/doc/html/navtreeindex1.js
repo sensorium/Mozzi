@@ -1,11 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"class_wave_shaper_3_01char_01_4.html#a8b6327480538c938c846829687ae300f":[2,0,28,1],
-"class_wave_shaper_3_01int_01_4.html":[2,0,29],
-"class_wave_shaper_3_01int_01_4.html#a2bf3bca1848a953c52ae94d5b58199ba":[2,0,29,1],
-"class_wave_shaper_3_01int_01_4.html#ad6a18a771345b6da7af8855fe69640d4":[2,0,29,0],
-"cogl__sqrti_8h_source.html":[3,0,9],
-"examples.html":[4],
 "files.html":[3,0],
 "functions.html":[2,2,0],
 "functions_func.html":[2,2,1],
@@ -173,8 +167,8 @@ var NAVTREEINDEX1 =
 "group__util.html#gaf45df8dbf0bc86752d8fc697e2381cc3":[1,5,5],
 "group__util.html#struct_int2_type":[1,5,1],
 "hierarchy.html":[2,1],
-"index.html":[],
 "index.html":[0],
+"index.html":[],
 "known__16bit__timers_8h_source.html":[3,0,15],
 "meta_8h_source.html":[3,0,18],
 "modules.html":[1],

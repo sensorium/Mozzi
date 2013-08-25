@@ -97,8 +97,8 @@ private:
 
 };
 
-
-/** @cond // no need to show the specialisations */
+// no need to show the specialisations
+/** @cond  */
 
 /** unsigned int partial specialisation of RollingAverage template.
 This is needed because unsigned types need to remind (unsigned) for rshift.
@@ -201,8 +201,9 @@ private:
 };
 
 
-
-/** @endcond // no need to show the specialisations */
+// no need to show the specialisations 
+/** @endcond 
+*/
 
 /**
 @example 03.Sensors/Knob_LDR_x2_WavePacket/Knob_LDR_x2_WavePacket.ino

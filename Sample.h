@@ -25,11 +25,9 @@
 #ifndef SAMPLE_H_
 #define SAMPLE_H_
 
-#include "Arduino.h"
 #include "MozziGuts.h"
 #include "mozzi_fixmath.h"
 #include <util/atomic.h>
-#include "mozzi_utils.h"
 
 // fractional bits for sample index precision
 #define SAMPLE_F_BITS 16
@@ -115,6 +113,7 @@ public:
 	inline
 	void start()
 	{
+		// atomic because start() can be called on a sample in the control interrupt
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
 			phase_fractional = startpos_fractional;
@@ -122,8 +121,8 @@ public:
 	}
 
 
-	/** Sets the a new start position and sets the phase (the playhead) to that position.
-	@param startpos position in samples from the beginning of the sound.
+	/** Sets a new start position and sets the phase (the playhead) to that position.
+	@param startpos position in samples from the beginning of the sound. 
 	*/
 	inline
 	void start(unsigned int startpos)
@@ -181,7 +180,6 @@ public:
 	*/
 	inline
 	char next() { // 4us
-	setPin13High();
 		
 		if (phase_fractional>endpos_fractional){
 			if (looping) {
@@ -202,7 +200,6 @@ public:
 			out = (char)pgm_read_byte_near(table + (phase_fractional >> SAMPLE_F_BITS));
 		}
 		incrementPhase();
-			setPin13Low();
 		return out;
 	}
 

@@ -122,6 +122,8 @@ Mozzi uses Timer0, Timer1 (or Timer4 on some boards), and Timer2, so pins 3 and 
 If you need PWM output (`analogWrite()`), you can do it on any digital pins using the technique in 
 Mozzi>examples>11.Communication>Sinewave_PWM_pins_HIFI.  
 
+* `analogRead()` is replaced by `mozziAnalogRead()`, which works in the background instead of blocking the processor.  
+
 ####Last Resort
 The timers can be made available with `pauseMozzi()`, which suspends audio and 
 control interrupts until you call `unpauseMozzi()`.  

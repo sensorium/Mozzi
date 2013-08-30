@@ -184,20 +184,18 @@ For delaying events, you can use Mozzi's EventDelay() unit instead (not to be co
 In STANDARD mode, startMozzi() starts Timer 1 for PWM output and audio output interrupts,
 and in HIFI mode, Mozzi uses Timer 1 for PWM and Timer2 for audio interrupts. 
 
-The audio rate is currently fixed at 16384 Hz.
+The audio rate defaults to 16384 Hz, but you can experiment with 32768 Hz by changing AUDIO_RATE in mozzi_config.h.
 
-@param control_rate_hz Sets how often updateControl() is called. It can be any
-power of 2 above and including 64. The practical upper limit for control rate
-depends on how busy the processor is, and you might need to do some tests to
-find the best setting. 
+@param control_rate_hz Sets how often updateControl() is called.  It must be a power of 2.
+If no parameter is provided, control_rate_hz is set to CONTROL_RATE,
+which has a default value of 64 (you can re-\#define it in your sketch). 
+The practical upper limit for control rate depends on how busy the processor is,
+and you might need to do some tests to find the best setting.
 
-It's good to define CONTROL_RATE in your
-sketches (eg. \#define CONTROL_RATE 128) because the literal numeric value is
-necessary for Oscils to work properly, and it also helps to keep the
-calculations in your sketch clear.
-
-@todo See if there is any advantage to using 8 bit port, without pwm, with a resistor ladder 
-(maybe use readymade resistor networks).
+@note startMozzi calls setupMozziADC(), which calls setupFastAnalogRead() and adcDisconnectAllDigitalIns(), 
+which disables digital inputs on all analog input pins.  All in mozzi_analog.h and easy to change if you need to (hack).
+They are all called automatically and hidden away because it keeps things simple for a standard set up, 
+but if it turns out to be confusing, they might need to become visible again.
 */
 void startMozzi(int control_rate_hz = CONTROL_RATE);
 

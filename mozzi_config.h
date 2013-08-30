@@ -63,7 +63,7 @@ Put \#define USE_AUDIO_INPUT true in Mozzi/mozzi_config.h to enable audio input 
 otherwise make it false, to save resources.  When audio input is used, don't read 
 other analog channels as they'll interfere with the audio sampling.
 */
-#define USE_AUDIO_INPUT  false
+#define USE_AUDIO_INPUT false
 
 
 /** @ingroup core

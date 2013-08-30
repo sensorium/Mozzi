@@ -328,4 +328,8 @@ getStandardDeviation	KEYWORD2
 
 
 
+SampleHuffman	KEYWORD1
+next	KEYWORD2
+
+
 

@@ -70,7 +70,7 @@ in the audio output, at the cost of some extra processing and memory.
 Converting soundfiles for Mozzi
 There is a python script called char2mozzi.py in the Mozzi/python folder.
 The usage is:
-python char2mozzi.py infilename outfilename tablename samplerate
+char2mozzi.py infilename outfilename tablename samplerate
 */
 //template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, bool DITHER_PHASE=false>
 template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE>

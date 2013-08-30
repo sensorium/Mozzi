@@ -5,6 +5,17 @@ get the latest version from http://sensorium.github.io/Mozzi/
 
 
 version 2013-08-25-18:38
+- added SampleHuffman.h, a sample player for samples encoded with Huffman compression, 
+	based on an Arduino sketch by Thomas Grill, 2011 http//grrrr.org.
+	- added extras/python/audio2huff.py,
+	a script to convert sounds to compressed tables for the player, by Thomas Grill (Modified by TB for Mozzi)
+	- added examples/08.Samples/SampleHuffman
+- added examples/03.Sensors/Light_Temperature_Multi_Oscil, mapping Thermistor and LDR readings to oscillator frequencies.
+
+
+
+
+version_2013-08-25-18:38
 
 - mozzi_analog.h - Much simpler, better analog input.  Now there's just mozziAnalogRead(pin).
 	Sorry about breaking your sketches, again.

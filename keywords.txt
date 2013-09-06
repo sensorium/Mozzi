@@ -327,8 +327,10 @@ getVariance	KEYWORD2
 getStandardDeviation	KEYWORD2
 
 
-
 SampleHuffman	KEYWORD1
+next	KEYWORD2
+
+OverSample	KEYWORD1
 next	KEYWORD2
 
 

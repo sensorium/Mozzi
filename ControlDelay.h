@@ -36,10 +36,10 @@ be a power of two.
 when adding manual feedback.  When using int, the input should be limited to 15 bits width, ie. -16384 to 16383.
 */
 
-template <unsigned int NUM_BUFFER_SAMPLES, class T = char>
+template <unsigned int NUM_BUFFER_SAMPLES, class T = int>
 class ControlDelay: public AudioDelay<NUM_BUFFER_SAMPLES, T>
 {
-	;
+
 };
 
 /**

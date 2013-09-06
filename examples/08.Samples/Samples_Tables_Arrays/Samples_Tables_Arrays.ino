@@ -39,8 +39,8 @@
 #define CONTROL_RATE 64
 
 // for scheduling samples to play
-EventDelay <CONTROL_RATE>  kTriggerDelay;
-EventDelay <CONTROL_RATE>  kTriggerSlowDelay;
+EventDelay kTriggerDelay;
+EventDelay kTriggerSlowDelay;
 
 byte ms_per_note = 111; // subject to CONTROL_RATE
 

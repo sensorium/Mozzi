@@ -23,8 +23,7 @@
 
 #include "MozziGuts.h"
 #include "mozzi_config.h" // at the top of all MozziGuts and analog files
-
-//#include <util/atomic.h>
+#include <util/atomic.h>
 //#include "mozzi_utils.h"
 
 
@@ -464,14 +463,19 @@ void audioHook() // 2us excluding updateAudio()
 #endif			
 	}
 	
-	
+
 unsigned long audioTicks(){
-	return output_buffer_tail;
+	unsigned long ticks;
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+	{
+		ticks = output_buffer_tail;
+	}
+	return ticks;
 }
 
 
 unsigned long mozziMicros(){
-	return output_buffer_tail * MICROS_PER_AUDIO_TICK;
+	return audioTicks() * MICROS_PER_AUDIO_TICK;
 }
 	
 

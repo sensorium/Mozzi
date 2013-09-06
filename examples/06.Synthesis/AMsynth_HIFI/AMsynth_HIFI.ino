@@ -54,7 +54,7 @@ Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aModulator(COS2048_DATA);
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aModDepth(COS2048_DATA);
 
 // for scheduling note changes in updateControl()
-EventDelay <CONTROL_RATE>  kNoteChangeDelay;
+EventDelay  kNoteChangeDelay;
 
 // synthesis parameters in fixed point formats
 Q8n8 ratio; // unsigned int with 8 integer bits and 8 fractional bits

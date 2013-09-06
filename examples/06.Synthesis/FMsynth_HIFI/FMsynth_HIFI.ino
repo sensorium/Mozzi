@@ -64,7 +64,7 @@ Q16n16 carrier_freq, mod_freq;
 // FM ratio between oscillator frequencies, stays the same through note range
 Q8n8 mod_to_carrier_ratio = float_to_Q8n8(3.f);
 
-EventDelay <CONTROL_RATE>  kNoteChangeDelay;
+EventDelay kNoteChangeDelay;
 
 // for note changes
 Q7n8 target_note, note0, note1, note_upper_limit, note_lower_limit, note_change_step, smoothed_note;

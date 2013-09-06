@@ -1,5 +1,5 @@
 /*
- * AutoRange.h
+ * RollingAutoRange.h
  *
  * Copyright 2013 Tim Barrass.
  *
@@ -19,67 +19,50 @@
  * along with Mozzi.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef AUTORANGE_H
-#define AUTORANGE_H
+#ifndef ROLLINGAUTORANGE_H
+#define ROLLINGAUTORANGE_H
+
+#include "AutoRange.h"
+#include "DCFilter.h" // to provide recent upper and lower limits to AutoRange
 
 /** @ingroup sensortools
-Keeps a running calculation of the range of the input values it receives.
+Keeps a running calculation of the range of recent input values it receives.
 */
-template <class T>
+//template <class T>
 class
-	AutoRange {
+	RollingAutoRange {
 
 public:
+
 	/** Constructor.
 	@tparam T the type of numbers to to use, eg. int, unsigned int, float etc.
 	@param min_expected the minimum possible input value.
 	@param max_expected the maximum possible input value.
 	*/
-	AutoRange(T min_expected, T max_expected):range_min(max_expected),range_max(min_expected),range(0)
-	{}
+	RollingAutoRange(unsigned int min_expected, unsigned int max_expected, float smoothness): filterMax(pole),filterMin(pole),smoothAutoRange(min_expected, max_expected)
+	{
+	}
 
 
 	/** Updates the current range.
 	@param n the next value to include in the range calculation.
 	*/
-	void next(T n){
-		if (n > range_max) {
-			range_max = n;
-			range = range_max - range_min;
-		}else{
-			if (n< range_min) {
-				range_min = n;
-				range = range_max - range_min;
-			}
-		}
+	void next(int n){
+		range = max-min;
+		centre = (range/2)+min;
+		relative_max = max-centre;
+		relative_min = -(centre-min);
+		max = centre + filterMax.next(relative_max);
+		min = centre + filterMin.next(relative_min);
 	}
-
-	/** Returns the current minimum.
-	@return minimum
-	*/
-	T getMin(){
-		return range_min;
-	}
-
-
-	/** Returns the current maximum.
-	@return maximum
-	*/
-	T getMax(){
-		return range_max;
-	}
-
-
-	/** Returns the current range.
-	@return range
-	*/
-	T getRange(){
-		return range;
-	}
-
+	
+	
 private:
-	T range_max, range_min , range;
+	//T range_max, range_min , range;
+	DCfilter filterMax;
+	DCfilter filterMin;
+	AutoRange <unsigned int> recentAutoRange;
 
 };
 
-#endif        //  #ifndef AUTORANGE_H
+#endif        //  #ifndef ROLLINGAUTORANGE_H

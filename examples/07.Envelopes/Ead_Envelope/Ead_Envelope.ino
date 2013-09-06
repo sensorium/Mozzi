@@ -23,7 +23,7 @@
 #define CONTROL_RATE 256 // powers of 2 please
 
 Oscil<BROWNNOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(BROWNNOISE8192_DATA);
-EventDelay <CONTROL_RATE>  kDelay; // for triggering envelope start
+EventDelay kDelay; // for triggering envelope start
 Ead kEnvelope(CONTROL_RATE); // resolution will be CONTROL_RATE
 
 int gain;

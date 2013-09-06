@@ -24,34 +24,33 @@
 #define EVENTDELAY_H_
 
 
-/** A non-blocking replacement for Arduino's delay() function (which is disabled by Mozzi). EventDelay can be
-set() to wait for a number of milliseconds, then after calling start(), calling ready() will return true when the time is up.
-@tparam update_rate is how frequently you'll check if the EventDelay is ready().
-This would be CONTROL_RATE if ready() is used simply in updateControl().
+/** A non-blocking replacement for Arduino's delay() function (which is disabled by Mozzi). 
+EventDelay can be set() to a number of milliseconds, then after calling start(), ready() will return true when the time is up.  
+Alternatively, start(milliseconds) will call set() and start() together.
 */
-template <unsigned int UPDATE_RATE>
 class EventDelay
 {
 
 public:
+	
 	/** Constructor.
-	Declare an EventDelay object with UPDATE_RATE template parameter.
-	UPDATE_RATE is how frequently you'll check if the EventDelay is ready().
-	This would be CONTROL_RATE if ready() is used simply in updateControl().
+	Declare an EventDelay object.
+	@param delay_milliseconds how long until ready() returns true, after calling start().  Defaults to 0 if no parameter is supplied.
 	*/
-	EventDelay(): counter(0), micros_per_update(1000000/UPDATE_RATE)
+	EventDelay(unsigned int delay_milliseconds = 0): AUDIO_TICKS_PER_MILLISECOND((float)AUDIO_RATE/1000.0f)
 	{
-		;
+		set(delay_milliseconds);
 	}	
 	
-
+	
 	/** Set the delay time.  This setting is persistent, until you change it by using set() again.
 	@param delay_milliseconds delay time in milliseconds.
+	@note timing: 12us
 	*/
 	inline
 	void set(unsigned int delay_milliseconds)
 	{
-		counter_start_value = ((long)delay_milliseconds*1000)/micros_per_update;
+		ticks = (unsigned long)(AUDIO_TICKS_PER_MILLISECOND*delay_milliseconds); // 12us
 	}
 
 
@@ -62,7 +61,7 @@ public:
 	inline
 	void start()
 	{
-		counter = counter_start_value;
+		deadline=audioTicks()+ticks;
 	}
 	
 	
@@ -79,20 +78,22 @@ public:
 
 	/** Call this in updateControl() or updateAudio() to check if the delay time is up.
 	@return true if the time is up.
+	@note timing: 1us.
 	*/
 	inline
 	bool ready()
 	{
-		return (--counter<0);
+		return(audioTicks()>=deadline); // 1us
 	}
 
 
+protected:
+	// Metronome accesses these
+	unsigned long deadline; 
+	unsigned long ticks;
+	
 private:
-
-	long counter; // long so even at a control rate of 2048 you can have >15seconds
-	long counter_start_value;
-	const unsigned int micros_per_update;
-
+	const float AUDIO_TICKS_PER_MILLISECOND; 
 };
 
 /**

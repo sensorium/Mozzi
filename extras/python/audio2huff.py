@@ -4,10 +4,28 @@
 # Thomas Grill, 2011
 # http://grrrr.org
 #
+# This script generates tables for the sample player class
+# in Mozzi's SampleHuffman.h file.
+#
+# Invoke with:
+# python audio2huff.py --sndfile=arduinosnd.wav --hdrfile=sounddata.h --bits=8 --name=soundtablename
+# 
+# You can resample and dither your audio file with SOX, 
+# e.g. to 8 bits depth @ Mozzi's 16384 Hz  sample rate:
+# sox fullglory.wav -b 8 -r 16384 arduinosnd.wav
+# 
+# Alternatively you can export a sound from Audacity, which seems to have less noticeable or no dithering, 
+# using Project Rate 16384 Hz and these output options:
+# Other uncompressed files, Header: WAV(Microsoft), Encoding: Unsigned 8 bit PCM
+# 
+# The header file contains two lengthy arrays:
+# One is "your-prefix-SOUNDDATA" which must fit into Flash RAM (available in total: 32k for ATMega328)
+# The other is "your-prefix-HUFFMAN" which must also fit into Flash RAM
+# 
 # Modified by TIm Barrass 2013
 # - changed PROGMEM to __attribute__((section(".progmem.data"))), to stop compiler warning
 # - moved huffman table to progmem
-# - added --name argument to give all constants specific names
+# - added --name argument to give all constants specific names/prefixes
 # - changed all constant names to upper case
 # - added include guards, Arduino and avr includes
 # 

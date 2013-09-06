@@ -5,14 +5,18 @@ get the latest version from http://sensorium.github.io/Mozzi/
 
 
 version 2013-08-25-18:38
+- EventDelay.h - no longer a template class, and doesn't need an UPDATE_RATE parameter.
+	Breaking old sketches again! Just get rid of the EventDelay template part in sketches.
+	Now sets an internal deadline and checks the time passed in audio ticks instead of counting down.
+- added Metronome.h, a repeating EventDelay.
 - added SampleHuffman.h, a sample player for samples encoded with Huffman compression, 
 	based on an Arduino sketch by Thomas Grill, 2011 http//grrrr.org.
 	- added extras/python/audio2huff.py,
 	a script to convert sounds to compressed tables for the player, by Thomas Grill (Modified by TB for Mozzi)
 	- added examples/08.Samples/SampleHuffman
 - added examples/03.Sensors/Light_Temperature_Multi_Oscil, mapping Thermistor and LDR readings to oscillator frequencies.
-
-
+- added OverSample.h, for increased resolution of analog inputs.
+- ControlDelay.h - changed default storage type from char to int.
 
 
 version_2013-08-25-18:38
@@ -39,7 +43,7 @@ version_2013-08-25-18:38
 - mozzi_midi.h, .cpp - changed return type from unsigned int to int for mtof(unsigned char midi_note), mtof(int midi_note),
 	to suit Oscil::setFreq()
 - added/corrected references to examples in docs
-	
+
 
 
 version_2013-07-29-18:09

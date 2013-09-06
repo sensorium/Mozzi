@@ -34,7 +34,7 @@
 #include "mozzi_utils.h" // for trailingZeros()
 
 
-/**
+/** @ingroup sensortools
   Calculates a running average over a 
   specified number of the most recent readings.  
   Like Smooth(), this is good for smoothing analog inputs in updateControl().
@@ -64,10 +64,9 @@ public:
 		// initialize all the readings to 0:
 		for (int thisReading = 0; thisReading < WINDOW_LENGTH; thisReading++)
 			readings[thisReading] = 0;
-
 	}
 
-
+		
 	/** Give the average of the last WINDOW_LENGTH.
 	@param input a control signal such as an analog input which needs smoothing.
 	@return the smoothed result.
@@ -75,6 +74,14 @@ public:
 	*/
 	T next(T input)
 	{
+		return add(input)>>WINDOW_LENGTH_AS_RSHIFT;
+	}
+
+
+protected:
+	
+	inline 
+	T add(T input){
 		// out with the old
 		total -= readings[index];
 		// in with the new
@@ -83,18 +90,16 @@ public:
 
 		// advance and wrap index
 		++index &= WINDOW_LENGTH -1;
-
-		// calculate the average:
-		return total>>WINDOW_LENGTH_AS_RSHIFT;
+		return total;
 	}
-
-
+		
+	
 private:
 	T readings[WINDOW_LENGTH];	// the readings from the analog input
 	unsigned int index;	// the index of the current reading
 	long total;	// the running total
 	const unsigned char WINDOW_LENGTH_AS_RSHIFT;
-
+	
 };
 
 // no need to show the specialisations
@@ -128,6 +133,17 @@ public:
 	*/
 	unsigned int next(unsigned int input)
 	{
+		// calculate the average:
+		// this unsigned cast is the only difference between the int and unsigned int specialisations
+		// it tells the shift not to sign extend in from the left
+		return (unsigned)add(input)>>WINDOW_LENGTH_AS_RSHIFT;
+	}
+
+protected:
+	
+	
+	inline 
+	unsigned int  add(unsigned int input){
 		// out with the old
 		total -= readings[index];
 		// in with the new
@@ -136,14 +152,10 @@ public:
 
 		// advance and wrap index
 		++index &= WINDOW_LENGTH -1;
-
-		// calculate the average:
-		// this unsigned cast is the only difference between the int and unsigned int specialisations
-		// it tells the shift not to sign extend in from the left
-		return (unsigned) total>>WINDOW_LENGTH_AS_RSHIFT;
+		return total;
 	}
-
-
+	
+	
 private:
 	unsigned int readings[WINDOW_LENGTH];      // the readings from the analog input
 	unsigned int index;                  // the index of the current reading

@@ -1,5 +1,5 @@
 /*
- * AutoMap.h
+ * RollingAutoMap.h
  *
  * Copyright 2012 Tim Barrass.
  *
@@ -20,8 +20,8 @@
  *
  */
 
-#ifndef AUTOMAP_H_
-#define AUTOMAP_H_
+#ifndef ROLLINGAUTOMAP_H_
+#define ROLLINGAUTOMAP_H_
 
 // for map - maybe rewrite my own templated map for better efficiency
 #if ARDUINO >= 100
@@ -30,20 +30,20 @@
  #include "WProgram.h"
 #endif
 
-#include "AutoRange.h"
+#include "AutoMap.h"
 
 /** @ingroup sensortools
-Automatically map an input value to an output range without knowing the precise range of inputs beforehand.
+Automatically map an input value to an output range based on the recent range of input values
 */
 
-class AutoMap : public AutoRange<int>
+class RollingAutoMap : public AutoMap
 {
 public:
 	/** Constructor.
 	@param min_expected the minimum possible input value.
 	@param max_expected the maximum possible input value.
 	*/
-	AutoMap(int min_expected, int max_expected, int map_to_min, int map_to_max) 
+	RollingAutoMap(int min_expected, int max_expected, int map_to_min, int map_to_max) 
 		: inherited(min_expected,max_expected),map_min(map_to_min), map_max(map_to_max)
 	{
 	}
@@ -78,8 +78,8 @@ private:
 
 /**
 @example 03.Sensors/Knob_LDR_x2_WavePacket/Knob_LDR_x2_WavePacket.ino
-This example demonstrates the AutoMap class.
+This example demonstrates the RollingAutoMap class.
 */
 
-#endif        //  #ifndef AUTOMAP_H_
+#endif        //  #ifndef ROLLINGAUTOMAP_H_
 

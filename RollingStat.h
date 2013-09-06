@@ -27,7 +27,7 @@
 #include "mozzi_fixmath.h"
 
 // adapted from RunningStat, http://www.johndcook.com/standard_deviation.html
-/**
+/** @ingroup sensortools
 Calculates an approximation of the variance and standard deviation for a window of recent inputs.
 @tparam T the type of numbers to use.  Choose unsigned int, int , unsigned char, char, or float
 @tparam WINDOW_LENGTH how many recent input values to include in the calculations.

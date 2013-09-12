@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>Mozzi: 05.Control_Filters/DCFilter/DCFilter.ino</title>
+<title>Mozzi: 08.Samples/SampleHuffman_Umpah/SampleHuffman_Umpah.ino</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -72,7 +72,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('05_8_control__filters_2_d_c_filter_2_d_c_filter_8ino-example.html','');});
+$(document).ready(function(){initNavTree('08_8_samples_2_sample_huffman__umpah_2_sample_huffman__umpah_8ino-example.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -91,55 +91,78 @@ $(document).ready(function(){initNavTree('05_8_control__filters_2_d_c_filter_2_d
 
 <div class="header">
   <div class="headertitle">
-<div class="title">05.Control_Filters/DCFilter/DCFilter.ino</div>  </div>
+<div class="title">08.Samples/SampleHuffman_Umpah/SampleHuffman_Umpah.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<p>This example demonstrates the DCFilter class.</p>
-<div class="fragment"><div class="line"><span class="comment">/* Example of filtering an analog input to remove DC bias,</span></div>
-<div class="line"><span class="comment">    using Mozzi sonification library.</span></div>
-<div class="line"><span class="comment">    </span></div>
-<div class="line"><span class="comment">    Demonstrates DCfilter(), DC-blocking filter useful for </span></div>
-<div class="line"><span class="comment">    highlighting changes in control signals.</span></div>
-<div class="line"><span class="comment">    The output of the filter settles to 0 if the incoming signal stays constant.</span></div>
-<div class="line"><span class="comment">    If the input changes, the filter output swings to track the change and </span></div>
-<div class="line"><span class="comment">    eventually settles back to 0.</span></div>
-<div class="line"><span class="comment">     </span></div>
-<div class="line"><span class="comment">    Mozzi help/discussion/announcements:</span></div>
-<div class="line"><span class="comment">    https://groups.google.com/forum/#!forum/mozzi-users</span></div>
-<div class="line"><span class="comment">  </span></div>
-<div class="line"><span class="comment">    Tim Barrass 2013.</span></div>
-<div class="line"><span class="comment">    This example code is in the public domain.</span></div>
-<div class="line"><span class="comment">     </span></div>
+<p>This example demonstrates the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> class.</p>
+<div class="fragment"><div class="line"><span class="comment">/*</span></div>
+<div class="line"><span class="comment"> Example playing samples encoded with Huffman compression.</span></div>
+<div class="line"><span class="comment"> </span></div>
+<div class="line"><span class="comment"> Demonstrates the SampleHuffman class.</span></div>
+<div class="line"><span class="comment"> SampleHuffman, most of this explanation, and the audio2huff.py script are adapted from &quot;audioout&quot;,</span></div>
+<div class="line"><span class="comment"> an Arduino sketch by Thomas Grill, 2011 http//grrrr.org.</span></div>
+<div class="line"><span class="comment"> </span></div>
+<div class="line"><span class="comment"> Huffman decoding is used on sample differentials,</span></div>
+<div class="line"><span class="comment"> saving 50-70% of space for 8 bit data, depending on the sample rate.</span></div>
+<div class="line"><span class="comment"> </span></div>
+<div class="line"><span class="comment"> This implementation just plays back one sample each time next() is called, with no</span></div>
+<div class="line"><span class="comment"> speed or other adjustments.  It&#39;s slow, so it&#39;s likely you will only be able to play one sound at a time.</span></div>
+<div class="line"><span class="comment"></span></div>
+<div class="line"><span class="comment"> Audio data, Huffman decoder table, sample rate and bit depth are defined</span></div>
+<div class="line"><span class="comment"> in a sounddata.h header file.  This file can be generated for a sound file with the </span></div>
+<div class="line"><span class="comment"> accompanying Python script audio2huff.py, in Mozzi/extras/python/</span></div>
+<div class="line"><span class="comment"></span></div>
+<div class="line"><span class="comment"> Invoke with:</span></div>
+<div class="line"><span class="comment"> python audio2huff.py --sndfile=arduinosnd.wav --hdrfile=sounddata.h --bits=8 --name=soundtablename</span></div>
+<div class="line"><span class="comment"></span></div>
+<div class="line"><span class="comment"> You can resample and dither your audio file with SOX, </span></div>
+<div class="line"><span class="comment"> e.g. to 8 bits depth @ Mozzi&#39;s 16384 Hz  sample rate:</span></div>
+<div class="line"><span class="comment"> sox fullglory.wav -b 8 -r 16384 arduinosnd.wav</span></div>
+<div class="line"><span class="comment"></span></div>
+<div class="line"><span class="comment"> Alternatively you can export a sound from Audacity, which seems to have less noticeable or no dithering, </span></div>
+<div class="line"><span class="comment"> using Project Rate 16384 Hz and these output options:</span></div>
+<div class="line"><span class="comment"> Other uncompressed files, Header: WAV(Microsoft), Encoding: Unsigned 8 bit PCM</span></div>
+<div class="line"><span class="comment"></span></div>
+<div class="line"><span class="comment"> The header file contains two lengthy arrays:</span></div>
+<div class="line"><span class="comment"> One is &quot;SOUNDDATA&quot; which must fit into Flash RAM (available in total: 32k for ATMega328)</span></div>
+<div class="line"><span class="comment"> The other is &quot;HUFFMAN&quot; which must also fit into Flash RAM</span></div>
+<div class="line"><span class="comment"></span></div>
+<div class="line"><span class="comment"> Circuit:</span></div>
+<div class="line"><span class="comment">  Audio output on digital pin 9 (on a Uno or similar), or </span></div>
+<div class="line"><span class="comment">  check the README or http://sensorium.github.com/Mozzi/</span></div>
+<div class="line"><span class="comment"></span></div>
+<div class="line"><span class="comment"> Mozzi help/discussion/announcements:</span></div>
+<div class="line"><span class="comment"> https://groups.google.com/forum/#!forum/mozzi-users</span></div>
+<div class="line"><span class="comment"> </span></div>
+<div class="line"><span class="comment"> Tim Barrass 2013.</span></div>
+<div class="line"><span class="comment"> This example code is in the public domain.</span></div>
+<div class="line"><span class="comment"></span></div>
 <div class="line"><span class="comment">*/</span></div>
+<div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;MozziGuts.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;DCfilter.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;SampleHuffman.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;umpah_huff.h&quot;</span></div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> sensorPin = A0; </div>
 <div class="line"></div>
-<div class="line"><a name="_a0"></a><a class="code" href="class_d_cfilter.html" title="A DC-blocking filter useful for highlighting changes in control signals.">DCfilter</a> dcFiltered(0.9); <span class="comment">// parameter sets how long the filter takes to settle</span></div>
+<div class="line"><a name="_a0"></a><a class="code" href="class_sample_huffman.html" title="A sample player for samples encoded with Huffman compression.">SampleHuffman</a> umpah(UMPAH_SOUNDDATA,UMPAH_HUFFMAN,UMPAH_SOUNDDATA_BITS);</div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> setup() {</div>
-<div class="line">  Serial.begin(115200);</div>
+<div class="line">  umpah.setLoopingOn();</div>
 <div class="line">  <a name="a1"></a><a class="code" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837" title="Sets up the timers for audio and control rate processes, storing the timer registers so they can be r...">startMozzi</a>();</div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> <a name="a2"></a><a class="code" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl</a>(){</div>
-<div class="line">  <span class="comment">// read the value from the sensor:</span></div>
-<div class="line">  <span class="keywordtype">int</span> sensorValue = <a name="a3"></a><a class="code" href="group__analog.html#ga860bfe1e9172d1f5bb8eb08c324cd6c9" title="Reads the analog input of a chosen channel, without blocking other operations from running...">mozziAnalogRead</a>(sensorPin); </div>
-<div class="line">  Serial.print(sensorValue); </div>
-<div class="line">  Serial.print(<span class="stringliteral">&quot;  Filtered = &quot;</span>); </div>
-<div class="line">  Serial.println(dcFiltered.next(sensorValue));              </div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> <a name="a4"></a><a class="code" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio</a>(){</div>
-<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="keywordtype">int</span> <a name="a3"></a><a class="code" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio</a>(){ </div>
+<div class="line">  <span class="keywordflow">return</span> umpah.next();</div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">void</span> loop(){</div>
-<div class="line">  <a name="a5"></a><a class="code" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook</a>();</div>
+<div class="line"><span class="keywordtype">void</span> loop() {</div>
+<div class="line">  <a name="a4"></a><a class="code" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook</a>();</div>
 <div class="line">}</div>
 </div><!-- fragment --> </div><!-- contents -->
 </div><!-- doc-content -->

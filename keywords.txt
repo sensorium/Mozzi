@@ -329,6 +329,10 @@ getStandardDeviation	KEYWORD2
 
 SampleHuffman	KEYWORD1
 next	KEYWORD2
+start	KEYWORD2
+setLoopingOn	KEYWORD2
+setLoopingOff	KEYWORD2
+
 
 OverSample	KEYWORD1
 next	KEYWORD2

@@ -70,7 +70,7 @@ public:
 
 
 /**
-@example 03.Sensors/OverSampling/OverSampling.ino
+@example 05.Control_Filters/Thermistor_OverSample/Thermistor_OverSample.ino
 This is an example demonstrating the OverSample class.
 */
 

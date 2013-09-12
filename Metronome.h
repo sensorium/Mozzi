@@ -93,7 +93,7 @@ private:
 
 
 /**
-@example 02.Control/Metronome/Metronome.ino
+@example 02.Control/Metronome_SampleHuffman/Metronome_SampleHuffman.ino
 This example shows how to use the Metronome class.
 */
 

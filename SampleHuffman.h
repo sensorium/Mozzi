@@ -144,4 +144,9 @@ private:
 
 };
 
+/**
+@example 08.Samples/SampleHuffman_Umpah/SampleHuffman_Umpah.ino
+This example demonstrates the Sample class.
+*/
+
 #endif        //  #ifndef SAMPLEHUFFMAN_H

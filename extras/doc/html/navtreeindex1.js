@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"group__analog.html#ga860bfe1e9172d1f5bb8eb08c324cd6c9":[1,1,4],
 "group__analog.html#ga8741756d32609ad6dec641943fa99af9":[1,1,6],
 "group__analog.html#gabad497d1f8c8026e81849be0b65bf38f":[1,1,1],
 "group__analog.html#gacd83735876cf223916ea4925ec4efd4a":[1,1,5],
@@ -188,8 +189,8 @@ var NAVTREEINDEX1 =
 "group__util.html#gaf45df8dbf0bc86752d8fc697e2381cc3":[1,5,5],
 "group__util.html#struct_int2_type":[1,5,1],
 "hierarchy.html":[2,1],
-"index.html":[],
 "index.html":[0],
+"index.html":[],
 "known__16bit__timers_8h_source.html":[3,0,15],
 "meta_8h_source.html":[3,0,18],
 "modules.html":[1],

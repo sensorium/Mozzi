@@ -74,8 +74,8 @@ public:
 		return current;
 	}
 
-	
-		/** Turns looping on, with the whole sample length as the loop range.
+
+	/** Turns looping on, with the whole sample length as the loop range.
 	*/
 	inline
 	void setLoopingOn()

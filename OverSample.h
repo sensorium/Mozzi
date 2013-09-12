@@ -34,10 +34,10 @@
  	[Enhancing ADC Resolution by Oversampling](http://www.atmel.com/images/doc8003.pdf‎),
  	as well as an explanation of the overall approach.
  	@tparam RESOLUTION_INCREASE_BITS how many extra bits of resolution to produce.
-	The window length and the memory it needs increases quickly as the oversampling resolution increases.
-	1 bit = 4 unsigned ints (analog input between 0-1023) = 8 bytes
-	2 bits = 16 unsigned ints = 32 bytes
-	3 bits = 64 unsigned ints = 128 bytes
+	The window length and the memory it needs increases quickly as the oversampling resolution increases.  
+	1 bit = 4 unsigned ints (analog input between 0-1023) = 8 bytes  
+	2 bits = 16 unsigned ints = 32 bytes  
+	3 bits = 64 unsigned ints = 128 bytes  
 	More than 3 bits increase in resolution would require either using longs to store the readings,
 	which would need 1024 bytes for a 4 bit increase and 4096 bytes for 5 bits (do any avr's have that much room?),
 	or the average reading would have to be no more than 128 (for 4 bits increase), because 256 readings would be needed,

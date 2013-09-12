@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-08-25-18:38</span>
+   &#160;<span id="projectnumber">version 2013-09-12-15:15</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -141,7 +141,7 @@ $(document).ready(function(){initNavTree('02_8_control_2_control__echo__theremin
 <div class="line"><a class="code" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil &lt;SIN2048_NUM_CELLS, AUDIO_RATE&gt;</a> aSin3(SIN2048_DATA);</div>
 <div class="line"></div>
 <div class="line"><span class="comment">// use: RollingAverage &lt;number_type, how_many_to_average&gt; myThing</span></div>
-<div class="line"><a name="_a2"></a><a class="code" href="class_rolling_average.html" title="Calculates a running average over a specified number of the most recent readings.">RollingAverage &lt;int, 32&gt;</a> kAverage; <span class="comment">// how_many_to_average has to be power of 2</span></div>
+<div class="line"><a name="_a2"></a><a class="code" href="group__sensortools.html#class_rolling_average" title="Calculates a running average over a specified number of the most recent readings.">RollingAverage &lt;int, 32&gt;</a> kAverage; <span class="comment">// how_many_to_average has to be power of 2</span></div>
 <div class="line"><span class="keywordtype">int</span> averaged;</div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> setup(){</div>
@@ -152,7 +152,7 @@ $(document).ready(function(){initNavTree('02_8_control_2_control__echo__theremin
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> <a name="a5"></a><a class="code" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl</a>(){</div>
 <div class="line">  <span class="keywordtype">int</span> bumpy_input = <a name="a6"></a><a class="code" href="group__analog.html#ga860bfe1e9172d1f5bb8eb08c324cd6c9" title="Reads the analog input of a chosen channel, without blocking other operations from running...">mozziAnalogRead</a>(INPUT_PIN);</div>
-<div class="line">  averaged = kAverage.<a name="a7"></a><a class="code" href="class_rolling_average.html#a23c4b93258faace0c7ee60eb395d2c4b" title="Give the average of the last WINDOW_LENGTH.">next</a>(bumpy_input);</div>
+<div class="line">  averaged = kAverage.<a name="a7"></a><a class="code" href="group__sensortools.html#a23c4b93258faace0c7ee60eb395d2c4b" title="Give the average of the last WINDOW_LENGTH.">next</a>(bumpy_input);</div>
 <div class="line">  aSin0.setFreq(averaged);</div>
 <div class="line">  aSin1.setFreq(kDelay.<a name="a8"></a><a class="code" href="class_audio_delay.html#a19258636609d83a2bab11849e17b5294" title="Input a value to the delay and retrieve the signal in the delay line at the position delaytime_cells...">next</a>(averaged));</div>
 <div class="line">  aSin2.setFreq(kDelay.<a name="a9"></a><a class="code" href="class_audio_delay.html#a26b409fbfc322ae527ba23680c56e3a9" title="Retrieve the signal in the delay line at the position delaytime_cells.">read</a>(echo_cells_2));</div>
@@ -176,7 +176,7 @@ $(document).ready(function(){initNavTree('02_8_control_2_control__echo__theremin
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Aug 25 2013 18:38:45 for Mozzi by
+    <li class="footer">Generated on Thu Sep 12 2013 15:15:34 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

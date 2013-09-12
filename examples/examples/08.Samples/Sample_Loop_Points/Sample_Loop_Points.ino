@@ -29,7 +29,7 @@
 Sample <ABOMB_NUM_CELLS, AUDIO_RATE> aSample(ABOMB_DATA);
 
 // for scheduling changes
-EventDelay <CONTROL_RATE>  kTriggerDelay;
+EventDelay  kTriggerDelay;
 
 
 const float playspeed = 1.3;

@@ -1,0 +1,522 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Mozzi, an introductory tutorial - MOZZI</title>
+  <meta name="author" content="Tim Barrass">
+  
+  
+  <meta name="description" content="Mozzi is a sound synthesis software library for Arduino." />
+
+  
+  <meta name="keywords" content="Applications : sound, music, audio, synthesis, sound art, electronic music, sonification, media art, performance, installation, electronic art, creative art, interactive art, Software: library, arduino, open source, extendable, free, Audience: artists, scientists, teachers, learners, students, hobby, do it yourself, diy, makers, creators, musicians, engineers, collaborators" />
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sensorium.github.io/Mozzi//learn/introductory-tutorial">
+  <link href="/Mozzi/favicon.png" rel="icon">
+  <link href="/Mozzi/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/Mozzi/atom.xml" rel="alternate" title="MOZZI" type="application/atom+xml">
+  <script src="/Mozzi/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/Mozzi/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+<link href='http://fonts.googleapis.com/css?family=Londrina+Solid&text=MOZZI' rel='stylesheet' type='text/css'>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32577259-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner">
+<div id="header_wrap">
+	
+	<hgroup>
+		<h1 id="banner_main_title"><a href="/Mozzi/">MOZZI</a></h1>
+		
+		
+			<h2>sound synthesis library for Arduino</h2>
+		
+	</hgroup>
+	
+	<img src="/Mozzi/images/mozzi-circle.gif" id="mozzi_logo"/> 
+	<img src="/Mozzi/images/lee.gif" id="lee"/>
+
+	<section id="header_links_section">
+		<p>
+			<a  class="header_link" href="https://github.com/sensorium/Mozzi"> 
+				<span id="header_small_label">View on <i class="icon-github icon-2x"></i> GitHub</span>
+			</a>
+		</p>
+		<p>
+			<!-- <a class="header_link" href="https://github.com/sensorium/Mozzi/zipball/master"> -->
+			<a class="header_link" href="http://tinyurl.com/mozzilib/Mozzi.zip">
+				download<br>
+				<i class="icon-download icon-4x"></i><br>
+				<span id="header_small_label">version 2013-09-12-15:15</span>
+			</a>
+		</p>
+	</section> 
+
+</div>
+
+
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/Mozzi/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <!-- <input type="hidden" name="q" value="site:sensorium.github.io/Mozzi/" /> -->
+    <input type="hidden" name="q" value="http://sensorium.github.io/Mozzi/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/Mozzi/">Home</a></li>
+  <li><a href="/Mozzi/examples/">Examples</a></li>
+  <li><a href="/Mozzi/learn/">Learn</a></li>
+  <li><a href="/Mozzi/gallery/">Gallery</a></li>
+  <li><a href="/Mozzi/faq/">FAQ</a></li>
+  <li><a href="https://groups.google.com/forum/#!forum/mozzi-users/">Forum</a></li>
+  <li><a href="http://sensorium.github.com/Mozzi/doc/html/index.html">API</a></li>
+  <!-- <li><a href="/Mozzi/blog/">Blog</a></li> -->
+  <!-- <li><a href="/Mozzi/resources/">Resources</a></li>   -->
+  <!-- <li><a href="/Mozzi/blog/archives/">Archives</a></li>
+  <li><a href="/Mozzi/about/">About</a></li> -->
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Mozzi, an Introductory Tutorial</h1>
+    <p class="meta">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-10T21:27:00+10:00" pubdate data-updated="true">Sep 10<span>th</span>, 2013</time></p>
+  </header>
+  
+  <h4>Sounds from Sensors with Mozzi on an Arduino or clone</h4>
+
+<h2>1. Parts list</h2>
+
+<p>Nano<br/>
+Knob<br/>
+Switch<br/>
+LDR x 2<br/>
+Piezo<br/>
+5.1K resistor X 2<br/>
+10K resistor<br/>
+1M resistor<br/>
+Red wire x 3<br/>
+Black or White wire x 4<br/>
+Yellow or Orange wire x 4<br/>
+Blue wire<br/>
+Audio socket<br/>
+Audio cable<br/>
+USB cable</p>
+
+<p><img src="images/fig1.png" title="Figure 1: Parts used in the tutorial" alt="Figure 1: Parts used in the tutorial" /></p>
+
+<h2>2. Arduino</h2>
+
+<p>Push the Nano into the breadboard with top left leg of the USB end at <strong>c1</strong>.
+Plug a mini USB cable into the Nano and connect it to your computer.</p>
+
+<ul>
+<li>Download the <a href="http://www.arduino.cc">Arduino application</a>, version 1.0.5 or better.</li>
+<li>Download and install <a href="http://www.ftdichip.com/Drivers/VCP.htm">FTDI drivers</a> so Arduino can access the USB port.</li>
+<li>Start the Arduino application and set it up for a Nano clone.
+<em>Arduino➞Tools➞Board➞Arduino Nano w/ Atmega 328</em></li>
+<li>Set it up to communicate through the USB port.
+<em>Arduino➞Tools➞Serial Port➞usbserial</em></li>
+</ul>
+
+
+<p>Let&#8217;s test it by uploading a program into the Nano through the USB serial port.  <em>Arduino➞File➞Examples➞Blink</em> and press the ➜ <em>(upload)</em> button to upload the program to the Nano.</p>
+
+<p>The red light on your nano should be blinking once per second.
+Edit the code to make the light blink twice as fast by changing the delay from 1000ms to 500ms.  Yay, it works.</p>
+
+<p><img src="images/fig2.png" title="Figure 2: Nano on breadboard" alt="Figure 2: Nano on breadboard" /></p>
+
+<h2>3. Mozzi</h2>
+
+<h3>Software</h3>
+
+<p>OK - now the Arduino is working we are ready to install Mozzi.</p>
+
+<ul>
+<li>Download <a href="http://sensorium.github.io/Mozzi/">Mozzi</a> from Github.</li>
+<li>Now let&#8217;s import Mozzi into the Arduino system.<br/>
+Go <em>Arduino➞Sketch➞Import Library➞Add Library</em> and select the Mozzi.zip file from your Downloads folder.</li>
+<li>You should now be able to see Mozzi in the list under
+<em>Arduino➞Sketch➞Import Library</em>.</li>
+</ul>
+
+
+<h3>Wiring</h3>
+
+<p>When we wire things together on the breadboard let&#8217;s all use a common wire colour protocol.</p>
+
+<p>+V ⇒ RED<br/>
+-V ⇒ BLACK or WHITE<br/>
+INPUTS ⇒ YELLOW or ORANGE<br/>
+AUDIO ⇒  BLUE</p>
+
+<p>Unplug the USB cable so that there is no power, just in case you plug a wire into the wrong place.</p>
+
+<p>First let&#8217;s set up the power rails.</p>
+
+<ul>
+<li>Unplug the USB cable (!)</li>
+<li>Push a black wire into <strong>b14</strong> which is <strong>GND</strong> on the Nano.</li>
+<li>Push the other end into the <strong>-V</strong> rail on the left of the board at row <strong>14</strong>.</li>
+<li>Push another black wire into the top of the left hand <strong>-V</strong> rail  and connect it across the board to the top of the right hand  <strong>-V</strong> rail.</li>
+<li>Push a red wire into <strong>b12</strong> that connects to the <strong>5V</strong> pin on the Nano.</li>
+<li>Push the other end into the left  <strong>+V</strong> rail at row <strong>14</strong>.</li>
+<li>Push another red wire into the top left  <strong>+V</strong> rail and connect it to the top of the right  <strong>+V</strong> rail.</li>
+</ul>
+
+
+<p><img src="images/fig3.png" title="Figure 3:  5V and GND pins connected to +V and -V rails" alt="Figure 3:  5V and GND pins connected to +V and -V rails" /></p>
+
+<p>Now let&#8217;s add a headphone socket so we can listen to sounds synthed on the Nano.</p>
+
+<ul>
+<li>Push the headphone socket into the bottom right hand corner of the breadboard at <strong>g26-g30</strong>.</li>
+<li>Push a blue wire into <strong>h4</strong> that connects to the audio output pin <strong>D9</strong> on the Nano.</li>
+<li>Push the other end of the blue wire into <strong>f26</strong> which is the tip of the audio socket.</li>
+<li>Push a black wire into  f28  to connect the <strong>GND</strong> on the audio socket and push the other end into the righthand  <strong>-V</strong> rail.</li>
+</ul>
+
+
+<p>Connect the audio cable to the audio output socket and the other end to the audio input on your computer.</p>
+
+<p><img src="images/fig4.png" title="Figure 4: Audio socket connected to PWM Audio Output Pin D9" alt="Figure 4: Audio socket connected to PWM Audio Output Pin D9" /></p>
+
+<h3>Audio set up</h3>
+
+<p>You can listen to the sound on your computer by downloading and installing <a href="http://audacity.sourceforge.net">Audacity</a>, a cross platform audio editor.</p>
+
+<p>In Audacity,</p>
+
+<ul>
+<li>set the <em>Input</em> to <strong>Built-in Input, 1 (Mono)</strong>.</li>
+<li>in the <em>Project Rate (Hz)</em> box, type <strong>16384</strong>.  This is Mozzi&#8217;s sample rate and will help show your waveforms clearly, otherwise they&#8217;ll appear as scrambled, aliased Pulse Width Modulated square waves.</li>
+</ul>
+
+
+<p>Some new laptops have a single audio socket that requires a 4-pole audio input cable. If you don&#8217;t have the cable then just listen to the audio through headphones which will be a bit noisy but good enough for learning….</p>
+
+<h3>Testing Mozzi</h3>
+
+<p>Let&#8217;s test that it works with an example from the Mozzi library.</p>
+
+<ul>
+<li><em>Arduino➞File➞Examples➞Mozzi➞01.Basics➞Sinewave</em></li>
+<li>Connect the USB cable to your Nano and upload the code.</li>
+<li>Press the Record button in Audacity to hear the sound and adjust the input level slider to avoid distortion.</li>
+<li>For a more interesting example of the sounds that Mozzi can make,
+<em>Arduino➞File-Examples➞Mozzi➞09.Delays➞ReverbTank_STANDARD</em></li>
+</ul>
+
+
+<p>Try some of the other examples in the filters, delays, synthesis and sample folders to get a feel for what can be done.</p>
+
+<h2>4. Sensors</h2>
+
+<p>Now let&#8217;s move on the next stage of sensing some input.</p>
+
+<h3>A Knob</h3>
+
+<p>A knob (variable resistor, potentiometer or pot) has a middle connection which can be moved across a resistor, changing the resistance between the sweeping pin and each end.</p>
+
+<p>Let&#8217;s make a circuit using a knob as a sensor.</p>
+
+<ul>
+<li>Unplug the USB cable to unpower the Nano.</li>
+<li>Push the 3 legs of the knob into the board at <strong>j18, j20 and j22</strong>, with the rotating part facing right.</li>
+<li>Connect a red wire from one end of the pot at <strong>f18</strong> to the <strong>+V</strong> rail.</li>
+<li>Add an orange wire from the centre pin of the pot at <strong>f20</strong> to <strong>b4</strong> which connects to analog input pin <strong>A0</strong> of the Nano.</li>
+<li>Add a black wire from the remaining leg of the potentiometer at <strong>f22</strong> to the <strong>-V</strong> rail.</li>
+</ul>
+
+
+<p><img src="images/fig5.png" title="Figure 5: Knob as input to Analog Pin A0" alt="Figure 5: Knob as input to Analog Pin A0" /></p>
+
+<p>Now the voltage on the analog input will go up and down as the knob is turned.  Let&#8217;s use the knob to change the sound volume in a Mozzi sketch.
+<em>Arduino➞File➞Examples➞Mozzi➞03.Sensors➞Volume_Knob</em></p>
+
+<p>This program reads the voltage on Analog pin 0 as an integer from 0-1023.</p>
+
+<ul>
+<li>Click the Monitor button (magnifying glass) on the top right of the Arduino programming environment to read the value.</li>
+<li>In the monitor window, select <strong>115200</strong> baud to match the baud rate setup in the code.   Now a stream of numbers should scroll down the monitor, varying between 0-1023 as you rotate the knob.</li>
+</ul>
+
+
+<h3>Light Dependent Resistors</h3>
+
+<p>A Light Dependent Resistor (LDR) changes resistance with the light level. Let&#8217;s use that to control an FM synthesis algorithm.</p>
+
+<p>First, we&#8217;ll make the sensor circuit using a LDR and a 5.1k Resistor (green-brown-black-brown) as a voltage ladder as input to the Analog Input on the Nano.</p>
+
+<ul>
+<li>Unplug the USB cable to unpower the Nano.</li>
+<li>Push one leg of the LDR into <strong>a20</strong> and the other leg into the <strong>+V</strong> rail.</li>
+<li>Connect an orange wire from the LDR at <strong>b20</strong> to <strong>b5</strong> which connects to the analog pin <strong>A1</strong> of the Nano.</li>
+<li>Push one leg of the 5.1k resistor into <strong>a5</strong> and the other leg into the <strong>-V</strong> rail.</li>
+</ul>
+
+
+<p><img src="images/fig6.png" title="Figure 6: LDR + resistor as input to Analog Pin A1" alt="Figure 6: LDR + resistor as input to Analog Pin A1" /></p>
+
+<p>Now the voltage on the analog input will go up and down with the light level.  The resistor stops high current draw on the USB port when the resistance of the LDR goes low.</p>
+
+<p>Let&#8217;s test the LDR in a Mozzi sketch.<br/>
+<em>Arduino➞File➞Examples➞Mozzi➞03.Sensors➞Volume_Knob_LightLevel_Frequency</em></p>
+
+<p>This program adds the LDR to the previous example, reading the voltage on Analog pin 1 to change the frequency of the sinewave.  Use the Serial Monitor in the Arduino IDE to have a look at the numbers from the LDR.  They should range somewhere between about 300-1000.  Feel free to calibrate the sensor by changing the number mapping from the LDR to the oscillator frequency in the sketch.</p>
+
+<p>Let&#8217;s try using the knob and LDR to modulate FM synthesis parameters.
+The knob sets the fundamental (or <em>carrier</em>) frequency and the LDR changes the modulation width, which affects the brightness of the sound.
+<em>Arduino➞File➞Examples➞Mozzi➞03.Sensors➞Knob_LightLevel_FMsynth</em></p>
+
+<p>Wow.  Try to stay calm.  We&#8217;re gonna make it twice as fun by adding another light level input to the FM synth.</p>
+
+<ul>
+<li>Unplug the Nano to depower it.</li>
+<li>Push the leg of another LDR into <strong>a25</strong> and connect the other leg to   the <strong>+V</strong> rail as before.</li>
+<li>Add an orange wire from the LDR at <strong>b25</strong> to <strong>b6</strong>, which connects to Nano Analog Input <strong>A2</strong>.</li>
+<li>Push one leg of the 5.1k resistor into <strong>a6</strong> and the other leg into the <strong>-V</strong> rail.</li>
+</ul>
+
+
+<p><img src="images/fig7.png" title="Figure 7: LDR + resistor as input to Analog Pin A2" alt="Figure 7: LDR + resistor as input to Analog Pin A2" /></p>
+
+<p>Now upload the dual LDR + knob input FM synth into the Nano.
+<em>Arduino➞File➞Examples➞Mozzi➞03.Sensors➞Knob_LightLevel_x2_FMsynth</em></p>
+
+<p>The three inputs will produce a range of vibratos and timbre modulations that are great fun to mess around with (depending on how excitable you are).  In the sketch, you can calibrate your own mappings from the sensors to the synthesis wherever you see “calibrate” in the comments.</p>
+
+<p>The same inputs can be used to play lots of different kinds of synthesis.  Here&#8217;s another sketch using the knob and two LDRs.  This one makes vocal-like sounds using wavepacket synthesis.
+<em>Arduino➞File➞Examples➞Mozzi➞03.Sensors➞LDR_x2_Knob_WavePacket</em></p>
+
+<h3>Piezo</h3>
+
+<p>A piezo creates a varying voltage when you squeeze it.  We&#8217;ll use it as a sensor by measuring the voltage the piezo produces across a 1 megaOhm resistor (brown-black-black-yellow).</p>
+
+<ul>
+<li>Unplug the Nano to depower it.</li>
+<li>It can be a good idea to wrap some sticky tape around the piezo where the wires are soldered on, to protect the fragile connections.</li>
+<li>Plug the red wire of the piezo into <strong>a30</strong> and the black wire into the <strong>-V</strong> rail.</li>
+<li>Add an orange wire from the piezo at <strong>b30</strong> to <strong>b7</strong> which connects to Nano analog input <strong>A3</strong>.</li>
+<li>Push one leg of the 1 megaOhm resistor into <strong>a7</strong> and the other leg into the <strong>-V</strong> rail.</li>
+</ul>
+
+
+<p><img src="images/fig8.png" title="Figure 8: Piezo + resistor as input to Analog Pin A3" alt="Figure 8: Piezo + resistor as input to Analog Pin A3" /></p>
+
+<p>First, let&#8217;s get a feel for the piezo&#8217;s response with a simple patch.
+<em>Arduino➞File➞Examples➞Mozzi➞03.Sensors➞Piezo_Frequency</em></p>
+
+<p>Press on the piezo, tap it and scrape it to hear what it does.  Notice it has a very fast response, especially a sharp attack and decay when it&#8217;s knocked.  There are a couple of commented-out modifications in the sketch which can be uncommented to play around with the dynamics of the piezo signal.</p>
+
+<p>Now we&#8217;ll use the sharp attack of the piezo to trigger a recorded audio sample to play, and for fun we can twist the knob to change the playback rate.
+<em>Arduino➞File➞Examples➞Mozzi➞03.Sensors➞Piezo_SampleTrigger</em></p>
+
+<p>The next sketch uses pressure on the piezo to scrub through a sample by changing the starting position.  It&#8217;s crude, but you get the idea&#8230;
+<em>Arduino➞File➞Examples➞Mozzi➞03.Sensors➞Piezo_SampleScrubber</em></p>
+
+<h3>Button</h3>
+
+<p>So far all of the sensor inputs have been analog.  Now we&#8217;ll add a digital input with a Button and a 10k Resistor (brown-black-black-red).</p>
+
+<ul>
+<li>Unplug the Nano to depower it.</li>
+<li>Push the button into the breadboard with one leg in <strong>j9</strong> which connects to digital input <strong>D4</strong>, and the other leg in the <strong>+V</strong> rail.</li>
+<li>Add the 10k resistor from <strong>h9</strong> to the <strong>-V</strong> rail.</li>
+</ul>
+
+
+<p><img src="images/fig9.png" title="Figure 9: Button + resistor as input to Digital Pin D4" alt="Figure 9: Button + resistor as input to Digital Pin D4" /></p>
+
+<p>When the button is pressed, the digital pin is connected to <strong>+V</strong>, and the voltage at the pin will be high.  When the button is not pressed, the pin is pulled to <strong>-V</strong> through the resistor and will be read as low by the Nano.</p>
+
+<p>Let&#8217;s use the button to change the pitch of a sample trigger by the piezo.<br/>
+<em>Arduino➞File➞Examples➞Mozzi➞03.Sensors➞Piezo_Switch_Pitch</em></p>
+
+<p>You can think of a better use for a switch than that!</p>
+
+<h2>5. Go to town</h2>
+
+<p>Now we&#8217;ve got some experience using sensors to generate sounds, it&#8217;s time to expand the frontiers of sensor-based microsynthesis!</p>
+
+<h2>6. Resources</h2>
+
+<p><a href="http://sensorium.github.io/Mozzi/doc/html/index.html">Mozzi Programming Reference</a><br/>
+<a href="http://sensorium.github.io/Mozzi/learn/output/">Output circuits for cleaner sounding audio</a><br/>
+<a href="http://sensorium.github.io/Mozzi/learn/hints/">Tips for effective Mozzi programming</a></p>
+
+  
+    <footer>
+      <p class="meta">
+        
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-10T21:27:00+10:00" pubdate data-updated="true">Sep 10<span>th</span>, 2013</time>
+        
+      </p>
+      
+        <div class="sharing">
+  
+  <a href="/Mozzi//twitter.com/share" class="twitter-share-button" data-url="http://sensorium.github.io/Mozzi//learn/introductory-tutorial/index.html" data-via="nothingperson" data-counturl="http://sensorium.github.io/Mozzi//learn/introductory-tutorial/index.html" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/Mozzi/blog/2013/08/25/simpler-adc-with-mozzianalogread/">Simpler Adc With mozziAnalogRead</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Mozzi/blog/2013/08/06/upcoming-mozzi-talk-at-icmc2013-in-perth/">Upcoming Mozzi Talk at ICMC2013 in Perth</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Mozzi/blog/2013/07/29/audio-and-control-adc-together/">Audio and Control ADC Together</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Mozzi/blog/2013/05/14/icad2013-workshop-announcement/">ICAD2013 Workshop Announcement</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Mozzi/blog/2013/05/13/music-hack-day-barcelona-workshop-announcement/">Music Hack Day Barcelona Workshop Announcement</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Tim Barrass -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <span class="credit">Published with <a href="http://pages.github.com">GitHub Pages</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -27,7 +27,7 @@
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
 // for scheduling freq changes
-EventDelay <CONTROL_RATE>  kFreqChangeDelay;
+EventDelay kFreqChangeDelay;
 
 Smooth <int> kSmoothFreq(0.975f);
 int target_freq, target_freq1, target_freq2;

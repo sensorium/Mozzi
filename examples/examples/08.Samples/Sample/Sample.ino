@@ -25,7 +25,7 @@
 Sample <BURROUGHS1_18649_NUM_CELLS, AUDIO_RATE> aSample(BURROUGHS1_18649_DATA);
 
 // for scheduling sample start
-EventDelay <CONTROL_RATE>  kTriggerDelay;
+EventDelay kTriggerDelay;
 
 void setup(){
   startMozzi(CONTROL_RATE);

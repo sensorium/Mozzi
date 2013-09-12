@@ -20,7 +20,7 @@
   
                      3.9k 
      pin 9  ---WWWW-----|-----output
-                       1M           |
+                    499k           |
      pin 10 ---WWWW---- |
                                        |
                              4.7n  ==
@@ -28,8 +28,11 @@
                                    ground
   
     Resistors are ±0.5%  Measure and choose the most precise 
-    from a batch of whatever you can get.
-  
+    from a batch of whatever you can get.  Use two 1M resistors
+    in parallel if you can't find 499k.
+    Alternatively using 39 ohm, 4.99k and 470nF components will 
+    work directly with headphones.
+    
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
@@ -64,7 +67,7 @@ Q16n16 carrier_freq, mod_freq;
 // FM ratio between oscillator frequencies, stays the same through note range
 Q8n8 mod_to_carrier_ratio = float_to_Q8n8(3.f);
 
-EventDelay <CONTROL_RATE>  kNoteChangeDelay;
+EventDelay kNoteChangeDelay;
 
 // for note changes
 Q7n8 target_note, note0, note1, note_upper_limit, note_lower_limit, note_change_step, smoothed_note;

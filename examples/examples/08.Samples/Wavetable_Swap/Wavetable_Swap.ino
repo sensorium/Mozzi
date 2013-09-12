@@ -22,7 +22,7 @@
 Oscil <512, AUDIO_RATE> aOscil; 
 
 // for scheduling table swaps
-EventDelay <CONTROL_RATE>  kSwapTablesDelay;
+EventDelay kSwapTablesDelay;
 
 boolean using_sin = true;
 

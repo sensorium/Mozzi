@@ -21,7 +21,7 @@ Oscil <8192, AUDIO_RATE> aOscil0(SIN8192_DATA);
 Oscil <8192, AUDIO_RATE> aOscil1(SIN8192_DATA);
 
 // for triggering the envelope
-EventDelay <CONTROL_RATE>  noteDelay;
+EventDelay noteDelay;
 
 ADSR <CONTROL_RATE> envelope0;
 ADSR <CONTROL_RATE> envelope1;

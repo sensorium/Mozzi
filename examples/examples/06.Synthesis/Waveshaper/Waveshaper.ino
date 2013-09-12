@@ -41,7 +41,7 @@ WaveShaper <char> aCheby6th(CHEBYSHEV_6TH_256_DATA); // 8th harmonic
 WaveShaper <int> aCompress(WAVESHAPE_COMPRESS_512_TO_488_DATA); // to compress instead of dividing by 2 after adding signals
 
 // for scheduling note changes
-EventDelay <CONTROL_RATE>  kChangeNoteDelay;
+EventDelay kChangeNoteDelay;
 
 // for random notes
 Q8n0 octave_start_note = 42;

@@ -31,7 +31,7 @@ Sample <BAMBOO_01_2048_NUM_CELLS, AUDIO_RATE>aBamboo1(BAMBOO_01_2048_DATA);
 Sample <BAMBOO_02_2048_NUM_CELLS, AUDIO_RATE>aBamboo2(BAMBOO_02_2048_DATA);
 
 // for scheduling audio gain changes
-EventDelay <CONTROL_RATE>  kTriggerDelay;
+EventDelay kTriggerDelay;
 
 void setup(){
   startMozzi(CONTROL_RATE);

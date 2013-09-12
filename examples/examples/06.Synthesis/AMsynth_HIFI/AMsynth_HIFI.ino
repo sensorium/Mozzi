@@ -22,7 +22,7 @@
   
                      3.9k 
      pin 9  ---WWWW-----|-----output
-                       1M           |
+                    499k           |
      pin 10 ---WWWW---- |
                                        |
                              4.7n  ==
@@ -30,8 +30,11 @@
                                    ground
   
     Resistors are ±0.5%  Measure and choose the most precise 
-    from a batch of whatever you can get.
-  
+    from a batch of whatever you can get.  Use two 1M resistors
+    in parallel if you can't find 499k.
+    Alternatively using 39 ohm, 4.99k and 470nF components will 
+    work directly with headphones.
+
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
@@ -54,7 +57,7 @@ Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aModulator(COS2048_DATA);
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aModDepth(COS2048_DATA);
 
 // for scheduling note changes in updateControl()
-EventDelay <CONTROL_RATE>  kNoteChangeDelay;
+EventDelay  kNoteChangeDelay;
 
 // synthesis parameters in fixed point formats
 Q8n8 ratio; // unsigned int with 8 integer bits and 8 fractional bits

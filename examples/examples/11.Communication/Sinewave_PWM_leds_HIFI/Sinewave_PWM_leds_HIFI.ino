@@ -28,7 +28,7 @@
   
                      3.9k 
      pin 9  ---WWWW-----|-----output
-                       1M           |
+                    499k           |
      pin 10 ---WWWW---- |
                                        |
                              4.7n  ==
@@ -36,8 +36,11 @@
                                    ground
   
     Resistors are ±0.5%  Measure and choose the most precise 
-    from a batch of whatever you can get.
-  
+    from a batch of whatever you can get.  Use two 1M resistors
+    in parallel if you can't find 499k.
+    Alternatively using 39 ohm, 4.99k and 470nF components will 
+    work directly with headphones.
+
     LEDs:
     Red led from pin 3 through a 1.5k resistor to ground
     Green led from pin 4 through a 1.5k resistor to ground

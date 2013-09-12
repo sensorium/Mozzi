@@ -139,6 +139,10 @@
 
 <h2>1. Parts list</h2>
 
+<p><img src="images/fig1.jpg" title="Figure 1: Parts used in the tutorial" ></p>
+
+<p>Figure 1: Parts used in the tutorial</p>
+
 <p>Nano<br/>
 Knob<br/>
 Switch<br/>
@@ -155,13 +159,16 @@ Audio socket<br/>
 Audio cable<br/>
 USB cable</p>
 
-<p><img src="images/fig1.jpg" alt="Figure 1: Parts used in the tutorial" /><br/>
-Figure 1: Parts used in the tutorial</p>
+<hr />
 
 <h2>2. Arduino</h2>
 
 <p>Push the Nano into the breadboard with top left leg of the USB end at <strong>c1</strong>.
 Plug a mini USB cable into the Nano and connect it to your computer.</p>
+
+<p>Figure 2: Nano on breadboard</p>
+
+<p><img class="left" src="images/fig2.jpg" width="390" height="390" title="Figure 2: Nano on breadboard" ></p>
 
 <ul>
 <li>Download the <a href="http://www.arduino.cc">Arduino application</a>, version 1.0.5 or better.</li>
@@ -178,8 +185,7 @@ Plug a mini USB cable into the Nano and connect it to your computer.</p>
 <p>The red light on your nano should be blinking once per second.
 Edit the code to make the light blink twice as fast by changing the delay from 1000ms to 500ms.  Yay, it works.</p>
 
-<p><img src="images/fig2.jpg" alt="Figure 2: Nano on breadboard" /><br/>
-Figure 2: Nano on breadboard</p>
+<hr />
 
 <h2>3. Mozzi</h2>
 
@@ -196,6 +202,8 @@ Go <em>Arduino➞Sketch➞Import Library➞Add Library</em> and select the Mozzi
 </ul>
 
 
+<hr />
+
 <h3>Wiring</h3>
 
 <p>When we wire things together on the breadboard let&#8217;s all use a common wire colour protocol.</p>
@@ -209,6 +217,10 @@ AUDIO ⇒  BLUE</p>
 
 <p>First let&#8217;s set up the power rails.</p>
 
+<p>Figure 3: 5V and GND pins connected to +V and -V rails</p>
+
+<p><img class="left" src="images/fig3.jpg" width="390" height="390" title="Figure 3: 5V and GND pins connected to +V and -V rails" ></p>
+
 <ul>
 <li>Unplug the USB cable (!)</li>
 <li>Push a black wire into <strong>b14</strong> which is <strong>GND</strong> on the Nano.</li>
@@ -220,10 +232,11 @@ AUDIO ⇒  BLUE</p>
 </ul>
 
 
-<p><img src="images/fig3.jpg" alt="Figure 3: 5V and GND pins connected to +V and -V rails" /><br/>
-Figure 3: 5V and GND pins connected to +V and -V rails</p>
-
 <p>Now let&#8217;s add a headphone socket so we can listen to sounds synthed on the Nano.</p>
+
+<p>Figure 4: Audio socket connected to PWM Audio Output Pin D9</p>
+
+<p><img class="left" src="images/fig4.jpg" width="390" height="390" title="Figure 4: Audio socket connected to PWM Audio Output Pin D9" ></p>
 
 <ul>
 <li>Push the headphone socket into the bottom right hand corner of the breadboard at <strong>g26-g30</strong>.</li>
@@ -235,8 +248,7 @@ Figure 3: 5V and GND pins connected to +V and -V rails</p>
 
 <p>Connect the audio cable to the audio output socket and the other end to the audio input on your computer.</p>
 
-<p><img src="images/fig4.jpg" alt="Figure 4: Audio socket connected to PWM Audio Output Pin D9" /><br/>
-Figure 4: Audio socket connected to PWM Audio Output Pin D9</p>
+<hr />
 
 <h3>Audio set up</h3>
 
@@ -251,6 +263,8 @@ Figure 4: Audio socket connected to PWM Audio Output Pin D9</p>
 
 
 <p>Some new laptops have a single audio socket that requires a 4-pole audio input cable. If you don&#8217;t have the cable then just listen to the audio through headphones which will be a bit noisy but good enough for learning….</p>
+
+<hr />
 
 <h3>Testing Mozzi</h3>
 
@@ -267,6 +281,8 @@ Figure 4: Audio socket connected to PWM Audio Output Pin D9</p>
 
 <p>Try some of the other examples in the filters, delays, synthesis and sample folders to get a feel for what can be done.</p>
 
+<hr />
+
 <h2>4. Sensors</h2>
 
 <p>Now let&#8217;s move on the next stage of sensing some input.</p>
@@ -277,6 +293,10 @@ Figure 4: Audio socket connected to PWM Audio Output Pin D9</p>
 
 <p>Let&#8217;s make a circuit using a knob as a sensor.</p>
 
+<p>Figure 5: Knob as input to Analog Pin A0</p>
+
+<p><img class="left" src="images/fig5.jpg" width="390" height="390" title="Figure 5: Knob as input to Analog Pin A0" ></p>
+
 <ul>
 <li>Unplug the USB cable to unpower the Nano.</li>
 <li>Push the 3 legs of the knob into the board at <strong>j18, j20 and j22</strong>, with the rotating part facing right.</li>
@@ -285,9 +305,6 @@ Figure 4: Audio socket connected to PWM Audio Output Pin D9</p>
 <li>Add a black wire from the remaining leg of the potentiometer at <strong>f22</strong> to the <strong>-V</strong> rail.</li>
 </ul>
 
-
-<p><img src="images/fig5.jpg" alt="Figure 5: Knob as input to Analog Pin A0" /><br/>
-Figure 5: Knob as input to Analog Pin A0</p>
 
 <p>Now the voltage on the analog input will go up and down as the knob is turned.  Let&#8217;s use the knob to change the sound volume in a Mozzi sketch.
 <em>Arduino➞File➞Examples➞Mozzi➞03.Sensors➞Volume_Knob</em></p>
@@ -300,11 +317,17 @@ Figure 5: Knob as input to Analog Pin A0</p>
 </ul>
 
 
+<hr />
+
 <h3>Light Dependent Resistors</h3>
 
 <p>A Light Dependent Resistor (LDR) changes resistance with the light level. Let&#8217;s use that to control an FM synthesis algorithm.</p>
 
 <p>First, we&#8217;ll make the sensor circuit using a LDR and a 5.1k Resistor (green-brown-black-brown) as a voltage ladder as input to the Analog Input on the Nano.</p>
+
+<p>Figure 6: LDR + resistor as input to Analog Pin A1</p>
+
+<p><img class="left" src="images/fig6.jpg" width="390" height="390" title="Figure 6: LDR + resistor as input to Analog Pin A1" ></p>
 
 <ul>
 <li>Unplug the USB cable to unpower the Nano.</li>
@@ -313,9 +336,6 @@ Figure 5: Knob as input to Analog Pin A0</p>
 <li>Push one leg of the 5.1k resistor into <strong>a5</strong> and the other leg into the <strong>-V</strong> rail.</li>
 </ul>
 
-
-<p><img src="images/fig6.jpg" alt="Figure 6: LDR + resistor as input to Analog Pin A1" /><br/>
-Figure 6: LDR + resistor as input to Analog Pin A1</p>
 
 <p>Now the voltage on the analog input will go up and down with the light level.  The resistor stops high current draw on the USB port when the resistance of the LDR goes low.</p>
 
@@ -330,6 +350,10 @@ The knob sets the fundamental (or <em>carrier</em>) frequency and the LDR change
 
 <p>Wow.  Try to stay calm.  We&#8217;re gonna make it twice as fun by adding another light level input to the FM synth.</p>
 
+<p>Figure 7: LDR + resistor as input to Analog Pin A2</p>
+
+<p><img class="left" src="images/fig7.jpg" width="390" height="390" title="Figure 7: LDR + resistor as input to Analog Pin A2" ></p>
+
 <ul>
 <li>Unplug the Nano to depower it.</li>
 <li>Push the leg of another LDR into <strong>a25</strong> and connect the other leg to   the <strong>+V</strong> rail as before.</li>
@@ -337,9 +361,6 @@ The knob sets the fundamental (or <em>carrier</em>) frequency and the LDR change
 <li>Push one leg of the 5.1k resistor into <strong>a6</strong> and the other leg into the <strong>-V</strong> rail.</li>
 </ul>
 
-
-<p><img src="images/fig7.jpg" alt="Figure 7: LDR + resistor as input to Analog Pin A2" /><br/>
-Figure 7: LDR + resistor as input to Analog Pin A2</p>
 
 <p>Now upload the dual LDR + knob input FM synth into the Nano.
 <em>Arduino➞File➞Examples➞Mozzi➞03.Sensors➞Knob_LightLevel_x2_FMsynth</em></p>
@@ -349,9 +370,15 @@ Figure 7: LDR + resistor as input to Analog Pin A2</p>
 <p>The same inputs can be used to play lots of different kinds of synthesis.  Here&#8217;s another sketch using the knob and two LDRs.  This one makes vocal-like sounds using wavepacket synthesis.
 <em>Arduino➞File➞Examples➞Mozzi➞03.Sensors➞LDR_x2_Knob_WavePacket</em></p>
 
+<hr />
+
 <h3>Piezo</h3>
 
 <p>A piezo creates a varying voltage when you squeeze it.  We&#8217;ll use it as a sensor by measuring the voltage the piezo produces across a 1 megaOhm resistor (brown-black-black-yellow).</p>
+
+<p>Figure 8: Piezo + resistor as input to Analog Pin A3</p>
+
+<p><img class="left" src="images/fig8.jpg" width="390" height="390" title="Figure 8: Piezo + resistor as input to Analog Pin A3" ></p>
 
 <ul>
 <li>Unplug the Nano to depower it.</li>
@@ -361,9 +388,6 @@ Figure 7: LDR + resistor as input to Analog Pin A2</p>
 <li>Push one leg of the 1 megaOhm resistor into <strong>a7</strong> and the other leg into the <strong>-V</strong> rail.</li>
 </ul>
 
-
-<p><img src="images/fig8.jpg" alt="Figure 8: Piezo + resistor as input to Analog Pin A3" /><br/>
-Figure 8: Piezo + resistor as input to Analog Pin A3</p>
 
 <p>First, let&#8217;s get a feel for the piezo&#8217;s response with a simple patch.
 <em>Arduino➞File➞Examples➞Mozzi➞03.Sensors➞Piezo_Frequency</em></p>
@@ -376,9 +400,15 @@ Figure 8: Piezo + resistor as input to Analog Pin A3</p>
 <p>The next sketch uses pressure on the piezo to scrub through a sample by changing the starting position.  It&#8217;s crude, but you get the idea&#8230;
 <em>Arduino➞File➞Examples➞Mozzi➞03.Sensors➞Piezo_SampleScrubber</em></p>
 
+<hr />
+
 <h3>Button</h3>
 
 <p>So far all of the sensor inputs have been analog.  Now we&#8217;ll add a digital input with a Button and a 10k Resistor (brown-black-black-red).</p>
+
+<p>Figure 9: Button + resistor as input to Digital Pin D4</p>
+
+<p><img class="left" src="images/fig9.jpg" width="390" height="390" title="Figure 9: Button + resistor as input to Digital Pin D4" ></p>
 
 <ul>
 <li>Unplug the Nano to depower it.</li>
@@ -387,9 +417,6 @@ Figure 8: Piezo + resistor as input to Analog Pin A3</p>
 </ul>
 
 
-<p><img src="images/fig9.jpg" alt="Figure 9: Button + resistor as input to Digital Pin D4" /><br/>
-Figure 9: Button + resistor as input to Digital Pin D4</p>
-
 <p>When the button is pressed, the digital pin is connected to <strong>+V</strong>, and the voltage at the pin will be high.  When the button is not pressed, the pin is pulled to <strong>-V</strong> through the resistor and will be read as low by the Nano.</p>
 
 <p>Let&#8217;s use the button to change the pitch of a sample trigger by the piezo.<br/>
@@ -397,9 +424,13 @@ Figure 9: Button + resistor as input to Digital Pin D4</p>
 
 <p>You can think of a better use for a switch than that!</p>
 
+<hr />
+
 <h2>5. Go to town</h2>
 
 <p>Now we&#8217;ve got some experience using sensors to generate sounds, it&#8217;s time to expand the frontiers of sensor-based microsynthesis!</p>
+
+<hr />
 
 <h2>6. Resources</h2>
 

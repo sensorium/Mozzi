@@ -6,5 +6,6 @@ var modules =
     [ "Midi", "group__midi.html", "group__midi" ],
     [ "Random", "group__random.html", "group__random" ],
     [ "Util", "group__util.html", "group__util" ],
-    [ "Soundtables", "group__soundtables.html", null ]
+    [ "Soundtables", "group__soundtables.html", null ],
+    [ "Sensortools", "group__sensortools.html", "group__sensortools" ]
 ];

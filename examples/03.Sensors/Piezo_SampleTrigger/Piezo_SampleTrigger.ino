@@ -8,18 +8,18 @@
    This example goes with a tutorial on the Mozzi site:
    http://sensorium.github.io/Mozzi/learn/Mozzi_Introductory_Tutorial.pdf
   
-    The circuit:
+   The circuit:
      Audio output on digital pin 9 (on a Uno or similar), or 
      check the README or http://sensorium.github.com/Mozzi/
 
      Potentiometer connected to analog pin 0.
-     Center pin of the potentiometer goes to the analog pin.
-     Side pins of the potentiometer go to +5V and ground
+       Center pin of the potentiometer goes to the analog pin.
+       Side pins of the potentiometer go to +5V and ground
  
-   Piezo on analog pin 3:
-   + connection of the piezo attached to the analog pin
-   - connection of the piezo attached to ground
-   1-megohm resistor between the analog pin and ground
+     Piezo on analog pin 3:
+       + connection of the piezo attached to the analog pin
+       - connection of the piezo attached to ground
+       1-megohm resistor between the analog pin and ground
  
    Mozzi help/discussion/announcements:
    https://groups.google.com/forum/#!forum/mozzi-users
@@ -52,7 +52,7 @@ void updateControl(){
   // read the knob
   int knob_value = mozziAnalogRead(KNOB_PIN); // value is 0-1023
   
-  // 0.1 to double recorded pitch
+  // map it to values between 0.1 and about double the recorded pitch
   float pitch = (recorded_pitch * (float) knob_value / 512.f) + 0.1f; 
   
   // set the sample playback frequency

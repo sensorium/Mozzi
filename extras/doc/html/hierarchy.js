@@ -8,13 +8,15 @@ var hierarchy =
     [ "AudioDelay< 128, int >", "class_audio_delay.html", null ],
     [ "AudioDelay< 256, int >", "class_audio_delay.html", null ],
     [ "AudioDelayFeedback< NUM_BUFFER_SAMPLES, INTERP_TYPE >", "class_audio_delay_feedback.html", null ],
-    [ "AutoRange< T >", "class_auto_range.html", null ],
-    [ "AutoRange< int >", "class_auto_range.html", [
-      [ "AutoMap", "class_auto_map.html", null ]
+    [ "AutoRange< T >", "group__sensortools.html#class_auto_range", null ],
+    [ "AutoRange< int >", "group__sensortools.html", [
+      [ "AutoMap", "group__sensortools.html#class_auto_map", null ]
     ] ],
     [ "DCfilter", "class_d_cfilter.html", null ],
     [ "Ead", "class_ead.html", null ],
-    [ "EventDelay< UPDATE_RATE >", "class_event_delay.html", null ],
+    [ "EventDelay", "class_event_delay.html", [
+      [ "Metronome", "class_metronome.html", null ]
+    ] ],
     [ "Int2Type< I >", "group__util.html#struct_int2_type", null ],
     [ "IntMap", "class_int_map.html", null ],
     [ "Line< T >", "class_line.html", null ],
@@ -29,9 +31,13 @@ var hierarchy =
     [ "Phasor< AUDIO_RATE >", "class_phasor.html", null ],
     [ "Portamento< CONTROL_UPDATE_RATE >", "class_portamento.html", null ],
     [ "ReverbTank", "class_reverb_tank.html", null ],
-    [ "RollingAverage< T, WINDOW_LENGTH >", "class_rolling_average.html", null ],
-    [ "RollingStat< T, WINDOW_LENGTH >", "class_rolling_stat.html", null ],
+    [ "RollingAverage< T, WINDOW_LENGTH >", "group__sensortools.html#class_rolling_average", null ],
+    [ "RollingAverage< unsigned int,(1<<(RESOLUTION_INCREASE_BITS *2))>", "group__sensortools.html", [
+      [ "OverSample< RESOLUTION_INCREASE_BITS >", "group__sensortools.html#class_over_sample", null ]
+    ] ],
+    [ "RollingStat< T, WINDOW_LENGTH >", "group__sensortools.html#class_rolling_stat", null ],
     [ "Sample< NUM_TABLE_CELLS, UPDATE_RATE, INTERP >", "class_sample.html", null ],
+    [ "SampleHuffman", "class_sample_huffman.html", null ],
     [ "Smooth< T >", "class_smooth.html", null ],
     [ "Stack< T, NUM_ITEMS >", "class_stack.html", null ],
     [ "StateVariable< FILTER_TYPE >", "class_state_variable.html", null ],

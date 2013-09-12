@@ -333,5 +333,7 @@ next	KEYWORD2
 OverSample	KEYWORD1
 next	KEYWORD2
 
-
-
+Metronome	KEYWORD1
+start	KEYWORD2
+ready	KEYWORD2
+stop	KEYWORD2

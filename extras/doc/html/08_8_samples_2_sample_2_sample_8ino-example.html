@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-08-25-18:38</span>
+   &#160;<span id="projectnumber">version 2013-09-12-14:49</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -122,19 +122,19 @@ $(document).ready(function(){initNavTree('08_8_samples_2_sample_2_sample_8ino-ex
 <div class="line"><a name="_a0"></a><a class="code" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample &lt;BURROUGHS1_18649_NUM_CELLS, AUDIO_RATE&gt;</a> aSample(BURROUGHS1_18649_DATA);</div>
 <div class="line"></div>
 <div class="line"><span class="comment">// for scheduling sample start</span></div>
-<div class="line"><a name="_a1"></a><a class="code" href="class_event_delay.html" title="A non-blocking replacement for Arduino&#39;s delay() function (which is disabled by Mozzi).">EventDelay &lt;CONTROL_RATE&gt;</a>  kTriggerDelay;</div>
+<div class="line"><a name="_a1"></a><a class="code" href="class_event_delay.html" title="A non-blocking replacement for Arduino&#39;s delay() function (which is disabled by Mozzi).">EventDelay</a> kTriggerDelay;</div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> setup(){</div>
 <div class="line">  <a name="a2"></a><a class="code" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837" title="Sets up the timers for audio and control rate processes, storing the timer registers so they can be r...">startMozzi</a>(<a name="a3"></a><a class="code" href="group__core.html#gae5d737db8bc97ecf08d2ea3121782d26" title="Control rate setting.">CONTROL_RATE</a>);</div>
 <div class="line">  aSample.setFreq((<span class="keywordtype">float</span>) BURROUGHS1_18649_SAMPLERATE / (<span class="keywordtype">float</span>) BURROUGHS1_18649_NUM_CELLS); <span class="comment">// play at the speed it was recorded</span></div>
-<div class="line">  kTriggerDelay.<a name="a4"></a><a class="code" href="class_event_delay.html#adb1ea3351d63b51c6c5270eff1de4cb8" title="Set the delay time.">set</a>(1500); <span class="comment">// 1500 msec countdown, within resolution of CONTROL_RATE</span></div>
+<div class="line">  kTriggerDelay.<a name="a4"></a><a class="code" href="class_event_delay.html#a937c86f3b05ccb6138ff7927713820da" title="Set the delay time.">set</a>(1500); <span class="comment">// 1500 msec countdown, within resolution of CONTROL_RATE</span></div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> <a name="a5"></a><a class="code" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl</a>(){</div>
-<div class="line">  <span class="keywordflow">if</span>(kTriggerDelay.<a name="a6"></a><a class="code" href="class_event_delay.html#a723a61a4670ffed732b1d8eb9e5bfd56" title="Call this in updateControl() or updateAudio() to check if the delay time is up.">ready</a>()){</div>
+<div class="line">  <span class="keywordflow">if</span>(kTriggerDelay.<a name="a6"></a><a class="code" href="class_event_delay.html#a2267889678fb75df2f6bdcbd0be0ea8a" title="Call this in updateControl() or updateAudio() to check if the delay time is up.">ready</a>()){</div>
 <div class="line">    aSample.start();</div>
-<div class="line">    kTriggerDelay.<a name="a7"></a><a class="code" href="class_event_delay.html#aa2a731ceb05f95cac1798089448c6aed" title="Start the delay.">start</a>();</div>
+<div class="line">    kTriggerDelay.<a name="a7"></a><a class="code" href="class_event_delay.html#a97a07c9371040d6388b8369352b08d83" title="Start the delay.">start</a>();</div>
 <div class="line">  }</div>
 <div class="line">}</div>
 <div class="line"></div>
@@ -155,7 +155,7 @@ $(document).ready(function(){initNavTree('08_8_samples_2_sample_2_sample_8ino-ex
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Aug 25 2013 18:38:45 for Mozzi by
+    <li class="footer">Generated on Thu Sep 12 2013 14:49:33 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

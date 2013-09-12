@@ -44,7 +44,8 @@
 	and the sum of all 256 readings would have to fit into an int.  (32767 / 256 = 128).
 	Changing OverSample to use unsigned ints could enable an average reading of 256, but isn't tested properly yet.
 	@note The higher the resolution, the more lag there will be.
-	It's like a RollingAverage filter, with the difference that OverSample doesn't divide by as much as for an average.
+	It's almost a RollingAverage filter, with the difference that 
+	OverSample doesn't divide by as much as you would for an average.
 */ 
 
 

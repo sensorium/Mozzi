@@ -1,29 +1,30 @@
-/*  Plays a fluctuating ambient wash in response to light and temperature sensors,
- using Mozzi sonification library.
- 
- 8 control rate oscillators are used to set the volume of 8 audio oscillators.
- Temperature readings from a thermistor are used to set the notes
- being played, and light readings from a light dependent resistor are
- mapped to the pulse rates of the volume control oscillators.
- 
- Circuit:
- Audio output on digital pin 9 (on a Uno or similar), or 
- check the README or http://sensorium.github.com/Mozzi/
- 
- Temperature dependent resistor (Thermistor) and 5.1k resistor on analog pin 1:
- Thermistor from analog pin to +5V
- 5.1k resistor from analog pin to ground
- 
- Light dependent resistor (LDR) and 5.1k resistor on analog pin 2:
- LDR from analog pin to +5V
- 5.1k resistor from analog pin to ground
- 
- Mozzi help/discussion/announcements:
- https://groups.google.com/forum/#!forum/mozzi-users
- 
- Tim Barrass 2013.
- This example code is in the public domain.
- */
+/*  
+  Plays a fluctuating ambient wash in response to light and temperature sensors,
+  using Mozzi sonification library.
+  
+  8 control rate oscillators are used to set the volume of 8 audio oscillators.
+  Temperature readings from a thermistor are used to set the notes
+  being played, and light readings from a light dependent resistor are
+  mapped to the pulse rates of the volume control oscillators.
+  
+  Circuit:
+    Audio output on digital pin 9 (on a Uno or similar), or 
+    check the README or http://sensorium.github.com/Mozzi/
+    
+    Temperature dependent resistor (Thermistor) and 5.1k resistor on analog pin 1:
+      Thermistor from analog pin to +5V
+      5.1k resistor from analog pin to ground
+    
+    Light dependent resistor (LDR) and 5.1k resistor on analog pin 2:
+      LDR from analog pin to +5V
+      5.1k resistor from analog pin to ground
+  
+  Mozzi help/discussion/announcements:
+  https://groups.google.com/forum/#!forum/mozzi-users
+  
+  Tim Barrass 2013.
+  This example code is in the public domain.
+*/
 
 #include <MozziGuts.h>
 #include <Oscil.h>

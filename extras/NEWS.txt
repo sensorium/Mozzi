@@ -4,20 +4,27 @@ NEWS
 get the latest version from http://sensorium.github.io/Mozzi/
 
 
-version 2013-08-25-18:38
+version 2013-09-12-14:49
+
 - EventDelay.h - no longer a template class, and doesn't need an UPDATE_RATE parameter.
 	Breaking old sketches again! Just get rid of the EventDelay template part in sketches.
 	Now sets an internal deadline and checks the time passed in audio ticks instead of counting down.
-- added Metronome.h, a repeating EventDelay.
 - added SampleHuffman.h, a sample player for samples encoded with Huffman compression, 
 	based on an Arduino sketch by Thomas Grill, 2011 http//grrrr.org.
 	- added extras/python/audio2huff.py,
 	a script to convert sounds to compressed tables for the player, by Thomas Grill (Modified by TB for Mozzi)
-	- added examples/08.Samples/SampleHuffman
-- added examples/03.Sensors/Light_Temperature_Multi_Oscil, mapping Thermistor and LDR readings to oscillator frequencies.
+	- added examples/08.Samples/SampleHuffman_Umpah.
+- added Metronome.h, a repeating EventDelay.
+	- added examples/02.Control/Metronome_SampleHuffman
+- added examples/03.Sensors/Light_Temperature_Multi_Oscil, mapping Thermistor and LDR readings to control and audio oscillator frequencies.
+- added examples/03.Sensors/Light_Temperature_Detuned, mapping Thermistor and LDR readings to 14 audio oscils
 - added OverSample.h, for increased resolution of analog inputs.
+	- added examples/05.Control_Filters/Thermistor_OverSample to demonstrate OverSample object.
 - ControlDelay.h - changed default storage type from char to int.
-
+- Changed docs regarding components for HIFI mode, 1M resistor is now 499k (or two 1M in parallel).
+	Also added contribution from Standuino group on forum about component values for direct headphone output,
+	39 ohm, 4.99k (or two 10k in parallel) and 470nF filter capacitor.
+	
 
 version_2013-08-25-18:38
 

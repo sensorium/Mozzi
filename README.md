@@ -4,7 +4,7 @@
 
 
 Tim Barrass  
-version 2013-08-25-18:38  
+version 2013-09-12-14:49  
 
 Currently your Arduino can only beep like a microwave oven. Mozzi brings
 your Arduino to life by allowing it to produce much more complex and interesting
@@ -20,13 +20,14 @@ passing or external synths.
 ***
 
 ## Features  
--    16384 Hz sample rate, with 8 bit or 14 bit audio output modes.
+-    16384 Hz sample rate, or experimental 32768 Hz rate.
+-    8 bit or 14 bit audio output modes.
 -    Variable control rate from 64 Hz upwards.
 -    Useful basic audio toolkit: oscillators, samples, lines, envelopes, scheduling, filtering.
 -    Fast ADC and other cpu-efficient code utilities to help keep audio running smoothly.
 -    Example sketches for easy modification.
 -    Readymade wavetables and a script to convert your own soundfiles for Mozzi.  
--	 Mozzi is designed to be easy to use, open source and extendable.
+-    Mozzi is designed to be easy to use, open source and extendable.
 
 ***
 

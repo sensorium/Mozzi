@@ -1,26 +1,26 @@
 /*
- Example using a piezo to change the frequency of a sinewave
- with Mozzi sonification library.
- 
- Demonstrates the use of Oscil to play a wavetable, and analog input for control.
- 
-  This example goes with a tutorial on the Mozzi site:
-  http://sensorium.github.io/Mozzi/learn/Mozzi_Introductory_Tutorial.pdf
-
- The circuit:
-   Audio output on digital pin 9 (on a Uno or similar), or 
- check the README or http://sensorium.github.com/Mozzi/
- 
- Piezo on analog pin 3:
- + connection of the piezo attached to the analog pin
- - connection of the piezo attached to ground
- 1-megohm resistor between the analog pin and ground
- 
- Mozzi help/discussion/announcements:
- https://groups.google.com/forum/#!forum/mozzi-users
- 
- Tim Barrass 2013.
- This example code is in the public domain.
+   Example using a piezo to change the frequency of a sinewave
+   with Mozzi sonification library.
+   
+   Demonstrates the use of Oscil to play a wavetable, and analog input for control.
+   
+   This example goes with a tutorial on the Mozzi site:
+   http://sensorium.github.io/Mozzi/learn/Mozzi_Introductory_Tutorial.pdf
+   
+   The circuit:
+     Audio output on digital pin 9 (on a Uno or similar), or 
+     check the README or http://sensorium.github.com/Mozzi/
+   
+     Piezo on analog pin 3:
+       + connection of the piezo attached to the analog pin
+       - connection of the piezo attached to ground
+       1-megohm resistor between the analog pin and ground
+   
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
+   
+   Tim Barrass 2013.
+   This example code is in the public domain.
 */
 
 #include <MozziGuts.h>

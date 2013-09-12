@@ -1,28 +1,28 @@
 /*
-   Example of simple "scrubbing" through a sampled sound with a knob
-     using Mozzi sonification library.
+  Example of simple "scrubbing" through a sampled sound with a knob
+  using Mozzi sonification library.
  
-     Demonstrates getting audio samples from a table using a Line to
-     slide between different indexes.
-     Also demonstrates mozziAnalogRead(pin), a non-blocking replacement for mozziAnalogRead
+  Demonstrates getting audio samples from a table using a Line to
+  slide between different indexes.
+  Also demonstrates mozziAnalogRead(pin), a non-blocking replacement for mozziAnalogRead
  
-   This example goes with a tutorial on the Mozzi site:
-   http://sensorium.github.io/Mozzi/learn/Mozzi_Introductory_Tutorial.pdf
+  This example goes with a tutorial on the Mozzi site:
+  http://sensorium.github.io/Mozzi/learn/Mozzi_Introductory_Tutorial.pdf
   
-   The circuit:
-     Audio output on digital pin 9 (on a Uno or similar), or 
-     check the README or http://sensorium.github.com/Mozzi/
+  The circuit:
+    Audio output on digital pin 9 (on a Uno or similar), or 
+    check the README or http://sensorium.github.com/Mozzi/
  
-   Piezo on analog pin A3:
-   + connection of the piezo attached to the analog pin
-   - connection of the piezo attached to ground
-   1-megOhm resistor attached from the analog pin to ground
+  Piezo on analog pin A3:
+    + connection of the piezo attached to the analog pin
+    - connection of the piezo attached to ground
+    1-megOhm resistor attached from the analog pin to ground
  
-   Mozzi help/discussion/announcements:
-   https://groups.google.com/forum/#!forum/mozzi-users
+  Mozzi help/discussion/announcements:
+  https://groups.google.com/forum/#!forum/mozzi-users
  
-   Tim Barrass 2013.
-   This example code is in the public domain.
+  Tim Barrass 2013.
+  This example code is in the public domain.
 */
 
 #include <MozziGuts.h>
@@ -61,7 +61,7 @@ void updateControl(){
   int sensor_value = mozziAnalogRead(INPUT_PIN); // value is 0-1023
 
   // map it to an 8 bit range for efficient calculations in updateAudio
-  int target = ((long) sensor_value * BLAHBLAH4B_NUM_CELLS) >> 10; //  / 1024
+  int target = ((long) sensor_value * BLAHBLAH4B_NUM_CELLS) >> 10; // >> 10 is / 1024
   int smooth_offset = kSmoothOffset.next(target);
 
   // set new target for interpolating line to scrub to

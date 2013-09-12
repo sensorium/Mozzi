@@ -73,7 +73,7 @@ public:
 	bool ready()
 	{
 		unsigned long now = audioTicks();
-		if (now<deadline) || stopped) return false;
+		if ((now<deadline) || stopped) return false;
 
 		deadline=now-(now-deadline)+ticks; // subtract overrun so the timing doesn't slip
 		return true;

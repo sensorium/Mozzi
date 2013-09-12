@@ -1,15 +1,15 @@
 /*
-Example playing samples encoded with Huffman compression.
-
-Demonstrates the SampleHuffman class.
-SampleHuffman, most of this explanation, and the audio2huff.py script are adapted from "audioout",
-an Arduino sketch by Thomas Grill, 2011 http//grrrr.org.
-
-Huffman decoding is used on sample differentials,
-saving 50-70% of space for 8 bit data, depending on the sample rate.
-
-This implementation just plays back one sample each time next() is called, with no
-speed or other adjustments.  It's slow, so it's likely you will only be able to play one sound at a time.
+ Example playing samples encoded with Huffman compression.
+ 
+ Demonstrates the SampleHuffman class.
+ SampleHuffman, most of this explanation, and the audio2huff.py script are adapted from "audioout",
+ an Arduino sketch by Thomas Grill, 2011 http//grrrr.org.
+ 
+ Huffman decoding is used on sample differentials,
+ saving 50-70% of space for 8 bit data, depending on the sample rate.
+ 
+ This implementation just plays back one sample each time next() is called, with no
+ speed or other adjustments.  It's slow, so it's likely you will only be able to play one sound at a time.
 
  Audio data, Huffman decoder table, sample rate and bit depth are defined
  in a sounddata.h header file.  This file can be generated for a sound file with the 
@@ -30,9 +30,9 @@ speed or other adjustments.  It's slow, so it's likely you will only be able to 
  One is "SOUNDDATA" which must fit into Flash RAM (available in total: 32k for ATMega328)
  The other is "HUFFMAN" which must also fit into Flash RAM
 
-Circuit:
- Audio output on digital pin 9 (on a Uno or similar), or 
- check the README or http://sensorium.github.com/Mozzi/
+ Circuit:
+  Audio output on digital pin 9 (on a Uno or similar), or 
+  check the README or http://sensorium.github.com/Mozzi/
 
  Mozzi help/discussion/announcements:
  https://groups.google.com/forum/#!forum/mozzi-users
@@ -44,13 +44,13 @@ Circuit:
 
 #include <MozziGuts.h>
 #include <SampleHuffman.h>
-#include "dinner_huff.h"
+#include "umpah_huff.h"
 
 
-SampleHuffman dinner(DINNER_SOUNDDATA,DINNER_HUFFMAN,DINNER_SOUNDDATA_BITS);
+SampleHuffman umpah(UMPAH_SOUNDDATA,UMPAH_HUFFMAN,UMPAH_SOUNDDATA_BITS);
 
 void setup() {
-  dinner.setLoopingOn();
+  umpah.setLoopingOn();
   startMozzi();
 }
 
@@ -60,7 +60,7 @@ void updateControl(){
 
 
 int updateAudio(){ 
-  return dinner.next();
+  return umpah.next();
 }
 
 

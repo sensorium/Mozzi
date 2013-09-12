@@ -1,5 +1,5 @@
 
- #ifndef SAMPLEHUFFMAN_H
+#ifndef SAMPLEHUFFMAN_H
 #define SAMPLEHUFFMAN_H
 
 /** A sample player for samples encoded with Huffman compression.

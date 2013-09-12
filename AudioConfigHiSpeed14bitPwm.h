@@ -6,8 +6,8 @@
 Timer 1: PWM 125kHz 
 Timer 2: called at AUDIO_RATE 16384 Hz, setting Timer1 pwm levels
 Output on Timer1, low byte on Pin 10, and high byte on Pin 9 (on 328 based Arduino boards)
-Add signals through a 3.9k resistor on high byte pin and 1M resistor on low byte pin.
-Use 1% or better resistors.
+Add signals through a 3.9k resistor on high byte pin and 499k resistor on low byte pin.
+Use 0.5% resistors or select the most accurate from a batch.
 As discussed on http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
 Also, there are higher quality output circuits are on the site.
 

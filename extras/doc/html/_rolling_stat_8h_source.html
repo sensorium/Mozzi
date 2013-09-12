@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-08-25-18:38</span>
+   &#160;<span id="projectnumber">version 2013-09-12-14:49</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -124,38 +124,38 @@ $(document).ready(function(){initNavTree('_rolling_stat_8h_source.html','');});
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// adapted from RunningStat, http://www.johndcook.com/standard_deviation.html</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T, <span class="keywordtype">int</span> WINDOW_LENGTH&gt;</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="code" href="class_rolling_stat.html">   36</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_rolling_stat.html" title="Calculates an approximation of the variance and standard deviation for a window of recent inputs...">RollingStat</a></div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="code" href="group__sensortools.html">   36</a></span>&#160;<span class="keyword">class </span><a class="code" href="group__sensortools.html#class_rolling_stat" title="Calculates an approximation of the variance and standard deviation for a window of recent inputs...">RollingStat</a></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    </div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="code" href="class_rolling_stat.html#a98c3f767391db80b8ad59ca53c1e6a94">   41</a></span>&#160;    <a class="code" href="class_rolling_stat.html#a98c3f767391db80b8ad59ca53c1e6a94" title="Constructor.">RollingStat</a>() : _previous_mean(0), _mean(0), _variance(0), WINDOW_LENGTH_AS_RSHIFT((unsigned char)<a class="code" href="group__util.html#gaf45df8dbf0bc86752d8fc697e2381cc3" title="Given a power of 2, work out the number to shift right by to do a divide by the number, or shift left to multiply.">trailingZeros</a>((unsigned long)WINDOW_LENGTH))</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="code" href="group__sensortools.html#a98c3f767391db80b8ad59ca53c1e6a94">   41</a></span>&#160;    <a class="code" href="group__sensortools.html#a98c3f767391db80b8ad59ca53c1e6a94" title="Constructor.">RollingStat</a>() : _previous_mean(0), _mean(0), _variance(0), WINDOW_LENGTH_AS_RSHIFT((unsigned char)<a class="code" href="group__util.html#gaf45df8dbf0bc86752d8fc697e2381cc3" title="Given a power of 2, work out the number to shift right by to do a divide by the number, or shift left to multiply.">trailingZeros</a>((unsigned long)WINDOW_LENGTH))</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    {}</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="code" href="class_rolling_stat.html#a85750e78ac282caec24408dce6e78201">   49</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_rolling_stat.html#a85750e78ac282caec24408dce6e78201" title="Update the mean and variance given a new input value.">update</a>(T x) {</div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="code" href="group__sensortools.html#a85750e78ac282caec24408dce6e78201">   49</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="group__sensortools.html#a85750e78ac282caec24408dce6e78201" title="Update the mean and variance given a new input value.">update</a>(T x) {</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        _mean = rollingMean.next(x);</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        _variance = (((long)x - _previous_mean)*((long)x - _mean))&gt;&gt;WINDOW_LENGTH_AS_RSHIFT; <span class="comment">// should really be div by (WINDOW_LENGTH-1), but exact values are not important for this application</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        _previous_mean = _mean;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    }</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    </div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="code" href="class_rolling_stat.html#afdc3f385aebe68492514f41129065aa5">   59</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_rolling_stat.html#afdc3f385aebe68492514f41129065aa5" title="Update the mean and variance given a new input value.">update</a>(<span class="keywordtype">char</span> x) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="code" href="group__sensortools.html#afdc3f385aebe68492514f41129065aa5">   59</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="group__sensortools.html#afdc3f385aebe68492514f41129065aa5" title="Update the mean and variance given a new input value.">update</a>(<span class="keywordtype">char</span> x) {</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        _mean = rollingMean.next(x);</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        _variance = (((int)x - _previous_mean)*((int)x - _mean))&gt;&gt;WINDOW_LENGTH_AS_RSHIFT; <span class="comment">// should really be div by (WINDOW_LENGTH-1), but exact values are not important for this application</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        _previous_mean = _mean;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    </div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="code" href="class_rolling_stat.html#aed85e98ab32f0a731dc12f9f1c4da398">   69</a></span>&#160;    T <a class="code" href="class_rolling_stat.html#aed85e98ab32f0a731dc12f9f1c4da398" title="Return the mean of the last WINDOW_LENGTH number of inputs.">getMean</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="code" href="group__sensortools.html#aed85e98ab32f0a731dc12f9f1c4da398">   69</a></span>&#160;    T <a class="code" href="group__sensortools.html#aed85e98ab32f0a731dc12f9f1c4da398" title="Return the mean of the last WINDOW_LENGTH number of inputs.">getMean</a>()<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordflow">return</span> _mean;</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="code" href="class_rolling_stat.html#a9d145736669d070194b8149eec084bc0">   79</a></span>&#160;    T <a class="code" href="class_rolling_stat.html#a9d145736669d070194b8149eec084bc0" title="Return the approximate variance of the last WINDOW_LENGTH number of inputs.">getVariance</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="code" href="group__sensortools.html#a9d145736669d070194b8149eec084bc0">   79</a></span>&#160;    T <a class="code" href="group__sensortools.html#a9d145736669d070194b8149eec084bc0" title="Return the approximate variance of the last WINDOW_LENGTH number of inputs.">getVariance</a>()<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">return</span> _variance;</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    </div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="code" href="class_rolling_stat.html#ade29f8eea338da4879fa692ea2b28bc3">   86</a></span>&#160;    T <a class="code" href="class_rolling_stat.html#ade29f8eea338da4879fa692ea2b28bc3" title="Return the approximate standard deviation of the last WINDOW_LENGTH number of inputs.">getStandardDeviation</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="code" href="group__sensortools.html#ade29f8eea338da4879fa692ea2b28bc3">   86</a></span>&#160;    T <a class="code" href="group__sensortools.html#ade29f8eea338da4879fa692ea2b28bc3" title="Return the approximate standard deviation of the last WINDOW_LENGTH number of inputs.">getStandardDeviation</a>()<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keywordflow">return</span> isqrt16(_variance);</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
@@ -163,37 +163,37 @@ $(document).ready(function(){initNavTree('_rolling_stat_8h_source.html','');});
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    T _previous_mean, _mean, _variance;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <a class="code" href="class_rolling_average.html" title="Calculates a running average over a specified number of the most recent readings.">RollingAverage &lt;T, WINDOW_LENGTH&gt;</a> rollingMean;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <a class="code" href="group__sensortools.html#class_rolling_average" title="Calculates a running average over a specified number of the most recent readings.">RollingAverage &lt;T, WINDOW_LENGTH&gt;</a> rollingMean;</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> WINDOW_LENGTH_AS_RSHIFT;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;};</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">// no need to show the specialisations</span></div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment"></span><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> WINDOW_LENGTH&gt;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">class </span><a class="code" href="class_rolling_stat.html" title="Calculates an approximation of the variance and standard deviation for a window of recent inputs...">RollingStat</a> &lt;float, WINDOW_LENGTH&gt;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">class </span><a class="code" href="group__sensortools.html#class_rolling_stat" title="Calculates an approximation of the variance and standard deviation for a window of recent inputs...">RollingStat</a> &lt;float, WINDOW_LENGTH&gt;</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;{</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <a class="code" href="class_rolling_stat.html#a98c3f767391db80b8ad59ca53c1e6a94" title="Constructor.">RollingStat</a>() : _previous_mean(0), _mean(0), _variance(0), WINDOW_LENGTH_AS_RSHIFT((unsigned char)<a class="code" href="group__util.html#gaf45df8dbf0bc86752d8fc697e2381cc3" title="Given a power of 2, work out the number to shift right by to do a divide by the number, or shift left to multiply.">trailingZeros</a>((unsigned long)WINDOW_LENGTH))</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <a class="code" href="group__sensortools.html#a98c3f767391db80b8ad59ca53c1e6a94" title="Constructor.">RollingStat</a>() : _previous_mean(0), _mean(0), _variance(0), WINDOW_LENGTH_AS_RSHIFT((unsigned char)<a class="code" href="group__util.html#gaf45df8dbf0bc86752d8fc697e2381cc3" title="Given a power of 2, work out the number to shift right by to do a divide by the number, or shift left to multiply.">trailingZeros</a>((unsigned long)WINDOW_LENGTH))</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    {}</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_rolling_stat.html#a85750e78ac282caec24408dce6e78201" title="Update the mean and variance given a new input value.">update</a>(<span class="keywordtype">float</span> x) {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="group__sensortools.html#a85750e78ac282caec24408dce6e78201" title="Update the mean and variance given a new input value.">update</a>(<span class="keywordtype">float</span> x) {</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        _mean = rollingMean.next(x);</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        _variance = ((x - _previous_mean)*(x - _mean))/(WINDOW_LENGTH-1);</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        _previous_mean = _mean;</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    }</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    </div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="class_rolling_stat.html#aed85e98ab32f0a731dc12f9f1c4da398" title="Return the mean of the last WINDOW_LENGTH number of inputs.">getMean</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="group__sensortools.html#aed85e98ab32f0a731dc12f9f1c4da398" title="Return the mean of the last WINDOW_LENGTH number of inputs.">getMean</a>()<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="keywordflow">return</span> _mean;</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    }</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="class_rolling_stat.html#a9d145736669d070194b8149eec084bc0" title="Return the approximate variance of the last WINDOW_LENGTH number of inputs.">getVariance</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="group__sensortools.html#a9d145736669d070194b8149eec084bc0" title="Return the approximate variance of the last WINDOW_LENGTH number of inputs.">getVariance</a>()<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="keywordflow">return</span> _variance;</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    }</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    </div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="class_rolling_stat.html#ade29f8eea338da4879fa692ea2b28bc3" title="Return the approximate standard deviation of the last WINDOW_LENGTH number of inputs.">getStandardDeviation</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="group__sensortools.html#ade29f8eea338da4879fa692ea2b28bc3" title="Return the approximate standard deviation of the last WINDOW_LENGTH number of inputs.">getStandardDeviation</a>()<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <span class="keywordflow">return</span> sqrt(_variance);</div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    }</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;</div>
@@ -201,7 +201,7 @@ $(document).ready(function(){initNavTree('_rolling_stat_8h_source.html','');});
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keywordtype">float</span> _previous_mean, _mean, _variance;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <a class="code" href="class_rolling_average.html" title="Calculates a running average over a specified number of the most recent readings.">RollingAverage &lt;float, WINDOW_LENGTH&gt;</a> rollingMean;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <a class="code" href="group__sensortools.html#class_rolling_average" title="Calculates a running average over a specified number of the most recent readings.">RollingAverage &lt;float, WINDOW_LENGTH&gt;</a> rollingMean;</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> WINDOW_LENGTH_AS_RSHIFT;</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;};</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;</div>
@@ -214,7 +214,7 @@ $(document).ready(function(){initNavTree('_rolling_stat_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>RollingStat.h</b></li>
-    <li class="footer">Generated on Sun Aug 25 2013 18:38:45 for Mozzi by
+    <li class="footer">Generated on Thu Sep 12 2013 14:49:33 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

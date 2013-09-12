@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-08-25-18:38</span>
+   &#160;<span id="projectnumber">version 2013-09-12-14:49</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -72,7 +72,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('class_auto_map.html','');});
+$(document).ready(function(){initNavTree('class_metronome.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -91,25 +91,27 @@ $(document).ready(function(){initNavTree('class_auto_map.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">AutoMap Member List</div>  </div>
+<div class="title">Metronome Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="class_auto_map.html">AutoMap</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="class_metronome.html">Metronome</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="class_auto_map.html#aec125f071bd83180ff0d0a71446725f3">AutoMap</a>(int min_expected, int max_expected, int map_to_min, int map_to_max)</td><td class="entry"><a class="el" href="class_auto_map.html">AutoMap</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_auto_range.html#a2f0638f4d8e2937080b67fc0614c8d6d">AutoRange</a>(intmin_expected, intmax_expected)</td><td class="entry"><a class="el" href="class_auto_range.html">AutoRange&lt; int &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_auto_range.html#a4d27e5fe43f9b376b537def88ac74119">getMax</a>()</td><td class="entry"><a class="el" href="class_auto_range.html">AutoRange&lt; int &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_auto_range.html#acd1dae6e6ffb288efc1618e2453ad5ef">getMin</a>()</td><td class="entry"><a class="el" href="class_auto_range.html">AutoRange&lt; int &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_auto_range.html#a75c842b27ad3917be6d29e3d35b485f3">getRange</a>()</td><td class="entry"><a class="el" href="class_auto_range.html">AutoRange&lt; int &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_auto_map.html#a34bc821f4f662e54383dd9d61db782df">next</a>(int n)</td><td class="entry"><a class="el" href="class_auto_map.html">AutoMap</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_auto_map.html#afd49885d3f05ca0a2f417199a9e7cf10">operator()</a>(int n)</td><td class="entry"><a class="el" href="class_auto_map.html">AutoMap</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>deadline</b> (defined in <a class="el" href="class_event_delay.html">EventDelay</a>)</td><td class="entry"><a class="el" href="class_event_delay.html">EventDelay</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_event_delay.html#acd7b63341732ac4c23bce04d81316017">EventDelay</a>(unsigned int delay_milliseconds=0)</td><td class="entry"><a class="el" href="class_event_delay.html">EventDelay</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_metronome.html#a37e8b0aa5a9aa8fa0f33212360cc0928">Metronome</a>(unsigned int delay_milliseconds=0)</td><td class="entry"><a class="el" href="class_metronome.html">Metronome</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_metronome.html#adc67bd96eac9f9b9260f8b070b7db75f">ready</a>()</td><td class="entry"><a class="el" href="class_metronome.html">Metronome</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_event_delay.html#a937c86f3b05ccb6138ff7927713820da">set</a>(unsigned int delay_milliseconds)</td><td class="entry"><a class="el" href="class_event_delay.html">EventDelay</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_metronome.html#ab85d2f5bdc5cb00d5056b0c2c6eed987">start</a>()</td><td class="entry"><a class="el" href="class_metronome.html">Metronome</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_metronome.html#ad5670c748042846b02cb33c613c50422">start</a>(unsigned int delay_milliseconds)</td><td class="entry"><a class="el" href="class_metronome.html">Metronome</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>stop</b>() (defined in <a class="el" href="class_metronome.html">Metronome</a>)</td><td class="entry"><a class="el" href="class_metronome.html">Metronome</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>ticks</b> (defined in <a class="el" href="class_event_delay.html">EventDelay</a>)</td><td class="entry"><a class="el" href="class_event_delay.html">EventDelay</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Aug 25 2013 18:38:45 for Mozzi by
+    <li class="footer">Generated on Thu Sep 12 2013 14:49:34 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

@@ -155,7 +155,8 @@ Audio socket<br/>
 Audio cable<br/>
 USB cable</p>
 
-<p><img src="images/fig1.png" title="Figure 1: Parts used in the tutorial" alt="Figure 1: Parts used in the tutorial" /></p>
+<p><img src="images/fig1.jpg" alt="Figure 1: Parts used in the tutorial" /><br/>
+Figure 1: Parts used in the tutorial</p>
 
 <h2>2. Arduino</h2>
 
@@ -177,7 +178,8 @@ Plug a mini USB cable into the Nano and connect it to your computer.</p>
 <p>The red light on your nano should be blinking once per second.
 Edit the code to make the light blink twice as fast by changing the delay from 1000ms to 500ms.  Yay, it works.</p>
 
-<p><img src="images/fig2.png" title="Figure 2: Nano on breadboard" alt="Figure 2: Nano on breadboard" /></p>
+<p><img src="images/fig2.jpg" alt="Figure 2: Nano on breadboard" /><br/>
+Figure 2: Nano on breadboard</p>
 
 <h2>3. Mozzi</h2>
 
@@ -218,7 +220,8 @@ AUDIO ⇒  BLUE</p>
 </ul>
 
 
-<p><img src="images/fig3.png" title="Figure 3:  5V and GND pins connected to +V and -V rails" alt="Figure 3:  5V and GND pins connected to +V and -V rails" /></p>
+<p><img src="images/fig3.jpg" alt="Figure 3: 5V and GND pins connected to +V and -V rails" /><br/>
+Figure 3: 5V and GND pins connected to +V and -V rails</p>
 
 <p>Now let&#8217;s add a headphone socket so we can listen to sounds synthed on the Nano.</p>
 
@@ -232,7 +235,8 @@ AUDIO ⇒  BLUE</p>
 
 <p>Connect the audio cable to the audio output socket and the other end to the audio input on your computer.</p>
 
-<p><img src="images/fig4.png" title="Figure 4: Audio socket connected to PWM Audio Output Pin D9" alt="Figure 4: Audio socket connected to PWM Audio Output Pin D9" /></p>
+<p><img src="images/fig4.jpg" alt="Figure 4: Audio socket connected to PWM Audio Output Pin D9" /><br/>
+Figure 4: Audio socket connected to PWM Audio Output Pin D9</p>
 
 <h3>Audio set up</h3>
 
@@ -282,7 +286,8 @@ AUDIO ⇒  BLUE</p>
 </ul>
 
 
-<p><img src="images/fig5.png" title="Figure 5: Knob as input to Analog Pin A0" alt="Figure 5: Knob as input to Analog Pin A0" /></p>
+<p><img src="images/fig5.jpg" alt="Figure 5: Knob as input to Analog Pin A0" /><br/>
+Figure 5: Knob as input to Analog Pin A0</p>
 
 <p>Now the voltage on the analog input will go up and down as the knob is turned.  Let&#8217;s use the knob to change the sound volume in a Mozzi sketch.
 <em>Arduino➞File➞Examples➞Mozzi➞03.Sensors➞Volume_Knob</em></p>
@@ -309,7 +314,8 @@ AUDIO ⇒  BLUE</p>
 </ul>
 
 
-<p><img src="images/fig6.png" title="Figure 6: LDR + resistor as input to Analog Pin A1" alt="Figure 6: LDR + resistor as input to Analog Pin A1" /></p>
+<p><img src="images/fig6.jpg" alt="Figure 6: LDR + resistor as input to Analog Pin A1" /><br/>
+Figure 6: LDR + resistor as input to Analog Pin A1</p>
 
 <p>Now the voltage on the analog input will go up and down with the light level.  The resistor stops high current draw on the USB port when the resistance of the LDR goes low.</p>
 
@@ -332,7 +338,8 @@ The knob sets the fundamental (or <em>carrier</em>) frequency and the LDR change
 </ul>
 
 
-<p><img src="images/fig7.png" title="Figure 7: LDR + resistor as input to Analog Pin A2" alt="Figure 7: LDR + resistor as input to Analog Pin A2" /></p>
+<p><img src="images/fig7.jpg" alt="Figure 7: LDR + resistor as input to Analog Pin A2" /><br/>
+Figure 7: LDR + resistor as input to Analog Pin A2</p>
 
 <p>Now upload the dual LDR + knob input FM synth into the Nano.
 <em>Arduino➞File➞Examples➞Mozzi➞03.Sensors➞Knob_LightLevel_x2_FMsynth</em></p>
@@ -355,7 +362,8 @@ The knob sets the fundamental (or <em>carrier</em>) frequency and the LDR change
 </ul>
 
 
-<p><img src="images/fig8.png" title="Figure 8: Piezo + resistor as input to Analog Pin A3" alt="Figure 8: Piezo + resistor as input to Analog Pin A3" /></p>
+<p><img src="images/fig8.jpg" alt="Figure 8: Piezo + resistor as input to Analog Pin A3" /><br/>
+Figure 8: Piezo + resistor as input to Analog Pin A3</p>
 
 <p>First, let&#8217;s get a feel for the piezo&#8217;s response with a simple patch.
 <em>Arduino➞File➞Examples➞Mozzi➞03.Sensors➞Piezo_Frequency</em></p>
@@ -379,7 +387,8 @@ The knob sets the fundamental (or <em>carrier</em>) frequency and the LDR change
 </ul>
 
 
-<p><img src="images/fig9.png" title="Figure 9: Button + resistor as input to Digital Pin D4" alt="Figure 9: Button + resistor as input to Digital Pin D4" /></p>
+<p><img src="images/fig9.jpg" alt="Figure 9: Button + resistor as input to Digital Pin D4" /><br/>
+Figure 9: Button + resistor as input to Digital Pin D4</p>
 
 <p>When the button is pressed, the digital pin is connected to <strong>+V</strong>, and the voltage at the pin will be high.  When the button is not pressed, the pin is pulled to <strong>-V</strong> through the resistor and will be read as low by the Nano.</p>
 
@@ -397,6 +406,11 @@ The knob sets the fundamental (or <em>carrier</em>) frequency and the LDR change
 <p><a href="http://sensorium.github.io/Mozzi/doc/html/index.html">Mozzi Programming Reference</a><br/>
 <a href="http://sensorium.github.io/Mozzi/learn/output/">Output circuits for cleaner sounding audio</a><br/>
 <a href="http://sensorium.github.io/Mozzi/learn/hints/">Tips for effective Mozzi programming</a></p>
+
+<hr />
+
+<p>Tim Barrass and Stephen Barrass 2013. This work is licensed under the Creative Commons Attribution-NonCommercial- ShareAlike 3.0 Unported License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/.<br/>
+<img src="images/by-nc-sa.png" alt="Creative Commons by-nc-sa logo" /></p>
 
   
     <footer>

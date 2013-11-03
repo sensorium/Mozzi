@@ -1920,6 +1920,7 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>143</span>
 <span class='line-number'>144</span>
 <span class='line-number'>145</span>
+<span class='line-number'>146</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of a pair of detuned oscillators </span>
 </span><span class='line'><span class="cm">    sliding smoothly between frequencies,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
@@ -1976,15 +1977,15 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Line.h&gt; </span><span class="c1">// for smooth transitions</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator template</span>
-</span><span class='line'><span class="cp">#include &lt;tables/triangle_warm8192_int8.h&gt; </span><span class="c1">// triangle table for oscillator</span>
+</span><span class='line'><span class="cp">#include &lt;tables/saw8192_int8.h&gt; </span><span class="c1">// saw table for oscillator</span>
 </span><span class='line'><span class="cp">#include &lt;mozzi_rand.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;mozzi_midi.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;mozzi_fixmath.h&gt;</span>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="c1">// use: Oscil &lt;table_size, update_rate&gt; oscilName (wavetable), look in .h file of table #included above</span>
-</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">TRIANGLE_WARM8192_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aTriangle1</span><span class="p">(</span><span class="n">TRIANGLE_WARM8192_DATA</span><span class="p">);</span>
-</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">TRIANGLE_WARM8192_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aTriangle2</span><span class="p">(</span><span class="n">TRIANGLE_WARM8192_DATA</span><span class="p">);</span>
+</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">SAW8192_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aSaw1</span><span class="p">(</span><span class="n">SAW8192_DATA</span><span class="p">);</span>
+</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">SAW8192_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aSaw2</span><span class="p">(</span><span class="n">SAW8192_DATA</span><span class="p">);</span>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="c1">// use: Line &lt;type&gt; lineName</span>
@@ -2050,20 +2051,21 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'>
 </span><span class='line'>    <span class="c1">// find the phase increments (step sizes) through the audio table for those freqs</span>
 </span><span class='line'>    <span class="c1">// they are big ugly numbers which the oscillator understands but you don&#39;t really want to know</span>
-</span><span class='line'>    <span class="kt">long</span> <span class="n">gliss_start</span> <span class="o">=</span> <span class="n">aTriangle1</span><span class="p">.</span><span class="n">phaseIncFromFreq</span><span class="p">(</span><span class="n">start_freq</span><span class="p">);</span>
-</span><span class='line'>    <span class="kt">long</span> <span class="n">gliss_end</span> <span class="o">=</span> <span class="n">aTriangle2</span><span class="p">.</span><span class="n">phaseIncFromFreq</span><span class="p">(</span><span class="n">end_freq</span><span class="p">);</span>
+</span><span class='line'>    <span class="kt">long</span> <span class="n">gliss_start</span> <span class="o">=</span> <span class="n">aSaw1</span><span class="p">.</span><span class="n">phaseIncFromFreq</span><span class="p">(</span><span class="n">start_freq</span><span class="p">);</span>
+</span><span class='line'>    <span class="kt">long</span> <span class="n">gliss_end</span> <span class="o">=</span> <span class="n">aSaw2</span><span class="p">.</span><span class="n">phaseIncFromFreq</span><span class="p">(</span><span class="n">end_freq</span><span class="p">);</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="n">aGliss1</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">gliss_start</span><span class="p">,</span> <span class="n">gliss_end</span><span class="p">,</span> <span class="n">audio_steps_per_gliss</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">aGliss2</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">gliss_start</span><span class="o">+</span><span class="p">(</span><span class="n">variation</span><span class="p">()</span><span class="o">*</span><span class="n">gliss_offset</span><span class="p">),</span> <span class="n">gliss_end</span><span class="o">+</span><span class="p">(</span><span class="n">variation</span><span class="p">()</span><span class="o">*</span><span class="n">gliss_offset</span><span class="p">),</span> <span class="n">audio_steps_per_gliss</span><span class="p">);</span>
+</span><span class='line'>    <span class="c1">// aGliss2 is an octave up and detuned</span>
+</span><span class='line'>    <span class="n">aGliss2</span><span class="p">.</span><span class="n">set</span><span class="p">((</span><span class="n">gliss_start</span><span class="o">+</span><span class="p">(</span><span class="n">variation</span><span class="p">()</span><span class="o">*</span><span class="n">gliss_offset</span><span class="p">))</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">gliss_end</span><span class="o">+</span><span class="p">(</span><span class="n">variation</span><span class="p">()</span><span class="o">*</span><span class="n">gliss_offset</span><span class="p">))</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="n">audio_steps_per_gliss</span><span class="p">);</span>
 </span><span class='line'>    <span class="n">counter</span> <span class="o">=</span> <span class="n">control_steps_per_gliss</span><span class="p">;</span>
 </span><span class='line'>  <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="kt">int</span> <span class="n">updateAudio</span><span class="p">(){</span>
-</span><span class='line'>  <span class="n">aTriangle1</span><span class="p">.</span><span class="n">setPhaseInc</span><span class="p">(</span><span class="n">aGliss1</span><span class="p">.</span><span class="n">next</span><span class="p">());</span>
-</span><span class='line'>  <span class="n">aTriangle2</span><span class="p">.</span><span class="n">setPhaseInc</span><span class="p">(</span><span class="n">aGliss2</span><span class="p">.</span><span class="n">next</span><span class="p">());</span>
-</span><span class='line'>  <span class="k">return</span> <span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">aTriangle1</span><span class="p">.</span><span class="n">next</span><span class="p">()</span><span class="o">+</span><span class="n">aTriangle2</span><span class="p">.</span><span class="n">next</span><span class="p">())</span><span class="o">&lt;&lt;</span><span class="mi">5</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">aSaw1</span><span class="p">.</span><span class="n">setPhaseInc</span><span class="p">(</span><span class="n">aGliss1</span><span class="p">.</span><span class="n">next</span><span class="p">());</span>
+</span><span class='line'>  <span class="n">aSaw2</span><span class="p">.</span><span class="n">setPhaseInc</span><span class="p">(</span><span class="n">aGliss2</span><span class="p">.</span><span class="n">next</span><span class="p">());</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">aSaw1</span><span class="p">.</span><span class="n">next</span><span class="p">()</span><span class="o">+</span><span class="n">aSaw2</span><span class="p">.</span><span class="n">next</span><span class="p">())</span><span class="o">&lt;&lt;</span><span class="mi">5</span><span class="p">;</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 </div>

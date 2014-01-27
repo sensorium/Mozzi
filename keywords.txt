@@ -341,3 +341,6 @@ Metronome	KEYWORD1
 start	KEYWORD2
 ready	KEYWORD2
 stop	KEYWORD2
+
+IntMap KEYWORD1
+

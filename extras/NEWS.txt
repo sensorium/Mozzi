@@ -5,6 +5,15 @@ get the latest version from http://sensorium.github.io/Mozzi/
 
 
 version 2013-09-12-15:15
+- PWM rate in STANDARD mode is now 32768Hz, up from 16384, moving the old 16384Hz whine out of hearing range!  The AUDIO_RATE is still 16384.
+- TimerOne.h - changed initialize(usecs) to choice of initializeMicroseconds(usecs) or initializeCPUCycles(cycles), 
+	providing the finer resolution required for the PWM rate increase.
+- MozziGuts.cpp - changed internally to use the new initializeCPUcycles(cycles).
+- examples/02.Control/Line_Gliss_Double_32k_HIFI - changed "warmtriangle" wave to saw and changed one of the oscils up an octave.  Molto Aggressivo.  Almost.
+- examples/10.Audio_Filters/StateVariableFilter - changed some floats which were supposed to be ints
+
+
+version_2013-09-12-15:15
 
 - EventDelay.h - no longer a template class, and doesn't need an UPDATE_RATE parameter.
 	Breaking old sketches again! Just get rid of the EventDelay template part in sketches.

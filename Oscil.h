@@ -278,7 +278,7 @@ public:
 	@return the phase increment value which will produce a given frequency.
 	*/
 	inline
-	//const
+	const
 	unsigned long phaseIncFromFreq(int frequency)
 	{
 		return (((unsigned long)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) << OSCIL_F_BITS;

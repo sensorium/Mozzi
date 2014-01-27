@@ -11,3 +11,12 @@ long trailingZeros(const unsigned long v) {
 	float f = (float)(v & -v); // cast the least significant bit in v to a float
 	return (*(uint32_t *)&f >> 23) - 0x7f;
 }
+
+
+	/** Convert BPM to milliseconds, which can be used to set the delay between beats for Metronome.
+	@param bpm beats per minute
+	*/
+	unsigned int BPMtoMillis(float bpm){
+		float seconds_per_beat = 60.f/bpm;
+		return (unsigned int) (seconds_per_beat*1000);
+	}

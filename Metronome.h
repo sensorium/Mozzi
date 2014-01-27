@@ -66,6 +66,19 @@ public:
 	}
 	
 	
+	
+		/** Set the beats per minute.
+	@param  bpm beats per minute
+	*/
+	inline
+	void setBPM(float bpm)
+	{
+		set((unsigned int) (60000.f/bpm));
+	}
+	
+	
+
+	
 	/** Call this in updateControl() or updateAudio() to check if it is time for a beat.
 	@return true if the time for one is up.
 	*/

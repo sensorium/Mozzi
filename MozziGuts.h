@@ -144,11 +144,13 @@ x...........B5(25)...B6(26)...........Teensy2++  \n
 #warning "AUDIO_MODE is set to HIFI in mozzi_config.h.  If things sound wrong, check if HIFI is the correct AUDIO_MODE for your sketch."
 #endif
 
-
+/*
 #if (AUDIO_MODE == STANDARD) && (AUDIO_RATE == 32768)
 #error AUDIO_RATE 32768 does not work when AUDIO_MODE is STANDARD, check settings in Mozzi/mozzi_config.h
 #endif
+*/
 
+#define CLOCK_TICKS_PER_AUDIO_TICK (F_CPU / AUDIO_RATE)
 
 #if AUDIO_RATE == 16384
 #define AUDIO_RATE_AS_LSHIFT 14

@@ -219,7 +219,9 @@ void audioHook() // 2us excluding updateAudio()
 		backupPreMozziTimer1();
 
 		pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);	// set pin to output for audio
-		Timer1.initialize(1000000UL/AUDIO_RATE, PHASE_FREQ_CORRECT);		// set period, phase and frequency correct
+		//Timer1.initialize(1000000UL/AUDIO_RATE, PHASE_FREQ_CORRECT);		// set period, phase and frequency correct
+		Timer1.initializeCPUCycles(16000000UL/PWM_AND_ISR_RATE, FAST);		// set period, fast mode
+		// can it use phase freq correct when using lower audio rate, so the overflow happens half as often while the pwm rate goes twice as fast?
 		Timer1.pwm(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);		// pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
 		TIMSK1 = _BV(TOIE1); 	// Overflow Interrupt Enable (when not using Timer1.attachInterrupt())
 
@@ -230,15 +232,29 @@ void audioHook() // 2us excluding updateAudio()
 	/* Interrupt service routine moves sound data from the output buffer to the
 	Arduino output register, running at AUDIO_RATE. */
 	ISR(TIMER1_OVF_vect, ISR_BLOCK) {
-#if (USE_AUDIO_INPUT==true)
-
-		adc_count = 0;
-	    startSecondAudioADC();
-
+#if (AUDIO_RATE==16384) // only update every second ISR, if lower audio rate
+		static boolean alternate;
+		alternate = !alternate;
+		if(alternate) {
 #endif
-		output_buffer_tail++;
-		AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer[(unsigned char)output_buffer_tail & (unsigned char)(BUFFER_NUM_CELLS-1)]; // 1us, 2.5us with longs
+#if (USE_AUDIO_INPUT==true)
+			adc_count = 0;
+	    startSecondAudioADC();
+#endif
+			output_buffer_tail++;
+			OCR1A = output_buffer[(unsigned char)output_buffer_tail & (unsigned char)(BUFFER_NUM_CELLS-1)]; // 1us, 2.5us with longs
+#if (AUDIO_RATE==16384) // all this conditional compilation is so clutsy!
+		}
+#endif
 	}
+	
+	/*
+	OCR1B = 0 
+	TIFR1 – Timer/Counter1 Interrupt Flag Register
+	OCF1B: Timer/Counter1, Output Compare B Match Flag, atmel manual page 140
+	set the OCF1B bit of TIFR1 register
+	then make the interrupt TIMER1 COMPB, with phase and freq correct, will happen less often
+*/
 
 	// end STANDARD
 
@@ -252,7 +268,9 @@ void audioHook() // 2us excluding updateAudio()
 		pinMode(AUDIO_CHANNEL_1_HIGHBYTE_PIN, OUTPUT);	// set pin to output for audio, use 3.9k resistor
 		pinMode(AUDIO_CHANNEL_1_LOWBYTE_PIN, OUTPUT);	// set pin to output for audio, use 499k resistor
 
-		Timer1.initialize(1000000UL/125000, FAST);		// set period for 125000 Hz fast pwm carrier frequency = 14 bits
+		//Timer1.initialize(1000000UL/125000, FAST);		// set period for 125000 Hz fast pwm carrier frequency = 14 bits
+		
+		Timer1.initializeCPUCycles(16000000UL/PWM_RATE, FAST);		// set period, fast mode, gives 244 max range of pwm pins (almost 16bit)
 
 		Timer1.pwm(AUDIO_CHANNEL_1_HIGHBYTE_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
 		Timer1.pwm(AUDIO_CHANNEL_1_LOWBYTE_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
@@ -339,8 +357,11 @@ void audioHook() // 2us excluding updateAudio()
 
 		// 14 bit - this sounds better than 12 bit, it's cleaner, less bitty, don't notice aliasing
 		AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 7; // B11111110000000 becomes B1111111
-		AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 127; // B001111111
+		AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 127; // B01111111
 
+		// almost 16 bit - would require different output resistors
+		//AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 8; // B1111111100000000 becomes B11111111
+		//AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 255; // B11111111
 	}
 
 	//  end of HIFI

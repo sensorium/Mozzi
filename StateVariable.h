@@ -90,16 +90,6 @@ public:
 	centre frequency to pass or reduce for BANDPASS and NOTCH.
 	@note Timing 25-30us
 	*/
-	/*
-	void setCentreFreq(unsigned int centre_freq){
-		// simple frequency tuning with error towards nyquist
-		// F is the filter's center frequency
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			f = (Q1n15)(((Q16n16_2PI*centre_freq)>>AUDIO_RATE_AS_LSHIFT)>>1);
-		}
-	}
-*/
 	void setCentreFreq(unsigned int centre_freq){
 		// simple frequency tuning with error towards nyquist
 		// F is the filter's center frequency

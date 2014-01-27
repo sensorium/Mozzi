@@ -46,6 +46,6 @@ void setPin13Low()
 
 
 long trailingZeros(unsigned long v);
-
+unsigned int BPMtoMillis(float bpm);
 
 #endif /* UTILS_H_ */

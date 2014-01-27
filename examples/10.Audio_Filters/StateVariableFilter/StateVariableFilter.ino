@@ -20,39 +20,42 @@
 #include <StateVariable.h>
 #include <mozzi_rand.h> // for rand()
 
-#define CONTROL_RATE 64 // powers of 2 please
-
 Oscil <WHITENOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(WHITENOISE8192_DATA); // audio noise
 Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFilterMod(COS2048_DATA);
 
 StateVariable <NOTCH> svf; // can be LOWPASS, BANDPASS, HIGHPASS or NOTCH
 
+
 void setup(){
-  startMozzi(CONTROL_RATE);
+  startMozzi();
   // cast to float because the resulting freq will be small and fractional
   aNoise.setFreq((float)AUDIO_RATE/WHITENOISE8192_SAMPLERATE);
   kFilterMod.setFreq(1.3f);
-  svf.setResonance(25.f);
-  svf.setCentreFreq(1200.f);
+  svf.setResonance(25);
+  svf.setCentreFreq(1200);
 }
 
-void loop(){
-  audioHook();
-}
+
 
 void updateControl(){
   if (rand(CONTROL_RATE/2) == 0){ // about once every half second
     kFilterMod.setFreq((float)rand(255)/64);  // choose a new modulation frequency
   }
-  float cutoff_freq = 2200.f + kFilterMod.next()*12;
+  int cutoff_freq = 2200 + kFilterMod.next()*12;
   svf.setCentreFreq(cutoff_freq);
 }
 
+
 int updateAudio(){
   // watch output levels, they can distort if too high
+  // also, at very resonant settings, the input signal may need attenuating
   return svf.next(aNoise.next())>>3;
 }
 
+
+void loop(){
+  audioHook();
+}
 
 
 

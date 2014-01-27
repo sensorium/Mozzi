@@ -51,30 +51,34 @@ public:
 	//****************************
 	//  Configuration
 	//****************************
-	void initialize(unsigned long microseconds=1000000, unsigned char mode = PHASE_FREQ_CORRECT) __attribute__((always_inline))
+	
+	
+	// TB2014 different init methods for microseconds or cpu_cycles
+	void initializeMicroseconds(unsigned long microseconds=1000000, unsigned char mode = PHASE_FREQ_CORRECT) __attribute__((always_inline))
 	{
-		//TB2013
-		_mode = mode;
-		if (_mode == FAST){
-			TCCR1B_PWM_MODE_BITS = _BV(WGM13) | _BV(WGM12);
-			TCCR1A_PWM_MODE_BITS = _BV(WGM11);
-		}else if (_mode == PHASE_FREQ_CORRECT){
-			TCCR1B_PWM_MODE_BITS  = _BV(WGM13);
-			TCCR1A_PWM_MODE_BITS = 0;
-		}
-		TCCR1B = TCCR1B_PWM_MODE_BITS;        // set mode as fast or phase and frequency correct pwm, stop the timer
-		TCCR1A = TCCR1A_PWM_MODE_BITS;        // set control register A
-		// end TB2013
-		setPeriod(microseconds);
+		setMode(mode);
+		setPeriodCPUCycles(microseconds*16);
 	}
-	void setPeriod(unsigned long microseconds) __attribute__((always_inline))
+	
+	
+	void initializeCPUCycles(unsigned long cpu_cyles=16000000, unsigned char mode = PHASE_FREQ_CORRECT) __attribute__((always_inline))
+	{
+		setMode(mode);
+		setPeriodCPUCycles(cpu_cyles);
+	}
+	
+	
+	void setPeriodCPUCycles(unsigned long sixteen_millionths_of_a_second) __attribute__((always_inline))
 	{
 		unsigned long cycles;
+	
 		// TB2013
 		if (_mode == FAST){
-			cycles = (F_CPU / 1000000) * microseconds; // adjusted for fast pwm
+			// TB2014
+			cycles = sixteen_millionths_of_a_second;
 		}else if (_mode == PHASE_FREQ_CORRECT){
-			cycles = (F_CPU / 2000000) * microseconds;
+			// TB2014
+			cycles = sixteen_millionths_of_a_second > 1; // has to go twice as fast to climb up and down in the same period as FAST mode
 		}
 		// end TB2013
 		
@@ -160,8 +164,10 @@ public:
 		else if (pin == TIMER1_C_PIN)
 			OCR1C = dutyCycle;
 #endif
-
 	}
+	
+	
+	
 	void pwm(char pin, unsigned int duty) __attribute__((always_inline))
 	{
 		if (pin == TIMER1_A_PIN)
@@ -186,10 +192,13 @@ public:
 		setPwmDuty(pin, duty);
 		TCCR1B = TCCR1B_PWM_MODE_BITS | clockSelectBits;
 	}
+	
+	
+	
 	void pwm(char pin, unsigned int duty, unsigned long microseconds) __attribute__((always_inline))
 	{
 		if (microseconds > 0)
-			setPeriod(microseconds);
+			setPeriodCPUCycles(microseconds*16);
 		pwm(pin, duty);
 	}
 	void disablePwm(char pin) __attribute__((always_inline))
@@ -212,6 +221,8 @@ public:
 
 	}
 
+	
+	
 	//****************************
 	//  Interrupt Function
 	//****************************
@@ -220,21 +231,33 @@ public:
 		isrCallback = isr;
 		TIMSK1 = _BV(TOIE1);
 	}
+	
+	
+	
 	void attachInterrupt(void (*isr)(), unsigned long microseconds) __attribute__((always_inline))
 	{
 		if(microseconds > 0)
-			setPeriod(microseconds);
+			setPeriodCPUCycles(microseconds*16);
 		attachInterrupt(isr);
 	}
+	
+	
+	
 	void detachInterrupt() __attribute__((always_inline))
 	{
 		TIMSK1 = 0;
 	}
+	
+	
 	void (*isrCallback)();
 
+	
+	
 	unsigned int getPeriod(){
 		return pwmPeriod;
 	}
+	
+	
 	
 protected:
 	// properties
@@ -244,6 +267,23 @@ protected:
 	unsigned char _mode;
 	unsigned char TCCR1B_PWM_MODE_BITS;
 	unsigned char TCCR1A_PWM_MODE_BITS;
+	
+private:
+	//TB2013, moved to separate function 2014 to enable init with usecs or cpu cycles
+	void setMode(unsigned char mode = PHASE_FREQ_CORRECT) __attribute__((always_inline))
+	{
+		_mode = mode;
+		if (_mode == FAST){
+			TCCR1B_PWM_MODE_BITS = _BV(WGM13) | _BV(WGM12);
+			TCCR1A_PWM_MODE_BITS = _BV(WGM11);
+		}else if (_mode == PHASE_FREQ_CORRECT){
+			TCCR1B_PWM_MODE_BITS  = _BV(WGM13);
+			TCCR1A_PWM_MODE_BITS = 0;
+		}
+		TCCR1B = TCCR1B_PWM_MODE_BITS;        // set mode as fast or phase and frequency correct pwm, stop the timer
+		TCCR1A = TCCR1A_PWM_MODE_BITS;        // set control register A
+	}
+	
 };
 
 extern TimerOne Timer1;

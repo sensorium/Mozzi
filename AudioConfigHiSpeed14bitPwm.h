@@ -20,6 +20,18 @@ Boards, pins and resistor positions are documented in MozziGuts.h
 #define AUDIO_CHANNEL_1_HIGHBYTE_REGISTER OCR1AL
 #define AUDIO_CHANNEL_1_LOWBYTE_REGISTER OCR1BL
 
+/* Used internally for HIFI mode, for pwm freq of TimerOne */
+#define PWM_RATE 65536
+
+/** @ingroup core
+This is the dynamic range of Mozzi's audio output on each of the dual output pins in HIFI mode.
+It is equal to the F_CPU rate of 16000000 divided by a PWM_RATE of 65536.
+It's included in the documentation because it's a slightly unusual number, and useful to know 
+about when you're writing sketches.
+*/
+#define HIFI_PWM_RESOLUTION 244
+
+
 /* Used internally to put the 0-biased generated audio into the right range for PWM output.*/
 // 14 bit
 #define AUDIO_BIAS ((unsigned int) 0x2000)

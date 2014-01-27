@@ -69,6 +69,7 @@ private:
 		return (uint) (((ulong)msec*CONTROL_UPDATE_RATE)>>10); // approximate /1000 with shift
 	}
 
+	
 	inline
 	void setPhase(phase * next_phase) {
 		phase_control_step_counter = 0;
@@ -104,6 +105,7 @@ inline
 		p->audio_steps = (ulong) p->control_steps * AUDIO_TICKS_PER_CONTROL;
 	}
 	
+
 	
 public:
 
@@ -120,6 +122,7 @@ public:
 	}
 
 
+	
 /** Updates the internal controls of the ADSR.
 	Call this in updateControl().
 	*/
@@ -146,6 +149,8 @@ public:
 		}	
 	}
 
+	
+	
 	/** Advances one audio step along the ADSR and returns the level.
 	Call this in updateAudio().
 	@return the next value, as an unsigned int.
@@ -235,10 +240,6 @@ public:
 		setSustainLevel(decay);
 		setReleaseLevel(0);
 	}
-	
-
-
-	
 	
 	
 	

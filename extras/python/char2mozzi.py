@@ -26,7 +26,7 @@
 #	Samples can be any length, as long as they fit in your Arduino.
 #	
 #	Save by exporting with the format set to "Other uncompressed formats",
-#	options set to "RAW(headerless)" and "Encoding 8 bit signed PCM".
+#	"Header: RAW(headerless)" and "Encoding: Signed 8 bit PCM".
 #	
 #	Now use the file you just exported, as the "infile" to convert.
 #	

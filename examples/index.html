@@ -106,6 +106,7 @@
   <li><a href="/Mozzi/faq/">FAQ</a></li>
   <li><a href="https://groups.google.com/forum/#!forum/mozzi-users/">Forum</a></li>
   <li><a href="http://sensorium.github.com/Mozzi/doc/html/index.html">API</a></li>
+  <li><a href="https://mozzi.sharetribe.com/">Market</a></li>
   <!-- <li><a href="/Mozzi/blog/">Blog</a></li> -->
   <!-- <li><a href="/Mozzi/resources/">Resources</a></li>   -->
   <!-- <li><a href="/Mozzi/blog/archives/">Archives</a></li>
@@ -12557,6 +12558,10 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>52</span>
 <span class='line-number'>53</span>
 <span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of filtering a wave,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -12579,37 +12584,41 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cp">#include &lt;StateVariable.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;mozzi_rand.h&gt; </span><span class="c1">// for rand()</span>
 </span><span class='line'>
-</span><span class='line'><span class="cp">#define CONTROL_RATE 64 </span><span class="c1">// powers of 2 please</span>
-</span><span class='line'>
 </span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">WHITENOISE8192_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aNoise</span><span class="p">(</span><span class="n">WHITENOISE8192_DATA</span><span class="p">);</span> <span class="c1">// audio noise</span>
 </span><span class='line'><span class="n">Oscil</span><span class="o">&lt;</span><span class="n">COS2048_NUM_CELLS</span><span class="p">,</span> <span class="n">CONTROL_RATE</span><span class="o">&gt;</span> <span class="n">kFilterMod</span><span class="p">(</span><span class="n">COS2048_DATA</span><span class="p">);</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">StateVariable</span> <span class="o">&lt;</span><span class="n">NOTCH</span><span class="o">&gt;</span> <span class="n">svf</span><span class="p">;</span> <span class="c1">// can be LOWPASS, BANDPASS, HIGHPASS or NOTCH</span>
 </span><span class='line'>
+</span><span class='line'>
 </span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
-</span><span class='line'>  <span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">startMozzi</span><span class="p">();</span>
 </span><span class='line'>  <span class="c1">// cast to float because the resulting freq will be small and fractional</span>
 </span><span class='line'>  <span class="n">aNoise</span><span class="p">.</span><span class="n">setFreq</span><span class="p">((</span><span class="kt">float</span><span class="p">)</span><span class="n">AUDIO_RATE</span><span class="o">/</span><span class="n">WHITENOISE8192_SAMPLERATE</span><span class="p">);</span>
 </span><span class='line'>  <span class="n">kFilterMod</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="mf">1.3f</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">svf</span><span class="p">.</span><span class="n">setResonance</span><span class="p">(</span><span class="mf">25.f</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">svf</span><span class="p">.</span><span class="n">setCentreFreq</span><span class="p">(</span><span class="mf">1200.f</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">svf</span><span class="p">.</span><span class="n">setResonance</span><span class="p">(</span><span class="mi">25</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">svf</span><span class="p">.</span><span class="n">setCentreFreq</span><span class="p">(</span><span class="mi">1200</span><span class="p">);</span>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'><span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
-</span><span class='line'>  <span class="n">audioHook</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span>
 </span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span> <span class="c1">// about once every half second</span>
 </span><span class='line'>    <span class="n">kFilterMod</span><span class="p">.</span><span class="n">setFreq</span><span class="p">((</span><span class="kt">float</span><span class="p">)</span><span class="n">rand</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="o">/</span><span class="mi">64</span><span class="p">);</span>  <span class="c1">// choose a new modulation frequency</span>
 </span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="kt">float</span> <span class="n">cutoff_freq</span> <span class="o">=</span> <span class="mf">2200.f</span> <span class="o">+</span> <span class="n">kFilterMod</span><span class="p">.</span><span class="n">next</span><span class="p">()</span><span class="o">*</span><span class="mi">12</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">cutoff_freq</span> <span class="o">=</span> <span class="mi">2200</span> <span class="o">+</span> <span class="n">kFilterMod</span><span class="p">.</span><span class="n">next</span><span class="p">()</span><span class="o">*</span><span class="mi">12</span><span class="p">;</span>
 </span><span class='line'>  <span class="n">svf</span><span class="p">.</span><span class="n">setCentreFreq</span><span class="p">(</span><span class="n">cutoff_freq</span><span class="p">);</span>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
+</span><span class='line'>
 </span><span class='line'><span class="kt">int</span> <span class="n">updateAudio</span><span class="p">(){</span>
 </span><span class='line'>  <span class="c1">// watch output levels, they can distort if too high</span>
+</span><span class='line'>  <span class="c1">// also, at very resonant settings, the input signal may need attenuating</span>
 </span><span class='line'>  <span class="k">return</span> <span class="n">svf</span><span class="p">.</span><span class="n">next</span><span class="p">(</span><span class="n">aNoise</span><span class="p">.</span><span class="n">next</span><span class="p">())</span><span class="o">&gt;&gt;</span><span class="mi">3</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">audioHook</span><span class="p">();</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 </div>
@@ -13807,6 +13816,10 @@ Your browser does not support the audio element.</audio></p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/Mozzi/blog/2013/12/31/mozzi-marketplace-on-sharetribe/">Mozzi Marketplace on Sharetribe</a>
+      </li>
+    
+      <li class="post">
         <a href="/Mozzi/blog/2013/08/25/simpler-adc-with-mozzianalogread/">Simpler Adc With mozziAnalogRead</a>
       </li>
     
@@ -13822,10 +13835,6 @@ Your browser does not support the audio element.</audio></p>
         <a href="/Mozzi/blog/2013/05/14/icad2013-workshop-announcement/">ICAD2013 Workshop Announcement</a>
       </li>
     
-      <li class="post">
-        <a href="/Mozzi/blog/2013/05/13/music-hack-day-barcelona-workshop-announcement/">Music Hack Day Barcelona Workshop Announcement</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -13836,7 +13845,7 @@ Your browser does not support the audio element.</audio></p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Tim Barrass -
+  Copyright &copy; 2014 - Tim Barrass -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
   <span class="credit">Published with <a href="http://pages.github.com">GitHub Pages</a></span>
 </p>

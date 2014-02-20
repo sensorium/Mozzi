@@ -4,7 +4,7 @@
   <title><![CDATA[MOZZI]]></title>
   <link href="http://sensorium.github.io/Mozzi//atom.xml" rel="self"/>
   <link href="http://sensorium.github.io/Mozzi//"/>
-  <updated>2013-12-27T21:00:16+11:00</updated>
+  <updated>2014-02-20T11:41:23+11:00</updated>
   <id>http://sensorium.github.io/Mozzi//</id>
   <author>
     <name><![CDATA[Tim Barrass]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mozzi Marketplace on Sharetribe]]></title>
+    <link href="http://sensorium.github.io/Mozzi//blog/2013/12/31/mozzi-marketplace-on-sharetribe/"/>
+    <updated>2013-12-31T19:22:00+11:00</updated>
+    <id>http://sensorium.github.io/Mozzi//blog/2013/12/31/mozzi-marketplace-on-sharetribe</id>
+    <content type="html"><![CDATA[<p>We (well, me and my brother Steph) are experimenting with the idea of a Mozzi marketplace where people can sell or swap things made with Mozzi.  The first test is with <a href="https://mozzi.sharetribe.com">Sharetribe</a>.</p>
+
+<p>We hope a marketplace will help ferment the Mozzi culture, but also there&#8217;s a remote thought of generating some kind of income to support the development of Mozzi.</p>
+
+<p>First up is the <a href="https://mozzi.sharetribe.com/en/listings/38888-mozzi-noob-kits">Mozzi Noob Kit</a> with everything you need to do the Mozzi Introductory Tutorial.</p>
+
+<p>Anyone can post a listing on the Mozzi marketplace.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Simpler adc with mozziAnalogRead]]></title>

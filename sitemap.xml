@@ -34,11 +34,17 @@
         <loc>
             http://sensorium.github.io/Mozzi//blog/2013/08/25/simpler-adc-with-mozzianalogread/
         </loc>
-        <lastmod>2013-08-25T21:53:14+10:00</lastmod>
+        <lastmod>2013-12-31T19:23:45+11:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://sensorium.github.io/Mozzi//blog/2013/12/31/mozzi-marketplace-on-sharetribe/
+        </loc>
+        <lastmod>2014-02-20T11:41:23+11:00</lastmod>
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//blog/archives/</loc>
-        <lastmod>2013-08-25T21:53:14+10:00</lastmod>
+        <lastmod>2014-02-20T11:41:23+11:00</lastmod>
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//examples/</loc>
@@ -50,11 +56,11 @@
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//gallery/</loc>
-        <lastmod>2013-12-27T20:59:21+11:00</lastmod>
+        <lastmod>2014-02-20T10:16:57+11:00</lastmod>
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//</loc>
-        <lastmod>2013-08-25T21:53:14+10:00</lastmod>
+        <lastmod>2014-02-20T11:41:23+11:00</lastmod>
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//</loc>
@@ -70,15 +76,19 @@
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//learn/</loc>
-        <lastmod>2013-09-11T11:57:19+10:00</lastmod>
+        <lastmod>2014-02-20T11:36:11+11:00</lastmod>
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//learn/introductory-tutorial/</loc>
-        <lastmod>2013-09-12T18:35:53+10:00</lastmod>
+        <lastmod>2013-12-31T19:14:12+11:00</lastmod>
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//learn/output/</loc>
         <lastmod>2013-11-04T09:37:22+11:00</lastmod>
+    </url>
+    <url>
+        <loc>http://sensorium.github.io/Mozzi//learn/under-the-hood/</loc>
+        <lastmod>2014-02-20T11:39:59+11:00</lastmod>
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//resources/resources.html</loc>

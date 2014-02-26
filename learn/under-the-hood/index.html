@@ -152,28 +152,20 @@ up two interrupts, one for audio output at a sample rate of 16384 Hz and a
 control interrupt which can be set by the user at 64 Hz or more, in powers of
 two.</p>
 
-<p>In STANDARD mode, the internal timers used by Mozzi on the ATmega
+<p>In <code>STANDARD</code> mode, the internal timers used by Mozzi on the ATmega
 processors are the 16 bit Timer 1 for audio and 8 bit Timer 0 for control.</p>
 
-<p>HIFI mode additionally employs Timer 2 with Timer 1 for audio.</p>
+<p><code>HIFI</code> mode additionally employs Timer 2 with Timer 1 for audio.</p>
 
 <p>Using Timer 0 disables Arduino time functions <code>millis()</code>, <code>micros()</code>, <code>delay()</code>
 and <code>delayMicroseconds()</code>. This saves processor time which would be spent on the
-interrupts and the blocking action of the <code>delay()</code> functions. <code>updateAudio()</code>
-and placed in the output buffer by <code>audioHook()</code>, in Arduino&#8217;s <code>loop()</code>, running
-as fast as possible.</p>
+interrupts and the blocking action of the <code>delay()</code> functions. Replacements for
+these functions are listed on the Mozzi home page under Caveats and Workarounds.</p>
 
-<p>The output buffer has 256 cells
-which equates to a maximum latency of about 15 milliseconds, to give leeway for
-control operations without interrupting audio output. The buffer is emptied
-behind the scenes by the regular 16384 Hz audio interrupt. Mozzi employs pulse
-wave modulation (PWM) for audio output. This allows a single Arduino pin to be
-allocated for output, requiring minimal external components.</p>
-
-<p>Depending on the
-application, the output signal may be adequate as it is. Passive filter designs
-to reduce aliasing and PWM carrier frequency noise are available on the Mozzi
-wiki if required.</p>
+<p>The output buffer has 256 cells which equates to a maximum latency of about 15
+milliseconds, to give leeway for control operations without interrupting audio
+output. The buffer is emptied behind the scenes by the regular 16384 Hz audio
+interrupt.</p>
 
   
     <footer>

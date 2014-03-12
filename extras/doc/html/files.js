@@ -50,8 +50,6 @@ var files =
     [ "Smooth.h", "_smooth_8h_source.html", null ],
     [ "Stack.h", "_stack_8h_source.html", null ],
     [ "StateVariable.h", "_state_variable_8h_source.html", null ],
-    [ "StaticWarning.h", "_static_warning_8h_source.html", null ],
-    [ "StaticWarningTest.h", "_static_warning_test_8h_source.html", null ],
     [ "twi_nonblock.cpp", "twi__nonblock_8cpp_source.html", null ],
     [ "twi_nonblock.h", "twi__nonblock_8h_source.html", null ],
     [ "umpah_huff.h", "umpah__huff_8h_source.html", null ],

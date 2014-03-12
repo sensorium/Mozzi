@@ -1,11 +1,5 @@
 var annotated =
 [
-    [ "detail", null, [
-      [ "true_type", "structdetail_1_1true__type.html", null ],
-      [ "false_type", "structdetail_1_1false__type.html", null ],
-      [ "converter", "structdetail_1_1converter.html", null ],
-      [ "converter< 0 >", "structdetail_1_1converter_3_010_01_4.html", null ]
-    ] ],
     [ "ADSR", "class_a_d_s_r.html", "class_a_d_s_r" ],
     [ "AudioDelay", "class_audio_delay.html", "class_audio_delay" ],
     [ "AudioDelayFeedback", "class_audio_delay_feedback.html", "class_audio_delay_feedback" ],
@@ -15,7 +9,6 @@ var annotated =
     [ "DCfilter", "class_d_cfilter.html", "class_d_cfilter" ],
     [ "Ead", "class_ead.html", "class_ead" ],
     [ "EventDelay", "class_event_delay.html", "class_event_delay" ],
-    [ "Foo", "struct_foo.html", "struct_foo" ],
     [ "Int2Type", "struct_int2_type.html", "struct_int2_type" ],
     [ "IntMap", "class_int_map.html", "class_int_map" ],
     [ "Line", "class_line.html", "class_line" ],
@@ -37,6 +30,5 @@ var annotated =
     [ "WavePacketSample", "class_wave_packet_sample.html", "class_wave_packet_sample" ],
     [ "WaveShaper", "class_wave_shaper.html", null ],
     [ "WaveShaper< char >", "class_wave_shaper_3_01char_01_4.html", "class_wave_shaper_3_01char_01_4" ],
-    [ "WaveShaper< int >", "class_wave_shaper_3_01int_01_4.html", "class_wave_shaper_3_01int_01_4" ],
-    [ "wrap", "structwrap.html", "structwrap" ]
+    [ "WaveShaper< int >", "class_wave_shaper_3_01int_01_4.html", "class_wave_shaper_3_01int_01_4" ]
 ];

@@ -17,10 +17,6 @@ var hierarchy =
     [ "EventDelay", "class_event_delay.html", [
       [ "Metronome", "class_metronome.html", null ]
     ] ],
-    [ "detail::false_type", "structdetail_1_1false__type.html", [
-      [ "detail::converter< 0 >", "structdetail_1_1converter_3_010_01_4.html", null ]
-    ] ],
-    [ "Foo", "struct_foo.html", null ],
     [ "Int2Type< I >", "struct_int2_type.html", null ],
     [ "IntMap", "class_int_map.html", null ],
     [ "Line< T >", "class_line.html", null ],
@@ -45,14 +41,10 @@ var hierarchy =
     [ "Smooth< T >", "class_smooth.html", null ],
     [ "Stack< T, NUM_ITEMS >", "class_stack.html", null ],
     [ "StateVariable< FILTER_TYPE >", "class_state_variable.html", null ],
-    [ "detail::true_type", "structdetail_1_1true__type.html", [
-      [ "detail::converter< test >", "structdetail_1_1converter.html", null ]
-    ] ],
     [ "WavePacket< ALGORITHM >", "class_wave_packet.html", [
       [ "WavePacketSample< ALGORITHM >", "class_wave_packet_sample.html", null ]
     ] ],
     [ "WaveShaper< T >", "class_wave_shaper.html", null ],
     [ "WaveShaper< char >", "class_wave_shaper_3_01char_01_4.html", null ],
-    [ "WaveShaper< int >", "class_wave_shaper_3_01int_01_4.html", null ],
-    [ "wrap< T >", "structwrap.html", null ]
+    [ "WaveShaper< int >", "class_wave_shaper_3_01int_01_4.html", null ]
 ];

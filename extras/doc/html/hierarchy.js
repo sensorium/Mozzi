@@ -45,9 +45,6 @@ var hierarchy =
     [ "Smooth< T >", "class_smooth.html", null ],
     [ "Stack< T, NUM_ITEMS >", "class_stack.html", null ],
     [ "StateVariable< FILTER_TYPE >", "class_state_variable.html", null ],
-    [ "Test< N >", "class_test.html", null ],
-    [ "Test< HIFI >", "class_test_3_01_h_i_f_i_01_4.html", null ],
-    [ "Test< STANDARD >", "class_test_3_01_s_t_a_n_d_a_r_d_01_4.html", null ],
     [ "detail::true_type", "structdetail_1_1true__type.html", [
       [ "detail::converter< test >", "structdetail_1_1converter.html", null ]
     ] ],

@@ -11,7 +11,6 @@ var files =
     [ "blahblah4b_int8.h", "blahblah4b__int8_8h_source.html", null ],
     [ "char2mozzi.py", "char2mozzi_8py.html", "char2mozzi_8py" ],
     [ "cogl_sqrti.h", "cogl__sqrti_8h_source.html", null ],
-    [ "CompileTest.h", "_compile_test_8h_source.html", null ],
     [ "ControlDelay.h", "_control_delay_8h_source.html", null ],
     [ "DCfilter.h", "_d_cfilter_8h_source.html", null ],
     [ "Ead.h", "_ead_8h_source.html", null ],

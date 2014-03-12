@@ -4,7 +4,7 @@ NEWS
 get the latest version from http://sensorium.github.io/Mozzi/
 
 
-version 2014-03-12-17:54
+version 2014-03-12-17:58
 
 - MozziGuts.cpp/h,mozzi_config.h - Added STANDARD_PLUS audio mode.   This is now the default audio mode. 
 	Just like STANDARD, but with 32768Hz PWM rate, so the whine which some people hear in STANDARD mode is now out of hearing range.

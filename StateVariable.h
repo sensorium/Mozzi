@@ -24,10 +24,33 @@
 /**
 State Variable Filter (approximation of Chamberlin version)
 Informed by pseudocode at http://www.musicdsp.org/showone.php?id=23 and http://www.musicdsp.org/showone.php?id=142.
+Here's the original:
+---------------------
+cutoff = cutoff freq in Hz
+fs = sampling frequency //(e.g. 44100Hz)
+f = 2 sin (pi * cutoff / fs) //[approximately]
+q = resonance/bandwidth [0 < q <= 1]  most res: q=1, less: q=0
+low = lowpass output
+high = highpass output
+band = bandpass output
+notch = notch output
+
+scale = q
+
+low=high=band=0;
+
+//--beginloop
+low = low + f * band;
+high = scale * input - low - q*band;
+band = f * high + band;
+notch = high + low;
+//--endloop
+----------------------
 References : 
 Hal Chamberlin, Musical Applications of Microprocessors, 2nd Ed, Hayden Book Company 1985. pp 490-492.
 Jon Dattorro, Effect Design Part 1, J. Audio Eng. Soc., Vol 45, No. 9, 1997 September
 */
+
 
 #ifndef STATEVARIABLE_H_
 #define STATEVARIABLE_H_
@@ -38,7 +61,6 @@ Jon Dattorro, Effect Design Part 1, J. Audio Eng. Soc., Vol 45, No. 9, 1997 Sept
 #include "math.h"
 #include "mozzi_utils.h"
 #include "meta.h"
-
 
 enum filter_types {LOWPASS,BANDPASS,HIGHPASS,NOTCH};
 
@@ -89,14 +111,15 @@ public:
 	This will be the cut-off frequency for LOWPASS and HIGHPASS, and the
 	centre frequency to pass or reduce for BANDPASS and NOTCH.
 	@note Timing 25-30us
+	@note The frequency calculation is VERY "approximate".  This really needs to be fixed.
 	*/
 	void setCentreFreq(unsigned int centre_freq){
-		// simple frequency tuning with error towards nyquist
-		// F is the filter's center frequency
-		//ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		//{
+		// simple frequency tuning with error towards nyquist (reference?  where did this come from?)
 			//f = (Q1n15)(((Q16n16_2PI*centre_freq)>>AUDIO_RATE_AS_LSHIFT)>>1);
-			f = (Q1n15)((Q16n16_2PI*centre_freq)>>(AUDIO_RATE_AS_LSHIFT+1));
+			f = (Q15n16)((Q16n16_2PI*centre_freq)>>(AUDIO_RATE_AS_LSHIFT)); // this works best for now
+			//f = (Q15n16)(((Q16n16_2PI*centre_freq)<<(16-AUDIO_RATE_AS_LSHIFT))>>16); // a small shift left and a round 16 right is faster than big non-byte-aligned right in one go
+			//float ff = Q16n16_to_float(((Q16n16_PI*centre_freq))>>AUDIO_RATE_AS_LSHIFT);
+			//f = float_to_Q15n16(2.0f *sin(ff));
 		//}
 	}
 
@@ -121,7 +144,7 @@ public:
 private:
 	int low, band;
 	Q0n8 q,scale;
-	volatile Q1n15 f;
+	volatile Q15n16 f;
 
 
 	/** Calculate the next sample, given an input signal.
@@ -132,12 +155,12 @@ private:
 	inline
 	int next(int input, Int2Type<LOWPASS>)
 	{
-		//SET_PIN13_HIGH;
-		low += (((long)band * f)>>15);
+		//setPin13High();
+		low += ((f*band)>>16);
 		int high = (((long)input - low - (((long)band * q)>>8))*scale)>>8;
-		band += (((long)high * f)>>15);
+		band += ((f*high)>>16);
 		//int notch = high + low;
-		//SET_PIN13_LOW;
+		//setPin13Low();
 		return low;
 	}
 
@@ -150,12 +173,12 @@ private:
 	inline
 	int next(int input, Int2Type<BANDPASS>)
 	{
-		//SET_PIN13_HIGH;
-		low += (((long)band * f)>>15);
+		//setPin13High();
+		low += ((f*band)>>16);
 		int high = (((long)input - low - (((long)band * q)>>8))*scale)>>8;
-		band += (((long)high * f)>>15);
+		band += ((f*high)>>16);
 		//int notch = high + low;
-		//SET_PIN13_LOW;
+		//setPin13Low();
 		return band;
 	}
 
@@ -169,12 +192,12 @@ private:
 	inline
 	int next(int input, Int2Type<HIGHPASS>)
 	{
-		//SET_PIN13_HIGH;
-		low += (((long)band * f)>>15);
+		//setPin13High();
+		low += ((f*band)>>16);
 		int high = (((long)input - low - (((long)band * q)>>8))*scale)>>8;
-		band += (((long)high * f)>>15);
+		band += ((f*high)>>16);
 		//int notch = high + low;
-		//SET_PIN13_LOW;
+		//setPin13Low();
 		return high;
 	}
 
@@ -188,12 +211,12 @@ private:
 	inline
 	int next(int input, Int2Type<NOTCH>)
 	{
-		//SET_PIN13_HIGH;
-		low += (((long)band * f)>>15);
+		//setPin13High();
+		low += ((f*band)>>16);
 		int high = (((long)input - low - (((long)band * q)>>8))*scale)>>8;
-		band += (((long)high * f)>>15);
+		band += ((f*high)>>16);
 		int notch = high + low;
-		//SET_PIN13_LOW;
+		//setPin13Low();
 		return notch;
 	}
 

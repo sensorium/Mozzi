@@ -48,7 +48,10 @@ for example: \#define CONTROL_RATE 256
 
 
 /** @ingroup core
-Used to set AUDIO_MODE to STANDARD.
+Used to set AUDIO_MODE to STANDARD, STANDARD_PLUS, or HIFI.
+
+STANDARD
+---------------
 Use \#define AUDIO_MODE STANDARD in Mozzi/config.h to select Mozzi's original audio
 output configuration, which is nearly 9 bit sound (-244 to 243) at 16384 Hz and
 16384 Hz pwm rate. It uses Timer 1 to output samples at AUDIO_RATE 16384 Hz,
@@ -58,7 +61,7 @@ level.
 Advantages: Only uses one timer for audio, and one output pin
 Disadvantages: low dynamic range, some people can hear pwm carrier frequency, may need simple hardware filter.
 
-Below is a list of the Digital Pins used by Mozzi for STANDARD mode PWM audio out on different boards.
+Below is a list of the Digital Pins used by Mozzi for STANDARD_PLUS mode PWM audio out on different boards.
 Those which have been tested and reported to work have an x.
 Feedback about others is welcome.
 
@@ -74,26 +77,23 @@ x...11.......Arduino Mega  \n
 x..B5........Teensy2  \n
 x..B5(25)..Teensy2++  \n
 ....13	.......Sanguino  \n
-*/
-#define STANDARD 0
 
 
-
-/** @ingroup core
-Used to set AUDIO_MODE to HIFI.
+HIFI
+----
 Use \#define AUDIO_MODE HIFI in Mozzi/config.h to set the audio mode to HIFI for output 14 bit sound at 16384 Hz sample rate and 125kHz PWM rate.
 The high PWM rate of HIFI mode places the carrier frequency beyond audible range, 
-overcoming one of the disadvantages of STANDARD mode.
+overcoming one of the disadvantages of STANDARD_PLUS mode.
 
-Also, 14 bits of dynamic range in HIFI mode provides more definition than the nearly 9 bits in STANDARD mode.
-HIFI mode takes about the same amount of processing time as STANDARD mode, and sounds clearer and brighter.
+Also, 14 bits of dynamic range in HIFI mode provides more definition than the nearly 9 bits in STANDARD_PLUS mode.
+HIFI mode takes about the same amount of processing time as STANDARD_PLUS mode, and sounds clearer and brighter.
 However, it requires an extra timer to be used on the Arduino, which could increase the chances of 
 conflicts with other libraries or processes if they rely on Timer 2.
 
 Timer 1 is used to provide the PWM output at 125kHz.
 Timer 2 generates an interrupt at AUDIO_RATE 16384 Hz, which sets the Timer1 PWM levels.
 HIFI mode uses 2 output pins, and sums their outputs with resistors, so is slightly less convenient for 
-rapid prototyping where you could listen to STANDARD mode by connecting the single output pin 
+rapid prototyping where you could listen to STANDARD_PLUS mode by connecting the single output pin 
 directly to a speaker or audio input (though a resistor of about 100 ohms is recommended).
 
 The resistors needed for HIFI output are 3.9k and 499k, with 0.5% or better tolerance.
@@ -107,14 +107,14 @@ Also, a 4.7nF capacitor is recommended between the summing junction of the resis
 This dual PWM technique is discussed on http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
 Also, there are higher quality output circuits are on the site.
 
-Advantages: higher quality sound than STANDARD mode.  Doesn't need a notch filter on 
+Advantages: higher quality sound than STANDARD_PLUS mode.  Doesn't need a notch filter on 
 the audio signal because the carrier frequency is out of hearing range.
 
 Disadvantages: requires 2 pins, 2 resistors and a capacitor, so it's not so quick to set up compared 
-to a rough, direct single-pin output in STANDARD mode.
+to a rough, direct single-pin output in STANDARD_PLUS mode.
  
 Pins and where to put the resistors on various boards for HIFI mode.  
-Boards tested in HIFI mode have an x, though most of these have been tested in STANDARD mode
+Boards tested in HIFI mode have an x, though most of these have been tested in STANDARD_PLUS mode
 and there's no reason for them not to work in HIFI (unless the pin number is wrong or something).
 Any reports are welcome. \n
 
@@ -133,24 +133,32 @@ x...........B5(25)...B6(26)...........Teensy2++  \n
 .................13.........12...............Sanguino  \n
 
 */
-#define HIFI 1
+
+//enum audio_modes {STANDARD,STANDARD_PLUS,HIFI};
+#define STANDARD 0
+#define STANDARD_PLUS 1
+#define HIFI 2
+
 
 #include "mozzi_config.h" // User can change the config file to set audio mode
+
 
 // Print warning/reminder about the AUDIO_MODE setting to the arduino console while compiling
 #if AUDIO_MODE == STANDARD
 #warning "AUDIO_MODE is set to STANDARD in mozzi_config.h.  If things sound wrong, check if STANDARD is the correct AUDIO_MODE for your sketch."
+#elif AUDIO_MODE == STANDARD_PLUS
+#warning "AUDIO_MODE is set to STANDARD_PLUS in mozzi_config.h.  If things sound wrong, check if STANDARD_PLUS is the correct AUDIO_MODE for your sketch."
 #elif AUDIO_MODE == HIFI
 #warning "AUDIO_MODE is set to HIFI in mozzi_config.h.  If things sound wrong, check if HIFI is the correct AUDIO_MODE for your sketch."
 #endif
 
-/*
 #if (AUDIO_MODE == STANDARD) && (AUDIO_RATE == 32768)
 #error AUDIO_RATE 32768 does not work when AUDIO_MODE is STANDARD, check settings in Mozzi/mozzi_config.h
 #endif
-*/
+
 
 #define CLOCK_TICKS_PER_AUDIO_TICK (F_CPU / AUDIO_RATE)
+
 
 #if AUDIO_RATE == 16384
 #define AUDIO_RATE_AS_LSHIFT 14
@@ -161,9 +169,11 @@ x...........B5(25)...B6(26)...........Teensy2++  \n
 #endif
 
 
-#if AUDIO_MODE == STANDARD
+#if (AUDIO_MODE == STANDARD)
 #include "AudioConfigStandard9bitPwm.h"
-#elif AUDIO_MODE == HIFI
+#elif (AUDIO_MODE == STANDARD_PLUS)
+#include "AudioConfigStandardPlus.h"
+#elif (AUDIO_MODE == HIFI)
 #include "AudioConfigHiSpeed14bitPwm.h"
 #endif
 
@@ -180,12 +190,12 @@ Sets up the timers for audio and control rate processes, storing the timer
 registers so they can be restored when Mozzi stops. startMozzi() goes in your sketch's
 setup() routine.
 
-In STANDARD and HIFI modes, Mozzi uses Timer 0 for control interrupts 0, disabling Arduino
-delay(), millis(), micros() and delayMicroseconds. 
+In STANDARD_PLUS and HIFI modes, Mozzi uses Timer 0 for control interrupts, disabling Arduino
+delay(), millis(), micros() and delayMicroseconds(). 
 For delaying events, you can use Mozzi's EventDelay() unit instead (not to be confused with AudioDelay()). 
 
 In STANDARD mode, startMozzi() starts Timer 1 for PWM output and audio output interrupts,
-and in HIFI mode, Mozzi uses Timer 1 for PWM and Timer2 for audio interrupts. 
+and in STANDARD_PLUS and HIFI modes, Mozzi uses Timer 1 for PWM and Timer2 for audio interrupts. 
 
 The audio rate defaults to 16384 Hz, but you can experiment with 32768 Hz by changing AUDIO_RATE in mozzi_config.h.
 
@@ -197,7 +207,7 @@ and you might need to do some tests to find the best setting.
 
 @note startMozzi calls setupMozziADC(), which calls setupFastAnalogRead() and adcDisconnectAllDigitalIns(), 
 which disables digital inputs on all analog input pins.  All in mozzi_analog.h and easy to change if you need to (hack).
-They are all called automatically and hidden away because it keeps things simple for a standard set up, 
+They are all called automatically and hidden away because it keeps things simple for a STANDARD_PLUS set up, 
 but if it turns out to be confusing, they might need to become visible again.
 */
 void startMozzi(int control_rate_hz = CONTROL_RATE);

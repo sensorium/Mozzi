@@ -57,7 +57,7 @@ public:
 	void initializeMicroseconds(unsigned long microseconds=1000000, unsigned char mode = PHASE_FREQ_CORRECT) __attribute__((always_inline))
 	{
 		setMode(mode);
-		setPeriodCPUCycles(microseconds*16);
+		setPeriodCPUCycles(microseconds*(F_CPU/1000000));
 	}
 	
 	
@@ -78,8 +78,10 @@ public:
 			cycles = sixteen_millionths_of_a_second;
 		}else if (_mode == PHASE_FREQ_CORRECT){
 			// TB2014
-			cycles = sixteen_millionths_of_a_second > 1; // has to go twice as fast to climb up and down in the same period as FAST mode
+			cycles = sixteen_millionths_of_a_second >> 1; // has to go twice as fast to climb up and down in the same period as FAST mode: you get 0.5 the counter range
 		}
+		
+		// Serial.println(cycles);
 		// end TB2013
 		
 		if (cycles < TIMER1_RESOLUTION)

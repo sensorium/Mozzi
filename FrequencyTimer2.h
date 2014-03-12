@@ -23,6 +23,10 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+/**
+MODIFIED by Tim Barrass 2013,2014: see .cpp file
+*/
+
 #if ARDUINO >= 100
 #include "Arduino.h"
 #else
@@ -56,7 +60,8 @@ class FrequencyTimer2
     static void (*onOverflow)(); // not really public, but I can't work out the 'friend' for the SIGNAL
     
   public:
-    static void setPeriod(unsigned long);
+  	static void setPeriodMicroSeconds(unsigned long);
+  	static void setPeriodCPUCycles(unsigned long);
     static unsigned long getPeriod();
     static void setOnOverflow( void (*)() );
     static void enable();

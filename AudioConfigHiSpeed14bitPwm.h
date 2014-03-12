@@ -14,23 +14,17 @@ Also, there are higher quality output circuits are on the site.
 Boards, pins and resistor positions are documented in MozziGuts.h
 */
 
+/* PWM carrier frequency, for HIFI this should be well out of hearing range, about 5 times the nyquist frequency if possible. */
+#define PWM_RATE 125000
+// following doesn't play nice
+//#define PWM_RATE 65536 // count will be 244 (7+ bits) on each pin = 14+ bits
+
+
 // pins defined in TimerOne/config/known_16bit_timers.h
 #define AUDIO_CHANNEL_1_HIGHBYTE_PIN TIMER1_A_PIN // 3.9k resistor
 #define AUDIO_CHANNEL_1_LOWBYTE_PIN TIMER1_B_PIN // 1 M resistor
 #define AUDIO_CHANNEL_1_HIGHBYTE_REGISTER OCR1AL
 #define AUDIO_CHANNEL_1_LOWBYTE_REGISTER OCR1BL
-
-/* Used internally for HIFI mode, for pwm freq of TimerOne */
-#define PWM_RATE 65536
-
-/** @ingroup core
-This is the dynamic range of Mozzi's audio output on each of the dual output pins in HIFI mode.
-It is equal to the F_CPU rate of 16000000 divided by a PWM_RATE of 65536.
-It's included in the documentation because it's a slightly unusual number, and useful to know 
-about when you're writing sketches.
-*/
-#define HIFI_PWM_RESOLUTION 244
-
 
 /* Used internally to put the 0-biased generated audio into the right range for PWM output.*/
 // 14 bit

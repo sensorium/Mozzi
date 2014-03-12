@@ -12,7 +12,9 @@
   -added support for ATMEGA32U4 processors (Leonardo,Teensy2.0)
   	using Timer 4 instead of Timer 2
   - commented out ISR for use with Mozzi which defines its own
-
+ Modified by Tim Barrass 2014,
+  - changed setPeriod() to setPeriodMicroSeconds() and added setPeriodCPUCycles() for more accuracy
+ 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
   License as published by the Free Software Foundation; either
@@ -32,6 +34,7 @@
 #include <FrequencyTimer2.h>
 
 #include <avr/interrupt.h>
+#include "Arduino.h"
 
 void (*FrequencyTimer2::onOverflow)() = 0;
 uint8_t FrequencyTimer2::enabled = 0;
@@ -76,14 +79,20 @@ void FrequencyTimer2::setOnOverflow( void (*func)() )
 }
 
 
-void FrequencyTimer2::setPeriod(unsigned long period)
-{
+void FrequencyTimer2::setPeriodMicroSeconds(unsigned long period) {
+	period *= clockCyclesPerMicrosecond();
+	setPeriodCPUCycles(period);
+}
+
+
+void FrequencyTimer2::setPeriodCPUCycles(unsigned long period){
 	uint8_t pre, top;
 
 	if ( period == 0) period = 1;
-	period *= clockCyclesPerMicrosecond();
-	period /= 2;            // we work with half-cycles before the toggle
+	//period *= clockCyclesPerMicrosecond();
+	//period /= 2;            // we work with half-cycles before the toggle
 
+	Serial.println(period);
 #if defined(TCCR2A) || defined(TCCR2)
 	if ( period <= 256) {
 		pre = 1;
@@ -133,8 +142,8 @@ void FrequencyTimer2::setPeriod(unsigned long period)
 	ASSR &= ~_BV(AS2);    // use clock, not T2 pin
 #endif
 	OCR2A = top;
-	//Clear Timer on Compare Match (CTC) mode
-	TCCR2A = (_BV(WGM21) | ( FrequencyTimer2::enabled ? _BV(COM2A0) : 0));
+	//Clear Timer on Compare Match (CTC) mode ..... TB2014 p158, looks like Toggle OC2A on Compare Match
+	TCCR2A = (_BV(WGM21) | ( FrequencyTimer2::enabled ? _BV(COM2A0) : 0)); 
 	TCCR2B = pre;
 #elif defined(TCCR2)
 	TCCR2 = 0;

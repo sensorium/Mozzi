@@ -74,6 +74,7 @@ typedef unsigned long Q16n16;	/**< unsigned fractional number using 16 integer b
 #define Q8n24_FIX1 ((Q8n24) 16777216)	/**< 1 in Q8n24 format*/
 #define Q0n32_FIX1 ((Q0n32) 4294967295)	/**< 0.999999999767169 in Q0n32 format*/
 
+#define Q16n16_PI ((Q16n16) 205887)		/**< PI in Q16n16 format*/
 #define Q3n13_2PI ((Q3n13) 411775)		/**< 2*PI in Q3n13 format*/
 #define Q16n16_2PI ((Q16n16) 411775)		/**< 2*PI in Q16n16 format*/
 

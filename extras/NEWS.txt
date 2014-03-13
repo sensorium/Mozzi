@@ -69,7 +69,6 @@ version_2013-08-25-18:38
 - added/corrected references to examples in docs
 
 
-
 version_2013-07-29-18:09
 
 - IMPORTANT: renamed RecentAverage.h to RollingAverage.h.  Update sketches accordingly.

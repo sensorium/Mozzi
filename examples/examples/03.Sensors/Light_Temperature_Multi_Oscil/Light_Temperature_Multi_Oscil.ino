@@ -7,6 +7,12 @@
   being played, and light readings from a light dependent resistor are
   mapped to the pulse rates of the volume control oscillators.
   
+  This sketch needs to be compiled using STANDARD audio mode 
+  to avoid clicks from high processor load.
+  Edit Mozzi/mozzi_config.h, uncomment 
+  	#define AUDIO_MODE STANDARD
+  and make sure the other 2 AUDIO_MODE defines are commented out.
+  
   Circuit:
     Audio output on digital pin 9 (on a Uno or similar), or 
     check the README or http://sensorium.github.com/Mozzi/

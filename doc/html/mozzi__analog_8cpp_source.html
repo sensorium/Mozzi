@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-09-12-15:15</span>
+   &#160;<span id="projectnumber">version 2014-03-13-12:35</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -80,7 +80,7 @@ $(document).ready(function(){initNavTree('mozzi__analog_8cpp_source.html','');})
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -123,7 +123,7 @@ $(document).ready(function(){initNavTree('mozzi__analog_8cpp_source.html','');})
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;Stack.h&quot;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">//#include &quot;mozzi_utils.h&quot;</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="code" href="group__analog.html#ga8741756d32609ad6dec641943fa99af9">   30</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#ga8741756d32609ad6dec641943fa99af9" title="This is automatically called in startMozzi.">setupFastAnalogRead</a>(<span class="keywordtype">char</span> speed)</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">void</span> setupFastAnalogRead(<span class="keywordtype">char</span> speed)</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordflow">if</span> (speed == FAST_ADC){ <span class="comment">// divide by 16</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        ADCSRA |= (1 &lt;&lt; ADPS2);</div>
@@ -148,30 +148,30 @@ $(document).ready(function(){initNavTree('mozzi__analog_8cpp_source.html','');})
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordtype">void</span> setupMozziADC(<span class="keywordtype">char</span> speed) {</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    ADCSRA |= (1 &lt;&lt; ADIE); <span class="comment">// adc Enable Interrupt</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="group__analog.html#ga8741756d32609ad6dec641943fa99af9" title="This is automatically called in startMozzi.">setupFastAnalogRead</a>(speed);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="group__analog.html#ga5042e7c576dd0307be38eb70efdb69fe" title="Prepare all analog input channels by turning off their digital input buffers.">adcDisconnectAllDigitalIns</a>();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    setupFastAnalogRead(speed);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    adcDisconnectAllDigitalIns();</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="code" href="group__analog.html#gad4433797b75fedd473250e9aa414dcae">   61</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#gad4433797b75fedd473250e9aa414dcae" title="Prepare an analog input channel by turning off its digital input buffer.">disconnectDigitalIn</a>(byte channel_num){</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keywordtype">void</span> disconnectDigitalIn(byte channel_num){</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    DIDR0 |= 1&lt;&lt;channel_num;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="code" href="group__analog.html#gacd83735876cf223916ea4925ec4efd4a">   66</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#gacd83735876cf223916ea4925ec4efd4a" title="Reconnect the digital input buffer for an analog input channel which has been set for analog input wi...">reconnectDigitalIn</a>(byte channel_num){</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordtype">void</span> reconnectDigitalIn(byte channel_num){</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    DIDR0 &amp;= ~(1&lt;&lt;channel_num);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="code" href="group__analog.html#ga5042e7c576dd0307be38eb70efdb69fe">   71</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#ga5042e7c576dd0307be38eb70efdb69fe" title="Prepare all analog input channels by turning off their digital input buffers.">adcDisconnectAllDigitalIns</a>(){</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">void</span> adcDisconnectAllDigitalIns(){</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> i = 0; i&lt;NUM_ANALOG_INPUTS; i++){</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        DIDR0 |= 1&lt;&lt;i;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}                     </div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="code" href="group__analog.html#gabad497d1f8c8026e81849be0b65bf38f">   78</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__analog.html#gabad497d1f8c8026e81849be0b65bf38f" title="Reconnect the digital input buffers for analog input channels which have been set for analog input wi...">adcReconnectAllDigitalIns</a>(){</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keywordtype">void</span> adcReconnectAllDigitalIns(){</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> i = 0; i&lt;NUM_ANALOG_INPUTS; i++){</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        DIDR0 &amp;= ~(1&lt;&lt;i);</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
@@ -253,7 +253,7 @@ $(document).ready(function(){initNavTree('mozzi__analog_8cpp_source.html','');})
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;</div>
-<div class="line"><a name="l00160"></a><span class="lineno"><a class="code" href="group__analog.html#ga860bfe1e9172d1f5bb8eb08c324cd6c9">  160</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__analog.html#ga860bfe1e9172d1f5bb8eb08c324cd6c9" title="Reads the analog input of a chosen channel, without blocking other operations from running...">mozziAnalogRead</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> pin) {</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="keywordtype">int</span> mozziAnalogRead(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> pin) {</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="comment">//analogPinToChannel&lt;pin&gt;;</span></div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    pin = adcPinToChannelNum(pin); <span class="comment">// allow for channel or pin numbers</span></div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    adc_channels_to_read.<a class="code" href="class_stack.html#af67739d9b82966da46f7496f4c1fc801" title="Put an item on the stack.">push</a>(pin);</div>
@@ -314,7 +314,7 @@ $(document).ready(function(){initNavTree('mozzi__analog_8cpp_source.html','');})
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>mozzi_analog.cpp</b></li>
-    <li class="footer">Generated on Thu Sep 12 2013 15:15:35 for Mozzi by
+    <li class="footer">Generated on Thu Mar 13 2014 12:35:13 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

@@ -10,6 +10,12 @@
     format numbers, mtof() for converting midi note
     values to frequency, and xorshift96() for random numbers.
   
+    This sketch needs to be compiled using STANDARD audio mode 
+    to avoid clicks from high processor load.
+    Edit Mozzi/mozzi_config.h, uncomment 
+    	#define AUDIO_MODE STANDARD
+    and make sure the other 2 AUDIO_MODE defines are commented out.
+  
     Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
     check the README or http://sensorium.github.com/Mozzi/
   

@@ -75,7 +75,7 @@
 			<a class="header_link" href="http://tinyurl.com/mozzilib/Mozzi.zip">
 				download<br>
 				<i class="icon-download icon-4x"></i><br>
-				<span id="header_small_label">version 2013-09-12-15:15</span>
+				<span id="header_small_label">version 2014-03-13-12:35</span>
 			</a>
 		</p>
 	</section> 
@@ -124,7 +124,11 @@
     
   </header>
   
-  <h2>Output circuit for HIFI mode</h2>
+  <p>The default AUDIO_MODE since March 2014 is STANDARD_PLUS.  This mode has a pwm carrier rate of 32768 Hz, double the rate for STANDARD mode.
+The higher pwm rate is above hearing range, an advance on STANDARD mode&#8217;s 16384 Hz which can be audible for children and some adults.
+STANDARD_PLUS can still benefit from a low pass filter, as outlined below for STANDARD mode.</p>
+
+<h2>Output circuit for HIFI mode</h2>
 
 <p>Mozzi&#8217;s HIFI audio mode combines the output of 2 pins in a technique called dual PWM, which is explained in detail at <a href="http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/">Open Music Labs</a>.</p>
 
@@ -135,8 +139,8 @@
 <h4>Advantages of HIFI mode</h4>
 
 <ul>
-<li>Higher resolution sound than STANDARD mode.</li>
-<li>Doesn&#8217;t need a notch filter on the audio signal because the carrier frequency is out of hearing range.</li>
+<li>Higher resolution sound than STANDARD or STANDARD_PLUS modes.</li>
+<li>Doesn&#8217;t need a notch filter on the audio signal because the carrier frequency is out of hearing range (STANDARD_PLUS also doesn&#8217;t need it).</li>
 </ul>
 
 
@@ -177,7 +181,8 @@ For Mozzi, an RC filter with a roll-off frequency of just under 6kHz works well,
 
 <h3>Notch filter for STANDARD mode carrier frequency</h3>
 
-<p>This may still be useful if you need to use STANDARD mode for some reason, for instance if you need Timer 2 for another process.  Otherwise HIFI mode is simpler and better.<br/>
+<p>This may still be useful if you need to use STANDARD mode for some reason, for instance if you need Timer 2 for another process
+(making HIFI unavailable), or if your sketch is too intensive for STANDARD and you need 10% more juice.
 The 16384 Hz pwm carrier frequency can also be uncomfortably audible for some people, depending on your hearing.<br/>
 <a href="http://www.phys.unsw.edu.au/jw/hearing.html">Here&#8217;s a hearing test.</a></p>
 

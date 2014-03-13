@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-09-12-15:15</span>
+   &#160;<span id="projectnumber">version 2014-03-13-12:35</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -80,7 +80,7 @@ $(document).ready(function(){initNavTree('02_8_control_2_metronome__sample_huffm
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -134,18 +134,18 @@ $(document).ready(function(){initNavTree('02_8_control_2_metronome__sample_huffm
 <div class="line"><a name="_a1"></a><a class="code" href="class_metronome.html" title="A metronome class which is like an EventDelay which retriggers itself when the delay time is up...">Metronome</a> kMetro(800); <span class="comment">// enough delay so samples don&#39;t overlap, because the load would be too much</span></div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> setup() {</div>
-<div class="line">  <a name="a2"></a><a class="code" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837" title="Sets up the timers for audio and control rate processes, storing the timer registers so they can be r...">startMozzi</a>();</div>
+<div class="line">  startMozzi();</div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"></div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">void</span> <a name="a3"></a><a class="code" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl</a>(){</div>
+<div class="line"><span class="keywordtype">void</span> updateControl(){</div>
 <div class="line">  <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> counter;</div>
 <div class="line">  counter++;</div>
 <div class="line">  <span class="keywordflow">if</span>(counter==384)kMetro.stop();</div>
 <div class="line">  <span class="keywordflow">if</span>(counter==512){kMetro.start();counter = 0;}</div>
 <div class="line">  <span class="keywordflow">if</span>(kMetro.ready()){</div>
-<div class="line">    <span class="keywordflow">switch</span>(<a name="a4"></a><a class="code" href="group__random.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(NUM_SAMPLES)){</div>
+<div class="line">    <span class="keywordflow">switch</span>(rand(NUM_SAMPLES)){</div>
 <div class="line">      <span class="keywordflow">case</span> 0:</div>
 <div class="line">      thumb0.start();</div>
 <div class="line">      <span class="keywordflow">break</span>;</div>
@@ -170,7 +170,7 @@ $(document).ready(function(){initNavTree('02_8_control_2_metronome__sample_huffm
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> <a name="a5"></a><a class="code" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio</a>(){ </div>
+<div class="line"><span class="keywordtype">int</span> updateAudio(){ </div>
 <div class="line">  <span class="keywordtype">int</span> asig = (int)</div>
 <div class="line">  thumb0.next() +</div>
 <div class="line">  thumb1.next() +</div>
@@ -182,14 +182,14 @@ $(document).ready(function(){initNavTree('02_8_control_2_metronome__sample_huffm
 <div class="line"></div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> loop() {</div>
-<div class="line">  <a name="a6"></a><a class="code" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook</a>();</div>
+<div class="line">  audioHook();</div>
 <div class="line">}</div>
 </div><!-- fragment --> </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Sep 12 2013 15:15:34 for Mozzi by
+    <li class="footer">Generated on Thu Mar 13 2014 12:35:13 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

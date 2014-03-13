@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['welcome',['Welcome',['../index.html',1,'']]],
   ['wavepacket',['WavePacket',['../class_wave_packet.html',1,'WavePacket&lt; ALGORITHM &gt;'],['../class_wave_packet.html#a09afa3b26d61c97e24ccbae9cba2fd57',1,'WavePacket::WavePacket()']]],
   ['wavepacketsample',['WavePacketSample',['../class_wave_packet_sample.html',1,'']]],
   ['waveshaper',['WaveShaper',['../class_wave_shaper.html',1,'WaveShaper&lt; T &gt;'],['../class_wave_shaper_3_01char_01_4.html#a0516cf5c7a3b827b1822480b46af132a',1,'WaveShaper&lt; char &gt;::WaveShaper()'],['../class_wave_shaper_3_01int_01_4.html#ad6a18a771345b6da7af8855fe69640d4',1,'WaveShaper&lt; int &gt;::WaveShaper()']]],

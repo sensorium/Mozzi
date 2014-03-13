@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-09-12-15:15</span>
+   &#160;<span id="projectnumber">version 2014-03-13-12:35</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -80,7 +80,7 @@ $(document).ready(function(){initNavTree('class_sample.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -151,7 +151,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a4d5840157e98024537ae10cd27ff9f9e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a4d5840157e98024537ae10cd27ff9f9e">setFreq</a> (float frequency)</td></tr>
 <tr class="memdesc:a4d5840157e98024537ae10cd27ff9f9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the sample frequency with a float.  <a href="#a4d5840157e98024537ae10cd27ff9f9e">More...</a><br/></td></tr>
 <tr class="separator:a4d5840157e98024537ae10cd27ff9f9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a903c2d634b10ac531c3c9f6a35fcb046"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a903c2d634b10ac531c3c9f6a35fcb046">setFreq_Q24n8</a> (<a class="el" href="group__fixmath.html#gaa8e579259244eb60e7f70576c8e61cbd">Q24n8</a> frequency)</td></tr>
+<tr class="memitem:a903c2d634b10ac531c3c9f6a35fcb046"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a903c2d634b10ac531c3c9f6a35fcb046">setFreq_Q24n8</a> (Q24n8 frequency)</td></tr>
 <tr class="memdesc:a903c2d634b10ac531c3c9f6a35fcb046"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the frequency using Q24n8 fixed-point number format.  <a href="#a903c2d634b10ac531c3c9f6a35fcb046">More...</a><br/></td></tr>
 <tr class="separator:a903c2d634b10ac531c3c9f6a35fcb046"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac04f0709f2c6c86dac6e0c11353715d6"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#ac04f0709f2c6c86dac6e0c11353715d6">atIndex</a> (unsigned int index)</td></tr>
@@ -173,7 +173,7 @@ class Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</h3>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">NUM_TABLE_CELLS</td><td>This is defined in the table ".h" file the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> will be using. The sound table can be arbitrary length for <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a>. It's important that NUM_TABLE_CELLS is either a literal number (eg. "8192") or a defined macro, rather than a const or int, for the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> to run fast enough. </td></tr>
-    <tr><td class="paramname">UPDATE_RATE</td><td>This will be AUDIO_RATE if the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> is updated in <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio()</a>, or CONTROL_RATE if it's updated each time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> is called. It could also be a fraction of CONTROL_RATE if you are doing some kind of cyclic updating in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, for example, to spread out the processor load. </td></tr>
+    <tr><td class="paramname">UPDATE_RATE</td><td>This will be AUDIO_RATE if the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> is updated in updateAudio(), or CONTROL_RATE if it's updated each time updateControl() is called. It could also be a fraction of CONTROL_RATE if you are doing some kind of cyclic updating in updateControl(), for example, to spread out the processor load. </td></tr>
   </table>
   </dd>
 </dl>
@@ -509,7 +509,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned cha
         <tr>
           <td class="memname">void <a class="el" href="class_sample.html">Sample</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;::setFreq_Q24n8 </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__fixmath.html#gaa8e579259244eb60e7f70576c8e61cbd">Q24n8</a>&#160;</td>
+          <td class="paramtype">Q24n8&#160;</td>
           <td class="paramname"><em>frequency</em></td><td>)</td>
           <td></td>
         </tr>
@@ -685,7 +685,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned cha
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_sample.html">Sample</a></li>
-    <li class="footer">Generated on Thu Sep 12 2013 15:15:35 for Mozzi by
+    <li class="footer">Generated on Thu Mar 13 2014 12:35:13 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

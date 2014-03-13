@@ -5,7 +5,7 @@ var class_oscil =
     [ "atIndex", "class_oscil.html#a3b2ea7727b2ec911957b3862dbb6a8ec", null ],
     [ "getPhaseFractional", "class_oscil.html#aa774ef68b06f9652e6ac23d4e9332554", null ],
     [ "next", "class_oscil.html#a2a76960954a19c7b24dfb7524b740c8f", null ],
-    [ "phaseIncFromFreq", "class_oscil.html#a184110cb1901d2742a6016b46cbea027", null ],
+    [ "phaseIncFromFreq", "class_oscil.html#a1cb5d694d59b7ae0df2e63fa5ce5cded", null ],
     [ "phMod", "class_oscil.html#abe39f0740f318c0ecfb405cfac641a13", null ],
     [ "setFreq", "class_oscil.html#a23121f22ea447918088a79c7f9748b3d", null ],
     [ "setFreq", "class_oscil.html#aa342e74f8e73edda0b0f042770e3fba4", null ],

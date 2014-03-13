@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-09-12-15:15</span>
+   &#160;<span id="projectnumber">version 2014-03-13-12:35</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -80,7 +80,7 @@ $(document).ready(function(){initNavTree('mozzi__rand_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -104,25 +104,25 @@ $(document).ready(function(){initNavTree('mozzi__rand_8h_source.html','');});
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="group__random.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator.">xorshift96</a>();</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> xorshift96();</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__random.html#gaf7117eb5e1e0676c276be7094ce30ab7" title="Initialises Mozzi&#39;s (pseudo)random number generator xorshift96() with a chosen seed number...">xorshiftSeed</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__random.html#ga84c58d758e238208eb82fc8ae2330b66" title="Initialises Mozzi&#39;s (pseudo)random number generator xorshift96(), which is used in Mozzi&#39;s rand() fun...">randSeed</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__random.html#ga84c58d758e238208eb82fc8ae2330b66" title="Initialises Mozzi&#39;s (pseudo)random number generator xorshift96(), which is used in Mozzi&#39;s rand() fun...">randSeed</a>();</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keywordtype">void</span> xorshiftSeed(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keywordtype">void</span> randSeed(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">void</span> randSeed();</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">char</span> <a class="code" href="group__random.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">char</span> minval, <span class="keywordtype">char</span> maxval);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">char</span> <a class="code" href="group__random.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">char</span> maxval);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">char</span> rand(<span class="keywordtype">char</span> minval, <span class="keywordtype">char</span> maxval);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">char</span> rand(<span class="keywordtype">char</span> maxval);</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="group__random.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> minval, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> maxval);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="group__random.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> maxval);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> rand(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> minval, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> maxval);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> rand(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> maxval);</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__random.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">int</span> minval, <span class="keywordtype">int</span> maxval);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__random.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">int</span> maxval);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">int</span> rand(<span class="keywordtype">int</span> minval, <span class="keywordtype">int</span> maxval);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">int</span> rand(<span class="keywordtype">int</span> maxval);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="group__random.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> minval, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> maxval);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="group__random.html#gacd4bfc9e040d0090b9321f43a6297e21" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> maxval);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> rand(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> minval, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> maxval);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> rand(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> maxval);</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="group__random.html#ga5c14e59f9bdf24917b6db63be89a2180" title="Generates a random number in the range for midi notes.">randMidiNote</a>();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> randMidiNote();</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* MOZZI_RAND_H_ */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('mozzi__rand_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>mozzi_rand.h</b></li>
-    <li class="footer">Generated on Thu Sep 12 2013 15:15:35 for Mozzi by
+    <li class="footer">Generated on Thu Mar 13 2014 12:35:13 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

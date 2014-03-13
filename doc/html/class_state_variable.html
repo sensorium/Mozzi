@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-09-12-15:15</span>
+   &#160;<span id="projectnumber">version 2014-03-13-12:35</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -80,7 +80,7 @@ $(document).ready(function(){initNavTree('class_state_variable.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -109,7 +109,7 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_state_variable.html#a9950b71a16f63654552d3e15774d6638">StateVariable</a> ()</td></tr>
 <tr class="memdesc:a9950b71a16f63654552d3e15774d6638"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br/></td></tr>
 <tr class="separator:a9950b71a16f63654552d3e15774d6638"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a992e23a80b611b72e3e764c14d5ee188"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_state_variable.html#a992e23a80b611b72e3e764c14d5ee188">setResonance</a> (<a class="el" href="group__fixmath.html#ga8a02d4dea10140847682e78ba4bd6367">Q0n8</a> resonance)</td></tr>
+<tr class="memitem:a992e23a80b611b72e3e764c14d5ee188"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_state_variable.html#a992e23a80b611b72e3e764c14d5ee188">setResonance</a> (Q0n8 resonance)</td></tr>
 <tr class="memdesc:a992e23a80b611b72e3e764c14d5ee188"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set how resonant the filter will be.  <a href="#a992e23a80b611b72e3e764c14d5ee188">More...</a><br/></td></tr>
 <tr class="separator:a992e23a80b611b72e3e764c14d5ee188"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47e7ddad76db7009e370fa91ea5d4d3d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_state_variable.html#a47e7ddad76db7009e370fa91ea5d4d3d">setCentreFreq</a> (unsigned int centre_freq)</td></tr>
@@ -132,7 +132,7 @@ class StateVariable&lt; FILTER_TYPE &gt;</h3>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>To save processing time, this version of the filter does not saturate internally, so any resonant peaks are unceremoniously truncated. It may be worth adding code to constrain the internal variables to enable resonant saturating effects. </dd></dl>
 
-<p>Definition at line <a class="el" href="_state_variable_8h_source.html#l00054">54</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
+<p>Definition at line <a class="el" href="_state_variable_8h_source.html#l00076">76</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a14cb100c22e4a33025665ef3620ca2b8"></a>
 <div class="memitem">
@@ -168,7 +168,7 @@ template&lt;char FILTER_TYPE&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>the signal output. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Timing: 16 - 20 us </dd></dl>
 
-<p>Definition at line <a class="el" href="_state_variable_8h_source.html#l00120">120</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
+<p>Definition at line <a class="el" href="_state_variable_8h_source.html#l00133">133</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
 
 </div>
 </div>
@@ -203,9 +203,11 @@ template&lt;char FILTER_TYPE&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>Timing 25-30us </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Timing 25-30us </dd>
+<dd>
+The frequency calculation is VERY "approximate". This really needs to be fixed. </dd></dl>
 
-<p>Definition at line <a class="el" href="_state_variable_8h_source.html#l00103">103</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
+<p>Definition at line <a class="el" href="_state_variable_8h_source.html#l00116">116</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
 
 </div>
 </div>
@@ -221,7 +223,7 @@ template&lt;char FILTER_TYPE&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="class_state_variable.html">StateVariable</a>&lt; FILTER_TYPE &gt;::setResonance </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__fixmath.html#ga8a02d4dea10140847682e78ba4bd6367">Q0n8</a>&#160;</td>
+          <td class="paramtype">Q0n8&#160;</td>
           <td class="paramname"><em>resonance</em></td><td>)</td>
           <td></td>
         </tr>
@@ -242,7 +244,7 @@ template&lt;char FILTER_TYPE&gt; </div>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>Timing &lt; 500 ns </dd></dl>
 
-<p>Definition at line <a class="el" href="_state_variable_8h_source.html#l00075">75</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
+<p>Definition at line <a class="el" href="_state_variable_8h_source.html#l00097">97</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
 
 </div>
 </div>
@@ -252,7 +254,7 @@ template&lt;char FILTER_TYPE&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_state_variable.html">StateVariable</a></li>
-    <li class="footer">Generated on Thu Sep 12 2013 15:15:35 for Mozzi by
+    <li class="footer">Generated on Thu Mar 13 2014 12:35:13 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

@@ -54,15 +54,15 @@
 #include <MozziGuts.h>
 #include <Line.h> // for smooth transitions
 #include <Oscil.h> // oscillator template
-#include <tables/triangle_warm8192_int8.h> // triangle table for oscillator
+#include <tables/saw8192_int8.h> // saw table for oscillator
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
 #include <mozzi_fixmath.h>
 
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <TRIANGLE_WARM8192_NUM_CELLS, AUDIO_RATE> aTriangle1(TRIANGLE_WARM8192_DATA);
-Oscil <TRIANGLE_WARM8192_NUM_CELLS, AUDIO_RATE> aTriangle2(TRIANGLE_WARM8192_DATA);
+Oscil <SAW8192_NUM_CELLS, AUDIO_RATE> aSaw1(SAW8192_DATA);
+Oscil <SAW8192_NUM_CELLS, AUDIO_RATE> aSaw2(SAW8192_DATA);
 
 
 // use: Line <type> lineName
@@ -128,19 +128,20 @@ void updateControl(){ // 900 us floats vs 160 fixed
     
     // find the phase increments (step sizes) through the audio table for those freqs
     // they are big ugly numbers which the oscillator understands but you don't really want to know
-    long gliss_start = aTriangle1.phaseIncFromFreq(start_freq);
-    long gliss_end = aTriangle2.phaseIncFromFreq(end_freq);
+    long gliss_start = aSaw1.phaseIncFromFreq(start_freq);
+    long gliss_end = aSaw2.phaseIncFromFreq(end_freq);
     
     aGliss1.set(gliss_start, gliss_end, audio_steps_per_gliss);
-    aGliss2.set(gliss_start+(variation()*gliss_offset), gliss_end+(variation()*gliss_offset), audio_steps_per_gliss);
+    // aGliss2 is an octave up and detuned
+    aGliss2.set((gliss_start+(variation()*gliss_offset))*2, (gliss_end+(variation()*gliss_offset))*2, audio_steps_per_gliss);
     counter = control_steps_per_gliss;
   }
 }
 
 
 int updateAudio(){
-  aTriangle1.setPhaseInc(aGliss1.next());
-  aTriangle2.setPhaseInc(aGliss2.next());
-  return ((int)aTriangle1.next()+aTriangle2.next())<<5;
+  aSaw1.setPhaseInc(aGliss1.next());
+  aSaw2.setPhaseInc(aGliss2.next());
+  return ((int)aSaw1.next()+aSaw2.next())<<5;
 }
 

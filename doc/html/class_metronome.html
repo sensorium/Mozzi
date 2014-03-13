@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-09-12-15:15</span>
+   &#160;<span id="projectnumber">version 2014-03-13-12:35</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -80,7 +80,7 @@ $(document).ready(function(){initNavTree('class_metronome.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -126,8 +126,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad5670c748042846b02cb33c613c50422"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_metronome.html#ad5670c748042846b02cb33c613c50422">start</a> (unsigned int delay_milliseconds)</td></tr>
 <tr class="memdesc:ad5670c748042846b02cb33c613c50422"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the time between beats and start the metronome.  <a href="#ad5670c748042846b02cb33c613c50422">More...</a><br/></td></tr>
 <tr class="separator:ad5670c748042846b02cb33c613c50422"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab384673719ebd552dd72d474ed58556"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_metronome.html#aab384673719ebd552dd72d474ed58556">setBPM</a> (float bpm)</td></tr>
+<tr class="memdesc:aab384673719ebd552dd72d474ed58556"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the beats per minute.  <a href="#aab384673719ebd552dd72d474ed58556">More...</a><br/></td></tr>
+<tr class="separator:aab384673719ebd552dd72d474ed58556"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc67bd96eac9f9b9260f8b070b7db75f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_metronome.html#adc67bd96eac9f9b9260f8b070b7db75f">ready</a> ()</td></tr>
-<tr class="memdesc:adc67bd96eac9f9b9260f8b070b7db75f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call this in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> or <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio()</a> to check if it is time for a beat.  <a href="#adc67bd96eac9f9b9260f8b070b7db75f">More...</a><br/></td></tr>
+<tr class="memdesc:adc67bd96eac9f9b9260f8b070b7db75f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call this in updateControl() or updateAudio() to check if it is time for a beat.  <a href="#adc67bd96eac9f9b9260f8b070b7db75f">More...</a><br/></td></tr>
 <tr class="separator:adc67bd96eac9f9b9260f8b070b7db75f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d77db8aafda48abf3f2a91b9d898ad7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6d77db8aafda48abf3f2a91b9d898ad7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>stop</b> ()</td></tr>
@@ -209,10 +212,10 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>ticks</b></t
 </table>
 </div><div class="memdoc">
 
-<p>Call this in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a> or <a class="el" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio()</a> to check if it is time for a beat. </p>
+<p>Call this in updateControl() or updateAudio() to check if it is time for a beat. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if the time for one is up. </dd></dl>
 
-<p>Definition at line <a class="el" href="_metronome_8h_source.html#l00073">73</a> of file <a class="el" href="_metronome_8h_source.html">Metronome.h</a>.</p>
+<p>Definition at line <a class="el" href="_metronome_8h_source.html#l00086">86</a> of file <a class="el" href="_metronome_8h_source.html">Metronome.h</a>.</p>
 
 </div>
 </div>
@@ -247,9 +250,43 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>ticks</b></t
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>timing: 12us </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="02_8_control_2_event_delay_2_event_delay_8ino-example.html#a4">02.Control/EventDelay/EventDelay.ino</a>, <a class="el" href="05_8_control__filters_2_smooth_2_smooth_8ino-example.html#a3">05.Control_Filters/Smooth/Smooth.ino</a>, <a class="el" href="06_8_synthesis_2_wave_shaper_2_wave_shaper_8ino-example.html#a8">06.Synthesis/WaveShaper/WaveShaper.ino</a>, <a class="el" href="07_8_envelopes_2_a_d_s_r__envelope_2_a_d_s_r__envelope_8ino-example.html#a4">07.Envelopes/ADSR_Envelope/ADSR_Envelope.ino</a>, and <a class="el" href="08_8_samples_2_sample_2_sample_8ino-example.html#a4">08.Samples/Sample/Sample.ino</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="02_8_control_2_event_delay_2_event_delay_8ino-example.html#a2">02.Control/EventDelay/EventDelay.ino</a>, <a class="el" href="05_8_control__filters_2_smooth_2_smooth_8ino-example.html#a3">05.Control_Filters/Smooth/Smooth.ino</a>, <a class="el" href="06_8_synthesis_2_wave_shaper_2_wave_shaper_8ino-example.html#a5">06.Synthesis/WaveShaper/WaveShaper.ino</a>, <a class="el" href="07_8_envelopes_2_a_d_s_r__envelope_2_a_d_s_r__envelope_8ino-example.html#a3">07.Envelopes/ADSR_Envelope/ADSR_Envelope.ino</a>, and <a class="el" href="08_8_samples_2_sample_2_sample_8ino-example.html#a2">08.Samples/Sample/Sample.ino</a>.</dd>
 </dl>
 <p>Definition at line <a class="el" href="_event_delay_8h_source.html#l00051">51</a> of file <a class="el" href="_event_delay_8h_source.html">EventDelay.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aab384673719ebd552dd72d474ed58556"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Metronome::setBPM </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>bpm</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the beats per minute. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bpm</td><td>beats per minute </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_metronome_8h_source.html#l00074">74</a> of file <a class="el" href="_metronome_8h_source.html">Metronome.h</a>.</p>
 
 </div>
 </div>
@@ -320,7 +357,7 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>ticks</b></t
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_metronome.html">Metronome</a></li>
-    <li class="footer">Generated on Thu Sep 12 2013 15:15:35 for Mozzi by
+    <li class="footer">Generated on Thu Mar 13 2014 12:35:13 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

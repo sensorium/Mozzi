@@ -3,6 +3,12 @@
   
     Demonstrates the audible quality of different length tables
     played with Oscil and scheduling with EventDelay.
+    
+    This sketch needs to be compiled using STANDARD audio mode 
+    to avoid clicks from high processor load.
+    Edit Mozzi/mozzi_config.h, uncomment 
+    	#define AUDIO_MODE STANDARD
+    and make sure the other 2 AUDIO_MODE defines are commented out.
   
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users

@@ -75,7 +75,7 @@
 			<a class="header_link" href="http://tinyurl.com/mozzilib/Mozzi.zip">
 				download<br>
 				<i class="icon-download icon-4x"></i><br>
-				<span id="header_small_label">version 2013-09-12-15:15</span>
+				<span id="header_small_label">version 2014-03-13-12:35</span>
 			</a>
 		</p>
 	</section> 
@@ -156,7 +156,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Control_Gaincollapse' style='display:none' onclick='javascript:toggleDisplay(Control_Gain, Control_Gainexpand, Control_Gaincollapse)'>hide sketch</button></p>
 
 <div id='Control_Gain' style='display:none'>
-<figure class='code'><figcaption><span> (Control_Gain.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Control_Gain.ino)</span> <a href='/Mozzi/downloads/code/examples/01.Basics/Control_Gain/Control_Gain.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -268,7 +268,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Sinewavecollapse' style='display:none' onclick='javascript:toggleDisplay(Sinewave, Sinewaveexpand, Sinewavecollapse)'>hide sketch</button></p>
 
 <div id='Sinewave' style='display:none'>
-<figure class='code'><figcaption><span> (Sinewave.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Sinewave.ino)</span> <a href='/Mozzi/downloads/code/examples/01.Basics/Sinewave/Sinewave.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -376,7 +376,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Sinewave_HIFIcollapse' style='display:none' onclick='javascript:toggleDisplay(Sinewave_HIFI, Sinewave_HIFIexpand, Sinewave_HIFIcollapse)'>hide sketch</button></p>
 
 <div id='Sinewave_HIFI' style='display:none'>
-<figure class='code'><figcaption><span> (Sinewave_HIFI.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Sinewave_HIFI.ino)</span> <a href='/Mozzi/downloads/code/examples/01.Basics/Sinewave_HIFI/Sinewave_HIFI.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -523,7 +523,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Skeletoncollapse' style='display:none' onclick='javascript:toggleDisplay(Skeleton, Skeletonexpand, Skeletoncollapse)'>hide sketch</button></p>
 
 <div id='Skeleton' style='display:none'>
-<figure class='code'><figcaption><span> (Skeleton.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Skeleton.ino)</span> <a href='/Mozzi/downloads/code/examples/01.Basics/Skeleton/Skeleton.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -581,7 +581,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Table_Resolutioncollapse' style='display:none' onclick='javascript:toggleDisplay(Table_Resolution, Table_Resolutionexpand, Table_Resolutioncollapse)'>hide sketch</button></p>
 
 <div id='Table_Resolution' style='display:none'>
-<figure class='code'><figcaption><span> (Table_Resolution.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Table_Resolution.ino)</span> <a href='/Mozzi/downloads/code/examples/01.Basics/Table_Resolution/Table_Resolution.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -688,11 +688,23 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>104</span>
 <span class='line-number'>105</span>
 <span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example playing sine tables of different sizes</span>
 </span><span class='line'><span class="cm">    with Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
 </span><span class='line'><span class="cm">    Demonstrates the audible quality of different length tables</span>
 </span><span class='line'><span class="cm">    played with Oscil and scheduling with EventDelay.</span>
+</span><span class='line'><span class="cm">    </span>
+</span><span class='line'><span class="cm">    This sketch needs to be compiled using STANDARD audio mode </span>
+</span><span class='line'><span class="cm">    to avoid clicks from high processor load.</span>
+</span><span class='line'><span class="cm">    Edit Mozzi/mozzi_config.h, uncomment </span>
+</span><span class='line'><span class="cm">     #define AUDIO_MODE STANDARD</span>
+</span><span class='line'><span class="cm">    and make sure the other 2 AUDIO_MODE defines are commented out.</span>
 </span><span class='line'><span class="cm">  </span>
 </span><span class='line'><span class="cm">    Mozzi help/discussion/announcements:</span>
 </span><span class='line'><span class="cm">    https://groups.google.com/forum/#!forum/mozzi-users</span>
@@ -811,7 +823,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Vibratocollapse' style='display:none' onclick='javascript:toggleDisplay(Vibrato, Vibratoexpand, Vibratocollapse)'>hide sketch</button></p>
 
 <div id='Vibrato' style='display:none'>
-<figure class='code'><figcaption><span> (Vibrato.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Vibrato.ino)</span> <a href='/Mozzi/downloads/code/examples/01.Basics/Vibrato/Vibrato.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -923,7 +935,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Control_Echo_Theremincollapse' style='display:none' onclick='javascript:toggleDisplay(Control_Echo_Theremin, Control_Echo_Thereminexpand, Control_Echo_Theremincollapse)'>hide sketch</button></p>
 
 <div id='Control_Echo_Theremin' style='display:none'>
-<figure class='code'><figcaption><span> (Control_Echo_Theremin.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Control_Echo_Theremin.ino)</span> <a href='/Mozzi/downloads/code/examples/02.Control/Control_Echo_Theremin/Control_Echo_Theremin.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -1089,7 +1101,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Control_Oscil_Washcollapse' style='display:none' onclick='javascript:toggleDisplay(Control_Oscil_Wash, Control_Oscil_Washexpand, Control_Oscil_Washcollapse)'>hide sketch</button></p>
 
 <div id='Control_Oscil_Wash' style='display:none'>
-<figure class='code'><figcaption><span> (Control_Oscil_Wash.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Control_Oscil_Wash.ino)</span> <a href='/Mozzi/downloads/code/examples/02.Control/Control_Oscil_Wash/Control_Oscil_Wash.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -1317,7 +1329,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Control_Tremelocollapse' style='display:none' onclick='javascript:toggleDisplay(Control_Tremelo, Control_Tremeloexpand, Control_Tremelocollapse)'>hide sketch</button></p>
 
 <div id='Control_Tremelo' style='display:none'>
-<figure class='code'><figcaption><span> (Control_Tremelo.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Control_Tremelo.ino)</span> <a href='/Mozzi/downloads/code/examples/02.Control/Control_Tremelo/Control_Tremelo.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -1447,7 +1459,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='EventDelaycollapse' style='display:none' onclick='javascript:toggleDisplay(EventDelay, EventDelayexpand, EventDelaycollapse)'>hide sketch</button></p>
 
 <div id='EventDelay' style='display:none'>
-<figure class='code'><figcaption><span> (EventDelay.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (EventDelay.ino)</span> <a href='/Mozzi/downloads/code/examples/02.Control/EventDelay/EventDelay.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -1579,7 +1591,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Line_Glisscollapse' style='display:none' onclick='javascript:toggleDisplay(Line_Gliss, Line_Glissexpand, Line_Glisscollapse)'>hide sketch</button></p>
 
 <div id='Line_Gliss' style='display:none'>
-<figure class='code'><figcaption><span> (Line_Gliss.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Line_Gliss.ino)</span> <a href='/Mozzi/downloads/code/examples/02.Control/Line_Gliss/Line_Gliss.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -1775,7 +1787,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Line_Gliss_Double_32k_HIFIcollapse' style='display:none' onclick='javascript:toggleDisplay(Line_Gliss_Double_32k_HIFI, Line_Gliss_Double_32k_HIFIexpand, Line_Gliss_Double_32k_HIFIcollapse)'>hide sketch</button></p>
 
 <div id='Line_Gliss_Double_32k_HIFI' style='display:none'>
-<figure class='code'><figcaption><span> (Line_Gliss_Double_32k_HIFI.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Line_Gliss_Double_32k_HIFI.ino)</span> <a href='/Mozzi/downloads/code/examples/02.Control/Line_Gliss_Double_32k_HIFI/Line_Gliss_Double_32k_HIFI.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -1921,6 +1933,7 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>143</span>
 <span class='line-number'>144</span>
 <span class='line-number'>145</span>
+<span class='line-number'>146</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of a pair of detuned oscillators </span>
 </span><span class='line'><span class="cm">    sliding smoothly between frequencies,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
@@ -1977,15 +1990,15 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Line.h&gt; </span><span class="c1">// for smooth transitions</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator template</span>
-</span><span class='line'><span class="cp">#include &lt;tables/triangle_warm8192_int8.h&gt; </span><span class="c1">// triangle table for oscillator</span>
+</span><span class='line'><span class="cp">#include &lt;tables/saw8192_int8.h&gt; </span><span class="c1">// saw table for oscillator</span>
 </span><span class='line'><span class="cp">#include &lt;mozzi_rand.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;mozzi_midi.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;mozzi_fixmath.h&gt;</span>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="c1">// use: Oscil &lt;table_size, update_rate&gt; oscilName (wavetable), look in .h file of table #included above</span>
-</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">TRIANGLE_WARM8192_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aTriangle1</span><span class="p">(</span><span class="n">TRIANGLE_WARM8192_DATA</span><span class="p">);</span>
-</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">TRIANGLE_WARM8192_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aTriangle2</span><span class="p">(</span><span class="n">TRIANGLE_WARM8192_DATA</span><span class="p">);</span>
+</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">SAW8192_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aSaw1</span><span class="p">(</span><span class="n">SAW8192_DATA</span><span class="p">);</span>
+</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">SAW8192_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aSaw2</span><span class="p">(</span><span class="n">SAW8192_DATA</span><span class="p">);</span>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="c1">// use: Line &lt;type&gt; lineName</span>
@@ -2051,20 +2064,21 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'>
 </span><span class='line'>    <span class="c1">// find the phase increments (step sizes) through the audio table for those freqs</span>
 </span><span class='line'>    <span class="c1">// they are big ugly numbers which the oscillator understands but you don&#39;t really want to know</span>
-</span><span class='line'>    <span class="kt">long</span> <span class="n">gliss_start</span> <span class="o">=</span> <span class="n">aTriangle1</span><span class="p">.</span><span class="n">phaseIncFromFreq</span><span class="p">(</span><span class="n">start_freq</span><span class="p">);</span>
-</span><span class='line'>    <span class="kt">long</span> <span class="n">gliss_end</span> <span class="o">=</span> <span class="n">aTriangle2</span><span class="p">.</span><span class="n">phaseIncFromFreq</span><span class="p">(</span><span class="n">end_freq</span><span class="p">);</span>
+</span><span class='line'>    <span class="kt">long</span> <span class="n">gliss_start</span> <span class="o">=</span> <span class="n">aSaw1</span><span class="p">.</span><span class="n">phaseIncFromFreq</span><span class="p">(</span><span class="n">start_freq</span><span class="p">);</span>
+</span><span class='line'>    <span class="kt">long</span> <span class="n">gliss_end</span> <span class="o">=</span> <span class="n">aSaw2</span><span class="p">.</span><span class="n">phaseIncFromFreq</span><span class="p">(</span><span class="n">end_freq</span><span class="p">);</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="n">aGliss1</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">gliss_start</span><span class="p">,</span> <span class="n">gliss_end</span><span class="p">,</span> <span class="n">audio_steps_per_gliss</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">aGliss2</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">gliss_start</span><span class="o">+</span><span class="p">(</span><span class="n">variation</span><span class="p">()</span><span class="o">*</span><span class="n">gliss_offset</span><span class="p">),</span> <span class="n">gliss_end</span><span class="o">+</span><span class="p">(</span><span class="n">variation</span><span class="p">()</span><span class="o">*</span><span class="n">gliss_offset</span><span class="p">),</span> <span class="n">audio_steps_per_gliss</span><span class="p">);</span>
+</span><span class='line'>    <span class="c1">// aGliss2 is an octave up and detuned</span>
+</span><span class='line'>    <span class="n">aGliss2</span><span class="p">.</span><span class="n">set</span><span class="p">((</span><span class="n">gliss_start</span><span class="o">+</span><span class="p">(</span><span class="n">variation</span><span class="p">()</span><span class="o">*</span><span class="n">gliss_offset</span><span class="p">))</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">gliss_end</span><span class="o">+</span><span class="p">(</span><span class="n">variation</span><span class="p">()</span><span class="o">*</span><span class="n">gliss_offset</span><span class="p">))</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="n">audio_steps_per_gliss</span><span class="p">);</span>
 </span><span class='line'>    <span class="n">counter</span> <span class="o">=</span> <span class="n">control_steps_per_gliss</span><span class="p">;</span>
 </span><span class='line'>  <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="kt">int</span> <span class="n">updateAudio</span><span class="p">(){</span>
-</span><span class='line'>  <span class="n">aTriangle1</span><span class="p">.</span><span class="n">setPhaseInc</span><span class="p">(</span><span class="n">aGliss1</span><span class="p">.</span><span class="n">next</span><span class="p">());</span>
-</span><span class='line'>  <span class="n">aTriangle2</span><span class="p">.</span><span class="n">setPhaseInc</span><span class="p">(</span><span class="n">aGliss2</span><span class="p">.</span><span class="n">next</span><span class="p">());</span>
-</span><span class='line'>  <span class="k">return</span> <span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">aTriangle1</span><span class="p">.</span><span class="n">next</span><span class="p">()</span><span class="o">+</span><span class="n">aTriangle2</span><span class="p">.</span><span class="n">next</span><span class="p">())</span><span class="o">&lt;&lt;</span><span class="mi">5</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">aSaw1</span><span class="p">.</span><span class="n">setPhaseInc</span><span class="p">(</span><span class="n">aGliss1</span><span class="p">.</span><span class="n">next</span><span class="p">());</span>
+</span><span class='line'>  <span class="n">aSaw2</span><span class="p">.</span><span class="n">setPhaseInc</span><span class="p">(</span><span class="n">aGliss2</span><span class="p">.</span><span class="n">next</span><span class="p">());</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">aSaw1</span><span class="p">.</span><span class="n">next</span><span class="p">()</span><span class="o">+</span><span class="n">aSaw2</span><span class="p">.</span><span class="n">next</span><span class="p">())</span><span class="o">&lt;&lt;</span><span class="mi">5</span><span class="p">;</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 </div>
@@ -2083,7 +2097,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Metronome_SampleHuffmancollapse' style='display:none' onclick='javascript:toggleDisplay(Metronome_SampleHuffman, Metronome_SampleHuffmanexpand, Metronome_SampleHuffmancollapse)'>hide sketch</button></p>
 
 <div id='Metronome_SampleHuffman' style='display:none'>
-<figure class='code'><figcaption><span> (Metronome_SampleHuffman.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Metronome_SampleHuffman.ino)</span> <a href='/Mozzi/downloads/code/examples/02.Control/Metronome_SampleHuffman/Metronome_SampleHuffman.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -2279,7 +2293,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Pausecollapse' style='display:none' onclick='javascript:toggleDisplay(Pause, Pauseexpand, Pausecollapse)'>hide sketch</button></p>
 
 <div id='Pause' style='display:none'>
-<figure class='code'><figcaption><span> (Pause.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Pause.ino)</span> <a href='/Mozzi/downloads/code/examples/02.Control/Pause/Pause.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -2417,7 +2431,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Knob_LDR_x2_WavePacketcollapse' style='display:none' onclick='javascript:toggleDisplay(Knob_LDR_x2_WavePacket, Knob_LDR_x2_WavePacketexpand, Knob_LDR_x2_WavePacketcollapse)'>hide sketch</button></p>
 
 <div id='Knob_LDR_x2_WavePacket' style='display:none'>
-<figure class='code'><figcaption><span> (Knob_LDR_x2_WavePacket.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Knob_LDR_x2_WavePacket.ino)</span> <a href='/Mozzi/downloads/code/examples/03.Sensors/Knob_LDR_x2_WavePacket/Knob_LDR_x2_WavePacket.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -2645,7 +2659,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Knob_LightLevel_FMsynthcollapse' style='display:none' onclick='javascript:toggleDisplay(Knob_LightLevel_FMsynth, Knob_LightLevel_FMsynthexpand, Knob_LightLevel_FMsynthcollapse)'>hide sketch</button></p>
 
 <div id='Knob_LightLevel_FMsynth' style='display:none'>
-<figure class='code'><figcaption><span> (Knob_LightLevel_FMsynth.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Knob_LightLevel_FMsynth.ino)</span> <a href='/Mozzi/downloads/code/examples/03.Sensors/Knob_LightLevel_FMsynth/Knob_LightLevel_FMsynth.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -2871,7 +2885,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Knob_LightLevel_x2_FMsynthcollapse' style='display:none' onclick='javascript:toggleDisplay(Knob_LightLevel_x2_FMsynth, Knob_LightLevel_x2_FMsynthexpand, Knob_LightLevel_x2_FMsynthcollapse)'>hide sketch</button></p>
 
 <div id='Knob_LightLevel_x2_FMsynth' style='display:none'>
-<figure class='code'><figcaption><span> (Knob_LightLevel_x2_FMsynth.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Knob_LightLevel_x2_FMsynth.ino)</span> <a href='/Mozzi/downloads/code/examples/03.Sensors/Knob_LightLevel_x2_FMsynth/Knob_LightLevel_x2_FMsynth.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -3161,7 +3175,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Light_Temperature_Detunedcollapse' style='display:none' onclick='javascript:toggleDisplay(Light_Temperature_Detuned, Light_Temperature_Detunedexpand, Light_Temperature_Detunedcollapse)'>hide sketch</button></p>
 
 <div id='Light_Temperature_Detuned' style='display:none'>
-<figure class='code'><figcaption><span> (Light_Temperature_Detuned.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Light_Temperature_Detuned.ino)</span> <a href='/Mozzi/downloads/code/examples/03.Sensors/Light_Temperature_Detuned/Light_Temperature_Detuned.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -3337,6 +3351,12 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>173</span>
 <span class='line-number'>174</span>
 <span class='line-number'>175</span>
+<span class='line-number'>176</span>
+<span class='line-number'>177</span>
+<span class='line-number'>178</span>
+<span class='line-number'>179</span>
+<span class='line-number'>180</span>
+<span class='line-number'>181</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  </span>
 </span><span class='line'><span class="cm">  Plays a fluctuating ambient wash in response to light and temperature sensors.</span>
 </span><span class='line'>
@@ -3346,6 +3366,12 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">  It&#39;s a pretty dumb, boring and horrible  sonification, but at this stage </span>
 </span><span class='line'><span class="cm">  it&#39;s just to demonstrate the possibility of reading sensors while</span>
 </span><span class='line'><span class="cm">  lots of audio oscillators are running.</span>
+</span><span class='line'><span class="cm">  </span>
+</span><span class='line'><span class="cm">  This sketch needs to be compiled using STANDARD audio mode </span>
+</span><span class='line'><span class="cm">  to avoid clicks from high processor load.</span>
+</span><span class='line'><span class="cm">  Edit Mozzi/mozzi_config.h, uncomment </span>
+</span><span class='line'><span class="cm">     #define AUDIO_MODE STANDARD</span>
+</span><span class='line'><span class="cm">  and make sure the other 2 AUDIO_MODE defines are commented out.</span>
 </span><span class='line'><span class="cm">  </span>
 </span><span class='line'><span class="cm">  Circuit:</span>
 </span><span class='line'><span class="cm">    Audio output on digital pin 9 (on a Uno or similar), or </span>
@@ -3529,7 +3555,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Light_Temperature_Multi_Oscilcollapse' style='display:none' onclick='javascript:toggleDisplay(Light_Temperature_Multi_Oscil, Light_Temperature_Multi_Oscilexpand, Light_Temperature_Multi_Oscilcollapse)'>hide sketch</button></p>
 
 <div id='Light_Temperature_Multi_Oscil' style='display:none'>
-<figure class='code'><figcaption><span> (Light_Temperature_Multi_Oscil.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Light_Temperature_Multi_Oscil.ino)</span> <a href='/Mozzi/downloads/code/examples/03.Sensors/Light_Temperature_Multi_Oscil/Light_Temperature_Multi_Oscil.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -3709,6 +3735,12 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>177</span>
 <span class='line-number'>178</span>
 <span class='line-number'>179</span>
+<span class='line-number'>180</span>
+<span class='line-number'>181</span>
+<span class='line-number'>182</span>
+<span class='line-number'>183</span>
+<span class='line-number'>184</span>
+<span class='line-number'>185</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  </span>
 </span><span class='line'><span class="cm">  Plays a fluctuating ambient wash in response to light and temperature sensors,</span>
 </span><span class='line'><span class="cm">  using Mozzi sonification library.</span>
@@ -3717,6 +3749,12 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">  Temperature readings from a thermistor are used to set the notes</span>
 </span><span class='line'><span class="cm">  being played, and light readings from a light dependent resistor are</span>
 </span><span class='line'><span class="cm">  mapped to the pulse rates of the volume control oscillators.</span>
+</span><span class='line'><span class="cm">  </span>
+</span><span class='line'><span class="cm">  This sketch needs to be compiled using STANDARD audio mode </span>
+</span><span class='line'><span class="cm">  to avoid clicks from high processor load.</span>
+</span><span class='line'><span class="cm">  Edit Mozzi/mozzi_config.h, uncomment </span>
+</span><span class='line'><span class="cm">     #define AUDIO_MODE STANDARD</span>
+</span><span class='line'><span class="cm">  and make sure the other 2 AUDIO_MODE defines are commented out.</span>
 </span><span class='line'><span class="cm">  </span>
 </span><span class='line'><span class="cm">  Circuit:</span>
 </span><span class='line'><span class="cm">    Audio output on digital pin 9 (on a Uno or similar), or </span>
@@ -3905,7 +3943,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Piezo_Frequencycollapse' style='display:none' onclick='javascript:toggleDisplay(Piezo_Frequency, Piezo_Frequencyexpand, Piezo_Frequencycollapse)'>hide sketch</button></p>
 
 <div id='Piezo_Frequency' style='display:none'>
-<figure class='code'><figcaption><span> (Piezo_Frequency.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Piezo_Frequency.ino)</span> <a href='/Mozzi/downloads/code/examples/03.Sensors/Piezo_Frequency/Piezo_Frequency.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -4073,7 +4111,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Piezo_SampleScrubbercollapse' style='display:none' onclick='javascript:toggleDisplay(Piezo_SampleScrubber, Piezo_SampleScrubberexpand, Piezo_SampleScrubbercollapse)'>hide sketch</button></p>
 
 <div id='Piezo_SampleScrubber' style='display:none'>
-<figure class='code'><figcaption><span> (Piezo_SampleScrubber.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Piezo_SampleScrubber.ino)</span> <a href='/Mozzi/downloads/code/examples/03.Sensors/Piezo_SampleScrubber/Piezo_SampleScrubber.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -4249,7 +4287,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Piezo_SampleTriggercollapse' style='display:none' onclick='javascript:toggleDisplay(Piezo_SampleTrigger, Piezo_SampleTriggerexpand, Piezo_SampleTriggercollapse)'>hide sketch</button></p>
 
 <div id='Piezo_SampleTrigger' style='display:none'>
-<figure class='code'><figcaption><span> (Piezo_SampleTrigger.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Piezo_SampleTrigger.ino)</span> <a href='/Mozzi/downloads/code/examples/03.Sensors/Piezo_SampleTrigger/Piezo_SampleTrigger.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -4445,7 +4483,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Piezo_Switch_Pitchcollapse' style='display:none' onclick='javascript:toggleDisplay(Piezo_Switch_Pitch, Piezo_Switch_Pitchexpand, Piezo_Switch_Pitchcollapse)'>hide sketch</button></p>
 
 <div id='Piezo_Switch_Pitch' style='display:none'>
-<figure class='code'><figcaption><span> (Piezo_Switch_Pitch.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Piezo_Switch_Pitch.ino)</span> <a href='/Mozzi/downloads/code/examples/03.Sensors/Piezo_Switch_Pitch/Piezo_Switch_Pitch.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -4674,13 +4712,16 @@ Your browser does not support the audio element.</audio></p>
 
 <p>Sinewave_Pinchange_Interrupt <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
 
-<p>&#8230;(no recording of this one)</p>
+<p><audio controls>
+<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/03.Sensors/Sinewave_Pinchange_Interrupt/Sinewave_Pinchange_Interrupt.ogg?raw=true' preload='auto'></source>
+<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/03.Sensors/Sinewave_Pinchange_Interrupt/Sinewave_Pinchange_Interrupt.mp3?raw=true' preload='auto'></source>
+Your browser does not support the audio element.</audio></p>
 
 <p><button type='button' id='Sinewave_Pinchange_Interruptexpand' onclick='javascript:toggleDisplay(Sinewave_Pinchange_Interrupt, Sinewave_Pinchange_Interruptexpand, Sinewave_Pinchange_Interruptcollapse)'>show sketch</button>
 <button id='Sinewave_Pinchange_Interruptcollapse' style='display:none' onclick='javascript:toggleDisplay(Sinewave_Pinchange_Interrupt, Sinewave_Pinchange_Interruptexpand, Sinewave_Pinchange_Interruptcollapse)'>hide sketch</button></p>
 
 <div id='Sinewave_Pinchange_Interrupt' style='display:none'>
-<figure class='code'><figcaption><span> (Sinewave_Pinchange_Interrupt.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Sinewave_Pinchange_Interrupt.ino)</span> <a href='/Mozzi/downloads/code/examples/03.Sensors/Sinewave_Pinchange_Interrupt/Sinewave_Pinchange_Interrupt.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -4852,7 +4893,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Volume_Knobcollapse' style='display:none' onclick='javascript:toggleDisplay(Volume_Knob, Volume_Knobexpand, Volume_Knobcollapse)'>hide sketch</button></p>
 
 <div id='Volume_Knob' style='display:none'>
-<figure class='code'><figcaption><span> (Volume_Knob.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Volume_Knob.ino)</span> <a href='/Mozzi/downloads/code/examples/03.Sensors/Volume_Knob/Volume_Knob.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -5012,7 +5053,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Volume_Knob_LightLevel_Frequencycollapse' style='display:none' onclick='javascript:toggleDisplay(Volume_Knob_LightLevel_Frequency, Volume_Knob_LightLevel_Frequencyexpand, Volume_Knob_LightLevel_Frequencycollapse)'>hide sketch</button></p>
 
 <div id='Volume_Knob_LightLevel_Frequency' style='display:none'>
-<figure class='code'><figcaption><span> (Volume_Knob_LightLevel_Frequency.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Volume_Knob_LightLevel_Frequency.ino)</span> <a href='/Mozzi/downloads/code/examples/03.Sensors/Volume_Knob_LightLevel_Frequency/Volume_Knob_LightLevel_Frequency.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -5205,13 +5246,16 @@ Your browser does not support the audio element.</audio></p>
 
 <p>Audio_Input <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
 
-<p>&#8230;(no recording of this one)</p>
+<p><audio controls>
+<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/04.Audio_Input/Audio_Input/Audio_Input.ogg?raw=true' preload='auto'></source>
+<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/04.Audio_Input/Audio_Input/Audio_Input.mp3?raw=true' preload='auto'></source>
+Your browser does not support the audio element.</audio></p>
 
 <p><button type='button' id='Audio_Inputexpand' onclick='javascript:toggleDisplay(Audio_Input, Audio_Inputexpand, Audio_Inputcollapse)'>show sketch</button>
 <button id='Audio_Inputcollapse' style='display:none' onclick='javascript:toggleDisplay(Audio_Input, Audio_Inputexpand, Audio_Inputcollapse)'>hide sketch</button></p>
 
 <div id='Audio_Input' style='display:none'>
-<figure class='code'><figcaption><span> (Audio_Input.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Audio_Input.ino)</span> <a href='/Mozzi/downloads/code/examples/04.Audio_Input/Audio_Input/Audio_Input.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -5317,7 +5361,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Audio_Input_with_Knob_Filtercollapse' style='display:none' onclick='javascript:toggleDisplay(Audio_Input_with_Knob_Filter, Audio_Input_with_Knob_Filterexpand, Audio_Input_with_Knob_Filtercollapse)'>hide sketch</button></p>
 
 <div id='Audio_Input_with_Knob_Filter' style='display:none'>
-<figure class='code'><figcaption><span> (Audio_Input_with_Knob_Filter.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Audio_Input_with_Knob_Filter.ino)</span> <a href='/Mozzi/downloads/code/examples/04.Audio_Input/Audio_Input_with_Knob_Filter/Audio_Input_with_Knob_Filter.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -5436,13 +5480,16 @@ Your browser does not support the audio element.</audio></p>
 
 <p>Audio_and_Control_Input <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
 
-<p>&#8230;(no recording of this one)</p>
+<p><audio controls>
+<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/04.Audio_Input/Audio_and_Control_Input/Audio_and_Control_Input.ogg?raw=true' preload='auto'></source>
+<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/04.Audio_Input/Audio_and_Control_Input/Audio_and_Control_Input.mp3?raw=true' preload='auto'></source>
+Your browser does not support the audio element.</audio></p>
 
 <p><button type='button' id='Audio_and_Control_Inputexpand' onclick='javascript:toggleDisplay(Audio_and_Control_Input, Audio_and_Control_Inputexpand, Audio_and_Control_Inputcollapse)'>show sketch</button>
 <button id='Audio_and_Control_Inputcollapse' style='display:none' onclick='javascript:toggleDisplay(Audio_and_Control_Input, Audio_and_Control_Inputexpand, Audio_and_Control_Inputcollapse)'>hide sketch</button></p>
 
 <div id='Audio_and_Control_Input' style='display:none'>
-<figure class='code'><figcaption><span> (Audio_and_Control_Input.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Audio_and_Control_Input.ino)</span> <a href='/Mozzi/downloads/code/examples/04.Audio_Input/Audio_and_Control_Input/Audio_and_Control_Input.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -5583,7 +5630,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='DCfiltercollapse' style='display:none' onclick='javascript:toggleDisplay(DCfilter, DCfilterexpand, DCfiltercollapse)'>hide sketch</button></p>
 
 <div id='DCfilter' style='display:none'>
-<figure class='code'><figcaption><span> (DCfilter.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (DCfilter.ino)</span> <a href='/Mozzi/downloads/code/examples/05.Control_Filters/DCfilter/DCfilter.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -5693,7 +5740,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Line_vs_Smoothcollapse' style='display:none' onclick='javascript:toggleDisplay(Line_vs_Smooth, Line_vs_Smoothexpand, Line_vs_Smoothcollapse)'>hide sketch</button></p>
 
 <div id='Line_vs_Smooth' style='display:none'>
-<figure class='code'><figcaption><span> (Line_vs_Smooth.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Line_vs_Smooth.ino)</span> <a href='/Mozzi/downloads/code/examples/05.Control_Filters/Line_vs_Smooth/Line_vs_Smooth.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -5891,7 +5938,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='MIDI_portamentocollapse' style='display:none' onclick='javascript:toggleDisplay(MIDI_portamento, MIDI_portamentoexpand, MIDI_portamentocollapse)'>hide sketch</button></p>
 
 <div id='MIDI_portamento' style='display:none'>
-<figure class='code'><figcaption><span> (MIDI_portamento.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (MIDI_portamento.ino)</span> <a href='/Mozzi/downloads/code/examples/05.Control_Filters/MIDI_portamento/MIDI_portamento.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -6093,7 +6140,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='RollingAveragecollapse' style='display:none' onclick='javascript:toggleDisplay(RollingAverage, RollingAverageexpand, RollingAveragecollapse)'>hide sketch</button></p>
 
 <div id='RollingAverage' style='display:none'>
-<figure class='code'><figcaption><span> (RollingAverage.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (RollingAverage.ino)</span> <a href='/Mozzi/downloads/code/examples/05.Control_Filters/RollingAverage/RollingAverage.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -6233,7 +6280,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Smoothcollapse' style='display:none' onclick='javascript:toggleDisplay(Smooth, Smoothexpand, Smoothcollapse)'>hide sketch</button></p>
 
 <div id='Smooth' style='display:none'>
-<figure class='code'><figcaption><span> (Smooth.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Smooth.ino)</span> <a href='/Mozzi/downloads/code/examples/05.Control_Filters/Smooth/Smooth.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -6413,7 +6460,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Smooth_Frequencycollapse' style='display:none' onclick='javascript:toggleDisplay(Smooth_Frequency, Smooth_Frequencyexpand, Smooth_Frequencycollapse)'>hide sketch</button></p>
 
 <div id='Smooth_Frequency' style='display:none'>
-<figure class='code'><figcaption><span> (Smooth_Frequency.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Smooth_Frequency.ino)</span> <a href='/Mozzi/downloads/code/examples/05.Control_Filters/Smooth_Frequency/Smooth_Frequency.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -6565,7 +6612,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Thermistor_OverSamplecollapse' style='display:none' onclick='javascript:toggleDisplay(Thermistor_OverSample, Thermistor_OverSampleexpand, Thermistor_OverSamplecollapse)'>hide sketch</button></p>
 
 <div id='Thermistor_OverSample' style='display:none'>
-<figure class='code'><figcaption><span> (Thermistor_OverSample.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Thermistor_OverSample.ino)</span> <a href='/Mozzi/downloads/code/examples/05.Control_Filters/Thermistor_OverSample/Thermistor_OverSample.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -6821,7 +6868,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='AMsynthcollapse' style='display:none' onclick='javascript:toggleDisplay(AMsynth, AMsynthexpand, AMsynthcollapse)'>hide sketch</button></p>
 
 <div id='AMsynth' style='display:none'>
-<figure class='code'><figcaption><span> (AMsynth.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (AMsynth.ino)</span> <a href='/Mozzi/downloads/code/examples/06.Synthesis/AMsynth/AMsynth.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -7061,7 +7108,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='AMsynth_HIFIcollapse' style='display:none' onclick='javascript:toggleDisplay(AMsynth_HIFI, AMsynth_HIFIexpand, AMsynth_HIFIcollapse)'>hide sketch</button></p>
 
 <div id='AMsynth_HIFI' style='display:none'>
-<figure class='code'><figcaption><span> (AMsynth_HIFI.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (AMsynth_HIFI.ino)</span> <a href='/Mozzi/downloads/code/examples/06.Synthesis/AMsynth_HIFI/AMsynth_HIFI.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -7349,7 +7396,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Detuned_Beats_Washcollapse' style='display:none' onclick='javascript:toggleDisplay(Detuned_Beats_Wash, Detuned_Beats_Washexpand, Detuned_Beats_Washcollapse)'>hide sketch</button></p>
 
 <div id='Detuned_Beats_Wash' style='display:none'>
-<figure class='code'><figcaption><span> (Detuned_Beats_Wash.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Detuned_Beats_Wash.ino)</span> <a href='/Mozzi/downloads/code/examples/06.Synthesis/Detuned_Beats_Wash/Detuned_Beats_Wash.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -7496,6 +7543,12 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>144</span>
 <span class='line-number'>145</span>
 <span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+<span class='line-number'>152</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Plays a fluctuating ambient wash using pairs</span>
 </span><span class='line'><span class="cm">    of slightly detuned oscillators, following an example</span>
 </span><span class='line'><span class="cm">    from Miller Puckette&#39;s Pure Data manual.</span>
@@ -7507,6 +7560,12 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Demonstrates the use of fixed-point Q16n16</span>
 </span><span class='line'><span class="cm">    format numbers, mtof() for converting midi note</span>
 </span><span class='line'><span class="cm">    values to frequency, and xorshift96() for random numbers.</span>
+</span><span class='line'><span class="cm">  </span>
+</span><span class='line'><span class="cm">    This sketch needs to be compiled using STANDARD audio mode </span>
+</span><span class='line'><span class="cm">    to avoid clicks from high processor load.</span>
+</span><span class='line'><span class="cm">    Edit Mozzi/mozzi_config.h, uncomment </span>
+</span><span class='line'><span class="cm">     #define AUDIO_MODE STANDARD</span>
+</span><span class='line'><span class="cm">    and make sure the other 2 AUDIO_MODE defines are commented out.</span>
 </span><span class='line'><span class="cm">  </span>
 </span><span class='line'><span class="cm">    Circuit: Audio output on digital pin 9 (on a Uno or similar), or </span>
 </span><span class='line'><span class="cm">    check the README or http://sensorium.github.com/Mozzi/</span>
@@ -7659,7 +7718,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='FMsynthcollapse' style='display:none' onclick='javascript:toggleDisplay(FMsynth, FMsynthexpand, FMsynthcollapse)'>hide sketch</button></p>
 
 <div id='FMsynth' style='display:none'>
-<figure class='code'><figcaption><span> (FMsynth.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (FMsynth.ino)</span> <a href='/Mozzi/downloads/code/examples/06.Synthesis/FMsynth/FMsynth.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -7911,7 +7970,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='FMsynth_HIFIcollapse' style='display:none' onclick='javascript:toggleDisplay(FMsynth_HIFI, FMsynth_HIFIexpand, FMsynth_HIFIcollapse)'>hide sketch</button></p>
 
 <div id='FMsynth_HIFI' style='display:none'>
-<figure class='code'><figcaption><span> (FMsynth_HIFI.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (FMsynth_HIFI.ino)</span> <a href='/Mozzi/downloads/code/examples/06.Synthesis/FMsynth_HIFI/FMsynth_HIFI.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -8205,7 +8264,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='PWM_Phasingcollapse' style='display:none' onclick='javascript:toggleDisplay(PWM_Phasing, PWM_Phasingexpand, PWM_Phasingcollapse)'>hide sketch</button></p>
 
 <div id='PWM_Phasing' style='display:none'>
-<figure class='code'><figcaption><span> (PWM_Phasing.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (PWM_Phasing.ino)</span> <a href='/Mozzi/downloads/code/examples/06.Synthesis/PWM_Phasing/PWM_Phasing.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -8325,7 +8384,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='WavePacket_Doublecollapse' style='display:none' onclick='javascript:toggleDisplay(WavePacket_Double, WavePacket_Doubleexpand, WavePacket_Doublecollapse)'>hide sketch</button></p>
 
 <div id='WavePacket_Double' style='display:none'>
-<figure class='code'><figcaption><span> (WavePacket_Double.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (WavePacket_Double.ino)</span> <a href='/Mozzi/downloads/code/examples/06.Synthesis/WavePacket_Double/WavePacket_Double.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -8451,7 +8510,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='WavePacket_Samplecollapse' style='display:none' onclick='javascript:toggleDisplay(WavePacket_Sample, WavePacket_Sampleexpand, WavePacket_Samplecollapse)'>hide sketch</button></p>
 
 <div id='WavePacket_Sample' style='display:none'>
-<figure class='code'><figcaption><span> (WavePacket_Sample.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (WavePacket_Sample.ino)</span> <a href='/Mozzi/downloads/code/examples/06.Synthesis/WavePacket_Sample/WavePacket_Sample.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -8589,7 +8648,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='WavePacket_Singlecollapse' style='display:none' onclick='javascript:toggleDisplay(WavePacket_Single, WavePacket_Singleexpand, WavePacket_Singlecollapse)'>hide sketch</button></p>
 
 <div id='WavePacket_Single' style='display:none'>
-<figure class='code'><figcaption><span> (WavePacket_Single.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (WavePacket_Single.ino)</span> <a href='/Mozzi/downloads/code/examples/06.Synthesis/WavePacket_Single/WavePacket_Single.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -8715,7 +8774,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Waveshapercollapse' style='display:none' onclick='javascript:toggleDisplay(Waveshaper, Waveshaperexpand, Waveshapercollapse)'>hide sketch</button></p>
 
 <div id='Waveshaper' style='display:none'>
-<figure class='code'><figcaption><span> (Waveshaper.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Waveshaper.ino)</span> <a href='/Mozzi/downloads/code/examples/06.Synthesis/Waveshaper/Waveshaper.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -8969,7 +9028,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Waveshaper_Difference_Tonecollapse' style='display:none' onclick='javascript:toggleDisplay(Waveshaper_Difference_Tone, Waveshaper_Difference_Toneexpand, Waveshaper_Difference_Tonecollapse)'>hide sketch</button></p>
 
 <div id='Waveshaper_Difference_Tone' style='display:none'>
-<figure class='code'><figcaption><span> (Waveshaper_Difference_Tone.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Waveshaper_Difference_Tone.ino)</span> <a href='/Mozzi/downloads/code/examples/06.Synthesis/Waveshaper_Difference_Tone/Waveshaper_Difference_Tone.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -9155,7 +9214,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='ADSR_Envelopecollapse' style='display:none' onclick='javascript:toggleDisplay(ADSR_Envelope, ADSR_Envelopeexpand, ADSR_Envelopecollapse)'>hide sketch</button></p>
 
 <div id='ADSR_Envelope' style='display:none'>
-<figure class='code'><figcaption><span> (ADSR_Envelope.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (ADSR_Envelope.ino)</span> <a href='/Mozzi/downloads/code/examples/07.Envelopes/ADSR_Envelope/ADSR_Envelope.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -9375,7 +9434,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='ADSR_Envelope_x2collapse' style='display:none' onclick='javascript:toggleDisplay(ADSR_Envelope_x2, ADSR_Envelope_x2expand, ADSR_Envelope_x2collapse)'>hide sketch</button></p>
 
 <div id='ADSR_Envelope_x2' style='display:none'>
-<figure class='code'><figcaption><span> (ADSR_Envelope_x2.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (ADSR_Envelope_x2.ino)</span> <a href='/Mozzi/downloads/code/examples/07.Envelopes/ADSR_Envelope_x2/ADSR_Envelope_x2.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -9741,7 +9800,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Ead_Envelopecollapse' style='display:none' onclick='javascript:toggleDisplay(Ead_Envelope, Ead_Envelopeexpand, Ead_Envelopecollapse)'>hide sketch</button></p>
 
 <div id='Ead_Envelope' style='display:none'>
-<figure class='code'><figcaption><span> (Ead_Envelope.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Ead_Envelope.ino)</span> <a href='/Mozzi/downloads/code/examples/07.Envelopes/Ead_Envelope/Ead_Envelope.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -9887,7 +9946,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Phasemod_Envelopecollapse' style='display:none' onclick='javascript:toggleDisplay(Phasemod_Envelope, Phasemod_Envelopeexpand, Phasemod_Envelopecollapse)'>hide sketch</button></p>
 
 <div id='Phasemod_Envelope' style='display:none'>
-<figure class='code'><figcaption><span> (Phasemod_Envelope.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Phasemod_Envelope.ino)</span> <a href='/Mozzi/downloads/code/examples/07.Envelopes/Phasemod_Envelope/Phasemod_Envelope.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -10019,7 +10078,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Samplecollapse' style='display:none' onclick='javascript:toggleDisplay(Sample, Sampleexpand, Samplecollapse)'>hide sketch</button></p>
 
 <div id='Sample' style='display:none'>
-<figure class='code'><figcaption><span> (Sample.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Sample.ino)</span> <a href='/Mozzi/downloads/code/examples/08.Samples/Sample/Sample.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -10141,7 +10200,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='SampleHuffman_Umpahcollapse' style='display:none' onclick='javascript:toggleDisplay(SampleHuffman_Umpah, SampleHuffman_Umpahexpand, SampleHuffman_Umpahcollapse)'>hide sketch</button></p>
 
 <div id='SampleHuffman_Umpah' style='display:none'>
-<figure class='code'><figcaption><span> (SampleHuffman_Umpah.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (SampleHuffman_Umpah.ino)</span> <a href='/Mozzi/downloads/code/examples/08.Samples/SampleHuffman_Umpah/SampleHuffman_Umpah.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -10297,7 +10356,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Sample_Loop_Pointscollapse' style='display:none' onclick='javascript:toggleDisplay(Sample_Loop_Points, Sample_Loop_Pointsexpand, Sample_Loop_Pointscollapse)'>hide sketch</button></p>
 
 <div id='Sample_Loop_Points' style='display:none'>
-<figure class='code'><figcaption><span> (Sample_Loop_Points.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Sample_Loop_Points.ino)</span> <a href='/Mozzi/downloads/code/examples/08.Samples/Sample_Loop_Points/Sample_Loop_Points.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -10527,7 +10586,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Sample_Scrubcollapse' style='display:none' onclick='javascript:toggleDisplay(Sample_Scrub, Sample_Scrubexpand, Sample_Scrubcollapse)'>hide sketch</button></p>
 
 <div id='Sample_Scrub' style='display:none'>
-<figure class='code'><figcaption><span> (Sample_Scrub.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Sample_Scrub.ino)</span> <a href='/Mozzi/downloads/code/examples/08.Samples/Sample_Scrub/Sample_Scrub.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -10699,7 +10758,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Samplescollapse' style='display:none' onclick='javascript:toggleDisplay(Samples, Samplesexpand, Samplescollapse)'>hide sketch</button></p>
 
 <div id='Samples' style='display:none'>
-<figure class='code'><figcaption><span> (Samples.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Samples.ino)</span> <a href='/Mozzi/downloads/code/examples/08.Samples/Samples/Samples.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -10907,7 +10966,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Samples_Tables_Arrayscollapse' style='display:none' onclick='javascript:toggleDisplay(Samples_Tables_Arrays, Samples_Tables_Arraysexpand, Samples_Tables_Arrayscollapse)'>hide sketch</button></p>
 
 <div id='Samples_Tables_Arrays' style='display:none'>
-<figure class='code'><figcaption><span> (Samples_Tables_Arrays.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Samples_Tables_Arrays.ino)</span> <a href='/Mozzi/downloads/code/examples/08.Samples/Samples_Tables_Arrays/Samples_Tables_Arrays.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -11179,7 +11238,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Wavetable_Swapcollapse' style='display:none' onclick='javascript:toggleDisplay(Wavetable_Swap, Wavetable_Swapexpand, Wavetable_Swapcollapse)'>hide sketch</button></p>
 
 <div id='Wavetable_Swap' style='display:none'>
-<figure class='code'><figcaption><span> (Wavetable_Swap.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Wavetable_Swap.ino)</span> <a href='/Mozzi/downloads/code/examples/08.Samples/Wavetable_Swap/Wavetable_Swap.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -11319,7 +11378,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='AudioDelaycollapse' style='display:none' onclick='javascript:toggleDisplay(AudioDelay, AudioDelayexpand, AudioDelaycollapse)'>hide sketch</button></p>
 
 <div id='AudioDelay' style='display:none'>
-<figure class='code'><figcaption><span> (AudioDelay.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (AudioDelay.ino)</span> <a href='/Mozzi/downloads/code/examples/09.Delays/AudioDelay/AudioDelay.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -11433,7 +11492,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='AudioDelayFeedbackcollapse' style='display:none' onclick='javascript:toggleDisplay(AudioDelayFeedback, AudioDelayFeedbackexpand, AudioDelayFeedbackcollapse)'>hide sketch</button></p>
 
 <div id='AudioDelayFeedback' style='display:none'>
-<figure class='code'><figcaption><span> (AudioDelayFeedback.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (AudioDelayFeedback.ino)</span> <a href='/Mozzi/downloads/code/examples/09.Delays/AudioDelayFeedback/AudioDelayFeedback.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -11583,7 +11642,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='AudioDelayFeedbackAllpasscollapse' style='display:none' onclick='javascript:toggleDisplay(AudioDelayFeedbackAllpass, AudioDelayFeedbackAllpassexpand, AudioDelayFeedbackAllpasscollapse)'>hide sketch</button></p>
 
 <div id='AudioDelayFeedbackAllpass' style='display:none'>
-<figure class='code'><figcaption><span> (AudioDelayFeedbackAllpass.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (AudioDelayFeedbackAllpass.ino)</span> <a href='/Mozzi/downloads/code/examples/09.Delays/AudioDelayFeedbackAllpass/AudioDelayFeedbackAllpass.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -11753,7 +11812,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='AudioDelayFeedbackX2collapse' style='display:none' onclick='javascript:toggleDisplay(AudioDelayFeedbackX2, AudioDelayFeedbackX2expand, AudioDelayFeedbackX2collapse)'>hide sketch</button></p>
 
 <div id='AudioDelayFeedbackX2' style='display:none'>
-<figure class='code'><figcaption><span> (AudioDelayFeedbackX2.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (AudioDelayFeedbackX2.ino)</span> <a href='/Mozzi/downloads/code/examples/09.Delays/AudioDelayFeedbackX2/AudioDelayFeedbackX2.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -11919,7 +11978,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='AudioDelayFeedback_HIFIcollapse' style='display:none' onclick='javascript:toggleDisplay(AudioDelayFeedback_HIFI, AudioDelayFeedback_HIFIexpand, AudioDelayFeedback_HIFIcollapse)'>hide sketch</button></p>
 
 <div id='AudioDelayFeedback_HIFI' style='display:none'>
-<figure class='code'><figcaption><span> (AudioDelayFeedback_HIFI.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (AudioDelayFeedback_HIFI.ino)</span> <a href='/Mozzi/downloads/code/examples/09.Delays/AudioDelayFeedback_HIFI/AudioDelayFeedback_HIFI.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -12065,7 +12124,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='ReverbTank_STANDARDcollapse' style='display:none' onclick='javascript:toggleDisplay(ReverbTank_STANDARD, ReverbTank_STANDARDexpand, ReverbTank_STANDARDcollapse)'>hide sketch</button></p>
 
 <div id='ReverbTank_STANDARD' style='display:none'>
-<figure class='code'><figcaption><span> (ReverbTank_STANDARD.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (ReverbTank_STANDARD.ino)</span> <a href='/Mozzi/downloads/code/examples/09.Delays/ReverbTank_STANDARD/ReverbTank_STANDARD.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -12237,7 +12296,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='LowPassFiltercollapse' style='display:none' onclick='javascript:toggleDisplay(LowPassFilter, LowPassFilterexpand, LowPassFiltercollapse)'>hide sketch</button></p>
 
 <div id='LowPassFilter' style='display:none'>
-<figure class='code'><figcaption><span> (LowPassFilter.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (LowPassFilter.ino)</span> <a href='/Mozzi/downloads/code/examples/10.Audio_Filters/LowPassFilter/LowPassFilter.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -12361,7 +12420,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='LowPassFilterX2collapse' style='display:none' onclick='javascript:toggleDisplay(LowPassFilterX2, LowPassFilterX2expand, LowPassFilterX2collapse)'>hide sketch</button></p>
 
 <div id='LowPassFilterX2' style='display:none'>
-<figure class='code'><figcaption><span> (LowPassFilterX2.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (LowPassFilterX2.ino)</span> <a href='/Mozzi/downloads/code/examples/10.Audio_Filters/LowPassFilterX2/LowPassFilterX2.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -12501,7 +12560,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='StateVariableFiltercollapse' style='display:none' onclick='javascript:toggleDisplay(StateVariableFilter, StateVariableFilterexpand, StateVariableFiltercollapse)'>hide sketch</button></p>
 
 <div id='StateVariableFilter' style='display:none'>
-<figure class='code'><figcaption><span> (StateVariableFilter.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (StateVariableFilter.ino)</span> <a href='/Mozzi/downloads/code/examples/10.Audio_Filters/StateVariableFilter/StateVariableFilter.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -12556,6 +12615,10 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>52</span>
 <span class='line-number'>53</span>
 <span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of filtering a wave,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -12578,37 +12641,207 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cp">#include &lt;StateVariable.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;mozzi_rand.h&gt; </span><span class="c1">// for rand()</span>
 </span><span class='line'>
-</span><span class='line'><span class="cp">#define CONTROL_RATE 64 </span><span class="c1">// powers of 2 please</span>
-</span><span class='line'>
 </span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">WHITENOISE8192_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aNoise</span><span class="p">(</span><span class="n">WHITENOISE8192_DATA</span><span class="p">);</span> <span class="c1">// audio noise</span>
 </span><span class='line'><span class="n">Oscil</span><span class="o">&lt;</span><span class="n">COS2048_NUM_CELLS</span><span class="p">,</span> <span class="n">CONTROL_RATE</span><span class="o">&gt;</span> <span class="n">kFilterMod</span><span class="p">(</span><span class="n">COS2048_DATA</span><span class="p">);</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">StateVariable</span> <span class="o">&lt;</span><span class="n">NOTCH</span><span class="o">&gt;</span> <span class="n">svf</span><span class="p">;</span> <span class="c1">// can be LOWPASS, BANDPASS, HIGHPASS or NOTCH</span>
 </span><span class='line'>
+</span><span class='line'>
 </span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
-</span><span class='line'>  <span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">startMozzi</span><span class="p">();</span>
 </span><span class='line'>  <span class="c1">// cast to float because the resulting freq will be small and fractional</span>
 </span><span class='line'>  <span class="n">aNoise</span><span class="p">.</span><span class="n">setFreq</span><span class="p">((</span><span class="kt">float</span><span class="p">)</span><span class="n">AUDIO_RATE</span><span class="o">/</span><span class="n">WHITENOISE8192_SAMPLERATE</span><span class="p">);</span>
 </span><span class='line'>  <span class="n">kFilterMod</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="mf">1.3f</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">svf</span><span class="p">.</span><span class="n">setResonance</span><span class="p">(</span><span class="mf">25.f</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">svf</span><span class="p">.</span><span class="n">setCentreFreq</span><span class="p">(</span><span class="mf">1200.f</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">svf</span><span class="p">.</span><span class="n">setResonance</span><span class="p">(</span><span class="mi">25</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">svf</span><span class="p">.</span><span class="n">setCentreFreq</span><span class="p">(</span><span class="mi">1200</span><span class="p">);</span>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'><span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
-</span><span class='line'>  <span class="n">audioHook</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span>
 </span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span> <span class="c1">// about once every half second</span>
 </span><span class='line'>    <span class="n">kFilterMod</span><span class="p">.</span><span class="n">setFreq</span><span class="p">((</span><span class="kt">float</span><span class="p">)</span><span class="n">rand</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="o">/</span><span class="mi">64</span><span class="p">);</span>  <span class="c1">// choose a new modulation frequency</span>
 </span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="kt">float</span> <span class="n">cutoff_freq</span> <span class="o">=</span> <span class="mf">2200.f</span> <span class="o">+</span> <span class="n">kFilterMod</span><span class="p">.</span><span class="n">next</span><span class="p">()</span><span class="o">*</span><span class="mi">12</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">cutoff_freq</span> <span class="o">=</span> <span class="mi">2200</span> <span class="o">+</span> <span class="n">kFilterMod</span><span class="p">.</span><span class="n">next</span><span class="p">()</span><span class="o">*</span><span class="mi">12</span><span class="p">;</span>
 </span><span class='line'>  <span class="n">svf</span><span class="p">.</span><span class="n">setCentreFreq</span><span class="p">(</span><span class="n">cutoff_freq</span><span class="p">);</span>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
+</span><span class='line'>
 </span><span class='line'><span class="kt">int</span> <span class="n">updateAudio</span><span class="p">(){</span>
 </span><span class='line'>  <span class="c1">// watch output levels, they can distort if too high</span>
+</span><span class='line'>  <span class="c1">// also, at very resonant settings, the input signal may need attenuating</span>
 </span><span class='line'>  <span class="k">return</span> <span class="n">svf</span><span class="p">.</span><span class="n">next</span><span class="p">(</span><span class="n">aNoise</span><span class="p">.</span><span class="n">next</span><span class="p">())</span><span class="o">&gt;&gt;</span><span class="mi">3</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">audioHook</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+</div>
+
+
+<hr />
+
+<p>StateVariableFilter_HIFI <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
+
+<p><audio controls>
+<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/10.Audio_Filters/StateVariableFilter_HIFI/StateVariableFilter_HIFI.ogg?raw=true' preload='auto'></source>
+<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/10.Audio_Filters/StateVariableFilter_HIFI/StateVariableFilter_HIFI.mp3?raw=true' preload='auto'></source>
+Your browser does not support the audio element.</audio></p>
+
+<p><button type='button' id='StateVariableFilter_HIFIexpand' onclick='javascript:toggleDisplay(StateVariableFilter_HIFI, StateVariableFilter_HIFIexpand, StateVariableFilter_HIFIcollapse)'>show sketch</button>
+<button id='StateVariableFilter_HIFIcollapse' style='display:none' onclick='javascript:toggleDisplay(StateVariableFilter_HIFI, StateVariableFilter_HIFIexpand, StateVariableFilter_HIFIcollapse)'>hide sketch</button></p>
+
+<div id='StateVariableFilter_HIFI' style='display:none'>
+<figure class='code'><figcaption><span> (StateVariableFilter_HIFI.ino)</span> <a href='/Mozzi/downloads/code/examples/10.Audio_Filters/StateVariableFilter_HIFI/StateVariableFilter_HIFI.ino'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of filtering audio noise with a resonant filter,</span>
+</span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
+</span><span class='line'><span class="cm">  </span>
+</span><span class='line'><span class="cm">    Demonstrates StateVariable() with acute resonance,</span>
+</span><span class='line'><span class="cm">    which in this case requires the input signal level to be reduced </span>
+</span><span class='line'><span class="cm">    to avoid distortion which can occur with sharp resonance settings.</span>
+</span><span class='line'><span class="cm">  </span>
+</span><span class='line'><span class="cm">     IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be</span>
+</span><span class='line'><span class="cm">    be changed from STANDARD mode to HIFI.</span>
+</span><span class='line'><span class="cm">    In Mozz/mozzi_config.h, change</span>
+</span><span class='line'><span class="cm">    #define AUDIO_MODE STANDARD</span>
+</span><span class='line'><span class="cm">    //#define AUDIO_MODE HIFI</span>
+</span><span class='line'><span class="cm">    to</span>
+</span><span class='line'><span class="cm">    //#define AUDIO_MODE STANDARD</span>
+</span><span class='line'><span class="cm">    #define AUDIO_MODE HIFI</span>
+</span><span class='line'><span class="cm">  </span>
+</span><span class='line'><span class="cm">    Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),</span>
+</span><span class='line'><span class="cm">    Check the Mozzi core module documentation for others and more detail</span>
+</span><span class='line'><span class="cm">  </span>
+</span><span class='line'><span class="cm">                     3.9k </span>
+</span><span class='line'><span class="cm">     pin 9  ---WWWW-----|-----output</span>
+</span><span class='line'><span class="cm">                    499k           |</span>
+</span><span class='line'><span class="cm">     pin 10 ---WWWW---- |</span>
+</span><span class='line'><span class="cm">                                       |</span>
+</span><span class='line'><span class="cm">                             4.7n  ==</span>
+</span><span class='line'><span class="cm">                                       |</span>
+</span><span class='line'><span class="cm">                                   ground</span>
+</span><span class='line'><span class="cm">  </span>
+</span><span class='line'><span class="cm">    Resistors are ±0.5%  Measure and choose the most precise </span>
+</span><span class='line'><span class="cm">    from a batch of whatever you can get.  Use two 1M resistors</span>
+</span><span class='line'><span class="cm">    in parallel if you can&#39;t find 499k.</span>
+</span><span class='line'><span class="cm">    Alternatively using 39 ohm, 4.99k and 470nF components will </span>
+</span><span class='line'><span class="cm">    work directly with headphones.</span>
+</span><span class='line'><span class="cm">  </span>
+</span><span class='line'><span class="cm">    Mozzi help/discussion/announcements:</span>
+</span><span class='line'><span class="cm">    https://groups.google.com/forum/#!forum/mozzi-users</span>
+</span><span class='line'><span class="cm">  </span>
+</span><span class='line'><span class="cm">    Tim Barrass 2012.</span>
+</span><span class='line'><span class="cm">    This example code is in the public domain.</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;tables/whitenoise8192_int8.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;StateVariable.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">WHITENOISE8192_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aNoise</span><span class="p">(</span><span class="n">WHITENOISE8192_DATA</span><span class="p">);</span> <span class="c1">// audio noise</span>
+</span><span class='line'><span class="n">StateVariable</span> <span class="o">&lt;</span><span class="n">BANDPASS</span><span class="o">&gt;</span> <span class="n">svf</span><span class="p">;</span> <span class="c1">// can be LOWPASS, BANDPASS, HIGHPASS or NOTCH</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">startMozzi</span><span class="p">();</span>
+</span><span class='line'>  <span class="n">aNoise</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="mf">1.27f</span><span class="o">*</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">AUDIO_RATE</span><span class="o">/</span><span class="n">WHITENOISE8192_SAMPLERATE</span><span class="p">);</span>   <span class="c1">// * by an oddish number (1.27) to avoid exact repeating of noise oscil</span>
+</span><span class='line'>  <span class="n">svf</span><span class="p">.</span><span class="n">setResonance</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// 0 to 255, 0 is the &quot;sharp&quot; end</span>
+</span><span class='line'>  <span class="n">svf</span><span class="p">.</span><span class="n">setCentreFreq</span><span class="p">(</span><span class="mi">3500</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">updateAudio</span><span class="p">(){</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">input</span> <span class="o">=</span> <span class="n">aNoise</span><span class="p">.</span><span class="n">next</span><span class="p">()</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// shift down (ie. fast /) to avoid distortion with extreme resonant filter setting</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">output</span> <span class="o">=</span> <span class="n">svf</span><span class="p">.</span><span class="n">next</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">output</span><span class="o">&lt;&lt;</span><span class="mi">4</span><span class="p">;</span> <span class="c1">// shift up for HIFI resolution</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">audioHook</span><span class="p">();</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 </div>
@@ -12624,16 +12857,13 @@ Your browser does not support the audio element.</audio></p>
 
 <p>Mozzi_Processing_Serial <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
 
-<p><audio controls>
-<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/11.Communication/Mozzi_Processing_Serial/Mozzi_Processing_Serial.ogg?raw=true' preload='auto'></source>
-<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/11.Communication/Mozzi_Processing_Serial/Mozzi_Processing_Serial.mp3?raw=true' preload='auto'></source>
-Your browser does not support the audio element.</audio></p>
+<p>&#8230;(no recording of this one)</p>
 
 <p><button type='button' id='Mozzi_Processing_Serialexpand' onclick='javascript:toggleDisplay(Mozzi_Processing_Serial, Mozzi_Processing_Serialexpand, Mozzi_Processing_Serialcollapse)'>show sketch</button>
 <button id='Mozzi_Processing_Serialcollapse' style='display:none' onclick='javascript:toggleDisplay(Mozzi_Processing_Serial, Mozzi_Processing_Serialexpand, Mozzi_Processing_Serialcollapse)'>hide sketch</button></p>
 
 <div id='Mozzi_Processing_Serial' style='display:none'>
-<figure class='code'><figcaption><span> (Mozzi_Processing_Serial.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Mozzi_Processing_Serial.ino)</span> <a href='/Mozzi/downloads/code/examples/11.Communication/Mozzi_Processing_Serial/Mozzi_Processing_Serial.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -12882,16 +13112,13 @@ Your browser does not support the audio element.</audio></p>
 
 <p>Sinewave_PWM_leds_HIFI <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
 
-<p><audio controls>
-<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/11.Communication/Sinewave_PWM_leds_HIFI/Sinewave_PWM_leds_HIFI.ogg?raw=true' preload='auto'></source>
-<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/11.Communication/Sinewave_PWM_leds_HIFI/Sinewave_PWM_leds_HIFI.mp3?raw=true' preload='auto'></source>
-Your browser does not support the audio element.</audio></p>
+<p>&#8230;(no recording of this one)</p>
 
 <p><button type='button' id='Sinewave_PWM_leds_HIFIexpand' onclick='javascript:toggleDisplay(Sinewave_PWM_leds_HIFI, Sinewave_PWM_leds_HIFIexpand, Sinewave_PWM_leds_HIFIcollapse)'>show sketch</button>
 <button id='Sinewave_PWM_leds_HIFIcollapse' style='display:none' onclick='javascript:toggleDisplay(Sinewave_PWM_leds_HIFI, Sinewave_PWM_leds_HIFIexpand, Sinewave_PWM_leds_HIFIcollapse)'>hide sketch</button></p>
 
 <div id='Sinewave_PWM_leds_HIFI' style='display:none'>
-<figure class='code'><figcaption><span> (Sinewave_PWM_leds_HIFI.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Sinewave_PWM_leds_HIFI.ino)</span> <a href='/Mozzi/downloads/code/examples/11.Communication/Sinewave_PWM_leds_HIFI/Sinewave_PWM_leds_HIFI.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -13149,7 +13376,7 @@ Your browser does not support the audio element.</audio></p>
 <button id='Teensy_USB_MIDI_Inputcollapse' style='display:none' onclick='javascript:toggleDisplay(Teensy_USB_MIDI_Input, Teensy_USB_MIDI_Inputexpand, Teensy_USB_MIDI_Inputcollapse)'>hide sketch</button></p>
 
 <div id='Teensy_USB_MIDI_Input' style='display:none'>
-<figure class='code'><figcaption><span> (Teensy_USB_MIDI_Input.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (Teensy_USB_MIDI_Input.ino)</span> <a href='/Mozzi/downloads/code/examples/11.Communication/Teensy_USB_MIDI_Input/Teensy_USB_MIDI_Input.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -13332,16 +13559,13 @@ Your browser does not support the audio element.</audio></p>
 
 <p>TwoWire_Read_ADXL345 <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
 
-<p><audio controls>
-<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/11.Communication/TwoWire_Read_ADXL345/TwoWire_Read_ADXL345.ogg?raw=true' preload='auto'></source>
-<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/11.Communication/TwoWire_Read_ADXL345/TwoWire_Read_ADXL345.mp3?raw=true' preload='auto'></source>
-Your browser does not support the audio element.</audio></p>
+<p>&#8230;(no recording of this one)</p>
 
 <p><button type='button' id='TwoWire_Read_ADXL345expand' onclick='javascript:toggleDisplay(TwoWire_Read_ADXL345, TwoWire_Read_ADXL345expand, TwoWire_Read_ADXL345collapse)'>show sketch</button>
 <button id='TwoWire_Read_ADXL345collapse' style='display:none' onclick='javascript:toggleDisplay(TwoWire_Read_ADXL345, TwoWire_Read_ADXL345expand, TwoWire_Read_ADXL345collapse)'>hide sketch</button></p>
 
 <div id='TwoWire_Read_ADXL345' style='display:none'>
-<figure class='code'><figcaption><span> (TwoWire_Read_ADXL345.ino)</span> </figcaption>
+<figure class='code'><figcaption><span> (TwoWire_Read_ADXL345.ino)</span> <a href='/Mozzi/downloads/code/examples/11.Communication/TwoWire_Read_ADXL345/TwoWire_Read_ADXL345.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>

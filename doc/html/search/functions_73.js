@@ -8,6 +8,7 @@ var searchData=
   ['setattacklevel',['setAttackLevel',['../class_a_d_s_r.html#aa7fe43c0a91006b5f72013bb5b25fcbb',1,'ADSR']]],
   ['setattacktime',['setAttackTime',['../class_a_d_s_r.html#ac8e63a0de672b4a91e2123bead6a465b',1,'ADSR']]],
   ['setbandwidth',['setBandwidth',['../class_wave_packet.html#abce5b3ca4c559473c199744753fb75aa',1,'WavePacket']]],
+  ['setbpm',['setBPM',['../class_metronome.html#aab384673719ebd552dd72d474ed58556',1,'Metronome']]],
   ['setcentrefreq',['setCentreFreq',['../class_state_variable.html#a47e7ddad76db7009e370fa91ea5d4d3d',1,'StateVariable::setCentreFreq()'],['../class_wave_packet.html#adbbbf8b6b9eaae18ef381ff04be3eb5b',1,'WavePacket::setCentreFreq()']]],
   ['setcutofffreq',['setCutoffFreq',['../class_low_pass_filter.html#ad7958bf53ac1c24b5653861ed521ed14',1,'LowPassFilter']]],
   ['setdecay',['setDecay',['../class_ead.html#aa99e6dc2d5448b4de0764c6208e5c2fc',1,'Ead']]],
@@ -28,9 +29,6 @@ var searchData=
   ['setphase',['setPhase',['../class_oscil.html#ab7b740eec56740426a47508562ed4dd5',1,'Oscil']]],
   ['setphasefractional',['setPhaseFractional',['../class_oscil.html#afc77bfc5a1ad5926ad8df37725d480d7',1,'Oscil']]],
   ['setphaseinc',['setPhaseInc',['../class_oscil.html#a2ff9bfcc57e07bf0df2ed7db186ecff7',1,'Oscil::setPhaseInc()'],['../class_phasor.html#aa3d62bdf762247b2523c0a625caeedd7',1,'Phasor::setPhaseInc()'],['../class_sample.html#aaff03b2a14f8f0f79c13840948151a1d',1,'Sample::setPhaseInc()']]],
-  ['setpin13high',['setPin13High',['../group__util.html#gaea7ee11e335eb2d6b891b886c5f3f942',1,'mozzi_utils.h']]],
-  ['setpin13low',['setPin13Low',['../group__util.html#ga4c87d0211135fd33a8697350235b50b4',1,'mozzi_utils.h']]],
-  ['setpin13out',['setPin13Out',['../group__util.html#gad1725ef17b234c4df9cc64a9bf561435',1,'mozzi_utils.h']]],
   ['setreleaselevel',['setReleaseLevel',['../class_a_d_s_r.html#aa577c32f8758e1ecda44b4410c1c103d',1,'ADSR']]],
   ['setreleasetime',['setReleaseTime',['../class_a_d_s_r.html#ab76efe021a258b65da9bc5ec85da2f34',1,'ADSR']]],
   ['setresonance',['setResonance',['../class_low_pass_filter.html#aa804e9162a1b855380c6f48d00de2c32',1,'LowPassFilter::setResonance()'],['../class_state_variable.html#a992e23a80b611b72e3e764c14d5ee188',1,'StateVariable::setResonance()']]],
@@ -41,10 +39,8 @@ var searchData=
   ['settable',['setTable',['../class_oscil.html#a59e9b132ad0770030d7339c6aa260925',1,'Oscil::setTable()'],['../class_sample.html#a03cb0ce7df128a179f4dc3b8cc9ff459',1,'Sample::setTable()'],['../class_wave_packet_sample.html#a69ae33a0540773b090e83d7fa884489e',1,'WavePacketSample::setTable()']]],
   ['settime',['setTime',['../class_portamento.html#af19c3b3c189e111079f54211ff5a4ebe',1,'Portamento']]],
   ['settimes',['setTimes',['../class_a_d_s_r.html#af656b88fdfddd521c3a30fe9b06b524b',1,'ADSR']]],
-  ['setupfastanalogread',['setupFastAnalogRead',['../group__analog.html#ga8741756d32609ad6dec641943fa99af9',1,'setupFastAnalogRead(char speed):&#160;mozzi_analog.cpp'],['../group__analog.html#ga8741756d32609ad6dec641943fa99af9',1,'setupFastAnalogRead(char speed=FAST_ADC):&#160;mozzi_analog.cpp']]],
   ['smooth',['Smooth',['../class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26',1,'Smooth']]],
   ['stack',['Stack',['../class_stack.html#ab034b819e2382f80d952cf8527dc6e6c',1,'Stack']]],
   ['start',['start',['../class_ead.html#ac385679b58e2f9755029b7da7405b233',1,'Ead::start()'],['../class_ead.html#a146b205e70f4b2293e643ea063f2b38f',1,'Ead::start(unsigned int attack_ms, unsigned int decay_ms)'],['../class_event_delay.html#a97a07c9371040d6388b8369352b08d83',1,'EventDelay::start()'],['../class_event_delay.html#a0943cb52a1ee36fda1156f8dd762a105',1,'EventDelay::start(unsigned int delay_milliseconds)'],['../class_metronome.html#ab85d2f5bdc5cb00d5056b0c2c6eed987',1,'Metronome::start()'],['../class_metronome.html#ad5670c748042846b02cb33c613c50422',1,'Metronome::start(unsigned int delay_milliseconds)'],['../class_portamento.html#af93c2b0ab1efa88d4e15f919401c2337',1,'Portamento::start(unsigned char note)'],['../class_portamento.html#af70701abfdd9f3d788f3b313e38017d0',1,'Portamento::start(Q16n16 note)'],['../class_sample.html#a49ab98acdfb4f81a8860ad21876bdc18',1,'Sample::start()'],['../class_sample.html#abb7084b95a6141843ede8025cdd726ac',1,'Sample::start(unsigned int startpos)'],['../class_sample_huffman.html#a15ead859261d3d916d700b75f4626f15',1,'SampleHuffman::start()']]],
-  ['startmozzi',['startMozzi',['../group__core.html#ga75aa9f4a501f4b167343b8caac8c6837',1,'startMozzi(int control_rate_hz):&#160;MozziGuts.cpp'],['../group__core.html#ga75aa9f4a501f4b167343b8caac8c6837',1,'startMozzi(int control_rate_hz=CONTROL_RATE):&#160;MozziGuts.cpp']]],
   ['statevariable',['StateVariable',['../class_state_variable.html#a9950b71a16f63654552d3e15774d6638',1,'StateVariable']]]
 ];

@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2013-09-12-15:15</span>
+   &#160;<span id="projectnumber">version 2014-03-13-12:35</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -80,7 +80,7 @@ $(document).ready(function(){initNavTree('mozzi__fixmath_8cpp_source.html','');}
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -108,14 +108,14 @@ $(document).ready(function(){initNavTree('mozzi__fixmath_8cpp_source.html','');}
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//Here is some ready to use fast integer 1 byte wide math functions (from ht1632c library).</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="code" href="group__fixmath.html#gaba3a1d38c23a4499cfb219412d0b115b">   24</a></span>&#160;byte <a class="code" href="group__fixmath.html#gaba3a1d38c23a4499cfb219412d0b115b" title=" Fast byte modulus ">byteMod</a>(byte n, byte d)</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;byte byteMod(byte n, byte d)</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">while</span>(n &gt;= d)</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        n -= d;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">return</span> n;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="code" href="group__fixmath.html#ga0c6fd804408a6789f49d3f5e07340eb0">   36</a></span>&#160;byte <a class="code" href="group__fixmath.html#ga0c6fd804408a6789f49d3f5e07340eb0" title="Fast byte division.">byteDiv</a>(byte n, byte d)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;byte byteDiv(byte n, byte d)</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    byte q = 0;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">while</span>(n &gt;= d)</div>
@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('mozzi__fixmath_8cpp_source.html','');}
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">static</span> byte seed;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    seed = (21 * seed + 21);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordflow">return</span> min + <a class="code" href="group__fixmath.html#gaba3a1d38c23a4499cfb219412d0b115b" title=" Fast byte modulus ">byteMod</a>(seed, --max);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordflow">return</span> min + byteMod(seed, --max);</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">//WARNING: don&#39;t use this byteRnd() function for cryptography!</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
@@ -142,7 +142,7 @@ $(document).ready(function(){initNavTree('mozzi__fixmath_8cpp_source.html','');}
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">// from http://stackoverflow.com/questions/101439/the-most-efficient-way-to-implement-an-integer-based-power-function-powint-int</span></div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">/* Exponentiation by squaring.</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="code" href="group__fixmath.html#ga5daaf7f37651029de2abf8ad375b6850">   63</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__fixmath.html#ga5daaf7f37651029de2abf8ad375b6850" title="dangerous overflow-prone int power function">ipow</a>(<span class="keywordtype">int</span> base, <span class="keywordtype">int</span> exp)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keywordtype">int</span> ipow(<span class="keywordtype">int</span> base, <span class="keywordtype">int</span> exp)</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;{</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">int</span> result = 1;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">while</span> (exp)</div>
@@ -174,14 +174,14 @@ $(document).ready(function(){initNavTree('mozzi__fixmath_8cpp_source.html','');}
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">where x is integer part, y is fractional part</span></div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
-<div class="line"><a name="l00102"></a><span class="lineno"><a class="code" href="group__fixmath.html#ga2e1d9d0fe4ba7edb9830efb7887c36bd">  102</a></span>&#160;<a class="code" href="group__fixmath.html#ga20ef71528ee7583bbf60586448b12caf" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> <a class="code" href="group__fixmath.html#ga2e1d9d0fe4ba7edb9830efb7887c36bd" title="This is a fast replacement for pow(2,x), where x is a fractional number in Q8n8  fixed-point exponent...">Q16n16_pow2</a>(<a class="code" href="group__fixmath.html#ga5ae84c3845de6126c16295e05599c163" title="unsigned fractional number using 8 integer bits and 8 fractional bits, represents 0 to 255...">Q8n8</a> exponent)</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;Q16n16 Q16n16_pow2(Q8n8 exponent)</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;{</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="comment">// to do 2^(x.y) first find</span></div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="comment">//2^x and 2^(x+1) through bit shifting 1 to the left by x and (x + 1) places</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> Q = (<span class="keywordtype">unsigned</span> char)((<a class="code" href="group__fixmath.html#ga5ae84c3845de6126c16295e05599c163" title="unsigned fractional number using 8 integer bits and 8 fractional bits, represents 0 to 255...">Q8n8</a>)exponent&gt;&gt;8); <span class="comment">// integer part</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> Q = (<span class="keywordtype">unsigned</span> char)((Q8n8)exponent&gt;&gt;8); <span class="comment">// integer part</span></div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> n = (<span class="keywordtype">unsigned</span> char) exponent; <span class="comment">// fractional part</span></div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="comment">// f = 2^x * (y + 1)</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">return</span> (((<a class="code" href="group__fixmath.html#ga20ef71528ee7583bbf60586448b12caf" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a>)<a class="code" href="group__fixmath.html#ga00d3299412f5460cae3af8f0c58b2db1" title="1 in Q8n8 format">Q8n8_FIX1</a> &lt;&lt; Q) * (<a class="code" href="group__fixmath.html#ga00d3299412f5460cae3af8f0c58b2db1" title="1 in Q8n8 format">Q8n8_FIX1</a> + n));</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">return</span> (((Q16n16)Q8n8_FIX1 &lt;&lt; Q) * (Q8n8_FIX1 + n));</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;}</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
@@ -249,7 +249,7 @@ $(document).ready(function(){initNavTree('mozzi__fixmath_8cpp_source.html','');}
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>mozzi_fixmath.cpp</b></li>
-    <li class="footer">Generated on Thu Sep 12 2013 15:15:35 for Mozzi by
+    <li class="footer">Generated on Thu Mar 13 2014 12:35:13 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

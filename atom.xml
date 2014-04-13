@@ -4,7 +4,7 @@
   <title><![CDATA[MOZZI]]></title>
   <link href="http://sensorium.github.io/Mozzi//atom.xml" rel="self"/>
   <link href="http://sensorium.github.io/Mozzi//"/>
-  <updated>2014-03-13T14:09:29+11:00</updated>
+  <updated>2014-04-13T19:29:55+10:00</updated>
   <id>http://sensorium.github.io/Mozzi//</id>
   <author>
     <name><![CDATA[Tim Barrass]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[New STANDARD_PLUS audio mode removes 16kHz whine]]></title>
+    <link href="http://sensorium.github.io/Mozzi//blog/2014/03/13/update-to-version-2014-03-13-14-09/"/>
+    <updated>2014-03-13T14:16:00+11:00</updated>
+    <id>http://sensorium.github.io/Mozzi//blog/2014/03/13/update-to-version-2014-03-13-14-09</id>
+    <content type="html"><![CDATA[<p>Took a long time coming&#8230;</p>
+
+<p>version 2014-03-13-14:09</p>
+
+<ul>
+<li>MozziGuts.cpp/h,mozzi_config.h - Added STANDARD_PLUS audio mode.   This is now the default audio mode.
+  Just like STANDARD, but with 32768Hz PWM rate, so the whine which some people hear in STANDARD mode is now out of hearing range.
+  A notch filter is not required for STANDARD_PLUS output.
+  STANDARD_PLUS introduces a slight performance penalty over STANDARD mode, but works for most of the Mozzi demo examples.
+  I recommend it for general use, with a fall back to STANDARD for more demanding sketches.
+  HIFI mode is unchanged, but is being revised to address broad-spectrum noise/distortion issues in this mode.</li>
+<li>TimerOne.h - changed initialize(usecs) to choice of initializeMicroseconds(usecs) or initializeCPUCycles(cycles),
+  providing the finer resolution required for the PWM rate increase.</li>
+<li>FrequencyTimer2.cpp - changed setPeriod to setPeriodMicroSeconds() and added setPeriodCPUCycles().</li>
+<li>examples/02.Control/Line_Gliss_Double_32k_HIFI - changed &#8220;warmtriangle&#8221; wave to saw and changed one of the oscils up an octave.  Molto Aggressivo.  Almost.</li>
+<li>examples/10.Audio_Filters/StateVariableFilter - changed some floats which were supposed to be ints</li>
+<li>StateVariable.h - removed a clicking sound heard in some situations, thanks to diligent problem-finding by qwester1 on github.  Cheers qwester1.<br/>
+The centre frequency calculation is still extremely approximate.  Needs more work.</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Making Things Purr, Growl and Sing - Mozzi workshop in Melbourne]]></title>

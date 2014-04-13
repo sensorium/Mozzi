@@ -56,7 +56,7 @@ void updateControl(){
   int knob_value = mozziAnalogRead(KNOB_PIN); // value is 0-1023
   
   // map it to an 8 bit volume range for efficient calculations in updateAudio
-  volume = sensor_value >> 2;  // 10 bits (0->1023) shifted right by 2 bits to give 8 bits (0->255)
+  volume = knob_value >> 2;  // 10 bits (0->1023) shifted right by 2 bits to give 8 bits (0->255)
   
   // print the value to the Serial monitor for debugging
   Serial.print("volume = ");

@@ -5,6 +5,7 @@ var annotated =
     [ "AudioDelayFeedback", "class_audio_delay_feedback.html", "class_audio_delay_feedback" ],
     [ "AutoMap", "class_auto_map.html", "class_auto_map" ],
     [ "AutoRange", "class_auto_range.html", "class_auto_range" ],
+    [ "CircularBuffer", "class_circular_buffer.html", "class_circular_buffer" ],
     [ "ControlDelay", "class_control_delay.html", "class_control_delay" ],
     [ "DCfilter", "class_d_cfilter.html", "class_d_cfilter" ],
     [ "Ead", "class_ead.html", "class_ead" ],

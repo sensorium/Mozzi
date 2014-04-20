@@ -1,6 +1,6 @@
 var hierarchy =
 [
-    [ "ADSR< CONTROL_UPDATE_RATE >", "class_a_d_s_r.html", null ],
+    [ "ADSR< CONTROL_UPDATE_RATE, LERP_RATE >", "class_a_d_s_r.html", null ],
     [ "AudioDelay< NUM_BUFFER_SAMPLES, T >", "class_audio_delay.html", [
       [ "ControlDelay< NUM_BUFFER_SAMPLES, T >", "class_control_delay.html", null ]
     ] ],
@@ -12,6 +12,7 @@ var hierarchy =
     [ "AutoRange< int >", "class_auto_range.html", [
       [ "AutoMap", "class_auto_map.html", null ]
     ] ],
+    [ "CircularBuffer< ITEM_TYPE >", "class_circular_buffer.html", null ],
     [ "DCfilter", "class_d_cfilter.html", null ],
     [ "Ead", "class_ead.html", null ],
     [ "EventDelay", "class_event_delay.html", [

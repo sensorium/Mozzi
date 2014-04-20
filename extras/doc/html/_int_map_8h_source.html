@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2014-03-13-14:09</span>
+   &#160;<span id="projectnumber">version 2014-04-20-13:57</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -130,7 +130,7 @@ $(document).ready(function(){initNavTree('_int_map_8h_source.html','');});
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
 <div class="line"><a name="l00049"></a><span class="lineno"><a class="code" href="class_int_map.html#af37387773185e7539457e4908ea73663">   49</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_int_map.html#af37387773185e7539457e4908ea73663" title="Process the next input value.">operator()</a>(<span class="keywordtype">int</span> n)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">return</span> (<span class="keywordtype">int</span>) ((multiplier*(n-_IN_MIN)&gt;&gt;8) + _OUT_MIN); <span class="comment">// (/ scale)</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">return</span> (<span class="keywordtype">int</span>) (((_MULTIPLIER*(n-_IN_MIN))&gt;&gt;8) + _OUT_MIN);</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    </div>
@@ -146,7 +146,7 @@ $(document).ready(function(){initNavTree('_int_map_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>IntMap.h</b></li>
-    <li class="footer">Generated on Thu Mar 13 2014 14:09:26 for Mozzi by
+    <li class="footer">Generated on Sun Apr 20 2014 13:57:40 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

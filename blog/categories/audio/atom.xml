@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: audio | MOZZI]]></title>
+  <link href="http://sensorium.github.io/Mozzi//blog/categories/audio/atom.xml" rel="self"/>
+  <link href="http://sensorium.github.io/Mozzi//"/>
+  <updated>2014-04-20T15:21:06+10:00</updated>
+  <id>http://sensorium.github.io/Mozzi//</id>
+  <author>
+    <name><![CDATA[Tim Barrass]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[STANDARD_PLUS performance improves]]></title>
+    <link href="http://sensorium.github.io/Mozzi//blog/2014/04/20/standard-plus-performance-improves/"/>
+    <updated>2014-04-20T15:16:00+10:00</updated>
+    <id>http://sensorium.github.io/Mozzi//blog/2014/04/20/standard-plus-performance-improves</id>
+    <content type="html"><![CDATA[<p>Due to recent improvements in output buffer code, STANDARD_PLUS audio mode is now the default, and performs as well as the old STANDARD mode,
+while removing the high-pitched PWM carrier frequency whine out of hearing range.</p>
+]]></content>
+  </entry>
+  
+</feed>

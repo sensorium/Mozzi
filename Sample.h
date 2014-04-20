@@ -121,7 +121,7 @@ public:
 	}
 
 
-	/** Sets a new start position and sets the phase (the playhead) to that position.
+	/** Sets a new start position plays the sample from that position.
 	@param startpos position in samples from the beginning of the sound. 
 	*/
 	inline
@@ -152,7 +152,7 @@ public:
 	}
 
 
-	/** Turns looping on, with the whole sample length as the loop range.
+	/** Turns looping on.
 	*/
 	inline
 	void setLoopingOn()

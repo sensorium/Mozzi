@@ -24,7 +24,7 @@
 #define MOZZIGUTS_H_
 
 #if F_CPU != 16000000
-#error "Mozzi expects a cpu clock speed of 16MHz!  You can try on boards with other clock speeds by removing this line in MozziGuts.h, but, well.....good luck!"
+#warning "Mozzi expects a cpu clock speed of 16MHz!  You can try on boards with other clock speeds, but, well.....good luck!"
 #endif
 
 #include "TimerZero.h"
@@ -305,7 +305,6 @@ Timer 0 for control interrupts. audioTicks() is updated each time an audio sampl
 is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when AUDIO_RATE is
 16384 Hz).
 @return the number of audio ticks since the program began.
-@todo  incorporate audioTicks() in a more accurate EventDelay()?
 */
 unsigned long audioTicks();
 

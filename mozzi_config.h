@@ -22,7 +22,6 @@ For HIFI mode, edit Mozzi/mozzi_config.h to contain \#define AUDIO_MODE HIFI,
 and comment out \#define AUDIO_MODE STANDARD.
 
 */
-
 //#define AUDIO_MODE STANDARD
 #define AUDIO_MODE STANDARD_PLUS
 //#define AUDIO_MODE HIFI
@@ -52,8 +51,7 @@ interrupt rate and pwm resolution relate.
 
 HIFI audio mode enables much higher quality output by combining signals from pins 9 and 10.
 For HIFI mode, edit Mozzi/mozzi_config.h to contain \#define AUDIO_MODE HIFI, 
-and comment out \#define AUDIO_MODE STANDARD. 
-
+and comment out \#define AUDIO_MODE STANDARD and \#define AUDIO_MODE STANDARD_PLUS. 
 
 @todo Possible option for output to R/2R DAC circuit, like
 http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/ .
@@ -63,13 +61,15 @@ Mozzi-users list has a thread on this.
 //#define AUDIO_RATE 32768
 
 
+
 /** @ingroup core
 Whether or not to use audio input.
 Put \#define USE_AUDIO_INPUT false in Mozzi/mozzi_config.h to enable audio input on analog pin AUDIO_INPUT_PIN,
 otherwise make it false, to save resources.  When audio input is used, don't read 
 other analog channels as they'll interfere with the audio sampling.
 */
-#define USE_AUDIO_INPUT false
+#define USE_AUDIO_INPUT true
+
 
 
 /** @ingroup core

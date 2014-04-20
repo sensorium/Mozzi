@@ -43,11 +43,11 @@ public:
 	}
 
 	/** Process the next input value.
-	@param n the next value to process.
-	@return the input value mapped to the output range.
+	@param n the next integer to process.
+	@return the input integer mapped to the output range.
 	*/
 	int operator()(int n) const {
-		return (int) ((multiplier*(n-_IN_MIN)>>8) + _OUT_MIN); // (/ scale)
+		return (int) (((_MULTIPLIER*(n-_IN_MIN))>>8) + _OUT_MIN);
 	}
 
 	

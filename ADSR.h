@@ -33,18 +33,31 @@
 #include "mozzi_fixmath.h"
 
 
-/** A simple ADSR envelope generator.
-@todo Test whether using the template parameter makes any difference to speed, 
+/** A simple ADSR envelope generator.  This implementation has separate update() and next()
+methods, where next() interpolates values between each update().
+The "normal" way to use this would be with update() in updateControl(), where it calculates a new internal state each control step,
+and then next() is in updateAudio(), called much more often, where it interpolates between the control values.
+This also allows the ADSR updates to be made even more sparsely if desired, eg. every 3rd control update.
+@tparam CONTROL_UPDATE_RATE The frequency of control updates.  
+Ordinarily this will be CONTROL_RATE, but an alternative (amongst others) is
+to set this as well as the LERP_RATE parameter to AUDIO_RATE, and call both update() and next() in updateAudio().
+Such a use would allow accurate envelopes with finer resolution of the control points than CONTROL_RATE.
+@tparam LERP_RATE Sets how often next() will be called, to interpolate between updates set by CONTROL_UPDATE_RATE.
+This will produce the smoothest results if it's set to AUDIO_RATE, but if you need to save processor time and your
+envelope changes slowly or controls something like a filter where there may not be problems with glitchy or clicking transitions,
+LERP_RATE could be set to CONTROL_RATE (for instance).  Then update() and next() could both be called in updateControl(), 
+greatly reducing the amount of processing required compared to calling next() in updateAudio().
+@todo Test whether using the template parameters makes any difference to speed, 
 and rationalise which units which do and don't need them.  
 Template objects are messy when you try to use pointers to them, 
 you have to include the whole template shebang in the pointer handling.
 */
-template <unsigned int CONTROL_UPDATE_RATE>
+template <unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE>
 class ADSR
 {
 private:
 
-	const unsigned int AUDIO_TICKS_PER_CONTROL;
+	const unsigned int LERPS_PER_CONTROL;
 
 	unsigned int phase_control_step_counter;
 	unsigned int phase_num_control_steps;
@@ -55,7 +68,7 @@ private:
 	struct phase{
 		byte phase_type;
 		unsigned int control_steps;
-		unsigned long audio_steps;
+		unsigned long lerp_steps;
 		Q8n0 level;
 	}attack,decay,sustain,release,idle;
 	
@@ -74,7 +87,7 @@ private:
 	void setPhase(phase * next_phase) {
 		phase_control_step_counter = 0;
 		phase_num_control_steps = next_phase->control_steps;
-		transition.set(Q8n0_to_Q16n16(next_phase->level),next_phase->audio_steps);
+		transition.set(Q8n0_to_Q16n16(next_phase->level),next_phase->lerp_steps);
 		current_phase = next_phase;
 	}
 	
@@ -102,16 +115,15 @@ inline
 	void setTime(phase * p, unsigned int msec)
 	{
 		p->control_steps=convertMsecToControlSteps(msec);
-		p->audio_steps = (ulong) p->control_steps * AUDIO_TICKS_PER_CONTROL;
+		p->lerp_steps = (ulong) p->control_steps * LERPS_PER_CONTROL;
 	}
 	
-
 	
 public:
 
 	/** Constructor.
 	 */
-	ADSR():AUDIO_TICKS_PER_CONTROL(AUDIO_RATE/CONTROL_UPDATE_RATE)
+	ADSR():LERPS_PER_CONTROL(LERP_RATE/CONTROL_UPDATE_RATE)
 	{
 		attack.phase_type = ATTACK;
 		decay.phase_type = DECAY;

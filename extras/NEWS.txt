@@ -6,6 +6,22 @@ get the latest version from http://sensorium.github.io/Mozzi/
 
 version 2014-03-13-14:09
 
+- MozziGuts.cpp
+	- all examples (exept HIFI) now run in STANDARD_PLUS mode, due to improved performance with new outbut buffer code (added CircularBuffer.h)	
+	- fixed error in audio input code (was output_gap instead of input_gap)
+	- modified mozziMicroseconds() to work with new buffer code.
+- MozziGuts.h - changed "Mozzi expects a cpu clock speed of 16MHz!" error message to a warning, 
+		since there are reports of people using Mozzi on 8MHz boards (though I reckon it would sound pretty rough).
+- ADSR.h added template parameter LERP_RATE, increasing the flexibility of ADSR use, so both update() and next() 
+	can now be used in updateAudio() or updateControl().
+- added examples/07.Envelopes/ADSR_Control_Rate_Envelope and examples/07.Envelopes/ADSR_Audio_Rate_Envelope, replacing ADSR_Envelope
+- added/fixed IntMap.h, a fast integer replacement for Arduino map(), using some compile-time calculations.
+- added examples/12.Utilities/IntMap_test
+- changed examples/06.Synthesis/FMSynth_HIFI to FMSynth_32k_HIFI, higher audio rate reduces audio aliasing.
+
+
+version_2014-03-13-14:09
+
 - MozziGuts.cpp/h,mozzi_config.h - Added STANDARD_PLUS audio mode.   This is now the default audio mode. 
 	Just like STANDARD, but with 32768Hz PWM rate, so the whine which some people hear in STANDARD mode is now out of hearing range.
 	A notch filter is not required for STANDARD_PLUS output.

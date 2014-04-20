@@ -115,9 +115,13 @@ static void backupMozziTimer1()
 
 #if (USE_AUDIO_INPUT==true)
 
-static volatile long input_gap;
-static volatile unsigned long input_buffer_head;
-static volatile int input_buffer[BUFFER_NUM_CELLS];
+//static volatile long input_gap;
+//static volatile unsigned long input_buffer_head;
+//static volatile int input_buffer[BUFFER_NUM_CELLS];
+
+// ring buffer for audio input
+CircularBuffer <unsigned int>input_buffer;
+
 static boolean audio_input_is_available;
 static int audio_input; // holds the latest audio from input_buffer
 unsigned char adc_count = 0;
@@ -150,14 +154,8 @@ static void startSecondAudioADC()
 
 static void receiveSecondAudioADC()
 {
-	//input_buffer[input_buffer_head & (BUFFER_NUM_CELLS-1)] = ADC; // put new data into input_buffer, don't worry about overwriting old, as guarding would also cause a glitch
-	input_buffer[(unsigned char)input_buffer_head] = ADC; // cast to unsigned char, no need for explicit wrap since BUFFER_NUM_CELLS is 256
-	input_buffer_head++;
-	if (input_gap > (BUFFER_NUM_CELLS>>1)) { // input buffer less full than than half of output buffer size
-		audio_input_is_available = true;
-	}else{
-		audio_input_is_available = false;
-	}
+	if (!input_buffer.isFull()) 
+		input_buffer.write(ADC);
 }
 
 
@@ -198,22 +196,15 @@ ISR(ADC_vect, ISR_BLOCK)
 void audioHook() // 2us excluding updateAudio()
 {
 //setPin13High();
-#if (USE_AUDIO_INPUT==true) // 3us
-
-	static unsigned long input_buffer_tail = 0;
-	input_gap = input_buffer_head - input_buffer_tail; // wraps to a big number if it's negative, and will take a long time to wrap
-	if ((input_gap < BUFFER_NUM_CELLS) && audio_input_is_available)
-	{
-		//audio_input = input_buffer[input_buffer_tail & (BUFFER_NUM_CELLS-1)];
-		audio_input = input_buffer[(unsigned char)input_buffer_tail]; // cast to unsigned char wraps to BUFFER_NUM_CELLS 256
-		input_buffer_tail++;
-	}
-
+#if (USE_AUDIO_INPUT==true)
+		if (!input_buffer.isEmpty()) 
+			audio_input = input_buffer.read();
 #endif
 
-	if (!output_buffer.isFull()) 
+	if (!output_buffer.isFull()) {
 		output_buffer.write((unsigned int) (updateAudio() + AUDIO_BIAS));
 
+	}
 //setPin13Low();
 }
 

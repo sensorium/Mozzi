@@ -50,18 +50,24 @@ for example: \#define CONTROL_RATE 256
 /** @ingroup core
 Used to set AUDIO_MODE to STANDARD, STANDARD_PLUS, or HIFI.
 
-STANDARD
+STANDARD / STANDARD_PLUS
 ---------------
-Use \#define AUDIO_MODE STANDARD in Mozzi/config.h to select Mozzi's original audio
-output configuration, which is nearly 9 bit sound (-244 to 243) at 16384 Hz and
-16384 Hz pwm rate. It uses Timer 1 to output samples at AUDIO_RATE 16384 Hz,
-with an interrupt being called once every PWM cycle to set the timer's own pwm
-level.
+STANDARD is almost obsolete now, replaced by STANDARD_PLUS which is the default audio mode.
+Use \#define AUDIO_MODE STANDARD_PLUS in Mozzi/config.h to select this
+output configuration, which is nearly 9 bit sound (-244 to 243) at 16384 Hz sample rate (AUDIO_RATE) and
+32768 Hz PWM rate. It uses Timer 1 to for PWM and the sample updating routine (as an interrupt).
 
-Advantages: Only uses one timer for audio, and one output pin
-Disadvantages: low dynamic range, some people can hear pwm carrier frequency, may need simple hardware filter.
+STANDARD mode uses 16384 Hz PWM rate with an output interrupt at the same frequency.  
+Some people can hear the PWM carrier frequency as an annoying whine.
 
-Below is a list of the Digital Pins used by Mozzi for STANDARD_PLUS mode PWM audio out on different boards.
+STANDARD_PLUS mode uses 32768 Hz PWM rate, so the PWM carrier is out of hearing range, 
+and uses every alternate interrupt for the sample update (unless you /#define AUDIO_RATE 32768 in mozzi_config.h),
+which makes it slightly less efficient than STANDARD, but almost always better.
+
+Advantages: Only uses one timer for audio, and one output pin.
+Disadvantages: low dynamic range.
+
+Below is a list of the Digital Pins used by Mozzi for STANDARD and STANDARD_PLUS audio out on different boards.
 Those which have been tested and reported to work have an x.
 Feedback about others is welcome.
 
@@ -153,7 +159,7 @@ x...........B5(25)...B6(26)...........Teensy2++  \n
 #endif
 
 #if (AUDIO_MODE == STANDARD) && (AUDIO_RATE == 32768)
-#error AUDIO_RATE 32768 does not work when AUDIO_MODE is STANDARD, check settings in Mozzi/mozzi_config.h
+#error AUDIO_RATE 32768 does not work when AUDIO_MODE is STANDARD, try setting the AUDIO_MODE to STANDARD_PLUS in Mozzi/mozzi_config.h
 #endif
 
 

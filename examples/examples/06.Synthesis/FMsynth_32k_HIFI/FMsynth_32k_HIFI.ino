@@ -8,12 +8,17 @@
      IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
     be changed from STANDARD mode to HIFI.
     In Mozz/mozzi_config.h, change
-    #define AUDIO_MODE STANDARD
+    //#define AUDIO_MODE STANDARD
+    #define AUDIO_MODE STANDARD_PLUS
     //#define AUDIO_MODE HIFI
     to
     //#define AUDIO_MODE STANDARD
+    //#define AUDIO_MODE STANDARD_PLUS
     #define AUDIO_MODE HIFI
   
+  The sketch also sounds better with a faster sample rate, for less aliasing
+  #define AUDIO_RATE 32768
+  in mozzi_config.
   
     Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
     Check the Mozzi core module documentation for others and more detail

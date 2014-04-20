@@ -49,17 +49,16 @@ Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kVol8(COS8192_DATA);
 char v1,v2,v3,v4,v5,v6,v7,v8;
 
 void setup(){
-  startMozzi(CONTROL_RATE);
 
   // set harmonic frequencies
-  aCos1.setFreq(mtof(60.f));
-  aCos2.setFreq(mtof(74.f));
-  aCos3.setFreq(mtof(64.f));
-  aCos4.setFreq(mtof(77.f));
-  aCos5.setFreq(mtof(67.f));
-  aCos6.setFreq(mtof(81.f));
-  aCos7.setFreq(mtof(60.f));
-  aCos8.setFreq(mtof(84.f));
+  aCos1.setFreq(mtof(60));
+  aCos2.setFreq(mtof(74));
+  aCos3.setFreq(mtof(64));
+  aCos4.setFreq(mtof(77));
+  aCos5.setFreq(mtof(67));
+  aCos6.setFreq(mtof(81));
+  aCos7.setFreq(mtof(60));
+  aCos8.setFreq(mtof(84));
 
 // set volume change frequencies
   kVol1.setFreq(4.43f); // more of a pulse
@@ -72,6 +71,8 @@ void setup(){
   kVol8.setFreq(0.041f);
 
   v1=v2=v3=v4=v5=v6=v7=v8=127;
+  
+  startMozzi(CONTROL_RATE);
 }
 
 void loop(){

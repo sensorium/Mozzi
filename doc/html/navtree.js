@@ -19,7 +19,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "01_8_basics_2_vibrato_2_vibrato_8ino-example.html",
-"class_wave_packet.html"
+"class_stack.html#ab034b819e2382f80d952cf8527dc6e6c"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

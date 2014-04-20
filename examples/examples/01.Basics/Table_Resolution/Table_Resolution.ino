@@ -1,21 +1,15 @@
 /*  Example playing sine tables of different sizes
-    with Mozzi sonification library.
-  
-    Demonstrates the audible quality of different length tables
-    played with Oscil and scheduling with EventDelay.
-    
-    This sketch needs to be compiled using STANDARD audio mode 
-    to avoid clicks from high processor load.
-    Edit Mozzi/mozzi_config.h, uncomment 
-    	#define AUDIO_MODE STANDARD
-    and make sure the other 2 AUDIO_MODE defines are commented out.
-  
-    Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
-  
-    Tim Barrass 2012.
-    This example code is in the public domain.
-*/
+ with Mozzi sonification library.
+ 
+ Demonstrates the audible quality of different length tables
+ played with Oscil and scheduling with EventDelay.
+ 
+ Mozzi help/discussion/announcements:
+ https://groups.google.com/forum/#!forum/mozzi-users
+ 
+ Tim Barrass 2012.
+ This example code is in the public domain.
+ */
 
 #include <MozziGuts.h>
 #include <Oscil.h>
@@ -41,7 +35,6 @@ Oscil <SIN8192_NUM_CELLS, AUDIO_RATE> aSin5(SIN8192_DATA);
 EventDelay kWhoseTurnDelay;
 
 const unsigned char NUM_OSCILS = 6;
-unsigned char gain[NUM_OSCILS] = {0,0,0,0,0,0}; // gain for each oscil
 unsigned char whose_turn = 0; // which oscil to listen to
 
 // Line to sweep frequency at control rate
@@ -60,14 +53,9 @@ void setup(){
 void updateControl(){
 
   if(kWhoseTurnDelay.ready()){
-    gain[whose_turn] =0;
     if (++whose_turn >= NUM_OSCILS) whose_turn =0;
-    gain[whose_turn] = 1;
     kWhoseTurnDelay.start();
     kSweep.set(0UL);
-    Serial.print(whose_turn);
-    Serial.print("  ");
-    Serial.println(millis());
   }
 
   float f = kSweep.next();
@@ -96,13 +84,27 @@ void updateControl(){
 
 
 int updateAudio(){
-  int asig = (int)
-    aSin0.next()*gain[0] +
-      aSin1.next()*gain[1] +
-      aSin2.next()*gain[2] +
-      aSin3.next()*gain[3] +
-      aSin4.next()*gain[4] +
-      aSin5.next()*gain[5];
+  int asig;
+  switch (whose_turn) {
+  case 0:
+    asig = aSin0.next();
+    break;
+  case 1:
+    asig = aSin1.next();
+    break;
+  case 2:
+    asig = aSin2.next();
+    break;
+  case 3:
+    asig = aSin3.next();
+    break;
+  case 4:
+    asig = aSin4.next();
+    break;
+  case 5:
+    asig = aSin5.next();
+    break;
+  }
   return asig;
 }
 
@@ -110,6 +112,7 @@ int updateAudio(){
 void loop(){
   audioHook(); // required here
 }
+
 
 
 

@@ -12,7 +12,7 @@
   <meta name="description" content="Mozzi is a sound synthesis software library for Arduino." />
 
   
-  <meta name="keywords" content="Applications : sound, music, audio, synthesis, sound art, electronic music, sonification, media art, performance, installation, electronic art, creative art, interactive art, Software: library, arduino, open source, extendable, free, Audience: artists, scientists, teachers, learners, students, hobby, do it yourself, diy, makers, creators, musicians, engineers, collaborators" />
+  <meta name="keywords" content="Applications : sound, music, audio, synthesis, synthesiser, synthesizer, sound art, electronic music, computer music, generative music, sonification, media art, performance, installation, electronic art, creative art, interactive art, Software: library, arduino, open source, extendable, free, Audience: artists, scientists, teachers, learners, students, hobby, do it yourself, diy, makers, creators, musicians, engineers, collaborators" />
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -75,7 +75,7 @@
 			<a class="header_link" href="http://tinyurl.com/mozzilib/Mozzi.zip">
 				download<br>
 				<i class="icon-download icon-4x"></i><br>
-				<span id="header_small_label">version 2014-03-13-14:09</span>
+				<span id="header_small_label">version 2014-04-20-13:57</span>
 			</a>
 		</p>
 	</section> 
@@ -694,24 +694,20 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>110</span>
 <span class='line-number'>111</span>
 <span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example playing sine tables of different sizes</span>
-</span><span class='line'><span class="cm">    with Mozzi sonification library.</span>
-</span><span class='line'><span class="cm">  </span>
-</span><span class='line'><span class="cm">    Demonstrates the audible quality of different length tables</span>
-</span><span class='line'><span class="cm">    played with Oscil and scheduling with EventDelay.</span>
-</span><span class='line'><span class="cm">    </span>
-</span><span class='line'><span class="cm">    This sketch needs to be compiled using STANDARD audio mode </span>
-</span><span class='line'><span class="cm">    to avoid clicks from high processor load.</span>
-</span><span class='line'><span class="cm">    Edit Mozzi/mozzi_config.h, uncomment </span>
-</span><span class='line'><span class="cm">     #define AUDIO_MODE STANDARD</span>
-</span><span class='line'><span class="cm">    and make sure the other 2 AUDIO_MODE defines are commented out.</span>
-</span><span class='line'><span class="cm">  </span>
-</span><span class='line'><span class="cm">    Mozzi help/discussion/announcements:</span>
-</span><span class='line'><span class="cm">    https://groups.google.com/forum/#!forum/mozzi-users</span>
-</span><span class='line'><span class="cm">  </span>
-</span><span class='line'><span class="cm">    Tim Barrass 2012.</span>
-</span><span class='line'><span class="cm">    This example code is in the public domain.</span>
-</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'><span class="cm"> with Mozzi sonification library.</span>
+</span><span class='line'><span class="cm"> </span>
+</span><span class='line'><span class="cm"> Demonstrates the audible quality of different length tables</span>
+</span><span class='line'><span class="cm"> played with Oscil and scheduling with EventDelay.</span>
+</span><span class='line'><span class="cm"> </span>
+</span><span class='line'><span class="cm"> Mozzi help/discussion/announcements:</span>
+</span><span class='line'><span class="cm"> https://groups.google.com/forum/#!forum/mozzi-users</span>
+</span><span class='line'><span class="cm"> </span>
+</span><span class='line'><span class="cm"> Tim Barrass 2012.</span>
+</span><span class='line'><span class="cm"> This example code is in the public domain.</span>
+</span><span class='line'><span class="cm"> */</span>
 </span><span class='line'>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
@@ -737,7 +733,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="n">EventDelay</span> <span class="n">kWhoseTurnDelay</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">NUM_OSCILS</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
-</span><span class='line'><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">gain</span><span class="p">[</span><span class="n">NUM_OSCILS</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">};</span> <span class="c1">// gain for each oscil</span>
 </span><span class='line'><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">whose_turn</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// which oscil to listen to</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">// Line to sweep frequency at control rate</span>
@@ -756,14 +751,9 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">kWhoseTurnDelay</span><span class="p">.</span><span class="n">ready</span><span class="p">()){</span>
-</span><span class='line'>    <span class="n">gain</span><span class="p">[</span><span class="n">whose_turn</span><span class="p">]</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span>
 </span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="o">++</span><span class="n">whose_turn</span> <span class="o">&gt;=</span> <span class="n">NUM_OSCILS</span><span class="p">)</span> <span class="n">whose_turn</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">gain</span><span class="p">[</span><span class="n">whose_turn</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </span><span class='line'>    <span class="n">kWhoseTurnDelay</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
 </span><span class='line'>    <span class="n">kSweep</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0UL</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">whose_turn</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;  &quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">millis</span><span class="p">());</span>
 </span><span class='line'>  <span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="kt">float</span> <span class="n">f</span> <span class="o">=</span> <span class="n">kSweep</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
@@ -792,13 +782,27 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="kt">int</span> <span class="n">updateAudio</span><span class="p">(){</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">asig</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">aSin0</span><span class="p">.</span><span class="n">next</span><span class="p">()</span><span class="o">*</span><span class="n">gain</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span>
-</span><span class='line'>      <span class="n">aSin1</span><span class="p">.</span><span class="n">next</span><span class="p">()</span><span class="o">*</span><span class="n">gain</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span>
-</span><span class='line'>      <span class="n">aSin2</span><span class="p">.</span><span class="n">next</span><span class="p">()</span><span class="o">*</span><span class="n">gain</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span>
-</span><span class='line'>      <span class="n">aSin3</span><span class="p">.</span><span class="n">next</span><span class="p">()</span><span class="o">*</span><span class="n">gain</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span>
-</span><span class='line'>      <span class="n">aSin4</span><span class="p">.</span><span class="n">next</span><span class="p">()</span><span class="o">*</span><span class="n">gain</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span>
-</span><span class='line'>      <span class="n">aSin5</span><span class="p">.</span><span class="n">next</span><span class="p">()</span><span class="o">*</span><span class="n">gain</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">asig</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">switch</span> <span class="p">(</span><span class="n">whose_turn</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
+</span><span class='line'>    <span class="n">asig</span> <span class="o">=</span> <span class="n">aSin0</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+</span><span class='line'>    <span class="n">asig</span> <span class="o">=</span> <span class="n">aSin1</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+</span><span class='line'>    <span class="n">asig</span> <span class="o">=</span> <span class="n">aSin2</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
+</span><span class='line'>    <span class="n">asig</span> <span class="o">=</span> <span class="n">aSin3</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">case</span> <span class="mi">4</span><span class="o">:</span>
+</span><span class='line'>    <span class="n">asig</span> <span class="o">=</span> <span class="n">aSin4</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">case</span> <span class="mi">5</span><span class="o">:</span>
+</span><span class='line'>    <span class="n">asig</span> <span class="o">=</span> <span class="n">aSin5</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
 </span><span class='line'>  <span class="k">return</span> <span class="n">asig</span><span class="p">;</span>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
@@ -1207,6 +1211,7 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>103</span>
 <span class='line-number'>104</span>
 <span class='line-number'>105</span>
+<span class='line-number'>106</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Plays a fluctuating ambient wash,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -1258,17 +1263,16 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="kt">char</span> <span class="n">v1</span><span class="p">,</span><span class="n">v2</span><span class="p">,</span><span class="n">v3</span><span class="p">,</span><span class="n">v4</span><span class="p">,</span><span class="n">v5</span><span class="p">,</span><span class="n">v6</span><span class="p">,</span><span class="n">v7</span><span class="p">,</span><span class="n">v8</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
-</span><span class='line'>  <span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="c1">// set harmonic frequencies</span>
-</span><span class='line'>  <span class="n">aCos1</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">mtof</span><span class="p">(</span><span class="mf">60.f</span><span class="p">));</span>
-</span><span class='line'>  <span class="n">aCos2</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">mtof</span><span class="p">(</span><span class="mf">74.f</span><span class="p">));</span>
-</span><span class='line'>  <span class="n">aCos3</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">mtof</span><span class="p">(</span><span class="mf">64.f</span><span class="p">));</span>
-</span><span class='line'>  <span class="n">aCos4</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">mtof</span><span class="p">(</span><span class="mf">77.f</span><span class="p">));</span>
-</span><span class='line'>  <span class="n">aCos5</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">mtof</span><span class="p">(</span><span class="mf">67.f</span><span class="p">));</span>
-</span><span class='line'>  <span class="n">aCos6</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">mtof</span><span class="p">(</span><span class="mf">81.f</span><span class="p">));</span>
-</span><span class='line'>  <span class="n">aCos7</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">mtof</span><span class="p">(</span><span class="mf">60.f</span><span class="p">));</span>
-</span><span class='line'>  <span class="n">aCos8</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">mtof</span><span class="p">(</span><span class="mf">84.f</span><span class="p">));</span>
+</span><span class='line'>  <span class="n">aCos1</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">mtof</span><span class="p">(</span><span class="mi">60</span><span class="p">));</span>
+</span><span class='line'>  <span class="n">aCos2</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">mtof</span><span class="p">(</span><span class="mi">74</span><span class="p">));</span>
+</span><span class='line'>  <span class="n">aCos3</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">mtof</span><span class="p">(</span><span class="mi">64</span><span class="p">));</span>
+</span><span class='line'>  <span class="n">aCos4</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">mtof</span><span class="p">(</span><span class="mi">77</span><span class="p">));</span>
+</span><span class='line'>  <span class="n">aCos5</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">mtof</span><span class="p">(</span><span class="mi">67</span><span class="p">));</span>
+</span><span class='line'>  <span class="n">aCos6</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">mtof</span><span class="p">(</span><span class="mi">81</span><span class="p">));</span>
+</span><span class='line'>  <span class="n">aCos7</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">mtof</span><span class="p">(</span><span class="mi">60</span><span class="p">));</span>
+</span><span class='line'>  <span class="n">aCos8</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">mtof</span><span class="p">(</span><span class="mi">84</span><span class="p">));</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">// set volume change frequencies</span>
 </span><span class='line'>  <span class="n">kVol1</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="mf">4.43f</span><span class="p">);</span> <span class="c1">// more of a pulse</span>
@@ -1281,6 +1285,8 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'>  <span class="n">kVol8</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="mf">0.041f</span><span class="p">);</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="n">v1</span><span class="o">=</span><span class="n">v2</span><span class="o">=</span><span class="n">v3</span><span class="o">=</span><span class="n">v4</span><span class="o">=</span><span class="n">v5</span><span class="o">=</span><span class="n">v6</span><span class="o">=</span><span class="n">v7</span><span class="o">=</span><span class="n">v8</span><span class="o">=</span><span class="mi">127</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'><span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
@@ -1934,6 +1940,7 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>144</span>
 <span class='line-number'>145</span>
 <span class='line-number'>146</span>
+<span class='line-number'>147</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of a pair of detuned oscillators </span>
 </span><span class='line'><span class="cm">    sliding smoothly between frequencies,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
@@ -1954,9 +1961,11 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    be changed from STANDARD mode to HIFI.</span>
 </span><span class='line'><span class="cm">    In Mozz/mozzi_config.h, change</span>
 </span><span class='line'><span class="cm">    #define AUDIO_MODE STANDARD</span>
+</span><span class='line'><span class="cm">    //#define AUDIO_MODE STANDARD_PLUS</span>
 </span><span class='line'><span class="cm">    //#define AUDIO_MODE HIFI</span>
 </span><span class='line'><span class="cm">    to</span>
 </span><span class='line'><span class="cm">    //#define AUDIO_MODE STANDARD</span>
+</span><span class='line'><span class="cm">    //#define AUDIO_MODE STANDARD_PLUS</span>
 </span><span class='line'><span class="cm">    #define AUDIO_MODE HIFI</span>
 </span><span class='line'><span class="cm">  </span>
 </span><span class='line'><span class="cm">    Also, AUDIO_RATE can be changed from 16384 to 32768 in mozzi_config.h,</span>
@@ -2005,8 +2014,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="n">Line</span> <span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span> <span class="n">aGliss1</span><span class="p">;</span>
 </span><span class='line'><span class="n">Line</span> <span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span> <span class="n">aGliss2</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'><span class="cp">#define CONTROL_RATE 64 </span><span class="c1">// powers of 2 please</span>
-</span><span class='line'>
 </span><span class='line'><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">lo_note</span> <span class="o">=</span> <span class="mi">24</span><span class="p">;</span> <span class="c1">// midi note numbers</span>
 </span><span class='line'><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">hi_note</span> <span class="o">=</span> <span class="mi">46</span><span class="p">;</span>
 </span><span class='line'>
@@ -2021,23 +2028,19 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">randSeed</span><span class="p">();</span>
-</span><span class='line'>  <span class="n">pinMode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">OUTPUT</span><span class="p">);</span> <span class="c1">// without this, updateControl() gets interrupted ........??</span>
-</span><span class='line'>  <span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span> <span class="c1">// optional control rate parameter</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
-</span><span class='line'>  <span class="n">audioHook</span><span class="p">();</span>
+</span><span class='line'>  <span class="c1">//randSeed();</span>
+</span><span class='line'>  <span class="c1">//pinMode(0,OUTPUT); // without this, updateControl() gets interrupted ........??</span>
+</span><span class='line'>  <span class="n">startMozzi</span><span class="p">();</span> <span class="c1">// uses default 64 control rate</span>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="c1">// variation between oscillator&#39;s phase increments</span>
 </span><span class='line'><span class="c1">// looks like a big number, but they are high precision </span>
-</span><span class='line'><span class="c1">// and this is just like a fractional part</span>
+</span><span class='line'><span class="c1">// and this is just a fractional part</span>
 </span><span class='line'><span class="kt">long</span> <span class="n">variation</span><span class="p">(){</span>
 </span><span class='line'>  <span class="k">return</span> <span class="n">rand</span><span class="p">(</span><span class="mi">16383</span><span class="p">);</span>
 </span><span class='line'><span class="p">}</span>
+</span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span> <span class="c1">// 900 us floats vs 160 fixed</span>
 </span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="o">--</span><span class="n">counter</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">){</span>
@@ -2065,7 +2068,7 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'>    <span class="c1">// find the phase increments (step sizes) through the audio table for those freqs</span>
 </span><span class='line'>    <span class="c1">// they are big ugly numbers which the oscillator understands but you don&#39;t really want to know</span>
 </span><span class='line'>    <span class="kt">long</span> <span class="n">gliss_start</span> <span class="o">=</span> <span class="n">aSaw1</span><span class="p">.</span><span class="n">phaseIncFromFreq</span><span class="p">(</span><span class="n">start_freq</span><span class="p">);</span>
-</span><span class='line'>    <span class="kt">long</span> <span class="n">gliss_end</span> <span class="o">=</span> <span class="n">aSaw2</span><span class="p">.</span><span class="n">phaseIncFromFreq</span><span class="p">(</span><span class="n">end_freq</span><span class="p">);</span>
+</span><span class='line'>    <span class="kt">long</span> <span class="n">gliss_end</span> <span class="o">=</span> <span class="n">aSaw1</span><span class="p">.</span><span class="n">phaseIncFromFreq</span><span class="p">(</span><span class="n">end_freq</span><span class="p">);</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="n">aGliss1</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">gliss_start</span><span class="p">,</span> <span class="n">gliss_end</span><span class="p">,</span> <span class="n">audio_steps_per_gliss</span><span class="p">);</span>
 </span><span class='line'>    <span class="c1">// aGliss2 is an octave up and detuned</span>
@@ -2079,6 +2082,11 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'>  <span class="n">aSaw1</span><span class="p">.</span><span class="n">setPhaseInc</span><span class="p">(</span><span class="n">aGliss1</span><span class="p">.</span><span class="n">next</span><span class="p">());</span>
 </span><span class='line'>  <span class="n">aSaw2</span><span class="p">.</span><span class="n">setPhaseInc</span><span class="p">(</span><span class="n">aGliss2</span><span class="p">.</span><span class="n">next</span><span class="p">());</span>
 </span><span class='line'>  <span class="k">return</span> <span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">aSaw1</span><span class="p">.</span><span class="n">next</span><span class="p">()</span><span class="o">+</span><span class="n">aSaw2</span><span class="p">.</span><span class="n">next</span><span class="p">())</span><span class="o">&lt;&lt;</span><span class="mi">5</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">audioHook</span><span class="p">();</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 </div>
@@ -3351,27 +3359,15 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>173</span>
 <span class='line-number'>174</span>
 <span class='line-number'>175</span>
-<span class='line-number'>176</span>
-<span class='line-number'>177</span>
-<span class='line-number'>178</span>
-<span class='line-number'>179</span>
-<span class='line-number'>180</span>
-<span class='line-number'>181</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  </span>
 </span><span class='line'><span class="cm">  Plays a fluctuating ambient wash in response to light and temperature sensors.</span>
 </span><span class='line'>
 </span><span class='line'><span class="cm">  Pairs of audio oscillators are detuned in response to light on an LDR and</span>
 </span><span class='line'><span class="cm">  the base frequencies are offset depending on the temperature.</span>
 </span><span class='line'><span class="cm">  </span>
-</span><span class='line'><span class="cm">  It&#39;s a pretty dumb, boring and horrible  sonification, but at this stage </span>
+</span><span class='line'><span class="cm">  It&#39;s a pretty dumb sonification, but at this stage </span>
 </span><span class='line'><span class="cm">  it&#39;s just to demonstrate the possibility of reading sensors while</span>
 </span><span class='line'><span class="cm">  lots of audio oscillators are running.</span>
-</span><span class='line'><span class="cm">  </span>
-</span><span class='line'><span class="cm">  This sketch needs to be compiled using STANDARD audio mode </span>
-</span><span class='line'><span class="cm">  to avoid clicks from high processor load.</span>
-</span><span class='line'><span class="cm">  Edit Mozzi/mozzi_config.h, uncomment </span>
-</span><span class='line'><span class="cm">     #define AUDIO_MODE STANDARD</span>
-</span><span class='line'><span class="cm">  and make sure the other 2 AUDIO_MODE defines are commented out.</span>
 </span><span class='line'><span class="cm">  </span>
 </span><span class='line'><span class="cm">  Circuit:</span>
 </span><span class='line'><span class="cm">    Audio output on digital pin 9 (on a Uno or similar), or </span>
@@ -3735,12 +3731,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>177</span>
 <span class='line-number'>178</span>
 <span class='line-number'>179</span>
-<span class='line-number'>180</span>
-<span class='line-number'>181</span>
-<span class='line-number'>182</span>
-<span class='line-number'>183</span>
-<span class='line-number'>184</span>
-<span class='line-number'>185</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  </span>
 </span><span class='line'><span class="cm">  Plays a fluctuating ambient wash in response to light and temperature sensors,</span>
 </span><span class='line'><span class="cm">  using Mozzi sonification library.</span>
@@ -3749,12 +3739,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">  Temperature readings from a thermistor are used to set the notes</span>
 </span><span class='line'><span class="cm">  being played, and light readings from a light dependent resistor are</span>
 </span><span class='line'><span class="cm">  mapped to the pulse rates of the volume control oscillators.</span>
-</span><span class='line'><span class="cm">  </span>
-</span><span class='line'><span class="cm">  This sketch needs to be compiled using STANDARD audio mode </span>
-</span><span class='line'><span class="cm">  to avoid clicks from high processor load.</span>
-</span><span class='line'><span class="cm">  Edit Mozzi/mozzi_config.h, uncomment </span>
-</span><span class='line'><span class="cm">     #define AUDIO_MODE STANDARD</span>
-</span><span class='line'><span class="cm">  and make sure the other 2 AUDIO_MODE defines are commented out.</span>
 </span><span class='line'><span class="cm">  </span>
 </span><span class='line'><span class="cm">  Circuit:</span>
 </span><span class='line'><span class="cm">    Audio output on digital pin 9 (on a Uno or similar), or </span>
@@ -5201,7 +5185,7 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'>  <span class="kt">int</span> <span class="n">knob_value</span> <span class="o">=</span> <span class="n">mozziAnalogRead</span><span class="p">(</span><span class="n">KNOB_PIN</span><span class="p">);</span> <span class="c1">// value is 0-1023</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="c1">// map it to an 8 bit volume range for efficient calculations in updateAudio</span>
-</span><span class='line'>  <span class="n">volume</span> <span class="o">=</span> <span class="n">sensor_value</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">;</span>  <span class="c1">// 10 bits (0-&gt;1023) shifted right by 2 bits to give 8 bits (0-&gt;255)</span>
+</span><span class='line'>  <span class="n">volume</span> <span class="o">=</span> <span class="n">knob_value</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">;</span>  <span class="c1">// 10 bits (0-&gt;1023) shifted right by 2 bits to give 8 bits (0-&gt;255)</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="c1">// print the value to the Serial monitor for debugging</span>
 </span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;volume = &quot;</span><span class="p">);</span>
@@ -7543,12 +7527,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>144</span>
 <span class='line-number'>145</span>
 <span class='line-number'>146</span>
-<span class='line-number'>147</span>
-<span class='line-number'>148</span>
-<span class='line-number'>149</span>
-<span class='line-number'>150</span>
-<span class='line-number'>151</span>
-<span class='line-number'>152</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Plays a fluctuating ambient wash using pairs</span>
 </span><span class='line'><span class="cm">    of slightly detuned oscillators, following an example</span>
 </span><span class='line'><span class="cm">    from Miller Puckette&#39;s Pure Data manual.</span>
@@ -7560,12 +7538,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Demonstrates the use of fixed-point Q16n16</span>
 </span><span class='line'><span class="cm">    format numbers, mtof() for converting midi note</span>
 </span><span class='line'><span class="cm">    values to frequency, and xorshift96() for random numbers.</span>
-</span><span class='line'><span class="cm">  </span>
-</span><span class='line'><span class="cm">    This sketch needs to be compiled using STANDARD audio mode </span>
-</span><span class='line'><span class="cm">    to avoid clicks from high processor load.</span>
-</span><span class='line'><span class="cm">    Edit Mozzi/mozzi_config.h, uncomment </span>
-</span><span class='line'><span class="cm">     #define AUDIO_MODE STANDARD</span>
-</span><span class='line'><span class="cm">    and make sure the other 2 AUDIO_MODE defines are commented out.</span>
 </span><span class='line'><span class="cm">  </span>
 </span><span class='line'><span class="cm">    Circuit: Audio output on digital pin 9 (on a Uno or similar), or </span>
 </span><span class='line'><span class="cm">    check the README or http://sensorium.github.com/Mozzi/</span>
@@ -7959,18 +7931,18 @@ Your browser does not support the audio element.</audio></p>
 
 <hr />
 
-<p>FMsynth_HIFI <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
+<p>FMsynth_32k_HIFI <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
 
 <p><audio controls>
-<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/06.Synthesis/FMsynth_HIFI/FMsynth_HIFI.ogg?raw=true' preload='auto'></source>
-<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/06.Synthesis/FMsynth_HIFI/FMsynth_HIFI.mp3?raw=true' preload='auto'></source>
+<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/06.Synthesis/FMsynth_32k_HIFI/FMsynth_32k_HIFI.ogg?raw=true' preload='auto'></source>
+<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/06.Synthesis/FMsynth_32k_HIFI/FMsynth_32k_HIFI.mp3?raw=true' preload='auto'></source>
 Your browser does not support the audio element.</audio></p>
 
-<p><button type='button' id='FMsynth_HIFIexpand' onclick='javascript:toggleDisplay(FMsynth_HIFI, FMsynth_HIFIexpand, FMsynth_HIFIcollapse)'>show sketch</button>
-<button id='FMsynth_HIFIcollapse' style='display:none' onclick='javascript:toggleDisplay(FMsynth_HIFI, FMsynth_HIFIexpand, FMsynth_HIFIcollapse)'>hide sketch</button></p>
+<p><button type='button' id='FMsynth_32k_HIFIexpand' onclick='javascript:toggleDisplay(FMsynth_32k_HIFI, FMsynth_32k_HIFIexpand, FMsynth_32k_HIFIcollapse)'>show sketch</button>
+<button id='FMsynth_32k_HIFIcollapse' style='display:none' onclick='javascript:toggleDisplay(FMsynth_32k_HIFI, FMsynth_32k_HIFIexpand, FMsynth_32k_HIFIcollapse)'>hide sketch</button></p>
 
-<div id='FMsynth_HIFI' style='display:none'>
-<figure class='code'><figcaption><span> (FMsynth_HIFI.ino)</span> <a href='/Mozzi/downloads/code/examples/06.Synthesis/FMsynth_HIFI/FMsynth_HIFI.ino'>download</a></figcaption>
+<div id='FMsynth_32k_HIFI' style='display:none'>
+<figure class='code'><figcaption><span> (FMsynth_32k_HIFI.ino)</span> <a href='/Mozzi/downloads/code/examples/06.Synthesis/FMsynth_32k_HIFI/FMsynth_32k_HIFI.ino'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -8109,6 +8081,11 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>136</span>
 <span class='line-number'>137</span>
 <span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of simple FM with the phase modulation technique,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -8119,12 +8096,17 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">     IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be</span>
 </span><span class='line'><span class="cm">    be changed from STANDARD mode to HIFI.</span>
 </span><span class='line'><span class="cm">    In Mozz/mozzi_config.h, change</span>
-</span><span class='line'><span class="cm">    #define AUDIO_MODE STANDARD</span>
+</span><span class='line'><span class="cm">    //#define AUDIO_MODE STANDARD</span>
+</span><span class='line'><span class="cm">    #define AUDIO_MODE STANDARD_PLUS</span>
 </span><span class='line'><span class="cm">    //#define AUDIO_MODE HIFI</span>
 </span><span class='line'><span class="cm">    to</span>
 </span><span class='line'><span class="cm">    //#define AUDIO_MODE STANDARD</span>
+</span><span class='line'><span class="cm">    //#define AUDIO_MODE STANDARD_PLUS</span>
 </span><span class='line'><span class="cm">    #define AUDIO_MODE HIFI</span>
 </span><span class='line'><span class="cm">  </span>
+</span><span class='line'><span class="cm">  The sketch also sounds better with a faster sample rate, for less aliasing</span>
+</span><span class='line'><span class="cm">  #define AUDIO_RATE 32768</span>
+</span><span class='line'><span class="cm">  in mozzi_config.</span>
 </span><span class='line'><span class="cm">  </span>
 </span><span class='line'><span class="cm">    Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),</span>
 </span><span class='line'><span class="cm">    Check the Mozzi core module documentation for others and more detail</span>
@@ -9203,35 +9185,829 @@ Your browser does not support the audio element.</audio></p>
 
 <hr />
 
-<p>ADSR_Envelope <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
+<p>ADSR_Audio_Rate_Envelope <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
 
 <p><audio controls>
-<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/07.Envelopes/ADSR_Envelope/ADSR_Envelope.ogg?raw=true' preload='auto'></source>
-<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/07.Envelopes/ADSR_Envelope/ADSR_Envelope.mp3?raw=true' preload='auto'></source>
+<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/07.Envelopes/ADSR_Audio_Rate_Envelope/ADSR_Audio_Rate_Envelope.ogg?raw=true' preload='auto'></source>
+<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/07.Envelopes/ADSR_Audio_Rate_Envelope/ADSR_Audio_Rate_Envelope.mp3?raw=true' preload='auto'></source>
 Your browser does not support the audio element.</audio></p>
 
-<p><button type='button' id='ADSR_Envelopeexpand' onclick='javascript:toggleDisplay(ADSR_Envelope, ADSR_Envelopeexpand, ADSR_Envelopecollapse)'>show sketch</button>
-<button id='ADSR_Envelopecollapse' style='display:none' onclick='javascript:toggleDisplay(ADSR_Envelope, ADSR_Envelopeexpand, ADSR_Envelopecollapse)'>hide sketch</button></p>
+<p><button type='button' id='ADSR_Audio_Rate_Envelopeexpand' onclick='javascript:toggleDisplay(ADSR_Audio_Rate_Envelope, ADSR_Audio_Rate_Envelopeexpand, ADSR_Audio_Rate_Envelopecollapse)'>show sketch</button>
+<button id='ADSR_Audio_Rate_Envelopecollapse' style='display:none' onclick='javascript:toggleDisplay(ADSR_Audio_Rate_Envelope, ADSR_Audio_Rate_Envelopeexpand, ADSR_Audio_Rate_Envelopecollapse)'>hide sketch</button></p>
 
-<div id='ADSR_Envelope' style='display:none'>
-File /Users/timbarrass/mozzi-octopress/source/downloads/code/examples/07.Envelopes/ADSR_Envelope/ADSR_Envelope.ino could not be found
+<div id='ADSR_Audio_Rate_Envelope' style='display:none'>
+<figure class='code'><figcaption><span> (ADSR_Audio_Rate_Envelope.ino)</span> <a href='/Mozzi/downloads/code/examples/07.Envelopes/ADSR_Audio_Rate_Envelope/ADSR_Audio_Rate_Envelope.ino'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example applying an ADSR envelope to an audio signal</span>
+</span><span class='line'><span class="cm">    with Mozzi sonification library.  This shows </span>
+</span><span class='line'><span class="cm">    internal updates at CONTROL_RATE, using update() in updateControl(),</span>
+</span><span class='line'><span class="cm">    with interpolation and output using next() at AUDIO_RATE in updateAudio().</span>
+</span><span class='line'><span class="cm">    This is the &quot;ordinary&quot; way to use ADSR for smooth amplitude transitions while</span>
+</span><span class='line'><span class="cm">    maintaining reasonable efficiency by updating internal states in updateControl().</span>
+</span><span class='line'><span class="cm">    </span>
+</span><span class='line'><span class="cm">    Demonstrates a simple ADSR object being controlled with</span>
+</span><span class='line'><span class="cm">    noteOn() and noteOff() instructions.</span>
+</span><span class='line'><span class="cm">  </span>
+</span><span class='line'><span class="cm">    Created by Tim Barrass 2013.</span>
+</span><span class='line'><span class="cm">    This example code is in the public domain.</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;EventDelay.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;ADSR.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;tables/sin8192_int8.h&gt; </span>
+</span><span class='line'><span class="cp">#include &lt;mozzi_rand.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;mozzi_midi.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define CONTROL_RATE 64</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="mi">8192</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aOscil</span><span class="p">(</span><span class="n">SIN8192_DATA</span><span class="p">);;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// for triggering the envelope</span>
+</span><span class='line'><span class="n">EventDelay</span> <span class="n">noteDelay</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">ADSR</span> <span class="o">&lt;</span><span class="n">CONTROL_RATE</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">envelope</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">boolean</span> <span class="n">note_is_on</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">randSeed</span><span class="p">();</span> <span class="c1">// fresh random</span>
+</span><span class='line'>  <span class="n">noteDelay</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span> <span class="c1">// 2 second countdown</span>
+</span><span class='line'>  <span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">duration</span><span class="p">,</span> <span class="n">attack</span><span class="p">,</span> <span class="n">decay</span><span class="p">,</span> <span class="n">sustain</span><span class="p">,</span> <span class="n">release_ms</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">noteDelay</span><span class="p">.</span><span class="n">ready</span><span class="p">()){</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// choose envelope levels</span>
+</span><span class='line'>      <span class="n">byte</span> <span class="n">attack_level</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span><span class="o">+</span><span class="mi">127</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">byte</span> <span class="n">decay_level</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">envelope</span><span class="p">.</span><span class="n">setADLevels</span><span class="p">(</span><span class="n">attack_level</span><span class="p">,</span><span class="n">decay_level</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// generate a random new adsr parameter value in milliseconds</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="o">-</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+</span><span class='line'>      <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">new_value</span> <span class="o">=</span> <span class="n">abs</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>     <span class="c1">// randomly choose one of the adsr parameters and set the new value</span>
+</span><span class='line'>     <span class="k">switch</span> <span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">)){</span>
+</span><span class='line'>       <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
+</span><span class='line'>       <span class="n">attack</span> <span class="o">=</span> <span class="n">new_value</span><span class="p">;</span>
+</span><span class='line'>       <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>       <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+</span><span class='line'>       <span class="n">decay</span> <span class="o">=</span> <span class="n">new_value</span><span class="p">;</span>
+</span><span class='line'>       <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>       <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+</span><span class='line'>       <span class="n">sustain</span> <span class="o">=</span> <span class="n">new_value</span><span class="p">;</span>
+</span><span class='line'>       <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>       <span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
+</span><span class='line'>       <span class="n">release_ms</span> <span class="o">=</span> <span class="n">new_value</span><span class="p">;</span>
+</span><span class='line'>       <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>     <span class="p">}</span>
+</span><span class='line'>     <span class="n">envelope</span><span class="p">.</span><span class="n">setTimes</span><span class="p">(</span><span class="n">attack</span><span class="p">,</span><span class="n">decay</span><span class="p">,</span><span class="n">sustain</span><span class="p">,</span><span class="n">release_ms</span><span class="p">);</span>
+</span><span class='line'>     <span class="n">envelope</span><span class="p">.</span><span class="n">noteOn</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>     <span class="n">byte</span> <span class="n">midi_note</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">107</span><span class="p">)</span><span class="o">+</span><span class="mi">20</span><span class="p">;</span>
+</span><span class='line'>     <span class="n">aOscil</span><span class="p">.</span><span class="n">setFreq</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">mtof</span><span class="p">(</span><span class="n">midi_note</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>     <span class="c1">// print to screen</span>
+</span><span class='line'>     <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;midi_note</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">midi_note</span><span class="p">);</span>
+</span><span class='line'>     <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;attack_level</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">attack_level</span><span class="p">);</span>
+</span><span class='line'>     <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;decay_level</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">decay_level</span><span class="p">);</span>
+</span><span class='line'>     <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;attack</span><span class="se">\t\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">attack</span><span class="p">);</span>
+</span><span class='line'>     <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;decay</span><span class="se">\t\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">decay</span><span class="p">);</span>
+</span><span class='line'>     <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;sustain</span><span class="se">\t\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">sustain</span><span class="p">);</span>
+</span><span class='line'>     <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;release</span><span class="se">\t\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">release_ms</span><span class="p">);</span>
+</span><span class='line'>     <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>     <span class="n">noteDelay</span><span class="p">.</span><span class="n">start</span><span class="p">(</span><span class="n">attack</span><span class="o">+</span><span class="n">decay</span><span class="o">+</span><span class="n">sustain</span><span class="o">+</span><span class="n">release_ms</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="p">}</span>
+</span><span class='line'>  <span class="n">envelope</span><span class="p">.</span><span class="n">update</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">updateAudio</span><span class="p">(){</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="n">envelope</span><span class="p">.</span><span class="n">next</span><span class="p">()</span> <span class="o">*</span> <span class="n">aOscil</span><span class="p">.</span><span class="n">next</span><span class="p">())</span><span class="o">&gt;&gt;</span><span class="mi">8</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">audioHook</span><span class="p">();</span> <span class="c1">// required here</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 </div>
 
 
 <hr />
 
-<p>ADSR_Envelope_x2 <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
+<p>ADSR_Audio_Rate_Envelope_x2 <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
 
 <p><audio controls>
-<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/07.Envelopes/ADSR_Envelope_x2/ADSR_Envelope_x2.ogg?raw=true' preload='auto'></source>
-<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/07.Envelopes/ADSR_Envelope_x2/ADSR_Envelope_x2.mp3?raw=true' preload='auto'></source>
+<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/07.Envelopes/ADSR_Audio_Rate_Envelope_x2/ADSR_Audio_Rate_Envelope_x2.ogg?raw=true' preload='auto'></source>
+<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/07.Envelopes/ADSR_Audio_Rate_Envelope_x2/ADSR_Audio_Rate_Envelope_x2.mp3?raw=true' preload='auto'></source>
 Your browser does not support the audio element.</audio></p>
 
-<p><button type='button' id='ADSR_Envelope_x2expand' onclick='javascript:toggleDisplay(ADSR_Envelope_x2, ADSR_Envelope_x2expand, ADSR_Envelope_x2collapse)'>show sketch</button>
-<button id='ADSR_Envelope_x2collapse' style='display:none' onclick='javascript:toggleDisplay(ADSR_Envelope_x2, ADSR_Envelope_x2expand, ADSR_Envelope_x2collapse)'>hide sketch</button></p>
+<p><button type='button' id='ADSR_Audio_Rate_Envelope_x2expand' onclick='javascript:toggleDisplay(ADSR_Audio_Rate_Envelope_x2, ADSR_Audio_Rate_Envelope_x2expand, ADSR_Audio_Rate_Envelope_x2collapse)'>show sketch</button>
+<button id='ADSR_Audio_Rate_Envelope_x2collapse' style='display:none' onclick='javascript:toggleDisplay(ADSR_Audio_Rate_Envelope_x2, ADSR_Audio_Rate_Envelope_x2expand, ADSR_Audio_Rate_Envelope_x2collapse)'>hide sketch</button></p>
 
-<div id='ADSR_Envelope_x2' style='display:none'>
-File /Users/timbarrass/mozzi-octopress/source/downloads/code/examples/07.Envelopes/ADSR_Envelope_x2/ADSR_Envelope_x2.ino could not be found
+<div id='ADSR_Audio_Rate_Envelope_x2' style='display:none'>
+<figure class='code'><figcaption><span> (ADSR_Audio_Rate_Envelope_x2.ino)</span> <a href='/Mozzi/downloads/code/examples/07.Envelopes/ADSR_Audio_Rate_Envelope_x2/ADSR_Audio_Rate_Envelope_x2.ino'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+<span class='line-number'>152</span>
+<span class='line-number'>153</span>
+<span class='line-number'>154</span>
+<span class='line-number'>155</span>
+<span class='line-number'>156</span>
+<span class='line-number'>157</span>
+<span class='line-number'>158</span>
+<span class='line-number'>159</span>
+<span class='line-number'>160</span>
+<span class='line-number'>161</span>
+<span class='line-number'>162</span>
+<span class='line-number'>163</span>
+<span class='line-number'>164</span>
+<span class='line-number'>165</span>
+<span class='line-number'>166</span>
+<span class='line-number'>167</span>
+<span class='line-number'>168</span>
+<span class='line-number'>169</span>
+<span class='line-number'>170</span>
+<span class='line-number'>171</span>
+<span class='line-number'>172</span>
+<span class='line-number'>173</span>
+<span class='line-number'>174</span>
+<span class='line-number'>175</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example applying ADSR envelopes to 2 audio oscillators</span>
+</span><span class='line'><span class="cm">     with Mozzi sonification library.</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">     Demonstrates ADSR, EventDelay and rand().</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">     Created by Tim Barrass 2013.</span>
+</span><span class='line'><span class="cm">     This example code is in the public domain.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;EventDelay.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;ADSR.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;tables/sin8192_int8.h&gt; </span>
+</span><span class='line'><span class="cp">#include &lt;mozzi_rand.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;mozzi_midi.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define CONTROL_RATE 64</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="mi">8192</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aOscil0</span><span class="p">(</span><span class="n">SIN8192_DATA</span><span class="p">);</span>
+</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="mi">8192</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aOscil1</span><span class="p">(</span><span class="n">SIN8192_DATA</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// for triggering the envelope</span>
+</span><span class='line'><span class="n">EventDelay</span> <span class="n">noteDelay</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// ADSR update_rate, interpolation_rte</span>
+</span><span class='line'><span class="n">ADSR</span> <span class="o">&lt;</span><span class="n">CONTROL_RATE</span><span class="p">,</span><span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">envelope0</span><span class="p">;</span>
+</span><span class='line'><span class="n">ADSR</span> <span class="o">&lt;</span><span class="n">CONTROL_RATE</span><span class="p">,</span><span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">envelope1</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">boolean</span> <span class="n">note_is_on</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">randSeed</span><span class="p">();</span> <span class="c1">// fresh random</span>
+</span><span class='line'>  <span class="n">envelope0</span><span class="p">.</span><span class="n">setTimes</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">300</span><span class="p">),</span><span class="n">rand</span><span class="p">(</span><span class="mi">300</span><span class="p">),</span><span class="n">rand</span><span class="p">(</span><span class="mi">300</span><span class="p">),</span><span class="n">rand</span><span class="p">(</span><span class="mi">300</span><span class="p">));</span>
+</span><span class='line'>  <span class="n">envelope1</span><span class="p">.</span><span class="n">setTimes</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">300</span><span class="p">),</span><span class="n">rand</span><span class="p">(</span><span class="mi">300</span><span class="p">),</span><span class="n">rand</span><span class="p">(</span><span class="mi">300</span><span class="p">),</span><span class="n">rand</span><span class="p">(</span><span class="mi">300</span><span class="p">));</span>
+</span><span class='line'>  <span class="n">noteDelay</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span> <span class="c1">// 2 second countdown</span>
+</span><span class='line'>  <span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">attack0</span><span class="p">,</span> <span class="n">decay0</span><span class="p">,</span> <span class="n">sustain0</span><span class="p">,</span> <span class="n">release_ms0</span><span class="p">;</span>
+</span><span class='line'><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">attack1</span><span class="p">,</span> <span class="n">decay1</span><span class="p">,</span> <span class="n">sustain1</span><span class="p">,</span> <span class="n">release_ms1</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">noteDelay</span><span class="p">.</span><span class="n">ready</span><span class="p">()){</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// change adsr 0</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// choose envelope levels</span>
+</span><span class='line'>    <span class="n">byte</span> <span class="n">attack0_level</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span><span class="o">+</span><span class="mi">127</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">byte</span> <span class="n">decay0_level</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">envelope0</span><span class="p">.</span><span class="n">setADLevels</span><span class="p">(</span><span class="n">attack0_level</span><span class="p">,</span><span class="n">decay0_level</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// generate a random new adsr parameter value in milliseconds</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span><span class="o">-</span><span class="n">rand</span><span class="p">(</span><span class="mi">300</span><span class="p">);</span>
+</span><span class='line'>    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">new_value</span> <span class="o">=</span> <span class="n">abs</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">+</span><span class="mi">100</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// randomly choose one of the adsr parameters and set the new value</span>
+</span><span class='line'>    <span class="k">switch</span> <span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">)){</span>
+</span><span class='line'>    <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
+</span><span class='line'>      <span class="n">attack0</span> <span class="o">=</span> <span class="n">new_value</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+</span><span class='line'>      <span class="n">decay0</span> <span class="o">=</span> <span class="n">new_value</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+</span><span class='line'>      <span class="n">sustain0</span> <span class="o">=</span> <span class="n">new_value</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
+</span><span class='line'>      <span class="n">release_ms0</span> <span class="o">=</span> <span class="n">new_value</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="n">envelope0</span><span class="p">.</span><span class="n">setTimes</span><span class="p">(</span><span class="n">attack0</span><span class="p">,</span><span class="n">decay0</span><span class="p">,</span><span class="n">sustain0</span><span class="p">,</span><span class="n">release_ms0</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">envelope0</span><span class="p">.</span><span class="n">noteOn</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// change adsr 1 </span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// choose envelope levels</span>
+</span><span class='line'>    <span class="n">byte</span> <span class="n">attack1_level</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span><span class="o">+</span><span class="mi">127</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">byte</span> <span class="n">decay1_level</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">envelope1</span><span class="p">.</span><span class="n">setADLevels</span><span class="p">(</span><span class="n">attack1_level</span><span class="p">,</span><span class="n">decay1_level</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// generate a random new adsr parameter value in milliseconds</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span><span class="o">-</span><span class="n">rand</span><span class="p">(</span><span class="mi">300</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">new_value</span> <span class="o">=</span> <span class="n">abs</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">+</span><span class="mi">100</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// randomly choose one of the adsr parameters and set the new value</span>
+</span><span class='line'>    <span class="k">switch</span> <span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">)){</span>
+</span><span class='line'>    <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
+</span><span class='line'>      <span class="n">attack1</span> <span class="o">=</span> <span class="n">new_value</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+</span><span class='line'>      <span class="n">decay1</span> <span class="o">=</span> <span class="n">new_value</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+</span><span class='line'>      <span class="n">sustain1</span> <span class="o">=</span> <span class="n">new_value</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
+</span><span class='line'>      <span class="n">release_ms1</span> <span class="o">=</span> <span class="n">new_value</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="n">envelope1</span><span class="p">.</span><span class="n">setTimes</span><span class="p">(</span><span class="n">attack1</span><span class="p">,</span><span class="n">decay1</span><span class="p">,</span><span class="n">sustain1</span><span class="p">,</span><span class="n">release_ms1</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">envelope1</span><span class="p">.</span><span class="n">noteOn</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// change the pitch</span>
+</span><span class='line'>    <span class="n">byte</span> <span class="n">midi_note</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">107</span><span class="p">)</span><span class="o">+</span><span class="mi">20</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">freq</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">mtof</span><span class="p">(</span><span class="n">midi_note</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">aOscil0</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">freq</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">aOscil1</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">freq</span><span class="o">*</span><span class="mi">2</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// print to screen</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;midi_note</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">midi_note</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;attack0_level</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">attack0_level</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s"> attack1_level</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">attack1_level</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;decay0_level</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">decay0_level</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s"> decay1_level</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">decay1_level</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;attack0</span><span class="se">\t\t</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">attack0</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s"> attack1</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">attack1</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;decay0</span><span class="se">\t\t</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">decay0</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s"> decay1</span><span class="se">\t\t</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">decay1</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;sustain0</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">sustain0</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s"> sustain1</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">sustain1</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;release0</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">release_ms0</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s"> release1</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">release_ms1</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// set duration to longest adsr of the 2</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">dur0</span> <span class="o">=</span> <span class="n">attack0</span><span class="o">+</span><span class="n">decay0</span><span class="o">+</span><span class="n">sustain0</span><span class="o">+</span><span class="n">release_ms0</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">dur1</span> <span class="o">=</span> <span class="n">attack1</span><span class="o">+</span><span class="n">decay1</span><span class="o">+</span><span class="n">sustain1</span><span class="o">+</span><span class="n">release_ms1</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">dur0</span><span class="o">&gt;</span><span class="n">dur1</span><span class="p">){</span>
+</span><span class='line'>      <span class="n">noteDelay</span><span class="p">.</span><span class="n">start</span><span class="p">(</span><span class="n">dur0</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">else</span><span class="p">{</span>
+</span><span class='line'>      <span class="n">noteDelay</span><span class="p">.</span><span class="n">start</span><span class="p">(</span><span class="n">dur1</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="n">envelope0</span><span class="p">.</span><span class="n">update</span><span class="p">();</span>
+</span><span class='line'>  <span class="n">envelope1</span><span class="p">.</span><span class="n">update</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">updateAudio</span><span class="p">(){</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">((</span><span class="kt">long</span><span class="p">)</span><span class="n">envelope0</span><span class="p">.</span><span class="n">next</span><span class="p">()</span> <span class="o">*</span> <span class="n">aOscil0</span><span class="p">.</span><span class="n">next</span><span class="p">())</span> <span class="o">+</span>
+</span><span class='line'>    <span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">envelope1</span><span class="p">.</span><span class="n">next</span><span class="p">()</span> <span class="o">*</span> <span class="n">aOscil1</span><span class="p">.</span><span class="n">next</span><span class="p">())</span>
+</span><span class='line'>    <span class="o">&gt;&gt;</span><span class="mi">9</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">audioHook</span><span class="p">();</span> <span class="c1">// required here</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+</div>
+
+
+<hr />
+
+<p>ADSR_Control_Rate_Envelope <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
+
+<p><audio controls>
+<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/07.Envelopes/ADSR_Control_Rate_Envelope/ADSR_Control_Rate_Envelope.ogg?raw=true' preload='auto'></source>
+<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/07.Envelopes/ADSR_Control_Rate_Envelope/ADSR_Control_Rate_Envelope.mp3?raw=true' preload='auto'></source>
+Your browser does not support the audio element.</audio></p>
+
+<p><button type='button' id='ADSR_Control_Rate_Envelopeexpand' onclick='javascript:toggleDisplay(ADSR_Control_Rate_Envelope, ADSR_Control_Rate_Envelopeexpand, ADSR_Control_Rate_Envelopecollapse)'>show sketch</button>
+<button id='ADSR_Control_Rate_Envelopecollapse' style='display:none' onclick='javascript:toggleDisplay(ADSR_Control_Rate_Envelope, ADSR_Control_Rate_Envelopeexpand, ADSR_Control_Rate_Envelopecollapse)'>hide sketch</button></p>
+
+<div id='ADSR_Control_Rate_Envelope' style='display:none'>
+<figure class='code'><figcaption><span> (ADSR_Control_Rate_Envelope.ino)</span> <a href='/Mozzi/downloads/code/examples/07.Envelopes/ADSR_Control_Rate_Envelope/ADSR_Control_Rate_Envelope.ino'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example applying an ADSR envelope to an audio signal</span>
+</span><span class='line'><span class="cm">    with Mozzi sonification library.  This shows </span>
+</span><span class='line'><span class="cm">    internal updates as well as interpolation at CONTROL_RATE, using both</span>
+</span><span class='line'><span class="cm">    update() and next()  in updateControl().</span>
+</span><span class='line'><span class="cm">    This is less computationally intensive than doing interpolation with</span>
+</span><span class='line'><span class="cm">    next() in updateAudio(), but can be less smooth, especially with fast envelopes.</span>
+</span><span class='line'><span class="cm">    </span>
+</span><span class='line'><span class="cm">    Demonstrates a simple ADSR object being controlled with</span>
+</span><span class='line'><span class="cm">    noteOn() and noteOff() instructions.</span>
+</span><span class='line'><span class="cm">  </span>
+</span><span class='line'><span class="cm">    Created by Tim Barrass 2013-14.</span>
+</span><span class='line'><span class="cm">    This example code is in the public domain.</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;EventDelay.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;ADSR.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;tables/sin8192_int8.h&gt; </span>
+</span><span class='line'><span class="cp">#include &lt;mozzi_rand.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;mozzi_midi.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define CONTROL_RATE 128 </span><span class="c1">// faster than usual to help smooth CONTROL_RATE adsr interpolation (next())</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="mi">8192</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aOscil</span><span class="p">(</span><span class="n">SIN8192_DATA</span><span class="p">);;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// for triggering the envelope</span>
+</span><span class='line'><span class="n">EventDelay</span> <span class="n">noteDelay</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">ADSR</span> <span class="o">&lt;</span><span class="n">CONTROL_RATE</span><span class="p">,</span> <span class="n">CONTROL_RATE</span><span class="o">&gt;</span> <span class="n">envelope</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">boolean</span> <span class="n">note_is_on</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'><span class="n">byte</span> <span class="n">gain</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">randSeed</span><span class="p">();</span> <span class="c1">// fresh random</span>
+</span><span class='line'>  <span class="n">noteDelay</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span> <span class="c1">// 2 second countdown</span>
+</span><span class='line'>  <span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">duration</span><span class="p">,</span> <span class="n">attack</span><span class="p">,</span> <span class="n">decay</span><span class="p">,</span> <span class="n">sustain</span><span class="p">,</span> <span class="n">release_ms</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">noteDelay</span><span class="p">.</span><span class="n">ready</span><span class="p">()){</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// choose envelope levels</span>
+</span><span class='line'>      <span class="n">byte</span> <span class="n">attack_level</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span><span class="o">+</span><span class="mi">127</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">byte</span> <span class="n">decay_level</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">envelope</span><span class="p">.</span><span class="n">setADLevels</span><span class="p">(</span><span class="n">attack_level</span><span class="p">,</span><span class="n">decay_level</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// generate a random new adsr parameter value in milliseconds</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="o">-</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+</span><span class='line'>      <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">new_value</span> <span class="o">=</span> <span class="n">abs</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>     <span class="c1">// randomly choose one of the adsr parameters and set the new value</span>
+</span><span class='line'>     <span class="k">switch</span> <span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">)){</span>
+</span><span class='line'>       <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
+</span><span class='line'>       <span class="n">attack</span> <span class="o">=</span> <span class="n">new_value</span><span class="p">;</span>
+</span><span class='line'>       <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>       <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+</span><span class='line'>       <span class="n">decay</span> <span class="o">=</span> <span class="n">new_value</span><span class="p">;</span>
+</span><span class='line'>       <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>       <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+</span><span class='line'>       <span class="n">sustain</span> <span class="o">=</span> <span class="n">new_value</span><span class="p">;</span>
+</span><span class='line'>       <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>       <span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
+</span><span class='line'>       <span class="n">release_ms</span> <span class="o">=</span> <span class="n">new_value</span><span class="p">;</span>
+</span><span class='line'>       <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>     <span class="p">}</span>
+</span><span class='line'>     <span class="n">envelope</span><span class="p">.</span><span class="n">setTimes</span><span class="p">(</span><span class="n">attack</span><span class="p">,</span><span class="n">decay</span><span class="p">,</span><span class="n">sustain</span><span class="p">,</span><span class="n">release_ms</span><span class="p">);</span>
+</span><span class='line'>     <span class="n">envelope</span><span class="p">.</span><span class="n">noteOn</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>     <span class="n">byte</span> <span class="n">midi_note</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">107</span><span class="p">)</span><span class="o">+</span><span class="mi">20</span><span class="p">;</span>
+</span><span class='line'>     <span class="n">aOscil</span><span class="p">.</span><span class="n">setFreq</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">mtof</span><span class="p">(</span><span class="n">midi_note</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>     <span class="c1">// print to screen</span>
+</span><span class='line'>     <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;midi_note</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">midi_note</span><span class="p">);</span>
+</span><span class='line'>     <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;attack_level</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">attack_level</span><span class="p">);</span>
+</span><span class='line'>     <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;decay_level</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">decay_level</span><span class="p">);</span>
+</span><span class='line'>     <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;attack</span><span class="se">\t\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">attack</span><span class="p">);</span>
+</span><span class='line'>     <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;decay</span><span class="se">\t\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">decay</span><span class="p">);</span>
+</span><span class='line'>     <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;sustain</span><span class="se">\t\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">sustain</span><span class="p">);</span>
+</span><span class='line'>     <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;release</span><span class="se">\t\t</span><span class="s">&quot;</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">release_ms</span><span class="p">);</span>
+</span><span class='line'>     <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>     <span class="n">noteDelay</span><span class="p">.</span><span class="n">start</span><span class="p">(</span><span class="n">attack</span><span class="o">+</span><span class="n">decay</span><span class="o">+</span><span class="n">sustain</span><span class="o">+</span><span class="n">release_ms</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="p">}</span>
+</span><span class='line'>  <span class="n">envelope</span><span class="p">.</span><span class="n">update</span><span class="p">();</span>
+</span><span class='line'>  <span class="n">gain</span> <span class="o">=</span> <span class="n">envelope</span><span class="p">.</span><span class="n">next</span><span class="p">();</span> <span class="c1">// this is where it&#39;s different to an audio rate envelope</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">updateAudio</span><span class="p">(){</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="n">gain</span> <span class="o">*</span> <span class="n">aOscil</span><span class="p">.</span><span class="n">next</span><span class="p">())</span><span class="o">&gt;&gt;</span><span class="mi">8</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">audioHook</span><span class="p">();</span> <span class="c1">// required here</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 </div>
 
 
@@ -13409,6 +14185,108 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'>
 </span><span class='line'><span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
 </span><span class='line'>  <span class="n">audioHook</span><span class="p">();</span> <span class="c1">// required here</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+</div>
+
+
+<hr />
+
+<h2 class=target_without_link><a id='12.Utilities'>
+12.Utilities</a></h2>
+
+
+<hr />
+
+<p>IntMap_test <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
+
+<p><audio controls>
+<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/12.Utilities/IntMap_test/IntMap_test.ogg?raw=true' preload='auto'></source>
+<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/12.Utilities/IntMap_test/IntMap_test.mp3?raw=true' preload='auto'></source>
+Your browser does not support the audio element.</audio></p>
+
+<p><button type='button' id='IntMap_testexpand' onclick='javascript:toggleDisplay(IntMap_test, IntMap_testexpand, IntMap_testcollapse)'>show sketch</button>
+<button id='IntMap_testcollapse' style='display:none' onclick='javascript:toggleDisplay(IntMap_test, IntMap_testexpand, IntMap_testcollapse)'>hide sketch</button></p>
+
+<div id='IntMap_test' style='display:none'>
+<figure class='code'><figcaption><span> (IntMap_test.ino)</span> <a href='/Mozzi/downloads/code/examples/12.Utilities/IntMap_test/IntMap_test.ino'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm"> *  Maps a range of input numbers to an output range, comparing</span>
+</span><span class='line'><span class="cm"> *  the results of Mozzi&#39;s IntMap object with Arduino map().</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> *  Demonstrates IntMap, a fast integer replacement for map().</span>
+</span><span class='line'><span class="cm"> *  </span>
+</span><span class='line'><span class="cm"> *  Circuit: not required</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> *  Mozzi help/discussion/announcements:</span>
+</span><span class='line'><span class="cm"> *  https://groups.google.com/forum/#!forum/mozzi-users</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> *  Tim Barrass 2014.</span>
+</span><span class='line'><span class="cm"> *  This example code is in the public domain.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;IntMap.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">const</span> <span class="n">IntMap</span> <span class="n">testIntMap</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1000</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2000</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">5000</span><span class="p">){</span>
+</span><span class='line'>    <span class="n">n</span> <span class="o">=</span> <span class="n">testIntMap</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;testIntMap: </span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">DEC</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">n</span> <span class="o">=</span> <span class="n">map</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1000</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s"> map: </span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">DEC</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">i</span> <span class="o">+=</span> <span class="mi">7</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 </div>

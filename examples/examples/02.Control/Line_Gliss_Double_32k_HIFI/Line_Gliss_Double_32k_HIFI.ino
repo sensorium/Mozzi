@@ -18,9 +18,11 @@
     be changed from STANDARD mode to HIFI.
     In Mozz/mozzi_config.h, change
     #define AUDIO_MODE STANDARD
+    //#define AUDIO_MODE STANDARD_PLUS
     //#define AUDIO_MODE HIFI
     to
     //#define AUDIO_MODE STANDARD
+    //#define AUDIO_MODE STANDARD_PLUS
     #define AUDIO_MODE HIFI
   
     Also, AUDIO_RATE can be changed from 16384 to 32768 in mozzi_config.h,
@@ -69,8 +71,6 @@ Oscil <SAW8192_NUM_CELLS, AUDIO_RATE> aSaw2(SAW8192_DATA);
 Line <long> aGliss1;
 Line <long> aGliss2;
 
-#define CONTROL_RATE 64 // powers of 2 please
-
 unsigned char lo_note = 24; // midi note numbers
 unsigned char hi_note = 46;
 
@@ -85,23 +85,19 @@ unsigned char  gliss_offset_max = 36;
 
 
 void setup() {
-  randSeed();
-  pinMode(0,OUTPUT); // without this, updateControl() gets interrupted ........??
-  startMozzi(CONTROL_RATE); // optional control rate parameter
-}
-
-
-void loop(){
-  audioHook();
+  //randSeed();
+  //pinMode(0,OUTPUT); // without this, updateControl() gets interrupted ........??
+  startMozzi(); // uses default 64 control rate
 }
 
 
 // variation between oscillator's phase increments
 // looks like a big number, but they are high precision 
-// and this is just like a fractional part
+// and this is just a fractional part
 long variation(){
   return rand(16383); 
 }
+
 
 void updateControl(){ // 900 us floats vs 160 fixed
   if (--counter <= 0){
@@ -129,7 +125,7 @@ void updateControl(){ // 900 us floats vs 160 fixed
     // find the phase increments (step sizes) through the audio table for those freqs
     // they are big ugly numbers which the oscillator understands but you don't really want to know
     long gliss_start = aSaw1.phaseIncFromFreq(start_freq);
-    long gliss_end = aSaw2.phaseIncFromFreq(end_freq);
+    long gliss_end = aSaw1.phaseIncFromFreq(end_freq);
     
     aGliss1.set(gliss_start, gliss_end, audio_steps_per_gliss);
     // aGliss2 is an octave up and detuned
@@ -145,3 +141,7 @@ int updateAudio(){
   return ((int)aSaw1.next()+aSaw2.next())<<5;
 }
 
+
+void loop(){
+  audioHook();
+}

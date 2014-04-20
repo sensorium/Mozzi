@@ -1,6 +1,10 @@
 /*  Example applying an ADSR envelope to an audio signal
-    with Mozzi sonification library.
-  
+    with Mozzi sonification library.  This shows 
+    internal updates at CONTROL_RATE, using update() in updateControl(),
+    with interpolation and output using next() at AUDIO_RATE in updateAudio().
+    This is the "ordinary" way to use ADSR for smooth amplitude transitions while
+    maintaining reasonable efficiency by updating internal states in updateControl().
+    
     Demonstrates a simple ADSR object being controlled with
     noteOn() and noteOff() instructions.
   
@@ -23,7 +27,7 @@ Oscil <8192, AUDIO_RATE> aOscil(SIN8192_DATA);;
 // for triggering the envelope
 EventDelay noteDelay;
 
-ADSR <CONTROL_RATE> envelope;
+ADSR <CONTROL_RATE, AUDIO_RATE> envelope;
 
 boolean note_is_on = true;
 

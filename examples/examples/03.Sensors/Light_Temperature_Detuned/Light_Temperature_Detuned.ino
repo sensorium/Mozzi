@@ -4,15 +4,9 @@
   Pairs of audio oscillators are detuned in response to light on an LDR and
   the base frequencies are offset depending on the temperature.
   
-  It's a pretty dumb, boring and horrible  sonification, but at this stage 
+  It's a pretty dumb sonification, but at this stage 
   it's just to demonstrate the possibility of reading sensors while
   lots of audio oscillators are running.
-  
-  This sketch needs to be compiled using STANDARD audio mode 
-  to avoid clicks from high processor load.
-  Edit Mozzi/mozzi_config.h, uncomment 
-  	#define AUDIO_MODE STANDARD
-  and make sure the other 2 AUDIO_MODE defines are commented out.
   
   Circuit:
     Audio output on digital pin 9 (on a Uno or similar), or 

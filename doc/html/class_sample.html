@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2014-03-13-14:09</span>
+   &#160;<span id="projectnumber">version 2014-04-20-13:57</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -122,7 +122,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:a49ab98acdfb4f81a8860ad21876bdc18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the phase (the playhead) to the start position, which will be 0 unless set to another value with <a class="el" href="class_sample.html#a01836f7624ea574e966e775377d5bf11" title="Sets the starting position in samples.">setStart()</a>;. <br/></td></tr>
 <tr class="separator:a49ab98acdfb4f81a8860ad21876bdc18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb7084b95a6141843ede8025cdd726ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#abb7084b95a6141843ede8025cdd726ac">start</a> (unsigned int startpos)</td></tr>
-<tr class="memdesc:abb7084b95a6141843ede8025cdd726ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a new start position and sets the phase (the playhead) to that position.  <a href="#abb7084b95a6141843ede8025cdd726ac">More...</a><br/></td></tr>
+<tr class="memdesc:abb7084b95a6141843ede8025cdd726ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a new start position plays the sample from that position.  <a href="#abb7084b95a6141843ede8025cdd726ac">More...</a><br/></td></tr>
 <tr class="separator:abb7084b95a6141843ede8025cdd726ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9713e2d38b94e629c06916a7543ef48f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a9713e2d38b94e629c06916a7543ef48f">setEnd</a> (unsigned int end)</td></tr>
 <tr class="memdesc:a9713e2d38b94e629c06916a7543ef48f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the end position in samples from the beginning of the sound.  <a href="#a9713e2d38b94e629c06916a7543ef48f">More...</a><br/></td></tr>
@@ -133,7 +133,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:a8a012ae52ee028222118f6bba5c7fb33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40e76011d841b84d2d54bf2cec6c4d5f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a40e76011d841b84d2d54bf2cec6c4d5f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a40e76011d841b84d2d54bf2cec6c4d5f">setLoopingOn</a> ()</td></tr>
-<tr class="memdesc:a40e76011d841b84d2d54bf2cec6c4d5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns looping on, with the whole sample length as the loop range. <br/></td></tr>
+<tr class="memdesc:a40e76011d841b84d2d54bf2cec6c4d5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns looping on. <br/></td></tr>
 <tr class="separator:a40e76011d841b84d2d54bf2cec6c4d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accfdc762cd47425824179bff4cd2a78f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="accfdc762cd47425824179bff4cd2a78f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#accfdc762cd47425824179bff4cd2a78f">setLoopingOff</a> ()</td></tr>
@@ -667,7 +667,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned cha
 </table>
 </div><div class="memdoc">
 
-<p>Sets a new start position and sets the phase (the playhead) to that position. </p>
+<p>Sets a new start position plays the sample from that position. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">startpos</td><td>position in samples from the beginning of the sound. </td></tr>
@@ -685,7 +685,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned cha
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_sample.html">Sample</a></li>
-    <li class="footer">Generated on Thu Mar 13 2014 14:09:26 for Mozzi by
+    <li class="footer">Generated on Sun Apr 20 2014 13:57:41 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

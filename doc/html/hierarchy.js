@@ -18,7 +18,7 @@ var hierarchy =
     [ "EventDelay", "class_event_delay.html", [
       [ "Metronome", "class_metronome.html", null ]
     ] ],
-    [ "Int2Type< I >", "struct_int2_type.html", null ],
+    [ "Int2Type< I >", "group__util.html#struct_int2_type", null ],
     [ "IntMap", "class_int_map.html", null ],
     [ "Line< T >", "class_line.html", null ],
     [ "Line< Q15n16 >", "class_line.html", null ],

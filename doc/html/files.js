@@ -2,6 +2,7 @@ var files =
 [
     [ "ADSR.h", "_a_d_s_r_8h_source.html", null ],
     [ "AudioConfigHiSpeed14bitPwm.h", "_audio_config_hi_speed14bit_pwm_8h_source.html", null ],
+    [ "AudioConfigStandard++.h", "_audio_config_standard_09_09_8h_source.html", null ],
     [ "AudioConfigStandard9bitPwm.h", "_audio_config_standard9bit_pwm_8h_source.html", null ],
     [ "AudioConfigStandardPlus.h", "_audio_config_standard_plus_8h_source.html", null ],
     [ "AudioDelay.h", "_audio_delay_8h_source.html", null ],

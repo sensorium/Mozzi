@@ -10,7 +10,7 @@ var annotated =
     [ "DCfilter", "class_d_cfilter.html", "class_d_cfilter" ],
     [ "Ead", "class_ead.html", "class_ead" ],
     [ "EventDelay", "class_event_delay.html", "class_event_delay" ],
-    [ "Int2Type", "struct_int2_type.html", "struct_int2_type" ],
+    [ "Int2Type", "group__util.html#struct_int2_type", "group__util" ],
     [ "IntMap", "class_int_map.html", "class_int_map" ],
     [ "Line", "class_line.html", "class_line" ],
     [ "LowPassFilter", "class_low_pass_filter.html", "class_low_pass_filter" ],

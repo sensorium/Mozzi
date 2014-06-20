@@ -30,7 +30,7 @@ ADSR <CONTROL_RATE,AUDIO_RATE> envelope1;
 boolean note_is_on = true;
 
 void setup(){
-  Serial.begin(115200);
+  Serial.begin(9600);
   randSeed(); // fresh random
   envelope0.setTimes(rand(300),rand(300),rand(300),rand(300));  
   envelope1.setTimes(rand(300),rand(300),rand(300),rand(300));  

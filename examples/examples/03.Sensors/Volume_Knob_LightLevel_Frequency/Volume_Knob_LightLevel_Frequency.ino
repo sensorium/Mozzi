@@ -46,7 +46,7 @@ Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 unsigned char volume;
 
 void setup(){
-  Serial.begin(115200); // set up the Serial output so we can look at the analog levels
+  Serial.begin(9600); // set up the Serial output so we can look at the analog levels
   startMozzi(); // :))
 }
 

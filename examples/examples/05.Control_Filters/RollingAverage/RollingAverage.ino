@@ -32,7 +32,7 @@ RollingAverage <int, 32> kAverage; // how_many_to_average has to be power of 2
 int averaged;
 
 void setup(){
-  Serial.begin(115200);
+  Serial.begin(9600);
   startMozzi();
 }
 

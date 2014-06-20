@@ -67,7 +67,7 @@ WavePacket <DOUBLE> wavey; // DOUBLE selects 2 overlapping streams
 
 
 void setup(){
-  Serial.begin(115200);
+  Serial.begin(9600);
   // wait before starting Mozzi to receive analog reads, so AutoRange will not get 0
   delay(200);
   startMozzi();

@@ -59,8 +59,14 @@
         <lastmod>2014-04-20T15:20:51+10:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://sensorium.github.io/Mozzi//blog/2014/06/20/teensy-3-dot-0-3-dot-1-port-progress/
+        </loc>
+        <lastmod>2014-06-20T22:16:31+10:00</lastmod>
+    </url>
+    <url>
         <loc>http://sensorium.github.io/Mozzi//blog/archives/</loc>
-        <lastmod>2014-04-20T15:20:51+10:00</lastmod>
+        <lastmod>2014-06-20T22:16:31+10:00</lastmod>
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//donate/</loc>
@@ -80,7 +86,7 @@
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//</loc>
-        <lastmod>2014-04-20T15:20:51+10:00</lastmod>
+        <lastmod>2014-06-20T22:16:31+10:00</lastmod>
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//</loc>
@@ -92,7 +98,7 @@
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//learn/hints/</loc>
-        <lastmod>2014-03-21T23:33:57+11:00</lastmod>
+        <lastmod>2014-05-26T17:11:07+10:00</lastmod>
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//learn/</loc>
@@ -104,7 +110,7 @@
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//learn/output/</loc>
-        <lastmod>2014-03-21T23:33:57+11:00</lastmod>
+        <lastmod>2014-05-02T17:31:15+10:00</lastmod>
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//learn/under-the-hood/</loc>

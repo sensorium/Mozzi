@@ -57,7 +57,7 @@ long fm_intensity; // carries control info from updateControl() to updateAudio()
 
 
 void setup(){
-  Serial.begin(115200); // set up the Serial output for debugging
+  Serial.begin(9600); // set up the Serial output for debugging
   startMozzi(); // :))
 }
 

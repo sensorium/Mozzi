@@ -28,7 +28,7 @@
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
 void setup(){
-  Serial.begin(115200);
+  Serial.begin(9600);
   startMozzi(); // uses default control rate of 64
 }
 
@@ -67,14 +67,14 @@ void loop(){
  
  // Uses the first port in this list (number 0).  Change this to
  // select the port corresponding to your Arduino board.  The last
- // parameter (e.g. 115200) is the speed of the communication.  It
+ // parameter (e.g. 9600) is the speed of the communication.  It
  // has to correspond to the value passed to Serial.begin() in your
  // Arduino sketch.
- port = new Serial(this, Serial.list()[0], 115200);  
+ port = new Serial(this, Serial.list()[0], 9600);  
  
  // If you know the name of the port used by the Arduino board, you
  // can specify it directly like this.
- //port = new Serial(this, "COM1", 115200);
+ //port = new Serial(this, "COM1", 9600);
  }
  
  void draw() {

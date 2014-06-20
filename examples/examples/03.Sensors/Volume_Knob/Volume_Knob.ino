@@ -42,7 +42,7 @@ unsigned char volume;
 
 
 void setup(){
-  Serial.begin(115200); // set up the Serial output so we can look at the input values
+  Serial.begin(9600); // set up the Serial output so we can look at the input values
   aSin.setFreq(440);
   startMozzi(); // :))
 }

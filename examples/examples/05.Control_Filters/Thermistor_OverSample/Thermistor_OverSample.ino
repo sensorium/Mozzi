@@ -57,7 +57,7 @@ const float TREMOLO_SCALE = 0.002;
 
 void setup(){
   pinMode(INPUT_PIN,INPUT);
-  Serial.begin(115200);
+  Serial.begin(9600);
   aEnvelope.setFreq(ENVELOPE_DURATION);
   startMozzi(); 
 }

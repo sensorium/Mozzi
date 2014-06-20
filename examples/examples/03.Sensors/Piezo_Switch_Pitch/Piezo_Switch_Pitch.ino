@@ -48,7 +48,7 @@ boolean triggered = false;
 float pitch, pitch_change;
 
 void setup(){
-  Serial.begin(115200); // set up the Serial output so we can look at the piezo values
+  Serial.begin(9600); // set up the Serial output so we can look at the piezo values
   startMozzi(); // :))
 }
 

@@ -43,7 +43,7 @@ float recorded_pitch = (float) BURROUGHS1_18649_SAMPLERATE / (float) BURROUGHS1_
 boolean triggered = false;
 
 void setup(){
-  Serial.begin(115200); // set up the Serial output so we can look at the piezo values
+  Serial.begin(9600); // set up the Serial output so we can look at the piezo values
   startMozzi(); // :))
 }
 

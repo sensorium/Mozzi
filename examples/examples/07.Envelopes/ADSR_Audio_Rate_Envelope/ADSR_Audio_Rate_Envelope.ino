@@ -32,7 +32,7 @@ ADSR <CONTROL_RATE, AUDIO_RATE> envelope;
 boolean note_is_on = true;
 
 void setup(){
-  Serial.begin(115200);
+  Serial.begin(9600);
   randSeed(); // fresh random
   noteDelay.set(2000); // 2 second countdown
   startMozzi(CONTROL_RATE);

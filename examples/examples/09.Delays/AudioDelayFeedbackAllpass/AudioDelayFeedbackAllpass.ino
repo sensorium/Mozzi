@@ -35,7 +35,7 @@ int gain;
 
 
 void setup(){
-  //Serial.begin(115200);
+  //Serial.begin(9600);
   startMozzi(CONTROL_RATE); 
   randSeed(); // reseed the random generator for different results each time the sketch runs
   // use float to set freq because it will be small and fractional

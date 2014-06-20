@@ -22,7 +22,7 @@ int sensorPin = A0;
 DCfilter dcFiltered(0.9); // parameter sets how long the filter takes to settle
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   startMozzi();
 }
 

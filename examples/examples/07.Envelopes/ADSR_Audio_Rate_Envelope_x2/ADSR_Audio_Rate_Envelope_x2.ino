@@ -3,10 +3,10 @@
 
      Demonstrates ADSR, EventDelay and rand().
 
-     Created by Tim Barrass 2013.
-     This example code is in the public domain.
+     Tim Barrass 2013, CC by-nc-sa.
  */
 
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <EventDelay.h>
@@ -30,7 +30,8 @@ ADSR <CONTROL_RATE,AUDIO_RATE> envelope1;
 boolean note_is_on = true;
 
 void setup(){
-  Serial.begin(9600);
+  //Serial.begin(9600); // for Teensy 3.0/3.1, beware printout can cause glitches
+  //Serial.begin(115200);
   randSeed(); // fresh random
   envelope0.setTimes(rand(300),rand(300),rand(300),rand(300));  
   envelope1.setTimes(rand(300),rand(300),rand(300),rand(300));  
@@ -52,9 +53,8 @@ void updateControl(){
     byte decay0_level = rand(255);
     envelope0.setADLevels(attack0_level,decay0_level);
 
-    // generate a random new adsr parameter value in milliseconds
-    int r = rand(300)-rand(300);
-    unsigned int new_value = abs(r)+100;
+    // generate a random new adsr time parameter value in milliseconds
+     unsigned int new_value = rand(300) +100;
 
     // randomly choose one of the adsr parameters and set the new value
     switch (rand(4)){
@@ -86,10 +86,8 @@ void updateControl(){
     byte decay1_level = rand(255);
     envelope1.setADLevels(attack1_level,decay1_level);
 
-    // generate a random new adsr parameter value in milliseconds
-
-    r = rand(300)-rand(300);
-    new_value = abs(r)+100;
+    // generate a random new adsr time parameter value in milliseconds
+     new_value = rand(300) +100;
 
     // randomly choose one of the adsr parameters and set the new value
     switch (rand(4)){
@@ -118,6 +116,7 @@ void updateControl(){
     aOscil0.setFreq(freq);
     aOscil1.setFreq(freq*2);   
 
+/*
     // print to screen
     Serial.print("midi_note\t"); 
     Serial.println(midi_note);
@@ -146,6 +145,7 @@ void updateControl(){
     Serial.print("\t release1\t"); 
     Serial.println(release_ms1);
     Serial.println();
+*/
 
     // set duration to longest adsr of the 2
     int dur0 = attack0+decay0+sustain0+release_ms0;

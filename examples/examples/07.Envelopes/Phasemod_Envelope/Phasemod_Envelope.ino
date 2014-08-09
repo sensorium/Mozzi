@@ -8,10 +8,10 @@
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
-    Tim Barrass 2012.
-    This example code is in the public domain.
+    Tim Barrass 2012, CC by-nc-sa.
 */
 
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/cos8192_int8.h>
@@ -45,7 +45,7 @@ void updateControl() {
 
 int updateAudio(){
   int asig = aCarrier.phMod((int)aModulator.next()*(260u+aModWidth.next()));
-  return (asig*(unsigned char)aEnvelop.next())>>8;
+  return (asig*(byte)aEnvelop.next())>>8;
 }
 
 

@@ -4,7 +4,9 @@
   
     Demonstrates use of twi_nonblock functions
     to replace processor-blocking Wire methods.
-  
+    
+    Note: The twi_nonblock code is not compatible with Teesy 3.0/3.1.
+    
     Circuit: Audio output on digital pin 9.
   
     Mozzi help/discussion/announcements:
@@ -41,12 +43,12 @@ int gain;
 #define ADXL345_ACT_INACT_CTL 0x27
 
 
-static volatile uint8_t acc_status = 0;
+static volatile byte acc_status = 0;
 #define ACC_IDLE 0
 #define ACC_READING 1
 #define ACC_WRITING 2
 
-uint8_t accbytedata[6];
+byte accbytedata[6];
 
 void setup_accelero(){
   initialize_twi_nonblock();
@@ -98,17 +100,17 @@ void initiate_request_accelero(){
   // indicate that we are done transmitting
   //   transmitting = 0;
 
-  uint8_t read = twi_initiateReadFrom(ADXL345_DEVICE, 6);
+  byte read = twi_initiateReadFrom(ADXL345_DEVICE, 6);
   acc_status = ACC_READING;
 }
 
 void finalise_request_accelero(){
-  uint8_t read = twi_readMasterBuffer( rxBuffer, 6 );
+  byte read = twi_readMasterBuffer( rxBuffer, 6 );
   // set rx buffer iterator vars
   rxBufferIndex = 0;
   rxBufferLength = read;
 
-  uint8_t i = 0;
+  byte i = 0;
   while( rxBufferLength - rxBufferIndex > 0)         // device may send less than requested (abnormal)
   { 
     accbytedata[i] = rxBuffer[rxBufferIndex];

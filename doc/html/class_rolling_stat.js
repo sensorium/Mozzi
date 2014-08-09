@@ -5,5 +5,5 @@ var class_rolling_stat =
     [ "getStandardDeviation", "class_rolling_stat.html#ade29f8eea338da4879fa692ea2b28bc3", null ],
     [ "getVariance", "class_rolling_stat.html#a9d145736669d070194b8149eec084bc0", null ],
     [ "update", "class_rolling_stat.html#a85750e78ac282caec24408dce6e78201", null ],
-    [ "update", "class_rolling_stat.html#afdc3f385aebe68492514f41129065aa5", null ]
+    [ "update", "class_rolling_stat.html#a6f7b384ab338da5ba10200fbce7f2eb0", null ]
 ];

@@ -4,16 +4,17 @@
     Demonstrates the use of WaveShaper(), EventDelay(), Smooth(),
     rand(), and fixed-point numbers.
   
-    Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+    Circuit: Audio output on digital pin 9 on a Uno or similar, or
+    DAC/A14 on Teensy 3.0/3.1, or 
     check the README or http://sensorium.github.com/Mozzi/
   
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
-    Tim Barrass 2012.
-    This example code is in the public domain.
+    Tim Barrass 2012, CC by-nc-sa.
 */
 
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <WaveShaper.h>
@@ -61,8 +62,8 @@ void setup(){
   kChangeNoteDelay.set(4000); // note duration ms, within resolution of CONTROL_RATE
 }
 
-unsigned char rndPentatonic(){
-  unsigned char note = rand((byte)5);
+byte rndPentatonic(){
+  byte note = rand((byte)5);
   switch(note){
   case 0:
     note = 0;
@@ -102,8 +103,8 @@ int updateAudio(){
   char asig0 = aSin.next(); // sine wave source
   // make 2 signals fading in and out to show effect of amplitude when waveshaping with Chebyshev polynomial curves
   // offset the signals by 128 to fit in the 0-255 range for the waveshaping table lookups
-  unsigned char asig1 = (unsigned char)128+((asig0*((unsigned char)128+aGain1.next()))>>8);
-  unsigned char asig2 = (unsigned char)128+((asig0*((unsigned char)128+aGain2.next()))>>8);
+  byte asig1 = (byte)128+((asig0*((byte)128+aGain1.next()))>>8);
+  byte asig2 = (byte)128+((asig0*((byte)128+aGain2.next()))>>8);
   // get the waveshaped signals
   char awaveshaped1 = aCheby3rd.next(asig1);
   char awaveshaped2 = aCheby6th.next(asig2);

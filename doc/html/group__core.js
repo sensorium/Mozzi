@@ -7,7 +7,6 @@ var group__core =
     [ "STANDARD", "group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1", null ],
     [ "STANDARD_PWM_RESOLUTION", "group__core.html#ga800c094e0a14fc31d87a360b3807a1b8", null ],
     [ "STANDARD_PWM_RESOLUTION", "group__core.html#ga800c094e0a14fc31d87a360b3807a1b8", null ],
-    [ "STANDARD_PWM_RESOLUTION", "group__core.html#ga800c094e0a14fc31d87a360b3807a1b8", null ],
     [ "USE_AUDIO_INPUT", "group__core.html#ga3417fc0b453af798a70340c912a4b657", null ],
     [ "audioHook", "group__core.html#ga2fca37b988ab369e2f3c3108c683e59d", null ],
     [ "audioTicks", "group__core.html#ga55fa9d48f327b646c2f71cef7da7b8f0", null ],

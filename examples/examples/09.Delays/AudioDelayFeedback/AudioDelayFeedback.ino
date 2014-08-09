@@ -3,16 +3,18 @@
   
     Demonstrates AudioDelayFeedback.
   
-    Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+    Circuit: Audio output on digital pin 9 on a Uno or similar, or
+    DAC/A14 on Teensy 3.0/3.1, or 
     check the README or http://sensorium.github.com/Mozzi/
   
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
-    Tim Barrass 2012-13.
-    This example code is in the public domain.
+    Tim Barrass 2012-13, CC by-nc-sa.
 */
 
+
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/triangle_analogue512_int8.h> // wavetable
@@ -28,7 +30,7 @@ Oscil<TRIANGLE512_NUM_CELLS, CONTROL_RATE> kDelSamps(TRIANGLE512_DATA); // for m
 AudioDelayFeedback <128> aDel;
 
 // the delay time, measured in samples, updated in updateControl, and used in updateAudio 
-unsigned char del_samps;
+byte del_samps;
 
 void setup(){
   startMozzi(CONTROL_RATE);

@@ -4,7 +4,7 @@
   <title><![CDATA[MOZZI]]></title>
   <link href="http://sensorium.github.io/Mozzi//atom.xml" rel="self"/>
   <link href="http://sensorium.github.io/Mozzi//"/>
-  <updated>2014-06-20T22:16:38+10:00</updated>
+  <updated>2014-08-09T22:07:04+10:00</updated>
   <id>http://sensorium.github.io/Mozzi//</id>
   <author>
     <name><![CDATA[Tim Barrass]]></name>
@@ -12,6 +12,67 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Teensy 3.0/3.1 test release]]></title>
+    <link href="http://sensorium.github.io/Mozzi//blog/2014/08/09/teensy-3-dot-0-slash-3-dot-1-test-release-version-2014-08-09-14-15/"/>
+    <updated>2014-08-09T21:21:00+10:00</updated>
+    <id>http://sensorium.github.io/Mozzi//blog/2014/08/09/teensy-3-dot-0-slash-3-dot-1-test-release-version-2014-08-09-14-15</id>
+    <content type="html"><![CDATA[<p>This release is a test of the recent work on the Mozzi Teensy 3 port in response to the donation campaign reaching the grand goal of $1000.
+Thankyou to all the dozen or so donors, especially my brother and sister, who donated more than half!</p>
+
+<p>It should run as usual on the Arduinos already supported, and now also Teensy 3.0 and 3.1 (instructions for Teensies below).
+I expect some mistakes and bugs so please let me know on the forum and I&#8217;ll try to sort them out asap.</p>
+
+<p>Extra libraries required for use withTeensy 3.0/3.1:</p>
+
+<ul>
+<li><p><a href="https://github.com/loglow/IntervalTimer">Timer library for Teensy 3.0</a> by Daniel Gilbert</p></li>
+<li><p><a href="http://github.com/pedvide/ADC">ADC library</a> by Pedro Villanueva</p></li>
+</ul>
+
+
+<p>Some of the differences for Teensy 3.0/3.1 which will affect users include:</p>
+
+<ul>
+<li><p>Audio output is on pin A14/DAC, in STANDARD or STANDARD_PLUS audio modes,  These modes are identical on Teensy 3.0/3.1, as
+  the output is via DAC rather than PWM.</p></li>
+<li><p>Output is 12 bits in STANDARD and STANDARD_PLUS modes, up from nearly 9 bits for Atmel based boards.
+  HIFI audio, which works by summing two output pins, is not available on Teensy 3.0/3.1.</p></li>
+<li><p>#include &lt;ADC.h> is required at the top of every Teensy 3.0/3.1 sketch.<br/>
+  The examples come with this commented out, for Arduino compatibility.</p></li>
+<li><p>Serial baud rate for monitoring in the IDE needs to be set to 9600 to work with Teensy 3.0/3.1.
+  This slow rate can cause audio glitches.</p></li>
+<li><p><a href="https://github.com/sensestage/Mozzi">twi_nonblock</a> code by Marije Baalman for non-blocking I2C is not compatible with Teensy 3.0/3.1.</p></li>
+</ul>
+
+
+<p>Various other changes which affect the library in general:</p>
+
+<ul>
+<li><p>Changed license from GPL3 to Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</p></li>
+<li><p>ADSR.h</p>
+
+<ul>
+<li><p>next() now returns unsigned char instead of unsigned int</p></li>
+<li><p>added functions to set ADSR times in update steps, eg. setAttackUpdateSteps(unsigned int steps), etc.,
+for finer-grained control</p></li>
+</ul>
+</li>
+<li><p>SampleHuffman.h - now plays correctly from beginning when start() used before finished playing previous cycle.</p></li>
+<li><p>Re-included RCpoll.h and examples>03.Sensors>RCpoll, for capacitive sensing.<br/>
+  They have been included before, but disappeared somewhere along the way.</p></li>
+<li><p>Added PDResonant.h, and examples>06.Synthesis>PDResonant.  PDResonant is a simple midi intrument which demonstrates
+  Phase Distortion used to create a sweeping resonant filter effect, based on
+  https://en.wikipedia.org/wiki/Phase_distortion_synthesis.</p></li>
+<li><p>mozzi_fixmath.h - added Q15n16_to_Q8n0()</p></li>
+<li><p>Fixed broken link in Sensor examples to http://sensorium.github.io/Mozzi/learn/introductory-tutorial/</p></li>
+<li><p>Moved Arduino timer libraries into &#8220;utility&#8221; folder and added conditional compilation to hide them from Teensy 3.0/3.1 compilation.</p></li>
+<li><p>Removed cpu speed warning from MozziGuts.h</p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Teensy 3.0-3.1 port progress]]></title>

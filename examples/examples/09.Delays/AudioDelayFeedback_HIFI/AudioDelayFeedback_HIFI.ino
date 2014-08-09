@@ -3,15 +3,48 @@
   
     Demonstrates AudioDelayFeedback.
   
-    Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
-    check the README or http://sensorium.github.com/Mozzi/
+    This sketch using HIFI mode is not for Teensy 3.0/3.1.
+    
+    IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
+    be changed from STANDARD mode to HIFI.
+    In Mozz/mozzi_config.h, change
+    //#define AUDIO_MODE STANDARD
+    #define AUDIO_MODE STANDARD_PLUS
+    //#define AUDIO_MODE HIFI
+    to
+    //#define AUDIO_MODE STANDARD
+    //#define AUDIO_MODE STANDARD_PLUS
+    #define AUDIO_MODE HIFI
+  
+  The sketch also sounds better with a faster sample rate, for less aliasing
+  #define AUDIO_RATE 32768
+  in mozzi_config.
+  
+    Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
+    Check the Mozzi core module documentation for others and more detail
+  
+                     3.9k 
+     pin 9  ---WWWW-----|-----output
+                    499k           |
+     pin 10 ---WWWW---- |
+                                       |
+                             4.7n  ==
+                                       |
+                                   ground
+  
+    Resistors are ±0.5%  Measure and choose the most precise 
+    from a batch of whatever you can get.  Use two 1M resistors
+    in parallel if you can't find 499k.
+    Alternatively using 39 ohm, 4.99k and 470nF components will 
+    work directly with headphones.
   
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
-    Tim Barrass 2012-13.
-    This example code is in the public domain.
+    Tim Barrass 2012-13, CC by-nc-sa.
 */
+
+
 
 #include <MozziGuts.h>
 #include <Oscil.h>
@@ -28,7 +61,7 @@ Oscil<TRIANGLE512_NUM_CELLS, CONTROL_RATE> kDelSamps(TRIANGLE512_DATA); // for m
 AudioDelayFeedback <128> aDel;
 
 // the delay time, measured in samples, updated in updateControl, and used in updateAudio 
-unsigned char del_samps;
+byte del_samps;
 Q16n16 del_samps_fractional;
 
 void setup(){

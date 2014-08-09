@@ -3,6 +3,8 @@
   
     Demonstrates the use of Oscil to play a wavetable.
   
+    This sketch using HIFI mode is not for Teensy 3.0/3.1.
+        
     IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
     be changed from STANDARD mode to HIFI.
     In Mozz/mozzi_config.h, change
@@ -11,7 +13,6 @@
     to
     //#define AUDIO_MODE STANDARD
     #define AUDIO_MODE HIFI
-  
   
     Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
     Check the Mozzi core module documentation for others and more detail
@@ -34,8 +35,7 @@
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
-    Tim Barrass 2012-13.
-    This example code is in the public domain.
+    Tim Barrass 2012-13, CC by-nc-sa.
 */
  
 #include <MozziGuts.h>

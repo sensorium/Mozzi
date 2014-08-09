@@ -7,16 +7,17 @@
     changes to loop and frequency parameters
     scheduled with EventDelay.
   
-    Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+    Circuit: Audio output on digital pin 9 on a Uno or similar, or
+    DAC/A14 on Teensy 3.0/3.1, or 
     check the README or http://sensorium.github.com/Mozzi/
   
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
-    Tim Barrass 2012.
-    This example code is in the public domain.
+    Tim Barrass 2012, CC by-nc-sa.
 */
 
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Sample.h> // Sample template
 #include <samples/abomb16384_int8.h> // table for Sample
@@ -58,7 +59,7 @@ unsigned int chooseEnd(unsigned int startpos){
 
 
 void chooseSpeedMod(){
-  if (rand((unsigned char)3) == 0){
+  if (rand((byte)3) == 0){
     speedchange = (float)rand((char)-100,(char)100)/8000;
     float startspeed = (float)rand((char)-100,(char)100)/100;
     playspeedmod = playspeed + startspeed;
@@ -72,7 +73,7 @@ void chooseSpeedMod(){
 
 void chooseStartEnd(){
   unsigned int s,e;
-  if (rand((unsigned char)2) == 0){
+  if (rand((byte)2) == 0){
     s = chooseStart();
     e = chooseEnd(s);
   }

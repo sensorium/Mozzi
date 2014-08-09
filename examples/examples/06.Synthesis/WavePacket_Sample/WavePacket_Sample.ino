@@ -12,10 +12,10 @@
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
-    Tim Barrass 2013.
-    This example code is in the public domain.
+    Tim Barrass 2013, CC by-nc-sa.
 */
 
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <mozzi_analog.h>
 #include <WavePacketSample.h>
 #include <RollingAverage.h>

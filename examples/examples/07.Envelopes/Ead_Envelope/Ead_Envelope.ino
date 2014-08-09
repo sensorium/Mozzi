@@ -1,18 +1,19 @@
 /*  Example playing an enveloped noise source
- *  using Mozzi sonification library.
- *
- *  Demonstrates Ead (exponential attack decay).
- *
- *  Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
- *  check the README or http://sensorium.github.com/Mozzi/
- *
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2012.
- *  This example code is in the public domain.
+		using Mozzi sonification library.
+	
+		Demonstrates Ead (exponential attack decay).
+	
+		Circuit: Audio output on digital pin 9 on a Uno or similar, or
+		DAC/A14 on Teensy 3.0/3.1, or 
+		check the README or http://sensorium.github.com/Mozzi/
+	
+		Mozzi help/discussion/announcements:
+		https://groups.google.com/forum/#!forum/mozzi-users
+	
+		Tim Barrass 2012, CC by-nc-sa
  */
 
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
 #include <tables/brownnoise8192_int8.h> // recorded audio wavetable
@@ -40,7 +41,7 @@ void setup(){
 
 void updateControl(){
   // jump around in audio noise table to disrupt obvious looping
-  aNoise.setPhase(rand((uint)BROWNNOISE8192_NUM_CELLS));
+  aNoise.setPhase(rand((unsigned int)BROWNNOISE8192_NUM_CELLS));
 
   if(kDelay.ready()){
     // set random parameters

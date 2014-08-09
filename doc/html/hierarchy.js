@@ -1,6 +1,8 @@
 var hierarchy =
 [
     [ "ADSR< CONTROL_UPDATE_RATE, LERP_RATE >", "class_a_d_s_r.html", null ],
+    [ "ADSR< CONTROL_RATE, AUDIO_RATE >", "class_a_d_s_r.html", null ],
+    [ "ADSR< CONTROL_RATE, CONTROL_RATE >", "class_a_d_s_r.html", null ],
     [ "AudioDelay< NUM_BUFFER_SAMPLES, T >", "class_audio_delay.html", [
       [ "ControlDelay< NUM_BUFFER_SAMPLES, T >", "class_control_delay.html", null ]
     ] ],
@@ -23,14 +25,19 @@ var hierarchy =
     [ "Line< T >", "class_line.html", null ],
     [ "Line< Q15n16 >", "class_line.html", null ],
     [ "Line< Q16n16 >", "class_line.html", null ],
-    [ "Line< unsigned long >", "class_line.html", null ],
+    [ "Line< unsigned char >", "class_line_3_01unsigned_01char_01_4.html", null ],
+    [ "Line< unsigned int >", "class_line_3_01unsigned_01int_01_4.html", null ],
+    [ "Line< unsigned long >", "class_line_3_01unsigned_01long_01_4.html", null ],
     [ "LowPassFilter", "class_low_pass_filter.html", null ],
     [ "Oscil< NUM_TABLE_CELLS, UPDATE_RATE >", "class_oscil.html", null ],
     [ "Oscil< 8192, AUDIO_RATE >", "class_oscil.html", null ],
     [ "Oscil< COS8192_NUM_CELLS, AUDIO_RATE >", "class_oscil.html", null ],
+    [ "Oscil< SIN2048_NUM_CELLS, AUDIO_RATE >", "class_oscil.html", null ],
+    [ "PDResonant", "class_p_d_resonant.html", null ],
     [ "Phasor< UPDATE_RATE >", "class_phasor.html", null ],
     [ "Phasor< AUDIO_RATE >", "class_phasor.html", null ],
     [ "Portamento< CONTROL_UPDATE_RATE >", "class_portamento.html", null ],
+    [ "RCpoll< SENSOR_PIN >", "class_r_cpoll.html", null ],
     [ "ReverbTank", "class_reverb_tank.html", null ],
     [ "RollingAverage< T, WINDOW_LENGTH >", "class_rolling_average.html", null ],
     [ "RollingAverage< unsigned int,(1<<(RESOLUTION_INCREASE_BITS *2))>", "class_rolling_average.html", [

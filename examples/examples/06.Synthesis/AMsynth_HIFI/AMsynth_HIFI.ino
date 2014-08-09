@@ -7,6 +7,8 @@
     values, random numbers with rand(), and EventDelay()
     for scheduling.
   
+    This sketch using HIFI mode is not for Teensy 3.0/3.1.
+        
     IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
     be changed from STANDARD mode to HIFI.
     In Mozz/mozzi_config.h, change
@@ -38,8 +40,7 @@
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
-    Tim Barrass 2012-13.
-    This example code is in the public domain.
+    Tim Barrass 2012-13, CC by-nc-sa.
 */
 
 #include <MozziGuts.h>
@@ -84,27 +85,27 @@ void updateControl(){
   if(kNoteChangeDelay.ready()){
 
     // change octave now and then
-    if(rand((unsigned char)5)==0){
-      last_note = 36+(rand((unsigned char)6)*12);
+    if(rand((byte)5)==0){
+      last_note = 36+(rand((byte)6)*12);
     }
 
     // change step up or down a semitone occasionally
-    if(rand((unsigned char)13)==0){
-      last_note += 1-rand((unsigned char)3);
+    if(rand((byte)13)==0){
+      last_note += 1-rand((byte)3);
     }
 
     // change modulation ratio now and then
-    if(rand((unsigned char)5)==0){
-      ratio = ((Q8n8) 1+ rand((unsigned char)5)) <<8;
+    if(rand((byte)5)==0){
+      ratio = ((Q8n8) 1+ rand((byte)5)) <<8;
     }
 
     // sometimes add a fraction to the ratio
-    if(rand((unsigned char)5)==0){
-      ratio += rand((unsigned char)255);
+    if(rand((byte)5)==0){
+      ratio += rand((byte)255);
     }
 
     // step up or down 3 semitones (or 0)
-    last_note += 3 * (1-rand((unsigned char)3));
+    last_note += 3 * (1-rand((byte)3));
 
     // convert midi to frequency
     Q16n16 midi_note = Q8n0_to_Q16n16(last_note); 
@@ -124,7 +125,7 @@ void updateControl(){
 
 
 int updateAudio(){
-  unsigned int mod = (128u+ aModulator.next()) * ((unsigned char)128+ aModDepth.next());
+  unsigned int mod = (128u+ aModulator.next()) * ((byte)128+ aModDepth.next());
   int out = ((long)mod * aCarrier.next())>>10; // 16 bit   8 bit = 24 bit, then >>10 = 14 bit
   return out;
 }

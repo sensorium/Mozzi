@@ -1,3 +1,5 @@
+
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>        // at the top of your sketch
 #define CONTROL_RATE 64   // or some other power of 2
 

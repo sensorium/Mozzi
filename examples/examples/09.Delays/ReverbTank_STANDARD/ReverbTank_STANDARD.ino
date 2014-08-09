@@ -16,10 +16,10 @@
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
-    Tim Barrass 2013.
-    This example code is in the public domain.
+    Tim Barrass 2013, CC by-nc-sa.
 */
 
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <ReverbTank.h>
 #include <Oscil.h>
@@ -60,7 +60,7 @@ void updateControl(){
 
 int updateAudio(){
   int synth = aCarrier.phMod((int)aModulator.next()*(150u+aModWidth.next()));
-  synth *= (unsigned char)aEnvelop.next();
+  synth *= (byte)aEnvelop.next();
   synth >>= 8;
   // here's the reverb
   int arev = reverb.next(synth);

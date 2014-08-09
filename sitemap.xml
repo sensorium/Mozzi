@@ -65,12 +65,22 @@
         <lastmod>2014-06-20T22:16:31+10:00</lastmod>
     </url>
     <url>
-        <loc>http://sensorium.github.io/Mozzi//blog/archives/</loc>
-        <lastmod>2014-06-20T22:16:31+10:00</lastmod>
+        <loc>
+            http://sensorium.github.io/Mozzi//blog/2014/08/09/teensy-3-dot-0-slash-3-dot-1-test-release-version-2014-08-09-14-15/
+        </loc>
+        <lastmod>2014-08-09T21:52:49+10:00</lastmod>
     </url>
     <url>
-        <loc>http://sensorium.github.io/Mozzi//donate/</loc>
-        <lastmod>2014-03-24T12:59:40+11:00</lastmod>
+        <loc>http://sensorium.github.io/Mozzi//blog/archives/</loc>
+        <lastmod>2014-08-09T21:52:49+10:00</lastmod>
+    </url>
+    <url>
+        <loc>http://sensorium.github.io/Mozzi//download/download/</loc>
+        <lastmod>2014-07-19T22:28:15+10:00</lastmod>
+    </url>
+    <url>
+        <loc>http://sensorium.github.io/Mozzi//download/</loc>
+        <lastmod>2014-08-09T22:06:07+10:00</lastmod>
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//examples/</loc>
@@ -86,11 +96,11 @@
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//</loc>
-        <lastmod>2014-06-20T22:16:31+10:00</lastmod>
+        <lastmod>2014-08-09T21:52:49+10:00</lastmod>
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//</loc>
-        <lastmod>2014-03-21T23:33:57+11:00</lastmod>
+        <lastmod>2014-07-31T12:02:08+10:00</lastmod>
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//learn/a-simple-sketch/</loc>
@@ -106,7 +116,7 @@
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//learn/introductory-tutorial/</loc>
-        <lastmod>2014-03-21T23:33:57+11:00</lastmod>
+        <lastmod>2014-07-31T11:46:50+10:00</lastmod>
     </url>
     <url>
         <loc>http://sensorium.github.io/Mozzi//learn/output/</loc>

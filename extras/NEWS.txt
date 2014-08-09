@@ -4,7 +4,7 @@ NEWS
 get the latest version from http://sensorium.github.io/Mozzi/
 
 
-version 2014-08-09-14:12
+version 2014-08-09-14:15
 
 Teensy 3.0/3.1 port, test release.
 
@@ -24,7 +24,7 @@ Some of the differences for Teensy 3.0/3.1 which will affect users include:
 - Output is 12 bits in STANDARD and STANDARD_PLUS modes, up from nearly 9 bits for Atmel based boards.
 	HIFI audio, by summing two output pins, is not available on Teensy 3.0/3.1.
 	
-- #include <ADC.h> is required at the top of every Teensy 3.0/3.1 sketch. 
+- #include <ADC.h> is required at the top of every Teensy 3.0/3.1 sketch.  The examples come with this commented out, for Arduino compatibility.
 	Non-blocking mozziAnalogRead() is implemented using the excellent ADC library 
 	created by Pedro Villanueva, which be downloaded from http://github.com/pedvide/ADC.
 	The ADC library is only being used very simply in the initial Mozzi port, but it opens the way to fine control
@@ -65,7 +65,7 @@ Various other changes which affect the library in general:
 
 - Moved Arduino timer libraries into "utility" folder and added conditional compilation to hide them from Teensy 3.0/3.1 compilation.
 
-- Removed cpu speed warning from MozziGuts.h
+ - Removed cpu speed warning from MozziGuts.h
 
 
 

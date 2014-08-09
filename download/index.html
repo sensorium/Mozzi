@@ -131,10 +131,11 @@
 <table id="donate_table">
 <tr>
   <td>
-      Bitcoin  
+  
+  Bitcoin  
       </br>
   
-        <script src="http://coinwidget.com/widget/coin.js"></script>
+        <script type="text/javascript" src="http://coinwidget.com/widget/coin.js"></script>
         <script>
         CoinWidgetCom.go({
             wallet_address: "1L6xQEdXLnSUTzrimQDsz8USE89ed9xL6F"
@@ -149,6 +150,7 @@
             , lbl_amount: "BTC"
         });
         </script>
+ 
   </td>
   
   <td>
@@ -156,7 +158,7 @@
   </td>
   
   <td>
-  PayPal
+    PayPal
   
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
         <input type="hidden" name="cmd" value="_donations">
@@ -183,6 +185,22 @@
 <i class="icon-download icon-4x"></i>
 Download the latest version here.
 </a></p>
+
+<script language="JavaScript">
+   function toggleDisplay(stuffToToggle,elementThatExpandsStuff,elementThatCollapsesStuff) {
+      if ( stuffToToggle.style.display == 'none' ) {
+         stuffToToggle.style.display = '';
+         elementThatExpandsStuff.style.display = 'none';
+         elementThatCollapsesStuff.style.display = '';
+      }
+      else {
+         stuffToToggle.style.display = 'none';
+         elementThatExpandsStuff.style.display = '';
+         elementThatCollapsesStuff.style.display = 'none';
+      }
+   }
+</script>
+
 
   
     <footer>

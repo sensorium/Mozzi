@@ -15,7 +15,7 @@
 /** Useful as a gain envelope
 */
 
-const char __attribute__((section(".progmem.data"))) sin8192_uint_DATA [] = {0, 0, 0, 0, 0, 0, 0,
+const int8_t __attribute__((section(".progmem.data"))) sin8192_uint_DATA [] = {0, 0, 0, 0, 0, 0, 0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

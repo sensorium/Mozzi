@@ -5,18 +5,7 @@
  *
  * This file is part of Mozzi.
  *
- * Mozzi is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Mozzi is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Mozzi.  If not, see <http://www.gnu.org/licenses/>.
+ * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
  *
  */
 
@@ -50,7 +39,7 @@ class Line
 {
 private:
 	volatile T current_value; // volatile because it could be set in control interrupt and updated in audio
-	T step_size;
+	volatile T step_size;
 
 public:
 	/** Constructor. Use the template parameter to set the type of numbers you
@@ -61,6 +50,8 @@ public:
 		;
 	}
 
+	
+		
 	/** Increments one step along the line.
 	@return the next value.
 	 */
@@ -71,6 +62,7 @@ public:
 		{
 			current_value += step_size;
 		}
+		//Serial.println(current_value);
 		return current_value;
 	}
 
@@ -99,7 +91,22 @@ public:
 	inline
 	void set(T targetvalue, T num_steps)
 	{
-		step_size=(T)((((float)targetvalue-current_value)/num_steps));
+		T numerator;
+//		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+//		{
+		 numerator = targetvalue-current_value;
+//		}
+		//float step = (float)numerator/num_steps;
+			T step = numerator/num_steps;
+//		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+//		{
+			step_size= (T)step;
+//		}
+		//Serial.print("numerator");Serial.print(" \t");Serial.println(numerator);
+		//Serial.print("num_steps");Serial.print(" \t");Serial.println(num_steps);
+		//Serial.print(step);Serial.print(" \t");Serial.println(step_size);
+		//step_size=(T)((((float)targetvalue-current_value)/num_steps));
+
 	}
 
 	/** Given a new starting value, target value and the number of steps to take on the way, this sets the step size needed to get there.
@@ -115,6 +122,232 @@ public:
 	}
 };
 
+
+/* unsigned char specialisation (probably not very useful because step size will likely = 0) */
+template <>
+class Line <unsigned char>
+{
+private:
+	volatile unsigned char current_value; // volatile because it could be set in control interrupt and updated in audio
+	char step_size;
+
+public:
+	/** Constructor. Use the template parameter to set the type of numbers you
+	want to use. For example, Line \<int\> myline; makes a Line which uses ints.
+	 */
+	Line ()
+	{
+		;
+	}
+
+	
+		
+	/** Increments one step along the line.
+	@return the next value.
+	 */
+	inline
+	unsigned char next()
+	{
+		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+		{
+			current_value += step_size;
+		}
+		return current_value;
+	}
+
+
+
+	/** Set the current value of the line. 
+	The Line will continue incrementing from this
+	value using any previously calculated step size.
+	@param value the number to set the Line's current_value to.
+	 */
+	inline
+	void set(unsigned char value)
+	{
+		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+		{
+			current_value=value;
+		}
+	}
+
+
+
+	/** Given a target value and the number of steps to take on the way, this calculates the step size needed to get there from the current value.
+	@param targetvalue the value to move towards.
+	@param num_steps how many steps to take to reach the target.
+	 */
+	inline
+	void set(unsigned char targetvalue, unsigned char num_steps)
+	{
+		step_size=(char)((((float)targetvalue-current_value)/num_steps));
+	}
+
+	/** Given a new starting value, target value and the number of steps to take on the way, this sets the step size needed to get there.
+	@param startvalue the number to set the Line's current_value to.
+	@param targetvalue the value to move towards.
+	@param num_steps how many steps to take to reach the target.
+	 */
+	inline
+	void set(unsigned char startvalue, unsigned char targetvalue, unsigned char num_steps)
+	{
+		set(startvalue);
+		set(targetvalue, num_steps);
+	}
+	
+};
+	
+	
+/* unsigned int specialisation */
+template <>
+class Line <unsigned int>
+{
+private:
+	volatile unsigned int current_value; // volatile because it could be set in control interrupt and updated in audio
+	int step_size;
+
+public:
+	/** Constructor. Use the template parameter to set the type of numbers you
+	want to use. For example, Line \<int\> myline; makes a Line which uses ints.
+	 */
+	Line ()
+	{
+		;
+	}
+
+	
+		
+	/** Increments one step along the line.
+	@return the next value.
+	 */
+	inline
+	unsigned int next()
+	{
+		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+		{
+			current_value += step_size;
+		}
+		return current_value;
+	}
+
+
+
+	/** Set the current value of the line. 
+	The Line will continue incrementing from this
+	value using any previously calculated step size.
+	@param value the number to set the Line's current_value to.
+	 */
+	inline
+	void set(unsigned int value)
+	{
+		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+		{
+			current_value=value;
+		}
+	}
+
+
+
+	/** Given a target value and the number of steps to take on the way, this calculates the step size needed to get there from the current value.
+	@param targetvalue the value to move towards.
+	@param num_steps how many steps to take to reach the target.
+	 */
+	inline
+	void set(unsigned int targetvalue, unsigned int num_steps)
+	{
+		step_size=(int)((((float)targetvalue-current_value)/num_steps));
+	}
+
+	
+	/** Given a new starting value, target value and the number of steps to take on the way, this sets the step size needed to get there.
+	@param startvalue the number to set the Line's current_value to.
+	@param targetvalue the value to move towards.
+	@param num_steps how many steps to take to reach the target.
+	 */
+	inline
+	void set(unsigned int startvalue, unsigned int targetvalue, unsigned int num_steps)
+	{
+		set(startvalue);
+		set(targetvalue, num_steps);
+	}
+};
+
+
+
+
+
+/* unsigned long specialisation */
+template <>
+class Line <unsigned long>
+{
+private:
+	volatile unsigned long current_value; // volatile because it could be set in control interrupt and updated in audio
+	long step_size;
+
+public:
+	/** Constructor. Use the template parameter to set the type of numbers you
+	want to use. For example, Line \<int\> myline; makes a Line which uses ints.
+	 */
+	Line ()
+	{
+		;
+	}
+
+	
+		
+	/** Increments one step along the line.
+	@return the next value.
+	 */
+	inline
+	unsigned long next()
+	{
+		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+		{
+			current_value += step_size;
+		}
+		return current_value;
+	}
+
+
+
+	/** Set the current value of the line. 
+	The Line will continue incrementing from this
+	value using any previously calculated step size.
+	@param value the number to set the Line's current_value to.
+	 */
+	inline
+	void set(unsigned long value)
+	{
+		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+		{
+			current_value=value;
+		}
+	}
+
+
+
+	/** Given a target value and the number of steps to take on the way, this calculates the step size needed to get there from the current value.
+	@param targetvalue the value to move towards.
+	@param num_steps how many steps to take to reach the target.
+	 */
+	inline
+	void set(unsigned long targetvalue, unsigned long num_steps)
+	{
+		step_size=(long)((((float)targetvalue-current_value)/num_steps));
+	}
+
+	/** Given a new starting value, target value and the number of steps to take on the way, this sets the step size needed to get there.
+	@param startvalue the number to set the Line's current_value to.
+	@param targetvalue the value to move towards.
+	@param num_steps how many steps to take to reach the target.
+	 */
+	inline
+	void set(unsigned long startvalue, unsigned long targetvalue, unsigned long num_steps)
+	{
+		set(startvalue);
+		set(targetvalue, num_steps);
+	}
+};
 
 /**
 @example 02.Control/Control_Tremelo/Control_Tremelo.ino

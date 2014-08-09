@@ -13,7 +13,7 @@
 
 #define WAVESHAPE_COMPRESS_512_TO_488_NUM_CELLS 512
 
-const int __attribute__((section(".progmem.data"))) WAVESHAPE_COMPRESS_512_TO_488_DATA [512] =
+const int16_t __attribute__((section(".progmem.data"))) WAVESHAPE_COMPRESS_512_TO_488_DATA [512] =
         {
                 -244 , -243 , -242 , -242 , -241 , -240 , -239 , -239 , -238 , -237 , -236 ,
                 -236 , -235 , -234 , -233 , -233 , -232 , -231 , -230 , -230 , -229 , -228 ,

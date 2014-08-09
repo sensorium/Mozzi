@@ -5,18 +5,7 @@
  *
  * This file is part of Mozzi.
  *
- * Mozzi is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Mozzi is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Mozzi.  If not, see <http://www.gnu.org/licenses/>.
+ * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
  *
  */
 
@@ -43,7 +32,7 @@ the envelopes and the rate of release of envelopes are the parameters which can
 be changed.
 @tparam ALGORITHM options are SINGLE or DOUBLE, for a single non-overlapping stream of packets or a double, overlapping stream.
 */
-template <char ALGORITHM>
+template <int8_t ALGORITHM>
 class WavePacket
 {
 public:
@@ -180,13 +169,13 @@ private:
 		// hack to make peak in middle of packet, otherwise it centres around a zero-crossing.. 
 		index += COS8192_NUM_CELLS>>1; 
 		index &= COS8192_NUM_CELLS-1;
-		char sig1 = aCos.atIndex(index);
+		int8_t sig1 = aCos.atIndex(index);
 
 		// packet envelope
 		Q23n8 bwphase = (param.bandwidth * phase)>>8;
 		bwphase += COS8192_NUM_CELLS>>1;
 		index = constrain(bwphase, 0, (COS8192_NUM_CELLS-1));
-		unsigned char packet_width = 128 + aCos.atIndex(index);
+		uint8_t packet_width = 128 + aCos.atIndex(index);
 		// if (AUDIO_MODE == HIFI){
 			// return ((int) sig1 * packet_width)>>3; // scaled to fit HIFI updateAudio output
 		// }else{

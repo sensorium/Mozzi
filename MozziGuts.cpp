@@ -5,27 +5,41 @@
  *
  * This file is part of Mozzi.
  *
- * Mozzi is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Mozzi is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Mozzi.  If not, see <http://www.gnu.org/licenses/>.
+ * Mozzi by Tim Barrass is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
  *
  */
 
+ #if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 
+#include <util/atomic.h>
 #include "MozziGuts.h"
 #include "mozzi_config.h" // at the top of all MozziGuts and analog files
-#include <util/atomic.h>
-//#include "mozzi_utils.h"
+#include "mozzi_analog.h"
 #include "CircularBuffer.h"
+//#include "mozzi_utils.h"
+
+#if defined(__MK20DX128__) || defined(__MK20DX256__) // teensy 3, 3.1
+#include "IntervalTimer.h"
+#else
+#include "TimerZero.h"
+#include "TimerOne.h"
+#include "FrequencyTimer2.h"
+#endif
+
+
+#if !(F_CPU == 16000000 || F_CPU == 48000000)
+#warning "Mozzi has been tested with a cpu clock speed of 16MHz on Arduino and 48MHz on Teensy 3!  Results may vary with other speeds."
+#endif
+
+// this seems to get included before mozzi_analog.cpp
+#if defined(__MK20DX128__) || defined(__MK20DX256__) // teensy 3, 3.1
+	ADC *adc; // adc object
+	uint8_t teensy_pin;
+#endif
 
 /*
 ATmega328 technical manual, Section 12.7.4:
@@ -53,24 +67,27 @@ PWM frequency tests
 //-----------------------------------------------------------------------------------------------------------------
 // ring buffer for audio output
 #define BUFFER_NUM_CELLS 256
-CircularBuffer <unsigned int>output_buffer;
+CircularBuffer <unsigned int> output_buffer;
 
 //-----------------------------------------------------------------------------------------------------------------
 
+#if defined(__MK20DX128__) || defined(__MK20DX256__) // teensy 3, 3.1
+// not storing backups, just turning timer on and off for pause
+#else
+
 // to store backups of timer registers so Mozzi can be stopped and pre_mozzi timer values can be restored
-static byte pre_mozzi_TCCR0A, pre_mozzi_TCCR0B, pre_mozzi_OCR0A, pre_mozzi_TIMSK0;
-static byte pre_mozzi_TCCR1A, pre_mozzi_TCCR1B, pre_mozzi_OCR1A, pre_mozzi_TIMSK1;
+static uint8_t pre_mozzi_TCCR0A, pre_mozzi_TCCR0B, pre_mozzi_OCR0A, pre_mozzi_TIMSK0;
+static uint8_t pre_mozzi_TCCR1A, pre_mozzi_TCCR1B, pre_mozzi_OCR1A, pre_mozzi_TIMSK1;
 
 #if (AUDIO_MODE == HIFI)
 #if defined(TCCR2A)
-static byte pre_mozzi_TCCR2A, pre_mozzi_TCCR2B, pre_mozzi_OCR2A, pre_mozzi_TIMSK2;
+static uint8_t pre_mozzi_TCCR2A, pre_mozzi_TCCR2B, pre_mozzi_OCR2A, pre_mozzi_TIMSK2;
 #elif defined(TCCR2)
-static byte pre_mozzi_TCCR2, pre_mozzi_OCR2, pre_mozzi_TIMSK;
+static uint8_t pre_mozzi_TCCR2, pre_mozzi_OCR2, pre_mozzi_TIMSK;
 #elif defined(TCCR4A)
-static byte pre_mozzi_TCCR4A, pre_mozzi_TCCR4B, pre_mozzi_TCCR4C, pre_mozzi_TCCR4D, pre_mozzi_TCCR4E, pre_mozzi_OCR4C, pre_mozzi_TIMSK4;
+static uint8_t pre_mozzi_TCCR4A, pre_mozzi_TCCR4B, pre_mozzi_TCCR4C, pre_mozzi_TCCR4D, pre_mozzi_TCCR4E, pre_mozzi_OCR4C, pre_mozzi_TIMSK4;
 #endif
 #endif
-
 
 
 static void backupPreMozziTimer1()
@@ -83,23 +100,22 @@ static void backupPreMozziTimer1()
 }
 
 
-
 //-----------------------------------------------------------------------------------------------------------------
 
+
 // to store backups of mozzi's changes to timer registers so Mozzi can be paused and unPaused
-static byte mozzi_TCCR0A, mozzi_TCCR0B, mozzi_OCR0A, mozzi_TIMSK0;
-static byte mozzi_TCCR1A, mozzi_TCCR1B, mozzi_OCR1A, mozzi_TIMSK1;
+static uint8_t mozzi_TCCR0A, mozzi_TCCR0B, mozzi_OCR0A, mozzi_TIMSK0;
+static uint8_t mozzi_TCCR1A, mozzi_TCCR1B, mozzi_OCR1A, mozzi_TIMSK1;
 
 #if (AUDIO_MODE == HIFI)
 #if defined(TCCR2A)
-static byte mozzi_TCCR2A, mozzi_TCCR2B, mozzi_OCR2A, mozzi_TIMSK2;
+static uint8_t mozzi_TCCR2A, mozzi_TCCR2B, mozzi_OCR2A, mozzi_TIMSK2;
 #elif defined(TCCR2)
-static byte mozzi_TCCR2, mozzi_OCR2, mozzi_TIMSK;
+static uint8_t mozzi_TCCR2, mozzi_OCR2, mozzi_TIMSK;
 #elif defined(TCCR4A)
-static byte mozzi_TCCR4A, mozzi_TCCR4B, mozzi_TCCR4C, mozzi_TCCR4D, mozzi_TCCR4E, mozzi_OCR4C, mozzi_TIMSK4;
+static uint8_t mozzi_TCCR4A, mozzi_TCCR4B, mozzi_TCCR4C, mozzi_TCCR4D, mozzi_TCCR4E, mozzi_OCR4C, mozzi_TIMSK4;
 #endif
 #endif
-
 
 
 static void backupMozziTimer1()
@@ -111,20 +127,17 @@ static void backupMozziTimer1()
 	mozzi_TIMSK1 = TIMSK1;
 }
 
+#endif // end of timer backups for non-Teensy 3 boards
 //-----------------------------------------------------------------------------------------------------------------
 
 #if (USE_AUDIO_INPUT==true)
-
-//static volatile long input_gap;
-//static volatile unsigned long input_buffer_head;
-//static volatile int input_buffer[BUFFER_NUM_CELLS];
 
 // ring buffer for audio input
 CircularBuffer <unsigned int>input_buffer;
 
 static boolean audio_input_is_available;
 static int audio_input; // holds the latest audio from input_buffer
-unsigned char adc_count = 0;
+uint8_t adc_count = 0;
 
 
 int getAudioInput()
@@ -135,7 +148,11 @@ int getAudioInput()
 
 static void startFirstAudioADC()
 {
+#if defined(__MK20DX128__) || defined(__MK20DX256__) // teensy 3, 3.1
+	adc->startSingleRead(AUDIO_INPUT_PIN); // ADC lib converts pin/channel in startSingleRead
+#else
 	adcStartConversion(adcPinToChannelNum(AUDIO_INPUT_PIN));
+#endif
 }
 
 /*
@@ -147,7 +164,11 @@ static void receiveFirstAudioADC()
 
 static void startSecondAudioADC()
 {
+#if defined(__MK20DX128__) || defined(__MK20DX256__) // teensy 3, 3.1
+	adc->startSingleRead(AUDIO_INPUT_PIN);
+#else
 	ADCSRA |= (1 << ADSC); // start a second conversion on the current channel
+#endif
 }
 
 
@@ -155,12 +176,19 @@ static void startSecondAudioADC()
 static void receiveSecondAudioADC()
 {
 	if (!input_buffer.isFull()) 
+#if defined(__MK20DX128__) || defined(__MK20DX256__) // teensy 3, 3.1
+		input_buffer.write(adc->readSingle());
+#else
 		input_buffer.write(ADC);
+#endif
 }
 
 
-
+#if defined(__MK20DX128__) || defined(__MK20DX256__) // teensy 3, 3.1
+void adc0_isr(void) 
+#else
 ISR(ADC_vect, ISR_BLOCK)
+#endif
 {
 	switch (adc_count){
 	case 0:
@@ -190,7 +218,7 @@ ISR(ADC_vect, ISR_BLOCK)
 	}
 	adc_count++;
 }
-#endif
+#endif // end main audio input section
 
 
 void audioHook() // 2us excluding updateAudio()
@@ -213,6 +241,39 @@ void audioHook() // 2us excluding updateAudio()
 //-----------------------------------------------------------------------------------------------------------------
 #if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS)
 
+#if defined(__MK20DX128__) || defined(__MK20DX256__) // teensy 3, 3.1
+//teensy 3 architecture
+
+  IntervalTimer timer1;
+
+
+static void teensyAudioOutput()
+{
+	
+#if (USE_AUDIO_INPUT==true)
+	adc_count = 0;
+	startSecondAudioADC();
+#endif
+
+	analogWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
+}
+
+
+static void startAudioStandard()
+{
+	//backupPreMozziTimer1(); // not for Teensy 3.0/3.1
+	
+	analogWriteResolution(12);
+	adc->setAveraging(0);
+	adc->setConversionSpeed(ADC_MED_SPEED); // could be ADC_HIGH_SPEED, noisier
+	timer1.begin(teensyAudioOutput, 1000000UL/AUDIO_RATE); 
+
+	//backupMozziTimer1(); // // not for Teensy 3.0/3.1
+}
+	
+#else
+
+// avr architecture
 static void startAudioStandard()
 {
 	backupPreMozziTimer1();
@@ -228,7 +289,6 @@ static void startAudioStandard()
 
 	backupMozziTimer1();
 }
-
 
 
 /* Interrupt service routine moves sound data from the output buffer to the
@@ -258,7 +318,8 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK)
 #endif
 
 }
-
+// end avr
+#endif
 // end STANDARD
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -267,18 +328,13 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK)
 static void startAudioHiFi()
 {
 	backupPreMozziTimer1();
-
 	// pwm on timer 1
-	pinMode(AUDIO_CHANNEL_1_HIGHBYTE_PIN, OUTPUT);	// set pin to output for audio, use 3.9k resistor
-	pinMode(AUDIO_CHANNEL_1_LOWBYTE_PIN, OUTPUT);	// set pin to output for audio, use 499k resistor
-
+	pinMode(AUDIO_CHANNEL_1_HIGHUINT8_T_PIN, OUTPUT);	// set pin to output for audio, use 3.9k resistor
+	pinMode(AUDIO_CHANNEL_1_lowByte_PIN, OUTPUT);	// set pin to output for audio, use 499k resistor
 	Timer1.initializeCPUCycles(16000000UL/125000, FAST);		// set period for 125000 Hz fast pwm carrier frequency = 14 bits
-
-	Timer1.pwm(AUDIO_CHANNEL_1_HIGHBYTE_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
-	Timer1.pwm(AUDIO_CHANNEL_1_LOWBYTE_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
-
+	Timer1.pwm(AUDIO_CHANNEL_1_HIGHUINT8_T_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
+	Timer1.pwm(AUDIO_CHANNEL_1_lowByte_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
 	backupMozziTimer1();
-
 	// audio output interrupt on timer 2, sets the pwm levels of timer 1
 	setupTimer2();
 }
@@ -371,10 +427,9 @@ void dummy_function(void)
 		//if (!output_buffer.isEmpty()){
 		unsigned int out = output_buffer.read();
 		// 14 bit, 7 bits on each pin
-		AUDIO_CHANNEL_1_HIGHBYTE_REGISTER = out >> 7; // B11111110000000 becomes B1111111
-		AUDIO_CHANNEL_1_LOWBYTE_REGISTER = out & 127; // B01111111
+		AUDIO_CHANNEL_1_HIGHUINT8_T_REGISTER = out >> 7; // B11111110000000 becomes B1111111
+		AUDIO_CHANNEL_1_lowByte_REGISTER = out & 127; // B01111111
 		//}
-
 }
 
 //  end of HIFI
@@ -387,6 +442,12 @@ void dummy_function(void)
 static void updateControlWithAutoADC()
 {
 	updateControl();
+	/*
+	#if (USE_AUDIO_INPUT==true)
+		adc_count = 0;
+		startSecondAudioADC();
+#endif
+*/
 	adcStartReadCycle();
 }
 
@@ -396,8 +457,16 @@ options Using Timer0 for control disables Arduino's time functions but also
 saves on the interrupts and blocking action of those functions. May add a config
 option for Using Timer2 instead if needed. (MozziTimer2 can be re-introduced for
 that). */
+#if defined(__MK20DX128__) || defined(__MK20DX256__) // teensy 3, 3.1
+IntervalTimer timer0;
+#endif
+
+
 static void startControl(unsigned int control_rate_hz)
 {
+#if defined(__MK20DX128__) || defined(__MK20DX256__) // teensy 3, 3.1
+	timer0.begin(updateControlWithAutoADC, 1000000/control_rate_hz);
+#else
 	// backup pre-mozzi register values
 	pre_mozzi_TCCR0A = TCCR0A;
 	pre_mozzi_TCCR0B = TCCR0B;
@@ -412,12 +481,13 @@ static void startControl(unsigned int control_rate_hz)
 	mozzi_TCCR0B = TCCR0B;
 	mozzi_OCR0A = OCR0A;
 	mozzi_TIMSK0 = TIMSK0;
+#endif
 }
 
 
 void startMozzi(int control_rate_hz)
 {
-	setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST in setup() if desired
+	setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST in setup() if desired (not for Teensy 3.0/3.1)
 	// delay(200); // so AutoRange doesn't read 0 to start with
 	startControl(control_rate_hz);
 #if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS)
@@ -429,6 +499,9 @@ void startMozzi(int control_rate_hz)
 
 
 void pauseMozzi(){
+#if defined(__MK20DX128__) || defined(__MK20DX256__) // teensy 3, 3.1
+	timer1.end();
+#else
 	// restore backed up register values
 	TCCR0A = pre_mozzi_TCCR0A;
 	TCCR0B = pre_mozzi_TCCR0B;
@@ -459,12 +532,16 @@ void pauseMozzi(){
 	OCR4C = pre_mozzi_OCR4C;
 	TIMSK4 = pre_mozzi_TIMSK4;
 #endif
-#endif			
+#endif	
+#endif	
 }
 
 
 void unPauseMozzi()
 {
+#if defined(__MK20DX128__) || defined(__MK20DX256__) // teensy 3, 3.1
+  timer1.begin(teensyAudioOutput, 1000000UL/AUDIO_RATE); 
+#else
 	// restore backed up register values
 	TCCR0A = mozzi_TCCR0A;
 	TCCR0B = mozzi_TCCR0B;
@@ -495,7 +572,8 @@ void unPauseMozzi()
 	OCR4C = mozzi_OCR4C;
 	TIMSK4 = mozzi_TIMSK4;
 #endif
-#endif			
+#endif
+#endif
 }
 
 

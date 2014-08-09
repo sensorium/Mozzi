@@ -8,18 +8,7 @@
  *
  * This file is part of Mozzi.
  *
- * Mozzi is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Mozzi is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Mozzi.  If not, see <http://www.gnu.org/licenses/>.
+ * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
  *
  */
 
@@ -29,7 +18,7 @@
 // adapted from RunningStat, http://www.johndcook.com/standard_deviation.html
 /** @ingroup sensortools
 Calculates an approximation of the variance and standard deviation for a window of recent inputs.
-@tparam T the type of numbers to use.  Choose unsigned int, int , unsigned char, char, or float
+@tparam T the type of numbers to use.  Choose unsigned int, int , uint8_t, int8_t, or float
 @tparam WINDOW_LENGTH how many recent input values to include in the calculations.
 */
 template <class T, int WINDOW_LENGTH>
@@ -38,7 +27,7 @@ class RollingStat
 public:
 	
 	/** Constructor */
-	RollingStat() : _previous_mean(0), _mean(0), _variance(0), WINDOW_LENGTH_AS_RSHIFT((unsigned char)trailingZeros((unsigned long)WINDOW_LENGTH))
+	RollingStat() : _previous_mean(0), _mean(0), _variance(0), WINDOW_LENGTH_AS_RSHIFT((uint8_t)trailingZeros((unsigned long)WINDOW_LENGTH))
 	{}
 
 
@@ -56,7 +45,7 @@ public:
 	/** Update the mean and variance given a new input value.
 	@param x the next input value
 	*/
-	void update(char x) {
+	void update(int8_t x) {
 		_mean = rollingMean.next(x);
 		_variance = (((int)x - _previous_mean)*((int)x - _mean))>>WINDOW_LENGTH_AS_RSHIFT; // should really be div by (WINDOW_LENGTH-1), but exact values are not important for this application
 		_previous_mean = _mean;
@@ -92,7 +81,7 @@ public:
 private:
 	T _previous_mean, _mean, _variance;
 	RollingAverage <T, WINDOW_LENGTH> rollingMean;
-	const unsigned char WINDOW_LENGTH_AS_RSHIFT;
+	const uint8_t WINDOW_LENGTH_AS_RSHIFT;
 };
 
 // no need to show the specialisations
@@ -105,7 +94,7 @@ class RollingStat <float, WINDOW_LENGTH>
 public:
 	
 	/** Constructor */
-	RollingStat() : _previous_mean(0), _mean(0), _variance(0), WINDOW_LENGTH_AS_RSHIFT((unsigned char)trailingZeros((unsigned long)WINDOW_LENGTH))
+	RollingStat() : _previous_mean(0), _mean(0), _variance(0), WINDOW_LENGTH_AS_RSHIFT((uint8_t)trailingZeros((unsigned long)WINDOW_LENGTH))
 	{}
 
 	
@@ -148,7 +137,7 @@ public:
 private:
 	float _previous_mean, _mean, _variance;
 	RollingAverage <float, WINDOW_LENGTH> rollingMean;
-	const unsigned char WINDOW_LENGTH_AS_RSHIFT;
+	const uint8_t WINDOW_LENGTH_AS_RSHIFT;
 };
 
 // no need to show the specialisations

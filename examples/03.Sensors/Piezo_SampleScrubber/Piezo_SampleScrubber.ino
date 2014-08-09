@@ -7,10 +7,11 @@
   Also demonstrates mozziAnalogRead(pin), a non-blocking replacement for mozziAnalogRead
  
   This example goes with a tutorial on the Mozzi site:
-  http://sensorium.github.io/Mozzi/learn/Mozzi_Introductory_Tutorial.pdf
+  http://sensorium.github.io/Mozzi/learn/introductory-tutorial/
   
   The circuit:
-    Audio output on digital pin 9 (on a Uno or similar), or 
+    Audio output on digital pin 9 on a Uno or similar, or
+    DAC/A14 on Teensy 3.0/3.1, or 
     check the README or http://sensorium.github.com/Mozzi/
  
   Piezo on analog pin A3:
@@ -21,10 +22,10 @@
   Mozzi help/discussion/announcements:
   https://groups.google.com/forum/#!forum/mozzi-users
  
-  Tim Barrass 2013.
-  This example code is in the public domain.
+  Tim Barrass 2013, CC by-nc-sa.
 */
 
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Sample.h> // Sample template
 #include "blahblah4b_int8.h"

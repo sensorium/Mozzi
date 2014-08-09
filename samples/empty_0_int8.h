@@ -11,6 +11,6 @@
 #define EMPTY_0_NUM_CELLS 0
 #define EMPTY_0_SAMPLERATE 16384
  
-const char __attribute__((section(".progmem.data"))) EMPTY_0_DATA [] = { };
+const int8_t __attribute__((section(".progmem.data"))) EMPTY_0_DATA [] = { };
  
  #endif /* EMPTY_0_H_ */

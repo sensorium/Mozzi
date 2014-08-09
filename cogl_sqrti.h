@@ -20,14 +20,14 @@
 
 //http://www.codecodex.com/wiki/Calculate_an_integer_square_root
 //see Integer Square Roots by Jack W. Crenshaw, figure 2, http://www.embedded.com/electronics-blogs/programmer-s-toolbox/4219659/Integer-Square-Roots
-    typedef unsigned char       	uint8_t;  
+    typedef uint8_t       	uint8_t;  
     typedef unsigned short int  uint16;  
     typedef unsigned long int   uint32;  
       
 
       
     uint32  // OR uint16 OR uint8_t  
-    isqrt32 (uint32 n) // OR isqrt16 ( uint16 n ) OR  isqrt8 ( uint8_t n ) - respectively [ OR overloaded as isqrt (uint?? n) in C++ ]  
+    isqrt32 (uint32 n) // OR isqrt16 ( uint16 n ) OR  isqrt8 ( uint8_t n ) - respectively [ OR overloaded as isqrt (uint16_t?? n) in C++ ]  
     {  
         register uint32 // OR register uint16 OR register uint8_t - respectively  
             root, remainder, place;  
@@ -53,7 +53,7 @@
     
     //http://www.codecodex.com/wiki/Calculate_an_integer_square_root
      uint16  // OR uint16 OR uint8_t  
-    isqrt16 (uint16 n) // OR isqrt16 ( uint16 n ) OR  isqrt8 ( uint8_t n ) - respectively [ OR overloaded as isqrt (uint?? n) in C++ ]  
+    isqrt16 (uint16 n) // OR isqrt16 ( uint16 n ) OR  isqrt8 ( uint8_t n ) - respectively [ OR overloaded as isqrt (uint16_t?? n) in C++ ]  
     {  
         register uint16 // OR register uint16 OR register uint8_t - respectively  
             root, remainder, place;  

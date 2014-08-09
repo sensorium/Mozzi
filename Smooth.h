@@ -5,18 +5,7 @@
  *
  * This file is part of Mozzi.
  *
- * Mozzi is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Mozzi is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Mozzi.  If not, see <http://www.gnu.org/licenses/>.
+ * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
  *
  */
 
@@ -99,9 +88,9 @@ public:
 
 /** @cond */ // doxygen can ignore the specialisations
 
-/** unsigned char specialisation of Smooth template*/
+/** uint8_t specialisation of Smooth template*/
 template <>
-class Smooth <unsigned char>
+class Smooth <uint8_t>
 {
 private:
 	unsigned int last_out;
@@ -123,11 +112,11 @@ public:
 	@return the filtered signal.
 	 */
 	inline
-	unsigned char next(unsigned char in)
+	uint8_t next(uint8_t in)
 	{
 		unsigned int out = (((((int)in - (last_out>>8)) * a)) + last_out);
 		last_out = out;
-		return (unsigned char)(out>>8);
+		return (uint8_t)(out>>8);
 	}
 
 	
@@ -136,7 +125,7 @@ public:
 	@return the filtered signal.
 	 */
 	inline
-	unsigned char  operator()(unsigned char  n) {
+	uint8_t  operator()(uint8_t  n) {
 		return next(n);
 	}
 	
@@ -155,9 +144,9 @@ public:
 };
 
 
-/** char specialisation of Smooth template*/
+/** int8_t specialisation of Smooth template*/
 template <>
-class Smooth <char>
+class Smooth <int8_t>
 {
 private:
 	int last_out;
@@ -180,11 +169,11 @@ public:
 	@return the filtered signal.
 	 */
 	inline
-	char next(char in)
+	int8_t next(int8_t in)
 	{
 		int out = (((((int)in - (last_out>>8)) * a)) + last_out);
 		last_out = out;
-		return (char)(out>>8);
+		return (int8_t)(out>>8);
 	}
 
 	
@@ -193,7 +182,7 @@ public:
 	@return the filtered signal.
 	 */
 	inline
-	char operator()(char n) {
+	int8_t operator()(int8_t n) {
 		return next(n);
 	}
 	

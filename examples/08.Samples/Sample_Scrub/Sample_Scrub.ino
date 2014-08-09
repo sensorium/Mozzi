@@ -4,16 +4,18 @@
     Demonstrates getting audio samples from a table using a Line to
     slide between different offsets.
 
-   Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+   Circuit: Audio output on digital pin 9 on a Uno or similar, or
+    DAC/A14 on Teensy 3.0/3.1, or 
    check the README or http://sensorium.github.com/Mozzi/
  
    Mozzi help/discussion/announcements:
    https://groups.google.com/forum/#!forum/mozzi-users
 
    Tim Barrass 2012-13.
-   This example code is in the public domain.
+   CC by-nc-sa
 */
 
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Sample.h> // Sample template
 #include <samples/burroughs1_18649_int8.h>

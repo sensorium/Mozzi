@@ -11,7 +11,7 @@
 #define BLAHBLAH4B_NUM_CELLS 22569
 #define BLAHBLAH4B_SAMPLERATE 16384
  
-const char __attribute__((section(".progmem.data"))) BLAHBLAH4B_DATA [] = {   -1, 2, 6, 9, 12, 15, 17, 20, 22, 25, 28, 30,
+const int8_t __attribute__((section(".progmem.data"))) BLAHBLAH4B_DATA [] = {   -1, 2, 6, 9, 12, 15, 17, 20, 22, 25, 28, 30,
 32, 34, 37, 38, 40, 42, 44, 46, 47, 49, 50, 52, 53, 53, 54, 55, 55, 55, 54, 54,
 53, 51, 48, 46, 42, 38, 34, 29, 25, 20, 15, 10, 5, -1, -6, -11, -16, -21, -25,
 -29, -33, -37, -40, -43, -47, -50, -52, -55, -57, -58, -59, -59, -59, -59, -58,

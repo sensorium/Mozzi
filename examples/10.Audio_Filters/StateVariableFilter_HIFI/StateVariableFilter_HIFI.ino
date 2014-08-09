@@ -5,7 +5,9 @@
     which in this case requires the input signal level to be reduced 
     to avoid distortion which can occur with sharp resonance settings.
   
-     IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
+    This sketch using HIFI mode is not for Teensy 3.0/3.1.
+        
+    IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
     be changed from STANDARD mode to HIFI.
     In Mozz/mozzi_config.h, change
     #define AUDIO_MODE STANDARD
@@ -35,10 +37,10 @@
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
-    Tim Barrass 2012.
-    This example code is in the public domain.
+    Tim Barrass 2012, CC by-nc-sa.
 */
 
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/whitenoise8192_int8.h>

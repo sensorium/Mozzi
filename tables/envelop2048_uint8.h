@@ -14,7 +14,7 @@
 #define ENVELOP2048_NUM_CELLS 2048
 #define ENVELOP2048_SAMPLERATE 2048
 
-const char __attribute__((section(".progmem.data"))) ENVELOP2048_DATA []  =
+const int8_t __attribute__((section(".progmem.data"))) ENVELOP2048_DATA []  =
         {
                 0, 1, 5, 8, 13, 22, 36, 53, 69, 82, 91,
                 97, 103, 107, 113, 119, 128, 139, 151, 162, 171, 177, 181, 184, 186, 189, 192,

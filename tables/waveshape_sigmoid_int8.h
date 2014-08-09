@@ -16,7 +16,7 @@ Useful for waveshaping audio compression/distortion sounds, or emphasising chang
 controls around 0 and making them less sensitive in higher (or lower) ranges.
 */
 
-const char __attribute__((section(".progmem.data"))) WAVESHAPE_SIGMOID_DATA [256] =
+const int8_t __attribute__((section(".progmem.data"))) WAVESHAPE_SIGMOID_DATA [256] =
         {
                 -127, -127, -127, -127, -127, -127, -127, -127, -127, -127, -127,
                 -127, -127, -127, -127, -127, -127, -127, -127, -126, -126, -126,

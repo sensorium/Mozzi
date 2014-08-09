@@ -14,11 +14,11 @@ void xorshiftSeed(unsigned long seed);
 void randSeed(unsigned long seed);
 void randSeed();
 
-char rand(char minval, char maxval);
-char rand(char maxval);
+int8_t rand(int8_t minval, int8_t maxval);
+int8_t rand(int8_t maxval);
 
-unsigned char rand(unsigned char minval, unsigned char maxval);
-unsigned char rand(unsigned char maxval);
+uint8_t rand(uint8_t minval, uint8_t maxval);
+uint8_t rand(uint8_t maxval);
 
 int rand(int minval, int maxval);
 int rand(int maxval);
@@ -26,6 +26,6 @@ int rand(int maxval);
 unsigned int rand(unsigned int minval, unsigned int maxval);
 unsigned int rand(unsigned int maxval);
 
-unsigned char randMidiNote();
+uint8_t randMidiNote();
 
 #endif /* MOZZI_RAND_H_ */

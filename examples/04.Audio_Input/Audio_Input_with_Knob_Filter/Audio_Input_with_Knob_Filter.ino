@@ -8,7 +8,7 @@
 
   Circuit: 
     Audio input on pin analog 0
-    Output on digital pin 9 (on a Uno or similar), or
+    Output on DAC/A14 on Teensy 3.0, 3.1, or digital pin 9 on a Uno or similar, or
     check the README or http://sensorium.github.com/Mozzi/
 
      Potentiometer connected to analog pin A1.
@@ -20,6 +20,7 @@
 
 */
 
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <LowPassFilter.h>
 
@@ -36,7 +37,7 @@ void setup(){
 
 void updateControl(){
   int knob = mozziAnalogRead(KNOB_PIN); 
-  unsigned char cutoff_freq = knob>>2; // range 0-255
+  byte cutoff_freq = knob>>2; // range 0-255
   lpf.setCutoffFreq(cutoff_freq);
 }
 

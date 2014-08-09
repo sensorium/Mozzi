@@ -10,10 +10,11 @@
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
-    Tim Barrass 2013.
-    This example code is in the public domain.
+    Tim Barrass 2013, CC by-nc-sa.
      
 */
+
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <DCfilter.h>
 
@@ -22,6 +23,7 @@ int sensorPin = A0;
 DCfilter dcFiltered(0.9); // parameter sets how long the filter takes to settle
 
 void setup() {
+  //Serial.begin(9600); // for Teensy 3.0/3.1, beware printout can cause glitches
   Serial.begin(115200);
   startMozzi();
 }

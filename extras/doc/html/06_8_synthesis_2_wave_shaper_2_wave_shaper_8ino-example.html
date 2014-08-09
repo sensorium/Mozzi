@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2014-04-20-15:06</span>
+   &#160;<span id="projectnumber">version 2014-08-09-14:12</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -80,7 +80,7 @@ $(document).ready(function(){initNavTree('06_8_synthesis_2_wave_shaper_2_wave_sh
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -101,16 +101,17 @@ $(document).ready(function(){initNavTree('06_8_synthesis_2_wave_shaper_2_wave_sh
 <div class="line"><span class="comment">    Demonstrates the use of WaveShaper(), EventDelay(), Smooth(),</span></div>
 <div class="line"><span class="comment">    rand(), and fixed-point numbers.</span></div>
 <div class="line"><span class="comment">  </span></div>
-<div class="line"><span class="comment">    Circuit: Audio output on digital pin 9 (on a Uno or similar), or </span></div>
+<div class="line"><span class="comment">    Circuit: Audio output on digital pin 9 on a Uno or similar, or</span></div>
+<div class="line"><span class="comment">    DAC/A14 on Teensy 3.0/3.1, or </span></div>
 <div class="line"><span class="comment">    check the README or http://sensorium.github.com/Mozzi/</span></div>
 <div class="line"><span class="comment">  </span></div>
 <div class="line"><span class="comment">    Mozzi help/discussion/announcements:</span></div>
 <div class="line"><span class="comment">    https://groups.google.com/forum/#!forum/mozzi-users</span></div>
 <div class="line"><span class="comment">  </span></div>
-<div class="line"><span class="comment">    Tim Barrass 2012.</span></div>
-<div class="line"><span class="comment">    This example code is in the public domain.</span></div>
+<div class="line"><span class="comment">    Tim Barrass 2012, CC by-nc-sa.</span></div>
 <div class="line"><span class="comment">*/</span></div>
 <div class="line"></div>
+<div class="line"><span class="comment">//#include &lt;ADC.h&gt;  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC</span></div>
 <div class="line"><span class="preprocessor">#include &lt;MozziGuts.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;Oscil.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;WaveShaper.h&gt;</span></div>
@@ -128,21 +129,21 @@ $(document).ready(function(){initNavTree('06_8_synthesis_2_wave_shaper_2_wave_sh
 <div class="line"><span class="preprocessor">#define CONTROL_RATE 64 // powers of 2 please</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="comment">// use: Oscil &lt;table_size, update_rate&gt; oscilName (wavetable), look in .h file of table #included above</span></div>
-<div class="line"><a name="_a0"></a><a class="code" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil &lt;SIN2048_NUM_CELLS, AUDIO_RATE&gt;</a> aSin(SIN2048_DATA); <span class="comment">// sine wave sound source</span></div>
-<div class="line"><a class="code" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil &lt;SIN2048_NUM_CELLS, AUDIO_RATE&gt;</a> aGain1(SIN2048_DATA); <span class="comment">// to fade sine wave in and out before waveshaping</span></div>
-<div class="line"><a class="code" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil &lt;SIN2048_NUM_CELLS, AUDIO_RATE&gt;</a> aGain2(SIN2048_DATA); <span class="comment">// to fade sine wave in and out before waveshaping</span></div>
+<div class="line"><a name="_a0"></a><a class="code" href="class_oscil.html">Oscil &lt;SIN2048_NUM_CELLS, AUDIO_RATE&gt;</a> aSin(SIN2048_DATA); <span class="comment">// sine wave sound source</span></div>
+<div class="line"><a class="code" href="class_oscil.html">Oscil &lt;SIN2048_NUM_CELLS, AUDIO_RATE&gt;</a> aGain1(SIN2048_DATA); <span class="comment">// to fade sine wave in and out before waveshaping</span></div>
+<div class="line"><a class="code" href="class_oscil.html">Oscil &lt;SIN2048_NUM_CELLS, AUDIO_RATE&gt;</a> aGain2(SIN2048_DATA); <span class="comment">// to fade sine wave in and out before waveshaping</span></div>
 <div class="line"></div>
 <div class="line"><span class="comment">// Chebyshev polynomial curves, The nth curve produces the n+2th harmonic component.</span></div>
-<div class="line"><a name="_a1"></a><a class="code" href="class_wave_shaper_3_01char_01_4.html" title="char specialisation of WaveShaper template">WaveShaper &lt;char&gt;</a> aCheby3rd(CHEBYSHEV_3RD_256_DATA); <span class="comment">// 5th harmonic</span></div>
-<div class="line"><a class="code" href="class_wave_shaper_3_01char_01_4.html" title="char specialisation of WaveShaper template">WaveShaper &lt;char&gt;</a> aCheby6th(CHEBYSHEV_6TH_256_DATA); <span class="comment">// 8th harmonic</span></div>
+<div class="line"><a name="_a1"></a><a class="code" href="class_wave_shaper_3_01char_01_4.html" title="int8_t specialisation of WaveShaper template">WaveShaper &lt;char&gt;</a> aCheby3rd(CHEBYSHEV_3RD_256_DATA); <span class="comment">// 5th harmonic</span></div>
+<div class="line"><a class="code" href="class_wave_shaper_3_01char_01_4.html" title="int8_t specialisation of WaveShaper template">WaveShaper &lt;char&gt;</a> aCheby6th(CHEBYSHEV_6TH_256_DATA); <span class="comment">// 8th harmonic</span></div>
 <div class="line"><a name="_a2"></a><a class="code" href="class_wave_shaper_3_01int_01_4.html" title="int specialisation of WaveShaper template">WaveShaper &lt;int&gt;</a> aCompress(WAVESHAPE_COMPRESS_512_TO_488_DATA); <span class="comment">// to compress instead of dividing by 2 after adding signals</span></div>
 <div class="line"></div>
 <div class="line"><span class="comment">// for scheduling note changes</span></div>
 <div class="line"><a name="_a3"></a><a class="code" href="class_event_delay.html" title="A non-blocking replacement for Arduino&#39;s delay() function (which is disabled by Mozzi).">EventDelay</a> kChangeNoteDelay;</div>
 <div class="line"></div>
 <div class="line"><span class="comment">// for random notes</span></div>
-<div class="line">Q8n0 octave_start_note = 42;</div>
-<div class="line">Q24n8 carrier_freq; <span class="comment">// unsigned long with 24 integer bits and 8 fractional bits</span></div>
+<div class="line"><a class="code" href="group__fixmath.html#gadec626a60cce3a7fec144d2505b79dda" title="normal uint8_t with 0 fractional bits, represents 0.0 to 255.0">Q8n0</a> octave_start_note = 42;</div>
+<div class="line"><a class="code" href="group__fixmath.html#ga940a116ff2bfbd1b013b41b1be73f70f" title="unsigned fractional number using 24 integer bits and 8 fractional bits, represents 0 to 16777215...">Q24n8</a> carrier_freq; <span class="comment">// unsigned long with 24 integer bits and 8 fractional bits</span></div>
 <div class="line"></div>
 <div class="line"><span class="comment">// smooth transitions between notes</span></div>
 <div class="line"><a name="_a4"></a><a class="code" href="class_smooth.html" title="A simple infinite impulse response low pass filter for smoothing control or audio signals...">Smooth &lt;unsigned int&gt;</a> kSmoothFreq(0.85f);</div>
@@ -150,16 +151,16 @@ $(document).ready(function(){initNavTree('06_8_synthesis_2_wave_shaper_2_wave_sh
 <div class="line"></div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> setup(){</div>
-<div class="line">  startMozzi(CONTROL_RATE); <span class="comment">// set a control rate of 64 (powers of 2 please)</span></div>
-<div class="line">  randSeed(); <span class="comment">// reseed the random generator for different results each time the sketch runs</span></div>
+<div class="line">  <a name="a5"></a><a class="code" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837" title="Sets up the timers for audio and control rate processes, storing the timer registers so they can be r...">startMozzi</a>(<a name="a6"></a><a class="code" href="group__core.html#gae5d737db8bc97ecf08d2ea3121782d26" title="Control rate setting.">CONTROL_RATE</a>); <span class="comment">// set a control rate of 64 (powers of 2 please)</span></div>
+<div class="line">  <a name="a7"></a><a class="code" href="group__random.html#ga84c58d758e238208eb82fc8ae2330b66" title="Initialises Mozzi&#39;s (pseudo)random number generator xorshift96(), which is used in Mozzi&#39;s rand() fun...">randSeed</a>(); <span class="comment">// reseed the random generator for different results each time the sketch runs</span></div>
 <div class="line">  aSin.setFreq(110); <span class="comment">// set the frequency</span></div>
 <div class="line">  aGain1.setFreq(2.f); <span class="comment">// use a float for low frequencies, in setup it doesn&#39;t need to be fast</span></div>
 <div class="line">  aGain2.setFreq(.4f);</div>
-<div class="line">  kChangeNoteDelay.<a name="a5"></a><a class="code" href="class_event_delay.html#a937c86f3b05ccb6138ff7927713820da" title="Set the delay time.">set</a>(4000); <span class="comment">// note duration ms, within resolution of CONTROL_RATE</span></div>
+<div class="line">  kChangeNoteDelay.<a name="a8"></a><a class="code" href="class_event_delay.html#a937c86f3b05ccb6138ff7927713820da" title="Set the delay time.">set</a>(4000); <span class="comment">// note duration ms, within resolution of CONTROL_RATE</span></div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> rndPentatonic(){</div>
-<div class="line">  <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> note = rand((byte)5);</div>
+<div class="line">byte rndPentatonic(){</div>
+<div class="line">  byte note = <a name="a9"></a><a class="code" href="group__random.html#gabe026433bdf21da516984d35730672fc" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>((byte)5);</div>
 <div class="line">  <span class="keywordflow">switch</span>(note){</div>
 <div class="line">  <span class="keywordflow">case</span> 0:</div>
 <div class="line">    note = 0;</div>
@@ -180,27 +181,27 @@ $(document).ready(function(){initNavTree('06_8_synthesis_2_wave_shaper_2_wave_sh
 <div class="line">  <span class="keywordflow">return</span> note;</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">void</span> updateControl(){</div>
-<div class="line">  <span class="keywordflow">if</span>(kChangeNoteDelay.<a name="a6"></a><a class="code" href="class_event_delay.html#a2267889678fb75df2f6bdcbd0be0ea8a" title="Call this in updateControl() or updateAudio() to check if the delay time is up.">ready</a>()){</div>
-<div class="line">    <span class="keywordflow">if</span>(rand((byte)5)==0){ <span class="comment">// about 1 in 5 or so</span></div>
+<div class="line"><span class="keywordtype">void</span> <a name="a10"></a><a class="code" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl</a>(){</div>
+<div class="line">  <span class="keywordflow">if</span>(kChangeNoteDelay.<a name="a11"></a><a class="code" href="class_event_delay.html#a2267889678fb75df2f6bdcbd0be0ea8a" title="Call this in updateControl() or updateAudio() to check if the delay time is up.">ready</a>()){</div>
+<div class="line">    <span class="keywordflow">if</span>(<a class="code" href="group__random.html#gabe026433bdf21da516984d35730672fc" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>((byte)5)==0){ <span class="comment">// about 1 in 5 or so</span></div>
 <div class="line">      <span class="comment">// change octave to midi 24 or any of 3 octaves above</span></div>
-<div class="line">      octave_start_note = (rand((byte)4)*12)+36;</div>
+<div class="line">      octave_start_note = (<a class="code" href="group__random.html#gabe026433bdf21da516984d35730672fc" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand</a>((byte)4)*12)+36;</div>
 <div class="line">    }</div>
-<div class="line">    Q16n16 midi_note = Q8n0_to_Q16n16(octave_start_note+rndPentatonic());</div>
-<div class="line">    target_freq = Q16n16_to_Q16n0(Q16n16_mtof(midi_note)); <span class="comment">// has to be 16 bits for Smooth</span></div>
-<div class="line">    kChangeNoteDelay.<a name="a7"></a><a class="code" href="class_event_delay.html#a97a07c9371040d6388b8369352b08d83" title="Start the delay.">start</a>();</div>
+<div class="line">    <a class="code" href="group__fixmath.html#gab3127fd8ac279e1d8dda0292bc1fc8dc" title="unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535...">Q16n16</a> midi_note = <a name="a12"></a><a class="code" href="group__fixmath.html#ga589b5c022b59a72fc3fb39061048d193" title="Convert Q8n0 uint8_t to Q16n16 fix.">Q8n0_to_Q16n16</a>(octave_start_note+rndPentatonic());</div>
+<div class="line">    target_freq = <a name="a13"></a><a class="code" href="group__fixmath.html#ga89bdabdfd59a8ec3f06aedbbab087527" title="Convert Q16n16 fixed to Q16n0 uint16_t.">Q16n16_to_Q16n0</a>(<a name="a14"></a><a class="code" href="group__midi.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2" title="Converts midi note number to frequency with speed and accuracy.">Q16n16_mtof</a>(midi_note)); <span class="comment">// has to be 16 bits for Smooth</span></div>
+<div class="line">    kChangeNoteDelay.<a name="a15"></a><a class="code" href="class_event_delay.html#a97a07c9371040d6388b8369352b08d83" title="Start the delay.">start</a>();</div>
 <div class="line">  }</div>
 <div class="line">  smoothed_freq = kSmoothFreq.next(target_freq*4); <span class="comment">// temporarily scale up target_freq to get better int smoothing at low values</span></div>
 <div class="line">  aSin.setFreq(smoothed_freq/4); <span class="comment">// then scale it back down after it&#39;s smoothed</span></div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> updateAudio(){</div>
+<div class="line"><span class="keywordtype">int</span> <a name="a16"></a><a class="code" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio</a>(){</div>
 <div class="line">  <span class="keywordtype">char</span> asig0 = aSin.next(); <span class="comment">// sine wave source</span></div>
 <div class="line">  <span class="comment">// make 2 signals fading in and out to show effect of amplitude when waveshaping with Chebyshev polynomial curves</span></div>
 <div class="line">  <span class="comment">// offset the signals by 128 to fit in the 0-255 range for the waveshaping table lookups</span></div>
-<div class="line">  <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> asig1 = (<span class="keywordtype">unsigned</span> char)128+((asig0*((<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)128+aGain1.next()))&gt;&gt;8);</div>
-<div class="line">  <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> asig2 = (<span class="keywordtype">unsigned</span> char)128+((asig0*((<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)128+aGain2.next()))&gt;&gt;8);</div>
+<div class="line">  byte asig1 = (byte)128+((asig0*((byte)128+aGain1.next()))&gt;&gt;8);</div>
+<div class="line">  byte asig2 = (byte)128+((asig0*((byte)128+aGain2.next()))&gt;&gt;8);</div>
 <div class="line">  <span class="comment">// get the waveshaped signals</span></div>
 <div class="line">  <span class="keywordtype">char</span> awaveshaped1 = aCheby3rd.next(asig1);</div>
 <div class="line">  <span class="keywordtype">char</span> awaveshaped2 = aCheby6th.next(asig2);</div>
@@ -211,7 +212,7 @@ $(document).ready(function(){initNavTree('06_8_synthesis_2_wave_shaper_2_wave_sh
 <div class="line"></div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> loop(){</div>
-<div class="line">  audioHook(); <span class="comment">// required here</span></div>
+<div class="line">  <a name="a17"></a><a class="code" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook</a>(); <span class="comment">// required here</span></div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"></div>
@@ -224,7 +225,7 @@ $(document).ready(function(){initNavTree('06_8_synthesis_2_wave_shaper_2_wave_sh
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Apr 20 2014 15:06:22 for Mozzi by
+    <li class="footer">Generated on Sat Aug 9 2014 14:12:58 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

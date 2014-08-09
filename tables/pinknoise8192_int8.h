@@ -14,7 +14,7 @@
 #define PINKNOISE8192_NUM_CELLS 8192
 #define PINKNOISE8192_SAMPLERATE 8192
 
-const char __attribute__((section(".progmem.data"))) PINKNOISE8192_DATA []  =
+const int8_t __attribute__((section(".progmem.data"))) PINKNOISE8192_DATA []  =
         {
                 -27, -51, -55, -63, -69, -29, -48,
                 -46, -37, 4, -40, -6, 12, 17, -34, -22, -30, 0, -33, -18, 19, -14, -4, 29, -26,

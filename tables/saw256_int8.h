@@ -11,7 +11,7 @@
 #define SAW256_NUM_CELLS 256
 #define SAW256_SAMPLERATE 256
 
-const char __attribute__((section(".progmem.data"))) SAW256_DATA []  =
+const int8_t __attribute__((section(".progmem.data"))) SAW256_DATA []  =
         {
                 -128, -127, -126, -125, -124, -123, -122,
                 -121, -120, -119, -118, -117, -116, -115, -114, -113, -112, -111, -110, -109,

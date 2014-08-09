@@ -19,10 +19,10 @@
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
-    Tim Barrass 2013.
-    This example code is in the public domain.
+    Tim Barrass 2013, CC by-nc-sa.
 */
 
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/sin2048_int8.h> // sine table for oscillator

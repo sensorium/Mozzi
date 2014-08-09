@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2014-04-20-15:06</span>
+   &#160;<span id="projectnumber">version 2014-08-09-14:12</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -80,7 +80,7 @@ $(document).ready(function(){initNavTree('class_audio_delay.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -137,26 +137,26 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a26b409fbfc322ae527ba23680c56e3a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt;<br/>
+<div class="textblock"><h3>template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = int8_t&gt;<br/>
 class AudioDelay&lt; NUM_BUFFER_SAMPLES, T &gt;</h3>
 
 <p>Audio delay line for comb filter, flange, chorus and short echo effects. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">NUM_BUFFER_SAMPLES</td><td>is the length of the delay buffer in samples. This should be a power of two. The largest delay you'll fit in an atmega328 will be 512 cells, which at 16384 Hz sample rate is 31 milliseconds. More of a flanger or a doubler than an echo. The amount of memory available for delays on other chips will vary. <a class="el" href="class_audio_delay.html#a688f69088f96bf3976a8555d3026365f" title="Constructor.">AudioDelay()</a> doesn't have feedback. If you want feedback, use AudioDelayFeedback(). </td></tr>
-    <tr><td class="paramname">the</td><td>type of numbers to use for the signal in the delay. The default is char, but int could be useful when adding manual feedback. When using int, the input should be limited to 15 bits width, ie. -16384 to 16383. </td></tr>
+    <tr><td class="paramname">the</td><td>type of numbers to use for the signal in the delay. The default is int8_t, but int could be useful when adding manual feedback. When using int, the input should be limited to 15 bits width, ie. -16384 to 16383. </td></tr>
   </table>
   </dd>
 </dl>
 <dl><dt><b>Examples: </b></dt><dd><a class="el" href="09_8_delays_2_audio_delay_2_audio_delay_8ino-example.html#_a1">09.Delays/AudioDelay/AudioDelay.ino</a>.</dd>
 </dl>
-<p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00038">38</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
+<p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00027">27</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a79be253fcb5709624c8fb708e54f069f"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt; </div>
+template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = int8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -184,7 +184,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00060">60</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
+<p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00049">49</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
 
 </div>
 </div>
@@ -193,7 +193,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt; </div>
+template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = int8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -232,7 +232,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00070">70</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
+<p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00059">59</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
 
 </div>
 </div>
@@ -240,7 +240,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt; </div>
+template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = int8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -268,7 +268,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00088">88</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
+<p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00077">77</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
 
 </div>
 </div>
@@ -276,7 +276,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt; </div>
+template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = int8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -305,7 +305,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00115">115</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
+<p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00104">104</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
 
 </div>
 </div>
@@ -313,7 +313,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt; </div>
+template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = int8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -341,7 +341,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00105">105</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
+<p>Definition at line <a class="el" href="_audio_delay_8h_source.html#l00094">94</a> of file <a class="el" href="_audio_delay_8h_source.html">AudioDelay.h</a>.</p>
 
 </div>
 </div>
@@ -351,7 +351,7 @@ template&lt;unsigned int NUM_BUFFER_SAMPLES, class T = char&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_audio_delay.html">AudioDelay</a></li>
-    <li class="footer">Generated on Sun Apr 20 2014 15:06:22 for Mozzi by
+    <li class="footer">Generated on Sat Aug 9 2014 14:12:58 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

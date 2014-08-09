@@ -14,28 +14,29 @@
 //or C operators (expecially / and %).
 //Look at IntegerCodeSnippets, http://code.google.com/p/ht1632c/wiki/IntegerCodeSnippets
 //
-//Here is some ready to use fast integer 1 byte wide math functions (from ht1632c library).
+//Here is some ready to use fast integer 1 uint8_t wide math functions (from ht1632c library).
 
-/** Fast byte modulus
+/** 
+fast uint8_t modulus
 @param n numerator
 @param  d denominator
 @return modulus
 */
-byte byteMod(byte n, byte d)
+uint8_t uint8_tMod(uint8_t n, uint8_t d)
 {
 	while(n >= d)
 		n -= d;
 	return n;
 }
 
-/** Fast byte division
+/** Fast uint8_t division
 @param n numerator
 @param  d denominator
 @return quotient
 */
-byte byteDiv(byte n, byte d)
+uint8_t uint8_tDiv(uint8_t n, uint8_t d)
 {
-	byte q = 0;
+	uint8_t q = 0;
 	while(n >= d)
 	{
 		n -= d;
@@ -44,14 +45,14 @@ byte byteDiv(byte n, byte d)
 	return q;
 }
 
-/* fast integer (1 byte) PRNG */
-byte byteRnd(byte min, byte max)
+/* fast integer (1 uint8_t) PRNG */
+uint8_t uint8_tRnd(uint8_t min, uint8_t max)
 {
-	static byte seed;
+	static uint8_t seed;
 	seed = (21 * seed + 21);
-	return min + byteMod(seed, --max);
+	return min + uint8_tMod(seed, --max);
 }
-//WARNING: don't use this byteRnd() function for cryptography!
+//WARNING: don't use this uint8_tRnd() function for cryptography!
 
 //} of snip from http://code.google.com/p/ht1632c/wiki/Optimizations
 
@@ -92,7 +93,9 @@ f = 2^(x) * (y) + 2^x
 where x is integer part, y is fractional part
 */
 
-/** This is a fast replacement for pow(2,x), where x is a fractional number in Q8n8
+
+/** 
+fast replacement for pow(2,x), where x is a Q8n8 fractional
 fixed-point exponent. It's less accurate than pow(2,x), but useful where a
 tradeoff between accuracy and speed is required to keep audio from glitching.
 @param exponent in Q8n8 format.
@@ -103,8 +106,8 @@ Q16n16 Q16n16_pow2(Q8n8 exponent)
 {
 	// to do 2^(x.y) first find
 	//2^x and 2^(x+1) through bit shifting 1 to the left by x and (x + 1) places
-	unsigned char Q = (unsigned char)((Q8n8)exponent>>8); // integer part
-	unsigned char n = (unsigned char) exponent; // fractional part
+	uint8_t Q = (uint8_t)((Q8n8)exponent>>8); // integer part
+	uint8_t n = (uint8_t) exponent; // fractional part
 	// f = 2^x * (y + 1)
 	return (((Q16n16)Q8n8_FIX1 << Q) * (Q8n8_FIX1 + n));
 }
@@ -116,7 +119,7 @@ Q16n16 Q16n16_pow2(Q8n8 exponent)
 //see Integer Square Roots by Jack W. Crenshaw, figure 2, http://www.embedded.com/electronics-blogs/programmer-s-toolbox/4219659/Integer-Square-Roots
 
 uint32_t  // OR uint16 OR uint8_t
-isqrt32 (uint32_t n) // OR isqrt16 ( uint16_t n ) OR  isqrt8 ( uint8_t n ) - respectively [ OR overloaded as isqrt (uint?? n) in C++ ]
+isqrt32 (uint32_t n) // OR isqrt16 ( uint16_t n ) OR  isqrt8 ( uint8_t n ) - respectively [ OR overloaded as isqrt (uint16_t?? n) in C++ ]
 {
 	register uint32_t // OR register uint16_t OR register uint8_t - respectively
 	root, remainder, place;
@@ -143,7 +146,7 @@ isqrt32 (uint32_t n) // OR isqrt16 ( uint16_t n ) OR  isqrt8 ( uint8_t n ) - res
 
 //http://www.codecodex.com/wiki/Calculate_an_integer_square_root
 uint16_t  // OR uint16_t OR uint8_t
-isqrt16 (uint16_t n) // OR isqrt16 ( uint16_t n ) OR  isqrt8 ( uint8_t n ) - respectively [ OR overloaded as isqrt (uint?? n) in C++ ]
+isqrt16 (uint16_t n) // OR isqrt16 ( uint16_t n ) OR  isqrt8 ( uint8_t n ) - respectively [ OR overloaded as isqrt (uint16_t?? n) in C++ ]
 {
 	register uint16_t // OR register uint16_t OR register uint8_t - respectively
 	root, remainder, place;

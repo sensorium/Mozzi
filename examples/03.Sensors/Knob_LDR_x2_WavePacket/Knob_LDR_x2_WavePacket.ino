@@ -9,10 +9,11 @@
   Also demonstrates AutoMap, which maps unpredictable inputs to a set range.
   
   This example goes with a tutorial on the Mozzi site:
-  http://sensorium.github.io/Mozzi/learn/Mozzi_Introductory_Tutorial.pdf
+  http://sensorium.github.io/Mozzi/learn/introductory-tutorial/
   
   The circuit:
-     Audio output on digital pin 9 (on a Uno or similar), or 
+     Audio output on digital pin 9 on a Uno or similar, or
+    DAC/A14 on Teensy 3.0/3.1, or 
      check the README or http://sensorium.github.com/Mozzi/
 
      Potentiometer connected to analog pin 0.
@@ -20,24 +21,24 @@
        Side pins of the potentiometer go to +5V and ground
   
      Light dependent resistor (LDR) and 5.1k resistor on analog pin 1:
-       LDR from analog pin to +5V
+       LDR from analog pin to +5V (3.3V on Teensy 3.0/3.1)
        5.1k resistor from analog pin to ground
      
      Light dependent resistor (LDR) and 5.1k resistor on analog pin 2:
-       LDR from analog pin to +5V
+       LDR from analog pin to +5V (3.3V on Teensy 3.0/3.1)
        5.1k resistor from analog pin to ground
   
   Mozzi help/discussion/announcements:
   https://groups.google.com/forum/#!forum/mozzi-users
 
-  Tim Barrass 2013.
-  This example code is in the public domain.
+  Tim Barrass 2013, CC by-nc-sa.
 */
  
 
- #include <WavePacket.h>
- #include <RollingAverage.h>
- #include <AutoMap.h>
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
+#include <WavePacket.h>
+#include <RollingAverage.h>
+#include <AutoMap.h>
  
 const int KNOB_PIN = 0; // set the input for the knob to analog pin 0
 const int LDR1_PIN=1; // set the analog input for fm_intensity to pin 1
@@ -67,6 +68,7 @@ WavePacket <DOUBLE> wavey; // DOUBLE selects 2 overlapping streams
 
 
 void setup(){
+  //Serial.begin(9600); // for Teensy 3.0/3.1, beware printout can cause glitches
   Serial.begin(115200);
   // wait before starting Mozzi to receive analog reads, so AutoRange will not get 0
   delay(200);

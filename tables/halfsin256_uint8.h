@@ -11,7 +11,7 @@
 #define HALFSIN256_NUM_CELLS 256
 #define HALFSIN256_SAMPLERATE 256
 
-const char __attribute__((section(".progmem.data"))) HALFSIN256_DATA []  =
+const int8_t __attribute__((section(".progmem.data"))) HALFSIN256_DATA []  =
         {
                 0, 3, 6, 9, 13, 16, 19, 22, 25, 28, 31,
                 34, 38, 41, 44, 47, 50, 53, 56, 59, 62, 65, 68, 71, 74, 77, 80, 83, 86, 89, 92,

@@ -14,7 +14,7 @@
 #define COSPHASE8192_NUM_CELLS 8192
 #define COSPHASE8192_SAMPLERATE 8192
 
-const char __attribute__((section(".progmem.data"))) COSPHASE8192_DATA []  =
+const int8_t __attribute__((section(".progmem.data"))) COSPHASE8192_DATA []  =
         {
         			127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,
 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,

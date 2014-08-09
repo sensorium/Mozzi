@@ -11,7 +11,7 @@
 #define SAW2048_NUM_CELLS 2048
 #define SAW2048_SAMPLERATE 2048
 
-const char __attribute__((section(".progmem.data"))) SAW2048_DATA []  =
+const int8_t __attribute__((section(".progmem.data"))) SAW2048_DATA []  =
         {
                 -128, -128, -128, -128, -128, -128, -128,
                 -128, -127, -127, -127, -127, -127, -127, -127, -127, -126, -126, -126, -126,

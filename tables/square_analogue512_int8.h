@@ -14,7 +14,7 @@
 #define SQUARE_ANALOGUE512_NUM_CELLS 512
 #define SQUARE_ANALOGUE512_SAMPLERATE 512
 
-const char __attribute__((section(".progmem.data"))) SQUARE_ANALOGUE512_DATA []  =
+const int8_t __attribute__((section(".progmem.data"))) SQUARE_ANALOGUE512_DATA []  =
         {
                 23, 68, 102, 119, 120, 112, 101,
                 94, 94, 99, 105, 109, 109, 106, 101, 98, 98, 101, 104, 107, 107, 105, 102, 100,

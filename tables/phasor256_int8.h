@@ -14,7 +14,7 @@
 #define PHASOR256_NUM_CELLS 256
 #define PHASOR256_SAMPLERATE 256
 
-const char __attribute__((section(".progmem.data"))) PHASOR256_DATA []  =
+const int8_t __attribute__((section(".progmem.data"))) PHASOR256_DATA []  =
         {
                 -128, -127, -127, -126, -124, -124, -122,
                 -122, -120, -120, -118, -118, -116, -115, -115, -113, -113, -111, -110, -110,

@@ -11,7 +11,7 @@
 #define COS4096_NUM_CELLS 4096
 #define COS4096_SAMPLERATE 4096
 
-const char __attribute__((section(".progmem.data"))) COS4096_DATA []  =
+const int8_t __attribute__((section(".progmem.data"))) COS4096_DATA []  =
         {
                 -128, -128, -128, -128, -128, -128, -128,
                 -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128,

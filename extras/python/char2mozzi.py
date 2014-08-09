@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
-##@file char2mozzi.py
+##@file int8_t2mozzi.py
 #  @ingroup util
 #	A script for converting raw 8 bit sound data files to wavetables for Mozzi.
 #
 #	Usage: 
-#	>>>char2mozzi.py <infile outfile tablename samplerate>
+#	>>>int8_t2mozzi.py <infile outfile tablename samplerate>
 #	
 #	@param infile		The file to convert.
 #	@param outfile	The file to save as output.
@@ -31,24 +31,24 @@
 #	Now use the file you just exported, as the "infile" to convert.
 #	
 #	@author Tim Barrass 2010-12
-#	@fn char2mozzi
+#	@fn int8_t2mozzi
 
 import sys, array, os, textwrap, random
 
 if len(sys.argv) != 5:
-        print 'Usage: char2mozzi.py <infile outfile tablename samplerate>'
+        print 'Usage: int8_t2mozzi.py <infile outfile tablename samplerate>'
         sys.exit(1)
 
 [infile, outfile, tablename, samplerate] = sys.argv[1:]
 
-def char2mozzi(infile, outfile, tablename, samplerate):
+def int8_t2mozzi(infile, outfile, tablename, samplerate):
 	fin = open(os.path.expanduser(infile), "rb")
 	print "opened " + infile
-	bytestoread = os.path.getsize(os.path.expanduser(infile))
-	##print bytestoread
-	valuesfromfile = array.array('b') # array of signed char ints
+	uint8_tstoread = os.path.getsize(os.path.expanduser(infile))
+	##print uint8_tstoread
+	valuesfromfile = array.array('b') # array of signed int8_t ints
 	try:
-		valuesfromfile.fromfile(fin, bytestoread)
+		valuesfromfile.fromfile(fin, uint8_tstoread)
 	finally:
 		fin.close()
 	
@@ -64,7 +64,7 @@ def char2mozzi(infile, outfile, tablename, samplerate):
 	fout.write('#include <avr/pgmspace.h>'+'\n \n')
 	fout.write('#define ' + tablename + '_NUM_CELLS '+ str(len(values))+'\n')
 	fout.write('#define ' + tablename + '_SAMPLERATE '+ str(samplerate)+'\n \n')
-	outstring = 'const char __attribute__((section(".progmem.data"))) ' + tablename + '_DATA [] = {'
+	outstring = 'const int8_t __attribute__((section(".progmem.data"))) ' + tablename + '_DATA [] = {'
 	try:
 		for i in range(len(values)):
 			## mega2560 boards won't upload if there is 33, 33, 33 in the array, so dither the 3rd 33 if there is one
@@ -79,4 +79,4 @@ def char2mozzi(infile, outfile, tablename, samplerate):
 		fout.close()
 		print "wrote " + outfile
 
-char2mozzi(infile, outfile, tablename, samplerate)
+int8_t2mozzi(infile, outfile, tablename, samplerate)

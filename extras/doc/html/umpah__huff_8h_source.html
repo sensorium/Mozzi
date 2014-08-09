@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2014-04-20-15:06</span>
+   &#160;<span id="projectnumber">version 2014-08-09-14:12</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -80,7 +80,7 @@ $(document).ready(function(){initNavTree('umpah__huff_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('umpah__huff_8h_source.html','');});
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#define UMPAH_SAMPLERATE 16384</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define UMPAH_SAMPLE_BITS 8</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor"></span><span class="keywordtype">int</span> <span class="keyword">const</span> __attribute__((section(<span class="stringliteral">&quot;.progmem.data&quot;</span>))) UMPAH_HUFFMAN[280] = {</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor"></span>int16_t <span class="keyword">const</span> __attribute__((section(<span class="stringliteral">&quot;.progmem.data&quot;</span>))) UMPAH_HUFFMAN[280] = {</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;277,169,67,0,1,64,46,28,25,7,4,0,-25,0,-26,0,-13,16,7,0,-31,4,0,-36,0,-39,7,0,20,4,0,-38,0,-35,0,-6,16,0,5,13,</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;10,0,13,7,0,31,4,0,39,0,-34,0,-10,16,0,4,13,10,4,0,16,0,-14,4,0,-15,0,15,0,-7,100,4,0,3,0,-2,94,52,49,43,</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;10,7,4,0,-37,0,36,0,-32,0,19,31,28,22,19,0,-43,16,0,44,13,10,4,0,46,0,-45,4,0,-46,0,-62,0,45,0,41,4,0,40,0,</div>
@@ -119,8 +119,8 @@ $(document).ready(function(){initNavTree('umpah__huff_8h_source.html','');});
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;13,0,-9,10,4,0,-24,0,-29,4,0,28,0,24,19,16,0,6,13,0,11,10,7,0,34,4,0,38,0,-42,0,27,0,-5,43,40,19,7,4,0,</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;-22,0,-27,0,12,10,4,0,-30,0,29,4,0,30,0,26,19,16,13,0,-28,10,0,33,7,4,0,42,0,-44,0,43,0,14,0,7,0,-3,0,0</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keyword">const</span> UMPAH_SOUNDDATA_BITS = 196860L;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <span class="keyword">const</span> __attribute__((section(<span class="stringliteral">&quot;.progmem.data&quot;</span>))) UMPAH_SOUNDDATA[] = {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;uint32_t <span class="keyword">const</span> UMPAH_SOUNDDATA_BITS = 196860L;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;byte <span class="keyword">const</span> __attribute__((section(<span class="stringliteral">&quot;.progmem.data&quot;</span>))) UMPAH_SOUNDDATA[] = {</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;210,20,130,2,84,176,64,164,16,40,8,29,42,245,148,33,72,34,0,32,104,132,68,82,192,164,66,170,80,100,40,32,2,104,165,134,133,104,242,140,</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;60,194,228,96,20,116,96,79,41,213,219,49,158,86,27,9,182,8,180,122,58,107,156,155,98,8,22,112,138,113,114,152,128,140,117,60,130,208,161,20,</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;98,207,136,134,36,230,195,107,78,3,129,129,16,68,158,98,61,163,56,71,14,4,97,30,120,29,152,6,112,161,20,96,68,179,69,176,233,152,98,156,</div>
@@ -745,7 +745,7 @@ $(document).ready(function(){initNavTree('umpah__huff_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d28a4824dc47e487b107a5db32ef43c4.html">examples</a></li><li class="navelem"><a class="el" href="dir_9ca29615486e86932f4b900563144736.html">08.Samples</a></li><li class="navelem"><a class="el" href="dir_0d6feda837323b0c7a50b1cca0a6cf12.html">SampleHuffman_Umpah</a></li><li class="navelem"><b>umpah_huff.h</b></li>
-    <li class="footer">Generated on Sun Apr 20 2014 15:06:22 for Mozzi by
+    <li class="footer">Generated on Sat Aug 9 2014 14:12:58 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

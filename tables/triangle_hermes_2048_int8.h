@@ -14,7 +14,7 @@
 #define TRIANGLE_HERMES_2048_NUM_CELLS 2048
 #define TRIANGLE_HERMES_2048_SAMPLERATE 2048
 
-const char __attribute__((section(".progmem.data"))) TRIANGLE_HERMES_2048_DATA []  =
+const int8_t __attribute__((section(".progmem.data"))) TRIANGLE_HERMES_2048_DATA []  =
         {
                 -1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
                 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 3,

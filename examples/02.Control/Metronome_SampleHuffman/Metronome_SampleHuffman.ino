@@ -1,20 +1,19 @@
-/*
-Example using Metronome to playing samples encoded with Huffman compression.
-
-Demonstrates Metronome start, stop and ready, and the the SampleHuffman class.
-
-Circuit:
- Audio output on digital pin 9 (on a Uno or similar), or 
- check the README or http://sensorium.github.com/Mozzi/
-
- Mozzi help/discussion/announcements:
- https://groups.google.com/forum/#!forum/mozzi-users
- 
- Tim Barrass 2013.
- This example code is in the public domain.
-
+/*  Example using Metronome to playing samples encoded with Huffman compression.
+	
+		Demonstrates Metronome start, stop and ready, and the the SampleHuffman class.
+		
+		Circuit:
+		Audio output on digital pin 9 on a Uno or similar, or
+		DAC/A14 on Teensy 3.0/3.1, or 
+		check the README or http://sensorium.github.com/Mozzi/
+		
+		Mozzi help/discussion/announcements:
+		https://groups.google.com/forum/#!forum/mozzi-users
+		
+		Tim Barrass 2013, CC by-nc-sa.
 */
 
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Metronome.h>
 #include <SampleHuffman.h>
@@ -45,8 +44,8 @@ void setup() {
 void updateControl(){
   static unsigned int counter;
   counter++;
-  if(counter==384)kMetro.stop();
-  if(counter==512){kMetro.start();counter = 0;}
+  if(counter==177)kMetro.stop();
+  if(counter==203){kMetro.start();counter = 0;}
   if(kMetro.ready()){
     switch(rand(NUM_SAMPLES)){
       case 0:

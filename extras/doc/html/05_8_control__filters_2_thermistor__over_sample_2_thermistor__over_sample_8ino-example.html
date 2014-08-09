@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2014-04-20-15:06</span>
+   &#160;<span id="projectnumber">version 2014-08-09-14:12</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -80,7 +80,7 @@ $(document).ready(function(){initNavTree('05_8_control__filters_2_thermistor__ov
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -109,20 +109,21 @@ $(document).ready(function(){initNavTree('05_8_control__filters_2_thermistor__ov
 <div class="line"><span class="comment">  Demonstrates OverSample object.</span></div>
 <div class="line"><span class="comment"></span></div>
 <div class="line"><span class="comment">  The circuit:</span></div>
-<div class="line"><span class="comment">     Audio output on digital pin 9 (on a Uno or similar), or </span></div>
+<div class="line"><span class="comment">     Audio output on digital pin 9 on a Uno or similar, or</span></div>
+<div class="line"><span class="comment">    DAC/A14 on Teensy 3.0/3.1, or </span></div>
 <div class="line"><span class="comment">     check the README or http://sensorium.github.com/Mozzi/</span></div>
 <div class="line"><span class="comment"></span></div>
 <div class="line"><span class="comment">  Temperature dependent resistor (Thermistor) and 5.1k resistor on analog pin 1:</span></div>
-<div class="line"><span class="comment">    Thermistor from analog pin to +5V</span></div>
+<div class="line"><span class="comment">    Thermistor from analog pin to +5V (3.3V on Teensy 3.0/3.1)</span></div>
 <div class="line"><span class="comment">    5.1k resistor from analog pin to ground</span></div>
 <div class="line"><span class="comment">    </span></div>
 <div class="line"><span class="comment">  Mozzi help/discussion/announcements:</span></div>
 <div class="line"><span class="comment">  https://groups.google.com/forum/#!forum/mozzi-users</span></div>
 <div class="line"><span class="comment"></span></div>
-<div class="line"><span class="comment">  Tim Barrass 2013.</span></div>
-<div class="line"><span class="comment">  This example code is in the public domain.</span></div>
+<div class="line"><span class="comment">  Tim Barrass 2013, CC by-nc-sa.</span></div>
 <div class="line"><span class="comment"> */</span></div>
 <div class="line"></div>
+<div class="line"><span class="comment">//#include &lt;ADC.h&gt;  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC</span></div>
 <div class="line"><span class="preprocessor">#include &lt;MozziGuts.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;Oscil.h&gt;</span> <span class="comment">// oscillator template</span></div>
 <div class="line"><span class="preprocessor">#include &lt;Line.h&gt;</span></div>
@@ -134,9 +135,9 @@ $(document).ready(function(){initNavTree('05_8_control__filters_2_thermistor__ov
 <div class="line"><span class="comment">//#define CONTROL_RATE 256 </span></div>
 <div class="line"></div>
 <div class="line"><span class="comment">// use: Oscil &lt;table_size, update_rate&gt; oscilName (wavetable)</span></div>
-<div class="line"><a name="_a0"></a><a class="code" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil &lt;SIN2048_NUM_CELLS, AUDIO_RATE&gt;</a> aSin(SIN2048_DATA);</div>
-<div class="line"><a class="code" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil &lt;SIN2048_NUM_CELLS, AUDIO_RATE&gt;</a> aTremelo(SIN2048_DATA); </div>
-<div class="line"><a class="code" href="class_oscil.html" title="Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil &lt;SIN2048_NUM_CELLS, AUDIO_RATE&gt;</a> aEnvelope(SIN2048_DATA); </div>
+<div class="line"><a name="_a0"></a><a class="code" href="class_oscil.html">Oscil &lt;SIN2048_NUM_CELLS, AUDIO_RATE&gt;</a> aSin(SIN2048_DATA);</div>
+<div class="line"><a class="code" href="class_oscil.html">Oscil &lt;SIN2048_NUM_CELLS, AUDIO_RATE&gt;</a> aTremelo(SIN2048_DATA); </div>
+<div class="line"><a class="code" href="class_oscil.html">Oscil &lt;SIN2048_NUM_CELLS, AUDIO_RATE&gt;</a> aEnvelope(SIN2048_DATA); </div>
 <div class="line"></div>
 <div class="line"><a name="_a1"></a><a class="code" href="class_line.html" title="For linear changes with a minimum of calculation at each step.">Line &lt;float&gt;</a> freqLine;</div>
 <div class="line"></div>
@@ -146,7 +147,7 @@ $(document).ready(function(){initNavTree('05_8_control__filters_2_thermistor__ov
 <div class="line"></div>
 <div class="line"><span class="keywordtype">float</span> ENVELOPE_DURATION = 1.f;</div>
 <div class="line"></div>
-<div class="line"><span class="keyword">const</span> byte LINE_LENGTH = (byte)((<span class="keywordtype">float</span>)CONTROL_RATE*ENVELOPE_DURATION*0.5); <span class="comment">// 0.5 seconds per line</span></div>
+<div class="line"><span class="keyword">const</span> byte LINE_LENGTH = (byte)((<span class="keywordtype">float</span>)<a name="a3"></a><a class="code" href="group__core.html#gae5d737db8bc97ecf08d2ea3121782d26" title="Control rate setting.">CONTROL_RATE</a>*ENVELOPE_DURATION*0.5); <span class="comment">// 0.5 seconds per line</span></div>
 <div class="line"></div>
 <div class="line"><span class="comment">// adjustments to get tremelo in useful range from oversampled temperature input</span></div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> TREMOLO_OFFSET = 4000;</div>
@@ -154,21 +155,22 @@ $(document).ready(function(){initNavTree('05_8_control__filters_2_thermistor__ov
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> setup(){</div>
 <div class="line">  pinMode(INPUT_PIN,INPUT);</div>
+<div class="line">  <span class="comment">//Serial.begin(9600); // for Teensy 3.0/3.1, beware printout can cause glitches</span></div>
 <div class="line">  Serial.begin(115200);</div>
 <div class="line">  aEnvelope.setFreq(ENVELOPE_DURATION);</div>
-<div class="line">  startMozzi(); </div>
+<div class="line">  <a name="a4"></a><a class="code" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837" title="Sets up the timers for audio and control rate processes, storing the timer registers so they can be r...">startMozzi</a>(); </div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">void</span> updateControl(){</div>
+<div class="line"><span class="keywordtype">void</span> <a name="a5"></a><a class="code" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl</a>(){</div>
 <div class="line">  <span class="keywordtype">float</span> start_freq, end_freq;</div>
 <div class="line">  <span class="keyword">static</span> <span class="keywordtype">int</span> counter, old_oversampled;</div>
 <div class="line">  </div>
 <div class="line">  <span class="comment">// read the variable resistor</span></div>
-<div class="line">  <span class="keywordtype">int</span> sensor_value = mozziAnalogRead(INPUT_PIN); <span class="comment">// value is 0-1023</span></div>
+<div class="line">  <span class="keywordtype">int</span> sensor_value = <a name="a6"></a><a class="code" href="group__analog.html#gae9536bf35f6ea46a6938d5eb52b947c3" title="Reads the analog input of a chosen channel, without blocking other operations from running...">mozziAnalogRead</a>(INPUT_PIN); <span class="comment">// value is 0-1023</span></div>
 <div class="line">  </div>
 <div class="line">  <span class="comment">// get the next oversampled sensor value</span></div>
-<div class="line">  <span class="keywordtype">int</span> oversampled = overSampler.<a name="a3"></a><a class="code" href="class_over_sample.html#a7f447746d8296314b4ad5184b0654646" title="Oversample and decimate the input to increase resolution by RESOLUTION_INCREASE_BITS;.">next</a>(sensor_value);</div>
+<div class="line">  <span class="keywordtype">int</span> oversampled = overSampler.<a name="a7"></a><a class="code" href="class_over_sample.html#a7f447746d8296314b4ad5184b0654646" title="Oversample and decimate the input to increase resolution by RESOLUTION_INCREASE_BITS;.">next</a>(sensor_value);</div>
 <div class="line">  </div>
 <div class="line">  <span class="comment">// modulate the amplitude of the sound in proportion to the magnitude of the oversampled sensor</span></div>
 <div class="line">  <span class="keywordtype">float</span> tremeloRate = TREMOLO_SCALE*(oversampled-TREMOLO_OFFSET);</div>
@@ -192,25 +194,25 @@ $(document).ready(function(){initNavTree('05_8_control__filters_2_thermistor__ov
 <div class="line">    counter = LINE_LENGTH-1; <span class="comment">// reset counter</span></div>
 <div class="line">    </div>
 <div class="line">    <span class="comment">// set the line to change the main frequency</span></div>
-<div class="line">    freqLine.<a name="a4"></a><a class="code" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80" title="Set the current value of the line.">set</a>(start_freq,end_freq,LINE_LENGTH);</div>
+<div class="line">    freqLine.<a name="a8"></a><a class="code" href="class_line.html#a6bad32d527e0d931c99e9b72c2a75c80" title="Set the current value of the line.">set</a>(start_freq,end_freq,LINE_LENGTH);</div>
 <div class="line">    </div>
 <div class="line">    <span class="comment">// print out for debugging</span></div>
 <div class="line">    Serial.print(oversampled);Serial.print(<span class="stringliteral">&quot;\t&quot;</span>);Serial.print(start_freq);Serial.print(<span class="stringliteral">&quot;\t&quot;</span>);Serial.println(end_freq);</div>
 <div class="line">  }</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">// update the main frequency of the sound</span></div>
-<div class="line">  aSin.setFreq(freqLine.<a name="a5"></a><a class="code" href="class_line.html#a413f620b2824c6996b3346ee54351849" title="Increments one step along the line.">next</a>());</div>
+<div class="line">  aSin.setFreq(freqLine.<a name="a9"></a><a class="code" href="class_line.html#a413f620b2824c6996b3346ee54351849" title="Increments one step along the line.">next</a>());</div>
 <div class="line"></div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> updateAudio(){</div>
+<div class="line"><span class="keywordtype">int</span> <a name="a10"></a><a class="code" href="group__core.html#gaab0d2c840c1aac4bb5f9b8ef5df30f6a" title="This is where you put your audio code.">updateAudio</a>(){</div>
 <div class="line">  <span class="keywordflow">return</span> ((((<span class="keywordtype">int</span>)aSin.next()*(128+aTremelo.next()))&gt;&gt;8)*aEnvelope.next())&gt;&gt;8; </div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> loop(){</div>
-<div class="line">  audioHook(); <span class="comment">// required here</span></div>
+<div class="line">  <a name="a11"></a><a class="code" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook</a>(); <span class="comment">// required here</span></div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"></div>
@@ -220,7 +222,7 @@ $(document).ready(function(){initNavTree('05_8_control__filters_2_thermistor__ov
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Apr 20 2014 15:06:22 for Mozzi by
+    <li class="footer">Generated on Sat Aug 9 2014 14:12:58 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

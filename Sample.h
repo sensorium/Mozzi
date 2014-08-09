@@ -7,18 +7,7 @@
  *
  * This file is part of Mozzi.
  *
- * Mozzi is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Mozzi is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Mozzi.  If not, see <http://www.gnu.org/licenses/>.
+ * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
  *
  */
 
@@ -51,13 +40,13 @@ defined macro, rather than a const or int, for the Sample to run fast enough.
 updateAudio(), or CONTROL_RATE if it's updated each time updateControl() is
 called. It could also be a fraction of CONTROL_RATE if you are doing some kind
 of cyclic updating in updateControl(), for example, to spread out the processor load.
-@section char2mozzi
+@section int8_t2mozzi
 Converting soundfiles for Mozzi.
-There is a python script called char2mozzi.py in the Mozzi/python folder.
+There is a python script called int8_t2mozzi.py in the Mozzi/python folder.
 The script converts raw sound data saved from a program like Audacity.
-Instructions are in the char2mozzi.py file.
+Instructions are in the int8_t2mozzi.py file.
 */
-template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, unsigned char INTERP=INTERP_NONE>
+template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, uint8_t INTERP=INTERP_NONE>
 class Sample
 {
 
@@ -66,10 +55,10 @@ public:
 	/** Constructor.
 	@param TABLE_NAME the name of the array the Sample will be using. This
 	can be found in the table ".h" file if you are using a table made for
-	Mozzi by the char2mozzi.py python script in Mozzi's python
+	Mozzi by the int8_t2mozzi.py python script in Mozzi's python
 	folder.  Sound tables can be of arbitrary lengths for Sample().
 	*/
-	Sample(const char * TABLE_NAME):table(TABLE_NAME),endpos_fractional((unsigned long) NUM_TABLE_CELLS << SAMPLE_F_BITS) // so isPlaying() will work
+	Sample(const int8_t * TABLE_NAME):table(TABLE_NAME),endpos_fractional((unsigned long) NUM_TABLE_CELLS << SAMPLE_F_BITS) // so isPlaying() will work
 	{
 		setLoopingOff();
 		//rangeWholeSample();
@@ -92,7 +81,7 @@ public:
 	@param TABLE_NAME is the name of the array in the table ".h" file you're using.
 	*/
 	inline
-	void setTable(const char * TABLE_NAME)
+	void setTable(const int8_t * TABLE_NAME)
 	{
 		table = TABLE_NAME;
 	}
@@ -179,7 +168,7 @@ public:
 	@todo in next(), incrementPhase() happens in a different position than for Oscil - check if it can be standardised
 	*/
 	inline
-	char next() { // 4us
+	int8_t next() { // 4us
 		
 		if (phase_fractional>endpos_fractional){
 			if (looping) {
@@ -188,16 +177,16 @@ public:
 				return 0;
 			}
 		}
-		char out;
+		int8_t out;
 		if(INTERP==INTERP_LINEAR){
 			// WARNNG this is hard coded for when SAMPLE_F_BITS is 16
 			unsigned int index = phase_fractional >> SAMPLE_F_BITS;
-			out = (char)pgm_read_byte_near(table + index);
-			char difference = (char)pgm_read_byte_near((table + 1) + index) - out;
-			char diff_fraction = (char)(((((unsigned int) phase_fractional)>>8)*difference)>>8); // (unsigned int) phase_fractional keeps low word, then>> for only 8 bit precision
+			out = (int8_t)pgm_read_byte_near(table + index);
+			int8_t difference = (int8_t)pgm_read_byte_near((table + 1) + index) - out;
+			int8_t diff_fraction = (int8_t)(((((unsigned int) phase_fractional)>>8)*difference)>>8); // (unsigned int) phase_fractional keeps low word, then>> for only 8 bit precision
 			out += diff_fraction;
 		}else{
-			out = (char)pgm_read_byte_near(table + (phase_fractional >> SAMPLE_F_BITS));
+			out = (int8_t)pgm_read_byte_near(table + (phase_fractional >> SAMPLE_F_BITS));
 		}
 		incrementPhase();
 		return out;
@@ -223,10 +212,10 @@ public:
 	// @return a sample from the table.
 	// 
 	// inline
-	// char phMod(long phmod_proportion)
+	// int8_t phMod(long phmod_proportion)
 	// {
 	// 	incrementPhase();
-	// 	return (char)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))>>SAMPLE_SAMPLE_F_BITS) & (NUM_TABLE_CELLS - 1)));
+	// 	return (int8_t)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))>>SAMPLE_SAMPLE_F_BITS) & (NUM_TABLE_CELLS - 1)));
 	// }
 
 
@@ -287,9 +276,9 @@ public:
 	@return the sample at the given table index.
 	*/
 	inline
-	char atIndex(unsigned int index)
+	int8_t atIndex(unsigned int index)
 	{
-		return (char)pgm_read_byte_near(table + index);
+		return (int8_t)pgm_read_byte_near(table + index);
 	}
 
 
@@ -328,7 +317,7 @@ private:
 
 	/** Used for shift arithmetic in setFreq() and its variations.
 	*/
-static const unsigned char ADJUST_FOR_NUM_TABLE_CELLS = (NUM_TABLE_CELLS<2048) ? 8 : 0;
+static const uint8_t ADJUST_FOR_NUM_TABLE_CELLS = (NUM_TABLE_CELLS<2048) ? 8 : 0;
 
 
 	/** Increments the phase of the oscillator without returning a sample.
@@ -342,7 +331,7 @@ static const unsigned char ADJUST_FOR_NUM_TABLE_CELLS = (NUM_TABLE_CELLS<2048) ?
 
 	volatile unsigned long phase_fractional;
 	volatile unsigned long phase_increment_fractional;
-	const char * table;
+	const int8_t * table;
 	bool looping;
 	unsigned long startpos_fractional, endpos_fractional;
 };

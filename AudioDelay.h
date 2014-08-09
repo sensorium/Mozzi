@@ -5,18 +5,7 @@
  *
  * This file is part of Mozzi.
  *
- * Mozzi is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Mozzi is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Mozzi.  If not, see <http://www.gnu.org/licenses/>.
+ * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
  *
  */
 
@@ -30,11 +19,11 @@ be a power of two. The largest delay you'll fit in an atmega328 will be 512
 cells, which at 16384 Hz sample rate is 31 milliseconds. More of a flanger or a
 doubler than an echo. The amount of memory available for delays on other chips will vary.
 AudioDelay() doesn't have feedback.  If you want feedback, use AudioDelayFeedback().
-@tparam the type of numbers to use for the signal in the delay.  The default is char, but int could be useful
+@tparam the type of numbers to use for the signal in the delay.  The default is int8_t, but int could be useful
 when adding manual feedback.  When using int, the input should be limited to 15 bits width, ie. -16384 to 16383.
 */
 
-template <unsigned int NUM_BUFFER_SAMPLES, class T = char>
+template <unsigned int NUM_BUFFER_SAMPLES, class T = int8_t>
 class AudioDelay
 {
 
@@ -74,7 +63,7 @@ public:
 
 		// why does delay jump if I read it before writing?
 		delay_array[_write_pos] = in_value;			// write to buffer
-		char delay_sig = delay_array[read_pos] ;	// read the delay buffer
+		int8_t delay_sig = delay_array[read_pos] ;	// read the delay buffer
 
 		return (T)delay_sig;
 	}

@@ -4,7 +4,72 @@ NEWS
 get the latest version from http://sensorium.github.io/Mozzi/
 
 
-version 2014-04-20-15:06
+version 2014-08-09-14:12
+
+Teensy 3.0/3.1 port, test release.
+
+
+Extra libraries required:
+
+- Timer library for Teensy 3.0 by Daniel Gilbert, from https://github.com/loglow/IntervalTimer
+
+- ADC library by Pedro Villanueva, from http://github.com/pedvide/ADC.
+
+
+Some of the differences for Teensy 3.0/3.1 which will affect users include:
+
+- Audio output is on pin A14/DAC, in STANDARD or STANDARD_PLUS audio modes - these are identical on Teensy 3.0/3.1, as
+	the output is via DAC rather than PWM.
+	
+- Output is 12 bits in STANDARD and STANDARD_PLUS modes, up from nearly 9 bits for Atmel based boards.
+	HIFI audio, by summing two output pins, is not available on Teensy 3.0/3.1.
+	
+- #include <ADC.h> is required at the top of every Teensy 3.0/3.1 sketch. 
+	Non-blocking mozziAnalogRead() is implemented using the excellent ADC library 
+	created by Pedro Villanueva, which be downloaded from http://github.com/pedvide/ADC.
+	The ADC library is only being used very simply in the initial Mozzi port, but it opens the way to fine control
+	of ADC in future development.Also, remember Teensy 3 analog input range is 3.3v, not 5v.
+	
+- uint8_t and int8_t are used instead of unsigned char and char, to work with Teensy 3.0/3.1, where char etc. don't work.
+
+- Serial baud rate for monitoring in the IDE needs to be set to 9600 to work with Teensy 3.0/3.1.  
+	This slow rate causes audio glitches.
+	
+- twi_nonblock code for non-blocking I2C is not compatible with Teensy 3.0/3.1.  
+	twi_nonblock was authored by Marije Baalman in this fork https://github.com/sensestage/Mozzi.
+
+
+Various other changes which affect the library in general:
+
+- Changed license from GPL3 to Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+
+- ADSR.h 
+
+	- next() now returns unsigned char instead of unsigned int
+	
+	- added functions to set ADSR times in update steps, eg. setAttackUpdateSteps(unsigned int steps), etc., 
+	for finer-grained control
+
+- SampleHuffman.h - now plays correctly from beginning when start() used before finished playing previous cycle.
+
+- Re-included RCpoll.h and examples>03.Sensors>RCpoll, for capacitive sensing.  
+	They have been included before, but disappeared somewhere along the way.
+	
+- Added PDResonant.h, and examples>06.Synthesis>PDResonant.  PDResonant is a simple midi intrument which demonstrates 
+	Phase Distortion used to create a sweeping resonant filter effect, based on 
+	https://en.wikipedia.org/wiki/Phase_distortion_synthesis.
+	
+- mozzi_fixmath.h - added Q15n16_to_Q8n0()
+
+- Fixed broken link in Sensor examples to http://sensorium.github.io/Mozzi/learn/introductory-tutorial/
+
+- Moved Arduino timer libraries into "utility" folder and added conditional compilation to hide them from Teensy 3.0/3.1 compilation.
+
+- Removed cpu speed warning from MozziGuts.h
+
+
+
+version_2014-04-20-15:06
 
 - MozziGuts.cpp
 	- all examples (exept HIFI) now run in STANDARD_PLUS mode, due to improved performance with new outbut buffer code (added CircularBuffer.h)	
@@ -56,7 +121,7 @@ version_2013-09-12-15:15
 - added examples/03.Sensors/Light_Temperature_Detuned, mapping Thermistor and LDR readings to 14 audio oscils
 - added OverSample.h, for increased resolution of analog inputs.
 	- added examples/05.Control_Filters/Thermistor_OverSample to demonstrate OverSample object.
-- ControlDelay.h - changed default storage type from char to int.
+- ControlDelay.h - changed default storage type from int8_t to int16_t.
 - Changed docs regarding components for HIFI mode, 1M resistor is now 499k (or two 1M in parallel).
 	Also added contribution from Standuino group on forum about component values for direct headphone output,
 	39 ohm, 4.99k (or two 10k in parallel) and 470nF filter capacitor.
@@ -83,7 +148,7 @@ version_2013-08-25-18:38
 - added examples/08.Samples/Sample_Scrub...uses interpolation/smoothing at different scales
 - Smooth.h - added operator method as an alternative to next() so you can use 
 	mySmooth(input-value) instead of mySmooth.next(input-value), if you want.
-- mozzi_midi.h, .cpp - changed return type from unsigned int to int for mtof(unsigned char midi_note), mtof(int midi_note),
+- mozzi_midi.h, .cpp - changed return type from uint16_t to int16_t for mtof(uint8_t midi_note), mtof(int16_t midi_note),
 	to suit Oscil::setFreq()
 - added/corrected references to examples in docs
 
@@ -99,7 +164,7 @@ version_2013-07-29-18:09
 - added examples/04.Analog_Input/Audio_and_Control_Input
 - added examples/04.Analog_Input/Audio_Input_with_Knob_Filter
 - removed examples/04.Analog_Input/Audio_Input_with_Filter_Control
-- RollingAverage.h - change unsigned char index to unsigned int and same for num_readings_as_rshift, so more than 255 items can be averaged
+- RollingAverage.h - change uint8_t index to uint16_t and same for num_readings_as_rshift, so more than 255 items can be averaged
 - added audioTicks(), returns how many audio samples have been played since the program started - this will overflow less often than mozziMicros().
 - mozziMicros() was wrong, audioticks/us-per-tick... fixed, now audioticks*us-per-tick
 - added Stack.h, a simple stack class used internally for reading analog control inputs via adcReadAllChannels().
@@ -117,7 +182,7 @@ version_2013-07-13-16:36
 	If Arduino's version of avr-gcc advances, this will eventually become unnecessary.
 - Added compiler warning to remind whether AUDIO_MODE is STANDARD or HIFI, might help debugging.
 - mozzi_fixmath.h 
-	- added Q7n0_to_Q15n16(Q7n0 a), Convert Q7n0 char to Q15n16 fixed point.
+	- added Q7n0_to_Q15n16(Q7n0 a), Convert Q7n0 int8_t to Q15n16 fixed point.
 	- added Q7n8_to_Q15n16(Q7n8 a), Convert Q7n8 fix to Q15n16.
 	- added Q7n8_mult(Q7n8 a, Q7n8 b)
 	
@@ -204,16 +269,16 @@ Version 0.01.1zzz
 Version 0.01.1zz
 - Added ReverbTank, a reverb which sounds like the inside of a tin can, and an example ReverbTank_STANDARD
 - AudioDelay 
-	- added template parameter for signal type, to allow ints as well as the default char type.
+	- added template parameter for signal type, to allow ints as well as the default int8_t type.
 	- next() now returns only delayed signal, so mixing can be flexible and is done in the sketch
 - AudioDelayFeedback 
 	- repaired a few bugs. (I hope)
-	- added next(char input) which was missing for LINEAR interpolated delays
+	- added next(int8_t input) which was missing for LINEAR interpolated delays
 	
 	
 	
 Version 0.01.1z
-- Phasor - changed setFreq(unsigned int) to setFreq(int), old sketches will need updating
+- Phasor - changed setFreq(uint16_t) to setFreq(int16_t), old sketches will need updating
 - Reorganised examples into topic subdirectories and removed numbers
 - MozziGuts.cpp 
 	- Added pauseMozzi() - Stops audio and control interrupts and restores the timers to the values they had before Mozzi was started.
@@ -246,9 +311,9 @@ Version 0.01.1z
 Version 0.01.1y
 
 Important: sketches written before this version of Mozzi will need updating to remove 
-	(unsigned int) casts or "u" after integer arguments to:
-	- Oscil::setFreq(unsigned int) changed to setFreq(int)
-	- Sample::setFreq(unsigned int) changed to setFreq(int)
+	(uint16_t) casts or "u" after integer arguments to:
+	- Oscil::setFreq(uint16_t) changed to setFreq(int16_t)
+	- Sample::setFreq(uint16_t) changed to setFreq(int16_t)
 - fixed a compile error for HIFI mode (thanks to Thomas for pointing this out)
 - Added HIFI tests m_01b_Sinewave_HIFI, m_03b_FMsynth_HIFI and m_05b_AMsynth_HIFI.
 	The AMsynth example is the only one which actually has higher resolution than its STANDARD version.
@@ -272,9 +337,9 @@ Lots of changes which will probably require some search and replace to maintain 
 
 - mozzi_analog.h, .cpp 
 	- Renamed startRead() to adcReadAllChannels(), more descriptive of what it does.
-	- Renamed getSensor(byte pin) to adcGetResult(byte pin), because the ADC conversions are already done, stored in an array.
+	- Renamed getSensor(uint8_t pin) to adcGetResult(uint8_t pin), because the ADC conversions are already done, stored in an array.
 	- Renamed adcEnableInterrupt() adcEnableInterrupt().
-	- Renamed startAnalogRead(byte pin) to adcStartConversion(byte pin).
+	- Renamed startAnalogRead(uint8_t pin) to adcStartConversion(uint8_t pin).
 	- Renamed adcReceiveAnalogRead() to adcGetResult().
 	- Added adcSetChannel() so you can sample from the same pin repeatedly without muxing every time.
 	- Added adcDisconnectAllDigitalIns() which helps to reduce analog noise, 
@@ -294,9 +359,9 @@ Lots of changes which will probably require some search and replace to maintain 
 - Added example m_39_Audio_Input_with_Filter_Control which demonstrates audio input with RCpoll to control a filter
 - Waveshaper.h - fixed some documentation errors.
 - Changed names of some of the examples to reflect library changes.
-- AudioDelayFeedback - added an alternative next(char in_value, Q16n16 delaytime_cells) function for fractional, linear interpolated delays.
+- AudioDelayFeedback - added an alternative next(int8_t in_value, Q16n16 delaytime_cells) function for fractional, linear interpolated delays.
 	- Examples for AudioDelayFeedback changed to disambiguate 
-		next(char in_value, Q16n16 delaytime_cells) and next(char in_value, unsigned int delaytime_cells).
+		next(int8_t in_value, Q16n16 delaytime_cells) and next(int8_t in_value, uint16_t delaytime_cells).
 - Moved some documentation into .h files to work around conditional compilation hiding documentation from doxygen.
 	
 
@@ -387,12 +452,12 @@ Version 0.01.1o
 - Mega2650 boards should now work properly.  Stephen Scutt identified a bug at upload time,
 	if the compiler sees 3 !!! exclamation marks in a row (or 33, 33, 33 in decimal) 
 	it enters serial mode and the board freezes.  All tables now have occurrences of 33, 33, 33 dithered.
-- python/char2mozzi.py, the python script for converting raw data to sound tables now
+- python/int8_t2mozzi.py, the python script for converting raw data to sound tables now
 	changes every 3rd 33 in a row to 32 or 34 (random).
 - Examples are renamed, so they are now prefixed with m_##_, eg. m_01_Sinewave, and given a sequential 
 	numerical order without the "a", "b" etc.  The renaming has to do with a script for a generating web
 	page for the code and audio recordings of sketches.
-- Ead.h - added function, start(unsigned int attack_ms, unsigned int decay_ms), to set and start a new envelope.
+- Ead.h - added function, start(uint16_t attack_ms, uint16_t decay_ms), to set and start a new envelope.
 		Changed from switch..case to if..else for checking envelope phase in next().
 - Example m_24_Ead_Envelope updated to generate random envelopes, to demonstrate variations.
 - Added StateVariable.h, a resonant audio filter with lowpass, bandpass, highpass and notch modes.  This works well.
@@ -413,7 +478,7 @@ Version 0.01.1n
 		to 
 		EventDelay <UPDATE_RATE> MyEventDelay();
 		
-	- added start(unsigned int delay_milliseconds), sets and starts the delay in one go.
+	- added start(uint16_t delay_milliseconds), sets and starts the delay in one go.
 		
 - _03c_AMSynth - more detailed, and far more irritating example.
 - hack for Teensy 2 (32u4), pasted from hardware/arduino/variants/leonardo/pins_arduino.h (actually included in previous version)
@@ -438,7 +503,7 @@ Version 0.01.1m
 - Wrote an automated build and record script to check all examples work for each release.
 - Line - fixed a bug which caused incorrect step calculation for unsigned types.
 - _03_Control_Tremelo example - added audio-rate linear interpolation to amplitude-control.
-- Smooth - increased internal smoothness resolution from Q0n8 to Q0n16 for template parameter types larger than char.
+- Smooth - increased internal smoothness resolution from Q0n8 to Q0n16 for template parameter types larger than int8_t.
 - _05_Smooth example - changed to do smoothing in updateAudio().
 - Various examples slightly modified/fixed (more needs doing).
 	
@@ -488,7 +553,7 @@ Version 0.01.1g
 	Timer0 is used by Arduino IDE, but Mozzi clobbered it already,
 	has EventDelay() to replace delay(), and this now leaves Timer2
 	(Timer4 on atmega32u4) free.
-- replaced: prog_char with: const char __attribute__((progmem))
+- replaced: prog_int8_t with: const int8_t __attribute__((progmem))
 	to test compatibility with atmega32u4 (Leonardo/Teeny).
 	Changed tables and python scripts to match.
 - added example _12c_Samples_Tables_Arrays, showing a way to use
@@ -502,7 +567,7 @@ Version 0.01.1f
 	with an example sketch,  _18_WaveShaper.
 - added tables for use with WaveShaper(), including Chebyshev polynomial curves and sigmoid curves.
 - mozzi_utils.h: added rand(), a fast ranged random number generator using xorshift96(),
-	for signed and unsigned chars and ints, in rand(min,max) for values
+	for signed and uint8_ts and ints, in rand(min,max) for values
 	between min and max-1, and rand(max) for 0 to max-1.
 	Much easier to use than xorshift() on its own.
 - added a folder of bamboo percussion sample tables - is it possible
@@ -518,7 +583,7 @@ Version 0.01.1e
 - fixed a bug in Smooth.h which stopped high smoothness values working properly.
 - added another example for Smooth, changing freqency.
 - fixed errors in mozzi_fixmath.h
-- fixed a naming problem in char2mozzi.py
+- fixed a naming problem in int8_t2mozzi.py
 - added _02b_FMsynth example
 - added _03b_AMsynth example
 - added _05b_Smooth2 example
@@ -536,7 +601,7 @@ Version 0.01.1c
 
 - Smooth.h: increased speed from about 400 us to between 1-5 us, depending on
 number type, by changing floating to fixed point in internal calculations. Types
-are now restricted to char, unsigned char, int and unsigned int.
+are now restricted to int8_t, uint8_t, int16_t and uint16_t.
 - mozzi_fixmath.h: changed *_float2fix names to float_to* , added some types and fixed some mistakes
 - mozzi_utils.h:
 	-hardcoded midiToFreq[] array to progmem instead of generating on startup

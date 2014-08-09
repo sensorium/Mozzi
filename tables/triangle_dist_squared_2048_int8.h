@@ -14,7 +14,7 @@
 #define TRIANGLE_DIST_SQUARED_2048_NUM_CELLS 2048
 #define TRIANGLE_DIST_SQUARED_2048_SAMPLERATE 2048
 
-const char __attribute__((section(".progmem.data"))) TRIANGLE_DIST_SQUARED_2048_DATA []  =
+const int8_t __attribute__((section(".progmem.data"))) TRIANGLE_DIST_SQUARED_2048_DATA []  =
         {
                 16, 16, 16, 16, 15, 16,
                 16, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 14, 15,

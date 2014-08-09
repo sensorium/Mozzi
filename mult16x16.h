@@ -38,7 +38,7 @@ asm volatile ( \
 // intRes = intIn1 * intIn2 >> 16
 // uses:
 // r26 to store 0
-// r27 to store the byte 1 of the 32bit result
+// r27 to store the uint8_t 1 of the 32bit result
 #define MultiU16X16toH16(intRes, intIn1, intIn2) \
 asm volatile ( \
 "clr r26 \n\t" \
@@ -67,7 +67,7 @@ asm volatile ( \
 // intRes = intIn1 * intIn2 >> 16 + round
 // uses:
 // r26 to store 0
-// r27 to store the byte 1 of the 32bit result
+// r27 to store the uint8_t 1 of the 32bit result
 // 21 cycles
 #define MultiU16X16toH16Round(intRes, intIn1, intIn2) \
 asm volatile ( \

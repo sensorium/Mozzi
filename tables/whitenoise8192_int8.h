@@ -15,7 +15,7 @@
 White noise table.
 */
 
-const char __attribute__((section(".progmem.data"))) WHITENOISE8192_DATA []  =
+const int8_t __attribute__((section(".progmem.data"))) WHITENOISE8192_DATA []  =
         {
                 22, -14, 108, 2, -80, -99, 62, -62,
                 -11, -127, -102, -80, -114, -66, -2, 68, -63, -101, 0, -13, 37, 55, 104, 61,

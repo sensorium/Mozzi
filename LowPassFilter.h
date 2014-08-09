@@ -5,18 +5,7 @@
  *
  * This file is part of Mozzi.
  *
- * Mozzi is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Mozzi is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Mozzi.  If not, see <http://www.gnu.org/licenses/>.
+ * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
  *
  */
 
@@ -41,7 +30,7 @@ fixed point version of the filter
 
 // we are using .n fixed point (n bits for the fractional part)
 #define FX_SHIFT 8
-#define SHIFTED_1 ((unsigned char) 255)
+#define SHIFTED_1 ((uint8_t) 255)
 
 /** A resonant low pass filter for audio signals.
 */
@@ -61,7 +50,7 @@ public:
 	@param cutoff use the range 0-255 to represent 0-8192 Hz (AUDIO_RATE/2).
 	Be careful of distortion at the lower end, especially with high resonance.
 	*/
-	void setCutoffFreq(unsigned char cutoff)
+	void setCutoffFreq(uint8_t cutoff)
 	{
 		f = cutoff;
 		fb = q+ucfxmul(q, SHIFTED_1 - cutoff);
@@ -71,7 +60,7 @@ public:
 	/** Set the resonance.  If you hear unwanted distortion, back off the resonance.
 	@param resonance in the range 0-255.
 	*/
-	void setResonance(unsigned char resonance)
+	void setResonance(uint8_t resonance)
 	{
 		q = resonance;
 	}
@@ -94,8 +83,8 @@ public:
 
 
 private:
-	unsigned char q;
-	unsigned char f;
+	uint8_t q;
+	uint8_t f;
 	unsigned int fb;
 	int buf0,buf1;
 
@@ -109,14 +98,14 @@ private:
 
 	// multiply two fixed point numbers (returns fixed point)
 	inline
-	unsigned int ucfxmul(unsigned char a, unsigned char b)
+	unsigned int ucfxmul(uint8_t a, uint8_t b)
 	{
 		return (((unsigned int)a*b)>>FX_SHIFT);
 	}
 	
 		// multiply two fixed point numbers (returns fixed point)
 	inline
-	int ifxmul(int a, unsigned char b)
+	int ifxmul(int a, uint8_t b)
 	{
 		return ((a*b)>>FX_SHIFT);
 	}

@@ -28,7 +28,7 @@ float mtof(float midival)
 
 
 /*
-static float ucmtof(unsigned char midival)
+static float ucmtof(uint8_t midival)
 {
 	return 8.1757989156 * pow(2.0, (float)midival/12.0);
 }
@@ -63,7 +63,7 @@ static float ucmtof(unsigned char midival)
 // @return the frequency represented by the input midi note number.
 // @todo hard-code fmidiToFreq table instead of generating at startup, and add an interpolating m2f which returns a float.
 // */
-// float m2f(unsigned char midival)
+// float m2f(uint8_t midival)
 // {
 // return (float) pgm_read_float(fmidiToFreq+midival);
 // }
@@ -118,8 +118,8 @@ static const uint32_t __attribute__((section(".progmem.data"))) midiToFreq[128] 
   
 /** @ingroup midi
 Converts midi note number to frequency with speed and accuracy.  Q16n16_mtofLookup() is a fast
-alternative to (float) mtof(), and more accurate than (unsigned char) mtof(),
-using Q16n16 fixed-point format instead of floats or byte values. Q16n16_mtof()
+alternative to (float) mtof(), and more accurate than (uint8_t) mtof(),
+using Q16n16 fixed-point format instead of floats or uint8_t values. Q16n16_mtof()
 uses cheap linear interpolation between whole midi-note frequency equivalents
 stored in a lookup table, so is less accurate than the float version, mtof(),
 for non-whole midi values.
@@ -131,8 +131,8 @@ fixed point fractional integer format, where the lower word is a fractional valu
 Q16n16  Q16n16_mtof(Q16n16 midival_fractional)
 {
 	Q16n16 diff_fraction;
-	unsigned char index = midival_fractional >> 16;
-	unsigned int fraction = (unsigned int) midival_fractional; // keeps low word
+	uint8_t index = midival_fractional >> 16;
+	uint16_t fraction = (uint16_t) midival_fractional; // keeps low word
 	Q16n16 freq1 = (Q16n16) pgm_read_dword(midiToFreq + index);
 	Q16n16 freq2 = (Q16n16) pgm_read_dword((midiToFreq + 1) + index);
 	Q16n16 difference = freq2 - freq1;
@@ -152,7 +152,7 @@ A good choice if you're using whole note values, want speed and simplicity, and 
 @param midi_note a midi note number.
 @return an integer approximation of the midi note's frequency.
 */
-int mtof(unsigned char midi_note){
+int mtof(uint8_t midi_note){
 	return (int) (pgm_read_dword(midiToFreq + midi_note) >> 16);
 }
 

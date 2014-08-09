@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2014-04-20-15:06</span>
+   &#160;<span id="projectnumber">version 2014-08-09-14:12</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -80,7 +80,7 @@ $(document).ready(function(){initNavTree('class_rolling_stat.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -112,9 +112,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a85750e78ac282caec24408dce6e78201"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rolling_stat.html#a85750e78ac282caec24408dce6e78201">update</a> (T x)</td></tr>
 <tr class="memdesc:a85750e78ac282caec24408dce6e78201"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the mean and variance given a new input value.  <a href="#a85750e78ac282caec24408dce6e78201">More...</a><br/></td></tr>
 <tr class="separator:a85750e78ac282caec24408dce6e78201"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afdc3f385aebe68492514f41129065aa5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rolling_stat.html#afdc3f385aebe68492514f41129065aa5">update</a> (char x)</td></tr>
-<tr class="memdesc:afdc3f385aebe68492514f41129065aa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the mean and variance given a new input value.  <a href="#afdc3f385aebe68492514f41129065aa5">More...</a><br/></td></tr>
-<tr class="separator:afdc3f385aebe68492514f41129065aa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f7b384ab338da5ba10200fbce7f2eb0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rolling_stat.html#a6f7b384ab338da5ba10200fbce7f2eb0">update</a> (int8_t x)</td></tr>
+<tr class="memdesc:a6f7b384ab338da5ba10200fbce7f2eb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the mean and variance given a new input value.  <a href="#a6f7b384ab338da5ba10200fbce7f2eb0">More...</a><br/></td></tr>
+<tr class="separator:a6f7b384ab338da5ba10200fbce7f2eb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed85e98ab32f0a731dc12f9f1c4da398"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rolling_stat.html#aed85e98ab32f0a731dc12f9f1c4da398">getMean</a> () const </td></tr>
 <tr class="memdesc:aed85e98ab32f0a731dc12f9f1c4da398"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the mean of the last WINDOW_LENGTH number of inputs.  <a href="#aed85e98ab32f0a731dc12f9f1c4da398">More...</a><br/></td></tr>
 <tr class="separator:aed85e98ab32f0a731dc12f9f1c4da398"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,13 +132,13 @@ class RollingStat&lt; T, WINDOW_LENGTH &gt;</h3>
 <p>Calculates an approximation of the variance and standard deviation for a window of recent inputs. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>the type of numbers to use. Choose unsigned int, int , unsigned char, char, or float </td></tr>
+    <tr><td class="paramname">T</td><td>the type of numbers to use. Choose unsigned int, int , uint8_t, int8_t, or float </td></tr>
     <tr><td class="paramname">WINDOW_LENGTH</td><td>how many recent input values to include in the calculations. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_rolling_stat_8h_source.html#l00036">36</a> of file <a class="el" href="_rolling_stat_8h_source.html">RollingStat.h</a>.</p>
+<p>Definition at line <a class="el" href="_rolling_stat_8h_source.html#l00025">25</a> of file <a class="el" href="_rolling_stat_8h_source.html">RollingStat.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="aed85e98ab32f0a731dc12f9f1c4da398"></a>
 <div class="memitem">
@@ -166,7 +166,7 @@ template&lt;class T , int WINDOW_LENGTH&gt; </div>
 <p>Return the mean of the last WINDOW_LENGTH number of inputs. </p>
 <dl class="section return"><dt>Returns</dt><dd>mean </dd></dl>
 
-<p>Definition at line <a class="el" href="_rolling_stat_8h_source.html#l00069">69</a> of file <a class="el" href="_rolling_stat_8h_source.html">RollingStat.h</a>.</p>
+<p>Definition at line <a class="el" href="_rolling_stat_8h_source.html#l00058">58</a> of file <a class="el" href="_rolling_stat_8h_source.html">RollingStat.h</a>.</p>
 
 </div>
 </div>
@@ -196,7 +196,7 @@ template&lt;class T , int WINDOW_LENGTH&gt; </div>
 <p>Return the approximate standard deviation of the last WINDOW_LENGTH number of inputs. </p>
 <dl class="section return"><dt>Returns</dt><dd>standard deviation. </dd></dl>
 
-<p>Definition at line <a class="el" href="_rolling_stat_8h_source.html#l00086">86</a> of file <a class="el" href="_rolling_stat_8h_source.html">RollingStat.h</a>.</p>
+<p>Definition at line <a class="el" href="_rolling_stat_8h_source.html#l00075">75</a> of file <a class="el" href="_rolling_stat_8h_source.html">RollingStat.h</a>.</p>
 
 </div>
 </div>
@@ -227,7 +227,7 @@ template&lt;class T , int WINDOW_LENGTH&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>variance </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This should really be calculated using WINDOW_LENGTH-1, but sacrificing accuracy for speed we use the power of two value of WINDOW_LENGTH. </dd></dl>
 
-<p>Definition at line <a class="el" href="_rolling_stat_8h_source.html#l00079">79</a> of file <a class="el" href="_rolling_stat_8h_source.html">RollingStat.h</a>.</p>
+<p>Definition at line <a class="el" href="_rolling_stat_8h_source.html#l00068">68</a> of file <a class="el" href="_rolling_stat_8h_source.html">RollingStat.h</a>.</p>
 
 </div>
 </div>
@@ -264,11 +264,11 @@ template&lt;class T , int WINDOW_LENGTH&gt; </div>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>timing for unsigned int 10us, int 22us </dd></dl>
 
-<p>Definition at line <a class="el" href="_rolling_stat_8h_source.html#l00049">49</a> of file <a class="el" href="_rolling_stat_8h_source.html">RollingStat.h</a>.</p>
+<p>Definition at line <a class="el" href="_rolling_stat_8h_source.html#l00038">38</a> of file <a class="el" href="_rolling_stat_8h_source.html">RollingStat.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="afdc3f385aebe68492514f41129065aa5"></a>
+<a class="anchor" id="a6f7b384ab338da5ba10200fbce7f2eb0"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -280,7 +280,7 @@ template&lt;class T , int WINDOW_LENGTH&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="class_rolling_stat.html">RollingStat</a>&lt; T, WINDOW_LENGTH &gt;::update </td>
           <td>(</td>
-          <td class="paramtype">char&#160;</td>
+          <td class="paramtype">int8_t&#160;</td>
           <td class="paramname"><em>x</em></td><td>)</td>
           <td></td>
         </tr>
@@ -300,7 +300,7 @@ template&lt;class T , int WINDOW_LENGTH&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_rolling_stat_8h_source.html#l00059">59</a> of file <a class="el" href="_rolling_stat_8h_source.html">RollingStat.h</a>.</p>
+<p>Definition at line <a class="el" href="_rolling_stat_8h_source.html#l00048">48</a> of file <a class="el" href="_rolling_stat_8h_source.html">RollingStat.h</a>.</p>
 
 </div>
 </div>
@@ -310,7 +310,7 @@ template&lt;class T , int WINDOW_LENGTH&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_rolling_stat.html">RollingStat</a></li>
-    <li class="footer">Generated on Sun Apr 20 2014 15:06:22 for Mozzi by
+    <li class="footer">Generated on Sat Aug 9 2014 14:12:59 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

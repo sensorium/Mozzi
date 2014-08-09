@@ -14,7 +14,7 @@
 #define SMOOTHSQUARE8192_NUM_CELLS 8192
 #define SMOOTHSQUARE8192_SAMPLERATE 8192
 
-const char __attribute__((section(".progmem.data"))) SMOOTHSQUARE8192_DATA []  =
+const int8_t __attribute__((section(".progmem.data"))) SMOOTHSQUARE8192_DATA []  =
         {
                 -1, 0, -1, 0, -1, 0, 0, 0, -1, 0,
                 -1, 0, -1, 0, 0, -1, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, -1, 0,

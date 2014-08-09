@@ -8,18 +8,7 @@
  *
  * This file is part of Mozzi.
  *
- * Mozzi is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Mozzi is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Mozzi.  If not, see <http://www.gnu.org/licenses/>.
+ * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
  *
  */
 
@@ -122,12 +111,12 @@ public:
 	*/
 
 	inline
-	unsigned char next()
+	uint8_t next()
 	{
 		if(attack_phase)
 		{
-			// signed multiply A(a1,b1) * A(a2,b2)=A(a1 +a2 +1,b1 +b2)
-			Q8n24state += ((Q8n24_FIX1 - Q8n24state) * Q8n8attack) >> 8; // Q8n24, shifts all back into n24
+			// multiply A(a1,b1) * A(a2,b2) = A(a1+a2, b1+b2)
+			Q8n24state += (((Q8n24)(Q8n24_FIX1 - Q8n24state) * Q8n8attack)) >> 8; // Q8n24, shifts all back into n24
 			if (Q8n24state >= Q8n24_FIX1-256)
 			{
 				Q8n24state = Q8n24_FIX1-256;

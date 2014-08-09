@@ -12,7 +12,7 @@
 */
 
 #define CHEBYSHEV_5TH_256_NUM_CELLS 256
-const char __attribute__((section(".progmem.data"))) CHEBYSHEV_5TH_256_DATA [] =
+const int8_t __attribute__((section(".progmem.data"))) CHEBYSHEV_5TH_256_DATA [] =
         {
                 -128, -104, -82,
                 -60, -40, -22, -5, 11, 26, 39, 52, 63, 73, 82, 90, 98, 104, 110, 114, 118, 121,

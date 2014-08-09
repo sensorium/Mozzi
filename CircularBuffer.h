@@ -6,7 +6,7 @@ doesn't work - cbIsEmpty() returns true whether the buffer is full or empty.
 */
 
 /** Circular buffer object.  Has a fixed number of cells, set to 256.
-@tparam ITEM_TYPE the kind of data to store, eg. int, char etc.
+@tparam ITEM_TYPE the kind of data to store, eg. int, int8_t etc.
 */
 template <class ITEM_TYPE>
 class CircularBuffer
@@ -50,10 +50,10 @@ public:
 
 private:
 	ITEM_TYPE items[256];
-	unsigned char         start;  /* index of oldest itement              */
-	unsigned char         end;    /* index at which to write new itement  */
-	unsigned char         s_msb;
-	unsigned char         e_msb;
+	uint8_t         start;  /* index of oldest itement              */
+	uint8_t         end;    /* index at which to write new itement  */
+	uint8_t         s_msb;
+	uint8_t         e_msb;
 	unsigned long num_buffers_read;
 
 

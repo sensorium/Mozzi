@@ -19,7 +19,7 @@ def generate(outfile, tablename, tablelength, numtables):
     fout.write('#endif'+'\n')   
     fout.write('#include <avr/pgmspace.h>'+'\n \n')
     fout.write('#define ' + tablename + '_NUM_CELLS '+ str(tablelength) +'\n')
-    fout.write('const char __attribute__((section(".progmem.data"))) ' + tablename + '_DATA [] = { \n')
+    fout.write('const int8_t __attribute__((section(".progmem.data"))) ' + tablename + '_DATA [] = { \n')
 
     try:
         for tablenum in range(numtables):
@@ -31,7 +31,7 @@ def generate(outfile, tablename, tablelength, numtables):
                     
                     t_x = math.sin(2*math.pi*x)*(float(tablenum+1)/numtables)
 
-                    scaled = int(math.floor(t_x*127.999))
+                    scaled = int16_t(math.floor(t_x*127.999))
 
                     outstring += str(scaled) + ', '
             finally:

@@ -7,16 +7,17 @@
     values, random numbers with rand(), and EventDelay()
     for scheduling.
   
-    Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+    Circuit: Audio output on digital pin 9 on a Uno or similar, or
+    DAC/A14 on Teensy 3.0/3.1, or 
     check the README or http://sensorium.github.com/Mozzi/
   
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
-    Tim Barrass 2012.
-    This example code is in the public domain.
+    Tim Barrass 2012, CC by-nc-sa.
 */
 
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/COS2048_int8.h> // table for Oscils to play
@@ -59,27 +60,27 @@ void updateControl(){
   if(kNoteChangeDelay.ready()){
 
     // change octave now and then
-    if(rand((unsigned char)5)==0){
-      last_note = 36+(rand((unsigned char)6)*12);
+    if(rand((byte)5)==0){
+      last_note = 36+(rand((byte)6)*12);
     }
 
     // change step up or down a semitone occasionally
-    if(rand((unsigned char)13)==0){
-      last_note += 1-rand((unsigned char)3);
+    if(rand((byte)13)==0){
+      last_note += 1-rand((byte)3);
     }
 
     // change modulation ratio now and then
-    if(rand((unsigned char)5)==0){
-      ratio = ((Q8n8) 1+ rand((unsigned char)5)) <<8;
+    if(rand((byte)5)==0){
+      ratio = ((Q8n8) 1+ rand((byte)5)) <<8;
     }
 
     // sometimes add a fractionto the ratio
-    if(rand((unsigned char)5)==0){
-      ratio += rand((unsigned char)255);
+    if(rand((byte)5)==0){
+      ratio += rand((byte)255);
     }
 
     // step up or down 3 semitones (or 0)
-    last_note += 3 * (1-rand((unsigned char)3));
+    last_note += 3 * (1-rand((byte)3));
 
     // convert midi to frequency
     Q16n16 midi_note = Q8n0_to_Q16n16(last_note); 
@@ -100,7 +101,7 @@ void updateControl(){
 }
 
 int updateAudio(){
-  long mod = (128u+ aModulator.next()) * ((unsigned char)128+ aModDepth.next());
+  long mod = (128u+ aModulator.next()) * ((byte)128+ aModDepth.next());
   int out = (mod * aCarrier.next())>>16;
   return out;
 }

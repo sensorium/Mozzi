@@ -14,7 +14,7 @@ about when you're writing sketches.
 #define PWM_RATE 16384
 
 /* Used internally to put the 0-biased generated audio into the right range for PWM output.*/
-#define AUDIO_BIAS ((unsigned char) 244)
+#define AUDIO_BIAS ((uint8_t) 244)
 
 // Used internally.  If there was a channel 2, it would be OCR1B.
 #define AUDIO_CHANNEL_1_OUTPUT_REGISTER OCR1A

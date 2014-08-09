@@ -4,16 +4,17 @@
     Demonstrates the use of WaveShaper(), EventDelay(), Smooth(),
     rand(), and fixed-point numbers.
   
-    Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+    Circuit: Audio output on digital pin 9 on a Uno or similar, or
+    DAC/A14 on Teensy 3.0/3.1, or 
     check the README or http://sensorium.github.com/Mozzi/
   
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
-    Tim Barrass 2012.
-    This example code is in the public domain.
+    Tim Barrass 2012, CC by-nc-sa.
 */
 
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <WaveShaper.h>
@@ -22,9 +23,6 @@
 #include <mozzi_midi.h>
 #include <Smooth.h>
 #include <tables/sin2048_int8.h>
-#include <tables/waveshape_chebyshev_3rd_256_int8.h>
-#include <tables/waveshape_chebyshev_6th_256_int8.h>
-#include <tables/waveshape_compress_512_to_488_int16.h>
 
 
 // use #define for CONTROL_RATE, not a constant
@@ -70,7 +68,7 @@ void updateControl(){
 
 
 int updateAudio(){
-  int asig = (int)((((long)aSin1.next()+ aSin2.next())*(200u+aGain.next()))>>3);
+  int asig = (int)((((uint32_t)aSin1.next()+ aSin2.next())*(200u+aGain.next()))>>3);
   int clipped = constrain(asig,-244,243);
   return clipped;
 }

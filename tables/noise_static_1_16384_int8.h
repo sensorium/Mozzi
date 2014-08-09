@@ -14,7 +14,7 @@
 #define NOISE_STATIC_1_16384_NUM_CELLS 16384
 #define NOISE_STATIC_1_16384_SAMPLERATE 16384
 
-const char __attribute__((section(".progmem.data"))) NOISE_STATIC_1_16384_DATA []  =
+const int8_t __attribute__((section(".progmem.data"))) NOISE_STATIC_1_16384_DATA []  =
         {
                 -5, -8, -8, 1, 4, -1, 5, 3, 3,
                 0, -4, 7, 1, -1, 0, -9, -3, -2, 2, 2, -2, 1, -8, -7, -5, -4, -1, -3, -6, -14, 0,

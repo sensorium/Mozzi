@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2014-04-20-15:06</span>
+   &#160;<span id="projectnumber">version 2014-08-09-14:12</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -80,7 +80,7 @@ $(document).ready(function(){initNavTree('_reverb_tank_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -104,100 +104,89 @@ $(document).ready(function(){initNavTree('_reverb_tank_8h_source.html','');});
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * This file is part of Mozzi.</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> * Mozzi is free software: you can redistribute it and/or modify</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> * it under the terms of the GNU General Public License as published by</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> * the Free Software Foundation, either version 3 of the License, or</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> * (at your option) any later version.</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> * Mozzi is distributed in the hope that it will be useful,</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> * but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"> * GNU General Public License for more details.</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"> * You should have received a copy of the GNU General Public License</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"> * along with Mozzi.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;AudioDelay.h&quot;</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="code" href="class_reverb_tank.html">   43</a></span>&#160;<span class="keyword">class</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="class_reverb_tank.html" title="A reverb which sounds like the inside of a tin can.">ReverbTank</a> {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="code" href="class_reverb_tank.html#a2b413e10d5d3688f2066624e5a8ae324">   56</a></span>&#160;    <a class="code" href="class_reverb_tank.html" title="A reverb which sounds like the inside of a tin can.">ReverbTank</a>(</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      <span class="keywordtype">char</span> early_reflection1 = 37,</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      <span class="keywordtype">char</span> early_reflection2 = 77,</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      <span class="keywordtype">char</span> early_reflection3 = 127,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      <span class="keywordtype">char</span> loop1_delay=117,</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> loop2_delay=255,</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      <span class="keywordtype">char</span> feedback_level = 85):</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            _early_reflection1(early_reflection1),_early_reflection2(early_reflection3),_early_reflection3(early_reflection3),</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            _feedback_level(feedback_level)</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        aLoopDel1.set(loop1_delay);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        aLoopDel2.set(loop2_delay);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    }</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="code" href="class_reverb_tank.html#a4930ae7a871dba610fb141d7ab83d827">   76</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_reverb_tank.html#a4930ae7a871dba610fb141d7ab83d827" title="Process the next audio sample and return the reverbed signal.">next</a>(<span class="keywordtype">int</span> input){</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">int</span> recycle1, recycle2;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="comment">// early reflections</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordtype">int</span> asig = aLoopDel0.next(input, _early_reflection1);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        asig += aLoopDel0.read(_early_reflection2);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        asig += aLoopDel0.read(_early_reflection3);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        asig &gt;&gt;= 2;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;AudioDelay.h&quot;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="code" href="class_reverb_tank.html">   32</a></span>&#160;<span class="keyword">class</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="class_reverb_tank.html" title="A reverb which sounds like the inside of a tin can.">ReverbTank</a> {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="code" href="class_reverb_tank.html#a3ca18b03d045df164462338f6ed0648c">   45</a></span>&#160;    <a class="code" href="class_reverb_tank.html" title="A reverb which sounds like the inside of a tin can.">ReverbTank</a>(</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      int8_t early_reflection1 = 37,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      int8_t early_reflection2 = 77,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      int8_t early_reflection3 = 127,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      int8_t loop1_delay=117,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      uint8_t loop2_delay=255,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      int8_t feedback_level = 85):</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            _early_reflection1(early_reflection1),_early_reflection2(early_reflection3),_early_reflection3(early_reflection3),</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            _feedback_level(feedback_level)</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        aLoopDel1.set(loop1_delay);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        aLoopDel2.set(loop2_delay);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="code" href="class_reverb_tank.html#a4930ae7a871dba610fb141d7ab83d827">   65</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_reverb_tank.html#a4930ae7a871dba610fb141d7ab83d827" title="Process the next audio sample and return the reverbed signal.">next</a>(<span class="keywordtype">int</span> input){</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">int</span> recycle1, recycle2;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="comment">// early reflections</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordtype">int</span> asig = aLoopDel0.next(input, _early_reflection1);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        asig += aLoopDel0.read(_early_reflection2);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        asig += aLoopDel0.read(_early_reflection3);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        asig &gt;&gt;= 2;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="comment">// recirculating delays</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        int8_t feedback_sig1 = (int8_t) min(max(((recycle1 * _feedback_level)&gt;&gt;7),-128),127); <span class="comment">// feedback clipped</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        int8_t feedback_sig2 = (int8_t) min(max(((recycle2 * _feedback_level)&gt;&gt;7),-128),127); <span class="comment">// feedback clipped</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordtype">int</span> sig3 = aLoopDel1.next(asig+feedback_sig1);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordtype">int</span> sig4 = aLoopDel2.next(asig+feedback_sig2);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        recycle1 = sig3 + sig4;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        recycle2 = sig3 - sig4;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordflow">return</span> recycle1;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    }</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="comment">// recirculating delays</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordtype">char</span> feedback_sig1 = (char) min(max(((recycle1 * _feedback_level)&gt;&gt;7),-128),127); <span class="comment">// feedback clipped</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keywordtype">char</span> feedback_sig2 = (char) min(max(((recycle2 * _feedback_level)&gt;&gt;7),-128),127); <span class="comment">// feedback clipped</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordtype">int</span> sig3 = aLoopDel1.next(asig+feedback_sig1);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keywordtype">int</span> sig4 = aLoopDel2.next(asig+feedback_sig2);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        recycle1 = sig3 + sig4;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        recycle2 = sig3 - sig4;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">return</span> recycle1;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="code" href="class_reverb_tank.html#a6d27d8a02ec9551a5338bb1ba4bf9af2">   91</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_reverb_tank.html#a6d27d8a02ec9551a5338bb1ba4bf9af2" title="Set the early reflection times in terms of delay cells.">setEarlyReflections</a>(int8_t early_reflection1, int8_t early_reflection2, int8_t early_reflection3){</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        _early_reflection1=early_reflection1;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        _early_reflection2=early_reflection2;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        _early_reflection3=early_reflection3;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    }</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
-<div class="line"><a name="l00102"></a><span class="lineno"><a class="code" href="class_reverb_tank.html#aeaa523c4fae743ef7ded87d4902af3d7">  102</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_reverb_tank.html#aeaa523c4fae743ef7ded87d4902af3d7" title="Set the early reflection times in terms of delay cells.">setEarlyReflections</a>(<span class="keywordtype">char</span> early_reflection1, <span class="keywordtype">char</span> early_reflection2, <span class="keywordtype">char</span> early_reflection3){</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        _early_reflection1=early_reflection1;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        _early_reflection2=early_reflection2;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        _early_reflection3=early_reflection3;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    }</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
-<div class="line"><a name="l00113"></a><span class="lineno"><a class="code" href="class_reverb_tank.html#a6c19a84c7bc1f068871551891011a89c">  113</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_reverb_tank.html#a6c19a84c7bc1f068871551891011a89c" title="Set the loop delay times in terms of delay cells.">setLoopDelays</a>(<span class="keywordtype">char</span> loop1_delay, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> loop2_delay){</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        aLoopDel1.set(loop1_delay);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        aLoopDel2.set(loop2_delay);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    }</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
-<div class="line"><a name="l00121"></a><span class="lineno"><a class="code" href="class_reverb_tank.html#a25ce51abfcaccb316007edc77446520b">  121</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_reverb_tank.html#a25ce51abfcaccb316007edc77446520b" title="Set the feedback level for the recirculating delays.">setFeebackLevel</a>(<span class="keywordtype">char</span> feedback_level){</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        _feedback_level=feedback_level;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    }</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="code" href="class_reverb_tank.html#a0b348b630007a5cbda8b314d0c8dd604">  102</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_reverb_tank.html#a0b348b630007a5cbda8b314d0c8dd604" title="Set the loop delay times in terms of delay cells.">setLoopDelays</a>(int8_t loop1_delay, uint8_t loop2_delay){</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        aLoopDel1.set(loop1_delay);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        aLoopDel2.set(loop2_delay);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00110"></a><span class="lineno"><a class="code" href="class_reverb_tank.html#a91eeb601e42df576737f0d44dc73c653">  110</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_reverb_tank.html#a91eeb601e42df576737f0d44dc73c653" title="Set the feedback level for the recirculating delays.">setFeebackLevel</a>(int8_t feedback_level){</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        _feedback_level=feedback_level;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    }</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    int8_t _early_reflection1;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    int8_t _early_reflection2;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    int8_t _early_reflection3;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    int8_t _feedback_level;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <a class="code" href="class_audio_delay.html">AudioDelay &lt;128&gt;</a> aLoopDel0; <span class="comment">// 128/16384 seconds * 340.29 m/s speed of sound = 3.5 metres</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <a class="code" href="class_audio_delay.html">AudioDelay &lt;128,int&gt;</a> aLoopDel1;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <a class="code" href="class_audio_delay.html">AudioDelay &lt;256,int&gt;</a> aLoopDel2; <span class="comment">// 7 metres</span></div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordtype">char</span> _early_reflection1;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordtype">char</span> _early_reflection2;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordtype">char</span> _early_reflection3;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordtype">char</span> _feedback_level;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <a class="code" href="class_audio_delay.html">AudioDelay &lt;128&gt;</a> aLoopDel0; <span class="comment">// 128/16384 seconds * 340.29 m/s speed of sound = 3.5 metres</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <a class="code" href="class_audio_delay.html">AudioDelay &lt;128,int&gt;</a> aLoopDel1;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <a class="code" href="class_audio_delay.html">AudioDelay &lt;256,int&gt;</a> aLoopDel2; <span class="comment">// 7 metres</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;};</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="preprocessor">#endif        //  #ifndef REVERBTANK_H</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;};</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="preprocessor">#endif        //  #ifndef REVERBTANK_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>ReverbTank.h</b></li>
-    <li class="footer">Generated on Sun Apr 20 2014 15:06:22 for Mozzi by
+    <li class="footer">Generated on Sat Aug 9 2014 14:12:58 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

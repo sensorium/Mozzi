@@ -18,7 +18,7 @@ def generate(outfile, tablename, tablelength, samplerate):
     fout.write('#include <avr/pgmspace.h>'+'\n \n')
     fout.write('#define ' + tablename + '_NUM_CELLS '+ str(tablelength)+'\n')
     fout.write('#define ' + tablename + '_SAMPLERATE '+ str(samplerate)+'\n \n')
-    outstring = 'const char __attribute__((section(".progmem.data"))) ' + tablename + '_DATA [] = {'
+    outstring = 'const int8_t __attribute__((section(".progmem.data"))) ' + tablename + '_DATA [] = {'
     halftable = tablelength/2
     try:
         for num in range(tablelength):
@@ -28,7 +28,7 @@ def generate(outfile, tablename, tablelength, samplerate):
             
             t_x = (math.cos(2*math.pi*x-math.pi)+1)/2
 
-            scaled = int(math.floor(t_x*255.999))
+            scaled = int16_t(math.floor(t_x*255.999))
 
             outstring += str(scaled) + ', '
        ## for num in range(halftable):

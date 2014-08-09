@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2014-04-20-15:06</span>
+   &#160;<span id="projectnumber">version 2014-08-09-14:12</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -80,7 +80,7 @@ $(document).ready(function(){initNavTree('class_rolling_average.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -124,7 +124,7 @@ T&#160;</td><td class="memItemRight" valign="bottom"><b>add</b> (T input)</td></
 class RollingAverage&lt; T, WINDOW_LENGTH &gt;</h3>
 
 <p>Calculates a running average over a specified number of the most recent readings. </p>
-<p>Like Smooth(), this is good for smoothing analog inputs in updateControl(). </p>
+<p>Like Smooth(), this is good for smoothing analog inputs in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">WINDOW_LENGTH</td><td>the number of readings to include in the rolling average. It must be a power of two (unless you're averaging floats). The higher the number, the more the readings will be smoothed, but the slower the output will respond to the input. </td></tr>
@@ -133,7 +133,7 @@ class RollingAverage&lt; T, WINDOW_LENGTH &gt;</h3>
 </dl>
 <dl><dt><b>Examples: </b></dt><dd><a class="el" href="02_8_control_2_control__echo__theremin_2_control__echo__theremin_8ino-example.html#_a2">02.Control/Control_Echo_Theremin/Control_Echo_Theremin.ino</a>, <a class="el" href="03_8_sensors_2_knob__l_d_r_x2__wave_packet_2_knob__l_d_r_x2__wave_packet_8ino-example.html#_a0">03.Sensors/Knob_LDR_x2_WavePacket/Knob_LDR_x2_WavePacket.ino</a>, and <a class="el" href="06_8_synthesis_2_wave_packet__sample_2_wave_packet__sample_8ino-example.html#_a0">06.Synthesis/WavePacket_Sample/WavePacket_Sample.ino</a>.</dd>
 </dl>
-<p>Definition at line <a class="el" href="_rolling_average_8h_source.html#l00048">48</a> of file <a class="el" href="_rolling_average_8h_source.html">RollingAverage.h</a>.</p>
+<p>Definition at line <a class="el" href="_rolling_average_8h_source.html#l00037">37</a> of file <a class="el" href="_rolling_average_8h_source.html">RollingAverage.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a11cf7b9e1278648b1eb10e5534fe3e29"></a>
 <div class="memitem">
@@ -168,7 +168,7 @@ template&lt;class T, int WINDOW_LENGTH&gt; </div>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>Watch out for overflows! </dd></dl>
 
-<p>Definition at line <a class="el" href="_rolling_average_8h_source.html#l00062">62</a> of file <a class="el" href="_rolling_average_8h_source.html">RollingAverage.h</a>.</p>
+<p>Definition at line <a class="el" href="_rolling_average_8h_source.html#l00051">51</a> of file <a class="el" href="_rolling_average_8h_source.html">RollingAverage.h</a>.</p>
 
 </div>
 </div>
@@ -207,7 +207,7 @@ template&lt;class T, int WINDOW_LENGTH&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>the smoothed result. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>unsigned int timing 5.7us </dd></dl>
 
-<p>Definition at line <a class="el" href="_rolling_average_8h_source.html#l00075">75</a> of file <a class="el" href="_rolling_average_8h_source.html">RollingAverage.h</a>.</p>
+<p>Definition at line <a class="el" href="_rolling_average_8h_source.html#l00064">64</a> of file <a class="el" href="_rolling_average_8h_source.html">RollingAverage.h</a>.</p>
 
 </div>
 </div>
@@ -217,7 +217,7 @@ template&lt;class T, int WINDOW_LENGTH&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_rolling_average.html">RollingAverage</a></li>
-    <li class="footer">Generated on Sun Apr 20 2014 15:06:22 for Mozzi by
+    <li class="footer">Generated on Sat Aug 9 2014 14:12:59 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

@@ -6,20 +6,20 @@
  in individual bytes, each of which ranges from 0 to 255.  Arduino
  reads these bytes and uses them to set the frequency of the oscillator.
  
- Circuit: Audio output on digital pin 9. (STANDARD mode in mozzi_config.h)
+ Circuit: Audio output on digital pin 9. (STANDARD_PLUS mode in mozzi_config.h)
  Serial connection to Processing, Max/MSP, or another serial application
  
  Dimmer example created 2006
  by David A. Mellis
  modified 30 Aug 2011
  by Tom Igoe and Scott Fitzgerald
- Adapted for Mozzi by Tim Barrass 2013.
- 
  This example code is in the public domain.
  
  http://www.arduino.cc/en/Tutorial/Dimmer
  
 */
+
+
 
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator
@@ -28,6 +28,7 @@
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
 void setup(){
+  //Serial.begin(9600); // for Teensy 3.0/3.1, beware printout can cause glitches
   Serial.begin(115200);
   startMozzi(); // uses default control rate of 64
 }
@@ -54,7 +55,7 @@ void loop(){
 /* Processing code for this example
  // Dimmer - sends bytes over a serial port
  // by David A. Mellis
- //This example code is in the public domain.
+ // This code is in the Public Domain.
  
  import processing.serial.*;
  Serial port;
@@ -67,14 +68,14 @@ void loop(){
  
  // Uses the first port in this list (number 0).  Change this to
  // select the port corresponding to your Arduino board.  The last
- // parameter (e.g. 115200) is the speed of the communication.  It
+ // parameter (e.g. 9600) is the speed of the communication.  It
  // has to correspond to the value passed to Serial.begin() in your
  // Arduino sketch.
- port = new Serial(this, Serial.list()[0], 115200);  
+ port = new Serial(this, Serial.list()[0], 9600);  
  
  // If you know the name of the port used by the Arduino board, you
  // can specify it directly like this.
- //port = new Serial(this, "COM1", 115200);
+ //port = new Serial(this, "COM1", 9600);
  }
  
  void draw() {

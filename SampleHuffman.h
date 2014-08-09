@@ -1,4 +1,13 @@
-
+/*
+ * SampleHuffman.h
+ *
+ * Copyright 2013 Tim Barrass.
+ *
+ * This file is part of Mozzi.
+ *
+ * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ *
+ */
 #ifndef SAMPLEHUFFMAN_H
 #define SAMPLEHUFFMAN_H
 
@@ -47,7 +56,7 @@ public:
 	@param HUFFMAN_DATA the name of the HUFFMAN table in the huffman sample .h file
 	@param	SOUNDDATA_BITS from the huffman sample .h file
 	*/
-	SampleHuffman(unsigned char const * SOUNDDATA, int const * HUFFMAN_DATA, unsigned long const SOUNDDATA_BITS):sounddata(SOUNDDATA),huffman(HUFFMAN_DATA),sounddata_bits(SOUNDDATA_BITS)
+	SampleHuffman(uint8_t const * SOUNDDATA, int16_t const * HUFFMAN_DATA, uint32_t const SOUNDDATA_BITS):sounddata(SOUNDDATA),huffman(HUFFMAN_DATA),sounddata_bits(SOUNDDATA_BITS)
 	{
 		setLoopingOff();
 	}
@@ -58,7 +67,7 @@ public:
 	@note timing: about 5 to 40 us, varies continuously depending on data
 	*/
 	inline
-	int next()
+	int16_t next()
 	{
 		if(datapos >= sounddata_bits){
 			if(looping){
@@ -69,7 +78,7 @@ public:
 			}
 		}
 		
-		int dif = decode();
+		int16_t dif = decode();
 		current += dif; // add differential
 		return current;
 	}
@@ -102,37 +111,39 @@ public:
 		{
 			current = 0;
 			datapos = 0;
+			bt = 0;
 		}
 	}
 	
 private:
-	unsigned char const * sounddata;
-	int const * huffman;
-	unsigned long const sounddata_bits;
-	unsigned long datapos; // current sample position
-	int current; // current amplitude value
+	uint8_t const * sounddata;
+	int16_t const * huffman;
+	uint32_t const sounddata_bits;
+	uint32_t datapos; // current sample position
+	int16_t current; // current amplitude value
 	bool looping;
+	uint8_t bt;
 	
 	// Get one bit from sound data
 	inline 
 	bool getbit()
 	{
-		const unsigned char b = datapos&7;
-		static unsigned char bt;
-		if(!b) bt = pgm_read_byte(sounddata+(datapos>>3));
+		const uint8_t b = datapos&7;
+		//static uint8_t bt;
+		if(!b) bt = pgm_read_byte(sounddata+((uint32_t)datapos>>3));
 		// extract the indexed bit
-		return (bt>>(7-b))&1;
+		return ((uint8_t)bt>>(7-b))&1;
 	}
 
 
 	// Decode bit stream using Huffman codes
 	inline
-	int decode()
+	int16_t decode()
 	{
-		int const * huffcode = huffman;
+		int16_t const * huffcode = huffman;
 		do {
 			if(getbit()) {
-				const int offs = pgm_read_word(huffcode);
+				const int16_t offs = pgm_read_word(huffcode);
 				huffcode += offs?offs+1:2;
 			}
 			datapos++;

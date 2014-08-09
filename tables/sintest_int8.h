@@ -9,14 +9,14 @@
 #endif
 #include <avr/pgmspace.h>
 
-template <int N>
+template <int16_t N>
 struct TableStruct {
-    static const int length = N;
-    const char __attribute__((section(".progmem.data")))  values[N];
+    static const int16_t length = N;
+    const int8_t __attribute__((section(".progmem.data")))  values[N];
 };
 
-template <int N>
-const int getLength(const TestStruct<N> &ts) { 
+template <int16_t N>
+const int16_t getLength(const TestStruct<N> &ts) { 
     return ts.length;
 }
 
@@ -87,7 +87,7 @@ TableStruct<1024> Sintest = {{-128, -128, -128, -128,
  */
 /*
 template <class T>
-const int getLength(const T &ts) { 
+const int16_t getLength(const T &ts) { 
     return ts.length;
 }
 */

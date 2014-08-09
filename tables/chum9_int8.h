@@ -14,7 +14,7 @@
 #define CHUM9_NUM_CELLS 8192
 #define CHUM9_SAMPLERATE 16384
 
-const char __attribute__((section(".progmem.data"))) CHUM9_DATA []  =
+const int8_t __attribute__((section(".progmem.data"))) CHUM9_DATA []  =
         {
                 29, 42, 43, 38, 44, 37, 44, 35, 42, 51, -108,
                 -82, -34, -72, -50, -65, -57, -61, -53, -59, -60, -53, -56, -58, -55, -55, -57,

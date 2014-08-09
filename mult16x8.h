@@ -45,7 +45,7 @@ asm volatile ( \
 "r22"\
 )
 
-// multiplies 16 bit number X 8 bit and stores 2 high bytes
+// multiplies 16 bit number X 8 bit and stores 2 high uint8_ts
 #define MultiSU16X8toH16(intRes, int16In, int8In) \
 asm volatile ( \
 "clr r26 \n\t"\
@@ -64,8 +64,8 @@ asm volatile ( \
 "r26"\
 )
 
-// multiplies 16 bit signed number X 8 bit and stores 2 high bytes
-// rounds the number based on the MSB of the lowest byte
+// multiplies 16 bit signed number X 8 bit and stores 2 high uint8_ts
+// rounds the number based on the MSB of the lowest uint8_t
 #define MultiSU16X8toH16Round(intRes, int16In, int8In) \
 asm volatile ( \
 "clr r26 \n\t"\

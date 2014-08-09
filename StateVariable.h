@@ -5,18 +5,7 @@
  *
  * This file is part of Mozzi.
  *
- * Mozzi is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Mozzi is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Mozzi.  If not, see <http://www.gnu.org/licenses/>.
+ * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
  *
  */
 
@@ -72,7 +61,7 @@ constrain the internal variables to enable resonant saturating effects.
 @todo Try adding code to constrain the internal variables to enable resonant
 saturating effects.
 */
-template <char FILTER_TYPE>
+template <int8_t FILTER_TYPE>
 class StateVariable
 {
 
@@ -88,7 +77,7 @@ public:
 
 
 	/** Set how resonant the filter will be.
-	@param resonance a byte value between 1 and 255.  
+	@param resonance a uint8_t value between 1 and 255.  
 	The lower this value is, the more resonant the filter.
 	At very low values, the filter can output loud peaks which can exceed
 	Mozzi's output range, so you may need to attenuate the output in your sketch.
@@ -117,7 +106,7 @@ public:
 		// simple frequency tuning with error towards nyquist (reference?  where did this come from?)
 			//f = (Q1n15)(((Q16n16_2PI*centre_freq)>>AUDIO_RATE_AS_LSHIFT)>>1);
 			f = (Q15n16)((Q16n16_2PI*centre_freq)>>(AUDIO_RATE_AS_LSHIFT)); // this works best for now
-			//f = (Q15n16)(((Q16n16_2PI*centre_freq)<<(16-AUDIO_RATE_AS_LSHIFT))>>16); // a small shift left and a round 16 right is faster than big non-byte-aligned right in one go
+			//f = (Q15n16)(((Q16n16_2PI*centre_freq)<<(16-AUDIO_RATE_AS_LSHIFT))>>16); // a small shift left and a round 16 right is faster than big non-uint8_t-aligned right in one go
 			//float ff = Q16n16_to_float(((Q16n16_PI*centre_freq))>>AUDIO_RATE_AS_LSHIFT);
 			//f = float_to_Q15n16(2.0f *sin(ff));
 		//}

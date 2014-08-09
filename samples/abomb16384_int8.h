@@ -11,7 +11,7 @@
 #define ABOMB_NUM_CELLS 16384
 #define ABOMB_SAMPLERATE 16384
  
-const char __attribute__((section(".progmem.data"))) ABOMB_DATA [] = {-11, -14, -16, -14, -9, -7,
+const int8_t __attribute__((section(".progmem.data"))) ABOMB_DATA [] = {-11, -14, -16, -14, -9, -7,
 -5, -1, 8, 13, 12, 10, 12, 16, 16, 16, 15, 15, 17, 14, 7, 3, 6, 4, 1, -1, -5,
 -4, -7, -10, -9, -12, -15, -17, -17, -15, -13, -13, -13, -13, -10, -4, -1, 1, 5,
 11, 13, 14, 15, 15, 15, 14, 15, 16, 15, 16, 13, 7, 10, 8, 0, -1, -1, -2, -3, -8,

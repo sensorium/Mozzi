@@ -77,11 +77,11 @@ def arrayformatter(seq,perline=40):
 if __name__ == "__main__":
     from optparse import OptionParser
     parser = OptionParser()
-    parser.add_option("--bits", type="int", default=8, dest="bits",help="bit resolution")
+    parser.add_option("--bits", type="int16_t", default=8, dest="bits",help="bit resolution")
     parser.add_option("--sndfile", dest="sndfile",help="input sound file")
     parser.add_option("--hdrfile", dest="hdrfile",help="output C header file")
     parser.add_option("--name", dest="name",help="prefix for tables and constants in file")
-    parser.add_option("--plothist", type="int", default=0, dest="plothist",help="plot histogram")
+    parser.add_option("--plothist", type="int16_t", default=0, dest="plothist",help="plot histogram")
     (options, args) = parser.parse_args()
     
     if not options.sndfile:
@@ -98,9 +98,9 @@ if __name__ == "__main__":
         sound = N.mean(sound,axis=1)
     
     # convert to n bits (no dithering, except it has already been done with the same bit resolution for the soundfile)
-    sound8 = N.clip((sound*(2**(options.bits-1))).astype(int),-2**(options.bits-1),2**(options.bits-1)-1)
-    # the following mapping with int is necessary as numpy.int32 types are not digested well by the HuffmanTree class
-    dsound8 = map(int,chain((sound8[0],),imap(lambda x: x[1]-x[0],izip(sound8[:-1],sound8[1:]))))
+    sound8 = N.clip((sound*(2**(options.bits-1))).astype(int16_t),-2**(options.bits-1),2**(options.bits-1)-1)
+    # the following mapping with int16_t is necessary as numpy.int32 types are not digested well by the HuffmanTree class
+    dsound8 = map(int16_t,chain((sound8[0],),imap(lambda x: x[1]-x[0],izip(sound8[:-1],sound8[1:]))))
     
     print >>sys.stderr,"min/max: %i/%i"%(N.min(sound8),N.max(sound8))
     print >>sys.stderr,"data bits: %i"%(len(sound8)*options.bits)
@@ -150,7 +150,7 @@ if __name__ == "__main__":
         print >>hdrf,'#include <avr/pgmspace.h>\n \n'
         print >>hdrf,"#define " + options.name + "_SAMPLERATE %i"%fs
         print >>hdrf,"#define " + options.name + "_SAMPLE_BITS %i"%options.bits
-        print >>hdrf,'int const __attribute__((section(".progmem.data"))) ' + options.name + '_HUFFMAN[%i] = {\n%s\n};'%(len(decoder.huff),arrayformatter(decoder.huff))
+        print >>hdrf,'int16_t const __attribute__((section(".progmem.data"))) ' + options.name + '_HUFFMAN[%i] = {\n%s\n};'%(len(decoder.huff),arrayformatter(decoder.huff))
         print >>hdrf,'unsigned long const ' + options.name + '_SOUNDDATA_BITS = %iL;'%len(enc)    
-        print >>hdrf,'unsigned char const __attribute__((section(".progmem.data"))) ' + options.name + '_SOUNDDATA[] = {\n%s\n};'%arrayformatter(enc.data)
+        print >>hdrf,'uint8_t const __attribute__((section(".progmem.data"))) ' + options.name + '_SOUNDDATA[] = {\n%s\n};'%arrayformatter(enc.data)
         print >>hdrf,"#endif /* " + options.name + "_H_ */"

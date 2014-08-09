@@ -5,38 +5,34 @@
  *
  * This file is part of Mozzi.
  *
- * Mozzi is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Mozzi is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Mozzi.  If not, see <http://www.gnu.org/licenses/>.
+ * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
  *
  */
 
 #ifndef MOZZI_ANALOG_H_
 #define MOZZI_ANALOG_H_
 
-
-
-#if ARDUINO >= 100
+ #if ARDUINO >= 100
  #include "Arduino.h"
 #else
  #include "WProgram.h"
 #endif
 
-//#include "mozzi_utils.h"
+// required from http://github.com/pedvide/ADC for Teensy 3.0/3.1
+#if defined(__MK20DX128__) || defined(__MK20DX256__)
+#include "../ADC/ADC.h" 
+#endif
 
+// these are declared in Mozziguts.cpp, and used in mozzi_analog.cpp... crazy but it compiles
+#if defined(__MK20DX128__) || defined(__MK20DX256__) // teensy 3, 3.1
+	extern ADC *adc; // adc object
+	extern uint8_t teensy_pin;
+#endif
 
 #if (USE_AUDIO_INPUT==true)
 #warning "Using AUDIO_INPUT_PIN defined in mozzi_config.h for audio input."
 #endif
+
 
 
 void adcReadSelectedChannels();
@@ -60,6 +56,26 @@ static const uint8_t PROGMEM adc_mapping[] = {
 #define analogPinToChannel(P)  ( pgm_read_byte( adc_mapping + (P) ) )
 #endif
 
+
+// include this although already in teensy 3 analog.c, because it is static there
+#if defined(__MK20DX128__)
+static const uint8_t channel2sc1a[] = {
+	5, 14, 8, 9, 13, 12, 6, 7, 15, 4,
+	0, 19, 3, 21, 26, 22, 23
+};
+#elif defined(__MK20DX256__)
+static const uint8_t channel2sc1a[] = {
+	5, 14, 8, 9, 13, 12, 6, 7, 15, 4,
+	0, 19, 3, 19+128, 26, 18+128, 23,
+	5+192, 5+128, 4+128, 6+128, 7+128, 4+192
+// A15  26   E1   ADC1_SE5a  5+64
+// A16  27   C9   ADC1_SE5b  5
+// A17  28   C8   ADC1_SE4b  4
+// A18  29   C10  ADC1_SE6b  6
+// A19  30   C11  ADC1_SE7b  7
+// A20  31   E0   ADC1_SE4a  4+64
+};
+#endif
 
 
 // for setupFastAnalogRead()
@@ -85,7 +101,7 @@ times of about 8us or 4us per sample. Beware, reliable results will depend on
 the sort of input signal you have. Only use FASTER_ADC or FASTEST_ADC if you
 know what you're doing.
 */
-void setupFastAnalogRead(char speed=FAST_ADC);
+void setupFastAnalogRead(int8_t speed=FAST_ADC);
 
 
 
@@ -94,7 +110,7 @@ Set up for asynchronous analog input, which enables analog reads to take
 place in the background without blocking the processor.
 @param speed FAST_ADC, FASTER_ADC or FASTEST_ADC.  See setupFastAnalogRead();
 */
-void setupMozziADC(char speed=FAST_ADC);
+void setupMozziADC(int8_t speed=FAST_ADC);
 
 
 
@@ -121,7 +137,7 @@ and ADC6 do not have digital input buffers, and therefore do not require
 Digital Input Disable bits.
 @param channel_num the analog input channel you wish to use.
 */
-void disconnectDigitalIn(byte channel_num);
+void disconnectDigitalIn(uint8_t channel_num);
 
 
 /** @ingroup analog
@@ -129,7 +145,7 @@ Reconnect the digital input buffer for an analog input channel which has
 been set for analog input with disconnectDigitalIn().
 @param channel_num the analog input channel you wish to reconnect.
 */
-void reconnectDigitalIn(byte channel_num);
+void reconnectDigitalIn(uint8_t channel_num);
 
 
 /**  @ingroup analog
@@ -156,7 +172,7 @@ the cpu for other things and call for the result later with adcGetResult().
 Use adcPinToChannelNum() to convert the pin number to its channel number.
 @note Timing: about 1us when used in updateControl() with CONTROL_RATE 64.
 */
-void adcStartConversion(unsigned char channel);
+void adcStartConversion(uint8_t channel);
 
 
 
@@ -168,7 +184,7 @@ interrupt.
 @param pin_or_channel the analog pin or channel number.
 @return the digitised value of the voltage on the chosen channel, in the range 0-1023.
 */
-int mozziAnalogRead(unsigned char pin);
+int mozziAnalogRead(uint8_t pin);
 
 
 /* Used in MozziGuts.cpp, in updateControlWithAutoADC() to kick off any mozziAnalogReads waiting on the stack
@@ -176,6 +192,6 @@ int mozziAnalogRead(unsigned char pin);
 void adcStartReadCycle();
 
 
-unsigned char adcPinToChannelNum(unsigned char pin);
+uint8_t adcPinToChannelNum(uint8_t pin);
 
 #endif /* MOZZI_ANALOG_H_ */

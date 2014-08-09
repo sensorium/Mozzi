@@ -11,7 +11,7 @@
 #define BURROUGHS1_18649_NUM_CELLS 18649
 #define BURROUGHS1_18649_SAMPLERATE 16384
  
-const char __attribute__((section(".progmem.data"))) BURROUGHS1_18649_DATA [] = {8, 16, 9, 9, 7,
+const int8_t __attribute__((section(".progmem.data"))) BURROUGHS1_18649_DATA [] = {8, 16, 9, 9, 7,
 6, 9, 12, 18, 20, 24, 25, 23, 22, 20, 20, 18, 18, 19, 19, 21, 22, 26, 24, 19,
 14, 10, 12, 13, 16, 17, 20, 18, 15, 14, 12, 12, 8, 7, 4, 7, 8, 8, 8, 7, 6, -14,
 -32, -40, -28, -21, -23, -27, -25, -19, -28, -40, -48, -38, -32, -34, -36, -25,

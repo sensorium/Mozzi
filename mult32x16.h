@@ -11,8 +11,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 // multiplies a signed long X unsigned int
-// stores the high 4 bytes of the result
-// rounds the number up if the MSB of the 2 low bytes is set
+// stores the high 4 uint8_ts of the result
+// rounds the number up if the MSB of the 2 low uint8_ts is set
 // 47 cycles
 #define MultiSU32X16toH32Round(longRes, longIn1, intIn2) \
 asm volatile ( \

@@ -5,16 +5,17 @@
     with EventDelay(), and fast random numbers with 
     xorshift96() and rand(), a more friendly wrapper for xorshift96().
   
-    Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+    Circuit: Audio output on digital pin 9 on a Uno or similar, or
+    DAC/A14 on Teensy 3.0/3.1, or 
     check the README or http://sensorium.github.com/Mozzi/
   
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
-    Tim Barrass 2012.
-    This example code is in the public domain.
+    Tim Barrass 2012, CC by-nc-sa.
 */
 
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Sample.h> // Sample template
 #include <samples/bamboo/bamboo_00_2048_int8.h> // wavetable data
@@ -42,7 +43,7 @@ void setup(){
 }
 
 
-unsigned char randomGain(){
+byte randomGain(){
   //return lowByte(xorshift96())<<1;
   return rand(200) + 55;
 }
@@ -50,9 +51,9 @@ unsigned char randomGain(){
 // referencing members from a struct is meant to be a bit faster than seperately
 // ....haven't actually tested it here...
 struct gainstruct{
-  unsigned char gain0;
-  unsigned char gain1;
-  unsigned char gain2;
+  byte gain0;
+  byte gain1;
+  byte gain2;
 }
 gains;
 

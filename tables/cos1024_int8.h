@@ -11,7 +11,7 @@
 #define COS1024_NUM_CELLS 1024
 #define COS1024_SAMPLERATE 1024
 
-const char __attribute__((section(".progmem.data"))) COS1024_DATA []  =
+const int8_t __attribute__((section(".progmem.data"))) COS1024_DATA []  =
         {
                 -128, -128, -128, -128, -128, -128, -128,
                 -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128,

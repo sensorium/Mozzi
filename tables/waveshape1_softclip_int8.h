@@ -14,7 +14,7 @@
 #define WAVESHAPE1_SOFTCLIP_NUM_CELLS 256
 #define WAVESHAPE1_SOFTCLIP_SAMPLERATE 256
 
-const char __attribute__((section(".progmem.data"))) WAVESHAPE1_SOFTCLIP_DATA []  =
+const int8_t __attribute__((section(".progmem.data"))) WAVESHAPE1_SOFTCLIP_DATA []  =
         {
                 -128, -128, -128, -128, -128,
                 -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128,

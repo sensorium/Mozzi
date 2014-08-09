@@ -7,18 +7,7 @@
  *
  * This file is part of Mozzi.
  *
- * Mozzi is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Mozzi is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Mozzi.  If not, see <http://www.gnu.org/licenses/>.
+ * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
  *
  */
 
@@ -43,8 +32,7 @@
 #define OSCIL_F_BITS 16
 #define OSCIL_F_BITS_AS_MULTIPLIER 65536
 
-// phmod_proportion is an 1n15 fixed-point number only using
-// the fractional part and the sign bit
+// phmod_proportion is an 15n16 fixed-point number
 #define OSCIL_PHMOD_BITS 16
 
 
@@ -66,14 +54,14 @@ sizes.
 @note If you #define OSCIL_DITHER_PHASE before you #include <Oscil.h>,
 the phase increments will be dithered, which reduces spurious frequency spurs
 in the audio output, at the cost of some extra processing and memory.
-@section char2mozzi
+@section int8_t2mozzi
 Converting soundfiles for Mozzi
-There is a python script called char2mozzi.py in the Mozzi/python folder.
+There is a python script called int8_t2mozzi.py in the Mozzi/python folder.
 The usage is:
-char2mozzi.py infilename outfilename tablename samplerate
+int8_t2mozzi.py infilename outfilename tablename samplerate
 */
 //template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, bool DITHER_PHASE=false>
-template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE>
+template <uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE>
 class Oscil
 {
 
@@ -82,9 +70,9 @@ public:
 	/** Constructor.
 	@param TABLE_NAME the name of the array the Oscil will be using. This
 	can be found in the table ".h" file if you are using a table made for
-	Mozzi by the char2mozzi.py python script in Mozzi's python
+	Mozzi by the int8_t2mozzi.py python script in Mozzi's python
 	folder.*/
-	Oscil(const char * TABLE_NAME):table(TABLE_NAME)
+	Oscil(const int8_t * TABLE_NAME):table(TABLE_NAME)
 	{}
 
 
@@ -102,7 +90,7 @@ public:
 	@return the next sample.
 	*/
 	inline
-	char next()
+	int8_t next()
 	{
 		incrementPhase();
 		return readTable();
@@ -112,7 +100,7 @@ public:
 	/** Change the sound table which will be played by the Oscil.
 	@param TABLE_NAME is the name of the array in the table ".h" file you're using.
 	*/
-	void setTable(const char * TABLE_NAME)
+	void setTable(const int8_t * TABLE_NAME)
 	{
 		table = TABLE_NAME;
 	}
@@ -165,19 +153,18 @@ public:
 	/** Returns the next sample given a phase modulation value.
 	@param phmod_proportion a phase modulation value given as a proportion of the wave. The
 	phmod_proportion parameter is a Q15n16 fixed-point number where the fractional
-	n16 part represents -1 to 1, modulating the phase by one whole table length in
-	each direction.
+	n16 part represents almost -1 to almost 1, modulating the phase by one whole table length in
+	each direction.  
 	@return a sample from the table.
-	@todo does the phmod_proportion param need to be Q15n16, why not Q0n15 and cast to long for multiply?
 	*/
 	// PM: cos((angle += incr) + change)
 	// FM: cos(angle += (incr + change))
 	// The ratio of deviation to modulation frequency is called the "index of modulation". ( I = d / Fm )
 	inline
-	char phMod(Q15n16 phmod_proportion)
+	int8_t phMod(Q15n16 phmod_proportion)
 	{
 		incrementPhase();
-		return (char)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))>>OSCIL_F_BITS) & (NUM_TABLE_CELLS - 1)));
+		return (int8_t)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))>>OSCIL_F_BITS) & (NUM_TABLE_CELLS - 1)));
 	}
 
 
@@ -244,14 +231,14 @@ public:
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
 			//phase_increment_fractional = ((frequency * (NUM_TABLE_CELLS>>7))/(UPDATE_RATE>>6)) << (F_BITS-16+1);
-			phase_increment_fractional = (((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)>>7)*frequency)/(UPDATE_RATE>>6))
+			phase_increment_fractional = (((((uint32_t)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)>>7)*frequency)/(UPDATE_RATE>>6))
 			                             << (OSCIL_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS - 16 + 1);
 
 		}
 	}
 /*
 	inline
-	void setFreqMidi(char note_num) {
+	void setFreqMidi(int8_t note_num) {
 		setFreq_Q16n16(mtof(note_num));
 	}
 */
@@ -261,9 +248,9 @@ public:
 	@return the sample at the given table index.
 	*/
 	inline
-	char atIndex(unsigned int index)
+	int8_t atIndex(unsigned int index)
 	{
-		return (char)pgm_read_byte_near(table + (index & (NUM_TABLE_CELLS - 1)));
+		return (int8_t)pgm_read_byte_near(table + (index & (NUM_TABLE_CELLS - 1)));
 	}
 
 
@@ -304,7 +291,7 @@ private:
 
 	/** Used for shift arithmetic in setFreq() and its variations.
 	*/
-static const unsigned char ADJUST_FOR_NUM_TABLE_CELLS = (NUM_TABLE_CELLS<2048) ? 8 : 0;
+static const uint8_t ADJUST_FOR_NUM_TABLE_CELLS = (NUM_TABLE_CELLS<2048) ? 8 : 0;
 
 
 	/** Increments the phase of the oscillator without returning a sample.
@@ -320,13 +307,13 @@ static const unsigned char ADJUST_FOR_NUM_TABLE_CELLS = (NUM_TABLE_CELLS<2048) ?
 	/** Returns the current sample.
 	 */
 	inline
-	char readTable()
+	int8_t readTable()
 	{
 #ifdef OSCIL_DITHER_PHASE
-		return (char)pgm_read_byte_near(table + (((phase_fractional + ((int)(xorshift96()>>16))) >> OSCIL_F_BITS) & (NUM_TABLE_CELLS - 1)));
+		return (int8_t)pgm_read_byte_near(table + (((phase_fractional + ((int)(xorshift96()>>16))) >> OSCIL_F_BITS) & (NUM_TABLE_CELLS - 1)));
 #else
-		return (char)pgm_read_byte_near(table + ((phase_fractional >> OSCIL_F_BITS) & (NUM_TABLE_CELLS - 1)));
-		//return (char)pgm_read_byte_near(table + (((phase_fractional >> OSCIL_F_BITS) | 1 ) & (NUM_TABLE_CELLS - 1))); odd phase, attempt to reduce frequency spurs in output
+		return (int8_t)pgm_read_byte_near(table + ((phase_fractional >> OSCIL_F_BITS) & (NUM_TABLE_CELLS - 1)));
+		//return (int8_t)pgm_read_byte_near(table + (((phase_fractional >> OSCIL_F_BITS) | 1 ) & (NUM_TABLE_CELLS - 1))); odd phase, attempt to reduce frequency spurs in output
 #endif
 	}
 
@@ -336,7 +323,7 @@ static const unsigned char ADJUST_FOR_NUM_TABLE_CELLS = (NUM_TABLE_CELLS<2048) ?
 	// be set in the updateControl() interrupt and
 	// used in updateAudio(), which is outside the
 	// interrupt.
-	const char * table;
+	const int8_t * table;
 
 };
 

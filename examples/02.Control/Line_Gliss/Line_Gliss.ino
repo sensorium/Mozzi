@@ -12,16 +12,17 @@
     Then, a computationally cheap Line() is used to slide between the
     different phase increments smoothly at audio rate.
   
-    Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+    Circuit: Audio output on digital pin 9 on a Uno or similar, or
+    DAC/A14 on Teensy 3.0/3.1, or 
     check the README or http://sensorium.github.com/Mozzi/
   
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
-    Tim Barrass 2012.
-    This example code is in the public domain.
+    Tim Barrass 2012, CC by-nc-sa.
 */
 
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Line.h> // for smooth transitions
 #include <Oscil.h> // oscillator template
@@ -36,17 +37,17 @@ Line <long> aGliss;
 
 #define CONTROL_RATE 64 // powers of 2 please
 
-unsigned char lo_note = 24; // midi note numbers
-unsigned char hi_note = 36;
+byte lo_note = 24; // midi note numbers
+byte hi_note = 36;
 
 long audio_steps_per_gliss = AUDIO_RATE / 4; // ie. 4 glisses per second
 long control_steps_per_gliss = CONTROL_RATE / 4;
 
 // stuff for changing starting positions, probably just confusing really
 int counter = 0;
-unsigned char gliss_offset = 0;
-unsigned char gliss_offset_step = 2;
-unsigned char  gliss_offset_max = 36;
+byte gliss_offset = 0;
+byte gliss_offset_step = 2;
+byte  gliss_offset_max = 36;
 
 
 void setup(){

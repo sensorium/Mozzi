@@ -15,12 +15,12 @@
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
-    Tim Barrass 2013.
-    This example code is in the public domain.
+    Tim Barrass 2013, CC by-nc-sa.
 */
 
 
 #include <MIDI.h>
+
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
 #include <Line.h> // for envelope
@@ -37,7 +37,7 @@
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
 // envelope generator
-ADSR <CONTROL_RATE> envelope;
+ADSR <CONTROL_RATE, AUDIO_RATE> envelope;
 
 #define LED 6 // 6 on Teensy++ 2.0, 11 on Teensy 2.0, to see if MIDI is being recieved
 

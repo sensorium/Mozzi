@@ -5,18 +5,7 @@
  *
  * This file is part of Mozzi.
  *
- * Mozzi is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Mozzi is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Mozzi.  If not, see <http://www.gnu.org/licenses/>.
+ * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
  *
  */
 
@@ -55,7 +44,7 @@ public:
 	@param note a midi note number, a whole number.
 	*/
 	inline
-	void start(unsigned char note) {
+	void start(uint8_t note) {
 		target_freq = Q16n16_mtof(Q8n0_to_Q16n16(note));
 		aPortamentoLine.set(target_freq, control_steps_per_portamento);
 		countdown = control_steps_per_portamento;
@@ -104,7 +93,7 @@ public:
 	// copied from ADSR.h
 	inline
 	static const unsigned int convertMsecToControlSteps(unsigned int msec){
-		return (uint) (((ulong)msec*CONTROL_UPDATE_RATE)>>10); // approximate /1000 with shift
+		return (uint16_t) (((uint32_t)msec*CONTROL_UPDATE_RATE)>>10); // approximate /1000 with shift
 	}
 
 };

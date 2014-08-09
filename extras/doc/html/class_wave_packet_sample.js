@@ -5,5 +5,5 @@ var class_wave_packet_sample =
     [ "setBandwidth", "class_wave_packet_sample.html#abce5b3ca4c559473c199744753fb75aa", null ],
     [ "setCentreFreq", "class_wave_packet_sample.html#adbbbf8b6b9eaae18ef381ff04be3eb5b", null ],
     [ "setFundamental", "class_wave_packet_sample.html#af87c37ffd274eee91aa93c0f7d560be2", null ],
-    [ "setTable", "class_wave_packet_sample.html#a69ae33a0540773b090e83d7fa884489e", null ]
+    [ "setTable", "class_wave_packet_sample.html#af50b8ef715a86bcdf417961b585c170d", null ]
 ];

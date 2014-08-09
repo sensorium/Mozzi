@@ -1,3 +1,14 @@
+/*
+ * WavePacketSample.h
+ *
+ * Copyright 2013 Tim Barrass.
+ *
+ * This file is part of Mozzi.
+ *
+ * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ *
+ */
+ 
 #ifndef WAVEPACKETSAMPLE_H
 #define WAVEPACKETSAMPLE_H
 
@@ -7,7 +18,7 @@
 @tparam ALGORITHM options are SINGLE or DOUBLE, for a single non-overlapping stream of packets or a double, overlapping stream.
 
 */
-template <char ALGORITHM>
+template <int8_t ALGORITHM>
 class WavePacketSample: public WavePacket<ALGORITHM>
 {
 public:
@@ -15,7 +26,7 @@ public:
 	@param TABLE_NAME is the name of the array in the table ".h" file you're using.
 	*/
 	inline
-	void setTable(const char * TABLE_NAME)
+	void setTable(const int8_t * TABLE_NAME)
 	{
 		aWav.setTable(TABLE_NAME);
 	}

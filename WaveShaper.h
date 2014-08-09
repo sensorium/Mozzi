@@ -5,18 +5,7 @@
  *
  * This file is part of Mozzi.
  *
- * Mozzi is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Mozzi is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Mozzi.  If not, see <http://www.gnu.org/licenses/>.
+ * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
  *
  */
 
@@ -35,9 +24,9 @@ class WaveShaper
 ;
 
 
-/** char specialisation of WaveShaper template*/
+/** int8_t specialisation of WaveShaper template*/
 template <>
-class WaveShaper < char>
+class WaveShaper <char>
 {
 
 public:
@@ -46,7 +35,7 @@ public:
 	@tparam T the type of numbers being input to be shaped, chosen to match the table.
 	@param TABLE_NAME the name of the table being used, which can be found in the
 	".h" file containing the table. */
-	WaveShaper(const char  * TABLE_NAME):table(TABLE_NAME)
+	WaveShaper(const int8_t  * TABLE_NAME):table(TABLE_NAME)
 	{
 		;
 	}
@@ -60,13 +49,13 @@ public:
 	@return the shaped signal.
 	 */
 	inline
-	char next(unsigned char in)
+	int8_t next(byte in)
 	{
-		return (char) pgm_read_byte_near(table + in);
+		return (int8_t) pgm_read_byte_near(table + in);
 	}
 
 private:
-	const char  * table;
+	const int8_t  * table;
 };
 
 
@@ -82,7 +71,7 @@ public:
 	@tparam T the type of numbers being input to be shaped, chosen to match the table.
 	@param TABLE_NAME the name of the table being used, which can be found in the
 	".h" file containing the table. */
-	WaveShaper(const int * TABLE_NAME):table(TABLE_NAME)
+	WaveShaper(const int16_t * TABLE_NAME):table(TABLE_NAME)
 	{
 		;
 	}
@@ -95,17 +84,17 @@ public:
 	cell 256, add 256 to offset the input value. With a sigmoid table, this
 	may be useful for compressing a bigger signal into the -244 to 243
 	output range of Mozzi, rather than dividing the signal and returning a
-	char from updateAudio().
+	int8_t from updateAudio().
 	@return the shaped signal.
 	 */
 	inline
 	int next(int in)
 	{
-		return (unsigned int) pgm_read_word_near(table + in);
+		return (uint16_t) pgm_read_word_near(table + in);
 	}
 
 private:
-	const int * table;
+	const int16_t * table;
 };
 
 /** @example 06.Synthesis/WaveShaper/WaveShaper.ino

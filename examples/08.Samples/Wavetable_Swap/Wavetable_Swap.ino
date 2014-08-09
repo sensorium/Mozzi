@@ -4,10 +4,10 @@
     Demonstrates declaring an Oscil without a table,
     and Oscil::setTable() method.
   
-    Created by Tim Barrass 2012.
-    This example code is in the public domain.
+    Tim Barrass 2012, CC by-nc-sa.
 */
 
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <EventDelay.h>

@@ -5,16 +5,17 @@
     random delaytimes and feedback levels on a 
     (random) percussive adsr whitenoise sound.
   
-    Circuit: Audio output on digital pin 9 (on a Uno or similar), or 
+    Circuit: Audio output on digital pin 9 on a Uno or similar, or
+    DAC/A14 on Teensy 3.0/3.1, or 
     check the README or http://sensorium.github.com/Mozzi/
   
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
-    Tim Barrass 2012-13.
-    This example code is in the public domain.
+    Tim Barrass 2012-13, CC by-nc-sa.
 */
 
+//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <AudioDelayFeedback.h>
@@ -35,7 +36,7 @@ int gain;
 
 
 void setup(){
-  //Serial.begin(115200);
+  //Serial.begin(9600);
   startMozzi(CONTROL_RATE); 
   randSeed(); // reseed the random generator for different results each time the sketch runs
   // use float to set freq because it will be small and fractional
@@ -46,7 +47,7 @@ void setup(){
 
 void updateControl(){
   // jump around in audio noise table to disrupt obvious looping
-  aNoise.setPhase(rand((uint)WHITENOISE8192_NUM_CELLS));
+  aNoise.setPhase(rand((unsigned int)WHITENOISE8192_NUM_CELLS));
 
   if(kDelay.ready()){
     // set random adsr parameters

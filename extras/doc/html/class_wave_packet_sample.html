@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version 2014-04-20-15:06</span>
+   &#160;<span id="projectnumber">version 2014-08-09-14:12</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -80,7 +80,7 @@ $(document).ready(function(){initNavTree('class_wave_packet_sample.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -116,9 +116,9 @@ $(document).ready(function(){initNavTree('class_wave_packet_sample.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a69ae33a0540773b090e83d7fa884489e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wave_packet_sample.html#a69ae33a0540773b090e83d7fa884489e">setTable</a> (const char *TABLE_NAME)</td></tr>
-<tr class="memdesc:a69ae33a0540773b090e83d7fa884489e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the sound table which will be played.  <a href="#a69ae33a0540773b090e83d7fa884489e">More...</a><br/></td></tr>
-<tr class="separator:a69ae33a0540773b090e83d7fa884489e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af50b8ef715a86bcdf417961b585c170d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wave_packet_sample.html#af50b8ef715a86bcdf417961b585c170d">setTable</a> (const int8_t *TABLE_NAME)</td></tr>
+<tr class="memdesc:af50b8ef715a86bcdf417961b585c170d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the sound table which will be played.  <a href="#af50b8ef715a86bcdf417961b585c170d">More...</a><br/></td></tr>
+<tr class="separator:af50b8ef715a86bcdf417961b585c170d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac693b3d676b583584a8cfc6b9cc0f37f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wave_packet.html#ac693b3d676b583584a8cfc6b9cc0f37f">set</a> (int fundamental, int bandwidth, int centrefreq)</td></tr>
 <tr class="memdesc:ac693b3d676b583584a8cfc6b9cc0f37f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set all the parameters for the synthesis.  <a href="#ac693b3d676b583584a8cfc6b9cc0f37f">More...</a><br/></td></tr>
 <tr class="separator:ac693b3d676b583584a8cfc6b9cc0f37f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,7 +136,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab4e35082b60d3ccc29c86d09078329bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;char ALGORITHM&gt;<br/>
+<div class="textblock"><h3>template&lt;int8_t ALGORITHM&gt;<br/>
 class WavePacketSample&lt; ALGORITHM &gt;</h3>
 
 <p>A <a class="el" href="class_wave_packet.html" title="Wavepacket synthesis, with two overlapping streams of wave packets.">WavePacket</a> which allows a custom table to be set as the audio source for the wavepackets (or grains). </p>
@@ -148,13 +148,13 @@ class WavePacketSample&lt; ALGORITHM &gt;</h3>
 </dl>
 <dl><dt><b>Examples: </b></dt><dd><a class="el" href="06_8_synthesis_2_wave_packet__sample_2_wave_packet__sample_8ino-example.html#_a1">06.Synthesis/WavePacket_Sample/WavePacket_Sample.ino</a>.</dd>
 </dl>
-<p>Definition at line <a class="el" href="_wave_packet_sample_8h_source.html#l00011">11</a> of file <a class="el" href="_wave_packet_sample_8h_source.html">WavePacketSample.h</a>.</p>
+<p>Definition at line <a class="el" href="_wave_packet_sample_8h_source.html#l00022">22</a> of file <a class="el" href="_wave_packet_sample_8h_source.html">WavePacketSample.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="ab4e35082b60d3ccc29c86d09078329bd"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;char ALGORITHM&gt; </div>
+template&lt;int8_t ALGORITHM&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -176,7 +176,7 @@ template&lt;char ALGORITHM&gt; </div>
 <p>Calculate the next synthesised sample. </p>
 <dl class="section return"><dt>Returns</dt><dd>a full-scale 16 bit value, which needs to be scaled to suit your sketch. If you're using it straight as the sketch output, then that will be yourThing.next()&gt;&gt;2 for HIFI 14 bit output, or &gt;&gt;8 for STANDARD 8+ bit output. </dd></dl>
 
-<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00124">124</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
+<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00113">113</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
 
 </div>
 </div>
@@ -184,7 +184,7 @@ template&lt;char ALGORITHM&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;char ALGORITHM&gt; </div>
+template&lt;int8_t ALGORITHM&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -231,7 +231,7 @@ template&lt;char ALGORITHM&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00068">68</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
+<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00057">57</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
 
 </div>
 </div>
@@ -239,7 +239,7 @@ template&lt;char ALGORITHM&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;char ALGORITHM&gt; </div>
+template&lt;int8_t ALGORITHM&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -268,7 +268,7 @@ template&lt;char ALGORITHM&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00096">96</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
+<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00085">85</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
 
 </div>
 </div>
@@ -276,7 +276,7 @@ template&lt;char ALGORITHM&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;char ALGORITHM&gt; </div>
+template&lt;int8_t ALGORITHM&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -305,7 +305,7 @@ template&lt;char ALGORITHM&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00111">111</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
+<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00100">100</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
 
 </div>
 </div>
@@ -313,7 +313,7 @@ template&lt;char ALGORITHM&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;char ALGORITHM&gt; </div>
+template&lt;int8_t ALGORITHM&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -342,15 +342,15 @@ template&lt;char ALGORITHM&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00081">81</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
+<p>Definition at line <a class="el" href="_wave_packet_8h_source.html#l00070">70</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a69ae33a0540773b090e83d7fa884489e"></a>
+<a class="anchor" id="af50b8ef715a86bcdf417961b585c170d"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;char ALGORITHM&gt; </div>
+template&lt;int8_t ALGORITHM&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -358,7 +358,7 @@ template&lt;char ALGORITHM&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="class_wave_packet_sample.html">WavePacketSample</a>&lt; ALGORITHM &gt;::setTable </td>
           <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
+          <td class="paramtype">const int8_t *&#160;</td>
           <td class="paramname"><em>TABLE_NAME</em></td><td>)</td>
           <td></td>
         </tr>
@@ -379,7 +379,7 @@ template&lt;char ALGORITHM&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_wave_packet_sample_8h_source.html#l00018">18</a> of file <a class="el" href="_wave_packet_sample_8h_source.html">WavePacketSample.h</a>.</p>
+<p>Definition at line <a class="el" href="_wave_packet_sample_8h_source.html#l00029">29</a> of file <a class="el" href="_wave_packet_sample_8h_source.html">WavePacketSample.h</a>.</p>
 
 </div>
 </div>
@@ -389,7 +389,7 @@ template&lt;char ALGORITHM&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_wave_packet_sample.html">WavePacketSample</a></li>
-    <li class="footer">Generated on Sun Apr 20 2014 15:06:22 for Mozzi by
+    <li class="footer">Generated on Sat Aug 9 2014 14:12:59 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

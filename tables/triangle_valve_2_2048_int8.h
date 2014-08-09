@@ -14,7 +14,7 @@
 #define TRIANGLE_VALVE_2_2048_NUM_CELLS 2048
 #define TRIANGLE_VALVE_2_2048_SAMPLERATE 2048
 
-const char __attribute__((section(".progmem.data"))) TRIANGLE_VALVE_2_2048_DATA []  =
+const int8_t __attribute__((section(".progmem.data"))) TRIANGLE_VALVE_2_2048_DATA []  =
         {
                 52, 52, 53, 53, 53, 54, 54,
                 54, 55, 55, 55, 56, 56, 56, 56, 57, 57, 57, 58, 58, 58, 59, 59, 59, 59, 60, 60,

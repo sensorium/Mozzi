@@ -21,6 +21,7 @@ HIFI audio mode enables much higher quality output by combining signals from pin
 For HIFI mode, edit Mozzi/mozzi_config.h to contain \#define AUDIO_MODE HIFI, 
 and comment out \#define AUDIO_MODE STANDARD.
 
+@note Teensy 3.0/3.1 plays 12 bit audio in STANDARD or STANDARD_PLUS modes, and has no HIFI mode.
 */
 //#define AUDIO_MODE STANDARD
 #define AUDIO_MODE STANDARD_PLUS
@@ -77,7 +78,12 @@ This sets which analog input channel to use for audio input, if you have
 \#define USE_AUDIO_INPUT  true 
 in mozz_config.h
 */
+#if defined(__MK20DX128__) || defined(__MK20DX256__) // teensy 3, 3.1
 #define AUDIO_INPUT_PIN 0
+#else
+#define AUDIO_INPUT_PIN 0
+#endif
 
+//AUDIO_INPUT_CHANNEL = analogPinToChannel(AUDIO_INPUT_PIN)
 #endif        //  #ifndef MOZZI_CONFIG_H
 

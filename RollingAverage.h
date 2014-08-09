@@ -8,18 +8,7 @@
  *
  * This file is part of Mozzi.
  *
- * Mozzi is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Mozzi is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Mozzi.  If not, see <http://www.gnu.org/licenses/>.
+ * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
  *
  */
 /*
@@ -59,7 +48,7 @@ public:
 	smoothed, but the slower the output will respond to the input.
 	@note Watch out for overflows!
 	*/
-	RollingAverage():index(0),total(0), WINDOW_LENGTH_AS_RSHIFT((unsigned char)trailingZeros((unsigned long)WINDOW_LENGTH))
+	RollingAverage():index(0),total(0), WINDOW_LENGTH_AS_RSHIFT((uint8_t)trailingZeros((unsigned long)WINDOW_LENGTH))
 	{
 		// initialize all the readings to 0:
 		for (int thisReading = 0; thisReading < WINDOW_LENGTH; thisReading++)
@@ -98,7 +87,7 @@ private:
 	T readings[WINDOW_LENGTH];	// the readings from the analog input
 	unsigned int index;	// the index of the current reading
 	long total;	// the running total
-	const unsigned char WINDOW_LENGTH_AS_RSHIFT;
+	const uint8_t WINDOW_LENGTH_AS_RSHIFT;
 	
 };
 
@@ -116,10 +105,10 @@ public:
 	@tparam WINDOW_LENGTH A power of two, the number of readings to keep track of.    
 	The higher the number, the more the readings will be smoothed, but the slower the output will
 	respond to the input. 
-	@note The internal total of all the values being averaged is held in a long (4 byte) integer, to avoid overflowing.
+	@note The internal total of all the values being averaged is held in a long (4 uint8_t) integer, to avoid overflowing.
 	However, watch out for overflows if you are averaging a long number types!
 	*/
-	RollingAverage():index(0),total(0), WINDOW_LENGTH_AS_RSHIFT((unsigned char)trailingZeros((unsigned long)WINDOW_LENGTH))
+	RollingAverage():index(0),total(0), WINDOW_LENGTH_AS_RSHIFT((uint8_t)trailingZeros((unsigned long)WINDOW_LENGTH))
 	{
 		// initialize all the readings to 0:
 		for (int thisReading = 0; thisReading < WINDOW_LENGTH; thisReading++)
@@ -160,7 +149,7 @@ private:
 	unsigned int readings[WINDOW_LENGTH];      // the readings from the analog input
 	unsigned int index;                  // the index of the current reading
 	long total;               // the running total
-	const unsigned char WINDOW_LENGTH_AS_RSHIFT;
+	const uint8_t WINDOW_LENGTH_AS_RSHIFT;
 
 };
 
@@ -175,7 +164,7 @@ public:
 	@tparam WINDOW_LENGTH A power of two, the number of readings to keep track of.    
 	The higher the number, the more the readings will be smoothed, but the slower the output will
 	respond to the input. 
-	@note The internal total of all the values being averaged is held in a long (4 byte) integer, to avoid overflowing.
+	@note The internal total of all the values being averaged is held in a long (4 uint8_t) integer, to avoid overflowing.
 	However, watch out for overflows if you are averaging a long number types!
 	*/
 	RollingAverage():index(0),total(0.0)

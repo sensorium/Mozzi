@@ -13,6 +13,8 @@
     different phase increments smoothly at audio rate.
     Also shows how to use random offsets between the oscillators'
     frequencies to produce a chorusing/doubling effect.
+    
+    This sketch using HIFI mode is not for Teensy 3.0/3.1.
   
     IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
     be changed from STANDARD mode to HIFI.
@@ -49,8 +51,7 @@
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
-    Tim Barrass 2012.
-    This example code is in the public domain.
+    Tim Barrass 2012, CC by-nc-sa.
 */
 
 #include <MozziGuts.h>
@@ -71,17 +72,17 @@ Oscil <SAW8192_NUM_CELLS, AUDIO_RATE> aSaw2(SAW8192_DATA);
 Line <long> aGliss1;
 Line <long> aGliss2;
 
-unsigned char lo_note = 24; // midi note numbers
-unsigned char hi_note = 46;
+byte lo_note = 24; // midi note numbers
+byte hi_note = 46;
 
 long audio_steps_per_gliss = AUDIO_RATE / 4; // ie. 4 glisses per second
 long control_steps_per_gliss = CONTROL_RATE / 4;
 
 // stuff for changing starting positions, probably just confusing really
 int counter = 0;
-unsigned char gliss_offset = 0;
-unsigned char gliss_offset_step = 2;
-unsigned char  gliss_offset_max = 36;
+byte gliss_offset = 0;
+byte gliss_offset_step = 2;
+byte  gliss_offset_max = 36;
 
 
 void setup() {

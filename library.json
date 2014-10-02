@@ -1,0 +1,11 @@
+{
+  "name": "Arduino-Mozzi",
+  "keywords": "audio, sound, synthesis, music",
+  "description": "A sound synthesis library for Arduino",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/sensorium/Mozzi.git"
+  },
+  "examples": "examples/*/*/*.ino"
+}

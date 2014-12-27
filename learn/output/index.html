@@ -186,11 +186,9 @@ For Mozzi, an RC filter with a roll-off frequency of just under 6kHz works well,
 <h3>Notch filter for STANDARD mode carrier frequency</h3>
 
 <p>This may still be useful if you need to use STANDARD mode for some reason, for instance if you need Timer 2 for another process
-(making HIFI unavailable), or if your sketch is too intensive for STANDARD and you need 10% more juice.
-The 16384 Hz pwm carrier frequency can also be uncomfortably audible for some people, depending on your hearing.<br/>
-<a href="http://www.phys.unsw.edu.au/jw/hearing.html">Here&#8217;s a hearing test.</a></p>
+(making HIFI unavailable), or if your sketch is too intensive for STANDARD_PLUS and you need 10% more juice.</p>
 
-<p>People who have used Mozzi with children report that kids find the carrier frequency particularly irritating, however adults are often unable to perceive it at any level!  Many thanks to Andrew McPherson, who sent a schematic and equation for a twin-T notch filter which he used successfully to remove the offending frequency.</p>
+<p>People who have used Mozzi in STANDARD mode with children report that kids find the carrier frequency particularly irritating, however adults are often unable to perceive it at any level!  Many thanks to Andrew McPherson, who sent a schematic and equation for a twin-T notch filter which he used successfully to remove the offending frequency.</p>
 
 <p><img src="http://farm9.staticflickr.com/8470/8124196839_6f3e506525.jpg" alt="Twin-T Notch Filter" />
 <img src="http://farm9.staticflickr.com/8472/8124196815_6c02f4fb86.jpg" alt="equation" /></p>
@@ -199,29 +197,13 @@ The 16384 Hz pwm carrier frequency can also be uncomfortably audible for some pe
 
 <p>Andrew also reported that the low-pass and notch filter described here can be used together in series without any problems.</p>
 
-<p>Here&#8217;s a schematic for the 6kHz low pass and the notch filter using commonly available parts chosen to exactly match Mozzi&#8217;s 16384Hz carrier frequency, using the notch filter design tool.</p>
+<p>Here&#8217;s a schematic for the 6kHz low pass and the notch filter using commonly available parts chosen to exactly match STANDARD mode&#8217;s 16384Hz carrier frequency, using the notch filter design tool.</p>
 
 <p><img src="http://farm9.staticflickr.com/8209/8210496070_4a1b21f8c1_c.jpg" alt="Schematic" /></p>
 
 <h3>Download</h3>
 
 <p>Download a Fritzing file with breadboard, schematic and circuit board layouts <a href="https://docs.google.com/file/d/0B_eOzePFYDZaSEo4bVJ6NlJnSXM/edit?usp=sharing">here</a>.</p>
-
-<h3>Plots</h3>
-
-<p>Below are plots of Mozzi playing white noise without filtering, with the notch filter, and with the low pass as well as the notch filter.  You can see the 16kHz spike clearly - at about -7dB before filtering, -54dB after the notch alone (also notice the foldover frequencies above the spike), and -50dB with the addition of low pass before the notch.  That&#8217;s interesting!  The spike is higher with the low pass! (though I couldn&#8217;t hear it).  It didn&#8217;t occur to me to try the low pass after the notch.  That might be better.</p>
-
-<p>White noise, no hardware filter:</p>
-
-<p><img src="http://farm9.staticflickr.com/8060/8209318951_a6ec01ee43.jpg" alt="No filtering" /></p>
-
-<p>White noise after 16384 Hz notch filter:</p>
-
-<p><img src="http://farm9.staticflickr.com/8197/8210408472_1475517fd8.jpg" alt="After notch" /></p>
-
-<p>White noise after 6kHz low pass and 16384 Hz notch filter:</p>
-
-<p><img src="http://farm9.staticflickr.com/8210/8210408422_e03380fd8d.jpg" alt="Low pass and notch" /></p>
 
   
     <footer>

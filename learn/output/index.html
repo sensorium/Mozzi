@@ -128,8 +128,9 @@
     
   </header>
   
-  <p>The default AUDIO_MODE since March 2014 is STANDARD_PLUS.  This mode has a pwm carrier rate of 32768 Hz, double the rate for STANDARD mode.
-The higher pwm rate is above hearing range, an advance on STANDARD mode&#8217;s 16384 Hz which can be audible for children and some adults.
+  <p>The default AUDIO_MODE since March 2014 is STANDARD_PLUS.  On Atmel-based boards this mode has a pwm carrier rate of 32768 Hz, double the rate for STANDARD mode.
+The higher pwm rate is above hearing range, an advance on STANDARD mode&#8217;s 16384 Hz which can be audible for children and some adults.<br/>
+Teensy 3.1 boards provide true analog DAC rather than pwm, so Teensy 3.1 is a great option for cleaner sounding audio and you won&#8217;t need a pwm carrier filter. Teensy 3.1 also runs much faster than the Atmel based Arduinos, so you can generate more complex sounds.<br/>
 STANDARD_PLUS can still benefit from a low pass filter, as outlined below for STANDARD mode.</p>
 
 <h2>Output circuit for HIFI mode</h2>
@@ -139,6 +140,8 @@ STANDARD_PLUS can still benefit from a low pass filter, as outlined below for ST
 <p>Here&#8217;s the circuit for Mozzi, based on the Open Music Labs article.</p>
 
 <p><img src="https://farm8.staticflickr.com/7458/10657009473_26c1f478de.jpg" alt="Mozzi output circuit for HIFI audio mode" /></p>
+
+<p>Teensy 3.1 doesn&#8217;t use 14 bit pwm HIFI mode, but has 12 bit DAC analog output enabled by default, even in STANDARD and STANDARD_PLUS modes.</p>
 
 <h4>Advantages of HIFI mode</h4>
 
@@ -170,9 +173,9 @@ x&#8230;&#8230;&#8230;&#8230;&#8230;.9&#8230;&#8230;&#8230;.10&#8230;&#8230;&#82
 x&#8230;&#8230;&#8230;&#8230;&#8230;.9&#8230;&#8230;&#8230;.10&#8230;&#8230;&#8230;&#8230;&#8230;Boarduino<br/>
 x&#8230;&#8230;&#8230;&#8230;&#8230;.11&#8230;&#8230;&#8230;12&#8230;&#8230;&#8230;&#8230;&#8230;Freetronics EtherMega<br/>
 &#8230;&#8230;&#8230;&#8230;&#8230;..11&#8230;&#8230;&#8230;12&#8230;&#8230;&#8230;&#8230;&#8230;Arduino Mega<br/>
-&#8230;&#8230;&#8230;&#8230;&#8230;..14&#8230;&#8230;&#8230;15&#8230;&#8230;&#8230;&#8230;&#8230;Teensy<br/>
-&#8230;&#8230;&#8230;&#8230;&#8230;B5(14)&#8230;B6(15)&#8230;&#8230;&#8230;..Teensy2<br/>
-x&#8230;&#8230;&#8230;&#8230;..B5(25)&#8230;B6(26)&#8230;&#8230;&#8230;..Teensy2++<br/>
+&#8230;&#8230;&#8230;&#8230;&#8230;..14&#8230;&#8230;&#8230;15&#8230;&#8230;&#8230;&#8230;..Teensy<br/>
+&#8230;&#8230;&#8230;&#8230;&#8230;B5(14)&#8230;B6(15)&#8230;&#8230;&#8230;Teensy2<br/>
+x&#8230;&#8230;&#8230;&#8230;.B5(25)&#8230;B6(26)&#8230;&#8230;&#8230;Teensy2++<br/>
 &#8230;&#8230;&#8230;&#8230;&#8230;..13&#8230;&#8230;&#8230;12&#8230;&#8230;&#8230;&#8230;&#8230;Sanguino</p>
 
 <h3>Low pass audio filter</h3>
@@ -266,7 +269,7 @@ For Mozzi, an RC filter with a roll-off frequency of just under 6kHz works well,
   <footer role="contentinfo"><p>
 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="https://purl.org/dc/terms/" property="dct:title">Mozzi</span> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/sensorium/Mozzi" property="cc:attributionName" rel="cc:attributionURL">Tim Barrass</a> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 </br>
-  <!-- Copyright &copy; 2014 - Tim Barrass - -->
+  <!-- Copyright &copy; 2015 - Tim Barrass - -->
   <span class="credit">Powered by <a href="https://octopress.org">Octopress</a></span>
   <span class="credit">Published with <a href="https://pages.github.com">GitHub Pages</a></span>
 </p>

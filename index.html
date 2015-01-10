@@ -177,7 +177,8 @@ Your browser does not support the audio element. </audio></p>
 
 <ul>
 <li> 16384 Hz sample rate or experimental 32768 Hz rate.</li>
-<li> 8 bit or 14 bit audio output modes.</li>
+<li> 8 bit or 14 bit audio output modes (12 bits on Teensy 3.1).</li>
+<li> PWM audio output on Atmel-based boards, or true analog out on Teensy 3.1.</li>
 <li> Variable control rate from 64 Hz up.</li>
 <li> Useful basic audio toolkit: oscillators, samples, lines, envelopes, scheduling, filtering.</li>
 <li> Fast ADC and other cpu-efficient code utilities to help keep audio running smoothly.</li>
@@ -263,6 +264,10 @@ These boards have been tested:</p>
 <tr>
 <td align="left">Teensy2++             </td>
 <td align="right"> &#8230;B5(25)  </td>
+</tr>
+<tr>
+<td align="left">Teensy3.1             </td>
+<td align="right"> &#8230;A14 (analog out)  </td>
 </tr>
 </tbody>
 </table>
@@ -432,7 +437,7 @@ Fork it to contribute directly to future developments.</p>
   <footer role="contentinfo"><p>
 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="https://purl.org/dc/terms/" property="dct:title">Mozzi</span> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/sensorium/Mozzi" property="cc:attributionName" rel="cc:attributionURL">Tim Barrass</a> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 </br>
-  <!-- Copyright &copy; 2014 - Tim Barrass - -->
+  <!-- Copyright &copy; 2015 - Tim Barrass - -->
   <span class="credit">Powered by <a href="https://octopress.org">Octopress</a></span>
   <span class="credit">Published with <a href="https://pages.github.com">GitHub Pages</a></span>
 </p>

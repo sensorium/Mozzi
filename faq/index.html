@@ -141,19 +141,21 @@
 
 <h2>Everything sounds glitchy, including the examples. <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></h2>
 
-<p>Maybe you&#8217;re listening to a <code>STANDARD</code> sketch, but <code>AUDIO_MODE</code> is set to <code>HIFI</code>.
+<p>Maybe you&#8217;re listening to a <code>STANDARD</code> or <code>STANDARD_PLUS</code> sketch, but <code>AUDIO_MODE</code> is set to <code>HIFI</code>.
 Check the file <strong>Mozzi/mozzi_config.h</strong>.  Look for:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#define AUDIO_MODE STANDARD</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="c1">//#define AUDIO_MODE STANDARD</span>
+</span><span class='line'><span class="cp">#define AUDIO_MODE STANDARD_PLUS</span>
 </span><span class='line'><span class="c1">//#define AUDIO_MODE HIFI</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>For <code>STANDARD</code> mode, the lines should appear as above,
-with the <code>HIFI</code> line commented out.  Most of the examples work in
-<code>STANDARD</code> mode, unless they say otherwise.</p>
+<p>For <code>STANDARD_PLUS</code> mode, the lines should appear as above,
+with the <code>STANDARD</code> and <code>HIFI</code> lines commented out.  Most of the examples work in
+<code>STANDARD_PLUS</code> mode, unless they say otherwise.</p>
 
 <hr />
 
@@ -161,7 +163,7 @@ with the <code>HIFI</code> line commented out.  Most of the examples work in
 
 <h2>Everything sounds too quiet. <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></h2>
 
-<p>Check if you&#8217;re listening to a <code>HIFI</code> sketch in <code>STANDARD</code> mode.  See the previous answer.</p>
+<p>Check if you&#8217;re listening to a <code>HIFI</code> sketch in <code>STANDARD</code> or <code>STANDARD_PLUS</code> mode.  See the previous answer.</p>
 
 <hr />
 

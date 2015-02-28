@@ -1,0 +1,6 @@
+digraph "python" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  dir_3faa5fff9e46bf8b8f48c87f683ce0e6 [shape=box, label="python", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_3faa5fff9e46bf8b8f48c87f683ce0e6.html"];
+}

@@ -1,0 +1,9 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="EventDelay",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_event_delay.html",tooltip="A non-blocking replacement for Arduino&#39;s delay() function (which is disabled by Mozzi). "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Metronome",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_metronome.html",tooltip="A metronome class which is like an EventDelay which retriggers itself when the delay time is up..."];
+}

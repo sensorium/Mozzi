@@ -14,6 +14,7 @@ var hierarchy =
     [ "AutoRange< int >", "class_auto_range.html", [
       [ "AutoMap", "class_auto_map.html", null ]
     ] ],
+    [ "CapPoll< SENSOR_PIN, SEND_PIN >", "class_cap_poll.html", null ],
     [ "CircularBuffer< ITEM_TYPE >", "class_circular_buffer.html", null ],
     [ "DCfilter", "class_d_cfilter.html", null ],
     [ "Ead", "class_ead.html", null ],
@@ -40,8 +41,8 @@ var hierarchy =
     [ "RCpoll< SENSOR_PIN >", "class_r_cpoll.html", null ],
     [ "ReverbTank", "class_reverb_tank.html", null ],
     [ "RollingAverage< T, WINDOW_LENGTH >", "class_rolling_average.html", null ],
-    [ "RollingAverage< unsigned int,(1<<(RESOLUTION_INCREASE_BITS *2))>", "class_rolling_average.html", [
-      [ "OverSample< RESOLUTION_INCREASE_BITS >", "class_over_sample.html", null ]
+    [ "RollingAverage< T,(1<<(RESOLUTION_INCREASE_BITS *2))>", "class_rolling_average.html", [
+      [ "OverSample< T, RESOLUTION_INCREASE_BITS >", "class_over_sample.html", null ]
     ] ],
     [ "RollingStat< T, WINDOW_LENGTH >", "class_rolling_stat.html", null ],
     [ "Sample< NUM_TABLE_CELLS, UPDATE_RATE, INTERP >", "class_sample.html", null ],

@@ -128,6 +128,78 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/Mozzi/blog/2013/07/29/audio-and-control-adc-together/">Audio and Control ADC Together</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-29T18:24:00+10:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Version 2013-07-29-18:09 enables audio and control rate analog inputs to work at the same time.
+Audio input is on analog pin A0.  Each time an audio sample is output, the audio input is sampled.
+For each audio input sample, one control input is also converted, by changing the input channel and
+triggering two conversions in a row using the ADC interrupt, keeping the second reading because the first
+is unreliable, then switching the channel back to 0 again for audio input and starting another audio conversion, which
+is also discarded.  Then the cycle goes again with the next audio output triggering a second, usable, audio input sample.
+Each time, one control input is stored, until the list of analog channels waiting to be sampled is empty.
+The audio samples continue alone until the next control interrupt, when a sketch has adcReadAllChannels() in updateControl().</p>
+
+<p>You can test it with examples/04.Analog_Input/Audio_and_Control_Input and examples/04.Analog_Input/Audio_Input_with_Knob_Filter.</p>
+
+<p>Also, now the Mozzi library downloads as Mozzi.zip and unzips as Mozzi, instead of sensorium-Mozzi-r4783rth43t or whatever.</p>
+
+<p>The NEWS.txt entry for this release is:</p>
+
+<ul>
+<li>IMPORTANT: renamed RecentAverage.h to RollingAverage.h.  Update sketches accordingly.</li>
+<li>mozzi_analog.h
+
+<ul>
+<li>added the ability to sample audio and control rate analog inputs at the same time</li>
+<li>added options for setupFastAnalogRead(), default is FAST (adc clock div main clock by 16, same as previously),
+  and setupFastAnalogRead(FASTER) and FASTEST for divide by 8 and divide by 4.  These faster rates risk being less accurate
+(see docs for setupFastAnalogRead), but FASTER (or FASTEST) is required for audio input with control inputs at the same time.</li>
+</ul>
+</li>
+<li>added examples/04.Analog_Input/Audio_and_Control_Input</li>
+<li>added examples/04.Analog_Input/Audio_Input_with_Knob_Filter</li>
+<li>removed examples/04.Analog_Input/Audio_Input_with_Filter_Control</li>
+<li>RollingAverage.h - change unsigned char index to unsigned int and same for num_readings_as_rshift, so more than 255 items can be averaged</li>
+<li>added audioTicks(), returns how many audio samples have been played since the program started - this will overflow less often than mozziMicros().</li>
+<li>mozziMicros() was wrong, audioticks/us-per-tick&#8230; fixed, now audioticks*us-per-tick</li>
+<li>added Stack.h, a simple stack class used internally for reading analog control inputs via adcReadAllChannels().</li>
+<li>added RollingStat.h, which calculates an approximation of the variance and standard deviation for a window of recent inputs,
+  for doing things with sensor inputs.</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/Mozzi/blog/2013/05/14/icad2013-workshop-announcement/">ICAD2013 Workshop Announcement</a></h1>
     
     
@@ -251,6 +323,10 @@ More details and registration: <a href="http://www.isea2013.org/event-category/w
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/Mozzi/blog/2015/04/08/use-arduino-1-dot-0-5/">Use Arduino 1.0.5</a>
+      </li>
+    
+      <li class="post">
         <a href="/Mozzi/blog/2014/11/21/yes/">Yes, You Can Donate!</a>
       </li>
     
@@ -264,10 +340,6 @@ More details and registration: <a href="http://www.isea2013.org/event-category/w
     
       <li class="post">
         <a href="/Mozzi/blog/2014/04/20/standard-plus-performance-improves/">STANDARD_PLUS Performance Improves</a>
-      </li>
-    
-      <li class="post">
-        <a href="/Mozzi/blog/2014/03/13/update-to-version-2014-03-13-14-09/">New STANDARD_PLUS Audio Mode Removes 16kHz Whine</a>
       </li>
     
   </ul>

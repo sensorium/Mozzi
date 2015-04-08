@@ -4,7 +4,7 @@
   <title><![CDATA[MOZZI]]></title>
   <link href="http://sensorium.github.io/Mozzi//atom.xml" rel="self"/>
   <link href="http://sensorium.github.io/Mozzi//"/>
-  <updated>2015-04-07T20:26:47+10:00</updated>
+  <updated>2015-04-08T21:55:32+10:00</updated>
   <id>http://sensorium.github.io/Mozzi//</id>
   <author>
     <name><![CDATA[Tim Barrass]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Use Arduino 1.0.5]]></title>
+    <link href="http://sensorium.github.io/Mozzi//blog/2015/04/08/use-arduino-1-dot-0-5/"/>
+    <updated>2015-04-08T21:52:00+10:00</updated>
+    <id>http://sensorium.github.io/Mozzi//blog/2015/04/08/use-arduino-1-dot-0-5</id>
+    <content type="html"><![CDATA[<p>Mozzi is broken in Arduino IDE 1.0.6 and 1.6.3.  For now, use Arduino 1.0.5.</p>
+
+<p>The symptom is that more complex sketches run too slowly for smooth audio synthesis.  I&#8217;ll try to sort it out!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[yes, you can donate!]]></title>

@@ -8995,6 +8995,18 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>55</span>
 <span class='line-number'>56</span>
 <span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of Wavepacket synthesis, using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">    This sketch draws on Miller Puckette&#39;s </span>
 </span><span class='line'><span class="cm">    Pure Data example, F14.wave.packet.pd, with</span>
@@ -9004,7 +9016,19 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">     Audio output on DAC/A14 on Teensy 3.0, 3.1, </span>
 </span><span class='line'><span class="cm">     or digital pin 9 on a Uno or similar, or </span>
 </span><span class='line'><span class="cm">     check the README or http://sensorium.github.com/Mozzi/</span>
-</span><span class='line'><span class="cm">  </span>
+</span><span class='line'><span class="cm">     </span>
+</span><span class='line'><span class="cm">     Potentiometer connected to analog pin 0.</span>
+</span><span class='line'><span class="cm">      Center pin of the potentiometer goes to the analog pin.</span>
+</span><span class='line'><span class="cm">      Side pins of the potentiometer go to +5V and ground</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">      Potentiometer connected to analog pin 1.</span>
+</span><span class='line'><span class="cm">      Center pin of the potentiometer goes to the analog pin.</span>
+</span><span class='line'><span class="cm">      Side pins of the potentiometer go to +5V and ground</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">      Potentiometer connected to analog pin 2.</span>
+</span><span class='line'><span class="cm">      Center pin of the potentiometer goes to the analog pin.</span>
+</span><span class='line'><span class="cm">      Side pins of the potentiometer go to +5V and ground</span>
+</span><span class='line'><span class="cm">      </span>
 </span><span class='line'><span class="cm">    Mozzi help/discussion/announcements:</span>
 </span><span class='line'><span class="cm">    https://groups.google.com/forum/#!forum/mozzi-users</span>
 </span><span class='line'><span class="cm">  </span>
@@ -9130,6 +9154,20 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>58</span>
 <span class='line-number'>59</span>
 <span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of Wavepacket synthesis, using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">    This sketch draws on Miller Puckette&#39;s </span>
 </span><span class='line'><span class="cm">    Pure Data example, F14.wave.packet.pd, with</span>
@@ -9138,9 +9176,23 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Demonstrates the WavePacketSample object, which enables a</span>
 </span><span class='line'><span class="cm">    custom sound table to be used as the audio source for wavepackets.</span>
 </span><span class='line'><span class="cm">  </span>
-</span><span class='line'><span class="cm">    Circuit: Audio output on digital pin 9 (for STANDARD mode on a Uno or similar), or </span>
-</span><span class='line'><span class="cm">    check the README or http://sensorium.github.com/Mozzi/</span>
-</span><span class='line'><span class="cm">  </span>
+</span><span class='line'><span class="cm">    Circuit:</span>
+</span><span class='line'><span class="cm">     Audio output on DAC/A14 on Teensy 3.0, 3.1, </span>
+</span><span class='line'><span class="cm">     or digital pin 9 on a Uno or similar, or </span>
+</span><span class='line'><span class="cm">     check the README or http://sensorium.github.com/Mozzi/</span>
+</span><span class='line'><span class="cm">     </span>
+</span><span class='line'><span class="cm">     Potentiometer connected to analog pin 0.</span>
+</span><span class='line'><span class="cm">      Center pin of the potentiometer goes to the analog pin.</span>
+</span><span class='line'><span class="cm">      Side pins of the potentiometer go to +5V and ground</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">      Potentiometer connected to analog pin 1.</span>
+</span><span class='line'><span class="cm">      Center pin of the potentiometer goes to the analog pin.</span>
+</span><span class='line'><span class="cm">      Side pins of the potentiometer go to +5V and ground</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">      Potentiometer connected to analog pin 2.</span>
+</span><span class='line'><span class="cm">      Center pin of the potentiometer goes to the analog pin.</span>
+</span><span class='line'><span class="cm">      Side pins of the potentiometer go to +5V and ground</span>
+</span><span class='line'><span class="cm">      </span>
 </span><span class='line'><span class="cm">    Mozzi help/discussion/announcements:</span>
 </span><span class='line'><span class="cm">    https://groups.google.com/forum/#!forum/mozzi-users</span>
 </span><span class='line'><span class="cm">  </span>
@@ -9262,13 +9314,41 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>52</span>
 <span class='line-number'>53</span>
 <span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of Wavepacket synthesis, using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">    This sketch draws on Miller Puckette&#39;s </span>
 </span><span class='line'><span class="cm">    Pure Data example, F14.wave.packet.pd, with</span>
 </span><span class='line'><span class="cm">    one non-overlapping stream of wave packets.</span>
 </span><span class='line'><span class="cm">  </span>
-</span><span class='line'><span class="cm">    Circuit: Audio output on digital pin 9 (for STANDARD mode on a Uno or similar), or </span>
-</span><span class='line'><span class="cm">    check the README or http://sensorium.github.com/Mozzi/</span>
+</span><span class='line'><span class="cm">    Circuit:</span>
+</span><span class='line'><span class="cm">     Audio output on DAC/A14 on Teensy 3.0, 3.1, </span>
+</span><span class='line'><span class="cm">     or digital pin 9 on a Uno or similar, or </span>
+</span><span class='line'><span class="cm">     check the README or http://sensorium.github.com/Mozzi/</span>
+</span><span class='line'><span class="cm">     </span>
+</span><span class='line'><span class="cm">     Potentiometer connected to analog pin 0.</span>
+</span><span class='line'><span class="cm">      Center pin of the potentiometer goes to the analog pin.</span>
+</span><span class='line'><span class="cm">      Side pins of the potentiometer go to +5V and ground</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">      Potentiometer connected to analog pin 1.</span>
+</span><span class='line'><span class="cm">      Center pin of the potentiometer goes to the analog pin.</span>
+</span><span class='line'><span class="cm">      Side pins of the potentiometer go to +5V and ground</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">      Potentiometer connected to analog pin 2.</span>
+</span><span class='line'><span class="cm">      Center pin of the potentiometer goes to the analog pin.</span>
+</span><span class='line'><span class="cm">      Side pins of the potentiometer go to +5V and ground</span>
 </span><span class='line'><span class="cm">  </span>
 </span><span class='line'><span class="cm">    Mozzi help/discussion/announcements:</span>
 </span><span class='line'><span class="cm">    https://groups.google.com/forum/#!forum/mozzi-users</span>
@@ -15024,6 +15104,10 @@ Your browser does not support the audio element.</audio></p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/Mozzi/blog/2015/04/08/use-arduino-1-dot-0-5/">Use Arduino 1.0.5</a>
+      </li>
+    
+      <li class="post">
         <a href="/Mozzi/blog/2014/11/21/yes/">Yes, You Can Donate!</a>
       </li>
     
@@ -15037,10 +15121,6 @@ Your browser does not support the audio element.</audio></p>
     
       <li class="post">
         <a href="/Mozzi/blog/2014/04/20/standard-plus-performance-improves/">STANDARD_PLUS Performance Improves</a>
-      </li>
-    
-      <li class="post">
-        <a href="/Mozzi/blog/2014/03/13/update-to-version-2014-03-13-14-09/">New STANDARD_PLUS Audio Mode Removes 16kHz Whine</a>
       </li>
     
   </ul>

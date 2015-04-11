@@ -3,7 +3,7 @@
   
     Demonstrates the use of Oscil to play a wavetable.
   
-    This sketch using HIFI mode is not for Teensy 3.0/3.1.
+    This sketch using HIFI mode is not for Teensy 3.1.
         
     IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
     be changed from STANDARD mode to HIFI.

@@ -179,7 +179,11 @@ public:
 	void setFreq (int frequency) {
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
-			phase_increment_fractional = ((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)*frequency)/UPDATE_RATE) << (OSCIL_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS);
+			// TB2014-8-20 change this following Austin Grossman's suggestion on user list
+			// https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!msg/mozzi-users/u4D5NMzVnQs/pCmiWInFvrkJ
+			//phase_increment_fractional = ((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)*frequency)/UPDATE_RATE) << (OSCIL_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS);
+			// to this:
+			phase_increment_fractional = ((unsigned long)frequency) * ((OSCIL_F_BITS_AS_MULTIPLIER*NUM_TABLE_CELLS)/UPDATE_RATE);
 		}
 	}
 
@@ -209,12 +213,23 @@ public:
 	inline
 	void setFreq_Q24n8(Q24n8 frequency)
 	{
+		
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
 			//phase_increment_fractional = (frequency* (NUM_TABLE_CELLS>>3)/(UPDATE_RATE>>6)) << (F_BITS-(8-3+6));
 			phase_increment_fractional = (((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)>>3)*frequency)/(UPDATE_RATE>>6))
 			                             << (OSCIL_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS - (8-3+6));
+			                             
+			// TB2014-8-20 change this following Austin Grossman's suggestion on user list
+			// https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!msg/mozzi-users/u4D5NMzVnQs/pCmiWInFvrkJ
+			if ((256UL*NUM_TABLE_CELLS) >= UPDATE_RATE) {
+       phase_increment_fractional = ((unsigned long)frequency) * ((256UL*NUM_TABLE_CELLS)/UPDATE_RATE);
+      } else {
+        phase_increment_fractional = ((unsigned long)frequency) / (UPDATE_RATE/(256UL*NUM_TABLE_CELLS));
+      }
 		}
+		
+
 	}
 
 
@@ -231,8 +246,15 @@ public:
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
 			//phase_increment_fractional = ((frequency * (NUM_TABLE_CELLS>>7))/(UPDATE_RATE>>6)) << (F_BITS-16+1);
-			phase_increment_fractional = (((((uint32_t)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)>>7)*frequency)/(UPDATE_RATE>>6))
-			                             << (OSCIL_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS - 16 + 1);
+			// TB2014-8-20 change this following Austin Grossman's suggestion on user list
+			// https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!msg/mozzi-users/u4D5NMzVnQs/pCmiWInFvrkJ
+			//phase_increment_fractional = (((((uint32_t)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)>>7)*frequency)/(UPDATE_RATE>>6))
+			//                             << (OSCIL_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS - 16 + 1);                      
+			if (NUM_TABLE_CELLS >= UPDATE_RATE) {
+        phase_increment_fractional = ((unsigned long)frequency) * (NUM_TABLE_CELLS/UPDATE_RATE);
+      } else {
+        phase_increment_fractional = ((unsigned long)frequency) / (UPDATE_RATE/NUM_TABLE_CELLS);
+      } 
 
 		}
 	}
@@ -268,7 +290,10 @@ public:
 	const
 	unsigned long phaseIncFromFreq(int frequency)
 	{
-		return (((unsigned long)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) << OSCIL_F_BITS;
+		// TB2014-8-20 change this following Austin Grossman's suggestion on user list
+		// https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!msg/mozzi-users/u4D5NMzVnQs/pCmiWInFvrkJ
+		//return (((unsigned long)frequency * NUM_TABLE_CELLS)/UPDATE_RATE) << OSCIL_F_BITS;
+		return ((unsigned long)frequency) * ((OSCIL_F_BITS_AS_MULTIPLIER*NUM_TABLE_CELLS)/UPDATE_RATE);
 	}
 
 

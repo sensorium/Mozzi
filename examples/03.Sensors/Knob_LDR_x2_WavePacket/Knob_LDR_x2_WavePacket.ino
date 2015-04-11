@@ -13,7 +13,7 @@
   
   The circuit:
      Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.0/3.1, or 
+    DAC/A14 on Teensy 3.1, or 
      check the README or http://sensorium.github.com/Mozzi/
 
      Potentiometer connected to analog pin 0.
@@ -21,11 +21,11 @@
        Side pins of the potentiometer go to +5V and ground
   
      Light dependent resistor (LDR) and 5.1k resistor on analog pin 1:
-       LDR from analog pin to +5V (3.3V on Teensy 3.0/3.1)
+       LDR from analog pin to +5V (3.3V on Teensy 3.1)
        5.1k resistor from analog pin to ground
      
      Light dependent resistor (LDR) and 5.1k resistor on analog pin 2:
-       LDR from analog pin to +5V (3.3V on Teensy 3.0/3.1)
+       LDR from analog pin to +5V (3.3V on Teensy 3.1)
        5.1k resistor from analog pin to ground
   
   Mozzi help/discussion/announcements:
@@ -35,7 +35,7 @@
 */
  
 
-//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
+//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <WavePacket.h>
 #include <RollingAverage.h>
 #include <AutoMap.h>
@@ -68,7 +68,7 @@ WavePacket <DOUBLE> wavey; // DOUBLE selects 2 overlapping streams
 
 
 void setup(){
-  //Serial.begin(9600); // for Teensy 3.0/3.1, beware printout can cause glitches
+  //Serial.begin(9600); // for Teensy 3.1, beware printout can cause glitches
   Serial.begin(115200);
   // wait before starting Mozzi to receive analog reads, so AutoRange will not get 0
   delay(200);

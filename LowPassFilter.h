@@ -57,8 +57,8 @@ public:
 	}
 
 
-	/** Set the resonance.  If you hear unwanted distortion, back off the resonance.
-	@param resonance in the range 0-255.
+	/** Set the resonance. If you hear unwanted distortion, back off the resonance.
+	@param resonance in the range 0-255, with 255 being most resonant.
 	*/
 	void setResonance(uint8_t resonance)
 	{

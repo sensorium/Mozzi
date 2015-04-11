@@ -71,7 +71,7 @@ static long longRandom()
 {
 	//analogReference(INTERNAL2V56);
 	unsigned long rv = 0;
-	for (uint8_t i=0; i< 32; i++) rv |= ((analogRead(8)+94) & 1L) << i; // added 94 in case analogRead is 0
+	for (uint8_t i=0; i< 32; i++) rv |= ((analogRead(8)+2294) & 1L) << i; // added 2294 in case analogRead is 0
 	return rv;
 }
 
@@ -81,7 +81,7 @@ static long longRandom()
 {
 	//analogReference(INTERNAL);
 	unsigned long rv = 0;
-	for (uint8_t i=0; i< 32; i++) rv |= ((analogRead(8)+71) & 1L) << i; // added 71 in case analogRead is 0
+	for (uint8_t i=0; i< 32; i++) rv |= ((analogRead(8)+1171) & 1L) << i; // added 1171 in case analogRead is 0
 	return rv;
 }
 
@@ -101,6 +101,7 @@ by Rob Tillaart.
 It might only work with some processors: (from the thread)
 "...ATmega328P in DIP, possibly others but the duemilanove and uno will do it at least."
 So far, gizduino's __AVR_ATmega644P__ chip doesn't like it, so we use (long)analogRead(0)*analogRead(1) for that instead. 
+@todo add Teensy 3 code
 */
 void randSeed() {
 	#if defined(__MK20DX128__) || defined(__MK20DX256__) // teensy 3, 3.1
@@ -132,7 +133,7 @@ void xorshiftSeed(long seed)
 
 
 /** @ingroup random
-Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi. 
+Ranged random number generator, faster than Arduino's built-in random function, which is too slow for generating at audio rate with Mozzi. 
 @param minval the minimum signed uint8_t value of the range to be chosen from. Minval will be the minimum value possibly returned by the function. 
 @param maxval the maximum signed uint8_t value of the range to be chosen from. Maxval-1 will be the largest value possibly returned by the function. 
 @return a random int8_t between minval and maxval-1 inclusive.
@@ -144,7 +145,7 @@ int8_t rand(int8_t minval, int8_t maxval)
 
 
 /** @ingroup random
-Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.
+Ranged random number generator, faster than Arduino's built-in random function, which is too slow for generating at audio rate with Mozzi.
 @param minval the minimum unsigned uint8_t value of the range to be chosen from.  Minval will be the minimum value possibly returned by the function.
 @param maxval the maximum unsigned uint8_t value of the range to be chosen from.  Maxval-1 will be the largest value possibly returned by the function.
 @return a random uint8_t between minval and maxval-1 inclusive.
@@ -156,7 +157,7 @@ uint8_t rand(uint8_t minval, uint8_t maxval)
 
 
 /** @ingroup random
-Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.
+Ranged random number generator, faster than Arduino's built-in random function, which is too slow for generating at audio rate with Mozzi.
 @param minval the minimum signed int value of the range to be chosen from.  Minval will be the minimum value possibly returned by the function.
 @param maxval the maximum signed int value of the range to be chosen from.  Maxval-1 will be the largest value possibly returned by the function.
 @return a random int between minval and maxval-1 inclusive.
@@ -168,7 +169,7 @@ int rand( int minval,  int maxval)
 
 
 /** @ingroup random
-Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.
+Ranged random number generator, faster than Arduino's built-in random function, which is too slow for generating at audio rate with Mozzi.
 @param minval the minimum unsigned int value of the range to be chosen from.  Minval will be the minimum value possibly returned by the function.
 @param maxval the maximum unsigned int value of the range to be chosen from.  Maxval-1 will be the largest value possibly returned by the function.
 @return a random unsigned int between minval and maxval-1 inclusive.
@@ -180,7 +181,7 @@ unsigned int rand(unsigned int minval, unsigned int maxval)
 
 
 /** @ingroup random
-Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.
+Ranged random number generator, faster than Arduino's built-in random function, which is too slow for generating at audio rate with Mozzi.
 @param maxval the maximum signed uint8_t value of the range to be chosen from.  Maxval-1 will be the largest value  possibly returned by the function.
 @return a random int8_t between 0 and maxval-1 inclusive.
 */
@@ -191,7 +192,7 @@ int8_t rand(int8_t maxval)
 
 
 /** @ingroup random
-Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.
+Ranged random number generator, faster than Arduino's built-in random function, which is too slow for generating at audio rate with Mozzi.
 @param maxval the maximum unsigned uint8_t value of the range to be chosen from.  Maxval-1 will be the largest value possibly returned by the function.
 @return a random uint8_t between 0 and maxval-1 inclusive.
 */
@@ -202,7 +203,7 @@ uint8_t rand(uint8_t maxval)
 
 
 /** @ingroup random
-Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.
+Ranged random number generator, faster than Arduino's built-in random function, which is too slow for generating at audio rate with Mozzi.
 @param maxval the maximum signed int value of the range to be chosen from.  Maxval-1 will be the largest value possibly returned by the function.
 @return a random int between 0 and maxval-1 inclusive.
 */
@@ -213,7 +214,7 @@ int rand(int maxval)
 
 
 /** @ingroup random
-Ranged random number generator, faster than Arduino's built-in random function, which is too slow for Mozzi.
+Ranged random number generator, faster than Arduino's built-in random function, which is too slow for generating at audio rate with Mozzi.
 @param maxval the maximum unsigned int value of the range to be chosen from.  Maxval-1 will be the largest value possibly returned by the function.
 @return a random unsigned int between 0 and maxval-1 inclusive.
 */

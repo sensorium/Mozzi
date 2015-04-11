@@ -59,8 +59,8 @@ x	 9	Arduino Duemilanove
 x	 9	Arduino Nano  
 x	 9	Arduino Pro Mini  
 x	 9	Arduino Leonardo
-x	11	Arduino Mega  
-x	11  Freetronics EtherMega  
+x	11	Arduino Mega  *broken since Jan 2015
+x	11  Freetronics EtherMega  *broken since Jan 2015
 x	 9  Ardweeny  
 x	 9  Boarduino
 ..14	Teensy  
@@ -75,8 +75,10 @@ For details about HIFI mode, read the [Mozzi core module documentation](http://s
 ## Using Mozzi  
 Here's a template for an empty Mozzi sketch:  
 
-```#include <ADC.h> // required from http://github.com/pedvide/ADC for Teensy 3.0/3.1
-#include <MozziGuts.h>   // at the top of your sketch
+````
+\\#include <ADC.h> // required from http://github.com/pedvide/ADC for Teensy 3.1  
+
+\#include <MozziGuts.h>   // at the top of your sketch
 
 void setup() {
 	startMozzi();
@@ -93,7 +95,7 @@ int updateAudio(){
 void loop() {
 	audioHook();
 }
-```
+````
 
 There's a detailed example explaining the different parts [here](http://sensorium.github.com/Mozzi/learn/a-simple-sketch/).
 

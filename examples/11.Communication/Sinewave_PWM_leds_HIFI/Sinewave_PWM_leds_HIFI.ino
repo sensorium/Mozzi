@@ -13,7 +13,7 @@
     or the AUDIO_RATE could be increased to 32768 Hz, if the
     cpu isn't too busy.
   
-    HIFI mode is not for Teensy 3.0/3.1, but the PWM led part should work.
+    HIFI mode is not for Teensy 3.1, but the PWM led part should work.
     
     IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
     be changed from STANDARD mode to HIFI.
@@ -55,7 +55,7 @@
 */
 
 
-//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
+//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator

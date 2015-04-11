@@ -7,7 +7,7 @@
     values, random numbers with rand(), and EventDelay()
     for scheduling.
   
-    This sketch using HIFI mode is not for Teensy 3.0/3.1.
+    This sketch using HIFI mode is not for Teensy 3.1.
         
     IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
     be changed from STANDARD mode to HIFI.
@@ -45,7 +45,7 @@
 
 #include <MozziGuts.h>
 #include <Oscil.h>
-#include <tables/COS2048_int8.h> // table for Oscils to play
+#include <tables/cos2048_int8.h> // table for Oscils to play
 #include <mozzi_fixmath.h>
 #include <EventDelay.h>
 #include <mozzi_rand.h>

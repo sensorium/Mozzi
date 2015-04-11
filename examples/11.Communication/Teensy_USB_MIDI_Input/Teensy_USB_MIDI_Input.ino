@@ -23,11 +23,9 @@
 
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
-#include <Line.h> // for envelope
 #include <tables/sin2048_int8.h> // sine table for oscillator
 #include <mozzi_midi.h>
 #include <ADSR.h>
-#include <mozzi_fixmath.h>
 
 
 // use #define for CONTROL_RATE, not a constant
@@ -54,10 +52,7 @@ void HandleNoteOff(byte channel, byte note, byte velocity) {
 }
 
 void setup() {
-  pinMode(LED, OUTPUT);
-
-  // Initiate MIDI communications, listen to all channels (not needed with Teensy usbMIDI)
-  //MIDI.begin(MIDI_CHANNEL_OMNI);    
+  pinMode(LED, OUTPUT);   
 
   // Connect the HandleNoteOn function to the library, so it is called upon reception of a NoteOn.
   usbMIDI.setHandleNoteOn(HandleNoteOn);  // Put only the name of the function

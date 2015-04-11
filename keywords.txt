@@ -251,7 +251,7 @@ randMidiNote	KEYWORD2
 randSeed	KEYWORD2
 
 mozzi_midi	KEYWORD1
-float mtof	KEYWORD2
+mtof	KEYWORD2
 Q16n16_mtof	KEYWORD2
 
 
@@ -270,6 +270,13 @@ setDecayTime	KEYWORD2
 setSustainTime	KEYWORD2
 setReleaseTime	KEYWORD2
 setTimes	KEYWORD2
+setLevels	KEYWORD2
+setAttackUpdateSteps	KEYWORD2
+setDecayUpdateSteps	KEYWORD2
+setSustainUpdateSteps	KEYWORD2
+setReleaseUpdateSteps	KEYWORD2
+setIdleUpdateSteps	KEYWORD2
+setAllUpdateSteps	KEYWORD2
 
 
 Portamento KEYWORD1

@@ -4,12 +4,14 @@
     Also demonstrates Portamento(), a traditional portamento with a 
     duration which can be set.
   
-    Circuit: Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.0/3.1, or 
-    check the README or http://sensorium.github.com/Mozzi/
-  
-    Check the Arduino MIDI library for MIDI set up info.
+    Uses Arduino MIDI library v4.2 
+    (https://github.com/FortySevenEffects/arduino_midi_library/releases/tag/4.2)
     
+    Circuit: 
+      MIDI input circuit as per http://arduino.cc/en/Tutorial/Midi
+      (midi has to be disconnected from rx for sketch to upload)
+      Audio output on digital pin 9 on a Uno or similar.
+      
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
   
@@ -17,7 +19,7 @@
 */
 
 #include <MIDI.h>
-//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
+//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
 #include <Line.h> // for envelope
@@ -26,6 +28,8 @@
 #include <ADSR.h>
 #include <mozzi_fixmath.h>
 #include <Portamento.h>
+
+MIDI_CREATE_DEFAULT_INSTANCE();
 
 // use #define for CONTROL_RATE, not a constant
 #define CONTROL_RATE 128 // powers of 2 please

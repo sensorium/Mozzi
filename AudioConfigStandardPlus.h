@@ -18,8 +18,10 @@ about when you're writing sketches.
 
 // Used internally.  If there was a channel 2, it would be OCR1B.
 #define AUDIO_CHANNEL_1_OUTPUT_REGISTER OCR1A
+#define AUDIO_CHANNEL_2_OUTPUT_REGISTER OCR1B
 
 #define AUDIO_CHANNEL_1_PIN TIMER1_A_PIN // defined in TimerOne/config/known_16bit_timers.h
+#define AUDIO_CHANNEL_2_PIN TIMER1_B_PIN
 
 #endif        //  #ifndef AUDIOCONFIGSTANDARDPLUS_H
 

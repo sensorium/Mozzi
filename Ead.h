@@ -101,7 +101,7 @@ public:
 	void start(unsigned int attack_ms, unsigned int decay_ms)
 	{
 		set(attack_ms, decay_ms);
-		Q8n24state = 0;
+		//Q8n24state = 0; // don't restart from 0, just go from whatever the current level is, to avoid glitches
 		attack_phase = true;
 	}
 

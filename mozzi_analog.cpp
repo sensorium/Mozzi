@@ -15,7 +15,7 @@
 #include "Stack.h"
 //#include "mozzi_utils.h"
 
-// required from http://github.com/pedvide/ADC for Teensy 3.0/3.1
+// required from http://github.com/pedvide/ADC for Teensy 3.1
 // This is a hacky way to access the ADC library, otherwise ADC.h has to be included at the top of every Arduino sketch.
 /*#if defined(__MK20DX128__) || defined(__MK20DX256__)
 #include "../ADC/ADC_Module.cpp"

@@ -23,7 +23,7 @@ Boards, pins and resistor positions are documented in MozziGuts.h
 // pins defined in TimerOne/config/known_16bit_timers.h
 #define AUDIO_CHANNEL_1_HIGHUINT8_T_PIN TIMER1_A_PIN // 3.9k resistor
 #define AUDIO_CHANNEL_1_lowByte_PIN TIMER1_B_PIN // 1 M resistor
-#define AUDIO_CHANNEL_1_HIGHUINT8_T_REGISTER OCR1AL
+#define AUDIO_CHANNEL_1_highByte_REGISTER OCR1AL
 #define AUDIO_CHANNEL_1_lowByte_REGISTER OCR1BL
 
 /* Used internally to put the 0-biased generated audio into the right range for PWM output.*/

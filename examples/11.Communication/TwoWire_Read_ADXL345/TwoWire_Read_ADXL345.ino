@@ -5,7 +5,7 @@
     Demonstrates use of twi_nonblock functions
     to replace processor-blocking Wire methods.
     
-    Note: The twi_nonblock code is not compatible with Teesy 3.0/3.1.
+    Note: The twi_nonblock code is not compatible with Teesy 3.1.
     
     Circuit: Audio output on digital pin 9.
   

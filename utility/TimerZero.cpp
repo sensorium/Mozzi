@@ -29,7 +29,7 @@
 // TB2012 search/replaced TimerTwo with TimerZero
 // TB2012 changed preScale array to suit Timer0
 
-// Added by TB2014 for Mozzi library, to hide code from Teensy 3.0/3.1
+// Added by TB2014 for Mozzi library, to hide code from Teensy 3.1
 #if !(defined(__MK20DX128__) || defined(__MK20DX256__))
 
 #include <avr/pgmspace.h>

@@ -5,7 +5,7 @@
   
   Demonstrates using Mozzi with PinChangeInt library from:
   http://code.google.com/p/arduino-pinchangeint/
-  (Not for Teensy 3.0/3.1)
+  (Not for Teensy 3.1)
   
   Circuit:
   

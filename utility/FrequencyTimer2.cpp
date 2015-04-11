@@ -30,7 +30,7 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-// Added by TB2014 for Mozzi library, to hide code from Teensy 3.0/3.1
+// Added by TB2014 for Mozzi library, to hide code from Teensy 3.1
 #if !(defined(__MK20DX128__) || defined(__MK20DX256__))
 
 #include <FrequencyTimer2.h>
@@ -145,14 +145,19 @@ void FrequencyTimer2::setPeriodCPUCycles(unsigned long period){
 #endif
 	OCR2A = top;
 	//Clear Timer on Compare Match (CTC) mode ..... TB2014 p158, looks like Toggle OC2A on Compare Match
-	TCCR2A = (_BV(WGM21) | ( FrequencyTimer2::enabled ? _BV(COM2A0) : 0)); 
+	//TCCR2A = (_BV(WGM21) | ( FrequencyTimer2::enabled ? _BV(COM2A0) : 0)); 
+	// TB2014b from Austin Grossman on user forum, to allow pin 11 to be used normally (on uno, other pin on other boards)
+	TCCR2A = _BV(WGM21);
 	TCCR2B = pre;
 #elif defined(TCCR2)
 	TCCR2 = 0;
 	TCNT2 = 0;
 	ASSR &= ~_BV(AS2);    // use clock, not T2 pin
 	OCR2 = top;
-	TCCR2 = (_BV(WGM21) | ( FrequencyTimer2::enabled ? _BV(COM20) : 0)  | pre);
+	// TB2014b from Austin Grossman on user forum, to allow pin 11 to be used normally (on uno, other pin on other boards), replace this:
+	//TCCR2 = (_BV(WGM21) | ( FrequencyTimer2::enabled ? _BV(COM20) : 0)  | pre);
+	// with:
+	TCCR2 = (_BV(WGM21) | pre);
 #elif defined(TCCR4A) // TB2013 for 32u4 (leonardo,teensy)
 	TCCR4A = 0;
 	TCCR4B = 0;
@@ -209,6 +214,8 @@ unsigned long  FrequencyTimer2::getPeriod()
 }
 
 
+// TB2014b from Austin Grossman on user forum, to allow pin 11 to be used normally (on uno, other pin on other boards), replace this:
+/*
 void FrequencyTimer2::enable()
 {
 	FrequencyTimer2::enabled = 1;
@@ -222,7 +229,17 @@ void FrequencyTimer2::enable()
 	TIMSK4 = _BV(OCIE4A);
 #endif
 }
+*/
 
+// with:
+void FrequencyTimer2::enable()
+{
+FrequencyTimer2::enabled = 1;
+}
+
+
+// TB2014b from Austin Grossman on user forum, to allow pin 11 to be used normally (on uno, other pin on other boards), replace this:
+/*
 void FrequencyTimer2::disable()
 {
 	FrequencyTimer2::enabled = 0;
@@ -235,5 +252,13 @@ void FrequencyTimer2::disable()
 	TIMSK4 = 0;
 #endif
 }
+*/
+
+// with:
+void FrequencyTimer2::disable()
+{
+FrequencyTimer2::enabled = 0;
+}
+
 
 #endif

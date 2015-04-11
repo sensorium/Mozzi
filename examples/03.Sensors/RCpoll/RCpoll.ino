@@ -35,7 +35,7 @@ sPin ---\/\/\/-----.
  
  */
 
-//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
+//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/sin2048_int8.h> // sine table for oscillator
@@ -49,7 +49,7 @@ RCpoll <SENSOR_PIN> sensor;
 
 
 void setup(){
-  //Serial.begin(9600); // for Teensy 3.0/3.1, beware printout can cause glitches
+  //Serial.begin(9600); // for Teensy 3.1, beware printout can cause glitches
   Serial.begin(115200);
   startMozzi(CONTROL_RATE);
 }

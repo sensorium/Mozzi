@@ -38,21 +38,21 @@
 */ 
 
 
-template <const uint8_t RESOLUTION_INCREASE_BITS>
-class OverSample: public RollingAverage<unsigned int, (1<<(RESOLUTION_INCREASE_BITS*2))>
+template <class T, const uint8_t RESOLUTION_INCREASE_BITS>
+class OverSample: public RollingAverage<T, (1<<(RESOLUTION_INCREASE_BITS*2))>
 {
 
 public:
-	using RollingAverage<unsigned int, (1<<(RESOLUTION_INCREASE_BITS*2))>::add;
+	using RollingAverage<T, (1<<(RESOLUTION_INCREASE_BITS*2))>::add;
 
 	/** Oversample and decimate the input to increase resolution by RESOLUTION_INCREASE_BITS;
 	@param input an analog input to oversample.
 	@return the higher resolution result.
 	@note timing 5.7us
 	*/
-	unsigned int next(unsigned int input)
+	T next(T input)
 	{
-		return (unsigned)add(input)>>RESOLUTION_INCREASE_BITS;
+		return add(input)>>RESOLUTION_INCREASE_BITS;
 	}
 
 };

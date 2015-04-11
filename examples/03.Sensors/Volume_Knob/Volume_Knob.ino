@@ -9,7 +9,7 @@
   
   The circuit:
     Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.0/3.1, or 
+    DAC/A14 on Teensy 3.1, or 
     check the README or http://sensorium.github.com/Mozzi/
 
   Potentiometer connected to analog pin 0:
@@ -28,7 +28,7 @@
   Tim Barrass 2013, CC by-nc-sa.
 */
 
-//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
+//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator
@@ -43,7 +43,7 @@ byte volume;
 
 
 void setup(){
-  //Serial.begin(9600); // for Teensy 3.0/3.1, beware printout can cause glitches
+  //Serial.begin(9600); // for Teensy 3.1, beware printout can cause glitches
   Serial.begin(115200); // set up the Serial output so we can look at the piezo values // set up the Serial output so we can look at the input values
   aSin.setFreq(440);
   startMozzi(); // :))

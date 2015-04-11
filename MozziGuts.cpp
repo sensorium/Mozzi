@@ -66,8 +66,7 @@ PWM frequency tests
 
 //-----------------------------------------------------------------------------------------------------------------
 // ring buffer for audio output
-#define BUFFER_NUM_CELLS 256
-CircularBuffer <unsigned int> output_buffer;
+CircularBuffer <unsigned int> output_buffer; // fixed size 256
 
 //-----------------------------------------------------------------------------------------------------------------
 
@@ -133,7 +132,7 @@ static void backupMozziTimer1()
 #if (USE_AUDIO_INPUT==true)
 
 // ring buffer for audio input
-CircularBuffer <unsigned int>input_buffer;
+CircularBuffer <unsigned int>input_buffer; // fixed size 256
 
 static boolean audio_input_is_available;
 static int audio_input; // holds the latest audio from input_buffer
@@ -261,14 +260,14 @@ static void teensyAudioOutput()
 
 static void startAudioStandard()
 {
-	//backupPreMozziTimer1(); // not for Teensy 3.0/3.1
+	//backupPreMozziTimer1(); // not for Teensy 3.1
 	
 	analogWriteResolution(12);
 	adc->setAveraging(0);
 	adc->setConversionSpeed(ADC_MED_SPEED); // could be ADC_HIGH_SPEED, noisier
 	timer1.begin(teensyAudioOutput, 1000000UL/AUDIO_RATE); 
 
-	//backupMozziTimer1(); // // not for Teensy 3.0/3.1
+	//backupMozziTimer1(); // // not for Teensy 3.1
 }
 	
 #else
@@ -279,17 +278,32 @@ static void startAudioStandard()
 	backupPreMozziTimer1();
 
 	pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);	// set pin to output for audio
+	//	pinMode(AUDIO_CHANNEL_2_PIN, OUTPUT);	// set pin to output for audio
 #if (AUDIO_MODE == STANDARD)
 	Timer1.initializeCPUCycles(16000000UL/AUDIO_RATE, PHASE_FREQ_CORRECT);		// set period, phase and frequency correct
 #else // (AUDIO_MODE == STANDARD_PLUS)
 	Timer1.initializeCPUCycles(16000000UL/PWM_RATE, FAST);	// fast mode enables higher PWM rate
 #endif
 	Timer1.pwm(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);		// pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
+	//Timer1.pwm(AUDIO_CHANNEL_2_PIN, AUDIO_BIAS);
 	TIMSK1 = _BV(TOIE1); 	// Overflow Interrupt Enable (when not using Timer1.attachInterrupt())
-
+	//TIMSK1 |= _BV(TOIE1) | _BV(OCIE1A); // Overflow Interrupt Enable and Output Compare A Match Interrupt Enable
 	backupMozziTimer1();
 }
 
+/*
+// trying to get ac output for piezo
+unsigned int output;
+
+//extern unsigned long interruptcounter;
+ISR(TIMER1_COMPA_vect){
+	//Serial.print(9);
+	//interruptcounter++;
+	// change polarity of pwm output pins 9 and 10 - one becomes ground, the other becomes max-output
+	AUDIO_CHANNEL_1_OUTPUT_REGISTER = 0;//STANDARD_PWM_RESOLUTION;
+	//AUDIO_CHANNEL_2_OUTPUT_REGISTER = STANDARD_PWM_RESOLUTION-output;
+}
+*/
 
 /* Interrupt service routine moves sound data from the output buffer to the
 Arduino output register, running at AUDIO_RATE. */
@@ -310,9 +324,22 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK)
 #endif
 
 //if (!output_buffer.isEmpty()) {
+/*
+output =  output_buffer.read();
+AUDIO_CHANNEL_1_OUTPUT_REGISTER = output;
+AUDIO_CHANNEL_2_OUTPUT_REGISTER = 0;
+*/
 	AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer.read();
 //}
 
+	// flip signal polarity - instead of signal going to 0 (both pins 0), it goes to pseudo-negative of its current value.
+	// this would set non-inverted when setting sample value, and then inverted when top is reached (in an interrupt)
+	// non-invert
+	//TCCR1A |= _BV(COM1A1);
+	// invert
+	//TCCR1A |= ~_BV(COM1A1)
+	
+	
 #if (AUDIO_MODE == STANDARD_PLUS) && (AUDIO_RATE==16384) // all this conditional compilation is so clutsy!
 	}
 #endif
@@ -427,7 +454,8 @@ void dummy_function(void)
 		//if (!output_buffer.isEmpty()){
 		unsigned int out = output_buffer.read();
 		// 14 bit, 7 bits on each pin
-		AUDIO_CHANNEL_1_HIGHUINT8_T_REGISTER = out >> 7; // B11111110000000 becomes B1111111
+		//AUDIO_CHANNEL_1_highByte_REGISTER = out >> 7; // B11111110000000 becomes B1111111
+		AUDIO_CHANNEL_1_highByte_REGISTER = (out + 0x8000) >> 8; // B11111110000000 becomes B1111111, tries to avoid looping over 7 shifts
 		AUDIO_CHANNEL_1_lowByte_REGISTER = out & 127; // B01111111
 		//}
 }
@@ -487,7 +515,7 @@ static void startControl(unsigned int control_rate_hz)
 
 void startMozzi(int control_rate_hz)
 {
-	setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST in setup() if desired (not for Teensy 3.0/3.1)
+	setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST in setup() if desired (not for Teensy 3.1)
 	// delay(200); // so AutoRange doesn't read 0 to start with
 	startControl(control_rate_hz);
 #if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS)

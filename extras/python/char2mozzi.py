@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 
-##@file int8_t2mozzi.py
+##@file char2mozzi.py
 #  @ingroup util
 #	A script for converting raw 8 bit sound data files to wavetables for Mozzi.
 #
 #	Usage: 
-#	>>>int8_t2mozzi.py <infile outfile tablename samplerate>
+#	>>>char2mozzi.py <infile outfile tablename samplerate>
 #	
-#	@param infile		The file to convert.
-#	@param outfile	The file to save as output.
+#	@param infile		The file to convert, RAW(headerless) Signed 8 bit PCM.
+#	@param outfile	The file to save as output, a .h file containing a table for Mozzi.
 #	@param tablename	The name to give the table of converted data in the new file.
 #	@param samplerate	The samplerate the sound was recorded at.  Choose what make sense for you, if it's not a normal recorded sample.
 #
@@ -31,19 +31,19 @@
 #	Now use the file you just exported, as the "infile" to convert.
 #	
 #	@author Tim Barrass 2010-12
-#	@fn int8_t2mozzi
+#	@fn char2mozzi
 
 import sys, array, os, textwrap, random
 
 if len(sys.argv) != 5:
-        print 'Usage: int8_t2mozzi.py <infile outfile tablename samplerate>'
+        print ('Usage: char2mozzi.py <infile outfile tablename samplerate>')
         sys.exit(1)
 
 [infile, outfile, tablename, samplerate] = sys.argv[1:]
 
-def int8_t2mozzi(infile, outfile, tablename, samplerate):
+def char2mozzi(infile, outfile, tablename, samplerate):
 	fin = open(os.path.expanduser(infile), "rb")
-	print "opened " + infile
+	print ("opened " + infile)
 	uint8_tstoread = os.path.getsize(os.path.expanduser(infile))
 	##print uint8_tstoread
 	valuesfromfile = array.array('b') # array of signed int8_t ints
@@ -77,6 +77,6 @@ def int8_t2mozzi(infile, outfile, tablename, samplerate):
 		fout.write(outstring)
 		fout.write('\n\n#endif /* ' + tablename + '_H_ */\n')
 		fout.close()
-		print "wrote " + outfile
+		print ("wrote " + outfile)
 
-int8_t2mozzi(infile, outfile, tablename, samplerate)
+char2mozzi(infile, outfile, tablename, samplerate)

@@ -7,7 +7,7 @@
     signal and one smoothed with RollingAverage().
   
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.0/3.1, or 
+    DAC/A14 on Teensy 3.1, or 
     check the README or http://sensorium.github.com/Mozzi/
   
     Mozzi help/discussion/announcements:
@@ -16,7 +16,7 @@
     Tim Barrass 2013, CC by-nc-sa.
 */
 
-//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
+//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator
@@ -33,7 +33,7 @@ RollingAverage <int, 32> kAverage; // how_many_to_average has to be power of 2
 int averaged;
 
 void setup(){
-  //Serial.begin(9600); // for Teensy 3.0/3.1, beware printout can cause glitches
+  //Serial.begin(9600); // for Teensy 3.1, beware printout can cause glitches
   Serial.begin(115200);
   startMozzi();
 }

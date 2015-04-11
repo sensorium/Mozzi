@@ -18,7 +18,7 @@
  #include "WProgram.h"
 #endif
 
-// required from http://github.com/pedvide/ADC for Teensy 3.0/3.1
+// required from http://github.com/pedvide/ADC for Teensy 3.1
 #if defined(__MK20DX128__) || defined(__MK20DX256__)
 #include "../ADC/ADC.h" 
 #endif

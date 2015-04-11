@@ -77,7 +77,7 @@ Here's a template for an empty Mozzi sketch:
 
 
 ```
-#include <ADC.h> // required from http://github.com/pedvide/ADC for Teensy 3.1  
+\\\#include <ADC.h> // required from http://github.com/pedvide/ADC for Teensy 3.1  
 
 #include <MozziGuts.h>   // at the top of your sketch
 

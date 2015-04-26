@@ -108,7 +108,7 @@
   <li><a href="/Mozzi/faq/">FAQ</a></li>
   <li><a href="https://groups.google.com/forum/#!forum/mozzi-users/">Forum</a></li>
   <li><a href="/Mozzi/doc/html/index.html">API</a></li>
-  <li><a href="/Mozzi/donate/">Donate $1</a></li>
+  <li><a href="/Mozzi/consulting/">Consulting</a></li>
   <!-- <li><a href="https://mozzi.sharetribe.com/">Market</a></li> -->
   <!-- <li><a href="/Mozzi/download/">Download</a></li> -->
   <!-- <li><a href="/Mozzi/blog/">Blog</a></li> -->
@@ -6282,18 +6282,24 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>90</span>
 <span class='line-number'>91</span>
 <span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of a sound being triggered by MIDI input, with portamento.</span>
 </span><span class='line'><span class="cm">  </span>
 </span><span class='line'><span class="cm">    Demonstrates playing notes with Mozzi in response to MIDI input.</span>
 </span><span class='line'><span class="cm">    Also demonstrates Portamento(), a traditional portamento with a </span>
 </span><span class='line'><span class="cm">    duration which can be set.</span>
 </span><span class='line'><span class="cm">  </span>
-</span><span class='line'><span class="cm">    Circuit: Audio output on digital pin 9 on a Uno or similar, or</span>
-</span><span class='line'><span class="cm">    DAC/A14 on Teensy 3.1, or </span>
-</span><span class='line'><span class="cm">    check the README or http://sensorium.github.com/Mozzi/</span>
-</span><span class='line'><span class="cm">  </span>
-</span><span class='line'><span class="cm">    Check the Arduino MIDI library for MIDI set up info.</span>
+</span><span class='line'><span class="cm">    Uses Arduino MIDI library v4.2 </span>
+</span><span class='line'><span class="cm">    (https://github.com/FortySevenEffects/arduino_midi_library/releases/tag/4.2)</span>
 </span><span class='line'><span class="cm">    </span>
+</span><span class='line'><span class="cm">    Circuit: </span>
+</span><span class='line'><span class="cm">      MIDI input circuit as per http://arduino.cc/en/Tutorial/Midi</span>
+</span><span class='line'><span class="cm">      (midi has to be disconnected from rx for sketch to upload)</span>
+</span><span class='line'><span class="cm">      Audio output on digital pin 9 on a Uno or similar.</span>
+</span><span class='line'><span class="cm">      </span>
 </span><span class='line'><span class="cm">    Mozzi help/discussion/announcements:</span>
 </span><span class='line'><span class="cm">    https://groups.google.com/forum/#!forum/mozzi-users</span>
 </span><span class='line'><span class="cm">  </span>
@@ -6310,6 +6316,8 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cp">#include &lt;ADSR.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;mozzi_fixmath.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Portamento.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">MIDI_CREATE_DEFAULT_INSTANCE</span><span class="p">();</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">// use #define for CONTROL_RATE, not a constant</span>
 </span><span class='line'><span class="cp">#define CONTROL_RATE 128 </span><span class="c1">// powers of 2 please</span>
@@ -14448,11 +14456,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>80</span>
 <span class='line-number'>81</span>
 <span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of a sound being triggered by MIDI input.</span>
 </span><span class='line'><span class="cm">  </span>
 </span><span class='line'><span class="cm">    Demonstrates playing notes with Mozzi in response to MIDI input,</span>
@@ -14478,11 +14481,9 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator template</span>
-</span><span class='line'><span class="cp">#include &lt;Line.h&gt; </span><span class="c1">// for envelope</span>
 </span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt; </span><span class="c1">// sine table for oscillator</span>
 </span><span class='line'><span class="cp">#include &lt;mozzi_midi.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;ADSR.h&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;mozzi_fixmath.h&gt;</span>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="c1">// use #define for CONTROL_RATE, not a constant</span>
@@ -14510,9 +14511,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'>
 </span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">()</span> <span class="p">{</span>
 </span><span class='line'>  <span class="n">pinMode</span><span class="p">(</span><span class="n">LED</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">// Initiate MIDI communications, listen to all channels (not needed with Teensy usbMIDI)</span>
-</span><span class='line'>  <span class="c1">//MIDI.begin(MIDI_CHANNEL_OMNI);    </span>
 </span><span class='line'>
 </span><span class='line'>  <span class="c1">// Connect the HandleNoteOn function to the library, so it is called upon reception of a NoteOn.</span>
 </span><span class='line'>  <span class="n">usbMIDI</span><span class="p">.</span><span class="n">setHandleNoteOn</span><span class="p">(</span><span class="n">HandleNoteOn</span><span class="p">);</span>  <span class="c1">// Put only the name of the function</span>

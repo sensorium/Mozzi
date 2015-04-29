@@ -36,10 +36,11 @@ Download Mozzi from the top of this page and unzip it. It will probably have a
 name like "sensorium-Mozzi-2bee818". Rename the unzipped folder "Mozzi". Then,
 following the instructions from the [Arduino libraries guide](http://arduino.cc/en/Guide/Libraries):  
 
-In the Arduino IDE, navigate to __Sketch > Import Library__. At the top of the drop
-down list, select the option to __Add Library__. Return to the __Sketch > Import Library__ menu. 
+In the Arduino IDE, navigate to __Sketch > Include Library__. To reveal a drop down menu. 
+Select __Add .ZIP Library...__ which should be second from the top. 
+Return to the __Sketch > Include Library__ menu. 
 You should now see the library at the bottom of the drop-down
-menu. It is ready to be used in your sketch.
+menu, underneath _Contributed libraries. It is ready to be used in your sketch.
 
 ***
 

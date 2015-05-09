@@ -1,7 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  rankdir="LR";
-  Node1 [label="AudioDelayFeedback\l\< NUM_BUFFER_SAMPLES,\l INTERP_TYPE \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_audio_delay_feedback.html",tooltip="Audio delay line with feedback for comb filter, flange, chorus and short echo effects. "];
-}

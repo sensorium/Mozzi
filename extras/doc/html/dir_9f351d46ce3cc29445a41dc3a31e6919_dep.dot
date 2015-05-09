@@ -1,6 +1,0 @@
-digraph "config" {
-  compound=true
-  node [ fontsize="10", fontname="Helvetica"];
-  edge [ labelfontsize="10", labelfontname="Helvetica"];
-  dir_9f351d46ce3cc29445a41dc3a31e6919 [shape=box, label="config", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_9f351d46ce3cc29445a41dc3a31e6919.html"];
-}

@@ -4,9 +4,9 @@ NEWS
 get the latest version from https://sensorium.github.io/Mozzi/
 
 
-version 2014-08-09-14:15
+version 2015-05-09-22:18
 
-Tweaks and fixes, to be honest I've lost track
+Tweaks and fixes, a couple of new simple demos, fixed/updated python script for converting wavetables.
 
 
 version_2014-08-09-14:15

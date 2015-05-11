@@ -454,12 +454,12 @@ void dummy_function(void)
 		//if (!output_buffer.isEmpty()){
 		unsigned int out = output_buffer.read();
 		// 14 bit, 7 bits on each pin
-		//AUDIO_CHANNEL_1_highByte_REGISTER = out >> 7; // B11111110000000 becomes B1111111
-		// try to avoid looping over 7 shifts - need to check timing
-		out <<= 1;
-		AUDIO_CHANNEL_1_highByte_REGISTER = out >> 8; 
+		//AUDIO_CHANNEL_1_highByte_REGISTER = out >> 7; // B00111111 10000000 becomes B1111111
+		// try to avoid looping over 7 shifts - need to check timing or disassemble to see what really happens
+		unsigned int out_high = out<<1; // B00111111 10000000 becomes B01111111 00000000
+		AUDIO_CHANNEL_1_highByte_REGISTER = out_high >> 8; // B01111111 00000000 produces B01111111
 		//
-		AUDIO_CHANNEL_1_lowByte_REGISTER = out & 127; // B01111111
+		AUDIO_CHANNEL_1_lowByte_REGISTER = out & 127; 
 		//}
 }
 

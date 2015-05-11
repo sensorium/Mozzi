@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Use Arduino 1.0.5 - MOZZI</title>
+  <title>Release v1.0.2 - MOZZI</title>
   <meta name="author" content="Tim Barrass">
   
   
@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sensorium.github.io/Mozzi//blog/2015/04/08/use-arduino-1-dot-0-5">
+  <link rel="canonical" href="http://sensorium.github.io/Mozzi//blog/2015/05/11/release-1-dot-0-2">
   <link href="/Mozzi/favicon.png" rel="icon">
   <link href="/Mozzi/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/Mozzi/atom.xml" rel="alternate" title="MOZZI" type="application/atom+xml">
@@ -125,7 +125,7 @@
   
   <header>
     
-      <h1 class="entry-title">Use Arduino 1.0.5</h1>
+      <h1 class="entry-title">Release v1.0.2</h1>
     
     
       <p class="meta">
@@ -141,16 +141,29 @@
   
 
 
-<time datetime="2015-04-08T21:52:00+10:00" pubdate data-updated="true">Apr 8<span>th</span>, 2015</time>
+<time datetime="2015-05-11T21:02:00+10:00" pubdate data-updated="true">May 11<span>th</span>, 2015</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Mozzi is broken in Arduino IDE 1.0.6 and 1.6.3.  For now, use Arduino 1.0.5.</p>
+<div class="entry-content"><p>New version released, named Aedes australis, v1.0.2.</p>
 
-<p>The symptom is that more complex sketches run too slowly for smooth audio synthesis.  I&#8217;ll try to sort it out!</p>
+<p>Updated 2015-05-11-20:23</p>
+
+<p>First (slightly edited) versioned release using GitHub release process.</p>
+
+<p>Warning: This release and all previous versions of Mozzi run slow when using Arduino IDE versions greater than 1.0.5, at least on OSX, causing glitches on many of the included examples. Simple examples run OK, but until this is resolved, Arduino 1.0.5 is recommended.</p>
+
+<ul>
+<li>Tweaks and fixes, a couple of new simple demos..</li>
+<li>Fixed/updated python script for converting wavetables, fixed name back to char2mozzi.py</li>
+<li>Updated MIDI examples for newer MIDI library.</li>
+<li>Updated OverSample.h to take an additional termplate parameter to allow different numeric types.</li>
+<li>Removed library.properties file until the library folder stucture is updated to match the new Arduino library form, as it stopped it installing in new IDEs.</li>
+</ul>
+
 </div>
 
 
@@ -173,7 +186,7 @@
   
 
 
-<time datetime="2015-04-08T21:52:00+10:00" pubdate data-updated="true">Apr 8<span>th</span>, 2015</time>
+<time datetime="2015-05-11T21:02:00+10:00" pubdate data-updated="true">May 11<span>th</span>, 2015</time>
       
 
 
@@ -181,7 +194,7 @@
     
       <div class="sharing">
   
-  <a href="/Mozzi//twitter.com/share" class="twitter-share-button" data-url="http://sensorium.github.io/Mozzi//blog/2015/04/08/use-arduino-1-dot-0-5/" data-via="nothingperson" data-counturl="http://sensorium.github.io/Mozzi//blog/2015/04/08/use-arduino-1-dot-0-5/" >Tweet</a>
+  <a href="/Mozzi//twitter.com/share" class="twitter-share-button" data-url="http://sensorium.github.io/Mozzi//blog/2015/05/11/release-1-dot-0-2/" data-via="nothingperson" data-counturl="http://sensorium.github.io/Mozzi//blog/2015/05/11/release-1-dot-0-2/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -194,10 +207,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/Mozzi/blog/2014/11/21/yes/" title="Previous Post: yes, you can donate!">&laquo; yes, you can donate!</a>
+        <a class="basic-alignment left" href="/Mozzi/blog/2015/04/08/use-arduino-1-dot-0-5/" title="Previous Post: Use Arduino 1.0.5">&laquo; Use Arduino 1.0.5</a>
       
-      
-        <a class="basic-alignment right" href="/Mozzi/blog/2015/05/11/release-1-dot-0-2/" title="Next Post: Release v1.0.2">Release v1.0.2 &raquo;</a>
       
     </p>
   </footer>

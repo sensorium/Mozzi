@@ -4,7 +4,7 @@
   <title><![CDATA[MOZZI]]></title>
   <link href="http://sensorium.github.io/Mozzi//atom.xml" rel="self"/>
   <link href="http://sensorium.github.io/Mozzi//"/>
-  <updated>2015-05-11T20:50:46+10:00</updated>
+  <updated>2015-05-11T21:09:06+10:00</updated>
   <id>http://sensorium.github.io/Mozzi//</id>
   <author>
     <name><![CDATA[Tim Barrass]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Release v1.0.2]]></title>
+    <link href="http://sensorium.github.io/Mozzi//blog/2015/05/11/release-1-dot-0-2/"/>
+    <updated>2015-05-11T21:02:00+10:00</updated>
+    <id>http://sensorium.github.io/Mozzi//blog/2015/05/11/release-1-dot-0-2</id>
+    <content type="html"><![CDATA[<p>New version released, named Aedes australis, v1.0.2.</p>
+
+<p>Updated 2015-05-11-20:23</p>
+
+<p>First (slightly edited) versioned release using GitHub release process.</p>
+
+<p>Warning: This release and all previous versions of Mozzi run slow when using Arduino IDE versions greater than 1.0.5, at least on OSX, causing glitches on many of the included examples. Simple examples run OK, but until this is resolved, Arduino 1.0.5 is recommended.</p>
+
+<ul>
+<li>Tweaks and fixes, a couple of new simple demos..</li>
+<li>Fixed/updated python script for converting wavetables, fixed name back to char2mozzi.py</li>
+<li>Updated MIDI examples for newer MIDI library.</li>
+<li>Updated OverSample.h to take an additional termplate parameter to allow different numeric types.</li>
+<li>Removed library.properties file until the library folder stucture is updated to match the new Arduino library form, as it stopped it installing in new IDEs.</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Use Arduino 1.0.5]]></title>

@@ -356,10 +356,10 @@ static void startAudioHiFi()
 {
 	backupPreMozziTimer1();
 	// pwm on timer 1
-	pinMode(AUDIO_CHANNEL_1_HIGHUINT8_T_PIN, OUTPUT);	// set pin to output for audio, use 3.9k resistor
+	pinMode(AUDIO_CHANNEL_1_highByte_PIN, OUTPUT);	// set pin to output for audio, use 3.9k resistor
 	pinMode(AUDIO_CHANNEL_1_lowByte_PIN, OUTPUT);	// set pin to output for audio, use 499k resistor
 	Timer1.initializeCPUCycles(16000000UL/125000, FAST);		// set period for 125000 Hz fast pwm carrier frequency = 14 bits
-	Timer1.pwm(AUDIO_CHANNEL_1_HIGHUINT8_T_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
+	Timer1.pwm(AUDIO_CHANNEL_1_highByte_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
 	Timer1.pwm(AUDIO_CHANNEL_1_lowByte_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
 	backupMozziTimer1();
 	// audio output interrupt on timer 2, sets the pwm levels of timer 1
@@ -455,7 +455,10 @@ void dummy_function(void)
 		unsigned int out = output_buffer.read();
 		// 14 bit, 7 bits on each pin
 		//AUDIO_CHANNEL_1_highByte_REGISTER = out >> 7; // B11111110000000 becomes B1111111
-		AUDIO_CHANNEL_1_highByte_REGISTER = (out + 0x8000) >> 8; // B11111110000000 becomes B1111111, tries to avoid looping over 7 shifts
+		// try to avoid looping over 7 shifts - need to check timing
+		out <<= 1;
+		AUDIO_CHANNEL_1_highByte_REGISTER = out >> 8; 
+		//
 		AUDIO_CHANNEL_1_lowByte_REGISTER = out & 127; // B01111111
 		//}
 }

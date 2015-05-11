@@ -454,10 +454,10 @@ $(document).ready(function(){initNavTree('_mozzi_guts_8cpp_source.html','');});
 <div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;{</div>
 <div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    backupPreMozziTimer1();</div>
 <div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    <span class="comment">// pwm on timer 1</span></div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    pinMode(AUDIO_CHANNEL_1_HIGHUINT8_T_PIN, OUTPUT);   <span class="comment">// set pin to output for audio, use 3.9k resistor</span></div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    pinMode(AUDIO_CHANNEL_1_highByte_PIN, OUTPUT);   <span class="comment">// set pin to output for audio, use 3.9k resistor</span></div>
 <div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    pinMode(AUDIO_CHANNEL_1_lowByte_PIN, OUTPUT);   <span class="comment">// set pin to output for audio, use 499k resistor</span></div>
 <div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    Timer1.initializeCPUCycles(16000000UL/125000, FAST);        <span class="comment">// set period for 125000 Hz fast pwm carrier frequency = 14 bits</span></div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    Timer1.pwm(AUDIO_CHANNEL_1_HIGHUINT8_T_PIN, 0);     <span class="comment">// pwm pin, 0% duty cycle, ie. 0 signal</span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    Timer1.pwm(AUDIO_CHANNEL_1_highByte_PIN, 0);     <span class="comment">// pwm pin, 0% duty cycle, ie. 0 signal</span></div>
 <div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    Timer1.pwm(AUDIO_CHANNEL_1_lowByte_PIN, 0);     <span class="comment">// pwm pin, 0% duty cycle, ie. 0 signal</span></div>
 <div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    backupMozziTimer1();</div>
 <div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="comment">// audio output interrupt on timer 2, sets the pwm levels of timer 1</span></div>

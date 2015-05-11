@@ -72,12 +72,12 @@
 		</p>
 		<p>
 		
-			<!-- <a class="header_link" href="https://github.com/sensorium/Mozzi/zipball/master"> -->
-			<a class="header_link" href="https://tinyurl.com/mozzilib/Mozzi.zip" > <!--download="Mozzi.zip" > stops download working in chrome -->
+			<a class="header_link" href="https://github.com/sensorium/Mozzi/releases">
+			<!-- <a class="header_link" href="https://tinyurl.com/mozzilib/Mozzi.zip" >  --> <!--download="Mozzi.zip" > stops download working in chrome -->
 			<!-- <a class="header_link" href="/Mozzi/download/">  -->
 				download<br>
 				<i class="icon-download icon-4x"></i><br>
-				<span id="header_small_label">version 2014-08-09-14:15</span>
+				<span id="header_small_label">version v1.0.2</span>
 			</a>
 		</p>
 	</section> 
@@ -5489,10 +5489,7 @@ Your browser does not support the audio element.</audio></p>
 
 <p>Audio_Input <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
 
-<p><audio controls>
-<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/04.Audio_Input/Audio_Input/Audio_Input.ogg?raw=true' preload='auto'></source>
-<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/04.Audio_Input/Audio_Input/Audio_Input.mp3?raw=true' preload='auto'></source>
-Your browser does not support the audio element.</audio></p>
+<p>&#8230;(no recording of this one)</p>
 
 <p><button type='button' id='Audio_Inputexpand' onclick='javascript:toggleDisplay(Audio_Input, Audio_Inputexpand, Audio_Inputcollapse)'>show sketch</button>
 <button id='Audio_Inputcollapse' style='display:none' onclick='javascript:toggleDisplay(Audio_Input, Audio_Inputexpand, Audio_Inputcollapse)'>hide sketch</button></p>
@@ -5725,10 +5722,7 @@ Your browser does not support the audio element.</audio></p>
 
 <p>Audio_and_Control_Input <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
 
-<p><audio controls>
-<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/04.Audio_Input/Audio_and_Control_Input/Audio_and_Control_Input.ogg?raw=true' preload='auto'></source>
-<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/04.Audio_Input/Audio_and_Control_Input/Audio_and_Control_Input.mp3?raw=true' preload='auto'></source>
-Your browser does not support the audio element.</audio></p>
+<p>&#8230;(no recording of this one)</p>
 
 <p><button type='button' id='Audio_and_Control_Inputexpand' onclick='javascript:toggleDisplay(Audio_and_Control_Input, Audio_and_Control_Inputexpand, Audio_and_Control_Inputcollapse)'>show sketch</button>
 <button id='Audio_and_Control_Inputcollapse' style='display:none' onclick='javascript:toggleDisplay(Audio_and_Control_Input, Audio_and_Control_Inputexpand, Audio_and_Control_Inputcollapse)'>hide sketch</button></p>
@@ -7043,7 +7037,7 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'>
 </span><span class='line'><span class="n">Line</span> <span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">freqLine</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'><span class="n">OverSample</span> <span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span> <span class="n">overSampler</span><span class="p">;</span> <span class="c1">// will give 10+3=13 bits resolution, 0-&gt;8191, using 128 bytes</span>
+</span><span class='line'><span class="n">OverSample</span> <span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span> <span class="n">overSampler</span><span class="p">;</span> <span class="c1">// will give 10+3=13 bits resolution, 0-&gt;8191, using 128 bytes</span>
 </span><span class='line'>
 </span><span class='line'><span class="k">const</span> <span class="n">byte</span> <span class="n">INPUT_PIN</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </span><span class='line'>
@@ -8675,6 +8669,16 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>129</span>
 <span class='line-number'>130</span>
 <span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/* Phase distortion used to simulate resonant filter, based on</span>
 </span><span class='line'><span class="cm">    https://en.wikipedia.org/wiki/Phase_distortion_synthesis</span>
 </span><span class='line'><span class="cm">    </span>
@@ -8688,12 +8692,21 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    </span>
 </span><span class='line'><span class="cm">    This version can only play a single voice at a time, it might </span>
 </span><span class='line'><span class="cm">    be possible to optimise it enough for more simultaneous voices.</span>
+</span><span class='line'><span class="cm">    </span>
+</span><span class='line'><span class="cm">    Circuit: </span>
+</span><span class='line'><span class="cm">      MIDI input circuit as per http://arduino.cc/en/Tutorial/Midi</span>
+</span><span class='line'><span class="cm">      (midi has to be disconnected from rx for sketch to upload)</span>
+</span><span class='line'><span class="cm">      Audio output on digital pin 9 on a Uno or similar.</span>
+</span><span class='line'><span class="cm">    </span>
+</span><span class='line'><span class="cm">    Mozzi help/discussion/announcements:</span>
+</span><span class='line'><span class="cm">    https://groups.google.com/forum/#!forum/mozzi-users</span>
+</span><span class='line'><span class="cm">  </span>
+</span><span class='line'><span class="cm">    Tim Barrass 2013-14, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm"> */</span>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;MIDI.h&gt;</span>
-</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;MIDI.h&gt;</span>
 </span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'>
@@ -8709,6 +8722,7 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="c1">// wavetable for oscillator:</span>
 </span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt;</span>
 </span><span class='line'>
+</span><span class='line'><span class="c1">// MIDI_CREATE_DEFAULT_INSTANCE(); // if really using midi</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">// analog joystick for controlling speed of modulation: assigned to attack, decay times and sustain level</span>
 </span><span class='line'><span class="cp">#define X A0</span>
@@ -13840,6 +13854,185 @@ Your browser does not support the audio element.</audio></p>
 
 <h2 class=target_without_link><a id='11.Communication'>
 11.Communication</a></h2>
+
+
+<hr />
+
+<p>Mozzi_MIDI_Input <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
+
+<p>&#8230;(no recording of this one)</p>
+
+<p><button type='button' id='Mozzi_MIDI_Inputexpand' onclick='javascript:toggleDisplay(Mozzi_MIDI_Input, Mozzi_MIDI_Inputexpand, Mozzi_MIDI_Inputcollapse)'>show sketch</button>
+<button id='Mozzi_MIDI_Inputcollapse' style='display:none' onclick='javascript:toggleDisplay(Mozzi_MIDI_Input, Mozzi_MIDI_Inputexpand, Mozzi_MIDI_Inputcollapse)'>hide sketch</button></p>
+
+<div id='Mozzi_MIDI_Input' style='display:none'>
+<figure class='code'><figcaption><span> (Mozzi_MIDI_Input.ino)</span> <a href='/Mozzi/downloads/code/examples/11.Communication/Mozzi_MIDI_Input/Mozzi_MIDI_Input.ino'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of a sound being triggered by MIDI input.</span>
+</span><span class='line'><span class="cm">  </span>
+</span><span class='line'><span class="cm">    Demonstrates playing notes with Mozzi in response to MIDI input,</span>
+</span><span class='line'><span class="cm">    using  Arduino MIDI library v4.2 </span>
+</span><span class='line'><span class="cm">    (https://github.com/FortySevenEffects/arduino_midi_library/releases/tag/4.2)</span>
+</span><span class='line'><span class="cm">  </span>
+</span><span class='line'><span class="cm">    Circuit: </span>
+</span><span class='line'><span class="cm">      MIDI input circuit as per http://arduino.cc/en/Tutorial/Midi</span>
+</span><span class='line'><span class="cm">      (midi has to be disconnected from rx for sketch to upload)</span>
+</span><span class='line'><span class="cm">      Audio output on digital pin 9 on a Uno or similar.</span>
+</span><span class='line'><span class="cm">    </span>
+</span><span class='line'><span class="cm">    Mozzi help/discussion/announcements:</span>
+</span><span class='line'><span class="cm">    https://groups.google.com/forum/#!forum/mozzi-users</span>
+</span><span class='line'><span class="cm">  </span>
+</span><span class='line'><span class="cm">    Tim Barrass 2013-14, CC by-nc-sa.</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;MIDI.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator template</span>
+</span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt; </span><span class="c1">// sine table for oscillator</span>
+</span><span class='line'><span class="cp">#include &lt;mozzi_midi.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;ADSR.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="n">MIDI_CREATE_DEFAULT_INSTANCE</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// use #define for CONTROL_RATE, not a constant</span>
+</span><span class='line'><span class="cp">#define CONTROL_RATE 128 </span><span class="c1">// powers of 2 please</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// audio sinewave oscillator</span>
+</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">SIN2048_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aSin</span><span class="p">(</span><span class="n">SIN2048_DATA</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// envelope generator</span>
+</span><span class='line'><span class="n">ADSR</span> <span class="o">&lt;</span><span class="n">CONTROL_RATE</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">envelope</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define LED 13 </span><span class="c1">// shows if MIDI is being recieved</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">HandleNoteOn</span><span class="p">(</span><span class="n">byte</span> <span class="n">channel</span><span class="p">,</span> <span class="n">byte</span> <span class="n">note</span><span class="p">,</span> <span class="n">byte</span> <span class="n">velocity</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">aSin</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">mtof</span><span class="p">(</span><span class="kt">float</span><span class="p">(</span><span class="n">note</span><span class="p">)));</span>
+</span><span class='line'>  <span class="n">envelope</span><span class="p">.</span><span class="n">noteOn</span><span class="p">();</span>
+</span><span class='line'>  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">HandleNoteOff</span><span class="p">(</span><span class="n">byte</span> <span class="n">channel</span><span class="p">,</span> <span class="n">byte</span> <span class="n">note</span><span class="p">,</span> <span class="n">byte</span> <span class="n">velocity</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">envelope</span><span class="p">.</span><span class="n">noteOff</span><span class="p">();</span>
+</span><span class='line'>  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">pinMode</span><span class="p">(</span><span class="n">LED</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Connect the HandleNoteOn function to the library, so it is called upon reception of a NoteOn.</span>
+</span><span class='line'>  <span class="n">MIDI</span><span class="p">.</span><span class="n">setHandleNoteOn</span><span class="p">(</span><span class="n">HandleNoteOn</span><span class="p">);</span>  <span class="c1">// Put only the name of the function</span>
+</span><span class='line'>  <span class="n">MIDI</span><span class="p">.</span><span class="n">setHandleNoteOff</span><span class="p">(</span><span class="n">HandleNoteOff</span><span class="p">);</span>  <span class="c1">// Put only the name of the function</span>
+</span><span class='line'>  <span class="c1">// Initiate MIDI communications, listen to all channels (not needed with Teensy usbMIDI)</span>
+</span><span class='line'>  <span class="n">MIDI</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">MIDI_CHANNEL_OMNI</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">envelope</span><span class="p">.</span><span class="n">setADLevels</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">64</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">envelope</span><span class="p">.</span><span class="n">setTimes</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">10000</span><span class="p">,</span><span class="mi">200</span><span class="p">);</span> <span class="c1">// 10000 is so the note will sustain 10 seconds unless a noteOff comes</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">aSin</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="mi">440</span><span class="p">);</span> <span class="c1">// default frequency</span>
+</span><span class='line'>  <span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">MIDI</span><span class="p">.</span><span class="n">read</span><span class="p">();</span>
+</span><span class='line'>  <span class="n">envelope</span><span class="p">.</span><span class="n">update</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">updateAudio</span><span class="p">(){</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="n">envelope</span><span class="p">.</span><span class="n">next</span><span class="p">()</span> <span class="o">*</span> <span class="n">aSin</span><span class="p">.</span><span class="n">next</span><span class="p">())</span><span class="o">&gt;&gt;</span><span class="mi">8</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">loop</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">audioHook</span><span class="p">();</span> <span class="c1">// required here</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+</div>
 
 
 <hr />

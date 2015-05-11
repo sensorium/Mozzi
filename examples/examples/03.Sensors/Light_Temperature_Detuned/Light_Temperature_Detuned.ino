@@ -10,15 +10,15 @@
   
   Circuit:
     Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.0/3.1, or 
+    DAC/A14 on Teensy 3.1, or 
     check the README or http://sensorium.github.com/Mozzi/
     
     Temperature dependent resistor (Thermistor) and 5.1k resistor on analog pin 1:
-      Thermistor from analog pin to +5V (3.3V on Teensy 3.0/3.1)
+      Thermistor from analog pin to +5V (3.3V on Teensy 3.1)
       5.1k resistor from analog pin to ground
     
     Light dependent resistor (LDR) and 5.1k resistor on analog pin 2:
-      LDR from analog pin to +5V (3.3V on Teensy 3.0/3.1)
+      LDR from analog pin to +5V (3.3V on Teensy 3.1)
       5.1k resistor from analog pin to ground
       
     Mozzi help/discussion/announcements:
@@ -27,7 +27,7 @@
     Tim Barrass 2012, CC by-nc-sa.
 */
 
-//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
+//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/cos8192_int8.h>

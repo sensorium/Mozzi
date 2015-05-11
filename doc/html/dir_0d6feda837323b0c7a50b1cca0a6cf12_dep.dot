@@ -1,9 +1,0 @@
-digraph "SampleHuffman_Umpah" {
-  compound=true
-  node [ fontsize="10", fontname="Helvetica"];
-  edge [ labelfontsize="10", labelfontname="Helvetica"];
-  subgraph clusterdir_9ca29615486e86932f4b900563144736 {
-    graph [ bgcolor="#ddddee", pencolor="black", label="08.Samples" fontname="Helvetica", fontsize="10", URL="dir_9ca29615486e86932f4b900563144736.html"]
-  dir_0d6feda837323b0c7a50b1cca0a6cf12 [shape=box, label="SampleHuffman_Umpah", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_0d6feda837323b0c7a50b1cca0a6cf12.html"];
-  }
-}

@@ -5,7 +5,7 @@
     Smooth() for smoothing control signals, 
     and Mozzi's fixed point number types for fractional frequencies.
     
-    This sketch using HIFI mode is not for Teensy 3.0/3.1.
+    This sketch using HIFI mode is not for Teensy 3.1.
     
     IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
     be changed from STANDARD mode to HIFI.

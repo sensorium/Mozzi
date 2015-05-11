@@ -4,7 +4,7 @@
 		Demonstrates Ead (exponential attack decay).
 	
 		Circuit: Audio output on digital pin 9 on a Uno or similar, or
-		DAC/A14 on Teensy 3.0/3.1, or 
+		DAC/A14 on Teensy 3.1, or 
 		check the README or http://sensorium.github.com/Mozzi/
 	
 		Mozzi help/discussion/announcements:
@@ -13,7 +13,7 @@
 		Tim Barrass 2012, CC by-nc-sa
  */
 
-//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
+//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
 #include <tables/brownnoise8192_int8.h> // recorded audio wavetable

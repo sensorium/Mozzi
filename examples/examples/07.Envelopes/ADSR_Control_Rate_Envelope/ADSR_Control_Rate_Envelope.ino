@@ -11,7 +11,7 @@
     Tim Barrass 2013-14, CC by-nc-sa.
 */
 
-//#include <ADC.h>  // Teensy 3.0/3.1 uncomment this line and install http://github.com/pedvide/ADC
+//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <EventDelay.h>
@@ -33,7 +33,7 @@ boolean note_is_on = true;
 byte gain;
 
 void setup(){
-  //Serial.begin(9600); // for Teensy 3.0/3.1, beware printout can cause glitches
+  //Serial.begin(9600); // for Teensy 3.1, beware printout can cause glitches
   Serial.begin(115200);
   randSeed(); // fresh random
   noteDelay.set(2000); // 2 second countdown

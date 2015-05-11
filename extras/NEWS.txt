@@ -4,17 +4,18 @@ NEWS
 get the latest version from https://sensorium.github.io/Mozzi/
 
 
-version 2014-08-09-14:15
+version 2015-05-11-20:23
 
 aka v1.0.2
 
 First (slightly edited) versioned release using GitHub release process.
-
-Tweaks and fixes, a couple of new simple demos, fixed/updated python script for converting wavetables, updated MIDI examples for newer MIDI library.
-
-Removed library.properties file until the library folder stucture is updated to match the new Arduino library form, as it stopped it installing in new IDEs.
-
 Warning: This release and all previous versions of Mozzi run slow when using Arduino IDE versions greater than 1.0.5, at least on OSX, causing glitches on many of the included examples. Simple examples run OK, but until this is resolved, Arduino 1.0.5 is recommended.
+
+- Tweaks and fixes, a couple of new simple demos..
+- Fixed/updated python script for converting wavetables
+- Updated MIDI examples for newer MIDI library.
+- updated OverSample.h to take an additional termplate parameter to allow different numeric types.
+- Removed library.properties file until the library folder stucture is updated to match the new Arduino library form, as it stopped it installing in new IDEs.
 
 
 

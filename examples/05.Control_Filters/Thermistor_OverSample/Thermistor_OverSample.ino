@@ -44,7 +44,7 @@ Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aEnvelope(SIN2048_DATA);
 
 Line <float> freqLine;
 
-OverSample <3> overSampler; // will give 10+3=13 bits resolution, 0->8191, using 128 bytes
+OverSample <unsigned int, 3> overSampler; // will give 10+3=13 bits resolution, 0->8191, using 128 bytes
 
 const byte INPUT_PIN = 1;
 

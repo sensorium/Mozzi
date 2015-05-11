@@ -11,12 +11,21 @@
     
     This version can only play a single voice at a time, it might 
     be possible to optimise it enough for more simultaneous voices.
+    
+    Circuit: 
+      MIDI input circuit as per http://arduino.cc/en/Tutorial/Midi
+      (midi has to be disconnected from rx for sketch to upload)
+      Audio output on digital pin 9 on a Uno or similar.
+    
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+  
+    Tim Barrass 2013-14, CC by-nc-sa.
  */
 
 
 
-//#include <MIDI.h>
-
+#include <MIDI.h>
 //#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 
@@ -32,6 +41,7 @@
 // wavetable for oscillator:
 #include <tables/sin2048_int8.h>
 
+// MIDI_CREATE_DEFAULT_INSTANCE(); // if really using midi
 
 // analog joystick for controlling speed of modulation: assigned to attack, decay times and sustain level
 #define X A0

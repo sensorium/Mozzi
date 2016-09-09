@@ -128,6 +128,77 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/Mozzi/blog/2013/08/25/simpler-adc-with-mozzianalogread/">Simpler Adc With mozziAnalogRead</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-25T21:20:00+10:00" pubdate data-updated="true">Aug 25<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Version 2013-08-25 evolves the adc developments of the previous release, by
+replacing the various ways of reading analog inputs (adcGetResult(),
+adcReadAllChannels(), etc.) with mozziAnalogRead(). Use it the same as
+analogRead(). It doesn&#8217;t need any special setup.</p>
+
+<p>Audio input still uses getAudioInput(), not mozziAnalogRead().</p>
+
+<p>Here&#8217;s the Mozzi/extras/NEWS.txt entry of the changes in this release:</p>
+
+<p>version 2013-08-25-18:38</p>
+
+<ul>
+<li>mozzi_analog.h - Much simpler, better analog input.  Now there&#8217;s just mozziAnalogRead(pin).
+  Sorry about breaking your sketches, again.
+  mozziAnalogRead completely replaces the arduino analogRead, and analogRead is no longer able to be used with Mozzi.
+  No setup is required for mozziAnalogRead, unless you want audio input, which is set in mozzi_config.h as before.
+  You can still use setupFastAnalogRead(speed) if you want faster than mozzi&#8217;s default,
+  which is automatically set if you don&#8217;t do anything.  See the documentation if you want this.
+  If you specially need analogRead for some reason (and you&#8217;re not using audio input), you can comment out a
+  line in MozziGuts.cpp, in the startMozzi function, where it says setupMozziADC().</li>
+<li>All example sketches using analog reads are updated, or removed where no longer relevant.</li>
+<li>examples/04.Analog_Input changed to 04.Audio_Input</li>
+<li>examples/envelopes/ADSR_Envelope - now plays random envelopes as a more thorough test/demo.</li>
+<li>add examples/envelopes/ADSR_Envelope_x2 - shows an additive sound combining 2 oscillators with individual envelopes.</li>
+<li>Sample.h - added linear interpolation as optional template parameter, eg.:
+  Sample &lt;SAMPLE_NUM_CELLS, AUDIO_RATE, INTERP_LINEAR> aSample(SAMPLE_DATA);
+  The default parameter is INTERP_NONE.</li>
+<li>removed examples/08.Samples/Sample_Offset too horrible</li>
+<li>added examples/08.Samples/Sample_Scrub&#8230;uses interpolation/smoothing at different scales</li>
+<li>Smooth.h - added operator method as an alternative to next() so you can use
+  mySmooth(input-value) instead of mySmooth.next(input-value), if you want.</li>
+<li>mozzi_midi.h, .cpp - changed return type from unsigned int to int for mtof(unsigned char midi_note), mtof(int midi_note),
+  to suit Oscil::setFreq()</li>
+<li>added/corrected references to examples in docs</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/Mozzi/blog/2013/08/06/upcoming-mozzi-talk-at-icmc2013-in-perth/">Upcoming Mozzi Talk at ICMC2013 in Perth</a></h1>
     
     
@@ -360,6 +431,10 @@ More details and registration: <a href="http://www.isea2013.org/event-category/w
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/Mozzi/blog/2016/09/09/howto-for-arduino-1-dot-6-11/">Howto for Arduino 1.6.11</a>
+      </li>
+    
+      <li class="post">
         <a href="/Mozzi/blog/2015/05/11/release-1-dot-0-2/">Release v1.0.2</a>
       </li>
     
@@ -373,10 +448,6 @@ More details and registration: <a href="http://www.isea2013.org/event-category/w
     
       <li class="post">
         <a href="/Mozzi/blog/2014/08/09/teensy-3-dot-0-slash-3-dot-1-test-release-version-2014-08-09-14-15/">Teensy 3.0/3.1 Test Release</a>
-      </li>
-    
-      <li class="post">
-        <a href="/Mozzi/blog/2014/06/20/teensy-3-dot-0-3-dot-1-port-progress/">Teensy 3.0-3.1 Port Progress</a>
       </li>
     
   </ul>

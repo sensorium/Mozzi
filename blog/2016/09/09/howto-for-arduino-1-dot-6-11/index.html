@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Making Things Purr, Growl and Sing - Mozzi workshop in Melbourne - MOZZI</title>
+  <title>Howto for Arduino 1.6.11 - MOZZI</title>
   <meta name="author" content="Tim Barrass">
   
   
@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sensorium.github.io/Mozzi//blog/2014/03/06/making-things-purr">
+  <link rel="canonical" href="http://sensorium.github.io/Mozzi//blog/2016/09/09/howto-for-arduino-1-dot-6-11">
   <link href="/Mozzi/favicon.png" rel="icon">
   <link href="/Mozzi/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/Mozzi/atom.xml" rel="alternate" title="MOZZI" type="application/atom+xml">
@@ -125,7 +125,7 @@
   
   <header>
     
-      <h1 class="entry-title">Making Things Purr, Growl and Sing - Mozzi Workshop in Melbourne</h1>
+      <h1 class="entry-title">Howto for Arduino 1.6.11</h1>
     
     
       <p class="meta">
@@ -141,24 +141,21 @@
   
 
 
-<time datetime="2014-03-06T17:50:00+11:00" pubdate data-updated="true">Mar 6<span>th</span>, 2014</time>
+<time datetime="2016-09-09T21:48:00+10:00" pubdate data-updated="true">Sep 9<span>th</span>, 2016</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>We will be running a Mozzi synth workshop in Melbourne on Thursday 20th March, 14:00-20:00.</p>
+<div class="entry-content"><p>Now Mozzi can work at full speed on the latest Arduino IDE.  It works, but now Mozzi needs an update to install smoothly in recent IDE&#8217;s.  Coming soon, with some other fixes.</p>
 
-<p>Participants will get a grip on Mozzi, and have a chance to work on their own projects, with help from me (Tim, the creator of Mozzi) and my brother Stephen Barrass (a media arts researcher and teacher).</p>
+<p>The problem for Mozzi on Arduino IDE&#8217;s after 1.0.5 used to be that sketches were compiled for small size instead of speed, but now the compiler optimations can be edited.</p>
 
-<p>Location: Kindred Studios, 212A Whitehall St, Yarraville</p>
+<p>Here&#8217;s how you do it.  Find Arduino&#8217;s platform.txt (on OSX you can find it by searching in Users/your_name/Library/Arduino15).  Search and replace -Os with -O2.  Save.</p>
 
-<p>Limit of 10 Participants</p>
-
-<p>Cost $90 ­ includes <a href="https://mozzi.sharetribe.com/en/listings/38888-mozzi-noob-kits">Mozzi Noob kit</a></p>
-
-<p>Register via <a href="https://mozzi.sharetribe.com/en/listings/42804-mozzi-arduino-synth-workshop--melbourne">Sharetribe</a></p>
+<p>It&#8217;s explained more thoroughly (for Windows) here:
+http://www.instructables.com/id/Arduino-IDE-16x-compiler-optimisations-faster-code/?ALLSTEPS</p>
 </div>
 
 
@@ -181,12 +178,12 @@
   
 
 
-<time datetime="2014-03-06T17:50:00+11:00" pubdate data-updated="true">Mar 6<span>th</span>, 2014</time>
+<time datetime="2016-09-09T21:48:00+10:00" pubdate data-updated="true">Sep 9<span>th</span>, 2016</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/Mozzi/blog/categories/workshops/'>workshops</a>
+    <a class='category' href='/Mozzi/blog/categories/fixes/'>fixes</a>, <a class='category' href='/Mozzi/blog/categories/updates/'>updates</a>
   
 </span>
 
@@ -195,7 +192,7 @@
     
       <div class="sharing">
   
-  <a href="/Mozzi//twitter.com/share" class="twitter-share-button" data-url="http://sensorium.github.io/Mozzi//blog/2014/03/06/making-things-purr/" data-via="nothingperson" data-counturl="http://sensorium.github.io/Mozzi//blog/2014/03/06/making-things-purr/" >Tweet</a>
+  <a href="/Mozzi//twitter.com/share" class="twitter-share-button" data-url="http://sensorium.github.io/Mozzi//blog/2016/09/09/howto-for-arduino-1-dot-6-11/" data-via="nothingperson" data-counturl="http://sensorium.github.io/Mozzi//blog/2016/09/09/howto-for-arduino-1-dot-6-11/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -208,10 +205,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/Mozzi/blog/2013/12/31/mozzi-marketplace-on-sharetribe/" title="Previous Post: Mozzi Marketplace on Sharetribe">&laquo; Mozzi Marketplace on Sharetribe</a>
+        <a class="basic-alignment left" href="/Mozzi/blog/2015/05/11/release-1-dot-0-2/" title="Previous Post: Release v1.0.2">&laquo; Release v1.0.2</a>
       
-      
-        <a class="basic-alignment right" href="/Mozzi/blog/2014/03/13/update-to-version-2014-03-13-14-09/" title="Next Post: New STANDARD_PLUS audio mode removes 16kHz whine">New STANDARD_PLUS audio mode removes 16kHz whine &raquo;</a>
       
     </p>
   </footer>

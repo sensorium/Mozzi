@@ -20,6 +20,8 @@
  #include "WProgram.h"
 #endif
 
+
+
 #include "mozzi_analog.h"
 
 /** @ingroup core
@@ -269,8 +271,11 @@ calculations here which could be done in setup() or updateControl().
 @return an audio sample.  In STANDARD modes this is between -244 and 243 inclusive.
 In HIFI mode, it's a 14 bit number between -16384 and 16383 inclusive.
 */
+#if (STEREO_HACK == true)
+void updateAudio();
+#else
 int updateAudio();
-
+#endif
 
 /** @ingroup core
 This is where you put your control code. You need updateControl() somewhere in
@@ -346,6 +351,5 @@ unsigned long mozziMicros();
 #if (AUDIO_MODE == HIFI)
 static void setupTimer2();
 #endif
-
 
 #endif /* MOZZIGUTS_H_ */

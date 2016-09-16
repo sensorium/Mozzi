@@ -4,7 +4,7 @@
 
 
 Tim Barrass  
-version 2015-05-11-20:23  
+version 2016-09-16-11:54  
 
 Currently your Arduino can only beep like a microwave oven. Mozzi brings
 your Arduino to life by allowing it to produce much more complex and interesting
@@ -32,14 +32,16 @@ passing or external synths.
 ***
 
 ## Installation  
-Download Mozzi from the top of this page and unzip it. It will probably have a
-name like "sensorium-Mozzi-2bee818". Rename the unzipped folder "Mozzi". Then,
-following the instructions from the [Arduino libraries guide](http://arduino.cc/en/Guide/Libraries):  
+Download Mozzi from the top of this page and unzip it.
+The new folder will have a name like Mozzi-1.0.2.
+Rename it to just Mozzi.  
+Then, following the instructions from the [Arduino libraries guide](http://arduino.cc/en/Guide/Libraries), except using the renamed folder rather the zip:  
 
-In the Arduino IDE, navigate to __Sketch > Import Library__. At the top of the drop
-down list, select the option to __Add Library__. Return to the __Sketch > Import Library__ menu. 
-You should now see the library at the bottom of the drop-down
-menu. It is ready to be used in your sketch.
+In the Arduino IDE, navigate to __Sketch > Import Library__.  At the top of the drop
+down list, select the option to __Add Library__.  Navigate to the folder's location and open it. 
+Return to the __Sketch > Import Library__ menu.
+You should now see the library at the bottom of the drop-down menu.
+It is ready to be used in your sketch.
 
 ***
 

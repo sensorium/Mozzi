@@ -223,7 +223,7 @@ public:
 			// TB2014-8-20 change this following Austin Grossman's suggestion on user list
 			// https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!msg/mozzi-users/u4D5NMzVnQs/pCmiWInFvrkJ
 			if ((256UL*NUM_TABLE_CELLS) >= UPDATE_RATE) {
-       phase_increment_fractional = ((unsigned long)frequency) * ((256UL*NUM_TABLE_CELLS)/UPDATE_RATE);
+				phase_increment_fractional = ((unsigned long)frequency) * ((256UL*NUM_TABLE_CELLS)/UPDATE_RATE);
       } else {
         phase_increment_fractional = ((unsigned long)frequency) / (UPDATE_RATE/(256UL*NUM_TABLE_CELLS));
       }

@@ -37,10 +37,11 @@ envelope changes slowly or controls something like a filter where there may not 
 LERP_RATE could be set to CONTROL_RATE (for instance).  Then update() and next() could both be called in updateControl(), 
 greatly reducing the amount of processing required compared to calling next() in updateAudio().
 @todo Test whether using the template parameters makes any difference to speed, 
-and rationalise which units which do and don't need them.  
+and rationalise which units do and don't need them.  
 Template objects are messy when you try to use pointers to them, 
 you have to include the whole template shebang in the pointer handling.
 */
+
 template <unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE>
 class ADSR
 {
@@ -81,8 +82,7 @@ private:
 		current_phase = next_phase;
 	}
 
-
-
+	
 	inline
 	void checkForAndSetNextPhase(phase * next_phase) {
 		if (++update_step_counter >= num_update_steps){
@@ -146,10 +146,10 @@ public:
 
 		case RELEASE:
 			checkForAndSetNextPhase(&idle);
-			//checkForAndSetIdle();
 			break;
 
 		case IDLE:
+			adsr_playing = false;
 			break;
 		}
 	}
@@ -162,8 +162,10 @@ public:
 	 */
 	inline
 	unsigned char next()
-	{
-		return Q15n16_to_Q8n0(transition.next());
+	{	
+		unsigned char out = 0;
+		if (adsr_playing) out = Q15n16_to_Q8n0(transition.next());
+		return out;
 	}
 
 
@@ -173,6 +175,7 @@ public:
 	inline
 	void noteOn(){
 		setPhase(&attack);
+		adsr_playing = true;
 	}
 
 
@@ -414,6 +417,7 @@ public:
 	}
 
 
+bool adsr_playing;
 
 	/** Tells if the envelope is currently playing.
 	@return true if playing, false if in IDLE state
@@ -421,7 +425,7 @@ public:
 	inline
 	bool playing()
 	{
-		return !(current_phase->phase_type==IDLE);
+		return adsr_playing;
 	}
 
 

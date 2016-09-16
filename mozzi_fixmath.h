@@ -276,6 +276,9 @@ inline
 Q7n8 Q15n16_to_Q7n8(Q15n16 a) { return static_cast<Q7n8>((Q15n16)a>>8); }			/**<Convert Q15n16 fixed to Q7n8 signed int16_t, keeping middle bits only. @param a is a Q15n16 signed int32_t.*/
 
 inline
+Q8n8 Q15n16_to_Q8n8(Q15n16 a) { return static_cast<Q8n8>((Q15n16)a>>8); }			/**<Convert Q15n16 fixed to Q8n8 signed int16_t, keeping middle bits only. @param a is a Q15n16 signed int32_t.*/
+
+inline
 Q23n8 Q15n16_to_Q23n8(Q15n16 a) { return static_cast<Q23n8>((Q15n16)a>>8); }			/**<Convert Q15n16 fixed to Q23n8 signed int32_t. @param a is a Q15n16 signed int32_t.*/
 
 inline
@@ -283,6 +286,9 @@ float Q15n16_to_float(Q15n16 a) { return (static_cast<float>(a))/65536; }			/**<
 
 inline
 Q0n8 Q16n16_to_Q0n8(Q16n16 a) { return static_cast<Q0n8>((Q16n16)a>>8); }			/**<Convert Q16n16 fixed to Q0n8 uint8_t. @param a is a Q16n16 uint32_t*/
+
+inline
+Q8n8 Q16n16_to_Q8n8(Q8n8 a) { return static_cast<Q8n8>((Q16n16)a>>16); }		/**<Convert Q16n16 fixed to Q8n8 uint16_t. @param a is a Q16n16 uint32_t*/
 
 inline
 Q16n0 Q16n16_to_Q16n0(Q16n16 a) { return static_cast<Q16n0>((Q16n16)a>>16); }		/**<Convert Q16n16 fixed to Q16n0 uint16_t. @param a is a Q16n16 uint32_t*/

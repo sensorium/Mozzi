@@ -3,8 +3,19 @@ Mozzi sound synthesis library for Arduino
 NEWS
 get the latest version from https://sensorium.github.io/Mozzi/
 
+version 2016-09-16-11:54
 
-version 2015-05-11-20:23
+aka v1.1.0
+
+- added library.properties for Arduino 1.5+
+- MozziGuts.cpp and .h, and mozzi_config.h: added STEREO_HACK config option, set it to true to try stereo output, also added Stereo_Hack exammple
+- README - updated install instructions
+- examples/Mozzi_Midi_Input, added note about rx pin for midi in rather than tx as shown on Arduino page.
+- ADSR.h - now IDLE phase will always return 0.
+- included ADC.h for Teensy 3+ in mozzi_analog.h and removed it from sketches - not sure why this didn't work before (maybe <> instead of "").
+
+
+version_2015-05-11-20:23
 
 aka v1.0.2
 

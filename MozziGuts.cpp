@@ -67,7 +67,9 @@ PWM frequency tests
 //-----------------------------------------------------------------------------------------------------------------
 // ring buffer for audio output
 CircularBuffer <unsigned int> output_buffer; // fixed size 256
-
+#if (STEREO_HACK == true)
+CircularBuffer <unsigned int> output_buffer2; // fixed size 256
+#endif
 //-----------------------------------------------------------------------------------------------------------------
 
 #if defined(__MK20DX128__) || defined(__MK20DX256__) // teensy 3, 3.1
@@ -219,6 +221,9 @@ ISR(ADC_vect, ISR_BLOCK)
 }
 #endif // end main audio input section
 
+#if (STEREO_HACK == true)
+extern int audio_out_1, audio_out_2;
+#endif
 
 void audioHook() // 2us excluding updateAudio()
 {
@@ -229,7 +234,13 @@ void audioHook() // 2us excluding updateAudio()
 #endif
 
 	if (!output_buffer.isFull()) {
+		#if (STEREO_HACK == true)
+		updateAudio(); // in hacked version, this returns void
+		output_buffer.write((unsigned int) (audio_out_1 + AUDIO_BIAS));
+		output_buffer2.write((unsigned int) (audio_out_2 + AUDIO_BIAS));
+		#else
 		output_buffer.write((unsigned int) (updateAudio() + AUDIO_BIAS));
+		#endif
 
 	}
 //setPin13Low();
@@ -329,7 +340,12 @@ output =  output_buffer.read();
 AUDIO_CHANNEL_1_OUTPUT_REGISTER = output;
 AUDIO_CHANNEL_2_OUTPUT_REGISTER = 0;
 */
+
 	AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer.read();
+#if (STEREO_HACK == true)
+		AUDIO_CHANNEL_2_OUTPUT_REGISTER = output_buffer2.read();
+#endif
+
 //}
 
 	// flip signal polarity - instead of signal going to 0 (both pins 0), it goes to pseudo-negative of its current value.

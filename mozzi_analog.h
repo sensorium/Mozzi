@@ -20,8 +20,9 @@
 
 // required from http://github.com/pedvide/ADC for Teensy 3.1
 #if defined(__MK20DX128__) || defined(__MK20DX256__)
-#include "../ADC/ADC.h" 
+#include <ADC.h>
 #endif
+
 
 // these are declared in Mozziguts.cpp, and used in mozzi_analog.cpp... crazy but it compiles
 #if defined(__MK20DX128__) || defined(__MK20DX256__) // teensy 3, 3.1

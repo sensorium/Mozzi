@@ -60,7 +60,7 @@ Mozzi-users list has a thread on this.
 */
 #define AUDIO_RATE 16384
 //#define AUDIO_RATE 32768
-
+//#define AUDIO_RATE 65536 // try on Teensy3/3.1
 
 
 /** @ingroup core
@@ -84,5 +84,14 @@ in mozz_config.h
 #endif
 
 //AUDIO_INPUT_CHANNEL = analogPinToChannel(AUDIO_INPUT_PIN)
+
+/** @ingroup core
+This sets an option for stereo output, a hack which requires 
+variables audio_signal_1 and audio_signal_2 to be set in updateAudio(), 
+instead of returning a single audio value as is usual for standard mono.
+You need to have \#define STEREO_HACK true in mozzi_config.h
+*/
+#define STEREO_HACK false
+
 #endif        //  #ifndef MOZZI_CONFIG_H
 

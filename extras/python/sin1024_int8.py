@@ -27,7 +27,7 @@ def generate(outfile, tablename, tablelength, samplerate):
             
             t_x = (math.cos(2*math.pi*x-math.pi)+1)/2
 
-            scaled = int16_t(math.floor(t_x*255.999))-128
+            scaled = int(math.floor(t_x*255.999))-128
 
             outstring += str(scaled) + ', '
     finally:

@@ -56,9 +56,9 @@ the phase increments will be dithered, which reduces spurious frequency spurs
 in the audio output, at the cost of some extra processing and memory.
 @section int8_t2mozzi
 Converting soundfiles for Mozzi
-There is a python script called int8_t2mozzi.py in the Mozzi/python folder.
+There is a python script called char2mozzi.py in the Mozzi/python folder.
 The usage is:
-int8_t2mozzi.py infilename outfilename tablename samplerate
+char2mozzi.py infilename outfilename tablename samplerate
 */
 //template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, bool DITHER_PHASE=false>
 template <uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE>
@@ -217,8 +217,9 @@ public:
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
 			//phase_increment_fractional = (frequency* (NUM_TABLE_CELLS>>3)/(UPDATE_RATE>>6)) << (F_BITS-(8-3+6));
-			phase_increment_fractional = (((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)>>3)*frequency)/(UPDATE_RATE>>6))
-			                             << (OSCIL_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS - (8-3+6));
+// TB2016-10-2 line below might have been left in accidentally while making the 2014 change below, remove for now
+//			phase_increment_fractional = (((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)>>3)*frequency)/(UPDATE_RATE>>6))
+//			                             << (OSCIL_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS - (8-3+6));
 			                             
 			// TB2014-8-20 change this following Austin Grossman's suggestion on user list
 			// https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!msg/mozzi-users/u4D5NMzVnQs/pCmiWInFvrkJ
@@ -238,6 +239,7 @@ public:
 	fixed-point format instead of floats.
 	@note This should work OK with tables 2048 cells or smaller and
 	frequencies up to 4096 Hz.  Can't be used with UPDATE_RATE less than 64 Hz.
+	@note This didn't run faster than float last time it was tested, after 2014 code changes.  Need to see if 2014 changes improved or worsened performance.
 	@param frequency in Q16n16 fixed-point number format.
 	*/
 	inline

@@ -13,35 +13,8 @@
     or the AUDIO_RATE could be increased to 32768 Hz, if the
     cpu isn't too busy.
   
-    HIFI mode is not for Teensy 3.1, but the PWM led part should work.
-    
-    IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
-    be changed from STANDARD mode to HIFI.
-    In Mozz/mozzi_config.h, change
-    #define AUDIO_MODE STANDARD
-    //#define AUDIO_MODE HIFI
-    to
-    //#define AUDIO_MODE STANDARD
-    #define AUDIO_MODE HIFI
-  
-  
-    Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
+    Circuit: Audio output on digital pin 9 (on a Uno or similar),
     Check the Mozzi core module documentation for others and more detail
-  
-                     3.9k 
-     pin 9  ---WWWW-----|-----output
-                    499k           |
-     pin 10 ---WWWW---- |
-                                       |
-                             4.7n  ==
-                                       |
-                                   ground
-  
-    Resistors are ±0.5%  Measure and choose the most precise 
-    from a batch of whatever you can get.  Use two 1M resistors
-    in parallel if you can't find 499k.
-    Alternatively using 39 ohm, 4.99k and 470nF components will 
-    work directly with headphones.
 
     LEDs:
     Red led from pin 3 through a 1.5k resistor to ground
@@ -112,9 +85,7 @@ void updateControl(){
 
 int updateAudio(){
   updateRGB(red_brightness, green_brightness, blue_brightness);
-  // this would make more sense with a higher resolution signal
-  // but still benefits from using HIFI to avoid the 16kHz pwm noise
-  return aSin.next()<<6; // 8 bits scaled up to 14 bits
+  return aSin.next();
 }
 
 

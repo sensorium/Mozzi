@@ -55,8 +55,7 @@ void updateControl(){}
 
 
 int updateAudio(){
-  // this would make more sense with a higher resolution signal
-  // but still benefits from using HIFI to avoid the 16kHz pwm noise
+  // this would make more sense with a higher resolution signal!
   return aSin.next()<<6; // 8 bits scaled up to 14 bits
 }
 

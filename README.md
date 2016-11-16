@@ -4,7 +4,7 @@
 
 
 Tim Barrass  
-version 2016-09-16-11:54  
+version 2016-11-16-18:43  
 
 Currently your Arduino can only beep like a microwave oven. Mozzi brings
 your Arduino to life by allowing it to produce much more complex and interesting
@@ -61,8 +61,8 @@ x	 9	Arduino Duemilanove
 x	 9	Arduino Nano  
 x	 9	Arduino Pro Mini  
 x	 9	Arduino Leonardo
-x	11	Arduino Mega  *broken since Jan 2015
-x	11  Freetronics EtherMega  *broken since Jan 2015
+..11	Arduino Mega  *broken since Jan 2015  
+..11  Freetronics EtherMega  *broken since Jan 2015
 x	 9  Ardweeny  
 x	 9  Boarduino
 ..14	Teensy  

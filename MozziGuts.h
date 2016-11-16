@@ -84,11 +84,10 @@ The Teensy 3.1 DAC output does not rely on PWM.
 HIFI (not for Teensy 3.1)
 ----
 Use \#define AUDIO_MODE HIFI in Mozzi/config.h to set the audio mode to HIFI for output 14 bit sound at 16384 Hz sample rate and 125kHz PWM rate.
-The high PWM rate of HIFI mode places the carrier frequency beyond audible range, 
-overcoming one of the disadvantages of STANDARD_PLUS mode.
+The high PWM rate of HIFI mode places the carrier frequency beyond audible range.
 
 Also, 14 bits of dynamic range in HIFI mode provides more definition than the nearly 9 bits in STANDARD_PLUS mode.
-HIFI mode takes about the same amount of processing time as STANDARD_PLUS mode, and sounds clearer and brighter.
+HIFI mode takes about the same amount of processing time as STANDARD_PLUS mode, and should sound clearer and brighter.
 However, it requires an extra timer to be used on the Arduino, which could increase the chances of 
 conflicts with other libraries or processes if they rely on Timer 2.
 
@@ -109,8 +108,8 @@ Also, a 4.7nF capacitor is recommended between the summing junction of the resis
 This dual PWM technique is discussed on http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
 Also, there are higher quality output circuits are on the site.
 
-Advantages: higher quality sound than STANDARD_PLUS mode.  Doesn't need a notch filter on 
-the audio signal because the carrier frequency is out of hearing range.
+Advantages: should be higher quality sound than STANDARD_PLUS mode.  Doesn't need a notch filter on 
+the audio signal (like STANDARD which is now obsolete) because the carrier frequency is out of hearing range.
 
 Disadvantages: requires 2 pins, 2 resistors and a capacitor, so it's not so quick to set up compared 
 to a rough, direct single-pin output in STANDARD_PLUS mode.

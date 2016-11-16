@@ -8,18 +8,18 @@ Edit this file if you want to choose your own configuration options.
 
 /**  @ingroup core
 AUDIO_MODE holds the audio mode setting.
-Select STANDARD or HIFI audio output mode in the Mozzi/mozzi_config.h file with
-\#define AUDIO_MODE STANDARD or \#define AUDIO_MODE HIFI.
-In Mozzi/config.h, comment one of these options in and the other out to set the audio mode.
+Select STANDARD (depreciated), STANDARD_PLUS or HIFI audio output mode in the Mozzi/mozzi_config.h file with
+\#define AUDIO_MODE STANDARD_PLUS or \#define AUDIO_MODE HIFI.
+In Mozzi/config.h, comment one of these options in and the others out to set the audio mode.
 
-In STANDARD mode the sample resolution is 488,
+In STANDARD_PLUS mode the sample resolution is 488,
 which provides some headroom above the 8 bit table resolution currently used by
 the oscillators. You can look at utility/TimerOne library for more info about how
 interrupt rate and pwm resolution relate.
 
 HIFI audio mode enables much higher quality output by combining signals from pins 9 and 10.
 For HIFI mode, edit Mozzi/mozzi_config.h to contain \#define AUDIO_MODE HIFI, 
-and comment out \#define AUDIO_MODE STANDARD.
+and comment out \#define AUDIO_MODE STANDARD and \#define AUDIO_MODE STANDARD_PLUS.
 
 @note Teensy 3.1 plays 12 bit audio in STANDARD or STANDARD_PLUS modes, and has no HIFI mode.
 */

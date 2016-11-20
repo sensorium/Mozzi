@@ -112,6 +112,18 @@ Look for code and usage changes [here](extras/NEWS.txt).
 
 ***
 
+## Tweaking Arduino for Faster Audio Code
+
+If you need your synth to run fast, Arduino versions above 1.5 can be tweaked to optimise compiled code for speed instead of small size.  
+
+Find Arduino’s platform.txt (on OSX you can find it by searching in Users/your_name/Library/Arduino15). Search and replace -Os with -O2. Save.
+
+It’s explained more thoroughly (for Windows) [here] (http://www.instructables.com/id/Arduino-IDE-16x-compiler-optimisations-faster-code/?ALLSTEPS).
+
+If you still need more, Arduino 1.0.5 produces slightly faster code.
+
+***
+
 ## Caveats and Workarounds
 
 * While Mozzi is running, the Arduino time functions `millis()`, `micros()`, `delay()`, and

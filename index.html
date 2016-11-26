@@ -72,12 +72,13 @@
 		</p>
 		<p>
 		
-			<a class="header_link" href="https://github.com/sensorium/Mozzi/releases">
+			<a class="header_link" href="/Mozzi/donate">
+			<!-- <a class="header_link" href="https://github.com/sensorium/Mozzi/releases">  -->
 			<!-- <a class="header_link" href="https://tinyurl.com/mozzilib/Mozzi.zip" >  --> <!--download="Mozzi.zip" > stops download working in chrome -->
 			<!-- <a class="header_link" href="/Mozzi/download/">  -->
 				download<br>
 				<i class="icon-download icon-4x"></i><br>
-				<span id="header_small_label">version v1.0.2</span>
+				<span id="header_small_label">version v1.0.3rc1</span>
 			</a>
 		</p>
 	</section> 
@@ -184,7 +185,7 @@ Your browser does not support the audio element. </audio></p>
 <li> Fast ADC and other cpu-efficient code utilities to help keep audio running smoothly.</li>
 <li> Example sketches for easy modification.</li>
 <li> Readymade wavetables and a script to convert your own soundfiles for Mozzi.</li>
-<li>   Designed to be easy to use, open source and extendable.</li>
+<li>   Designed to be easy to use, open source (CC-nc-sa) and extendable.</li>
 </ul>
 
 
@@ -192,16 +193,8 @@ Your browser does not support the audio element. </audio></p>
 
 <h1>Installation</h1>
 
-<p>Download Mozzi from the top of this page and unzip it.
-The new folder will have a name like Mozzi-1.0.2.
-Rename it to just Mozzi.<br/>
-Then, following the instructions from the <a href="http://arduino.cc/en/Guide/Libraries">Arduino libraries guide</a>, except using the renamed folder rather the zip:</p>
-
-<p>In the Arduino IDE, navigate to <strong>Sketch > Import Library</strong>.  At the top of the drop
-down list, select the option to <strong>Add Library</strong>.  Navigate to the folder&#8217;s location and open it.
-Return to the <strong>Sketch > Import Library</strong> menu.
-You should now see the library at the bottom of the drop-down menu.
-It is ready to be used in your sketch.</p>
+<p>Download the most recent Mozzi from the top of this page.
+Then, follow the instructions from the <a href="http://arduino.cc/en/Guide/Libraries">Arduino libraries guide</a>.</p>
 
 <hr />
 
@@ -253,7 +246,7 @@ These boards have been tested:</p>
 </tr>
 <tr>
 <td align="left">Arduino Mega          </td>
-<td align="right"> &#8230;11  *broken since Jan 2015</td>
+<td align="right"> &#8230;11  *broken since Jan 2015  </td>
 </tr>
 <tr>
 <td align="left">Freetronics EtherMega </td>
@@ -335,6 +328,18 @@ Look for code and usage changes <a href="https://github.com/sensorium/Mozzi/blob
 
 <hr />
 
+<h2>Tweaking Arduino for Faster Audio Code</h2>
+
+<p>If you need your synth to run fast, Arduino versions above 1.5 can be tweaked to optimise compiled code for speed instead of small size.</p>
+
+<p>Find Arduino’s platform.txt (on OSX you can find it by searching in Users/your_name/Library/Arduino15). Search and replace -Os with -O2. Save.</p>
+
+<p>It’s explained more thoroughly (for Windows) <a href="https://www.instructables.com/id/Arduino-IDE-16x-compiler-optimisations-faster-code/?ALLSTEPS">here</a>.</p>
+
+<p>If you still need more speed, Arduino 1.0.5 produces slightly faster code.</p>
+
+<hr />
+
 <h1>Caveats and Workarounds</h1>
 
 <ul>
@@ -408,6 +413,14 @@ or <a href="https://github.com/sensorium/Mozzi/issues/">GitHub Mozzi site</a>, F
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/Mozzi/blog/2016/11/26/tweak-for-faster-code/">Tweak for Faster Code</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Mozzi/blog/2016/11/26/update-1-dot-0-3rc1-available/">Update 1.0.3rc1 Available</a>
+      </li>
+    
+      <li class="post">
         <a href="/Mozzi/blog/2016/09/09/howto-for-arduino-1-dot-6-11/">Howto for Arduino 1.6.11</a>
       </li>
     
@@ -417,14 +430,6 @@ or <a href="https://github.com/sensorium/Mozzi/issues/">GitHub Mozzi site</a>, F
     
       <li class="post">
         <a href="/Mozzi/blog/2015/04/08/use-arduino-1-dot-0-5/">Use Arduino 1.0.5</a>
-      </li>
-    
-      <li class="post">
-        <a href="/Mozzi/blog/2014/11/21/yes/">Yes, You Can Donate!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/Mozzi/blog/2014/08/09/teensy-3-dot-0-slash-3-dot-1-test-release-version-2014-08-09-14-15/">Teensy 3.0/3.1 Test Release</a>
       </li>
     
   </ul>

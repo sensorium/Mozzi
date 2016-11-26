@@ -16,6 +16,7 @@ var examples =
     [ "06.Synthesis/WaveShaper/WaveShaper.ino", "06_8_synthesis_2_wave_shaper_2_wave_shaper_8ino-example.html", null ],
     [ "07.Envelopes/ADSR_Envelope/ADSR_Envelope.ino", "07_8_envelopes_2_a_d_s_r__envelope_2_a_d_s_r__envelope_8ino-example.html", null ],
     [ "07.Envelopes/Ead_Envelope/Ead_Envelope.ino", "07_8_envelopes_2_ead__envelope_2_ead__envelope_8ino-example.html", null ],
+    [ "07.Envelopes/MultiLine_Envelope/MultiLine_Envelope.ino", "07_8_envelopes_2_multi_line__envelope_2_multi_line__envelope_8ino-example.html", null ],
     [ "08.Samples/Sample/Sample.ino", "08_8_samples_2_sample_2_sample_8ino-example.html", null ],
     [ "08.Samples/SampleHuffman_Umpah/SampleHuffman_Umpah.ino", "08_8_samples_2_sample_huffman__umpah_2_sample_huffman__umpah_8ino-example.html", null ],
     [ "09.Delays/AudioDelay/AudioDelay.ino", "09_8_delays_2_audio_delay_2_audio_delay_8ino-example.html", null ],

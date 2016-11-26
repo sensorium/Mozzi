@@ -6,7 +6,8 @@
   
     Circuit: 
       MIDI input circuit as per http://arduino.cc/en/Tutorial/Midi
-      (midi has to be disconnected from rx for sketch to upload)
+      Note: midi input on rx pin, not tx as in the illustration on the above page.
+      Midi has to be disconnected from rx for sketch to upload.
       Audio output on digital pin 9 on a Uno or similar.
     
     Mozzi help/discussion/announcements:

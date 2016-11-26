@@ -1,4 +1,4 @@
-var annotated =
+var annotated_dup =
 [
     [ "ADSR", "class_a_d_s_r.html", "class_a_d_s_r" ],
     [ "AudioDelay", "class_audio_delay.html", "class_audio_delay" ],
@@ -19,6 +19,7 @@ var annotated =
     [ "Line< unsigned long >", "class_line_3_01unsigned_01long_01_4.html", "class_line_3_01unsigned_01long_01_4" ],
     [ "LowPassFilter", "class_low_pass_filter.html", "class_low_pass_filter" ],
     [ "Metronome", "class_metronome.html", "class_metronome" ],
+    [ "MultiLine", "class_multi_line.html", "class_multi_line" ],
     [ "Oscil", "class_oscil.html", "class_oscil" ],
     [ "OverSample", "class_over_sample.html", "class_over_sample" ],
     [ "PDResonant", "class_p_d_resonant.html", "class_p_d_resonant" ],

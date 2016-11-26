@@ -24,5 +24,6 @@ var class_a_d_s_r =
     [ "setSustainTime", "class_a_d_s_r.html#abd93d77bf049b8151eeb735685b0e8d7", null ],
     [ "setSustainUpdateSteps", "class_a_d_s_r.html#aac492e771fd8e653d4ce70f519fb9382", null ],
     [ "setTimes", "class_a_d_s_r.html#a68df2fe03f1582d79e7b55e3407d474b", null ],
-    [ "update", "class_a_d_s_r.html#a764566274a3982b43cb1f9fb47ca06ae", null ]
+    [ "update", "class_a_d_s_r.html#a764566274a3982b43cb1f9fb47ca06ae", null ],
+    [ "adsr_playing", "class_a_d_s_r.html#ad7d5a1d98b7caf2cec77adb6e1ffed3a", null ]
 ];

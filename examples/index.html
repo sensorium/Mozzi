@@ -72,12 +72,13 @@
 		</p>
 		<p>
 		
-			<a class="header_link" href="https://github.com/sensorium/Mozzi/releases">
+			<a class="header_link" href="/Mozzi/donate">
+			<!-- <a class="header_link" href="https://github.com/sensorium/Mozzi/releases">  -->
 			<!-- <a class="header_link" href="https://tinyurl.com/mozzilib/Mozzi.zip" >  --> <!--download="Mozzi.zip" > stops download working in chrome -->
 			<!-- <a class="header_link" href="/Mozzi/download/">  -->
 				download<br>
 				<i class="icon-download icon-4x"></i><br>
-				<span id="header_small_label">version v1.0.2</span>
+				<span id="header_small_label">version v1.0.3rc1</span>
 			</a>
 		</p>
 	</section> 
@@ -142,7 +143,7 @@ They&#8217;re intended to be instructive, rather than musically interesting&#823
 <a href="#09.Delays">09.Delays</a> : for effects like flanging or reverb.<br/>
 <a href="#10.Audio_Filters">10.Audio Filters</a> : modify audio frequencies.<br/>
 <a href="#11.Communication">11.Communication</a> : non-blocking communication with external devices.<br/>
-<a href="#12.Utilities">12.Utilities</a> : other useful things.</p>
+<a href="#12.Misc">12.Misc</a> : other useful things.</p>
 
 <h2 class=target_without_link><a id='01.Basics'>
 01.Basics</a></h2>
@@ -7813,6 +7814,11 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>145</span>
 <span class='line-number'>146</span>
 <span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+<span class='line-number'>152</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Plays a fluctuating ambient wash using pairs</span>
 </span><span class='line'><span class="cm">    of slightly detuned oscillators, following an example</span>
 </span><span class='line'><span class="cm">    from Miller Puckette&#39;s Pure Data manual.</span>
@@ -7824,6 +7830,11 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Demonstrates the use of fixed-point Q16n16</span>
 </span><span class='line'><span class="cm">    format numbers, mtof() for converting midi note</span>
 </span><span class='line'><span class="cm">    values to frequency, and xorshift96() for random numbers.</span>
+</span><span class='line'><span class="cm">    </span>
+</span><span class='line'><span class="cm">    For this sketch to run smoothly on 16MHz Ateml boards, you need to edit</span>
+</span><span class='line'><span class="cm">    platform.txt (on OSX you can find it by searching in /Users/your_name/Library/Arduino15).</span>
+</span><span class='line'><span class="cm">    Search and replace -Os with -O2.  Save.  </span>
+</span><span class='line'><span class="cm">    This tells the compiler to optimise for speed, instead of size.</span>
 </span><span class='line'><span class="cm">  </span>
 </span><span class='line'><span class="cm">    Circuit: Audio output on digital pin 9 on a Uno or similar, or</span>
 </span><span class='line'><span class="cm">    DAC/A14 on Teensy 3.1, or </span>
@@ -15154,8 +15165,8 @@ Your browser does not support the audio element.</audio></p>
 
 <hr />
 
-<h2 class=target_without_link><a id='12.Utilities'>
-12.Utilities</a></h2>
+<h2 class=target_without_link><a id='12.Misc'>
+12.Misc</a></h2>
 
 
 <hr />
@@ -15168,7 +15179,212 @@ Your browser does not support the audio element.</audio></p>
 <button id='IntMap_testcollapse' style='display:none' onclick='javascript:toggleDisplay(IntMap_test, IntMap_testexpand, IntMap_testcollapse)'>hide sketch</button></p>
 
 <div id='IntMap_test' style='display:none'>
-File /Users/timbarrass/mozzi-octopress/source/downloads/code/examples/12.Utilities/IntMap_test/IntMap_test.ino could not be found
+<figure class='code'><figcaption><span> (IntMap_test.ino)</span> <a href='/Mozzi/downloads/code/examples/12.Misc/IntMap_test/IntMap_test.ino'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/* Maps a range of input numbers to an output range, comparing</span>
+</span><span class='line'><span class="cm">  the results of Mozzi&#39;s IntMap object with Arduino map().</span>
+</span><span class='line'><span class="cm"> </span>
+</span><span class='line'><span class="cm">  Demonstrates IntMap, a fast integer replacement for map().</span>
+</span><span class='line'><span class="cm">  </span>
+</span><span class='line'><span class="cm">  Circuit: not required</span>
+</span><span class='line'><span class="cm"> </span>
+</span><span class='line'><span class="cm">  Mozzi help/discussion/announcements:</span>
+</span><span class='line'><span class="cm">  https://groups.google.com/forum/#!forum/mozzi-users</span>
+</span><span class='line'><span class="cm"> </span>
+</span><span class='line'><span class="cm">  Tim Barrass 2014, CC by-nc-sa.</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
+</span><span class='line'><span class="cp">#include &lt;IntMap.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">const</span> <span class="n">IntMap</span> <span class="n">testIntMap</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1000</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
+</span><span class='line'>  <span class="c1">//Serial.begin(9600); // for Teensy 3.1, beware printout can cause glitches</span>
+</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2000</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">5000</span><span class="p">){</span>
+</span><span class='line'>    <span class="n">n</span> <span class="o">=</span> <span class="n">testIntMap</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;testIntMap: </span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">DEC</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">n</span> <span class="o">=</span> <span class="n">map</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1000</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s"> map: </span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">DEC</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">i</span> <span class="o">+=</span> <span class="mi">7</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+</div>
+
+
+<hr />
+
+<p>Stereo_Hack <a  href= "#top"><i class="icon-level-up right_up_level"></i></a></p>
+
+<p><audio controls>
+<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/12.Misc/Stereo_Hack/Stereo_Hack.ogg?raw=true' preload='auto'></source>
+<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/12.Misc/Stereo_Hack/Stereo_Hack.mp3?raw=true' preload='auto'></source>
+Your browser does not support the audio element.</audio></p>
+
+<p><button type='button' id='Stereo_Hackexpand' onclick='javascript:toggleDisplay(Stereo_Hack, Stereo_Hackexpand, Stereo_Hackcollapse)'>show sketch</button>
+<button id='Stereo_Hackcollapse' style='display:none' onclick='javascript:toggleDisplay(Stereo_Hack, Stereo_Hackexpand, Stereo_Hackcollapse)'>hide sketch</button></p>
+
+<div id='Stereo_Hack' style='display:none'>
+<figure class='code'><figcaption><span> (Stereo_Hack.ino)</span> <a href='/Mozzi/downloads/code/examples/12.Misc/Stereo_Hack/Stereo_Hack.ino'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example crudely panning noise to test stereo output hack,</span>
+</span><span class='line'><span class="cm"> *  using Mozzi sonification library.</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> *  Tests stereo output hack.  This requires #define STEREO_HACK true in mozzi_config.h</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> *  Circuit: Audio outputs on digital pins 9 and 10.</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> *  Mozzi help/discussion/announcements:</span>
+</span><span class='line'><span class="cm"> *  https://groups.google.com/forum/#!forum/mozzi-users</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> *  Tim Barrass 2012.</span>
+</span><span class='line'><span class="cm"> *  This example code is in the public domain.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;MozziGutsStereo.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;Phasor.h&gt; </span><span class="c1">// for controlling panning position</span>
+</span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscil for audio sig</span>
+</span><span class='line'><span class="cp">#include &lt;tables/pinknoise8192_int8.h&gt; </span><span class="c1">// table for oscillator</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// use #define for CONTROL_RATE, not a constant</span>
+</span><span class='line'><span class="cp">#define CONTROL_RATE 64 </span><span class="c1">// powers of 2 please</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// use: Oscil &lt;table_size, update_rate&gt; oscilName (wavetable)</span>
+</span><span class='line'><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">PINKNOISE8192_NUM_CELLS</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aNoise</span><span class="p">(</span><span class="n">PINKNOISE8192_DATA</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//Phasor for panning</span>
+</span><span class='line'><span class="n">Phasor</span> <span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">,</span> <span class="n">CONTROL_RATE</span><span class="o">&gt;</span> <span class="n">kPan</span><span class="p">;</span>
+</span><span class='line'><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">pan</span><span class="p">;</span> <span class="c1">// convey pan from updateControl() to updateAudioStereo();</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">aNoise</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="mf">2.111f</span><span class="p">);</span> <span class="c1">// set the frequency with an unsigned int or a float</span>
+</span><span class='line'>  <span class="n">kPan</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="mf">0.25f</span><span class="p">);</span> <span class="c1">// take 4 seconds to move left-right</span>
+</span><span class='line'>  <span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span> <span class="c1">// set a control rate of 64 (powers of 2 please)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">pan</span> <span class="o">=</span> <span class="n">kPan</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">audio_signal_1</span><span class="p">,</span> <span class="n">audio_signal_2</span><span class="p">;</span> <span class="c1">// required for the stereo hack</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">updateAudioStereo</span><span class="p">(){</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">asig</span> <span class="o">=</span> <span class="n">aNoise</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+</span><span class='line'>  <span class="n">audio_signal_1</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(((</span><span class="kt">long</span><span class="p">)</span><span class="n">pan</span><span class="o">*</span><span class="n">asig</span><span class="p">)</span><span class="o">&gt;&gt;</span><span class="mi">16</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">audio_signal_2</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)((((</span><span class="kt">long</span><span class="p">)</span><span class="mi">65535</span><span class="o">-</span><span class="n">pan</span><span class="p">)</span><span class="o">*</span><span class="n">asig</span><span class="p">)</span><span class="o">&gt;&gt;</span><span class="mi">16</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">audioHook</span><span class="p">();</span> <span class="c1">// required here</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 </div>
 
 
@@ -15220,6 +15436,14 @@ File /Users/timbarrass/mozzi-octopress/source/downloads/code/examples/12.Utiliti
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/Mozzi/blog/2016/11/26/tweak-for-faster-code/">Tweak for Faster Code</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Mozzi/blog/2016/11/26/update-1-dot-0-3rc1-available/">Update 1.0.3rc1 Available</a>
+      </li>
+    
+      <li class="post">
         <a href="/Mozzi/blog/2016/09/09/howto-for-arduino-1-dot-6-11/">Howto for Arduino 1.6.11</a>
       </li>
     
@@ -15229,14 +15453,6 @@ File /Users/timbarrass/mozzi-octopress/source/downloads/code/examples/12.Utiliti
     
       <li class="post">
         <a href="/Mozzi/blog/2015/04/08/use-arduino-1-dot-0-5/">Use Arduino 1.0.5</a>
-      </li>
-    
-      <li class="post">
-        <a href="/Mozzi/blog/2014/11/21/yes/">Yes, You Can Donate!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/Mozzi/blog/2014/08/09/teensy-3-dot-0-slash-3-dot-1-test-release-version-2014-08-09-14-15/">Teensy 3.0/3.1 Test Release</a>
       </li>
     
   </ul>

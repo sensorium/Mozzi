@@ -1,5 +1,6 @@
 var group__util =
 [
+    [ "char2mozzi.py", "char2mozzi_8py.html", null ],
     [ "Int2Type", "group__util.html#struct_int2_type", [
       [ "value", "group__util.html#a21bb06a1d9872a32b8729c961ae30eb0afc88b5b34784bb728b4172d2551fbfb4", null ]
     ] ],

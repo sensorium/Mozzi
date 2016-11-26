@@ -9,6 +9,11 @@
     Demonstrates the use of fixed-point Q16n16
     format numbers, mtof() for converting midi note
     values to frequency, and xorshift96() for random numbers.
+    
+    For this sketch to run smoothly on 16MHz Ateml boards, you need to edit
+    platform.txt (on OSX you can find it by searching in /Users/your_name/Library/Arduino15).
+    Search and replace -Os with -O2.  Save.  
+    This tells the compiler to optimise for speed, instead of size.
   
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
     DAC/A14 on Teensy 3.1, or 

@@ -30,6 +30,7 @@ var hierarchy =
     [ "Line< unsigned int >", "class_line_3_01unsigned_01int_01_4.html", null ],
     [ "Line< unsigned long >", "class_line_3_01unsigned_01long_01_4.html", null ],
     [ "LowPassFilter", "class_low_pass_filter.html", null ],
+    [ "MultiLine< CONTROL_UPDATE_RATE, LERP_RATE >", "class_multi_line.html", null ],
     [ "Oscil< NUM_TABLE_CELLS, UPDATE_RATE >", "class_oscil.html", null ],
     [ "Oscil< 8192, AUDIO_RATE >", "class_oscil.html", null ],
     [ "Oscil< COS8192_NUM_CELLS, AUDIO_RATE >", "class_oscil.html", null ],

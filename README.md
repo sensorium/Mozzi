@@ -4,7 +4,7 @@
 
 
 Tim Barrass  
-version 2016-11-26-22:24  
+version 2016-11-26-23:07  
 
 Currently your Arduino can only beep like a microwave oven. Mozzi brings
 your Arduino to life by allowing it to produce much more complex and interesting
@@ -32,10 +32,8 @@ passing or external synths.
 ***
 
 ## Installation  
-Download Mozzi from the top of this page and unzip it.
-The new folder will have a name like Mozzi-1.0.2.
-Rename it to just Mozzi.  
-Then, following the instructions from the [Arduino libraries guide](http://arduino.cc/en/Guide/Libraries), except using the renamed folder rather the zip:  
+Download the most recent version of Mozzi from Github.
+Then, following the instructions from the [Arduino libraries guide](http://arduino.cc/en/Guide/Libraries).
 
 In the Arduino IDE, navigate to __Sketch > Import Library__.  At the top of the drop
 down list, select the option to __Add Library__.  Navigate to the folder's location and open it. 
@@ -120,7 +118,7 @@ Find Arduino’s platform.txt (on OSX you can find it by searching in Users/your
 
 It’s explained more thoroughly (for Windows) [here] (http://www.instructables.com/id/Arduino-IDE-16x-compiler-optimisations-faster-code/?ALLSTEPS).
 
-If you still need more, Arduino 1.0.5 produces slightly faster code.
+If you still need more speed, Arduino 1.0.5 produces slightly faster code.
 
 ***
 

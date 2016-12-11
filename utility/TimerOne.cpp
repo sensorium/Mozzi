@@ -14,7 +14,7 @@
  */
 
 // Added by TB2014 for Mozzi library, to hide code from Teensy 3.1
-#if !(defined(__MK20DX128__) || defined(__MK20DX256__))
+#if !(defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO)  || defined(TEENSYDUINO))
  
 #include "TimerOne.h"
 

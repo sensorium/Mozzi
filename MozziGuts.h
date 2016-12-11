@@ -171,7 +171,7 @@ HIFI is not available/not required on Teensy 3.1.
 #endif
 
 
-#if defined(__MK20DX128__) || defined(__MK20DX256__) // Teensy 3
+#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO)  || defined(TEENSYDUINO) // Teensy 3
 #include "AudioConfigTeensy3_12bit.h"
 #else
 #if (AUDIO_MODE == STANDARD)
@@ -189,7 +189,7 @@ typedef unsigned char uchar;
 typedef unsigned int uint;
 typedef unsigned long ulong;
 
-#if defined(__MK20DX128__) || defined(__MK20DX256__) // teensy 3, 3.1
+#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO)  || defined(TEENSYDUINO) // teensy 3, 3.1
 //typedef uint8_t byte;//unsigned char;
 //typedef int8_t char;
 //typedef (uint16_t) (short unsigned int);

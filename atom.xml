@@ -4,7 +4,7 @@
   <title><![CDATA[MOZZI]]></title>
   <link href="http://sensorium.github.io/Mozzi//atom.xml" rel="self"/>
   <link href="http://sensorium.github.io/Mozzi//"/>
-  <updated>2016-11-27T00:07:32+11:00</updated>
+  <updated>2016-12-12T09:14:56+11:00</updated>
   <id>http://sensorium.github.io/Mozzi//</id>
   <author>
     <name><![CDATA[Tim Barrass]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[v1.0.3rc2 Teensy bugfix]]></title>
+    <link href="http://sensorium.github.io/Mozzi//blog/2016/12/11/v1-dot-0-3rc2-teensy-bugfix/"/>
+    <updated>2016-12-11T17:11:00+11:00</updated>
+    <id>http://sensorium.github.io/Mozzi//blog/2016/12/11/v1-dot-0-3rc2-teensy-bugfix</id>
+    <content type="html"><![CDATA[<p>release v1.0.3rc2</p>
+
+<ul>
+<li>Teensy now compiles, bit of a hack added
+  || defined(TEENSYDUINO)
+  to all Teensy conditional compile lines like this:
+  #if defined(<strong>MK20DX128</strong>) || defined(<strong>MK20DX256</strong>) || defined(TEENSYDUINO)  // teensy 3, 3.1</li>
+<li>examples, removed commented ADC.h line from all examples, Teensy doesn&#8217;t seem to need it anymore</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tweak for faster code]]></title>

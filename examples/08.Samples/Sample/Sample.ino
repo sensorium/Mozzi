@@ -14,7 +14,6 @@
     Tim Barrass 2012, CC by-nc-sa.
 */
 
-//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Sample.h> // Sample template
 #include <samples/burroughs1_18649_int8.h>

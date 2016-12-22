@@ -18,7 +18,6 @@
     Tim Barrass 2013, CC by-nc-sa.
 */
 
-//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/brownnoise8192_int8.h> // recorded audio wavetable

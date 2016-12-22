@@ -19,7 +19,6 @@
 */
 
 #include <MIDI.h>
-//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
 #include <Line.h> // for envelope

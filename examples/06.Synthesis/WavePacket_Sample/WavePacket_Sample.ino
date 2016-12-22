@@ -29,7 +29,6 @@
     Tim Barrass 2013, CC by-nc-sa.
 */
 
-//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <mozzi_analog.h>
 #include <WavePacketSample.h>
 #include <RollingAverage.h>

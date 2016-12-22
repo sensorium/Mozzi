@@ -35,7 +35,6 @@
 */
  
 
-//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <WavePacket.h>
 #include <RollingAverage.h>
 #include <AutoMap.h>

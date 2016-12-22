@@ -11,7 +11,6 @@
 	 Tim Barrass 2014, CC by-nc-sa.
 */
 
-//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <IntMap.h>
 
 const IntMap testIntMap(0,100,10,1000);

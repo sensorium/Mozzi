@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>output - MOZZI</title>
+  <title>v1.0.3rc4 fixes compile - MOZZI</title>
   <meta name="author" content="Tim Barrass">
   
   
@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sensorium.github.io/Mozzi//learn/output">
+  <link rel="canonical" href="http://sensorium.github.io/Mozzi//blog/2017/01/16/v1-dot-0-3rc4-fixes-compile">
   <link href="/Mozzi/favicon.png" rel="icon">
   <link href="/Mozzi/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/Mozzi/atom.xml" rel="alternate" title="MOZZI" type="application/atom+xml">
@@ -120,100 +120,71 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Output</h1>
+    
+      <h1 class="entry-title">v1.0.3rc4 Fixes Compile</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-01-16T15:10:00+11:00" pubdate data-updated="true">Jan 16<span>th</span>, 2017</time>
+        
+      </p>
     
   </header>
-  
-  <p>The default AUDIO_MODE since March 2014 is STANDARD_PLUS.  On Atmel-based boards this mode has a pwm carrier rate of 32768 Hz, double the rate for STANDARD mode.
-The higher pwm rate is above hearing range, an advance on STANDARD mode&#8217;s 16384 Hz which can be audible for children and some adults.<br/>
-Teensy 3.1 boards provide true analog DAC rather than pwm, so Teensy 3.1 is a great option for cleaner sounding audio and you won&#8217;t need a pwm carrier filter. Teensy 3.1 also runs much faster than the Atmel based Arduinos, so you can generate more complex sounds.<br/>
-STANDARD_PLUS can still benefit from a low pass filter, as outlined below for STANDARD mode.</p>
-
-<h2>Output circuit for HIFI mode</h2>
-
-<p>Mozzi&#8217;s HIFI audio mode combines the output of 2 pins in a technique called dual PWM, which is explained in detail at <a href="http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/">Open Music Labs</a>.</p>
-
-<p>Here&#8217;s the circuit for Mozzi, based on the Open Music Labs article.</p>
-
-<p><img src="https://farm8.staticflickr.com/7458/10657009473_26c1f478de.jpg" alt="Mozzi output circuit for HIFI audio mode" /></p>
-
-<p>Teensy 3.1 doesn&#8217;t use 14 bit pwm HIFI mode, but has 12 bit DAC analog output enabled by default, even in STANDARD and STANDARD_PLUS modes.</p>
-
-<h4>Advantages of HIFI mode</h4>
-
-<ul>
-<li>Higher resolution sound than STANDARD or STANDARD_PLUS modes.</li>
-<li>Doesn&#8217;t need a notch filter on the audio signal because the carrier frequency is out of hearing range (STANDARD_PLUS also doesn&#8217;t need it).</li>
-</ul>
 
 
-<h4>Disadvantages</h4>
-
-<ul>
-<li>Requires 2 pins, 2 resistors and a capacitor, so it&#8217;s not so quick to set up compared to a rough, direct single-pin output in STANDARD mode.</li>
-</ul>
+<div class="entry-content"><p>Removed stray FrequencyTimer files from main folder, which stopped anything compiling&#8230;!</p>
+</div>
 
 
-<h3>Pins and where to put the resistors on various boards for HIFI mode</h3>
-
-<p>Boards tested in HIFI mode have an x, though most of these have been tested in STANDARD mode
-and there&#8217;s no reason for them not to work in HIFI (unless the pin number is wrong or something).
-Any reports are welcome.</p>
-
-<p>resistor&#8230;..3.9k&#8230;&#8230;499k (or 2 1M in parallel)<br/>
-x&#8230;&#8230;&#8230;&#8230;&#8230;.9&#8230;&#8230;&#8230;.10&#8230;&#8230;&#8230;&#8230;&#8230;Arduino Uno<br/>
-x&#8230;&#8230;&#8230;&#8230;&#8230;.9&#8230;&#8230;&#8230;.10&#8230;&#8230;&#8230;&#8230;&#8230;Arduino Duemilanove<br/>
-x&#8230;&#8230;&#8230;&#8230;&#8230;.9&#8230;&#8230;&#8230;.10&#8230;&#8230;&#8230;&#8230;&#8230;Arduino Nano<br/>
-&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;9&#8230;&#8230;&#8230;.10&#8230;&#8230;&#8230;&#8230;&#8230;Arduino Leonardo<br/>
-x&#8230;&#8230;&#8230;&#8230;&#8230;.9&#8230;&#8230;&#8230;.10&#8230;&#8230;&#8230;&#8230;&#8230;Ardweeny<br/>
-x&#8230;&#8230;&#8230;&#8230;&#8230;.9&#8230;&#8230;&#8230;.10&#8230;&#8230;&#8230;&#8230;&#8230;Boarduino<br/>
-x&#8230;&#8230;&#8230;&#8230;&#8230;.11&#8230;&#8230;&#8230;12&#8230;&#8230;&#8230;&#8230;&#8230;Freetronics EtherMega<br/>
-&#8230;&#8230;&#8230;&#8230;&#8230;..11&#8230;&#8230;&#8230;12&#8230;&#8230;&#8230;&#8230;&#8230;Arduino Mega<br/>
-&#8230;&#8230;&#8230;&#8230;&#8230;..14&#8230;&#8230;&#8230;15&#8230;&#8230;&#8230;&#8230;..Teensy<br/>
-&#8230;&#8230;&#8230;&#8230;&#8230;B5(14)&#8230;B6(15)&#8230;&#8230;&#8230;Teensy2<br/>
-x&#8230;&#8230;&#8230;&#8230;.B5(25)&#8230;B6(26)&#8230;&#8230;&#8230;Teensy2++<br/>
-&#8230;&#8230;&#8230;&#8230;&#8230;..13&#8230;&#8230;&#8230;12&#8230;&#8230;&#8230;&#8230;&#8230;Sanguino</p>
-
-<h3>Low pass audio filter</h3>
-
-<p>Mozzi&#8217;s sound output can be filtered to reduce aliasing at high frequencies.
-Here&#8217;s some info about low pass <a href="http://electronics.stackexchange.com/questions/34843/how-determine-the-rc-time-constant-in-pwm-digital-to-analog-low-pass-filter">RC filters</a> and a <a href="http://sim.okawa-denshi.jp/en/PWMtool.php">calculator</a> to help choose components.
-For Mozzi, an RC filter with a roll-off frequency of just under 6kHz works well, using a 270 Ω resistor and a 100n capacitor, as shown below.   In HIFI mode, this would be on the combined audio output signal rather than straight from pin 9.</p>
-
-<p><img src="http://farm9.staticflickr.com/8317/7934584004_096300ef0d.jpg" alt="RC circuit" /></p>
-
-<h3>Notch filter for STANDARD mode carrier frequency</h3>
-
-<p>This may still be useful if you need to use STANDARD mode for some reason, for instance if you need Timer 2 for another process
-(making HIFI unavailable), or if your sketch is too intensive for STANDARD_PLUS and you need 10% more juice.</p>
-
-<p>People who have used Mozzi in STANDARD mode with children report that kids find the carrier frequency particularly irritating, however adults are often unable to perceive it at any level!  Many thanks to Andrew McPherson, who sent a schematic and equation for a twin-T notch filter which he used successfully to remove the offending frequency.</p>
-
-<p><img src="http://farm9.staticflickr.com/8470/8124196839_6f3e506525.jpg" alt="Twin-T Notch Filter" />
-<img src="http://farm9.staticflickr.com/8472/8124196815_6c02f4fb86.jpg" alt="equation" /></p>
-
-<p>Here&#8217;s a design tool for calculating <a href="http://sim.okawa-denshi.jp/en/TwinTCRtool.php">Twin-T notch filters.</a></p>
-
-<p>Andrew also reported that the low-pass and notch filter described here can be used together in series without any problems.</p>
-
-<p>Here&#8217;s a schematic for the 6kHz low pass and the notch filter using commonly available parts chosen to exactly match STANDARD mode&#8217;s 16384Hz carrier frequency, using the notch filter design tool.</p>
-
-<p><img src="http://farm9.staticflickr.com/8209/8210496070_4a1b21f8c1_c.jpg" alt="Schematic" /></p>
-
-<h3>Download</h3>
-
-<p>Download a Fritzing file with breadboard, schematic and circuit board layouts <a href="https://docs.google.com/file/d/0B_eOzePFYDZaSEo4bVJ6NlJnSXM/edit?usp=sharing">here</a>.</p>
-
-  
-    <footer>
+  <footer>
+    <p class="meta">
       
-      
-        <div class="sharing">
   
-  <a href="/Mozzi//twitter.com/share" class="twitter-share-button" data-url="http://sensorium.github.io/Mozzi//learn/output/index.html" data-via="nothingperson" data-counturl="http://sensorium.github.io/Mozzi//learn/output/index.html" >Tweet</a>
+
+<span class="byline author vcard">Posted by <span class="fn">Tim Barrass</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-01-16T15:10:00+11:00" pubdate data-updated="true">Jan 16<span>th</span>, 2017</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/Mozzi/blog/categories/bugfix/'>bugfix</a>, <a class='category' href='/Mozzi/blog/categories/releases/'>releases,</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="/Mozzi//twitter.com/share" class="twitter-share-button" data-url="http://sensorium.github.io/Mozzi//blog/2017/01/16/v1-dot-0-3rc4-fixes-compile/" data-via="nothingperson" data-counturl="http://sensorium.github.io/Mozzi//blog/2017/01/16/v1-dot-0-3rc4-fixes-compile/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -223,9 +194,14 @@ For Mozzi, an RC filter with a roll-off frequency of just under 6kHz works well,
   
 </div>
 
+    
+    <p class="meta">
       
-    </footer>
-  
+        <a class="basic-alignment left" href="/Mozzi/blog/2016/12/11/v1-dot-0-3rc2-teensy-bugfix/" title="Previous Post: v1.0.3rc2 Teensy bugfix">&laquo; v1.0.3rc2 Teensy bugfix</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>

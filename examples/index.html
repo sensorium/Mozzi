@@ -78,7 +78,7 @@
 			<!-- <a class="header_link" href="/Mozzi/download/">  -->
 				download<br>
 				<i class="icon-download icon-4x"></i><br>
-				<span id="header_small_label">version v1.0.3rc2</span>
+				<span id="header_small_label">version v1.0.3rc4</span>
 			</a>
 		</p>
 	</section> 
@@ -107,7 +107,7 @@
   <li><a href="/Mozzi/faq/">FAQ</a></li>
   <li><a href="https://groups.google.com/forum/#!forum/mozzi-users/">Forum</a></li>
   <li><a href="/Mozzi/doc/html/index.html">API</a></li>
-  <li><a href="/Mozzi/consulting/">Consulting</a></li>
+  <!-- <li><a href="/Mozzi/consulting/">Consulting</a></li> -->
   <!-- <li><a href="https://mozzi.sharetribe.com/">Market</a></li> -->
   <!-- <li><a href="/Mozzi/download/">Download</a></li> -->
   <!-- <li><a href="/Mozzi/blog/">Blog</a></li> -->
@@ -208,7 +208,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>45</span>
 <span class='line-number'>46</span>
 <span class='line-number'>47</span>
-<span class='line-number'>48</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example changing the gain of a sinewave,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -225,7 +224,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator template</span>
 </span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt; </span><span class="c1">// sine table for oscillator</span>
@@ -320,7 +318,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>43</span>
 <span class='line-number'>44</span>
 <span class='line-number'>45</span>
-<span class='line-number'>46</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example playing a sinewave at a set frequency,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -336,7 +333,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator template</span>
 </span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt; </span><span class="c1">// sine table for oscillator</span>
@@ -552,9 +548,7 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
 <span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
-</span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;        </span><span class="c1">// at the top of your sketch</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;        </span><span class="c1">// at the top of your sketch</span>
 </span><span class='line'><span class="cp">#define CONTROL_RATE 64   </span><span class="c1">// or some other power of 2</span>
 </span><span class='line'>
 </span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">()</span> <span class="p">{</span>
@@ -893,7 +887,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>45</span>
 <span class='line-number'>46</span>
 <span class='line-number'>47</span>
-<span class='line-number'>48</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example playing a sinewave with vibrato,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -909,7 +902,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;tables/cos2048_int8.h&gt; </span><span class="c1">// table for Oscils to play</span>
@@ -1040,7 +1032,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>72</span>
 <span class='line-number'>73</span>
 <span class='line-number'>74</span>
-<span class='line-number'>75</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of a simple light-sensing theremin-like</span>
 </span><span class='line'><span class="cm">     instrument with long echoes,</span>
 </span><span class='line'><span class="cm">     using Mozzi sonification library.</span>
@@ -1065,7 +1056,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">     Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator template</span>
 </span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt; </span><span class="c1">// sine table for oscillator</span>
@@ -1240,7 +1230,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>104</span>
 <span class='line-number'>105</span>
 <span class='line-number'>106</span>
-<span class='line-number'>107</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Plays a fluctuating ambient wash,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -1261,7 +1250,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;tables/cos8192_int8.h&gt;</span>
@@ -1428,7 +1416,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>60</span>
 <span class='line-number'>61</span>
 <span class='line-number'>62</span>
-<span class='line-number'>63</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of amplitude modulation (as tremelo),</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -1449,7 +1436,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;tables/triangle_valve_2048_int8.h&gt;</span>
@@ -1567,7 +1553,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>55</span>
 <span class='line-number'>56</span>
 <span class='line-number'>57</span>
-<span class='line-number'>58</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of a sound being toggled on an off,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -1587,7 +1572,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator template</span>
 </span><span class='line'><span class="cp">#include &lt;tables/sin8192_int8.h&gt; </span><span class="c1">// sine table for oscillator</span>
@@ -1733,7 +1717,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>87</span>
 <span class='line-number'>88</span>
 <span class='line-number'>89</span>
-<span class='line-number'>90</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of sliding smoothly</span>
 </span><span class='line'><span class="cm">    between oscillator frequencies,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
@@ -1758,7 +1741,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Line.h&gt; </span><span class="c1">// for smooth transitions</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator template</span>
@@ -2243,7 +2225,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>85</span>
 <span class='line-number'>86</span>
 <span class='line-number'>87</span>
-<span class='line-number'>88</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example using Metronome to playing samples encoded with Huffman compression.</span>
 </span><span class='line'><span class="cm"> </span>
 </span><span class='line'><span class="cm">     Demonstrates Metronome start, stop and ready, and the the SampleHuffman class.</span>
@@ -2259,7 +2240,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">     Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Metronome.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;SampleHuffman.h&gt;</span>
@@ -2408,7 +2388,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>56</span>
 <span class='line-number'>57</span>
 <span class='line-number'>58</span>
-<span class='line-number'>59</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example pausing Mozzi, restoring timers to previous states,</span>
 </span><span class='line'><span class="cm">    during which Arduino delay() works, then resuming Mozzi again.</span>
 </span><span class='line'><span class="cm">    </span>
@@ -2429,7 +2408,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;tables/brownnoise8192_int8.h&gt; </span><span class="c1">// recorded audio wavetable</span>
@@ -2598,7 +2576,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>104</span>
 <span class='line-number'>105</span>
 <span class='line-number'>106</span>
-<span class='line-number'>107</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  </span>
 </span><span class='line'><span class="cm">  Example of Wavepacket synthesis, using analog</span>
 </span><span class='line'><span class="cm">  inputs to change the fundamental frequency, </span>
@@ -2636,7 +2613,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;WavePacket.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;RollingAverage.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;AutoMap.h&gt;</span>
@@ -2829,7 +2805,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>103</span>
 <span class='line-number'>104</span>
 <span class='line-number'>105</span>
-<span class='line-number'>106</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/* </span>
 </span><span class='line'><span class="cm">  Example using a light dependent resistor (LDR) to change </span>
 </span><span class='line'><span class="cm">  an FM synthesis parameter, and a knob for fundamental frequency,</span>
@@ -2862,7 +2837,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">  Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator </span>
 </span><span class='line'><span class="cp">#include &lt;tables/cos2048_int8.h&gt; </span><span class="c1">// table for Oscils to play</span>
@@ -3091,7 +3065,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>135</span>
 <span class='line-number'>136</span>
 <span class='line-number'>137</span>
-<span class='line-number'>138</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/* </span>
 </span><span class='line'><span class="cm">  Example using 2 light dependent resistors (LDRs) to change </span>
 </span><span class='line'><span class="cm">  FM synthesis parameters, and a knob for fundamental frequency,</span>
@@ -3127,7 +3100,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">  Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator </span>
 </span><span class='line'><span class="cp">#include &lt;tables/cos2048_int8.h&gt; </span><span class="c1">// table for Oscils to play</span>
@@ -3423,7 +3395,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>173</span>
 <span class='line-number'>174</span>
 <span class='line-number'>175</span>
-<span class='line-number'>176</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  </span>
 </span><span class='line'><span class="cm">  Plays a fluctuating ambient wash in response to light and temperature sensors.</span>
 </span><span class='line'>
@@ -3453,7 +3424,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;tables/cos8192_int8.h&gt;</span>
@@ -3797,7 +3767,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>177</span>
 <span class='line-number'>178</span>
 <span class='line-number'>179</span>
-<span class='line-number'>180</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  </span>
 </span><span class='line'><span class="cm">  Plays a fluctuating ambient wash in response to light and temperature sensors,</span>
 </span><span class='line'><span class="cm">  using Mozzi sonification library.</span>
@@ -3826,7 +3795,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">  Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;tables/cos8192_int8.h&gt;</span>
@@ -4072,7 +4040,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>74</span>
 <span class='line-number'>75</span>
 <span class='line-number'>76</span>
-<span class='line-number'>77</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*</span>
 </span><span class='line'><span class="cm">   Example using a piezo to change the frequency of a sinewave</span>
 </span><span class='line'><span class="cm">   with Mozzi sonification library.</span>
@@ -4098,7 +4065,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">   Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator </span>
 </span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt; </span><span class="c1">// table for Oscils to play</span>
@@ -4247,7 +4213,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>77</span>
 <span class='line-number'>78</span>
 <span class='line-number'>79</span>
-<span class='line-number'>80</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*</span>
 </span><span class='line'><span class="cm">  Example of simple &quot;scrubbing&quot; through a sampled sound with a knob</span>
 </span><span class='line'><span class="cm">  using Mozzi sonification library.</span>
@@ -4275,7 +4240,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">  Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Sample.h&gt; </span><span class="c1">// Sample template</span>
 </span><span class='line'><span class="cp">#include &quot;blahblah4b_int8.h&quot;</span>
@@ -4437,7 +4401,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>89</span>
 <span class='line-number'>90</span>
 <span class='line-number'>91</span>
-<span class='line-number'>92</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*</span>
 </span><span class='line'><span class="cm">   Example using a piezo to trigger an audio sample to play,</span>
 </span><span class='line'><span class="cm">   and a knob to set the playback pitch,</span>
@@ -4469,7 +4432,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">   CC by-nc-sa</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Sample.h&gt; </span><span class="c1">// Sample template</span>
 </span><span class='line'><span class="cp">#include &lt;samples/burroughs1_18649_int8.h&gt; </span><span class="c1">// a converted audio sample included in the Mozzi download</span>
@@ -4659,7 +4621,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>109</span>
 <span class='line-number'>110</span>
 <span class='line-number'>111</span>
-<span class='line-number'>112</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*</span>
 </span><span class='line'><span class="cm">  Example using a piezo to trigger an audio sample </span>
 </span><span class='line'><span class="cm">  and a switch to change the playback pitch.</span>
@@ -4691,7 +4652,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">  Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Sample.h&gt; </span><span class="c1">// Sample template</span>
 </span><span class='line'><span class="cp">#include &lt;samples/burroughs1_18649_int8.h&gt; </span><span class="c1">// a converted audio sample included in the Mozzi download</span>
@@ -4862,7 +4822,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>70</span>
 <span class='line-number'>71</span>
 <span class='line-number'>72</span>
-<span class='line-number'>73</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Sets the frequency of an oscillator with a resistive sensor on a digital pin,</span>
 </span><span class='line'><span class="cm"> *  using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm"> *</span>
@@ -4900,7 +4859,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm"> </span>
 </span><span class='line'><span class="cm"> */</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt; </span><span class="c1">// sine table for oscillator</span>
@@ -5200,7 +5158,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>70</span>
 <span class='line-number'>71</span>
 <span class='line-number'>72</span>
-<span class='line-number'>73</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  </span>
 </span><span class='line'><span class="cm">  Example using a potentiometer to control the amplitude of a sinewave</span>
 </span><span class='line'><span class="cm">  with Mozzi sonification library.</span>
@@ -5231,7 +5188,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">  Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator template</span>
 </span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt; </span><span class="c1">// sine table for oscillator</span>
@@ -5382,7 +5338,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>88</span>
 <span class='line-number'>89</span>
 <span class='line-number'>90</span>
-<span class='line-number'>91</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  </span>
 </span><span class='line'><span class="cm">  Example using a potentiometer to change the amplitude of a sinewave</span>
 </span><span class='line'><span class="cm">  and a light dependent resister (LDR) to change the frequency.</span>
@@ -5418,7 +5373,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">  Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator template</span>
 </span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt; </span><span class="c1">// sine table for oscillator</span>
@@ -5538,7 +5492,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>41</span>
 <span class='line-number'>42</span>
 <span class='line-number'>43</span>
-<span class='line-number'>44</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Test of audio input using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm"> </span>
 </span><span class='line'><span class="cm"> An audio input using the range between 0 to 5V on analog pin A0</span>
@@ -5559,7 +5512,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">  Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
@@ -5656,7 +5608,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>53</span>
 <span class='line-number'>54</span>
 <span class='line-number'>55</span>
-<span class='line-number'>56</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  </span>
 </span><span class='line'><span class="cm">  Test of audio input and processing with control input,</span>
 </span><span class='line'><span class="cm">  using Mozzi sonification library.</span>
@@ -5679,7 +5630,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;LowPassFilter.h&gt;</span>
 </span><span class='line'>
@@ -5788,7 +5738,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>58</span>
 <span class='line-number'>59</span>
 <span class='line-number'>60</span>
-<span class='line-number'>61</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Test of audio and control rate analog input using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm"> </span>
 </span><span class='line'><span class="cm">  An audio input using the range between 0 to 5V on analog pin A0</span>
@@ -5817,7 +5766,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">  Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'>
 </span><span class='line'>
@@ -5918,7 +5866,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>45</span>
 <span class='line-number'>46</span>
 <span class='line-number'>47</span>
-<span class='line-number'>48</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/* Example of filtering an analog input to remove DC bias,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">    </span>
@@ -5935,7 +5882,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">     </span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;DCfilter.h&gt;</span>
 </span><span class='line'>
@@ -6074,7 +6020,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>87</span>
 <span class='line-number'>88</span>
 <span class='line-number'>89</span>
-<span class='line-number'>90</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of 2 different ways to smooth analog inputs,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.  The inputs are used </span>
 </span><span class='line'><span class="cm">    to control the frequencies of two oscillators.</span>
@@ -6099,7 +6044,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt; </span><span class="c1">// sine table for oscillator</span>
@@ -6278,7 +6222,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>93</span>
 <span class='line-number'>94</span>
 <span class='line-number'>95</span>
-<span class='line-number'>96</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of a sound being triggered by MIDI input, with portamento.</span>
 </span><span class='line'><span class="cm">  </span>
 </span><span class='line'><span class="cm">    Demonstrates playing notes with Mozzi in response to MIDI input.</span>
@@ -6300,7 +6243,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
 </span><span class='line'><span class="cp">#include &lt;MIDI.h&gt;</span>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator template</span>
 </span><span class='line'><span class="cp">#include &lt;Line.h&gt; </span><span class="c1">// for envelope</span>
@@ -6455,7 +6397,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>60</span>
 <span class='line-number'>61</span>
 <span class='line-number'>62</span>
-<span class='line-number'>63</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example changing the frequency of 2 sinewaves with 1 analog input,</span>
 </span><span class='line'><span class="cm">    using RollingAverage() to filter one of the control signals </span>
 </span><span class='line'><span class="cm">    and the other one unfiltered,</span>
@@ -6474,7 +6415,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator template</span>
 </span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt; </span><span class="c1">// sine table for oscillator</span>
@@ -6618,7 +6558,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>79</span>
 <span class='line-number'>80</span>
 <span class='line-number'>81</span>
-<span class='line-number'>82</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of a sound changing volume with and without</span>
 </span><span class='line'><span class="cm">    smoothing of the control signal to remove obvious clicks,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
@@ -6636,7 +6575,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator template</span>
 </span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt; </span><span class="c1">// sine table for oscillator</span>
@@ -6786,7 +6724,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>65</span>
 <span class='line-number'>66</span>
 <span class='line-number'>67</span>
-<span class='line-number'>68</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example sliding between frequencies,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -6802,7 +6739,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator template</span>
 </span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt; </span><span class="c1">// sine table for oscillator</span>
@@ -6990,7 +6926,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>115</span>
 <span class='line-number'>116</span>
 <span class='line-number'>117</span>
-<span class='line-number'>118</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*    </span>
 </span><span class='line'><span class="cm">  Example of oversampling analog input from a thermistor</span>
 </span><span class='line'><span class="cm">  for increased resolution.  It&#39;s a basic attempt at a biofeedback</span>
@@ -7018,7 +6953,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">  Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm"> */</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator template</span>
 </span><span class='line'><span class="cp">#include &lt;Line.h&gt;</span>
@@ -7244,7 +7178,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>109</span>
 <span class='line-number'>110</span>
 <span class='line-number'>111</span>
-<span class='line-number'>112</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of Amplitude Modulation synthesis</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -7264,7 +7197,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;tables/cos2048_int8.h&gt; </span><span class="c1">// table for Oscils to play</span>
@@ -7816,7 +7748,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>149</span>
 <span class='line-number'>150</span>
 <span class='line-number'>151</span>
-<span class='line-number'>152</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Plays a fluctuating ambient wash using pairs</span>
 </span><span class='line'><span class="cm">    of slightly detuned oscillators, following an example</span>
 </span><span class='line'><span class="cm">    from Miller Puckette&#39;s Pure Data manual.</span>
@@ -7844,7 +7775,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;tables/cos8192_int8.h&gt;</span>
@@ -8104,7 +8034,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>115</span>
 <span class='line-number'>116</span>
 <span class='line-number'>117</span>
-<span class='line-number'>118</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of simple FM with the phase modulation technique,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -8126,7 +8055,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;tables/cos2048_int8.h&gt; </span><span class="c1">// table for Oscils to play</span>
@@ -8687,7 +8615,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>138</span>
 <span class='line-number'>139</span>
 <span class='line-number'>140</span>
-<span class='line-number'>141</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/* Phase distortion used to simulate resonant filter, based on</span>
 </span><span class='line'><span class="cm">    https://en.wikipedia.org/wiki/Phase_distortion_synthesis</span>
 </span><span class='line'><span class="cm">    </span>
@@ -8716,7 +8643,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="cp">#include &lt;MIDI.h&gt;</span>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">// for fake midi</span>
@@ -8898,7 +8824,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>49</span>
 <span class='line-number'>50</span>
 <span class='line-number'>51</span>
-<span class='line-number'>52</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of pulse width modulation,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">     </span>
@@ -8919,7 +8844,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Phasor.h&gt;</span>
 </span><span class='line'>
@@ -9037,7 +8961,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>66</span>
 <span class='line-number'>67</span>
 <span class='line-number'>68</span>
-<span class='line-number'>69</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of Wavepacket synthesis, using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">    This sketch draws on Miller Puckette&#39;s </span>
 </span><span class='line'><span class="cm">    Pure Data example, F14.wave.packet.pd, with</span>
@@ -9066,7 +8989,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;mozzi_analog.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;WavePacket.h&gt;</span>
@@ -9198,7 +9120,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>71</span>
 <span class='line-number'>72</span>
 <span class='line-number'>73</span>
-<span class='line-number'>74</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of Wavepacket synthesis, using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">    This sketch draws on Miller Puckette&#39;s </span>
 </span><span class='line'><span class="cm">    Pure Data example, F14.wave.packet.pd, with</span>
@@ -9230,7 +9151,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;mozzi_analog.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;WavePacketSample.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;RollingAverage.h&gt;</span>
@@ -9358,7 +9278,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>65</span>
 <span class='line-number'>66</span>
 <span class='line-number'>67</span>
-<span class='line-number'>68</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of Wavepacket synthesis, using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">    This sketch draws on Miller Puckette&#39;s </span>
 </span><span class='line'><span class="cm">    Pure Data example, F14.wave.packet.pd, with</span>
@@ -9387,7 +9306,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;mozzi_analog.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;WavePacket.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;RollingAverage.h&gt;</span>
@@ -9563,7 +9481,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>116</span>
 <span class='line-number'>117</span>
 <span class='line-number'>118</span>
-<span class='line-number'>119</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example using waveshaping to modify the spectrum of an audio signal</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -9580,7 +9497,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;WaveShaper.h&gt;</span>
@@ -9779,7 +9695,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>76</span>
 <span class='line-number'>77</span>
 <span class='line-number'>78</span>
-<span class='line-number'>79</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example using waveshaping to modify the spectrum of an audio signal</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -9796,7 +9711,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;WaveShaper.h&gt;</span>
@@ -9987,7 +9901,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>102</span>
 <span class='line-number'>103</span>
 <span class='line-number'>104</span>
-<span class='line-number'>105</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example applying an ADSR envelope to an audio signal</span>
 </span><span class='line'><span class="cm">    with Mozzi sonification library.  This shows </span>
 </span><span class='line'><span class="cm">    internal updates at CONTROL_RATE, using update() in updateControl(),</span>
@@ -10001,7 +9914,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;EventDelay.h&gt;</span>
@@ -10285,7 +10197,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>172</span>
 <span class='line-number'>173</span>
 <span class='line-number'>174</span>
-<span class='line-number'>175</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example applying ADSR envelopes to 2 audio oscillators</span>
 </span><span class='line'><span class="cm">     with Mozzi sonification library.</span>
 </span><span class='line'>
@@ -10294,7 +10205,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">     Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm"> */</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;EventDelay.h&gt;</span>
@@ -10586,7 +10496,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>105</span>
 <span class='line-number'>106</span>
 <span class='line-number'>107</span>
-<span class='line-number'>108</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example applying an ADSR envelope to an audio signal</span>
 </span><span class='line'><span class="cm">    with Mozzi sonification library.  This shows </span>
 </span><span class='line'><span class="cm">    internal updates as well as interpolation at CONTROL_RATE, using both</span>
@@ -10600,7 +10509,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2013-14, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;EventDelay.h&gt;</span>
@@ -10777,7 +10685,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>62</span>
 <span class='line-number'>63</span>
 <span class='line-number'>64</span>
-<span class='line-number'>65</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example playing an enveloped noise source</span>
 </span><span class='line'><span class="cm">     using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm"> </span>
@@ -10793,7 +10700,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">     Tim Barrass 2012, CC by-nc-sa</span>
 </span><span class='line'><span class="cm"> */</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator template</span>
 </span><span class='line'><span class="cp">#include &lt;tables/brownnoise8192_int8.h&gt; </span><span class="c1">// recorded audio wavetable</span>
@@ -10914,7 +10820,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>51</span>
 <span class='line-number'>52</span>
 <span class='line-number'>53</span>
-<span class='line-number'>54</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of a modulating timbre with a rhythmic</span>
 </span><span class='line'><span class="cm">    volume envelope, using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -10928,7 +10833,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;tables/cos8192_int8.h&gt;</span>
@@ -11045,7 +10949,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>50</span>
 <span class='line-number'>51</span>
 <span class='line-number'>52</span>
-<span class='line-number'>53</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of playing a sampled sound,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -11062,7 +10965,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Sample.h&gt; </span><span class="c1">// Sample template</span>
 </span><span class='line'><span class="cp">#include &lt;samples/burroughs1_18649_int8.h&gt;</span>
@@ -11185,7 +11087,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>66</span>
 <span class='line-number'>67</span>
 <span class='line-number'>68</span>
-<span class='line-number'>69</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*</span>
 </span><span class='line'><span class="cm"> Example playing samples encoded with Huffman compression.</span>
 </span><span class='line'><span class="cm"> </span>
@@ -11229,7 +11130,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm"> Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;SampleHuffman.h&gt;</span>
 </span><span class='line'><span class="cp">#include &quot;umpah_huff.h&quot;</span>
@@ -11379,7 +11279,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>104</span>
 <span class='line-number'>105</span>
 <span class='line-number'>106</span>
-<span class='line-number'>107</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example playing a looped sampled sound while </span>
 </span><span class='line'><span class="cm">    changing the start end end loop points, </span>
 </span><span class='line'><span class="cm">    and sliding the frequency around,</span>
@@ -11399,7 +11298,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Sample.h&gt; </span><span class="c1">// Sample template</span>
 </span><span class='line'><span class="cp">#include &lt;samples/abomb16384_int8.h&gt; </span><span class="c1">// table for Sample</span>
@@ -11583,7 +11481,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>76</span>
 <span class='line-number'>77</span>
 <span class='line-number'>78</span>
-<span class='line-number'>79</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of simple &quot;scrubbing&quot; through a sampled sound</span>
 </span><span class='line'><span class="cm">     using Mozzi sonification library.</span>
 </span><span class='line'>
@@ -11601,7 +11498,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">   CC by-nc-sa</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Sample.h&gt; </span><span class="c1">// Sample template</span>
 </span><span class='line'><span class="cp">#include &lt;samples/burroughs1_18649_int8.h&gt;</span>
@@ -11776,7 +11672,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>93</span>
 <span class='line-number'>94</span>
 <span class='line-number'>95</span>
-<span class='line-number'>96</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of playing sampled sounds,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -11794,7 +11689,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Sample.h&gt; </span><span class="c1">// Sample template</span>
 </span><span class='line'><span class="cp">#include &lt;samples/bamboo/bamboo_00_2048_int8.h&gt; </span><span class="c1">// wavetable data</span>
@@ -12018,7 +11912,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>125</span>
 <span class='line-number'>126</span>
 <span class='line-number'>127</span>
-<span class='line-number'>128</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of a polyphonic sketch in which </span>
 </span><span class='line'><span class="cm">    11 sound tables are shared between 3 voices,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
@@ -12040,7 +11933,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Sample.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;EventDelay.h&gt;</span>
@@ -12222,7 +12114,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>55</span>
 <span class='line-number'>56</span>
 <span class='line-number'>57</span>
-<span class='line-number'>58</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example swapping between sounds played by a single Oscil</span>
 </span><span class='line'><span class="cm">    with Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -12232,7 +12123,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;EventDelay.h&gt;</span>
@@ -12353,7 +12243,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>46</span>
 <span class='line-number'>47</span>
 <span class='line-number'>48</span>
-<span class='line-number'>49</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of modulating a signal by using a variable delay,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -12369,7 +12258,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;tables/triangle_analogue512_int8.h&gt; </span><span class="c1">// wavetable</span>
@@ -12488,7 +12376,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>65</span>
 <span class='line-number'>66</span>
 <span class='line-number'>67</span>
-<span class='line-number'>68</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of flanging,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -12505,7 +12392,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;tables/triangle_analogue512_int8.h&gt; </span><span class="c1">// wavetable</span>
@@ -12651,7 +12537,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>74</span>
 <span class='line-number'>75</span>
 <span class='line-number'>76</span>
-<span class='line-number'>77</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of allpass interpolation for fractional delays,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -12669,7 +12554,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012-13, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;AudioDelayFeedback.h&gt;</span>
@@ -12821,7 +12705,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>72</span>
 <span class='line-number'>73</span>
 <span class='line-number'>74</span>
-<span class='line-number'>75</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of flanging,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -12838,7 +12721,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012-13, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;tables/triangle_analogue512_int8.h&gt; </span><span class="c1">// wavetable for audio</span>
@@ -13200,7 +13082,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>71</span>
 <span class='line-number'>72</span>
 <span class='line-number'>73</span>
-<span class='line-number'>74</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of reverb on a synthesised sound</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -13222,7 +13103,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2013, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;ReverbTank.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
@@ -13352,7 +13232,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>51</span>
 <span class='line-number'>52</span>
 <span class='line-number'>53</span>
-<span class='line-number'>54</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of filtering a wave,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -13368,7 +13247,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;tables/chum9_int8.h&gt; </span><span class="c1">// recorded audio wavetable</span>
@@ -13486,7 +13364,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>59</span>
 <span class='line-number'>60</span>
 <span class='line-number'>61</span>
-<span class='line-number'>62</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of filtering 2 waves with different filter settings,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -13502,7 +13379,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;tables/chum9_int8.h&gt; </span><span class="c1">// recorded audio wavetable</span>
@@ -13625,7 +13501,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>56</span>
 <span class='line-number'>57</span>
 <span class='line-number'>58</span>
-<span class='line-number'>59</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of filtering a wave,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -13641,7 +13516,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;tables/whitenoise8192_int8.h&gt;</span>
@@ -13778,7 +13652,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>73</span>
 <span class='line-number'>74</span>
 <span class='line-number'>75</span>
-<span class='line-number'>76</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example of filtering audio noise with a resonant filter,</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
 </span><span class='line'><span class="cm">  </span>
@@ -13821,7 +13694,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">    Tim Barrass 2012, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;tables/whitenoise8192_int8.h&gt;</span>
@@ -14436,7 +14308,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>120</span>
 <span class='line-number'>121</span>
 <span class='line-number'>122</span>
-<span class='line-number'>123</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/*  Example playing a sinewave </span>
 </span><span class='line'><span class="cm">    and changing the brightness of 3 leds</span>
 </span><span class='line'><span class="cm">    using Mozzi sonification library.</span>
@@ -14494,7 +14365,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;MozziGuts.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;Oscil.h&gt; </span><span class="c1">// oscillator template</span>
 </span><span class='line'><span class="cp">#include &lt;tables/sin2048_int8.h&gt; </span><span class="c1">// sine table for oscillator</span>
@@ -15215,7 +15085,6 @@ Your browser does not support the audio element.</audio></p>
 <span class='line-number'>35</span>
 <span class='line-number'>36</span>
 <span class='line-number'>37</span>
-<span class='line-number'>38</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cm">/* Maps a range of input numbers to an output range, comparing</span>
 </span><span class='line'><span class="cm">  the results of Mozzi&#39;s IntMap object with Arduino map().</span>
 </span><span class='line'><span class="cm"> </span>
@@ -15229,7 +15098,6 @@ Your browser does not support the audio element.</audio></p>
 </span><span class='line'><span class="cm">  Tim Barrass 2014, CC by-nc-sa.</span>
 </span><span class='line'><span class="cm">*/</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">//#include &lt;ADC.h&gt;  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC</span>
 </span><span class='line'><span class="cp">#include &lt;IntMap.h&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="k">const</span> <span class="n">IntMap</span> <span class="n">testIntMap</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1000</span><span class="p">);</span>
@@ -15434,6 +15302,10 @@ Your browser does not support the audio element.</audio></p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/Mozzi/blog/2017/01/16/v1-dot-0-3rc4-fixes-compile/">v1.0.3rc4 Fixes Compile</a>
+      </li>
+    
+      <li class="post">
         <a href="/Mozzi/blog/2016/12/11/v1-dot-0-3rc2-teensy-bugfix/">v1.0.3rc2 Teensy Bugfix</a>
       </li>
     
@@ -15449,10 +15321,6 @@ Your browser does not support the audio element.</audio></p>
         <a href="/Mozzi/blog/2016/09/09/howto-for-arduino-1-dot-6-11/">Howto for Arduino 1.6.11</a>
       </li>
     
-      <li class="post">
-        <a href="/Mozzi/blog/2015/05/11/release-1-dot-0-2/">Release v1.0.2</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -15465,7 +15333,7 @@ Your browser does not support the audio element.</audio></p>
   <footer role="contentinfo"><p>
 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="https://purl.org/dc/terms/" property="dct:title">Mozzi</span> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/sensorium/Mozzi" property="cc:attributionName" rel="cc:attributionURL">Tim Barrass</a> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 </br>
-  <!-- Copyright &copy; 2016 - Tim Barrass - -->
+  <!-- Copyright &copy; 2017 - Tim Barrass - -->
   <span class="credit">Powered by <a href="https://octopress.org">Octopress</a></span>
   <span class="credit">Published with <a href="https://pages.github.com">GitHub Pages</a></span>
 </p>

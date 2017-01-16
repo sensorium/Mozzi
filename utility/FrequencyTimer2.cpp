@@ -1,5 +1,5 @@
 /*
-  FrequencyTimer2.h - A frequency generator and interrupt generator library
+  FrequencyTimer2.cpp - A frequency generator and interrupt generator library
   Author: Jim Studt, jim@federated.com
   Copyright (c) 2007 David A. Mellis.  All right reserved.
 

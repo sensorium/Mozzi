@@ -441,7 +441,7 @@ static void setupTimer2()
 	backupPreMozziTimer2(); // to reset while pausing
 	unsigned long period = 16000000UL/AUDIO_RATE;
 	period *= FrequencyTimer2::clockCyclesPerMicrosecond();
-	FrequencyTimer2::setPeriod(period);
+	FrequencyTimer2::setPeriodMicroSeconds(period);
 	FrequencyTimer2::setOnOverflow(dummy);
 	FrequencyTimer2::enable();
 

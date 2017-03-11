@@ -4,7 +4,7 @@
   <title><![CDATA[Category: fixes | MOZZI]]></title>
   <link href="http://sensorium.github.io/Mozzi//blog/categories/fixes/atom.xml" rel="self"/>
   <link href="http://sensorium.github.io/Mozzi//"/>
-  <updated>2017-02-19T11:54:34+11:00</updated>
+  <updated>2017-03-12T09:53:15+10:30</updated>
   <id>http://sensorium.github.io/Mozzi//</id>
   <author>
     <name><![CDATA[Tim Barrass]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Howto for Arduino 1.6.11]]></title>
     <link href="http://sensorium.github.io/Mozzi//blog/2016/09/09/howto-for-arduino-1-dot-6-11/"/>
-    <updated>2016-09-09T21:48:00+10:00</updated>
+    <updated>2016-09-09T21:48:00+09:30</updated>
     <id>http://sensorium.github.io/Mozzi//blog/2016/09/09/howto-for-arduino-1-dot-6-11</id>
     <content type="html"><![CDATA[<p>Now Mozzi can work at full speed on the latest Arduino IDE.  It works, but now Mozzi needs an update to install smoothly in recent IDE's.  Coming soon, with some other fixes.</p>
 

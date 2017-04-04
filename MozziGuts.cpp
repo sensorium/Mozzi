@@ -435,13 +435,12 @@ static void backupMozziTimer2()
 }
 
 
-// audio output interrupt on timer 2 (or 4 on ATMEGA32U4 cpu), sets the pwm levels of timer 1
+// audio output interrupt on timer 2 (or 4 on ATMEGA32U4 cpu), sets the pwm levels of timer 2
 static void setupTimer2()
 {
 	backupPreMozziTimer2(); // to reset while pausing
 	unsigned long period = 16000000UL/AUDIO_RATE;
-	period *= clockCyclesPerMicrosecond();
-	FrequencyTimer2::setPeriodMicroSeconds(period);
+	FrequencyTimer2::setPeriodCPUCycles(period);
 	FrequencyTimer2::setOnOverflow(dummy);
 	FrequencyTimer2::enable();
 

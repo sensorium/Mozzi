@@ -4,6 +4,10 @@ NEWS
 get the latest version from https://sensorium.github.io/Mozzi/
 
 
+release v1.0.3rc6
+-MozziGuts.cpp line 444: changed setPeriodMicroSeconds setPeriodCPUCycles so HIFI actually works this time...
+
+
 release v1.0.3rc5
 -MozziGuts.cpp line 444: changed setPeriod to setPeriodMicroSeconds to match Mozzi's modified FrequencyTimer2
 

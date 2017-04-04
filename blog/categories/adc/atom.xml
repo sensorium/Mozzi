@@ -4,7 +4,7 @@
   <title><![CDATA[Category: adc | MOZZI]]></title>
   <link href="http://sensorium.github.io/Mozzi//blog/categories/adc/atom.xml" rel="self"/>
   <link href="http://sensorium.github.io/Mozzi//"/>
-  <updated>2017-03-12T09:53:15+10:30</updated>
+  <updated>2017-04-04T23:07:04+10:00</updated>
   <id>http://sensorium.github.io/Mozzi//</id>
   <author>
     <name><![CDATA[Tim Barrass]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Simpler adc with mozziAnalogRead]]></title>
     <link href="http://sensorium.github.io/Mozzi//blog/2013/08/25/simpler-adc-with-mozzianalogread/"/>
-    <updated>2013-08-25T21:20:00+09:30</updated>
+    <updated>2013-08-25T21:20:00+10:00</updated>
     <id>http://sensorium.github.io/Mozzi//blog/2013/08/25/simpler-adc-with-mozzianalogread</id>
     <content type="html"><![CDATA[<p>Version 2013-08-25 evolves the adc developments of the previous release, by
 replacing the various ways of reading analog inputs (adcGetResult(),
@@ -60,7 +60,7 @@ analogRead(). It doesn't need any special setup.</p>
   <entry>
     <title type="html"><![CDATA[Audio and Control ADC together]]></title>
     <link href="http://sensorium.github.io/Mozzi//blog/2013/07/29/audio-and-control-adc-together/"/>
-    <updated>2013-07-29T18:24:00+09:30</updated>
+    <updated>2013-07-29T18:24:00+10:00</updated>
     <id>http://sensorium.github.io/Mozzi//blog/2013/07/29/audio-and-control-adc-together</id>
     <content type="html"><![CDATA[<p>Version 2013-07-29-18:09 enables audio and control rate analog inputs to work at the same time.
 Audio input is on analog pin A0.  Each time an audio sample is output, the audio input is sampled.

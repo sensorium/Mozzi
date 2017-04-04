@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Simpler adc with mozziAnalogRead - MOZZI</title>
+  <title>v1.0.3rc6 HIFI works - MOZZI</title>
   <meta name="author" content="Tim Barrass">
   
   
@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sensorium.github.io/Mozzi//blog/2013/08/25/simpler-adc-with-mozzianalogread">
+  <link rel="canonical" href="http://sensorium.github.io/Mozzi//blog/2017/04/04/v1-dot-0-3rc6-hifi-works">
   <link href="/Mozzi/favicon.png" rel="icon">
   <link href="/Mozzi/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/Mozzi/atom.xml" rel="alternate" title="MOZZI" type="application/atom+xml">
@@ -124,7 +124,7 @@
   
   <header>
     
-      <h1 class="entry-title">Simpler Adc With mozziAnalogRead</h1>
+      <h1 class="entry-title">v1.0.3rc6 HIFI Works</h1>
     
     
       <p class="meta">
@@ -140,49 +140,14 @@
   
 
 
-<time datetime="2013-08-25T21:20:00+10:00" pubdate data-updated="true">Aug 25<span>th</span>, 2013</time>
+<time datetime="2017-04-04T23:05:00+10:00" pubdate data-updated="true">Apr 4<span>th</span>, 2017</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Version 2013-08-25 evolves the adc developments of the previous release, by
-replacing the various ways of reading analog inputs (adcGetResult(),
-adcReadAllChannels(), etc.) with mozziAnalogRead(). Use it the same as
-analogRead(). It doesn&#8217;t need any special setup.</p>
-
-<p>Audio input still uses getAudioInput(), not mozziAnalogRead().</p>
-
-<p>Here&#8217;s the Mozzi/extras/NEWS.txt entry of the changes in this release:</p>
-
-<p>version 2013-08-25-18:38</p>
-
-<ul>
-<li>mozzi_analog.h - Much simpler, better analog input.  Now there&#8217;s just mozziAnalogRead(pin).
-  Sorry about breaking your sketches, again.
-  mozziAnalogRead completely replaces the arduino analogRead, and analogRead is no longer able to be used with Mozzi.
-  No setup is required for mozziAnalogRead, unless you want audio input, which is set in mozzi_config.h as before.
-  You can still use setupFastAnalogRead(speed) if you want faster than mozzi&#8217;s default,
-  which is automatically set if you don&#8217;t do anything.  See the documentation if you want this.
-  If you specially need analogRead for some reason (and you&#8217;re not using audio input), you can comment out a
-  line in MozziGuts.cpp, in the startMozzi function, where it says setupMozziADC().</li>
-<li>All example sketches using analog reads are updated, or removed where no longer relevant.</li>
-<li>examples/04.Analog_Input changed to 04.Audio_Input</li>
-<li>examples/envelopes/ADSR_Envelope - now plays random envelopes as a more thorough test/demo.</li>
-<li>add examples/envelopes/ADSR_Envelope_x2 - shows an additive sound combining 2 oscillators with individual envelopes.</li>
-<li>Sample.h - added linear interpolation as optional template parameter, eg.:
-  Sample &lt;SAMPLE_NUM_CELLS, AUDIO_RATE, INTERP_LINEAR> aSample(SAMPLE_DATA);
-  The default parameter is INTERP_NONE.</li>
-<li>removed examples/08.Samples/Sample_Offset too horrible</li>
-<li>added examples/08.Samples/Sample_Scrub&#8230;uses interpolation/smoothing at different scales</li>
-<li>Smooth.h - added operator method as an alternative to next() so you can use
-  mySmooth(input-value) instead of mySmooth.next(input-value), if you want.</li>
-<li>mozzi_midi.h, .cpp - changed return type from unsigned int to int for mtof(unsigned char midi_note), mtof(int midi_note),
-  to suit Oscil::setFreq()</li>
-<li>added/corrected references to examples in docs</li>
-</ul>
-
+<div class="entry-content"><p>HIFI actually works this time&#8230; ie. it&#8217;s unbroken</p>
 </div>
 
 
@@ -205,21 +170,15 @@ analogRead(). It doesn&#8217;t need any special setup.</p>
   
 
 
-<time datetime="2013-08-25T21:20:00+10:00" pubdate data-updated="true">Aug 25<span>th</span>, 2013</time>
+<time datetime="2017-04-04T23:05:00+10:00" pubdate data-updated="true">Apr 4<span>th</span>, 2017</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/Mozzi/blog/categories/adc/'>adc</a>, <a class='category' href='/Mozzi/blog/categories/updates/'>updates</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="/Mozzi//twitter.com/share" class="twitter-share-button" data-url="http://sensorium.github.io/Mozzi//blog/2013/08/25/simpler-adc-with-mozzianalogread/" data-via="nothingperson" data-counturl="http://sensorium.github.io/Mozzi//blog/2013/08/25/simpler-adc-with-mozzianalogread/" >Tweet</a>
+  <a href="/Mozzi//twitter.com/share" class="twitter-share-button" data-url="http://sensorium.github.io/Mozzi//blog/2017/04/04/v1-dot-0-3rc6-hifi-works/" data-via="nothingperson" data-counturl="http://sensorium.github.io/Mozzi//blog/2017/04/04/v1-dot-0-3rc6-hifi-works/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -232,10 +191,8 @@ analogRead(). It doesn&#8217;t need any special setup.</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/Mozzi/blog/2013/08/06/upcoming-mozzi-talk-at-icmc2013-in-perth/" title="Previous Post: Upcoming Mozzi talk at ICMC2013 in Perth">&laquo; Upcoming Mozzi talk at ICMC2013 in Perth</a>
+        <a class="basic-alignment left" href="/Mozzi/blog/2017/03/12/v1-dot-0-3rc5-hifi-compile-fix/" title="Previous Post: v1.0.3rc5 HIFI compile fix">&laquo; v1.0.3rc5 HIFI compile fix</a>
       
-      
-        <a class="basic-alignment right" href="/Mozzi/blog/2013/12/31/mozzi-marketplace-on-sharetribe/" title="Next Post: Mozzi Marketplace on Sharetribe">Mozzi Marketplace on Sharetribe &raquo;</a>
       
     </p>
   </footer>

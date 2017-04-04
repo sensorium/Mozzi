@@ -78,7 +78,7 @@
 			<!-- <a class="header_link" href="/Mozzi/download/">  -->
 				download<br>
 				<i class="icon-download icon-4x"></i><br>
-				<span id="header_small_label">version v1.0.3rc5</span>
+				<span id="header_small_label">version v1.0.3rc6</span>
 			</a>
 		</p>
 	</section> 
@@ -127,6 +127,94 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/Mozzi/blog/2014/08/09/teensy-3-dot-0-slash-3-dot-1-test-release-version-2014-08-09-14-15/">Teensy 3.0/3.1 Test Release</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-09T21:21:00+10:00" pubdate data-updated="true">Aug 9<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This release is a test of the recent work on the Mozzi Teensy 3 port in response to the donation campaign reaching the grand goal of $1000.
+Thankyou to all the dozen or so donors, especially my brother and sister, who donated more than half!</p>
+
+<p>It should run as usual on the Arduinos already supported, and now also Teensy 3.0 and 3.1 (instructions for Teensies below).
+I expect some mistakes and bugs so please let me know on the forum and I&#8217;ll try to sort them out asap.</p>
+
+<p>Extra libraries required for use withTeensy 3.0/3.1:</p>
+
+<ul>
+<li><p><a href="https://github.com/loglow/IntervalTimer">Timer library for Teensy 3.0</a> by Daniel Gilbert</p></li>
+<li><p><a href="http://github.com/pedvide/ADC">ADC library</a> by Pedro Villanueva</p></li>
+</ul>
+
+
+<p>Some of the differences for Teensy 3.0/3.1 which will affect users include:</p>
+
+<ul>
+<li><p>Audio output is on pin A14/DAC, in STANDARD or STANDARD_PLUS audio modes,  These modes are identical on Teensy 3.0/3.1, as
+  the output is via DAC rather than PWM.</p></li>
+<li><p>Output is 12 bits in STANDARD and STANDARD_PLUS modes, up from nearly 9 bits for Atmel based boards.
+  HIFI audio, which works by summing two output pins, is not available on Teensy 3.0/3.1.</p></li>
+<li><p>#include &lt;ADC.h> is required at the top of every Teensy 3.0/3.1 sketch.<br/>
+  The examples come with this commented out, for Arduino compatibility.</p></li>
+<li><p>Serial baud rate for monitoring in the IDE needs to be set to 9600 to work with Teensy 3.0/3.1.
+  This slow rate can cause audio glitches.</p></li>
+<li><p><a href="https://github.com/sensestage/Mozzi">twi_nonblock</a> code by Marije Baalman for non-blocking I2C is not compatible with Teensy 3.0/3.1.</p></li>
+</ul>
+
+
+<p>Various other changes which affect the library in general:</p>
+
+<ul>
+<li><p>Changed license from GPL3 to Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</p></li>
+<li><p>ADSR.h</p>
+
+<ul>
+<li><p>next() now returns unsigned char instead of unsigned int</p></li>
+<li><p>added functions to set ADSR times in update steps, eg. setAttackUpdateSteps(unsigned int steps), etc.,
+for finer-grained control</p></li>
+</ul>
+</li>
+<li><p>SampleHuffman.h - now plays correctly from beginning when start() used before finished playing previous cycle.</p></li>
+<li><p>Re-included RCpoll.h and examples>03.Sensors>RCpoll, for capacitive sensing.<br/>
+  They have been included before, but disappeared somewhere along the way.</p></li>
+<li><p>Added PDResonant.h, and examples>06.Synthesis>PDResonant.  PDResonant is a simple midi intrument which demonstrates
+  Phase Distortion used to create a sweeping resonant filter effect, based on
+  https://en.wikipedia.org/wiki/Phase_distortion_synthesis.</p></li>
+<li><p>mozzi_fixmath.h - added Q15n16_to_Q8n0()</p></li>
+<li><p>Fixed broken link in Sensor examples to http://sensorium.github.io/Mozzi/learn/introductory-tutorial/</p></li>
+<li><p>Moved Arduino timer libraries into &#8220;utility&#8221; folder and added conditional compilation to hide them from Teensy 3.0/3.1 compilation.</p></li>
+<li><p>Removed cpu speed warning from MozziGuts.h</p></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/Mozzi/blog/2014/06/20/teensy-3-dot-0-3-dot-1-port-progress/">Teensy 3.0-3.1 Port Progress</a></h1>
     
     
@@ -143,7 +231,7 @@
   
 
 
-<time datetime="2014-06-20T21:30:00+09:30" pubdate data-updated="true">Jun 20<span>th</span>, 2014</time>
+<time datetime="2014-06-20T21:30:00+10:00" pubdate data-updated="true">Jun 20<span>th</span>, 2014</time>
         
       </p>
     
@@ -196,7 +284,7 @@ of ADC in future development.  Audio input hasn&#8217;t been tested yet.</p>
   
 
 
-<time datetime="2014-04-20T15:16:00+09:30" pubdate data-updated="true">Apr 20<span>th</span>, 2014</time>
+<time datetime="2014-04-20T15:16:00+10:00" pubdate data-updated="true">Apr 20<span>th</span>, 2014</time>
         
       </p>
     
@@ -233,7 +321,7 @@ while removing the high-pitched PWM carrier frequency whine out of hearing range
   
 
 
-<time datetime="2014-03-13T14:16:00+10:30" pubdate data-updated="true">Mar 13<span>th</span>, 2014</time>
+<time datetime="2014-03-13T14:16:00+11:00" pubdate data-updated="true">Mar 13<span>th</span>, 2014</time>
         
       </p>
     
@@ -288,7 +376,7 @@ The centre frequency calculation is still extremely approximate.  Needs more wor
   
 
 
-<time datetime="2014-03-06T17:50:00+10:30" pubdate data-updated="true">Mar 6<span>th</span>, 2014</time>
+<time datetime="2014-03-06T17:50:00+11:00" pubdate data-updated="true">Mar 6<span>th</span>, 2014</time>
         
       </p>
     
@@ -334,7 +422,7 @@ The centre frequency calculation is still extremely approximate.  Needs more wor
   
 
 
-<time datetime="2013-12-31T19:22:00+10:30" pubdate data-updated="true">Dec 31<span>st</span>, 2013</time>
+<time datetime="2013-12-31T19:22:00+11:00" pubdate data-updated="true">Dec 31<span>st</span>, 2013</time>
         
       </p>
     
@@ -376,7 +464,7 @@ The centre frequency calculation is still extremely approximate.  Needs more wor
   
 
 
-<time datetime="2013-08-25T21:20:00+09:30" pubdate data-updated="true">Aug 25<span>th</span>, 2013</time>
+<time datetime="2013-08-25T21:20:00+10:00" pubdate data-updated="true">Aug 25<span>th</span>, 2013</time>
         
       </p>
     
@@ -447,7 +535,7 @@ analogRead(). It doesn&#8217;t need any special setup.</p>
   
 
 
-<time datetime="2013-08-06T17:34:00+09:30" pubdate data-updated="true">Aug 6<span>th</span>, 2013</time>
+<time datetime="2013-08-06T17:34:00+10:00" pubdate data-updated="true">Aug 6<span>th</span>, 2013</time>
         
       </p>
     
@@ -484,7 +572,7 @@ The paper will be on Thursday 15 August, 14:15 â€“ 16:15, State Theatre Centre â
   
 
 
-<time datetime="2013-07-29T18:24:00+09:30" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
+<time datetime="2013-07-29T18:24:00+10:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
         
       </p>
     
@@ -556,7 +644,7 @@ The audio samples continue alone until the next control interrupt, when a sketch
   
 
 
-<time datetime="2013-05-14T18:33:00+09:30" pubdate data-updated="true">May 14<span>th</span>, 2013</time>
+<time datetime="2013-05-14T18:33:00+10:00" pubdate data-updated="true">May 14<span>th</span>, 2013</time>
         
       </p>
     
@@ -564,42 +652,6 @@ The audio samples continue alone until the next control interrupt, when a sketch
 
 
   <div class="entry-content"><p>Mozzi workshop at <a href="http://icad2013.com/index.php?action=workshops">International Conference on Auditory Display</a>, July 6-10, 2013, Lodz University of Technology, Poland.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/Mozzi/blog/2013/05/13/music-hack-day-barcelona-workshop-announcement/">Music Hack Day Barcelona Workshop Announcement</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-13T18:27:00+09:30" pubdate data-updated="true">May 13<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Mozzi workshop at <a href="http://bcn.musichackday.org/2013/index.php?page=Main+page">Music Hack Day</a>, 13-14 June 2013, Barcelona.</p>
 </div>
   
   
@@ -624,6 +676,10 @@ The audio samples continue alone until the next control interrupt, when a sketch
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/Mozzi/blog/2017/04/04/v1-dot-0-3rc6-hifi-works/">v1.0.3rc6 HIFI Works</a>
+      </li>
+    
+      <li class="post">
         <a href="/Mozzi/blog/2017/03/12/v1-dot-0-3rc5-hifi-compile-fix/">v1.0.3rc5 HIFI Compile Fix</a>
       </li>
     
@@ -637,10 +693,6 @@ The audio samples continue alone until the next control interrupt, when a sketch
     
       <li class="post">
         <a href="/Mozzi/blog/2016/11/26/tweak-for-faster-code/">Tweak for Faster Code</a>
-      </li>
-    
-      <li class="post">
-        <a href="/Mozzi/blog/2016/11/26/update-1-dot-0-3rc1-available/">Update 1.0.3rc1 Available</a>
       </li>
     
   </ul>

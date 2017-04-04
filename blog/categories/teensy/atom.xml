@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Teensy | MOZZI]]></title>
   <link href="http://sensorium.github.io/Mozzi//blog/categories/teensy/atom.xml" rel="self"/>
   <link href="http://sensorium.github.io/Mozzi//"/>
-  <updated>2017-03-12T09:53:15+10:30</updated>
+  <updated>2017-04-04T23:07:04+10:00</updated>
   <id>http://sensorium.github.io/Mozzi//</id>
   <author>
     <name><![CDATA[Tim Barrass]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Teensy 3.0/3.1 test release]]></title>
     <link href="http://sensorium.github.io/Mozzi//blog/2014/08/09/teensy-3-dot-0-slash-3-dot-1-test-release-version-2014-08-09-14-15/"/>
-    <updated>2014-08-09T21:21:00+09:30</updated>
+    <updated>2014-08-09T21:21:00+10:00</updated>
     <id>http://sensorium.github.io/Mozzi//blog/2014/08/09/teensy-3-dot-0-slash-3-dot-1-test-release-version-2014-08-09-14-15</id>
     <content type="html"><![CDATA[<p>This release is a test of the recent work on the Mozzi Teensy 3 port in response to the donation campaign reaching the grand goal of $1000.
 Thankyou to all the dozen or so donors, especially my brother and sister, who donated more than half!</p>

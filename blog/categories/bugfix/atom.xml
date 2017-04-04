@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bugfix | MOZZI]]></title>
   <link href="http://sensorium.github.io/Mozzi//blog/categories/bugfix/atom.xml" rel="self"/>
   <link href="http://sensorium.github.io/Mozzi//"/>
-  <updated>2017-03-12T09:53:15+10:30</updated>
+  <updated>2017-04-04T23:07:04+10:00</updated>
   <id>http://sensorium.github.io/Mozzi//</id>
   <author>
     <name><![CDATA[Tim Barrass]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[v1.0.3rc5 HIFI compile fix]]></title>
     <link href="http://sensorium.github.io/Mozzi//blog/2017/03/12/v1-dot-0-3rc5-hifi-compile-fix/"/>
-    <updated>2017-03-12T09:50:00+10:30</updated>
+    <updated>2017-03-12T09:50:00+11:00</updated>
     <id>http://sensorium.github.io/Mozzi//blog/2017/03/12/v1-dot-0-3rc5-hifi-compile-fix</id>
     <content type="html"><![CDATA[<p>HIFI sketches compile again. The problems were due to more errors around changes in Mozzi's modified FrequencyTimer2 library usage which were not tested properly before release.</p>
 ]]></content>
@@ -25,7 +25,7 @@
   <entry>
     <title type="html"><![CDATA[v1.0.3rc4 fixes compile]]></title>
     <link href="http://sensorium.github.io/Mozzi//blog/2017/01/16/v1-dot-0-3rc4-fixes-compile/"/>
-    <updated>2017-01-16T15:10:00+10:30</updated>
+    <updated>2017-01-16T15:10:00+11:00</updated>
     <id>http://sensorium.github.io/Mozzi//blog/2017/01/16/v1-dot-0-3rc4-fixes-compile</id>
     <content type="html"><![CDATA[<p>Removed stray FrequencyTimer files from main folder, which stopped anything compiling...!</p>
 ]]></content>
@@ -34,7 +34,7 @@
   <entry>
     <title type="html"><![CDATA[v1.0.3rc2 Teensy bugfix]]></title>
     <link href="http://sensorium.github.io/Mozzi//blog/2016/12/11/v1-dot-0-3rc2-teensy-bugfix/"/>
-    <updated>2016-12-11T17:11:00+10:30</updated>
+    <updated>2016-12-11T17:11:00+11:00</updated>
     <id>http://sensorium.github.io/Mozzi//blog/2016/12/11/v1-dot-0-3rc2-teensy-bugfix</id>
     <content type="html"><![CDATA[<p>release v1.0.3rc2</p>
 

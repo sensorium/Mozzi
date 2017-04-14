@@ -1,6 +1,6 @@
-#Mozzi  
+# Mozzi  
 
-###sound synthesis library for Arduino  
+### sound synthesis library for Arduino  
 
 
 Tim Barrass  
@@ -138,7 +138,7 @@ Mozzi>examples>11.Communication>Sinewave_PWM_pins_HIFI.
 
 * `analogRead()` is replaced by `mozziAnalogRead()`, which works in the background instead of blocking the processor.  
 
-####Last Resort
+#### Last Resort
 The timers can be made available with `pauseMozzi()`, which suspends audio and 
 control interrupts until you call `unpauseMozzi()`.  
 
@@ -154,7 +154,7 @@ Mozzi is a development of research into Mobile Sonification in the
 
 ***
 
-##Contributions / Included Dependencies  
+## Contributions / Included Dependencies  
 Modified versions of the following libraries are included in the Mozzi download:  
 
 [TimerOne library](http://www.pjrc.com/teensy/td_libs_TimerOne.html)  

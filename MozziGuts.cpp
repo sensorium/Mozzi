@@ -222,9 +222,7 @@ ISR(ADC_vect, ISR_BLOCK)
 }
 #endif // end main audio input section
 
-#if (STEREO_HACK == true)
-extern int audio_out_1, audio_out_2;
-#endif
+
 
 void audioHook() // 2us excluding updateAudio()
 {

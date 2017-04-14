@@ -4,8 +4,12 @@ NEWS
 get the latest version from https://sensorium.github.io/Mozzi/
 
 
+release v1.0.3rc7
+- fixed STEREO_HACK code and example
+
+
 release v1.0.3rc6
--MozziGuts.cpp line 444: changed setPeriodMicroSeconds setPeriodCPUCycles so HIFI actually works this time...
+-MozziGuts.cpp line 444: changed setPeriodMicroSeconds to setPeriodCPUCycles so HIFI actually works this time...
 
 
 release v1.0.3rc5

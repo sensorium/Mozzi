@@ -271,6 +271,7 @@ calculations here which could be done in setup() or updateControl().
 In HIFI mode, it's a 14 bit number between -16384 and 16383 inclusive.
 */
 #if (STEREO_HACK == true)
+extern int audio_out_1, audio_out_2;
 void updateAudio();
 #else
 int updateAudio();

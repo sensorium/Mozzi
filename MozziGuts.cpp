@@ -295,7 +295,9 @@ static void startAudioStandard()
 	Timer1.initializeCPUCycles(16000000UL/PWM_RATE, FAST);	// fast mode enables higher PWM rate
 #endif
 	Timer1.pwm(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);		// pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
-	//Timer1.pwm(AUDIO_CHANNEL_2_PIN, AUDIO_BIAS);
+#if (STEREO_HACK == true)
+	Timer1.pwm(AUDIO_CHANNEL_2_PIN, AUDIO_BIAS);	// sets pin to output
+#endif
 	TIMSK1 = _BV(TOIE1); 	// Overflow Interrupt Enable (when not using Timer1.attachInterrupt())
 	//TIMSK1 |= _BV(TOIE1) | _BV(OCIE1A); // Overflow Interrupt Enable and Output Compare A Match Interrupt Enable
 	backupMozziTimer1();

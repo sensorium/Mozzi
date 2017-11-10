@@ -70,7 +70,7 @@ public:
 	
 	void setPeriodCPUCycles(unsigned long sixteen_millionths_of_a_second) __attribute__((always_inline))
 	{
-		unsigned long cycles;
+		unsigned long cycles = sixteen_millionths_of_a_second; // TB2017 prevent "may be uninitialized" compiler warning
 	
 		// TB2013
 		if (_mode == FAST){

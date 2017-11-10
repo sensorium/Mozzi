@@ -104,7 +104,7 @@ So far, gizduino's __AVR_ATmega644P__ chip doesn't like it, so we use (long)anal
 @todo add Teensy 3 code
 */
 void randSeed() {
-	#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO)  || defined(TEENSYDUINO) // teensy 3, 3.1
+	#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
 #else
 	ADCSRA &= ~ (1 << ADIE); // adc Disable Interrupt, re-enable at end
 	// this attempt at remembering analog_reference stops it working 

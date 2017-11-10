@@ -46,7 +46,7 @@ STANDARD / STANDARD_PLUS
 ---------------
 Use \#define AUDIO_MODE STANDARD_PLUS in Mozzi/config.h to select this
 output configuration, which is nearly 9 bit sound (-244 to 243) at 16384 Hz sample rate (AUDIO_RATE) and
-32768 Hz PWM rate. It uses Timer 1 to for PWM and the sample updating routine (as an interrupt).
+32768 Hz PWM rate. It uses Timer 1 for PWM and the sample updating routine (as an interrupt).
 
 STANDARD is obsolete now, replaced by STANDARD_PLUS which is the default audio mode.
 STANDARD mode uses 16384 Hz PWM rate with an output interrupt at the same frequency.  
@@ -79,7 +79,11 @@ x..A14.....Teensy3.1  \n
 
 On Teensy 3.1 STANDARD and STANDARD_PLUS are the same, providing 16384Hz sample rate and 12 bit resolution on pin A14/ADC.
 The Teensy 3.1 DAC output does not rely on PWM.
+*/
 
+
+/** @ingroup core
+Used to set AUDIO_MODE to HIFI.
 
 HIFI (not for Teensy 3.1)
 ----
@@ -171,7 +175,7 @@ HIFI is not available/not required on Teensy 3.1.
 #endif
 
 
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO)  || defined(TEENSYDUINO) // Teensy 3
+#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // Teensy 3
 #include "AudioConfigTeensy3_12bit.h"
 #else
 #if (AUDIO_MODE == STANDARD)
@@ -189,7 +193,7 @@ typedef unsigned char uchar;
 typedef unsigned int uint;
 typedef unsigned long ulong;
 
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO)  || defined(TEENSYDUINO) // teensy 3, 3.1
+#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
 //typedef uint8_t byte;//unsigned char;
 //typedef int8_t char;
 //typedef (uint16_t) (short unsigned int);
@@ -246,22 +250,23 @@ non-blocking methods, such as demonstrated by the twowire_nonblock code in the
 forked version of Mozzi on github, so sound production can continue while
 reading sensors.
 
-As it is, pauseMozzi restores all the Timers used by Mozzi to their previous
+As it is, stopMozzi restores all the Timers used by Mozzi to their previous
 settings. Another scenario which could be easily hacked in MozziGuts.cpp could
 involve individually saving and restoring particular Timer registers depending
 on which one(s) are required for other tasks, so for example the control
 interrupt (Timer 0) could be suspended while audio continues.*/
-void pauseMozzi();
+void stopMozzi();
 
 
+// TB2017 deleted function, use startMozzi() instead
+// /** @ingroup core
+// Restores Mozzi audio and control interrupts, if they have been temporarily
+// disabled with pauseMozzi(). This once more takes over Timer 0, and stops the
+// Arduino time functions millis(), micros(), delay(), and delayMicroseconds() from
+// working.
+// */
+// void unPauseMozzi();
 
-/** @ingroup core
-Restores Mozzi audio and control interrupts, if they have been temporarily
-disabled with pauseMozzi(). This once more takes over Timer 0, and stops the
-Arduino time functions millis(), micros(), delay(), and delayMicroseconds() from
-working.
-*/
-void unPauseMozzi();
 
 /** @ingroup core
 This is where you put your audio code. updateAudio() has to keep up with the

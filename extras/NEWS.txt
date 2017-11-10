@@ -4,9 +4,22 @@ NEWS
 get the latest version from https://sensorium.github.io/Mozzi/
 
 
+
+release v1.1.0
+- MozziGuts.cpp, .h, removed pauseMozzi() and unPauseMozzi().  Added stopMozzi().  
+Use startMozzi() from now on instead of unPauseMozzi().  Removed examples>02.Control>Pause, added Stop_Start.
+
+release v1.0.4
+- EventDelay.h and Metronome.h moved stop() from Metronome to EventDelay, and Metronome's ready() to EventTimer.
+	This allows EventTimer to be stopped, and Metronome inherits from there.
+- globally removed "defined(TEENSYDUINO)  || defined(TEENSYDUINO" typo, replaced with "defined(TEENSYDUINO)-
+- MozziGuts.cpp changed line 277 to 	
+	adc->setConversionSpeed(ADC_CONVERSION_SPEED::MED_SPEED); // could be HIGH_SPEED, noisier
+	to keep up with Teensy changes
+	
 release v1.0.3rc7
 - fixed STEREO_HACK code and example
-
+- added Stereo_Hack_pan example demonstrating constant power panning
 
 release v1.0.3rc6
 -MozziGuts.cpp line 444: changed setPeriodMicroSeconds to setPeriodCPUCycles so HIFI actually works this time...

@@ -77,7 +77,7 @@ This sets which analog input channel to use for audio input, if you have
 \#define USE_AUDIO_INPUT  true 
 in mozz_config.h
 */
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO)  || defined(TEENSYDUINO) // teensy 3, 3.1
+#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
 #define AUDIO_INPUT_PIN 0
 #else
 #define AUDIO_INPUT_PIN 0

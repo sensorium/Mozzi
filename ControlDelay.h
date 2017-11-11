@@ -14,7 +14,7 @@
 
 #include "AudioDelay.h"
 
-/** 
+/**
 @brief Control-rate delay line for delaying control signals.
 For example, this could be used to produce echo-like effects using multiple
 instances of the same voice, when AudioDelay would be too short for an actual
@@ -28,7 +28,6 @@ when adding manual feedback.  When using int, the input should be limited to 15 
 template <unsigned int NUM_BUFFER_SAMPLES, class T = int>
 class ControlDelay: public AudioDelay<NUM_BUFFER_SAMPLES, T>
 {
-
 };
 
 /**
@@ -37,4 +36,3 @@ This is an example of how to use the ControlDelay class.
 */
 
 #endif        //  #ifndef CONTROLDELAY_H_
-

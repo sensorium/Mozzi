@@ -25,18 +25,24 @@ public:
 	@param max_expected the maximum possible input value.
 	*/
 	AutoRange(T min_expected, T max_expected):range_min(max_expected),range_max(min_expected),range(0)
-	{}
+	{
+	}
 
 
 	/** Updates the current range.
 	@param n the next value to include in the range calculation.
 	*/
-	void next(T n){
-		if (n > range_max) {
+	void next(T n)
+	{
+		if (n > range_max)
+		{
 			range_max = n;
 			range = range_max - range_min;
-		}else{
-			if (n< range_min) {
+		}
+		else
+		{
+			if (n< range_min)
+			{
 				range_min = n;
 				range = range_max - range_min;
 			}
@@ -46,7 +52,8 @@ public:
 	/** Returns the current minimum.
 	@return minimum
 	*/
-	T getMin(){
+	T getMin()
+	{
 		return range_min;
 	}
 
@@ -54,7 +61,8 @@ public:
 	/** Returns the current maximum.
 	@return maximum
 	*/
-	T getMax(){
+	T getMax()
+	{
 		return range_max;
 	}
 
@@ -62,12 +70,13 @@ public:
 	/** Returns the current range.
 	@return range
 	*/
-	T getRange(){
+	T getRange()
+	{
 		return range;
 	}
 
 private:
-	T range_max, range_min , range;
+	T range_max, range_min, range;
 
 };
 

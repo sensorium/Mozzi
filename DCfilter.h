@@ -8,42 +8,43 @@
  * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
  *
  */
- 
+
 #ifndef DCFILTER_H
 #define DCFILTER_H
 
 /*
-tb2010 adapted from: 
+tb2010 adapted from:
 robert bristow-johnson, DSP Trick: Fixed-Point DC Blocking Filter with Noise-Shaping
 http://www.dspguru.com/book/export/html/126
 
 y[n] = x[n] - x[n-1] + a * y[n-1]
 
-Where y[n] is the output at the current time n, and x[n] is the input at the current time n. 
+Where y[n] is the output at the current time n, and x[n] is the input at the current time n.
 
 also, see DC Blocker Algorithms, http://www.ingelec.uns.edu.ar/pds2803/materiales/articulos/04472252.pdf
  */
- 
+
 /**
 A DC-blocking filter useful for highlighting changes in control signals.
 The output of the filter settles to 0 if the incoming signal stays constant.  If the input changes, the
 filter output swings to track the change and eventually settles back to 0.
 */
-class DCfilter {
+class DCfilter
+{
 public:
-/** 
+/**
 Instantiate a DC-blocking filter.
-@param pole sets the responsiveness of the filter, 
+@param pole sets the responsiveness of the filter,
 how long it takes to settle to 0 if the input signal levels out at a constant value.
 */
 	DCfilter(float pole):acc(0),prev_x(0),prev_y(0)
 	{
 		A = (int)(32768.0*(1.0 - pole));
 	}
-	
+
 /*  almost original
 	// timing: 20us
-	int next(int x) 
+	int next(int x)
 	{
 		setPin13High();
 		acc   -= prev_x;
@@ -58,20 +59,20 @@ how long it takes to settle to 0 if the input signal levels out at a constant va
 	}
 	*/
 
-	/** 
+	/**
 	Filter the incoming value and return the result.
 	@param x the value to filter
 	@return filtered signal
 	*/
 	// timing :8us
 	inline
-	int next(int x) 
+	int next(int x)
 	{
 		acc += ((long)(x-prev_x)<<16)>>1;
 		prev_x = x;
 		acc   -= (long)A*prev_y; 	// acc has y[n] in upper 17 bits and -e[n] in lower 15 bits
-		prev_y = (acc>>16)<<1; // faster than >>15 but loses bit 0	 
-		if (acc & 32784) prev_y += 1; // adds 1 if it was in the 0 bit position lost in the shifts above  
+		prev_y = (acc>>16)<<1; // faster than >>15 but loses bit 0
+		if (acc & 32784) prev_y += 1; // adds 1 if it was in the 0 bit position lost in the shifts above
 		return prev_y;
 	}
 
@@ -86,4 +87,3 @@ This example demonstrates the DCFilter class.
 */
 
 #endif        //  #ifndef DCFILTER_H
-

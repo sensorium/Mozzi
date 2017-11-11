@@ -13,7 +13,10 @@
 #include "mozzi_config.h"
 #include "mozzi_analog.h"
 #include "Stack.h"
+
 //#include "mozzi_utils.h"
+
+extern uint8_t analog_reference;
 
 // required from http://github.com/pedvide/ADC for Teensy 3.1
 // This is a hacky way to access the ADC library, otherwise ADC.h has to be included at the top of every Arduino sketch.
@@ -86,7 +89,7 @@ void adcDisconnectAllDigitalIns(){
 		DIDR0 |= 1<<i;
 	}
 	#endif
-}                     
+}
 
 
 void adcReconnectAllDigitalIns(){
@@ -131,11 +134,13 @@ static void adcSetChannel(uint8_t channel) {
 	ADCSRB = (ADCSRB & ~(1 << MUX5)) | (((channel >> 3) & 0x01) << MUX5);
 #endif
 
-	// set the analog reference (high two bits of ADMUX) and select the
-	// channel (low 4 bits).  this also sets ADLAR (left-adjust result)
-	// to 0 (the default).
+// from wiring_analog.c:
+// set the analog reference (high two bits of ADMUX) and select the
+// channel (low 4 bits).  this also sets ADLAR (left-adjust result)
+// to 0 (the default).
 #if defined(ADMUX)
-	ADMUX = (1 << REFS0) | (channel & 0x07);
+	//ADMUX = (1 << REFS0) | (channel & 0x07); // TB2017 this overwrote analog_reference
+	ADMUX = (analog_reference << 6) | (channel & 0x07);
 #endif
 #endif
 }
@@ -143,7 +148,7 @@ static void adcSetChannel(uint8_t channel) {
 
 
 
-	
+
 // basically analogRead() chopped in half so the ADC conversion
 // can be started here and received by another function.
 void adcStartConversion(uint8_t channel) {
@@ -162,8 +167,8 @@ void adcStartConversion(uint8_t channel) {
 
 
 /*
-The code below was informed initially by a discussion between 
-jRaskell, bobgardner, theusch, Koshchi, and code by jRaskell. 
+The code below was informed initially by a discussion between
+jRaskell, bobgardner, theusch, Koshchi, and code by jRaskell.
 http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=789581
 */
 
@@ -183,7 +188,7 @@ void adcStartReadCycle(){
 		adc_channels_to_read.push(AUDIO_INPUT_PIN); // for audio
 #else
 		adcReadSelectedChannels();
-		first = true;		
+		first = true;
 #endif
 	}
 }
@@ -236,16 +241,16 @@ void receiveSecondControlADC(){
 
 
 /* This interrupt handler cycles through all analog inputs on the adc_channels_to_read Stack,
-doing 2 conversions on each channel but only keeping the second conversion each time, 
+doing 2 conversions on each channel but only keeping the second conversion each time,
 because the first conversion after changing channels is often inaccurate (on atmel-based arduinos).
 
 The version for USE_AUDIO_INPUT==true is in MozziGuts.cpp... compilation reasons...
 */
 #if(USE_AUDIO_INPUT==false)
 #if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
-void adc0_isr(void) 
+void adc0_isr(void)
 #else
-ISR(ADC_vect, ISR_BLOCK) 
+ISR(ADC_vect, ISR_BLOCK)
 #endif
 {
 	if (first)
@@ -255,7 +260,7 @@ ISR(ADC_vect, ISR_BLOCK)
    	first=false;
   }
   else
-  {	
+  {
   	// 3us
     receiveSecondControlADC();
     adcReadSelectedChannels();
@@ -263,4 +268,3 @@ ISR(ADC_vect, ISR_BLOCK)
 	}
 }
 #endif
-

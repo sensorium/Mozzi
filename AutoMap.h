@@ -32,33 +32,36 @@ public:
 	@param min_expected the minimum possible input value.
 	@param max_expected the maximum possible input value.
 	*/
-	AutoMap(int min_expected, int max_expected, int map_to_min, int map_to_max) 
+	AutoMap(int min_expected, int max_expected, int map_to_min, int map_to_max)
 		: inherited(min_expected,max_expected),map_min(map_to_min), map_max(map_to_max)
 	{
 	}
 	
-	
+
 	/** Process the next value and return it mapped to the range which was set in the constructor.
 	Can use the operator instead if you prefer, eg. myMap(n) instead of myMap.next(n).
 	@param n the next value to process.
 	@return the input value mapped to the range which was set in the constructor.
 	*/
 	inline
-	int next(int n){
+	int next(int n)
+  {
 		inherited::next(n);
 		return map(n,inherited::getMin(),inherited::getMax(),map_min,map_max);
 	}
-	
+
 	/** Process the next value and return it mapped to the range which was set in the constructor.
 	This is an alternative to next() if you prefer, eg. myMap(n) instead of myMap.next(n).
 	@param n the next value to process.
 	@return the input value mapped to the range which was set in the constructor.
 	*/
 	inline
-	int operator()(int n) {
+	int operator()(int n)
+  {
 		return next(n);
 	}
-	
+
+
 private:
 	typedef AutoRange <int> inherited;
 	int map_min, map_max;
@@ -71,4 +74,3 @@ This example demonstrates the AutoMap class.
 */
 
 #endif        //  #ifndef AUTOMAP_H_
-

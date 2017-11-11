@@ -3,7 +3,7 @@
 
 /*
 14 bit sound at 16384 Hz and 125kHz pwm rate
-Timer 1: PWM 125kHz 
+Timer 1: PWM 125kHz
 Timer 2: called at AUDIO_RATE 16384 Hz, setting Timer1 pwm levels
 Output on Timer1, low uint8_t on Pin 10, and high uint8_t on Pin 9 (on 328 based Arduino boards)
 Add signals through a 3.9k resistor on high uint8_t pin and 499k resistor on low uint8_t pin.
@@ -22,7 +22,7 @@ Boards, pins and resistor positions are documented in MozziGuts.h
 
 // pins defined in TimerOne/config/known_16bit_timers.h
 #define AUDIO_CHANNEL_1_highByte_PIN TIMER1_A_PIN // 3.9k resistor
-#define AUDIO_CHANNEL_1_lowByte_PIN TIMER1_B_PIN // 1 M resistor
+#define AUDIO_CHANNEL_1_lowByte_PIN TIMER1_B_PIN // 499k resistor
 #define AUDIO_CHANNEL_1_highByte_REGISTER OCR1AL
 #define AUDIO_CHANNEL_1_lowByte_REGISTER OCR1BL
 
@@ -32,4 +32,3 @@ Boards, pins and resistor positions are documented in MozziGuts.h
 
 
 #endif        //  #ifndef AUDIOCONFIGHISPEED14BITPWM_H
-

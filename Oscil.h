@@ -37,7 +37,7 @@
 
 
 
-/** 
+/**
 Oscil plays a wavetable, cycling through the table to generate an audio or
 control signal. The frequency of the signal can be set or changed with
 setFreq(), and the output of an Oscil can be produced with next() for a simple
@@ -154,7 +154,7 @@ public:
 	@param phmod_proportion a phase modulation value given as a proportion of the wave. The
 	phmod_proportion parameter is a Q15n16 fixed-point number where the fractional
 	n16 part represents almost -1 to almost 1, modulating the phase by one whole table length in
-	each direction.  
+	each direction.
 	@return a sample from the table.
 	*/
 	// PM: cos((angle += incr) + change)
@@ -213,14 +213,14 @@ public:
 	inline
 	void setFreq_Q24n8(Q24n8 frequency)
 	{
-		
+
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
 			//phase_increment_fractional = (frequency* (NUM_TABLE_CELLS>>3)/(UPDATE_RATE>>6)) << (F_BITS-(8-3+6));
 // TB2016-10-2 line below might have been left in accidentally while making the 2014 change below, remove for now
 //			phase_increment_fractional = (((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)>>3)*frequency)/(UPDATE_RATE>>6))
 //			                             << (OSCIL_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS - (8-3+6));
-			                             
+
 			// TB2014-8-20 change this following Austin Grossman's suggestion on user list
 			// https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!msg/mozzi-users/u4D5NMzVnQs/pCmiWInFvrkJ
 			if ((256UL*NUM_TABLE_CELLS) >= UPDATE_RATE) {
@@ -229,7 +229,7 @@ public:
         phase_increment_fractional = ((unsigned long)frequency) / (UPDATE_RATE/(256UL*NUM_TABLE_CELLS));
       }
 		}
-		
+
 
 	}
 
@@ -251,12 +251,12 @@ public:
 			// TB2014-8-20 change this following Austin Grossman's suggestion on user list
 			// https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!msg/mozzi-users/u4D5NMzVnQs/pCmiWInFvrkJ
 			//phase_increment_fractional = (((((uint32_t)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)>>7)*frequency)/(UPDATE_RATE>>6))
-			//                             << (OSCIL_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS - 16 + 1);                      
+			//                             << (OSCIL_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS - 16 + 1);
 			if (NUM_TABLE_CELLS >= UPDATE_RATE) {
         phase_increment_fractional = ((unsigned long)frequency) * (NUM_TABLE_CELLS/UPDATE_RATE);
       } else {
         phase_increment_fractional = ((unsigned long)frequency) / (UPDATE_RATE/NUM_TABLE_CELLS);
-      } 
+      }
 
 		}
 	}
@@ -278,7 +278,7 @@ public:
 	}
 
 
-	/** phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies. 
+	/** phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies.
 	Instead of recalculating the phase increment for each
 	frequency in between, you can just calculate the phase increment for each end
 	frequency with phaseIncFromFreq(), then use a Line to interpolate on the fly and
@@ -289,7 +289,6 @@ public:
 	@return the phase increment value which will produce a given frequency.
 	*/
 	inline
-	const
 	unsigned long phaseIncFromFreq(int frequency)
 	{
 		// TB2014-8-20 change this following Austin Grossman's suggestion on user list

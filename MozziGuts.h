@@ -177,7 +177,7 @@ HIFI is not available/not required on Teensy 3.1.
 
 #if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // Teensy 3
 #include "AudioConfigTeensy3_12bit.h"
-#else
+#elif defined(__AVR__)
 #if (AUDIO_MODE == STANDARD)
 #include "AudioConfigStandard9bitPwm.h"
 #elif (AUDIO_MODE == STANDARD_PLUS)
@@ -185,7 +185,10 @@ HIFI is not available/not required on Teensy 3.1.
 #elif (AUDIO_MODE == HIFI)
 #include "AudioConfigHiSpeed14bitPwm.h"
 #endif
-
+#elif defined (__arm__) // other STM32
+#define AUDIO_BIAS ((uint16_t) 2048)
+#define AUDIO_PWM_TIMER 1
+#define AUDIO_CHANNEL_1_PIN PA8
 #endif
 
 // common numeric types
@@ -193,20 +196,15 @@ typedef unsigned char uchar;
 typedef unsigned int uint;
 typedef unsigned long ulong;
 
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
-//typedef uint8_t byte;//unsigned char;
-//typedef int8_t char;
-//typedef (uint16_t) (short unsigned int);
-//typedef int16_t int;
-//typedef (uint32_t) (unsigned long);
-//typedef int32_t long; 
-#else
+#if defined(__AVR__)
 typedef unsigned char uint8_t;
 typedef signed char int8_t;
 typedef unsigned int uint16_t;
 typedef signed int int16_t;
 typedef unsigned long uint32_t;
 typedef signed long int32_t;
+#else
+// Other supported arches add typedefs, here, unless already defined for that platform needed
 #endif
 
 

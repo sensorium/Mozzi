@@ -104,8 +104,7 @@ So far, gizduino's __AVR_ATmega644P__ chip doesn't like it, so we use (long)anal
 @todo add Teensy 3 code
 */
 void randSeed() {
-	#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
-#else
+#if defined(__AVR__)
 	ADCSRA &= ~ (1 << ADIE); // adc Disable Interrupt, re-enable at end
 	// this attempt at remembering analog_reference stops it working 
 	// maybe needs a delay after changing analog reference in longRandom (Arduino reference suggests this)
@@ -116,7 +115,9 @@ void randSeed() {
 	z=longRandom();
 	//analogReference(analog_reference_orig); // change back to original
 	ADCSRA |= (1 << ADIE); // adc re-Enable Interrupt
-	#endif
+#else
+#warning Fancy random seeding not implemented on this platform
+#endif
 }
 
 

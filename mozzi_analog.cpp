@@ -28,8 +28,7 @@ extern uint8_t analog_reference;
 
 void setupFastAnalogRead(int8_t speed)
 {
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
-#else
+#if defined(__AVR__)
 	if (speed == FAST_ADC){ // divide by 16
 		ADCSRA |= (1 << ADPS2);
 		ADCSRA &= ~(1 << ADPS1);
@@ -55,57 +54,54 @@ void adcEnableInterrupt(){
 
 
 void setupMozziADC(int8_t speed) {
-	#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
 	adc = new ADC();
 	adc->enableInterrupts(ADC_0);
-#else
+#elif defined(__AVR__)
 	ADCSRA |= (1 << ADIE); // adc Enable Interrupt
 	setupFastAnalogRead(speed);
 	adcDisconnectAllDigitalIns();
+#else
+#warning Fast ADC not implemented on this platform
 #endif
 }
 
 
 void disconnectDigitalIn(uint8_t channel_num){
-	#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
-#else
+#if defined(__AVR__)
 	DIDR0 |= 1<<channel_num;
-	#endif
+#endif
 }
 
 
 void reconnectDigitalIn(uint8_t channel_num){
-	#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
-#else
+#if defined(__AVR__)
 	DIDR0 &= ~(1<<channel_num);
-	#endif
+#endif
 }
 
 
 void adcDisconnectAllDigitalIns(){
-	#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
-#else
+#if defined(__AVR__)
 	for (uint8_t i = 0; i<NUM_ANALOG_INPUTS; i++){
 		DIDR0 |= 1<<i;
 	}
-	#endif
+#endif
 }
 
 
 void adcReconnectAllDigitalIns(){
-	#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
-#else
+#if defined(__AVR__)
 	for (uint8_t i = 0; i<NUM_ANALOG_INPUTS; i++){
 		DIDR0 &= ~(1<<i);
 	}
-	#endif
+#endif
 }
 
 
 uint8_t adcPinToChannelNum(uint8_t pin) {
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
 
-#else
+#if defined(__AVR__)
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
 	if (pin >= 54) pin -= 54; // allow for channel or pin numbers
 #elif defined(__AVR_ATmega32U4__)
@@ -116,16 +112,14 @@ uint8_t adcPinToChannelNum(uint8_t pin) {
 #else
 	if (pin >= 14) pin -= 14; // allow for channel or pin numbers
 #endif
-	#endif
+#endif
 	return pin;
 }
 
 
 // assumes channel is correct, not pin number, pin number would be converted first with adcPinToChannelNum
 static void adcSetChannel(uint8_t channel) {
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
-// ADC library converts pin/channel each time in startSingleRead
-#else
+#if defined(__AVR__)
 #if defined(__AVR_ATmega32U4__)
 	ADCSRB = (ADCSRB & ~(1 << MUX5)) | (((channel >> 3) & 0x01) << MUX5);
 #elif defined(ADCSRB) && defined(MUX5)
@@ -142,6 +136,8 @@ static void adcSetChannel(uint8_t channel) {
 	//ADMUX = (1 << REFS0) | (channel & 0x07); // TB2017 this overwrote analog_reference
 	ADMUX = (analog_reference << 6) | (channel & 0x07);
 #endif
+#else
+// For other platforms ADC library converts pin/channel each time in startSingleRead
 #endif
 }
 
@@ -155,12 +151,14 @@ void adcStartConversion(uint8_t channel) {
 #if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
 	teensy_pin = channel; // remember for second startSingleRead
 	adc->startSingleRead(teensy_pin); // channel/pin gets converted every time in startSingleRead
-#else
+#elif defined(__AVR__)
 	adcSetChannel(channel);
 #if defined(ADCSRA) && defined(ADCL)
 	// start the conversion
 	ADCSRA |= (1 << ADSC);
 #endif
+#else
+#warning Fast analog read not implemented on this platform
 #endif
 }
 
@@ -172,12 +170,13 @@ jRaskell, bobgardner, theusch, Koshchi, and code by jRaskell.
 http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=789581
 */
 
-
+#if !(defined(__AVR__) || defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO))
+#define NUM_ANALOG_INPUTS 1 // dummy
+#endif
 static volatile int analog_readings[NUM_ANALOG_INPUTS];
 static Stack <volatile int8_t,NUM_ANALOG_INPUTS> adc_channels_to_read;
 volatile static int8_t current_channel = -1; // volatile because accessed in control and adc ISRs
 static bool first = true;
-
 
 /* Called each time in updateControlWithAutoADC(), after updateControl()
 */
@@ -205,13 +204,17 @@ void adcReadSelectedChannels() {
 
 
 int mozziAnalogRead(uint8_t pin) {
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+
 // ADC lib converts pin/channel in startSingleRead
-#else
+#if defined(__AVR__)
 	pin = adcPinToChannelNum(pin); // allow for channel or pin numbers
-#endif
+#elif defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
 	adc_channels_to_read.push(pin);
 	return analog_readings[pin];
+#else
+#warning Fast analog read not implemented on this platform
+        return analogRead (pin) >> 2; // Map from STM32's 4096 to AVR's 1024
+#endif
 }
 
 
@@ -225,7 +228,7 @@ void receiveFirstControlADC(){
 void startSecondControlADC() {
 #if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
 	adc->startSingleRead(teensy_pin);
-#else
+#elif defined(__AVR__)
 	ADCSRA |= (1 << ADSC); // start a second conversion on the current channel
 #endif
 }
@@ -234,7 +237,7 @@ void startSecondControlADC() {
 void receiveSecondControlADC(){
 #if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
 	analog_readings[current_channel] = adc->readSingle();
-#else
+#elif defined(__AVR__)
 	analog_readings[current_channel] = ADC; // officially (ADCL | (ADCH << 8)) but the compiler works it out
 #endif
 }
@@ -249,9 +252,10 @@ The version for USE_AUDIO_INPUT==true is in MozziGuts.cpp... compilation reasons
 #if(USE_AUDIO_INPUT==false)
 #if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
 void adc0_isr(void)
-#else
+#elif defined(__AVR__)
 ISR(ADC_vect, ISR_BLOCK)
 #endif
+#if defined(__AVR__) || defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO)
 {
 	if (first)
 	{
@@ -267,4 +271,5 @@ ISR(ADC_vect, ISR_BLOCK)
    	first=true;
 	}
 }
+#endif
 #endif

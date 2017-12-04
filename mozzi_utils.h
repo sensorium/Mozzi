@@ -22,8 +22,12 @@
 Set digital pin 13 to output for testing timing with an oscilloscope.*/
 inline
 void setPin13Out()
-{	
-		DDRB |= B00100000;
+{
+#if defined(__AVR__)
+	DDRB |= B00100000;
+#else
+	pinMode(13, OUTPUT);
+#endif
 }
 
 
@@ -31,8 +35,12 @@ void setPin13Out()
 Set pin 13 high for testing timing with an oscilloscope.*/
 inline
 void setPin13High()
-{	
- 	PORTB |= B00100000;
+{
+#if defined(__AVR__)
+	PORTB |= B00100000;
+#else
+	digitalWrite(13, HIGH);
+#endif
 }
 
 
@@ -40,8 +48,12 @@ void setPin13High()
 Set pin 13 low for testing timing with an oscilloscope.*/
 inline
 void setPin13Low()
-{		
+{
+#if defined(__AVR__)
 	PORTB &= B11011111;
+#else
+	digitalWrite(13, LOW);
+#endif
 }
 
 

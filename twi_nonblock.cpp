@@ -7,7 +7,7 @@
 
  
 // Added by TB2014 for Mozzi library, to hide code from Teensy 3.1
-#if !(defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO))
+#if defined (__AVR__)
 
 #include "twi_nonblock.h"
 

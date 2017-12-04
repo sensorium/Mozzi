@@ -1,3 +1,23 @@
+# This fork of Mozzi adds support for STM32duino boards
+
+For the official and stable Mozzi synth, refer to https://github.com/sensorium/Mozzi . This is just a workplace copy that
+will hopefully be merged into the official Mozzi, once stable.
+
+## Status and Caveats
+
+Compiles for and runs on my STM32F103C8T6 blue pill board, with a bunch of caveats (see below), i.e. on a board _without_ a
+real DAC. Should probably run on any other board supported by [STM32duino](https://github.com/rogerclarkmelbourne/Arduino_STM32).
+
+- Audio output is to pin PA8
+- You will have to add the header file "util/atomic.h" to your Arduino_STM32/STM32F1/cores/maple/util, manually. Get it [here](http://www.stm32duino.com/viewtopic.php?f=3&t=258&start=10#p1901)
+- Trying to use MIDI causes lockup or something. Don't do that, yet.
+- Surprisingly, there are also issues using random(), so try playing fixed values for now
+- AUDIO_INPUT is not implemented at all, yet
+- mozzi_analogRead simply redirects to analogRead(), ATM (and is not even tested)
+- Hardware #ifdefs are still pretty messy (but they already were before I started)
+- Not cross-tested to verify that I did not break anything on the existing platforms AVR and Teensy
+- Timers 1 (PWM output), 2 (control rate), and 3 (audio rate) are used. Timers 2 and 3 could certainly be merged, but I did not bother optimizing, yet.
+
 # Mozzi  
 
 ### sound synthesis library for Arduino  

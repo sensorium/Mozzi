@@ -257,7 +257,7 @@ void audioHook() // 2us excluding updateAudio()
   HardwareTimer audio_pwm_timer(AUDIO_PWM_TIMER);
 #endif
 
-#if !IS_AVR()
+#if IS_TEENSY3()
 static void teensyAudioOutput()
 {
 	
@@ -268,7 +268,7 @@ static void teensyAudioOutput()
 
 	analogWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
 }
-
+#elif IS_STM32
 static void pwmAudioOutput()
 {
 #if (USE_AUDIO_INPUT==true)
@@ -300,12 +300,10 @@ static void startAudioStandard()
 	audio_update_timer.attachCompare1Interrupt(pwmAudioOutput);
 	audio_update_timer.refresh();
 	audio_update_timer.resume();
-digitalWrite(PC13, LOW);
         
 	pinMode(AUDIO_CHANNEL_1_PIN, PWM);
 	audio_pwm_timer.setPrescaleFactor(1);        // Generate as fast a carrier as possible (for today's CPU speeds)
 	audio_pwm_timer.setOverflow(1 << AUDIO_BITS);   // Allocate enough room to write all intended bits
-digitalWrite(PC13, HIGH);
 #define CARRIER_FREQ (F_CPU/(1<<AUDIO_BITS))
 #if CARRIER_FREQ < AUDIO_RATE
 #error Configured audio resolution is definitely too high at the configured audio rate (and the given CPU speed)

@@ -5,11 +5,13 @@
  *
  */
 
+#include "hardware_defines.h"
  
 // Added by TB2014 for Mozzi library, to hide code from Teensy 3.1
-#if defined (__AVR__)
+#if IS_AVR()
 
 #include "twi_nonblock.h"
+
 
 #include <avr/interrupt.h>
 

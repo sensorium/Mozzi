@@ -18,14 +18,15 @@
  #include "WProgram.h"
 #endif
 
+#include "hardware_defines.h"
 // required from http://github.com/pedvide/ADC for Teensy 3.1
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO)
+#if IS_TEENSY3()
 #include <ADC.h>
 #endif
 
 
 // these are declared in Mozziguts.cpp, and used in mozzi_analog.cpp... crazy but it compiles
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
 	extern ADC *adc; // adc object
 	extern uint8_t teensy_pin;
 #endif

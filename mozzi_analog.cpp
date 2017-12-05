@@ -20,7 +20,7 @@ extern uint8_t analog_reference;
 
 // required from http://github.com/pedvide/ADC for Teensy 3.1
 // This is a hacky way to access the ADC library, otherwise ADC.h has to be included at the top of every Arduino sketch.
-/*#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO)
+/*#if IS_TEENSY3()
 #include "../ADC/ADC_Module.cpp"
 #include "../ADC/ADC.cpp"
 #endif
@@ -28,7 +28,7 @@ extern uint8_t analog_reference;
 
 void setupFastAnalogRead(int8_t speed)
 {
-#if defined(__AVR__)
+#if IS_AVR()
 	if (speed == FAST_ADC){ // divide by 16
 		ADCSRA |= (1 << ADPS2);
 		ADCSRA &= ~(1 << ADPS1);
@@ -54,10 +54,10 @@ void adcEnableInterrupt(){
 
 
 void setupMozziADC(int8_t speed) {
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
 	adc = new ADC();
 	adc->enableInterrupts(ADC_0);
-#elif defined(__AVR__)
+#elif IS_AVR()
 	ADCSRA |= (1 << ADIE); // adc Enable Interrupt
 	setupFastAnalogRead(speed);
 	adcDisconnectAllDigitalIns();
@@ -68,21 +68,21 @@ void setupMozziADC(int8_t speed) {
 
 
 void disconnectDigitalIn(uint8_t channel_num){
-#if defined(__AVR__)
+#if IS_AVR()
 	DIDR0 |= 1<<channel_num;
 #endif
 }
 
 
 void reconnectDigitalIn(uint8_t channel_num){
-#if defined(__AVR__)
+#if IS_AVR()
 	DIDR0 &= ~(1<<channel_num);
 #endif
 }
 
 
 void adcDisconnectAllDigitalIns(){
-#if defined(__AVR__)
+#if IS_AVR()
 	for (uint8_t i = 0; i<NUM_ANALOG_INPUTS; i++){
 		DIDR0 |= 1<<i;
 	}
@@ -91,7 +91,7 @@ void adcDisconnectAllDigitalIns(){
 
 
 void adcReconnectAllDigitalIns(){
-#if defined(__AVR__)
+#if IS_AVR()
 	for (uint8_t i = 0; i<NUM_ANALOG_INPUTS; i++){
 		DIDR0 &= ~(1<<i);
 	}
@@ -101,7 +101,7 @@ void adcReconnectAllDigitalIns(){
 
 uint8_t adcPinToChannelNum(uint8_t pin) {
 
-#if defined(__AVR__)
+#if IS_AVR()
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
 	if (pin >= 54) pin -= 54; // allow for channel or pin numbers
 #elif defined(__AVR_ATmega32U4__)
@@ -119,7 +119,7 @@ uint8_t adcPinToChannelNum(uint8_t pin) {
 
 // assumes channel is correct, not pin number, pin number would be converted first with adcPinToChannelNum
 static void adcSetChannel(uint8_t channel) {
-#if defined(__AVR__)
+#if IS_AVR()
 #if defined(__AVR_ATmega32U4__)
 	ADCSRB = (ADCSRB & ~(1 << MUX5)) | (((channel >> 3) & 0x01) << MUX5);
 #elif defined(ADCSRB) && defined(MUX5)
@@ -148,10 +148,10 @@ static void adcSetChannel(uint8_t channel) {
 // basically analogRead() chopped in half so the ADC conversion
 // can be started here and received by another function.
 void adcStartConversion(uint8_t channel) {
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
 	teensy_pin = channel; // remember for second startSingleRead
 	adc->startSingleRead(teensy_pin); // channel/pin gets converted every time in startSingleRead
-#elif defined(__AVR__)
+#elif IS_AVR()
 	adcSetChannel(channel);
 #if defined(ADCSRA) && defined(ADCL)
 	// start the conversion
@@ -170,7 +170,7 @@ jRaskell, bobgardner, theusch, Koshchi, and code by jRaskell.
 http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=789581
 */
 
-#if !(defined(__AVR__) || defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO))
+#if IS_STM32()
 #define NUM_ANALOG_INPUTS 1 // dummy
 #endif
 static volatile int analog_readings[NUM_ANALOG_INPUTS];
@@ -206,9 +206,9 @@ void adcReadSelectedChannels() {
 int mozziAnalogRead(uint8_t pin) {
 
 // ADC lib converts pin/channel in startSingleRead
-#if defined(__AVR__)
+#if IS_AVR()
 	pin = adcPinToChannelNum(pin); // allow for channel or pin numbers
-#elif defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#elif IS_TEENSY3()
 	adc_channels_to_read.push(pin);
 	return analog_readings[pin];
 #else
@@ -226,18 +226,18 @@ void receiveFirstControlADC(){
 
 
 void startSecondControlADC() {
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
 	adc->startSingleRead(teensy_pin);
-#elif defined(__AVR__)
+#elif IS_AVR()
 	ADCSRA |= (1 << ADSC); // start a second conversion on the current channel
 #endif
 }
 
 
 void receiveSecondControlADC(){
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
 	analog_readings[current_channel] = adc->readSingle();
-#elif defined(__AVR__)
+#elif IS_AVR()
 	analog_readings[current_channel] = ADC; // officially (ADCL | (ADCH << 8)) but the compiler works it out
 #endif
 }
@@ -250,12 +250,12 @@ because the first conversion after changing channels is often inaccurate (on atm
 The version for USE_AUDIO_INPUT==true is in MozziGuts.cpp... compilation reasons...
 */
 #if(USE_AUDIO_INPUT==false)
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
 void adc0_isr(void)
-#elif defined(__AVR__)
+#elif IS_AVR()
 ISR(ADC_vect, ISR_BLOCK)
 #endif
-#if defined(__AVR__) || defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO)
+#if !IS_STM32()
 {
 	if (first)
 	{

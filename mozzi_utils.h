@@ -9,6 +9,8 @@
  #include "WProgram.h"
 #endif
 
+#include "hardware_defines.h"
+
 // macros for setting and clearing register bits
 #ifndef cbi
 #define cbi(sfr, bit) (_SFR_UINT8_T(sfr) &= ~_BV(bit))
@@ -23,7 +25,7 @@ Set digital pin 13 to output for testing timing with an oscilloscope.*/
 inline
 void setPin13Out()
 {
-#if defined(__AVR__)
+#if IS_AVR()
 	DDRB |= B00100000;
 #else
 	pinMode(13, OUTPUT);
@@ -36,7 +38,7 @@ Set pin 13 high for testing timing with an oscilloscope.*/
 inline
 void setPin13High()
 {
-#if defined(__AVR__)
+#if IS_AVR()
 	PORTB |= B00100000;
 #else
 	digitalWrite(13, HIGH);
@@ -49,7 +51,7 @@ Set pin 13 low for testing timing with an oscilloscope.*/
 inline
 void setPin13Low()
 {
-#if defined(__AVR__)
+#if IS_AVR()
 	PORTB &= B11011111;
 #else
 	digitalWrite(13, LOW);

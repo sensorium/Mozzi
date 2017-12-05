@@ -21,7 +21,7 @@
 #endif
 
 
-
+#include "hardware_defines.h"
 #include "mozzi_analog.h"
 
 /** @ingroup core
@@ -175,9 +175,9 @@ HIFI is not available/not required on Teensy 3.1.
 #endif
 
 
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // Teensy 3
+#if IS_TEENSY3()
 #include "AudioConfigTeensy3_12bit.h"
-#elif defined(__AVR__)
+#elif IS_AVR()
 #if (AUDIO_MODE == STANDARD)
 #include "AudioConfigStandard9bitPwm.h"
 #elif (AUDIO_MODE == STANDARD_PLUS)
@@ -185,7 +185,7 @@ HIFI is not available/not required on Teensy 3.1.
 #elif (AUDIO_MODE == HIFI)
 #include "AudioConfigHiSpeed14bitPwm.h"
 #endif
-#elif defined (__arm__) // other STM32
+#elif IS_STM32()
 // The more audio bits you use, the slower the carrier frequency of the PWM signal. 10 bits yields ~ 70kHz on a 72Mhz CPU (which appears to be a reasonable compromise)
 // NOTE: HIFI-mode is not yet implemented for STM32, although that should be quite possible
 #define AUDIO_BITS 10

@@ -22,13 +22,13 @@
 #include "CircularBuffer.h"
 //#include "mozzi_utils.h"
 
-#if defined (__AVR__)
+#if IS_AVR()
 #include "TimerZero.h"
 #include "TimerOne.h"
 #include "FrequencyTimer2.h"
-#elif defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO)  // teensy 3, 3.1
+#elif IS_TEENSY3()
 #include "IntervalTimer.h"
-#elif defined(__arm__)
+#elif IS_STM32()
 #include "HardwareTimer.h"
 #endif
 
@@ -39,7 +39,7 @@
 
 
 // this seems to get included before mozzi_analog.cpp
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
 	ADC *adc; // adc object
 	uint8_t teensy_pin;
 #endif
@@ -75,7 +75,7 @@ CircularBuffer <unsigned int> output_buffer2; // fixed size 256
 #endif
 //-----------------------------------------------------------------------------------------------------------------
 
-#if defined(__AVR__) // not storing backupts, just turning timer on and off for pause for teensy 3, 3.1, other ARMs
+#if IS_AVR() // not storing backups, just turning timer on and off for pause for teensy 3, 3.1, other ARMs
 
 // to store backups of timer registers so Mozzi can be stopped and pre_mozzi timer values can be restored
 static uint8_t pre_mozzi_TCCR0A, pre_mozzi_TCCR0B, pre_mozzi_OCR0A, pre_mozzi_TIMSK0;
@@ -150,7 +150,7 @@ int getAudioInput()
 
 static void startFirstAudioADC()
 {
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
 	adc->startSingleRead(AUDIO_INPUT_PIN); // ADC lib converts pin/channel in startSingleRead
 #else
 	adcStartConversion(adcPinToChannelNum(AUDIO_INPUT_PIN));
@@ -166,7 +166,7 @@ static void receiveFirstAudioADC()
 
 static void startSecondAudioADC()
 {
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
 	adc->startSingleRead(AUDIO_INPUT_PIN);
 #else
 	ADCSRA |= (1 << ADSC); // start a second conversion on the current channel
@@ -178,7 +178,7 @@ static void startSecondAudioADC()
 static void receiveSecondAudioADC()
 {
 	if (!input_buffer.isFull()) 
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
 		input_buffer.write(adc->readSingle());
 #else
 		input_buffer.write(ADC);
@@ -186,7 +186,7 @@ static void receiveSecondAudioADC()
 }
 
 
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
 void adc0_isr(void) 
 #else
 ISR(ADC_vect, ISR_BLOCK)
@@ -250,14 +250,14 @@ void audioHook() // 2us excluding updateAudio()
 //-----------------------------------------------------------------------------------------------------------------
 #if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS)
 
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO)
+#if IS_TEENSY3()
   IntervalTimer timer1;
-#elif defined(__arm__)
+#elif IS_STM32()
   HardwareTimer audio_update_timer(AUDIO_PWM_TIMER);
   HardwareTimer audio_pwm_timer(AUDIO_PWM_TIMER);
 #endif
 
-#if !defined(AVR)
+#if IS_TEENSY3()
 static void teensyAudioOutput()
 {
 	
@@ -268,7 +268,7 @@ static void teensyAudioOutput()
 
 	analogWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
 }
-
+#elif IS_STM32()
 static void pwmAudioOutput()
 {
 #if (USE_AUDIO_INPUT==true)
@@ -279,19 +279,20 @@ static void pwmAudioOutput()
 
         pwmWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
 }
+#endif
 
+#if !IS_AVR()
 static void startAudioStandard()
 {
 	//backupPreMozziTimer1(); // not for arm
 	
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO)
+#if IS_TEENSY3()
 	adc->setAveraging(0);
 	adc->setConversionSpeed(ADC_CONVERSION_SPEED::MED_SPEED); // could be HIGH_SPEED, noisier
-#endif
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO)
+
 	analogWriteResolution(12);
 	timer1.begin(teensyAudioOutput, 1000000UL/AUDIO_RATE); 
-#elif defined(__arm__)
+#elif IS_STM32()
         audio_update_timer.pause();
 	audio_update_timer.setPeriod(1000000UL/AUDIO_RATE);
 	audio_update_timer.setChannel1Mode(TIMER_OUTPUT_COMPARE);
@@ -540,16 +541,16 @@ options Using Timer0 for control disables Arduino's time functions but also
 saves on the interrupts and blocking action of those functions. May add a config
 option for Using Timer2 instead if needed. (MozziTimer2 can be re-introduced for
 that). */
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
 IntervalTimer timer0;
-#elif defined(__arm__)
+#elif IS_STM32()
 HardwareTimer control_timer(CONTROL_UPDATE_TIMER);
 #endif
 
 
 static void startControl(unsigned int control_rate_hz)
 {
-#if defined(__AVR__)
+#if IS_AVR()
 	// backup pre-mozzi register values
 	pre_mozzi_TCCR0A = TCCR0A;
 	pre_mozzi_TCCR0B = TCCR0B;
@@ -564,7 +565,7 @@ static void startControl(unsigned int control_rate_hz)
 	mozzi_TCCR0B = TCCR0B;
 	mozzi_OCR0A = OCR0A;
 	mozzi_TIMSK0 = TIMSK0;
-#elif defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#elif IS_TEENSY3()
 	timer0.begin(updateControlWithAutoADC, 1000000/control_rate_hz);
 #else
 	control_timer.pause();
@@ -592,9 +593,9 @@ void startMozzi(int control_rate_hz)
 
 
 void stopMozzi(){
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
 	timer1.end();
-#elif defined (__arm__)
+#elif IS_STM32()
         audio_update_timer.pause();
         control_timer.pause();
 #else
@@ -642,7 +643,7 @@ void stopMozzi(){
 /*
 void unPauseMozzi()
 {
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
   timer1.begin(teensyAudioOutput, 1000000UL/AUDIO_RATE); 
 #else
 

@@ -1,5 +1,7 @@
 #include "mozzi_rand.h"
 
+#include "hardware_defines.h"
+
 // moved these out of xorshift96() so xorshift96() can be reseeded manually
 static unsigned long x=132456789, y=362436069, z=521288629;
 // static unsigned long x= analogRead(A0)+123456789;
@@ -104,7 +106,7 @@ So far, gizduino's __AVR_ATmega644P__ chip doesn't like it, so we use (long)anal
 @todo add Teensy 3 code
 */
 void randSeed() {
-#if defined(__AVR__)
+#if IS_AVR()
 	ADCSRA &= ~ (1 << ADIE); // adc Disable Interrupt, re-enable at end
 	// this attempt at remembering analog_reference stops it working 
 	// maybe needs a delay after changing analog reference in longRandom (Arduino reference suggests this)

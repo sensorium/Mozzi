@@ -186,9 +186,15 @@ HIFI is not available/not required on Teensy 3.1.
 #include "AudioConfigHiSpeed14bitPwm.h"
 #endif
 #elif defined (__arm__) // other STM32
-#define AUDIO_BIAS ((uint16_t) 2048)
-#define AUDIO_PWM_TIMER 1
+// The more audio bits you use, the slower the carrier frequency of the PWM signal. 10 bits yields ~ 70kHz on a 72Mhz CPU (which appears to be a reasonable compromise)
+// NOTE: HIFI-mode is not yet implemented for STM32, although that should be quite possible
+#define AUDIO_BITS 10
+#define AUDIO_BIAS ((uint16_t) 1<<(AUDIO_BITS-1))
+// Audio output pin. If you want to change this, make sure to also set AUDIO_PWM_TIMER to whichever timer is responsible for your PWM pin, and set the other timers to non-conflicting values
 #define AUDIO_CHANNEL_1_PIN PA8
+#define AUDIO_PWM_TIMER 1
+#define AUDIO_UPDATE_TIMER 3
+#define CONTROL_UPDATE_TIMER 2
 #endif
 
 // common numeric types

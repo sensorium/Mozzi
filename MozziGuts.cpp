@@ -253,7 +253,7 @@ void audioHook() // 2us excluding updateAudio()
 #if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO)
   IntervalTimer timer1;
 #elif defined(__arm__)
-  HardwareTimer audio_update_timer(3);
+  HardwareTimer audio_update_timer(AUDIO_PWM_TIMER);
   HardwareTimer audio_pwm_timer(AUDIO_PWM_TIMER);
 #endif
 
@@ -302,8 +302,15 @@ static void startAudioStandard()
 
         
 	pinMode(AUDIO_CHANNEL_1_PIN, PWM);
-	audio_pwm_timer.setPeriod(1000000UL/(AUDIO_RATE*2)); // Set carrier frequency to twice the audio rate. Three times would be better, but apparently that's more than my board can handle.
-        // TODO: find a reliable way to determine the max carrier frequency, automatically.
+	audio_pwm_timer.setPrescaleFactor(1);        // Generate as fast a carrier as possible (for today's CPU speeds)
+	audio_pwm_timer.setOverflow(1 << AUDIO_BITS);   // Allocate enough room to write all intended bits
+#define CARRIER_FREQ (F_CPU/(1<<AUDIO_BITS))
+#if CARRIER_FREQ < AUDIO_RATE
+#error Configured audio resolution is definitely too high at the configured audio rate (and the given CPU speed)
+#elif CARRIER_FREQ < (AUDIO_RATE * 3)
+#warning Configured audio resolution may be higher than optimal at the configured audio rate (and the given CPU speed)
+#endif
+
 #endif
 	//backupMozziTimer1(); // // not for arm
 }
@@ -536,7 +543,7 @@ that). */
 #if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
 IntervalTimer timer0;
 #elif defined(__arm__)
-HardwareTimer control_timer(2);
+HardwareTimer control_timer(CONTROL_UPDATE_TIMER);
 #endif
 
 

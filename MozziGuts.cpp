@@ -268,7 +268,7 @@ static void teensyAudioOutput()
 
 	analogWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
 }
-#elif IS_STM32
+#elif IS_STM32()
 static void pwmAudioOutput()
 {
 #if (USE_AUDIO_INPUT==true)

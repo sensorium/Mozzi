@@ -27,8 +27,11 @@
 #include "TimerOne.h"
 #include "FrequencyTimer2.h"
 #elif IS_TEENSY3()
+// required from http://github.com/pedvide/ADC for Teensy 3.1
+#include <ADC.h>
 #include "IntervalTimer.h"
 #elif IS_STM32()
+#include <STM32ADC.h>
 #include "HardwareTimer.h"
 #endif
 
@@ -37,11 +40,12 @@
 #warning "Mozzi has been tested with a cpu clock speed of 16MHz on Arduino and 48MHz on Teensy 3!  Results may vary with other speeds."
 #endif
 
-
-// this seems to get included before mozzi_analog.cpp
 #if IS_TEENSY3()
 	ADC *adc; // adc object
 	uint8_t teensy_pin;
+#elif IS_STM32()
+	STM32ADC adc(ADC1);
+	uint8_t stm32_current_adc_pin;
 #endif
 
 /*
@@ -152,6 +156,10 @@ static void startFirstAudioADC()
 {
 #if IS_TEENSY3()
 	adc->startSingleRead(AUDIO_INPUT_PIN); // ADC lib converts pin/channel in startSingleRead
+#elif IS_STM32()
+	uint8_t dummy = AUDIO_INPUT_PIN;
+	adc.setPins(&dummy, 1);
+	adc.startConversion();
 #else
 	adcStartConversion(adcPinToChannelNum(AUDIO_INPUT_PIN));
 #endif
@@ -168,6 +176,10 @@ static void startSecondAudioADC()
 {
 #if IS_TEENSY3()
 	adc->startSingleRead(AUDIO_INPUT_PIN);
+#elif IS_STM32()
+	uint8_t dummy = AUDIO_INPUT_PIN;
+	adc.setPins(&dummy, 1);
+	adc.startConversion();
 #else
 	ADCSRA |= (1 << ADSC); // start a second conversion on the current channel
 #endif
@@ -180,6 +192,8 @@ static void receiveSecondAudioADC()
 	if (!input_buffer.isFull()) 
 #if IS_TEENSY3()
 		input_buffer.write(adc->readSingle());
+#elif IS_STM32()
+	input_buffer.write(adc.getData());
 #else
 		input_buffer.write(ADC);
 #endif
@@ -187,7 +201,9 @@ static void receiveSecondAudioADC()
 
 
 #if IS_TEENSY3()
-void adc0_isr(void) 
+void adc0_isr(void)
+#elif IS_STM32()
+void stm32_adc_eoc_handler()
 #else
 ISR(ADC_vect, ISR_BLOCK)
 #endif

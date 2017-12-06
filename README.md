@@ -10,13 +10,15 @@ real DAC. Should probably run on any other board supported by [STM32duino](https
 
 - Audio output is to pin PA8
 - You will have to add the header file "util/atomic.h" to your Arduino_STM32/STM32F1/cores/maple/util, manually. Get it [here](http://www.stm32duino.com/viewtopic.php?f=3&t=258&start=10#p1901)
-- If you want to use MIDI, be sure to replace "MIDI_CREATE_DEFAULT_INSTANCE()" with "MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, MIDI)"
-- AUDIO_INPUT is not implemented at all, yet
-- mozzi_analogRead simply redirects to analogRead(), ATM (and is not even tested)
-- Hardware #ifdefs are still pretty messy (but they already were before I started)
+- You will have to apply a patch to STM32F1/libraries/STM32ADC/src/STM32ADC.h - See http://www.stm32duino.com/viewtopic.php?f=14&t=2207&p=38131#p38131
+- If you want to use MIDI, be sure to replace "MIDI_CREATE_DEFAULT_INSTANCE()" with "MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, MIDI)" (or Serial2)
+- Hardware #ifdefs are still pretty messy (but better than before I started, IMO)
 - Not cross-tested to verify that I did not break anything on the existing platforms AVR and Teensy
 - Timers 1 (PWM output), 2 (control rate), and 3 (audio rate) are used. Timers 2 and 3 could certainly be merged, but I did not bother optimizing, yet.
 - Audio resolution currently set to 10 bits, which yields 70khZ PWM frequency on a 72MHz CPU. HIFI mode (dual pin output) not yet implemented.
+- STEREO_HACK not yet implemented
+- AUDIO_INPUT is completely untested (but implemented in theory)
+- mozziAnalogRead() is implemented, but returns range 0-4095 rather than AVR's 0-1023. We might want to make this configurable, and default to the lower range
 
 # Mozzi  
 

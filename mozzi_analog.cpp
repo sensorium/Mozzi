@@ -16,15 +16,25 @@
 
 //#include "mozzi_utils.h"
 
-extern uint8_t analog_reference;
-
+#include "hardware_defines.h"
+#if IS_TEENSY3()
 // required from http://github.com/pedvide/ADC for Teensy 3.1
-// This is a hacky way to access the ADC library, otherwise ADC.h has to be included at the top of every Arduino sketch.
-/*#if IS_TEENSY3()
-#include "../ADC/ADC_Module.cpp"
-#include "../ADC/ADC.cpp"
+#include <ADC.h>
+#elif IS_STM32()
+#include <STM32ADC.h>
 #endif
-*/
+
+// defined in Mozziguts.cpp
+#if IS_TEENSY3()
+	extern ADC *adc; // adc object
+	extern uint8_t teensy_pin;
+#elif IS_STM32()
+	extern STM32ADC adc;
+	extern uint8_t stm32_current_adc_pin;
+	void stm32_adc_eoc_handler();
+#endif
+
+extern uint8_t analog_reference;
 
 void setupFastAnalogRead(int8_t speed)
 {
@@ -42,6 +52,11 @@ void setupFastAnalogRead(int8_t speed)
 		ADCSRA |= (1 << ADPS1);
 		ADCSRA &= ~(1 << ADPS0);
 	}
+#elif IS_STM32()
+	// NOTE: These picks are pretty arbitrary. Further available options are 7_5, 28_5, 55_5, 71_5 and 239_5 (i.e. 7.5 ADC cylces, etc.)
+	if (speed == FASTEST_ADC) adc.setSampleRate(ADC_SMPR_1_5);
+	else if (speed == FASTER_ADC) adc.setSampleRate(ADC_SMPR_13_5);
+        else (adc.setSampleRate(ADC_SMPR_41_5));
 #endif
 }
 
@@ -57,6 +72,10 @@ void setupMozziADC(int8_t speed) {
 #if IS_TEENSY3()
 	adc = new ADC();
 	adc->enableInterrupts(ADC_0);
+#elif IS_STM32()
+	adc.calibrate();
+	setupFastAnalogRead(speed);
+	adc.attachInterrupt(stm32_adc_eoc_handler, ADC_EOC);
 #elif IS_AVR()
 	ADCSRA |= (1 << ADIE); // adc Enable Interrupt
 	setupFastAnalogRead(speed);
@@ -151,6 +170,10 @@ void adcStartConversion(uint8_t channel) {
 #if IS_TEENSY3()
 	teensy_pin = channel; // remember for second startSingleRead
 	adc->startSingleRead(teensy_pin); // channel/pin gets converted every time in startSingleRead
+#elif IS_STM32()
+	stm32_current_adc_pin = channel;
+	adc.setPins(&stm32_current_adc_pin, 1);
+	adc.startConversion();
 #elif IS_AVR()
 	adcSetChannel(channel);
 #if defined(ADCSRA) && defined(ADCL)
@@ -170,9 +193,6 @@ jRaskell, bobgardner, theusch, Koshchi, and code by jRaskell.
 http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=789581
 */
 
-#if IS_STM32()
-#define NUM_ANALOG_INPUTS 1 // dummy
-#endif
 static volatile int analog_readings[NUM_ANALOG_INPUTS];
 static Stack <volatile int8_t,NUM_ANALOG_INPUTS> adc_channels_to_read;
 volatile static int8_t current_channel = -1; // volatile because accessed in control and adc ISRs
@@ -204,17 +224,12 @@ void adcReadSelectedChannels() {
 
 
 int mozziAnalogRead(uint8_t pin) {
-
 // ADC lib converts pin/channel in startSingleRead
 #if IS_AVR()
 	pin = adcPinToChannelNum(pin); // allow for channel or pin numbers
-#elif IS_TEENSY3()
+#endif
 	adc_channels_to_read.push(pin);
 	return analog_readings[pin];
-#else
-#warning Fast analog read not implemented on this platform
-        return analogRead (pin) >> 2; // Map from STM32's 4096 to AVR's 1024
-#endif
 }
 
 
@@ -228,6 +243,9 @@ void receiveFirstControlADC(){
 void startSecondControlADC() {
 #if IS_TEENSY3()
 	adc->startSingleRead(teensy_pin);
+#elif IS_STM32()
+	adc.setPins(&stm32_current_adc_pin, 1);
+	adc.startConversion();
 #elif IS_AVR()
 	ADCSRA |= (1 << ADSC); // start a second conversion on the current channel
 #endif
@@ -237,6 +255,8 @@ void startSecondControlADC() {
 void receiveSecondControlADC(){
 #if IS_TEENSY3()
 	analog_readings[current_channel] = adc->readSingle();
+#elif IS_STM32()
+	analog_readings[current_channel] = adc.getData();
 #elif IS_AVR()
 	analog_readings[current_channel] = ADC; // officially (ADCL | (ADCH << 8)) but the compiler works it out
 #endif
@@ -252,10 +272,11 @@ The version for USE_AUDIO_INPUT==true is in MozziGuts.cpp... compilation reasons
 #if(USE_AUDIO_INPUT==false)
 #if IS_TEENSY3()
 void adc0_isr(void)
+#elif IS_STM32()
+void stm32_adc_eoc_handler()
 #elif IS_AVR()
 ISR(ADC_vect, ISR_BLOCK)
 #endif
-#if !IS_STM32()
 {
 	if (first)
 	{
@@ -271,5 +292,4 @@ ISR(ADC_vect, ISR_BLOCK)
    	first=true;
 	}
 }
-#endif
 #endif

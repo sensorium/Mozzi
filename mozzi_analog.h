@@ -18,19 +18,6 @@
  #include "WProgram.h"
 #endif
 
-#include "hardware_defines.h"
-// required from http://github.com/pedvide/ADC for Teensy 3.1
-#if IS_TEENSY3()
-#include <ADC.h>
-#endif
-
-
-// these are declared in Mozziguts.cpp, and used in mozzi_analog.cpp... crazy but it compiles
-#if IS_TEENSY3()
-	extern ADC *adc; // adc object
-	extern uint8_t teensy_pin;
-#endif
-
 #if (USE_AUDIO_INPUT==true)
 #warning "Using AUDIO_INPUT_PIN defined in mozzi_config.h for audio input."
 #endif

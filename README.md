@@ -8,15 +8,16 @@ will hopefully be merged into the official Mozzi, once stable.
 Compiles for and runs on my STM32F103C8T6 blue pill board, with a bunch of caveats (see below), i.e. on a board _without_ a
 real DAC. Should probably run on any other board supported by [STM32duino](https://github.com/rogerclarkmelbourne/Arduino_STM32).
 
-- Audio output is to pin PA8
+- Audio output is to pin PB6, by default (HIFI-mode: PB6 and PB7)
 - You will have to add the header file "util/atomic.h" to your Arduino_STM32/STM32F1/cores/maple/util, manually. Get it [here](http://www.stm32duino.com/viewtopic.php?f=3&t=258&start=10#p1901)
 - You will have to apply a patch to STM32F1/libraries/STM32ADC/src/STM32ADC.h - See http://www.stm32duino.com/viewtopic.php?f=14&t=2207&p=38131#p38131
 - If you want to use MIDI, be sure to replace "MIDI_CREATE_DEFAULT_INSTANCE()" with "MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, MIDI)" (or Serial2)
 - Hardware #ifdefs are still pretty messy (but better than before I started, IMO)
 - Not cross-tested to verify that I did not break anything on the existing platforms AVR and Teensy
-- Timers 1 (PWM output), 2 (control rate), and 3 (audio rate) are used. Timers 2 and 3 could certainly be merged, but I did not bother optimizing, yet.
-- Audio resolution currently set to 10 bits, which yields 70khZ PWM frequency on a 72MHz CPU. HIFI mode (dual pin output) not yet implemented.
-- STEREO_HACK not yet implemented
+- Timers 4 (PWM output), 2 (control rate), and 3 (audio rate) are used. Timers 2 and 3 could certainly be merged, but I did not bother optimizing, yet.
+- Default audio resolution is currently set to 10 bits, which yields 70khZ PWM frequency on a 72MHz CPU. HIFI mode is 2*7bits at up to 560Khz (but limited to 5 times audio rate)
+- HIFI_MODE did not get much testing
+- STEREO_HACK not yet implemented (although that should not be too hard to do)
 - AUDIO_INPUT is completely untested (but implemented in theory)
 - mozziAnalogRead() is implemented, but returns range 0-4095 rather than AVR's 0-1023. We might want to make this configurable, and default to the lower range
 
@@ -89,6 +90,7 @@ x	 9  Boarduino
 x	B5  Teensy2  
 x	B5(25) Teensy2++  
 ..13	Sanguino  
+x       PB6  STM32duino (tested: STM32F103C8T6 "blue pill")
 
 For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).  
 

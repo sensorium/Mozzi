@@ -264,7 +264,7 @@ void audioHook() // 2us excluding updateAudio()
 
 
 //-----------------------------------------------------------------------------------------------------------------
-#if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS)
+#if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS) || IS_STM32()
 
 #if IS_TEENSY3()
   IntervalTimer timer1;
@@ -288,12 +288,17 @@ static void teensyAudioOutput()
 static void pwmAudioOutput()
 {
 #if (USE_AUDIO_INPUT==true)
-#error TODO implement me
 	adc_count = 0;
 	startSecondAudioADC();
 #endif
 
-        pwmWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
+#if (AUDIO_MODE == HIFI)
+	int out = output_buffer.read();
+	pwmWrite(AUDIO_CHANNEL_1_PIN, out & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
+	pwmWrite(AUDIO_CHANNEL_1_PIN_HIGH, out >> AUDIO_BITS_PER_CHANNEL);
+#else
+	pwmWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
+#endif
 }
 #endif
 
@@ -318,14 +323,25 @@ static void startAudioStandard()
 	audio_update_timer.resume();
         
 	pinMode(AUDIO_CHANNEL_1_PIN, PWM);
-	audio_pwm_timer.setPrescaleFactor(1);        // Generate as fast a carrier as possible (for today's CPU speeds)
-	audio_pwm_timer.setOverflow(1 << AUDIO_BITS);   // Allocate enough room to write all intended bits
-#define CARRIER_FREQ (F_CPU/(1<<AUDIO_BITS))
-#if CARRIER_FREQ < AUDIO_RATE
+#if (AUDIO_MODE == HIFI)
+	pinMode(AUDIO_CHANNEL_1_PIN_HIGH, PWM);
+#endif
+
+#define MAX_CARRIER_FREQ (F_CPU/(1<<AUDIO_BITS_PER_CHANNEL))
+#if MAX_CARRIER_FREQ < AUDIO_RATE
 #error Configured audio resolution is definitely too high at the configured audio rate (and the given CPU speed)
-#elif CARRIER_FREQ < (AUDIO_RATE * 3)
+#elif MAX_CARRIER_FREQ < (AUDIO_RATE * 3)
 #warning Configured audio resolution may be higher than optimal at the configured audio rate (and the given CPU speed)
 #endif
+
+#if MAX_CARRIER_FREQ < (AUDIO_RATE * 5)
+	// Generate as fast a carrier as possible
+	audio_pwm_timer.setPrescaleFactor(1);
+#else
+	// No point in generating arbitrarily high carrier frequencies. In fact, if there _is_ any headroom, give the PWM pin more time to swing from HIGH to LOW and BACK, cleanly
+	audio_pwm_timer.setPrescaleFactor((int) MAX_CARRIER_FREQ / (AUDIO_RATE * 5));
+#endif
+	audio_pwm_timer.setOverflow(1 << AUDIO_BITS_PER_CHANNEL);   // Allocate enough room to write all intended bits
 
 #endif
 	//backupMozziTimer1(); // // not for arm
@@ -418,7 +434,7 @@ AUDIO_CHANNEL_2_OUTPUT_REGISTER = 0;
 // end STANDARD
 
 //-----------------------------------------------------------------------------------------------------------------
-#elif (AUDIO_MODE == HIFI)
+#elif IS_AVR() && (AUDIO_MODE == HIFI)
 
 static void startAudioHiFi()
 {
@@ -598,7 +614,7 @@ void startMozzi(int control_rate_hz)
 	setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST in setup() if desired (not for Teensy 3.1)
 	// delay(200); // so AutoRange doesn't read 0 to start with
 	startControl(control_rate_hz);
-#if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS)
+#if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS) || IS_STM32()  // Sorry, this is really hacky. But on STM32 regular and HIF audio modes are so similar to set up, that we do it all in one function.
 	startAudioStandard();
 #elif (AUDIO_MODE == HIFI)
 	startAudioHiFi();

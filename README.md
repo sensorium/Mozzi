@@ -1,24 +1,8 @@
 # This fork of Mozzi adds support for STM32duino boards
 
 For the official and stable Mozzi synth, refer to https://github.com/sensorium/Mozzi . This is just a workplace copy that
-will hopefully be merged into the official Mozzi, once stable.
-
-## Status and Caveats
-
-Compiles for and runs on my STM32F103C8T6 blue pill board, with a bunch of caveats (see below), i.e. on a board _without_ a
-real DAC. Should probably run on any other board supported by [STM32duino](https://github.com/rogerclarkmelbourne/Arduino_STM32).
-
-- Audio output is to pin PB6, by default (HIFI-mode: PB6 and PB7)
-- You will have to add the header file "util/atomic.h" to your Arduino_STM32/STM32F1/cores/maple/util, manually. Get it [here](http://www.stm32duino.com/viewtopic.php?f=3&t=258&start=10#p1901)
-- You will have to apply a patch to STM32F1/libraries/STM32ADC/src/STM32ADC.h - See http://www.stm32duino.com/viewtopic.php?f=14&t=2207&p=38131#p38131
-- If you want to use MIDI, be sure to replace "MIDI_CREATE_DEFAULT_INSTANCE()" with "MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, MIDI)" (or Serial2)
-- Not cross-tested to verify that I did not break anything on the existing platforms AVR and Teensy
-- Timers 4 (PWM output), 2 (control rate), and 3 (audio rate) are used. Timers 2 and 3 could certainly be merged, but I did not bother optimizing, yet.
-- Default audio resolution is currently set to 10 bits, which yields 70khZ PWM frequency on a 72MHz CPU. HIFI mode is 2*7bits at up to 560Khz (but limited to 5 times audio rate)
-- HIFI_MODE did not get much testing
-- STEREO_HACK not yet implemented (although that should not be too hard to do)
-- AUDIO_INPUT is completely untested (but implemented in theory)
-- Note that AUDIO_INPUT and mozziAnalogRead() return values in the STM32's full ADC resolution of 0-4095 rather than AVR's 0-1023.
+will hopefully be merged into the official Mozzi, once stable. See section "Hardware specific notes", for info on status
+and details of the STM32 port.
 
 # Mozzi  
 
@@ -89,7 +73,7 @@ x	 9  Boarduino
 x	B5  Teensy2  
 x	B5(25) Teensy2++  
 ..13	Sanguino  
-x       PB6  STM32duino (tested: STM32F103C8T6 "blue pill")
+x       PB6  STM32duino (see "Hardware specific notes", below)
 
 For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).  
 
@@ -194,3 +178,38 @@ and fixed point version of the filter on [dave's blog of art and programming] (h
 State Variable filter pseudocode at [musicdsp.org] (http://www.musicdsp.org/showone.php?id=23 and http://www.musicdsp.org/showone.php?id=142)  
 Various examples from [Pure Data](http://puredata.info/) by Miller Puckette  
 [Practical synthesis tutorials](http://www.obiwannabe.co.uk/) by Andy Farnell  
+
+
+## Hardware specific notes
+
+### STM32(duino)
+
+Compiles for and runs on my STM32F103C8T6 blue pill board, with a bunch of caveats (see below), i.e. on a board _without_ a
+real DAC. Should probably run on any other board supported by [STM32duino](https://github.com/rogerclarkmelbourne/Arduino_STM32).
+
+- You will need a very recent (12/2017) checkout of the Arduino_STM32 repository, otherwise compilation will fail.
+- Audio output is to pin PB6, by default (HIFI-mode: PB6 and PB7)
+- If you want to use MIDI, be sure to replace "MIDI_CREATE_DEFAULT_INSTANCE()" with "MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, MIDI)" (or Serial2)
+- Timers 4 (PWM output), 2 (control rate), and 3 (audio rate) are used. Timers 2 and 3 could certainly be merged, but I did not bother optimizing, yet.
+- Default audio resolution is currently set to 10 bits, which yields 70khZ PWM frequency on a 72MHz CPU. HIFI mode is 2*7bits at up to 560Khz (but limited to 5 times audio rate)
+- HIFI_MODE did not get much testing
+- STEREO_HACK not yet implemented (although that should not be too hard to do)
+- AUDIO_INPUT is completely untested (but implemented in theory)
+- Note that AUDIO_INPUT and mozziAnalogRead() return values in the STM32's full ADC resolution of 0-4095 rather than AVR's 0-1023.
+- twi_nonblock is not ported
+
+### Teensy 3.0/3.1
+
+Extra libraries required for use withTeensy 3.0/3.1:
+
+- [Timer library](https://github.com/loglow/IntervalTimer) for Teensy 3.0 by Daniel Gilbert
+- [ADC library](http://github.com/pedvide/ADC) by Pedro Villanueva
+
+Some of the differences for Teensy 3.0/3.1 which will affect users include:
+
+- Audio output is on pin A14/DAC, in STANDARD or STANDARD_PLUS audio modes, These modes are identical on Teensy 3.0/3.1, as the output is via DAC rather than PWM.
+- Output is 12 bits in STANDARD and STANDARD_PLUS modes, up from nearly 9 bits for Atmel based boards. HIFI audio, which works by summing two output pins, is not available on Teensy 3.0/3.1.
+- #include <ADC.h> is required at the top of every Teensy 3.0/3.1 sketch.
+- The examples come with this commented out, for Arduino compatibility.
+- Serial baud rate for monitoring in the IDE needs to be set to 9600 to work with Teensy 3.0/3.1. This slow rate can cause audio glitches.
+- twi_nonblock code by Marije Baalman for non-blocking I2C is not compatible with Teensy 3.0/3.1.

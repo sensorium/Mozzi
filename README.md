@@ -188,7 +188,7 @@ Compiles for and runs on my STM32F103C8T6 blue pill board, with a bunch of cavea
 real DAC. Should probably run on any other board supported by [STM32duino](https://github.com/rogerclarkmelbourne/Arduino_STM32).
 
 - You will need a very recent (12/2017) checkout of the Arduino_STM32 repository, otherwise compilation will fail.
-- Audio output is to pin PB6, by default (HIFI-mode: PB6 and PB7)
+- Audio output is to pin PB6, by default (HIFI-mode: PB8 and PB9)
 - If you want to use MIDI, be sure to replace "MIDI_CREATE_DEFAULT_INSTANCE()" with "MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, MIDI)" (or Serial2)
 - Timers 4 (PWM output), 2 (control rate), and 3 (audio rate) are used. Timers 2 and 3 could certainly be merged, but I did not bother optimizing, yet.
 - Default audio resolution is currently set to 10 bits, which yields 70khZ PWM frequency on a 72MHz CPU. HIFI mode is 2*7bits at up to 560Khz (but limited to 5 times audio rate)

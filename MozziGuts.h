@@ -33,7 +33,7 @@ to become impractical is around 1024. 64, 128, 256 and sometimes 512 are all
 usable values. Try to keep it as low as you can, for efficiency, though higher
 rates can sometimes give smoother results, avoiding the need to interpolate
 sensitive variables at audio rate in updateAudio(). CONTROL_RATE has a default
-of 64 Hz, but it can be changed at the top of your sketch, after the \#includes,
+of 64 Hz, but it can be changed at the top of your sketch, (before the \#includes),
 for example: \#define CONTROL_RATE 256
 */
 #define CONTROL_RATE 64

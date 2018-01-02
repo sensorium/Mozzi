@@ -24,6 +24,7 @@
 
 #include "mozzi_analog.h"
 
+#if not defined (CONTROL_RATE)
 /** @ingroup core
 Control rate setting.
 Mozzi's CONTROL_RATE sets how many times per second updateControl() is called.
@@ -36,6 +37,7 @@ of 64 Hz, but it can be changed at the top of your sketch, after the \#includes,
 for example: \#define CONTROL_RATE 256
 */
 #define CONTROL_RATE 64
+#endif
 
 
 
@@ -147,16 +149,6 @@ HIFI is not available/not required on Teensy 3.1.
 
 
 #include "mozzi_config.h" // User can change the config file to set audio mode
-
-
-// Print warning/reminder about the AUDIO_MODE setting to the arduino console while compiling
-#if AUDIO_MODE == STANDARD
-#warning "AUDIO_MODE is set to STANDARD in mozzi_config.h.  If things sound wrong, check if STANDARD is the correct AUDIO_MODE for your sketch."
-#elif AUDIO_MODE == STANDARD_PLUS
-#warning "AUDIO_MODE is set to STANDARD_PLUS in mozzi_config.h.  If things sound wrong, check if STANDARD_PLUS is the correct AUDIO_MODE for your sketch."
-#elif AUDIO_MODE == HIFI
-#warning "AUDIO_MODE is set to HIFI in mozzi_config.h.  If things sound wrong, check if HIFI is the correct AUDIO_MODE for your sketch."
-#endif
 
 #if (AUDIO_MODE == STANDARD) && (AUDIO_RATE == 32768)
 #error AUDIO_RATE 32768 does not work when AUDIO_MODE is STANDARD, try setting the AUDIO_MODE to STANDARD_PLUS in Mozzi/mozzi_config.h

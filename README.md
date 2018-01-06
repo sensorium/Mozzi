@@ -1,9 +1,3 @@
-# This fork of Mozzi adds support for STM32duino boards
-
-For the official and stable Mozzi synth, refer to https://github.com/sensorium/Mozzi . This is just a workplace copy that
-will hopefully be merged into the official Mozzi, once stable. See section "Hardware specific notes", for info on status
-and details of the STM32 port.
-
 # Mozzi  
 
 ### sound synthesis library for Arduino  

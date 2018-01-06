@@ -18,23 +18,9 @@
  #include "WProgram.h"
 #endif
 
-// required from http://github.com/pedvide/ADC for Teensy 3.1
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO)
-#include <ADC.h>
-#endif
-
-
-// these are declared in Mozziguts.cpp, and used in mozzi_analog.cpp... crazy but it compiles
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
-	extern ADC *adc; // adc object
-	extern uint8_t teensy_pin;
-#endif
-
 #if (USE_AUDIO_INPUT==true)
 #warning "Using AUDIO_INPUT_PIN defined in mozzi_config.h for audio input."
 #endif
-
-
 
 void adcReadSelectedChannels();
 //void receiveFirstControlADC();
@@ -183,7 +169,8 @@ It actually returns the most recent analog reading and puts the chosen pin or ch
 on the stack of channels to be read in the background before the next control
 interrupt.
 @param pin_or_channel the analog pin or channel number.
-@return the digitised value of the voltage on the chosen channel, in the range 0-1023.
+@return the digitised value of the voltage on the chosen channel, in the range 0-1023. @Note that non-AVR
+hardware may return a different range, e.g. 0-4095 on STM32 boards.
 */
 int mozziAnalogRead(uint8_t pin);
 

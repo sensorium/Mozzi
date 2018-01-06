@@ -1,5 +1,12 @@
 #include "mozzi_rand.h"
 
+#include "hardware_defines.h"
+
+#if IS_STM32()
+#include <STM32ADC.h>
+extern STM32ADC adc;
+#endif
+
 // moved these out of xorshift96() so xorshift96() can be reseeded manually
 static unsigned long x=132456789, y=362436069, z=521288629;
 // static unsigned long x= analogRead(A0)+123456789;
@@ -100,12 +107,13 @@ by Rob Tillaart.
 @note It's not perfect, as discussed in the forum thread.
 It might only work with some processors: (from the thread)
 "...ATmega328P in DIP, possibly others but the duemilanove and uno will do it at least."
-So far, gizduino's __AVR_ATmega644P__ chip doesn't like it, so we use (long)analogRead(0)*analogRead(1) for that instead. 
+So far, gizduino's __AVR_ATmega644P__ chip doesn't like it, so we use (long)analogRead(0)*analogRead(1) for that instead.
+It works to some degree on STM32 chips, but the produced seed is not very random at all. Again, using an appropriate
+analogRead() (preferably on one or two floating input pins) is much more effective.
 @todo add Teensy 3 code
 */
 void randSeed() {
-	#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
-#else
+#if IS_AVR()
 	ADCSRA &= ~ (1 << ADIE); // adc Disable Interrupt, re-enable at end
 	// this attempt at remembering analog_reference stops it working 
 	// maybe needs a delay after changing analog reference in longRandom (Arduino reference suggests this)
@@ -116,7 +124,22 @@ void randSeed() {
 	z=longRandom();
 	//analogReference(analog_reference_orig); // change back to original
 	ADCSRA |= (1 << ADIE); // adc re-Enable Interrupt
-	#endif
+#elif IS_STM32()
+	// Unfortunately the internal temp sensor on STM32s does _not_ appear to create a lot of noise.
+	// Ironically, the calls to calibrate help induce some random noise. You're still fairly likely to produce two equal
+	// random seeds in two subsequent runs, however.
+	adc.enableInternalReading();
+	float dummy = adc.readTemp();
+	x=*(reinterpret_cast<long*>(&dummy));
+	adc.calibrate();
+	dummy = adc.readTemp();
+	y=*(reinterpret_cast<long*>(&dummy));
+	adc.calibrate();
+	dummy = adc.readTemp();
+	z=*(reinterpret_cast<long*>(&dummy));
+#else
+#warning Automatic random seeding not implemented on this platform
+#endif
 }
 
 

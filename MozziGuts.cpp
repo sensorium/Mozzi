@@ -22,12 +22,17 @@
 #include "CircularBuffer.h"
 //#include "mozzi_utils.h"
 
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO)  // teensy 3, 3.1
-#include "IntervalTimer.h"
-#else
+#if IS_AVR()
 #include "TimerZero.h"
 #include "TimerOne.h"
 #include "FrequencyTimer2.h"
+#elif IS_TEENSY3()
+// required from http://github.com/pedvide/ADC for Teensy 3.1
+#include <ADC.h>
+#include "IntervalTimer.h"
+#elif IS_STM32()
+#include <STM32ADC.h>
+#include "HardwareTimer.h"
 #endif
 
 
@@ -35,11 +40,12 @@
 #warning "Mozzi has been tested with a cpu clock speed of 16MHz on Arduino and 48MHz on Teensy 3!  Results may vary with other speeds."
 #endif
 
-
-// this seems to get included before mozzi_analog.cpp
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
 	ADC *adc; // adc object
 	uint8_t teensy_pin;
+#elif IS_STM32()
+	STM32ADC adc(ADC1);
+	uint8_t stm32_current_adc_pin;
 #endif
 
 /*
@@ -73,9 +79,7 @@ CircularBuffer <unsigned int> output_buffer2; // fixed size 256
 #endif
 //-----------------------------------------------------------------------------------------------------------------
 
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
-// not storing backups, just turning timer on and off for pause
-#else
+#if IS_AVR() // not storing backups, just turning timer on and off for pause for teensy 3, 3.1, other ARMs
 
 // to store backups of timer registers so Mozzi can be stopped and pre_mozzi timer values can be restored
 static uint8_t pre_mozzi_TCCR0A, pre_mozzi_TCCR0B, pre_mozzi_OCR0A, pre_mozzi_TIMSK0;
@@ -150,8 +154,12 @@ int getAudioInput()
 
 static void startFirstAudioADC()
 {
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
 	adc->startSingleRead(AUDIO_INPUT_PIN); // ADC lib converts pin/channel in startSingleRead
+#elif IS_STM32()
+	uint8_t dummy = AUDIO_INPUT_PIN;
+	adc.setPins(&dummy, 1);
+	adc.startConversion();
 #else
 	adcStartConversion(adcPinToChannelNum(AUDIO_INPUT_PIN));
 #endif
@@ -166,8 +174,12 @@ static void receiveFirstAudioADC()
 
 static void startSecondAudioADC()
 {
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
 	adc->startSingleRead(AUDIO_INPUT_PIN);
+#elif IS_STM32()
+	uint8_t dummy = AUDIO_INPUT_PIN;
+	adc.setPins(&dummy, 1);
+	adc.startConversion();
 #else
 	ADCSRA |= (1 << ADSC); // start a second conversion on the current channel
 #endif
@@ -178,16 +190,20 @@ static void startSecondAudioADC()
 static void receiveSecondAudioADC()
 {
 	if (!input_buffer.isFull()) 
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
 		input_buffer.write(adc->readSingle());
+#elif IS_STM32()
+	input_buffer.write(adc.getData());
 #else
 		input_buffer.write(ADC);
 #endif
 }
 
 
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
-void adc0_isr(void) 
+#if IS_TEENSY3()
+void adc0_isr(void)
+#elif IS_STM32()
+void stm32_adc_eoc_handler()
 #else
 ISR(ADC_vect, ISR_BLOCK)
 #endif
@@ -248,14 +264,16 @@ void audioHook() // 2us excluding updateAudio()
 
 
 //-----------------------------------------------------------------------------------------------------------------
-#if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS)
+#if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS) || IS_STM32()
 
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
-//teensy 3 architecture
-
+#if IS_TEENSY3()
   IntervalTimer timer1;
+#elif IS_STM32()
+  HardwareTimer audio_update_timer(AUDIO_UPDATE_TIMER);
+  HardwareTimer audio_pwm_timer(AUDIO_PWM_TIMER);
+#endif
 
-
+#if IS_TEENSY3()
 static void teensyAudioOutput()
 {
 	
@@ -266,18 +284,67 @@ static void teensyAudioOutput()
 
 	analogWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
 }
+#elif IS_STM32()
+static void pwmAudioOutput()
+{
+#if (USE_AUDIO_INPUT==true)
+	adc_count = 0;
+	startSecondAudioADC();
+#endif
 
+#if (AUDIO_MODE == HIFI)
+	int out = output_buffer.read();
+	pwmWrite(AUDIO_CHANNEL_1_PIN, out & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
+	pwmWrite(AUDIO_CHANNEL_1_PIN_HIGH, out >> AUDIO_BITS_PER_CHANNEL);
+#else
+	pwmWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
+#endif
+}
+#endif
 
+#if !IS_AVR()
 static void startAudioStandard()
 {
-	//backupPreMozziTimer1(); // not for Teensy 3.1
+	//backupPreMozziTimer1(); // not for arm
 	
-	analogWriteResolution(12);
+#if IS_TEENSY3()
 	adc->setAveraging(0);
 	adc->setConversionSpeed(ADC_CONVERSION_SPEED::MED_SPEED); // could be HIGH_SPEED, noisier
-	timer1.begin(teensyAudioOutput, 1000000UL/AUDIO_RATE); 
 
-	//backupMozziTimer1(); // // not for Teensy 3.1
+	analogWriteResolution(12);
+	timer1.begin(teensyAudioOutput, 1000000UL/AUDIO_RATE); 
+#elif IS_STM32()
+        audio_update_timer.pause();
+	audio_update_timer.setPeriod(1000000UL/AUDIO_RATE);
+	audio_update_timer.setChannel1Mode(TIMER_OUTPUT_COMPARE);
+	audio_update_timer.setCompare(TIMER_CH1, 1);  // Interrupt 1 count after each update
+	audio_update_timer.attachCompare1Interrupt(pwmAudioOutput);
+	audio_update_timer.refresh();
+	audio_update_timer.resume();
+        
+	pinMode(AUDIO_CHANNEL_1_PIN, PWM);
+#if (AUDIO_MODE == HIFI)
+	pinMode(AUDIO_CHANNEL_1_PIN_HIGH, PWM);
+#endif
+
+#define MAX_CARRIER_FREQ (F_CPU/(1<<AUDIO_BITS_PER_CHANNEL))
+#if MAX_CARRIER_FREQ < AUDIO_RATE
+#error Configured audio resolution is definitely too high at the configured audio rate (and the given CPU speed)
+#elif MAX_CARRIER_FREQ < (AUDIO_RATE * 3)
+#warning Configured audio resolution may be higher than optimal at the configured audio rate (and the given CPU speed)
+#endif
+
+#if MAX_CARRIER_FREQ < (AUDIO_RATE * 5)
+	// Generate as fast a carrier as possible
+	audio_pwm_timer.setPrescaleFactor(1);
+#else
+	// No point in generating arbitrarily high carrier frequencies. In fact, if there _is_ any headroom, give the PWM pin more time to swing from HIGH to LOW and BACK, cleanly
+	audio_pwm_timer.setPrescaleFactor((int) MAX_CARRIER_FREQ / (AUDIO_RATE * 5));
+#endif
+	audio_pwm_timer.setOverflow(1 << AUDIO_BITS_PER_CHANNEL);   // Allocate enough room to write all intended bits
+
+#endif
+	//backupMozziTimer1(); // // not for arm
 }
 	
 #else
@@ -367,7 +434,7 @@ AUDIO_CHANNEL_2_OUTPUT_REGISTER = 0;
 // end STANDARD
 
 //-----------------------------------------------------------------------------------------------------------------
-#elif (AUDIO_MODE == HIFI)
+#elif IS_AVR() && (AUDIO_MODE == HIFI)
 
 static void startAudioHiFi()
 {
@@ -505,16 +572,16 @@ options Using Timer0 for control disables Arduino's time functions but also
 saves on the interrupts and blocking action of those functions. May add a config
 option for Using Timer2 instead if needed. (MozziTimer2 can be re-introduced for
 that). */
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
 IntervalTimer timer0;
+#elif IS_STM32()
+HardwareTimer control_timer(CONTROL_UPDATE_TIMER);
 #endif
 
 
 static void startControl(unsigned int control_rate_hz)
 {
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
-	timer0.begin(updateControlWithAutoADC, 1000000/control_rate_hz);
-#else
+#if IS_AVR()
 	// backup pre-mozzi register values
 	pre_mozzi_TCCR0A = TCCR0A;
 	pre_mozzi_TCCR0B = TCCR0B;
@@ -529,16 +596,25 @@ static void startControl(unsigned int control_rate_hz)
 	mozzi_TCCR0B = TCCR0B;
 	mozzi_OCR0A = OCR0A;
 	mozzi_TIMSK0 = TIMSK0;
+#elif IS_TEENSY3()
+	timer0.begin(updateControlWithAutoADC, 1000000/control_rate_hz);
+#else
+	control_timer.pause();
+	control_timer.setPeriod(1000000/control_rate_hz);
+	control_timer.setChannel1Mode(TIMER_OUTPUT_COMPARE);
+	control_timer.setCompare(TIMER_CH1, 1);
+	control_timer.attachCompare1Interrupt(updateControlWithAutoADC);
+	control_timer.refresh();
+	control_timer.resume();
 #endif
 }
-
 
 void startMozzi(int control_rate_hz)
 {
 	setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST in setup() if desired (not for Teensy 3.1)
 	// delay(200); // so AutoRange doesn't read 0 to start with
 	startControl(control_rate_hz);
-#if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS)
+#if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS) || IS_STM32()  // Sorry, this is really hacky. But on STM32 regular and HIFI audio modes are so similar to set up, that we do it all in one function.
 	startAudioStandard();
 #elif (AUDIO_MODE == HIFI)
 	startAudioHiFi();
@@ -548,8 +624,11 @@ void startMozzi(int control_rate_hz)
 
 
 void stopMozzi(){
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
 	timer1.end();
+#elif IS_STM32()
+        audio_update_timer.pause();
+        control_timer.pause();
 #else
 
     noInterrupts();
@@ -595,7 +674,7 @@ void stopMozzi(){
 /*
 void unPauseMozzi()
 {
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(TEENSYDUINO) // teensy 3, 3.1
+#if IS_TEENSY3()
   timer1.begin(teensyAudioOutput, 1000000UL/AUDIO_RATE); 
 #else
 

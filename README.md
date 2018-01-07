@@ -3,8 +3,7 @@
 ### sound synthesis library for Arduino  
 
 
-Tim Barrass  
-version 2016-12-11-17:03  
+Tim Barrass   
 
 Currently your Arduino can only beep like a microwave oven. Mozzi brings
 your Arduino to life by allowing it to produce much more complex and interesting
@@ -128,10 +127,9 @@ If you still need more speed, Arduino 1.0.5 produces slightly faster code.
 * While Mozzi is running, the Arduino time functions `millis()`, `micros()`, `delay()`, and
 `delayMicroseconds()` are disabled.  
 
-Mozzi provides `EventDelay()` for scheduling instead of `delay`, and `mozziMicros()` for timing, with 61us resolution (in `STANDARD` mode).  
+Mozzi provides `EventDelay()` for scheduling instead of `delay`, and `mozziMicros()` for timing, with 61us resolution (in `STANDARD` or `STANDARD_PLUS` modes).  
 
-* Mozzi interferes with `analogWrite()`.  In `STANDARD` audio mode, Mozzi takes over Timer0 (pins 5 and 6) and 
-Timer1 (pins 9 and 10), but you can use the Timer2 pins, 3 and 11 (your board may differ).  In `HIFI` mode, 
+* Mozzi interferes with `analogWrite()`.  In `STANDARD` and `STANDARD_PLUS` audio modes, Mozzi takes over Timer0 (pins 5 and 6) and Timer1 (pins 9 and 10), but you can use the Timer2 pins, 3 and 11 (your board may differ).  In `HIFI` mode, 
 Mozzi uses Timer0, Timer1 (or Timer4 on some boards), and Timer2, so pins 3 and 11 are also out.  
 
 If you need PWM output (`analogWrite()`), you can do it on any digital pins using the technique in 
@@ -140,8 +138,8 @@ Mozzi>examples>11.Communication>Sinewave_PWM_pins_HIFI.
 * `analogRead()` is replaced by `mozziAnalogRead()`, which works in the background instead of blocking the processor.  
 
 #### Last Resort
-The timers can be made available with `pauseMozzi()`, which suspends audio and 
-control interrupts until you call `unpauseMozzi()`.  
+The timers can be made available with `stopMozzi()`, which stops audio and 
+control interrupts, until you call `startMozzi()`.  
 
 ***
 
@@ -176,9 +174,10 @@ Various examples from [Pure Data](http://puredata.info/) by Miller Puckette
 
 ## Hardware specific notes
 
-### STM32(duino)
+### STM32(duino) 
+port by Thomas Friedrichsmeier
 
-Compiles for and runs on my STM32F103C8T6 blue pill board, with a bunch of caveats (see below), i.e. on a board _without_ a
+Compiles for and runs on a STM32F103C8T6 blue pill board, with a bunch of caveats (see below), i.e. on a board _without_ a
 real DAC. Should probably run on any other board supported by [STM32duino](https://github.com/rogerclarkmelbourne/Arduino_STM32).
 
 - You will need a very recent (12/2017) checkout of the Arduino_STM32 repository, otherwise compilation will fail.

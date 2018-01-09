@@ -73,9 +73,9 @@ PWM frequency tests
 
 //-----------------------------------------------------------------------------------------------------------------
 // ring buffer for audio output
-CircularBuffer <unsigned int> output_buffer; // fixed size 256
+CircularBuffer <uint16_t> output_buffer; // fixed size 256
 #if (STEREO_HACK == true)
-CircularBuffer <unsigned int> output_buffer2; // fixed size 256
+CircularBuffer <uint16_t> output_buffer2; // fixed size 256
 #endif
 //-----------------------------------------------------------------------------------------------------------------
 
@@ -251,10 +251,10 @@ void audioHook() // 2us excluding updateAudio()
 	if (!output_buffer.isFull()) {
 		#if (STEREO_HACK == true)
 		updateAudio(); // in hacked version, this returns void
-		output_buffer.write((unsigned int) (audio_out_1 + AUDIO_BIAS));
-		output_buffer2.write((unsigned int) (audio_out_2 + AUDIO_BIAS));
+		output_buffer.write((uint16_t) (audio_out_1 + AUDIO_BIAS));
+		output_buffer2.write((uint16_t) (audio_out_2 + AUDIO_BIAS));
 		#else
-		output_buffer.write((unsigned int) (updateAudio() + AUDIO_BIAS));
+		output_buffer.write((uint16_t) (updateAudio() + AUDIO_BIAS));
 		#endif
 
 	}

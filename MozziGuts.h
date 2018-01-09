@@ -264,10 +264,10 @@ calculations here which could be done in setup() or updateControl().
 In HIFI mode, it's a 14 bit number between -16384 and 16383 inclusive.
 */
 #if (STEREO_HACK == true)
-extern int audio_out_1, audio_out_2;
+extern int16_t audio_out_1, audio_out_2;
 void updateAudio();
 #else
-int updateAudio();
+int16_t updateAudio();
 #endif
 
 /** @ingroup core
@@ -312,7 +312,7 @@ http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS
 @return audio data from the input buffer
 */
 #if (USE_AUDIO_INPUT == true)
-int getAudioInput();
+int16_t getAudioInput();
 #endif
 
 

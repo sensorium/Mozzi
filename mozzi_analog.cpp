@@ -193,7 +193,7 @@ jRaskell, bobgardner, theusch, Koshchi, and code by jRaskell.
 http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=789581
 */
 
-static volatile int analog_readings[NUM_ANALOG_INPUTS];
+static volatile int16_t analog_readings[NUM_ANALOG_INPUTS];
 static Stack <volatile int8_t,NUM_ANALOG_INPUTS> adc_channels_to_read;
 volatile static int8_t current_channel = -1; // volatile because accessed in control and adc ISRs
 static bool first = true;
@@ -223,7 +223,7 @@ void adcReadSelectedChannels() {
 
 
 
-int mozziAnalogRead(uint8_t pin) {
+int16_t mozziAnalogRead(uint8_t pin) {
 // ADC lib converts pin/channel in startSingleRead
 #if IS_AVR()
 	pin = adcPinToChannelNum(pin); // allow for channel or pin numbers

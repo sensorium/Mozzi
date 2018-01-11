@@ -239,7 +239,9 @@ ISR(ADC_vect, ISR_BLOCK)
 #endif // end main audio input section
 
 
-
+static uint16_t update_control_timeout;
+static uint16_t update_control_counter;
+static void updateControlWithAutoADC();
 void audioHook() // 2us excluding updateAudio()
 {
 //setPin13High();
@@ -249,6 +251,12 @@ void audioHook() // 2us excluding updateAudio()
 #endif
 
 	if (!output_buffer.isFull()) {
+		if (!update_control_counter) {
+			update_control_counter = update_control_timeout;
+			updateControlWithAutoADC ();
+		} else {
+			--update_control_counter;
+		}
 		#if (STEREO_HACK == true)
 		updateAudio(); // in hacked version, this returns void
 		output_buffer.write((unsigned int) (audio_out_1 + AUDIO_BIAS));
@@ -581,6 +589,8 @@ HardwareTimer control_timer(CONTROL_UPDATE_TIMER);
 
 static void startControl(unsigned int control_rate_hz)
 {
+	update_control_counter = 0;
+        update_control_timeout = AUDIO_RATE / control_rate_hz;
 #if IS_AVR()
 	// backup pre-mozzi register values
 	pre_mozzi_TCCR0A = TCCR0A;
@@ -588,8 +598,8 @@ static void startControl(unsigned int control_rate_hz)
 	pre_mozzi_OCR0A = OCR0A;
 	pre_mozzi_TIMSK0 = TIMSK0;
 
-	TimerZero::init(1000000/control_rate_hz,updateControlWithAutoADC); // set period, attach updateControlWithAutoADC()
-	TimerZero::start();
+//	TimerZero::init(1000000/control_rate_hz,updateControlWithAutoADC); // set period, attach updateControlWithAutoADC()
+//	TimerZero::start();
 
 	// backup mozzi register values for unpausing later
 	mozzi_TCCR0A = TCCR0A;
@@ -597,13 +607,13 @@ static void startControl(unsigned int control_rate_hz)
 	mozzi_OCR0A = OCR0A;
 	mozzi_TIMSK0 = TIMSK0;
 #elif IS_TEENSY3()
-	timer0.begin(updateControlWithAutoADC, 1000000/control_rate_hz);
+//	timer0.begin(updateControlWithAutoADC, 1000000/control_rate_hz);
 #else
 	control_timer.pause();
 	control_timer.setPeriod(1000000/control_rate_hz);
 	control_timer.setChannel1Mode(TIMER_OUTPUT_COMPARE);
 	control_timer.setCompare(TIMER_CH1, 1);
-	control_timer.attachCompare1Interrupt(updateControlWithAutoADC);
+//	control_timer.attachCompare1Interrupt(updateControlWithAutoADC);
 	control_timer.refresh();
 	control_timer.resume();
 #endif

@@ -15,7 +15,6 @@
  #include "WProgram.h"
 #endif
 
-#include <util/atomic.h>
 #include "MozziGuts.h"
 #include "mozzi_config.h" // at the top of all MozziGuts and analog files
 #include "mozzi_analog.h"

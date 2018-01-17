@@ -45,7 +45,6 @@ Jon Dattorro, Effect Design Part 1, J. Audio Eng. Soc., Vol 45, No. 9, 1997 Sept
 #define STATEVARIABLE_H_
 
 #include "Arduino.h"
-#include "util/atomic.h"
 #include "mozzi_fixmath.h"
 #include "math.h"
 #include "mozzi_utils.h"
@@ -87,10 +86,7 @@ public:
 		// qvalue goes from 255 to 0, representing .999 to 0 in fixed point
 		// lower q, more resonance
 		q = resonance;
-		//ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		//{
 		scale = (Q0n8)sqrt((unsigned int) resonance<<8);
-		//}
 	}
 
 

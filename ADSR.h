@@ -17,7 +17,6 @@
 #else
  #include "WProgram.h"
 #endif
-//#include <util/atomic.h>
 #include "Line.h"
 #include "mozzi_fixmath.h"
 

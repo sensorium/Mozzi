@@ -13,7 +13,7 @@
 #define EVENTDELAY_H_
 
 
-/** A non-blocking replacement for Arduino's delay() function (which is disabled by Mozzi). 
+/** A non-blocking replacement for Arduino's delay() function. 
 EventDelay can be set() to a number of milliseconds, then after calling start(), ready() will return true when the time is up.  
 Alternatively, start(milliseconds) will call set() and start() together.
 */

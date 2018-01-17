@@ -23,7 +23,6 @@
 //#include "mozzi_utils.h"
 
 #if IS_AVR()
-#include "TimerZero.h"
 #include "TimerOne.h"
 #include "FrequencyTimer2.h"
 #elif IS_TEENSY3()
@@ -82,7 +81,6 @@ CircularBuffer <unsigned int> output_buffer2; // fixed size 256
 #if IS_AVR() // not storing backups, just turning timer on and off for pause for teensy 3, 3.1, other ARMs
 
 // to store backups of timer registers so Mozzi can be stopped and pre_mozzi timer values can be restored
-static uint8_t pre_mozzi_TCCR0A, pre_mozzi_TCCR0B, pre_mozzi_OCR0A, pre_mozzi_TIMSK0;
 static uint8_t pre_mozzi_TCCR1A, pre_mozzi_TCCR1B, pre_mozzi_OCR1A, pre_mozzi_TIMSK1;
 
 #if (AUDIO_MODE == HIFI)
@@ -110,7 +108,6 @@ static void backupPreMozziTimer1()
 
 
 // to store backups of mozzi's changes to timer registers so Mozzi can be paused and unPaused
-static uint8_t mozzi_TCCR0A, mozzi_TCCR0B, mozzi_OCR0A, mozzi_TIMSK0;
 static uint8_t mozzi_TCCR1A, mozzi_TCCR1B, mozzi_OCR1A, mozzi_TIMSK1;
 
 #if (AUDIO_MODE == HIFI)
@@ -575,48 +572,10 @@ static void updateControlWithAutoADC()
 }
 
 
-/* Sets up Timer 0 for control interrupts. This is the same for all output
-options Using Timer0 for control disables Arduino's time functions but also
-saves on the interrupts and blocking action of those functions. May add a config
-option for Using Timer2 instead if needed. (MozziTimer2 can be re-introduced for
-that). */
-#if IS_TEENSY3()
-IntervalTimer timer0;
-#elif IS_STM32()
-HardwareTimer control_timer(CONTROL_UPDATE_TIMER);
-#endif
-
-
 static void startControl(unsigned int control_rate_hz)
 {
 	update_control_counter = 0;
         update_control_timeout = AUDIO_RATE / control_rate_hz;
-#if IS_AVR()
-	// backup pre-mozzi register values
-	pre_mozzi_TCCR0A = TCCR0A;
-	pre_mozzi_TCCR0B = TCCR0B;
-	pre_mozzi_OCR0A = OCR0A;
-	pre_mozzi_TIMSK0 = TIMSK0;
-
-//	TimerZero::init(1000000/control_rate_hz,updateControlWithAutoADC); // set period, attach updateControlWithAutoADC()
-//	TimerZero::start();
-
-	// backup mozzi register values for unpausing later
-	mozzi_TCCR0A = TCCR0A;
-	mozzi_TCCR0B = TCCR0B;
-	mozzi_OCR0A = OCR0A;
-	mozzi_TIMSK0 = TIMSK0;
-#elif IS_TEENSY3()
-//	timer0.begin(updateControlWithAutoADC, 1000000/control_rate_hz);
-#else
-	control_timer.pause();
-	control_timer.setPeriod(1000000/control_rate_hz);
-	control_timer.setChannel1Mode(TIMER_OUTPUT_COMPARE);
-	control_timer.setCompare(TIMER_CH1, 1);
-//	control_timer.attachCompare1Interrupt(updateControlWithAutoADC);
-	control_timer.refresh();
-	control_timer.resume();
-#endif
 }
 
 void startMozzi(int control_rate_hz)
@@ -638,22 +597,15 @@ void stopMozzi(){
 	timer1.end();
 #elif IS_STM32()
         audio_update_timer.pause();
-        control_timer.pause();
 #else
 
     noInterrupts();
 	
 	// restore backed up register values
-	TCCR0A = pre_mozzi_TCCR0A;
-	TCCR0B = pre_mozzi_TCCR0B;
-	OCR0A = pre_mozzi_OCR0A;
-
-
 	TCCR1A = pre_mozzi_TCCR1A;
 	TCCR1B = pre_mozzi_TCCR1B;
 	OCR1A = pre_mozzi_OCR1A;
 
-	TIMSK0 = pre_mozzi_TIMSK0;
 	TIMSK1 = pre_mozzi_TIMSK1;
 
 #if (AUDIO_MODE == HIFI)

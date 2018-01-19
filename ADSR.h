@@ -170,10 +170,14 @@ public:
 
 
 
-	/** Start the attack phase of the ADSR.  THis will restart the ADSR no matter what phase it is up to.
+	/** Start the attack phase of the ADSR.  This will restart the ADSR no matter what phase it is up to.
+	@param reset If true, the envelope will start from 0, even if it is still playing (often useful for effect envelopes).
+	If false (default if omitted), the envelope will start rising from the current level, which could be non-zero, if
+	it is still playing (most useful for note envelopes).
 	*/
 	inline
-	void noteOn(){
+	void noteOn(bool reset=false){
+		if (reset) transition.set(0);
 		setPhase(&attack);
 		adsr_playing = true;
 	}

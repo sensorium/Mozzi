@@ -190,7 +190,7 @@ real DAC. Should probably run on any other board supported by [STM32duino](https
 - You will need a very recent (12/2017) checkout of the Arduino_STM32 repository, otherwise compilation will fail.
 - Audio output is to pin PB8, by default (HIFI-mode: PB8 and PB9)
 - If you want to use MIDI, be sure to replace "MIDI_CREATE_DEFAULT_INSTANCE()" with "MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, MIDI)" (or Serial2)
-- Timers 4 (PWM output), 2 (control rate), and 3 (audio rate) are used. Timers 2 and 3 could certainly be merged, but I did not bother optimizing, yet.
+- Timers 4 (PWM output), and 3 (audio rate) are used.
 - Default audio resolution is currently set to 10 bits, which yields 70khZ PWM frequency on a 72MHz CPU. HIFI mode is 2*7bits at up to 560Khz (but limited to 5 times audio rate)
 - HIFI_MODE did not get much testing
 - STEREO_HACK not yet implemented (although that should not be too hard to do)

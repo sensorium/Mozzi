@@ -278,14 +278,14 @@ setIdleUpdateSteps	KEYWORD2
 setAllUpdateSteps	KEYWORD2
 
 
-Portamento KEYWORD1
+Portamento	KEYWORD1
 setTime	KEYWORD2
 start	KEYWORD2
 next	KEYWORD2
 
 
 DCfilter	KEYWORD1
-next KEYWORD2
+next	KEYWORD2
 
 
 RollingAverage	KEYWORD1

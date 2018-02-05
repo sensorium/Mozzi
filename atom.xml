@@ -4,7 +4,7 @@
   <title><![CDATA[MOZZI]]></title>
   <link href="http://sensorium.github.io/Mozzi//atom.xml" rel="self"/>
   <link href="http://sensorium.github.io/Mozzi//"/>
-  <updated>2017-04-04T23:07:04+10:00</updated>
+  <updated>2018-02-05T22:28:07+11:00</updated>
   <id>http://sensorium.github.io/Mozzi//</id>
   <author>
     <name><![CDATA[Tim Barrass]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MozziByte synth shield kickstarter launched]]></title>
+    <link href="http://sensorium.github.io/Mozzi//blog/2018/02/05/mozzibyte-synth-shield-kickstarter-launched/"/>
+    <updated>2018-02-05T21:48:00+11:00</updated>
+    <id>http://sensorium.github.io/Mozzi//blog/2018/02/05/mozzibyte-synth-shield-kickstarter-launched</id>
+    <content type="html"><![CDATA[<p>MozziByte, a shield for the Arduino Pro Mini.  <a href="https://www.kickstarter.com/projects/mozzibyte/mozzibyte-mozzi-arduino-mini-sensor-sonification-s">On kickstarter.</a></p>
+
+<p>Making synths with Mozzi, we frequently use the same basic audio components and connectors, and putting them together every time is a pain.  So we&#8217;ve created the MozziByte.</p>
+
+<p>MozziByte has an amp, phono socket, speaker pins, battery connector, power switch and prototyping area for connecting sensors, knobs, and switches.</p>
+
+<p>We have to order a minimum of 100 MozziBytes to make it cost effective to produce as a PCB+assembly board.</p>
+
+<p>If you would like to order a MozziByte and support our initial production run please <a href="https://www.kickstarter.com/projects/mozzibyte/mozzibyte-mozzi-arduino-mini-sensor-sonification-s">visit our Kickstarter</a> and share it with others who may be interested.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[v1.0.3rc6 HIFI works]]></title>
@@ -412,15 +429,6 @@ The audio samples continue alone until the next control interrupt, when a sketch
   for doing things with sensor inputs.</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ICAD2013 workshop announcement]]></title>
-    <link href="http://sensorium.github.io/Mozzi//blog/2013/05/14/icad2013-workshop-announcement/"/>
-    <updated>2013-05-14T18:33:00+10:00</updated>
-    <id>http://sensorium.github.io/Mozzi//blog/2013/05/14/icad2013-workshop-announcement</id>
-    <content type="html"><![CDATA[<p>Mozzi workshop at <a href="http://icad2013.com/index.php?action=workshops">International Conference on Auditory Display</a>, July 6-10, 2013, Lodz University of Technology, Poland.</p>
 ]]></content>
   </entry>
   

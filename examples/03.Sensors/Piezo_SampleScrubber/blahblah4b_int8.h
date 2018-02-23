@@ -6,7 +6,7 @@
 #else
 #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
  
 #define BLAHBLAH4B_NUM_CELLS 22569
 #define BLAHBLAH4B_SAMPLERATE 16384

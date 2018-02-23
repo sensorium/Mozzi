@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 // this is the top half of a sin, used as a rough envelope for a cycling fade-in, fade-out with empty space in between.
 

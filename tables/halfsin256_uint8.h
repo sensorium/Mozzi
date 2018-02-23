@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 #define HALFSIN256_NUM_CELLS 256
 #define HALFSIN256_SAMPLERATE 256

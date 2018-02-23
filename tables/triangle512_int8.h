@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 #define TRIANGLE512_NUM_CELLS 512
 #define TRIANGLE512_SAMPLERATE 512

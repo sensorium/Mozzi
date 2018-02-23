@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 #define SAW2048_NUM_CELLS 2048
 #define SAW2048_SAMPLERATE 2048

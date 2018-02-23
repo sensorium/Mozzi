@@ -17,7 +17,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <util/atomic.h>
+#include ATOMIC_INCLUDE_H
 
 /** For linear changes with a minimum of calculation at each step. For instance,
 you can use Line to make an oscillator glide from one frequency to another,

@@ -6,7 +6,8 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include "hardware_defines.h"
+#include PGMSPACE_INCLUDE_H
 
 #define SAW512_NUM_CELLS 512
 #define SAW512_SAMPLERATE 512

@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 #define WHITENOISE8192_NUM_CELLS 8192
 #define WHITENOISE8192_SAMPLERATE 8192

@@ -9,7 +9,7 @@
 #include "WProgram.h"
 #endif 
 
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
  
 
 #define THUMB2_SAMPLERATE 16384

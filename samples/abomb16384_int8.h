@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
  
 #define ABOMB_NUM_CELLS 16384
 #define ABOMB_SAMPLERATE 16384

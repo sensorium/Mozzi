@@ -16,7 +16,7 @@
 
 #include "MozziGuts.h"
 #include "mozzi_fixmath.h"
-#include <util/atomic.h>
+#include ATOMIC_INCLUDE_H
 
 // fractional bits for sample index precision
 #define SAMPLE_F_BITS 16

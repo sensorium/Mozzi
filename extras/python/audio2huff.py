@@ -129,7 +129,7 @@ if __name__ == "__main__":
         print >>hdrf,'#else'
         print >>hdrf,'#include "WProgram.h"'
         print >>hdrf,'#endif \n'
-        print >>hdrf,'#include <avr/pgmspace.h>\n \n'
+        print >>hdrf,'#include PGMSPACE_INCLUDE_H\n \n'
         print >>hdrf,"#define " + options.name + "_SAMPLERATE %i"%fs
         print >>hdrf,"#define " + options.name + "_SAMPLE_BITS %i"%options.bits
         print >>hdrf,'int const __attribute__((section(".progmem.data"))) ' + options.name + '_HUFFMAN[%i] = {\n%s\n};'%(len(decoder.huff),arrayformatter(decoder.huff))

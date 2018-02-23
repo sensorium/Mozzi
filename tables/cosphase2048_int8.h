@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 /** Cosine wave, out-of-phase so it starts at 127, cycles to -128 and ends at 127
 */

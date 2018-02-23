@@ -1,5 +1,9 @@
 # Mozzi  
 
+# ESP8266 port
+This branch is a work-in-progress to port Mozzi to the ESP8266 architecture. The port is _not_ usable so far.
+Check back, soon.
+
 ### sound synthesis library for Arduino  
 
 
@@ -206,3 +210,11 @@ Some of the differences for Teensy 3.0/3.1 which will affect users include:
 - The examples come with this commented out, for Arduino compatibility.
 - Serial baud rate for monitoring in the IDE needs to be set to 9600 to work with Teensy 3.0/3.1. This slow rate can cause audio glitches.
 - twi_nonblock code by Marije Baalman for non-blocking I2C is not compatible with Teensy 3.0/3.1.
+
+### ESP8266
+
+Work-in-progress, no functional port, yet.
+
+- Atomic operations not implemented. For now I hope I can get away with it due to 32-bitiness. Mid-term I hope updateControl() will be called from the main loop, obsoleting the need for atomic blocks
+- For now we keep tables / samples in flash, but that may not be a good solution on the ESP8266, since flash is comparatively slow - but there is also a comparatively huge amount of RAM to use, instead.
+

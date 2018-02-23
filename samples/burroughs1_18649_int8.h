@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
  
 #define BURROUGHS1_18649_NUM_CELLS 18649
 #define BURROUGHS1_18649_SAMPLERATE 16384

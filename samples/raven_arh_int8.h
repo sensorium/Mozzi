@@ -6,7 +6,7 @@
 #else
 #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
  
 #define RAVEN_ARH_NUM_CELLS 8192
 #define RAVEN_ARH_SAMPLERATE 8192

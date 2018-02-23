@@ -9,7 +9,7 @@ If anyone knows an efficient way to do bandlimited synthesis which could work fo
 #else
 #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
  
 #define SQUARE_NO_ALIAS_2048_NUM_CELLS 2048
 #define SQUARE_NO_ALIAS_2048_SAMPLERATE 2048

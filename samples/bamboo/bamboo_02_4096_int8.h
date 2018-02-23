@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 #define BAMBOO_02_4096_NUM_CELLS 4096
 #define BAMBOO_02_4096_SAMPLERATE 16384

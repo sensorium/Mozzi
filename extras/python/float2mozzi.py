@@ -32,7 +32,7 @@ def float2mozzi(infile, outfile, tablename,samplerate):
     fout.write('#else'+'\n')
     fout.write('#include "WProgram.h"'+'\n')
     fout.write('#endif'+'\n')   
-    fout.write('#include <avr/pgmspace.h>'+'\n \n')
+    fout.write('#include PGMSPACE_INCLUDE_H'+'\n \n')
     fout.write('#define ' + tablename + '_NUM_CELLS '+ str(len(values))+'\n')
     fout.write('#define ' + tablename + '_SAMPLERATE '+ str(samplerate)+'\n \n')
     outstring = 'const int8_t __attribute__((section(".progmem.data"))) ' + tablename + '_DATA [] = {'

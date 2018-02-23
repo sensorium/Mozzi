@@ -6,7 +6,7 @@
 #else
 #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
  
 #define sin1024_uint_NUM_CELLS 1024
 #define sin1024_uint_SAMPLERATE 1024

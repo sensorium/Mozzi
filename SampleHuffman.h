@@ -44,7 +44,7 @@ The other is "HUFFMAN" which must also fit into Flash RAM
 
 */
 
-#include <util/atomic.h>
+#include ATOMIC_INCLUDE_H
 
 class SampleHuffman
 {

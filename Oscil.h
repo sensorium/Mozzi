@@ -21,7 +21,7 @@
 #endif
 #include "MozziGuts.h"
 #include "mozzi_fixmath.h"
-#include <util/atomic.h>
+#include ATOMIC_INCLUDE_H
 
 
 #ifdef OSCIL_DITHER_PHASE

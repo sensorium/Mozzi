@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
  
 #define EMPTY_0_NUM_CELLS 0
 #define EMPTY_0_SAMPLERATE 16384

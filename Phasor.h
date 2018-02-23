@@ -18,7 +18,7 @@
  #include "WProgram.h"
 #endif
 #include "mozzi_fixmath.h"
-#include <util/atomic.h>
+#include ATOMIC_INCLUDE_H
 
 #define PHASOR_MAX_VALUE_UL 4294967295UL
 

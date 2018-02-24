@@ -393,12 +393,12 @@ static void startAudioStandard()
 	audio_pwm_timer.setOverflow(1 << AUDIO_BITS_PER_CHANNEL);   // Allocate enough room to write all intended bits
 
 #elif IS_ESP8266()
+	i2s_begin();
 	#if ((ESP_AUDIO_OUT_MODE == PDM_VIA_I2S) && (PDM_RESOLUTION != 1))
 	i2s_set_rate(AUDIO_RATE*PDM_RESOLUION);
 	#else
 	i2s_set_rate(AUDIO_RATE);
 	#endif
-	i2s_begin();
 	if (output_buffer_size == 0) output_buffer_size = i2s_available(); // Do not reset count when stopping / restarting
 #endif
 	//backupMozziTimer1(); // // not for arm

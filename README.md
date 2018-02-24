@@ -71,6 +71,7 @@ x	B5  Teensy2
 x	B5(25) Teensy2++  
 ..13	Sanguino  
 x       PB8  STM32duino (see "Hardware specific notes", below)
+	RX	ESP8266 *see details*
 
 For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).  
 
@@ -220,3 +221,7 @@ Work-in-progress, no functional port, yet.
 - Output via external DAC not yet implemented
 - The update control period is rather inexact on ESP8266, as it can only be specified in millisecond resolution. This would be fixed, if updateControl() is called from the main loop.
 - Asynchronous analog reads are not implemnted. mozziAnalogRead() relays to analogRead().
+- Audio output is via the I2S pins. Either to an external DAC, or via PDM output to the I2S-Data-Out pin (which is also "RX"). I both cases, all I2S output pins (RX, GPIO2 and GPIO15) will be affected.
+  - This means, Mozzi is not usable on boards such as the ESP01, where one of these pins is tied to Gnd
+  - Also note that the RX pin cannot output any significant amount of current. Connecting a headphone, directly, might damage it. Please use appropriate amplification (which can be as simple as a single
+    transistor, as the output signal is still digitally modulated).

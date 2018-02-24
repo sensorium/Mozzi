@@ -24,6 +24,8 @@
 // Hardware detail defines
 #if IS_STM32()
 #define NUM_ANALOG_INPUTS 16  // probably wrong, but mostly needed to allocate an array of readings
+#elif IS_ESP8266()
+#define NUM_ANALOG_INPUTS 1
 #endif
 
 #if IS_ESP8266()

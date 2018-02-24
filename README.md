@@ -217,4 +217,6 @@ Work-in-progress, no functional port, yet.
 
 - Atomic operations not implemented. For now I hope I can get away with it due to 32-bitiness. Mid-term I hope updateControl() will be called from the main loop, obsoleting the need for atomic blocks
 - For now we keep tables / samples in flash, but that may not be a good solution on the ESP8266, since flash is comparatively slow - but there is also a comparatively huge amount of RAM to use, instead.
-
+- Output via external DAC not yet implemented
+- The update control period is rather inexact on ESP8266, as it can only be specified in millisecond resolution. This would be fixed, if updateControl() is called from the main loop.
+- Asynchronous analog reads are not implemnted. mozziAnalogRead() relays to analogRead().

@@ -15,8 +15,8 @@
  #include "WProgram.h"
 #endif
 
-#include ATOMIC_INCLUDE_H
 #include "MozziGuts.h"
+#include ATOMIC_INCLUDE_H
 #include "mozzi_config.h" // at the top of all MozziGuts and analog files
 #include "mozzi_analog.h"
 #include "CircularBuffer.h"
@@ -33,6 +33,8 @@
 #elif IS_STM32()
 #include <STM32ADC.h>
 #include "HardwareTimer.h"
+#elif IS_ESP8266()
+#include <Ticker.h>
 #endif
 
 
@@ -70,7 +72,11 @@ PWM frequency tests
 16384Hz single nearly 9 bits (original mode) not bad for a single pin, but carrier freq noise can be an issue
 */
 
-
+#if IS_ESP8266()
+#include <i2s.h>
+uint16_t output_buffer_size = 0;
+uint64_t samples_written_to_buffer = 0;
+#else
 //-----------------------------------------------------------------------------------------------------------------
 // ring buffer for audio output
 CircularBuffer <unsigned int> output_buffer; // fixed size 256
@@ -78,6 +84,7 @@ CircularBuffer <unsigned int> output_buffer; // fixed size 256
 CircularBuffer <unsigned int> output_buffer2; // fixed size 256
 #endif
 //-----------------------------------------------------------------------------------------------------------------
+#endif
 
 #if IS_AVR() // not storing backups, just turning timer on and off for pause for teensy 3, 3.1, other ARMs
 
@@ -238,7 +245,35 @@ ISR(ADC_vect, ISR_BLOCK)
 }
 #endif // end main audio input section
 
-
+#if IS_ESP8266()
+inline void espWriteAudioToBuffer() {
+	#if (ESP_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
+		#if (STEREO_HACK == true)
+		i2s_write_lr(audio_out_1, audio_out_2);
+		#else
+		i2s_lr((uint16_t) (updateAudio() + AUDIO_BIAS), 0);
+		#endif
+	#else
+		uint16_t sample = updateAudio() + AUDIO_BIAS;
+		static uint16_t qerr = 0;
+		// We can write 32 bits at a time to the output buffer, typically, we'll do this either once of twice per sample
+		for (uint8_t words = 0; words < PDM_RESOLUTION; ++words) {
+			uint32_t outbits = 0;
+			for (uint8_t i = 0; i < 32; ++i) {
+				outbits <<= 1;
+				if (sample >= qerr) {
+					outbits |= 1;
+					qerr += 0xFFFF - sample;
+				} else {
+					qerr -= sample;
+				}
+			}
+			i2s_write_sample (outbits);
+		}
+	#endif
+	++samples_written_to_buffer;
+}
+#endif
 
 void audioHook() // 2us excluding updateAudio()
 {
@@ -248,7 +283,21 @@ void audioHook() // 2us excluding updateAudio()
 			audio_input = input_buffer.read();
 #endif
 
+#if IS_ESP8266()
+	#if ((ESP_AUDIO_OUT_MODE == PDM_VIA_I2S) && (PDM_RESOLUTION != 1))
+	if (i2s_available() >= PDM_RESOLUTION) {
+	#else
+	if (!i2s_is_full()) {
+	#endif
+#else
 	if (!output_buffer.isFull()) {
+#endif
+
+#if IS_ESP8266()
+		//NOTE: On ESP, we simply use the I2S buffer as the output buffer, which saves RAM, but also simplifies things a lot
+		// esp. since i2s output already has output rate control -> no need for a separate output timer
+		espWriteAudioToBuffer();
+#else
 		#if (STEREO_HACK == true)
 		updateAudio(); // in hacked version, this returns void
 		output_buffer.write((unsigned int) (audio_out_1 + AUDIO_BIAS));
@@ -256,7 +305,7 @@ void audioHook() // 2us excluding updateAudio()
 		#else
 		output_buffer.write((unsigned int) (updateAudio() + AUDIO_BIAS));
 		#endif
-
+#endif
 	}
 //setPin13Low();
 }
@@ -343,6 +392,14 @@ static void startAudioStandard()
 #endif
 	audio_pwm_timer.setOverflow(1 << AUDIO_BITS_PER_CHANNEL);   // Allocate enough room to write all intended bits
 
+#elif IS_ESP8266()
+	#if ((ESP_AUDIO_OUT_MODE == PDM_VIA_I2S) && (PDM_RESOLUTION != 1))
+	i2s_set_rate(AUDIO_RATE*PDM_RESOLUION);
+	#else
+	i2s_set_rate(AUDIO_RATE);
+	#endif
+	i2s_begin();
+	if (output_buffer_size == 0) output_buffer_size = i2s_available(); // Do not reset count when stopping / restarting
 #endif
 	//backupMozziTimer1(); // // not for arm
 }
@@ -576,6 +633,8 @@ that). */
 IntervalTimer timer0;
 #elif IS_STM32()
 HardwareTimer control_timer(CONTROL_UPDATE_TIMER);
+#elif IS_ESP8266()
+Ticker control_timer;
 #endif
 
 
@@ -598,7 +657,7 @@ static void startControl(unsigned int control_rate_hz)
 	mozzi_TIMSK0 = TIMSK0;
 #elif IS_TEENSY3()
 	timer0.begin(updateControlWithAutoADC, 1000000/control_rate_hz);
-#else
+#elif IS_STM32()
 	control_timer.pause();
 	control_timer.setPeriod(1000000/control_rate_hz);
 	control_timer.setChannel1Mode(TIMER_OUTPUT_COMPARE);
@@ -606,6 +665,8 @@ static void startControl(unsigned int control_rate_hz)
 	control_timer.attachCompare1Interrupt(updateControlWithAutoADC);
 	control_timer.refresh();
 	control_timer.resume();
+#else
+	control_timer.attach_ms(1000/control_rate_hz, updateControlWithAutoADC);
 #endif
 }
 
@@ -627,11 +688,14 @@ void stopMozzi(){
 #if IS_TEENSY3()
 	timer1.end();
 #elif IS_STM32()
-        audio_update_timer.pause();
-        control_timer.pause();
+	audio_update_timer.pause();
+	control_timer.pause();
+#elif IS_ESP8266()
+	control_timer.detach();
+	i2s_end();
 #else
 
-    noInterrupts();
+	noInterrupts();
 	
 	// restore backed up register values
 	TCCR0A = pre_mozzi_TCCR0A;
@@ -722,7 +786,15 @@ void unPauseMozzi()
 
 unsigned long audioTicks()
 {
+#if IS_ESP8266()
+	#if ((ESP_AUDIO_OUT_MODE == PDM_VIA_I2S) && (PDM_RESOLUTION != 1))
+	return (samples_written_to_buffer - ((output_buffer_size - i2s_available()) / PDM_RESOLUTION));
+	#else
+	return (samples_written_to_buffer - (output_buffer_size - i2s_available()));
+	#endif
+#else
 	return output_buffer.count();
+#endif
 }
 
 

@@ -220,8 +220,7 @@ Work-in-progress, no finished port, yet.
 - Atomic operations not implemented. For now I hope I can get away with it due to 32-bitiness. Mid-term I hope updateControl() will be called from the main loop, obsoleting the need for atomic blocks
 - Since flash memory is not built into the ESP8266, but connected, externally, it is much too slow for keeping wave tables, audio samples, etc. Instead, these are kept in RAM on this platform.
   - TODO: Does Mozzi actually still need the pgm_read_byte_near, etc. functions? I have read that current GCC versions support regular addressing of flash memory, out of the box?
-- Output via external DAC not yet implemented
-- The update control period is rather inexact on ESP8266, as it can only be specified in millisecond resolution. This would be fixed, if updateControl() is called from the main loop.
+- TODO: The update control period is rather inexact on ESP8266, as it can only be specified in millisecond resolution. This would be fixed, if updateControl() is called from the main loop.
 - Asynchronous analog reads are not implemnted. mozziAnalogRead() relays to analogRead().
 - AUDIO_INPUT is not implemeted.
 - Several audio output modes exist, only PDM_VIA_SERIAL is tested, yet:
@@ -229,13 +228,21 @@ Work-in-progress, no finished port, yet.
     - TODO: Test timing/tuning. Do we need to account for start/stop bits?
   - PDM_VIA_I2S: Output is coded using pulse density modulation, and sent via the I2S pins. The I2S data out pin (which is also "RX") will have the output, but *all* I2S output pins (RX, GPIO2 and GPIO15) will be
   affected. This means, this mode is not usable on boards such as the ESP01, where one of these pins is tied to Gnd
-    - TODO: Unteted!
+    - TODO: Untested!
   - EXTERNAL_DAC_VIA_I2S: Output is sent to and external DAC (such as a PT811), digitally coded. This is the only mode that supports STEREO_HACK. It also need the least processing power.
-    - TODO: Unteted!
-- There is no "HIFI_MODE", in addition to the above output options.
+    - TODO: Untested!
+- There is no "HIFI_MODE", in addition to the above output options. For high quality output, either use an external DAC, or increase the PDM_RESOLUTION value.
 - Do note that the ESP8266 pins can output less current than the other supported CPUs. The maximum is 12mA, with a recommendation to stay below 6mA.
   - WHEN CONNECTING A HEADPHONE, DIRECTLY, USE APPROPRIATE CURRENT LIMITING RESISTORS (>= 500Ohms).
 - The audio output resolution is always 16 bits on this platform, _internally_. Thus, in updateAudio, you should scale your output samples to a full 16 bit range. The actual output bittiness cannot easily
   be quantified, due to PDM coding.
+- TODO: Re-consider output buffer, and timer-less output modes. We may need a high-priority interrupt to keep the (Serial) buffer fed, though it does not have to be at the exact (or full) audio rate.
 - TODO: fight code ugliness
 - twi_nonblock is not ported
+
+## Unrelated notes
+
+- STM32 could support PDM coded output via Serial1 or Serial2, too. (Serial1 is fastest)
+- Faster PDM coding algorithm? Coding multiple bits at once?
+- I think it would be cool, if there was a macro for automatic scaling of the output to the audio output resolution, so that you don't have to fiddle with updateAudio() every time you change the audio
+  output options / switch to HIFI_MODE / switch to a different CPU. "SCALE_AUDIO8(value)", "SCALE_AUDIO16(value)", "SCALE_AUDIO(x, value)", which will assume the given input bittiness, and shift ot the required output bittiness (if needed).

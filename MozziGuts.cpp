@@ -249,27 +249,29 @@ ISR(ADC_vect, ISR_BLOCK)
 #endif // end main audio input section
 
 #if IS_ESP8266()
+// lookup table for fast pdm coding on 8 output bits at a time
+static byte fast_pdm_table[] {0, 0b00010000, 0b01000100, 0b10010010, 0b10101010, 0b10110101, 0b11011101, 0b11110111, 0b11111111};
+
 inline uint32_t writePDMCoded(uint16_t sample) {
-	static uint16_t qerr = 0;
+	static uint32_t lastwritten = 0;
+	static uint32_t nexttarget = 0;
 
         // We can write 32 bits at a time to the output buffer, typically, we'll do this either once of twice per sample
 	for (uint8_t words = 0; words < PDM_RESOLUTION; ++words) {
 		uint32_t outbits = 0;
-		for (uint8_t i = 0; i < 32; ++i) {
-			outbits = outbits << 1;
-			if (sample >= qerr) {
-				outbits |= 1;
-				qerr += 0xFFFF - sample;
-			} else {
-				qerr -= sample;
-			}
-		}
+		for (uint8_t i = 0; i < 4; ++i) {
+			nexttarget += sample - lastwritten;
+			lastwritten = nexttarget & 0b11110000000000000; // code the highest 3-and-a-little bits next.
+			                                                // Note that sample only has 16 bits, while the highest bit we consider for writing is bit 17.
+			                                                // Thus, if the highest bit is set, the next three bits cannot be.
 	#if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
-		Serial1.write((outbits >> 24) & 0xFF);
-		Serial1.write((outbits >> 16) & 0xFF);
-		Serial1.write((outbits >> 8) & 0xFF);
-		Serial1.write(outbits & 0xFF);
+			Serial1.write(fast_pdm_table[lastwritten >> 13]);
 	#else
+			outbits = outbits << 8;
+			outbits |= fast_pdm_table[lastwritten >> 13];
+	#endif
+                }
+	#if (ESP_AUDIO_OUT_MODE == PDM_VIA_I2S)
 		i2s_write_sample (outbits);
 	#endif
 	}

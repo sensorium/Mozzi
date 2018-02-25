@@ -121,6 +121,8 @@ public:
 		release.phase_type = RELEASE;
 		idle.phase_type = IDLE;
 		release.level = 0;
+		adsr_playing = false;
+		current_phase = &idle;
 	}
 
 

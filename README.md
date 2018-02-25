@@ -215,7 +215,7 @@ Some of the differences for Teensy 3.0/3.1 which will affect users include:
 
 ### ESP8266
 
-Work-in-progress, no functional port, yet.
+Work-in-progress, no finished port, yet.
 
 - Atomic operations not implemented. For now I hope I can get away with it due to 32-bitiness. Mid-term I hope updateControl() will be called from the main loop, obsoleting the need for atomic blocks
 - For now we keep tables / samples in flash, but that may not be a good solution on the ESP8266, since flash is comparatively slow - but there is also a comparatively huge amount of RAM to use, instead.
@@ -232,4 +232,7 @@ Work-in-progress, no functional port, yet.
   - EXTERNAL_DAC_VIA_I2S: Output is sent to and external DAC (such as a PT811), digitally coded. This is the only mode that supports STEREO_HACK. It also need the least processing power.
 - Do note that the ESP8266 pins can output less current than the other supported CPUs. The maximum is 12mA, with a recommendation to stay below 6mA.
   - WHEN CONNECTING A HEADPHONE, DIRECTLY, USE APPROPRIATE CURRENT LIMITING RESISTORS.
+- The audio output resolution is always 16 bits on this platform, _internally_. Thus, in updateAudio, you should scale your output samples to a full 16 bit range. The actual output bittiness cannot easily
+  be quantified, due to PDM coding.
 - TODO: Random seeding
+- TODO: fight code ugliness

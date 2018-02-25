@@ -33,10 +33,16 @@
 #define ATOMIC_BLOCK(x) if(true || x)
 #define ATOMIC_RESTORESTATE true
 
-#define PGMSPACE_INCLUDE_H <pgmspace.h>
-#define ATOMIC_INCLUDE_H <Arduino.h>  // dummy
+#define PGMSPACE_INCLUDE_H <Arduino.h>  // dummy because not needed
+#define CONSTTABLE_READ(x) (*(x))
+#define CONSTTABLE_READ_DWORD(x) (*(x))
+#define CONSTTABLE_STORAGE
+#define ATOMIC_INCLUDE_H <Arduino.h>  // dummy because not available
 #else
 #define PGMSPACE_INCLUDE_H <avr/pgmspace.h>
+#define CONSTTABLE_READ_DWORD(x) pgm_read_dword(x)
+#define CONSTTABLE_READ(x) pgm_read_byte_near(x)
+#define CONSTABLE_STORAGE __attribute__((section(".progmem.data")))
 #define ATOMIC_INCLUDE_H <util/atomic.h>
 #endif
 

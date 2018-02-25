@@ -1,8 +1,9 @@
 # Mozzi  
 
 # ESP8266 port
-This branch is a work-in-progress to port Mozzi to the ESP8266 architecture. The port is _not_ usable so far.
-Check back, soon.
+This branch is a work-in-progress to port Mozzi to the ESP8266 architecture.
+
+This port is _not_ finished, yet, but basic examples work.
 
 ### sound synthesis library for Arduino  
 
@@ -219,6 +220,7 @@ Work-in-progress, no functional port, yet.
 - Atomic operations not implemented. For now I hope I can get away with it due to 32-bitiness. Mid-term I hope updateControl() will be called from the main loop, obsoleting the need for atomic blocks
 - For now we keep tables / samples in flash, but that may not be a good solution on the ESP8266, since flash is comparatively slow - but there is also a comparatively huge amount of RAM to use, instead.
   - **Oscillators are essentially unuseable as of now!**
+  - TODO: Does Mozzi actually still need the pgm_read_byte_near, etc. functions? I have read that current GCC versions support regular addressing of flash memory, out of the box?
 - Output via external DAC not yet implemented
 - The update control period is rather inexact on ESP8266, as it can only be specified in millisecond resolution. This would be fixed, if updateControl() is called from the main loop.
 - Asynchronous analog reads are not implemnted. mozziAnalogRead() relays to analogRead().
@@ -230,3 +232,4 @@ Work-in-progress, no functional port, yet.
   - EXTERNAL_DAC_VIA_I2S: Output is sent to and external DAC (such as a PT811), digitally coded. This is the only mode that supports STEREO_HACK. It also need the least processing power.
 - Do note that the ESP8266 pins can output less current than the other supported CPUs. The maximum is 12mA, with a recommendation to stay below 6mA.
   - WHEN CONNECTING A HEADPHONE, DIRECTLY, USE APPROPRIATE CURRENT LIMITING RESISTORS.
+- TODO: Random seeding

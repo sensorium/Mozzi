@@ -5,7 +5,7 @@
 # http://grrrr.org
 #
 # Modified by TIm Barrass 2013
-# - changed PROGMEM to __attribute__((section(".progmem.data"))), to stop compiler warning
+# - changed PROGMEM to CONSTTABLE_STORAGE, to stop compiler warning
 # - moved huffman table to progmem
 # - added --name argument to give all constants specific names
 # - changed all constant names to upper case
@@ -132,7 +132,7 @@ if __name__ == "__main__":
         print >>hdrf,'#include PGMSPACE_INCLUDE_H\n \n'
         print >>hdrf,"#define " + options.name + "_SAMPLERATE %i"%fs
         print >>hdrf,"#define " + options.name + "_SAMPLE_BITS %i"%options.bits
-        print >>hdrf,'int const __attribute__((section(".progmem.data"))) ' + options.name + '_HUFFMAN[%i] = {\n%s\n};'%(len(decoder.huff),arrayformatter(decoder.huff))
+        print >>hdrf,'int const CONSTTABLE_STORAGE ' + options.name + '_HUFFMAN[%i] = {\n%s\n};'%(len(decoder.huff),arrayformatter(decoder.huff))
         print >>hdrf,'unsigned long const ' + options.name + '_SOUNDDATA_BITS = %iL;'%len(enc)    
-        print >>hdrf,'unsigned char const __attribute__((section(".progmem.data"))) ' + options.name + '_SOUNDDATA[] = {\n%s\n};'%arrayformatter(enc.data)
+        print >>hdrf,'unsigned char const CONSTTABLE_STORAGE ' + options.name + '_SOUNDDATA[] = {\n%s\n};'%arrayformatter(enc.data)
         print >>hdrf,"#endif /* " + options.name + "_H_ */"

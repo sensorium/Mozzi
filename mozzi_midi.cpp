@@ -13,6 +13,7 @@ calculation.
  */
 
 
+#include "hardware_defines.h"
 
 float mtof(float midival)
 {
@@ -73,7 +74,7 @@ static float ucmtof(uint8_t midival)
 // 	return float_to_Q16n16(mtof(midival));
 // }
 
-//static const Q16n16 __attribute__((section(".progmem.data"))) midiToFreq[128] =
+//static const Q16n16 CONSTTABLE_STORAGE midiToFreq[128] =
 // {
 //         Q16n16_m2f(0), Q16n16_m2f(1), Q16n16_m2f(2),Q16n16_m2f(3), Q16n16_m2f(4), Q16n16_m2f(5), Q16n16_m2f(6), Q16n16_m2f(7),
 //         Q16n16_m2f(8),Q16n16_m2f(9), Q16n16_m2f(10), Q16n16_m2f(11), Q16n16_m2f(12), Q16n16_m2f(13), Q16n16_m2f(14), Q16n16_m2f(15),
@@ -94,7 +95,7 @@ static float ucmtof(uint8_t midival)
 // };
 
 
-static const uint32_t __attribute__((section(".progmem.data"))) midiToFreq[128] =
+static const uint32_t CONSTTABLE_STORAGE midiToFreq[128] =
   {
     0, 567670, 601425, 637188, 675077, 715219, 757748, 802806, 850544, 901120,
     954703, 1011473, 1071618, 1135340, 1202851, 1274376, 1350154, 1430438, 1515497,
@@ -133,8 +134,8 @@ Q16n16  Q16n16_mtof(Q16n16 midival_fractional)
 	Q16n16 diff_fraction;
 	uint8_t index = midival_fractional >> 16;
 	uint16_t fraction = (uint16_t) midival_fractional; // keeps low word
-	Q16n16 freq1 = (Q16n16) pgm_read_dword(midiToFreq + index);
-	Q16n16 freq2 = (Q16n16) pgm_read_dword((midiToFreq + 1) + index);
+	Q16n16 freq1 = (Q16n16) CONSTTABLE_READ_DWORD(midiToFreq + index);
+	Q16n16 freq2 = (Q16n16) CONSTTABLE_READ_DWORD((midiToFreq + 1) + index);
 	Q16n16 difference = freq2 - freq1;
 	if (difference>=65536)
 	{
@@ -153,7 +154,7 @@ A good choice if you're using whole note values, want speed and simplicity, and 
 @return an integer approximation of the midi note's frequency.
 */
 int mtof(uint8_t midi_note){
-	return (int) (pgm_read_dword(midiToFreq + midi_note) >> 16);
+	return (int) (CONSTTABLE_READ_DWORD(midiToFreq + midi_note) >> 16);
 }
 
 
@@ -163,5 +164,5 @@ A good choice if you're using whole note values, want speed and simplicity, and 
 @return an integer approximation of the midi note's frequency.
 */
 int mtof(int midi_note){
-	return (int) (pgm_read_dword(midiToFreq + midi_note) >> 16);
+	return (int) (CONSTTABLE_READ_DWORD(midiToFreq + midi_note) >> 16);
 }

@@ -24,7 +24,7 @@
 
 /** Phasor repeatedly generates a high resolution ramp at a variable frequency.
 The output of Phasor.next() is an unsigned number between 0 and 4294967295, the
-maximum that can be expressed by an unsigned long.
+maximum that can be expressed by an unsigned 32 bit integer.
 @tparam UPDATE_RATE the rate at which the Phasor will be updated,
 usually CONTROL_RATE or AUDIO_RATE.
 */
@@ -33,8 +33,8 @@ template <unsigned int UPDATE_RATE>
 class Phasor
 {
 private:
-	unsigned long current_value;
-	volatile unsigned long step_size;
+	uint32_t current_value;
+	volatile uint32_t step_size;
 
 public:
 	/** Constructor. "Phasor <AUDIO_RATE> myphasor;"
@@ -48,7 +48,7 @@ public:
 	@return the next value.
 	 */
 	inline
-	unsigned long next()
+	uint32_t next()
 	{
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{
@@ -61,7 +61,7 @@ public:
 	value using any previously calculated step size.
 	 */
 	inline
-	void set(unsigned long value)
+	void set(uint32_t value)
 	{
 		current_value=value;
 	}
@@ -69,26 +69,26 @@ public:
 
 	/** Set the Phasor frequency with an unsigned int.
 	@param frequency is how many times per second to count from
-	0 to the maximum unsigned long value 4294967295.
+	0 to the maximum uint32_t value 4294967295.
 	@note Timing 8us
 	 */
 	inline
 	void setFreq( int frequency)
 	{
-		step_size = ((((unsigned long)((PHASOR_MAX_VALUE_UL>>8)+1))/(UPDATE_RATE))*frequency)<<8;
+		step_size = ((((uint32_t)((PHASOR_MAX_VALUE_UL>>8)+1))/(UPDATE_RATE))*frequency)<<8;
 	}
 
 
 	/** Set the Phasor frequency with a float.
 	@param frequency is  how many times per second to count from
-	0 to the maximum unsigned long value 4294967295.
+	0 to the maximum uint32_t value 4294967295.
 	 */
 	inline
 	void setFreq(float frequency)
 	{ // 1 us - using float doesn't seem to incur measurable overhead with the oscilloscope
 		//ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		//{
-		step_size = (unsigned long)(((float)PHASOR_MAX_VALUE_UL/UPDATE_RATE)*frequency);
+		step_size = (uint32_t)(((float)PHASOR_MAX_VALUE_UL/UPDATE_RATE)*frequency);
 
 		//}
 	}
@@ -103,9 +103,9 @@ public:
 	@return the phase increment value which will produce a given frequency.
 	*/
 	inline
-	unsigned long phaseIncFromFreq(int frequency)
+	uint32_t phaseIncFromFreq(int frequency)
 	{
-		return ((((unsigned long)((PHASOR_MAX_VALUE_UL>>8)+1))/(UPDATE_RATE))*frequency)<<8;
+		return ((((uint32_t)((PHASOR_MAX_VALUE_UL>>8)+1))/(UPDATE_RATE))*frequency)<<8;
 	}
 
 
@@ -113,7 +113,7 @@ public:
 	@param stepsize a phase increment value as calculated by phaseIncFromFreq().
 	 */
 	inline
-	void setPhaseInc(unsigned long stepsize)
+	void setPhaseInc(uint32_t stepsize)
 	{
 		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 		{

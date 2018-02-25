@@ -5,6 +5,8 @@
 #if IS_STM32()
 #include <STM32ADC.h>
 extern STM32ADC adc;
+#elif IS_ESP8266()
+#include <esp8266_peri.h>
 #endif
 
 // moved these out of xorshift96() so xorshift96() can be reseeded manually
@@ -137,6 +139,10 @@ void randSeed() {
 	adc.calibrate();
 	dummy = adc.readTemp();
 	z=*(reinterpret_cast<long*>(&dummy));
+#elif IS_ESP8266()
+	x = RANDOM_REG32;
+	y = random (0xFFFFFFFF) ^ RANDOM_REG32;
+	z = random (0xFFFFFFFF) ^ RANDOM_REG32;
 #else
 #warning Automatic random seeding not implemented on this platform
 #endif

@@ -97,7 +97,7 @@ public:
 		 numerator = targetvalue-current_value;
 //		}
 		//float step = (float)numerator/num_steps;
-			T step = numerator/num_steps;
+			T step = numerator/(num_steps ? num_steps : 1);
 //		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 //		{
 			step_size= (T)step;

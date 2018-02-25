@@ -118,6 +118,7 @@ public:
 		target4.phase_type = LINE4;
 		idle.phase_type = IDLE;
 		target4.level = 0;
+		current_phase = &idle;
 	}
 
 

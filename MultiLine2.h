@@ -126,6 +126,8 @@ public:
 		// target4.phase_type = LINE4;
 		// idle.phase_type = IDLE;
 		// target4.level = 0;
+		current_phase_num = NUM_PHASES-1;
+		current_phase = phases[current_phase_num];
 	}
 
 

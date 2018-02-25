@@ -181,12 +181,12 @@ public:
 		if(INTERP==INTERP_LINEAR){
 			// WARNNG this is hard coded for when SAMPLE_F_BITS is 16
 			unsigned int index = phase_fractional >> SAMPLE_F_BITS;
-			out = (int8_t)#include ATOMIC_INCLUDE_H(table + index);
-			int8_t difference = (int8_t)#include ATOMIC_INCLUDE_H((table + 1) + index) - out;
+			out = (int8_t) CONSTTABLE_READ(table + index);
+			int8_t difference = (int8_t) CONSTTABLE_READ((table + 1) + index) - out;
 			int8_t diff_fraction = (int8_t)(((((unsigned int) phase_fractional)>>8)*difference)>>8); // (unsigned int) phase_fractional keeps low word, then>> for only 8 bit precision
 			out += diff_fraction;
 		}else{
-			out = (int8_t)#include ATOMIC_INCLUDE_H(table + (phase_fractional >> SAMPLE_F_BITS));
+			out = (int8_t) CONSTTABLE_READ(table + (phase_fractional >> SAMPLE_F_BITS));
 		}
 		incrementPhase();
 		return out;

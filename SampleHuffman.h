@@ -130,7 +130,7 @@ private:
 	{
 		const uint8_t b = datapos&7;
 		//static uint8_t bt;
-		if(!b) bt = pgm_read_byte(sounddata+((uint32_t)datapos>>3));
+		if(!b) bt = CONSTTABLE_READ(sounddata+((uint32_t)datapos>>3));
 		// extract the indexed bit
 		return ((uint8_t)bt>>(7-b))&1;
 	}
@@ -143,13 +143,13 @@ private:
 		int16_t const * huffcode = huffman;
 		do {
 			if(getbit()) {
-				const int16_t offs = pgm_read_word(huffcode);
+				const int16_t offs = CONSTTABLE_READ_WORD(huffcode);
 				huffcode += offs?offs+1:2;
 			}
 			datapos++;
 		}
-		while(pgm_read_word(huffcode++));
-		return pgm_read_word(huffcode);
+		while(CONSTTABLE_READ_WORD(huffcode++));
+		return CONSTTABLE_READ_WORD(huffcode);
 	}
 
 

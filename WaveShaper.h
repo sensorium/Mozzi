@@ -90,7 +90,7 @@ public:
 	inline
 	int next(int in)
 	{
-		return (uint16_t) pgm_read_word_near(table + in);
+		return (uint16_t) CONSTTABLE_READ_WORD(table + in);
 	}
 
 private:

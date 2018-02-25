@@ -71,7 +71,7 @@ x	B5  Teensy2
 x	B5(25) Teensy2++  
 ..13	Sanguino  
 x       PB8  STM32duino (see "Hardware specific notes", below)
-	RX	ESP8266 *see details*
+	GPIO2	ESP8266 *see details*
 
 For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).  
 
@@ -218,10 +218,15 @@ Work-in-progress, no functional port, yet.
 
 - Atomic operations not implemented. For now I hope I can get away with it due to 32-bitiness. Mid-term I hope updateControl() will be called from the main loop, obsoleting the need for atomic blocks
 - For now we keep tables / samples in flash, but that may not be a good solution on the ESP8266, since flash is comparatively slow - but there is also a comparatively huge amount of RAM to use, instead.
+  - **Oscillators are essentially unuseable as of now!**
 - Output via external DAC not yet implemented
 - The update control period is rather inexact on ESP8266, as it can only be specified in millisecond resolution. This would be fixed, if updateControl() is called from the main loop.
 - Asynchronous analog reads are not implemnted. mozziAnalogRead() relays to analogRead().
-- Audio output is via the I2S pins. Either to an external DAC, or via PDM output to the I2S-Data-Out pin (which is also "RX"). I both cases, all I2S output pins (RX, GPIO2 and GPIO15) will be affected.
-  - This means, Mozzi is not usable on boards such as the ESP01, where one of these pins is tied to Gnd
-  - Also note that the RX pin cannot output any significant amount of current. Connecting a headphone, directly, might damage it. Please use appropriate amplification (which can be as simple as a single
-    transistor, as the output signal is still digitally modulated).
+- Several audio output modes exist, only PDM_VIA_SERIAL is tested, yet:
+  - PDM_VIA_SERIAL: Output is coded using pulse density modulation, and sent via GPIO2 (Serial1 tx).
+    - TODO: Test timing/tuning. Do we need to account for start/stop bits?
+  - PDM_VIA_I2S: Output is coded using pulse density modulation, and sent via the I2S pins. The I2S data out pin (which is also "RX") will have the output, but *all* I2S output pins (RX, GPIO2 and GPIO15) will be
+  affected. This means, this mode is not usable on boards such as the ESP01, where one of these pins is tied to Gnd
+  - EXTERNAL_DAC_VIA_I2S: Output is sent to and external DAC (such as a PT811), digitally coded. This is the only mode that supports STEREO_HACK. It also need the least processing power.
+- Do note that the ESP8266 pins can output less current than the other supported CPUs. The maximum is 12mA, with a recommendation to stay below 6mA.
+  - WHEN CONNECTING A HEADPHONE, DIRECTLY, USE APPROPRIATE CURRENT LIMITING RESISTORS.

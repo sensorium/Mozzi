@@ -72,11 +72,14 @@ PWM frequency tests
 16384Hz single nearly 9 bits (original mode) not bad for a single pin, but carrier freq noise can be an issue
 */
 
-#if IS_ESP8266()
+#if IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
 #include <i2s.h>
 uint16_t output_buffer_size = 0;
 uint64_t samples_written_to_buffer = 0;
 #else
+	#if IS_ESP8266() && (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
+bool output_stopped = true;
+	#endif
 //-----------------------------------------------------------------------------------------------------------------
 // ring buffer for audio output
 CircularBuffer <unsigned int> output_buffer; // fixed size 256
@@ -246,33 +249,48 @@ ISR(ADC_vect, ISR_BLOCK)
 #endif // end main audio input section
 
 #if IS_ESP8266()
-inline void espWriteAudioToBuffer() {
-	#if (ESP_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
-		#if (STEREO_HACK == true)
-		i2s_write_lr(audio_out_1, audio_out_2);
-		#else
-		i2s_lr((uint16_t) (updateAudio() + AUDIO_BIAS), 0);
-		#endif
-	#else
-		uint16_t sample = updateAudio() + AUDIO_BIAS;
-		static uint16_t qerr = 0;
-		// We can write 32 bits at a time to the output buffer, typically, we'll do this either once of twice per sample
-		for (uint8_t words = 0; words < PDM_RESOLUTION; ++words) {
-			uint32_t outbits = 0;
-			for (uint8_t i = 0; i < 32; ++i) {
-				outbits <<= 1;
-				if (sample >= qerr) {
-					outbits |= 1;
-					qerr += 0xFFFF - sample;
-				} else {
-					qerr -= sample;
-				}
+inline uint32_t writePDMCoded(uint16_t sample) {
+	static uint16_t qerr = 0;
+
+        // We can write 32 bits at a time to the output buffer, typically, we'll do this either once of twice per sample
+	for (uint8_t words = 0; words < PDM_RESOLUTION; ++words) {
+		uint32_t outbits = 0;
+		for (uint8_t i = 0; i < 32; ++i) {
+			outbits = outbits << 1;
+			if (sample >= qerr) {
+				outbits |= 1;
+				qerr += 0xFFFF - sample;
+			} else {
+				qerr -= sample;
 			}
-			i2s_write_sample (outbits);
 		}
+	#if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
+		Serial1.write((outbits >> 24) & 0xFF);
+		Serial1.write((outbits >> 16) & 0xFF);
+		Serial1.write((outbits >> 8) & 0xFF);
+		Serial1.write(outbits & 0xFF);
+	#else
+		i2s_write_sample (outbits);
 	#endif
+	}
+}
+
+	#if (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
+inline void espWriteAudioToBuffer() {
+		#if (ESP_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
+			#if (STEREO_HACK == true)
+	updateAudio ();
+	i2s_write_lr(audio_out_1, audio_out_2);
+			#else
+	i2s_lr((uint16_t) (updateAudio() + AUDIO_BIAS), 0);
+			#endif
+		#else
+	uint16_t sample = updateAudio() + AUDIO_BIAS;
+	writePDMCoded(sample);
+		#endif
 	++samples_written_to_buffer;
 }
+	#endif
 #endif
 
 void audioHook() // 2us excluding updateAudio()
@@ -283,8 +301,14 @@ void audioHook() // 2us excluding updateAudio()
 			audio_input = input_buffer.read();
 #endif
 
-#if IS_ESP8266()
-	#if ((ESP_AUDIO_OUT_MODE == PDM_VIA_I2S) && (PDM_RESOLUTION != 1))
+#if IS_ESP8266() && (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
+	while (Serial1.availableForWrite() > (PDM_RESOLUTION*4) && !output_buffer.isEmpty() && !output_stopped) {
+		writePDMCoded(output_buffer.read());
+	}
+#endif
+
+#if IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
+	#if (PDM_RESOLUTION != 1)
 	if (i2s_available() >= PDM_RESOLUTION) {
 	#else
 	if (!i2s_is_full()) {
@@ -293,7 +317,7 @@ void audioHook() // 2us excluding updateAudio()
 	if (!output_buffer.isFull()) {
 #endif
 
-#if IS_ESP8266()
+#if IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
 		//NOTE: On ESP, we simply use the I2S buffer as the output buffer, which saves RAM, but also simplifies things a lot
 		// esp. since i2s output already has output rate control -> no need for a separate output timer
 		espWriteAudioToBuffer();
@@ -393,13 +417,14 @@ static void startAudioStandard()
 	audio_pwm_timer.setOverflow(1 << AUDIO_BITS_PER_CHANNEL);   // Allocate enough room to write all intended bits
 
 #elif IS_ESP8266()
-	i2s_begin();
-	#if ((ESP_AUDIO_OUT_MODE == PDM_VIA_I2S) && (PDM_RESOLUTION != 1))
-	i2s_set_rate(AUDIO_RATE*PDM_RESOLUION);
+	#if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
+	output_stopped = false;
+	Serial1.begin(AUDIO_RATE*(PDM_RESOLUTION*32));
 	#else
-	i2s_set_rate(AUDIO_RATE);
+	i2s_begin();
+	i2s_set_rate(AUDIO_RATE*PDM_RESOLUTION);
+	if (output_buffer_size == 0) output_buffer_size = Serial1.availableForWrite(); // Do not reset count when stopping / restarting
 	#endif
-	if (output_buffer_size == 0) output_buffer_size = i2s_available(); // Do not reset count when stopping / restarting
 #endif
 	//backupMozziTimer1(); // // not for arm
 }
@@ -692,7 +717,9 @@ void stopMozzi(){
 	control_timer.pause();
 #elif IS_ESP8266()
 	control_timer.detach();
+	#if (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
 	i2s_end();
+	#endif  // NOTE: No good way to stop the serial output, but probably not needed, anyway
 #else
 
 	noInterrupts();
@@ -786,11 +813,11 @@ void unPauseMozzi()
 
 unsigned long audioTicks()
 {
-#if IS_ESP8266()
+#if (IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL))
 	#if ((ESP_AUDIO_OUT_MODE == PDM_VIA_I2S) && (PDM_RESOLUTION != 1))
-	return (samples_written_to_buffer - ((output_buffer_size - i2s_available()) / PDM_RESOLUTION));
+	return (samples_written_to_buffer - ((output_buffer_size - Serial1.availableForWrite()) / PDM_RESOLUTION));
 	#else
-	return (samples_written_to_buffer - (output_buffer_size - i2s_available()));
+	return (samples_written_to_buffer - (output_buffer_size - Serial1.availableForWrite()));
 	#endif
 #else
 	return output_buffer.count();

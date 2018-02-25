@@ -5,15 +5,16 @@
 #error This header should be included for ESP architecture, only
 #endif
 
-// AUDIO output modes
+// AUDIO output modes. See README.md
 #define PDM_VIA_I2S 1
-#define EXTERNAL_DAC_VIA_I2S 2    // output via external DAC connected to I2S (PT8211 or similar)
+#define PDM_VIA_SERIAL 2
+#define EXTERNAL_DAC_VIA_I2S 3    // output via external DAC connected to I2S (PT8211 or similar)
 
-#define ESP_AUDIO_OUT_MODE PDM_VIA_I2S
+#define ESP_AUDIO_OUT_MODE PDM_VIA_SERIAL
 #define PDM_RESOLUTION 1   // 1 corresponds to 32 PDM clocks per sample, 2 corresponds to 64 PDM clocks (and more will be overkill)
 
-#if (ESP_AUDIO_OUT_MODE != PDM_VIA_I2S)
-#error this audio output mode not yet implemented
+#if (ESP_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
+#define PDM_RESOLUTION 1   // fix at 1, allows for easier coding
 #endif
 
 #if (AUDIO_MODE == HIFI)

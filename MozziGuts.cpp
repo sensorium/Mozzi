@@ -34,6 +34,7 @@
 #include <STM32ADC.h>
 #include "HardwareTimer.h"
 #elif IS_ESP8266()
+#include <uart.h>
 #include <Ticker.h>
 #endif
 
@@ -265,7 +266,7 @@ inline uint32_t writePDMCoded(uint16_t sample) {
 			                                                // Note that sample only has 16 bits, while the highest bit we consider for writing is bit 17.
 			                                                // Thus, if the highest bit is set, the next three bits cannot be.
 	#if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
-			Serial1.write(fast_pdm_table[lastwritten >> 13]);
+			U1F = fast_pdm_table[lastwritten >> 13];  // optimized version of: Serial1.write(...);
 	#else
 			outbits = outbits << 8;
 			outbits |= fast_pdm_table[lastwritten >> 13];
@@ -277,7 +278,14 @@ inline uint32_t writePDMCoded(uint16_t sample) {
 	}
 }
 
-	#if (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
+	#if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
+void ICACHE_RAM_ATTR write_audio_to_serial_tx() {
+#define OPTIMIZED_SERIAL1_AVAIALABLEFORWRITE (UART_TX_FIFO_SIZE - ((U1S >> USTXC) & 0xff))
+	while ((OPTIMIZED_SERIAL1_AVAIALABLEFORWRITE > (PDM_RESOLUTION*4)) && !output_stopped) {
+		writePDMCoded(output_buffer.read());
+	}
+}
+	#else
 inline void espWriteAudioToBuffer() {
 		#if (ESP_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
 			#if (STEREO_HACK == true)
@@ -303,12 +311,6 @@ void audioHook() // 2us excluding updateAudio()
 			audio_input = input_buffer.read();
 #endif
 
-#if IS_ESP8266() && (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
-	while (Serial1.availableForWrite() > (PDM_RESOLUTION*4) && !output_buffer.isEmpty() && !output_stopped) {
-		writePDMCoded(output_buffer.read());
-	}
-#endif
-
 #if IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
 	#if (PDM_RESOLUTION != 1)
 	if (i2s_available() >= PDM_RESOLUTION) {
@@ -320,7 +322,7 @@ void audioHook() // 2us excluding updateAudio()
 #endif
 
 #if IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
-		//NOTE: On ESP, we simply use the I2S buffer as the output buffer, which saves RAM, but also simplifies things a lot
+		//NOTE: On ESP / output via I2S, we simply use the I2S buffer as the output buffer, which saves RAM, but also simplifies things a lot
 		// esp. since i2s output already has output rate control -> no need for a separate output timer
 		espWriteAudioToBuffer();
 #else
@@ -331,6 +333,10 @@ void audioHook() // 2us excluding updateAudio()
 		#else
 		output_buffer.write((unsigned int) (updateAudio() + AUDIO_BIAS));
 		#endif
+#endif
+
+#if IS_ESP8266()
+		yield();
 #endif
 	}
 //setPin13Low();
@@ -421,11 +427,18 @@ static void startAudioStandard()
 #elif IS_ESP8266()
 	#if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
 	output_stopped = false;
-	Serial1.begin(AUDIO_RATE*(PDM_RESOLUTION*32));
+	Serial1.begin(AUDIO_RATE*(PDM_RESOLUTION*32), SERIAL_8N1, SERIAL_TX_ONLY);
+        // set up a timer to copy from Mozzi output_buffer into Serial TX buffer
+	timer1_isr_init();
+	timer1_attachInterrupt(write_audio_to_serial_tx);
+	// UART FIFO buffer size is 128 bytes. To be on the safe side, we keep the interval to the time needed to write half of that.
+	// PDM_RESOLUTION * 4 bytes per sample written.
+	timer1_enable(TIM_DIV16, TIM_EDGE, TIM_LOOP);
+	timer1_write(F_CPU / (AUDIO_RATE*PDM_RESOLUTION));
 	#else
 	i2s_begin();
 	i2s_set_rate(AUDIO_RATE*PDM_RESOLUTION);
-	if (output_buffer_size == 0) output_buffer_size = Serial1.availableForWrite(); // Do not reset count when stopping / restarting
+	if (output_buffer_size == 0) output_buffer_size = i2s_available(); // Do not reset count when stopping / restarting
 	#endif
 #endif
 	//backupMozziTimer1(); // // not for arm
@@ -817,9 +830,9 @@ unsigned long audioTicks()
 {
 #if (IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL))
 	#if ((ESP_AUDIO_OUT_MODE == PDM_VIA_I2S) && (PDM_RESOLUTION != 1))
-	return (samples_written_to_buffer - ((output_buffer_size - Serial1.availableForWrite()) / PDM_RESOLUTION));
+	return (samples_written_to_buffer - ((output_buffer_size - i2s_available()) / PDM_RESOLUTION));
 	#else
-	return (samples_written_to_buffer - (output_buffer_size - Serial1.availableForWrite()));
+	return (samples_written_to_buffer - (output_buffer_size - i2s_available()));
 	#endif
 #else
 	return output_buffer.count();

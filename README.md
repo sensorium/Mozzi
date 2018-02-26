@@ -226,6 +226,8 @@ Work-in-progress, no finished port, yet.
 - Several audio output modes exist, only PDM_VIA_SERIAL is tested, yet:
   - PDM_VIA_SERIAL: Output is coded using pulse density modulation, and sent via GPIO2 (Serial1 tx).
     - TODO: Test timing/tuning. Do we need to account for start/stop bits?
+    - This output mode uses timer1 for queuing audio sample, so that timer is not available for other uses.
+    - Note that this mode has slightly lower effective analog output range, due to start/stop bits being added to the output stream
   - PDM_VIA_I2S: Output is coded using pulse density modulation, and sent via the I2S pins. The I2S data out pin (which is also "RX") will have the output, but *all* I2S output pins (RX, GPIO2 and GPIO15) will be
   affected. This means, this mode is not usable on boards such as the ESP01, where one of these pins is tied to Gnd
     - TODO: Untested!
@@ -236,13 +238,12 @@ Work-in-progress, no finished port, yet.
   - WHEN CONNECTING A HEADPHONE, DIRECTLY, USE APPROPRIATE CURRENT LIMITING RESISTORS (>= 500Ohms).
 - The audio output resolution is always 16 bits on this platform, _internally_. Thus, in updateAudio, you should scale your output samples to a full 16 bit range. The actual output bittiness cannot easily
   be quantified, due to PDM coding.
-- TODO: Re-consider output buffer, and timer-less output modes. We may need a high-priority interrupt to keep the (Serial) buffer fed, though it does not have to be at the exact (or full) audio rate.
+- audioHook() calls yield() once for every audio sample generated. Thus, as long as your audio output buffer does not run empty, you should not need any additional yield()'s inside loop().
 - TODO: fight code ugliness
 - twi_nonblock is not ported
 
 ## Unrelated notes
 
 - STM32 could support PDM coded output via Serial1 or Serial2, too. (Serial1 is fastest)
-- Faster PDM coding algorithm? Coding multiple bits at once?
 - I think it would be cool, if there was a macro for automatic scaling of the output to the audio output resolution, so that you don't have to fiddle with updateAudio() every time you change the audio
   output options / switch to HIFI_MODE / switch to a different CPU. "SCALE_AUDIO8(value)", "SCALE_AUDIO16(value)", "SCALE_AUDIO(x, value)", which will assume the given input bittiness, and shift ot the required output bittiness (if needed).

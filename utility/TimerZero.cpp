@@ -32,7 +32,7 @@
 // Added by TB2014 for Mozzi library, to hide code from Teensy 3.1
 #if defined (__AVR__)
 
-#include PGMSPACE_INCLUDE_H
+#include <avr/pgmspace.h>
 #include <avr/interrupt.h>
 #include <TimerZero.h>
 #include <Arduino.h>
@@ -54,7 +54,7 @@
 #define PS1024  (1 << CS02) | (1 << CS00)
 
 // table by prescale = 2^n where n is the table index
-static const unsigned char CONSTTABLE_STORAGE preScale[] =
+static const unsigned char __attribute__((section(".progmem.data"))) preScale[] =
         {
                 PS1, 0, 0, PS8, 0, 0, PS64, 0, PS256, 0, PS1024
         };

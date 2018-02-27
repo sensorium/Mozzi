@@ -16,7 +16,6 @@
 
 #include "MozziGuts.h"
 #include "mozzi_fixmath.h"
-#include ATOMIC_INCLUDE_H
 
 // fractional bits for sample index precision
 #define SAMPLE_F_BITS 16
@@ -102,11 +101,7 @@ public:
 	inline
 	void start()
 	{
-		// atomic because start() can be called on a sample in the control interrupt
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			phase_fractional = startpos_fractional;
-		}
+		phase_fractional = startpos_fractional;
 	}
 
 
@@ -229,10 +224,7 @@ public:
 	*/
 	inline
 	void setFreq (int frequency) {
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			phase_increment_fractional = ((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)*frequency)/UPDATE_RATE) << (SAMPLE_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS);
-		}
+		phase_increment_fractional = ((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)*frequency)/UPDATE_RATE) << (SAMPLE_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS);
 	}
 
 
@@ -244,10 +236,7 @@ public:
 	inline
 	void setFreq(float frequency)
 	{ // 1 us - using float doesn't seem to incur measurable overhead with the oscilloscope
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			phase_increment_fractional = (unsigned long)((((float)NUM_TABLE_CELLS * frequency)/UPDATE_RATE) * SAMPLE_F_BITS_AS_MULTIPLIER);
-		}
+		phase_increment_fractional = (unsigned long)((((float)NUM_TABLE_CELLS * frequency)/UPDATE_RATE) * SAMPLE_F_BITS_AS_MULTIPLIER);
 	}
 
 
@@ -262,12 +251,9 @@ public:
 	inline
 	void setFreq_Q24n8(Q24n8 frequency)
 	{
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			//phase_increment_fractional = (frequency* (NUM_TABLE_CELLS>>3)/(UPDATE_RATE>>6)) << (F_BITS-(8-3+6));
-			phase_increment_fractional = (((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)>>3)*frequency)/(UPDATE_RATE>>6))
+		//phase_increment_fractional = (frequency* (NUM_TABLE_CELLS>>3)/(UPDATE_RATE>>6)) << (F_BITS-(8-3+6));
+		phase_increment_fractional = (((((unsigned long)NUM_TABLE_CELLS<<ADJUST_FOR_NUM_TABLE_CELLS)>>3)*frequency)/(UPDATE_RATE>>6))
 			                             << (SAMPLE_F_BITS - ADJUST_FOR_NUM_TABLE_CELLS - (8-3+6));
-		}
 	}
 
 
@@ -305,10 +291,7 @@ public:
 	inline
 	void setPhaseInc(unsigned long phaseinc_fractional)
 	{
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			phase_increment_fractional = phaseinc_fractional;
-		}
+		phase_increment_fractional = phaseinc_fractional;
 	}
 
 

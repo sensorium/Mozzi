@@ -205,9 +205,11 @@ Sets up the timers for audio and control rate processes, storing the timer
 registers so they can be restored when Mozzi stops. startMozzi() goes in your sketch's
 setup() routine.
 
-In STANDARD_PLUS and HIFI modes, Mozzi uses Timer 0 for control interrupts, disabling Arduino
-delay(), millis(), micros() and delayMicroseconds(). 
-For delaying events, you can use Mozzi's EventDelay() unit instead (not to be confused with AudioDelay()). 
+Contrary to earlier versions of Mozzi, this version does not take over Timer 0, and thus Arduino
+functions delay(), millis(), micros() and delayMicroseconds() remain usable in theory. That said,
+you should avoid these functions, as they are slow (or even blocking). For measuring time, refer
+to mozziMircos(). For delaying events, you can use Mozzi's EventDelay() unit instead
+(not to be confused with AudioDelay()).
 
 In STANDARD mode, startMozzi() starts Timer 1 for PWM output and audio output interrupts,
 and in STANDARD_PLUS and HIFI modes, Mozzi uses Timer 1 for PWM and Timer2 for audio interrupts. 
@@ -231,9 +233,8 @@ void startMozzi(int control_rate_hz = CONTROL_RATE);
 
 /** @ingroup core
 Stops audio and control interrupts and restores the timers to the values they
-had before Mozzi was started. This will enable the standard Arduino time
-functions millis(), micros(), delay(), and delayMicroseconds(). This could be
-useful when using sensor libraries which depend on the same timers as Mozzi. 
+had before Mozzi was started. This could be useful when using sensor libraries
+which depend on the same timers as Mozzi.
 
 A potentially better option for resolving timer conflicts involves using
 non-blocking methods, such as demonstrated by the twowire_nonblock code in the
@@ -243,17 +244,14 @@ reading sensors.
 As it is, stopMozzi restores all the Timers used by Mozzi to their previous
 settings. Another scenario which could be easily hacked in MozziGuts.cpp could
 involve individually saving and restoring particular Timer registers depending
-on which one(s) are required for other tasks, so for example the control
-interrupt (Timer 0) could be suspended while audio continues.*/
+on which one(s) are required for other tasks. */
 void stopMozzi();
 
 
 // TB2017 deleted function, use startMozzi() instead
 // /** @ingroup core
 // Restores Mozzi audio and control interrupts, if they have been temporarily
-// disabled with pauseMozzi(). This once more takes over Timer 0, and stops the
-// Arduino time functions millis(), micros(), delay(), and delayMicroseconds() from
-// working.
+// disabled with pauseMozzi().
 // */
 // void unPauseMozzi();
 
@@ -319,8 +317,10 @@ int getAudioInput();
 
 
 /** @ingroup core
-An alternative for Arduino time funcitions like micros() which are disabled by Mozzi when it takes over
-Timer 0 for control interrupts. audioTicks() is updated each time an audio sample
+An alternative for Arduino time functions like micros() and millis(). This is slightly faster than micros(),
+and also it is synchronized with the currently processed audio sample (which, due to the audio
+output buffer, could diverge up to 256/AUDIO_RATE seconds from the current time).
+audioTicks() is updated each time an audio sample
 is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when AUDIO_RATE is
 16384 Hz).
 @return the number of audio ticks since the program began.
@@ -330,9 +330,11 @@ unsigned long audioTicks();
 
 
 /** @ingroup core
-A replacement for Arduino micros() which is disabled by Mozzi which takes over
-Timer 0 for control interrupts. mozziMicros is updated each time an audio sample
-is output, so the resolution is 1/AUDIO_RATE (61 microseconds when AUDIO_RATE is
+An alternative for Arduino time functions like micros() and millis(). This is slightly faster than micros(),
+and also it is synchronized with the currently processed audio sample (which, due to the audio
+output buffer, could diverge up to 256/AUDIO_RATE seconds from the current time).
+audioTicks() is updated each time an audio sample
+is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when AUDIO_RATE is
 16384 Hz).
 @return the approximate number of microseconds since the program began.
 @todo  incorporate mozziMicros() in a more accurate EventDelay()?

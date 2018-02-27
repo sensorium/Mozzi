@@ -17,7 +17,6 @@
 #else
  #include "WProgram.h"
 #endif
-#include ATOMIC_INCLUDE_H
 
 /** For linear changes with a minimum of calculation at each step. For instance,
 you can use Line to make an oscillator glide from one frequency to another,
@@ -58,10 +57,7 @@ public:
 	inline
 	T next()
 	{
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			current_value += step_size;
-		}
+		current_value += step_size;
 		//Serial.println(current_value);
 		return current_value;
 	}
@@ -76,10 +72,7 @@ public:
 	inline
 	void set(T value)
 	{
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			current_value=value;
-		}
+		current_value=value;
 	}
 
 
@@ -92,16 +85,10 @@ public:
 	void set(T targetvalue, T num_steps)
 	{
 		T numerator;
-//		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-//		{
-		 numerator = targetvalue-current_value;
-//		}
+		numerator = targetvalue-current_value;
 		//float step = (float)numerator/num_steps;
-			T step = numerator/(num_steps ? num_steps : 1);
-//		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-//		{
-			step_size= (T)step;
-//		}
+		T step = numerator/(num_steps ? num_steps : 1);
+		step_size= (T)step;
 		//Serial.print("numerator");Serial.print(" \t");Serial.println(numerator);
 		//Serial.print("num_steps");Serial.print(" \t");Serial.println(num_steps);
 		//Serial.print(step);Serial.print(" \t");Serial.println(step_size);
@@ -148,10 +135,7 @@ public:
 	inline
 	unsigned char next()
 	{
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			current_value += step_size;
-		}
+		current_value += step_size;
 		return current_value;
 	}
 
@@ -165,10 +149,7 @@ public:
 	inline
 	void set(unsigned char value)
 	{
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			current_value=value;
-		}
+		current_value=value;
 	}
 
 
@@ -223,10 +204,7 @@ public:
 	inline
 	unsigned int next()
 	{
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			current_value += step_size;
-		}
+		current_value += step_size;
 		return current_value;
 	}
 
@@ -240,10 +218,7 @@ public:
 	inline
 	void set(unsigned int value)
 	{
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			current_value=value;
-		}
+		current_value=value;
 	}
 
 
@@ -301,10 +276,7 @@ public:
 	inline
 	unsigned long next()
 	{
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			current_value += step_size;
-		}
+		current_value += step_size;
 		return current_value;
 	}
 
@@ -318,10 +290,7 @@ public:
 	inline
 	void set(unsigned long value)
 	{
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			current_value=value;
-		}
+		current_value=value;
 	}
 
 

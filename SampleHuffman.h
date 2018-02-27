@@ -44,8 +44,6 @@ The other is "HUFFMAN" which must also fit into Flash RAM
 
 */
 
-#include ATOMIC_INCLUDE_H
-
 class SampleHuffman
 {
 
@@ -106,13 +104,9 @@ public:
 	inline
 	void start()
 	{
-		// atomic because start() can be called on a sample in the control interrupt
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			current = 0;
-			datapos = 0;
-			bt = 0;
-		}
+		current = 0;
+		datapos = 0;
+		bt = 0;
 	}
 	
 private:

@@ -37,7 +37,7 @@
 #endif
 
 
-#if !(F_CPU == 16000000 || F_CPU == 48000000)
+#if (IS_TEENSY3() && F_CPU != 48000000) || (IS_AVR() && F_CPU != 16000000)
 #warning "Mozzi has been tested with a cpu clock speed of 16MHz on Arduino and 48MHz on Teensy 3!  Results may vary with other speeds."
 #endif
 
@@ -432,8 +432,9 @@ static void startAudioStandard()
 #elif IS_ESP8266()
 	#if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
 	output_stopped = false;
-	Serial1.begin(AUDIO_RATE*(PDM_RESOLUTION*32), SERIAL_8N1, SERIAL_TX_ONLY);
-        // set up a timer to copy from Mozzi output_buffer into Serial TX buffer
+	Serial1.begin(AUDIO_RATE*(PDM_RESOLUTION*40), SERIAL_8N1, SERIAL_TX_ONLY);  // Note: PDM_RESOLUTION corresponds to packets of 32 encoded bits  However, the UART (unfortunately) adds a
+	                                                                            // start and stop bit each around each byte, thus sending a total to 40 bits per audio sample per PDM_RESOLUTION.
+	// set up a timer to copy from Mozzi output_buffer into Serial TX buffer
 	timer1_isr_init();
 	timer1_attachInterrupt(write_audio_to_serial_tx);
 	// UART FIFO buffer size is 128 bytes. To be on the safe side, we keep the interval to the time needed to write half of that.

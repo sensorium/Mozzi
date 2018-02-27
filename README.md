@@ -3,7 +3,7 @@
 # ESP8266 port
 This branch is a work-in-progress to port Mozzi to the ESP8266 architecture.
 
-This port is _not_ finished, yet, but basic examples work.
+The port is essentially finished, but needs more testing.
 
 ### sound synthesis library for Arduino  
 
@@ -217,15 +217,12 @@ Some of the differences for Teensy 3.0/3.1 which will affect users include:
 
 Work-in-progress, no finished port, yet.
 
-- Atomic operations not implemented. For now I hope I can get away with it due to 32-bitiness. Mid-term I hope updateControl() will be called from the main loop, obsoleting the need for atomic blocks
 - Since flash memory is not built into the ESP8266, but connected, externally, it is much too slow for keeping wave tables, audio samples, etc. Instead, these are kept in RAM on this platform.
-  - TODO: Does Mozzi actually still need the pgm_read_byte_near, etc. functions? I have read that current GCC versions support regular addressing of flash memory, out of the box?
-- TODO: The update control period is rather inexact on ESP8266, as it can only be specified in millisecond resolution. This would be fixed, if updateControl() is called from the main loop.
-- Asynchronous analog reads are not implemnted. mozziAnalogRead() relays to analogRead().
-- AUDIO_INPUT is not implemeted.
+- Asynchronous analog reads are not implemented. mozziAnalogRead() relays to analogRead().
+- AUDIO_INPUT is not implemented.
+- twi_nonblock is not ported
 - Several audio output modes exist, only PDM_VIA_SERIAL is tested, yet:
   - PDM_VIA_SERIAL: Output is coded using pulse density modulation, and sent via GPIO2 (Serial1 tx).
-    - TODO: Test timing/tuning. Do we need to account for start/stop bits?
     - This output mode uses timer1 for queuing audio sample, so that timer is not available for other uses.
     - Note that this mode has slightly lower effective analog output range, due to start/stop bits being added to the output stream
   - PDM_VIA_I2S: Output is coded using pulse density modulation, and sent via the I2S pins. The I2S data out pin (which is also "RX") will have the output, but *all* I2S output pins (RX, GPIO2 and GPIO15) will be
@@ -234,13 +231,16 @@ Work-in-progress, no finished port, yet.
   - EXTERNAL_DAC_VIA_I2S: Output is sent to and external DAC (such as a PT811), digitally coded. This is the only mode that supports STEREO_HACK. It also need the least processing power.
     - TODO: Untested!
 - There is no "HIFI_MODE", in addition to the above output options. For high quality output, either use an external DAC, or increase the PDM_RESOLUTION value.
-- Do note that the ESP8266 pins can output less current than the other supported CPUs. The maximum is 12mA, with a recommendation to stay below 6mA.
+- Note that the ESP8266 pins can output less current than the other supported CPUs. The maximum is 12mA, with a recommendation to stay below 6mA.
   - WHEN CONNECTING A HEADPHONE, DIRECTLY, USE APPROPRIATE CURRENT LIMITING RESISTORS (>= 500Ohms).
+- _Any_ WiFi-activity can cause severe spikes in power consumption. This can cause audible "ticking" artifacts, long before any other symptoms.
+  - If you do not require WiFi in your sketch, you should turn it off, _explicitly_, using WiFi.mode(WIFI_OFF).
+  - A juicy enough, well regulated power supply, and a stabilizing capacitor between VCC and Gnd can help a lot.
+  - As the (PDM) output signal is digital, a single transistor can be used to amplify it to an independent voltage level.
 - The audio output resolution is always 16 bits on this platform, _internally_. Thus, in updateAudio, you should scale your output samples to a full 16 bit range. The actual output bittiness cannot easily
   be quantified, due to PDM coding.
 - audioHook() calls yield() once for every audio sample generated. Thus, as long as your audio output buffer does not run empty, you should not need any additional yield()'s inside loop().
 - TODO: fight code ugliness
-- twi_nonblock is not ported
 
 ## Unrelated notes
 

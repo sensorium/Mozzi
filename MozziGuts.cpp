@@ -281,7 +281,8 @@ inline uint32_t writePDMCoded(uint16_t sample) {
 	#if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
 void ICACHE_RAM_ATTR write_audio_to_serial_tx() {
 #define OPTIMIZED_SERIAL1_AVAIALABLEFORWRITE (UART_TX_FIFO_SIZE - ((U1S >> USTXC) & 0xff))
-	while ((OPTIMIZED_SERIAL1_AVAIALABLEFORWRITE > (PDM_RESOLUTION*4)) && !output_stopped) {
+	if (output_stopped) return;
+	while (OPTIMIZED_SERIAL1_AVAIALABLEFORWRITE > (PDM_RESOLUTION*4)) {
 		writePDMCoded(output_buffer.read());
 	}
 }

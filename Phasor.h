@@ -18,7 +18,6 @@
  #include "WProgram.h"
 #endif
 #include "mozzi_fixmath.h"
-#include <util/atomic.h>
 
 #define PHASOR_MAX_VALUE_UL 4294967295UL
 
@@ -50,10 +49,7 @@ public:
 	inline
 	unsigned long next()
 	{
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			current_value += step_size; // will wrap
-		}
+		current_value += step_size; // will wrap
 		return current_value;
 	}
 
@@ -86,11 +82,7 @@ public:
 	inline
 	void setFreq(float frequency)
 	{ // 1 us - using float doesn't seem to incur measurable overhead with the oscilloscope
-		//ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		//{
 		step_size = (unsigned long)(((float)PHASOR_MAX_VALUE_UL/UPDATE_RATE)*frequency);
-
-		//}
 	}
 
 	/** phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies.
@@ -115,10 +107,7 @@ public:
 	inline
 	void setPhaseInc(unsigned long stepsize)
 	{
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			step_size = stepsize;
-		}
+		step_size = stepsize;
 	}
 
 };

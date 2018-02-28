@@ -172,7 +172,7 @@ interrupt.
 @return the digitised value of the voltage on the chosen channel, in the range 0-1023. @Note that non-AVR
 hardware may return a different range, e.g. 0-4095 on STM32 boards.
 */
-int mozziAnalogRead(uint8_t pin);
+int16_t mozziAnalogRead(uint8_t pin);
 
 
 /* Used in MozziGuts.cpp, in updateControlWithAutoADC() to kick off any mozziAnalogReads waiting on the stack

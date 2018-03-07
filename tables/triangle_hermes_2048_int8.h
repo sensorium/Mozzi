@@ -14,7 +14,7 @@
 #define TRIANGLE_HERMES_2048_NUM_CELLS 2048
 #define TRIANGLE_HERMES_2048_SAMPLERATE 2048
 
-const int8_t CONSTTABLE_STORAGE TRIANGLE_HERMES_2048_DATA []  =
+CONSTTABLE_STORAGE(int8_t) TRIANGLE_HERMES_2048_DATA []  =
         {
                 -1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
                 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 3,

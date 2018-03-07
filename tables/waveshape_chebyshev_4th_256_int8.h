@@ -12,7 +12,7 @@
 */
 
 #define CHEBYSHEV_4TH_256_NUM_CELLS 256
-const int8_t CONSTTABLE_STORAGE CHEBYSHEV_4TH_256_DATA [] =
+CONSTTABLE_STORAGE(int8_t) CHEBYSHEV_4TH_256_DATA [] =
         {
                 127, 112, 97, 82,
                 68, 55, 42, 30, 19, 7, -3, -13, -23, -32, -40, -49, -56, -63, -70, -77, -83,

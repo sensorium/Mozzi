@@ -11,7 +11,7 @@
 #define COS8192_NUM_CELLS 8192
 #define COS8192_SAMPLERATE 8192
 
-const int8_t CONSTTABLE_STORAGE COS8192_DATA []  =
+CONSTTABLE_STORAGE(int8_t) COS8192_DATA []  =
         {
                 -128, -128, -128, -128, -128, -128, -128,
                 -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128,

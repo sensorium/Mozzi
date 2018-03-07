@@ -11,7 +11,7 @@
 #define SAW1024_NUM_CELLS 1024
 #define SAW1024_SAMPLERATE 1024
 
-const int8_t CONSTTABLE_STORAGE SAW1024_DATA []  =
+CONSTTABLE_STORAGE(int8_t) SAW1024_DATA []  =
         {
                 -128, -128, -128, -128, -127, -127, -127,
                 -127, -126, -126, -126, -126, -125, -125, -125, -125, -125, -124, -124, -124,

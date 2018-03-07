@@ -16,7 +16,7 @@ Useful for waveshaping audio compression/distortion sounds, or emphasising chang
 controls around 0 and making them less sensitive in higher (or lower) ranges.
 */
 
-const int8_t CONSTTABLE_STORAGE  WAVESHAPE_TANH_DATA [256]  =
+CONSTTABLE_STORAGE(int8_t)  WAVESHAPE_TANH_DATA [256]  =
         {
                 -127, -127, -127, -127, -127, -127, -127, -127, -127, -127, -127, -127, -127,
                 -127, -127, -127, -127, -127, -127, -126, -126, -126, -126, -126, -126, -126,

@@ -44,7 +44,7 @@ def chebyTable(outfile, tablename, tablelength, curvenum):
     fout.write('#endif'+'\n')   
     fout.write('#include PGMSPACE_INCLUDE_H'+'\n \n')
     fout.write('#define ' + tablename + '_NUM_CELLS '+ str(tablelength) +'\n')
-    outstring = 'const int8_t CONSTTABLE_STORAGE ' + tablename + '_DATA [] = {'
+    outstring = 'CONSTTABLE_STORAGE(int8_t) ' + tablename + '_DATA [] = {'
     try:
         for num in range(tablelength):
             ## range between -1 and 1 first

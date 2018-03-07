@@ -11,6 +11,6 @@
 #define EMPTY_0_NUM_CELLS 0
 #define EMPTY_0_SAMPLERATE 16384
  
-const int8_t CONSTTABLE_STORAGE EMPTY_0_DATA [] = { };
+CONSTTABLE_STORAGE(int8_t) EMPTY_0_DATA [] = { };
  
  #endif /* EMPTY_0_H_ */

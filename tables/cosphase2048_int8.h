@@ -21,7 +21,7 @@
 
 /** The table data, stored in progmem.
 */
-const int8_t CONSTTABLE_STORAGE COSPHASE2048_DATA []  =
+CONSTTABLE_STORAGE(int8_t) COSPHASE2048_DATA []  =
         {
                 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,
                 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,

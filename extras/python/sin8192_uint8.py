@@ -18,7 +18,7 @@ def generate(outfile, tablename, tablelength, samplerate):
     fout.write('#include PGMSPACE_INCLUDE_H'+'\n \n')
     fout.write('#define ' + tablename + '_NUM_CELLS '+ str(tablelength)+'\n')
     fout.write('#define ' + tablename + '_SAMPLERATE '+ str(samplerate)+'\n \n')
-    outstring = 'const int8_t CONSTTABLE_STORAGE ' + tablename + '_DATA [] = {'
+    outstring = 'CONSTTABLE_STORAGE(int8_t) ' + tablename + '_DATA [] = {'
     halftable = tablelength/2
     try:
         for num in range(tablelength):

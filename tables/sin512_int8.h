@@ -11,7 +11,7 @@
 #define SIN512_NUM_CELLS 512
 #define SIN512_SAMPLERATE 512
 
-const int8_t CONSTTABLE_STORAGE SIN512_DATA []  =
+CONSTTABLE_STORAGE(int8_t) SIN512_DATA []  =
         {
                 0, 1, 2, 4, 5, 7, 8, 9, 11, 12, 14, 15, 16,
                 18, 19, 21, 22, 23, 25, 26, 27, 29, 30, 32, 33, 34, 36, 37, 38, 40, 41, 42, 44,

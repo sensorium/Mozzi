@@ -11,7 +11,7 @@
 #define SAW4096_NUM_CELLS 4096
 #define SAW4096_SAMPLERATE 4096
 
-const int8_t CONSTTABLE_STORAGE SAW4096_DATA []  =
+CONSTTABLE_STORAGE(int8_t) SAW4096_DATA []  =
         {
                 -128, -128, -128, -128, -128, -128, -128,
                 -128, -128, -128, -128, -128, -128, -128, -128, -128, -127, -127, -127, -127,

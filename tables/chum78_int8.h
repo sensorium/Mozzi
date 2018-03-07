@@ -14,7 +14,7 @@
 #define CHUM78_NUM_CELLS 8193
 #define CHUM78_SAMPLERATE 16384
 
-const int8_t CONSTTABLE_STORAGE CHUM78_DATA []  =
+CONSTTABLE_STORAGE(int8_t) CHUM78_DATA []  =
         {
                 -12, -28, -24, -14, -15, -14, -15, -23, -21,
                 -13, -10, -25, -47, -49, -37, -37, -47, -46, -35, -28, -30, -27, -27, -48, -57,

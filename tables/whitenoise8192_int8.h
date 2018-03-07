@@ -15,7 +15,7 @@
 White noise table.
 */
 
-const int8_t CONSTTABLE_STORAGE WHITENOISE8192_DATA []  =
+CONSTTABLE_STORAGE(int8_t) WHITENOISE8192_DATA []  =
         {
                 22, -14, 108, 2, -80, -99, 62, -62,
                 -11, -127, -102, -80, -114, -66, -2, 68, -63, -101, 0, -13, 37, 55, 104, 61,

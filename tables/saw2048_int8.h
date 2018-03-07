@@ -11,7 +11,7 @@
 #define SAW2048_NUM_CELLS 2048
 #define SAW2048_SAMPLERATE 2048
 
-const int8_t CONSTTABLE_STORAGE SAW2048_DATA []  =
+CONSTTABLE_STORAGE(int8_t) SAW2048_DATA []  =
         {
                 -128, -128, -128, -128, -128, -128, -128,
                 -128, -127, -127, -127, -127, -127, -127, -127, -127, -126, -126, -126, -126,

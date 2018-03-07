@@ -11,7 +11,7 @@
 #define COS2048_NUM_CELLS 2048
 #define COS2048_SAMPLERATE 2048
 
-const int8_t CONSTTABLE_STORAGE COS2048_DATA []  =
+CONSTTABLE_STORAGE(int8_t) COS2048_DATA []  =
         {
                 -128, -128, -128, -128, -128, -128, -128,
                 -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128,

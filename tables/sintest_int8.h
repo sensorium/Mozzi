@@ -12,7 +12,7 @@
 template <int16_t N>
 struct TableStruct {
     static const int16_t length = N;
-    const int8_t CONSTTABLE_STORAGE  values[N];
+    CONSTTABLE_STORAGE(int8_t)  values[N];
 };
 
 template <int16_t N>

@@ -249,7 +249,7 @@ ISR(ADC_vect, ISR_BLOCK)
 // lookup table for fast pdm coding on 8 output bits at a time
 static byte fast_pdm_table[] {0, 0b00010000, 0b01000100, 0b10010010, 0b10101010, 0b10110101, 0b11011101, 0b11110111, 0b11111111};
 
-inline uint32_t writePDMCoded(uint16_t sample) {
+inline void writePDMCoded(uint16_t sample) {
 	static uint32_t lastwritten = 0;
 	static uint32_t nexttarget = 0;
 
@@ -443,6 +443,10 @@ static void startAudioStandard()
 	timer1_write(F_CPU / (AUDIO_RATE*PDM_RESOLUTION));
 	#else
 	i2s_begin();
+	#if (ESP_AUDIO_OUT_MODE == PDM_VIA_I2S)
+	pinMode(2, INPUT);  // Set the two unneeded I2S pins to input mode, to reduce side effects
+	pinMode(15, INPUT);
+	#endif
 	i2s_set_rate(AUDIO_RATE*PDM_RESOLUTION);
 	if (output_buffer_size == 0) output_buffer_size = i2s_available(); // Do not reset count when stopping / restarting
 	#endif
@@ -698,8 +702,9 @@ void stopMozzi(){
 #elif IS_ESP8266()
 	#if (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
 	i2s_end();
-	#endif  // NOTE: No good way to stop the serial output, but probably not needed, anyway
-	output_stopped = true;
+	#else
+	output_stopped = true;  // NOTE: No good way to stop the serial output itself, but probably not needed, anyway
+	#endif
 #else
 
 	noInterrupts();

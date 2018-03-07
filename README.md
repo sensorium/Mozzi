@@ -1,10 +1,5 @@
 # Mozzi  
 
-# ESP8266 port
-This branch is a work-in-progress to port Mozzi to the ESP8266 architecture.
-
-The port is essentially finished, but needs more testing.
-
 ### sound synthesis library for Arduino  
 
 
@@ -215,8 +210,6 @@ Some of the differences for Teensy 3.0/3.1 which will affect users include:
 
 ### ESP8266
 
-Work-in-progress, no finished port, yet.
-
 - Since flash memory is not built into the ESP8266, but connected, externally, it is much too slow for keeping wave tables, audio samples, etc. Instead, these are kept in RAM on this platform.
 - Asynchronous analog reads are not implemented. mozziAnalogRead() relays to analogRead().
 - AUDIO_INPUT is not implemented.
@@ -226,8 +219,8 @@ Work-in-progress, no finished port, yet.
     - This output mode uses timer1 for queuing audio sample, so that timer is not available for other uses.
     - Note that this mode has slightly lower effective analog output range, due to start/stop bits being added to the output stream
   - PDM_VIA_I2S: Output is coded using pulse density modulation, and sent via the I2S pins. The I2S data out pin (which is also "RX") will have the output, but *all* I2S output pins (RX, GPIO2 and GPIO15) will be
-  affected. This means, this mode is not usable on boards such as the ESP01, where one of these pins is tied to Gnd
-    - TODO: Untested!
+  affected. Mozzi tries to set GPIO2 and GPIO15 to input mode, and *at the time of this writing*, this allows I2S output on RX even on boards such as the ESP01 (where GPIO15 is tied to Gnd), however, it seems safest to
+  assume that this mode may not be useable on boards where GPIO2 or GPIO15 are not available as output pins.
   - EXTERNAL_DAC_VIA_I2S: Output is sent to and external DAC (such as a PT811), digitally coded. This is the only mode that supports STEREO_HACK. It also need the least processing power.
     - TODO: Untested!
 - There is no "HIFI_MODE", in addition to the above output options. For high quality output, either use an external DAC, or increase the PDM_RESOLUTION value.
@@ -237,13 +230,6 @@ Work-in-progress, no finished port, yet.
   - If you do not require WiFi in your sketch, you should turn it off, _explicitly_, using WiFi.mode(WIFI_OFF).
   - A juicy enough, well regulated power supply, and a stabilizing capacitor between VCC and Gnd can help a lot.
   - As the (PDM) output signal is digital, a single transistor can be used to amplify it to an independent voltage level.
-- The audio output resolution is always 16 bits on this platform, _internally_. Thus, in updateAudio, you should scale your output samples to a full 16 bit range. The actual output bittiness cannot easily
+- The audio output resolution is always 16 bits on this platform, _internally_. Thus, in updateAudio(), you should scale your output samples to a full 16 bit range. The effective number of output bits cannot easily
   be quantified, due to PDM coding.
 - audioHook() calls yield() once for every audio sample generated. Thus, as long as your audio output buffer does not run empty, you should not need any additional yield()'s inside loop().
-- TODO: fight code ugliness
-
-## Unrelated notes
-
-- STM32 could support PDM coded output via Serial1 or Serial2, too. (Serial1 is fastest)
-- I think it would be cool, if there was a macro for automatic scaling of the output to the audio output resolution, so that you don't have to fiddle with updateAudio() every time you change the audio
-  output options / switch to HIFI_MODE / switch to a different CPU. "SCALE_AUDIO8(value)", "SCALE_AUDIO16(value)", "SCALE_AUDIO(x, value)", which will assume the given input bittiness, and shift ot the required output bittiness (if needed).

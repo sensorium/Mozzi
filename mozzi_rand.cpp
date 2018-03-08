@@ -84,7 +84,7 @@ static long longRandom()
 	return rv;
 }
 
-#else
+#elif IS_AVR()
 
 static long longRandom()
 {
@@ -132,13 +132,14 @@ void randSeed() {
 	// random seeds in two subsequent runs, however.
 	adc.enableInternalReading();
 	float dummy = adc.readTemp();
-	x=*(reinterpret_cast<long*>(&dummy));
+        int* dummy_int = (int*) &dummy;
+	x=*dummy_int;
 	adc.calibrate();
 	dummy = adc.readTemp();
-	y=*(reinterpret_cast<long*>(&dummy));
+	y=*dummy_int;
 	adc.calibrate();
 	dummy = adc.readTemp();
-	z=*(reinterpret_cast<long*>(&dummy));
+	z=*dummy_int;
 #elif IS_ESP8266()
 	x = RANDOM_REG32;
 	y = random (0xFFFFFFFF) ^ RANDOM_REG32;

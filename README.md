@@ -66,8 +66,8 @@ x	 9  Boarduino
 x	B5  Teensy2  
 x	B5(25) Teensy2++  
 ..13	Sanguino  
-x       PB8  STM32duino (see "Hardware specific notes", below)
-	GPIO2	ESP8266 *see details*
+x       PB8  STM32duino (see "Hardware specific notes", below)  
+x	GPIO2	ESP8266 *see details*  
 
 For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).  
 
@@ -125,13 +125,14 @@ If you still need more speed, Arduino 1.0.5 produces slightly faster code.
 
 ## Caveats and Workarounds
 
-* While Mozzi is running, the Arduino time functions `millis()`, `micros()`, `delay()`, and
-`delayMicroseconds()` are disabled.  
+* While Mozzi is running, calling 'delay()', 'delayMicroseconds()', or any other function involving a blocking delay is likely to cause severe
+audio glitches. Do not do this.  
 
-Mozzi provides `EventDelay()` for scheduling instead of `delay`, and `mozziMicros()` for timing, with 61us resolution (in `STANDARD` or `STANDARD_PLUS` modes).  
+Mozzi provides `EventDelay()` for scheduling instead of `delay`. A faster alternative to 'millis()' and 'micros()' is `mozziMicros()` for timing,
+with 61us resolution (in `STANDARD` or `STANDARD_PLUS` modes).  
 
-* Mozzi interferes with `analogWrite()`.  In `STANDARD` and `STANDARD_PLUS` audio modes, Mozzi takes over Timer0 (pins 5 and 6) and Timer1 (pins 9 and 10), but you can use the Timer2 pins, 3 and 11 (your board may differ).  In `HIFI` mode, 
-Mozzi uses Timer0, Timer1 (or Timer4 on some boards), and Timer2, so pins 3 and 11 are also out.  
+* Mozzi interferes with `analogWrite()`.  In `STANDARD` and `STANDARD_PLUS` audio modes, Mozzi takes over Timer1 (pins 9 and 10), but you can use the Timer2 pins, 3 and 11 (your board may differ).  In `HIFI` mode, 
+Mozzi uses Timer1 (or Timer4 on some boards), and Timer2, so pins 3 and 11 are also out.  
 
 If you need PWM output (`analogWrite()`), you can do it on any digital pins using the technique in 
 Mozzi>examples>11.Communication>Sinewave_PWM_pins_HIFI.  
@@ -139,8 +140,7 @@ Mozzi>examples>11.Communication>Sinewave_PWM_pins_HIFI.
 * `analogRead()` is replaced by `mozziAnalogRead()`, which works in the background instead of blocking the processor.  
 
 #### Last Resort
-The timers can be made available with `stopMozzi()`, which stops audio and 
-control interrupts, until you call `startMozzi()`.  
+The timers can be made available with `stopMozzi()`, which stops audio interrupts, until you call `startMozzi()`.  
 
 ***
 
@@ -209,13 +209,14 @@ Some of the differences for Teensy 3.0/3.1 which will affect users include:
 - twi_nonblock code by Marije Baalman for non-blocking I2C is not compatible with Teensy 3.0/3.1.
 
 ### ESP8266
+port by Thomas Friedrichsmeier
 
 - Since flash memory is not built into the ESP8266, but connected, externally, it is much too slow for keeping wave tables, audio samples, etc. Instead, these are kept in RAM on this platform.
 - Asynchronous analog reads are not implemented. mozziAnalogRead() relays to analogRead().
 - AUDIO_INPUT is not implemented.
 - twi_nonblock is not ported
-- Several audio output modes exist, only PDM_VIA_SERIAL is tested, yet:
-  - PDM_VIA_SERIAL: Output is coded using pulse density modulation, and sent via GPIO2 (Serial1 tx).
+- Several audio output modes exist, the default beding PDM_VIA_SERIAL:
+  - PDM_VIA_SERIAL: Output is coded using pulse density modulation, and sent via GPIO2 (Serial1 TX).
     - This output mode uses timer1 for queuing audio sample, so that timer is not available for other uses.
     - Note that this mode has slightly lower effective analog output range, due to start/stop bits being added to the output stream
   - PDM_VIA_I2S: Output is coded using pulse density modulation, and sent via the I2S pins. The I2S data out pin (which is also "RX") will have the output, but *all* I2S output pins (RX, GPIO2 and GPIO15) will be

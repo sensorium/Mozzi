@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 /* a hand-drawn envelope with fast attack and slow decay
 */
@@ -14,7 +14,7 @@
 #define ENVELOP2048_NUM_CELLS 2048
 #define ENVELOP2048_SAMPLERATE 2048
 
-const int8_t __attribute__((section(".progmem.data"))) ENVELOP2048_DATA []  =
+CONSTTABLE_STORAGE(int8_t) ENVELOP2048_DATA []  =
         {
                 0, 1, 5, 8, 13, 22, 36, 53, 69, 82, 91,
                 97, 103, 107, 113, 119, 128, 139, 151, 162, 171, 177, 181, 184, 186, 189, 192,

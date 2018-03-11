@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 /* table for waveshaper to impose soft clipping
 */
@@ -14,7 +14,7 @@
 #define WAVESHAPE1_SOFTCLIP_NUM_CELLS 256
 #define WAVESHAPE1_SOFTCLIP_SAMPLERATE 256
 
-const int8_t __attribute__((section(".progmem.data"))) WAVESHAPE1_SOFTCLIP_DATA []  =
+CONSTTABLE_STORAGE(int8_t) WAVESHAPE1_SOFTCLIP_DATA []  =
         {
                 -128, -128, -128, -128, -128,
                 -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128,

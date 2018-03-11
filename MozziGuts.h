@@ -171,6 +171,8 @@ HIFI is not available/not required on Teensy 3.1.
 #include "AudioConfigTeensy3_12bit.h"
 #elif IS_STM32()
 #include "AudioConfigSTM32.h"
+#elif IS_ESP8266()
+#include "AudioConfigESP.h"
 #elif IS_AVR()
 #if (AUDIO_MODE == STANDARD)
 #include "AudioConfigStandard9bitPwm.h"

@@ -6,12 +6,12 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 #define SIN4096_NUM_CELLS 4096
 #define SIN4096_SAMPLERATE 4096
 
-const int8_t __attribute__((section(".progmem.data"))) SIN4096_DATA []  =
+CONSTTABLE_STORAGE(int8_t) SIN4096_DATA []  =
         {
                 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2,
                 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7,

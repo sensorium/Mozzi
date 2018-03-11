@@ -7,12 +7,12 @@
 #else
 #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 template <int16_t N>
 struct TableStruct {
     static const int16_t length = N;
-    const int8_t __attribute__((section(".progmem.data")))  values[N];
+    CONSTTABLE_STORAGE(int8_t)  values[N];
 };
 
 template <int16_t N>

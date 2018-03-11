@@ -87,7 +87,7 @@ public:
 		T numerator;
 		numerator = targetvalue-current_value;
 		//float step = (float)numerator/num_steps;
-			T step = numerator/num_steps;
+		T step = numerator/(num_steps ? num_steps : 1);
 		step_size= (T)step;
 		//Serial.print("numerator");Serial.print(" \t");Serial.println(numerator);
 		//Serial.print("num_steps");Serial.print(" \t");Serial.println(num_steps);

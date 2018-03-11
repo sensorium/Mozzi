@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 /* generated "analogue" triangle wave from Audacity
 */
@@ -14,7 +14,7 @@
 #define TRIANGLE_ANALOGUE512_NUM_CELLS 512
 #define TRIANGLE_ANALOGUE512_SAMPLERATE 512
 
-const int8_t __attribute__((section(".progmem.data"))) TRIANGLE_ANALOGUE512_DATA []  =
+CONSTTABLE_STORAGE(int8_t) TRIANGLE_ANALOGUE512_DATA []  =
         {
                 0, 1, 2, 2, 3, 4, 5, 6,
                 7, 8, 9, 9, 10, 11, 12, 13, 14, 15, 16, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,

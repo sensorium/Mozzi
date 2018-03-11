@@ -33,8 +33,6 @@
 // phmod_proportion is an 15n16 fixed-point number
 #define OSCIL_PHMOD_BITS 16
 
-
-
 /**
 Oscil plays a wavetable, cycling through the table to generate an audio or
 control signal. The frequency of the signal can be set or changed with
@@ -151,7 +149,7 @@ public:
 	int8_t phMod(Q15n16 phmod_proportion)
 	{
 		incrementPhase();
-		return (int8_t)pgm_read_byte_near(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))>>OSCIL_F_BITS) & (NUM_TABLE_CELLS - 1)));
+		return (int8_t)CONSTTABLE_READ(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))>>OSCIL_F_BITS) & (NUM_TABLE_CELLS - 1)));
 	}
 
 
@@ -245,7 +243,7 @@ public:
 	inline
 	int8_t atIndex(unsigned int index)
 	{
-		return (int8_t)pgm_read_byte_near(table + (index & (NUM_TABLE_CELLS - 1)));
+		return (int8_t)CONSTTABLE_READ(table + (index & (NUM_TABLE_CELLS - 1)));
 	}
 
 
@@ -304,10 +302,10 @@ static const uint8_t ADJUST_FOR_NUM_TABLE_CELLS = (NUM_TABLE_CELLS<2048) ? 8 : 0
 	int8_t readTable()
 	{
 #ifdef OSCIL_DITHER_PHASE
-		return (int8_t)pgm_read_byte_near(table + (((phase_fractional + ((int)(xorshift96()>>16))) >> OSCIL_F_BITS) & (NUM_TABLE_CELLS - 1)));
+		return (int8_t)CONSTTABLE_READ(table + (((phase_fractional + ((int)(xorshift96()>>16))) >> OSCIL_F_BITS) & (NUM_TABLE_CELLS - 1)));
 #else
-		return (int8_t)pgm_read_byte_near(table + ((phase_fractional >> OSCIL_F_BITS) & (NUM_TABLE_CELLS - 1)));
-		//return (int8_t)pgm_read_byte_near(table + (((phase_fractional >> OSCIL_F_BITS) | 1 ) & (NUM_TABLE_CELLS - 1))); odd phase, attempt to reduce frequency spurs in output
+		return (int8_t)CONSTTABLE_READ(table + ((phase_fractional >> OSCIL_F_BITS) & (NUM_TABLE_CELLS - 1)));
+		//return (int8_t)CONSTTABLE_READ(table + (((phase_fractional >> OSCIL_F_BITS) | 1 ) & (NUM_TABLE_CELLS - 1))); odd phase, attempt to reduce frequency spurs in output
 #endif
 	}
 

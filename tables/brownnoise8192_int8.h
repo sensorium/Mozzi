@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 /* Brown noise generated in Audacity
 */
@@ -14,7 +14,7 @@
 #define BROWNNOISE8192_NUM_CELLS 8192
 #define BROWNNOISE8192_SAMPLERATE 8192
 
-const int8_t __attribute__((section(".progmem.data"))) BROWNNOISE8192_DATA []  =
+CONSTTABLE_STORAGE(int8_t) BROWNNOISE8192_DATA []  =
         {
                 54, 75, 42, 8, 11, 63, 34, -6, 36,
                 79, 36, 72, 108, 99, 59, 106, 70, 102, 60, 100, 101, 97, 95, 127, 127, 127, 127,

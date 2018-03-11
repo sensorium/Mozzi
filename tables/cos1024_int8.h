@@ -6,12 +6,12 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 #define COS1024_NUM_CELLS 1024
 #define COS1024_SAMPLERATE 1024
 
-const int8_t __attribute__((section(".progmem.data"))) COS1024_DATA []  =
+CONSTTABLE_STORAGE(int8_t) COS1024_DATA []  =
         {
                 -128, -128, -128, -128, -128, -128, -128,
                 -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128,

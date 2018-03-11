@@ -6,14 +6,14 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 // this is the top half of a sin, used as a rough envelope for a cycling fade-in, fade-out with empty space in between.
 
 #define HALFSINWINDOW512_NUM_CELLS 512
 #define HALFSINWINDOW512_SAMPLERATE 512
 
-const int8_t __attribute__((section(".progmem.data"))) HALFSINWINDOW512_DATA []  =
+CONSTTABLE_STORAGE(int8_t) HALFSINWINDOW512_DATA []  =
         {
                 1, 3, 6, 9, 13, 16, 19, 22, 25, 28, 31,
                 34, 38, 41, 44, 47, 50, 53, 56, 59, 62, 65, 68, 71, 74, 77, 80, 83, 86, 89, 92,

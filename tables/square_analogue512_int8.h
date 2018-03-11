@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 /* generated "analogue"  square wave from Audacity
 */
@@ -14,7 +14,7 @@
 #define SQUARE_ANALOGUE512_NUM_CELLS 512
 #define SQUARE_ANALOGUE512_SAMPLERATE 512
 
-const int8_t __attribute__((section(".progmem.data"))) SQUARE_ANALOGUE512_DATA []  =
+CONSTTABLE_STORAGE(int8_t) SQUARE_ANALOGUE512_DATA []  =
         {
                 23, 68, 102, 119, 120, 112, 101,
                 94, 94, 99, 105, 109, 109, 106, 101, 98, 98, 101, 104, 107, 107, 105, 102, 100,

@@ -6,11 +6,11 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
  
 #define EMPTY_0_NUM_CELLS 0
 #define EMPTY_0_SAMPLERATE 16384
  
-const int8_t __attribute__((section(".progmem.data"))) EMPTY_0_DATA [] = { };
+CONSTTABLE_STORAGE(int8_t) EMPTY_0_DATA [] = { };
  
  #endif /* EMPTY_0_H_ */

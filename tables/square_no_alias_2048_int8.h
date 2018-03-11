@@ -9,12 +9,12 @@ If anyone knows an efficient way to do bandlimited synthesis which could work fo
 #else
 #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
  
 #define SQUARE_NO_ALIAS_2048_NUM_CELLS 2048
 #define SQUARE_NO_ALIAS_2048_SAMPLERATE 2048
  
-const int8_t __attribute__((section(".progmem.data"))) SQUARE_NO_ALIAS_2048_DATA
+CONSTTABLE_STORAGE(int8_t) SQUARE_NO_ALIAS_2048_DATA
 [] = {0, 47, 89, 121, 127, 127, 127, 127, 127, 120, 116, 117, 122, 127, 127,
 127, 127, 127, 127, 124, 122, 122, 124, 127, 127, 127, 127, 127, 127, 126, 124,
 124, 125, 127, 127, 127, 127, 127, 127, 127, 125, 125, 125, 126, 127, 127, 127,

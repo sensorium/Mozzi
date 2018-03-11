@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 /* hand-drawn square wave with rounded corners from Audacity
 */
@@ -14,7 +14,7 @@
 #define SMOOTHSQUARE8192_NUM_CELLS 8192
 #define SMOOTHSQUARE8192_SAMPLERATE 8192
 
-const int8_t __attribute__((section(".progmem.data"))) SMOOTHSQUARE8192_DATA []  =
+CONSTTABLE_STORAGE(int8_t) SMOOTHSQUARE8192_DATA []  =
         {
                 -1, 0, -1, 0, -1, 0, 0, 0, -1, 0,
                 -1, 0, -1, 0, 0, -1, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, -1, 0,

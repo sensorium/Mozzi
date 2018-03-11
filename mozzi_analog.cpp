@@ -224,12 +224,17 @@ void adcReadSelectedChannels() {
 
 
 int mozziAnalogRead(uint8_t pin) {
+#if IS_ESP8266()
+#warning Asynchronouos analog reads not implemented for this platform
+	return analogRead(pin);
+#else
 // ADC lib converts pin/channel in startSingleRead
 #if IS_AVR()
 	pin = adcPinToChannelNum(pin); // allow for channel or pin numbers
 #endif
 	adc_channels_to_read.push(pin);
 	return analog_readings[pin];
+#endif
 }
 
 
@@ -277,6 +282,7 @@ void stm32_adc_eoc_handler()
 #elif IS_AVR()
 ISR(ADC_vect, ISR_BLOCK)
 #endif
+#if IS_TEENSY3() || IS_STM32() || IS_AVR()
 {
 	if (first)
 	{
@@ -292,4 +298,5 @@ ISR(ADC_vect, ISR_BLOCK)
    	first=true;
 	}
 }
+#endif
 #endif

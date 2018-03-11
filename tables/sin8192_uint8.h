@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
  
 
 #define sin8192_uint_NUM_CELLS 8192
@@ -15,7 +15,7 @@
 /** Useful as a gain envelope
 */
 
-const int8_t __attribute__((section(".progmem.data"))) sin8192_uint_DATA [] = {0, 0, 0, 0, 0, 0, 0,
+CONSTTABLE_STORAGE(int8_t) sin8192_uint_DATA [] = {0, 0, 0, 0, 0, 0, 0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 /** Cosine wave, out-of-phase so it starts at 127, cycles to -128 and ends at 127
 */
@@ -21,7 +21,7 @@
 
 /** The table data, stored in progmem.
 */
-const int8_t __attribute__((section(".progmem.data"))) COSPHASE2048_DATA []  =
+CONSTTABLE_STORAGE(int8_t) COSPHASE2048_DATA []  =
         {
                 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,
                 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,

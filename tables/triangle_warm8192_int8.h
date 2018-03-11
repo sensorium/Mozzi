@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 /* triangle wave with "warmth" from Audacity
 */
@@ -14,7 +14,7 @@
 #define TRIANGLE_WARM8192_NUM_CELLS 8192
 #define TRIANGLE_WARM8192_SAMPLERATE 8192
 
-const int8_t __attribute__((section(".progmem.data"))) TRIANGLE_WARM8192_DATA []  =
+CONSTTABLE_STORAGE(int8_t) TRIANGLE_WARM8192_DATA []  =
         {
                 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
                 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3,

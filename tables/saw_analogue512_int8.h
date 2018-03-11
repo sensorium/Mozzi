@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 /* generated "analogue" saw wave from Audacity
 */
@@ -14,7 +14,7 @@
 #define SAW_ANALOGUE512_NUM_CELLS 512
 #define SAW_ANALOGUE512_SAMPLERATE 512
 
-const int8_t __attribute__((section(".progmem.data"))) SAW_ANALOGUE512_DATA []  =
+CONSTTABLE_STORAGE(int8_t) SAW_ANALOGUE512_DATA []  =
         {
                 23, 68, 102, 119, 120, 111, 100,
                 92, 91, 95, 101, 106, 106, 102, 97, 93, 92, 94, 97, 100, 100, 97, 94, 91, 90,

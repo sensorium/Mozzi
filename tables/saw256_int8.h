@@ -6,12 +6,12 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 #define SAW256_NUM_CELLS 256
 #define SAW256_SAMPLERATE 256
 
-const int8_t __attribute__((section(".progmem.data"))) SAW256_DATA []  =
+CONSTTABLE_STORAGE(int8_t) SAW256_DATA []  =
         {
                 -128, -127, -126, -125, -124, -123, -122,
                 -121, -120, -119, -118, -117, -116, -115, -114, -113, -112, -111, -110, -109,

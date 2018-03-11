@@ -17,9 +17,9 @@ def generate(outfile, tablename, tablelength, numtables):
     fout.write('#else'+'\n')
     fout.write('#include "WProgram.h"'+'\n')
     fout.write('#endif'+'\n')   
-    fout.write('#include <avr/pgmspace.h>'+'\n \n')
+    fout.write('#include PGMSPACE_INCLUDE_H'+'\n \n')
     fout.write('#define ' + tablename + '_NUM_CELLS '+ str(tablelength) +'\n')
-    fout.write('const int8_t __attribute__((section(".progmem.data"))) ' + tablename + '_DATA [] = { \n')
+    fout.write('CONSTTABLE_STORAGE(int8_t) ' + tablename + '_DATA [] = { \n')
 
     try:
         for tablenum in range(numtables):

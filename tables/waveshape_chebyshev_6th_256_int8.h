@@ -6,13 +6,13 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 /* table for waveshaper using chebyshev polynomials
 */
 
 #define CHEBYSHEV_6TH_256_NUM_CELLS 256
-const int8_t __attribute__((section(".progmem.data"))) CHEBYSHEV_6TH_256_DATA [] =
+CONSTTABLE_STORAGE(int8_t) CHEBYSHEV_6TH_256_DATA [] =
         {
                 127, 93, 62, 34, 8,
                 -15, -35, -53, -69, -82, -94, -103, -111, -118, -122, -126, -128, -128, -128,

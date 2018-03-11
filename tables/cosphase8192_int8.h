@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 /* cos out-of-phase
 */
@@ -14,7 +14,7 @@
 #define COSPHASE8192_NUM_CELLS 8192
 #define COSPHASE8192_SAMPLERATE 8192
 
-const int8_t __attribute__((section(".progmem.data"))) COSPHASE8192_DATA []  =
+CONSTTABLE_STORAGE(int8_t) COSPHASE8192_DATA []  =
         {
         			127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,
 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,

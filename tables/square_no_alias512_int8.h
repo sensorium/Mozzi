@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 /* square wave with rounded corners from Audacity
 */
@@ -14,7 +14,7 @@
 #define SQUARE_NO_ALIAS512_NUM_CELLS 512
 #define SQUARE_NO_ALIAS512_SAMPLERATE 512
 
-const int8_t __attribute__((section(".progmem.data"))) SQUARE_NO_ALIAS512_DATA []  =
+CONSTTABLE_STORAGE(int8_t) SQUARE_NO_ALIAS512_DATA []  =
         {
                 -1, 93, 117, 114, 115,
                 114, 115, 115, 114, 115, 114, 115, 115, 114, 115, 115, 115, 115, 115, 115, 115,

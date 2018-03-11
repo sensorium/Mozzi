@@ -51,7 +51,7 @@ public:
 	inline
 	int8_t next(byte in)
 	{
-		return (int8_t) pgm_read_byte_near(table + in);
+		return (int8_t) CONSTTABLE_READ(table + in);
 	}
 
 private:
@@ -90,7 +90,7 @@ public:
 	inline
 	int next(int in)
 	{
-		return (uint16_t) pgm_read_word_near(table + in);
+		return (uint16_t) CONSTTABLE_READ_WORD(table + in);
 	}
 
 private:

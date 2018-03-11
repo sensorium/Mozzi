@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 #define WAVESHAPE_SIGMOID_NUM_CELLS 256
 
@@ -16,7 +16,7 @@ Useful for waveshaping audio compression/distortion sounds, or emphasising chang
 controls around 0 and making them less sensitive in higher (or lower) ranges.
 */
 
-const int8_t __attribute__((section(".progmem.data"))) WAVESHAPE_SIGMOID_DATA [256] =
+CONSTTABLE_STORAGE(int8_t) WAVESHAPE_SIGMOID_DATA [256] =
         {
                 -127, -127, -127, -127, -127, -127, -127, -127, -127, -127, -127,
                 -127, -127, -127, -127, -127, -127, -127, -127, -126, -126, -126,

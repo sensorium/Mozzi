@@ -6,12 +6,12 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 #define TRIANGLE2048_NUM_CELLS 2048
 #define TRIANGLE2048_SAMPLERATE 2048
 
-const int8_t __attribute__((section(".progmem.data"))) TRIANGLE2048_DATA []  =
+CONSTTABLE_STORAGE(int8_t) TRIANGLE2048_DATA []  =
         {
                 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3,
                 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9,

@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 /* triangle wave with distortion from Audacity
 */
@@ -14,7 +14,7 @@
 #define TRIANGLE_HERMES_2048_NUM_CELLS 2048
 #define TRIANGLE_HERMES_2048_SAMPLERATE 2048
 
-const int8_t __attribute__((section(".progmem.data"))) TRIANGLE_HERMES_2048_DATA []  =
+CONSTTABLE_STORAGE(int8_t) TRIANGLE_HERMES_2048_DATA []  =
         {
                 -1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
                 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 3,

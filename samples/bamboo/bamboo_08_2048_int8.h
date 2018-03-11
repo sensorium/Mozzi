@@ -6,12 +6,12 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 #define BAMBOO_08_2048_NUM_CELLS 2048
 #define BAMBOO_08_2048_SAMPLERATE 16384
 
-const int8_t __attribute__((section(".progmem.data"))) BAMBOO_08_2048_DATA []  = {1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
+CONSTTABLE_STORAGE(int8_t) BAMBOO_08_2048_DATA []  = {1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
                 0, 1, 0, 0, 0, -6, -33, -86, -100, -11, 111, 125, 49, -15, -60, -49, -7, -7, -1,
                 9, -27, -38, 21, 77, 80, 50, 0, -42, -46, -32, 3, -13, -91, -62, 44, 80, 36, -5,
                 15, 47, 27, 5, -8, -60, -78, -34, -7, 12, 12, -7, 15, 51, 55, 43, 20, -24, -56,

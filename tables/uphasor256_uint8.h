@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include <avr/pgmspace.h>
+#include PGMSPACE_INCLUDE_H
 
 /* ramp
 */
@@ -14,7 +14,7 @@
 #define UPHASOR256_NUM_CELLS 256
 #define UPHASOR256_SAMPLERATE 256
 
-const int8_t __attribute__((section(".progmem.data"))) UPHASOR256_DATA []  =
+CONSTTABLE_STORAGE(int8_t) UPHASOR256_DATA []  =
         {
                 0,1,2,3,4,5,6,7,8,9,
                 10,11,12,13,14,15,16,17,18,19,

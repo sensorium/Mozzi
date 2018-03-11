@@ -31,10 +31,13 @@
 #elif IS_STM32()
 #include <STM32ADC.h>
 #include "HardwareTimer.h"
+#elif IS_ESP8266()
+#include <uart.h>
+#include <Ticker.h>
 #endif
 
 
-#if !(F_CPU == 16000000 || F_CPU == 48000000)
+#if (IS_TEENSY3() && F_CPU != 48000000) || (IS_AVR() && F_CPU != 16000000)
 #warning "Mozzi has been tested with a cpu clock speed of 16MHz on Arduino and 48MHz on Teensy 3!  Results may vary with other speeds."
 #endif
 
@@ -68,7 +71,14 @@ PWM frequency tests
 16384Hz single nearly 9 bits (original mode) not bad for a single pin, but carrier freq noise can be an issue
 */
 
-
+#if IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
+#include <i2s.h>
+uint16_t output_buffer_size = 0;
+uint64_t samples_written_to_buffer = 0;
+#else
+	#if IS_ESP8266() && (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
+bool output_stopped = true;
+	#endif
 //-----------------------------------------------------------------------------------------------------------------
 // ring buffer for audio output
 CircularBuffer <unsigned int> output_buffer; // fixed size 256
@@ -76,6 +86,7 @@ CircularBuffer <unsigned int> output_buffer; // fixed size 256
 CircularBuffer <unsigned int> output_buffer2; // fixed size 256
 #endif
 //-----------------------------------------------------------------------------------------------------------------
+#endif
 
 #if IS_AVR() // not storing backups, just turning timer on and off for pause for teensy 3, 3.1, other ARMs
 
@@ -234,6 +245,60 @@ ISR(ADC_vect, ISR_BLOCK)
 }
 #endif // end main audio input section
 
+#if IS_ESP8266()
+// lookup table for fast pdm coding on 8 output bits at a time
+static byte fast_pdm_table[] {0, 0b00010000, 0b01000100, 0b10010010, 0b10101010, 0b10110101, 0b11011101, 0b11110111, 0b11111111};
+
+inline void writePDMCoded(uint16_t sample) {
+	static uint32_t lastwritten = 0;
+	static uint32_t nexttarget = 0;
+
+        // We can write 32 bits at a time to the output buffer, typically, we'll do this either once of twice per sample
+	for (uint8_t words = 0; words < PDM_RESOLUTION; ++words) {
+		uint32_t outbits = 0;
+		for (uint8_t i = 0; i < 4; ++i) {
+			nexttarget += sample - lastwritten;
+			lastwritten = nexttarget & 0b11110000000000000; // code the highest 3-and-a-little bits next.
+			                                                // Note that sample only has 16 bits, while the highest bit we consider for writing is bit 17.
+			                                                // Thus, if the highest bit is set, the next three bits cannot be.
+	#if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
+			U1F = fast_pdm_table[lastwritten >> 13];  // optimized version of: Serial1.write(...);
+	#else
+			outbits = outbits << 8;
+			outbits |= fast_pdm_table[lastwritten >> 13];
+	#endif
+                }
+	#if (ESP_AUDIO_OUT_MODE == PDM_VIA_I2S)
+		i2s_write_sample (outbits);
+	#endif
+	}
+}
+
+	#if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
+void ICACHE_RAM_ATTR write_audio_to_serial_tx() {
+#define OPTIMIZED_SERIAL1_AVAIALABLEFORWRITE (UART_TX_FIFO_SIZE - ((U1S >> USTXC) & 0xff))
+	if (output_stopped) return;
+	while (OPTIMIZED_SERIAL1_AVAIALABLEFORWRITE > (PDM_RESOLUTION*4)) {
+		writePDMCoded(output_buffer.read());
+	}
+}
+	#else
+inline void espWriteAudioToBuffer() {
+		#if (ESP_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
+			#if (STEREO_HACK == true)
+	updateAudio ();
+	i2s_write_lr(audio_out_1, audio_out_2);
+			#else
+	i2s_lr((uint16_t) (updateAudio() + AUDIO_BIAS), 0);
+			#endif
+		#else
+	uint16_t sample = updateAudio() + AUDIO_BIAS;
+	writePDMCoded(sample);
+		#endif
+	++samples_written_to_buffer;
+}
+	#endif
+#endif
 
 static uint16_t update_control_timeout;
 static uint16_t update_control_counter;
@@ -246,13 +311,26 @@ void audioHook() // 2us excluding updateAudio()
 			audio_input = input_buffer.read();
 #endif
 
+#if IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
+	#if (PDM_RESOLUTION != 1)
+	if (i2s_available() >= PDM_RESOLUTION) {
+	#else
+	if (!i2s_is_full()) {
+	#endif
+#else
 	if (!output_buffer.isFull()) {
+#endif
 		if (!update_control_counter) {
 			update_control_counter = update_control_timeout;
 			updateControlWithAutoADC ();
 		} else {
 			--update_control_counter;
 		}
+#if IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
+		//NOTE: On ESP / output via I2S, we simply use the I2S buffer as the output buffer, which saves RAM, but also simplifies things a lot
+		// esp. since i2s output already has output rate control -> no need for a separate output timer
+		espWriteAudioToBuffer();
+#else
 		#if (STEREO_HACK == true)
 		updateAudio(); // in hacked version, this returns void
 		output_buffer.write((unsigned int) (audio_out_1 + AUDIO_BIAS));
@@ -260,7 +338,11 @@ void audioHook() // 2us excluding updateAudio()
 		#else
 		output_buffer.write((unsigned int) (updateAudio() + AUDIO_BIAS));
 		#endif
+#endif
 
+#if IS_ESP8266()
+		yield();
+#endif
 	}
 //setPin13Low();
 }
@@ -347,6 +429,27 @@ static void startAudioStandard()
 #endif
 	audio_pwm_timer.setOverflow(1 << AUDIO_BITS_PER_CHANNEL);   // Allocate enough room to write all intended bits
 
+#elif IS_ESP8266()
+	#if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
+	output_stopped = false;
+	Serial1.begin(AUDIO_RATE*(PDM_RESOLUTION*40), SERIAL_8N1, SERIAL_TX_ONLY);  // Note: PDM_RESOLUTION corresponds to packets of 32 encoded bits  However, the UART (unfortunately) adds a
+	                                                                            // start and stop bit each around each byte, thus sending a total to 40 bits per audio sample per PDM_RESOLUTION.
+	// set up a timer to copy from Mozzi output_buffer into Serial TX buffer
+	timer1_isr_init();
+	timer1_attachInterrupt(write_audio_to_serial_tx);
+	// UART FIFO buffer size is 128 bytes. To be on the safe side, we keep the interval to the time needed to write half of that.
+	// PDM_RESOLUTION * 4 bytes per sample written.
+	timer1_enable(TIM_DIV16, TIM_EDGE, TIM_LOOP);
+	timer1_write(F_CPU / (AUDIO_RATE*PDM_RESOLUTION));
+	#else
+	i2s_begin();
+	#if (ESP_AUDIO_OUT_MODE == PDM_VIA_I2S)
+	pinMode(2, INPUT);  // Set the two unneeded I2S pins to input mode, to reduce side effects
+	pinMode(15, INPUT);
+	#endif
+	i2s_set_rate(AUDIO_RATE*PDM_RESOLUTION);
+	if (output_buffer_size == 0) output_buffer_size = i2s_available(); // Do not reset count when stopping / restarting
+	#endif
 #endif
 	//backupMozziTimer1(); // // not for arm
 }
@@ -595,10 +698,16 @@ void stopMozzi(){
 #if IS_TEENSY3()
 	timer1.end();
 #elif IS_STM32()
-        audio_update_timer.pause();
+	audio_update_timer.pause();
+#elif IS_ESP8266()
+	#if (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
+	i2s_end();
+	#else
+	output_stopped = true;  // NOTE: No good way to stop the serial output itself, but probably not needed, anyway
+	#endif
 #else
 
-    noInterrupts();
+	noInterrupts();
 	
 	// restore backed up register values
 	TCCR1A = pre_mozzi_TCCR1A;
@@ -683,7 +792,15 @@ void unPauseMozzi()
 
 unsigned long audioTicks()
 {
+#if (IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL))
+	#if ((ESP_AUDIO_OUT_MODE == PDM_VIA_I2S) && (PDM_RESOLUTION != 1))
+	return (samples_written_to_buffer - ((output_buffer_size - i2s_available()) / PDM_RESOLUTION));
+	#else
+	return (samples_written_to_buffer - (output_buffer_size - i2s_available()));
+	#endif
+#else
 	return output_buffer.count();
+#endif
 }
 
 

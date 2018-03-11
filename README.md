@@ -125,7 +125,7 @@ If you still need more speed, Arduino 1.0.5 produces slightly faster code.
 
 ## Caveats and Workarounds
 
-* While Mozzi is running, calling 'delay()', 'delayMicroseconds()', or any other function involving a blocking delay is likely to cause severe
+* While Mozzi is running, calling `delay()`, `delayMicroseconds()`, or any other function involving a blocking delay is likely to cause severe
 audio glitches. Do not do this.  
 
 Mozzi provides `EventDelay()` for scheduling instead of `delay`. A faster alternative to 'millis()' and 'micros()' is `mozziMicros()` for timing,
@@ -212,25 +212,25 @@ Some of the differences for Teensy 3.0/3.1 which will affect users include:
 port by Thomas Friedrichsmeier
 
 - Since flash memory is not built into the ESP8266, but connected, externally, it is much too slow for keeping wave tables, audio samples, etc. Instead, these are kept in RAM on this platform.
-- Asynchronous analog reads are not implemented. mozziAnalogRead() relays to analogRead().
+- Asynchronous analog reads are not implemented. `mozziAnalogRead()` relays to `analogRead()`.
 - AUDIO_INPUT is not implemented.
 - twi_nonblock is not ported
-- Several audio output modes exist, the default beding PDM_VIA_SERIAL:
+- Several audio output modes exist, the default being PDM_VIA_SERIAL (configurable in AudioConfigESP.h):
   - PDM_VIA_SERIAL: Output is coded using pulse density modulation, and sent via GPIO2 (Serial1 TX).
     - This output mode uses timer1 for queuing audio sample, so that timer is not available for other uses.
-    - Note that this mode has slightly lower effective analog output range, due to start/stop bits being added to the output stream
+    - Note that this mode has slightly lower effective analog output range than PDM_VIA_I2S, due to start/stop bits being added to the output stream.
   - PDM_VIA_I2S: Output is coded using pulse density modulation, and sent via the I2S pins. The I2S data out pin (which is also "RX") will have the output, but *all* I2S output pins (RX, GPIO2 and GPIO15) will be
-  affected. Mozzi tries to set GPIO2 and GPIO15 to input mode, and *at the time of this writing*, this allows I2S output on RX even on boards such as the ESP01 (where GPIO15 is tied to Gnd), however, it seems safest to
+  affected. Mozzi tries to set GPIO2 and GPIO15 to input mode, and *at the time of this writing*, this allows I2S output on RX even on boards such as the ESP01 (where GPIO15 is tied to Gnd). However, it seems safest to
   assume that this mode may not be useable on boards where GPIO2 or GPIO15 are not available as output pins.
-  - EXTERNAL_DAC_VIA_I2S: Output is sent to and external DAC (such as a PT811), digitally coded. This is the only mode that supports STEREO_HACK. It also need the least processing power.
+  - EXTERNAL_DAC_VIA_I2S: Output is sent to an external DAC (such as a PT8211), digitally coded. This is the only mode that supports STEREO_HACK. It also need the least processing power.
     - TODO: Untested!
-- There is no "HIFI_MODE", in addition to the above output options. For high quality output, either use an external DAC, or increase the PDM_RESOLUTION value.
+- There is no "HIFI_MODE" in addition to the above output options. For high quality output, either use an external DAC, or increase the PDM_RESOLUTION value.
 - Note that the ESP8266 pins can output less current than the other supported CPUs. The maximum is 12mA, with a recommendation to stay below 6mA.
   - WHEN CONNECTING A HEADPHONE, DIRECTLY, USE APPROPRIATE CURRENT LIMITING RESISTORS (>= 500Ohms).
 - _Any_ WiFi-activity can cause severe spikes in power consumption. This can cause audible "ticking" artifacts, long before any other symptoms.
-  - If you do not require WiFi in your sketch, you should turn it off, _explicitly_, using WiFi.mode(WIFI_OFF).
+  - If you do not require WiFi in your sketch, you should turn it off, _explicitly_, using `WiFi.mode(WIFI_OFF)`.
   - A juicy enough, well regulated power supply, and a stabilizing capacitor between VCC and Gnd can help a lot.
   - As the (PDM) output signal is digital, a single transistor can be used to amplify it to an independent voltage level.
 - The audio output resolution is always 16 bits on this platform, _internally_. Thus, in updateAudio(), you should scale your output samples to a full 16 bit range. The effective number of output bits cannot easily
   be quantified, due to PDM coding.
-- audioHook() calls yield() once for every audio sample generated. Thus, as long as your audio output buffer does not run empty, you should not need any additional yield()'s inside loop().
+- audioHook() calls `yield()` once for every audio sample generated. Thus, as long as your audio output buffer does not run empty, you should not need any additional `yield()`s inside `loop()`.

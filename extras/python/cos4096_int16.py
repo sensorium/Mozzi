@@ -1,4 +1,4 @@
-## generates a sin-shaped table with values -128 to 127
+## generates a cos-shaped table scaled to MAX(16-bit Integer)
 
 
 import array
@@ -27,8 +27,7 @@ def generate(outfile, tablename, tablelength, samplerate):
             
             t_x = (math.cos(2*math.pi*x))
 
-            scaled = int(math.floor(t_x*4095.999))
-
+            scaled = int(math.floor(t_x* (32766.999)))
             outstring += str(scaled) + ', '
     finally:
         outstring = textwrap.fill(outstring, 80)
@@ -37,4 +36,4 @@ def generate(outfile, tablename, tablelength, samplerate):
         fout.close()
         print "wrote " + outfile
 
-generate("~/Desktop/cos4096_int12.h", "COS4096X12", 4096, "4096")
+generate("~/Desktop/cos4096_int16.h", "COS4096X16", 4096, "4096")

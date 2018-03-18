@@ -68,6 +68,7 @@ x	B5(25) Teensy2++
 x   DAC/D   Teensy 3.0 3.1 LC 3.2 
 .   DAC/D     Teensy 3.4, 3.5
 x   A0   Gemma M0
+x   Built in Speaker            Adafruit Playground Express
 ..13	Sanguino  
 x       PB8  STM32duino (see "Hardware specific notes", below)  
 x	GPIO2	ESP8266 *see details*  

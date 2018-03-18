@@ -504,6 +504,14 @@ static void startAudioStandard()
 	analogWriteResolution(12);
 	timer1.begin(teensyAudioOutput, 1000000UL/AUDIO_RATE);
 #elif IS_SAMD21()
+#ifdef ARDUINO_SAMD_CIRCUITPLAYGROUND_EXPRESS
+    {
+        static const int CPLAY_SPEAKER_SHUTDOWN= 11;
+        pinMode(CPLAY_SPEAKER_SHUTDOWN, OUTPUT);
+        digitalWrite(CPLAY_SPEAKER_SHUTDOWN, HIGH);
+    }
+    
+#endif
     analogWriteResolution(12);
     analogWrite(DAC0, 0);
     tcConfigure(AUDIO_RATE);

@@ -25,7 +25,7 @@
 #include "TimerOne.h"
 #include "FrequencyTimer2.h"
 #elif IS_TEENSY3()
-// required from http://github.com/pedvide/ADC for Teensy 3.1
+// required from http://github.com/pedvide/ADC for Teensy 3.*
 #include <ADC.h>
 #include "IntervalTimer.h"
 #elif IS_STM32()
@@ -88,7 +88,7 @@ CircularBuffer <unsigned int> output_buffer2; // fixed size 256
 //-----------------------------------------------------------------------------------------------------------------
 #endif
 
-#if IS_AVR() // not storing backups, just turning timer on and off for pause for teensy 3, 3.1, other ARMs
+#if IS_AVR() // not storing backups, just turning timer on and off for pause for teensy 3.*, other ARMs
 
 // to store backups of timer registers so Mozzi can be stopped and pre_mozzi timer values can be restored
 static uint8_t pre_mozzi_TCCR1A, pre_mozzi_TCCR1B, pre_mozzi_OCR1A, pre_mozzi_TIMSK1;
@@ -790,7 +790,7 @@ static void startControl(unsigned int control_rate_hz)
 
 void startMozzi(int control_rate_hz)
 {
-	setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST in setup() if desired (not for Teensy 3.1)
+	setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST in setup() if desired (not for Teensy 3.* )
 	// delay(200); // so AutoRange doesn't read 0 to start with
 	startControl(control_rate_hz);
 #if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS) || IS_STM32()  // Sorry, this is really hacky. But on STM32 regular and HIFI audio modes are so similar to set up, that we do it all in one function.

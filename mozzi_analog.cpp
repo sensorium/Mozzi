@@ -18,7 +18,7 @@
 
 #include "hardware_defines.h"
 #if IS_TEENSY3()
-// required from http://github.com/pedvide/ADC for Teensy 3.1
+// required from http://github.com/pedvide/ADC for Teensy 3.*
 #include <ADC.h>
 #elif IS_STM32()
 #include <STM32ADC.h>

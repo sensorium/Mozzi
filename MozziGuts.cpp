@@ -464,9 +464,9 @@ static void startAudioStandard()
 	pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);	// set pin to output for audio
 	//	pinMode(AUDIO_CHANNEL_2_PIN, OUTPUT);	// set pin to output for audio
 #if (AUDIO_MODE == STANDARD)
-	Timer1.initializeCPUCycles(16000000UL/AUDIO_RATE, PHASE_FREQ_CORRECT);		// set period, phase and frequency correct
+	Timer1.initializeCPUCycles(F_CPU/AUDIO_RATE, PHASE_FREQ_CORRECT);		// set period, phase and frequency correct
 #else // (AUDIO_MODE == STANDARD_PLUS)
-	Timer1.initializeCPUCycles(16000000UL/PWM_RATE, FAST);	// fast mode enables higher PWM rate
+	Timer1.initializeCPUCycles(F_CPU/PWM_RATE, FAST);	// fast mode enables higher PWM rate
 #endif
 	Timer1.pwm(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);		// pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
 #if (STEREO_HACK == true)
@@ -549,7 +549,7 @@ static void startAudioHiFi()
 	// pwm on timer 1
 	pinMode(AUDIO_CHANNEL_1_highByte_PIN, OUTPUT);	// set pin to output for audio, use 3.9k resistor
 	pinMode(AUDIO_CHANNEL_1_lowByte_PIN, OUTPUT);	// set pin to output for audio, use 499k resistor
-	Timer1.initializeCPUCycles(16000000UL/125000, FAST);		// set period for 125000 Hz fast pwm carrier frequency = 14 bits
+	Timer1.initializeCPUCycles(F_CPU/125000, FAST);		// set period for 125000 Hz fast pwm carrier frequency = 14 bits
 	Timer1.pwm(AUDIO_CHANNEL_1_highByte_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
 	Timer1.pwm(AUDIO_CHANNEL_1_lowByte_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
 	backupMozziTimer1();
@@ -613,7 +613,7 @@ static void backupMozziTimer2()
 static void setupTimer2()
 {
 	backupPreMozziTimer2(); // to reset while pausing
-	unsigned long period = 16000000UL/AUDIO_RATE;
+	unsigned long period = F_CPU/AUDIO_RATE;
 	FrequencyTimer2::setPeriodCPUCycles(period);
 	FrequencyTimer2::setOnOverflow(dummy);
 	FrequencyTimer2::enable();

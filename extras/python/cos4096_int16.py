@@ -18,16 +18,16 @@ def generate(outfile, tablename, tablelength, samplerate):
     fout.write('#include PGMSPACE_INCLUDE_H'+'\n \n')
     fout.write('#define ' + tablename + '_NUM_CELLS '+ str(tablelength)+'\n')
     fout.write('#define ' + tablename + '_SAMPLERATE '+ str(samplerate)+'\n \n')
-    outstring = 'CONSTTABLE_STORAGE(int8_t) ' + tablename + '_DATA [] = {'
+    outstring = 'CONSTTABLE_STORAGE(int16_t) ' + tablename + '_DATA [] = {'
 
     try:
         for num in range(tablelength):
             ## range between 0 and 1 first
             x = float(num)/tablelength
             
-            t_x = (math.cos(2*math.pi*x-math.pi)+1)/2
+            t_x = (math.cos(2*math.pi*x))
 
-            scaled = int(math.floor(t_x*255.999))-128
+            scaled = int(math.floor(t_x*4095.999))
 
             outstring += str(scaled) + ', '
     finally:
@@ -37,4 +37,4 @@ def generate(outfile, tablename, tablelength, samplerate):
         fout.close()
         print "wrote " + outfile
 
-generate("~/Desktop/sin1024_int8.h", "SIN1024", 1024, "1024")
+generate("~/Desktop/cos4096_int12.h", "COS4096X12", 4096, "4096")

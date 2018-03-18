@@ -76,11 +76,11 @@ x...11.......Arduino Mega  *broken since Jan 2015 \n
 ....14........Teensy  \n
 x..B5........Teensy2  \n
 x..B5(25)..Teensy2++  \n
-x..A14.....Teensy3.1  \n
+x..A14.....Teensy3.1 and 3.2  \n
 ....13	.......Sanguino  \n
 
 On Teensy 3.1 STANDARD and STANDARD_PLUS are the same, providing 16384Hz sample rate and 12 bit resolution on pin A14/ADC.
-The Teensy 3.1 DAC output does not rely on PWM.
+The Teensy 3.* DAC output does not rely on PWM.
 */
 
 

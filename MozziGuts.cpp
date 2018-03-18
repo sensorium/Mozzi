@@ -206,6 +206,7 @@ static void receiveSecondAudioADC()
 #endif
 }
 
+#if !IS_SAMD21()
 
 #if IS_TEENSY3()
 void adc0_isr(void)
@@ -244,6 +245,76 @@ ISR(ADC_vect, ISR_BLOCK)
 	adc_count++;
 }
 #endif // end main audio input section
+#endif
+
+
+#if IS_SAMD21()
+#define AUDIO_BIAS ((uint16_t) 2048)
+
+static bool tcIsSyncing()
+{
+    return TC5->COUNT16.STATUS.reg & TC_STATUS_SYNCBUSY;
+}
+
+static void tcStartCounter()
+{
+    // Enable TC
+    
+    TC5->COUNT16.CTRLA.reg |= TC_CTRLA_ENABLE;
+    while (tcIsSyncing());
+}
+
+static void tcReset()
+{
+    // Reset TCx
+    TC5->COUNT16.CTRLA.reg = TC_CTRLA_SWRST;
+    while (tcIsSyncing());
+    while (TC5->COUNT16.CTRLA.bit.SWRST);
+}
+
+static void tcDisable()
+{
+    // Disable TC5
+    TC5->COUNT16.CTRLA.reg &= ~TC_CTRLA_ENABLE;
+    while (tcIsSyncing());
+}
+static void tcEnd() {
+    tcDisable();
+    tcReset();
+    analogWrite(DAC0, 0);
+    
+}
+
+static void tcConfigure(uint32_t sampleRate)
+{
+    // Enable GCLK for TCC2 and TC5 (timer counter input clock)
+    GCLK->CLKCTRL.reg = (uint16_t) (GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK0 | GCLK_CLKCTRL_ID(GCM_TC4_TC5)) ;
+    while (GCLK->STATUS.bit.SYNCBUSY);
+    
+    tcReset();
+    
+    // Set Timer counter Mode to 16 bits
+    TC5->COUNT16.CTRLA.reg |= TC_CTRLA_MODE_COUNT16;
+    
+    // Set TC5 mode as match frequency
+    TC5->COUNT16.CTRLA.reg |= TC_CTRLA_WAVEGEN_MFRQ;
+    
+    TC5->COUNT16.CTRLA.reg |= TC_CTRLA_PRESCALER_DIV1 | TC_CTRLA_ENABLE;
+    
+    TC5->COUNT16.CC[0].reg = (uint16_t) (SystemCoreClock / sampleRate - 1);
+    while (tcIsSyncing());
+    
+    // Configure interrupt request
+    NVIC_DisableIRQ(TC5_IRQn);
+    NVIC_ClearPendingIRQ(TC5_IRQn);
+    NVIC_SetPriority(TC5_IRQn, 0);
+    NVIC_EnableIRQ(TC5_IRQn);
+    
+    // Enable the TC5 interrupt request
+    TC5->COUNT16.INTENSET.bit.MC0 = 1;
+    while (tcIsSyncing());
+}
+#endif
 
 #if IS_ESP8266()
 // lookup table for fast pdm coding on 8 output bits at a time
@@ -346,20 +417,53 @@ void audioHook() // 2us excluding updateAudio()
 	}
 //setPin13Low();
 }
-
+        
+#if IS_SAMD21()
+        void TC5_Handler (void) __attribute__ ((weak, alias("samd21AudioOutput")));
+#endif
 
 
 //-----------------------------------------------------------------------------------------------------------------
 #if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS) || IS_STM32()
-
-#if IS_TEENSY3()
+#if IS_SAMD21()
+#ifdef __cplusplus
+    extern "C" {
+#endif
+        
+        void samd21AudioOutput(void);
+#ifdef __cplusplus
+    }
+#endif
+    
+#elif    IS_TEENSY3()
   IntervalTimer timer1;
 #elif IS_STM32()
   HardwareTimer audio_update_timer(AUDIO_UPDATE_TIMER);
   HardwareTimer audio_pwm_timer(AUDIO_PWM_TIMER);
+
 #endif
 
-#if IS_TEENSY3()
+#if IS_SAMD21()
+#ifdef __cplusplus
+    extern "C" {
+#endif
+        
+     void samd21AudioOutput()
+    {
+        
+#if (USE_AUDIO_INPUT==true)
+        adc_count = 0;
+        startSecondAudioADC();
+#endif
+        
+        analogWrite(DAC0, (int)output_buffer.read());
+        TC5->COUNT16.INTFLAG.bit.MC0 = 1;
+
+    }
+#ifdef __cplusplus
+    }
+#endif
+#elif IS_TEENSY3()
 static void teensyAudioOutput()
 {
 	
@@ -398,7 +502,11 @@ static void startAudioStandard()
 	adc->setConversionSpeed(ADC_CONVERSION_SPEED::MED_SPEED); // could be HIGH_SPEED, noisier
 
 	analogWriteResolution(12);
-	timer1.begin(teensyAudioOutput, 1000000UL/AUDIO_RATE); 
+	timer1.begin(teensyAudioOutput, 1000000UL/AUDIO_RATE);
+#elif IS_SAMD21()
+    analogWriteResolution(12);
+    analogWrite(DAC0, 0);
+    tcConfigure(AUDIO_RATE);
 #elif IS_STM32()
         audio_update_timer.pause();
 	audio_update_timer.setPeriod(1000000UL/AUDIO_RATE);
@@ -705,6 +813,7 @@ void stopMozzi(){
 	#else
 	output_stopped = true;  // NOTE: No good way to stop the serial output itself, but probably not needed, anyway
 	#endif
+#elif IS_SAMD21()
 #else
 
 	noInterrupts();

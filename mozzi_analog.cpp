@@ -56,7 +56,7 @@ void setupFastAnalogRead(int8_t speed)
 	// NOTE: These picks are pretty arbitrary. Further available options are 7_5, 28_5, 55_5, 71_5 and 239_5 (i.e. 7.5 ADC cylces, etc.)
 	if (speed == FASTEST_ADC) adc.setSampleRate(ADC_SMPR_1_5);
 	else if (speed == FASTER_ADC) adc.setSampleRate(ADC_SMPR_13_5);
-        else (adc.setSampleRate(ADC_SMPR_41_5));
+        else if (speed == FAST_ADC) (adc.setSampleRate(ADC_SMPR_41_5));
 #endif
 }
 
@@ -69,6 +69,7 @@ void adcEnableInterrupt(){
 
 
 void setupMozziADC(int8_t speed) {
+	if (speed == NO_SETUP_MOZZI_ADC) return;
 #if IS_TEENSY3()
 	adc = new ADC();
 	adc->enableInterrupts(ADC_0);

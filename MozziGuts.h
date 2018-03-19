@@ -222,12 +222,15 @@ which has a default value of 64 (you can re-\#define it in your sketch).
 The practical upper limit for control rate depends on how busy the processor is,
 and you might need to do some tests to find the best setting.
 
+@param adc_speed Passed to setupMozziADC(). See the note, below.
+
 @note startMozzi calls setupMozziADC(), which calls setupFastAnalogRead() and adcDisconnectAllDigitalIns(), 
 which disables digital inputs on all analog input pins.  All in mozzi_analog.h and easy to change if you need to (hack).
 They are all called automatically and hidden away because it keeps things simple for a STANDARD_PLUS set up, 
-but if it turns out to be confusing, they might need to become visible again.
+but if it turns out to be confusing, they might need to become visible again. Use adc_speed=NO_SETUP_MOZZI_ADC to skip
+the ADC setup.
 */
-void startMozzi(int control_rate_hz = CONTROL_RATE);
+void startMozzi(int control_rate_hz = CONTROL_RATE, ANALOG_READ_SPEED adc_speed=FAST_ADC);
 
 
 

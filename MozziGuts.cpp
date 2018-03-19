@@ -680,9 +680,9 @@ static void startControl(unsigned int control_rate_hz)
         update_control_timeout = AUDIO_RATE / control_rate_hz;
 }
 
-void startMozzi(int control_rate_hz)
+void startMozzi(int control_rate_hz, ANALOG_READ_SPEED adc_speed)
 {
-	setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST in setup() if desired (not for Teensy 3.1)
+	setupMozziADC(adc_speed); // you can use setupFastAnalogRead() with FASTER or FASTEST in setup() if desired (not for Teensy 3.1)
 	// delay(200); // so AutoRange doesn't read 0 to start with
 	startControl(control_rate_hz);
 #if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS) || IS_STM32()  // Sorry, this is really hacky. But on STM32 regular and HIFI audio modes are so similar to set up, that we do it all in one function.

@@ -4,7 +4,7 @@
 
 /** @ingroup core
 */
-/* Used internally to put the 0-biased generated audio into the centre of the output range (12 bits)
+/* Used internally to put the 0-biased generated audio into the centre of the output range (12 bits) */
 #define AUDIO_BIAS ((uint16_t) 2048)
 
 

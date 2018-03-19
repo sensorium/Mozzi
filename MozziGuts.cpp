@@ -249,8 +249,7 @@ ISR(ADC_vect, ISR_BLOCK)
 
 
 #if IS_SAMD21()
-#define AUDIO_BIAS ((uint16_t) 2048)
-
+// These are ARM SAMD21 Timer 5 routines to establish a sample rate interrupt
 static bool tcIsSyncing()
 {
     return TC5->COUNT16.STATUS.reg & TC_STATUS_SYNCBUSY;

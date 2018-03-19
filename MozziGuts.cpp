@@ -281,9 +281,10 @@ static void tcDisable()
 static void tcEnd() {
     tcDisable();
     tcReset();
-    analogWrite(DAC0, 0);
+    analogWrite(AUDIO_CHANNEL_1_PIN, 0);
     
 }
+
 
 static void tcConfigure(uint32_t sampleRate)
 {
@@ -455,8 +456,7 @@ void audioHook() // 2us excluding updateAudio()
         adc_count = 0;
         startSecondAudioADC();
 #endif
-        
-        analogWrite(DAC0, (int)output_buffer.read());
+        analogWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
         TC5->COUNT16.INTFLAG.bit.MC0 = 1;
 
     }
@@ -513,7 +513,7 @@ static void startAudioStandard()
     
 #endif
     analogWriteResolution(12);
-    analogWrite(DAC0, 0);
+    analogWrite(AUDIO_CHANNEL_1_PIN, 0);
     tcConfigure(AUDIO_RATE);
 #elif IS_STM32()
         audio_update_timer.pause();

@@ -66,7 +66,7 @@ static const uint8_t channel2sc1a[] = {
 
 
 // for setupFastAnalogRead()
-enum ANALOG_READ_SPEED {FAST_ADC,FASTER_ADC,FASTEST_ADC};
+enum ANALOG_READ_SPEED {FAST_ADC,FASTER_ADC,FASTEST_ADC,NO_SETUP_MOZZI_ADC};
 
 /** 
 @ingroup analog
@@ -92,10 +92,14 @@ void setupFastAnalogRead(int8_t speed=FAST_ADC);
 
 
 
-/*  @ingroup analog
+/**
+@ingroup analog
 Set up for asynchronous analog input, which enables analog reads to take 
 place in the background without blocking the processor.
 @param speed FAST_ADC, FASTER_ADC or FASTEST_ADC.  See setupFastAnalogRead();
+@note Specifying NO_SETUP_MOZZI_ADC for speed makes this function return, immediately. It
+does not undo the ADC setup. If you want to skip on ADC setup, be sure to include
+NO_SETUP_MOZZI_ADC in your call to startMozzi().
 */
 void setupMozziADC(int8_t speed=FAST_ADC);
 

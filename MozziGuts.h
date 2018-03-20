@@ -87,7 +87,7 @@ The Teensy 3.* DAC output does not rely on PWM.
 /** @ingroup core
 Used to set AUDIO_MODE to HIFI.
 
-HIFI for AVR (not for Teensy 3.* and ARM)
+HIFI for AVR  and STM32 (not for Teensy 3.*)
 ----
 Use \#define AUDIO_MODE HIFI in Mozzi/config.h to set the audio mode to HIFI for output 14 bit sound at 16384 Hz sample rate and 125kHz PWM rate.
 The high PWM rate of HIFI mode places the carrier frequency beyond audible range.

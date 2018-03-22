@@ -18,7 +18,7 @@
 
 #include "hardware_defines.h"
 #if IS_TEENSY3()
-// required from http://github.com/pedvide/ADC for Teensy 3.1
+// required from http://github.com/pedvide/ADC for Teensy 3.*
 #include <ADC.h>
 #elif IS_STM32()
 #include <STM32ADC.h>
@@ -152,8 +152,11 @@ static void adcSetChannel(uint8_t channel) {
 // channel (low 4 bits).  this also sets ADLAR (left-adjust result)
 // to 0 (the default).
 #if defined(ADMUX)
-	//ADMUX = (1 << REFS0) | (channel & 0x07); // TB2017 this overwrote analog_reference
+#if defined(TEENSYDUINO) // analog_reference is not part TEENSY 2.0 codebase
+    ADMUX = (1 << REFS0) | (channel & 0x07); // TB2017 this overwrote analog_reference
+#else
 	ADMUX = (analog_reference << 6) | (channel & 0x07);
+#endif
 #endif
 #else
 // For other platforms ADC library converts pin/channel each time in startSingleRead

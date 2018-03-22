@@ -76,18 +76,18 @@ x...11.......Arduino Mega  *broken since Jan 2015 \n
 ....14........Teensy  \n
 x..B5........Teensy2  \n
 x..B5(25)..Teensy2++  \n
-x..A14.....Teensy3.1  \n
+x..A14.....Teensy 3.0, 3.1 and 3.2  \n
 ....13	.......Sanguino  \n
 
-On Teensy 3.1 STANDARD and STANDARD_PLUS are the same, providing 16384Hz sample rate and 12 bit resolution on pin A14/ADC.
-The Teensy 3.1 DAC output does not rely on PWM.
+On Teensy 3.* STANDARD and STANDARD_PLUS are the same, providing 16384Hz sample rate and 12 bit resolution on pin A14/ADC.
+The Teensy 3.* DAC output does not rely on PWM.
 */
 
 
 /** @ingroup core
 Used to set AUDIO_MODE to HIFI.
 
-HIFI (not for Teensy 3.1)
+HIFI for AVR  and STM32 (not for Teensy 3.*)
 ----
 Use \#define AUDIO_MODE HIFI in Mozzi/config.h to set the audio mode to HIFI for output 14 bit sound at 16384 Hz sample rate and 125kHz PWM rate.
 The high PWM rate of HIFI mode places the carrier frequency beyond audible range.
@@ -139,7 +139,7 @@ x...............11.........12...............Freetronics EtherMega  \n
 x...........B5(25)...B6(26)...........Teensy2++  \n
 .................13.........12...............Sanguino  \n
 
-HIFI is not available/not required on Teensy 3.1.
+HIFI is not available/not required on Teensy 3.* or ARM.
 */
 
 //enum audio_modes {STANDARD,STANDARD_PLUS,HIFI};
@@ -173,6 +173,8 @@ HIFI is not available/not required on Teensy 3.1.
 #include "AudioConfigSTM32.h"
 #elif IS_ESP8266()
 #include "AudioConfigESP.h"
+#elif IS_SAMD21()
+#include "AudioConfigSAMD21.h"
 #elif IS_AVR()
 #if (AUDIO_MODE == STANDARD)
 #include "AudioConfigStandard9bitPwm.h"

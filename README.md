@@ -65,6 +65,10 @@ x	 9  Boarduino
 ..14	Teensy  
 x	B5  Teensy2  
 x	B5(25) Teensy2++  
+x   DAC/D   Teensy 3.0 3.1 LC 3.2 
+.   DAC/D     Teensy 3.4, 3.5
+x   A0   Gemma M0
+x   Built in Speaker            Adafruit Playground Express
 ..13	Sanguino  
 x       PB8  STM32duino (see "Hardware specific notes", below)  
 x	GPIO2	ESP8266 *see details*  
@@ -125,6 +129,7 @@ If you still need more speed, Arduino 1.0.5 produces slightly faster code.
 
 ## Caveats and Workarounds
 
+* AVR
 * While Mozzi is running, calling `delay()`, `delayMicroseconds()`, or any other function involving a blocking delay is likely to cause severe
 audio glitches. Do not do this.  
 
@@ -193,21 +198,22 @@ real DAC. Should probably run on any other board supported by [STM32duino](https
 - Note that AUDIO_INPUT and mozziAnalogRead() return values in the STM32's full ADC resolution of 0-4095 rather than AVR's 0-1023.
 - twi_nonblock is not ported
 
-### Teensy 3.0/3.1
+### Teensy 3.0/3.1/3.2/3.4/3.5/LC
 
-Extra libraries required for use withTeensy 3.0/3.1:
-
-- [Timer library](https://github.com/loglow/IntervalTimer) for Teensy 3.0 by Daniel Gilbert
+Extra libraries required for use withTeensy 3.*:
+These are included in the standard Teensyduino install unless you explicitly disable them
+- [Timer library](https://github.com/loglow/IntervalTimer) for Teensy 3.* by Daniel Gilbert
 - [ADC library](http://github.com/pedvide/ADC) by Pedro Villanueva
 
-Some of the differences for Teensy 3.0/3.1 which will affect users include:
+Some of the differences for Teensy 3.0# which will affect users include:
 
-- Audio output is on pin A14/DAC, in STANDARD or STANDARD_PLUS audio modes, These modes are identical on Teensy 3.0/3.1, as the output is via DAC rather than PWM.
+- On Teeensy 3.0/3.1/3.2/Audio output is on pin A14/DAC, in STANDARD or STANDARD_PLUS audio modes. 
+    These modes are identical on Teensy 3.0/3.1/3.2, as the output is via DAC rather than PWM.
 - Output is 12 bits in STANDARD and STANDARD_PLUS modes, up from nearly 9 bits for Atmel based boards. HIFI audio, which works by summing two output pins, is not available on Teensy 3.0/3.1.
-- #include <ADC.h> is required at the top of every Teensy 3.0/3.1 sketch.
+- #include <ADC.h> is required at the top of every Teensy 3 sketch.
 - The examples come with this commented out, for Arduino compatibility.
-- Serial baud rate for monitoring in the IDE needs to be set to 9600 to work with Teensy 3.0/3.1. This slow rate can cause audio glitches.
-- twi_nonblock code by Marije Baalman for non-blocking I2C is not compatible with Teensy 3.0/3.1.
+- Serial baud rate for monitoring in the IDE needs to be set to 9600 to work with Teensy 3.0/3.1/3.2. This slow rate can cause audio glitches.
+- twi_nonblock code by Marije Baalman for non-blocking I2C is not compatible with Teensy 3.0/3.1/3.2.
 
 ### ESP8266
 port by Thomas Friedrichsmeier

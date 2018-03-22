@@ -25,7 +25,7 @@
 #include "TimerOne.h"
 #include "FrequencyTimer2.h"
 #elif IS_TEENSY3()
-// required from http://github.com/pedvide/ADC for Teensy 3.1
+// required from http://github.com/pedvide/ADC for Teensy 3.*
 #include <ADC.h>
 #include "IntervalTimer.h"
 #elif IS_STM32()
@@ -88,7 +88,7 @@ CircularBuffer <unsigned int> output_buffer2; // fixed size 256
 //-----------------------------------------------------------------------------------------------------------------
 #endif
 
-#if IS_AVR() // not storing backups, just turning timer on and off for pause for teensy 3, 3.1, other ARMs
+#if IS_AVR() // not storing backups, just turning timer on and off for pause for teensy 3.*, other ARMs
 
 // to store backups of timer registers so Mozzi can be stopped and pre_mozzi timer values can be restored
 static uint8_t pre_mozzi_TCCR1A, pre_mozzi_TCCR1B, pre_mozzi_OCR1A, pre_mozzi_TIMSK1;
@@ -206,6 +206,7 @@ static void receiveSecondAudioADC()
 #endif
 }
 
+#if !IS_SAMD21()
 
 #if IS_TEENSY3()
 void adc0_isr(void)
@@ -244,6 +245,76 @@ ISR(ADC_vect, ISR_BLOCK)
 	adc_count++;
 }
 #endif // end main audio input section
+#endif
+
+
+#if IS_SAMD21()
+// These are ARM SAMD21 Timer 5 routines to establish a sample rate interrupt
+static bool tcIsSyncing()
+{
+    return TC5->COUNT16.STATUS.reg & TC_STATUS_SYNCBUSY;
+}
+
+static void tcStartCounter()
+{
+    // Enable TC
+    
+    TC5->COUNT16.CTRLA.reg |= TC_CTRLA_ENABLE;
+    while (tcIsSyncing());
+}
+
+static void tcReset()
+{
+    // Reset TCx
+    TC5->COUNT16.CTRLA.reg = TC_CTRLA_SWRST;
+    while (tcIsSyncing());
+    while (TC5->COUNT16.CTRLA.bit.SWRST);
+}
+
+static void tcDisable()
+{
+    // Disable TC5
+    TC5->COUNT16.CTRLA.reg &= ~TC_CTRLA_ENABLE;
+    while (tcIsSyncing());
+}
+static void tcEnd() {
+    tcDisable();
+    tcReset();
+    analogWrite(AUDIO_CHANNEL_1_PIN, 0);
+    
+}
+
+
+static void tcConfigure(uint32_t sampleRate)
+{
+    // Enable GCLK for TCC2 and TC5 (timer counter input clock)
+    GCLK->CLKCTRL.reg = (uint16_t) (GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK0 | GCLK_CLKCTRL_ID(GCM_TC4_TC5)) ;
+    while (GCLK->STATUS.bit.SYNCBUSY);
+    
+    tcReset();
+    
+    // Set Timer counter Mode to 16 bits
+    TC5->COUNT16.CTRLA.reg |= TC_CTRLA_MODE_COUNT16;
+    
+    // Set TC5 mode as match frequency
+    TC5->COUNT16.CTRLA.reg |= TC_CTRLA_WAVEGEN_MFRQ;
+    
+    TC5->COUNT16.CTRLA.reg |= TC_CTRLA_PRESCALER_DIV1 | TC_CTRLA_ENABLE;
+    
+    TC5->COUNT16.CC[0].reg = (uint16_t) (SystemCoreClock / sampleRate - 1);
+    while (tcIsSyncing());
+    
+    // Configure interrupt request
+    NVIC_DisableIRQ(TC5_IRQn);
+    NVIC_ClearPendingIRQ(TC5_IRQn);
+    NVIC_SetPriority(TC5_IRQn, 0);
+    NVIC_EnableIRQ(TC5_IRQn);
+    
+    // Enable the TC5 interrupt request
+    TC5->COUNT16.INTENSET.bit.MC0 = 1;
+    while (tcIsSyncing());
+}
+#endif
 
 #if IS_ESP8266()
 // lookup table for fast pdm coding on 8 output bits at a time
@@ -346,20 +417,52 @@ void audioHook() // 2us excluding updateAudio()
 	}
 //setPin13Low();
 }
-
+        
+#if IS_SAMD21()
+        void TC5_Handler (void) __attribute__ ((weak, alias("samd21AudioOutput")));
+#endif
 
 
 //-----------------------------------------------------------------------------------------------------------------
 #if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS) || IS_STM32()
-
-#if IS_TEENSY3()
+#if IS_SAMD21()
+#ifdef __cplusplus
+    extern "C" {
+#endif
+        
+        void samd21AudioOutput(void);
+#ifdef __cplusplus
+    }
+#endif
+    
+#elif    IS_TEENSY3()
   IntervalTimer timer1;
 #elif IS_STM32()
   HardwareTimer audio_update_timer(AUDIO_UPDATE_TIMER);
   HardwareTimer audio_pwm_timer(AUDIO_PWM_TIMER);
+
 #endif
 
-#if IS_TEENSY3()
+#if IS_SAMD21()
+#ifdef __cplusplus
+    extern "C" {
+#endif
+        
+     void samd21AudioOutput()
+    {
+        
+#if (USE_AUDIO_INPUT==true)
+        adc_count = 0;
+        startSecondAudioADC();
+#endif
+        analogWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
+        TC5->COUNT16.INTFLAG.bit.MC0 = 1;
+
+    }
+#ifdef __cplusplus
+    }
+#endif
+#elif IS_TEENSY3()
 static void teensyAudioOutput()
 {
 	
@@ -398,7 +501,19 @@ static void startAudioStandard()
 	adc->setConversionSpeed(ADC_CONVERSION_SPEED::MED_SPEED); // could be HIGH_SPEED, noisier
 
 	analogWriteResolution(12);
-	timer1.begin(teensyAudioOutput, 1000000UL/AUDIO_RATE); 
+	timer1.begin(teensyAudioOutput, 1000000UL/AUDIO_RATE);
+#elif IS_SAMD21()
+#ifdef ARDUINO_SAMD_CIRCUITPLAYGROUND_EXPRESS
+    {
+        static const int CPLAY_SPEAKER_SHUTDOWN= 11;
+        pinMode(CPLAY_SPEAKER_SHUTDOWN, OUTPUT);
+        digitalWrite(CPLAY_SPEAKER_SHUTDOWN, HIGH);
+    }
+    
+#endif
+    analogWriteResolution(12);
+    analogWrite(AUDIO_CHANNEL_1_PIN, 0);
+    tcConfigure(AUDIO_RATE);
 #elif IS_STM32()
         audio_update_timer.pause();
 	audio_update_timer.setPeriod(1000000UL/AUDIO_RATE);
@@ -464,9 +579,9 @@ static void startAudioStandard()
 	pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);	// set pin to output for audio
 	//	pinMode(AUDIO_CHANNEL_2_PIN, OUTPUT);	// set pin to output for audio
 #if (AUDIO_MODE == STANDARD)
-	Timer1.initializeCPUCycles(16000000UL/AUDIO_RATE, PHASE_FREQ_CORRECT);		// set period, phase and frequency correct
+	Timer1.initializeCPUCycles(F_CPU/AUDIO_RATE, PHASE_FREQ_CORRECT);		// set period, phase and frequency correct
 #else // (AUDIO_MODE == STANDARD_PLUS)
-	Timer1.initializeCPUCycles(16000000UL/PWM_RATE, FAST);	// fast mode enables higher PWM rate
+	Timer1.initializeCPUCycles(F_CPU/PWM_RATE, FAST);	// fast mode enables higher PWM rate
 #endif
 	Timer1.pwm(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);		// pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
 #if (STEREO_HACK == true)
@@ -549,7 +664,7 @@ static void startAudioHiFi()
 	// pwm on timer 1
 	pinMode(AUDIO_CHANNEL_1_highByte_PIN, OUTPUT);	// set pin to output for audio, use 3.9k resistor
 	pinMode(AUDIO_CHANNEL_1_lowByte_PIN, OUTPUT);	// set pin to output for audio, use 499k resistor
-	Timer1.initializeCPUCycles(16000000UL/125000, FAST);		// set period for 125000 Hz fast pwm carrier frequency = 14 bits
+	Timer1.initializeCPUCycles(F_CPU/125000, FAST);		// set period for 125000 Hz fast pwm carrier frequency = 14 bits
 	Timer1.pwm(AUDIO_CHANNEL_1_highByte_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
 	Timer1.pwm(AUDIO_CHANNEL_1_lowByte_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
 	backupMozziTimer1();
@@ -613,7 +728,7 @@ static void backupMozziTimer2()
 static void setupTimer2()
 {
 	backupPreMozziTimer2(); // to reset while pausing
-	unsigned long period = 16000000UL/AUDIO_RATE;
+	unsigned long period = F_CPU/AUDIO_RATE;
 	FrequencyTimer2::setPeriodCPUCycles(period);
 	FrequencyTimer2::setOnOverflow(dummy);
 	FrequencyTimer2::enable();
@@ -682,7 +797,7 @@ static void startControl(unsigned int control_rate_hz)
 
 void startMozzi(int control_rate_hz)
 {
-	setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST in setup() if desired (not for Teensy 3.1)
+	setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST in setup() if desired (not for Teensy 3.* )
 	// delay(200); // so AutoRange doesn't read 0 to start with
 	startControl(control_rate_hz);
 #if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS) || IS_STM32()  // Sorry, this is really hacky. But on STM32 regular and HIFI audio modes are so similar to set up, that we do it all in one function.
@@ -705,6 +820,7 @@ void stopMozzi(){
 	#else
 	output_stopped = true;  // NOTE: No good way to stop the serial output itself, but probably not needed, anyway
 	#endif
+#elif IS_SAMD21()
 #else
 
 	noInterrupts();

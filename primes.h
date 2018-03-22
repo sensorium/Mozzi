@@ -45,7 +45,7 @@ You need to "#include <primes.h>" separately to mozzi_rand.h.
 */
 inline
 unsigned int randPrime(unsigned int n){
-	return CONSTTABLE_READ_WORD(primes+rand(n));
+	return FLASH_OR_RAM_READ<const unsigned int>(primes+rand(n));
 }
 
 /** @ingroup random
@@ -62,7 +62,7 @@ inline
 unsigned int randPrimeUpTo(unsigned int n){
 	unsigned int p;
 	do {
-		p = CONSTTABLE_READ_WORD(primes+rand(TOP_PRIME_INDEX));
+		p = FLASH_OR_RAM_READ<const unsigned int>(primes+rand(TOP_PRIME_INDEX));
 	} while (p > n);
 }
 

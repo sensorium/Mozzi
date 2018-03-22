@@ -51,7 +51,7 @@ public:
 	inline
 	int8_t next(byte in)
 	{
-		return (int8_t) CONSTTABLE_READ(table + in);
+		return FLASH_OR_RAM_READ<const int8_t>(table + in);
 	}
 
 private:
@@ -90,7 +90,7 @@ public:
 	inline
 	int next(int in)
 	{
-		return (uint16_t) CONSTTABLE_READ_WORD(table + in);
+		return FLASH_OR_RAM_READ<const uint16_t>(table + in);
 	}
 
 private:

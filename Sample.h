@@ -176,12 +176,12 @@ public:
 		if(INTERP==INTERP_LINEAR){
 			// WARNNG this is hard coded for when SAMPLE_F_BITS is 16
 			unsigned int index = phase_fractional >> SAMPLE_F_BITS;
-			out = (int8_t) CONSTTABLE_READ(table + index);
-			int8_t difference = (int8_t) CONSTTABLE_READ((table + 1) + index) - out;
+			out = FLASH_OR_RAM_READ<const int8_t>(table + index);
+			int8_t difference = FLASH_OR_RAM_READ<const int8_t>((table + 1) + index) - out;
 			int8_t diff_fraction = (int8_t)(((((unsigned int) phase_fractional)>>8)*difference)>>8); // (unsigned int) phase_fractional keeps low word, then>> for only 8 bit precision
 			out += diff_fraction;
 		}else{
-			out = (int8_t) CONSTTABLE_READ(table + (phase_fractional >> SAMPLE_F_BITS));
+			out = FLASH_OR_RAM_READ<const int8_t>(table + (phase_fractional >> SAMPLE_F_BITS));
 		}
 		incrementPhase();
 		return out;
@@ -210,7 +210,7 @@ public:
 	// int8_t phMod(long phmod_proportion)
 	// {
 	// 	incrementPhase();
-	// 	return (int8_t)CONSTTABLE_READ(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))>>SAMPLE_SAMPLE_F_BITS) & (NUM_TABLE_CELLS - 1)));
+	// 	return FLASH_OR_RAM_READ<const int8_t>(table + (((phase_fractional+(phmod_proportion * NUM_TABLE_CELLS))>>SAMPLE_SAMPLE_F_BITS) & (NUM_TABLE_CELLS - 1)));
 	// }
 
 
@@ -264,7 +264,7 @@ public:
 	inline
 	int8_t atIndex(unsigned int index)
 	{
-		return (int8_t)CONSTTABLE_READ(table + index);
+		return FLASH_OR_RAM_READ<const int8_t>(table + index);
 	}
 
 

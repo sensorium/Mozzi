@@ -9,7 +9,7 @@
 #include "WProgram.h"
 #endif 
 
-#include PGMSPACE_INCLUDE_H
+#include "mozzi_pgmspace.h"
  
 
 #define UMPAH_SAMPLERATE 16384

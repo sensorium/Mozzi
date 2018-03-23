@@ -11,6 +11,8 @@
 #ifndef SAMPLEHUFFMAN_H
 #define SAMPLEHUFFMAN_H
 
+#include "mozzi_pgmspace.h"
+
 /** A sample player for samples encoded with Huffman compression.
 
 This class and the audio2huff.py script are adapted from "audioout",

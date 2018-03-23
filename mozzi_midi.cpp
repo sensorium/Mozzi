@@ -13,7 +13,7 @@ calculation.
  */
 
 
-#include "hardware_defines.h"
+#include "mozzi_pgmspace.h"
 
 float mtof(float midival)
 {

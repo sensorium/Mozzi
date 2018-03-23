@@ -21,6 +21,7 @@
 #endif
 #include "MozziGuts.h"
 #include "mozzi_fixmath.h"
+#include "mozzi_pgmspace.h"
 
 #ifdef OSCIL_DITHER_PHASE
 #include "mozzi_rand.h"

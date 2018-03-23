@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include PGMSPACE_INCLUDE_H
+#include "mozzi_pgmspace.h"
 
 #define SIN4096_NUM_CELLS 4096
 #define SIN4096_SAMPLERATE 4096

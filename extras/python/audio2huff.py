@@ -129,7 +129,7 @@ if __name__ == "__main__":
         print >>hdrf,'#else'
         print >>hdrf,'#include "WProgram.h"'
         print >>hdrf,'#endif \n'
-        print >>hdrf,'#include PGMSPACE_INCLUDE_H\n \n'
+        print >>hdrf,'#include "mozzi_pgmspace.h"\n \n'
         print >>hdrf,"#define " + options.name + "_SAMPLERATE %i"%fs
         print >>hdrf,"#define " + options.name + "_SAMPLE_BITS %i"%options.bits
         print >>hdrf,'CONSTTABLE_STORAGE(int) ' + options.name + '_HUFFMAN[%i] = {\n%s\n};'%(len(decoder.huff),arrayformatter(decoder.huff))

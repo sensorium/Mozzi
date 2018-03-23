@@ -6,7 +6,7 @@
 #else
 #include "WProgram.h"
 #endif
-#include PGMSPACE_INCLUDE_H
+#include "mozzi_pgmspace.h"
  
 #define BLAHBLAH4B_NUM_CELLS 22569
 #define BLAHBLAH4B_SAMPLERATE 16384

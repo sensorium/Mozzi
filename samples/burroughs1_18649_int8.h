@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include PGMSPACE_INCLUDE_H
+#include "mozzi_pgmspace.h"
  
 #define BURROUGHS1_18649_NUM_CELLS 18649
 #define BURROUGHS1_18649_SAMPLERATE 16384

@@ -16,6 +16,7 @@
 
 #include "MozziGuts.h"
 #include "mozzi_fixmath.h"
+#include "mozzi_pgmspace.h"
 
 // fractional bits for sample index precision
 #define SAMPLE_F_BITS 16

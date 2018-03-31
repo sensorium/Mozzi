@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include PGMSPACE_INCLUDE_H
+#include "mozzi_pgmspace.h"
 
 /** Cosine wave, out-of-phase so it starts at 127, cycles to -128 and ends at 127
 */

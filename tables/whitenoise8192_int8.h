@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include PGMSPACE_INCLUDE_H
+#include "mozzi_pgmspace.h"
 
 #define WHITENOISE8192_NUM_CELLS 8192
 #define WHITENOISE8192_SAMPLERATE 8192

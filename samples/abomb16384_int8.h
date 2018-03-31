@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include PGMSPACE_INCLUDE_H
+#include "mozzi_pgmspace.h"
  
 #define ABOMB_NUM_CELLS 16384
 #define ABOMB_SAMPLERATE 16384

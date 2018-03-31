@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include PGMSPACE_INCLUDE_H
+#include "mozzi_pgmspace.h"
 
 #define BAMBOO_03_4096_NUM_CELLS 4096
 #define BAMBOO_03_4096_SAMPLERATE 16384

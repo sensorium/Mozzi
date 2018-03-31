@@ -6,7 +6,7 @@
 #else
 #include "WProgram.h"
 #endif
-#include PGMSPACE_INCLUDE_H
+#include "mozzi_pgmspace.h"
  
 #define RAVEN_ARH_NUM_CELLS 8192
 #define RAVEN_ARH_SAMPLERATE 8192

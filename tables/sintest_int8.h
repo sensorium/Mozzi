@@ -7,7 +7,7 @@
 #else
 #include "WProgram.h"
 #endif
-#include PGMSPACE_INCLUDE_H
+#include "mozzi_pgmspace.h"
 
 template <int16_t N>
 struct TableStruct {

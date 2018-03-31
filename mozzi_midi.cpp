@@ -13,7 +13,7 @@ calculation.
  */
 
 
-#include "hardware_defines.h"
+#include "mozzi_pgmspace.h"
 
 float mtof(float midival)
 {
@@ -134,8 +134,8 @@ Q16n16  Q16n16_mtof(Q16n16 midival_fractional)
 	Q16n16 diff_fraction;
 	uint8_t index = midival_fractional >> 16;
 	uint16_t fraction = (uint16_t) midival_fractional; // keeps low word
-	Q16n16 freq1 = (Q16n16) CONSTTABLE_READ_DWORD(midiToFreq + index);
-	Q16n16 freq2 = (Q16n16) CONSTTABLE_READ_DWORD((midiToFreq + 1) + index);
+	Q16n16 freq1 = (Q16n16) FLASH_OR_RAM_READ<const uint32_t>(midiToFreq + index);
+	Q16n16 freq2 = (Q16n16) FLASH_OR_RAM_READ<const uint32_t>((midiToFreq + 1) + index);
 	Q16n16 difference = freq2 - freq1;
 	if (difference>=65536)
 	{
@@ -154,7 +154,7 @@ A good choice if you're using whole note values, want speed and simplicity, and 
 @return an integer approximation of the midi note's frequency.
 */
 int mtof(uint8_t midi_note){
-	return (int) (CONSTTABLE_READ_DWORD(midiToFreq + midi_note) >> 16);
+	return (FLASH_OR_RAM_READ<const uint32_t>(midiToFreq + midi_note) >> 16);
 }
 
 
@@ -164,5 +164,5 @@ A good choice if you're using whole note values, want speed and simplicity, and 
 @return an integer approximation of the midi note's frequency.
 */
 int mtof(int midi_note){
-	return (int) (CONSTTABLE_READ_DWORD(midiToFreq + midi_note) >> 16);
+	return (FLASH_OR_RAM_READ<const uint32_t>(midiToFreq + midi_note) >> 16);
 }

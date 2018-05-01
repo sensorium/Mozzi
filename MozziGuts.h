@@ -20,7 +20,7 @@
  #include "WProgram.h"
 #endif
 
-
+#include <DAC_MCP49xx.h>
 #include "hardware_defines.h"
 #include "mozzi_analog.h"
 
@@ -297,7 +297,7 @@ are called.
 void audioHook();
 
 
-
+void dacHook(DAC_MCP49xx dac);
 /** @ingroup analog
 This returns audio input from the input buffer, if 
 \#define USE_AUDIO_INPUT true is in the Mozzi/mozzi_config.h file.

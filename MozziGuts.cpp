@@ -16,6 +16,7 @@
 #endif
 
 #include "MozziGuts.h"
+#include <DAC_MCP49xx.h>
 #include "mozzi_config.h" // at the top of all MozziGuts and analog files
 #include "mozzi_analog.h"
 #include "CircularBuffer.h"
@@ -374,6 +375,18 @@ inline void espWriteAudioToBuffer() {
 static uint16_t update_control_timeout;
 static uint16_t update_control_counter;
 static void updateControlWithAutoADC();
+
+
+
+void dacHook(DAC_MCP49xx dac) ///addition by T.Combriat
+{
+	if (!output_buffer.isFull()) {
+	dac.output((unsigned int) (updateAudio() + AUDIO_BIAS));
+	}
+
+
+}
+
 void audioHook() // 2us excluding updateAudio()
 {
 //setPin13High();

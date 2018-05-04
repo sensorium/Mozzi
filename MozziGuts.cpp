@@ -381,7 +381,7 @@ static void updateControlWithAutoADC();
 void dacHook(DAC_MCP49xx dac) ///addition by T.Combriat
 {
 	if (!output_buffer.isFull()) {
-	dac.output((unsigned int) (updateAudio() + AUDIO_BIAS));
+	dac.output((unsigned int) (updateAudio() + 2048));
 	}
 
 

@@ -61,7 +61,7 @@ Mozzi-users list has a thread on this.
 
 #ifdef __DAC_MCP__
 //#define AUDIO_RATE 55000
-#define AUDIO_RATE 65535
+#define AUDIO_RATE 72700
 #else
 #define AUDIO_RATE 16384
 #endif

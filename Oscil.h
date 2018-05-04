@@ -58,7 +58,12 @@ The usage is:
 char2mozzi.py infilename outfilename tablename samplerate
 */
 //template <unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, bool DITHER_PHASE=false>
-template <uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE>
+//template <uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE> //mozzi original
+#ifdef __DAC_MCP__
+template <uint16_t NUM_TABLE_CELLS, unsigned long int UPDATE_RATE>  //T combriat
+#else
+  template <uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE> //mozzi original
+  #endif
 class Oscil
 {
 

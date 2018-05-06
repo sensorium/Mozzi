@@ -9,14 +9,18 @@
  *
  */
 
- #if ARDUINO >= 100
- #include "Arduino.h"
+
+
+#if ARDUINO >= 100
+#include "Arduino.h"
 #else
- #include "WProgram.h"
+#include "WProgram.h"
 #endif
 
+
 #include "MozziGuts.h"
-#include <DAC_MCP49xx.h>
+
+
 #include "mozzi_config.h" // at the top of all MozziGuts and analog files
 #include "mozzi_analog.h"
 #include "CircularBuffer.h"
@@ -35,51 +39,62 @@
 #elif IS_ESP8266()
 #include <uart.h>
 #include <Ticker.h>
-#endif
+#endif 
 
+#ifdef __DAC_MCP__
+#include"AudioConfigMCP4922.h"
+#endif
 
 #if (IS_TEENSY3() && F_CPU != 48000000) || (IS_AVR() && F_CPU != 16000000)
 #warning "Mozzi has been tested with a cpu clock speed of 16MHz on Arduino and 48MHz on Teensy 3!  Results may vary with other speeds."
 #endif
 
 #if IS_TEENSY3()
-	ADC *adc; // adc object
-	uint8_t teensy_pin;
+ADC *adc; // adc object
+uint8_t teensy_pin;
 #elif IS_STM32()
-	STM32ADC adc(ADC1);
-	uint8_t stm32_current_adc_pin;
+STM32ADC adc(ADC1);
+uint8_t stm32_current_adc_pin;
 #endif
 
+
+
+
+
+
 /*
-ATmega328 technical manual, Section 12.7.4:
-The dual-slope operation [of phase correct pwm] has lower maximum operation
-frequency than single slope operation. However, due to the symmetric feature
-of the dual-slope PWM modes, these modes are preferred for motor control
-applications.
-Due to the single-slope operation, the operating frequency of the
-fast PWM mode can be twice as high as the phase correct PWM mode that use
-dual-slope operation. This high frequency makes the fast PWM mode well suited
-for power regulation, rectification, and DAC applications. High frequency allows
-physically small sized external components (coils, capacitors)..
+  ATmega328 technical manual, Section 12.7.4:
+  The dual-slope operation [of phase correct pwm] has lower maximum operation
+  frequency than single slope operation. However, due to the symmetric feature
+  of the dual-slope PWM modes, these modes are preferred for motor control
+  applications.
+  Due to the single-slope operation, the operating frequency of the
+  fast PWM mode can be twice as high as the phase correct PWM mode that use
+  dual-slope operation. This high frequency makes the fast PWM mode well suited
+  for power regulation, rectification, and DAC applications. High frequency allows
+  physically small sized external components (coils, capacitors)..
 
-DAC, that's us!  Fast PWM.
+  DAC, that's us!  Fast PWM.
 
-PWM frequency tests
-62500Hz, single 8 or dual 16 bits, bad aliasing
-125000Hz dual 14 bits, sweet
-250000Hz dual 12 bits, gritty, if you're gonna have 2 pins, have 14 bits
-500000Hz dual 10 bits, grittier
-16384Hz single nearly 9 bits (original mode) not bad for a single pin, but carrier freq noise can be an issue
+  PWM frequency tests
+  62500Hz, single 8 or dual 16 bits, bad aliasing
+  125000Hz dual 14 bits, sweet
+  250000Hz dual 12 bits, gritty, if you're gonna have 2 pins, have 14 bits
+  500000Hz dual 10 bits, grittier
+  16384Hz single nearly 9 bits (original mode) not bad for a single pin, but carrier freq noise can be an issue
 */
+
+
+
 
 #if IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
 #include <i2s.h>
 uint16_t output_buffer_size = 0;
 uint64_t samples_written_to_buffer = 0;
 #else
-	#if IS_ESP8266() && (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
+#if IS_ESP8266() && (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
 bool output_stopped = true;
-	#endif
+#endif
 //-----------------------------------------------------------------------------------------------------------------
 // ring buffer for audio output
 CircularBuffer <unsigned int> output_buffer; // fixed size 256
@@ -107,11 +122,11 @@ static uint8_t pre_mozzi_TCCR4A, pre_mozzi_TCCR4B, pre_mozzi_TCCR4C, pre_mozzi_T
 
 static void backupPreMozziTimer1()
 {
-	// backup pre-mozzi register values for pausing later
-	pre_mozzi_TCCR1A = TCCR1A;
-	pre_mozzi_TCCR1B = TCCR1B;
-	pre_mozzi_OCR1A = OCR1A;
-	pre_mozzi_TIMSK1 = TIMSK1;
+  // backup pre-mozzi register values for pausing later
+  pre_mozzi_TCCR1A = TCCR1A;
+  pre_mozzi_TCCR1B = TCCR1B;
+  pre_mozzi_OCR1A = OCR1A;
+  pre_mozzi_TIMSK1 = TIMSK1;
 }
 
 
@@ -134,11 +149,11 @@ static uint8_t mozzi_TCCR4A, mozzi_TCCR4B, mozzi_TCCR4C, mozzi_TCCR4D, mozzi_TCC
 
 static void backupMozziTimer1()
 {
-	// backup mozzi register values for unpausing later
-	mozzi_TCCR1A = TCCR1A;
-	mozzi_TCCR1B = TCCR1B;
-	mozzi_OCR1A = OCR1A;
-	mozzi_TIMSK1 = TIMSK1;
+  // backup mozzi register values for unpausing later
+  mozzi_TCCR1A = TCCR1A;
+  mozzi_TCCR1B = TCCR1B;
+  mozzi_OCR1A = OCR1A;
+  mozzi_TIMSK1 = TIMSK1;
 }
 
 #endif // end of timer backups for non-Teensy 3 boards
@@ -156,40 +171,40 @@ uint8_t adc_count = 0;
 
 int getAudioInput()
 {
-	return audio_input;
+  return audio_input;
 }
 
 
 static void startFirstAudioADC()
 {
 #if IS_TEENSY3()
-	adc->startSingleRead(AUDIO_INPUT_PIN); // ADC lib converts pin/channel in startSingleRead
+  adc->startSingleRead(AUDIO_INPUT_PIN); // ADC lib converts pin/channel in startSingleRead
 #elif IS_STM32()
-	uint8_t dummy = AUDIO_INPUT_PIN;
-	adc.setPins(&dummy, 1);
-	adc.startConversion();
+  uint8_t dummy = AUDIO_INPUT_PIN;
+  adc.setPins(&dummy, 1);
+  adc.startConversion();
 #else
-	adcStartConversion(adcPinToChannelNum(AUDIO_INPUT_PIN));
+  adcStartConversion(adcPinToChannelNum(AUDIO_INPUT_PIN));
 #endif
 }
 
 /*
-static void receiveFirstAudioADC() 
-{
-	// nothing
-}
+  static void receiveFirstAudioADC() 
+  {
+  // nothing
+  }
 */
 
 static void startSecondAudioADC()
 {
 #if IS_TEENSY3()
-	adc->startSingleRead(AUDIO_INPUT_PIN);
+  adc->startSingleRead(AUDIO_INPUT_PIN);
 #elif IS_STM32()
-	uint8_t dummy = AUDIO_INPUT_PIN;
-	adc.setPins(&dummy, 1);
-	adc.startConversion();
+  uint8_t dummy = AUDIO_INPUT_PIN;
+  adc.setPins(&dummy, 1);
+  adc.startConversion();
 #else
-	ADCSRA |= (1 << ADSC); // start a second conversion on the current channel
+  ADCSRA |= (1 << ADSC); // start a second conversion on the current channel
 #endif
 }
 
@@ -197,13 +212,13 @@ static void startSecondAudioADC()
 
 static void receiveSecondAudioADC()
 {
-	if (!input_buffer.isFull()) 
+  if (!input_buffer.isFull()) 
 #if IS_TEENSY3()
-		input_buffer.write(adc->readSingle());
+    input_buffer.write(adc->readSingle());
 #elif IS_STM32()
-	input_buffer.write(adc.getData());
+  input_buffer.write(adc.getData());
 #else
-		input_buffer.write(ADC);
+  input_buffer.write(ADC);
 #endif
 }
 
@@ -212,38 +227,38 @@ static void receiveSecondAudioADC()
 #if IS_TEENSY3()
 void adc0_isr(void)
 #elif IS_STM32()
-void stm32_adc_eoc_handler()
+  void stm32_adc_eoc_handler()
 #else
-ISR(ADC_vect, ISR_BLOCK)
+  ISR(ADC_vect, ISR_BLOCK)
 #endif
 {
-	switch (adc_count){
-	case 0:
-		// 6us
-		receiveSecondAudioADC();
-		adcReadSelectedChannels();
-		break;
+  switch (adc_count){
+  case 0:
+    // 6us
+    receiveSecondAudioADC();
+    adcReadSelectedChannels();
+    break;
 
-	case 1:
-		// <2us, <1us w/o receive
-		//receiveFirstControlADC();
-		startSecondControlADC();
-		break;
+  case 1:
+    // <2us, <1us w/o receive
+    //receiveFirstControlADC();
+    startSecondControlADC();
+    break;
 
-	case 2:
-		// 3us
-		receiveSecondControlADC();
-		startFirstAudioADC();
-		break;
+  case 2:
+    // 3us
+    receiveSecondControlADC();
+    startFirstAudioADC();
+    break;
 
 
-		//      	case 3:
-		// invisible
-		//      	receiveFirstAudioADC();
-		//      	break;
+    //      	case 3:
+    // invisible
+    //      	receiveFirstAudioADC();
+    //      	break;
 
-	}
-	adc_count++;
+  }
+  adc_count++;
 }
 #endif // end main audio input section
 #endif
@@ -253,67 +268,67 @@ ISR(ADC_vect, ISR_BLOCK)
 // These are ARM SAMD21 Timer 5 routines to establish a sample rate interrupt
 static bool tcIsSyncing()
 {
-    return TC5->COUNT16.STATUS.reg & TC_STATUS_SYNCBUSY;
+  return TC5->COUNT16.STATUS.reg & TC_STATUS_SYNCBUSY;
 }
 
 static void tcStartCounter()
 {
-    // Enable TC
+  // Enable TC
     
-    TC5->COUNT16.CTRLA.reg |= TC_CTRLA_ENABLE;
-    while (tcIsSyncing());
+  TC5->COUNT16.CTRLA.reg |= TC_CTRLA_ENABLE;
+  while (tcIsSyncing());
 }
 
 static void tcReset()
 {
-    // Reset TCx
-    TC5->COUNT16.CTRLA.reg = TC_CTRLA_SWRST;
-    while (tcIsSyncing());
-    while (TC5->COUNT16.CTRLA.bit.SWRST);
+  // Reset TCx
+  TC5->COUNT16.CTRLA.reg = TC_CTRLA_SWRST;
+  while (tcIsSyncing());
+  while (TC5->COUNT16.CTRLA.bit.SWRST);
 }
 
 static void tcDisable()
 {
-    // Disable TC5
-    TC5->COUNT16.CTRLA.reg &= ~TC_CTRLA_ENABLE;
-    while (tcIsSyncing());
+  // Disable TC5
+  TC5->COUNT16.CTRLA.reg &= ~TC_CTRLA_ENABLE;
+  while (tcIsSyncing());
 }
 static void tcEnd() {
-    tcDisable();
-    tcReset();
-    analogWrite(AUDIO_CHANNEL_1_PIN, 0);
+  tcDisable();
+  tcReset();
+  analogWrite(AUDIO_CHANNEL_1_PIN, 0);
     
 }
 
 
 static void tcConfigure(uint32_t sampleRate)
 {
-    // Enable GCLK for TCC2 and TC5 (timer counter input clock)
-    GCLK->CLKCTRL.reg = (uint16_t) (GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK0 | GCLK_CLKCTRL_ID(GCM_TC4_TC5)) ;
-    while (GCLK->STATUS.bit.SYNCBUSY);
+  // Enable GCLK for TCC2 and TC5 (timer counter input clock)
+  GCLK->CLKCTRL.reg = (uint16_t) (GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK0 | GCLK_CLKCTRL_ID(GCM_TC4_TC5)) ;
+  while (GCLK->STATUS.bit.SYNCBUSY);
     
-    tcReset();
+  tcReset();
     
-    // Set Timer counter Mode to 16 bits
-    TC5->COUNT16.CTRLA.reg |= TC_CTRLA_MODE_COUNT16;
+  // Set Timer counter Mode to 16 bits
+  TC5->COUNT16.CTRLA.reg |= TC_CTRLA_MODE_COUNT16;
     
-    // Set TC5 mode as match frequency
-    TC5->COUNT16.CTRLA.reg |= TC_CTRLA_WAVEGEN_MFRQ;
+  // Set TC5 mode as match frequency
+  TC5->COUNT16.CTRLA.reg |= TC_CTRLA_WAVEGEN_MFRQ;
     
-    TC5->COUNT16.CTRLA.reg |= TC_CTRLA_PRESCALER_DIV1 | TC_CTRLA_ENABLE;
+  TC5->COUNT16.CTRLA.reg |= TC_CTRLA_PRESCALER_DIV1 | TC_CTRLA_ENABLE;
     
-    TC5->COUNT16.CC[0].reg = (uint16_t) (SystemCoreClock / sampleRate - 1);
-    while (tcIsSyncing());
+  TC5->COUNT16.CC[0].reg = (uint16_t) (SystemCoreClock / sampleRate - 1);
+  while (tcIsSyncing());
     
-    // Configure interrupt request
-    NVIC_DisableIRQ(TC5_IRQn);
-    NVIC_ClearPendingIRQ(TC5_IRQn);
-    NVIC_SetPriority(TC5_IRQn, 0);
-    NVIC_EnableIRQ(TC5_IRQn);
+  // Configure interrupt request
+  NVIC_DisableIRQ(TC5_IRQn);
+  NVIC_ClearPendingIRQ(TC5_IRQn);
+  NVIC_SetPriority(TC5_IRQn, 0);
+  NVIC_EnableIRQ(TC5_IRQn);
     
-    // Enable the TC5 interrupt request
-    TC5->COUNT16.INTENSET.bit.MC0 = 1;
-    while (tcIsSyncing());
+  // Enable the TC5 interrupt request
+  TC5->COUNT16.INTENSET.bit.MC0 = 1;
+  while (tcIsSyncing());
 }
 #endif
 
@@ -322,54 +337,54 @@ static void tcConfigure(uint32_t sampleRate)
 static byte fast_pdm_table[] {0, 0b00010000, 0b01000100, 0b10010010, 0b10101010, 0b10110101, 0b11011101, 0b11110111, 0b11111111};
 
 inline void writePDMCoded(uint16_t sample) {
-	static uint32_t lastwritten = 0;
-	static uint32_t nexttarget = 0;
+  static uint32_t lastwritten = 0;
+  static uint32_t nexttarget = 0;
 
-        // We can write 32 bits at a time to the output buffer, typically, we'll do this either once of twice per sample
-	for (uint8_t words = 0; words < PDM_RESOLUTION; ++words) {
-		uint32_t outbits = 0;
-		for (uint8_t i = 0; i < 4; ++i) {
-			nexttarget += sample - lastwritten;
-			lastwritten = nexttarget & 0b11110000000000000; // code the highest 3-and-a-little bits next.
-			                                                // Note that sample only has 16 bits, while the highest bit we consider for writing is bit 17.
-			                                                // Thus, if the highest bit is set, the next three bits cannot be.
-	#if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
-			U1F = fast_pdm_table[lastwritten >> 13];  // optimized version of: Serial1.write(...);
-	#else
-			outbits = outbits << 8;
-			outbits |= fast_pdm_table[lastwritten >> 13];
-	#endif
-                }
-	#if (ESP_AUDIO_OUT_MODE == PDM_VIA_I2S)
-		i2s_write_sample (outbits);
-	#endif
-	}
+  // We can write 32 bits at a time to the output buffer, typically, we'll do this either once of twice per sample
+  for (uint8_t words = 0; words < PDM_RESOLUTION; ++words) {
+    uint32_t outbits = 0;
+    for (uint8_t i = 0; i < 4; ++i) {
+      nexttarget += sample - lastwritten;
+      lastwritten = nexttarget & 0b11110000000000000; // code the highest 3-and-a-little bits next.
+      // Note that sample only has 16 bits, while the highest bit we consider for writing is bit 17.
+      // Thus, if the highest bit is set, the next three bits cannot be.
+#if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
+      U1F = fast_pdm_table[lastwritten >> 13];  // optimized version of: Serial1.write(...);
+#else
+      outbits = outbits << 8;
+      outbits |= fast_pdm_table[lastwritten >> 13];
+#endif
+    }
+#if (ESP_AUDIO_OUT_MODE == PDM_VIA_I2S)
+    i2s_write_sample (outbits);
+#endif
+  }
 }
 
-	#if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
+#if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
 void ICACHE_RAM_ATTR write_audio_to_serial_tx() {
 #define OPTIMIZED_SERIAL1_AVAIALABLEFORWRITE (UART_TX_FIFO_SIZE - ((U1S >> USTXC) & 0xff))
-	if (output_stopped) return;
-	while (OPTIMIZED_SERIAL1_AVAIALABLEFORWRITE > (PDM_RESOLUTION*4)) {
-		writePDMCoded(output_buffer.read());
-	}
+  if (output_stopped) return;
+  while (OPTIMIZED_SERIAL1_AVAIALABLEFORWRITE > (PDM_RESOLUTION*4)) {
+    writePDMCoded(output_buffer.read());
+  }
 }
-	#else
+#else
 inline void espWriteAudioToBuffer() {
-		#if (ESP_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
-			#if (STEREO_HACK == true)
-	updateAudio ();
-	i2s_write_lr(audio_out_1, audio_out_2);
-			#else
-	i2s_lr((uint16_t) (updateAudio() + AUDIO_BIAS), 0);
-			#endif
-		#else
-	uint16_t sample = updateAudio() + AUDIO_BIAS;
-	writePDMCoded(sample);
-		#endif
-	++samples_written_to_buffer;
+#if (ESP_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
+#if (STEREO_HACK == true)
+  updateAudio ();
+  i2s_write_lr(audio_out_1, audio_out_2);
+#else
+  i2s_lr((uint16_t) (updateAudio() + AUDIO_BIAS), 0);
+#endif
+#else
+  uint16_t sample = updateAudio() + AUDIO_BIAS;
+  writePDMCoded(sample);
+#endif
+  ++samples_written_to_buffer;
 }
-	#endif
+#endif
 #endif
 
 static uint16_t update_control_timeout;
@@ -378,81 +393,88 @@ static void updateControlWithAutoADC();
 
 
 
-void dacHook(DAC_MCP49xx dac) ///addition by T.Combriat
+
+
+
+void dacHook() ///addition by T.Combriat
 {
-	if (!output_buffer.isFull()) {
-	dac.output((unsigned int) (updateAudio() + 2048));
-	}
-
-
+  if (!output_buffer.isFull()) {
+    //dac.setPortWrite(true);
+    dac.output((unsigned int) (updateAudio() + AUDIO_BIAS));
+  }
 }
 
 void audioHook() // 2us excluding updateAudio()
 {
-//setPin13High();
+  //setPin13High();
 #if (USE_AUDIO_INPUT==true)
-		if (!input_buffer.isEmpty()) 
-			audio_input = input_buffer.read();
+  if (!input_buffer.isEmpty()) 
+    audio_input = input_buffer.read();
 #endif
 
 #if IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
-	#if (PDM_RESOLUTION != 1)
-	if (i2s_available() >= PDM_RESOLUTION) {
-	#else
-	if (!i2s_is_full()) {
-	#endif
+#if (PDM_RESOLUTION != 1)
+  if (i2s_available() >= PDM_RESOLUTION) {
 #else
-	if (!output_buffer.isFull()) {
+    if (!i2s_is_full()) {
 #endif
-		if (!update_control_counter) {
-			update_control_counter = update_control_timeout;
-			updateControlWithAutoADC ();
-		} else {
-			--update_control_counter;
-		}
-#if IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
-		//NOTE: On ESP / output via I2S, we simply use the I2S buffer as the output buffer, which saves RAM, but also simplifies things a lot
-		// esp. since i2s output already has output rate control -> no need for a separate output timer
-		espWriteAudioToBuffer();
 #else
-		#if (STEREO_HACK == true)
-		updateAudio(); // in hacked version, this returns void
-		output_buffer.write((unsigned int) (audio_out_1 + AUDIO_BIAS));
-		output_buffer2.write((unsigned int) (audio_out_2 + AUDIO_BIAS));
-		#else
-		output_buffer.write((unsigned int) (updateAudio() + AUDIO_BIAS));
-		#endif
+      if (!output_buffer.isFull()) {
+#endif
+	if (!update_control_counter) {
+	  update_control_counter = update_control_timeout;
+	  updateControlWithAutoADC ();
+	} else {
+	  --update_control_counter;
+	}
+#if IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
+	//NOTE: On ESP / output via I2S, we simply use the I2S buffer as the output buffer, which saves RAM, but also simplifies things a lot
+	// esp. since i2s output already has output rate control -> no need for a separate output timer
+	espWriteAudioToBuffer();
+#else
+#ifdef __DAC_MCP__
+	dac.output((unsigned int) (updateAudio() + 2048));
+#else
+	
+#if (STEREO_HACK == true)
+	updateAudio(); // in hacked version, this returns void
+	output_buffer.write((unsigned int) (audio_out_1 + AUDIO_BIAS));
+	output_buffer2.write((unsigned int) (audio_out_2 + AUDIO_BIAS));
+#else
+	output_buffer.write((unsigned int) (updateAudio() + AUDIO_BIAS));
+#endif
+#endif
 #endif
 
 #if IS_ESP8266()
-		yield();
+	yield();
 #endif
-	}
-//setPin13Low();
-}
+      }
+      //setPin13Low();
+    } //end of audioHook()
         
 #if IS_SAMD21()
-        void TC5_Handler (void) __attribute__ ((weak, alias("samd21AudioOutput")));
+    void TC5_Handler (void) __attribute__ ((weak, alias("samd21AudioOutput")));
 #endif
 
 
-//-----------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------
 #if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS) || IS_STM32()
 #if IS_SAMD21()
 #ifdef __cplusplus
     extern "C" {
 #endif
         
-        void samd21AudioOutput(void);
+      void samd21AudioOutput(void);
 #ifdef __cplusplus
     }
 #endif
     
 #elif    IS_TEENSY3()
-  IntervalTimer timer1;
+    IntervalTimer timer1;
 #elif IS_STM32()
-  HardwareTimer audio_update_timer(AUDIO_UPDATE_TIMER);
-  HardwareTimer audio_pwm_timer(AUDIO_PWM_TIMER);
+    HardwareTimer audio_update_timer(AUDIO_UPDATE_TIMER);
+    HardwareTimer audio_pwm_timer(AUDIO_PWM_TIMER);
 
 #endif
 
@@ -461,8 +483,8 @@ void audioHook() // 2us excluding updateAudio()
     extern "C" {
 #endif
         
-     void samd21AudioOutput()
-    {
+      void samd21AudioOutput()
+      {
         
 #if (USE_AUDIO_INPUT==true)
         adc_count = 0;
@@ -471,74 +493,74 @@ void audioHook() // 2us excluding updateAudio()
         analogWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
         TC5->COUNT16.INTFLAG.bit.MC0 = 1;
 
-    }
+      }
 #ifdef __cplusplus
     }
 #endif
 #elif IS_TEENSY3()
-static void teensyAudioOutput()
-{
+    static void teensyAudioOutput()
+    {
 	
 #if (USE_AUDIO_INPUT==true)
-	adc_count = 0;
-	startSecondAudioADC();
+      adc_count = 0;
+      startSecondAudioADC();
 #endif
 
-	analogWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
-}
+      analogWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
+    }
 #elif IS_STM32()
-static void pwmAudioOutput()
-{
+    static void pwmAudioOutput()
+    {
 #if (USE_AUDIO_INPUT==true)
-	adc_count = 0;
-	startSecondAudioADC();
+      adc_count = 0;
+      startSecondAudioADC();
 #endif
 
 #if (AUDIO_MODE == HIFI)
-	int out = output_buffer.read();
-	pwmWrite(AUDIO_CHANNEL_1_PIN, out & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
-	pwmWrite(AUDIO_CHANNEL_1_PIN_HIGH, out >> AUDIO_BITS_PER_CHANNEL);
+      int out = output_buffer.read();
+      pwmWrite(AUDIO_CHANNEL_1_PIN, out & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
+      pwmWrite(AUDIO_CHANNEL_1_PIN_HIGH, out >> AUDIO_BITS_PER_CHANNEL);
 #else
-	pwmWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
+      pwmWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
 #endif
-}
+    }
 #endif
 
 #if !IS_AVR()
-static void startAudioStandard()
-{
-	//backupPreMozziTimer1(); // not for arm
+    static void startAudioStandard()
+    {
+      //backupPreMozziTimer1(); // not for arm
 	
 #if IS_TEENSY3()
-	adc->setAveraging(0);
-	adc->setConversionSpeed(ADC_CONVERSION_SPEED::MED_SPEED); // could be HIGH_SPEED, noisier
+      adc->setAveraging(0);
+      adc->setConversionSpeed(ADC_CONVERSION_SPEED::MED_SPEED); // could be HIGH_SPEED, noisier
 
-	analogWriteResolution(12);
-	timer1.begin(teensyAudioOutput, 1000000UL/AUDIO_RATE);
+      analogWriteResolution(12);
+      timer1.begin(teensyAudioOutput, 1000000UL/AUDIO_RATE);
 #elif IS_SAMD21()
 #ifdef ARDUINO_SAMD_CIRCUITPLAYGROUND_EXPRESS
-    {
+      {
         static const int CPLAY_SPEAKER_SHUTDOWN= 11;
         pinMode(CPLAY_SPEAKER_SHUTDOWN, OUTPUT);
         digitalWrite(CPLAY_SPEAKER_SHUTDOWN, HIGH);
-    }
+      }
     
 #endif
-    analogWriteResolution(12);
-    analogWrite(AUDIO_CHANNEL_1_PIN, 0);
-    tcConfigure(AUDIO_RATE);
+      analogWriteResolution(12);
+      analogWrite(AUDIO_CHANNEL_1_PIN, 0);
+      tcConfigure(AUDIO_RATE);
 #elif IS_STM32()
-        audio_update_timer.pause();
-	audio_update_timer.setPeriod(1000000UL/AUDIO_RATE);
-	audio_update_timer.setChannel1Mode(TIMER_OUTPUT_COMPARE);
-	audio_update_timer.setCompare(TIMER_CH1, 1);  // Interrupt 1 count after each update
-	audio_update_timer.attachCompare1Interrupt(pwmAudioOutput);
-	audio_update_timer.refresh();
-	audio_update_timer.resume();
+      audio_update_timer.pause();
+      audio_update_timer.setPeriod(1000000UL/AUDIO_RATE);
+      audio_update_timer.setChannel1Mode(TIMER_OUTPUT_COMPARE);
+      audio_update_timer.setCompare(TIMER_CH1, 1);  // Interrupt 1 count after each update
+      audio_update_timer.attachCompare1Interrupt(pwmAudioOutput);
+      audio_update_timer.refresh();
+      audio_update_timer.resume();
         
-	pinMode(AUDIO_CHANNEL_1_PIN, PWM);
+      pinMode(AUDIO_CHANNEL_1_PIN, PWM);
 #if (AUDIO_MODE == HIFI)
-	pinMode(AUDIO_CHANNEL_1_PIN_HIGH, PWM);
+      pinMode(AUDIO_CHANNEL_1_PIN_HIGH, PWM);
 #endif
 
 #define MAX_CARRIER_FREQ (F_CPU/(1<<AUDIO_BITS_PER_CHANNEL))
@@ -549,130 +571,130 @@ static void startAudioStandard()
 #endif
 
 #if MAX_CARRIER_FREQ < (AUDIO_RATE * 5)
-	// Generate as fast a carrier as possible
-	audio_pwm_timer.setPrescaleFactor(1);
+      // Generate as fast a carrier as possible
+      audio_pwm_timer.setPrescaleFactor(1);
 #else
-	// No point in generating arbitrarily high carrier frequencies. In fact, if there _is_ any headroom, give the PWM pin more time to swing from HIGH to LOW and BACK, cleanly
-	audio_pwm_timer.setPrescaleFactor((int) MAX_CARRIER_FREQ / (AUDIO_RATE * 5));
+      // No point in generating arbitrarily high carrier frequencies. In fact, if there _is_ any headroom, give the PWM pin more time to swing from HIGH to LOW and BACK, cleanly
+      audio_pwm_timer.setPrescaleFactor((int) MAX_CARRIER_FREQ / (AUDIO_RATE * 5));
 #endif
-	audio_pwm_timer.setOverflow(1 << AUDIO_BITS_PER_CHANNEL);   // Allocate enough room to write all intended bits
+      audio_pwm_timer.setOverflow(1 << AUDIO_BITS_PER_CHANNEL);   // Allocate enough room to write all intended bits
 
 #elif IS_ESP8266()
-	#if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
-	output_stopped = false;
-	Serial1.begin(AUDIO_RATE*(PDM_RESOLUTION*40), SERIAL_8N1, SERIAL_TX_ONLY);  // Note: PDM_RESOLUTION corresponds to packets of 32 encoded bits  However, the UART (unfortunately) adds a
-	                                                                            // start and stop bit each around each byte, thus sending a total to 40 bits per audio sample per PDM_RESOLUTION.
-	// set up a timer to copy from Mozzi output_buffer into Serial TX buffer
-	timer1_isr_init();
-	timer1_attachInterrupt(write_audio_to_serial_tx);
-	// UART FIFO buffer size is 128 bytes. To be on the safe side, we keep the interval to the time needed to write half of that.
-	// PDM_RESOLUTION * 4 bytes per sample written.
-	timer1_enable(TIM_DIV16, TIM_EDGE, TIM_LOOP);
-	timer1_write(F_CPU / (AUDIO_RATE*PDM_RESOLUTION));
-	#else
-	i2s_begin();
-	#if (ESP_AUDIO_OUT_MODE == PDM_VIA_I2S)
-	pinMode(2, INPUT);  // Set the two unneeded I2S pins to input mode, to reduce side effects
-	pinMode(15, INPUT);
-	#endif
-	i2s_set_rate(AUDIO_RATE*PDM_RESOLUTION);
-	if (output_buffer_size == 0) output_buffer_size = i2s_available(); // Do not reset count when stopping / restarting
-	#endif
+#if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
+      output_stopped = false;
+      Serial1.begin(AUDIO_RATE*(PDM_RESOLUTION*40), SERIAL_8N1, SERIAL_TX_ONLY);  // Note: PDM_RESOLUTION corresponds to packets of 32 encoded bits  However, the UART (unfortunately) adds a
+      // start and stop bit each around each byte, thus sending a total to 40 bits per audio sample per PDM_RESOLUTION.
+      // set up a timer to copy from Mozzi output_buffer into Serial TX buffer
+      timer1_isr_init();
+      timer1_attachInterrupt(write_audio_to_serial_tx);
+      // UART FIFO buffer size is 128 bytes. To be on the safe side, we keep the interval to the time needed to write half of that.
+      // PDM_RESOLUTION * 4 bytes per sample written.
+      timer1_enable(TIM_DIV16, TIM_EDGE, TIM_LOOP);
+      timer1_write(F_CPU / (AUDIO_RATE*PDM_RESOLUTION));
+#else
+      i2s_begin();
+#if (ESP_AUDIO_OUT_MODE == PDM_VIA_I2S)
+      pinMode(2, INPUT);  // Set the two unneeded I2S pins to input mode, to reduce side effects
+      pinMode(15, INPUT);
 #endif
-	//backupMozziTimer1(); // // not for arm
-}
+      i2s_set_rate(AUDIO_RATE*PDM_RESOLUTION);
+      if (output_buffer_size == 0) output_buffer_size = i2s_available(); // Do not reset count when stopping / restarting
+#endif
+#endif
+      //backupMozziTimer1(); // // not for arm
+    }
 	
 #else
 
-// avr architecture
-static void startAudioStandard()
-{
-	backupPreMozziTimer1();
+    // avr architecture
+    static void startAudioStandard()
+    {
+      backupPreMozziTimer1();
 
-	pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);	// set pin to output for audio
-	//	pinMode(AUDIO_CHANNEL_2_PIN, OUTPUT);	// set pin to output for audio
+      pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);	// set pin to output for audio
+      //	pinMode(AUDIO_CHANNEL_2_PIN, OUTPUT);	// set pin to output for audio
 #if (AUDIO_MODE == STANDARD)
-	Timer1.initializeCPUCycles(F_CPU/AUDIO_RATE, PHASE_FREQ_CORRECT);		// set period, phase and frequency correct
+      Timer1.initializeCPUCycles(F_CPU/AUDIO_RATE, PHASE_FREQ_CORRECT);		// set period, phase and frequency correct
 #else // (AUDIO_MODE == STANDARD_PLUS)
-	Timer1.initializeCPUCycles(F_CPU/PWM_RATE, FAST);	// fast mode enables higher PWM rate
+      Timer1.initializeCPUCycles(F_CPU/PWM_RATE, FAST);	// fast mode enables higher PWM rate
 #endif
-	Timer1.pwm(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);		// pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
+      Timer1.pwm(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);		// pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
 #if (STEREO_HACK == true)
-	Timer1.pwm(AUDIO_CHANNEL_2_PIN, AUDIO_BIAS);	// sets pin to output
+      Timer1.pwm(AUDIO_CHANNEL_2_PIN, AUDIO_BIAS);	// sets pin to output
 #endif
-	TIMSK1 = _BV(TOIE1); 	// Overflow Interrupt Enable (when not using Timer1.attachInterrupt())
-	//TIMSK1 |= _BV(TOIE1) | _BV(OCIE1A); // Overflow Interrupt Enable and Output Compare A Match Interrupt Enable
-	backupMozziTimer1();
-}
+      TIMSK1 = _BV(TOIE1); 	// Overflow Interrupt Enable (when not using Timer1.attachInterrupt())
+      //TIMSK1 |= _BV(TOIE1) | _BV(OCIE1A); // Overflow Interrupt Enable and Output Compare A Match Interrupt Enable
+      backupMozziTimer1();
+    }
 
-/*
-// trying to get ac output for piezo
-unsigned int output;
+    /*
+    // trying to get ac output for piezo
+    unsigned int output;
 
-//extern unsigned long interruptcounter;
-ISR(TIMER1_COMPA_vect){
-	//Serial.print(9);
-	//interruptcounter++;
-	// change polarity of pwm output pins 9 and 10 - one becomes ground, the other becomes max-output
-	AUDIO_CHANNEL_1_OUTPUT_REGISTER = 0;//STANDARD_PWM_RESOLUTION;
-	//AUDIO_CHANNEL_2_OUTPUT_REGISTER = STANDARD_PWM_RESOLUTION-output;
-}
-*/
+    //extern unsigned long interruptcounter;
+    ISR(TIMER1_COMPA_vect){
+    //Serial.print(9);
+    //interruptcounter++;
+    // change polarity of pwm output pins 9 and 10 - one becomes ground, the other becomes max-output
+    AUDIO_CHANNEL_1_OUTPUT_REGISTER = 0;//STANDARD_PWM_RESOLUTION;
+    //AUDIO_CHANNEL_2_OUTPUT_REGISTER = STANDARD_PWM_RESOLUTION-output;
+    }
+    */
 
-/* Interrupt service routine moves sound data from the output buffer to the
-Arduino output register, running at AUDIO_RATE. */
+    /* Interrupt service routine moves sound data from the output buffer to the
+       Arduino output register, running at AUDIO_RATE. */
 
-ISR(TIMER1_OVF_vect, ISR_BLOCK)
-{
+    ISR(TIMER1_OVF_vect, ISR_BLOCK)
+      {
 
 #if (AUDIO_MODE == STANDARD_PLUS) && (AUDIO_RATE == 16384) // only update every second ISR, if lower audio rate
 	static boolean alternate;
 	alternate = !alternate;
 	if(alternate)
-	{
+	  {
 #endif
 
 #if (USE_AUDIO_INPUT==true)
-		adc_count = 0;
-		startSecondAudioADC();
+	    adc_count = 0;
+	    startSecondAudioADC();
 #endif
 
-//if (!output_buffer.isEmpty()) {
-/*
-output =  output_buffer.read();
-AUDIO_CHANNEL_1_OUTPUT_REGISTER = output;
-AUDIO_CHANNEL_2_OUTPUT_REGISTER = 0;
-*/
+	    //if (!output_buffer.isEmpty()) {
+	    /*
+	      output =  output_buffer.read();
+	      AUDIO_CHANNEL_1_OUTPUT_REGISTER = output;
+	      AUDIO_CHANNEL_2_OUTPUT_REGISTER = 0;
+	    */
 
-	AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer.read();
+	    AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer.read();
 #if (STEREO_HACK == true)
-		AUDIO_CHANNEL_2_OUTPUT_REGISTER = output_buffer2.read();
+	    AUDIO_CHANNEL_2_OUTPUT_REGISTER = output_buffer2.read();
 #endif
 
-//}
+	    //}
 
-	// flip signal polarity - instead of signal going to 0 (both pins 0), it goes to pseudo-negative of its current value.
-	// this would set non-inverted when setting sample value, and then inverted when top is reached (in an interrupt)
-	// non-invert
-	//TCCR1A |= _BV(COM1A1);
-	// invert
-	//TCCR1A |= ~_BV(COM1A1)
+	    // flip signal polarity - instead of signal going to 0 (both pins 0), it goes to pseudo-negative of its current value.
+	    // this would set non-inverted when setting sample value, and then inverted when top is reached (in an interrupt)
+	    // non-invert
+	    //TCCR1A |= _BV(COM1A1);
+	    // invert
+	    //TCCR1A |= ~_BV(COM1A1)
 	
 	
 #if (AUDIO_MODE == STANDARD_PLUS) && (AUDIO_RATE==16384) // all this conditional compilation is so clutsy!
-	}
+	  }
 #endif
 
-}
-// end avr
+	  }
+      // end avr
 #endif
-// end STANDARD
+      // end STANDARD
 
-//-----------------------------------------------------------------------------------------------------------------
+      //-----------------------------------------------------------------------------------------------------------------
 #elif IS_AVR() && (AUDIO_MODE == HIFI)
 
-static void startAudioHiFi()
-{
+      static void startAudioHiFi()
+      {
 	backupPreMozziTimer1();
 	// pwm on timer 1
 	pinMode(AUDIO_CHANNEL_1_highByte_PIN, OUTPUT);	// set pin to output for audio, use 3.9k resistor
@@ -683,14 +705,14 @@ static void startAudioHiFi()
 	backupMozziTimer1();
 	// audio output interrupt on timer 2, sets the pwm levels of timer 1
 	setupTimer2();
-}
+      }
 
-/* set up Timer 2 using modified FrequencyTimer2 library */
-void dummy(){}
+      /* set up Timer 2 using modified FrequencyTimer2 library */
+      void dummy(){}
 
 
-static void backupPreMozziTimer2()
-{
+      static void backupPreMozziTimer2()
+      {
 	//backup Timer2 register values
 #if defined(TCCR2A)
 	pre_mozzi_TCCR2A = TCCR2A;
@@ -710,12 +732,12 @@ static void backupPreMozziTimer2()
 	pre_mozzi_OCR4C = OCR4C;
 	pre_mozzi_TIMSK4 = TIMSK4;
 #endif
-}
+      }
 
 
 
-static void backupMozziTimer2()
-{
+      static void backupMozziTimer2()
+      {
 #if defined(TCCR2A)
 	mozzi_TCCR2A = TCCR2A;
 	mozzi_TCCR2B = TCCR2B;
@@ -734,12 +756,12 @@ static void backupMozziTimer2()
 	mozzi_OCR4C = OCR4C;
 	mozzi_TIMSK4 = TIMSK4;
 #endif
-}
+      }
 
 
-// audio output interrupt on timer 2 (or 4 on ATMEGA32U4 cpu), sets the pwm levels of timer 2
-static void setupTimer2()
-{
+      // audio output interrupt on timer 2 (or 4 on ATMEGA32U4 cpu), sets the pwm levels of timer 2
+      static void setupTimer2()
+      {
 	backupPreMozziTimer2(); // to reset while pausing
 	unsigned long period = F_CPU/AUDIO_RATE;
 	FrequencyTimer2::setPeriodCPUCycles(period);
@@ -748,91 +770,98 @@ static void setupTimer2()
 
 	// backup mozzi register values for unpausing later
 	backupMozziTimer2();
-}
+      }
 
 
 
 #if defined(TIMER2_COMPA_vect)
-ISR(TIMER2_COMPA_vect)
+      ISR(TIMER2_COMPA_vect)
 #elif defined(TIMER2_COMP_vect)
-ISR(TIMER2_COMP_vect)
+	ISR(TIMER2_COMP_vect)
 #elif defined(TIMER4_COMPA_vect)
-ISR(TIMER4_COMPA_vect)
+	ISR(TIMER4_COMPA_vect)
 #else
 #error "This board does not have a hardware timer which is compatible with FrequencyTimer2"
-void dummy_function(void)
+	void dummy_function(void)
 #endif
-{
+	{
 #if (USE_AUDIO_INPUT==true)
-	adc_count = 0;
-	startSecondAudioADC();
+	  adc_count = 0;
+	  startSecondAudioADC();
 #endif
 
-		// read about dual pwm at http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
-		// sketches at http://wiki.openmusiclabs.com/wiki/PWMDAC,  http://wiki.openmusiclabs.com/wiki/MiniArDSP
-		//if (!output_buffer.isEmpty()){
-		unsigned int out = output_buffer.read();
-		// 14 bit, 7 bits on each pin
-		//AUDIO_CHANNEL_1_highByte_REGISTER = out >> 7; // B00111111 10000000 becomes B1111111
-		// try to avoid looping over 7 shifts - need to check timing or disassemble to see what really happens
-		unsigned int out_high = out<<1; // B00111111 10000000 becomes B01111111 00000000
-		AUDIO_CHANNEL_1_highByte_REGISTER = out_high >> 8; // B01111111 00000000 produces B01111111
-		//
-		AUDIO_CHANNEL_1_lowByte_REGISTER = out & 127; 
-		//}
-}
+	  // read about dual pwm at http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
+	  // sketches at http://wiki.openmusiclabs.com/wiki/PWMDAC,  http://wiki.openmusiclabs.com/wiki/MiniArDSP
+	  //if (!output_buffer.isEmpty()){
+	  unsigned int out = output_buffer.read();
+	  // 14 bit, 7 bits on each pin
+	  //AUDIO_CHANNEL_1_highByte_REGISTER = out >> 7; // B00111111 10000000 becomes B1111111
+	  // try to avoid looping over 7 shifts - need to check timing or disassemble to see what really happens
+	  unsigned int out_high = out<<1; // B00111111 10000000 becomes B01111111 00000000
+	  AUDIO_CHANNEL_1_highByte_REGISTER = out_high >> 8; // B01111111 00000000 produces B01111111
+	  //
+	  AUDIO_CHANNEL_1_lowByte_REGISTER = out & 127; 
+	  //}
+	}
 
-//  end of HIFI
+      //  end of HIFI
 
 #endif
 
 
-//-----------------------------------------------------------------------------------------------------------------
+      //-----------------------------------------------------------------------------------------------------------------
 
-static void updateControlWithAutoADC()
-{
+      static void updateControlWithAutoADC()
+      {
 	updateControl();
 	/*
-	#if (USE_AUDIO_INPUT==true)
-		adc_count = 0;
-		startSecondAudioADC();
-#endif
-*/
+	  #if (USE_AUDIO_INPUT==true)
+	  adc_count = 0;
+	  startSecondAudioADC();
+	  #endif
+	*/
 	adcStartReadCycle();
-}
+      }
 
 
-static void startControl(unsigned int control_rate_hz)
-{
+      static void startControl(unsigned int control_rate_hz)
+      {
 	update_control_counter = 0;
         update_control_timeout = AUDIO_RATE / control_rate_hz;
-}
+      }
 
-void startMozzi(int control_rate_hz)
-{
+      void startMozzi(int control_rate_hz)
+      {
 	setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST in setup() if desired (not for Teensy 3.* )
 	// delay(200); // so AutoRange doesn't read 0 to start with
 	startControl(control_rate_hz);
+#if defined __DAC_MCP__
+	dac.setSPIDivider(SPI_CLOCK_DIV8);
+	dac.setGain(1);
+	dac.setPortWrite(true);
+	SPI.begin();
+	dac.output(0);
+#endif
 #if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS) || IS_STM32()  // Sorry, this is really hacky. But on STM32 regular and HIFI audio modes are so similar to set up, that we do it all in one function.
 	startAudioStandard();
 #elif (AUDIO_MODE == HIFI)
 	startAudioHiFi();
 #endif
-}
+      }
 
 
 
-void stopMozzi(){
+      void stopMozzi(){
 #if IS_TEENSY3()
 	timer1.end();
 #elif IS_STM32()
 	audio_update_timer.pause();
 #elif IS_ESP8266()
-	#if (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
+#if (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
 	i2s_end();
-	#else
+#else
 	output_stopped = true;  // NOTE: No good way to stop the serial output itself, but probably not needed, anyway
-	#endif
+#endif
 #elif IS_SAMD21()
 #else
 
@@ -867,17 +896,17 @@ void stopMozzi(){
 #endif	
 #endif	
 	interrupts();
-}
+      }
 
 
-/*
-void unPauseMozzi()
-{
-#if IS_TEENSY3()
-  timer1.begin(teensyAudioOutput, 1000000UL/AUDIO_RATE); 
-#else
+      /*
+	void unPauseMozzi()
+	{
+	#if IS_TEENSY3()
+	timer1.begin(teensyAudioOutput, 1000000UL/AUDIO_RATE); 
+	#else
 
-    noInterrupts();
+	noInterrupts();
 	// restore backed up register values
 	TCCR0A = mozzi_TCCR0A;
 	TCCR0B = mozzi_TCCR0B;
@@ -894,17 +923,17 @@ void unPauseMozzi()
 
 	interrupts();
 		
-#if (AUDIO_MODE == HIFI)
-#if defined(TCCR2A)
+	#if (AUDIO_MODE == HIFI)
+	#if defined(TCCR2A)
 	TCCR2A = mozzi_TCCR2A;
 	TCCR2B = mozzi_TCCR2B;
 	OCR2A = mozzi_OCR2A;
 	TIMSK2 = mozzi_TIMSK2;
-#elif defined(TCCR2)
+	#elif defined(TCCR2)
 	TCCR2 = mozzi_TCCR2;
 	OCR2 = mozzi_OCR2;
 	TIMSK = mozzi_TIMSK;
-#elif defined(TCCR4A)
+	#elif defined(TCCR4A)
 	TCCR4B = mozzi_TCCR4A;
 	TCCR4B = mozzi_TCCR4B;
 	TCCR4B = mozzi_TCCR4C;
@@ -912,38 +941,38 @@ void unPauseMozzi()
 	TCCR4B = mozzi_TCCR4E;
 	OCR4C = mozzi_OCR4C;
 	TIMSK4 = mozzi_TIMSK4;
-#endif
-#endif
-#endif
-
-}
-*/
-
-unsigned long audioTicks()
-{
-#if (IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL))
-	#if ((ESP_AUDIO_OUT_MODE == PDM_VIA_I2S) && (PDM_RESOLUTION != 1))
-	return (samples_written_to_buffer - ((output_buffer_size - i2s_available()) / PDM_RESOLUTION));
-	#else
-	return (samples_written_to_buffer - (output_buffer_size - i2s_available()));
 	#endif
+	#endif
+	#endif
+
+	}
+      */
+
+      unsigned long audioTicks()
+      {
+#if (IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL))
+#if ((ESP_AUDIO_OUT_MODE == PDM_VIA_I2S) && (PDM_RESOLUTION != 1))
+	return (samples_written_to_buffer - ((output_buffer_size - i2s_available()) / PDM_RESOLUTION));
+#else
+	return (samples_written_to_buffer - (output_buffer_size - i2s_available()));
+#endif
 #else
 	return output_buffer.count();
 #endif
-}
+      }
 
 
-unsigned long mozziMicros()
-{
+      unsigned long mozziMicros()
+      {
 	return audioTicks() * MICROS_PER_AUDIO_TICK;
-}
+      }
 
 
 
-// Unmodified TimerOne.cpp has TIMER3_OVF_vect.
-// Watch out if you update the library file.
-// The symptom will be no sound.
-// ISR(TIMER1_OVF_vect)
-// {
-// 	Timer1.isrCallback();
-// }
+      // Unmodified TimerOne.cpp has TIMER3_OVF_vect.
+      // Watch out if you update the library file.
+      // The symptom will be no sound.
+      // ISR(TIMER1_OVF_vect)
+      // {
+      // 	Timer1.isrCallback();
+      // }

@@ -432,9 +432,7 @@ void audioHook() // 2us excluding updateAudio()
 	// esp. since i2s output already has output rate control -> no need for a separate output timer
 	espWriteAudioToBuffer();
 #else
-#ifdef __DAC_MCP__
-	dac.output((unsigned int) (updateAudio() + 2048));
-#else
+
 	
 #if (STEREO_HACK == true)
 	updateAudio(); // in hacked version, this returns void
@@ -442,7 +440,6 @@ void audioHook() // 2us excluding updateAudio()
 	output_buffer2.write((unsigned int) (audio_out_2 + AUDIO_BIAS));
 #else
 	output_buffer.write((unsigned int) (updateAudio() + AUDIO_BIAS));
-#endif
 #endif
 #endif
 
@@ -835,6 +832,7 @@ void audioHook() // 2us excluding updateAudio()
 	setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST in setup() if desired (not for Teensy 3.* )
 	// delay(200); // so AutoRange doesn't read 0 to start with
 	startControl(control_rate_hz);
+	
 #if defined __DAC_MCP__
 	dac.setSPIDivider(SPI_CLOCK_DIV8);
 	dac.setGain(1);
@@ -842,6 +840,7 @@ void audioHook() // 2us excluding updateAudio()
 	SPI.begin();
 	dac.output(0);
 #endif
+	
 #if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS) || IS_STM32()  // Sorry, this is really hacky. But on STM32 regular and HIFI audio modes are so similar to set up, that we do it all in one function.
 	startAudioStandard();
 #elif (AUDIO_MODE == HIFI)

@@ -61,7 +61,7 @@
 */
 
 #ifdef __DAC_MCP__
-#define AUDIO_RATE 61000
+#define AUDIO_RATE 43200
 #warning Mozzi is configured for using an external DAC
 #else
 #define AUDIO_RATE 16384

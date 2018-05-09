@@ -27,7 +27,22 @@
 #define AUDIO_MODE STANDARD_PLUS
 //#define AUDIO_MODE HIFI
 
-#define __DAC_MCP__
+
+
+
+     /*
+  Uncomment this line if you want to use Mozzi with an external DAC of type MCP4922. Note that you will need the MCP49XX library (see AudioConfigMCP4922 for details.
+     */
+//#define __DAC_MCP__
+
+
+#ifdef __DAC_MCP__
+#warning Mozzi is configured for using an external DAC, edit mozzi_config.h if you want to change this
+#endif
+
+
+
+
 
 /** @ingroup core
     Holds the audio rate setting.
@@ -60,14 +75,8 @@
     Mozzi-users list has a thread on this.
 */
 
-#ifdef __DAC_MCP__
-#define AUDIO_RATE 43200
-#warning Mozzi is configured for using an external DAC
-#else
+
 #define AUDIO_RATE 16384
-#endif
-
-
 
 //#define AUDIO_RATE 32768
 //#define AUDIO_RATE 65536 // try on Teensy3/3.1

@@ -106,6 +106,17 @@ CircularBuffer <unsigned int> output_buffer2; // fixed size 256
 
 #if IS_AVR() // not storing backups, just turning timer on and off for pause for teensy 3.*, other ARMs
 
+
+#ifdef __DAC_MCP__   // in case an external MCP4922 dac is used.
+    static void dacMCPAudioOutput()
+    {
+
+      dac.output((unsigned int) output_buffer.read());
+    }
+#endif
+
+
+
 // to store backups of timer registers so Mozzi can be stopped and pre_mozzi timer values can be restored
 static uint8_t pre_mozzi_TCCR1A, pre_mozzi_TCCR1B, pre_mozzi_OCR1A, pre_mozzi_TIMSK1;
 
@@ -394,16 +405,6 @@ static void updateControlWithAutoADC();
 
 
 
-
-
-void dacHook() ///addition by T.Combriat
-{
-  if (!output_buffer.isFull()) {
-    //dac.setPortWrite(true);
-    dac.output((unsigned int) (updateAudio() + AUDIO_BIAS));
-  }
-}
-
 void audioHook() // 2us excluding updateAudio()
 {
   //setPin13High();
@@ -449,6 +450,8 @@ void audioHook() // 2us excluding updateAudio()
       }
       //setPin13Low();
     } //end of audioHook()
+
+    
         
 #if IS_SAMD21()
     void TC5_Handler (void) __attribute__ ((weak, alias("samd21AudioOutput")));
@@ -505,6 +508,10 @@ void audioHook() // 2us excluding updateAudio()
 
       analogWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
     }
+
+
+
+    
 #elif IS_STM32()
     static void pwmAudioOutput()
     {
@@ -662,8 +669,11 @@ void audioHook() // 2us excluding updateAudio()
 	      AUDIO_CHANNEL_1_OUTPUT_REGISTER = output;
 	      AUDIO_CHANNEL_2_OUTPUT_REGISTER = 0;
 	    */
-
+	    #ifdef __DAC_MCP__
+	    dacMCPAudioOutput();
+	    #else
 	    AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer.read();
+	    #endif
 #if (STEREO_HACK == true)
 	    AUDIO_CHANNEL_2_OUTPUT_REGISTER = output_buffer2.read();
 #endif
@@ -834,7 +844,7 @@ void audioHook() // 2us excluding updateAudio()
 	startControl(control_rate_hz);
 	
 #if defined __DAC_MCP__
-	dac.setSPIDivider(SPI_CLOCK_DIV8);
+	dac.setSPIDivider(SPI_CLOCK_DIV2);
 	dac.setGain(1);
 	dac.setPortWrite(true);
 	SPI.begin();

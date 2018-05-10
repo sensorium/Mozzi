@@ -35,10 +35,10 @@
 #include <uart.h>
 #include <Ticker.h>
 #endif
-#ifdef __DAC_MCP__
-#include"AudioConfigMCP49XX.h"
-#endif
 
+#ifdef EXTERNAL_DAC
+DAC_MCP49xx dac(DAC_MCP49xx::MCP4922,10);
+#endif
 
 #if (IS_TEENSY3() && F_CPU != 48000000) || (IS_AVR() && F_CPU != 16000000)
 #warning "Mozzi has been tested with a cpu clock speed of 16MHz on Arduino and 48MHz on Teensy 3!  Results may vary with other speeds."
@@ -92,11 +92,17 @@ CircularBuffer <unsigned int> output_buffer2; // fixed size 256
 #endif
 
 #if IS_AVR() // not storing backups, just turning timer on and off for pause for teensy 3.*, other ARMs
-#ifdef __DAC_MCP__   // in case an external MCP4922 dac is used.
+#ifdef EXTERNAL_DAC   // in case an external MCP4922 dac is used.
 static void dacMCPAudioOutput()
 {
   dac.output((unsigned int) output_buffer.read());
 }
+#if (STEREO_HACK == true)
+static void dacMCPAudioOutput2()
+{
+  dac.outputB((unsigned int) output_buffer2.read());
+}
+#endif
 #endif
 
 // to store backups of timer registers so Mozzi can be stopped and pre_mozzi timer values can be restored
@@ -639,8 +645,11 @@ output =  output_buffer.read();
 AUDIO_CHANNEL_1_OUTPUT_REGISTER = output;
 AUDIO_CHANNEL_2_OUTPUT_REGISTER = 0;
 */
-#ifdef __DAC_MCP__
+#ifdef EXTERNAL_DAC
 		dacMCPAudioOutput();
+#if (STEREO_HACK == true)
+                dacMCPAudioOutput2();
+#endif
 #else
 	AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer.read();
 #endif

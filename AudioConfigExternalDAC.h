@@ -1,5 +1,5 @@
-#ifndef AUDIOCONFIGMCP49XX_H
-#define AUDIOCONFIGMCP49XX_H
+#ifndef AUDIOCONFIGEXTERNALDAC_H
+#define AUDIOCONFIGEXTERNALDAC_H
 
 /**
   Config file in order to use Mozzi with a true DAC MCP4922.
@@ -12,6 +12,6 @@
 
 #include <DAC_MCP49xx.h>
 #include <SPI.h>
-DAC_MCP49xx dac(DAC_MCP49xx::MCP4922,10);
 #define AUDIO_BIAS 2048  //we are using 12bits
+
 #endif

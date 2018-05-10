@@ -166,7 +166,9 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #define MICROS_PER_AUDIO_TICK 31 // = 1000000 / 32768 = 30.518, ...* 256 = 7812.6
 #endif
 
-
+#ifdef EXTERNAL_DAC
+#include"AudioConfigExternalDAC.h"
+#endif
 #if IS_TEENSY3()
 #include "AudioConfigTeensy3_12bit.h"
 #elif IS_STM32()

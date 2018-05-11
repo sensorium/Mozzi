@@ -2,7 +2,7 @@
 #define AUDIOCONFIGEXTERNALDAC_H
 
 /**
-  Config file in order to use Mozzi with a true DAC MCP4922.
+  Config file in order to use Mozzi with a true DAC MCP49XX.
   In order to use this, you will the MCP49XX library that can be found here:
   https://github.com/exscape/electronics/tree/master/Arduino/Libraries/DAC_MCP49xx written by Thomas Backman.
   As PortWrite is enabled in order to gain speed, use Pin10 for CS SPI pin.

@@ -81,6 +81,8 @@ x..A14.....Teensy 3.0, 3.1 and 3.2  \n
 
 On Teensy 3.* STANDARD and STANDARD_PLUS are the same, providing 16384Hz sample rate and 12 bit resolution on pin A14/ADC.
 The Teensy 3.* DAC output does not rely on PWM.
+
+On AVR, there is the possibility to use an external DAC in order to have an Audio output which does not rely on PWM. For now, this is only implemented for MCP49XX DAC, you can enable this in mozzi_config.h. Please see details in AudioConfigExternalDAC.h.
 */
 
 
@@ -166,7 +168,9 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #define MICROS_PER_AUDIO_TICK 31 // = 1000000 / 32768 = 30.518, ...* 256 = 7812.6
 #endif
 
-
+#ifdef EXTERNAL_DAC
+#include"AudioConfigExternalDAC.h"
+#endif
 #if IS_TEENSY3()
 #include "AudioConfigTeensy3_12bit.h"
 #elif IS_STM32()

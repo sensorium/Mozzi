@@ -90,7 +90,7 @@ public:
 	inline
 	int next(int in)
 	{
-		return FLASH_OR_RAM_READ<const uint16_t>(table + in);
+		return FLASH_OR_RAM_READ<const int16_t>(table + in);
 	}
 
 private:
@@ -101,5 +101,3 @@ private:
 This is an example of how to use the WaveShaper class.
 */
 #endif /* WAVESHAPER_H_ */
-
-

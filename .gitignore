@@ -7,6 +7,7 @@
 .deps
 .libs
 .DS_Store
+*unfinished*
 atom.xml
 config.sub
 config.guess

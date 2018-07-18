@@ -1,0 +1,9 @@
+---
+layout: single
+title: "yes, you can donate!"
+date: 2014-11-21 18:15
+comments: false
+categories: 
+---
+
+Actually, I'm not asking for donations now...  But I am offering paid Mozzi [consulting](/consulting/).

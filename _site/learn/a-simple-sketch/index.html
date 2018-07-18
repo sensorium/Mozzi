@@ -1,0 +1,474 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.12.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Mozzi</title>
+<meta name="description" content="audio synthesis library for Arduino">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="Mozzi">
+<meta property="og:title" content="Mozzi">
+<meta property="og:url" content="http://localhost:4000/Mozzi/learn/a-simple-sketch/">
+
+
+  <meta property="og:description" content="audio synthesis library for Arduino">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/Mozzi/assets/images/mozzi-square.png">
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Mozzi/learn/a-simple-sketch/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Tim Barrass",
+      "url": "http://localhost:4000/Mozzi",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/Mozzi/feed.xml" type="application/atom+xml" rel="alternate" title="Mozzi Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/Mozzi/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/Mozzi/">Mozzi</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/download/" >download</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/gallery/" >gallery</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/examples/" >examples</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/learn/" >learn</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/faq/" >faq</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/blog/" >blog</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/doc/html/" >api</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://github.com/sensorium/Mozzi" >github</a>
+            </li>
+          
+        </ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: url('/Mozzi/assets/images/mozzi-square.png');"
+>
+  
+    <div class="wrapper">
+      <h1 class="page__title" itemprop="headline">
+        
+          Mozzi
+
+        
+      </h1>
+      
+        <p class="page__lead">audio synthesis library for Arduino
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <meta itemprop="description" content="audio synthesis library for Arduino">
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>Here’s a detailed explanation of the parts in a Mozzi sketch. We’ll start by
+generating audio to produce a plain sine wave, then add control to the sketch to
+change the sine wave’s frequency and produce vibrato.</p>
+
+<h2 id="bare-bones-example-playing-a-sine-wave">Bare bones example: playing a sine wave</h2>
+
+<p>Let’s make a minimal Mozzi sketch step by step. The sketch plays a sine wave at
+a specified frequency. No great feat, and you can find lots of other Arduino
+sketches doing it without Mozzi, but it gives the gist of how a
+Mozzi sketch works. You don’t need much experience with
+Arduino or programming.</p>
+
+<p>First <code class="highlighter-rouge">#include &lt;MozziGuts.h&gt;</code>. You always need this, as well as headers for any
+Mozzi classes, modules or tables used in the sketch.  This time we’ll have an oscillator
+and a wavetable for the oscillator to play:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="cp">#include &lt;MozziGuts.h&gt; // this makes everything work
+#include &lt;Oscil.h&gt;  // a template for an oscillator
+#include &lt;tables/sin2048_int8.h&gt;  // a wavetable holding a sine wave</span></code></pre></figure>
+
+<p>Next, instantiate the oscillator, using the <code class="highlighter-rouge">Oscil</code> class just included.  Here is the structure and
+the parameters used to declare an <code class="highlighter-rouge">Oscil</code>.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="n">Oscil</span> <span class="o">&lt;</span><span class="n">table_size</span><span class="p">,</span> <span class="n">update_rate</span><span class="o">&gt;</span> <span class="n">name</span><span class="p">(</span><span class="n">table_data</span><span class="p">);</span></code></pre></figure>
+
+<p>The oscillator needs to be instantiated using literal numeric values as template
+parameters (inside the <code class="highlighter-rouge">&lt; &gt;</code> brackets). This allows the compiler to do some
+calculations at compile time instead of slowing down execution by repeating the
+same operations over and over while the program runs.</p>
+
+<p>The table used by an <code class="highlighter-rouge">Oscil</code> needs to be a power of two, typically at least 256
+cells and preferably longer for lower aliasing noise. This Oscil will be
+operating as an audio generator, so the update rate will be <code class="highlighter-rouge">AUDIO_RATE</code>. The
+<code class="highlighter-rouge">table_data</code> is an array which you can find the name of in the table file included
+at the top of the sketch.  If you look in Mozzi/tables/sin2048_int8.h, you’ll find <code class="highlighter-rouge">SIN2048_DATA</code>.</p>
+
+<p>So, an audio sine tone oscillator for our sketch is created like this:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="n">Oscil</span> <span class="o">&lt;</span><span class="mi">2048</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aSin</span><span class="p">(</span><span class="n">SIN2048_DATA</span><span class="p">);</span></code></pre></figure>
+
+<p>The <code class="highlighter-rouge">CONTROL_RATE</code> has a default value of 64, but you can change it if you want
+control updates to happen more frequently. Like the audio rate, it must be a
+literal number and power of two to allow Mozzi to optimise internal calculations
+for run-time speed.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="cp">#define CONTROL_RATE 128</span></code></pre></figure>
+
+<p>Now to the program functions.  In Arduino’s <code class="highlighter-rouge">setup()</code> routine goes:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span></code></pre></figure>
+
+<p>This sets up one timer to call <code class="highlighter-rouge">updateControl()</code> at the rate chosen and another
+timer which works behind the scenes to send audio samples to the output pin at
+the fixed rate of 16384 Hz.</p>
+
+<p>The oscillator frequency can be set in a range of ways, but we’ll use an integer:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="n">aSin</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="mi">440</span><span class="p">);</span></code></pre></figure>
+
+<p>Now Arduino’s <code class="highlighter-rouge">setup()</code> function looks like this:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
+	<span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span>
+	<span class="n">aSin</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="mi">440</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>The next parts of the sketch are <code class="highlighter-rouge">updateControl()</code> and <code class="highlighter-rouge">updateAudio()</code>, which
+are both required. In this example the frequency has already been set and the
+oscillator just needs to be run in <code class="highlighter-rouge">updateAudio()</code>, using the Oscil’s <code class="highlighter-rouge">next()</code>
+method which returns a signed 8 bit value from the oscillator’s wavetable. The
+<code class="highlighter-rouge">int</code> return value of <code class="highlighter-rouge">updateAudio()</code> must be in the range -244 to 243 in Mozzi’s
+default <code class="highlighter-rouge">STANDARD</code> audio mode.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span>
+	<span class="c1">// no controls being changed</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">updateAudio</span><span class="p">(){</span>
+	<span class="k">return</span> <span class="n">aSin</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Finally, <code class="highlighter-rouge">audioHook()</code> goes in Arduino’s <code class="highlighter-rouge">loop()</code>.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
+	<span class="n">audioHook</span><span class="p">();</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>This is where the sound actually gets synthesised, running as fast as possible
+to fill the output buffer which gets steadily emptied at Mozzi’s audio rate. For
+this reason, it’s usually best to avoid placing any other code in <code class="highlighter-rouge">loop()</code>.</p>
+
+<p>It’s important to design a sketch with efficiency in mind in terms of what can
+be processed in <code class="highlighter-rouge">updateAudio()</code>, <code class="highlighter-rouge">updateControl()</code> and <code class="highlighter-rouge">setup()</code>. Keep <code class="highlighter-rouge">updateAudio()</code>
+lean, put slow changing values in <code class="highlighter-rouge">updateControl()</code>, and pre-calculate as much as
+possible in <code class="highlighter-rouge">setup()</code>. Control values which directly modify audio synthesis can be
+efficiently interpolated with a <code class="highlighter-rouge">Line</code> object in <code class="highlighter-rouge">updateAudio()</code> if necessary.</p>
+
+<p>Here’s the whole sketch:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="cp">#include &lt;MozziGuts.h&gt;
+#include &lt;Oscil.h&gt;
+#include &lt;tables/sin2048_int8.h&gt;
+</span>
+<span class="cp">#define CONTROL_RATE 128
+</span><span class="n">Oscil</span> <span class="o">&lt;</span><span class="mi">2048</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aSin</span><span class="p">(</span><span class="n">SIN2048_DATA</span><span class="p">);</span>
+
+<span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
+	<span class="n">aSin</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="mi">440</span><span class="p">);</span>
+	<span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">updateAudio</span><span class="p">(){</span>
+	<span class="k">return</span> <span class="n">aSin</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
+	<span class="n">audioHook</span><span class="p">();</span>
+<span class="p">}</span></code></pre></figure>
+
+<hr />
+<h2 id="adding-a-control-signal-vibrato">Adding a control signal: vibrato</h2>
+
+<p>Vibrato can be added to the sketch by periodically changing the frequency of the
+audio wave with a low frequency oscillator. The new oscillator can use the same
+wave table but this time it’s set up to update at control rate. The
+naming convention of using a prefix of <code class="highlighter-rouge">k</code> for control and <code class="highlighter-rouge">a</code> for audio rate units
+is a personal mnemonic, influenced by Csound.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="n">Oscil</span> <span class="o">&lt;</span><span class="mi">2048</span><span class="p">,</span> <span class="n">CONTROL_RATE</span><span class="o">&gt;</span> <span class="n">kVib</span><span class="p">(</span><span class="n">SIN2048_DATA</span><span class="p">);</span></code></pre></figure>
+
+<p>This time the frequency can be set with a floating point value:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="n">kVib</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="mf">6.5</span><span class="n">f</span><span class="p">);</span></code></pre></figure>
+
+<p>Now, using variables for depth and centre frequency, the vibrato oscillator can
+modulate the frequency of the audio oscillator in <code class="highlighter-rouge">updateControl()</code>.  <code class="highlighter-rouge">kVib.next()</code>
+returns a signed byte between -128 to 127 from the wave table, so <code class="highlighter-rouge">depth</code> has to
+be set proportionately.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span>
+	<span class="kt">float</span> <span class="n">vibrato</span> <span class="o">=</span> <span class="n">depth</span> <span class="o">*</span> <span class="n">kVib</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+	<span class="n">aSin</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">centre_freq</span><span class="o">+</span><span class="n">vibrato</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Here’s the modified sketch complete with vibrato:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="cp">#include &lt;MozziGuts.h&gt;
+#include &lt;Oscil.h&gt;
+#include &lt;tables/sin2048_int8.h&gt;
+</span>
+<span class="cp">#define CONTROL_RATE 128
+</span><span class="n">Oscil</span> <span class="o">&lt;</span><span class="mi">2048</span><span class="p">,</span> <span class="n">AUDIO_RATE</span><span class="o">&gt;</span> <span class="n">aSin</span><span class="p">(</span><span class="n">SIN2048_DATA</span><span class="p">);</span>
+<span class="n">Oscil</span> <span class="o">&lt;</span><span class="mi">2048</span><span class="p">,</span> <span class="n">CONTROL_RATE</span><span class="o">&gt;</span> <span class="n">kVib</span><span class="p">(</span><span class="n">SIN2048_DATA</span><span class="p">);</span>
+
+<span class="kt">float</span> <span class="n">centre_freq</span> <span class="o">=</span> <span class="mf">440.0</span><span class="p">;</span>
+<span class="kt">float</span> <span class="n">depth</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
+	<span class="n">kVib</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="mf">6.5</span><span class="n">f</span><span class="p">);</span>
+	<span class="n">startMozzi</span><span class="p">(</span><span class="n">CONTROL_RATE</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">updateControl</span><span class="p">(){</span>
+	<span class="kt">float</span> <span class="n">vibrato</span> <span class="o">=</span> <span class="n">depth</span> <span class="o">*</span> <span class="n">kVib</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+	<span class="n">aSin</span><span class="p">.</span><span class="n">setFreq</span><span class="p">(</span><span class="n">centre_freq</span><span class="o">+</span><span class="n">vibrato</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">updateAudio</span><span class="p">(){</span>
+	<span class="k">return</span> <span class="n">aSin</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">loop</span><span class="p">(){</span>
+	<span class="n">audioHook</span><span class="p">();</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>While this example uses floating point numbers, it is best to avoid their use
+for intensive audio code which needs to run fast, especially in <code class="highlighter-rouge">updateAudio()</code>.
+When the speed of integer maths is required along with fractional precision, it
+is better to use fixed point fractional arithmetic. Mozzi’s <code class="highlighter-rouge">fixmath</code> module has
+number types and conversion functions which assist in keeping track of precision
+through complex calculations.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+    
+    
+    <li><a href="/Mozzi/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 Tim Barrass. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/Mozzi/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>

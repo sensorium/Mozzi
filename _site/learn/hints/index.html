@@ -1,0 +1,393 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.12.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Mozzi</title>
+<meta name="description" content="audio synthesis library for Arduino">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="Mozzi">
+<meta property="og:title" content="Mozzi">
+<meta property="og:url" content="http://localhost:4000/Mozzi/learn/hints/">
+
+
+  <meta property="og:description" content="audio synthesis library for Arduino">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/Mozzi/assets/images/mozzi-square.png">
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Mozzi/learn/hints/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Tim Barrass",
+      "url": "http://localhost:4000/Mozzi",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/Mozzi/feed.xml" type="application/atom+xml" rel="alternate" title="Mozzi Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/Mozzi/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/Mozzi/">Mozzi</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/download/" >download</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/gallery/" >gallery</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/examples/" >examples</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/learn/" >learn</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/faq/" >faq</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/blog/" >blog</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/doc/html/" >api</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://github.com/sensorium/Mozzi" >github</a>
+            </li>
+          
+        </ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: url('/Mozzi/assets/images/mozzi-square.png');"
+>
+  
+    <div class="wrapper">
+      <h1 class="page__title" itemprop="headline">
+        
+          Mozzi
+
+        
+      </h1>
+      
+        <p class="page__lead">audio synthesis library for Arduino
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <meta itemprop="description" content="audio synthesis library for Arduino">
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h2 id="efficient-code-for-smooth-audio">Efficient code for smooth audio</h2>
+
+<ul>
+  <li>
+    <p>Writing speed-efficient code can be tricky, because the Arduino IDE sets
+the compiler for small code size rather than speed!  Here’s a great read ; )<br />
+<a href="http://ww1.microchip.com/downloads/en/AppNotes/doc8453.pdf">Atmel AVR4027: Tips and Tricks to Optimize. Your C Code for 8-bit AVR Microcontrollers</a></p>
+  </li>
+  <li>
+    <p>Pre-calculate where possible. Do as much as you can in <code class="highlighter-rouge">setup()</code> and
+<code class="highlighter-rouge">updateControl()</code>, and keep <code class="highlighter-rouge">updateAudio()</code> lean.</p>
+  </li>
+  <li>
+    <p>Avoid division! Use powers of two for numbers where you can, and use
+<a href="http://arduino.cc/en/Reference/Bitshift">bit-shifting arithmetic</a> instead of
+multiplication and division where possible.
+Shifting by 8 or 16 is faster than other amounts.</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="number-types">Number types</h2>
+
+<ul>
+  <li>
+    <p>For speed, use the smallest data types you can, and unsigned where possible.</p>
+  </li>
+  <li>
+    <p><strong>Choose variables or casts which provide room for intermediate results!</strong></p>
+  </li>
+  <li>
+    <p>Take care declaring and casting variables - this can affect speed and also be <strong>a source of unexpected sounds</strong>.</p>
+  </li>
+  <li>
+    <p>Use integer and fixed point maths, and avoid floating point, particularly in
+<code class="highlighter-rouge">updateAudio()</code>. Mozzi has a collection of fixed-point number types and
+conversion functions in <strong>mozzi_fixmath.h</strong>. These are often much faster than
+floating point, but they can over - or under - flow if you’re not careful.</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="debugging">Debugging</h2>
+
+<ul>
+  <li>
+    <p>Printing to the Arduino Serial monitor is a useful tool for debugging, but
+beware of trying to print too much or your whole computer might freeze! It’s
+mostly OK to print from <code class="highlighter-rouge">updateControl()</code> with a <code class="highlighter-rouge">CONTROL_RATE</code> of 64, and it
+works well with a baud rate of 9600, ie. <code class="highlighter-rouge">Serial.begin(9600)</code>. Remember to
+set it in the monitor window too. Notice that using Serial adds size to your
+sketch and can often disrupt audio, so check if you’ve got print statements
+interfering if you’re hearing audio clicks.</p>
+  </li>
+  <li>
+    <p>To print audio rate debugging info, don’t use the Arduino serial monitor, try
+<a href="http://freeware.the-meiers.org/">CoolTerm</a>, it’s a great application which
+performs much better and can capture incoming data to a file.</p>
+  </li>
+  <li>
+    <p>An oscilloscope is useful for timing your code. Mozzi has fast code to flip
+digital pin 13 without interfering much with the audio timing. Put <code class="highlighter-rouge">#include
+mozzi_utils.h</code> in your sketch and <code class="highlighter-rouge">setPin13Out()</code> in <code class="highlighter-rouge">setup()</code>, then use
+<code class="highlighter-rouge">setPin13High()</code> and <code class="highlighter-rouge">setPin13Low()</code> around the code you want to time.</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="listening-and-analysing">Listening and analysing</h2>
+
+<ul>
+  <li>
+    <p>A computer line-in works well for listening, and some good tools to record or
+examine your sounds are <a href="https://www.audacityteam.org/download/">Audacity</a>,
+<a href="http://www.baudline.com/">Baudline</a> signal analyser, and
+<a href="http://www.faberacoustical.com/products/signalscope/">SignalScope</a>.</p>
+  </li>
+  <li>
+    <p>In Audacity, set the Project Rate to Mozzi’s audio rate of 16384 Hz before
+recording. This will make the PWM artifacts disappear and the waves will look
+like normal, non-PWM sound. You need to adjust the recording level by ear,
+because the sound distorts at a lower level than expected even though the levels
+in the window look OK.</p>
+  </li>
+  <li>
+    <p>If you’re stuck with a fixed recording rate and you need to see what’s
+happening in your synthesis, filtering makes a big difference. There’s a Pure
+Data patch in Mozzi/pd with 4 4000Hz filters in series which can be used with a
+utility like Jack or Soundflower to filter the audio before it gets to your
+sound program. This allows you to check what’s happening in real time.</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="keep-up-to-date">Keep up to date!</h2>
+<ul>
+  <li>Mozzi is actively developing, so make sure you’ve got the latest version,
+and the <a href="https://groups.google.com/forum/#!forum/mozzi-users/">users’ forum</a> is there to help.</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+    
+    
+    <li><a href="/Mozzi/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 Tim Barrass. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/Mozzi/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>

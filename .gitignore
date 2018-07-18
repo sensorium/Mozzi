@@ -6,6 +6,7 @@
 *.tar.gz
 .deps
 .libs
+.DS_Store
 config.sub
 config.guess
 config.log

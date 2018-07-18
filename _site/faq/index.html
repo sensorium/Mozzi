@@ -1,0 +1,384 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.12.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Mozzi</title>
+<meta name="description" content="audio synthesis library for Arduino">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="Mozzi">
+<meta property="og:title" content="Mozzi">
+<meta property="og:url" content="http://localhost:4000/Mozzi/faq/">
+
+
+  <meta property="og:description" content="audio synthesis library for Arduino">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/Mozzi/assets/images/mozzi-square.png">
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Mozzi/faq/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Tim Barrass",
+      "url": "http://localhost:4000/Mozzi",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/Mozzi/feed.xml" type="application/atom+xml" rel="alternate" title="Mozzi Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/Mozzi/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/Mozzi/">Mozzi</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/download/" >download</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/gallery/" >gallery</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/examples/" >examples</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/learn/" >learn</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/faq/" >faq</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/blog/" >blog</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/doc/html/" >api</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://github.com/sensorium/Mozzi" >github</a>
+            </li>
+          
+        </ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: url('/Mozzi/assets/images/mozzi-square.png');"
+>
+  
+    <div class="wrapper">
+      <h1 class="page__title" itemprop="headline">
+        
+          Mozzi
+
+        
+      </h1>
+      
+        <p class="page__lead">audio synthesis library for Arduino
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <meta itemprop="description" content="audio synthesis library for Arduino">
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p><a id="top"> </a><br />
+<a href="#q1">1. Everything sounds glitchy, including the examples.</a> <br />
+<a href="#q2">2. Everything sounds too quiet.</a><br />
+<a href="#q3">3. My patch was working and now it sounds horrible!</a><br />
+<a href="#q4">4. How can I optimise my code to get the most out of Mozzi?</a><br />
+<a href="#q5">5. How can I extend Mozzi? </a><br />
+<a href="#q6">6. Can I contribute developments?  How?</a></p>
+
+<hr />
+
+<p><a id="q1"></a></p>
+<h3 id="everything-sounds-glitchy-including-the-examples">Everything sounds glitchy, including the examples.</h3>
+
+<p>Maybe you’re listening to a <code class="highlighter-rouge">STANDARD</code> or <code class="highlighter-rouge">STANDARD_PLUS</code> sketch, but <code class="highlighter-rouge">AUDIO_MODE</code> is set to <code class="highlighter-rouge">HIFI</code>.
+Check the file <strong>Mozzi/mozzi_config.h</strong>.  Look for:</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="c"><span class="line"><span></span><span class="c1">//#define AUDIO_MODE STANDARD</span>
+</span><span class="line"><span class="cp">#define AUDIO_MODE STANDARD_PLUS</span>
+</span><span class="line"><span class="c1">//#define AUDIO_MODE HIFI</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>For <code class="highlighter-rouge">STANDARD_PLUS</code> mode, the lines should appear as above,
+with the <code class="highlighter-rouge">STANDARD</code> and <code class="highlighter-rouge">HIFI</code> lines commented out.  Most of the examples work in
+<code class="highlighter-rouge">STANDARD_PLUS</code> mode, unless they say otherwise.</p>
+
+<p><a href="#top">(go to top)</a></p>
+
+<hr />
+
+<p><a id="q2"></a></p>
+<h3 id="everything-sounds-too-quiet">Everything sounds too quiet.</h3>
+
+<p>Check if you’re listening to a <code class="highlighter-rouge">HIFI</code> sketch in <code class="highlighter-rouge">STANDARD</code> or <code class="highlighter-rouge">STANDARD_PLUS</code> mode.  See the previous answer.</p>
+
+<p><a href="#top">(go to top)</a></p>
+
+<hr />
+
+<p><a id="q3"></a></p>
+<h3 id="my-patch-was-working-and-now-it-sounds-horrible">My patch was working and now it sounds horrible!</h3>
+
+<ul>
+  <li>Has the <code class="highlighter-rouge">AUDIO_MODE</code> changed in <strong>Mozzi/mozzi_config.h</strong>?</li>
+  <li>Is the processor having trouble keeping up with the amount of calculations it’s doing?</li>
+  <li>Has a signed or unsigned variable been cast to the wrong sign?</li>
+  <li>Is there a data type overflowing somewhere?</li>
+  <li>Are there <code class="highlighter-rouge">Serial.print()</code> statements slowing things down?</li>
+</ul>
+
+<p><a href="#top">(go to top)</a></p>
+
+<hr />
+
+<p><a id="q4"></a></p>
+<h3 id="how-can-i-optimise-my-code-to-get-the-most-out-of-mozzi">How can I optimise my code to get the most out of Mozzi?</h3>
+
+<p>Read this: <a href="http://ww1.microchip.com/downloads/en/AppNotes/doc8453.pdf">Atmel AVR4027: Tips and Tricks to Optimize. Your C Code for 8-bit AVR Microcontrollers</a>.<br />
+And there are a few hints <a href="../learn/hints/">here</a> on the Mozzi site.</p>
+
+<p>Also, to make your compiled code run slightly faster, Arduino versions above 1.5 can be tweaked to optimise for speed instead of small size.</p>
+
+<p>Find Arduino’s platform.txt (on OSX you can find it by searching in Users/your_name/Library/Arduino15). Search and replace -Os with -O2. Save.</p>
+
+<p>It’s explained more thoroughly (for Windows) <a href="https://www.instructables.com/id/Arduino-IDE-16x-compiler-optimisations-faster-code/?ALLSTEPS">here</a>.</p>
+
+<p>If you <em>still</em> need more speed, Arduino 1.0.5 compiles code that runs slightly faster.</p>
+
+<p><a href="#top">(go to top)</a></p>
+
+<hr />
+
+<p><a id="q5"></a></p>
+<h3 id="how-can-i-extend-mozzi">How can I extend Mozzi?</h3>
+
+<p>It’s easy!  I usually copy the simplest class.h file I can find in the Mozzi folder and base the next thing on that.
+Usually it’ll have a <code class="highlighter-rouge">next()</code> method, maybe a couple of <code class="highlighter-rouge">set()</code> methods and whetever else you decide on.
+It might make use of <code class="highlighter-rouge">AUDIO_RATE</code> or <code class="highlighter-rouge">CONTROL_RATE</code>.
+It seems self-explanatory to me, but then I haven’t ever explained it to anyone.</p>
+
+<p><a href="#top">(go to top)</a></p>
+
+<hr />
+
+<p><a id="q6"></a></p>
+<h3 id="can-i-contribute-developments--how">Can I contribute developments?  How?</h3>
+
+<p><a href="https://github.com/sensorium/Mozzi">Fork Mozzi on GitHub</a>, and your changes will become part of the “development graph”, or just post to the <a href="https://groups.google.com/forum/#!forum/mozzi-users/">users’ list</a>.</p>
+
+<p><a href="#top">(go to top)</a></p>
+
+<hr />
+
+<p>To be continued…</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+    
+    
+    <li><a href="/Mozzi/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 Tim Barrass. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/Mozzi/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,603 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.12.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Mozzi</title>
+<meta name="description" content="audio synthesis library for Arduino">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="Mozzi">
+<meta property="og:title" content="Mozzi">
+<meta property="og:url" content="http://localhost:4000/Mozzi/">
+
+
+  <meta property="og:description" content="audio synthesis library for Arduino">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/Mozzi/assets/images/mozzi-square.png">
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Mozzi/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Tim Barrass",
+      "url": "http://localhost:4000/Mozzi",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/Mozzi/feed.xml" type="application/atom+xml" rel="alternate" title="Mozzi Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/Mozzi/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--home">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/Mozzi/">Mozzi</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/download/" >download</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/gallery/" >gallery</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/examples/" >examples</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/learn/" >learn</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/faq/" >faq</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/blog/" >blog</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/doc/html/" >api</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://github.com/sensorium/Mozzi" >github</a>
+            </li>
+          
+        </ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: url('/Mozzi/assets/images/mozzi-square.png');"
+>
+  
+    <div class="wrapper">
+      <h1 class="page__title" itemprop="headline">
+        
+          Mozzi
+
+        
+      </h1>
+      
+        <p class="page__lead">audio synthesis library for Arduino
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <meta itemprop="description" content="audio synthesis library for Arduino">
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#features">Features</a></li>
+  <li><a href="#installation">Installation</a></li>
+  <li><a href="#quick-start">Quick Start</a></li>
+  <li><a href="#using-mozzi">Using Mozzi</a></li>
+  <li><a href="#documentation">Documentation</a></li>
+  <li><a href="#wierd-things">Wierd things</a></li>
+  <li><a href="#contributions--included-dependencies">Contributions / Included Dependencies</a></li>
+  <li><a href="#hardware-specific-notes">Hardware specific notes</a>
+    <ul>
+      <li><a href="#stm32duino">STM32(duino)</a></li>
+      <li><a href="#teensy-3031323435lc">Teensy 3.0/3.1/3.2/3.4/3.5/LC</a></li>
+      <li><a href="#esp8266">ESP8266</a></li>
+    </ul>
+  </li>
+  <li><a href="#contact">Contact</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>Currently your Arduino can only beep like a microwave oven. Mozzi brings
+your Arduino to life by allowing it to produce much more complex and interesting
+growls, sweeps and chorusing atmospherics. These sounds can be quickly and easily
+constructed from familiar synthesis units like oscillators, delays, filters and
+envelopes.</p>
+
+<p>You can use Mozzi to generate algorithmic music for an installation or
+performance, or make interactive sonifications of sensors, on a small, modular
+and super cheap Arduino, without the need for additional shields, message
+passing or external synths.</p>
+
+<p>Here are some sounds of the example sketches which come with Mozzi:</p>
+
+<hr />
+
+<p>Using a “Line” to sweep frequency:</p>
+
+<audio controls="">
+<source type="audio/ogg" src="https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/02.Control/Line_Gliss_Double_32k_HIFI/Line_Gliss_Double_32k_HIFI.ogg?raw=true" preload="auto" />&lt;/source&gt;
+<source type="audio/mp3" src="https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/02.Control/Line_Gliss_Double_32k_HIFI/Line_Gliss_Double_32k_HIFI.mp3?raw=true" preload="auto" />&lt;/source&gt;
+Your browser does not support the audio element. </audio>
+
+<hr />
+
+<p>Phase and amplitude modulation, with reverb:</p>
+
+<audio controls="">
+<source type="audio/ogg" src="https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/09.Delays/ReverbTank_STANDARD/ReverbTank_STANDARD.ogg?raw=true" preload="auto" />&lt;/source&gt;
+<source type="audio/mp3" src="https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/09.Delays/ReverbTank_STANDARD/ReverbTank_STANDARD.mp3?raw=true" preload="auto" />&lt;/source&gt;
+Your browser does not support the audio element. </audio>
+
+<hr />
+
+<p>A chordal wash of detuned oscillator pairs:</p>
+
+<audio controls="controls">
+<source type="audio/ogg" src="https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/06.Synthesis/Detuned_Beats_Wash/Detuned_Beats_Wash.ogg?raw=true" preload="auto" />&lt;/source&gt;
+<source type="audio/mp3" src="https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/06.Synthesis/Detuned_Beats_Wash/Detuned_Beats_Wash.mp3?raw=true" preload="auto" />&lt;/source&gt;
+Your browser does not support the audio element. </audio>
+
+<hr />
+
+<p>Waveshaping:</p>
+
+<audio controls="controls">
+<source type="audio/ogg" src="https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/06.Synthesis/Waveshaper/Waveshaper.ogg?raw=true" preload="auto" />&lt;/source&gt;
+<source type="audio/mp3" src="https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/06.Synthesis/Waveshaper/Waveshaper.mp3?raw=true" preload="auto" />&lt;/source&gt;
+Your browser does not support the audio element. </audio>
+
+<hr />
+
+<p>Samples sequenced on the fly:</p>
+
+<audio controls="">
+<source type="audio/ogg" src="https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/08.Samples/Samples_Tables_Arrays/Samples_Tables_Arrays.ogg?raw=true" preload="auto" />&lt;/source&gt;
+<source type="audio/mp3" src="https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/08.Samples/Samples_Tables_Arrays/Samples_Tables_Arrays.mp3?raw=true" preload="auto" />&lt;/source&gt;
+Your browser does not support the audio element. </audio>
+
+<h2 id="features">Features</h2>
+<ul>
+  <li>16384 Hz sample rate or experimental 32768 Hz rate.</li>
+  <li>8 bit or 14 bit audio output modes (12 bits on Teensy 3.x).</li>
+  <li>PWM audio output on Atmel-based boards, or true analog out on Teensy 3.x.</li>
+  <li>Variable control rate.</li>
+  <li>Useful basic audio toolkit: oscillators, samples, lines, envelopes, scheduling, filtering.</li>
+  <li>Fast ADC and other cpu-efficient code utilities to help keep audio running smoothly.</li>
+  <li>Example sketches for easy modification.</li>
+  <li>Readymade wavetables and a script to convert your own soundfiles for Mozzi.</li>
+  <li>Designed to be easy to use, open source (CC-nc-sa) and extendable.</li>
+</ul>
+
+<h2 id="installation">Installation</h2>
+<p>Download the most recent Mozzi from the link at the top of this page.
+Then, follow the instructions from the <a href="http://arduino.cc/en/Guide/Libraries">Arduino libraries guide</a>.</p>
+
+<h2 id="quick-start">Quick Start</h2>
+<p>To hear Mozzi, wire a 3.5mm audio jack with the centre to the audio out pin for your Arduino as shown in the table below, and the shield to GND on the Arduino.
+Plug into your computer and listen with a sound program like <a href="http://audacity.sourceforge.net/">Audacity</a>.
+Try some examples from the <strong>File &gt; Examples &gt; Mozzi</strong> menu.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><strong>Board</strong></th>
+      <th style="text-align: right"><strong>Output Pin</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Uno, Nano, Pro Mini and other Atmega 328 based boards</td>
+      <td style="text-align: right">9</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Arduino Leonardo</td>
+      <td style="text-align: right">9</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Arduino Mega <em>broken since Jan 2015</em></td>
+      <td style="text-align: right">11</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Teensy2, 2++</td>
+      <td style="text-align: right">B5 (25)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Teensy3.x</td>
+      <td style="text-align: right">A14 (analog out)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>You could try a <a href="https://www.kickstarter.com/projects/mozzibyte/mozzibyte-mozzi-arduino-mini-sensor-sonification-s">Mozzibyte</a>, a little board for Mozzi with an amp and sockets for headphone/line and speaker.</p>
+
+<p>For more about audio output, including HIFI mode, read the <a href="http://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/">Mozzi core module documentation</a>.</p>
+
+<h2 id="using-mozzi">Using Mozzi</h2>
+<p>Here’s a template for an empty Mozzi sketch:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="cp">#include &lt;MozziGuts.h&gt;   // at the top of your sketch
+</span>
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">startMozzi</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">updateControl</span><span class="p">(){</span>
+	<span class="c1">// your control code</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">updateAudio</span><span class="p">(){</span>
+	<span class="c1">// your audio code which returns an int between -244 and 243</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">loop</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">audioHook</span><span class="p">();</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>There’s a detailed example explaining the different parts <a href="learn/a-simple-sketch/">here</a>.</p>
+
+<h2 id="documentation">Documentation</h2>
+
+<p>There’s documentation in the extras/doc folder in the Mozzi download and <a href="http://sensorium.github.com/Mozzi/doc/html/index.html">online</a>.
+There is practical help on the <a href="learn/">learn</a> page on the Mozzi site.
+Start or look up a topic on the <a href="https://groups.google.com/forum/#!forum/mozzi-users/">users forum</a>.
+Also, feel free to submit any issues on the <a href="https://github.com/sensorium/Mozzi/issues/">GitHub Mozzi site</a>.
+Look for code and usage changes <a href="https://github.com/sensorium/Mozzi/blob/gh-pages/examples/extras/NEWS.txt">here</a>.</p>
+
+<h2 id="wierd-things">Wierd things</h2>
+
+<h4 id="avr">AVR</h4>
+
+<ul>
+  <li>
+    <p>While Mozzi is running, calling <code class="highlighter-rouge">delay()</code>, <code class="highlighter-rouge">delayMicroseconds()</code>, or other functions which wait or cycle through loops can cause audio glitches.
+Mozzi provides <code class="highlighter-rouge">EventDelay()</code> for scheduling instead of <code class="highlighter-rouge">delay()</code>.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">analogRead()</code> is replaced by <code class="highlighter-rouge">mozziAnalogRead()</code>, which works in the background instead of blocking the processor.</p>
+  </li>
+  <li>
+    <p>Mozzi interferes with <code class="highlighter-rouge">analogWrite()</code>.  In <code class="highlighter-rouge">STANDARD</code> and <code class="highlighter-rouge">STANDARD_PLUS</code> audio modes, Mozzi takes over Timer1 (pins 9 and 10), but you can use the Timer2 pins, 3 and 11 (your board may differ).  In <code class="highlighter-rouge">HIFI</code> mode,
+Mozzi uses Timer1 (or Timer4 on some boards), and Timer2, so pins 3 and 11 are also out.<br />
+If you need <code class="highlighter-rouge">analogWrite()</code>, you can do PWM output on any digital pins using the technique in
+<em>Mozzi&gt;examples&gt;11.Communication&gt;Sinewave_PWM_pins_HIFI</em>.</p>
+  </li>
+  <li>
+    <p>Mozzi provides<code class="highlighter-rouge">mozziMicros()</code> as an alternative to ‘millis()’ and ‘micros()’.</p>
+  </li>
+  <li>
+    <p>The timers can be made available with <code class="highlighter-rouge">stopMozzi()</code>, which stops audio interrupts, until you call <code class="highlighter-rouge">startMozzi()</code>.</p>
+  </li>
+</ul>
+
+<h2 id="contributions--included-dependencies">Contributions / Included Dependencies</h2>
+<p>Modified versions of the following libraries are included in the Mozzi download:</p>
+
+<p><a href="http://www.pjrc.com/teensy/td_libs_TimerOne.html">TimerOne library</a><br />
+<a href="http://www.pjrc.com/teensy/td_libs_FrequencyTimer2.html">FrequencyTimer2 library</a> - now a <a href="https://github.com/sensorium/FrequencyTimer2/">fork with support for ATmega32u4 processors</a></p>
+
+<p>Mozzi has also drawn on and been influenced by (among many others):</p>
+
+<p><a href="http://school.anhb.uwa.edu.au/personalpages/kwessen/shared/Marsaglia03.html">xorshift</a> random number generator, George Marsaglia, (2003)<br />
+ead~.c puredata external (creb library) Copyright (c) 2000-2003 by Tom Schouten (GPL2)<br />
+<a href="http://adrianfreed.com/content/arduino-sketch-high-frequency-precision-sine-wave-tone-sound-synthesis">AF_precision_synthesis</a>
+by Adrian Freed, 2009<br />
+<a href="http://www.musicdsp.org/archive.php?classid=3#259">Resonant filter</a> posted to musicdsp.org by Paul Kellett,
+and fixed point version of the filter on <a href="http://www.pawfal.org/dave/blog/2011/09/">dave’s blog of art and programming</a><br />
+State Variable filter pseudocode at musicdsp.org <a href="http://www.musicdsp.org/showone.php?id=23">here</a> and <a href="http://www.musicdsp.org/showone.php?id=142">here</a><br />
+Various examples from <a href="http://puredata.info/">Pure Data</a> by Miller Puckette<br />
+<a href="http://www.moz.ac.at/sem/lehre/lib/pd-sounddesign/index.html">Practical synthesis tutorials</a> by Andy Farnell</p>
+
+<h2 id="hardware-specific-notes">Hardware specific notes</h2>
+
+<h3 id="stm32duino">STM32(duino)</h3>
+<p>port by Thomas Friedrichsmeier</p>
+
+<p>Compiles for and runs on a STM32F103C8T6 blue pill board, with a bunch of caveats (see below), i.e. on a board <em>without</em> a
+real DAC. Should probably run on any other board supported by <a href="https://github.com/rogerclarkmelbourne/Arduino_STM32">STM32duino</a>.</p>
+
+<ul>
+  <li>You will need a very recent (12/2017) checkout of the Arduino_STM32 repository, otherwise compilation will fail.</li>
+  <li>Audio output is to pin PB8, by default (HIFI-mode: PB8 and PB9)</li>
+  <li>If you want to use MIDI, be sure to replace “MIDI_CREATE_DEFAULT_INSTANCE()” with “MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, MIDI)” (or Serial2)</li>
+  <li>Timers 4 (PWM output), and 2 (audio rate) are used by default.</li>
+  <li>The STM32-specific options (pins, timers) can be configured in AudioConfigSTM32.h</li>
+  <li>Default audio resolution is currently set to 10 bits, which yields 70khZ PWM frequency on a 72MHz CPU. HIFI mode is 2*7bits at up to 560Khz (but limited to 5 times audio rate)</li>
+  <li>HIFI_MODE did not get much testing</li>
+  <li>STEREO_HACK not yet implemented (although that should not be too hard to do)</li>
+  <li>AUDIO_INPUT is completely untested (but implemented in theory)</li>
+  <li>Note that AUDIO_INPUT and mozziAnalogRead() return values in the STM32’s full ADC resolution of 0-4095 rather than AVR’s 0-1023.</li>
+  <li>twi_nonblock is not ported</li>
+</ul>
+
+<h3 id="teensy-3031323435lc">Teensy 3.0/3.1/3.2/3.4/3.5/LC</h3>
+
+<p>Extra libraries required for use withTeensy 3.*:
+These are included in the standard Teensyduino install unless you explicitly disable them</p>
+<ul>
+  <li><a href="https://github.com/loglow/IntervalTimer">Timer library</a> for Teensy 3.* by Daniel Gilbert</li>
+  <li><a href="http://github.com/pedvide/ADC">ADC library</a> by Pedro Villanueva</li>
+</ul>
+
+<p>Some of the differences for Teensy 3.0# which will affect users include:</p>
+
+<ul>
+  <li>On Teeensy 3.0/3.1/3.2/Audio output is on pin A14/DAC, in STANDARD or STANDARD_PLUS audio modes.
+  These modes are identical on Teensy 3.0/3.1/3.2, as the output is via DAC rather than PWM.</li>
+  <li>Output is 12 bits in STANDARD and STANDARD_PLUS modes, up from nearly 9 bits for Atmel based boards. HIFI audio, which works by summing two output pins, is not available on Teensy 3.0/3.1.</li>
+  <li>#include <ADC.h> is required at the top of every Teensy 3 sketch.</ADC.h></li>
+  <li>The examples come with this commented out, for Arduino compatibility.</li>
+  <li>Serial baud rate for monitoring in the IDE needs to be set to 9600 to work with Teensy 3.0/3.1/3.2. This slow rate can cause audio glitches.</li>
+  <li>twi_nonblock code by Marije Baalman for non-blocking I2C is not compatible with Teensy 3.0/3.1/3.2.</li>
+</ul>
+
+<h3 id="esp8266">ESP8266</h3>
+<p>port by Thomas Friedrichsmeier</p>
+
+<ul>
+  <li>Since flash memory is not built into the ESP8266, but connected, externally, it is much too slow for keeping wave tables, audio samples, etc. Instead, these are kept in RAM on this platform.</li>
+  <li>Asynchronous analog reads are not implemented. <code class="highlighter-rouge">mozziAnalogRead()</code> relays to <code class="highlighter-rouge">analogRead()</code>.</li>
+  <li>AUDIO_INPUT is not implemented.</li>
+  <li>twi_nonblock is not ported</li>
+  <li>Several audio output modes exist, the default being PDM_VIA_SERIAL (configurable in AudioConfigESP.h):
+    <ul>
+      <li>PDM_VIA_SERIAL: Output is coded using pulse density modulation, and sent via GPIO2 (Serial1 TX).
+        <ul>
+          <li>This output mode uses timer1 for queuing audio sample, so that timer is not available for other uses.</li>
+          <li>Note that this mode has slightly lower effective analog output range than PDM_VIA_I2S, due to start/stop bits being added to the output stream.</li>
+        </ul>
+      </li>
+      <li>PDM_VIA_I2S: Output is coded using pulse density modulation, and sent via the I2S pins. The I2S data out pin (which is also “RX”) will have the output, but <em>all</em> I2S output pins (RX, GPIO2 and GPIO15) will be
+affected. Mozzi tries to set GPIO2 and GPIO15 to input mode, and <em>at the time of this writing</em>, this allows I2S output on RX even on boards such as the ESP01 (where GPIO15 is tied to Gnd). However, it seems safest to
+assume that this mode may not be useable on boards where GPIO2 or GPIO15 are not available as output pins.</li>
+      <li>EXTERNAL_DAC_VIA_I2S: Output is sent to an external DAC (such as a PT8211), digitally coded. This is the only mode that supports STEREO_HACK. It also need the least processing power.
+        <ul>
+          <li>TODO: Untested!</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>There is no “HIFI_MODE” in addition to the above output options. For high quality output, either use an external DAC, or increase the PDM_RESOLUTION value.</li>
+  <li>Note that the ESP8266 pins can output less current than the other supported CPUs. The maximum is 12mA, with a recommendation to stay below 6mA.
+    <ul>
+      <li>WHEN CONNECTING A HEADPHONE, DIRECTLY, USE APPROPRIATE CURRENT LIMITING RESISTORS (&gt;= 500Ohms).</li>
+    </ul>
+  </li>
+  <li><em>Any</em> WiFi-activity can cause severe spikes in power consumption. This can cause audible “ticking” artifacts, long before any other symptoms.
+    <ul>
+      <li>If you do not require WiFi in your sketch, you should turn it off, <em>explicitly</em>, using <code class="highlighter-rouge">WiFi.mode(WIFI_OFF)</code>.</li>
+      <li>A juicy enough, well regulated power supply, and a stabilizing capacitor between VCC and Gnd can help a lot.</li>
+      <li>As the (PDM) output signal is digital, a single transistor can be used to amplify it to an independent voltage level.</li>
+    </ul>
+  </li>
+  <li>The audio output resolution is always 16 bits on this platform, <em>internally</em>. Thus, in updateAudio(), you should scale your output samples to a full 16 bit range. The effective number of output bits cannot easily
+be quantified, due to PDM coding.</li>
+  <li>audioHook() calls <code class="highlighter-rouge">yield()</code> once for every audio sample generated. Thus, as long as your audio output buffer does not run empty, you should not need any additional <code class="highlighter-rouge">yield()</code>s inside <code class="highlighter-rouge">loop()</code>.</li>
+</ul>
+
+<hr />
+
+<h2 id="contact">Contact</h2>
+<p>If you enjoy using Mozzi for a project, or have extended it, we would be
+pleased to hear about it and provide support wherever possible. Contribute
+suggestions, improvements and bug fixes to the <a href="https://groups.google.com/forum/#!forum/mozzi-users/">users forum</a>
+or <a href="https://github.com/sensorium/Mozzi/issues/">GitHub Mozzi site</a>. Fork it to contribute directly to future developments.</p>
+
+<p>Mozzi began as a development of research into Mobile Sonification in the
+<a href="http://stephenbarrass.wordpress.com/tag/sweatsonics/">SweatSonics</a> project.</p>
+
+<hr />
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+    
+    
+    <li><a href="/Mozzi/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 Tim Barrass. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/Mozzi/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,378 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.12.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Mozzi</title>
+<meta name="description" content="audio synthesis library for Arduino">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="Mozzi">
+<meta property="og:title" content="Mozzi">
+<meta property="og:url" content="http://localhost:4000/Mozzi/learn/output/">
+
+
+  <meta property="og:description" content="audio synthesis library for Arduino">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/Mozzi/assets/images/mozzi-square.png">
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Mozzi/learn/output/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Tim Barrass",
+      "url": "http://localhost:4000/Mozzi",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/Mozzi/feed.xml" type="application/atom+xml" rel="alternate" title="Mozzi Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/Mozzi/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/Mozzi/">Mozzi</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/download/" >download</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/gallery/" >gallery</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/examples/" >examples</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/learn/" >learn</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/faq/" >faq</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/blog/" >blog</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/doc/html/" >api</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://github.com/sensorium/Mozzi" >github</a>
+            </li>
+          
+        </ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: url('/Mozzi/assets/images/mozzi-square.png');"
+>
+  
+    <div class="wrapper">
+      <h1 class="page__title" itemprop="headline">
+        
+          Mozzi
+
+        
+      </h1>
+      
+        <p class="page__lead">audio synthesis library for Arduino
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <meta itemprop="description" content="audio synthesis library for Arduino">
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>The default AUDIO_MODE since March 2014 is STANDARD_PLUS.  On Atmel-based boards this mode has a pwm carrier rate of 32768 Hz, double the rate for STANDARD mode.
+The higher pwm rate is above hearing range, an advance on STANDARD mode’s 16384 Hz which can be audible for children and some adults.<br />
+Teensy 3.x boards provide true analog DAC rather than pwm, so Teensy 3’s are a great option for cleaner sounding audio and you won’t need a pwm carrier filter. These boards also run much faster than the Atmel based Arduinos, so you can generate more complex sounds.<br />
+STANDARD_PLUS can still benefit from a low pass filter, as outlined below for STANDARD mode.</p>
+
+<h2 id="output-circuit-for-hifi-mode">Output circuit for HIFI mode</h2>
+<p>Mozzi’s HIFI audio mode combines the output of 2 pins in a technique called dual PWM, which is explained in detail at <a href="http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/">Open Music Labs</a>.</p>
+
+<p>Here’s the circuit for Mozzi, based on the Open Music Labs article.</p>
+
+<p><img src="https://farm8.staticflickr.com/7458/10657009473_26c1f478de.jpg" alt="Mozzi output circuit for HIFI audio mode" /></p>
+
+<p>Teensy 3.1 doesn’t use 14 bit pwm HIFI mode, but has 12 bit DAC analog output enabled by default, even in STANDARD and STANDARD_PLUS modes.</p>
+
+<h4 id="advantages-of-hifi-mode">Advantages of HIFI mode</h4>
+<ul>
+  <li>Higher resolution sound than STANDARD or STANDARD_PLUS modes.</li>
+  <li>Doesn’t need a notch filter on the audio signal because the carrier frequency is out of hearing range (STANDARD_PLUS also doesn’t need it).</li>
+</ul>
+
+<h4 id="disadvantages">Disadvantages</h4>
+<ul>
+  <li>Requires 2 pins, 2 resistors and a capacitor, so it’s not so quick to set up compared to a rough, direct single-pin output in STANDARD and STANDARD_PLUS modes.</li>
+</ul>
+
+<h3 id="pins-and-where-to-put-the-resistors-on-various-boards-for-hifi-mode">Pins and where to put the resistors on various boards for HIFI mode</h3>
+<p>Boards tested in HIFI mode have an x, though most of these have been tested in STANDARD_PLUS mode
+and there’s no reason for them not to work in HIFI (unless the pin number is wrong or something).
+Any reports are welcome.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><strong>Board</strong></th>
+      <th style="text-align: right"><strong>Output Pin</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Uno, Nano, Pro Mini and other Atmega 328 based boards</td>
+      <td style="text-align: right">9</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Arduino Leonardo</td>
+      <td style="text-align: right">9</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Arduino Mega <em>broken since Jan 2015</em></td>
+      <td style="text-align: right">11</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Teensy2, 2++</td>
+      <td style="text-align: right">B5 (25)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Teensy3.x</td>
+      <td style="text-align: right">A14 (analog out)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="low-pass-audio-filter">Low pass audio filter</h3>
+<p>Mozzi’s sound output can be filtered to reduce aliasing at high frequencies.
+Here’s some info about low pass <a href="http://electronics.stackexchange.com/questions/34843/how-determine-the-rc-time-constant-in-pwm-digital-to-analog-low-pass-filter">RC filters</a> and a <a href="http://sim.okawa-denshi.jp/en/PWMtool.php">calculator</a> to help choose components.
+For Mozzi, an RC filter with a roll-off frequency of just under 6kHz works well, using a 270 Ω resistor and a 100n capacitor, as shown below.   In HIFI mode, this would be on the combined audio output signal rather than straight from pin 9.</p>
+
+<p><img src="http://farm9.staticflickr.com/8317/7934584004_096300ef0d.jpg" alt="RC circuit" /></p>
+
+<h3 id="notch-filter-for-standard-mode-carrier-frequency">Notch filter for STANDARD mode carrier frequency</h3>
+
+<p>This may still be useful if you need to use STANDARD mode for some reason, for instance if you need Timer 2 for another process
+(making HIFI unavailable), or if your sketch is too intensive for STANDARD_PLUS and you need 10% more juice.</p>
+
+<p>People who have used Mozzi in STANDARD mode with children report that kids find the carrier frequency particularly irritating, however adults are often unable to perceive it at any level!  Many thanks to Andrew McPherson, who sent a schematic and equation for a twin-T notch filter which he used successfully to remove the offending frequency.</p>
+
+<p><img src="http://farm9.staticflickr.com/8470/8124196839_6f3e506525.jpg" alt="Twin-T Notch Filter" />
+<img src="http://farm9.staticflickr.com/8472/8124196815_6c02f4fb86.jpg" alt="equation" /></p>
+
+<p>Here’s a design tool for calculating <a href="http://sim.okawa-denshi.jp/en/TwinTCRtool.php">Twin-T notch filters.</a></p>
+
+<p>Andrew also reported that the low-pass and notch filter described here can be used together in series without any problems.</p>
+
+<p>Here’s a schematic for the 6kHz low pass and the notch filter using commonly available parts chosen to exactly match STANDARD mode’s 16384Hz carrier frequency, using the notch filter design tool.</p>
+
+<p><img src="http://farm9.staticflickr.com/8209/8210496070_4a1b21f8c1_c.jpg" alt="Schematic" /></p>
+
+<h3 id="download">Download</h3>
+<p>Download a Fritzing file with breadboard, schematic and circuit board layouts <a href="https://docs.google.com/file/d/0B_eOzePFYDZaSEo4bVJ6NlJnSXM/edit?usp=sharing">here</a>.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+    
+    
+    <li><a href="/Mozzi/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 Tim Barrass. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/Mozzi/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,25 @@
+---
+layout: single
+title: "New STANDARD_PLUS audio mode removes 16kHz whine"
+date: 2014-03-13 14:16
+
+categories: [updates, audio modes]
+---
+
+Took a long time coming...
+
+version 2014-03-13-14:09
+
+- MozziGuts.cpp/h,mozzi_config.h - Added STANDARD_PLUS audio mode.   This is now the default audio mode. 
+	Just like STANDARD, but with 32768Hz PWM rate, so the whine which some people hear in STANDARD mode is now out of hearing range.
+	A notch filter is not required for STANDARD_PLUS output.
+	STANDARD_PLUS introduces a slight performance penalty over STANDARD mode, but works for most of the Mozzi demo examples.
+	I recommend it for general use, with a fall back to STANDARD for more demanding sketches.
+	HIFI mode is unchanged, but is being revised to address broad-spectrum noise/distortion issues in this mode.
+- TimerOne.h - changed initialize(usecs) to choice of initializeMicroseconds(usecs) or initializeCPUCycles(cycles), 
+	providing the finer resolution required for the PWM rate increase.
+- FrequencyTimer2.cpp - changed setPeriod to setPeriodMicroSeconds() and added setPeriodCPUCycles().
+- examples/02.Control/Line_Gliss_Double_32k_HIFI - changed "warmtriangle" wave to saw and changed one of the oscils up an octave.  Molto Aggressivo.  Almost.
+- examples/10.Audio_Filters/StateVariableFilter - changed some floats which were supposed to be ints
+- StateVariable.h - removed a clicking sound heard in some situations, thanks to diligent problem-finding by qwester1 on github.  Cheers qwester1.  
+  The centre frequency calculation is still extremely approximate.  Needs more work.

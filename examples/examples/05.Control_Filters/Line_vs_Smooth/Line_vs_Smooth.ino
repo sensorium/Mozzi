@@ -10,7 +10,7 @@
     
     Circuit: Audio output on digital pin 9 
     (for standard output on a Uno or similar), or 
-    check the README or http://sensorium.github.com/Mozzi/
+    check the README or https://sensorium.github.com/Mozzi/
     Your choice of analog sesnsors, or
     2 10k Potentiometers with wipers (middle terminals) 
     connected to analog pins 0, 1 and 2, and
@@ -22,7 +22,7 @@
     Tim Barrass 2013, CC by-nc-sa.
 */
 
-//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
+//#include <ADC.h>  // Teensy 3.1 uncomment this line and install https://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/sin2048_int8.h> // sine table for oscillator

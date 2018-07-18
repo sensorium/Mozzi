@@ -1,5 +1,5 @@
 # Title: Include Code Tag for Jekyll
-# Author: Brandon Mathis http://brandonmathis.com
+# Author: Brandon Mathis https://brandonmathis.com
 # Description: Import files on your filesystem into any blog post as embedded code snippets with syntax highlighting and a download link.
 # Configuration: You can set default import path in _config.yml (defaults to code_dir: downloads/code)
 #

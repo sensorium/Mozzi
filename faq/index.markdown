@@ -55,7 +55,7 @@ Check if you're listening to a `HIFI` sketch in `STANDARD` or `STANDARD_PLUS` mo
 <a id="q4"></a>
 ### How can I optimise my code to get the most out of Mozzi?
 
-Read this: [Atmel AVR4027: Tips and Tricks to Optimize. Your C Code for 8-bit AVR Microcontrollers](http://ww1.microchip.com/downloads/en/AppNotes/doc8453.pdf).  
+Read this: [Atmel AVR4027: Tips and Tricks to Optimize. Your C Code for 8-bit AVR Microcontrollers](https://ww1.microchip.com/downloads/en/AppNotes/doc8453.pdf).  
 And there are a few hints [here](../learn/hints/) on the Mozzi site.
 
 Also, to make your compiled code run slightly faster, Arduino versions above 1.5 can be tweaked to optimise for speed instead of small size.

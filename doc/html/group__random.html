@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
@@ -572,7 +572,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialises Mozzi's (pseudo)random number generator <a class="el" href="group__random.html#gaf2deee83847f1fcee2c859d97bd072f6" title="Random number generator. ">xorshift96()</a>, which is used in Mozzi's <a class="el" href="group__random.html#gabe026433bdf21da516984d35730672fc" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand()</a> function. </p>
-<p>This can be useful if you want random sequences to be different on each run of a sketch, by seeding with a fairly random input. <a class="el" href="group__random.html#ga84c58d758e238208eb82fc8ae2330b66" title="Initialises Mozzi&#39;s (pseudo)random number generator xorshift96(), which is used in Mozzi&#39;s rand() fun...">randSeed()</a> called without a parameter uses noise from reading the Arduino's internal temperature as the seed, a technique discussed at <a href="http://arduino.cc/forum/index.php/topic,38091.0.html,">http://arduino.cc/forum/index.php/topic,38091.0.html,</a> borrowing code put there by Rob Tillaart. </p><dl class="section note"><dt>Note</dt><dd>It's not perfect, as discussed in the forum thread. It might only work with some processors: (from the thread) "...ATmega328P in DIP, possibly others but the duemilanove and uno will do it at least." So far, gizduino's <b>AVR_ATmega644P</b> chip doesn't like it, so we use (long)analogRead(0)*analogRead(1) for that instead. </dd></dl>
+<p>This can be useful if you want random sequences to be different on each run of a sketch, by seeding with a fairly random input. <a class="el" href="group__random.html#ga84c58d758e238208eb82fc8ae2330b66" title="Initialises Mozzi&#39;s (pseudo)random number generator xorshift96(), which is used in Mozzi&#39;s rand() fun...">randSeed()</a> called without a parameter uses noise from reading the Arduino's internal temperature as the seed, a technique discussed at <a href="https://arduino.cc/forum/index.php/topic,38091.0.html,">https://arduino.cc/forum/index.php/topic,38091.0.html,</a> borrowing code put there by Rob Tillaart. </p><dl class="section note"><dt>Note</dt><dd>It's not perfect, as discussed in the forum thread. It might only work with some processors: (from the thread) "...ATmega328P in DIP, possibly others but the duemilanove and uno will do it at least." So far, gizduino's <b>AVR_ATmega644P</b> chip doesn't like it, so we use (long)analogRead(0)*analogRead(1) for that instead. </dd></dl>
 
 <p>Definition at line <a class="el" href="mozzi__rand_8cpp_source.html#l00106">106</a> of file <a class="el" href="mozzi__rand_8cpp_source.html">mozzi_rand.cpp</a>.</p>
 
@@ -594,7 +594,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Random number generator. </p>
-<p>A faster replacement for Arduino's random function, which is too slow to use with Mozzi. Based on Marsaglia, George. (2003). Xorshift RNGs. <a href="http://www.jstatsoft.org/v08/i14/xorshift.pdf">http://www.jstatsoft.org/v08/i14/xorshift.pdf</a> </p><dl class="section return"><dt>Returns</dt><dd>a random 32 bit integer. </dd></dl>
+<p>A faster replacement for Arduino's random function, which is too slow to use with Mozzi. Based on Marsaglia, George. (2003). Xorshift RNGs. <a href="https://www.jstatsoft.org/v08/i14/xorshift.pdf">https://www.jstatsoft.org/v08/i14/xorshift.pdf</a> </p><dl class="section return"><dt>Returns</dt><dd>a random 32 bit integer. </dd></dl>
 
 <p>Definition at line <a class="el" href="mozzi__rand_8cpp_source.html#l00017">17</a> of file <a class="el" href="mozzi__rand_8cpp_source.html">mozzi_rand.cpp</a>.</p>
 
@@ -634,7 +634,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="footer">Generated on Sun Dec 11 2016 17:03:11 for Mozzi by
-    <a href="http://www.doxygen.org/index.html">
+    <a href="https://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
   </ul>
 </div>

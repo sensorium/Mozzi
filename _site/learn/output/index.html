@@ -18,14 +18,14 @@
 <meta property="og:locale" content="en_GB">
 <meta property="og:site_name" content="Mozzi">
 <meta property="og:title" content="Mozzi">
-<meta property="og:url" content="http://localhost:4000/Mozzi/learn/output/">
+<meta property="og:url" content="https://localhost:4000/Mozzi/learn/output/">
 
 
   <meta property="og:description" content="audio synthesis library for Arduino">
 
 
 
-  <meta property="og:image" content="http://localhost:4000/Mozzi/assets/images/mozzi-square.png">
+  <meta property="og:image" content="https://localhost:4000/Mozzi/assets/images/mozzi-square.png">
 
 
 
@@ -40,7 +40,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/Mozzi/learn/output/">
+<link rel="canonical" href="https://localhost:4000/Mozzi/learn/output/">
 
 
 
@@ -50,10 +50,10 @@
 
   <script type="application/ld+json">
     {
-      "@context": "http://schema.org",
+      "@context": "https://schema.org",
       "@type": "Person",
       "name": "Tim Barrass",
-      "url": "http://localhost:4000/Mozzi",
+      "url": "https://localhost:4000/Mozzi",
       "sameAs": null
     }
   </script>
@@ -69,7 +69,7 @@
 
 <link href="/Mozzi/feed.xml" type="application/atom+xml" rel="alternate" title="Mozzi Feed">
 
-<!-- http://t.co/dKP3o1e -->
+<!-- https://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -120,37 +120,37 @@
           
             
             <li class="masthead__menu-item">
-              <a href="http://localhost:4000/Mozzi/download/" >download</a>
+              <a href="https://localhost:4000/Mozzi/download/" >download</a>
             </li>
           
             
             <li class="masthead__menu-item">
-              <a href="http://localhost:4000/Mozzi/gallery/" >gallery</a>
+              <a href="https://localhost:4000/Mozzi/gallery/" >gallery</a>
             </li>
           
             
             <li class="masthead__menu-item">
-              <a href="http://localhost:4000/Mozzi/examples/" >examples</a>
+              <a href="https://localhost:4000/Mozzi/examples/" >examples</a>
             </li>
           
             
             <li class="masthead__menu-item">
-              <a href="http://localhost:4000/Mozzi/learn/" >learn</a>
+              <a href="https://localhost:4000/Mozzi/learn/" >learn</a>
             </li>
           
             
             <li class="masthead__menu-item">
-              <a href="http://localhost:4000/Mozzi/faq/" >faq</a>
+              <a href="https://localhost:4000/Mozzi/faq/" >faq</a>
             </li>
           
             
             <li class="masthead__menu-item">
-              <a href="http://localhost:4000/Mozzi/blog/" >blog</a>
+              <a href="https://localhost:4000/Mozzi/blog/" >blog</a>
             </li>
           
             
             <li class="masthead__menu-item">
-              <a href="http://localhost:4000/Mozzi/doc/html/" >api</a>
+              <a href="https://localhost:4000/Mozzi/doc/html/" >api</a>
             </li>
           
             
@@ -213,7 +213,7 @@
 <div id="main" role="main">
   
 
-  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     
     <meta itemprop="description" content="audio synthesis library for Arduino">
     
@@ -230,7 +230,7 @@ Teensy 3.x boards provide true analog DAC rather than pwm, so Teensy 3’s are a
 STANDARD_PLUS can still benefit from a low pass filter, as outlined below for STANDARD mode.</p>
 
 <h2 id="output-circuit-for-hifi-mode">Output circuit for HIFI mode</h2>
-<p>Mozzi’s HIFI audio mode combines the output of 2 pins in a technique called dual PWM, which is explained in detail at <a href="http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/">Open Music Labs</a>.</p>
+<p>Mozzi’s HIFI audio mode combines the output of 2 pins in a technique called dual PWM, which is explained in detail at <a href="https://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/">Open Music Labs</a>.</p>
 
 <p>Here’s the circuit for Mozzi, based on the Open Music Labs article.</p>
 
@@ -287,10 +287,10 @@ Any reports are welcome.</p>
 
 <h3 id="low-pass-audio-filter">Low pass audio filter</h3>
 <p>Mozzi’s sound output can be filtered to reduce aliasing at high frequencies.
-Here’s some info about low pass <a href="http://electronics.stackexchange.com/questions/34843/how-determine-the-rc-time-constant-in-pwm-digital-to-analog-low-pass-filter">RC filters</a> and a <a href="http://sim.okawa-denshi.jp/en/PWMtool.php">calculator</a> to help choose components.
+Here’s some info about low pass <a href="https://electronics.stackexchange.com/questions/34843/how-determine-the-rc-time-constant-in-pwm-digital-to-analog-low-pass-filter">RC filters</a> and a <a href="https://sim.okawa-denshi.jp/en/PWMtool.php">calculator</a> to help choose components.
 For Mozzi, an RC filter with a roll-off frequency of just under 6kHz works well, using a 270 Ω resistor and a 100n capacitor, as shown below.   In HIFI mode, this would be on the combined audio output signal rather than straight from pin 9.</p>
 
-<p><img src="http://farm9.staticflickr.com/8317/7934584004_096300ef0d.jpg" alt="RC circuit" /></p>
+<p><img src="https://farm9.staticflickr.com/8317/7934584004_096300ef0d.jpg" alt="RC circuit" /></p>
 
 <h3 id="notch-filter-for-standard-mode-carrier-frequency">Notch filter for STANDARD mode carrier frequency</h3>
 
@@ -299,16 +299,16 @@ For Mozzi, an RC filter with a roll-off frequency of just under 6kHz works well,
 
 <p>People who have used Mozzi in STANDARD mode with children report that kids find the carrier frequency particularly irritating, however adults are often unable to perceive it at any level!  Many thanks to Andrew McPherson, who sent a schematic and equation for a twin-T notch filter which he used successfully to remove the offending frequency.</p>
 
-<p><img src="http://farm9.staticflickr.com/8470/8124196839_6f3e506525.jpg" alt="Twin-T Notch Filter" />
-<img src="http://farm9.staticflickr.com/8472/8124196815_6c02f4fb86.jpg" alt="equation" /></p>
+<p><img src="https://farm9.staticflickr.com/8470/8124196839_6f3e506525.jpg" alt="Twin-T Notch Filter" />
+<img src="https://farm9.staticflickr.com/8472/8124196815_6c02f4fb86.jpg" alt="equation" /></p>
 
-<p>Here’s a design tool for calculating <a href="http://sim.okawa-denshi.jp/en/TwinTCRtool.php">Twin-T notch filters.</a></p>
+<p>Here’s a design tool for calculating <a href="https://sim.okawa-denshi.jp/en/TwinTCRtool.php">Twin-T notch filters.</a></p>
 
 <p>Andrew also reported that the low-pass and notch filter described here can be used together in series without any problems.</p>
 
 <p>Here’s a schematic for the 6kHz low pass and the notch filter using commonly available parts chosen to exactly match STANDARD mode’s 16384Hz carrier frequency, using the notch filter design tool.</p>
 
-<p><img src="http://farm9.staticflickr.com/8209/8210496070_4a1b21f8c1_c.jpg" alt="Schematic" /></p>
+<p><img src="https://farm9.staticflickr.com/8209/8210496070_4a1b21f8c1_c.jpg" alt="Schematic" /></p>
 
 <h3 id="download">Download</h3>
 <p>Download a Fritzing file with breadboard, schematic and circuit board layouts <a href="https://docs.google.com/file/d/0B_eOzePFYDZaSEo4bVJ6NlJnSXM/edit?usp=sharing">here</a>.</p>

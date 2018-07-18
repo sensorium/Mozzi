@@ -6,13 +6,13 @@ layout: single
 
 * Writing speed-efficient code can be tricky, because the Arduino IDE sets
 the compiler for small code size rather than speed!  Here's a great read ; )  
-[Atmel AVR4027: Tips and Tricks to Optimize. Your C Code for 8-bit AVR Microcontrollers](http://ww1.microchip.com/downloads/en/AppNotes/doc8453.pdf)
+[Atmel AVR4027: Tips and Tricks to Optimize. Your C Code for 8-bit AVR Microcontrollers](https://ww1.microchip.com/downloads/en/AppNotes/doc8453.pdf)
 
 * Pre-calculate where possible. Do as much as you can in `setup()` and
 `updateControl()`, and keep `updateAudio()` lean.
 
 * Avoid division! Use powers of two for numbers where you can, and use
-[bit-shifting arithmetic](http://arduino.cc/en/Reference/Bitshift) instead of
+[bit-shifting arithmetic](https://arduino.cc/en/Reference/Bitshift) instead of
 multiplication and division where possible.
 Shifting by 8 or 16 is faster than other amounts.
 
@@ -44,7 +44,7 @@ sketch and can often disrupt audio, so check if you've got print statements
 interfering if you're hearing audio clicks.
 
 * To print audio rate debugging info, don't use the Arduino serial monitor, try
-[CoolTerm](http://freeware.the-meiers.org/), it's a great application which
+[CoolTerm](https://freeware.the-meiers.org/), it's a great application which
 performs much better and can capture incoming data to a file.
 
 * An oscilloscope is useful for timing your code. Mozzi has fast code to flip
@@ -58,8 +58,8 @@ mozzi_utils.h` in your sketch and `setPin13Out()` in `setup()`, then use
 
 * A computer line-in works well for listening, and some good tools to record or
 examine your sounds are [Audacity](https://www.audacityteam.org/download/),
-[Baudline](http://www.baudline.com/) signal analyser, and
-[SignalScope](http://www.faberacoustical.com/products/signalscope/).
+[Baudline](https://www.baudline.com/) signal analyser, and
+[SignalScope](https://www.faberacoustical.com/products/signalscope/).
 
 * In Audacity, set the Project Rate to Mozzi's audio rate of 16384 Hz before
 recording. This will make the PWM artifacts disappear and the waves will look

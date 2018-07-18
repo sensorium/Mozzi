@@ -14,7 +14,7 @@
      
 */
 
-//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
+//#include <ADC.h>  // Teensy 3.1 uncomment this line and install https://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <DCfilter.h>
 

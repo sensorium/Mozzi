@@ -7,7 +7,7 @@
     Control oscillators are used here to modulate the brightness of the leds
     between 0-255.
     The technique is explained here:
-     http://playground.arduino.cc/Main/PWMallPins
+     https://playground.arduino.cc/Main/PWMallPins
     With AUDIO_RATE at 16384 Hz, this gives a 64 Hz pwm duty cycle for the LEDs.
     If there is visible flicker, the resolution of the pwm could be made lower,
     or the AUDIO_RATE could be increased to 32768 Hz, if the
@@ -55,7 +55,7 @@
 */
 
 
-//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
+//#include <ADC.h>  // Teensy 3.1 uncomment this line and install https://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator
@@ -82,7 +82,7 @@ void updateRGB(byte r, byte g, byte b){
   static byte green_count=85;
   static byte blue_count=170;
 // PORTD maps to Arduino digital pins 0 to 7
-// http://playground.arduino.cc/Learning/PortManipulation
+// https://playground.arduino.cc/Learning/PortManipulation
   (red_count++ >= r) ? PORTD &= ~(1 << RED_PIN) : PORTD |= (1 << RED_PIN);
   (green_count++ >= g) ? PORTD &= ~(1 << GREEN_PIN) : PORTD |= (1 << GREEN_PIN);
   (blue_count++ >= b) ? PORTD &= ~(1 << BLUE_PIN) : PORTD |= (1 << BLUE_PIN);

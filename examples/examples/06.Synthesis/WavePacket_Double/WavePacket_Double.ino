@@ -6,7 +6,7 @@
     Circuit:
     	Audio output on DAC/A14 on Teensy 3.0, 3.1, 
     	or digital pin 9 on a Uno or similar, or 
-    	check the README or http://sensorium.github.com/Mozzi/
+    	check the README or https://sensorium.github.com/Mozzi/
     	
     	Potentiometer connected to analog pin 0.
       Center pin of the potentiometer goes to the analog pin.
@@ -26,7 +26,7 @@
     Tim Barrass 2013, CC by-nc-sa.
 */
  
-//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
+//#include <ADC.h>  // Teensy 3.1 uncomment this line and install https://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <mozzi_analog.h>
 #include <WavePacket.h>

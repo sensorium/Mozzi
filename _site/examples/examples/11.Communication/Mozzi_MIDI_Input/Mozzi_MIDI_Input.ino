@@ -5,7 +5,7 @@
     (https://github.com/FortySevenEffects/arduino_midi_library/releases/tag/4.2)
   
     Circuit: 
-      MIDI input circuit as per http://arduino.cc/en/Tutorial/Midi
+      MIDI input circuit as per https://arduino.cc/en/Tutorial/Midi
       Note: midi input on rx pin, not tx as in the illustration on the above page.
       Midi has to be disconnected from rx for sketch to upload.
       Audio output on digital pin 9 on a Uno or similar.

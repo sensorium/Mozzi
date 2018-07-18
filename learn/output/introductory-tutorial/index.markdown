@@ -44,8 +44,8 @@ _Figure 2: Nano on breadboard_
 
 ![Nano]({{ page.url }}/images/fig2.jpg "Figure 2: Nano on breadboard")
 
-* Download the [Arduino application](http://www.arduino.cc), version 1.0.5 or better.
-* Download and install [FTDI drivers](http://www.ftdichip.com/Drivers/VCP.htm) so Arduino can access the USB port.
+* Download the [Arduino application](https://www.arduino.cc), version 1.0.5 or better.
+* Download and install [FTDI drivers](https://www.ftdichip.com/Drivers/VCP.htm) so Arduino can access the USB port.
 * Start the Arduino application and set it up for a Nano clone.
 _Arduino➞Tools➞Board➞Arduino Nano w/ Atmega 328_
 * Set it up to communicate through the USB port.
@@ -64,7 +64,7 @@ Edit the code to make the light blink twice as fast by changing the delay from 1
 
 OK - now the Arduino is working we are ready to install Mozzi.
 
-* Download [Mozzi](http://sensorium.github.io/Mozzi/) from Github.
+* Download [Mozzi](https://sensorium.github.io/Mozzi/) from Github.
 * Now let's import Mozzi into the Arduino system.  
 Go _Arduino➞Sketch➞Import Library➞Add Library_ and select the Mozzi.zip file from your Downloads folder.
 * You should now be able to see Mozzi in the list under
@@ -114,7 +114,7 @@ Connect the audio cable to the audio output socket and the other end to the audi
 
 ### Audio set up
 
-You can listen to the sound on your computer by downloading and installing [Audacity](http://audacity.sourceforge.net), a cross platform audio editor.
+You can listen to the sound on your computer by downloading and installing [Audacity](https://audacity.sourceforge.net), a cross platform audio editor.
 
 In Audacity,
 
@@ -272,11 +272,11 @@ Now we've got some experience using sensors to generate sounds, it's time to exp
 
 ## 6. Resources
 
-[Mozzi Programming Reference](http://sensorium.github.io/Mozzi/doc/html/index.html)  
-[Output circuits for cleaner sounding audio](http://sensorium.github.io/Mozzi/learn/output/)  
-[Tips for effective Mozzi programming](http://sensorium.github.io/Mozzi/learn/hints/)  
+[Mozzi Programming Reference](https://sensorium.github.io/Mozzi/doc/html/index.html)  
+[Output circuits for cleaner sounding audio](https://sensorium.github.io/Mozzi/learn/output/)  
+[Tips for effective Mozzi programming](https://sensorium.github.io/Mozzi/learn/hints/)  
 
 ---
 
-Tim Barrass and Stephen Barrass 2013. This work is licensed under the Creative Commons Attribution-NonCommercial- ShareAlike 3.0 Unported License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/.  
+Tim Barrass and Stephen Barrass 2013. This work is licensed under the Creative Commons Attribution-NonCommercial- ShareAlike 3.0 Unported License. To view a copy of this license, visit https://creativecommons.org/licenses/by-nc-sa/3.0/.  
 ![Creative Commons by-nc-sa logo](images/by-nc-sa.png)  

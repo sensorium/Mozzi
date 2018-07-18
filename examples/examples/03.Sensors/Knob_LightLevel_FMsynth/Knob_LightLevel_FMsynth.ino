@@ -9,12 +9,12 @@
   could be smoothed with Line or Smooth objects.
     
   This example goes with a tutorial on the Mozzi site:
-  http://sensorium.github.io/Mozzi/learn/introductory-tutorial/
+  https://sensorium.github.io/Mozzi/learn/introductory-tutorial/
   
   The circuit:
      Audio output on digital pin 9 on a Uno or similar, or
     DAC/A14 on Teensy 3.1, or 
-     check the README or http://sensorium.github.com/Mozzi/
+     check the README or https://sensorium.github.com/Mozzi/
 
      Potentiometer connected to analog pin 0.
        Center pin of the potentiometer goes to the analog pin.
@@ -30,7 +30,7 @@
   Tim Barrass 2013, CC by-nc-sa.
 */
 
-//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
+//#include <ADC.h>  // Teensy 3.1 uncomment this line and install https://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator 
 #include <tables/cos2048_int8.h> // table for Oscils to play

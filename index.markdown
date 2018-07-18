@@ -76,19 +76,19 @@ Your browser does not support the audio element. </audio>
 
 ## Installation
 Download the most recent Mozzi from the link at the top of this page.
-Then, follow the instructions from the [Arduino libraries guide](http://arduino.cc/en/Guide/Libraries).
+Then, follow the instructions from the [Arduino libraries guide](https://arduino.cc/en/Guide/Libraries).
 
 
 ## Quick Start
 To hear Mozzi, wire a 3.5mm audio jack with the centre to the audio out pin for your Arduino as shown in the table below, and the shield to GND on the Arduino.
-Plug into your computer and listen with a sound program like [Audacity](http://audacity.sourceforge.net/).
+Plug into your computer and listen with a sound program like [Audacity](https://audacity.sourceforge.net/).
 Try some examples from the __File > Examples > Mozzi__ menu.
 
 {% include boards-tested.markdown %}
 
 You could try a [Mozzibyte](https://www.kickstarter.com/projects/mozzibyte/mozzibyte-mozzi-arduino-mini-sensor-sonification-s), a little board for Mozzi with an amp and sockets for headphone/line and speaker.
 
-For more about audio output, including HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).
+For more about audio output, including HIFI mode, read the [Mozzi core module documentation](https://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).
 
 
 ## Using Mozzi
@@ -119,7 +119,7 @@ There's a detailed example explaining the different parts [here](learn/a-simple-
 
 ## Documentation
 
-There's documentation in the extras/doc folder in the Mozzi download and [online](http://sensorium.github.com/Mozzi/doc/html/index.html).
+There's documentation in the extras/doc folder in the Mozzi download and [online](https://sensorium.github.com/Mozzi/doc/html/index.html).
 There is practical help on the [learn](learn/) page on the Mozzi site.
 Start or look up a topic on the [users forum](https://groups.google.com/forum/#!forum/mozzi-users/).
 Also, feel free to submit any issues on the [GitHub Mozzi site](https://github.com/sensorium/Mozzi/issues/).
@@ -148,20 +148,20 @@ If you need `analogWrite()`, you can do PWM output on any digital pins using the
 ## Contributions / Included Dependencies  
 Modified versions of the following libraries are included in the Mozzi download:  
 
-[TimerOne library](http://www.pjrc.com/teensy/td_libs_TimerOne.html)  
-[FrequencyTimer2 library](http://www.pjrc.com/teensy/td_libs_FrequencyTimer2.html) - now a [fork with support for ATmega32u4 processors](https://github.com/sensorium/FrequencyTimer2/)   
+[TimerOne library](https://www.pjrc.com/teensy/td_libs_TimerOne.html)  
+[FrequencyTimer2 library](https://www.pjrc.com/teensy/td_libs_FrequencyTimer2.html) - now a [fork with support for ATmega32u4 processors](https://github.com/sensorium/FrequencyTimer2/)   
 
 Mozzi has also drawn on and been influenced by (among many others):  
 
-[xorshift](http://school.anhb.uwa.edu.au/personalpages/kwessen/shared/Marsaglia03.html) random number generator, George Marsaglia, (2003)  
+[xorshift](https://school.anhb.uwa.edu.au/personalpages/kwessen/shared/Marsaglia03.html) random number generator, George Marsaglia, (2003)  
 ead~.c puredata external (creb library) Copyright (c) 2000-2003 by Tom Schouten (GPL2)  
-[AF_precision_synthesis](http://adrianfreed.com/content/arduino-sketch-high-frequency-precision-sine-wave-tone-sound-synthesis)
+[AF_precision_synthesis](https://adrianfreed.com/content/arduino-sketch-high-frequency-precision-sine-wave-tone-sound-synthesis)
 by Adrian Freed, 2009  
-[Resonant filter](http://www.musicdsp.org/archive.php?classid=3#259) posted to musicdsp.org by Paul Kellett,
-and fixed point version of the filter on [dave's blog of art and programming](http://www.pawfal.org/dave/blog/2011/09/)  
-State Variable filter pseudocode at musicdsp.org [here](http://www.musicdsp.org/showone.php?id=23) and [here](http://www.musicdsp.org/showone.php?id=142)  
-Various examples from [Pure Data](http://puredata.info/) by Miller Puckette  
-[Practical synthesis tutorials](http://www.moz.ac.at/sem/lehre/lib/pd-sounddesign/index.html) by Andy Farnell  
+[Resonant filter](https://www.musicdsp.org/archive.php?classid=3#259) posted to musicdsp.org by Paul Kellett,
+and fixed point version of the filter on [dave's blog of art and programming](https://www.pawfal.org/dave/blog/2011/09/)  
+State Variable filter pseudocode at musicdsp.org [here](https://www.musicdsp.org/showone.php?id=23) and [here](https://www.musicdsp.org/showone.php?id=142)  
+Various examples from [Pure Data](https://puredata.info/) by Miller Puckette  
+[Practical synthesis tutorials](https://www.moz.ac.at/sem/lehre/lib/pd-sounddesign/index.html) by Andy Farnell  
 
 
 ## Hardware specific notes
@@ -189,7 +189,7 @@ real DAC. Should probably run on any other board supported by [STM32duino](https
 Extra libraries required for use withTeensy 3.*:
 These are included in the standard Teensyduino install unless you explicitly disable them
 - [Timer library](https://github.com/loglow/IntervalTimer) for Teensy 3.* by Daniel Gilbert
-- [ADC library](http://github.com/pedvide/ADC) by Pedro Villanueva
+- [ADC library](https://github.com/pedvide/ADC) by Pedro Villanueva
 
 Some of the differences for Teensy 3.0# which will affect users include:
 
@@ -237,6 +237,6 @@ suggestions, improvements and bug fixes to the [users forum](https://groups.goog
 or [GitHub Mozzi site](https://github.com/sensorium/Mozzi/issues/). Fork it to contribute directly to future developments.
 
 Mozzi began as a development of research into Mobile Sonification in the
-[SweatSonics](http://stephenbarrass.wordpress.com/tag/sweatsonics/) project.
+[SweatSonics](https://stephenbarrass.wordpress.com/tag/sweatsonics/) project.
 
 ***

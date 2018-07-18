@@ -122,14 +122,14 @@ module OctopressLiquidFilters
     input
   end
 
-  # Returns a url without the protocol (http://)
+  # Returns a url without the protocol (https://)
   def shorthand_url(input)
     input.gsub /(https?:\/\/)(\S+)/ do
       $2
     end
   end
 
-  # Returns a title cased string based on John Gruber's title case http://daringfireball.net/2008/08/title_case_update
+  # Returns a title cased string based on John Gruber's title case https://daringfireball.net/2008/08/title_case_update
   def titlecase(input)
     input.titlecase
   end

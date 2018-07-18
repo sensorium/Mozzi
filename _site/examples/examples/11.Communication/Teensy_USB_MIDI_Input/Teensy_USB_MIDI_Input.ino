@@ -2,7 +2,7 @@
   
     Demonstrates playing notes with Mozzi in response to MIDI input,
     using the version of the Arduino MIDI library which
-    works with Teensy boards (http://www.pjrc.com/teensy/td_midi.html).  
+    works with Teensy boards (https://www.pjrc.com/teensy/td_midi.html).  
     Tested on a Teensy2++, which can be used as a MIDI device 
     without any extra parts.  
     The sketch would be almost the same with the mainstream
@@ -18,7 +18,7 @@
     Tim Barrass 2013, CC by-nc-sa.
 */
 
-#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
+#include <ADC.h>  // Teensy 3.1 uncomment this line and install https://github.com/pedvide/ADC
 #include <MIDI.h>
 
 #include <MozziGuts.h>

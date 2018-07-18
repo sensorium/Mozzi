@@ -4,7 +4,7 @@
  *  Demonstrates RCpoll to read a resistive sensor on a digital pin,
  *  without blocking audio output. 
  *  
- *  Control circuit: http://arduino.cc/en/Tutorial/RCtime
+ *  Control circuit: https://arduino.cc/en/Tutorial/RCtime
  *  Values for components which work with this sketch are:
  *  Sensing Capacitor .1uf (104)
  *  Variable resistor 1 MegaOhm
@@ -35,7 +35,7 @@ sPin ---\/\/\/-----.
  
  */
 
-//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
+//#include <ADC.h>  // Teensy 3.1 uncomment this line and install https://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/sin2048_int8.h> // sine table for oscillator

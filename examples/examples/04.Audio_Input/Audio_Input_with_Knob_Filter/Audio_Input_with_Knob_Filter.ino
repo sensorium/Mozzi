@@ -9,7 +9,7 @@
   Circuit: 
     Audio input on pin analog 0
     Output on DAC/A14 on Teensy 3.0, 3.1, or digital pin 9 on a Uno or similar, or
-    check the README or http://sensorium.github.com/Mozzi/
+    check the README or https://sensorium.github.com/Mozzi/
 
      Potentiometer connected to analog pin A1.
      Center pin of the potentiometer goes to the analog pin.
@@ -20,7 +20,7 @@
 
 */
 
-//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
+//#include <ADC.h>  // Teensy 3.1 uncomment this line and install https://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <LowPassFilter.h>
 

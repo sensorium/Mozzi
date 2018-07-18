@@ -17,7 +17,7 @@ Extra libraries required for use withTeensy 3.0/3.1:
 
 - [Timer library for Teensy 3.0](https://github.com/loglow/IntervalTimer) by Daniel Gilbert
 
-- [ADC library](http://github.com/pedvide/ADC) by Pedro Villanueva 
+- [ADC library](https://github.com/pedvide/ADC) by Pedro Villanueva 
 
 
 Some of the differences for Teensy 3.0/3.1 which will affect users include:
@@ -59,7 +59,7 @@ Various other changes which affect the library in general:
 	
 - mozzi_fixmath.h - added Q15n16_to_Q8n0()
 
-- Fixed broken link in Sensor examples to http://sensorium.github.io/Mozzi/learn/introductory-tutorial/
+- Fixed broken link in Sensor examples to https://sensorium.github.io/Mozzi/learn/introductory-tutorial/
 
 - Moved Arduino timer libraries into "utility" folder and added conditional compilation to hide them from Teensy 3.0/3.1 compilation.
 

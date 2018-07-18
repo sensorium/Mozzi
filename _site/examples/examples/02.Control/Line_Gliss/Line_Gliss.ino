@@ -14,7 +14,7 @@
   
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
     DAC/A14 on Teensy 3.1, or 
-    check the README or http://sensorium.github.com/Mozzi/
+    check the README or https://sensorium.github.com/Mozzi/
   
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
@@ -22,7 +22,7 @@
     Tim Barrass 2012, CC by-nc-sa.
 */
 
-//#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
+//#include <ADC.h>  // Teensy 3.1 uncomment this line and install https://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Line.h> // for smooth transitions
 #include <Oscil.h> // oscillator template

@@ -13,4 +13,4 @@ The problem for Mozzi on Arduino IDE's after 1.0.5 used to be that sketches were
 Here's how you do it.  Find Arduino's platform.txt (on OSX you can find it by searching in Users/your_name/Library/Arduino15).  Search and replace -Os with -O2.  Save.
 
 It's explained more thoroughly (for Windows) here:
-http://www.instructables.com/id/Arduino-IDE-16x-compiler-optimisations-faster-code/?ALLSTEPS
+https://www.instructables.com/id/Arduino-IDE-16x-compiler-optimisations-faster-code/?ALLSTEPS

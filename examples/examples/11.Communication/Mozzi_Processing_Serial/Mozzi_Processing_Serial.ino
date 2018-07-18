@@ -15,7 +15,7 @@
  by Tom Igoe and Scott Fitzgerald
  This example code is in the public domain.
  
- http://www.arduino.cc/en/Tutorial/Dimmer
+ https://www.arduino.cc/en/Tutorial/Dimmer
  
 */
 

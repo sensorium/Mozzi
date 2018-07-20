@@ -358,9 +358,9 @@ inline void espWriteAudioToBuffer() {
 		#if (ESP_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
 			#if (STEREO_HACK == true)
 	updateAudio ();
-	i2s_write_lr(audio_out_1, audio_out_2);
+	i2s_write_lr(audio_out_1 + AUDIO_BIAS, audio_out_2 + AUDIO_BIAS);
 			#else
-	i2s_lr((uint16_t) (updateAudio() + AUDIO_BIAS), 0);
+	i2s_write_lr((uint16_t) (updateAudio() + AUDIO_BIAS), 0);
 			#endif
 		#else
 	uint16_t sample = updateAudio() + AUDIO_BIAS;

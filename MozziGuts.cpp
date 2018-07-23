@@ -375,7 +375,7 @@ inline void espWriteAudioToBuffer() {
 	updateAudio ();
 	i2s_write_lr(audio_out_1, audio_out_2);
 			#else
-	i2s_lr((uint16_t) (updateAudio() + AUDIO_BIAS), 0);
+	i2s_write_lr(updateAudio(), 0);
 			#endif
 		#else
 	uint16_t sample = updateAudio() + AUDIO_BIAS;

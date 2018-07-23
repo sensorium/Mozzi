@@ -1,10 +1,14 @@
-var files =
+var files_dup =
 [
     [ "ADSR.h", "_a_d_s_r_8h_source.html", null ],
     [ "audio2huff.py", "audio2huff_8py_source.html", null ],
+    [ "AudioConfigESP.h", "_audio_config_e_s_p_8h_source.html", null ],
+    [ "AudioConfigExternalDAC.h", "_audio_config_external_d_a_c_8h_source.html", null ],
     [ "AudioConfigHiSpeed14bitPwm.h", "_audio_config_hi_speed14bit_pwm_8h_source.html", null ],
+    [ "AudioConfigSAMD21.h", "_audio_config_s_a_m_d21_8h_source.html", null ],
     [ "AudioConfigStandard9bitPwm.h", "_audio_config_standard9bit_pwm_8h_source.html", null ],
     [ "AudioConfigStandardPlus.h", "_audio_config_standard_plus_8h_source.html", null ],
+    [ "AudioConfigSTM32.h", "_audio_config_s_t_m32_8h_source.html", null ],
     [ "AudioConfigTeensy3_12bit.h", "_audio_config_teensy3__12bit_8h_source.html", null ],
     [ "AudioDelay.h", "_audio_delay_8h_source.html", null ],
     [ "AudioDelayFeedback.h", "_audio_delay_feedback_8h_source.html", null ],
@@ -22,6 +26,7 @@ var files =
     [ "EventDelay.h", "_event_delay_8h_source.html", null ],
     [ "float2mozzi.py", "float2mozzi_8py_source.html", null ],
     [ "float2mozzi_uint8.py", "float2mozzi__uint8_8py_source.html", null ],
+    [ "hardware_defines.h", "hardware__defines_8h_source.html", null ],
     [ "IntMap.h", "_int_map_8h_source.html", null ],
     [ "known_16bit_timers.h", "known__16bit__timers_8h_source.html", null ],
     [ "Line.h", "_line_8h_source.html", null ],
@@ -35,6 +40,7 @@ var files =
     [ "mozzi_fixmath.h", "mozzi__fixmath_8h_source.html", null ],
     [ "mozzi_midi.cpp", "mozzi__midi_8cpp_source.html", null ],
     [ "mozzi_midi.h", "mozzi__midi_8h_source.html", null ],
+    [ "mozzi_pgmspace.h", "mozzi__pgmspace_8h_source.html", null ],
     [ "mozzi_rand.cpp", "mozzi__rand_8cpp_source.html", null ],
     [ "mozzi_rand.h", "mozzi__rand_8h_source.html", null ],
     [ "mozzi_utils.cpp", "mozzi__utils_8cpp_source.html", null ],

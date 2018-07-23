@@ -6,14 +6,14 @@
 	vertical-align: bottom;
 	border-collapse: separate;
 }
- 
+
 #projectlogo img
-{ 
+{
 	max-width: 50%;
 	margin: 10%;
 	border: 0px none;
 }
- 
+
 #projectname
 {
 	color: white;
@@ -21,7 +21,7 @@
 	margin: 0px;
 	padding: 2px 0px;
 }
-    
+
 #projectbrief
 {
 	color: white;
@@ -40,10 +40,9 @@
 
 #titlearea
 {
-	background-color: #766C6B;
+	background-color: #94C254;
 	padding: 5px;
 	margin: 0px;
 	width: 100%;
 	border-bottom: 1px solid #5373B4;
 }
-

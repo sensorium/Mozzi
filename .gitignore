@@ -7,7 +7,6 @@ sonar-project.properties
 *.bak
 *#*
 images
-doxygen*
 Makefile*
 tags
 user_guide.md

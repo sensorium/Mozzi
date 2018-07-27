@@ -158,9 +158,9 @@ ead~.c puredata external (creb library) Copyright (c) 2000-2003 by Tom Schouten 
 [AF_precision_synthesis](https://adrianfreed.com/content/arduino-sketch-high-frequency-precision-sine-wave-tone-sound-synthesis)
 by Adrian Freed, 2009  
 [Resonant filter](https://www.musicdsp.org/archive.php?classid=3#259) posted to musicdsp.org by Paul Kellett,
-and fixed point version of the filter on [dave's blog of art and programming](https://www.pawfal.org/dave/blog/2011/09/)  
-State Variable filter pseudocode at musicdsp.org [here](https://www.musicdsp.org/showone.php?id=23) and [here](https://www.musicdsp.org/showone.php?id=142)  
-Various examples from [Pure Data](https://puredata.info/) by Miller Puckette  
+and fixed point version of the filter on  [dave's blog of art and programming](https://www.pawfal.org/dave/blog/2011/09/)  
+State Variable filter pseudocode at musicdsp.org  [here](https://www.musicdsp.org/showone.php?id=23) and  [here](https://www.musicdsp.org/showone.php?id=142)  
+Various examples from  [Pure Data](https://puredata.info/) by Miller Puckette  
 [Practical synthesis tutorials](https://www.moz.ac.at/sem/lehre/lib/pd-sounddesign/index.html) by Andy Farnell  
 
 
@@ -186,7 +186,7 @@ real DAC. Should probably run on any other board supported by [STM32duino](https
 
 ### Teensy 3.0/3.1/3.2/3.4/3.5/LC
 
-Extra libraries required for use withTeensy 3.*:
+Extra libraries required for use withTeensy 3.*:  
 These are included in the standard Teensyduino install unless you explicitly disable them
 - [Timer library](https://github.com/loglow/IntervalTimer) for Teensy 3.* by Daniel Gilbert
 - [ADC library](https://github.com/pedvide/ADC) by Pedro Villanueva

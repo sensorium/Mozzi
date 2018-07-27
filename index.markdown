@@ -196,7 +196,7 @@ Some of the differences for Teensy 3.0# which will affect users include:
 - On Teensy 3.0/3.1/3.2/Audio output is on pin A14/DAC, in STANDARD or STANDARD_PLUS audio modes.
     These modes are identical on Teensy 3.0/3.1/3.2, as the output is via DAC rather than PWM.
 - Output is 12 bits in STANDARD and STANDARD_PLUS modes, up from nearly 9 bits for Atmel based boards. HIFI audio, which works by summing two output pins, is not available on Teensy 3.0/3.1.
-- #include <ADC.h> is required at the top of every Teensy 3 sketch.
+- `#include <ADC.h>` is required at the top of every Teensy 3 sketch.
 - The examples come with this commented out, for Arduino compatibility.
 - Serial baud rate for monitoring in the IDE needs to be set to 9600 to work with Teensy 3.0/3.1/3.2. This slow rate can cause audio glitches.
 - twi_nonblock code by Marije Baalman for non-blocking I2C is not compatible with Teensy 3.0/3.1/3.2.

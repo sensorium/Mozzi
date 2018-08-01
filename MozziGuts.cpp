@@ -146,15 +146,6 @@ static uint8_t mozzi_TCCR4A, mozzi_TCCR4B, mozzi_TCCR4C, mozzi_TCCR4D, mozzi_TCC
 #endif
 
 
-static void backupMozziTimer1()
-{
-	// backup mozzi register values for unpausing later
-	mozzi_TCCR1A = TCCR1A;
-	mozzi_TCCR1B = TCCR1B;
-	mozzi_OCR1A = OCR1A;
-	mozzi_TIMSK1 = TIMSK1;
-}
-
 #endif // end of timer backups for non-Teensy 3 boards
 //-----------------------------------------------------------------------------------------------------------------
 
@@ -188,7 +179,7 @@ static void startFirstAudioADC()
 }
 
 /*
-static void receiveFirstAudioADC() 
+static void receiveFirstAudioADC()
 {
 	// nothing
 }
@@ -211,7 +202,7 @@ static void startSecondAudioADC()
 
 static void receiveSecondAudioADC()
 {
-	if (!input_buffer.isFull()) 
+	if (!input_buffer.isFull())
 #if IS_TEENSY3()
 		input_buffer.write(adc->readSingle());
 #elif IS_STM32()
@@ -273,7 +264,7 @@ static bool tcIsSyncing()
 static void tcStartCounter()
 {
     // Enable TC
-    
+
     TC5->COUNT16.CTRLA.reg |= TC_CTRLA_ENABLE;
     while (tcIsSyncing());
 }
@@ -296,7 +287,7 @@ static void tcEnd() {
     tcDisable();
     tcReset();
     analogWrite(AUDIO_CHANNEL_1_PIN, 0);
-    
+
 }
 
 
@@ -305,26 +296,26 @@ static void tcConfigure(uint32_t sampleRate)
     // Enable GCLK for TCC2 and TC5 (timer counter input clock)
     GCLK->CLKCTRL.reg = (uint16_t) (GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK0 | GCLK_CLKCTRL_ID(GCM_TC4_TC5)) ;
     while (GCLK->STATUS.bit.SYNCBUSY);
-    
+
     tcReset();
-    
+
     // Set Timer counter Mode to 16 bits
     TC5->COUNT16.CTRLA.reg |= TC_CTRLA_MODE_COUNT16;
-    
+
     // Set TC5 mode as match frequency
     TC5->COUNT16.CTRLA.reg |= TC_CTRLA_WAVEGEN_MFRQ;
-    
+
     TC5->COUNT16.CTRLA.reg |= TC_CTRLA_PRESCALER_DIV1 | TC_CTRLA_ENABLE;
-    
+
     TC5->COUNT16.CC[0].reg = (uint16_t) (SystemCoreClock / sampleRate - 1);
     while (tcIsSyncing());
-    
+
     // Configure interrupt request
     NVIC_DisableIRQ(TC5_IRQn);
     NVIC_ClearPendingIRQ(TC5_IRQn);
     NVIC_SetPriority(TC5_IRQn, 0);
     NVIC_EnableIRQ(TC5_IRQn);
-    
+
     // Enable the TC5 interrupt request
     TC5->COUNT16.INTENSET.bit.MC0 = 1;
     while (tcIsSyncing());
@@ -393,7 +384,7 @@ void audioHook() // 2us excluding updateAudio()
 {
 //setPin13High();
 #if (USE_AUDIO_INPUT==true)
-		if (!input_buffer.isEmpty()) 
+		if (!input_buffer.isEmpty())
 			audio_input = input_buffer.read();
 #endif
 
@@ -432,7 +423,7 @@ void audioHook() // 2us excluding updateAudio()
 	}
 //setPin13Low();
 }
-        
+
 #if IS_SAMD21()
         void TC5_Handler (void) __attribute__ ((weak, alias("samd21AudioOutput")));
 #endif
@@ -444,12 +435,12 @@ void audioHook() // 2us excluding updateAudio()
 #ifdef __cplusplus
     extern "C" {
 #endif
-        
+
         void samd21AudioOutput(void);
 #ifdef __cplusplus
     }
 #endif
-    
+
 #elif    IS_TEENSY3()
   IntervalTimer timer1;
 #elif IS_STM32()
@@ -462,10 +453,10 @@ void audioHook() // 2us excluding updateAudio()
 #ifdef __cplusplus
     extern "C" {
 #endif
-        
+
      void samd21AudioOutput()
     {
-        
+
 #if (USE_AUDIO_INPUT==true)
         adc_count = 0;
         startSecondAudioADC();
@@ -480,7 +471,7 @@ void audioHook() // 2us excluding updateAudio()
 #elif IS_TEENSY3()
 static void teensyAudioOutput()
 {
-	
+
 #if (USE_AUDIO_INPUT==true)
 	adc_count = 0;
 	startSecondAudioADC();
@@ -509,8 +500,7 @@ static void pwmAudioOutput()
 #if !IS_AVR()
 static void startAudioStandard()
 {
-	//backupPreMozziTimer1(); // not for arm
-	
+
 #if IS_TEENSY3()
 	adc->setAveraging(0);
 	adc->setConversionSpeed(ADC_CONVERSION_SPEED::MED_SPEED); // could be HIGH_SPEED, noisier
@@ -524,7 +514,7 @@ static void startAudioStandard()
         pinMode(CPLAY_SPEAKER_SHUTDOWN, OUTPUT);
         digitalWrite(CPLAY_SPEAKER_SHUTDOWN, HIGH);
     }
-    
+
 #endif
     analogWriteResolution(12);
     analogWrite(AUDIO_CHANNEL_1_PIN, 0);
@@ -537,7 +527,7 @@ static void startAudioStandard()
 	audio_update_timer.attachCompare1Interrupt(pwmAudioOutput);
 	audio_update_timer.refresh();
 	audio_update_timer.resume();
-        
+
 	pinMode(AUDIO_CHANNEL_1_PIN, PWM);
 #if (AUDIO_MODE == HIFI)
 	pinMode(AUDIO_CHANNEL_1_PIN_HIGH, PWM);
@@ -581,9 +571,9 @@ static void startAudioStandard()
 	if (output_buffer_size == 0) output_buffer_size = i2s_available(); // Do not reset count when stopping / restarting
 	#endif
 #endif
-	//backupMozziTimer1(); // // not for arm
+
 }
-	
+
 #else
 
 // avr architecture
@@ -603,23 +593,8 @@ static void startAudioStandard()
 	Timer1.pwm(AUDIO_CHANNEL_2_PIN, AUDIO_BIAS);	// sets pin to output
 #endif
 	TIMSK1 = _BV(TOIE1); 	// Overflow Interrupt Enable (when not using Timer1.attachInterrupt())
-	//TIMSK1 |= _BV(TOIE1) | _BV(OCIE1A); // Overflow Interrupt Enable and Output Compare A Match Interrupt Enable
-	backupMozziTimer1();
 }
 
-/*
-// trying to get ac output for piezo
-unsigned int output;
-
-//extern unsigned long interruptcounter;
-ISR(TIMER1_COMPA_vect){
-	//Serial.print(9);
-	//interruptcounter++;
-	// change polarity of pwm output pins 9 and 10 - one becomes ground, the other becomes max-output
-	AUDIO_CHANNEL_1_OUTPUT_REGISTER = 0;//STANDARD_PWM_RESOLUTION;
-	//AUDIO_CHANNEL_2_OUTPUT_REGISTER = STANDARD_PWM_RESOLUTION-output;
-}
-*/
 
 /* Interrupt service routine moves sound data from the output buffer to the
 Arduino output register, running at AUDIO_RATE. */
@@ -639,12 +614,6 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK)
 		startSecondAudioADC();
 #endif
 
-//if (!output_buffer.isEmpty()) {
-/*
-output =  output_buffer.read();
-AUDIO_CHANNEL_1_OUTPUT_REGISTER = output;
-AUDIO_CHANNEL_2_OUTPUT_REGISTER = 0;
-*/
 #ifdef EXTERNAL_DAC
 		dacMCPAudioOutput();
 #if (STEREO_HACK == true)
@@ -665,8 +634,8 @@ AUDIO_CHANNEL_2_OUTPUT_REGISTER = 0;
 	//TCCR1A |= _BV(COM1A1);
 	// invert
 	//TCCR1A |= ~_BV(COM1A1)
-	
-	
+
+
 #if (AUDIO_MODE == STANDARD_PLUS) && (AUDIO_RATE==16384) // all this conditional compilation is so clutsy!
 	}
 #endif
@@ -688,10 +657,10 @@ static void startAudioHiFi()
 	Timer1.initializeCPUCycles(F_CPU/125000, FAST);		// set period for 125000 Hz fast pwm carrier frequency = 14 bits
 	Timer1.pwm(AUDIO_CHANNEL_1_highByte_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
 	Timer1.pwm(AUDIO_CHANNEL_1_lowByte_PIN, 0);		// pwm pin, 0% duty cycle, ie. 0 signal
-	backupMozziTimer1();
 	// audio output interrupt on timer 2, sets the pwm levels of timer 1
 	setupTimer2();
 }
+
 
 /* set up Timer 2 using modified FrequencyTimer2 library */
 void dummy(){}
@@ -721,30 +690,6 @@ static void backupPreMozziTimer2()
 }
 
 
-
-static void backupMozziTimer2()
-{
-#if defined(TCCR2A)
-	mozzi_TCCR2A = TCCR2A;
-	mozzi_TCCR2B = TCCR2B;
-	mozzi_OCR2A = OCR2A;
-	mozzi_TIMSK2 = TIMSK2;
-#elif defined(TCCR2)
-	mozzi_TCCR2 = TCCR2;
-	mozzi_OCR2 = OCR2;
-	mozzi_TIMSK = TIMSK;
-#elif defined(TCCR4A)
-	mozzi_TCCR4B = TCCR4A;
-	mozzi_TCCR4B = TCCR4B;
-	mozzi_TCCR4B = TCCR4C;
-	mozzi_TCCR4B = TCCR4D;
-	mozzi_TCCR4B = TCCR4E;
-	mozzi_OCR4C = OCR4C;
-	mozzi_TIMSK4 = TIMSK4;
-#endif
-}
-
-
 // audio output interrupt on timer 2 (or 4 on ATMEGA32U4 cpu), sets the pwm levels of timer 2
 static void setupTimer2()
 {
@@ -753,11 +698,7 @@ static void setupTimer2()
 	FrequencyTimer2::setPeriodCPUCycles(period);
 	FrequencyTimer2::setOnOverflow(dummy);
 	FrequencyTimer2::enable();
-
-	// backup mozzi register values for unpausing later
-	backupMozziTimer2();
 }
-
 
 
 #if defined(TIMER2_COMPA_vect)
@@ -783,11 +724,21 @@ void dummy_function(void)
 		// 14 bit, 7 bits on each pin
 		//AUDIO_CHANNEL_1_highByte_REGISTER = out >> 7; // B00111111 10000000 becomes B1111111
 		// try to avoid looping over 7 shifts - need to check timing or disassemble to see what really happens
-		unsigned int out_high = out<<1; // B00111111 10000000 becomes B01111111 00000000
-		AUDIO_CHANNEL_1_highByte_REGISTER = out_high >> 8; // B01111111 00000000 produces B01111111
-		//
-		AUDIO_CHANNEL_1_lowByte_REGISTER = out & 127; 
-		//}
+		// unsigned int out_high = out<<1; // B00111111 10000000 becomes B01111111 00000000
+		//AUDIO_CHANNEL_1_highByte_REGISTER = out_high >> 8; // B01111111 00000000 produces B01111111
+		//AUDIO_CHANNEL_1_lowByte_REGISTER = out & 127;
+    /* Atmega manual, p123
+    The high byte (OCR1xH) has to be written first.
+    When the high byte I/O location is written by the CPU,
+    the TEMP Register will be updated by the value written.
+    Then when the low byte (OCR1xL) is written to the lower eight bits,
+    the high byte will be copied into the upper 8-bits of
+    either the OCR1x buffer or OCR1x Compare Register in
+    the same system clock cycle.
+    */
+    AUDIO_CHANNEL_1_highByte_REGISTER = out >> AUDIO_BITS_PER_REGISTER;
+    AUDIO_CHANNEL_1_lowByte_REGISTER = out & ((1 << AUDIO_BITS_PER_REGISTER) - 1);
+
 }
 
 //  end of HIFI
@@ -816,6 +767,7 @@ static void startControl(unsigned int control_rate_hz)
         update_control_timeout = AUDIO_RATE / control_rate_hz;
 }
 
+
 void startMozzi(int control_rate_hz)
 {
 	setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST in setup() if desired (not for Teensy 3.* )
@@ -827,7 +779,6 @@ void startMozzi(int control_rate_hz)
 	startAudioHiFi();
 #endif
 }
-
 
 
 void stopMozzi(){
@@ -845,7 +796,7 @@ void stopMozzi(){
 #else
 
 	noInterrupts();
-	
+
 	// restore backed up register values
 	TCCR1A = pre_mozzi_TCCR1A;
 	TCCR1B = pre_mozzi_TCCR1B;
@@ -872,60 +823,11 @@ void stopMozzi(){
 	OCR4C = pre_mozzi_OCR4C;
 	TIMSK4 = pre_mozzi_TIMSK4;
 #endif
-#endif	
-#endif	
+#endif
+#endif
 	interrupts();
 }
 
-
-/*
-void unPauseMozzi()
-{
-#if IS_TEENSY3()
-  timer1.begin(teensyAudioOutput, 1000000UL/AUDIO_RATE); 
-#else
-
-    noInterrupts();
-	// restore backed up register values
-	TCCR0A = mozzi_TCCR0A;
-	TCCR0B = mozzi_TCCR0B;
-	OCR0A = mozzi_OCR0A;
-
-	TCCR1A = mozzi_TCCR1A;
-	TCCR1B = mozzi_TCCR1B;
-	OCR1A = mozzi_OCR1A;
-	
-	// put these last to try to avoid interrupts starting up and disrupting this routine
-	// though it's probably not necessary with noInterrupts() called above, and interrupts() below
-	TIMSK0 = mozzi_TIMSK0;
-	TIMSK1 = mozzi_TIMSK1;
-
-	interrupts();
-		
-#if (AUDIO_MODE == HIFI)
-#if defined(TCCR2A)
-	TCCR2A = mozzi_TCCR2A;
-	TCCR2B = mozzi_TCCR2B;
-	OCR2A = mozzi_OCR2A;
-	TIMSK2 = mozzi_TIMSK2;
-#elif defined(TCCR2)
-	TCCR2 = mozzi_TCCR2;
-	OCR2 = mozzi_OCR2;
-	TIMSK = mozzi_TIMSK;
-#elif defined(TCCR4A)
-	TCCR4B = mozzi_TCCR4A;
-	TCCR4B = mozzi_TCCR4B;
-	TCCR4B = mozzi_TCCR4C;
-	TCCR4B = mozzi_TCCR4D;
-	TCCR4B = mozzi_TCCR4E;
-	OCR4C = mozzi_OCR4C;
-	TIMSK4 = mozzi_TIMSK4;
-#endif
-#endif
-#endif
-
-}
-*/
 
 unsigned long audioTicks()
 {

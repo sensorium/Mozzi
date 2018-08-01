@@ -44,14 +44,14 @@ const int LDR1_PIN=1; // set the analog input for fm_intensity to pin 1
 const int LDR2_PIN=2; // set the analog input for mod rate to pin 2
 
 // min and max values of synth parameters to map AutoRanged analog inputs to
-const int MIN_F = 5;
-const int MAX_F = 100;
+const int MIN_F = 20;
+const int MAX_F = 150;
 
-const int MIN_BW = 1;
-const int MAX_BW = 1000;
+const int MIN_BW = 20;
+const int MAX_BW = 600;
 
 const int MIN_CF = 60;
-const int MAX_CF = 2000;
+const int MAX_CF = 600;
 
 
 // for smoothing the control signals
@@ -59,12 +59,12 @@ const int MAX_CF = 2000;
 RollingAverage <int, 16> kAverageF;
 RollingAverage <int, 16> kAverageBw;
 RollingAverage <int, 16> kAverageCf;
+// AutoMap adapts to range of input as it arrives
 AutoMap kMapF(0,1023,MIN_F,MAX_F);
 AutoMap kMapBw(0,1023,MIN_BW,MAX_BW);
 AutoMap kMapCf(0,1023,MIN_CF,MAX_CF);
 
 WavePacket <DOUBLE> wavey; // DOUBLE selects 2 overlapping streams
-
 
 void setup(){
   //Serial.begin(9600); // for Teensy 3.1, beware printout can cause glitches
@@ -77,18 +77,21 @@ void setup(){
 
 void updateControl(){
   int fundamental = mozziAnalogRead(KNOB_PIN)+1;
-  Serial.print(fundamental);
-  Serial.print("  ");
   fundamental = kMapF(fundamental);
+  Serial.print("f=");
   Serial.print(fundamental);
-  Serial.println();
   
   int bandwidth = mozziAnalogRead(LDR1_PIN);
   bandwidth = kMapBw(bandwidth);
+  Serial.print("\t bw=");
+  Serial.print(bandwidth);
   
   int centre_freq = mozziAnalogRead(LDR2_PIN);
   centre_freq = kMapCf(centre_freq);
-
+  Serial.print("\t cf=");
+  Serial.print(centre_freq);
+  
+  Serial.println();
   
   wavey.set(fundamental, bandwidth, centre_freq);
 }

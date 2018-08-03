@@ -126,7 +126,7 @@ Also, feel free to submit any issues on the [GitHub Mozzi site](https://github.c
 Look for code and usage changes [here](https://github.com/sensorium/Mozzi/blob/gh-pages/examples/extras/NEWS.txt).
 
 
-## Wierd things
+## Weird things
 
 #### AVR
 

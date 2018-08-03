@@ -27,7 +27,7 @@
 #include <EventDelay.h>
 #include <Smooth.h>
 
-#define CONTROL_RATE 256 // powers of 2 please
+#define CONTROL_RATE 256 // Hz
 
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCarrier(COS2048_DATA);
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aModulator(COS2048_DATA);

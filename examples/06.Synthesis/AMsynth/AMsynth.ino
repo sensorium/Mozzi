@@ -27,7 +27,7 @@
 #include <mozzi_midi.h>
 
 
-#define CONTROL_RATE 64 // powers of 2 please
+#define CONTROL_RATE 64 // Hz
 
 // audio oscils
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCarrier(COS2048_DATA);

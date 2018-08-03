@@ -34,7 +34,7 @@ Oscil <TRIANGLE_WARM8192_NUM_CELLS, AUDIO_RATE> aTriangle(TRIANGLE_WARM8192_DATA
 // use: Line <type> lineName
 Line <long> aGliss;
 
-#define CONTROL_RATE 64 // powers of 2 please
+#define CONTROL_RATE 64 // Hz
 
 byte lo_note = 24; // midi note numbers
 byte hi_note = 36;

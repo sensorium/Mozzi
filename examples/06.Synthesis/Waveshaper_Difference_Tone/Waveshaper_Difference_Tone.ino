@@ -25,7 +25,7 @@
 
 
 // use #define for CONTROL_RATE, not a constant
-#define CONTROL_RATE 64 // powers of 2 please
+#define CONTROL_RATE 64 // Hz
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin1(SIN2048_DATA); // sine wave sound source
@@ -44,7 +44,7 @@ int target_freq, smoothed_freq;
 
 
 void setup(){
-  startMozzi(CONTROL_RATE); // set a control rate of 64 (powers of 2 please)
+  startMozzi(CONTROL_RATE); // :)
   aSin1.setFreq_Q16n16(freq1); // set the frequency with a Q16n16 fractional number
   aGain.setFreq(0.2f); // use a float for low frequencies, in setup it doesn't need to be fast
   kChangeNoteDelay.set(2000); // note duration ms, within resolution of CONTROL_RATE

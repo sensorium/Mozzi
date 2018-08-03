@@ -25,7 +25,7 @@
 #include <Line.h>
 #include <mozzi_midi.h>
 
-#define CONTROL_RATE 64 // powers of 2 please
+#define CONTROL_RATE 64 // Hz
 
 // audio oscillator
 Oscil<TRIANGLE_VALVE_2048_NUM_CELLS, AUDIO_RATE> aSig(TRIANGLE_VALVE_2048_DATA);

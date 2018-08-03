@@ -24,13 +24,13 @@
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
 // use #define for CONTROL_RATE, not a constant
-#define CONTROL_RATE 64 // powers of 2 please
+#define CONTROL_RATE 64 // Hz
 
 #define FILTER_SHIFT 6 // 5 or 6 work well - the spectrum of 6 looks a bit more linear, like the generated brown noise in Audacity
 
 void setup()
 {
-  startMozzi(CONTROL_RATE); // set a control rate of 64 (powers of 2 please)
+  startMozzi(CONTROL_RATE); // :)
   aSin.setFreq(0.05f); // set the frequency
 }
 

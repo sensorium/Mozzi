@@ -21,7 +21,7 @@
 #include <AudioDelayFeedback.h>
 #include <mozzi_midi.h> // for mtof
 
-#define CONTROL_RATE 128 // powers of 2 please
+#define CONTROL_RATE 128 // Hz
 
 Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, AUDIO_RATE> aTriangle1(TRIANGLE_ANALOGUE512_DATA); // audio oscillator
 Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, AUDIO_RATE> aTriangle2(TRIANGLE_ANALOGUE512_DATA); // audio oscillator

@@ -19,7 +19,7 @@
 
 
 // use #define for CONTROL_RATE, not a constant
-#define CONTROL_RATE 64 // powers of 2 please
+#define CONTROL_RATE 64 // Hz
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable)
 Oscil <PINKNOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(PINKNOISE8192_DATA);
@@ -32,7 +32,7 @@ unsigned int pan; // convey pan from updateControl() to updateAudioStereo();
 void setup(){
   aNoise.setFreq(2.111f); // set the frequency with an unsigned int or a float
   kPan.setFreq(0.25f); // take 4 seconds to move left-right
-  startMozzi(CONTROL_RATE); // set a control rate of 64 (powers of 2 please)
+  startMozzi(CONTROL_RATE); // :)
   Serial.begin(115200);
 }
 

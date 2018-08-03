@@ -30,7 +30,7 @@
 #include <Smooth.h>
 #include <mozzi_analog.h>
 
-#define CONTROL_RATE 64 // powers of 2 please
+#define CONTROL_RATE 64 // Hz
 
 // 2 oscillators to compare linear interpolated vs smoothed control
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin0(SIN2048_DATA);

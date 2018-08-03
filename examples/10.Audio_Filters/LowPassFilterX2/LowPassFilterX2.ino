@@ -20,7 +20,7 @@
 #include <LowPassFilter.h>
 #include <mozzi_rand.h> // for rand()
 
-#define CONTROL_RATE 64 // powers of 2 please
+#define CONTROL_RATE 64 // Hz
 
 Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound1(CHUM9_DATA); //audio oscillator
 Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound2(CHUM9_DATA); //audio oscillator

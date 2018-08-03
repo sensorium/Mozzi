@@ -19,7 +19,7 @@
 #include <mozzi_midi.h> // for mtof
 #include <mozzi_fixmath.h>
 
-#define CONTROL_RATE 64 // powers of 2 please
+#define CONTROL_RATE 64 // Hz
 
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCos(COS2048_DATA);
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aVibrato(COS2048_DATA);

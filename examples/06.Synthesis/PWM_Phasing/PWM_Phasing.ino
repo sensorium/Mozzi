@@ -21,7 +21,7 @@
 #include <MozziGuts.h>
 #include <Phasor.h>
 
-#define CONTROL_RATE 64 // powers of 2 please
+#define CONTROL_RATE 64 // Hz
 
 Phasor <AUDIO_RATE> aPhasor1;
 Phasor <AUDIO_RATE> aPhasor2;
@@ -31,7 +31,7 @@ float freq = 55.f;
 void setup(){
   aPhasor1.setFreq(freq);
   aPhasor2.setFreq(freq+0.2f);  
-  startMozzi(CONTROL_RATE); // set a control rate of 64 (powers of 2 please)
+  startMozzi(CONTROL_RATE); // :)
 }
 
 

@@ -28,7 +28,7 @@
 
 
 // use #define for CONTROL_RATE, not a constant
-#define CONTROL_RATE 64 // powers of 2 please
+#define CONTROL_RATE 64 // Hz
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA); // sine wave sound source
@@ -53,7 +53,7 @@ int target_freq, smoothed_freq;
 
 
 void setup(){
-  startMozzi(CONTROL_RATE); // set a control rate of 64 (powers of 2 please)
+  startMozzi(CONTROL_RATE); // :)
   randSeed(); // reseed the random generator for different results each time the sketch runs
   aSin.setFreq(110); // set the frequency
   aGain1.setFreq(2.f); // use a float for low frequencies, in setup it doesn't need to be fast

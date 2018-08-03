@@ -35,7 +35,7 @@ band = f * high + band;
 notch = high + low;
 //--endloop
 ----------------------
-References : 
+References :
 Hal Chamberlin, Musical Applications of Microprocessors, 2nd Ed, Hayden Book Company 1985. pp 490-492.
 Jon Dattorro, Effect Design Part 1, J. Audio Eng. Soc., Vol 45, No. 9, 1997 September
 */
@@ -54,7 +54,7 @@ enum filter_types {LOWPASS,BANDPASS,HIGHPASS,NOTCH};
 
 /** A State Variable filter which offers 12db resonant low, high, bandpass and notch modes.
 @tparam FILTER_TYPE choose between LOWPASS, BANDPASS, HIGHPASS and NOTCH.
-@note To save processing time, this version of the filter does not saturate internally, 
+@note To save processing time, this version of the filter does not saturate internally,
 so any resonant peaks are unceremoniously truncated.  It may be worth adding code to
 constrain the internal variables to enable resonant saturating effects.
 @todo Try adding code to constrain the internal variables to enable resonant
@@ -76,7 +76,7 @@ public:
 
 
 	/** Set how resonant the filter will be.
-	@param resonance a uint8_t value between 1 and 255.  
+	@param resonance a byte value between 1 and 255.
 	The lower this value is, the more resonant the filter.
 	At very low values, the filter can output loud peaks which can exceed
 	Mozzi's output range, so you may need to attenuate the output in your sketch.
@@ -102,10 +102,9 @@ public:
 		// simple frequency tuning with error towards nyquist (reference?  where did this come from?)
 			//f = (Q1n15)(((Q16n16_2PI*centre_freq)>>AUDIO_RATE_AS_LSHIFT)>>1);
 			f = (Q15n16)((Q16n16_2PI*centre_freq)>>(AUDIO_RATE_AS_LSHIFT)); // this works best for now
-			//f = (Q15n16)(((Q16n16_2PI*centre_freq)<<(16-AUDIO_RATE_AS_LSHIFT))>>16); // a small shift left and a round 16 right is faster than big non-uint8_t-aligned right in one go
+			//f = (Q15n16)(((Q16n16_2PI*centre_freq)<<(16-AUDIO_RATE_AS_LSHIFT))>>16); // a small shift left and a round 16 right is faster than big non-byte-aligned right in one go
 			//float ff = Q16n16_to_float(((Q16n16_PI*centre_freq))>>AUDIO_RATE_AS_LSHIFT);
 			//f = float_to_Q15n16(2.0f *sin(ff));
-		//}
 	}
 
 
@@ -153,7 +152,7 @@ private:
 	/** Calculate the next sample, given an input signal.
 	@param input the signal input.
 	@return the signal output.
-	@note Timing: 
+	@note Timing:
 	*/
 	inline
 	int next(int input, Int2Type<BANDPASS>)
@@ -172,7 +171,7 @@ private:
 	/** Calculate the next sample, given an input signal.
 	@param input the signal input.
 	@return the signal output.
-	@note Timing: 
+	@note Timing:
 	*/
 	inline
 	int next(int input, Int2Type<HIGHPASS>)

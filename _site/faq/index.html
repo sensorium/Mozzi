@@ -18,14 +18,14 @@
 <meta property="og:locale" content="en_GB">
 <meta property="og:site_name" content="Mozzi">
 <meta property="og:title" content="Mozzi">
-<meta property="og:url" content="https://localhost:4000/Mozzi/faq/">
+<meta property="og:url" content="http://localhost:4000/Mozzi/faq/">
 
 
   <meta property="og:description" content="audio synthesis library for Arduino">
 
 
 
-  <meta property="og:image" content="https://localhost:4000/Mozzi/assets/images/mozzi-square.png">
+  <meta property="og:image" content="http://localhost:4000/Mozzi/assets/images/mozzi-square.png">
 
 
 
@@ -40,7 +40,7 @@
   
 
 
-<link rel="canonical" href="https://localhost:4000/Mozzi/faq/">
+<link rel="canonical" href="http://localhost:4000/Mozzi/faq/">
 
 
 
@@ -50,10 +50,10 @@
 
   <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
+      "@context": "http://schema.org",
       "@type": "Person",
       "name": "Tim Barrass",
-      "url": "https://localhost:4000/Mozzi",
+      "url": "http://localhost:4000/Mozzi",
       "sameAs": null
     }
   </script>
@@ -69,7 +69,7 @@
 
 <link href="/Mozzi/feed.xml" type="application/atom+xml" rel="alternate" title="Mozzi Feed">
 
-<!-- https://t.co/dKP3o1e -->
+<!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -120,42 +120,47 @@
           
             
             <li class="masthead__menu-item">
-              <a href="https://localhost:4000/Mozzi/download/" >download</a>
+              <a href="http://localhost:4000/Mozzi/download/" >download</a>
             </li>
           
             
             <li class="masthead__menu-item">
-              <a href="https://localhost:4000/Mozzi/gallery/" >gallery</a>
+              <a href="http://localhost:4000/Mozzi/gallery/" >gallery</a>
             </li>
           
             
             <li class="masthead__menu-item">
-              <a href="https://localhost:4000/Mozzi/examples/" >examples</a>
+              <a href="http://localhost:4000/Mozzi/examples/" >examples</a>
             </li>
           
             
             <li class="masthead__menu-item">
-              <a href="https://localhost:4000/Mozzi/learn/" >learn</a>
+              <a href="http://localhost:4000/Mozzi/learn/" >learn</a>
             </li>
           
             
             <li class="masthead__menu-item">
-              <a href="https://localhost:4000/Mozzi/faq/" >faq</a>
+              <a href="http://localhost:4000/Mozzi/faq/" >faq</a>
             </li>
           
             
             <li class="masthead__menu-item">
-              <a href="https://localhost:4000/Mozzi/blog/" >blog</a>
+              <a href="http://localhost:4000/Mozzi/blog/" >blog</a>
             </li>
           
             
             <li class="masthead__menu-item">
-              <a href="https://localhost:4000/Mozzi/doc/html/" >api</a>
+              <a href="http://localhost:4000/Mozzi/doc/html/" >api</a>
             </li>
           
             
             <li class="masthead__menu-item">
               <a href="https://github.com/sensorium/Mozzi" >github</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/shop/" >shop</a>
             </li>
           
         </ul>
@@ -213,7 +218,7 @@
 <div id="main" role="main">
   
 
-  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     
     <meta itemprop="description" content="audio synthesis library for Arduino">
     
@@ -239,13 +244,10 @@
 
 <p>Maybe you’re listening to a <code class="highlighter-rouge">STANDARD</code> or <code class="highlighter-rouge">STANDARD_PLUS</code> sketch, but <code class="highlighter-rouge">AUDIO_MODE</code> is set to <code class="highlighter-rouge">HIFI</code>.
 Check the file <strong>Mozzi/mozzi_config.h</strong>.  Look for:</p>
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="c"><span class="line"><span></span><span class="c1">//#define AUDIO_MODE STANDARD</span>
-</span><span class="line"><span class="cp">#define AUDIO_MODE STANDARD_PLUS</span>
-</span><span class="line"><span class="c1">//#define AUDIO_MODE HIFI</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//#define AUDIO_MODE STANDARD
+</span><span class="cp">#define AUDIO_MODE STANDARD_PLUS
+</span><span class="c1">//#define AUDIO_MODE HIFI
+</span></code></pre></div></div>
 <p>For <code class="highlighter-rouge">STANDARD_PLUS</code> mode, the lines should appear as above,
 with the <code class="highlighter-rouge">STANDARD</code> and <code class="highlighter-rouge">HIFI</code> lines commented out.  Most of the examples work in
 <code class="highlighter-rouge">STANDARD_PLUS</code> mode, unless they say otherwise.</p>
@@ -371,7 +373,7 @@ It seems self-explanatory to me, but then I haven’t ever explained it to anyon
 
     
   <script src="/Mozzi/assets/js/main.min.js"></script>
-  <script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
 
 

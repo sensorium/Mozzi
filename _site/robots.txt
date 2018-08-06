@@ -1,1 +1,1 @@
-Sitemap: https://localhost:4000/Mozzi/sitemap.xml
+Sitemap: http://localhost:4000/Mozzi/sitemap.xml

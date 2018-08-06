@@ -18,14 +18,14 @@
 <meta property="og:locale" content="en_GB">
 <meta property="og:site_name" content="Mozzi">
 <meta property="og:title" content="Mozzi">
-<meta property="og:url" content="https://localhost:4000/Mozzi/">
+<meta property="og:url" content="http://localhost:4000/Mozzi/">
 
 
   <meta property="og:description" content="audio synthesis library for Arduino">
 
 
 
-  <meta property="og:image" content="https://localhost:4000/Mozzi/assets/images/mozzi-square.png">
+  <meta property="og:image" content="http://localhost:4000/Mozzi/assets/images/mozzi-square.png">
 
 
 
@@ -40,7 +40,7 @@
   
 
 
-<link rel="canonical" href="https://localhost:4000/Mozzi/">
+<link rel="canonical" href="http://localhost:4000/Mozzi/">
 
 
 
@@ -50,10 +50,10 @@
 
   <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
+      "@context": "http://schema.org",
       "@type": "Person",
       "name": "Tim Barrass",
-      "url": "https://localhost:4000/Mozzi",
+      "url": "http://localhost:4000/Mozzi",
       "sameAs": null
     }
   </script>
@@ -69,7 +69,7 @@
 
 <link href="/Mozzi/feed.xml" type="application/atom+xml" rel="alternate" title="Mozzi Feed">
 
-<!-- https://t.co/dKP3o1e -->
+<!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -120,42 +120,47 @@
           
             
             <li class="masthead__menu-item">
-              <a href="https://localhost:4000/Mozzi/download/" >download</a>
+              <a href="http://localhost:4000/Mozzi/download/" >download</a>
             </li>
           
             
             <li class="masthead__menu-item">
-              <a href="https://localhost:4000/Mozzi/gallery/" >gallery</a>
+              <a href="http://localhost:4000/Mozzi/gallery/" >gallery</a>
             </li>
           
             
             <li class="masthead__menu-item">
-              <a href="https://localhost:4000/Mozzi/examples/" >examples</a>
+              <a href="http://localhost:4000/Mozzi/examples/" >examples</a>
             </li>
           
             
             <li class="masthead__menu-item">
-              <a href="https://localhost:4000/Mozzi/learn/" >learn</a>
+              <a href="http://localhost:4000/Mozzi/learn/" >learn</a>
             </li>
           
             
             <li class="masthead__menu-item">
-              <a href="https://localhost:4000/Mozzi/faq/" >faq</a>
+              <a href="http://localhost:4000/Mozzi/faq/" >faq</a>
             </li>
           
             
             <li class="masthead__menu-item">
-              <a href="https://localhost:4000/Mozzi/blog/" >blog</a>
+              <a href="http://localhost:4000/Mozzi/blog/" >blog</a>
             </li>
           
             
             <li class="masthead__menu-item">
-              <a href="https://localhost:4000/Mozzi/doc/html/" >api</a>
+              <a href="http://localhost:4000/Mozzi/doc/html/" >api</a>
             </li>
           
             
             <li class="masthead__menu-item">
               <a href="https://github.com/sensorium/Mozzi" >github</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/Mozzi/shop/" >shop</a>
             </li>
           
         </ul>
@@ -213,7 +218,7 @@
 <div id="main" role="main">
   
 
-  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     
     <meta itemprop="description" content="audio synthesis library for Arduino">
     
@@ -233,7 +238,7 @@
   <li><a href="#quick-start">Quick Start</a></li>
   <li><a href="#using-mozzi">Using Mozzi</a></li>
   <li><a href="#documentation">Documentation</a></li>
-  <li><a href="#wierd-things">Wierd things</a></li>
+  <li><a href="#weird-things">Weird things</a></li>
   <li><a href="#contributions--included-dependencies">Contributions / Included Dependencies</a></li>
   <li><a href="#hardware-specific-notes">Hardware specific notes</a>
     <ul>
@@ -372,12 +377,12 @@ Try some examples from the <strong>File &gt; Examples &gt; Mozzi</strong> menu.<
 <span class="p">}</span>
 
 <span class="kt">void</span> <span class="nf">updateControl</span><span class="p">(){</span>
-	<span class="c1">// your control code</span>
-<span class="p">}</span>
+	<span class="c1">// your control code
+</span><span class="p">}</span>
 
 <span class="kt">int</span> <span class="n">updateAudio</span><span class="p">(){</span>
-	<span class="c1">// your audio code which returns an int between -244 and 243</span>
-<span class="p">}</span>
+	<span class="c1">// your audio code which returns an int between -244 and 243
+</span><span class="p">}</span>
 
 <span class="kt">void</span> <span class="n">loop</span><span class="p">()</span> <span class="p">{</span>
 	<span class="n">audioHook</span><span class="p">();</span>
@@ -393,7 +398,7 @@ Start or look up a topic on the <a href="https://groups.google.com/forum/#!forum
 Also, feel free to submit any issues on the <a href="https://github.com/sensorium/Mozzi/issues/">GitHub Mozzi site</a>.
 Look for code and usage changes <a href="https://github.com/sensorium/Mozzi/blob/gh-pages/examples/extras/NEWS.txt">here</a>.</p>
 
-<h2 id="wierd-things">Wierd things</h2>
+<h2 id="weird-things">Weird things</h2>
 
 <h4 id="avr">AVR</h4>
 
@@ -432,9 +437,9 @@ ead~.c puredata external (creb library) Copyright (c) 2000-2003 by Tom Schouten 
 <a href="https://adrianfreed.com/content/arduino-sketch-high-frequency-precision-sine-wave-tone-sound-synthesis">AF_precision_synthesis</a>
 by Adrian Freed, 2009<br />
 <a href="https://www.musicdsp.org/archive.php?classid=3#259">Resonant filter</a> posted to musicdsp.org by Paul Kellett,
-and fixed point version of the filter on <a href="https://www.pawfal.org/dave/blog/2011/09/">dave’s blog of art and programming</a><br />
-State Variable filter pseudocode at musicdsp.org <a href="https://www.musicdsp.org/showone.php?id=23">here</a> and <a href="https://www.musicdsp.org/showone.php?id=142">here</a><br />
-Various examples from <a href="https://puredata.info/">Pure Data</a> by Miller Puckette<br />
+and fixed point version of the filter on  <a href="https://www.pawfal.org/dave/blog/2011/09/">dave’s blog of art and programming</a><br />
+State Variable filter pseudocode at musicdsp.org  <a href="https://www.musicdsp.org/showone.php?id=23">here</a> and  <a href="https://www.musicdsp.org/showone.php?id=142">here</a><br />
+Various examples from  <a href="https://puredata.info/">Pure Data</a> by Miller Puckette<br />
 <a href="https://www.moz.ac.at/sem/lehre/lib/pd-sounddesign/index.html">Practical synthesis tutorials</a> by Andy Farnell</p>
 
 <h2 id="hardware-specific-notes">Hardware specific notes</h2>
@@ -461,7 +466,7 @@ real DAC. Should probably run on any other board supported by <a href="https://g
 
 <h3 id="teensy-3031323435lc">Teensy 3.0/3.1/3.2/3.4/3.5/LC</h3>
 
-<p>Extra libraries required for use withTeensy 3.*:
+<p>Extra libraries required for use withTeensy 3.*:<br />
 These are included in the standard Teensyduino install unless you explicitly disable them</p>
 <ul>
   <li><a href="https://github.com/loglow/IntervalTimer">Timer library</a> for Teensy 3.* by Daniel Gilbert</li>
@@ -471,10 +476,10 @@ These are included in the standard Teensyduino install unless you explicitly dis
 <p>Some of the differences for Teensy 3.0# which will affect users include:</p>
 
 <ul>
-  <li>On Teeensy 3.0/3.1/3.2/Audio output is on pin A14/DAC, in STANDARD or STANDARD_PLUS audio modes.
+  <li>On Teensy 3.0/3.1/3.2/Audio output is on pin A14/DAC, in STANDARD or STANDARD_PLUS audio modes.
   These modes are identical on Teensy 3.0/3.1/3.2, as the output is via DAC rather than PWM.</li>
   <li>Output is 12 bits in STANDARD and STANDARD_PLUS modes, up from nearly 9 bits for Atmel based boards. HIFI audio, which works by summing two output pins, is not available on Teensy 3.0/3.1.</li>
-  <li>#include <ADC.h> is required at the top of every Teensy 3 sketch.</ADC.h></li>
+  <li><code class="highlighter-rouge">#include &lt;ADC.h&gt;</code> is required at the top of every Teensy 3 sketch.</li>
   <li>The examples come with this commented out, for Arduino compatibility.</li>
   <li>Serial baud rate for monitoring in the IDE needs to be set to 9600 to work with Teensy 3.0/3.1/3.2. This slow rate can cause audio glitches.</li>
   <li>twi_nonblock code by Marije Baalman for non-blocking I2C is not compatible with Teensy 3.0/3.1/3.2.</li>
@@ -590,7 +595,7 @@ or <a href="https://github.com/sensorium/Mozzi/issues/">GitHub Mozzi site</a>. F
 
     
   <script src="/Mozzi/assets/js/main.min.js"></script>
-  <script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
 
 

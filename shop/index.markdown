@@ -1,6 +1,7 @@
 ---
 layout: single
 title: "Mozzi Shop"
+excerpt: ""
 ---
 
 ## MozziByte

@@ -5,6 +5,7 @@ Mozzi-resources
 *.mp3
 sonar-project.properties
 *.bak
+*.gch
 *#*
 images
 Makefile*

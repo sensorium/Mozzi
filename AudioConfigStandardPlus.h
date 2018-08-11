@@ -5,7 +5,7 @@
 /** @ingroup core
 This is the dynamic range of Mozzi's audio output in STANDARD mode.
 It is equal to Timer1.pwmPeriod calculated for interrupt rate 16384.
-It's included in the documentation because it's a slightly unusual number and useful to know 
+It's included in the documentation because it's a slightly unusual number and useful to know
 about when you're writing sketches.
 */
 #define STANDARD_PWM_RESOLUTION 488
@@ -24,4 +24,3 @@ about when you're writing sketches.
 #define AUDIO_CHANNEL_2_PIN TIMER1_B_PIN
 
 #endif        //  #ifndef AUDIOCONFIGSTANDARDPLUS_H
-

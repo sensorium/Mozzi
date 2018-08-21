@@ -57,7 +57,7 @@ Q16n16 variation() {
 
 
 void setup(){
-  startMozzi(64); // a literal control rate here
+  startMozzi();
 
   // select base frequencies using mtof (midi to freq) and fixed-point numbers
   f1 = Q16n16_mtof(Q16n0_to_Q16n16(48));

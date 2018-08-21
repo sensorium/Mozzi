@@ -1,44 +1,43 @@
-/*  
+/*
   Example of Wavepacket synthesis, using analog
-  inputs to change the fundamental frequency, 
+  inputs to change the fundamental frequency,
   bandwidth and centre frequency,
   using Mozzi sonification library.
 
   Demonstrates WavePacket, mozziAnalogRead(), and smoothing
   control signals with RollingAverage.
   Also demonstrates AutoMap, which maps unpredictable inputs to a set range.
-  
+
   This example goes with a tutorial on the Mozzi site:
   http://sensorium.github.io/Mozzi/learn/introductory-tutorial/
-  
+
   The circuit:
      Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
      check the README or http://sensorium.github.com/Mozzi/
 
      Potentiometer connected to analog pin 0.
        Center pin of the potentiometer goes to the analog pin.
        Side pins of the potentiometer go to +5V and ground
-  
+
      Light dependent resistor (LDR) and 5.1k resistor on analog pin 1:
        LDR from analog pin to +5V (3.3V on Teensy 3.1)
        5.1k resistor from analog pin to ground
-     
+
      Light dependent resistor (LDR) and 5.1k resistor on analog pin 2:
        LDR from analog pin to +5V (3.3V on Teensy 3.1)
        5.1k resistor from analog pin to ground
-  
+
   Mozzi help/discussion/announcements:
   https://groups.google.com/forum/#!forum/mozzi-users
 
   Tim Barrass 2013, CC by-nc-sa.
 */
- 
 
 #include <WavePacket.h>
 #include <RollingAverage.h>
 #include <AutoMap.h>
- 
+
 const int KNOB_PIN = 0; // set the input for the knob to analog pin 0
 const int LDR1_PIN=1; // set the analog input for fm_intensity to pin 1
 const int LDR2_PIN=2; // set the analog input for mod rate to pin 2
@@ -80,19 +79,19 @@ void updateControl(){
   fundamental = kMapF(fundamental);
   Serial.print("f=");
   Serial.print(fundamental);
-  
+
   int bandwidth = mozziAnalogRead(LDR1_PIN);
   bandwidth = kMapBw(bandwidth);
   Serial.print("\t bw=");
   Serial.print(bandwidth);
-  
+
   int centre_freq = mozziAnalogRead(LDR2_PIN);
   centre_freq = kMapCf(centre_freq);
   Serial.print("\t cf=");
   Serial.print(centre_freq);
-  
+
   Serial.println();
-  
+
   wavey.set(fundamental, bandwidth, centre_freq);
 }
 

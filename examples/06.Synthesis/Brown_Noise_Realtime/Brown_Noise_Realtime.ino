@@ -1,17 +1,17 @@
 /*  Example generating brownian noise in real time,
     using Mozzi sonification library.
-  
+
     Demonstrates rand(), a fast random generator,
-    a filter used as a "leaky integrator" 
+    a filter used as a "leaky integrator"
     (based on an implementation by Barry Dorr:
     https://www.edn.com/design/systems-design/4320010/A-simple-software-lowpass-filter-suits-embedded-system-applications)
     and the use of Oscil to modulate amplitude.
-    
+
     Circuit: Audio output on digital pin 9 on a Uno or similar.
-  
+
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 20118, CC by-nc-sa.
 */
 
@@ -20,17 +20,14 @@
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator
 
+#define FILTER_SHIFT 6 // 5 or 6 work well - the spectrum of 6 looks a bit more linear, like the generated brown noise in Audacity
+
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
-// use #define for CONTROL_RATE, not a constant
-#define CONTROL_RATE 64 // Hz
-
-#define FILTER_SHIFT 6 // 5 or 6 work well - the spectrum of 6 looks a bit more linear, like the generated brown noise in Audacity
-
 void setup()
 {
-  startMozzi(CONTROL_RATE); // :)
+  startMozzi(); // :)
   aSin.setFreq(0.05f); // set the frequency
 }
 
@@ -56,6 +53,3 @@ int updateAudio()
 void loop(){
   audioHook(); // required here
 }
-
-
-

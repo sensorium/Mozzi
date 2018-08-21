@@ -1,16 +1,16 @@
 /*  Example changing the gain of a sinewave,
     using Mozzi sonification library.
-  
+
     Demonstrates the use of a control variable to influence an
     audio signal.
-  
+
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.com/Mozzi/
-  
+
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2012, CC by-nc-sa.
 */
 
@@ -26,14 +26,14 @@ byte gain = 255;
 
 
 void setup(){
-  startMozzi(); // start with default control rate of 64
+  startMozzi(); // start with default control rate of 50
   aSin.setFreq(3320); // set the frequency
 }
 
 
 void updateControl(){
   // as byte, this will automatically roll around to 255 when it passes 0
-  gain = gain - 3 ; 
+  gain = gain - 3 ;
 }
 
 
@@ -45,6 +45,3 @@ int updateAudio(){
 void loop(){
   audioHook(); // required here
 }
-
-
-

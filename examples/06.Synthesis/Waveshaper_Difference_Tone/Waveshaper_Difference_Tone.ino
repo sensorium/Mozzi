@@ -1,16 +1,16 @@
 /*  Example using waveshaping to modify the spectrum of an audio signal
     using Mozzi sonification library.
-  
+
     Demonstrates the use of WaveShaper(), EventDelay(), Smooth(),
     rand(), and fixed-point numbers.
-  
+
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.com/Mozzi/
-  
+
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2012, CC by-nc-sa.
 */
 
@@ -23,10 +23,6 @@
 #include <Smooth.h>
 #include <tables/sin2048_int8.h>
 
-
-// use #define for CONTROL_RATE, not a constant
-#define CONTROL_RATE 64 // Hz
-
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin1(SIN2048_DATA); // sine wave sound source
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin2(SIN2048_DATA); // sine wave sound source
@@ -36,7 +32,7 @@ Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aGain(SIN2048_DATA); // to fade audio sign
 EventDelay kChangeNoteDelay;
 
 // audio frequency as Q16n16 fractional number
-Q16n16 freq1 = Q8n0_to_Q16n16(300); 
+Q16n16 freq1 = Q8n0_to_Q16n16(300);
 
 // smooth transitions between notes
 Smooth <unsigned int> kSmoothFreq(0.85f);
@@ -44,7 +40,7 @@ int target_freq, smoothed_freq;
 
 
 void setup(){
-  startMozzi(CONTROL_RATE); // :)
+  startMozzi(); // :)
   aSin1.setFreq_Q16n16(freq1); // set the frequency with a Q16n16 fractional number
   aGain.setFreq(0.2f); // use a float for low frequencies, in setup it doesn't need to be fast
   kChangeNoteDelay.set(2000); // note duration ms, within resolution of CONTROL_RATE
@@ -76,10 +72,3 @@ int updateAudio(){
 void loop(){
   audioHook(); // required here
 }
-
-
-
-
-
-
-

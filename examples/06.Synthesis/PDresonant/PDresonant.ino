@@ -23,9 +23,8 @@
     Tim Barrass 2013-14, CC by-nc-sa.
  */
 
-
-
 //#include <MIDI.h> may be needed on some systems/versions
+
 #include <MozziGuts.h>
 
 // for fake midi

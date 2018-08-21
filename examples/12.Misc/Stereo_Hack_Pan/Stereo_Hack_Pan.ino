@@ -17,9 +17,6 @@
 #include <tables/pinknoise8192_int8.h> // table for audio oscillator
 #include <tables/sin2048_int8.h> // sine table for pan oscillator
 
-// use #define for CONTROL_RATE, not a constant
-#define CONTROL_RATE 64 // Hz
-
 // use: Oscil <table_size, update_rate> oscilName (wavetable)
 Oscil <PINKNOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(PINKNOISE8192_DATA);
 
@@ -31,7 +28,7 @@ void setup()
 {
   kPan.setFreq(0.25f);
   aNoise.setFreq(2.111f); // set the frequency with an unsigned int or a float
-  startMozzi(CONTROL_RATE); // :)
+  startMozzi(); // :)
   Serial.begin(115200);
 }
 
@@ -62,7 +59,3 @@ void updateAudio() {
 void loop() {
   audioHook(); // required here
 }
-
-
-
-

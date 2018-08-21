@@ -46,7 +46,7 @@
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
 void setup(){
-  startMozzi(); // uses the default control rate of 64, defined in mozzi_config.h
+  startMozzi(); // uses the default control rate of 50, defined in mozzi_config.h
   aSin.setFreq(440); // set the frequency
 }
 

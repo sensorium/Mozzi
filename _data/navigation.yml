@@ -28,8 +28,8 @@ main:
     url: /examples/
   - title: "learn"
     url: /learn/
-  - title: "faq"
-    url: /faq/
+  - title: "forum"
+    url: https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!forum/mozzi-users
   - title: "blog"
     url: /blog/
   - title: "api"

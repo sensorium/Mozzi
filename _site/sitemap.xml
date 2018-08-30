@@ -102,6 +102,9 @@
 <loc>http://localhost:4000/Mozzi/blog/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/Mozzi/learn/output/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/Mozzi/learn/a-simple-sketch/</loc>
 </url>
 <url>
@@ -112,9 +115,6 @@
 </url>
 <url>
 <loc>http://localhost:4000/Mozzi/learn/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/Mozzi/faq/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/Mozzi/learn/under-the-hood/</loc>
@@ -138,10 +138,10 @@
 <loc>http://localhost:4000/Mozzi/gallery/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/Mozzi/learn/output/introductory-tutorial/</loc>
+<loc>http://localhost:4000/Mozzi/learn/faq/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/Mozzi/learn/output/</loc>
+<loc>http://localhost:4000/Mozzi/learn/output/introductory-tutorial/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/Mozzi/examples/example-list/</loc>

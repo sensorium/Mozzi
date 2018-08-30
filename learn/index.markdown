@@ -2,8 +2,6 @@
 layout: single
 ---
 
-[Frequently Asked Questions](faq)
-
 [Mozzi, an Introductory Tutorial](introductory-tutorial/)  
 This shows how to set up an Arduino with Mozzi from scratch and use analog inputs to make sounds using a knob, light sensing, pressure, and a switch (on a digital input).
 
@@ -18,3 +16,5 @@ Shows how to connect Mozzi for audio output, including a schematic for HIFI mode
 
 [Hints and Tips](hints/)  
 What kind of code Mozzi likes best, debugging and monitoring your sketches.
+
+[Frequently Asked Questions](faq/)

@@ -113,4 +113,9 @@ var store = [{
         "excerpt":"MozziByte, a shield for the Arduino Pro Mini. On kickstarter. Making synths with Mozzi, we frequently use the same basic audio components and connectors, and putting them together every time is a pain. So we’ve created the MozziByte. MozziByte has an amp, phono socket, speaker pins, battery connector, power switch...","categories": [],
         "tags": [],
         "url": "http://localhost:4000/Mozzi/mozzibyte-synth-shield-kickstarter-launched/",
+        "teaser":"http://localhost:4000/Mozzi"},{
+        "title": "MozziByte workshop at AudioMostly in Wales",
+        "excerpt":"The 2018 Conference Programme from 12-14 September at Wrexham Glyndŵr University in Wales, UK includes a MozziByte Workshop for attendees…https://stephenbarrass.com/2018/09/03/mozzibyte-workshop-audiomostly-2016/ ","categories": [],
+        "tags": [],
+        "url": "http://localhost:4000/Mozzi/mozzibyte-workshop-at-audiomostly/",
         "teaser":"http://localhost:4000/Mozzi"}]

@@ -269,13 +269,14 @@ defaults:
       comments: # true
       share: true
       related: true
-      excerpt: ""
+      #excerpt: ""
 
 
   # _pages
   - scope:
       path: ""
     values:
-      excerpt: "audio synthesis library for Arduino"
+      #excerpt: "audio synthesis library for Arduino"
+      subtitle: "audio synthesis library for Arduino"
       header:
         overlay_image: /assets/images/mozzi-square.png

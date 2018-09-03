@@ -115,7 +115,7 @@ var store = [{
         "url": "http://localhost:4000/Mozzi/mozzibyte-synth-shield-kickstarter-launched/",
         "teaser":"http://localhost:4000/Mozzi"},{
         "title": "MozziByte workshop at AudioMostly in Wales",
-        "excerpt":"The 2018 Conference Programme from 12-14 September at Wrexham Glyndŵr University in Wales, UK includes a MozziByte Workshop for attendees. ","categories": [],
+        "excerpt":"The 2018 Conference Programme from 12-14 September at Wrexham Glyndŵr University in Wales, UK includes a MozziByte Workshop for attendees… ","categories": [],
         "tags": [],
         "url": "http://localhost:4000/Mozzi/mozzibyte-workshop-at-audiomostly/",
         "teaser":"http://localhost:4000/Mozzi"}]

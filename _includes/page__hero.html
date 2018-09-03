@@ -43,8 +43,11 @@
           {{ site.title | markdownify | remove: "<p>" | remove: "</p>" }}
         {% endif %}
       </h1>
-      {% if page.header.show_overlay_excerpt != false and page.excerpt %}
+      <!-- {% if page.header.show_overlay_excerpt != false and page.excerpt %}
         <p class="page__lead">{{ page.excerpt | markdownify | remove: "<p>" | remove: "</p>" }}</p>
+      {% endif %} -->
+      {% if page.header.show_overlay_subtitle != false and page.subtitle %}
+        <p class="page__lead">{{ page.subtitle | markdownify | remove: "<p>" | remove: "</p>" }}</p>
       {% endif %}
       {% if site.read_time and page.read_time %}
         <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> {% include read-time.html %}</p>

@@ -54,6 +54,12 @@ mozzi_utils.h` in your sketch and `setPin13Out()` in `setup()`, then use
 
 ---
 
+## Cool code
+
+* In updateAudio() you can store "submixes" in variables, to eventually make the return line easier to read and troubleshoot. (Thanks to Charles Peck for this tip).
+
+___
+
 ## Listening and analysing
 
 * A computer line-in works well for listening, and some good tools to record or

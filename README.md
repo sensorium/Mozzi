@@ -59,8 +59,8 @@ Arduino Duemilanove | 9	| yes
 Arduino Nano | 9 | yes
 Arduino Pro Mini | 9 | yes
 Arduino Leonardo | 9 | yes
-Arduino Mega | 11	| broken  
-Freetronics EtherMega | 11 | broken
+Arduino Mega | 11 | yes
+Freetronics EtherMega | 11 | yes
 Ardweeny | 9 | yes     
 Boarduino | 9 | yes
 Teensy | 14 | -

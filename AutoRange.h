@@ -24,7 +24,7 @@ public:
 	@param min_expected the minimum possible input value.
 	@param max_expected the maximum possible input value.
 	*/
-	AutoRange(T min_expected, T max_expected):range_min(max_expected),range_max(min_expected),range(0)
+	AutoRange(T min_expected, T max_expected):range_max(max_expected),range_min(min_expected),range(0)
 	{
 	}
 

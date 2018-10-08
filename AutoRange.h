@@ -24,7 +24,7 @@ public:
 	@param min_expected the minimum possible input value.
 	@param max_expected the maximum possible input value.
 	*/
-	AutoRange(T min_expected, T max_expected):range_min(max_expected),range_max(min_expected),range(0)
+	AutoRange(T min_expected, T max_expected):org_range_max(max_expected),org_range_min(min_expected),range_max(max_expected),range_min(min_expected),range(0)
 	{
 	}
 
@@ -34,14 +34,14 @@ public:
 	*/
 	void next(T n)
 	{
-		if (n > range_max)
+		if (n >= org_range_max)
 		{
 			range_max = n;
 			range = range_max - range_min;
 		}
 		else
 		{
-			if (n< range_min)
+			if (n <= org_range_min)
 			{
 				range_min = n;
 				range = range_max - range_min;
@@ -76,6 +76,7 @@ public:
 	}
 
 private:
+	const T org_range_max, org_range_min;
 	T range_max, range_min, range;
 
 };

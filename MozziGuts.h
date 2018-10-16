@@ -20,23 +20,26 @@
  #include "WProgram.h"
 #endif
 
-
 #include "hardware_defines.h"
+
+#if IS_TEENSY3()
+// required from http://github.com/pedvide/ADC for Teensy 3.*
+#include <ADC.h>
+#endif
+
 #include "mozzi_analog.h"
 
 #if not defined (CONTROL_RATE)
 /** @ingroup core
 Control rate setting.
 Mozzi's CONTROL_RATE sets how many times per second updateControl() is called.
-It can be any power of 2 greater than 64, and the largest value where it starts
-to become impractical is around 1024. 64, 128, 256 and sometimes 512 are all
-usable values. Try to keep it as low as you can, for efficiency, though higher
-rates can sometimes give smoother results, avoiding the need to interpolate
-sensitive variables at audio rate in updateAudio(). CONTROL_RATE has a default
-of 64 Hz, but it can be changed at the top of your sketch, (before the \#includes),
-for example: \#define CONTROL_RATE 256
+CONTROL_RATE has a default of 50 Hz, but it can be changed at the top of your sketch,
+(before the \#includes), for example: \#define CONTROL_RATE 250.
+Try to keep it low, for efficiency, though higher rates up to about 1000
+can sometimes give smoother results, avoiding the need to interpolate
+sensitive variables at audio rate in updateAudio().
 */
-#define CONTROL_RATE 64
+#define CONTROL_RATE 50
 #endif
 
 

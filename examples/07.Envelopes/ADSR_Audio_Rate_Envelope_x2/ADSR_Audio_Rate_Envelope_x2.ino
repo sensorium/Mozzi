@@ -1,9 +1,20 @@
 /*  Example applying ADSR envelopes to 2 audio oscillators
      with Mozzi sonification library.
 
-     Demonstrates ADSR, EventDelay and rand().
+    This shows how to use an ADSR which updates at AUDIO_RATE,
+    in updateAudio(), and output using next() at AUDIO_RATE in updateAudio().
 
-     Tim Barrass 2013, CC by-nc-sa.
+    Another example in this folder shows an ADSR updating at CONTROL_RATE,
+    which is more efficient, but AUDIO_RATE updates shown in this example
+    enable faster envelope transitions.
+
+    Mozzi documentation/API
+    https://sensorium.github.io/Mozzi/doc/html/index.html
+
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+
+    Tim Barrass 2013, CC by-nc-sa.
  */
 
 #include <MozziGuts.h>

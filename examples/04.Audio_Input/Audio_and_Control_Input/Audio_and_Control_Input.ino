@@ -20,6 +20,9 @@
   The serial printing might cause glitches, so try commenting
   them out to test if this is a problem.
 
+  Mozzi documentation/API
+  https://sensorium.github.io/Mozzi/doc/html/index.html
+
   Mozzi help/discussion/announcements:
   https://groups.google.com/forum/#!forum/mozzi-users
 

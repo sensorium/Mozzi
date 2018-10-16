@@ -22,9 +22,12 @@
               /
  GND ---|
 
-  Mozzi help/discussion/announcements:
-  https://groups.google.com/forum/#!forum/mozzi-users
+ Mozzi documentation/API
+ https://sensorium.github.io/Mozzi/doc/html/index.html
 
+ Mozzi help/discussion/announcements:
+ https://groups.google.com/forum/#!forum/mozzi-users
+ 
   Tim Barrass 2013, CC by-nc-sa.
 */
 

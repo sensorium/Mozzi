@@ -1,13 +1,13 @@
 /* Maps a range of input numbers to an output range, comparing
 	 the results of Mozzi's IntMap object with Arduino map().
-	
+
 	 Demonstrates IntMap, a fast integer replacement for map().
-	 
+
 	 Circuit: not required
-	
+
 	 Mozzi help/discussion/announcements:
 	 https://groups.google.com/forum/#!forum/mozzi-users
-	
+
 	 Tim Barrass 2014, CC by-nc-sa.
 */
 
@@ -35,5 +35,3 @@ void setup(){
 
 void loop(){
 }
-
-

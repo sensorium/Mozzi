@@ -1,13 +1,13 @@
 /*  Example of Wavepacket synthesis, using Mozzi sonification library.
-    This sketch draws on Miller Puckette's 
+    This sketch draws on Miller Puckette's
     Pure Data example, F14.wave.packet.pd, with
     one non-overlapping stream of wave packets.
-  
+
     Circuit:
-    	Audio output on DAC/A14 on Teensy 3.0, 3.1, 
-    	or digital pin 9 on a Uno or similar, or 
+    	Audio output on DAC/A14 on Teensy 3.0, 3.1,
+    	or digital pin 9 on a Uno or similar, or
     	check the README or http://sensorium.github.com/Mozzi/
-    	
+
     	Potentiometer connected to analog pin 0.
       Center pin of the potentiometer goes to the analog pin.
       Side pins of the potentiometer go to +5V and ground
@@ -20,16 +20,19 @@
       Center pin of the potentiometer goes to the analog pin.
       Side pins of the potentiometer go to +5V and ground
   
-    Mozzi help/discussion/announcements:
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2013, CC by-nc-sa.
 */
- 
+
 #include <mozzi_analog.h>
 #include <WavePacket.h>
 #include <RollingAverage.h>
- 
+
 #define FUNDAMENTAL_PIN 0
 #define BANDWIDTH_PIN 1
 #define CENTREFREQ_PIN 2
@@ -49,8 +52,8 @@ void setup(){
 
 
 void updateControl(){
-  wavey.set(kAverageF.next(mozziAnalogRead(FUNDAMENTAL_PIN))+1, 
-    kAverageBw.next(mozziAnalogRead(BANDWIDTH_PIN)), 
+  wavey.set(kAverageF.next(mozziAnalogRead(FUNDAMENTAL_PIN))+1,
+    kAverageBw.next(mozziAnalogRead(BANDWIDTH_PIN)),
     kAverageCf.next(2*mozziAnalogRead(CENTREFREQ_PIN)));
 }
 

@@ -19,6 +19,9 @@
     - connection of the piezo attached to ground
     1-megOhm resistor attached from the analog pin to ground
 
+  Mozzi documentation/API
+  https://sensorium.github.io/Mozzi/doc/html/index.html
+
   Mozzi help/discussion/announcements:
   https://groups.google.com/forum/#!forum/mozzi-users
 

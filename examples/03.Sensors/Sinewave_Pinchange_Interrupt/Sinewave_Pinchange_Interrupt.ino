@@ -18,6 +18,9 @@
       6.8nf capacitor from the digital pin to ground
 
 
+  Mozzi documentation/API
+  https://sensorium.github.io/Mozzi/doc/html/index.html
+
   Mozzi help/discussion/announcements:
   https://groups.google.com/forum/#!forum/mozzi-users
 

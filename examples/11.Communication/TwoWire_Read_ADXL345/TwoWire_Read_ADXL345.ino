@@ -9,7 +9,10 @@
 
     Circuit: Audio output on digital pin 9.
 
-    Mozzi help/discussion/announcements:
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
 
     Marije Baalman 2012.

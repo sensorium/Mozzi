@@ -16,7 +16,10 @@
     connected to analog pins 0, 1 and 2, and
     outside leads to ground and +5V.
 
-    Mozzi help/discussion/announcements:
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
 
     Tim Barrass 2013, CC by-nc-sa.

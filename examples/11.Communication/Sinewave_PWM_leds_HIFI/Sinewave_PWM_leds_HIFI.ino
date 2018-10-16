@@ -48,7 +48,10 @@
     Green led from pin 4 through a 1.5k resistor to ground
     Blue led from pin 5 through a 1.5k resistor to ground
 
-    Mozzi help/discussion/announcements:
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
 
     Tim Barrass 2012-13, CC by-nc-sa.

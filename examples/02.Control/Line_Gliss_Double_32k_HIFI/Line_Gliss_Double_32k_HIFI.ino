@@ -48,7 +48,10 @@
     Alternatively using 39 ohm, 4.99k and 470nF components will
     work directly with headphones.
 
-    Mozzi help/discussion/announcements:
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
 
     Tim Barrass 2012, CC by-nc-sa.

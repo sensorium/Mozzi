@@ -17,7 +17,10 @@
       (midi has to be disconnected from rx for sketch to upload)
       Audio output on digital pin 9 on a Uno or similar.
 
-    Mozzi help/discussion/announcements:
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
 
     Tim Barrass 2013-14, CC by-nc-sa.

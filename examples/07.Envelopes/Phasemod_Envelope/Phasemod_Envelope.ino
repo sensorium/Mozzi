@@ -5,7 +5,10 @@
     Demonstrates phase modulation and modifying
     the volume of a sound with an envelope setd in a table.
 
-    Mozzi help/discussion/announcements:
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
 
     Tim Barrass 2012, CC by-nc-sa.

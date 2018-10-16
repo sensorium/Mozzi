@@ -9,7 +9,10 @@
     DAC/A14 on Teensy 3.1, or
     your board check the README or http://sensorium.github.com/Mozzi/
 
-    Mozzi help/discussion/announcements:
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
 
     Tim Barrass 2012, CC by-nc-sa.

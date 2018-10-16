@@ -20,7 +20,10 @@
       Center pin of the potentiometer goes to the analog pin.
       Side pins of the potentiometer go to +5V and ground
 
-    Mozzi help/discussion/announcements:
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
 
     Tim Barrass 2013, CC by-nc-sa.

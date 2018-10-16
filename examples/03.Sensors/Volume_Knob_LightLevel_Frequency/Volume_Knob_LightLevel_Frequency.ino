@@ -27,6 +27,9 @@
     LDR from analog pin to +5V (3.3V on Teensy 3.1)
     5.1k resistor from analog pin to ground
 
+  Mozzi documentation/API
+  https://sensorium.github.io/Mozzi/doc/html/index.html
+
   Mozzi help/discussion/announcements:
   https://groups.google.com/forum/#!forum/mozzi-users
 

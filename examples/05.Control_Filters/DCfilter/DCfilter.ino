@@ -7,7 +7,10 @@
     If the input changes, the filter output swings to track the change and
     eventually settles back to 0.
 
-    Mozzi help/discussion/announcements:
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
 
     Tim Barrass 2013, CC by-nc-sa.

@@ -48,7 +48,7 @@ Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos5b(COS8192_DATA);
 Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos6b(COS8192_DATA);
 //Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos7b(COS8192_DATA);
 
-// base pitch frequencies in 24n8 fixed int format (for speed later)
+// base pitch frequencies in Q16n16 fixed int format (for speed later)
 Q16n16 f1,f2,f3,f4,f5,f6;//,f7;
 
 

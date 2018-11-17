@@ -10,14 +10,14 @@ def generate(outfile, tablename, tablelength, samplerate):
     fout.write('#include "Arduino.h"'+'\n')
     fout.write('#else'+'\n')
     fout.write('#include "WProgram.h"'+'\n')
-    fout.write('#endif'+'\n')   
+    fout.write('#endif'+'\n')
     fout.write('#include "mozzi_pgmspace.h"'+'\n \n')
     fout.write('#define ' + tablename + '_NUM_CELLS '+ str(len(values))+'\n')
     fout.write('#define ' + tablename + '_SAMPLERATE '+ str(samplerate)+'\n \n')
     outstring = 'CONSTTABLE_STORAGE(int8_t) ' + tablename + '_DATA [] = {'
     try:
         for num in range(tablelength):
-            outstring += str(num/32) + ", "  ## for saw line, or put your own generating code here
+            outstring += str(num/32) + ", "  ## put your own generating code here
     finally:
         outstring +=  "};"
         outstring = textwrap.fill(outstring, 80)

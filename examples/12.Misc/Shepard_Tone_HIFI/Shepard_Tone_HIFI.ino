@@ -1,6 +1,6 @@
 /*  Plays a basic Shepard tone
     using Mozzi sonification library.
-    
+
     https://en.wikipedia.org/wiki/Shepard_tone
 
     Demonstrates audio and control rate updates, Lines, EventDelay.
@@ -8,7 +8,7 @@
 
     Important:
     #define AUDIO_MODE HIFI in mozzi_config.h
-    
+
     Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
     Check the Mozzi core module documentation for others and more detail
 
@@ -20,7 +20,7 @@
                   4.7n  ==
                         |
                       ground
-                      
+
 		Mozzi documentation/API
 		https://sensorium.github.io/Mozzi/doc/html/index.html
 
@@ -72,7 +72,7 @@ long v0, v1;
 
 void setup() {
   //Serial.begin(115200);
-  
+
   // set volume change frequencies
   kVol0.setFreq(0.5f / GLISS_SECONDS);
   kVol1.setFreq(0.5f / GLISS_SECONDS);
@@ -91,12 +91,14 @@ void updateControl() {
 
   if (kTriggerDelay0.ready()) {
     kGliss0.set(NOTE_START_FIXEDPOINT, NOTE_END_FIXEDPOINT, CONTROL_STEPS_PER_GLISS);
+    kVol0.setPhase(0);
     kTriggerDelay0.start((int)(GLISS_SECONDS * 1000.f)); // milliseconds
     Serial.println("gliss1");
   }
 
   if (kTriggerDelay1.ready()) {
     kGliss1.set(NOTE_START_FIXEDPOINT, NOTE_END_FIXEDPOINT, CONTROL_STEPS_PER_GLISS);
+    kVol1.setPhase(0);
     kTriggerDelay1.start((int)(GLISS_SECONDS * 1000.f)); // milliseconds
     Serial.println("\t gliss2");
   }

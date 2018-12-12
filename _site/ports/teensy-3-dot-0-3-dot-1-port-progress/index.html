@@ -1,9 +1,9 @@
 <!doctype html>
 <!--
-  Minimal Mistakes Jekyll Theme 4.12.2 by Michael Rose
+  Minimal Mistakes Jekyll Theme 4.14.1 by Michael Rose
   Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
-  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
 -->
 <html lang="en" class="no-js">
   <head>
@@ -52,7 +52,7 @@
 
   <script type="application/ld+json">
     {
-      "@context": "http://schema.org",
+      "@context": "https://schema.org",
       "@type": "Person",
       "name": "Tim Barrass",
       "url": "http://localhost:4000/Mozzi",
@@ -72,8 +72,6 @@
 <link href="/Mozzi/feed.xml" type="application/atom+xml" rel="alternate" title="Mozzi Feed">
 
 <!-- http://t.co/dKP3o1e -->
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script>
@@ -97,6 +95,7 @@
     }
   </style>
 <![endif]-->
+
 
 
     <!-- start custom head snippets -->
@@ -206,7 +205,7 @@ I’m aiming to finish it in the second half of July.
   
 
 
-<div itemscope itemtype="http://schema.org/Person">
+<div itemscope itemtype="https://schema.org/Person">
 
   
 
@@ -225,9 +224,11 @@ I’m aiming to finish it in the second half of July.
     <button class="btn btn--inverse">Follow</button>
     <ul class="author__urls social-icons">
       
-        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
           <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name"></span>
         </li>
+      
+
       
 
       
@@ -289,7 +290,7 @@ I’m aiming to finish it in the second half of July.
 
       <!--
   <li>
-    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
       <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
     </a>
   </li>
@@ -302,7 +303,7 @@ I’m aiming to finish it in the second half of July.
   </div>
 
 
-  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Teensy 3.0-3.1 port progress">
     <meta itemprop="description" content="This is an update regarding work in progress on the port to Teensy 3.0 and 3.1,to let donors to the project know where the work is up to.  It’s taking a bit longer than anticipated,but I want to assure people who are waiting that the work is well underway.  However, I won’t be able to spend time on the port for the next couple of weeks, so the wait is going to be a bit longer yet.I’m aiming to finish it in the second half of July.">
     <meta itemprop="datePublished" content="June 20, 2014">
@@ -406,6 +407,7 @@ of ADC in future development.  Audio input hasn’t been tested yet.</p>
       <div class="grid__wrapper">
         
           
+          
 
 
 
@@ -440,6 +442,7 @@ of ADC in future development.  Audio input hasn’t been tested yet.</p>
   </article>
 </div>
         
+          
           
 
 
@@ -477,6 +480,7 @@ of ADC in future development.  Audio input hasn’t been tested yet.</p>
 </div>
         
           
+          
 
 
 
@@ -511,6 +515,7 @@ of ADC in future development.  Audio input hasn’t been tested yet.</p>
   </article>
 </div>
         
+          
           
 
 
@@ -549,6 +554,7 @@ of ADC in future development.  Audio input hasn’t been tested yet.</p>
     </div>
   
 </div>
+
     </div>
 
     
@@ -563,11 +569,9 @@ of ADC in future development.  Audio input hasn’t been tested yet.</p>
     
       <li><strong>Follow:</strong></li>
     
+
     
-    
-    
-    
-    
+
     <li><a href="/Mozzi/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
   </ul>
 </div>
@@ -579,7 +583,7 @@ of ADC in future development.  Audio input hasn’t been tested yet.</p>
 
     
   <script src="/Mozzi/assets/js/main.min.js"></script>
-  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
 
 
 

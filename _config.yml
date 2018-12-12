@@ -210,6 +210,7 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jemoji
+  - jekyll-include-cache # TB20181212
 
 # mimic GitHub Pages with --safe
 whitelist:

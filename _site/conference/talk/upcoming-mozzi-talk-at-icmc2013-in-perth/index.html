@@ -1,9 +1,9 @@
 <!doctype html>
 <!--
-  Minimal Mistakes Jekyll Theme 4.12.2 by Michael Rose
+  Minimal Mistakes Jekyll Theme 4.14.1 by Michael Rose
   Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
-  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
 -->
 <html lang="en" class="no-js">
   <head>
@@ -52,7 +52,7 @@
 
   <script type="application/ld+json">
     {
-      "@context": "http://schema.org",
+      "@context": "https://schema.org",
       "@type": "Person",
       "name": "Tim Barrass",
       "url": "http://localhost:4000/Mozzi",
@@ -72,8 +72,6 @@
 <link href="/Mozzi/feed.xml" type="application/atom+xml" rel="alternate" title="Mozzi Feed">
 
 <!-- http://t.co/dKP3o1e -->
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script>
@@ -97,6 +95,7 @@
     }
   </style>
 <![endif]-->
+
 
 
     <!-- start custom head snippets -->
@@ -202,7 +201,7 @@ The paper will be on Thursday 15 August, 14:15 â€“ 16:15, State Theatre Centre â
   
 
 
-<div itemscope itemtype="http://schema.org/Person">
+<div itemscope itemtype="https://schema.org/Person">
 
   
 
@@ -221,9 +220,11 @@ The paper will be on Thursday 15 August, 14:15 â€“ 16:15, State Theatre Centre â
     <button class="btn btn--inverse">Follow</button>
     <ul class="author__urls social-icons">
       
-        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
           <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name"></span>
         </li>
+      
+
       
 
       
@@ -285,7 +286,7 @@ The paper will be on Thursday 15 August, 14:15 â€“ 16:15, State Theatre Centre â
 
       <!--
   <li>
-    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
       <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
     </a>
   </li>
@@ -298,7 +299,7 @@ The paper will be on Thursday 15 August, 14:15 â€“ 16:15, State Theatre Centre â
   </div>
 
 
-  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Upcoming Mozzi talk at ICMC2013 in Perth">
     <meta itemprop="description" content="Thereâ€™ll be a conference presentation about Mozzi as part of ICMC in Perth.The paper will be on Thursday 15 August, 14:15 â€“ 16:15, State Theatre Centre â€“ Studio Underground.">
     <meta itemprop="datePublished" content="August 06, 2013">
@@ -387,6 +388,7 @@ The paper will be on Thursday 15 August, 14:15 â€“ 16:15, State Theatre Centre â
       <div class="grid__wrapper">
         
           
+          
 
 
 
@@ -421,6 +423,7 @@ The paper will be on Thursday 15 August, 14:15 â€“ 16:15, State Theatre Centre â
   </article>
 </div>
         
+          
           
 
 
@@ -458,6 +461,7 @@ The paper will be on Thursday 15 August, 14:15 â€“ 16:15, State Theatre Centre â
 </div>
         
           
+          
 
 
 
@@ -492,6 +496,7 @@ The paper will be on Thursday 15 August, 14:15 â€“ 16:15, State Theatre Centre â
   </article>
 </div>
         
+          
           
 
 
@@ -530,6 +535,7 @@ The paper will be on Thursday 15 August, 14:15 â€“ 16:15, State Theatre Centre â
     </div>
   
 </div>
+
     </div>
 
     
@@ -544,11 +550,9 @@ The paper will be on Thursday 15 August, 14:15 â€“ 16:15, State Theatre Centre â
     
       <li><strong>Follow:</strong></li>
     
+
     
-    
-    
-    
-    
+
     <li><a href="/Mozzi/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
   </ul>
 </div>
@@ -560,7 +564,7 @@ The paper will be on Thursday 15 August, 14:15 â€“ 16:15, State Theatre Centre â
 
     
   <script src="/Mozzi/assets/js/main.min.js"></script>
-  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
 
 
 

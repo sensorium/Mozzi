@@ -1,9 +1,9 @@
 <!doctype html>
 <!--
-  Minimal Mistakes Jekyll Theme 4.12.2 by Michael Rose
+  Minimal Mistakes Jekyll Theme 4.14.1 by Michael Rose
   Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
-  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
 -->
 <html lang="en" class="no-js">
   <head>
@@ -48,7 +48,7 @@
 
   <script type="application/ld+json">
     {
-      "@context": "http://schema.org",
+      "@context": "https://schema.org",
       "@type": "Person",
       "name": "Tim Barrass",
       "url": "http://localhost:4000/Mozzi",
@@ -68,8 +68,6 @@
 <link href="/Mozzi/feed.xml" type="application/atom+xml" rel="alternate" title="Mozzi Feed">
 
 <!-- http://t.co/dKP3o1e -->
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script>
@@ -93,6 +91,7 @@
     }
   </style>
 <![endif]-->
+
 
 
     <!-- start custom head snippets -->
@@ -191,7 +190,7 @@
 <div id="main" role="main">
   
 
-  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     
     
     
@@ -212,7 +211,10 @@
   <li><a href="#using-mozzi">Using Mozzi</a></li>
   <li><a href="#documentation">Documentation</a></li>
   <li><a href="#weird-things">Weird things</a>
-     -  <a href="#avr">AVR</a></li>
+    <ul>
+      <li><a href="#avr">AVR</a></li>
+    </ul>
+  </li>
   <li><a href="#contributions--included-dependencies">Contributions / Included Dependencies</a></li>
   <li><a href="#hardware-specific-notes">Hardware specific notes</a>
     <ul>
@@ -227,15 +229,10 @@
           </aside>
         
         <p>Currently your Arduino can only beep like a microwave oven. Mozzi brings
-your Arduino to life by allowing it to produce much more complex and interesting
-growls, sweeps and chorusing atmospherics. These sounds can be quickly and easily
-constructed from familiar synthesis units like oscillators, delays, filters and
-envelopes.</p>
+your Arduino to life by allowing it to produce much more complex and interesting growls, sweeps and chorusing atmospherics. These sounds can be quickly and easily constructed from familiar synthesis units like oscillators, delays, filters and envelopes.</p>
 
 <p>You can use Mozzi to generate algorithmic music for an installation or
-performance, or make interactive sonifications of sensors, on a small, modular
-and super cheap Arduino, without the need for additional shields, message
-passing or external synths.</p>
+performance, or make interactive sonifications of sensors, on a small, modular and super cheap Arduino, without the need for additional shields, message passing or external synths.</p>
 
 <p>Here are some sounds of the example sketches which come with Mozzi:</p>
 
@@ -323,7 +320,7 @@ Try some examples from the <strong>File &gt; Examples &gt; Mozzi</strong> menu.<
       <td style="text-align: right">9</td>
     </tr>
     <tr>
-      <td style="text-align: left">Arduino Mega <em>broken since Jan 2015</em></td>
+      <td style="text-align: left">Arduino Mega</td>
       <td style="text-align: right">11</td>
     </tr>
     <tr>
@@ -374,7 +371,7 @@ Look for code and usage changes <a href="https://github.com/sensorium/Mozzi/blob
 
 <h2 id="weird-things">Weird things</h2>
 
-<h4 id="avr">AVR</h4>
+<h3 id="avr">AVR</h3>
 
 <ul>
   <li>
@@ -385,10 +382,7 @@ Mozzi provides <code class="highlighter-rouge">EventDelay()</code> for schedulin
     <p><code class="highlighter-rouge">analogRead()</code> is replaced by <code class="highlighter-rouge">mozziAnalogRead()</code>, which works in the background instead of blocking the processor.</p>
   </li>
   <li>
-    <p>Mozzi interferes with <code class="highlighter-rouge">analogWrite()</code>.  In <code class="highlighter-rouge">STANDARD</code> and <code class="highlighter-rouge">STANDARD_PLUS</code> audio modes, Mozzi takes over Timer1 (pins 9 and 10), but you can use the Timer2 pins, 3 and 11 (your board may differ).  In <code class="highlighter-rouge">HIFI</code> mode,
-Mozzi uses Timer1 (or Timer4 on some boards), and Timer2, so pins 3 and 11 are also out.<br />
-If you need <code class="highlighter-rouge">analogWrite()</code>, you can do PWM output on any digital pins using the technique in
-<em>Mozzi&gt;examples&gt;11.Communication&gt;Sinewave_PWM_pins_HIFI</em>.</p>
+    <p>Mozzi interferes with <code class="highlighter-rouge">analogWrite()</code>.  In <code class="highlighter-rouge">STANDARD</code> and <code class="highlighter-rouge">STANDARD_PLUS</code> audio modes, Mozzi takes over Timer1 (pins 9 and 10), but you can use the Timer2 pins, 3 and 11 (your board may differ).  In <code class="highlighter-rouge">HIFI</code> mode, Mozzi uses Timer1 (or Timer4 on some boards), and Timer2, so pins 3 and 11 are also out.  If you need <code class="highlighter-rouge">analogWrite()</code>, you can do PWM output on any digital pins using the technique in <em>Mozzi&gt;examples&gt;11.Communication&gt;Sinewave_PWM_pins_HIFI</em>.</p>
   </li>
   <li>
     <p>Mozzi provides<code class="highlighter-rouge">mozziMicros()</code> as an alternative to ‘millis()’ and ‘micros()’.</p>
@@ -497,8 +491,7 @@ assume that this mode may not be useable on boards where GPIO2 or GPIO15 are not
       <li>As the (PDM) output signal is digital, a single transistor can be used to amplify it to an independent voltage level.</li>
     </ul>
   </li>
-  <li>The audio output resolution is always 16 bits on this platform, <em>internally</em>. Thus, in updateAudio(), you should scale your output samples to a full 16 bit range. The effective number of output bits cannot easily
-be quantified, due to PDM coding.</li>
+  <li>The audio output resolution is always 16 bits on this platform, <em>internally</em>. Thus, in updateAudio(), you should scale your output samples to a full 16 bit range. The effective number of output bits cannot easily be quantified, due to PDM coding.</li>
   <li>audioHook() calls <code class="highlighter-rouge">yield()</code> once for every audio sample generated. Thus, as long as your audio output buffer does not run empty, you should not need any additional <code class="highlighter-rouge">yield()</code>s inside <code class="highlighter-rouge">loop()</code>.</li>
 </ul>
 
@@ -538,6 +531,7 @@ or <a href="https://github.com/sensorium/Mozzi/issues/">GitHub Mozzi site</a>. F
   
   
 </div>
+
     </div>
 
     
@@ -552,11 +546,9 @@ or <a href="https://github.com/sensorium/Mozzi/issues/">GitHub Mozzi site</a>. F
     
       <li><strong>Follow:</strong></li>
     
+
     
-    
-    
-    
-    
+
     <li><a href="/Mozzi/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
   </ul>
 </div>
@@ -568,7 +560,7 @@ or <a href="https://github.com/sensorium/Mozzi/issues/">GitHub Mozzi site</a>. F
 
     
   <script src="/Mozzi/assets/js/main.min.js"></script>
-  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
 
 
 

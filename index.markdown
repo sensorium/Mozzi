@@ -4,15 +4,10 @@ toc: true
 ---
 
 Currently your Arduino can only beep like a microwave oven. Mozzi brings
-your Arduino to life by allowing it to produce much more complex and interesting
-growls, sweeps and chorusing atmospherics. These sounds can be quickly and easily
-constructed from familiar synthesis units like oscillators, delays, filters and
-envelopes.
+your Arduino to life by allowing it to produce much more complex and interesting growls, sweeps and chorusing atmospherics. These sounds can be quickly and easily constructed from familiar synthesis units like oscillators, delays, filters and envelopes.
 
 You can use Mozzi to generate algorithmic music for an installation or
-performance, or make interactive sonifications of sensors, on a small, modular
-and super cheap Arduino, without the need for additional shields, message
-passing or external synths.
+performance, or make interactive sonifications of sensors, on a small, modular and super cheap Arduino, without the need for additional shields, message passing or external synths.
 
 Here are some sounds of the example sketches which come with Mozzi:
 
@@ -128,17 +123,14 @@ Look for code and usage changes [here](https://github.com/sensorium/Mozzi/blob/g
 
 ## Weird things
 
-#### AVR
+### AVR
 
 * While Mozzi is running, calling `delay()`, `delayMicroseconds()`, or other functions which wait or cycle through loops can cause audio glitches.
 Mozzi provides `EventDelay()` for scheduling instead of `delay()`.
 
 * `analogRead()` is replaced by `mozziAnalogRead()`, which works in the background instead of blocking the processor.  
 
-* Mozzi interferes with `analogWrite()`.  In `STANDARD` and `STANDARD_PLUS` audio modes, Mozzi takes over Timer1 (pins 9 and 10), but you can use the Timer2 pins, 3 and 11 (your board may differ).  In `HIFI` mode,
-Mozzi uses Timer1 (or Timer4 on some boards), and Timer2, so pins 3 and 11 are also out.  
-If you need `analogWrite()`, you can do PWM output on any digital pins using the technique in
-*Mozzi>examples>11.Communication>Sinewave_PWM_pins_HIFI*.  
+* Mozzi interferes with `analogWrite()`.  In `STANDARD` and `STANDARD_PLUS` audio modes, Mozzi takes over Timer1 (pins 9 and 10), but you can use the Timer2 pins, 3 and 11 (your board may differ).  In `HIFI` mode, Mozzi uses Timer1 (or Timer4 on some boards), and Timer2, so pins 3 and 11 are also out.  If you need `analogWrite()`, you can do PWM output on any digital pins using the technique in *Mozzi>examples>11.Communication>Sinewave_PWM_pins_HIFI*.  
 
 * Mozzi provides`mozziMicros()` as an alternative to 'millis()' and 'micros()'.  
 
@@ -223,8 +215,7 @@ port by Thomas Friedrichsmeier
   - If you do not require WiFi in your sketch, you should turn it off, _explicitly_, using `WiFi.mode(WIFI_OFF)`.
   - A juicy enough, well regulated power supply, and a stabilizing capacitor between VCC and Gnd can help a lot.
   - As the (PDM) output signal is digital, a single transistor can be used to amplify it to an independent voltage level.
-- The audio output resolution is always 16 bits on this platform, _internally_. Thus, in updateAudio(), you should scale your output samples to a full 16 bit range. The effective number of output bits cannot easily
-  be quantified, due to PDM coding.
+- The audio output resolution is always 16 bits on this platform, _internally_. Thus, in updateAudio(), you should scale your output samples to a full 16 bit range. The effective number of output bits cannot easily be quantified, due to PDM coding.
 - audioHook() calls `yield()` once for every audio sample generated. Thus, as long as your audio output buffer does not run empty, you should not need any additional `yield()`s inside `loop()`.
 
 ***

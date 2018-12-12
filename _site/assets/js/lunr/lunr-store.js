@@ -1,31 +1,31 @@
 var store = [{
         "title": "ISEA2013 workshop announcement",
-        "excerpt":"Mozzi workshop at international Symposium on Electonic Art, June 8-9, 2013 in Sydney.Through guided making, participants will learn to use Mozzi and Arduino to combine sensors with synthesisto make complex, reactive sounds. By the end of the workshop everyone will have created and customisedtheir own responsive sound-generating objects.More details and...","categories": ["workshops"],
+        "excerpt":"Mozzi workshop at international Symposium on Electonic Art, June 8-9, 2013 in Sydney. Through guided making, participants will learn to use Mozzi and Arduino to combine sensors with synthesis to make complex, reactive sounds. By the end of the workshop everyone will have created and customised their own responsive sound-generating...","categories": ["workshops"],
         "tags": [],
         "url": "http://localhost:4000/Mozzi/workshops/isea2013-workshop-announcement/",
         "teaser":"http://localhost:4000/Mozzi"},{
         "title": "Music Hack Day Barcelona workshop announcement",
-        "excerpt":"Mozzi workshop at Music Hack Day, 13-14 June 2013, Barcelona. ","categories": ["workshops"],
+        "excerpt":"Mozzi workshop at Music Hack Day, 13-14 June 2013, Barcelona.  ","categories": ["workshops"],
         "tags": [],
         "url": "http://localhost:4000/Mozzi/workshops/music-hack-day-barcelona-workshop-announcement/",
         "teaser":"http://localhost:4000/Mozzi"},{
         "title": "ICAD2013 workshop announcement",
-        "excerpt":"Mozzi workshop at International Conference on Auditory Display, July 6-10, 2013, Lodz University of Technology, Poland. ","categories": ["workshops"],
+        "excerpt":"Mozzi workshop at International Conference on Auditory Display, July 6-10, 2013, Lodz University of Technology, Poland.   ","categories": ["workshops"],
         "tags": [],
         "url": "http://localhost:4000/Mozzi/workshops/icad2013-workshop-announcement/",
         "teaser":"http://localhost:4000/Mozzi"},{
         "title": "Audio and Control ADC together",
-        "excerpt":"Version 2013-07-29-18:09 enables audio and control rate analog inputs to work at the same time.Audio input is on analog pin A0. Each time an audio sample is output, the audio input is sampled.For each audio input sample, one control input is also converted, by changing the input channel andtriggering two...","categories": ["updates","adc"],
+        "excerpt":"Version 2013-07-29-18:09 enables audio and control rate analog inputs to work at the same time. Audio input is on analog pin A0. Each time an audio sample is output, the audio input is sampled. For each audio input sample, one control input is also converted, by changing the input channel...","categories": ["updates","adc"],
         "tags": [],
         "url": "http://localhost:4000/Mozzi/updates/adc/audio-and-control-adc-together/",
         "teaser":"http://localhost:4000/Mozzi"},{
         "title": "Upcoming Mozzi talk at ICMC2013 in Perth",
-        "excerpt":"There’ll be a conference presentation about Mozzi as part of ICMC in Perth.The paper will be on Thursday 15 August, 14:15 – 16:15, State Theatre Centre – Studio Underground. ","categories": ["conference","talk"],
+        "excerpt":"There’ll be a conference presentation about Mozzi as part of ICMC in Perth. The paper will be on Thursday 15 August, 14:15 – 16:15, State Theatre Centre – Studio Underground.  ","categories": ["conference","talk"],
         "tags": [],
         "url": "http://localhost:4000/Mozzi/conference/talk/upcoming-mozzi-talk-at-icmc2013-in-perth/",
         "teaser":"http://localhost:4000/Mozzi"},{
         "title": "Simpler adc with mozziAnalogRead",
-        "excerpt":"Version 2013-08-25 evolves the adc developments of the previous release, byreplacing the various ways of reading analog inputs (adcGetResult(),adcReadAllChannels(), etc.) with mozziAnalogRead(). Use it the same asanalogRead(). It doesn’t need any special setup. Audio input still uses getAudioInput(), not mozziAnalogRead(). Here’s the Mozzi/extras/NEWS.txt entry of the changes in this release:...","categories": ["updates","adc"],
+        "excerpt":"Version 2013-08-25 evolves the adc developments of the previous release, by replacing the various ways of reading analog inputs (adcGetResult(), adcReadAllChannels(), etc.) with mozziAnalogRead(). Use it the same as analogRead(). It doesn’t need any special setup. Audio input still uses getAudioInput(), not mozziAnalogRead(). Here’s the Mozzi/extras/NEWS.txt entry of the changes...","categories": ["updates","adc"],
         "tags": [],
         "url": "http://localhost:4000/Mozzi/updates/adc/simpler-adc-with-mozzianalogread/",
         "teaser":"http://localhost:4000/Mozzi"},{
@@ -45,27 +45,27 @@ var store = [{
         "url": "http://localhost:4000/Mozzi/updates/audio%20modes/update-to-version-2014-03-13-14-09/",
         "teaser":"http://localhost:4000/Mozzi"},{
         "title": "STANDARD_PLUS performance improves",
-        "excerpt":"Due to recent improvements in output buffer code, STANDARD_PLUS audio mode is now the default, and performs as well as the old STANDARD mode, while removing the high-pitched PWM carrier frequency whine out of hearing range. ","categories": ["audio","updates"],
+        "excerpt":"Due to recent improvements in output buffer code, STANDARD_PLUS audio mode is now the default, and performs as well as the old STANDARD mode,  while removing the high-pitched PWM carrier frequency whine out of hearing range.  ","categories": ["audio","updates"],
         "tags": [],
         "url": "http://localhost:4000/Mozzi/audio/updates/standard-plus-performance-improves/",
         "teaser":"http://localhost:4000/Mozzi"},{
         "title": "Teensy 3.0-3.1 port progress",
-        "excerpt":"This is an update regarding work in progress on the port to Teensy 3.0 and 3.1,to let donors to the project know where the work is up to. It’s taking a bit longer than anticipated,but I want to assure people who are waiting that the work is well underway. However,...","categories": ["ports"],
+        "excerpt":"This is an update regarding work in progress on the port to Teensy 3.0 and 3.1, to let donors to the project know where the work is up to. It’s taking a bit longer than anticipated, but I want to assure people who are waiting that the work is well...","categories": ["ports"],
         "tags": [],
         "url": "http://localhost:4000/Mozzi/ports/teensy-3-dot-0-3-dot-1-port-progress/",
         "teaser":"http://localhost:4000/Mozzi"},{
         "title": "Teensy 3.0/3.1 test release",
-        "excerpt":"This release is a test of the recent work on the Mozzi Teensy 3 port in response to the donation campaign reaching the grand goal of $1000.Thankyou to all the dozen or so donors, especially my brother and sister, who donated more than half! It should run as usual on...","categories": ["ports","Teensy","releases"],
+        "excerpt":"This release is a test of the recent work on the Mozzi Teensy 3 port in response to the donation campaign reaching the grand goal of $1000. Thankyou to all the dozen or so donors, especially my brother and sister, who donated more than half! It should run as usual...","categories": ["ports","Teensy","releases"],
         "tags": [],
         "url": "http://localhost:4000/Mozzi/ports/teensy/releases/teensy-3-dot-0-slash-3-dot-1-test-release-version-2014-08-09-14-15/",
         "teaser":"http://localhost:4000/Mozzi"},{
         "title": "yes, you can donate!",
-        "excerpt":"Actually, I’m not asking for donations now…  But I am offering paid Mozzi consulting. ","categories": [],
+        "excerpt":"Actually, I’m not asking for donations now…  But I am offering paid Mozzi consulting.  ","categories": [],
         "tags": [],
         "url": "http://localhost:4000/Mozzi/yes/",
         "teaser":"http://localhost:4000/Mozzi"},{
         "title": "Use Arduino 1.0.5",
-        "excerpt":"Mozzi is broken in Arduino IDE 1.0.6 and 1.6.3.  For now, use Arduino 1.0.5. The symptom is that more complex sketches run too slowly for smooth audio synthesis.  I’ll try to sort it out! ","categories": [],
+        "excerpt":"Mozzi is broken in Arduino IDE 1.0.6 and 1.6.3.  For now, use Arduino 1.0.5.   The symptom is that more complex sketches run too slowly for smooth audio synthesis.  I’ll try to sort it out!  ","categories": [],
         "tags": [],
         "url": "http://localhost:4000/Mozzi/use-arduino-1-dot-0-5/",
         "teaser":"http://localhost:4000/Mozzi"},{
@@ -90,22 +90,22 @@ var store = [{
         "url": "http://localhost:4000/Mozzi/tweak-for-faster-code/",
         "teaser":"http://localhost:4000/Mozzi"},{
         "title": "v1.0.3rc2 Teensy bugfix",
-        "excerpt":"release v1.0.3rc2   Teensy now compiles, bit of a hack added   || defined(TEENSYDUINO)  to all Teensy conditional compile lines like this:  #if defined(MK20DX128) || defined(MK20DX256) || defined(TEENSYDUINO)  // teensy 3, 3.1  examples, removed commented ADC.h line from all examples, Teensy doesn’t seem to need it anymore","categories": ["releases,","bugfix"],
+        "excerpt":"release v1.0.3rc2      Teensy now compiles, bit of a hack added    || defined(TEENSYDUINO)   to all Teensy conditional compile lines like this:   #if defined(MK20DX128) || defined(MK20DX256) || defined(TEENSYDUINO)  // teensy 3, 3.1   examples, removed commented ADC.h line from all examples, Teensy doesn’t seem to need it anymore  ","categories": ["releases,","bugfix"],
         "tags": [],
         "url": "http://localhost:4000/Mozzi/releases,/bugfix/v1-dot-0-3rc2-teensy-bugfix/",
         "teaser":"http://localhost:4000/Mozzi"},{
         "title": "v1.0.3rc4 fixes compile",
-        "excerpt":"Removed stray FrequencyTimer files from main folder, which stopped anything compiling…! ","categories": ["releases,","bugfix"],
+        "excerpt":"Removed stray FrequencyTimer files from main folder, which stopped anything compiling…!  ","categories": ["releases,","bugfix"],
         "tags": [],
         "url": "http://localhost:4000/Mozzi/releases,/bugfix/v1-dot-0-3rc4-fixes-compile/",
         "teaser":"http://localhost:4000/Mozzi"},{
         "title": "v1.0.3rc5 HIFI compile fix",
-        "excerpt":"HIFI sketches compile again. The problems were due to more errors around changes in Mozzi’s modified FrequencyTimer2 library usage which were not tested properly before release. ","categories": ["releases,","bugfix"],
+        "excerpt":"HIFI sketches compile again. The problems were due to more errors around changes in Mozzi’s modified FrequencyTimer2 library usage which were not tested properly before release.  ","categories": ["releases,","bugfix"],
         "tags": [],
         "url": "http://localhost:4000/Mozzi/releases,/bugfix/v1-dot-0-3rc5-hifi-compile-fix/",
         "teaser":"http://localhost:4000/Mozzi"},{
         "title": "v1.0.3rc6 HIFI works",
-        "excerpt":"HIFI actually works this time… ie. it’s unbroken ","categories": [],
+        "excerpt":"HIFI actually works this time… ie. it’s unbroken  ","categories": [],
         "tags": [],
         "url": "http://localhost:4000/Mozzi/v1-dot-0-3rc6-hifi-works/",
         "teaser":"http://localhost:4000/Mozzi"},{
@@ -115,7 +115,7 @@ var store = [{
         "url": "http://localhost:4000/Mozzi/mozzibyte-synth-shield-kickstarter-launched/",
         "teaser":"http://localhost:4000/Mozzi"},{
         "title": "MozziByte workshop at AudioMostly in Wales",
-        "excerpt":"The 2018 Conference Programme from 12-14 September at Wrexham Glyndŵr University in Wales, UK includes a MozziByte Workshop for attendees… ","categories": [],
+        "excerpt":"The 2018 Conference Programme from 12-14 September at Wrexham Glyndŵr University in Wales, UK includes a MozziByte Workshop for attendees…  ","categories": [],
         "tags": [],
         "url": "http://localhost:4000/Mozzi/mozzibyte-workshop-at-audiomostly/",
         "teaser":"http://localhost:4000/Mozzi"}]

@@ -1,9 +1,9 @@
 <!doctype html>
 <!--
-  Minimal Mistakes Jekyll Theme 4.12.2 by Michael Rose
+  Minimal Mistakes Jekyll Theme 4.14.1 by Michael Rose
   Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
-  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
 -->
 <html lang="en" class="no-js">
   <head>
@@ -48,7 +48,7 @@
 
   <script type="application/ld+json">
     {
-      "@context": "http://schema.org",
+      "@context": "https://schema.org",
       "@type": "Person",
       "name": "Tim Barrass",
       "url": "http://localhost:4000/Mozzi",
@@ -68,8 +68,6 @@
 <link href="/Mozzi/feed.xml" type="application/atom+xml" rel="alternate" title="Mozzi Feed">
 
 <!-- http://t.co/dKP3o1e -->
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script>
@@ -93,6 +91,7 @@
     }
   </style>
 <![endif]-->
+
 
 
     <!-- start custom head snippets -->
@@ -191,7 +190,7 @@
 <div id="main" role="main">
   
 
-  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Efficient code for smooth audio">
     
     
@@ -207,8 +206,7 @@
 <ul>
   <li>
     <p>Writing speed-efficient code can be tricky, because the Arduino IDE sets
-the compiler for small code size rather than speed!  Here’s a great read ; )<br />
-<a href="https://ww1.microchip.com/downloads/en/AppNotes/doc8453.pdf">Atmel AVR4027: Tips and Tricks to Optimize. Your C Code for 8-bit AVR Microcontrollers</a></p>
+the compiler for small code size rather than speed!  Here’s a great read ; ) <a href="https://ww1.microchip.com/downloads/en/AppNotes/doc8453.pdf">Atmel AVR4027: Tips and Tricks to Optimize. Your C Code for 8-bit AVR Microcontrollers</a></p>
   </li>
   <li>
     <p>Pre-calculate where possible. Do as much as you can in <code class="highlighter-rouge">setup()</code> and
@@ -216,9 +214,7 @@ the compiler for small code size rather than speed!  Here’s a great read ; )<b
   </li>
   <li>
     <p>Avoid division! Use powers of two for numbers where you can, and use
-<a href="https://arduino.cc/en/Reference/Bitshift">bit-shifting arithmetic</a> instead of
-multiplication and division where possible.
-Shifting by 8 or 16 is faster than other amounts.</p>
+<a href="https://arduino.cc/en/Reference/Bitshift">bit-shifting arithmetic</a> instead of multiplication and division where possible.  Shifting by 8 or 16 is faster than other amounts.</p>
   </li>
 </ul>
 
@@ -237,10 +233,7 @@ Shifting by 8 or 16 is faster than other amounts.</p>
     <p>Take care declaring and casting variables - this can affect speed and also be <strong>a source of unexpected sounds</strong>.</p>
   </li>
   <li>
-    <p>Use integer and fixed point maths, and avoid floating point, particularly in
-<code class="highlighter-rouge">updateAudio()</code>. Mozzi has a collection of fixed-point number types and
-conversion functions in <strong>mozzi_fixmath.h</strong>. These are often much faster than
-floating point, but they can over - or under - flow if you’re not careful.</p>
+    <p>Use integer and fixed point maths, and avoid floating point, particularly in <code class="highlighter-rouge">updateAudio()</code>. Mozzi has a collection of fixed-point number types and conversion functions in <strong>mozzi_fixmath.h</strong>. These are often much faster than floating point, but they can over - or under - flow if you’re not careful.</p>
   </li>
 </ul>
 
@@ -250,25 +243,22 @@ floating point, but they can over - or under - flow if you’re not careful.</p>
 
 <ul>
   <li>
-    <p>Printing to the Arduino Serial monitor is a useful tool for debugging, but
-beware of trying to print too much or your whole computer might freeze! It’s
-mostly OK to print from <code class="highlighter-rouge">updateControl()</code> with a <code class="highlighter-rouge">CONTROL_RATE</code> of 64, and it
-works well with a baud rate of 9600, ie. <code class="highlighter-rouge">Serial.begin(9600)</code>. Remember to
-set it in the monitor window too. Notice that using Serial adds size to your
-sketch and can often disrupt audio, so check if you’ve got print statements
-interfering if you’re hearing audio clicks.</p>
+    <p>Printing to the Arduino Serial monitor is a useful tool for debugging, but beware of trying to print too much or your whole computer might freeze! It’s mostly OK to print from <code class="highlighter-rouge">updateControl()</code> with a <code class="highlighter-rouge">CONTROL_RATE</code> of 64, and it works well with a baud rate of 9600, ie. <code class="highlighter-rouge">Serial.begin(9600)</code>. Remember to set it in the monitor window too. Notice that using Serial adds size to your sketch and can often disrupt audio, so check if you’ve got print statements interfering if you’re hearing audio clicks.</p>
   </li>
   <li>
-    <p>To print audio rate debugging info, don’t use the Arduino serial monitor, try
-<a href="https://freeware.the-meiers.org/">CoolTerm</a>, it’s a great application which
-performs much better and can capture incoming data to a file.</p>
+    <p>To print audio rate debugging info, don’t use the Arduino serial monitor, try <a href="https://freeware.the-meiers.org/">CoolTerm</a>, it’s a great application which performs much better and can capture incoming data to a file.</p>
   </li>
   <li>
-    <p>An oscilloscope is useful for timing your code. Mozzi has fast code to flip
-digital pin 13 without interfering much with the audio timing. Put <code class="highlighter-rouge">#include
-mozzi_utils.h</code> in your sketch and <code class="highlighter-rouge">setPin13Out()</code> in <code class="highlighter-rouge">setup()</code>, then use
-<code class="highlighter-rouge">setPin13High()</code> and <code class="highlighter-rouge">setPin13Low()</code> around the code you want to time.</p>
+    <p>An oscilloscope is useful for timing your code. Mozzi has fast code to flip digital pin 13 without interfering much with the audio timing. Put <code class="highlighter-rouge">#include mozzi_utils.h</code> in your sketch and <code class="highlighter-rouge">setPin13Out()</code> in <code class="highlighter-rouge">setup()</code>, then use <code class="highlighter-rouge">setPin13High()</code> and <code class="highlighter-rouge">setPin13Low()</code> around the code you want to time.</p>
   </li>
+</ul>
+
+<hr />
+
+<h2 id="cool-code">Cool code</h2>
+
+<ul>
+  <li>In <code class="highlighter-rouge">updateAudio()</code> you can store “submixes” in variables, to eventually make the return line easier to read and troubleshoot. (Thanks to Charles Peck for this tip).</li>
 </ul>
 
 <hr />
@@ -277,24 +267,16 @@ mozzi_utils.h</code> in your sketch and <code class="highlighter-rouge">setPin13
 
 <ul>
   <li>
-    <p>A computer line-in works well for listening, and some good tools to record or
-examine your sounds are <a href="https://www.audacityteam.org/download/">Audacity</a>,
+    <p>A computer line-in works well for listening, and some good tools to record or examine your sounds are <a href="https://www.audacityteam.org/download/">Audacity</a>,
 <a href="https://www.baudline.com/">Baudline</a> signal analyser, and
 <a href="https://www.faberacoustical.com/products/signalscope/">SignalScope</a>.</p>
   </li>
   <li>
-    <p>In Audacity, set the Project Rate to Mozzi’s audio rate of 16384 Hz before
-recording. This will make the PWM artifacts disappear and the waves will look
-like normal, non-PWM sound. You need to adjust the recording level by ear,
-because the sound distorts at a lower level than expected even though the levels
-in the window look OK.</p>
+    <p>In Audacity, set the Project Rate to Mozzi’s audio rate of 16384 Hz before recording. This will make the PWM artifacts disappear and the waves will look like normal, non-PWM sound. You need to adjust the recording level by ear, because the sound distorts at a lower level than expected even though the levels in the window look OK.</p>
   </li>
   <li>
     <p>If you’re stuck with a fixed recording rate and you need to see what’s
-happening in your synthesis, filtering makes a big difference. There’s a Pure
-Data patch in Mozzi/pd with 4 4000Hz filters in series which can be used with a
-utility like Jack or Soundflower to filter the audio before it gets to your
-sound program. This allows you to check what’s happening in real time.</p>
+happening in your synthesis, filtering makes a big difference. There’s a Pure Data patch in Mozzi/pd with 4 4000Hz filters in series which can be used with a utility like Jack or Soundflower to filter the audio before it gets to your sound program. This allows you to check what’s happening in real time.</p>
   </li>
 </ul>
 
@@ -302,8 +284,7 @@ sound program. This allows you to check what’s happening in real time.</p>
 
 <h2 id="keep-up-to-date">Keep up to date!</h2>
 <ul>
-  <li>Mozzi is actively developing, so make sure you’ve got the latest version,
-and the <a href="https://groups.google.com/forum/#!forum/mozzi-users/">users’ forum</a> is there to help.</li>
+  <li>Mozzi is actively developing, so make sure you’ve got the latest version, and the <a href="https://groups.google.com/forum/#!forum/mozzi-users/">users’ forum</a> is there to help.</li>
 </ul>
 
         
@@ -328,6 +309,7 @@ and the <a href="https://groups.google.com/forum/#!forum/mozzi-users/">users’ 
   
   
 </div>
+
     </div>
 
     
@@ -342,11 +324,9 @@ and the <a href="https://groups.google.com/forum/#!forum/mozzi-users/">users’ 
     
       <li><strong>Follow:</strong></li>
     
+
     
-    
-    
-    
-    
+
     <li><a href="/Mozzi/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
   </ul>
 </div>
@@ -358,7 +338,7 @@ and the <a href="https://groups.google.com/forum/#!forum/mozzi-users/">users’ 
 
     
   <script src="/Mozzi/assets/js/main.min.js"></script>
-  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
 
 
 

@@ -488,6 +488,9 @@ static void pwmAudioOutput() {
   pwmWrite(AUDIO_CHANNEL_1_PIN_HIGH, out >> AUDIO_BITS_PER_CHANNEL);
 #else
   pwmWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
+#if (STEREO_HACK == true)
+  pwmWrite(AUDIO_CHANNEL_2_PIN, (int)output_buffer2.read());
+#endif
 #endif
 }
 #endif
@@ -527,6 +530,8 @@ static void startAudioStandard() {
   pinMode(AUDIO_CHANNEL_1_PIN, PWM);
 #if (AUDIO_MODE == HIFI)
   pinMode(AUDIO_CHANNEL_1_PIN_HIGH, PWM);
+#elif (STEREO_HACK == true)
+  pinMode(AUDIO_CHANNEL_2_PIN, PWM);
 #endif
 
 #define MAX_CARRIER_FREQ (F_CPU / (1 << AUDIO_BITS_PER_CHANNEL))

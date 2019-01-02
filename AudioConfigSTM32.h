@@ -22,6 +22,9 @@
 // The more audio bits you use, the slower the carrier frequency of the PWM signal. 10 bits yields ~ 70kHz on a 72Mhz CPU (which appears to be a reasonable compromise)
 #define AUDIO_BITS 10
 #define AUDIO_BITS_PER_CHANNEL AUDIO_BITS
+#if (STEREO_HACK == true)
+#define AUDIO_CHANNEL_2_PIN PB9
+#endif
 #endif
 
 #define AUDIO_BIAS ((uint16_t) 1<<(AUDIO_BITS-1))

@@ -378,6 +378,7 @@ inline void espWriteAudioToBuffer() {
 static uint16_t update_control_timeout;
 static uint16_t update_control_counter;
 static void updateControlWithAutoADC();
+
 void audioHook() // 2us excluding updateAudio()
 {
 // setPin13High();

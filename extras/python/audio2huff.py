@@ -10,11 +10,11 @@
 # - added --name argument to give all constants specific names
 # - changed all constant names to upper case
 # - added include guards, Arduino and avr includes
-# 
+#
 # Dependencies:
 # Numerical Python (numpy): http://numpy.scipy.org/
 # scikits.audiolab: http://pypi.python.org/pypi/scikits.audiolab/
-# purehuff: http://grrrr.org/purehuff
+# purehuff: https://grrrr.org/data/dev/purehuff/
 # pylab / matplotlib (only for plotting): http://matplotlib.sourceforge.net/
 #
 # For help on options invoke with:
@@ -32,7 +32,7 @@ except ImportError:
 try:
     from scikits.audiolab import Sndfile
 except ImportError:
-    print >>sys.stderr, "Error: Scikits.audiolab not found"
+    print >>sys.stderr, "Error: scikits.audiolab not found"
     exit(-1)
 
 try:
@@ -40,7 +40,6 @@ try:
 except ImportError:
     print >>sys.stderr, "Error: purehuff module not found"
     exit(-1)
-    
 
 def grouper(n,seq):
     """group list elements"""
@@ -49,7 +48,7 @@ def grouper(n,seq):
         l = [v for _,v in izip(xrange(n),it)]
         if l:
             yield l
-        if len(l) < n: 
+        if len(l) < n:
             break
 
 def arrayformatter(seq,perline=40):
@@ -65,36 +64,36 @@ if __name__ == "__main__":
     parser.add_option("--name", dest="name",help="prefix for tables and constants in file")
     parser.add_option("--plothist", type="int", default=0, dest="plothist",help="plot histogram")
     (options, args) = parser.parse_args()
-    
+
     if not options.sndfile:
         print >>sys.stderr,"Error: --sndfile argument required"
         exit(-1)
-        
+
     sndf = Sndfile(options.sndfile,'r')
     sound = sndf.read_frames(sndf.nframes)
     fs = sndf.samplerate
     del sndf
-    
+
     # mix down multi-channel audio
-    if len(sound.shape) > 1: 
+    if len(sound.shape) > 1:
         sound = N.mean(sound,axis=1)
-    
+
     # convert to n bits (no dithering, except it has already been done with the same bit resolution for the soundfile)
     sound8 = N.clip((sound*(2**(options.bits-1))).astype(int),-2**(options.bits-1),2**(options.bits-1)-1)
     # the following mapping with int is necessary as numpy.int32 types are not digested well by the HuffmanTree class
     dsound8 = map(int,chain((sound8[0],),imap(lambda x: x[1]-x[0],izip(sound8[:-1],sound8[1:]))))
-    
+
     print >>sys.stderr,"min/max: %i/%i"%(N.min(sound8),N.max(sound8))
     print >>sys.stderr,"data bits: %i"%(len(sound8)*options.bits)
-    
+
     hist = purehuff.histogram(dsound8)
-    
+
     if options.plothist:
         try:
             import pylab as P
         except ImportError:
             print >>sys.stderr, "Plotting needs pylab"
-            
+
         from collections import defaultdict
         d = defaultdict(float)
         for n,v in hist:
@@ -105,10 +104,10 @@ if __name__ == "__main__":
         P.title("Histogram of sample differentials, file %s"%os.path.split(options.sndfile)[-1])
         P.plot(x,y,marker='x')
         P.show()
-    
+
     hufftree = purehuff.HuffTree(hist)
 
-    # get decoder instance    
+    # get decoder instance
     decoder = hufftree.decoder()
     # get encoder instance
     encoder = hufftree.encoder()
@@ -133,6 +132,6 @@ if __name__ == "__main__":
         print >>hdrf,"#define " + options.name + "_SAMPLERATE %i"%fs
         print >>hdrf,"#define " + options.name + "_SAMPLE_BITS %i"%options.bits
         print >>hdrf,'CONSTTABLE_STORAGE(int) ' + options.name + '_HUFFMAN[%i] = {\n%s\n};'%(len(decoder.huff),arrayformatter(decoder.huff))
-        print >>hdrf,'unsigned long const ' + options.name + '_SOUNDDATA_BITS = %iL;'%len(enc)    
+        print >>hdrf,'unsigned long const ' + options.name + '_SOUNDDATA_BITS = %iL;'%len(enc)
         print >>hdrf,'CONSTTABLE_STORAGE(unsigned char) ' + options.name + '_SOUNDDATA[] = {\n%s\n};'%arrayformatter(enc.data)
         print >>hdrf,"#endif /* " + options.name + "_H_ */"

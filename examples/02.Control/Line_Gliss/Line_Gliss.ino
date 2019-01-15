@@ -31,7 +31,7 @@
 #include <tables/triangle_warm8192_int8.h> // triangle table for oscillator
 #include <mozzi_midi.h>
 
-#define CONTROL_RATE 50 // Hz
+#define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <TRIANGLE_WARM8192_NUM_CELLS, AUDIO_RATE> aTriangle(TRIANGLE_WARM8192_DATA);

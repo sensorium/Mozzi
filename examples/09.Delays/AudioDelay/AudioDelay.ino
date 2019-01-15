@@ -23,7 +23,7 @@
 #include <AudioDelay.h>
 #include <mozzi_midi.h> // for mtof
 
-#define CONTROL_RATE 250 // Hz
+#define CONTROL_RATE 256 // Hz, powers of 2 are most reliable
 
 Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, AUDIO_RATE> aTriangle(TRIANGLE_ANALOGUE512_DATA);
 Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFreq(COS2048_DATA);

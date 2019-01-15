@@ -25,7 +25,7 @@
 #include <tables/sin8192_int8.h> // sine table for oscillator
 #include <EventDelay.h>
 
-#define CONTROL_RATE 50
+#define CONTROL_RATE 64
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <SIN8192_NUM_CELLS, AUDIO_RATE> aSin(SIN8192_DATA);

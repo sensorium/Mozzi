@@ -28,7 +28,7 @@
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
 
-#define CONTROL_RATE 50 // Hz
+#define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
 
 // audio oscils
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCarrier(COS2048_DATA);

@@ -25,7 +25,7 @@
 #include <EventDelay.h> // for scheduling events
 #include <Line.h>
 
-#define CONTROL_RATE 50
+#define CONTROL_RATE 64
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <SIN256_NUM_CELLS, AUDIO_RATE> aSin0(SIN256_DATA); // can hear significant aliasing noise

@@ -32,7 +32,7 @@
 #include <ControlDelay.h>
 
 #define INPUT_PIN 0 // analog control input
-#define CONTROL_RATE 50
+#define CONTROL_RATE 64
 
 unsigned int echo_cells_1 = 32;
 unsigned int echo_cells_2 = 60;

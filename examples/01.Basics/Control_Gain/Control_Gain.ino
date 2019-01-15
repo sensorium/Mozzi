@@ -29,7 +29,7 @@ byte gain = 255;
 
 
 void setup(){
-  startMozzi(); // start with default control rate of 50
+  startMozzi(); // start with default control rate of 64
   aSin.setFreq(3320); // set the frequency
 }
 

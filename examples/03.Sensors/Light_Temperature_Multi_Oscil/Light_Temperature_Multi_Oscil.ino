@@ -34,7 +34,7 @@
 #include <tables/cos8192_int8.h>
 #include <mozzi_midi.h>
 
-#define CONTROL_RATE 250
+#define CONTROL_RATE 256
 
 #define THERMISTOR_PIN 1
 #define LDR_PIN 2

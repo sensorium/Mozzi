@@ -8,14 +8,15 @@ get the latest version from https://sensorium.github.io/Mozzi/
 towards release v1.1.0
 - STM32(duino) and ESP8266 ports have been added by Thomas Friedrichsmeier.
 	Thomas has provided hardware specific notes on the Mozzi main web page.
-- Timer0 is no longer used for control interrupts.
-	CONTROL_RATE no longer has to be a power of 2.
-	This is another innovation by Thomas.
-- Other Minor changes to MozziGuts.cpp, .h,
+- CONTROL_RATE no longer has to be a power of 2,
+	and Mozzi no longer takes over Timer 0 for control interrupts.
+	Thanks to Thomas Friedrichsmeier for this innovation.
+- Other changes to MozziGuts.cpp, .h,
 	-	removed pauseMozzi() and unPauseMozzi().  Added stopMozzi().
 		Use startMozzi() from now on instead of unPauseMozzi().
 	- Removed backupMozziTimer functions, not required anymore.
 - Removed examples>02.Control>Pause, added Stop_Start.
+- Fixed errors in ADSR examples
 
 
 release v1.0.4

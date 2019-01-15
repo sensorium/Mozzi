@@ -26,7 +26,7 @@
 #include <tables/sin2048_int8.h> // sine table for oscillator
 #include <twi_nonblock.h>
 
-#define CONTROL_RATE 100 // Hz
+#define CONTROL_RATE 128 // Hz, powers of 2 are most reliable
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);

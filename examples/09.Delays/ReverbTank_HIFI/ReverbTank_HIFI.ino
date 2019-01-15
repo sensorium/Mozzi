@@ -30,7 +30,7 @@
 
 ReverbTank reverb;
 
-#define CONTROL_RATE 500 // quite fast, keeps modulation smooth
+#define CONTROL_RATE 640 // quite fast, keeps modulation smooth
 
 // Synth from PhaseMod_Envelope example
 Oscil <COS8192_NUM_CELLS, AUDIO_RATE> aCarrier(COS8192_DATA);

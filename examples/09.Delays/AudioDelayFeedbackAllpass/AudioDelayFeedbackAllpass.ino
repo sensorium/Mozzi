@@ -26,7 +26,7 @@
 #include <mozzi_rand.h>
 #include <tables/whitenoise8192_int8.h>
 
-#define CONTROL_RATE 100 // Hz
+#define CONTROL_RATE 128 // Hz, powers of 2 are most reliable
 
 Oscil <WHITENOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(WHITENOISE8192_DATA); // audio noise
 EventDelay kDelay; // for triggering envelope start

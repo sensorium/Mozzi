@@ -44,7 +44,7 @@ var NAVTREEINDEX =
 [
 "01_8_basics_2_vibrato_2_vibrato_8ino-example.html",
 "class_oscil.html#a184110cb1901d2742a6016b46cbea027",
-"group__fixmath.html#ga97de6e3641b7638093a53cd137c8568c"
+"group__fixmath.html#ga958d671aeefb66c2492b84bf299f8d13"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

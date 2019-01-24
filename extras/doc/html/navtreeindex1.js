@@ -84,10 +84,11 @@ var NAVTREEINDEX1 =
 "class_sample_huffman.html#a8587f641949024cd5aad7bfc1715adff":[1,0,30,0],
 "class_sample_huffman.html#a8ec7bbb21f5cf0e780611a7539e86695":[1,0,30,1],
 "class_smooth.html":[1,0,31],
-"class_smooth.html#a24eb02e4c4bfe9401f24ed0399b1e392":[1,0,31,2],
-"class_smooth.html#aac44bbf7a9bc6b9bae80eecc1be6e188":[1,0,31,3],
-"class_smooth.html#ab7c809b6b5217771832a3e829695f8d5":[1,0,31,1],
+"class_smooth.html#a24eb02e4c4bfe9401f24ed0399b1e392":[1,0,31,3],
+"class_smooth.html#aac44bbf7a9bc6b9bae80eecc1be6e188":[1,0,31,4],
+"class_smooth.html#ab7c809b6b5217771832a3e829695f8d5":[1,0,31,2],
 "class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26":[1,0,31,0],
+"class_smooth.html#ae57139ceccee7527013ec2297dbc79ad":[1,0,31,1],
 "class_stack.html":[1,0,32],
 "class_stack.html#ab034b819e2382f80d952cf8527dc6e6c":[1,0,32,0],
 "class_stack.html#af67739d9b82966da46f7496f4c1fc801":[1,0,32,2],
@@ -128,8 +129,8 @@ var NAVTREEINDEX1 =
 "functions_c.html":[1,2,0,1],
 "functions_d.html":[1,2,0,2],
 "functions_e.html":[1,2,0,3],
-"functions_func.html":[1,2,1,0],
 "functions_func.html":[1,2,1],
+"functions_func.html":[1,2,1,0],
 "functions_func_c.html":[1,2,1,1],
 "functions_func_d.html":[1,2,1,2],
 "functions_func_e.html":[1,2,1,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "group__fixmath.html#ga8f4b2d87d5b697b3625c347618fa64c4":[0,2,19],
 "group__fixmath.html#ga90a5d59d5a529f4caaf408730230a156":[0,2,104],
 "group__fixmath.html#ga940a116ff2bfbd1b013b41b1be73f70f":[0,2,30],
-"group__fixmath.html#ga94dd6fe8594b171881ade98431dfda28":[0,2,91],
-"group__fixmath.html#ga958d671aeefb66c2492b84bf299f8d13":[0,2,99]
+"group__fixmath.html#ga94dd6fe8594b171881ade98431dfda28":[0,2,91]
 };

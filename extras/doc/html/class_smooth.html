@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version July 2018</span>
+   &#160;<span id="projectnumber">version January 2019</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -117,6 +117,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac6626aae94eb7a22024e2054c1bbbb26"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26">Smooth</a> (float smoothness)</td></tr>
 <tr class="memdesc:ac6626aae94eb7a22024e2054c1bbbb26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#ac6626aae94eb7a22024e2054c1bbbb26">More...</a><br /></td></tr>
 <tr class="separator:ac6626aae94eb7a22024e2054c1bbbb26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae57139ceccee7527013ec2297dbc79ad"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smooth.html#ae57139ceccee7527013ec2297dbc79ad">Smooth</a> ()</td></tr>
+<tr class="memdesc:ae57139ceccee7527013ec2297dbc79ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#ae57139ceccee7527013ec2297dbc79ad">More...</a><br /></td></tr>
+<tr class="separator:ae57139ceccee7527013ec2297dbc79ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7c809b6b5217771832a3e829695f8d5"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smooth.html#ab7c809b6b5217771832a3e829695f8d5">next</a> (T in)</td></tr>
 <tr class="memdesc:ab7c809b6b5217771832a3e829695f8d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filters the input and returns the filtered value.  <a href="#ab7c809b6b5217771832a3e829695f8d5">More...</a><br /></td></tr>
 <tr class="separator:ab7c809b6b5217771832a3e829695f8d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,7 +146,7 @@ class Smooth&lt; T &gt;</h3>
 <p class="definition">Definition at line <a class="el" href="_smooth_8h_source.html#l00035">35</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac6626aae94eb7a22024e2054c1bbbb26"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac6626aae94eb7a22024e2054c1bbbb26">&#9670;&nbsp;</a></span>Smooth()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6626aae94eb7a22024e2054c1bbbb26">&#9670;&nbsp;</a></span>Smooth() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -177,6 +180,38 @@ template&lt;class T &gt; </div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="_smooth_8h_source.html#l00047">47</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
+
+</div>
+</div>
+<a id="ae57139ceccee7527013ec2297dbc79ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae57139ceccee7527013ec2297dbc79ad">&#9670;&nbsp;</a></span>Smooth() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_smooth.html">Smooth</a>&lt; T &gt;::<a class="el" href="class_smooth.html">Smooth</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<p>This constructor which doesn't take a smoothness parameter is useful when you incorporate <a class="el" href="class_smooth.html" title="A simple infinite impulse response low pass filter for smoothing control or audio signals...">Smooth</a> into another class definition. You need to call <a class="el" href="class_smooth.html#aac44bbf7a9bc6b9bae80eecc1be6e188" title="Sets how much smoothing the filter will apply to its input. ">setSmoothness(float)</a> for your object before using <a class="el" href="class_smooth.html" title="A simple infinite impulse response low pass filter for smoothing control or audio signals...">Smooth</a>. </p><dl class="section note"><dt>Note</dt><dd>there's probably a better way to do this... </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_smooth_8h_source.html#l00057">57</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
 
 </div>
 </div>
@@ -216,7 +251,7 @@ template&lt;class T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the filtered signal. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_smooth_8h_source.html#l00057">57</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_smooth_8h_source.html#l00066">66</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
 
 </div>
 </div>
@@ -255,7 +290,7 @@ template&lt;class T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the filtered signal. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_smooth_8h_source.html#l00070">70</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_smooth_8h_source.html#l00079">79</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
 
 </div>
 </div>
@@ -293,7 +328,7 @@ template&lt;class T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_smooth_8h_source.html#l00081">81</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_smooth_8h_source.html#l00090">90</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
 
 </div>
 </div>
@@ -303,7 +338,7 @@ template&lt;class T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_smooth.html">Smooth</a></li>
-    <li class="footer">Generated on Mon Jul 23 2018 23:46:13 for Mozzi by
+    <li class="footer">Generated on Thu Jan 24 2019 22:38:54 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

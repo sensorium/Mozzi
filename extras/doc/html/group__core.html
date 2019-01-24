@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version July 2018</span>
+   &#160;<span id="projectnumber">version January 2019</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('group__core.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ga9c4a39187db1d0a1ad0fa6981920f383"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga9c4a39187db1d0a1ad0fa6981920f383">AUDIO_MODE</a>&#160;&#160;&#160;STANDARD_PLUS</td></tr>
+<tr class="memitem:ga9c4a39187db1d0a1ad0fa6981920f383"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga9c4a39187db1d0a1ad0fa6981920f383">AUDIO_MODE</a>&#160;&#160;&#160;<a class="el" href="group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1">STANDARD</a></td></tr>
 <tr class="memdesc:ga9c4a39187db1d0a1ad0fa6981920f383"><td class="mdescLeft">&#160;</td><td class="mdescRight">AUDIO_MODE holds the audio mode setting.  <a href="#ga9c4a39187db1d0a1ad0fa6981920f383">More...</a><br /></td></tr>
 <tr class="separator:ga9c4a39187db1d0a1ad0fa6981920f383"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5b972bafb3267e820993812beca1b298"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga5b972bafb3267e820993812beca1b298">AUDIO_RATE</a>&#160;&#160;&#160;16384</td></tr>
@@ -199,7 +199,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>audio_out_2</b></td></
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define AUDIO_MODE&#160;&#160;&#160;STANDARD_PLUS</td>
+          <td class="memname">#define AUDIO_MODE&#160;&#160;&#160;<a class="el" href="group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1">STANDARD</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -210,7 +210,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>audio_out_2</b></td></
 <p>HIFI audio mode enables much higher quality output by combining signals from pins 9 and 10. For HIFI mode, edit <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> to contain #define AUDIO_MODE HIFI, and comment out #define AUDIO_MODE STANDARD and #define AUDIO_MODE STANDARD_PLUS.</p>
 <dl class="section note"><dt>Note</dt><dd>Teensy 3.* plays 12 bit audio in STANDARD or STANDARD_PLUS modes, and has no HIFI mode. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__config_8h_source.html#l00027">27</a> of file <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__config_8h_source.html#l00026">26</a> of file <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a>.</p>
 
 </div>
 </div>
@@ -319,7 +319,7 @@ x...........B5(25)...B6(26)...........Teensy2++ <br />
 .................13.........12...............Sanguino <br />
  HIFI is not available/not required on Teensy 3.* or ARM. </p>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00148">148</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00155">155</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -418,7 +418,7 @@ x...........B5(25)...B6(26)...........Teensy2++ <br />
 <p>This is required in Arduino's loop(). </p>
 <p>If there is room in Mozzi's output buffer, <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop(). ">audioHook()</a> calls updateAudio() once and puts the result into the output buffer. Also, if #define USE_AUDIO_INPUT true is in <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a>, <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop(). ">audioHook()</a> takes care of moving audio input from the input buffer so it can be accessed with <a class="el" href="group__analog.html#ga3f15eb8d6694020d170ebcbedb645de7" title="This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the Mozzi/mozzi...">getAudioInput()</a> in your updateAudio() routine. If other functions are called in loop() along with <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop(). ">audioHook()</a>, see if they can be called less often by moving them into <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>, to save processing power. Otherwise it may be most efficient to calculate a block of samples at a time by putting <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop(). ">audioHook()</a> in a loop of its own, rather than calculating only 1 sample for each time your other functions are called. </p>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00392">392</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00382">382</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -440,7 +440,7 @@ x...........B5(25)...B6(26)...........Teensy2++ <br />
 <p>An alternative for Arduino time functions like micros() and millis(). </p>
 <p>This is slightly faster than micros(), and also it is synchronized with the currently processed audio sample (which, due to the audio output buffer, could diverge up to 256/AUDIO_RATE seconds from the current time). <a class="el" href="group__core.html#ga55fa9d48f327b646c2f71cef7da7b8f0" title="An alternative for Arduino time functions like micros() and millis(). ">audioTicks()</a> is updated each time an audio sample is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when AUDIO_RATE is 16384 Hz). </p><dl class="section return"><dt>Returns</dt><dd>the number of audio ticks since the program began. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00930">930</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00834">834</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -528,7 +528,7 @@ template&lt;typename T &gt; </div>
 <p>An alternative for Arduino time functions like micros() and millis(). </p>
 <p>This is slightly faster than micros(), and also it is synchronized with the currently processed audio sample (which, due to the audio output buffer, could diverge up to 256/AUDIO_RATE seconds from the current time). <a class="el" href="group__core.html#ga55fa9d48f327b646c2f71cef7da7b8f0" title="An alternative for Arduino time functions like micros() and millis(). ">audioTicks()</a> is updated each time an audio sample is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when AUDIO_RATE is 16384 Hz). </p><dl class="section return"><dt>Returns</dt><dd>the approximate number of microseconds since the program began. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00944">944</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00847">847</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -561,7 +561,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>startMozzi calls setupMozziADC(), which calls <a class="el" href="group__analog.html#gae909f8857d71ed79f277ee024de52574" title="  This is automatically called in startMozzi. ">setupFastAnalogRead()</a> and <a class="el" href="group__analog.html#ga5042e7c576dd0307be38eb70efdb69fe" title="Prepare all analog input channels by turning off their digital input buffers. ">adcDisconnectAllDigitalIns()</a>, which disables digital inputs on all analog input pins. All in <a class="el" href="mozzi__analog_8h_source.html">mozzi_analog.h</a> and easy to change if you need to (hack). They are all called automatically and hidden away because it keeps things simple for a STANDARD_PLUS set up, but if it turns out to be confusing, they might need to become visible again. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00819">819</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00771">771</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -585,7 +585,7 @@ template&lt;typename T &gt; </div>
 <p>A potentially better option for resolving timer conflicts involves using non-blocking methods, such as demonstrated by the twowire_nonblock code in the forked version of Mozzi on github, so sound production can continue while reading sensors.</p>
 <p>As it is, stopMozzi restores all the Timers used by Mozzi to their previous settings. Another scenario which could be easily hacked in <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a> could involve individually saving and restoring particular Timer registers depending on which one(s) are required for other tasks. </p>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00833">833</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00786">786</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -632,7 +632,7 @@ template&lt;typename T &gt; </div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Jul 23 2018 23:46:13 for Mozzi by
+    <li class="footer">Generated on Thu Jan 24 2019 22:38:54 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

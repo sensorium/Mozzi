@@ -1,5 +1,6 @@
 var NAVTREEINDEX2 =
 {
+"group__fixmath.html#ga958d671aeefb66c2492b84bf299f8d13":[0,2,99],
 "group__fixmath.html#ga97de6e3641b7638093a53cd137c8568c":[0,2,23],
 "group__fixmath.html#ga990f68566b105bc35ed718ad5ef93d72":[0,2,70],
 "group__fixmath.html#ga9a64ce80fa7c320187d2cf2104a96daa":[0,2,21],
@@ -102,7 +103,7 @@ var NAVTREEINDEX2 =
 "sin__multi__levels__int8_8py_source.html":[2,0,66],
 "sounddata_8h_source.html":[2,0,68],
 "table__generator__template_8py_source.html":[2,0,71],
-"twi__nonblock_8cpp_source.html":[2,0,72],
-"twi__nonblock_8h_source.html":[2,0,73],
+"triangle512__uint8_8h_source.html":[2,0,73],
+"triangle_8py_source.html":[2,0,72],
 "umpah__huff_8h_source.html":[2,0,74]
 };

@@ -33,7 +33,7 @@ Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aGain(SIN2048_DATA); // to fade audio sign
 EventDelay kChangeNoteDelay;
 
 // audio frequency as Q16n16 fractional number
-Q16n16 freq1 = Q8n0_to_Q16n16(300);
+Q16n16 freq1 = Q8n0_to_Q16n16(440);
 
 
 void setup(){

@@ -17,6 +17,7 @@ towards release v1.1.0
 	- Removed backupMozziTimer functions, not required anymore.
 - Removed examples>02.Control>Pause, added Stop_Start.
 - Fixed errors in ADSR examples
+- Several more not very important changes.
 
 
 release v1.0.4

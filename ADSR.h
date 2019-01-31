@@ -178,7 +178,7 @@ public:
 	*/
 	inline
 	void noteOn(bool reset=false){
-		if (reset) transition.set(0);
+		if (reset || !adsr_playing) transition.set(0);
 		setPhase(&attack);
 		adsr_playing = true;
 	}

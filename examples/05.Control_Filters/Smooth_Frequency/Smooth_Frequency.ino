@@ -24,7 +24,7 @@
 #include <mozzi_midi.h>
 
 // this is a high value to avoid zipper noise
-#define CONTROL_RATE 1000
+#define CONTROL_RATE 1280
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);

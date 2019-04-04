@@ -19,7 +19,7 @@
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
 
-#define CONTROL_RATE 100 // faster than usual to help smooth CONTROL_RATE adsr interpolation (next())
+#define CONTROL_RATE 128 // faster than usual to help smooth CONTROL_RATE adsr interpolation (next())
 
 Oscil <8192, AUDIO_RATE> aOscil(SIN8192_DATA);;
 

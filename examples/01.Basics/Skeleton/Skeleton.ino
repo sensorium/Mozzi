@@ -1,5 +1,5 @@
 #include <MozziGuts.h>        // at the top of your sketch
-#define CONTROL_RATE 50
+#define CONTROL_RATE 64
 
 void setup() {
   startMozzi(CONTROL_RATE);

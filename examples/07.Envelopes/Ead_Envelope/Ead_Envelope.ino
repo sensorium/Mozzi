@@ -20,7 +20,7 @@
 #include <EventDelay.h>
 #include <mozzi_rand.h>
 
-#define CONTROL_RATE 250 // Hz
+#define CONTROL_RATE 256 // Hz, powers of 2 are most reliable
 
 Oscil<BROWNNOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(BROWNNOISE8192_DATA);
 EventDelay kDelay; // for triggering envelope start

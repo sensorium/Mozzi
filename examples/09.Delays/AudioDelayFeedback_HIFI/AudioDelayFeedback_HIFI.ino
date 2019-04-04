@@ -54,7 +54,7 @@
 #include <AudioDelayFeedback.h>
 #include <mozzi_midi.h> // for mtof
 
-#define CONTROL_RATE 100 // Hz
+#define CONTROL_RATE 128 // Hz, powers of 2 are most reliable
 
 Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, AUDIO_RATE> aTriangle(TRIANGLE_ANALOGUE512_DATA); // audio oscillator
 Oscil<TRIANGLE512_NUM_CELLS, CONTROL_RATE> kDelSamps(TRIANGLE512_DATA); // for modulating delay time, measured in audio samples

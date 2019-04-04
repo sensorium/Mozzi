@@ -33,13 +33,17 @@
 /** @ingroup core
 Control rate setting.
 Mozzi's CONTROL_RATE sets how many times per second updateControl() is called.
-CONTROL_RATE has a default of 50 Hz, but it can be changed at the top of your sketch,
-(before the \#includes), for example: \#define CONTROL_RATE 250.
-Try to keep it low, for efficiency, though higher rates up to about 1000
+CONTROL_RATE has a default of 64 Hz, but it can be changed at the top of your sketch,
+(before the \#includes), for example: \#define CONTROL_RATE 256.
+It is useful to have CONTROL_RATE set at a power of 2 (such as 64,128,256 etc),
+to have exact timing of audio and control operations.
+Non-power-of-2 CONTROL_RATE can cause glitches due to audio and control
+events not lining up precisely.  If this happens a power of two CONTROL_RATE might solve it.
+Try to keep CONTROL_RATE low, for efficiency, though higher rates up to about 1000
 can sometimes give smoother results, avoiding the need to interpolate
 sensitive variables at audio rate in updateAudio().
 */
-#define CONTROL_RATE 50
+#define CONTROL_RATE 64
 #endif
 
 

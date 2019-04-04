@@ -34,7 +34,7 @@
 MIDI_CREATE_DEFAULT_INSTANCE();
 
 // use #define for CONTROL_RATE, not a constant
-#define CONTROL_RATE 128 // Hz
+#define CONTROL_RATE 128 // Hz, powers of 2 are most reliable
 
 // audio sinewave oscillator
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);

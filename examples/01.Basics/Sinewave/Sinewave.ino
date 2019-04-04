@@ -24,7 +24,7 @@
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
 // use #define for CONTROL_RATE, not a constant
-#define CONTROL_RATE 50 // Hz
+#define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
 
 
 void setup(){

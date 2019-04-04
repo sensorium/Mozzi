@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version July 2018</span>
+   &#160;<span id="projectnumber">version January 2019</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -141,7 +141,7 @@ class StateVariable&lt; FILTER_TYPE &gt;</h3>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>To save processing time, this version of the filter does not saturate internally, so any resonant peaks are unceremoniously truncated. It may be worth adding code to constrain the internal variables to enable resonant saturating effects. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_state_variable_8h_source.html#l00064">64</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_state_variable_8h_source.html#l00065">65</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a14cb100c22e4a33025665ef3620ca2b8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a14cb100c22e4a33025665ef3620ca2b8">&#9670;&nbsp;</a></span>next()</h2>
@@ -179,7 +179,7 @@ template&lt;int8_t FILTER_TYPE&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>the signal output. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Timing: 16 - 20 us </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_state_variable_8h_source.html#l00118">118</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_state_variable_8h_source.html#l00112">112</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
 
 </div>
 </div>
@@ -220,7 +220,7 @@ template&lt;int8_t FILTER_TYPE&gt; </div>
 <dd>
 The frequency calculation is VERY "approximate". This really needs to be fixed. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_state_variable_8h_source.html#l00101">101</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_state_variable_8h_source.html#l00094">94</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
 
 </div>
 </div>
@@ -253,14 +253,13 @@ template&lt;int8_t FILTER_TYPE&gt; </div>
 <p>Set how resonant the filter will be. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">resonance</td><td>a uint8_t value between 1 and 255. <br />
-The lower this value is, the more resonant the filter. At very low values, the filter can output loud peaks which can exceed Mozzi's output range, so you may need to attenuate the output in your sketch. </td></tr>
+    <tr><td class="paramname">resonance</td><td>a byte value between 1 and 255. The lower this value is, the more resonant the filter. At very low values, the filter can output loud peaks which can exceed Mozzi's output range, so you may need to attenuate the output in your sketch. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>Timing &lt; 500 ns </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_state_variable_8h_source.html#l00085">85</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_state_variable_8h_source.html#l00079">79</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
 
 </div>
 </div>
@@ -270,7 +269,7 @@ The lower this value is, the more resonant the filter. At very low values, the f
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_state_variable.html">StateVariable</a></li>
-    <li class="footer">Generated on Mon Jul 23 2018 23:46:13 for Mozzi by
+    <li class="footer">Generated on Thu Jan 24 2019 22:38:54 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

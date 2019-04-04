@@ -65,7 +65,7 @@ var searchData=
   ['settime',['setTime',['../class_portamento.html#af19c3b3c189e111079f54211ff5a4ebe',1,'Portamento']]],
   ['settimes',['setTimes',['../class_a_d_s_r.html#a68df2fe03f1582d79e7b55e3407d474b',1,'ADSR::setTimes()'],['../class_multi_line.html#a0ad417817ec47553a1e8ebe1e1dc5f46',1,'MultiLine::setTimes()']]],
   ['setupfastanalogread',['setupFastAnalogRead',['../group__analog.html#gae909f8857d71ed79f277ee024de52574',1,'setupFastAnalogRead(int8_t speed):&#160;mozzi_analog.cpp'],['../group__analog.html#gae909f8857d71ed79f277ee024de52574',1,'setupFastAnalogRead(int8_t speed=FAST_ADC):&#160;mozzi_analog.cpp']]],
-  ['smooth',['Smooth',['../class_smooth.html',1,'Smooth&lt; T &gt;'],['../class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26',1,'Smooth::Smooth()']]],
+  ['smooth',['Smooth',['../class_smooth.html',1,'Smooth&lt; T &gt;'],['../class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26',1,'Smooth::Smooth(float smoothness)'],['../class_smooth.html#ae57139ceccee7527013ec2297dbc79ad',1,'Smooth::Smooth()']]],
   ['soundtables',['Soundtables',['../group__soundtables.html',1,'']]],
   ['stack',['Stack',['../class_stack.html',1,'Stack&lt; T, NUM_ITEMS &gt;'],['../class_stack.html#ab034b819e2382f80d952cf8527dc6e6c',1,'Stack::Stack()']]],
   ['standard',['STANDARD',['../group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1',1,'MozziGuts.h']]],

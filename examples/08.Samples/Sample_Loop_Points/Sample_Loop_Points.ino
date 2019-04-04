@@ -26,7 +26,7 @@
 #include <EventDelay.h>
 #include <mozzi_rand.h>
 
-#define CONTROL_RATE 100
+#define CONTROL_RATE 128
 
 // use: Sample <table_size, update_rate> SampleName (wavetable)
 Sample <ABOMB_NUM_CELLS, AUDIO_RATE> aSample(ABOMB_DATA);

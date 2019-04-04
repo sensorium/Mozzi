@@ -15,11 +15,11 @@
 #include "Arduino.h"
 #include "mozzi_fixmath.h"
 
-/** A simple infinite impulse response low pass filter for smoothing control or audio signals. 
-This algorithm comes from http://en.wikipedia.org/wiki/Low-pass_filter: 
-y[i] := y[i-1] + α * (x[i] - y[i-1]), 
-translated as 
-out = last_out + a * (in - last_out). 
+/** A simple infinite impulse response low pass filter for smoothing control or audio signals.
+This algorithm comes from http://en.wikipedia.org/wiki/Low-pass_filter:
+y[i] := y[i-1] + α * (x[i] - y[i-1]),
+translated as
+out = last_out + a * (in - last_out).
 It's not calibrated to any real-world update rate, so if you use it at
 CONTROL_RATE and you change CONTROL_RATE, you'll need to adjust the smoothness
 value to suit.
@@ -49,6 +49,15 @@ public:
 		setSmoothness(smoothness);
 	}
 
+	/** Constructor.
+	This constructor which doesn't take a smoothness parameter is useful when you incorporate Smooth into another class definition.
+	You need to call setSmoothness(float) for your object before using Smooth.
+	@note there's probably a better way to do this...
+	 */
+	Smooth()
+	{}
+
+
 	/** Filters the input and returns the filtered value.  You can also use the operator() function, eg. something like mySmoother(input-value).
 	@param in the signal to be smoothed.
 	@return the filtered signal.
@@ -61,7 +70,7 @@ public:
 		return (T)(out>>8);
 	}
 
-	
+
 	/** Filters the input and returns the filtered value.  Same as next(input-value).
 	@param in the signal to be smoothed.
 	@return the filtered signal.
@@ -70,8 +79,8 @@ public:
 	T operator()(T n) {
 		return next(n);
 	}
-	
-	
+
+
 	/** Sets how much smoothing the filter will apply to its input.
 	@param smoothness sets how much smoothing the filter will apply to
 	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
@@ -119,7 +128,7 @@ public:
 		return (uint8_t)(out>>8);
 	}
 
-	
+
 	/** Filters the input and returns the filtered value.  Same as next(input-value).
 	@param in the signal to be smoothed.
 	@return the filtered signal.
@@ -128,8 +137,8 @@ public:
 	uint8_t  operator()(uint8_t  n) {
 		return next(n);
 	}
-	
-	
+
+
 	/** Sets how much smoothing the filter will apply to its input.
 	@param smoothness sets how much smoothing the filter will apply to
 	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
@@ -163,7 +172,7 @@ public:
 		setSmoothness(smoothness);
 	}
 
-	
+
 	/** Filters the input and returns the filtered value.  You can also use the operator() function, eg. something like mySmoother(input-value).
 	@param in the signal to be smoothed.
 	@return the filtered signal.
@@ -176,7 +185,7 @@ public:
 		return (int8_t)(out>>8);
 	}
 
-	
+
 	/** Filters the input and returns the filtered value.  Same as next(input-value).
 	@param in the signal to be smoothed.
 	@return the filtered signal.
@@ -185,8 +194,8 @@ public:
 	int8_t operator()(int8_t n) {
 		return next(n);
 	}
-	
-	
+
+
 	/** Sets how much smoothing the filter will apply to its input.
 	@param smoothness sets how much smoothing the filter will apply to
 	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
@@ -232,7 +241,7 @@ public:
 		return out;
 	}
 
-	
+
 	/** Filters the input and returns the filtered value.  Same as next(input-value).
 	@param in the signal to be smoothed.
 	@return the filtered signal.
@@ -241,8 +250,8 @@ public:
 	float operator()(float n) {
 		return next(n);
 	}
-	
-	
+
+
 	/** Sets how much smoothing the filter will apply to its input.
 	@param smoothness sets how much smoothing the filter will apply to
 	its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is

@@ -262,12 +262,18 @@ on which one(s) are required for other tasks. */
 void stopMozzi();
 
 
-// TB2017 deleted function, use startMozzi() instead
-// /** @ingroup core
-// Restores Mozzi audio and control interrupts, if they have been temporarily
-// disabled with pauseMozzi().
-// */
-// void unPauseMozzi();
+/** @ingroup core
+Obsolete function, use stopMozzi() instead.
+*/
+void pauseMozzi();
+
+//TB2017-19
+/** @ingroup core
+Obsolete function, use startMozzi() instead.
+Restores Mozzi audio and control interrupts, if they have been temporarily
+disabled with pauseMozzi().
+*/
+void unPauseMozzi();
 
 
 /** @ingroup core

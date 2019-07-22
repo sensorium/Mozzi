@@ -1,4 +1,5 @@
 <h2 id='01.Basics'> 01.Basics </h2>
+<a id='Control_Gain top'></a>
 Control_Gain
 
 <audio controls>
@@ -14,6 +15,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Sinewave top'></a>
 Sinewave
 
 <audio controls>
@@ -29,6 +31,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Sinewave_HIFI top'></a>
 Sinewave_HIFI
 
 <audio controls>
@@ -44,6 +47,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Skeleton top'></a>
 Skeleton
 ...(no recording of this one)
 
@@ -55,6 +59,7 @@ Skeleton
 {% endhighlight %}
 </div>
 ***
+<a id='Table_Resolution top'></a>
 Table_Resolution
 
 <audio controls>
@@ -70,6 +75,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Vibrato top'></a>
 Vibrato
 
 <audio controls>
@@ -86,6 +92,7 @@ Your browser does not support the audio element.</audio>
 </div>
 ***
 <h2 id='02.Control'> 02.Control </h2>
+<a id='Control_Echo_Theremin top'></a>
 Control_Echo_Theremin
 
 <audio controls>
@@ -101,6 +108,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Control_Oscil_Wash top'></a>
 Control_Oscil_Wash
 
 <audio controls>
@@ -116,6 +124,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Control_Tremelo top'></a>
 Control_Tremelo
 
 <audio controls>
@@ -131,6 +140,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='EventDelay top'></a>
 EventDelay
 
 <audio controls>
@@ -146,6 +156,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Line_Gliss top'></a>
 Line_Gliss
 
 <audio controls>
@@ -161,6 +172,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Line_Gliss_Double_32k_HIFI top'></a>
 Line_Gliss_Double_32k_HIFI
 
 <audio controls>
@@ -176,6 +188,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Metronome_SampleHuffman top'></a>
 Metronome_SampleHuffman
 
 <audio controls>
@@ -191,6 +204,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Pause top'></a>
 Pause
 
 <audio controls>
@@ -206,7 +220,20 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Stop_Start top'></a>
+Stop_Start
+...(no recording of this one)
+
+<button type='button' id='Stop_Startexpand' onclick='javascript:toggleDisplay(Stop_Start, Stop_Startexpand, Stop_Startcollapse)'>show sketch</button>
+<button id='Stop_Startcollapse' style='display:none' onclick='javascript:toggleDisplay(Stop_Start, Stop_Startexpand, Stop_Startcollapse)'>hide sketch</button>
+<div id='Stop_Start' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/02.Control/Stop_Start/Stop_Start.ino %}
+{% endhighlight %}
+</div>
+***
 <h2 id='03.Sensors'> 03.Sensors </h2>
+<a id='Knob_LDR_x2_WavePacket top'></a>
 Knob_LDR_x2_WavePacket
 
 <audio controls>
@@ -222,6 +249,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Knob_LightLevel_FMsynth top'></a>
 Knob_LightLevel_FMsynth
 
 <audio controls>
@@ -237,6 +265,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Knob_LightLevel_x2_FMsynth top'></a>
 Knob_LightLevel_x2_FMsynth
 
 <audio controls>
@@ -252,6 +281,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Light_Temperature_Detuned top'></a>
 Light_Temperature_Detuned
 
 <audio controls>
@@ -267,6 +297,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Light_Temperature_Multi_Oscil top'></a>
 Light_Temperature_Multi_Oscil
 
 <audio controls>
@@ -282,6 +313,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Piezo_Frequency top'></a>
 Piezo_Frequency
 
 <audio controls>
@@ -297,6 +329,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Piezo_SampleScrubber top'></a>
 Piezo_SampleScrubber
 
 <audio controls>
@@ -312,6 +345,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Piezo_SampleTrigger top'></a>
 Piezo_SampleTrigger
 
 <audio controls>
@@ -327,6 +361,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Piezo_Switch_Pitch top'></a>
 Piezo_Switch_Pitch
 
 <audio controls>
@@ -342,6 +377,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='RCpoll top'></a>
 RCpoll
 
 <audio controls>
@@ -357,6 +393,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Sinewave_Pinchange_Interrupt top'></a>
 Sinewave_Pinchange_Interrupt
 
 <audio controls>
@@ -372,6 +409,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Volume_Knob top'></a>
 Volume_Knob
 
 <audio controls>
@@ -387,6 +425,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Volume_Knob_LightLevel_Frequency top'></a>
 Volume_Knob_LightLevel_Frequency
 
 <audio controls>
@@ -403,6 +442,7 @@ Your browser does not support the audio element.</audio>
 </div>
 ***
 <h2 id='04.Audio_Input'> 04.Audio_Input </h2>
+<a id='Audio_Input top'></a>
 Audio_Input
 ...(no recording of this one)
 
@@ -414,6 +454,7 @@ Audio_Input
 {% endhighlight %}
 </div>
 ***
+<a id='Audio_Input_with_Knob_Filter top'></a>
 Audio_Input_with_Knob_Filter
 
 <audio controls>
@@ -429,6 +470,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Audio_and_Control_Input top'></a>
 Audio_and_Control_Input
 ...(no recording of this one)
 
@@ -441,6 +483,7 @@ Audio_and_Control_Input
 </div>
 ***
 <h2 id='05.Control_Filters'> 05.Control_Filters </h2>
+<a id='DCfilter top'></a>
 DCfilter
 ...(no recording of this one)
 
@@ -452,6 +495,7 @@ DCfilter
 {% endhighlight %}
 </div>
 ***
+<a id='Line_vs_Smooth top'></a>
 Line_vs_Smooth
 
 <audio controls>
@@ -467,6 +511,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='MIDI_portamento top'></a>
 MIDI_portamento
 
 <audio controls>
@@ -482,6 +527,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='RollingAverage top'></a>
 RollingAverage
 
 <audio controls>
@@ -497,6 +543,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Smooth top'></a>
 Smooth
 
 <audio controls>
@@ -512,6 +559,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Smooth_Frequency top'></a>
 Smooth_Frequency
 
 <audio controls>
@@ -527,6 +575,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Thermistor_OverSample top'></a>
 Thermistor_OverSample
 
 <audio controls>
@@ -543,6 +592,7 @@ Your browser does not support the audio element.</audio>
 </div>
 ***
 <h2 id='06.Synthesis'> 06.Synthesis </h2>
+<a id='AMsynth top'></a>
 AMsynth
 
 <audio controls>
@@ -558,6 +608,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='AMsynth_HIFI top'></a>
 AMsynth_HIFI
 
 <audio controls>
@@ -573,6 +624,19 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Brown_Noise_Realtime top'></a>
+Brown_Noise_Realtime
+...(no recording of this one)
+
+<button type='button' id='Brown_Noise_Realtimeexpand' onclick='javascript:toggleDisplay(Brown_Noise_Realtime, Brown_Noise_Realtimeexpand, Brown_Noise_Realtimecollapse)'>show sketch</button>
+<button id='Brown_Noise_Realtimecollapse' style='display:none' onclick='javascript:toggleDisplay(Brown_Noise_Realtime, Brown_Noise_Realtimeexpand, Brown_Noise_Realtimecollapse)'>hide sketch</button>
+<div id='Brown_Noise_Realtime' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/06.Synthesis/Brown_Noise_Realtime/Brown_Noise_Realtime.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='Detuned_Beats_Wash top'></a>
 Detuned_Beats_Wash
 
 <audio controls>
@@ -588,6 +652,19 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Difference_Tone top'></a>
+Difference_Tone
+...(no recording of this one)
+
+<button type='button' id='Difference_Toneexpand' onclick='javascript:toggleDisplay(Difference_Tone, Difference_Toneexpand, Difference_Tonecollapse)'>show sketch</button>
+<button id='Difference_Tonecollapse' style='display:none' onclick='javascript:toggleDisplay(Difference_Tone, Difference_Toneexpand, Difference_Tonecollapse)'>hide sketch</button>
+<div id='Difference_Tone' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/06.Synthesis/Difference_Tone/Difference_Tone.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='FMsynth top'></a>
 FMsynth
 
 <audio controls>
@@ -603,6 +680,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='FMsynth_32k_HIFI top'></a>
 FMsynth_32k_HIFI
 
 <audio controls>
@@ -618,6 +696,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='PDresonant top'></a>
 PDresonant
 
 <audio controls>
@@ -633,6 +712,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='PWM_Phasing top'></a>
 PWM_Phasing
 
 <audio controls>
@@ -648,6 +728,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='WavePacket_Double top'></a>
 WavePacket_Double
 
 <audio controls>
@@ -663,6 +744,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='WavePacket_Sample top'></a>
 WavePacket_Sample
 
 <audio controls>
@@ -678,6 +760,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='WavePacket_Single top'></a>
 WavePacket_Single
 
 <audio controls>
@@ -693,6 +776,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Waveshaper top'></a>
 Waveshaper
 
 <audio controls>
@@ -708,6 +792,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Waveshaper_Difference_Tone top'></a>
 Waveshaper_Difference_Tone
 
 <audio controls>
@@ -724,6 +809,7 @@ Your browser does not support the audio element.</audio>
 </div>
 ***
 <h2 id='07.Envelopes'> 07.Envelopes </h2>
+<a id='ADSR_Audio_Rate_Envelope top'></a>
 ADSR_Audio_Rate_Envelope
 
 <audio controls>
@@ -739,6 +825,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='ADSR_Audio_Rate_Envelope_x2 top'></a>
 ADSR_Audio_Rate_Envelope_x2
 
 <audio controls>
@@ -754,6 +841,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='ADSR_Control_Rate_Envelope top'></a>
 ADSR_Control_Rate_Envelope
 
 <audio controls>
@@ -769,6 +857,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Ead_Envelope top'></a>
 Ead_Envelope
 
 <audio controls>
@@ -784,6 +873,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Phasemod_Envelope top'></a>
 Phasemod_Envelope
 
 <audio controls>
@@ -800,6 +890,7 @@ Your browser does not support the audio element.</audio>
 </div>
 ***
 <h2 id='08.Samples'> 08.Samples </h2>
+<a id='Sample top'></a>
 Sample
 
 <audio controls>
@@ -815,6 +906,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='SampleHuffman_Umpah top'></a>
 SampleHuffman_Umpah
 
 <audio controls>
@@ -830,6 +922,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Sample_Loop_Points top'></a>
 Sample_Loop_Points
 
 <audio controls>
@@ -845,6 +938,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Sample_Scrub top'></a>
 Sample_Scrub
 
 <audio controls>
@@ -860,6 +954,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Samples top'></a>
 Samples
 
 <audio controls>
@@ -875,6 +970,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Samples_Tables_Arrays top'></a>
 Samples_Tables_Arrays
 
 <audio controls>
@@ -890,6 +986,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='Wavetable_Swap top'></a>
 Wavetable_Swap
 
 <audio controls>
@@ -906,6 +1003,7 @@ Your browser does not support the audio element.</audio>
 </div>
 ***
 <h2 id='09.Delays'> 09.Delays </h2>
+<a id='AudioDelay top'></a>
 AudioDelay
 
 <audio controls>
@@ -921,6 +1019,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='AudioDelayFeedback top'></a>
 AudioDelayFeedback
 
 <audio controls>
@@ -936,6 +1035,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='AudioDelayFeedbackAllpass top'></a>
 AudioDelayFeedbackAllpass
 
 <audio controls>
@@ -951,6 +1051,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='AudioDelayFeedbackX2 top'></a>
 AudioDelayFeedbackX2
 
 <audio controls>
@@ -966,6 +1067,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='AudioDelayFeedback_HIFI top'></a>
 AudioDelayFeedback_HIFI
 
 <audio controls>
@@ -981,6 +1083,19 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='ReverbTank_HIFI top'></a>
+ReverbTank_HIFI
+...(no recording of this one)
+
+<button type='button' id='ReverbTank_HIFIexpand' onclick='javascript:toggleDisplay(ReverbTank_HIFI, ReverbTank_HIFIexpand, ReverbTank_HIFIcollapse)'>show sketch</button>
+<button id='ReverbTank_HIFIcollapse' style='display:none' onclick='javascript:toggleDisplay(ReverbTank_HIFI, ReverbTank_HIFIexpand, ReverbTank_HIFIcollapse)'>hide sketch</button>
+<div id='ReverbTank_HIFI' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/09.Delays/ReverbTank_HIFI/ReverbTank_HIFI.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='ReverbTank_STANDARD top'></a>
 ReverbTank_STANDARD
 
 <audio controls>
@@ -997,6 +1112,7 @@ Your browser does not support the audio element.</audio>
 </div>
 ***
 <h2 id='10.Audio_Filters'> 10.Audio_Filters </h2>
+<a id='LowPassFilter top'></a>
 LowPassFilter
 
 <audio controls>
@@ -1012,6 +1128,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='LowPassFilterX2 top'></a>
 LowPassFilterX2
 
 <audio controls>
@@ -1027,6 +1144,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='StateVariableFilter top'></a>
 StateVariableFilter
 
 <audio controls>
@@ -1042,6 +1160,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='StateVariableFilter_HIFI top'></a>
 StateVariableFilter_HIFI
 
 <audio controls>
@@ -1058,6 +1177,7 @@ Your browser does not support the audio element.</audio>
 </div>
 ***
 <h2 id='11.Communication'> 11.Communication </h2>
+<a id='Mozzi_MIDI_Input top'></a>
 Mozzi_MIDI_Input
 ...(no recording of this one)
 
@@ -1069,6 +1189,7 @@ Mozzi_MIDI_Input
 {% endhighlight %}
 </div>
 ***
+<a id='Mozzi_Processing_Serial top'></a>
 Mozzi_Processing_Serial
 ...(no recording of this one)
 
@@ -1092,6 +1213,7 @@ Sinewave_PWM_leds_HIFI
 {% endhighlight %}
 </div>
 ***
+<a id='Teensy_USB_MIDI_Input top'></a>
 Teensy_USB_MIDI_Input
 
 <audio controls>
@@ -1107,6 +1229,7 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='TwoWire_Read_ADXL345 top'></a>
 TwoWire_Read_ADXL345
 ...(no recording of this one)
 
@@ -1119,6 +1242,7 @@ TwoWire_Read_ADXL345
 </div>
 ***
 <h2 id='12.Misc'> 12.Misc </h2>
+<a id='IntMap_test top'></a>
 IntMap_test
 ...(no recording of this one)
 
@@ -1130,6 +1254,43 @@ IntMap_test
 {% endhighlight %}
 </div>
 ***
+<a id='MozziByte_HIFI top'></a>
+MozziByte_HIFI
+...(no recording of this one)
+
+<button type='button' id='MozziByte_HIFIexpand' onclick='javascript:toggleDisplay(MozziByte_HIFI, MozziByte_HIFIexpand, MozziByte_HIFIcollapse)'>show sketch</button>
+<button id='MozziByte_HIFIcollapse' style='display:none' onclick='javascript:toggleDisplay(MozziByte_HIFI, MozziByte_HIFIexpand, MozziByte_HIFIcollapse)'>hide sketch</button>
+<div id='MozziByte_HIFI' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/12.Misc/MozziByte_HIFI/MozziByte_HIFI.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='Risset_Beat_HIFI top'></a>
+Risset_Beat_HIFI
+...(no recording of this one)
+
+<button type='button' id='Risset_Beat_HIFIexpand' onclick='javascript:toggleDisplay(Risset_Beat_HIFI, Risset_Beat_HIFIexpand, Risset_Beat_HIFIcollapse)'>show sketch</button>
+<button id='Risset_Beat_HIFIcollapse' style='display:none' onclick='javascript:toggleDisplay(Risset_Beat_HIFI, Risset_Beat_HIFIexpand, Risset_Beat_HIFIcollapse)'>hide sketch</button>
+<div id='Risset_Beat_HIFI' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/12.Misc/Risset_Beat_HIFI/Risset_Beat_HIFI.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='Shepard_Tone_HIFI top'></a>
+Shepard_Tone_HIFI
+...(no recording of this one)
+
+<button type='button' id='Shepard_Tone_HIFIexpand' onclick='javascript:toggleDisplay(Shepard_Tone_HIFI, Shepard_Tone_HIFIexpand, Shepard_Tone_HIFIcollapse)'>show sketch</button>
+<button id='Shepard_Tone_HIFIcollapse' style='display:none' onclick='javascript:toggleDisplay(Shepard_Tone_HIFI, Shepard_Tone_HIFIexpand, Shepard_Tone_HIFIcollapse)'>hide sketch</button>
+<div id='Shepard_Tone_HIFI' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/12.Misc/Shepard_Tone_HIFI/Shepard_Tone_HIFI.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='Stereo_Hack top'></a>
 Stereo_Hack
 
 <audio controls>
@@ -1142,6 +1303,18 @@ Your browser does not support the audio element.</audio>
 <div id='Stereo_Hack' style='display:none'>
 {% highlight c++ %}
 {% include_relative examples/12.Misc/Stereo_Hack/Stereo_Hack.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='Stereo_Hack_Pan top'></a>
+Stereo_Hack_Pan
+...(no recording of this one)
+
+<button type='button' id='Stereo_Hack_Panexpand' onclick='javascript:toggleDisplay(Stereo_Hack_Pan, Stereo_Hack_Panexpand, Stereo_Hack_Pancollapse)'>show sketch</button>
+<button id='Stereo_Hack_Pancollapse' style='display:none' onclick='javascript:toggleDisplay(Stereo_Hack_Pan, Stereo_Hack_Panexpand, Stereo_Hack_Pancollapse)'>hide sketch</button>
+<div id='Stereo_Hack_Pan' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/12.Misc/Stereo_Hack_Pan/Stereo_Hack_Pan.ino %}
 {% endhighlight %}
 </div>
 ***

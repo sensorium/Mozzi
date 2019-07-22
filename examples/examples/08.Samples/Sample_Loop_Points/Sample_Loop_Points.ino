@@ -1,23 +1,25 @@
-/*  Example playing a looped sampled sound while 
-    changing the start end end loop points, 
+/*  Example playing a looped sampled sound while
+    changing the start end end loop points,
     and sliding the frequency around,
     using Mozzi sonification library.
-  
-    Demonstrates Sample(), looping with random 
+
+    Demonstrates Sample(), looping with random
     changes to loop and frequency parameters
     scheduled with EventDelay.
-  
+
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
-    check the README or https://sensorium.github.com/Mozzi/
-  
-    Mozzi help/discussion/announcements:
+    DAC/A14 on Teensy 3.1, or
+    check the README or http://sensorium.github.com/Mozzi/
+
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2012, CC by-nc-sa.
 */
 
-//#include <ADC.h>  // Teensy 3.1 uncomment this line and install https://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Sample.h> // Sample template
 #include <samples/abomb16384_int8.h> // table for Sample
@@ -42,7 +44,7 @@ const unsigned int full = (int) (1000.f/playspeed) - 23; // adjustment approx fo
 void setup(){
   randSeed(); // reseed the random generator for different results each time the sketch runs
   aSample.setFreq(playspeed*((float) ABOMB_SAMPLERATE / (float) ABOMB_NUM_CELLS));
-  kTriggerDelay.set(full); 
+  kTriggerDelay.set(full);
   aSample.setLoopingOn();
   startMozzi(CONTROL_RATE);
 }
@@ -105,10 +107,3 @@ int updateAudio(){
 void loop(){
   audioHook();
 }
-
-
-
-
-
-
-

@@ -1,23 +1,25 @@
 /*  Example of a sound being toggled on an off,
     using Mozzi sonification library.
-  
+
     Demonstrates scheduling with EventDelay.
     EventDelay is a way to make non-blocking
     time delays for events.  Use this instead of
     the Arduino delay() function, which doesn't
     work with Mozzi.
-  
+
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
-    check the README or https://sensorium.github.com/Mozzi/
-  
-    Mozzi help/discussion/announcements:
+    DAC/A14 on Teensy 3.1, or
+    check the README or http://sensorium.github.com/Mozzi/
+
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2012, CC by-nc-sa.
 */
 
-//#include <ADC.h>  // Teensy 3.1 uncomment this line and install https://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin8192_int8.h> // sine table for oscillator
@@ -56,6 +58,3 @@ int updateAudio(){
 void loop(){
   audioHook();
 }
-
-
-

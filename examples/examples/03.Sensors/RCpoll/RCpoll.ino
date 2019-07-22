@@ -2,9 +2,9 @@
  *  using Mozzi sonification library.
  *
  *  Demonstrates RCpoll to read a resistive sensor on a digital pin,
- *  without blocking audio output. 
- *  
- *  Control circuit: https://arduino.cc/en/Tutorial/RCtime
+ *  without blocking audio output.
+ *
+ *  Control circuit: http://arduino.cc/en/Tutorial/RCtime
  *  Values for components which work with this sketch are:
  *  Sensing Capacitor .1uf (104)
  *  Variable resistor 1 MegaOhm
@@ -20,28 +20,30 @@
 sPin ---\/\/\/-----.
        220 - 1K       |
                             |
-                            \   
+                            \
                             /     Variable Resistive Sensor
                             \     Photocell, phototransistor, FSR etc.
                             /
                             |
                             |
-                          _____ 
+                          _____
                            ___
                             _
 
- *  Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- 
+    Mozzi documentation/API
+    https://sensorium.github.io/Mozzi/doc/html/index.html
+
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+
  */
 
-//#include <ADC.h>  // Teensy 3.1 uncomment this line and install https://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/sin2048_int8.h> // sine table for oscillator
 #include <RCpoll.h>
 
-#define CONTROL_RATE 128 // powers of 2 please
+#define CONTROL_RATE 128 // Hz, powers of 2 are most reliable
 #define SENSOR_PIN 4            // digital pin for sensor input
 
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
@@ -71,7 +73,3 @@ int updateAudio(){
 void loop(){
   audioHook();
 }
-
-
-
-

@@ -489,6 +489,9 @@ static void pwmAudioOutput() {
   pwmWrite(AUDIO_CHANNEL_1_PIN_HIGH, out >> AUDIO_BITS_PER_CHANNEL);
 #else
   pwmWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
+#if (STEREO_HACK == true)
+  pwmWrite(AUDIO_CHANNEL_2_PIN, (int)output_buffer2.read());
+#endif
 #endif
 }
 #endif
@@ -517,7 +520,13 @@ static void startAudioStandard() {
   tcConfigure(AUDIO_RATE);
 #elif IS_STM32()
   audio_update_timer.pause();
-  audio_update_timer.setPeriod(1000000UL / AUDIO_RATE);
+  //audio_update_timer.setPeriod(1000000UL / AUDIO_RATE);
+  // Manually calculate prescaler and overflow instead of using setPeriod, to avoid rounding errors
+  uint32_t period_cyc = F_CPU / AUDIO_RATE;
+  uint16_t prescaler = (uint16_t)(period_cyc / 65535 + 1);
+  uint16_t overflow = (uint16_t)((period_cyc + (prescaler / 2)) / prescaler);
+  audio_update_timer.setPrescaleFactor(prescaler);
+  audio_update_timer.setOverflow(overflow);
   audio_update_timer.setChannel1Mode(TIMER_OUTPUT_COMPARE);
   audio_update_timer.setCompare(TIMER_CH1,
                                 1); // Interrupt 1 count after each update
@@ -528,6 +537,8 @@ static void startAudioStandard() {
   pinMode(AUDIO_CHANNEL_1_PIN, PWM);
 #if (AUDIO_MODE == HIFI)
   pinMode(AUDIO_CHANNEL_1_PIN_HIGH, PWM);
+#elif (STEREO_HACK == true)
+  pinMode(AUDIO_CHANNEL_2_PIN, PWM);
 #endif
 
 #define MAX_CARRIER_FREQ (F_CPU / (1 << AUDIO_BITS_PER_CHANNEL))

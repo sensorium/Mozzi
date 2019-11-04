@@ -5,9 +5,9 @@ Mozzi-resources
 *.mp3
 sonar-project.properties
 *.bak
+*.gch
 *#*
 images
-doxygen*
 Makefile*
 tags
 user_guide.md

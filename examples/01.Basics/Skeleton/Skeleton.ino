@@ -1,6 +1,5 @@
-
 #include <MozziGuts.h>        // at the top of your sketch
-#define CONTROL_RATE 64   // or some other power of 2
+#define CONTROL_RATE 64
 
 void setup() {
   startMozzi(CONTROL_RATE);
@@ -19,4 +18,3 @@ int updateAudio() {
 void loop() {
   audioHook(); // fills the audio buffer
 }
-

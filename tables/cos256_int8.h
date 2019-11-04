@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include PGMSPACE_INCLUDE_H
+#include "mozzi_pgmspace.h"
 
 #define COS256_NUM_CELLS 256
 #define COS256_SAMPLERATE 256

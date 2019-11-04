@@ -1,16 +1,19 @@
 /*  Example of flanging,
     using Mozzi sonification library.
-  
+
     Demonstrates 2 oscillators going through 2 AudioDelayFeedback units,
     with straight signal mixed in.
-  
+
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.com/Mozzi/
-  
-    Mozzi help/discussion/announcements:
+
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2012-13, CC by-nc-sa.
 */
 
@@ -21,7 +24,7 @@
 #include <AudioDelayFeedback.h>
 #include <mozzi_midi.h> // for mtof
 
-#define CONTROL_RATE 128 // powers of 2 please
+#define CONTROL_RATE 128 // Hz, powers of 2 are most reliable
 
 Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, AUDIO_RATE> aTriangle1(TRIANGLE_ANALOGUE512_DATA); // audio oscillator
 Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, AUDIO_RATE> aTriangle2(TRIANGLE_ANALOGUE512_DATA); // audio oscillator
@@ -32,7 +35,7 @@ Oscil<TRIANGLE512_NUM_CELLS, CONTROL_RATE> kDelSamps2(TRIANGLE512_DATA); // for 
 AudioDelayFeedback <128> aDel1;
 AudioDelayFeedback <128> aDel2;
 
-// the delay time, measured in samples, updated in updateControl, and used in updateAudio 
+// the delay time, measured in samples, updated in updateControl, and used in updateAudio
 unsigned int del_samps1;
 unsigned int del_samps2;
 
@@ -55,7 +58,7 @@ void updateControl(){
   del_samps1 = 64+kDelSamps1.next();
 
   // delay time range from 1 to 33 samples, @ 16384 samps per sec = 0 to 2 milliseconds
-  del_samps2 = 17+kDelSamps2.next()/8; 
+  del_samps2 = 17+kDelSamps2.next()/8;
 }
 
 
@@ -72,7 +75,3 @@ int updateAudio(){
 void loop(){
   audioHook();
 }
-
-
-
-

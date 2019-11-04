@@ -12,7 +12,10 @@
     DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.com/Mozzi/
 
-    Mozzi help/discussion/announcements:
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
 
     Tim Barrass 2013, CC by-nc-sa.
@@ -21,7 +24,6 @@
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/sin2048_int8.h> // sine table for oscillator
-
 
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
@@ -70,7 +72,3 @@ void loop() {
 
   if(!paused) audioHook();
 }
-
-
-
-

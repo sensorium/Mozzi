@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include PGMSPACE_INCLUDE_H
+#include "mozzi_pgmspace.h"
 
 #define SIN256_NUM_CELLS 256
 #define SIN256_SAMPLERATE 256

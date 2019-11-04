@@ -1,17 +1,20 @@
 /*  Example reading an ADXL345 accelerometer
     using I2C communication without blocking audio synthesis,
     using Mozzi sonification library.
-  
+
     Demonstrates use of twi_nonblock functions
     to replace processor-blocking Wire methods.
-    
+
     Note: The twi_nonblock code is not compatible with Teesy 3.1.
-    
+
     Circuit: Audio output on digital pin 9.
-  
-    Mozzi help/discussion/announcements:
+
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Marije Baalman 2012.
     Small modifications by TIm Barrass to retain Mozzi compatibility.
     This example code is in the public domain.
@@ -23,7 +26,7 @@
 #include <tables/sin2048_int8.h> // sine table for oscillator
 #include <twi_nonblock.h>
 
-#define CONTROL_RATE 128 // powers of 2 please
+#define CONTROL_RATE 128 // Hz, powers of 2 are most reliable
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
@@ -64,8 +67,8 @@ void setup_accelero(){
   //   acc_writeTo( ADXL345_THRESH_INACT, inactivityThreshold );
   //   acc_writeTo( ADXL345_TIME_INACT, inactivityTime );
   // 0B10001111
-  //   acc_writeTo( ADXL345_ACT_INACT_CTL, B10001111 ); 
-  //   acc_writeTo(ADXL345_POWER_CTL, B00111000); 
+  //   acc_writeTo( ADXL345_ACT_INACT_CTL, B10001111 );
+  //   acc_writeTo(ADXL345_POWER_CTL, B00111000);
 
   acc_writeTo(ADXL345_POWER_CTL, 8);  // auto sleep off, measure on
 
@@ -81,12 +84,12 @@ void initiate_read_accelero(){
   txAddress = ADXL345_DEVICE;
   // reset tx buffer iterator vars
   txBufferIndex = 0;
-  txBufferLength = 0;  
+  txBufferLength = 0;
 
   // put byte in tx buffer
   txBuffer[txBufferIndex] = ADXL345_DATAX0;
   ++txBufferIndex;
-  // update amount in buffer   
+  // update amount in buffer
   txBufferLength = txBufferIndex;
 
   twi_initiateWriteTo(txAddress, txBuffer, txBufferLength);
@@ -112,7 +115,7 @@ void finalise_request_accelero(){
 
   byte i = 0;
   while( rxBufferLength - rxBufferIndex > 0)         // device may send less than requested (abnormal)
-  { 
+  {
     accbytedata[i] = rxBuffer[rxBufferIndex];
     ++rxBufferIndex;
     i++;
@@ -124,12 +127,12 @@ void finalise_request_accelero(){
 
 // Writes val to address register on device
 void acc_writeTo(byte address, byte val) {
-  //   Wire.beginTransmission(ADXL345_DEVICE); // start transmission to device   
-  twowire_beginTransmission(ADXL345_DEVICE); // start transmission to device   
+  //   Wire.beginTransmission(ADXL345_DEVICE); // start transmission to device
+  twowire_beginTransmission(ADXL345_DEVICE); // start transmission to device
   //   Wire.send(address);             // send register address
   twowire_send( address );
   //   Wire.send(val);                 // send value to write
-  twowire_send( val );  
+  twowire_send( val );
   //   Wire.endTransmission();         // end transmission
   twowire_endTransmission();
 }
@@ -151,17 +154,17 @@ int accz;
 
 int envgain;
 
-void updateControl(){  
+void updateControl(){
   envgain = (int) kEnvelope.next();
   if ( envgain < 5 ){
     if ( accx > 512){
       aSin.setFreq( 400 );
       kEnvelope.start();
-    } 
+    }
     else if ( accy > 512 ) {
       aSin.setFreq( 800 );
       kEnvelope.start();
-    } 
+    }
     else if ( accz > 512 ) {
       aSin.setFreq( 1200 );
       kEnvelope.start();
@@ -198,4 +201,3 @@ int updateAudio(){
 void loop(){
   audioHook(); // required here
 }
-

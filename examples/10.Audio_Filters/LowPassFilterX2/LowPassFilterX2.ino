@@ -1,15 +1,18 @@
 /*  Example of filtering 2 waves with different filter settings,
     using Mozzi sonification library.
-  
+
     Demonstrates 2 Oscillators, each with a LowPassFilter().
-  
+
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.com/Mozzi/
-  
-    Mozzi help/discussion/announcements:
+
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2012, CC by-nc-sa.
 */
 
@@ -20,8 +23,6 @@
 #include <LowPassFilter.h>
 #include <mozzi_rand.h> // for rand()
 
-#define CONTROL_RATE 64 // powers of 2 please
-
 Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound1(CHUM9_DATA); //audio oscillator
 Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound2(CHUM9_DATA); //audio oscillator
 Oscil<COS512_NUM_CELLS, CONTROL_RATE> kFilterMod1(COS512_DATA); // to modulate filter frequency
@@ -31,7 +32,7 @@ LowPassFilter lpf1;
 LowPassFilter lpf2;
 
 void setup(){
-  startMozzi(CONTROL_RATE);
+  startMozzi();
   aCrunchySound1.setFreq(2.f);
   aCrunchySound2.setFreq(6.f);
   kFilterMod1.setFreq(1.3f);
@@ -59,8 +60,3 @@ int updateAudio(){
 void loop(){
   audioHook();
 }
-
-
-
-
-

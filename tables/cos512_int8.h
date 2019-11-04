@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include PGMSPACE_INCLUDE_H
+#include "mozzi_pgmspace.h"
 
 #define COS512_NUM_CELLS 512
 #define COS512_SAMPLERATE 512

@@ -1,16 +1,19 @@
 /*  Example of playing a sampled sound,
     using Mozzi sonification library.
-  
+
     Demonstrates one-shot samples scheduled
     with EventDelay.
-  
+
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.com/Mozzi/
-  
-    Mozzi help/discussion/announcements:
+
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2012, CC by-nc-sa.
 */
 
@@ -19,8 +22,6 @@
 #include <samples/burroughs1_18649_int8.h>
 #include <EventDelay.h>
 
-#define CONTROL_RATE 64
-
 // use: Sample <table_size, update_rate> SampleName (wavetable)
 Sample <BURROUGHS1_18649_NUM_CELLS, AUDIO_RATE> aSample(BURROUGHS1_18649_DATA);
 
@@ -28,7 +29,7 @@ Sample <BURROUGHS1_18649_NUM_CELLS, AUDIO_RATE> aSample(BURROUGHS1_18649_DATA);
 EventDelay kTriggerDelay;
 
 void setup(){
-  startMozzi(CONTROL_RATE);
+  startMozzi();
   aSample.setFreq((float) BURROUGHS1_18649_SAMPLERATE / (float) BURROUGHS1_18649_NUM_CELLS); // play at the speed it was recorded
   kTriggerDelay.set(1500); // 1500 msec countdown, within resolution of CONTROL_RATE
 }
@@ -50,6 +51,3 @@ int updateAudio(){
 void loop(){
   audioHook();
 }
-
-
-

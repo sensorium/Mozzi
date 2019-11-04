@@ -5,10 +5,10 @@
     slide between different offsets.
 
    Circuit: Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
    check the README or http://sensorium.github.com/Mozzi/
- 
-   Mozzi help/discussion/announcements:
+
+   		Mozzi help/discussion/announcements:
    https://groups.google.com/forum/#!forum/mozzi-users
 
    Tim Barrass 2012-13.
@@ -47,23 +47,23 @@ void setup(){
 
 
 void updateControl(){
-  
+
   // wandering advance rate
   offset_advance += (int)rand(20)-rand(20);
   if(!rand(CONTROL_RATE)) offset_advance = -offset_advance; // reverse sometimes
   if(!rand(CONTROL_RATE)) offset_advance = 500-rand(1000); // jump speed sometimes
- 
+
   int smooth_offset_advance = kSmoothOffsetAdvance.next(offset_advance);
-  
+
   offset += smooth_offset_advance;
-  
+
   // keep offset in range
   if (offset >= BURROUGHS1_18649_NUM_CELLS) offset -= BURROUGHS1_18649_NUM_CELLS;
   if (offset < 0) offset += BURROUGHS1_18649_NUM_CELLS;
 
   // set new target for interpolating line to scrub to
   scrub.set(Q16n0_to_Q16n16(offset), AUDIO_STEPS_PER_CONTROL);
-  
+
 }
 
 
@@ -76,11 +76,3 @@ int updateAudio(){
 void loop(){
   audioHook();
 }
-
-
-
-
-
-
-
-

@@ -1,31 +1,34 @@
 /*
-  Example using a piezo to trigger an audio sample 
+  Example using a piezo to trigger an audio sample
   and a switch to change the playback pitch.
   using Mozzi sonification library.
-  
+
   Demonstrates one-shot samples, analog input for triggering,
   and digital input for switching.
-  
+
   This example goes with a tutorial on the Mozzi site:
   http://sensorium.github.io/Mozzi/learn/introductory-tutorial/
-  
+
   The circuit:
     Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.com/Mozzi/
-  
+
     Piezo on analog pin A3:
       + connection of the piezo attached to the analog pin
       - connection of the piezo attached to ground
       1-megOhm resistor attached from the analog pin to ground
-    
+
     Pushbutton on digital pin D4
       button between the digital pin and +5V
       10K resistor from the digital pin to ground
-  
-  Mozzi help/discussion/announcements:
-  https://groups.google.com/forum/#!forum/mozzi-users
-  
+
+    Mozzi documentation/API
+    https://sensorium.github.io/Mozzi/doc/html/index.html
+
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+
   Tim Barrass 2013, CC by-nc-sa.
 */
 
@@ -33,7 +36,7 @@
 #include <Sample.h> // Sample template
 #include <samples/burroughs1_18649_int8.h> // a converted audio sample included in the Mozzi download
 
-const int PIEZO_PIN = 3;  // set the analog input pin for the piezo 
+const int PIEZO_PIN = 3;  // set the analog input pin for the piezo
 const int threshold = 80;  // threshold value to decide when the detected signal is a knock or not
 
 const int BUTTON_PIN = 4;  // set the digital input pin for the button
@@ -42,7 +45,7 @@ const int BUTTON_PIN = 4;  // set the digital input pin for the button
 Sample <BURROUGHS1_18649_NUM_CELLS, AUDIO_RATE> aSample(BURROUGHS1_18649_DATA);
 float recorded_pitch = (float) BURROUGHS1_18649_SAMPLERATE / (float) BURROUGHS1_18649_NUM_CELLS;
 
-char button_state, previous_button_state; // variable for reading the pushbutton status       
+char button_state, previous_button_state; // variable for reading the pushbutton status
 char latest_button_change;
 boolean triggered = false;
 float pitch, pitch_change;
@@ -64,7 +67,7 @@ void buttonChangePitch(){
     // if the latest change was a press, pitch up, else pitch down
     if (button_state == HIGH) {
       pitch = 2.f * recorded_pitch;
-    } 
+    }
     else {
       pitch = 0.5f * recorded_pitch;
     }
@@ -109,13 +112,3 @@ int updateAudio(){
 void loop(){
   audioHook();
 }
-
-
-
-
-
-
-
-
-
-

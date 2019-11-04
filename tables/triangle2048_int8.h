@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include PGMSPACE_INCLUDE_H
+#include "mozzi_pgmspace.h"
 
 #define TRIANGLE2048_NUM_CELLS 2048
 #define TRIANGLE2048_SAMPLERATE 2048

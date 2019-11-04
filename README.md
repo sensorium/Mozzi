@@ -35,7 +35,7 @@ Download the most recent version of Mozzi from Github.
 Then, following the instructions from the [Arduino libraries guide](http://arduino.cc/en/Guide/Libraries).
 
 In the Arduino IDE, navigate to __Sketch > Import Library__.  At the top of the drop
-down list, select the option to __Add Library__.  Navigate to the folder's location and open it. 
+down list, select the option to __Add Library__.  Navigate to the folder's location and open it.
 Return to the __Sketch > Import Library__ menu.
 You should now see the library at the bottom of the drop-down menu.
 It is ready to be used in your sketch.
@@ -44,34 +44,35 @@ It is ready to be used in your sketch.
 
 ## Quick Start  
 To hear Mozzi, connect a 3.5mm audio jack with the centre wire to the PWM output
-on Digital Pin 9\* on Arduino, and the ground to the Ground on the Arduino.
+on Digital Pin 9 on the Arduino, and the ground to the Ground on the Arduino.
 Use this as a line out which you can plug into your computer and listen to with
-a sound program like [Audacity](http://audacity.sourceforge.net/). 
+a sound program like [Audacity](http://audacity.sourceforge.net/).
 Try some examples from the __File > Examples > Mozzi__ menu.  
 
-Below is a list of the Digital Pins used by Mozzi for STANDARD mode PWM audio out on different boards.
-Those which have been tested and reported to work have an x.
+Below is a list of the Digital Pins used by Mozzi for STANDARD_PLUS mode PWM audio out on different boards.
 Feedback about others is welcome.
 
-x	 9	Arduino Uno  
-x	 9	Arduino Duemilanove  
-x	 9	Arduino Nano  
-x	 9	Arduino Pro Mini  
-x	 9	Arduino Leonardo
-..11	Arduino Mega  *broken since Jan 2015  
-..11  Freetronics EtherMega  *broken since Jan 2015
-x	 9  Ardweeny  
-x	 9  Boarduino
-..14	Teensy  
-x	B5  Teensy2  
-x	B5(25) Teensy2++  
-x   DAC/D   Teensy 3.0 3.1 LC 3.2 
-.   DAC/D     Teensy 3.4, 3.5
-x   A0   Gemma M0
-x   Built in Speaker            Adafruit Playground Express
-..13	Sanguino  
-x       PB8  STM32duino (see "Hardware specific notes", below)  
-x	GPIO2	ESP8266 *see details*  
+Model | Pin | Tested
+----- | --- | ------
+Arduino Uno | 9	| yes
+Arduino Duemilanove | 9	| yes
+Arduino Nano | 9 | yes
+Arduino Pro Mini | 9 | yes
+Arduino Leonardo | 9 | yes
+Arduino Mega | 11 | yes
+Freetronics EtherMega | 11 | yes
+Ardweeny | 9 | yes     
+Boarduino | 9 | yes
+Teensy | 14 | -
+Teensy2 | B5 | yes  
+Teensy2++ | B5(25) | yes
+Teensy 3.0 3.1 LC 3.2 | DAC/D | yes
+Teensy 3.4, 3.5 | DAC/D | -     
+Gemma M0 | A0 | yes
+Adafruit Playground Express | Built in Speaker | yes    
+Sanguino | 13	| -  
+STM32duino (see "Hardware specific notes", below) | PB8 | yes
+ESP8266 *see details* | GPIO2 | yes
 
 For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).  
 
@@ -115,9 +116,30 @@ Look for code and usage changes [here](extras/NEWS.txt).
 
 ***
 
+## Caveats and Workarounds
+
+#### AVR
+
+* While Mozzi is running, calling `delay()`, `delayMicroseconds()`, or other functions which wait or cycle through loops can cause audio glitches.
+Mozzi provides `EventDelay()` for scheduling instead of `delay`.
+
+* `analogRead()` is replaced by `mozziAnalogRead()`, which works in the background instead of blocking the processor.  
+
+* Mozzi interferes with `analogWrite()`.  In `STANDARD` and `STANDARD_PLUS` audio modes, Mozzi takes over Timer1 (pins 9 and 10), but you can use the Timer2 pins, 3 and 11 (your board may differ).  In `HIFI` mode,
+Mozzi uses Timer1 (or Timer4 on some boards), and Timer2, so pins 3 and 11 are also out.  
+If you need `analogWrite()`, you can do PWM output on any digital pins using the technique in
+*Mozzi>examples>11.Communication>Sinewave_PWM_pins_HIFI*.  
+
+* Mozzi provides`mozziMicros()` as an alternative to 'millis()' and 'micros()'.  
+
+#### Last Resort
+The timers can be made available with `stopMozzi()`, which stops audio interrupts, until you call `startMozzi()`.  
+
+***
+
 ## Tweaking Arduino for Faster Audio Code
 
-If you need your synth to run fast, Arduino versions above 1.5 can be tweaked to optimise compiled code for speed instead of small size.  
+If you need your synth to run faster on AVR architectures, Arduino versions above 1.5 can be tweaked to optimise compiled code for speed instead of small size.  
 
 Find Arduino’s platform.txt (on OSX you can find it by searching in Users/your_name/Library/Arduino15). Search and replace -Os with -O2. Save.
 
@@ -127,35 +149,13 @@ If you still need more speed, Arduino 1.0.5 produces slightly faster code.
 
 ***
 
-## Caveats and Workarounds
-
-* AVR
-* While Mozzi is running, calling `delay()`, `delayMicroseconds()`, or any other function involving a blocking delay is likely to cause severe
-audio glitches. Do not do this.  
-
-Mozzi provides `EventDelay()` for scheduling instead of `delay`. A faster alternative to 'millis()' and 'micros()' is `mozziMicros()` for timing,
-with 61us resolution (in `STANDARD` or `STANDARD_PLUS` modes).  
-
-* Mozzi interferes with `analogWrite()`.  In `STANDARD` and `STANDARD_PLUS` audio modes, Mozzi takes over Timer1 (pins 9 and 10), but you can use the Timer2 pins, 3 and 11 (your board may differ).  In `HIFI` mode, 
-Mozzi uses Timer1 (or Timer4 on some boards), and Timer2, so pins 3 and 11 are also out.  
-
-If you need PWM output (`analogWrite()`), you can do it on any digital pins using the technique in 
-Mozzi>examples>11.Communication>Sinewave_PWM_pins_HIFI.  
-
-* `analogRead()` is replaced by `mozziAnalogRead()`, which works in the background instead of blocking the processor.  
-
-#### Last Resort
-The timers can be made available with `stopMozzi()`, which stops audio interrupts, until you call `startMozzi()`.  
-
-***
-
 If you enjoy using Mozzi for a project, or have extended it, we would be
 pleased to hear about it and provide support wherever possible. Contribute
 suggestions, improvements and bug fixes to the Mozzi wiki on Github, or
 Fork it to contribute directly to future developments.
 
 Mozzi is a development of research into Mobile Sonification in the
-[SweatSonics](http://stephenbarrass.wordpress.com/tag/sweatsonics/) project. 
+[SweatSonics](http://stephenbarrass.wordpress.com/tag/sweatsonics/) project.
 
 ***
 
@@ -180,7 +180,7 @@ Various examples from [Pure Data](http://puredata.info/) by Miller Puckette
 
 ## Hardware specific notes
 
-### STM32(duino) 
+### STM32(duino)
 port by Thomas Friedrichsmeier
 
 Compiles for and runs on a STM32F103C8T6 blue pill board, with a bunch of caveats (see below), i.e. on a board _without_ a
@@ -207,7 +207,7 @@ These are included in the standard Teensyduino install unless you explicitly dis
 
 Some of the differences for Teensy 3.0# which will affect users include:
 
-- On Teeensy 3.0/3.1/3.2/Audio output is on pin A14/DAC, in STANDARD or STANDARD_PLUS audio modes. 
+- On Teeensy 3.0/3.1/3.2/Audio output is on pin A14/DAC, in STANDARD or STANDARD_PLUS audio modes.
     These modes are identical on Teensy 3.0/3.1/3.2, as the output is via DAC rather than PWM.
 - Output is 12 bits in STANDARD and STANDARD_PLUS modes, up from nearly 9 bits for Atmel based boards. HIFI audio, which works by summing two output pins, is not available on Teensy 3.0/3.1.
 - #include <ADC.h> is required at the top of every Teensy 3 sketch.

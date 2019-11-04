@@ -6,8 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include "hardware_defines.h"
-#include PGMSPACE_INCLUDE_H
+#include "mozzi_pgmspace.h"
 
 #define SAW512_NUM_CELLS 512
 #define SAW512_SAMPLERATE 512

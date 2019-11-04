@@ -5,7 +5,7 @@
  *
  *  Circuit: Audio outputs on digital pins 9 and 10.
  *
- *  Mozzi help/discussion/announcements:
+ *  		Mozzi help/discussion/announcements:
  *  https://groups.google.com/forum/#!forum/mozzi-users
  *
  *  Tim Barrass 2012.
@@ -16,10 +16,6 @@
 #include <Phasor.h> // for controlling panning position
 #include <Oscil.h> // oscil for audio sig
 #include <tables/pinknoise8192_int8.h> // table for oscillator
-
-
-// use #define for CONTROL_RATE, not a constant
-#define CONTROL_RATE 64 // powers of 2 please
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable)
 Oscil <PINKNOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(PINKNOISE8192_DATA);
@@ -32,7 +28,7 @@ unsigned int pan; // convey pan from updateControl() to updateAudioStereo();
 void setup(){
   aNoise.setFreq(2.111f); // set the frequency with an unsigned int or a float
   kPan.setFreq(0.25f); // take 4 seconds to move left-right
-  startMozzi(CONTROL_RATE); // set a control rate of 64 (powers of 2 please)
+  startMozzi(); // :)
   Serial.begin(115200);
 }
 
@@ -55,7 +51,3 @@ void updateAudio(){
 void loop(){
   audioHook(); // required here
 }
-
-
-
-

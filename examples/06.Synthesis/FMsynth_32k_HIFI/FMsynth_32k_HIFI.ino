@@ -1,12 +1,12 @@
 /*  Example of simple FM with the phase modulation technique,
     using Mozzi sonification library.
-  
-    Demonstrates Oscil::phMod() for phase modulation, 
-    Smooth() for smoothing control signals, 
+
+    Demonstrates Oscil::phMod() for phase modulation,
+    Smooth() for smoothing control signals,
     and Mozzi's fixed point number types for fractional frequencies.
-    
+
     This sketch using HIFI mode is not for Teensy 3.1.
-    
+
     IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
     be changed from STANDARD mode to HIFI.
     In Mozz/mozzi_config.h, change
@@ -17,15 +17,15 @@
     //#define AUDIO_MODE STANDARD
     //#define AUDIO_MODE STANDARD_PLUS
     #define AUDIO_MODE HIFI
-  
+
   The sketch also sounds better with a faster sample rate, for less aliasing
   #define AUDIO_RATE 32768
   in mozzi_config.
-  
+
     Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
     Check the Mozzi core module documentation for others and more detail
-  
-                     3.9k 
+
+                     3.9k
      pin 9  ---WWWW-----|-----output
                     499k           |
      pin 10 ---WWWW---- |
@@ -33,16 +33,19 @@
                              4.7n  ==
                                        |
                                    ground
-  
-    Resistors are ±0.5%  Measure and choose the most precise 
+
+    Resistors are ±0.5%  Measure and choose the most precise
     from a batch of whatever you can get.  Use two 1M resistors
     in parallel if you can't find 499k.
-    Alternatively using 39 ohm, 4.99k and 470nF components will 
+    Alternatively using 39 ohm, 4.99k and 470nF components will
     work directly with headphones.
-    
-    Mozzi help/discussion/announcements:
+
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2012-13, CC by-nc-sa.
 */
 
@@ -54,7 +57,7 @@
 #include <EventDelay.h>
 #include <Smooth.h>
 
-#define CONTROL_RATE 256 // powers of 2 please
+#define CONTROL_RATE 256 // Hz, powers of 2 are most reliable
 
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCarrier(COS2048_DATA);
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aModulator(COS2048_DATA);
@@ -78,7 +81,7 @@ EventDelay kNoteChangeDelay;
 // for note changes
 Q7n8 target_note, note0, note1, note_upper_limit, note_lower_limit, note_change_step, smoothed_note;
 
-// using Smooth on midi notes rather than frequency, 
+// using Smooth on midi notes rather than frequency,
 // because fractional frequencies need larger types than Smooth can handle
 // Inefficient, but...until there is a better Smooth....
 Smooth <int> kSmoothNote(0.95f);
@@ -110,7 +113,7 @@ void updateControl(){
       note1 += note_change_step;
       target_note=note1;
     }
-    else{ 
+    else{
       note0 += note_change_step;
       target_note=note0;
     }
@@ -118,14 +121,14 @@ void updateControl(){
     // change direction
     if(note0>note_upper_limit) note_change_step = Q7n0_to_Q7n8(-3);
     if(note0<note_lower_limit) note_change_step = Q7n0_to_Q7n8(3);
-    
+
     // reset eventdelay
     kNoteChangeDelay.start();
   }
-  
+
   // vary the modulation index
   mod_index = (Q8n8)350+kModIndex.next();
-  
+
   // here's where the smoothing happens
   smoothed_note = kSmoothNote.next(target_note);
   setFreqs(smoothed_note);
@@ -142,7 +145,3 @@ int updateAudio(){
 void loop(){
   audioHook();
 }
-
-
-
-

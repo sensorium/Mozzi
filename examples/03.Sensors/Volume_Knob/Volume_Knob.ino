@@ -1,4 +1,4 @@
-/*  
+/*
   Example using a potentiometer to control the amplitude of a sinewave
   with Mozzi sonification library.
 
@@ -6,10 +6,10 @@
 
   This example goes with a tutorial on the Mozzi site:
   http://sensorium.github.io/Mozzi/learn/introductory-tutorial/
-  
+
   The circuit:
     Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.com/Mozzi/
 
   Potentiometer connected to analog pin 0:
@@ -17,14 +17,17 @@
      Side pins of the potentiometer go to +5V and ground
 
  +5V ---|
-              /    
-  A0 ----\  potentiometer 
-              /    
+              /
+  A0 ----\  potentiometer
+              /
  GND ---|
 
-  Mozzi help/discussion/announcements:
-  https://groups.google.com/forum/#!forum/mozzi-users
+ Mozzi documentation/API
+ https://sensorium.github.io/Mozzi/doc/html/index.html
 
+ Mozzi help/discussion/announcements:
+ https://groups.google.com/forum/#!forum/mozzi-users
+ 
   Tim Barrass 2013, CC by-nc-sa.
 */
 
@@ -52,10 +55,10 @@ void setup(){
 void updateControl(){
   // read the variable resistor for volume
   int sensor_value = mozziAnalogRead(INPUT_PIN); // value is 0-1023
-  
+
   // map it to an 8 bit range for efficient calculations in updateAudio
-  volume = map(sensor_value, 0, 1023, 0, 255);  
-  
+  volume = map(sensor_value, 0, 1023, 0, 255);
+
   // print the value to the Serial monitor for debugging
   Serial.print("volume = ");
   Serial.println((int)volume);

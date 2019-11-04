@@ -1,21 +1,24 @@
-/*  Example of a polyphonic sketch in which 
+/*  Example of a polyphonic sketch in which
     11 sound tables are shared between 3 voices,
     using Mozzi sonification library.
-  
-    Demonstrates use of Sample() objects as players, 
-    using setTable() to share many sound tables between 
+
+    Demonstrates use of Sample() objects as players,
+    using setTable() to share many sound tables between
     a few players, to minimise processing in updateAudio().
     Shows how to use Samples and sound tables in arrays,
-    EventDelay() for scheduling, and rand() to select 
+    EventDelay() for scheduling, and rand() to select
     sound tables and vary the gain of each player.
-  
+
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.com/Mozzi/
-  
-    Mozzi help/discussion/announcements:
+
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2012, CC by-nc-sa.
 */
 
@@ -34,9 +37,6 @@
 #include <samples/bamboo/bamboo_08_2048_int8.h> // wavetable data
 #include <samples/bamboo/bamboo_09_2048_int8.h> // wavetable data
 #include <samples/bamboo/bamboo_10_2048_int8.h> // wavetable data
-
-
-#define CONTROL_RATE 64
 
 // for scheduling samples to play
 EventDelay kTriggerDelay;
@@ -74,12 +74,12 @@ byte gain[NUM_PLAYERS];
 
 void setup(){
   for (int i=0;i<NUM_PLAYERS;i++){  // play at the speed they're sampled at
-    (aSample[i]).setFreq((float) BAMBOO_00_2048_SAMPLERATE / (float) BAMBOO_00_2048_NUM_CELLS);   
+    (aSample[i]).setFreq((float) BAMBOO_00_2048_SAMPLERATE / (float) BAMBOO_00_2048_NUM_CELLS);
   }
   kTriggerDelay.set(ms_per_note); // countdown ms, within resolution of CONTROL_RATE
   kTriggerSlowDelay.set(ms_per_note*6); // resolution-dependent inaccuracy leads to polyrhythm :)
 
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 
@@ -90,7 +90,7 @@ byte randomGain(){
 
 void updateControl(){
   static byte player =0;
-  
+
   if(kTriggerDelay.ready()){
     gain[player] = randomGain();
     (aSample[player]).setTable(tables[rand(NUM_TABLES)]);
@@ -125,23 +125,3 @@ int updateAudio(){
 void loop(){
   audioHook();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

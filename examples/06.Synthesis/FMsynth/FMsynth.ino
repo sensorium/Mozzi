@@ -1,21 +1,24 @@
 /*  Example of simple FM with the phase modulation technique,
     using Mozzi sonification library.
-  
-    Demonstrates Oscil::phMod() for phase modulation, 
-    Smooth() for smoothing control signals, 
+
+    Demonstrates Oscil::phMod() for phase modulation,
+    Smooth() for smoothing control signals,
     and Mozzi's fixed point number types for fractional frequencies.
-  
+
     Also shows the limitations of Mozzi's 16384Hz Sample rate,
-    as aliasing audibly intrudes as the sound gets brighter around 
+    as aliasing audibly intrudes as the sound gets brighter around
     midi note 48.
-    
+
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.com/Mozzi/
-  
-    Mozzi help/discussion/announcements:
+
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2012, CC by-nc-sa.
 */
 
@@ -27,7 +30,7 @@
 #include <EventDelay.h>
 #include <Smooth.h>
 
-#define CONTROL_RATE 256 // powers of 2 please
+#define CONTROL_RATE 256 // Hz, powers of 2 are most reliable
 
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCarrier(COS2048_DATA);
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aModulator(COS2048_DATA);
@@ -51,7 +54,7 @@ EventDelay kNoteChangeDelay;
 // for note changes
 Q7n8 target_note, note0, note1, note_upper_limit, note_lower_limit, note_change_step, smoothed_note;
 
-// using Smooth on midi notes rather than frequency, 
+// using Smooth on midi notes rather than frequency,
 // because fractional frequencies need larger types than Smooth can handle
 // Inefficient, but...until there is a better Smooth....
 Smooth <int> kSmoothNote(0.95f);
@@ -83,7 +86,7 @@ void updateControl(){
       note1 += note_change_step;
       target_note=note1;
     }
-    else{ 
+    else{
       note0 += note_change_step;
       target_note=note0;
     }
@@ -91,14 +94,14 @@ void updateControl(){
     // change direction
     if(note0>note_upper_limit) note_change_step = Q7n0_to_Q7n8(-3);
     if(note0<note_lower_limit) note_change_step = Q7n0_to_Q7n8(3);
-    
+
     // reset eventdelay
     kNoteChangeDelay.start();
   }
-  
+
   // vary the modulation index
   mod_index = (Q8n8)350+kModIndex.next();
-  
+
   // here's where the smoothing happens
   smoothed_note = kSmoothNote.next(target_note);
   setFreqs(smoothed_note);
@@ -115,7 +118,3 @@ int updateAudio(){
 void loop(){
   audioHook();
 }
-
-
-
-

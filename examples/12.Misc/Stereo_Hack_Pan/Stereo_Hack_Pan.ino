@@ -5,7 +5,10 @@
 
     Circuit: Audio outputs on digital pins 9 and 10.
 
-    Mozzi help/discussion/announcements:
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
 
     Tim Barrass 2017.
@@ -16,9 +19,6 @@
 #include <Oscil.h> // oscil for audio sig
 #include <tables/pinknoise8192_int8.h> // table for audio oscillator
 #include <tables/sin2048_int8.h> // sine table for pan oscillator
-
-// use #define for CONTROL_RATE, not a constant
-#define CONTROL_RATE 64 // powers of 2 please
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable)
 Oscil <PINKNOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(PINKNOISE8192_DATA);
@@ -31,7 +31,7 @@ void setup()
 {
   kPan.setFreq(0.25f);
   aNoise.setFreq(2.111f); // set the frequency with an unsigned int or a float
-  startMozzi(CONTROL_RATE); // set a control rate of 64 (powers of 2 please)
+  startMozzi(); // :)
   Serial.begin(115200);
 }
 
@@ -62,7 +62,3 @@ void updateAudio() {
 void loop() {
   audioHook(); // required here
 }
-
-
-
-

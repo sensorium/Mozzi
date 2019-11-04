@@ -1,33 +1,34 @@
 /*  Example of Amplitude Modulation synthesis
     using Mozzi sonification library.
-  
+
     Demonstrates modulating the gain of one oscillator
     by the instantaneous amplitude of another,
     shows the use of fixed-point numbers to express fractional
     values, random numbers with rand(), and EventDelay()
     for scheduling.
-  
+
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.com/Mozzi/
-  
-    Mozzi help/discussion/announcements:
+
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2012, CC by-nc-sa.
 */
 
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/cos2048_int8.h> // table for Oscils to play
-//#include <mozzi_utils.h>
 #include <mozzi_fixmath.h>
 #include <EventDelay.h>
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
 
-
-#define CONTROL_RATE 64 // powers of 2 please
+#define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
 
 // audio oscils
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCarrier(COS2048_DATA);
@@ -82,7 +83,7 @@ void updateControl(){
     last_note += 3 * (1-rand((byte)3));
 
     // convert midi to frequency
-    Q16n16 midi_note = Q8n0_to_Q16n16(last_note); 
+    Q16n16 midi_note = Q8n0_to_Q16n16(last_note);
     carrier_freq = Q16n16_to_Q24n8(Q16n16_mtof(midi_note));
 
     // calculate modulation frequency to stay in ratio with carrier
@@ -109,7 +110,3 @@ int updateAudio(){
 void loop(){
   audioHook();
 }
-
-
-
-

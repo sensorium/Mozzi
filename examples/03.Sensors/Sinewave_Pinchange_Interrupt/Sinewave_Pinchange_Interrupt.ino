@@ -1,26 +1,29 @@
-/*  
-  Example of changing a sound in response to pin changes detected 
+/*
+  Example of changing a sound in response to pin changes detected
   in the background with an interrupt, using PinChangeInt library
   with Mozzi sonification library.
-  
+
   Demonstrates using Mozzi with PinChangeInt library from:
   http://code.google.com/p/arduino-pinchangeint/
   (Not for Teensy 3.1)
-  
+
   Circuit:
-  
-    Audio output on digital pin 9 on a Uno or similar, or 
+
+    Audio output on digital pin 9 on a Uno or similar, or
     check the README or http://sensorium.github.com/Mozzi/
-    
+
     Pushbutton on digital pin D4
       button from the digital pin to +5V
       10K resistor from the digital pin to ground
       6.8nf capacitor from the digital pin to ground
-     
-     
+
+
+  Mozzi documentation/API
+  https://sensorium.github.io/Mozzi/doc/html/index.html
+
   Mozzi help/discussion/announcements:
   https://groups.google.com/forum/#!forum/mozzi-users
-  
+
   Tim Barrass 2013, CC by-nc-sa.
  */
 

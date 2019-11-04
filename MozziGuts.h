@@ -20,21 +20,28 @@
  #include "WProgram.h"
 #endif
 
-
 #include "hardware_defines.h"
+
+#if IS_TEENSY3()
+// required from http://github.com/pedvide/ADC for Teensy 3.*
+#include <ADC.h>
+#endif
+
 #include "mozzi_analog.h"
 
 #if not defined (CONTROL_RATE)
 /** @ingroup core
 Control rate setting.
 Mozzi's CONTROL_RATE sets how many times per second updateControl() is called.
-It can be any power of 2 greater than 64, and the largest value where it starts
-to become impractical is around 1024. 64, 128, 256 and sometimes 512 are all
-usable values. Try to keep it as low as you can, for efficiency, though higher
-rates can sometimes give smoother results, avoiding the need to interpolate
-sensitive variables at audio rate in updateAudio(). CONTROL_RATE has a default
-of 64 Hz, but it can be changed at the top of your sketch, (before the \#includes),
-for example: \#define CONTROL_RATE 256
+CONTROL_RATE has a default of 64 Hz, but it can be changed at the top of your sketch,
+(before the \#includes), for example: \#define CONTROL_RATE 256.
+It is useful to have CONTROL_RATE set at a power of 2 (such as 64,128,256 etc),
+to have exact timing of audio and control operations.
+Non-power-of-2 CONTROL_RATE can cause glitches due to audio and control
+events not lining up precisely.  If this happens a power of two CONTROL_RATE might solve it.
+Try to keep CONTROL_RATE low, for efficiency, though higher rates up to about 1000
+can sometimes give smoother results, avoiding the need to interpolate
+sensitive variables at audio rate in updateAudio().
 */
 #define CONTROL_RATE 64
 #endif
@@ -51,7 +58,7 @@ output configuration, which is nearly 9 bit sound (-244 to 243) at 16384 Hz samp
 32768 Hz PWM rate. It uses Timer 1 for PWM and the sample updating routine (as an interrupt).
 
 STANDARD is obsolete now, replaced by STANDARD_PLUS which is the default audio mode.
-STANDARD mode uses 16384 Hz PWM rate with an output interrupt at the same frequency.  
+STANDARD mode uses 16384 Hz PWM rate with an output interrupt at the same frequency.
 Some people can hear the PWM carrier frequency as an annoying whine.
 
 STANDARD_PLUS mode uses 32768 Hz PWM rate, so the PWM carrier is out of hearing range.
@@ -66,11 +73,11 @@ Those which have been tested and reported to work have an x.
 Feedback about others is welcome.
 
 x....9........Arduino Uno \n
-x....9........Arduino Duemilanove \n 
+x....9........Arduino Duemilanove \n
 x....9........Arduino Nano  \n
 x....9........Arduino Leonardo  \n
 x....9........Ardweeny  \n
-x....9........Boarduino  \n 
+x....9........Boarduino  \n
 x...11.......Freetronics EtherMega  *broken since Jan 2015 \n
 x...11.......Arduino Mega  *broken since Jan 2015 \n
 ....14........Teensy  \n
@@ -81,6 +88,8 @@ x..A14.....Teensy 3.0, 3.1 and 3.2  \n
 
 On Teensy 3.* STANDARD and STANDARD_PLUS are the same, providing 16384Hz sample rate and 12 bit resolution on pin A14/ADC.
 The Teensy 3.* DAC output does not rely on PWM.
+
+On AVR, there is the possibility to use an external DAC in order to have an Audio output which does not rely on PWM. For now, this is only implemented for MCP49XX DAC, you can enable this in mozzi_config.h. Please see details in AudioConfigExternalDAC.h.
 */
 
 
@@ -94,17 +103,17 @@ The high PWM rate of HIFI mode places the carrier frequency beyond audible range
 
 Also, 14 bits of dynamic range in HIFI mode provides more definition than the nearly 9 bits in STANDARD_PLUS mode.
 HIFI mode takes about the same amount of processing time as STANDARD_PLUS mode, and should sound clearer and brighter.
-However, it requires an extra timer to be used on the Arduino, which could increase the chances of 
+However, it requires an extra timer to be used on the Arduino, which could increase the chances of
 conflicts with other libraries or processes if they rely on Timer 2.
 
 Timer 1 is used to provide the PWM output at 125kHz.
 Timer 2 generates an interrupt at AUDIO_RATE 16384 Hz, which sets the Timer1 PWM levels.
-HIFI mode uses 2 output pins, and sums their outputs with resistors, so is slightly less convenient for 
-rapid prototyping where you could listen to STANDARD_PLUS mode by connecting the single output pin 
+HIFI mode uses 2 output pins, and sums their outputs with resistors, so is slightly less convenient for
+rapid prototyping where you could listen to STANDARD_PLUS mode by connecting the single output pin
 directly to a speaker or audio input (though a resistor of about 100 ohms is recommended).
 
 The resistors needed for HIFI output are 3.9k and 499k, with 0.5% or better tolerance.
-If you can only get 1% resistors, use a multimeter to find the most accurate. 
+If you can only get 1% resistors, use a multimeter to find the most accurate.
 Use two 1M resistors in parallel if you can't find 499k.
 
 On 328 based Arduino boards, output is on Timer1, with the high byte on Pin 9 and low byte on Pin 10.
@@ -114,24 +123,24 @@ Also, a 4.7nF capacitor is recommended between the summing junction of the resis
 This dual PWM technique is discussed on http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
 Also, there are higher quality output circuits are on the site.
 
-Advantages: should be higher quality sound than STANDARD_PLUS mode.  Doesn't need a notch filter on 
+Advantages: should be higher quality sound than STANDARD_PLUS mode.  Doesn't need a notch filter on
 the audio signal (like STANDARD which is now obsolete) because the carrier frequency is out of hearing range.
 
-Disadvantages: requires 2 pins, 2 resistors and a capacitor, so it's not so quick to set up compared 
+Disadvantages: requires 2 pins, 2 resistors and a capacitor, so it's not so quick to set up compared
 to a rough, direct single-pin output in STANDARD_PLUS mode.
- 
-Pins and where to put the resistors on various boards for HIFI mode.  
+
+Pins and where to put the resistors on various boards for HIFI mode.
 Boards tested in HIFI mode have an x, though most of these have been tested in STANDARD_PLUS mode
 and there's no reason for them not to work in HIFI (unless the pin number is wrong or something).
 Any reports are welcome. \n
 
 resistor.....3.9k......499k \n
 x................9..........10...............Arduino Uno \n
-x................9..........10...............Arduino Duemilanove \n 
+x................9..........10...............Arduino Duemilanove \n
 x................9..........10...............Arduino Nano  \n
 x................9..........10...............Arduino Leonardo  \n
 x................9..........10...............Ardweeny  \n
-x................9..........10...............Boarduino  \n 
+x................9..........10...............Boarduino  \n
 x...............11.........12...............Freetronics EtherMega  \n
 .................11.........12...............Arduino Mega  \n
 .................14.........15...............Teensy  \n
@@ -166,7 +175,9 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #define MICROS_PER_AUDIO_TICK 31 // = 1000000 / 32768 = 30.518, ...* 256 = 7812.6
 #endif
 
-
+#ifdef EXTERNAL_DAC
+#include"AudioConfigExternalDAC.h"
+#endif
 #if IS_TEENSY3()
 #include "AudioConfigTeensy3_12bit.h"
 #elif IS_STM32()
@@ -191,6 +202,7 @@ typedef unsigned int uint;
 typedef unsigned long ulong;
 
 #if defined(__AVR__)
+typedef unsigned char byte; // for arduino ide
 typedef unsigned char uint8_t;
 typedef signed char int8_t;
 typedef unsigned int uint16_t;
@@ -214,19 +226,19 @@ to mozziMircos(). For delaying events, you can use Mozzi's EventDelay() unit ins
 (not to be confused with AudioDelay()).
 
 In STANDARD mode, startMozzi() starts Timer 1 for PWM output and audio output interrupts,
-and in STANDARD_PLUS and HIFI modes, Mozzi uses Timer 1 for PWM and Timer2 for audio interrupts. 
+and in STANDARD_PLUS and HIFI modes, Mozzi uses Timer 1 for PWM and Timer2 for audio interrupts.
 
 The audio rate defaults to 16384 Hz, but you can experiment with 32768 Hz by changing AUDIO_RATE in mozzi_config.h.
 
 @param control_rate_hz Sets how often updateControl() is called.  It must be a power of 2.
 If no parameter is provided, control_rate_hz is set to CONTROL_RATE,
-which has a default value of 64 (you can re-\#define it in your sketch). 
+which has a default value of 64 (you can re-\#define it in your sketch).
 The practical upper limit for control rate depends on how busy the processor is,
 and you might need to do some tests to find the best setting.
 
-@note startMozzi calls setupMozziADC(), which calls setupFastAnalogRead() and adcDisconnectAllDigitalIns(), 
+@note startMozzi calls setupMozziADC(), which calls setupFastAnalogRead() and adcDisconnectAllDigitalIns(),
 which disables digital inputs on all analog input pins.  All in mozzi_analog.h and easy to change if you need to (hack).
-They are all called automatically and hidden away because it keeps things simple for a STANDARD_PLUS set up, 
+They are all called automatically and hidden away because it keeps things simple for a STANDARD_PLUS set up,
 but if it turns out to be confusing, they might need to become visible again.
 */
 void startMozzi(int control_rate_hz = CONTROL_RATE);
@@ -250,12 +262,18 @@ on which one(s) are required for other tasks. */
 void stopMozzi();
 
 
-// TB2017 deleted function, use startMozzi() instead
-// /** @ingroup core
-// Restores Mozzi audio and control interrupts, if they have been temporarily
-// disabled with pauseMozzi().
-// */
-// void unPauseMozzi();
+/** @ingroup core
+Obsolete function, use stopMozzi() instead.
+*/
+void pauseMozzi();
+
+//TB2017-19
+/** @ingroup core
+Obsolete function, use startMozzi() instead.
+Restores Mozzi audio and control interrupts, if they have been temporarily
+disabled with pauseMozzi().
+*/
+void unPauseMozzi();
 
 
 /** @ingroup core
@@ -288,7 +306,7 @@ buffer.  Also, if \#define USE_AUDIO_INPUT true is in Mozzi/mozzi_config.h,
 audioHook() takes care of moving audio input from the input buffer so it can be
 accessed with getAudioInput() in your updateAudio() routine.
 If other functions are called in loop() along with audioHook(), see if
-they can be called less often by moving them into updateControl(), 
+they can be called less often by moving them into updateControl(),
 to save processing power. Otherwise it may be most efficient to
 calculate a block of samples at a time by putting audioHook() in a loop of its
 own, rather than calculating only 1 sample for each time your other functions
@@ -299,14 +317,14 @@ void audioHook();
 
 
 /** @ingroup analog
-This returns audio input from the input buffer, if 
+This returns audio input from the input buffer, if
 \#define USE_AUDIO_INPUT true is in the Mozzi/mozzi_config.h file.
-The pin used for audio input is set in Mozzi/mozzi_config.h with 
+The pin used for audio input is set in Mozzi/mozzi_config.h with
 \#define AUDIO_INPUT_PIN 0 (or other analog input pin).
-The audio signal needs to be in the range 0 to 5 volts.  
+The audio signal needs to be in the range 0 to 5 volts.
 Circuits and discussions about biasing a signal
-in the middle of this range can be found at 
-http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal 
+in the middle of this range can be found at
+http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal
 and
 http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/ .
 A circuit and instructions for amplifying and biasing a microphone signal can be found at

@@ -1,23 +1,26 @@
 /* Example of filtering an analog input to remove DC bias,
     using Mozzi sonification library.
-    
-    Demonstrates DCfilter(), DC-blocking filter useful for 
+
+    Demonstrates DCfilter(), DC-blocking filter useful for
     highlighting changes in control signals.
     The output of the filter settles to 0 if the incoming signal stays constant.
-    If the input changes, the filter output swings to track the change and 
+    If the input changes, the filter output swings to track the change and
     eventually settles back to 0.
-     
-    Mozzi help/discussion/announcements:
+
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2013, CC by-nc-sa.
-     
+
 */
 
 #include <MozziGuts.h>
 #include <DCfilter.h>
 
-int sensorPin = A0; 
+int sensorPin = A0;
 
 DCfilter dcFiltered(0.9); // parameter sets how long the filter takes to settle
 
@@ -30,10 +33,10 @@ void setup() {
 
 void updateControl(){
   // read the value from the sensor:
-  int sensorValue = mozziAnalogRead(sensorPin); 
-  Serial.print(sensorValue); 
-  Serial.print("  Filtered = "); 
-  Serial.println(dcFiltered.next(sensorValue));              
+  int sensorValue = mozziAnalogRead(sensorPin);
+  Serial.print(sensorValue);
+  Serial.print("  Filtered = ");
+  Serial.println(dcFiltered.next(sensorValue));
 }
 
 

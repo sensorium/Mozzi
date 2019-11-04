@@ -1,17 +1,20 @@
 /*  Example of playing sampled sounds,
     using Mozzi sonification library.
-  
+
     Demonstrates one-shot samples scheduled
-    with EventDelay(), and fast random numbers with 
+    with EventDelay(), and fast random numbers with
     xorshift96() and rand(), a more friendly wrapper for xorshift96().
-  
+
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.com/Mozzi/
-  
-    Mozzi help/discussion/announcements:
+
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2012, CC by-nc-sa.
 */
 
@@ -23,8 +26,6 @@
 #include <EventDelay.h>
 #include <mozzi_rand.h>
 
-#define CONTROL_RATE 64
-
 // use: Sample <table_size, update_rate> SampleName (wavetable)
 Sample <BAMBOO_00_2048_NUM_CELLS, AUDIO_RATE>aBamboo0(BAMBOO_00_2048_DATA);
 Sample <BAMBOO_01_2048_NUM_CELLS, AUDIO_RATE>aBamboo1(BAMBOO_01_2048_DATA);
@@ -34,7 +35,7 @@ Sample <BAMBOO_02_2048_NUM_CELLS, AUDIO_RATE>aBamboo2(BAMBOO_02_2048_DATA);
 EventDelay kTriggerDelay;
 
 void setup(){
-  startMozzi(CONTROL_RATE);
+  startMozzi();
   aBamboo0.setFreq((float) BAMBOO_00_2048_SAMPLERATE / (float) BAMBOO_00_2048_NUM_CELLS); // play at the speed it was recorded at
   aBamboo1.setFreq((float) BAMBOO_01_2048_SAMPLERATE / (float) BAMBOO_01_2048_NUM_CELLS);
   aBamboo2.setFreq((float) BAMBOO_02_2048_SAMPLERATE / (float) BAMBOO_02_2048_NUM_CELLS);
@@ -79,7 +80,7 @@ void updateControl(){
 
 
 int updateAudio(){
-  int asig= (int) 
+  int asig= (int)
     ((long) aBamboo0.next()*gains.gain0 +
       aBamboo1.next()*gains.gain1 +
       aBamboo2.next()*gains.gain2)>>4;
@@ -93,15 +94,3 @@ int updateAudio(){
 void loop(){
   audioHook();
 }
-
-
-
-
-
-
-
-
-
-
-
-

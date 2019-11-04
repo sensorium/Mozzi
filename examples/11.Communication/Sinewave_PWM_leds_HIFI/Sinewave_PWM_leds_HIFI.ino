@@ -1,7 +1,7 @@
-/*  Example playing a sinewave 
+/*  Example playing a sinewave
     and changing the brightness of 3 leds
     using Mozzi sonification library.
-  
+
     Demonstrates the use of Oscil for audio and control,
     and a way to do PWM on digital pins without disrupting audio.
     Control oscillators are used here to modulate the brightness of the leds
@@ -12,9 +12,9 @@
     If there is visible flicker, the resolution of the pwm could be made lower,
     or the AUDIO_RATE could be increased to 32768 Hz, if the
     cpu isn't too busy.
-  
-    HIFI mode is not for Teensy 3.1, but the PWM led part should work.
-    
+
+    HIFI mode is not for Teensy 3.x, but the PWM led part should work.
+
     IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
     be changed from STANDARD mode to HIFI.
     In Mozz/mozzi_config.h, change
@@ -23,12 +23,12 @@
     to
     //#define AUDIO_MODE STANDARD
     #define AUDIO_MODE HIFI
-  
-  
+
+
     Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
     Check the Mozzi core module documentation for others and more detail
-  
-                     3.9k 
+
+                     3.9k
      pin 9  ---WWWW-----|-----output
                     499k           |
      pin 10 ---WWWW---- |
@@ -36,24 +36,26 @@
                              4.7n  ==
                                        |
                                    ground
-  
-    Resistors are ±0.5%  Measure and choose the most precise 
+
+    Resistors are ±0.5%  Measure and choose the most precise
     from a batch of whatever you can get.  Use two 1M resistors
     in parallel if you can't find 499k.
-    Alternatively using 39 ohm, 4.99k and 470nF components will 
+    Alternatively using 39 ohm, 4.99k and 470nF components will
     work directly with headphones.
 
     LEDs:
     Red led from pin 3 through a 1.5k resistor to ground
     Green led from pin 4 through a 1.5k resistor to ground
     Blue led from pin 5 through a 1.5k resistor to ground
-  
-    Mozzi help/discussion/announcements:
+
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2012-13, CC by-nc-sa.
 */
-
 
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
@@ -97,7 +99,7 @@ void setup(){
   kGreen.setFreq(0.3f);
   kBlue.setFreq(0.27f);
   // set audio oscil frequency
-  aSin.setFreq(440); 
+  aSin.setFreq(440);
   startMozzi(); // uses the default control rate of 64, defined in mozzi_config.h
 }
 
@@ -120,5 +122,3 @@ int updateAudio(){
 void loop(){
   audioHook(); // required here
 }
-
-

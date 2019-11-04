@@ -1,9 +1,9 @@
 /*  Example swapping between sounds played by a single Oscil
     with Mozzi sonification library.
-  
+
     Demonstrates declaring an Oscil without a table,
     and Oscil::setTable() method.
-  
+
     Tim Barrass 2012, CC by-nc-sa.
 */
 
@@ -12,13 +12,11 @@
 #include <EventDelay.h>
 
 // tables need to be the same size
-#include <tables/sin512_int8.h> 
+#include <tables/sin512_int8.h>
 #include <tables/saw_analogue512_int8.h>
 
-#define CONTROL_RATE 64
-
 // declare with or without a wavetable, and use setTable() later
-Oscil <512, AUDIO_RATE> aOscil; 
+Oscil <512, AUDIO_RATE> aOscil;
 
 // for scheduling table swaps
 EventDelay kSwapTablesDelay;
@@ -27,7 +25,7 @@ boolean using_sin = true;
 
 
 void setup(){
-  startMozzi(CONTROL_RATE);
+  startMozzi();
   kSwapTablesDelay.set(1000); // 1 second countdown, within resolution of CONTROL_RATE
   aOscil.setFreq(440.f);
 }
@@ -44,7 +42,7 @@ void updateControl(){
       }
       kSwapTablesDelay.start();
     }
-} 
+}
 
 
 int updateAudio(){
@@ -55,8 +53,3 @@ int updateAudio(){
 void loop(){
   audioHook(); // required here
 }
-
-
-
-
-

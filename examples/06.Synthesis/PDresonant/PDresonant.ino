@@ -1,6 +1,6 @@
 /* Phase distortion used to simulate resonant filter, based on
     https://en.wikipedia.org/wiki/Phase_distortion_synthesis
-    
+
     Demonstrates PDResonant, a class which can be used as a
     simple midi instrument.  The class shows how the Mozzi Phasor class
     can be used to generate an index into a wavetable, and an ADSR
@@ -8,24 +8,26 @@
     More complex phase distortion effects could be developed by using
     precalculated tables, or calcuating tables on the fly using a double buffer,
     or a line-breakpoint model, a sort of hybridPhasor-Line object.
-    
-    This version can only play a single voice at a time, it might 
+
+    This version can only play a single voice at a time, it might
     be possible to optimise it enough for more simultaneous voices.
-    
-    Circuit: 
+
+    Circuit:
       MIDI input circuit as per http://arduino.cc/en/Tutorial/Midi
       (midi has to be disconnected from rx for sketch to upload)
       Audio output on digital pin 9 on a Uno or similar.
-    
-    Mozzi help/discussion/announcements:
+
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2013-14, CC by-nc-sa.
  */
 
+//#include <MIDI.h> may be needed on some systems/versions
 
-
-#include <MIDI.h>
 #include <MozziGuts.h>
 
 // for fake midi
@@ -53,7 +55,7 @@ const IntMap kmapY(0, 1023, 0, 3000); //D
 PDResonant voice;
 
 // for fake midi
-EventDelay startNote; 
+EventDelay startNote;
 EventDelay endNote;
 
 void setup(){
@@ -66,7 +68,7 @@ void setup(){
   //MIDI.setHandleNoteOn(HandleNoteOn);
   //MIDI.setHandleNoteOff(HandleNoteOff);
 
-  // open MOZZI (: 
+  // open MOZZI (:
   startMozzi(CONTROL_RATE);
 
 }
@@ -114,7 +116,7 @@ void fakeMidiRead(){
 
 
 void updateControl(){
-  // check MIDI : 
+  // check MIDI :
   //MIDI.read();
 
   // analog joystick for controlling speed of modulation: assigned to attack, decay times and sustain level
@@ -138,18 +140,3 @@ int updateAudio(){
 void loop(){
   audioHook(); // required here
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

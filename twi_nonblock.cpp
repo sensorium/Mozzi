@@ -6,7 +6,7 @@
  */
 
 #include "hardware_defines.h"
- 
+
 // Added by TB2014 for Mozzi library, to hide code from Teensy 3.1
 #if IS_AVR()
 
@@ -23,7 +23,7 @@ uint8_t twi_readAddress;
 // uint8_t * twi_writeData;
 uint8_t twi_readLength;
 
-/* 
+/*
  * Function twi_init
  * Desc     readys twi pins and sets twi bitrate
  * Input    none
@@ -34,7 +34,7 @@ void initialize_twi_nonblock(){
   rxBufferLength = 0;
 
   txBufferIndex = 0;
-  txBufferLength = 0;  
+  txBufferLength = 0;
 
   // initialize state
   twi_state = TWI_READY;
@@ -88,7 +88,7 @@ void twowire_beginTransmission( uint8_t address ){
   txAddress = address;
   // reset tx buffer iterator vars
   txBufferIndex = 0;
-  txBufferLength = 0;  
+  txBufferLength = 0;
 }
 
 void twowire_send( uint8_t data ){
@@ -101,9 +101,9 @@ void twowire_send( uint8_t data ){
     // put byte in tx buffer
     txBuffer[txBufferIndex] = data;
     ++txBufferIndex;
-    // update amount in buffer   
+    // update amount in buffer
     txBufferLength = txBufferIndex;
-  }    
+  }
 }
 
 uint8_t twowire_endTransmission(void)
@@ -118,7 +118,7 @@ uint8_t twowire_endTransmission(void)
   return ret;
 }
 
-/* 
+/*
  * Function twi_readFrom
  * Desc     attempts to become twi bus master and read a
  *          series of bytes from a device on the bus
@@ -141,7 +141,7 @@ uint8_t twi_readFromBlocking(uint8_t address, uint8_t* data, uint8_t length)
   while(TWI_READY != twi_state){
     continue;
   }
-  
+
   twi_state = TWI_MRX;
   // reset error state (0xFF.. no error occured)
   twi_error = 0xFF;
@@ -150,7 +150,7 @@ uint8_t twi_readFromBlocking(uint8_t address, uint8_t* data, uint8_t length)
   twi_masterBufferIndex = 0;
   twi_masterBufferLength = length-1;  // This is not intuitive, read on...
   // On receive, the previously configured ACK/NACK setting is transmitted in
-  // response to the received byte before the interrupt is signalled. 
+  // response to the received byte before the interrupt is signalled.
   // Therefor we must actually set NACK when the _next_ to last byte is
   // received, causing that NACK to be sent in response to receiving the last
   // expected byte of data.
@@ -174,7 +174,7 @@ uint8_t twi_readFromBlocking(uint8_t address, uint8_t* data, uint8_t length)
   for(i = 0; i < length; ++i){
     data[i] = twi_masterBuffer[i];
   }
-	
+
   return length;
 }
 
@@ -190,10 +190,10 @@ uint8_t twi_initiateReadFrom(uint8_t address, uint8_t length)
   if(TWI_BUFFER_LENGTH < length){
     return 0;
   }
-  
+
   twi_readLength = length;
   twi_readAddress = address;
-  
+
   if ( TWI_READY == twi_state ){
       twi_continueReadFrom();
   } else {
@@ -212,7 +212,7 @@ uint8_t twi_initiateReadFrom(uint8_t address, uint8_t length)
 
 
 void twi_continueReadFrom(){
-    
+
   twi_state = TWI_MRX;
   // reset error state (0xFF.. no error occured)
   twi_error = 0xFF;
@@ -221,7 +221,7 @@ void twi_continueReadFrom(){
   twi_masterBufferIndex = 0;
   twi_masterBufferLength = twi_readLength-1;  // This is not intuitive, read on...
   // On receive, the previously configured ACK/NACK setting is transmitted in
-  // response to the received byte before the interrupt is signalled. 
+  // response to the received byte before the interrupt is signalled.
   // Therefor we must actually set NACK when the _next_ to last byte is
   // received, causing that NACK to be sent in response to receiving the last
   // expected byte of data.
@@ -245,7 +245,7 @@ uint8_t twi_readMasterBuffer( uint8_t* data, uint8_t length ){
   for(i = 0; i < length; ++i){
     data[i] = twi_masterBuffer[i];
   }
-	
+
   return length;
 }
 
@@ -254,7 +254,7 @@ uint8_t twi_readMasterBuffer( uint8_t* data, uint8_t length ){
 /// ----end------ non-blocking version ----------
 
 
-/* 
+/*
  * Function twi_writeTo
  * Desc     attempts to become twi bus master and write a
  *          series of bytes to a device on the bus
@@ -290,16 +290,16 @@ uint8_t twi_writeToBlocking(uint8_t address, uint8_t* data, uint8_t length, uint
   // initialize buffer iteration vars
   twi_masterBufferIndex = 0;
   twi_masterBufferLength = length;
-  
+
   // copy data to twi buffer
   for(i = 0; i < length; ++i){
     twi_masterBuffer[i] = data[i];
   }
-  
+
   // build sla+w, slave device address + w bit
   twi_slarw = TW_WRITE;
   twi_slarw |= address << 1;
-  
+
   // send start condition
   TWCR = _BV(TWEN) | _BV(TWIE) | _BV(TWEA) | _BV(TWINT) | _BV(TWSTA);
 
@@ -307,7 +307,7 @@ uint8_t twi_writeToBlocking(uint8_t address, uint8_t* data, uint8_t length, uint
   while(wait && (TWI_MTX == twi_state)){
     continue;
   }
-  
+
   if (twi_error == 0xFF)
     return 0;	// success
   else if (twi_error == TW_MT_SLA_NACK)
@@ -364,16 +364,16 @@ void twi_continueWriteTo(){
   // initialize buffer iteration vars
   twi_masterBufferIndex = 0;
   twi_masterBufferLength = twi_writeLength;
-  
+
   // copy data to twi buffer
   for(i = 0; i < twi_writeLength; ++i){
     twi_masterBuffer[i] = twi_writeData[i];
   }
-  
+
   // build sla+w, slave device address + w bit
   twi_slarw = TW_WRITE;
   twi_slarw |= twi_writeAddress << 1;
-  
+
   // send start condition
   TWCR = _BV(TWEN) | _BV(TWIE) | _BV(TWEA) | _BV(TWINT) | _BV(TWSTA);
 }
@@ -382,7 +382,7 @@ void twi_continueWriteTo(){
 // -----------end non-blocking --------------------
 
 
-/* 
+/*
  * Function twi_reply
  * Desc     sends byte or readys receive line
  * Input    ack: byte indicating to ack or to nack
@@ -400,7 +400,7 @@ void twi_reply(uint8_t ack)
 
 
 
-/* 
+/*
  * Function twi_stop
  * Desc     relinquishes bus master status
  * Input    none
@@ -429,7 +429,7 @@ void twi_stop(void)
 
 
 
-/* 
+/*
  * Function twi_releaseBus
  * Desc     releases bus control
  * Input    none
@@ -466,7 +466,7 @@ ISR(TWI_vect)
     // Master Transmitter
     case TW_MT_SLA_ACK:  // slave receiver acked address
     case TW_MT_DATA_ACK: // slave receiver acked data
-      // if there is data to send, send it, otherwise stop 
+      // if there is data to send, send it, otherwise stop
       if(twi_masterBufferIndex < twi_masterBufferLength){
         // copy data to output register and ack
         TWDR = twi_masterBuffer[twi_masterBufferIndex++];
@@ -550,7 +550,7 @@ ISR(TWI_vect)
 //       // nack back at master
 //       twi_reply(0);
 //       break;
-//     
+//
 //     // Slave Transmitter
 //     case TW_ST_SLA_ACK:          // addressed, returned ack
 //     case TW_ST_ARB_LOST_SLA_ACK: // arbitration lost, returned ack
@@ -579,7 +579,7 @@ ISR(TWI_vect)
 //         twi_reply(0);
 //       }
 //       break;
-//     case TW_ST_DATA_NACK: // received nack, we are done 
+//     case TW_ST_DATA_NACK: // received nack, we are done
 //     case TW_ST_LAST_DATA: // received ack, but we are done already!
 //       // ack future responses
 //       twi_reply(1);

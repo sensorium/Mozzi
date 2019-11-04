@@ -1,4 +1,4 @@
-/*  
+/*
   Example using a potentiometer to change the amplitude of a sinewave
   and a light dependent resister (LDR) to change the frequency.
   with Mozzi sonification library.
@@ -7,10 +7,10 @@
 
   This example goes with a tutorial on the Mozzi site:
   http://sensorium.github.io/Mozzi/learn/introductory-tutorial/
-  
+
   The circuit:
      Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
      check the README or http://sensorium.github.com/Mozzi/
 
   Potentiometer connected to analog pin 0:
@@ -18,15 +18,18 @@
      Side pins of the potentiometer go to +5V and ground
 
  +5V ---|
-              /    
-  A0 ----\  potentiometer 
-              /    
+              /
+  A0 ----\  potentiometer
+              /
  GND ---|
- 
+
   Light dependent resistor (LDR) and 5.1k resistor on analog pin 1:
     LDR from analog pin to +5V (3.3V on Teensy 3.1)
     5.1k resistor from analog pin to ground
- 
+
+  Mozzi documentation/API
+  https://sensorium.github.io/Mozzi/doc/html/index.html
+
   Mozzi help/discussion/announcements:
   https://groups.google.com/forum/#!forum/mozzi-users
 
@@ -55,18 +58,18 @@ void setup(){
 void updateControl(){
   // read the potentiometer
   int knob_value = mozziAnalogRead(KNOB_PIN); // value is 0-1023
-  
+
   // map it to an 8 bit volume range for efficient calculations in updateAudio
   volume = knob_value >> 2;  // 10 bits (0->1023) shifted right by 2 bits to give 8 bits (0->255)
-  
+
   // print the value to the Serial monitor for debugging
   Serial.print("volume = ");
   Serial.print((int)volume);
   Serial.print("\t"); // prints a tab
-  
+
   // read the light dependent resistor
   int light_level = mozziAnalogRead(LDR_PIN); // value is 0-1023
-  
+
   // print the value to the Serial monitor for debugging
   Serial.print("light level = ");
   Serial.print(light_level);
@@ -74,7 +77,7 @@ void updateControl(){
 
   // set the frequency
   aSin.setFreq(light_level);
-  
+
   Serial.println(); // next line
 }
 

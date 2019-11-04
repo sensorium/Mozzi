@@ -1,20 +1,29 @@
 /*  Example applying ADSR envelopes to 2 audio oscillators
      with Mozzi sonification library.
 
-     Demonstrates ADSR, EventDelay and rand().
+    This shows how to use an ADSR which updates at AUDIO_RATE,
+    in updateAudio(), and output using next() at AUDIO_RATE in updateAudio().
 
-     Tim Barrass 2013, CC by-nc-sa.
+    Another example in this folder shows an ADSR updating at CONTROL_RATE,
+    which is more efficient, but AUDIO_RATE updates shown in this example
+    enable faster envelope transitions.
+
+    Mozzi documentation/API
+    https://sensorium.github.io/Mozzi/doc/html/index.html
+
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+
+    Tim Barrass 2013, CC by-nc-sa.
  */
 
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <EventDelay.h>
 #include <ADSR.h>
-#include <tables/sin8192_int8.h> 
+#include <tables/sin8192_int8.h>
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
-
-#define CONTROL_RATE 64
 
 Oscil <8192, AUDIO_RATE> aOscil0(SIN8192_DATA);
 Oscil <8192, AUDIO_RATE> aOscil1(SIN8192_DATA);
@@ -32,10 +41,10 @@ void setup(){
   //Serial.begin(9600); // for Teensy 3.1, beware printout can cause glitches
   //Serial.begin(115200);
   randSeed(); // fresh random
-  envelope0.setTimes(rand(300),rand(300),rand(300),rand(300));  
-  envelope1.setTimes(rand(300),rand(300),rand(300),rand(300));  
+  envelope0.setTimes(rand(300),rand(300),rand(300),rand(300));
+  envelope1.setTimes(rand(300),rand(300),rand(300),rand(300));
   noteDelay.set(2000); // 2 second countdown
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 
@@ -73,12 +82,12 @@ void updateControl(){
       release_ms0 = new_value;
       break;
     }
-    envelope0.setTimes(attack0,decay0,sustain0,release_ms0);    
+    envelope0.setTimes(attack0,decay0,sustain0,release_ms0);
     envelope0.noteOn();
 
 
 
-    // change adsr 1 
+    // change adsr 1
 
     // choose envelope levels
     byte attack1_level = rand(128)+127;
@@ -106,42 +115,42 @@ void updateControl(){
       release_ms1 = new_value;
       break;
     }
-    envelope1.setTimes(attack1,decay1,sustain1,release_ms1);    
+    envelope1.setTimes(attack1,decay1,sustain1,release_ms1);
     envelope1.noteOn();
 
     // change the pitch
     byte midi_note = rand(107)+20;
     int freq = (int)mtof(midi_note);
     aOscil0.setFreq(freq);
-    aOscil1.setFreq(freq*2);   
+    aOscil1.setFreq(freq*2);
 
 /*
     // print to screen
-    Serial.print("midi_note\t"); 
+    Serial.print("midi_note\t");
     Serial.println(midi_note);
-    Serial.print("attack0_level\t"); 
+    Serial.print("attack0_level\t");
     Serial.print(attack0_level);
-    Serial.print("\t attack1_level\t"); 
+    Serial.print("\t attack1_level\t");
     Serial.println(attack1_level);
-    Serial.print("decay0_level\t"); 
+    Serial.print("decay0_level\t");
     Serial.print(decay0_level);
-    Serial.print("\t decay1_level\t"); 
+    Serial.print("\t decay1_level\t");
     Serial.println(decay1_level);
-    Serial.print("attack0\t\t"); 
+    Serial.print("attack0\t\t");
     Serial.print(attack0);
-    Serial.print("\t attack1\t"); 
+    Serial.print("\t attack1\t");
     Serial.println(attack1);
-    Serial.print("decay0\t\t"); 
+    Serial.print("decay0\t\t");
     Serial.print(decay0);
-    Serial.print("\t decay1\t\t"); 
+    Serial.print("\t decay1\t\t");
     Serial.println(decay1);
-    Serial.print("sustain0\t"); 
+    Serial.print("sustain0\t");
     Serial.print(sustain0);
-    Serial.print("\t sustain1\t"); 
+    Serial.print("\t sustain1\t");
     Serial.println(sustain1);
-    Serial.print("release0\t"); 
+    Serial.print("release0\t");
     Serial.print(release_ms0);
-    Serial.print("\t release1\t"); 
+    Serial.print("\t release1\t");
     Serial.println(release_ms1);
     Serial.println();
 */
@@ -159,7 +168,7 @@ void updateControl(){
   }
   envelope0.update();
   envelope1.update();
-} 
+}
 
 
 int updateAudio(){
@@ -172,11 +181,3 @@ int updateAudio(){
 void loop(){
   audioHook(); // required here
 }
-
-
-
-
-
-
-
-

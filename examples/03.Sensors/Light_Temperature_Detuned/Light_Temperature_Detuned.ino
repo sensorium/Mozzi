@@ -1,29 +1,32 @@
-/*  
+/*
   Plays a fluctuating ambient wash in response to light and temperature sensors.
 
   Pairs of audio oscillators are detuned in response to light on an LDR and
   the base frequencies are offset depending on the temperature.
-  
-  It's a pretty dumb sonification, but at this stage 
+
+  It's a pretty dumb sonification, but at this stage
   it's just to demonstrate the possibility of reading sensors while
   lots of audio oscillators are running.
-  
+
   Circuit:
     Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.com/Mozzi/
-    
+
     Temperature dependent resistor (Thermistor) and 5.1k resistor on analog pin 1:
       Thermistor from analog pin to +5V (3.3V on Teensy 3.1)
       5.1k resistor from analog pin to ground
-    
+
     Light dependent resistor (LDR) and 5.1k resistor on analog pin 2:
       LDR from analog pin to +5V (3.3V on Teensy 3.1)
       5.1k resistor from analog pin to ground
-      
-    Mozzi help/discussion/announcements:
+
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2012, CC by-nc-sa.
 */
 
@@ -43,7 +46,6 @@ Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos3(COS8192_DATA);
 Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos4(COS8192_DATA);
 Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos5(COS8192_DATA);
 Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos6(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos0(COS8192_DATA);
 
 // duplicates but slightly off frequency for adding to originals
 Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos1b(COS8192_DATA);
@@ -52,7 +54,6 @@ Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos3b(COS8192_DATA);
 Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos4b(COS8192_DATA);
 Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos5b(COS8192_DATA);
 Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos6b(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos0b(COS8192_DATA);
 
 // base pitch frequencies
 float f0, f1,f2,f3,f4,f5,f6;
@@ -65,10 +66,9 @@ const float OFFSET_SCALE = 0.1; // 0.1*1023 = 102.3 Hz max drift
 
 void setup(){
   startMozzi();
-  
+
   // select base frequencies using mtof
   // C F♯ B♭ E A D the "Promethean chord"
-  f0 = mtof(36.f); // a spare C !
   f1 = mtof(48.f);
   f2 = mtof(54.f);
   f3 = mtof(58.f);
@@ -78,7 +78,6 @@ void setup(){
 
 
   // set Oscils with chosen frequencies
-  aCos0.setFreq(f0);
   aCos1.setFreq(f1);
   aCos2.setFreq(f2);
   aCos3.setFreq(f3);
@@ -87,13 +86,12 @@ void setup(){
   aCos6.setFreq(f6);
 
   // set frequencies of duplicate oscillators
-  aCos6b.setFreq(f6);
-  aCos0b.setFreq(f0);
   aCos1b.setFreq(f1);
   aCos2b.setFreq(f2);
   aCos3b.setFreq(f3);
   aCos4b.setFreq(f4);
   aCos5b.setFreq(f5);
+  aCos6b.setFreq(f6);
 }
 
 
@@ -109,17 +107,11 @@ void updateControl(){
 
   float base_freq_offset = OFFSET_SCALE*temperature;
   float divergence = DIVERGENCE_SCALE*light_input;
-  
-  float freq;
-  
-  // change frequencies of the oscillators, randomly choosing one pair each time to change
-  switch (rand(7)){ 
 
-    case 0:
-      freq = f0+base_freq_offset;
-      aCos0.setFreq(freq);
-      aCos0b.setFreq(freq+divergence);
-    break;
+  float freq;
+
+  // change frequencies of the oscillators, randomly choosing one pair each time to change
+  switch (rand(6)+1){
 
     case 1:
       freq = f1+base_freq_offset;
@@ -163,7 +155,6 @@ void updateControl(){
 int updateAudio(){
 
   int asig =
-    aCos0.next() + aCos0b.next() +
     aCos1.next() + aCos1b.next() +
     aCos2.next() + aCos2b.next() +
     aCos3.next() + aCos3b.next() +

@@ -1,18 +1,21 @@
 /*  Example changing the frequency of 2 sinewaves with 1 analog input,
-    using RollingAverage() to filter one of the control signals 
+    using RollingAverage() to filter one of the control signals
     and the other one unfiltered,
     using Mozzi sonification library.
-  
+
     Demonstrates the difference between a raw control
     signal and one smoothed with RollingAverage().
-  
+
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.com/Mozzi/
-  
-    Mozzi help/discussion/announcements:
+
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2013, CC by-nc-sa.
 */
 
@@ -60,5 +63,3 @@ int updateAudio(){
 void loop(){
   audioHook();
 }
-
-

@@ -1,28 +1,31 @@
-/*  
+/*
   Plays a fluctuating ambient wash in response to light and temperature sensors,
   using Mozzi sonification library.
-  
+
   8 control rate oscillators are used to set the volume of 8 audio oscillators.
   Temperature readings from a thermistor are used to set the notes
   being played, and light readings from a light dependent resistor are
   mapped to the pulse rates of the volume control oscillators.
-  
+
   Circuit:
     Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.com/Mozzi/
-    
+
     Temperature dependent resistor (Thermistor) and 5.1k resistor on analog pin 1:
       Thermistor from analog pin to +5V (3.3V on Teensy 3.1)
       5.1k resistor from analog pin to ground
-    
+
     Light dependent resistor (LDR) and 5.1k resistor on analog pin 2:
       LDR from analog pin to +5V (3.3V on Teensy 3.1)
       5.1k resistor from analog pin to ground
-  
+
+  Mozzi documentation/API
+  https://sensorium.github.io/Mozzi/doc/html/index.html
+
   Mozzi help/discussion/announcements:
   https://groups.google.com/forum/#!forum/mozzi-users
-  
+
   Tim Barrass 2013, CC by-nc-sa.
 */
 
@@ -67,7 +70,7 @@ float upnotes[NUM_VOICES] = {
 
 float downnotes[NUM_VOICES] = {
   mtof(64.f),mtof(65.f),mtof(88.f),mtof(72.f),mtof(79.f),mtof(84.f),mtof(86.f),mtof(89.f)};
-  
+
 
 void setup(){
   startMozzi(CONTROL_RATE);
@@ -90,7 +93,7 @@ int temperatureToFreq(char oscil_num, int temperature){
 
 void updateControl(){
   static float previous_pulse_freq;
-    
+
   // read analog inputs
   int temperature = mozziAnalogRead(THERMISTOR_PIN); // not calibrated to degrees!
   int light = mozziAnalogRead(LDR_PIN);
@@ -107,10 +110,10 @@ void updateControl(){
   v5 = kVol5.next();
   v6 = kVol6.next();
   v7 = kVol7.next();
-  
+
   // set one note oscillator frequency each time (if it's volume is close to 0)
   static char whoseTurn;
-  switch(whoseTurn){  
+  switch(whoseTurn){
   case 0:
     kVol0.setFreq(pulse_freq);
     if(abs(v0)<THRESHOLD) aCos0.setFreq(temperatureToFreq(0,temperature));
@@ -177,4 +180,3 @@ int updateAudio(){
 void loop(){
   audioHook();
 }
-

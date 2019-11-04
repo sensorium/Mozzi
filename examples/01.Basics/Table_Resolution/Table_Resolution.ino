@@ -1,20 +1,19 @@
 /* Example playing sine tables of different sizes
 	 with Mozzi sonification library.
-	 
+
 	 Demonstrates the audible quality of different length tables
 	 played with Oscil and scheduling with EventDelay.
-	 
+
 	 Circuit: Audio output on digital pin 9 on a Uno or similar, or
-	 DAC/A14 on Teensy 3.1, or 
+	 DAC/A14 on Teensy 3.1, or
 	 check the README or http://sensorium.github.com/Mozzi/
-	 
+
 	 Mozzi help/discussion/announcements:
 	 https://groups.google.com/forum/#!forum/mozzi-users
-	 
+
 	 Tim Barrass 2012, CC by-nc-sa.
 */
 
-//#include <ADC.h>  // Teensy 3.1 uncomment this line and install
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/sin256_int8.h>
@@ -116,11 +115,3 @@ int updateAudio(){
 void loop(){
   audioHook(); // required here
 }
-
-
-
-
-
-
-
-

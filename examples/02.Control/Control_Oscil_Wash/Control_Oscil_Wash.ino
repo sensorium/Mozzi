@@ -1,20 +1,23 @@
 /*  Plays a fluctuating ambient wash,
     using Mozzi sonification library.
-  
+
     Demonstrates audio and control rate updates.
     There are 8 oscillators updated at control rate to set
     the volume of 8 audio oscillators.  Updating the volume
     at control rate saves processor time, incrementing the
     Oscils only 128 times per second rather than at the
     audio rate of 16384 Hz.
-  
+
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.com/Mozzi/
-  
-    Mozzi help/discussion/announcements:
+
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2012, CC by-nc-sa.
 */
 
@@ -71,7 +74,7 @@ void setup(){
   kVol8.setFreq(0.041f);
 
   v1=v2=v3=v4=v5=v6=v7=v8=127;
-  
+
   startMozzi(CONTROL_RATE);
 }
 

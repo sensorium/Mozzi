@@ -82,18 +82,15 @@ public:
 	@param num_steps how many steps to take to reach the target.
 	 */
 	inline
-	void set(T targetvalue, T num_steps)
+	  void set(T targetvalue, T num_steps)
 	{
-		T numerator;
-		numerator = targetvalue-current_value;
-		//float step = (float)numerator/num_steps;
-		T step = numerator/(num_steps ? num_steps : 1);
-		step_size= (T)step;
-		//Serial.print("numerator");Serial.print(" \t");Serial.println(numerator);
-		//Serial.print("num_steps");Serial.print(" \t");Serial.println(num_steps);
-		//Serial.print(step);Serial.print(" \t");Serial.println(step_size);
-		//step_size=(T)((((float)targetvalue-current_value)/num_steps));
-
+	  if(num_steps) {
+	    T numerator = targetvalue-current_value;
+	    step_size= numerator/num_steps;
+	  } else {
+	    step_size = 0;
+	    current_value = targetvalue;
+	  }
 	}
 
 	/** Given a new starting value, target value and the number of steps to take on the way, this sets the step size needed to get there.

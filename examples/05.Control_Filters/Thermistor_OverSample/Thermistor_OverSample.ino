@@ -1,5 +1,5 @@
 
-/*    
+/*
   Example of oversampling analog input from a thermistor
   for increased resolution.  It's a basic attempt at a biofeedback
   device used as an ineffective treatment for migraines.  The idea
@@ -13,13 +13,16 @@
 
   The circuit:
      Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
      check the README or http://sensorium.github.com/Mozzi/
 
   Temperature dependent resistor (Thermistor) and 5.1k resistor on analog pin 1:
     Thermistor from analog pin to +5V (3.3V on Teensy 3.1)
     5.1k resistor from analog pin to ground
-    
+
+  Mozzi documentation/API
+  https://sensorium.github.io/Mozzi/doc/html/index.html
+
   Mozzi help/discussion/announcements:
   https://groups.google.com/forum/#!forum/mozzi-users
 
@@ -33,13 +36,10 @@
 #include <OverSample.h>
 #include <ControlDelay.h>
 
-
-//#define CONTROL_RATE 256 
-
 // use: Oscil <table_size, update_rate> oscilName (wavetable)
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aTremelo(SIN2048_DATA); 
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aEnvelope(SIN2048_DATA); 
+Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aTremelo(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aEnvelope(SIN2048_DATA);
 
 Line <float> freqLine;
 
@@ -60,28 +60,28 @@ void setup(){
   //Serial.begin(9600); // for Teensy 3.1, beware printout can cause glitches
   Serial.begin(115200);
   aEnvelope.setFreq(ENVELOPE_DURATION);
-  startMozzi(); 
+  startMozzi();
 }
 
 
 void updateControl(){
   float start_freq, end_freq;
   static int counter, old_oversampled;
-  
+
   // read the variable resistor
   int sensor_value = mozziAnalogRead(INPUT_PIN); // value is 0-1023
-  
+
   // get the next oversampled sensor value
   int oversampled = overSampler.next(sensor_value);
-  
+
   // modulate the amplitude of the sound in proportion to the magnitude of the oversampled sensor
   float tremeloRate = TREMOLO_SCALE*(oversampled-TREMOLO_OFFSET);
   tremeloRate = tremeloRate*tremeloRate*tremeloRate*tremeloRate*tremeloRate;
   aTremelo.setFreq(tremeloRate);
-  
+
   // every half second
    if (--counter<0){
-   
+
     if (oversampled>old_oversampled){ // high tweet up if temp rose
       start_freq = 550.f;
       end_freq = 660.f;
@@ -94,10 +94,10 @@ void updateControl(){
     }
     old_oversampled = oversampled;
     counter = LINE_LENGTH-1; // reset counter
-    
+
     // set the line to change the main frequency
     freqLine.set(start_freq,end_freq,LINE_LENGTH);
-    
+
     // print out for debugging
     Serial.print(oversampled);Serial.print("\t");Serial.print(start_freq);Serial.print("\t");Serial.println(end_freq);
   }
@@ -109,13 +109,10 @@ void updateControl(){
 
 
 int updateAudio(){
-  return ((((int)aSin.next()*(128+aTremelo.next()))>>8)*aEnvelope.next())>>8; 
+  return ((((int)aSin.next()*(128+aTremelo.next()))>>8)*aEnvelope.next())>>8;
 }
 
 
 void loop(){
   audioHook(); // required here
 }
-
-
-

@@ -1,15 +1,18 @@
 /*  Example sliding between frequencies,
     using Mozzi sonification library.
-  
+
     Demonstrates using Smooth to filter a control signal.
-  
+
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.com/Mozzi/
-  
-    Mozzi help/discussion/announcements:
+
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2012, CC by-nc-sa.
 */
 
@@ -21,7 +24,7 @@
 #include <mozzi_midi.h>
 
 // this is a high value to avoid zipper noise
-#define CONTROL_RATE 1024 
+#define CONTROL_RATE 1280
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
@@ -65,4 +68,3 @@ int updateAudio(){
 void loop(){
   audioHook();
 }
-

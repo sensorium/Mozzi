@@ -1,6 +1,6 @@
 /*  Example of reverb on a synthesised sound
     using Mozzi sonification library.
-  
+
     Demonstrates ReverbTank, a reverb small enough to fit on
     the Arduino Nano, which for some reason wasn't able to fit a larger version
     which did fit on other 328 based boards.
@@ -9,13 +9,16 @@
     but also has default delay times which can be changed in the constructor
     or by setting during run time to allow live tweaking.
     The synthesised sound comes from the phasemod synth example.
-  
+
     Circuit: Audio output on digital pin 9 for STANDARD output on a Uno or similar, or
     see the readme.md file for others.
-  
-    Mozzi help/discussion/announcements:
+
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2013, CC by-nc-sa.
 */
 
@@ -25,10 +28,9 @@
 #include <tables/cos8192_int8.h>
 #include <tables/envelop2048_uint8.h>
 
-
 ReverbTank reverb;
 
-#define CONTROL_RATE 512 // quite fast, keeps modulation smooth
+#define CONTROL_RATE 640 // quite fast, keeps modulation smooth
 
 // Synth from PhaseMod_Envelope example
 Oscil <COS8192_NUM_CELLS, AUDIO_RATE> aCarrier(COS8192_DATA);
@@ -47,7 +49,7 @@ void setup(){
   aModWidth.setFreq(2.52434f);
   aEnvelop.setFreq(9.0f);
 
-  startMozzi();
+  startMozzi(CONTROL_RATE);
 }
 
 
@@ -71,11 +73,3 @@ int updateAudio(){
 void loop(){
   audioHook();
 }
-
-
-
-
-
-
-
-

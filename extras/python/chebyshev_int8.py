@@ -42,7 +42,7 @@ def chebyTable(outfile, tablename, tablelength, curvenum):
     fout.write('#else'+'\n')
     fout.write('#include "WProgram.h"'+'\n')
     fout.write('#endif'+'\n')   
-    fout.write('#include PGMSPACE_INCLUDE_H'+'\n \n')
+    fout.write('#include "mozzi_pgmspace.h"'+'\n \n')
     fout.write('#define ' + tablename + '_NUM_CELLS '+ str(tablelength) +'\n')
     outstring = 'CONSTTABLE_STORAGE(int8_t) ' + tablename + '_DATA [] = {'
     try:

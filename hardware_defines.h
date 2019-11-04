@@ -29,18 +29,4 @@
 #define NUM_ANALOG_INPUTS 1
 #endif
 
-#if IS_ESP8266()
-#define PGMSPACE_INCLUDE_H <Arduino.h>  // dummy because not needed
-#define CONSTTABLE_READ(x) (*(x))
-#define CONSTTABLE_READ_DWORD(x) (*(x))
-#define CONSTTABLE_READ_WORD(x) (*(x))
-#define CONSTTABLE_STORAGE(X) const X
-#else
-#define PGMSPACE_INCLUDE_H <avr/pgmspace.h>
-#define CONSTTABLE_READ_DWORD(x) pgm_read_dword(x)
-#define CONSTTABLE_READ_WORD(x) pgm_read_word_near(x)
-#define CONSTTABLE_READ(x) pgm_read_byte_near(x)
-#define CONSTTABLE_STORAGE(X) const X __attribute__((section(".progmem.data")))
-#endif
-
 #endif /* HARDWARE_DEFINES_H_ */

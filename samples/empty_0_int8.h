@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include PGMSPACE_INCLUDE_H
+#include "mozzi_pgmspace.h"
  
 #define EMPTY_0_NUM_CELLS 0
 #define EMPTY_0_SAMPLERATE 16384

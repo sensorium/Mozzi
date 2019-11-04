@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include PGMSPACE_INCLUDE_H
+#include "mozzi_pgmspace.h"
 
 // this is the top half of a sin, used as a rough envelope for a cycling fade-in, fade-out with empty space in between.
 

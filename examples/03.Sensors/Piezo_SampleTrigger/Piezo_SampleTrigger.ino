@@ -2,29 +2,32 @@
    Example using a piezo to trigger an audio sample to play,
    and a knob to set the playback pitch,
    with Mozzi sonification library.
- 
+
    Demonstrates one-shot samples and analog input for control.
-   
+
    This example goes with a tutorial on the Mozzi site:
    http://sensorium.github.io/Mozzi/learn/introductory-tutorial/
-  
+
    The circuit:
      Audio output on digital pin 9 on a Uno or similar, or
-    DAC/A14 on Teensy 3.1, or 
+    DAC/A14 on Teensy 3.1, or
      check the README or http://sensorium.github.com/Mozzi/
 
      Potentiometer connected to analog pin 0.
        Center pin of the potentiometer goes to the analog pin.
        Side pins of the potentiometer go to +5V and ground
- 
+
      Piezo on analog pin 3:
        + connection of the piezo attached to the analog pin
        - connection of the piezo attached to ground
        1-megohm resistor between the analog pin and ground
- 
-   Mozzi help/discussion/announcements:
-   https://groups.google.com/forum/#!forum/mozzi-users
- 
+
+    Mozzi documentation/API
+    https://sensorium.github.io/Mozzi/doc/html/index.html
+
+    Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
+
    Tim Barrass 2013.
    CC by-nc-sa
 */
@@ -34,7 +37,7 @@
 #include <samples/burroughs1_18649_int8.h> // a converted audio sample included in the Mozzi download
 
 const char KNOB_PIN = 0;  // set the analog input pin for the knob
-const char PIEZO_PIN = 3;  // set the analog input pin for the piezo 
+const char PIEZO_PIN = 3;  // set the analog input pin for the piezo
 const int threshold = 80;  // threshold value to decide when the detected signal is a knock or not
 
 // use: Sample <table_size, update_rate> SampleName (wavetable)
@@ -53,13 +56,13 @@ void setup(){
 void updateControl(){
   // read the knob
   int knob_value = mozziAnalogRead(KNOB_PIN); // value is 0-1023
-  
+
   // map it to values between 0.1 and about double the recorded pitch
-  float pitch = (recorded_pitch * (float) knob_value / 512.f) + 0.1f; 
-  
+  float pitch = (recorded_pitch * (float) knob_value / 512.f) + 0.1f;
+
   // set the sample playback frequency
   aSample.setFreq(pitch);
-  
+
   // read the piezo
   int piezo_value = mozziAnalogRead(PIEZO_PIN); // value is 0-1023
 
@@ -76,7 +79,7 @@ void updateControl(){
   }else{
     triggered = false;
   }
- 
+
   Serial.println(); // next line
 }
 
@@ -89,4 +92,3 @@ int updateAudio(){
 void loop(){
   audioHook();
 }
-

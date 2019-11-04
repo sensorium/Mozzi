@@ -18,7 +18,7 @@ the oscillators. You can look at utility/TimerOne library for more info about ho
 interrupt rate and pwm resolution relate.
 
 HIFI audio mode enables much higher quality output by combining signals from pins 9 and 10.
-For HIFI mode, edit Mozzi/mozzi_config.h to contain \#define AUDIO_MODE HIFI, 
+For HIFI mode, edit Mozzi/mozzi_config.h to contain \#define AUDIO_MODE HIFI,
 and comment out \#define AUDIO_MODE STANDARD and \#define AUDIO_MODE STANDARD_PLUS.
 
 @note Teensy 3.* plays 12 bit audio in STANDARD or STANDARD_PLUS modes, and has no HIFI mode.
@@ -30,15 +30,15 @@ and comment out \#define AUDIO_MODE STANDARD and \#define AUDIO_MODE STANDARD_PL
 
 /** @ingroup core
 Holds the audio rate setting.
-AUDIO_RATE can be \#defined as 16384 or 32768 Hertz in Mozzi/mozzi_config.h. 
+AUDIO_RATE can be \#defined as 16384 or 32768 Hertz in Mozzi/mozzi_config.h.
 
 Mozzi's original audio mode, now called STANDARD, uses 16384 Hz, chosen as a
 compromise between the sample rate (interrupt rate) and sample bitdepth (pwm
 width), which are interdependent due to the way pulse wave modulation is used to
-generate the sound output. 
+generate the sound output.
 An AUDIO_RATE of 32768 Hz works in STANDARD_PLUS and HIFI modes.
 Of course, doubling the sample rate halves the amount of time available to calculate the each sample, so it
-may only be useful for relatively simple sketches.  The increased frequency response can also make 
+may only be useful for relatively simple sketches.  The increased frequency response can also make
 unwanted artefacts of low resolution synthesis calculations more apparent, so it's not always a bonus.
 
 Another factor which is important for Mozzi's operation is that with AUDIO_RATE
@@ -51,8 +51,8 @@ the oscillators. You can look at the TimerOne library for more info about how
 interrupt rate and pwm resolution relate.
 
 HIFI audio mode enables much higher quality output by combining signals from pins 9 and 10.
-For HIFI mode, edit Mozzi/mozzi_config.h to contain \#define AUDIO_MODE HIFI, 
-and comment out \#define AUDIO_MODE STANDARD and \#define AUDIO_MODE STANDARD_PLUS. 
+For HIFI mode, edit Mozzi/mozzi_config.h to contain \#define AUDIO_MODE HIFI,
+and comment out \#define AUDIO_MODE STANDARD and \#define AUDIO_MODE STANDARD_PLUS.
 
 @todo Possible option for output to R/2R DAC circuit, like
 http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/ .
@@ -73,8 +73,8 @@ otherwise make it false, to save resources.
 
 
 /** @ingroup core
-This sets which analog input channel to use for audio input, if you have 
-\#define USE_AUDIO_INPUT  true 
+This sets which analog input channel to use for audio input, if you have
+\#define USE_AUDIO_INPUT  true
 in mozz_config.h
 */
 #define AUDIO_INPUT_PIN 0
@@ -82,12 +82,22 @@ in mozz_config.h
 //AUDIO_INPUT_CHANNEL = analogPinToChannel(AUDIO_INPUT_PIN)
 
 /** @ingroup core
-This sets an option for stereo output, a hack which requires 
-variables audio_signal_1 and audio_signal_2 to be set in updateAudio(), 
+This sets an option for stereo output, a hack which requires
+variables audio_signal_1 and audio_signal_2 to be set in updateAudio(),
 instead of returning a single audio value as is usual for standard mono.
 You need to have \#define STEREO_HACK true in mozzi_config.h
 */
 #define STEREO_HACK false
 
-#endif        //  #ifndef MOZZI_CONFIG_H
 
+/**
+  Uncomment this line if you want to use Mozzi with an external DAC of type MCP4922. Note that you will need the MCP49XX library (see AudioConfigMCP4922 for details.
+*/
+//#define EXTERNAL_DAC
+
+#ifdef EXTERNAL_DAC
+#warning Mozzi is configured for using an external DAC, edit mozzi_config.h if you want to change this
+#endif
+
+
+#endif        //  #ifndef MOZZI_CONFIG_H

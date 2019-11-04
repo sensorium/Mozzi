@@ -4,7 +4,7 @@
 
 /** This may need adjusting: SAMD21-boards seem to come with different resolution DACs. The Adafruit M0 has 10 bits.
  *  see https://github.com/sensorium/Mozzi/issues/75 */
-#if defined ADAFRUIT_FEATHER_M0
+#if defined(ADAFRUIT_FEATHER_M0)
 #define AUDIO_BITS 10
 #else
 #define AUDIO_BITS 12

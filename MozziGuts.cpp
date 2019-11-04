@@ -515,7 +515,7 @@ static void startAudioStandard() {
   }
 
 #endif
-  analogWriteResolution(12);
+  analogWriteResolution(AUDIO_BITS);
   analogWrite(AUDIO_CHANNEL_1_PIN, 0);
   tcConfigure(AUDIO_RATE);
 #elif IS_STM32()

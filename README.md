@@ -125,12 +125,9 @@ Mozzi provides `EventDelay()` for scheduling instead of `delay`.
 
 * `analogRead()` is replaced by `mozziAnalogRead()`, which works in the background instead of blocking the processor.  
 
-* Mozzi interferes with `analogWrite()`.  In `STANDARD` and `STANDARD_PLUS` audio modes, Mozzi takes over Timer1 (pins 9 and 10), but you can use the Timer2 pins, 3 and 11 (your board may differ).  In `HIFI` mode,
-Mozzi uses Timer1 (or Timer4 on some boards), and Timer2, so pins 3 and 11 are also out.  
-If you need `analogWrite()`, you can do PWM output on any digital pins using the technique in
-*Mozzi>examples>11.Communication>Sinewave_PWM_pins_HIFI*.  
+* Mozzi interferes with `analogWrite()`.  In `STANDARD` and `STANDARD_PLUS` audio modes, Mozzi takes over Timer1 (pins 9 and 10), but you can use the Timer2 pins, 3 and 11 (your board may differ).  In `HIFI` mode, Mozzi uses Timer1 (or Timer4 on some boards), and Timer2, so pins 3 and 11 are also out.  
+If you need `analogWrite()`, you can do PWM output on any digital pins using the technique in *Mozzi>examples>11.Communication>Sinewave_PWM_pins_HIFI*.  
 
-* Mozzi provides`mozziMicros()` as an alternative to 'millis()' and 'micros()'.  
 
 #### Last Resort
 The timers can be made available with `stopMozzi()`, which stops audio interrupts, until you call `startMozzi()`.  

@@ -15,7 +15,7 @@ Please consider supporting Mozzi by donating.
 
 Thanks!
 
-[Get the most recent release](https://tinyurl.com/mozzilib/Mozzi.zip){: .btn .btn--success}
-[Check out the latest development on GitHub](https://github.com/sensorium/Mozzi){: .btn .btn--warning}
+<!-- [Get the most recent release](https://tinyurl.com/mozzilib/Mozzi.zip){: .btn .btn--success} -->
+[Download from GitHub](https://github.com/sensorium/Mozzi){: .btn .btn--warning}
 
 ![Spags](images/Spags-grin.jpg)

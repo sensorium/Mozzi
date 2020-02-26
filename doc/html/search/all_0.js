@@ -9,6 +9,7 @@ var searchData=
   ['atindex',['atIndex',['../class_oscil.html#a97f2c0f28751641417202fee2a0776d3',1,'Oscil::atIndex()'],['../class_sample.html#a86948f48dcdc0cb19f6e256ece70149d',1,'Sample::atIndex()']]],
   ['audio_5finput_5fpin',['AUDIO_INPUT_PIN',['../group__core.html#gad6f503b77ed0c93394363460509f5cbd',1,'mozzi_config.h']]],
   ['audio_5fmode',['AUDIO_MODE',['../group__core.html#ga9c4a39187db1d0a1ad0fa6981920f383',1,'mozzi_config.h']]],
+  ['audio_5fout_5f1',['audio_out_1',['../group__core.html#ga7e9f1a116ef90eed49d5f3126466dc7c',1,'MozziGuts.h']]],
   ['audio_5frate',['AUDIO_RATE',['../group__core.html#ga5b972bafb3267e820993812beca1b298',1,'mozzi_config.h']]],
   ['audiodelay',['AudioDelay',['../class_audio_delay.html',1,'AudioDelay&lt; NUM_BUFFER_SAMPLES, T &gt;'],['../class_audio_delay.html#a688f69088f96bf3976a8555d3026365f',1,'AudioDelay::AudioDelay()'],['../class_audio_delay.html#a79be253fcb5709624c8fb708e54f069f',1,'AudioDelay::AudioDelay(unsigned int delaytime_cells)']]],
   ['audiodelay_3c_20128_20_3e',['AudioDelay&lt; 128 &gt;',['../class_audio_delay.html',1,'']]],

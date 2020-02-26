@@ -14,8 +14,10 @@ var group__core =
     [ "FLASH_OR_RAM_READ", "group__core.html#ga14d8349004d9544dbd01b907c60c08aa", null ],
     [ "mozzi_pgm_read_wrapper", "group__core.html#ga6eab513d77c44e4a6e3cc63e95a35d98", null ],
     [ "mozziMicros", "group__core.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe", null ],
+    [ "pauseMozzi", "group__core.html#ga0dc2dc3b2c20b081df4d55ad039f64e5", null ],
     [ "startMozzi", "group__core.html#ga75aa9f4a501f4b167343b8caac8c6837", null ],
     [ "stopMozzi", "group__core.html#ga8d9307490ec05ad28539d513c73a5c20", null ],
+    [ "unPauseMozzi", "group__core.html#ga1718c5f0bbb56cc4b2db55702750f43f", null ],
     [ "updateControl", "group__core.html#ga59d187b915b2e366c88489e52801951a", null ],
     [ "audio_out_1", "group__core.html#ga7e9f1a116ef90eed49d5f3126466dc7c", null ]
 ];

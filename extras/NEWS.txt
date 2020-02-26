@@ -4,8 +4,9 @@ NEWS
 get the latest version from https://sensorium.github.io/Mozzi/
 
 
+Mozzi is now available as the most recent code on Github, rather than as releases.
 
-release v1.1.0rc1
+release v1.1.0rc1 (not actually "released", just the Github code around 2019 onwards.)
 - STM32(duino) and ESP8266 ports have been added by Thomas Friedrichsmeier.
 	Thomas has provided hardware specific notes on the Mozzi main web page.
 - CONTROL_RATE no longer has to be a power of 2,

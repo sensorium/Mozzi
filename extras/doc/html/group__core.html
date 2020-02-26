@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version January 2019</span>
+   &#160;<span id="projectnumber">version v1.1.0</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('group__core.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ga9c4a39187db1d0a1ad0fa6981920f383"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga9c4a39187db1d0a1ad0fa6981920f383">AUDIO_MODE</a>&#160;&#160;&#160;<a class="el" href="group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1">STANDARD</a></td></tr>
+<tr class="memitem:ga9c4a39187db1d0a1ad0fa6981920f383"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga9c4a39187db1d0a1ad0fa6981920f383">AUDIO_MODE</a>&#160;&#160;&#160;STANDARD_PLUS</td></tr>
 <tr class="memdesc:ga9c4a39187db1d0a1ad0fa6981920f383"><td class="mdescLeft">&#160;</td><td class="mdescRight">AUDIO_MODE holds the audio mode setting.  <a href="#ga9c4a39187db1d0a1ad0fa6981920f383">More...</a><br /></td></tr>
 <tr class="separator:ga9c4a39187db1d0a1ad0fa6981920f383"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5b972bafb3267e820993812beca1b298"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga5b972bafb3267e820993812beca1b298">AUDIO_RATE</a>&#160;&#160;&#160;16384</td></tr>
@@ -165,6 +165,13 @@ Functions</h2></td></tr>
 <tr class="memitem:ga8d9307490ec05ad28539d513c73a5c20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga8d9307490ec05ad28539d513c73a5c20">stopMozzi</a> ()</td></tr>
 <tr class="memdesc:ga8d9307490ec05ad28539d513c73a5c20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops audio and control interrupts and restores the timers to the values they had before Mozzi was started.  <a href="#ga8d9307490ec05ad28539d513c73a5c20">More...</a><br /></td></tr>
 <tr class="separator:ga8d9307490ec05ad28539d513c73a5c20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0dc2dc3b2c20b081df4d55ad039f64e5"><td class="memItemLeft" align="right" valign="top"><a id="ga0dc2dc3b2c20b081df4d55ad039f64e5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga0dc2dc3b2c20b081df4d55ad039f64e5">pauseMozzi</a> ()</td></tr>
+<tr class="memdesc:ga0dc2dc3b2c20b081df4d55ad039f64e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obsolete function, use <a class="el" href="group__core.html#ga8d9307490ec05ad28539d513c73a5c20" title="Stops audio and control interrupts and restores the timers to the values they had before Mozzi was st...">stopMozzi()</a> instead. <br /></td></tr>
+<tr class="separator:ga0dc2dc3b2c20b081df4d55ad039f64e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1718c5f0bbb56cc4b2db55702750f43f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga1718c5f0bbb56cc4b2db55702750f43f">unPauseMozzi</a> ()</td></tr>
+<tr class="memdesc:ga1718c5f0bbb56cc4b2db55702750f43f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obsolete function, use <a class="el" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837" title="Sets up the timers for audio and control rate processes, storing the timer registers so they can be r...">startMozzi()</a> instead.  <a href="#ga1718c5f0bbb56cc4b2db55702750f43f">More...</a><br /></td></tr>
+<tr class="separator:ga1718c5f0bbb56cc4b2db55702750f43f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga59d187b915b2e366c88489e52801951a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a">updateControl</a> ()</td></tr>
 <tr class="memdesc:ga59d187b915b2e366c88489e52801951a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is where you put your control code.  <a href="#ga59d187b915b2e366c88489e52801951a">More...</a><br /></td></tr>
 <tr class="separator:ga59d187b915b2e366c88489e52801951a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,7 +188,7 @@ Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:ga7e9f1a116ef90eed49d5f3126466dc7c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga7e9f1a116ef90eed49d5f3126466dc7c">audio_out_1</a></td></tr>
-<tr class="memdesc:ga7e9f1a116ef90eed49d5f3126466dc7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restores Mozzi audio and control interrupts, if they have been temporarily disabled with pauseMozzi().  <a href="#ga7e9f1a116ef90eed49d5f3126466dc7c">More...</a><br /></td></tr>
+<tr class="memdesc:ga7e9f1a116ef90eed49d5f3126466dc7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is where you put your audio code.  <a href="#ga7e9f1a116ef90eed49d5f3126466dc7c">More...</a><br /></td></tr>
 <tr class="separator:ga7e9f1a116ef90eed49d5f3126466dc7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad21b521fdddcfe0bc12f44332730ff5e"><td class="memItemLeft" align="right" valign="top"><a id="gad21b521fdddcfe0bc12f44332730ff5e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>audio_out_2</b></td></tr>
@@ -199,7 +206,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>audio_out_2</b></td></
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define AUDIO_MODE&#160;&#160;&#160;<a class="el" href="group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1">STANDARD</a></td>
+          <td class="memname">#define AUDIO_MODE&#160;&#160;&#160;STANDARD_PLUS</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -210,7 +217,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>audio_out_2</b></td></
 <p>HIFI audio mode enables much higher quality output by combining signals from pins 9 and 10. For HIFI mode, edit <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> to contain #define AUDIO_MODE HIFI, and comment out #define AUDIO_MODE STANDARD and #define AUDIO_MODE STANDARD_PLUS.</p>
 <dl class="section note"><dt>Note</dt><dd>Teensy 3.* plays 12 bit audio in STANDARD or STANDARD_PLUS modes, and has no HIFI mode. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__config_8h_source.html#l00026">26</a> of file <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__config_8h_source.html#l00027">27</a> of file <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a>.</p>
 
 </div>
 </div>
@@ -440,7 +447,7 @@ x...........B5(25)...B6(26)...........Teensy2++ <br />
 <p>An alternative for Arduino time functions like micros() and millis(). </p>
 <p>This is slightly faster than micros(), and also it is synchronized with the currently processed audio sample (which, due to the audio output buffer, could diverge up to 256/AUDIO_RATE seconds from the current time). <a class="el" href="group__core.html#ga55fa9d48f327b646c2f71cef7da7b8f0" title="An alternative for Arduino time functions like micros() and millis(). ">audioTicks()</a> is updated each time an audio sample is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when AUDIO_RATE is 16384 Hz). </p><dl class="section return"><dt>Returns</dt><dd>the number of audio ticks since the program began. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00834">834</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00845">845</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -528,7 +535,7 @@ template&lt;typename T &gt; </div>
 <p>An alternative for Arduino time functions like micros() and millis(). </p>
 <p>This is slightly faster than micros(), and also it is synchronized with the currently processed audio sample (which, due to the audio output buffer, could diverge up to 256/AUDIO_RATE seconds from the current time). <a class="el" href="group__core.html#ga55fa9d48f327b646c2f71cef7da7b8f0" title="An alternative for Arduino time functions like micros() and millis(). ">audioTicks()</a> is updated each time an audio sample is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when AUDIO_RATE is 16384 Hz). </p><dl class="section return"><dt>Returns</dt><dd>the approximate number of microseconds since the program began. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00847">847</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00858">858</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -561,7 +568,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>startMozzi calls setupMozziADC(), which calls <a class="el" href="group__analog.html#gae909f8857d71ed79f277ee024de52574" title="  This is automatically called in startMozzi. ">setupFastAnalogRead()</a> and <a class="el" href="group__analog.html#ga5042e7c576dd0307be38eb70efdb69fe" title="Prepare all analog input channels by turning off their digital input buffers. ">adcDisconnectAllDigitalIns()</a>, which disables digital inputs on all analog input pins. All in <a class="el" href="mozzi__analog_8h_source.html">mozzi_analog.h</a> and easy to change if you need to (hack). They are all called automatically and hidden away because it keeps things simple for a STANDARD_PLUS set up, but if it turns out to be confusing, they might need to become visible again. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00771">771</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00782">782</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -585,7 +592,27 @@ template&lt;typename T &gt; </div>
 <p>A potentially better option for resolving timer conflicts involves using non-blocking methods, such as demonstrated by the twowire_nonblock code in the forked version of Mozzi on github, so sound production can continue while reading sensors.</p>
 <p>As it is, stopMozzi restores all the Timers used by Mozzi to their previous settings. Another scenario which could be easily hacked in <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a> could involve individually saving and restoring particular Timer registers depending on which one(s) are required for other tasks. </p>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00786">786</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00797">797</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga1718c5f0bbb56cc4b2db55702750f43f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1718c5f0bbb56cc4b2db55702750f43f">&#9670;&nbsp;</a></span>unPauseMozzi()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void unPauseMozzi </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obsolete function, use <a class="el" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837" title="Sets up the timers for audio and control rate processes, storing the timer registers so they can be r...">startMozzi()</a> instead. </p>
+<p>Restores Mozzi audio and control interrupts, if they have been temporarily disabled with <a class="el" href="group__core.html#ga0dc2dc3b2c20b081df4d55ad039f64e5" title="Obsolete function, use stopMozzi() instead. ">pauseMozzi()</a>. </p>
 
 </div>
 </div>
@@ -622,8 +649,8 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Restores Mozzi audio and control interrupts, if they have been temporarily disabled with pauseMozzi(). </p>
-<p>This is where you put your audio code. updateAudio() has to keep up with the AUDIO_RATE of 16384 Hz, so to keep things running smoothly, avoid doing any calculations here which could be done in setup() or <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>. </p><dl class="section return"><dt>Returns</dt><dd>an audio sample. In STANDARD modes this is between -244 and 243 inclusive. In HIFI mode, it's a 14 bit number between -16384 and 16383 inclusive. </dd></dl>
+<p>This is where you put your audio code. </p>
+<p>updateAudio() has to keep up with the AUDIO_RATE of 16384 Hz, so to keep things running smoothly, avoid doing any calculations here which could be done in setup() or <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>. </p><dl class="section return"><dt>Returns</dt><dd>an audio sample. In STANDARD modes this is between -244 and 243 inclusive. In HIFI mode, it's a 14 bit number between -16384 and 16383 inclusive. </dd></dl>
 
 </div>
 </div>
@@ -632,7 +659,7 @@ template&lt;typename T &gt; </div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jan 24 2019 22:38:54 for Mozzi by
+    <li class="footer">Generated on Wed Feb 26 2020 13:12:06 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

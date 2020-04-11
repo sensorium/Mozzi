@@ -399,10 +399,10 @@ void audioHook() // 2us excluding updateAudio()
 #else
 #if (STEREO_HACK == true)
     updateAudio(); // in hacked version, this returns void
-    output_buffer.write((unsigned int)(audio_out_1 + AUDIO_BIAS));
-    output_buffer2.write((unsigned int)(audio_out_2 + AUDIO_BIAS));
+    output_buffer.write((int)(audio_out_1));
+    output_buffer2.write((int)(audio_out_2));
 #else
-    output_buffer.write((unsigned int)(updateAudio() + AUDIO_BIAS));
+    output_buffer.write((int)(updateAudio()));
 #endif
 #endif
 

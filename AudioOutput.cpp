@@ -25,14 +25,9 @@ void audioOutput(int l, int r)
 
 // STM32
 #if IS_STM32()
-#warning "in stm"
-#if (AUDIO_MODE == HIFI)
-#warning "HIFI"
-#endif
 #include "AudioConfigSTM32.h"
 void audioOutput(int l, int r)
 {
-
 #if (AUDIO_MODE == HIFI)
   pwmWrite(AUDIO_CHANNEL_1_PIN, (l+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
   pwmWrite(AUDIO_CHANNEL_1_PIN_HIGH, (l+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);

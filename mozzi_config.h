@@ -90,14 +90,4 @@ You need to have \#define STEREO_HACK true in mozzi_config.h
 #define STEREO_HACK false
 
 
-/**
-  Uncomment this line if you want to use Mozzi with an external DAC of type MCP4922. Note that you will need the MCP49XX library (see AudioConfigMCP4922 for details.
-*/
-//#define EXTERNAL_DAC
-
-#ifdef EXTERNAL_DAC
-#warning Mozzi is configured for using an external DAC, edit mozzi_config.h if you want to change this
-#endif
-
-
 #endif        //  #ifndef MOZZI_CONFIG_H

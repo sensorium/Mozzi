@@ -37,9 +37,6 @@
 #include <uart.h>
 #endif
 
-#ifdef EXTERNAL_DAC
-DAC_MCP49xx dac(DAC_MCP49xx::MCP4922, 10);
-#endif
 
 #if (IS_TEENSY3() && F_CPU != 48000000) || (IS_AVR() && F_CPU != 16000000)
 #warning                                                                       \
@@ -96,16 +93,6 @@ CircularBuffer<unsigned int> output_buffer2; // fixed size 256
 
 #if IS_AVR() // not storing backups, just turning timer on and off for pause for
              // teensy 3.*, other ARMs
-#ifdef EXTERNAL_DAC // in case an external MCP4922 dac is used.
-static void dacMCPAudioOutput() {
-  dac.output((unsigned int)output_buffer.read());
-}
-#if (STEREO_HACK == true)
-static void dacMCPAudioOutput2() {
-  dac.outputB((unsigned int)output_buffer2.read());
-}
-#endif
-#endif
 
 // to store backups of timer registers so Mozzi can be stopped and pre_mozzi
 // timer values can be restored
@@ -636,14 +623,9 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK) {
     startSecondAudioADC();
 #endif
 
-#ifdef EXTERNAL_DAC
-    dacMCPAudioOutput();
-#if (STEREO_HACK == true)
-    dacMCPAudioOutput2();
-#endif
-#else
-  AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer.read();
-#endif
+
+AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer.read();
+
 #if (STEREO_HACK == true)
     AUDIO_CHANNEL_2_OUTPUT_REGISTER = output_buffer2.read();
 #endif

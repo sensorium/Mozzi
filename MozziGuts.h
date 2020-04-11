@@ -19,7 +19,7 @@
 #else
  #include "WProgram.h"
 #endif
-
+#include "AudioOutput.h"
 #include "hardware_defines.h"
 
 #if IS_TEENSY3()

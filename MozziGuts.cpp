@@ -22,6 +22,7 @@
 #include "mozzi_config.h" // at the top of all MozziGuts and analog files
 //#include "mozzi_utils.h"
 
+
 #if IS_AVR()
 #include "FrequencyTimer2.h"
 #include "TimerOne.h"
@@ -443,11 +444,12 @@ extern "C" {
 
 void samd21AudioOutput() {
 
+
 #if (USE_AUDIO_INPUT == true)
   adc_count = 0;
   startSecondAudioADC();
 #endif
-  analogWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
+  audioOutput((int)output_buffer.read());
   TC5->COUNT16.INTFLAG.bit.MC0 = 1;
 }
 #ifdef __cplusplus
@@ -460,9 +462,8 @@ static void teensyAudioOutput() {
   adc_count = 0;
   startSecondAudioADC();
 #endif
-
-  analogWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
-}
+  audioOutput((int) output_buffer.read());
+  }
 #elif IS_STM32()
 static void pwmAudioOutput() {
 #if (USE_AUDIO_INPUT == true)
@@ -470,15 +471,11 @@ static void pwmAudioOutput() {
   startSecondAudioADC();
 #endif
 
-#if (AUDIO_MODE == HIFI)
-  int out = output_buffer.read();
-  pwmWrite(AUDIO_CHANNEL_1_PIN, out & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
-  pwmWrite(AUDIO_CHANNEL_1_PIN_HIGH, out >> AUDIO_BITS_PER_CHANNEL);
-#else
-  pwmWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
+
 #if (STEREO_HACK == true)
-  pwmWrite(AUDIO_CHANNEL_2_PIN, (int)output_buffer2.read());
-#endif
+  audioOutput((int) output_buffer.read(), (int) output_buffer2.read());
+#else
+  audioOutput((int) output_buffer.read());
 #endif
 }
 #endif
@@ -624,10 +621,10 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK) {
 #endif
 
 
-AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer.read();
-
 #if (STEREO_HACK == true)
-    AUDIO_CHANNEL_2_OUTPUT_REGISTER = output_buffer2.read();
+    audioOutput(output_buffer.read(),output_buffer2.read());
+#else
+    audioOutput(output_buffer.read());
 #endif
 
 #if (AUDIO_MODE == STANDARD_PLUS) &&                                           \
@@ -717,7 +714,8 @@ void dummy_function(void)
   // sketches at http://wiki.openmusiclabs.com/wiki/PWMDAC,
   // http://wiki.openmusiclabs.com/wiki/MiniArDSP
   // if (!output_buffer.isEmpty()){
-  unsigned int out = output_buffer.read();
+  //unsigned int out = output_buffer.read();
+  audioOutput(output_buffer.read());
   // 14 bit, 7 bits on each pin
   // AUDIO_CHANNEL_1_highByte_REGISTER = out >> 7; // B00111111 10000000 becomes
   // B1111111
@@ -735,8 +733,7 @@ void dummy_function(void)
   either the OCR1x buffer or OCR1x Compare Register in
   the same system clock cycle.
   */
-  AUDIO_CHANNEL_1_highByte_REGISTER = out >> AUDIO_BITS_PER_REGISTER;
-  AUDIO_CHANNEL_1_lowByte_REGISTER = out & ((1 << AUDIO_BITS_PER_REGISTER) - 1);
+
 }
 
 //  end of HIFI

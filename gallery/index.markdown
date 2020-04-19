@@ -6,6 +6,11 @@ Here are some projects by people using Mozzi.  If you have something you'd like 
 
 ***
 
+[TURBULENCE v.1.2 - wind sound installation](https://www.jiri-suchanek.net/en/project/turbulence/) by Jiri Suchanek.
+{% include video id="391571617" provider="vimeo" %}
+
+***
+
 [LFS1 - a light field synthesis](https://dietervandoren.net/index.php?/project/lfs1/): Installation by Dieter Vandoren and Mariska de Groot.
 {% include video id="214520434" provider="vimeo" %}
 

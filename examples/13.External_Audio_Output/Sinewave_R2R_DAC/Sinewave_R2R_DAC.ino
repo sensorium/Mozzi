@@ -2,6 +2,9 @@
     using Mozzi sonification library and an user-defined
     audioOutput() function.
 
+    #define EXTERNAL_AUDIO_OUTPUT true should be uncommented
+    in mozzi_config.h.
+
     Demonstrates the use of audioOutput() using a R/2R DAC
     connected on 6 digital pins of an Arduino.
 

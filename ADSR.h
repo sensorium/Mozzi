@@ -26,19 +26,19 @@ methods, where next() interpolates values between each update().
 The "normal" way to use this would be with update() in updateControl(), where it calculates a new internal state each control step,
 and then next() is in updateAudio(), called much more often, where it interpolates between the control values.
 This also allows the ADSR updates to be made even more sparsely if desired, eg. every 3rd control update.
-@tparam CONTROL_UPDATE_RATE The frequency of control updates.  
+@tparam CONTROL_UPDATE_RATE The frequency of control updates.
 Ordinarily this will be CONTROL_RATE, but an alternative (amongst others) is
 to set this as well as the LERP_RATE parameter to AUDIO_RATE, and call both update() and next() in updateAudio().
 Such a use would allow accurate envelopes with finer resolution of the control points than CONTROL_RATE.
 @tparam LERP_RATE Sets how often next() will be called, to interpolate between updates set by CONTROL_UPDATE_RATE.
 This will produce the smoothest results if it's set to AUDIO_RATE, but if you need to save processor time and your
 envelope changes slowly or controls something like a filter where there may not be problems with glitchy or clicking transitions,
-LERP_RATE could be set to CONTROL_RATE (for instance).  Then update() and next() could both be called in updateControl(), 
+LERP_RATE could be set to CONTROL_RATE (for instance).  Then update() and next() could both be called in updateControl(),
 greatly reducing the amount of processing required compared to calling next() in updateAudio().
-@todo Test whether using the template parameters makes any difference to speed, 
-and rationalise which units do and don't need them.  
-Template objects are messy when you try to use pointers to them, 
-you have to include the whole template shebang in the pointer handling.
+@todo Test whether using the template parameters makes any difference to speed,
+and rationalise which units do and don't need them.
+Template objects are messy when you try to use pointers to them,
+you have to include the whole template in the pointer handling.
 */
 
 template <unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE>
@@ -81,7 +81,7 @@ private:
 		current_phase = next_phase;
 	}
 
-	
+
 	inline
 	void checkForAndSetNextPhase(phase * next_phase) {
 		if (++update_step_counter >= num_update_steps){
@@ -163,7 +163,7 @@ public:
 	 */
 	inline
 	unsigned char next()
-	{	
+	{
 		unsigned char out = 0;
 		if (adsr_playing) out = Q15n16_to_Q8n0(transition.next());
 		return out;
@@ -217,7 +217,7 @@ public:
 
 
 	/** Set the sustain level of the ADSR.
-	@param value the sustain level.  Usually the same as the decay level, 
+	@param value the sustain level.  Usually the same as the decay level,
 	for a steady sustained note.
 	*/
 	inline
@@ -242,7 +242,7 @@ public:
 	{
 		idle.level=value;
 	}
-	
+
 
 	/** Set the attack and decay levels of the ADSR.  This assumes a conventional
 	ADSR where the sustain continues at the same level as the decay, till the release ramps to 0.
@@ -256,7 +256,7 @@ public:
 		setDecayLevel(decay);
 		setSustainLevel(decay); // stay at decay level
 		setReleaseLevel(1);
-		setIdleLevel(0);	
+		setIdleLevel(0);
 	}
 
 
@@ -273,7 +273,7 @@ public:
 		setDecayLevel(decay);
 		setSustainLevel(sustain);
 		setReleaseLevel(release);
-		setIdleLevel(0);	
+		setIdleLevel(0);
 	}
 
 
@@ -334,9 +334,9 @@ public:
 	inline
 	void setIdleTime(unsigned int msec)
 	{
-		setTime(&idle, msec); 	
+		setTime(&idle, msec);
 	}
-	
+
 
 	/** Set the attack, decay and release times of the ADSR in milliseconds.
 	The actual times will be resolved within the resolution of CONTROL_RATE.
@@ -404,7 +404,7 @@ public:
 	{
 		setUpdateSteps(&idle, steps);
 	}
-	
+
 	/** Set the attack, decay and release times of the ADSR, expressed in update steps (not ADSR::next() interpolation steps).
 	@param attack_steps the number of update steps in the attack phase
 	@param decay_steps the number of update steps in the decay phase

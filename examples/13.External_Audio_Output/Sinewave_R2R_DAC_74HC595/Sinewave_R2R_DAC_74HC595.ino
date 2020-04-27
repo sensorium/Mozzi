@@ -9,7 +9,8 @@
     connected on a shift register 74HC595.
 
     Note: the overhead by putting a second one, and thus having a 16bits outputs
-    would be minimal. The timing part here are the digitalWrite.
+    would be minimal. The timing part here are the digitalWrite. One could use
+    writing in the Arduino registers to speed it up.
 
     Circuit: 
 

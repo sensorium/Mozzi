@@ -62,14 +62,14 @@ const int r2r_pin[R2R_N_PIN] = {30, 31, 32, 33, 34, 35}; // pins to the resistan
 
 #define AUDIO_BIAS 32    // we are at 6 bits so we have to bias the signal of 2^(6-1)=32
 
-void audioOutput(int r, int l) // r is the sample we want to output, it is zero-centered
-                               // l is used when using STEREO_HACK (see mozzi_config.h)
+void audioOutput(int l, int r) // l is the sample we want to output, it is zero-centered
+                               // r is used when using STEREO_HACK (see mozzi_config.h)
 {
-  r += AUDIO_BIAS;   // make the signal positive
+  l += AUDIO_BIAS;   // make the signal positive
   int mask = 0b00000001;   // mask for outputting only 1 bit (one per pin)
     for (int i = 0; i < R2R_N_PIN; i++)
     {
-      digitalWrite(r2r_pin[i], bool((r >> i) & mask));  // write on digital Pins:
+      digitalWrite(r2r_pin[i], bool((l >> i) & mask));  // write on digital Pins:
     }                                                   // shift the value to the right
 }                                                       // apply the mask to get only the last bit
                                                         // use that value in digitalWrite()

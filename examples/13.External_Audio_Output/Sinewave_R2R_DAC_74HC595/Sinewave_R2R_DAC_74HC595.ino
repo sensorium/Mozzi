@@ -65,12 +65,12 @@ Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
 #define AUDIO_BIAS 128    // we are at 6 bits so we have to bias the signal of 2^(6-1)=32
 
-void audioOutput(int r, int l) // r is the sample we want to output, it is zero-centered
-                               // l is used when using STEREO_HACK (see mozzi_config.h)
+void audioOutput(int l, int r) // l is the sample we want to output, it is zero-centered
+                               // r is used when using STEREO_HACK (see mozzi_config.h)
 {
-  r += AUDIO_BIAS;   // make the signal positive
+  l += AUDIO_BIAS;   // make the signal positive
   digitalWrite(LATCH_PIN, LOW);
-  SPI.transfer(r);
+  SPI.transfer(l);
   digitalWrite(LATCH_PIN, HIGH);
 }                                                  
     

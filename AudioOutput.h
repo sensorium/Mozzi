@@ -5,9 +5,9 @@
 #include "mozzi_config.h"
 //#include "MozziGuts.h"
 
-//#ifdef EXTERNAL_AUDIO_OUTPUT
+
 inline void audioOutput(int, int =0);
-//#endif
+
 
 #ifndef EXTERNAL_AUDIO_OUTPUT
 

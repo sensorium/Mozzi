@@ -10,7 +10,7 @@
     MCP4921   //  Connect to:
     -------       -----------
     Vdd           V+
-    CS            any digital pin defined by SS_PIN (see after), or pin 10 on UNO / 11 on Mega if you are using Portwrite
+    CS            any digital pin defined by SS_PIN (see after), or pin 7 on UNO / 38 on Mega if you are using Portwrite
     SCK           SCK of Arduino
     SDI           MOSI of Arduino
     VoutA         to headphones/loudspeaker
@@ -60,7 +60,7 @@ Smooth <int> kSmoothNote(0.95f);
 
 
 // External audio output parameters and DAC declaration
-#define SS_PIN -1  // if you are on AVR and using PortWrite, you do not care what you put here.
+#define SS_PIN 38  // if you are on AVR and using PortWrite you need still need to put the pin you are actually using: 7 on Uno, 38 on Mega
 #define AUDIO_BIAS 2048  // we are at 12 bits, so we have to bias the signal of 2^(12-1) = 2048
 DAC_MCP49xx dac(DAC_MCP49xx::MCP4921, SS_PIN);
 

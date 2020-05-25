@@ -11,7 +11,7 @@
     MCP4921   //  Connect to:
     -------       -----------
     Vdd           V+
-    CS            any digital pin defined by SS_PIN (see after), or pin 10 on UNO / 11 on Mega if you are using Portwrite
+    CS            any digital pin defined by SS_PIN (see after), or pin 7 on UNO / 38 on Mega if you are using Portwrite
     SCK           SCK of Arduino
     SDI           MOSI of Arduino
     VoutA/B       to headphones/loudspeaker (right and left channels)
@@ -50,7 +50,7 @@ Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kEnv2(COS2048_DATA);
 
 
 // External audio output parameters and DAC declaration
-#define SS_PIN PB6  // if you are on AVR and using PortWrite, you do not care what you put here.
+#define SS_PIN 7  // if you are on AVR and using PortWrite you need still need to put the pin you are actually using: 7 on Uno, 38 on Mega
 #define AUDIO_BIAS 2048  // we are at 12 bits, so we have to bias the signal of 2^(12-1) = 2048
 DAC_MCP49xx dac(DAC_MCP49xx::MCP4922, SS_PIN);
 
@@ -72,11 +72,11 @@ void setup() {
   aCos1.setFreq(440.f);
   aCos2.setFreq(220.f);
   kEnv1.setFreq(0.25f);
-  kEnv2.setFreq(0.4f);
+  kEnv2.setFreq(4.f);
 
   dac.init();   // start SPI communications
 
-  //dac.setPortWrite(true);  //comment this line if you do not want to use PortWrite (for non-AVR platforms)
+  dac.setPortWrite(true);  //comment this line if you do not want to use PortWrite (for non-AVR platforms)
 
   startMozzi(CONTROL_RATE);
 }

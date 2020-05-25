@@ -2,6 +2,7 @@
     using Mozzi sonification library and an external dual DAC MCP4922 (original library by Thomas Backman - https://github.com/exscape/electronics/tree/master/Arduino/Libraries/DAC_MCP49xx)
     using an user-defined audioOutput() function.
 
+    WARNING: YOU CANNOT ACHEIVE MORE THAN 16BITS ON AN AVR ARDUINO, THIS EXAMPLE WON'T WORK AS IT IS.
 
     #define EXTERNAL_AUDIO_OUTPUT true should be uncommented in mozzi_config.h.
 
@@ -11,7 +12,7 @@
     MCP4921   //  Connect to:
     -------       -----------
     Vdd           V+
-    CS            any digital pin defined by SS_PIN (see after), or pin 10 on UNO / 11 on Mega if you are using Portwrite
+    CS            any digital pin defined by SS_PIN (see after), or pin 7 on UNO / 38 on Mega if you are using Portwrite
     SCK           SCK of Arduino
     SDI           MOSI of Arduino
     VoutA/B       (see after)
@@ -69,7 +70,7 @@ Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kEnv1(COS2048_DATA);
 
 
 // External audio output parameters and DAC declaration
-#define SS_PIN PB6  // if you are on AVR and using PortWrite, you do not care what you put here.
+#define SS_PIN 38  // if you are on AVR and using PortWrite you need still need to put the pin you are actually using: 7 on Uno, 38 on Mega
 #define AUDIO_BIAS 8388608  // we are at 24 bits, so we have to bias the signal of 2^(24-1) = 8388608
 #define BITS_PER_CHANNEL 12  // each channel of the DAC is outputting 12 bits
 DAC_MCP49xx dac(DAC_MCP49xx::MCP4922, SS_PIN);

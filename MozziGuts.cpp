@@ -21,6 +21,8 @@
 #include "mozzi_analog.h"
 #include "mozzi_config.h" // at the top of all MozziGuts and analog files
 //#include "mozzi_utils.h"
+#include "AudioOutput.h"
+
 
 #if IS_AVR()
 #include "FrequencyTimer2.h"
@@ -37,9 +39,6 @@
 #include <uart.h>
 #endif
 
-#ifdef EXTERNAL_DAC
-DAC_MCP49xx dac(DAC_MCP49xx::MCP4922, 10);
-#endif
 
 #if (IS_TEENSY3() && F_CPU != 48000000) || (IS_AVR() && F_CPU != 16000000)
 #warning                                                                       \
@@ -96,16 +95,6 @@ CircularBuffer<unsigned int> output_buffer2; // fixed size 256
 
 #if IS_AVR() // not storing backups, just turning timer on and off for pause for
              // teensy 3.*, other ARMs
-#ifdef EXTERNAL_DAC // in case an external MCP4922 dac is used.
-static void dacMCPAudioOutput() {
-  dac.output((unsigned int)output_buffer.read());
-}
-#if (STEREO_HACK == true)
-static void dacMCPAudioOutput2() {
-  dac.outputB((unsigned int)output_buffer2.read());
-}
-#endif
-#endif
 
 // to store backups of timer registers so Mozzi can be stopped and pre_mozzi
 // timer values can be restored
@@ -411,10 +400,10 @@ void audioHook() // 2us excluding updateAudio()
 #else
 #if (STEREO_HACK == true)
     updateAudio(); // in hacked version, this returns void
-    output_buffer.write((unsigned int)(audio_out_1 + AUDIO_BIAS));
-    output_buffer2.write((unsigned int)(audio_out_2 + AUDIO_BIAS));
+    output_buffer.write((int)(audio_out_1));
+    output_buffer2.write((int)(audio_out_2));
 #else
-    output_buffer.write((unsigned int)(updateAudio() + AUDIO_BIAS));
+    output_buffer.write((int)(updateAudio()));
 #endif
 #endif
 
@@ -456,11 +445,12 @@ extern "C" {
 
 void samd21AudioOutput() {
 
+
 #if (USE_AUDIO_INPUT == true)
   adc_count = 0;
   startSecondAudioADC();
 #endif
-  analogWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
+  audioOutput((int)output_buffer.read());
   TC5->COUNT16.INTFLAG.bit.MC0 = 1;
 }
 #ifdef __cplusplus
@@ -473,9 +463,8 @@ static void teensyAudioOutput() {
   adc_count = 0;
   startSecondAudioADC();
 #endif
-
-  analogWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
-}
+  audioOutput((int) output_buffer.read());
+  }
 #elif IS_STM32()
 static void pwmAudioOutput() {
 #if (USE_AUDIO_INPUT == true)
@@ -483,15 +472,11 @@ static void pwmAudioOutput() {
   startSecondAudioADC();
 #endif
 
-#if (AUDIO_MODE == HIFI)
-  int out = output_buffer.read();
-  pwmWrite(AUDIO_CHANNEL_1_PIN, out & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
-  pwmWrite(AUDIO_CHANNEL_1_PIN_HIGH, out >> AUDIO_BITS_PER_CHANNEL);
-#else
-  pwmWrite(AUDIO_CHANNEL_1_PIN, (int)output_buffer.read());
+
 #if (STEREO_HACK == true)
-  pwmWrite(AUDIO_CHANNEL_2_PIN, (int)output_buffer2.read());
-#endif
+  audioOutput((int) output_buffer.read(), (int) output_buffer2.read());
+#else
+  audioOutput((int) output_buffer.read());
 #endif
 }
 #endif
@@ -636,16 +621,11 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK) {
     startSecondAudioADC();
 #endif
 
-#ifdef EXTERNAL_DAC
-    dacMCPAudioOutput();
+
 #if (STEREO_HACK == true)
-    dacMCPAudioOutput2();
-#endif
+    audioOutput(output_buffer.read(),output_buffer2.read());
 #else
-  AUDIO_CHANNEL_1_OUTPUT_REGISTER = output_buffer.read();
-#endif
-#if (STEREO_HACK == true)
-    AUDIO_CHANNEL_2_OUTPUT_REGISTER = output_buffer2.read();
+    audioOutput(output_buffer.read());
 #endif
 
 #if (AUDIO_MODE == STANDARD_PLUS) &&                                           \
@@ -735,7 +715,8 @@ void dummy_function(void)
   // sketches at http://wiki.openmusiclabs.com/wiki/PWMDAC,
   // http://wiki.openmusiclabs.com/wiki/MiniArDSP
   // if (!output_buffer.isEmpty()){
-  unsigned int out = output_buffer.read();
+  //unsigned int out = output_buffer.read();
+  audioOutput(output_buffer.read());
   // 14 bit, 7 bits on each pin
   // AUDIO_CHANNEL_1_highByte_REGISTER = out >> 7; // B00111111 10000000 becomes
   // B1111111
@@ -753,8 +734,7 @@ void dummy_function(void)
   either the OCR1x buffer or OCR1x Compare Register in
   the same system clock cycle.
   */
-  AUDIO_CHANNEL_1_highByte_REGISTER = out >> AUDIO_BITS_PER_REGISTER;
-  AUDIO_CHANNEL_1_lowByte_REGISTER = out & ((1 << AUDIO_BITS_PER_REGISTER) - 1);
+
 }
 
 //  end of HIFI

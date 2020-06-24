@@ -43,7 +43,7 @@ void updateControl(){
   if (rand(CONTROL_RATE/2) == 0){ // about once every half second
     kFilterMod.setFreq((float)rand(255)/64);  // choose a new modulation frequency
   }
-  // map the modulation into the filter range (0-255)
+  // map the modulation into the filter range (0-255), corresponds with 0-8191Hz
   byte cutoff_freq = 100 + kFilterMod.next()/2;
   lpf.setCutoffFreq(cutoff_freq);
 }

@@ -167,7 +167,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>the signal output. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Timing: about 11us. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_low_pass_filter_8h_source.html#l00075">75</a> of file <a class="el" href="_low_pass_filter_8h_source.html">LowPassFilter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_low_pass_filter_8h_source.html#l00077">77</a> of file <a class="el" href="_low_pass_filter_8h_source.html">LowPassFilter.h</a>.</p>
 
 </div>
 </div>
@@ -232,14 +232,15 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Set the resonance. </p>
-<p>If you hear unwanted distortion, back off the resonance. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>If you hear unwanted distortion, back off the resonance. After setting resonance, you need to call setCuttoffFreq() to hear the change! </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">resonance</td><td>in the range 0-255, with 255 being most resonant. </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note</dt><dd>Remember to call setCuttoffFreq() after resonance is changed! </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_low_pass_filter_8h_source.html#l00063">63</a> of file <a class="el" href="_low_pass_filter_8h_source.html">LowPassFilter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_low_pass_filter_8h_source.html#l00065">65</a> of file <a class="el" href="_low_pass_filter_8h_source.html">LowPassFilter.h</a>.</p>
 
 </div>
 </div>
@@ -249,7 +250,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_low_pass_filter.html">LowPassFilter</a></li>
-    <li class="footer">Generated on Wed Feb 26 2020 13:12:06 for Mozzi by
+    <li class="footer">Generated on Wed Jun 24 2020 21:18:36 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

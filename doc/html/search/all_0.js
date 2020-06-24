@@ -17,7 +17,7 @@ var searchData=
   ['audiodelay_3c_20256_2c_20int_20_3e',['AudioDelay&lt; 256, int &gt;',['../class_audio_delay.html',1,'']]],
   ['audiodelayfeedback',['AudioDelayFeedback',['../class_audio_delay_feedback.html',1,'AudioDelayFeedback&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;'],['../class_audio_delay_feedback.html#a6e6352413ac4ee9b2bc03684b072fdc7',1,'AudioDelayFeedback::AudioDelayFeedback()'],['../class_audio_delay_feedback.html#a7d038aff13126acbca484b74b1ee5620',1,'AudioDelayFeedback::AudioDelayFeedback(uint16_t delaytime_cells)'],['../class_audio_delay_feedback.html#a54d7f001d6a99bd3955fb7dab94fbfe8',1,'AudioDelayFeedback::AudioDelayFeedback(uint16_t delaytime_cells, int8_t feedback_level)']]],
   ['audiohook',['audioHook',['../group__core.html#ga2fca37b988ab369e2f3c3108c683e59d',1,'audioHook():&#160;MozziGuts.cpp'],['../group__core.html#ga2fca37b988ab369e2f3c3108c683e59d',1,'audioHook():&#160;MozziGuts.cpp']]],
-  ['audioticks',['audioTicks',['../group__core.html#ga55fa9d48f327b646c2f71cef7da7b8f0',1,'audioTicks():&#160;MozziGuts.cpp'],['../group__core.html#ga55fa9d48f327b646c2f71cef7da7b8f0',1,'audioTicks():&#160;MozziGuts.cpp']]],
+  ['audioticks',['audioTicks',['../group__core.html#ga55fa9d48f327b646c2f71cef7da7b8f0',1,'MozziGuts.h']]],
   ['automap',['AutoMap',['../class_auto_map.html',1,'AutoMap'],['../class_auto_map.html#aec125f071bd83180ff0d0a71446725f3',1,'AutoMap::AutoMap()']]],
   ['autorange',['AutoRange',['../class_auto_range.html',1,'AutoRange&lt; T &gt;'],['../class_auto_range.html#a2f0638f4d8e2937080b67fc0614c8d6d',1,'AutoRange::AutoRange()']]],
   ['autorange_3c_20int_20_3e',['AutoRange&lt; int &gt;',['../class_auto_range.html',1,'']]]

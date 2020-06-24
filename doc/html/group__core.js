@@ -4,7 +4,6 @@ var group__core =
     [ "AUDIO_MODE", "group__core.html#ga9c4a39187db1d0a1ad0fa6981920f383", null ],
     [ "AUDIO_RATE", "group__core.html#ga5b972bafb3267e820993812beca1b298", null ],
     [ "CONSTTABLE_STORAGE", "group__core.html#gad03d3ea20c802844460cd1ad636cf6a9", null ],
-    [ "STANDARD", "group__core.html#ga0b8ca8ad62b88c01b639bad62eafcbf1", null ],
     [ "STANDARD_PWM_RESOLUTION", "group__core.html#ga800c094e0a14fc31d87a360b3807a1b8", null ],
     [ "STANDARD_PWM_RESOLUTION", "group__core.html#ga800c094e0a14fc31d87a360b3807a1b8", null ],
     [ "STEREO_HACK", "group__core.html#ga41e77c76435031bd6088de496aa2a9e0", null ],

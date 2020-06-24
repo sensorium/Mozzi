@@ -47,7 +47,7 @@ public:
 
 
 	/** Set the cut off frequency,
-	@param cutoff use the range 0-255 to represent 0-8192 Hz (AUDIO_RATE/2).
+	@param cutoff use the range 0-255 to represent 0-8191 Hz (AUDIO_RATE/2).
 	Be careful of distortion at the lower end, especially with high resonance.
 	*/
 	void setCutoffFreq(uint8_t cutoff)

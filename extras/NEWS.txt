@@ -40,7 +40,7 @@ release v1.0.3rc5
 -MozziGuts.cpp line 444: changed setPeriod to setPeriodMicroSeconds to match Mozzi's modified FrequencyTimer2
 
 
-version 2016-12-11-17:03
+release 2016-12-11-17:03
 release v1.0.3rc4
 - removed stray FrequencyTimer files from main folder, which stopped anything compiling...!
 - small fixes in rc3
@@ -272,7 +272,7 @@ version_2013-07-07-17:51
 - new versioning: a timestamp
 
 
-_Version 0.01.2e_
+_Version_0.01.2e_
 - bugfixes.  Should have tested properly!
 - Fixed ADSR compile problem due to mistakes while editing docs.
 - Fixed Table_Resolution compile prob due to sin table error
@@ -280,7 +280,7 @@ _Version 0.01.2e_
 	- demos of AutoMap in examples/sensors/Knob_LDR_x2_WavePacket and a couple of others in sensors/
 
 
-Version 0.01.2d
+Version_0.01.2d
 - mozzi_analog.cpp - fixed show-stopping typo (!= instead of |=)in adcStartConversion() and adcStartConversion(pin).
 - added WavePacketSample.h, a WavePacket which allows a custom table for audio source (limited at the moment to 8192 samples)
 	- added samples/raven_arh_int8.h to test WavePacketSample with.
@@ -288,7 +288,7 @@ Version 0.01.2d
 - re-arranged website with some docs more easy to find.
 
 
-Version 0.01.2c
+Version_0.01.2c
 - removed Ead.cpp, condensed to Ead.h
 - mozzi_analog.h changed all xorshift96()>>16's to xorshift96() & 0xFFFF and all /256's to >>8
 - added ControlDelay(), the same as AudioDelay() but for control values.
@@ -307,12 +307,12 @@ Version 0.01.2c
 - removed samples/Bamboo1 and changed samples/Samples sketch to use samples/bamboo
 
 
-Version 0.01.2b
+Version_0.01.2b
 - fixed some docs
 - added thumbpiano samples
 
 
-Version 0.01.2a
+Version_0.01.2a
 - Added Examples>Mozzi>communication>Sinewave_HIFI_PWM_leds, to show
 	non-blocking pwm for any pins without disprupting audio.
 - Added Examples>Mozzi>sensors directory with several basic examples
@@ -321,7 +321,7 @@ Version 0.01.2a
 	Updated from previous unannounced inclusion which had lots of errors...
 
 
-Version 0.01.1zzzz
+Version_0.01.1zzzz
 - fixed indent error in all python scripts (error introduced in last release)
 - removed a wierd file link which stopped installation working
 - added some samples from a collection of analog bass samples by T.J.Baker,
@@ -331,7 +331,7 @@ Version 0.01.1zzzz
 	More of the like to come...
 
 
-Version 0.01.1zzz
+Version_0.01.1zzz
 - Modified Flexitimer2.cpp so ATMEGA32U4 processor based boards work again (Leonardo,Teensy2.0).
 - Included twi_nonblock.h and twi_nonblock.cpp, non-blocking two wire I2C code by Marije Baalman,
 	with Examples>Mozzi>Communication>TwoWire_Read_ADXL345.  Not documented yet.
@@ -345,7 +345,7 @@ Version 0.01.1zzz
 
 
 
-Version 0.01.1zz
+Version_0.01.1zz
 - Added ReverbTank, a reverb which sounds like the inside of a tin can, and an example ReverbTank_STANDARD
 - AudioDelay
 	- added template parameter for signal type, to allow ints as well as the default int8_t type.
@@ -356,7 +356,7 @@ Version 0.01.1zz
 
 
 
-Version 0.01.1z
+Version_0.01.1z
 - Phasor - changed setFreq(uint16_t) to setFreq(int16_t), old sketches will need updating
 - Reorganised examples into topic subdirectories and removed numbers
 - MozziGuts.cpp
@@ -387,7 +387,7 @@ Version 0.01.1z
 
 
 
-Version 0.01.1y
+Version_0.01.1y
 
 Important: sketches written before this version of Mozzi will need updating to remove
 	(uint16_t) casts or "u" after integer arguments to:
@@ -404,14 +404,14 @@ Important: sketches written before this version of Mozzi will need updating to r
 - fixmath.h Added Q8n0_to_Q15n16(Q8n0 a)
 
 
-Version 0.01.1x
+Version_0.01.1x
 
 - fixed (I hope) mozzi_config.h being loaded after other things which depend on it,
 	which caused multiple definitions of the ISR(ADC_vect).
 	Now the analog and audio input sketches should behave as configured.
 
 
-Version 0.01.1w
+Version_0.01.1w
 Lots of changes which will probably require some search and replace to maintain sketches written with earlier versions:
 
 - mozzi_analog.h, .cpp
@@ -445,7 +445,7 @@ Lots of changes which will probably require some search and replace to maintain 
 
 
 
-Version 0.01.1v
+Version_0.01.1v
 - Introduced alternative output options, STANDARD and HIFI.  STANDARD is set by default and is the
 	original Mozzi output, 16384Hz, nearly 9 bit PWM on pin 9.
 	HIFI is 16384Hz, 14 bits and has a high PWM carrier frequency of 125kHz which
@@ -470,7 +470,7 @@ Version 0.01.1v
 
 
 
-Version 0.01.1u
+Version_0.01.1u
 - moved audio Timer 1 ISR to MozziGuts.cpp, so outputAudio() can be inlined, saving about 16ms/s (1.6%, not much!)
 - mozzi_utils.h rewrote macros as inline functions, now setPin13Out(), setPin13Low() and setPin13High().  That'll break a few sketches!
 - Oscil.h - fixed bug which stopped OSCIL_DITHER_PHASE option finding xorshift96().
@@ -479,7 +479,7 @@ Version 0.01.1u
 - removed examples/m_09_LowPass1stOrder
 
 
-Version 0.01.1t
+Version_0.01.1t
 - Added Portamento.h, in response to ajax on mozzi-users - easier to make a new unit than to do it in a sketch.
 - Added example m_34_Teensy_USB_MIDI_portamento.
 - Removed MozziTimer2.cpp and MozziTimer2.h, they're not used.  Removed commented references to them in MozziGuts.cpp and MozziGuts.h.
@@ -490,7 +490,7 @@ Version 0.01.1t
 - Smooth.h - added a template for floats.  Aah that feels better.
 
 
-Version 0.01.1s
+Version_0.01.1s
 - Added randSeed() with no parameters, which seeds the random generator with
 	noise from reading the Arduino's internal temperature.  This randSeed() leaves analogReference() set to DEFAULT.
 	Watch out for that.
@@ -499,18 +499,18 @@ Version 0.01.1s
 
 
 
-Version 0.01.1r
+Version_0.01.1r
 - Fixed example m_26_adcGetResult_LowPassFilter, user Doctroid noticed a mistake in the circuit pinout.
 
 
 
-Version 0.01.1q
+Version_0.01.1q
 - Added ADSR.h, a simple envelope generator, and an example m_32_ADSR_Envelope.
 - Added m_33_Teensy_USB_MIDI_Input example, playing ADSR enveloped notes from a midi source.
 
 
 
-Version 0.01.1p
+Version_0.01.1p
 
 - Moved midi, random and analog input code from utils each into their own files as described below.
 	THIS WILL BREAK OLD SKETCHES but is easy to fix by #including the appropriate new *.h files.
@@ -526,7 +526,7 @@ Version 0.01.1p
 
 
 
-Version 0.01.1o
+Version_0.01.1o
 
 - Mega2650 boards should now work properly.  Stephen Scutt identified a bug at upload time,
 	if the compiler sees 3 !!! exclamation marks in a row (or 33, 33, 33 in decimal)
@@ -546,7 +546,7 @@ Version 0.01.1o
 		improving noise and speed.  Also added unSetAnalogInChannel(), to reconnect digital input.
 
 
-Version 0.01.1n
+Version_0.01.1n
 
 - EventDelay()
 	- IMPORTANT! this will break old sketches.
@@ -572,7 +572,7 @@ Version 0.01.1n
 
 
 
-Version 0.01.1m
+Version_0.01.1m
 
 - Oscil - fixed inaccurate results for small table sizes in setFreq().
 - Removed EventDelay.cpp, EventDelay() is all in the .h file so all inline now.
@@ -587,7 +587,7 @@ Version 0.01.1m
 - Various examples slightly modified/fixed (more needs doing).
 
 
-Version 0.01.1l
+Version_0.01.1l
 
 - fixed randSeed() and xorshift96Seed();
 - Sample()
@@ -599,17 +599,17 @@ Version 0.01.1l
 - Add example _19_PWM_Phasing, demonstrating Phasor() as an audio generator.
 
 
-Version 0.01.1k
+Version_0.01.1k
 
 - Tested and working on Leonardo board.
 
 
-Version 0.01.1j
+Version_0.01.1j
 
 - Fixed Phasor and docs.
 
 
-Version 0.01.1i
+Version_0.01.1i
 
 - newer version of TimerOne library from http://www.pjrc.com.  Teensy2++ works,
 	Arduino Mega and others should also be OK, noting audio out pin differences in README Quick Start section.
@@ -621,12 +621,12 @@ Version 0.01.1i
 - lots of typos, etc.
 
 
-Version 0.01.1h
+Version_0.01.1h
 
 - more Leonardo/Teensy compatibilty fixes, thanks to massi on mozzi users list.
 
 
-Version 0.01.1g
+Version_0.01.1g
 
 - changed control interrupts to Timer0 to test compatibility on atmega32u4 - (Leonardo/Teensy).
 	Timer0 is used by Arduino IDE, but Mozzi clobbered it already,
@@ -640,7 +640,7 @@ Version 0.01.1g
 	to play many sound tables.
 
 
-Version 0.01.1f
+Version_0.01.1f
 
 - added WaveShaper(), a table-based waveshaping object suited for audio synthesis,
 	with an example sketch,  _18_WaveShaper.
@@ -656,7 +656,7 @@ Version 0.01.1f
 - lots of typos
 
 
-Version 0.01.1e
+Version_0.01.1e
 
 - added LowPass1stOrder.h, an alternative to Smooth which can handle long numbers.
 - fixed a bug in Smooth.h which stopped high smoothness values working properly.
@@ -669,14 +669,14 @@ Version 0.01.1e
 - added _05c_LowPass1stOrder example
 
 
-Version 0.01.1d
+Version_0.01.1d
 
 -mozzi_utils.h: added adcStartConversion() and adcGetResult(), so conversion can
 	happen in the background instead of hogging the cpu in Arduino's analogRead().
 - mozzi_fixmath.h: tweaks and additions
 
 
-Version 0.01.1c
+Version_0.01.1c
 
 - Smooth.h: increased speed from about 400 us to between 1-5 us, depending on
 number type, by changing floating to fixed point in internal calculations. Types
@@ -689,7 +689,7 @@ are now restricted to int8_t, uint8_t, int16_t and uint16_t.
 - fixed example _08_Detuned_Beats_Wash to work with new midi, fixed-point and Oscil setFreq_Q16n16 code.
 
 
-Version 0.01.1b
+Version_0.01.1b
 
 - Oscil.h:
 	- added a setPhase() method to play a table from any position.
@@ -704,7 +704,7 @@ Version 0.01.1b
 - replaced TABLE_NUM_CELLS with NUM_CELLS in tables
 
 
-Version 0.01.1
+Version_0.01.1
 
 - Changed utils.c to utils.cpp and changed all examples from #include utils.c to #include mozzi_utils.h.
 - Changed and capitalised names in saw_analogue512_int8.h

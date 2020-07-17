@@ -46,7 +46,8 @@ public:
 	}
 
 
-	/** Set the cut off frequency,
+	/** Depreciated.  Use setCutoffFreqAndResonance(uint8_t cutoff, uint8_t resonance).
+	Set the cut off frequency,
 	@param cutoff use the range 0-255 to represent 0-8191 Hz (AUDIO_RATE/2).
 	Be careful of distortion at the lower end, especially with high resonance.
 	*/
@@ -57,7 +58,8 @@ public:
 	}
 
 
-	/** Set the resonance. If you hear unwanted distortion, back off the resonance.
+	/** Depreciated.  Use setCutoffFreqAndResonance(uint8_t cutoff, uint8_t resonance).
+	Set the resonance. If you hear unwanted distortion, back off the resonance.
 	After setting resonance, you need to call setCuttoffFreq() to hear the change!
 	@param resonance in the range 0-255, with 255 being most resonant.
 	@note	Remember to call setCuttoffFreq() after resonance is changed!
@@ -66,6 +68,21 @@ public:
 	{
 		q = resonance;
 	}
+
+/*
+Set the cut off frequency and resonance.  Replaces setCutoffFreq() and setResonance().
+@param cutoff use the range 0-255 to represent 0-8191 Hz (AUDIO_RATE/2).
+Be careful of distortion at the lower end, especially with high resonance.
+@param resonance in the range 0-255, with 255 being most resonant.
+*/
+	void setCutoffFreqAndResonance(uint8_t cutoff, uint8_t resonance)
+	{
+		f = cutoff;
+		q = resonance; // hopefully optimised away when compiled, just here for backwards compatibility
+		fb = q+ucfxmul(q, SHIFTED_1 - cutoff);
+	}
+
+
 
 	/** Calculate the next sample, given an input signal.
 	@param in the signal input.

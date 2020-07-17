@@ -27,12 +27,12 @@ Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound(CHUM9_DATA);
 Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFilterMod(COS2048_DATA);
 
 LowPassFilter lpf;
+uint8_t resonance = 200; // range 0-255, 255 is most resonant
 
 void setup(){
   startMozzi();
   aCrunchySound.setFreq(2.f);
   kFilterMod.setFreq(1.3f);
-  lpf.setResonance(200);
 }
 
 void loop(){
@@ -45,7 +45,7 @@ void updateControl(){
   }
   // map the modulation into the filter range (0-255), corresponds with 0-8191Hz
   byte cutoff_freq = 100 + kFilterMod.next()/2;
-  lpf.setCutoffFreq(cutoff_freq);
+  lpf.setCutoffFreqAndResonance(cutoff_freq, resonance);
 }
 
 int updateAudio(){

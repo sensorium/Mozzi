@@ -119,11 +119,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a6d6538d3dfe603cce18711c990b85a03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
 <tr class="separator:a6d6538d3dfe603cce18711c990b85a03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8a9f6a04009d37885f47cdf5a45023d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_low_pass_filter.html#ac8a9f6a04009d37885f47cdf5a45023d">setCutoffFreq</a> (uint8_t cutoff)</td></tr>
-<tr class="memdesc:ac8a9f6a04009d37885f47cdf5a45023d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the cut off frequency,.  <a href="#ac8a9f6a04009d37885f47cdf5a45023d">More...</a><br /></td></tr>
+<tr class="memdesc:ac8a9f6a04009d37885f47cdf5a45023d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Depreciated.  <a href="#ac8a9f6a04009d37885f47cdf5a45023d">More...</a><br /></td></tr>
 <tr class="separator:ac8a9f6a04009d37885f47cdf5a45023d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad655253ff702ba5bda1bdbb0199019f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_low_pass_filter.html#ad655253ff702ba5bda1bdbb0199019f0">setResonance</a> (uint8_t resonance)</td></tr>
-<tr class="memdesc:ad655253ff702ba5bda1bdbb0199019f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the resonance.  <a href="#ad655253ff702ba5bda1bdbb0199019f0">More...</a><br /></td></tr>
+<tr class="memdesc:ad655253ff702ba5bda1bdbb0199019f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Depreciated.  <a href="#ad655253ff702ba5bda1bdbb0199019f0">More...</a><br /></td></tr>
 <tr class="separator:ad655253ff702ba5bda1bdbb0199019f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1204760d817016d25dc028757a42adc3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_low_pass_filter.html#a1204760d817016d25dc028757a42adc3">setCutoffFreqAndResonance</a> (uint8_t cutoff, uint8_t resonance)</td></tr>
+<tr class="memdesc:a1204760d817016d25dc028757a42adc3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><br />
+Set the cut off frequency and resonance.  <a href="#a1204760d817016d25dc028757a42adc3">More...</a><br /></td></tr>
+<tr class="separator:a1204760d817016d25dc028757a42adc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a393f154ec729419747c5dd630327b852"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_low_pass_filter.html#a393f154ec729419747c5dd630327b852">next</a> (int in)</td></tr>
 <tr class="memdesc:a393f154ec729419747c5dd630327b852"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the next sample, given an input signal.  <a href="#a393f154ec729419747c5dd630327b852">More...</a><br /></td></tr>
 <tr class="separator:a393f154ec729419747c5dd630327b852"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,7 +135,7 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A resonant low pass filter for audio signals. </p>
 
-<p class="definition">Definition at line <a class="el" href="_low_pass_filter_8h_source.html#l00037">37</a> of file <a class="el" href="_low_pass_filter_8h_source.html">LowPassFilter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_low_pass_filter_8h_source.html#l00038">38</a> of file <a class="el" href="_low_pass_filter_8h_source.html">LowPassFilter.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a393f154ec729419747c5dd630327b852"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a393f154ec729419747c5dd630327b852">&#9670;&nbsp;</a></span>next()</h2>
@@ -167,7 +171,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>the signal output. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Timing: about 11us. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_low_pass_filter_8h_source.html#l00077">77</a> of file <a class="el" href="_low_pass_filter_8h_source.html">LowPassFilter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_low_pass_filter_8h_source.html#l00090">90</a> of file <a class="el" href="_low_pass_filter_8h_source.html">LowPassFilter.h</a>.</p>
 
 </div>
 </div>
@@ -195,15 +199,64 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Set the cut off frequency,. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Depreciated. </p>
+<p>Use setCutoffFreqAndResonance(uint8_t cutoff, uint8_t resonance).</p>
+<p>Set the cut off frequency, </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">cutoff</td><td>use the range 0-255 to represent 0-8192 Hz (AUDIO_RATE/2). Be careful of distortion at the lower end, especially with high resonance. </td></tr>
+    <tr><td class="paramname">cutoff</td><td>use the range 0-255 to represent 0-8191 Hz (AUDIO_RATE/2). Be careful of distortion at the lower end, especially with high resonance. </td></tr>
   </table>
   </dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="_low_pass_filter_8h_source.html#l00053">53</a> of file <a class="el" href="_low_pass_filter_8h_source.html">LowPassFilter.h</a>.</p>
+
+</div>
+</div>
+<a id="a1204760d817016d25dc028757a42adc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1204760d817016d25dc028757a42adc3">&#9670;&nbsp;</a></span>setCutoffFreqAndResonance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LowPassFilter::setCutoffFreqAndResonance </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>cutoff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>resonance</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><br />
+Set the cut off frequency and resonance. </p>
+<p>Replaces <a class="el" href="class_low_pass_filter.html#ac8a9f6a04009d37885f47cdf5a45023d" title="Depreciated. ">setCutoffFreq()</a> and <a class="el" href="class_low_pass_filter.html#ad655253ff702ba5bda1bdbb0199019f0" title="Depreciated. ">setResonance()</a>. (Because the internal calculations need to be done whenever either parameter changes.) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cutoff</td><td>range 0-255 represents 0-8191 Hz (AUDIO_RATE/2). Be careful of distortion at the lower end, especially with high resonance. </td></tr>
+    <tr><td class="paramname">resonance</td><td>range 0-255, 255 is most resonant. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_low_pass_filter_8h_source.html#l00076">76</a> of file <a class="el" href="_low_pass_filter_8h_source.html">LowPassFilter.h</a>.</p>
 
 </div>
 </div>
@@ -231,8 +284,9 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Set the resonance. </p>
-<p>If you hear unwanted distortion, back off the resonance. After setting resonance, you need to call setCuttoffFreq() to hear the change! </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Depreciated. </p>
+<p>Use setCutoffFreqAndResonance(uint8_t cutoff, uint8_t resonance).</p>
+<p>Set the resonance. If you hear unwanted distortion, back off the resonance. After setting resonance, you need to call setCuttoffFreq() to hear the change! </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">resonance</td><td>in the range 0-255, with 255 being most resonant. </td></tr>
   </table>
@@ -240,7 +294,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>Remember to call setCuttoffFreq() after resonance is changed! </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_low_pass_filter_8h_source.html#l00065">65</a> of file <a class="el" href="_low_pass_filter_8h_source.html">LowPassFilter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_low_pass_filter_8h_source.html#l00067">67</a> of file <a class="el" href="_low_pass_filter_8h_source.html">LowPassFilter.h</a>.</p>
 
 </div>
 </div>
@@ -250,7 +304,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_low_pass_filter.html">LowPassFilter</a></li>
-    <li class="footer">Generated on Wed Jun 24 2020 21:18:36 for Mozzi by
+    <li class="footer">Generated on Fri Jul 17 2020 20:16:37 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

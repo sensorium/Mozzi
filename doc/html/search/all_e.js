@@ -13,6 +13,7 @@ var searchData=
   ['setbpm',['setBPM',['../class_metronome.html#aab384673719ebd552dd72d474ed58556',1,'Metronome']]],
   ['setcentrefreq',['setCentreFreq',['../class_state_variable.html#a47e7ddad76db7009e370fa91ea5d4d3d',1,'StateVariable::setCentreFreq()'],['../class_wave_packet.html#adbbbf8b6b9eaae18ef381ff04be3eb5b',1,'WavePacket::setCentreFreq()']]],
   ['setcutofffreq',['setCutoffFreq',['../class_low_pass_filter.html#ac8a9f6a04009d37885f47cdf5a45023d',1,'LowPassFilter']]],
+  ['setcutofffreqandresonance',['setCutoffFreqAndResonance',['../class_low_pass_filter.html#a1204760d817016d25dc028757a42adc3',1,'LowPassFilter']]],
   ['setdecay',['setDecay',['../class_ead.html#aa99e6dc2d5448b4de0764c6208e5c2fc',1,'Ead']]],
   ['setdecaylevel',['setDecayLevel',['../class_a_d_s_r.html#a6542f4a76a37696245447855d647b41f',1,'ADSR']]],
   ['setdecaytime',['setDecayTime',['../class_a_d_s_r.html#a3b8c6492ad9a379dc0c6749677ba4d29',1,'ADSR']]],

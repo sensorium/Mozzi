@@ -2,7 +2,11 @@
 layout: single
 ---
 
-Here are some projects by people using Mozzi.  If you have something you'd like to share, [get in touch](https://groups.google.com/forum/#!forum/mozzi-users).
+Here are some projects by people using Mozzi. If you have something you'd like to share, [get in touch](https://groups.google.com/forum/#!forum/mozzi-users).
+
+***
+
+[OscPocketO](https://youtu.be/xTlGxCow4GA) - Pocket Synth and Drum machine by Staffan Melin, who invites you to [download, edit, share and evolve!](https://oscillator.se/arduino)
 
 ***
 
@@ -40,11 +44,6 @@ Ben Nolan's art project for [Kiwiburn](https://www.kiwiburn.com/) (New Zealand's
 [mobileBB shield](https://breadboardband.github.io/mobileBBshield_for_Mozzi/) for Mozzi, by [The Breadboard Band](https://www.breadboardband.org/wordpress/?p=5)
 
 ![mobileBB shield](https://raw.github.com/BreadboardBand/mobileBBshield_for_Mozzi/gh-pages/mobileBBforMozzi01.jpg)
-
-***
-
-[Ototo](https://www.kickstarter.com/projects/905018498/ototo-make-music-from-anything?ref=category), "make music from anything", by Dentaku.  
-<iframe src="https://d2pq0u4uni88oo.cloudfront.net/projects/823298/video-338353-h264_high.mp4" width="715" height="432" frameborder="0" allowfullscreen></iframe>
 
 ***
 

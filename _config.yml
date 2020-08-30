@@ -12,7 +12,7 @@
 
 #theme                  : "minimal-mistakes-jekyll"
 # tb: replace above line with this for github pages to work
-remote_theme           : "mmistakes/minimal-mistakes"
+remote_theme:             "mmistakes/minimal-mistakes@4.20.1"
 minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings

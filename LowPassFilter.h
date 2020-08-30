@@ -43,7 +43,7 @@ public:
    */
   LowPassFilter() { ; }
 
-  /** Depreciated.  Use setCutoffFreqAndResonance(uint8_t cutoff, uint8_t
+  /** deprecated.  Use setCutoffFreqAndResonance(uint8_t cutoff, uint8_t
   resonance).
 
   Set the cut off frequency,
@@ -56,7 +56,7 @@ public:
     fb = q + ucfxmul(q, SHIFTED_1 - cutoff);
   }
 
-  /** Depreciated.  Use setCutoffFreqAndResonance(uint8_t cutoff, uint8_t
+  /** deprecated.  Use setCutoffFreqAndResonance(uint8_t cutoff, uint8_t
   resonance).
 
   Set the resonance. If you hear unwanted distortion, back off the resonance.

@@ -8,7 +8,7 @@ Edit this file if you want to choose your own configuration options.
 
 /**  @ingroup core
 AUDIO_MODE holds the audio mode setting.
-Select STANDARD (depreciated), STANDARD_PLUS or HIFI audio output mode in the Mozzi/mozzi_config.h file with
+Select STANDARD (deprecated), STANDARD_PLUS or HIFI audio output mode in the Mozzi/mozzi_config.h file with
 \#define AUDIO_MODE STANDARD_PLUS or \#define AUDIO_MODE HIFI.
 In Mozzi/config.h, comment one of these options in and the others out to set the audio mode.
 

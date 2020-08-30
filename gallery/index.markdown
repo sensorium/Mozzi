@@ -6,7 +6,8 @@ Here are some projects by people using Mozzi. If you have something you'd like t
 
 ***
 
-[OscPocketO](https://youtu.be/xTlGxCow4GA): Pocket Synth and Drum machine by Staffan Melin, who invites you to [download, edit, share and evolve!](https://oscillator.se/arduino)
+OscPocketO : Pocket Synth and Drum machine by Staffan Melin, who invites you to [download, edit, share and evolve!](https://oscillator.se/arduino)
+{% include video id="xTlGxCow4GA" provider="youtube" %}
 
 ***
 

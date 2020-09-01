@@ -10,6 +10,7 @@ source "https://rubygems.org"
 # Happy Jekylling!
 #gem "jekyll", "~> 3.7.3"
 # tb:replace above line with this for github pages to work
+source "https://rubygems.org"
 gem "github-pages", group: :jekyll_plugins
 
 # This is the default theme for new Jekyll sites. You may change this to anything you like.
@@ -30,7 +31,7 @@ group :jekyll_plugins do
 end
 
 group :development do
-  #gem 'rake'
+  gem 'rake'
   #gem 'jekyll'
   #gem 'rdiscount'
   gem 'pygments.rb'

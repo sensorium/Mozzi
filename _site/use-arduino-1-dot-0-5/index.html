@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
-  Minimal Mistakes Jekyll Theme 4.14.1 by Michael Rose
-  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Minimal Mistakes Jekyll Theme 4.20.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
 -->
@@ -12,6 +12,8 @@
 <!-- begin _includes/seo.html --><title>Use Arduino 1.0.5 - Mozzi</title>
 <meta name="description" content="Mozzi is broken in Arduino IDE 1.0.6 and 1.6.3.  For now, use Arduino 1.0.5.">
 
+
+  <meta name="author" content="Tim Barrass">
 
 
 <meta property="og:type" content="article">
@@ -47,19 +49,16 @@
 
 
 
-
-
-
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
       "@type": "Person",
       "name": "Tim Barrass",
-      "url": "http://localhost:4000/Mozzi",
-      "sameAs": null
-    }
-  </script>
-
+      "url": "http://localhost:4000/Mozzi/"
+    
+  }
+</script>
 
 
 
@@ -71,7 +70,7 @@
 
 <link href="/Mozzi/feed.xml" type="application/atom+xml" rel="alternate" title="Mozzi Feed">
 
-<!-- http://t.co/dKP3o1e -->
+<!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script>
@@ -80,8 +79,9 @@
 
 <!-- For all browsers -->
 <link rel="stylesheet" href="/Mozzi/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
 
-<!--[if lte IE 9]>
+<!--[if IE]>
   <style>
     /* old IE unsupported flexbox fixes */
     .greedy-nav .site-title {
@@ -107,34 +107,46 @@
   </head>
 
   <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
 
     <!--[if lt IE 9]>
 <div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
 <![endif]-->
 
-    <div class="masthead">
+    
+
+<div class="masthead">
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <a class="site-title" href="/Mozzi/">Mozzi</a>
+        
+        <a class="site-title" href="/Mozzi/">
+          Mozzi
+          
+        </a>
         <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="/Mozzi/download/" >download</a>
+              <a href="/Mozzi/download/">download</a>
             </li><li class="masthead__menu-item">
-              <a href="/Mozzi/gallery/" >gallery</a>
+              <a href="/Mozzi/gallery/">gallery</a>
             </li><li class="masthead__menu-item">
-              <a href="/Mozzi/examples/" >examples</a>
+              <a href="/Mozzi/examples/">examples</a>
             </li><li class="masthead__menu-item">
-              <a href="/Mozzi/learn/" >learn</a>
+              <a href="/Mozzi/learn/">learn</a>
             </li><li class="masthead__menu-item">
-              <a href="https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!forum/mozzi-users" >forum</a>
+              <a href="https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!forum/mozzi-users">forum</a>
             </li><li class="masthead__menu-item">
-              <a href="/Mozzi/blog/" >blog</a>
+              <a href="/Mozzi/doc/html/">api</a>
             </li><li class="masthead__menu-item">
-              <a href="/Mozzi/doc/html/" >api</a>
+              <a href="https://github.com/sensorium/Mozzi">github</a>
             </li><li class="masthead__menu-item">
-              <a href="https://github.com/sensorium/Mozzi" >github</a>
-            </li><li class="masthead__menu-item">
-              <a href="/Mozzi/shop/" >shop</a>
+              <a href="/Mozzi/shop/">shop</a>
             </li></ul>
         
         <button class="greedy-nav__toggle hidden" type="button">
@@ -158,32 +170,43 @@
 
 
 
-
-
-
-
 <div class="page__hero--overlay"
   style=" background-image: url('/Mozzi/assets/images/mozzi-square.png');"
 >
   
     <div class="wrapper">
-      <h1 class="page__title" itemprop="headline">
+      <h1 id="page-title" class="page__title" itemprop="headline">
         
-          <!--Use Arduino 1.0.5
--->
-          Mozzi
+          Use Arduino 1.0.5
 
         
       </h1>
-      <!-- 
+      
         <p class="page__lead">Mozzi is broken in Arduino IDE 1.0.6 and 1.6.3.  For now, use Arduino 1.0.5.
 
 </p>
-       -->
       
-        <p class="page__lead">audio synthesis library for Arduino
-</p>
       
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
       
       
     </div>
@@ -210,9 +233,10 @@
       <h3 class="author__name" itemprop="name">Tim Barrass</h3>
     
     
-      <p class="author__bio" itemprop="description">
+      <div class="author__bio" itemprop="description">
         
-      </p>
+
+      </div>
     
   </div>
 
@@ -233,11 +257,9 @@
         <li>
           <a href="mailto:faveflave@gmail.com">
             <meta itemprop="email" content="faveflave@gmail.com" />
-            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
           </a>
         </li>
-      
-
       
 
       
@@ -299,10 +321,11 @@
   </div>
 
 
+
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Use Arduino 1.0.5">
     <meta itemprop="description" content="Mozzi is broken in Arduino IDE 1.0.6 and 1.6.3.  For now, use Arduino 1.0.5.">
-    <meta itemprop="datePublished" content="April 08, 2015">
+    <meta itemprop="datePublished" content="2015-04-08T21:52:00+10:00">
     
 
     <div class="page__inner-wrap">
@@ -323,8 +346,9 @@
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2015-04-08T21:52:00+10:00">April 08, 2015</time></p>
-        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2015-04-08T21:52:00+10:00">April 8, 2015</time></p>
+
+
       </footer>
 
       <section class="page__share">
@@ -335,8 +359,6 @@
   <a href="https://twitter.com/intent/tweet?text=Use+Arduino+1.0.5%20http%3A%2F%2Flocalhost%3A4000%2FMozzi%2Fuse-arduino-1-dot-0-5%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FMozzi%2Fuse-arduino-1-dot-0-5%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
-
-  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2FMozzi%2Fuse-arduino-1-dot-0-5%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
   <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2FMozzi%2Fuse-arduino-1-dot-0-5%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
@@ -366,151 +388,184 @@
       <div class="grid__wrapper">
         
           
-          
 
 
 
 <div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src=
-          
-            "/Mozzi"
-          
-          alt="">
+        <img src="/Mozzi" alt="">
       </div>
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/Mozzi/mozzibyte-workshop-at-audiomostly/" rel="permalink">MozziByte workshop at AudioMostly in Wales
 </a>
       
     </h2>
     
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
 
 
+  <p class="page__meta">
 
-
-  less than 1 minute read
-</p>
     
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
     <p class="archive__item-excerpt" itemprop="description">The 2018 Conference Programme from 12-14 September at Wrexham Glyndŵr University in Wales, UK includes a MozziByte Workshop for attendees…
 </p>
   </article>
 </div>
+
         
-          
           
 
 
 
 <div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src=
-          
-            "/Mozzi"
-          
-          alt="">
+        <img src="/Mozzi" alt="">
       </div>
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/Mozzi/mozzibyte-synth-shield-kickstarter-launched/" rel="permalink">MozziByte synth shield kickstarter launched
 </a>
       
     </h2>
     
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
 
 
+  <p class="page__meta">
 
-
-  less than 1 minute read
-</p>
     
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
     <p class="archive__item-excerpt" itemprop="description">MozziByte, a shield for the Arduino Pro Mini.  On kickstarter.
 
 </p>
   </article>
 </div>
+
         
-          
           
 
 
 
 <div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src=
-          
-            "/Mozzi"
-          
-          alt="">
+        <img src="/Mozzi" alt="">
       </div>
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/Mozzi/v1-dot-0-3rc6-hifi-works/" rel="permalink">v1.0.3rc6 HIFI works
 </a>
       
     </h2>
     
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
 
 
+  <p class="page__meta">
 
-
-  less than 1 minute read
-</p>
     
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
     <p class="archive__item-excerpt" itemprop="description">HIFI actually works this time… ie. it’s unbroken
 </p>
   </article>
 </div>
+
         
-          
           
 
 
 
 <div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src=
-          
-            "/Mozzi"
-          
-          alt="">
+        <img src="/Mozzi" alt="">
       </div>
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/Mozzi/releases,/bugfix/v1-dot-0-3rc5-hifi-compile-fix/" rel="permalink">v1.0.3rc5 HIFI compile fix
 </a>
       
     </h2>
     
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
 
 
+  <p class="page__meta">
 
-
-  less than 1 minute read
-</p>
     
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
     <p class="archive__item-excerpt" itemprop="description">HIFI sketches compile again. The problems were due to more errors around changes in Mozzi’s modified FrequencyTimer2 library usage which were not tested prop...</p>
   </article>
 </div>
+
         
       </div>
     </div>
+  
   
 </div>
 
@@ -518,7 +573,7 @@
 
     
 
-    <div class="page__footer">
+    <div id="footer" class="page__footer">
       <footer>
         <!-- start custom footer snippets -->
 
@@ -535,14 +590,15 @@
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2018 Tim Barrass. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2020 Tim Barrass. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>
 
     
   <script src="/Mozzi/assets/js/main.min.js"></script>
-  <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+
+
 
 
 

@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
-  Minimal Mistakes Jekyll Theme 4.14.1 by Michael Rose
-  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Minimal Mistakes Jekyll Theme 4.20.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
 -->
@@ -13,6 +13,8 @@
 <meta name="description" content="audio synthesis library for Arduino">
 
 
+  <meta name="author" content="Tim Barrass">
+
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_GB">
@@ -20,6 +22,8 @@
 <meta property="og:title" content="Efficient code for smooth audio">
 <meta property="og:url" content="http://localhost:4000/Mozzi/learn/hints/">
 
+
+  <meta property="og:description" content="audio synthesis library for Arduino">
 
 
 
@@ -43,19 +47,16 @@
 
 
 
-
-
-
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
       "@type": "Person",
       "name": "Tim Barrass",
-      "url": "http://localhost:4000/Mozzi",
-      "sameAs": null
-    }
-  </script>
-
+      "url": "http://localhost:4000/Mozzi/"
+    
+  }
+</script>
 
 
 
@@ -67,7 +68,7 @@
 
 <link href="/Mozzi/feed.xml" type="application/atom+xml" rel="alternate" title="Mozzi Feed">
 
-<!-- http://t.co/dKP3o1e -->
+<!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script>
@@ -76,8 +77,9 @@
 
 <!-- For all browsers -->
 <link rel="stylesheet" href="/Mozzi/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
 
-<!--[if lte IE 9]>
+<!--[if IE]>
   <style>
     /* old IE unsupported flexbox fixes */
     .greedy-nav .site-title {
@@ -103,34 +105,46 @@
   </head>
 
   <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
 
     <!--[if lt IE 9]>
 <div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
 <![endif]-->
 
-    <div class="masthead">
+    
+
+<div class="masthead">
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <a class="site-title" href="/Mozzi/">Mozzi</a>
+        
+        <a class="site-title" href="/Mozzi/">
+          Mozzi
+          
+        </a>
         <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="/Mozzi/download/" >download</a>
+              <a href="/Mozzi/download/">download</a>
             </li><li class="masthead__menu-item">
-              <a href="/Mozzi/gallery/" >gallery</a>
+              <a href="/Mozzi/gallery/">gallery</a>
             </li><li class="masthead__menu-item">
-              <a href="/Mozzi/examples/" >examples</a>
+              <a href="/Mozzi/examples/">examples</a>
             </li><li class="masthead__menu-item">
-              <a href="/Mozzi/learn/" >learn</a>
+              <a href="/Mozzi/learn/">learn</a>
             </li><li class="masthead__menu-item">
-              <a href="https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!forum/mozzi-users" >forum</a>
+              <a href="https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!forum/mozzi-users">forum</a>
             </li><li class="masthead__menu-item">
-              <a href="/Mozzi/blog/" >blog</a>
+              <a href="/Mozzi/doc/html/">api</a>
             </li><li class="masthead__menu-item">
-              <a href="/Mozzi/doc/html/" >api</a>
+              <a href="https://github.com/sensorium/Mozzi">github</a>
             </li><li class="masthead__menu-item">
-              <a href="https://github.com/sensorium/Mozzi" >github</a>
-            </li><li class="masthead__menu-item">
-              <a href="/Mozzi/shop/" >shop</a>
+              <a href="/Mozzi/shop/">shop</a>
             </li></ul>
         
         <button class="greedy-nav__toggle hidden" type="button">
@@ -154,28 +168,21 @@
 
 
 
-
-
-
-
 <div class="page__hero--overlay"
   style=" background-image: url('/Mozzi/assets/images/mozzi-square.png');"
 >
   
     <div class="wrapper">
-      <h1 class="page__title" itemprop="headline">
+      <h1 id="page-title" class="page__title" itemprop="headline">
         
-          <!--Efficient code for smooth audio
--->
-          Mozzi
+          Efficient code for smooth audio
 
         
       </h1>
-      <!--  -->
       
-        <p class="page__lead">audio synthesis library for Arduino
-</p>
       
+
+
       
       
     </div>
@@ -189,6 +196,7 @@
 
 <div id="main" role="main">
   
+
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Efficient code for smooth audio">
@@ -209,8 +217,8 @@
 the compiler for small code size rather than speed!  Here’s a great read ; ) <a href="https://ww1.microchip.com/downloads/en/AppNotes/doc8453.pdf">Atmel AVR4027: Tips and Tricks to Optimize. Your C Code for 8-bit AVR Microcontrollers</a></p>
   </li>
   <li>
-    <p>Pre-calculate where possible. Do as much as you can in <code class="highlighter-rouge">setup()</code> and
-<code class="highlighter-rouge">updateControl()</code>, and keep <code class="highlighter-rouge">updateAudio()</code> lean.</p>
+    <p>Pre-calculate where possible. Do as much as you can in <code class="language-plaintext highlighter-rouge">setup()</code> and
+<code class="language-plaintext highlighter-rouge">updateControl()</code>, and keep <code class="language-plaintext highlighter-rouge">updateAudio()</code> lean.</p>
   </li>
   <li>
     <p>Avoid division! Use powers of two for numbers where you can, and use
@@ -233,7 +241,7 @@ the compiler for small code size rather than speed!  Here’s a great read ; ) <
     <p>Take care declaring and casting variables - this can affect speed and also be <strong>a source of unexpected sounds</strong>.</p>
   </li>
   <li>
-    <p>Use integer and fixed point maths, and avoid floating point, particularly in <code class="highlighter-rouge">updateAudio()</code>. Mozzi has a collection of fixed-point number types and conversion functions in <strong>mozzi_fixmath.h</strong>. These are often much faster than floating point, but they can over - or under - flow if you’re not careful.</p>
+    <p>Use integer and fixed point maths, and avoid floating point, particularly in <code class="language-plaintext highlighter-rouge">updateAudio()</code>. Mozzi has a collection of fixed-point number types and conversion functions in <strong>mozzi_fixmath.h</strong>. These are often much faster than floating point, but they can over - or under - flow if you’re not careful.</p>
   </li>
 </ul>
 
@@ -243,13 +251,13 @@ the compiler for small code size rather than speed!  Here’s a great read ; ) <
 
 <ul>
   <li>
-    <p>Printing to the Arduino Serial monitor is a useful tool for debugging, but beware of trying to print too much or your whole computer might freeze! It’s mostly OK to print from <code class="highlighter-rouge">updateControl()</code> with a <code class="highlighter-rouge">CONTROL_RATE</code> of 64, and it works well with a baud rate of 9600, ie. <code class="highlighter-rouge">Serial.begin(9600)</code>. Remember to set it in the monitor window too. Notice that using Serial adds size to your sketch and can often disrupt audio, so check if you’ve got print statements interfering if you’re hearing audio clicks.</p>
+    <p>Printing to the Arduino Serial monitor is a useful tool for debugging, but beware of trying to print too much or your whole computer might freeze! It’s mostly OK to print from <code class="language-plaintext highlighter-rouge">updateControl()</code> with a <code class="language-plaintext highlighter-rouge">CONTROL_RATE</code> of 64, and it works well with a baud rate of 9600, ie. <code class="language-plaintext highlighter-rouge">Serial.begin(9600)</code>. Remember to set it in the monitor window too. Notice that using Serial adds size to your sketch and can often disrupt audio, so check if you’ve got print statements interfering if you’re hearing audio clicks.</p>
   </li>
   <li>
     <p>To print audio rate debugging info, don’t use the Arduino serial monitor, try <a href="https://freeware.the-meiers.org/">CoolTerm</a>, it’s a great application which performs much better and can capture incoming data to a file.</p>
   </li>
   <li>
-    <p>An oscilloscope is useful for timing your code. Mozzi has fast code to flip digital pin 13 without interfering much with the audio timing. Put <code class="highlighter-rouge">#include mozzi_utils.h</code> in your sketch and <code class="highlighter-rouge">setPin13Out()</code> in <code class="highlighter-rouge">setup()</code>, then use <code class="highlighter-rouge">setPin13High()</code> and <code class="highlighter-rouge">setPin13Low()</code> around the code you want to time.</p>
+    <p>An oscilloscope is useful for timing your code. Mozzi has fast code to flip digital pin 13 without interfering much with the audio timing. Put <code class="language-plaintext highlighter-rouge">#include mozzi_utils.h</code> in your sketch and <code class="language-plaintext highlighter-rouge">setPin13Out()</code> in <code class="language-plaintext highlighter-rouge">setup()</code>, then use <code class="language-plaintext highlighter-rouge">setPin13High()</code> and <code class="language-plaintext highlighter-rouge">setPin13Low()</code> around the code you want to time.</p>
   </li>
 </ul>
 
@@ -258,7 +266,7 @@ the compiler for small code size rather than speed!  Here’s a great read ; ) <
 <h2 id="cool-code">Cool code</h2>
 
 <ul>
-  <li>In <code class="highlighter-rouge">updateAudio()</code> you can store “submixes” in variables, to eventually make the return line easier to read and troubleshoot. (Thanks to Charles Peck for this tip).</li>
+  <li>In <code class="language-plaintext highlighter-rouge">updateAudio()</code> you can store “submixes” in variables, to eventually make the return line easier to read and troubleshoot. (Thanks to Charles Peck for this tip).</li>
 </ul>
 
 <hr />
@@ -296,6 +304,7 @@ happening in your synthesis, filtering makes a big difference. There’s a Pure 
 
 
         
+
       </footer>
 
       
@@ -314,7 +323,7 @@ happening in your synthesis, filtering makes a big difference. There’s a Pure 
 
     
 
-    <div class="page__footer">
+    <div id="footer" class="page__footer">
       <footer>
         <!-- start custom footer snippets -->
 
@@ -331,14 +340,15 @@ happening in your synthesis, filtering makes a big difference. There’s a Pure 
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2018 Tim Barrass. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2020 Tim Barrass. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>
 
     
   <script src="/Mozzi/assets/js/main.min.js"></script>
-  <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+
+
 
 
 

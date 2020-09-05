@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['flash_5for_5fram_5fread',['FLASH_OR_RAM_READ',['../group__core.html#ga14d8349004d9544dbd01b907c60c08aa',1,'mozzi_pgmspace.h']]],
   ['float_5fto_5fq0n16',['float_to_Q0n16',['../group__fixmath.html#ga4d20591828f0189963f1190f7197ba68',1,'mozzi_fixmath.h']]],
   ['float_5fto_5fq0n7',['float_to_Q0n7',['../group__fixmath.html#ga1e0eab490ffe9a47fd78bcc449e3b995',1,'mozzi_fixmath.h']]],
   ['float_5fto_5fq0n8',['float_to_Q0n8',['../group__fixmath.html#ga00e21c6b9d75ed26cd3bf1b9f4f9482e',1,'mozzi_fixmath.h']]],

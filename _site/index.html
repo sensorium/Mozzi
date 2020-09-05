@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
-  Minimal Mistakes Jekyll Theme 4.14.1 by Michael Rose
-  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Minimal Mistakes Jekyll Theme 4.20.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
 -->
@@ -13,6 +13,8 @@
 <meta name="description" content="audio synthesis library for Arduino">
 
 
+  <meta name="author" content="Tim Barrass">
+
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_GB">
@@ -20,6 +22,8 @@
 <meta property="og:title" content="Mozzi">
 <meta property="og:url" content="http://localhost:4000/Mozzi/">
 
+
+  <meta property="og:description" content="audio synthesis library for Arduino">
 
 
 
@@ -43,19 +47,16 @@
 
 
 
-
-
-
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
       "@type": "Person",
       "name": "Tim Barrass",
-      "url": "http://localhost:4000/Mozzi",
-      "sameAs": null
-    }
-  </script>
-
+      "url": "http://localhost:4000/Mozzi/"
+    
+  }
+</script>
 
 
 
@@ -67,7 +68,7 @@
 
 <link href="/Mozzi/feed.xml" type="application/atom+xml" rel="alternate" title="Mozzi Feed">
 
-<!-- http://t.co/dKP3o1e -->
+<!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script>
@@ -76,8 +77,9 @@
 
 <!-- For all browsers -->
 <link rel="stylesheet" href="/Mozzi/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
 
-<!--[if lte IE 9]>
+<!--[if IE]>
   <style>
     /* old IE unsupported flexbox fixes */
     .greedy-nav .site-title {
@@ -103,34 +105,46 @@
   </head>
 
   <body class="layout--home">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
 
     <!--[if lt IE 9]>
 <div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
 <![endif]-->
 
-    <div class="masthead">
+    
+
+<div class="masthead">
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <a class="site-title" href="/Mozzi/">Mozzi</a>
+        
+        <a class="site-title" href="/Mozzi/">
+          Mozzi
+          
+        </a>
         <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="/Mozzi/download/" >download</a>
+              <a href="/Mozzi/download/">download</a>
             </li><li class="masthead__menu-item">
-              <a href="/Mozzi/gallery/" >gallery</a>
+              <a href="/Mozzi/gallery/">gallery</a>
             </li><li class="masthead__menu-item">
-              <a href="/Mozzi/examples/" >examples</a>
+              <a href="/Mozzi/examples/">examples</a>
             </li><li class="masthead__menu-item">
-              <a href="/Mozzi/learn/" >learn</a>
+              <a href="/Mozzi/learn/">learn</a>
             </li><li class="masthead__menu-item">
-              <a href="https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!forum/mozzi-users" >forum</a>
+              <a href="https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!forum/mozzi-users">forum</a>
             </li><li class="masthead__menu-item">
-              <a href="/Mozzi/blog/" >blog</a>
+              <a href="/Mozzi/doc/html/">api</a>
             </li><li class="masthead__menu-item">
-              <a href="/Mozzi/doc/html/" >api</a>
+              <a href="https://github.com/sensorium/Mozzi">github</a>
             </li><li class="masthead__menu-item">
-              <a href="https://github.com/sensorium/Mozzi" >github</a>
-            </li><li class="masthead__menu-item">
-              <a href="/Mozzi/shop/" >shop</a>
+              <a href="/Mozzi/shop/">shop</a>
             </li></ul>
         
         <button class="greedy-nav__toggle hidden" type="button">
@@ -154,28 +168,21 @@
 
 
 
-
-
-
-
 <div class="page__hero--overlay"
   style=" background-image: url('/Mozzi/assets/images/mozzi-square.png');"
 >
   
     <div class="wrapper">
-      <h1 class="page__title" itemprop="headline">
+      <h1 id="page-title" class="page__title" itemprop="headline">
         
-          <!--Mozzi
--->
           Mozzi
 
         
       </h1>
-      <!--  -->
       
-        <p class="page__lead">audio synthesis library for Arduino
-</p>
       
+
+
       
       
     </div>
@@ -190,45 +197,10 @@
 <div id="main" role="main">
   
 
-  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    
-    
-    
 
-    <div class="page__inner-wrap">
-      
-
-      <section class="page__content" itemprop="text">
-        
-          <aside class="sidebar__right ">
-            <nav class="toc">
-              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
-              <ul class="toc__menu">
-  <li><a href="#features">Features</a></li>
-  <li><a href="#installation">Installation</a></li>
-  <li><a href="#quick-start">Quick Start</a></li>
-  <li><a href="#using-mozzi">Using Mozzi</a></li>
-  <li><a href="#documentation">Documentation</a></li>
-  <li><a href="#weird-things">Weird things</a>
-    <ul>
-      <li><a href="#avr">AVR</a></li>
-    </ul>
-  </li>
-  <li><a href="#contributions--included-dependencies">Contributions / Included Dependencies</a></li>
-  <li><a href="#hardware-specific-notes">Hardware specific notes</a>
-    <ul>
-      <li><a href="#stm32duino">STM32(duino)</a></li>
-      <li><a href="#teensy-3031323435lc">Teensy 3.0/3.1/3.2/3.4/3.5/LC</a></li>
-      <li><a href="#esp8266">ESP8266</a></li>
-    </ul>
-  </li>
-  <li><a href="#contact">Contact</a></li>
-</ul>
-            </nav>
-          </aside>
-        
-        <p>Currently your Arduino can only beep like a microwave oven. Mozzi brings
+  <div class="archive">
+    
+    <p>Currently your Arduino can only beep like a microwave oven. Mozzi brings
 your Arduino to life by allowing it to produce much more complex and interesting growls, sweeps and chorusing atmospherics. These sounds can be quickly and easily constructed from familiar synthesis units like oscillators, delays, filters and envelopes.</p>
 
 <p>You can use Mozzi to generate algorithmic music for an installation or
@@ -348,14 +320,14 @@ Try some examples from the <strong>File &gt; Examples &gt; Mozzi</strong> menu.<
 <span class="p">}</span>
 
 <span class="kt">void</span> <span class="nf">updateControl</span><span class="p">(){</span>
-	<span class="c1">// your control code
-</span><span class="p">}</span>
+	<span class="c1">// your control code</span>
+<span class="p">}</span>
 
-<span class="kt">int</span> <span class="n">updateAudio</span><span class="p">(){</span>
-	<span class="c1">// your audio code which returns an int between -244 and 243
-</span><span class="p">}</span>
+<span class="kt">int</span> <span class="nf">updateAudio</span><span class="p">(){</span>
+	<span class="c1">// your audio code which returns an int between -244 and 243</span>
+<span class="p">}</span>
 
-<span class="kt">void</span> <span class="n">loop</span><span class="p">()</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
 	<span class="n">audioHook</span><span class="p">();</span>
 <span class="p">}</span></code></pre></figure>
 
@@ -375,20 +347,17 @@ Look for code and usage changes <a href="https://github.com/sensorium/Mozzi/blob
 
 <ul>
   <li>
-    <p>While Mozzi is running, calling <code class="highlighter-rouge">delay()</code>, <code class="highlighter-rouge">delayMicroseconds()</code>, or other functions which wait or cycle through loops can cause audio glitches.
-Mozzi provides <code class="highlighter-rouge">EventDelay()</code> for scheduling instead of <code class="highlighter-rouge">delay()</code>.</p>
+    <p>While Mozzi is running, calling <code class="language-plaintext highlighter-rouge">delay()</code>, <code class="language-plaintext highlighter-rouge">delayMicroseconds()</code>, or other functions which wait or cycle through loops can cause audio glitches.
+Mozzi provides <code class="language-plaintext highlighter-rouge">EventDelay()</code> for scheduling instead of <code class="language-plaintext highlighter-rouge">delay()</code>.</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">analogRead()</code> is replaced by <code class="highlighter-rouge">mozziAnalogRead()</code>, which works in the background instead of blocking the processor.</p>
+    <p><code class="language-plaintext highlighter-rouge">analogRead()</code> is replaced by <code class="language-plaintext highlighter-rouge">mozziAnalogRead()</code>, which works in the background instead of blocking the processor.</p>
   </li>
   <li>
-    <p>Mozzi interferes with <code class="highlighter-rouge">analogWrite()</code>.  In <code class="highlighter-rouge">STANDARD</code> and <code class="highlighter-rouge">STANDARD_PLUS</code> audio modes, Mozzi takes over Timer1 (pins 9 and 10), but you can use the Timer2 pins, 3 and 11 (your board may differ).  In <code class="highlighter-rouge">HIFI</code> mode, Mozzi uses Timer1 (or Timer4 on some boards), and Timer2, so pins 3 and 11 are also out.  If you need <code class="highlighter-rouge">analogWrite()</code>, you can do PWM output on any digital pins using the technique in <em>Mozzi&gt;examples&gt;11.Communication&gt;Sinewave_PWM_pins_HIFI</em>.</p>
+    <p>Mozzi interferes with <code class="language-plaintext highlighter-rouge">analogWrite()</code>.  In <code class="language-plaintext highlighter-rouge">STANDARD</code> and <code class="language-plaintext highlighter-rouge">STANDARD_PLUS</code> audio modes, Mozzi takes over Timer1 (pins 9 and 10), but you can use the Timer2 pins, 3 and 11 (your board may differ).  In <code class="language-plaintext highlighter-rouge">HIFI</code> mode, Mozzi uses Timer1 (or Timer4 on some boards), and Timer2, so pins 3 and 11 are also out.  If you need <code class="language-plaintext highlighter-rouge">analogWrite()</code>, you can do PWM output on any digital pins using the technique in <em>Mozzi&gt;examples&gt;11.Communication&gt;Sinewave_PWM_pins_HIFI</em>.</p>
   </li>
   <li>
-    <p>Mozzi provides<code class="highlighter-rouge">mozziMicros()</code> as an alternative to ‘millis()’ and ‘micros()’.</p>
-  </li>
-  <li>
-    <p>The timers can be made available with <code class="highlighter-rouge">stopMozzi()</code>, which stops audio interrupts, until you call <code class="highlighter-rouge">startMozzi()</code>.</p>
+    <p>The timers can be made available with <code class="language-plaintext highlighter-rouge">stopMozzi()</code>, which stops audio interrupts, until you call <code class="language-plaintext highlighter-rouge">startMozzi()</code>.</p>
   </li>
 </ul>
 
@@ -446,7 +415,7 @@ These are included in the standard Teensyduino install unless you explicitly dis
 <ul>
   <li>On Teensy 3.0/3.1/3.2 audio output is on pin A14/DAC, in STANDARD or STANDARD_PLUS audio modes. These modes are identical on Teensy 3.0/3.1/3.2, as the output is via DAC rather than PWM.</li>
   <li>Output is 12 bits in STANDARD and STANDARD_PLUS modes, up from nearly 9 bits for Atmel based boards. HIFI audio, which works by summing two output pins, is not available on Teensy 3.0/3.1/3.2.</li>
-  <li><code class="highlighter-rouge">#include &lt;ADC.h&gt;</code> is required at the top of every Teensy 3 sketch.</li>
+  <li><code class="language-plaintext highlighter-rouge">#include &lt;ADC.h&gt;</code> is required at the top of every Teensy 3 sketch.</li>
   <li>The examples come with this commented out, for Arduino compatibility.</li>
   <li>Serial baud rate for monitoring in the IDE needs to be set to 9600 to work with Teensy 3.0/3.1/3.2. This slow rate can cause audio glitches.</li>
   <li>twi_nonblock code by Marije Baalman for non-blocking I2C is not compatible with Teensy 3.0/3.1/3.2.</li>
@@ -457,7 +426,7 @@ These are included in the standard Teensyduino install unless you explicitly dis
 
 <ul>
   <li>Since flash memory is not built into the ESP8266, but connected, externally, it is much too slow for keeping wave tables, audio samples, etc. Instead, these are kept in RAM on this platform.</li>
-  <li>Asynchronous analog reads are not implemented. <code class="highlighter-rouge">mozziAnalogRead()</code> relays to <code class="highlighter-rouge">analogRead()</code>.</li>
+  <li>Asynchronous analog reads are not implemented. <code class="language-plaintext highlighter-rouge">mozziAnalogRead()</code> relays to <code class="language-plaintext highlighter-rouge">analogRead()</code>.</li>
   <li>AUDIO_INPUT is not implemented.</li>
   <li>twi_nonblock is not ported</li>
   <li>Several audio output modes exist, the default being PDM_VIA_SERIAL (configurable in AudioConfigESP.h):
@@ -486,13 +455,13 @@ assume that this mode may not be useable on boards where GPIO2 or GPIO15 are not
   </li>
   <li><em>Any</em> WiFi-activity can cause severe spikes in power consumption. This can cause audible “ticking” artifacts, long before any other symptoms.
     <ul>
-      <li>If you do not require WiFi in your sketch, you should turn it off, <em>explicitly</em>, using <code class="highlighter-rouge">WiFi.mode(WIFI_OFF)</code>.</li>
+      <li>If you do not require WiFi in your sketch, you should turn it off, <em>explicitly</em>, using <code class="language-plaintext highlighter-rouge">WiFi.mode(WIFI_OFF)</code>.</li>
       <li>A juicy enough, well regulated power supply, and a stabilizing capacitor between VCC and Gnd can help a lot.</li>
       <li>As the (PDM) output signal is digital, a single transistor can be used to amplify it to an independent voltage level.</li>
     </ul>
   </li>
   <li>The audio output resolution is always 16 bits on this platform, <em>internally</em>. Thus, in updateAudio(), you should scale your output samples to a full 16 bit range. The effective number of output bits cannot easily be quantified, due to PDM coding.</li>
-  <li>audioHook() calls <code class="highlighter-rouge">yield()</code> once for every audio sample generated. Thus, as long as your audio output buffer does not run empty, you should not need any additional <code class="highlighter-rouge">yield()</code>s inside <code class="highlighter-rouge">loop()</code>.</li>
+  <li>audioHook() calls <code class="language-plaintext highlighter-rouge">yield()</code> once for every audio sample generated. Thus, as long as your audio output buffer does not run empty, you should not need any additional <code class="language-plaintext highlighter-rouge">yield()</code>s inside <code class="language-plaintext highlighter-rouge">loop()</code>.</li>
 </ul>
 
 <hr />
@@ -509,34 +478,992 @@ or <a href="https://github.com/sensorium/Mozzi/issues/">GitHub Mozzi site</a>. F
 <hr />
 
 
-        
-      </section>
-
-      <footer class="page__meta">
-        
-        
+<h3 class="archive__subtitle">Recent Posts</h3>
 
 
-        
-      </footer>
 
+
+<div class="entries-list">
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
-
+        <a href="/Mozzi/mozzibyte-workshop-at-audiomostly/" rel="permalink">MozziByte workshop at AudioMostly in Wales
+</a>
       
-    </div>
+    </h2>
+    
+
+
+  <p class="page__meta">
 
     
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">The 2018 Conference Programme from 12-14 September at Wrexham Glyndŵr University in Wales, UK includes a MozziByte Workshop for attendees…
+</p>
   </article>
+</div>
 
   
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/mozzibyte-synth-shield-kickstarter-launched/" rel="permalink">MozziByte synth shield kickstarter launched
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">MozziByte, a shield for the Arduino Pro Mini.  On kickstarter.
+
+</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/v1-dot-0-3rc6-hifi-works/" rel="permalink">v1.0.3rc6 HIFI works
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">HIFI actually works this time… ie. it’s unbroken
+</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/releases,/bugfix/v1-dot-0-3rc5-hifi-compile-fix/" rel="permalink">v1.0.3rc5 HIFI compile fix
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">HIFI sketches compile again. The problems were due to more errors around changes in Mozzi’s modified FrequencyTimer2 library usage which were not tested prop...</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/releases,/bugfix/v1-dot-0-3rc4-fixes-compile/" rel="permalink">v1.0.3rc4 fixes compile
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">Removed stray FrequencyTimer files from main folder, which stopped anything compiling…!
+</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/releases,/bugfix/v1-dot-0-3rc2-teensy-bugfix/" rel="permalink">v1.0.3rc2 Teensy bugfix
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">release v1.0.3rc2
+
+</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/tweak-for-faster-code/" rel="permalink">Tweak for faster code
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">
+
+</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/update-1-dot-0-3rc1-available/" rel="permalink">Update 1.0.3rc1 available
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">release v1.0.3
+
+</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/fixes/updates/howto-for-arduino-1-dot-6-11/" rel="permalink">Howto for Arduino 1.6.11
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">Now Mozzi can work at full speed on the latest Arduino IDE.  It works, but now Mozzi needs an update to install smoothly in recent IDE’s.  Coming soon, with ...</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/release-1-dot-0-2/" rel="permalink">Release v1.0.2
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">New version released, named Aedes australis, v1.0.2.
+
+</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/use-arduino-1-dot-0-5/" rel="permalink">Use Arduino 1.0.5
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">Mozzi is broken in Arduino IDE 1.0.6 and 1.6.3.  For now, use Arduino 1.0.5.
+
+</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/yes/" rel="permalink">yes, you can donate!
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">Actually, I’m not asking for donations now…  But I am offering paid Mozzi consulting.
+</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/ports/teensy/releases/teensy-3-dot-0-slash-3-dot-1-test-release-version-2014-08-09-14-15/" rel="permalink">Teensy 3.0/3.1 test release
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">This release is a test of the recent work on the Mozzi Teensy 3 port in response to the donation campaign reaching the grand goal of $1000.
+Thankyou to all t...</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/ports/teensy-3-dot-0-3-dot-1-port-progress/" rel="permalink">Teensy 3.0-3.1 port progress
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">This is an update regarding work in progress on the port to Teensy 3.0 and 3.1,
+to let donors to the project know where the work is up to.  It’s taking a bit...</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/audio/updates/standard-plus-performance-improves/" rel="permalink">STANDARD_PLUS performance improves
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">Due to recent improvements in output buffer code, STANDARD_PLUS audio mode is now the default, and performs as well as the old STANDARD mode, 
+while removing...</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/updates/audio%20modes/update-to-version-2014-03-13-14-09/" rel="permalink">New STANDARD_PLUS audio mode removes 16kHz whine
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">Took a long time coming…
+
+</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/workshops/making-things-purr/" rel="permalink">Making Things Purr, Growl and Sing - Mozzi workshop in Melbourne
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">We will be running a Mozzi synth workshop in Melbourne on Thursday 20th March, 14:00-20:00.
+
+</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/marketplace/kits/mozzi-marketplace-on-sharetribe/" rel="permalink">Mozzi Marketplace on Sharetribe
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">We (well, me and my brother Steph) are experimenting with the idea of a Mozzi marketplace where people can sell or swap things made with Mozzi.  The first te...</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/updates/adc/simpler-adc-with-mozzianalogread/" rel="permalink">Simpler adc with mozziAnalogRead
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">Version 2013-08-25 evolves the adc developments of the previous release, by
+replacing the various ways of reading analog inputs (adcGetResult(),
+adcReadAllCh...</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/conference/talk/upcoming-mozzi-talk-at-icmc2013-in-perth/" rel="permalink">Upcoming Mozzi talk at ICMC2013 in Perth
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">There’ll be a conference presentation about Mozzi as part of ICMC in Perth.
+The paper will be on Thursday 15 August, 14:15 – 16:15, State Theatre Centre – St...</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/updates/adc/audio-and-control-adc-together/" rel="permalink">Audio and Control ADC together
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">Version 2013-07-29-18:09 enables audio and control rate analog inputs to work at the same time.
+Audio input is on analog pin A0.  Each time an audio sample i...</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/workshops/icad2013-workshop-announcement/" rel="permalink">ICAD2013 workshop announcement
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">Mozzi workshop at International Conference on Auditory Display, July 6-10, 2013, Lodz University of Technology, Poland.
+</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/workshops/music-hack-day-barcelona-workshop-announcement/" rel="permalink">Music Hack Day Barcelona workshop announcement
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">Mozzi workshop at Music Hack Day, 13-14 June 2013, Barcelona.
+</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Mozzi/workshops/isea2013-workshop-announcement/" rel="permalink">ISEA2013 workshop announcement
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">
+
+</p>
+  </article>
+</div>
+
   
 </div>
 
+
+
+
+  </div>
+</div>
     </div>
 
     
 
-    <div class="page__footer">
+    <div id="footer" class="page__footer">
       <footer>
         <!-- start custom footer snippets -->
 
@@ -553,14 +1480,15 @@ or <a href="https://github.com/sensorium/Mozzi/issues/">GitHub Mozzi site</a>. F
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2018 Tim Barrass. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2020 Tim Barrass. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>
 
     
   <script src="/Mozzi/assets/js/main.min.js"></script>
-  <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+
+
 
 
 

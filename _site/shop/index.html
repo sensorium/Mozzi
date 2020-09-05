@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
-  Minimal Mistakes Jekyll Theme 4.14.1 by Michael Rose
-  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Minimal Mistakes Jekyll Theme 4.20.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
 -->
@@ -12,6 +12,8 @@
 <!-- begin _includes/seo.html --><title>Mozzi Shop - Mozzi</title>
 <meta name="description" content="audio synthesis library for Arduino">
 
+
+  <meta name="author" content="Tim Barrass">
 
 
 <meta property="og:type" content="website">
@@ -45,19 +47,16 @@
 
 
 
-
-
-
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
       "@type": "Person",
       "name": "Tim Barrass",
-      "url": "http://localhost:4000/Mozzi",
-      "sameAs": null
-    }
-  </script>
-
+      "url": "http://localhost:4000/Mozzi/"
+    
+  }
+</script>
 
 
 
@@ -69,7 +68,7 @@
 
 <link href="/Mozzi/feed.xml" type="application/atom+xml" rel="alternate" title="Mozzi Feed">
 
-<!-- http://t.co/dKP3o1e -->
+<!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script>
@@ -78,8 +77,9 @@
 
 <!-- For all browsers -->
 <link rel="stylesheet" href="/Mozzi/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
 
-<!--[if lte IE 9]>
+<!--[if IE]>
   <style>
     /* old IE unsupported flexbox fixes */
     .greedy-nav .site-title {
@@ -105,34 +105,46 @@
   </head>
 
   <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
 
     <!--[if lt IE 9]>
 <div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
 <![endif]-->
 
-    <div class="masthead">
+    
+
+<div class="masthead">
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <a class="site-title" href="/Mozzi/">Mozzi</a>
+        
+        <a class="site-title" href="/Mozzi/">
+          Mozzi
+          
+        </a>
         <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="/Mozzi/download/" >download</a>
+              <a href="/Mozzi/download/">download</a>
             </li><li class="masthead__menu-item">
-              <a href="/Mozzi/gallery/" >gallery</a>
+              <a href="/Mozzi/gallery/">gallery</a>
             </li><li class="masthead__menu-item">
-              <a href="/Mozzi/examples/" >examples</a>
+              <a href="/Mozzi/examples/">examples</a>
             </li><li class="masthead__menu-item">
-              <a href="/Mozzi/learn/" >learn</a>
+              <a href="/Mozzi/learn/">learn</a>
             </li><li class="masthead__menu-item">
-              <a href="https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!forum/mozzi-users" >forum</a>
+              <a href="https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!forum/mozzi-users">forum</a>
             </li><li class="masthead__menu-item">
-              <a href="/Mozzi/blog/" >blog</a>
+              <a href="/Mozzi/doc/html/">api</a>
             </li><li class="masthead__menu-item">
-              <a href="/Mozzi/doc/html/" >api</a>
+              <a href="https://github.com/sensorium/Mozzi">github</a>
             </li><li class="masthead__menu-item">
-              <a href="https://github.com/sensorium/Mozzi" >github</a>
-            </li><li class="masthead__menu-item">
-              <a href="/Mozzi/shop/" >shop</a>
+              <a href="/Mozzi/shop/">shop</a>
             </li></ul>
         
         <button class="greedy-nav__toggle hidden" type="button">
@@ -156,31 +168,24 @@
 
 
 
-
-
-
-
 <div class="page__hero--overlay"
   style=" background-image: url('/Mozzi/assets/images/mozzi-square.png');"
 >
   
     <div class="wrapper">
-      <h1 class="page__title" itemprop="headline">
+      <h1 id="page-title" class="page__title" itemprop="headline">
         
-          <!--Mozzi Shop
--->
-          Mozzi
+          Mozzi Shop
 
         
       </h1>
-      <!-- 
+      
         <p class="page__lead">
 </p>
-       -->
       
-        <p class="page__lead">audio synthesis library for Arduino
-</p>
       
+
+
       
       
     </div>
@@ -194,6 +199,7 @@
 
 <div id="main" role="main">
   
+
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Mozzi Shop">
@@ -285,6 +291,7 @@
 
 
         
+
       </footer>
 
       
@@ -303,7 +310,7 @@
 
     
 
-    <div class="page__footer">
+    <div id="footer" class="page__footer">
       <footer>
         <!-- start custom footer snippets -->
 
@@ -320,14 +327,15 @@
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2018 Tim Barrass. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2020 Tim Barrass. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>
 
     
   <script src="/Mozzi/assets/js/main.min.js"></script>
-  <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+
+
 
 
 

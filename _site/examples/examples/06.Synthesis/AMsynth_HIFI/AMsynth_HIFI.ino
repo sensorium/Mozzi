@@ -1,14 +1,14 @@
 /*  Example of Amplitude Modulation synthesis
     using Mozzi sonification library.
-  
+
     Demonstrates modulating the gain of one oscillator
     by the instantaneous amplitude of another,
     shows the use of fixed-point numbers to express fractional
     values, random numbers with rand(), and EventDelay()
     for scheduling.
-  
+
     This sketch using HIFI mode is not for Teensy 3.1.
-        
+
     IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
     be changed from STANDARD mode to HIFI.
     In Mozz/mozzi_config.h, change
@@ -17,12 +17,12 @@
     to
     //#define AUDIO_MODE STANDARD
     #define AUDIO_MODE HIFI
-  
-  
+
+
     Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
     Check the Mozzi core module documentation for others and more detail
-  
-                     3.9k 
+
+                     3.9k
      pin 9  ---WWWW-----|-----output
                     499k           |
      pin 10 ---WWWW---- |
@@ -30,16 +30,19 @@
                              4.7n  ==
                                        |
                                    ground
-  
-    Resistors are ±0.5%  Measure and choose the most precise 
+
+    Resistors are ±0.5%  Measure and choose the most precise
     from a batch of whatever you can get.  Use two 1M resistors
     in parallel if you can't find 499k.
-    Alternatively using 39 ohm, 4.99k and 470nF components will 
+    Alternatively using 39 ohm, 4.99k and 470nF components will
     work directly with headphones.
 
-    Mozzi help/discussion/announcements:
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
+
+		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
-  
+
     Tim Barrass 2012-13, CC by-nc-sa.
 */
 
@@ -50,7 +53,6 @@
 #include <EventDelay.h>
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
-
 
 // audio oscils
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCarrier(COS2048_DATA);
@@ -67,8 +69,6 @@ Q24n8 mod_freq; // unsigned long with 24 integer bits and 8 fractional bits
 
 // for random notes
 Q8n0 octave_start_note = 42;
-
-
 
 void setup(){
   ratio = float_to_Q8n8(3.0f);   // define modulation ratio in float and convert to fixed-point
@@ -108,7 +108,7 @@ void updateControl(){
     last_note += 3 * (1-rand((byte)3));
 
     // convert midi to frequency
-    Q16n16 midi_note = Q8n0_to_Q16n16(last_note); 
+    Q16n16 midi_note = Q8n0_to_Q16n16(last_note);
     carrier_freq = Q16n16_to_Q24n8(Q16n16_mtof(midi_note));
 
     // calculate modulation frequency to stay in ratio with carrier
@@ -134,7 +134,3 @@ int updateAudio(){
 void loop(){
   audioHook();
 }
-
-
-
-

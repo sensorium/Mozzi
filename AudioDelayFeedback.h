@@ -173,8 +173,8 @@ public:
 	inline
 	void write(int8_t input, uint16_t offset)
 	{
-		(write_pos + offset) &= (NUM_BUFFER_SAMPLES - 1);
-		delay_array[write_pos] = input;
+    uint16_t _pos = (write_pos + offset) & (NUM_BUFFER_SAMPLES - 1);
+    delay_array[_pos] = input;
 	}
 
 

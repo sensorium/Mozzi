@@ -6,7 +6,7 @@ The interface between Mozzi and the Arduino environment consists of four main fu
 
 ![Mozzi system architecture](images/Mozzi-system.jpg)
 
-`startMozzi(control_rate)` goes in Arduino's `setup()`. It starts the control and audio output timers, given the requested control rate in Hz as a parameter, or defaulting to 64 Hz without a parameter.
+`startMozzi(control_rate)` goes in Arduino's `setup()`. It starts a timer which regularly sends audio out from the audio output buffer, and calls updateControl() at the requested control rate given in Hz as a parameter, or defaulting to 64 Hz without a parameter.
 
 `updateControl()` is where any analog or digital input sensing code should be placed and relatively slow changes such as LFO's or frequency changes can be performed.
 

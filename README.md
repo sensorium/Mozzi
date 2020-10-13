@@ -238,3 +238,20 @@ port by Thomas Friedrichsmeier
 - The audio output resolution is always 16 bits on this platform, _internally_. Thus, in updateAudio(), you should scale your output samples to a full 16 bit range. The effective number of output bits cannot easily
   be quantified, due to PDM coding.
 - audioHook() calls `yield()` once for every audio sample generated. Thus, as long as your audio output buffer does not run empty, you should not need any additional `yield()`s inside `loop()`.
+
+***
+
+## Use and Remix
+Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License, which is detailed in LICENSE.txt
+
+Disclaimer: This is a human-readable summary of (and not a substitute for) the license. 
+
+You are free to:
+ - Share — copy and redistribute the material in any medium or format
+ - Adapt — remix, transform, and build upon the material
+
+The licensor cannot revoke these freedoms as long as you follow the license terms.
+Under the following terms:
+ - Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+ - NonCommercial — You may not use the material for commercial purposes.
+ - No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.

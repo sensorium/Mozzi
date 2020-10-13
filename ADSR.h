@@ -41,22 +41,22 @@ Template objects are messy when you try to use pointers to them,
 you have to include the whole template in the pointer handling.
 */
 
-template <unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE>
+template <unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int>
 class ADSR
 {
 private:
 
 	const unsigned int LERPS_PER_CONTROL;
 
-	unsigned int update_step_counter;
-	unsigned int num_update_steps;
+	T update_step_counter;
+	T num_update_steps;
 
 	enum {ATTACK,DECAY,SUSTAIN,RELEASE,IDLE};
 
 
 	struct phase{
 		byte phase_type;
-		unsigned int update_steps;
+		T update_steps;
 		long lerp_steps; // signed, to match params to transition (line) type Q15n16, below
 		Q8n0 level;
 	}attack,decay,sustain,release,idle;
@@ -68,8 +68,8 @@ private:
 	Line <Q15n16> transition; // scale up unsigned char levels for better accuracy, then scale down again for output
 
 	inline
-	unsigned int convertMsecToControlUpdateSteps(unsigned int msec){
-		return (uint16_t) (((uint32_t)msec*CONTROL_UPDATE_RATE)>>10); // approximate /1000 with shift
+	T convertMsecToControlUpdateSteps(unsigned int msec){
+		return (T) (((uint32_t)msec*CONTROL_UPDATE_RATE)>>10); // approximate /1000 with shift
 	}
 
 

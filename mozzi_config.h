@@ -91,10 +91,10 @@ You need to have \#define STEREO_HACK true in mozzi_config.h
 
 //#define EXTERNAL_AUDIO_OUTPUT true
 
-// ESP32 with PT8211 DAC, requires AUDIO_RATE 32768, output on pin 26
+// ESP32 with PT8211 DAC, requires AUDIO_RATE 32768
 #define ESP32_PT8211 true
 
-// ESP32 internal DAC, requires AUDIO_RATE 32768, 
+// ESP32 internal DAC, requires AUDIO_RATE 32768, output on pin 26 
 // BUGGY !!!
 //#define ESP32_internal true
 

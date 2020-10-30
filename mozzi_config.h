@@ -58,8 +58,8 @@ and comment out \#define AUDIO_MODE STANDARD and \#define AUDIO_MODE STANDARD_PL
 http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/ .
 Mozzi-users list has a thread on this.
 */
-#define AUDIO_RATE 16384
-//#define AUDIO_RATE 32768
+//#define AUDIO_RATE 16384
+#define AUDIO_RATE 32768
 //#define AUDIO_RATE 65536 // try on Teensy3/3.1
 
 
@@ -91,5 +91,11 @@ You need to have \#define STEREO_HACK true in mozzi_config.h
 
 //#define EXTERNAL_AUDIO_OUTPUT true
 
+// ESP32 with PT8211 DAC, requires AUDIO_RATE 32768, output on pin 26
+#define ESP32_PT8211 true
+
+// ESP32 internal DAC, requires AUDIO_RATE 32768, 
+// BUGGY !!!
+//#define ESP32_internal true
 
 #endif        //  #ifndef MOZZI_CONFIG_H

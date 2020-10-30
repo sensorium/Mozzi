@@ -37,6 +37,7 @@
 #elif IS_ESP8266()
 #include <Ticker.h>
 #include <uart.h>
+#elif IS_ESP32()
 #endif
 
 
@@ -91,6 +92,46 @@ CircularBuffer<unsigned int> output_buffer;  // fixed size 256
 CircularBuffer<unsigned int> output_buffer2; // fixed size 256
 #endif
 //-----------------------------------------------------------------------------------------------------------------
+#endif
+
+// ESP32
+#if IS_ESP32()
+
+	#include <driver/i2s.h>
+	#include "freertos/queue.h"	
+	hw_timer_t * timer = NULL;
+	int i2s_num = 0;
+#if (ESP32_PT8211 == true)	
+	i2s_config_t i2s_config = {
+		.mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX),
+		.sample_rate = AUDIO_RATE,
+		.bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,
+		.channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
+		.communication_format = (i2s_comm_format_t)(I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_LSB),
+		.intr_alloc_flags = ESP_INTR_FLAG_LEVEL1, 
+		.dma_buf_count = 8,
+		.dma_buf_len = 8, 
+        .use_apll = 0 // Use audio PLL
+	};
+	i2s_pin_config_t pin_config = {
+	  .bck_io_num = 26, 
+	  .ws_io_num = 25, 
+	  .data_out_num = 33, 
+	  .data_in_num = -1 
+	};
+#elif (ESP32_internal == true)
+	i2s_config_t i2s_config = {
+		.mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN),
+		.sample_rate = AUDIO_RATE,
+		.bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,
+		.channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
+		.communication_format = (i2s_comm_format_t)(I2S_COMM_FORMAT_I2S_MSB),
+		.intr_alloc_flags = ESP_INTR_FLAG_LEVEL1, 
+		.dma_buf_count = 8,
+		.dma_buf_len = 8,
+        .use_apll = 0 
+	};
+#endif
 #endif
 
 #if IS_AVR() // not storing backups, just turning timer on and off for pause for
@@ -191,7 +232,7 @@ static void receiveSecondAudioADC() {
 #endif
 }
 
-#if !IS_SAMD21()
+#if !IS_SAMD21() && !IS_ESP32()
 
 #if IS_TEENSY3()
 void adc0_isr(void)
@@ -456,6 +497,17 @@ void samd21AudioOutput() {
 #ifdef __cplusplus
 }
 #endif
+
+#elif IS_ESP32()
+static void IRAM_ATTR esp32AudioOutput() {
+#if (ESP32_PT8211 == true)	
+	uint32_t outputEsp32=(uint32_t)output_buffer.read();
+#elif (ESP32_internal == true)
+	uint32_t outputEsp32=(uint32_t)output_buffer.read()<<8;
+#endif
+	i2s_write_bytes((i2s_port_t)i2s_num, (const char *)&outputEsp32, sizeof(uint32_t), 0);
+}
+
 #elif IS_TEENSY3()
 static void teensyAudioOutput() {
 
@@ -503,6 +555,33 @@ static void startAudioStandard() {
   analogWriteResolution(12);
   analogWrite(AUDIO_CHANNEL_1_PIN, 0);
   tcConfigure(AUDIO_RATE);
+  
+#elif IS_ESP32()
+  #ifdef DO_NOT_INIT_ESP32_I2S
+  #else
+	#if (ESP32_PT8211 == true)
+	i2s_driver_install((i2s_port_t)i2s_num, &i2s_config, 0, NULL);
+	i2s_set_pin((i2s_port_t)i2s_num, &pin_config);
+	//i2s_set_sample_rates((i2s_port_t)i2s_num, 44100);
+	i2s_set_sample_rates((i2s_port_t)i2s_num, AUDIO_RATE);    	
+	i2s_zero_dma_buffer((i2s_port_t)i2s_num);
+	
+	#elif (ESP32_internal == true)
+	i2s_driver_install((i2s_port_t)i2s_num, &i2s_config, 0, NULL); 
+	i2s_set_pin((i2s_port_t)i2s_num, NULL);
+	i2s_set_sample_rates((i2s_port_t)i2s_num, AUDIO_RATE);
+	i2s_zero_dma_buffer((i2s_port_t)i2s_num);
+	i2s_set_dac_mode(I2S_DAC_CHANNEL_RIGHT_EN);
+	#endif
+	
+	timer = timerBegin(0, 80, true);
+	timerAttachInterrupt(timer, &esp32AudioOutput, true);
+		// zc - 30 microseconds is ok for now
+	timerAlarmWrite(timer, 30, true);
+	//timerAlarmWrite(timer, 1000000UL/44100, true);  
+	timerAlarmEnable(timer);
+  #endif  
+  
 #elif IS_STM32()
   audio_update_timer.pause();
   //audio_update_timer.setPeriod(1000000UL / AUDIO_RATE);
@@ -787,6 +866,7 @@ void stopMozzi() {
                          // but probably not needed, anyway
 #endif
 #elif IS_SAMD21()
+#elif IS_ESP32()
 #else
 
   noInterrupts();

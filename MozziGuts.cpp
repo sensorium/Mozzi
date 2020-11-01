@@ -37,7 +37,6 @@
 #elif IS_ESP8266()
 #include <Ticker.h>
 #include <uart.h>
-#elif IS_ESP32()
 #endif
 
 
@@ -101,7 +100,7 @@ CircularBuffer<unsigned int> output_buffer2; // fixed size 256
 	#include "freertos/queue.h"	
 	hw_timer_t * timer = NULL;
 	int i2s_num = 0;
-#if (ESP32_PT8211 == true)	
+#if (ESP32_AUDIO_OUT_MODE == PT8211_DAC)	
 	i2s_config_t i2s_config = {
 		.mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX),
 		.sample_rate = AUDIO_RATE,
@@ -119,7 +118,7 @@ CircularBuffer<unsigned int> output_buffer2; // fixed size 256
 	  .data_out_num = 33, 
 	  .data_in_num = -1 
 	};
-#elif (ESP32_internal == true)
+#elif (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
 	i2s_config_t i2s_config = {
 		.mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN),
 		.sample_rate = AUDIO_RATE,
@@ -500,9 +499,9 @@ void samd21AudioOutput() {
 
 #elif IS_ESP32()
 static void IRAM_ATTR esp32AudioOutput() {
-#if (ESP32_PT8211 == true)	
+#if (ESP32_AUDIO_OUT_MODE == PT8211_DAC)	
 	uint32_t outputEsp32=(uint32_t)output_buffer.read();
-#elif (ESP32_internal == true)
+#elif (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
 	uint32_t outputEsp32=(uint32_t)output_buffer.read()<<8;
 #endif
 	i2s_write_bytes((i2s_port_t)i2s_num, (const char *)&outputEsp32, sizeof(uint32_t), 0);
@@ -559,14 +558,14 @@ static void startAudioStandard() {
 #elif IS_ESP32()
   #ifdef DO_NOT_INIT_ESP32_I2S
   #else
-	#if (ESP32_PT8211 == true)
+	#if (ESP32_AUDIO_OUT_MODE == PT8211_DAC)
 	i2s_driver_install((i2s_port_t)i2s_num, &i2s_config, 0, NULL);
 	i2s_set_pin((i2s_port_t)i2s_num, &pin_config);
 	//i2s_set_sample_rates((i2s_port_t)i2s_num, 44100);
 	i2s_set_sample_rates((i2s_port_t)i2s_num, AUDIO_RATE);    	
 	i2s_zero_dma_buffer((i2s_port_t)i2s_num);
 	
-	#elif (ESP32_internal == true)
+	#elif (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
 	i2s_driver_install((i2s_port_t)i2s_num, &i2s_config, 0, NULL); 
 	i2s_set_pin((i2s_port_t)i2s_num, NULL);
 	i2s_set_sample_rates((i2s_port_t)i2s_num, AUDIO_RATE);

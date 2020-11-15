@@ -35,7 +35,6 @@
 #include "HardwareTimer.h"
 #include <STM32ADC.h>
 #elif IS_ESP8266()
-#include <Ticker.h>
 #include <uart.h>
 #endif
 

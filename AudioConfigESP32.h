@@ -14,7 +14,7 @@
 #define PT8211_DAC 2 // ESP32 with PT8211 DAC via I2S, requires AUDIO_RATE 32768
 
 // Set output mode
-#define ESP32_AUDIO_OUT_MODE PT8211_DAC
+#define ESP32_AUDIO_OUT_MODE INTERNAL_DAC
 
 // For external I2S output, only: I2S_PINS
 #define ESP32_I2S_BCK_PIN 26

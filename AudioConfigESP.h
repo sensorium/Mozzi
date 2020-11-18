@@ -29,6 +29,14 @@
 #endif
 #endif
 
+#if (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
+// NOTE: On ESP / output via I2S, we simply use the I2S buffer as the output
+// buffer, which saves RAM, but also simplifies things a lot
+// esp. since i2s output already has output rate control -> no need for a
+// separate output timer
+#define BYPASS_MOZZI_OUTPUT_BUFFER true
+#endif
+
 #define AUDIO_BIAS ((uint16_t) 1<<(15))
 
 #endif        //  #ifndef AUDIOCONFIGESP_H

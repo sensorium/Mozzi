@@ -397,10 +397,20 @@ void audioHook() // 2us excluding updateAudio()
       ++samples_written_to_buffer;
 #if (STEREO_HACK == true)
       updateAudio();
+#if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
+      // Note: need high 8 bits of 16 bit int, here.
       prev_sample[0] = (audio_out_1 + AUDIO_BIAS) << 8;
       prev_sample[1] = (audio_out_2 + AUDIO_BIAS) << 8;
 #else
+      prev_sample[0] = audio_out_1 + AUDIO_BIAS;
+      prev_sample[1] = audio_out_2 + AUDIO_BIAS;
+#endif
+#else
+#if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
       prev_sample[0] = (updateAudio() + AUDIO_BIAS) << 8;
+#else
+      prev_sample[0] = updateAudio() + AUDIO_BIAS;
+#endif
       prev_sample[1] = prev_sample[0];
 #endif
       advanceControlLoop();

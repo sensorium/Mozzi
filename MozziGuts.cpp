@@ -229,14 +229,6 @@ static bool tcIsSyncing() {
   return TC5->COUNT16.STATUS.reg & TC_STATUS_SYNCBUSY;
 }
 
-static void tcStartCounter() {
-  // Enable TC
-
-  TC5->COUNT16.CTRLA.reg |= TC_CTRLA_ENABLE;
-  while (tcIsSyncing())
-    ;
-}
-
 static void tcReset() {
   // Reset TCx
   TC5->COUNT16.CTRLA.reg = TC_CTRLA_SWRST;
@@ -246,14 +238,11 @@ static void tcReset() {
     ;
 }
 
-static void tcDisable() {
+static void tcEnd() {
   // Disable TC5
   TC5->COUNT16.CTRLA.reg &= ~TC_CTRLA_ENABLE;
   while (tcIsSyncing())
     ;
-}
-static void tcEnd() {
-  tcDisable();
   tcReset();
   analogWrite(AUDIO_CHANNEL_1_PIN, 0);
 }

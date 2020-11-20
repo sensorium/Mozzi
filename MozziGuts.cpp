@@ -130,6 +130,7 @@ static uint8_t mozzi_TCCR4A, mozzi_TCCR4B, mozzi_TCCR4C, mozzi_TCCR4D,
 #endif // end of timer backups for non-Teensy 3 boards
 //-----------------------------------------------------------------------------------------------------------------
 
+////// BEGIN AUDIO INPUT code ////////
 #if (USE_AUDIO_INPUT == true)
 
 // ring buffer for audio input
@@ -222,6 +223,8 @@ ISR(ADC_vect, ISR_BLOCK)
 }
 #endif // end main audio input section
 #endif
+////// END AUDIO INPUT code ////////
+
 
 #if IS_SAMD21()
 // These are ARM SAMD21 Timer 5 routines to establish a sample rate interrupt
@@ -281,43 +284,6 @@ static void tcConfigure(uint32_t sampleRate) {
 }
 #endif
 
-#if IS_ESP8266()
-// lookup table for fast pdm coding on 8 output bits at a time
-static byte fast_pdm_table[]{0,          0b00010000, 0b01000100,
-                             0b10010010, 0b10101010, 0b10110101,
-                             0b11011101, 0b11110111, 0b11111111};
-
-inline void writePDMCoded(uint16_t sample) {
-  static uint32_t lastwritten = 0;
-  static uint32_t nexttarget = 0;
-
-  // We can write 32 bits at a time to the output buffer, typically, we'll do
-  // this either once of twice per sample
-  for (uint8_t words = 0; words < PDM_RESOLUTION; ++words) {
-    uint32_t outbits = 0;
-    for (uint8_t i = 0; i < 4; ++i) {
-      nexttarget += sample - lastwritten;
-      lastwritten =
-          nexttarget &
-          0b11110000000000000; // code the highest 3-and-a-little bits next.
-                               // Note that sample only has 16 bits, while the
-                               // highest bit we consider for writing is bit 17.
-                               // Thus, if the highest bit is set, the next
-                               // three bits cannot be.
-#if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
-      U1F = fast_pdm_table[lastwritten >>
-                           13]; // optimized version of: Serial1.write(...);
-#else
-      outbits = outbits << 8;
-      outbits |= fast_pdm_table[lastwritten >> 13];
-#endif
-    }
-#if (ESP_AUDIO_OUT_MODE == PDM_VIA_I2S)
-    i2s_write_sample(outbits);
-#endif
-  }
-}
-
 #if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
 void ICACHE_RAM_ATTR esp8266_serial_audio_output() {
   // Note: That unreadble mess is an optimized version of Serial1.availableForWrite()
@@ -337,12 +303,8 @@ static void bufferAudioOutput(const AudioOutput_t f) {
   ++samples_written_to_buffer;
 }
 #else
-static bool canBufferAudioOutput() {
-  return (!output_buffer.isFull());
-}
-static void bufferAudioOutput(const AudioOutput_t f) {
-  output_buffer.write(f);
-}
+#define canBufferAudioOutput() (!output_buffer.isFull())
+#define bufferAudioOutput(f) output_buffer.write(f)
 #endif
 
 void audioHook() // 2us on AVR excluding updateAudio()
@@ -373,31 +335,6 @@ void audioHook() // 2us on AVR excluding updateAudio()
   }
   // setPin13Low();
 }
-
-#if IS_ESP8266()
-#if (ESP_AUDIO_OUT_MODE == PDM_VIA_I2S) 
-static bool canBufferAudioOutput() {
-  return (i2s_available() >= PDM_RESOLUTION);
-}
-static void audioOutput(const AudioOutput_t f) {
-  writePDMCoded(f+AUDIO_BIAS);
-}
-#elif (ESP_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
-static bool canBufferAudioOutput() {
-  return (i2s_available() >= PDM_RESOLUTION);
-}
-static void audioOutput(const AudioOutput_t f) {
-#if STEREO_HACK == true
-  i2s_write_lr(f.l, f.r);  // Note: i2s_write expects zero-centered output
-#else
-  i2s_write_lr(f, 0);
-#endif
-}
-#else
-static void audioOutput(const AudioOutput_t f) {
-  writePDMCoded(f+AUDIO_BIAS);
-}
-#endif
 
 #if IS_SAMD21()
 void TC5_Handler(void) __attribute__((weak, alias("samd21AudioOutput")));

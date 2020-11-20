@@ -56,12 +56,37 @@ namespace AudioOutput {
 };
 
 inline void audioOutput(const AudioOutput_t f);
+#if BYPASS_MOZZI_OUTPUT_BUFFER
 inline void bufferAudioOutput(const AudioOutput_t f);
 inline bool canBufferAudioOutput();
+#endif
+
+/** Perform one step of (fast) pdm encoding, returning 8 "bits" (i.e. 8 ones and zeros).
+ *  You will usually call this at least four or eight times for a single input sample.
+ *
+ *  The return type is defined as uint32_t too avoid conversion steps. Actually, only the 8 lowest
+ *  bits of the return value are set. */
+inline uint32_t pdmCode8(uint16_t sample) {
+  // lookup table for fast pdm coding on 8 output bits at a time
+  static const byte fast_pdm_table[]{0,  0b00010000, 0b01000100,
+                             0b10010010, 0b10101010, 0b10110101,
+                             0b11011101, 0b11110111, 0b11111111};
+
+  static uint32_t lastwritten = 0;
+  static uint32_t nexttarget = 0;
+  // in each iteration, code the highest 3-and-a-little bits.
+  // Note that sample only has 16 bits, while the
+  // highest bit we consider for writing is bit 17.
+  // Thus, if the highest bit is set, the next
+  // three bits cannot be.
+  nexttarget += sample - lastwritten;
+  lastwritten = nexttarget & 0b11110000000000000;
+  return lastwritten >> 13;
+}
 
 #ifndef EXTERNAL_AUDIO_OUTPUT
 
-// SAMD21
+///////////////////// SAMD21
 #if IS_SAMD21()
 #include "AudioConfigSAMD21.h"
 inline void audioOutput(const AudioOutput_t f)
@@ -71,7 +96,7 @@ inline void audioOutput(const AudioOutput_t f)
 #endif
 
 
-// TEENSY3
+///////////////////// TEENSY3
 #if IS_TEENSY3()
 #include "AudioConfigTeensy3_12bit.h"
 inline void audioOutput(const AudioOutput_t f)
@@ -81,40 +106,80 @@ inline void audioOutput(const AudioOutput_t f)
 #endif
 
 
-// STM32
+///////////////////// STM32
 #if IS_STM32()
 #include "AudioConfigSTM32.h"
 inline void audioOutput(const AudioOutput_t f)
 {
 #if (AUDIO_MODE == HIFI)
-  pwmWrite(AUDIO_CHANNEL_1_PIN, (f.l+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
-  pwmWrite(AUDIO_CHANNEL_1_PIN_HIGH, (f.l+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
-#else
+  pwmWrite(AUDIO_CHANNEL_1_PIN, (f+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
+  pwmWrite(AUDIO_CHANNEL_1_PIN_HIGH, (f+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
+#elif (STEREO_HACK == true)
   pwmWrite(AUDIO_CHANNEL_1_PIN, f.l+AUDIO_BIAS);
-#if (STEREO_HACK == true)
   pwmWrite(AUDIO_CHANNEL_2_PIN, f.r+AUDIO_BIAS);
+#else
+  pwmWrite(AUDIO_CHANNEL_1_PIN, f+AUDIO_BIAS);
 #endif
 #endif
 }
 #endif
 
 
+///////////////////// ESP8266
+#if IS_ESP8266()
+#include "AudioConfigESP.h"
+#if (ESP_AUDIO_OUT_MODE == PDM_VIA_I2S)
+static bool canBufferAudioOutput() {
+  return (i2s_available() >= PDM_RESOLUTION);
+}
+inline void audioOutput(const AudioOutput_t f) {
+  for (uint8_t words = 0; words < PDM_RESOLUTION; ++words) {
+    uint32_t outbits = 0;
+    for (uint8_t i = 0; i < PDM_RESOLUTION*4; ++i) {
+      outbits = outbits << 8;
+      outbits |= pdmCode(f);
+    }
+    i2s_write_sample(outbits);
+}
+#elif (ESP_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
+static bool canBufferAudioOutput() {
+  return (i2s_available() >= PDM_RESOLUTION);
+}
+inline void audioOutput(const AudioOutput_t f) {
+#if STEREO_HACK == true
+  i2s_write_lr(f.l, f.r);  // Note: i2s_write expects zero-centered output
+#else
+  i2s_write_lr(f, 0);
+#endif
+}
+#else
+inline void audioOutput(const AudioOutput_t f) {
+  // optimized version of: Serial1.write(...);
+  for (uint8_t i = 0; i < PDM_RESOLUTION*4; ++i) {
+    U1F = fast_pdm_table[pdmCode8(f)];
+  }
+}
+#endif
+#endif
 
 
-//AVR STANDARD
+
+///////////////////// AVR STANDARD
 #if IS_AVR() && (AUDIO_MODE == STANDARD_PLUS)
 #include "AudioConfigStandardPlus.h"
 inline void audioOutput(const AudioOutput_t f)
 {
-  AUDIO_CHANNEL_1_OUTPUT_REGISTER = f.l+AUDIO_BIAS;
 #if (STEREO_HACK == true)
+  AUDIO_CHANNEL_1_OUTPUT_REGISTER = f.l+AUDIO_BIAS;
   AUDIO_CHANNEL_2_OUTPUT_REGISTER = f.r+AUDIO_BIAS;
+#else
+  AUDIO_CHANNEL_1_OUTPUT_REGISTER = f+AUDIO_BIAS;
 #endif
 }
 
 
 
-//AVR HIFI
+///////////////////// AVR HIFI
 #elif IS_AVR() && (AUDIO_MODE == HIFI)
 #include "AudioConfigHiSpeed14bitPwm.h"
 inline void audioOutput(const AudioOutput_t f)

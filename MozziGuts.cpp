@@ -294,8 +294,6 @@ void ICACHE_RAM_ATTR esp8266_serial_audio_output() {
 #endif
 
 static uint16_t update_control_timeout;
-static uint16_t update_control_counter;
-static void updateControlWithAutoADC();
 
 #if BYPASS_MOZZI_OUTPUT_BUFFER == true
 static void bufferAudioOutput(const AudioOutput_t f) {
@@ -309,6 +307,7 @@ static void bufferAudioOutput(const AudioOutput_t f) {
 
 void audioHook() // 2us on AVR excluding updateAudio()
 {
+  static uint16_t update_control_counter = 0;
 // setPin13High();
 #if (USE_AUDIO_INPUT == true)
   if (!input_buffer.isEmpty())
@@ -318,7 +317,8 @@ void audioHook() // 2us on AVR excluding updateAudio()
   if (canBufferAudioOutput()) {
     if (!update_control_counter) {
       update_control_counter = update_control_timeout;
-      updateControlWithAutoADC();
+      updateControl();
+      adcStartReadCycle();
     } else {
       --update_control_counter;
     }
@@ -330,7 +330,7 @@ void audioHook() // 2us on AVR excluding updateAudio()
 #endif
 
 #if IS_ESP8266()
-  yield();
+    yield();
 #endif
   }
   // setPin13Low();
@@ -587,19 +587,7 @@ void dummy_function(void)
 
 //-----------------------------------------------------------------------------------------------------------------
 
-static void updateControlWithAutoADC() {
-  updateControl();
-  /*
-  #if (USE_AUDIO_INPUT==true)
-          adc_count = 0;
-          startSecondAudioADC();
-#endif
-*/
-  adcStartReadCycle();
-}
-
 static void startControl(unsigned int control_rate_hz) {
-  update_control_counter = 0;
   update_control_timeout = AUDIO_RATE / control_rate_hz;
 }
 
@@ -666,6 +654,9 @@ void stopMozzi() {
 }
 
 unsigned long audioTicks() {
+#if (BYPASS_MOZZI_OUTPUT_BUFFER != true)
+  return output_buffer.count();
+#else
 #if (IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL))
 #if ((ESP_AUDIO_OUT_MODE == PDM_VIA_I2S) && (PDM_RESOLUTION != 1))
   return (samples_written_to_buffer -
@@ -673,8 +664,6 @@ unsigned long audioTicks() {
 #else
   return (samples_written_to_buffer - (output_buffer_size - i2s_available()));
 #endif
-#else
-  return output_buffer.count();
 #endif
 }
 

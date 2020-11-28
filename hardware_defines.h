@@ -29,4 +29,10 @@
 #define NUM_ANALOG_INPUTS 1
 #endif
 
+#if IS_AVR()
+#define AUDIO_RATE_PLATFORM_DEFAULT 16384
+#else
+#define AUDIO_RATE_PLATFORM_DEFAULT 32768
+#endif
+
 #endif /* HARDWARE_DEFINES_H_ */

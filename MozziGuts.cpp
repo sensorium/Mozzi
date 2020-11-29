@@ -287,8 +287,8 @@ static void tcConfigure(uint32_t sampleRate) {
 #if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
 void ICACHE_RAM_ATTR esp8266_serial_audio_output() {
   // Note: That unreadble mess is an optimized version of Serial1.availableForWrite()
-  while (UART_TX_FIFO_SIZE - ((U1S >> USTXC) & 0xff)) > (PDM_RESOLUTION * 4) {
-    audioOutput();
+  while ((UART_TX_FIFO_SIZE - ((U1S >> USTXC) & 0xff)) > (PDM_RESOLUTION * 4)) {
+    audioOutput(output_buffer.read());
   }
 }
 #endif
@@ -296,7 +296,7 @@ void ICACHE_RAM_ATTR esp8266_serial_audio_output() {
 static uint16_t update_control_timeout;
 
 #if BYPASS_MOZZI_OUTPUT_BUFFER == true
-static void bufferAudioOutput(const AudioOutput_t f) {
+inline void bufferAudioOutput(const AudioOutput_t f) {
   audioOutput(f);
   ++samples_written_to_buffer;
 }
@@ -349,6 +349,7 @@ HardwareTimer audio_update_timer(AUDIO_UPDATE_TIMER);
 HardwareTimer audio_pwm_timer(AUDIO_PWM_TIMER);
 #endif
 
+#if (BYPASS_MOZZI_OUTPUT_BUFFER != true)
 static void defaultAudioOutput() {
 #if (USE_AUDIO_INPUT == true)
   adc_count = 0;
@@ -356,6 +357,7 @@ static void defaultAudioOutput() {
 #endif
   audioOutput(output_buffer.read());
 }
+#endif
 
 #if IS_SAMD21()
 #ifdef __cplusplus
@@ -656,14 +658,11 @@ void stopMozzi() {
 unsigned long audioTicks() {
 #if (BYPASS_MOZZI_OUTPUT_BUFFER != true)
   return output_buffer.count();
-#else
-#if (IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL))
-#if ((ESP_AUDIO_OUT_MODE == PDM_VIA_I2S) && (PDM_RESOLUTION != 1))
+#elif ((ESP_AUDIO_OUT_MODE == PDM_VIA_I2S) && (PDM_RESOLUTION != 1))
   return (samples_written_to_buffer -
           ((output_buffer_size - i2s_available()) / PDM_RESOLUTION));
 #else
   return (samples_written_to_buffer - (output_buffer_size - i2s_available()));
-#endif
 #endif
 }
 

@@ -90,8 +90,8 @@ On Teensy 3.* STANDARD and STANDARD_PLUS are the same, providing 16384Hz sample 
 The Teensy 3.* DAC output does not rely on PWM.
 
 
+@ingroup core
 
-/** @ingroup core
 Used to set AUDIO_MODE to HIFI.
 
 HIFI for AVR  and STM32 (not for Teensy 3.*)

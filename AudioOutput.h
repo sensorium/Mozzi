@@ -30,7 +30,7 @@ struct AudioOutput_t {
  *  AudioOutput::from9Bit(), or AudioOutput::fromNBits() will allow you to write code that will work across different platforms, even
  *  when those use a different output resolution.
  */
-typedef AudioOutput_t int16_t;
+typedef int16_t AudioOutput_t;
 #endif
 
 namespace AudioOutput {
@@ -81,7 +81,7 @@ inline uint32_t pdmCode8(uint16_t sample) {
   // three bits cannot be.
   nexttarget += sample - lastwritten;
   lastwritten = nexttarget & 0b11110000000000000;
-  return lastwritten >> 13;
+  return fast_pdm_table[lastwritten >> 13];
 }
 
 #ifndef EXTERNAL_AUDIO_OUTPUT
@@ -120,7 +120,6 @@ inline void audioOutput(const AudioOutput_t f)
 #else
   pwmWrite(AUDIO_CHANNEL_1_PIN, f+AUDIO_BIAS);
 #endif
-#endif
 }
 #endif
 
@@ -129,20 +128,23 @@ inline void audioOutput(const AudioOutput_t f)
 #if IS_ESP8266()
 #include "AudioConfigESP.h"
 #if (ESP_AUDIO_OUT_MODE == PDM_VIA_I2S)
-static bool canBufferAudioOutput() {
+#include <i2s.h>
+inline bool canBufferAudioOutput() {
   return (i2s_available() >= PDM_RESOLUTION);
 }
 inline void audioOutput(const AudioOutput_t f) {
   for (uint8_t words = 0; words < PDM_RESOLUTION; ++words) {
     uint32_t outbits = 0;
-    for (uint8_t i = 0; i < PDM_RESOLUTION*4; ++i) {
+    for (uint8_t i = 0; i < 4; ++i) {
       outbits = outbits << 8;
-      outbits |= pdmCode(f);
+      outbits |= pdmCode8(f);
     }
     i2s_write_sample(outbits);
+  }
 }
 #elif (ESP_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
-static bool canBufferAudioOutput() {
+#include <i2s.h>
+inline bool canBufferAudioOutput() {
   return (i2s_available() >= PDM_RESOLUTION);
 }
 inline void audioOutput(const AudioOutput_t f) {
@@ -156,7 +158,7 @@ inline void audioOutput(const AudioOutput_t f) {
 inline void audioOutput(const AudioOutput_t f) {
   // optimized version of: Serial1.write(...);
   for (uint8_t i = 0; i < PDM_RESOLUTION*4; ++i) {
-    U1F = fast_pdm_table[pdmCode8(f)];
+    U1F = pdmCode8(f);
   }
 }
 #endif

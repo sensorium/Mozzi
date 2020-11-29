@@ -37,6 +37,7 @@
 #define BYPASS_MOZZI_OUTPUT_BUFFER true
 #endif
 
-#define AUDIO_BIAS ((uint16_t) 1<<(15))
+#define AUDIO_BITS 16
+#define AUDIO_BIAS ((uint16_t) 1<<(AUDIO_BITS-1))
 
 #endif        //  #ifndef AUDIOCONFIGESP_H

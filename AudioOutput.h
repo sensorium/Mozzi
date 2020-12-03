@@ -1,3 +1,39 @@
+/** @file
+ *
+ * Platform independent audio output and adding support for new platforms or output methods.
+ *
+ * Mozzi provides support for audio ouput on a range of different boards and CPUs. This page is about the following related topics:
+ *
+ *  - adding a custom output method (importantly using external DACs) to your sketch
+ *  - writing sketches that will work on different platforms / with different output methods
+ *  - extending Mozzi for a new architecture
+ *
+ * For all of these topics, it is helpful to have a basic understanding of the basic output steps in Mozzi:
+ *
+ * 1. Inside the loop() function in your sketch you call audioHook(). This function is responsible for calling updateAudio(), whenever there is room in the output buffer,
+ *    adding the generated sample to the output buffer, calling updateControl() at an appropriate rate, and a few other details that are not important for this discussion.
+ *
+ * 2. A platform-specific timer is triggered at audio rate (usually), takes a sample from the output buffer and sends it to audioOutput().
+ *
+ * 3. The audioOutput() function - usually predefined inside Mozzi - takes care of sending the sample to the hardware.
+ *
+ * This basic output pipeline can be customized in several ways. First, defining EXTERNAL_AUDIO_OUTPUT to true in mozzi_config.h will allow you to define your own audioOutput()
+ * fuction. The library ships with some sample sketches for output to external DACs using this mechanism.
+ *
+ * In some cases, you will additionally want to bypass Mozzis output buffer, for example, if your board, or your external DAC already comes with an efficient built-in buffer.
+ * In this case, define BYPASS_MOZZI_OUTPUT_BUFFER to true. You will then have to provide a custom definition of canBufferAudioOutput(), returning true whenever your hardware
+ * is ready toaccept a new sample of output. This is called from inside audioHook(), and whenever there is room for a new sample, it is generated and sent to audioOutput(),
+ * immediately.
+ *
+ * Of course it is also possible to combine EXTERNAL_AUDIO_OUTPUT and BYPASS_MOZZI_OUTPUT_BUFFER.
+ *
+ * Different output methods often support a different resolution of output samples. To provide best performance on slow boards, Mozzi expects your updateAudio() function to
+ * return samples in exactly the width that is needed at the output stage. Thus, defining this naively, an updateAudio() function designed for 8 bit output will produce very
+ * low volume output on a 16 bit DAC, while the other way around overflows will result in way too loud and heavily distored output. Fortunately, all that is needed to write
+ * portable sketches is to specify how many bits your updateAudio() function provides. The (inline) functions in the AudioOutput namespace do just that. Using them makes sure
+ * your audio output is shifted if, and as much as needed on all platforms.
+ */
+
 #ifndef AUDIOOUTPUT
 #define AUDIOOUTPUT
 
@@ -55,9 +91,10 @@ namespace AudioOutput {
 #endif
 };
 
+/** When setting EXTERNAL_AUDIO_OUTPUT to true, implement this function to take care of writing samples to the hardware. */
 inline void audioOutput(const AudioOutput_t f);
 #if BYPASS_MOZZI_OUTPUT_BUFFER
-inline void bufferAudioOutput(const AudioOutput_t f);
+/** When setting BYPASS_MOZZI_OUTPUT_BUFFER to true, implement this function to return true, if and only if your hardware (or custom buffer) is ready to accept the next sample. */
 inline bool canBufferAudioOutput();
 #endif
 

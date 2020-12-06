@@ -82,6 +82,10 @@ uint64_t samples_written_to_buffer = 0;
 #else
 #if IS_ESP8266() && (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
 bool output_stopped = true;
+#elif IS_ESP32()
+#include <driver/i2s.h>
+const i2s_port_t i2s_num = I2S_NUM_0;
+uint64_t samples_written_to_buffer = 0;
 #endif
 //-----------------------------------------------------------------------------------------------------------------
 // ring buffer for audio output
@@ -190,7 +194,7 @@ static void receiveSecondAudioADC() {
 #endif
 }
 
-#if !IS_SAMD21()
+#if !IS_SAMD21() && !IS_ESP32()
 
 #if IS_TEENSY3()
 void adc0_isr(void)
@@ -367,6 +371,15 @@ static uint16_t update_control_timeout;
 static uint16_t update_control_counter;
 static void updateControlWithAutoADC();
 
+inline void advanceControlLoop() {
+  if (!update_control_counter) {
+    update_control_counter = update_control_timeout;
+    updateControlWithAutoADC();
+  } else {
+    --update_control_counter;
+  }
+}
+
 void audioHook() // 2us excluding updateAudio()
 {
 // setPin13High();
@@ -375,6 +388,38 @@ void audioHook() // 2us excluding updateAudio()
     audio_input = input_buffer.read();
 #endif
 
+#if IS_ESP32()
+#if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
+#define ESP32_OUT_t uint16_t
+#else
+#define ESP32_OUT_t int16_t
+#endif
+   static ESP32_OUT_t prev_sample[2] = {(ESP32_OUT_t)AUDIO_BIAS, (ESP32_OUT_t)AUDIO_BIAS};
+   size_t bytes_written;
+   i2s_write(i2s_num, &prev_sample, 2*sizeof(ESP32_OUT_t), &bytes_written, 0);
+   if (bytes_written != 0) {
+      ++samples_written_to_buffer;
+#if (STEREO_HACK == true)
+      updateAudio();
+#if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
+      // Note: need high 8 bits of 16 bit int, here.
+      prev_sample[0] = (audio_out_1 + AUDIO_BIAS) << 8;
+      prev_sample[1] = (audio_out_2 + AUDIO_BIAS) << 8;
+#else
+      prev_sample[0] = audio_out_1;
+      prev_sample[1] = audio_out_2;
+#endif
+#else
+#if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
+      prev_sample[0] = (updateAudio() + AUDIO_BIAS) << 8;
+#else
+      prev_sample[0] = updateAudio();
+#endif
+      prev_sample[1] = prev_sample[0];
+#endif
+      advanceControlLoop();
+   }
+#else
 #if IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
 #if (PDM_RESOLUTION != 1)
   if (i2s_available() >= PDM_RESOLUTION) {
@@ -384,12 +429,7 @@ void audioHook() // 2us excluding updateAudio()
 #else
   if (!output_buffer.isFull()) {
 #endif
-    if (!update_control_counter) {
-      update_control_counter = update_control_timeout;
-      updateControlWithAutoADC();
-    } else {
-      --update_control_counter;
-    }
+    advanceControlLoop();
 #if IS_ESP8266() && (ESP_AUDIO_OUT_MODE != PDM_VIA_SERIAL)
     // NOTE: On ESP / output via I2S, we simply use the I2S buffer as the output
     // buffer, which saves RAM, but also simplifies things a lot
@@ -410,6 +450,7 @@ void audioHook() // 2us excluding updateAudio()
     yield();
 #endif
   }
+#endif
   // setPin13Low();
 }
 
@@ -428,6 +469,7 @@ void samd21AudioOutput(void);
 #ifdef __cplusplus
 }
 #endif
+
 
 #elif IS_TEENSY3()
 IntervalTimer timer1;
@@ -455,6 +497,7 @@ void samd21AudioOutput() {
 #ifdef __cplusplus
 }
 #endif
+
 #elif IS_TEENSY3()
 static void teensyAudioOutput() {
 
@@ -502,6 +545,39 @@ static void startAudioStandard() {
   analogWriteResolution(12);
   analogWrite(AUDIO_CHANNEL_1_PIN, 0);
   tcConfigure(AUDIO_RATE);
+  
+#elif IS_ESP32()
+  static const i2s_config_t i2s_config = {
+#if (ESP32_AUDIO_OUT_MODE == PT8211_DAC)
+    .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX),
+#elif (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
+    .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN),
+#endif
+    .sample_rate = AUDIO_RATE,
+    .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,  // only the top 8 bits will actually be used by the internal DAC, but using 8 bits straight away seems buggy
+    .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,  // always use stereo output. mono seems to be buggy, and the overhead is insignifcant on the ESP32
+    .communication_format = (i2s_comm_format_t)(I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_LSB),  // this appears to be the correct setting for internal DAC and PT8211, but not for other dacs
+    .intr_alloc_flags = 0, // default interrupt priority
+    .dma_buf_count = 8,    // 8*128 bytes of buffer corresponds to 256 samples (2 channels, see above, 2 bytes per sample per channel)
+    .dma_buf_len = 128,
+    .use_apll = false
+  };
+
+  i2s_driver_install(i2s_num, &i2s_config, 0, NULL);
+  #if (ESP32_AUDIO_OUT_MODE == PT8211_DAC)
+  static const i2s_pin_config_t pin_config = {
+    .bck_io_num = ESP32_I2S_BCK_PIN,
+    .ws_io_num = ESP32_I2S_WS_PIN,
+    .data_out_num = ESP32_I2S_DATA_PIN,
+    .data_in_num = -1
+  };
+  i2s_set_pin((i2s_port_t)i2s_num, &pin_config);
+  #elif (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
+  i2s_set_pin((i2s_port_t)i2s_num, NULL);
+  i2s_set_dac_mode(I2S_DAC_CHANNEL_BOTH_EN);
+  #endif
+  i2s_zero_dma_buffer((i2s_port_t)i2s_num);
+  
 #elif IS_STM32()
   audio_update_timer.pause();
   //audio_update_timer.setPeriod(1000000UL / AUDIO_RATE);
@@ -786,6 +862,7 @@ void stopMozzi() {
                          // but probably not needed, anyway
 #endif
 #elif IS_SAMD21()
+#elif IS_ESP32()
 #else
 
   noInterrupts();
@@ -829,6 +906,11 @@ unsigned long audioTicks() {
 #else
   return (samples_written_to_buffer - (output_buffer_size - i2s_available()));
 #endif
+#elif IS_ESP32()
+  // TODO: This is not entirely accurate, as it does not account for samples still in the buffer
+  //       and not yet written to output. There does not seem to be an API to retrieve I2S-buffer
+  //       fill state on ESP32.
+  return samples_written_to_buffer;
 #else
   return output_buffer.count();
 #endif

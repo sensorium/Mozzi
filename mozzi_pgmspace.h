@@ -6,7 +6,7 @@
 
 #include "hardware_defines.h"
 
-#if IS_ESP8266()
+#if IS_ESP8266() || IS_ESP32()
 template<typename T> inline T FLASH_OR_RAM_READ(T* address) {
     return (T) (*address);
 }

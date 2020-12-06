@@ -239,6 +239,24 @@ port by Thomas Friedrichsmeier
   be quantified, due to PDM coding.
 - audioHook() calls `yield()` once for every audio sample generated. Thus, as long as your audio output buffer does not run empty, you should not need any additional `yield()`s inside `loop()`.
 
+### ESP32
+port by Dieter Vandoren and Thomas Friedrichsmeier
+
+- Since flash memory is not built into the ESP8266, but connected, externally, it is much too slow for keeping wave tables, audio samples, etc. Instead, these are kept in RAM on this platform.
+- Asynchronous analog reads are not implemented. `mozziAnalogRead()` relays to `analogRead()`.
+- AUDIO_INPUT is not implemented.
+- twi_nonblock is not ported
+- Currently, two audio output modes exist, the default being INTERNAL_DAC (configurable in AudioConfigESP32.h). *The configuration details may still be subject to change; please be prepared to make some minimal adjustments to your code, when upgrading Mozzi*:
+  - INTERNAL_DAC: Output using the built-in DAC on GPIO pins 25 and 26.
+    - 8 bits resolution
+    - For simplicity of code, both pins are always used, even in mono output mode
+  - PT8211_DAC: Output is sent via I2S in a format suitable for the PT8211 external EXTERNAL_DAC
+    - 16 bits resolution. Remember to shift your audio accordingly.
+    - Output pins can be configured in AudioConfigESP32.h. Default is BCK: 26, WS: 15, DATA: 33
+- "HIFI_MODE" is not currently implemented, but could conceivably be realized for the INTERNAL_DAC mode. Patches welcome.
+- WIFI-activity not yet tested, but likely the same notes as for ESP8266 apply. Consider turning off WIFI.
+- The implementation of audioTicks() may be slightly inaccurate on this platform.
+
 ***
 
 ## Use and Remix

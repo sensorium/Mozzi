@@ -227,7 +227,7 @@ void adcReadSelectedChannels() {
 
 
 int mozziAnalogRead(uint8_t pin) {
-#if IS_ESP8266()
+#if IS_ESP8266() || IS_ESP32()
 #warning Asynchronouos analog reads not implemented for this platform
 	return analogRead(pin);
 #else

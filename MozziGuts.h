@@ -87,7 +87,7 @@ x..A14.....Teensy 3.0, 3.1 and 3.2  \n
 ....13	.......Sanguino  \n
 
 On Teensy 3.* STANDARD and STANDARD_PLUS are the same, providing 16384Hz sample rate and 12 bit resolution on pin A14/ADC.
-The Teensy 3.* DAC output does not rely on PWM.
+The Teensy 3.* DAC output does not rely on PWM. */
 
 
 
@@ -180,6 +180,8 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #include "AudioConfigSTM32.h"
 #elif IS_ESP8266()
 #include "AudioConfigESP.h"
+#elif IS_ESP32()
+#include "AudioConfigESP32.h"
 #elif IS_SAMD21()
 #include "AudioConfigSAMD21.h"
 #elif IS_AVR()

@@ -38,6 +38,8 @@
 #include <uart.h>
 #include <i2s.h>
 uint16_t output_buffer_size = 0;
+#elif IS_ESP32()
+#include <driver/i2s.h>
 #endif
 
 
@@ -185,8 +187,7 @@ static void receiveSecondAudioADC() {
 #endif
 }
 
-#if !IS_SAMD21()
-
+#if IS_TEENSY3() || IS_STM32() || IS_AVR()
 #if IS_TEENSY3()
 void adc0_isr(void)
 #elif IS_STM32()
@@ -284,7 +285,7 @@ static void tcConfigure(uint32_t sampleRate) {
 }
 #endif
 
-#if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
+#if (IS_ESP8266() && (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL))
 void ICACHE_RAM_ATTR esp8266_serial_audio_output() {
   // Note: That unreadble mess is an optimized version of Serial1.availableForWrite()
   while ((UART_TX_FIFO_SIZE - ((U1S >> USTXC) & 0xff)) > (PDM_RESOLUTION * 4)) {
@@ -292,8 +293,6 @@ void ICACHE_RAM_ATTR esp8266_serial_audio_output() {
   }
 }
 #endif
-
-static uint16_t update_control_timeout;
 
 #if BYPASS_MOZZI_OUTPUT_BUFFER == true
 inline void bufferAudioOutput(const AudioOutput_t f) {
@@ -305,9 +304,21 @@ inline void bufferAudioOutput(const AudioOutput_t f) {
 #define bufferAudioOutput(f) output_buffer.write(f)
 #endif
 
+static uint16_t update_control_timeout;
+static uint16_t update_control_counter;
+
+inline void advanceControlLoop() {
+  if (!update_control_counter) {
+    update_control_counter = update_control_timeout;
+    updateControl();
+    adcStartReadCycle();
+  } else {
+    --update_control_counter;
+  }
+}
+
 void audioHook() // 2us on AVR excluding updateAudio()
 {
-  static uint16_t update_control_counter = 0;
 // setPin13High();
 #if (USE_AUDIO_INPUT == true)
   if (!input_buffer.isEmpty())
@@ -315,13 +326,7 @@ void audioHook() // 2us on AVR excluding updateAudio()
 #endif
 
   if (canBufferAudioOutput()) {
-    if (!update_control_counter) {
-      update_control_counter = update_control_timeout;
-      updateControl();
-      adcStartReadCycle();
-    } else {
-      --update_control_counter;
-    }
+    advanceControlLoop();
 #if (STEREO_HACK == true)
     updateAudio(); // in hacked version, this returns void
     bufferAudioOutput(AudioOutput_t(audio_out_1, audio_out_2));
@@ -394,6 +399,39 @@ static void startAudioStandard() {
   analogWriteResolution(12);
   analogWrite(AUDIO_CHANNEL_1_PIN, 0);
   tcConfigure(AUDIO_RATE);
+
+#elif IS_ESP32()
+  static const i2s_config_t i2s_config = {
+#if (ESP32_AUDIO_OUT_MODE == PT8211_DAC)
+    .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX),
+#elif (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
+    .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN),
+#endif
+    .sample_rate = AUDIO_RATE,
+    .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,  // only the top 8 bits will actually be used by the internal DAC, but using 8 bits straight away seems buggy
+    .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,  // always use stereo output. mono seems to be buggy, and the overhead is insignifcant on the ESP32
+    .communication_format = (i2s_comm_format_t)(I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_LSB),  // this appears to be the correct setting for internal DAC and PT8211, but not for other dacs
+    .intr_alloc_flags = 0, // default interrupt priority
+    .dma_buf_count = 8,    // 8*128 bytes of buffer corresponds to 256 samples (2 channels, see above, 2 bytes per sample per channel)
+    .dma_buf_len = 128,
+    .use_apll = false
+  };
+
+  i2s_driver_install(i2s_num, &i2s_config, 0, NULL);
+  #if (ESP32_AUDIO_OUT_MODE == PT8211_DAC)
+  static const i2s_pin_config_t pin_config = {
+    .bck_io_num = ESP32_I2S_BCK_PIN,
+    .ws_io_num = ESP32_I2S_WS_PIN,
+    .data_out_num = ESP32_I2S_DATA_PIN,
+    .data_in_num = -1
+  };
+  i2s_set_pin((i2s_port_t)i2s_num, &pin_config);
+  #elif (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
+  i2s_set_pin((i2s_port_t)i2s_num, NULL);
+  i2s_set_dac_mode(I2S_DAC_CHANNEL_BOTH_EN);
+  #endif
+  i2s_zero_dma_buffer((i2s_port_t)i2s_num);
+
 #elif IS_STM32()
   audio_update_timer.pause();
   //audio_update_timer.setPeriod(1000000UL / AUDIO_RATE);
@@ -620,6 +658,7 @@ void stopMozzi() {
   timer1_disable();
 #endif
 #elif IS_SAMD21()
+#elif IS_ESP32()
 #else
 
   noInterrupts();
@@ -658,7 +697,12 @@ void stopMozzi() {
 unsigned long audioTicks() {
 #if (BYPASS_MOZZI_OUTPUT_BUFFER != true)
   return output_buffer.count();
-#elif ((ESP_AUDIO_OUT_MODE == PDM_VIA_I2S) && (PDM_RESOLUTION != 1))
+#elif IS_ESP32()
+  // TODO: This is not entirely accurate, as it does not account for samples still in the buffer
+  //       and not yet written to output. There does not seem to be an API to retrieve I2S-buffer
+  //       fill state on ESP32.
+  return samples_written_to_buffer;
+#elif (IS_ESP8266() && (ESP_AUDIO_OUT_MODE == PDM_VIA_I2S) && (PDM_RESOLUTION != 1))
   return (samples_written_to_buffer -
           ((output_buffer_size - i2s_available()) / PDM_RESOLUTION));
 #else

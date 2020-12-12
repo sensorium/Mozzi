@@ -203,6 +203,59 @@ inline void audioOutput(const AudioOutput_t f) {
 
 
 
+///////////////////// ESP32
+#if IS_ESP32()
+#include "AudioConfigESP32.h"
+// On ESP32 we cannot test wether the DMA buffer has room. Instead, we have to use a one-sample mini buffer. In each iteration we
+// _try_ to write that sample to the DMA buffer, and if successful, we can buffer the next sample. Somewhat cumbersome, but works.
+// TODO: Should ESP32 gain an implemenation of i2s_available(), we should switch to using that, instead.
+static bool _esp32_can_buffer_next = true;
+#if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
+#define ESP32_OUT_t uint16_t
+#else
+#define ESP32_OUT_t int16_t
+#endif
+static ESP32_OUT_t _esp32_prev_sample[2] = {(ESP32_OUT_t)AUDIO_BIAS, (ESP32_OUT_t)AUDIO_BIAS};
+
+inline bool esp32_tryWriteSample() {
+  size_t bytes_written;
+  i2s_write(i2s_num, &_esp32_prev_sample, 2*sizeof(ESP32_OUT_t), &bytes_written, 0);
+  return (bytes_written != 0);
+}
+
+inline bool canBufferAudioOutput() {
+  if (_esp32_can_buffer_next) return true;
+  _esp32_can_buffer_next = esp32_tryWriteSample();
+  return _esp32_can_buffer_next;
+}
+
+inline void audioOutput(const AudioOutput_t f) {
+#if (STEREO_HACK == true)
+#if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
+  // Note: need high 8 bits of 16 bit int, here.
+  _esp32_prev_sample[0] = (f.l + AUDIO_BIAS) << 8;
+  _esp32_prev_sample[1] = (f.r + AUDIO_BIAS) << 8;
+#else
+  // PT8211 takes signed samples
+  _esp32_prev_sample[0] = f.l;
+  _esp32_prev_sample[1] = f.r;
+#endif
+#else
+#if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
+  _esp32_prev_sample[0] = (f + AUDIO_BIAS) << 8;
+#else
+  _esp32_prev_sample[0] = f;
+#endif
+  // For simplicity of code, even in mono, we're writing stereo samples
+  _esp32_prev_sample[1] = _esp32_prev_sample[0];
+#endif
+  _esp32_can_buffer_next = esp32_tryWriteSample();
+}
+
+#endif
+
+
+
 ///////////////////// AVR STANDARD
 #if IS_AVR() && (AUDIO_MODE == STANDARD_PLUS)
 #include "AudioConfigStandardPlus.h"

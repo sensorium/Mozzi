@@ -194,6 +194,8 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #endif
 #endif
 
+#include "AudioOutput.h"
+
 // common numeric types
 typedef unsigned char uchar;
 typedef unsigned int uint;
@@ -285,7 +287,7 @@ In HIFI mode, it's a 14 bit number between -16384 and 16383 inclusive.
 extern int audio_out_1, audio_out_2;
 void updateAudio();
 #else
-int updateAudio();
+AudioOutput_t updateAudio();
 #endif
 
 /** @ingroup core

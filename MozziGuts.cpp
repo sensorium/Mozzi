@@ -402,12 +402,12 @@ static void startAudioStandard() {
 
 #elif IS_ESP32()
   static const i2s_config_t i2s_config = {
-#if (ESP32_AUDIO_OUT_MODE == PT8211_DAC)
+#if (ESP32_AUDIO_OUT_MODE == PT8211_DAC) || (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
     .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX),
 #elif (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
     .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN),
 #endif
-    .sample_rate = AUDIO_RATE,
+    .sample_rate = AUDIO_RATE * PDM_RESOLUTION,
     .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,  // only the top 8 bits will actually be used by the internal DAC, but using 8 bits straight away seems buggy
     .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,  // always use stereo output. mono seems to be buggy, and the overhead is insignifcant on the ESP32
     .communication_format = (i2s_comm_format_t)(I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_LSB),  // this appears to be the correct setting for internal DAC and PT8211, but not for other dacs
@@ -418,7 +418,7 @@ static void startAudioStandard() {
   };
 
   i2s_driver_install(i2s_num, &i2s_config, 0, NULL);
-  #if (ESP32_AUDIO_OUT_MODE == PT8211_DAC)
+  #if (ESP32_AUDIO_OUT_MODE == PT8211_DAC) || (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
   static const i2s_pin_config_t pin_config = {
     .bck_io_num = ESP32_I2S_BCK_PIN,
     .ws_io_num = ESP32_I2S_WS_PIN,

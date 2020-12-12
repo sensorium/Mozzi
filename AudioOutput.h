@@ -47,17 +47,20 @@
 #define SCALE_AUDIO_ANY(x,bits) (bits > 8 ? x >> (bits - 8) : x << (8 - bits))
 #else
 #define SCALE_AUDIO8(x) (x << (AUDIO_BITS-8))
-#define SCALE_AUDIO9(x) (x << (AUDIO_BITS-9))
+#define SCALE_AUDIO9(x) (SCALE_AUDIO_ANY(x, 9))
 #define SCALE_AUDIO_ANY(x,bits) (bits > AUDIO_BITS ? x >> (bits - AUDIO_BITS) : x << (AUDIO_BITS - bits))
 #endif
 
-#if (STEREO_HACK == true)
-struct AudioOutput_t {
+#define MonoAudioOutput_t int /* For compatibility with earlier versions of Mozzi. Actually, this should better be int16_t */
+struct StereoAudioOutput_t {
   /** Construct an audio frame from raw values (zero-centered) */
-  AudioOutput_t(int16_t l, int16_t r) : l(l), r(r) {};
-  int16_t l;
-  int16_t r;
-}
+  StereoAudioOutput_t(MonoAudioOutput_t l, MonoAudioOutput_t r) : l(l), r(r) {};
+  StereoAudioOutput_t(MonoAudioOutput_t l) : l(l), r(l) {};
+  MonoAudioOutput_t l;
+  MonoAudioOutput_t r;
+};
+#if (STEREO_HACK == true)
+#define AudioOutput_t StereoAudioOutput_t
 #else
 /** Representation of an single audio output sample/frame. For mono output, this is really just a single zero-centered int,
  *  but for stereo it's a struct containing two ints.
@@ -66,28 +69,32 @@ struct AudioOutput_t {
  *  AudioOutput::from9Bit(), or AudioOutput::fromNBits() will allow you to write code that will work across different platforms, even
  *  when those use a different output resolution.
  */
-typedef int16_t AudioOutput_t;
+#define AudioOutput_t MonoAudioOutput_t
 #endif
 
 namespace AudioOutput {
 #if (STEREO_HACK == true)
+  /** @see from8Bit(), stereo variant */
+  inline StereoAudioOutput_t stereoFrom8Bit(int16_t l, int16_t r) { return AudioOutput_t(SCALE_AUDIO8(l), SCALE_AUDIO8(r)); }
+  /** @see from9Bit(), stereo variant */
+  inline StereoAudioOutput_t stereoFrom9Bit(int16_t l, int16_t r) { return AudioOutput_t(SCALE_AUDIO9(l), SCALE_AUDIO9(r)); }
+  /** @see fromNBit(), stereo variant */
+  inline StereoAudioOutput_t stereoFromNBit(uint8_t bits, int16_t l, int16_t r) { return AudioOutput_t(SCALE_AUDIO_ANY(l, bits), SCALE_AUDIO_ANY(r, bits)); }
+  /** @see fromNBit(), stereo variant, 32 bit overload */
+  inline StereoAudioOutput_t stereoFromNBit(uint8_t bits, int32_t l, int32_t r) { return AudioOutput_t(SCALE_AUDIO_ANY(l, bits), SCALE_AUDIO_ANY(r, bits)); }
+#else
   /** Construct an audio frame a zero-centered value known to be in the 8 bit range. On AVR, STANDARD_PLUS mode, this is effectively the same as calling the constructor,
    *  directly (no scaling gets applied). On platforms/configs using more bits, an appropriate left-shift will be performed. */
-   AudioOutput_t from8Bit(int16_t l, int16_t r) { return AudioOutput_t(SCALE_AUDIO8(l), SCALE_AUDIO8(r)); }
+  inline MonoAudioOutput_t from8Bit(int16_t l) { return AudioOutput_t(SCALE_AUDIO8(l)); }
   /** Construct an audio frame a zero-centered value known to be in the 9 bit range. On AVR, STANDARD_PLUS (where about 8.5 bits are usable), the value will not be shifted,
    *  but will be constrained() into the representable range. On platforms/configs using more bits, an appropriate left-shift (but not constrain) will be performed. */
-  AudioOutput_t from9Bit(int16_t l, int16_t r) { return AudioOutput_t(SCALE_AUDIO9(l), SCALE_AUDIO9(r)); }
+  inline MonoAudioOutput_t from9Bit(int16_t l) { return AudioOutput_t(SCALE_AUDIO9(l)); }
   /** Construct an audio frame a zero-centered value known to be in the N bit range. Appropriate left- or right-shifting will be performed, based on the number of output
    *  bits available. While this function takes care of the shifting, beware of potential overflow issues, if you intermediary results exceed the 16 bit range. Use proper
    *  casts to int32_t or larger in that case (and the compiler will automaticall pick the 32 bit overload in this case) */
-  AudioOutput_t fromNBit(uint8_t bits, int16_t l, int16_t r) { return AudioOutput_t(SCALE_AUDIO_ANY(l, bits), SCALE_AUDIO_ANY(r, bits)); }
+  inline MonoAudioOutput_t fromNBit(uint8_t bits, int16_t l) { return AudioOutput_t(SCALE_AUDIO_ANY(l, bits)); }
   /** 32bit overload. See above. */
-  AudioOutput_t fromNBit(uint8_t bits, int32_t l, int32_t r) { return AudioOutput_t(SCALE_AUDIO_ANY(l, bits), SCALE_AUDIO_ANY(r, bits)); }
-#else
-  AudioOutput_t from8Bit(int16_t l) { return AudioOutput_t(SCALE_AUDIO8(l)); }
-  AudioOutput_t from9Bit(int16_t l) { return AudioOutput_t(SCALE_AUDIO9(l)); }
-  AudioOutput_t fromNBit(uint8_t bits, int16_t l) { return AudioOutput_t(SCALE_AUDIO_ANY(l, bits)); }
-  AudioOutput_t fromNBit(uint8_t bits, int32_t l) { return AudioOutput_t(SCALE_AUDIO_ANY(l, bits)); }
+  inline MonoAudioOutput_t fromNBit(uint8_t bits, int32_t l) { return AudioOutput_t(SCALE_AUDIO_ANY(l, bits)); }
 #endif
 };
 
@@ -101,7 +108,7 @@ inline bool canBufferAudioOutput();
 /** Perform one step of (fast) pdm encoding, returning 8 "bits" (i.e. 8 ones and zeros).
  *  You will usually call this at least four or eight times for a single input sample.
  *
- *  The return type is defined as uint32_t too avoid conversion steps. Actually, only the 8 lowest
+ *  The return type is defined as uint32_t to avoid conversion steps. Actually, only the 8 lowest
  *  bits of the return value are set. */
 inline uint32_t pdmCode8(uint16_t sample) {
   // lookup table for fast pdm coding on 8 output bits at a time
@@ -116,9 +123,20 @@ inline uint32_t pdmCode8(uint16_t sample) {
   // highest bit we consider for writing is bit 17.
   // Thus, if the highest bit is set, the next
   // three bits cannot be.
-  nexttarget += sample - lastwritten;
+  nexttarget += sample;
+  nexttarget -= lastwritten;
   lastwritten = nexttarget & 0b11110000000000000;
   return fast_pdm_table[lastwritten >> 13];
+}
+
+/** Convenience function to perform four iterations of pdmCode8() */
+inline uint32_t pdmCode32(uint16_t sample) {
+  uint32_t outbits = 0;
+  for (uint8_t i = 0; i < 4; ++i) {
+    outbits = outbits << 8;
+    outbits |= pdmCode8(sample);
+  }
+  return outbits;
 }
 
 #ifndef EXTERNAL_AUDIO_OUTPUT
@@ -171,12 +189,7 @@ inline bool canBufferAudioOutput() {
 }
 inline void audioOutput(const AudioOutput_t f) {
   for (uint8_t words = 0; words < PDM_RESOLUTION; ++words) {
-    uint32_t outbits = 0;
-    for (uint8_t i = 0; i < 4; ++i) {
-      outbits = outbits << 8;
-      outbits |= pdmCode8(f);
-    }
-    i2s_write_sample(outbits);
+    i2s_write_sample(pdmCode32(f));
   }
 }
 #elif (ESP_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
@@ -211,15 +224,19 @@ inline void audioOutput(const AudioOutput_t f) {
 // TODO: Should ESP32 gain an implemenation of i2s_available(), we should switch to using that, instead.
 static bool _esp32_can_buffer_next = true;
 #if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
-#define ESP32_OUT_t uint16_t
-#else
-#define ESP32_OUT_t int16_t
+static uint16_t _esp32_prev_sample[2];
+#define ESP_SAMPLE_SIZE (2*sizeof(uint16_t))
+#elif (ESP32_AUDIO_OUT_MODE == PT8211_DAC)
+static int16_t _esp32_prev_sample[2];
+#define ESP_SAMPLE_SIZE (2*sizeof(int16_t))
+#elif (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
+static uint32_t _esp32_prev_sample[PDM_RESOLUTION];
+#define ESP_SAMPLE_SIZE (PDM_RESOLUTION*sizeof(uint32_t))
 #endif
-static ESP32_OUT_t _esp32_prev_sample[2] = {(ESP32_OUT_t)AUDIO_BIAS, (ESP32_OUT_t)AUDIO_BIAS};
 
 inline bool esp32_tryWriteSample() {
   size_t bytes_written;
-  i2s_write(i2s_num, &_esp32_prev_sample, 2*sizeof(ESP32_OUT_t), &bytes_written, 0);
+  i2s_write(i2s_num, &_esp32_prev_sample, ESP_SAMPLE_SIZE, &bytes_written, 0);
   return (bytes_written != 0);
 }
 
@@ -235,6 +252,8 @@ inline void audioOutput(const AudioOutput_t f) {
   // Note: need high 8 bits of 16 bit int, here.
   _esp32_prev_sample[0] = (f.l + AUDIO_BIAS) << 8;
   _esp32_prev_sample[1] = (f.r + AUDIO_BIAS) << 8;
+#elif (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
+#error Stereo not currently supported for this output mode
 #else
   // PT8211 takes signed samples
   _esp32_prev_sample[0] = f.l;
@@ -242,12 +261,15 @@ inline void audioOutput(const AudioOutput_t f) {
 #endif
 #else
 #if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
-  _esp32_prev_sample[0] = (f + AUDIO_BIAS) << 8;
-#else
-  _esp32_prev_sample[0] = f;
-#endif
   // For simplicity of code, even in mono, we're writing stereo samples
-  _esp32_prev_sample[1] = _esp32_prev_sample[0];
+  _esp32_prev_sample[1] = _esp32_prev_sample[0] = (f + AUDIO_BIAS) << 8;
+#elif (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
+  for (uint8_t i=0; i<PDM_RESOLUTION; ++i) {
+    _esp32_prev_sample[i] = pdmCode32(f + AUDIO_BIAS);
+  }
+#else
+  _esp32_prev_sample[1] = _esp32_prev_sample[0] = f;
+#endif
 #endif
   _esp32_can_buffer_next = esp32_tryWriteSample();
 }

@@ -246,13 +246,18 @@ port by Dieter Vandoren and Thomas Friedrichsmeier
 - Asynchronous analog reads are not implemented. `mozziAnalogRead()` relays to `analogRead()`.
 - AUDIO_INPUT is not implemented.
 - twi_nonblock is not ported
-- Currently, two audio output modes exist, the default being INTERNAL_DAC (configurable in AudioConfigESP32.h). *The configuration details may still be subject to change; please be prepared to make some minimal adjustments to your code, when upgrading Mozzi*:
+- Currently, three audio output modes exist, the default being INTERNAL_DAC (configurable in AudioConfigESP32.h). *The configuration details may still be subject to change; please be prepared to make some minimal adjustments to your code, when upgrading Mozzi*:
   - INTERNAL_DAC: Output using the built-in DAC on GPIO pins 25 and 26.
     - 8 bits resolution
     - For simplicity of code, both pins are always used, even in mono output mode
   - PT8211_DAC: Output is sent via I2S in a format suitable for the PT8211 external EXTERNAL_DAC
     - 16 bits resolution. Remember to shift your audio accordingly.
     - Output pins can be configured in AudioConfigESP32.h. Default is BCK: 26, WS: 15, DATA: 33
+  - PDM_VIA_I2S: Output is converted using pulse density modulation, sent to the I2S data pin. No external hardware needed.
+    - 16 bits resolution. Remember to shift your audio accordingly.
+    - Output (DATA) pin can be configured in AudioConfigESP32.h. Default 33. Note that the BCK and WS pins are also used in this mode.
+    - The PDM_RESOLUTION parameter can be used to reduce noise at the cost of more CPU power.
+    - Mono, only.
 - "HIFI_MODE" is not currently implemented, but could conceivably be realized for the INTERNAL_DAC mode. Patches welcome.
 - WIFI-activity not yet tested, but likely the same notes as for ESP8266 apply. Consider turning off WIFI.
 - The implementation of audioTicks() may be slightly inaccurate on this platform.

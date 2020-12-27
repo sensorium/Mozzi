@@ -33,7 +33,7 @@
 #include <ADC.h>
 #elif IS_STM32()
 #include "HardwareTimer.h"
-#include <STM32ADC.h>
+//#include <STM32ADC.h>  // Disabled, here. See AudioConfigSTM32.h
 #elif IS_ESP8266()
 #include <uart.h>
 #include <i2s.h>

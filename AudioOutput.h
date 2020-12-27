@@ -146,7 +146,7 @@ inline uint32_t pdmCode32(uint16_t sample) {
 #include "AudioConfigSAMD21.h"
 inline void audioOutput(const AudioOutput_t f)
 {
-  analogWrite(AUDIO_CHANNEL_1_PIN, f.l+AUDIO_BIAS);
+  analogWrite(AUDIO_CHANNEL_1_PIN, f+AUDIO_BIAS);
 }
 #endif
 
@@ -156,7 +156,7 @@ inline void audioOutput(const AudioOutput_t f)
 #include "AudioConfigTeensy3_12bit.h"
 inline void audioOutput(const AudioOutput_t f)
 {
-  analogWrite(AUDIO_CHANNEL_1_PIN, f.l+AUDIO_BIAS);
+  analogWrite(AUDIO_CHANNEL_1_PIN, f+AUDIO_BIAS);
 }
 #endif
 

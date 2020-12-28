@@ -6,7 +6,8 @@
     #define EXTERNAL_AUDIO_OUTPUT true should be uncommented in mozzi_config.h.
     #define STEREO_HACK true should be set in mozzi_config.h
 
-    Circuit: (see the DAC library README for details)
+
+    Circuit:
 
     PT8211   //  Connect to:
     -------       -----------

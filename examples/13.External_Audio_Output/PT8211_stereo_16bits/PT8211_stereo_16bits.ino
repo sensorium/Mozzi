@@ -1,6 +1,6 @@
 /*  Example of simple panning and stereo,
     using Mozzi sonification library and an external dual DAC PT8211 (inspired by: https://sparklogic.ru/code-snipplets/i2s-example-code.html)
-    using an user-defined audioOutput() function.
+    using an user-defined audioOutput() function. I2S, the protocol used by this DAC, is here emulated in synced way using SPI.
 
 
     #define EXTERNAL_AUDIO_OUTPUT true should be uncommented in mozzi_config.h.
@@ -61,12 +61,10 @@ void audioOutput(int l, int r)
  */
 
   digitalWrite(WS_pin, LOW);  //select Right channel
-  SPI.transfer(r >> 8);
-  SPI.transfer(r);
+  SPI.transfer16(r);
 
   digitalWrite(WS_pin, HIGH);  // select Left channel
-  SPI.transfer(l >> 8);
-  SPI.transfer(l);
+  SPI.transfer16(l);
 }
 
 
@@ -76,7 +74,7 @@ void setup() {
 
   // Initialising the SPI connection on default port
   SPI.begin();
-  SPI.beginTransaction(SPISettings(200000000, MSBFIRST, SPI_MODE0));
+  SPI.beginTransaction(SPISettings(200000000, MSBFIRST, SPI_MODE0));  //MSB first, according to the DAC spec
 
 
   aCos1.setFreq(440.f);

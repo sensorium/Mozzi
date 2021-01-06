@@ -1,4 +1,4 @@
-/** @file
+/** @file AudioOutput
  *
  * Platform independent audio output and adding support for new platforms or output methods.
  *
@@ -23,9 +23,10 @@
  * In some cases, you will additionally want to bypass Mozzis output buffer, for example, if your board, or your external DAC already comes with an efficient built-in buffer.
  * In this case, define BYPASS_MOZZI_OUTPUT_BUFFER to true. You will then have to provide a custom definition of canBufferAudioOutput(), returning true whenever your hardware
  * is ready toaccept a new sample of output. This is called from inside audioHook(), and whenever there is room for a new sample, it is generated and sent to audioOutput(),
- * immediately.
+ * immediately. In this case, should you need a timer running at AUDIO_RATE, you will have to set up one, yourself, if needed.
  *
- * Of course it is also possible to combine EXTERNAL_AUDIO_OUTPUT and BYPASS_MOZZI_OUTPUT_BUFFER.
+ * In custom code, setting BYPASS_MOZZI_OUTPUT_BUFFER does not make much sense without EXTERNAL_AUDIO_OUTPUT also set to true. However, some platform ports (e.g. ESP32) actually
+ * use this combination, internally.
  *
  * Different output methods often support a different resolution of output samples. To provide best performance on slow boards, Mozzi expects your updateAudio() function to
  * return samples in exactly the width that is needed at the output stage. Thus, defining this naively, an updateAudio() function designed for 8 bit output will produce very
@@ -37,9 +38,7 @@
 #ifndef AUDIOOUTPUT
 #define AUDIOOUTPUT
 
-#include "hardware_defines.h"
-#include "mozzi_config.h"
-//#include "MozziGuts.h"
+#include "MozziGuts.h"
 
 #if IS_AVR() && (AUDIO_MODE == STANDARD_PLUS)
 #define SCALE_AUDIO8(x) (x)

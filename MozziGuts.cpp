@@ -39,7 +39,8 @@
 #include <i2s.h>
 uint16_t output_buffer_size = 0;
 #elif IS_ESP32()
-#include <driver/i2s.h>
+#include <driver/i2s.h>   // for I2S-based output modes
+#include <driver/timer.h> // for EXTERNAL_AUDIO_OUTPUT
 #endif
 
 
@@ -286,7 +287,7 @@ static void tcConfigure(uint32_t sampleRate) {
 #endif
 
 #if (IS_ESP8266() && (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL))
-void ICACHE_RAM_ATTR esp8266_serial_audio_output() {
+void CACHED_FUNCTION_ATTR esp8266_serial_audio_output() {
   // Note: That unreadble mess is an optimized version of Serial1.availableForWrite()
   while ((UART_TX_FIFO_SIZE - ((U1S >> USTXC) & 0xff)) > (PDM_RESOLUTION * 4)) {
     audioOutput(output_buffer.read());
@@ -355,12 +356,20 @@ HardwareTimer audio_pwm_timer(AUDIO_PWM_TIMER);
 #endif
 
 #if (BYPASS_MOZZI_OUTPUT_BUFFER != true)
-static void defaultAudioOutput() {
+static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
 #if (USE_AUDIO_INPUT == true)
   adc_count = 0;
   startSecondAudioADC();
 #endif
   audioOutput(output_buffer.read());
+}
+#endif
+
+#if (IS_ESP32() && (BYPASS_MOZZI_OUTPUT_BUFFER != true))
+void CACHED_FUNCTION_ATTR timer0_audio_output_isr(void *) {
+  TIMERG0.int_clr_timers.t0 = 1;
+  TIMERG0.hw_timer[0].config.alarm_en = 1;
+  defaultAudioOutput();
 }
 #endif
 
@@ -399,6 +408,23 @@ static void startAudioStandard() {
   analogWriteResolution(12);
   analogWrite(AUDIO_CHANNEL_1_PIN, 0);
   tcConfigure(AUDIO_RATE);
+
+#elif IS_ESP32() && (BYPASS_MOZZI_OUTPUT_BUFFER != true)  // for external audio output, set up a timer running a audio rate
+  static intr_handle_t s_timer_handle;
+  timer_config_t config = {
+    .alarm_en = true,
+    .counter_en = false,
+    .intr_type = TIMER_INTR_LEVEL,
+    .counter_dir = TIMER_COUNT_UP,
+    .auto_reload = true,
+    .divider = 1 // For max available precision: The APB_CLK clock signal is running at 80 MHz, i.e. 1/80 uS per tick
+  };
+  timer_init(TIMER_GROUP_0, TIMER_0, &config);
+  timer_set_counter_value(TIMER_GROUP_0, TIMER_0, 0);
+  timer_set_alarm_value(TIMER_GROUP_0, TIMER_0, 80000000UL / AUDIO_RATE);
+  timer_enable_intr(TIMER_GROUP_0, TIMER_0);
+  timer_isr_register(TIMER_GROUP_0, TIMER_0, &timer0_audio_output_isr, nullptr, 0, &s_timer_handle);
+  timer_start(TIMER_GROUP_0, TIMER_0);
 
 #elif IS_ESP32()
   static const i2s_config_t i2s_config = {
@@ -448,6 +474,7 @@ static void startAudioStandard() {
   audio_update_timer.refresh();
   audio_update_timer.resume();
 
+#if (EXTERNAL_AUDIO_OUTPUT != true)
   pinMode(AUDIO_CHANNEL_1_PIN, PWM);
 #if (AUDIO_MODE == HIFI)
   pinMode(AUDIO_CHANNEL_1_PIN_HIGH, PWM);
@@ -474,7 +501,13 @@ static void startAudioStandard() {
   audio_pwm_timer.setOverflow(
       1 << AUDIO_BITS_PER_CHANNEL); // Allocate enough room to write all
                                     // intended bits
+#endif
 
+#elif IS_ESP8266() && (EXTERNAL_AUDIO_OUTPUT == true)  && (BYPASS_MOZZI_OUTPUT_BUFFER != true) // for external audio output, set up a timer running a audio rate
+  timer1_isr_init();
+  timer1_attachInterrupt(defaultAudioOutput);
+  timer1_enable(TIM_DIV1, TIM_EDGE, TIM_LOOP);
+  timer1_write(F_CPU / AUDIO_RATE);
 #elif IS_ESP8266()
 #if (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
   Serial1.begin(

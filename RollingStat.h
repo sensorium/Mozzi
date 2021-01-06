@@ -4,6 +4,8 @@
 /*
  * RollingStat.h
  *
+ * WARNING: this code is incomplete, it doesn't work yet
+ *
  * Copyright 2013 Tim Barrass.
  *
  * This file is part of Mozzi.
@@ -17,6 +19,7 @@
 
 // adapted from RunningStat, http://www.johndcook.com/standard_deviation.html
 /** @ingroup sensortools
+WARNING: this class is work in progress, don't use it yet.
 Calculates an approximation of the variance and standard deviation for a window of recent inputs.
 @tparam T the type of numbers to use.  Choose unsigned int, int , uint8_t, int8_t, or float
 @tparam WINDOW_LENGTH how many recent input values to include in the calculations.
@@ -25,7 +28,7 @@ template <class T, int WINDOW_LENGTH>
 class RollingStat
 {
 public:
-	
+
 	/** Constructor */
 	RollingStat() : _previous_mean(0), _mean(0), _variance(0), WINDOW_LENGTH_AS_RSHIFT((uint8_t)trailingZeros((unsigned long)WINDOW_LENGTH))
 	{}
@@ -40,7 +43,7 @@ public:
 		_variance = (((long)x - _previous_mean)*((long)x - _mean))>>WINDOW_LENGTH_AS_RSHIFT; // should really be div by (WINDOW_LENGTH-1), but exact values are not important for this application
 		_previous_mean = _mean;
 	}
-	
+
 
 	/** Update the mean and variance given a new input value.
 	@param x the next input value
@@ -50,7 +53,7 @@ public:
 		_variance = (((int)x - _previous_mean)*((int)x - _mean))>>WINDOW_LENGTH_AS_RSHIFT; // should really be div by (WINDOW_LENGTH-1), but exact values are not important for this application
 		_previous_mean = _mean;
 	}
-	
+
 
 	/** Return the mean of the last WINDOW_LENGTH number of inputs.
 	@return  mean
@@ -60,15 +63,15 @@ public:
 	}
 
 
-	/** Return the approximate variance of the last WINDOW_LENGTH number of inputs.  
+	/** Return the approximate variance of the last WINDOW_LENGTH number of inputs.
 	@return  variance
-	@note This should really be calculated using WINDOW_LENGTH-1, but sacrificing accuracy for speed 
+	@note This should really be calculated using WINDOW_LENGTH-1, but sacrificing accuracy for speed
 	we use the power of two value of WINDOW_LENGTH.
 	*/
 	T getVariance() const {
 		return _variance;
 	}
-	
+
 	/** Return the approximate standard deviation of the last WINDOW_LENGTH number of inputs.
 	@return  standard deviation.
 	*/
@@ -76,7 +79,7 @@ public:
 		return isqrt16(_variance);
 	}
 
-	
+
 
 private:
 	T _previous_mean, _mean, _variance;
@@ -92,12 +95,12 @@ template <int WINDOW_LENGTH>
 class RollingStat <float, WINDOW_LENGTH>
 {
 public:
-	
+
 	/** Constructor */
 	RollingStat() : _previous_mean(0), _mean(0), _variance(0), WINDOW_LENGTH_AS_RSHIFT((uint8_t)trailingZeros((unsigned long)WINDOW_LENGTH))
 	{}
 
-	
+
 	/** Update the mean and variance given a new input value.
 	@param x the next input value
 	@note timing for float: 60 to 90us
@@ -107,7 +110,7 @@ public:
 		_variance = ((x - _previous_mean)*(x - _mean))/(WINDOW_LENGTH-1);
 		_previous_mean = _mean;
 	}
-	
+
 
 	/** Return the mean of the last WINDOW_LENGTH number of inputs.
 	@return  mean
@@ -117,13 +120,13 @@ public:
 	}
 
 
-	/** Return the approximate variance of the last WINDOW_LENGTH number of inputs.  
+	/** Return the approximate variance of the last WINDOW_LENGTH number of inputs.
 	@return  variance
 	*/
 	float getVariance() const {
 		return _variance;
 	}
-	
+
 	/** Calculate and return the approximate standard deviation of the last WINDOW_LENGTH number of inputs.
 	@return  standard deviation.
 	@note this is probably too slow to use!
@@ -132,7 +135,7 @@ public:
 		return sqrt(_variance);
 	}
 
-	
+
 
 private:
 	float _previous_mean, _mean, _variance;
@@ -144,4 +147,3 @@ private:
 /** @endcond  */
 
 #endif        //  #ifndef ROLLINGSTAT_H
-

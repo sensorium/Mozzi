@@ -1,5 +1,6 @@
 #ifndef MOZZI_CONFIG_H
 #define MOZZI_CONFIG_H
+#include "hardware_defines.h"
 
 /*
 Edit this file if you want to choose your own configuration options.
@@ -58,17 +59,18 @@ and comment out \#define AUDIO_MODE STANDARD and \#define AUDIO_MODE STANDARD_PL
 http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/ .
 Mozzi-users list has a thread on this.
 */
-#define AUDIO_RATE 16384
-//#define AUDIO_RATE 32768
-//#define AUDIO_RATE 65536 // try on Teensy3/3.1
+#define AUDIO_RATE AUDIO_RATE_PLATFORM_DEFAULT
+//#define AUDIO_RATE 16384 // default on AVR / classic Arduino
+//#define AUDIO_RATE 32768 // default on most other platforms
+//#define AUDIO_RATE 65536 // try on Teensy3/3.1 or other strong cpus
 
 
 /** @ingroup core
 Whether or not to use audio input.
-Put \#define USE_AUDIO_INPUT false in Mozzi/mozzi_config.h to enable audio input on analog pin AUDIO_INPUT_PIN,
+Put \#define USE_AUDIO_INPUT true in Mozzi/mozzi_config.h to enable audio input on analog pin AUDIO_INPUT_PIN,
 otherwise make it false, to save resources.
 */
-#define USE_AUDIO_INPUT false
+//#define USE_AUDIO_INPUT true
 
 
 
@@ -88,5 +90,7 @@ instead of returning a single audio value as is usual for standard mono.
 You need to have \#define STEREO_HACK true in mozzi_config.h
 */
 #define STEREO_HACK false
+
+//#define EXTERNAL_AUDIO_OUTPUT true
 
 #endif        //  #ifndef MOZZI_CONFIG_H

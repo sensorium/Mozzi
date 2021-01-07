@@ -52,11 +52,11 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   // cast to long before multiply to give room for intermediate result,
   // and also before shift,
   // to give consistent results for both 8 and 32 bit processors.
-  return (int)((long)((long) aSig.next() * aGain.next()) >> 16); // shifted back to audio range after multiply
+  return AudioOutput::fromNBits(24, ((long)((long) aSig.next() * aGain.next()))); // shifted back to audio range after multiply
 }
 
 

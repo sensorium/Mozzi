@@ -40,9 +40,9 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
     Q15n16 vibrato = (Q15n16) intensity * aVibrato.next();
-    return aCos.phMod(vibrato); // phase modulation to modulate frequency
+    return AudioOutput::from8bit(aCos.phMod(vibrato)); // phase modulation to modulate frequency
 }
 
 void loop(){

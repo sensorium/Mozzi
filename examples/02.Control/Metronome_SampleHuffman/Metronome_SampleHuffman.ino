@@ -74,14 +74,14 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   int asig = (int)
   thumb0.next() +
   thumb1.next() +
   thumb2.next() +
   thumb3.next() +
   thumb4.next();
-  return asig;
+  return AudioOutput::from9Bit(asig);
 }
 
 

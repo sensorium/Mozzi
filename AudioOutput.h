@@ -81,6 +81,8 @@ namespace AudioOutput {
   inline StereoAudioOutput_t stereoFromNBit(uint8_t bits, int16_t l, int16_t r) { return AudioOutput_t(SCALE_AUDIO_ANY(l, bits), SCALE_AUDIO_ANY(r, bits)); }
   /** @see fromNBit(), stereo variant, 32 bit overload */
   inline StereoAudioOutput_t stereoFromNBit(uint8_t bits, int32_t l, int32_t r) { return AudioOutput_t(SCALE_AUDIO_ANY(l, bits), SCALE_AUDIO_ANY(r, bits)); }
+  /** @see from16Bit(), stereo variant */
+  inline StereoAudioOutput_t stereoFrom16Bit(int16_t l, int16_t r) { return stereoFromNBit(16, l, r); }
 #else
   /** Construct an audio frame a zero-centered value known to be in the 8 bit range. On AVR, STANDARD_PLUS mode, this is effectively the same as calling the constructor,
    *  directly (no scaling gets applied). On platforms/configs using more bits, an appropriate left-shift will be performed. */
@@ -89,11 +91,13 @@ namespace AudioOutput {
    *  but will be constrained() into the representable range. On platforms/configs using more bits, an appropriate left-shift (but not constrain) will be performed. */
   inline MonoAudioOutput_t from9Bit(int16_t l) { return AudioOutput_t(SCALE_AUDIO9(l)); }
   /** Construct an audio frame a zero-centered value known to be in the N bit range. Appropriate left- or right-shifting will be performed, based on the number of output
-   *  bits available. While this function takes care of the shifting, beware of potential overflow issues, if you intermediary results exceed the 16 bit range. Use proper
-   *  casts to int32_t or larger in that case (and the compiler will automaticall pick the 32 bit overload in this case) */
+   *  bits available. While this function takes care of the shifting, beware of potential overflow issues, if your intermediary results exceed the 16 bit range. Use proper
+   *  casts to int32_t or larger in that case (and the compiler will automatically pick the 32 bit overload in this case) */
   inline MonoAudioOutput_t fromNBit(uint8_t bits, int16_t l) { return AudioOutput_t(SCALE_AUDIO_ANY(l, bits)); }
   /** 32bit overload. See above. */
   inline MonoAudioOutput_t fromNBit(uint8_t bits, int32_t l) { return AudioOutput_t(SCALE_AUDIO_ANY(l, bits)); }
+  /** Construct an audio frame a zero-centered value known to be in the 16 bit range. This is jsut a shortcut for fromNBit(16, ...) provided for convenience. */
+  inline MonoAudioOutput_t from16Bit(int16_t l) { return fromNBit(16, l); }
 #endif
 };
 
@@ -138,7 +142,7 @@ inline uint32_t pdmCode32(uint16_t sample) {
   return outbits;
 }
 
-#ifndef EXTERNAL_AUDIO_OUTPUT
+#if (EXTERNAL_AUDIO_OUTPUT == false)
 
 ///////////////////// SAMD21
 #if IS_SAMD21()

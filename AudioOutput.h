@@ -142,7 +142,7 @@ inline uint32_t pdmCode32(uint16_t sample) {
   return outbits;
 }
 
-#if (EXTERNAL_AUDIO_OUTPUT == false)
+#if (EXTERNAL_AUDIO_OUTPUT != true)
 
 ///////////////////// SAMD21
 #if IS_SAMD21()

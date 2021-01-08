@@ -41,68 +41,116 @@
 #include "MozziGuts.h"
 
 #if IS_AVR() && (AUDIO_MODE == STANDARD_PLUS)
-#define SCALE_AUDIO8(x) (x)
-#define SCALE_AUDIO9(x) constrain(x,-244,243)
-#define SCALE_AUDIO_ANY(x,bits) (bits > 8 ? x >> (bits - 8) : x << (8 - bits))
+#define SCALE_AUDIO(x,bits) (bits > 8 ? (x) >> (bits - 8) : (x) << (8 - bits))
+#define SCALE_AUDIO_NEAR(x,bits) (bits > 9 ? (x) >> (bits - 9) : (x) << (9 - bits))
+#define CLIP_AUDIO(x) constrain((x), -244,243)
 #else
-#define SCALE_AUDIO8(x) (x << (AUDIO_BITS-8))
-#define SCALE_AUDIO9(x) (SCALE_AUDIO_ANY(x, 9))
-#define SCALE_AUDIO_ANY(x,bits) (bits > AUDIO_BITS ? x >> (bits - AUDIO_BITS) : x << (AUDIO_BITS - bits))
+#define SCALE_AUDIO(x,bits) (bits > AUDIO_BITS ? (x) >> (bits - AUDIO_BITS) : (x) << (AUDIO_BITS - bits))
+#define SCALE_AUDIO_NEAR(x,bits) SCALE_AUDIO(x,bits)
+#define CLIP_AUDIO(x) constrain((x), -AUDIO_BIAS, AUDIO_BIAS-1)
 #endif
 
-#define MonoAudioOutput_t int /* For compatibility with earlier versions of Mozzi. Actually, this should better be int16_t */
-struct StereoAudioOutput_t {
+/** The type used to store a single channel of a single frame, internally. For compatibility with earlier versions of Mozzi this is defined as int.
+ *  If you do not care about keeping old sketches working, you may be able to save some RAM by using int16_t, instead (on boards where int is larger
+ *  than 16 bits). */
+#define AudioOutputStorage_t int
+struct StereoOutput;
+struct MonoOutput {
   /** Construct an audio frame from raw values (zero-centered) */
-  StereoAudioOutput_t(MonoAudioOutput_t l, MonoAudioOutput_t r) : l(l), r(r) {};
-  StereoAudioOutput_t(MonoAudioOutput_t l) : l(l), r(l) {};
-  MonoAudioOutput_t l;
-  MonoAudioOutput_t r;
-};
+  MonoOutput(AudioOutputStorage_t l) : _l(l) {};
 #if (STEREO_HACK == true)
-#define AudioOutput_t StereoAudioOutput_t
+  /** Conversion to void operator: If used in a stereo config, returns identical channels (and gives a compile time warning). */
+  inline operator AudioOutputStorage_t() const __attribute__((deprecated("Sketch generates mono output, but Mozzi is configured for stereo. Check mozzi_config.h."))) { audio_out_1 = _l; audio_out_2 = _l; };
+#else
+  /** Conversion to int operator. */
+  operator AudioOutputStorage_t() const { return _l; };
+#endif
+  AudioOutputStorage_t _l;
+  AudioOutputStorage_t l() const { return _l; };
+  AudioOutputStorage_t r() const { return _l; };
+  /** Clip frame to supported range. This is useful when at times, but only rarely, the signal may exceed the usual range. Using this function does not avoid
+   *  artifacts, entirely, but gives much better results than an overflow. */
+  MonoOutput& clip() { _l = CLIP_AUDIO(_l); return *this; };
+
+  /** Construct an audio frame a zero-centered value known to be in the N bit range. Appropriate left- or right-shifting will be performed, based on the number of output
+   *  bits available. While this function takes care of the shifting, beware of potential overflow issues, if your intermediary results exceed the 16 bit range. Use proper
+   *  casts to int32_t or larger in that case (and the compiler will automatically pick the 32 bit overload in this case) */
+  static inline MonoOutput fromNBit(uint8_t bits, int16_t l) { return MonoOutput(SCALE_AUDIO(l, bits)); }
+  /** 32bit overload. See above. */
+  static inline MonoOutput fromNBit(uint8_t bits, int32_t l) { return MonoOutput(SCALE_AUDIO(l, bits)); }
+  /** Construct an audio frame from a zero-centered value known to be in the 8 bit range. On AVR, STANDARD_PLUS mode, this is effectively the same as calling the constructor,
+   *  directly (no scaling gets applied). On platforms/configs using more bits, an appropriate left-shift will be performed. */
+  static inline MonoOutput from8Bit(int16_t l) { return fromNBit(8, l); }
+  /** Construct an audio frame a zero-centered value known to be in the 16 bit range. This is jsut a shortcut for fromNBit(16, ...) provided for convenience. */
+  static inline MonoOutput from16Bit(int16_t l) { return fromNBit(16, l); }
+  /** Construct an audio frame a zero-centered value known to be above at almost but not quite the N bit range, e.g. at N=8 bits and a litte. On most platforms, this is
+   *  exactly the same as fromNBit(), shifting up or down to the platforms' available resolution.
+   *
+   *  However, on AVR, STANDARD_PLUS (where about 8.5 bits are usable), the value will be shifted to the (almost) 9 bit range, instead of to the 8 bit range. allowing to
+   *  make use of that extra half bit of resolution. In many cases it is useful to follow up this call with clip().
+   *
+   *  @example fromAlmostNBit(10, oscilA.next() + oscilB.next() + oscilC.next());
+   */
+  static inline MonoOutput fromAlmostNBit(uint8_t bits, int16_t l) { return MonoOutput(SCALE_AUDIO_NEAR(l, bits)); }
+  /** 32bit overload. See above. */
+  static inline MonoOutput fromAlmostNBit(uint8_t bits, int32_t l) { return MonoOutput(SCALE_AUDIO_NEAR(l, bits)); }
+};
+struct StereoOutput {
+  /** Construct an audio frame from raw values (zero-centered) */
+  StereoOutput(AudioOutputStorage_t l, AudioOutputStorage_t r) : _l(l), _r(r) {};
+  /** Construct a stereo audio frame (with identical channels) from a mono frame */
+  StereoOutput(const MonoOutput &m) : _l(m._l), _r(m._l) {};
+#if (STEREO_HACK == true)
+  inline operator AudioOutputStorage_t() const { audio_out_1 = _l; audio_out_2 = _r; };
+#else
+  /** Conversion to int operator: If used in a mono config, returns only the left channel (and gives a compile time warning). */
+  inline operator AudioOutputStorage_t() const __attribute__((deprecated("Sketch generates stereo output, but Mozzi is configured for mono. Check mozzi_config.h."))) { return _l; };
+#endif
+  AudioOutputStorage_t _l;
+  AudioOutputStorage_t _r;
+  AudioOutputStorage_t l() { return _l; };
+  AudioOutputStorage_t r() { return _r; };
+  /** @see MonoOutput::clip(). Clips both channels. */
+  StereoOutput& clip() { _l = CLIP_AUDIO(_l); _r = CLIP_AUDIO(_r); return *this; };
+
+  /** @see MonoOutput::fromNBit(), stereo variant */
+  static inline StereoOutput fromNBit(uint8_t bits, int16_t l, int16_t r) { return StereoOutput(SCALE_AUDIO(l, bits), SCALE_AUDIO(r, bits)); }
+  /** @see MonoOutput::fromNBit(), stereo variant, 32 bit overload */
+  static inline StereoOutput fromNBit(uint8_t bits, int32_t l, int32_t r) { return StereoOutput(SCALE_AUDIO(l, bits), SCALE_AUDIO(r, bits)); }
+  /** @see MonoOutput::from8Bit(), stereo variant */
+  static inline StereoOutput from8Bit(int16_t l, int16_t r) { return fromNBit(8, l, r); }
+  /** @see MonoOutput::from16Bit(), stereo variant */
+  static inline StereoOutput from16Bit(int16_t l, int16_t r) { return fromNBit(16, l, r); }
+  /** @see MonoOutput::fromAlmostNBit(), stereo variant */
+  static inline StereoOutput fromAlmostNBit(uint8_t bits, int16_t l, int16_t r) { return StereoOutput(SCALE_AUDIO_NEAR(l, bits), SCALE_AUDIO_NEAR(r, bits)); }
+  /** @see MonoOutput::fromAlmostNBit(), stereo variant, 32 bit overload */
+  static inline StereoOutput fromAlmostNBit(uint8_t bits, int32_t l, int32_t r) { return StereoOutput(SCALE_AUDIO_NEAR(l, bits), SCALE_AUDIO_NEAR(r, bits)); }
+};
+
+#if (STEREO_HACK == true)
+#define AudioOutput_t StereoOutput
+#define AudioOutput StereoOutput
 #else
 /** Representation of an single audio output sample/frame. For mono output, this is really just a single zero-centered int,
  *  but for stereo it's a struct containing two ints.
  *
  *  While it may be tempting (and is possible) to use an int, directly, using AudioOutput_t and the functions AudioOutput::from8Bit(),
- *  AudioOutput::from9Bit(), or AudioOutput::fromNBits() will allow you to write code that will work across different platforms, even
+ *  AudioOutput::fromNBit(), or AudioOutput::fromAlmostNBit() will allow you to write code that will work across different platforms, even
  *  when those use a different output resolution.
  */
-#define AudioOutput_t MonoAudioOutput_t
+#define AudioOutput_t AudioOutputStorage_t
+/** Representation of an single audio output sample/frame. For mono output, this is really just a single zero-centered int,
+ *  but for stereo it's a struct containing two ints.
+ *
+ *  While it may be tempting (and is possible) to use an int, directly, using AudioOutput_t and the functions AudioOutput::from8Bit(),
+ *  AudioOutput::fromNBit(), or AudioOutput::fromAlmostNBit() will allow you to write code that will work across different platforms, even
+ *  when those use a different output resolution.
+ */
+#define AudioOutput MonoOutput
 #endif
-
-namespace AudioOutput {
-#if (STEREO_HACK == true)
-  /** @see from8Bit(), stereo variant */
-  inline StereoAudioOutput_t stereoFrom8Bit(int16_t l, int16_t r) { return AudioOutput_t(SCALE_AUDIO8(l), SCALE_AUDIO8(r)); }
-  /** @see from9Bit(), stereo variant */
-  inline StereoAudioOutput_t stereoFrom9Bit(int16_t l, int16_t r) { return AudioOutput_t(SCALE_AUDIO9(l), SCALE_AUDIO9(r)); }
-  /** @see fromNBit(), stereo variant */
-  inline StereoAudioOutput_t stereoFromNBit(uint8_t bits, int16_t l, int16_t r) { return AudioOutput_t(SCALE_AUDIO_ANY(l, bits), SCALE_AUDIO_ANY(r, bits)); }
-  /** @see fromNBit(), stereo variant, 32 bit overload */
-  inline StereoAudioOutput_t stereoFromNBit(uint8_t bits, int32_t l, int32_t r) { return AudioOutput_t(SCALE_AUDIO_ANY(l, bits), SCALE_AUDIO_ANY(r, bits)); }
-  /** @see from16Bit(), stereo variant */
-  inline StereoAudioOutput_t stereoFrom16Bit(int16_t l, int16_t r) { return stereoFromNBit(16, l, r); }
-#else
-  /** Construct an audio frame a zero-centered value known to be in the 8 bit range. On AVR, STANDARD_PLUS mode, this is effectively the same as calling the constructor,
-   *  directly (no scaling gets applied). On platforms/configs using more bits, an appropriate left-shift will be performed. */
-  inline MonoAudioOutput_t from8Bit(int16_t l) { return AudioOutput_t(SCALE_AUDIO8(l)); }
-  /** Construct an audio frame a zero-centered value known to be in the 9 bit range. On AVR, STANDARD_PLUS (where about 8.5 bits are usable), the value will not be shifted,
-   *  but will be constrained() into the representable range. On platforms/configs using more bits, an appropriate left-shift (but not constrain) will be performed. */
-  inline MonoAudioOutput_t from9Bit(int16_t l) { return AudioOutput_t(SCALE_AUDIO9(l)); }
-  /** Construct an audio frame a zero-centered value known to be in the N bit range. Appropriate left- or right-shifting will be performed, based on the number of output
-   *  bits available. While this function takes care of the shifting, beware of potential overflow issues, if your intermediary results exceed the 16 bit range. Use proper
-   *  casts to int32_t or larger in that case (and the compiler will automatically pick the 32 bit overload in this case) */
-  inline MonoAudioOutput_t fromNBit(uint8_t bits, int16_t l) { return AudioOutput_t(SCALE_AUDIO_ANY(l, bits)); }
-  /** 32bit overload. See above. */
-  inline MonoAudioOutput_t fromNBit(uint8_t bits, int32_t l) { return AudioOutput_t(SCALE_AUDIO_ANY(l, bits)); }
-  /** Construct an audio frame a zero-centered value known to be in the 16 bit range. This is jsut a shortcut for fromNBit(16, ...) provided for convenience. */
-  inline MonoAudioOutput_t from16Bit(int16_t l) { return fromNBit(16, l); }
-#endif
-};
 
 /** When setting EXTERNAL_AUDIO_OUTPUT to true, implement this function to take care of writing samples to the hardware. */
-inline void audioOutput(const AudioOutput_t f);
+inline void audioOutput(const AudioOutput& f);
 #if BYPASS_MOZZI_OUTPUT_BUFFER
 /** When setting BYPASS_MOZZI_OUTPUT_BUFFER to true, implement this function to return true, if and only if your hardware (or custom buffer) is ready to accept the next sample. */
 inline bool canBufferAudioOutput();
@@ -147,9 +195,9 @@ inline uint32_t pdmCode32(uint16_t sample) {
 ///////////////////// SAMD21
 #if IS_SAMD21()
 #include "AudioConfigSAMD21.h"
-inline void audioOutput(const AudioOutput_t f)
+inline void audioOutput(const AudioOutput& f)
 {
-  analogWrite(AUDIO_CHANNEL_1_PIN, f+AUDIO_BIAS);
+  analogWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
 }
 #endif
 
@@ -157,9 +205,9 @@ inline void audioOutput(const AudioOutput_t f)
 ///////////////////// TEENSY3
 #if IS_TEENSY3()
 #include "AudioConfigTeensy3_12bit.h"
-inline void audioOutput(const AudioOutput_t f)
+inline void audioOutput(const AudioOutput& f)
 {
-  analogWrite(AUDIO_CHANNEL_1_PIN, f+AUDIO_BIAS);
+  analogWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
 }
 #endif
 
@@ -167,16 +215,16 @@ inline void audioOutput(const AudioOutput_t f)
 ///////////////////// STM32
 #if IS_STM32()
 #include "AudioConfigSTM32.h"
-inline void audioOutput(const AudioOutput_t f)
+inline void audioOutput(const AudioOutput& f)
 {
 #if (AUDIO_MODE == HIFI)
-  pwmWrite(AUDIO_CHANNEL_1_PIN, (f+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
-  pwmWrite(AUDIO_CHANNEL_1_PIN_HIGH, (f+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
-#elif (STEREO_HACK == true)
-  pwmWrite(AUDIO_CHANNEL_1_PIN, f.l+AUDIO_BIAS);
-  pwmWrite(AUDIO_CHANNEL_2_PIN, f.r+AUDIO_BIAS);
+  pwmWrite(AUDIO_CHANNEL_1_PIN, (f.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
+  pwmWrite(AUDIO_CHANNEL_1_PIN_HIGH, (f.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
 #else
-  pwmWrite(AUDIO_CHANNEL_1_PIN, f+AUDIO_BIAS);
+  pwmWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
+#if (STEREO_HACK == true)
+  pwmWrite(AUDIO_CHANNEL_2_PIN, f.r()+AUDIO_BIAS);
+#endif
 #endif
 }
 #endif
@@ -190,9 +238,9 @@ inline void audioOutput(const AudioOutput_t f)
 inline bool canBufferAudioOutput() {
   return (i2s_available() >= PDM_RESOLUTION);
 }
-inline void audioOutput(const AudioOutput_t f) {
+inline void audioOutput(const AudioOutput& f) {
   for (uint8_t words = 0; words < PDM_RESOLUTION; ++words) {
-    i2s_write_sample(pdmCode32(f));
+    i2s_write_sample(pdmCode32(f.l()));
   }
 }
 #elif (ESP_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
@@ -200,15 +248,11 @@ inline void audioOutput(const AudioOutput_t f) {
 inline bool canBufferAudioOutput() {
   return (i2s_available() >= PDM_RESOLUTION);
 }
-inline void audioOutput(const AudioOutput_t f) {
-#if STEREO_HACK == true
-  i2s_write_lr(f.l, f.r);  // Note: i2s_write expects zero-centered output
-#else
-  i2s_write_lr(f, 0);
-#endif
+inline void audioOutput(const AudioOutput& f) {
+  i2s_write_lr(f.l(), f.r());  // Note: i2s_write expects zero-centered output
 }
 #else
-inline void audioOutput(const AudioOutput_t f) {
+inline void audioOutput(const AudioOutput& f) {
   // optimized version of: Serial1.write(...);
   for (uint8_t i = 0; i < PDM_RESOLUTION*4; ++i) {
     U1F = pdmCode8(f);
@@ -249,30 +293,23 @@ inline bool canBufferAudioOutput() {
   return _esp32_can_buffer_next;
 }
 
-inline void audioOutput(const AudioOutput_t f) {
+inline void audioOutput(const AudioOutput& f) {
+#if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
+  _esp32_prev_sample[0] = (f.l() + AUDIO_BIAS) << 8;
 #if (STEREO_HACK == true)
-#if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
-  // Note: need high 8 bits of 16 bit int, here.
-  _esp32_prev_sample[0] = (f.l + AUDIO_BIAS) << 8;
-  _esp32_prev_sample[1] = (f.r + AUDIO_BIAS) << 8;
-#elif (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
-#error Stereo not currently supported for this output mode
+  _esp32_prev_sample[1] = (f.r() + AUDIO_BIAS) << 8;
 #else
-  // PT8211 takes signed samples
-  _esp32_prev_sample[0] = f.l;
-  _esp32_prev_sample[1] = f.r;
-#endif
-#else
-#if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
   // For simplicity of code, even in mono, we're writing stereo samples
-  _esp32_prev_sample[1] = _esp32_prev_sample[0] = (f + AUDIO_BIAS) << 8;
+  _esp32_prev_sample[1] = _esp32_prev_sample[0];
+#endif
 #elif (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
   for (uint8_t i=0; i<PDM_RESOLUTION; ++i) {
-    _esp32_prev_sample[i] = pdmCode32(f + AUDIO_BIAS);
+    _esp32_prev_sample[i] = pdmCode32(f.l() + AUDIO_BIAS);
   }
 #else
-  _esp32_prev_sample[1] = _esp32_prev_sample[0] = f;
-#endif
+  // PT8211 takes signed samples
+  _esp32_prev_sample[0] = f.l();
+  _esp32_prev_sample[1] = f.r();
 #endif
   _esp32_can_buffer_next = esp32_tryWriteSample();
 }
@@ -284,13 +321,11 @@ inline void audioOutput(const AudioOutput_t f) {
 ///////////////////// AVR STANDARD
 #if IS_AVR() && (AUDIO_MODE == STANDARD_PLUS)
 #include "AudioConfigStandardPlus.h"
-inline void audioOutput(const AudioOutput_t f)
+inline void audioOutput(const AudioOutput& f)
 {
+  AUDIO_CHANNEL_1_OUTPUT_REGISTER = f.l()+AUDIO_BIAS;
 #if (STEREO_HACK == true)
-  AUDIO_CHANNEL_1_OUTPUT_REGISTER = f.l+AUDIO_BIAS;
-  AUDIO_CHANNEL_2_OUTPUT_REGISTER = f.r+AUDIO_BIAS;
-#else
-  AUDIO_CHANNEL_1_OUTPUT_REGISTER = f+AUDIO_BIAS;
+  AUDIO_CHANNEL_2_OUTPUT_REGISTER = f.r()+AUDIO_BIAS;
 #endif
 }
 
@@ -299,7 +334,7 @@ inline void audioOutput(const AudioOutput_t f)
 ///////////////////// AVR HIFI
 #elif IS_AVR() && (AUDIO_MODE == HIFI)
 #include "AudioConfigHiSpeed14bitPwm.h"
-inline void audioOutput(const AudioOutput_t f)
+inline void audioOutput(const AudioOutput& f)
 {
   // read about dual pwm at
   // http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
@@ -324,14 +359,14 @@ inline void audioOutput(const AudioOutput_t f)
   either the OCR1x buffer or OCR1x Compare Register in
   the same system clock cycle.
   */
-  AUDIO_CHANNEL_1_highByte_REGISTER = (f.l+AUDIO_BIAS) >> AUDIO_BITS_PER_REGISTER;
-  AUDIO_CHANNEL_1_lowByte_REGISTER = (f.l+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_REGISTER) - 1);
+  AUDIO_CHANNEL_1_highByte_REGISTER = (f.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_REGISTER;
+  AUDIO_CHANNEL_1_lowByte_REGISTER = (f.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_REGISTER) - 1);
 }
 #endif
 
 
 #else
-#warning "Mozzi is configured to use an external void 'audioOutput(const AudioOutput_t f)' function. Please define one in your sketch"
+#warning "Mozzi is configured to use an external void 'audioOutput(const AudioOutput f)' function. Please define one in your sketch"
 #endif
 
 #endif

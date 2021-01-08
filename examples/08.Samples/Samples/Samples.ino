@@ -79,15 +79,12 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   int asig= (int)
     ((long) aBamboo0.next()*gains.gain0 +
       aBamboo1.next()*gains.gain1 +
       aBamboo2.next()*gains.gain2)>>4;
-  //clip to keep audio loud but still in range
-  if (asig > 243) asig = 243;
-  if (asig < -244) asig = -244;
-  return asig;
+  return AudioOutput::from9Bit(asig);
 }
 
 

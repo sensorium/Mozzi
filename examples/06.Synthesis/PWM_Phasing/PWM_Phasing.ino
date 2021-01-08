@@ -40,10 +40,10 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   char asig1 = (char)(aPhasor1.next()>>24);
   char asig2 = (char)(aPhasor2.next()>>24);
-  return ((int)asig1-asig2)/2;
+  return AudioOutput::fromNBit(9, ((int)asig1-asig2));
 }
 
 

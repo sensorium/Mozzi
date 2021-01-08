@@ -136,9 +136,9 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   Q15n16 modulation = deviation * aModulator.next() >> 8;
-  return (int)aCarrier.phMod(modulation)<<6; // aCarrier is still only an 8 bit wave so shift up to 14 bits
+  return AudioOutput::from8Bit(aCarrier.phMod(modulation)); // Internally still only 8 bits, will be shifted up to 14 bits in HIFI mode
 }
 
 

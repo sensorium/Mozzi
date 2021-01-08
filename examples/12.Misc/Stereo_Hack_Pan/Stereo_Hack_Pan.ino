@@ -56,6 +56,7 @@ void updateAudio() {
   int asig = aNoise.next();
   audio_out_1 = (asig * ampA) >> 8;
   audio_out_2 = (asig * ampB) >> 8;
+  // return AudioOutput::stereoFrom16Bit(asig*ampA, asig*ampB);
 }
 
 

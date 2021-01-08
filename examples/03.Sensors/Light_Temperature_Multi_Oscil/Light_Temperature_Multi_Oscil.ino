@@ -161,7 +161,7 @@ void updateControl(){
 
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   long asig = (long)
     aCos0.next()*v0 +
       aCos1.next()*v1 +
@@ -171,8 +171,7 @@ int updateAudio(){
       aCos5.next()*v5 +
       aCos6.next()*v6 +
       aCos7.next()*v7;
-  asig >>= 9; // shift back to audio output range
-  return (int) asig;
+  return AudioOutput::fromNBit(17, asig);
 }
 
 

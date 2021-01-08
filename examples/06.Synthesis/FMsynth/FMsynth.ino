@@ -109,9 +109,9 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   Q15n16 modulation = deviation * aModulator.next() >> 8;
-  return (int)aCarrier.phMod(modulation);
+  return AudioOutput::from8Bit(aCarrier.phMod(modulation));
 }
 
 

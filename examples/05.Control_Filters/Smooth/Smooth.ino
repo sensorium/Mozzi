@@ -74,8 +74,8 @@ void updateControl(){
 }
 
 
-int updateAudio(){
-  return (aSmoothGain.next(target_gain) * aSin.next()) >> 8; // shift back to char precision after multiply
+AudioOutput_t updateAudio(){
+  return AudioOutput::from16Bit(aSmoothGain.next(target_gain) * aSin.next());
 }
 
 

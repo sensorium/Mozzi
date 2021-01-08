@@ -45,8 +45,8 @@ void updateControl(){
 }
 
 
-int updateAudio(){
-  return aOscil.next();
+AudioOutput_t updateAudio(){
+  return AudioOutput::from8Bit(aOscil.next());
 }
 
 

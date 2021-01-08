@@ -54,8 +54,8 @@ void updateControl(){
 }
 
 
-int updateAudio(){
-  return (gain*aNoise.next())>>8;
+AudioOutput_t updateAudio(){
+  return AudioOutput::from16Bit(gain*aNoise.next());
 }
 
 

@@ -69,8 +69,8 @@ void updateControl(){
 }
 
 
-int updateAudio(){
-  return aDel.next((gain*aNoise.next())>>8);
+AudioOutput_t updateAudio(){
+  return AudioOutput::from8Bit(aDel.next((gain*aNoise.next())>>8));
 }
 
 

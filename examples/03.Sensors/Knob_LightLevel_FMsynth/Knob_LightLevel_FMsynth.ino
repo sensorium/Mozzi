@@ -97,9 +97,9 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   long modulation = fm_intensity * aModulator.next();
-  return aCarrier.phMod(modulation); // phMod does the FM
+  return AudioOutput::from8Bit(aCarrier.phMod(modulation)); // phMod does the FM
 }
 
 

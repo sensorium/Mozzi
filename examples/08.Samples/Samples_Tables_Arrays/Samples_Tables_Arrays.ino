@@ -111,14 +111,14 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   long asig=0;
   for (byte i=0;i<NUM_PLAYERS;i++){
     asig += (int) (aSample[i]).next() * gain[i];
   }
   asig >>= 6; // shift into usable range
   //clip any stray peaks to max output range
-  return (int)constrain((int)asig,-244,243);
+  return AudioOutput::from9Bit((int)constrain((int)asig,-244,243));
 }
 
 

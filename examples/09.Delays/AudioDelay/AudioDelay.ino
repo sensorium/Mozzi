@@ -45,7 +45,7 @@ void updateControl(){
   del_samps = 128+kFreq.next();
 }
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   char asig = aDel.next(aTriangle.next(), del_samps);
-  return (int) asig;
+  return AudioOutput::from8Bit(asig);
 }

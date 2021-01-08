@@ -97,8 +97,8 @@ void updateControl() {
 }
 
 
-int updateAudio() {
-  return (((long)aSample0.next() * alevel0) + ((long)aSample1.next() * alevel1)) >> 2;
+AudioOutput_t updateAudio() {
+  return AudioOutput::fromNBit(17, ((long)aSample0.next() * alevel0) + ((long)aSample1.next() * alevel1));
 }
 
 

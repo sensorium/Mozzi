@@ -98,9 +98,9 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   envelope.update();
-  return (int) (envelope.next() * aOscil.next())>>8;
+  return AudioOutput::from16Bit((int) (envelope.next() * aOscil.next()));
 }
 
 

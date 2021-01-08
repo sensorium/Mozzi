@@ -99,8 +99,8 @@ void updateControl(){
 }
 
 
-int updateAudio(){
-  return (int)aSample.next();
+AudioOutput_t updateAudio(){
+  return AudioOutput::from8Bit(aSample.next());
 }
 
 

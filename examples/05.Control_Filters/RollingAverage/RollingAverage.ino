@@ -55,8 +55,8 @@ void updateControl(){
 }
 
 
-int updateAudio(){
-  return 3*(aSin0.next()+aSin1.next())>>2;
+AudioOutput_t updateAudio(){
+  return AudioOutput::fromNBit(10, 3*(aSin0.next()+aSin1.next()));
 }
 
 

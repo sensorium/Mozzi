@@ -152,7 +152,7 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
 
   int asig =
     aCos1.next() + aCos1b.next() +
@@ -162,5 +162,5 @@ int updateAudio(){
     aCos5.next() + aCos5b.next() +
     aCos6.next() + aCos6b.next();
 
-  return asig >> 3;
+  return AudioOutput::fromNBit(11, asig);
 }

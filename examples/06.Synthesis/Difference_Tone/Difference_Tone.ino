@@ -59,10 +59,11 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   int asig = (int)((((uint32_t)aSin1.next()+ aSin2.next())*(200u+aGain.next()))>>3);
+  // Designed specifically for AVR STANDARD_PLUS audio output, where _almost_ 9 biits are supported
   int clipped = constrain(asig,-244,243);
-  return clipped;
+  return AudioOutput::from9Bit(clipped);
 }
 
 

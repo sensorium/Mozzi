@@ -129,9 +129,9 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   long modulation = aSmoothIntensity.next(fm_intensity) * aModulator.next();
-  return aCarrier.phMod(modulation);
+  return AudioOutput::from8Bit(aCarrier.phMod(modulation));
 }
 
 

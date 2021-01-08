@@ -45,9 +45,9 @@ void updateControl() {
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   int asig = aCarrier.phMod((int)aModulator.next()*(260u+aModWidth.next()));
-  return (asig*(byte)aEnvelop.next())>>8;
+  return AudioOutput::from16Bit(asig*(byte)aEnvelop.next());
 }
 
 

@@ -132,8 +132,8 @@ void updateControl(){
 }
 
 
-int updateAudio(){
-  return voice.next();
+AudioOutput_t updateAudio(){
+  return AudioOutput::from8Bit(voice.next());
 }
 
 

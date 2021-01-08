@@ -64,10 +64,10 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   int input = aNoise.next()>>1; // shift down (ie. fast /) to avoid distortion with extreme resonant filter setting
   int output = svf.next(input);
-  return output<<4; // shift up for HIFI resolution
+  return AudioOutput::fromNBit(10, output);
 }
 
 

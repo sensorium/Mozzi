@@ -48,7 +48,7 @@ void updateControl(){
   lpf.setCutoffFreqAndResonance(cutoff_freq, resonance);
 }
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   char asig = lpf.next(aCrunchySound.next());
-  return (int) asig;
+  return AudioOutput::from8Bit(asig);
 }

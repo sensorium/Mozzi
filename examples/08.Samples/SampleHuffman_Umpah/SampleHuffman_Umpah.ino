@@ -57,8 +57,8 @@ void updateControl(){
 }
 
 
-int updateAudio(){
-  return umpah.next();
+AudioOutput_t updateAudio(){
+  return AudioOutput::from8Bit(umpah.next());
 }
 
 

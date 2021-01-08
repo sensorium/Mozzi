@@ -74,8 +74,8 @@ void updateControl(){
 }
 
 
-int updateAudio(){
-  return (int) (envelope.next() * aSin.next())>>8;
+AudioOutput_t updateAudio(){
+  return AudioOutput::from16Bit(envelope.next() * aSin.next());
 }
 
 

@@ -44,12 +44,12 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   // subtracting 512 moves the unsigned audio data into 0-centred,
   // signed range required by all Mozzi units
   int asig = getAudioInput()-512;
   asig = lpf.next(asig>>1);
-  return asig;
+  return AudioOutput::from8Bit(asig);
 }
 
 

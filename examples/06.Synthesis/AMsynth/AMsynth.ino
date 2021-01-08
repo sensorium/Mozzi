@@ -100,10 +100,9 @@ void updateControl(){
 
 }
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   long mod = (128u+ aModulator.next()) * ((byte)128+ aModDepth.next());
-  int out = (mod * aCarrier.next())>>16;
-  return out;
+  return AudioOutput::fromNBit(24, mod * aCarrier.next());
 }
 
 

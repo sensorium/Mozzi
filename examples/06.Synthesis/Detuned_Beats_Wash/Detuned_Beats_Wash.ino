@@ -10,6 +10,12 @@
     format numbers, mtof() for converting midi note
     values to frequency, and xorshift96() for random numbers.
 
+    This sketch is pushing the limits of computing power on the
+    8-biit AVR boards. At the time of this writing, you will have
+    to manually alter your platform.txt file to use optimization
+    for speed rather than size on Arduino Uno and similar.
+    (Alternatively, remove one of the oscillators)
+
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
     DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.com/Mozzi/
@@ -135,7 +141,7 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
 
   int asig =
     aCos1.next() + aCos1b.next() +
@@ -146,5 +152,5 @@ int updateAudio(){
     aCos6.next() + aCos6b.next();// +
     // aCos7.next() + aCos7b.next();
 
-  return asig >> 3;
+  return AudioOutput::fromNBit(11, asig);
 }

@@ -41,7 +41,7 @@ void updateControl()
 }
 
 
-int updateAudio()
+AudioOutput_t updateAudio()
 {
   static int filtered;
 
@@ -49,7 +49,7 @@ int updateAudio()
   filtered = filtered - (filtered>>FILTER_SHIFT) + whitenoise;
 
   int asig = filtered>>3; // shift to 8 bit range (trial and error)
-  return ((int)asig * aSin.next())>>8;
+  return AudioOutput::from16Bit((int)asig * aSin.next());
 }
 
 

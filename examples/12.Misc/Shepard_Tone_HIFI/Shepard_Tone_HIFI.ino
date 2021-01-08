@@ -122,11 +122,10 @@ void updateControl() {
   v1 *= v1;
 }
 
-int updateAudio() {
+AudioOutput_t updateAudio() {
   long asig = ((v0 * aCos0.next()) >> 8) +
               ((v1 * aCos1.next()) >> 8);
-  asig >>= 1;
-  return (int) asig;
+  return AudioOutput::fromNBit(9, asig);
 }
 
 

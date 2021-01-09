@@ -84,15 +84,13 @@
  *  useful API an top of that. For more detail @see MonoOutput . */
 struct StereoOutput {
   /** Construct an audio frame from raw values (zero-centered) */
-  StereoOutput(AudioOutputStorage_t l=0, AudioOutputStorage_t r=0) : _l(l), _r(r) {};
-#if (STEREO_HACK == true)
-  inline void generate() const { audio_out_1 = _l; audio_out_2 = _r; };
-#else
+  StereoOutput(AudioOutputStorage_t l, AudioOutputStorage_t r) : _l(l), _r(r) {};
+  /** Default contstructor */
+  StereoOutput() : _l(0), _r(0) {};
+#if (STEREO_HACK != true)
   /** Conversion to int operator: If used in a mono config, returns only the left channel (and gives a compile time warning). */
   inline operator AudioOutput_t() const __attribute__((deprecated("Sketch generates stereo output, but Mozzi is configured for mono. Check mozzi_config.h."))) { return _l; };
 #endif
-  AudioOutputStorage_t _l;
-  AudioOutputStorage_t _r;
   AudioOutputStorage_t l() const { return _l; };
   AudioOutputStorage_t r() const { return _r; };
   /** @see MonoOutput::clip(). Clips both channels. */
@@ -110,6 +108,9 @@ struct StereoOutput {
   static inline StereoOutput fromAlmostNBit(uint8_t bits, int16_t l, int16_t r) { return StereoOutput(SCALE_AUDIO_NEAR(l, bits), SCALE_AUDIO_NEAR(r, bits)); }
   /** @see MonoOutput::fromAlmostNBit(), stereo variant, 32 bit overload */
   static inline StereoOutput fromAlmostNBit(uint8_t bits, int32_t l, int32_t r) { return StereoOutput(SCALE_AUDIO_NEAR(l, bits), SCALE_AUDIO_NEAR(r, bits)); }
+private:
+  AudioOutputStorage_t _l;
+  AudioOutputStorage_t _r;
 };
 
 /** This struct encapsulates one frame of mono audio output. Internally, it really just boils down to a single int value, but the struct provides
@@ -130,13 +131,12 @@ struct MonoOutput {
   /** Construct an audio frame from raw values (zero-centered) */
   MonoOutput(AudioOutputStorage_t l=0) : _l(l) {};
 #if (STEREO_HACK == true)
-  /** Conversion to void operator: If used in a stereo config, returns identical channels (and gives a compile time warning). */
+  /** Conversion to stereo operator: If used in a stereo config, returns identical channels (and gives a compile time warning). */
   inline operator AudioOutput_t() const __attribute__((deprecated("Sketch generates mono output, but Mozzi is configured for stereo. Check mozzi_config.h."))) { return StereoOutput(_l, _l); };
 #else
   /** Conversion to int operator. */
   inline operator AudioOutput_t() const { return _l; };
 #endif
-  AudioOutputStorage_t _l;
   AudioOutputStorage_t l() const { return _l; };
   AudioOutputStorage_t r() const { return _l; };
   /** Clip frame to supported range. This is useful when at times, but only rarely, the signal may exceed the usual range. Using this function does not avoid
@@ -165,6 +165,8 @@ struct MonoOutput {
   static inline MonoOutput fromAlmostNBit(uint8_t bits, int16_t l) { return MonoOutput(SCALE_AUDIO_NEAR(l, bits)); }
   /** 32bit overload. See above. */
   static inline MonoOutput fromAlmostNBit(uint8_t bits, int32_t l) { return MonoOutput(SCALE_AUDIO_NEAR(l, bits)); }
+private:
+  AudioOutputStorage_t _l;
 };
 
 

@@ -100,7 +100,7 @@ void updateControl(){
 
 
 AudioOutput_t updateAudio(){
-  return AudioOutput::from8Bit(aSample.next());
+  return MonoOutput::from8Bit(aSample.next());
 }
 
 

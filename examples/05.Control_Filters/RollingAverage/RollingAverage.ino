@@ -56,7 +56,7 @@ void updateControl(){
 
 
 AudioOutput_t updateAudio(){
-  return AudioOutput::fromNBit(10, 3*(aSin0.next()+aSin1.next()));
+  return MonoOutput::fromAlmostNBit(10, 3*(aSin0.next()+aSin1.next()));
 }
 
 

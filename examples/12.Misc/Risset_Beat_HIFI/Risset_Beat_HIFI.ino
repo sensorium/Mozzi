@@ -98,7 +98,7 @@ void updateControl() {
 
 
 AudioOutput_t updateAudio() {
-  return AudioOutput::fromNBit(17, ((long)aSample0.next() * alevel0) + ((long)aSample1.next() * alevel1));
+  return MonoOutput::fromNBit(17, ((long)aSample0.next() * alevel0) + ((long)aSample1.next() * alevel1));
 }
 
 

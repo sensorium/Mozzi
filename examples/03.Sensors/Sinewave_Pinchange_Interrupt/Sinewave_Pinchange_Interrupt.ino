@@ -71,7 +71,7 @@ void changeFreq()
 
 
 AudioOutput_t updateAudio(){
-  return AudioOutput::from8Bit(aSin.next()); // return an int signal centred around 0
+  return MonoOutput::from8Bit(aSin.next()); // return an int signal centred around 0
 }
 
 

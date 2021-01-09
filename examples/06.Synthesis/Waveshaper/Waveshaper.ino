@@ -108,7 +108,7 @@ AudioOutput_t updateAudio(){
   char awaveshaped2 = aCheby6th.next(asig2);
   // use a waveshaping table to squeeze 2 summed 8 bit signals into the range -244 to 243
   int awaveshaped3 = aCompress.next(256u + awaveshaped1 + awaveshaped2);
-  return AudioOutput::from8Bit(awaveshaped3);
+  return MonoOutput::fromAlmostNBit(9, awaveshaped3);
 }
 
 

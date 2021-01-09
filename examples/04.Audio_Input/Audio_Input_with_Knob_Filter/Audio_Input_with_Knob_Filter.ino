@@ -49,7 +49,7 @@ AudioOutput_t updateAudio(){
   // signed range required by all Mozzi units
   int asig = getAudioInput()-512;
   asig = lpf.next(asig>>1);
-  return AudioOutput::from8Bit(asig);
+  return MonoOutput::fromAlmostNBit(9, asig);
 }
 
 

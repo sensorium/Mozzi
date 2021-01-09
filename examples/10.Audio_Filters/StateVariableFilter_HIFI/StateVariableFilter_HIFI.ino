@@ -67,7 +67,7 @@ void updateControl(){
 AudioOutput_t updateAudio(){
   int input = aNoise.next()>>1; // shift down (ie. fast /) to avoid distortion with extreme resonant filter setting
   int output = svf.next(input);
-  return AudioOutput::fromNBit(10, output);
+  return MonoOutput::fromNBit(10, output);
 }
 
 

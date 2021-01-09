@@ -50,5 +50,5 @@ void updateControl(){
 
 AudioOutput_t updateAudio(){
   char asig = lpf.next(aCrunchySound.next());
-  return AudioOutput::from8Bit(asig);
+  return MonoOutput::from8Bit(asig);
 }

@@ -66,7 +66,7 @@ AudioOutput_t updateAudio(){
   // here's the reverb
   int arev = reverb.next(synth);
   // add the dry and wet signals
-  return AudioOutput::fromNBit(9, synth + (arev>>3));
+  return MonoOutput::fromAlmostNBit(9, synth + (arev>>3));
 }
 
 

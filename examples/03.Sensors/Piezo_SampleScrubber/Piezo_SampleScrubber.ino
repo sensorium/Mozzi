@@ -71,7 +71,7 @@ void updateControl(){
 
 
 AudioOutput_t updateAudio(){
-  return AudioOutput::from8Bit(aSample.atIndex(Q16n16_to_Q16n0(scrub.next())));
+  return MonoOutput::from8Bit(aSample.atIndex(Q16n16_to_Q16n0(scrub.next())));
 }
 
 

@@ -55,7 +55,7 @@ void updateControl(){
 
 
 AudioOutput_t updateAudio(){
-  return AudioOutput::from16Bit(gain*aNoise.next());
+  return MonoOutput::from16Bit(gain*aNoise.next());
 }
 
 

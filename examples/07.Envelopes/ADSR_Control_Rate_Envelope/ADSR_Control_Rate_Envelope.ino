@@ -98,7 +98,7 @@ void updateControl(){
 
 
 AudioOutput_t updateAudio(){
-  return AudioOutput::from16Bit((int) (gain * aOscil.next()));
+  return MonoOutput::from16Bit((int) (gain * aOscil.next()));
 }
 
 

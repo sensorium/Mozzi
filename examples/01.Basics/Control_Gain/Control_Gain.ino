@@ -41,7 +41,7 @@ void updateControl(){
 
 
 AudioOutput_t updateAudio(){
-  return AudioOutput::from16Bit(aSin.next() * gain)); // 8 bits waveform * 8 bits gain makes 16 bits
+  return MonoOutput::from16Bit(aSin.next() * gain)); // 8 bits waveform * 8 bits gain makes 16 bits
 }
 
 

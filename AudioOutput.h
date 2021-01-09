@@ -40,7 +40,7 @@
 
 #include "MozziGuts.h"
 
-#if IS_AVR() && (AUDIO_MODE == STANDARD_PLUS)
+#if IS_AVR() && ((AUDIO_MODE == STANDARD_PLUS) || (AUDIO_MODE == STANDARD))
 #define SCALE_AUDIO(x,bits) (bits > 8 ? (x) >> (bits - 8) : (x) << (8 - bits))
 #define SCALE_AUDIO_NEAR(x,bits) (bits > 9 ? (x) >> (bits - 9) : (x) << (9 - bits))
 #define CLIP_AUDIO(x) constrain((x), -244,243)
@@ -149,15 +149,15 @@ struct MonoOutput {
   static inline MonoOutput fromNBit(uint8_t bits, int16_t l) { return MonoOutput(SCALE_AUDIO(l, bits)); }
   /** 32bit overload. See above. */
   static inline MonoOutput fromNBit(uint8_t bits, int32_t l) { return MonoOutput(SCALE_AUDIO(l, bits)); }
-  /** Construct an audio frame from a zero-centered value known to be in the 8 bit range. On AVR, STANDARD_PLUS mode, this is effectively the same as calling the constructor,
-   *  directly (no scaling gets applied). On platforms/configs using more bits, an appropriate left-shift will be performed. */
+  /** Construct an audio frame from a zero-centered value known to be in the 8 bit range. On AVR, STANDADR or STANDARD_PLUS mode, this is effectively the same as calling the
+   * constructor, directly (no scaling gets applied). On platforms/configs using more bits, an appropriate left-shift will be performed. */
   static inline MonoOutput from8Bit(int16_t l) { return fromNBit(8, l); }
   /** Construct an audio frame a zero-centered value known to be in the 16 bit range. This is jsut a shortcut for fromNBit(16, ...) provided for convenience. */
   static inline MonoOutput from16Bit(int16_t l) { return fromNBit(16, l); }
   /** Construct an audio frame a zero-centered value known to be above at almost but not quite the N bit range, e.g. at N=8 bits and a litte. On most platforms, this is
    *  exactly the same as fromNBit(), shifting up or down to the platforms' available resolution.
    *
-   *  However, on AVR, STANDARD_PLUS (where about 8.5 bits are usable), the value will be shifted to the (almost) 9 bit range, instead of to the 8 bit range. allowing to
+   *  However, on AVR, STANDARD(_PLUS) (where about 8.5 bits are usable), the value will be shifted to the (almost) 9 bit range, instead of to the 8 bit range. allowing to
    *  make use of that extra half bit of resolution. In many cases it is useful to follow up this call with clip().
    *
    *  @example fromAlmostNBit(10, oscilA.next() + oscilB.next() + oscilC.next());

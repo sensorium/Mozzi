@@ -133,7 +133,7 @@ void updateControl(){
 
 
 AudioOutput_t updateAudio(){
-  return AudioOutput::from8Bit(voice.next());
+  return MonoOutput::from8Bit(voice.next());
 }
 
 

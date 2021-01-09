@@ -49,7 +49,7 @@ AudioOutput_t updateAudio()
   filtered = filtered - (filtered>>FILTER_SHIFT) + whitenoise;
 
   int asig = filtered>>3; // shift to 8 bit range (trial and error)
-  return AudioOutput::from16Bit((int)asig * aSin.next());
+  return MonoOutput::from16Bit((int)asig * aSin.next());
 }
 
 

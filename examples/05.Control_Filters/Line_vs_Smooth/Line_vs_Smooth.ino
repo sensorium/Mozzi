@@ -83,7 +83,7 @@ AudioOutput_t updateAudio(){
   int smoothedFreq = aSmooth.next(freq1); // get the next filtered frequency
   aSin1.setFreq(smoothedFreq);
 
-  return AudioOutput::fromNBit(9, (int) (aSin0.next() + aSin1.next()));
+  return MonoOutput::fromNBit(9, (int) (aSin0.next() + aSin1.next()));
 }
 
 

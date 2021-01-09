@@ -89,7 +89,7 @@ AudioOutput_t updateAudio(){
   char asig = aTriangle.next(); // get this so it can be used twice without calling next() again
   //return asig/8 + aDel.next(asig, del_samps); // mix some straight signal with the delayed signal
   //return aDel.next(aTriangle.next(), del_samps); // instead of the previous 2 lines for only the delayed signal
-  return AudioOutput::fromNBit(13, asig + (aDel.next(asig, del_samps_fractional)<<4)); // mix some straight signal with the delayed signal
+  return MonoOutput::fromAlmostNBit(13, asig + (aDel.next(asig, del_samps_fractional)<<4)); // mix some straight signal with the delayed signal
 }
 
 

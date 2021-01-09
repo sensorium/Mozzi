@@ -109,7 +109,7 @@ void updateControl(){
 
 
 AudioOutput_t updateAudio(){
-  return AudioOutput::from16Bit((((int)aSin.next()*(128+aTremelo.next()))>>8)*aEnvelope.next());
+  return MonoOutput::from16Bit((((int)aSin.next()*(128+aTremelo.next()))>>8)*aEnvelope.next());
 }
 
 

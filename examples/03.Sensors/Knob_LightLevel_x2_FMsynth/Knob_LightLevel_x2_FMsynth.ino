@@ -131,7 +131,7 @@ void updateControl(){
 
 AudioOutput_t updateAudio(){
   long modulation = aSmoothIntensity.next(fm_intensity) * aModulator.next();
-  return AudioOutput::from8Bit(aCarrier.phMod(modulation));
+  return MonoOutput::from8Bit(aCarrier.phMod(modulation));
 }
 
 

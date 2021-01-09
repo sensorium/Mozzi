@@ -53,7 +53,7 @@ void updateControl(){
 AudioOutput_t updateAudio(){
   int asig = getAudioInput(); // range 0-1023
   asig = asig - 512; // now range is -512 to 511
-  return AudioOutput::fromNBit(9, asig);
+  return MonoOutput::fromAlmostNBit(9, asig).clip();
 }
 
 

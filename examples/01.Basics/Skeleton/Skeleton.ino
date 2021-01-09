@@ -14,13 +14,15 @@ AudioOutput_t updateAudio() {
   // However, for best portability of your sketch to different boards and configurations,
   // pick one of the variants below, depending on the "natural" range of the audio values
   // you generate:
-  return AudioOutput::from8Bit(0);  // if your signal is in 8 bit range
+  return MonoOutput::from8Bit(0);  // if your signal is in 8 bit range
   /* OR */
-  return AudioOutput::from9Bit(0);  // if your signal is between -244 and 243 (_almost_ 9 bits is a special case on AVR boards)
+  return MonoOutput::fromAlmostNBit(9, 0);  // if your signal is between -244 and 243 (_almost_ 9 bits is a special case on AVR boards)
   /* OR */
-  return AudioOutput::from16Bit(0);  // if your signal is in 16 bit range, e.g. the product of two 8 bit numbers
+  return MonoOutput::fromAlmostNBit(9, 0).clip();  // To clip (instead of overflow), should a few stray values exceed the allowable range
   /* OR */
-  return AudioOutput::fromNBit(21, 0);  // if your signal happens to be in 21 bit range
+  return MonoOutput::from16Bit(0);  // if your signal is in 16 bit range, e.g. the product of two 8 bit numbers
+  /* OR */
+  return MonoOutput::fromNBit(21, 0);  // if your signal happens to be in 21 bit range
   // In case you are wondering:
   // In older sketches, you will find "int updateAudio()", returning a plain int value.
   // That will still work, but is not recommended.

@@ -116,9 +116,8 @@ AudioOutput_t updateAudio(){
   for (byte i=0;i<NUM_PLAYERS;i++){
     asig += (int) (aSample[i]).next() * gain[i];
   }
-  asig >>= 6; // shift into usable range
   //clip any stray peaks to max output range
-  return AudioOutput::from9Bit((int)constrain((int)asig,-244,243));
+  return MonoOutput::fromAlmostNBit(15, asig).clip();
 }
 
 

@@ -172,7 +172,7 @@ void updateControl(){
 
 
 AudioOutput_t updateAudio(){
-  return AudioOutput::fromNBit(17,
+  return MonoOutput::fromNBit(17,
     ((long)envelope0.next() * aOscil0.next()) +
     ((int)envelope1.next() * aOscil1.next())
   );

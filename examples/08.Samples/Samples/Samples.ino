@@ -84,7 +84,8 @@ AudioOutput_t updateAudio(){
     ((long) aBamboo0.next()*gains.gain0 +
       aBamboo1.next()*gains.gain1 +
       aBamboo2.next()*gains.gain2)>>4;
-  return AudioOutput::from9Bit(asig);
+  // clip to keep sample loud but still in range
+  return MonoOutput::fromAlmostNBit(9, asig).clip();
 }
 
 

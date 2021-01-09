@@ -59,9 +59,9 @@ void updateControl(){}
 
 AudioOutput_t updateAudio(){
   // this would make more sense with a higher resolution signal
-  // AudioOutput::from8Bit() (and it friends from16Bit() and fromNBit()) take care of scaling the output signal
+  // MonoOutput::from8Bit() (and it friends from16Bit() and fromNBit()) take care of scaling the output signal
   // as appropiate for the platform (to 14 bits on AVR with AUDIO_MODE HIFI).
-  return AudioOutput::from8Bit(aSin.next());
+  return MonoOutput::from8Bit(aSin.next());
 }
 
 

@@ -103,7 +103,7 @@ void updateControl(){
 
 AudioOutput_t updateAudio(){
   envelope.update();
-  return AudioOutput::from16Bit((int) (envelope.next() * aOscil.next()));
+  return MonoOutput::from16Bit((int) (envelope.next() * aOscil.next()));
 }
 
 

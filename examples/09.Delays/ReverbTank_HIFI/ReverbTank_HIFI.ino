@@ -65,7 +65,7 @@ AudioOutput_t updateAudio(){
   // here's the reverb
   int arev = reverb.next(synth>>8); // >>8 avoids clipping
   // experiment to adjust levels of the dry and wet signals
-  return AudioOutput::fromNBit(11, (synth+(arev<<4)));
+  return MonoOutput::fromNBit(12, (synth+(arev<<4)));
 }
 
 

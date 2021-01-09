@@ -108,7 +108,7 @@ AudioOutput_t updateAudio(){
     asig = aSin5.next();
     break;
   }
-  return AudioOutput::from8Bit(asig);
+  return MonoOutput::from8Bit(asig);
 }
 
 

@@ -65,11 +65,11 @@ DAC_MCP49xx dac(DAC_MCP49xx::MCP4921, SS_PIN);
 
 
 
-void audioOutput(const AudioOutput_t f)
+void audioOutput(const AudioOutput_t& f)
 {
   // signal is passed as 16 bit, zero-centered, internally. This DAC expects 12 bits unsigned,
   // so shift back four bits, and add a bias of 2^(12-1)=2048
-  uint16_t out = (f >> 4) + 2048;
+  uint16_t out = (f.l() >> 4) + 2048;
   dac.output(out);
 }
 
@@ -135,7 +135,7 @@ void updateControl() {
 AudioOutput_t updateAudio() {
   Q15n16 modulation = deviation * aModulator.next() >> 8;
 
-  return AudioOutput::from8Bit(aCarrier.phMod(modulation));
+  return MonoOutput::from8Bit(aCarrier.phMod(modulation));
   // this example does not really use the full capability of the 12bits of the DAC
 }
 

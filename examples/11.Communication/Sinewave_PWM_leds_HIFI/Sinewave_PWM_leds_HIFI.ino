@@ -115,7 +115,7 @@ AudioOutput_t updateAudio(){
   updateRGB(red_brightness, green_brightness, blue_brightness);
   // this would make more sense with a higher resolution signal
   // but still benefits from using HIFI to avoid the 16kHz pwm noise
-  return AudioOutput::from8Bit(aSin.next());
+  return MonoOutput::from8Bit(aSin.next());
 }
 
 

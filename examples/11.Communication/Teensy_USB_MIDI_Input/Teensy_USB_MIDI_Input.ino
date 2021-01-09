@@ -74,7 +74,7 @@ void updateControl(){
 
 
 AudioOutput_t updateAudio(){
-  return AudioOutput::from16Bit(envelope.next() * aSin.next());
+  return MonoOutput::from16Bit(envelope.next() * aSin.next());
 }
 
 

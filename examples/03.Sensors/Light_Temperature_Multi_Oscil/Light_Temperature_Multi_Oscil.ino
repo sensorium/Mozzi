@@ -171,7 +171,7 @@ AudioOutput_t updateAudio(){
       aCos5.next()*v5 +
       aCos6.next()*v6 +
       aCos7.next()*v7;
-  return AudioOutput::fromNBit(17, asig);
+  return MonoOutput::fromAlmostNBit(18, asig);
 }
 
 

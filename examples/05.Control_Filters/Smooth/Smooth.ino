@@ -75,7 +75,7 @@ void updateControl(){
 
 
 AudioOutput_t updateAudio(){
-  return AudioOutput::from16Bit(aSmoothGain.next(target_gain) * aSin.next());
+  return MonoOutput::from16Bit(aSmoothGain.next(target_gain) * aSin.next());
 }
 
 

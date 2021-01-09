@@ -43,7 +43,7 @@ void updateControl(){
 AudioOutput_t updateAudio(){
   char asig1 = (char)(aPhasor1.next()>>24);
   char asig2 = (char)(aPhasor2.next()>>24);
-  return AudioOutput::fromNBit(9, ((int)asig1-asig2));
+  return MonoOutput::fromNBit(9, ((int)asig1-asig2));
 }
 
 

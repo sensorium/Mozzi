@@ -54,7 +54,7 @@ void updateControl(){
 
 
 AudioOutput_t updateAudio(){
-  return AudioOutput::from9Bit((((char)lpf1.next(aCrunchySound1.next()))>>1) + (char)lpf2.next(aCrunchySound2.next()));
+  return MonoOutput::fromAlmostNBit(9, (((char)lpf1.next(aCrunchySound1.next()))>>1) + (char)lpf2.next(aCrunchySound2.next());
 }
 
 

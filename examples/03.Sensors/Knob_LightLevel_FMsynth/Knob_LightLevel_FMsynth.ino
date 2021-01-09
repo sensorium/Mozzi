@@ -99,7 +99,7 @@ void updateControl(){
 
 AudioOutput_t updateAudio(){
   long modulation = fm_intensity * aModulator.next();
-  return AudioOutput::from8Bit(aCarrier.phMod(modulation)); // phMod does the FM
+  return MonoOutput::from8Bit(aCarrier.phMod(modulation)); // phMod does the FM
 }
 
 

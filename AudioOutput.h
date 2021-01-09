@@ -54,7 +54,23 @@
  *  If you do not care about keeping old sketches working, you may be able to save some RAM by using int16_t, instead (on boards where int is larger
  *  than 16 bits). */
 #define AudioOutputStorage_t int
+
 struct StereoOutput;
+
+/** This struct encapsulates one frame of mono audio output. Internally, it really just boils down to a single int value, but the struct provides
+ *  useful API an top of that, for the following:
+ *
+ * a) To construct an output frame, you should use one of the from8Bit(), fromNBit(), etc. functions. Given a raw input value, at a known resolution (number of bits), 
+ *    this scales the output efficiently to whatever is needed on the target platform. Using this, your updateAudio() function will be portable across different CPU and
+ *    different output methods, including external DACs.
+ * b) The struct provides some convenience API on top of this. Right now, this is the function clip(), replacing the more verbose, and non-portable constrain(x, -244, 243)
+ *    found in some old sketches.
+ * c) The struct provides accessors l() and r() that are source-compatible with StereoOutput, making it easy to e.g. implement support for an external DAC in both mono
+ *    and stereo.
+ * d) Finally, an automatic conversion operator to int aka AudioOutput_t provides backward compatibility with old Mozzi sketches. Internally, the compiler will actually
+ *    do away with this wholw struct, leaving just the same basic fast integer operations as in older Mozzi sketches. However, now, you don't have to rewrite those for
+ *    different configurations.
+ */
 struct MonoOutput {
   /** Construct an audio frame from raw values (zero-centered) */
   MonoOutput(AudioOutputStorage_t l) : _l(l) {};
@@ -95,6 +111,9 @@ struct MonoOutput {
   /** 32bit overload. See above. */
   static inline MonoOutput fromAlmostNBit(uint8_t bits, int32_t l) { return MonoOutput(SCALE_AUDIO_NEAR(l, bits)); }
 };
+
+/** This struct encapsulates one frame of mono audio output. Internally, it really just boils down to two int values, but the struct provides
+ *  useful API an top of that. For more detail @see MonoOutput . */
 struct StereoOutput {
   /** Construct an audio frame from raw values (zero-centered) */
   StereoOutput(AudioOutputStorage_t l, AudioOutputStorage_t r) : _l(l), _r(r) {};
@@ -137,14 +156,17 @@ struct StereoOutput {
  *  While it may be tempting (and is possible) to use an int, directly, using AudioOutput_t and the functions AudioOutput::from8Bit(),
  *  AudioOutput::fromNBit(), or AudioOutput::fromAlmostNBit() will allow you to write code that will work across different platforms, even
  *  when those use a different output resolution.
+ *
+ *  @note The only place where you should be using AudioOutput_t, directly, is in your updateAudio() function signature. It's really just a
+ *        dummy used to make the "same" function signature work across different configurations (importantly mono/stereo). It's true value
+ *        might be subject to change, and it may even be void. Use either MonoOutput or StereoOutput to represent a piece of audio output.
  */
 #define AudioOutput_t AudioOutputStorage_t
-/** Representation of an single audio output sample/frame. For mono output, this is really just a single zero-centered int,
- *  but for stereo it's a struct containing two ints.
+/** Representation of an single audio output sample/frame. This #define maps to either MonoOutput or StereoOutput, depending on what is configured
+ *  in mozzi_config.h. Since the two are source compatible to a large degree, it often isn't even necessary to test, which it is, in your code. E.g.
+ *  both have functions l() and r(), to return "two" audio channels (which will be the same in case of mono).
  *
- *  While it may be tempting (and is possible) to use an int, directly, using AudioOutput_t and the functions AudioOutput::from8Bit(),
- *  AudioOutput::fromNBit(), or AudioOutput::fromAlmostNBit() will allow you to write code that will work across different platforms, even
- *  when those use a different output resolution.
+ *  You will not usually use or encounter this definition, unless using EXTERNAL_AUDIO_OUTPUT.
  */
 #define AudioOutput MonoOutput
 #endif

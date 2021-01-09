@@ -196,6 +196,9 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #include "AudioConfigHiSpeed14bitPwm.h"
 #endif
 #else // EXTERNAL_AUDIO_OUTPUT==true
+#if !defined(EXTERNAL_AUDIO_BITS)
+#define EXTERNAL_AUDIO_BITS 16
+#endif
 #define AUDIO_BITS 16
 #endif
 

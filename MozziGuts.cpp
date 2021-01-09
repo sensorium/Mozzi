@@ -57,6 +57,10 @@ STM32ADC adc(ADC1);
 uint8_t stm32_current_adc_pin;
 #endif
 
+#if (STEREO_HACK == true)
+int audio_out_1, audio_out_2;
+#endif
+
 /*
 ATmega328 technical manual, Section 12.7.4:
 The dual-slope operation [of phase correct pwm] has lower maximum operation
@@ -330,7 +334,7 @@ void audioHook() // 2us on AVR excluding updateAudio()
     advanceControlLoop();
 #if (STEREO_HACK == true)
     updateAudio(); // in hacked version, this returns void
-    bufferAudioOutput(AudioOutput_t(audio_out_1, audio_out_2));
+    bufferAudioOutput(StereoOutput(audio_out_1, audio_out_2));
 #else
     bufferAudioOutput(updateAudio());
 #endif

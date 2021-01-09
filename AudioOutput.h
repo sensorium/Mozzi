@@ -55,7 +55,62 @@
  *  than 16 bits). */
 #define AudioOutputStorage_t int
 
-struct StereoOutput;
+#if (STEREO_HACK == true)
+#define AudioOutput_t StereoOutput
+#define AudioOutput StereoOutput
+#else
+/** Representation of an single audio output sample/frame. For mono output, this is really just a single zero-centered int,
+ *  but for stereo it's a struct containing two ints.
+ *
+ *  While it may be tempting (and is possible) to use an int, directly, using AudioOutput_t and the functions AudioOutput::from8Bit(),
+ *  AudioOutput::fromNBit(), or AudioOutput::fromAlmostNBit() will allow you to write code that will work across different platforms, even
+ *  when those use a different output resolution.
+ *
+ *  @note The only place where you should be using AudioOutput_t, directly, is in your updateAudio() function signature. It's really just a
+ *        dummy used to make the "same" function signature work across different configurations (importantly mono/stereo). It's true value
+ *        might be subject to change, and it may even be void. Use either MonoOutput or StereoOutput to represent a piece of audio output.
+ */
+#define AudioOutput_t AudioOutputStorage_t
+/** Representation of an single audio output sample/frame. This #define maps to either MonoOutput or StereoOutput, depending on what is configured
+ *  in mozzi_config.h. Since the two are source compatible to a large degree, it often isn't even necessary to test, which it is, in your code. E.g.
+ *  both have functions l() and r(), to return "two" audio channels (which will be the same in case of mono).
+ *
+ *  You will not usually use or encounter this definition, unless using EXTERNAL_AUDIO_OUTPUT.
+ */
+#define AudioOutput MonoOutput
+#endif
+
+/** This struct encapsulates one frame of mono audio output. Internally, it really just boils down to two int values, but the struct provides
+ *  useful API an top of that. For more detail @see MonoOutput . */
+struct StereoOutput {
+  /** Construct an audio frame from raw values (zero-centered) */
+  StereoOutput(AudioOutputStorage_t l=0, AudioOutputStorage_t r=0) : _l(l), _r(r) {};
+#if (STEREO_HACK == true)
+  inline void generate() const { audio_out_1 = _l; audio_out_2 = _r; };
+#else
+  /** Conversion to int operator: If used in a mono config, returns only the left channel (and gives a compile time warning). */
+  inline operator AudioOutput_t() const __attribute__((deprecated("Sketch generates stereo output, but Mozzi is configured for mono. Check mozzi_config.h."))) { return _l; };
+#endif
+  AudioOutputStorage_t _l;
+  AudioOutputStorage_t _r;
+  AudioOutputStorage_t l() const { return _l; };
+  AudioOutputStorage_t r() const { return _r; };
+  /** @see MonoOutput::clip(). Clips both channels. */
+  StereoOutput& clip() { _l = CLIP_AUDIO(_l); _r = CLIP_AUDIO(_r); return *this; };
+
+  /** @see MonoOutput::fromNBit(), stereo variant */
+  static inline StereoOutput fromNBit(uint8_t bits, int16_t l, int16_t r) { return StereoOutput(SCALE_AUDIO(l, bits), SCALE_AUDIO(r, bits)); }
+  /** @see MonoOutput::fromNBit(), stereo variant, 32 bit overload */
+  static inline StereoOutput fromNBit(uint8_t bits, int32_t l, int32_t r) { return StereoOutput(SCALE_AUDIO(l, bits), SCALE_AUDIO(r, bits)); }
+  /** @see MonoOutput::from8Bit(), stereo variant */
+  static inline StereoOutput from8Bit(int16_t l, int16_t r) { return fromNBit(8, l, r); }
+  /** @see MonoOutput::from16Bit(), stereo variant */
+  static inline StereoOutput from16Bit(int16_t l, int16_t r) { return fromNBit(16, l, r); }
+  /** @see MonoOutput::fromAlmostNBit(), stereo variant */
+  static inline StereoOutput fromAlmostNBit(uint8_t bits, int16_t l, int16_t r) { return StereoOutput(SCALE_AUDIO_NEAR(l, bits), SCALE_AUDIO_NEAR(r, bits)); }
+  /** @see MonoOutput::fromAlmostNBit(), stereo variant, 32 bit overload */
+  static inline StereoOutput fromAlmostNBit(uint8_t bits, int32_t l, int32_t r) { return StereoOutput(SCALE_AUDIO_NEAR(l, bits), SCALE_AUDIO_NEAR(r, bits)); }
+};
 
 /** This struct encapsulates one frame of mono audio output. Internally, it really just boils down to a single int value, but the struct provides
  *  useful API an top of that, for the following:
@@ -73,13 +128,13 @@ struct StereoOutput;
  */
 struct MonoOutput {
   /** Construct an audio frame from raw values (zero-centered) */
-  MonoOutput(AudioOutputStorage_t l) : _l(l) {};
+  MonoOutput(AudioOutputStorage_t l=0) : _l(l) {};
 #if (STEREO_HACK == true)
   /** Conversion to void operator: If used in a stereo config, returns identical channels (and gives a compile time warning). */
-  inline operator AudioOutputStorage_t() const __attribute__((deprecated("Sketch generates mono output, but Mozzi is configured for stereo. Check mozzi_config.h."))) { audio_out_1 = _l; audio_out_2 = _l; };
+  inline operator AudioOutput_t() const __attribute__((deprecated("Sketch generates mono output, but Mozzi is configured for stereo. Check mozzi_config.h."))) { return StereoOutput(_l, _l); };
 #else
   /** Conversion to int operator. */
-  operator AudioOutputStorage_t() const { return _l; };
+  inline operator AudioOutput_t() const { return _l; };
 #endif
   AudioOutputStorage_t _l;
   AudioOutputStorage_t l() const { return _l; };
@@ -112,64 +167,6 @@ struct MonoOutput {
   static inline MonoOutput fromAlmostNBit(uint8_t bits, int32_t l) { return MonoOutput(SCALE_AUDIO_NEAR(l, bits)); }
 };
 
-/** This struct encapsulates one frame of mono audio output. Internally, it really just boils down to two int values, but the struct provides
- *  useful API an top of that. For more detail @see MonoOutput . */
-struct StereoOutput {
-  /** Construct an audio frame from raw values (zero-centered) */
-  StereoOutput(AudioOutputStorage_t l, AudioOutputStorage_t r) : _l(l), _r(r) {};
-  /** Construct a stereo audio frame (with identical channels) from a mono frame */
-  StereoOutput(const MonoOutput &m) : _l(m._l), _r(m._l) {};
-#if (STEREO_HACK == true)
-  inline operator AudioOutputStorage_t() const { audio_out_1 = _l; audio_out_2 = _r; };
-#else
-  /** Conversion to int operator: If used in a mono config, returns only the left channel (and gives a compile time warning). */
-  inline operator AudioOutputStorage_t() const __attribute__((deprecated("Sketch generates stereo output, but Mozzi is configured for mono. Check mozzi_config.h."))) { return _l; };
-#endif
-  AudioOutputStorage_t _l;
-  AudioOutputStorage_t _r;
-  AudioOutputStorage_t l() { return _l; };
-  AudioOutputStorage_t r() { return _r; };
-  /** @see MonoOutput::clip(). Clips both channels. */
-  StereoOutput& clip() { _l = CLIP_AUDIO(_l); _r = CLIP_AUDIO(_r); return *this; };
-
-  /** @see MonoOutput::fromNBit(), stereo variant */
-  static inline StereoOutput fromNBit(uint8_t bits, int16_t l, int16_t r) { return StereoOutput(SCALE_AUDIO(l, bits), SCALE_AUDIO(r, bits)); }
-  /** @see MonoOutput::fromNBit(), stereo variant, 32 bit overload */
-  static inline StereoOutput fromNBit(uint8_t bits, int32_t l, int32_t r) { return StereoOutput(SCALE_AUDIO(l, bits), SCALE_AUDIO(r, bits)); }
-  /** @see MonoOutput::from8Bit(), stereo variant */
-  static inline StereoOutput from8Bit(int16_t l, int16_t r) { return fromNBit(8, l, r); }
-  /** @see MonoOutput::from16Bit(), stereo variant */
-  static inline StereoOutput from16Bit(int16_t l, int16_t r) { return fromNBit(16, l, r); }
-  /** @see MonoOutput::fromAlmostNBit(), stereo variant */
-  static inline StereoOutput fromAlmostNBit(uint8_t bits, int16_t l, int16_t r) { return StereoOutput(SCALE_AUDIO_NEAR(l, bits), SCALE_AUDIO_NEAR(r, bits)); }
-  /** @see MonoOutput::fromAlmostNBit(), stereo variant, 32 bit overload */
-  static inline StereoOutput fromAlmostNBit(uint8_t bits, int32_t l, int32_t r) { return StereoOutput(SCALE_AUDIO_NEAR(l, bits), SCALE_AUDIO_NEAR(r, bits)); }
-};
-
-#if (STEREO_HACK == true)
-#define AudioOutput_t StereoOutput
-#define AudioOutput StereoOutput
-#else
-/** Representation of an single audio output sample/frame. For mono output, this is really just a single zero-centered int,
- *  but for stereo it's a struct containing two ints.
- *
- *  While it may be tempting (and is possible) to use an int, directly, using AudioOutput_t and the functions AudioOutput::from8Bit(),
- *  AudioOutput::fromNBit(), or AudioOutput::fromAlmostNBit() will allow you to write code that will work across different platforms, even
- *  when those use a different output resolution.
- *
- *  @note The only place where you should be using AudioOutput_t, directly, is in your updateAudio() function signature. It's really just a
- *        dummy used to make the "same" function signature work across different configurations (importantly mono/stereo). It's true value
- *        might be subject to change, and it may even be void. Use either MonoOutput or StereoOutput to represent a piece of audio output.
- */
-#define AudioOutput_t AudioOutputStorage_t
-/** Representation of an single audio output sample/frame. This #define maps to either MonoOutput or StereoOutput, depending on what is configured
- *  in mozzi_config.h. Since the two are source compatible to a large degree, it often isn't even necessary to test, which it is, in your code. E.g.
- *  both have functions l() and r(), to return "two" audio channels (which will be the same in case of mono).
- *
- *  You will not usually use or encounter this definition, unless using EXTERNAL_AUDIO_OUTPUT.
- */
-#define AudioOutput MonoOutput
-#endif
 
 /** When setting EXTERNAL_AUDIO_OUTPUT to true, implement this function to take care of writing samples to the hardware. */
 inline void audioOutput(const AudioOutput& f);

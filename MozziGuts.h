@@ -199,6 +199,10 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #define AUDIO_BITS 16
 #endif
 
+#if (STEREO_HACK == true)
+extern int audio_out_1, audio_out_2;
+#endif
+
 #include "AudioOutput.h"
 
 // common numeric types
@@ -289,7 +293,6 @@ calculations here which could be done in setup() or updateControl().
 In HIFI mode, it's a 14 bit number between -16384 and 16383 inclusive.
 */
 #if (STEREO_HACK == true)
-extern int audio_out_1, audio_out_2;
 void updateAudio();
 #else
 AudioOutput_t updateAudio();

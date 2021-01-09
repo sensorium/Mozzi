@@ -409,7 +409,7 @@ static void startAudioStandard() {
   }
 
 #endif
-  analogWriteResolution(12);
+  analogWriteResolution(10);
   analogWrite(AUDIO_CHANNEL_1_PIN, 0);
   tcConfigure(AUDIO_RATE);
 

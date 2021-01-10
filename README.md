@@ -242,7 +242,7 @@ port by Thomas Friedrichsmeier
 ### ESP32
 port by Dieter Vandoren and Thomas Friedrichsmeier
 
-- Since flash memory is not built into the ESP8266, but connected, externally, it is much too slow for keeping wave tables, audio samples, etc. Instead, these are kept in RAM on this platform.
+- Since flash memory is not built into the ESP32, but connected, externally, it is much too slow for keeping wave tables, audio samples, etc. Instead, these are kept in RAM on this platform.
 - Asynchronous analog reads are not implemented. `mozziAnalogRead()` relays to `analogRead()`.
 - AUDIO_INPUT is not implemented.
 - twi_nonblock is not ported

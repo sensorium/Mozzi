@@ -56,7 +56,7 @@
 #define AudioOutputStorage_t int
 
 #if (STEREO_HACK == true)
-#define AudioOutput_t StereoOutput
+#define AudioOutput_t void
 #define AudioOutput StereoOutput
 #else
 /** Representation of an single audio output sample/frame. For mono output, this is really just a single zero-centered int,
@@ -132,7 +132,7 @@ struct MonoOutput {
   MonoOutput(AudioOutputStorage_t l=0) : _l(l) {};
 #if (STEREO_HACK == true)
   /** Conversion to stereo operator: If used in a stereo config, returns identical channels (and gives a compile time warning). */
-  inline operator AudioOutput_t() const __attribute__((deprecated("Sketch generates mono output, but Mozzi is configured for stereo. Check mozzi_config.h."))) { return StereoOutput(_l, _l); };
+  inline operator StereoOutput() const __attribute__((deprecated("Sketch generates mono output, but Mozzi is configured for stereo. Check mozzi_config.h."))) { return StereoOutput(_l, _l); };
 #else
   /** Conversion to int operator. */
   inline operator AudioOutput_t() const { return _l; };

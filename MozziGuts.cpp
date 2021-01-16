@@ -57,10 +57,6 @@ STM32ADC adc(ADC1);
 uint8_t stm32_current_adc_pin;
 #endif
 
-#if (STEREO_HACK == true)
-int audio_out_1, audio_out_2;
-#endif
-
 /*
 ATmega328 technical manual, Section 12.7.4:
 The dual-slope operation [of phase correct pwm] has lower maximum operation
@@ -89,7 +85,11 @@ uint64_t samples_written_to_buffer = 0;
 #else
 //-----------------------------------------------------------------------------------------------------------------
 // ring buffer for audio output
+#if (STEREO_HACK == true)
+CircularBuffer<StereoOutput> output_buffer;  // fixed size 256
+#else
 CircularBuffer<AudioOutput_t> output_buffer;  // fixed size 256
+#endif
 //-----------------------------------------------------------------------------------------------------------------
 #endif
 

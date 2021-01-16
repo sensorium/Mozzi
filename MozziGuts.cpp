@@ -290,7 +290,7 @@ static void tcConfigure(uint32_t sampleRate) {
 }
 #endif
 
-#if (IS_ESP8266() && (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL))
+#if (IS_ESP8266() && (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL) && (EXTERNAL_AUDIO_OUTPUT != true))
 void CACHED_FUNCTION_ATTR esp8266_serial_audio_output() {
   // Note: That unreadble mess is an optimized version of Serial1.availableForWrite()
   while ((UART_TX_FIFO_SIZE - ((U1S >> USTXC) & 0xff)) > (PDM_RESOLUTION * 4)) {

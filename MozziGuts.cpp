@@ -553,6 +553,11 @@ static void startAudioStandard() {
   TIMSK1 = _BV(TOIE1); // Overflow Interrupt Enable (when not using
                        // Timer1.attachInterrupt())
 }
+
+ISR(TIMER1_OVF_vect, ISR_BLOCK) {
+  defaultAudioOutput();
+}
+
 #else
 
 // avr architecture

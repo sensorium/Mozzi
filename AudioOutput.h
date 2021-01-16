@@ -171,7 +171,7 @@ private:
 
 
 /** When setting EXTERNAL_AUDIO_OUTPUT to true, implement this function to take care of writing samples to the hardware. */
-inline void audioOutput(const AudioOutput& f);
+void audioOutput(const AudioOutput& f);
 #if BYPASS_MOZZI_OUTPUT_BUFFER
 /** When setting BYPASS_MOZZI_OUTPUT_BUFFER to true, implement this function to return true, if and only if your hardware (or custom buffer) is ready to accept the next sample. */
 inline bool canBufferAudioOutput();

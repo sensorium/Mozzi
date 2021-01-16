@@ -354,6 +354,8 @@ void TC5_Handler(void) __attribute__((weak, alias("samd21AudioOutput")));
 #if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS) || IS_STM32()
 #if IS_TEENSY3()
 IntervalTimer timer1;
+#elif IS_STM32() && (EXTERNAL_AUDIO_OUTPUT == true)
+HardwareTimer audio_update_timer(2);
 #elif IS_STM32()
 HardwareTimer audio_update_timer(AUDIO_UPDATE_TIMER);
 HardwareTimer audio_pwm_timer(AUDIO_PWM_TIMER);

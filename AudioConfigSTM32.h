@@ -29,9 +29,5 @@
 
 #define AUDIO_BIAS ((uint16_t) 1<<(AUDIO_BITS-1))
 
-// This is a little silly, but with Arduino 1.8.13, including this header inside MozziGuts.cpp does not work (fails to detect the proper include path).
-// Putting it here, instead, seem to work.
-#include <STM32ADC.h>
-
 #endif        //  #ifndef AUDIOCONFIGSTM32_H
 

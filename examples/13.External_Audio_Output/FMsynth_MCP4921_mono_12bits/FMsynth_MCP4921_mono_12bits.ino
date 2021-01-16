@@ -65,7 +65,7 @@ DAC_MCP49xx dac(DAC_MCP49xx::MCP4921, SS_PIN);
 
 
 
-void audioOutput(const AudioOutput_t& f)
+void audioOutput(const AudioOutput& f)
 {
   // signal is passed as 16 bit, zero-centered, internally. This DAC expects 12 bits unsigned,
   // so shift back four bits, and add a bias of 2^(12-1)=2048

@@ -246,7 +246,7 @@ static void tcReset() {
   while (TC5->COUNT16.CTRLA.bit.SWRST)
     ;
 }
-
+/* Not currently used, and does not compile with EXTERNAL_AUDIO_OUTPUT
 static void tcEnd() {
   // Disable TC5
   TC5->COUNT16.CTRLA.reg &= ~TC_CTRLA_ENABLE;
@@ -254,7 +254,7 @@ static void tcEnd() {
     ;
   tcReset();
   analogWrite(AUDIO_CHANNEL_1_PIN, 0);
-}
+} */
 
 static void tcConfigure(uint32_t sampleRate) {
   // Enable GCLK for TCC2 and TC5 (timer counter input clock)
@@ -410,7 +410,9 @@ static void startAudioStandard() {
 
 #endif
   analogWriteResolution(10);
+#if (EXTERNAL_AUDIO_OUTPUT != true)
   analogWrite(AUDIO_CHANNEL_1_PIN, 0);
+#endif
   tcConfigure(AUDIO_RATE);
 
 #elif IS_ESP32() && (BYPASS_MOZZI_OUTPUT_BUFFER != true)  // for external audio output, set up a timer running a audio rate

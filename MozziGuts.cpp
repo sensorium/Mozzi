@@ -544,6 +544,15 @@ static void startAudioStandard() {
 #endif
 }
 
+#elif IS_AVR() && (EXTERNAL_AUDIO_OUTPUT == true)
+static void startAudioStandard() {
+  backupPreMozziTimer1();
+  Timer1.initializeCPUCycles(
+      F_CPU / AUDIO_RATE,
+      PHASE_FREQ_CORRECT); // set period, phase and frequency correct
+  TIMSK1 = _BV(TOIE1); // Overflow Interrupt Enable (when not using
+                       // Timer1.attachInterrupt())
+}
 #else
 
 // avr architecture

@@ -199,7 +199,8 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #if !defined(EXTERNAL_AUDIO_BITS)
 #define EXTERNAL_AUDIO_BITS 16
 #endif
-#define AUDIO_BITS 16
+#define AUDIO_BITS EXTERNAL_AUDIO_BITS
+#define AUDIO_BIAS (1 << (AUDIO_BITS - 1))
 #endif
 
 #if (STEREO_HACK == true)
@@ -295,11 +296,7 @@ calculations here which could be done in setup() or updateControl().
 @return an audio sample.  In STANDARD modes this is between -244 and 243 inclusive.
 In HIFI mode, it's a 14 bit number between -16384 and 16383 inclusive.
 */
-#if (STEREO_HACK == true)
-void updateAudio();
-#else
 AudioOutput_t updateAudio();
-#endif
 
 /** @ingroup core
 This is where you put your control code. You need updateControl() somewhere in

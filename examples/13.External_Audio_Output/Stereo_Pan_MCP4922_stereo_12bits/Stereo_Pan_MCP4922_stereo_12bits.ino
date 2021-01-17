@@ -6,6 +6,8 @@
     #define EXTERNAL_AUDIO_OUTPUT true should be uncommented in mozzi_config.h.
     #define STEREO_HACK true should be set in mozzi_config.h
 
+
+
     Circuit: (see the DAC library README for details)
 
     MCP4921   //  Connect to:
@@ -51,17 +53,17 @@ Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kEnv2(COS2048_DATA);
 
 // External audio output parameters and DAC declaration
 #define SS_PIN 7  // if you are on AVR and using PortWrite you need still need to put the pin you are actually using: 7 on Uno, 38 on Mega
-#define AUDIO_BIAS 2048  // we are at 12 bits, so we have to bias the signal of 2^(12-1) = 2048
+//#define AUDIO_BIAS 2048  // we are at 12 bits, so we have to bias the signal of 2^(12-1) = 2048
 DAC_MCP49xx dac(DAC_MCP49xx::MCP4922, SS_PIN);
 
 
 
-void audioOutput(int l, int r)
+void audioOutput(const AudioOutput& f) // f is a structure containing both channels
 {
-  l += AUDIO_BIAS;
-  r += AUDIO_BIAS;
+  int out_l = f.l() + AUDIO_BIAS;  // the DAC wants positive signals only, so we need to add a bias.
+  int out_r = f.r() + AUDIO_BIAS;
 
-  dac.output2(l, r);  // outputs the two channels in one call.
+  dac.output2(out_l, out_r);  // outputs the two channels in one call.
 
 }
 
@@ -95,7 +97,7 @@ void updateControl() {
 // needed for stereo output
 int audio_out_1, audio_out_2;
 
-void updateAudio() {
+AudioOutput_t updateAudio() {
   audio_out_1 = (aCos1.next() * env1) >> 4 ;
   audio_out_2 = (aCos2.next() * env2) >> 4 ;
 }

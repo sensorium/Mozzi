@@ -91,6 +91,7 @@ You need to have \#define STEREO_HACK true in mozzi_config.h
 */
 #define STEREO_HACK false
 
+
 /** @ingroup core
 Defining this option as true in mozzi_config.h allows to completely customize the audio output, e.g. for connecting to external DACs.
 For more detail, @see AudioOuput .

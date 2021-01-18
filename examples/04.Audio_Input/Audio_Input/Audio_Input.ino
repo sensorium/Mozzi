@@ -29,12 +29,13 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   int asig = getAudioInput(); // range 0-1023
   asig = asig - 512; // now range is -512 to 511
   // output range in STANDARD mode is -244 to 243,
-  // so you might need to adjust your signal to suit
-  return asig;
+  // we scale down only by one bit, so you might need
+  // to adjust your signal to suit
+  return MonoOutput::fromAlmostNBit(9, asig).clip();
 }
 
 

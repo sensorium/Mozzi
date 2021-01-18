@@ -59,14 +59,14 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   int synth = aCarrier.phMod((int)aModulator.next()*(150u+aModWidth.next()));
   synth *= (byte)aEnvelop.next();
   synth >>= 8;
   // here's the reverb
   int arev = reverb.next(synth);
   // add the dry and wet signals
-  return synth + (arev>>3);
+  return MonoOutput::fromAlmostNBit(9, synth + (arev>>3));
 }
 
 

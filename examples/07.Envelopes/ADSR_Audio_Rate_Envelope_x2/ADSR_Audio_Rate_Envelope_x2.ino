@@ -171,10 +171,11 @@ void updateControl(){
 }
 
 
-int updateAudio(){
-  return ((long)envelope0.next() * aOscil0.next()) +
+AudioOutput_t updateAudio(){
+  return MonoOutput::fromNBit(17,
+    ((long)envelope0.next() * aOscil0.next()) +
     ((int)envelope1.next() * aOscil1.next())
-    >>9;
+  );
 }
 
 

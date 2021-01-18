@@ -40,8 +40,8 @@ void updateControl(){
 }
 
 
-int updateAudio(){
-  return (aSin.next()* gain)>>8; // shift back to STANDARD audio range, like /256 but faster
+AudioOutput_t updateAudio(){
+  return MonoOutput::from16Bit(aSin.next() * gain)); // 8 bits waveform * 8 bits gain makes 16 bits
 }
 
 

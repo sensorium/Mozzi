@@ -44,8 +44,8 @@ void updateControl(){
 }
 
 
-int updateAudio(){
-  return aSin.next(); // return an int signal centred around 0
+AudioOutput_t updateAudio(){
+  return MonoOutput::from8Bit(aSin.next());
 }
 
 void loop(){

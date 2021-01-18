@@ -53,8 +53,8 @@ void updateControl(){
 }
 
 
-int updateAudio(){
-  return (((char)lpf1.next(aCrunchySound1.next()))>>1) + (char)lpf2.next(aCrunchySound2.next());
+AudioOutput_t updateAudio(){
+  return MonoOutput::fromAlmostNBit(9, (((char)lpf1.next(aCrunchySound1.next()))>>1) + (char)lpf2.next(aCrunchySound2.next());
 }
 
 

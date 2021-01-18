@@ -86,7 +86,7 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   int asig;
   switch (whose_turn) {
   case 0:
@@ -108,7 +108,7 @@ int updateAudio(){
     asig = aSin5.next();
     break;
   }
-  return asig;
+  return MonoOutput::from8Bit(asig);
 }
 
 

@@ -97,7 +97,7 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   char asig0 = aSin.next(); // sine wave source
   // make 2 signals fading in and out to show effect of amplitude when waveshaping with Chebyshev polynomial curves
   // offset the signals by 128 to fit in the 0-255 range for the waveshaping table lookups
@@ -108,7 +108,7 @@ int updateAudio(){
   char awaveshaped2 = aCheby6th.next(asig2);
   // use a waveshaping table to squeeze 2 summed 8 bit signals into the range -244 to 243
   int awaveshaped3 = aCompress.next(256u + awaveshaped1 + awaveshaped2);
-  return awaveshaped3;
+  return MonoOutput::fromAlmostNBit(9, awaveshaped3);
 }
 
 

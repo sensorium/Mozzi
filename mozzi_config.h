@@ -1,5 +1,6 @@
 #ifndef MOZZI_CONFIG_H
 #define MOZZI_CONFIG_H
+#include "hardware_defines.h"
 
 /*
 Edit this file if you want to choose your own configuration options.
@@ -58,9 +59,10 @@ and comment out \#define AUDIO_MODE STANDARD and \#define AUDIO_MODE STANDARD_PL
 http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/ .
 Mozzi-users list has a thread on this.
 */
-#define AUDIO_RATE 16384
-//#define AUDIO_RATE 32768
-//#define AUDIO_RATE 65536 // try on Teensy3/3.1
+#define AUDIO_RATE AUDIO_RATE_PLATFORM_DEFAULT
+//#define AUDIO_RATE 16384 // default on AVR / classic Arduino
+//#define AUDIO_RATE 32768 // default on most other platforms
+//#define AUDIO_RATE 65536 // try on Teensy3/3.1 or other strong cpus
 
 
 /** @ingroup core
@@ -89,6 +91,17 @@ You need to have \#define STEREO_HACK true in mozzi_config.h
 */
 #define STEREO_HACK false
 
+
+/** @ingroup core
+Defining this option as true in mozzi_config.h allows to completely customize the audio output, e.g. for connecting to external DACs.
+For more detail, @see AudioOuput .
+*/
+#define EXTERNAL_AUDIO_OUTPUT false
 //#define EXTERNAL_AUDIO_OUTPUT true
+
+/** @ingroup core
+Only used when EXTERNAL_AUDIO_OUTPUT is set to true: The resolution to use for audio samples, internally. You will usually set this to match the
+output resolution of your DAC. 16 is the default value, here. Note that 16 bits is also the maximum currently supported on AVR. */
+//#define EXTERNAL_AUDIO_BITS 16
 
 #endif        //  #ifndef MOZZI_CONFIG_H

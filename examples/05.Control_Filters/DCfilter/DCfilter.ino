@@ -40,7 +40,7 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   return 0;
 }
 

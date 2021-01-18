@@ -59,10 +59,9 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   int asig = (int)((((uint32_t)aSin1.next()+ aSin2.next())*(200u+aGain.next()))>>3);
-  int clipped = constrain(asig,-244,243);
-  return clipped;
+  return MonoOutput::fromAlmostNBit(9, asig).clip();
 }
 
 

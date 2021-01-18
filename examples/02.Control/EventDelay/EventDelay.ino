@@ -50,8 +50,8 @@ void updateControl(){
 }
 
 
-int updateAudio(){
-  return aSin.next()*gain;
+AudioOutput_t updateAudio(){
+  return AudioOutput::from8Bit(aSin.next()*gain);
 }
 
 

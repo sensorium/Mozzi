@@ -97,8 +97,8 @@ void updateControl(){
 }
 
 
-int updateAudio(){
-  return (int) (gain * aOscil.next())>>8;
+AudioOutput_t updateAudio(){
+  return MonoOutput::from16Bit((int) (gain * aOscil.next()));
 }
 
 

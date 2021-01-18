@@ -193,8 +193,8 @@ void updateControl(){
 }
 
 
-int updateAudio(){
-  return (aSin.next()*gain)>>8;
+AudioOutput_t updateAudio(){
+  return MonoOutput::from16Bit(aSin.next()*gain);
 }
 
 

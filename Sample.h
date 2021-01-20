@@ -1,9 +1,7 @@
 /*
  * Sample.h
  *
- * Oscil.h owes much to AF_precision_synthesis.pde, 2009, Adrian Freed.
- *
- * Copyright 2012 Tim Barrass, 2009 Adrian Freed.
+ * Copyright 2012 Tim Barrass
  *
  * This file is part of Mozzi.
  *
@@ -107,7 +105,7 @@ public:
 
 
 	/** Sets a new start position plays the sample from that position.
-	@param startpos position in samples from the beginning of the sound. 
+	@param startpos position in samples from the beginning of the sound.
 	*/
 	inline
 	void start(unsigned int startpos)
@@ -165,7 +163,7 @@ public:
 	*/
 	inline
 	int8_t next() { // 4us
-		
+
 		if (phase_fractional>endpos_fractional){
 			if (looping) {
 				phase_fractional = startpos_fractional + (phase_fractional - endpos_fractional);
@@ -206,7 +204,7 @@ public:
 	// n16 part represents -1 to 1, modulating the phase by one whole table length in
 	// each direction.
 	// @return a sample from the table.
-	// 
+	//
 	// inline
 	// int8_t phMod(long phmod_proportion)
 	// {
@@ -216,7 +214,7 @@ public:
 
 
 
-	/** Set the oscillator frequency with an unsigned int. 
+	/** Set the oscillator frequency with an unsigned int.
 	This is faster than using a float, so it's useful when processor time is tight,
 	but it can be tricky with low and high frequencies, depending on the size of the
 	wavetable being used. If you're not getting the results you expect, try
@@ -269,7 +267,7 @@ public:
 	}
 
 
-	/** phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies. 
+	/** phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies.
 	Instead of recalculating the phase increment for each
 	frequency in between, you can just calculate the phase increment for each end
 	frequency with phaseIncFromFreq(), then use a Line to interpolate on the fly and

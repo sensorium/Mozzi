@@ -58,7 +58,7 @@ Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kEnv2(COS2048_DATA);
 
 
 
-void audioOutput(const AudioOutput& f) // f is a structure containing both channels
+void audioOutput(const AudioOutput f) // f is a structure containing both channels
 
 {
 

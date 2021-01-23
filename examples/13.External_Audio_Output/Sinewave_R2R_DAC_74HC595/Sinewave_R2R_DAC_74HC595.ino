@@ -65,7 +65,7 @@ Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
 //#define AUDIO_BIAS 128    // not needed since PR#98
 
-void audioOutput(const AudioOutput& f) // f is a structure potentially containing both channels, scaled according to EXTERNAL_AUDIO_BITS
+void audioOutput(const AudioOutput f) // f is a structure potentially containing both channels, scaled according to EXTERNAL_AUDIO_BITS
 {
   int out = f.l() + AUDIO_BIAS;   // make the signal positive
   digitalWrite(LATCH_PIN, LOW);

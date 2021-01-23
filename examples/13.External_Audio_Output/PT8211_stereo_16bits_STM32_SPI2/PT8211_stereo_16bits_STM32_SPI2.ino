@@ -57,7 +57,7 @@ SPIClass mySPI(2);    // declaration of SPI for using SPI2 and thus freeing all 
 
 
 
-void audioOutput(const AudioOutput& f) // f is a structure containing both channels
+void audioOutput(const AudioOutput f) // f is a structure containing both channels
 {
   digitalWrite(WS_pin, LOW);  //select Right channel
   mySPI.transfer16(f.r());

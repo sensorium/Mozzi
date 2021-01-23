@@ -77,7 +77,7 @@ DAC_MCP49xx dac(DAC_MCP49xx::MCP4922, SS_PIN);
 
 
 
-void audioOutput(const AudioOutput& f) // f is a structure containing both channels
+void audioOutput(const AudioOutput f) // f is a structure containing both channels
 {
 
   int out = AUDIO_BIAS + f.l();

@@ -58,7 +58,7 @@ DAC_MCP49xx dac(DAC_MCP49xx::MCP4922, SS_PIN);
 
 
 
-void audioOutput(const AudioOutput& f) // f is a structure containing both channels
+void audioOutput(const AudioOutput f) // f is a structure containing both channels
 {
   int out_l = f.l() + AUDIO_BIAS;  // the DAC wants positive signals only, so we need to add a bias.
   int out_r = f.r() + AUDIO_BIAS;

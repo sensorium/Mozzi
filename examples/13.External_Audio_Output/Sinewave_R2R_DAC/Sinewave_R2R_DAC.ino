@@ -62,7 +62,7 @@ const int r2r_pin[R2R_N_PIN] = {30, 31, 32, 33, 34, 35}; // pins to the resistan
 
 //#define AUDIO_BIAS 32    // we are at 6 bits so we have to bias the signal of 2^(6-1)=32, not needed since PR#98
 
-void audioOutput(const AudioOutput& f) // f is a structure potentially containing both channels, scaled according to EXTERNAL_AUDIO_BITS
+void audioOutput(const AudioOutput f) // f is a structure potentially containing both channels, scaled according to EXTERNAL_AUDIO_BITS
 {
   int out = f.l() + AUDIO_BIAS; // get the audio and make it positive
   int mask = 0b00000001;   // mask for outputting only 1 bit (one per pin)

@@ -171,7 +171,7 @@ private:
 
 
 /** When setting EXTERNAL_AUDIO_OUTPUT to true, implement this function to take care of writing samples to the hardware. */
-void audioOutput(const AudioOutput& f);
+void audioOutput(const AudioOutput f);
 #if BYPASS_MOZZI_OUTPUT_BUFFER
 /** When setting BYPASS_MOZZI_OUTPUT_BUFFER to true, implement this function to return true, if and only if your hardware (or custom buffer) is ready to accept the next sample. */
 inline bool canBufferAudioOutput();
@@ -216,7 +216,7 @@ inline uint32_t pdmCode32(uint16_t sample) {
 ///////////////////// SAMD21
 #if IS_SAMD21()
 #include "AudioConfigSAMD21.h"
-inline void audioOutput(const AudioOutput& f)
+inline void audioOutput(const AudioOutput f)
 {
   analogWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
 }
@@ -226,7 +226,7 @@ inline void audioOutput(const AudioOutput& f)
 ///////////////////// TEENSY3
 #if IS_TEENSY3()
 #include "AudioConfigTeensy3_12bit.h"
-inline void audioOutput(const AudioOutput& f)
+inline void audioOutput(const AudioOutput f)
 {
   analogWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
 }
@@ -236,7 +236,7 @@ inline void audioOutput(const AudioOutput& f)
 ///////////////////// STM32
 #if IS_STM32()
 #include "AudioConfigSTM32.h"
-inline void audioOutput(const AudioOutput& f)
+inline void audioOutput(const AudioOutput f)
 {
 #if (AUDIO_MODE == HIFI)
   pwmWrite(AUDIO_CHANNEL_1_PIN, (f.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
@@ -259,7 +259,7 @@ inline void audioOutput(const AudioOutput& f)
 inline bool canBufferAudioOutput() {
   return (i2s_available() >= PDM_RESOLUTION);
 }
-inline void audioOutput(const AudioOutput& f) {
+inline void audioOutput(const AudioOutput f) {
   for (uint8_t words = 0; words < PDM_RESOLUTION; ++words) {
     i2s_write_sample(pdmCode32(f.l()));
   }
@@ -269,11 +269,11 @@ inline void audioOutput(const AudioOutput& f) {
 inline bool canBufferAudioOutput() {
   return (i2s_available() >= PDM_RESOLUTION);
 }
-inline void audioOutput(const AudioOutput& f) {
+inline void audioOutput(const AudioOutput f) {
   i2s_write_lr(f.l(), f.r());  // Note: i2s_write expects zero-centered output
 }
 #else
-inline void audioOutput(const AudioOutput& f) {
+inline void audioOutput(const AudioOutput f) {
   // optimized version of: Serial1.write(...);
   for (uint8_t i = 0; i < PDM_RESOLUTION*4; ++i) {
     U1F = pdmCode8(f);
@@ -314,7 +314,7 @@ inline bool canBufferAudioOutput() {
   return _esp32_can_buffer_next;
 }
 
-inline void audioOutput(const AudioOutput& f) {
+inline void audioOutput(const AudioOutput f) {
 #if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
   _esp32_prev_sample[0] = (f.l() + AUDIO_BIAS) << 8;
 #if (STEREO_HACK == true)
@@ -342,7 +342,7 @@ inline void audioOutput(const AudioOutput& f) {
 ///////////////////// AVR STANDARD
 #if IS_AVR() && (AUDIO_MODE == STANDARD_PLUS)
 #include "AudioConfigStandardPlus.h"
-inline void audioOutput(const AudioOutput& f)
+inline void audioOutput(const AudioOutput f)
 {
   AUDIO_CHANNEL_1_OUTPUT_REGISTER = f.l()+AUDIO_BIAS;
 #if (STEREO_HACK == true)
@@ -355,7 +355,7 @@ inline void audioOutput(const AudioOutput& f)
 ///////////////////// AVR HIFI
 #elif IS_AVR() && (AUDIO_MODE == HIFI)
 #include "AudioConfigHiSpeed14bitPwm.h"
-inline void audioOutput(const AudioOutput& f)
+inline void audioOutput(const AudioOutput f)
 {
   // read about dual pwm at
   // http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/

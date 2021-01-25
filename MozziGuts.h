@@ -87,11 +87,11 @@ x..A14.....Teensy 3.0, 3.1 and 3.2  \n
 ....13	.......Sanguino  \n
 
 On Teensy 3.* STANDARD and STANDARD_PLUS are the same, providing 16384Hz sample rate and 12 bit resolution on pin A14/ADC.
-The Teensy 3.* DAC output does not rely on PWM. */
+The Teensy 3.* DAC output does not rely on PWM.
 
 
+@ingroup core
 
-/** @ingroup core
 Used to set AUDIO_MODE to HIFI.
 
 HIFI for AVR  and STM32 (not for Teensy 3.*)
@@ -154,7 +154,6 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #define STANDARD_PLUS 1
 #define HIFI 2
 
-
 #include "mozzi_config.h" // User can change the config file to set audio mode
 
 #if (AUDIO_MODE == STANDARD) && (AUDIO_RATE == 32768)
@@ -173,7 +172,12 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #define MICROS_PER_AUDIO_TICK 31 // = 1000000 / 32768 = 30.518, ...* 256 = 7812.6
 #endif
 
+// for compatibility with old (local) versions of mozzi_config.h
+#if !defined(EXTERNAL_AUDIO_OUTPUT)
+#define EXTERNAL_AUDIO_OUTPUT false
+#endif
 
+#if (EXTERNAL_AUDIO_OUTPUT != true)
 #if IS_TEENSY3()
 #include "AudioConfigTeensy3_12bit.h"
 #elif IS_STM32()
@@ -184,15 +188,26 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #include "AudioConfigESP32.h"
 #elif IS_SAMD21()
 #include "AudioConfigSAMD21.h"
-#elif IS_AVR()
-#if (AUDIO_MODE == STANDARD)
+#elif IS_AVR() && (AUDIO_MODE == STANDARD)
 #include "AudioConfigStandard9bitPwm.h"
-#elif (AUDIO_MODE == STANDARD_PLUS)
+#elif IS_AVR() && (AUDIO_MODE == STANDARD_PLUS)
 #include "AudioConfigStandardPlus.h"
-#elif (AUDIO_MODE == HIFI)
+#elif IS_AVR() && (AUDIO_MODE == HIFI)
 #include "AudioConfigHiSpeed14bitPwm.h"
 #endif
+#else // EXTERNAL_AUDIO_OUTPUT==true
+#if !defined(EXTERNAL_AUDIO_BITS)
+#define EXTERNAL_AUDIO_BITS 16
 #endif
+#define AUDIO_BITS EXTERNAL_AUDIO_BITS
+#define AUDIO_BIAS (1 << (AUDIO_BITS - 1))
+#endif
+
+#if (STEREO_HACK == true)
+extern int audio_out_1, audio_out_2;
+#endif
+
+#include "AudioOutput.h"
 
 // common numeric types
 typedef unsigned char uchar;
@@ -281,12 +296,7 @@ calculations here which could be done in setup() or updateControl().
 @return an audio sample.  In STANDARD modes this is between -244 and 243 inclusive.
 In HIFI mode, it's a 14 bit number between -16384 and 16383 inclusive.
 */
-#if (STEREO_HACK == true)
-extern int audio_out_1, audio_out_2;
-void updateAudio();
-#else
-int updateAudio();
-#endif
+AudioOutput_t updateAudio();
 
 /** @ingroup core
 This is where you put your control code. You need updateControl() somewhere in

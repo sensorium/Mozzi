@@ -69,8 +69,8 @@ void updateControl(){
 }
 
 
-int updateAudio(){
-  return aSin.next();
+AudioOutput_t updateAudio(){
+  return MonoOutput::from8Bit(aSin.next());
 }
 
 

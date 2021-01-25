@@ -2,8 +2,8 @@
     using Mozzi sonification library and an user-defined
     audioOutput() function.
 
-    #define EXTERNAL_AUDIO_OUTPUT true should be uncommented
-    in mozzi_config.h.
+    #define EXTERNAL_AUDIO_OUTPUT true should be uncommented in mozzi_config.h.
+    #define EXTERNAL_AUDIO_BITS 8 should be set in mozzi_config.h, as the 74HC595 has 8 outputs.
 
     Demonstrates the use of audioOutput() using a R/2R DAC
     connected on a shift register 74HC595.
@@ -63,14 +63,13 @@ Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 // External output parameters for this example
 #define LATCH_PIN 31  // Number of stage of the resistance ladder = number of digits of the DAC
 
-#define AUDIO_BIAS 128    // we are at 6 bits so we have to bias the signal of 2^(6-1)=32
+//#define AUDIO_BIAS 128    // not needed since PR#98
 
-void audioOutput(int l, int r) // l is the sample we want to output, it is zero-centered
-                               // r is used when using STEREO_HACK (see mozzi_config.h)
+void audioOutput(const AudioOutput f) // f is a structure potentially containing both channels, scaled according to EXTERNAL_AUDIO_BITS
 {
-  l += AUDIO_BIAS;   // make the signal positive
+  int out = f.l() + AUDIO_BIAS;   // make the signal positive
   digitalWrite(LATCH_PIN, LOW);
-  SPI.transfer(l);
+  SPI.transfer(out);
   digitalWrite(LATCH_PIN, HIGH);
 }                                                  
     
@@ -90,9 +89,10 @@ void updateControl() {
 }
 
 
-int updateAudio() {
-  return aSin.next();    // return an int signal centred around 0
-}                        
+AudioOutput_t updateAudio() {
+  return MonoOutput::from8Bit(aSin.next()); // return an int signal centred around 0, 8bits wide
+}                 
+                      
 
 
 

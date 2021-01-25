@@ -3,7 +3,7 @@
 
     Demonstrates the use of Oscil to play a wavetable.
 
-    This sketch using HIFI mode is not for Teensy 3.1.
+    This sketch using HIFI mode on AVR (i.e. the classic Arduino borads, not Teensy 3.x and friends).
 
     IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
     be changed from STANDARD mode to HIFI.
@@ -57,9 +57,11 @@ void setup(){
 void updateControl(){}
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   // this would make more sense with a higher resolution signal
-  return aSin.next()<<6; // 8 bits scaled up to 14 bits
+  // MonoOutput::from8Bit() (and it friends from16Bit() and fromNBit()) take care of scaling the output signal
+  // as appropiate for the platform (to 14 bits on AVR with AUDIO_MODE HIFI).
+  return MonoOutput::from8Bit(aSin.next());
 }
 
 

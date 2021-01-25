@@ -49,10 +49,10 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   // watch output levels, they can distort if too high
   // also, at very resonant settings, the input signal may need attenuating
-  return svf.next(aNoise.next())>>3;
+  return MonoOutput::fromAlmostNBit(12, svf.next(aNoise.next()));
 }
 
 

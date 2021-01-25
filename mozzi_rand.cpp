@@ -3,7 +3,7 @@
 #include "hardware_defines.h"
 
 #if IS_STM32()
-#include <STM32ADC.h>
+//#include <STM32ADC.h>
 extern STM32ADC adc;
 #elif IS_ESP8266()
 #include <esp8266_peri.h>

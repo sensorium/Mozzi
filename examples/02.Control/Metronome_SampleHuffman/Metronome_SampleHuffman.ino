@@ -28,7 +28,7 @@
 #include <samples/thumbpiano_huffman/thumbpiano4.h>
 
 SampleHuffman thumb0(THUMB0_SOUNDDATA,THUMB0_HUFFMAN,THUMB0_SOUNDDATA_BITS);
-SampleHuffman  thumb1(THUMB1_SOUNDDATA,THUMB1_HUFFMAN,THUMB1_SOUNDDATA_BITS);
+SampleHuffman thumb1(THUMB1_SOUNDDATA,THUMB1_HUFFMAN,THUMB1_SOUNDDATA_BITS);
 SampleHuffman thumb2(THUMB2_SOUNDDATA,THUMB2_HUFFMAN,THUMB2_SOUNDDATA_BITS);
 SampleHuffman thumb3(THUMB3_SOUNDDATA,THUMB3_HUFFMAN,THUMB3_SOUNDDATA_BITS);
 SampleHuffman thumb4(THUMB4_SOUNDDATA,THUMB4_HUFFMAN,THUMB4_SOUNDDATA_BITS);
@@ -74,14 +74,15 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   int asig = (int)
   thumb0.next() +
   thumb1.next() +
   thumb2.next() +
   thumb3.next() +
   thumb4.next();
-  return asig;
+  // Note: Samples don't overlap, here, therefore this the sum is still only 8 bits range
+  return MonoOutput::from8Bit(asig);
 }
 
 

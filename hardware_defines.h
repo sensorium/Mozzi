@@ -36,4 +36,18 @@
 #define AUDIO_RATE_PLATFORM_DEFAULT 32768
 #endif
 
+#if IS_ESP8266()
+#define CACHED_FUNCTION_ATTR ICACHE_RAM_ATTR
+#elif IS_ESP32()
+#define CACHED_FUNCTION_ATTR IRAM_ATTR
+#else
+#define CACHED_FUNCTION_ATTR
+#endif
+
+#if IS_STM32()
+// This is a little silly, but with Arduino 1.8.13, including this header inside MozziGuts.cpp does not work (fails to detect the proper include path).
+// Putting it here, instead, seem to work.
+#include <STM32ADC.h>
+#endif
+
 #endif /* HARDWARE_DEFINES_H_ */

@@ -86,7 +86,7 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   aTriangle.setPhaseInc(aGliss.next());
-  return aTriangle.next();
+  return MonoOutput::from8Bit(aTriangle.next());
 }

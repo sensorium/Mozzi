@@ -94,7 +94,7 @@ void updateControl(){
    v8 = kVol8.next();
 }
 
-int updateAudio(){
+AudioOutput_t updateAudio(){
   long asig = (long)
     aCos1.next()*v1 +
     aCos2.next()*v2 +
@@ -104,6 +104,5 @@ int updateAudio(){
     aCos6.next()*v6 +
     aCos7.next()*v7 +
     aCos8.next()*v8;
-  asig >>= 9;
-  return (int) asig;
+  return MonoOutput::fromAlmostNBit(18, asig);
 }

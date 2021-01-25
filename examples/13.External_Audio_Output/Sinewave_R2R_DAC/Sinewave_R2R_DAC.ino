@@ -2,8 +2,8 @@
     using Mozzi sonification library and an user-defined
     audioOutput() function.
 
-    #define EXTERNAL_AUDIO_OUTPUT true should be uncommented
-    in mozzi_config.h.
+    #define EXTERNAL_AUDIO_OUTPUT true should be uncommented in mozzi_config.h.
+    #define EXTERNAL_AUDIO_BITS 6 should be set in mozzi_config.h (you can increase that if you want, but will need to increase the number of step of the ladder accordingly).
 
     Demonstrates the use of audioOutput() using a R/2R DAC
     connected on 6 digital pins of an Arduino.
@@ -55,21 +55,20 @@ Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
 
 // External output parameters for this example
-#define R2R_N_PIN 6  // Number of stage of the resistance ladder = number of digits of the DAC
+#define R2R_N_PIN EXTERNAL_AUDIO_BITS  // Number of stage of the resistance ladder = number of digits of the DAC, can be defined through EXTERNAL_AUDIO_BITS in mozzi_config.h
 const int r2r_pin[R2R_N_PIN] = {30, 31, 32, 33, 34, 35}; // pins to the resistance ladder, in order,
                                                          // starting with LSB (pin closer to GND)
                                                          // so D0, D1, etc.
 
-#define AUDIO_BIAS 32    // we are at 6 bits so we have to bias the signal of 2^(6-1)=32
+//#define AUDIO_BIAS 32    // we are at 6 bits so we have to bias the signal of 2^(6-1)=32, not needed since PR#98
 
-void audioOutput(int l, int r) // l is the sample we want to output, it is zero-centered
-                               // r is used when using STEREO_HACK (see mozzi_config.h)
+void audioOutput(const AudioOutput f) // f is a structure potentially containing both channels, scaled according to EXTERNAL_AUDIO_BITS
 {
-  l += AUDIO_BIAS;   // make the signal positive
+  int out = f.l() + AUDIO_BIAS; // get the audio and make it positive
   int mask = 0b00000001;   // mask for outputting only 1 bit (one per pin)
     for (int i = 0; i < R2R_N_PIN; i++)
     {
-      digitalWrite(r2r_pin[i], bool((l >> i) & mask));  // write on digital Pins:
+      digitalWrite(r2r_pin[i], bool((out >> i) & mask));  // write on digital Pins:
     }                                                   // shift the value to the right
 }                                                       // apply the mask to get only the last bit
                                                         // use that value in digitalWrite()
@@ -87,12 +86,9 @@ void updateControl() {
 }
 
 
-int updateAudio() {
-  return aSin.next()>>2; // return an int signal centred around 0
-}                        // as we are using only 6 bits, and aSin 
-                         // is returning of 8 we have to get rid 
-                         // of two
-
+AudioOutput_t updateAudio() {
+  return MonoOutput::from8Bit(aSin.next()); // return an int signal centred around 0, 8bits wide
+}                 
 
 
 void loop() {

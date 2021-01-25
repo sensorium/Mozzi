@@ -65,8 +65,8 @@ void updateControl(){
 }
 
 
-int updateAudio(){
-  return ((int)aSin.next() * volume)>>8; // shift back into range after multiplying by 8 bit value
+AudioOutput_t updateAudio(){
+  return MonoOutput::from16Bit((int)aSin.next() * volume); // 8 bit * 8 bit gives 16 bits value
 }
 
 

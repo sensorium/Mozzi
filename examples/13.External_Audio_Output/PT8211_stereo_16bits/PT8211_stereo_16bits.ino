@@ -1,4 +1,6 @@
-/*  Example of simple panning and stereo,
+
+/*  Example of simple and stereo synthesis,
+
     using Mozzi sonification library and an external dual DAC PT8211 (inspired by: https://sparklogic.ru/code-snipplets/i2s-example-code.html)
     using an user-defined audioOutput() function. I2S, the protocol used by this DAC, is here emulated in synced way using SPI.
 
@@ -47,13 +49,17 @@ Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kEnv2(COS2048_DATA);
 
 // External audio output parameters
 #define WS_pin 5   // channel select pin for the DAC
-#define AUDIO_BIAS 0  // this DAC works on 0-centered signals
+
+//#define AUDIO_BIAS 0  // this DAC works on 0-centered signals
 
 
 
 
 
-void audioOutput(int l, int r)
+
+
+void audioOutput(const AudioOutput f) // f is a structure containing both channels
+
 {
 
 /* Note:
@@ -61,12 +67,11 @@ void audioOutput(int l, int r)
  */
 
   digitalWrite(WS_pin, LOW);  //select Right channel
-  SPI.transfer16(r);
+  SPI.transfer16(f.r());
 
   digitalWrite(WS_pin, HIGH);  // select Left channel
-  SPI.transfer16(l);
+  SPI.transfer16(f.l());
 }
-
 
 
 void setup() {
@@ -98,9 +103,12 @@ void updateControl() {
 // needed for stereo output
 int audio_out_1, audio_out_2;
 
-void updateAudio() {
+
+AudioOutput_t updateAudio() {
   audio_out_1 = (aCos1.next() * env1);
-  audio_out_2 = (aCos2.next() * env2) ;
+  audio_out_2 = (aCos2.next() * env2);
+  //  return StereoOutput::from16Bit(aCos1.next() * env1, aCos2.next() * env2);
+
 }
 
 

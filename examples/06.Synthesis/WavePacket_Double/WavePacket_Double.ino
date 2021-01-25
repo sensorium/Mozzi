@@ -59,8 +59,8 @@ void updateControl(){
 
 
 
-int updateAudio(){
-  return wavey.next()>>8; // >>8 for AUDIO_MODE STANDARD
+AudioOutput_t updateAudio(){
+  return MonoOutput::from16Bit(wavey.next());
 }
 
 

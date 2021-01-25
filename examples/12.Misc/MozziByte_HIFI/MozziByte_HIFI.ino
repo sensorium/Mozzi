@@ -215,9 +215,9 @@ void updateControl() {
 }
 
 
-int updateAudio() {
-  int asig = (aSmoothLevel.next(k_leveltarget) * wavey.next()) >> 8; // for AUDIO_MODE HIFI
-  return asig >> 1; // avoid distortion
+AudioOutput_t updateAudio() {
+  int32_t asig = aSmoothLevel.next(k_leveltarget) * wavey.next();
+  return MonoOutput::fromNBit(23, asig); // avoid distortion
 }
 
 

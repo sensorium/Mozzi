@@ -45,6 +45,7 @@ void updateAudio(){
   int asig = aNoise.next();
   audio_out_1 = (int)(((long)pan*asig)>>16);
   audio_out_2 = (int)((((long)65535-pan)*asig)>>16);
+  // return StereoOutput::fromNBit(24, (long)pan*asig, ((long)65535-pan)*asig);
 }
 
 

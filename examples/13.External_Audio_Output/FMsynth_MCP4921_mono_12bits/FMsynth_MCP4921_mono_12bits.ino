@@ -61,15 +61,16 @@ Smooth <int> kSmoothNote(0.95f);
 
 // External audio output parameters and DAC declaration
 #define SS_PIN 38  // if you are on AVR and using PortWrite you need still need to put the pin you are actually using: 7 on Uno, 38 on Mega
-#define AUDIO_BIAS 2048  // we are at 12 bits, so we have to bias the signal of 2^(12-1) = 2048
 DAC_MCP49xx dac(DAC_MCP49xx::MCP4921, SS_PIN);
 
 
 
-void audioOutput(int l, int r)
+void audioOutput(const AudioOutput f)
 {
-  l += AUDIO_BIAS;
-  dac.output(l);
+  // signal is passed as 16 bit, zero-centered, internally. This DAC expects 12 bits unsigned,
+  // so shift back four bits, and add a bias of 2^(12-1)=2048
+  uint16_t out = (f.l() >> 4) + 2048;
+  dac.output(out);
 }
 
 
@@ -131,11 +132,11 @@ void updateControl() {
 }
 
 
-int updateAudio() {
+AudioOutput_t updateAudio() {
   Q15n16 modulation = deviation * aModulator.next() >> 8;
 
-  return (int)aCarrier.phMod(modulation) << 4;    // boost to match the 12bits output of the DAC
-                                                  // this example does not really use the full capability of the 12bits...
+  return MonoOutput::from8Bit(aCarrier.phMod(modulation));
+  // this example does not really use the full capability of the 12bits of the DAC
 }
 
 

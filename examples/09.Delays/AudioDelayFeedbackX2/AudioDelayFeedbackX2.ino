@@ -36,8 +36,8 @@ AudioDelayFeedback <128> aDel1;
 AudioDelayFeedback <128> aDel2;
 
 // the delay time, measured in samples, updated in updateControl, and used in updateAudio
-unsigned int del_samps1;
-unsigned int del_samps2;
+uint16_t del_samps1;
+uint16_t del_samps2;
 
 
 void setup(){

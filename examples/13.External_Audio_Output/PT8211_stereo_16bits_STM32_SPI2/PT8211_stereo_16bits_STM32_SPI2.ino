@@ -64,7 +64,7 @@ void audioOutput(const AudioOutput f) // f is a structure containing both channe
 
   digitalWrite(WS_pin, HIGH);  // select Left channel
   mySPI.transfer16(f.l());
-
+}
 
 
 

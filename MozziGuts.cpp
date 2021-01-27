@@ -486,7 +486,7 @@ static void startAudioStandard() {
   pinMode(AUDIO_CHANNEL_1_PIN, PWM);
 #if (AUDIO_MODE == HIFI)
   pinMode(AUDIO_CHANNEL_1_PIN_HIGH, PWM);
-#elif (STEREO_HACK == true)
+#elif (AUDIO_CHANNELS > 1)
   pinMode(AUDIO_CHANNEL_2_PIN, PWM);
 #endif
 
@@ -580,7 +580,7 @@ static void startAudioStandard() {
 #endif
   Timer1.pwm(AUDIO_CHANNEL_1_PIN,
              AUDIO_BIAS); // pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
-#if (STEREO_HACK == true)
+#if (AUDIO_CHANNELS > 1)
   Timer1.pwm(AUDIO_CHANNEL_2_PIN, AUDIO_BIAS); // sets pin to output
 #endif
   TIMSK1 = _BV(TOIE1); // Overflow Interrupt Enable (when not using

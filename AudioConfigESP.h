@@ -23,7 +23,7 @@
 #error HIFI mode is not available for this CPU architecture (but check ESP_AUDIO_OUT_MODE, and PDM_RESOLUTION)
 #endif
 
-#if (STEREO_HACK == true)
+#if (AUDIO_CHANNELS > 1)
 #if (ESP_AUDIO_OUT_MODE != EXTERNAL_DAC_VIA_I2S)
 #error Stereo is not available for the configured audio output mode
 #endif

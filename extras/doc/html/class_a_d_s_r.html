@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Mozzi: ADSR&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt; Class Template Reference</title>
+<title>Mozzi: ADSR&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -105,7 +105,7 @@ $(document).ready(function(){initNavTree('class_a_d_s_r.html','');});
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="class_a_d_s_r-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">ADSR&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt; Class Template Reference</div>  </div>
+<div class="title">ADSR&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -116,117 +116,117 @@ $(document).ready(function(){initNavTree('class_a_d_s_r.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3c0d554daae3502cfecee7f3e6a28dd0"><td class="memItemLeft" align="right" valign="top"><a id="a3c0d554daae3502cfecee7f3e6a28dd0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a3c0d554daae3502cfecee7f3e6a28dd0">ADSR</a> ()</td></tr>
-<tr class="memdesc:a3c0d554daae3502cfecee7f3e6a28dd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
-<tr class="separator:a3c0d554daae3502cfecee7f3e6a28dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a764566274a3982b43cb1f9fb47ca06ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a764566274a3982b43cb1f9fb47ca06ae">update</a> ()</td></tr>
-<tr class="memdesc:a764566274a3982b43cb1f9fb47ca06ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the internal controls of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>.  <a href="#a764566274a3982b43cb1f9fb47ca06ae">More...</a><br /></td></tr>
-<tr class="separator:a764566274a3982b43cb1f9fb47ca06ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5cc9ada01565729187d65fce113899d"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#ab5cc9ada01565729187d65fce113899d">next</a> ()</td></tr>
-<tr class="memdesc:ab5cc9ada01565729187d65fce113899d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances one audio step along the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> and returns the level.  <a href="#ab5cc9ada01565729187d65fce113899d">More...</a><br /></td></tr>
-<tr class="separator:ab5cc9ada01565729187d65fce113899d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6263c1a5dc36ab9df3f679514c4e09e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a6263c1a5dc36ab9df3f679514c4e09e2">noteOn</a> (bool reset=false)</td></tr>
-<tr class="memdesc:a6263c1a5dc36ab9df3f679514c4e09e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the attack phase of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>.  <a href="#a6263c1a5dc36ab9df3f679514c4e09e2">More...</a><br /></td></tr>
-<tr class="separator:a6263c1a5dc36ab9df3f679514c4e09e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5ec578b60c4eb157312ed9c718eb44b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#ab5ec578b60c4eb157312ed9c718eb44b">noteOff</a> ()</td></tr>
-<tr class="memdesc:ab5ec578b60c4eb157312ed9c718eb44b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the release phase of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>.  <a href="#ab5ec578b60c4eb157312ed9c718eb44b">More...</a><br /></td></tr>
-<tr class="separator:ab5ec578b60c4eb157312ed9c718eb44b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e1741d76154cca16b2c8354b5d6db1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a6e1741d76154cca16b2c8354b5d6db1d">setAttackLevel</a> (byte value)</td></tr>
-<tr class="memdesc:a6e1741d76154cca16b2c8354b5d6db1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the attack level of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>.  <a href="#a6e1741d76154cca16b2c8354b5d6db1d">More...</a><br /></td></tr>
-<tr class="separator:a6e1741d76154cca16b2c8354b5d6db1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6542f4a76a37696245447855d647b41f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a6542f4a76a37696245447855d647b41f">setDecayLevel</a> (byte value)</td></tr>
-<tr class="memdesc:a6542f4a76a37696245447855d647b41f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the decay level of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>.  <a href="#a6542f4a76a37696245447855d647b41f">More...</a><br /></td></tr>
-<tr class="separator:a6542f4a76a37696245447855d647b41f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e54b94f8adf1555996c0aa254d3245b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a4e54b94f8adf1555996c0aa254d3245b">setSustainLevel</a> (byte value)</td></tr>
-<tr class="memdesc:a4e54b94f8adf1555996c0aa254d3245b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the sustain level of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>.  <a href="#a4e54b94f8adf1555996c0aa254d3245b">More...</a><br /></td></tr>
-<tr class="separator:a4e54b94f8adf1555996c0aa254d3245b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2651482b2f666e224cf8ce82f4146213"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a2651482b2f666e224cf8ce82f4146213">setReleaseLevel</a> (byte value)</td></tr>
-<tr class="memdesc:a2651482b2f666e224cf8ce82f4146213"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the release level of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>.  <a href="#a2651482b2f666e224cf8ce82f4146213">More...</a><br /></td></tr>
-<tr class="separator:a2651482b2f666e224cf8ce82f4146213"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7269a6fe1f974b08a9eccc3131a86d91"><td class="memItemLeft" align="right" valign="top"><a id="a7269a6fe1f974b08a9eccc3131a86d91"></a>
+<tr class="memitem:a4bd943baa8c5b68d3ee7b3d385e77221"><td class="memItemLeft" align="right" valign="top"><a id="a4bd943baa8c5b68d3ee7b3d385e77221"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a4bd943baa8c5b68d3ee7b3d385e77221">ADSR</a> ()</td></tr>
+<tr class="memdesc:a4bd943baa8c5b68d3ee7b3d385e77221"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
+<tr class="separator:a4bd943baa8c5b68d3ee7b3d385e77221"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bef7104c263fc1f0df28809a788ee23"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a1bef7104c263fc1f0df28809a788ee23">update</a> ()</td></tr>
+<tr class="memdesc:a1bef7104c263fc1f0df28809a788ee23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the internal controls of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>.  <a href="#a1bef7104c263fc1f0df28809a788ee23">More...</a><br /></td></tr>
+<tr class="separator:a1bef7104c263fc1f0df28809a788ee23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa032d8689ff618dbfa974ec6803803ef"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef">next</a> ()</td></tr>
+<tr class="memdesc:aa032d8689ff618dbfa974ec6803803ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances one audio step along the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> and returns the level.  <a href="#aa032d8689ff618dbfa974ec6803803ef">More...</a><br /></td></tr>
+<tr class="separator:aa032d8689ff618dbfa974ec6803803ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef8d9c2799485fcd5a854228503f9f2f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#aef8d9c2799485fcd5a854228503f9f2f">noteOn</a> (bool reset=false)</td></tr>
+<tr class="memdesc:aef8d9c2799485fcd5a854228503f9f2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the attack phase of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>.  <a href="#aef8d9c2799485fcd5a854228503f9f2f">More...</a><br /></td></tr>
+<tr class="separator:aef8d9c2799485fcd5a854228503f9f2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c7362c1c91486e09a306b5109ad498c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a3c7362c1c91486e09a306b5109ad498c">noteOff</a> ()</td></tr>
+<tr class="memdesc:a3c7362c1c91486e09a306b5109ad498c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the release phase of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>.  <a href="#a3c7362c1c91486e09a306b5109ad498c">More...</a><br /></td></tr>
+<tr class="separator:a3c7362c1c91486e09a306b5109ad498c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a54760cfc0fee1b02983aa4c0331aa1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a8a54760cfc0fee1b02983aa4c0331aa1">setAttackLevel</a> (byte value)</td></tr>
+<tr class="memdesc:a8a54760cfc0fee1b02983aa4c0331aa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the attack level of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>.  <a href="#a8a54760cfc0fee1b02983aa4c0331aa1">More...</a><br /></td></tr>
+<tr class="separator:a8a54760cfc0fee1b02983aa4c0331aa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ad21cb6ed8fa44bb24134f2b5b4f296"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a0ad21cb6ed8fa44bb24134f2b5b4f296">setDecayLevel</a> (byte value)</td></tr>
+<tr class="memdesc:a0ad21cb6ed8fa44bb24134f2b5b4f296"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the decay level of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>.  <a href="#a0ad21cb6ed8fa44bb24134f2b5b4f296">More...</a><br /></td></tr>
+<tr class="separator:a0ad21cb6ed8fa44bb24134f2b5b4f296"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec7ac1290688214a934c3b9f78ca43e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#aec7ac1290688214a934c3b9f78ca43e9">setSustainLevel</a> (byte value)</td></tr>
+<tr class="memdesc:aec7ac1290688214a934c3b9f78ca43e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the sustain level of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>.  <a href="#aec7ac1290688214a934c3b9f78ca43e9">More...</a><br /></td></tr>
+<tr class="separator:aec7ac1290688214a934c3b9f78ca43e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f67baf632be737cbae5a1d62edc4e23"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a8f67baf632be737cbae5a1d62edc4e23">setReleaseLevel</a> (byte value)</td></tr>
+<tr class="memdesc:a8f67baf632be737cbae5a1d62edc4e23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the release level of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>.  <a href="#a8f67baf632be737cbae5a1d62edc4e23">More...</a><br /></td></tr>
+<tr class="separator:a8f67baf632be737cbae5a1d62edc4e23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5913d28627495858854419dc2b41753"><td class="memItemLeft" align="right" valign="top"><a id="ae5913d28627495858854419dc2b41753"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setIdleLevel</b> (byte value)</td></tr>
-<tr class="separator:a7269a6fe1f974b08a9eccc3131a86d91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5739379144932ae38f408b228d05b7cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a5739379144932ae38f408b228d05b7cb">setADLevels</a> (byte attack, byte decay)</td></tr>
-<tr class="memdesc:a5739379144932ae38f408b228d05b7cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the attack and decay levels of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>.  <a href="#a5739379144932ae38f408b228d05b7cb">More...</a><br /></td></tr>
-<tr class="separator:a5739379144932ae38f408b228d05b7cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6a213e9c236eb3b47e941384693e75d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#ae6a213e9c236eb3b47e941384693e75d">setLevels</a> (byte attack, byte decay, byte sustain, byte release)</td></tr>
-<tr class="memdesc:ae6a213e9c236eb3b47e941384693e75d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the attack, decay, sustain and release levels.  <a href="#ae6a213e9c236eb3b47e941384693e75d">More...</a><br /></td></tr>
-<tr class="separator:ae6a213e9c236eb3b47e941384693e75d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5160133723ed85ec89f20bde128f604"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#ad5160133723ed85ec89f20bde128f604">setAttackTime</a> (unsigned int msec)</td></tr>
-<tr class="memdesc:ad5160133723ed85ec89f20bde128f604"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the attack time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> in milliseconds.  <a href="#ad5160133723ed85ec89f20bde128f604">More...</a><br /></td></tr>
-<tr class="separator:ad5160133723ed85ec89f20bde128f604"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b8c6492ad9a379dc0c6749677ba4d29"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a3b8c6492ad9a379dc0c6749677ba4d29">setDecayTime</a> (unsigned int msec)</td></tr>
-<tr class="memdesc:a3b8c6492ad9a379dc0c6749677ba4d29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the decay time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> in milliseconds.  <a href="#a3b8c6492ad9a379dc0c6749677ba4d29">More...</a><br /></td></tr>
-<tr class="separator:a3b8c6492ad9a379dc0c6749677ba4d29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd93d77bf049b8151eeb735685b0e8d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#abd93d77bf049b8151eeb735685b0e8d7">setSustainTime</a> (unsigned int msec)</td></tr>
-<tr class="memdesc:abd93d77bf049b8151eeb735685b0e8d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the sustain time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> in milliseconds.  <a href="#abd93d77bf049b8151eeb735685b0e8d7">More...</a><br /></td></tr>
-<tr class="separator:abd93d77bf049b8151eeb735685b0e8d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2333aa55547ec8c690e632265cd4f1c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a2333aa55547ec8c690e632265cd4f1c4">setReleaseTime</a> (unsigned int msec)</td></tr>
-<tr class="memdesc:a2333aa55547ec8c690e632265cd4f1c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the release time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> in milliseconds.  <a href="#a2333aa55547ec8c690e632265cd4f1c4">More...</a><br /></td></tr>
-<tr class="separator:a2333aa55547ec8c690e632265cd4f1c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0392ff30325a93ca0772b7ece6aef18a"><td class="memItemLeft" align="right" valign="top"><a id="a0392ff30325a93ca0772b7ece6aef18a"></a>
+<tr class="separator:ae5913d28627495858854419dc2b41753"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48aa75585d0ff96c87b4b232ee3df753"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a48aa75585d0ff96c87b4b232ee3df753">setADLevels</a> (byte attack, byte decay)</td></tr>
+<tr class="memdesc:a48aa75585d0ff96c87b4b232ee3df753"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the attack and decay levels of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>.  <a href="#a48aa75585d0ff96c87b4b232ee3df753">More...</a><br /></td></tr>
+<tr class="separator:a48aa75585d0ff96c87b4b232ee3df753"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ef5dfa5c71809737c3e614b09775203"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a4ef5dfa5c71809737c3e614b09775203">setLevels</a> (byte attack, byte decay, byte sustain, byte release)</td></tr>
+<tr class="memdesc:a4ef5dfa5c71809737c3e614b09775203"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the attack, decay, sustain and release levels.  <a href="#a4ef5dfa5c71809737c3e614b09775203">More...</a><br /></td></tr>
+<tr class="separator:a4ef5dfa5c71809737c3e614b09775203"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf4131de0c02e4f154a97e3e9d95c199"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#aaf4131de0c02e4f154a97e3e9d95c199">setAttackTime</a> (unsigned int msec)</td></tr>
+<tr class="memdesc:aaf4131de0c02e4f154a97e3e9d95c199"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the attack time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> in milliseconds.  <a href="#aaf4131de0c02e4f154a97e3e9d95c199">More...</a><br /></td></tr>
+<tr class="separator:aaf4131de0c02e4f154a97e3e9d95c199"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a0cb7fbf47f65dc81df7b5eb21ae4ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a1a0cb7fbf47f65dc81df7b5eb21ae4ec">setDecayTime</a> (unsigned int msec)</td></tr>
+<tr class="memdesc:a1a0cb7fbf47f65dc81df7b5eb21ae4ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the decay time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> in milliseconds.  <a href="#a1a0cb7fbf47f65dc81df7b5eb21ae4ec">More...</a><br /></td></tr>
+<tr class="separator:a1a0cb7fbf47f65dc81df7b5eb21ae4ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0c7bd5b53f4b5c2d4ff3b5116d5c40f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#ad0c7bd5b53f4b5c2d4ff3b5116d5c40f">setSustainTime</a> (unsigned int msec)</td></tr>
+<tr class="memdesc:ad0c7bd5b53f4b5c2d4ff3b5116d5c40f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the sustain time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> in milliseconds.  <a href="#ad0c7bd5b53f4b5c2d4ff3b5116d5c40f">More...</a><br /></td></tr>
+<tr class="separator:ad0c7bd5b53f4b5c2d4ff3b5116d5c40f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabd0af40f4676bde840f6c83bbe302b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#aabd0af40f4676bde840f6c83bbe302b2">setReleaseTime</a> (unsigned int msec)</td></tr>
+<tr class="memdesc:aabd0af40f4676bde840f6c83bbe302b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the release time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> in milliseconds.  <a href="#aabd0af40f4676bde840f6c83bbe302b2">More...</a><br /></td></tr>
+<tr class="separator:aabd0af40f4676bde840f6c83bbe302b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77daa5e20e49338f92a10b4c53593504"><td class="memItemLeft" align="right" valign="top"><a id="a77daa5e20e49338f92a10b4c53593504"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setIdleTime</b> (unsigned int msec)</td></tr>
-<tr class="separator:a0392ff30325a93ca0772b7ece6aef18a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68df2fe03f1582d79e7b55e3407d474b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a68df2fe03f1582d79e7b55e3407d474b">setTimes</a> (unsigned int attack_ms, unsigned int decay_ms, unsigned int sustain_ms, unsigned int release_ms)</td></tr>
-<tr class="memdesc:a68df2fe03f1582d79e7b55e3407d474b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the attack, decay and release times of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> in milliseconds.  <a href="#a68df2fe03f1582d79e7b55e3407d474b">More...</a><br /></td></tr>
-<tr class="separator:a68df2fe03f1582d79e7b55e3407d474b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12a942278a6a621794b7d34a8edbc7c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a12a942278a6a621794b7d34a8edbc7c5">setAttackUpdateSteps</a> (unsigned int steps)</td></tr>
-<tr class="memdesc:a12a942278a6a621794b7d34a8edbc7c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the attack time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>, expressed as the number of update steps (not <a class="el" href="class_a_d_s_r.html#ab5cc9ada01565729187d65fce113899d" title="Advances one audio step along the ADSR and returns the level. ">ADSR::next()</a> interpolation steps) in the attack phase.  <a href="#a12a942278a6a621794b7d34a8edbc7c5">More...</a><br /></td></tr>
-<tr class="separator:a12a942278a6a621794b7d34a8edbc7c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fdc36f6648a058e0197ccaf2f5acdbd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a7fdc36f6648a058e0197ccaf2f5acdbd">setDecayUpdateSteps</a> (unsigned int steps)</td></tr>
-<tr class="memdesc:a7fdc36f6648a058e0197ccaf2f5acdbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the decay time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>, expressed as the number of update steps (not <a class="el" href="class_a_d_s_r.html#ab5cc9ada01565729187d65fce113899d" title="Advances one audio step along the ADSR and returns the level. ">ADSR::next()</a> interpolation steps) in the decay phase.  <a href="#a7fdc36f6648a058e0197ccaf2f5acdbd">More...</a><br /></td></tr>
-<tr class="separator:a7fdc36f6648a058e0197ccaf2f5acdbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac492e771fd8e653d4ce70f519fb9382"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#aac492e771fd8e653d4ce70f519fb9382">setSustainUpdateSteps</a> (unsigned int steps)</td></tr>
-<tr class="memdesc:aac492e771fd8e653d4ce70f519fb9382"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the sustain time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>, expressed as the number of update steps (not <a class="el" href="class_a_d_s_r.html#ab5cc9ada01565729187d65fce113899d" title="Advances one audio step along the ADSR and returns the level. ">ADSR::next()</a> interpolation steps) in the sustain phase.  <a href="#aac492e771fd8e653d4ce70f519fb9382">More...</a><br /></td></tr>
-<tr class="separator:aac492e771fd8e653d4ce70f519fb9382"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21eda3f27fbfc71d12ca89f54f89adaf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a21eda3f27fbfc71d12ca89f54f89adaf">setReleaseUpdateSteps</a> (unsigned int steps)</td></tr>
-<tr class="memdesc:a21eda3f27fbfc71d12ca89f54f89adaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the release time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>, expressed as the number of update steps (not <a class="el" href="class_a_d_s_r.html#ab5cc9ada01565729187d65fce113899d" title="Advances one audio step along the ADSR and returns the level. ">ADSR::next()</a> interpolation steps) in the release phase.  <a href="#a21eda3f27fbfc71d12ca89f54f89adaf">More...</a><br /></td></tr>
-<tr class="separator:a21eda3f27fbfc71d12ca89f54f89adaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75f1b593d9825049c96b21cca1e75173"><td class="memItemLeft" align="right" valign="top"><a id="a75f1b593d9825049c96b21cca1e75173"></a>
+<tr class="separator:a77daa5e20e49338f92a10b4c53593504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e16aa54a82fc6f907a7560e035adf2b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a5e16aa54a82fc6f907a7560e035adf2b">setTimes</a> (unsigned int attack_ms, unsigned int decay_ms, unsigned int sustain_ms, unsigned int release_ms)</td></tr>
+<tr class="memdesc:a5e16aa54a82fc6f907a7560e035adf2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the attack, decay and release times of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> in milliseconds.  <a href="#a5e16aa54a82fc6f907a7560e035adf2b">More...</a><br /></td></tr>
+<tr class="separator:a5e16aa54a82fc6f907a7560e035adf2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01cf549d19416288d604a02d95c31f21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a01cf549d19416288d604a02d95c31f21">setAttackUpdateSteps</a> (unsigned int steps)</td></tr>
+<tr class="memdesc:a01cf549d19416288d604a02d95c31f21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the attack time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>, expressed as the number of update steps (not <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">ADSR::next()</a> interpolation steps) in the attack phase.  <a href="#a01cf549d19416288d604a02d95c31f21">More...</a><br /></td></tr>
+<tr class="separator:a01cf549d19416288d604a02d95c31f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9a0d338581d3aaf6c4a89c4cfe19f5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#ae9a0d338581d3aaf6c4a89c4cfe19f5b">setDecayUpdateSteps</a> (unsigned int steps)</td></tr>
+<tr class="memdesc:ae9a0d338581d3aaf6c4a89c4cfe19f5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the decay time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>, expressed as the number of update steps (not <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">ADSR::next()</a> interpolation steps) in the decay phase.  <a href="#ae9a0d338581d3aaf6c4a89c4cfe19f5b">More...</a><br /></td></tr>
+<tr class="separator:ae9a0d338581d3aaf6c4a89c4cfe19f5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec9c57671f1dfae7aa529dcc51b98e40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#aec9c57671f1dfae7aa529dcc51b98e40">setSustainUpdateSteps</a> (unsigned int steps)</td></tr>
+<tr class="memdesc:aec9c57671f1dfae7aa529dcc51b98e40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the sustain time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>, expressed as the number of update steps (not <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">ADSR::next()</a> interpolation steps) in the sustain phase.  <a href="#aec9c57671f1dfae7aa529dcc51b98e40">More...</a><br /></td></tr>
+<tr class="separator:aec9c57671f1dfae7aa529dcc51b98e40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0de6df796f56e97a4c6c44a9692251eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a0de6df796f56e97a4c6c44a9692251eb">setReleaseUpdateSteps</a> (unsigned int steps)</td></tr>
+<tr class="memdesc:a0de6df796f56e97a4c6c44a9692251eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the release time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>, expressed as the number of update steps (not <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">ADSR::next()</a> interpolation steps) in the release phase.  <a href="#a0de6df796f56e97a4c6c44a9692251eb">More...</a><br /></td></tr>
+<tr class="separator:a0de6df796f56e97a4c6c44a9692251eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8668f42712c817f7d43fe9dfe9c364c"><td class="memItemLeft" align="right" valign="top"><a id="ad8668f42712c817f7d43fe9dfe9c364c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setIdleUpdateSteps</b> (unsigned int steps)</td></tr>
-<tr class="separator:a75f1b593d9825049c96b21cca1e75173"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab70af348346b644239a36d6a163369cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#ab70af348346b644239a36d6a163369cc">setAllUpdateSteps</a> (unsigned int attack_steps, unsigned int decay_steps, unsigned int sustain_steps, unsigned int release_steps)</td></tr>
-<tr class="memdesc:ab70af348346b644239a36d6a163369cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the attack, decay and release times of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>, expressed in update steps (not <a class="el" href="class_a_d_s_r.html#ab5cc9ada01565729187d65fce113899d" title="Advances one audio step along the ADSR and returns the level. ">ADSR::next()</a> interpolation steps).  <a href="#ab70af348346b644239a36d6a163369cc">More...</a><br /></td></tr>
-<tr class="separator:ab70af348346b644239a36d6a163369cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e85542579496e15fca189f33d31f149"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a7e85542579496e15fca189f33d31f149">playing</a> ()</td></tr>
-<tr class="memdesc:a7e85542579496e15fca189f33d31f149"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tells if the envelope is currently playing.  <a href="#a7e85542579496e15fca189f33d31f149">More...</a><br /></td></tr>
-<tr class="separator:a7e85542579496e15fca189f33d31f149"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:ad8668f42712c817f7d43fe9dfe9c364c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cd0d4d6fefdd58d81acb2a76b9fc4c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#a9cd0d4d6fefdd58d81acb2a76b9fc4c0">setAllUpdateSteps</a> (unsigned int attack_steps, unsigned int decay_steps, unsigned int sustain_steps, unsigned int release_steps)</td></tr>
+<tr class="memdesc:a9cd0d4d6fefdd58d81acb2a76b9fc4c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the attack, decay and release times of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>, expressed in update steps (not <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">ADSR::next()</a> interpolation steps).  <a href="#a9cd0d4d6fefdd58d81acb2a76b9fc4c0">More...</a><br /></td></tr>
+<tr class="separator:a9cd0d4d6fefdd58d81acb2a76b9fc4c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2723ed7ab315967afa81786c8d7621d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s_r.html#ab2723ed7ab315967afa81786c8d7621d">playing</a> ()</td></tr>
+<tr class="memdesc:ab2723ed7ab315967afa81786c8d7621d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tells if the envelope is currently playing.  <a href="#ab2723ed7ab315967afa81786c8d7621d">More...</a><br /></td></tr>
+<tr class="separator:ab2723ed7ab315967afa81786c8d7621d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ad7d5a1d98b7caf2cec77adb6e1ffed3a"><td class="memItemLeft" align="right" valign="top"><a id="ad7d5a1d98b7caf2cec77adb6e1ffed3a"></a>
+<tr class="memitem:aff42b7b93bb272371a90af7d8a935695"><td class="memItemLeft" align="right" valign="top"><a id="aff42b7b93bb272371a90af7d8a935695"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>adsr_playing</b></td></tr>
-<tr class="separator:ad7d5a1d98b7caf2cec77adb6e1ffed3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:aff42b7b93bb272371a90af7d8a935695"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt;<br />
-class ADSR&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</h3>
+<div class="textblock"><h3>template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt;<br />
+class ADSR&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;</h3>
 
 <p>A simple <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> envelope generator. </p>
-<p>This implementation has separate <a class="el" href="class_a_d_s_r.html#a764566274a3982b43cb1f9fb47ca06ae" title="Updates the internal controls of the ADSR. ">update()</a> and <a class="el" href="class_a_d_s_r.html#ab5cc9ada01565729187d65fce113899d" title="Advances one audio step along the ADSR and returns the level. ">next()</a> methods, where <a class="el" href="class_a_d_s_r.html#ab5cc9ada01565729187d65fce113899d" title="Advances one audio step along the ADSR and returns the level. ">next()</a> interpolates values between each <a class="el" href="class_a_d_s_r.html#a764566274a3982b43cb1f9fb47ca06ae" title="Updates the internal controls of the ADSR. ">update()</a>. The "normal" way to use this would be with <a class="el" href="class_a_d_s_r.html#a764566274a3982b43cb1f9fb47ca06ae" title="Updates the internal controls of the ADSR. ">update()</a> in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>, where it calculates a new internal state each control step, and then <a class="el" href="class_a_d_s_r.html#ab5cc9ada01565729187d65fce113899d" title="Advances one audio step along the ADSR and returns the level. ">next()</a> is in updateAudio(), called much more often, where it interpolates between the control values. This also allows the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> updates to be made even more sparsely if desired, eg. every 3rd control update. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+<p>This implementation has separate <a class="el" href="class_a_d_s_r.html#a1bef7104c263fc1f0df28809a788ee23" title="Updates the internal controls of the ADSR. ">update()</a> and <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> methods, where <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> interpolates values between each <a class="el" href="class_a_d_s_r.html#a1bef7104c263fc1f0df28809a788ee23" title="Updates the internal controls of the ADSR. ">update()</a>. The "normal" way to use this would be with <a class="el" href="class_a_d_s_r.html#a1bef7104c263fc1f0df28809a788ee23" title="Updates the internal controls of the ADSR. ">update()</a> in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>, where it calculates a new internal state each control step, and then <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> is in <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a>, called much more often, where it interpolates between the control values. This also allows the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> updates to be made even more sparsely if desired, eg. every 3rd control update. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">CONTROL_UPDATE_RATE</td><td>The frequency of control updates. Ordinarily this will be CONTROL_RATE, but an alternative (amongst others) is to set this as well as the LERP_RATE parameter to AUDIO_RATE, and call both <a class="el" href="class_a_d_s_r.html#a764566274a3982b43cb1f9fb47ca06ae" title="Updates the internal controls of the ADSR. ">update()</a> and <a class="el" href="class_a_d_s_r.html#ab5cc9ada01565729187d65fce113899d" title="Advances one audio step along the ADSR and returns the level. ">next()</a> in updateAudio(). Such a use would allow accurate envelopes with finer resolution of the control points than CONTROL_RATE. </td></tr>
-    <tr><td class="paramname">LERP_RATE</td><td>Sets how often <a class="el" href="class_a_d_s_r.html#ab5cc9ada01565729187d65fce113899d" title="Advances one audio step along the ADSR and returns the level. ">next()</a> will be called, to interpolate between updates set by CONTROL_UPDATE_RATE. This will produce the smoothest results if it's set to AUDIO_RATE, but if you need to save processor time and your envelope changes slowly or controls something like a filter where there may not be problems with glitchy or clicking transitions, LERP_RATE could be set to CONTROL_RATE (for instance). Then <a class="el" href="class_a_d_s_r.html#a764566274a3982b43cb1f9fb47ca06ae" title="Updates the internal controls of the ADSR. ">update()</a> and <a class="el" href="class_a_d_s_r.html#ab5cc9ada01565729187d65fce113899d" title="Advances one audio step along the ADSR and returns the level. ">next()</a> could both be called in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>, greatly reducing the amount of processing required compared to calling <a class="el" href="class_a_d_s_r.html#ab5cc9ada01565729187d65fce113899d" title="Advances one audio step along the ADSR and returns the level. ">next()</a> in updateAudio(). </td></tr>
+    <tr><td class="paramname">CONTROL_UPDATE_RATE</td><td>The frequency of control updates. Ordinarily this will be CONTROL_RATE, but an alternative (amongst others) is to set this as well as the LERP_RATE parameter to AUDIO_RATE, and call both <a class="el" href="class_a_d_s_r.html#a1bef7104c263fc1f0df28809a788ee23" title="Updates the internal controls of the ADSR. ">update()</a> and <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> in <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a>. Such a use would allow accurate envelopes with finer resolution of the control points than CONTROL_RATE. </td></tr>
+    <tr><td class="paramname">LERP_RATE</td><td>Sets how often <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> will be called, to interpolate between updates set by CONTROL_UPDATE_RATE. This will produce the smoothest results if it's set to AUDIO_RATE, but if you need to save processor time and your envelope changes slowly or controls something like a filter where there may not be problems with glitchy or clicking transitions, LERP_RATE could be set to CONTROL_RATE (for instance). Then <a class="el" href="class_a_d_s_r.html#a1bef7104c263fc1f0df28809a788ee23" title="Updates the internal controls of the ADSR. ">update()</a> and <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> could both be called in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>, greatly reducing the amount of processing required compared to calling <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> in <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a>. </td></tr>
   </table>
   </dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00045">45</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab5cc9ada01565729187d65fce113899d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5cc9ada01565729187d65fce113899d">&#9670;&nbsp;</a></span>next()</h2>
+<a id="aa032d8689ff618dbfa974ec6803803ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa032d8689ff618dbfa974ec6803803ef">&#9670;&nbsp;</a></span>next()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned char <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::next </td>
+          <td class="memname">unsigned char <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::next </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -240,25 +240,25 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 </div><div class="memdoc">
 
 <p>Advances one audio step along the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> and returns the level. </p>
-<p>Call this in updateAudio(). </p><dl class="section return"><dt>Returns</dt><dd>the next value, as an unsigned char. </dd></dl>
+<p>Call this in <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a>. </p><dl class="section return"><dt>Returns</dt><dd>the next value, as an unsigned char. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00165">165</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
-<a id="ab5ec578b60c4eb157312ed9c718eb44b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5ec578b60c4eb157312ed9c718eb44b">&#9670;&nbsp;</a></span>noteOff()</h2>
+<a id="a3c7362c1c91486e09a306b5109ad498c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c7362c1c91486e09a306b5109ad498c">&#9670;&nbsp;</a></span>noteOff()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::noteOff </td>
+          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::noteOff </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -277,19 +277,19 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 
 </div>
 </div>
-<a id="a6263c1a5dc36ab9df3f679514c4e09e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6263c1a5dc36ab9df3f679514c4e09e2">&#9670;&nbsp;</a></span>noteOn()</h2>
+<a id="aef8d9c2799485fcd5a854228503f9f2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef8d9c2799485fcd5a854228503f9f2f">&#9670;&nbsp;</a></span>noteOn()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::noteOn </td>
+          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::noteOn </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>reset</em> = <code>false</code></td><td>)</td>
@@ -315,19 +315,19 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 
 </div>
 </div>
-<a id="a7e85542579496e15fca189f33d31f149"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e85542579496e15fca189f33d31f149">&#9670;&nbsp;</a></span>playing()</h2>
+<a id="ab2723ed7ab315967afa81786c8d7621d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2723ed7ab315967afa81786c8d7621d">&#9670;&nbsp;</a></span>playing()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::playing </td>
+          <td class="memname">bool <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::playing </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -347,19 +347,19 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 
 </div>
 </div>
-<a id="a5739379144932ae38f408b228d05b7cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5739379144932ae38f408b228d05b7cb">&#9670;&nbsp;</a></span>setADLevels()</h2>
+<a id="a48aa75585d0ff96c87b4b232ee3df753"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48aa75585d0ff96c87b4b232ee3df753">&#9670;&nbsp;</a></span>setADLevels()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::setADLevels </td>
+          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::setADLevels </td>
           <td>(</td>
           <td class="paramtype">byte&#160;</td>
           <td class="paramname"><em>attack</em>, </td>
@@ -396,19 +396,19 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 
 </div>
 </div>
-<a id="ab70af348346b644239a36d6a163369cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab70af348346b644239a36d6a163369cc">&#9670;&nbsp;</a></span>setAllUpdateSteps()</h2>
+<a id="a9cd0d4d6fefdd58d81acb2a76b9fc4c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cd0d4d6fefdd58d81acb2a76b9fc4c0">&#9670;&nbsp;</a></span>setAllUpdateSteps()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::setAllUpdateSteps </td>
+          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::setAllUpdateSteps </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>attack_steps</em>, </td>
@@ -444,7 +444,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set the attack, decay and release times of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>, expressed in update steps (not <a class="el" href="class_a_d_s_r.html#ab5cc9ada01565729187d65fce113899d" title="Advances one audio step along the ADSR and returns the level. ">ADSR::next()</a> interpolation steps). </p>
+<p>Set the attack, decay and release times of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>, expressed in update steps (not <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">ADSR::next()</a> interpolation steps). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">attack_steps</td><td>the number of update steps in the attack phase </td></tr>
@@ -459,19 +459,19 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 
 </div>
 </div>
-<a id="a6e1741d76154cca16b2c8354b5d6db1d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e1741d76154cca16b2c8354b5d6db1d">&#9670;&nbsp;</a></span>setAttackLevel()</h2>
+<a id="a8a54760cfc0fee1b02983aa4c0331aa1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a54760cfc0fee1b02983aa4c0331aa1">&#9670;&nbsp;</a></span>setAttackLevel()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::setAttackLevel </td>
+          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::setAttackLevel </td>
           <td>(</td>
           <td class="paramtype">byte&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
@@ -497,19 +497,19 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 
 </div>
 </div>
-<a id="ad5160133723ed85ec89f20bde128f604"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad5160133723ed85ec89f20bde128f604">&#9670;&nbsp;</a></span>setAttackTime()</h2>
+<a id="aaf4131de0c02e4f154a97e3e9d95c199"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf4131de0c02e4f154a97e3e9d95c199">&#9670;&nbsp;</a></span>setAttackTime()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::setAttackTime </td>
+          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::setAttackTime </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>msec</em></td><td>)</td>
@@ -536,19 +536,19 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 
 </div>
 </div>
-<a id="a12a942278a6a621794b7d34a8edbc7c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12a942278a6a621794b7d34a8edbc7c5">&#9670;&nbsp;</a></span>setAttackUpdateSteps()</h2>
+<a id="a01cf549d19416288d604a02d95c31f21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01cf549d19416288d604a02d95c31f21">&#9670;&nbsp;</a></span>setAttackUpdateSteps()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::setAttackUpdateSteps </td>
+          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::setAttackUpdateSteps </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>steps</em></td><td>)</td>
@@ -562,10 +562,10 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set the attack time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>, expressed as the number of update steps (not <a class="el" href="class_a_d_s_r.html#ab5cc9ada01565729187d65fce113899d" title="Advances one audio step along the ADSR and returns the level. ">ADSR::next()</a> interpolation steps) in the attack phase. </p>
+<p>Set the attack time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>, expressed as the number of update steps (not <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">ADSR::next()</a> interpolation steps) in the attack phase. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">steps</td><td>the number of times <a class="el" href="class_a_d_s_r.html#a764566274a3982b43cb1f9fb47ca06ae" title="Updates the internal controls of the ADSR. ">ADSR::update()</a> will be called in the attack phase. </td></tr>
+    <tr><td class="paramname">steps</td><td>the number of times <a class="el" href="class_a_d_s_r.html#a1bef7104c263fc1f0df28809a788ee23" title="Updates the internal controls of the ADSR. ">ADSR::update()</a> will be called in the attack phase. </td></tr>
   </table>
   </dd>
 </dl>
@@ -574,19 +574,19 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 
 </div>
 </div>
-<a id="a6542f4a76a37696245447855d647b41f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6542f4a76a37696245447855d647b41f">&#9670;&nbsp;</a></span>setDecayLevel()</h2>
+<a id="a0ad21cb6ed8fa44bb24134f2b5b4f296"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ad21cb6ed8fa44bb24134f2b5b4f296">&#9670;&nbsp;</a></span>setDecayLevel()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::setDecayLevel </td>
+          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::setDecayLevel </td>
           <td>(</td>
           <td class="paramtype">byte&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
@@ -612,19 +612,19 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 
 </div>
 </div>
-<a id="a3b8c6492ad9a379dc0c6749677ba4d29"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b8c6492ad9a379dc0c6749677ba4d29">&#9670;&nbsp;</a></span>setDecayTime()</h2>
+<a id="a1a0cb7fbf47f65dc81df7b5eb21ae4ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a0cb7fbf47f65dc81df7b5eb21ae4ec">&#9670;&nbsp;</a></span>setDecayTime()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::setDecayTime </td>
+          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::setDecayTime </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>msec</em></td><td>)</td>
@@ -651,19 +651,19 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 
 </div>
 </div>
-<a id="a7fdc36f6648a058e0197ccaf2f5acdbd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7fdc36f6648a058e0197ccaf2f5acdbd">&#9670;&nbsp;</a></span>setDecayUpdateSteps()</h2>
+<a id="ae9a0d338581d3aaf6c4a89c4cfe19f5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9a0d338581d3aaf6c4a89c4cfe19f5b">&#9670;&nbsp;</a></span>setDecayUpdateSteps()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::setDecayUpdateSteps </td>
+          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::setDecayUpdateSteps </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>steps</em></td><td>)</td>
@@ -677,10 +677,10 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set the decay time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>, expressed as the number of update steps (not <a class="el" href="class_a_d_s_r.html#ab5cc9ada01565729187d65fce113899d" title="Advances one audio step along the ADSR and returns the level. ">ADSR::next()</a> interpolation steps) in the decay phase. </p>
+<p>Set the decay time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>, expressed as the number of update steps (not <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">ADSR::next()</a> interpolation steps) in the decay phase. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">steps</td><td>the number of times <a class="el" href="class_a_d_s_r.html#a764566274a3982b43cb1f9fb47ca06ae" title="Updates the internal controls of the ADSR. ">ADSR::update()</a> will be called in the decay phase. </td></tr>
+    <tr><td class="paramname">steps</td><td>the number of times <a class="el" href="class_a_d_s_r.html#a1bef7104c263fc1f0df28809a788ee23" title="Updates the internal controls of the ADSR. ">ADSR::update()</a> will be called in the decay phase. </td></tr>
   </table>
   </dd>
 </dl>
@@ -689,19 +689,19 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 
 </div>
 </div>
-<a id="ae6a213e9c236eb3b47e941384693e75d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6a213e9c236eb3b47e941384693e75d">&#9670;&nbsp;</a></span>setLevels()</h2>
+<a id="a4ef5dfa5c71809737c3e614b09775203"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ef5dfa5c71809737c3e614b09775203">&#9670;&nbsp;</a></span>setLevels()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::setLevels </td>
+          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::setLevels </td>
           <td>(</td>
           <td class="paramtype">byte&#160;</td>
           <td class="paramname"><em>attack</em>, </td>
@@ -752,19 +752,19 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 
 </div>
 </div>
-<a id="a2651482b2f666e224cf8ce82f4146213"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2651482b2f666e224cf8ce82f4146213">&#9670;&nbsp;</a></span>setReleaseLevel()</h2>
+<a id="a8f67baf632be737cbae5a1d62edc4e23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f67baf632be737cbae5a1d62edc4e23">&#9670;&nbsp;</a></span>setReleaseLevel()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::setReleaseLevel </td>
+          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::setReleaseLevel </td>
           <td>(</td>
           <td class="paramtype">byte&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
@@ -790,19 +790,19 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 
 </div>
 </div>
-<a id="a2333aa55547ec8c690e632265cd4f1c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2333aa55547ec8c690e632265cd4f1c4">&#9670;&nbsp;</a></span>setReleaseTime()</h2>
+<a id="aabd0af40f4676bde840f6c83bbe302b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabd0af40f4676bde840f6c83bbe302b2">&#9670;&nbsp;</a></span>setReleaseTime()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::setReleaseTime </td>
+          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::setReleaseTime </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>msec</em></td><td>)</td>
@@ -829,19 +829,19 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 
 </div>
 </div>
-<a id="a21eda3f27fbfc71d12ca89f54f89adaf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21eda3f27fbfc71d12ca89f54f89adaf">&#9670;&nbsp;</a></span>setReleaseUpdateSteps()</h2>
+<a id="a0de6df796f56e97a4c6c44a9692251eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0de6df796f56e97a4c6c44a9692251eb">&#9670;&nbsp;</a></span>setReleaseUpdateSteps()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::setReleaseUpdateSteps </td>
+          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::setReleaseUpdateSteps </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>steps</em></td><td>)</td>
@@ -855,10 +855,10 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set the release time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>, expressed as the number of update steps (not <a class="el" href="class_a_d_s_r.html#ab5cc9ada01565729187d65fce113899d" title="Advances one audio step along the ADSR and returns the level. ">ADSR::next()</a> interpolation steps) in the release phase. </p>
+<p>Set the release time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>, expressed as the number of update steps (not <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">ADSR::next()</a> interpolation steps) in the release phase. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">steps</td><td>the number of times <a class="el" href="class_a_d_s_r.html#a764566274a3982b43cb1f9fb47ca06ae" title="Updates the internal controls of the ADSR. ">ADSR::update()</a> will be called in the release phase. </td></tr>
+    <tr><td class="paramname">steps</td><td>the number of times <a class="el" href="class_a_d_s_r.html#a1bef7104c263fc1f0df28809a788ee23" title="Updates the internal controls of the ADSR. ">ADSR::update()</a> will be called in the release phase. </td></tr>
   </table>
   </dd>
 </dl>
@@ -867,19 +867,19 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 
 </div>
 </div>
-<a id="a4e54b94f8adf1555996c0aa254d3245b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e54b94f8adf1555996c0aa254d3245b">&#9670;&nbsp;</a></span>setSustainLevel()</h2>
+<a id="aec7ac1290688214a934c3b9f78ca43e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec7ac1290688214a934c3b9f78ca43e9">&#9670;&nbsp;</a></span>setSustainLevel()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::setSustainLevel </td>
+          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::setSustainLevel </td>
           <td>(</td>
           <td class="paramtype">byte&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
@@ -905,19 +905,19 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 
 </div>
 </div>
-<a id="abd93d77bf049b8151eeb735685b0e8d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd93d77bf049b8151eeb735685b0e8d7">&#9670;&nbsp;</a></span>setSustainTime()</h2>
+<a id="ad0c7bd5b53f4b5c2d4ff3b5116d5c40f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0c7bd5b53f4b5c2d4ff3b5116d5c40f">&#9670;&nbsp;</a></span>setSustainTime()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::setSustainTime </td>
+          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::setSustainTime </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>msec</em></td><td>)</td>
@@ -932,7 +932,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 </div><div class="memdoc">
 
 <p>Set the sustain time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> in milliseconds. </p>
-<p>The actual time taken will be resolved within the resolution of CONTROL_RATE. The sustain phase will finish if the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> recieves a <a class="el" href="class_a_d_s_r.html#ab5ec578b60c4eb157312ed9c718eb44b" title="Start the release phase of the ADSR. ">noteOff()</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The actual time taken will be resolved within the resolution of CONTROL_RATE. The sustain phase will finish if the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> recieves a <a class="el" href="class_a_d_s_r.html#a3c7362c1c91486e09a306b5109ad498c" title="Start the release phase of the ADSR. ">noteOff()</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">msec</td><td>the unsigned int sustain time in milliseconds. </td></tr>
   </table>
@@ -944,19 +944,19 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 
 </div>
 </div>
-<a id="aac492e771fd8e653d4ce70f519fb9382"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac492e771fd8e653d4ce70f519fb9382">&#9670;&nbsp;</a></span>setSustainUpdateSteps()</h2>
+<a id="aec9c57671f1dfae7aa529dcc51b98e40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec9c57671f1dfae7aa529dcc51b98e40">&#9670;&nbsp;</a></span>setSustainUpdateSteps()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::setSustainUpdateSteps </td>
+          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::setSustainUpdateSteps </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>steps</em></td><td>)</td>
@@ -970,10 +970,10 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set the sustain time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>, expressed as the number of update steps (not <a class="el" href="class_a_d_s_r.html#ab5cc9ada01565729187d65fce113899d" title="Advances one audio step along the ADSR and returns the level. ">ADSR::next()</a> interpolation steps) in the sustain phase. </p>
+<p>Set the sustain time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>, expressed as the number of update steps (not <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">ADSR::next()</a> interpolation steps) in the sustain phase. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">steps</td><td>the number of times <a class="el" href="class_a_d_s_r.html#a764566274a3982b43cb1f9fb47ca06ae" title="Updates the internal controls of the ADSR. ">ADSR::update()</a> will be called in the sustain phase. </td></tr>
+    <tr><td class="paramname">steps</td><td>the number of times <a class="el" href="class_a_d_s_r.html#a1bef7104c263fc1f0df28809a788ee23" title="Updates the internal controls of the ADSR. ">ADSR::update()</a> will be called in the sustain phase. </td></tr>
   </table>
   </dd>
 </dl>
@@ -982,19 +982,19 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 
 </div>
 </div>
-<a id="a68df2fe03f1582d79e7b55e3407d474b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a68df2fe03f1582d79e7b55e3407d474b">&#9670;&nbsp;</a></span>setTimes()</h2>
+<a id="a5e16aa54a82fc6f907a7560e035adf2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e16aa54a82fc6f907a7560e035adf2b">&#9670;&nbsp;</a></span>setTimes()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::setTimes </td>
+          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::setTimes </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>attack_ms</em>, </td>
@@ -1046,19 +1046,19 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 
 </div>
 </div>
-<a id="a764566274a3982b43cb1f9fb47ca06ae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a764566274a3982b43cb1f9fb47ca06ae">&#9670;&nbsp;</a></span>update()</h2>
+<a id="a1bef7104c263fc1f0df28809a788ee23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bef7104c263fc1f0df28809a788ee23">&#9670;&nbsp;</a></span>update()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
+template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;::update </td>
+          <td class="memname">void <a class="el" href="class_a_d_s_r.html">ADSR</a>&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;::update </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1084,7 +1084,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_a_d_s_r.html">ADSR</a></li>
-    <li class="footer">Generated on Fri Jul 17 2020 20:16:37 for Mozzi by
+    <li class="footer">Generated on Mon Feb 8 2021 17:03:47 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

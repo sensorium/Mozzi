@@ -4,9 +4,8 @@ var indexSectionsWithContent =
   1: "acdeilmoprsw",
   2: "c",
   3: "acdefgilmnopqrstuwx",
-  4: "a",
-  5: "q",
-  6: "acfmrsu"
+  4: "q",
+  5: "acfmrsu"
 };
 
 var indexSectionNames =
@@ -15,9 +14,8 @@ var indexSectionNames =
   1: "classes",
   2: "files",
   3: "functions",
-  4: "variables",
-  5: "typedefs",
-  6: "groups"
+  4: "typedefs",
+  5: "groups"
 };
 
 var indexSectionLabels =
@@ -26,8 +24,7 @@ var indexSectionLabels =
   1: "Classes",
   2: "Files",
   3: "Functions",
-  4: "Variables",
-  5: "Typedefs",
-  6: "Modules"
+  4: "Typedefs",
+  5: "Modules"
 };
 

@@ -3,6 +3,7 @@ var files_dup =
     [ "ADSR.h", "_a_d_s_r_8h_source.html", null ],
     [ "audio2huff.py", "audio2huff_8py_source.html", null ],
     [ "AudioConfigESP.h", "_audio_config_e_s_p_8h_source.html", null ],
+    [ "AudioConfigESP32.h", "_audio_config_e_s_p32_8h_source.html", null ],
     [ "AudioConfigHiSpeed14bitPwm.h", "_audio_config_hi_speed14bit_pwm_8h_source.html", null ],
     [ "AudioConfigSAMD21.h", "_audio_config_s_a_m_d21_8h_source.html", null ],
     [ "AudioConfigStandard9bitPwm.h", "_audio_config_standard9bit_pwm_8h_source.html", null ],

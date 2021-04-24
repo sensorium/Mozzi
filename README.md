@@ -74,7 +74,7 @@ Sanguino | 13	| -
 STM32duino (see "Hardware specific notes", below) | PB8 | yes
 ESP8266 *see details* | GPIO2 | yes
 
-For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).  
+For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.io/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).  
 
 ***
 
@@ -102,14 +102,14 @@ void loop() {
 }
 ```
 
-There's a detailed example explaining the different parts [here](http://sensorium.github.com/Mozzi/learn/a-simple-sketch/).
+There's a detailed example explaining the different parts [here](http://sensorium.github.io/Mozzi/learn/a-simple-sketch/).
 
 ***
 
 ## Documentation
 
-There's documentation in the doc folder in the Mozzi download and [online](http://sensorium.github.com/Mozzi/doc/html/index.html).  
-There is practical help on the [learn](http://sensorium.github.com/Mozzi/learn/) page on the Mozzi site.  
+There's documentation in the doc folder in the Mozzi download and [online](http://sensorium.github.io/Mozzi/doc/html/index.html).  
+There is practical help on the [learn](http://sensorium.github.io/Mozzi/learn/) page on the Mozzi site.  
 Start or look up a topic on the [users forum](https://groups.google.com/forum/#!forum/mozzi-users/).  
 Also, feel free to submit any issues on the [GitHub Mozzi site](https://github.com/sensorium/Mozzi/issues/).  
 Look for code and usage changes [here](extras/NEWS.txt).  

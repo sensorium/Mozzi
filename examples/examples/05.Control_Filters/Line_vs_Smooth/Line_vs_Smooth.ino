@@ -10,7 +10,7 @@
 
     Circuit: Audio output on digital pin 9
     (for standard output on a Uno or similar), or
-    check the README or http://sensorium.github.com/Mozzi/
+    check the README or http://sensorium.github.io/Mozzi/
     Your choice of analog sesnsors, or
     2 10k Potentiometers with wipers (middle terminals)
     connected to analog pins 0, 1 and 2, and

@@ -83,7 +83,7 @@ Try some examples from the __File > Examples > Mozzi__ menu.
 
 You could try a [Mozzibyte](https://www.kickstarter.com/projects/mozzibyte/mozzibyte-mozzi-arduino-mini-sensor-sonification-s), a little board for Mozzi with an amp and sockets for headphone/line and speaker.
 
-For more about audio output, including HIFI mode, read the [Mozzi core module documentation](https://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).
+For more about audio output, including HIFI mode, read the [Mozzi core module documentation](https://sensorium.github.io/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).
 
 
 ## Using Mozzi
@@ -114,7 +114,7 @@ There's a detailed example explaining the different parts [here](learn/a-simple-
 
 ## Documentation
 
-There's documentation in the extras/doc folder in the Mozzi download and [online](https://sensorium.github.com/Mozzi/doc/html/index.html).
+There's documentation in the extras/doc folder in the Mozzi download and [online](https://sensorium.github.io/Mozzi/doc/html/index.html).
 There is practical help on the [learn](learn/) page on the Mozzi site.
 Start or look up a topic on the [users forum](https://groups.google.com/forum/#!forum/mozzi-users/).
 Also, feel free to submit any issues on the [GitHub Mozzi site](https://github.com/sensorium/Mozzi/issues/).

@@ -10,7 +10,7 @@
   Circuit:
 
     Audio output on digital pin 9 on a Uno or similar, or
-    check the README or http://sensorium.github.com/Mozzi/
+    check the README or http://sensorium.github.io/Mozzi/
 
     Pushbutton on digital pin D4
       button from the digital pin to +5V

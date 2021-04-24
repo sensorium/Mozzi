@@ -7,7 +7,7 @@
 
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
     DAC/A14 on Teensy 3.1, or
-    check the README or http://sensorium.github.com/Mozzi/
+    check the README or http://sensorium.github.io/Mozzi/
 
 		Mozzi documentation/API
 		https://sensorium.github.io/Mozzi/doc/html/index.html

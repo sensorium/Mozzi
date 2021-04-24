@@ -48,7 +48,7 @@ public:
 
 	/**  Play a note in response to midi input.  Params copied from MIDI library HandleNoteOn().
 	@param channel is the midi channel
-	@param pitch is the frequency in Hz
+	@param pitch is the midi note
 	@param velocity you know what it is
 	*/
 	void noteOn(byte channel, byte pitch, byte velocity)
@@ -63,7 +63,7 @@ public:
 
 	/**  Stop a note in response to midi input.    Params copied from MIDI library HandleNoteOff()
 	@param channel is the midi channel
-	@param pitch is the frequency in Hz
+	@param pitch is the midi note
 	@param velocity you know what it is
 	*/
 	void noteOff(byte channel, byte pitch, byte velocity)

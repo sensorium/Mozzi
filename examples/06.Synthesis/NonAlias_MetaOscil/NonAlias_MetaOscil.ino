@@ -1,7 +1,7 @@
-/*  Example playing a sinewave at a set frequency,
+/*  Example playing a squarewave on a sweep without aliases,
     using Mozzi sonification library.
 
-    Demonstrates the use of Oscil to play a wavetable.
+    Demonstrates the use of MetaOscil to play a wavetables sequentially to avoid aliases.
 
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
     DAC/A14 on Teensy 3.1, or

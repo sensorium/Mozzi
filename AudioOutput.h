@@ -338,7 +338,6 @@ inline void audioOutput(const AudioOutput f) {
 #endif
 
 
-
 ///////////////////// AVR STANDARD
 #if IS_AVR() && (AUDIO_MODE == STANDARD_PLUS)
 #include "AudioConfigStandardPlus.h"
@@ -349,8 +348,6 @@ inline void audioOutput(const AudioOutput f)
   AUDIO_CHANNEL_2_OUTPUT_REGISTER = f.r()+AUDIO_BIAS;
 #endif
 }
-
-
 
 ///////////////////// AVR HIFI
 #elif IS_AVR() && (AUDIO_MODE == HIFI)

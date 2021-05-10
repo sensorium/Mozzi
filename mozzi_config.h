@@ -73,7 +73,6 @@ otherwise make it false, to save resources.
 //#define USE_AUDIO_INPUT true
 
 
-
 /** @ingroup core
 This sets which analog input channel to use for audio input, if you have
 \#define USE_AUDIO_INPUT  true

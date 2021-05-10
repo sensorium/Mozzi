@@ -158,6 +158,8 @@ HIFI is not available/not required on Teensy 3.* or ARM.
     #include "AudioConfigStandardPlus.h"
     #elif IS_AVR() && (AUDIO_MODE == HIFI)
     #include "AudioConfigHiSpeed14bitPwm.h"
+    #elif IS_RP2040()  
+    #include "AudioConfigRP2040.h"
     #endif
 #endif
 

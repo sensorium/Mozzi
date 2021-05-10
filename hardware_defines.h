@@ -50,4 +50,16 @@
 #include <STM32ADC.h>
 #endif
 
+#if IS_TEENSY3()
+#include <ADC.h>
+#endif
+
+/** 
+You can define the use of the legacy MozziGuts.h and MozziGuts.cpp - my adding an override in the processor specific section or by setting the value here
+to affect all procssors
+*/
+#ifndef USE_LEGACY_GUTS
+#define USE_LEGACY_GUTS false
+#endif
+
 #endif /* HARDWARE_DEFINES_H_ */

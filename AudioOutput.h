@@ -253,7 +253,7 @@ inline void audioOutput(const AudioOutput f)
 
 ///////////////////// ESP8266
 #if IS_ESP8266()
-#include "AudioConfigESP.h"
+#include "AudioConfigESP8266.h"
 #if (ESP_AUDIO_OUT_MODE == PDM_VIA_I2S)
 #include <i2s.h>
 inline bool canBufferAudioOutput() {

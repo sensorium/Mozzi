@@ -219,7 +219,7 @@ port by Thomas Friedrichsmeier
 - Asynchronous analog reads are not implemented. `mozziAnalogRead()` relays to `analogRead()`.
 - AUDIO_INPUT is not implemented.
 - twi_nonblock is not ported
-- Several audio output modes exist, the default being PDM_VIA_SERIAL (configurable in AudioConfigESP.h):
+- Several audio output modes exist, the default being PDM_VIA_SERIAL (configurable in AudioConfigESP8266.h):
   - PDM_VIA_SERIAL: Output is coded using pulse density modulation, and sent via GPIO2 (Serial1 TX).
     - This output mode uses timer1 for queuing audio sample, so that timer is not available for other uses.
     - Note that this mode has slightly lower effective analog output range than PDM_VIA_I2S, due to start/stop bits being added to the output stream.

@@ -6,7 +6,7 @@
 #else
  #include "WProgram.h"
 #endif
-#include "mozzi_pgmspace.h")
+#include "mozzi_pgmspace.h"
 
 
 #define SQUARE_MAX_500_AT_16384_2048_NUM_CELLS 2048

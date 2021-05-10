@@ -61,7 +61,7 @@ unsigned long MozziClass::audioTicks() {
 //-----------------------------------------------------------------------------------------------------------------
 
 // Timer Callback
-long long int defaultAudioOutput(long int v, void* obj) {
+bool defaultAudioOutput(repeating_timer *t) {
   audioOutput(output_buffer.read());
   return true;
 }

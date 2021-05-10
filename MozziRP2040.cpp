@@ -138,7 +138,6 @@ void MozziClass::stop() {
   if (alarm_id!=-1){
     alarm_pool_cancel_alarm(ap, alarm_id);
   }
-  interrupts();
 }
 
 unsigned long MozziClass::mozziMicros() { 

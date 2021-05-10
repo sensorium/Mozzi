@@ -776,4 +776,4 @@ unsigned long mozziMicros() { return audioTicks() * MICROS_PER_AUDIO_TICK; }
 // 	Timer1.isrCallback();
 // }
 
-#endif USE_LEGACY_GUTS
+#endif // USE_LEGACY_GUTS

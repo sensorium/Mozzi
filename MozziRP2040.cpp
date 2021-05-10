@@ -1,8 +1,11 @@
 /*
- * MozziTeensy3.cpp
- *
+ * MozziRP2040.cpp
+ * 
+ * Mozzi Support for the Rasperry Pico
+ * 
  * Copyright 2012 Tim Barrass.
- *
+ * Copyright 2021 Phil Schatzmann.
+ * 
  * This file is part of Mozzi.
  *
  * Mozzi by Tim Barrass is licensed under a Creative Commons
@@ -15,13 +18,12 @@
 
 #include "CircularBuffer.h"
 #include "Mozzi.h"
-#include "mozzi_analog.h"
-#include "mozzi_config.h" // at the top of all MozziGuts and analog files
+//#include "mozzi_analog.h"
 #include "AudioOutput.h"
 #include "hardware/gpio.h"
 #include "hardware/adc.h"
 #include "hardware/pwm.h"
-#include "hardware/clocks.h"
+#include "pico/time.h"
 
 // common variables
 alarm_id_t alarm_id=-1;
@@ -102,14 +104,14 @@ void setupPWM() {
 
 void setupTimer() {
   // start output timer
+  //alarm_pool_init_default();
+  //ap = alarm_pool_get_default();
   //ap = alarm_pool_create(ALARM_POOL_HARDWARE_ALARM_NUM, ALARM_POOL_HARDWARE_ALARM_COUNT);
-  alarm_pool_init_default();
-  ap = alarm_pool_get_default();
+  //ap = alarm_pool_create(PICO_TIME_DEFAULT_ALARM_POOL_HARDWARE_ALARM_NUM, ALARM_POOL_HARDWARE_ALARM_COUNT);
   uint64_t time = 1000000UL / AUDIO_RATE;
-  if (!alarm_pool_add_repeating_timer_us(ap, -time, defaultAudioOutput, nullptr, &timer)){
-    LOG_OUTPUT.println("Could not start timer");
+  if (!add_repeating_timer_ms(-time, defaultAudioOutput, nullptr, &timer)){
+    LOG_OUTPUT.println("Error: alarm_pool_add_repeating_timer_us failed; no alarm slots available");
   }
-
 }
 
 void startAudio() {
@@ -166,22 +168,22 @@ void MozziClass::audioHook()
 //-----------------------------------------------------------------------------------------------------------------
 /// Output
 
-inline void pwmWrite(int channel, int16_t value){
+inline void writePWM(int channel, int16_t value){
   pwm_set_chan_level(pwm_slice_num, channel, value);
-  LOG_OUTPUT.println(value);
+  //LOG_OUTPUT.println(value);
 }
 
 /// Output will always be on both pins!
 inline void audioOutput(const AudioOutput f) {
 #if (AUDIO_MODE == HIFI)
-  pwmWrite(PWM_CHAN_A, (f.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
-  pwmWrite(PWM_CHAN_B, (f.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
+  writePWM(PWM_CHAN_A, (f.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
+  writePWM(PWM_CHAN_B, (f.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
 #else
-  pwmWrite(PWM_CHAN_A, f.l()+AUDIO_BIAS);
+  writePWM(PWM_CHAN_A, f.l()+AUDIO_BIAS);
   #if (STEREO_HACK == true)
-    pwmWrite(PWM_CHAN_B, f.r()+AUDIO_BIAS);
+    writePWM(PWM_CHAN_B, f.r()+AUDIO_BIAS);
   #else
-    pwmWrite(PWM_CHAN_B, f.l()+AUDIO_BIAS);
+    writePWM(PWM_CHAN_B, f.l()+AUDIO_BIAS);
   #endif
 #endif
 }

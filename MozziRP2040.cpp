@@ -105,7 +105,7 @@ void setupTimer() {
   alarm_pool_init_default();
   ap = alarm_pool_get_default();
   uint64_t time = 1000000UL / AUDIO_RATE;
-  alarm_id = alarm_pool_add_alarm_in_us(ap, -time, defaultAudioOutput, nullptr, false);
+  alarm_id = alarm_pool_add_repeating_timer_us(ap, -time, defaultAudioOutput, nullptr, false);
 
 }
 
@@ -136,7 +136,7 @@ void MozziClass::start(int control_rate_hz) {
 
 void MozziClass::stop() {
   if (alarm_id!=-1){
-    alarm_pool_cancel_alarm(ap, alarm_id);
+    cancel_repeating_timer(ap, alarm_id);
   }
 }
 

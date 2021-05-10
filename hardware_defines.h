@@ -55,7 +55,9 @@
 #include <ADC.h>
 #endif
 
-
+#if IS_RP2040()
+#define NUM_ANALOG_INPUTS 1
+#endif
 
 /** 
 You can define the use of the legacy MozziGuts.h and MozziGuts.cpp - my adding an override in the processor specific section or by setting the value here

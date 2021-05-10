@@ -22,3 +22,4 @@
 
 // Bypass buffering -> only false is supported
 #define BYPASS_MOZZI_OUTPUT_BUFFER false
+#define LOG_OUTPUT Serial

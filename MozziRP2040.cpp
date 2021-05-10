@@ -26,6 +26,7 @@
 // common variables
 alarm_id_t alarm_id=-1;
 alarm_pool_t *ap;
+repeating_timer_t timer;
 uint pwm_slice_num;
 
 ////// BEGIN AUDIO INPUT code ////////
@@ -105,13 +106,15 @@ void setupTimer() {
   alarm_pool_init_default();
   ap = alarm_pool_get_default();
   uint64_t time = 1000000UL / AUDIO_RATE;
-  alarm_id = alarm_pool_add_repeating_timer_us(ap, -time, defaultAudioOutput, nullptr, false);
+  if (!alarm_pool_add_repeating_timer_us(ap, -time, defaultAudioOutput, nullptr, &timer)){
+    LOG_OUTPUT.println("Could not start timer");
+  }
 
 }
 
 void startAudio() {
   //analogWriteResolution(12);
-  Serial.println("startAudioStandard");
+  LOG_OUTPUT.println("startAudioStandard");
 
   // this supports all AUDIO_MODE settings
   setupPWM();
@@ -136,7 +139,7 @@ void MozziClass::start(int control_rate_hz) {
 
 void MozziClass::stop() {
   if (alarm_id!=-1){
-    cancel_repeating_timer(ap, alarm_id);
+    cancel_repeating_timer(&timer);
   }
 }
 
@@ -165,7 +168,7 @@ void MozziClass::audioHook()
 
 inline void pwmWrite(int channel, int16_t value){
   pwm_set_chan_level(pwm_slice_num, channel, value);
-  Serial.println(value);
+  LOG_OUTPUT.println(value);
 }
 
 /// Output will always be on both pins!

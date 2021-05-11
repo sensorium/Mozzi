@@ -1,7 +1,7 @@
 /*
  * MozziRP2040.cpp
  * 
- * Mozzi Support for the Rasperry Pico
+ * Mozzi Support for the Rasperry Pico for the Arduino Kernels which provide the full Rasperry Pico API
  * 
  * Copyright 2012 Tim Barrass.
  * Copyright 2021 Phil Schatzmann.
@@ -14,37 +14,16 @@
  */
 
 #include "hardware_defines.h"
+
 #if IS_RP2040() 
 
-#include "CircularBuffer.h"
 #include "Mozzi.h"
-//#include "mozzi_analog.h"
-#include "AudioOutput.h"
+#include "CircularBuffer.h"
 #include "hardware/gpio.h"
 #include "hardware/adc.h"
 #include "hardware/pwm.h"
 #include "pico/time.h"
 
-// common variables
-alarm_id_t alarm_id=-1;
-alarm_pool_t *ap;
-repeating_timer_t timer;
-uint pwm_slice_num;
-
-////// BEGIN AUDIO INPUT code ////////
-#if (USE_AUDIO_INPUT == true)
-#error USE_AUDIO_INPUT not supported yet
-#endif
-////// END AUDIO INPUT code ////////
-
-//-----------------------------------------------------------------------------------------------------------------
-/// Logic with no Buffer
-#if BYPASS_MOZZI_OUTPUT_BUFFER == true
-#error USE_AUDIO_INPUT not supported yet
-#endif
-
-//-----------------------------------------------------------------------------------------------------------------
- /// Logic with Buffer
 
 // ring buffer for audio output
 #if (STEREO_HACK == true)
@@ -56,31 +35,17 @@ CircularBuffer<AudioOutput_t> output_buffer;  // fixed size 256
 #define canBufferAudioOutput() (!output_buffer.isFull())
 #define bufferAudioOutput(f) output_buffer.write(f)
 
-unsigned long MozziClass::audioTicks() {
-    return output_buffer.count();
-}
 
 //-----------------------------------------------------------------------------------------------------------------
+/// We use the Pico API
 
-// Timer Callback
-bool defaultAudioOutput(repeating_timer *t) {
-  audioOutput(output_buffer.read());
-  return true;
-}
+uint pwm_slice_num;
+alarm_id_t alarm_id=-1;
+alarm_pool_t *ap;
+repeating_timer_t timer;
 
-uint16_t update_control_timeout;
-uint16_t update_control_counter;
 
-inline void advanceControlLoop() {
-  if (!update_control_counter) {
-    update_control_counter = update_control_timeout;
-    updateControl();
-    //adcStartReadCycle();
-  } else {
-    --update_control_counter;
-  }
-}
-
+// Setup PWM On 2 output Pins
 void setupPWM() {
   // start pwm
   gpio_set_function(AUDIO_CHANNEL_1_PIN, GPIO_FUNC_PWM);
@@ -102,15 +67,46 @@ void setupPWM() {
   pwm_set_enabled(pwm_slice_num, true);
 }
 
+// Timer Callback
+bool defaultAudioOutput(repeating_timer *t) {
+  audioOutput(output_buffer.read());
+  return true;
+}
+
 void setupTimer() {
-  // start output timer
-  //alarm_pool_init_default();
-  //ap = alarm_pool_get_default();
-  //ap = alarm_pool_create(ALARM_POOL_HARDWARE_ALARM_NUM, ALARM_POOL_HARDWARE_ALARM_COUNT);
-  //ap = alarm_pool_create(PICO_TIME_DEFAULT_ALARM_POOL_HARDWARE_ALARM_NUM, ALARM_POOL_HARDWARE_ALARM_COUNT);
-  uint64_t time = 1000000UL / AUDIO_RATE;
-  if (!add_repeating_timer_ms(-time, defaultAudioOutput, nullptr, &timer)){
-    LOG_OUTPUT.println("Error: alarm_pool_add_repeating_timer_us failed; no alarm slots available");
+    uint64_t time = 1000000UL / AUDIO_RATE;
+    if (!add_repeating_timer_ms(-time, defaultAudioOutput, nullptr, &timer)){
+      LOG_OUTPUT.println("Error: alarm_pool_add_repeating_timer_us failed; no alarm slots available");
+    }
+}
+
+inline void writePWM(uint channel, int16_t value){
+  pwm_set_chan_level(channel==1 ?PWM_CHAN_A:PWM_CHAN_B, channel, value);
+}
+
+
+//-----------------------------------------------------------------------------------------------------------------
+/// Logic with Buffer
+
+unsigned long MozziClass::audioTicks() {
+    return output_buffer.count();
+}
+
+// Timer Callback
+void defaultAudioOutput() {
+  audioOutput(output_buffer.read());
+}
+
+uint16_t update_control_timeout;
+uint16_t update_control_counter;
+
+inline void advanceControlLoop() {
+  if (!update_control_counter) {
+    update_control_counter = update_control_timeout;
+    updateControl();
+    //adcStartReadCycle();
+  } else {
+    --update_control_counter;
   }
 }
 
@@ -125,6 +121,28 @@ void startAudio() {
 }
 
 //-----------------------------------------------------------------------------------------------------------------
+/// Input -> This might not be optimal but we just use the Pico API adc_read 
+#if (USE_AUDIO_INPUT == true)
+
+void  setupADC() {
+    adc_init();
+ 
+    // Make sure GPIO is high-impedance, no pullups etc
+    adc_gpio_init(AUDIO_CHANNEL_1_PIN);
+    // Select ADC input 0 (GPIO26)
+    adc_select_input(AuDIO_CHANNEL_IN);
+}
+
+int MozziClass::getAudioInput() { 
+  // range 0x0, 0xFFFF
+  uint16_t result = adc_read();
+  return result;
+}
+#else
+#define setupInput()
+#endif
+
+//-----------------------------------------------------------------------------------------------------------------
 // Start - Stop
 
 void startControl(unsigned int control_rate_hz) {
@@ -132,17 +150,16 @@ void startControl(unsigned int control_rate_hz) {
 }
 
 void MozziClass::start(int control_rate_hz) {
-  // setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST
-  //                  // in setup() if desired (not for Teensy 3.* )
-  // // delay(200); // so AutoRange doesn't read 0 to start with
+  setupADC(); 
   startControl(control_rate_hz);
   startAudio();
 }
 
 void MozziClass::stop() {
-  if (alarm_id!=-1){
-    cancel_repeating_timer(&timer);
-  }
+    if (alarm_id!=-1){
+      cancel_repeating_timer(&timer);
+    }
+    pwm_set_enabled(pwm_slice_num, false);
 }
 
 unsigned long MozziClass::mozziMicros() { 
@@ -162,16 +179,11 @@ void MozziClass::audioHook()
     #endif
 
   }
-  // setPin13Low();
 }
+
 
 //-----------------------------------------------------------------------------------------------------------------
 /// Output
-
-inline void writePWM(int channel, int16_t value){
-  pwm_set_chan_level(pwm_slice_num, channel, value);
-  //LOG_OUTPUT.println(value);
-}
 
 /// Output will always be on both pins!
 inline void audioOutput(const AudioOutput f) {

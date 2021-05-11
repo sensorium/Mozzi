@@ -51,7 +51,7 @@ static boolean audio_input_is_available;
 static int audio_input; // holds the latest audio from input_buffer
 uint8_t adc_count = 0;
 
-int getAudioInput() { return audio_input; }
+int MozziClass::getAudioInput() { return audio_input; }
 
 static void startFirstAudioADC() {
   uint8_t dummy = AUDIO_INPUT_PIN;

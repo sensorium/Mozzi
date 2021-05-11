@@ -12,15 +12,26 @@
 - Compiler protection against typos
 - Easy to extend for new but compatible boards */
 
+// Determine if it is a MBED based Arduino Core
+#if __has_include("mbed.h")
+#define ARDUINO_MBED 
+#endif
+
+#if __has_include("STM32ADC.h")
+#define ARDUINO_STM32 
+#endif
+
+
 #define IS_AVR() (defined(__AVR__))  // "Classic" Arduino boards
 #define IS_SAMD21() (defined(ARDUINO_ARCH_SAMD))
 #define IS_TEENSY3() (defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MK64FX512__) || defined(__MK66FX1M0__) || defined(__MKL26Z64__) )  // 32bit arm-based Teensy
-#define IS_RP2040() (defined(ARDUINO_ARCH_RP2040))
-#define IS_STM32() (defined(__arm__) && !IS_TEENSY3() && !IS_SAMD21() && !IS_RP2040())  // STM32 boards (note that only the maple based core is supported at this time. If another cores is to be supported in the future, this define should be split.
+#define IS_MBED() (defined(ARDUINO_MBED))
+#define IS_RP2040() (defined(ARDUINO_ARCH_RP2040) && !defined(ARDUINO_MBED))
+#define IS_STM32() (defined(ARDUINO_STM32)) 
 #define IS_ESP8266() (defined(ESP8266))
 #define IS_ESP32() (defined(ESP32))
 
-#if !(IS_AVR() || IS_TEENSY3() || IS_STM32() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() || IS_RP2040())
+#if !(IS_AVR() || IS_TEENSY3() || IS_STM32() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() || IS_RP2040() || IS_MBED())
 #error Your hardware is not supported by Mozzi or not recognized. Edit hardware_defines.h to proceed.
 #endif
 
@@ -55,15 +66,9 @@
 #include <ADC.h>
 #endif
 
-#if IS_RP2040()
-#define NUM_ANALOG_INPUTS 1
-#endif
-
-/** 
-You can define the use of the legacy MozziGuts.h and MozziGuts.cpp - my adding an override in the processor specific section or by setting the value here
-to affect all procssors
-*/
-#ifndef USE_LEGACY_GUTS
+#if (IS_AVR() || IS_TEENSY3() || IS_STM32() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() )
+#define USE_LEGACY_GUTS true
+#else
 #define USE_LEGACY_GUTS false
 #endif
 

@@ -158,6 +158,8 @@ HIFI is not available/not required on Teensy 3.* or ARM.
     #include "AudioConfigStandardPlus.h"
     #elif IS_AVR() && (AUDIO_MODE == HIFI)
     #include "AudioConfigHiSpeed14bitPwm.h"
+    #elif IS_MBED() 
+    #include "AudioConfigMBED.h"
     #elif IS_RP2040()  
     #include "AudioConfigRP2040.h"
     #endif
@@ -175,14 +177,14 @@ typedef unsigned char uchar;
 typedef unsigned int uint;
 typedef unsigned long ulong;
 
+
 /**
- * @brief User facing Mozzi Class with oprerations for start, stop and audioHook()
- * 
+ * @brief Mozzi Autio Output Class - We provide different implementations. The most important is
+ * the MozziClass which sends the output to IO PINs
  */
-class MozziClass {
+class MozziControl {
     public:
-        /** @ingroup core
-        Sets up the timers for audio and control rate processes, storing the timer
+        /** @brief Sets up the timers for audio and control rate processes, storing the timer
         registers so they can be restored when Mozzi stops. startMozzi() goes in your sketch's
         setup() routine.
         Contrary to earlier versions of Mozzi, this version does not take over Timer 0, and thus Arduino
@@ -203,11 +205,10 @@ class MozziClass {
         They are all called automatically and hidden away because it keeps things simple for a STANDARD_PLUS set up,
         but if it turns out to be confusing, they might need to become visible again.
         */
-        void start(int control_rate_hz = CONTROL_RATE);
+        void start(int control_rate_hz = CONTROL_RATE) = 0;
 
 
-        /** @ingroup core
-        Stops audio and control interrupts and restores the timers to the values they
+        /** @brief Stops audio and control interrupts and restores the timers to the values they
         had before Mozzi was started. This could be useful when using sensor libraries
         which depend on the same timers as Mozzi.
         A potentially better option for resolving timer conflicts involves using
@@ -218,10 +219,18 @@ class MozziClass {
         settings. Another scenario which could be easily hacked in MozziGuts.cpp could
         involve individually saving and restoring particular Timer registers depending
         on which one(s) are required for other tasks. */
-        void stop();
+        void stop() = 0;
+};
 
-        /** @ingroup core
-        This is required in Arduino's loop(). If there is room in Mozzi's output buffer,
+/**
+ * @brief User facing Mozzi Class with oprerations for start, stop and audioHook()
+ * 
+ */
+class MozziClass : MozziControl {
+    public:
+
+
+        /** @brief This is required in Arduino's loop(). If there is room in Mozzi's output buffer,
         audioHook() calls updateAudio() once and puts the result into the output
         buffer.  Also, if \#define USE_AUDIO_INPUT true is in Mozzi/mozzi_config.h,
         audioHook() takes care of moving audio input from the input buffer so it can be
@@ -233,10 +242,10 @@ class MozziClass {
         own, rather than calculating only 1 sample for each time your other functions
         are called.
         */
+
         void audioHook();
 
-        /** @ingroup analog
-        This returns audio input from the input buffer, if
+        /** @brief This returns audio input from the input buffer, if
         \#define USE_AUDIO_INPUT true is in the Mozzi/mozzi_config.h file.
         The pin used for audio input is set in Mozzi/mozzi_config.h with
         \#define AUDIO_INPUT_PIN 0 (or other analog input pin).
@@ -254,8 +263,7 @@ class MozziClass {
         int getAudioInput();
         #endif
 
-        /** @ingroup core
-        An alternative for Arduino time functions like micros() and millis(). This is slightly faster than micros(),
+        /** @brief An alternative for Arduino time functions like micros() and millis(). This is slightly faster than micros(),
         and also it is synchronized with the currently processed audio sample (which, due to the audio
         output buffer, could diverge up to 256/AUDIO_RATE seconds from the current time).
         audioTicks() is updated each time an audio sample
@@ -266,8 +274,7 @@ class MozziClass {
         */
         unsigned long mozziMicros();
 
-        /** @ingroup core
-        An alternative for Arduino time functions like micros() and millis(). This is slightly faster than micros(),
+        /** @brief An alternative for Arduino time functions like micros() and millis(). This is slightly faster than micros(),
         and also it is synchronized with the currently processed audio sample (which, due to the audio
         output buffer, could diverge up to 256/AUDIO_RATE seconds from the current time).
         audioTicks() is updated each time an audio sample
@@ -315,24 +322,24 @@ is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when 
 extern MozziClass Mozzi;
 
 /** @ingroup core
- * Support for legacy startMozzi - please use Mozzi.start() instead
+ * Support for legacy startMozzi - You can use Mozzi.start() instead
  */
 void startMozzi(int control_rate_hz = CONTROL_RATE);
 
 /**
- * @brief Support for legacy stopMozzi() - please use Mozzi.stop() instead
+ * @brief Support for legacy stopMozzi() - You can use Mozzi.stop() instead
  * 
  */
 void stopMozzi();
 
 /**
- * @brief Support for legacy audioHook() - please use Mozzi.audioHook() instead
+ * @brief Support for legacy audioHook() - You can use Mozzi.audioHook() instead
  * 
  */
 void audioHook();
 
 /**
- * @brief Support for legacy audioTicks() - please use Mozzi.audioTicks() instead
+ * @brief Support for legacy audioTicks() - You can use Mozzi.audioTicks() instead
  * 
  */
 unsigned long audioTicks();

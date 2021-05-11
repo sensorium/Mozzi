@@ -153,9 +153,10 @@ void MozziClass::start(int control_rate_hz) {
 }
 
 void MozziClass::stop() {
+  // ps - added missing i2s_driver_uninstall
   i2s_driver_uninstall((i2s_port_t)i2s_num);   
-  interrupts();
-  // ps - added missing shutdown
+  // ps - nointerrupts was never called so the following is not necessary: 
+  // interrupts();
 }
 
 unsigned long MozziClass::audioTicks() {

@@ -33,11 +33,7 @@ inline void bufferAudioOutput(const AudioOutput_t f) {
 }
 #else
 // ring buffer for audio output
-#if (STEREO_HACK == true)
-CircularBuffer<StereoOutput> output_buffer;  // fixed size 256
-#else
-CircularBuffer<AudioOutput_t> output_buffer;  // fixed size 256
-#endif
+CircularBuffer<OUTPUT_TYPE> output_buffer;  // fixed size 256
 #define canBufferAudioOutput() (!output_buffer.isFull())
 #define bufferAudioOutput(f) output_buffer.write(f)
 #endif
@@ -53,11 +49,15 @@ PwmOut pin1(digitalPinToPinName(AUDIO_CHANNEL_1_PIN));
 PwmOut pin2(digitalPinToPinName(AUDIO_CHANNEL_2_PIN));
 
 void defaultAudioOutput() {
+  strcpy(debug_buffer,"defaultAudioOutput-begin");
   audioOutput(output_buffer.read());
+  strcpy(debug_buffer,"defaultAudioOutput-end");
 }
 
 void setupTimer() {
-    ticker.attach(defaultAudioOutput, 1000000us / AUDIO_RATE );
+    //ticker.attach(defaultAudioOutput, 1000000us / AUDIO_RATE );
+    //ticker.attach(defaultAudioOutput, 1s );
+    //ticker.attach(defaultAudioOutput,1.0);
 }
 
 void setupPWM() {
@@ -70,9 +70,16 @@ void setupPWM() {
   pin2.resume(); //in case it was suspended before
 }
 
+const uint MAX = 2*AUDIO_BIAS;
+
 inline void writePWM(PwmOut &pin, int16_t value){
-  float float_value = static_cast<float>(value) / AUDIO_BIAS;
-  pin.write(0.0f);  
+  strcpy(debug_buffer,"writePWM-1");
+  float float_value = static_cast<float>(value) / MAX;
+  strcpy(debug_buffer,"writePWM-2");
+  // pwm the value is between 0.0 and 1.0 
+  sprintf(debug_buffer, "test: %d - %f", sizeof(OUTPUT_TYPE), float_value );
+  strcpy(debug_buffer,"writePWM-3");
+  //pin.write(float_value);  
 }
 
 
@@ -133,14 +140,19 @@ unsigned long MozziClass::mozziMicros() {
 
 void MozziClass::audioHook() 
 {
+  strcpy(debug_buffer,"audioHook");
   if (canBufferAudioOutput()) {
+    strcpy(debug_buffer,"audioHook-1");
     advanceControlLoop();
+    strcpy(debug_buffer,"audioHook-2");
 
     #if (STEREO_HACK == true)
         updateAudio(); // in hacked version, this returns void
         bufferAudioOutput(StereoOutput(audio_out_1, audio_out_2));
     #else
+        strcpy(debug_buffer,"audioHook-3");
         bufferAudioOutput(updateAudio());
+        strcpy(debug_buffer,"audioHook-4");
     #endif
   }
 }
@@ -151,26 +163,29 @@ void MozziClass::audioHook()
 AnalogIn analog_in(AUDIO_CHANNEL_1_PIN);
 
 int MozziClass::getAudioInput() { 
-  // range 0x0, 0xFFFF
-  int result analog_in.read_u16(); 
-  return result;
+  // range 0x0, 0xFFFF -> -AUDIO_BIAS, +AUDIO_BIAS
+  int value = analog_in.read_u16(); 
+  return map(value,0x0,0xFFFF,-AUDIO_BIAS,AUDIO_BIAS);
 }
 #endif
 
 //-----------------------------------------------------------------------------------------------------------------
 /// Output
+char debug_buffer[80] = {'N','A',0};
 
 /// Output will always be on both pins!
-inline void audioOutput(const AudioOutput f) {
+inline void audioOutput(const AudioOutput audio_output) {
+  strcpy(debug_buffer,"audioOutput");
+
 #if (AUDIO_MODE == HIFI)
-  writePWM(pin1, (f.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
-  writePWM(pin2, (f.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
+  writePWM(pin1, (audio_output.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
+  writePWM(pin2, (audio_output.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
 #else
-  writePWM(pin1, f.l()+AUDIO_BIAS);
+  writePWM(pin1, audio_output.l()+AUDIO_BIAS);
   #if (STEREO_HACK == true)
-    writePWM(pin2, f.r()+AUDIO_BIAS);
+    writePWM(pin2, audio_output.r()+AUDIO_BIAS);
   #else
-    writePWM(pin2, f.l()+AUDIO_BIAS);
+    writePWM(pin2, audio_output.l()+AUDIO_BIAS);
   #endif
 #endif
 }

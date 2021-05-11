@@ -34,11 +34,7 @@ inline void bufferAudioOutput(const AudioOutput_t f) {
 }
 #else
 // ring buffer for audio output
-#if (STEREO_HACK == true)
-CircularBuffer<StereoOutput> output_buffer;  // fixed size 256
-#else
-CircularBuffer<AudioOutput_t> output_buffer;  // fixed size 256
-#endif
+CircularBuffer<OUTPUT_TYPE> output_buffer;  // fixed size 256
 #define canBufferAudioOutput() (!output_buffer.isFull())
 #define bufferAudioOutput(f) output_buffer.write(f)
 #endif
@@ -138,7 +134,7 @@ void  setupADC() {
     // Make sure GPIO is high-impedance, no pullups etc
     adc_gpio_init(AUDIO_CHANNEL_1_PIN);
     // Select ADC input 0 (GPIO26)
-    adc_select_input(AuDIO_CHANNEL_IN);
+    adc_select_input(AUDIO_CHANNEL_IN);
 }
 
 int MozziClass::getAudioInput() { 

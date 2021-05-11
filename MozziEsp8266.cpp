@@ -29,11 +29,7 @@ uint64_t samples_written_to_buffer = 0;
 #else
 //-----------------------------------------------------------------------------------------------------------------
 // ring buffer for audio output
-#if (STEREO_HACK == true)
-CircularBuffer<StereoOutput> output_buffer;  // fixed size 256
-#else
-CircularBuffer<AudioOutput_t> output_buffer;  // fixed size 256
-#endif
+CircularBuffer<OUTPUT_TYPE> output_buffer;  // fixed size 256
 //-----------------------------------------------------------------------------------------------------------------
 #endif
 
@@ -217,7 +213,8 @@ void MozziClass::stop() {
 #else
   timer1_disable();
 #endif
-  interrupts();
+  // ps - nointerrupts was never called so the following is not necessary: 
+  // interrupts();
 }
 
 unsigned long MozziClass::audioTicks() {

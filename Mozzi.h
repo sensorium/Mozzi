@@ -165,12 +165,15 @@ HIFI is not available/not required on Teensy 3.* or ARM.
     #endif
 #endif
 
+// TODO it might make sense to integrate AudioOutput into the new Mozzi Class - Anyhow I provide a typedef so that we do not need 
+// to use 
+#include "AudioOutput.h"
 #if (STEREO_HACK == true)
 extern int audio_out_1, audio_out_2;
+typedef StereoOutput OUTPUT_TYPE;
+#else
+typedef AudioOutput_t OUTPUT_TYPE;
 #endif
-
-// TODO it might make sense to integrate AudioOutput into the new Mozzi Class
-#include "AudioOutput.h"
 
 // common numeric types
 typedef unsigned char uchar;
@@ -205,7 +208,7 @@ class MozziControl {
         They are all called automatically and hidden away because it keeps things simple for a STANDARD_PLUS set up,
         but if it turns out to be confusing, they might need to become visible again.
         */
-        void start(int control_rate_hz = CONTROL_RATE) = 0;
+        virtual void start(int control_rate_hz = CONTROL_RATE) = 0;
 
 
         /** @brief Stops audio and control interrupts and restores the timers to the values they
@@ -219,7 +222,7 @@ class MozziControl {
         settings. Another scenario which could be easily hacked in MozziGuts.cpp could
         involve individually saving and restoring particular Timer registers depending
         on which one(s) are required for other tasks. */
-        void stop() = 0;
+        virtual void stop() = 0;
 };
 
 /**
@@ -284,6 +287,10 @@ class MozziClass : MozziControl {
         */
         unsigned long audioTicks();
 
+        virtual void start(int control_rate_hz = CONTROL_RATE);
+        virtual void stop();
+
+
 };
 
 // Global Functionality which is globally used
@@ -343,3 +350,6 @@ void audioHook();
  * 
  */
 unsigned long audioTicks();
+
+
+extern char debug_buffer[80];

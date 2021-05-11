@@ -14,7 +14,9 @@
 // Analog input
 #define AUDIO_CHANNEL_1_PIN A0
 
-// Bypass buffering -> only false is supported
 #define LOG_OUTPUT Serial
+
+// We do not want to use int because it is 4 bytes -> we switch to 2 bytes instead!
+#define AudioOutputStorage_t int16_t
 
 #endif

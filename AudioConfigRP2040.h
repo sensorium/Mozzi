@@ -17,15 +17,16 @@
 #define AUDIO_CHANNEL_2_PIN 15
 #define AUDIO_CHANNEL_1_PIN_HIGH 15
 // ADC input. 0...3 are GPIOs 26...29 respectively. Input 4 is the onboard temperature sensor.
-#define AuDIO_CHANNEL_IN 0
+#define AUDIO_CHANNEL_IN 0
 #define AUDIO_CHANNEL_1_PIN 26
 
 // Timer settings
 #define ALARM_POOL_HARDWARE_ALARM_NUM 2
 #define ALARM_POOL_HARDWARE_ALARM_COUNT 1
 
-// Bypass buffering -> only false is supported
-#define BYPASS_MOZZI_OUTPUT_BUFFER false
 #define LOG_OUTPUT Serial
+
+// We do not want to use int because it is 4 bytes -> we switch to 2 bytes instead!
+#define AudioOutputStorage_t int16_t
 
 #endif

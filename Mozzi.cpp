@@ -8,6 +8,8 @@
  * @copyright Copyright (c) 2021
  * 
  */
+#include "hardware_defines.h"
+#if USE_LEGACY_GUTS == false
 #include "Mozzi.h"
 
 MozziClass Mozzi;
@@ -28,3 +30,4 @@ unsigned long audioTicks() {
     return Mozzi.audioTicks();
 }
 
+#endif

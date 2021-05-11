@@ -1,4 +1,5 @@
-#pragma once
+#ifndef AUDIOCONFIGRP2040_H
+#define AUDIOCONFIGRP2040_H
 
 /* Used internally to put the 0-biased generated audio into the centre of the output range (12 bits) */
 #define AUDIO_BIAS ((uint16_t) 2048)
@@ -26,3 +27,5 @@
 // Bypass buffering -> only false is supported
 #define BYPASS_MOZZI_OUTPUT_BUFFER false
 #define LOG_OUTPUT Serial
+
+#endif

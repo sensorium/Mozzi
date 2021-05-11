@@ -23,17 +23,24 @@
 //#include "AudioOutput.h"
 #include "mbed.h"
 
+//-----------------------------------------------------------------------------------------------------------------
+/// bufferAudioOutput
 
+#if BYPASS_MOZZI_OUTPUT_BUFFER == true
+inline void bufferAudioOutput(const AudioOutput_t f) {
+  audioOutput(f);
+  ++samples_written_to_buffer;
+}
+#else
 // ring buffer for audio output
 #if (STEREO_HACK == true)
 CircularBuffer<StereoOutput> output_buffer;  // fixed size 256
 #else
 CircularBuffer<AudioOutput_t> output_buffer;  // fixed size 256
 #endif
-
 #define canBufferAudioOutput() (!output_buffer.isFull())
 #define bufferAudioOutput(f) output_buffer.write(f)
-
+#endif
 
 //-----------------------------------------------------------------------------------------------------------------
 /// MBED Implementation

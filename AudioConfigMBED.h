@@ -1,4 +1,5 @@
-#pragma once
+#ifndef AUDIOCONFIGMBED_H
+#define AUDIOCONFIGMBED_H
 
 /* Used internally to put the 0-biased generated audio into the centre of the output range (12 bits) */
 #define AUDIO_BIAS ((uint16_t) 2048)
@@ -16,3 +17,4 @@
 // Bypass buffering -> only false is supported
 #define LOG_OUTPUT Serial
 
+#endif

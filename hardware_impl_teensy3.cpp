@@ -20,6 +20,7 @@
 #include "AudioOutput.h"
 #include "IntervalTimer.h" // required from http://github.com/pedvide/ADC for Teensy 3.*
 #include <ADC.h>
+#include "AudioConfigTeensy3_12bit.h"
 
 
 #if ( F_CPU != 48000000) 
@@ -30,6 +31,14 @@
 
 ADC *adc; // adc object
 uint8_t teensy_pin;
+
+#if (EXTERNAL_AUDIO_OUTPUT != true)
+inline void audioOutput(const AudioOutput f)
+{
+  analogWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
+}
+#endif
+
 
 #if BYPASS_MOZZI_OUTPUT_BUFFER == true
   uint64_t samples_written_to_buffer = 0;

@@ -10,7 +10,7 @@
  *
  * Mozzi by Tim Barrass is licensed under a Creative Commons
  * Attribution-NonCommercial-ShareAlike 4.0 International License.
- *
+ *()
  */
 
 #include "hardware_defines.h"
@@ -22,39 +22,56 @@
 #include "CircularBuffer.h"
 #include "mbed.h"
 
-using namespace std::chrono;
-//using namespace mbed;
+
+//-----------------------------------------------------------------------------------------------------------------
+/// MBED Implementation
 
 mbed::Ticker ticker; // calls a callback repeatedly with a timeout
-mbed::PwmOut pin1(digitalPinToPinName(AUDIO_CHANNEL_1_PIN));
-//mbed::PwmOut pin2(digitalPinToPinName(AUDIO_CHANNEL_2_PIN));
+mbed::PwmOut *pwm_pins[CHANNELS];
 uint16_t update_control_timeout;
 uint16_t update_control_counter;
 const uint MAX = 2*AUDIO_BIAS;
 char debug_buffer[80] = {'N','A',0};
 
 //-----------------------------------------------------------------------------------------------------------------
-/// bufferAudioOutput
+/// Output 
 
 #if BYPASS_MOZZI_OUTPUT_BUFFER == true
-inline void bufferAudioOutput(const AudioOutput_t f) {
+void bufferAudioOutput(const MultiChannelOutput f) {
   audioOutput(f);
   ++samples_written_to_buffer;
 }
 #else
 // ring buffer for audio output
-CircularBuffer<OUTPUT_TYPE> output_buffer;  // fixed size 256
-#define canBufferAudioOutput() (!output_buffer.isFull())
-#define bufferAudioOutput(f) output_buffer.write(f)
+CircularBuffer<MultiChannelOutput> output_buffer;  // fixed size 256
+
+bool canBufferAudioOutput(){
+  return !output_buffer.isFull();
+} 
+
+void bufferAudioOutput(const MultiChannelOutput f){
+   output_buffer.write(f);
+}
 #endif
 
-//-----------------------------------------------------------------------------------------------------------------
-/// MBED Implementation
+// forward declaration
+void writePWM(mbed::PwmOut &pin, int16_t value);
 
+void audioOutput(MultiChannelOutput audio_output) {
+#if (AUDIO_MODE == HIFI)
+  writePWM(*pwm_pins[0], (audio_output[0].l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
+  writePWM(*pwm_pins[1], (audio_output[1].l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
+#else
+  for (int j=0;j<CHANNELS;j++){
+    if (pwm_pins[j]!=nullptr){
+      writePWM(*pwm_pins[j], audio_output[j].l()+AUDIO_BIAS);
+    }
+  }
+#endif
+}
 
 void defaultAudioOutputCallback() {
   audioOutput(output_buffer.read());
-
 }
 
 void setupTimer() {
@@ -70,27 +87,23 @@ void setupPWMPin(mbed::PwmOut &pin){
   pin.resume(); // in case it was suspended before
 }
 
-void setupPWM() {
-  setupPWMPin(pin1);
- // setupPWMPin(pin2);
+void setupPWM(const uint8_t *pins) {
+  for (int j=0;j<CHANNELS;j++){
+    int gpio = pins[j];
+    if  (pwm_pins[j] != nullptr && gpio!=-1)  {
+      mbed::PwmOut *pin = new mbed::PwmOut(digitalPinToPinName(gpio));
+      pwm_pins[j] = pin;
+      if (pin!=nullptr){
+        setupPWMPin(*pin);
+      }
+    } 
+  }
 }
 
-inline void writePWM(mbed::PwmOut &pin, int16_t value){
-  strcpy(debug_buffer,"writePWM-1");
+void writePWM(mbed::PwmOut &pin, int16_t value){
   float float_value = static_cast<float>(value) / MAX;
-  strcpy(debug_buffer,"writePWM-2");
   // pwm the value is between 0.0 and 1.0 
-  sprintf(debug_buffer, "test: %d - %f", sizeof(OUTPUT_TYPE), float_value );
-//  strcpy(debug_buffer,"writePWM-3");
   pin.write(float_value);  
-}
-
-
-//-----------------------------------------------------------------------------------------------------------------
-/// Logic with Buffer
-
-unsigned long MozziClass::audioTicks() {
-    return output_buffer.count();
 }
 
 inline void advanceControlLoop() {
@@ -103,16 +116,6 @@ inline void advanceControlLoop() {
   }
 }
 
-void startAudio() {
-  //analogWriteResolution(12);
-  LOG_OUTPUT.println("startAudioStandard");
-
-  // this supports all AUDIO_MODE settings
-  setupPWM();
-  // setup timer for defaultAudioOutput
-  setupTimer();
-}
-
 //-----------------------------------------------------------------------------------------------------------------
 // Start - Stop
 
@@ -120,18 +123,37 @@ void startControl(unsigned int control_rate_hz) {
   update_control_timeout = AUDIO_RATE / control_rate_hz;
 }
 
+void startAudio(const uint8_t *pins) {
+  //analogWriteResolution(12);
+  LOG_OUTPUT.println("startAudioStandard");
+
+  // this supports all AUDIO_MODE settings
+  setupPWM(pins);
+  // setup timer for defaultAudioOutput
+  setupTimer();
+}
+
 void MozziClass::start(int control_rate_hz) {
   // setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST
   //                  // in setup() if desired (not for Teensy 3.* )
   // // delay(200); // so AutoRange doesn't read 0 to start with
   startControl(control_rate_hz);
-  startAudio();
+  startAudio(pins());
 }
 
 void MozziClass::stop() {
   ticker.detach();
-  pin1.suspend();
-  //pin2.suspend();
+
+  // stop all pins
+  for (int j=0;j<CHANNELS;j++){
+    if (pwm_pins[j] != nullptr)  {
+      pwm_pins[j]->suspend();
+    } 
+  }
+}
+
+unsigned long MozziClass::audioTicks() {
+    return output_buffer.count();
 }
 
 unsigned long MozziClass::mozziMicros() { 
@@ -140,20 +162,18 @@ unsigned long MozziClass::mozziMicros() {
 
 void MozziClass::audioHook() 
 {
-  strcpy(debug_buffer,"audioHook");
   if (canBufferAudioOutput()) {
-    strcpy(debug_buffer,"audioHook-1");
     advanceControlLoop();
-    strcpy(debug_buffer,"audioHook-2");
-
-    #if (STEREO_HACK == true)
-        updateAudio(); // in hacked version, this returns void
-        bufferAudioOutput(StereoOutput(audio_out_1, audio_out_2));
-    #else
-        strcpy(debug_buffer,"audioHook-3");
-        bufferAudioOutput(updateAudio());
-        strcpy(debug_buffer,"audioHook-4");
-    #endif
+    MultiChannelOutput out;
+    if (updateAudio!=nullptr){
+      out[0]=updateAudio();
+      bufferAudioOutput(out);
+    } else {
+      if (updateAudioN!=nullptr){
+        updateAudioN(CHANNELS, out);
+        bufferAudioOutput(out);
+      }
+    }
   }
   yield();
 }
@@ -170,21 +190,5 @@ int MozziClass::getAudioInput() {
 }
 #endif
 
-//-----------------------------------------------------------------------------------------------------------------
-
-/// Output will always be on both pins!
-void audioOutput(const AudioOutput audio_output) {
-#if (AUDIO_MODE == HIFI)
-  writePWM(pin1, (audio_output.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
-  //writePWM(pin2, (audio_output.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
-#else
-  writePWM(pin1, audio_output.l()+AUDIO_BIAS);
-  #if (STEREO_HACK == true)
-    //writePWM(pin2, audio_output.r()+AUDIO_BIAS);
-  #else
-    //writePWM(pin2, audio_output.l()+AUDIO_BIAS);
-  #endif
-#endif
-}
 
 #endif  // IS_RP2040

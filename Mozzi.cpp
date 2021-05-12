@@ -30,4 +30,32 @@ unsigned long audioTicks() {
     return Mozzi.audioTicks();
 }
 
+
+// Common Functionality - DO NOT ADD ANY PLATFORM SPECIFIC IFDEFS BELOW - You can opt in or provide your own implementation
+// in the hardware-impl<platform>.cpp file !
+
+/**
+* Constructor for MozziControl:
+* In the current configuration settings we support max 2 pins - so we automatically make them available
+*/
+#if (IS_AVR() || IS_TEENSY3() || IS_STM32() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() || IS_RP2040() || IS_MBED())
+
+MozziControl::MozziControl(){
+
+#ifdef AUDIO_CHANNEL_1_PIN
+    channel_pins[0] = AUDIO_CHANNEL_1_PIN;
 #endif
+#if CHANNELS > 1
+    #ifdef AUDIO_CHANNEL_1_PIN_HIGH
+        channel_pins[1] = AUDIO_CHANNEL_2_PIN;
+    #elif defined(AUDIO_CHANNEL_2_PIN)
+        channel_pins[1] = AUDIO_CHANNEL_2_PIN;
+    #endif
+#endif
+
+}
+
+#endif // Platforms
+
+
+#endif // USE_LEGACY_GUTS

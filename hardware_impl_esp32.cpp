@@ -19,6 +19,7 @@
 #include "AudioOutput.h"
 #include <driver/i2s.h>   // for I2S-based output modes
 #include <driver/timer.h> // for EXTERNAL_AUDIO_OUTPUT
+#include "AudioConfigESP32.h"
 
 
 uint64_t samples_written_to_buffer = 0;
@@ -49,6 +50,57 @@ static void startFirstAudioADC() {
 //   if (!input_buffer.isFull())
 //     input_buffer.write(ADC);
 // }
+
+#endif
+
+#if (EXTERNAL_AUDIO_OUTPUT != true)
+// On ESP32 we cannot test wether the DMA buffer has room. Instead, we have to use a one-sample mini buffer. In each iteration we
+// _try_ to write that sample to the DMA buffer, and if successful, we can buffer the next sample. Somewhat cumbersome, but works.
+// TODO: Should ESP32 gain an implemenation of i2s_available(), we should switch to using that, instead.
+static bool _esp32_can_buffer_next = true;
+#if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
+static uint16_t _esp32_prev_sample[2];
+#define ESP_SAMPLE_SIZE (2*sizeof(uint16_t))
+#elif (ESP32_AUDIO_OUT_MODE == PT8211_DAC)
+static int16_t _esp32_prev_sample[2];
+#define ESP_SAMPLE_SIZE (2*sizeof(int16_t))
+#elif (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
+static uint32_t _esp32_prev_sample[PDM_RESOLUTION];
+#define ESP_SAMPLE_SIZE (PDM_RESOLUTION*sizeof(uint32_t))
+#endif
+
+inline bool esp32_tryWriteSample() {
+  size_t bytes_written;
+  i2s_write(i2s_num, &_esp32_prev_sample, ESP_SAMPLE_SIZE, &bytes_written, 0);
+  return (bytes_written != 0);
+}
+
+inline bool canBufferAudioOutput() {
+  if (_esp32_can_buffer_next) return true;
+  _esp32_can_buffer_next = esp32_tryWriteSample();
+  return _esp32_can_buffer_next;
+}
+
+inline void audioOutput(const AudioOutput f) {
+#if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
+  _esp32_prev_sample[0] = (f.l() + AUDIO_BIAS) << 8;
+#if (STEREO_HACK == true)
+  _esp32_prev_sample[1] = (f.r() + AUDIO_BIAS) << 8;
+#else
+  // For simplicity of code, even in mono, we're writing stereo samples
+  _esp32_prev_sample[1] = _esp32_prev_sample[0];
+#endif
+#elif (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
+  for (uint8_t i=0; i<PDM_RESOLUTION; ++i) {
+    _esp32_prev_sample[i] = pdmCode32(f.l() + AUDIO_BIAS);
+  }
+#else
+  // PT8211 takes signed samples
+  _esp32_prev_sample[0] = f.l();
+  _esp32_prev_sample[1] = f.r();
+#endif
+  _esp32_can_buffer_next = esp32_tryWriteSample();
+}
 
 #endif
 

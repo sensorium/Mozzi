@@ -20,6 +20,7 @@
 #include "AudioOutput.h"
 #include <uart.h>
 #include <i2s.h>
+#include "AudioConfigESP8266.h"
 
 uint16_t output_buffer_size = 0;
 
@@ -32,6 +33,36 @@ uint64_t samples_written_to_buffer = 0;
 CircularBuffer<OUTPUT_TYPE> output_buffer;  // fixed size 256
 //-----------------------------------------------------------------------------------------------------------------
 #endif
+
+
+#if (EXTERNAL_AUDIO_OUTPUT != true)
+#if (ESP_AUDIO_OUT_MODE == PDM_VIA_I2S)
+inline bool canBufferAudioOutput() {
+  return (i2s_available() >= PDM_RESOLUTION);
+}
+inline void audioOutput(const AudioOutput f) {
+  for (uint8_t words = 0; words < PDM_RESOLUTION; ++words) {
+    i2s_write_sample(pdmCode32(f.l()));
+  }
+}
+#elif (ESP_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
+inline bool canBufferAudioOutput() {
+  return (i2s_available() >= PDM_RESOLUTION);
+}
+inline void audioOutput(const AudioOutput f) {
+  i2s_write_lr(f.l(), f.r());  // Note: i2s_write expects zero-centered output
+}
+#else
+inline void audioOutput(const AudioOutput f) {
+  // optimized version of: Serial1.write(...);
+  for (uint8_t i = 0; i < PDM_RESOLUTION*4; ++i) {
+    U1F = pdmCode8(f);
+  }
+}
+#endif
+#endif
+
+
 
 //-----------------------------------------------------------------------------------------------------------------
 

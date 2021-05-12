@@ -187,6 +187,8 @@ typedef unsigned long ulong;
  */
 class MozziControl {
     public:
+        MozziControl();
+
         /** @brief Sets up the timers for audio and control rate processes, storing the timer
         registers so they can be restored when Mozzi stops. startMozzi() goes in your sketch's
         setup() routine.
@@ -225,24 +227,22 @@ class MozziControl {
         virtual void stop() = 0;
 
         /**
-        * Adds a new output channel with the GPIO pin that will be used as output 
-        */
-        void addChannel(int pin){
-            if (channel_count<20){
-                channel_pins[channel_count++];
-            }
-        }
-
-        /**
         * Returns the number of available channels
         */
-        int channels() {
-            return channel_count;
+        const int channels() const {
+            return CHANNELS;
+        }
+
+        const uint8_t* pins(){
+            return channel_pins;
+        }
+
+        void setPin(int8_t idx, int8_t pin){
+            channel_pins[idx] = pin;
         }
 
     protected:
-        int channel_count=0;
-        uint8_t channel_pins[20];
+        uint8_t channel_pins[CHANNELS];
 };
 
 /**
@@ -251,7 +251,6 @@ class MozziControl {
  */
 class MozziClass : MozziControl {
     public:
-
 
         /** @brief This is required in Arduino's loop(). If there is room in Mozzi's output buffer,
         audioHook() calls updateAudio() once and puts the result into the output
@@ -310,7 +309,6 @@ class MozziClass : MozziControl {
         virtual void start(int control_rate_hz = CONTROL_RATE);
         virtual void stop();
 
-
 };
 
 // Global Functionality which is globally used
@@ -327,7 +325,7 @@ AudioOutput_t updateAudio() __attribute__((weak));
 /** @ingroup core
 * see updateAudio() but for multiple channels: e.g. stereo
 */
-void updateAudioN(int channels, AudioOutput_t *output ) __attribute__((weak));
+void updateAudioN(int channels, MultiChannelOutput &output ) __attribute__((weak));
 
 
 /** @ingroup core

@@ -57,7 +57,52 @@ CircularBuffer<OUTPUT_TYPE> output_buffer;  // fixed size 256
 //-----------------------------------------------------------------------------------------------------------------
 #endif
 
-             // teensy 3.*, other ARMs
+
+#if (EXTERNAL_AUDIO_OUTPUT != true)
+#if (AUDIO_MODE == STANDARD_PLUS)
+#include "AudioConfigStandardPlus.h"
+inline void audioOutput(const AudioOutput f)
+{
+  AUDIO_CHANNEL_1_OUTPUT_REGISTER = f.l()+AUDIO_BIAS;
+#if (STEREO_HACK == true)
+  AUDIO_CHANNEL_2_OUTPUT_REGISTER = f.r()+AUDIO_BIAS;
+#endif
+}
+
+///////////////////// AVR HIFI
+#elif (AUDIO_MODE == HIFI)
+#include "AudioConfigHiSpeed14bitPwm.h"
+inline void audioOutput(const AudioOutput f)
+{
+  // read about dual pwm at
+  // http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
+  // sketches at http://wiki.openmusiclabs.com/wiki/PWMDAC,
+  // http://wiki.openmusiclabs.com/wiki/MiniArDSP
+  // if (!output_buffer.isEmpty()){
+  //unsigned int out = output_buffer.read();
+  // 14 bit, 7 bits on each pin
+  // AUDIO_CHANNEL_1_highByte_REGISTER = out >> 7; // B00111111 10000000 becomes
+  // B1111111
+  // try to avoid looping over 7 shifts - need to check timing or disassemble to
+  // see what really happens unsigned int out_high = out<<1; // B00111111
+  // 10000000 becomes B01111111 00000000
+  // AUDIO_CHANNEL_1_highByte_REGISTER = out_high >> 8; // B01111111 00000000
+  // produces B01111111 AUDIO_CHANNEL_1_lowByte_REGISTER = out & 127;
+  /* Atmega manual, p123
+  The high byte (OCR1xH) has to be written first.
+  When the high byte I/O location is written by the CPU,
+  the TEMP Register will be updated by the value written.
+  Then when the low byte (OCR1xL) is written to the lower eight bits,
+  the high byte will be copied into the upper 8-bits of
+  either the OCR1x buffer or OCR1x Compare Register in
+  the same system clock cycle.
+  */
+  AUDIO_CHANNEL_1_highByte_REGISTER = (f.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_REGISTER;
+  AUDIO_CHANNEL_1_lowByte_REGISTER = (f.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_REGISTER) - 1);
+}
+#endif
+#endif
+
 
 // to store backups of timer registers so Mozzi can be stopped and pre_mozzi
 // timer values can be restored
@@ -114,13 +159,6 @@ int MozziClass::getAudioInput() { return audio_input; }
 static void startFirstAudioADC() {
   adcStartConversion(adcPinToChannelNum(AUDIO_INPUT_PIN));
 }
-
-/*
-static void receiveFirstAudioADC()
-{
-        // nothing
-}
-*/
 
 static void startSecondAudioADC() {
   ADCSRA |= (1 << ADSC); // start a second conversion on the current channel

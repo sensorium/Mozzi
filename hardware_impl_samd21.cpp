@@ -20,6 +20,15 @@
 #include "AudioOutput.h"
 
 
+#if (EXTERNAL_AUDIO_OUTPUT != true)
+inline void audioOutput(const AudioOutput f)
+{
+  analogWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
+}
+#endif
+
+
+
 #if BYPASS_MOZZI_OUTPUT_BUFFER == true
 uint64_t samples_written_to_buffer = 0;
 #else
@@ -62,6 +71,7 @@ static void receiveSecondAudioADC() {
   if (!input_buffer.isFull())
     input_buffer.write(ADC);
 }
+
 
 #endif
 ////// END AUDIO INPUT code ////////

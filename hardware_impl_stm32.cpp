@@ -19,11 +19,27 @@
 #include "mozzi_config.h" // at the top of all MozziGuts and analog files
 #include "AudioOutput.h"
 #include "HardwareTimer.h"
+#include "AudioConfigSTM32.h"
 //#include <STM32ADC.h>  // Disabled, here. See AudioConfigSTM32.h
 
 
 STM32ADC adc(ADC1);
 uint8_t stm32_current_adc_pin;
+
+#if (EXTERNAL_AUDIO_OUTPUT != true)
+inline void audioOutput(const AudioOutput f)
+{
+#if (AUDIO_MODE == HIFI)
+  pwmWrite(AUDIO_CHANNEL_1_PIN, (f.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
+  pwmWrite(AUDIO_CHANNEL_1_PIN_HIGH, (f.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
+#else
+  pwmWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
+#if (STEREO_HACK == true)
+  pwmWrite(AUDIO_CHANNEL_2_PIN, f.r()+AUDIO_BIAS);
+#endif
+#endif
+}
+#endif
 
 
 #if BYPASS_MOZZI_OUTPUT_BUFFER == true

@@ -35,7 +35,7 @@ class AudioStream : public MozziControl, public Stream {
         AudioStream(){     
         }
 
-        void start(int control_rate){
+        void start(int control_rate = CONTROL_RATE){
             active = true;
             control_counter_max = AUDIO_RATE / control_rate;
             if (control_counter_max <= 0){

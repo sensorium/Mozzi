@@ -1,7 +1,7 @@
 /*
  * MozziMBED.cpp
  * 
- * Mozzi Support for Microporcessors which use the arm Mbed OS (e.g. Raspberry Pico)
+ * Mozzi Support for Microporcessors which use the ARM Mbed OS (e.g. Raspberry Pico)
  * 
  * Copyright 2012 Tim Barrass.
  * Copyright 2021 Phil Schatzmann.
@@ -20,8 +20,18 @@
 #include "Mozzi.h"
 #include "pinDefinitions.h"
 #include "CircularBuffer.h"
-//#include "AudioOutput.h"
 #include "mbed.h"
+
+using namespace std::chrono;
+//using namespace mbed;
+
+mbed::Ticker ticker; // calls a callback repeatedly with a timeout
+mbed::PwmOut pin1(digitalPinToPinName(AUDIO_CHANNEL_1_PIN));
+//mbed::PwmOut pin2(digitalPinToPinName(AUDIO_CHANNEL_2_PIN));
+uint16_t update_control_timeout;
+uint16_t update_control_counter;
+const uint MAX = 2*AUDIO_BIAS;
+char debug_buffer[80] = {'N','A',0};
 
 //-----------------------------------------------------------------------------------------------------------------
 /// bufferAudioOutput
@@ -41,45 +51,38 @@ CircularBuffer<OUTPUT_TYPE> output_buffer;  // fixed size 256
 //-----------------------------------------------------------------------------------------------------------------
 /// MBED Implementation
 
-using namespace std::chrono;
-using namespace mbed;
 
-Ticker ticker; // calls a callback repeatedly with a timeout
-PwmOut pin1(digitalPinToPinName(AUDIO_CHANNEL_1_PIN));
-PwmOut pin2(digitalPinToPinName(AUDIO_CHANNEL_2_PIN));
-
-void defaultAudioOutput() {
-  strcpy(debug_buffer,"defaultAudioOutput-begin");
+void defaultAudioOutputCallback() {
   audioOutput(output_buffer.read());
-  strcpy(debug_buffer,"defaultAudioOutput-end");
+
 }
 
 void setupTimer() {
-    //ticker.attach(defaultAudioOutput, 1000000us / AUDIO_RATE );
-    //ticker.attach(defaultAudioOutput, 1s );
-    //ticker.attach(defaultAudioOutput,1.0);
+    // 1000000l / 32768 -> 30 microsends
+    ticker.attach_us(defaultAudioOutputCallback, 1000000l / AUDIO_RATE );
+    //ticker.attach(defaultAudioOutputCallback,1.0);
+}
+
+void setupPWMPin(mbed::PwmOut &pin){
+  unsigned long period = 1000000l / PWM_RATE;  // -> 30.517578125 microseconds
+  pin.period_us(period);  
+  pin.write(0.0f);  // 0% duty cycle ->  
+  pin.resume(); // in case it was suspended before
 }
 
 void setupPWM() {
-  unsigned long period = 1000000l / PWM_RATE;  // -> 30.517578125 microseconds
-  pin1.period_us(period);  
-  pin1.period_us(period);
-  pin1.write(0.0f);  // 0% duty cycle ->  
-  pin2.write(0.0f);  // 0% duty cycle -> value between 0 and 1
-  pin1.resume(); // in case it was suspended before
-  pin2.resume(); //in case it was suspended before
+  setupPWMPin(pin1);
+ // setupPWMPin(pin2);
 }
 
-const uint MAX = 2*AUDIO_BIAS;
-
-inline void writePWM(PwmOut &pin, int16_t value){
+inline void writePWM(mbed::PwmOut &pin, int16_t value){
   strcpy(debug_buffer,"writePWM-1");
   float float_value = static_cast<float>(value) / MAX;
   strcpy(debug_buffer,"writePWM-2");
   // pwm the value is between 0.0 and 1.0 
   sprintf(debug_buffer, "test: %d - %f", sizeof(OUTPUT_TYPE), float_value );
-  strcpy(debug_buffer,"writePWM-3");
-  //pin.write(float_value);  
+//  strcpy(debug_buffer,"writePWM-3");
+  pin.write(float_value);  
 }
 
 
@@ -89,9 +92,6 @@ inline void writePWM(PwmOut &pin, int16_t value){
 unsigned long MozziClass::audioTicks() {
     return output_buffer.count();
 }
-
-uint16_t update_control_timeout;
-uint16_t update_control_counter;
 
 inline void advanceControlLoop() {
   if (!update_control_counter) {
@@ -131,7 +131,7 @@ void MozziClass::start(int control_rate_hz) {
 void MozziClass::stop() {
   ticker.detach();
   pin1.suspend();
-  pin2.suspend();
+  //pin2.suspend();
 }
 
 unsigned long MozziClass::mozziMicros() { 
@@ -155,6 +155,7 @@ void MozziClass::audioHook()
         strcpy(debug_buffer,"audioHook-4");
     #endif
   }
+  yield();
 }
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -170,22 +171,18 @@ int MozziClass::getAudioInput() {
 #endif
 
 //-----------------------------------------------------------------------------------------------------------------
-/// Output
-char debug_buffer[80] = {'N','A',0};
 
 /// Output will always be on both pins!
-inline void audioOutput(const AudioOutput audio_output) {
-  strcpy(debug_buffer,"audioOutput");
-
+void audioOutput(const AudioOutput audio_output) {
 #if (AUDIO_MODE == HIFI)
   writePWM(pin1, (audio_output.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
-  writePWM(pin2, (audio_output.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
+  //writePWM(pin2, (audio_output.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
 #else
   writePWM(pin1, audio_output.l()+AUDIO_BIAS);
   #if (STEREO_HACK == true)
-    writePWM(pin2, audio_output.r()+AUDIO_BIAS);
+    //writePWM(pin2, audio_output.r()+AUDIO_BIAS);
   #else
-    writePWM(pin2, audio_output.l()+AUDIO_BIAS);
+    //writePWM(pin2, audio_output.l()+AUDIO_BIAS);
   #endif
 #endif
 }

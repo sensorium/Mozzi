@@ -182,7 +182,7 @@ typedef unsigned long ulong;
 
 
 /**
- * @brief Mozzi Autio Output Class - We provide different implementations. The most important is
+ * @brief Mozzi Audio Output Class - We provide different implementations. The most important is
  * the MozziClass which sends the output to IO PINs
  */
 class MozziControl {
@@ -353,3 +353,4 @@ unsigned long audioTicks();
 
 
 extern char debug_buffer[80];
+

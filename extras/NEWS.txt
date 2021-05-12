@@ -3,6 +3,14 @@ Mozzi sound synthesis library for Arduino
 NEWS
 get the latest version from https://sensorium.github.io/Mozzi/
 
+- Support for ARM processors where Arduino is based on MBED (e.g. Raspberry Pico)
+- Support with Native Raspberry Pico API
+- Split up of MozziGuts into separate processor specific implementations and provide a high level Class interface for Mozzi: The 
+	new functionality can be activated per processor in hardware_defines.h with USE_LEGACY_GUTS
+- Type of AudioOutputStorage_t can be defined in AudioConfig<platform>.h  e.g. with #define AudioOutputStorage_t int16_t
+- ESP32 close() is now deinstalling the I2S interface - and makeing the resources available again.
+- Renamed AudioConfigESP.h to AudioConfigESP8266.h to avoid any confusion with the ESP32
+
 
 Mozzi is now available as the most recent code on Github, rather than as releases.
 

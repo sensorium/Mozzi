@@ -223,6 +223,26 @@ class MozziControl {
         involve individually saving and restoring particular Timer registers depending
         on which one(s) are required for other tasks. */
         virtual void stop() = 0;
+
+        /**
+        * Adds a new output channel with the GPIO pin that will be used as output 
+        */
+        void addChannel(int pin){
+            if (channel_count<20){
+                channel_pins[channel_count++];
+            }
+        }
+
+        /**
+        * Returns the number of available channels
+        */
+        int channels() {
+            return channel_count;
+        }
+
+    protected:
+        int channel_count=0;
+        uint8_t channel_pins[20];
 };
 
 /**
@@ -302,7 +322,13 @@ calculations here which could be done in setup() or updateControl().
 @return an audio sample.  In STANDARD modes this is between -244 and 243 inclusive.
 In HIFI mode, it's a 14 bit number between -16384 and 16383 inclusive.
 */
-AudioOutput_t updateAudio();
+AudioOutput_t updateAudio() __attribute__((weak));
+
+/** @ingroup core
+* see updateAudio() but for multiple channels: e.g. stereo
+*/
+void updateAudioN(int channels, AudioOutput_t *output ) __attribute__((weak));
+
 
 /** @ingroup core
 This is where you put your control code. You need updateControl() somewhere in
@@ -310,7 +336,13 @@ your sketch, even if it's empty. updateControl() is called at the control rate
 you set in startMozzi(). To save processor load, avoid any calculations here
 which could be done in setup().
 */
-void updateControl();
+void updateControl() __attribute__((weak));
+
+/** @ingroup core
+* see updateControl() but for multiple channels: e.g. stereo
+*/
+void updateControlN(int channels) __attribute__((weak));;
+
 
 /** @ingroup core
 An alternative for Arduino time functions like micros() and millis(). This is slightly faster than micros(),
@@ -321,6 +353,7 @@ is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when 
 16384 Hz).
 @return the number of audio ticks since the program began.
 */
+
 
 
 /** @ingroup core

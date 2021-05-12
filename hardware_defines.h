@@ -12,22 +12,13 @@
 - Compiler protection against typos
 - Easy to extend for new but compatible boards */
 
-// Determine if it is a MBED based Arduino Core
-#if __has_include("mbed.h")
-#define ARDUINO_MBED 
-#endif
-
-#if __has_include("STM32ADC.h")
-#define ARDUINO_STM32 
-#endif
-
 
 #define IS_AVR() (defined(__AVR__))  // "Classic" Arduino boards
 #define IS_SAMD21() (defined(ARDUINO_ARCH_SAMD))
 #define IS_TEENSY3() (defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MK64FX512__) || defined(__MK66FX1M0__) || defined(__MKL26Z64__) )  // 32bit arm-based Teensy
-#define IS_MBED() (defined(ARDUINO_MBED))
-#define IS_RP2040() (defined(ARDUINO_ARCH_RP2040) && !defined(ARDUINO_MBED))
-#define IS_STM32() (defined(ARDUINO_STM32)) 
+#define IS_MBED() (defined(__arm__)  && __has_include("mbed.h"))
+#define IS_RP2040() (defined(ARDUINO_ARCH_RP2040) && !IS_MBED())
+#define IS_STM32() (defined(STM32_CORE_VERSION)) 
 #define IS_ESP8266() (defined(ESP8266))
 #define IS_ESP32() (defined(ESP32))
 

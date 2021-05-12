@@ -173,6 +173,18 @@ private:
 };
 
 
+
+template <int N>
+struct MultiChannelOutput {
+  public:
+    MonoOutput output[N];
+    int size() {
+      return N;
+    }  
+};
+
+
+
 /** When setting EXTERNAL_AUDIO_OUTPUT to true, implement this function to take care of writing samples to the hardware. */
 void audioOutput(const AudioOutput f);
 #if BYPASS_MOZZI_OUTPUT_BUFFER

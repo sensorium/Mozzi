@@ -21,19 +21,28 @@
 
 
 
-template <uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE, byte N_OSCIL>
+template<uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE, byte N_OSCIL>
   class MetaOscil
 {
 
  public:
-  MetaOscil(){}
-  
-  void addOscil(Oscil<NUM_TABLE_CELLS, UPDATE_RATE>* osc, int cutoff_freq)
+  template<class... T>  MetaOscil(Oscil<NUM_TABLE_CELLS, UPDATE_RATE>* first, T*... elements):oscillators{first, elements...} {};
+
+  template<typename ... T >  void setCutoffFreqs(int first,T... elements)
+    {
+      cutoff_freqs[current_rank]=first;
+      current_rank+=1;
+      setCutoffFreqs(elements...);
+      current_rank = 0;
+    }
+
+  void setCutoffFreqs() {};
+   
+  void setCutoffFreq(byte rank, int freq)
   {
-    oscillators[current_rank] = osc;
-    cutoff_freqs[current_rank] = cutoff_freq;
-    current_rank +=1;
+    cutoff_freqs[rank] = freq;
   }
+  
 
   inline
     int8_t next() {return current_osc->next();}

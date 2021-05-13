@@ -6,7 +6,7 @@ var searchData=
   ['phasor',['Phasor',['../class_phasor.html',1,'Phasor&lt; UPDATE_RATE &gt;'],['../class_phasor.html#a147c4c3aa7506c3da800e6cc77deb4ac',1,'Phasor::Phasor()']]],
   ['phasor_3c_20audio_5frate_20_3e',['Phasor&lt; AUDIO_RATE &gt;',['../class_phasor.html',1,'']]],
   ['phmod',['phMod',['../class_oscil.html#a4c6de90bc2d4183a5146eb2ae5e3dd2c',1,'Oscil']]],
-  ['playing',['playing',['../class_a_d_s_r.html#a7e85542579496e15fca189f33d31f149',1,'ADSR::playing()'],['../class_multi_line.html#a16a4fc1f4378a3c47a279fe0b0459448',1,'MultiLine::playing()'],['../class_multi_line.html#a16a4fc1f4378a3c47a279fe0b0459448',1,'MultiLine::playing()']]],
+  ['playing',['playing',['../class_a_d_s_r.html#ab2723ed7ab315967afa81786c8d7621d',1,'ADSR::playing()'],['../class_multi_line.html#a16a4fc1f4378a3c47a279fe0b0459448',1,'MultiLine::playing()'],['../class_multi_line.html#a16a4fc1f4378a3c47a279fe0b0459448',1,'MultiLine::playing()']]],
   ['pop',['pop',['../class_stack.html#afa9a35e13b68d9b59999227218a34d0a',1,'Stack']]],
   ['portamento',['Portamento',['../class_portamento.html',1,'Portamento&lt; CONTROL_UPDATE_RATE &gt;'],['../class_portamento.html#adc910a47d3fe8eff848d6de42d7280df',1,'Portamento::Portamento()']]],
   ['push',['push',['../class_stack.html#af67739d9b82966da46f7496f4c1fc801',1,'Stack']]]

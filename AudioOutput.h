@@ -40,6 +40,11 @@
 
 #include "MozziGuts.h"
 
+/** The type used to store a single channel of a single frame, internally. For compatibility with earlier versions of Mozzi this is defined as int.
+ *  If you do not care about keeping old sketches working, you may be able to save some RAM by using int16_t, instead (on boards where int is larger
+ *  than 16 bits). */
+#define AudioOutputStorage_t int
+
 #if IS_AVR() && ((AUDIO_MODE == STANDARD_PLUS) || (AUDIO_MODE == STANDARD))
 #define SCALE_AUDIO(x,bits) (bits > 8 ? (x) >> (bits - 8) : (x) << (8 - bits))
 #define SCALE_AUDIO_NEAR(x,bits) (bits > 9 ? (x) >> (bits - 9) : (x) << (9 - bits))
@@ -47,13 +52,8 @@
 #else
 #define SCALE_AUDIO(x,bits) (bits > AUDIO_BITS ? (x) >> (bits - AUDIO_BITS) : (x) << (AUDIO_BITS - bits))
 #define SCALE_AUDIO_NEAR(x,bits) SCALE_AUDIO(x,bits)
-#define CLIP_AUDIO(x) constrain((x), -AUDIO_BIAS, AUDIO_BIAS-1)
+#define CLIP_AUDIO(x) constrain((x), (-(AudioOutputStorage_t) AUDIO_BIAS), (AudioOutputStorage_t) AUDIO_BIAS-1)
 #endif
-
-/** The type used to store a single channel of a single frame, internally. For compatibility with earlier versions of Mozzi this is defined as int.
- *  If you do not care about keeping old sketches working, you may be able to save some RAM by using int16_t, instead (on boards where int is larger
- *  than 16 bits). */
-#define AudioOutputStorage_t int
 
 #if (AUDIO_CHANNELS == STEREO)
 #define AudioOutput StereoOutput

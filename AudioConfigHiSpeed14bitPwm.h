@@ -27,10 +27,11 @@ Boards, pins and resistor positions are documented in MozziGuts.h
 #define AUDIO_CHANNEL_1_lowByte_REGISTER OCR1BL
 
 #define AUDIO_BITS_PER_REGISTER 7
+#define AUDIO_BITS 14
 
 /* Used internally to put the 0-biased generated audio into the right range for PWM output.*/
 // 14 bit
-#define AUDIO_BIAS ((unsigned int) 0x2000)
+#define AUDIO_BIAS ((uint16_t) 1<<(AUDIO_BITS-1))
 
 
 #endif        //  #ifndef AUDIOCONFIGHISPEED14BITPWM_H

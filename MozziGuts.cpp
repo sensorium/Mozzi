@@ -351,16 +351,6 @@ void TC5_Handler(void) __attribute__((weak, alias("samd21AudioOutput")));
 #endif
 
 //-----------------------------------------------------------------------------------------------------------------
-#if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS) || IS_STM32()
-#if IS_TEENSY3()
-IntervalTimer timer1;
-#elif IS_STM32() && (EXTERNAL_AUDIO_OUTPUT == true)
-HardwareTimer audio_update_timer(2);
-#elif IS_STM32()
-HardwareTimer audio_update_timer(AUDIO_UPDATE_TIMER);
-HardwareTimer audio_pwm_timer(AUDIO_PWM_TIMER);
-#endif
-
 #if (BYPASS_MOZZI_OUTPUT_BUFFER != true)
 static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
 #if (USE_AUDIO_INPUT == true)
@@ -369,6 +359,16 @@ static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
 #endif
   audioOutput(output_buffer.read());
 }
+#endif
+
+#if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS) || IS_STM32()
+#if IS_TEENSY3()
+IntervalTimer timer1;
+#elif IS_STM32() && (EXTERNAL_AUDIO_OUTPUT == true)
+HardwareTimer audio_update_timer(2);
+#elif IS_STM32()
+HardwareTimer audio_update_timer(AUDIO_UPDATE_TIMER);
+HardwareTimer audio_pwm_timer(AUDIO_PWM_TIMER);
 #endif
 
 #if (IS_ESP32() && (BYPASS_MOZZI_OUTPUT_BUFFER != true))

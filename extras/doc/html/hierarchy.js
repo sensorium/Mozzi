@@ -1,6 +1,6 @@
 var hierarchy =
 [
-    [ "ADSR< CONTROL_UPDATE_RATE, LERP_RATE >", "class_a_d_s_r.html", null ],
+    [ "ADSR< CONTROL_UPDATE_RATE, LERP_RATE, T >", "class_a_d_s_r.html", null ],
     [ "ADSR< CONTROL_RATE, AUDIO_RATE >", "class_a_d_s_r.html", null ],
     [ "ADSR< CONTROL_RATE, CONTROL_RATE >", "class_a_d_s_r.html", null ],
     [ "AudioDelay< NUM_BUFFER_SAMPLES, T >", "class_audio_delay.html", [
@@ -30,6 +30,7 @@ var hierarchy =
     [ "Line< unsigned int >", "class_line_3_01unsigned_01int_01_4.html", null ],
     [ "Line< unsigned long >", "class_line_3_01unsigned_01long_01_4.html", null ],
     [ "LowPassFilter", "class_low_pass_filter.html", null ],
+    [ "MonoOutput", "struct_mono_output.html", null ],
     [ "MultiLine< CONTROL_UPDATE_RATE, LERP_RATE >", "class_multi_line.html", null ],
     [ "Oscil< NUM_TABLE_CELLS, UPDATE_RATE >", "class_oscil.html", null ],
     [ "Oscil< 8192, AUDIO_RATE >", "class_oscil.html", null ],
@@ -51,6 +52,7 @@ var hierarchy =
     [ "Smooth< T >", "class_smooth.html", null ],
     [ "Stack< T, NUM_ITEMS >", "class_stack.html", null ],
     [ "StateVariable< FILTER_TYPE >", "class_state_variable.html", null ],
+    [ "StereoOutput", "struct_stereo_output.html", null ],
     [ "WavePacket< ALGORITHM >", "class_wave_packet.html", [
       [ "WavePacketSample< ALGORITHM >", "class_wave_packet_sample.html", null ]
     ] ],

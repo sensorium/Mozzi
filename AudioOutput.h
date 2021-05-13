@@ -92,8 +92,10 @@ struct StereoOutput {
   /** Default contstructor */
   StereoOutput() : _l(0), _r(0) {};
 #if (AUDIO_CHANNELS != STEREO)
-  /** Conversion to int operator: If used in a mono config, returns only the left channel (and gives a compile time warning). */
-  inline operator AudioOutput_t() const __attribute__((deprecated("Sketch generates stereo output, but Mozzi is configured for mono. Check mozzi_config.h."))) { return _l; };
+  /** Conversion to int operator: If used in a mono config, returns only the left channel (and gives a compile time warning). 
+      This _could_ be turned into an operator for implicit conversion in this case. For now we chose to apply conversion on demand, only, as most of the time
+      using StereoOutput in a mono config, is not intended. */
+  inline AudioOutput_t portable() const __attribute__((deprecated("Sketch generates stereo output, but Mozzi is configured for mono. Check mozzi_config.h."))) { return _l; };
 #endif
   AudioOutputStorage_t l() const { return _l; };
   AudioOutputStorage_t r() const { return _r; };
@@ -135,8 +137,10 @@ struct MonoOutput {
   /** Construct an audio frame from raw values (zero-centered) */
   MonoOutput(AudioOutputStorage_t l=0) : _l(l) {};
 #if (AUDIO_CHANNELS > 1)
-  /** Conversion to stereo operator: If used in a stereo config, returns identical channels (and gives a compile time warning). */
-  inline operator StereoOutput() const __attribute__((deprecated("Sketch generates mono output, but Mozzi is configured for stereo. Check mozzi_config.h."))) { return StereoOutput(_l, _l); };
+  /** Conversion to stereo operator: If used in a stereo config, returns identical channels (and gives a compile time warning).
+      This _could_ be turned into an operator for implicit conversion in this case. For now we chose to apply conversion on demand, only, as most of the time
+      using StereoOutput in a mono config, is not intended. */
+  inline StereoOutput portable() const __attribute__((deprecated("Sketch generates mono output, but Mozzi is configured for stereo. Check mozzi_config.h."))) { return StereoOutput(_l, _l); };
 #else
   /** Conversion to int operator. */
   inline operator AudioOutput_t() const { return _l; };

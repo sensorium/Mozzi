@@ -48,9 +48,9 @@ template<uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE, byte N_OSCIL>
   }
 
 
-  /** Add all Oscil to a MetaOscil.
+  /** Set all Oscil of a MetaOscil.
       @param first... is a list of pointers towards several Oscil */ 
-  template<typename ... T >  void addOscils(Oscil<NUM_TABLE_CELLS, UPDATE_RATE>* first,T... elements)
+  template<typename ... T >  void setOscils(Oscil<NUM_TABLE_CELLS, UPDATE_RATE>* first,T... elements)
     {
       oscillators[current_rank]=first;
       current_rank+=1;

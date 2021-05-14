@@ -356,3 +356,9 @@ noteOff	KEYWORD2
 setPDEnv	KEYWORD2
 update	KEYWORD2
 next	KEYWORD2
+
+MetaOscil	KEYWORD1
+setCutoffFreqs	KEYWORD2
+setCutoffFreq	KEYWORD2
+setGlobalPhase	KEYWORD2
+setGlobalPhaseFractional	KEYWORD2

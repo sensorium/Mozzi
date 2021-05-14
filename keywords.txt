@@ -362,3 +362,5 @@ setCutoffFreqs	KEYWORD2
 setCutoffFreq	KEYWORD2
 setGlobalPhase	KEYWORD2
 setGlobalPhaseFractional	KEYWORD2
+addOscil			KEYWORD2
+addOscils			KEYWORD2

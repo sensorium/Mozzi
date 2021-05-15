@@ -70,7 +70,7 @@ Whether or not to use audio input.
 Put \#define USE_AUDIO_INPUT true in Mozzi/mozzi_config.h to enable audio input on analog pin AUDIO_INPUT_PIN,
 otherwise make it false, to save resources.
 */
-//#define USE_AUDIO_INPUT true
+#define USE_AUDIO_INPUT false
 
 
 /** @ingroup core
@@ -90,8 +90,13 @@ You need to have \#define STEREO_HACK true in mozzi_config.h
 */
 #define STEREO_HACK false
 
+/** @ingroup core
+This defines the naximum number of output channels that we will be processing. Please notice that adding additional channels might impact have
+an impact on timings. The maximum number is additinally restricted by the specific implementation in the output class: e.g. on the ESP32 which 
+uses the I2S interface the number of channels are restricted to 2. But many processors are quite happy to support more then 2 PWM output pins...  
+*/
 
-#define CHANNELS 2
+#define CHANNELS 1
 
 
 /** @ingroup core

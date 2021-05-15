@@ -2,7 +2,8 @@
  * MozziRP2040.cpp
  * 
  * Mozzi Support for the Rasperry Pico for the Arduino Kernels which provide the full Rasperry Pico API
- * 
+ * ATTENTION: The standard Arduino implementation uses the ARM Mbed! So this would be the wrong place
+  
  * Copyright 2012 Tim Barrass.
  * Copyright 2021 Phil Schatzmann.
  * 
@@ -25,29 +26,33 @@
 #include "pico/time.h"
 
 //-----------------------------------------------------------------------------------------------------------------
-/// bufferAudioOutput
-
-#if BYPASS_MOZZI_OUTPUT_BUFFER == true
-inline void bufferAudioOutput(const AudioOutput_t f) {
-  audioOutput(f);
-  ++samples_written_to_buffer;
-}
-#else
-// ring buffer for audio output
-CircularBuffer<OUTPUT_TYPE> output_buffer;  // fixed size 256
-#define canBufferAudioOutput() (!output_buffer.isFull())
-#define bufferAudioOutput(f) output_buffer.write(f)
-#endif
-
-
+/// local variables
 //-----------------------------------------------------------------------------------------------------------------
-/// We use the Pico API
+
+uint16_t update_control_timeout;
+uint16_t update_control_counter;
 
 uint pwm_slice_num;
 alarm_id_t alarm_id=-1;
 alarm_pool_t *ap;
 repeating_timer_t timer;
 
+// ring buffer for audio output
+CircularBuffer<MultiChannelOutput> output_buffer;  // fixed size 256
+#define canBufferAudioOutput() (!output_buffer.isFull())
+#define bufferAudioOutput(f) output_buffer.write(f)
+
+
+//-----------------------------------------------------------------------------------------------------------------
+// Some forware declarations that we can use method in logical sections
+//-----------------------------------------------------------------------------------------------------------------
+void setupOutputTimer();
+void defaultAudioOutput();
+
+
+//-----------------------------------------------------------------------------------------------------------------
+/// Setup
+//-----------------------------------------------------------------------------------------------------------------
 
 // Setup PWM On 2 output Pins
 void setupPWM() {
@@ -71,22 +76,7 @@ void setupPWM() {
   pwm_set_enabled(pwm_slice_num, true);
 }
 
-// Timer Callback
-bool defaultAudioOutput(repeating_timer *t) {
-  audioOutput(output_buffer.read());
-  return true;
-}
 
-void setupTimer() {
-    uint64_t time = 1000000UL / AUDIO_RATE;
-    if (!add_repeating_timer_ms(-time, defaultAudioOutput, nullptr, &timer)){
-      LOG_OUTPUT.println("Error: alarm_pool_add_repeating_timer_us failed; no alarm slots available");
-    }
-}
-
-inline void writePWM(uint channel, int16_t value){
-  pwm_set_chan_level(channel==1 ?PWM_CHAN_A:PWM_CHAN_B, channel, value);
-}
 
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -96,13 +86,7 @@ unsigned long MozziClass::audioTicks() {
     return output_buffer.count();
 }
 
-// Timer Callback
-void defaultAudioOutput() {
-  audioOutput(output_buffer.read());
-}
 
-uint16_t update_control_timeout;
-uint16_t update_control_counter;
 
 inline void advanceControlLoop() {
   if (!update_control_counter) {
@@ -121,7 +105,7 @@ void startAudio() {
   // this supports all AUDIO_MODE settings
   setupPWM();
   // setup timer for defaultAudioOutput
-  setupTimer();
+  setupOutputTimer();
 }
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -129,12 +113,12 @@ void startAudio() {
 #if (USE_AUDIO_INPUT == true)
 
 void  setupADC() {
-    adc_init();
- 
-    // Make sure GPIO is high-impedance, no pullups etc
-    adc_gpio_init(AUDIO_CHANNEL_1_PIN);
-    // Select ADC input 0 (GPIO26)
-    adc_select_input(AUDIO_CHANNEL_IN);
+  adc_init();
+
+  // Make sure GPIO is high-impedance, no pullups etc
+  adc_gpio_init(AUDIO_CHANNEL_1_PIN);
+  // Select ADC input 0 (GPIO26)
+  adc_select_input(AUDIO_CHANNEL_IN);
 }
 
 int MozziClass::getAudioInput() { 
@@ -147,7 +131,8 @@ int MozziClass::getAudioInput() {
 #endif
 
 //-----------------------------------------------------------------------------------------------------------------
-// Start - Stop
+// Class Methods: Start - Stop
+//-----------------------------------------------------------------------------------------------------------------
 
 void startControl(unsigned int control_rate_hz) {
   update_control_timeout = AUDIO_RATE / control_rate_hz;
@@ -174,23 +159,48 @@ void MozziClass::audioHook()
 {
   if (canBufferAudioOutput()) {
     advanceControlLoop();
-
-    #if (STEREO_HACK == true)
-        updateAudio(); // in hacked version, this returns void
-        bufferAudioOutput(StereoOutput(audio_out_1, audio_out_2));
-    #else
-        bufferAudioOutput(updateAudio());
-    #endif
-
+    MultiChannelOutput out;
+    if (updateAudio!=nullptr){
+      out[0]=updateAudio();
+      bufferAudioOutput(out);
+    } else {
+      if (updateAudioN!=nullptr){
+        updateAudioN(CHANNELS, out);
+        bufferAudioOutput(out);
+      }
+    }
   }
+  yield();
 }
+
+//-----------------------------------------------------------------------------------------------------------------
+// Input
+//-----------------------------------------------------------------------------------------------------------------
+
 
 
 //-----------------------------------------------------------------------------------------------------------------
-/// Output
+// Output
+//-----------------------------------------------------------------------------------------------------------------
+// Timer Callback
+void defaultAudioOutput() {
+  audioOutput(output_buffer.read());
+}
+
+void setupOutputTimer() {
+    uint64_t time = 1000000UL / AUDIO_RATE;
+    if (!add_repeating_timer_ms(-time, defaultAudioOutput, nullptr, &timer)){
+      LOG_OUTPUT.println("Error: alarm_pool_add_repeating_timer_us failed; no alarm slots available");
+    }
+}
+
+
+inline void writePWM(uint channel, int16_t value){
+  pwm_set_chan_level(channel==1 ?PWM_CHAN_A:PWM_CHAN_B, channel, value);
+}
 
 /// Output will always be on both pins!
-inline void audioOutput(const AudioOutput f) {
+inline void audioOutput(const MultiChannelOutput f) {
 #if (AUDIO_MODE == HIFI)
   writePWM(PWM_CHAN_A, (f.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
   writePWM(PWM_CHAN_B, (f.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);

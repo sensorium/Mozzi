@@ -6,12 +6,13 @@
 
 #include "hardware_defines.h"
 
-#if IS_ESP8266() || IS_ESP32()
+#if IS_ESP8266() || IS_ESP32() 
 template<typename T> inline T FLASH_OR_RAM_READ(T* address) {
     return (T) (*address);
 }
 #define CONSTTABLE_STORAGE(X) const X
 #else
+//#elif IS_AVR() || IS_TEENSY3() || IS_STM32() || IS_SAMD21()
 #include <avr/pgmspace.h>
 // work around missing std::is_const
 template<typename T> inline bool mozzi_is_const_pointer(T* x) { return false; }
@@ -54,6 +55,8 @@ template<typename T> inline T FLASH_OR_RAM_READ(T* address) {
  *  is reasonably possible (i.e. not on ESP8266, where random location flash memory access is too slow).
  *  To read the variable in a cross-platform compatible way, use FLASH_OR_RAM_READ(). */
 #define CONSTTABLE_STORAGE(X) const X __attribute__((section(".progmem.data")))
+//#else
+//#error Please implement FLASH_OR_RAM_READ and CONSTTABLE_STORAGE
 #endif
 
 #endif

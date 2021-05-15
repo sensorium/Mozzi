@@ -1,46 +1,57 @@
 /**
-* We demonstrate how we can use the AudioStream as Aduio Data Source.
-* We just print the data to the Serial port where you could analyze it in the Serial Plotter
+* We demonstrate how we can send the output to Serial so that we can verify it in the Arduino Serial Plotter
 */
+#include <Mozzi.h>
+#include <Phasor.h> // for controlling panning position
+#include <Oscil.h> // oscil for audio sig
+#include <tables/pinknoise8192_int8.h> // table for oscillator
+#include "MozziOut.h"
 
-#include <MozziOut.h>
-#include <Oscil.h> // oscillator template
-#include <tables/sin2048_int8.h> // sine table for oscillator
+#if CHANNELS != 2 
+#error("Please set the channels to 2 for this example")
+#endif
 
-// use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+// use: Oscil <table_size, update_rate> oscilName (wavetable)
+Oscil <PINKNOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(PINKNOISE8192_DATA);
+Phasor <CONTROL_RATE> kPan; // outputs an unsigned long 0-max 32 bit positive number
+unsigned int pan; // convey pan from updateControl() to updateAudioStereo();
 
-// use #define for CONTROL_RATE, not a constant
-#define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
-
+// output to Serial
 AudioStream mozzi;
-const int bufferSize=100;
-int16_t buffer[bufferSize];
+const int buffer_size = 100;
+AudioOutputStorage_t buffer[buffer_size];
+const int sample_size = sizeof(AudioOutputStorage_t);
 
-void setup() {
+
+void setup(){
+  aNoise.setFreq(2.111f); // set the frequency with an unsigned int or a float
+  kPan.setFreq(0.25f); // take 4 seconds to move left-right
+  mozzi.start(); // :)
   Serial.begin(115200);
-  while(!Serial);
-  
-  Serial.println("setup...");
-  mozzi.start(CONTROL_RATE); // :)
-  aSin.setFreq(440); // set the frequency
-
-  Serial.println("playing sound...");
 }
 
-void updateControl(){
-  // put changing controls in here
+
+void updateControlN(int channels){
+  pan = kPan.next()>>16;
+  Serial.println(pan);
 }
 
-AudioOutput_t updateAudio(){
-  return MonoOutput::from8Bit(aSin.next()); // return an int signal centred around 0
+
+void updateAudioN(int channels, MultiChannelOutput &out ) {
+  int asig = aNoise.next();
+  out[0] = (((long)pan*asig)>>16);
+  out[1] = ((((long)65535-pan)*asig)>>16);
 }
+
 
 void loop(){
-  int byteCount = sizeof(int16_t);
-
-  // we just copy the generated sound data from mozzi to I2S
-  size_t size = mozzi.readBytes((uint8_t*)buffer, bufferSize*byteCount);
-  for (int16_t j=0;j<size/byteCount;j++){
-    Serial.println(buffer[j]);
-  }
+    size_t bytes = mozzi.readBytes((uint8_t*)buffer, buffer_size/sample_size);
+    size_t samples = bytes / sample_size;
+    for (int j=0;j<samples;j++){
+      if (j%CHANNELS==0)
+        Serial.println();
+      else
+        Serial.print(", ");
+      Serial.print(buffer[j]);
+    }
+}

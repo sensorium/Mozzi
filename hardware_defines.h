@@ -16,11 +16,11 @@
 #define IS_AVR() (defined(__AVR__))  // "Classic" Arduino boards
 #define IS_SAMD21() (defined(ARDUINO_ARCH_SAMD))
 #define IS_TEENSY3() (defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MK64FX512__) || defined(__MK66FX1M0__) || defined(__MKL26Z64__) )  // 32bit arm-based Teensy
-#define IS_MBED() (defined(__arm__)  && __has_include("mbed.h"))
-#define IS_RP2040() (defined(ARDUINO_ARCH_RP2040) && !IS_MBED())
 #define IS_STM32() (defined(STM32_CORE_VERSION)) 
 #define IS_ESP8266() (defined(ESP8266))
 #define IS_ESP32() (defined(ESP32))
+#define IS_MBED() (defined(__arm__)  && __has_include("mbed.h"))
+#define IS_RP2040() (!IS_MBED() && defined(ARDUINO_ARCH_RP2040) && __has_include("hardware/pwm.h"))
 
 #if !(IS_AVR() || IS_TEENSY3() || IS_STM32() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() || IS_RP2040() || IS_MBED())
 #error Your hardware is not supported by Mozzi or not recognized. Edit hardware_defines.h to proceed.
@@ -57,10 +57,13 @@
 #include <ADC.h>
 #endif
 
+// Remove envorionment if if to activate the new functionality
 #if (IS_AVR() || IS_TEENSY3() || IS_STM32() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() )
 #define USE_LEGACY_GUTS true
 #else
 #define USE_LEGACY_GUTS false
 #endif
+
+
 
 #endif /* HARDWARE_DEFINES_H_ */

@@ -3,7 +3,7 @@
  *
  * Copyright 2012 Tim Barrass.
  *
- * This file is part of Mozzi.
+ * This file is part of Mozzi. NOTICE: This contains the legacy implementation which is replaced by Mozzi.h
  *
  * Mozzi by Tim Barrass is licensed under a Creative Commons
  * Attribution-NonCommercial-ShareAlike 4.0 International License.

@@ -2,8 +2,12 @@
  * MozziMBED.cpp
  * 
  * Mozzi Support for Microporcessors which use the ARM Mbed OS (e.g. Raspberry Pico)
- * 
- * Copyright 2012 Tim Barrass.
+ *
+ * Design Decisions:
+ * - We avoid preprocessor statements because ARM processors have enough resources and because if is easier to catch compile errors
+ * - We avoid any low level APIs - to be as understandable as possible
+ * - These decisions are valid for this implementation only!
+ *
  * Copyright 2021 Phil Schatzmann.
  * 
  * This file is part of Mozzi.
@@ -18,67 +22,52 @@
 #if IS_MBED() 
 
 #include "Mozzi.h"
-#include "pinDefinitions.h"
 #include "CircularBuffer.h"
+#include "AudioConfigArmMbed.h"
+#include "pinDefinitions.h"
 #include "mbed.h"
 
-
 //-----------------------------------------------------------------------------------------------------------------
-/// MBED Implementation
+/// Variables
+//-----------------------------------------------------------------------------------------------------------------
 
 mbed::Ticker ticker; // calls a callback repeatedly with a timeout
+mbed::Ticker inputTicker; // calls a callback repeatedly with a timeout
 mbed::PwmOut *pwm_pins[CHANNELS];
 uint16_t update_control_timeout;
 uint16_t update_control_counter;
-const uint MAX = 2*AUDIO_BIAS;
-char debug_buffer[80] = {'N','A',0};
+const uint MAX_VALUE = 2*AUDIO_BIAS;
+uint8_t max_channel = 0; // last valid channel with a pin defined
+CircularBuffer<AudioOutput_t> output_buffer;
+char msg[80];
 
 //-----------------------------------------------------------------------------------------------------------------
-/// Output 
+// forward declaration of some local methods 
+//-----------------------------------------------------------------------------------------------------------------
 
-#if BYPASS_MOZZI_OUTPUT_BUFFER == true
-void bufferAudioOutput(const MultiChannelOutput f) {
-  audioOutput(f);
-  ++samples_written_to_buffer;
-}
-#else
-// ring buffer for audio output
-CircularBuffer<MultiChannelOutput> output_buffer;  // fixed size 256
-
-bool canBufferAudioOutput(){
-  return !output_buffer.isFull();
-} 
-
-void bufferAudioOutput(const MultiChannelOutput f){
-   output_buffer.write(f);
-}
-#endif
-
-// forward declaration
 void writePWM(mbed::PwmOut &pin, int16_t value);
+void defaultAudioOutputCallback();
+void defaultAudioInputCallback();
+bool canBufferAudioOutput();
+void bufferAudioOutput(const AudioOutput_t f);
+void audioOutput(AudioOutput_t audio_output);
+void adcStartReadCycle();
+void setupInput();
+void stopInput();
 
-void audioOutput(MultiChannelOutput audio_output) {
-#if (AUDIO_MODE == HIFI)
-  writePWM(*pwm_pins[0], (audio_output[0].l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
-  writePWM(*pwm_pins[1], (audio_output[1].l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
-#else
-  for (int j=0;j<CHANNELS;j++){
-    if (pwm_pins[j]!=nullptr){
-      writePWM(*pwm_pins[j], audio_output[j].l()+AUDIO_BIAS);
-    }
-  }
-#endif
-}
-
-void defaultAudioOutputCallback() {
-  audioOutput(output_buffer.read());
-}
+//-----------------------------------------------------------------------------------------------------------------
+// Setup
+//-----------------------------------------------------------------------------------------------------------------
 
 void setupTimer() {
-    // 1000000l / 32768 -> 30 microsends
-    ticker.attach_us(defaultAudioOutputCallback, 1000000l / AUDIO_RATE );
+    // to test we use an interval of 1 sec
     //ticker.attach(defaultAudioOutputCallback,1.0);
+
+    // We use 1000000l / AUDIO_RATE => 1000000l / 16000 => 62 microsends 
+    long wait_time = 1000000l / AUDIO_RATE;
+    ticker.attach_us(defaultAudioOutputCallback, wait_time);
 }
+
 
 void setupPWMPin(mbed::PwmOut &pin){
   unsigned long period = 1000000l / PWM_RATE;  // -> 30.517578125 microseconds
@@ -87,62 +76,60 @@ void setupPWMPin(mbed::PwmOut &pin){
   pin.resume(); // in case it was suspended before
 }
 
-void setupPWM(const uint8_t *pins) {
+
+void setupPWM(const int16_t pins[]) {
   for (int j=0;j<CHANNELS;j++){
-    int gpio = pins[j];
-    if  (pwm_pins[j] != nullptr && gpio!=-1)  {
+    int16_t gpio = pins[j];
+    if  (pwm_pins[j] == nullptr && gpio >- 1)  {
       mbed::PwmOut *pin = new mbed::PwmOut(digitalPinToPinName(gpio));
       pwm_pins[j] = pin;
-      if (pin!=nullptr){
+      if (pin!=nullptr) {
+        sprintf(msg,"Channel %d -> pin %d", j, gpio);
+        Serial.println(msg);
         setupPWMPin(*pin);
+        max_channel = j + 1;
+      } else {
+        sprintf(msg,"Channel %d -> pin could not be defined", j);
+        Serial.println(msg);
       }
-    } 
-  }
-}
-
-void writePWM(mbed::PwmOut &pin, int16_t value){
-  float float_value = static_cast<float>(value) / MAX;
-  // pwm the value is between 0.0 and 1.0 
-  pin.write(float_value);  
-}
-
-inline void advanceControlLoop() {
-  if (!update_control_counter) {
-    update_control_counter = update_control_timeout;
-    updateControl();
-    //adcStartReadCycle();
-  } else {
-    --update_control_counter;
+    } else {
+        sprintf(msg,"Channel %d -> pin %d is already defined", j, gpio);
+        Serial.println(msg);
+    }
   }
 }
 
 //-----------------------------------------------------------------------------------------------------------------
-// Start - Stop
+// Start - Stop - Control
 
 void startControl(unsigned int control_rate_hz) {
   update_control_timeout = AUDIO_RATE / control_rate_hz;
 }
 
-void startAudio(const uint8_t *pins) {
-  //analogWriteResolution(12);
-  LOG_OUTPUT.println("startAudioStandard");
+void startAudio(const int16_t pins[]) {
+  if (USE_AUDIO_INPUT) {
+    setupInput();
+  }
 
   // this supports all AUDIO_MODE settings
-  setupPWM(pins);
+  if (!EXTERNAL_AUDIO_OUTPUT)
+    setupPWM(pins);
+
   // setup timer for defaultAudioOutput
   setupTimer();
 }
 
 void MozziClass::start(int control_rate_hz) {
-  // setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST
-  //                  // in setup() if desired (not for Teensy 3.* )
-  // // delay(200); // so AutoRange doesn't read 0 to start with
   startControl(control_rate_hz);
   startAudio(pins());
+
+  sprintf(msg,"Mozzi started on %d channels", max_channel);
+  Serial.println(msg);
 }
 
+
 void MozziClass::stop() {
-  ticker.detach();
+  ticker.detach(); // it does not hurt to call this even if it has not been started
 
   // stop all pins
   for (int j=0;j<CHANNELS;j++){
@@ -150,45 +137,122 @@ void MozziClass::stop() {
       pwm_pins[j]->suspend();
     } 
   }
+  stopInput();
 }
 
 unsigned long MozziClass::audioTicks() {
-    return output_buffer.count();
+  return output_buffer.count();
 }
 
 unsigned long MozziClass::mozziMicros() { 
   return audioTicks() * MICROS_PER_AUDIO_TICK;
 }
 
-void MozziClass::audioHook() 
-{
+inline void advanceControlLoop() {
+  if (!update_control_counter) {
+    update_control_counter = update_control_timeout;
+    updateControl();
+    adcStartReadCycle();
+  } else {
+    --update_control_counter;
+  }
+}
+
+void MozziClass::audioHook()  {
+  #if (USE_AUDIO_INPUT == true) 
+    if (!input_buffer.isEmpty()) {
+      adc_in_value = input_buffer.read();
+    }
+  #endif
+
   if (canBufferAudioOutput()) {
     advanceControlLoop();
-    MultiChannelOutput out;
-    if (updateAudio!=nullptr){
-      out[0]=updateAudio();
-      bufferAudioOutput(out);
-    } else {
-      if (updateAudioN!=nullptr){
-        updateAudioN(CHANNELS, out);
-        bufferAudioOutput(out);
-      }
-    }
+    bufferAudioOutput(updateAudio());
   }
-  yield();
 }
 
 //-----------------------------------------------------------------------------------------------------------------
-/// Input -> This might not be optimal but we just use the MBED AnalogIn )
-#if (USE_AUDIO_INPUT == true)
-AnalogIn analog_in(AUDIO_CHANNEL_1_PIN);
+/// Input -> This might not be optimal but we just use the MBED AnaSerialIn )
+//-----------------------------------------------------------------------------------------------------------------
 
-int MozziClass::getAudioInput() { 
+#if USE_AUDIO_INPUT == true
+mbed::AnalogIn *analog_in = nullptr;
+CircularBuffer<AudioOutput_t> input_buffer;  
+AudioOutput_t adc_in_value = 0;
+
+void defaultAudioInputCallback() {
+  int value = analog_in->read_u16(); 
   // range 0x0, 0xFFFF -> -AUDIO_BIAS, +AUDIO_BIAS
-  int value = analog_in.read_u16(); 
-  return map(value,0x0,0xFFFF,-AUDIO_BIAS,AUDIO_BIAS);
+  if (!input_buffer.isFull()){
+    input_buffer.write(map(value,0x0,0xFFFF,-AUDIO_BIAS,AUDIO_BIAS));
+  }
 }
+
+
+void setupInput() {
+    // We use 1000000l / AUDIO_RATE => 1000000l / 16000 => 62 microsends 
+    long wait_time = 1000000l / AUDIO_RATE;
+    ticker.attach_us(defaultAudioInputCallback, wait_time);
+
+    if (analog_in==nullptr){
+      analog_in = new mbed::AnalogIn(digitalPinToPinName(AUDIO_INPUT_PIN));
+    }
+}
+
+void stopInput() {
+  inputTicker.detach();  // it does not hurt to call this even if it has not been started
+  // rmove analog pin
+  if (analog_in!=nullptr)
+    delete analog_in;
+}
+
+// Provides the analog value w/o delay
+int16_t MozziClass::getAudioInput() { 
+  return adc_in_value;
+}
+
+#else
+void setupInput() {}
+void stopInput() {}
+
 #endif
 
+//-----------------------------------------------------------------------------------------------------------------
+/// Output 
+//-----------------------------------------------------------------------------------------------------------------
 
-#endif  // IS_RP2040
+void defaultAudioOutputCallback() {
+  if (!output_buffer.isEmpty()){
+    int value = output_buffer.read();
+    // pwm the value is between 0.0 and 1.0 
+    float float_value = static_cast<float>(value + AUDIO_BIAS) / MAX_VALUE;
+    debug_output = float_value;
+  
+    // output values to pins
+    for (int j=0;j<max_channel;j++){
+      pwm_pins[j]->write(float_value);
+    }
+  }
+}
+
+bool canBufferAudioOutput(){
+  return !output_buffer.isFull();
+} 
+
+void bufferAudioOutput(const AudioOutput_t f){
+   output_buffer.write(f);
+}
+
+// TODO - to be removed
+void audioOutput(MonoOutput out){
+    float float_value = static_cast<float>(out.l()) / MAX_VALUE;
+    pwm_pins[0]->write(float_value);
+    if (max_channel>=2){
+      float float_value = static_cast<float>(out.r()) / MAX_VALUE;
+      pwm_pins[1]->write(float_value);
+    }
+}
+
+
+
+#endif  // IS_MBED

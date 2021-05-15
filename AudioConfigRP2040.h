@@ -18,7 +18,7 @@
 #define AUDIO_CHANNEL_1_PIN_HIGH 15
 // ADC input. 0...3 are GPIOs 26...29 respectively. Input 4 is the onboard temperature sensor.
 #define AUDIO_CHANNEL_IN 0
-#define AUDIO_CHANNEL_1_PIN 26
+#define AUDIO_INPUT_PIN 26
 
 // Timer settings
 #define ALARM_POOL_HARDWARE_ALARM_NUM 2

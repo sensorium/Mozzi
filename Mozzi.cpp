@@ -41,21 +41,29 @@ unsigned long audioTicks() {
 #if (IS_AVR() || IS_TEENSY3() || IS_STM32() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() || IS_RP2040() || IS_MBED())
 
 MozziControl::MozziControl(){
+    // intialize all cannels to to be undefined
+    for (int j=0;j<CHANNELS;j++) {
+        channel_pins[j] = -1;
+    }
 
-#ifdef AUDIO_CHANNEL_1_PIN
+    // setup pin numbers
     channel_pins[0] = AUDIO_CHANNEL_1_PIN;
-#endif
-#if CHANNELS > 1
-    #ifdef AUDIO_CHANNEL_1_PIN_HIGH
-        channel_pins[1] = AUDIO_CHANNEL_2_PIN;
-    #elif defined(AUDIO_CHANNEL_2_PIN)
-        channel_pins[1] = AUDIO_CHANNEL_2_PIN;
+
+    #if CHANNELS > 1
+        #ifdef AUDIO_CHANNEL_1_PIN_HIGH
+            channel_pins[1] = AUDIO_CHANNEL_1_PIN_HIGH;
+        #elif defined(AUDIO_CHANNEL_2_PIN)
+            channel_pins[1] = AUDIO_CHANNEL_2_PIN;
+        #endif
     #endif
-#endif
 
 }
 
 #endif // Platforms
+
+
+
+float debug_output;
 
 
 #endif // USE_LEGACY_GUTS

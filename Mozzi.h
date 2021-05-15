@@ -134,36 +134,8 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #define EXTERNAL_AUDIO_OUTPUT false
 #endif
 
-// External output e.g. to DAC
-#if (EXTERNAL_AUDIO_OUTPUT == true)
-    #if !defined(EXTERNAL_AUDIO_BITS)
-    #define EXTERNAL_AUDIO_BITS 16
-    #endif
-    #define AUDIO_BITS EXTERNAL_AUDIO_BITS
-    #define AUDIO_BIAS (1 << (AUDIO_BITS - 1))
-#else // EXTERNAL_AUDIO_OUTPUT==false
-    #if IS_TEENSY3()
-    #include "AudioConfigTeensy3_12bit.h"
-    #elif IS_STM32()
-    #include "AudioConfigSTM32.h"
-    #elif IS_ESP8266()
-    #include "AudioConfigESP8266.h"
-    #elif IS_ESP32()
-    #include "AudioConfigESP32.h"
-    #elif IS_SAMD21()
-    #include "AudioConfigSAMD21.h"
-    #elif IS_AVR() && (AUDIO_MODE == STANDARD)
-    #include "AudioConfigStandard9bitPwm.h"
-    #elif IS_AVR() && (AUDIO_MODE == STANDARD_PLUS)
-    #include "AudioConfigStandardPlus.h"
-    #elif IS_AVR() && (AUDIO_MODE == HIFI)
-    #include "AudioConfigHiSpeed14bitPwm.h"
-    #elif IS_MBED() 
-    #include "AudioConfigMBED.h"
-    #elif IS_RP2040()  
-    #include "AudioConfigRP2040.h"
-    #endif
-#endif
+// Load AudioConfig for specific environement
+#include "AudioConfigAll.h"
 
 // TODO it might make sense to integrate AudioOutput into the new Mozzi Class - Anyhow I provide a typedef so that we do not need 
 // to use 
@@ -233,23 +205,23 @@ class MozziControl {
             return CHANNELS;
         }
 
-        const uint8_t* pins(){
+        const int16_t* pins() {
             return channel_pins;
         }
 
-        void setPin(int8_t idx, int8_t pin){
+        void setPin(uint8_t idx, int16_t pin){
             channel_pins[idx] = pin;
         }
 
     protected:
-        uint8_t channel_pins[CHANNELS];
+        int16_t channel_pins[CHANNELS];
 };
 
 /**
  * @brief User facing Mozzi Class with oprerations for start, stop and audioHook()
  * 
  */
-class MozziClass : MozziControl {
+class MozziClass : public MozziControl {
     public:
 
         /** @brief This is required in Arduino's loop(). If there is room in Mozzi's output buffer,
@@ -282,7 +254,7 @@ class MozziClass : MozziControl {
         @return audio data from the input buffer
         */
         #if (USE_AUDIO_INPUT == true)
-        int getAudioInput();
+        static int getAudioInput();
         #endif
 
         /** @brief An alternative for Arduino time functions like micros() and millis(). This is slightly faster than micros(),
@@ -294,7 +266,7 @@ class MozziClass : MozziControl {
         @return the approximate number of microseconds since the program began.
         @todo  incorporate mozziMicros() in a more accurate EventDelay()?
         */
-        unsigned long mozziMicros();
+        static unsigned long mozziMicros();
 
         /** @brief An alternative for Arduino time functions like micros() and millis(). This is slightly faster than micros(),
         and also it is synchronized with the currently processed audio sample (which, due to the audio
@@ -304,9 +276,12 @@ class MozziClass : MozziControl {
         16384 Hz).
         @return the number of audio ticks since the program began.
         */
-        unsigned long audioTicks();
+        static unsigned long audioTicks();
 
+        // see MozziControl::start
         virtual void start(int control_rate_hz = CONTROL_RATE);
+
+        // see MozziControl::stop
         virtual void stop();
 
 };
@@ -320,12 +295,7 @@ calculations here which could be done in setup() or updateControl().
 @return an audio sample.  In STANDARD modes this is between -244 and 243 inclusive.
 In HIFI mode, it's a 14 bit number between -16384 and 16383 inclusive.
 */
-AudioOutput_t updateAudio() __attribute__((weak));
-
-/** @ingroup core
-* see updateAudio() but for multiple channels: e.g. stereo
-*/
-void updateAudioN(int channels, MultiChannelOutput &output ) __attribute__((weak));
+AudioOutput_t updateAudio();
 
 
 /** @ingroup core
@@ -334,12 +304,7 @@ your sketch, even if it's empty. updateControl() is called at the control rate
 you set in startMozzi(). To save processor load, avoid any calculations here
 which could be done in setup().
 */
-void updateControl() __attribute__((weak));
-
-/** @ingroup core
-* see updateControl() but for multiple channels: e.g. stereo
-*/
-void updateControlN(int channels) __attribute__((weak));;
+void updateControl();
 
 
 /** @ingroup core
@@ -351,7 +316,6 @@ is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when 
 16384 Hz).
 @return the number of audio ticks since the program began.
 */
-
 
 
 /** @ingroup core
@@ -383,5 +347,4 @@ void audioHook();
 unsigned long audioTicks();
 
 
-extern char debug_buffer[80];
-
+extern float debug_output;

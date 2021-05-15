@@ -33,7 +33,8 @@ template<uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE, byte N_OSCIL>
   /** Constructor
       Declare a MetaOscil containing any number of Oscil pointers. Every Oscil should have the same TABLE_NUM_CELLS and UPDATE_RATE which are also passed in the MetaOscil constructor. 
       @param N_OSCIL is the number of Oscil contained in the MetaOscil. This cannot be changed after construction. */ 
-  template<class... T>  MetaOscil(Oscil<NUM_TABLE_CELLS, UPDATE_RATE>* first, T*... elements):oscillators{first, elements...} {};
+  template<class... T>  MetaOscil(Oscil<NUM_TABLE_CELLS, UPDATE_RATE>* first, T*... elements):oscillators{first, elements...} {
+    current_osc=oscillators[0];};
 
   MetaOscil(){};
 
@@ -44,7 +45,8 @@ template<uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE, byte N_OSCIL>
   {
     oscillators[current_rank] = osc;
     cutoff_freqs[current_rank] = cutoff_freq;
-    current_rank +=1;
+    if (current_rank == 0) current_osc=oscillators[0];
+    current_rank += 1;
   }
 
 
@@ -53,6 +55,7 @@ template<uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE, byte N_OSCIL>
   template<typename ... T >  void setOscils(Oscil<NUM_TABLE_CELLS, UPDATE_RATE>* first,T... elements)
     {
       oscillators[current_rank]=first;
+      if (current_rank == 0) current_osc=oscillators[0];
       current_rank+=1;
       setOscils(elements...);
       current_rank = 0;
@@ -92,50 +95,22 @@ template<uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE, byte N_OSCIL>
       @param rank is the Oscil.*/
   void setTable(const int8_t * TABLE_NAME, byte rank) {oscillators[rank]->setTable(TABLE_NAME);}
 
+  
   /** Set the phase of the currently playing Oscil.
       @param phase a position in the wavetable.*/
   void setPhase(unsigned int phase) {current_osc->setPhase(phase);}
 
-  /** Set the phase of one Oscil.
-      @param phase a position in the wavetable.
-      @param rank the rank of the Oscil to be adjusted.*/
-  void setPhase(unsigned int phase, byte rank) {oscillators[rank]->setPhase(phase);}
-
-  
-  /** Set the phase of all Oscil.
-      @param phase a position in the wavetable.*/
-  void setGlobalPhase(unsigned int phase)
-  {
-    for (byte i=0;i<N_OSCIL;i++) oscillators[i]->setPhase(phase);
-  }
 
   /** Set the phase of the currently playing Oscil in fractional format.
       @param phase a position in the wavetable.*/
   void setPhaseFractional(unsigned long phase) {current_osc->setPhaseFractional(phase);}
 
 
-  /** Set the phase of one Oscil in fractional format.
-      @param phase a position in the wavetable.
-      @param rank the rank of the Oscil to be adjusted.*/
-  void setPhaseFractional(unsigned long phase, byte rank) {oscillators[rank]->setPhaseFractional(phase);}
-
-  /** Set the phase of all Oscil in fractional format.
-      @param phase a position in the wavetable.*/
-  void setGlobalPhaseFractional(unsigned long phase)
-  {
-    for (byte i=0;i<N_OSCIL; i++) oscillators[i]->setPhaseInc(phase);
-  }
-
   /** Get the phase of the currently playin Oscil in fractional format.
       @return position in the wavetable, shifted left by OSCIL_F_BITS (which is 16 when this was written).
   */
   unsigned long getPhaseFractional() {return current_osc->getPhaseFractional();}
 
-  /** Get the phase of one Oscil in fractional format.
-      @param rank the rank of the Oscil.
-      @return position in the wavetable, shifted left by OSCIL_F_BITS (which is 16 when this was written).
-  */
-  unsigned long getPhaseFractional(byte rank) {return oscillators[rank]->getPhaseFractional();}
 
   
   /** Returns the next sample given a phase modulation value.
@@ -151,26 +126,39 @@ template<uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE, byte N_OSCIL>
   /** Set the MetaOsc frequency with an unsigned int.
       @param frequency to play the wave table.*/
   inline
-    void setFreq(int frequency)
+    void setFreq(int frequency, bool apply = true)
   {
-    bool fallback = true;
-    for (byte i=0; i<N_OSCIL-1; i++)
+    if (frequency < cutoff_freqs[0])  //getting out the extreme cases
       {
-	if (frequency < cutoff_freqs[i])
-	  {
-	    fallback = false;
-	    oscillators[i]->setPhaseFractional(current_osc->getPhaseFractional());
-	    current_osc = oscillators[i];
-	    current_osc->setFreq(frequency);
-	    break;
-	  }
-      }
-    if (fallback)
-      {
-	oscillators[N_OSCIL-1]->setPhaseFractional(current_osc->getPhaseFractional());
-	current_osc = oscillators[N_OSCIL-1];
+	oscillators[0]->setPhaseFractional(current_osc->getPhaseFractional());
+	current_osc = oscillators[0];
 	current_osc->setFreq(frequency);
       }
+    
+    else if (frequency > cutoff_freqs[N_OSCIL-1])
+      {	    
+	oscillators[N_OSCIL-1]->setPhaseFractional(current_osc->getPhaseFractional());
+	current_osc = oscillators[N_OSCIL-1];
+	current_osc->setFreq(frequency);      
+      }
+    else  // dichotomic search
+      {
+	byte low_point = 0, high_point = N_OSCIL-1, mid_point = (N_OSCIL-1)>>1;
+	while(low_point != high_point)
+	  {
+	    if (frequency > cutoff_freqs[mid_point]) low_point = mid_point+1;
+	    else if (frequency < cutoff_freqs[mid_point]) high_point = mid_point;
+	    else
+	      {
+		break;
+	      }
+	    mid_point = (low_point + high_point)>>1;
+	  }
+	oscillators[mid_point]->setPhaseFractional(current_osc->getPhaseFractional());
+	current_osc = oscillators[mid_point];
+	if (apply) current_osc->setFreq(frequency);      
+      }
+      
   }
 
 
@@ -179,24 +167,8 @@ template<uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE, byte N_OSCIL>
   inline
     void setFreq(float frequency)
   {
-    bool fallback = true;
-    for (byte i=0; i<N_OSCIL-1; i++)
-      {
-	if ((int)frequency < cutoff_freqs[i])
-	  {
-	    fallback = false;
-	    oscillators[i]->setPhaseFractional(current_osc->getPhaseFractional());
-	    current_osc = oscillators[i];
-	    current_osc->setFreq(frequency);
-	    break;
-	  }
-      }
-    if (fallback)
-      {
-	oscillators[N_OSCIL-1]->setPhaseFractional(current_osc->getPhaseFractional());
-	current_osc = oscillators[N_OSCIL-1];
-	current_osc->setFreq(frequency);
-      }
+    setFreq((int) frequency, false);
+    current_osc->setFreq(frequency);    
   }
 
 
@@ -205,24 +177,8 @@ template<uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE, byte N_OSCIL>
   inline
     void setFreq_Q24n8(Q24n8 frequency)
   {
-    bool fallback = true;
-    for (byte i=0; i<N_OSCIL-1; i++)
-      {
-	if ((int)(frequency >> 8) < cutoff_freqs[i])
-	  {
-	    fallback = false;
-	    oscillators[i]->setPhaseFractional(current_osc->getPhaseFractional());
-	    current_osc = oscillators[i];
-	    current_osc->setFreq_Q24n8(frequency);
-	    break;
-	  }
-      }
-    if (fallback)
-      {
-	oscillators[N_OSCIL-1]->setPhaseFractional(current_osc->getPhaseFractional());
-	current_osc = oscillators[N_OSCIL-1];
-	current_osc->setFreq_Q24n8(frequency);
-      }
+    setFreq((int) (frequency>>8), false);
+    current_osc->setFreq_Q24n8(frequency);
   }
 
   
@@ -231,24 +187,8 @@ template<uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE, byte N_OSCIL>
   inline
     void setFreq_Q16n16(Q16n16 frequency)
   {
-    bool fallback = true;
-    for (byte i=0; i<N_OSCIL-1; i++)
-      {
-	if ((int)(frequency >> 16) < cutoff_freqs[i])
-	  {
-	    fallback = false;
-	    oscillators[i]->setPhaseFractional(current_osc->getPhaseFractional());
-	    current_osc = oscillators[i];
-	    current_osc->setFreq_Q16n16(frequency);
-	    break;
-	  }
-      }
-    if (fallback)
-      {
-	oscillators[N_OSCIL-1]->setPhaseFractional(current_osc->getPhaseFractional());
-	current_osc = oscillators[N_OSCIL-1];
-	current_osc->setFreq_Q16n16(frequency);
-      }
+    setFreq((int) (frequency>>16), false);
+    current_osc->setFreq_Q16n16(frequency);
   }
 
 

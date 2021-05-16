@@ -38,7 +38,7 @@ alarm_pool_t *ap;
 repeating_timer_t timer;
 
 // ring buffer for audio output
-CircularBuffer<MultiChannelOutput> output_buffer;  // fixed size 256
+CircularBuffer<AudioOutput> output_buffer;  // fixed size 256
 #define canBufferAudioOutput() (!output_buffer.isFull())
 #define bufferAudioOutput(f) output_buffer.write(f)
 
@@ -47,7 +47,8 @@ CircularBuffer<MultiChannelOutput> output_buffer;  // fixed size 256
 // Some forware declarations that we can use method in logical sections
 //-----------------------------------------------------------------------------------------------------------------
 void setupOutputTimer();
-void defaultAudioOutput();
+bool defaultAudioOutputCallback(repeating_timer* ptr);
+void setupADC(); 
 
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -58,8 +59,9 @@ void defaultAudioOutput();
 void setupPWM() {
   // start pwm
   gpio_set_function(AUDIO_CHANNEL_1_PIN, GPIO_FUNC_PWM);
-  gpio_set_function(AUDIO_CHANNEL_2_PIN, GPIO_FUNC_PWM);
-
+  if (CHANNELS>1){
+    gpio_set_function(AUDIO_CHANNEL_2_PIN, GPIO_FUNC_PWM);
+  }
   pwm_config cfg = pwm_get_default_config();
   pwm_config_set_clkdiv (&cfg, PWM_CLOCK_DIV);
 
@@ -70,23 +72,38 @@ void setupPWM() {
   pwm_set_wrap(pwm_slice_num, PWM_CYCLES);
   // Set channel A output high for 0 cycle before dropping
   pwm_set_chan_level(pwm_slice_num, PWM_CHAN_A, 0); // pin 14
-  // Set initial B output high for 0 cycles before dropping
-  pwm_set_chan_level(pwm_slice_num, PWM_CHAN_B, 0); // pin 15
+
+  if (CHANNELS>1){
+    // Set initial B output high for 0 cycles before dropping
+    pwm_set_chan_level(pwm_slice_num, PWM_CHAN_B, 0); // pin 15
+  }
   // Set the PWM running
   pwm_set_enabled(pwm_slice_num, true);
 }
 
-
-
-
-//-----------------------------------------------------------------------------------------------------------------
-/// Logic with Buffer
-
-unsigned long MozziClass::audioTicks() {
-    return output_buffer.count();
+void setupOutputTimer() {
+    uint64_t time = 1000000UL / AUDIO_RATE;
+    if (!add_repeating_timer_ms(-time, defaultAudioOutputCallback, nullptr, &timer)){
+      Serial.println("Error: alarm_pool_add_repeating_timer_us failed; no alarm slots available");
+    }
 }
 
+void startAudio() {
+  //analogWriteResolution(12);
+  Serial.println("startAudioStandard");
 
+  // this supports all AUDIO_MODE settings
+  setupPWM();
+  // setup timer for defaultAudioOutput
+  setupOutputTimer();
+}
+
+void startControl(unsigned int control_rate_hz) {
+  update_control_timeout = AUDIO_RATE / control_rate_hz;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+/// 
 
 inline void advanceControlLoop() {
   if (!update_control_counter) {
@@ -98,25 +115,56 @@ inline void advanceControlLoop() {
   }
 }
 
-void startAudio() {
-  //analogWriteResolution(12);
-  LOG_OUTPUT.println("startAudioStandard");
 
-  // this supports all AUDIO_MODE settings
-  setupPWM();
-  // setup timer for defaultAudioOutput
-  setupOutputTimer();
+void MozziClass::audioHook() 
+{
+  if (canBufferAudioOutput()) {
+    advanceControlLoop();
+    bufferAudioOutput(updateAudio());
+  }
 }
 
+
 //-----------------------------------------------------------------------------------------------------------------
-/// Input -> This might not be optimal but we just use the Pico API adc_read 
+// Class Methods: Start - Stop
+//-----------------------------------------------------------------------------------------------------------------
+
+void MozziClass::start(int control_rate_hz) {
+  setupADC(); 
+  startControl(control_rate_hz);
+  startAudio();
+  Serial.println("Mozzi started");
+}
+
+void MozziClass::stop() {
+    if (alarm_id!=-1){
+      cancel_repeating_timer(&timer);
+    }
+    pwm_set_enabled(pwm_slice_num, false);
+}
+
+unsigned long MozziClass::audioTicks() {
+    return output_buffer.count();
+}
+
+
+unsigned long MozziClass::mozziMicros() { 
+  return audioTicks() * MICROS_PER_AUDIO_TICK;
+}
+
+
+
+//-----------------------------------------------------------------------------------------------------------------
+// Input
+//-----------------------------------------------------------------------------------------------------------------
+
 #if (USE_AUDIO_INPUT == true)
 
 void  setupADC() {
   adc_init();
 
   // Make sure GPIO is high-impedance, no pullups etc
-  adc_gpio_init(AUDIO_CHANNEL_1_PIN);
+  adc_gpio_init(AUDIO_INPUT_PIN);
   // Select ADC input 0 (GPIO26)
   adc_select_input(AUDIO_CHANNEL_IN);
 }
@@ -127,84 +175,33 @@ int MozziClass::getAudioInput() {
   return result;
 }
 #else
-#define setupInput()
+
+void setupADC(){ }
+
 #endif
-
-//-----------------------------------------------------------------------------------------------------------------
-// Class Methods: Start - Stop
-//-----------------------------------------------------------------------------------------------------------------
-
-void startControl(unsigned int control_rate_hz) {
-  update_control_timeout = AUDIO_RATE / control_rate_hz;
-}
-
-void MozziClass::start(int control_rate_hz) {
-  setupADC(); 
-  startControl(control_rate_hz);
-  startAudio();
-}
-
-void MozziClass::stop() {
-    if (alarm_id!=-1){
-      cancel_repeating_timer(&timer);
-    }
-    pwm_set_enabled(pwm_slice_num, false);
-}
-
-unsigned long MozziClass::mozziMicros() { 
-  return audioTicks() * MICROS_PER_AUDIO_TICK;
-}
-
-void MozziClass::audioHook() 
-{
-  if (canBufferAudioOutput()) {
-    advanceControlLoop();
-    MultiChannelOutput out;
-    if (updateAudio!=nullptr){
-      out[0]=updateAudio();
-      bufferAudioOutput(out);
-    } else {
-      if (updateAudioN!=nullptr){
-        updateAudioN(CHANNELS, out);
-        bufferAudioOutput(out);
-      }
-    }
-  }
-  yield();
-}
-
-//-----------------------------------------------------------------------------------------------------------------
-// Input
-//-----------------------------------------------------------------------------------------------------------------
-
 
 
 //-----------------------------------------------------------------------------------------------------------------
 // Output
 //-----------------------------------------------------------------------------------------------------------------
 // Timer Callback
-void defaultAudioOutput() {
+bool defaultAudioOutputCallback(repeating_timer* ptr) {
   audioOutput(output_buffer.read());
+  return true;
 }
-
-void setupOutputTimer() {
-    uint64_t time = 1000000UL / AUDIO_RATE;
-    if (!add_repeating_timer_ms(-time, defaultAudioOutput, nullptr, &timer)){
-      LOG_OUTPUT.println("Error: alarm_pool_add_repeating_timer_us failed; no alarm slots available");
-    }
-}
-
 
 inline void writePWM(uint channel, int16_t value){
-  pwm_set_chan_level(channel==1 ?PWM_CHAN_A:PWM_CHAN_B, channel, value);
+  pwm_set_chan_level(pwm_slice_num, channel, value);
 }
 
+
 /// Output will always be on both pins!
-inline void audioOutput(const MultiChannelOutput f) {
-#if (AUDIO_MODE == HIFI)
-  writePWM(PWM_CHAN_A, (f.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
-  writePWM(PWM_CHAN_B, (f.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
-#else
+inline void audioOutput(const AudioOutput f) {
+  writePWM(PWM_CHAN_A, f+AUDIO_BIAS);
+ #if (AUDIO_MODE == HIFI)
+   writePWM(PWM_CHAN_A, (f.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
+   writePWM(PWM_CHAN_B, (f.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
+ #else
   writePWM(PWM_CHAN_A, f.l()+AUDIO_BIAS);
   #if (STEREO_HACK == true)
     writePWM(PWM_CHAN_B, f.r()+AUDIO_BIAS);

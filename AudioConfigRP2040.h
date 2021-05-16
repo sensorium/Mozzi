@@ -13,18 +13,24 @@
 #define PWM_CLOCK_DIV 133000000.0 / PWM_CYCLES / PWM_RATE
 
 // Pins - Please make sure they are on the same channel!
-#define AUDIO_CHANNEL_1_PIN 14
-#define AUDIO_CHANNEL_2_PIN 15
-#define AUDIO_CHANNEL_1_PIN_HIGH 15
+#define AUDIO_CHANNEL_1_PIN 2
+#define AUDIO_CHANNEL_2_PIN 3
+#define AUDIO_CHANNEL_1_PIN_HIGH 3
+
+// Overwrite Input Pins!
+#if USE_AUDIO_INPUT == true
+#ifdef AUDIO_INPUT_PIN
+#undef AUDIO_INPUT_PIN 
+#warning We use the AUDIO_INPUT_PIN defined in AudioConfigRP2040.h
+#endif
 // ADC input. 0...3 are GPIOs 26...29 respectively. Input 4 is the onboard temperature sensor.
-#define AUDIO_CHANNEL_IN 0
 #define AUDIO_INPUT_PIN 26
+#define AUDIO_CHANNEL_IN 0
+#endif
 
 // Timer settings
 #define ALARM_POOL_HARDWARE_ALARM_NUM 2
 #define ALARM_POOL_HARDWARE_ALARM_COUNT 1
-
-#define LOG_OUTPUT Serial
 
 // We do not want to use int because it is 4 bytes -> we switch to 2 bytes instead!
 #define AudioOutputStorage_t int16_t

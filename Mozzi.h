@@ -1,6 +1,9 @@
 #pragma once
 
 #include "hardware_defines.h"
+
+#if USE_LEGACY_GUTS == false
+
 #include "stdint.h"
 #include "mozzi_analog.h"
 
@@ -348,3 +351,8 @@ unsigned long audioTicks();
 
 
 extern float debug_output;
+
+#else
+ // we still support the use of USE_LEGACY_GUTS
+#include "MozziGuts.h"
+#endif

@@ -42,14 +42,14 @@ unsigned long audioTicks() {
 
 MozziControl::MozziControl(){
     // intialize all cannels to to be undefined
-    for (int j=0;j<CHANNELS;j++) {
+    for (int j=0;j<AUDIO_CHANNELS;j++) {
         channel_pins[j] = -1;
     }
 
     // setup pin numbers
     channel_pins[0] = AUDIO_CHANNEL_1_PIN;
 
-    #if CHANNELS > 1
+    #if AUDIO_CHANNELS > 1
         #ifdef AUDIO_CHANNEL_1_PIN_HIGH
             channel_pins[1] = AUDIO_CHANNEL_1_PIN_HIGH;
         #elif defined(AUDIO_CHANNEL_2_PIN)

@@ -33,7 +33,7 @@
 
 mbed::Ticker ticker; // calls a callback repeatedly with a timeout
 mbed::Ticker inputTicker; // calls a callback repeatedly with a timeout
-mbed::PwmOut *pwm_pins[CHANNELS];
+mbed::PwmOut *pwm_pins[AUDIO_CHANNELS];
 uint16_t update_control_timeout;
 uint16_t update_control_counter;
 const uint MAX_VALUE = 2*AUDIO_BIAS;
@@ -78,7 +78,7 @@ void setupPWMPin(mbed::PwmOut &pin){
 
 
 void setupPWM(const int16_t pins[]) {
-  for (int j=0;j<CHANNELS;j++){
+  for (int j=0;j<AUDIO_CHANNELS;j++){
     int16_t gpio = pins[j];
     if  (pwm_pins[j] == nullptr && gpio >- 1)  {
       mbed::PwmOut *pin = new mbed::PwmOut(digitalPinToPinName(gpio));
@@ -132,7 +132,7 @@ void MozziClass::stop() {
   ticker.detach(); // it does not hurt to call this even if it has not been started
 
   // stop all pins
-  for (int j=0;j<CHANNELS;j++){
+  for (int j=0;j<max_channel;j++){
     if (pwm_pins[j] != nullptr)  {
       pwm_pins[j]->suspend();
     } 
@@ -223,15 +223,7 @@ void stopInput() {}
 
 void defaultAudioOutputCallback() {
   if (!output_buffer.isEmpty()){
-    int value = output_buffer.read();
-    // pwm the value is between 0.0 and 1.0 
-    float float_value = static_cast<float>(value + AUDIO_BIAS) / MAX_VALUE;
-    debug_output = float_value;
-  
-    // output values to pins
-    for (int j=0;j<max_channel;j++){
-      pwm_pins[j]->write(float_value);
-    }
+    audioOutput(output_buffer.read());
   }
 }
 
@@ -243,13 +235,19 @@ void bufferAudioOutput(const AudioOutput_t f){
    output_buffer.write(f);
 }
 
-// TODO - to be removed
-void audioOutput(MonoOutput out){
-    float float_value = static_cast<float>(out.l()) / MAX_VALUE;
-    pwm_pins[0]->write(float_value);
-    if (max_channel>=2){
-      float float_value = static_cast<float>(out.r()) / MAX_VALUE;
-      pwm_pins[1]->write(float_value);
+// mono output
+inline void audioOutput(const AudioOutputStorage_t value) {
+    float float_value = static_cast<float>(value+AUDIO_BIAS / MAX_VALUE);
+    pwm_pins[0]->write(float_value);    // pwm the value is between 0.0 and 1.0 
+}
+
+// output an yn channel
+inline void audioOutput(const AudioOutput value) {
+    // output values to pins
+    for (int j=0;j<max_channel;j++){
+      AudioOutputStorage_t v = value[j] + AUDIO_BIAS;
+      float float_value = static_cast<float>(v / MAX_VALUE);
+      pwm_pins[j]->write(float_value);    // pwm the value is between 0.0 and 1.0 
     }
 }
 

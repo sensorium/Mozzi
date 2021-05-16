@@ -110,11 +110,25 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #define STANDARD_PLUS 1
 #define HIFI 2
 
+//enum audio_channels {MONO,STEREO,...};
+#define MONO 1
+#define STEREO 2
+
+
 #include "mozzi_config.h" // User can change the config file to set audio mode
 
 #if (AUDIO_MODE == STANDARD) && (AUDIO_RATE == 32768)
 #error AUDIO_RATE 32768 does not work when AUDIO_MODE is STANDARD, try setting the AUDIO_MODE to STANDARD_PLUS in Mozzi/mozzi_config.h
 #endif
+
+#if (STEREO_HACK == true)
+#warning Use of STEREO_HACK is deprecated. Use AUDIO_CHANNELS STEREO, instead.
+#define AUDIO_CHANNELS STEREO
+#endif
+#if !defined(AUDIO_CHANNELS)
+#define AUDIO_CHANNELS MONO
+#endif
+
 
 #define CLOCK_TICKS_PER_AUDIO_TICK (F_CPU / AUDIO_RATE)
 
@@ -143,12 +157,6 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 // TODO it might make sense to integrate AudioOutput into the new Mozzi Class - Anyhow I provide a typedef so that we do not need 
 // to use 
 #include "AudioOutput.h"
-#if (STEREO_HACK == true)
-extern int audio_out_1, audio_out_2;
-typedef StereoOutput OUTPUT_TYPE;
-#else
-typedef AudioOutput_t OUTPUT_TYPE;
-#endif
 
 // common numeric types
 typedef unsigned char uchar;
@@ -205,7 +213,7 @@ class MozziControl {
         * Returns the number of available channels
         */
         const int channels() const {
-            return CHANNELS;
+            return AUDIO_CHANNELS;
         }
 
         const int16_t* pins() {
@@ -217,7 +225,7 @@ class MozziControl {
         }
 
     protected:
-        int16_t channel_pins[CHANNELS];
+        int16_t channel_pins[AUDIO_CHANNELS];
 };
 
 /**

@@ -96,7 +96,8 @@ an impact on timings. The maximum number is additinally restricted by the specif
 uses the I2S interface the number of channels are restricted to 2. But many processors are quite happy to support more then 2 PWM output pins...  
 */
 
-#define CHANNELS 1
+//#define AUDIO_CHANNELS MONO
+#define AUDIO_CHANNELS STEREO
 
 
 /** @ingroup core

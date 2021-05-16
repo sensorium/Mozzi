@@ -7,7 +7,7 @@
 #include <tables/pinknoise8192_int8.h> // table for oscillator
 #include "MozziOut.h"
 
-#if CHANNELS != 2 
+#if AUDIO_CHANNELS != 2 
 #error("Please set the channels to 2 for this example")
 #endif
 
@@ -48,7 +48,7 @@ void loop(){
     size_t bytes = mozzi.readBytes((uint8_t*)buffer, buffer_size/sample_size);
     size_t samples = bytes / sample_size;
     for (int j=0;j<samples;j++){
-      if (j % CHANNELS == 0)
+      if (j % AUDIO_CHANNELS == 0)
         Serial.println();
       else
         Serial.print(", ");

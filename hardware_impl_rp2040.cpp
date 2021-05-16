@@ -48,7 +48,7 @@ void setupOutputTimer();
 bool defaultAudioOutputCallback(repeating_timer* ptr);
 void setupADC(); 
 bool canBufferAudioOutput();
-void bufferAudioOutput(const AudioOutput_t f);
+void bufferAudioOutput(const AudioOutput f);
 
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ void setupPWM() {
   // start pwm
   gpio_set_function(AUDIO_CHANNEL_1_PIN, GPIO_FUNC_PWM);
   Serial.printf("Using Pin %d on channel 1\n", AUDIO_CHANNEL_1_PIN);
-  if (CHANNELS>1){
+  if (AUDIO_CHANNELS>1){
     gpio_set_function(AUDIO_CHANNEL_2_PIN, GPIO_FUNC_PWM);
     Serial.printf("Using Pin %d on channel 2\n", AUDIO_CHANNEL_2_PIN);
   }
@@ -75,7 +75,7 @@ void setupPWM() {
   // Set channel A output high for 0 cycle before dropping
   pwm_set_chan_level(pwm_slice_num, PWM_CHAN_A, 0); // pin 14
 
-  if (CHANNELS>1){
+  if (AUDIO_CHANNELS>1){
     // Set initial B output high for 0 cycles before dropping
     pwm_set_chan_level(pwm_slice_num, PWM_CHAN_B, 0); // pin 15
   }

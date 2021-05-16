@@ -58,9 +58,13 @@
 #define CLIP_AUDIO(x) constrain((x), (-(AudioOutputStorage_t) AUDIO_BIAS), (AudioOutputStorage_t) AUDIO_BIAS-1)
 #endif
 
+#if (AUDIO_CHANNELS == STEREO)
+#define AudioOutput StereoOutput
 #if (STEREO_HACK == true)
 #define AudioOutput_t void
-#define AudioOutput StereoOutput
+#else
+#define AudioOutput_t StereoOutput
+#endif
 #else
 /** Representation of an single audio output sample/frame. For mono output, this is really just a single zero-centered int,
  *  but for stereo it's a struct containing two ints.
@@ -90,9 +94,11 @@ struct StereoOutput {
   StereoOutput(AudioOutputStorage_t l, AudioOutputStorage_t r) : _l(l), _r(r) {};
   /** Default contstructor */
   StereoOutput() : _l(0), _r(0) {};
-#if (STEREO_HACK != true)
-  /** Conversion to int operator: If used in a mono config, returns only the left channel (and gives a compile time warning). */
-  inline operator AudioOutput_t() const __attribute__((deprecated("Sketch generates stereo output, but Mozzi is configured for mono. Check mozzi_config.h."))) { return _l; };
+#if (AUDIO_CHANNELS != STEREO)
+  /** Conversion to int operator: If used in a mono config, returns only the left channel (and gives a compile time warning). 
+      This _could_ be turned into an operator for implicit conversion in this case. For now we chose to apply conversion on demand, only, as most of the time
+      using StereoOutput in a mono config, is not intended. */
+  inline AudioOutput_t portable() const __attribute__((deprecated("Sketch generates stereo output, but Mozzi is configured for mono. Check mozzi_config.h."))) { return _l; };
 #endif
   AudioOutputStorage_t l() const { return _l; };
   AudioOutputStorage_t r() const { return _r; };
@@ -111,6 +117,19 @@ struct StereoOutput {
   static inline StereoOutput fromAlmostNBit(uint8_t bits, int16_t l, int16_t r) { return StereoOutput(SCALE_AUDIO_NEAR(l, bits), SCALE_AUDIO_NEAR(r, bits)); }
   /** @see MonoOutput::fromAlmostNBit(), stereo variant, 32 bit overload */
   static inline StereoOutput fromAlmostNBit(uint8_t bits, int32_t l, int32_t r) { return StereoOutput(SCALE_AUDIO_NEAR(l, bits), SCALE_AUDIO_NEAR(r, bits)); }
+
+  // access of value by index
+  const AudioOutputStorage_t operator [](int idx) const {
+    switch(idx){
+      case 0:
+        return _l;
+      case 1:
+        return _r;
+      default:
+        return 0;
+    }
+  }
+
 private:
   AudioOutputStorage_t _l;
   AudioOutputStorage_t _r;
@@ -133,9 +152,13 @@ private:
 struct MonoOutput {
   /** Construct an audio frame from raw values (zero-centered) */
   MonoOutput(AudioOutputStorage_t l=0) : _l(l) {};
-#if (STEREO_HACK == true)
-  /** Conversion to stereo operator: If used in a stereo config, returns identical channels (and gives a compile time warning). */
-  inline operator StereoOutput() const __attribute__((deprecated("Sketch generates mono output, but Mozzi is configured for stereo. Check mozzi_config.h."))) { return StereoOutput(_l, _l); };
+#if (AUDIO_CHANNELS > 1)
+  /** Conversion to stereo operator: If used in a stereo config, returns identical channels (and gives a compile time warning).
+      This _could_ be turned into an operator for implicit conversion in this case. For now we chose to apply conversion on demand, only, as most of the time
+      using StereoOutput in a mono config, is not intended. */
+  // TODO restore proper state
+  //inline StereoOutput portable() const __attribute__((deprecated("Sketch generates mono output, but Mozzi is configured for stereo. Check mozzi_config.h."))) { return StereoOutput(_l, _l); };
+  operator StereoOutput() { return StereoOutput(_l, _l); };
 #else
   /** Conversion to int operator. */
   inline operator AudioOutput_t() const { return _l; };
@@ -168,26 +191,21 @@ struct MonoOutput {
   static inline MonoOutput fromAlmostNBit(uint8_t bits, int16_t l) { return MonoOutput(SCALE_AUDIO_NEAR(l, bits)); }
   /** 32bit overload. See above. */
   static inline MonoOutput fromAlmostNBit(uint8_t bits, int32_t l) { return MonoOutput(SCALE_AUDIO_NEAR(l, bits)); }
+
+  // access of value by index
+  const AudioOutputStorage_t operator [](int idx) const {
+    switch(idx){
+      case 0:
+        return _l;
+      default:
+        return 0;
+    }
+  }
+
 private:
   AudioOutputStorage_t _l;
 };
 
-/**
-/** This struct encapsulates one frame with multiple channels
-*/
-struct MultiChannelOutput {
-  public:
-    MonoOutput output[CHANNELS];
-
-    MonoOutput& operator[](int j){
-      int pos = min(j, CHANNELS-1);
-      return output[pos];
-    }
-
-    int size() {
-      return CHANNELS;
-    }  
-};
 
 /** When setting EXTERNAL_AUDIO_OUTPUT to true, implement this function to take care of writing samples to the hardware. */
 void audioOutput(const AudioOutput f);
@@ -234,8 +252,8 @@ inline uint32_t pdmCode32(uint16_t sample) {
 #warning "Mozzi is configured to use an external void 'audioOutput(const AudioOutput f)' function. Please define one in your sketch"
 #endif
 
-// -----------------------------------------------------------------------
-//## TODO To be removed after migration 
+// --------------------------------------------------------------------------
+//## TODO To be removed after final Clenaup and deactivation of the old Guts 
 #if (USE_LEGACY_GUTS == true && EXTERNAL_AUDIO_OUTPUT != true)
 
 ///////////////////// SAMD21

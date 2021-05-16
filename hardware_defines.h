@@ -35,8 +35,10 @@
 
 #if IS_AVR()
 #define AUDIO_RATE_PLATFORM_DEFAULT 16384
-#else
+#elif IS_TEENSY3() || IS_STM32() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() 
 #define AUDIO_RATE_PLATFORM_DEFAULT 32768
+#else
+// AUDIO_RATE_PLATFORM_DEFAULT defined in AudioConfig<platform>.h
 #endif
 
 #if IS_ESP8266()

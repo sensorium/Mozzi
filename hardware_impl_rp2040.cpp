@@ -39,8 +39,6 @@ repeating_timer_t timer;
 
 // ring buffer for audio output
 CircularBuffer<AudioOutput> output_buffer;  // fixed size 256
-#define canBufferAudioOutput() (!output_buffer.isFull())
-#define bufferAudioOutput(f) output_buffer.write(f)
 
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -49,6 +47,8 @@ CircularBuffer<AudioOutput> output_buffer;  // fixed size 256
 void setupOutputTimer();
 bool defaultAudioOutputCallback(repeating_timer* ptr);
 void setupADC(); 
+bool canBufferAudioOutput();
+void bufferAudioOutput(const AudioOutput_t f);
 
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -59,8 +59,10 @@ void setupADC();
 void setupPWM() {
   // start pwm
   gpio_set_function(AUDIO_CHANNEL_1_PIN, GPIO_FUNC_PWM);
+  Serial.printf("Using Pin %d on channel 1\n", AUDIO_CHANNEL_1_PIN);
   if (CHANNELS>1){
     gpio_set_function(AUDIO_CHANNEL_2_PIN, GPIO_FUNC_PWM);
+    Serial.printf("Using Pin %d on channel 2\n", AUDIO_CHANNEL_2_PIN);
   }
   pwm_config cfg = pwm_get_default_config();
   pwm_config_set_clkdiv (&cfg, PWM_CLOCK_DIV);
@@ -90,8 +92,6 @@ void setupOutputTimer() {
 
 void startAudio() {
   //analogWriteResolution(12);
-  Serial.println("startAudioStandard");
-
   // this supports all AUDIO_MODE settings
   setupPWM();
   // setup timer for defaultAudioOutput
@@ -133,7 +133,7 @@ void MozziClass::start(int control_rate_hz) {
   setupADC(); 
   startControl(control_rate_hz);
   startAudio();
-  Serial.println("Mozzi started");
+  Serial.printf("Mozzi started with AUDIO_RATE %u\n", AUDIO_RATE);
 }
 
 void MozziClass::stop() {
@@ -190,14 +190,21 @@ bool defaultAudioOutputCallback(repeating_timer* ptr) {
   return true;
 }
 
+bool canBufferAudioOutput(){
+  return !output_buffer.isFull();
+} 
+
+void bufferAudioOutput(const AudioOutput_t f){
+   output_buffer.write(f);
+}
+
+
 inline void writePWM(uint channel, int16_t value){
   pwm_set_chan_level(pwm_slice_num, channel, value);
 }
 
-
 /// Output will always be on both pins!
 inline void audioOutput(const AudioOutput f) {
-  writePWM(PWM_CHAN_A, f+AUDIO_BIAS);
  #if (AUDIO_MODE == HIFI)
    writePWM(PWM_CHAN_A, (f.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
    writePWM(PWM_CHAN_B, (f.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);

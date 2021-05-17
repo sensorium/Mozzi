@@ -29,7 +29,8 @@
 static bool defaultAudioOutputCallbackX(repeating_timer* ptr);
 
 /**
-*
+* @brief  Hardware specific implementation class for the Raspberry Pico API - Please note that the standard Arduino implementation is based on MBed and does not
+* use this implementation 
 */
 
 class MozziRP2040  {

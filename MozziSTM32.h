@@ -1,5 +1,5 @@
 /*
- * MozziStm32.h
+ * MozziSTM32.h
  *
  * Copyright 2012 Tim Barrass.
  *
@@ -14,6 +14,10 @@
 #if IS_STM32() && USE_LEGACY_GUTS == false
 #include "MozziCommon.h"
 
+/**
+* @brief  Hardware specific implementation class for STM32 processors providing PWM output
+ * 
+ */
 class MozziSTM32  {
   public:
     void start(int control_rate_hz);

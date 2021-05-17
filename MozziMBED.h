@@ -30,7 +30,7 @@ static void defaultAudioInputCallbackX();
 static void defaultAudioOutputCallbackX();
 
 /**
-* Hardware specific implementation class
+* @brief  Hardware specific implementation class for Arm Mbed based processors using PWM output
 */
 class MozziMBED  {
   friend void defaultAudioInputCallbackX();

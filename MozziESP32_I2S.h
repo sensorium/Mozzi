@@ -16,7 +16,10 @@
 #include <driver/i2s.h>   // for I2S-based output modes
 #include <driver/timer.h> // for EXTERNAL_AUDIO_OUTPUT
 
-
+/**
+ * @brief Hardware specific implementation for ESP32 using I2S
+ * 
+ */
 class MozziESP32_I2S  {
 
   public:

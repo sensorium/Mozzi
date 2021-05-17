@@ -1,7 +1,7 @@
 #pragma once
 
 /*
- * MozziSamd21.h
+ * MozziSAMD21.h
  *
  * Copyright 2012 Tim Barrass.
  *
@@ -16,6 +16,10 @@
 #if IS_SAMD21() && USE_LEGACY_GUTS == false
 #include "MozziCommon.h"
 
+/**
+* @brief  Hardware specific implementation class for SAMD21 processors providing PWM output
+ * 
+ */
 class MozziSAMD21  {
   public:
     void start(int control_rate_hz);

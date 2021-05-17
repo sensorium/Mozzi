@@ -20,6 +20,11 @@ static void CACHED_FUNCTION_ATTR esp8266_serial_audio_output();
 static void CACHED_FUNCTION_ATTR defaultAudioOutput();
 
 
+/**
+ * @brief Hardware specific implementation for the  ESP8266 
+ * 
+ */
+
 class MozziESP8266  {
   
   friend void CACHED_FUNCTION_ATTR esp8266_serial_audio_output();

@@ -15,6 +15,10 @@
 #if IS_TEENSY3() && USE_LEGACY_GUTS == false
 #include "MozziCommon.h"
 
+/**
+* @brief  Hardware specific implementation class for Teensy 3 processors providing PWM output
+ * 
+ */
 class MozziTeensy3  {
   public:
     void start(int control_rate_hz);

@@ -105,16 +105,7 @@ x...........B5(25)...B6(26)...........Teensy2++  \n
 HIFI is not available/not required on Teensy 3.* or ARM.
 */
 
-//enum audio_modes {STANDARD,STANDARD_PLUS,HIFI};
-#define STANDARD 0
-#define STANDARD_PLUS 1
-#define HIFI 2
-
-//enum audio_channels {MONO,STEREO,...};
-#define MONO 1
-#define STEREO 2
-
-
+#include "mozzi_config_defines.h"
 #include "mozzi_config.h" // User can change the config file to set audio mode
 
 #if (AUDIO_MODE == STANDARD) && (AUDIO_RATE == 32768)
@@ -153,149 +144,14 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 
 // Load AudioConfig for specific environement
 #include "AudioConfigAll.h"
-
-// TODO it might make sense to integrate AudioOutput into the new Mozzi Class - Anyhow I provide a typedef so that we do not need 
-// to use 
 #include "AudioOutput.h"
+
 
 // common numeric types
 typedef unsigned char uchar;
 typedef unsigned int uint;
 typedef unsigned long ulong;
 
-
-/**
- * @brief Mozzi Audio Output Class - We provide different implementations. The most important is
- * the MozziClass which sends the output to IO PINs
- */
-class MozziControl {
-    public:
-        MozziControl();
-
-        /** @brief Sets up the timers for audio and control rate processes, storing the timer
-        registers so they can be restored when Mozzi stops. startMozzi() goes in your sketch's
-        setup() routine.
-        Contrary to earlier versions of Mozzi, this version does not take over Timer 0, and thus Arduino
-        functions delay(), millis(), micros() and delayMicroseconds() remain usable in theory. That said,
-        you should avoid these functions, as they are slow (or even blocking). For measuring time, refer
-        to mozziMircos(). For delaying events, you can use Mozzi's EventDelay() unit instead
-        (not to be confused with AudioDelay()).
-        In STANDARD mode, startMozzi() starts Timer 1 for PWM output and audio output interrupts,
-        and in STANDARD_PLUS and HIFI modes, Mozzi uses Timer 1 for PWM and Timer2 for audio interrupts.
-        The audio rate defaults to 16384 Hz, but you can experiment with 32768 Hz by changing AUDIO_RATE in mozzi_config.h.
-        @param control_rate_hz Sets how often updateControl() is called.  It must be a power of 2.
-        If no parameter is provided, control_rate_hz is set to CONTROL_RATE,
-        which has a default value of 64 (you can re-\#define it in your sketch).
-        The practical upper limit for control rate depends on how busy the processor is,
-        and you might need to do some tests to find the best setting.
-        @note startMozzi calls setupMozziADC(), which calls setupFastAnalogRead() and adcDisconnectAllDigitalIns(),
-        which disables digital inputs on all analog input pins.  All in mozzi_analog.h and easy to change if you need to (hack).
-        They are all called automatically and hidden away because it keeps things simple for a STANDARD_PLUS set up,
-        but if it turns out to be confusing, they might need to become visible again.
-        */
-        virtual void start(int control_rate_hz = CONTROL_RATE) = 0;
-
-
-        /** @brief Stops audio and control interrupts and restores the timers to the values they
-        had before Mozzi was started. This could be useful when using sensor libraries
-        which depend on the same timers as Mozzi.
-        A potentially better option for resolving timer conflicts involves using
-        non-blocking methods, such as demonstrated by the twowire_nonblock code in the
-        forked version of Mozzi on github, so sound production can continue while
-        reading sensors.
-        As it is, stopMozzi restores all the Timers used by Mozzi to their previous
-        settings. Another scenario which could be easily hacked in MozziGuts.cpp could
-        involve individually saving and restoring particular Timer registers depending
-        on which one(s) are required for other tasks. */
-        virtual void stop() = 0;
-
-        /**
-        * Returns the number of available channels
-        */
-        const int channels() const {
-            return AUDIO_CHANNELS;
-        }
-
-        const int16_t* pins() {
-            return channel_pins;
-        }
-
-        void setPin(uint8_t idx, int16_t pin){
-            channel_pins[idx] = pin;
-        }
-
-    protected:
-        int16_t channel_pins[AUDIO_CHANNELS];
-};
-
-/**
- * @brief User facing Mozzi Class with oprerations for start, stop and audioHook()
- * 
- */
-class MozziClass : public MozziControl {
-    public:
-
-        /** @brief This is required in Arduino's loop(). If there is room in Mozzi's output buffer,
-        audioHook() calls updateAudio() once and puts the result into the output
-        buffer.  Also, if \#define USE_AUDIO_INPUT true is in Mozzi/mozzi_config.h,
-        audioHook() takes care of moving audio input from the input buffer so it can be
-        accessed with getAudioInput() in your updateAudio() routine.
-        If other functions are called in loop() along with audioHook(), see if
-        they can be called less often by moving them into updateControl(),
-        to save processing power. Otherwise it may be most efficient to
-        calculate a block of samples at a time by putting audioHook() in a loop of its
-        own, rather than calculating only 1 sample for each time your other functions
-        are called.
-        */
-
-        void audioHook();
-
-        /** @brief This returns audio input from the input buffer, if
-        \#define USE_AUDIO_INPUT true is in the Mozzi/mozzi_config.h file.
-        The pin used for audio input is set in Mozzi/mozzi_config.h with
-        \#define AUDIO_INPUT_PIN 0 (or other analog input pin).
-        The audio signal needs to be in the range 0 to 5 volts.
-        Circuits and discussions about biasing a signal
-        in the middle of this range can be found at
-        http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal
-        and
-        http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/ .
-        A circuit and instructions for amplifying and biasing a microphone signal can be found at
-        http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS
-        @return audio data from the input buffer
-        */
-        #if (USE_AUDIO_INPUT == true)
-        static int getAudioInput();
-        #endif
-
-        /** @brief An alternative for Arduino time functions like micros() and millis(). This is slightly faster than micros(),
-        and also it is synchronized with the currently processed audio sample (which, due to the audio
-        output buffer, could diverge up to 256/AUDIO_RATE seconds from the current time).
-        audioTicks() is updated each time an audio sample
-        is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when AUDIO_RATE is
-        16384 Hz).
-        @return the approximate number of microseconds since the program began.
-        @todo  incorporate mozziMicros() in a more accurate EventDelay()?
-        */
-        static unsigned long mozziMicros();
-
-        /** @brief An alternative for Arduino time functions like micros() and millis(). This is slightly faster than micros(),
-        and also it is synchronized with the currently processed audio sample (which, due to the audio
-        output buffer, could diverge up to 256/AUDIO_RATE seconds from the current time).
-        audioTicks() is updated each time an audio sample
-        is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when AUDIO_RATE is
-        16384 Hz).
-        @return the number of audio ticks since the program began.
-        */
-        static unsigned long audioTicks();
-
-        // see MozziControl::start
-        virtual void start(int control_rate_hz = CONTROL_RATE);
-
-        // see MozziControl::stop
-        virtual void stop();
-
-};
 
 // Global Functionality which is globally used
 
@@ -327,38 +183,123 @@ is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when 
 16384 Hz).
 @return the number of audio ticks since the program began.
 */
+// TODO it might make sense to integrate AudioOutput into the new Mozzi Class - Anyhow I provide a typedef so that we do not need 
+// to use 
+
 
 
 /** @ingroup core
  * Mozzi application object with methods for start(), stop(), audioHook() ...
  */
-extern MozziClass Mozzi;
+
+#include "MozziMBED.h"
+#include "MozziRP2040.h"
+#include "MozziAVR.h"
+#include "MozziESP32_I2S.h"
+#include "MozziESP8266.h"
+#include "MozziSAMD21.h"
+#include "MozziTeensy3.h"
+#include "MozziSTM32.h"
+
+extern PLATFORM_OUTPUT_CLASS Mozzi;
+
+
 
 /** @ingroup core
- * Support for legacy startMozzi - You can use Mozzi.start() instead
+/** @brief Sets up the timers for audio and control rate processes, storing the timer
+registers so they can be restored when Mozzi stops. startMozzi() goes in your sketch's
+setup() routine.
+Contrary to earlier versions of Mozzi, this version does not take over Timer 0, and thus Arduino
+functions delay(), millis(), micros() and delayMicroseconds() remain usable in theory. That said,
+you should avoid these functions, as they are slow (or even blocking). For measuring time, refer
+to mozziMircos(). For delaying events, you can use Mozzi's EventDelay() unit instead
+(not to be confused with AudioDelay()).
+In STANDARD mode, startMozzi() starts Timer 1 for PWM output and audio output interrupts,
+and in STANDARD_PLUS and HIFI modes, Mozzi uses Timer 1 for PWM and Timer2 for audio interrupts.
+The audio rate defaults to 16384 Hz, but you can experiment with 32768 Hz by changing AUDIO_RATE in mozzi_config.h.
+@param control_rate_hz Sets how often updateControl() is called.  It must be a power of 2.
+If no parameter is provided, control_rate_hz is set to CONTROL_RATE,
+which has a default value of 64 (you can re-\#define it in your sketch).
+The practical upper limit for control rate depends on how busy the processor is,
+and you might need to do some tests to find the best setting.
+@note startMozzi calls setupMozziADC(), which calls setupFastAnalogRead() and adcDisconnectAllDigitalIns(),
+which disables digital inputs on all analog input pins.  All in mozzi_analog.h and easy to change if you need to (hack).
+They are all called automatically and hidden away because it keeps things simple for a STANDARD_PLUS set up,
+but if it turns out to be confusing, they might need to become visible again. 
+You can also use Mozzi.start() instead
  */
 void startMozzi(int control_rate_hz = CONTROL_RATE);
 
-/**
- * @brief Support for legacy stopMozzi() - You can use Mozzi.stop() instead
- * 
+/** @brief Stops audio and control interrupts and restores the timers to the values they
+had before Mozzi was started. This could be useful when using sensor libraries
+which depend on the same timers as Mozzi.
+A potentially better option for resolving timer conflicts involves using
+non-blocking methods, such as demonstrated by the twowire_nonblock code in the
+forked version of Mozzi on github, so sound production can continue while
+reading sensors.
+As it is, stopMozzi restores all the Timers used by Mozzi to their previous
+settings. Another scenario which could be easily hacked in MozziGuts.cpp could
+involve individually saving and restoring particular Timer registers depending
+on which one(s) are required for other tasks.
+
+You can use Mozzi.stop() instead.
  */
 void stopMozzi();
 
-/**
- * @brief Support for legacy audioHook() - You can use Mozzi.audioHook() instead
- * 
+/** @brief This is required in Arduino's loop(). If there is room in Mozzi's output buffer,
+audioHook() calls updateAudio() once and puts the result into the output
+buffer.  Also, if \#define USE_AUDIO_INPUT true is in Mozzi/mozzi_config.h,
+audioHook() takes care of moving audio input from the input buffer so it can be
+accessed with getAudioInput() in your updateAudio() routine.
+If other functions are called in loop() along with audioHook(), see if
+they can be called less often by moving them into updateControl(),
+to save processing power. Otherwise it may be most efficient to
+calculate a block of samples at a time by putting audioHook() in a loop of its
+own, rather than calculating only 1 sample for each time your other functions
+are called.
+
+You can use Mozzi.audioHook() instead. 
  */
 void audioHook();
 
-/**
- * @brief Support for legacy audioTicks() - You can use Mozzi.audioTicks() instead
- * 
- */
-unsigned long audioTicks();
+/** @brief This returns audio input from the input buffer, if
+\#define USE_AUDIO_INPUT true is in the Mozzi/mozzi_config.h file.
+The pin used for audio input is set in Mozzi/mozzi_config.h with
+\#define AUDIO_INPUT_PIN 0 (or other analog input pin).
+The audio signal needs to be in the range 0 to 5 volts.
+Circuits and discussions about biasing a signal
+in the middle of this range can be found at
+http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal
+and
+http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/ .
+A circuit and instructions for amplifying and biasing a microphone signal can be found at
+http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS
+@return audio data from the input buffer
+*/
+#if (USE_AUDIO_INPUT == true)
+int getAudioInput();
+#endif
 
+/** @brief An alternative for Arduino time functions like micros() and millis(). This is slightly faster than micros(),
+and also it is synchronized with the currently processed audio sample (which, due to the audio
+output buffer, could diverge up to 256/AUDIO_RATE seconds from the current time).
+audioTicks() is updated each time an audio sample
+is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when AUDIO_RATE is
+16384 Hz).
+@return the approximate number of microseconds since the program began.
+@todo  incorporate mozziMicros() in a more accurate EventDelay()?
+*/
+unsigned long mozziMicros();
 
-extern float debug_output;
+/** @brief An alternative for Arduino time functions like micros() and millis(). This is slightly faster than micros(),
+and also it is synchronized with the currently processed audio sample (which, due to the audio
+output buffer, could diverge up to 256/AUDIO_RATE seconds from the current time).
+audioTicks() is updated each time an audio sample
+is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when AUDIO_RATE is
+16384 Hz).
+@return the number of audio ticks since the program began.
+*/
+unsigned long audioTicks();  
 
 #else
  // we still support the use of USE_LEGACY_GUTS

@@ -60,11 +60,11 @@
 #endif
 
 // Remove envorionment if if to activate the new functionality
-#if (IS_AVR() || IS_TEENSY3() || IS_STM32() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() )
-#define USE_LEGACY_GUTS true
-#else
+//#if (IS_AVR() || IS_TEENSY3() || IS_STM32() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() )
+//#define USE_LEGACY_GUTS true
+//#else
 #define USE_LEGACY_GUTS false
-#endif
+//#endif
 
 
 

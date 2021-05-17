@@ -1,31 +1,6 @@
-/*
- * MozziAvr.cpp
- *
- * Copyright 2012 Tim Barrass.
- *
- * This file is part of Mozzi.
- *
- * Mozzi by Tim Barrass is licensed under a Creative Commons
- * Attribution-NonCommercial-ShareAlike 4.0 International License.
- *
- */
 #include "hardware_defines.h"
-#if IS_AVR() && USE_LEGACY_GUTS == false
-
-#include "CircularBuffer.h"
-#include "Mozzi.h"
-#include "mozzi_analog.h"
-#include "mozzi_config.h" // at the top of all MozziGuts and analog files
-#include "AudioOutput.h"
-#include "FrequencyTimer2.h"
-#include "TimerOne.h"
-
-
-#if (F_CPU != 16000000)
-#warning                                                                       \
-    "Mozzi has been tested with a cpu clock speed of 16MHz on Arduino and 48MHz on Teensy 3!  Results may vary with other speeds."
-#endif
-
+#if IS_AVR() 
+#include "hardware_impl_avr.h"
 
 /*
 ATmega328 technical manual, Section 12.7.4:
@@ -50,11 +25,6 @@ carrier freq noise can be an issue
 
 #if BYPASS_MOZZI_OUTPUT_BUFFER == true
 uint64_t samples_written_to_buffer = 0;
-#else
-//-----------------------------------------------------------------------------------------------------------------
-// ring buffer for audio output
-CircularBuffer<OUTPUT_TYPE> output_buffer;  // fixed size 256
-//-----------------------------------------------------------------------------------------------------------------
 #endif
 
 
@@ -151,10 +121,9 @@ static uint8_t mozzi_TCCR4A, mozzi_TCCR4B, mozzi_TCCR4C, mozzi_TCCR4D,
 CircularBuffer<unsigned int> input_buffer; // fixed size 256
 
 static boolean audio_input_is_available;
-static int audio_input; // holds the latest audio from input_buffer
+//static int audio_input; // holds the latest audio from input_buffer
 uint8_t adc_count = 0;
 
-int MozziClass::getAudioInput() { return audio_input; }
 
 static void startFirstAudioADC() {
   adcStartConversion(adcPinToChannelNum(AUDIO_INPUT_PIN));
@@ -211,40 +180,6 @@ inline void bufferAudioOutput(const AudioOutput_t f) {
 #define bufferAudioOutput(f) output_buffer.write(f)
 #endif
 
-static uint16_t update_control_timeout;
-static uint16_t update_control_counter;
-
-inline void advanceControlLoop() {
-  if (!update_control_counter) {
-    update_control_counter = update_control_timeout;
-    updateControl();
-    adcStartReadCycle();
-  } else {
-    --update_control_counter;
-  }
-}
-
-void MozziClass::audioHook() // 2us on AVR excluding updateAudio()
-{
-// setPin13High();
-#if (USE_AUDIO_INPUT == true)
-  if (!input_buffer.isEmpty())
-    audio_input = input_buffer.read();
-#endif
-
-  if (canBufferAudioOutput()) {
-    advanceControlLoop();
-#if (STEREO_HACK == true)
-    updateAudio(); // in hacked version, this returns void
-    bufferAudioOutput(StereoOutput(audio_out_1, audio_out_2));
-#else
-    bufferAudioOutput(updateAudio());
-#endif
-
-  }
-  // setPin13Low();
-}
-
 
 //-----------------------------------------------------------------------------------------------------------------
 #if (BYPASS_MOZZI_OUTPUT_BUFFER != true)
@@ -253,14 +188,14 @@ static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
   adc_count = 0;
   startSecondAudioADC();
 #endif
-  audioOutput(output_buffer.read());
+  audioOutput(Common.output_buffer.read());
 }
 #endif
 
 #if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS) 
 
 #if (EXTERNAL_AUDIO_OUTPUT == true)
-static void startAudioStandard() {
+void startAudioStandard() {
   backupPreMozziTimer1();
   Timer1.initializeCPUCycles(
       F_CPU / AUDIO_RATE,
@@ -276,7 +211,7 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK) {
 #else
 
 // avr architecture
-static void startAudioStandard() {
+void startAudioStandard() {
   backupPreMozziTimer1();
 
   pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT); // set pin to output for audio
@@ -317,7 +252,7 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK) {
 // end STANDARD
 
 //-----------------------------------------------------------------------------------------------------------------
-#elif IS_AVR && (AUDIO_MODE == HIFI)
+#elif (AUDIO_MODE == HIFI)
 
 // audio output interrupt on timer 2 (or 4 on ATMEGA32U4 cpu), sets the pwm
 // levels of timer 2
@@ -329,7 +264,7 @@ static void setupTimer2() {
   FrequencyTimer2::enable();
 }
 
-static void startAudioHiFi() {
+void startAudioHiFi() {
   backupPreMozziTimer1();
   // pwm on timer 1
   pinMode(AUDIO_CHANNEL_1_highByte_PIN,
@@ -393,69 +328,37 @@ void dummy_function(void)
 
 //-----------------------------------------------------------------------------------------------------------------
 
-static void startControl(unsigned int control_rate_hz) {
-  update_control_timeout = AUDIO_RATE / control_rate_hz;
-}
+void stopTimers() {
+      noInterrupts();
 
-void MozziClass::start(int control_rate_hz) {
-  setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST
-                   // in setup() if desired (not for Teensy 3.* )
-  // delay(200); // so AutoRange doesn't read 0 to start with
-  startControl(control_rate_hz);
-#if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS) ||               \
-    IS_STM32 // Sorry, this is really hacky. But on STM32 regular and HIFI
-               // audio modes are so similar to set up, that we do it all in one
-               // function.
-  startAudioStandard();
-#elif (AUDIO_MODE == HIFI)
-  startAudioHiFi();
-#endif
-}
+      // restore backed up register values
+      TCCR1A = pre_mozzi_TCCR1A;
+      TCCR1B = pre_mozzi_TCCR1B;
+      OCR1A = pre_mozzi_OCR1A;
 
-void MozziClass::stop() {
+      TIMSK1 = pre_mozzi_TIMSK1;
 
-  noInterrupts();
-
-  // restore backed up register values
-  TCCR1A = pre_mozzi_TCCR1A;
-  TCCR1B = pre_mozzi_TCCR1B;
-  OCR1A = pre_mozzi_OCR1A;
-
-  TIMSK1 = pre_mozzi_TIMSK1;
-
-#if (AUDIO_MODE == HIFI)
-#if defined(TCCR2A)
-  TCCR2A = pre_mozzi_TCCR2A;
-  TCCR2B = pre_mozzi_TCCR2B;
-  OCR2A = pre_mozzi_OCR2A;
-  TIMSK2 = pre_mozzi_TIMSK2;
-#elif defined(TCCR2)
-  TCCR2 = pre_mozzi_TCCR2;
-  OCR2 = pre_mozzi_OCR2;
-  TIMSK = pre_mozzi_TIMSK;
-#elif defined(TCCR4A)
-  TCCR4B = pre_mozzi_TCCR4A;
-  TCCR4B = pre_mozzi_TCCR4B;
-  TCCR4B = pre_mozzi_TCCR4C;
-  TCCR4B = pre_mozzi_TCCR4D;
-  TCCR4B = pre_mozzi_TCCR4E;
-  OCR4C = pre_mozzi_OCR4C;
-  TIMSK4 = pre_mozzi_TIMSK4;
-#endif
-#endif
-  interrupts();
-}
-
-unsigned long MozziClass::audioTicks() {
-#if (BYPASS_MOZZI_OUTPUT_BUFFER != true)
-  return output_buffer.count();
-#else
-  return (samples_written_to_buffer - (output_buffer_size - i2s_available()));
-#endif
-}
-
-unsigned long MozziClass::mozziMicros() { 
-  return audioTicks() * MICROS_PER_AUDIO_TICK;
+      #if (AUDIO_MODE == HIFI)
+        #if defined(TCCR2A)
+          TCCR2A = pre_mozzi_TCCR2A;
+          TCCR2B = pre_mozzi_TCCR2B;
+          OCR2A = pre_mozzi_OCR2A;
+          TIMSK2 = pre_mozzi_TIMSK2;
+        #elif defined(TCCR2)
+          TCCR2 = pre_mozzi_TCCR2;
+          OCR2 = pre_mozzi_OCR2;
+          TIMSK = pre_mozzi_TIMSK;
+        #elif defined(TCCR4A)
+          TCCR4B = pre_mozzi_TCCR4A;
+          TCCR4B = pre_mozzi_TCCR4B;
+          TCCR4B = pre_mozzi_TCCR4C;
+          TCCR4B = pre_mozzi_TCCR4D;
+          TCCR4B = pre_mozzi_TCCR4E;
+          OCR4C = pre_mozzi_OCR4C;
+          TIMSK4 = pre_mozzi_TIMSK4;
+        #endif
+      #endif
+      interrupts();
 }
 
 #endif

@@ -33,5 +33,8 @@ Boards, pins and resistor positions are documented in MozziGuts.h
 // 14 bit
 #define AUDIO_BIAS ((uint16_t) 1<<(AUDIO_BITS-1))
 
+// Default ouput implementation class
+#define PLATFORM_OUTPUT_CLASS MozziAVR
+
 
 #endif        //  #ifndef AUDIOCONFIGHISPEED14BITPWM_H

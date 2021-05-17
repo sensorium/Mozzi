@@ -29,5 +29,10 @@
 
 #define AUDIO_BIAS ((uint16_t) 1<<(AUDIO_BITS-1))
 
+// Default ouput implementation class
+#define PLATFORM_OUTPUT_CLASS MozziSTM32
+
+
+
 #endif        //  #ifndef AUDIOCONFIGSTM32_H
 

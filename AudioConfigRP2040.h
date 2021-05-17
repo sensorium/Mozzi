@@ -40,4 +40,8 @@
 // We do not want to use int because it is 4 bytes -> we switch to 2 bytes instead!
 #define AudioOutputStorage_t int16_t
 
+// Default ouput implementation class
+#define PLATFORM_OUTPUT_CLASS MozziRP2040
+
+
 #endif

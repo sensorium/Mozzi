@@ -5,6 +5,9 @@
 #error This header should be included for ESP architecture, only
 #endif
 
+// Default ouput implementation class
+#define PLATFORM_OUTPUT_CLASS MozziESP8266
+
 // AUDIO output modes. See README.md
 #define PDM_VIA_I2S 1
 #define PDM_VIA_SERIAL 2

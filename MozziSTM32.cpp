@@ -13,11 +13,7 @@
 #include "hardware_defines.h"
 #if IS_STM32() && USE_LEGACY_GUTS == false
 
-#include "CircularBuffer.h"
-#include "Mozzi.h"
-#include "mozzi_analog.h"
-#include "mozzi_config.h" // at the top of all MozziGuts and analog files
-#include "AudioOutput.h"
+#include "MozziSTM32.h"
 #include "HardwareTimer.h"
 #include "AudioConfigSTM32.h"
 //#include <STM32ADC.h>  // Disabled, here. See AudioConfigSTM32.h
@@ -47,7 +43,7 @@ uint64_t samples_written_to_buffer = 0;
 #else
 //-----------------------------------------------------------------------------------------------------------------
 // ring buffer for audio output
-CircularBuffer<OUTPUT_TYPE> output_buffer;  // fixed size 256
+CircularBuffer<AudioOutput_t> output_buffer;  // fixed size 256
 //-----------------------------------------------------------------------------------------------------------------
 #endif
 
@@ -63,7 +59,7 @@ static boolean audio_input_is_available;
 static int audio_input; // holds the latest audio from input_buffer
 uint8_t adc_count = 0;
 
-int MozziClass::getAudioInput() { return audio_input; }
+int MozziSTM32::getAudioInput() { return audio_input; }
 
 static void startFirstAudioADC() {
   uint8_t dummy = AUDIO_INPUT_PIN;
@@ -146,7 +142,7 @@ inline void advanceControlLoop() {
   }
 }
 
-void MozziClass::audioHook() // 2us on AVR excluding updateAudio()
+void MozziSTM32::audioHook() // 2us on AVR excluding updateAudio()
 {
 // setPin13High();
 #if (USE_AUDIO_INPUT == true)
@@ -246,7 +242,7 @@ static void startControl(unsigned int control_rate_hz) {
   update_control_timeout = AUDIO_RATE / control_rate_hz;
 }
 
-void MozziClass::start(int control_rate_hz) {
+void MozziSTM32::start(int control_rate_hz) {
   setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST
                    // in setup() if desired (not for Teensy 3.* )
   // delay(200); // so AutoRange doesn't read 0 to start with
@@ -261,13 +257,13 @@ void MozziClass::start(int control_rate_hz) {
 #endif
 }
 
-void MozziClass::stop() {
+void MozziSTM32::stop() {
   audio_update_timer.pause();
   // ps - nointerrupts was never called so the following is not necessary: 
   // interrupts();
 }
 
-unsigned long MozziClass::audioTicks() {
+unsigned long MozziSTM32::audioTicks() {
 #if (BYPASS_MOZZI_OUTPUT_BUFFER != true)
   return output_buffer.count();
 #else
@@ -275,7 +271,7 @@ unsigned long MozziClass::audioTicks() {
 #endif
 }
 
-unsigned long MozziClass::mozziMicros() { 
+unsigned long MozziSTM32::mozziMicros() { 
   return audioTicks() * MICROS_PER_AUDIO_TICK;
 }
 

@@ -9,6 +9,9 @@
 #error HIFI mode is not available for this CPU architecture (but check ESP32_AUDIO_OUT_MODE, and PDM_RESOLUTION)
 #endif
 
+// Default ouput implementation class
+#define PLATFORM_OUTPUT_CLASS MozziESP32_I2S
+
 // Audio output options
 #define INTERNAL_DAC 1 // output using internal DAC via I2S, output on pin 26
 #define PT8211_DAC 2 // output using an external PT8211 DAC via I2S
@@ -41,5 +44,6 @@ const i2s_port_t i2s_num = I2S_NUM_0;
 
 #define AUDIO_BIAS ((uint16_t) 1<<(AUDIO_BITS-1))
 #define BYPASS_MOZZI_OUTPUT_BUFFER true
+
 
 #endif        //  #ifndef AUDIOCONFIGESP_H

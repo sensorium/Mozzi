@@ -20,5 +20,9 @@
 #endif
 #endif
 
+// Default ouput implementation class
+#define PLATFORM_OUTPUT_CLASS MozziTeensy3
+
+
 #endif        //  #ifndef AUDIOCONFIGTEENSY3_12BIT_H
 

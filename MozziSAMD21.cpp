@@ -13,12 +13,7 @@
 #include "hardware_defines.h"
 #if IS_SAMD21() && USE_LEGACY_GUTS == false
 
-#include "CircularBuffer.h"
-#include "Mozzi.h"
-#include "mozzi_analog.h"
-#include "mozzi_config.h" // at the top of all MozziGuts and analog files
-#include "AudioOutput.h"
-
+#include "MozziSAMD21.h"
 
 #if (EXTERNAL_AUDIO_OUTPUT != true)
 inline void audioOutput(const AudioOutput f)
@@ -34,7 +29,7 @@ uint64_t samples_written_to_buffer = 0;
 #else
 //-----------------------------------------------------------------------------------------------------------------
 // ring buffer for audio output
-CircularBuffer<OUTPUT_TYPE> output_buffer;  // fixed size 256
+CircularBuffer<AudioOutput_t> output_buffer;  // fixed size 256
 //-----------------------------------------------------------------------------------------------------------------
 #endif
 
@@ -50,7 +45,7 @@ static boolean audio_input_is_available;
 static int audio_input; // holds the latest audio from input_buffer
 uint8_t adc_count = 0;
 
-int MozziClass::getAudioInput() { return audio_input; }
+int MozziSAMD21::getAudioInput() { return audio_input; }
 
 static void startFirstAudioADC() {
   adcStartConversion(adcPinToChannelNum(AUDIO_INPUT_PIN));
@@ -157,7 +152,7 @@ inline void advanceControlLoop() {
   }
 }
 
-void MozziClass::audioHook() // 2us on AVR excluding updateAudio()
+void MozziSAMD21::audioHook() // 2us on AVR excluding updateAudio()
 {
 // setPin13High();
 #if (USE_AUDIO_INPUT == true)
@@ -234,7 +229,7 @@ static void startControl(unsigned int control_rate_hz) {
   update_control_timeout = AUDIO_RATE / control_rate_hz;
 }
 
-void MozziClass::start(int control_rate_hz) {
+void MozziSAMD21::start(int control_rate_hz) {
   setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST
                    // in setup() if desired (not for Teensy 3.* )
   // delay(200); // so AutoRange doesn't read 0 to start with
@@ -249,12 +244,12 @@ void MozziClass::start(int control_rate_hz) {
 #endif
 }
 
-void MozziClass::stop() {
+void MozziSAMD21::stop() {
   // ps - nointerrupts was never called so the following is not necessary: 
   // interrupts();
 }
 
-unsigned long MozziClass::audioTicks() {
+unsigned long MozziSAMD21::audioTicks() {
 #if (BYPASS_MOZZI_OUTPUT_BUFFER != true)
   return output_buffer.count();
 #else
@@ -262,7 +257,7 @@ unsigned long MozziClass::audioTicks() {
 #endif
 }
 
-unsigned long MozziClass::mozziMicros() { 
+unsigned long MozziSAMD21::mozziMicros() { 
   return audioTicks() * MICROS_PER_AUDIO_TICK;
 }
 

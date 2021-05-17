@@ -11,5 +11,9 @@
 
 #define AUDIO_CHANNEL_1_PIN DAC0
 
+// Default ouput implementation class
+#define PLATFORM_OUTPUT_CLASS MozziSAMD21
+
+
 #endif        //  #ifndef AUDIOCONFIGSAMD21_H
 

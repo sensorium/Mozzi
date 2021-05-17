@@ -1,7 +1,6 @@
 #ifndef MOZZI_CONFIG_H
 #define MOZZI_CONFIG_H
 #include "hardware_defines.h"
-
 /*
 Edit this file if you want to choose your own configuration options.
 */

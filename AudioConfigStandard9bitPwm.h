@@ -21,5 +21,9 @@ about when you're writing sketches.
 
 #define AUDIO_CHANNEL_1_PIN TIMER1_A_PIN // defined in TimerOne/config/known_16bit_timers.h
 
+// Default ouput implementation class
+#define PLATFORM_OUTPUT_CLASS MozziAVR
+
+
 #endif        //  #ifndef AUDIOCONFIGSTANDARD9BITPWM_H
 

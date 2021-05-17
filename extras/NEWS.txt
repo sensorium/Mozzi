@@ -15,7 +15,11 @@ get the latest version from https://sensorium.github.io/Mozzi/
 Mozzi is now available as the most recent code on Github, rather than as releases.
 
 release v1.1.0rc1 (not actually "released", just the Github code around 2019 onwards.)
-- STM32(duino) and ESP8266 ports have been added by Thomas Friedrichsmeier.
+- STEREO_HACK is deprecated in favor of AUDIO_CHANNELS
+- updateAudio() should be slightly rewritten for portability across different configuraitions and boards
+	- refer to the MonoOutput() and StereoOutput() classes for more detail
+- EXTERNAL_AUDIO_OUPUT allows to integrate external DACs, easily
+- STM32(duino) and ESP8266 ports have been added by Thomas Friedrichsmeier, ESP32 port by Dieter Vandoren and Thomas Friedrichsmeier.
 	Thomas has provided hardware specific notes on the Mozzi main web page.
 - CONTROL_RATE no longer has to be a power of 2,
 	and Mozzi no longer takes over Timer 0 for control interrupts.

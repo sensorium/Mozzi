@@ -82,22 +82,20 @@ in mozz_config.h
 //AUDIO_INPUT_CHANNEL = analogPinToChannel(AUDIO_INPUT_PIN)
 
 /** @ingroup core
-This sets an option for stereo output, a hack which requires
-variables audio_signal_1 and audio_signal_2 to be set in updateAudio(),
-instead of returning a single audio value as is usual for standard mono.
-You need to have \#define STEREO_HACK true in mozzi_config.h
-*/
-#define STEREO_HACK false
+This sets allows to change from a single/mono audio output channel to
+stereo output. To actually generate two channels, your updateAudio()-function
+should return a StereoOutput(). Sketches returning a MonoOutput() in a stereo
+config, or vice versa will continue to work, but will generate a warning a
+compile time.
 
-/** @ingroup core
-This defines the naximum number of output channels that we will be processing. Please notice that adding additional channels might impact have
-an impact on timings. The maximum number is additinally restricted by the specific implementation in the output class: e.g. on the ESP32 which 
-uses the I2S interface the number of channels are restricted to 2. But many processors are quite happy to support more then 2 PWM output pins...  
-*/
+@note This option superseeds the earlier STEREO_HACK, which is still available at
+      the time of this writing, but should not be used in new sketches.
 
-//#define AUDIO_CHANNELS MONO
-#define AUDIO_CHANNELS STEREO
-
+@note At the time of this writing, only MONO and STEREO are supported. The value of
+      MONO is 1 and the value of STEREO is 2, so future extensions are also expected
+      to set this to the number of available channels. */
+#define AUDIO_CHANNELS MONO
+//#define AUDIO_CHANNELS STEREO
 
 /** @ingroup core
 Defining this option as true in mozzi_config.h allows to completely customize the audio output, e.g. for connecting to external DACs.

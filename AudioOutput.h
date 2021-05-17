@@ -286,7 +286,7 @@ inline void audioOutput(const AudioOutput f)
   pwmWrite(AUDIO_CHANNEL_1_PIN_HIGH, (f.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
 #else
   pwmWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
-#if (STEREO_HACK == true)
+#if (AUDIO_CHANNELS > 1)
   pwmWrite(AUDIO_CHANNEL_2_PIN, f.r()+AUDIO_BIAS);
 #endif
 #endif
@@ -360,7 +360,7 @@ inline bool canBufferAudioOutput() {
 inline void audioOutput(const AudioOutput f) {
 #if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
   _esp32_prev_sample[0] = (f.l() + AUDIO_BIAS) << 8;
-#if (STEREO_HACK == true)
+#if (AUDIO_CHANNELS > 1)
   _esp32_prev_sample[1] = (f.r() + AUDIO_BIAS) << 8;
 #else
   // For simplicity of code, even in mono, we're writing stereo samples
@@ -388,7 +388,7 @@ inline void audioOutput(const AudioOutput f) {
 inline void audioOutput(const AudioOutput f)
 {
   AUDIO_CHANNEL_1_OUTPUT_REGISTER = f.l()+AUDIO_BIAS;
-#if (STEREO_HACK == true)
+#if (AUDIO_CHANNELS > 1)
   AUDIO_CHANNEL_2_OUTPUT_REGISTER = f.r()+AUDIO_BIAS;
 #endif
 }

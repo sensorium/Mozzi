@@ -68,7 +68,7 @@ public:
 	Declare a Sample with template TABLE_NUM_CELLS and UPDATE_RATE parameters, without specifying a particular wave table for it to play.
 	The table can be set or changed on the fly with setTable().
 	*/
-	Sample():endpos_fractional(4294967295UL) // biggest UL number so isPlaying() will work
+	Sample():endpos_fractional((unsigned long) NUM_TABLE_CELLS << SAMPLE_F_BITS)
 	{
 		setLoopingOff();
 		//rangeWholeSample();

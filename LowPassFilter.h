@@ -122,6 +122,107 @@ private:
   inline long fxmul(long a, int b) { return ((a * b) >> FX_SHIFT); }
 };
 
+
+
+
+
+
+
+
+#define FX_SHIFT16 16
+#define SHIFTED_1_16 ((uint16_t)65535)
+
+/** A resonant low pass filter for audio signals that takes 16 bits values for the cutoff frequency and the resonance, allowing for smoother transition if needed.
+ */
+class LowPassFilter16
+{
+
+public:
+  /** Constructor.
+   */
+  LowPassFilter16() { ; }
+
+  /** deprecated.  Use setCutoffFreqAndResonance(uint16_t cutoff, uint16_t
+  resonance).
+
+  Set the cut off frequency,
+  @param cutoff use the range 0-65535 to represent 0-8191 Hz (AUDIO_RATE/2).
+  Be careful of distortion at the lower end, especially with high resonance.
+  */
+  void setCutoffFreq(uint16_t cutoff)
+	{
+    f = cutoff;
+    fb = q + ucfxmul(q, SHIFTED_1_16 - cutoff);
+  }
+
+  /** deprecated.  Use setCutoffFreqAndResonance(uint8_t cutoff, uint8_t
+  resonance).
+
+  Set the resonance. If you hear unwanted distortion, back off the resonance.
+  After setting resonance, you need to call setCuttoffFreq() to hear the change!
+  @param resonance in the range 0-65535, with 65535 being most resonant.
+  @note	Remember to call setCutoffFreq() after resonance is changed!
+  */
+  void setResonance(uint16_t resonance) { q = resonance; }
+
+  /**
+  Set the cut off frequency and resonance.  Replaces setCutoffFreq() and
+  setResonance().  (Because the internal calculations need to be done whenever either parameter changes.)
+  @param cutoff range 0-65535 represents 0-8191 Hz (AUDIO_RATE/2).
+  Be careful of distortion at the lower end, especially with high resonance.
+  @param resonance range 0-65535, 65535 is most resonant.
+  */
+  void setCutoffFreqAndResonance(uint16_t cutoff, uint16_t resonance)
+	{
+    f = cutoff;
+    q = resonance; // hopefully optimised away when compiled, just here for
+                   // backwards compatibility
+    fb = q + ucfxmul(q, SHIFTED_1_16 - cutoff);
+  }
+
+  /** Calculate the next sample, given an input signal.
+  @param in the signal input.
+  @return the signal output.
+  @note Timing: about 11us.
+  */
+  //	10.5 to 12.5 us, mostly 10.5 us (was 14us)
+  inline int32_t next(int32_t in)
+	{
+    // setPin13High();
+    buf0 += fxmul(((in - buf0) + fxmul(fb, buf0 - buf1)), f);
+    buf1 += ifxmul(buf0 - buf1, f); // could overflow if input changes fast
+    // setPin13Low();
+    return buf1;
+  }
+
+private:
+  uint16_t q;
+  uint16_t f;
+  uint32_t fb;
+  int32_t buf0, buf1;
+
+  // // multiply two fixed point numbers (returns fixed point)
+  // inline
+  // long fxmul(long a, long b)
+  // {
+  // 	return (a*b)>>FX_SHIFT;
+  // }
+
+  // multiply two fixed point numbers (returns fixed point)
+  inline uint32_t ucfxmul(uint16_t a, uint16_t b)
+  {
+    return (((uint32_t)a * b) >> FX_SHIFT16);
+  }
+
+  // multiply two fixed point numbers (returns fixed point)
+  inline int32_t ifxmul(int64_t a, uint16_t b) { return ((a * b) >> FX_SHIFT16); }
+
+  // multiply two fixed point numbers (returns fixed point)
+  inline int64_t fxmul(int64_t a, int32_t b) { return ((a * b) >> FX_SHIFT16); }
+};
+
+
+
 /**
 @example 10.Audio_Filters/LowPassFilter/LowPassFilter.ino
 This example demonstrates the LowPassFilter class.

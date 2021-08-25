@@ -1,14 +1,14 @@
 /*  Example of constant power panning to test stereo output hack,
     using Mozzi sonification library.
 
-    Tests stereo output hack.  This requires #define STEREO_HACK true in mozzi_config.h
+    Tests stereo output.  This requires #define AUDIO_CHANNELS STEREO in mozzi_config.h
 
     Circuit: Audio outputs on digital pins 9 and 10.
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+    Mozzi documentation/API
+    https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
+    Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
 
     Tim Barrass 2017.
@@ -49,14 +49,9 @@ void updateControl()
 }
 
 
-// needed for stereo output
-int audio_out_1, audio_out_2;
-
-void updateAudio() {
+AudioOutput_t updateAudio() {
   int asig = aNoise.next();
-  audio_out_1 = (asig * ampA) >> 8;
-  audio_out_2 = (asig * ampB) >> 8;
-  // return StereoOutput::stereoFrom16Bit(asig*ampA, asig*ampB);
+  return StereoOutput::stereoFrom16Bit(asig*ampA, asig*ampB);
 }
 
 

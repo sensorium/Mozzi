@@ -74,7 +74,7 @@ Sanguino | 13	| -
 STM32duino (see "Hardware specific notes", below) | PB8 | yes
 ESP8266 *see details* | GPIO2 | yes
 
-For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.com/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).  
+For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.io/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).  
 
 ***
 
@@ -102,14 +102,14 @@ void loop() {
 }
 ```
 
-There's a detailed example explaining the different parts [here](http://sensorium.github.com/Mozzi/learn/a-simple-sketch/).
+There's a detailed example explaining the different parts [here](http://sensorium.github.io/Mozzi/learn/a-simple-sketch/).
 
 ***
 
 ## Documentation
 
-There's documentation in the doc folder in the Mozzi download and [online](http://sensorium.github.com/Mozzi/doc/html/index.html).  
-There is practical help on the [learn](http://sensorium.github.com/Mozzi/learn/) page on the Mozzi site.  
+There's documentation in the doc folder in the Mozzi download and [online](http://sensorium.github.io/Mozzi/doc/html/index.html).  
+There is practical help on the [learn](http://sensorium.github.io/Mozzi/learn/) page on the Mozzi site.  
 Start or look up a topic on the [users forum](https://groups.google.com/forum/#!forum/mozzi-users/).  
 Also, feel free to submit any issues on the [GitHub Mozzi site](https://github.com/sensorium/Mozzi/issues/).  
 Look for code and usage changes [here](extras/NEWS.txt).  
@@ -190,7 +190,7 @@ real DAC. Should probably run on any other board supported by [STM32duino](https
 - The STM32-specific options (pins, timers) can be configured in AudioConfigSTM32.h
 - Default audio resolution is currently set to 10 bits, which yields 70khZ PWM frequency on a 72MHz CPU. HIFI mode is 2*7bits at up to 560Khz (but limited to 5 times audio rate)
 - HIFI_MODE did not get much testing
-- STEREO_HACK not yet implemented (although that should not be too hard to do)
+- STEREO not yet implemented (although that should not be too hard to do)
 - AUDIO_INPUT is completely untested (but implemented in theory)
 - Note that AUDIO_INPUT and mozziAnalogRead() return values in the STM32's full ADC resolution of 0-4095 rather than AVR's 0-1023.
 - twi_nonblock is not ported
@@ -226,8 +226,7 @@ port by Thomas Friedrichsmeier
   - PDM_VIA_I2S: Output is coded using pulse density modulation, and sent via the I2S pins. The I2S data out pin (which is also "RX") will have the output, but *all* I2S output pins (RX, GPIO2 and GPIO15) will be
   affected. Mozzi tries to set GPIO2 and GPIO15 to input mode, and *at the time of this writing*, this allows I2S output on RX even on boards such as the ESP01 (where GPIO15 is tied to Gnd). However, it seems safest to
   assume that this mode may not be useable on boards where GPIO2 or GPIO15 are not available as output pins.
-  - EXTERNAL_DAC_VIA_I2S: Output is sent to an external DAC (such as a PT8211), digitally coded. This is the only mode that supports STEREO_HACK. It also need the least processing power.
-    - TODO: Untested!
+  - EXTERNAL_DAC_VIA_I2S: Output is sent to an external DAC (such as a PT8211), digitally coded. This is the only mode that supports STEREO. It also needs the least processing power.
 - There is no "HIFI_MODE" in addition to the above output options. For high quality output, either use an external DAC, or increase the PDM_RESOLUTION value.
 - Note that the ESP8266 pins can output less current than the other supported CPUs. The maximum is 12mA, with a recommendation to stay below 6mA.
   - WHEN CONNECTING A HEADPHONE, DIRECTLY, USE APPROPRIATE CURRENT LIMITING RESISTORS (>= 500Ohms).
@@ -248,13 +247,13 @@ port by Dieter Vandoren and Thomas Friedrichsmeier
 - twi_nonblock is not ported
 - Currently, three audio output modes exist, the default being INTERNAL_DAC (configurable in AudioConfigESP32.h). *The configuration details may still be subject to change; please be prepared to make some minimal adjustments to your code, when upgrading Mozzi*:
   - INTERNAL_DAC: Output using the built-in DAC on GPIO pins 25 and 26.
-    - 8 bits resolution
+    - 8 bits resolution, mono (on both pins) or stereo
     - For simplicity of code, both pins are always used, even in mono output mode
   - PT8211_DAC: Output is sent via I2S in a format suitable for the PT8211 external EXTERNAL_DAC
-    - 16 bits resolution. Remember to shift your audio accordingly.
+    - 16 bits resolution, mono or stereo. Remember to shift your audio accordingly.
     - Output pins can be configured in AudioConfigESP32.h. Default is BCK: 26, WS: 15, DATA: 33
   - PDM_VIA_I2S: Output is converted using pulse density modulation, sent to the I2S data pin. No external hardware needed.
-    - 16 bits resolution. Remember to shift your audio accordingly.
+    - 16 bits resolution, mono or stereo. Remember to shift your audio accordingly.
     - Output (DATA) pin can be configured in AudioConfigESP32.h. Default 33. Note that the BCK and WS pins are also used in this mode.
     - The PDM_RESOLUTION parameter can be used to reduce noise at the cost of more CPU power.
     - Mono, only.

@@ -55,9 +55,13 @@
 #define CLIP_AUDIO(x) constrain((x), (-(AudioOutputStorage_t) AUDIO_BIAS), (AudioOutputStorage_t) AUDIO_BIAS-1)
 #endif
 
+#if (AUDIO_CHANNELS == STEREO)
+#define AudioOutput StereoOutput
 #if (STEREO_HACK == true)
 #define AudioOutput_t void
-#define AudioOutput StereoOutput
+#else
+#define AudioOutput_t StereoOutput
+#endif
 #else
 /** Representation of an single audio output sample/frame. For mono output, this is really just a single zero-centered int,
  *  but for stereo it's a struct containing two ints.
@@ -87,9 +91,11 @@ struct StereoOutput {
   StereoOutput(AudioOutputStorage_t l, AudioOutputStorage_t r) : _l(l), _r(r) {};
   /** Default contstructor */
   StereoOutput() : _l(0), _r(0) {};
-#if (STEREO_HACK != true)
-  /** Conversion to int operator: If used in a mono config, returns only the left channel (and gives a compile time warning). */
-  inline operator AudioOutput_t() const __attribute__((deprecated("Sketch generates stereo output, but Mozzi is configured for mono. Check mozzi_config.h."))) { return _l; };
+#if (AUDIO_CHANNELS != STEREO)
+  /** Conversion to int operator: If used in a mono config, returns only the left channel (and gives a compile time warning). 
+      This _could_ be turned into an operator for implicit conversion in this case. For now we chose to apply conversion on demand, only, as most of the time
+      using StereoOutput in a mono config, is not intended. */
+  inline AudioOutput_t portable() const __attribute__((deprecated("Sketch generates stereo output, but Mozzi is configured for mono. Check mozzi_config.h."))) { return _l; };
 #endif
   AudioOutputStorage_t l() const { return _l; };
   AudioOutputStorage_t r() const { return _r; };
@@ -130,9 +136,11 @@ private:
 struct MonoOutput {
   /** Construct an audio frame from raw values (zero-centered) */
   MonoOutput(AudioOutputStorage_t l=0) : _l(l) {};
-#if (STEREO_HACK == true)
-  /** Conversion to stereo operator: If used in a stereo config, returns identical channels (and gives a compile time warning). */
-  inline operator StereoOutput() const __attribute__((deprecated("Sketch generates mono output, but Mozzi is configured for stereo. Check mozzi_config.h."))) { return StereoOutput(_l, _l); };
+#if (AUDIO_CHANNELS > 1)
+  /** Conversion to stereo operator: If used in a stereo config, returns identical channels (and gives a compile time warning).
+      This _could_ be turned into an operator for implicit conversion in this case. For now we chose to apply conversion on demand, only, as most of the time
+      using StereoOutput in a mono config, is not intended. */
+  inline StereoOutput portable() const __attribute__((deprecated("Sketch generates mono output, but Mozzi is configured for stereo. Check mozzi_config.h."))) { return StereoOutput(_l, _l); };
 #else
   /** Conversion to int operator. */
   inline operator AudioOutput_t() const { return _l; };
@@ -243,7 +251,7 @@ inline void audioOutput(const AudioOutput f)
   pwmWrite(AUDIO_CHANNEL_1_PIN_HIGH, (f.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
 #else
   pwmWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
-#if (STEREO_HACK == true)
+#if (AUDIO_CHANNELS > 1)
   pwmWrite(AUDIO_CHANNEL_2_PIN, f.r()+AUDIO_BIAS);
 #endif
 #endif
@@ -317,7 +325,7 @@ inline bool canBufferAudioOutput() {
 inline void audioOutput(const AudioOutput f) {
 #if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
   _esp32_prev_sample[0] = (f.l() + AUDIO_BIAS) << 8;
-#if (STEREO_HACK == true)
+#if (AUDIO_CHANNELS > 1)
   _esp32_prev_sample[1] = (f.r() + AUDIO_BIAS) << 8;
 #else
   // For simplicity of code, even in mono, we're writing stereo samples
@@ -345,7 +353,7 @@ inline void audioOutput(const AudioOutput f) {
 inline void audioOutput(const AudioOutput f)
 {
   AUDIO_CHANNEL_1_OUTPUT_REGISTER = f.l()+AUDIO_BIAS;
-#if (STEREO_HACK == true)
+#if (AUDIO_CHANNELS > 1)
   AUDIO_CHANNEL_2_OUTPUT_REGISTER = f.r()+AUDIO_BIAS;
 #endif
 }

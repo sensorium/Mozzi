@@ -13,6 +13,9 @@
 #ifndef LOWPASS_H_
 #define LOWPASS_H_
 
+#include "IntegerType.h"
+#include "AudioOutput.h"
+
 /*
 simple resonant filter posted to musicdsp.org by Paul Kellett
 http://www.musicdsp.org/archive.php?classid=3#259
@@ -35,7 +38,8 @@ fixed point version of the filter
 
 /** A resonant low pass filter for audio signals.
  */
-template<typename su=uint8_t, typename ms=int, typename mu=unsigned int, typename ls1=int, typename ls2=long>
+//template<typename su=uint8_t, typename ms=int, typename mu=unsigned int, typename ls1=int, typename ls2=long>
+template<typename su=uint8_t>
 class LowPassFilterNbits
 {
 
@@ -88,7 +92,7 @@ public:
   @note Timing: about 11us.
   */
   //	10.5 to 12.5 us, mostly 10.5 us (was 14us)
-  inline ms next(ms in)
+  inline AudioOutputStorage_t next(AudioOutputStorage_t in)
 	{
     // setPin13High();
     buf0 += fxmul(((in - buf0) + fxmul(fb, buf0 - buf1)), f);
@@ -100,10 +104,10 @@ public:
 private:
   su q;
   su f;
-  mu fb;
-  ms buf0, buf1;
-const su FX_SHIFT = sizeof(su) << 3;
-const su SHIFTED_1 = (1<<FX_SHIFT)-1;
+  IntegerType<sizeof(AudioOutputStorage_t)>::unsigned_type fb;
+  AudioOutputStorage_t buf0, buf1;
+  const uint8_t FX_SHIFT = sizeof(su) << 3;
+  const su SHIFTED_1 = (1<<FX_SHIFT)-1;
 
   // // multiply two fixed point numbers (returns fixed point)
   // inline
@@ -113,20 +117,20 @@ const su SHIFTED_1 = (1<<FX_SHIFT)-1;
   // }
 
   // multiply two fixed point numbers (returns fixed point)
-  inline mu ucfxmul(su a, su b)
+  inline typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type ucfxmul(su a, su b)
 	{
-    return (((mu)a * b) >> FX_SHIFT);
+    return (((typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type)a * b) >> FX_SHIFT);
   }
 
   // multiply two fixed point numbers (returns fixed point)
-  inline ms ifxmul(ls1 a, su b) { return ((a * b) >> FX_SHIFT); }
+  inline typename IntegerType<sizeof(AudioOutputStorage_t)+sizeof(su)-1>::signed_type ifxmul(typename IntegerType<sizeof(AudioOutputStorage_t )+sizeof(su)-1>::signed_type a, su b) { return ((a * b) >> FX_SHIFT); } 
 
   // multiply two fixed point numbers (returns fixed point)
-  inline ls2 fxmul(ls2 a, ms b) { return ((a * b) >> FX_SHIFT); }
+  inline typename IntegerType<sizeof(AudioOutputStorage_t)+sizeof(AudioOutputStorage_t)>::signed_type fxmul(typename IntegerType<sizeof(AudioOutputStorage_t)+sizeof(AudioOutputStorage_t)>::signed_type a, AudioOutputStorage_t b) { return ((a * b) >> FX_SHIFT); }
 };
 
 typedef LowPassFilterNbits<> LowPassFilter;
-typedef LowPassFilterNbits<uint16_t, int32_t, uint32_t, int64_t, int64_t> LowPassFilter16;
+typedef LowPassFilterNbits<uint16_t> LowPassFilter16;
 
 
 /**

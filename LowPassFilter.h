@@ -103,7 +103,7 @@ public:
 private:
   su q;
   su f;
-  IntegerType<sizeof(AudioOutputStorage_t)>::unsigned_type fb;
+  typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type fb;
   AudioOutputStorage_t buf0, buf1;
   const uint8_t FX_SHIFT = sizeof(su) << 3;
   const su SHIFTED_1 = (1<<FX_SHIFT)-1;

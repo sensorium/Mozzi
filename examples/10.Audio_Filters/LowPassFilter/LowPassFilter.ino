@@ -2,6 +2,10 @@
     using Mozzi sonification library.
 
     Demonstrates LowPassFilter().
+    
+    Note that, on 8bits platforms (Arduino) this filter cannot work
+    on samples of more than 8bits. Use LowPassFilter16() if you need
+    more than that.
 
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
     DAC/A14 on Teensy 3.1, or

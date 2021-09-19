@@ -16,6 +16,8 @@
 #include "IntegerType.h"
 #include "AudioOutput.h"
 
+
+
 /*
 simple resonant filter posted to musicdsp.org by Paul Kellett
 http://www.musicdsp.org/archive.php?classid=3#259
@@ -38,7 +40,6 @@ fixed point version of the filter
 
 /** A resonant low pass filter for audio signals.
  */
-//template<typename su=uint8_t, typename ms=int, typename mu=unsigned int, typename ls1=int, typename ls2=long>
 template<typename su=uint8_t>
 class LowPassFilterNbits
 {

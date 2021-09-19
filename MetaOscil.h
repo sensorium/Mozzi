@@ -37,17 +37,17 @@ template<uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE, byte N_OSCIL>
     current_osc=oscillators[0];};
 
   MetaOscil(){};
-
-  /** Add one oscil to the MetaOscil.
+  
+  /* Add one oscil to the MetaOscil.
       @param osc is a pointer toward an Oscil
-      @param cutoff_freq is the cutoff frequency of this Oscil */ 
+      @param cutoff_freq is the cutoff frequency of this Oscil 
   void addOscil(Oscil<NUM_TABLE_CELLS, UPDATE_RATE>* osc, int cutoff_freq)
   {
     oscillators[current_rank] = osc;
     cutoff_freqs[current_rank] = cutoff_freq;
     if (current_rank == 0) current_osc=oscillators[0];
     current_rank += 1;
-  }
+  }*/
 
 
   /** Set all Oscil of a MetaOscil.
@@ -223,5 +223,9 @@ template<uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE, byte N_OSCIL>
   
 };
 
+/**
+@example 06.Synthesis/NonAlias_MetaOscil/NonAlias_MetaOscil.ino
+This example demonstrates the Meta_Oscil class.
+*/
 
 #endif  /* META_OSCIL_H */

@@ -13,9 +13,22 @@
 #ifndef LOWPASS_H_
 #define LOWPASS_H_
 
+#include "IntegerType.h"
+#include "AudioOutput.h"
+
+
+
 /*
 simple resonant filter posted to musicdsp.org by Paul Kellett
 http://www.musicdsp.org/archive.php?classid=3#259
+
+Two versions are available: LowPassFilter and LowPassFilter16.
+LowPassFilter is an optimized version that uses 8bits values to set
+the resonance and the cutoff_freq. It can works on 8bits samples only
+on 8bits platforms.
+LowPassFilter16 consumes more CPU ressources but uses 16bits values
+for resonance and cutoff_freq and can work on samples up to 16bits on
+8bits platforms and up to 32 on 32bits platforms.
 
 // set feedback amount given f and q between 0 and 1
 fb = q + q/(1.0 - f);
@@ -30,50 +43,52 @@ fixed point version of the filter
 */
 
 // we are using .n fixed point (n bits for the fractional part)
-#define FX_SHIFT 8
-#define SHIFTED_1 ((uint8_t)255)
+//#define FX_SHIFT 8
+//#define SHIFTED_1 ((uint8_t)255)
 
 /** A resonant low pass filter for audio signals.
  */
-class LowPassFilter
+template<typename su=uint8_t>
+class LowPassFilterNbits
 {
 
 public:
   /** Constructor.
    */
-  LowPassFilter() { ; }
+  LowPassFilterNbits() { ; }
 
-  /** deprecated.  Use setCutoffFreqAndResonance(uint8_t cutoff, uint8_t
+
+  /** deprecated.  Use setCutoffFreqAndResonance(su cutoff, su
   resonance).
 
   Set the cut off frequency,
-  @param cutoff use the range 0-255 to represent 0-8191 Hz (AUDIO_RATE/2).
+  @param cutoff use the range 0-255 to represent 0-8191 Hz (AUDIO_RATE/2) for LowPassFilter, cutoff use the range 0-65535 to represent 0-AUDIO_RATE/2.
   Be careful of distortion at the lower end, especially with high resonance.
   */
-  void setCutoffFreq(uint8_t cutoff)
-	{
+  void setCutoffFreq(su cutoff)
+      {
     f = cutoff;
     fb = q + ucfxmul(q, SHIFTED_1 - cutoff);
   }
 
-  /** deprecated.  Use setCutoffFreqAndResonance(uint8_t cutoff, uint8_t
+  /** deprecated.  Use setCutoffFreqAndResonance(su cutoff, su
   resonance).
 
   Set the resonance. If you hear unwanted distortion, back off the resonance.
   After setting resonance, you need to call setCuttoffFreq() to hear the change!
-  @param resonance in the range 0-255, with 255 being most resonant.
+  @param resonance in the range 0-255 for LowPassFilter, 0-65535 for LowPassFilter16, with 255/65535 being most resonant
   @note	Remember to call setCuttoffFreq() after resonance is changed!
   */
-  void setResonance(uint8_t resonance) { q = resonance; }
+  void setResonance(su resonance) { q = resonance; }
 
   /**
   Set the cut off frequency and resonance.  Replaces setCutoffFreq() and
   setResonance().  (Because the internal calculations need to be done whenever either parameter changes.)
-  @param cutoff range 0-255 represents 0-8191 Hz (AUDIO_RATE/2).
+  @param cutoff range 0-255 represents 0-8191 Hz (AUDIO_RATE/2) for LowPassFilter, range 0-65535 for LowPassFilter16
   Be careful of distortion at the lower end, especially with high resonance.
-  @param resonance range 0-255, 255 is most resonant.
+  @param resonance range 0-255 for LowPassFilter, 0-65535 for LowPassFilter16, 255/65535 is most resonant.
   */
-  void setCutoffFreqAndResonance(uint8_t cutoff, uint8_t resonance)
+  void setCutoffFreqAndResonance(su cutoff, su resonance)
 	{
     f = cutoff;
     q = resonance; // hopefully optimised away when compiled, just here for
@@ -82,25 +97,26 @@ public:
   }
 
   /** Calculate the next sample, given an input signal.
-  @param in the signal input.
+  @param in the signal input. Should not be more than 8bits on 8bits platforms (Arduino) if using LowPassFilter and not LowPassFilter16.
   @return the signal output.
   @note Timing: about 11us.
   */
   //	10.5 to 12.5 us, mostly 10.5 us (was 14us)
-  inline int next(int in)
+  inline AudioOutputStorage_t next(AudioOutputStorage_t in)
 	{
     // setPin13High();
     buf0 += fxmul(((in - buf0) + fxmul(fb, buf0 - buf1)), f);
     buf1 += ifxmul(buf0 - buf1, f); // could overflow if input changes fast
-    // setPin13Low();
     return buf1;
   }
 
 private:
-  uint8_t q;
-  uint8_t f;
-  unsigned int fb;
-  int buf0, buf1;
+  su q;
+  su f;
+  typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type fb;
+  AudioOutputStorage_t buf0, buf1;
+  const uint8_t FX_SHIFT = sizeof(su) << 3;
+  const su SHIFTED_1 = (1<<FX_SHIFT)-1;
 
   // // multiply two fixed point numbers (returns fixed point)
   // inline
@@ -110,21 +126,28 @@ private:
   // }
 
   // multiply two fixed point numbers (returns fixed point)
-  inline unsigned int ucfxmul(uint8_t a, uint8_t b)
+  inline typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type ucfxmul(su a, su b)
 	{
-    return (((unsigned int)a * b) >> FX_SHIFT);
+    return (((typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type)a * b) >> FX_SHIFT);
   }
 
   // multiply two fixed point numbers (returns fixed point)
-  inline int ifxmul(int a, uint8_t b) { return ((a * b) >> FX_SHIFT); }
+  inline typename IntegerType<sizeof(AudioOutputStorage_t)+sizeof(su)-1>::signed_type ifxmul(typename IntegerType<sizeof(AudioOutputStorage_t )+sizeof(su)-1>::signed_type a, su b) { return ((a * b) >> FX_SHIFT); } 
 
   // multiply two fixed point numbers (returns fixed point)
-  inline long fxmul(long a, int b) { return ((a * b) >> FX_SHIFT); }
+  inline typename IntegerType<sizeof(AudioOutputStorage_t)+sizeof(AudioOutputStorage_t)>::signed_type fxmul(typename IntegerType<sizeof(AudioOutputStorage_t)+sizeof(AudioOutputStorage_t)>::signed_type a, typename IntegerType<sizeof(AudioOutputStorage_t)+sizeof(su)-1>::signed_type b) { return ((a * b) >> FX_SHIFT); }
 };
+
+typedef LowPassFilterNbits<> LowPassFilter;
+typedef LowPassFilterNbits<uint16_t> LowPassFilter16;
+
 
 /**
 @example 10.Audio_Filters/LowPassFilter/LowPassFilter.ino
 This example demonstrates the LowPassFilter class.
+
+@example 10.Audio_Filters/LowPassFilter/LowPassFilter16.ino
+This example demonstrates the LowPassFilter16 class.
 */
 
 #endif /* LOWPASS_H_ */

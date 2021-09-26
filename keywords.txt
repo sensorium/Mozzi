@@ -21,6 +21,9 @@ LowPassFilter	KEYWORD1
 setCutoffFreq	KEYWORD2
 setResonance	KEYWORD2
 next	KEYWORD2
+setCutoffFreqAndResonance	KEYWORD2
+LowPassFilter16	KEYWORD1
+
 
 Oscil	KEYWORD1
 incrementPhase	KEYWORD2

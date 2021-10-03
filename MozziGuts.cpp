@@ -399,9 +399,8 @@ static void startAudioStandard() {
   adc->adc0->setAveraging(0);
   adc->adc0->setConversionSpeed(
       ADC_CONVERSION_SPEED::MED_SPEED); // could be HIGH_SPEED, noisier
-
   analogWriteResolution(12);
-  timer1.begin(defaultAudioOutput, 1000000UL / AUDIO_RATE);
+  timer1.begin(defaultAudioOutput, 1000000. / AUDIO_RATE);
 #elif IS_SAMD21()
 #ifdef ARDUINO_SAMD_CIRCUITPLAYGROUND_EXPRESS
   {

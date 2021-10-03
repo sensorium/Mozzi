@@ -71,7 +71,7 @@ void adcEnableInterrupt(){
 void setupMozziADC(int8_t speed) {
 #if IS_TEENSY3()
 	adc = new ADC();
-	adc->enableInterrupts(ADC_0);
+	adc->adc0->enableInterrupts(ADC_0);
 #elif IS_STM32()
 	adc.calibrate();
 	setupFastAnalogRead(speed);

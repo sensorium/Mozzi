@@ -396,8 +396,8 @@ void samd21AudioOutput() {
 static void startAudioStandard() {
 
 #if IS_TEENSY3()
-  adc->setAveraging(0);
-  adc->setConversionSpeed(
+  adc->adc0->setAveraging(0);
+  adc->adc0->setConversionSpeed(
       ADC_CONVERSION_SPEED::MED_SPEED); // could be HIGH_SPEED, noisier
 
   analogWriteResolution(12);

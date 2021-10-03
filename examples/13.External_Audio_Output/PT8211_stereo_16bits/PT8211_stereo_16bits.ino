@@ -79,7 +79,7 @@ void setup() {
 
   // Initialising the SPI connection on default port
   SPI.begin();
-  SPI.beginTransaction(SPISettings(200000000, MSBFIRST, SPI_MODE0));  //MSB first, according to the DAC spec
+  SPI.beginTransaction(SPISettings(20000000, MSBFIRST, SPI_MODE0));  //MSB first, according to the DAC spec
 
 
   aCos1.setFreq(440.f);

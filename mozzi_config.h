@@ -79,7 +79,7 @@ This sets which analog input channel to use for audio input, if you have
 \#define USE_AUDIO_INPUT  true
 in mozz_config.h
 */
-#define AUDIO_INPUT_PIN 0
+//#define AUDIO_INPUT_PIN 11
 
 //AUDIO_INPUT_CHANNEL = analogPinToChannel(AUDIO_INPUT_PIN)
 

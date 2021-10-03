@@ -27,7 +27,7 @@
 #if IS_AVR()
 #include "FrequencyTimer2.h"
 #include "TimerOne.h"
-#elif IS_TEENSY3()
+#elif (IS_TEENSY3() || IS_TEENSY4())
 // required from http://github.com/pedvide/ADC for Teensy 3.*
 #include "IntervalTimer.h"
 #include <ADC.h>
@@ -49,7 +49,7 @@ uint16_t output_buffer_size = 0;
     "Mozzi has been tested with a cpu clock speed of 16MHz on Arduino and 48MHz on Teensy 3!  Results may vary with other speeds."
 #endif
 
-#if IS_TEENSY3()
+#if (IS_TEENSY3() || IS_TEENSY4())
 ADC *adc; // adc object
 uint8_t teensy_pin;
 #elif IS_STM32()
@@ -150,8 +150,8 @@ uint8_t adc_count = 0;
 int getAudioInput() { return audio_input; }
 
 static void startFirstAudioADC() {
-#if IS_TEENSY3()
-  adc->startSingleRead(
+#if (IS_TEENSY3() || IS_TEENSY4())
+  adc->adc0->startSingleRead(
       AUDIO_INPUT_PIN); // ADC lib converts pin/channel in startSingleRead
 #elif IS_STM32()
   uint8_t dummy = AUDIO_INPUT_PIN;
@@ -170,8 +170,8 @@ static void receiveFirstAudioADC()
 */
 
 static void startSecondAudioADC() {
-#if IS_TEENSY3()
-  adc->startSingleRead(AUDIO_INPUT_PIN);
+#if (IS_TEENSY3() || IS_TEENSY4())
+  adc->adc0->startSingleRead(AUDIO_INPUT_PIN);
 #elif IS_STM32()
   uint8_t dummy = AUDIO_INPUT_PIN;
   adc.setPins(&dummy, 1);
@@ -183,8 +183,8 @@ static void startSecondAudioADC() {
 
 static void receiveSecondAudioADC() {
   if (!input_buffer.isFull())
-#if IS_TEENSY3()
-    input_buffer.write(adc->readSingle());
+#if (IS_TEENSY3() || IS_TEENSY4())
+    input_buffer.write(adc->adc0->readSingle());
 #elif IS_STM32()
     input_buffer.write(adc.getData());
 #else
@@ -192,8 +192,8 @@ static void receiveSecondAudioADC() {
 #endif
 }
 
-#if IS_TEENSY3() || IS_STM32() || IS_AVR()
-#if IS_TEENSY3()
+#if IS_TEENSY3() || IS_STM32() || IS_AVR() || IS_TEENSY4()
+#if IS_TEENSY3() || IS_TEENSY4()
 void adc0_isr(void)
 #elif IS_STM32()
 void stm32_adc_eoc_handler()
@@ -362,7 +362,7 @@ static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
 #endif
 
 #if (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS) || IS_STM32()
-#if IS_TEENSY3()
+#if IS_TEENSY3() || IS_TEENSY4()
 IntervalTimer timer1;
 #elif IS_STM32() && (EXTERNAL_AUDIO_OUTPUT == true)
 HardwareTimer audio_update_timer(2);
@@ -395,13 +395,22 @@ void samd21AudioOutput() {
 #if !IS_AVR()
 static void startAudioStandard() {
 
-#if IS_TEENSY3()
+#if IS_TEENSY3() || IS_TEENSY4()
   adc->adc0->setAveraging(0);
   adc->adc0->setConversionSpeed(
-      ADC_CONVERSION_SPEED::MED_SPEED); // could be HIGH_SPEED, noisier
-
+				ADC_CONVERSION_SPEED::MED_SPEED); // could be HIGH_SPEED, noisier
+#if IS_TEENSY3()
   analogWriteResolution(12);
-  timer1.begin(defaultAudioOutput, 1000000UL / AUDIO_RATE);
+#elif IS_TEENSY4()
+  analogWriteResolution(10);
+#if (!EXTERNAL_AUDIO_OUTPUT)
+  analogWriteFrequency(AUDIO_CHANNEL_1_PIN, 146484.38f);
+#if (AUDIO_CHANNELS > 1)
+  analogWriteFrequency(AUDIO_CHANNEL_2_PIN, 146484.38f);
+#endif  // end #if (AUDIO_CHANNELS > 1) 
+#endif  // end #if (!EXTERNAL_AUDIO_OUTPUT)
+#endif
+  timer1.begin(defaultAudioOutput, 1000000. / AUDIO_RATE);
 #elif IS_SAMD21()
 #ifdef ARDUINO_SAMD_CIRCUITPLAYGROUND_EXPRESS
   {
@@ -702,7 +711,7 @@ void startMozzi(int control_rate_hz) {
 }
 
 void stopMozzi() {
-#if IS_TEENSY3()
+#if IS_TEENSY3() || IS_TEENSY4()
   timer1.end();
 #elif IS_STM32()
   audio_update_timer.pause();

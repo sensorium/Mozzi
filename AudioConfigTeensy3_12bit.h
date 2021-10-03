@@ -1,6 +1,7 @@
 #ifndef AUDIOCONFIGTEENSY3_12BIT_H
 #define AUDIOCONFIGTEENSY3_12BIT_H
 
+#warning If you get a compilation error you should probably update Teensyduino to its latest version
 
 /** @ingroup core
 */

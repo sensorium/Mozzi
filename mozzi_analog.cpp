@@ -17,7 +17,7 @@
 //#include "mozzi_utils.h"
 
 #include "hardware_defines.h"
-#if IS_TEENSY3()
+#if IS_TEENSY3() || IS_TEENSY4()
 // required from http://github.com/pedvide/ADC for Teensy 3.*
 #include <ADC.h>
 #elif IS_STM32()
@@ -25,7 +25,7 @@
 #endif
 
 // defined in Mozziguts.cpp
-#if IS_TEENSY3()
+#if IS_TEENSY3() || IS_TEENSY4()
 	extern ADC *adc; // adc object
 	extern uint8_t teensy_pin;
 #elif IS_STM32()
@@ -69,9 +69,10 @@ void adcEnableInterrupt(){
 
 
 void setupMozziADC(int8_t speed) {
-#if IS_TEENSY3()
+#if IS_TEENSY3() || IS_TEENSY4()
 	adc = new ADC();
-	adc->adc0->enableInterrupts(ADC_0);
+	//adc->adc0->enableInterrupts(ADC_0);
+	adc->adc0->enableInterrupts(adc0_isr);
 #elif IS_STM32()
 	adc.calibrate();
 	setupFastAnalogRead(speed);
@@ -170,7 +171,7 @@ static void adcSetChannel(uint8_t channel) {
 // basically analogRead() chopped in half so the ADC conversion
 // can be started here and received by another function.
 void adcStartConversion(uint8_t channel) {
-#if IS_TEENSY3()
+#if IS_TEENSY3() || IS_TEENSY4()
 	teensy_pin = channel; // remember for second startSingleRead
 	adc->startSingleRead(teensy_pin); // channel/pin gets converted every time in startSingleRead
 #elif IS_STM32()
@@ -249,7 +250,7 @@ void receiveFirstControlADC(){
 
 
 void startSecondControlADC() {
-#if IS_TEENSY3()
+#if IS_TEENSY3() || IS_TEENSY4()
 	adc->startSingleRead(teensy_pin);
 #elif IS_STM32()
 	adc.setPins(&stm32_current_adc_pin, 1);
@@ -261,8 +262,8 @@ void startSecondControlADC() {
 
 
 void receiveSecondControlADC(){
-#if IS_TEENSY3()
-	analog_readings[current_channel] = adc->readSingle();
+#if IS_TEENSY3() || IS_TEENSY4()
+	analog_readings[current_channel] = adc->adc0->readSingle();
 #elif IS_STM32()
 	analog_readings[current_channel] = adc.getData();
 #elif IS_AVR()
@@ -278,14 +279,14 @@ because the first conversion after changing channels is often inaccurate (on atm
 The version for USE_AUDIO_INPUT==true is in MozziGuts.cpp... compilation reasons...
 */
 #if(USE_AUDIO_INPUT==false)
-#if IS_TEENSY3()
+#if IS_TEENSY3() || IS_TEENSY4()
 void adc0_isr(void)
 #elif IS_STM32()
 void stm32_adc_eoc_handler()
 #elif IS_AVR()
 ISR(ADC_vect, ISR_BLOCK)
 #endif
-#if IS_TEENSY3() || IS_STM32() || IS_AVR()
+#if IS_TEENSY3() || IS_STM32() || IS_AVR() || IS_TEENSY4()
 {
 	if (first)
 	{

@@ -52,6 +52,7 @@ uint16_t output_buffer_size = 0;
 #if (IS_TEENSY3() || IS_TEENSY4())
 ADC *adc; // adc object
 uint8_t teensy_pin;
+int8_t teensy_adc=0;
 #elif IS_STM32()
 STM32ADC adc(ADC1);
 uint8_t stm32_current_adc_pin;
@@ -399,6 +400,12 @@ static void startAudioStandard() {
   adc->adc0->setAveraging(0);
   adc->adc0->setConversionSpeed(
 				ADC_CONVERSION_SPEED::MED_SPEED); // could be HIGH_SPEED, noisier
+  #ifdef ADC_DUAL_ADCS
+adc->adc1->setAveraging(0);
+  adc->adc1->setConversionSpeed(
+				ADC_CONVERSION_SPEED::MED_SPEED);
+  #endif
+  
 #if IS_TEENSY3()
   analogWriteResolution(12);
 #elif IS_TEENSY4()

@@ -20,6 +20,7 @@
 #if IS_TEENSY3() || IS_TEENSY4()
 // required from http://github.com/pedvide/ADC for Teensy 3.*
 #include <ADC.h>
+#include "teensyPinMap.h"
 #elif IS_STM32()
 //#include <STM32ADC.h>
 #endif
@@ -28,6 +29,7 @@
 #if IS_TEENSY3() || IS_TEENSY4()
 	extern ADC *adc; // adc object
 	extern uint8_t teensy_pin;
+        extern int8_t teensy_adc;
 #elif IS_STM32()
 	extern STM32ADC adc;
 	extern uint8_t stm32_current_adc_pin;
@@ -71,8 +73,10 @@ void adcEnableInterrupt(){
 void setupMozziADC(int8_t speed) {
 #if IS_TEENSY3() || IS_TEENSY4()
 	adc = new ADC();
-	//adc->adc0->enableInterrupts(ADC_0);
 	adc->adc0->enableInterrupts(adc0_isr);
+	#ifdef ADC_DUAL_ADCS
+	adc->adc1->enableInterrupts(adc0_isr);
+	#endif
 #elif IS_STM32()
 	adc.calibrate();
 	setupFastAnalogRead(speed);
@@ -132,7 +136,12 @@ uint8_t adcPinToChannelNum(uint8_t pin) {
 #else
 	if (pin >= 14) pin -= 14; // allow for channel or pin numbers
 #endif
+
+#elif IS_TEENSY3() || IS_TEENSY4()
+	pin = teensyPinMap(pin);	
 #endif
+
+
 	return pin;
 }
 
@@ -173,7 +182,12 @@ static void adcSetChannel(uint8_t channel) {
 void adcStartConversion(uint8_t channel) {
 #if IS_TEENSY3() || IS_TEENSY4()
 	teensy_pin = channel; // remember for second startSingleRead
-	adc->startSingleRead(teensy_pin); // channel/pin gets converted every time in startSingleRead
+	#ifdef ADC_DUAL_ADCS
+	if (adc->adc0->checkPin(teensy_pin)) teensy_adc = 0;
+	else teensy_adc=1;
+	#endif
+	adc->startSingleRead(teensy_pin,teensy_adc); // channel/pin gets converted every time in startSingleRead
+	
 #elif IS_STM32()
 	stm32_current_adc_pin = channel;
 	adc.setPins(&stm32_current_adc_pin, 1);
@@ -237,7 +251,11 @@ int mozziAnalogRead(uint8_t pin) {
 	pin = adcPinToChannelNum(pin); // allow for channel or pin numbers
 #endif
 	adc_channels_to_read.push(pin);
+#if IS_TEENSY3() || IS_TEENSY4()	
+	return analog_readings[adcPinToChannelNum(pin)];
+#else
 	return analog_readings[pin];
+#endif
 #endif
 }
 
@@ -251,7 +269,7 @@ void receiveFirstControlADC(){
 
 void startSecondControlADC() {
 #if IS_TEENSY3() || IS_TEENSY4()
-	adc->startSingleRead(teensy_pin);
+  adc->startSingleRead(teensy_pin,teensy_adc);
 #elif IS_STM32()
 	adc.setPins(&stm32_current_adc_pin, 1);
 	adc.startConversion();
@@ -263,7 +281,8 @@ void startSecondControlADC() {
 
 void receiveSecondControlADC(){
 #if IS_TEENSY3() || IS_TEENSY4()
-	analog_readings[current_channel] = adc->adc0->readSingle();
+  analog_readings[adcPinToChannelNum(current_channel)] = adc->readSingle(teensy_adc);
+
 #elif IS_STM32()
 	analog_readings[current_channel] = adc.getData();
 #elif IS_AVR()

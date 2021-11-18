@@ -1,5 +1,5 @@
-#ifndef AUDIOCONFIGTEENSY4_10BITPWM_H
-#define AUDIOCONFIGTEENSY4_10BITPWM_H
+#ifndef AUDIOCONFIGTEENSY4_H
+#define AUDIOCONFIGTEENSY4_H
 
 #warning If you get a compilation error you should probably update Teensyduino to its latest version
 
@@ -13,5 +13,5 @@
 #define AUDIO_CHANNEL_2_PIN A9
 
 
-#endif        //  #ifndef AUDIOCONFIGTEENSY4_10BITPWM_H
+#endif        //  #ifndef AUDIOCONFIGTEENSY4_H
 

@@ -240,7 +240,7 @@ inline void audioOutput(const AudioOutput f)
 
 ///////////////////// TEENSY4
 #if IS_TEENSY4()
-#include "AudioConfigTeensy4_10bitPwm.h"
+#include "AudioConfigTeensy4.h"
 inline void audioOutput(const AudioOutput f)
 {
   analogWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);

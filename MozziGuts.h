@@ -192,7 +192,7 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #if IS_TEENSY3()
 #include "AudioConfigTeensy3_12bit.h"
 #elif IS_TEENSY4()
-#include "AudioConfigTeensy4_10bitPwm.h"
+#include "AudioConfigTeensy4.h"
 #elif IS_STM32()
 #include "AudioConfigSTM32.h"
 #elif IS_ESP8266()

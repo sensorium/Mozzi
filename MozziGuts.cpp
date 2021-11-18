@@ -401,7 +401,7 @@ static void startAudioStandard() {
   adc->adc0->setConversionSpeed(
 				ADC_CONVERSION_SPEED::MED_SPEED); // could be HIGH_SPEED, noisier
   #ifdef ADC_DUAL_ADCS
-adc->adc1->setAveraging(0);
+  adc->adc1->setAveraging(0);
   adc->adc1->setConversionSpeed(
 				ADC_CONVERSION_SPEED::MED_SPEED);
   #endif

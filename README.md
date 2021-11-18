@@ -20,12 +20,13 @@ passing or external synths.
 
 ## Features  
 -    16384 Hz sample rate, or experimental 32768 Hz rate.
--    8 bit or 14 bit audio output modes.
+-    8 bit or 14 bit audio output modes on a bare Arduino, up to 16 bit using an external DAC.
 -    Variable control rate from 64 Hz upwards.
 -    Useful basic audio toolkit: oscillators, samples, lines, envelopes, scheduling, filtering.
 -    Fast ADC and other cpu-efficient code utilities to help keep audio running smoothly.
 -    Example sketches for easy modification.
--    Readymade wavetables and a script to convert your own soundfiles for Mozzi.  
+-    Readymade wavetables and a script to convert your own soundfiles for Mozzi.
+-    Usable on several platforms: Arduino, STM32, ESP, Teensy.
 -    Mozzi is designed to be easy to use, open source and extendable.
 
 ***
@@ -67,7 +68,8 @@ Teensy | 14 | -
 Teensy2 | B5 | yes  
 Teensy2++ | B5(25) | yes
 Teensy 3.0 3.1 LC 3.2 | DAC/D | yes
-Teensy 3.4, 3.5 | DAC/D | -     
+Teensy 3.4, 3.5 | DAC/D | -
+Teensy 4.0 4.1 | A8 | yes
 Gemma M0 | A0 | yes
 Adafruit Playground Express | Built in Speaker | yes    
 Sanguino | 13	| -  
@@ -145,6 +147,12 @@ It’s explained more thoroughly (for Windows) [here] (http://www.instructables.
 If you still need more speed, Arduino 1.0.5 produces slightly faster code.
 
 ***
+## Using external chips to produce the sound
+
+External chips (DAC) can also be used on any platform which does not support natively the I2S protocol  using an user defined `audioOutput` function. This can allow a greater audio quality over the native ways to output the sound (PWM for AVR Arduinos and STM32 and 12 bit DAC for Teensy 3.*).
+Examples are provided for the MCP492X DAC (12 bit on SPI) and for the (PT8211) 16 bit stereo DAC using SPI port to emulate the I2S protocol. The latter should be compatible with any DAC using I2S.
+
+***
 
 If you enjoy using Mozzi for a project, or have extended it, we would be
 pleased to hear about it and provide support wherever possible. Contribute
@@ -197,20 +205,31 @@ real DAC. Should probably run on any other board supported by [STM32duino](https
 
 ### Teensy 3.0/3.1/3.2/3.4/3.5/LC
 
-Extra libraries required for use withTeensy 3.*:
+This port is working with the latest version of Teensyduino (1.8.5)
+Extra libraries required for use with Teensy 3.*:
 These are included in the standard Teensyduino install unless you explicitly disable them
 - [Timer library](https://github.com/loglow/IntervalTimer) for Teensy 3.* by Daniel Gilbert
 - [ADC library](http://github.com/pedvide/ADC) by Pedro Villanueva
 
-Some of the differences for Teensy 3.0# which will affect users include:
+Some of the differences for Teensy 3.* which will affect users include:
 
 - On Teeensy 3.0/3.1/3.2/Audio output is on pin A14/DAC, in STANDARD or STANDARD_PLUS audio modes.
     These modes are identical on Teensy 3.0/3.1/3.2, as the output is via DAC rather than PWM.
 - Output is 12 bits in STANDARD and STANDARD_PLUS modes, up from nearly 9 bits for Atmel based boards. HIFI audio, which works by summing two output pins, is not available on Teensy 3.0/3.1.
-- #include <ADC.h> is required at the top of every Teensy 3 sketch.
-- The examples come with this commented out, for Arduino compatibility.
-- Serial baud rate for monitoring in the IDE needs to be set to 9600 to work with Teensy 3.0/3.1/3.2. This slow rate can cause audio glitches.
 - twi_nonblock code by Marije Baalman for non-blocking I2C is not compatible with Teensy 3.0/3.1/3.2.
+
+### Teensy 4.0/4.1
+port by Thomas Combriat
+
+This port is working with the latest version of Teensyduino (1.8.5)
+Extra libraries required for use with Teensy 4.*:
+These are included in the standard Teensyduino install unless you explicitly disable them
+- [Timer library](https://github.com/loglow/IntervalTimer) for Teensy 3.* by Daniel Gilbert
+- [ADC library](http://github.com/pedvide/ADC) by Pedro Villanueva
+
+Some of the differences for Teensy 4.*:
+
+- Contrary to the Teensy 3, the Teensy 4 do not have any DAC. The output is done on pin A8 (PWM) by default (editable in `AudioConfigTeensy4.h`
 
 ### ESP8266
 port by Thomas Friedrichsmeier

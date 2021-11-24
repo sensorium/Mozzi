@@ -9,8 +9,8 @@
  *
  */
 
-#ifndef teensyPinMap_
-#define teensyPinMap_
+#ifndef TEENSYPINMAP_H_
+#define TEENSYPINMAP_H
 
 
 #include "mozzi_config.h"

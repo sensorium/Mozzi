@@ -238,6 +238,19 @@ inline void audioOutput(const AudioOutput f)
 #endif
 
 
+///////////////////// TEENSY4
+#if IS_TEENSY4()
+#include "AudioConfigTeensy4.h"
+inline void audioOutput(const AudioOutput f)
+{
+  analogWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
+#if (AUDIO_CHANNELS > 1)
+  analogWrite(AUDIO_CHANNEL_2_PIN, f.r()+AUDIO_BIAS);
+#endif
+}
+#endif
+
+
 ///////////////////// STM32
 #if IS_STM32()
 #include "AudioConfigSTM32.h"

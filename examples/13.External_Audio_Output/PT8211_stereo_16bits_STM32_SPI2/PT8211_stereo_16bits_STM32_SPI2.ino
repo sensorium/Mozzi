@@ -73,7 +73,7 @@ void setup() {
 
   
   mySPI.begin();
-  mySPI.beginTransaction(SPISettings(200000000, MSBFIRST, SPI_MODE0)); //MSB first, according to the DAC spec
+  mySPI.beginTransaction(SPISettings(20000000, MSBFIRST, SPI_MODE0)); //MSB first, according to the DAC spec
 
 
   aCos1.setFreq(440.f);

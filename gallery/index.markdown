@@ -85,7 +85,7 @@ at The University of Tokyo.
 
 ***
 
-[^ [xor] synth](https://www.standuino.eu/devices/instruments/xor-synth/) by Václav Peloušek, the Standuino hand-made electronic music project.
+[[xor] synth](https://www.standuino.eu/devices/instruments/xor-synth/) by Václav Peloušek, the Standuino hand-made electronic music project.
 {% include video id="53604532" provider="vimeo" %}
 
 ***

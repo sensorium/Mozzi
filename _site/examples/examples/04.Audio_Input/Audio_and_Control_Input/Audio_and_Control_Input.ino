@@ -15,7 +15,7 @@
   Circuit:
   Audio cable centre wire on pin A0, outer shielding to Arduino Ground.
   Audio output on DAC/A14 on Teensy 3.0, 3.1, or digital pin 9 on a Uno or similar, or
-  check the README or http://sensorium.github.com/Mozzi/
+  check the README or http://sensorium.github.io/Mozzi/
   Analog sensor inputs on any other analog input pins.
   The serial printing might cause glitches, so try commenting
   them out to test if this is a problem.

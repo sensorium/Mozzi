@@ -10,7 +10,7 @@
        10K resistor from the digital pin to ground
     Audio output on digital pin 9 on a Uno or similar, or
     DAC/A14 on Teensy 3.1, or 
-    check the README or https://sensorium.github.com/Mozzi/
+    check the README or https://sensorium.github.io/Mozzi/
     
     Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users

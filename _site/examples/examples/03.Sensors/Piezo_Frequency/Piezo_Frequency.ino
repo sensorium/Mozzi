@@ -10,7 +10,7 @@
    The circuit:
      Audio output on digital pin 9 on a Uno or similar, or
     DAC/A14 on Teensy 3.1, or
-     check the README or http://sensorium.github.com/Mozzi/
+     check the README or http://sensorium.github.io/Mozzi/
 
      Piezo on analog pin 3:
        + connection of the piezo attached to the analog pin

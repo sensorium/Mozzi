@@ -231,16 +231,6 @@ inline void audioOutput(const AudioOutput f)
 #endif
 
 
-///////////////////// SAMD51
-#if IS_SAMD51()
-#include "AudioConfigSAMD51.h"
-inline void audioOutput(const AudioOutput f)
-{
-  analogWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
-}
-#endif
-
-
 ///////////////////// TEENSY3
 #if IS_TEENSY3()
 #include "AudioConfigTeensy3_12bit.h"

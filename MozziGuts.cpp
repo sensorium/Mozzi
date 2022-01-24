@@ -290,64 +290,6 @@ static void tcConfigure(uint32_t sampleRate) {
 }
 #endif
 
-#if IS_SAMD51()
-// These are ARM SAMD51 Timer 0 routines to establish a sample rate interrupt
-// (Based on the code for the ARM SAMD21 Timer 5 routines above)
-static bool tcIsSyncing() {
-  return (TC0->COUNT16.SYNCBUSY.reg > 0);
-}
-
-static void tcReset() {
-  // Disable TCx
-  TC0->COUNT16.CTRLA.bit.ENABLE = 0;
-  while (TC0->COUNT16.SYNCBUSY.bit.ENABLE)
-    ;
-  // Reset TCx
-  TC0->COUNT16.CTRLA.reg = TC_CTRLA_SWRST;
-  while (TC0->COUNT16.SYNCBUSY.bit.SWRST)
-    ;
-}
-
-/* Not currently used, and does not compile with EXTERNAL_AUDIO_OUTPUT
-static void tcEnd() {
-  // Disable TC5
-  TC5->COUNT16.CTRLA.reg &= ~TC_CTRLA_ENABLE;
-  while (tcIsSyncing())
-    ;
-  tcReset();
-  analogWrite(AUDIO_CHANNEL_1_PIN, 0);
-} */
-
-static void tcConfigure(uint32_t sampleRate) {
-  // Enable GCLK0 for TC0 (timer counter input clock)
-  GCLK->PCHCTRL[TC0_GCLK_ID].reg = (GCLK_PCHCTRL_CHEN | GCLK_PCHCTRL_GEN_GCLK0);
-   
-  tcReset();
-
-  // Set Timer counter Mode to 16 bits
-  TC0->COUNT16.CTRLA.reg |= TC_CTRLA_MODE_COUNT16;
-
-  // Set TC0 mode as match frequency
-  TC0->COUNT16.WAVE.reg |= TC_WAVE_WAVEGEN_MFRQ;
-
-  TC0->COUNT16.CTRLA.reg |= TC_CTRLA_PRESCALER_DIV1 | TC_CTRLA_ENABLE;
-  TC0->COUNT16.CC[0].reg = (uint16_t)(SystemCoreClock / sampleRate - 1);
-  while (tcIsSyncing())
-    ;
-
-  // Configure interrupt request
-  NVIC_DisableIRQ(TC0_IRQn);
-  NVIC_ClearPendingIRQ(TC0_IRQn);
-  NVIC_SetPriority(TC0_IRQn, 0);
-  NVIC_EnableIRQ(TC0_IRQn);
-
-  // Enable the TC0 interrupt request
-  TC0->COUNT16.INTENSET.bit.MC0 = 1;
-  while (tcIsSyncing())
-    ;
-}
-#endif
-
 #if (IS_ESP8266() && (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL) && (EXTERNAL_AUDIO_OUTPUT != true))
 void CACHED_FUNCTION_ATTR esp8266_serial_audio_output() {
   // Note: That unreadble mess is an optimized version of Serial1.availableForWrite()
@@ -408,10 +350,6 @@ void audioHook() // 2us on AVR excluding updateAudio()
 void TC5_Handler(void) __attribute__((weak, alias("samd21AudioOutput")));
 #endif
 
-#if IS_SAMD51()
-void TC0_Handler(void) __attribute__((weak, alias("samd51AudioOutput")));
-#endif
-
 //-----------------------------------------------------------------------------------------------------------------
 #if (BYPASS_MOZZI_OUTPUT_BUFFER != true)
 static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
@@ -454,21 +392,6 @@ void samd21AudioOutput() {
 #endif
 #endif
 
-#if IS_SAMD51()
-#ifdef __cplusplus
-extern "C" {
-#endif
-void samd51AudioOutput() {
-  defaultAudioOutput();
-  // This has to clear the interrupt flag otherwise there will
-  // be repeated triggers even if there is no match.
-  TC0->COUNT16.INTFLAG.bit.MC0 = 1;
-}
-#ifdef __cplusplus
-}
-#endif
-#endif
-
 #if !IS_AVR()
 static void startAudioStandard() {
 
@@ -494,13 +417,6 @@ static void startAudioStandard() {
 #endif
   tcConfigure(AUDIO_RATE);
 
-#elif IS_SAMD51()
-  analogWriteResolution(12);
-#if (EXTERNAL_AUDIO_OUTPUT != true)
-  analogWrite(AUDIO_CHANNEL_1_PIN, 0);
-#endif
-  tcConfigure(AUDIO_RATE);
-  
 #elif IS_ESP32() && (BYPASS_MOZZI_OUTPUT_BUFFER != true)  // for external audio output, set up a timer running a audio rate
   static intr_handle_t s_timer_handle;
   timer_config_t config = {
@@ -797,7 +713,6 @@ void stopMozzi() {
   timer1_disable();
 #endif
 #elif IS_SAMD21()
-#elif IS_SAMD51()
 #elif IS_ESP32()
 #else
 

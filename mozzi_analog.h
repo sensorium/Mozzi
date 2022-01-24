@@ -18,6 +18,8 @@
  #include "WProgram.h"
 #endif
 
+#include "hardware_defines.h"
+
 #if (USE_AUDIO_INPUT==true)
 #warning "Using AUDIO_INPUT_PIN defined in mozzi_config.h for audio input."
 #endif
@@ -181,5 +183,11 @@ void adcStartReadCycle();
 
 
 uint8_t adcPinToChannelNum(uint8_t pin);
+
+
+#if IS_TEENSY3() || IS_TEENSY4()
+void adc0_isr(void);
+#endif
+
 
 #endif /* MOZZI_ANALOG_H_ */

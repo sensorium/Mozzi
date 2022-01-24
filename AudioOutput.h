@@ -111,9 +111,7 @@ struct StereoOutput {
   /** @see MonoOutput::from16Bit(), stereo variant */
   static inline StereoOutput from16Bit(int16_t l, int16_t r) { return fromNBit(16, l, r); }
   /** @see MonoOutput::fromAlmostNBit(), stereo variant */
-  static inline StereoOutput fromAlmostNBit(uint8_t bits, int16_t l, int16_t r) { return StereoOutput(SCALE_AUDIO_NEAR(l, bits), SCALE_AUDIO_NEAR(r, bits)); }
-  /** @see MonoOutput::fromAlmostNBit(), stereo variant, 32 bit overload */
-  static inline StereoOutput fromAlmostNBit(uint8_t bits, int32_t l, int32_t r) { return StereoOutput(SCALE_AUDIO_NEAR(l, bits), SCALE_AUDIO_NEAR(r, bits)); }
+  template<typename A, typename B> static inline StereoOutput fromAlmostNBit(A bits, B l, B r) { return StereoOutput(SCALE_AUDIO_NEAR(l, bits), SCALE_AUDIO_NEAR(r, bits)); }
 private:
   AudioOutputStorage_t _l;
   AudioOutputStorage_t _r;
@@ -170,9 +168,8 @@ struct MonoOutput {
    *
    *  @example fromAlmostNBit(10, oscilA.next() + oscilB.next() + oscilC.next());
    */
-  static inline MonoOutput fromAlmostNBit(uint8_t bits, int16_t l) { return MonoOutput(SCALE_AUDIO_NEAR(l, bits)); }
-  /** 32bit overload. See above. */
-  static inline MonoOutput fromAlmostNBit(uint8_t bits, int32_t l) { return MonoOutput(SCALE_AUDIO_NEAR(l, bits)); }
+  template<typename A, typename B> static inline MonoOutput fromAlmostNBit(A bits, B l) { return MonoOutput(SCALE_AUDIO_NEAR(l, bits)); }
+
 private:
   AudioOutputStorage_t _l;
 };
@@ -237,6 +234,19 @@ inline void audioOutput(const AudioOutput f)
 inline void audioOutput(const AudioOutput f)
 {
   analogWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
+}
+#endif
+
+
+///////////////////// TEENSY4
+#if IS_TEENSY4()
+#include "AudioConfigTeensy4.h"
+inline void audioOutput(const AudioOutput f)
+{
+  analogWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
+#if (AUDIO_CHANNELS > 1)
+  analogWrite(AUDIO_CHANNEL_2_PIN, f.r()+AUDIO_BIAS);
+#endif
 }
 #endif
 

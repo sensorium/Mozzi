@@ -22,7 +22,7 @@
 
 #include "hardware_defines.h"
 
-#if IS_TEENSY3()
+#if IS_TEENSY3() || IS_TEENSY4()
 // required from http://github.com/pedvide/ADC for Teensy 3.*
 #include <ADC.h>
 #endif
@@ -191,6 +191,8 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #if (EXTERNAL_AUDIO_OUTPUT != true)
 #if IS_TEENSY3()
 #include "AudioConfigTeensy3_12bit.h"
+#elif IS_TEENSY4()
+#include "AudioConfigTeensy4.h"
 #elif IS_STM32()
 #include "AudioConfigSTM32.h"
 #elif IS_ESP8266()

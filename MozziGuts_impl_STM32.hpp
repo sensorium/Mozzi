@@ -67,35 +67,35 @@ static void startAudio() {
 
 #if (EXTERNAL_AUDIO_OUTPUT != true)
   pinMode(AUDIO_CHANNEL_1_PIN, PWM);
-#if (AUDIO_MODE == HIFI)
+#  if (AUDIO_MODE == HIFI)
   pinMode(AUDIO_CHANNEL_1_PIN_HIGH, PWM);
-#elif (AUDIO_CHANNELS > 1)
+#  elif (AUDIO_CHANNELS > 1)
   pinMode(AUDIO_CHANNEL_2_PIN, PWM);
-#endif
+#  endif
 
-#define MAX_CARRIER_FREQ (F_CPU / (1 << AUDIO_BITS_PER_CHANNEL))
-#if MAX_CARRIER_FREQ < AUDIO_RATE
-#error Configured audio resolution is definitely too high at the configured audio rate (and the given CPU speed)
-#elif MAX_CARRIER_FREQ < (AUDIO_RATE * 3)
-#warning Configured audio resolution may be higher than optimal at the configured audio rate (and the given CPU speed)
-#endif
+#  define MAX_CARRIER_FREQ (F_CPU / (1 << AUDIO_BITS_PER_CHANNEL))
+#  if MAX_CARRIER_FREQ < AUDIO_RATE
+#    error Configured audio resolution is definitely too high at the configured audio rate (and the given CPU speed)
+#  elif MAX_CARRIER_FREQ < (AUDIO_RATE * 3)
+#    warning Configured audio resolution may be higher than optimal at the configured audio rate (and the given CPU speed)
+#  endif
 
-#if MAX_CARRIER_FREQ < (AUDIO_RATE * 5)
+#  if MAX_CARRIER_FREQ < (AUDIO_RATE * 5)
   // Generate as fast a carrier as possible
   audio_pwm_timer.setPrescaleFactor(1);
-#else
+#  else
   // No point in generating arbitrarily high carrier frequencies. In fact, if
   // there _is_ any headroom, give the PWM pin more time to swing from HIGH to
   // LOW and BACK, cleanly
   audio_pwm_timer.setPrescaleFactor((int)MAX_CARRIER_FREQ / (AUDIO_RATE * 5));
-#endif
+#  endif
   audio_pwm_timer.setOverflow(
       1 << AUDIO_BITS_PER_CHANNEL); // Allocate enough room to write all
                                     // intended bits
+#endif
 }
 
 void stopMozzi() {
   audio_update_timer.pause();
 }
 
-unsigned long mozziMicros() { return audioTicks() * MICROS_PER_AUDIO_TICK; }

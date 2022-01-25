@@ -9,6 +9,7 @@
  * Attribution-NonCommercial-ShareAlike 4.0 International License.
  *
  */
+#include <Arduino.h>
 
 #include "CircularBuffer.h"
 #include "MozziGuts.h"
@@ -65,6 +66,7 @@ inline void advanceADCStep() {
   }
   adc_count++;
 }
+#endif
 ////// END AUDIO INPUT code ////////
 
 ////// BEGIN Output buffering /////
@@ -138,6 +140,7 @@ unsigned long audioTicks() {
 #if (BYPASS_MOZZI_OUTPUT_BUFFER != true)
   return output_buffer.count();
 #elif defined(AUDIOTICK_ADJUSTMENT)
+  // TODO: this won't work, yet
   return samples_written_to_buffer - (AUDIOTICK_ADJUSTMENT);
 #else
   return samples_written_to_buffer;
@@ -163,4 +166,10 @@ void startMozzi(int control_rate_hz) {
 #  include "MozziGuts_impl_AVR.hpp"
 #elif IS_STM32()
 #  include "MozziGuts_impl_STM32.hpp"
+#elif IS_ESP32()
+#  include "MozziGuts_impl_ESP32.hpp"
+#elif IS_ESP8266()
+#  include "MozziGuts_impl_ESP8266.hpp"
+#elif (IS_TEENSY3() || IS_TEENSY4())
+#  include "MozziGuts_impl_TEENSY.hpp"
 #endif

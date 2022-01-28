@@ -33,7 +33,7 @@ void CACHED_FUNCTION_ATTR esp8266_serial_audio_output() {
 
 
 static void startAudio() {
-#if (EXTERNAL_AUDIO_OUTPUT == true)  && (BYPASS_MOZZI_OUTPUT_BUFFER != true) // for external audio output, set up a timer running a audio rate
+#if (EXTERNAL_AUDIO_OUTPUT == true) && (BYPASS_MOZZI_OUTPUT_BUFFER != true) // for external audio output, set up a timer running a audio rate
   timer1_isr_init();
   timer1_attachInterrupt(defaultAudioOutput);
   timer1_enable(TIM_DIV1, TIM_EDGE, TIM_LOOP);

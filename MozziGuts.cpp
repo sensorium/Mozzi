@@ -33,7 +33,7 @@ uint8_t adc_count = 0;
 
 int getAudioInput() { return audio_input; }
 
-// forward-declarations; implemenation is platform specific
+// forward-declarations; implementation is platform specific
 static void startFirstAudioADC();
 /*static void receiveFirstAudioADC();  // nothing */
 static void startSecondAudioADC();
@@ -67,6 +67,7 @@ inline void advanceADCStep() {
   adc_count++;
 }
 #endif
+
 ////// END AUDIO INPUT code ////////
 
 ////// BEGIN Output buffering /////
@@ -172,4 +173,8 @@ void startMozzi(int control_rate_hz) {
 #  include "MozziGuts_impl_ESP8266.hpp"
 #elif (IS_TEENSY3() || IS_TEENSY4())
 #  include "MozziGuts_impl_TEENSY.hpp"
+#elif (IS_SAMD21())
+#  include "MozziGuts_impl_SAMD.hpp"
+#else
+#  error "Platform not (yet) supported. Check MozziGuts_impl_template.hpp and existing implementations for a blueprint for adding your favorite MCU."
 #endif

@@ -79,11 +79,20 @@ http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=789581
 static volatile int analog_readings[NUM_ANALOG_INPUTS];
 static Stack <volatile int8_t,NUM_ANALOG_INPUTS> adc_channels_to_read;
 volatile static int8_t current_channel = -1; // volatile because accessed in control and adc ISRs
-uint8_t adc_count = 0;
+static uint8_t adc_count = 0;
 
-/* Called each time in updateControlWithAutoADC(), after updateControl() */
-void adcStartReadCycle(){
-	if (current_channel == -1) // last read of adc_channels_to_read stack was empty, ie. all channels from last time have been read
+/* gets the next channel to read off the stack, and if there is a channel there, it changes to that channel and starts a conversion.
+*/
+void adcReadSelectedChannels() {
+	// ugly syntax below saves a few bytes/instructions (as current_channel is declared volatile)
+	if((current_channel = adc_channels_to_read.pop()) >= 0) adcStartConversion(current_channel);
+}
+
+/* Called each time in updateControlWithAutoADC(), after updateControl()
+   Forbidding inline, here, saves a wholesome 16 bytes flash on AVR (without USE_AUDIO_INPUT). No idea, why.
+*/
+__attribute__((noinline)) void adcStartReadCycle() {
+	if (current_channel < 0) // last read of adc_channels_to_read stack was empty, ie. all channels from last time have been read
 	{
 #if (USE_AUDIO_INPUT == true)
 		adc_channels_to_read.push(AUDIO_INPUT_PIN); // for audio
@@ -92,13 +101,6 @@ void adcStartReadCycle(){
 		adc_count = 0;
 #endif
 	}
-}
-
-/* gets the next channel to read off the stack, and if there is a channel there, it changes to that channel and starts a conversion.
-*/
-void adcReadSelectedChannels() {
-	current_channel = adc_channels_to_read.pop();
-	if(current_channel != -1) adcStartConversion(current_channel);
 }
 
 int mozziAnalogRead(uint8_t pin) {

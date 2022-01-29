@@ -185,9 +185,4 @@ void adcStartReadCycle();
 uint8_t adcPinToChannelNum(uint8_t pin);
 
 
-#if IS_TEENSY3() || IS_TEENSY4()
-void adc0_isr(void);
-#endif
-
-
 #endif /* MOZZI_ANALOG_H_ */

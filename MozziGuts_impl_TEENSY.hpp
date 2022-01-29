@@ -17,42 +17,58 @@
 // required from http://github.com/pedvide/ADC for Teensy 3.*
 #include "IntervalTimer.h"
 #include <ADC.h>
+#include "teensyPinMap.h"
 
 #if (IS_TEENSY3() && F_CPU != 48000000)
 #warning                                                                       \
     "Mozzi has been tested with a cpu clock speed of 16MHz on Arduino and 48MHz on Teensy 3!  Results may vary with other speeds."
 #endif
 
+////// BEGIN analog input code ////////
+#define MOZZI_FAST_ANALOG_IMPLEMENTED
 ADC *adc; // adc object
-uint8_t teensy_pin;
+uint8_t teensy_pin;   // TODO: this is actually a "channel" according to our terminology, but "channel" and "pin" are equal on this platform
 int8_t teensy_adc=0;
-
-
-////// BEGIN AUDIO INPUT code ////////
-#if (USE_AUDIO_INPUT == true)
-static void startFirstAudioADC() {
-  adc->adc0->startSingleRead(
-      AUDIO_INPUT_PIN); // ADC lib converts pin/channel in startSingleRead
+#define getADCReading() adc->readSingle(teensy_adc)
+#define channelNumToIndex(channel) teensyPinMap(channel)
+uint8_t adcPinToChannelNum(uint8_t pin) {
+  return pin;
 }
 
-static void startSecondAudioADC() {
-  adc->adc0->startSingleRead(AUDIO_INPUT_PIN);
+void setupFastAnalogRead(int8_t speed) {
+// TODO: Impelement me
 }
 
-static void receiveSecondAudioADC() {
-  if (!input_buffer.isFull())
-    input_buffer.write(adc->adc0->readSingle());
+void setupMozziADC(int8_t speed) {
+  adc = new ADC();
+  adc->adc0->enableInterrupts(adc0_isr);
+#ifdef ADC_DUAL_ADCS
+  adc->adc1->enableInterrupts(adc0_isr);
+#endif
+}
+
+void adcStartConversion(uint8_t channel) {
+  teensy_pin = channel; // remember for startSecondADCReadOnCurrentChannel()
+#ifdef ADC_DUAL_ADCS
+  if (adc->adc0->checkPin(teensy_pin)) teensy_adc = 0;
+  else teensy_adc=1;
+#endif
+  adc->startSingleRead(teensy_pin,teensy_adc);
+}
+
+static void startSecondADCReadOnCurrentChannel() {
+  adc->startSingleRead(teensy_pin,teensy_adc);
 }
 
 void adc0_isr(void)
 {
   advanceADCStep();
 }
-#endif
-////// END AUDIO INPUT code ////////
+////// END  analog input code ////////
 
 
 
+//// BEGIN AUDIO OUTPUT code ///////
 IntervalTimer timer1;
 
 static void startAudio() {
@@ -83,3 +99,4 @@ void stopMozzi() {
   timer1.end();
   interrupts();
 }
+//// END AUDIO OUTPUT code ///////

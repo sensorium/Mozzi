@@ -18,6 +18,10 @@
 //#include "mozzi_utils.h"
 #include "AudioOutput.h"
 
+// forward-declarations for use in hardware-specific implementations:
+static void advanceADCStep();
+static uint8_t adc_count = 0;
+
 // forward-declarations; to be supplied by plaform specific implementations
 static void startSecondADCReadOnCurrentChannel();
 
@@ -48,8 +52,6 @@ static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
 #endif
 ////// END Output buffering ///////
 
-// forward-declarations for use in hardware-specific implementations:
-static void advanceADCStep();
 
 // Include the appropriate implementation
 #if IS_AVR()
@@ -79,7 +81,6 @@ http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=789581
 static volatile int analog_readings[NUM_ANALOG_INPUTS];
 static Stack <volatile int8_t,NUM_ANALOG_INPUTS> adc_channels_to_read;
 volatile static int8_t current_channel = -1; // volatile because accessed in control and adc ISRs
-static uint8_t adc_count = 0;
 
 /* gets the next channel to read off the stack, and if there is a channel there, it changes to that channel and starts a conversion.
 */

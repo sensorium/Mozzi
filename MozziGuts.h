@@ -382,12 +382,4 @@ is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when 
 */
 unsigned long mozziMicros();
 
-
-
-
-// internal use
-#if (AUDIO_MODE == HIFI)
-static void setupTimer2();
-#endif
-
 #endif /* MOZZIGUTS_H_ */

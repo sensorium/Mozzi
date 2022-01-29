@@ -46,7 +46,6 @@ void setupFastAnalogRead(int8_t speed) {
 }
 
 void setupMozziADC(int8_t speed) {
-  setupFastAnalogRead(speed);
   adc.attachInterrupt(stm32_adc_eoc_handler, ADC_EOC);
 }
 
@@ -60,6 +59,19 @@ HardwareTimer audio_update_timer(2);
 #else
 HardwareTimer audio_update_timer(AUDIO_UPDATE_TIMER);
 HardwareTimer audio_pwm_timer(AUDIO_PWM_TIMER);
+
+#include "AudioConfigSTM32.h"
+inline void audioOutput(const AudioOutput f) {
+#  if (AUDIO_MODE == HIFI)
+  pwmWrite(AUDIO_CHANNEL_1_PIN, (f.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
+  pwmWrite(AUDIO_CHANNEL_1_PIN_HIGH, (f.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
+#  else
+  pwmWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
+#    if (AUDIO_CHANNELS > 1)
+  pwmWrite(AUDIO_CHANNEL_2_PIN, f.r()+AUDIO_BIAS);
+#    endif
+#endif
+}
 #endif
 
 static void startAudio() {

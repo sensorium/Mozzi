@@ -229,6 +229,7 @@ unsigned long mozziMicros() { return audioTicks() * MICROS_PER_AUDIO_TICK; }
 void startMozzi(int control_rate_hz) {
   setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST
                    // in setup() if desired (not for Teensy 3.* )
+  setupFastAnalogRead();
   // delay(200); // so AutoRange doesn't read 0 to start with
   update_control_timeout = AUDIO_RATE / control_rate_hz;
   startAudio();

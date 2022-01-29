@@ -107,6 +107,13 @@ void samd21AudioOutput() {
 }
 #endif
 
+#if (EXTERNAL_AUDIO_OUTPUT != true)   // otherwise, the last stage - audioOutput() - will be provided by the user
+#include "AudioConfigSAMD21.h"
+inline void audioOutput(const AudioOutput f) {
+  analogWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
+}
+#endif
+
 static void startAudio() {
 #ifdef ARDUINO_SAMD_CIRCUITPLAYGROUND_EXPRESS
   {

@@ -23,7 +23,7 @@
  *  How to implement MozziGuts_impl_YOURPLATFORM.hpp:
  *  - Follow the NOTEs provided in this file
  *  - Read the doc at the top of AudioConfig.h for a better understanding the basic audio output framework
- *  - Take a peek at existing implementations for other hardware (e.g. STM32 is rather complete while also simple at the time of this writing)
+ *  - Take a peek at existing implementations for other hardware (e.g. TEENSY3/4 is rather complete while also simple at the time of this writing)
  *  - Wait for more documentation to arrive
  *  - Ask when in doubt
  *  - Don't forget to provide a PR when done (it does not have to be perfect)
@@ -74,17 +74,16 @@ void startSecondADCReadOnCurrentChannel() {
 #warning Fast analog read not implemented on this platform
 }
 
-/** NOTE: Code needed set up faster than usual analog reads, e.g. specifying the number of CPU cycles that the ADC waits for the result to stabilize.
+/** NOTE: Code needed to set up faster than usual analog reads, e.g. specifying the number of CPU cycles that the ADC waits for the result to stabilize.
  *  This particular function is not super important, so may be ok to leave empty, at least, if the ADC is fast enough by default. */
 void setupFastAnalogRead(int8_t speed) {
 #warning Fast analog read not implemented on this platform
 }
 
 /** NOTE: Code needed to initialize the ADC for asynchronous reads. Typically involves setting up an interrupt handler for when conversion is done, and
- *  possibly calibration. Also, setupFastAnalogRead(speed) should be called. */
+ *  possibly calibration. */
 void setupMozziADC(int8_t speed) {
 #warning Fast analog read not implemented on this platform
-  setupFastAnalogRead(speed);
 }
 
 /* NOTE: Most platforms call a specific function/ISR when conversion is complete. Provide this function, here.
@@ -96,6 +95,16 @@ void stm32_adc_eoc_handler() {
 ////// END analog input code ////////
 
 ////// BEGIN audio output code //////
+#if (EXTERNAL_AUDIO_OUTPUT != true) // otherwise, the last stage - audioOutput() - will be provided by the user
+/** NOTE: This is the function that actually write a sample to the output. In case of EXTERNAL_AUDIO_OUTPUT == true, it is provided by the library user, instead. */
+inline void audioOutput(const AudioOutput f) {
+  // e.g. analogWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
+#if (AUDIO_CHANNELS > 1)
+  // e.g. analogWrite(AUDIO_CHANNEL_2_PIN, f.r()+AUDIO_BIAS);
+#endif
+}
+#endif
+
 static void startAudio() {
   // Add here code to get audio output going. This usually involves:
   // 1) setting up some DAC mechanism (e.g. setting up a PWM pin with appropriate resolution

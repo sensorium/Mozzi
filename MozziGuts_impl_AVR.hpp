@@ -97,7 +97,6 @@ void setupFastAnalogRead(int8_t speed) {
 
 void setupMozziADC(int8_t speed) {
 	ADCSRA |= (1 << ADIE); // adc Enable Interrupt
-	setupFastAnalogRead(speed);
 	adcDisconnectAllDigitalIns();
 }
 
@@ -165,9 +164,6 @@ static uint8_t mozzi_TCCR4A, mozzi_TCCR4B, mozzi_TCCR4C, mozzi_TCCR4D,
 #endif
 #endif
 
-
-
-
 #if (EXTERNAL_AUDIO_OUTPUT == true)
 static void startAudio() {
   backupPreMozziTimer1();
@@ -181,27 +177,38 @@ static void startAudio() {
 ISR(TIMER1_OVF_vect, ISR_BLOCK) {
   defaultAudioOutput();
 }
-
 #elif (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS)
+#  if (AUDIO_MODE == STANDARD_PLUS)
+#    include "AudioConfigStandardPlus.h"
+#  else
+#    include "AudioConfigStandard9bitPwm.h"
+#  endif
+inline void audioOutput(const AudioOutput f)
+{
+  AUDIO_CHANNEL_1_OUTPUT_REGISTER = f.l()+AUDIO_BIAS;
+#    if (AUDIO_CHANNELS > 1)
+  AUDIO_CHANNEL_2_OUTPUT_REGISTER = f.r()+AUDIO_BIAS;
+#    endif
+}
 
 static void startAudio() {
   backupPreMozziTimer1();
 
   pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT); // set pin to output for audio
   //	pinMode(AUDIO_CHANNEL_2_PIN, OUTPUT);	// set pin to output for audio
-#if (AUDIO_MODE == STANDARD)
+#  if (AUDIO_MODE == STANDARD)
   Timer1.initializeCPUCycles(
       F_CPU / AUDIO_RATE,
       PHASE_FREQ_CORRECT); // set period, phase and frequency correct
-#else // (AUDIO_MODE == STANDARD_PLUS)
+#  else // (AUDIO_MODE == STANDARD_PLUS)
   Timer1.initializeCPUCycles(F_CPU / PWM_RATE,
                              FAST); // fast mode enables higher PWM rate
-#endif
+#  endif
   Timer1.pwm(AUDIO_CHANNEL_1_PIN,
              AUDIO_BIAS); // pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
-#if (AUDIO_CHANNELS > 1)
+#  if (AUDIO_CHANNELS > 1)
   Timer1.pwm(AUDIO_CHANNEL_2_PIN, AUDIO_BIAS); // sets pin to output
-#endif
+#  endif
   TIMSK1 = _BV(TOIE1); // Overflow Interrupt Enable (when not using
                        // Timer1.attachInterrupt())
 }
@@ -210,16 +217,46 @@ static void startAudio() {
 Arduino output register, running at AUDIO_RATE. */
 
 ISR(TIMER1_OVF_vect, ISR_BLOCK) {
-#if (AUDIO_MODE == STANDARD_PLUS) && (AUDIO_RATE == 16384) // only update every second ISR, if lower audio rate
+#  if (AUDIO_MODE == STANDARD_PLUS) && (AUDIO_RATE == 16384) // only update every second ISR, if lower audio rate
   static boolean alternate;
   alternate = !alternate;
   if (alternate) return;
-#endif
+#  endif
 
   defaultAudioOutput();
 }
 
 #elif (AUDIO_MODE == HIFI)
+#  if (EXTERNAL_AUDIO_OUTPUT != true)
+#    include "AudioConfigHiSpeed14bitPwm.h"
+inline void audioOutput(const AudioOutput f) {
+  // read about dual pwm at
+  // http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
+  // sketches at http://wiki.openmusiclabs.com/wiki/PWMDAC,
+  // http://wiki.openmusiclabs.com/wiki/MiniArDSP
+  // if (!output_buffer.isEmpty()){
+  //unsigned int out = output_buffer.read();
+  // 14 bit, 7 bits on each pin
+  // AUDIO_CHANNEL_1_highByte_REGISTER = out >> 7; // B00111111 10000000 becomes
+  // B1111111
+  // try to avoid looping over 7 shifts - need to check timing or disassemble to
+  // see what really happens unsigned int out_high = out<<1; // B00111111
+  // 10000000 becomes B01111111 00000000
+  // AUDIO_CHANNEL_1_highByte_REGISTER = out_high >> 8; // B01111111 00000000
+  // produces B01111111 AUDIO_CHANNEL_1_lowByte_REGISTER = out & 127;
+  /* Atmega manual, p123
+  The high byte (OCR1xH) has to be written first.
+  When the high byte I/O location is written by the CPU,
+  the TEMP Register will be updated by the value written.
+  Then when the low byte (OCR1xL) is written to the lower eight bits,
+  the high byte will be copied into the upper 8-bits of
+  either the OCR1x buffer or OCR1x Compare Register in
+  the same system clock cycle.
+  */
+  AUDIO_CHANNEL_1_highByte_REGISTER = (f.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_REGISTER;
+  AUDIO_CHANNEL_1_lowByte_REGISTER = (f.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_REGISTER) - 1);
+}
+#  endif
 
 static void startAudio() {
   backupPreMozziTimer1();

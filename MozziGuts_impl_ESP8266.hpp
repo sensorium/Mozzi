@@ -42,15 +42,45 @@ void setupMozziADC(int8_t speed) {
 #include <i2s.h>
 uint16_t output_buffer_size = 0;
 
-#if ((ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL) && (EXTERNAL_AUDIO_OUTPUT != true))
+#if (EXTERNAL_AUDIO_OUTPUT != true) // otherwise, the last stage - audioOutput() - will be provided by the user
+#  include "AudioConfigESP.h"
+
+#  if (ESP_AUDIO_OUT_MODE == PDM_VIA_I2S)
+#    include <i2s.h>
+inline bool canBufferAudioOutput() {
+  return (i2s_available() >= PDM_RESOLUTION);
+}
+inline void audioOutput(const AudioOutput f) {
+  for (uint8_t words = 0; words < PDM_RESOLUTION; ++words) {
+    i2s_write_sample(pdmCode32(f.l()));
+  }
+}
+#  elif (ESP_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
+#    include <i2s.h>
+inline bool canBufferAudioOutput() {
+  return (i2s_available() >= PDM_RESOLUTION);
+}
+inline void audioOutput(const AudioOutput f) {
+  i2s_write_lr(f.l(), f.r());  // Note: i2s_write expects zero-centered output
+}
+#  else  // (ESP_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
+// NOTE: This intermediate step is needed because the output timer is running at a rate higher than AUDIO_RATE, and we need to rely on the (tiny)
+//       serial buffer itself to achieve appropriate rate control
 void CACHED_FUNCTION_ATTR esp8266_serial_audio_output() {
   // Note: That unreadble mess is an optimized version of Serial1.availableForWrite()
   while ((UART_TX_FIFO_SIZE - ((U1S >> USTXC) & 0xff)) > (PDM_RESOLUTION * 4)) {
-    audioOutput(output_buffer.read());
+    defaultAudioOutput();
   }
 }
-#endif
 
+inline void audioOutput(const AudioOutput f) {
+  // optimized version of: Serial1.write(...);
+  for (uint8_t i = 0; i < PDM_RESOLUTION*4; ++i) {
+    U1F = pdmCode8(f);
+  }
+}
+#  endif
+#endif
 
 static void startAudio() {
 #if (EXTERNAL_AUDIO_OUTPUT == true) && (BYPASS_MOZZI_OUTPUT_BUFFER != true) // for external audio output, set up a timer running a audio rate

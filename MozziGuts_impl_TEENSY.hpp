@@ -36,7 +36,12 @@ uint8_t adcPinToChannelNum(uint8_t pin) {
 }
 
 void setupFastAnalogRead(int8_t speed) {
-// TODO: Impelement me
+  adc->adc0->setAveraging(0);
+  adc->adc0->setConversionSpeed(ADC_CONVERSION_SPEED::MED_SPEED); // could be HIGH_SPEED, noisier
+#ifdef ADC_DUAL_ADCS
+  adc->adc1->setAveraging(0);
+  adc->adc1->setConversionSpeed(ADC_CONVERSION_SPEED::MED_SPEED);
+#endif
 }
 
 void setupMozziADC(int8_t speed) {
@@ -71,16 +76,21 @@ void adc0_isr(void)
 //// BEGIN AUDIO OUTPUT code ///////
 IntervalTimer timer1;
 
-static void startAudio() {
-  adc->adc0->setAveraging(0);
-  adc->adc0->setConversionSpeed(
-				ADC_CONVERSION_SPEED::MED_SPEED); // could be HIGH_SPEED, noisier
-#ifdef ADC_DUAL_ADCS
-  adc->adc1->setAveraging(0);
-  adc->adc1->setConversionSpeed(
-				ADC_CONVERSION_SPEED::MED_SPEED);
+#if (EXTERNAL_AUDIO_OUTPUT != true) // otherwise, the last stage - audioOutput() - will be provided by the user
+#if IS_TEENSY3()
+#include "AudioConfigTeensy3_12bit.h"
+#elif IS_TEENSY4()
+#include "AudioConfigTeensy4.h"
 #endif
-  
+inline void audioOutput(const AudioOutput f) {
+  analogWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
+#if (AUDIO_CHANNELS > 1)
+  analogWrite(AUDIO_CHANNEL_2_PIN, f.r()+AUDIO_BIAS);
+#endif
+}
+#endif
+
+static void startAudio() {
 #if IS_TEENSY3()
   analogWriteResolution(12);
 #elif IS_TEENSY4()

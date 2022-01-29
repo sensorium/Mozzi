@@ -35,7 +35,7 @@ static void startSecondADCReadOnCurrentChannel() {
 }
 
 void stm32_adc_eoc_handler() {
-  advancdeADCStep();
+  advanceADCStep();
 }
 
 void setupFastAnalogRead(int8_t speed) {

@@ -258,6 +258,7 @@ inline void audioOutput(const AudioOutput f) {
 }
 #  endif
 
+static void setupTimer2();
 static void startAudio() {
   backupPreMozziTimer1();
   // pwm on timer 1

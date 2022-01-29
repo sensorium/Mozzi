@@ -11,37 +11,50 @@
  */
 
 #include "HardwareTimer.h"
+
+////// BEGIN analog input code ////////
+#define MOZZI_FAST_ANALOG_IMPLEMENTED
 //#include <STM32ADC.h>  // Disabled, here. See AudioConfigSTM32.h
 STM32ADC adc(ADC1);
-uint8_t stm32_current_adc_pin;
+uint8_t stm32_current_adc_pin;   // TODO: this is actually a "channel" according to our terminology, but "channel" and "pin" are equal on this platform
+#define getADCReading() adc.getData()
+#define channelNumToIndex(channel) channel
+uint8_t adcPinToChannelNum(uint8_t pin) {
+  return pin;
+}
 
-////// BEGIN AUDIO INPUT code ////////
-#if (USE_AUDIO_INPUT == true)
-static void startFirstAudioADC() {
-  uint8_t dummy = AUDIO_INPUT_PIN;
-  adc.setPins(&dummy, 1);
+void adcStartConversion(uint8_t channel) {
+  stm32_current_adc_pin = channel;
+  adc.setPins(&stm32_current_adc_pin, 1);
   adc.startConversion();
 }
 
-static void startSecondAudioADC() {
-  uint8_t dummy = AUDIO_INPUT_PIN;
-  adc.setPins(&dummy, 1);
+static void startSecondADCReadOnCurrentChannel() {
+  adc.setPins(&stm32_current_adc_pin, 1);
   adc.startConversion();
 }
 
-static void receiveSecondAudioADC() {
-  if (!input_buffer.isFull())
-    input_buffer.write(adc.getData());
-}
-
-void stm32_adc_eoc_handler()
-{
+void stm32_adc_eoc_handler() {
   advancdeADCStep();
 }
-#endif
-////// END AUDIO INPUT code ////////
+
+void setupFastAnalogRead(int8_t speed) {
+  // NOTE: These picks are pretty arbitrary. Further available options are 7_5, 28_5, 55_5, 71_5 and 239_5 (i.e. 7.5 ADC cylces, etc.)
+  if (speed == FASTEST_ADC) adc.setSampleRate(ADC_SMPR_1_5);
+  else if (speed == FASTER_ADC) adc.setSampleRate(ADC_SMPR_13_5);
+  else (adc.setSampleRate(ADC_SMPR_41_5));
+}
+
+void setupMozziADC(int8_t speed) {
+  setupFastAnalogRead(speed);
+  adc.attachInterrupt(stm32_adc_eoc_handler, ADC_EOC);
+}
+
+////// END analog input code ////////
 
 
+
+//// BEGIN AUDIO OUTPUT code ///////
 #if (EXTERNAL_AUDIO_OUTPUT == true)
 HardwareTimer audio_update_timer(2);
 #else
@@ -99,3 +112,4 @@ void stopMozzi() {
   audio_update_timer.pause();
 }
 
+//// END AUDIO OUTPUT code ///////

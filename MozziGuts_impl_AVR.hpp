@@ -18,6 +18,94 @@
     "Mozzi has been tested with a cpu clock speed of 16MHz on Arduino!  Results may vary with other speeds."
 #endif
 
+////// BEGIN analog input code ////////
+#define MOZZI_FAST_ANALOG_IMPLEMENTED
+extern uint8_t analog_reference;
+
+#define getADCReading() ADC  /* officially (ADCL | (ADCH << 8)) but the compiler works it out */
+#define channelNumToIndex(channel) channel
+uint8_t adcPinToChannelNum(uint8_t pin) {
+#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
+	if (pin >= 54) pin -= 54; // allow for channel or pin numbers
+#elif defined(__AVR_ATmega32U4__)
+	if (pin >= 18) pin -= 18; // allow for channel or pin numbers
+	pin = analogPinToChannel(pin); // moved from extra #if which was below in Arduino code, and redefined in mozzi_analog.h, with notes
+#elif defined(__AVR_ATmega1284__)
+	if (pin >= 24) pin -= 24; // allow for channel or pin numbers
+#else
+	if (pin >= 14) pin -= 14; // allow for channel or pin numbers
+#endif
+	return pin;
+}
+
+void adcStartConversion(uint8_t channel) {
+#if defined(__AVR_ATmega32U4__)
+	ADCSRB = (ADCSRB & ~(1 << MUX5)) | (((channel >> 3) & 0x01) << MUX5);
+#elif defined(ADCSRB) && defined(MUX5)
+	// the MUX5 bit of ADCSRB selects whether we're reading from channels
+	// 0 to 7 (MUX5 low) or 8 to 15 (MUX5 high).
+	ADCSRB = (ADCSRB & ~(1 << MUX5)) | (((channel >> 3) & 0x01) << MUX5);
+#endif
+
+// from wiring_analog.c:
+// set the analog reference (high two bits of ADMUX) and select the
+// channel (low 4 bits).  this also sets ADLAR (left-adjust result)
+// to 0 (the default).
+#if defined(ADMUX)
+#  if defined(TEENSYDUINO) // analog_reference is not part TEENSY 2.0 codebase
+	ADMUX = (1 << REFS0) | (channel & 0x07); // TB2017 this overwrote analog_reference
+#  else
+	ADMUX = (analog_reference << 6) | (channel & 0x07);
+#  endif
+#endif
+#if defined(ADCSRA) && defined(ADCL)
+	// start the conversion
+	ADCSRA |= (1 << ADSC);
+#endif
+}
+
+static void startSecondADCReadOnCurrentChannel() {
+  ADCSRA |= (1 << ADSC); // start a second conversion on the current channel
+}
+
+/*
+void adcEnableInterrupt(){
+	ADCSRA |= (1 << ADIE);
+}
+*/
+
+ISR(ADC_vect, ISR_BLOCK)
+{
+  advanceADCStep();
+}
+
+void setupFastAnalogRead(int8_t speed) {
+	if (speed == FAST_ADC){ // divide by 16
+		ADCSRA |= (1 << ADPS2);
+		ADCSRA &= ~(1 << ADPS1);
+		ADCSRA &= ~(1 << ADPS0);
+	} else if(speed == FASTER_ADC){ // divide by 8
+		ADCSRA &= ~(1 << ADPS2);
+		ADCSRA |= (1 << ADPS1);
+		ADCSRA |= (1 << ADPS0);
+	} else if(speed == FASTEST_ADC){ // divide by 4
+		ADCSRA &= ~(1 << ADPS2);
+		ADCSRA |= (1 << ADPS1);
+		ADCSRA &= ~(1 << ADPS0);
+	}
+}
+
+void setupMozziADC(int8_t speed) {
+	ADCSRA |= (1 << ADIE); // adc Enable Interrupt
+	setupFastAnalogRead(speed);
+	adcDisconnectAllDigitalIns();
+}
+
+////// END analog input code ////////
+
+
+
+//// BEGIN AUDIO OUTPUT code ///////
 /*
 ATmega328 technical manual, Section 12.7.4:
 The dual-slope operation [of phase correct pwm] has lower maximum operation
@@ -66,8 +154,6 @@ static void backupPreMozziTimer1() {
   pre_mozzi_TIMSK1 = TIMSK1;
 }
 
-//-----------------------------------------------------------------------------------------------------------------
-
 #if (AUDIO_MODE == HIFI)
 #if defined(TCCR2A)
 static uint8_t mozzi_TCCR2A, mozzi_TCCR2B, mozzi_OCR2A, mozzi_TIMSK2;
@@ -80,32 +166,7 @@ static uint8_t mozzi_TCCR4A, mozzi_TCCR4B, mozzi_TCCR4C, mozzi_TCCR4D,
 #endif
 
 
-//-----------------------------------------------------------------------------------------------------------------
 
-////// BEGIN AUDIO INPUT code ////////
-#if (USE_AUDIO_INPUT == true)
-
-static void startFirstAudioADC() {
-  adcStartConversion(adcPinToChannelNum(AUDIO_INPUT_PIN));
-}
-
-static void startSecondAudioADC() {
-  ADCSRA |= (1 << ADSC); // start a second conversion on the current channel
-}
-
-static void receiveSecondAudioADC() {
-    input_buffer.write(ADC);
-}
-
-ISR(ADC_vect, ISR_BLOCK)
-{
-  advanceADCStep();
-}
-#endif
-////// END AUDIO INPUT code ////////
-
-
-//// BEGIN AUDIO OUTPUT code ///////
 
 #if (EXTERNAL_AUDIO_OUTPUT == true)
 static void startAudio() {
@@ -275,3 +336,4 @@ void stopMozzi() {
 // {
 // 	Timer1.isrCallback();
 // }
+//// END AUDIO OUTPUT code ///////

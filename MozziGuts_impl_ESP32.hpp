@@ -14,10 +14,30 @@
 #  error "Wrong implementation included for this platform"
 #endif
 
-#if (USE_AUDIO_INPUT == true)
-#  warning USE_AUDIO_INPUT is not (yet) implemented on this platform
-#endif
+////// BEGIN analog input code ////////
+//#define MOZZI_FAST_ANALOG_IMPLEMENTED // not yet
+#define getADCReading() 0
+#define channelNumToIndex(channel) channel
+uint8_t adcPinToChannelNum(uint8_t pin) {
+  return pin;
+}
+void adcStartConversion(uint8_t channel) {
+#warning Fast analog read not implemented on this platform
+}
+void startSecondADCReadOnCurrentChannel() {
+#warning Fast analog read not implemented on this platform
+}
+void setupFastAnalogRead(int8_t speed) {
+#warning Fast analog read not implemented on this platform
+}
+void setupMozziADC(int8_t speed) {
+#warning Fast analog read not implemented on this platform
+}
+////// END analog input code ////////
 
+
+
+//// BEGIN AUDIO OUTPUT code ///////
 #include <driver/i2s.h>   // for I2S-based output modes
 #include <driver/timer.h> // for EXTERNAL_AUDIO_OUTPUT
 
@@ -85,3 +105,4 @@ static void startAudio() {
 void stopMozzi() {
   // TODO: implement me
 }
+//// END AUDIO OUTPUT code ///////

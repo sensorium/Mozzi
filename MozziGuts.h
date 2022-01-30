@@ -201,6 +201,8 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #include "AudioConfigESP32.h"
 #elif IS_SAMD21()
 #include "AudioConfigSAMD21.h"
+#elif IS_RP2040()
+#include "AudioConfigRP2040.h"
 #elif IS_AVR() && (AUDIO_MODE == STANDARD)
 #include "AudioConfigStandard9bitPwm.h"
 #elif IS_AVR() && (AUDIO_MODE == STANDARD_PLUS)

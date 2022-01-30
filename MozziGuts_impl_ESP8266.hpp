@@ -38,6 +38,8 @@ void setupMozziADC(int8_t speed) {
 
 
 //// BEGIN AUDIO OUTPUT code ///////
+#define LOOP_YIELD yield();
+
 #include <uart.h>
 #include <i2s.h>
 uint16_t output_buffer_size = 0;

@@ -95,6 +95,11 @@ void stm32_adc_eoc_handler() {
 ////// END analog input code ////////
 
 ////// BEGIN audio output code //////
+/* NOTE: Some platforms rely on control returning to outside loop() every so often. However, updateAudio() may take too long (it tries to completely fill the output buffer,
+ * which of course is being drained at the same time, theoretically it may not return at all). If you set this define, it will be called once per audio frame to keep things
+ * running smoothly. */
+//#define LOOP_YIELD yield();
+
 #if (EXTERNAL_AUDIO_OUTPUT != true) // otherwise, the last stage - audioOutput() - will be provided by the user
 /** NOTE: This is the function that actually write a sample to the output. In case of EXTERNAL_AUDIO_OUTPUT == true, it is provided by the library user, instead. */
 inline void audioOutput(const AudioOutput f) {

@@ -243,9 +243,10 @@ port by Thomas Friedrichsmeier
   - PDM_VIA_SERIAL: Output is coded using pulse density modulation, and sent via GPIO2 (Serial1 TX).
     - This output mode uses timer1 for queuing audio sample, so that timer is not available for other uses.
     - Note that this mode has slightly lower effective analog output range than PDM_VIA_I2S, due to start/stop bits being added to the output stream.
-  - PDM_VIA_I2S: Output is coded using pulse density modulation, and sent via the I2S pins. The I2S data out pin (which is also "RX") will have the output, but *all* I2S output pins (RX, GPIO2 and GPIO15) will be
-  affected. Mozzi tries to set GPIO2 and GPIO15 to input mode, and *at the time of this writing*, this allows I2S output on RX even on boards such as the ESP01 (where GPIO15 is tied to Gnd). However, it seems safest to
-  assume that this mode may not be useable on boards where GPIO2 or GPIO15 are not available as output pins.
+  - PDM_VIA_I2S: Output is coded using pulse density modulation, and sent via the I2S pins. The I2S data out pin (GPIO3, which is also "RX") will have the output,
+  but *all* I2S output pins (RX, GPIO2 and GPIO15) will be affected. Mozzi tries to set GPIO2 and GPIO15 to input mode, and *at the time of this writing*, this allows
+  I2S output on RX even on boards such as the ESP01 (where GPIO15 is tied to Gnd). However, it seems safest to assume that this mode may not be useable on boards where
+  GPIO2 or GPIO15 are not available as output pins.
   - EXTERNAL_DAC_VIA_I2S: Output is sent to an external DAC (such as a PT8211), digitally coded. This is the only mode that supports STEREO. It also needs the least processing power.
 - There is no "HIFI_MODE" in addition to the above output options. For high quality output, either use an external DAC, or increase the PDM_RESOLUTION value.
 - Note that the ESP8266 pins can output less current than the other supported CPUs. The maximum is 12mA, with a recommendation to stay below 6mA.

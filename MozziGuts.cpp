@@ -66,6 +66,8 @@ static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
 #  include "MozziGuts_impl_TEENSY.hpp"
 #elif (IS_SAMD21())
 #  include "MozziGuts_impl_SAMD.hpp"
+#elif (IS_RP2040())
+#  include "MozziGuts_impl_RP2040.hpp"
 #else
 #  error "Platform not (yet) supported. Check MozziGuts_impl_template.hpp and existing implementations for a blueprint for adding your favorite MCU."
 #endif
@@ -202,8 +204,8 @@ void audioHook() // 2us on AVR excluding updateAudio()
     bufferAudioOutput(updateAudio());
 #endif
 
-#if IS_ESP8266()
-    yield();
+#if defined(LOOP_YIELD)
+    LOOP_YIELD
 #endif
   }
   // setPin13Low();

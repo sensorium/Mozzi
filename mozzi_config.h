@@ -69,6 +69,8 @@ Mozzi-users list has a thread on this.
 Whether or not to use audio input.
 Put \#define USE_AUDIO_INPUT true in Mozzi/mozzi_config.h to enable audio input on analog pin AUDIO_INPUT_PIN,
 otherwise make it false, to save resources.
+
+@note You may have to call setupFastAnalogReads(FASTEST_ADC) after setupMozzi(), when using this.
 */
 //#define USE_AUDIO_INPUT true
 
@@ -81,7 +83,6 @@ in mozz_config.h
 */
 #define AUDIO_INPUT_PIN 0
 
-//AUDIO_INPUT_CHANNEL = analogPinToChannel(AUDIO_INPUT_PIN)
 
 /** @ingroup core
 This sets allows to change from a single/mono audio output channel to

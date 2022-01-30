@@ -47,7 +47,7 @@ void startSecondADCReadOnCurrentChannel() {
 void setupFastAnalogRead(int8_t speed) {
   if (speed == FAST_ADC) {
     adc_set_clkdiv(2048);  // Note: arbritray pick
-  } else if (speed = FASTER_ADC) {
+  } else if (speed == FASTER_ADC) {
     adc_set_clkdiv(256);  // Note: arbritray pick
   } else {
     adc_set_clkdiv(0); // max speed
@@ -155,6 +155,9 @@ static void startAudio() {
   gpio_set_function(AUDIO_CHANNEL_1_PIN, GPIO_FUNC_PWM);
   gpio_set_drive_strength(AUDIO_CHANNEL_1_PIN, GPIO_DRIVE_STRENGTH_12MA); // highest we can get
 #  if (AUDIO_CHANNELS > 1)
+#    if ((AUDIO_CHANNEL_1_PIN / 2) != (AUDIO_CHANNEL_2_PIN / 2))
+#      error Audio channel pins for stereo or HIFI must be on the same PWM slice (which is the case for the pairs (0,1), (2,3), (4,5), etc. Adjust AudioConfigRP2040.h .
+#    endif
   gpio_set_function(AUDIO_CHANNEL_2_PIN, GPIO_FUNC_PWM);
   gpio_set_drive_strength(AUDIO_CHANNEL_2_PIN, GPIO_DRIVE_STRENGTH_12MA); // highest we can get
 #  endif

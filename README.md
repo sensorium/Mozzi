@@ -75,6 +75,7 @@ Adafruit Playground Express | Built in Speaker | yes
 Sanguino | 13	| -  
 STM32duino (see "Hardware specific notes", below) | PB8 | yes
 ESP8266 *see details* | GPIO2 | yes
+RP2040 | 0 | yes
 
 For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.io/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).  
 
@@ -279,6 +280,21 @@ port by Dieter Vandoren and Thomas Friedrichsmeier
 - "HIFI_MODE" is not currently implemented, but could conceivably be realized for the INTERNAL_DAC mode. Patches welcome.
 - WIFI-activity not yet tested, but likely the same notes as for ESP8266 apply. Consider turning off WIFI.
 - The implementation of audioTicks() may be slightly inaccurate on this platform.
+
+### RP2040 (Raspberry Pi Pico)
+port by Thomas Friedrichsmeier
+
+Compiles and runs using [this core](https://github.com/earlephilhower/arduino-pico). Can probably be ported to the Mbed core for RP2040, relatively easily, as it relies mostly
+on the RP2040 SDK API. Tested on a Pi Pico.
+
+- This is a recent addition, implementation details may still change (currently just PWM driven by a timer)
+- Wavetables and samples are not kept in progmem on this platform. While apparently speed (of the external flash) is not much of an issue, the data always seems to be copied into RAM, anyway.
+- Audio output is to pin 0, by default, with 11 bits default output resolution
+- One hardware alarm and one DMA channel are claimed (number not hardcoded)
+- HIFI_MODE not yet implemented (although that should not be too hard to do)
+- Note that AUDIO_INPUT and mozziAnalogRead() return values in the STM32's full ADC resolution of 0-4095 rather than AVR's 0-1023.
+- twi_nonblock is not ported
+
 
 ***
 

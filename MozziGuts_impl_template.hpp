@@ -11,22 +11,24 @@
  */
 
 /** README! 
- * This file is meant to be used as a template when adding support for a new platform. Please read the instructions, first.
+ * This file is meant to be used as a template when adding support for a new platform. Please read these instructions, first.
  *
  *  Files involved:
  *  1. Modify hardware_defines.h, adding a macro to detect your target platform
  *  2. Modify MozziGuts.cpp to include MozziGuts_impl_YOURPLATFORM.hpp
- *  3. Copy this file to MozziGuts_impl_YOURPLATFORM.hpp and adjust as necessary
- *  (If your platform is very similar to an existing port, it may instead be better to modify the existing MozziGuts_impl_XYZ.hpp, instead of 2 and 3.)
+ *  3. Modify MozziGuts.h to include AudioConfigYOURPLATFORM.h
+ *  4. Copy this file to MozziGuts_impl_YOURPLATFORM.hpp and adjust as necessary
+ *  (If your platform is very similar to an existing port, it may instead be better to modify the existing MozziGuts_impl_XYZ.hpp/AudioConfigYOURPLATFORM.h,
+ *  instead of steps 2-3.).
  *  Some platforms may need small modifications to other files as well, e.g. mozzi_pgmspace.h
  *
  *  How to implement MozziGuts_impl_YOURPLATFORM.hpp:
  *  - Follow the NOTEs provided in this file
- *  - Read the doc at the top of AudioConfig.h for a better understanding the basic audio output framework
+ *  - Read the doc at the top of AudioOutput.h for a better understanding of the basic audio output framework
  *  - Take a peek at existing implementations for other hardware (e.g. TEENSY3/4 is rather complete while also simple at the time of this writing)
  *  - Wait for more documentation to arrive
  *  - Ask when in doubt
- *  - Don't forget to provide a PR when done (it does not have to be perfect)
+ *  - Don't forget to provide a PR when done (it does not have to be perfect; e.g. many ports skip analog input, initially)
  */
 
 // The main point of this check is to document, what platform & variants this implementation file is for.
@@ -38,7 +40,7 @@
 
 ////// BEGIN analog input code ////////
 
-/** NOTE: This section deals with implementing (fast) asynchronous analog reads, which form the backbone of mozziAnalogRead(), but also of AUDIO_INPUT (if enabled).
+/** NOTE: This section deals with implementing (fast) asynchronous analog reads, which form the backbone of mozziAnalogRead(), but also of USE_AUDIO_INPUT (if enabled).
  *  This template provides empty/dummy implementations to allow you to skip over this section, initially. Once you have an implementation, be sure to enable the
  *  #define, below: */
 //#define MOZZI_FAST_ANALOG_IMPLEMENTED
@@ -48,14 +50,16 @@
 #define getADCReading() 0
 
 /** NOTE: On "pins" vs. "channels" vs. "indices"
- *  "Pin" is the pin number as would usually be specified by the user.
- *  "Channel" is an internal ADC channel number corresponding to that pin. On most platforms this is simply the same as the pin number, on AVR is differs.
+ *  "Pin" is the pin number as would usually be specified by the user in mozziAnalogRead().
+ *  "Channel" is an internal ADC channel number corresponding to that pin. On many platforms this is simply the same as the pin number, on others it differs.
  *      In other words, this is an internal representation of "pin".
- *  "Index" is the index of the reading for a certain pin/channel in the array of analog_readings. This, again may be the same as "channel" (e.g. on AVR),
- *      however, on platforms where ADC-capable "channels" are not numbered sequentially starting from 0, the channel needs to be converted to a suitable index
- *      ranging from 0 to NUM_ANALOG_PINS.
+ *  "Index" is the index of the reading for a certain pin/channel in the array of analog_readings, ranging from 0 to NUM_ANALOG_PINS. This, again may be the
+ *      same as "channel" (e.g. on AVR), however, on platforms where ADC-capable "channels" are not numbered sequentially starting from 0, the channel needs
+ *      to be converted to a suitable index.
+ *
  *  In summary, the semantics are roughly
  *      mozziAnalogRead(pin) -> _ADCimplementation_(channel) -> analog_readings[index]
+ *  Implement adcPinToChannelNum() and channelNumToIndex() to perform the appropriate mapping.
  */
 // NOTE: Theoretically, adcPinToChannelNum is public API for historical reasons, thus cannot be replaced by a define
 #define channelNumToIndex(channel) channel
@@ -95,7 +99,7 @@ void stm32_adc_eoc_handler() {
 ////// END analog input code ////////
 
 ////// BEGIN audio output code //////
-/* NOTE: Some platforms rely on control returning to outside loop() every so often. However, updateAudio() may take too long (it tries to completely fill the output buffer,
+/* NOTE: Some platforms rely on control returning from loop() every so often. However, updateAudio() may take too long (it tries to completely fill the output buffer,
  * which of course is being drained at the same time, theoretically it may not return at all). If you set this define, it will be called once per audio frame to keep things
  * running smoothly. */
 //#define LOOP_YIELD yield();

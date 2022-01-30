@@ -54,7 +54,7 @@ inline bool canBufferAudioOutput() {
 }
 inline void audioOutput(const AudioOutput f) {
   for (uint8_t words = 0; words < PDM_RESOLUTION; ++words) {
-    i2s_write_sample(pdmCode32(f.l()));
+    i2s_write_sample(pdmCode32(f.l()+AUDIO_BIAS));
   }
 }
 #  elif (ESP_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
@@ -131,9 +131,9 @@ void stopMozzi() {
 }
 
 #if ((ESP_AUDIO_OUT_MODE == PDM_VIA_I2S) && (PDM_RESOLUTION != 1))
-#  define AUDIOTICK_ADJUSTMENT ((output_buffer_size - i2s_available()) / PDM_RESOLUTION);
+#  define AUDIOTICK_ADJUSTMENT ((output_buffer_size - i2s_available()) / PDM_RESOLUTION)
 #else
-#  define AUDIOTICK_ADJUSTMENT (output_buffer_size - i2s_available());
+#  define AUDIOTICK_ADJUSTMENT (output_buffer_size - i2s_available())
 #endif
 
 //// END AUDIO OUTPUT code ///////

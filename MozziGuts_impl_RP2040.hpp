@@ -22,8 +22,9 @@
 
 /** Implementation notes:
  *  - So nobody on the nets seems to have quite figured out, how to run the RP2040 ADC in "regular" asynchronous mode.
- *  - There is, however, an official example on a free running ADC writing to DMA. We'll hijack that for now
- *    (https://github.com/raspberrypi/pico-examples/blob/master/adc/dma_capture/dma_capture.c ; BSD licensed)
+ *  - The ADC sports an interrupt, presumably to be triggered when a conversion is done, but how to connect a callback to that?
+ *  - There is, however, an official example on a free running ADC writing to DMA (https://github.com/raspberrypi/pico-examples/blob/master/adc/dma_capture/dma_capture.c ; BSD licensed)
+ *    We'll abuse that to connect a callback to the DMA channel, instead.
 */
 
 #include <hardware/adc.h>

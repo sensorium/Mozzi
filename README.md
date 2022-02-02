@@ -274,7 +274,7 @@ port by Dieter Vandoren and Thomas Friedrichsmeier
     - 16 bits resolution, mono or stereo. Remember to shift your audio accordingly.
     - Output pins can be configured in AudioConfigESP32.h. Default is BCK: 26, WS: 15, DATA: 33
   - PDM_VIA_I2S: Output is converted using pulse density modulation, sent to the I2S data pin. No external hardware needed.
-    - 16 bits resolution, mono or stereo. Remember to shift your audio accordingly.
+    - 16 bits resolution. Remember to shift your audio accordingly.
     - Output (DATA) pin can be configured in AudioConfigESP32.h. Default 33. Note that the BCK and WS pins are also used in this mode.
     - The PDM_RESOLUTION parameter can be used to reduce noise at the cost of more CPU power.
     - Mono, only.
@@ -288,13 +288,14 @@ port by Thomas Friedrichsmeier
 Compiles and runs using [this core](https://github.com/earlephilhower/arduino-pico). Can probably be ported to the Mbed core for RP2040, relatively easily, as it relies mostly
 on the RP2040 SDK API. Tested on a Pi Pico.
 
-- This is a recent addition, implementation details may still change (currently just PWM driven by a timer)
+- This is a recent addition, implementation details may still change (currently just PWM driven by a timer; this may be worth changing to a DMA driven output)
 - Wavetables and samples are not kept in progmem on this platform. While apparently speed (of the external flash) is not much of an issue, the data always seems to be copied into RAM, anyway.
 - Audio output is to pin 0, by default, with 11 bits default output resolution
 - One hardware alarm and one DMA channel are claimed (number not hardcoded)
 - HIFI_MODE not yet implemented (although that should not be too hard to do)
-- Note that AUDIO_INPUT and mozziAnalogRead() return values in the STM32's full ADC resolution of 0-4095 rather than AVR's 0-1023.
+- Note that AUDIO_INPUT and mozziAnalogRead() return values in the RP2040's full ADC resolution of 0-4095 rather than AVR's 0-1023.
 - twi_nonblock is not ported
+- Code uses only one CPU core
 
 
 ***

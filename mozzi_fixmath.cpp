@@ -121,7 +121,7 @@ Q16n16 Q16n16_pow2(Q8n8 exponent)
 uint32_t  // OR uint16 OR uint8_t
 isqrt32 (uint32_t n) // OR isqrt16 ( uint16_t n ) OR  isqrt8 ( uint8_t n ) - respectively [ OR overloaded as isqrt (uint16_t?? n) in C++ ]
 {
-	register uint32_t // OR register uint16_t OR register uint8_t - respectively
+	uint32_t // OR register uint16_t OR register uint8_t - respectively
 	root, remainder, place;
 
 	root = 0;
@@ -148,7 +148,7 @@ isqrt32 (uint32_t n) // OR isqrt16 ( uint16_t n ) OR  isqrt8 ( uint8_t n ) - res
 uint16_t  // OR uint16_t OR uint8_t
 isqrt16 (uint16_t n) // OR isqrt16 ( uint16_t n ) OR  isqrt8 ( uint8_t n ) - respectively [ OR overloaded as isqrt (uint16_t?? n) in C++ ]
 {
-	register uint16_t // OR register uint16_t OR register uint8_t - respectively
+	uint16_t // OR register uint16_t OR register uint8_t - respectively
 	root, remainder, place;
 
 	root = 0;

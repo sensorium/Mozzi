@@ -48,7 +48,7 @@ public:
 	smoothed, but the slower the output will respond to the input.
 	@note Watch out for overflows!
 	*/
-	RollingAverage():index(0),total(0), WINDOW_LENGTH_AS_RSHIFT((uint8_t)trailingZeros((unsigned long)WINDOW_LENGTH))
+	RollingAverage():index(0),total(0), WINDOW_LENGTH_AS_RSHIFT(trailingZerosConst(WINDOW_LENGTH))
 	{
 		// initialize all the readings to 0:
 		for (int thisReading = 0; thisReading < WINDOW_LENGTH; thisReading++)
@@ -108,7 +108,7 @@ public:
 	@note The internal total of all the values being averaged is held in a long (4 uint8_t) integer, to avoid overflowing.
 	However, watch out for overflows if you are averaging a long number types!
 	*/
-	RollingAverage():index(0),total(0), WINDOW_LENGTH_AS_RSHIFT((uint8_t)trailingZeros((unsigned long)WINDOW_LENGTH))
+	RollingAverage():index(0),total(0), WINDOW_LENGTH_AS_RSHIFT(trailingZerosConst(WINDOW_LENGTH))
 	{
 		// initialize all the readings to 0:
 		for (int thisReading = 0; thisReading < WINDOW_LENGTH; thisReading++)

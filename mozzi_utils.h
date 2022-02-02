@@ -59,7 +59,8 @@ void setPin13Low()
 }
 
 
-long trailingZeros(unsigned long v);
+constexpr uint8_t trailingZerosConst(unsigned long v) { return ((v % 2) ? 0 : 1+trailingZerosConst(v >> 1)); }
+//uint8_t trailingZeros(uint16_t v);
 unsigned int BPMtoMillis(float bpm);
 
 #endif /* UTILS_H_ */

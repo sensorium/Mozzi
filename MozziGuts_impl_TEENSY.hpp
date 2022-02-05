@@ -44,6 +44,11 @@ void setupFastAnalogRead(int8_t speed) {
 #endif
 }
 
+void adc0_isr(void)
+{
+  advanceADCStep();
+}
+
 void setupMozziADC(int8_t speed) {
   adc = new ADC();
   adc->adc0->enableInterrupts(adc0_isr);
@@ -65,10 +70,6 @@ static void startSecondADCReadOnCurrentChannel() {
   adc->startSingleRead(teensy_pin,teensy_adc);
 }
 
-void adc0_isr(void)
-{
-  advanceADCStep();
-}
 ////// END  analog input code ////////
 
 

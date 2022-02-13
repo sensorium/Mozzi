@@ -432,8 +432,9 @@ static void startAudioStandard() {
   irq_set_exclusive_handler(PWM_IRQ_WRAP, defaultAudioOutput);
   irq_set_enabled(PWM_IRQ_WRAP, true);
   pwm_config config1 = pwm_get_default_config();
-  pwm_config_set_wrap(&config1, 4096);
-  //pwm_config_set_clkdiv(&config1, 8.f);
+  pwm_config_set_wrap(&config1, AUDIO_BIAS<<1);
+  pwm_config_set_phase_correct(&config1, PHASE_CORRECT);
+  //pwm_config_set_clkdiv(&config1, 1.f);
   pwm_init(slice1_num, &config1, true);
   #if (AUDIO_CHANNELS > 1)
     gpio_set_function(AUDIO_CHANNEL_2_PIN, GPIO_FUNC_PWM);

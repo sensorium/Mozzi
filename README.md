@@ -75,6 +75,7 @@ Adafruit Playground Express | Built in Speaker | yes
 Sanguino | 13	| -  
 STM32duino (see "Hardware specific notes", below) | PB8 | yes
 ESP8266 *see details* | GPIO2 | yes
+raspberry pi pico | 2 | yes
 
 For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.io/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).  
 
@@ -279,6 +280,14 @@ port by Dieter Vandoren and Thomas Friedrichsmeier
 - "HIFI_MODE" is not currently implemented, but could conceivably be realized for the INTERNAL_DAC mode. Patches welcome.
 - WIFI-activity not yet tested, but likely the same notes as for ESP8266 apply. Consider turning off WIFI.
 - The implementation of audioTicks() may be slightly inaccurate on this platform.
+
+### Raspberry Pi Pico
+port by j-enns
+
+- audio out only (audio input work in progress)
+- audio out on gpio 2
+- tested and working: Sinewave.ino and AMsynth.ino
+- works with "Arduino Mbed OS RP2040" boards and https://github.com/earlephilhower/arduino-pico
 
 ***
 

@@ -251,6 +251,19 @@ inline void audioOutput(const AudioOutput f)
 #endif
 
 
+// RPI PICO
+#if IS_PICO()
+#include "AudioConfigPico.h"
+inline void audioOutput(const AudioOutput f)
+{
+  pwm_set_gpio_level(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
+#if (AUDIO_CHANNELS > 1)
+  pwm_set_gpio_level(AUDIO_CHANNEL_2_PIN, f.r()+AUDIO_BIAS);
+#endif
+}
+#endif
+
+
 ///////////////////// STM32
 #if IS_STM32()
 #include "AudioConfigSTM32.h"

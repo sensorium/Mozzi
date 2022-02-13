@@ -31,6 +31,8 @@
 // required from http://github.com/pedvide/ADC for Teensy 3.*
 #include "IntervalTimer.h"
 #include <ADC.h>
+#elif IS_PICO()
+#include "hardware/pwm.h"
 #elif IS_STM32()
 #include "HardwareTimer.h"
 //#include <STM32ADC.h>  // Disabled, here. See AudioConfigSTM32.h
@@ -358,6 +360,9 @@ static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
   adc_count = 0;
   startSecondAudioADC();
 #endif
+#if IS_PICO()
+  pwm_clear_irq(pwm_gpio_to_slice_num(AUDIO_CHANNEL_1_PIN));
+#endif
   audioOutput(output_buffer.read());
 }
 #endif
@@ -418,6 +423,32 @@ static void startAudioStandard() {
 #endif  // end #if (!EXTERNAL_AUDIO_OUTPUT)
 #endif
   timer1.begin(defaultAudioOutput, 1000000. / AUDIO_RATE);
+
+#elif IS_PICO()
+  gpio_set_function(AUDIO_CHANNEL_1_PIN, GPIO_FUNC_PWM);
+  uint slice1_num = pwm_gpio_to_slice_num(AUDIO_CHANNEL_1_PIN);
+  pwm_clear_irq(slice1_num);
+  pwm_set_irq_enabled(slice1_num, true);
+  irq_set_exclusive_handler(PWM_IRQ_WRAP, defaultAudioOutput);
+  irq_set_enabled(PWM_IRQ_WRAP, true);
+  pwm_config config1 = pwm_get_default_config();
+  pwm_config_set_wrap(&config1, 4096);
+  //pwm_config_set_clkdiv(&config1, 8.f);
+  pwm_init(slice1_num, &config1, true);
+  #if (AUDIO_CHANNELS > 1)
+    gpio_set_function(AUDIO_CHANNEL_2_PIN, GPIO_FUNC_PWM);
+    uint slice2_num = pwm_gpio_to_slice_num(AUDIO_CHANNEL_2_PIN);
+    if (slice1_num != slice2_num) {
+      pwm_clear_irq(slice2_num);
+      //pwm_set_irq_enabled(slice2_num, true);
+      //irq_set_exclusive_handler(PWM_IRQ_WRAP, on_pwm_wrap);
+      //irq_set_enabled(PWM_IRQ_WRAP, true);
+      pwm_config config2 = pwm_get_default_config();
+      //pwm_config_set_clkdiv(&config, 4.f);
+      pwm_init(slice2_num, &config2, true);
+    }
+  #endif  // end #if (AUDIO_CHANNELS > 1) 
+
 #elif IS_SAMD21()
 #ifdef ARDUINO_SAMD_CIRCUITPLAYGROUND_EXPRESS
   {
@@ -720,6 +751,10 @@ void startMozzi(int control_rate_hz) {
 void stopMozzi() {
 #if IS_TEENSY3() || IS_TEENSY4()
   timer1.end();
+#elif IS_PICO()
+  uint slice1_num = pwm_gpio_to_slice_num(AUDIO_CHANNEL_1_PIN);
+  pwm_clear_irq(slice1_num);
+  pwm_set_irq_enabled(slice1_num, false);
 #elif IS_STM32()
   audio_update_timer.pause();
 #elif IS_ESP8266()

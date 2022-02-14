@@ -21,6 +21,8 @@
 // required from http://github.com/pedvide/ADC for Teensy 3.*
 #include <ADC.h>
 #include "teensyPinMap.h"
+#elif IS_PICO()
+#include "hardware/adc.h"
 #elif IS_STM32()
 //#include <STM32ADC.h>
 #endif
@@ -77,6 +79,11 @@ void setupMozziADC(int8_t speed) {
 	#ifdef ADC_DUAL_ADCS
 	adc->adc1->enableInterrupts(adc0_isr);
 	#endif
+#elif IS_PICO()
+	adc_init();
+	adc_gpio_init(AUDIO_INPUT_PIN+26);
+	// irq_set_exclusive_handler(ADC0_IRQ_FIFO, pico_adc_handler);  // can call interrupt below
+  	// irq_set_enabled(ADC0_IRQ_FIFO, true);
 #elif IS_STM32()
 	adc.calibrate();
 	setupFastAnalogRead(speed);
@@ -245,6 +252,10 @@ int mozziAnalogRead(uint8_t pin) {
 #if IS_ESP8266() || IS_ESP32()
 #warning Asynchronouos analog reads not implemented for this platform
 	return analogRead(pin);
+#elif IS_PICO()
+#warning 2-3x faster than analogRead(), would be faster with analog_readings[] implimented
+	adc_select_input(pin);
+	return adc_read();
 #else
 // ADC lib converts pin/channel in startSingleRead
 #if IS_AVR()
@@ -300,6 +311,8 @@ The version for USE_AUDIO_INPUT==true is in MozziGuts.cpp... compilation reasons
 #if(USE_AUDIO_INPUT==false)
 #if IS_TEENSY3() || IS_TEENSY4()
 void adc0_isr(void)
+//#elif IS_PICO()
+//void pico_adc_handler()
 #elif IS_STM32()
 void stm32_adc_eoc_handler()
 #elif IS_AVR()

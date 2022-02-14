@@ -75,7 +75,7 @@ Adafruit Playground Express | Built in Speaker | yes
 Sanguino | 13	| -  
 STM32duino (see "Hardware specific notes", below) | PB8 | yes
 ESP8266 *see details* | GPIO2 | yes
-raspberry pi pico | 2 | yes
+raspberry pi pico | GP2 | yes
 
 For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.io/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).  
 
@@ -284,10 +284,14 @@ port by Dieter Vandoren and Thomas Friedrichsmeier
 ### Raspberry Pi Pico
 port by j-enns
 
+- default audio is nearly 11 bits with phase corrected PWM at 32768hz
+- phase correct and bit depth can be changed in AudioConfigPico.h
 - audio out only (audio input work in progress)
-- audio out on gpio 2
+- mono audio out on gp2 
+- stereo audio out with gp3
 - tested and working: Sinewave.ino and AMsynth.ino
 - works with "Arduino Mbed OS RP2040" boards and https://github.com/earlephilhower/arduino-pico
+- can be run on either core
 
 ***
 

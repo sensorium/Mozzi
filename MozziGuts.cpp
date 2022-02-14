@@ -360,9 +360,6 @@ static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
   adc_count = 0;
   startSecondAudioADC();
 #endif
-#if IS_PICO()
-  pwm_clear_irq(pwm_gpio_to_slice_num(AUDIO_CHANNEL_1_PIN));
-#endif
   audioOutput(output_buffer.read());
 }
 #endif
@@ -441,10 +438,9 @@ static void startAudioStandard() {
     uint slice2_num = pwm_gpio_to_slice_num(AUDIO_CHANNEL_2_PIN);
     if (slice1_num != slice2_num) {
       pwm_clear_irq(slice2_num);
-      //pwm_set_irq_enabled(slice2_num, true);
-      //irq_set_exclusive_handler(PWM_IRQ_WRAP, on_pwm_wrap);
-      //irq_set_enabled(PWM_IRQ_WRAP, true);
       pwm_config config2 = pwm_get_default_config();
+      pwm_config_set_wrap(&config2, AUDIO_BIAS<<1);
+      pwm_config_set_phase_correct(&config2, PHASE_CORRECT);
       //pwm_config_set_clkdiv(&config, 4.f);
       pwm_init(slice2_num, &config2, true);
     }

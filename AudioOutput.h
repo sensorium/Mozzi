@@ -254,8 +254,8 @@ inline void audioOutput(const AudioOutput f)
 // RPI PICO
 #if IS_PICO()
 #include "AudioConfigPico.h"
-inline void audioOutput(const AudioOutput f)
-{
+inline void audioOutput(const AudioOutput f) {
+  pwm_clear_irq(pwm_gpio_to_slice_num(AUDIO_CHANNEL_1_PIN));
   pwm_set_gpio_level(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
 #if (AUDIO_CHANNELS > 1)
   pwm_set_gpio_level(AUDIO_CHANNEL_2_PIN, f.r()+AUDIO_BIAS);

@@ -46,7 +46,7 @@ void setupFastAnalogRead(int8_t speed) {
 }
 
 void setupMozziADC(int8_t speed) {
-  adc.attachInterrupt(stm32_adc_eoc_handler, ADC_EOC);
+  adc.attachInterrupt(stm32_adc_eoc_handler);
 }
 
 ////// END analog input code ////////

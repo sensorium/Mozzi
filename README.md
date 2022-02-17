@@ -281,9 +281,10 @@ port by Dieter Vandoren and Thomas Friedrichsmeier
 - WIFI-activity not yet tested, but likely the same notes as for ESP8266 apply. Consider turning off WIFI.
 - The implementation of audioTicks() may be slightly inaccurate on this platform.
 
-### Raspberry Pi Pico
+### Raspberry Pi Pico (rp2040)
 port by j-enns
 
+- for use at 133mhz
 - default audio is nearly 11 bits with phase corrected PWM at 32768hz
 - phase correct and bit depth can be changed in AudioConfigPico.h
 - audio out only (audio input work in progress)

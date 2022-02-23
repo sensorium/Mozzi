@@ -297,7 +297,9 @@ port by j-enns
 
 differances to mozzi for avr:
 - adc0 - adc3 (gp26 - gp29) are being converted in a round robin, and transfered to a variable via dma (a interrupt runs every ~51 minutes to restart the dma transfer)
-- instead of running a timer to call an interrupt to call AudioOutput, there is a callback attached directly to the pwm.
+- instead of running a timer to call an interrupt to call AudioOutput, there is a callback attached directly to the pwm
+- randSeed() gets values from the internal temp sensor (offereing small variations) and adc3 (not connected and random floating on the pi pico)
+- in setup(), randSeed() MUST be called before startMozzi() or the analog inputs will not work
 
 ***
 

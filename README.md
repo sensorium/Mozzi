@@ -287,12 +287,17 @@ port by j-enns
 - for use at 133mhz
 - default audio is nearly 11 bits with phase corrected PWM at 32768hz
 - phase correct and bit depth can be changed in AudioConfigPico.h
-- audio out only (audio input work in progress)
-- mono audio out on gp2 
+- mono audio out on gp2  (gp0 and gp1 are left available for midi uart)
 - stereo audio out with gp3
-- tested and working: Sinewave.ino and AMsynth.ino
+- adc0 (gp26) can be used for audio input
+- tested and working: Sinewave.ino, AMsynth.ino, and Audio_and_Control_Input.ino
 - works with "Arduino Mbed OS RP2040" boards and https://github.com/earlephilhower/arduino-pico
 - can be run on either core
+- gp26 - gp29 can only be used as analog inputs
+
+differances to mozzi for avr:
+- adc0 - adc3 (gp26 - gp29) are being converted in a round robin, and transfered to a variable via dma (a interrupt runs every ~51 minutes to restart the dma transfer)
+- instead of running a timer to call an interrupt to call AudioOutput, there is a callback attached directly to the pwm.
 
 ***
 

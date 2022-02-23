@@ -187,6 +187,10 @@ uint8_t adcPinToChannelNum(uint8_t pin);
 
 #if IS_TEENSY3() || IS_TEENSY4()
 void adc0_isr(void);
+#elif IS_PICO()
+void pico_dma_setup();
+void pico_adc_handler();
+uint adc_dma_chan();
 #endif
 
 

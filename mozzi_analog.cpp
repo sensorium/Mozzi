@@ -22,7 +22,9 @@
 #include <ADC.h>
 #include "teensyPinMap.h"
 #elif IS_PICO()
+//#include "hardware/irq.h"
 #include "hardware/adc.h"
+#include "hardware/dma.h"
 #elif IS_STM32()
 //#include <STM32ADC.h>
 #endif
@@ -31,7 +33,9 @@
 #if IS_TEENSY3() || IS_TEENSY4()
 	extern ADC *adc; // adc object
 	extern uint8_t teensy_pin;
-        extern int8_t teensy_adc;
+    extern int8_t teensy_adc;
+#elif IS_PICO()
+	uint8_t dma_chan;
 #elif IS_STM32()
 	extern STM32ADC adc;
 	extern uint8_t stm32_current_adc_pin;
@@ -80,10 +84,23 @@ void setupMozziADC(int8_t speed) {
 	adc->adc1->enableInterrupts(adc0_isr);
 	#endif
 #elif IS_PICO()
+	for (uint i = 0;  i < NUM_ANALOG_INPUTS; ++i) {
+		adc_gpio_init(i+26);
+	}
 	adc_init();
-	adc_gpio_init(AUDIO_INPUT_PIN+26);
-	// irq_set_exclusive_handler(ADC0_IRQ_FIFO, pico_adc_handler);  // can call interrupt below
-  	// irq_set_enabled(ADC0_IRQ_FIFO, true);
+	adc_select_input(0);
+	adc_fifo_setup(
+        true,    // Write each completed conversion to the sample FIFO
+        true,    // Enable DMA data request (DREQ)
+        1,       // DREQ (and IRQ) asserted when at least 1 sample present
+        false,   // We won't see the ERR bit because of 8 bit reads; disable.
+        false     // don't Shift each sample to 8 bits when pushing to FIFO
+    );
+
+	pico_dma_setup();
+
+	adc_set_round_robin(0x0F);
+    adc_run(true);
 #elif IS_STM32()
 	adc.calibrate();
 	setupFastAnalogRead(speed);
@@ -154,8 +171,8 @@ uint8_t adcPinToChannelNum(uint8_t pin) {
 
 
 // assumes channel is correct, not pin number, pin number would be converted first with adcPinToChannelNum
-static void adcSetChannel(uint8_t channel) {
 #if IS_AVR()
+static void adcSetChannel(uint8_t channel) {
 #if defined(__AVR_ATmega32U4__)
 	ADCSRB = (ADCSRB & ~(1 << MUX5)) | (((channel >> 3) & 0x01) << MUX5);
 #elif defined(ADCSRB) && defined(MUX5)
@@ -175,10 +192,10 @@ static void adcSetChannel(uint8_t channel) {
 	ADMUX = (analog_reference << 6) | (channel & 0x07);
 #endif
 #endif
+}
 #else
 // For other platforms ADC library converts pin/channel each time in startSingleRead
 #endif
-}
 
 
 
@@ -194,7 +211,8 @@ void adcStartConversion(uint8_t channel) {
 	else teensy_adc=1;
 	#endif
 	adc->startSingleRead(teensy_pin,teensy_adc); // channel/pin gets converted every time in startSingleRead
-	
+#elif IS_PICO()
+	// fast analog is implemented via dma
 #elif IS_STM32()
 	stm32_current_adc_pin = channel;
 	adc.setPins(&stm32_current_adc_pin, 1);
@@ -253,9 +271,8 @@ int mozziAnalogRead(uint8_t pin) {
 #warning Asynchronouos analog reads not implemented for this platform
 	return analogRead(pin);
 #elif IS_PICO()
-#warning 2-3x faster than analogRead(), would be faster with analog_readings[] implimented
-	adc_select_input(pin);
-	return adc_read();
+//   analog_readings[] filled via dma
+	return analog_readings[pin];
 #else
 // ADC lib converts pin/channel in startSingleRead
 #if IS_AVR()
@@ -281,6 +298,9 @@ void receiveFirstControlADC(){
 void startSecondControlADC() {
 #if IS_TEENSY3() || IS_TEENSY4()
   adc->startSingleRead(teensy_pin,teensy_adc);
+#elif IS_PICO()
+	adc_select_input(current_channel);
+	// adc_read();
 #elif IS_STM32()
 	adc.setPins(&stm32_current_adc_pin, 1);
 	adc.startConversion();
@@ -293,7 +313,8 @@ void startSecondControlADC() {
 void receiveSecondControlADC(){
 #if IS_TEENSY3() || IS_TEENSY4()
   analog_readings[adcPinToChannelNum(current_channel)] = adc->readSingle(teensy_adc);
-
+#elif IS_PICO()
+	analog_readings[current_channel] = adc_read();
 #elif IS_STM32()
 	analog_readings[current_channel] = adc.getData();
 #elif IS_AVR()
@@ -301,6 +322,43 @@ void receiveSecondControlADC(){
 #endif
 }
 
+
+#if IS_PICO()
+void pico_dma_setup() {
+	// Set up the DMA to start transferring data as soon as it appears in FIFO
+    dma_chan = dma_claim_unused_channel(true);
+    dma_channel_config cfg = dma_channel_get_default_config(dma_chan);
+
+    // set up dma channel
+    channel_config_set_transfer_data_size(&cfg, DMA_SIZE_32);	// set to 16 bit to accomodate 12 bit input
+    channel_config_set_read_increment(&cfg, false);			// always read from fifo
+    channel_config_set_write_increment(&cfg, true);			// write to next array variable
+    channel_config_set_ring(&cfg, true, 4);					// loop back to zero: 0 -> 1 -> 2 -> 3 -> 0
+    channel_config_set_dreq(&cfg, DREQ_ADC);				// Pace transfers based on availability of ADC samples
+
+    dma_channel_set_read_addr(dma_chan, &adc_hw->fifo, false);
+    dma_channel_set_write_addr(dma_chan, analog_readings, false);
+    dma_channel_set_trans_count(dma_chan, 0xffffffff, false);
+    dma_channel_set_config(dma_chan, &cfg, true);
+
+  	dma_channel_set_irq0_enabled(dma_chan, true);
+	irq_set_exclusive_handler(DMA_IRQ_0, pico_adc_handler); // called every 4294967295 analog reads to restart dma
+  	irq_set_enabled(DMA_IRQ_0, true);
+}
+
+void pico_adc_handler() { 	// rp2040 using a dma to fill analog_readings. 
+    adc_run(false);			// every 51 minutes the dma completes its maximum transfers and is restarted
+	dma_hw->ints0 = 1u << dma_chan;  // clear interrupt flag
+	adc_fifo_drain();
+    dma_channel_set_trans_count(dma_chan, 0xffffffff, true);
+	adc_set_round_robin(0x0F);
+    adc_run(true);
+}
+
+uint adc_dma_chan() {
+	return dma_chan;
+}
+#endif // pico dma and adc setup
 
 /* This interrupt handler cycles through all analog inputs on the adc_channels_to_read Stack,
 doing 2 conversions on each channel but only keeping the second conversion each time,
@@ -311,8 +369,6 @@ The version for USE_AUDIO_INPUT==true is in MozziGuts.cpp... compilation reasons
 #if(USE_AUDIO_INPUT==false)
 #if IS_TEENSY3() || IS_TEENSY4()
 void adc0_isr(void)
-//#elif IS_PICO()
-//void pico_adc_handler()
 #elif IS_STM32()
 void stm32_adc_eoc_handler()
 #elif IS_AVR()

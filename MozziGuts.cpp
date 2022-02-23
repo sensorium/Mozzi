@@ -33,6 +33,8 @@
 #include <ADC.h>
 #elif IS_PICO()
 #include "hardware/pwm.h"
+#include "hardware/adc.h"
+#include "hardware/dma.h"
 #elif IS_STM32()
 #include "HardwareTimer.h"
 //#include <STM32ADC.h>  // Disabled, here. See AudioConfigSTM32.h
@@ -46,9 +48,9 @@ uint16_t output_buffer_size = 0;
 #endif
 
 
-#if (IS_TEENSY3() && F_CPU != 48000000) || (IS_AVR() && F_CPU != 16000000)
+#if (IS_TEENSY3() && F_CPU != 48000000) || (IS_AVR() && F_CPU != 16000000) || (IS_PICO() && F_CPU != 133000000)
 #warning                                                                       \
-    "Mozzi has been tested with a cpu clock speed of 16MHz on Arduino and 48MHz on Teensy 3!  Results may vary with other speeds."
+    "Mozzi has been tested with a cpu clock speed of 16MHz on Arduino, 48MHz on Teensy 3, and 133Mhz on RPI Pico!  Results may vary with other speeds."
 #endif
 
 #if (IS_TEENSY3() || IS_TEENSY4())
@@ -160,6 +162,7 @@ static void startFirstAudioADC() {
   uint8_t dummy = AUDIO_INPUT_PIN;
   adc.setPins(&dummy, 1);
   adc.startConversion();
+#elif IS_PICO()
 #else
   adcStartConversion(adcPinToChannelNum(AUDIO_INPUT_PIN));
 #endif
@@ -179,6 +182,7 @@ static void startSecondAudioADC() {
   uint8_t dummy = AUDIO_INPUT_PIN;
   adc.setPins(&dummy, 1);
   adc.startConversion();
+#elif IS_PICO()
 #else
   ADCSRA |= (1 << ADSC); // start a second conversion on the current channel
 #endif
@@ -190,6 +194,8 @@ static void receiveSecondAudioADC() {
     input_buffer.write(adc->adc0->readSingle());
 #elif IS_STM32()
     input_buffer.write(adc.getData());
+#elif IS_PICO()
+    tight_loop_contents();
 #else
     input_buffer.write(ADC);
 #endif
@@ -328,7 +334,9 @@ inline void advanceControlLoop() {
 void audioHook() // 2us on AVR excluding updateAudio()
 {
 // setPin13High();
-#if (USE_AUDIO_INPUT == true)
+#if (USE_AUDIO_INPUT == true) && IS_PICO()
+  audio_input = mozziAnalogRead(AUDIO_INPUT_1_PIN);
+#elif (USE_AUDIO_INPUT == true)
   if (!input_buffer.isEmpty())
     audio_input = input_buffer.read();
 #endif
@@ -426,7 +434,7 @@ static void startAudioStandard() {
   uint slice1_num = pwm_gpio_to_slice_num(AUDIO_CHANNEL_1_PIN);
   pwm_clear_irq(slice1_num);
   pwm_set_irq_enabled(slice1_num, true);
-  irq_set_exclusive_handler(PWM_IRQ_WRAP, defaultAudioOutput);
+  irq_set_exclusive_handler(PWM_IRQ_WRAP, defaultAudioOutput);  //use pwm wrap instead of timer
   irq_set_enabled(PWM_IRQ_WRAP, true);
   pwm_config config1 = pwm_get_default_config();
   pwm_config_set_wrap(&config1, AUDIO_BIAS<<1);
@@ -751,7 +759,10 @@ void stopMozzi() {
 #elif IS_PICO()
   uint slice1_num = pwm_gpio_to_slice_num(AUDIO_CHANNEL_1_PIN);
   pwm_clear_irq(slice1_num);
-  pwm_set_irq_enabled(slice1_num, false);
+  pwm_set_irq_enabled(slice1_num, false);   // stop running the PWM handler
+  adc_run(false);   // stop continuous analog conversions
+  dma_channel_abort(adc_dma_chan());    // stop adc fifo to variable dma
+  adc_fifo_drain();    // empty the adc fifo
 #elif IS_STM32()
   audio_update_timer.pause();
 #elif IS_ESP8266()

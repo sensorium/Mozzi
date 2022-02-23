@@ -7,6 +7,8 @@
 extern STM32ADC adc;
 #elif IS_ESP8266()
 #include <esp8266_peri.h>
+#elif IS_PICO()
+#include "hardware/adc.h"
 #endif
 
 // moved these out of xorshift96() so xorshift96() can be reseeded manually
@@ -126,6 +128,16 @@ void randSeed() {
 	z=longRandom();
 	//analogReference(analog_reference_orig); // change back to original
 	ADCSRA |= (1 << ADIE); // adc re-Enable Interrupt
+#elif IS_PICO()
+	adc_set_temp_sensor_enabled(true);
+	adc_select_input(4); // temp sensor. number within a small range
+	int k = adc_read();
+	adc_select_input(3); // not connected analog input on Pico
+	x = k * adc_read();
+	y = adc_read() << 16;
+	z = (x >> 2) * adc_read() ;
+	adc_set_temp_sensor_enabled(false);
+	adc_select_input(0);
 #elif IS_STM32()
 	// Unfortunately the internal temp sensor on STM32s does _not_ appear to create a lot of noise.
 	// Ironically, the calls to calibrate help induce some random noise. You're still fairly likely to produce two equal

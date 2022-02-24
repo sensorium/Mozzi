@@ -1,11 +1,6 @@
 #ifndef AUDIOCONFIGPICO_H
 #define AUDIOCONFIGPICO_H
 
-#include "hardware/pwm.h"
-
-  #define USE_AUDIO_INPUT true
-  #define AUDIO_INPUT_PIN 0
-
 /* use with PWM_RATE 65536 and phase corrected */
 // #define AUDIO_BITS 10 // closer to 9.986
 // #define AUDIO_BIAS 507
@@ -18,7 +13,7 @@
  #define PHASE_CORRECT 1            // phase corrected PWM
 
 // #define PHASE_CORRECT 0          // fast PWM
-// #define AUDIO_RATE 65536         // OR uncomment for faster audio rate
+// #define AUDIO_RATE 65536         // uncomment for faster audio rate with fast pwm
 
 /* use with PWM_RATE 32768 and not phase corrected */
 // #define AUDIO_BITS 12 // closer to 11.987
@@ -32,7 +27,6 @@
 
 // analog input
 #define AUDIO_INPUT_1_PIN 0     // analog pin # + 26 for gp pin
-//#define ADC_INPUT_8BITS       
 
 
 #endif        //  #ifndef AUDIOCONFIGPICO_H

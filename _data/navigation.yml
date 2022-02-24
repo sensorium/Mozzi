@@ -36,8 +36,8 @@ main:
     url: /doc/html/
   - title: "github"
     url: https://github.com/sensorium/Mozzi
-  - title: "shop"
-    url: /shop/
+  # - title: "shop"
+  #  url: /shop/
 
 # documentation links
 # docs:

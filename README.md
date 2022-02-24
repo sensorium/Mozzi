@@ -290,7 +290,7 @@ port by j-enns
 - mono audio out on gp2  (gp0 and gp1 are left available for midi uart)
 - stereo audio out with gp3
 - adc0 (gp26) can be used for audio input
-- tested and working: Sinewave.ino, AMsynth.ino, and Audio_and_Control_Input.ino
+- tested and working: Sinewave.ino, FMsynth.ino, and Audio_and_Control_Input.ino
 - works with "Arduino Mbed OS RP2040" boards and https://github.com/earlephilhower/arduino-pico
 - can be run on either core
 - gp26 - gp29 can only be used as analog inputs

@@ -129,13 +129,15 @@ void randSeed() {
 	//analogReference(analog_reference_orig); // change back to original
 	ADCSRA |= (1 << ADIE); // adc re-Enable Interrupt
 #elif IS_PICO()
+	adc_gpio_init(29);
+	adc_init();
 	adc_set_temp_sensor_enabled(true);
-	adc_select_input(4); // temp sensor. number within a small range
+	adc_select_input(4); // temp sensor. usually outputs a number within a small range
 	int k = adc_read();
-	adc_select_input(3); // not connected analog input on Pico
-	x = k * adc_read();
-	y = adc_read() << 16;
-	z = (x >> 2) * adc_read() ;
+	adc_select_input(3); // floating analog input on Pico
+	x = (k << 16) | adc_read();
+	y = (adc_read() << 16) | k;
+	z = (x >> 8) * adc_read();
 	adc_set_temp_sensor_enabled(false);
 	adc_select_input(0);
 #elif IS_STM32()

@@ -5,8 +5,10 @@ layout: single
 [Mozzi, an Introductory Tutorial](introductory-tutorial/)  
 This shows how to set up an Arduino with Mozzi from scratch and use analog inputs to make sounds using a knob, light sensing, pressure, and a switch (on a digital input).
 
-[MozziByte Noob Toot](MozziByte-NoobToot.pdf)  
-A quick start guide for the [MozziByte board](https://www.kickstarter.com/projects/mozzibyte/mozzibyte-mozzi-arduino-mini-sensor-sonification-s).
+
+[//]: # [MozziByte Noob Toot](MozziByte-NoobToot.pdf)  
+[//]: # A quick start guide for the [MozziByte board](https://www.kickstarter.com/projects/mozzibyte/mozzibyte-mozzi-arduino-mini-sensor-sonification-s).
+
 
 [Anatomy of a Mozzi sketch](a-simple-sketch/)  
 A detailed introduction to the parts of a Mozzi sketch, showing how to use an oscillator to generate audio and control signals.

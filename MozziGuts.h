@@ -85,7 +85,6 @@ x..B5........Teensy2  \n
 x..B5(25)..Teensy2++  \n
 x..A14.....Teensy 3.0, 3.1 and 3.2  \n
 ....13	.......Sanguino  \n
-....gp2.......Raspberry Pi Pico
 
 On Teensy 3.* STANDARD and STANDARD_PLUS are the same, providing 16384Hz sample rate and 12 bit resolution on pin A14/ADC.
 The Teensy 3.* DAC output does not rely on PWM.
@@ -194,8 +193,6 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #include "AudioConfigTeensy3_12bit.h"
 #elif IS_TEENSY4()
 #include "AudioConfigTeensy4.h"
-#elif IS_PICO()
-#include "AudioConfigPico.h"
 #elif IS_STM32()
 #include "AudioConfigSTM32.h"
 #elif IS_ESP8266()
@@ -204,6 +201,8 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #include "AudioConfigESP32.h"
 #elif IS_SAMD21()
 #include "AudioConfigSAMD21.h"
+#elif IS_RP2040()
+#include "AudioConfigRP2040.h"
 #elif IS_AVR() && (AUDIO_MODE == STANDARD)
 #include "AudioConfigStandard9bitPwm.h"
 #elif IS_AVR() && (AUDIO_MODE == STANDARD_PLUS)
@@ -384,13 +383,5 @@ is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when 
 @todo  incorporate mozziMicros() in a more accurate EventDelay()?
 */
 unsigned long mozziMicros();
-
-
-
-
-// internal use
-#if (AUDIO_MODE == HIFI)
-static void setupTimer2();
-#endif
 
 #endif /* MOZZIGUTS_H_ */

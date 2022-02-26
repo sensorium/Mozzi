@@ -75,7 +75,7 @@ Adafruit Playground Express | Built in Speaker | yes
 Sanguino | 13	| -  
 STM32duino (see "Hardware specific notes", below) | PB8 | yes
 ESP8266 *see details* | GPIO2 | yes
-raspberry pi pico | GP2 | yes
+RP2040 | 0 | yes
 
 For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.io/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).  
 
@@ -243,9 +243,10 @@ port by Thomas Friedrichsmeier
   - PDM_VIA_SERIAL: Output is coded using pulse density modulation, and sent via GPIO2 (Serial1 TX).
     - This output mode uses timer1 for queuing audio sample, so that timer is not available for other uses.
     - Note that this mode has slightly lower effective analog output range than PDM_VIA_I2S, due to start/stop bits being added to the output stream.
-  - PDM_VIA_I2S: Output is coded using pulse density modulation, and sent via the I2S pins. The I2S data out pin (which is also "RX") will have the output, but *all* I2S output pins (RX, GPIO2 and GPIO15) will be
-  affected. Mozzi tries to set GPIO2 and GPIO15 to input mode, and *at the time of this writing*, this allows I2S output on RX even on boards such as the ESP01 (where GPIO15 is tied to Gnd). However, it seems safest to
-  assume that this mode may not be useable on boards where GPIO2 or GPIO15 are not available as output pins.
+  - PDM_VIA_I2S: Output is coded using pulse density modulation, and sent via the I2S pins. The I2S data out pin (GPIO3, which is also "RX") will have the output,
+  but *all* I2S output pins (RX, GPIO2 and GPIO15) will be affected. Mozzi tries to set GPIO2 and GPIO15 to input mode, and *at the time of this writing*, this allows
+  I2S output on RX even on boards such as the ESP01 (where GPIO15 is tied to Gnd). However, it seems safest to assume that this mode may not be useable on boards where
+  GPIO2 or GPIO15 are not available as output pins.
   - EXTERNAL_DAC_VIA_I2S: Output is sent to an external DAC (such as a PT8211), digitally coded. This is the only mode that supports STEREO. It also needs the least processing power.
 - There is no "HIFI_MODE" in addition to the above output options. For high quality output, either use an external DAC, or increase the PDM_RESOLUTION value.
 - Note that the ESP8266 pins can output less current than the other supported CPUs. The maximum is 12mA, with a recommendation to stay below 6mA.
@@ -273,7 +274,7 @@ port by Dieter Vandoren and Thomas Friedrichsmeier
     - 16 bits resolution, mono or stereo. Remember to shift your audio accordingly.
     - Output pins can be configured in AudioConfigESP32.h. Default is BCK: 26, WS: 15, DATA: 33
   - PDM_VIA_I2S: Output is converted using pulse density modulation, sent to the I2S data pin. No external hardware needed.
-    - 16 bits resolution, mono or stereo. Remember to shift your audio accordingly.
+    - 16 bits resolution. Remember to shift your audio accordingly.
     - Output (DATA) pin can be configured in AudioConfigESP32.h. Default 33. Note that the BCK and WS pins are also used in this mode.
     - The PDM_RESOLUTION parameter can be used to reduce noise at the cost of more CPU power.
     - Mono, only.
@@ -281,25 +282,21 @@ port by Dieter Vandoren and Thomas Friedrichsmeier
 - WIFI-activity not yet tested, but likely the same notes as for ESP8266 apply. Consider turning off WIFI.
 - The implementation of audioTicks() may be slightly inaccurate on this platform.
 
-### Raspberry Pi Pico (rp2040)
-port by j-enns
+### RP2040 (Raspberry Pi Pico)
+port by Thomas Friedrichsmeier
 
-- for use at 133mhz
-- default audio is nearly 11 bits with phase corrected PWM at 32768hz
-- phase correct and bit depth can be changed in AudioConfigPico.h
-- mono audio out on gp2  (gp0 and gp1 are left available for midi uart)
-- stereo audio out with gp3
-- adc0 (gp26) can be used for audio input
-- tested and working: Sinewave.ino, AMsynth.ino, FMsynth.ino, and Audio_and_Control_Input.ino
-- works with "Arduino Mbed OS RP2040" boards and https://github.com/earlephilhower/arduino-pico
-- can be run on either core
-- gp26 - gp29 can only be used as analog inputs
+Compiles and runs using [this core](https://github.com/earlephilhower/arduino-pico). Can probably be ported to the Mbed core for RP2040, relatively easily, as it relies mostly
+on the RP2040 SDK API. Tested on a Pi Pico.
 
-differances to mozzi for avr:
-- adc0 - adc3 (gp26 - gp29) are being converted in a round robin, and transfered to a variable via dma (a interrupt runs every ~51 minutes to restart the dma transfer)
-- instead of running a timer to call an interrupt to call AudioOutput, there is a callback attached directly to the pwm
-- randSeed() gets values from the internal temp sensor (offereing small variations) and adc3 (not connected and random floating on the pi pico)
-- in setup(), randSeed() MUST be called before startMozzi() or the analog inputs will not work
+- This is a recent addition, implementation details may still change (currently just PWM driven by a timer; this may be worth changing to a DMA driven output)
+- Wavetables and samples are not kept in progmem on this platform. While apparently speed (of the external flash) is not much of an issue, the data always seems to be copied into RAM, anyway.
+- Audio output is to pin 0, by default, with 11 bits default output resolution
+- One hardware alarm and one DMA channel are claimed (number not hardcoded)
+- HIFI_MODE not yet implemented (although that should not be too hard to do)
+- Note that AUDIO_INPUT and mozziAnalogRead() return values in the RP2040's full ADC resolution of 0-4095 rather than AVR's 0-1023.
+- twi_nonblock is not ported
+- Code uses only one CPU core
+
 
 ***
 

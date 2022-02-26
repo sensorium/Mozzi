@@ -7,6 +7,8 @@ get the latest version from https://sensorium.github.io/Mozzi/
 Mozzi is now available as the most recent code on Github, rather than as releases.
 
 release v1.1.0rc1 (not actually "released", just the Github code around 2019 onwards.)
+- Initial RP2040 port added by Thomas Friedrichsmeier
+- Code reorganised to split most hardware specific code into dedicated files
 - STEREO_HACK is deprecated in favor of AUDIO_CHANNELS
 - updateAudio() should be slightly rewritten for portability across different configuraitions and boards
 	- refer to the MonoOutput() and StereoOutput() classes for more detail

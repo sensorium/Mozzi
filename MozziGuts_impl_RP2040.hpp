@@ -32,17 +32,24 @@
 
 #define getADCReading() rp2040_adc_result
 #define channelNumToIndex(channel) channel
+
+inline void adc_run_once () {
+    hw_set_bits(&adc_hw->cs, ADC_CS_START_ONCE_BITS);
+}
+
 uint8_t adcPinToChannelNum(uint8_t pin) {
   return pin-26;
 }
 
 void adcStartConversion(uint8_t channel) {
   adc_select_input(channel);
-  adc_run(true);
+  adc_run_once();
+  // adc_run(true);
 }
 
 void startSecondADCReadOnCurrentChannel() {
-  adc_run(true);
+  adc_run_once();
+  // adc_run(true);
 }
 
 void setupFastAnalogRead(int8_t speed) {
@@ -61,7 +68,7 @@ static uint16_t rp2040_adc_result = 0;
 int rp2040_adc_dma_chan;
 void setupMozziADC(int8_t speed) {
   for (int i = 0;  i < NUM_ANALOG_INPUTS; ++i) {
-    adc_gpio_init(adcPinToChannelNum(26+i));
+    adc_gpio_init(i);  // why add 26 just to call a function that subtracts 26?
   }
 
   adc_init();
@@ -99,8 +106,8 @@ void setupMozziADC(int8_t speed) {
 
 void rp2040_adc_queue_handler() {
   dma_hw->ints0 = 1u << rp2040_adc_dma_chan;  // clear interrupt flag
-  adc_run(false);
-  adc_fifo_drain();
+  //adc_run(false);  // adc not running continuous
+  //adc_fifo_drain(); // no need to drain fifo, the dma transfer did that
   dma_channel_set_trans_count(rp2040_adc_dma_chan, 1, true);  // set up for another read
   advanceADCStep();
 }

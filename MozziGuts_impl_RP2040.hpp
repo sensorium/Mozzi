@@ -33,12 +33,14 @@
 #define getADCReading() rp2040_adc_result
 #define channelNumToIndex(channel) channel
 
-inline void adc_run_once () {
-    hw_set_bits(&adc_hw->cs, ADC_CS_START_ONCE_BITS);
+inline void adc_run_once () {           // see rp2040 sdk code for adc_read() vs adc_run()
+    hw_set_bits(&adc_hw->cs, ADC_CS_START_ONCE_BITS); // vs ADC_CS_START_MANY_BITS
 }
 
 uint8_t adcPinToChannelNum(uint8_t pin) {
-  return pin-26;
+  if (pin >= 26) pin -= 26;     // allow analog to be called by GP or ADC numbering
+  return pin;
+
 }
 
 void adcStartConversion(uint8_t channel) {
@@ -68,7 +70,7 @@ static uint16_t rp2040_adc_result = 0;
 int rp2040_adc_dma_chan;
 void setupMozziADC(int8_t speed) {
   for (int i = 0;  i < NUM_ANALOG_INPUTS; ++i) {
-    adc_gpio_init(i);  // why add 26 just to call a function that subtracts 26?
+    adc_gpio_init(i); 
   }
 
   adc_init();

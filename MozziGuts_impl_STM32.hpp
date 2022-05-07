@@ -11,6 +11,7 @@
  */
 
 #include "HardwareTimer.h"
+#include "STM32PinMap.h"
 
 ////// BEGIN analog input code ////////
 #define MOZZI_FAST_ANALOG_IMPLEMENTED

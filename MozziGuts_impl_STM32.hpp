@@ -11,6 +11,7 @@
  */
 
 #include "HardwareTimer.h"
+#include "STM32PinMap.h"
 
 ////// BEGIN analog input code ////////
 #define MOZZI_FAST_ANALOG_IMPLEMENTED
@@ -18,7 +19,7 @@
 STM32ADC adc(ADC1);
 uint8_t stm32_current_adc_pin;   // TODO: this is actually a "channel" according to our terminology, but "channel" and "pin" are equal on this platform
 #define getADCReading() adc.getData()
-#define channelNumToIndex(channel) channel
+#define channelNumToIndex(channel) STM32PinMap(channel)
 uint8_t adcPinToChannelNum(uint8_t pin) {
   return pin;
 }

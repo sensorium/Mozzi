@@ -18,7 +18,7 @@
 STM32ADC adc(ADC1);
 uint8_t stm32_current_adc_pin;   // TODO: this is actually a "channel" according to our terminology, but "channel" and "pin" are equal on this platform
 #define getADCReading() adc.getData()
-#define channelNumToIndex(channel) channel
+#define channelNumToIndex(channel) STM32PinMap(channel)
 uint8_t adcPinToChannelNum(uint8_t pin) {
   return pin;
 }
@@ -47,6 +47,13 @@ void setupFastAnalogRead(int8_t speed) {
 
 void setupMozziADC(int8_t speed) {
   adc.attachInterrupt(stm32_adc_eoc_handler);
+}
+
+
+inline uint8_t STM32PinMap(uint8_t pin)
+{  
+  if (pin > 15) return pin-8;
+  else return pin;
 }
 
 ////// END analog input code ////////

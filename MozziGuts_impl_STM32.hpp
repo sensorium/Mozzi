@@ -11,7 +11,6 @@
  */
 
 #include "HardwareTimer.h"
-#include "STM32PinMap.h"
 
 ////// BEGIN analog input code ////////
 #define MOZZI_FAST_ANALOG_IMPLEMENTED
@@ -48,6 +47,13 @@ void setupFastAnalogRead(int8_t speed) {
 
 void setupMozziADC(int8_t speed) {
   adc.attachInterrupt(stm32_adc_eoc_handler);
+}
+
+
+inline uint8_t STM32PinMap(uint8_t pin)
+{  
+  if (pin > 15) return pin-8;
+  else return pin;
 }
 
 ////// END analog input code ////////

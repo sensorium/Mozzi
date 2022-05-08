@@ -68,7 +68,7 @@ public:
   void setCutoffFreq(su cutoff)
       {
     f = cutoff;
-    fb = q + ucfxmul(q, SHIFTED_1 - cutoff);
+    fb = q + ucfxmul(q, SHIFTED_1 + cutoff);
   }
 
   /** deprecated.  Use setCutoffFreqAndResonance(su cutoff, su
@@ -93,7 +93,7 @@ public:
     f = cutoff;
     q = resonance; // hopefully optimised away when compiled, just here for
                    // backwards compatibility
-    fb = q + ucfxmul(q, SHIFTED_1 - cutoff);
+    fb = q + ucfxmul(q, SHIFTED_1 + cutoff);
   }
 
   /** Calculate the next sample, given an input signal.

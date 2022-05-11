@@ -68,7 +68,7 @@ public:
   void setCutoffFreq(su cutoff)
       {
     f = cutoff;
-    fb = q + ucfxmul(q, SHIFTED_1 + cutoff);
+    fb = q + ucfxmul(q, (typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type) SHIFTED_1 + cutoff);
   }
 
   /** deprecated.  Use setCutoffFreqAndResonance(su cutoff, su
@@ -93,7 +93,7 @@ public:
     f = cutoff;
     q = resonance; // hopefully optimised away when compiled, just here for
                    // backwards compatibility
-    fb = q + ucfxmul(q, SHIFTED_1 + cutoff);
+    fb = q + ucfxmul(q,(typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type) SHIFTED_1 + cutoff);
   }
 
   /** Calculate the next sample, given an input signal.
@@ -126,7 +126,7 @@ private:
   // }
 
   // multiply two fixed point numbers (returns fixed point)
-  inline typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type ucfxmul(su a, su b)
+  inline typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type ucfxmul(su a, typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type b)
 	{
     return (((typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type)a * b) >> FX_SHIFT);
   }

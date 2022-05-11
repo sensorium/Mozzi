@@ -128,7 +128,7 @@ private:
   // multiply two fixed point numbers (returns fixed point)
   inline typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type ucfxmul(su a, typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type b)
 	{
-    return (((typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type)a * b) >> FX_SHIFT);
+    return (((typename IntegerType<sizeof(su)+sizeof(su)+sizeof(su)>::unsigned_type)a * b) >> FX_SHIFT);
   }
 
   // multiply two fixed point numbers (returns fixed point)

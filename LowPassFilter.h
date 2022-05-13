@@ -116,6 +116,7 @@ private:
   typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type fb;
   AudioOutputStorage_t buf0, buf1;
   const uint8_t FX_SHIFT = sizeof(su) << 3;
+  const uint8_t FX_SHIFT_M_1 = FX_SHIFT-1;
   const su SHIFTED_1 = (1<<FX_SHIFT)-1;
 
   // // multiply two fixed point numbers (returns fixed point)
@@ -128,7 +129,7 @@ private:
   // multiply two fixed point numbers (returns fixed point)
   inline typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type ucfxmul(su a, typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type b)
 	{
-    return (((typename IntegerType<sizeof(su)+sizeof(su)+sizeof(su)>::unsigned_type)a * b) >> FX_SHIFT);
+	  return (((typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type)a * (b >> 1)) >> (FX_SHIFT_M_1));
   }
 
   // multiply two fixed point numbers (returns fixed point)

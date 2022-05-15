@@ -32,6 +32,10 @@ for resonance and cutoff_freq and can work on samples up to 16bits on
 
 // set feedback amount given f and q between 0 and 1
 fb = q + q/(1.0 - f);
+In order to avoid a slow division we use the use a Taylor expansion to approximate 1/(1.0 - f):
+Close to f=0: 1/(1.0-f) approx 1.0+f.
+Hence: fb = q + q * (1.0 + f)
+This approximation is less and less valid with an increasing cutoff, leading to a reduction of the resonance of the filter at high cutoff frequencies.
 
 // for each sample...
 buf0 = buf0 + f * (in - buf0 + fb * (buf0 - buf1));

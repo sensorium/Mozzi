@@ -32,6 +32,10 @@ for resonance and cutoff_freq and can work on samples up to 16bits on
 
 // set feedback amount given f and q between 0 and 1
 fb = q + q/(1.0 - f);
+In order to avoid a slow division we use the use a Taylor expansion to approximate 1/(1.0 - f):
+Close to f=0: 1/(1.0-f) approx 1.0+f.
+Hence: fb = q + q * (1.0 + f)
+This approximation is less and less valid with an increasing cutoff, leading to a reduction of the resonance of the filter at high cutoff frequencies.
 
 // for each sample...
 buf0 = buf0 + f * (in - buf0 + fb * (buf0 - buf1));
@@ -68,7 +72,7 @@ public:
   void setCutoffFreq(su cutoff)
       {
     f = cutoff;
-    fb = q + ucfxmul(q, SHIFTED_1 - cutoff);
+    fb = q + ucfxmul(q, (typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type) SHIFTED_1 + cutoff);
   }
 
   /** deprecated.  Use setCutoffFreqAndResonance(su cutoff, su
@@ -93,7 +97,7 @@ public:
     f = cutoff;
     q = resonance; // hopefully optimised away when compiled, just here for
                    // backwards compatibility
-    fb = q + ucfxmul(q, SHIFTED_1 - cutoff);
+    fb = q + ucfxmul(q,(typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type) SHIFTED_1 + cutoff);
   }
 
   /** Calculate the next sample, given an input signal.
@@ -116,6 +120,7 @@ private:
   typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type fb;
   AudioOutputStorage_t buf0, buf1;
   const uint8_t FX_SHIFT = sizeof(su) << 3;
+  const uint8_t FX_SHIFT_M_1 = FX_SHIFT-1;
   const su SHIFTED_1 = (1<<FX_SHIFT)-1;
 
   // // multiply two fixed point numbers (returns fixed point)
@@ -126,9 +131,9 @@ private:
   // }
 
   // multiply two fixed point numbers (returns fixed point)
-  inline typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type ucfxmul(su a, su b)
+  inline typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type ucfxmul(su a, typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type b)
 	{
-    return (((typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type)a * b) >> FX_SHIFT);
+	  return (((typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type)a * (b >> 1)) >> (FX_SHIFT_M_1));
   }
 
   // multiply two fixed point numbers (returns fixed point)

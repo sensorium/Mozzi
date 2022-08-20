@@ -32,14 +32,12 @@ passing or external synths.
 ***
 
 ## Installation  
-Download the most recent version of Mozzi from Github.
-Then, following the instructions from the [Arduino libraries guide](http://arduino.cc/en/Guide/Libraries).
 
-In the Arduino IDE, navigate to __Sketch > Import Library__.  At the top of the drop
-down list, select the option to __Add Library__.  Navigate to the folder's location and open it.
-Return to the __Sketch > Import Library__ menu.
-You should now see the library at the bottom of the drop-down menu.
-It is ready to be used in your sketch.
+Use the "code" button on Mozzi's Github page to download a ZIP file of the latest developing code.  Import this into Arduino, following the instructions from the [Arduino libraries guide](http://arduino.cc/en/Guide/Libraries).
+
+In the Arduino IDE, navigate to __Sketch > Import Library__.  At the top of the drop down list, select the option to __Add Library__.  Navigate to the folder's location and open it.  Return to the __Sketch > Import Library__ menu.  You should now see the library at the bottom of the drop-down menu. It is ready to be used in your sketch.
+
+(Note: the files in the "releases" section on Github are now legacy.  The development code is recommended.)
 
 ***
 
@@ -303,7 +301,7 @@ on the RP2040 SDK API. Tested on a Pi Pico.
 ## Use and Remix
 Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License, which is detailed in LICENSE.txt
 
-Disclaimer: This is a human-readable summary of (and not a substitute for) the license. 
+Disclaimer: This is a human-readable summary of (and not a substitute for) the license.
 
 You are free to:
  - Share — copy and redistribute the material in any medium or format

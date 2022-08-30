@@ -35,7 +35,7 @@ passing or external synths.
 
 Use the "code" button on Mozzi's Github page to download a ZIP file of the latest developing code.  Import this into Arduino, following the instructions from the [Arduino libraries guide](http://arduino.cc/en/Guide/Libraries).
 
-In the Arduino IDE, navigate to __Sketch > Import Library__.  At the top of the drop down list, select the option to __Add Library__.  Navigate to the folder's location and open it.  Return to the __Sketch > Import Library__ menu.  You should now see the library at the bottom of the drop-down menu. It is ready to be used in your sketch.
+*In the Arduino IDE, navigate to Sketch > Include Library > Add .ZIP Library. At the top of the drop down list, select the option to "Add .ZIP Library".*
 
 (Note: the files in the "releases" section on Github are now legacy.  The development code is recommended.)
 

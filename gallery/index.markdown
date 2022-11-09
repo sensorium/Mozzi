@@ -6,6 +6,12 @@ Here are some projects by people using Mozzi. If you have something you'd like t
 
 ***
 
+Mutant and Freaq generative synths from [Meebleeps](https://github.com/Meebleeps):
+{% include video id="d2Lml1Z9uWc" provider="youtube" %}
+{% include video id="KD6IrcmMkoA" provider="youtube" %}
+
+***
+
 OscPocketM and OscPocketO ; A beatmaker and a synth/drum machine by Staffan Melin, who invites you to ["edit, share and evolve"](https://oscillator.se/arduino) {% include video id="BsVUM46RVbc" provider="youtube" %}
 {% include video id="xTlGxCow4GA" provider="youtube" %}
 

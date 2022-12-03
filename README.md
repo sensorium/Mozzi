@@ -32,14 +32,12 @@ passing or external synths.
 ***
 
 ## Installation  
-Download the most recent version of Mozzi from Github.
-Then, following the instructions from the [Arduino libraries guide](http://arduino.cc/en/Guide/Libraries).
 
-In the Arduino IDE, navigate to __Sketch > Import Library__.  At the top of the drop
-down list, select the option to __Add Library__.  Navigate to the folder's location and open it.
-Return to the __Sketch > Import Library__ menu.
-You should now see the library at the bottom of the drop-down menu.
-It is ready to be used in your sketch.
+Use the "code" button on Mozzi's Github page to download a ZIP file of the latest developing code.  Import this into Arduino, following the instructions from the [Arduino libraries guide](http://arduino.cc/en/Guide/Libraries).
+
+*In the Arduino IDE, navigate to Sketch > Include Library > Add .ZIP Library. At the top of the drop down list, select the option to "Add .ZIP Library".*
+
+(Note: the files in the "releases" section on Github are now legacy.  The development code is recommended.)
 
 ***
 
@@ -143,11 +141,12 @@ If you need your synth to run faster on AVR architectures, Arduino versions abov
 
 Find Arduino’s platform.txt (on OSX you can find it by searching in Users/your_name/Library/Arduino15). Search and replace -Os with -O2. Save.
 
-It’s explained more thoroughly (for Windows) [here] (http://www.instructables.com/id/Arduino-IDE-16x-compiler-optimisations-faster-code/?ALLSTEPS).
+It’s explained more thoroughly (for Windows) [here](http://www.instructables.com/id/Arduino-IDE-16x-compiler-optimisations-faster-code/?ALLSTEPS).
 
 If you still need more speed, Arduino 1.0.5 produces slightly faster code.
 
 ***
+
 ## Using external chips to produce the sound
 
 External chips (DAC) can also be used on any platform which does not support natively the I2S protocol  using an user defined `audioOutput` function. This can allow a greater audio quality over the native ways to output the sound (PWM for AVR Arduinos and STM32 and 12 bit DAC for Teensy 3.*).
@@ -173,13 +172,13 @@ Modified versions of the following libraries are included in the Mozzi download:
 
 Mozzi has also drawn on and been influenced by (among many others):  
 
-[xorshift] (http://www.jstatsoft.org/v08/i14/xorshift.pdf) random number generator, George Marsaglia, (2003)  
+[xorshift](http://www.jstatsoft.org/v08/i14/xorshift.pdf) random number generator, George Marsaglia, (2003)  
 ead~.c puredata external (creb library) Copyright (c) 2000-2003 by Tom Schouten (GPL2)  
 [AF_precision_synthesis](http://adrianfreed.com/content/arduino-sketch-high-frequency-precision-sine-wave-tone-sound-synthesis)
 by Adrian Freed, 2009  
 [Resonant filter](http://www.musicdsp.org/archive.php?classid=3#259) posted to musicdsp.org by Paul Kellett,
-and fixed point version of the filter on [dave's blog of art and programming] (http://www.pawfal.org/dave/blog/2011/09/)  
-State Variable filter pseudocode at [musicdsp.org] (http://www.musicdsp.org/showone.php?id=23 and http://www.musicdsp.org/showone.php?id=142)  
+and fixed point version of the filter on [dave's blog of art and programming](http://www.pawfal.org/dave/blog/2011/09/)  
+State Variable filter pseudocode at [musicdsp.org](http://www.musicdsp.org/showone.php?id=23) and [here](http://www.musicdsp.org/showone.php?id=142)  
 Various examples from [Pure Data](http://puredata.info/) by Miller Puckette  
 [Practical synthesis tutorials](http://www.obiwannabe.co.uk/) by Andy Farnell  
 
@@ -303,7 +302,7 @@ on the RP2040 SDK API. Tested on a Pi Pico.
 ## Use and Remix
 Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License, which is detailed in LICENSE.txt
 
-Disclaimer: This is a human-readable summary of (and not a substitute for) the license. 
+Disclaimer: This is a human-readable summary of (and not a substitute for) the license.
 
 You are free to:
  - Share — copy and redistribute the material in any medium or format

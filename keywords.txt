@@ -359,3 +359,9 @@ noteOff	KEYWORD2
 setPDEnv	KEYWORD2
 update	KEYWORD2
 next	KEYWORD2
+
+WaveFolder	KEYWORD1
+setHighLimit	KEYWORD2
+setLowLimit	KEYWORD2
+setLimits	KEYWORD2
+next	KEYWORD2

@@ -13,6 +13,8 @@
 #ifndef WAVEFOLDER_H
 #define WAVEFOLDER_H
 
+
+#include "IntegerType.h"
 #include "AudioOutput.h"
 
 
@@ -23,16 +25,13 @@
 */
 
 
-
-
-
 /** A simple wavefolder
  */
 
 template<typename T=AudioOutputStorage_t>
-  class WaveFolder
-  {  
-  public:
+class WaveFolder
+{  
+public:
   /** Constructor
    */
   WaveFolder(){;}
@@ -45,6 +44,7 @@ template<typename T=AudioOutputStorage_t>
   {
     hl = highLimit;
     R = hl-ll;
+    Ri = NUMERATOR / (hl-ll); // calculated here to speed up next()
   }
 
 
@@ -55,18 +55,21 @@ template<typename T=AudioOutputStorage_t>
   {
     ll = lowLimit;
     R = hl-ll;
+    Ri = NUMERATOR / (hl-ll); // calculated here to speed up next()
   }
 
 
   /** Set the low and the high limits at the same time.
       @param lowLimit the low limit used by the wavefolder
       @param highLimit the high limit used by the wavefolder
+      @note highLimit MUST be higher than lowLimit
   */
   void setLimits(T lowLimit, T highLimit)
   {
     hl = highLimit;
     ll = lowLimit;
     R = hl-ll;
+    Ri = NUMERATOR / (hl-ll); // calculated here to speed up next()
   }
 
 
@@ -76,30 +79,47 @@ template<typename T=AudioOutputStorage_t>
   */
   T next(T in)
   {
-    if (in > hl)
+     if (in > hl)
       {
-	T sub = in-hl;
-	T q = sub/R; // ratio
-	T r = sub - q*R; // remainer
-	if (q%2 == 0) return hl-r;
-	else return ll+r;
+	typename IntegerType<sizeof(T)>::unsigned_type sub = in-hl;
+	/* Instead of using a division, we multiply by the inverse.
+	   As the inverse is necessary smaller than 1, in order to fit in an integer
+	   we multiply it by NUMERATOR before computing the inverse.
+	   The shift is equivalent to divide by the NUMERATOR:
+	   q = sub / R = (sub * (NUMERATOR/R))/NUMERATOR with NUMERATOR/R = Ri
+	*/
+        typename IntegerType<sizeof(T)>::unsigned_type q =  ((typename IntegerType<sizeof(T)+sizeof(T)>::unsigned_type) sub*Ri) >> SHIFT; 
+	typename IntegerType<sizeof(T)>::unsigned_type r = sub - q*R; // remainer
+	if (q&0b1) return ll+r;  //odd
+	else return hl-r;  // even
+	
       }
     else if (in < ll)
       {
-	T sub = ll-in;
-	T q = sub/R; // ratio
-	T r = sub - q*R; // remainer
-	if (q%2 == 0) return ll+r;
-	else return hl-r;
+	typename IntegerType<sizeof(T)>::unsigned_type sub = ll-in;
+	typename IntegerType<sizeof(T)>::unsigned_type q = ((typename IntegerType<sizeof(T)+sizeof(T)>::unsigned_type) sub*Ri) >> SHIFT;
+	typename IntegerType<sizeof(T)>::unsigned_type r = sub - q*R; // remainer
+	if (q&0b1) return hl-r;
+	else return ll+r;
       }
     else return in;
   }
 
-  private:
+private:
   T hl;
   T ll;
-  T R;
-  };
+  typename IntegerType<sizeof(T)>::unsigned_type R;
+  typename IntegerType<sizeof(T)>::unsigned_type Ri;
+  static const uint8_t SHIFT = (sizeof(T) << 3);
+  static const typename IntegerType<sizeof(T)>::unsigned_type NUMERATOR = ((typename IntegerType<sizeof(T)+sizeof(T)>::unsigned_type) 1<<(SHIFT))-1;
+
+  // Slower (way slower, around 2.5 times) but more precise, kept in case we want to switch one day.
+  /*   typename IntegerType<sizeof(T)+sizeof(T)>::unsigned_type Ri;
+  static const uint8_t SHIFT = 1+(sizeof(T) << 3);
+  static const typename IntegerType<sizeof(T)+sizeof(T)>::unsigned_type NUMERATOR = ((typename IntegerType<sizeof(T)+sizeof(T)>::unsigned_type) 1<<(SHIFT))-1;*/
+    
+    
+};
 
 
 #endif

@@ -22,6 +22,12 @@
    A simple wavefolder which folds the waves once it reachs the up or
    low limits. The wave can be folded several times. It constrains the wave
    to be constrain between the LowLimit and the HighLimit.
+   By default, this class is working on data which not overflow the  
+   AudioOutputStorage_t type, which is int by default.
+   Feeding samples which, before folding, are overflowing this container
+   will lead to unpredicted behavior.
+   It is possible to use a bigger type with the template formulation
+   if needed.
 */
 
 

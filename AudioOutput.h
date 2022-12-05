@@ -106,6 +106,8 @@ struct StereoOutput {
   static inline StereoOutput fromNBit(uint8_t bits, int16_t l, int16_t r) { return StereoOutput(SCALE_AUDIO(l, bits), SCALE_AUDIO(r, bits)); }
   /** @see MonoOutput::fromNBit(), stereo variant, 32 bit overload */
   static inline StereoOutput fromNBit(uint8_t bits, int32_t l, int32_t r) { return StereoOutput(SCALE_AUDIO(l, bits), SCALE_AUDIO(r, bits)); }
+  /** @see MonoOutput::fromNBit(), stereo variant, native int bit overload */
+  static inline StereoOutput fromNBit(uint8_t bits, int l, int r) { return StereoOutput(SCALE_AUDIO(l, bits), SCALE_AUDIO(r, bits)); }  
   /** @see MonoOutput::from8Bit(), stereo variant */
   static inline StereoOutput from8Bit(int16_t l, int16_t r) { return fromNBit(8, l, r); }
   /** @see MonoOutput::from16Bit(), stereo variant */
@@ -155,6 +157,8 @@ struct MonoOutput {
   static inline MonoOutput fromNBit(uint8_t bits, int16_t l) { return MonoOutput(SCALE_AUDIO(l, bits)); }
   /** 32bit overload. See above. */
   static inline MonoOutput fromNBit(uint8_t bits, int32_t l) { return MonoOutput(SCALE_AUDIO(l, bits)); }
+  /** Native int overload. Fixes Compilation on Teensys. */
+  static inline MonoOutput fromNBit(uint8_t bits, int l) { return MonoOutput(SCALE_AUDIO(l, bits)); }
   /** Construct an audio frame from a zero-centered value known to be in the 8 bit range. On AVR, STANDADR or STANDARD_PLUS mode, this is effectively the same as calling the
    * constructor, directly (no scaling gets applied). On platforms/configs using more bits, an appropriate left-shift will be performed. */
   static inline MonoOutput from8Bit(int16_t l) { return fromNBit(8, l); }

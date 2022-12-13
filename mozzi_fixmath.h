@@ -31,7 +31,7 @@ typedef uint32_t Q0n31;				/**< signed number using 0 integer bits and 31 fracti
 typedef int16_t Q7n8; 				/**< signed fractional number using 7 integer bits and 8 fractional bits, represents -127.996 to 127.996*/
 typedef uint16_t Q3n13; /**< unsigned fractional number using 3 integer bits and 13 fractional bits, represents 0 to 7.999*/
 typedef int16_t Q1n14;				/**< signed fractional number using 1 integer bit and 14 fractional bits, represents -1.999 to 1.999*/
-typedef int16_t Q15n0;				/**< signed number using 15 integer bits and 0 fractional bits, represents -2147483648 to 2147483647*/
+typedef int16_t Q15n0;				/**< signed number using 15 integer bits and 0 fractional bits, represents -32768 to 32767*/
 typedef uint16_t Q8n8;		/**< unsigned fractional number using 8 integer bits and 8 fractional bits, represents 0 to 255.996*/
 typedef int16_t	 Q0n15;				/**< signed fractional number using 0 integer bits and 15 fractional bits, represents -0.32768 to 0.32767*/
 typedef uint16_t	 Q1n15;	/**< unsigned fractional number using 1 integer bit and 15 fractional bits, represents 0 to 1.999*/

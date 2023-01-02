@@ -101,9 +101,9 @@ void setupMozziADC(int8_t speed) {
   );
 
   // we want notification, when a sample has arrived
-  dma_channel_set_irq0_enabled(dma_chan, true);
-  irq_set_exclusive_handler(DMA_IRQ_0, rp2040_adc_queue_handler);
-  irq_set_enabled(DMA_IRQ_0, true);
+  dma_channel_set_irq1_enabled(dma_chan, true);
+  irq_set_exclusive_handler(DMA_IRQ_1, rp2040_adc_queue_handler);
+  irq_set_enabled(DMA_IRQ_1, true);
 }
 
 void rp2040_adc_queue_handler() {
@@ -119,8 +119,9 @@ void rp2040_adc_queue_handler() {
 ////// BEGIN audio output code //////
 #define LOOP_YIELD tight_loop_contents();  // apparently needed, among other things, to service the alarm pool
 
-#include <hardware/pwm.h>
 
+#if (RP2040_AUDIO_OUT_MODE == PWM_VIA_BARE_CHIP) || (EXTERNAL_AUDIO_OUTPUT == true)
+#include <hardware/pwm.h>
 #if (EXTERNAL_AUDIO_OUTPUT != true) // otherwise, the last stage - audioOutput() - will be provided by the user
 inline void audioOutput(const AudioOutput f) {
   pwm_set_gpio_level(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
@@ -128,7 +129,7 @@ inline void audioOutput(const AudioOutput f) {
   pwm_set_gpio_level(AUDIO_CHANNEL_2_PIN, f.r()+AUDIO_BIAS);
 #endif
 }
-#endif
+#endif  // #if (EXTERNAL_AUDIO_OUTPUT != true)
 
 #include <pico/time.h>
 /** Implementation notes:
@@ -150,8 +151,35 @@ void audioOutputCallback(uint) {
     // NOTE: hardware_alarm_set_target returns true, if the target was already missed. In that case, keep pushing samples, until we have caught up.
   } while (hardware_alarm_set_target(audio_update_alarm_num, next_audio_update));
 }
+ 
+#elif (RP2040_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
+#include <I2S.h>
+I2S i2s(OUTPUT);
+
+inline bool canBufferAudioOutput() {
+  return (i2s.availableForWrite());
+}
+
+inline void audioOutput(const AudioOutput f) {  
+#if (AUDIO_BITS == 16)
+#if (AUDIO_CHANNELS > 1)
+  i2s.write16(f.l()+AUDIO_BIAS, f.r()+AUDIO_BIAS);
+#else
+  i2s.write16(f.l()+AUDIO_BIAS, AUDIO_BIAS);
+#endif
+#elif (AUDIO_BITS == 32)
+#if (AUDIO_CHANNELS > 1)
+  i2s.write32(f.l()+AUDIO_BIAS, f.r()+AUDIO_BIAS);
+#else
+  i2s.write32(f.l()+AUDIO_BIAS, AUDIO_BIAS);
+#endif
+#endif   
+}
+#endif 
+
 
 static void startAudio() {
+#if (RP2040_AUDIO_OUT_MODE == PWM_VIA_BARE_CHIP) || (EXTERNAL_AUDIO_OUTPUT == true) // EXTERNAL AUDIO needs the timers set here
 #if (EXTERNAL_AUDIO_OUTPUT != true)
   // calling analogWrite for the first time will try to init the pwm frequency and range on all pins. We don't want that happening after we've set up our own,
   // so we start off with a dummy call to analogWrite:
@@ -185,9 +213,21 @@ static void startAudio() {
     next_audio_update = make_timeout_time_us(micros_per_update);
     // See audioOutputCallback(), above. In _theory_ some interrupt stuff might delay us, here, causing us to miss the first beat (and everything that follows)
   } while (hardware_alarm_set_target(audio_update_alarm_num, next_audio_update));
+
+#elif (RP2040_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
+  i2s.setBCLK(pBCLK);
+  i2s.setDATA(pDOUT);
+  i2s.setBitsPerSample(AUDIO_BITS);
+  i2s.begin(AUDIO_RATE);
+#endif
 }
 
 void stopMozzi() {
+#if (RP2040_AUDIO_OUT_MODE == PWM_VIA_BARE_CHIP) || (EXTERNAL_AUDIO_OUTPUT == true)
   hardware_alarm_set_callback(audio_update_alarm_num, NULL);
+#elif (RP2040_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
+  i2s.end();
+#endif
+  
 }
 ////// END audio output code //////

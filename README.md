@@ -289,9 +289,16 @@ on the RP2040 SDK API. Tested on a Pi Pico.
 
 - This is a recent addition, implementation details may still change (currently just PWM driven by a timer; this may be worth changing to a DMA driven output)
 - Wavetables and samples are not kept in progmem on this platform. While apparently speed (of the external flash) is not much of an issue, the data always seems to be copied into RAM, anyway.
-- Audio output is to pin 0, by default, with 11 bits default output resolution
-- One hardware alarm and one DMA channel are claimed (number not hardcoded)
-- HIFI_MODE not yet implemented (although that should not be too hard to do)
+- Currently, two audio output modes exist (configurable in AudioConfigRP2040.h) in addition to using an user-defined `audioOutput` function, with the default being PWM_VIA_BARE_CHIP:
+  - PWM_VIA_BARE_CHIP: PWM audio output on pin 0, by default, with 11 bits default output resolution
+    - One hardware alarm and one DMA channel are claimed (number not hardcoded).
+    - HIFI_MODE not yet implemented (although that should not be too hard to do).
+  - EXTERNAL_DAC_VIA_I2S: I2S output to be connected to an external DAC
+    - 16 bits resolution by default (configurable in AudioConfigRP2040.h), 8, 16, 24 (left aligned) and 32 resolution are available.
+    - Both plain I2S and LSBJ_FORMAT (for the PT8211 for instance) are available (configurable in AudioConfigRP2040.h), default is LSBJ.
+    - Outputs pins can be configured in AudioConfigRP2040.h. Default is BCK: 20, WS: 21, DATA: 22.
+    - Two hardware alarms and two DMA channels are claimed.
+    - At the time of writing, LSBJ is only available with github arduino-pico core.
 - Note that AUDIO_INPUT and mozziAnalogRead() return values in the RP2040's full ADC resolution of 0-4095 rather than AVR's 0-1023.
 - twi_nonblock is not ported
 - Code uses only one CPU core

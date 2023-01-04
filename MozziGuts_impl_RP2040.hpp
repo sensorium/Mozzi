@@ -156,24 +156,58 @@ void audioOutputCallback(uint) {
 #include <I2S.h>
 I2S i2s(OUTPUT);
 
+
 inline bool canBufferAudioOutput() {
   return (i2s.availableForWrite());
 }
-
-inline void audioOutput(const AudioOutput f) {  
-#if (AUDIO_BITS == 16)
-#if (AUDIO_CHANNELS > 1)
-  i2s.write16(f.l()+AUDIO_BIAS, f.r()+AUDIO_BIAS);
+/*
+#if (AUDIO_BITS == 8)
+size_t (*i2sWritePtr) (int8_t, int8_t) = &i2s.write8;
+#elif (AUDIO_BITS == 16)
+//size_t (*i2sWritePtr) (int16_t, int16_t) = &i2s.write16;
+size_t (I2S::*i2sWritePtr) (int16_t, int16_t) = &I2S::write16;
+#elif (AUDIO_BITS == 24)
+size_t (*i2sWritePtr) (int32_t, int32_t) = &i2s.write24;
+#elif (AUDIO_BITS == 32)
+size_t (*i2sWritePtr) (int32_t, int32_t) = &i2s.write32;
 #else
-  i2s.write16(f.l()+AUDIO_BIAS, AUDIO_BIAS);
+#error The number of AUDIO_BITS in AudioConfigRP2040.h is incorrect
+#endif*/
+
+inline void audioOutput(const AudioOutput f) {
+
+#if (AUDIO_BITS == 8)
+#if (AUDIO_CHANNELS > 1)
+  i2s.write8(f.l(), f.r());
+#else
+  i2s.write8(f.l(), 0);
 #endif
+  
+#elif (AUDIO_BITS == 16)
+#if (AUDIO_CHANNELS > 1)
+  i2s.write16(f.l(), f.r());
+#else
+  i2s.write16(f.l(), 0);
+#endif
+  
+#elif (AUDIO_BITS == 24)
+#if (AUDIO_CHANNELS > 1)
+  i2s.write24(f.l(), f.r());
+#else
+  i2s.write24(f.l(), 0);
+#endif
+  
 #elif (AUDIO_BITS == 32)
 #if (AUDIO_CHANNELS > 1)
-  i2s.write32(f.l()+AUDIO_BIAS, f.r()+AUDIO_BIAS);
+  i2s.write32(f.l(), f.r());
 #else
-  i2s.write32(f.l()+AUDIO_BIAS, AUDIO_BIAS);
+  i2s.write32(f.l(), 0);
 #endif
-#endif   
+#else
+  #error The number of AUDIO_BITS set in AudioConfigRP2040.h is incorrect
+#endif  
+
+  
 }
 #endif 
 
@@ -215,9 +249,13 @@ static void startAudio() {
   } while (hardware_alarm_set_target(audio_update_alarm_num, next_audio_update));
 
 #elif (RP2040_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
-  i2s.setBCLK(pBCLK);
-  i2s.setDATA(pDOUT);
+  i2s.setBCLK(BCLK_PIN);
+  i2s.setDATA(DOUT_PIN);
   i2s.setBitsPerSample(AUDIO_BITS);
+  i2s.setBuffers(BUFFERS, BUFFER_WORDS, 0);
+#if (LSBJ_FORMAT == true)
+  i2s.setLSBJFormat();
+#endif
   i2s.begin(AUDIO_RATE);
 #endif
 }

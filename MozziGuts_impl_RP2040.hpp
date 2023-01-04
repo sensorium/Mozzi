@@ -160,19 +160,6 @@ I2S i2s(OUTPUT);
 inline bool canBufferAudioOutput() {
   return (i2s.availableForWrite());
 }
-/*
-#if (AUDIO_BITS == 8)
-size_t (*i2sWritePtr) (int8_t, int8_t) = &i2s.write8;
-#elif (AUDIO_BITS == 16)
-//size_t (*i2sWritePtr) (int16_t, int16_t) = &i2s.write16;
-size_t (I2S::*i2sWritePtr) (int16_t, int16_t) = &I2S::write16;
-#elif (AUDIO_BITS == 24)
-size_t (*i2sWritePtr) (int32_t, int32_t) = &i2s.write24;
-#elif (AUDIO_BITS == 32)
-size_t (*i2sWritePtr) (int32_t, int32_t) = &i2s.write32;
-#else
-#error The number of AUDIO_BITS in AudioConfigRP2040.h is incorrect
-#endif*/
 
 inline void audioOutput(const AudioOutput f) {
 

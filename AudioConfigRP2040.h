@@ -31,22 +31,17 @@
 #define BCLK_PIN 20
 #define WS_PIN (pBCLK+1)  // CANNOT BE CHANGED, HAS TO BE NEXT TO pBCLK
 #define DOUT_PIN 22
-#define LSBJ_FORMAT true   // some DAC, like the PT8211, use a variant of I2S data format called LSBJ
+#define LSBJ_FORMAT false   // some DAC, like the PT8211, use a variant of I2S data format called LSBJ
                            // set this to true to use this kind of DAC or false for plain I2S.
 #define AUDIO_BITS 16   // available values are 8, 16, 24 (LEFT ALIGN in 32 bits type!!) and 32 bits
 // ****** END: These are define you may want to change. Best not to touch anything outside this range. ************/
 
 #define BYPASS_MOZZI_OUTPUT_BUFFER true
 
-// Configuration of the I2S port, especially DMA. Set in stone here as default of the library when this want written.
+// Configuration of the I2S port, especially DMA. Set in stone here as default of the library when this was written.
 // Probably do not change if you are not sure of what you are doing
 #define BUFFERS 8       // number of DMA buffers used
-#if (AUDIO_BITS == 32)
-#define BUFFER_WORDS 32  // number of words in the buffers
-#else
-#define BUFFER_WORDS 16
-#endif
-
+#define BUFFER_SIZE 256  // total size of the buffer, in samples
 #endif
 
 

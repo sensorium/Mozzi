@@ -239,7 +239,12 @@ static void startAudio() {
   i2s.setBCLK(BCLK_PIN);
   i2s.setDATA(DOUT_PIN);
   i2s.setBitsPerSample(AUDIO_BITS);
-  i2s.setBuffers(BUFFERS, BUFFER_WORDS, 0);
+  
+#if (AUDIO_BITS > 16)
+  i2s.setBuffers(BUFFERS, (size_t) (BUFFER_SIZE/BUFFERS), 0);
+#else
+  i2s.setBuffers(BUFFERS, (size_t) (BUFFER_SIZE/BUFFERS/2), 0);
+#endif
 #if (LSBJ_FORMAT == true)
   i2s.setLSBJFormat();
 #endif

@@ -83,6 +83,7 @@ void setupMozziADC(int8_t speed) {
   );
   
   uint dma_chan = dma_claim_unused_channel(true);
+  rp2040_adc_dma_chan = dma_chan;
   static dma_channel_config cfg = dma_channel_get_default_config(dma_chan);
 
   // Reading from constant address, writing to incrementing byte addresses
@@ -102,8 +103,9 @@ void setupMozziADC(int8_t speed) {
 
   // we want notification, when a sample has arrived
   dma_channel_set_irq1_enabled(dma_chan, true);
-  irq_set_exclusive_handler(DMA_IRQ_1, rp2040_adc_queue_handler);
+  irq_add_shared_handler(DMA_IRQ_1, rp2040_adc_queue_handler, PICO_SHARED_IRQ_HANDLER_DEFAULT_ORDER_PRIORITY);
   irq_set_enabled(DMA_IRQ_1, true);
+  dma_channel_start(dma_chan);
 }
 
 void rp2040_adc_queue_handler() {

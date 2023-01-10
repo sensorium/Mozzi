@@ -102,14 +102,15 @@ void setupMozziADC(int8_t speed) {
   );
 
   // we want notification, when a sample has arrived
-  dma_channel_set_irq1_enabled(dma_chan, true);
-  irq_add_shared_handler(DMA_IRQ_1, rp2040_adc_queue_handler, PICO_SHARED_IRQ_HANDLER_DEFAULT_ORDER_PRIORITY);
-  irq_set_enabled(DMA_IRQ_1, true);
+  dma_channel_set_irq0_enabled(dma_chan, true);
+  irq_add_shared_handler(DMA_IRQ_0, rp2040_adc_queue_handler, PICO_SHARED_IRQ_HANDLER_DEFAULT_ORDER_PRIORITY);
+  irq_set_enabled(DMA_IRQ_0, true);
   dma_channel_start(dma_chan);
 }
 
 void rp2040_adc_queue_handler() {
-  dma_hw->ints0 = 1u << rp2040_adc_dma_chan;  // clear interrupt flag
+  if (!dma_channel_get_irq0_status(rp2040_adc_dma_chan)) return; // shared handler may get called on unrelated events
+  dma_channel_acknowledge_irq0(rp2040_adc_dma_chan); // clear interrupt flag  
   //adc_run(false);  // adc not running continuous
   //adc_fifo_drain(); // no need to drain fifo, the dma transfer did that
   dma_channel_set_trans_count(rp2040_adc_dma_chan, 1, true);  // set up for another read

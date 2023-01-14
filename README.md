@@ -189,9 +189,9 @@ Various examples from [Pure Data](http://puredata.info/) by Miller Puckette
 port by Thomas Friedrichsmeier
 
 Compiles for and runs on a STM32F103C8T6 blue pill board, with a bunch of caveats (see below), i.e. on a board _without_ a
-real DAC. Should probably run on any other board supported by [STM32duino](https://github.com/rogerclarkmelbourne/Arduino_STM32).
+real DAC. Should probably run on any other board supported by [STM32duino](https://github.com/rogerclarkmelbourne/Arduino_STM32) (STM32F4 is __not__ supported for now).
 
-- You will need a very recent (12/2017) checkout of the Arduino_STM32 repository, otherwise compilation will fail.
+- You will need a very recent checkout of the Arduino_STM32 repository, otherwise compilation will fail.
 - Audio output is to pin PB8, by default (HIFI-mode: PB8 and PB9)
 - If you want to use MIDI, be sure to replace "MIDI_CREATE_DEFAULT_INSTANCE()" with "MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, MIDI)" (or Serial2)
 - Timers 4 (PWM output), and 2 (audio rate) are used by default.

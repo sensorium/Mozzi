@@ -18,6 +18,7 @@ setPin13Low	KEYWORD2
 trailingZeros	KEYWORD2
 
 ResonantFilterNbits	KEYWORD1
+ResonantFilter	KEYWORD1
 LowPassFilter	KEYWORD1
 HighPassFilter	KEYWORD1
 BandPassFilter	KEYWORD1

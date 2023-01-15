@@ -2,7 +2,6 @@
  * ResonantFilter.h
  *
  * Copyright 2012 Tim Barrass
- * Copyright 2022 Thomas Combriat
  *
  * This file is part of Mozzi.
  *
@@ -41,7 +40,7 @@ for resonance and cutoff_freq and can work on samples up to 16bits on
 The filter can be instanciated using the template version ResonantFilterNbits<unsigned_t type, FILTER_TYPE>. For ease of use, the following types are also accepted:
 
 8bits versions: LowPassFilter, HighPassFilter, BandPassFilter, NotchFilter
-8bits versions: LowPassFilter16, HighPassFilter16, BandPassFilter16, NotchFilter16
+16bits versions: LowPassFilter16, HighPassFilter16, BandPassFilter16, NotchFilter16
 
 
 

@@ -36,6 +36,20 @@
 #define AUDIO_BITS 16   // available values are 8, 16, 24 (LEFT ALIGN in 32 bits type!!) and 32 bits
 // ****** END: These are define you may want to change. Best not to touch anything outside this range. ************/
 
+// The arduino-pico SDK has I2S Pins predefined for some boards.
+#if defined(ARDUINO_ARCH_RP2040)
+
+#if defined(PIN_I2S_BCLK)
+#define BCLK_PIN PIN_I2S_BCLK
+#define WS_PIN (PIN_I2S_BCLK+)
+#endif
+
+#if defined(PIN_I2S_DOUT)
+#define DOUT_PIN PIN_I2S_DOUT
+#endif
+
+#endif
+
 #define BYPASS_MOZZI_OUTPUT_BUFFER true
 
 // Configuration of the I2S port, especially DMA. Set in stone here as default of the library when this was written.

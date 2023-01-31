@@ -31,10 +31,10 @@ Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound(CHUM9_DATA);
 Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFilterMod(COS2048_DATA);
 
 //Different types of filters available
-LowPassFilter rf; // Equivalent to ResonantFilter<uint8_t, LOWPASS>
-//HighPassFilter rf; // Equivalent to ResonantFilter<uint8_t, HIGHPASS>
-//BandPassFilter rf; // Equivalent to ResonantFilter<uint8_t, BANDPASS>
-//NotchFilter rf; // Equivalent to ResonantFilter<uint8_t, NOTCH>
+LowPassFilter rf; // Equivalent to ResonantFilter<LOWPASS>
+//ResonantFilter<HIGHPASS> rf; // HighPass filter
+//ResonantFilter<BANDPASS> rf; // BandPass filter
+//ResonantFilter<NOTCH> rf; // Notch filter
 
 uint8_t resonance = 200; // range 0-255, 255 is most resonant
 

@@ -25,7 +25,7 @@ http://www.musicdsp.org/archive.php?classid=3#259, applying the
 modification from Peter Schoffhauzer to make it able to output
 all filter types (LowPass, HighPass, Notch and BandPass).
 
-The generic filter is ResonantFilterNbits<unsigned_t type, FILTER_TYPE>. 
+The generic filter is ResonantFilter<unsigned_t type, FILTER_TYPE>. 
  - type specifies the type expected for the cutoff and resonance. Only uint8_t and uint16_t have been tested. These are denoted 8bits and 16bits versions of the filter in the following.
  - FILTER_TYPE specifies the filter type. LOWPASS, BANDPASS, HIGHPASS and NOTCH are available types.
 
@@ -37,7 +37,7 @@ The 16bits version consumes more CPU ressources but uses 16bits values
 for resonance and cutoff_freq and can work on samples up to 16bits on
 8bits platforms and up to 32 on 32bits platforms.
 
-The filter can be instanciated using the template version ResonantFilterNbits<unsigned_t type, FILTER_TYPE>. For ease of use, the following types are also accepted:
+The filter can be instanciated using the template version ResonantFilter<unsigned_t type, FILTER_TYPE>. For ease of use, the following types are also accepted:
 
 8bits versions: LowPassFilter, HighPassFilter, BandPassFilter, NotchFilter
 16bits versions: LowPassFilter16, HighPassFilter16, BandPassFilter16, NotchFilter16
@@ -72,14 +72,14 @@ enum filter_types { LOWPASS, BANDPASS, HIGHPASS, NOTCH };
 
 /** A generic resonant pass filter for audio signals.
  */
-template<typename su, int8_t FILTER_TYPE>
-class ResonantFilterNbits
+template<int8_t FILTER_TYPE, typename su=uint8_t>
+class ResonantFilter
 {
 
 public:
   /** Constructor.
    */
-  ResonantFilterNbits() { ; }
+  ResonantFilter() { ; }
 
 
   /** deprecated.  Use setCutoffFreqAndResonance(su cutoff, su
@@ -170,14 +170,16 @@ private:
   inline typename IntegerType<sizeof(AudioOutputStorage_t)+sizeof(AudioOutputStorage_t)>::signed_type fxmul(typename IntegerType<sizeof(AudioOutputStorage_t)+sizeof(AudioOutputStorage_t)>::signed_type a, typename IntegerType<sizeof(AudioOutputStorage_t)+sizeof(su)-1>::signed_type b) { return ((a * b) >> FX_SHIFT); }
 };
 
-typedef ResonantFilterNbits<uint8_t, LOWPASS> LowPassFilter;
-typedef ResonantFilterNbits<uint16_t, LOWPASS> LowPassFilter16;
-typedef ResonantFilterNbits<uint8_t, HIGHPASS> HighPassFilter;
-typedef ResonantFilterNbits<uint16_t, HIGHPASS> HighPassFilter16;
-typedef ResonantFilterNbits<uint8_t, BANDPASS> BandPassFilter;
-typedef ResonantFilterNbits<uint16_t, BANDPASS> BandPassFilter16;
-typedef ResonantFilterNbits<uint8_t, NOTCH> NotchFilter;
-typedef ResonantFilterNbits<uint16_t, NOTCH> NotchFilter16;
+typedef ResonantFilter<LOWPASS> LowPassFilter;
+typedef ResonantFilter<LOWPASS, uint16_t> LowPassFilter16;
+/*
+typedef ResonantFilter<uint8_t, HIGHPASS> HighPassFilter;
+typedef ResonantFilter<uint16_t, HIGHPASS> HighPassFilter16;
+typedef ResonantFilter<uint8_t, BANDPASS> BandPassFilter;
+typedef ResonantFilter<uint16_t, BANDPASS> BandPassFilter16;
+typedef ResonantFilter<uint8_t, NOTCH> NotchFilter;
+typedef ResonantFilter<uint16_t, NOTCH> NotchFilter16;
+*/
 
 
 /**

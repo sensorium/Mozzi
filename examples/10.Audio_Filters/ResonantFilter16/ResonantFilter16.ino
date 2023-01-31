@@ -34,10 +34,10 @@ Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFilterMod(COS2048_DATA);
 Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFilterMod2(COS2048_DATA);
 
 //Different types of filters available
-LowPassFilter16 rf;  // Equivalent to ResonantFilter<uint8_t, LOWPASS>
-//HighPassFilter16 rf;  // Equivalent to ResonantFilter<uint8_t, HIGHPASS>
-//BandPassFilter16 rf;  // Equivalent to ResonantFilter<uint8_t, BANDPASS>
-//NotchFilter16 rf;  // Equivalent to ResonantFilter<uint8_t, NOTCH>
+LowPassFilter16 rf;  // Equivalent to ResonantFilter<LOWPASS, uint16_t>
+//ResonantFilter<HIGHPASS, uint16_t> rf;  // HighPass filter
+//ResonantFilter<BANDPASS, uint16_t> rf;  // BandPass filter
+//ResonantFilter<NOTCH, uint16_t> rf;  // Notch filter
 
 
 uint16_t resonance = 50000; // range 0-65535, 65535 is most resonant.

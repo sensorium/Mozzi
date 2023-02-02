@@ -70,7 +70,7 @@ fixed point version of the filter
 
 enum filter_types { LOWPASS, BANDPASS, HIGHPASS, NOTCH };
 
-/** A generic resonant pass filter for audio signals.
+/** A generic resonant filter for audio signals.
  */
 template<int8_t FILTER_TYPE, typename su=uint8_t>
 class ResonantFilter
@@ -100,7 +100,7 @@ public:
 
   Set the resonance. If you hear unwanted distortion, back off the resonance.
   After setting resonance, you need to call setCuttoffFreq() to hear the change!
-  @param resonance in the range 0-255 for ResonantFilter, 0-65535 for ResonantFilter16, with 255/65535 being most resonant
+  @param resonance in the range 0-255 for ResonantFilter, 0-65535 for ResonantFilter<FILTER_TYPE, uint16_t>, with 255/65535 being most resonant
   @note	Remember to call setCuttoffFreq() after resonance is changed!
   */
   void setResonance(su resonance) { q = resonance; }
@@ -110,7 +110,7 @@ public:
   setResonance().  (Because the internal calculations need to be done whenever either parameter changes.)
   @param cutoff range 0-255 represents 0-8191 Hz (AUDIO_RATE/2) for ResonantFilter, range 0-65535 for ResonantFilter16
   Be careful of distortion at the lower end, especially with high resonance.
-  @param resonance range 0-255 for ResonantFilter, 0-65535 for ResonantFilter16, 255/65535 is most resonant.
+  @param resonance range 0-255 for ResonantFilter, 0-65535 for ResonantFilter<FILTER_TYPE, uint16_t>, 255/65535 is most resonant.
   */
   void setCutoffFreqAndResonance(su cutoff, su resonance)
 	{
@@ -127,13 +127,12 @@ public:
   */
   //	10.5 to 12.5 us, mostly 10.5 us (was 14us)
   inline AudioOutputStorage_t next(AudioOutputStorage_t in)
-  {    
-    buf0 += fxmul(((in - buf0) + fxmul(fb, buf0 - buf1)), f);
-    buf1 += ifxmul(buf0 - buf1, f); // could overflow if input changes fast
+  {
+    advanceBuffers(in);
     return next(in, Int2Type<FILTER_TYPE>());
   }
 
-private:
+protected:
   su q;
   su f;
   typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type fb;
@@ -149,6 +148,12 @@ private:
   // 	return (a*b)>>FX_SHIFT;
   // }
 
+  inline void advanceBuffers(AudioOutputStorage_t in)
+  {
+    buf0 += fxmul(((in - buf0) + fxmul(fb, buf0 - buf1)), f);
+    buf1 += ifxmul(buf0 - buf1, f); // could overflow if input changes fast
+  }
+  
   inline AudioOutputStorage_t next(AudioOutputStorage_t in, Int2Type<LOWPASS>) {return buf1;}
 
   inline AudioOutputStorage_t next(AudioOutputStorage_t in, Int2Type<HIGHPASS>) {return in - buf0;}
@@ -169,6 +174,46 @@ private:
   // multiply two fixed point numbers (returns fixed point)
   inline typename IntegerType<sizeof(AudioOutputStorage_t)+sizeof(AudioOutputStorage_t)>::signed_type fxmul(typename IntegerType<sizeof(AudioOutputStorage_t)+sizeof(AudioOutputStorage_t)>::signed_type a, typename IntegerType<sizeof(AudioOutputStorage_t)+sizeof(su)-1>::signed_type b) { return ((a * b) >> FX_SHIFT); }
 };
+
+/** A generic filter for audio signals that can produce lowpass, highpass, bandpass and notch outputs at runtime.
+Behaves like ResonantFilter for setting the resonance and cutoff frequency.
+Like ResonantFilter, it can be used on different sample sizes: MultiFilter<uint8_t> and MultiFilter<uint16_t> have been tested.
+For the former, both cutoff and resonance are uint8_t, hence between 0-255.
+For the later,  both cutoff and resonance are uint16_t, hence between 0-65535.
+ */
+template<typename su=uint8_t>
+class MultiFilter: public ResonantFilter<LOWPASS,su>
+{
+public:
+  /** Compute the filters, given an input signal.
+      @param in the signal input. Should not be more than 8bits on 8bits platforms (Arduino) if using the 8bits version and not 16bits version.
+  */
+inline void next (AudioOutputStorage_t in)
+  {
+    last_in = in;
+    ResonantFilter<LOWPASS,su>::advanceBuffers(in);
+  }
+  /** Return the input filtered with a lowpass filter
+      @return the filtered signal output.
+   */
+  inline AudioOutputStorage_t low() {return ResonantFilter<LOWPASS,su>::next(last_in,Int2Type<LOWPASS>());}
+  /** Return the input filtered with a highpass filter
+      @return the filtered signal output.
+   */
+  inline AudioOutputStorage_t high() {return ResonantFilter<LOWPASS,su>::next(last_in,Int2Type<HIGHPASS>());}
+  /** Return the input filtered with a bandpass filter
+      @return the filtered signal output.
+   */
+  inline AudioOutputStorage_t band() {return ResonantFilter<LOWPASS,su>::next(last_in,Int2Type<BANDPASS>());}
+  /** Return the input filtered with a notch filter
+      @return the filtered signal output.
+   */
+  inline AudioOutputStorage_t notch() {return ResonantFilter<LOWPASS,su>::next(last_in,Int2Type<NOTCH>());}
+  
+private:
+  AudioOutputStorage_t last_in;
+};
+
 
 typedef ResonantFilter<LOWPASS> LowPassFilter;
 typedef ResonantFilter<LOWPASS, uint16_t> LowPassFilter16;

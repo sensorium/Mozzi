@@ -1,9 +1,9 @@
 /*  Example of filtering a wave with different types of filters
     using Mozzi sonification library.
 
-    Demonstrates MultiFilter<uint8_t>.
+    Demonstrates MultiResonantFilter<uint8_t>.
 
-    MultiFilter is a derivative of ResonantFilter which allows all filter types to be accessed with only one filter.
+    MultiResonantFilter is a derivative of ResonantFilter which allows all filter types to be accessed with only one filter.
     It behaves similarly to ResonantFilter except:
       - next(in) does not return anything and is just used to pass the current sample to the filter. Except for special cases should probably be called only once in updateAudio()
       - different filter outputs are accessible via low(), high(), band() and notch() functions.
@@ -34,8 +34,8 @@ Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound(CHUM9_DATA);
 Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFilterMod(COS2048_DATA);
 Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFilterMod2(COS2048_DATA);
 
-MultiFilter<uint8_t> mf; // Multifilter applied to a 8 bits signal.
-                         // MultiFilter<uint16_t> can also be used for signals with higher number of bits
+MultiResonantFilter<uint8_t> mf; // Multifilter applied to a 8 bits signal.
+                         // MultiResonantFilter<uint16_t> can also be used for signals with higher number of bits
                          // in this last case, both the cutoff frequency and the resonance are uint16_t,
                          // ranging from 0, to 65535.
                          

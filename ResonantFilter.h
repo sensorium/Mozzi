@@ -177,12 +177,12 @@ protected:
 
 /** A generic filter for audio signals that can produce lowpass, highpass, bandpass and notch outputs at runtime.
 Behaves like ResonantFilter for setting the resonance and cutoff frequency.
-Like ResonantFilter, it can be used on different sample sizes: MultiFilter<uint8_t> and MultiFilter<uint16_t> have been tested.
+Like ResonantFilter, it can be used on different sample sizes: MultiResonantFilter<uint8_t> and MultiResonantFilter<uint16_t> have been tested.
 For the former, both cutoff and resonance are uint8_t, hence between 0-255.
 For the later,  both cutoff and resonance are uint16_t, hence between 0-65535.
  */
 template<typename su=uint8_t>
-class MultiFilter: public ResonantFilter<LOWPASS,su>
+class MultiResonantFilter: public ResonantFilter<LOWPASS,su>
 {
 public:
   /** Compute the filters, given an input signal.
@@ -228,11 +228,14 @@ typedef ResonantFilter<uint16_t, NOTCH> NotchFilter16;
 
 
 /**
-@example 10.Audio_Filters/LowPassFilter/LowPassFilter.ino
-This example demonstrates the LowPassFilter specification of this class.
+@example 10.Audio_Filters/ResonantFilter/ResonantFilter.ino
+This example demonstrates the ResonantFilter specification of this class.
 
-@example 10.Audio_Filters/LowPassFilter16/LowPassFilter16.ino
-This example demonstrates the LowPassFilter16 specification of thisclass.
+@example 10.Audio_Filters/ResonantFilter16/ResonantFilter16.ino
+This example demonstrates the ResonantFilter16 specification of this class.
+
+@example 10.Audio_Filters/MultiResonantFilter/MultiResonantFilter.ino
+This example demonstrates the MultiResonantFilter specification of this class.
 */
 
 #endif /* RESONANTFILTER_H_ */

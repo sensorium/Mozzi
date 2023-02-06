@@ -129,7 +129,7 @@ public:
   inline AudioOutputStorage_t next(AudioOutputStorage_t in)
   {
     advanceBuffers(in);
-    return next(in, Int2Type<FILTER_TYPE>());
+    return current(in, Int2Type<FILTER_TYPE>());
   }
 
 protected:
@@ -154,13 +154,13 @@ protected:
     buf1 += ifxmul(buf0 - buf1, f); // could overflow if input changes fast
   }
   
-  inline AudioOutputStorage_t next(AudioOutputStorage_t in, Int2Type<LOWPASS>) {return buf1;}
+  inline AudioOutputStorage_t current(AudioOutputStorage_t in, Int2Type<LOWPASS>) {return buf1;}
 
-  inline AudioOutputStorage_t next(AudioOutputStorage_t in, Int2Type<HIGHPASS>) {return in - buf0;}
+  inline AudioOutputStorage_t current(AudioOutputStorage_t in, Int2Type<HIGHPASS>) {return in - buf0;}
 
-  inline AudioOutputStorage_t next(AudioOutputStorage_t in, Int2Type<BANDPASS>) {return buf0-buf1;}
+  inline AudioOutputStorage_t current(AudioOutputStorage_t in, Int2Type<BANDPASS>) {return buf0-buf1;}
 
-  inline AudioOutputStorage_t next(AudioOutputStorage_t in, Int2Type<NOTCH>) {return in - buf0 + buf1;}
+  inline AudioOutputStorage_t current(AudioOutputStorage_t in, Int2Type<NOTCH>) {return in - buf0 + buf1;}
   
   // multiply two fixed point numbers (returns fixed point)
   inline typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type ucfxmul(su a, typename IntegerType<sizeof(su)+sizeof(su)>::unsigned_type b)
@@ -196,19 +196,19 @@ inline void next (AudioOutputStorage_t in)
   /** Return the input filtered with a lowpass filter
       @return the filtered signal output.
    */
-  inline AudioOutputStorage_t low() {return ResonantFilter<LOWPASS,su>::next(last_in,Int2Type<LOWPASS>());}
+  inline AudioOutputStorage_t low() {return ResonantFilter<LOWPASS,su>::current(last_in,Int2Type<LOWPASS>());}
   /** Return the input filtered with a highpass filter
       @return the filtered signal output.
    */
-  inline AudioOutputStorage_t high() {return ResonantFilter<LOWPASS,su>::next(last_in,Int2Type<HIGHPASS>());}
+  inline AudioOutputStorage_t high() {return ResonantFilter<LOWPASS,su>::current(last_in,Int2Type<HIGHPASS>());}
   /** Return the input filtered with a bandpass filter
       @return the filtered signal output.
    */
-  inline AudioOutputStorage_t band() {return ResonantFilter<LOWPASS,su>::next(last_in,Int2Type<BANDPASS>());}
+  inline AudioOutputStorage_t band() {return ResonantFilter<LOWPASS,su>::current(last_in,Int2Type<BANDPASS>());}
   /** Return the input filtered with a notch filter
       @return the filtered signal output.
    */
-  inline AudioOutputStorage_t notch() {return ResonantFilter<LOWPASS,su>::next(last_in,Int2Type<NOTCH>());}
+  inline AudioOutputStorage_t notch() {return ResonantFilter<LOWPASS,su>::current(last_in,Int2Type<NOTCH>());}
   
 private:
   AudioOutputStorage_t last_in;

@@ -36,20 +36,6 @@
 #define AUDIO_BITS 16   // available values are 8, 16, 24 (LEFT ALIGN in 32 bits type!!) and 32 bits
 // ****** END: These are define you may want to change. Best not to touch anything outside this range. ************/
 
-// The arduino-pico SDK has I2S Pins predefined for some boards.
-#if defined(ARDUINO_ARCH_RP2040)
-
-#if defined(PIN_I2S_BCLK)
-#define BCLK_PIN PIN_I2S_BCLK
-#define WS_PIN (PIN_I2S_BCLK+)
-#endif
-
-#if defined(PIN_I2S_DOUT)
-#define DOUT_PIN PIN_I2S_DOUT
-#endif
-
-#endif
-
 #define BYPASS_MOZZI_OUTPUT_BUFFER true
 
 // Configuration of the I2S port, especially DMA. Set in stone here as default of the library when this was written.
@@ -58,15 +44,9 @@
 #define BUFFER_SIZE 256  // total size of the buffer, in samples
 #endif
 
-// override all definitions if the board has dedicated I2S pins
-#if defined(PIN_I2S_DOUT)
-// undefine to disable compiler warnings
-#undef DOUT_PIN
-#define DOUT_PIN PIN_I2S_DOUT
-#endif
-
-#if defined(PIN_I2S_BCLK)
-// undefine to disable compiler warnings
+#if defined(ARDUINO_DATANOISETV_PICOADK)
+// undefined the defindes to disable compiler warnings
+// about redefinition.
 #undef BCLK_PIN
 #undef WS_PIN
 #undef LSBJ_FORMAT
@@ -78,14 +58,14 @@
 
 #define BCLK_PIN PIN_I2S_BCLK
 #define WS_PIN (PIN_I2S_BCLK+1)
+#define DOUT_PIN PIN_I2S_DOUT
 #define LSBJ_FORMAT false
 #define AUDIO_BITS 16
 #define BYPASS_MOZZI_OUTPUT_BUFFER true
 #define BUFFERS 8
-#define BUFFER_SIZE 128
+#define BUFFER_SIZE 256
 #define RP2040_AUDIO_OUT_MODE EXTERNAL_DAC_VIA_I2S
 #endif
-
 
 #define AUDIO_BITS_PER_CHANNEL AUDIO_BITS
 

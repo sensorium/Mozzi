@@ -9,6 +9,10 @@ extern STM32ADC adc;
 #include <esp8266_peri.h>
 #endif
 
+#if IS_RP2040()
+#include "hardware/structs/rosc.h"
+#endif
+
 // moved these out of xorshift96() so xorshift96() can be reseeded manually
 static unsigned long x=132456789, y=362436069, z=521288629;
 // static unsigned long x= analogRead(A0)+123456789;
@@ -144,6 +148,16 @@ void randSeed() {
 	x = RANDOM_REG32;
 	y = random (0xFFFFFFFF) ^ RANDOM_REG32;
 	z = random (0xFFFFFFFF) ^ RANDOM_REG32;
+#elif IS_RP2040()
+    uint32_t rand_seed;
+    for (int i = 0; i < 32; i++)
+    {
+            bool randomBit = rosc_hw->randombit;
+            rand_seed = rand_seed | (randomBit << i);
+    }
+	x = random (rand_seed);
+	y = random (rand_seed);
+	z = random (rand_seed);
 #else
 #warning Automatic random seeding not implemented on this platform
 #endif

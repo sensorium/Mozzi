@@ -46,6 +46,10 @@
 #define CACHED_FUNCTION_ATTR
 #endif
 
+#if IS_RP2040()
+#define AUDIO_RATE_PLATFORM_DEFAULT 32768
+#endif
+
 #if IS_STM32()
 // This is a little silly, but with Arduino 1.8.13, including this header inside MozziGuts.cpp does not work (fails to detect the proper include path).
 // Putting it here, instead, seem to work.

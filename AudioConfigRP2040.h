@@ -58,6 +58,34 @@
 #define BUFFER_SIZE 256  // total size of the buffer, in samples
 #endif
 
+// override all definitions if the board has dedicated I2S pins
+#if defined(PIN_I2S_DOUT)
+// undefine to disable compiler warnings
+#undef DOUT_PIN
+#define DOUT_PIN PIN_I2S_DOUT
+#endif
+
+#if defined(PIN_I2S_BCLK)
+// undefine to disable compiler warnings
+#undef BCLK_PIN
+#undef WS_PIN
+#undef LSBJ_FORMAT
+#undef AUDIO_BITS
+#undef BYPASS_MOZZI_OUTPUT_BUFFER
+#undef BUFFERS
+#undef BUFFER_SIZE
+#undef RP2040_AUDIO_OUT_MODE
+
+#define BCLK_PIN PIN_I2S_BCLK
+#define WS_PIN (PIN_I2S_BCLK+1)
+#define LSBJ_FORMAT false
+#define AUDIO_BITS 16
+#define BYPASS_MOZZI_OUTPUT_BUFFER true
+#define BUFFERS 8
+#define BUFFER_SIZE 64
+#define RP2040_AUDIO_OUT_MODE EXTERNAL_DAC_VIA_I2S
+#endif
+
 
 #define AUDIO_BITS_PER_CHANNEL AUDIO_BITS
 

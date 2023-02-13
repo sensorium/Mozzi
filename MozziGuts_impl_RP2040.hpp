@@ -242,6 +242,14 @@ static void startAudio() {
   i2s.setBCLK(BCLK_PIN);
   i2s.setDATA(DOUT_PIN);
   i2s.setBitsPerSample(AUDIO_BITS);
+
+#if (ARDUINO_DATANOISETV_PICOADK)
+  // Soft mute and de-emphasis for audio codec
+  pinMode(25, OUTPUT);
+  digitalWrite(25, HIGH);
+  pinMode(23, OUTPUT);
+  digitalWrite(23, LOW);
+#endif
   
 #if (AUDIO_BITS > 16)
   i2s.setBuffers(BUFFERS, (size_t) (BUFFER_SIZE/BUFFERS), 0);

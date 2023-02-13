@@ -246,7 +246,6 @@ static void startAudio() {
 // The PicoADK won't output a tone until it is unmuted.
 // Move it into the Mozzi implementation so the user won't need to change mozzi code.
 #if (ARDUINO_DATANOISETV_PICOADK)
-#warning "DATANOISETV_PICOADK audio codec"
   // Soft mute and de-emphasis for audio codec
   i2s.setBCLK(PIN_I2S_BCLK);
   i2s.setDATA(PIN_I2S_DOUT);

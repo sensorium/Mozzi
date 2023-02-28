@@ -104,11 +104,11 @@ static void startAudio() {
 #if (BYPASS_MOZZI_OUTPUT_BUFFER != true)  // for external audio output, set up a timer running a audio rate
   static intr_handle_t s_timer_handle;
   timer_config_t config = {
-    .alarm_en = true,
-    .counter_en = false,
-    .intr_type = TIMER_INTR_LEVEL,
+    .alarm_en = (timer_alarm_t)true,
+    .counter_en = (timer_start_t)false,
+    .intr_type = (timer_intr_mode_t) TIMER_INTR_LEVEL,
     .counter_dir = TIMER_COUNT_UP,
-    .auto_reload = true,
+    .auto_reload = (timer_autoreload_t) true,
     .divider = 1 // For max available precision: The APB_CLK clock signal is running at 80 MHz, i.e. 1/80 uS per tick
   };
   timer_init(TIMER_GROUP_0, TIMER_0, &config);

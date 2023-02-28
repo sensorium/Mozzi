@@ -104,8 +104,8 @@ compile time.
 Defining this option as true in mozzi_config.h allows to completely customize the audio output, e.g. for connecting to external DACs.
 For more detail, @see AudioOuput .
 */
-//#define EXTERNAL_AUDIO_OUTPUT false
-#define EXTERNAL_AUDIO_OUTPUT true
+#define EXTERNAL_AUDIO_OUTPUT false
+//#define EXTERNAL_AUDIO_OUTPUT true
 
 /** @ingroup core
 Only used when EXTERNAL_AUDIO_OUTPUT is set to true: The resolution to use for audio samples, internally. You will usually set this to match the

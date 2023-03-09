@@ -37,6 +37,7 @@ void setupMozziADC(int8_t speed) {
 
 
 
+
 //// BEGIN AUDIO OUTPUT code ///////
 #include <driver/i2s.h>   // for I2S-based output modes
 #include <driver/timer.h> // for EXTERNAL_AUDIO_OUTPUT
@@ -103,17 +104,19 @@ void CACHED_FUNCTION_ATTR timer0_audio_output_isr(void *) {
 static void startAudio() {
 #if (BYPASS_MOZZI_OUTPUT_BUFFER != true)  // for external audio output, set up a timer running a audio rate
   static intr_handle_t s_timer_handle;
+  const int div = 2;
   timer_config_t config = {
-    .alarm_en = true,
-    .counter_en = false,
-    .intr_type = TIMER_INTR_LEVEL,
+    .alarm_en = (timer_alarm_t)true,
+    .counter_en = (timer_start_t)false,
+    .intr_type = (timer_intr_mode_t) TIMER_INTR_LEVEL,
     .counter_dir = TIMER_COUNT_UP,
-    .auto_reload = true,
-    .divider = 1 // For max available precision: The APB_CLK clock signal is running at 80 MHz, i.e. 1/80 uS per tick
+    .auto_reload = (timer_autoreload_t) true,
+    .divider = div // For max available precision: The APB_CLK clock signal is running at 80 MHz, i.e. 2/80 uS per tick
+                 // Min acceptable value is 2
   };
   timer_init(TIMER_GROUP_0, TIMER_0, &config);
   timer_set_counter_value(TIMER_GROUP_0, TIMER_0, 0);
-  timer_set_alarm_value(TIMER_GROUP_0, TIMER_0, 80000000UL / AUDIO_RATE);
+  timer_set_alarm_value(TIMER_GROUP_0, TIMER_0, 80000000UL / AUDIO_RATE / div);
   timer_enable_intr(TIMER_GROUP_0, TIMER_0);
   timer_isr_register(TIMER_GROUP_0, TIMER_0, &timer0_audio_output_isr, nullptr, 0, &s_timer_handle);
   timer_start(TIMER_GROUP_0, TIMER_0);

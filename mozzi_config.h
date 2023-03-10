@@ -112,12 +112,6 @@ Only used when EXTERNAL_AUDIO_OUTPUT is set to true: The resolution to use for a
 output resolution of your DAC. 16 is the default value, here. Note that 16 bits is also the maximum currently supported on AVR. */
 //#define EXTERNAL_AUDIO_BITS 16
 
-/** @ingroup core
-Defining this option as true in mozzi_config.h allows to completely customize the audio input, e.g. for connecting from an external DACs.
-For more detail, @see AudioInput .
-*/
-#define EXTERNAL_AUDIO_INPUT false
-//#define EXTERNAL_AUDIO_INPUT true
 
 
 #endif        //  #ifndef MOZZI_CONFIG_H

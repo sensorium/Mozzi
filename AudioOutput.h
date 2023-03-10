@@ -216,8 +216,4 @@ inline uint32_t pdmCode32(uint16_t sample) {
 #warning "Mozzi is configured to use an external void 'audioOutput(const AudioOutput f)' function. Please define one in your sketch"
 #endif
 
-#if (EXTERNAL_AUDIO_INPUT == true)
-#warning "Mozzi is configured to use an external int 'audioRead()' function. Please define one in your sketch"
-#endif
-
 #endif

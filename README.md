@@ -277,6 +277,9 @@ port by Dieter Vandoren and Thomas Friedrichsmeier
     - Output (DATA) pin can be configured in AudioConfigESP32.h. Default 33. Note that the BCK and WS pins are also used in this mode.
     - The PDM_RESOLUTION parameter can be used to reduce noise at the cost of more CPU power.
     - Mono, only.
+  - I2S_DAC_AND_I2S_ADC: Output is sent via I2S in a format, Input is read from I2S in douplex mode.
+    - 16 bits resolution, mono or stereo. Remember to shift your audio accordingly.
+    - I2S ins can be configured in AudioConfigESP32.h. Default is BCK: 26, WS: 15, DATA: 33, DATA_IN: 32.
 - "HIFI_MODE" is not currently implemented, but could conceivably be realized for the INTERNAL_DAC mode. Patches welcome.
 - WIFI-activity not yet tested, but likely the same notes as for ESP8266 apply. Consider turning off WIFI.
 - The implementation of audioTicks() may be slightly inaccurate on this platform.

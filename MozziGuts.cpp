@@ -117,7 +117,7 @@ int mozziAnalogRead(uint8_t pin) {
 #endif
 }
 
-#if (USE_AUDIO_INPUT == true)
+#if (USE_AUDIO_INPUT == true && !defined(USE_CUSTOM_AUDIO_INPUT) && !EXTERNAL_AUDIO_INPUT)
 // ring buffer for audio input
 CircularBuffer<unsigned int> input_buffer; // fixed size 256
 

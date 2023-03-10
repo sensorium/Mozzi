@@ -9,33 +9,84 @@
  * Attribution-NonCommercial-ShareAlike 4.0 International License.
  *
  */
-
 #if !(IS_ESP32())
 #  error "Wrong implementation included for this platform"
 #endif
+#include "AudioConfigESP32.h"
+#include <driver/i2s.h>
+#include <soc/adc_channel.h>
 
-////// BEGIN analog input code ////////
-//#define MOZZI_FAST_ANALOG_IMPLEMENTED // not yet
-#define getADCReading() 0
+static const char module[]="Mozzi-ESP32";
+
+/// Make sure that we provide a supported port
+int getWritePort(){
+  switch (ESP32_AUDIO_OUT_MODE){
+    case INTERNAL_DAC: 
+      return 0;
+    case PDM_VIA_I2S:  
+      return 0;
+    case PT8211_DAC:     
+     return i2s_num;
+    case I2S_DAC_AND_I2S_ADC:  
+      return i2s_num;
+  }
+  ESP_LOGE(module, "%s - %s", __func__, "ESP32_AUDIO_OUT_MODE invalid");
+  return -1;
+}
+
+
+/// Determine the I2S Output Mode (and input mode if on same port)
+int getI2SModeOut(){
+  switch (ESP32_AUDIO_OUT_MODE){
+    case INTERNAL_DAC: 
+      return I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN;
+    case PDM_VIA_I2S:  
+      return I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_PDM;
+    case PT8211_DAC:     
+      return I2S_MODE_MASTER | I2S_MODE_TX;
+    case I2S_DAC_AND_I2S_ADC:  
+      return I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_RX;
+  }
+   ESP_LOGE(module, "%s - %s", __func__, "ESP32_AUDIO_OUT_MODE invalid");
+ return -1;
+}
+
+
+// We provide a custom implementation of getAudioInput() avoiding the complex standard handling
+#define USE_CUSTOM_AUDIO_INPUT
+
+/// @brief  Reads a sample from the I2S buffer. I2S is stereo, so we combine the result to one single sample
+int getAudioInput() {
+  static const int i2s_port = getWritePort();
+  if (i2s_port==-1) return 0;
+
+  int16_t tmp[2];
+  size_t result;
+  esp_err_t rc = i2s_read((i2s_port_t)i2s_port, tmp, sizeof(tmp), &result, portMAX_DELAY);
+  return ADC_VALUE((tmp[0]+tmp[1]) / 2);
+}
+
+
+// ////// BEGIN analog input code ////////
+#define getADCReading() 0;
+
 #define channelNumToIndex(channel) channel
 uint8_t adcPinToChannelNum(uint8_t pin) {
   return pin;
 }
 void adcStartConversion(uint8_t channel) {
-#warning Fast analog read not implemented on this platform
+//    ESP_LOGD(module, "%s", __func__);
 }
 void startSecondADCReadOnCurrentChannel() {
-#warning Fast analog read not implemented on this platform
+//    ESP_LOGD(module, "%s", __func__);
 }
 void setupFastAnalogRead(int8_t speed) {
-#warning Fast analog read not implemented on this platform
+//    ESP_LOGD(module, "%s", __func__);
 }
 void setupMozziADC(int8_t speed) {
-#warning Fast analog read not implemented on this platform
+//   ESP_LOGD(module, "%s: %d", __func__, speed);
 }
 ////// END analog input code ////////
-
-
 
 
 //// BEGIN AUDIO OUTPUT code ///////
@@ -43,25 +94,24 @@ void setupMozziADC(int8_t speed) {
 #include <driver/timer.h> // for EXTERNAL_AUDIO_OUTPUT
 
 #if (EXTERNAL_AUDIO_OUTPUT != true)
-#  include "AudioConfigESP32.h"
 // On ESP32 we cannot test wether the DMA buffer has room. Instead, we have to use a one-sample mini buffer. In each iteration we
 // _try_ to write that sample to the DMA buffer, and if successful, we can buffer the next sample. Somewhat cumbersome, but works.
 // TODO: Should ESP32 gain an implemenation of i2s_available(), we should switch to using that, instead.
 static bool _esp32_can_buffer_next = true;
-#  if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
+#  if (IS_INTERNAL_DAC())
 static uint16_t _esp32_prev_sample[2];
-#    define ESP_SAMPLE_SIZE (2*sizeof(uint16_t))
-#  elif (ESP32_AUDIO_OUT_MODE == PT8211_DAC)
+#  elif (IS_I2S_DAC())
 static int16_t _esp32_prev_sample[2];
-#    define ESP_SAMPLE_SIZE (2*sizeof(int16_t))
-#  elif (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
+#  elif (IS_PDM())
 static uint32_t _esp32_prev_sample[PDM_RESOLUTION];
-#    define ESP_SAMPLE_SIZE (PDM_RESOLUTION*sizeof(uint32_t))
 #  endif
 
 inline bool esp32_tryWriteSample() {
+  static i2s_port_t port = (i2s_port_t) getWritePort();
   size_t bytes_written;
-  i2s_write(i2s_num, &_esp32_prev_sample, ESP_SAMPLE_SIZE, &bytes_written, 0);
+  int write_len = sizeof(_esp32_prev_sample);
+  i2s_write(port, &_esp32_prev_sample, write_len, &bytes_written, 0);
+  //ESP_LOGD(module, "%s port:%d, len: %d, written: %d, value: %d", __func__, port, write_len, bytes_written, _esp32_prev_sample[0]);
   return (bytes_written != 0);
 }
 
@@ -101,8 +151,54 @@ void CACHED_FUNCTION_ATTR timer0_audio_output_isr(void *) {
 }
 #endif
 
-static void startAudio() {
+
+static void startI2SAudio(i2s_port_t port, int mode){
+  ESP_LOGI(module, "%s: port=%d, mode=0x%x, rate=%d", __func__, port, mode, AUDIO_RATE * PDM_RESOLUTION);
+
+  static i2s_config_t i2s_config = {
+    .mode = (i2s_mode_t)mode,
+    .sample_rate = AUDIO_RATE * PDM_RESOLUTION,
+    .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,  // only the top 8 bits will actually be used by the internal DAC, but using 8 bits straight away seems buggy
+    .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,  // always use stereo output. mono seems to be buggy, and the overhead is insignifcant on the ESP32
+    .communication_format = (i2s_comm_format_t)(I2S_COMM_FORMAT_STAND_I2S),  // this appears to be the correct setting for internal DAC and PT8211, but not for other dacs
+    .intr_alloc_flags = 0, // default interrupt priority
+    .dma_buf_count = 8,    // 8*128 bytes of buffer corresponds to 256 samples (2 channels, see above, 2 bytes per sample per channel)
+    .dma_buf_len = 128,
+    .use_apll = false,
+  };
+
+  // install i2s driver
+  if (i2s_driver_install(port, &i2s_config, 0, NULL)!=ESP_OK){
+    ESP_LOGE(module, "%s - %s : %d", __func__, "i2s_driver_install", port);
+  }
+
+  // Internal DAC
+  if (mode & I2S_MODE_DAC_BUILT_IN){
+    if (i2s_set_pin(port, NULL)!=ESP_OK) {
+        ESP_LOGE(module, "%s - %s", __func__, "i2s_set_pin");
+    }
+    if (i2s_set_dac_mode(I2S_DAC_CHANNEL_BOTH_EN)!=ESP_OK) {
+        ESP_LOGE(module, "%s - %s", __func__, "i2s_set_dac_mode");
+    }
+  // Regular I2S
+  } else {
+    static const i2s_pin_config_t pin_config = {
+      .bck_io_num = ESP32_I2S_BCK_PIN,
+      .ws_io_num = ESP32_I2S_WS_PIN,
+      .data_out_num = ESP32_I2S_DATA_PIN,
+      .data_in_num = ESP32_I2S_DATA_PIN_IN,
+    };
+    if (i2s_set_pin(port, &pin_config)!=ESP_OK) {
+      ESP_LOGE(module, "%s - %s", __func__, "i2s_set_pin");
+    }
+  }
+  i2s_zero_dma_buffer(port);
+}
+
+
 #if (BYPASS_MOZZI_OUTPUT_BUFFER != true)  // for external audio output, set up a timer running a audio rate
+
+static void startAudio() {
   static intr_handle_t s_timer_handle;
   const int div = 2;
   timer_config_t config = {
@@ -120,43 +216,18 @@ static void startAudio() {
   timer_enable_intr(TIMER_GROUP_0, TIMER_0);
   timer_isr_register(TIMER_GROUP_0, TIMER_0, &timer0_audio_output_isr, nullptr, 0, &s_timer_handle);
   timer_start(TIMER_GROUP_0, TIMER_0);
-
+}
 #else
-  static const i2s_config_t i2s_config = {
-#  if (ESP32_AUDIO_OUT_MODE == PT8211_DAC) || (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
-    .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX),
-#  elif (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
-    .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN),
-#  endif
-    .sample_rate = AUDIO_RATE * PDM_RESOLUTION,
-    .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,  // only the top 8 bits will actually be used by the internal DAC, but using 8 bits straight away seems buggy
-    .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,  // always use stereo output. mono seems to be buggy, and the overhead is insignifcant on the ESP32
-    .communication_format = (i2s_comm_format_t)(I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_LSB),  // this appears to be the correct setting for internal DAC and PT8211, but not for other dacs
-    .intr_alloc_flags = 0, // default interrupt priority
-    .dma_buf_count = 8,    // 8*128 bytes of buffer corresponds to 256 samples (2 channels, see above, 2 bytes per sample per channel)
-    .dma_buf_len = 128,
-    .use_apll = false
-  };
 
-  i2s_driver_install(i2s_num, &i2s_config, 0, NULL);
-#  if (ESP32_AUDIO_OUT_MODE == PT8211_DAC) || (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
-  static const i2s_pin_config_t pin_config = {
-    .bck_io_num = ESP32_I2S_BCK_PIN,
-    .ws_io_num = ESP32_I2S_WS_PIN,
-    .data_out_num = ESP32_I2S_DATA_PIN,
-    .data_in_num = -1
-  };
-  i2s_set_pin((i2s_port_t)i2s_num, &pin_config);
-#  elif (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
-  i2s_set_pin((i2s_port_t)i2s_num, NULL);
-  i2s_set_dac_mode(I2S_DAC_CHANNEL_BOTH_EN);
-#  endif
-  i2s_zero_dma_buffer((i2s_port_t)i2s_num);
-
-#endif
+/// Use I2S for the Output and Input
+static void startAudio() {
+  // start output
+  startI2SAudio((i2s_port_t)getWritePort(), getI2SModeOut());
 }
 
+#endif
+
 void stopMozzi() {
-  // TODO: implement me
+  i2s_driver_uninstall((i2s_port_t)getWritePort());
 }
 //// END AUDIO OUTPUT code ///////

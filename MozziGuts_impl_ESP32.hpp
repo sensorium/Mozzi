@@ -51,10 +51,6 @@ int getI2SMode(){
  return -1;
 }
 
-
-// We provide a custom implementation of getAudioInput() avoiding the complex standard handling
-#define USE_CUSTOM_AUDIO_INPUT
-
 /// @brief  Reads a sample from the I2S buffer. I2S is stereo, so we combine the result to one single sample
 int getAudioInput() {
   static const int i2s_port = getWritePort();

@@ -71,9 +71,8 @@ const i2s_port_t i2s_num = I2S_NUM_0;
 
 // If ADC is available we support getAudioInput()
 #if ESP32_AUDIO_OUT_MODE == I2S_DAC_AND_I2S_ADC
+#  define USE_CUSTOM_AUDIO_INPUT
 int getAudioInput();
 #endif
-
-
 
 #endif        //  #ifndef AUDIOCONFIGESP_H

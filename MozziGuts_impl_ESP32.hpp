@@ -18,50 +18,6 @@
 
 static const char module[]="Mozzi-ESP32";
 
-/// Make sure that we provide a supported port
-int getI2SPort(){
-  switch (ESP32_AUDIO_OUT_MODE){
-    case INTERNAL_DAC: 
-      return 0;
-    case PDM_VIA_I2S:  
-      return 0;
-    case PT8211_DAC:     
-      return i2s_num;
-    case I2S_DAC_AND_I2S_ADC:  
-      return i2s_num;
-  }
-  ESP_LOGE(module, "%s - %s", __func__, "ESP32_AUDIO_OUT_MODE invalid");
-  return -1;
-}
-
-
-/// Determine the I2S Output Mode (and input mode if on same port)
-int getI2SMode(){
-  switch (ESP32_AUDIO_OUT_MODE){
-    case INTERNAL_DAC: 
-      return I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN;
-    case PDM_VIA_I2S:  
-      return I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_PDM;
-    case PT8211_DAC:     
-      return I2S_MODE_MASTER | I2S_MODE_TX;
-    case I2S_DAC_AND_I2S_ADC:  
-      return I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_RX;
-  }
-   ESP_LOGE(module, "%s - %s", __func__, "ESP32_AUDIO_OUT_MODE invalid");
- return -1;
-}
-
-/// @brief  Reads a sample from the I2S buffer. I2S is stereo, so we combine the result to one single sample
-int getAudioInput() {
-  static const int i2s_port = getI2SPort();
-  if (i2s_port==-1) return 0;
-
-  int16_t tmp[2];
-  size_t result;
-  esp_err_t rc = i2s_read((i2s_port_t)i2s_port, tmp, sizeof(tmp), &result, portMAX_DELAY);
-  return ADC_VALUE((tmp[0]+tmp[1]) / 2);
-}
-
 
 // ////// BEGIN analog input code ////////
 #define getADCReading() 0;
@@ -85,7 +41,42 @@ void setupMozziADC(int8_t speed) {
 ////// END analog input code ////////
 
 
-#if (EXTERNAL_AUDIO_OUTPUT != true)
+#if (EXTERNAL_AUDIO_OUTPUT) // for external audio output, set up a timer running a audio rate
+
+void CACHED_FUNCTION_ATTR timer0_audio_output_isr(void *) {
+  TIMERG0.int_clr_timers.t0 = 1;
+  TIMERG0.hw_timer[0].config.alarm_en = 1;
+  defaultAudioOutput();
+}
+
+
+static void startAudio() {
+  static intr_handle_t s_timer_handle;
+  const int div = 2;
+  timer_config_t config = {
+    .alarm_en = (timer_alarm_t)true,
+    .counter_en = (timer_start_t)false,
+    .intr_type = (timer_intr_mode_t) TIMER_INTR_LEVEL,
+    .counter_dir = TIMER_COUNT_UP,
+    .auto_reload = (timer_autoreload_t) true,
+    .divider = div // For max available precision: The APB_CLK clock signal is running at 80 MHz, i.e. 2/80 uS per tick
+                 // Min acceptable value is 2
+  };
+  timer_init(TIMER_GROUP_0, TIMER_0, &config);
+  timer_set_counter_value(TIMER_GROUP_0, TIMER_0, 0);
+  timer_set_alarm_value(TIMER_GROUP_0, TIMER_0, 80000000UL / AUDIO_RATE / div);
+  timer_enable_intr(TIMER_GROUP_0, TIMER_0);
+  timer_isr_register(TIMER_GROUP_0, TIMER_0, &timer0_audio_output_isr, nullptr, 0, &s_timer_handle);
+  timer_start(TIMER_GROUP_0, TIMER_0);
+}
+
+void stopMozzi() {
+  timer_pause(TIMER_GROUP_0, TIMER_0);
+  timer_disable_intr(TIMER_GROUP_0, TIMER_0);
+}
+
+#else // I2S Output
+
 // On ESP32 we cannot test wether the DMA buffer has room. Instead, we have to use a one-sample mini buffer. In each iteration we
 // _try_ to write that sample to the DMA buffer, and if successful, we can buffer the next sample. Somewhat cumbersome, but works.
 // TODO: Should ESP32 gain an implemenation of i2s_available(), we should switch to using that, instead.
@@ -97,6 +88,56 @@ static int16_t _esp32_prev_sample[2];
 #  elif defined(IS_PDM)
 static uint32_t _esp32_prev_sample[PDM_RESOLUTION];
 #  endif
+
+
+/// Make sure that we provide a supported port
+int getI2SPort(){
+  switch (ESP32_AUDIO_OUT_MODE){
+    case INTERNAL_DAC: 
+      return 0;
+    case PDM_VIA_I2S:  
+      return 0;
+    case PT8211_DAC:     
+      return i2s_num;
+    case I2S_DAC_AND_I2S_ADC:  
+      return i2s_num;
+  }
+  ESP_LOGE(module, "%s - %s", __func__, "ESP32_AUDIO_OUT_MODE invalid");
+  return -1;
+}
+
+
+/// Determine the I2S Output Mode (and input mode if on same port)
+int getI2SMode(){
+  switch (ESP32_AUDIO_OUT_MODE){
+    case INTERNAL_DAC: 
+      ESP_LOGD(module, "%s: %s", __func__, "I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN");
+      return I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN;
+    case PDM_VIA_I2S:  
+      ESP_LOGD(module, "%s: %s", __func__, "I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_PDM");
+      return I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_PDM;
+    case PT8211_DAC:     
+      ESP_LOGD(module, "%s: %s", __func__, "I2S_MODE_MASTER | I2S_MODE_TX");
+      return I2S_MODE_MASTER | I2S_MODE_TX;
+    case I2S_DAC_AND_I2S_ADC:  
+      ESP_LOGD(module, "%s: %s", __func__, "I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_RX");
+      return I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_RX;
+  }
+   ESP_LOGE(module, "%s: %s", __func__, "ESP32_AUDIO_OUT_MODE invalid");
+ return -1;
+}
+
+/// @brief  Reads a sample from the I2S buffer. I2S is stereo, so we combine the result to one single sample
+int getAudioInput() {
+  static const int i2s_port = getI2SPort();
+  if (i2s_port==-1) return 0;
+
+  int16_t tmp[2];
+  size_t result;
+  esp_err_t rc = i2s_read((i2s_port_t)i2s_port, tmp, sizeof(tmp), &result, portMAX_DELAY);
+  return ADC_VALUE((tmp[0]+tmp[1]) / 2);
+}
+
 
 inline bool esp32_tryWriteSample() {
   static i2s_port_t port = (i2s_port_t) getI2SPort();
@@ -133,16 +174,6 @@ inline void audioOutput(const AudioOutput f) {
 #  endif
   _esp32_can_buffer_next = esp32_tryWriteSample();
 }
-#endif
-
-#if (BYPASS_MOZZI_OUTPUT_BUFFER != true)
-void CACHED_FUNCTION_ATTR timer0_audio_output_isr(void *) {
-  TIMERG0.int_clr_timers.t0 = 1;
-  TIMERG0.hw_timer[0].config.alarm_en = 1;
-  defaultAudioOutput();
-}
-#endif
-
 
 static void startI2SAudio(i2s_port_t port, int mode){
   ESP_LOGI(module, "%s: port=%d, mode=0x%x, rate=%d", __func__, port, mode, AUDIO_RATE * PDM_RESOLUTION);
@@ -165,7 +196,7 @@ static void startI2SAudio(i2s_port_t port, int mode){
   }
 
   // Internal DAC
-  if (mode & I2S_MODE_DAC_BUILT_IN){
+  if (ESP32_AUDIO_OUT_MODE==INTERNAL_DAC){
     if (i2s_set_pin(port, NULL)!=ESP_OK) {
         ESP_LOGE(module, "%s - %s", __func__, "i2s_set_pin");
     }
@@ -187,39 +218,19 @@ static void startI2SAudio(i2s_port_t port, int mode){
   i2s_zero_dma_buffer(port);
 }
 
-
-#if (BYPASS_MOZZI_OUTPUT_BUFFER != true)  // for external audio output, set up a timer running a audio rate
-
-static void startAudio() {
-  static intr_handle_t s_timer_handle;
-  const int div = 2;
-  timer_config_t config = {
-    .alarm_en = (timer_alarm_t)true,
-    .counter_en = (timer_start_t)false,
-    .intr_type = (timer_intr_mode_t) TIMER_INTR_LEVEL,
-    .counter_dir = TIMER_COUNT_UP,
-    .auto_reload = (timer_autoreload_t) true,
-    .divider = div // For max available precision: The APB_CLK clock signal is running at 80 MHz, i.e. 2/80 uS per tick
-                 // Min acceptable value is 2
-  };
-  timer_init(TIMER_GROUP_0, TIMER_0, &config);
-  timer_set_counter_value(TIMER_GROUP_0, TIMER_0, 0);
-  timer_set_alarm_value(TIMER_GROUP_0, TIMER_0, 80000000UL / AUDIO_RATE / div);
-  timer_enable_intr(TIMER_GROUP_0, TIMER_0);
-  timer_isr_register(TIMER_GROUP_0, TIMER_0, &timer0_audio_output_isr, nullptr, 0, &s_timer_handle);
-  timer_start(TIMER_GROUP_0, TIMER_0);
-}
-#else
-
 /// Use I2S for the Output and Input
 static void startAudio() {
   // start output
-  startI2SAudio((i2s_port_t)getI2SPort(), getI2SMode());
+  i2s_port_t port = (i2s_port_t)getI2SPort();
+  startI2SAudio(port, getI2SMode());
+}
+
+void stopMozzi() {
+  i2s_port_t port = (i2s_port_t)getI2SPort();
+  i2s_stop(port);
+  i2s_driver_uninstall(port);
 }
 
 #endif
 
-void stopMozzi() {
-  i2s_driver_uninstall((i2s_port_t)getI2SPort());
-}
 //// END AUDIO OUTPUT code ///////

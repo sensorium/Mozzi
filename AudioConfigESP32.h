@@ -44,36 +44,37 @@ const i2s_port_t i2s_num = I2S_NUM_0;
 ///--------------------------------------------------------------------------------------------------------
 /// User config end. Do not modify below this line
 ///--------------------------------------------------------------------------------------------------------
+#if !EXTERNAL_AUDIO_OUTPUT
+#  if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
+#    define AUDIO_BITS 8
+#    define PDM_RESOLUTION 1
+#    define IS_INTERNAL_DAC
+#  elif (ESP32_AUDIO_OUT_MODE == PT8211_DAC  || ESP32_AUDIO_OUT_MODE == I2S_DAC_AND_I2S_ADC)
+#    define AUDIO_BITS 16
+#    define PDM_RESOLUTION 1
+#    define IS_I2S_DAC
+#  elif (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
+#    define AUDIO_BITS 16
+#    define PDM_RESOLUTION 4
+#    define IS_PDM
+#  else
+#  error Invalid output mode configured in AudioConfigESP32.h
+#  endif
 
-#if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
-#define AUDIO_BITS 8
-#define PDM_RESOLUTION 1
-#define IS_INTERNAL_DAC
-#elif (ESP32_AUDIO_OUT_MODE == PT8211_DAC  || ESP32_AUDIO_OUT_MODE == I2S_DAC_AND_I2S_ADC)
-#define AUDIO_BITS 16
-#define PDM_RESOLUTION 1
-#define IS_I2S_DAC
-#elif (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
-#define AUDIO_BITS 16
-#define PDM_RESOLUTION 4
-#define IS_PDM
-#else
-#error Invalid output mode configured in AudioConfigESP32.h
-#endif
-
-#define AUDIO_BIAS ((uint16_t) 1<<(AUDIO_BITS-1))
-#define BYPASS_MOZZI_OUTPUT_BUFFER !EXTERNAL_AUDIO_OUTPUT
+#  define AUDIO_BIAS ((uint16_t) 1<<(AUDIO_BITS-1))
+#  define BYPASS_MOZZI_OUTPUT_BUFFER true
 
 // Use defined rate as new AUDIO_RATE_PLATFORM_DEFAULT
-#ifdef ESP32_AUDIO_RATE
-#  undef AUDIO_RATE_PLATFORM_DEFAULT 
-#  define AUDIO_RATE_PLATFORM_DEFAULT ESP32_AUDIO_RATE
-#endif
+#  ifdef ESP32_AUDIO_RATE
+#    undef AUDIO_RATE_PLATFORM_DEFAULT 
+#    define AUDIO_RATE_PLATFORM_DEFAULT ESP32_AUDIO_RATE
+#  endif
 
 // If ADC is available we support getAudioInput()
-#if ESP32_AUDIO_OUT_MODE == I2S_DAC_AND_I2S_ADC
-#  define USE_CUSTOM_AUDIO_INPUT
+#  if ESP32_AUDIO_OUT_MODE == I2S_DAC_AND_I2S_ADC
+#    define USE_CUSTOM_AUDIO_INPUT
 int getAudioInput();
+#  endif
 #endif
 
 #endif        //  #ifndef AUDIOCONFIGESP_H

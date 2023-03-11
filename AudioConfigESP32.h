@@ -35,7 +35,7 @@ const i2s_port_t i2s_num = I2S_NUM_0;
 
 // Select the data range of the ADC
 //#define ADC_VALUE(in) (in) // no scaling
-#define ADC_VALUE(in) ((in + 32768)*0.015625) // scale to 0 to 1023
+#define ADC_VALUE(in) (0.015625*(in + 32768)) // scale to 0 to 1023
 
 // Optionally select a higher Sample Rate
 //#define ESP32_AUDIO_RATE 8000

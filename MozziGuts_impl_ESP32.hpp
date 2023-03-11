@@ -71,16 +71,16 @@ uint8_t adcPinToChannelNum(uint8_t pin) {
   return pin;
 }
 void adcStartConversion(uint8_t channel) {
-//    ESP_LOGD(module, "%s", __func__);
+#warning Fast analog read not implemented on this platform
 }
 void startSecondADCReadOnCurrentChannel() {
-//    ESP_LOGD(module, "%s", __func__);
+#warning Fast analog read not implemented on this platform
 }
 void setupFastAnalogRead(int8_t speed) {
-//    ESP_LOGD(module, "%s", __func__);
+#warning Fast analog read not implemented on this platform
 }
 void setupMozziADC(int8_t speed) {
-//   ESP_LOGD(module, "%s: %d", __func__, speed);
+#warning Fast analog read not implemented on this platform
 }
 ////// END analog input code ////////
 

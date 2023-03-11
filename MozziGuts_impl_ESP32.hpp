@@ -13,8 +13,8 @@
 #  error "Wrong implementation included for this platform"
 #endif
 #include "AudioConfigESP32.h"
-#include <driver/i2s.h>
-#include <soc/adc_channel.h>
+#include <driver/i2s.h>   // for I2S-based output modes
+#include <driver/timer.h> // for EXTERNAL_AUDIO_OUTPUT
 
 static const char module[]="Mozzi-ESP32";
 
@@ -26,7 +26,7 @@ int getWritePort(){
     case PDM_VIA_I2S:  
       return 0;
     case PT8211_DAC:     
-     return i2s_num;
+      return i2s_num;
     case I2S_DAC_AND_I2S_ADC:  
       return i2s_num;
   }
@@ -36,7 +36,7 @@ int getWritePort(){
 
 
 /// Determine the I2S Output Mode (and input mode if on same port)
-int getI2SModeOut(){
+int getI2SMode(){
   switch (ESP32_AUDIO_OUT_MODE){
     case INTERNAL_DAC: 
       return I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN;
@@ -89,20 +89,16 @@ void setupMozziADC(int8_t speed) {
 ////// END analog input code ////////
 
 
-//// BEGIN AUDIO OUTPUT code ///////
-#include <driver/i2s.h>   // for I2S-based output modes
-#include <driver/timer.h> // for EXTERNAL_AUDIO_OUTPUT
-
 #if (EXTERNAL_AUDIO_OUTPUT != true)
 // On ESP32 we cannot test wether the DMA buffer has room. Instead, we have to use a one-sample mini buffer. In each iteration we
 // _try_ to write that sample to the DMA buffer, and if successful, we can buffer the next sample. Somewhat cumbersome, but works.
 // TODO: Should ESP32 gain an implemenation of i2s_available(), we should switch to using that, instead.
 static bool _esp32_can_buffer_next = true;
-#  if (IS_INTERNAL_DAC())
+#  if defined(IS_INTERNAL_DAC)
 static uint16_t _esp32_prev_sample[2];
-#  elif (IS_I2S_DAC())
+#  elif defined(IS_I2S_DAC)
 static int16_t _esp32_prev_sample[2];
-#  elif (IS_PDM())
+#  elif defined(IS_PDM)
 static uint32_t _esp32_prev_sample[PDM_RESOLUTION];
 #  endif
 
@@ -122,7 +118,7 @@ inline bool canBufferAudioOutput() {
 }
 
 inline void audioOutput(const AudioOutput f) {
-#  if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
+#  if defined(IS_INTERNAL_DAC)
   _esp32_prev_sample[0] = (f.l() + AUDIO_BIAS) << 8;
 #    if (AUDIO_CHANNELS > 1)
   _esp32_prev_sample[1] = (f.r() + AUDIO_BIAS) << 8;
@@ -130,7 +126,7 @@ inline void audioOutput(const AudioOutput f) {
   // For simplicity of code, even in mono, we're writing stereo samples
   _esp32_prev_sample[1] = _esp32_prev_sample[0];
 #    endif
-#  elif (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
+#  elif defined(IS_PDM)
   for (uint8_t i=0; i<PDM_RESOLUTION; ++i) {
     _esp32_prev_sample[i] = pdmCode32(f.l() + AUDIO_BIAS);
   }
@@ -222,7 +218,7 @@ static void startAudio() {
 /// Use I2S for the Output and Input
 static void startAudio() {
   // start output
-  startI2SAudio((i2s_port_t)getWritePort(), getI2SModeOut());
+  startI2SAudio((i2s_port_t)getWritePort(), getI2SMode());
 }
 
 #endif

@@ -14,7 +14,7 @@
 
 // Audio IO options
 #define INTERNAL_DAC 1 // output using internal DAC via I2S, output on pin 26
-#define PT8211_DAC 2   // OBSOLETE: use PT8211_DAC instead
+#define PT8211_DAC 2 // output using an external PT8211 DAC via I2S
 #define PDM_VIA_I2S 3  // output PDM coded sample on the I2S data pin (pin 33, by default, configurable, below)
 #define I2S_DAC_AND_I2S_ADC 4  // output using an external DAC , input with exteran ADC - both via I2S
 
@@ -25,7 +25,7 @@
 #define ESP32_I2S_BCK_PIN 26
 #define ESP32_I2S_WS_PIN 25
 #define ESP32_I2S_DATA_PIN 33
-#define ESP32_I2S_DATA_PIN_IN 32  // relevant with I2S_ADC
+#define ESP32_I2S_DATA_PIN_IN 32  
 
 
 // Preferred I2S port: note that this might be taken into consideration if there is a choice
@@ -47,25 +47,18 @@ const i2s_port_t i2s_num = I2S_NUM_0;
 #if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
 #define AUDIO_BITS 8
 #define PDM_RESOLUTION 1
+#define IS_INTERNAL_DAC
 #elif (ESP32_AUDIO_OUT_MODE == PT8211_DAC  || ESP32_AUDIO_OUT_MODE == I2S_DAC_AND_I2S_ADC)
 #define AUDIO_BITS 16
 #define PDM_RESOLUTION 1
+#define IS_I2S_DAC
 #elif (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
 #define AUDIO_BITS 16
 #define PDM_RESOLUTION 4
+#define IS_PDM
 #else
 #error Invalid output mode configured in AudioConfigESP32.h
 #endif
-
-/// Activate Analog Input
-#if (ESP32_AUDIO_OUT_MODE == PT8211_DAC_AND_INTERNAL_ADC || ESP32_AUDIO_OUT_MODE == I2S_DAC_AND_I2S_ADC || ESP32_AUDIO_OUT_MODE == INTERNAL_DAC_AND_I2S_ADC)
-#  define MOZZI_FAST_ANALOG_IMPLEMENTED // not yet
-#endif
-
-/// Logic for Output Buffer
-#define IS_INTERNAL_DAC() (ESP32_AUDIO_OUT_MODE==INTERNAL_DAC || ESP32_AUDIO_OUT_MODE==INTERNAL_DAC_AND_I2S_ADC)
-#define IS_I2S_DAC() (ESP32_AUDIO_OUT_MODE==I2S_DAC || ESP32_AUDIO_OUT_MODE==I2S_DAC_AND_INTERNAL_ADC||ESP32_AUDIO_OUT_MODE==I2S_DAC_AND_I2S_ADC)
-#define IS_PDM() (ESP32_AUDIO_OUT_MODE==PDM_VIA_I2S) 
 
 #define AUDIO_BIAS ((uint16_t) 1<<(AUDIO_BITS-1))
 #define BYPASS_MOZZI_OUTPUT_BUFFER true

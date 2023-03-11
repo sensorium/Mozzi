@@ -19,7 +19,7 @@
 static const char module[]="Mozzi-ESP32";
 
 /// Make sure that we provide a supported port
-int getWritePort(){
+int getI2SPort(){
   switch (ESP32_AUDIO_OUT_MODE){
     case INTERNAL_DAC: 
       return 0;
@@ -53,7 +53,7 @@ int getI2SMode(){
 
 /// @brief  Reads a sample from the I2S buffer. I2S is stereo, so we combine the result to one single sample
 int getAudioInput() {
-  static const int i2s_port = getWritePort();
+  static const int i2s_port = getI2SPort();
   if (i2s_port==-1) return 0;
 
   int16_t tmp[2];
@@ -99,7 +99,7 @@ static uint32_t _esp32_prev_sample[PDM_RESOLUTION];
 #  endif
 
 inline bool esp32_tryWriteSample() {
-  static i2s_port_t port = (i2s_port_t) getWritePort();
+  static i2s_port_t port = (i2s_port_t) getI2SPort();
   size_t bytes_written;
   int write_len = sizeof(_esp32_prev_sample);
   i2s_write(port, &_esp32_prev_sample, write_len, &bytes_written, 0);
@@ -214,12 +214,12 @@ static void startAudio() {
 /// Use I2S for the Output and Input
 static void startAudio() {
   // start output
-  startI2SAudio((i2s_port_t)getWritePort(), getI2SMode());
+  startI2SAudio((i2s_port_t)getI2SPort(), getI2SMode());
 }
 
 #endif
 
 void stopMozzi() {
-  i2s_driver_uninstall((i2s_port_t)getWritePort());
+  i2s_driver_uninstall((i2s_port_t)getI2SPort());
 }
 //// END AUDIO OUTPUT code ///////

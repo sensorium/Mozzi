@@ -41,6 +41,7 @@ const i2s_port_t i2s_num = I2S_NUM_0;
 //#define ESP32_AUDIO_RATE 8000
 
 
+///--------------------------------------------------------------------------------------------------------
 /// User config end. Do not modify below this line
 ///--------------------------------------------------------------------------------------------------------
 
@@ -61,7 +62,7 @@ const i2s_port_t i2s_num = I2S_NUM_0;
 #endif
 
 #define AUDIO_BIAS ((uint16_t) 1<<(AUDIO_BITS-1))
-#define BYPASS_MOZZI_OUTPUT_BUFFER true
+#define BYPASS_MOZZI_OUTPUT_BUFFER !EXTERNAL_AUDIO_OUTPUT
 
 // Use defined rate as new AUDIO_RATE_PLATFORM_DEFAULT
 #ifdef ESP32_AUDIO_RATE

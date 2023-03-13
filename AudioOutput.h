@@ -103,9 +103,7 @@ struct StereoOutput {
   StereoOutput& clip() { _l = CLIP_AUDIO(_l); _r = CLIP_AUDIO(_r); return *this; };
 
   /** @see MonoOutput::fromNBit(), stereo variant */
-  static inline StereoOutput fromNBit(uint8_t bits, int16_t l, int16_t r) { return StereoOutput(SCALE_AUDIO(l, bits), SCALE_AUDIO(r, bits)); }
-  /** @see MonoOutput::fromNBit(), stereo variant, 32 bit overload */
-  static inline StereoOutput fromNBit(uint8_t bits, int32_t l, int32_t r) { return StereoOutput(SCALE_AUDIO(l, bits), SCALE_AUDIO(r, bits)); }
+template<typename T> static inline StereoOutput fromNBit(uint8_t bits, T l, T r) { return StereoOutput(SCALE_AUDIO(l, bits), SCALE_AUDIO(r, bits)); }
   /** @see MonoOutput::from8Bit(), stereo variant */
   static inline StereoOutput from8Bit(int16_t l, int16_t r) { return fromNBit(8, l, r); }
   /** @see MonoOutput::from16Bit(), stereo variant */
@@ -152,9 +150,7 @@ struct MonoOutput {
   /** Construct an audio frame a zero-centered value known to be in the N bit range. Appropriate left- or right-shifting will be performed, based on the number of output
    *  bits available. While this function takes care of the shifting, beware of potential overflow issues, if your intermediary results exceed the 16 bit range. Use proper
    *  casts to int32_t or larger in that case (and the compiler will automatically pick the 32 bit overload in this case) */
-  static inline MonoOutput fromNBit(uint8_t bits, int16_t l) { return MonoOutput(SCALE_AUDIO(l, bits)); }
-  /** 32bit overload. See above. */
-  static inline MonoOutput fromNBit(uint8_t bits, int32_t l) { return MonoOutput(SCALE_AUDIO(l, bits)); }
+  template<typename T> static inline MonoOutput fromNBit(uint8_t bits, T l) { return MonoOutput(SCALE_AUDIO(l, bits)); }
   /** Construct an audio frame from a zero-centered value known to be in the 8 bit range. On AVR, STANDADR or STANDARD_PLUS mode, this is effectively the same as calling the
    * constructor, directly (no scaling gets applied). On platforms/configs using more bits, an appropriate left-shift will be performed. */
   static inline MonoOutput from8Bit(int16_t l) { return fromNBit(8, l); }

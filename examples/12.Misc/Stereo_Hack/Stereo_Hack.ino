@@ -40,7 +40,7 @@ void updateControl(){
 
 AudioOutput_t updateAudio(){
   int asig = aNoise.next();
-  return StereoOutput::fromNBit(24, (long)pan*asig, ((long)65535-pan)*asig);
+  return StereoOutput::fromNBit(24, (long)pan*asig, (long)(65535-pan)*asig);
 }
 
 

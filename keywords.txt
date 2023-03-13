@@ -17,13 +17,25 @@ setPin13High	KEYWORD2
 setPin13Low	KEYWORD2
 trailingZeros	KEYWORD2
 
+ResonantFilterNbits	KEYWORD1
+ResonantFilter	KEYWORD1
 LowPassFilter	KEYWORD1
 setCutoffFreq	KEYWORD2
 setResonance	KEYWORD2
 next	KEYWORD2
 setCutoffFreqAndResonance	KEYWORD2
 LowPassFilter16	KEYWORD1
+LOWPASS	LITERAL1
+BANDPASS	LITERAL1
+HIGHPASS	LITERAL1
+NOTCH	LITERAL1
 
+MultiResonantFilter	KEYWORD1
+next		KEYWORD2
+low		KEYWORD2
+high		KEYWORD2
+band		KEYWORD2
+notch		KEYWORD2
 
 Oscil	KEYWORD1
 incrementPhase	KEYWORD2
@@ -358,4 +370,10 @@ noteOn	KEYWORD2
 noteOff	KEYWORD2
 setPDEnv	KEYWORD2
 update	KEYWORD2
+next	KEYWORD2
+
+WaveFolder	KEYWORD1
+setHighLimit	KEYWORD2
+setLowLimit	KEYWORD2
+setLimits	KEYWORD2
 next	KEYWORD2

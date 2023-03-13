@@ -49,8 +49,9 @@ Soc., Vol 45, No. 9, 1997 September
 #include "meta.h"
 #include "mozzi_fixmath.h"
 #include "mozzi_utils.h"
+#include "ResonantFilter.h"
 
-enum filter_types { LOWPASS, BANDPASS, HIGHPASS, NOTCH };
+//enum filter_types { LOWPASS, BANDPASS, HIGHPASS, NOTCH };
 
 /** A State Variable filter which offers 12db resonant low, high, bandpass and
 notch modes.

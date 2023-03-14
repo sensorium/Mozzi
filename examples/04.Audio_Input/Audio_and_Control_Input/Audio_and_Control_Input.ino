@@ -15,7 +15,7 @@
   Circuit:
   Audio cable centre wire on pin A0, outer shielding to Arduino Ground.
   Audio output on DAC/A14 on Teensy 3.0, 3.1, or digital pin 9 on a Uno or similar, or
-  check the README or http://sensorium.github.com/Mozzi/
+  check the README or http://sensorium.github.io/Mozzi/
   Analog sensor inputs on any other analog input pins.
   The serial printing might cause glitches, so try commenting
   them out to test if this is a problem.
@@ -43,7 +43,7 @@ void setup() {
 
 void updateControl(){
   for (int i=1;i<NUM_ANALOG_INPUTS;i++) { // analog 0 is configured for audio
-    Serial.print(mozziAnalogRead(i)); // mozziAnalogRead is better than mozziAnalogRead
+    Serial.print(mozziAnalogRead(i)); // mozziAnalogRead is better than analogRead
     Serial.print("\t"); // tab
   }
   Serial.println();

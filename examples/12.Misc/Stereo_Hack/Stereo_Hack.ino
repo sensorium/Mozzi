@@ -1,7 +1,7 @@
 /*  Example crudely panning noise to test stereo output hack,
  *  using Mozzi sonification library.
  *
- *  Tests stereo output hack.  This requires #define STEREO_HACK true in mozzi_config.h
+ *  Tests stereo output.  This requires #define AUDIO_CHANNELS STEREO in mozzi_config.h
  *
  *  Circuit: Audio outputs on digital pins 9 and 10.
  *
@@ -38,14 +38,9 @@ void updateControl(){
   Serial.println(pan);
 }
 
-// needed for stereo output
-int audio_out_1, audio_out_2;
-
-void updateAudio(){
+AudioOutput_t updateAudio(){
   int asig = aNoise.next();
-  audio_out_1 = (int)(((long)pan*asig)>>16);
-  audio_out_2 = (int)((((long)65535-pan)*asig)>>16);
-  // return StereoOutput::fromNBit(24, (long)pan*asig, ((long)65535-pan)*asig);
+  return StereoOutput::fromNBit(24, (long)pan*asig, (long)(65535-pan)*asig);
 }
 
 

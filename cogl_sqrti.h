@@ -17,69 +17,9 @@
  */
 #include "mozzi_fixmath.h"
 
-
-//http://www.codecodex.com/wiki/Calculate_an_integer_square_root
-//see Integer Square Roots by Jack W. Crenshaw, figure 2, http://www.embedded.com/electronics-blogs/programmer-s-toolbox/4219659/Integer-Square-Roots
-    typedef uint8_t       	uint8_t;  
-    typedef unsigned short int  uint16;  
-    typedef unsigned long int   uint32;  
-      
-
-      
-    uint32  // OR uint16 OR uint8_t  
-    isqrt32 (uint32 n) // OR isqrt16 ( uint16 n ) OR  isqrt8 ( uint8_t n ) - respectively [ OR overloaded as isqrt (uint16_t?? n) in C++ ]  
-    {  
-        register uint32 // OR register uint16 OR register uint8_t - respectively  
-            root, remainder, place;  
-      
-        root = 0;  
-        remainder = n;  
-        place = 0x40000000; // OR place = 0x4000; OR place = 0x40; - respectively  
-      
-        while (place > remainder)  
-            place = place >> 2;  
-        while (place)  
-        {  
-            if (remainder >= root + place)  
-            {  
-                remainder = remainder - root - place;  
-                root = root + (place << 1);  
-            }  
-            root = root >> 1;  
-            place = place >> 2;  
-        }  
-        return root;  
-    }  
-    
-    //http://www.codecodex.com/wiki/Calculate_an_integer_square_root
-     uint16  // OR uint16 OR uint8_t  
-    isqrt16 (uint16 n) // OR isqrt16 ( uint16 n ) OR  isqrt8 ( uint8_t n ) - respectively [ OR overloaded as isqrt (uint16_t?? n) in C++ ]  
-    {  
-        register uint16 // OR register uint16 OR register uint8_t - respectively  
-            root, remainder, place;  
-      
-        root = 0;  
-        remainder = n;  
-        place = 0x4000; // OR place = 0x4000; OR place = 0x40; - respectively  
-      
-        while (place > remainder)  
-            place = place >> 2;  
-        while (place)  
-        {  
-            if (remainder >= root + place)  
-            {  
-                remainder = remainder - root - place;  
-                root = root + (place << 1);  
-            }  
-            root = root >> 1;  
-            place = place >> 2;  
-        }  
-        return root;  
-    }  
-    
-    
-    
-    
+/** NOTE: This header-file used to be entirely broken for many years (due to double definition of isqrt16 and isqrt32, now removed), with no apparent complaints.
+ * The algos in here look sort of cool, but I don't think they should be part of official API to maintain. Hence the deliberate error below. */
+#error This file is just a scratchpad for integer sqrt algorithms. It is not currently meant to an official part of the Mozzi API.
     
 /*-- isqrt -----------------------------------------------------------------*/
 

@@ -30,7 +30,7 @@ class RollingStat
 public:
 
 	/** Constructor */
-	RollingStat() : _previous_mean(0), _mean(0), _variance(0), WINDOW_LENGTH_AS_RSHIFT((uint8_t)trailingZeros((unsigned long)WINDOW_LENGTH))
+	RollingStat() : _previous_mean(0), _mean(0), _variance(0), WINDOW_LENGTH_AS_RSHIFT(trailingZerosConst(WINDOW_LENGTH))
 	{}
 
 
@@ -97,7 +97,7 @@ class RollingStat <float, WINDOW_LENGTH>
 public:
 
 	/** Constructor */
-	RollingStat() : _previous_mean(0), _mean(0), _variance(0), WINDOW_LENGTH_AS_RSHIFT((uint8_t)trailingZeros((unsigned long)WINDOW_LENGTH))
+	RollingStat() : _previous_mean(0), _mean(0), _variance(0), WINDOW_LENGTH_AS_RSHIFT(trailingZerosConst(WINDOW_LENGTH))
 	{}
 
 

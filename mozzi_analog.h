@@ -18,14 +18,11 @@
  #include "WProgram.h"
 #endif
 
+#include "hardware_defines.h"
+
 #if (USE_AUDIO_INPUT==true)
 #warning "Using AUDIO_INPUT_PIN defined in mozzi_config.h for audio input."
 #endif
-
-void adcReadSelectedChannels();
-//void receiveFirstControlADC();
-void startSecondControlADC();
-void receiveSecondControlADC();
 
 // hack for Teensy 2 (ATmega32U4), which has "adc_mapping" instead of "analog_pin_to_channel_PGM"
 #if defined(__AVR_ATmega32U4__) && defined(CORE_TEENSY) 
@@ -175,11 +172,7 @@ hardware may return a different range, e.g. 0-4095 on STM32 boards.
 int mozziAnalogRead(uint8_t pin);
 
 
-/* Used in MozziGuts.cpp, in updateControlWithAutoADC() to kick off any mozziAnalogReads waiting on the stack
-*/
-void adcStartReadCycle();
-
-
 uint8_t adcPinToChannelNum(uint8_t pin);
+
 
 #endif /* MOZZI_ANALOG_H_ */

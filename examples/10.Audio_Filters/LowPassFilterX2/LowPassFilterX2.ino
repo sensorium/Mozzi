@@ -5,7 +5,7 @@
 
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
     DAC/A14 on Teensy 3.1, or
-    check the README or http://sensorium.github.com/Mozzi/
+    check the README or http://sensorium.github.io/Mozzi/
 
 		Mozzi documentation/API
 		https://sensorium.github.io/Mozzi/doc/html/index.html
@@ -20,7 +20,7 @@
 #include <Oscil.h>
 #include <tables/chum9_int8.h> // recorded audio wavetable
 #include <tables/cos512_int8.h> // for filter modulation
-#include <LowPassFilter.h>
+#include <ResonantFilter.h>
 #include <mozzi_rand.h> // for rand()
 
 Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound1(CHUM9_DATA); //audio oscillator
@@ -28,7 +28,7 @@ Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound2(CHUM9_DATA); //audio oscillato
 Oscil<COS512_NUM_CELLS, CONTROL_RATE> kFilterMod1(COS512_DATA); // to modulate filter frequency
 Oscil<COS512_NUM_CELLS, CONTROL_RATE> kFilterMod2(COS512_DATA); // to modulate filter frequency
 
-LowPassFilter lpf1;
+LowPassFilter lpf1;  // can be changed to HighPassFilter, BandPassFilter or NotchFilter
 LowPassFilter lpf2;
 
 uint8_t resonance1 = 180; // range 0-255, 255 is most resonant
@@ -54,7 +54,7 @@ void updateControl(){
 
 
 AudioOutput_t updateAudio(){
-  return MonoOutput::fromAlmostNBit(9, (((char)lpf1.next(aCrunchySound1.next()))>>1) + (char)lpf2.next(aCrunchySound2.next());
+  return MonoOutput::fromAlmostNBit(9, (((char)lpf1.next(aCrunchySound1.next()))>>1) + (char)lpf2.next(aCrunchySound2.next()));
 }
 
 

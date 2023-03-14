@@ -4,7 +4,7 @@
 
 
     #define EXTERNAL_AUDIO_OUTPUT true should be uncommented in mozzi_config.h.
-    #define STEREO_HACK true should be set in mozzi_config.h
+    #define AUDIO_CHANNELS STEREO should be set in mozzi_config.h
 
 
 
@@ -94,12 +94,8 @@ void updateControl() {
 }
 
 
-// needed for stereo output
-int audio_out_1, audio_out_2;
-
 AudioOutput_t updateAudio() {
-  audio_out_1 = (aCos1.next() * env1) >> 4 ;
-  audio_out_2 = (aCos2.next() * env2) >> 4 ;
+  return StereoOutput::fromNBit(12, aCos1.next() * env1, aCos2.next() * env2);
 }
 
 

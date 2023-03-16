@@ -124,7 +124,6 @@ $(document).ready(function(){initNavTree('functions_s.html','');});
 </li>
 <li>setAllUpdateSteps()
 : <a class="el" href="class_a_d_s_r.html#a9cd0d4d6fefdd58d81acb2a76b9fc4c0">ADSR&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;</a>
-, <a class="el" href="class_multi_line.html#a7e8ebd732f18ed056bc9754c372307a6">MultiLine&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</a>
 </li>
 <li>setAttack()
 : <a class="el" href="class_ead.html#a6bae0e92e6709c3fcd31fccd41212bac">Ead</a>
@@ -149,10 +148,14 @@ $(document).ready(function(){initNavTree('functions_s.html','');});
 , <a class="el" href="class_wave_packet.html#adbbbf8b6b9eaae18ef381ff04be3eb5b">WavePacket&lt; ALGORITHM &gt;</a>
 </li>
 <li>setCutoffFreq()
-: <a class="el" href="class_resonant_filter.html#a906d49cb7d195dd0ac2185e3064fb25b">ResonantFilter&lt; FILTER_TYPE, su &gt;</a>
+: <a class="el" href="class_meta_oscil.html#aceb617c02ea3a693a8ec48b32247a355">MetaOscil&lt; NUM_TABLE_CELLS, UPDATE_RATE, N_OSCIL &gt;</a>
+, <a class="el" href="class_resonant_filter.html#a906d49cb7d195dd0ac2185e3064fb25b">ResonantFilter&lt; FILTER_TYPE, su &gt;</a>
 </li>
 <li>setCutoffFreqAndResonance()
 : <a class="el" href="class_resonant_filter.html#ab6f35bf0b8dd435b501931cef941e4a6">ResonantFilter&lt; FILTER_TYPE, su &gt;</a>
+</li>
+<li>setCutoffFreqs()
+: <a class="el" href="class_meta_oscil.html#a7567da1ff25347c8d44fad66efe28af1">MetaOscil&lt; NUM_TABLE_CELLS, UPDATE_RATE, N_OSCIL &gt;</a>
 </li>
 <li>setDecay()
 : <a class="el" href="class_ead.html#aa99e6dc2d5448b4de0764c6208e5c2fc">Ead</a>
@@ -182,15 +185,18 @@ $(document).ready(function(){initNavTree('functions_s.html','');});
 : <a class="el" href="class_audio_delay_feedback.html#a2cd87a7dc91187ed439a8ec1d7e00d29">AudioDelayFeedback&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;</a>
 </li>
 <li>setFreq()
-: <a class="el" href="class_oscil.html#a23121f22ea447918088a79c7f9748b3d">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+: <a class="el" href="class_meta_oscil.html#a1960b7c4012424058876085c76d1dfd9">MetaOscil&lt; NUM_TABLE_CELLS, UPDATE_RATE, N_OSCIL &gt;</a>
+, <a class="el" href="class_oscil.html#a23121f22ea447918088a79c7f9748b3d">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
 , <a class="el" href="class_phasor.html#afc6106c648bddb5f2f084b8f34216b0f">Phasor&lt; UPDATE_RATE &gt;</a>
 , <a class="el" href="class_sample.html#aa0c37457f99def5c7036c6b6d9ee43fc">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 </li>
 <li>setFreq_Q16n16()
-: <a class="el" href="class_oscil.html#a73b52741178ed490463d9ff471cebef3">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+: <a class="el" href="class_meta_oscil.html#a98794f84684b257079e79bd9f92d0892">MetaOscil&lt; NUM_TABLE_CELLS, UPDATE_RATE, N_OSCIL &gt;</a>
+, <a class="el" href="class_oscil.html#a73b52741178ed490463d9ff471cebef3">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
 </li>
 <li>setFreq_Q24n8()
-: <a class="el" href="class_oscil.html#abc8a4ee236f7fd45dda9dece7292b6e7">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+: <a class="el" href="class_meta_oscil.html#adcadf4935c390cd8d2eea9623365bf70">MetaOscil&lt; NUM_TABLE_CELLS, UPDATE_RATE, N_OSCIL &gt;</a>
+, <a class="el" href="class_oscil.html#abc8a4ee236f7fd45dda9dece7292b6e7">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
 , <a class="el" href="class_sample.html#a903c2d634b10ac531c3c9f6a35fcb046">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 </li>
 <li>setFundamental()
@@ -201,7 +207,6 @@ $(document).ready(function(){initNavTree('functions_s.html','');});
 </li>
 <li>setLevels()
 : <a class="el" href="class_a_d_s_r.html#a4ef5dfa5c71809737c3e614b09775203">ADSR&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;</a>
-, <a class="el" href="class_multi_line.html#a2e3788c36c4a6f59c62770cfef2036e5">MultiLine&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</a>
 </li>
 <li>setLimits()
 : <a class="el" href="class_wave_folder.html#af06cfae975014be2651966519df0f0cd">WaveFolder&lt; T &gt;</a>
@@ -220,17 +225,23 @@ $(document).ready(function(){initNavTree('functions_s.html','');});
 <li>setLowLimit()
 : <a class="el" href="class_wave_folder.html#ae8522fd82e949e8115193905bcf5b01c">WaveFolder&lt; T &gt;</a>
 </li>
+<li>setOscils()
+: <a class="el" href="class_meta_oscil.html#a3390f39fbaa06276398624bd14a639ad">MetaOscil&lt; NUM_TABLE_CELLS, UPDATE_RATE, N_OSCIL &gt;</a>
+</li>
 <li>setPDEnv()
 : <a class="el" href="class_p_d_resonant.html#a7c921c18d37b0625beab9e4f06c69ca4">PDResonant</a>
 </li>
 <li>setPhase()
-: <a class="el" href="class_oscil.html#ab7b740eec56740426a47508562ed4dd5">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+: <a class="el" href="class_meta_oscil.html#a889ea6de8595838ef735f8237a0abc51">MetaOscil&lt; NUM_TABLE_CELLS, UPDATE_RATE, N_OSCIL &gt;</a>
+, <a class="el" href="class_oscil.html#ab7b740eec56740426a47508562ed4dd5">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
 </li>
 <li>setPhaseFractional()
-: <a class="el" href="class_oscil.html#afc77bfc5a1ad5926ad8df37725d480d7">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+: <a class="el" href="class_meta_oscil.html#ab3c61548e9b48714d1e0900532e99408">MetaOscil&lt; NUM_TABLE_CELLS, UPDATE_RATE, N_OSCIL &gt;</a>
+, <a class="el" href="class_oscil.html#afc77bfc5a1ad5926ad8df37725d480d7">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
 </li>
 <li>setPhaseInc()
-: <a class="el" href="class_oscil.html#a2ff9bfcc57e07bf0df2ed7db186ecff7">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+: <a class="el" href="class_meta_oscil.html#a3bed37fc800a93ff95af445d25eaf57d">MetaOscil&lt; NUM_TABLE_CELLS, UPDATE_RATE, N_OSCIL &gt;</a>
+, <a class="el" href="class_oscil.html#a2ff9bfcc57e07bf0df2ed7db186ecff7">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
 , <a class="el" href="class_phasor.html#adf134d4e4ce960e4c773830fd8467e4b">Phasor&lt; UPDATE_RATE &gt;</a>
 , <a class="el" href="class_sample.html#aaff03b2a14f8f0f79c13840948151a1d">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 </li>
@@ -263,61 +274,16 @@ $(document).ready(function(){initNavTree('functions_s.html','');});
 : <a class="el" href="class_a_d_s_r.html#aec9c57671f1dfae7aa529dcc51b98e40">ADSR&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;</a>
 </li>
 <li>setTable()
-: <a class="el" href="class_oscil.html#a0b22d79fb2d6c7fb50b19c00f249ed84">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
+: <a class="el" href="class_meta_oscil.html#afa39a5e42b7f82619ca1b898bdafced5">MetaOscil&lt; NUM_TABLE_CELLS, UPDATE_RATE, N_OSCIL &gt;</a>
+, <a class="el" href="class_oscil.html#a0b22d79fb2d6c7fb50b19c00f249ed84">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>
 , <a class="el" href="class_sample.html#ade1401f231c920576b1eea2776ac591f">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 , <a class="el" href="class_wave_packet_sample.html#af50b8ef715a86bcdf417961b585c170d">WavePacketSample&lt; ALGORITHM &gt;</a>
-</li>
-<li>setTarget1Level()
-: <a class="el" href="class_multi_line.html#aa79a31cd77050e22f975ada45635ac58">MultiLine&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</a>
-</li>
-<li>setTarget1Time()
-: <a class="el" href="class_multi_line.html#abb797c4d04a052ae56130e2554b07b8d">MultiLine&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</a>
-</li>
-<li>setTarget1UpdateSteps()
-: <a class="el" href="class_multi_line.html#af65dde0a6731c711fe65b4dd24293c43">MultiLine&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</a>
-</li>
-<li>setTarget2Level()
-: <a class="el" href="class_multi_line.html#ae5d8c361d54349c81d2fa99cdb8ad579">MultiLine&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</a>
-</li>
-<li>setTarget2Time()
-: <a class="el" href="class_multi_line.html#abc2ed9d5db8dd064228ffe7bb68b7044">MultiLine&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</a>
-</li>
-<li>setTarget2UpdateSteps()
-: <a class="el" href="class_multi_line.html#ad0a22fc5f50162d1933689e18ab99b9c">MultiLine&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</a>
-</li>
-<li>setTarget3Level()
-: <a class="el" href="class_multi_line.html#a7d7e332ca89c42eaf652e724c06cfd92">MultiLine&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</a>
-</li>
-<li>setTarget3Time()
-: <a class="el" href="class_multi_line.html#a9edf92a819ee55e98d7d5360dcefe582">MultiLine&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</a>
-</li>
-<li>setTarget3UpdateSteps()
-: <a class="el" href="class_multi_line.html#a65056b607b842c4b6a3bf3c66ab2e1db">MultiLine&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</a>
-</li>
-<li>setTarget4Level()
-: <a class="el" href="class_multi_line.html#a0f505af65246d7faa0917543be6aacfe">MultiLine&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</a>
-</li>
-<li>setTarget4Time()
-: <a class="el" href="class_multi_line.html#a7c750cf3cfefee3c345765cdfad8c3cf">MultiLine&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</a>
-</li>
-<li>setTarget4UpdateSteps()
-: <a class="el" href="class_multi_line.html#a0bebb4cc76e0991a6ced481cd4e2cafa">MultiLine&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</a>
-</li>
-<li>setTargetLevel()
-: <a class="el" href="class_multi_line.html#a95bb8b96b4160e0cde1c66e6e1f9473c">MultiLine&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</a>
-</li>
-<li>setTargetTime()
-: <a class="el" href="class_multi_line.html#a499325d5ce2a3534780ea228c3228684">MultiLine&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</a>
-</li>
-<li>setTargetUpdateSteps()
-: <a class="el" href="class_multi_line.html#a7c063cfd9a9e08b74eadcdb85be1a5a6">MultiLine&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</a>
 </li>
 <li>setTime()
 : <a class="el" href="class_portamento.html#af19c3b3c189e111079f54211ff5a4ebe">Portamento&lt; CONTROL_UPDATE_RATE &gt;</a>
 </li>
 <li>setTimes()
 : <a class="el" href="class_a_d_s_r.html#a5e16aa54a82fc6f907a7560e035adf2b">ADSR&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;</a>
-, <a class="el" href="class_multi_line.html#a0ad417817ec47553a1e8ebe1e1dc5f46">MultiLine&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</a>
 </li>
 <li>Smooth()
 : <a class="el" href="class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26">Smooth&lt; T &gt;</a>
@@ -327,10 +293,9 @@ $(document).ready(function(){initNavTree('functions_s.html','');});
 </li>
 <li>start()
 : <a class="el" href="class_ead.html#ac385679b58e2f9755029b7da7405b233">Ead</a>
-, <a class="el" href="class_event_delay.html#a97a07c9371040d6388b8369352b08d83">EventDelay</a>
-, <a class="el" href="class_metronome.html#ad5670c748042846b02cb33c613c50422">Metronome</a>
-, <a class="el" href="class_multi_line.html#aa33607aeff7aef37a1ed9151cac35ea2">MultiLine&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</a>
-, <a class="el" href="class_portamento.html#aae67a74be47cb2e8a6ffbb90786221af">Portamento&lt; CONTROL_UPDATE_RATE &gt;</a>
+, <a class="el" href="class_event_delay.html#a0943cb52a1ee36fda1156f8dd762a105">EventDelay</a>
+, <a class="el" href="class_metronome.html#ab85d2f5bdc5cb00d5056b0c2c6eed987">Metronome</a>
+, <a class="el" href="class_portamento.html#af70701abfdd9f3d788f3b313e38017d0">Portamento&lt; CONTROL_UPDATE_RATE &gt;</a>
 , <a class="el" href="class_sample.html#a49ab98acdfb4f81a8860ad21876bdc18">Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</a>
 , <a class="el" href="class_sample_huffman.html#a15ead859261d3d916d700b75f4626f15">SampleHuffman</a>
 </li>
@@ -338,10 +303,7 @@ $(document).ready(function(){initNavTree('functions_s.html','');});
 : <a class="el" href="class_state_variable.html#a9950b71a16f63654552d3e15774d6638">StateVariable&lt; FILTER_TYPE &gt;</a>
 </li>
 <li>StereoOutput()
-: <a class="el" href="struct_stereo_output.html#a78371f79ab53e2b7c6ec5e0e04fc5062">StereoOutput</a>
-</li>
-<li>stop()
-: <a class="el" href="class_multi_line.html#abae6da4598432fdce5fb568f5d330d9d">MultiLine&lt; CONTROL_UPDATE_RATE, LERP_RATE &gt;</a>
+: <a class="el" href="struct_stereo_output.html#a21de1439b838982ab5cb6663bef94498">StereoOutput</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -349,7 +311,7 @@ $(document).ready(function(){initNavTree('functions_s.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Mar 14 2023 22:17:52 for Mozzi by
+    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

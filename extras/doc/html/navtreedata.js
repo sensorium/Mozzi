@@ -43,8 +43,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "01_8_basics_2_vibrato_2_vibrato_8ino-example.html",
-"class_multi_line.html#abae6da4598432fdce5fb568f5d330d9d",
-"group__core.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe"
+"class_multi_resonant_filter.html#a477e6e40d56d5e8f65ec3f6a5559581a",
+"group__fixmath.html#ga17dd8cb80ef87b6573926e411618105a"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

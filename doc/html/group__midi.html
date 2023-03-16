@@ -145,7 +145,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Converts midi note number to frequency. </p>
-<p>Caution: this can take up to 400 microseconds to run. It can seriously mess up the audio output if you use it in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> or updateAudio(). This is a good choice in setup(), or where you need precise midi-pitch conversion and aren't doing much other audio calculation. </p><dl class="section note"><dt>Note</dt><dd>Beware this returns an invalid result for midi note 0. </dd>
+<p>Caution: this can take up to 400 microseconds to run. It can seriously mess up the audio output if you use it in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> or <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a>. This is a good choice in setup(), or where you need precise midi-pitch conversion and aren't doing much other audio calculation. </p><dl class="section note"><dt>Note</dt><dd>Beware this returns an invalid result for midi note 0. </dd>
 <dd>
 Timing: ~350 us </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -253,7 +253,7 @@ Timing: ~350 us </dd></dl>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Jul 17 2020 20:16:37 for Mozzi by
+    <li class="footer">Generated on Tue Mar 14 2023 22:17:52 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

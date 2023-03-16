@@ -1,6 +1,6 @@
 var hierarchy =
 [
-    [ "ADSR< CONTROL_UPDATE_RATE, LERP_RATE >", "class_a_d_s_r.html", null ],
+    [ "ADSR< CONTROL_UPDATE_RATE, LERP_RATE, T >", "class_a_d_s_r.html", null ],
     [ "ADSR< CONTROL_RATE, AUDIO_RATE >", "class_a_d_s_r.html", null ],
     [ "ADSR< CONTROL_RATE, CONTROL_RATE >", "class_a_d_s_r.html", null ],
     [ "AudioDelay< NUM_BUFFER_SAMPLES, T >", "class_audio_delay.html", [
@@ -22,6 +22,13 @@ var hierarchy =
       [ "Metronome", "class_metronome.html", null ]
     ] ],
     [ "Int2Type< I >", "group__util.html#struct_int2_type", null ],
+    [ "IntegerType< BYTES >", "struct_integer_type.html", null ],
+    [ "IntegerType< 1 >", "struct_integer_type_3_011_01_4.html", null ],
+    [ "IntegerType< 2 >", "struct_integer_type_3_012_01_4.html", null ],
+    [ "IntegerType< 4 >", "struct_integer_type_3_014_01_4.html", null ],
+    [ "IntegerType< 8 >", "struct_integer_type_3_018_01_4.html", null ],
+    [ "IntegerType< sizeof(su)+sizeof(su)>", "struct_integer_type.html", null ],
+    [ "IntegerType< sizeof(T)>", "struct_integer_type.html", null ],
     [ "IntMap", "class_int_map.html", null ],
     [ "Line< T >", "class_line.html", null ],
     [ "Line< Q15n16 >", "class_line.html", null ],
@@ -29,7 +36,7 @@ var hierarchy =
     [ "Line< unsigned char >", "class_line_3_01unsigned_01char_01_4.html", null ],
     [ "Line< unsigned int >", "class_line_3_01unsigned_01int_01_4.html", null ],
     [ "Line< unsigned long >", "class_line_3_01unsigned_01long_01_4.html", null ],
-    [ "LowPassFilter", "class_low_pass_filter.html", null ],
+    [ "MonoOutput", "struct_mono_output.html", null ],
     [ "MultiLine< CONTROL_UPDATE_RATE, LERP_RATE >", "class_multi_line.html", null ],
     [ "Oscil< NUM_TABLE_CELLS, UPDATE_RATE >", "class_oscil.html", null ],
     [ "Oscil< 8192, AUDIO_RATE >", "class_oscil.html", null ],
@@ -40,6 +47,10 @@ var hierarchy =
     [ "Phasor< AUDIO_RATE >", "class_phasor.html", null ],
     [ "Portamento< CONTROL_UPDATE_RATE >", "class_portamento.html", null ],
     [ "RCpoll< SENSOR_PIN >", "class_r_cpoll.html", null ],
+    [ "ResonantFilter< FILTER_TYPE, su >", "class_resonant_filter.html", null ],
+    [ "ResonantFilter< LOWPASS, su >", "class_resonant_filter.html", [
+      [ "MultiResonantFilter< su >", "class_multi_resonant_filter.html", null ]
+    ] ],
     [ "ReverbTank", "class_reverb_tank.html", null ],
     [ "RollingAverage< T, WINDOW_LENGTH >", "class_rolling_average.html", null ],
     [ "RollingAverage< T,(1<<(RESOLUTION_INCREASE_BITS *2))>", "class_rolling_average.html", [
@@ -51,6 +62,8 @@ var hierarchy =
     [ "Smooth< T >", "class_smooth.html", null ],
     [ "Stack< T, NUM_ITEMS >", "class_stack.html", null ],
     [ "StateVariable< FILTER_TYPE >", "class_state_variable.html", null ],
+    [ "StereoOutput", "struct_stereo_output.html", null ],
+    [ "WaveFolder< T >", "class_wave_folder.html", null ],
     [ "WavePacket< ALGORITHM >", "class_wave_packet.html", [
       [ "WavePacketSample< ALGORITHM >", "class_wave_packet_sample.html", null ]
     ] ],

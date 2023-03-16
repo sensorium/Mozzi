@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['operator_28_29',['operator()',['../class_auto_map.html#afd49885d3f05ca0a2f417199a9e7cf10',1,'AutoMap::operator()()'],['../class_int_map.html#ae3bf8b61f2ab79ac6626245213e7cb2a',1,'IntMap::operator()()'],['../class_smooth.html#a24eb02e4c4bfe9401f24ed0399b1e392',1,'Smooth::operator()()']]],
-  ['oscil',['Oscil',['../class_oscil.html#afe6a75646d2dd822a654bcd85242e800',1,'Oscil::Oscil(const int8_t *TABLE_NAME)'],['../class_oscil.html#ab7dc5f97742d841fff6a4dca6d7242f3',1,'Oscil::Oscil()']]]
+  ['metronome',['Metronome',['../class_metronome.html#a37e8b0aa5a9aa8fa0f33212360cc0928',1,'Metronome']]],
+  ['monooutput',['MonoOutput',['../struct_mono_output.html#a89428135a43dd00ea52a1bd49bbfece9',1,'MonoOutput']]],
+  ['mozzianalogread',['mozziAnalogRead',['../group__analog.html#gae9536bf35f6ea46a6938d5eb52b947c3',1,'mozziAnalogRead(uint8_t pin):&#160;MozziGuts.cpp'],['../group__analog.html#gae9536bf35f6ea46a6938d5eb52b947c3',1,'mozziAnalogRead(uint8_t pin):&#160;MozziGuts.cpp']]],
+  ['mozzimicros',['mozziMicros',['../group__core.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe',1,'mozziMicros():&#160;MozziGuts.cpp'],['../group__core.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe',1,'mozziMicros():&#160;MozziGuts.cpp']]],
+  ['mtof',['mtof',['../group__midi.html#gafacb8849f96270644ea79184fde7db37',1,'mtof(float midival):&#160;mozzi_midi.cpp'],['../group__midi.html#ga07d1ca985403df63f75aa5d143477206',1,'mtof(uint8_t midi_note):&#160;mozzi_midi.cpp'],['../group__midi.html#ga08102facf170648591b2ca24a3c39712',1,'mtof(int midi_note):&#160;mozzi_midi.cpp'],['../group__midi.html#gafacb8849f96270644ea79184fde7db37',1,'mtof(float x):&#160;mozzi_midi.cpp'],['../group__midi.html#ga07d1ca985403df63f75aa5d143477206',1,'mtof(uint8_t midi_note):&#160;mozzi_midi.cpp'],['../group__midi.html#ga08102facf170648591b2ca24a3c39712',1,'mtof(int midi_note):&#160;mozzi_midi.cpp']]],
+  ['multiline',['MultiLine',['../class_multi_line.html#ad5aed7c3561c71a13398015e2f396fdc',1,'MultiLine::MultiLine()'],['../class_multi_line.html#ad5aed7c3561c71a13398015e2f396fdc',1,'MultiLine::MultiLine()']]]
 ];

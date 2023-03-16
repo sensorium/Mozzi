@@ -22,6 +22,9 @@ var examples =
     [ "09.Delays/AudioDelay/AudioDelay.ino", "09_8_delays_2_audio_delay_2_audio_delay_8ino-example.html", null ],
     [ "09.Delays/AudioDelayFeedback/AudioDelayFeedback.ino", "09_8_delays_2_audio_delay_feedback_2_audio_delay_feedback_8ino-example.html", null ],
     [ "09.Delays/ReverbTank_STANDARD/ReverbTank_STANDARD.ino", "09_8_delays_2_reverb_tank__s_t_a_n_d_a_r_d_2_reverb_tank__s_t_a_n_d_a_r_d_8ino-example.html", null ],
-    [ "10.Audio_Filters/LowPassFilter/LowPassFilter.ino", "10_8_audio__filters_2_low_pass_filter_2_low_pass_filter_8ino-example.html", null ],
-    [ "11.Audio_Filters/StateVariableFilter/StateVariableFilter.ino", "11_8_audio__filters_2_state_variable_filter_2_state_variable_filter_8ino-example.html", null ]
+    [ "10.Audio_Filters/MultiResonantFilter/MultiResonantFilter.ino", "10_8_audio__filters_2_multi_resonant_filter_2_multi_resonant_filter_8ino-example.html", null ],
+    [ "10.Audio_Filters/ResonantFilter/ResonantFilter.ino", "10_8_audio__filters_2_resonant_filter_2_resonant_filter_8ino-example.html", null ],
+    [ "10.Audio_Filters/ResonantFilter16/ResonantFilter16.ino", "10_8_audio__filters_2_resonant_filter16_2_resonant_filter16_8ino-example.html", null ],
+    [ "11.Audio_Filters/StateVariableFilter/StateVariableFilter.ino", "11_8_audio__filters_2_state_variable_filter_2_state_variable_filter_8ino-example.html", null ],
+    [ "fromAlmostNBit", "from_almost_n_bit-example.html", null ]
 ];

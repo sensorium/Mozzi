@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Mozzi: AudioConfigExternalDAC.h Source File</title>
+<title>Mozzi: IntegerType&lt; 8 &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('_audio_config_external_d_a_c_8h_source.html','');});
+$(document).ready(function(){initNavTree('struct_integer_type_3_018_01_4.html','');});
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -99,17 +99,36 @@ $(document).ready(function(){initNavTree('_audio_config_external_d_a_c_8h_source
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="struct_integer_type_3_018_01_4-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">AudioConfigExternalDAC.h</div>  </div>
+<div class="title">IntegerType&lt; 8 &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">ifndef</span> <span class="preprocessor">AUDIOCONFIGEXTERNALDAC_H</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">AUDIOCONFIGEXTERNALDAC_H</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">/**</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  Config file in order to use Mozzi with a true DAC MCP49XX.</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">  In order to use this, you will the MCP49XX library that can be found here:</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">  https://github.com/exscape/electronics/tree/master/Arduino/Libraries/DAC_MCP49xx written by Thomas Backman.</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">  As PortWrite is enabled in order to gain speed, use Pin10 for CS SPI pin.</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">  The type of DAC can be changed in the constructor, beware to adapt the AUDIO_BIAS to the number of bits you are using.</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> */</span></div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">DAC_MCP49xx</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">SPI</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">AUDIO_BIAS</span> 2048  <span class="comment">//we are using 12bits</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">endif</span></div></div><!-- fragment --></div><!-- contents -->
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a7319b96acf35cd610fd96a474e30d55e"><td class="memItemLeft" align="right" valign="top"><a id="a7319b96acf35cd610fd96a474e30d55e"></a>
+typedef uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>unsigned_type</b></td></tr>
+<tr class="separator:a7319b96acf35cd610fd96a474e30d55e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a228ff4637cc681fd9319de423525f5a0"><td class="memItemLeft" align="right" valign="top"><a id="a228ff4637cc681fd9319de423525f5a0"></a>
+typedef int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>signed_type</b></td></tr>
+<tr class="separator:a228ff4637cc681fd9319de423525f5a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;&gt;<br />
+struct IntegerType&lt; 8 &gt;</h3>
+
+
+<p class="definition">Definition at line <a class="el" href="_integer_type_8h_source.html#l00024">24</a> of file <a class="el" href="_integer_type_8h_source.html">IntegerType.h</a>.</p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>AudioConfigExternalDAC.h</b></li>
-    <li class="footer">Generated on Wed Feb 26 2020 13:12:05 for Mozzi by
+    <li class="navelem"><a class="el" href="struct_integer_type_3_018_01_4.html">IntegerType&lt; 8 &gt;</a></li>
+    <li class="footer">Generated on Tue Mar 14 2023 22:17:52 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

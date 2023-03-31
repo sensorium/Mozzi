@@ -68,6 +68,8 @@ static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
 #  include "MozziGuts_impl_SAMD.hpp"
 #elif (IS_RP2040())
 #  include "MozziGuts_impl_RP2040.hpp"
+#elif (IS_MBED())
+#  include "MozziGuts_impl_MBED.hpp"
 #else
 #  error "Platform not (yet) supported. Check MozziGuts_impl_template.hpp and existing implementations for a blueprint for adding your favorite MCU."
 #endif

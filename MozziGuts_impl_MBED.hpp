@@ -108,25 +108,24 @@ void stm32_adc_eoc_handler() {
 #if MBED_AUDIO_OUT_MODE == INTERNAL_DAC
 #include <Arduino_AdvancedAnalog.h>
 AdvancedDAC dac1(AUDIO_CHANNEL_1_PIN);
-AdvancedDAC dac2(AUDIO_CHANNEL_2_PIN);
-DMABuffer<Sample> dummy;
-SampleBuffer buf1(dummy);
-SampleBuffer buf2(dummy);
-int bufpos;
-
-#define CHUNKSIZE 16
+//AdvancedDAC dac2(AUDIO_CHANNEL_2_PIN);
+#define CHUNKSIZE 32
+Sample buf1[CHUNKSIZE];
+int bufpos = 0;
 
 /** NOTE: This is the function that actually write a sample to the output. In case of EXTERNAL_AUDIO_OUTPUT == true, it is provided by the library user, instead. */
 inline void audioOutput(const AudioOutput f) {
   if (bufpos >= CHUNKSIZE) {
-    dac1.write(buf1);
-    dac2.write(buf2);
-    buf1 = dac1.dequeue();
-    buf2 = dac2.dequeue();
+    SampleBuffer dmabuf = dac1.dequeue();
+    for (int i = 0; i < dmabuf.size(); ++i) dmabuf.data()[i] = buf1[i];
+    dac1.write(dmabuf);
+    //Serial.println("written");
+    //dac2.write(buf2);
+    //buf2 = dac2.dequeue();
     bufpos = 0;
   }
-  buf1.data()[bufpos] = f.l()+AUDIO_BIAS;
-  buf2.data()[bufpos] = f.r()+AUDIO_BIAS;
+  buf1[bufpos] = f.l()+AUDIO_BIAS;
+  //buf2.data()[bufpos] = f.r()+AUDIO_BIAS;
   ++bufpos;
 #if (AUDIO_CHANNELS > 1)
   // e.g. analogWrite(AUDIO_CHANNEL_2_PIN, f.r()+AUDIO_BIAS);
@@ -134,13 +133,22 @@ inline void audioOutput(const AudioOutput f) {
 }
 
 bool canBufferAudioOutput() {
-  return dac1.available();
+/*  if (dac1.available()) {
+    Serial.print(audioTicks());
+    Serial.print(" ");
+    Serial.println(bufpos);
+  } */
+  return (bufpos < CHUNKSIZE || dac1.available());
 }
 
 static void startAudio() {
-  bufpos = CHUNKSIZE;  // As buffers are initially invalid
-  dac1.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZE, 256/CHUNKSIZE);
-  dac2.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZE, 256/CHUNKSIZE);
+  //NOTE: AdvancedDAC seems suspiciously dependent on a specific size and number of buffers, in order to work without hickups. Both too few, and too many cause problems.
+  //      I suspect a bug in AdvancedDAC, perhaps in available() ?
+  if (!dac1.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZE, 1024/CHUNKSIZE)) {
+      Serial.println("Failed to start DAC1 !");
+      while (1);
+  }
+  //dac2.begin(AN_RESOLUTION_12, 8000, CHUNKSIZE, 256/CHUNKSIZE);
 
   // Add here code to get audio output going. This usually involves:
   // 1) setting up some DAC mechanism (e.g. setting up a PWM pin with appropriate resolution

@@ -4,14 +4,14 @@ name: Compile Examples
 on:
   push:
     paths:
-      - ".github/workflows/compile-examples.yml"
+      - ".github/workflows/compile_examples.yml"
       - "examples/**"
       - "**.cpp"
       - "**.h"
       - "**.hpp"
   pull_request:
     paths:
-      - ".github/workflows/compile-examples.yml"
+      - ".github/workflows/compile_examples.yml"
       - "examples/**"
       - "**.cpp"
       - "**.h"
@@ -52,7 +52,8 @@ jobs:
             - examples/05.Control_Filters
           libraries: |
             - source-path: ./
-            - name: PinChangeInt
+            - name: PinChangeInterrupt
+            - name: MIDI Library
           enable-deltas-report: true
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
 

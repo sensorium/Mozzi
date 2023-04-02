@@ -6,15 +6,16 @@ on:
     paths:
       - ".github/workflows/compile-examples.yml"
       - "examples/**"
-      - "src/**"
+      - "**.cpp"
+      - "**.h"
+      - "**.hpp"
   pull_request:
     paths:
       - ".github/workflows/compile-examples.yml"
       - "examples/**"
-      - "src/**"
-  schedule:
-    # Run every Tuesday at 8 AM UTC to catch breakage caused by changes to external resources (libraries, platforms).
-    - cron: "0 8 * * TUE"
+      - "**.cpp"
+      - "**.h"
+      - "**.hpp"
   workflow_dispatch:
   repository_dispatch:
 

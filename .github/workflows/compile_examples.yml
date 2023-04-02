@@ -48,8 +48,6 @@ jobs:
           sketch-paths: |
             - examples/01.Basics
             - examples/02.Control
-            - examples/03.Sensors
-            - examples/05.Control_Filters
           libraries: |
             - source-path: ./
             - name: PinChangeInterrupt

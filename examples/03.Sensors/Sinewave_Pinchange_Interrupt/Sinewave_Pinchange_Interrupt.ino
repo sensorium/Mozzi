@@ -42,7 +42,7 @@ void setup(){
   aSin.setFreq(440);
   pinMode(PIN, INPUT);     //set the pin to input
   digitalWrite(PIN, HIGH); //use the internal pullup resistor
-  attachPCInterrupt(digitalPinToPCInt(PIN), changeFreq, RISING); // attach a PinChange Interrupt to our pin on the rising edge
+  attachPCInterrupt(digitalPinToPCINT(PIN), changeFreq, RISING); // attach a PinChange Interrupt to our pin on the rising edge
   // (RISING, FALLING and CHANGE all work with this library)
   // and execute the function changeFreq when that pin changes
   startMozzi();

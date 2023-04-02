@@ -12,16 +12,73 @@
 - Compiler protection against typos
 - Easy to extend for new but compatible boards */
 
-#define IS_AVR() (defined(__AVR__))  // "Classic" Arduino boards
-#define IS_SAMD21() (defined(ARDUINO_ARCH_SAMD))
-#define IS_TEENSY3() (defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MK64FX512__) || defined(__MK66FX1M0__) || defined(__MKL26Z64__))  // 32bit arm-based Teensy
-#define IS_TEENSY4() (defined(__IMXRT1062__)) // Teensy4 (no DAC)
-#define IS_MBED() (defined(ARDUINO_ARCH_MBED))
-#define IS_STM32() (defined(__arm__) && !IS_TEENSY3() && !IS_SAMD21() && !IS_TEENSY4() && !IS_RP2040() && !IS_MBED())  // STM32 boards (note that only the maple based core is supported at this time. If another cores is to be supported in the future, this define should be split.
-#define IS_ESP8266() (defined(ESP8266))
-#define IS_ESP32() (defined(ESP32))
-#define IS_RP2040() (defined(ARDUINO_ARCH_RP2040))
-#define IS_GIGA() (IS_MBED() && defined(ARDUINO_GIGA))
+// "Classic" Arduino boards
+#if (defined(__AVR__))
+#define IS_AVR() 1
+#else
+#define IS_AVR() 0
+#endif
+
+// SAMD
+#if (defined(ARDUINO_ARCH_SAMD))
+#define IS_SAMD21() 1
+#else
+#define IS_SAMD21() 0
+#endif
+
+// 32bit arm-based Teensy
+#if (defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MK64FX512__) || defined(__MK66FX1M0__) || defined(__MKL26Z64__))
+#define IS_TEENSY3() 1
+#else
+#define IS_TEENSY3() 0
+#endif
+
+// Teensy4 (no DAC)
+#if (defined(__IMXRT1062__))
+#define IS_TEENSY4() 1
+#else
+#define IS_TEENSY4() 0
+#endif
+
+// RP2040 (Raspberry Pi Pico and friends)
+#if (defined(ARDUINO_ARCH_RP2040))
+#define IS_RP2040() 1
+#else
+#define IS_RP2040() 0
+#endif
+
+// Mbed OS based boards
+#if (defined(ARDUINO_ARCH_MBED))
+#define IS_MBED() 1
+#else
+#define IS_MBED() 0
+#endif
+
+// Arduino Giga
+#if (IS_MBED() && defined(ARDUINO_GIGA))
+#define IS_GIGA() 1
+#else
+#define IS_GIGA() 0
+#endif
+
+// STM32 boards (note that only the maple based core is supported at this time. If another cores is to be supported in the future, this define should be split.
+#if (defined(__arm__) && !IS_TEENSY3() && !IS_SAMD21() && !IS_TEENSY4() && !IS_RP2040() && !IS_MBED())
+#define IS_STM32() 1
+#else
+#define IS_STM32() 0
+#endif
+
+#if (defined(ESP8266))
+#define IS_ESP8266() 1
+#else
+#define IS_ESP8266() 0
+#endif
+
+#if (defined(ESP32))
+#define IS_ESP32() 1
+#else
+#define IS_ESP32() 0
+#endif
 
 #if !(IS_AVR() || IS_TEENSY3() || IS_TEENSY4() || IS_STM32() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() || IS_RP2040() || IS_GIGA())
 #error Your hardware is not supported by Mozzi or not recognized. Edit hardware_defines.h to proceed.

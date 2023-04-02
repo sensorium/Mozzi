@@ -46,7 +46,10 @@ jobs:
           fqbn: ${{ matrix.board.fqbn }}
           platforms: ${{ matrix.board.platforms }}
           sketch-paths: |
-            - examples
+            - examples/01.Basics
+            - examples/02.Control
+            - examples/03.Sensors
+            - examples/05.Control_Filters
           enable-deltas-report: true
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
 

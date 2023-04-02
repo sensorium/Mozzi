@@ -10,30 +10,25 @@
 #endif
 
 // Audio output options
-#define INTERNAL_DAC 1 // output using internal DAC via I2S, output on pin 26
-//#define PT8211_DAC 2 // output using an external PT8211 DAC via I2S
-//#define PDM_VIA_I2S 3 // output PDM coded sample on the I2S data pin (pin 33, by default, configurable, below)
+#define INTERNAL_DAC 1 // output using internal DAC driven via DMA. Output is only possible on the DAC pins (A12, and A13 on the Giga)
+#define TIMED_PWM 2    // BROKEN: output using PWM updated by a timer at audio rate. Less efficient, but should be most portable, and allows to use any PWM capable pin for output.
+//#define PDM_VIA_I2S 3 // output PDM coded sample on the I2S data pin
 
 // Set output mode
 #define MBED_AUDIO_OUT_MODE INTERNAL_DAC
 
-// For external I2S output, only: I2S_PINS
-//#define ESP32_I2S_BCK_PIN 26
-//#define ESP32_I2S_WS_PIN 25
-//#define ESP32_I2S_DATA_PIN 33
-
-//#include <driver/i2s.h>
-//const i2s_port_t i2s_num = I2S_NUM_0;
 /// User config end. Do not modify below this line
 
 #if (MBED_AUDIO_OUT_MODE == INTERNAL_DAC)
 #define AUDIO_BITS 12
 #define AUDIO_CHANNEL_1_PIN A12
 #define AUDIO_CHANNEL_2_PIN A13
-/*#elif (ESP32_AUDIO_OUT_MODE == PT8211_DAC)
-#define AUDIO_BITS 16
-#define PDM_RESOLUTION 1
-#elif (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
+#define BYPASS_MOZZI_OUTPUT_BUFFER true
+#elif (MBED_AUDIO_OUT_MODE == TIMED_PWM)
+#define AUDIO_BITS 16  // well, used internally, at least. The pins will not be able to actually produce this many bits
+#define AUDIO_CHANNEL_1_PIN D8
+#define AUDIO_CHANNEL_2_PIN D9
+/*#elif (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
 #define AUDIO_BITS 16
 #define PDM_RESOLUTION 4 */
 #else
@@ -41,6 +36,5 @@
 #endif
 
 #define AUDIO_BIAS ((uint16_t) 1<<(AUDIO_BITS-1))
-#define BYPASS_MOZZI_OUTPUT_BUFFER true
 
 #endif        //  #ifndef AUDIOCONFIGMBED_H

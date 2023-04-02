@@ -99,13 +99,7 @@ void stm32_adc_eoc_handler() {
 ////// END analog input code ////////
 
 ////// BEGIN audio output code //////
-/* NOTE: Some platforms rely on control returning from loop() every so often. However, updateAudio() may take too long (it tries to completely fill the output buffer,
- * which of course is being drained at the same time, theoretically it may not return at all). If you set this define, it will be called once per audio frame to keep things
- * running smoothly. */
-//#define LOOP_YIELD yield();
-
-#if (EXTERNAL_AUDIO_OUTPUT != true) // otherwise, the last stage - audioOutput() - will be provided by the user
-#if MBED_AUDIO_OUT_MODE == INTERNAL_DAC
+#if (EXTERNAL_AUDIO_OUTPUT != true && MBED_AUDIO_OUT_MODE == INTERNAL_DAC) // otherwise, the last stage - audioOutput() - will be provided by the user
 #include <Arduino_AdvancedAnalog.h>
 
 #define CHUNKSIZE 256  // Smaller ought to be possible, but currently affected by https://github.com/arduino-libraries/Arduino_AdvancedAnalog/issues/35
@@ -165,6 +159,44 @@ void stopMozzi() {
   dac2.stop();
 #endif
 }
+
+#else
+#define US_PER_AUDIO_TICK (1000000L / AUDIO_RATE)
+#include <mbed.h>
+#include <pinDefinitions.h>
+#if (MBED_AUDIOw_OUT_MODE == TIMEDPWM)
+#define US_PER_PWM_CYCLE (US_PER_AUDIO_TICK)
+mbed::PwmOut pwmpin1(digitalPinToPinName(AUDIO_CHANNEL_1_PIN));
+mbed::Ticker audio_output_timer;
+#if (AUDIO_CHANNELS > 1)
+mbed::PwmOut pwmpin2(digitalPinToPinName(AUDIO_CHANNEL_2_PIN));
 #endif
+
+inline void audioOutput(const AudioOutput f) {
+// Unfortunately, this is no good. mBed PWM simply isn't designed for that (too slow, and resets pin on each update).
+// We'll need to move closer to the hardware for this...
+  pwmpin1.write(.5 + (float) f.l() / ((float) (1L << AUDIO_BITS)));
+#if (AUDIO_CHANNELS > 1)
+  pwmpin2.write(.5 + (float) f.r() / ((float) (1L << AUDIO_BITS)));
+#endif
+}
+#endif
+
+static void startAudio() {
+#if (MBED_AUDIO_OUT_MODE == TIMEDPWM)
+  pwmpin1.period_us(US_PER_UPDATE);
+  pwmpin1.write(.5);
+  #if (AUDIO_CHANNELS > 1)
+  pwmpin2.period_us(US_PER_UPDATE);
+  pwmpin2.write(.5);
+  #endif
+#endif
+  audio_output_timer.attach_us(&defaultAudioOutput, US_PER_AUDIO_TICK);
+}
+
+void stopMozzi() {
+  audio_output_timer.detach();
+}
+
 #endif
 ////// END audio output code //////

@@ -30,11 +30,13 @@ jobs:
     strategy:
       fail-fast: false
 
+# Of course we'll want to add all supported arches. See https://github.com/arduino-libraries/ArduinoIoTCloud/blob/master/.github/workflows/compile-examples.yml for a complex multi-board setup
       matrix:
         board:
           - fqbn: arduino:avr:uno
             platforms: |
               - name: arduino:avr
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -45,6 +47,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           fqbn: ${{ matrix.board.fqbn }}
           platforms: ${{ matrix.board.platforms }}
+# limit to only some sketches for now, while figuring out the workflow
           sketch-paths: |
             - examples/01.Basics
             - examples/02.Control

@@ -50,6 +50,9 @@ jobs:
             - examples/02.Control
             - examples/03.Sensors
             - examples/05.Control_Filters
+          libraries: |
+            - source-path: ./
+            - name: PinChangeInt
           enable-deltas-report: true
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
 

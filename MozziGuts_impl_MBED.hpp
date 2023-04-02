@@ -107,59 +107,63 @@ void stm32_adc_eoc_handler() {
 #if (EXTERNAL_AUDIO_OUTPUT != true) // otherwise, the last stage - audioOutput() - will be provided by the user
 #if MBED_AUDIO_OUT_MODE == INTERNAL_DAC
 #include <Arduino_AdvancedAnalog.h>
+
+#define CHUNKSIZE 256  // Smaller ought to be possible, but currently affected by https://github.com/arduino-libraries/Arduino_AdvancedAnalog/issues/35
 AdvancedDAC dac1(AUDIO_CHANNEL_1_PIN);
-//AdvancedDAC dac2(AUDIO_CHANNEL_2_PIN);
-#define CHUNKSIZE 32
 Sample buf1[CHUNKSIZE];
+#if (AUDIO_CHANNELS > 1)
+AdvancedDAC dac2(AUDIO_CHANNEL_2_PIN);
+Sample buf2[CHUNKSIZE];
+#endif
 int bufpos = 0;
+
+inline void commitBuffer(Sample buffer[], AdvancedDAC &dac) {
+  SampleBuffer dmabuf = dac.dequeue();
+  for (int i = 0; i < dmabuf.size(); ++i) memcpy(dmabuf.data(), buffer, CHUNKSIZE*sizeof(Sample));
+  dac.write(dmabuf);
+}
 
 /** NOTE: This is the function that actually write a sample to the output. In case of EXTERNAL_AUDIO_OUTPUT == true, it is provided by the library user, instead. */
 inline void audioOutput(const AudioOutput f) {
   if (bufpos >= CHUNKSIZE) {
-    SampleBuffer dmabuf = dac1.dequeue();
-    for (int i = 0; i < dmabuf.size(); ++i) dmabuf.data()[i] = buf1[i];
-    dac1.write(dmabuf);
-    //Serial.println("written");
-    //dac2.write(buf2);
-    //buf2 = dac2.dequeue();
+    commitBuffer(buf1, dac1);
+#if (AUDIO_CHANNELS > 1)
+    commitBuffer(buf2, dac2);
+#endif
     bufpos = 0;
   }
   buf1[bufpos] = f.l()+AUDIO_BIAS;
-  //buf2.data()[bufpos] = f.r()+AUDIO_BIAS;
-  ++bufpos;
 #if (AUDIO_CHANNELS > 1)
-  // e.g. analogWrite(AUDIO_CHANNEL_2_PIN, f.r()+AUDIO_BIAS);
+  buf2[bufpos] = f.r()+AUDIO_BIAS;
 #endif
+  ++bufpos;
 }
 
 bool canBufferAudioOutput() {
-/*  if (dac1.available()) {
-    Serial.print(audioTicks());
-    Serial.print(" ");
-    Serial.println(bufpos);
-  } */
+  // NOTE: In case of stereo, we *assume* the DACs to be running exactly in sync. However, this is safe enough to do, as AdvancedDAC::dequeue() will wait if necessary.
   return (bufpos < CHUNKSIZE || dac1.available());
 }
 
 static void startAudio() {
   //NOTE: AdvancedDAC seems suspiciously dependent on a specific size and number of buffers, in order to work without hickups. Both too few, and too many cause problems.
-  //      I suspect a bug in AdvancedDAC, perhaps in available() ?
-  if (!dac1.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZE, 1024/CHUNKSIZE)) {
+  //      Revisit setup after https://github.com/arduino-libraries/Arduino_AdvancedAnalog/issues/35 is resolved
+  if (!dac1.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZE, 2048/CHUNKSIZE)) {
       Serial.println("Failed to start DAC1 !");
       while (1);
   }
-  //dac2.begin(AN_RESOLUTION_12, 8000, CHUNKSIZE, 256/CHUNKSIZE);
-
-  // Add here code to get audio output going. This usually involves:
-  // 1) setting up some DAC mechanism (e.g. setting up a PWM pin with appropriate resolution
-  // 2a) setting up a timer to call defaultAudioOutput() at AUDIO_RATE
-  // OR 2b) setting up a buffered output queue such as I2S (see ESP32 / ESP8266 for examples for this setup)
-
-  // remember that the user may configure EXTERNAL_AUDIO_OUTPUT, in which case, you'll want to provide step 2a), and only that.
+#if (AUDIO_CHANNELS > 1)
+  if (!dac2.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZE, 2048/CHUNKSIZE)) {
+      Serial.println("Failed to start DAC2 !");
+      while (1);
+  }
+#endif
 }
 
 void stopMozzi() {
-  // Add here code to pause whatever mechanism moves audio samples to the output
+  dac1.stop();
+#if (AUDIO_CHANNELS > 1)
+  dac2.stop();
+#endif
 }
 #endif
 #endif

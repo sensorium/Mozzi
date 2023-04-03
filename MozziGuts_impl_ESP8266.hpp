@@ -41,7 +41,7 @@ void setupMozziADC(int8_t speed) {
 #define LOOP_YIELD yield();
 
 #include <uart.h>
-#include <i2s.h>
+#include <I2S.h>
 uint16_t output_buffer_size = 0;
 
 #if (EXTERNAL_AUDIO_OUTPUT != true) // otherwise, the last stage - audioOutput() - will be provided by the user

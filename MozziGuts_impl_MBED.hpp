@@ -102,7 +102,7 @@ void stm32_adc_eoc_handler() {
 #if (EXTERNAL_AUDIO_OUTPUT != true && MBED_AUDIO_OUT_MODE == INTERNAL_DAC) // otherwise, the last stage - audioOutput() - will be provided by the user
 #include <Arduino_AdvancedAnalog.h>
 
-#define CHUNKSIZE 256  // Smaller ought to be possible, but currently affected by https://github.com/arduino-libraries/Arduino_AdvancedAnalog/issues/35
+#define CHUNKSIZE 64
 AdvancedDAC dac1(AUDIO_CHANNEL_1_PIN);
 Sample buf1[CHUNKSIZE];
 #if (AUDIO_CHANNELS > 1)
@@ -139,14 +139,13 @@ bool canBufferAudioOutput() {
 }
 
 static void startAudio() {
-  //NOTE: AdvancedDAC seems suspiciously dependent on a specific size and number of buffers, in order to work without hickups. Both too few, and too many cause problems.
-  //      Revisit setup after https://github.com/arduino-libraries/Arduino_AdvancedAnalog/issues/35 is resolved
-  if (!dac1.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZE, 2048/CHUNKSIZE)) {
+  //NOTE: DAC setup currently affected by https://github.com/arduino-libraries/Arduino_AdvancedAnalog/issues/35 . Don't expect this to work, until using a fixed version fo Arduino_AdvancedAnalog!
+  if (!dac1.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZE, 256/CHUNKSIZE)) {
       Serial.println("Failed to start DAC1 !");
       while (1);
   }
 #if (AUDIO_CHANNELS > 1)
-  if (!dac2.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZE, 2048/CHUNKSIZE)) {
+  if (!dac2.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZE, 256/CHUNKSIZE)) {
       Serial.println("Failed to start DAC2 !");
       while (1);
   }

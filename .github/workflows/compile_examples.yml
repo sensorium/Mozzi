@@ -36,7 +36,18 @@ jobs:
           - fqbn: arduino:avr:uno
             platforms: |
               - name: arduino:avr
+          - fqbn: esp8266:esp8266:huzzah
+            type: 8266
+            platforms: |
+              - name: esp8266:esp8266
+                source-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
 
+        exclude:
+          - board:
+              type: esp8266
+              sketch-paths: |
+                - examples/03.Sensors/Sinewave_Pinchange_Interrupt
+              
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3

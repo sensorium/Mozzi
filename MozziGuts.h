@@ -199,7 +199,6 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #define EXTERNAL_AUDIO_OUTPUT false
 #endif
 
-
 #if (EXTERNAL_AUDIO_OUTPUT != true)
 #if IS_TEENSY3()
 #include "AudioConfigTeensy3_12bit.h"

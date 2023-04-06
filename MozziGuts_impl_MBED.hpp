@@ -164,6 +164,11 @@ void stopMozzi() {
 #include <mbed.h>
 #include <pinDefinitions.h>
 mbed::Ticker audio_output_timer;
+
+#if (EXTERNAL_AUDIO_OUTPUT == true)
+#define AUDIO_OUTPUT_OUTSIDE_CALLBACK true
+#endif
+
 #if (MBED_AUDIO_OUT_MODE == TIMEDPWM && EXTERNAL_AUDIO_OUTPUT != true)
 #define US_PER_PWM_CYCLE (US_PER_AUDIO_TICK)
 mbed::PwmOut pwmpin1(digitalPinToPinName(AUDIO_CHANNEL_1_PIN));
@@ -179,7 +184,7 @@ inline void audioOutput(const AudioOutput f) {
   pwmpin2.write(.5 + (float) f.r() / ((float) (1L << AUDIO_BITS)));
 #endif
 }
-#endif
+#endif  // #if (MBED_AUDIO_OUT_MODE == TIMEDPWM && EXTERNAL_AUDIO_OUTPUT != true)
 
 static void startAudio() {
 #if (MBED_AUDIO_OUT_MODE == TIMEDPWM && EXTERNAL_AUDIO_OUTPUT != true)

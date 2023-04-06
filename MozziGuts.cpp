@@ -21,6 +21,7 @@
 // forward-declarations for use in hardware-specific implementations:
 static void advanceADCStep();
 static uint8_t adc_count = 0;
+volatile bool audio_output_requested = false;
 
 // forward-declarations; to be supplied by plaform specific implementations
 static void startSecondADCReadOnCurrentChannel();
@@ -47,7 +48,11 @@ static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
   adc_count = 0;
   startSecondADCReadOnCurrentChannel();  // the current channel is the AUDIO_INPUT pin
 #  endif
+#if (AUDIO_OUTPUT_OUTSIDE_CALLBACK == true)
+  audio_output_requested = true;
+  #else
   audioOutput(output_buffer.read());
+  #endif
 }
 #endif
 ////// END Output buffering ///////
@@ -75,7 +80,7 @@ static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
 #endif
 
 
-////// BEGIN Analog inpput code ////////
+////// BEGIN Analog input code ////////
 /* Analog input code was informed initially by a discussion between
 jRaskell, bobgardner, theusch, Koshchi, and code by jRaskell.
 http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=789581
@@ -209,6 +214,14 @@ void audioHook() // 2us on AVR excluding updateAudio()
 #if defined(LOOP_YIELD)
     LOOP_YIELD
 #endif
+      
+#if (AUDIO_OUTPUT_OUTSIDE_CALLBACK)
+      if (audio_output_requested)
+	{
+	  audioOutput(output_buffer.read());
+	  audio_output_requested = false;
+	}
+	#endif
   }
   // setPin13Low();
 }

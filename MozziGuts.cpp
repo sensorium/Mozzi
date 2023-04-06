@@ -21,7 +21,9 @@
 // forward-declarations for use in hardware-specific implementations:
 static void advanceADCStep();
 static uint8_t adc_count = 0;
+#if (AUDIO_OUTPUT_OUTSIDE_CALLBACK)
 volatile bool audio_output_requested = false;
+#endif
 
 // forward-declarations; to be supplied by plaform specific implementations
 static void startSecondADCReadOnCurrentChannel();

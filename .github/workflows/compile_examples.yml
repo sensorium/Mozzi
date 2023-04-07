@@ -70,3 +70,9 @@ jobs:
           if-no-files-found: error
           path: ${{ env.SKETCHES_REPORTS_PATH }}
           name: ${{ env.SKETCHES_REPORTS_PATH }}
+
+      - name: Comment size deltas reports to PRs
+        uses: arduino/report-size-deltas@v1
+        with:
+          # The name of the workflow artifact created by the sketch compilation workflow
+          sketches-reports-source: ${{ env.SKETCHES_REPORTS_PATH }}

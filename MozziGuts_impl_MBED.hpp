@@ -163,10 +163,21 @@ void stopMozzi() {
 #define US_PER_AUDIO_TICK (1000000L / AUDIO_RATE)
 #include <mbed.h>
 #include <pinDefinitions.h>
-#if (MBED_AUDIOw_OUT_MODE == TIMEDPWM)
+mbed::Ticker audio_output_timer;
+
+#if (EXTERNAL_AUDIO_OUTPUT == true)
+volatile bool audio_output_requested = false;
+inline void defaultAudioOutputCallback() {
+  audio_output_requested = true;
+}
+#define AUDIO_HOOK_HOOK { if (audio_output_requested) { audio_output_requested = false; defaultAudioOutput(); } }
+#else
+#define defaultAudioOutputCallback defaultAudioOutput
+#endif
+
+#if (MBED_AUDIO_OUT_MODE == TIMEDPWM && EXTERNAL_AUDIO_OUTPUT != true)
 #define US_PER_PWM_CYCLE (US_PER_AUDIO_TICK)
 mbed::PwmOut pwmpin1(digitalPinToPinName(AUDIO_CHANNEL_1_PIN));
-mbed::Ticker audio_output_timer;
 #if (AUDIO_CHANNELS > 1)
 mbed::PwmOut pwmpin2(digitalPinToPinName(AUDIO_CHANNEL_2_PIN));
 #endif
@@ -179,10 +190,10 @@ inline void audioOutput(const AudioOutput f) {
   pwmpin2.write(.5 + (float) f.r() / ((float) (1L << AUDIO_BITS)));
 #endif
 }
-#endif
+#endif  // #if (MBED_AUDIO_OUT_MODE == TIMEDPWM && EXTERNAL_AUDIO_OUTPUT != true)
 
 static void startAudio() {
-#if (MBED_AUDIO_OUT_MODE == TIMEDPWM)
+#if (MBED_AUDIO_OUT_MODE == TIMEDPWM && EXTERNAL_AUDIO_OUTPUT != true)
   pwmpin1.period_us(US_PER_UPDATE);
   pwmpin1.write(.5);
   #if (AUDIO_CHANNELS > 1)
@@ -190,7 +201,7 @@ static void startAudio() {
   pwmpin2.write(.5);
   #endif
 #endif
-  audio_output_timer.attach_us(&defaultAudioOutput, US_PER_AUDIO_TICK);
+  audio_output_timer.attach_us(&defaultAudioOutputCallback, US_PER_AUDIO_TICK);
 }
 
 void stopMozzi() {

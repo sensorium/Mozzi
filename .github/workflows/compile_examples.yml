@@ -1,0 +1,67 @@
+name: Compile Examples
+
+# See: https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
+on:
+  push:
+    paths:
+      - ".github/workflows/compile_examples.yml"
+      - "examples/**"
+      - "**.cpp"
+      - "**.h"
+      - "**.hpp"
+  pull_request:
+    paths:
+      - ".github/workflows/compile_examples.yml"
+      - "examples/**"
+      - "**.cpp"
+      - "**.h"
+      - "**.hpp"
+  workflow_dispatch:
+  repository_dispatch:
+
+jobs:
+  build:
+    name: ${{ matrix.board.fqbn }}
+    runs-on: ubuntu-latest
+
+    env:
+      SKETCHES_REPORTS_PATH: sketches-reports
+
+    strategy:
+      fail-fast: false
+
+# Of course we'll want to add all supported arches. See https://github.com/arduino-libraries/ArduinoIoTCloud/blob/master/.github/workflows/compile-examples.yml for a complex multi-board setup
+      matrix:
+        board:
+          - fqbn: arduino:avr:uno
+            platforms: |
+              - name: arduino:avr
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Compile examples
+        uses: arduino/compile-sketches@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          fqbn: ${{ matrix.board.fqbn }}
+          platforms: ${{ matrix.board.platforms }}
+# limit to only some sketches for now, while figuring out the workflow
+          sketch-paths: |
+            - examples/01.Basics
+            - examples/02.Control
+            - examples/03.Sensors
+          libraries: |
+            - source-path: ./
+            - name: PinChangeInterrupt
+            - name: MIDI Library
+          enable-deltas-report: true
+          sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
+
+      - name: Save sketches report as workflow artifact
+        uses: actions/upload-artifact@v3
+        with:
+          if-no-files-found: error
+          path: ${{ env.SKETCHES_REPORTS_PATH }}
+          name: ${{ env.SKETCHES_REPORTS_PATH }}

@@ -4,14 +4,14 @@ name: Compile Examples
 on:
   push:
     paths:
-      - ".github/workflows/compile_examples.yml"
+      - ".github/workflows/**"
       - "examples/**"
       - "**.cpp"
       - "**.h"
       - "**.hpp"
   pull_request:
     paths:
-      - ".github/workflows/compile_examples.yml"
+      - ".github/workflows/**"
       - "examples/**"
       - "**.cpp"
       - "**.h"

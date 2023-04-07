@@ -69,7 +69,7 @@ jobs:
         with:
           if-no-files-found: error
           path: ${{ env.SKETCHES_REPORTS_PATH }}
-          name: ${{ env.SKETCHES_REPORTS_PATH }}
+          name: sketches-reports-artifact
 
   # When using a matrix to compile for multiple boards, it's necessary to use a separate job for the deltas report
   report:
@@ -81,7 +81,7 @@ jobs:
       - name: Download sketches reports artifact
         uses: actions/download-artifact@v2
         with:
-          name: ${{ env.SKETCHES_REPORTS_PATH }}
+          name: sketches-reports-artifact
           path: ${{ env.SKETCHES_REPORTS_PATH }}
 
       - uses: arduino/report-size-deltas@v1

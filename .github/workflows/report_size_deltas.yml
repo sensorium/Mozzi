@@ -1,0 +1,16 @@
+name: Report Size Deltas
+
+on:
+  pull_request:
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment size deltas reports to PRs
+        uses: arduino/report-size-deltas@v1
+        with:
+          # The name of the workflow artifact created by the sketch compilation workflow
+          sketches-reports-source: sketches-reports

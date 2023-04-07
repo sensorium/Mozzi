@@ -44,6 +44,7 @@ jobs:
           - fqbn: arduino:mbed_giga:giga
             platforms: |
               - name: arduino:mbed_giga
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -63,6 +64,7 @@ jobs:
             - source-path: ./
             - name: PinChangeInterrupt
             - name: MIDI Library
+            - name: Advanced_Analog
           enable-deltas-report: true
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
 

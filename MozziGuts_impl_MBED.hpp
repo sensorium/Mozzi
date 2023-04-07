@@ -166,7 +166,13 @@ void stopMozzi() {
 mbed::Ticker audio_output_timer;
 
 #if (EXTERNAL_AUDIO_OUTPUT == true)
-#define AUDIO_OUTPUT_OUTSIDE_CALLBACK true
+volatile bool audio_output_requested = false;
+inline void defaultAudioOutputCallback() {
+  audio_output_requested = true;
+}
+#define AUDIO_HOOK_HOOK { if (audio_output_requested) { audio_output_requested = false; defaultAudioOutput(); } }
+#else
+#define defaultAudioOutputCallback defaultAudioOutput
 #endif
 
 #if (MBED_AUDIO_OUT_MODE == TIMEDPWM && EXTERNAL_AUDIO_OUTPUT != true)
@@ -195,7 +201,7 @@ static void startAudio() {
   pwmpin2.write(.5);
   #endif
 #endif
-  audio_output_timer.attach_us(&defaultAudioOutput, US_PER_AUDIO_TICK);
+  audio_output_timer.attach_us(&defaultAudioOutputCallback, US_PER_AUDIO_TICK);
 }
 
 void stopMozzi() {

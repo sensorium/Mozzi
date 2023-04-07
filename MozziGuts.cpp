@@ -44,15 +44,7 @@ static void CACHED_FUNCTION_ATTR defaultAudioOutput();
 #endif
 
 
-// forward-declarations for use in hardware-specific implementations:
-//static void advanceADCStep();
 static uint8_t adc_count = 0;
-#if (AUDIO_OUTPUT_OUTSIDE_CALLBACK)
-volatile bool audio_output_requested = false;
-#endif
-
-// forward-declarations; to be supplied by plaform specific implementations
-//static void startSecondADCReadOnCurrentChannel();
 
 ////// BEGIN Output buffering /////
 #if BYPASS_MOZZI_OUTPUT_BUFFER == true
@@ -76,11 +68,7 @@ static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
   adc_count = 0;
   startSecondADCReadOnCurrentChannel();  // the current channel is the AUDIO_INPUT pin
 #  endif
-#if (AUDIO_OUTPUT_OUTSIDE_CALLBACK == true)
-  audio_output_requested = true;
-  #else
   audioOutput(output_buffer.read());
-  #endif
 }
 #endif
 ////// END Output buffering ///////
@@ -222,14 +210,11 @@ void audioHook() // 2us on AVR excluding updateAudio()
     LOOP_YIELD
 #endif      
       }
-  // setPin13Low();
-#if (AUDIO_OUTPUT_OUTSIDE_CALLBACK)
-  if (audio_output_requested)
-    {
-      audioOutput(output_buffer.read());
-      audio_output_requested = false;
-    }
+// Like LOOP_YIELD, but running every cycle of audioHook(), not just once per sample
+#if defined(AUDIO_HOOK_HOOK)
+    AUDIO_HOOK_HOOK
 #endif
+  // setPin13Low();
 }
 
 // NOTE: This function counts the ticks of audio _output_, corresponding to real time elapsed.

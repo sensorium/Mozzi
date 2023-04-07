@@ -36,6 +36,11 @@ jobs:
           - fqbn: arduino:avr:uno
             platforms: |
               - name: arduino:avr
+          - fqbn: esp8266:esp8266:huzzah
+            type: 8266
+            platforms: |
+              - name: esp8266:esp8266
+                source-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
 
     steps:
       - name: Checkout repository
@@ -51,7 +56,7 @@ jobs:
           sketch-paths: |
             - examples/01.Basics
             - examples/02.Control
-            - examples/03.Sensors
+            - examples/06.Synthesis
           libraries: |
             - source-path: ./
             - name: PinChangeInterrupt

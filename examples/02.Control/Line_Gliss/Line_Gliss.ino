@@ -28,13 +28,13 @@
 #include <MozziGuts.h>
 #include <Line.h> // for smooth transitions
 #include <Oscil.h> // oscillator template
-#include <tables/triangle_warm8192_int8.h> // triangle table for oscillator
+#include <tables/saw8192_int8.h> // saw table for oscillator
 #include <mozzi_midi.h>
 
 #define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <TRIANGLE_WARM8192_NUM_CELLS, AUDIO_RATE> aTriangle(TRIANGLE_WARM8192_DATA);
+Oscil <SAW8192_NUM_CELLS, AUDIO_RATE> aSaw(SAW8192_DATA);
 
 // use: Line <type> lineName
 Line <long> aGliss;
@@ -75,8 +75,8 @@ void updateControl(){
 
     // find the phase increments (step sizes) through the audio table for those freqs
     // they are big ugly numbers which the oscillator understands but you don't really want to know
-    long gliss_start = aTriangle.phaseIncFromFreq(start_freq);
-    long gliss_end = aTriangle.phaseIncFromFreq(end_freq);
+    long gliss_start = aSaw.phaseIncFromFreq(start_freq);
+    long gliss_end = aSaw.phaseIncFromFreq(end_freq);
 
     // set the audio rate line to transition between the different step sizes
     aGliss.set(gliss_start, gliss_end, audio_steps_per_gliss);
@@ -87,6 +87,6 @@ void updateControl(){
 
 
 AudioOutput_t updateAudio(){
-  aTriangle.setPhaseInc(aGliss.next());
-  return MonoOutput::from8Bit(aTriangle.next());
+  aSaw.setPhaseInc(aGliss.next());
+  return MonoOutput::from8Bit(aSaw.next());
 }

@@ -11,11 +11,18 @@
 
 // Audio output options
 #define INTERNAL_DAC 1 // output using internal DAC driven via DMA. Output is only possible on the DAC pins (A12, and A13 on the Giga)
-#define TIMED_PWM 2    // BROKEN: output using PWM updated by a timer at audio rate. Less efficient, but should be most portable, and allows to use any PWM capable pin for output.
-//#define PDM_VIA_I2S 3 // output PDM coded sample on the I2S data pin
+#define PDM_VIA_SERIAL 2 // output PDM coded sample on a hardware serial UART. NOTE: currently to be considered experimental. Tune is not correct for all combinatinos of AUDIO_RATE & PDM_RESOLUTION
+                         // Also NOTE that you will almost certainly want to use at least some basic RC filter circuit with this mode
 
 // Set output mode
 #define MBED_AUDIO_OUT_MODE INTERNAL_DAC
+
+#if (MBED_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
+// For use in PDM_VIA_SERIAL, only: Peripheral to use. Note that only the TX channel is actually used, but sine this is a hardware UART, the corresponding
+// RX channel needs to be claimed, as well. NOTE: This does not necessarily correspond to the labeling on your board! E.g. SERIAL2_TX is TX1 on the Arduino Giga.
+#define PDM_SERIAL_UART_TX_CHANNEL_1 SERIAL2_TX
+#define PDM_SERIAL_UART_RX_CHANNEL_1 SERIAL2_RX
+#endif
 
 /// User config end. Do not modify below this line
 
@@ -24,13 +31,10 @@
 #define AUDIO_CHANNEL_1_PIN A12
 #define AUDIO_CHANNEL_2_PIN A13
 #define BYPASS_MOZZI_OUTPUT_BUFFER true
-#elif (MBED_AUDIO_OUT_MODE == TIMED_PWM)
+#elif (MBED_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
 #define AUDIO_BITS 16  // well, used internally, at least. The pins will not be able to actually produce this many bits
-#define AUDIO_CHANNEL_1_PIN D8
-#define AUDIO_CHANNEL_2_PIN D9
-/*#elif (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
-#define AUDIO_BITS 16
-#define PDM_RESOLUTION 4 */
+#define PDM_RESOLUTION 2
+#define BYPASS_MOZZI_OUTPUT_BUFFER true
 #else
 #error Invalid output mode configured in AudioConfigMBED.h
 #endif

@@ -99,7 +99,29 @@ void stm32_adc_eoc_handler() {
 ////// END analog input code ////////
 
 ////// BEGIN audio output code //////
-#if (EXTERNAL_AUDIO_OUTPUT != true && MBED_AUDIO_OUT_MODE == INTERNAL_DAC) // otherwise, the last stage - audioOutput() - will be provided by the user
+#if (EXTERNAL_AUDIO_OUTPUT == true)
+
+#define US_PER_AUDIO_TICK (1000000L / AUDIO_RATE)
+#include <mbed.h>
+mbed::Ticker audio_output_timer;
+
+volatile bool audio_output_requested = false;
+inline void defaultAudioOutputCallback() {
+  audio_output_requested = true;
+}
+
+#define AUDIO_HOOK_HOOK { if (audio_output_requested) { audio_output_requested = false; defaultAudioOutput(); } }
+
+static void startAudio() {
+  audio_output_timer.attach_us(&defaultAudioOutputCallback, US_PER_AUDIO_TICK);
+}
+
+void stopMozzi() {
+  audio_output_timer.detach();
+}
+
+#elif (MBED_AUDIO_OUT_MODE == INTERNAL_DAC)
+
 #include <Arduino_AdvancedAnalog.h>
 
 #define CHUNKSIZE 64
@@ -159,54 +181,33 @@ void stopMozzi() {
 #endif
 }
 
-#else
-#define US_PER_AUDIO_TICK (1000000L / AUDIO_RATE)
+#elif (MBED_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
+
 #include <mbed.h>
-#include <pinDefinitions.h>
-mbed::Ticker audio_output_timer;
 
-#if (EXTERNAL_AUDIO_OUTPUT == true)
-volatile bool audio_output_requested = false;
-inline void defaultAudioOutputCallback() {
-  audio_output_requested = true;
+mbed::BufferedSerial serial_out1(digitalPinToPinName(PDM_SERIAL_UART_TX_CHANNEL_1), digitalPinToPinName(PDM_SERIAL_UART_RX_CHANNEL_1));
+uint8_t buf[PDM_RESOLUTION*4];
+
+bool canBufferAudioOutput() {
+  return serial_out1.writable();
 }
-#define AUDIO_HOOK_HOOK { if (audio_output_requested) { audio_output_requested = false; defaultAudioOutput(); } }
-#else
-#define defaultAudioOutputCallback defaultAudioOutput
-#endif
-
-#if (MBED_AUDIO_OUT_MODE == TIMEDPWM && EXTERNAL_AUDIO_OUTPUT != true)
-#define US_PER_PWM_CYCLE (US_PER_AUDIO_TICK)
-mbed::PwmOut pwmpin1(digitalPinToPinName(AUDIO_CHANNEL_1_PIN));
-#if (AUDIO_CHANNELS > 1)
-mbed::PwmOut pwmpin2(digitalPinToPinName(AUDIO_CHANNEL_2_PIN));
-#endif
 
 inline void audioOutput(const AudioOutput f) {
-// Unfortunately, this is no good. mBed PWM simply isn't designed for that (too slow, and resets pin on each update).
-// We'll need to move closer to the hardware for this...
-  pwmpin1.write(.5 + (float) f.l() / ((float) (1L << AUDIO_BITS)));
-#if (AUDIO_CHANNELS > 1)
-  pwmpin2.write(.5 + (float) f.r() / ((float) (1L << AUDIO_BITS)));
-#endif
+  for (uint8_t i = 0; i < PDM_RESOLUTION*4; ++i) {
+    buf[i] = pdmCode8(f.l()+AUDIO_BIAS);
+  }
+  serial_out1.write(&buf, PDM_RESOLUTION*4);
 }
-#endif  // #if (MBED_AUDIO_OUT_MODE == TIMEDPWM && EXTERNAL_AUDIO_OUTPUT != true)
 
 static void startAudio() {
-#if (MBED_AUDIO_OUT_MODE == TIMEDPWM && EXTERNAL_AUDIO_OUTPUT != true)
-  pwmpin1.period_us(US_PER_UPDATE);
-  pwmpin1.write(.5);
-  #if (AUDIO_CHANNELS > 1)
-  pwmpin2.period_us(US_PER_UPDATE);
-  pwmpin2.write(.5);
-  #endif
-#endif
-  audio_output_timer.attach_us(&defaultAudioOutputCallback, US_PER_AUDIO_TICK);
+  serial_out1.set_baud(AUDIO_RATE*PDM_RESOLUTION*40); // NOTE: 40 = 4 * (8 bits + stop-bits)
+  serial_out1.set_format(8, mbed::BufferedSerial::None, 1);
 }
 
 void stopMozzi() {
-  audio_output_timer.detach();
+#warning implement me
 }
+
 
 #endif
 ////// END audio output code //////

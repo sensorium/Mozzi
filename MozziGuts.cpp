@@ -20,7 +20,9 @@
 
 
 // Forward declaration
+#if (!BYPASS_MOZZI_OUTPUT_BUFFER)
 static void CACHED_FUNCTION_ATTR defaultAudioOutput();
+#endif
 
 // Include the appropriate implementation
 #if IS_AVR()

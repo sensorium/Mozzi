@@ -64,7 +64,7 @@ jobs:
             - source-path: ./
             - name: PinChangeInterrupt
             - name: MIDI Library
-            - name: Advanced_Analog
+            - name: Arduino_AdvancedAnalog
           enable-deltas-report: true
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
 

@@ -19,10 +19,12 @@
 #include "AudioOutput.h"
 
 
-// Forward declaration
+// Forward declarations of functions to be provided by platform specific implementations
 #if (!BYPASS_MOZZI_OUTPUT_BUFFER)
 static void CACHED_FUNCTION_ATTR defaultAudioOutput();
 #endif
+static void advanceADCStep();
+static void startSecondADCReadOnCurrentChannel();
 
 // Include the appropriate implementation
 #if IS_AVR()

@@ -48,7 +48,8 @@
 #endif
 
 // STM32 boards (note that only the maple based core is supported at this time. If another cores is to be supported in the future, this define should be split.
-#if (defined(__arm__) && !IS_TEENSY3() && !IS_SAMD21() && !IS_TEENSY4() && !IS_RP2040())
+// https://github.com/stevstrong/Arduino_STM32
+#if (defined(__STM32F1__) || defined(__STM32F4__))
 #define IS_STM32() 1
 #else
 #define IS_STM32() 0

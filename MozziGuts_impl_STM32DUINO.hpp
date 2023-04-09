@@ -77,13 +77,11 @@ void stm32_adc_eoc_handler() {
 
 //// BEGIN AUDIO OUTPUT code ///////
 #if (EXTERNAL_AUDIO_OUTPUT == true)
-HardwareTimer audio_update_timer(2);
+HardwareTimer audio_update_timer(AUDIO_UPDATE_TIMER);
 #else
 PinName output_pin_1 = digitalPinToPinName(AUDIO_CHANNEL_1_PIN);
-TIM_TypeDef *pwm_timer_tim = (TIM_TypeDef *) pinmap_peripheral(output_pin_1, PinMap_TIM);
-HardwareTimer *pwm_timer_ht = new HardwareTimer(pwm_timer_tim);
+HardwareTimer *pwm_timer_ht;
 uint32_t pwm_timer_channel_1 = STM_PIN_CHANNEL(pinmap_function(output_pin_1, PinMap_TIM));
-
 HardwareTimer audio_update_timer(AUDIO_UPDATE_TIMER);
 
 #include "AudioConfigSTM32.h"
@@ -114,9 +112,9 @@ static void startAudio() {
   audio_update_timer.setCaptureCompare(/* channel */ 1, 1); // Interrupt 1 count after each update
   audio_update_timer.attachInterrupt(/* channel */ 1, defaultAudioOutput);
   audio_update_timer.refresh();
-  audio_update_timer.resume();
 
 #if (EXTERNAL_AUDIO_OUTPUT != true)
+  // Configure PWM output
   pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT);
 #  if (AUDIO_MODE == HIFI)
   pinMode(AUDIO_CHANNEL_1_PIN_HIGH, OUTPUT);
@@ -126,7 +124,8 @@ static void startAudio() {
 
 #  define MAX_CARRIER_FREQ (F_CPU / (1 << AUDIO_BITS_PER_CHANNEL))
   // static_assert(MAX_CARRIER_FREQ >= AUDIO_RATE); // Unfortunately, we cannot test this at compile time. F_CPU expands to a runtime variable
-
+  TIM_TypeDef *pwm_timer_tim = (TIM_TypeDef *) pinmap_peripheral(output_pin_1, PinMap_TIM);
+  pwm_timer_ht = new HardwareTimer(pwm_timer_tim);
   pwm_timer_ht->setMode(pwm_timer_channel_1, TIMER_OUTPUT_COMPARE_PWM1, output_pin_1);
 #  if MAX_CARRIER_FREQ < (AUDIO_RATE * 5)
   // Generate as fast a carrier as possible
@@ -143,6 +142,8 @@ static void startAudio() {
 
   pwm_timer_ht->resume();
 #endif
+
+  audio_update_timer.resume();
 }
 
 void stopMozzi() {

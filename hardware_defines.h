@@ -55,6 +55,12 @@
 #define IS_STM32() 0
 #endif
 
+#if (defined(__arm__) && !IS_STM32() && !IS_TEENSY3() && !IS_TEENSY4() && !IS_RP2040()) // && !IS_MBED()
+#define IS_STM32DUINO() 1
+#else
+#define IS_STM32DUINO() 0
+#endif
+
 #if (defined(ESP8266))
 #define IS_ESP8266() 1
 #else
@@ -67,7 +73,7 @@
 #define IS_ESP32() 0
 #endif
 
-#if !(IS_AVR() || IS_TEENSY3() || IS_TEENSY4() || IS_STM32() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() || IS_RP2040())
+#if !(IS_AVR() || IS_TEENSY3() || IS_TEENSY4() || IS_STM32() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() || IS_RP2040() || IS_STM32DUINO())
 #error Your hardware is not supported by Mozzi or not recognized. Edit hardware_defines.h to proceed.
 #endif
 

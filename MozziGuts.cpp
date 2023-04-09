@@ -58,6 +58,8 @@ static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
 #  include "MozziGuts_impl_AVR.hpp"
 #elif IS_STM32()
 #  include "MozziGuts_impl_STM32.hpp"
+#elif IS_STM32DUINO()
+#  include "MozziGuts_impl_STM32DUINO.hpp"
 #elif IS_ESP32()
 #  include "MozziGuts_impl_ESP32.hpp"
 #elif IS_ESP8266()

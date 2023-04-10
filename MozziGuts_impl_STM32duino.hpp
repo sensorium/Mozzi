@@ -94,12 +94,12 @@ uint32_t pwm_timer_channel_2 = STM_PIN_CHANNEL(pinmap_function(output_pin_2, Pin
 #include "AudioConfigSTM32.h"
 inline void audioOutput(const AudioOutput f) {
 #  if (AUDIO_MODE == HIFI)
-  pwm_timer_ht->setCaptureCompare(pwm_timer_channel_1, (f.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1);
+  pwm_timer_ht->setCaptureCompare(pwm_timer_channel_1, (f.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
   pwm_timer_ht->setCaptureCompare(pwm_timer_channel_1_high, (f.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
 #  else
-  pwm_timer_ht->setCaptureCompare(pwm_timer_channel_1, f.l()+AUDIO_BIAS;
+  pwm_timer_ht->setCaptureCompare(pwm_timer_channel_1, f.l()+AUDIO_BIAS);
 #    if (AUDIO_CHANNELS > 1)
-  pwm_timer_ht->setCaptureCompare(pwm_timer_channel_2, f.r()+AUDIO_BIAS;
+  pwm_timer_ht->setCaptureCompare(pwm_timer_channel_2, f.r()+AUDIO_BIAS);
 #    endif
 #endif
 }

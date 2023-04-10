@@ -47,9 +47,9 @@
 #define IS_RP2040() 0
 #endif
 
-// STM32 boards (note that only the maple based core is supported at this time. If another cores is to be supported in the future, this define should be split.
+// STM32 boards (libmaple based)
 // https://github.com/stevstrong/Arduino_STM32
-#if (defined(__STM32F1__) || defined(__STM32F4__))
+#if (defined(__arm__) && !IS_TEENSY3() && !IS_TEENSY4() && __has_include("libmaple/libmaple.h"))
 #define IS_STM32() 1
 #else
 #define IS_STM32() 0

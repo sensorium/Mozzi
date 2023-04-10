@@ -188,7 +188,7 @@ Various examples from [Pure Data](http://puredata.info/) by Miller Puckette
 The situation on STM32-based boards is rather confusing, as there are several competing Arduino cores. Importantly:
 - Some boards use dedicated cores (e.g. Arduino Giga / Protenta) etc. For those, see the relevant sections (if we support them)
 - There is a series of libmaple-based cores, the most recent offsptring apparentely being [Stev Strong's libmaple-based core](https://github.com/stevstrong/Arduino_STM32/). These are highly optimized, and provide very complete support, but only for a limited number of boards. Unfortunately, at the time of this writing (2023/04), they are not available for installation via the Arduino Board Manager, and they do not currently seem actively maintained.
-- A generic Arduino core for STM32 is the [STM32duino core](https://github.com/stm32duino/Arduino_Core_STM32). It supports a huge step of boards, and seems to have (semi-?) offical backing by STM, but some features of the libmaple based cores are still lacking. To complete confusion, this core now uses the label "STM32duino", which used to be what the libmaple cores above were known by (don't blame Mozzi for this mess!).
+- A generic Arduino core for STM32 is the [STM32duino core](https://github.com/stm32duino/Arduino_Core_STM32). It supports a huge step of boards, and seems to have offical backing by STM, but some features of the libmaple based cores are still lacking. To complete confusion, this core now uses the label "STM32duino", which used to be what the libmaple cores above were known by (don't blame Mozzi for this mess!).
 
 Mozzi supports both of the latter, but currently not at the same level of completeness.
 

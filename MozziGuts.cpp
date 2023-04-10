@@ -210,6 +210,9 @@ void audioHook() // 2us on AVR excluding updateAudio()
     LOOP_YIELD
 #endif
   }
+#if defined(AUDIO_HOOK_HOOK)
+AUDIO_HOOK_HOOK();
+#endif
   // setPin13Low();
 }
 

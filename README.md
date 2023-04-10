@@ -213,12 +213,17 @@ port by Thomas Friedrichsmeier
 
 Compiles for and runs on a STM32F103C8T6 blue pill board, with a bunch of caveats (see below), i.e. on a board _without_ a
 real DAC. Should probably run on any other board supported by the [STM32duino core](https://github.com/stm32duino/Arduino_Core_STM32) (although this theory is untested).
+When trying any other board, you probably want to check the platform specific settings (see below), carefully, importantly, whether the desired output resolution is
+achievable, and whether the desired output pins are PWM capable.
 
 - Audio output is PWM-based to pin PA8, by default (HIFI-mode: PA8 and PA9)
 - Timers 3 (PWM output), and 2 (audio rate) are used by default.
 - The STM32-specific options (pins, timers) can be configured in AudioConfigSTM32duino.h
-- Default audio resolution is currently set to 10 bits, which yields 70khZ PWM frequency on a 72MHz CPU. HIFI mode is 2*7bits at up to 560Khz (but limited to 5 times audio rate)
-- Analog input (mozziAnalogRead() and AUDIO_INPUT) are _not_ yet implemented! (Contributions welcome)
+- Default audio resolution is currently set to 10 bits, which yields 70khZ PWM frequency on a 72MHz CPU. IMPORTANT: Should your CPU be slower, you will need to lower the audio resolution!
+- HIFI mode is 2*7bits at up to 560Khz with a 72MHz CPU (but limited to 5 times audio rate)
+- Analog input implementation is somewhat experimental, and may not be able to service a whole lot of pins (contributions welcome)
+- AUDIO_INPUT is completely untested (but implemented in theory)
+- Note that AUDIO_INPUT and mozziAnalogRead() return values in the STM32's full ADC resolution (the exact range depending on the board in use) rather than AVR's 0-1023.
 - twi_nonblock is not ported
 
 ### Teensy 3.0/3.1/3.2/3.4/3.5/LC

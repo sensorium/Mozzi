@@ -14,62 +14,59 @@
 
 ////// BEGIN analog input code ////////
 
-/** NOTE: This section deals with implementing (fast) asynchronous analog reads, which form the backbone of mozziAnalogRead(), but also of USE_AUDIO_INPUT (if enabled).
- *  This template provides empty/dummy implementations to allow you to skip over this section, initially. Once you have an implementation, be sure to enable the
- *  #define, below: */
-//#define MOZZI_FAST_ANALOG_IMPLEMENTED
+#define MOZZI_FAST_ANALOG_IMPLEMENTED
 
-// Insert here code to read the result of the latest asynchronous conversion, when it is finished.
-// You can also provide this as a function returning unsigned int, should it be more complex on your platform
-#define getADCReading() 0
+// Notes on ADC implementation: So in hours I could not get IRQ-driven ADC to work, much less in a way that should work across the whole STM32 family.
+// Instead, this code resorts to polling, but contrary to the regular implementation, it sets does so non-blocking. Polling is done from inside audioHook().
+// Not terribly efficient, but seems to work ok.
+//
+// All this still involves coping much, much more low level detail, than I would like. Most of that is moved to MozziGuts_impl_STM32duino_analog.hpp .
+// If this core ever gets a more advanced ADC API, we should definitely switch to using that.
 
-/** NOTE: On "pins" vs. "channels" vs. "indices"
- *  "Pin" is the pin number as would usually be specified by the user in mozziAnalogRead().
- *  "Channel" is an internal ADC channel number corresponding to that pin. On many platforms this is simply the same as the pin number, on others it differs.
- *      In other words, this is an internal representation of "pin".
- *  "Index" is the index of the reading for a certain pin/channel in the array of analog_readings, ranging from 0 to NUM_ANALOG_PINS. This, again may be the
- *      same as "channel" (e.g. on AVR), however, on platforms where ADC-capable "channels" are not numbered sequentially starting from 0, the channel needs
- *      to be converted to a suitable index.
- *
- *  In summary, the semantics are roughly
- *      mozziAnalogRead(pin) -> _ADCimplementation_(channel) -> analog_readings[index]
- *  Implement adcPinToChannelNum() and channelNumToIndex() to perform the appropriate mapping.
- */
-// NOTE: Theoretically, adcPinToChannelNum is public API for historical reasons, thus cannot be replaced by a define
+#define getADCReading() HAL_ADC_GetValue(&AdcHandle)
+
+// NOTE: a single uint8_t for ADC channel is no good, here, as we may be dealing with serval distinct ADCs servicing the pins.
+//       However, there is a real danger of overflowing an int8_t storage (as is used as an intermediate), so subtract min pin number.
 #define channelNumToIndex(channel) channel
 uint8_t adcPinToChannelNum(uint8_t pin) {
-  return pin;
+  return pin - PNUM_ANALOG_BASE;
 }
 
-/** NOTE: Code needed to trigger a conversion on a new channel */
-void adcStartConversion(uint8_t channel) {
-#warning Fast analog read not implemented on this platform
+int16_t previously_sampled_pin = -1;
+ADC_HandleTypeDef AdcHandle = {};
+
+#include "MozziGuts_impl_STM32duino_analog.hpp"
+
+void adcStartConversion(int8_t pin) {
+  if (pin != previously_sampled_pin) {
+    if (previously_sampled_pin != -1) {
+      HAL_ADC_Stop(&AdcHandle);
+      HAL_ADC_DeInit(&AdcHandle);
+    }
+    previously_sampled_pin = pin;
+  }
+  adc_setup_read(analogInputToPinName(pin+PNUM_ANALOG_BASE), 16); // resolution will be limited to max available, anyway, so let's request 16 bits
 }
 
-/** NOTE: Code needed to trigger a subsequent conversion on the latest channel. If your platform has no special code for it, you should store the channel from
- *  adcStartConversion(), and simply call adcStartConversion(previous_channel), here. */
 void startSecondADCReadOnCurrentChannel() {
-#warning Fast analog read not implemented on this platform
+  HAL_ADC_Start(&AdcHandle);
 }
 
-/** NOTE: Code needed to set up faster than usual analog reads, e.g. specifying the number of CPU cycles that the ADC waits for the result to stabilize.
- *  This particular function is not super important, so may be ok to leave empty, at least, if the ADC is fast enough by default. */
-void setupFastAnalogRead(int8_t speed) {
-#warning Fast analog read not implemented on this platform
+void setupFastAnalogRead(int8_t /*speed*/) {
 }
 
-/** NOTE: Code needed to initialize the ADC for asynchronous reads. Typically involves setting up an interrupt handler for when conversion is done, and
- *  possibly calibration. */
-void setupMozziADC(int8_t speed) {
-#warning Fast analog read not implemented on this platform
+void setupMozziADC(int8_t /*speed*/) {
 }
 
-/* NOTE: Most platforms call a specific function/ISR when conversion is complete. Provide this function, here.
- * From inside its body, simply call advanceADCStep(). E.g.:
-void stm32_adc_eoc_handler() {
-  advanceADCStep();
+#define AUDIO_HOOK_HOOK() checkADCConversionComplete();
+
+void checkADCConversionComplete() {
+  if (previously_sampled_pin == -1) return;
+  if(HAL_ADC_PollForConversion(&AdcHandle, 0) == HAL_OK) {
+    advanceADCStep();
+  }
 }
-*/
+
 ////// END analog input code ////////
 ////// END analog input code ////////
 

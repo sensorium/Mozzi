@@ -41,6 +41,10 @@ jobs:
             platforms: |
               - name: esp8266:esp8266
                 source-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
+          - fqbn: STMicroelectronics:stm32:GenF1:pnum=BLUEPILL_F103C6
+            platforms: |
+              - name: STMicroelectronics:stm32
+                source-url: https://github.com/stm32duino/BoardManagerFiles/raw/main/package_stmicroelectronics_index.json
 
     steps:
       - name: Checkout repository

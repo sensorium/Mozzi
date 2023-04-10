@@ -76,24 +76,30 @@ void stm32_adc_eoc_handler() {
 
 
 //// BEGIN AUDIO OUTPUT code ///////
-#if (EXTERNAL_AUDIO_OUTPUT == true)
 HardwareTimer audio_update_timer(AUDIO_UPDATE_TIMER);
-#else
-PinName output_pin_1 = digitalPinToPinName(AUDIO_CHANNEL_1_PIN);
+
+#if (EXTERNAL_AUDIO_OUTPUT != true)
 HardwareTimer *pwm_timer_ht;
+PinName output_pin_1 = digitalPinToPinName(AUDIO_CHANNEL_1_PIN);
 uint32_t pwm_timer_channel_1 = STM_PIN_CHANNEL(pinmap_function(output_pin_1, PinMap_TIM));
-HardwareTimer audio_update_timer(AUDIO_UPDATE_TIMER);
+
+#  if (AUDIO_MODE == HIFI)
+PinName output_pin_1_high = digitalPinToPinName(AUDIO_CHANNEL_1_PIN_HIGH);
+uint32_t pwm_timer_channel_1_high = STM_PIN_CHANNEL(pinmap_function(output_pin_1_high, PinMap_TIM));
+#  elif (AUDIO_CHANNELS > 1)
+PinName output_pin_2 = digitalPinToPinName(AUDIO_CHANNEL_2);
+uint32_t pwm_timer_channel_2 = STM_PIN_CHANNEL(pinmap_function(output_pin_2, PinMap_TIM));
+#  endif
 
 #include "AudioConfigSTM32.h"
 inline void audioOutput(const AudioOutput f) {
 #  if (AUDIO_MODE == HIFI)
-//  pwmWrite(AUDIO_CHANNEL_1_PIN, (f.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
-//  pwmWrite(AUDIO_CHANNEL_1_PIN_HIGH, (f.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
+  pwm_timer_ht->setCaptureCompare(pwm_timer_channel_1, (f.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1);
+  pwm_timer_ht->setCaptureCompare(pwm_timer_channel_1_high, (f.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
 #  else
-  pwm_timer_ht->setCaptureCompare(pwm_timer_channel_1, f.l()+AUDIO_BIAS /*, resolution */);
-//  pwmWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
+  pwm_timer_ht->setCaptureCompare(pwm_timer_channel_1, f.l()+AUDIO_BIAS;
 #    if (AUDIO_CHANNELS > 1)
-//  pwmWrite(AUDIO_CHANNEL_2_PIN, f.r()+AUDIO_BIAS);
+  pwm_timer_ht->setCaptureCompare(pwm_timer_channel_2, f.r()+AUDIO_BIAS;
 #    endif
 #endif
 }

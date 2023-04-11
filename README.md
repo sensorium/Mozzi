@@ -312,7 +312,7 @@ on the RP2040 SDK API. Tested on a Pi Pico.
 - Code uses only one CPU core
 
 ### Arduino Giga
-port by Thomas Friedrichsmeier
+port by Thomas Friedrichsmeier & Thomas Combriat
 
 Compiles and runs using Arduino's standard and Arduino_AdvancedAnalog libraries.
 
@@ -321,7 +321,7 @@ Compiles and runs using Arduino's standard and Arduino_AdvancedAnalog libraries.
   - Asynchroneous analog reads are not implemented (yet), `mozziAnalogRead()` relays to `analogRead()`.
   - HIFI mode is not implemented.
 - In addition to using an user-defined `audioOutput()` by setting `EXTERNAL_AUDIO_OUTPUT` to `true` in mozzi_config.h, two bare chip output modes exist (configurable in AudioConfigMBED.h):
-  - INTERNAL_DAC: uses the DAC present on the board and outputs by default on pin A13 (3.5mm jack connector's tip). Stereo mode uses pin A12 (3.5mm jack connector's first ring) additionnaly.
+  - INTERNAL_DAC: uses the DAC present on the board and outputs by default on pin A13 (3.5mm jack connector's tip). Stereo mode uses pin A12 (3.5mm jack connector's first ring) additionally.
   - PDM_VIA_SERIAL: returns a pulse-density modulated signal on one of the hardware UART of the board (Serial ports). Default is using the SERIAL2, on pin D18.
 
 ***

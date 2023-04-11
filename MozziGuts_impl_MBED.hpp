@@ -10,32 +10,9 @@
  *
  */
 
-/** README! 
- * This file is meant to be used as a template when adding support for a new platform. Please read these instructions, first.
- *
- *  Files involved:
- *  1. Modify hardware_defines.h, adding a macro to detect your target platform
- *  2. Modify MozziGuts.cpp to include MozziGuts_impl_YOURPLATFORM.hpp
- *  3. Modify MozziGuts.h to include AudioConfigYOURPLATFORM.h
- *  4. Copy this file to MozziGuts_impl_YOURPLATFORM.hpp and adjust as necessary
- *  (If your platform is very similar to an existing port, it may instead be better to modify the existing MozziGuts_impl_XYZ.hpp/AudioConfigYOURPLATFORM.h,
- *  instead of steps 2-3.).
- *  Some platforms may need small modifications to other files as well, e.g. mozzi_pgmspace.h
- *
- *  How to implement MozziGuts_impl_YOURPLATFORM.hpp:
- *  - Follow the NOTEs provided in this file
- *  - Read the doc at the top of AudioOutput.h for a better understanding of the basic audio output framework
- *  - Take a peek at existing implementations for other hardware (e.g. TEENSY3/4 is rather complete while also simple at the time of this writing)
- *  - Wait for more documentation to arrive
- *  - Ask when in doubt
- *  - Don't forget to provide a PR when done (it does not have to be perfect; e.g. many ports skip analog input, initially)
- */
-
-// The main point of this check is to document, what platform & variants this implementation file is for.
 #if !(IS_MBED())
 #  error "Wrong implementation included for this platform"
 #endif
-// Add platform specific includes and declarations, here
 
 
 ////// BEGIN analog input code ////////

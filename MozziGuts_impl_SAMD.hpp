@@ -123,7 +123,7 @@ static void startAudio() {
   }
 
 #endif
-  analogWriteResolution(10);
+  analogWriteResolution(AUDIO_BITS);
 #if (EXTERNAL_AUDIO_OUTPUT != true)
   analogWrite(AUDIO_CHANNEL_1_PIN, 0);
 #endif

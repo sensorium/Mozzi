@@ -28,8 +28,8 @@
 
 #if (MBED_AUDIO_OUT_MODE == INTERNAL_DAC)
 #define AUDIO_BITS 12
-#define AUDIO_CHANNEL_1_PIN A12
-#define AUDIO_CHANNEL_2_PIN A13
+#define AUDIO_CHANNEL_1_PIN A13
+#define AUDIO_CHANNEL_2_PIN A12
 #define BYPASS_MOZZI_OUTPUT_BUFFER true
 #elif (MBED_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
 #define AUDIO_BITS 16  // well, used internally, at least. The pins will not be able to actually produce this many bits

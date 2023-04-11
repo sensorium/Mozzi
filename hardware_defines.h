@@ -80,7 +80,7 @@
 #define IS_ESP32() 0
 #endif
 
-#if !(IS_AVR() || IS_TEENSY3() || IS_TEENSY4() || IS_STM32() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() || IS_RP2040() || IS_GIGA())
+#if !(IS_AVR() || IS_TEENSY3() || IS_TEENSY4() || IS_STM32() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() || IS_RP2040() || IS_MBED())
 #error Your hardware is not supported by Mozzi or not recognized. Edit hardware_defines.h to proceed.
 #endif
 

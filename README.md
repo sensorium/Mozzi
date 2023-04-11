@@ -230,6 +230,13 @@ Some of the differences for Teensy 4.*:
 
 - Contrary to the Teensy 3, the Teensy 4 do not have any DAC. The output is done on pin A8 (PWM) by default (editable in `AudioConfigTeensy4.h`
 
+### SAMD21 architecture (Arduino Circuitplayground M0 and others)
+port by Adrian Freed
+
+- Output using inbuilt DAC (pin DAC0). Ouput resolution is fixed at 10 bits. If your board supports more, configure in AudioConfigSAMD21.h
+- mozziAnalogRead() and AUDIO_INPUT are not implemented (contributions welcome)
+- We don't have a lot of data, which boards this port has been tested on. Success or not, let us know, if you are using Mozzi on SAMD21 boards
+
 ### ESP8266
 port by Thomas Friedrichsmeier
 

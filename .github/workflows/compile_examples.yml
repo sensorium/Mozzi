@@ -45,6 +45,11 @@ jobs:
           - fqbn: arduino:samd:adafruit_circuitplayground_m0
             platforms: |
               - name: arduino:samd
+          - fqbn: rp2040:rp2040:rpipico
+            type: rp2040
+            platforms: |
+              - name: rp2040:rp2040
+                source-url: https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
 
     steps:
       - name: Checkout repository

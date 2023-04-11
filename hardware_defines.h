@@ -55,7 +55,7 @@
 #define IS_STM32() 0
 #endif
 
-#if (defined(__arm__) && !IS_STM32() && !IS_TEENSY3() && !IS_TEENSY4() && !IS_RP2040()) // && !IS_MBED()
+#if (defined(__arm__) && !IS_STM32() && !IS_TEENSY3() && !IS_TEENSY4() && !IS_RP2040() && !IS_SAMD21()) // && !IS_MBED()
 #define IS_STM32DUINO() 1
 #else
 #define IS_STM32DUINO() 0

@@ -4,14 +4,14 @@ name: Compile Examples
 on:
   push:
     paths:
-      - ".github/workflows/compile_examples.yml"
+      - ".github/workflows/**"
       - "examples/**"
       - "**.cpp"
       - "**.h"
       - "**.hpp"
   pull_request:
     paths:
-      - ".github/workflows/compile_examples.yml"
+      - ".github/workflows/**"
       - "examples/**"
       - "**.cpp"
       - "**.h"
@@ -44,6 +44,10 @@ jobs:
           - fqbn: arduino:mbed_giga:giga
             platforms: |
               - name: arduino:mbed_giga
+          # SAMD boards. There is also an Adrafruit fork of this core, and the two seem to have diverged, considerably. I have no idea on the differences.
+          - fqbn: arduino:samd:adafruit_circuitplayground_m0
+            platforms: |
+              - name: arduino:samd
 
     steps:
       - name: Checkout repository
@@ -73,4 +77,21 @@ jobs:
         with:
           if-no-files-found: error
           path: ${{ env.SKETCHES_REPORTS_PATH }}
-          name: ${{ env.SKETCHES_REPORTS_PATH }}
+          name: sketches-reports-artifact
+
+  # When using a matrix to compile for multiple boards, it's necessary to use a separate job for the deltas report
+  report:
+    needs: build # Wait for the compile job to finish to get the data for the report
+    if: github.event_name == 'pull_request' # Only run the job when the workflow is triggered by a pull request
+    runs-on: ubuntu-latest
+    steps:
+      # This step is needed to get the size data produced by the compile jobs
+      - name: Download sketches reports artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: sketches-reports-artifact
+          path: ${{ env.SKETCHES_REPORTS_PATH }}
+
+      - uses: arduino/report-size-deltas@v1
+        with:
+          sketches-reports-source: ${{ env.SKETCHES_REPORTS_PATH }}

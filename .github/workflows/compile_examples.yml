@@ -42,7 +42,7 @@ jobs:
               - name: esp8266:esp8266
                 source-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
           # SAMD boards. There is also an Adrafruit fork of this core, and the two seem to have diverged, considerably. I have no idea on the differences.
-          - fqbn: arduino:samd:mkrzero
+          - fqbn: arduino:samd:circuitplay
             platforms: |
               - name: arduino:samd
 

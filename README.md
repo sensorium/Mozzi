@@ -58,6 +58,8 @@ Arduino Nano | 9 | yes
 Arduino Pro Mini | 9 | yes
 Arduino Leonardo | 9 | yes
 Arduino Mega | 11 | yes
+Arduino MBED (only the Giga has been tested, see "Hardware specific notes", below) | A13 | no
+Arduino Giga | A13 (jack) | yes
 Freetronics EtherMega | 11 | yes
 Ardweeny | 9 | yes     
 Boarduino | 9 | yes
@@ -310,6 +312,19 @@ on the RP2040 SDK API. Tested on a Pi Pico.
 - twi_nonblock is not ported
 - Code uses only one CPU core
 
+### Arduino Giga/MBED
+port by Thomas Friedrichsmeier & Thomas Combriat
+
+Compiles and runs using Arduino's standard and Arduino_AdvancedAnalog libraries.
+
+- This port is not complete yet, in particular:
+  - AUDIO_INPUT is not implemented (yet).
+  - Asynchroneous analog reads are not implemented (yet), `mozziAnalogRead()` relays to `analogRead()`.
+  - HIFI mode is not implemented.
+- In addition to using an user-defined `audioOutput()` by setting `EXTERNAL_AUDIO_OUTPUT` to `true` in mozzi_config.h, two bare chip output modes exist (configurable in AudioConfigMBED.h):
+  - INTERNAL_DAC: uses the DAC present on the board and outputs by default on pin A13 (3.5mm jack connector's tip). Stereo mode uses pin A12 (3.5mm jack connector's first ring) additionally.
+  - PDM_VIA_SERIAL: returns a pulse-density modulated signal on one of the hardware UART of the board (Serial ports). Default is using the SERIAL2, on pin D18.
+- This port should support other MBED based Arduino boards like the Arduino Portenta, in *theory*. It has only been tested on the giga but feedbacks are welcome!
 
 ***
 

@@ -41,6 +41,9 @@ jobs:
             platforms: |
               - name: esp8266:esp8266
                 source-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
+          - fqbn: arduino:mbed_giga:giga
+            platforms: |
+              - name: arduino:mbed_giga
           # SAMD boards. There is also an Adrafruit fork of this core, and the two seem to have diverged, considerably. I have no idea on the differences.
           - fqbn: arduino:samd:adafruit_circuitplayground_m0
             platforms: |
@@ -70,6 +73,7 @@ jobs:
             - source-path: ./
             - name: PinChangeInterrupt
             - name: MIDI Library
+            - name: Arduino_AdvancedAnalog
           enable-deltas-report: true
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
 

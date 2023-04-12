@@ -3,6 +3,9 @@ Mozzi sound synthesis library for Arduino
 NEWS
 get the latest version from https://sensorium.github.io/Mozzi/
 
+not yet released (latest github version)
+- new partial port of the Arduino Giga by Thomas Friedrichsmeier & Thomas Combriat
+
 release v1.1.0
 - new synth classes (and examples) by Tom Combriat @tomcombriat:
 	- Wavefolder

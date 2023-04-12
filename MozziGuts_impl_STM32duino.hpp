@@ -32,24 +32,33 @@ uint8_t adcPinToChannelNum(uint8_t pin) {
   return pin - PNUM_ANALOG_BASE;
 }
 
+uint32_t adc_pins_initialized = 0;
 int16_t previously_sampled_pin = -1;
+bool conversion_running = false;
 ADC_HandleTypeDef AdcHandle = {};
 
 #include "MozziGuts_impl_STM32duino_analog.hpp"
 
 void adcStartConversion(int8_t pin) {
   if (pin != previously_sampled_pin) {
-    if (previously_sampled_pin != -1) {
+    if (conversion_running) {
       HAL_ADC_Stop(&AdcHandle);
       HAL_ADC_DeInit(&AdcHandle);
     }
     previously_sampled_pin = pin;
+    uint32_t mask = 1 << pin;
+    if (!(adc_pins_initialized & mask)) {
+      analogRead(pin+PNUM_ANALOG_BASE);  // I have no idea, what black magic analogRead() performs, but it seems to be needed - once - on STM32F411
+      adc_pins_initialized += mask;
+    }
   }
   adc_setup_read(analogInputToPinName(pin+PNUM_ANALOG_BASE), 16); // resolution will be limited to max available, anyway, so let's request 16 bits
+  conversion_running = true;
 }
 
 void startSecondADCReadOnCurrentChannel() {
   HAL_ADC_Start(&AdcHandle);
+  conversion_running = true;
 }
 
 void setupFastAnalogRead(int8_t /*speed*/) {
@@ -61,8 +70,9 @@ void setupMozziADC(int8_t /*speed*/) {
 #define AUDIO_HOOK_HOOK() checkADCConversionComplete();
 
 void checkADCConversionComplete() {
-  if (previously_sampled_pin == -1) return;
+  if (!conversion_running) return;
   if(HAL_ADC_PollForConversion(&AdcHandle, 0) == HAL_OK) {
+    conversion_running = false;
     advanceADCStep();
   }
 }

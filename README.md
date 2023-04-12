@@ -70,7 +70,9 @@ Teensy 4.0 4.1 | A8 | yes
 Gemma M0 | A0 | yes
 Adafruit Playground Express | Built in Speaker | yes    
 Sanguino | 13	| -  
-STM32duino (see "Hardware specific notes", below) | PB8 | yes
+STM32F1 maple core (see "Hardware specific notes", below) | PB8 | yes
+STM32F1 STM core (see "Hardware specific notes", below) | PA8 | yes
+STM32F4 STM core (see "Hardware specific notes", below) | PA8 | yes
 ESP8266 *see details* | GPIO2 | yes
 RP2040 | 0 | yes
 
@@ -211,8 +213,9 @@ real DAC. Should probably run on any other board supported by [Stev Strong's lib
 #### STM32 STM32duino
 port by Thomas Friedrichsmeier
 
-Compiles for and runs on a STM32F103C8T6 blue pill board, with a bunch of caveats (see below), i.e. on a board _without_ a
-real DAC. Should probably run on any other board supported by the [STM32duino core](https://github.com/stm32duino/Arduino_Core_STM32) (although this theory is untested).
+Tested on a STM32F103C8T6 blue pill board as well as an STM32F411CE black pill board, i.e. on sboards _without_ a
+real DAC. Compiles and runs, with a bunch of caveats (see below). Should probably run on any other board supported by the
+[STM32duino core](https://github.com/stm32duino/Arduino_Core_STM32) (although this theory is untested).
 When trying any other board, you probably want to check the platform specific settings (see below), carefully, importantly, whether the desired output resolution is
 achievable, and whether the desired output pins are PWM capable.
 

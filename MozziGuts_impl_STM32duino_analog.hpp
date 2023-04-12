@@ -1,5 +1,4 @@
 // NOTE: The contents of this file are copied mostly verbatim from Arduino_Core_STM32, (c) STMicroelectronics, BSD 3-clause license.
-
 static PinName g_current_pin = NC;
 
 #ifndef ADC_SAMPLINGTIME
@@ -308,5 +307,6 @@ bool adc_setup_read(PinName pin, uint32_t resolution) {
     /* Start Conversion Error */
     return 0;
   }
-  return true;
+
+  return HAL_OK;
 }

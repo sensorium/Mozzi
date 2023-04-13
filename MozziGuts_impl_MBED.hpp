@@ -73,6 +73,13 @@ void stm32_adc_eoc_handler() {
   advanceADCStep();
 }
 */
+
+#if (USE_AUDIO_INPUT)
+#define audioInputAvailable() (true)
+#define readAudioInput() (0)
+
+#endif
+
 ////// END analog input code ////////
 
 ////// BEGIN audio output code //////

@@ -196,10 +196,8 @@ inline void advanceControlLoop() {
 void audioHook() // 2us on AVR excluding updateAudio()
 {
 // setPin13High();
-#if (USE_AUDIO_INPUT == true && !BYPASS_MOZZI_INPUT_BUFFER)
-  if (audioInputAvailable())
-    audio_input = readAudioInput();
-  /* audio_input = input_buffer.read();*/
+#if (USE_AUDIO_INPUT == true)
+  if (audioInputAvailable()) audio_input = readAudioInput(); 
 #endif
 
   if (canBufferAudioOutput()) {

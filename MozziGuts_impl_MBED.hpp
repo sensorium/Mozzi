@@ -17,6 +17,47 @@
 
 ////// BEGIN analog input code ////////
 
+#if (USE_AUDIO_INPUT)
+
+#include <Arduino_AdvancedAnalog.h>
+
+#define CHUNKSIZEIN 64
+AdvancedADC adc(AUDIO_INPUT_PIN);
+Sample inbuf[CHUNKSIZEIN];
+int inbufpos=0; 
+
+bool audioInputAvailable()  {
+  if (inbufpos >= CHUNKSIZEIN)
+    {
+      if (!adc.available()) return false;
+      SampleBuffer buf = adc.read();
+      /*
+      for (unsigned int i = 0; i < CHUNKSIZE; ++i) {
+	inbuf[i] = buf[i];
+	}*/
+      for (int i = 0; i < buf.size(); ++i) memcpy(inbuf,buf.data(), CHUNKSIZEIN*sizeof(Sample));
+      inbufpos = 0;
+      buf.release();
+      return true;
+    }
+  else return true;
+}
+AudioOutput_t readAudioInput(){
+  inbufpos++;
+  return inbuf[inbufpos-1];
+}
+
+
+static void startAudioInput()
+{
+  if (!adc.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZEIN, 256/CHUNKSIZEIN)) {
+        Serial.println("Failed to start analog acquisition!");
+        while (1);
+    }
+}
+#endif
+
+
 /** NOTE: This section deals with implementing (fast) asynchronous analog reads, which form the backbone of mozziAnalogRead(), but also of USE_AUDIO_INPUT (if enabled).
  *  This template provides empty/dummy implementations to allow you to skip over this section, initially. Once you have an implementation, be sure to enable the
  *  #define, below: */
@@ -65,6 +106,9 @@ void setupFastAnalogRead(int8_t speed) {
  *  possibly calibration. */
 void setupMozziADC(int8_t speed) {
 #warning Fast analog read not implemented on this platform
+  #if (USE_AUDIO_INPUT)
+      startAudioInput();
+  #endif
 }
 
 /* NOTE: Most platforms call a specific function/ISR when conversion is complete. Provide this function, here.
@@ -74,11 +118,7 @@ void stm32_adc_eoc_handler() {
 }
 */
 
-#if (USE_AUDIO_INPUT)
-#define audioInputAvailable() (true)
-#define readAudioInput() (0)
 
-#endif
 
 ////// END analog input code ////////
 

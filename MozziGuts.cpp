@@ -47,7 +47,6 @@ static void startSecondADCReadOnCurrentChannel();
 #  error "Platform not (yet) supported. Check MozziGuts_impl_template.hpp and existing implementations for a blueprint for adding your favorite MCU."
 #endif
 
-
 static uint8_t adc_count = 0;
 
 ////// BEGIN Output buffering /////
@@ -68,7 +67,7 @@ CircularBuffer<AudioOutput_t> output_buffer;  // fixed size 256
 #  define canBufferAudioOutput() (!output_buffer.isFull())
 #  define bufferAudioOutput(f) output_buffer.write(f)
 static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
-#  if (USE_AUDIO_INPUT == true)
+#  if (USE_AUDIO_INPUT == true && !BYPASS_MOZZI_INPUT_BUFFER == true)
   adc_count = 0;
   startSecondADCReadOnCurrentChannel();  // the current channel is the AUDIO_INPUT pin
 #  endif
@@ -103,7 +102,7 @@ void adcReadSelectedChannels() {
 __attribute__((noinline)) void adcStartReadCycle() {
 	if (current_channel < 0) // last read of adc_channels_to_read stack was empty, ie. all channels from last time have been read
 	{
-#if (USE_AUDIO_INPUT == true)
+#if (USE_AUDIO_INPUT == true && !BYPASS_MOZZI_INPUT_BUFFER)
 		adc_channels_to_read.push(AUDIO_INPUT_PIN); // for audio
 #else
 		adcReadSelectedChannels();
@@ -124,13 +123,13 @@ int mozziAnalogRead(uint8_t pin) {
 }
 
 #if (USE_AUDIO_INPUT == true)
+static int audio_input; // holds the latest audio from input_buffer
+int getAudioInput() { return audio_input; }
+#if (!BYPASS_MOZZI_INPUT_BUFFER)
 // ring buffer for audio input
 CircularBuffer<unsigned int> input_buffer; // fixed size 256
-
-static int audio_input; // holds the latest audio from input_buffer
-
-int getAudioInput() { return audio_input; }
-
+#define audioInputAvailable() (!input_buffer.isEmpty())
+#define readAudioInput() (input_buffer.read())
 /** NOTE: Triggered at AUDIO_RATE via defaultAudioOutput(). In addition to the AUDIO_INPUT_PIN, at most one reading is taken for mozziAnalogRead().  */
 inline void advanceADCStep() {
   switch (adc_count) {
@@ -156,7 +155,8 @@ inline void advanceADCStep() {
   }
   adc_count++;
 }
-#else
+#endif // #if (!BYPASS_MOZZI_INPUT_BUFFER)
+#elif (!USE_AUDIO_INPUT || (USE_AUDIO_INPUT && BYPASS_MOZZI_INPUT_BUFFER))
 /** NOTE: Triggered at CONTROL_RATE via advanceControlLoop().
 
 This interrupt handler cycles through all analog inputs on the adc_channels_to_read Stack,
@@ -196,9 +196,10 @@ inline void advanceControlLoop() {
 void audioHook() // 2us on AVR excluding updateAudio()
 {
 // setPin13High();
-#if (USE_AUDIO_INPUT == true)
-  if (!input_buffer.isEmpty())
-    audio_input = input_buffer.read();
+#if (USE_AUDIO_INPUT == true && !BYPASS_MOZZI_INPUT_BUFFER)
+  if (audioInputAvailable())
+    audio_input = readAudioInput();
+  /* audio_input = input_buffer.read();*/
 #endif
 
   if (canBufferAudioOutput()) {

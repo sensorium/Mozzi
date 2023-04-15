@@ -28,23 +28,18 @@ int inbufpos=0;
 
 bool audioInputAvailable()  {
   if (inbufpos >= CHUNKSIZEIN)
-    {
+     {
       if (!adc.available()) return false;
       SampleBuffer buf = adc.read();
-      /*
-      for (unsigned int i = 0; i < CHUNKSIZE; ++i) {
-	inbuf[i] = buf[i];
-	}*/
-      for (int i = 0; i < buf.size(); ++i) memcpy(inbuf,buf.data(), CHUNKSIZEIN*sizeof(Sample));
+      memcpy(inbuf,buf.data(), CHUNKSIZEIN*sizeof(Sample));
       inbufpos = 0;
       buf.release();
       return true;
-    }
+       }
   else return true;
 }
 AudioOutput_t readAudioInput(){
-  inbufpos++;
-  return inbuf[inbufpos-1];
+  return inbuf[inbufpos++];
 }
 
 

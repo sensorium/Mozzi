@@ -196,10 +196,6 @@ inline void advanceControlLoop() {
 void audioHook() // 2us on AVR excluding updateAudio()
 {
 // setPin13High();
-#if (USE_AUDIO_INPUT == true)
-  if (audioInputAvailable()) audio_input = readAudioInput(); 
-#endif
-
   if (canBufferAudioOutput()) {
     advanceControlLoop();
 #if (STEREO_HACK == true)
@@ -211,7 +207,11 @@ void audioHook() // 2us on AVR excluding updateAudio()
 
 #if defined(LOOP_YIELD)
     LOOP_YIELD
-#endif      
+#endif
+
+#if (USE_AUDIO_INPUT == true)
+  if (audioInputAvailable()) audio_input = readAudioInput(); 
+#endif
       }
 // Like LOOP_YIELD, but running every cycle of audioHook(), not just once per sample
 #if defined(AUDIO_HOOK_HOOK)

@@ -88,6 +88,7 @@ jobs:
   report:
     needs: build # Wait for the compile job to finish to get the data for the report
     if: github.event_name == 'pull_request' # Only run the job when the workflow is triggered by a pull request
+    continue-on-error: true # Not the programmer's fault, if reporting fails
     runs-on: ubuntu-latest
     steps:
       # This step is needed to get the size data produced by the compile jobs

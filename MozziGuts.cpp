@@ -67,7 +67,7 @@ CircularBuffer<AudioOutput_t> output_buffer;  // fixed size 256
 #  define canBufferAudioOutput() (!output_buffer.isFull())
 #  define bufferAudioOutput(f) output_buffer.write(f)
 static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
-#  if (USE_AUDIO_INPUT == true && !BYPASS_MOZZI_INPUT_BUFFER == true)
+#  if (USE_AUDIO_INPUT == true && !BYPASS_MOZZI_INPUT_BUFFER == true) // in that case, we rely on asynchroneous ADC reads implemented for mozziAnalogRead to get the audio in samples
   adc_count = 0;
   startSecondADCReadOnCurrentChannel();  // the current channel is the AUDIO_INPUT pin
 #  endif
@@ -102,7 +102,7 @@ void adcReadSelectedChannels() {
 __attribute__((noinline)) void adcStartReadCycle() {
 	if (current_channel < 0) // last read of adc_channels_to_read stack was empty, ie. all channels from last time have been read
 	{
-#if (USE_AUDIO_INPUT == true && !BYPASS_MOZZI_INPUT_BUFFER)
+#if (USE_AUDIO_INPUT == true && !BYPASS_MOZZI_INPUT_BUFFER == true) // use of async ADC for audio input
 		adc_channels_to_read.push(AUDIO_INPUT_PIN); // for audio
 #else
 		adcReadSelectedChannels();
@@ -156,7 +156,7 @@ inline void advanceADCStep() {
   adc_count++;
 }
 #endif // #if (!BYPASS_MOZZI_INPUT_BUFFER)
-#elif (!USE_AUDIO_INPUT || (USE_AUDIO_INPUT && BYPASS_MOZZI_INPUT_BUFFER))
+#elif (!USE_AUDIO_INPUT || (USE_AUDIO_INPUT && BYPASS_MOZZI_INPUT_BUFFER)) // in case we skipped the previous block, we still need to implement async ADC, just like without audio inputs
 /** NOTE: Triggered at CONTROL_RATE via advanceControlLoop().
 
 This interrupt handler cycles through all analog inputs on the adc_channels_to_read Stack,
@@ -241,7 +241,7 @@ unsigned long mozziMicros() { return audioTicks() * MICROS_PER_AUDIO_TICK; }
 
 ////// BEGIN initialization ///////
 void startMozzi(int control_rate_hz) {
-  setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST
+  setupMozziADC(); // you can use setupFastAnalogRead() with FASTER_ADC or FASTEST_ADC
                    // in setup() if desired (not for Teensy 3.* )
   setupFastAnalogRead();
   // delay(200); // so AutoRange doesn't read 0 to start with

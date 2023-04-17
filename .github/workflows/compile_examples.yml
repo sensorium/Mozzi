@@ -45,10 +45,18 @@ jobs:
             platforms: |
               - name: STMicroelectronics:stm32
                 source-url: https://github.com/stm32duino/BoardManagerFiles/raw/main/package_stmicroelectronics_index.json
+          - fqbn: arduino:mbed_giga:giga
+            platforms: |
+              - name: arduino:mbed_giga
           # SAMD boards. There is also an Adrafruit fork of this core, and the two seem to have diverged, considerably. I have no idea on the differences.
           - fqbn: arduino:samd:adafruit_circuitplayground_m0
             platforms: |
               - name: arduino:samd
+          - fqbn: rp2040:rp2040:rpipico
+            type: rp2040
+            platforms: |
+              - name: rp2040:rp2040
+                source-url: https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
 
     steps:
       - name: Checkout repository
@@ -69,6 +77,7 @@ jobs:
             - source-path: ./
             - name: PinChangeInterrupt
             - name: MIDI Library
+            - name: Arduino_AdvancedAnalog
           enable-deltas-report: true
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
 
@@ -87,7 +96,7 @@ jobs:
     steps:
       # This step is needed to get the size data produced by the compile jobs
       - name: Download sketches reports artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: sketches-reports-artifact
           path: ${{ env.SKETCHES_REPORTS_PATH }}

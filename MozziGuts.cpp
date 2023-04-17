@@ -18,12 +18,39 @@
 //#include "mozzi_utils.h"
 #include "AudioOutput.h"
 
-// forward-declarations for use in hardware-specific implementations:
-static void advanceADCStep();
-static uint8_t adc_count = 0;
 
-// forward-declarations; to be supplied by plaform specific implementations
+// Forward declarations of functions to be provided by platform specific implementations
+#if (!BYPASS_MOZZI_OUTPUT_BUFFER)
+static void CACHED_FUNCTION_ATTR defaultAudioOutput();
+#endif
+static void advanceADCStep();
 static void startSecondADCReadOnCurrentChannel();
+
+// Include the appropriate implementation
+#if IS_AVR()
+#  include "MozziGuts_impl_AVR.hpp"
+#elif IS_STM32()
+#  include "MozziGuts_impl_STM32.hpp"
+#elif IS_STM32DUINO()
+#  include "MozziGuts_impl_STM32duino.hpp"
+#elif IS_ESP32()
+#  include "MozziGuts_impl_ESP32.hpp"
+#elif IS_ESP8266()
+#  include "MozziGuts_impl_ESP8266.hpp"
+#elif (IS_TEENSY3() || IS_TEENSY4())
+#  include "MozziGuts_impl_TEENSY.hpp"
+#elif (IS_SAMD21())
+#  include "MozziGuts_impl_SAMD.hpp"
+#elif (IS_RP2040())
+#  include "MozziGuts_impl_RP2040.hpp"
+#elif (IS_MBED())
+#  include "MozziGuts_impl_MBED.hpp"
+#else
+#  error "Platform not (yet) supported. Check MozziGuts_impl_template.hpp and existing implementations for a blueprint for adding your favorite MCU."
+#endif
+
+
+static uint8_t adc_count = 0;
 
 ////// BEGIN Output buffering /////
 #if BYPASS_MOZZI_OUTPUT_BUFFER == true
@@ -53,29 +80,7 @@ static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
 ////// END Output buffering ///////
 
 
-// Include the appropriate implementation
-#if IS_AVR()
-#  include "MozziGuts_impl_AVR.hpp"
-#elif IS_STM32()
-#  include "MozziGuts_impl_STM32.hpp"
-#elif IS_STM32DUINO()
-#  include "MozziGuts_impl_STM32duino.hpp"
-#elif IS_ESP32()
-#  include "MozziGuts_impl_ESP32.hpp"
-#elif IS_ESP8266()
-#  include "MozziGuts_impl_ESP8266.hpp"
-#elif (IS_TEENSY3() || IS_TEENSY4())
-#  include "MozziGuts_impl_TEENSY.hpp"
-#elif (IS_SAMD21())
-#  include "MozziGuts_impl_SAMD.hpp"
-#elif (IS_RP2040())
-#  include "MozziGuts_impl_RP2040.hpp"
-#else
-#  error "Platform not (yet) supported. Check MozziGuts_impl_template.hpp and existing implementations for a blueprint for adding your favorite MCU."
-#endif
-
-
-////// BEGIN Analog inpput code ////////
+////// BEGIN Analog input code ////////
 /* Analog input code was informed initially by a discussion between
 jRaskell, bobgardner, theusch, Koshchi, and code by jRaskell.
 http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=789581
@@ -208,10 +213,11 @@ void audioHook() // 2us on AVR excluding updateAudio()
 
 #if defined(LOOP_YIELD)
     LOOP_YIELD
-#endif
+#endif      
   }
+// Like LOOP_YIELD, but running every cycle of audioHook(), not just once per sample
 #if defined(AUDIO_HOOK_HOOK)
-AUDIO_HOOK_HOOK();
+    AUDIO_HOOK_HOOK
 #endif
   // setPin13Low();
 }

@@ -67,7 +67,7 @@ void setupFastAnalogRead(int8_t /*speed*/) {
 void setupMozziADC(int8_t /*speed*/) {
 }
 
-#define AUDIO_HOOK_HOOK() checkADCConversionComplete();
+#define AUDIO_HOOK_HOOK checkADCConversionComplete();
 
 void checkADCConversionComplete() {
   if (!conversion_running) return;

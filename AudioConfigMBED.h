@@ -39,7 +39,7 @@
 #error Invalid output mode configured in AudioConfigMBED.h
 #endif
 
-#define BYPASS_MOZZI_INPUT_BUFFER true
+//#define BYPASS_MOZZI_INPUT_BUFFER true
 #define AUDIO_BIAS ((uint16_t) 1<<(AUDIO_BITS-1))
 
 #endif        //  #ifndef AUDIOCONFIGMBED_H

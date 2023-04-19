@@ -14,24 +14,26 @@
 #  error "Wrong implementation included for this platform"
 #endif
 
+#define CHUNKSIZE 64
 
 ////// BEGIN analog input code ////////
 
 #if (USE_AUDIO_INPUT)
+#define AUDIO_INPUT_MODE AUDIO_INPUT_CUSTOM
 
 #include <Arduino_AdvancedAnalog.h>
 
-#define CHUNKSIZEIN 64
+#define CHUNKSIZE 64
 AdvancedADC adc(AUDIO_INPUT_PIN);
-Sample inbuf[CHUNKSIZEIN];
+Sample inbuf[CHUNKSIZE];
 int inbufpos=0; 
 
 bool audioInputAvailable()  {
-  if (inbufpos >= CHUNKSIZEIN)
+  if (inbufpos >= CHUNKSIZE)
      {
       if (!adc.available()) return false;
       SampleBuffer buf = adc.read();
-      memcpy(inbuf,buf.data(), CHUNKSIZEIN*sizeof(Sample));
+      memcpy(inbuf,buf.data(), CHUNKSIZE*sizeof(Sample));
       inbufpos = 0;
       buf.release();
       return true;
@@ -45,7 +47,7 @@ AudioOutput_t readAudioInput(){
 
 static void startAudioInput()
 {
-  if (!adc.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZEIN, 256/CHUNKSIZEIN)) {
+  if (!adc.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZE, 256/CHUNKSIZE)) {
         Serial.println("Failed to start analog acquisition!");
         while (1);
     }
@@ -143,7 +145,6 @@ void stopMozzi() {
 
 #include <Arduino_AdvancedAnalog.h>
 
-#define CHUNKSIZE 64
 AdvancedDAC dac1(AUDIO_CHANNEL_1_PIN);
 Sample buf1[CHUNKSIZE];
 #if (AUDIO_CHANNELS > 1)
@@ -154,7 +155,8 @@ int bufpos = 0;
 
 inline void commitBuffer(Sample buffer[], AdvancedDAC &dac) {
   SampleBuffer dmabuf = dac.dequeue();
-  for (int i = 0; i < dmabuf.size(); ++i) memcpy(dmabuf.data(), buffer, CHUNKSIZE*sizeof(Sample));
+  for (unsigned int i=0;i<CHUNKSIZE;i++) memcpy(dmabuf.data(), buffer, CHUNKSIZE*sizeof(Sample));
+  //for (unsigned int i=0;i<CHUNKSIZE;i++) dmabuf[i]=buffer[i];
   dac.write(dmabuf);
 }
 

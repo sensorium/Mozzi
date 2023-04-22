@@ -139,8 +139,10 @@ int mozziAnalogRead(uint8_t pin) {
 }
 
 #if (USE_AUDIO_INPUT == true)
-static int audio_input; // holds the latest audio from input_buffer
-int getAudioInput() { return audio_input; }
+static AudioOutputStorage_t audio_input; // holds the latest audio from input_buffer
+AudioOutputStorage_t getAudioInput() { return audio_input; }
+#endif
+
 //#if (!BYPASS_MOZZI_INPUT_BUFFER)
 #if (AUDIO_INPUT_MODE == AUDIO_INPUT_LEGACY)
 // ring buffer for audio input
@@ -172,11 +174,7 @@ inline void advanceADCStep() {
   }
   adc_count++;
 }
-#endif // #if (AUDIO_INPUT_MODE == AUDIO_INPUT_LEGACY)
-#endif // #if (USE_AUDIO_INPUT == true)
-//#elif (!USE_AUDIO_INPUT || (USE_AUDIO_INPUT && BYPASS_MOZZI_INPUT_BUFFER)) // in case we skipped the previous block, we still need to implement async ADC, just like without audio inputs
-
-#if (AUDIO_INPUT_MODE == AUDIO_INPUT_NONE || AUDIO_INPUT_MODE == AUDIO_INPUT_CUSTOM)  // in case we skipped the previous block, we still need to implement async ADC, just like without audio inputs
+#else
 /** NOTE: Triggered at CONTROL_RATE via advanceControlLoop().
 
 This interrupt handler cycles through all analog inputs on the adc_channels_to_read Stack,
@@ -194,7 +192,7 @@ inline void advanceADCStep() {
     adc_count=0;
   }
 }
-#endif // #if (AUDIO_INPUT_MODE == AUDIO_INPUT_NONE || AUDIO_INPUT_MODE == AUDIO_INPUT_CUSTOM) 
+#endif // else block #if (AUDIO_INPUT_MODE == AUDIO_INPUT_LEGACY)
 
 ////// END analog input code ////////
 

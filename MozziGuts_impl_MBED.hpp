@@ -40,7 +40,7 @@ bool audioInputAvailable()  {
        }
   else return true;
 }
-AudioOutput_t readAudioInput(){
+AudioOutputStorage_t readAudioInput(){
   return inbuf[inbufpos++];
 }
 
@@ -177,8 +177,11 @@ inline void audioOutput(const AudioOutput f) {
 }
 
 bool canBufferAudioOutput() {
-  // NOTE: In case of stereo, we *assume* the DACs to be running exactly in sync. However, this is safe enough to do, as AdvancedDAC::dequeue() will wait if necessary.
-  return (bufpos < CHUNKSIZE || dac1.available());
+  return (bufpos < CHUNKSIZE || (dac1.available()
+#if (AUDIO_CHANNELS > 1)
+    && dac2.available()
+#endif
+  ));
 }
 
 static void startAudio() {

@@ -28,16 +28,15 @@ AdvancedADC adc(AUDIO_INPUT_PIN);
 Sample inbuf[CHUNKSIZE];
 int inbufpos=0; 
 
-bool audioInputAvailable()  {
-  if (inbufpos >= CHUNKSIZE)
-     {
-      if (!adc.available()) return false;
-      SampleBuffer buf = adc.read();
-      memcpy(inbuf,buf.data(), CHUNKSIZE*sizeof(Sample));
-      inbufpos = 0;
-      buf.release();
-      return true;
-       }
+bool audioInputAvailable() {
+  if (inbufpos >= CHUNKSIZE) {
+    if (!adc.available()) return false;
+    SampleBuffer buf = adc.read();
+    memcpy(inbuf,buf.data(), CHUNKSIZE*sizeof(Sample));
+    inbufpos = 0;
+    buf.release();
+    return true;
+  }
   else return true;
 }
 AudioOutputStorage_t readAudioInput(){
@@ -45,12 +44,11 @@ AudioOutputStorage_t readAudioInput(){
 }
 
 
-static void startAudioInput()
-{
+static void startAudioInput() {
   if (!adc.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZE, 256/CHUNKSIZE)) {
-        Serial.println("Failed to start analog acquisition!");
-        while (1);
-    }
+    Serial.println("Failed to start analog acquisition!");
+    while (1);
+  }
 }
 #endif
 
@@ -187,13 +185,13 @@ bool canBufferAudioOutput() {
 static void startAudio() {
   //NOTE: DAC setup currently affected by https://github.com/arduino-libraries/Arduino_AdvancedAnalog/issues/35 . Don't expect this to work, until using a fixed version fo Arduino_AdvancedAnalog!
   if (!dac1.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZE, 256/CHUNKSIZE)) {
-      Serial.println("Failed to start DAC1 !");
-      while (1);
+    Serial.println("Failed to start DAC1 !");
+    while (1);
   }
 #if (AUDIO_CHANNELS > 1)
   if (!dac2.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZE, 256/CHUNKSIZE)) {
-      Serial.println("Failed to start DAC2 !");
-      while (1);
+    Serial.println("Failed to start DAC2 !");
+    while (1);
   }
 #endif
 }

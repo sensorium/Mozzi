@@ -23,7 +23,6 @@
 
 #include <Arduino_AdvancedAnalog.h>
 
-#define CHUNKSIZE 64
 AdvancedADC adc(AUDIO_INPUT_PIN);
 Sample inbuf[CHUNKSIZE];
 int inbufpos=0; 
@@ -153,8 +152,8 @@ int bufpos = 0;
 
 inline void commitBuffer(Sample buffer[], AdvancedDAC &dac) {
   SampleBuffer dmabuf = dac.dequeue();
+  // NOTE: Yes, this is silly code, and originated as an accident. Somehow it appears to help _a little_ against current problem wrt DAC stability
   for (unsigned int i=0;i<CHUNKSIZE;i++) memcpy(dmabuf.data(), buffer, CHUNKSIZE*sizeof(Sample));
-  //for (unsigned int i=0;i<CHUNKSIZE;i++) dmabuf[i]=buffer[i];
   dac.write(dmabuf);
 }
 

@@ -81,7 +81,7 @@ CircularBuffer<AudioOutput_t> output_buffer;  // fixed size 256
 #  define canBufferAudioOutput() (!output_buffer.isFull())
 #  define bufferAudioOutput(f) output_buffer.write(f)
 static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
-  //#  if (USE_AUDIO_INPUT == true && !BYPASS_MOZZI_INPUT_BUFFER == true) // in that case, we rely on asynchroneous ADC reads implemented for mozziAnalogRead to get the audio in samples
+
 #if (AUDIO_INPUT_MODE == AUDIO_INPUT_LEGACY) // in that case, we rely on asynchroneous ADC reads implemented for mozziAnalogRead to get the audio in samples
   adc_count = 0;
   startSecondADCReadOnCurrentChannel();  // the current channel is the AUDIO_INPUT pin
@@ -117,7 +117,6 @@ void adcReadSelectedChannels() {
 __attribute__((noinline)) void adcStartReadCycle() {
 	if (current_channel < 0) // last read of adc_channels_to_read stack was empty, ie. all channels from last time have been read
 	{
-	  //#if (USE_AUDIO_INPUT == true && !BYPASS_MOZZI_INPUT_BUFFER == true) // use of async ADC for audio input
 #if (AUDIO_INPUT_MODE == AUDIO_INPUT_LEGACY) // use of async ADC for audio input
 		adc_channels_to_read.push(AUDIO_INPUT_PIN); // for audio
 #else
@@ -143,7 +142,6 @@ static AudioOutputStorage_t audio_input; // holds the latest audio from input_bu
 AudioOutputStorage_t getAudioInput() { return audio_input; }
 #endif
 
-//#if (!BYPASS_MOZZI_INPUT_BUFFER)
 #if (AUDIO_INPUT_MODE == AUDIO_INPUT_LEGACY)
 // ring buffer for audio input
 CircularBuffer<unsigned int> input_buffer; // fixed size 256
@@ -192,7 +190,7 @@ inline void advanceADCStep() {
     adc_count=0;
   }
 }
-#endif // else block #if (AUDIO_INPUT_MODE == AUDIO_INPUT_LEGACY)
+#endif
 
 ////// END analog input code ////////
 

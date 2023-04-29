@@ -83,6 +83,9 @@ void checkADCConversionComplete() {
 
 
 //// BEGIN AUDIO OUTPUT code ///////
+// The timer used for running the audio update loop. This must _not_ be the same timer responsible for PWM on the output pins! NOTE: Timer 3 appears to clash with SPI DMA transfers under some circumstances
+#define AUDIO_UPDATE_TIMER TIM2
+
 HardwareTimer audio_update_timer(AUDIO_UPDATE_TIMER);
 
 #if (EXTERNAL_AUDIO_OUTPUT != true)

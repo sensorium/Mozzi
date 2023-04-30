@@ -7,6 +7,8 @@
 
 // Audio output pin. If you want to change this, make sure to also set AUDIO_PWM_TIMER to whichever timer is responsible for your PWM pin, and set the other timers to non-conflicting values
 #define AUDIO_CHANNEL_1_PIN PA8  // Note: PB8 does not appear to be available as a PWM pin with this core.
+// The timer used for running the audio update loop. This must _not_ be the same timer responsible for PWM on the output pins! NOTE: Timer 3 appears to clash with SPI DMA transfers under some circumstances
+#define AUDIO_UPDATE_TIMER TIM2
 
 #if (AUDIO_MODE == HIFI)
 // Second out pin for HIFI mode. This must be on the same timer as AUDIO_CHANNEL_1_PIN!

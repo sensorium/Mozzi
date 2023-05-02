@@ -84,7 +84,7 @@ void checkADCConversionComplete() {
 
 //// BEGIN AUDIO OUTPUT code ///////
 #if (EXTERNAL_AUDIO_OUTPUT == true)
-HardwareTimer audio_update_timer(2);
+HardwareTimer audio_update_timer(TIM2);
 #else
 HardwareTimer audio_update_timer(AUDIO_UPDATE_TIMER);
 HardwareTimer *pwm_timer_ht;

@@ -61,6 +61,16 @@
 #define IS_GIGA() 0
 #endif
 
+// Arduino Uno R4 (FSP arch)
+
+#if (defined(ARDUINO_FSP))
+#define IS_FSP() 1
+#else
+#define IS_FSP() 0
+#endif
+
+
+
 // STM32 boards (note that only the maple based core is supported at this time. If another cores is to be supported in the future, this define should be split.
 #if (defined(__arm__) && !IS_TEENSY3() && !IS_SAMD21() && !IS_TEENSY4() && !IS_RP2040() && !IS_MBED())
 #define IS_STM32() 1
@@ -80,7 +90,7 @@
 #define IS_ESP32() 0
 #endif
 
-#if !(IS_AVR() || IS_TEENSY3() || IS_TEENSY4() || IS_STM32() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() || IS_RP2040() || IS_MBED())
+#if !(IS_AVR() || IS_TEENSY3() || IS_TEENSY4() || IS_STM32() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() || IS_RP2040() || IS_MBED() || IS_FSP())
 #error Your hardware is not supported by Mozzi or not recognized. Edit hardware_defines.h to proceed.
 #endif
 

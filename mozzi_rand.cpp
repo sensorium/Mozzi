@@ -50,7 +50,7 @@ for randomSeed(). randSeed is the same as xorshift96Seed(), but easier to
 remember. 
 @param seed a number to use as a seed.
 */
-void randSeed(long seed)
+void randSeed(unsigned long seed)
 {
 	x=seed;
 }
@@ -155,7 +155,7 @@ void randSeed() {
 Initialises Mozzi's (pseudo)random number generator xorshift96() with a chosen seed number.
 @param seed a number to use as a seed.
 */
-void xorshiftSeed(long seed)
+void xorshiftSeed(unsigned long seed)
 {
 	x=seed;
 }

@@ -345,10 +345,9 @@ on the RP2040 SDK API. Tested on a Pi Pico.
 ### Arduino Giga/MBED
 port by Thomas Friedrichsmeier & Thomas Combriat
 
-Compiles and runs using Arduino's standard and Arduino_AdvancedAnalog libraries.
+Compiles and runs using Arduino's standard and Arduino_AdvancedAnalog libraries. This port is still **experimental**, testing reveals some instabilities for some configurations (in particular with USE_AUDIO_INPUT) that are under active investigations.
 
 - This port is not complete yet, in particular:
-  - AUDIO_INPUT is not implemented (yet).
   - Asynchroneous analog reads are not implemented (yet), `mozziAnalogRead()` relays to `analogRead()`.
   - HIFI mode is not implemented.
 - In addition to using an user-defined `audioOutput()` by setting `EXTERNAL_AUDIO_OUTPUT` to `true` in mozzi_config.h, two bare chip output modes exist (configurable in AudioConfigMBED.h):

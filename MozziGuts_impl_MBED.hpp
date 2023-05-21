@@ -14,8 +14,43 @@
 #  error "Wrong implementation included for this platform"
 #endif
 
+#define CHUNKSIZE 64
 
 ////// BEGIN analog input code ////////
+
+#if (USE_AUDIO_INPUT)
+#define AUDIO_INPUT_MODE AUDIO_INPUT_CUSTOM
+
+#include <Arduino_AdvancedAnalog.h>
+
+AdvancedADC adc(AUDIO_INPUT_PIN);
+Sample inbuf[CHUNKSIZE];
+int inbufpos=0; 
+
+bool audioInputAvailable() {
+  if (inbufpos >= CHUNKSIZE) {
+    if (!adc.available()) return false;
+    SampleBuffer buf = adc.read();
+    memcpy(inbuf,buf.data(), CHUNKSIZE*sizeof(Sample));
+    inbufpos = 0;
+    buf.release();
+    return true;
+  }
+  else return true;
+}
+AudioOutputStorage_t readAudioInput(){
+  return inbuf[inbufpos++];
+}
+
+
+static void startAudioInput() {
+  if (!adc.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZE, 256/CHUNKSIZE)) {
+    Serial.println("Failed to start analog acquisition!");
+    while (1);
+  }
+}
+#endif
+
 
 /** NOTE: This section deals with implementing (fast) asynchronous analog reads, which form the backbone of mozziAnalogRead(), but also of USE_AUDIO_INPUT (if enabled).
  *  This template provides empty/dummy implementations to allow you to skip over this section, initially. Once you have an implementation, be sure to enable the
@@ -65,6 +100,9 @@ void setupFastAnalogRead(int8_t speed) {
  *  possibly calibration. */
 void setupMozziADC(int8_t speed) {
 #warning Fast analog read not implemented on this platform
+  #if (USE_AUDIO_INPUT)
+      startAudioInput();
+  #endif
 }
 
 /* NOTE: Most platforms call a specific function/ISR when conversion is complete. Provide this function, here.
@@ -73,6 +111,9 @@ void stm32_adc_eoc_handler() {
   advanceADCStep();
 }
 */
+
+
+
 ////// END analog input code ////////
 
 ////// BEGIN audio output code //////
@@ -101,7 +142,6 @@ void stopMozzi() {
 
 #include <Arduino_AdvancedAnalog.h>
 
-#define CHUNKSIZE 64
 AdvancedDAC dac1(AUDIO_CHANNEL_1_PIN);
 Sample buf1[CHUNKSIZE];
 #if (AUDIO_CHANNELS > 1)
@@ -112,7 +152,8 @@ int bufpos = 0;
 
 inline void commitBuffer(Sample buffer[], AdvancedDAC &dac) {
   SampleBuffer dmabuf = dac.dequeue();
-  for (int i = 0; i < dmabuf.size(); ++i) memcpy(dmabuf.data(), buffer, CHUNKSIZE*sizeof(Sample));
+  // NOTE: Yes, this is silly code, and originated as an accident. Somehow it appears to help _a little_ against current problem wrt DAC stability
+  for (unsigned int i=0;i<CHUNKSIZE;i++) memcpy(dmabuf.data(), buffer, CHUNKSIZE*sizeof(Sample));
   dac.write(dmabuf);
 }
 
@@ -133,20 +174,23 @@ inline void audioOutput(const AudioOutput f) {
 }
 
 bool canBufferAudioOutput() {
-  // NOTE: In case of stereo, we *assume* the DACs to be running exactly in sync. However, this is safe enough to do, as AdvancedDAC::dequeue() will wait if necessary.
-  return (bufpos < CHUNKSIZE || dac1.available());
+  return (bufpos < CHUNKSIZE || (dac1.available()
+#if (AUDIO_CHANNELS > 1)
+    && dac2.available()
+#endif
+  ));
 }
 
 static void startAudio() {
   //NOTE: DAC setup currently affected by https://github.com/arduino-libraries/Arduino_AdvancedAnalog/issues/35 . Don't expect this to work, until using a fixed version fo Arduino_AdvancedAnalog!
   if (!dac1.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZE, 256/CHUNKSIZE)) {
-      Serial.println("Failed to start DAC1 !");
-      while (1);
+    Serial.println("Failed to start DAC1 !");
+    while (1);
   }
 #if (AUDIO_CHANNELS > 1)
   if (!dac2.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZE, 256/CHUNKSIZE)) {
-      Serial.println("Failed to start DAC2 !");
-      while (1);
+    Serial.println("Failed to start DAC2 !");
+    while (1);
   }
 #endif
 }

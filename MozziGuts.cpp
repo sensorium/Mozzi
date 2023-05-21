@@ -18,6 +18,10 @@
 //#include "mozzi_utils.h"
 #include "AudioOutput.h"
 
+#define AUDIO_INPUT_NONE 0
+#define AUDIO_INPUT_LEGACY 1
+#define AUDIO_INPUT_CUSTOM 2
+
 
 // Forward declarations of functions to be provided by platform specific implementations
 #if (!BYPASS_MOZZI_OUTPUT_BUFFER)
@@ -49,6 +53,15 @@ static void startSecondADCReadOnCurrentChannel();
 #  error "Platform not (yet) supported. Check MozziGuts_impl_template.hpp and existing implementations for a blueprint for adding your favorite MCU."
 #endif
 
+/* Retro-compatibility with "legacy" boards which use the async
+   ADC for getting AUDIO_INPUT
+*/
+#if (defined(USE_AUDIO_INPUT) && !defined(AUDIO_INPUT_MODE))
+    #define AUDIO_INPUT_MODE AUDIO_INPUT_LEGACY
+#elif !defined(AUDIO_INPUT_MODE)
+    #define AUDIO_INPUT_MODE AUDIO_INPUT_NONE
+#endif
+
 
 static uint8_t adc_count = 0;
 
@@ -70,13 +83,14 @@ CircularBuffer<AudioOutput_t> output_buffer;  // fixed size 256
 #  define canBufferAudioOutput() (!output_buffer.isFull())
 #  define bufferAudioOutput(f) output_buffer.write(f)
 static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
-#  if (USE_AUDIO_INPUT == true)
+
+#if (AUDIO_INPUT_MODE == AUDIO_INPUT_LEGACY) // in that case, we rely on asynchroneous ADC reads implemented for mozziAnalogRead to get the audio in samples
   adc_count = 0;
   startSecondADCReadOnCurrentChannel();  // the current channel is the AUDIO_INPUT pin
 #  endif
   audioOutput(output_buffer.read());
 }
-#endif
+#endif  // #if (AUDIO_INPUT_MODE == AUDIO_INPUT_LEGACY)
 ////// END Output buffering ///////
 
 
@@ -104,7 +118,7 @@ void adcReadSelectedChannels() {
 __attribute__((noinline)) void adcStartReadCycle() {
 	if (current_channel < 0) // last read of adc_channels_to_read stack was empty, ie. all channels from last time have been read
 	{
-#if (USE_AUDIO_INPUT == true)
+#if (AUDIO_INPUT_MODE == AUDIO_INPUT_LEGACY) // use of async ADC for audio input
 		adc_channels_to_read.push(AUDIO_INPUT_PIN); // for audio
 #else
 		adcReadSelectedChannels();
@@ -125,13 +139,15 @@ int mozziAnalogRead(uint8_t pin) {
 }
 
 #if (USE_AUDIO_INPUT == true)
+static AudioOutputStorage_t audio_input; // holds the latest audio from input_buffer
+AudioOutputStorage_t getAudioInput() { return audio_input; }
+#endif
+
+#if (AUDIO_INPUT_MODE == AUDIO_INPUT_LEGACY)
 // ring buffer for audio input
 CircularBuffer<unsigned int> input_buffer; // fixed size 256
-
-static int audio_input; // holds the latest audio from input_buffer
-
-int getAudioInput() { return audio_input; }
-
+#define audioInputAvailable() (!input_buffer.isEmpty())
+#define readAudioInput() (input_buffer.read())
 /** NOTE: Triggered at AUDIO_RATE via defaultAudioOutput(). In addition to the AUDIO_INPUT_PIN, at most one reading is taken for mozziAnalogRead().  */
 inline void advanceADCStep() {
   switch (adc_count) {
@@ -197,11 +213,6 @@ inline void advanceControlLoop() {
 void audioHook() // 2us on AVR excluding updateAudio()
 {
 // setPin13High();
-#if (USE_AUDIO_INPUT == true)
-  if (!input_buffer.isEmpty())
-    audio_input = input_buffer.read();
-#endif
-
   if (canBufferAudioOutput()) {
     advanceControlLoop();
 #if (STEREO_HACK == true)
@@ -213,7 +224,11 @@ void audioHook() // 2us on AVR excluding updateAudio()
 
 #if defined(LOOP_YIELD)
     LOOP_YIELD
-#endif      
+#endif
+
+#if (USE_AUDIO_INPUT == true)
+    if (audioInputAvailable()) audio_input = readAudioInput(); 
+#endif
   }
 // Like LOOP_YIELD, but running every cycle of audioHook(), not just once per sample
 #if defined(AUDIO_HOOK_HOOK)
@@ -243,7 +258,7 @@ unsigned long mozziMicros() { return audioTicks() * MICROS_PER_AUDIO_TICK; }
 
 ////// BEGIN initialization ///////
 void startMozzi(int control_rate_hz) {
-  setupMozziADC(); // you can use setupFastAnalogRead() with FASTER or FASTEST
+  setupMozziADC(); // you can use setupFastAnalogRead() with FASTER_ADC or FASTEST_ADC
                    // in setup() if desired (not for Teensy 3.* )
   setupFastAnalogRead();
   // delay(200); // so AutoRange doesn't read 0 to start with

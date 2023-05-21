@@ -191,7 +191,7 @@ Various examples from [Pure Data](http://puredata.info/) by Miller Puckette
 ### STM32
 The situation on STM32-based boards is rather confusing, as there are several competing Arduino cores. Importantly:
 - Some boards use dedicated cores (e.g. Arduino Giga / Protenta) etc. For those, see the relevant sections (if we support them)
-- There is a series of libmaple-based cores, the most recent offsptring apparentely being [Stev Strong's libmaple-based core](https://github.com/stevstrong/Arduino_STM32/). These are highly optimized, and provide very complete support, but only for a limited number of boards. Unfortunately, at the time of this writing (2023/04), they are not available for installation via the Arduino Board Manager, and they do not currently seem actively maintained.
+- There is a series of libmaple-based cores, including [Roger Clark's libmaple-based core](https://github.com/rogerclarkmelbourne/Arduino_STM32). These are highly optimized, and provide very complete support, but only for a limited number of boards. Unfortunately, at the time of this writing (2023/04), they are not available for installation via the Arduino Board Manager, and they do not currently seem actively maintained.
 - A generic Arduino core for STM32 is the [STM32duino core](https://github.com/stm32duino/Arduino_Core_STM32). It supports a huge step of boards, and seems to have offical backing by STM, but some features of the libmaple based cores are still lacking. To complete confusion, this core now uses the label "STM32duino", which used to be what the libmaple cores above were known by (don't blame Mozzi for this mess!).
 
 Mozzi supports both of the latter, but currently not at the same level of completeness.
@@ -200,7 +200,10 @@ Mozzi supports both of the latter, but currently not at the same level of comple
 port by Thomas Friedrichsmeier
 
 Compiles for and runs on a STM32F103C8T6 blue pill board, with a bunch of caveats (see below), i.e. on a board _without_ a
-real DAC. Should probably run on any other board supported by [Stev Strong's libmaple-based core](https://github.com/stevstrong/Arduino_STM32/) (although this theory is untested).
+real DAC. Should probably run on any other board supported by [Roger Clark's libmaple-based core](https://github.com/rogerclarkmelbourne/Arduino_STM32) (although this theory is untested).
+
+*NOTE* that at the time of this writing, [Stev Strong's slightliy more recent fork of this core](https://github.com/stevstrong/Arduino_STM32/) does *not* work with
+Mozzi, apparently due to a bug in pwmWrite().
 
 - You will need a very recent checkout of the Arduino_STM32 repository, otherwise compilation will fail.
 - Audio output is to pin PB8, by default (HIFI-mode: PB8 and PB9)

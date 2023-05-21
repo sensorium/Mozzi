@@ -72,7 +72,9 @@ Teensy 4.0 4.1 | A8 | yes
 Gemma M0 | A0 | yes
 Adafruit Playground Express | Built in Speaker | yes    
 Sanguino | 13	| -  
-STM32duino (see "Hardware specific notes", below) | PB8 | yes
+STM32F1 maple core (see "Hardware specific notes", below) | PB8 | yes
+STM32F1 STM core (see "Hardware specific notes", below) | PA8 | yes
+STM32F4 STM core (see "Hardware specific notes", below) | PA8 | yes
 ESP8266 *see details* | GPIO2 | yes
 RP2040 | 0 | yes
 
@@ -186,11 +188,22 @@ Various examples from [Pure Data](http://puredata.info/) by Miller Puckette
 
 ## Hardware specific notes
 
-### STM32(duino)
+### STM32
+The situation on STM32-based boards is rather confusing, as there are several competing Arduino cores. Importantly:
+- Some boards use dedicated cores (e.g. Arduino Giga / Protenta) etc. For those, see the relevant sections (if we support them)
+- There is a series of libmaple-based cores, including [Roger Clark's libmaple-based core](https://github.com/rogerclarkmelbourne/Arduino_STM32). These are highly optimized, and provide very complete support, but only for a limited number of boards. Unfortunately, at the time of this writing (2023/04), they are not available for installation via the Arduino Board Manager, and they do not currently seem actively maintained.
+- A generic Arduino core for STM32 is the [STM32duino core](https://github.com/stm32duino/Arduino_Core_STM32). It supports a huge step of boards, and seems to have offical backing by STM, but some features of the libmaple based cores are still lacking. To complete confusion, this core now uses the label "STM32duino", which used to be what the libmaple cores above were known by (don't blame Mozzi for this mess!).
+
+Mozzi supports both of the latter, but currently not at the same level of completeness.
+
+#### STM32 libmaple based
 port by Thomas Friedrichsmeier
 
 Compiles for and runs on a STM32F103C8T6 blue pill board, with a bunch of caveats (see below), i.e. on a board _without_ a
-real DAC. Should probably run on any other board supported by [STM32duino](https://github.com/rogerclarkmelbourne/Arduino_STM32) (STM32F4 is __not__ supported for now).
+real DAC. Should probably run on any other board supported by [Roger Clark's libmaple-based core](https://github.com/rogerclarkmelbourne/Arduino_STM32) (although this theory is untested).
+
+*NOTE* that at the time of this writing, [Stev Strong's slightliy more recent fork of this core](https://github.com/stevstrong/Arduino_STM32/) does *not* work with
+Mozzi, apparently due to a bug in pwmWrite().
 
 - You will need a very recent checkout of the Arduino_STM32 repository, otherwise compilation will fail.
 - Audio output is to pin PB8, by default (HIFI-mode: PB8 and PB9)
@@ -198,10 +211,27 @@ real DAC. Should probably run on any other board supported by [STM32duino](https
 - Timers 4 (PWM output), and 2 (audio rate) are used by default.
 - The STM32-specific options (pins, timers) can be configured in AudioConfigSTM32.h
 - Default audio resolution is currently set to 10 bits, which yields 70khZ PWM frequency on a 72MHz CPU. HIFI mode is 2*7bits at up to 560Khz (but limited to 5 times audio rate)
-- HIFI_MODE did not get much testing
-- STEREO not yet implemented (although that should not be too hard to do)
 - AUDIO_INPUT is completely untested (but implemented in theory)
 - Note that AUDIO_INPUT and mozziAnalogRead() return values in the STM32's full ADC resolution of 0-4095 rather than AVR's 0-1023.
+- twi_nonblock is not ported
+
+#### STM32 STM32duino
+port by Thomas Friedrichsmeier
+
+Tested on a STM32F103C8T6 blue pill board as well as an STM32F411CE black pill board, i.e. on sboards _without_ a
+real DAC. Compiles and runs, with a bunch of caveats (see below). Should probably run on any other board supported by the
+[STM32duino core](https://github.com/stm32duino/Arduino_Core_STM32) (although this theory is untested).
+When trying any other board, you probably want to check the platform specific settings (see below), carefully, importantly, whether the desired output resolution is
+achievable, and whether the desired output pins are PWM capable.
+
+- Audio output is PWM-based to pin PA8, by default (HIFI-mode: PA8 and PA9)
+- Timers 3 (PWM output), and 2 (audio rate) are used by default.
+- The STM32-specific options (pins, timers) can be configured in AudioConfigSTM32duino.h
+- Default audio resolution is currently set to 10 bits, which yields 70khZ PWM frequency on a 72MHz CPU. IMPORTANT: Should your CPU be slower, you will need to lower the audio resolution!
+- HIFI mode is 2*7bits at up to 560Khz with a 72MHz CPU (but limited to 5 times audio rate)
+- Analog input implementation is somewhat experimental, and may not be able to service a whole lot of pins (contributions welcome)
+- AUDIO_INPUT is completely untested (but implemented in theory)
+- Note that AUDIO_INPUT and mozziAnalogRead() return values in the STM32's full ADC resolution (the exact range depending on the board in use) rather than AVR's 0-1023.
 - twi_nonblock is not ported
 
 ### Teensy 3.0/3.1/3.2/3.4/3.5/LC

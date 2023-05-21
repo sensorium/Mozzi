@@ -35,6 +35,8 @@ static void startSecondADCReadOnCurrentChannel();
 #  include "MozziGuts_impl_AVR.hpp"
 #elif IS_STM32()
 #  include "MozziGuts_impl_STM32.hpp"
+#elif IS_STM32DUINO()
+#  include "MozziGuts_impl_STM32duino.hpp"
 #elif IS_ESP32()
 #  include "MozziGuts_impl_ESP32.hpp"
 #elif IS_ESP8266()
@@ -90,7 +92,6 @@ static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
 }
 #endif  // #if (AUDIO_INPUT_MODE == AUDIO_INPUT_LEGACY)
 ////// END Output buffering ///////
-
 
 
 ////// BEGIN Analog input code ////////
@@ -226,9 +227,9 @@ void audioHook() // 2us on AVR excluding updateAudio()
 #endif
 
 #if (USE_AUDIO_INPUT == true)
-  if (audioInputAvailable()) audio_input = readAudioInput(); 
+    if (audioInputAvailable()) audio_input = readAudioInput(); 
 #endif
-      }
+  }
 // Like LOOP_YIELD, but running every cycle of audioHook(), not just once per sample
 #if defined(AUDIO_HOOK_HOOK)
     AUDIO_HOOK_HOOK

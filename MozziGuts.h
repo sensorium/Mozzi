@@ -206,6 +206,8 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #include "AudioConfigTeensy4.h"
 #elif IS_STM32()
 #include "AudioConfigSTM32.h"
+#elif IS_STM32DUINO()
+#include "AudioConfigSTM32duino.h"
 #elif IS_ESP8266()
 #include "AudioConfigESP.h"
 #elif IS_ESP32()

@@ -90,10 +90,10 @@ static void startAudio() {
   uint16_t overflow = (uint16_t)((period_cyc + (prescaler / 2)) / prescaler);
   audio_update_timer.setPrescaleFactor(prescaler);
   audio_update_timer.setOverflow(overflow);
-  audio_update_timer.setChannel1Mode(TIMER_OUTPUT_COMPARE);
+  audio_update_timer.setMode(TIMER_CH1, TIMER_OUTPUT_COMPARE);
   audio_update_timer.setCompare(TIMER_CH1,
                                 1); // Interrupt 1 count after each update
-  audio_update_timer.attachCompare1Interrupt(defaultAudioOutput);
+  audio_update_timer.attachInterrupt(TIMER_CH1, defaultAudioOutput);
   audio_update_timer.refresh();
   audio_update_timer.resume();
 

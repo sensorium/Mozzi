@@ -13,7 +13,7 @@
 #define AUDIO_CHANNEL_2_PIN 10
 #endif
 
-#define AUDIO_BITS 9 // random value for now
+#define AUDIO_BITS 8 // random value for now
 
 #define AUDIO_BITS_PER_CHANNEL AUDIO_BITS
 

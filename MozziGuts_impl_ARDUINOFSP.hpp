@@ -63,22 +63,26 @@ void stm32_adc_eoc_handler() {
 
 
 //// BEGIN AUDIO OUTPUT code ///////
-FspTimer timer1;
+
 
 #if (EXTERNAL_AUDIO_OUTPUT != true) // otherwise, the last stage - audioOutput() - will be provided by the user
 inline void audioOutput(const AudioOutput f) {
+  /*
   analogWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
 #if (AUDIO_CHANNELS > 1)
   analogWrite(AUDIO_CHANNEL_2_PIN, f.r()+AUDIO_BIAS);
-#endif
+  #endif*/
 }
-#endif
-
+#else  // manually setting a timer for EXTERNAL_AUDIO_OUTPUT
+FspTimer timer1;
 void timer_callbar_dummy(timer_callback_args_t __attribute__((unused)) *args){defaultAudioOutput();};
+#endif
 
 static void startAudio() {
 
-  pinMode(AUDIO_CHANNEL_1_PIN,OUTPUT);
+  //pinMode(AUDIO_CHANNEL_1_PIN,OUTPUT);
+
+#if (EXTERNAL_AUDIO_OUTPUT == true)
   timer1.set_period(1.0 / AUDIO_RATE);
   timer1.set_irq_callback(timer_callbar_dummy);
 
@@ -86,10 +90,8 @@ static void startAudio() {
   uint8_t type=0;
   int8_t tindex = FspTimer::get_available_timer(type);
 
-    if (tindex < 0) {
-    tindex = FspTimer::get_available_timer(type, true);
-  }
-
+  if (tindex < 0) tindex = FspTimer::get_available_timer(type, true);
+    
   if (tindex >= 0) {
     // defaultAudioOutput cannot be used straight, so we are using a dummy, with no argument, linking to defaultAudioOutput
     timer1.begin(TIMER_MODE_PERIODIC, type, tindex,AUDIO_RATE, 50.0f, timer_callbar_dummy);
@@ -97,6 +99,7 @@ static void startAudio() {
     timer1.open();
     timer1.start();
   }
+#else
 
   
   //Serial.println("sa");
@@ -106,12 +109,15 @@ static void startAudio() {
   // 1) setting up some DAC mechanism (e.g. setting up a PWM pin with appropriate resolution
   // 2a) setting up a timer to call defaultAudioOutput() at AUDIO_RATE
   // OR 2b) setting up a buffered output queue such as I2S (see ESP32 / ESP8266 for examples for this setup)
-#if (EXTERNAL_AUDIO_OUTPUT != true)
   // remember that the user may configure EXTERNAL_AUDIO_OUTPUT, in which case, you'll want to provide step 2a), and only that.
   #endif
 }
 
 void stopMozzi() {
+#if (EXTERNAL_AUDIO_OUTPUT)
   timer1.stop();
+#else
+
+#endif
 }
 //// END AUDIO OUTPUT code ///////

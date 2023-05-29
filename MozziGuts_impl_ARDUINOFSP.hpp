@@ -68,10 +68,15 @@ void setupMozziADC(int8_t speed) {
 FspTimer timer;
 
 #if (EXTERNAL_AUDIO_OUTPUT != true) // otherwise, the last stage - audioOutput() - will be provided by the user
+FspTimer timer_dac;
 #include <dac.h>
 #include <FspTimer.h>
 #include <r_dtc.h>
 
+
+/*
+Good parts of the following are from analogWave example class
+*/
 
 volatile uint32_t pin;
 CircularBuffer<uint16_t> output_buffer;
@@ -153,13 +158,8 @@ void dac_init() {
 #if EXTERNAL_AUDIO_OUTPUT == true
 void timer_callback_dummy(timer_callback_args_t __attribute__((unused)) *args){defaultAudioOutput();};
 #else
-void timer_callback_dummy(timer_callback_args_t __attribute__((unused)) *args){
-
-  output_buffer.read();
-  digitalWrite(LED_BUILTIN,HIGH);
-
-
-}; // to empty the buffer (the dac does not take care of it)
+//void timer_callback_dummy(timer_callback_args_t __attribute__((unused)) *args){
+void timer_callback_dummy(timer_callback_args_t __attribute__((unused)) *args){output_buffer.read();}; // to empty the buffer (the dac does not take care of it), a bit a waste of timer...
 #endif
 
 void timer_init() {
@@ -171,13 +171,25 @@ void timer_init() {
   }
 
   if (tindex >= 0) {
-#if EXTERNAL_AUDIO_OUTPUT != true
-    FspTimer::force_use_of_pwm_reserved_timer();
-#endif
     timer.begin(TIMER_MODE_PERIODIC, type, tindex, AUDIO_RATE, 50.0,timer_callback_dummy);
     timer.setup_overflow_irq();
-#if EXTERNAL_AUDIO_OUTPUT != true
-     dtc_cfg_extend.activation_source = timer.get_cfg()->cycle_end_irq;
+  }
+  
+#if EXTERNAL_AUDIO_OUTPUT != true // we need to set up another timer for dac caring
+  // note: it is running at the same speed than the other one, but could not manage
+  // to get the other one updating the dac and removing the samples from the buffer…
+    tindex = FspTimer::get_available_timer(type);
+
+  if (tindex < 0) {
+    tindex = FspTimer::get_available_timer(type, true);
+  }
+
+  if (tindex >= 0) {
+    FspTimer::force_use_of_pwm_reserved_timer();
+    timer_dac.begin(TIMER_MODE_PERIODIC, type, tindex, AUDIO_RATE, 50.0);
+    timer_dac.setup_overflow_irq();    
+     dtc_cfg_extend.activation_source = timer_dac.get_cfg()->cycle_end_irq;
+     timer_dac.open();    
 #endif
     timer.open();
   }
@@ -203,6 +215,7 @@ static void startAudio() {
   dtc_cfg.p_info->p_src = output_buffer.address();
   dtc_cfg.p_info->length = MOZZI_BUFFER_SIZE;
   R_DTC_Reconfigure(&dtc_ctrl, dtc_cfg.p_info);
+  timer_dac.start();
 #endif
   timer.start();
   

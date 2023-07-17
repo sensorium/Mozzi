@@ -53,6 +53,7 @@ Feedback about others is welcome.
 Model | Pin | Tested
 ----- | --- | ------
 Arduino Uno | 9	| yes
+Arduino Uno R4 | A0 | yes
 Arduino Duemilanove | 9	| yes
 Arduino Nano | 9 | yes
 Arduino Pro Mini | 9 | yes
@@ -354,6 +355,17 @@ Compiles and runs using Arduino's standard and Arduino_AdvancedAnalog libraries.
   - INTERNAL_DAC: uses the DAC present on the board and outputs by default on pin A13 (3.5mm jack connector's tip). Stereo mode uses pin A12 (3.5mm jack connector's first ring) additionally.
   - PDM_VIA_SERIAL: returns a pulse-density modulated signal on one of the hardware UART of the board (Serial ports). Default is using the SERIAL2, on pin D18.
 - This port should support other MBED based Arduino boards like the Arduino Portenta, in *theory*. It has only been tested on the giga but feedbacks are welcome!
+
+### Arduino Uno R4
+port by Thomas Combriat
+
+Compiles and runs using Arduino's standard library (Renesas 0.8.7 at the time of this writing).
+
+- A few particularities:
+  - Because this board has an on-board DAC (A0), but only one, STEREO is not implemented and Mozzi uses this pin. Usage of other pins using PWM for instance is not implemented yet.
+  - Two timers are claimed by Mozzi when using the on-board DAC, one when using `EXTERNAL_AUDIO_OUTPUT`.
+  - `mozziAnalogRead()` is not yet implemented and falls back on Arduino's `analogRead()`.
+  
 
 ***
 

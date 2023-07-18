@@ -9,7 +9,7 @@
 #include "mozzi_pgmspace.h"
 
 #define WHITENOISE8192_NUM_CELLS 8192
-#define WHITENOISE8192_SAMPLERATE 8192
+#define WHITENOISE8192_SAMPLERATE 16384
 
 /** @ingroup tables
 White noise table.

@@ -10,7 +10,7 @@
  *
  */
 
-#if !(IS_FSP())
+#if !(IS_RENESAS())
 #  error "Wrong implementation included for this platform"
 #endif
 

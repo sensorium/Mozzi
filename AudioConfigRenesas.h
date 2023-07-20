@@ -1,7 +1,7 @@
-#ifndef AUDIOCONFIGARDUINOFSP_H
-#define AUDIOCONFIGARDUINOFSP_H
+#ifndef AUDIOCONFIGRENESAS_H
+#define AUDIOCONFIGRENESAS_H
 
-#if not IS_FSP()
+#if not IS_RENESAS()
 #error This header should be included for Arduino FSB board (Uno R4/Renesa) family, only
 #endif
 
@@ -21,5 +21,5 @@
 
 #define BYPASS_MOZZI_OUTPUT_BUFFER true  // Mozzi initial buffer are not of the good type, so we bypass it and create our own
 
-#endif        //  #ifndef AUDIOCONFIGARDUINOFSP_H
+#endif        //  #ifndef AUDIOCONFIGRENESAS_H
 

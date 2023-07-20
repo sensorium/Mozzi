@@ -224,8 +224,8 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #include "AudioConfigStandardPlus.h"
 #elif IS_AVR() && (AUDIO_MODE == HIFI)
 #include "AudioConfigHiSpeed14bitPwm.h"
-#elif IS_FSP()
-#include "AudioConfigArduinoFSP.h"
+#elif IS_RENESAS()
+#include "AudioConfigRenesas.h"
 #endif
 #else // EXTERNAL_AUDIO_OUTPUT==true
 #if !defined(EXTERNAL_AUDIO_BITS)

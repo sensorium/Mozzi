@@ -64,6 +64,19 @@ void setupMozziADC(int8_t speed) {
 
 //// BEGIN AUDIO OUTPUT code ///////
 
+/*
+The strategy to output sound on this platform differs somehow from what is usually done in Mozzi.
+Usually, Mozzi's circular buffer are read from the outputting device (PWM, DAC...) or committed as
+a whole (for the MBED platform) and thus emptied. Once a free spot is present, Mozzi fills it with updateAudio().
+Here, the DAC works straight from a buffer, outputting samples from it at a fixed rate. 
+This is sweet as we can branch it straight to Mozzi's buffer and it will read from it without
+further action from us.
+The big difference is that it *does not* empty the buffer, nor notify that something has been
+read, which is okay for outputting a periodic signal where just a full period is present
+in the buffer.
+As a consequence we need to artificially empty the buffer at the same rate that the DAC is reading
+it.
+*/
 
 FspTimer timer;
 
@@ -83,7 +96,7 @@ void timer_callback_dummy(timer_callback_args_t __attribute__((unused)) *args){o
 #endif
 
 void timer_init() {
-  uint8_t type = 0;
+  uint8_t type;
   int8_t tindex = FspTimer::get_available_timer(type);
 
   if (tindex < 0) {
@@ -113,7 +126,7 @@ void timer_init() {
 #endif
     timer.open();
   }
-}
+  }
 
 
 inline void audioOutput(const AudioOutput f) {
@@ -126,12 +139,13 @@ static void startAudio() {
 #if EXTERNAL_AUDIO_OUTPUT != true
   dac_creation(AUDIO_CHANNEL_1_PIN);
 #endif
-  timer_init();
+  timer_init(); // this need to be done between the DAC creation and initialization in the case where the on-board DAC is used, hence the ugly repetition here.
 #if EXTERNAL_AUDIO_OUTPUT != true
   dac_init();
   R_DTC_Open(&dtc_ctrl, &dtc_cfg);
   R_DTC_Enable(&dtc_ctrl);
 
+  // The following branches the DAC straight on Mozzi's circular buffer.
   dtc_cfg.p_info->p_src = output_buffer.address();
   dtc_cfg.p_info->length = MOZZI_BUFFER_SIZE;
   R_DTC_Reconfigure(&dtc_ctrl, dtc_cfg.p_info);

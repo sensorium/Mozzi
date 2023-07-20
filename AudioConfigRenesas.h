@@ -13,7 +13,7 @@
 #define AUDIO_CHANNEL_2_PIN 10
 #endif
 
-#define AUDIO_BITS 12 // random value for now
+#define AUDIO_BITS 12 // outputting resolution of the on-bard DAC. Other values are *NOT* expected to work.
 
 #define AUDIO_BITS_PER_CHANNEL AUDIO_BITS
 

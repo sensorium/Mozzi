@@ -18,6 +18,9 @@ dtc_extended_cfg_t dtc_cfg_extend;
 transfer_cfg_t dtc_cfg;
 
 ////////////// DAC CREATION AND FIRST INIT ///////////////////
+// DAC creation, will take care of specifying the number of bits according to the
+// capacity of the DAC (12 only for now) and set up the transfer mode straight from
+// an external buffer.
 void dac_creation(pin_size_t pinN) {
   if (IS_DAC(pinN)) {
     auto cfg_dac = getPinCfgs(pinN, PIN_CFG_REQ_DAC);
@@ -67,6 +70,8 @@ void dac_creation(pin_size_t pinN) {
   dtc_cfg_extend.activation_source = FSP_INVALID_VECTOR;
 }
 
+
+// DAC initialization
 void dac_init() {
   if (IS_DAC_8BIT(pin)) {
 #if DAC8_HOWMANY > 0
@@ -80,3 +85,4 @@ void dac_init() {
     }
   }
 }
+

@@ -1,3 +1,5 @@
+#ifndef INTTYPE_H_
+#define INTTYPE_H_
 
 template<uint8_t BYTES> struct IntegerType {
     // at an odd value, such as 3 bytes? Add one more byte (up to at most 8 bytes)..
@@ -25,3 +27,5 @@ template<> struct IntegerType<8> {
     typedef uint64_t unsigned_type;
     typedef int64_t signed_type;
 };
+
+#endif /* INTTYPE_H_ */

@@ -4,6 +4,7 @@ NEWS
 get the latest version from https://sensorium.github.io/Mozzi/
 
 not yet released (latest github version)
+- new partial port of the Arduino Uno R4
 - new partial port of the Arduino Giga by Thomas Friedrichsmeier & Thomas Combriat
 - new (partial) port to the STM32duino core by Thomas Friedrichsmeier
 - compilation fixes to old (libmaple-based) STM32 core

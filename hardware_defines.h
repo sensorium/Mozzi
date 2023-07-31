@@ -69,7 +69,14 @@
 #define IS_GIGA() 0
 #endif
 
-#if (defined(__arm__) && !IS_STM32() && !IS_TEENSY3() && !IS_TEENSY4() && !IS_RP2040() && !IS_SAMD21() && !IS_MBED())
+// Arduino Uno R4 (Renesas arch)
+#if (defined(ARDUINO_FSP))
+#define IS_RENESAS() 1
+#else
+#define IS_RENESAS() 0
+#endif
+
+#if (defined(__arm__) && !IS_STM32() && !IS_TEENSY3() && !IS_TEENSY4() && !IS_RP2040() && !IS_SAMD21() && !IS_MBED() && !IS_RENESAS())
 #define IS_STM32DUINO() 1
 #else
 #define IS_STM32DUINO() 0
@@ -87,7 +94,7 @@
 #define IS_ESP32() 0
 #endif
 
-#if !(IS_AVR() || IS_TEENSY3() || IS_TEENSY4() || IS_STM32() || IS_STM32DUINO() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() || IS_RP2040() || IS_MBED())
+#if !(IS_AVR() || IS_TEENSY3() || IS_TEENSY4() || IS_STM32() || IS_STM32DUINO() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() || IS_RP2040() || IS_MBED() || IS_RENESAS())
 #error Your hardware is not supported by Mozzi or not recognized. Edit hardware_defines.h to proceed.
 #endif
 

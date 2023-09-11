@@ -17,7 +17,6 @@ void startScan(int pin)
 {
   int32_t adc_idx = digitalPinToAnalogPin(pin);
   ADC_Container *_adc = get_ADC_container_ptr(adc_idx, cfg_adc);
-  //ADC_Container * _adc = &adc;
   _adc->cfg.mode = ADC_MODE_SINGLE_SCAN;
   pinPeripheral(digitalPinToBspPin(adc_idx), (uint32_t)IOPORT_CFG_ANALOG_ENABLE);
   _adc->channel_cfg.scan_mask |= (1 << GET_CHANNEL(cfg_adc));

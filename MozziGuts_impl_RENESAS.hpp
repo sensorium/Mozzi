@@ -54,7 +54,7 @@ void setupFastAnalogRead(int8_t speed) {
 }
 
 void setupMozziADC(int8_t speed) {
-  IRQManager::getInstance().addADCScanEnd(&adc, NULL);
+  IRQManager::getInstance().addADCScanEnd(&adc, NULL); // this is needed to change some config inside the ADC, even though we do not give the callback here (doing so crashes the board). The callback is declared to the ADC by: R_ADC_CallbackSet(&(_adc->ctrl), adc_callback, p_context, p_callback_memory); in MozziGuts_impl_RENESAS_ADC.hpp.
 }
 
   

@@ -131,19 +131,25 @@ public:
 		*/
 	void update(){ // control rate
 
-		switch(current_phase->phase_type) {
+        switch(current_phase->phase_type) {
 
 		case ATTACK:
-			checkForAndSetNextPhase(&decay);
-			break;
+			if (decay.lerp_steps > 0) {
+				checkForAndSetNextPhase(&decay);
+				break;
+			}
 
 		case DECAY:
-			checkForAndSetNextPhase(&sustain);
-			break;
+			if (sustain.lerp_steps > 0) {
+				checkForAndSetNextPhase(&sustain);
+				break;
+			}
 
 		case SUSTAIN:
-			checkForAndSetNextPhase(&release);
-			break;
+			if (release.lerp_steps > 0) {
+				checkForAndSetNextPhase(&release);
+				break;
+			}
 
 		case RELEASE:
 			checkForAndSetNextPhase(&idle);
@@ -152,7 +158,7 @@ public:
 		case IDLE:
 			adsr_playing = false;
 			break;
-		}
+        }
 	}
 
 
@@ -180,6 +186,16 @@ public:
 	void noteOn(bool reset=false){
 		if (reset) transition.set(0);
 		setPhase(&attack);
+		if (attack.lerp_steps == 0) {
+            if (decay.lerp_steps > 0)
+                setPhase(&decay);
+            else if (sustain.lerp_steps > 0)
+                setPhase(&sustain);
+            else if (release.lerp_steps > 0)
+                setPhase(&release);
+            else
+                setPhase(&idle);
+        }
 		adsr_playing = true;
 	}
 

@@ -56,6 +56,7 @@ Arduino Uno | 9	| yes
 Arduino Uno R4 | A0 | yes
 Arduino Duemilanove | 9	| yes
 Arduino Nano | 9 | yes
+Arduino Nano 33 Iot | A0 | yes
 Arduino Pro Mini | 9 | yes
 Arduino Leonardo | 9 | yes
 Arduino Mega | 11 | yes
@@ -362,10 +363,8 @@ port by Thomas Combriat
 Compiles and runs using Arduino's standard library (Renesas 0.8.7 at the time of this writing).
 
 - A few particularities:
-  - Because this board has an on-board DAC (A0), but only one, STEREO is not implemented and Mozzi uses this pin. Usage of other pins using PWM for instance is not implemented yet.
-  - Two timers are claimed by Mozzi when using the on-board DAC, one when using `EXTERNAL_AUDIO_OUTPUT`.
-  - `mozziAnalogRead()` is not yet implemented and falls back on Arduino's `analogRead()`.
-  
+  - Because this board has an on-board DAC (A0), but only one, STEREO is not implemented and Mozzi uses only this pin. Usage of other pins using PWM for instance is not implemented.
+  - Two timers are claimed by Mozzi when using the on-board DAC, one when using `EXTERNAL_AUDIO_OUTPUT`.  
 
 ***
 

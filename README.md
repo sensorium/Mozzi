@@ -364,7 +364,7 @@ Compiles and runs using Arduino's standard library (Renesas 0.8.7 at the time of
 - A few particularities:
   - Because this board has an on-board DAC (A0), but only one, STEREO is not implemented and Mozzi uses this pin. Usage of other pins using PWM for instance is not implemented yet.
   - Two timers are claimed by Mozzi when using the on-board DAC, one when using `EXTERNAL_AUDIO_OUTPUT`.
-  - `mozziAnalogRead()` is not yet implemented and falls back on Arduino's `analogRead()`.
+  - `mozziAnalogRead()` returns values in the Renesas' full ADC resolution of 0-16384 rather than AVR's 0-1023. *This might change in the near future for speed purposes.*
   
 
 ***

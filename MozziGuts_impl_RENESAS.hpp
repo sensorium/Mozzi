@@ -19,45 +19,45 @@
 
 ////// BEGIN analog input code ////////
 
-//#define MOZZI_FAST_ANALOG_IMPLEMENTED
 
-#define getADCReading() 0
+#define channelNumToIndex(channel) channel-14  // A0=14
+void const *const p_context = 0; // unused but needed for the ADC call
+adc_callback_args_t *const p_callback_memory = NULL;  // idem
+uint16_t cfg_adc = 0;  // put at 0 for starters but modified by the ADC_container
+uint8_t r4_pin; // to store it between calls
 
+void adc_callback(adc_callback_args_t *p_args) {
+  advanceADCStep();
+}
 
-#define channelNumToIndex(channel) channel
+#include "MozziGuts_impl_RENESAS_ADC.hpp"
+
+#define MOZZI_FAST_ANALOG_IMPLEMENTED
+
+#define getADCReading() readADC(r4_pin)
+
 uint8_t adcPinToChannelNum(uint8_t pin) {
   return pin;
 }
 
-/** NOTE: Code needed to trigger a conversion on a new channel */
 void adcStartConversion(uint8_t channel) {
-#warning Fast analog read not implemented on this platform
+  r4_pin = channel;  // remember for startSecondADCReadOnCurrentChannel()
+  startScan(r4_pin);
 }
 
-/** NOTE: Code needed to trigger a subsequent conversion on the latest channel. If your platform has no special code for it, you should store the channel from
- *  adcStartConversion(), and simply call adcStartConversion(previous_channel), here. */
 void startSecondADCReadOnCurrentChannel() {
-#warning Fast analog read not implemented on this platform
+  startScan(r4_pin);
 }
 
-/** NOTE: Code needed to set up faster than usual analog reads, e.g. specifying the number of CPU cycles that the ADC waits for the result to stabilize.
- *  This particular function is not super important, so may be ok to leave empty, at least, if the ADC is fast enough by default. */
 void setupFastAnalogRead(int8_t speed) {
-#warning Fast analog read not implemented on this platform
+  //#warning Fast analog read not implemented on this platform
 }
 
-/** NOTE: Code needed to initialize the ADC for asynchronous reads. Typically involves setting up an interrupt handler for when conversion is done, and
- *  possibly calibration. */
 void setupMozziADC(int8_t speed) {
-#warning Fast analog read not implemented on this platform
+  IRQManager::getInstance().addADCScanEnd(&adc, NULL); // this is needed to change some config inside the ADC, even though we do not give the callback here (doing so crashes the board). The callback is declared to the ADC by: R_ADC_CallbackSet(&(_adc->ctrl), adc_callback, p_context, p_callback_memory); in MozziGuts_impl_RENESAS_ADC.hpp.
 }
 
-/* NOTE: Most platforms call a specific function/ISR when conversion is complete. Provide this function, here.
- * From inside its body, simply call advanceADCStep(). E.g.:
- void stm32_adc_eoc_handler() {
- advanceADCStep();
- }
-*/
+  
 ////// END analog input code ////////
 
 

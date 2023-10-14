@@ -168,7 +168,7 @@ static uint8_t mozzi_TCCR4A, mozzi_TCCR4B, mozzi_TCCR4C, mozzi_TCCR4D,
 static void startAudio() {
   backupPreMozziTimer1();
   Timer1.initializeCPUCycles(
-      F_CPU / AUDIO_RATE-1,
+      (F_CPU/AUDIO_RATE)-1,
       PHASE_FREQ_CORRECT); // set period, phase and frequency correct
   TIMSK1 = _BV(TOIE1); // Overflow Interrupt Enable (when not using
                        // Timer1.attachInterrupt())
@@ -198,10 +198,10 @@ static void startAudio() {
   //	pinMode(AUDIO_CHANNEL_2_PIN, OUTPUT);	// set pin to output for audio
 #  if (AUDIO_MODE == STANDARD)
   Timer1.initializeCPUCycles(
-      F_CPU / AUDIO_RATE-1,
+      (F_CPU/AUDIO_RATE)-1,
       PHASE_FREQ_CORRECT); // set period, phase and frequency correct
 #  else // (AUDIO_MODE == STANDARD_PLUS)
-  Timer1.initializeCPUCycles(F_CPU / PWM_RATE-1,
+  Timer1.initializeCPUCycles((F_CPU/PWM_RATE)-1,
                              FAST); // fast mode enables higher PWM rate
 #  endif
   Timer1.pwm(AUDIO_CHANNEL_1_PIN,
@@ -267,7 +267,7 @@ static void startAudio() {
   pinMode(AUDIO_CHANNEL_1_lowByte_PIN,
           OUTPUT); // set pin to output for audio, use 499k resistor
   Timer1.initializeCPUCycles(
-      F_CPU / 125000,
+      F_CPU/125000,
       FAST); // set period for 125000 Hz fast pwm carrier frequency = 14 bits
   Timer1.pwm(AUDIO_CHANNEL_1_highByte_PIN,
              0); // pwm pin, 0% duty cycle, ie. 0 signal

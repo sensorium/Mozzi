@@ -168,10 +168,11 @@ static uint8_t mozzi_TCCR4A, mozzi_TCCR4B, mozzi_TCCR4C, mozzi_TCCR4D,
 static void startAudio() {
   backupPreMozziTimer1();
   Timer1.initializeCPUCycles(
-      (F_CPU/AUDIO_RATE)-1 // the -1 here is a result of empirical tests
+     (F_CPU/AUDIO_RATE)-1, // the -1 here is a result of empirical tests
                            // that showed that it brings the resulting frequency
                            // closer to what is expected.
                            // see: https://github.com/sensorium/Mozzi/pull/202
+
       PHASE_FREQ_CORRECT); // set period, phase and frequency correct
   TIMSK1 = _BV(TOIE1); // Overflow Interrupt Enable (when not using
                        // Timer1.attachInterrupt())

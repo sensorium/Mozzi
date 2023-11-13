@@ -158,7 +158,7 @@
  * on platforms that do support it may come with a considerable performance overhead. Don't enable, unless you need this.
  *
  * Currently allowed values are:
- *   - MOZZI_AUDIO_INPUT_DISABLED
+ *   - MOZZI_AUDIO_INPUT_NONE
  *     No audio input
  *   - MOZZI_AUDIO_INPUT_STANDARD
  *     Audio input enabled (currently there is only the "standard" method, but future versions might allow additional choice, here).
@@ -233,7 +233,7 @@
  * of the resistors and ground. This is discussed in much more detail on http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
  * Also, there are higher quality output circuits are on the site.
  *
- * On the classic Arduino Uno, the default pinout in this mode is: 
+ * On the classic Arduino Uno, the default pinout in this mode is:
  *    - Pin 9 (high bits) and Pin 10 (low bits) -> configurable using MOZZI_AUDIO_PIN_1 and MOZZI_AUDIO_PIN_1_LOW
  *
  * Here is table of the default pins on some other boards. Rows with an x on it have actually been tested (and importantly, the outcome recoreded;

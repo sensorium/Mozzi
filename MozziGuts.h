@@ -52,12 +52,6 @@
 #include "AudioConfigRP2040.h"
 #elif IS_MBED()
 #include "AudioConfigMBED.h"
-#elif IS_AVR() && (AUDIO_MODE == STANDARD)
-#include "AudioConfigStandard9bitPwm.h"
-#elif IS_AVR() && (AUDIO_MODE == STANDARD_PLUS)
-#include "AudioConfigStandardPlus.h"
-#elif IS_AVR() && (AUDIO_MODE == HIFI)
-#include "AudioConfigHiSpeed14bitPwm.h"
 #elif IS_RENESAS()
 #include "AudioConfigRenesas.h"
 #endif

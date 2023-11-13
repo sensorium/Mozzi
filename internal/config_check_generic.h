@@ -4,7 +4,8 @@
 #ifndef MOZZI_CONFIG_CHECK_GENERIC_H
 #define MOZZI_CONFIG_CHECK_GENERIC_H
 
-#include <MozziConfigValues.h>  // in case not user-included
+#include "../MozziConfigValues.h"  // in case not user-included
+#include "mozzi_macros.h"
 
 //// Step 1: Apply missing defaults for generic config options (not the hardware specific ones)
 #if not defined(MOZZI_COMPATIBILITY_LEVEL)
@@ -16,7 +17,7 @@
 #warning Use of STEREO_HACK is deprecated. Use AUDIO_CHANNELS STEREO, instead.
 #define MOZZI_AUDIO_CHANNELS MOZZI_STEREO
 #else
-#define MOZZI_MONO
+#define MOZZI_AUDIO_CHANNELS MOZZI_MONO
 #endif
 #endif
 
@@ -30,10 +31,10 @@
 //MOZZI_ANALOG_READ -> hardware specific
 
 #if not defined(MOZZI_AUDIO_INPUT)
-#define MOZZI_AUDIO_INPUT_DISABLED
+#define MOZZI_AUDIO_INPUT MOZZI_AUDIO_INPUT_NONE
 #endif
 
-#if not defined(MOZZI_AUDIO_INPUT_PIN)
+#if !MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE) && !defined(MOZZI_AUDIO_INPUT_PIN)
 #define MOZZI_AUDIO_INPUT_PIN 0
 #endif
 
@@ -50,7 +51,7 @@
 #include "config_checks_avr.h"
 #else
 // TODO
-
+#error oops
 #endif
 
 
@@ -80,9 +81,6 @@ MOZZI_CHECK_POW2(MOZZI_CONTROL_RATE)
 // Hardware-specific checks file should have more narrow checks for most options, below, but is not required to, so let's check for anything that is wildly out of scope:
 MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_2PIN_PWM, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPUT_EXTERNAL_CUSTOM, MOZZI_OUTPUT_PDM_VIA_I2S, MOZZI_OUTPUT_PDM_VIA_SERIAL, MOZZI_OUTPUT_I2S_DAC, MOZZI_OUTPUT_INTERNAL_DAC)
 MOZZI_CHECK_SUPPORTED(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE, MOZZI_ANALOG_READ_STANDARD)
-static_assert(MOZZI_AUDIO_BITS <= (4*sizeof(AudioOutputStorage_t)), "Configured MOZZI_AUDIO_BITS is too large for the internal storage type");
-
-
 
 /// Step 4: Init Read-only defines that depend on other values
 #if !defined(MOZZI_AUDIO_BIAS)
@@ -97,7 +95,7 @@ static_assert(MOZZI_AUDIO_BITS <= (4*sizeof(AudioOutputStorage_t)), "Configured 
 #if MOZZI_AUDIO_RATE == 8192
 #define AUDIO_RATE_AS_LSHIFT 13
 #define MICROS_PER_AUDIO_TICK 122
-#if MOZZI_AUDIO_RATE == 16384
+#elif MOZZI_AUDIO_RATE == 16384
 #define AUDIO_RATE_AS_LSHIFT 14
 #define MICROS_PER_AUDIO_TICK 61 // 1000000 / 16384 = 61.035, ...* 256 = 15625
 #elif MOZZI_AUDIO_RATE == 32768
@@ -107,7 +105,7 @@ static_assert(MOZZI_AUDIO_BITS <= (4*sizeof(AudioOutputStorage_t)), "Configured 
 #define AUDIO_RATE_AS_LSHIFT 16
 #define MICROS_PER_AUDIO_TICK 15
 #else
-#error Whoopsie, not LSHIFT defined for this audio rate. Please report and/or fix
+//#error Whoopsie, not LSHIFT defined for this audio rate. Please report and/or fix
 #endif
 
 
@@ -117,7 +115,9 @@ static_assert(MOZZI_AUDIO_BITS <= (4*sizeof(AudioOutputStorage_t)), "Configured 
 #define CONTROL_RATE MOZZI_CONTROL_RATE
 #endif
 
-
-
+/// Step 6: Some more checks that need to be at the end, because of requiring end of the foodchain headers
+// TODO: Rather move this up again, and make AudioOutputStorage_t a primary config option
+#include "../AudioOutput.h"
+static_assert(MOZZI_AUDIO_BITS <= (8*sizeof(AudioOutputStorage_t)), "Configured MOZZI_AUDIO_BITS is too large for the internal storage type");
 
 #endif

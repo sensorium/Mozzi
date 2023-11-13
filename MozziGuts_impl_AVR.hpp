@@ -182,11 +182,6 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK) {
   defaultAudioOutput();
 }
 #elif (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS)
-#  if (AUDIO_MODE == STANDARD_PLUS)
-#    include "AudioConfigStandardPlus.h"
-#  else
-#    include "AudioConfigStandard9bitPwm.h"
-#  endif
 inline void audioOutput(const AudioOutput f)
 {
   AUDIO_CHANNEL_1_OUTPUT_REGISTER = f.l()+AUDIO_BIAS;

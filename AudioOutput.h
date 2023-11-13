@@ -93,7 +93,7 @@ struct StereoOutput {
   StereoOutput(AudioOutputStorage_t l, AudioOutputStorage_t r) : _l(l), _r(r) {};
   /** Default contstructor */
   StereoOutput() : _l(0), _r(0) {};
-#if (AUDIO_CHANNELS != STEREO)
+#if (MOZZI_AUDIO_CHANNELS != MOZZI_STEREO)
   /** Conversion to int operator: If used in a mono config, returns only the left channel (and gives a compile time warning). 
       This _could_ be turned into an operator for implicit conversion in this case. For now we chose to apply conversion on demand, only, as most of the time
       using StereoOutput in a mono config, is not intended. */

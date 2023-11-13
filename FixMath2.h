@@ -25,8 +25,8 @@ class UFixMath2
   /** Constructor
    */
   UFixMath2() {;}
-  UfixMath2(float fl)  {internal_value = static_cast<typename IntegerType< ((NI+NF)>>3)> > (fl * (1 << NF));}
-  UfixMath2(typename IntegerType<((NI)>>3)> integral_part, typename IntegerType<((NF)>>3)>fractionnal_part)
+  UfixMath2(float fl)  {internal_value = static_cast<typename IntegerType<((NI+NF)>>3)>::unsigned_type > (fl * (1 << NF));}
+  UfixMath2(typename IntegerType<((NI)>>3)>::unsigned_type integral_part, typename IntegerType<((NF)>>3)>::unsigned_type fractionnal_part)
   {
     internal_value = (integral_part << NI) + fractionnal_part;
   } // probably a more confusing than anything constructor!

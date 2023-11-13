@@ -26,7 +26,7 @@
      MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE))
 
 /// Complain if the given argument is not a power of two
-#define MOZZI_CHECK_POW_2(X) static_assert((X & (X - 1)) == 0, #X " must be a power of two");
+#define MOZZI_CHECK_POW2(X) static_assert((X & (X - 1)) == 0, #X " must be a power of two");
 
 /// Simply a way to check if X is Y, realiably, in case one or both are defined empty (such as because of a programmer's typo)
 #define MOZZI_IS(X, Y) (X == Y)

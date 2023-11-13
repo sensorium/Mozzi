@@ -14,7 +14,6 @@
 #include "CircularBuffer.h"
 #include "MozziGuts.h"
 #include "mozzi_analog.h"
-#include "mozzi_config.h" // at the top of all MozziGuts and analog files
 //#include "mozzi_utils.h"
 #include "AudioOutput.h"
 

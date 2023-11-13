@@ -10,7 +10,6 @@
  */
 
 
-#include "mozzi_config.h"
 #include "mozzi_analog.h"
 
 #include "hardware_defines.h"

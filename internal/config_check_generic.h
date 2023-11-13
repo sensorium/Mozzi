@@ -4,8 +4,9 @@
 #ifndef MOZZI_CONFIG_CHECK_GENERIC_H
 #define MOZZI_CONFIG_CHECK_GENERIC_H
 
+#include <MozziConfigValues.h>  // in case not user-included
 
-//// Step 1: Apply missing defaults for generic config options (not hardware specific)
+//// Step 1: Apply missing defaults for generic config options (not the hardware specific ones)
 #if not defined(MOZZI_COMPATIBILITY_LEVEL)
 #define MOZZI_COMPATIBILITY_LEVEL MOZZI_COMPATIBILITY_2_0
 #endif
@@ -38,6 +39,7 @@
 //MOZZI_AUDIO_PIN_2_LOW -> hardware specific
 
 
+
 /// Step 2: Include the hardware specific checks-and-defaults-header
 #if IS_AVR()
 #include "config_checks_avr.h"
@@ -45,6 +47,14 @@
 // TODO
 
 #endif
+
+
+/// Step 2b: Minimal special handling for MOZZI_OUTPUT_EXTERNAL
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL) && !defined(MOZZI_AUDIO_BITS)
+#define MOZZI_AUDIO_BITS 16
+#endif
+
+
 
 /// Step 3: Apply various generic checks that make sense on more than one platform
 MOZZI_CHECK_POW2(MOZZI_AUDIO_RATE)
@@ -62,15 +72,26 @@ MOZZI_CHECK_POW2(MOZZI_CONTROL_RATE)
 #error "MOZZI_AUDIO_CHANNELS outside of (currently) supported range"
 #endif
 
-// Hardware-specific checks file should have more narrow checks for most options, below, but is not required to:
-MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_2PIN_PWM, MOZZI_OUTPUT_EXTERNAL,MOZZI_OUTPUT_PDM_VIA_I2S, MOZZI_OUTPUT_PDM_VIA_SERIAL, MOZZI_OUTPUT_I2S_DAC, MOZZI_OUTPUT_INTERNAL_DAC)
+// Hardware-specific checks file should have more narrow checks for most options, below, but is not required to, so let's check for anything that is wildly out of scope:
+MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_2PIN_PWM, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPUT_EXTERNAL_CUSTOM, MOZZI_OUTPUT_PDM_VIA_I2S, MOZZI_OUTPUT_PDM_VIA_SERIAL, MOZZI_OUTPUT_I2S_DAC, MOZZI_OUTPUT_INTERNAL_DAC)
 MOZZI_CHECK_SUPPORTED(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE, MOZZI_ANALOG_READ_STANDARD)
+static_assert(MOZZI_AUDIO_BITS <= (4*sizeof(AudioOutputStorage_t)), "Configured MOZZI_AUDIO_BITS is too large for the internal storage type");
 
 
-// TODO: much more
+
+/// Step 4: Init Read-only defines that depend on other values
+#if !defined(MOZZI_AUDIO_BIAS)
+#define MOZZI_AUDIO_BIAS ((uint16_t) 1<<(MOZZI_AUDIO_BITS-1))
+#endif
+
+#if !defined(MOZZI_AUDIO_BITS_OPTIMISTIC)
+#define MOZZI_AUDIO_BITS_OPTIMISTIC MOZZI_AUDIO_BITS
+#endif
 
 
-/// Step 4: Patch up some backwards compatibility issues as far as config-related
+
+
+/// Step 5: Patch up some backwards compatibility issues as far as config-related
 #if MOZZI_COMPATIBILITY_LEVEL < MOZZI_COMPATIBILITY_LATEST
 #define AUDIO_RATE MOZZI_AUDIO_RATE
 #define CONTROL_RATE MOZZI_CONTROL_RATE

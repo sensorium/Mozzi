@@ -20,6 +20,8 @@
  * TODO: Fix and complete Doxygen coverage
 */
 
+#include <MozziConfigValues.h>  // needed for the named option values
+
 /** @ingroup core
  * @def MOZZI_COMPATIBILTY_LEVEL
  *
@@ -48,16 +50,17 @@
  * hardware setup is correct. Similarly, if you observe problems running your "real" sketch, it is often a good idea ot test your sketch with the default audio mode,
  * too (by leaving this option, and preferrably all others, unset).
  *
- * TODO: link to specific documentation for each option/platform, and/or spell out, what is supported, where
+ * TODO: link to specific documentation for each option/platform, here, and/or spell out, what is supported, where
  *
  * Supported values:
  *   - MOZZI_OUTPUT_PWM Output using pulse width modulation (PWM) on a GPIO pin. This is the default on most platforms.
  *                      On the Arduino Uno (more generally ATMEGA328P), this allows for a sample resolution of 488 (almost 9 bits) on pin 9.
  *                      Usable pins and resolution will be different on other boards.
  *   - MOZZI_OUTPUT_2PIN_PWM Output using pulse width modulation on two GPIO pins, where one pin represents the lower bits, and the other the higer bits of the sample.
- *                      On the Aduino Uno, this allows for 14 bits of resolution on pins 9 (low) and 10 (high). For further information (wiring etc.) see TODO add ref.
- *   - MOZZI_OUTPUT_EXTERNAL Output is not controlled by Mozzi itself, but left to the user sketch. This setting allows to completely customize the audio output, e.g.
- *                      for connecting to external DACs. For more detail, @see AudioOuput
+ *                      On the Aduino Uno, this allows for 14 bits of resolution on pins 9 (low) and 10 (high). For further information (wiring etc.) see @ref hardware_avr_2pin.
+ *   - MOZZI_OUTPUT_EXTERNAL_TIMED Output is not controlled by Mozzi itself, but left to the user sketch. This setting allows to completely customize the audio output, e.g.
+ *                      for connecting to external DACs. For more detail, see @ref external_audio
+ *   - MOZZI_OUTPUT_EXTERNAL_CUSTOM As above, but additionally bypassing Mozzi's sample buffer. For more detail, see @ref external_audio
  *   - MOZZI_OUTPUT_PDM_VIA_I2S Output pulse density modulated (PDM) samples via a (hardware) I2S interface (without a DAC connected to it).
  *   - MOZZI_OUTPUT_PDM_VIA_SERIAL Output pulse density modulated (PDM) samples via a hardware serial interface.
  *   - MOZZI_OUTPUT_I2S_DAC Output samples to a PT8211 (or compatible) DAC connected to a hardware I2S interface.
@@ -82,7 +85,7 @@
  *
  * @note At the time of this writing, only MOZZI_MONO and MOZZI_STEREO are supported. The value of
  *       MOZZI_MONO is 1 and the value of MOZZI_STEREO is 2, so future extensions are also expected
- *       to set this to the number of available channels. */
+ *       to set this to the number of available channels, and it's ok to use numerical comparison. */
 //#define MOZZI_AUDIO_CHANNELS MOZZI_STEREO
 
 
@@ -162,7 +165,7 @@
  *     This mode implies that MOZZI_ANALOG_READ s are enabled and supported. You may have to call setupFastAnalogReads(FASTEST_ADC)
  *     after setupMozzi(), when using this.
  *
- * Further reading and config: @see getAudioInput() @see MOZZI_AUDIO_INPUT_PIN
+ * Further reading and config: @ref getAudioInput() @ref MOZZI_AUDIO_INPUT_PIN
 */
 //#define MOZZI_AUDIO_INPUT MOZZI_AUDIO_INPUT_STANDARD
 
@@ -193,15 +196,16 @@
 /** @ingroup hardware
  * @page hardware_avr Mozzi on classic Arduino, Teensy (2.x and 3.x), Arduino Mega, and other 8 bit "AVR"/ATMEGA architecture boards
  *
- * The following audio modes (@see MOZZI_AUDIO_MODE) are currently supported on this hardware. In all cases, Timer 1 is claimed, and
+ * The following audio modes (see @ref MOZZI_AUDIO_MODE) are currently supported on this hardware. In all cases, Timer 1 is claimed, and
  * is not available for any other purpose:
  *   - MOZZI_OUTPUT_PWM
  *   - MOZZI_OUTPUT_2PIN_PWM
- *   - MOZZI_OUTPUT_EXTERNAL
+ *   - MOZZI_OUTPUT_EXTERNAL_TIMED
+ *   - MOZZI_OUTPUT_EXTERNAL_CUSTOM
  *
  * In all cases, Timer 1 is claimed, and is not available for any other purpose.
  *
- * @section MOZZI_OUTPUT_PWM
+ * @section avr_pwm MOZZI_OUTPUT_PWM
  * For MOZZI_OUTPUT_PWM, output is restricted to pins that are hardware-attached to Timer 1, but can be configured
  * within this tight limit. In particular, the default setup on the
  * Arduino UNO is:
@@ -214,7 +218,7 @@
  * The available sample resolution is 488, i.e. almost 9 bits, providing some headroom above the 8 bit table resolution
  * currently used by the oscillators. You can look at the TimerOne library for more info about how interrupt rate and pwm resolution relate.
  *
- * @section MOZZI_OUTPUT_2PIN_PWM
+ * @section avr_2pin_pwm  MOZZI_OUTPUT_2PIN_PWM
  * For MOZZI_OUTPUT_2PIN_PWM, Timer 2 is used in addition to Timer 1. Output is split across two pins (again, both connected to Timer 1), with each
  * outputting 7 bits for a total of 14. Add signals through a 3.9k resistor on the "high" pin and 499k resistor on "low" pin.
  * Use 0.5% resistors or select the most accurate from a batch. As discussed on http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
@@ -226,11 +230,11 @@
  *
  * Rate of the PWM output can be controlled separately from MOZZI_AUDIO_RATE, and is much higher (125kHz), by default: MOZZI_PWM_RATE.
  * 
- * The default sample resolution is 7 bits per pin, for a total of 14 bits. This can be configured within hardware limits (@see MOZZI_PWM_RATE) using
+ * The default sample resolution is 7 bits per pin, for a total of 14 bits. This can be configured within hardware limits (@ref MOZZI_PWM_RATE) using
  * MOZZI_AUDIO_BITS_PER_CHANNEL, but beware that increasing this will require even more accuracy in our output resistors (see the linked documentation, above).
  *
- * @section MOZZI_OUTPUT_PWM
- * @see AudioOutput
+ * @section avr_external MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ * See @ref external_audio
 */
 
 
@@ -244,24 +248,57 @@
  * writte to the output pin(s): 2 ^ (output bits) * MOZZI_PWM_RATE cannot be higher than the CPU frequency!
 */
 
+/** @ingroup core
+ * @def MOZZI_AUDIO_BITS_PER_CHANNEL
+ *
+ * <em>Only for MOZZI_AUDIO_MODE MOZZI_OUTPUT_2PIN_PWM</em>. Sample resolution per channel to use in 2 pin output, given in bits (i.e. total resolution is twice as much).
+ * Defaults to 7 bits per channel. Note that increasing this requires very, very well matched output resistors.
+ *
+ * See @ref hardware_avr for a more detailed description.
+*/
 
 
 
 
 
+/***************************************** ADVANCED SETTTINGS -- External audio output ******************************************
+ *
+ * The settings in the following section applies to MOZZI_OUTPUT_EXTERNAL_TIMED, and MOZZI_OUTPUT_EXTERNAL_CUSTOM, only. 
+ *
+********************************************************************************************************************************/
 
-
-
-
-/// TODO: settings bits that still need to end up in their proper section, below
-
+/** @ingroup hardware
+ * @page external_audio External audio output
+ *
+ * <em>Only for MOZZI_AUDIO_MODE s MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM</em>. Most (all?) platforms support
+ * output using an "external" function. When using this option, you will need to provide a suitable definition for audioOutput() in
+ * your own sketch, yourself. Some understanding of the general Mozzi audio output architecture may be recommendable, when using this
+ * mode: See @ref AudioOutput .
+ *
+ * In the more simple case (MOZZI_OUPUT_EXTERNAL_TIMED), Mozzi will still take care of buffering the samples, and calling this function
+ * at audio rate (hence "timed"). This generally involves use of a timer, which should be detailed in the @ref hardware details for
+ * your platform.
+ *
+ * Should you desire even more control - perhaps because your board, or your external DAC already comes with a rate controlled DMA buffer -
+ * using MOZZI_OUPUT_EXTERNAL_CUSTOM also bypasses Mozzis sample buffer. In addition to audioOutput(), you will then need to provide
+ * a definition for canBufferAudioOutput(), which will control the rate at which samples are produced. In essence, whenever
+ * canBufferAudioOutput() returns true, Mozzi will call updateAudio(), and pass the produced sample to audioOutput(), unbuffered. It is
+ * entirely your job to make sure that this actually happens at MOZZI_AUDIO_RATE, and / or an appropriate buffer gets used.
+ *
+ * One additional configuration setting is MOZZI_AUDIO_BITS, which defaults to 16 bits for this mode, but might be set higher, if your
+ * hardware supports it.
+*/
 
 
 /** @ingroup core
  * @def MOZZI_AUDIO_BITS
-Only used when EXTERNAL_AUDIO_OUTPUT is set to true: The resolution to use for audio samples, internally. You will usually set this to match the
-output resolution of your DAC. 16 is the default value, here. Note that 16 bits is also the maximum currently supported on AVR. */
-//#define EXTERNAL_AUDIO_BITS 16
- 
-
-
+ *
+ * Output resolution of audio samples. In most cases you should leave this value untouched (for the defaults that get applied, see @ref hardware .
+ * However, for MOZZI_AUDIO_MODE s MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM you way wish to customize the default value
+ * of 16 bits.
+ *
+ * @note
+ * At the time of this writng single audio samples are stored as "int", unconditionally. This limits MOZZI_AUDIO_BITS to a maximumg of 16 bits on
+ * some 8 bit boards!
+ */
+//#define MOZZI_AUDIO_BITS 16

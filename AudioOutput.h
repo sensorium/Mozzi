@@ -16,6 +16,7 @@
  * 2. A platform-specific timer is triggered at audio rate (usually), takes a sample from the output buffer and sends it to audioOutput().
  *
  * 3. The audioOutput() function - usually predefined inside Mozzi - takes care of sending the sample to the hardware.
+ *    // TODO refer to @see external_audio for most of this, instead.
  *
  * This basic output pipeline can be customized in several ways. First, defining EXTERNAL_AUDIO_OUTPUT to true in mozzi_config.h will allow you to define your own audioOutput()
  * fuction. The library ships with some sample sketches for output to external DACs using this mechanism.
@@ -46,6 +47,7 @@
 #define AudioOutputStorage_t int
 
 #if IS_AVR() && ((AUDIO_MODE == STANDARD_PLUS) || (AUDIO_MODE == STANDARD))
+// TODO: remove this specialisation -> see MOZZI_AUDIO_BITS_OPTIMISTIC
 #define SCALE_AUDIO(x,bits) (bits > 8 ? (x) >> (bits - 8) : (x) << (8 - bits))
 #define SCALE_AUDIO_NEAR(x,bits) (bits > 9 ? (x) >> (bits - 9) : (x) << (9 - bits))
 #define CLIP_AUDIO(x) constrain((x), -244,243)

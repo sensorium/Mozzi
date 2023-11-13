@@ -219,14 +219,41 @@
  * currently used by the oscillators. You can look at the TimerOne library for more info about how interrupt rate and pwm resolution relate.
  *
  * @section avr_2pin_pwm  MOZZI_OUTPUT_2PIN_PWM
- * For MOZZI_OUTPUT_2PIN_PWM, Timer 2 is used in addition to Timer 1. Output is split across two pins (again, both connected to Timer 1), with each
- * outputting 7 bits for a total of 14. Add signals through a 3.9k resistor on the "high" pin and 499k resistor on "low" pin.
- * Use 0.5% resistors or select the most accurate from a batch. As discussed on http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
+ * In this mode, output is split across two pins (again, both connected to Timer 1), with each outputting 7 bits for a total of 14. This allows for
+ * much better dynamic range, providing much more definition than can be achieved using @ref avr_pwm , while using
+ * only modestly more processing power. Further, it allows for a much higher PWM carrier rate can be much higher (125 kHz by default; see @ref
+ * MOZZI_PWM_RATE), which is well beyond the audible range.
+ *
+ * On the downside, this mode requires an extra hardware timer (Timer2 in addition to Timer1), which may increase compatibility
+ * problems with other Arduino libraries that also require a timer. Further, a more elaborate hardware setup is needed, making it less convenient
+ * for rapid prototyping:
+ *
+ * In hardware, add the two signals through a 3.9k resistor on the "high" pin and 499k resistor on "low" pin.
+ * Use 0.5% resistors or select the most accurate from a batch. It is further recommended to place a 4.7nF capacitor between the summing junction
+ * of the resistors and ground. This is discussed in much more detail on http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
  * Also, there are higher quality output circuits are on the site.
  *
- * The default pinout in this mode is: 
+ * On the classic Arduino Uno, the default pinout in this mode is: 
  *    - Pin 9 (high bits) and Pin 10 (low bits) -> configurable using MOZZI_AUDIO_PIN_1 and MOZZI_AUDIO_PIN_1_LOW
- * For pinouts on other boards, refer to config/known_16bit_timers.
+ *
+ * Here is table of the default pins on some other boards. Rows with an x on it have actually been tested (and importantly, the outcome recoreded;
+ * input welcome on further boards.)
+ *
+ * resistor.....3.9k......499k \n
+ * x................9..........10...............Arduino Uno \n
+ * x................9..........10...............Arduino Duemilanove \n
+ * x................9..........10...............Arduino Nano  \n
+ * x................9..........10...............Arduino Leonardo  \n
+ * x................9..........10...............Ardweeny  \n
+ * x................9..........10...............Boarduino  \n
+ * x...............11.........12...............Freetronics EtherMega  \n
+ * .................11.........12...............Arduino Mega  \n
+ * .................14.........15...............Teensy  \n
+ * .............B5(14)...B6(15)...........Teensy2  \n
+ * x...........B5(25)...B6(26)...........Teensy2++  \n
+ * .................13.........12...............Sanguino  \n
+ *
+ * For pinouts on other AVR boards, config/known_16bit_timers might contain some hints.
  *
  * Rate of the PWM output can be controlled separately from MOZZI_AUDIO_RATE, and is much higher (125kHz), by default: MOZZI_PWM_RATE.
  * 
@@ -242,10 +269,13 @@
  * @def MOZZI_PWM_RATE
  *
  * <em>Only for MOZZI_AUDIO_MODE s MOZZI_OUTPUT_PWM and MOZZI_OUTPUT_2PIN_PWM</em>. On some platforms, the rate at which PWM signals are repeated may be higher
- * than that at with audio signals are produced (i.e. MOZZI_AUDIO_RATE). E.g. fro MOZZI_OUTPUT_PWM on the classic Arduino, the pwm defaults to 32768 while the audio rate defaults to 16384.
+ * than that at with audio signals are produced (i.e. MOZZI_AUDIO_RATE). E.g. for MOZZI_OUTPUT_PWM on the classic Arduino, the pwm defaults to 32768 while the
+ * audio rate defaults to 16384. The reasoning behind this is that 16384 Hz audio rate turned out to be te most useful compromise - in most casses - between
+ * output quality, and available computing power. However, output at that rate produced high-frequency whine, audible to some people, which could be mitigated
+ * by the higher PWM rate.
  *
- * This improves the signal quality at less cost than doubling the audio rate itself. However, increasing this too far will limit the dynamic resolution of the samples that can be
- * writte to the output pin(s): 2 ^ (output bits) * MOZZI_PWM_RATE cannot be higher than the CPU frequency!
+ * In other words, increasing this improves the signal quality at less cost than doubling the audio rate itself. However, increasing this too far will limit the dynamic resolution of the samples that can be
+ * written to the output pin(s): 2 ^ (output bits) * MOZZI_PWM_RATE cannot be higher than the CPU frequency!
 */
 
 /** @ingroup core

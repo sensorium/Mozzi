@@ -12,7 +12,12 @@
 #endif
 
 #if not defined(MOZZI_AUDIO_CHANNELS)
+#if (MOZZI_COMPATIBILITY_LEVEL <= MOZZI_COMPATIBILITY_1_1) && (STEREO_HACK == true)
+#warning Use of STEREO_HACK is deprecated. Use AUDIO_CHANNELS STEREO, instead.
+#define MOZZI_AUDIO_CHANNELS MOZZI_STEREO
+#else
 #define MOZZI_MONO
+#endif
 #endif
 
 //MOZZI_AUDIO_MODE -> hardware specific
@@ -88,7 +93,22 @@ static_assert(MOZZI_AUDIO_BITS <= (4*sizeof(AudioOutputStorage_t)), "Configured 
 #define MOZZI_AUDIO_BITS_OPTIMISTIC MOZZI_AUDIO_BITS
 #endif
 
-
+// TODO: Rename these defines
+#if MOZZI_AUDIO_RATE == 8192
+#define AUDIO_RATE_AS_LSHIFT 13
+#define MICROS_PER_AUDIO_TICK 122
+#if MOZZI_AUDIO_RATE == 16384
+#define AUDIO_RATE_AS_LSHIFT 14
+#define MICROS_PER_AUDIO_TICK 61 // 1000000 / 16384 = 61.035, ...* 256 = 15625
+#elif MOZZI_AUDIO_RATE == 32768
+#define AUDIO_RATE_AS_LSHIFT 15
+#define MICROS_PER_AUDIO_TICK 31 // = 1000000 / 32768 = 30.518, ...* 256 = 7812.6
+#elif MOZZI_AUDIO_RATE == 65336
+#define AUDIO_RATE_AS_LSHIFT 16
+#define MICROS_PER_AUDIO_TICK 15
+#else
+#error Whoopsie, not LSHIFT defined for this audio rate. Please report and/or fix
+#endif
 
 
 /// Step 5: Patch up some backwards compatibility issues as far as config-related
@@ -96,5 +116,8 @@ static_assert(MOZZI_AUDIO_BITS <= (4*sizeof(AudioOutputStorage_t)), "Configured 
 #define AUDIO_RATE MOZZI_AUDIO_RATE
 #define CONTROL_RATE MOZZI_CONTROL_RATE
 #endif
+
+
+
 
 #endif

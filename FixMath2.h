@@ -35,11 +35,11 @@ public:
 
   // Constructor from another fixed type
   template<byte _NI, byte _NF>
-  UFixMath2(UFixMath2<_NI,_NF> uf) {internal_value = SHIFTR((internal_type) uf.getInt(),(_NF-NF));}
+  UFixMath2(const UFixMath2<_NI,_NF>& uf) {internal_value = SHIFTR((internal_type) uf.getInt(),(_NF-NF));}
 
   // Multiplication overload
   template<byte _NI, byte _NF>
-    internal_type operator* (const UFixMath2<_NI,_NF> op)
+    internal_type operator* (const UFixMath2<_NI,_NF>& op)
   {
     byte sub = (NF+_NF)>>1;
     Serial.println(sub);

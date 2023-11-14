@@ -21,21 +21,22 @@
 template<byte NI, byte NF> // NI and NF being the number of bits for the integral and the fractionnal parts respectively.
 class UFixMath2
 {
+  typedef typename IntegerType< ((NI+NF)>>3) >::unsigned_type internal_type ;
  public:
   /** Constructor
    */
   UFixMath2() {;}
-  UfixMath2(float fl)  {internal_value = static_cast<typename IntegerType<((NI+NF)>>3)>::unsigned_type > (fl * (1 << NF));}
-  UfixMath2(typename IntegerType<((NI)>>3)>::unsigned_type integral_part, typename IntegerType<((NF)>>3)>::unsigned_type fractionnal_part)
+  UFixMath2(float fl)  {internal_value = static_cast<internal_type> (fl * (internal_type(1) << NF));}
+  UFixMath2(typename IntegerType<((NI)>>3)>::unsigned_type integral_part, typename IntegerType<((NF)>>3)>::unsigned_type fractionnal_part)
   {
     internal_value = (integral_part << NI) + fractionnal_part;
   } // probably a more confusing than anything constructor!
 
-  float asFloat() { return (static_cast<float>(internal_value)) / (1<<NF); }
-  typename IntegerType< ((NI+NF)>>3) >::unsigned_type getInt() { return internal_value; }
+  float asFloat() { return (static_cast<float>(internal_value)) / (internal_type(1)<<NF); }
+  internal_type getInt() { return internal_value; }
 
  private:
-  typename IntegerType< ((NI+NF)>>3) >::unsigned_type internal_value;
+  internal_type internal_value;
   
 };
 

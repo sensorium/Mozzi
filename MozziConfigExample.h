@@ -23,7 +23,7 @@
 #include <MozziConfigValues.h>  // needed for the named option values
 
 /** @ingroup core
- * @def MOZZI_COMPATIBILTY_LEVEL
+ * @def MOZZI_COMPATIBILITY_LEVEL
  *
  * Mozzi generally tries to keep your old sketches working, but we continue to find new (and hopefully better) approaches to old problems.
  * Sometimes, keeping API compatibilty with the pre-existing solution may come with a smaller or larger penalty in terms of performance or code size.
@@ -35,9 +35,9 @@
  *   - MOZZI_COMPATIBILITY_LATEST - always live on the bleeding edge
  *
  * @note
- * MOZZI_COMPATIBILTY_V1_1 does not guarantee, that *everything* from Mozzi 1.1 will continue to work, just that we're doing a reasonable effort.
+ * MOZZI_COMPATIBILITY_V1_1 does not guarantee, that *everything* from Mozzi 1.1 will continue to work, just that we're doing a reasonable effort.
 */
-//#define MOZZI_COMPATIBILTY_LEVEL MOZZI_COMPATIBILTY_LATEST
+//#define MOZZI_COMPATIBILITY_LEVEL MOZZI_COMPATIBILITY_LATEST
 
 /** @ingroup core
  * @def MOZZI_AUDIO_MODE
@@ -307,8 +307,8 @@
  * #define MOZZI_AUDIO_PIN_2            [...]
  * #define MOZZI_AUDIO_PIN_2_REGISTER   [the matching OCR]
  * // or
- * #define MOZZI_AUDIO_PIN_2_LOW            [...]
- * #define MOZZI_AUDIO_PIN_2_LOW_REGISTER   [the matching OCR]
+ * #define MOZZI_AUDIO_PIN_1_LOW            [...]
+ * #define MOZZI_AUDIO_PIN_1_LOW_REGISTER   [the matching OCR]
  * @endcode
  *
  * @see config/known_16bit_timers.h
@@ -329,12 +329,12 @@
  * your own sketch, yourself. Some understanding of the general Mozzi audio output architecture may be recommendable, when using this
  * mode: See @ref AudioOutput .
  *
- * In the more simple case (MOZZI_OUPUT_EXTERNAL_TIMED), Mozzi will still take care of buffering the samples, and calling this function
+ * In the more simple case (MOZZI_OUTPUT_EXTERNAL_TIMED), Mozzi will still take care of buffering the samples, and calling this function
  * at audio rate (hence "timed"). This generally involves use of a timer, which should be detailed in the @ref hardware details for
  * your platform.
  *
  * Should you desire even more control - perhaps because your board, or your external DAC already comes with a rate controlled DMA buffer -
- * using MOZZI_OUPUT_EXTERNAL_CUSTOM also bypasses Mozzis sample buffer. In addition to audioOutput(), you will then need to provide
+ * using MOZZI_OUTPUT_EXTERNAL_CUSTOM also bypasses Mozzis sample buffer. In addition to audioOutput(), you will then need to provide
  * a definition for canBufferAudioOutput(), which will control the rate at which samples are produced. In essence, whenever
  * canBufferAudioOutput() returns true, Mozzi will call updateAudio(), and pass the produced sample to audioOutput(), unbuffered. It is
  * entirely your job to make sure that this actually happens at MOZZI_AUDIO_RATE, and / or an appropriate buffer gets used.

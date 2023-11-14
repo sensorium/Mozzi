@@ -22,7 +22,7 @@ template<byte NI, byte NF> // NI and NF being the number of bits for the integra
 class UFixMath2
 {
   typedef typename IntegerType< ((NI+NF)>>3) >::unsigned_type internal_type ;
- public:
+public:
   /** Constructor
    */
   UFixMath2() {;}
@@ -32,10 +32,37 @@ class UFixMath2
     internal_value = (integral_part << NI) + fractionnal_part;
   } // probably a more confusing than anything constructor!
 
+
+  // Constructor from another fixed type
+  template<byte _NI, byte _NF>
+  UFixMath2(UFixMath2<_NI,_NF> uf) {internal_value = SHIFTR((internal_type) uf.getInt(),(_NF-NF));}
+
+  // Multiplication overload
+  template<byte _NI, byte _NF>
+    internal_type operator* (const UFixMath2<_NI,_NF> op)
+  {
+    byte sub = (NF+_NF)>>1;
+    Serial.println(sub);
+    return (internal_value>>sub) * (op.getInt() >> (NF+_NF-sub));
+    
+  }
   float asFloat() { return (static_cast<float>(internal_value)) / (internal_type(1)<<NF); }
   internal_type getInt() { return internal_value; }
 
- private:
+  // Multiplication overload
+  /*
+  internal_type operator* (const UFixMath2 op)
+  {
+    byte sub = (NF+op.getNF())>>1;
+   return (internal_value>>sub) * (op.getInt() >> (NF+op.getNF()-sub));
+
+   }*/
+  
+
+  byte getNI(){return NI;}
+  byte getNF(){return NF;}
+
+private:
   internal_type internal_value;
   
 };

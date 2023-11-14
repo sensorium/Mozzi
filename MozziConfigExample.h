@@ -277,6 +277,7 @@
  * In other words, increasing this improves the signal quality at less cost than doubling the audio rate itself. However, increasing this too far will limit the dynamic resolution of the samples that can be
  * written to the output pin(s): 2 ^ (output bits) * MOZZI_PWM_RATE cannot be higher than the CPU frequency!
 */
+//#define MOZZI_PWM_RATE 65356
 
 /** @ingroup core
  * @def MOZZI_AUDIO_BITS_PER_CHANNEL
@@ -286,9 +287,32 @@
  *
  * See @ref hardware_avr for a more detailed description.
 */
+//#define MOZZI_AUDIO_BITS_PER_CHANNEL 8
 
-
-
+/** @ingroup core
+ * @def MOZZI_AUDIO_PIN_1
+ *
+ * Only for MOZZI_AUDIO_MODE s MOZZI_OUTPUT_PWM and MOZZI_OUTPUT_2PIN_PWM: The IO pin to use as (first) audio output. This **must** be attached to Timer1.
+ * When settings this, you alsso need to specify the output compare register responsible for this pin (either OCR1A or OCR1B).
+ *
+ * Example:
+ * @code
+ * #define MOZZI_AUDIO_PIN_1            TIMER1_B_PIN
+ * #define MOZZI_AUDIO_PIN_1_REGISTER   OCR1B          // must also specify this, when customizing MOZZI_AUDIO_PIN_1
+ * @endcode
+ *
+ * Equivalent definitions can be used to control the pin for the right audio channel (in stereo mode), or the low byte channel (in 2 Pin PWM mode):
+ *
+ * @code
+ * #define MOZZI_AUDIO_PIN_2            [...]
+ * #define MOZZI_AUDIO_PIN_2_REGISTER   [the matching OCR]
+ * // or
+ * #define MOZZI_AUDIO_PIN_2_LOW            [...]
+ * #define MOZZI_AUDIO_PIN_2_LOW_REGISTER   [the matching OCR]
+ * @endcode
+ *
+ * @see config/known_16bit_timers.h
+ * */
 
 
 /***************************************** ADVANCED SETTTINGS -- External audio output ******************************************

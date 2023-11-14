@@ -133,7 +133,7 @@ carrier freq noise can be an issue
 static uint8_t pre_mozzi_TCCR1A, pre_mozzi_TCCR1B, pre_mozzi_OCR1A,
     pre_mozzi_TIMSK1;
 
-#if (AUDIO_MODE == HIFI)
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_2PIN_PWM)
 #if defined(TCCR2A)
 static uint8_t pre_mozzi_TCCR2A, pre_mozzi_TCCR2B, pre_mozzi_OCR2A,
     pre_mozzi_TIMSK2;
@@ -153,7 +153,7 @@ static void backupPreMozziTimer1() {
   pre_mozzi_TIMSK1 = TIMSK1;
 }
 
-#if (AUDIO_MODE == HIFI)
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_2PIN_PWM)
 #if defined(TCCR2A)
 static uint8_t mozzi_TCCR2A, mozzi_TCCR2B, mozzi_OCR2A, mozzi_TIMSK2;
 #elif defined(TCCR2)
@@ -164,7 +164,7 @@ static uint8_t mozzi_TCCR4A, mozzi_TCCR4B, mozzi_TCCR4C, mozzi_TCCR4D,
 #endif
 #endif
 
-#if (EXTERNAL_AUDIO_OUTPUT == true)
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)  // TODO: Check: This block used to compile also for BYPASS_MOZZI_OUTPUT_BUFFER, but I think unneccessarily so.
 static void startAudio() {
   backupPreMozziTimer1();
   Timer1.initializeCPUCycles(
@@ -181,38 +181,38 @@ static void startAudio() {
 ISR(TIMER1_OVF_vect, ISR_BLOCK) {
   defaultAudioOutput();
 }
-#elif (AUDIO_MODE == STANDARD) || (AUDIO_MODE == STANDARD_PLUS)
+#elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
 inline void audioOutput(const AudioOutput f)
 {
-  AUDIO_CHANNEL_1_OUTPUT_REGISTER = f.l()+AUDIO_BIAS;
-#    if (AUDIO_CHANNELS > 1)
-  AUDIO_CHANNEL_2_OUTPUT_REGISTER = f.r()+AUDIO_BIAS;
+  MOZZI_AUDIO_PIN_1_REGISTER = f.l()+MOZZI_AUDIO_BIAS;
+#    if (MOZZI_AUDIO_CHANNELS > 1)
+  MOZZI_AUDIO_PIN_2_REGISTER = f.r()+MOZZI_AUDIO_BIAS;
 #    endif
 }
 
 static void startAudio() {
   backupPreMozziTimer1();
 
-  pinMode(AUDIO_CHANNEL_1_PIN, OUTPUT); // set pin to output for audio
-  //	pinMode(AUDIO_CHANNEL_2_PIN, OUTPUT);	// set pin to output for audio
-#  if (AUDIO_MODE == STANDARD)
+  pinMode(MOZZI_AUDIO_PIN_1, OUTPUT); // set pin to output for audio
+#  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM) && (MOZZI_PWM_RATE < 32768)    // Formerly known as the - long since deprecated - "STANDARD" mode
   Timer1.initializeCPUCycles(
-      (F_CPU/AUDIO_RATE)-1,// the -1 here is a result of empirical tests
+      (F_CPU/MOZZI_AUDIO_RATE)-1,// the -1 here is a result of empirical tests
                            // that showed that it brings the resulting frequency
                            // closer to what is expected.
                            // see: https://github.com/sensorium/Mozzi/pull/202
       PHASE_FREQ_CORRECT); // set period, phase and frequency correct
-#  else // (AUDIO_MODE == STANDARD_PLUS)
-  Timer1.initializeCPUCycles((F_CPU/PWM_RATE)-1, // the -1 here is a result of empirical tests
+#  else // Formerly known as "STANDARD_PLUS" mode
+  Timer1.initializeCPUCycles((F_CPU/MOZZI_PWM_RATE)-1, // the -1 here is a result of empirical tests
                                                  // that showed that it brings the resulting frequency
                                                  // closer to what is expected.
                                                  // see: https://github.com/sensorium/Mozzi/pull/202
                              FAST); // fast mode enables higher PWM rate
 #  endif
-  Timer1.pwm(AUDIO_CHANNEL_1_PIN,
-             AUDIO_BIAS); // pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
-#  if (AUDIO_CHANNELS > 1)
-  Timer1.pwm(AUDIO_CHANNEL_2_PIN, AUDIO_BIAS); // sets pin to output
+  Timer1.pwm(MOZZI_AUDIO_PIN_1,
+             MOZZI_AUDIO_BIAS); // pwm pin, 50% of Mozzi's duty cycle, ie. 0 signal
+#  if (MOZZI_AUDIO_CHANNELS > 1)
+  pinMode(MOZZI_AUDIO_PIN_2, OUTPUT); // set pin to output for audio
+  Timer1.pwm(MOZZI_AUDIO_PIN_2, MOZZI_AUDIO_BIAS);
 #  endif
   TIMSK1 = _BV(TOIE1); // Overflow Interrupt Enable (when not using
                        // Timer1.attachInterrupt())
@@ -222,7 +222,8 @@ static void startAudio() {
 Arduino output register, running at AUDIO_RATE. */
 
 ISR(TIMER1_OVF_vect, ISR_BLOCK) {
-#  if (AUDIO_MODE == STANDARD_PLUS) && (AUDIO_RATE == 16384) // only update every second ISR, if lower audio rate
+#  if (MOZZI_AUDIO_RATE < MOZZI_PWM_RATE) // only update every second ISR, if lower audio rate
+  static_assert(2l*MOZZI_AUDIO_RATE == MOZZI_PWM_RATE, "audio rate must the same, or exactly half of the pwm rate!");
   static boolean alternate;
   alternate = !alternate;
   if (alternate) return;
@@ -231,9 +232,8 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK) {
   defaultAudioOutput();
 }
 
-#elif (AUDIO_MODE == HIFI)
-#  if (EXTERNAL_AUDIO_OUTPUT != true)
-#    include "AudioConfigHiSpeed14bitPwm.h"
+#elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_2PIN_PWM)
+#  include "AudioConfigHiSpeed14bitPwm.h"
 inline void audioOutput(const AudioOutput f) {
   // read about dual pwm at
   // http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
@@ -242,13 +242,13 @@ inline void audioOutput(const AudioOutput f) {
   // if (!output_buffer.isEmpty()){
   //unsigned int out = output_buffer.read();
   // 14 bit, 7 bits on each pin
-  // AUDIO_CHANNEL_1_highByte_REGISTER = out >> 7; // B00111111 10000000 becomes
+  // MOZZI_AUDIO_PIN_1_REGISTER = out >> 7; // B00111111 10000000 becomes
   // B1111111
   // try to avoid looping over 7 shifts - need to check timing or disassemble to
   // see what really happens unsigned int out_high = out<<1; // B00111111
   // 10000000 becomes B01111111 00000000
-  // AUDIO_CHANNEL_1_highByte_REGISTER = out_high >> 8; // B01111111 00000000
-  // produces B01111111 AUDIO_CHANNEL_1_lowByte_REGISTER = out & 127;
+  // MOZZI_AUDIO_PIN_1_REGISTER = out_high >> 8; // B01111111 00000000
+  // produces B01111111 MOZZI_AUDIO_PIN_1_LOW_REGISTER = out & 127;
   /* Atmega manual, p123
   The high byte (OCR1xH) has to be written first.
   When the high byte I/O location is written by the CPU,
@@ -258,25 +258,24 @@ inline void audioOutput(const AudioOutput f) {
   either the OCR1x buffer or OCR1x Compare Register in
   the same system clock cycle.
   */
-  AUDIO_CHANNEL_1_highByte_REGISTER = (f.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_REGISTER;
-  AUDIO_CHANNEL_1_lowByte_REGISTER = (f.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_REGISTER) - 1);
+  MOZZI_AUDIO_PIN_1_REGISTER = (f.l()+MOZZI_AUDIO_BIAS) >> MOZZI_AUDIO_BITS_PER_REGISTER;
+  MOZZI_AUDIO_PIN_1_LOW_REGISTER = (f.l()+MOZZI_AUDIO_BIAS) & ((1 << MOZZI_AUDIO_BITS_PER_REGISTER) - 1);
 }
-#  endif
 
 static void setupTimer2();
 static void startAudio() {
   backupPreMozziTimer1();
   // pwm on timer 1
-  pinMode(AUDIO_CHANNEL_1_highByte_PIN,
+  pinMode(MOZZI_AUDIO_CHANNEL_1_PIN,
           OUTPUT); // set pin to output for audio, use 3.9k resistor
-  pinMode(AUDIO_CHANNEL_1_lowByte_PIN,
+  pinMode(MOZZI_AUDIO_CHANNEL_1_LOW_PIN,
           OUTPUT); // set pin to output for audio, use 499k resistor
   Timer1.initializeCPUCycles(
       F_CPU/125000,
       FAST); // set period for 125000 Hz fast pwm carrier frequency = 14 bits
-  Timer1.pwm(AUDIO_CHANNEL_1_highByte_PIN,
+  Timer1.pwm(MOZZI_AUDIO_CHANNEL_1_PIN,
              0); // pwm pin, 0% duty cycle, ie. 0 signal
-  Timer1.pwm(AUDIO_CHANNEL_1_lowByte_PIN,
+  Timer1.pwm(MOZZI_AUDIO_CHANNEL_1_LOW_PIN,
              0); // pwm pin, 0% duty cycle, ie. 0 signal
   // audio output interrupt on timer 2, sets the pwm levels of timer 1
   setupTimer2();
@@ -349,7 +348,7 @@ void stopMozzi() {
 
   TIMSK1 = pre_mozzi_TIMSK1;
 
-#if (AUDIO_MODE == HIFI)
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_2PIN_PWM)
 #if defined(TCCR2A)
   TCCR2A = pre_mozzi_TCCR2A;
   TCCR2B = pre_mozzi_TCCR2B;

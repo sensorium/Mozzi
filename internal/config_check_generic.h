@@ -78,6 +78,14 @@ MOZZI_CHECK_POW2(MOZZI_CONTROL_RATE)
 #error "MOZZI_AUDIO_CHANNELS outside of (currently) supported range"
 #endif
 
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED) || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_CUSTOM)
+#warning "Mozzi is configured to use an external void 'audioOutput(const AudioOutput f)' function. Please define one in your sketch"
+#endif
+
+#if defined(BYPASS_MOZZI_OUTPUT_BUFFER)
+#error "BYPASS_MOZZI_OUTPUT_BUFFER may not be customized via config"
+#endif
+
 // Hardware-specific checks file should have more narrow checks for most options, below, but is not required to, so let's check for anything that is wildly out of scope:
 MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_2PIN_PWM, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPUT_EXTERNAL_CUSTOM, MOZZI_OUTPUT_PDM_VIA_I2S, MOZZI_OUTPUT_PDM_VIA_SERIAL, MOZZI_OUTPUT_I2S_DAC, MOZZI_OUTPUT_INTERNAL_DAC)
 MOZZI_CHECK_SUPPORTED(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE, MOZZI_ANALOG_READ_STANDARD)
@@ -105,9 +113,12 @@ MOZZI_CHECK_SUPPORTED(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE, MOZZI_ANALOG_RE
 #define AUDIO_RATE_AS_LSHIFT 16
 #define MICROS_PER_AUDIO_TICK 15
 #else
-//#error Whoopsie, not LSHIFT defined for this audio rate. Please report and/or fix
+#error Whoopsie, not LSHIFT defined for this audio rate. Please report and/or fix
 #endif
 
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_CUSTOM)
+#define BYPASS_MOZZI_OUTPUT_BUFFER true
+#endif
 
 /// Step 5: Patch up some backwards compatibility issues as far as config-related
 #if MOZZI_COMPATIBILITY_LEVEL < MOZZI_COMPATIBILITY_LATEST

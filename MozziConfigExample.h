@@ -203,7 +203,7 @@
  *   - MOZZI_OUTPUT_EXTERNAL_TIMED
  *   - MOZZI_OUTPUT_EXTERNAL_CUSTOM
  *
- * In all cases, Timer 1 is claimed, and is not available for any other purpose.
+ * In all cases, except MOZZI_OUTPUT_EXTERNAL_CUSTOM, Timer 1 is claimed, and is not available for any other purpose.
  *
  * @section avr_pwm MOZZI_OUTPUT_PWM
  * For MOZZI_OUTPUT_PWM, output is restricted to pins that are hardware-attached to Timer 1, but can be configured
@@ -356,3 +356,73 @@
  * some 8 bit boards!
  */
 //#define MOZZI_AUDIO_BITS 16
+
+
+
+
+/***************************************** ADVANCED SETTTINGS -- ESP32 ***********************************************************
+ *
+ * The settings in the following section applies to the ESP32 architecture.
+ *
+ * It is generally not recommended to change anything, here, unless you really know, what you are doing and/or
+ * are willing to rough it out by yourself.
+ *
+********************************************************************************************************************************/
+
+
+/** @ingroup hardware
+ * @page hardware_esp32 Mozzi on ESP32-based boards.
+ *
+ * The following audio modes (see @ref MOZZI_AUDIO_MODE) are currently supported on this hardware:
+ *   - MOZZI_OUTPUT_EXTERNAL_TIMED
+ *   - MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ *   - MOZZI_OUTPUT_PDM_VIA_I2S
+ *   - MOZZI_OUTPUT_I2S_DAC
+ *   - MOZZI_OUTPUT_INTERNAL_DAC
+ *
+ * The default mode is @ref esp32_internal_dac .
+ *
+ * @note
+ * This port really does not currently come with a PWM mode!
+ *
+ * @section esp32_internal_dac MOZZI_OUTPUT_INTERNAL_DAC
+ * The internal DAC has 8 bit resolution, and outputs to GPIO pins 25 and 26 (non-configurable). For simplicity of code, both pins are always used.
+ * In a mono configuration, both pins output the same sample.
+ *
+ * TODO: We could really use this to hack in a 2 PIN mode!
+ *
+ * @note
+ * The number 25 refers to "GPIO 25" or sometimes labelled "D25". Confusingly, many boards come with an additional, totally different numbering scheme on top of that.
+ *
+ * Internally, the inbuilt DAC is connected via an I2S interface. Which interface number to use can be configured using:
+ *
+ * @code
+ * #define MOZZI_I2S_PORT     ... // (default: I2S_NUM_0)
+ * @endcode
+ *
+ * @section esp32_i2s_dac MOZZI_OUTPUT_I2S_DAC
+ * This mode outputs to a PT8211 (or compatible) I2S DAC, which allows for very high quality (mono or stereo) output. Communication needs the BCK, WS, and DATA(out) pins
+ * of one I2S interface. Presumably, any pins qualify, and you can configure this using:
+ * @code
+ * #define MOZZI_I2S_PIN_BCK  ... // (default: 26)
+ * #define MOZZI_I2S_PIN_WS   ... // (default: 15)
+ * #define MOZZI_I2S_PIN_DATA ... // (default: 33)
+ * #define MOZZI_I2S_PORT     ... // (default: I2S_NUM_0)
+ * @endcode
+ *
+ * See the note above (@ref esp_internal_dac) regarding pin numbering. Also, please always test the default pinout, should a custom setting fail!
+ *
+ * As a technical note, I2S support in the ESP32 SDK has been reworked since this was implemented in Mozzi, and Mozzi uses the "legacy" implementation "i2s.h".
+ * This should not be an issue, unless you want to connect additional I2S components, yourself. In which case contributions are certainly welcome!
+ *
+ * @section esp32_pdm_via_i2s MOZZI_OUTPUT_PDM_VIA_I2S
+ * This mode uses the same setup as @ref esp32_i2s_dac, but rather than using an external DAC, the communication signal itself is modulated in PDM
+ * (pulse density modulation) encoded form. Thus not extra hardware is needed, and the signal is output on the DATA pin (see above). The BCK and
+ * WS pins are also claimed, but should be left non-connected, and do not produce anything meaningful. This can only be used in mono mode.
+ *
+ * Output resolution may be adjusted by defining MOZZI_PDM_RESOLUTION , where the default value of 4 means that each audio sample is encoded into four 32 bit blocks
+ * of ones and zeros. Obviously, more is potentially better, but at the cost of considerable computation power.
+ *
+ * @section esp32_external MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ * See @ref external_audio
+*/

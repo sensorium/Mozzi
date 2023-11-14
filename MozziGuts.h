@@ -21,6 +21,7 @@
 #endif
 
 #include "hardware_defines.h"
+#include "mozzi_config.h"
 
 #if IS_TEENSY3() || IS_TEENSY4()
 // required from http://github.com/pedvide/ADC for Teensy 3.*

@@ -41,7 +41,7 @@
 #define MOZZI_AUDIO_PIN_1 TIMER1_A_PIN
 #define MOZZI_AUDIO_PIN_1_REGISTER OCR1A
 #  endif
-#  if !defined(MOZZI_AUDIO_PIN_1)
+#  if !defined(MOZZI_AUDIO_PIN_1_LOW)
 #define MOZZI_AUDIO_PIN_1_LOW TIMER1_B_PIN
 #define MOZZI_AUDIO_PIN_1_LOW_REGISTER OCR1B
 #  endif
@@ -50,7 +50,7 @@
 #define MOZZI_PWM_RATE 125000
 #  endif
 
-#  if !defined(MOZZI_PWM_RATE)
+#  if !defined(MOZZI_AUDIO_BITS_PER_CHANNEL)
 #define MOZZI_AUDIO_BITS_PER_CHANNEL 7
 #  endif
 

@@ -39,7 +39,7 @@
 #ifndef AUDIOOUTPUT
 #define AUDIOOUTPUT
 
-#include "MozziGuts.h"
+#include "mozzi_config.h"
 
 /** The type used to store a single channel of a single frame, internally. For compatibility with earlier versions of Mozzi this is defined as int.
  *  If you do not care about keeping old sketches working, you may be able to save some RAM by using int16_t, instead (on boards where int is larger

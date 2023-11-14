@@ -13,6 +13,7 @@
 #include "mozzi_analog.h"
 
 #include "hardware_defines.h"
+#include "mozzi_config.h"
 
 /** NOTE: Since analog input code is heavily hardware dependent, and also heavily interweaved with AUDIO_INPUT,
  *  it was moved to MozziGuts.cpp / MozziGuts_impl_XYZ.hpp for better maintainability.

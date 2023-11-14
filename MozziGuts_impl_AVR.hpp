@@ -233,7 +233,6 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK) {
 }
 
 #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_2PIN_PWM)
-#  include "AudioConfigHiSpeed14bitPwm.h"
 inline void audioOutput(const AudioOutput f) {
   // read about dual pwm at
   // http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
@@ -258,25 +257,21 @@ inline void audioOutput(const AudioOutput f) {
   either the OCR1x buffer or OCR1x Compare Register in
   the same system clock cycle.
   */
-  MOZZI_AUDIO_PIN_1_REGISTER = (f.l()+MOZZI_AUDIO_BIAS) >> MOZZI_AUDIO_BITS_PER_REGISTER;
-  MOZZI_AUDIO_PIN_1_LOW_REGISTER = (f.l()+MOZZI_AUDIO_BIAS) & ((1 << MOZZI_AUDIO_BITS_PER_REGISTER) - 1);
+  MOZZI_AUDIO_PIN_1_REGISTER = (f.l()+MOZZI_AUDIO_BIAS) >> MOZZI_AUDIO_BITS_PER_CHANNEL;
+  MOZZI_AUDIO_PIN_1_LOW_REGISTER = (f.l()+MOZZI_AUDIO_BIAS) & ((1 << MOZZI_AUDIO_BITS_PER_CHANNEL) - 1);
 }
 
 static void setupTimer2();
 static void startAudio() {
   backupPreMozziTimer1();
   // pwm on timer 1
-  pinMode(MOZZI_AUDIO_CHANNEL_1_PIN,
-          OUTPUT); // set pin to output for audio, use 3.9k resistor
-  pinMode(MOZZI_AUDIO_CHANNEL_1_LOW_PIN,
-          OUTPUT); // set pin to output for audio, use 499k resistor
+  pinMode(MOZZI_AUDIO_PIN_1, OUTPUT); // set pin to output for audio, use 3.9k resistor
+  pinMode(MOZZI_AUDIO_PIN_1_LOW, OUTPUT); // set pin to output for audio, use 499k resistor
   Timer1.initializeCPUCycles(
       F_CPU/125000,
       FAST); // set period for 125000 Hz fast pwm carrier frequency = 14 bits
-  Timer1.pwm(MOZZI_AUDIO_CHANNEL_1_PIN,
-             0); // pwm pin, 0% duty cycle, ie. 0 signal
-  Timer1.pwm(MOZZI_AUDIO_CHANNEL_1_LOW_PIN,
-             0); // pwm pin, 0% duty cycle, ie. 0 signal
+  Timer1.pwm(MOZZI_AUDIO_PIN_1, 0); // pwm pin, 0% duty cycle, ie. 0 signal
+  Timer1.pwm(MOZZI_AUDIO_PIN_1_LOW, 0);
   // audio output interrupt on timer 2, sets the pwm levels of timer 1
   setupTimer2();
 }
@@ -310,7 +305,7 @@ static void backupPreMozziTimer2() {
 // levels of timer 2
 static void setupTimer2() {
   backupPreMozziTimer2(); // to reset while pausing
-  unsigned long period = F_CPU / AUDIO_RATE;
+  unsigned long period = F_CPU / MOZZI_AUDIO_RATE;
   FrequencyTimer2::setPeriodCPUCycles(period);
   FrequencyTimer2::setOnOverflow(dummy);
   FrequencyTimer2::enable();

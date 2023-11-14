@@ -16,19 +16,31 @@
 // MSVC needs this indirection for proper __VA_ARGS__ expansion. I case we ever need to support MSVC...
 #define MOZZI__MACRO_EVAL(...) __VA_ARGS__
 
-/// @file mozzi_internal_macros
-/// compile time check whether the given first value (usually specified as a #define) is among the values specified in subsequent args (up to 20)
-/// @example MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_EXTERNAL)
+/** @file mozzi_internal_macros
+ * compile time check whether the given first value (usually specified as a #define) is among the values specified in subsequent args (up to 20)
+ *
+ * Example: @code MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_EXTERNAL) @endcode
+*/
 #define MOZZI_CHECK_SUPPORTED(X, ...) MOZZI__MACRO_EVAL(MOZZI__CHECK_SUPPORTED(X, #X, __VA_ARGS__, \
      MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, \
      MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, \
      MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, \
      MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE, MOZZI__INVALID_CONFIG_VALUE))
 
-/// Complain if the given argument is not a power of two
+/** Compile time check to complain if the given argument is not a power of two */
 #define MOZZI_CHECK_POW2(X) static_assert((X & (X - 1)) == 0, #X " must be a power of two");
 
-/// Simply a way to check if X is Y, realiably, in case one or both are defined empty (such as because of a programmer's typo)
+/** Simply a way to check if X equal Y, realiably (at compile time). The advantage of this macro is that it will produce an error, in case one or both are defined empty
+ * (such as because of a programmer's typo)
+ *
+ * TODO: Gahh, this doesn't work. I thought it did.
+ *
+ * Example: @code
+ * #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
+ * [...]
+ * #endif
+ * @endcode
+ */
 #define MOZZI_IS(X, Y) (X == Y)
 
 #endif

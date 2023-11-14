@@ -46,18 +46,11 @@
  *  than 16 bits). */
 #define AudioOutputStorage_t int
 
-#if IS_AVR() && ((AUDIO_MODE == STANDARD_PLUS) || (AUDIO_MODE == STANDARD))
-// TODO: remove this specialisation -> see MOZZI_AUDIO_BITS_OPTIMISTIC
-#define SCALE_AUDIO(x,bits) (bits > 8 ? (x) >> (bits - 8) : (x) << (8 - bits))
-#define SCALE_AUDIO_NEAR(x,bits) (bits > 9 ? (x) >> (bits - 9) : (x) << (9 - bits))
-#define CLIP_AUDIO(x) constrain((x), -244,243)
-#else
-#define SCALE_AUDIO(x,bits) (bits > AUDIO_BITS ? (x) >> (bits - AUDIO_BITS) : (x) << (AUDIO_BITS - bits))
-#define SCALE_AUDIO_NEAR(x,bits) SCALE_AUDIO(x,bits)
-#define CLIP_AUDIO(x) constrain((x), (-(AudioOutputStorage_t) AUDIO_BIAS), (AudioOutputStorage_t) AUDIO_BIAS-1)
-#endif
+#define SCALE_AUDIO(x,bits) (bits > MOZZI_AUDIO_BITS ? (x) >> (bits - MOZZI_AUDIO_BITS) : (x) << (MOZZI_AUDIO_BITS - bits))
+#define SCALE_AUDIO_NEAR(x,bits) (bits > MOZZI_AUDIO_BITS_OPTIMISTIC ? (x) >> (bits - MOZZI_AUDIO_BITS_OPTIMISTIC) : (x) << (MOZZI_AUDIO_BITS_OPTIMISTIC - bits))
+#define CLIP_AUDIO(x) constrain((x), (-(AudioOutputStorage_t) MOZZI_AUDIO_BIAS), (AudioOutputStorage_t) MOZZI_AUDIO_BIAS-1)
 
-#if (AUDIO_CHANNELS == STEREO)
+#if MOZZI_IS(MOZZI_AUDIO_CHANNELS, MOZZI_STEREO)
 #define AudioOutput StereoOutput
 #if (STEREO_HACK == true)
 #define AudioOutput_t void
@@ -93,7 +86,7 @@ struct StereoOutput {
   StereoOutput(AudioOutputStorage_t l, AudioOutputStorage_t r) : _l(l), _r(r) {};
   /** Default contstructor */
   StereoOutput() : _l(0), _r(0) {};
-#if (MOZZI_AUDIO_CHANNELS != MOZZI_STEREO)
+#if !MOZZI_IS(MOZZI_AUDIO_CHANNELS, MOZZI_STEREO)
   /** Conversion to int operator: If used in a mono config, returns only the left channel (and gives a compile time warning). 
       This _could_ be turned into an operator for implicit conversion in this case. For now we chose to apply conversion on demand, only, as most of the time
       using StereoOutput in a mono config, is not intended. */
@@ -134,7 +127,7 @@ private:
 struct MonoOutput {
   /** Construct an audio frame from raw values (zero-centered) */
   MonoOutput(AudioOutputStorage_t l=0) : _l(l) {};
-#if (AUDIO_CHANNELS > 1)
+#if (MOZZI_AUDIO_CHANNELS > 1)
   /** Conversion to stereo operator: If used in a stereo config, returns identical channels (and gives a compile time warning).
       This _could_ be turned into an operator for implicit conversion in this case. For now we chose to apply conversion on demand, only, as most of the time
       using StereoOutput in a mono config, is not intended. */
@@ -213,9 +206,5 @@ inline uint32_t pdmCode32(uint16_t sample) {
   }
   return outbits;
 }
-
-#if (EXTERNAL_AUDIO_OUTPUT == true)
-#warning "Mozzi is configured to use an external void 'audioOutput(const AudioOutput f)' function. Please define one in your sketch"
-#endif
 
 #endif

@@ -18,8 +18,8 @@
 
 ////// BEGIN analog input code ////////
 
-#if (USE_AUDIO_INPUT)
-#define AUDIO_INPUT_MODE AUDIO_INPUT_CUSTOM
+#if MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_STANDARD)
+#define MOZZI__LEGACY_AUDIO_INPUT_IMPL 0
 
 #include <Arduino_AdvancedAnalog.h>
 

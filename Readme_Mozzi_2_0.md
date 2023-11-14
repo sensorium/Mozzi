@@ -24,7 +24,8 @@ all new
  - MOZZI_ANALOG_READS
  - MOZZI_COMPATIBILITY_LEVEL
 
-
+general:
+ - Added many config sanity checks. Some may be too strict, if so please mention
 
  Other removed stuff:
  - pauseMozzi() - was still declared but not defined -> not usable, anyway

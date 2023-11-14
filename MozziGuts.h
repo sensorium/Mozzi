@@ -32,37 +32,6 @@
 
 #include "internal/config_check_generic.h"
 
-
-#if (EXTERNAL_AUDIO_OUTPUT != true)
-#if IS_TEENSY3()
-#include "AudioConfigTeensy3_12bit.h"
-#elif IS_TEENSY4()
-#include "AudioConfigTeensy4.h"
-#elif IS_STM32()
-#include "AudioConfigSTM32.h"
-#elif IS_STM32DUINO()
-#include "AudioConfigSTM32duino.h"
-#elif IS_ESP8266()
-#include "AudioConfigESP.h"
-#elif IS_ESP32()
-#include "AudioConfigESP32.h"
-#elif IS_SAMD21()
-#include "AudioConfigSAMD21.h"
-#elif IS_RP2040()
-#include "AudioConfigRP2040.h"
-#elif IS_MBED()
-#include "AudioConfigMBED.h"
-#elif IS_RENESAS()
-#include "AudioConfigRenesas.h"
-#endif
-#else // EXTERNAL_AUDIO_OUTPUT==true
-#if !defined(EXTERNAL_AUDIO_BITS)
-#define EXTERNAL_AUDIO_BITS 16
-#endif
-#define AUDIO_BITS EXTERNAL_AUDIO_BITS
-#define AUDIO_BIAS (1 << (AUDIO_BITS - 1))
-#endif
-
 #if (STEREO_HACK == true)
 extern int audio_out_1, audio_out_2;
 #endif

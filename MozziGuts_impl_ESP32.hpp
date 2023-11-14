@@ -39,22 +39,21 @@ void setupMozziADC(int8_t speed) {
 
 
 //// BEGIN AUDIO OUTPUT code ///////
-#include <driver/i2s.h>   // for I2S-based output modes
-#include <driver/timer.h> // for EXTERNAL_AUDIO_OUTPUT
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC) || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC) || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S)
+#  include <driver/i2s.h>   // for I2S-based output modes, including - technically - internal DAC
+const i2s_port_t i2s_num = MOZZI_I2S_PORT;
 
-#if (EXTERNAL_AUDIO_OUTPUT != true)
-#  include "AudioConfigESP32.h"
 // On ESP32 we cannot test wether the DMA buffer has room. Instead, we have to use a one-sample mini buffer. In each iteration we
 // _try_ to write that sample to the DMA buffer, and if successful, we can buffer the next sample. Somewhat cumbersome, but works.
 // TODO: Should ESP32 gain an implemenation of i2s_available(), we should switch to using that, instead.
 static bool _esp32_can_buffer_next = true;
-#  if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
+#  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
 static uint16_t _esp32_prev_sample[2];
 #    define ESP_SAMPLE_SIZE (2*sizeof(uint16_t))
-#  elif (ESP32_AUDIO_OUT_MODE == PT8211_DAC)
+#  elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC)
 static int16_t _esp32_prev_sample[2];
 #    define ESP_SAMPLE_SIZE (2*sizeof(int16_t))
-#  elif (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
+#  elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S)
 static uint32_t _esp32_prev_sample[PDM_RESOLUTION];
 #    define ESP_SAMPLE_SIZE (PDM_RESOLUTION*sizeof(uint32_t))
 #  endif
@@ -72,17 +71,17 @@ inline bool canBufferAudioOutput() {
 }
 
 inline void audioOutput(const AudioOutput f) {
-#  if (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
-  _esp32_prev_sample[0] = (f.l() + AUDIO_BIAS) << 8;
-#    if (AUDIO_CHANNELS > 1)
-  _esp32_prev_sample[1] = (f.r() + AUDIO_BIAS) << 8;
+#  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
+  _esp32_prev_sample[0] = (f.l() + MOZZI_AUDIO_BIAS) << 8;
+#    if (MOZZI_AUDIO_CHANNELS > 1)
+  _esp32_prev_sample[1] = (f.r() + MOZZI_AUDIO_BIAS) << 8;
 #    else
   // For simplicity of code, even in mono, we're writing stereo samples
   _esp32_prev_sample[1] = _esp32_prev_sample[0];
 #    endif
-#  elif (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
-  for (uint8_t i=0; i<PDM_RESOLUTION; ++i) {
-    _esp32_prev_sample[i] = pdmCode32(f.l() + AUDIO_BIAS);
+#  elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S)
+  for (uint8_t i=0; i<MOZZI_PDM_RESOLUTION; ++i) {
+    _esp32_prev_sample[i] = pdmCode32(f.l() + MOZZI_AUDIO_BIAS);
   }
 #  else
   // PT8211 takes signed samples
@@ -93,7 +92,8 @@ inline void audioOutput(const AudioOutput f) {
 }
 #endif
 
-#if (BYPASS_MOZZI_OUTPUT_BUFFER != true)
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)
+#  include <driver/timer.h>
 void CACHED_FUNCTION_ATTR timer0_audio_output_isr(void *) {
   TIMERG0.int_clr_timers.t0 = 1;
   TIMERG0.hw_timer[0].config.alarm_en = 1;
@@ -102,7 +102,7 @@ void CACHED_FUNCTION_ATTR timer0_audio_output_isr(void *) {
 #endif
 
 static void startAudio() {
-#if (BYPASS_MOZZI_OUTPUT_BUFFER != true)  // for external audio output, set up a timer running a audio rate
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)  // for external audio output, set up a timer running a audio rate
   static intr_handle_t s_timer_handle;
   const int div = 2;
   timer_config_t config = {
@@ -116,19 +116,19 @@ static void startAudio() {
   };
   timer_init(TIMER_GROUP_0, TIMER_0, &config);
   timer_set_counter_value(TIMER_GROUP_0, TIMER_0, 0);
-  timer_set_alarm_value(TIMER_GROUP_0, TIMER_0, 80000000UL / AUDIO_RATE / div);
+  timer_set_alarm_value(TIMER_GROUP_0, TIMER_0, 80000000UL / MOZZI_AUDIO_RATE / div);
   timer_enable_intr(TIMER_GROUP_0, TIMER_0);
   timer_isr_register(TIMER_GROUP_0, TIMER_0, &timer0_audio_output_isr, nullptr, 0, &s_timer_handle);
   timer_start(TIMER_GROUP_0, TIMER_0);
 
 #else
   static const i2s_config_t i2s_config = {
-#  if (ESP32_AUDIO_OUT_MODE == PT8211_DAC) || (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
+#  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC) || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S)
     .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX),
-#  elif (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
+#  elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
     .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN),
 #  endif
-    .sample_rate = AUDIO_RATE * PDM_RESOLUTION,
+    .sample_rate = MOZZI_AUDIO_RATE * MOZZI_PDM_RESOLUTION,
     .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,  // only the top 8 bits will actually be used by the internal DAC, but using 8 bits straight away seems buggy
     .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,  // always use stereo output. mono seems to be buggy, and the overhead is insignifcant on the ESP32
     .communication_format = (i2s_comm_format_t)(I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_LSB),  // this appears to be the correct setting for internal DAC and PT8211, but not for other dacs
@@ -139,15 +139,15 @@ static void startAudio() {
   };
 
   i2s_driver_install(i2s_num, &i2s_config, 0, NULL);
-#  if (ESP32_AUDIO_OUT_MODE == PT8211_DAC) || (ESP32_AUDIO_OUT_MODE == PDM_VIA_I2S)
+#  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC) || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S)
   static const i2s_pin_config_t pin_config = {
-    .bck_io_num = ESP32_I2S_BCK_PIN,
-    .ws_io_num = ESP32_I2S_WS_PIN,
-    .data_out_num = ESP32_I2S_DATA_PIN,
+    .bck_io_num = MOZZI_I2S_PIN_BCK,
+    .ws_io_num = MOZZI_I2S_PIN_WS,
+    .data_out_num = MOZZI_I2S_PIN_DATA,
     .data_in_num = -1
   };
   i2s_set_pin((i2s_port_t)i2s_num, &pin_config);
-#  elif (ESP32_AUDIO_OUT_MODE == INTERNAL_DAC)
+#  elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
   i2s_set_pin((i2s_port_t)i2s_num, NULL);
   i2s_set_dac_mode(I2S_DAC_CHANNEL_BOTH_EN);
 #  endif
@@ -160,3 +160,5 @@ void stopMozzi() {
   // TODO: implement me
 }
 //// END AUDIO OUTPUT code ///////
+
+#undef ESP_SAMPLE_SIZE    // only used inside this file

@@ -7,6 +7,12 @@
 #include "../MozziConfigValues.h"  // in case not user-included
 #include "mozzi_macros.h"
 
+/// Step 0: Check for some stuff that user should never configure directly (but may be set, indirectly from the hardware-specific setups)
+#if defined(BYPASS_MOZZI_OUTPUT_BUFFER)
+#error "BYPASS_MOZZI_OUTPUT_BUFFER may not be customized via config"
+#endif
+
+
 //// Step 1: Apply missing defaults for generic config options (not the hardware specific ones)
 #if not defined(MOZZI_COMPATIBILITY_LEVEL)
 #define MOZZI_COMPATIBILITY_LEVEL MOZZI_COMPATIBILITY_2_0
@@ -45,10 +51,11 @@
 //MOZZI_AUDIO_PIN_2_LOW -> hardware specific
 
 
-
 /// Step 2: Include the hardware specific checks-and-defaults-header
 #if IS_AVR()
 #include "config_checks_avr.h"
+#elif IS_ESP32()
+#include "config_checks_esp32.h"
 #else
 // TODO
 #error oops
@@ -80,10 +87,6 @@ MOZZI_CHECK_POW2(MOZZI_CONTROL_RATE)
 
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED) || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_CUSTOM)
 #warning "Mozzi is configured to use an external void 'audioOutput(const AudioOutput f)' function. Please define one in your sketch"
-#endif
-
-#if defined(BYPASS_MOZZI_OUTPUT_BUFFER)
-#error "BYPASS_MOZZI_OUTPUT_BUFFER may not be customized via config"
 #endif
 
 // Hardware-specific checks file should have more narrow checks for most options, below, but is not required to, so let's check for anything that is wildly out of scope:

@@ -59,6 +59,8 @@
 #include "config_checks_avr.h"
 #elif IS_ESP32()
 #include "config_checks_esp32.h"
+#elif IS_ESP8266()
+#include "config_checks_esp8266.h"
 #else
 // TODO
 #error oops

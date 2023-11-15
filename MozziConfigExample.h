@@ -141,10 +141,11 @@
  * disabled, explicitly, to save resources, or in order to implement custom read schemes (e.g. with IO multiplexing).
  *
  * For simplicity, mozziAnalogRead() is always defined, but when MOZZI_ANALOG_READ s are disabled or unsupported, it simply relays
- * to Arduino's regular analogRead(). Also setupFastAnalogReads() continues to be defined, for your convenience, but is not called automatically.
+ * to Arduino's regular analogRead(). It is thus quite recommended _not_ to depend on mozziAnalogRead() when disabling this.
+ * Also setupFastAnalogReads() continues to be defined, for your convenience, but is not called automatically.
  *
  * As a rough estimate (your numbers may differ a bit, depending on compiler version, etc.), on an ATMEGA328P (aka Arduino Uno),
- * disabling analog reads saves 33 bytes of RAM and 340 bytes of FLASH. The performance savings are theorized to be non-measurable, however.
+ * disabling analog reads saves 33 bytes of RAM and 340 bytes of FLASH. The performance savings are theorized to be neglegible, however.
  *
  * Currently allowed values are:
  *   - MOZZI_ANALOG_READ_NONE
@@ -428,5 +429,58 @@
  * of ones and zeros. Obviously, more is potentially better, but at the cost of considerable computation power.
  *
  * @section esp32_external MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ * See @ref external_audio
+*/
+
+
+/***************************************** ADVANCED SETTTINGS -- ESP8266 ***********************************************************
+ *
+ * The settings in the following section applies to the ESP8266 architecture.
+ *
+ * It is generally not recommended to change anything, here, unless you really know, what you are doing and/or
+ * are willing to rough it out by yourself.
+ *
+********************************************************************************************************************************/
+
+
+/** @ingroup hardware
+ * @page hardware_esp8266 Mozzi on ESP32-based boards.
+ *
+ * The following audio modes (see @ref MOZZI_AUDIO_MODE) are currently supported on this hardware:
+ *   - MOZZI_OUTPUT_EXTERNAL_TIMED
+ *   - MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ *   - MOZZI_OUTPUT_PDM_VIA_I2S
+ *   - MOZZI_OUTPUT_PDM_VIA_SERIAL
+ *   - MOZZI_OUTPUT_I2S_DAC
+ *
+ * The default mode is @ref esp8266_pdm_via_serial .
+ *
+ * @note
+ * This port really does not currently come with a PWM mode!
+ *
+ * @section esp8266_pdm_via_serial MOZZI_OUTPUT_PDM_VIA_SERIAL
+ * Output is coded using pulse density modulation, and sent via GPIO2 (Serial1 TX).
+ *   - This output mode uses timer1 for queuing audio sample, so that timer is not available for other uses.
+ *   - Note that this mode has slightly lower effective analog output range than @ref esp8266_pdm_via_i2s, due to start/stop bits being added to the output stream.
+ *   - Supports mono output, only, pins not configurable.
+ *
+ * The option @ref MOZZI_PDM_RESOLTUON (default value 2, corresponding to 64 ones and zeros per audio sample) can be used to adjust the output resolution.
+ * Obviously higher values demand more computation power.
+ *
+ * @section esp8266_pdm_via_serial MOZZI_OUTPUT_PDM_VIA_I2S
+ * Output is coded using pulse density modulation, and sent via the I2S pins. The I2S data out pin (GPIO3, which is also "RX") will have the output,
+ * but *all* I2S output pins (RX, GPIO2 and GPIO15) will be affected. Mozzi tries to set GPIO2 and GPIO15 to input mode, and *at the time of this writing*, this allows
+ * I2S output on RX even on boards such as the ESP01 (where GPIO15 is tied to Ground). However, it seems safest to assume that this mode may not be useable on boards where
+ * GPIO2 or GPIO15 are not available as output pins.
+ *
+ * Supports mono output, only, pins not configurable.
+ *
+ * Resolution may be controlled using MOZZI_PDM_RESOLUTION (see above; default value is 2).
+ *
+ * @section esp8266_i2s_dac MOZZI_OUTPUT_I2S_DAC
+ * Output is sent to an external DAC (such as a PT8211), digitally coded. This is the only mode that supports stereo (@ref MOZZI_AUDIO_CHANNELS). It also needs the least processing power.
+ * The pins cannot be configured (GPIO3/RX, GPIO2, and GPIO15).
+ *
+ * @section esp8266_external MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM
  * See @ref external_audio
 */

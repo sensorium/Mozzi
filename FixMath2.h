@@ -16,7 +16,7 @@
 
 #include "IntegerType.h"
 
-#define SHIFTR(x,bits) (bits > 0 ? x >> (bits) : x << (-bits)) // shift right for positive shift numbers, and left for negative ones.
+#define SHIFTR(x,bits) (bits > 0 ? (x >> (bits)) : (x << (-bits))) // shift right for positive shift numbers, and left for negative ones.
 #define MAX(N1,N2) (N1 > N2 ? N1 : N2)
 
 template<byte NI, byte NF> // NI and NF being the number of bits for the integral and the fractionnal parts respectively.
@@ -60,13 +60,20 @@ public:
  
 
   // Multiplication overload, returns the compound type
-  template<byte _NI, byte _NF>
-  UFixMath2<NI+_NI,NF+_NF> operator* (const UFixMath2<_NI,_NF>& op)
+  /* template<byte _NI, byte _NF>
+ const UFixMath2<NI+_NI,NF+_NF> operator* (const UFixMath2<_NI,_NF>& op)
   {
     typedef typename IntegerType< ((NI+_NI+NF+_NF-1)>>3)+1>::unsigned_type return_type ;
     return_type tt = return_type(internal_value)*op.getInt();
     return UFixMath2<NI+_NI,NF+_NF>(tt,true);
+    }*/
 
+  template<byte _NI, byte _NF>
+  UFixMath2<NI+_NI,NF+_NF> operator* (const UFixMath2<_NI,_NF>& op) const
+  {
+    typedef typename IntegerType< ((NI+_NI+NF+_NF-1)>>3)+1>::unsigned_type return_type ;
+    return_type tt = return_type(internal_value)*op.getInt();
+    return UFixMath2<NI+_NI,NF+_NF>(tt,true);
   }
     
     
@@ -85,7 +92,7 @@ public:
 
   
   float asFloat() { return (static_cast<float>(internal_value)) / (next_greater_type(1)<<NF); }
-  internal_type getInt() { return internal_value; }
+  internal_type getInt() const { return internal_value; }
   
 
   /* byte getNI(){return NI;}

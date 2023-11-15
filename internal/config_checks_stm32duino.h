@@ -1,8 +1,29 @@
-#ifndef AUDIOCONFIGSTM32_H
-#define AUDIOCONFIGSTM32_H
+#ifndef CONFIG_CHECKS_STM32DUINO_H
+#define CONFIG_CHECKS_STM32DUINO_H
 
 #if not IS_STM32DUINO()
 #error This header should be included for STM32 (stm32duino.com core), only
+#endif
+
+#if !defined(MOZZI_AUDIO_MODE)
+#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_PWM
+#endif
+MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPUT_EXTERNAL_CUSTOM, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_2PIN_PWM)
+
+#if !defined(MOZZI_AUDIO_RATE)
+#define MOZZI_AUDIO_RATE 32768
+#endif
+
+
+
+
+
+
+
+
+
+#if !defined(MOZZI_AUDIO_BITS)
+#  define MOZZI_AUDIO_BITS 16
 #endif
 
 // Audio output pin. If you want to change this, make sure to also set AUDIO_PWM_TIMER to whichever timer is responsible for your PWM pin, and set the other timers to non-conflicting values
@@ -27,7 +48,5 @@
 #endif
 #endif
 
-#define AUDIO_BIAS ((uint16_t) 1<<(AUDIO_BITS-1))
 
-#endif        //  #ifndef AUDIOCONFIGSTM32_H
-
+#endif        //  #ifndef CONFIG_CHECKS_STM32DUINO_H

@@ -484,3 +484,387 @@
  * @section esp8266_external MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM
  * See @ref external_audio
 */
+
+
+
+/***************************************** ADVANCED SETTTINGS -- Arduino Giga/Portenta MBED ***********************************************************
+ *
+ * The settings in the following section applies to Arduino Giga/Portenta (MBED architecture)
+ *
+ * It is generally not recommended to change anything, here, unless you really know, what you are doing and/or
+ * are willing to rough it out by yourself.
+ *
+********************************************************************************************************************************/
+
+
+/** @ingroup hardware
+ * @page hardware_mbed Mozzi on MBED-based boards (Arduino Giga / Portenta).
+ *
+ * The following audio modes (see @ref MOZZI_AUDIO_MODE) are currently supported on this hardware:
+ *   - MOZZI_OUTPUT_EXTERNAL_TIMED
+ *   - MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ *   - MOZZI_OUTPUT_PDM_VIA_SERIAL
+ *   - MOZZI_OUTPUT_INTERNAL_DAC
+ *
+ * The default mode is @ref mbed_internal_dac .
+ *
+ * @section mbed_internal_dac MOZZI_OUTPUT_INTERNAL_DAC
+ * This uses the inbuild DAC on the board. The default is setting is appropriate for the Arduino Giga: 12 bits going to A13 (3.5mm jack connector's tip),
+ * and in stereo mode to pin A12 (3.5mm jack connector's first ring) additionally.
+ *
+ * For other boards is may be appropriate to customize:
+ * @code
+ * #define MOZZI_AUDIO_PIN_1   ...   // mono / left channel; default: A13
+ * #define MOZZI_AUDIO_PIN_1   ...   // stereo only: right channel; default: A12
+ * #define MOZZI_AUDIO_BITS    ...   // default is 12
+ * @endcode
+ *
+ * @section mbed_pdm_via_serial MOZZI_PDM_VIA_SERIAL
+ * Returns a pulse-density modulated (mono only) signal on one of the hardware UARTs of the board (Serial ports). Default is using the SERIAL2, on pin D18.
+ * You can confiugre the pins to use, but it must be connected to a hardware UART. Output is written to the TX pin, only, but the RX pin needs to be
+ * claimed as well. Beware of confusing pinout labelling, for instance SERIAL2_TX iss labelled "TX1" on the Arduino Giga. The audio resolution can be enhanced
+ * using @ref MOZZI_PDM_RESOLUTION, which is described in more detail here: @esp32_pdm_via_i2s .
+ *
+ * Configuration options:
+ * @code
+ * #define MOZZI_SERIAL_PIN_TX ...    // default: SERIAL2_TX
+ * #define MOZZI_SERIAL_PIN_RX ...    // *must* specify the matching one, if customizing the above; default: SERIAL2_RX
+ * #define MOZZI_PDM_RESOLUTION ...   // default value is 2, for 2*32 ones and zeros per audio sample
+ * @endcode
+ *
+ * @section mbed_external MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ * See @ref external_audio
+*/
+
+
+/***************************************** ADVANCED SETTTINGS -- Arduino Uno R4 - Renesas ***********************************************************
+ *
+ * The settings in the following section applies to Arduino Uno R4 - Renesas
+ *
+ * It is generally not recommended to change anything, here, unless you really know, what you are doing and/or
+ * are willing to rough it out by yourself.
+ *
+********************************************************************************************************************************/
+
+
+/** @ingroup hardware
+ * @page hardware_renesas Mozzi on Arduino Uno R4 - Renesas.
+ *
+ * The following audio modes (see @ref MOZZI_AUDIO_MODE) are currently supported on this hardware:
+ *   - MOZZI_OUTPUT_EXTERNAL_TIMED
+ *   - MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ *   - MOZZI_OUTPUT_INTERNAL_DAC
+ *
+ * The default mode is @ref renesas_internal_dac. Further modes may be added in the future.
+  - Because this board has an on-board DAC (A0), but only one, STEREO is not implemented and Mozzi uses this pin. Usage of other pins using PWM for instance is not implemented yet.
+  - Two timers are claimed by Mozzi when using the on-board DAC, one when using `EXTERNAL_AUDIO_OUTPUT`.
+  - `mozziAnalogRead()` returns values in the Renesas' full ADC resolution of 0-16384 rather than AVR's 0-1023. *This might change in the near future for speed purposes.*
+
+ * @section renesas_internal_dac MOZZI_OUTPUT_INTERNAL_DAC
+ * This uses the inbuild DAC on the board on pin A0. Mono output only, and the pin is not configurable. Audio resolution is also fixed at 12 bits (which is what the board supports).
+ *
+ * This mode claims two timers (but it is not hardcoded, which ones).
+ *
+ * @section renesas_external MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ * MOZZI_OUTPUT_EXTERNAL_TIMED claimes one timer, MOZZI_OUTPUT_EXTERNAL_CUSTOM does not claim any timer.
+ * See @ref external_audio
+*/
+
+
+
+
+/***************************************** ADVANCED SETTTINGS -- RP2040 (Raspberry Pi Pico) ***********************************************************
+ *
+ * The settings in the following section applies to RP2040 (Raspberry Pi Pico)
+ *
+ * It is generally not recommended to change anything, here, unless you really know, what you are doing and/or
+ * are willing to rough it out by yourself.
+ *
+********************************************************************************************************************************/
+
+
+/** @ingroup hardware
+ * @page hardware_rp2040 Mozzi on RP2040 (Raspberry Pi Pico)
+ *
+ * The following audio modes (see @ref MOZZI_AUDIO_MODE) are currently supported on this hardware:
+ *   - MOZZI_OUTPUT_EXTERNAL_TIMED
+ *   - MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ *   - MOZZI_OUTPUT_PDM
+ *   - MOZZI_OUTPUT_I2S_DAC
+ *
+ * The default mode is @ref rp2040_pdm .
+ *
+ * @section rp2040_pdm MOZZI_OUTPUT_PDM
+ * Audio output is written to pin 0 (mono) or 0 and 1 (stereo), by default, with 11 bits of ouput resolution.
+ * One hardware timer interrupt and one DMA channel are claimed (number not hardcoded), a non-exclusive handler is installed on DMA_IRQ_0.
+ *
+ * Configuration options:
+ * @code
+ * #define MOZZI_AUDIO_PIN_1   ...  // default is 0
+ * #define MOZZI_AUDIO_BITS    ...  // output resolution (bits); default is 11
+ * // additionally, for stereo:
+ * #define MOZZI_AUDIO_PIN_2   ...  // default is 1
+ * @endcode
+ *
+ * @section rp2040_i2s_dac MOZZI_OUTPUT_I2S_DAC
+ * Output to an external DAC, connected via I2S. This uses 16 bit (per audio channel), but can be changed to 8, 16, 24 (left aligned) and 32 resolution.
+ * Both plain I2S and LSBJ format (PT8211 needs this, for instance) are available. LSBJ format is used by default. The GPIO pins to use can be configured,
+ * - almost - freely (see below). Two DMA channels are claimed (numbers not hardcoded), non-exclusive handlers are installed on DMA_IRQ_0.
+ *
+ * Configuration options:
+ * @code
+ * #define MOZZI_AUDIO_BITS    ...  // available values are 8, 16 (default), 24 (LEFT ALIGN in 32 bits type!!) and 32 bits
+ * #define MOZZI_I2S_PIN_BCK                        ... // /BLCK) default is 20
+ * //#define MOZZI_I2S_PIN_WS (MOZZI_I2S_PIN_BCK+1) ... // CANNOT BE CHANGED, HAS TO BE NEXT TO pBCLK, i.e. default is 21
+ * #define MOZZI_I2S_PIN_DATA                       ... // (DOUT) default is 22
+ * #define MOZZI_I2S_FORMAT                         ... // may be MOZZI_I2S_FORMAT_LSBJ (default) or MOZZI_I2S_FORMAT_PLAIN
+ * @endcode
+ *
+ * @section rp2040_external MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ * See @ref external_audio
+*/
+
+
+
+/***************************************** ADVANCED SETTTINGS -- SAMD21 ***********************************************************
+ *
+ * The settings in the following section applies to SAMD21 boards
+ *
+ * It is generally not recommended to change anything, here, unless you really know, what you are doing and/or
+ * are willing to rough it out by yourself.
+ *
+********************************************************************************************************************************/
+
+/** @ingroup hardware
+ * @page hardware_samd Mozzi on SAMD21 based boards (Arduino Circuitplayground M0 and others)
+ *
+ * The following audio modes (see @ref MOZZI_AUDIO_MODE) are currently supported on this hardware:
+ *   - MOZZI_OUTPUT_EXTERNAL_TIMED
+ *   - MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ *   - MOZZI_OUTPUT_INTERNAL_DAC
+ *
+ * The default mode is @ref samd_internal_dac , meaning, only boards with an inbuilt DAC are covered by default
+ * (you could stil use one of the external output modes, however).
+ *
+ * @section samd_internal_dac MOZZI_OUTPUT_INTERNAL_DAC
+ * Output resolution is 10 bits by default, and goes to pin DAC0. Only mono output is supported. Within the hardware limits of your board, you can configure the following:
+ *
+ * @code
+ * #define MOZZI_AUDIO_PIN_1   ...  // default is DAC0
+ * #define MOZZI_AUDIO_BITS    ...  // default is 10
+ * @endcode
+ *
+ * @section samd_external MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ * See @ref external_audio
+*/
+
+
+
+
+/***************************************** ADVANCED SETTTINGS -- STM32(duino) ***********************************************************
+ *
+ * The settings in the following section applies to the STM32(duino) architecture.
+ *
+ * It is generally not recommended to change anything, here, unless you really know, what you are doing and/or
+ * are willing to rough it out by yourself.
+ *
+********************************************************************************************************************************/
+
+/** @ingroup hardware
+* @page hardware_stm32_disambiguation Mozzi on STM32-based boards - disambiguation
+*
+*  * The situation on STM32-based boards is rather confusing, as there are several competing Arduino cores. Importantly:
+*    - Some boards use dedicated cores (e.g. Arduino Giga / Portenta @ref hardware_mbed) etc. For those, see the relevant sections (if we support them).
+*    - There is a series of libmaple-based cores, including [Roger Clark's libmaple-based core](https://github.com/rogerclarkmelbourne/Arduino_STM32). These are highly optimized,
+*      and provide very complete support, but only for a limited number of boards. Unfortunately, at the time of this writing (2023/04), they are not available for installation
+*      via the Arduino Board Manager, and they do not currently seem actively maintained.
+*      For using these with Mozzi, see @ref hardware_stm32_maple
+*    - A generic Arduino core for STM32 is the [STM32duino core](https://github.com/stm32duino/Arduino_Core_STM32). It supports a huge step of boards, and seems to have offical
+*      backing by STM, but some features of the libmaple based cores are still lacking. To complete confusion, this core now uses the label "STM32duino", which used to be what
+*      the libmaple cores above were known by (don't blame Mozzi for this mess!).
+*      For using this with Mozzi, see @ref hardware_stm32duino
+*
+* */
+
+/** @ingroup hardware
+ * @page hardware_stm32duino Mozzi on STM32duino-based boards.
+ *
+ * @note
+ * Be sure to understand the info given at @ref hardwware_stm32_disambiguation . This page is about using Mozzi with the STM32duino core.
+ *
+ * The following audio modes (see @ref MOZZI_AUDIO_MODE) are currently supported on this hardware:
+ *   - MOZZI_OUTPUT_EXTERNAL_TIMED
+ *   - MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ *   - MOZZI_OUTPUT_PWM
+ *   - MOZZI_OUTPUT_PWM_2PIN
+ *
+ * The default mode is @ref stm32duino_pwm .
+ *
+ * @note
+ * This port may look similar to, but uses a different default GPIO pinout than @hardware_stm32_maple !
+ *
+ * @section stm32duino_pwm MOZZI_OUTPUT_PWM
+ * Standard pulse width modulated output to one (mono) or two (stereo, see @ref MOZZI_AUDIO_CHANNELS) GPIO pins. Default pinout: PA8 (mono/left), PA9 (right channel in stereo).
+ * This mode uses two hardware timers: One for the PWM (Timer 3 when using the default pin configuration), and a second for updating the output at audio rate.
+ * The default audio resolution is 10 bits, which results in a carrier frequency of ~70kHz on a 72MHz CPU. On slower boards you will have to descrease this.
+ * The following settings may be costumized, if desired:
+ *
+ * @code
+ * #define MOZZI_AUDIO_PIN_1       ...  // Left / mono output pin. Default: PA8
+ * #define MOZZI_AUDIO_UPDATE_TIMER ... // Second hardware timer to claim. Default TIM2
+ * #define MOZZI_AUDIO_BITS        ...  // Output resolution in bits. Default is 10
+ * // For stereo, only:
+ * #define MOZZI_AUDIO_PIN_2       ...  // Right channel output pin. This *must* be connected to the same hardware timer as MOZZI_AUDIO_PIN_1 ! Default: PA9
+ * @endcode
+ *
+ * @section stm32duino_pwm MOZZI_OUTPUT_2PIN_PWM
+ * This mode is very similar to @ref stm32duino_pwm, but splitting output for a single channel across two GPIO pins for better resolution. For details on the required
+ * hardware setup, and configuration tradeoffs, see @ref avr_2pin_pwm . Stereo output is not available in this mode.
+ *
+ * Customizable configuration options:
+ * @code
+ * #define MOZZI_AUDIO_PIN_1       ...  // High byte of the output. Default: PA8
+ * #define MOZZI_AUDIO_PIN_2       ...  // Low byte of the output. Default: PA9
+ * #define MOZZI_AUDIO_UPDATE_TIMER ... // Second hardware timer to claim. Default TIM2
+ * #define MOZZI_AUDIO_BITS_PER_CHANNEL  ...  // Bits per pin. Default is 7
+ * @endcode
+ *
+ * @section stm32duino_external MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ * See @ref external_audio .
+ * The (single) hardware timer claimed for MOZZI_OUTPUT_EXTERNAL_TIMED may be configured using "MOZZI_AUDIO_UPDATE_TIMER" (default: TIM2).
+*/
+
+
+
+/***************************************** ADVANCED SETTTINGS -- STM32 (libmaple-based core) ***********************************************************
+ *
+ * The settings in the following section applies to the STM32 (libmaple-based core) architecture.
+ *
+ * It is generally not recommended to change anything, here, unless you really know, what you are doing and/or
+ * are willing to rough it out by yourself.
+ *
+********************************************************************************************************************************/
+
+/** @ingroup hardware
+ * @page hardware_stm32_maple Mozzi on STM32duino-based boards.
+ *
+ * @note
+ * Be sure to understand the info given at @ref hardwware_stm32_disambiguation . This page is about using Mozzi with the STM32 "libmaple based" core.
+ *
+ * @note
+ * This port may look similar to, but uses a different default GPIO pinout than @hardware_stm32duino !
+ *
+ * The following audio modes (see @ref MOZZI_AUDIO_MODE) are currently supported on this hardware:
+ *   - MOZZI_OUTPUT_EXTERNAL_TIMED
+ *   - MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ *   - MOZZI_OUTPUT_PWM
+ *   - MOZZI_OUTPUT_PWM_2PIN
+ *
+ * The default mode is @ref stm32_maple_pwm .
+ *
+ * @section stm32_maple_pwm MOZZI_OUTPUT_PWM
+ * Standard pulse width modulated output to one (mono) or two (stereo, see @ref MOZZI_AUDIO_CHANNELS) GPIO pins. Default pinout: PB8 (mono/left), PB9 (right channel in stereo).
+ * This mode uses two hardware timers: One for the PWM (Timer 4 when using the default pin configuration), and a second for updating the output at audio rate.
+ * The default audio resolution is 10 bits, which results in a carrier frequency of ~70kHz on a 72MHz CPU. On slower boards you will have to descrease this.
+ * The following settings may be costumized, if desired:
+ *
+ * @code
+ * #define MOZZI_AUDIO_PIN_1       ...  // Left / mono output pin. Default: PA8
+ * #define MOZZI_AUDIO_UPDATE_TIMER ... // Second hardware timer to claim. Default TIM2
+ * #define MOZZI_AUDIO_BITS        ...  // Output resolution in bits. Default is 10
+ * // For stereo, only:
+ * #define MOZZI_AUDIO_PIN_2       ...  // Right channel output pin. This *must* be connected to the same hardware timer as MOZZI_AUDIO_PIN_1 ! Default: PA9
+ * @endcode
+ *
+ * @section stm32_maple_pwm MOZZI_OUTPUT_2PIN_PWM
+ * This mode is very similar to @ref stm32_maple_pwm, but splitting output for a single channel across two GPIO pins for better resolution. For details on the required
+ * hardware setup, and configuration tradeoffs, see @ref avr_2pin_pwm . Stereo output is not available in this mode.
+ *
+ * Customizable configuration options:
+ * @code
+ * #define MOZZI_AUDIO_PIN_1       ...  // High byte of the output. Default: PB8
+ * #define MOZZI_AUDIO_PIN_2       ...  // Low byte of the output. Default: PB9
+ * #define MOZZI_AUDIO_UPDATE_TIMER ... // Second hardware timer to claim. Default TIM2
+ * #define MOZZI_AUDIO_BITS_PER_CHANNEL  ...  // Bits per pin. Default is 7
+ * @endcode
+ *
+ * @section stm32_maple_external MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ * See @ref external_audio
+ * The (single) hardware timer claimed for MOZZI_OUTPUT_EXTERNAL_TIMED may be configured using "MOZZI_AUDIO_UPDATE_TIMER" (default: TIM2).
+*/
+
+
+/***************************************** ADVANCED SETTTINGS -- Teensy 3.x ***********************************************************
+ *
+ * The settings in the following section applies to Teensy 3.x boards
+ *
+ * It is generally not recommended to change anything, here, unless you really know, what you are doing and/or
+ * are willing to rough it out by yourself.
+ *
+********************************************************************************************************************************/
+
+/** @ingroup hardware
+ * @page hardware_teensy3 Mozzi on Teensy 3.0/3.1/3.2/3.4/3.5/LC boards.
+ *
+ * @note
+ * For Teensy 4.x see @ref hardware_teensy4
+ *
+ * @note
+ * This port requires the following two libraries (which should be part of a default installtion, however):
+ * - [Timer library](https://github.com/loglow/IntervalTimer) for Teensy 3.* by Daniel Gilbert
+ * - [ADC library](http://github.com/pedvide/ADC) by Pedro Villanueva
+ *
+ * The following audio modes (see @ref MOZZI_AUDIO_MODE) are currently supported on this hardware:
+ *   - MOZZI_OUTPUT_EXTERNAL_TIMED
+ *   - MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ *   - MOZZI_OUTPUT_INTERNAL_DAC
+ *
+ * The default mode is @ref teensy3_internal_dac .
+ *
+ * @section teensy3_internal_dac MOZZI_OUTPUT_INTERNAL_DAC
+ * Output is to the inbuilt DAC on pin 14/DAC. The pinout is not configurable. Output resolution is 12 bits.
+ *
+ * @section teensy3_external MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ * See @ref external_audio
+*/
+
+/***************************************** ADVANCED SETTTINGS -- Teensy 4.x ***********************************************************
+ *
+ * The settings in the following section applies to Teensy 4.x boards
+ *
+ * It is generally not recommended to change anything, here, unless you really know, what you are doing and/or
+ * are willing to rough it out by yourself.
+ *
+********************************************************************************************************************************/
+
+/** @ingroup hardware
+ * @page hardware_teensy4 Mozzi on Teensy 3.0/3.1/3.2/3.4/3.5/LC boards.
+ *
+ * @note
+ * For Teensy 3.x see @ref hardware_teensy3
+ *
+ * @note
+ * This port requires the following two libraries (which should be part of a default installtion, however):
+ * - [Timer library](https://github.com/loglow/IntervalTimer) for Teensy 4.* by Daniel Gilbert
+ * - [ADC library](http://github.com/pedvide/ADC) by Pedro Villanueva
+ *
+ * The following audio modes (see @ref MOZZI_AUDIO_MODE) are currently supported on this hardware:
+ *   - MOZZI_OUTPUT_EXTERNAL_TIMED
+ *   - MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ *   - MOZZI_OUTPUT_PWM
+ *
+ * The default mode is @ref teensy4_pwm .
+ *
+ * @section teensy4_pwm MOZZI_OUTPUT_INTERNAL_DAC
+ * Output is to a GPIO pin (or two in stereo). The output resolution is fixed at 10 bits, and a 146484 kHz carrier frequency.
+ * The output pins can be configured as:
+ *
+ * @code
+ * #define MOZZI_AUDIO_PIN_1       ...  // Left / mono output pin. Default: A8
+ * // For stereo, only:
+ * #define MOZZI_AUDIO_PIN_2       ...  // Right channel output pin. Default: A9
+ * @endcode
+ *
+ * @section teensy4_external MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ * See @ref external_audio
+*/

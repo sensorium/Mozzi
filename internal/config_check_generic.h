@@ -61,6 +61,8 @@
 #include "config_checks_esp32.h"
 #elif IS_ESP8266()
 #include "config_checks_esp8266.h"
+#elif IS_STM32DUINO()
+#include "config_checks_stm32duino.h"
 #else
 // TODO
 #error oops

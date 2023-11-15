@@ -18,6 +18,7 @@
  *         (should your sketch have more than one .cpp-file, identical options need to be set before each #include <MozziGuts.h>)
  * 
  * TODO: Fix and complete Doxygen coverage
+ * TODO: Probably the recommendation to copy this whole file is over the top, perhaps provide stripped-down examples, instead
 */
 
 #include <MozziConfigValues.h>  // needed for the named option values
@@ -140,7 +141,10 @@
  * disabled, explicitly, to save resources, or in order to implement custom read schemes (e.g. with IO multiplexing).
  *
  * For simplicity, mozziAnalogRead() is always defined, but when MOZZI_ANALOG_READ s are disabled or unsupported, it simply relays
- * to Arduino's regular analogRead().
+ * to Arduino's regular analogRead(). Also setupFastAnalogReads() continues to be defined, for your convenience, but is not called automatically.
+ *
+ * As a rough estimate (your numbers may differ a bit, depending on compiler version, etc.), on an ATMEGA328P (aka Arduino Uno),
+ * disabling analog reads saves 33 bytes of RAM and 340 bytes of FLASH. The performance savings are theorized to be non-measurable, however.
  *
  * Currently allowed values are:
  *   - MOZZI_ANALOG_READ_NONE

@@ -43,4 +43,22 @@
  */
 #define MOZZI_IS(X, Y) (X == Y)
 
+/** Short-hand for a compile time complaint, if the given define does not have the expected value.
+ *
+ * Use this to check - and clarify - complex nested logic inside #fidefs.
+ *
+ * Example: @code
+ * #if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_STANDARD)
+ * [long difficult to read logic, with further nested #if's]]
+ * #else
+ * MOZZI_ASSERT_EQUAL(MOZZI_ANALOG_READ, MOZZI_ANALOG_NONE)
+ * [more complex logic]
+ * #endif
+ * @endcode
+ */
+#define MOZZI_ASSERT_EQUAL(X, Y) static_assert(X == Y, "Internal error in #if-statement: " #X " != " #Y ".");
+
+/** See MOZZI_ASSERT_EQUAL, but reversed */
+#define MOZZI_ASSERT_NOTEQUAL(X, Y) static_assert(X != Y, "Internal error in #if-statement: " #X " == " #Y ".");
+
 #endif

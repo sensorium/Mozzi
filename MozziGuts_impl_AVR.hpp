@@ -19,7 +19,7 @@
 #endif
 
 ////// BEGIN analog input code ////////
-#define MOZZI_FAST_ANALOG_IMPLEMENTED
+#if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
 extern uint8_t analog_reference;
 
 #define getADCReading() ADC  /* officially (ADCL | (ADCH << 8)) but the compiler works it out */
@@ -79,6 +79,14 @@ ISR(ADC_vect, ISR_BLOCK)
   advanceADCStep();
 }
 
+void setupMozziADC(int8_t speed) {
+	ADCSRA |= (1 << ADIE); // adc Enable Interrupt
+	adcDisconnectAllDigitalIns();
+        setupFastAnalogRead(speed);
+}
+
+#endif
+
 void setupFastAnalogRead(int8_t speed) {
 	if (speed == FAST_ADC){ // divide by 16
 		ADCSRA |= (1 << ADPS2);
@@ -93,11 +101,6 @@ void setupFastAnalogRead(int8_t speed) {
 		ADCSRA |= (1 << ADPS1);
 		ADCSRA &= ~(1 << ADPS0);
 	}
-}
-
-void setupMozziADC(int8_t speed) {
-	ADCSRA |= (1 << ADIE); // adc Enable Interrupt
-	adcDisconnectAllDigitalIns();
 }
 
 ////// END analog input code ////////

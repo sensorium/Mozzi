@@ -34,7 +34,10 @@
 #define MOZZI_CONTROL_RATE 64
 #endif
 
-//MOZZI_ANALOG_READ -> hardware specific
+//MOZZI_ANALOG_READ -> hardware specific, but we want to insert a warning, if not supported, and user has not explicitly configured anything
+#if not defined(MOZZI_ANALOG_READ)
+#define MOZZI__ANALOG_READ_NOT_CONFIGURED
+#endif
 
 #if not defined(MOZZI_AUDIO_INPUT)
 #define MOZZI_AUDIO_INPUT MOZZI_AUDIO_INPUT_NONE
@@ -92,6 +95,13 @@ MOZZI_CHECK_POW2(MOZZI_CONTROL_RATE)
 // Hardware-specific checks file should have more narrow checks for most options, below, but is not required to, so let's check for anything that is wildly out of scope:
 MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_2PIN_PWM, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPUT_EXTERNAL_CUSTOM, MOZZI_OUTPUT_PDM_VIA_I2S, MOZZI_OUTPUT_PDM_VIA_SERIAL, MOZZI_OUTPUT_I2S_DAC, MOZZI_OUTPUT_INTERNAL_DAC)
 MOZZI_CHECK_SUPPORTED(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE, MOZZI_ANALOG_READ_STANDARD)
+
+#if defined(MOZZI__ANALOG_READ_NOT_CONFIGURED)
+#  if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE)
+#    warning Asynchronous analog reads not implemented on this platform
+#  endif
+#  undef MOZZI__ANALOG_READ_NOT_CONFIGURED
+#endif
 
 /// Step 4: Init Read-only defines that depend on other values
 #if !defined(MOZZI_AUDIO_BIAS)

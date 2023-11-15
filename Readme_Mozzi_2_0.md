@@ -21,7 +21,7 @@ simple renames:
  - CONTROL_RATE: MOZZI_CONTROL_RATE
 
 all new
- - MOZZI_ANALOG_READS
+ - MOZZI_ANALOG_READS -> allows to disable, explicitly
  - MOZZI_COMPATIBILITY_LEVEL
 
 general:

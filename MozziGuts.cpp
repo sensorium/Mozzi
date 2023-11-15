@@ -21,8 +21,11 @@
 #if (!BYPASS_MOZZI_OUTPUT_BUFFER)
 static void CACHED_FUNCTION_ATTR defaultAudioOutput();
 #endif
-static void advanceADCStep();
-static void startSecondADCReadOnCurrentChannel();
+#if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
+static void advanceADCStep();                       // to be provided by platform implementation
+static void startSecondADCReadOnCurrentChannel();   // to be provided by platform implementation
+static uint8_t adc_count = 0;                       // needed below
+#endif
 
 // Include the appropriate implementation
 #if IS_AVR()
@@ -60,9 +63,6 @@ static void startSecondADCReadOnCurrentChannel();
 #  endif
 #endif
 
-
-static uint8_t adc_count = 0;
-
 ////// BEGIN Output buffering /////
 #if BYPASS_MOZZI_OUTPUT_BUFFER == true
 uint64_t samples_written_to_buffer = 0;
@@ -83,6 +83,7 @@ CircularBuffer<AudioOutput_t> output_buffer;  // fixed size 256
 static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
 
 #if MOZZI_IS(MOZZI__LEGACY_AUDIO_INPUT_IMPL, 1) // in that case, we rely on asynchroneous ADC reads implemented for mozziAnalogRead to get the audio in samples
+  MOZZI_ASSERT_NOTEQUAL(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE);
   adc_count = 0;
   startSecondADCReadOnCurrentChannel();  // the current channel is the AUDIO_INPUT pin
 #  endif
@@ -97,6 +98,8 @@ static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
 jRaskell, bobgardner, theusch, Koshchi, and code by jRaskell.
 http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=789581
 */
+
+#if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
 
 #include "Stack.h"
 static volatile int analog_readings[NUM_ANALOG_INPUTS];
@@ -126,14 +129,9 @@ __attribute__((noinline)) void adcStartReadCycle() {
 }
 
 int mozziAnalogRead(uint8_t pin) {
-#if defined(MOZZI_FAST_ANALOG_IMPLEMENTED)
 	pin = adcPinToChannelNum(pin); // allow for channel or pin numbers; on most platforms other than AVR this has no effect. See note on pins/channels
 	adc_channels_to_read.push(pin);
 	return analog_readings[channelNumToIndex(pin)];
-#else
-#  warning Asynchronouos analog reads not implemented for this platform
-	return analogRead(pin);
-#endif
 }
 
 #if !MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE)
@@ -171,7 +169,7 @@ inline void advanceADCStep() {
   }
   adc_count++;
 }
-#else
+#else  // no (legacy) audio input
 /** NOTE: Triggered at CONTROL_RATE via advanceControlLoop().
 
 This interrupt handler cycles through all analog inputs on the adc_channels_to_read Stack,
@@ -191,6 +189,15 @@ inline void advanceADCStep() {
 }
 #endif
 
+#else
+MOZZI_ASSERT_EQUAL(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE)
+
+int mozziAnalogRead(uint8_t pin) {
+  return analogRead(pin);
+}
+
+#endif  // MOZZI_ANALOG_READ
+
 ////// END analog input code ////////
 
 
@@ -202,7 +209,9 @@ inline void advanceControlLoop() {
   if (!update_control_counter) {
     update_control_counter = update_control_timeout;
     updateControl();
+#if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
     adcStartReadCycle();
+#endif
   } else {
     --update_control_counter;
   }
@@ -256,9 +265,10 @@ unsigned long mozziMicros() { return audioTicks() * MICROS_PER_AUDIO_TICK; }
 
 ////// BEGIN initialization ///////
 void startMozzi(int control_rate_hz) {
+#if !MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE)
   setupMozziADC(); // you can use setupFastAnalogRead() with FASTER_ADC or FASTEST_ADC
                    // in setup() if desired (not for Teensy 3.* )
-  setupFastAnalogRead();
+#endif
   // delay(200); // so AutoRange doesn't read 0 to start with
   update_control_timeout = MOZZI_AUDIO_RATE / control_rate_hz;
   startAudio();

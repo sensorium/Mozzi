@@ -7,6 +7,7 @@
 
 //#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_2PIN_PWM
 //#define MOZZI_AUDIO_CHANNELS MOZZI_STEREO
+//#define MOZZI_ANALOG_READ MOZZI_ANALOG_READ_NONE
 
 #include "internal/config_check_generic.h"
 

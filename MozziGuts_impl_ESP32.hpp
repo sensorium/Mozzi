@@ -15,22 +15,24 @@
 #endif
 
 ////// BEGIN analog input code ////////
-//#define MOZZI_FAST_ANALOG_IMPLEMENTED // not yet
+#if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
+
+#error not yet implemented
+
 #define getADCReading() 0
 #define channelNumToIndex(channel) channel
 uint8_t adcPinToChannelNum(uint8_t pin) {
   return pin;
 }
 void adcStartConversion(uint8_t channel) {
-#warning Fast analog read not implemented on this platform
 }
 void startSecondADCReadOnCurrentChannel() {
-#warning Fast analog read not implemented on this platform
-}
-void setupFastAnalogRead(int8_t speed) {
-#warning Fast analog read not implemented on this platform
 }
 void setupMozziADC(int8_t speed) {
+}
+#endif
+
+void setupFastAnalogRead(int8_t speed) {
 #warning Fast analog read not implemented on this platform
 }
 ////// END analog input code ////////

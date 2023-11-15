@@ -40,14 +40,23 @@
 
 ////// BEGIN analog input code ////////
 
-/** NOTE: This section deals with implementing (fast) asynchronous analog reads, which form the backbone of mozziAnalogRead(), but also of USE_AUDIO_INPUT (if enabled).
- *  This template provides empty/dummy implementations to allow you to skip over this section, initially. Once you have an implementation, be sure to enable the
- *  #define, below: */
-//#define MOZZI_FAST_ANALOG_IMPLEMENTED
+#if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
+/** NOTE: This section deals with implementing (fast) asynchronous analog reads, which form the backbone of mozziAnalogRead(), but also of MOZZI_AUDIO_INPUT (if enabled).
+ *
+ * It is possible, and even recommended, to skip over this section, initially, when starting a new port. Once you have an implementation, be sure to include something like this
+ * in your platform configuration checks:
+ *
+ * // analog reads shall be enabled by default on platforms that support it 
+ * #if not defined(MOZZI_ANALOG_READ)
+ * #define MOZZI_ANALOG_READ MOZZI_ANALOG_READ_STANDARD
+ * #endif
+ *
+ * The only function in this section that is always defined is setupFastAnalogRead() (but this, too, may be left empty, initially).
+ */
 
 // Insert here code to read the result of the latest asynchronous conversion, when it is finished.
 // You can also provide this as a function returning unsigned int, should it be more complex on your platform
-#define getADCReading() 0
+#define getADCReading() GET_MY_PLATFORM_ADC_REGISTER
 
 /** NOTE: On "pins" vs. "channels" vs. "indices"
  *  "Pin" is the pin number as would usually be specified by the user in mozziAnalogRead().
@@ -69,25 +78,18 @@ uint8_t adcPinToChannelNum(uint8_t pin) {
 
 /** NOTE: Code needed to trigger a conversion on a new channel */
 void adcStartConversion(uint8_t channel) {
-#warning Fast analog read not implemented on this platform
 }
 
 /** NOTE: Code needed to trigger a subsequent conversion on the latest channel. If your platform has no special code for it, you should store the channel from
  *  adcStartConversion(), and simply call adcStartConversion(previous_channel), here. */
 void startSecondADCReadOnCurrentChannel() {
-#warning Fast analog read not implemented on this platform
-}
-
-/** NOTE: Code needed to set up faster than usual analog reads, e.g. specifying the number of CPU cycles that the ADC waits for the result to stabilize.
- *  This particular function is not super important, so may be ok to leave empty, at least, if the ADC is fast enough by default. */
-void setupFastAnalogRead(int8_t speed) {
-#warning Fast analog read not implemented on this platform
 }
 
 /** NOTE: Code needed to initialize the ADC for asynchronous reads. Typically involves setting up an interrupt handler for when conversion is done, and
  *  possibly calibration. */
 void setupMozziADC(int8_t speed) {
-#warning Fast analog read not implemented on this platform
+  setupFastAnalogRead(speed);
+  // insert further custom code
 }
 
 /* NOTE: Most platforms call a specific function/ISR when conversion is complete. Provide this function, here.
@@ -96,6 +98,15 @@ void stm32_adc_eoc_handler() {
   advanceADCStep();
 }
 */
+
+#endif
+
+/** NOTE: Code needed to set up faster than usual analog reads, e.g. specifying the number of CPU cycles that the ADC waits for the result to stabilize.
+ *  This particular function is not super important, so may be ok to leave empty, at least, if the ADC is fast enough by default. */
+void setupFastAnalogRead(int8_t speed) {
+#warning Fast analog read not implemented on this platform
+}
+
 ////// END analog input code ////////
 
 ////// BEGIN audio output code //////

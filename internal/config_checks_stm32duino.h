@@ -6,46 +6,47 @@
 #endif
 
 #if !defined(MOZZI_AUDIO_MODE)
-#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_PWM
+#  define MOZZI_AUDIO_MODE MOZZI_OUTPUT_PWM
 #endif
 MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPUT_EXTERNAL_CUSTOM, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_2PIN_PWM)
 
 #if !defined(MOZZI_AUDIO_RATE)
-#define MOZZI_AUDIO_RATE 32768
+#  define MOZZI_AUDIO_RATE 32768
 #endif
 
-
-
-
-
-
-
-
-
-#if !defined(MOZZI_AUDIO_BITS)
-#  define MOZZI_AUDIO_BITS 16
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_2PIN_PWM, MOZZI_OUTPUT_EXTERNAL_TIMED)
+#  if !defined(MOZZI_AUDIO_UPDATE_TIMER)
+#    define MOZZI_AUDIO_UPDATE_TIMER TIM2
+#  endif
 #endif
 
-// Audio output pin. If you want to change this, make sure to also set AUDIO_PWM_TIMER to whichever timer is responsible for your PWM pin, and set the other timers to non-conflicting values
-#define AUDIO_CHANNEL_1_PIN PA8  // Note: PB8 does not appear to be available as a PWM pin with this core.
-// The timer used for running the audio update loop. This must _not_ be the same timer responsible for PWM on the output pins! NOTE: Timer 3 appears to clash with SPI DMA transfers under some circumstances
-#define AUDIO_UPDATE_TIMER TIM2
-
-#if (AUDIO_MODE == HIFI)
-// Second out pin for HIFI mode. This must be on the same timer as AUDIO_CHANNEL_1_PIN!
-// Note that by default we are not using adjacent pins. This is to leave the "Serial1" pins available (often used for upload/communication with Arduino IDE). If you don't need that, PA9 is a good choice.
-#define AUDIO_CHANNEL_1_PIN_HIGH PA9
-// Total audio bits.
-#define AUDIO_BITS 14
-#define AUDIO_BITS_PER_CHANNEL 7
-#else
-// The more audio bits you use, the slower the carrier frequency of the PWM signal. 10 bits yields ~ 70kHz on a 72Mhz CPU (which appears to be a reasonable compromise)
-#define AUDIO_BITS 10
-#define AUDIO_BITS_PER_CHANNEL AUDIO_BITS
-#if (AUDIO_CHANNELS > 1)
-// Second out pin for stereo mode. This must be on the same timer as AUDIO_CHANNEL_1_PIN!
-#define AUDIO_CHANNEL_2_PIN PA9
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
+#  if !defined(MOZZI_AUDIO_PIN_1)
+#    define MOZZI_AUDIO_PIN_1 PA8
+#  endif
+#  if (MOZZI_AUDIO_CHANNELS > 1) && !defined(MOZZI_AUDIO_PIN_1)
+#    define MOZZI_AUDIO_PIN_2 PA9
+#  endif
+#  if !defined(MOZZI_AUDIO_BITS)
+#    define MOZZI_AUDIO_BITS 10
+#  endif
+#  define MOZZI_AUDIO_BITS_PER_CHANNEL MOZZI_AUDIO_BITS
+#elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_2PIN_PWM)
+#  if !defined(MOZZI_AUDIO_PIN_1)
+#    define MOZZI_AUDIO_PIN_1 PA8
+#  endif
+#  if !defined(MOZZI_AUDIO_PIN_1_LOW)
+#    define MOZZI_AUDIO_PIN_1_LOW PA9
+#  endif
+MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_CHANNELS, 1)
+#  if !defined(MOZZI_AUDIO_PER_CHANNEL)
+#    define MOZZI_AUDIO_PER_CHANNEL 7
+#  endif
+#  define MOZZI_AUDIO_BITS MOZZI_AUDIO_BITS_PER_CHANNEL * 2
 #endif
+
+#if !defined(MOZZI_ANALOG_READ)
+#define MOZZI_ANALOG_READ MOZZI_ANALOG_READ_STANDARD
 #endif
 
 

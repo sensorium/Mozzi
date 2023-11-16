@@ -711,7 +711,7 @@
  *
  * @code
  * #define MOZZI_AUDIO_PIN_1       ...  // Left / mono output pin. Default: PA8
- * #define MOZZI_AUDIO_UPDATE_TIMER ... // Second hardware timer to claim. Default TIM2
+ * #define MOZZI_AUDIO_UPDATE_TIMER ... // Second hardware timer to claim, must not be the same of the timer for the above pin. Default TIM2
  * #define MOZZI_AUDIO_BITS        ...  // Output resolution in bits. Default is 10
  * // For stereo, only:
  * #define MOZZI_AUDIO_PIN_2       ...  // Right channel output pin. This *must* be connected to the same hardware timer as MOZZI_AUDIO_PIN_1 ! Default: PA9
@@ -724,7 +724,7 @@
  * Customizable configuration options:
  * @code
  * #define MOZZI_AUDIO_PIN_1       ...  // High byte of the output. Default: PA8
- * #define MOZZI_AUDIO_PIN_2       ...  // Low byte of the output. Default: PA9
+ * #define MOZZI_AUDIO_PIN_1_LOW   ...  // Low byte of the output. Default: PA9
  * #define MOZZI_AUDIO_UPDATE_TIMER ... // Second hardware timer to claim. Default TIM2
  * #define MOZZI_AUDIO_BITS_PER_CHANNEL  ...  // Bits per pin. Default is 7
  * @endcode

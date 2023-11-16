@@ -61,12 +61,12 @@ public:
 
   // Multiplication overload, returns the compound type
   /* template<byte _NI, byte _NF>
- const UFixMath2<NI+_NI,NF+_NF> operator* (const UFixMath2<_NI,_NF>& op)
-  {
-    typedef typename IntegerType< ((NI+_NI+NF+_NF-1)>>3)+1>::unsigned_type return_type ;
-    return_type tt = return_type(internal_value)*op.getInt();
-    return UFixMath2<NI+_NI,NF+_NF>(tt,true);
-    }*/
+     const UFixMath2<NI+_NI,NF+_NF> operator* (const UFixMath2<_NI,_NF>& op)
+     {
+     typedef typename IntegerType< ((NI+_NI+NF+_NF-1)>>3)+1>::unsigned_type return_type ;
+     return_type tt = return_type(internal_value)*op.getInt();
+     return UFixMath2<NI+_NI,NF+_NF>(tt,true);
+     }*/
 
   template<byte _NI, byte _NF>
   UFixMath2<NI+_NI,NF+_NF> operator* (const UFixMath2<_NI,_NF>& op) const
@@ -88,7 +88,13 @@ public:
       internal_type tt = (internal_value>>sub) * internal_type((SHIFTR(typename IntegerType<((MAX(NI+NF,_NI+_NF))>>3)>::unsigned_type(op.getInt()), (_NF-sub))));
       return  UFixMath2<NI,NF>(tt,true);*/
 
-
+  template<byte NI1, byte NF1, byte NI2, byte NF2>
+  UFixMath2<NI1-NI2, NF1-NF2> operator/(const UFixMath2<NI1, NF1>& op1, const UFixMath2<NI2, NF2>& op2)
+  {
+    typedef typename IntegerType< ((NI1-NI2+NF1-NF2+1)>>3)+1>::unsigned_type return_type ;
+    return_type tt = (return_type(op1.getInt())<<(NF1-NF2))/op2.getInt();
+    return UFixMath2<NI1-NI2, NF1-NF2>(tt,true);
+  }
 
   
   float asFloat() { return (static_cast<float>(internal_value)) / (next_greater_type(1)<<NF); }

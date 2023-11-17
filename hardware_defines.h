@@ -50,9 +50,9 @@
 // STM32 boards (libmaple based)
 // https://github.com/stevstrong/Arduino_STM32
 #if (defined(__arm__) && !IS_TEENSY3() && !IS_TEENSY4() && __has_include("libmaple/libmaple.h"))
-#define IS_STM32() 1
+#define IS_STM32MAPLE() 1
 #else
-#define IS_STM32() 0
+#define IS_STM32MAPLE() 0
 #endif
 
 // Mbed OS based boards
@@ -76,7 +76,7 @@
 #define IS_RENESAS() 0
 #endif
 
-#if (defined(__arm__) && !IS_STM32() && !IS_TEENSY3() && !IS_TEENSY4() && !IS_RP2040() && !IS_SAMD21() && !IS_MBED() && !IS_RENESAS())
+#if (defined(__arm__) && !IS_STM32MAPLE() && !IS_TEENSY3() && !IS_TEENSY4() && !IS_RP2040() && !IS_SAMD21() && !IS_MBED() && !IS_RENESAS())
 #define IS_STM32DUINO() 1
 #else
 #define IS_STM32DUINO() 0
@@ -94,12 +94,13 @@
 #define IS_ESP32() 0
 #endif
 
-#if !(IS_AVR() || IS_TEENSY3() || IS_TEENSY4() || IS_STM32() || IS_STM32DUINO() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() || IS_RP2040() || IS_MBED() || IS_RENESAS())
+#if !(IS_AVR() || IS_TEENSY3() || IS_TEENSY4() || IS_STM32MAPLE() || IS_STM32DUINO() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() || IS_RP2040() || IS_MBED() || IS_RENESAS())
+// TODO: add an exception for MOZZI_OUTPUT_EXTERNAL_CUSTOM
 #error Your hardware is not supported by Mozzi or not recognized. Edit hardware_defines.h to proceed.
 #endif
 
 // Hardware detail defines
-#if IS_STM32()
+#if IS_STM32MAPLE()
 #define NUM_ANALOG_INPUTS 16  // probably wrong, but mostly needed to allocate an array of readings
 #elif IS_ESP8266()
 #define NUM_ANALOG_INPUTS 1
@@ -111,7 +112,7 @@
 #define CACHED_FUNCTION_ATTR
 #endif
 
-#if IS_STM32()
+#if IS_STM32MAPLE()
 // This is a little silly, but with Arduino 1.8.13, including this header inside MozziGuts.cpp does not work (fails to detect the proper include path).
 // Putting it here, instead, seem to work.
 #include <STM32ADC.h>

@@ -13,8 +13,9 @@
 #include "HardwareTimer.h"
 
 ////// BEGIN analog input code ////////
-#define MOZZI_FAST_ANALOG_IMPLEMENTED
-//#include <STM32ADC.h>  // Disabled, here. See AudioConfigSTM32.h
+#if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
+
+//#include <STM32ADC.h>  // Disabled, here. See hardware_defines.h
 STM32ADC adc(ADC1);
 uint8_t stm32_current_adc_pin;   // TODO: this is actually a "channel" according to our terminology, but "channel" and "pin" are equal on this platform
 #define getADCReading() adc.getData()
@@ -38,13 +39,6 @@ void stm32_adc_eoc_handler() {
   advanceADCStep();
 }
 
-void setupFastAnalogRead(int8_t speed) {
-  // NOTE: These picks are pretty arbitrary. Further available options are 7_5, 28_5, 55_5, 71_5 and 239_5 (i.e. 7.5 ADC cylces, etc.)
-  if (speed == FASTEST_ADC) adc.setSampleRate(ADC_SMPR_1_5);
-  else if (speed == FASTER_ADC) adc.setSampleRate(ADC_SMPR_13_5);
-  else (adc.setSampleRate(ADC_SMPR_41_5));
-}
-
 void setupMozziADC(int8_t speed) {
   adc.attachInterrupt(stm32_adc_eoc_handler);
 }
@@ -56,32 +50,40 @@ inline uint8_t STM32PinMap(uint8_t pin)
   else return pin;
 }
 
+void setupFastAnalogRead(int8_t speed) {
+  // NOTE: These picks are pretty arbitrary. Further available options are 7_5, 28_5, 55_5, 71_5 and 239_5 (i.e. 7.5 ADC cylces, etc.)
+  if (speed == FASTEST_ADC) adc.setSampleRate(ADC_SMPR_1_5);
+  else if (speed == FASTER_ADC) adc.setSampleRate(ADC_SMPR_13_5);
+  else (adc.setSampleRate(ADC_SMPR_41_5));
+}
+#endif
+
 ////// END analog input code ////////
 
 
 
 //// BEGIN AUDIO OUTPUT code ///////
-#if (EXTERNAL_AUDIO_OUTPUT == true)
-HardwareTimer audio_update_timer(2);
-#else
-HardwareTimer audio_update_timer(AUDIO_UPDATE_TIMER);
-HardwareTimer audio_pwm_timer(AUDIO_PWM_TIMER);
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXERNAL_TIMED)
+HardwareTimer audio_update_timer(MOZZI_AUDIO_UPDATE_TIMER);
+#elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_2PIN_PWM)
+HardwareTimer audio_update_timer(MOZZI_AUDIO_UPDATE_TIMER);
+HardwareTimer audio_pwm_timer(MOZZI_AUDIO_PWM_TIMER);
 
-#include "AudioConfigSTM32.h"
 inline void audioOutput(const AudioOutput f) {
-#  if (AUDIO_MODE == HIFI)
-  pwmWrite(AUDIO_CHANNEL_1_PIN, (f.l()+AUDIO_BIAS) & ((1 << AUDIO_BITS_PER_CHANNEL) - 1));
-  pwmWrite(AUDIO_CHANNEL_1_PIN_HIGH, (f.l()+AUDIO_BIAS) >> AUDIO_BITS_PER_CHANNEL);
+#  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_2PIN_PWM)
+  pwmWrite(MOZZI_AUDIO_PIN_1, (f.l()+MOZZI_AUDIO_BIAS) >> MOZZI_AUDIO_BITS_PER_CHANNEL);
+  pwmWrite(MOZZI_AUDIO_PIN_1_LOW, (f.l()+MOZZI_AUDIO_BIAS) & ((1 << MOZZI_AUDIO_BITS_PER_CHANNEL) - 1));
 #  else
-  pwmWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
-#    if (AUDIO_CHANNELS > 1)
-  pwmWrite(AUDIO_CHANNEL_2_PIN, f.r()+AUDIO_BIAS);
+  pwmWrite(MOZZI_AUDIO_PIN_1, f.l()+MOZZI_AUDIO_BIAS);
+#    if (MOZZI_AUDIO_CHANNELS > 1)
+  pwmWrite(MOZZI_AUDIO_PIN_2, f.r()+MOZZI_AUDIO_BIAS);
 #    endif
 #endif
 }
 #endif
 
 static void startAudio() {
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_2PIN_PWM, MOZZI_OUTPUT_EXERNAL_TIMED)
   audio_update_timer.pause();
   //audio_update_timer.setPeriod(1000000UL / AUDIO_RATE);
   // Manually calculate prescaler and overflow instead of using setPeriod, to avoid rounding errors
@@ -96,39 +98,43 @@ static void startAudio() {
   audio_update_timer.attachInterrupt(TIMER_CH1, defaultAudioOutput);
   audio_update_timer.refresh();
   audio_update_timer.resume();
+#endif
 
-#if (EXTERNAL_AUDIO_OUTPUT != true)
-  pinMode(AUDIO_CHANNEL_1_PIN, PWM);
-#  if (AUDIO_MODE == HIFI)
-  pinMode(AUDIO_CHANNEL_1_PIN_HIGH, PWM);
-#  elif (AUDIO_CHANNELS > 1)
-  pinMode(AUDIO_CHANNEL_2_PIN, PWM);
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_2PIN_PWM)
+  pinMode(MOZZI_AUDIO_PIN_1, PWM);
+#  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_2PIN_PWM)
+  pinMode(MOZZI_AUDIO_PIN_1_LOW, PWM);
+#  elif (MOZZI_AUDIO_CHANNELS > 1)
+  pinMode(MOZZI_AUDIO_PIN_2, PWM);
 #  endif
 
-#  define MAX_CARRIER_FREQ (F_CPU / (1 << AUDIO_BITS_PER_CHANNEL))
-#  if MAX_CARRIER_FREQ < AUDIO_RATE
+#  define MAX_CARRIER_FREQ (F_CPU / (1 << MOZZI_AUDIO_BITS_PER_CHANNEL))
+#  if MAX_CARRIER_FREQ < MOZZI_AUDIO_RATE
 #    error Configured audio resolution is definitely too high at the configured audio rate (and the given CPU speed)
-#  elif MAX_CARRIER_FREQ < (AUDIO_RATE * 3)
+#  elif MAX_CARRIER_FREQ < (MOZZI_AUDIO_RATE * 3)
 #    warning Configured audio resolution may be higher than optimal at the configured audio rate (and the given CPU speed)
 #  endif
 
-#  if MAX_CARRIER_FREQ < (AUDIO_RATE * 5)
+#  if MAX_CARRIER_FREQ < (MOZZI_AUDIO_RATE * 5)
   // Generate as fast a carrier as possible
   audio_pwm_timer.setPrescaleFactor(1);
 #  else
   // No point in generating arbitrarily high carrier frequencies. In fact, if
   // there _is_ any headroom, give the PWM pin more time to swing from HIGH to
   // LOW and BACK, cleanly
-  audio_pwm_timer.setPrescaleFactor((int)MAX_CARRIER_FREQ / (AUDIO_RATE * 5));
+  audio_pwm_timer.setPrescaleFactor((int)MAX_CARRIER_FREQ / (MOZZI_AUDIO_RATE * 5));
 #  endif
   audio_pwm_timer.setOverflow(
-      1 << AUDIO_BITS_PER_CHANNEL); // Allocate enough room to write all
+      1 << MOZZI_AUDIO_BITS_PER_CHANNEL); // Allocate enough room to write all
                                     // intended bits
+#  undef MAX_CARRIER_FREQ // no longer needed
 #endif
 }
 
 void stopMozzi() {
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_2PIN_PWM, MOZZI_OUTPUT_EXERNAL_TIMED)
   audio_update_timer.pause();
+#endif
 }
 
 //// END AUDIO OUTPUT code ///////

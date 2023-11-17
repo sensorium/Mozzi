@@ -30,7 +30,7 @@ static uint8_t adc_count = 0;                       // needed below
 // Include the appropriate implementation
 #if IS_AVR()
 #  include "MozziGuts_impl_AVR.hpp"
-#elif IS_STM32()
+#elif IS_STM32MAPLE()
 #  include "MozziGuts_impl_STM32.hpp"
 #elif IS_STM32DUINO()
 #  include "MozziGuts_impl_STM32duino.hpp"

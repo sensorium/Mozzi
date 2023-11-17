@@ -2,7 +2,7 @@
 
 #include "hardware_defines.h"
 
-#if IS_STM32()
+#if IS_STM32MAPLE()
 //#include <STM32ADC.h>
 extern STM32ADC adc;
 #elif IS_ESP8266()
@@ -126,7 +126,7 @@ void randSeed() {
 	z=longRandom();
 	//analogReference(analog_reference_orig); // change back to original
 	ADCSRA |= (1 << ADIE); // adc re-Enable Interrupt
-#elif IS_STM32()
+#elif IS_STM32MAPLE()
 	// Unfortunately the internal temp sensor on STM32s does _not_ appear to create a lot of noise.
 	// Ironically, the calls to calibrate help induce some random noise. You're still fairly likely to produce two equal
 	// random seeds in two subsequent runs, however.

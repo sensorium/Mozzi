@@ -63,6 +63,8 @@
 #include "config_checks_esp8266.h"
 #elif IS_STM32DUINO()
 #include "config_checks_stm32duino.h"
+#elif IS_STM32MAPLE()
+#include "config_checks_stm32maple.h"
 #else
 // TODO
 #error oops

@@ -142,7 +142,7 @@
  *
  * For simplicity, mozziAnalogRead() is always defined, but when MOZZI_ANALOG_READ s are disabled or unsupported, it simply relays
  * to Arduino's regular analogRead(). It is thus quite recommended _not_ to depend on mozziAnalogRead() when disabling this.
- * Also setupFastAnalogReads() continues to be defined, for your convenience, but is not called automatically.
+ * Also setupFastAnalogReads() continues to be defined, for your convenience, but is not called automatically. TODO: rethink that!
  *
  * As a rough estimate (your numbers may differ a bit, depending on compiler version, etc.), on an ATMEGA328P (aka Arduino Uno),
  * disabling analog reads saves 33 bytes of RAM and 340 bytes of FLASH. The performance savings are theorized to be neglegible, however.
@@ -769,11 +769,12 @@
  * The following settings may be costumized, if desired:
  *
  * @code
- * #define MOZZI_AUDIO_PIN_1       ...  // Left / mono output pin. Default: PA8
- * #define MOZZI_AUDIO_UPDATE_TIMER ... // Second hardware timer to claim. Default TIM2
+ * #define MOZZI_AUDIO_PIN_1       ...  // Left / mono output pin. Default: PB8
+ * #define MOZZI_AUDIO_PWM_TIMER   ...  // Must be set ot the hardware timer connected to the above pin. Default: 4
+ * #define MOZZI_AUDIO_UPDATE_TIMER ... // Second hardware timer to claim. Default 2
  * #define MOZZI_AUDIO_BITS        ...  // Output resolution in bits. Default is 10
  * // For stereo, only:
- * #define MOZZI_AUDIO_PIN_2       ...  // Right channel output pin. This *must* be connected to the same hardware timer as MOZZI_AUDIO_PIN_1 ! Default: PA9
+ * #define MOZZI_AUDIO_PIN_2       ...  // Right channel output pin. This *must* be connected to the same hardware timer as MOZZI_AUDIO_PIN_1 ! Default: PB9
  * @endcode
  *
  * @section stm32_maple_pwm MOZZI_OUTPUT_2PIN_PWM
@@ -784,6 +785,7 @@
  * @code
  * #define MOZZI_AUDIO_PIN_1       ...  // High byte of the output. Default: PB8
  * #define MOZZI_AUDIO_PIN_2       ...  // Low byte of the output. Default: PB9
+ * #define MOZZI_AUDIO_PWM_TIMER   ...  // Must be set to the number of the hardware timer connect to the above pins. Default: 4
  * #define MOZZI_AUDIO_UPDATE_TIMER ... // Second hardware timer to claim. Default TIM2
  * #define MOZZI_AUDIO_BITS_PER_CHANNEL  ...  // Bits per pin. Default is 7
  * @endcode

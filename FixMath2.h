@@ -78,12 +78,18 @@ public:
   }
 
   // Multiplication with any other type: directly to the internal_value
-  template<typename T>
+   template<typename T>
   UFixMath2<NI,NF> operator* (const T op) const
   {
     return UFixMath2<NI,NF>(internal_value*op,true);
-  }
-    
+    }
+
+  /*    template<typename T>
+     UFixMath2<NI,NF> operator* (const T op, const UFixMath2<NI, NF>& uf)
+  {
+    return UFixMath2<NI,NF>(uf.asRaw()*op,true);
+    }
+  */
     
   /* version 1, prior promotion/demotion to return type, safe */
   /*   byte sub = NF>>1;
@@ -116,5 +122,16 @@ private:
   internal_type internal_value;
   
 };
+
+
+/// Reverse overloadings, making a template here leads to an ambiguity, forcing us to specify them one by one??
+
+template <byte NI, byte NF>
+UFixMath2<NI, NF> operator*(int op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath2<NI, NF> operator*(double op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+
+
+
+
 
 #endif

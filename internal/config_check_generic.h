@@ -63,13 +63,20 @@
 #include "config_checks_esp8266.h"
 #elif IS_MBED()
 #include "config_checks_mbed.h"
+#elif IS_RENESAS()
+#include "config_checks_renesas.h"
+#elif IS_RP2040()
+#include "config_checks_rp2040.h"
+#elif IS_SAMD21()
+#include "config_checks_samd21.h"
 #elif IS_STM32DUINO()
 #include "config_checks_stm32duino.h"
 #elif IS_STM32MAPLE()
 #include "config_checks_stm32maple.h"
+#elif IS_TEENSY3() || IS_TEENSY4
+#include "config_checks_teensy.h"
 #else
-// TODO
-#error oops
+#error Problem detecting hardware
 #endif
 
 

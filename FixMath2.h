@@ -128,8 +128,15 @@ private:
 
 template <byte NI, byte NF>
 UFixMath2<NI, NF> operator*(int op, const UFixMath2<NI, NF>& uf) {return uf*op;}
-UFixMath2<NI, NF> operator*(double op, const UFixMath2<NI, NF>& uf) {return uf*op;}
 
+template <byte NI, byte NF>
+UFixMath2<NI, NF> operator*(double op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+/*
+template<typename T,byte NI, byte NF>
+     UFixMath2<NI,NF> operator* (const T op, const UFixMath2<NI, NF>& uf)
+  {
+    return UFixMath2<NI,NF>(uf.asRaw()*op,true);
+    }*/
 
 
 

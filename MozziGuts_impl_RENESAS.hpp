@@ -19,6 +19,7 @@
 
 ////// BEGIN analog input code ////////
 
+#if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
 
 #define channelNumToIndex(channel) channel-14  // A0=14
 void const *const p_context = 0; // unused but needed for the ADC call
@@ -31,8 +32,6 @@ void adc_callback(adc_callback_args_t *p_args) {
 }
 
 #include "MozziGuts_impl_RENESAS_ADC.hpp"
-
-#define MOZZI_FAST_ANALOG_IMPLEMENTED
 
 #define getADCReading() readADC(r4_pin)
 
@@ -56,7 +55,7 @@ void setupFastAnalogRead(int8_t speed) {
 void setupMozziADC(int8_t speed) {
   IRQManager::getInstance().addADCScanEnd(&adc, NULL); // this is needed to change some config inside the ADC, even though we do not give the callback here (doing so crashes the board). The callback is declared to the ADC by: R_ADC_CallbackSet(&(_adc->ctrl), adc_callback, p_context, p_callback_memory); in MozziGuts_impl_RENESAS_ADC.hpp.
 }
-
+#endif
   
 ////// END analog input code ////////
 
@@ -78,9 +77,11 @@ As a consequence we need to artificially empty the buffer at the same rate that 
 it.
 */
 
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC, MOZZI_OUTPUT_EXTERNAL_TIMED)
 FspTimer timer;
+#endif
 
-#if (EXTERNAL_AUDIO_OUTPUT != true) // otherwise, the last stage - audioOutput() - will be provided by
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
 CircularBuffer<uint16_t> output_buffer;
 #include "MozziGuts_impl_RENESAS_analog.hpp"
 #endif
@@ -88,13 +89,14 @@ CircularBuffer<uint16_t> output_buffer;
 
 //////////////// TIMER ////////////////
 
-#if EXTERNAL_AUDIO_OUTPUT == true
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)
 void timer_callback_dummy(timer_callback_args_t __attribute__((unused)) *args){defaultAudioOutput();};
-#else
+#elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
 //void timer_callback_dummy(timer_callback_args_t __attribute__((unused)) *args){
 void timer_callback_dummy(timer_callback_args_t __attribute__((unused)) *args){output_buffer.read();}; // to empty the buffer (the dac does not take care of it), a bit a waste of timer...
 #endif
 
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC, MOZZI_OUTPUT_EXTERNAL_TIMED)
 void timer_init() {
   uint8_t type;
   int8_t tindex = FspTimer::get_available_timer(type);
@@ -104,14 +106,15 @@ void timer_init() {
   }
 
   if (tindex >= 0) {
-    timer.begin(TIMER_MODE_PERIODIC, type, tindex, AUDIO_RATE, 50.0,timer_callback_dummy);
+    timer.begin(TIMER_MODE_PERIODIC, type, tindex, MOZZI_AUDIO_RATE, 50.0,timer_callback_dummy);
     timer.setup_overflow_irq();
   }
-  
-#if EXTERNAL_AUDIO_OUTPUT != true // we need to set up another timer for dac caring
+
+#  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
+  // we need to set up another timer for dac caring
   // note: it is running at the same speed than the other one, but could not manage
   // to get the other one updating the dac and removing the samples from the buffer…
-    tindex = FspTimer::get_available_timer(type);
+  tindex = FspTimer::get_available_timer(type);
 
   if (tindex < 0) {
     tindex = FspTimer::get_available_timer(type, true);
@@ -119,28 +122,31 @@ void timer_init() {
 
   if (tindex >= 0) {
     FspTimer::force_use_of_pwm_reserved_timer();
-    timer_dac.begin(TIMER_MODE_PERIODIC, type, tindex, AUDIO_RATE, 50.0);
-    timer_dac.setup_overflow_irq();    
-     dtc_cfg_extend.activation_source = timer_dac.get_cfg()->cycle_end_irq;
-     timer_dac.open();    
-#endif
-    timer.open();
+    timer_dac.begin(TIMER_MODE_PERIODIC, type, tindex, MOZZI_AUDIO_RATE, 50.0);
+    timer_dac.setup_overflow_irq();
+    dtc_cfg_extend.activation_source = timer_dac.get_cfg()->cycle_end_irq;
+    timer_dac.open();
   }
-  }
-
-
-inline void audioOutput(const AudioOutput f) {
-  output_buffer.write(f+AUDIO_BIAS);
+#  endif // TODO: This endif used to be two lines up from here (above timer.open), which does not make sense syntactically, for external output
+  timer.open();
 }
-#define canBufferAudioOutput() (!output_buffer.isFull())
+#endif
 
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
+inline void audioOutput(const AudioOutput f) {
+  output_buffer.write(f+MOZZI_AUDIO_BIAS);
+}
+#  define canBufferAudioOutput() (!output_buffer.isFull())
+#endif
 
 static void startAudio() {
-#if EXTERNAL_AUDIO_OUTPUT != true
-  dac_creation(AUDIO_CHANNEL_1_PIN);
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
+  dac_creation(MOZZI_AUDIO_PIN_1);
 #endif
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC, MOZZI_OUTPUT_EXTERNAL_TIMED)
   timer_init(); // this need to be done between the DAC creation and initialization in the case where the on-board DAC is used, hence the ugly repetition here.
-#if EXTERNAL_AUDIO_OUTPUT != true
+#endif
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
   dac_init();
   R_DTC_Open(&dtc_ctrl, &dtc_cfg);
   R_DTC_Enable(&dtc_ctrl);
@@ -151,11 +157,14 @@ static void startAudio() {
   R_DTC_Reconfigure(&dtc_ctrl, dtc_cfg.p_info);
   timer_dac.start();
 #endif
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC, MOZZI_OUTPUT_EXTERNAL_TIMED)
   timer.start();
-  
+#endif
 }
 
 void stopMozzi() {
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC, MOZZI_OUTPUT_EXTERNAL_TIMED)
   timer.stop();
+#endif
 }
 //// END AUDIO OUTPUT code ///////

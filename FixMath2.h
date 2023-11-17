@@ -40,9 +40,16 @@ public:
   template<typename T>
   UFixMath2(T value,bool as_frac=false)
   {
-    if (as_frac) internal_value = value;
+    // if (as_frac) internal_value = value;
+    if (as_frac) fromRaw(value);
     else internal_value = (internal_type(value) << NF);
   }
+
+  /*
+
+   */
+  template<typename T>
+   void fromRaw(T raw) { internal_value = raw; }
 
   /* Constructor from different integer and fractionnal part, to remove? */
   /*  UFixMath2(typename IntegerType<((NI)>>3)>::unsigned_type integral_part, typename IntegerType<((NF)>>3)>::unsigned_type fractionnal_part)
@@ -55,25 +62,26 @@ public:
   /* Constructor from another fixed type */
   template<byte _NI, byte _NF>
   UFixMath2(const UFixMath2<_NI,_NF>& uf) {
-    internal_value = SHIFTR((typename IntegerType<((MAX(NI+NF-1,_NI+_NF-1))>>3)+1>::unsigned_type) uf.getInt(),(_NF-NF));
+    internal_value = SHIFTR((typename IntegerType<((MAX(NI+NF-1,_NI+_NF-1))>>3)+1>::unsigned_type) uf.asRaw(),(_NF-NF));
   }
  
 
-  // Multiplication overload, returns the compound type
-  /* template<byte _NI, byte _NF>
-     const UFixMath2<NI+_NI,NF+_NF> operator* (const UFixMath2<_NI,_NF>& op)
-     {
-     typedef typename IntegerType< ((NI+_NI+NF+_NF-1)>>3)+1>::unsigned_type return_type ;
-     return_type tt = return_type(internal_value)*op.getInt();
-     return UFixMath2<NI+_NI,NF+_NF>(tt,true);
-     }*/
-
+  //////// MULTIPLICATION OVERLOADS
+  
+  // Multiplication overload between fixed type, returns the compound type
   template<byte _NI, byte _NF>
   UFixMath2<NI+_NI,NF+_NF> operator* (const UFixMath2<_NI,_NF>& op) const
   {
     typedef typename IntegerType< ((NI+_NI+NF+_NF-1)>>3)+1>::unsigned_type return_type ;
-    return_type tt = return_type(internal_value)*op.getInt();
+    return_type tt = return_type(internal_value)*op.asRaw();
     return UFixMath2<NI+_NI,NF+_NF>(tt,true);
+  }
+
+  // Multiplication with any other type: directly to the internal_value
+  template<typename T>
+  UFixMath2<NI,NF> operator* (const T op) const
+  {
+    return UFixMath2<NI,NF>(internal_value*op,true);
   }
     
     
@@ -87,7 +95,7 @@ public:
   /*  byte sub = NF>>1;
       internal_type tt = (internal_value>>sub) * internal_type((SHIFTR(typename IntegerType<((MAX(NI+NF,_NI+_NF))>>3)>::unsigned_type(op.getInt()), (_NF-sub))));
       return  UFixMath2<NI,NF>(tt,true);*/
-
+  /*
   template<byte NI1, byte NF1, byte NI2, byte NF2>
   UFixMath2<NI1-NI2, NF1-NF2> operator/(const UFixMath2<NI1, NF1>& op1, const UFixMath2<NI2, NF2>& op2)
   {
@@ -95,10 +103,10 @@ public:
     return_type tt = (return_type(op1.getInt())<<(NF1-NF2))/op2.getInt();
     return UFixMath2<NI1-NI2, NF1-NF2>(tt,true);
   }
-
+  */
   
   float asFloat() { return (static_cast<float>(internal_value)) / (next_greater_type(1)<<NF); }
-  internal_type getInt() const { return internal_value; }
+  internal_type asRaw() const { return internal_value; }
   
 
   /* byte getNI(){return NI;}

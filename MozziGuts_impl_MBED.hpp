@@ -23,7 +23,7 @@
 
 #include <Arduino_AdvancedAnalog.h>
 
-AdvancedADC adc(AUDIO_INPUT_PIN);
+AdvancedADC adc(MOZZI_AUDIO_INPUT_PIN);
 Sample inbuf[CHUNKSIZE];
 int inbufpos=0; 
 
@@ -44,18 +44,19 @@ AudioOutputStorage_t readAudioInput(){
 
 
 static void startAudioInput() {
-  if (!adc.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZE, 256/CHUNKSIZE)) {
+  if (!adc.begin(AN_RESOLUTION_12, MOZZI_AUDIO_RATE, CHUNKSIZE, 256/CHUNKSIZE)) {
     Serial.println("Failed to start analog acquisition!");
     while (1);
   }
 }
+#else
+static void startAudioInput() {}; // dummy to ease coding
 #endif
 
-
+#if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
 /** NOTE: This section deals with implementing (fast) asynchronous analog reads, which form the backbone of mozziAnalogRead(), but also of USE_AUDIO_INPUT (if enabled).
  *  This template provides empty/dummy implementations to allow you to skip over this section, initially. Once you have an implementation, be sure to enable the
- *  #define, below: */
-//#define MOZZI_FAST_ANALOG_IMPLEMENTED
+ *  #define, above */
 
 // Insert here code to read the result of the latest asynchronous conversion, when it is finished.
 // You can also provide this as a function returning unsigned int, should it be more complex on your platform
@@ -74,20 +75,17 @@ static void startAudioInput() {
  *  Implement adcPinToChannelNum() and channelNumToIndex() to perform the appropriate mapping.
  */
 // NOTE: Theoretically, adcPinToChannelNum is public API for historical reasons, thus cannot be replaced by a define
-#define channelNumToIndex(channel) channel
 uint8_t adcPinToChannelNum(uint8_t pin) {
   return pin;
 }
 
 /** NOTE: Code needed to trigger a conversion on a new channel */
 void adcStartConversion(uint8_t channel) {
-#warning Fast analog read not implemented on this platform
 }
 
 /** NOTE: Code needed to trigger a subsequent conversion on the latest channel. If your platform has no special code for it, you should store the channel from
  *  adcStartConversion(), and simply call adcStartConversion(previous_channel), here. */
 void startSecondADCReadOnCurrentChannel() {
-#warning Fast analog read not implemented on this platform
 }
 
 /** NOTE: Code needed to set up faster than usual analog reads, e.g. specifying the number of CPU cycles that the ADC waits for the result to stabilize.
@@ -99,27 +97,16 @@ void setupFastAnalogRead(int8_t speed) {
 /** NOTE: Code needed to initialize the ADC for asynchronous reads. Typically involves setting up an interrupt handler for when conversion is done, and
  *  possibly calibration. */
 void setupMozziADC(int8_t speed) {
-#warning Fast analog read not implemented on this platform
-  #if (USE_AUDIO_INPUT)
-      startAudioInput();
-  #endif
 }
 
-/* NOTE: Most platforms call a specific function/ISR when conversion is complete. Provide this function, here.
- * From inside its body, simply call advanceADCStep(). E.g.:
-void stm32_adc_eoc_handler() {
-  advanceADCStep();
-}
-*/
-
-
+#endif
 
 ////// END analog input code ////////
 
 ////// BEGIN audio output code //////
-#if (EXTERNAL_AUDIO_OUTPUT == true)
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)
 
-#define US_PER_AUDIO_TICK (1000000L / AUDIO_RATE)
+#define US_PER_AUDIO_TICK (1000000L / MOZZI_AUDIO_RATE)
 #include <mbed.h>
 mbed::Ticker audio_output_timer;
 
@@ -132,20 +119,21 @@ inline void defaultAudioOutputCallback() {
 
 static void startAudio() {
   audio_output_timer.attach_us(&defaultAudioOutputCallback, US_PER_AUDIO_TICK);
+  startAudioInput(),
 }
 
 void stopMozzi() {
   audio_output_timer.detach();
 }
 
-#elif (MBED_AUDIO_OUT_MODE == INTERNAL_DAC)
+#elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
 
 #include <Arduino_AdvancedAnalog.h>
 
-AdvancedDAC dac1(AUDIO_CHANNEL_1_PIN);
+AdvancedDAC dac1(MOZZI_AUDIO_PIN_1);
 Sample buf1[CHUNKSIZE];
-#if (AUDIO_CHANNELS > 1)
-AdvancedDAC dac2(AUDIO_CHANNEL_2_PIN);
+#if (MOZZI_AUDIO_CHANNELS > 1)
+AdvancedDAC dac2(MOZZI_AUDIO_PIN_2);
 Sample buf2[CHUNKSIZE];
 #endif
 int bufpos = 0;
@@ -161,21 +149,21 @@ inline void commitBuffer(Sample buffer[], AdvancedDAC &dac) {
 inline void audioOutput(const AudioOutput f) {
   if (bufpos >= CHUNKSIZE) {
     commitBuffer(buf1, dac1);
-#if (AUDIO_CHANNELS > 1)
+#if (MOZZI_AUDIO_CHANNELS > 1)
     commitBuffer(buf2, dac2);
 #endif
     bufpos = 0;
   }
-  buf1[bufpos] = f.l()+AUDIO_BIAS;
-#if (AUDIO_CHANNELS > 1)
-  buf2[bufpos] = f.r()+AUDIO_BIAS;
+  buf1[bufpos] = f.l()+MOZZI_AUDIO_BIAS;
+#if (MOZZI_AUDIO_CHANNELS > 1)
+  buf2[bufpos] = f.r()+MOZZI_AUDIO_BIAS;
 #endif
   ++bufpos;
 }
 
 bool canBufferAudioOutput() {
   return (bufpos < CHUNKSIZE || (dac1.available()
-#if (AUDIO_CHANNELS > 1)
+#if (MOZZI_AUDIO_CHANNELS > 1)
     && dac2.available()
 #endif
   ));
@@ -183,45 +171,46 @@ bool canBufferAudioOutput() {
 
 static void startAudio() {
   //NOTE: DAC setup currently affected by https://github.com/arduino-libraries/Arduino_AdvancedAnalog/issues/35 . Don't expect this to work, until using a fixed version fo Arduino_AdvancedAnalog!
-  if (!dac1.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZE, 256/CHUNKSIZE)) {
+  if (!dac1.begin(AN_RESOLUTION_12, MOZZI_AUDIO_RATE, CHUNKSIZE, 256/CHUNKSIZE)) {
     Serial.println("Failed to start DAC1 !");
     while (1);
   }
-#if (AUDIO_CHANNELS > 1)
-  if (!dac2.begin(AN_RESOLUTION_12, AUDIO_RATE, CHUNKSIZE, 256/CHUNKSIZE)) {
+#if (MOZZI_AUDIO_CHANNELS > 1)
+  if (!dac2.begin(AN_RESOLUTION_12, MOZZI_AUDIO_RATE, CHUNKSIZE, 256/CHUNKSIZE)) {
     Serial.println("Failed to start DAC2 !");
     while (1);
   }
 #endif
+  startAudioInput();
 }
 
 void stopMozzi() {
   dac1.stop();
-#if (AUDIO_CHANNELS > 1)
+#if (MOZZI_AUDIO_CHANNELS > 1)
   dac2.stop();
 #endif
 }
 
-#elif (MBED_AUDIO_OUT_MODE == PDM_VIA_SERIAL)
+#elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_SERIAL)
 
 #include <mbed.h>
 
-mbed::BufferedSerial serial_out1(digitalPinToPinName(PDM_SERIAL_UART_TX_CHANNEL_1), digitalPinToPinName(PDM_SERIAL_UART_RX_CHANNEL_1));
-uint8_t buf[PDM_RESOLUTION*4];
+mbed::BufferedSerial serial_out1(digitalPinToPinName(MOZZI_SERIAL_PIN_TX), digitalPinToPinName(MOZZI_SERIAL_PIN_RX));
+uint8_t buf[MOZZI_PDM_RESOLUTION*4];
 
 bool canBufferAudioOutput() {
   return serial_out1.writable();
 }
 
 inline void audioOutput(const AudioOutput f) {
-  for (uint8_t i = 0; i < PDM_RESOLUTION*4; ++i) {
-    buf[i] = pdmCode8(f.l()+AUDIO_BIAS);
+  for (uint8_t i = 0; i < MOZZI_PDM_RESOLUTION*4; ++i) {
+    buf[i] = pdmCode8(f.l()+MOZZI_AUDIO_BIAS);
   }
-  serial_out1.write(&buf, PDM_RESOLUTION*4);
+  serial_out1.write(&buf, MOZZI_PDM_RESOLUTION*4);
 }
 
 static void startAudio() {
-  serial_out1.set_baud(AUDIO_RATE*PDM_RESOLUTION*40); // NOTE: 40 = 4 * (8 bits + stop-bits)
+  serial_out1.set_baud(MOZZI_AUDIO_RATE*MOZZI_PDM_RESOLUTION*40); // NOTE: 40 == 4 * (8 bits + stop-bits)
   serial_out1.set_format(8, mbed::BufferedSerial::None, 1);
 }
 
@@ -232,3 +221,6 @@ void stopMozzi() {
 
 #endif
 ////// END audio output code //////
+
+#undef CHUNKSIZE
+#undef US_PER_AUDIO_TICK

@@ -515,7 +515,7 @@
  * For other boards is may be appropriate to customize:
  * @code
  * #define MOZZI_AUDIO_PIN_1   ...   // mono / left channel; default: A13
- * #define MOZZI_AUDIO_PIN_1   ...   // stereo only: right channel; default: A12
+ * #define MOZZI_AUDIO_PIN_2   ...   // stereo only: right channel; default: A12
  * #define MOZZI_AUDIO_BITS    ...   // default is 12
  * @endcode
  *

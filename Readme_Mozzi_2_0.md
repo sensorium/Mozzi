@@ -15,6 +15,7 @@ audio modes mapping
  
 further
  - USE_AUDIO_INPUT: MOZZI_AUDIO_INPUT
+ - IS_STM32() -> IS_STM32MAPLE()
 
 simple renames:
  - AUDIO_RATE: MOZZI_AUDIO_RATE

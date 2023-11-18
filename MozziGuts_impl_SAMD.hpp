@@ -16,6 +16,7 @@
 
 ////// BEGIN analog input code ////////
 #if MOZZI_IS(MOZZI_ANALOG_READ, NOZZI_ANALOG_READ_STANDARD)
+#error not yet implemented
 #define getADCReading() 0
 #define channelNumToIndex(channel) channel
 uint8_t adcPinToChannelNum(uint8_t pin) {

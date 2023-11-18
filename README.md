@@ -190,79 +190,15 @@ Various examples from [Pure Data](http://puredata.info/) by Miller Puckette
 
 ## Hardware specific notes
 
-### STM32
-The situation on STM32-based boards is rather confusing, as there are several competing Arduino cores. Importantly:
-- Some boards use dedicated cores (e.g. Arduino Giga / Protenta) etc. For those, see the relevant sections (if we support them)
-- There is a series of libmaple-based cores, including [Roger Clark's libmaple-based core](https://github.com/rogerclarkmelbourne/Arduino_STM32). These are highly optimized, and provide very complete support, but only for a limited number of boards. Unfortunately, at the time of this writing (2023/04), they are not available for installation via the Arduino Board Manager, and they do not currently seem actively maintained.
-- A generic Arduino core for STM32 is the [STM32duino core](https://github.com/stm32duino/Arduino_Core_STM32). It supports a huge step of boards, and seems to have offical backing by STM, but some features of the libmaple based cores are still lacking. To complete confusion, this core now uses the label "STM32duino", which used to be what the libmaple cores above were known by (don't blame Mozzi for this mess!).
-
-Mozzi supports both of the latter, but currently not at the same level of completeness.
-
-#### STM32 libmaple based
-port by Thomas Friedrichsmeier
-
-Compiles for and runs on a STM32F103C8T6 blue pill board, with a bunch of caveats (see below), i.e. on a board _without_ a
-real DAC. Should probably run on any other board supported by [Roger Clark's libmaple-based core](https://github.com/rogerclarkmelbourne/Arduino_STM32) (although this theory is untested).
-
-*NOTE* that at the time of this writing, [Stev Strong's slightliy more recent fork of this core](https://github.com/stevstrong/Arduino_STM32/) does *not* work with
-Mozzi, apparently due to a bug in pwmWrite().
-
-- You will need a very recent checkout of the Arduino_STM32 repository, otherwise compilation will fail.
-- Audio output is to pin PB8, by default (HIFI-mode: PB8 and PB9)
-- If you want to use MIDI, be sure to replace "MIDI_CREATE_DEFAULT_INSTANCE()" with "MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, MIDI)" (or Serial2)
-- Timers 4 (PWM output), and 2 (audio rate) are used by default.
-- The STM32-specific options (pins, timers) can be configured in AudioConfigSTM32.h
-- Default audio resolution is currently set to 10 bits, which yields 70khZ PWM frequency on a 72MHz CPU. HIFI mode is 2*7bits at up to 560Khz (but limited to 5 times audio rate)
-- AUDIO_INPUT is completely untested (but implemented in theory)
-- Note that AUDIO_INPUT and mozziAnalogRead() return values in the STM32's full ADC resolution of 0-4095 rather than AVR's 0-1023.
-- twi_nonblock is not ported
-
-#### STM32 STM32duino
-port by Thomas Friedrichsmeier
-
-Tested on a STM32F103C8T6 blue pill board as well as an STM32F411CE black pill board, i.e. on sboards _without_ a
-real DAC. Compiles and runs, with a bunch of caveats (see below). Should probably run on any other board supported by the
-[STM32duino core](https://github.com/stm32duino/Arduino_Core_STM32) (although this theory is untested).
-When trying any other board, you probably want to check the platform specific settings (see below), carefully, importantly, whether the desired output resolution is
-achievable, and whether the desired output pins are PWM capable.
-
-- Audio output is PWM-based to pin PA8, by default (HIFI-mode: PA8 and PA9)
-- Timers 3 (PWM output), and 2 (audio rate) are used by default.
-- The STM32-specific options (pins, timers) can be configured in AudioConfigSTM32duino.h
-- Default audio resolution is currently set to 10 bits, which yields 70khZ PWM frequency on a 72MHz CPU. IMPORTANT: Should your CPU be slower, you will need to lower the audio resolution!
-- HIFI mode is 2*7bits at up to 560Khz with a 72MHz CPU (but limited to 5 times audio rate)
-- Analog input implementation is somewhat experimental, and may not be able to service a whole lot of pins (contributions welcome)
-- AUDIO_INPUT is completely untested (but implemented in theory)
-- Note that AUDIO_INPUT and mozziAnalogRead() return values in the STM32's full ADC resolution (the exact range depending on the board in use) rather than AVR's 0-1023.
-- twi_nonblock is not ported
+TODO link to hardware section in API docs
+TODO list just the basic headers, here.
 
 ### Teensy 3.0/3.1/3.2/3.4/3.5/LC
 
-This port is working with the latest version of Teensyduino (1.8.5)
-Extra libraries required for use with Teensy 3.*:
-These are included in the standard Teensyduino install unless you explicitly disable them
-- [Timer library](https://github.com/loglow/IntervalTimer) for Teensy 3.* by Daniel Gilbert
-- [ADC library](http://github.com/pedvide/ADC) by Pedro Villanueva
-
-Some of the differences for Teensy 3.* which will affect users include:
-
-- On Teeensy 3.0/3.1/3.2/Audio output is on pin A14/DAC, in STANDARD or STANDARD_PLUS audio modes.
-    These modes are identical on Teensy 3.0/3.1/3.2, as the output is via DAC rather than PWM.
-- Output is 12 bits in STANDARD and STANDARD_PLUS modes, up from nearly 9 bits for Atmel based boards. HIFI audio, which works by summing two output pins, is not available on Teensy 3.0/3.1.
-- twi_nonblock code by Marije Baalman for non-blocking I2C is not compatible with Teensy 3.0/3.1/3.2.
 
 ### Teensy 4.0/4.1
-port by Thomas Combriat
 
-This port is working with the latest version of Teensyduino (1.8.5)
-Extra libraries required for use with Teensy 4.*:
-These are included in the standard Teensyduino install unless you explicitly disable them
-- [Timer library](https://github.com/loglow/IntervalTimer) for Teensy 3.* by Daniel Gilbert
-- [ADC library](http://github.com/pedvide/ADC) by Pedro Villanueva
-
-Some of the differences for Teensy 4.*:
-
-- Contrary to the Teensy 3, the Teensy 4 do not have any DAC. The output is done on pin A8 (PWM) by default (editable in `AudioConfigTeensy4.h`
+### STM32
 
 ### SAMD21 architecture (Arduino Circuitplayground M0 and others)
 port by Adrian Freed
@@ -294,7 +230,7 @@ port by Thomas Friedrichsmeier
 - _Any_ WiFi-activity can cause severe spikes in power consumption. This can cause audible "ticking" artifacts, long before any other symptoms.
   - If you do not require WiFi in your sketch, you should turn it off, _explicitly_, using `WiFi.mode(WIFI_OFF)`.
   - A juicy enough, well regulated power supply, and a stabilizing capacitor between VCC and Gnd can help a lot.
-  - As the (PDM) output signal is digital, a single transistor can be used to amplify it to an independent voltage level.
+  - As the (PDM) output signal is digital, a single (fast!) transistor can be used to amplify it to an independent voltage level.
 - The audio output resolution is always 16 bits on this platform, _internally_. Thus, in updateAudio(), you should scale your output samples to a full 16 bit range. The effective number of output bits cannot easily
   be quantified, due to PDM coding.
 - audioHook() calls `yield()` once for every audio sample generated. Thus, as long as your audio output buffer does not run empty, you should not need any additional `yield()`s inside `loop()`.

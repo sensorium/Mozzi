@@ -1,9 +1,87 @@
 #ifndef CONFIG_CHECK_TEENSY_H
 #define CONFIG_CHECK_TEENSY_H
 
+/** @ingroup hardware
+ * @page hardware_teensy3 Mozzi on Teensy 3.0/3.1/3.2/3.4/3.5/LC boards.
+ *
+ * port by Thomas Combriat
+ *
+ * @note
+ * For Teensy 4.x see @ref hardware_teensy4
+ *
+ * @section teensy3_status Port status and ussage notes
+ * This port requires the following two libraries (which should be part of a default installtion, however):
+ * - [Timer library](https://github.com/loglow/IntervalTimer) for Teensy 3.* by Daniel Gilbert
+ * - [ADC library](http://github.com/pedvide/ADC) by Pedro Villanueva
+ *
+ * Some of the differences for Teensy 3.* which will affect users include:
+ * - twi_nonblock code by Marije Baalman for non-blocking I2C is not compatible with Teensy 3.0/3.1/3.2.
+ *
+ * @section teensy3_output Output modes
+ * The following audio modes (see @ref MOZZI_AUDIO_MODE) are currently supported on this hardware:
+ *   - MOZZI_OUTPUT_EXTERNAL_TIMED
+ *   - MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ *   - MOZZI_OUTPUT_INTERNAL_DAC
+ *
+ * The default mode is @ref teensy3_internal_dac .
+ *
+ * @section teensy3_internal_dac MOZZI_OUTPUT_INTERNAL_DAC
+ * Output is to the inbuilt DAC. Output resolution is 12 bits. Mono, only. The DAC output pin differs from board to boards.
+ * In most cases the appropriate pin will be set outmatically. If needed, you can specify the DAC pin, explicitly:
+ *
+ * @code
+ * #define MOZZI_AUDIO_PIN_1       ...  // Default: A14, A12, or A21, depending on board
+ * @endcode
+ *
+ * @section teensy3_external MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ * See @ref external_audio
+*/
+
+
+/** @ingroup hardware
+ * @page hardware_teensy4 Mozzi on Teensy 4.x boards.
+ *
+ * port by Thomas Combriat
+ *
+ * @note
+ * For Teensy 3.x see @ref hardware_teensy3
+ *
+ * @section teensy4_status Port status and ussage notes
+ * This port requires the following two libraries (which should be part of a default installtion, however):
+ * - [Timer library](https://github.com/loglow/IntervalTimer) for Teensy 4.* by Daniel Gilbert
+ * - [ADC library](http://github.com/pedvide/ADC) by Pedro Villanueva
+ *
+ * Contrary to the Teensy 3, the Teensy 4 do not have any DAC. The output is done on pin A8 (PWM) by default (see below).
+ * twi_nonblock is not ported.
+ *
+ * @section teensy3_output Output modes
+ * The following audio modes (see @ref MOZZI_AUDIO_MODE) are currently supported on this hardware:
+ *   - MOZZI_OUTPUT_EXTERNAL_TIMED
+ *   - MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ *   - MOZZI_OUTPUT_PWM
+ *
+ * The default mode is @ref teensy4_pwm .
+ *
+ * @section teensy4_pwm MOZZI_OUTPUT_PWM
+ * Output is to a GPIO pin (or two in stereo). The output resolution is fixed at 10 bits, and a 146484 kHz carrier frequency.
+ * The output pins can be configured as:
+ *
+ * @code
+ * #define MOZZI_AUDIO_PIN_1       ...  // Left / mono output pin. Default: A8
+ * // For stereo, only:
+ * #define MOZZI_AUDIO_PIN_2       ...  // Right channel output pin. Default: A9
+ * @endcode
+ *
+ * @section teensy4_external MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ * See @ref external_audio
+*/
+
+
 #if !(IS_TEENSY3() || IS_TEENSY4())
 #error This header should be included for Teensy (3.x or 4.x) boards, only
 #endif
+
+
 
 #if IS_TEENSY3()
 #  if !defined(MOZZI_AUDIO_MODE)

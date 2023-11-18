@@ -604,7 +604,7 @@
  * #define MOZZI_AUDIO_PIN_1   ...  // default is 0
  * #define MOZZI_AUDIO_BITS    ...  // output resolution (bits); default is 11
  * // additionally, for stereo:
- * #define MOZZI_AUDIO_PIN_2   ...  // default is 1
+ * #define MOZZI_AUDIO_PIN_2   ...  // default is 1; this must be on the same PWM slice as the first pin (i.e. neighboring)
  * @endcode
  *
  * @section rp2040_i2s_dac MOZZI_OUTPUT_I2S_DAC

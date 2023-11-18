@@ -26,8 +26,11 @@ TODO: Fix documentation
 #define MOZZI_AUDIO_INPUT_NONE 201
 #define MOZZI_AUDIO_INPUT_STANDARD 202
 
-#define MOZZI_ANALOG_READ_NONE 201
-#define MOZZI_ANALOG_READ_STANDARD 202
+#define MOZZI_ANALOG_READ_NONE 301
+#define MOZZI_ANALOG_READ_STANDARD 302
+
+#define MOZZI_I2S_FORMAT_PLAIN 401
+#define MOZZI_I2S_FORMAT_LSBJ 402
 
 // defined with some space in between, just in case. This should be numerically ordered.
 #define MOZZI_COMPATIBILITY_1_1 1100

@@ -1,0 +1,57 @@
+#ifndef CONFIG_CHECK_RP2040_H
+#define CONFIG_CHECK_RP2040_H
+
+
+#if not IS_RP2040()
+#error This header should be included for RP2040 architecture (Raspberry Pi Pico and others), only
+#endif
+
+#if !defined(MOZZI_AUDIO_MODE)
+#  define MOZZI_AUDIO_MODE MOZZI_OUTPUT_PWM
+#endif
+MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPUT_EXTERNAL_CUSTOM, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_I2S_DAC)
+
+#if !defined(MOZZI_AUDIO_RATE)
+#define MOZZI_AUDIO_RATE 32768
+#endif
+
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
+#  if !defined(MOZZI_AUDIO_BITS)
+#    define MOZZI_AUDIO_BITS 11
+#  endif
+#  if !defined(MOZZI_AUDIO_PIN_1)
+#    define MOZZI_AUDIO_PIN_1 0
+#  endif
+#  if !defined(MOZZI_AUDIO_PIN_2)
+#    define MOZZI_AUDIO_PIN_2 1
+#  endif
+#endif
+
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC)
+#  if !defined(MOZZI_AUDIO_BITS)
+#    define MOZZI_AUDIO_BITS 16
+#  endif
+#  if !defined(MOZZI_I2S_PIN_BCK)
+#    define MOZZI_I2S_PIN_BCK 20
+#  endif
+//#  define MOZZI_IS_PIN_WS(MOZZI_I2S_PIN_BCK + 1)  // implicit
+#  if !defined(MOZZI_I2S_PIN_DATA)
+#    define MOZZI_I2S_PIN_DATA 22
+#  endif
+#  if !defined(MOZZI_I2S_FORMAT)
+#    define MOZZI_I2S_FORMAT MOZZI_I2S_FORMAT_PLAIN
+#  endif
+MOZZI_CHECK_SUPPORTED(MOZZI_I2S_FORMAT, MOZZI_I2S_FORMAT_PLAIN, MOZZI_I2S_FORMAT_LSBJ)
+#  define BYPASS_MOZZI_OUTPUT_BUFFER true
+#  define MOZZI_RP2040_BUFFERS 8       // number of DMA buffers used
+#  define MOZZI_RP2040_BUFFER_SIZE 256  // total size of the buffer, in samples
+#endif
+
+#if !defined(MOZZI_ANALOG_READ)
+#  define MOZZI_ANALOG_READ MOZZI_ANALOG_READ_STANDARD
+#endif
+
+MOZZI_CHECK_SUPPORTED(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE, MOZZI_ANALOG_READ_STANDARD)
+MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE, MOZZI_ANALOG_READ_STANDARD)
+
+#endif        //  #ifndef CONFIG_CHECK_RP2040_H

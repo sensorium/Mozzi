@@ -22,6 +22,7 @@
 template<byte NI, byte NF> // NI and NF being the number of bits for the integral and the fractionnal parts respectively.
 class UFixMath2
 {
+  static_assert(NI+NF<=64, "The total width of a UFixMath2 cannot exceed 64bits");
   typedef typename IntegerType<((NI+NF-1)>>3)+1>::unsigned_type internal_type ; // smallest size that fits our internal integer
   typedef typename IntegerType<((NI+NF)>>3)+1>::unsigned_type next_greater_type ; // smallest size that fits 1<<NF for sure (NI could be equal to 0). It can be the same than internal_type in some cases.
   
@@ -40,7 +41,6 @@ public:
   template<typename T>
   UFixMath2(T value,bool as_raw=false)
   {
-    // if (as_frac) internal_value = value;
     if (as_raw) fromRaw(value);
     else internal_value = (internal_type(value) << NF);
   }
@@ -75,7 +75,7 @@ public:
 
   //////// MULTIPLICATION OVERLOADS
   
-  // Multiplication overload between fixed type, returns the compound type
+  // Multiplication overload between Ufixed type, returns the compound type
   template<byte _NI, byte _NF>
   UFixMath2<NI+_NI,NF+_NF> operator* (const UFixMath2<_NI,_NF>& op) const
   {
@@ -83,6 +83,8 @@ public:
     return_type tt = return_type(internal_value)*op.asRaw();
     return UFixMath2<NI+_NI,NF+_NF>(tt,true);
   }
+
+
 
   // Multiplication with any other type: directly to the internal_value
   template<typename T>
@@ -104,7 +106,9 @@ public:
     return UFixMath2<NI+1,NF>(internal_value<<op,true);
   }
 
-  
+
+
+  // Division. Might actually more misleading than helping. NON Working version below.
   /*
     template<byte NI1, byte NF1, byte NI2, byte NF2>
     UFixMath2<NI1-NI2, NF1-NF2> operator/(const UFixMath2<NI1, NF1>& op1, const UFixMath2<NI2, NF2>& op2)
@@ -129,6 +133,8 @@ private:
 
 
 /// Reverse overloadings, making a template here leads to an ambiguity, forcing us to specify them one by one??
+
+
 template <byte NI, byte NF>
 UFixMath2<NI, NF> operator*(uint8_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
 
@@ -140,6 +146,19 @@ UFixMath2<NI, NF> operator*(uint32_t op, const UFixMath2<NI, NF>& uf) {return uf
 
 template <byte NI, byte NF>
 UFixMath2<NI, NF> operator*(uint64_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+
+template <byte NI, byte NF>
+UFixMath2<NI, NF> operator*(int8_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+
+template <byte NI, byte NF>
+UFixMath2<NI, NF> operator*(int16_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+
+template <byte NI, byte NF>
+UFixMath2<NI, NF> operator*(int32_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+
+template <byte NI, byte NF>
+UFixMath2<NI, NF> operator*(int64_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+
 
 template <byte NI, byte NF>
 UFixMath2<NI, NF> operator*(float op, const UFixMath2<NI, NF>& uf) {return uf*op;}
@@ -156,6 +175,7 @@ UFixMath2<NI, NF> operator*(double op, const UFixMath2<NI, NF>& uf) {return uf*o
 template<byte NI, byte NF> // NI and NF being the number of bits for the integral and the fractionnal parts respectively.
 class SFixMath2
 {
+  static_assert(NI+NF<64, "The total width of a SFixMath2 cannot exceed 63bits");
   typedef typename IntegerType<((NI+NF-1)>>3)+1>::signed_type internal_type ; // smallest size that fits our internal integer
   typedef typename IntegerType<((NI+NF)>>3)+1>::signed_type next_greater_type ; // smallest size that fits 1<<NF for sure (NI could be equal to 0). It can be the same than internal_type in some cases.
   
@@ -229,9 +249,64 @@ private:
 
 };
 
+/// Reverse overloadings, 
+
+
+template <byte NI, byte NF>
+SFixMath2<NI, NF> operator*(uint8_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+
+template <byte NI, byte NF>
+SFixMath2<NI, NF> operator*(uint16_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+
+template <byte NI, byte NF>
+SFixMath2<NI, NF> operator*(uint32_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+
+template <byte NI, byte NF>
+SFixMath2<NI, NF> operator*(uint64_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+
+template <byte NI, byte NF>
+SFixMath2<NI, NF> operator*(int8_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+
+template <byte NI, byte NF>
+SFixMath2<NI, NF> operator*(int16_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+
+template <byte NI, byte NF>
+SFixMath2<NI, NF> operator*(int32_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+
+template <byte NI, byte NF>
+SFixMath2<NI, NF> operator*(int64_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+
+
+template <byte NI, byte NF>
+SFixMath2<NI, NF> operator*(float op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+
+template <byte NI, byte NF>
+SFixMath2<NI, NF> operator*(double op, const SFixMath2<NI, NF>& uf) {return uf*op;}
 
 
 
+
+
+
+
+
+// Multiplications between SFixMath2 and UFixMath2
+
+template<byte NI, byte NF, byte _NI, byte _NF>
+SFixMath2<NI+_NI+1,NF+_NF> operator* (const SFixMath2<NI,NF>& op1, const UFixMath2<_NI,_NF>& op2 )
+{
+  typedef typename IntegerType< ((NI+_NI+1+NF+_NF-1)>>3)+1>::signed_type return_type ;
+  return_type tt = return_type(op1.asRaw())*op2.asRaw();
+  return SFixMath2<NI+_NI+1,NF+_NF>(tt,true);
+}
+
+template<byte NI, byte NF, byte _NI, byte _NF>
+SFixMath2<NI+_NI+1,NF+_NF> operator* (const UFixMath2<NI,NF>& op1, const SFixMath2<_NI,_NF>& op2 )
+{
+  typedef typename IntegerType< ((NI+_NI+1+NF+_NF-1)>>3)+1>::signed_type return_type ;
+  return_type tt = return_type(op1.asRaw())*op2.asRaw();
+  return SFixMath2<NI+_NI+1,NF+_NF>(tt,true);
+}
 
 
 

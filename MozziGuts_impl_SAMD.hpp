@@ -15,29 +15,27 @@
 #endif
 
 ////// BEGIN analog input code ////////
-//#define MOZZI_FAST_ANALOG_IMPLEMENTED // not yet
+#if MOZZI_IS(MOZZI_ANALOG_READ, NOZZI_ANALOG_READ_STANDARD)
 #define getADCReading() 0
 #define channelNumToIndex(channel) channel
 uint8_t adcPinToChannelNum(uint8_t pin) {
   return pin;
 }
 void adcStartConversion(uint8_t channel) {
-#warning Fast analog read not implemented on this platform
 }
 void startSecondADCReadOnCurrentChannel() {
-#warning Fast analog read not implemented on this platform
 }
 void setupFastAnalogRead(int8_t speed) {
-#warning Fast analog read not implemented on this platform
 }
 void setupMozziADC(int8_t speed) {
-#warning Fast analog read not implemented on this platform
 }
+#endif
 ////// END analog input code ////////
 
 
 
 //// BEGIN AUDIO OUTPUT code ///////
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC, MOZZI_OUTPUT_EXTERNAL_TIMED)
 // These are ARM SAMD21 Timer 5 routines to establish a sample rate interrupt
 static bool tcIsSyncing() {
   return TC5->COUNT16.STATUS.reg & TC_STATUS_SYNCBUSY;
@@ -106,29 +104,32 @@ void samd21AudioOutput() {
 #ifdef __cplusplus
 }
 #endif
+#endif // MOZZI_AUDIO_MODE
 
-#if (EXTERNAL_AUDIO_OUTPUT != true)   // otherwise, the last stage - audioOutput() - will be provided by the user
-#include "AudioConfigSAMD21.h"
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
 inline void audioOutput(const AudioOutput f) {
-  analogWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
+  analogWrite(MOZZI_AUDIO_PIN_1, f.l()+MOZZI_AUDIO_BIAS);
 }
 #endif
 
 static void startAudio() {
-#ifdef ARDUINO_SAMD_CIRCUITPLAYGROUND_EXPRESS
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
+#  ifdef ARDUINO_SAMD_CIRCUITPLAYGROUND_EXPRESS
   {
     static const int CPLAY_SPEAKER_SHUTDOWN = 11;
     pinMode(CPLAY_SPEAKER_SHUTDOWN, OUTPUT);
     digitalWrite(CPLAY_SPEAKER_SHUTDOWN, HIGH);
   }
 
-#endif
-  analogWriteResolution(AUDIO_BITS);
-#if (EXTERNAL_AUDIO_OUTPUT != true)
-  analogWrite(AUDIO_CHANNEL_1_PIN, 0);
+#  endif
+
+  analogWriteResolution(MOZZI_AUDIO_BITS);
+  analogWrite(MOZZI_AUDIO_PIN_1, 0);
 #endif
 
-  tcConfigure(AUDIO_RATE);
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC, MOZZI_OUTPUT_EXTERNAL_TIMED)
+  tcConfigure(MOZZI_AUDIO_RATE);
+#endif
 }
 
 void stopMozzi() {

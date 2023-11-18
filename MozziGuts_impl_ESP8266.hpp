@@ -29,10 +29,9 @@ void startSecondADCReadOnCurrentChannel() {
 }
 void setupMozziADC(int8_t speed) {
 }
-#endif
 void setupFastAnalogRead(int8_t speed) {
-#warning Fast analog read not implemented on this platform
 }
+#endif
 ////// END analog input code ////////
 
 

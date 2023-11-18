@@ -85,8 +85,6 @@ void setupMozziADC(int8_t speed) {
         setupFastAnalogRead(speed);
 }
 
-#endif
-
 void setupFastAnalogRead(int8_t speed) {
 	if (speed == FAST_ADC){ // divide by 16
 		ADCSRA |= (1 << ADPS2);
@@ -102,6 +100,8 @@ void setupFastAnalogRead(int8_t speed) {
 		ADCSRA &= ~(1 << ADPS0);
 	}
 }
+
+#endif
 
 ////// END analog input code ////////
 

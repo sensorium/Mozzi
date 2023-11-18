@@ -54,6 +54,7 @@ static void startAudioInput() {}; // dummy to ease coding
 #endif
 
 #if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
+#error not yet implemented
 /** NOTE: This section deals with implementing (fast) asynchronous analog reads, which form the backbone of mozziAnalogRead(), but also of USE_AUDIO_INPUT (if enabled).
  *  This template provides empty/dummy implementations to allow you to skip over this section, initially. Once you have an implementation, be sure to enable the
  *  #define, above */
@@ -91,7 +92,6 @@ void startSecondADCReadOnCurrentChannel() {
 /** NOTE: Code needed to set up faster than usual analog reads, e.g. specifying the number of CPU cycles that the ADC waits for the result to stabilize.
  *  This particular function is not super important, so may be ok to leave empty, at least, if the ADC is fast enough by default. */
 void setupFastAnalogRead(int8_t speed) {
-#warning Fast analog read not implemented on this platform
 }
 
 /** NOTE: Code needed to initialize the ADC for asynchronous reads. Typically involves setting up an interrupt handler for when conversion is done, and

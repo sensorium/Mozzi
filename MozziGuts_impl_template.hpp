@@ -16,9 +16,9 @@
  *  Files involved:
  *  1. Modify hardware_defines.h, adding a macro to detect your target platform
  *  2. Modify MozziGuts.cpp to include MozziGuts_impl_YOURPLATFORM.hpp
- *  3. Modify MozziGuts.h to include AudioConfigYOURPLATFORM.h
- *  4. Copy this file to MozziGuts_impl_YOURPLATFORM.hpp and adjust as necessary
- *  (If your platform is very similar to an existing port, it may instead be better to modify the existing MozziGuts_impl_XYZ.hpp/AudioConfigYOURPLATFORM.h,
+ *  3. Modify internal/config_checks_generic.h to include internal/config_checks_YOURPLATFORM.h
+ *  4. Copy this file to MozziGuts_impl_YOURPLATFORM.hpp and adjust as necessary, same for internal/config_checks_template.h
+ *  (If your platform is very similar to an existing port, it may instead be better to modify the existing MozziGuts_impl_XYZ.hpp/config_checks_XYZ.h,
  *  instead of steps 2-3.).
  *  Some platforms may need small modifications to other files as well, e.g. mozzi_pgmspace.h
  *
@@ -51,8 +51,9 @@
  * #define MOZZI_ANALOG_READ MOZZI_ANALOG_READ_STANDARD
  * #endif
  *
- * The only function in this section that is always defined is setupFastAnalogRead() (but this, too, may be left empty, initially).
+ * Also, of course, remove the #error line, below
  */
+#error not yet implemented
 
 // Insert here code to read the result of the latest asynchronous conversion, when it is finished.
 // You can also provide this as a function returning unsigned int, should it be more complex on your platform
@@ -99,13 +100,12 @@ void stm32_adc_eoc_handler() {
 }
 */
 
-#endif
-
 /** NOTE: Code needed to set up faster than usual analog reads, e.g. specifying the number of CPU cycles that the ADC waits for the result to stabilize.
  *  This particular function is not super important, so may be ok to leave empty, at least, if the ADC is fast enough by default. */
 void setupFastAnalogRead(int8_t speed) {
-#warning Fast analog read not implemented on this platform
 }
+
+#endif
 
 ////// END analog input code ////////
 
@@ -121,23 +121,34 @@ void setupFastAnalogRead(int8_t speed) {
  * analog reads for instance. */
 //#define AUDIO_HOOK_HOOK
 
-#if (EXTERNAL_AUDIO_OUTPUT != true) // otherwise, the last stage - audioOutput() - will be provided by the user
-/** NOTE: This is the function that actually write a sample to the output. In case of EXTERNAL_AUDIO_OUTPUT == true, it is provided by the library user, instead. */
+/* NOTE: Code sections that are needed for a certain audio mode, only, should be guarded as follows (in this example, code will compile for the
+ * two modes MOZZI_OUTPUT_PWM, and MOZZI_OUTPUT_INTERNAL_DAC (should your port happen to support these two).
+ *
+ * Keep in mind that you probably want to support MOZZI_OUTPUT_EXTERNAL_TIMED, and MOZZI_OUTPUT_EXTERNAL_CUSTOM, too, which is usually very
+ * easy: For both, do *not* provide an audioOutput() function, as this will be provided by the user. For MOZZI_OUTPUT_EXTERNAL_TIMED make sure some
+ * timer is set up to call defaultAudioOutput() at MOZZI_AUDIO_RATE. For MOZZI_OUTPUT_EXTERNAL_CUSTOM, nothing else will be needed. */
+
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_INTERNAL_DAC)  // just an example!
+/** NOTE: This is the function that actually write a sample to the output. In case of the two EXTERNAL modes, it is provided by the library user, instead. */
 inline void audioOutput(const AudioOutput f) {
-  // e.g. analogWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
-#if (AUDIO_CHANNELS > 1)
-  // e.g. analogWrite(AUDIO_CHANNEL_2_PIN, f.r()+AUDIO_BIAS);
-#endif
+  // e.g. analogWrite(MOZZI_AUDIO_CHANNEL_1_PIN, f.l()+MOZZI_AUDIO_BIAS);
+#  if (MOZZI_AUDIO_CHANNELS > 1)
+  // e.g. analogWrite(MOZZI_AUDIO_CHANNEL_2_PIN, f.r()+MOZZI_AUDIO_BIAS);
+#  endif
 }
 #endif
 
 static void startAudio() {
   // Add here code to get audio output going. This usually involves:
   // 1) setting up some DAC mechanism (e.g. setting up a PWM pin with appropriate resolution
-  // 2a) setting up a timer to call defaultAudioOutput() at AUDIO_RATE
+  // 2a) setting up a timer to call defaultAudioOutput() at MOZZI_AUDIO_RATE
   // OR 2b) setting up a buffered output queue such as I2S (see ESP32 / ESP8266 for examples for this setup)
-#if (EXTERNAL_AUDIO_OUTPUT != true)
-  // remember that the user may configure EXTERNAL_AUDIO_OUTPUT, in which case, you'll want to provide step 2a), and only that.
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
+  // [...]
+#elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
+  // [...]
+#elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)
+  // remember that the user may configure MOZZI_OUTPUT_EXTERNAL_TIMED, in which case, you'll want to provide step 2a), and only that.
 #endif
 }
 

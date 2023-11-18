@@ -31,7 +31,7 @@
 #include "mozzi_analog.h"
 
 
-#include "internal/config_check_generic.h"
+#include "internal/config_checks_generic.h"
 
 #if (STEREO_HACK == true)
 extern int audio_out_1, audio_out_2;

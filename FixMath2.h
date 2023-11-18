@@ -71,11 +71,43 @@ public:
   UFixMath2(const UFixMath2<_NI,_NF>& uf) {
     internal_value = SHIFTR((typename IntegerType<((MAX(NI+NF-1,_NI+_NF-1))>>3)+1>::unsigned_type) uf.asRaw(),(_NF-NF));
   }
- 
+
+
+  //////// ADDITION OVERLOADS
+  // Between UFix
+  template<byte _NI, byte _NF>
+  UFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)> operator+ (const UFixMath2<_NI,_NF>& op) const
+  {
+    constexpr byte new_NI = MAX(NI, _NI) + 1;
+    constexpr byte new_NF = MAX(NF, _NF);
+    typedef typename IntegerType< ((new_NI+new_NF-1)>>3)+1>::unsigned_type return_type;
+    UFixMath2<new_NI,new_NF> left(*this);
+    UFixMath2<new_NI,new_NF> right(op);
+
+    return_type tt = return_type(left.asRaw()) + right.asRaw();
+    return UFixMath2<new_NI,new_NF>(tt,true);
+  }
+
+
+
+  //////// SUBSTRACTION OVERLOADS
+  // Between UFix
+  template<byte _NI, byte _NF> // We do not have the +1 after MAX(NI, _NI) because the substraction between two UFix should fit in the bigger of the two.
+  UFixMath2<MAX(NI,_NI),MAX(NF,_NF)> operator- (const UFixMath2<_NI,_NF>& op) const
+  {
+    constexpr byte new_NI = MAX(NI, _NI);
+    constexpr byte new_NF = MAX(NF, _NF);
+    typedef typename IntegerType< ((new_NI+new_NF-1)>>3)+1>::unsigned_type return_type;
+    UFixMath2<new_NI,new_NF> left(*this);
+    UFixMath2<new_NI,new_NF> right(op);
+
+    return_type tt = return_type(left.asRaw()) - right.asRaw();
+    return UFixMath2<new_NI,new_NF>(tt,true);
+  }
 
   //////// MULTIPLICATION OVERLOADS
   
-  // Multiplication overload between Ufixed type, returns the compound type
+  // Multiplication overload between Ufixed type, returns the compound type, safe
   template<byte _NI, byte _NF>
   UFixMath2<NI+_NI,NF+_NF> operator* (const UFixMath2<_NI,_NF>& op) const
   {
@@ -84,9 +116,7 @@ public:
     return UFixMath2<NI+_NI,NF+_NF>(tt,true);
   }
 
-
-
-  // Multiplication with any other type: directly to the internal_value
+  // Multiplication with any other type: directly to the internal_value, potential overflow
   template<typename T>
   UFixMath2<NI,NF> operator* (const T op) const
   {

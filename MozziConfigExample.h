@@ -19,6 +19,7 @@
  * 
  * TODO: Fix and complete Doxygen coverage
  * TODO: Probably the recommendation to copy this whole file is over the top, perhaps provide stripped-down examples, instead
+ * TODO: Move all the hardware depended stuff to the corresponding config_checks_xyz.h, to increase the chances that doc and implementation remain in sync
 */
 
 #include <MozziConfigValues.h>  // needed for the named option values
@@ -824,7 +825,12 @@
  * The default mode is @ref teensy3_internal_dac .
  *
  * @section teensy3_internal_dac MOZZI_OUTPUT_INTERNAL_DAC
- * Output is to the inbuilt DAC on pin 14/DAC. The pinout is not configurable. Output resolution is 12 bits.
+ * Output is to the inbuilt DAC. Output resolution is 12 bits. Mono, only. The DAC output pin differs from board to boards.
+ * In most cases the appropriate pin will be set outmatically. If needed, you can specify the DAC pin, explicitly:
+ *
+ * @code
+ * #define MOZZI_AUDIO_PIN_1       ...  // Default: A14, A12, or A21, depending on board
+ * @endcode
  *
  * @section teensy3_external MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM
  * See @ref external_audio
@@ -857,7 +863,7 @@
  *
  * The default mode is @ref teensy4_pwm .
  *
- * @section teensy4_pwm MOZZI_OUTPUT_INTERNAL_DAC
+ * @section teensy4_pwm MOZZI_OUTPUT_PWM
  * Output is to a GPIO pin (or two in stereo). The output resolution is fixed at 10 bits, and a 146484 kHz carrier frequency.
  * The output pins can be configured as:
  *

@@ -14,18 +14,16 @@
 #  error "Wrong implementation included for this platform"
 #endif
 
-// required from http://github.com/pedvide/ADC for Teensy 3.*
-#include "IntervalTimer.h"
-#include <ADC.h>
-#include "teensyPinMap.h"
-
 #if (IS_TEENSY3() && F_CPU != 48000000)
 #warning                                                                       \
     "Mozzi has been tested with a cpu clock speed of 16MHz on Arduino and 48MHz on Teensy 3!  Results may vary with other speeds."
 #endif
 
 ////// BEGIN analog input code ////////
-#define MOZZI_FAST_ANALOG_IMPLEMENTED
+#if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
+// required from http://github.com/pedvide/ADC for Teensy 3.*
+#include <ADC.h>
+
 ADC *adc; // adc object
 uint8_t teensy_pin;   // TODO: this is actually a "channel" according to our terminology, but "channel" and "pin" are equal on this platform
 int8_t teensy_adc=0;
@@ -69,45 +67,48 @@ void adcStartConversion(uint8_t channel) {
 static void startSecondADCReadOnCurrentChannel() {
   adc->startSingleRead(teensy_pin,teensy_adc);
 }
+#endif  // MOZZI_ANALOG_READ
 
 ////// END  analog input code ////////
 
 
 
 //// BEGIN AUDIO OUTPUT code ///////
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_INTERNAL_DAC, MOZZI_OUTPUT_EXTERNAL_TIMED)
+#include "IntervalTimer.h"
 IntervalTimer timer1;
+#endif
 
-#if (EXTERNAL_AUDIO_OUTPUT != true) // otherwise, the last stage - audioOutput() - will be provided by the user
-#if IS_TEENSY3()
-#include "AudioConfigTeensy3_12bit.h"
-#elif IS_TEENSY4()
-#include "AudioConfigTeensy4.h"
-#endif
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_INTERNAL_DAC)
 inline void audioOutput(const AudioOutput f) {
-  analogWrite(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
-#if (AUDIO_CHANNELS > 1)
-  analogWrite(AUDIO_CHANNEL_2_PIN, f.r()+AUDIO_BIAS);
-#endif
+  analogWrite(MOZZI_AUDIO_PIN_1, f.l()+MOZZI_AUDIO_BIAS);
+#  if (MOZZI_AUDIO_CHANNELS > 1)
+  analogWrite(MOZZI_AUDIO_PIN_2, f.r()+MOZZI_AUDIO_BIAS);
+#  endif
 }
 #endif
 
 static void startAudio() {
-#if IS_TEENSY3()
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_INTERNAL_DAC)
+#  if IS_TEENSY3()
   analogWriteResolution(12);
-#elif IS_TEENSY4()
+#  elif IS_TEENSY4()
   analogWriteResolution(10);
-#  if (!EXTERNAL_AUDIO_OUTPUT)
-  analogWriteFrequency(AUDIO_CHANNEL_1_PIN, 146484.38f);
-#    if (AUDIO_CHANNELS > 1)
-  analogWriteFrequency(AUDIO_CHANNEL_2_PIN, 146484.38f);
-#    endif  // end #if (AUDIO_CHANNELS > 1) 
-#  endif  // end #if (!EXTERNAL_AUDIO_OUTPUT)
+  analogWriteFrequency(MOZZI_AUDIO_PIN_1, 146484.38f);
+#    if (MOZZI_AUDIO_CHANNELS > 1)
+  analogWriteFrequency(MOZZI_AUDIO_PIN_2, 146484.38f);
+#    endif  // end #if (MOZZI_AUDIO_CHANNELS > 1)
+#  endif // TEENSY3/4
 #endif
-  timer1.begin(defaultAudioOutput, 1000000. / AUDIO_RATE);
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_INTERNAL_DAC, MOZZI_OUTPUT_EXTERNAL_TIMED)
+  timer1.begin(defaultAudioOutput, 1000000. / MOZZI_AUDIO_RATE);
+#endif
 }
 
 void stopMozzi() {
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_INTERNAL_DAC, MOZZI_OUTPUT_EXTERNAL_TIMED)
   timer1.end();
+#endif
   interrupts();
 }
 //// END AUDIO OUTPUT code ///////

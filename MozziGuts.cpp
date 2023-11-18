@@ -275,3 +275,10 @@ void startMozzi(int control_rate_hz) {
 }
 
 ////// END initialization ///////
+
+// reduce Macro leakage
+#undef LOOP_YIELD
+#undef BYPASS_MOZZI_OUTPUT_BUFFER
+#undef AUDIO_HOOK_HOOK
+#undef AUDIOTICK_ADJUSTMENT
+#undef MOZZI__LEGACY_AUDIO_INPUT_IMPL

@@ -15,10 +15,11 @@
 #  error "Wrong implementation included for this platform"
 #endif
 
+#include <hardware/dma.h>
 
 ////// BEGIN analog input code ////////
 
-#define MOZZI_FAST_ANALOG_IMPLEMENTED
+#if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
 
 /** Implementation notes:
  *  - So nobody on the nets seems to have quite figured out, how to run the RP2040 ADC in "regular" asynchronous mode.
@@ -28,7 +29,6 @@
 */
 
 #include <hardware/adc.h>
-#include <hardware/dma.h>
 
 #define getADCReading() rp2040_adc_result
 #define channelNumToIndex(channel) channel
@@ -116,6 +116,8 @@ void rp2040_adc_queue_handler() {
   dma_channel_set_trans_count(rp2040_adc_dma_chan, 1, true);  // set up for another read
   advanceADCStep();
 }
+#endif // MOZZI_ANALOG_READ
+
 ////// END analog input code ////////
 
 
@@ -123,16 +125,17 @@ void rp2040_adc_queue_handler() {
 #define LOOP_YIELD tight_loop_contents();  // apparently needed, among other things, to service the alarm pool
 
 
-#if (RP2040_AUDIO_OUT_MODE == PWM_VIA_BARE_CHIP) || (EXTERNAL_AUDIO_OUTPUT == true)
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_EXTERNAL_TIMED)
 #include <hardware/pwm.h>
-#if (EXTERNAL_AUDIO_OUTPUT != true) // otherwise, the last stage - audioOutput() - will be provided by the user
+
+#  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
 inline void audioOutput(const AudioOutput f) {
-  pwm_set_gpio_level(AUDIO_CHANNEL_1_PIN, f.l()+AUDIO_BIAS);
-#if (AUDIO_CHANNELS > 1)
-  pwm_set_gpio_level(AUDIO_CHANNEL_2_PIN, f.r()+AUDIO_BIAS);
-#endif
+  pwm_set_gpio_level(MOZZI_AUDIO_PIN_1, f.l()+MOZZI_AUDIO_BIAS);
+#    if (MOZZI_AUDIO_CHANNELS > 1)
+  pwm_set_gpio_level(MOZZI_AUDIO_PIN_2, f.r()+MOZZI_AUDIO_BIAS);
+#    endif
 }
-#endif  // #if (EXTERNAL_AUDIO_OUTPUT != true)
+#  endif  // MOZZI_OUTPUT_PWM
 
 #include <pico/time.h>
 /** Implementation notes:
@@ -155,10 +158,9 @@ void audioOutputCallback(uint) {
   } while (hardware_alarm_set_target(audio_update_alarm_num, next_audio_update));
 }
  
-#elif (RP2040_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
+#elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC)
 #include <I2S.h>
 I2S i2s(OUTPUT);
-
 
 inline bool canBufferAudioOutput() {
   return (i2s.availableForWrite());
@@ -166,65 +168,64 @@ inline bool canBufferAudioOutput() {
 
 inline void audioOutput(const AudioOutput f) {
 
-#if (AUDIO_BITS == 8)
-#if (AUDIO_CHANNELS > 1)
+#  if (MOZZI_AUDIO_BITS == 8)
+#    if (MOZZI_AUDIO_CHANNELS > 1)
   i2s.write8(f.l(), f.r());
-#else
+#    else
   i2s.write8(f.l(), 0);
-#endif
+#    endif
   
-#elif (AUDIO_BITS == 16)
-#if (AUDIO_CHANNELS > 1)
+#  elif (MOZZI_AUDIO_BITS == 16)
+#    if (MOZZI_AUDIO_CHANNELS > 1)
   i2s.write16(f.l(), f.r());
-#else
+#    else
   i2s.write16(f.l(), 0);
-#endif
+#    endif
   
-#elif (AUDIO_BITS == 24)
-#if (AUDIO_CHANNELS > 1)
+#  elif (MOZZI_AUDIO_BITS == 24)
+#    if (MOZZI_AUDIO_CHANNELS > 1)
   i2s.write24(f.l(), f.r());
-#else
+#    else
   i2s.write24(f.l(), 0);
-#endif
+#    endif
   
-#elif (AUDIO_BITS == 32)
-#if (AUDIO_CHANNELS > 1)
+#  elif (MOZZI_AUDIO_BITS == 32)
+#    if (MOZZI_AUDIO_CHANNELS > 1)
   i2s.write32(f.l(), f.r());
-#else
+#    else
   i2s.write32(f.l(), 0);
-#endif
-#else
-  #error The number of AUDIO_BITS set in AudioConfigRP2040.h is incorrect
-#endif  
+#    endif
+#  else
+#    error Invalid number of MOZZI_AUDIO_BITS configured
+#  endif  
 
-  
 }
 #endif 
 
 
 static void startAudio() {
-#if (RP2040_AUDIO_OUT_MODE == PWM_VIA_BARE_CHIP) || (EXTERNAL_AUDIO_OUTPUT == true) // EXTERNAL AUDIO needs the timers set here
-#if (EXTERNAL_AUDIO_OUTPUT != true)
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
   // calling analogWrite for the first time will try to init the pwm frequency and range on all pins. We don't want that happening after we've set up our own,
   // so we start off with a dummy call to analogWrite:
-  analogWrite(AUDIO_CHANNEL_1_PIN, AUDIO_BIAS);
+  analogWrite(MOZZI_AUDIO_PIN_1, MOZZI_AUDIO_BIAS);
   // Set up fast PWM on the output pins
   // TODO: This is still very crude!
   pwm_config c = pwm_get_default_config();
   pwm_config_set_clkdiv(&c, 1);  // Fastest we can get: PWM clock running at full CPU speed
-  pwm_config_set_wrap(&c, 1l << AUDIO_BITS);  // 11 bits output resolution means FCPU / 2048 values per second, which is around 60kHz for 133Mhz clock speed.
-  pwm_init(pwm_gpio_to_slice_num(AUDIO_CHANNEL_1_PIN), &c, true);
-  gpio_set_function(AUDIO_CHANNEL_1_PIN, GPIO_FUNC_PWM);
-  gpio_set_drive_strength(AUDIO_CHANNEL_1_PIN, GPIO_DRIVE_STRENGTH_12MA); // highest we can get
-#  if (AUDIO_CHANNELS > 1)
-#    if ((AUDIO_CHANNEL_1_PIN / 2) != (AUDIO_CHANNEL_2_PIN / 2))
-#      error Audio channel pins for stereo or HIFI must be on the same PWM slice (which is the case for the pairs (0,1), (2,3), (4,5), etc. Adjust AudioConfigRP2040.h .
+  pwm_config_set_wrap(&c, 1l << MOZZI_AUDIO_BITS);  // 11 bits output resolution means FCPU / 2048 values per second, which is around 60kHz for 133Mhz clock speed.
+  pwm_init(pwm_gpio_to_slice_num(MOZZI_AUDIO_PIN_1), &c, true);
+  gpio_set_function(MOZZI_AUDIO_PIN_1, GPIO_FUNC_PWM);
+  gpio_set_drive_strength(MOZZI_AUDIO_PIN_2, GPIO_DRIVE_STRENGTH_12MA); // highest we can get
+#  if (MOZZI_AUDIO_CHANNELS > 1)
+#    if ((MOZZI_AUDIO_PIN_1 / 2) != (MOZZI_AUDIO_PIN_1 / 2))
+#      error Audio channel pins for stereo or HIFI must be on the same PWM slice (which is the case for the pairs (0,1), (2,3), (4,5), etc. Adjust MOZZI_AUDIO_PIN_1/2 .
 #    endif
-  gpio_set_function(AUDIO_CHANNEL_2_PIN, GPIO_FUNC_PWM);
-  gpio_set_drive_strength(AUDIO_CHANNEL_2_PIN, GPIO_DRIVE_STRENGTH_12MA); // highest we can get
+  gpio_set_function(MOZZI_AUDIO_PIN_2, GPIO_FUNC_PWM);
+  gpio_set_drive_strength(MOZZI_AUDIO_PIN_2, GPIO_DRIVE_STRENGTH_12MA); // highest we can get
 #  endif
 #endif
 
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_EXTERNAL_TIMED)
   for (audio_update_alarm_num = 0; audio_update_alarm_num < 4; ++audio_update_alarm_num) {
     if (!hardware_alarm_is_claimed(audio_update_alarm_num)) {
       hardware_alarm_claim(audio_update_alarm_num);
@@ -232,26 +233,26 @@ static void startAudio() {
       break;
     }
   }
-  micros_per_update = 1000000l / AUDIO_RATE;
+  micros_per_update = 1000000l / MOZZI_AUDIO_RATE;
   do {
     next_audio_update = make_timeout_time_us(micros_per_update);
     // See audioOutputCallback(), above. In _theory_ some interrupt stuff might delay us, here, causing us to miss the first beat (and everything that follows)
   } while (hardware_alarm_set_target(audio_update_alarm_num, next_audio_update));
 
-#elif (RP2040_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
-  i2s.setBCLK(BCLK_PIN);
-  i2s.setDATA(DOUT_PIN);
-  i2s.setBitsPerSample(AUDIO_BITS);
+#elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC)
+  i2s.setBCLK(MOZZI_I2S_PIN_BCK);
+  i2s.setDATA(MOZZI_I2S_PIN_DATA);
+  i2s.setBitsPerSample(MOZZI_AUDIO_BITS);
   
-#if (AUDIO_BITS > 16)
-  i2s.setBuffers(BUFFERS, (size_t) (BUFFER_SIZE/BUFFERS), 0);
-#else
-  i2s.setBuffers(BUFFERS, (size_t) (BUFFER_SIZE/BUFFERS/2), 0);
-#endif
-#if (LSBJ_FORMAT == true)
+#  if (MOZZI_AUDIO_BITS > 16)
+  i2s.setBuffers(MOZZI_RP2040_BUFFERS, (size_t) (MOZZI_RP2040_BUFFER_SIZE/MOZZI_RP2040_BUFFERS), 0);
+#  else
+  i2s.setBuffers(MOZZI_RP2040_BUFFERS, (size_t) (MOZZI_RP2040_BUFFER_SIZE/MOZZI_RP2040_BUFFERS/2), 0);
+#  endif
+#  if MOZZI_IS(MOZZI_I2S_FORMAT, MOZZI_I2S_FORMAT_LSBJ)
   i2s.setLSBJFormat();
-#endif
-  i2s.begin(AUDIO_RATE);
+#  endif
+  i2s.begin(MOZZI_AUDIO_RATE);
 #endif
 }
 
@@ -264,3 +265,6 @@ void stopMozzi() {
   
 }
 ////// END audio output code //////
+
+#undef MOZZI_RP2040_BUFFERS
+#undef MOZZI_RP2040_BUFFER_SIZE

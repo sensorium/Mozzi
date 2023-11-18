@@ -16,7 +16,6 @@
 
 ////// BEGIN analog input code ////////
 #if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
-
 #error not yet implemented
 
 #define getADCReading() 0

@@ -48,6 +48,13 @@ public:
   template<typename T>
   void fromRaw(T raw) { internal_value = raw; }
 
+  /* template<typename T>
+  static UFixMath2<NI, NF>fromRaw(T raw) {
+    UFixMath2<NI, NF> ret;
+    ret.internal_value = raw;
+    return ret;
+    }*/
+
   /* Constructors from signed types
    */
 
@@ -84,23 +91,20 @@ public:
     return UFixMath2<NI,NF>(internal_value*op,true);
   }
 
-  /*    template<typename T>
-	UFixMath2<NI,NF> operator* (const T op, const UFixMath2<NI, NF>& uf)
-	{
-	return UFixMath2<NI,NF>(uf.asRaw()*op,true);
-	}
-  */
-    
-  /* version 1, prior promotion/demotion to return type, safe */
-  /*   byte sub = NF>>1;
-       internal_type tt = (internal_value>>sub) * (UFixMath2<NI,NF>(op).getInt() >> (sub));
-       return  UFixMath2<NI,NF>(tt,true);*/
 
-  /* version 2, optimisation (?) of the former: one shift instead of two (at cast and here)
-     Keeps the bigger type for the operand, shift it by the appropriate number, cast it to the final type (which might be the same) and multiply by the internal_value, shifted of course */
-  /*  byte sub = NF>>1;
-      internal_type tt = (internal_value>>sub) * internal_type((SHIFTR(typename IntegerType<((MAX(NI+NF,_NI+_NF))>>3)>::unsigned_type(op.getInt()), (_NF-sub))));
-      return  UFixMath2<NI,NF>(tt,true);*/
+  // Right shift operator
+  UFixMath2<NI-1,NF> operator>> (const byte op) const
+  {
+    return UFixMath2<NI-1,NF>(internal_value>>op,true);
+  }
+
+  // Left shift operator
+  UFixMath2<NI+1,NF> operator<< (const byte op) const
+  {
+    return UFixMath2<NI+1,NF>(internal_value<<op,true);
+  }
+
+  
   /*
     template<byte NI1, byte NF1, byte NI2, byte NF2>
     UFixMath2<NI1-NI2, NF1-NF2> operator/(const UFixMath2<NI1, NF1>& op1, const UFixMath2<NI2, NF2>& op2)

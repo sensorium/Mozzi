@@ -49,11 +49,11 @@ public:
   void fromRaw(T raw) { internal_value = raw; }
 
   /* template<typename T>
-  static UFixMath2<NI, NF>fromRaw(T raw) {
-    UFixMath2<NI, NF> ret;
-    ret.internal_value = raw;
-    return ret;
-    }*/
+     static UFixMath2<NI, NF>fromRaw(T raw) {
+     UFixMath2<NI, NF> ret;
+     ret.internal_value = raw;
+     return ret;
+     }*/
 
   /* Constructors from signed types
    */
@@ -146,12 +146,92 @@ UFixMath2<NI, NF> operator*(float op, const UFixMath2<NI, NF>& uf) {return uf*op
 
 template <byte NI, byte NF>
 UFixMath2<NI, NF> operator*(double op, const UFixMath2<NI, NF>& uf) {return uf*op;}
-/*
-  template<typename T,byte NI, byte NF>
-  UFixMath2<NI,NF> operator* (const T op, const UFixMath2<NI, NF>& uf)
+
+
+
+
+
+///////////// SIGNED TYPE
+
+template<byte NI, byte NF> // NI and NF being the number of bits for the integral and the fractionnal parts respectively.
+class SFixMath2
+{
+  typedef typename IntegerType<((NI+NF-1)>>3)+1>::signed_type internal_type ; // smallest size that fits our internal integer
+  typedef typename IntegerType<((NI+NF)>>3)+1>::signed_type next_greater_type ; // smallest size that fits 1<<NF for sure (NI could be equal to 0). It can be the same than internal_type in some cases.
+  
+public:
+  /** Constructor
+   */
+  SFixMath2() {;}
+  
+  /* Constructor from float */
+  SFixMath2(float fl)  {internal_value = /*static_cast<internal_type>*/(fl * (next_greater_type(1) << NF));}
+
+  /* Constructor from double */
+  SFixMath2(double fl)  {internal_value = static_cast<internal_type> (fl * (next_greater_type(1) << NF)); }
+
+
+  /* Constructor from other types (int)*/
+  template<typename T>
+  SFixMath2(T value,bool as_raw=false)
   {
-  return UFixMath2<NI,NF>(uf.asRaw()*op,true);
-  }*/
+    // if (as_frac) internal_value = value;
+    if (as_raw) fromRaw(value);
+    else internal_value = (internal_type(value) << NF);
+  }
+  
+  template<typename T>
+  void fromRaw(T raw) { internal_value = raw; }
+
+
+
+  
+  //////// MULTIPLICATION OVERLOADS
+  
+  // Multiplication overload between fixed type, returns the compound type
+  template<byte _NI, byte _NF>
+  SFixMath2<NI+_NI,NF+_NF> operator* (const SFixMath2<_NI,_NF>& op) const
+  {
+    typedef typename IntegerType< ((NI+_NI+NF+_NF-1)>>3)+1>::signed_type return_type ;
+    return_type tt = return_type(internal_value)*op.asRaw();
+    return SFixMath2<NI+_NI,NF+_NF>(tt,true);
+  }
+
+  // Multiplication with any other type: directly to the internal_value
+  template<typename T>
+  SFixMath2<NI,NF> operator* (const T op) const
+  {
+    return SFixMath2<NI,NF>(internal_value*op,true);
+  }
+
+
+  // Right shift operator
+  SFixMath2<NI-1,NF> operator>> (const byte op) const
+  {
+    return SFixMath2<NI-1,NF>(internal_value>>op,true);
+  }
+
+  // Left shift operator
+  SFixMath2<NI+1,NF> operator<< (const byte op) const
+  {
+    return SFixMath2<NI+1,NF>(internal_value<<op,true);
+  }
+
+  
+
+
+
+  float asFloat() { return (static_cast<float>(internal_value)) / (next_greater_type(1)<<NF); }
+  internal_type asRaw() const { return internal_value; }
+
+private:
+  internal_type internal_value;
+
+};
+
+
+
+
 
 
 

@@ -180,15 +180,15 @@ public:
 
 
   // Right shift operator
-  UFixMath2<NI-1,NF> operator>> (const byte op) const
+  UFixMath2<NI,NF> operator>> (const byte op) const
   {
-    return UFixMath2<NI-1,NF>(internal_value>>op,true);
+    return UFixMath2<NI,NF>(internal_value>>op,true);
   }
 
   // Left shift operator
-  UFixMath2<NI+1,NF> operator<< (const byte op) const
+  UFixMath2<NI,NF> operator<< (const byte op) const
   {
-    return UFixMath2<NI+1,NF>(internal_value<<op,true);
+    return UFixMath2<NI,NF>(internal_value<<op,true);
   }
 
 
@@ -461,19 +461,16 @@ public:
 
 
   // Right shift operator
-  SFixMath2<NI-1,NF> operator>> (const byte op) const
+  SFixMath2<NI,NF> operator>> (const byte op) const
   {
-    return SFixMath2<NI-1,NF>(internal_value>>op,true);
+    return SFixMath2<NI,NF>(internal_value>>op,true);
   }
 
   // Left shift operator
-  SFixMath2<NI+1,NF> operator<< (const byte op) const
+  SFixMath2<NI,NF> operator<< (const byte op) const
   {
-    return SFixMath2<NI+1,NF>(internal_value<<op,true);
+    return SFixMath2<NI,NF>(internal_value<<op,true);
   }
-
-  
-
 
 
   float asFloat() { return (static_cast<float>(internal_value)) / (next_greater_type(1)<<NF); }

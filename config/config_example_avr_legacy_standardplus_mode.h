@@ -9,8 +9,8 @@ do not need to configure anything! This file just lists the relevant settings in
 
 // all of these are the defaults on AVR, anyway, thus commented
 //#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_MODE_PWM
-//#define MOZZI_AUDIO_RATE 32768
-//#define MOZZI_PWM_RATE 16384
+//#define MOZZI_AUDIO_RATE 16384
+//#define MOZZI_PWM_RATE 32768
 
 
 // should you wish to customize the output pin:

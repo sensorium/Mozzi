@@ -145,7 +145,6 @@ inline void commitBuffer(Sample buffer[], AdvancedDAC &dac) {
   dac.write(dmabuf);
 }
 
-/** NOTE: This is the function that actually write a sample to the output. In case of EXTERNAL_AUDIO_OUTPUT == true, it is provided by the library user, instead. */
 inline void audioOutput(const AudioOutput f) {
   if (bufpos >= CHUNKSIZE) {
     commitBuffer(buf1, dac1);

@@ -191,6 +191,18 @@ public:
     return UFixMath2<NI,NF>(internal_value<<op,true);
   }
 
+  template<byte op>
+  UFixMath2<NI-op,NF> sR()
+  {
+    return UFixMath2<NI-op,NF>(internal_value>>op,true);
+  }
+
+  template<byte op>
+  UFixMath2<NI+op,NF> sL()
+  {
+    return UFixMath2<NI+op,NF>((typename IntegerType<((NI+op+NF-1)>>3)+1>::unsigned_type) internal_value<<op,true);
+  }
+
 
 
   // Division. Might actually more misleading than helping. NON Working version below.
@@ -470,6 +482,18 @@ public:
   SFixMath2<NI,NF> operator<< (const byte op) const
   {
     return SFixMath2<NI,NF>(internal_value<<op,true);
+  }
+
+  template<byte op>
+  SFixMath2<NI-op,NF> sR()
+  {
+    return SFixMath2<NI-op,NF>(internal_value>>op,true);
+  }
+
+  template<byte op>
+  SFixMath2<NI+op,NF> sL()
+  {
+    return SFixMath2<NI+op,NF>((typename IntegerType<((NI+op+NF-1)>>3)+1>::signed_type) internal_value<<op,true);
   }
 
 

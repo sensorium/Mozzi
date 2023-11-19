@@ -19,9 +19,9 @@
 #define SHIFTR(x,bits) (bits > 0 ? (x >> (bits)) : (x << (-bits))) // shift right for positive shift numbers, and left for negative ones.
 #define MAX(N1,N2) (N1 > N2 ? N1 : N2)
 /*#define NBITSREAL(X,N) (abs(X) < (1<<N) ? N : NBITSREAL2(X,N+1))
-#define NBITSREAL2(X,N) (abs(X) < (1<<N) ? N : NBITSREAL(X,N+1))
-#define UFixAuto(X) (UFixMath2<NBITSREAL(X,0),0>(X))*/
-//#define UFixAuto(X) (UFixMath2<NBITSREAL(X,0),0>(X))
+  #define NBITSREAL2(X,N) (abs(X) < (1<<N) ? N : NBITSREAL(X,N+1))
+  #define UFixAuto(X) (UFixMath2<NBITSREAL(X,0),0>(X))
+  #define UFixAuto(X) (UFixMath2<NBITSREAL(X,0),0>(X))*/
 
 /*
   template<typename T>
@@ -102,10 +102,10 @@ public:
   }
 
   /* Constructor from Sfixed type */
-   template<byte _NI, byte _NF>
+  template<byte _NI, byte _NF>
   UFixMath2(const SFixMath2<_NI,_NF>& uf) {
     internal_value = SHIFTR((typename IntegerType<((MAX(NI+NF-1,_NI+_NF-1))>>3)+1>::unsigned_type) uf.asRaw(),(_NF-NF));
-    }
+  }
 
 
   //////// ADDITION OVERLOADS
@@ -154,11 +154,11 @@ public:
     return UFixMath2<NI,NF>(internal_value-((internal_type)op<<NF),true);
   }
 
-    /////// Negative overload
-   SFixMath2<NI+1,NF> operator-() const
+  /////// Negative overload
+  SFixMath2<NI+1,NF> operator-() const
   {
-     return SFixMath2<NI+1,NF>( -(typename IntegerType<((NI+NF-1+1)>>3)+1>::signed_type)(internal_value),true);
-     }
+    return SFixMath2<NI+1,NF>( -(typename IntegerType<((NI+NF-1+1)>>3)+1>::signed_type)(internal_value),true);
+  }
 
   //////// MULTIPLICATION OVERLOADS
   
@@ -609,7 +609,7 @@ SFixMath2<NI+_NI+1,NF+_NF> operator* (const UFixMath2<NI,NF>& op1, const SFixMat
 }
 
 
-// Addition between SFixMath2 and UFixMath2 (promotion to SFixMath2)
+// Addition between SFixMath2 and UFixMath2 (promotion to next SFixMath2)
 
 template<byte NI, byte NF, byte _NI, byte _NF>
 SFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)> operator+ (const SFixMath2<NI,NF>& op1, const UFixMath2<_NI,_NF>& op2 )
@@ -630,7 +630,7 @@ SFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)> operator+ (const UFixMath2<NI,NF>& op1, con
   return op2+op1;
 }
 
-// Substraction between SFixMath2 and UFixMath2 (promotion to SFixMath2)
+// Substraction between SFixMath2 and UFixMath2 (promotion to next SFixMath2)
 
 template<byte NI, byte NF, byte _NI, byte _NF>
 SFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)> operator- (const SFixMath2<NI,NF>& op1, const UFixMath2<_NI,_NF>& op2 )

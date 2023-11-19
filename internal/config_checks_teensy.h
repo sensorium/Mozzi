@@ -4,7 +4,7 @@
 /** @ingroup hardware
  * @page hardware_teensy3 Mozzi on Teensy 3.0/3.1/3.2/3.4/3.5/LC boards.
  *
- * port by Thomas Combriat
+ * port by Tim Barrass
  *
  * @note
  * For Teensy 4.x see @ref hardware_teensy4

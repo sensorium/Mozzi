@@ -1,6 +1,39 @@
 #ifndef CONFIG_CHECK_RENESAS_H
 #define CONFIG_CHECK_RENESAS_H
 
+/** @ingroup hardware
+ * @page hardware_renesas Mozzi on Arduino Uno R4 - Renesas.
+ *
+ * port by Thomas Combriat
+ *
+ * @section renesas_status Port status and notes
+ * Compiles and runs using Arduino's standard library (Renesas 0.8.7 at the time of this writing).
+ *
+ * A few particularities:
+ *   - Because this board has an on-board DAC (A0), but only one, STEREO is not implemented and Mozzi uses this pin. Usage of other pins using PWM for instance is not implemented yet.
+ *   - getAudioInput() and mozziAnalogRead() return values in the Renesas' full ADC resolution of 0-16384 rather than AVR's 0-1023. *This might change in the near future for speed purposes.*
+ *
+ * @section rensesas_output Output modes
+ * The following audio modes (see @ref MOZZI_AUDIO_MODE) are currently supported on this hardware:
+ *   - MOZZI_OUTPUT_EXTERNAL_TIMED
+ *   - MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ *   - MOZZI_OUTPUT_INTERNAL_DAC
+ *
+ * The default mode is @ref renesas_internal_dac. Further modes may be added in the future.
+  - Because this board has an on-board DAC (A0), but only one, STEREO is not implemented and Mozzi uses this pin. Usage of other pins using PWM for instance is not implemented yet.
+  - Two timers are claimed by Mozzi when using the on-board DAC, one when using `EXTERNAL_AUDIO_OUTPUT`.
+  - `mozziAnalogRead()` returns values in the Renesas' full ADC resolution of 0-16384 rather than AVR's 0-1023. *This might change in the near future for speed purposes.*
+
+ * @section renesas_internal_dac MOZZI_OUTPUT_INTERNAL_DAC
+ * This uses the inbuild DAC on the board on pin A0. Mono output only, and the pin is not configurable. Audio resolution is also fixed at 12 bits (which is what the board supports).
+ *
+ * This mode claims two timers (but it is not hardcoded, which ones).
+ *
+ * @section renesas_external MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM
+ * MOZZI_OUTPUT_EXTERNAL_TIMED claimes one timer, MOZZI_OUTPUT_EXTERNAL_CUSTOM does not claim any timer.
+ * See @ref external_audio
+*/
+
 #if not IS_RENESAS()
 #error This header should be included for RENESAS (Arduino Uno R4) architecture, only
 #endif

@@ -102,10 +102,10 @@ public:
   }
 
   /* Constructor from Sfixed type */
-  template<byte _NI, byte _NF>
+   template<byte _NI, byte _NF>
   UFixMath2(const SFixMath2<_NI,_NF>& uf) {
     internal_value = SHIFTR((typename IntegerType<((MAX(NI+NF-1,_NI+_NF-1))>>3)+1>::unsigned_type) uf.asRaw(),(_NF-NF));
-  }
+    }
 
 
   //////// ADDITION OVERLOADS
@@ -151,8 +151,14 @@ public:
   template<typename T>
   UFixMath2<NI,NF> operator- (const T op) const
   {
-    return UFixMath2<NI,NF>(internal_value+((internal_type)op<<NF),true);
+    return UFixMath2<NI,NF>(internal_value-((internal_type)op<<NF),true);
   }
+
+    /////// Negative overload
+   SFixMath2<NI+1,NF> operator-() const
+  {
+     return SFixMath2<NI+1,NF>( -(typename IntegerType<((NI+NF-1+1)>>3)+1>::signed_type)(internal_value),true);
+     }
 
   //////// MULTIPLICATION OVERLOADS
   
@@ -246,68 +252,65 @@ UFixMath2<NI, NF> operator*(double op, const UFixMath2<NI, NF>& uf) {return uf*o
 
 // Addition
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator+(uint8_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath2<NI, NF> operator+(uint8_t op, const UFixMath2<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator+(uint16_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath2<NI, NF> operator+(uint16_t op, const UFixMath2<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator+(uint32_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath2<NI, NF> operator+(uint32_t op, const UFixMath2<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator+(uint64_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath2<NI, NF> operator+(uint64_t op, const UFixMath2<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator+(int8_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath2<NI, NF> operator+(int8_t op, const UFixMath2<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator+(int16_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath2<NI, NF> operator+(int16_t op, const UFixMath2<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator+(int32_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath2<NI, NF> operator+(int32_t op, const UFixMath2<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator+(int64_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath2<NI, NF> operator+(int64_t op, const UFixMath2<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator+(float op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath2<NI, NF> operator+(float op, const UFixMath2<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator+(double op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath2<NI, NF> operator+(double op, const UFixMath2<NI, NF>& uf) {return uf+op;}
 
 // Substraction
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator-(uint8_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI+1, NF> operator-(uint8_t op, const UFixMath2<NI, NF>& uf) {return -uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator-(uint16_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI+1, NF> operator-(uint16_t op, const UFixMath2<NI, NF>& uf) {return -uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator-(uint32_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI+1, NF> operator-(uint32_t op, const UFixMath2<NI, NF>& uf) {return -uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator-(uint64_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI+1, NF> operator-(uint64_t op, const UFixMath2<NI, NF>& uf) {return -uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator-(int8_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI+1, NF> operator-(int8_t op, const UFixMath2<NI, NF>& uf) {return -uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator-(int16_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI+1, NF> operator-(int16_t op, const UFixMath2<NI, NF>& uf) {return -uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator-(int32_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI+1, NF> operator-(int32_t op, const UFixMath2<NI, NF>& uf) {return -uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator-(int64_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI+1, NF> operator-(int64_t op, const UFixMath2<NI, NF>& uf) {return -uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator-(float op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI+1, NF> operator-(float op, const UFixMath2<NI, NF>& uf) {return -uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator-(double op, const UFixMath2<NI, NF>& uf) {return uf*op;}
-
-
-
+SFixMath2<NI+1, NF> operator-(double op, const UFixMath2<NI, NF>& uf) {return -uf+op;}
 /*
   template<typename T>
   constexpr byte nBitsReal(T x,byte n=0) { (abs(x)<(1<<n)) ? (return n;) : (return nBitsReal(x,n+1);)}
@@ -428,9 +431,15 @@ public:
   template<typename T>
   SFixMath2<NI,NF> operator- (const T op) const
   {
-    return SFixMath2<NI,NF>(internal_value+(op<<NF),true);
+    return SFixMath2<NI,NF>(internal_value-(op<<NF),true);
   }
 
+
+  /////// Negative overload
+  SFixMath2<NI,NF> operator-() const
+  {
+    return SFixMath2<NI,NF>(-internal_value,true);
+  }
   
   //////// MULTIPLICATION OVERLOADS
   
@@ -514,65 +523,65 @@ SFixMath2<NI, NF> operator*(double op, const SFixMath2<NI, NF>& uf) {return uf*o
 
 // Addition
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator+(uint8_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI, NF> operator+(uint8_t op, const SFixMath2<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator+(uint16_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI, NF> operator+(uint16_t op, const SFixMath2<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator+(uint32_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI, NF> operator+(uint32_t op, const SFixMath2<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator+(uint64_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI, NF> operator+(uint64_t op, const SFixMath2<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator+(int8_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI, NF> operator+(int8_t op, const SFixMath2<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator+(int16_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI, NF> operator+(int16_t op, const SFixMath2<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator+(int32_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI, NF> operator+(int32_t op, const SFixMath2<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator+(int64_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI, NF> operator+(int64_t op, const SFixMath2<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator+(float op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI, NF> operator+(float op, const SFixMath2<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator+(double op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI, NF> operator+(double op, const SFixMath2<NI, NF>& uf) {return uf+op;}
 
 // Substraction
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(uint8_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI, NF> operator-(uint8_t op, const SFixMath2<NI, NF>& uf) {return (-uf)+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(uint16_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI, NF> operator-(uint16_t op, const SFixMath2<NI, NF>& uf) {return (-uf)+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(uint32_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI, NF> operator-(uint32_t op, const SFixMath2<NI, NF>& uf) {return (-uf)+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(uint64_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI, NF> operator-(uint64_t op, const SFixMath2<NI, NF>& uf) {return (-uf)+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(int8_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI, NF> operator-(int8_t op, const SFixMath2<NI, NF>& uf) {return (-uf)+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(int16_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI, NF> operator-(int16_t op, const SFixMath2<NI, NF>& uf) {return (-uf)+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(int32_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI, NF> operator-(int32_t op, const SFixMath2<NI, NF>& uf) {return (-uf)+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(int64_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI, NF> operator-(int64_t op, const SFixMath2<NI, NF>& uf) {return (-uf)+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(float op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI, NF> operator-(float op, const SFixMath2<NI, NF>& uf) {return (-uf)+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(double op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath2<NI, NF> operator-(double op, const SFixMath2<NI, NF>& uf) {return (-uf)+op;}
 
 
 

@@ -78,7 +78,7 @@
  *  in mozzi_config.h. Since the two are source compatible to a large degree, it often isn't even necessary to test, which it is, in your code. E.g.
  *  both have functions l() and r(), to return "two" audio channels (which will be the same in case of mono).
  *
- *  You will not usually use or encounter this definition, unless using EXTERNAL_AUDIO_OUTPUT.
+ *  You will not usually use or encounter this definition, unless using @ref external_audio output mode.
  */
 #define AudioOutput MonoOutput
 #endif

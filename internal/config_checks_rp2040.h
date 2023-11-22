@@ -39,7 +39,7 @@
  *
  * @section rp2040_i2s_dac MOZZI_OUTPUT_I2S_DAC
  * Output to an external DAC, connected via I2S. This uses 16 bit (per audio channel), but can be changed to 8, 16, 24 (left aligned) and 32 resolution.
- * Both plain I2S and LSBJ format (PT8211 needs this, for instance) are available. LSBJ format is used by default. The GPIO pins to use can be configured,
+ * Both plain I2S and LSBJ format (PT8211 needs this, for instance) are available. Plain format is used by default. The GPIO pins to use can be configured,
  * - almost - freely (see below). Two DMA channels are claimed (numbers not hardcoded), non-exclusive handlers are installed on DMA_IRQ_0.
  *
  * Configuration options:
@@ -48,7 +48,7 @@
  * #define MOZZI_I2S_PIN_BCK                        ... // /BLCK) default is 20
  * //#define MOZZI_I2S_PIN_WS (MOZZI_I2S_PIN_BCK+1) ... // CANNOT BE CHANGED, HAS TO BE NEXT TO pBCLK, i.e. default is 21
  * #define MOZZI_I2S_PIN_DATA                       ... // (DOUT) default is 22
- * #define MOZZI_I2S_FORMAT                         ... // may be MOZZI_I2S_FORMAT_LSBJ (default) or MOZZI_I2S_FORMAT_PLAIN
+ * #define MOZZI_I2S_FORMAT                         ... // may be MOZZI_I2S_FORMAT_LSBJ or MOZZI_I2S_FORMAT_PLAIN (default)
  * @endcode
  *
  * @note

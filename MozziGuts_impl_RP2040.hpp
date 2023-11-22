@@ -257,9 +257,9 @@ static void startAudio() {
 }
 
 void stopMozzi() {
-#if (RP2040_AUDIO_OUT_MODE == PWM_VIA_BARE_CHIP) || (EXTERNAL_AUDIO_OUTPUT == true)
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_EXTERNAL_TIMED)
   hardware_alarm_set_callback(audio_update_alarm_num, NULL);
-#elif (RP2040_AUDIO_OUT_MODE == EXTERNAL_DAC_VIA_I2S)
+#elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC)
   i2s.end();
 #endif
   

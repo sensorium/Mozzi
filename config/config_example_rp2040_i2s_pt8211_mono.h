@@ -2,7 +2,7 @@
 
 This example is targetted at the RP2040 (raspberry Pi pico) platform only!
 
-Configure the Raspberry Pico to output sound on a I2S DAC on LSBJ format (like the PT8211). */
+Configure the Raspberry Pico to output sound in mono on a I2S DAC on LSBJ format (like the PT8211). */
 
 
 #include "MozziConfigValues.h"  // for named option values

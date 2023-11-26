@@ -12,4 +12,4 @@ See TODO: link to relevant tutorial
 //#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_EXTERNAL_CUSTOM
 
 //#define MOZZI_AUDIO_RATE 32768  // the default, in this mode
-//#define AUDIO_BITS 16 // the default in this mode, but e.g. when connecting to a 24-bit DAC, you'd set 24, here.
+//#define MOZZI_AUDIO_BITS 16 // the default in this mode, but e.g. when connecting to a 24-bit DAC, you'd set 24, here.

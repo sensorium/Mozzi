@@ -17,7 +17,7 @@
     signed (SFixMath2) or unsigned (UFixMath2).
 
     A fixed point number has its range defined by the number of bits encoding the integer part (NI 
-    in the following) and its precision by the number of bits encoding the fractional part (NF).
+    in the following) and its precision by the number of bits encoding the fractional part (NF). For UFixMath2 types, the integral part can hold values in [0,2^NI-1], for SFixMath2 types, the integral part can hold values in [-2^NI,2^NI-1].
 
     Like standard C(++) types, the fixed point numbers defined here are following some rules:
     - any fixed type can be converted to another *as long as the value can be represented in the destination type*. Casting to a bigger type in term of NI and NF is safe, but reducing NI can lead to an overflow if the new type cannot hold the integer value and reducing NF leads to a loss of precision.
@@ -26,7 +26,35 @@
     - any operation between a signed and an unsigned leads to a signed number
     - resulting numbers will be casted to a type big enough to store the expected values. It follows that it is worth starting with types that are as small as possible to hold the initial value.
     - all operations between a fixed point number and a native type (int, float, uint) are *not* safe. If the resulting value cannot be represented in the fixed point type it will overflow. Only addition, subtraction, multiplication and right/left shift are implemented.
-    - safe right/left shifts, which return the correct value in the correct type are implemented as .sR<shift>() and .sL<shift>() respectively, shift being the shifting amount.
+    - safe right/left shifts, which return the correct value in the correct type are implemented as .sR<shift>() and .sL<shift>() respectively, shift being the shifting amount. These shifts are basically on
+
+    More specifically on the returned types of the operations between fixed point math types:
+    - Additions:
+      - UFixMath2<NI,NF> + UFixMath2<_NI,_NF> returns UFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)>
+      - SFixMath2<NI,NF> + SFixMath2<_NI,_NF> returns SFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)>
+      - UFixMath2<NI,NF> + SFixMath2<_NI,_NF> returns SFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)>
+      - UFixMath2<NI,NF> + anything_else returns UFixMath2<NI,NF>
+      - SFixMath2<NI,NF> + anything_else returns SFixMath2<NI,NF>
+    - Subtractions:
+      - UFixMath2<NI,NF> - UFixMath2<_NI,_NF> returns SFixMath2<MAX(NI,_NI),MAX(NF,_NF)>
+      - SFixMath2<NI,NF> - SFixMath2<_NI,_NF> returns SFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)>
+      - SFixMath2<NI,NF> - UFixMath2<_NI,_NF> returns SFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)>
+      - UFixMath2<NI,NF> - anything_else returns UFixMath2<NI,NF>
+      - SFixMath2<NI,NF> - anything_else returns SFixMath2<NI,NF>
+      - (-)SFixMath2<NI,NF> return SFixMath2<NI,NF>
+      - (-)UFixMath2<NI,NF> return SFixMath2<NI,NF>
+    - Multiplications:
+      - UFixMath2<NI,NF> * UFixMath2<_NI,_NF> returns UFixMath2<NI+_NI,NF+_NF>
+      - UFixMath2<NI,NF> * SFixMath2<_NI,_NF> returns SFixMath2<NI+_NI,NF+_NF>
+      - SFixMath2<NI,NF> * SFixMath2<_NI,_NF> returns SFixMath2<NI+_NI,NF+_NF>
+      - UFixMath2<NI,NF> * anything_else returns UFixMath2<NI,NF>
+      - SFixMath2<NI,NF> * anything_else returns SFixMath2<NI,NF>
+    - Shifts:
+      - UFixMath2<NI,NF> .sR<NS> returns UFixMath2<NI-NS,NF+NS>
+      - UFixMath2<NI,NF> .sL<NS> returns UFixMath2<NI+NS,NF-NS>
+      - same for SFixMath2.
+      
+   
 */
 
 
@@ -73,7 +101,7 @@ class SFixMath2;
 
 
 /** Instanciate an unsigned fixed point math number.
-    @param NI The number of bits encoding the integer part
+    @param NI The number of bits encoding the integer part. The integral part can range into [0, 2^NI -1]
     @param NF The number of bits encoding the fractional part
 */
 template<byte NI, byte NF> // NI and NF being the number of bits for the integral and the fractionnal parts respectively.
@@ -188,7 +216,7 @@ public:
   {
     constexpr byte new_NI = MAX(NI, _NI);
     constexpr byte new_NF = MAX(NF, _NF);
-    typedef typename IntegerType<SBITSTOBYTES(NI+NF)>::signed_type return_type;
+    typedef typename IntegerType<SBITSTOBYTES(new_NI+new_NF)>::signed_type return_type;
     SFixMath2<new_NI,new_NF> left(*this);
     SFixMath2<new_NI,new_NF> right(op);
 
@@ -422,8 +450,9 @@ SFixMath2<NI, NF> operator-(double op, const UFixMath2<NI, NF>& uf) {return -uf+
 
 
 /** Instanciate an signed fixed point math number.
-    @param NI The number of bits encoding the integer part
+    @param NI The number of bits encoding the integer part. The integral part can range into [-2^NI, 2^NI -1]
     @param NF The number of bits encoding the fractional part
+    @note The total number of the underlying int will be NI+NF+1 in order to accomodate the sign. It follows that, if you want something that reproduces the behavior of a int8_t, it should be declared as SFixMath2<7,0>.
 */
 template<byte NI, byte NF> // NI and NF being the number of bits for the integral and the fractionnal parts respectively.
 class SFixMath2
@@ -488,8 +517,7 @@ public:
   */
   template<byte _NI, byte _NF>
   SFixMath2(const UFixMath2<_NI,_NF>& uf) {
-    //internal_value = MOZZI_SHIFTR((typename IntegerType<((MAX(NI+NF-1,_NI+_NF))>>3)+1>::unsigned_type) uf.asRaw(),(_NF-NF));
-    internal_value = MOZZI_SHIFTR((typename IntegerType<MAX(SBITSTOBYTES(NI+NF), UBITSTOBYTES(_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
+    internal_value = MOZZI_SHIFTR((typename IntegerType<UBITSTOBYTES(MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
   }
 
   //////// ADDITION OVERLOADS

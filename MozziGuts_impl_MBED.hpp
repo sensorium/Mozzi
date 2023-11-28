@@ -119,7 +119,7 @@ inline void defaultAudioOutputCallback() {
 
 static void startAudio() {
   audio_output_timer.attach_us(&defaultAudioOutputCallback, US_PER_AUDIO_TICK);
-  startAudioInput(),
+  startAudioInput();
 }
 
 void stopMozzi() {

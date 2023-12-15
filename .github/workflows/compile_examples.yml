@@ -97,7 +97,7 @@ jobs:
     steps:
       # This step is needed to get the size data produced by the compile jobs
       - name: Download sketches reports artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: sketches-reports-artifact
           path: ${{ env.SKETCHES_REPORTS_PATH }}

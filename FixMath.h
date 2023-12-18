@@ -1,5 +1,5 @@
 /*
- * FixMath2.h
+ * FixMath.h
  *
  * Copyright 2023, Thomas Combriat and the Mozzi team
  *
@@ -14,10 +14,10 @@
 /** This file implements two fixed point number classes. These numbers can have a fractional
     part but are actually standard integers under the hood which makes calculations with them
     efficient on platforms which do not have a FPU like most micro-controllers. These numbers can be
-    signed (SFixMath2) or unsigned (UFixMath2).
+    signed (SFixMath) or unsigned (UFixMath).
 
     A fixed point number has its range defined by the number of bits encoding the integer part (NI 
-    in the following) and its precision by the number of bits encoding the fractional part (NF). For UFixMath2 types, the integral part can hold values in [0,2^NI-1], for SFixMath2 types, the integral part can hold values in [-2^NI,2^NI-1].
+    in the following) and its precision by the number of bits encoding the fractional part (NF). For UFixMath types, the integral part can hold values in [0,2^NI-1], for SFixMath types, the integral part can hold values in [-2^NI,2^NI-1].
 
     Like standard C(++) types, the fixed point numbers defined here are following some rules:
     - any fixed type can be converted to another *as long as the value can be represented in the destination type*. Casting to a bigger type in term of NI and NF is safe, but reducing NI can lead to an overflow if the new type cannot hold the integer value and reducing NF leads to a loss of precision.
@@ -30,29 +30,29 @@
 
     More specifically on the returned types of the operations between fixed point math types:
     - Additions:
-      - UFixMath2<NI,NF> + UFixMath2<_NI,_NF> returns UFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)>
-      - SFixMath2<NI,NF> + SFixMath2<_NI,_NF> returns SFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)>
-      - UFixMath2<NI,NF> + SFixMath2<_NI,_NF> returns SFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)>
-      - UFixMath2<NI,NF> + anything_else returns UFixMath2<NI,NF>
-      - SFixMath2<NI,NF> + anything_else returns SFixMath2<NI,NF>
+    - UFixMath<NI,NF> + UFixMath<_NI,_NF> returns UFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)>
+    - SFixMath<NI,NF> + SFixMath<_NI,_NF> returns SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)>
+    - UFixMath<NI,NF> + SFixMath<_NI,_NF> returns SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)>
+    - UFixMath<NI,NF> + anything_else returns UFixMath<NI,NF>
+    - SFixMath<NI,NF> + anything_else returns SFixMath<NI,NF>
     - Subtractions:
-      - UFixMath2<NI,NF> - UFixMath2<_NI,_NF> returns SFixMath2<MAX(NI,_NI),MAX(NF,_NF)>
-      - SFixMath2<NI,NF> - SFixMath2<_NI,_NF> returns SFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)>
-      - SFixMath2<NI,NF> - UFixMath2<_NI,_NF> returns SFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)>
-      - UFixMath2<NI,NF> - anything_else returns UFixMath2<NI,NF>
-      - SFixMath2<NI,NF> - anything_else returns SFixMath2<NI,NF>
-      - (-)SFixMath2<NI,NF> return SFixMath2<NI,NF>
-      - (-)UFixMath2<NI,NF> return SFixMath2<NI,NF>
+    - UFixMath<NI,NF> - UFixMath<_NI,_NF> returns SFixMath<MAX(NI,_NI),MAX(NF,_NF)>
+    - SFixMath<NI,NF> - SFixMath<_NI,_NF> returns SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)>
+    - SFixMath<NI,NF> - UFixMath<_NI,_NF> returns SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)>
+    - UFixMath<NI,NF> - anything_else returns UFixMath<NI,NF>
+    - SFixMath<NI,NF> - anything_else returns SFixMath<NI,NF>
+    - (-)SFixMath<NI,NF> return SFixMath<NI,NF>
+    - (-)UFixMath<NI,NF> return SFixMath<NI,NF>
     - Multiplications:
-      - UFixMath2<NI,NF> * UFixMath2<_NI,_NF> returns UFixMath2<NI+_NI,NF+_NF>
-      - UFixMath2<NI,NF> * SFixMath2<_NI,_NF> returns SFixMath2<NI+_NI,NF+_NF>
-      - SFixMath2<NI,NF> * SFixMath2<_NI,_NF> returns SFixMath2<NI+_NI,NF+_NF>
-      - UFixMath2<NI,NF> * anything_else returns UFixMath2<NI,NF>
-      - SFixMath2<NI,NF> * anything_else returns SFixMath2<NI,NF>
+    - UFixMath<NI,NF> * UFixMath<_NI,_NF> returns UFixMath<NI+_NI,NF+_NF>
+    - UFixMath<NI,NF> * SFixMath<_NI,_NF> returns SFixMath<NI+_NI,NF+_NF>
+    - SFixMath<NI,NF> * SFixMath<_NI,_NF> returns SFixMath<NI+_NI,NF+_NF>
+    - UFixMath<NI,NF> * anything_else returns UFixMath<NI,NF>
+    - SFixMath<NI,NF> * anything_else returns SFixMath<NI,NF>
     - Shifts:
-      - UFixMath2<NI,NF> .sR<NS> returns UFixMath2<NI-NS,NF+NS>
-      - UFixMath2<NI,NF> .sL<NS> returns UFixMath2<NI+NS,NF-NS>
-      - same for SFixMath2.
+    - UFixMath<NI,NF> .sR<NS> returns UFixMath<NI-NS,NF+NS>
+    - UFixMath<NI,NF> .sL<NS> returns UFixMath<NI+NS,NF-NS>
+    - same for SFixMath.
       
    
 */
@@ -73,8 +73,8 @@
 // Experiments
 /*#define NBITSREAL(X,N) (abs(X) < (1<<N) ? N : NBITSREAL2(X,N+1))
   #define NBITSREAL2(X,N) (abs(X) < (1<<N) ? N : NBITSREAL(X,N+1))
-  #define UFixAuto(X) (UFixMath2<NBITSREAL(X,0),0>(X))
-  #define UFixAuto(X) (UFixMath2<NBITSREAL(X,0),0>(X))*/
+  #define UFixAuto(X) (UFixMath<NBITSREAL(X,0),0>(X))
+  #define UFixAuto(X) (UFixMath<NBITSREAL(X,0),0>(X))*/
 
 /*
   template<typename T>
@@ -86,7 +86,7 @@
   }
   }
 
-  #define UFixAuto(X) (UFixMath2<nBitsReal(X),0>(X))
+  #define UFixAuto(X) (UFixMath<nBitsReal(X),0>(X))
 */
 
  
@@ -96,7 +96,7 @@
 
 // Forward declaration
 template<byte NI, byte NF>
-class SFixMath2;
+class SFixMath;
 
 
 
@@ -105,28 +105,28 @@ class SFixMath2;
     @param NF The number of bits encoding the fractional part
 */
 template<byte NI, byte NF> // NI and NF being the number of bits for the integral and the fractionnal parts respectively.
-class UFixMath2
+class UFixMath
 {
-  static_assert(NI+NF<=64, "The total width of a UFixMath2 cannot exceed 64bits");
+  static_assert(NI+NF<=64, "The total width of a UFixMath cannot exceed 64bits");
   typedef typename IntegerType<UBITSTOBYTES(NI+NF)>::unsigned_type internal_type ; // smallest size that fits our internal integer
   typedef typename IntegerType<UBITSTOBYTES(NI+NF+1)>::unsigned_type next_greater_type ; // smallest size that fits 1<<NF for sure (NI could be equal to 0). It can be the same than internal_type in some cases.
   
 public:
   /** Constructor
    */
-  UFixMath2() {;}
+  UFixMath() {;}
 
   /** Constructor from a positive floating point value.
       @param fl Floating point value
       @return An unsigned fixed point number
   */
-  UFixMath2(float fl)  {internal_value = /*static_cast<internal_type>*/(fl * (next_greater_type(1) << NF));}
+  UFixMath(float fl)  {internal_value = /*static_cast<internal_type>*/(fl * (next_greater_type(1) << NF));}
 
   /** Constructor from a floating point value.
       @param fl Floating point value
       @return An unsigned fixed point number
   */
-  UFixMath2(double fl)  {internal_value = static_cast<internal_type> (fl * (next_greater_type(1) << NF)); }
+  UFixMath(double fl)  {internal_value = static_cast<internal_type> (fl * (next_greater_type(1) << NF)); }
   
   /* Constructor from integer type (as_frac = false) or from fractionnal value (as_frac=true) can be used to emulate the behavior of for instance Q8n0_to_Q8n8 */
 
@@ -137,7 +137,7 @@ public:
       @return An unsigned fixed point number
   */
   template<typename T>
-  UFixMath2(T value,bool as_raw=false)
+  UFixMath(T value,bool as_raw=false)
   {
     if (as_raw) internal_value = value;
     else internal_value = (internal_type(value) << NF);
@@ -146,169 +146,169 @@ public:
 
   /** Set the internal value of the fixed point math number.
       @param raw The new internal value.
-      @return An UFixMath2x
+      @return An UFixMathx
   */  
   template<typename T>
-  static UFixMath2<NI,NF> fromRaw(T raw){return UFixMath2<NI,NF>(raw,true);}
+  static UFixMath<NI,NF> fromRaw(T raw){return UFixMath<NI,NF>(raw,true);}
 
 
 
 
 
-  /** Constructor from another UFixMath2. 
+  /** Constructor from another UFixMath. 
       @param uf An unsigned fixed type number which value can be represented in this type.
       @return A unsigned fixed type number
   */
   template<byte _NI, byte _NF>
-  UFixMath2(const UFixMath2<_NI,_NF>& uf) {
+  UFixMath(const UFixMath<_NI,_NF>& uf) {
     //internal_value = MOZZI_SHIFTR((typename IntegerType<((MAX(NI+NF-1,_NI+_NF-1))>>3)+1>::unsigned_type) uf.asRaw(),(_NF-NF));
     internal_value = MOZZI_SHIFTR((typename IntegerType<UBITSTOBYTES(MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
   }
 
-  /** Constructor from another SFixMath2. 
+  /** Constructor from another SFixMath. 
       @param uf An signed fixed type number which value can be represented in this type: sign is thus discarded.
       @return A unsigned fixed type number
   */
   template<byte _NI, byte _NF>
-  UFixMath2(const SFixMath2<_NI,_NF>& uf) {
+  UFixMath(const SFixMath<_NI,_NF>& uf) {
     internal_value = MOZZI_SHIFTR((typename IntegerType<UBITSTOBYTES(MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
   }
 
 
   //////// ADDITION OVERLOADS
 
-  /** Addition with another UFixMath2. Safe.
-      @param op The UFixMath2 to be added.
-      @return The result of the addition as a UFixMath2.
+  /** Addition with another UFixMath. Safe.
+      @param op The UFixMath to be added.
+      @return The result of the addition as a UFixMath.
   */
   template<byte _NI, byte _NF>
-  UFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)> operator+ (const UFixMath2<_NI,_NF>& op) const
+  UFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator+ (const UFixMath<_NI,_NF>& op) const
   {
     constexpr byte new_NI = MAX(NI, _NI) + 1;
     constexpr byte new_NF = MAX(NF, _NF);
     typedef typename IntegerType<UBITSTOBYTES(new_NI+new_NF)>::unsigned_type return_type;
-    UFixMath2<new_NI,new_NF> left(*this);
-    UFixMath2<new_NI,new_NF> right(op);
+    UFixMath<new_NI,new_NF> left(*this);
+    UFixMath<new_NI,new_NF> right(op);
 
     return_type tt = return_type(left.asRaw()) + right.asRaw();
-    return UFixMath2<new_NI,new_NF>(tt,true);
+    return UFixMath<new_NI,new_NF>(tt,true);
   }
 
   /** Addition with another type. Unsafe
       @param op The number to be added.
-      @return The result of the addition as a UFixMath2.
+      @return The result of the addition as a UFixMath.
   */
   template<typename T>
-  UFixMath2<NI,NF> operator+ (const T op) const
+  UFixMath<NI,NF> operator+ (const T op) const
   {
-    return UFixMath2<NI,NF>(internal_value+((internal_type)op<<NF),true);
+    return UFixMath<NI,NF>(internal_value+((internal_type)op<<NF),true);
   }
 
 
   //////// SUBSTRACTION OVERLOADS
 
-  /** Subtraction with another UFixMath2. Safe.
-      @param op The UFixMath2 to be subtracted.
-      @return The result of the subtraction as a SFixMath2.
+  /** Subtraction with another UFixMath. Safe.
+      @param op The UFixMath to be subtracted.
+      @return The result of the subtraction as a SFixMath.
   */
   template<byte _NI, byte _NF> // We do not have the +1 after MAX(NI, _NI) because the substraction between two UFix should fit in the biggest of the two.
-  SFixMath2<MAX(NI,_NI),MAX(NF,_NF)> operator- (const UFixMath2<_NI,_NF>& op) const
+  SFixMath<MAX(NI,_NI),MAX(NF,_NF)> operator- (const UFixMath<_NI,_NF>& op) const
   {
     constexpr byte new_NI = MAX(NI, _NI);
     constexpr byte new_NF = MAX(NF, _NF);
     typedef typename IntegerType<SBITSTOBYTES(new_NI+new_NF)>::signed_type return_type;
-    SFixMath2<new_NI,new_NF> left(*this);
-    SFixMath2<new_NI,new_NF> right(op);
+    SFixMath<new_NI,new_NF> left(*this);
+    SFixMath<new_NI,new_NF> right(op);
 
     return_type tt = return_type(left.asRaw()) - right.asRaw();
-    return SFixMath2<new_NI,new_NF>(tt,true);
+    return SFixMath<new_NI,new_NF>(tt,true);
   }
 
   
   /** Subtraction with another type. Unsafe
       @param op The number to be subtracted.
-      @return The result of the subtraction as a UFixMath2.
+      @return The result of the subtraction as a UFixMath.
   */
   template<typename T>
-  UFixMath2<NI,NF> operator- (const T op) const
+  UFixMath<NI,NF> operator- (const T op) const
   {
-    return UFixMath2<NI,NF>(internal_value-((internal_type)op<<NF),true);
+    return UFixMath<NI,NF>(internal_value-((internal_type)op<<NF),true);
   }
 
   /** Opposite of the number.
-      @return The opposite numberas a SFixMath2.
+      @return The opposite numberas a SFixMath.
   */
-  SFixMath2<NI,NF> operator-() const
+  SFixMath<NI,NF> operator-() const
   {
-    return SFixMath2<NI,NF>( -(typename IntegerType<SBITSTOBYTES(NI+NF)>::signed_type)(internal_value),true);
+    return SFixMath<NI,NF>( -(typename IntegerType<SBITSTOBYTES(NI+NF)>::signed_type)(internal_value),true);
   }
 
   //////// MULTIPLICATION OVERLOADS
   
-  /** Multiplication with another UFixMath2. Safe.
-      @param op The UFixMath2 to be multiplied.
-      @return The result of the multiplication as a UFixMath2.
+  /** Multiplication with another UFixMath. Safe.
+      @param op The UFixMath to be multiplied.
+      @return The result of the multiplication as a UFixMath.
   */
   template<byte _NI, byte _NF>
-  UFixMath2<NI+_NI,NF+_NF> operator* (const UFixMath2<_NI,_NF>& op) const
+  UFixMath<NI+_NI,NF+_NF> operator* (const UFixMath<_NI,_NF>& op) const
   {
     //typedef typename IntegerType< ((NI+_NI+NF+_NF-1)>>3)+1>::unsigned_type return_type ;
     typedef typename IntegerType<UBITSTOBYTES(NI+_NI+NF+_NF)>::unsigned_type return_type ;
     return_type tt = return_type(internal_value)*op.asRaw();
-    return UFixMath2<NI+_NI,NF+_NF>(tt,true);
+    return UFixMath<NI+_NI,NF+_NF>(tt,true);
   }
 
   /** Multiplication with another type. Unsafe.
       @param op The number to be multiplied.
-      @return The result of the multiplication as a UFixMath2.
+      @return The result of the multiplication as a UFixMath.
   */
   template<typename T>
-  UFixMath2<NI,NF> operator* (const T op) const
+  UFixMath<NI,NF> operator* (const T op) const
   {
-    return UFixMath2<NI,NF>(internal_value*op,true);
+    return UFixMath<NI,NF>(internal_value*op,true);
   }
 
 
   /** Right shift. This won't overflow but will not leverage on the bits freed by the shift.
       Better to use .sR<shift>() if possible instead.
       @param op The shift number
-      @return The result of the shift as a UFixMath2.
+      @return The result of the shift as a UFixMath.
   */
-  UFixMath2<NI,NF> operator>> (const byte op) const
+  UFixMath<NI,NF> operator>> (const byte op) const
   {
-    return UFixMath2<NI,NF>(internal_value>>op,true);
+    return UFixMath<NI,NF>(internal_value>>op,true);
   }
 
   /** Left shift. This can overflow if you shift to a value that cannot be represented.
       Better to use .sL<shift>() if possible instead.
       @param op The shift number
-      @return The result of the shift as a UFixMath2.
+      @return The result of the shift as a UFixMath.
   */
-  UFixMath2<NI,NF> operator<< (const byte op) const
+  UFixMath<NI,NF> operator<< (const byte op) const
   {
-    return UFixMath2<NI,NF>(internal_value<<op,true);
+    return UFixMath<NI,NF>(internal_value<<op,true);
   }
 
   /** Safe and optimal right shift. The returned type will be adjusted accordingly
       @param op The shift number
-      @return The result of the shift as a UFixMath2 of smaller size.
+      @return The result of the shift as a UFixMath of smaller size.
   */
   template<byte op>
-  UFixMath2<NI-op,NF+op> sR()
+  UFixMath<NI-op,NF+op> sR()
   {
-    return UFixMath2<NI-op,NF+op>(internal_value,true);
+    return UFixMath<NI-op,NF+op>(internal_value,true);
   }
 
   /** Safe and optimal left shift. The returned type will be adjusted accordingly
       @param op The shift number
-      @return The result of the shift as a UFixMath2 of bigger size.
+      @return The result of the shift as a UFixMath of bigger size.
   */
   template<byte op>
-  UFixMath2<NI+op,NF-op> sL()
+  UFixMath<NI+op,NF-op> sL()
   {
-    //return UFixMath2<NI+op,NF-op>((typename IntegerType<((NI+op+NF-op-1)>>3)+1>::unsigned_type) internal_value<<op,true);
-    //return UFixMath2<NI+op,NF-op>((typename IntegerType<UBITSTOBYTES(NI+op+NF-op)>::unsigned_type) internal_value,true);
-    return UFixMath2<NI+op,NF-op>(internal_value,true);
+    //return UFixMath<NI+op,NF-op>((typename IntegerType<((NI+op+NF-op-1)>>3)+1>::unsigned_type) internal_value<<op,true);
+    //return UFixMath<NI+op,NF-op>((typename IntegerType<UBITSTOBYTES(NI+op+NF-op)>::unsigned_type) internal_value,true);
+    return UFixMath<NI+op,NF-op>(internal_value,true);
   }
 
 
@@ -316,11 +316,11 @@ public:
   // Division. Might actually more misleading than helping. NON Working version below.
   /*
     template<byte NI1, byte NF1, byte NI2, byte NF2>
-    UFixMath2<NI1-NI2, NF1-NF2> operator/(const UFixMath2<NI1, NF1>& op1, const UFixMath2<NI2, NF2>& op2)
+    UFixMath<NI1-NI2, NF1-NF2> operator/(const UFixMath<NI1, NF1>& op1, const UFixMath<NI2, NF2>& op2)
     {
     typedef typename IntegerType< ((NI1-NI2+NF1-NF2+1)>>3)+1>::unsigned_type return_type ;
     return_type tt = (return_type(op1.getInt())<<(NF1-NF2))/op2.getInt();
-    return UFixMath2<NI1-NI2, NF1-NF2>(tt,true);
+    return UFixMath<NI1-NI2, NF1-NF2>(tt,true);
     }
   */
 
@@ -355,96 +355,96 @@ private:
 
 // Multiplication
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator*(uint8_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath<NI, NF> operator*(uint8_t op, const UFixMath<NI, NF>& uf) {return uf*op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator*(uint16_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath<NI, NF> operator*(uint16_t op, const UFixMath<NI, NF>& uf) {return uf*op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator*(uint32_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath<NI, NF> operator*(uint32_t op, const UFixMath<NI, NF>& uf) {return uf*op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator*(uint64_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath<NI, NF> operator*(uint64_t op, const UFixMath<NI, NF>& uf) {return uf*op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator*(int8_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath<NI, NF> operator*(int8_t op, const UFixMath<NI, NF>& uf) {return uf*op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator*(int16_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath<NI, NF> operator*(int16_t op, const UFixMath<NI, NF>& uf) {return uf*op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator*(int32_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath<NI, NF> operator*(int32_t op, const UFixMath<NI, NF>& uf) {return uf*op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator*(int64_t op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath<NI, NF> operator*(int64_t op, const UFixMath<NI, NF>& uf) {return uf*op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator*(float op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath<NI, NF> operator*(float op, const UFixMath<NI, NF>& uf) {return uf*op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator*(double op, const UFixMath2<NI, NF>& uf) {return uf*op;}
+UFixMath<NI, NF> operator*(double op, const UFixMath<NI, NF>& uf) {return uf*op;}
 
 // Addition
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator+(uint8_t op, const UFixMath2<NI, NF>& uf) {return uf+op;}
+UFixMath<NI, NF> operator+(uint8_t op, const UFixMath<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator+(uint16_t op, const UFixMath2<NI, NF>& uf) {return uf+op;}
+UFixMath<NI, NF> operator+(uint16_t op, const UFixMath<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator+(uint32_t op, const UFixMath2<NI, NF>& uf) {return uf+op;}
+UFixMath<NI, NF> operator+(uint32_t op, const UFixMath<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator+(uint64_t op, const UFixMath2<NI, NF>& uf) {return uf+op;}
+UFixMath<NI, NF> operator+(uint64_t op, const UFixMath<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator+(int8_t op, const UFixMath2<NI, NF>& uf) {return uf+op;}
+UFixMath<NI, NF> operator+(int8_t op, const UFixMath<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator+(int16_t op, const UFixMath2<NI, NF>& uf) {return uf+op;}
+UFixMath<NI, NF> operator+(int16_t op, const UFixMath<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator+(int32_t op, const UFixMath2<NI, NF>& uf) {return uf+op;}
+UFixMath<NI, NF> operator+(int32_t op, const UFixMath<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator+(int64_t op, const UFixMath2<NI, NF>& uf) {return uf+op;}
+UFixMath<NI, NF> operator+(int64_t op, const UFixMath<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator+(float op, const UFixMath2<NI, NF>& uf) {return uf+op;}
+UFixMath<NI, NF> operator+(float op, const UFixMath<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-UFixMath2<NI, NF> operator+(double op, const UFixMath2<NI, NF>& uf) {return uf+op;}
+UFixMath<NI, NF> operator+(double op, const UFixMath<NI, NF>& uf) {return uf+op;}
 
 // Substraction
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(uint8_t op, const UFixMath2<NI, NF>& uf) {return -uf+op;}
+SFixMath<NI, NF> operator-(uint8_t op, const UFixMath<NI, NF>& uf) {return -uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(uint16_t op, const UFixMath2<NI, NF>& uf) {return -uf+op;}
+SFixMath<NI, NF> operator-(uint16_t op, const UFixMath<NI, NF>& uf) {return -uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(uint32_t op, const UFixMath2<NI, NF>& uf) {return -uf+op;}
+SFixMath<NI, NF> operator-(uint32_t op, const UFixMath<NI, NF>& uf) {return -uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(uint64_t op, const UFixMath2<NI, NF>& uf) {return -uf+op;}
+SFixMath<NI, NF> operator-(uint64_t op, const UFixMath<NI, NF>& uf) {return -uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(int8_t op, const UFixMath2<NI, NF>& uf) {return -uf+op;}
+SFixMath<NI, NF> operator-(int8_t op, const UFixMath<NI, NF>& uf) {return -uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(int16_t op, const UFixMath2<NI, NF>& uf) {return -uf+op;}
+SFixMath<NI, NF> operator-(int16_t op, const UFixMath<NI, NF>& uf) {return -uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(int32_t op, const UFixMath2<NI, NF>& uf) {return -uf+op;}
+SFixMath<NI, NF> operator-(int32_t op, const UFixMath<NI, NF>& uf) {return -uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(int64_t op, const UFixMath2<NI, NF>& uf) {return -uf+op;}
+SFixMath<NI, NF> operator-(int64_t op, const UFixMath<NI, NF>& uf) {return -uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(float op, const UFixMath2<NI, NF>& uf) {return -uf+op;}
+SFixMath<NI, NF> operator-(float op, const UFixMath<NI, NF>& uf) {return -uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(double op, const UFixMath2<NI, NF>& uf) {return -uf+op;}
+SFixMath<NI, NF> operator-(double op, const UFixMath<NI, NF>& uf) {return -uf+op;}
 
 
 
@@ -452,31 +452,31 @@ SFixMath2<NI, NF> operator-(double op, const UFixMath2<NI, NF>& uf) {return -uf+
 /** Instanciate an signed fixed point math number.
     @param NI The number of bits encoding the integer part. The integral part can range into [-2^NI, 2^NI -1]
     @param NF The number of bits encoding the fractional part
-    @note The total number of the underlying int will be NI+NF+1 in order to accomodate the sign. It follows that, if you want something that reproduces the behavior of a int8_t, it should be declared as SFixMath2<7,0>.
+    @note The total number of the underlying int will be NI+NF+1 in order to accomodate the sign. It follows that, if you want something that reproduces the behavior of a int8_t, it should be declared as SFixMath<7,0>.
 */
 template<byte NI, byte NF> // NI and NF being the number of bits for the integral and the fractionnal parts respectively.
-class SFixMath2
+class SFixMath
 {
-  static_assert(NI+NF<64, "The total width of a SFixMath2 cannot exceed 63bits");
+  static_assert(NI+NF<64, "The total width of a SFixMath cannot exceed 63bits");
   typedef typename IntegerType<SBITSTOBYTES(NI+NF)>::signed_type internal_type ; // smallest size that fits our internal integer
   typedef typename IntegerType<SBITSTOBYTES(NI+NF+1)>::signed_type next_greater_type ; // smallest size that fits 1<<NF for sure (NI could be equal to 0). It can be the same than internal_type in some cases.
   
 public:
   /** Constructor
    */
-  SFixMath2() {;}
+  SFixMath() {;}
   
   /** Constructor from a floating point value.
       @param fl Floating point value
       @return An signed fixed point number
   */
-  SFixMath2(float fl)  {internal_value = /*static_cast<internal_type>*/(fl * (next_greater_type(1) << NF));}
+  SFixMath(float fl)  {internal_value = /*static_cast<internal_type>*/(fl * (next_greater_type(1) << NF));}
 
   /** Constructor from a floating point value.
       @param fl Floating point value
       @return An signed fixed point number
   */
-  SFixMath2(double fl)  {internal_value = static_cast<internal_type> (fl * (next_greater_type(1) << NF)); }
+  SFixMath(double fl)  {internal_value = static_cast<internal_type> (fl * (next_greater_type(1) << NF)); }
 
 
   /** Constructor from an integer value which can be interpreted as both a resulting fixed point 
@@ -486,7 +486,7 @@ public:
       @return An signed fixed point number
   */
   template<typename T>
-  SFixMath2(T value,bool as_raw=false)
+  SFixMath(T value,bool as_raw=false)
   {
     if (as_raw) internal_value = value;
     else internal_value = (internal_type(value) << NF);
@@ -494,164 +494,164 @@ public:
 
   /** Set the internal value of the fixed point math number.
       @param raw The new internal value.
-      @return A SFixMath2.
+      @return A SFixMath.
   */  
   template<typename T>
-  static SFixMath2<NI,NF> fromRaw(T raw){return UFixMath2<NI,NF>(raw,true);}
+  static SFixMath<NI,NF> fromRaw(T raw){return UFixMath<NI,NF>(raw,true);}
 
 
-  /** Constructor from another SFixMath2. 
+  /** Constructor from another SFixMath. 
       @param uf A signed fixed type number which value can be represented in this type.
       @return A signed fixed type number
   */
   template<byte _NI, byte _NF>
-  SFixMath2(const SFixMath2<_NI,_NF>& uf) {
+  SFixMath(const SFixMath<_NI,_NF>& uf) {
     //internal_value = MOZZI_SHIFTR((typename IntegerType<((MAX(NI+NF,_NI+_NF))>>3)+1>::unsigned_type) uf.asRaw(),(_NF-NF));
     internal_value = MOZZI_SHIFTR((typename IntegerType<SBITSTOBYTES(MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
     
   }
 
-  /** Constructor from another UFixMath2. 
+  /** Constructor from another UFixMath. 
       @param uf A unsigned fixed type number which value can be represented in this type.
       @return A signed fixed type number
   */
   template<byte _NI, byte _NF>
-  SFixMath2(const UFixMath2<_NI,_NF>& uf) {
+  SFixMath(const UFixMath<_NI,_NF>& uf) {
     internal_value = MOZZI_SHIFTR((typename IntegerType<UBITSTOBYTES(MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
   }
 
   //////// ADDITION OVERLOADS
 
-  /** Addition with another SFixMath2. Safe.
-      @param op The SFixMath2 to be added.
-      @return The result of the addition as a SFixMath2.
+  /** Addition with another SFixMath. Safe.
+      @param op The SFixMath to be added.
+      @return The result of the addition as a SFixMath.
   */
   template<byte _NI, byte _NF>
-  SFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)> operator+ (const SFixMath2<_NI,_NF>& op) const
+  SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator+ (const SFixMath<_NI,_NF>& op) const
   {
     constexpr byte new_NI = MAX(NI, _NI) + 1;
     constexpr byte new_NF = MAX(NF, _NF);
     typedef typename IntegerType<SBITSTOBYTES(new_NI+new_NF)>::unsigned_type return_type;
-    SFixMath2<new_NI,new_NF> left(*this);
-    SFixMath2<new_NI,new_NF> right(op);
+    SFixMath<new_NI,new_NF> left(*this);
+    SFixMath<new_NI,new_NF> right(op);
 
     return_type tt = return_type(left.asRaw()) + right.asRaw();
-    return SFixMath2<new_NI,new_NF>(tt,true);
+    return SFixMath<new_NI,new_NF>(tt,true);
   }
 
   /** Addition with another type. Unsafe
       @param op The number to be added.
-      @return The result of the addition as a UFixMath2.
+      @return The result of the addition as a UFixMath.
   */
   template<typename T>
-  SFixMath2<NI,NF> operator+ (const T op) const
+  SFixMath<NI,NF> operator+ (const T op) const
   {
-    return SFixMath2<NI,NF>(internal_value+(op<<NF),true);
+    return SFixMath<NI,NF>(internal_value+(op<<NF),true);
   }
 
 
   //////// SUBSTRACTION OVERLOADS
 
-  /** Subtraction with another SFixMath2. Safe.
-      @param op The SFixMath2 to be subtracted.
-      @return The result of the subtraction as a SFixMath2.
+  /** Subtraction with another SFixMath. Safe.
+      @param op The SFixMath to be subtracted.
+      @return The result of the subtraction as a SFixMath.
   */ 
   template<byte _NI, byte _NF>
-  SFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)> operator- (const SFixMath2<_NI,_NF>& op) const
+  SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator- (const SFixMath<_NI,_NF>& op) const
   {
     constexpr byte new_NI = MAX(NI, _NI) + 1;
     constexpr byte new_NF = MAX(NF, _NF);
     typedef typename IntegerType<SBITSTOBYTES(new_NI+new_NF)>::unsigned_type return_type;
-    SFixMath2<new_NI,new_NF> left(*this);
-    SFixMath2<new_NI,new_NF> right(op);
+    SFixMath<new_NI,new_NF> left(*this);
+    SFixMath<new_NI,new_NF> right(op);
 
     return_type tt = return_type(left.asRaw()) - right.asRaw();
-    return SFixMath2<new_NI,new_NF>(tt,true);
+    return SFixMath<new_NI,new_NF>(tt,true);
   }
 
   
   /** Subtraction with another type. Unsafe
       @param op The number to be subtracted.
-      @return The result of the subtraction as a SFixMath2.
+      @return The result of the subtraction as a SFixMath.
   */
   template<typename T>
-  SFixMath2<NI,NF> operator- (const T op) const
+  SFixMath<NI,NF> operator- (const T op) const
   {
-    return SFixMath2<NI,NF>(internal_value-(op<<NF),true);
+    return SFixMath<NI,NF>(internal_value-(op<<NF),true);
   }
 
 
   /** Opposite of the number.
-      @return The opposite numberas a SFixMath2.
+      @return The opposite numberas a SFixMath.
   */
-  SFixMath2<NI,NF> operator-() const
+  SFixMath<NI,NF> operator-() const
   {
-    return SFixMath2<NI,NF>(-internal_value,true);
+    return SFixMath<NI,NF>(-internal_value,true);
   }
   
   //////// MULTIPLICATION OVERLOADS
   
-  /** Multiplication with another SFixMath2. Safe.
-      @param op The SFixMath2 to be multiplied.
-      @return The result of the multiplication as a SFixMath2.
+  /** Multiplication with another SFixMath. Safe.
+      @param op The SFixMath to be multiplied.
+      @return The result of the multiplication as a SFixMath.
   */
   template<byte _NI, byte _NF>
-  SFixMath2<NI+_NI,NF+_NF> operator* (const SFixMath2<_NI,_NF>& op) const
+  SFixMath<NI+_NI,NF+_NF> operator* (const SFixMath<_NI,_NF>& op) const
   {
     typedef typename IntegerType<SBITSTOBYTES(NI+_NI+NF+_NF)>::signed_type return_type ;
     return_type tt = return_type(internal_value)*op.asRaw();
-    return SFixMath2<NI+_NI,NF+_NF>(tt,true);
+    return SFixMath<NI+_NI,NF+_NF>(tt,true);
   }
 
   /** Multiplication with another type. Unsafe.
       @param op The number to be multiplied.
-      @return The result of the multiplication as a UFixMath2.
+      @return The result of the multiplication as a UFixMath.
   */
   template<typename T>
-  SFixMath2<NI,NF> operator* (const T op) const
+  SFixMath<NI,NF> operator* (const T op) const
   {
-    return SFixMath2<NI,NF>(internal_value*op,true);
+    return SFixMath<NI,NF>(internal_value*op,true);
   }
 
 
   /** Right shift. This won't overflow but will not leverage on the bits freed by the shift.
       Better to use .sR<shift>() if possible instead.
       @param op The shift number
-      @return The result of the shift as a SFixMath2.
+      @return The result of the shift as a SFixMath.
   */
-  SFixMath2<NI,NF> operator>> (const byte op) const
+  SFixMath<NI,NF> operator>> (const byte op) const
   {
-    return SFixMath2<NI,NF>(internal_value>>op,true);
+    return SFixMath<NI,NF>(internal_value>>op,true);
   }
 
   /** Left shift. This can overflow if you shift to a value that cannot be represented.
       Better to use .sL<shift>() if possible instead.
       @param op The shift number
-      @return The result of the shift as a UFixMath2.
+      @return The result of the shift as a UFixMath.
   */
-  SFixMath2<NI,NF> operator<< (const byte op) const
+  SFixMath<NI,NF> operator<< (const byte op) const
   {
-    return SFixMath2<NI,NF>(internal_value<<op,true);
+    return SFixMath<NI,NF>(internal_value<<op,true);
   }
 
   /** Safe and optimal right shift. The returned type will be adjusted accordingly
       @param op The shift number
-      @return The result of the shift as a UFixMath2 of smaller size.
+      @return The result of the shift as a UFixMath of smaller size.
   */
   template<byte op>
-  SFixMath2<NI-op,NF+op> sR()
+  SFixMath<NI-op,NF+op> sR()
   {
-    return SFixMath2<NI-op,NF+op>(internal_value,true);
+    return SFixMath<NI-op,NF+op>(internal_value,true);
   }
 
   /** Safe and optimal left shift. The returned type will be adjusted accordingly
       @param op The shift number
-      @return The result of the shift as a UFixMath2 of bigger size.
+      @return The result of the shift as a UFixMath of bigger size.
   */
   template<byte op>
-  SFixMath2<NI+op,NF-op> sL()
+  SFixMath<NI+op,NF-op> sL()
   {
-    return SFixMath2<NI+op,NF-op>(internal_value,true);
+    return SFixMath<NI+op,NF-op>(internal_value,true);
   }
 
   /** Returns the value as floating point number.
@@ -684,96 +684,96 @@ private:
 
 // Multiplication
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator*(uint8_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath<NI, NF> operator*(uint8_t op, const SFixMath<NI, NF>& uf) {return uf*op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator*(uint16_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath<NI, NF> operator*(uint16_t op, const SFixMath<NI, NF>& uf) {return uf*op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator*(uint32_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath<NI, NF> operator*(uint32_t op, const SFixMath<NI, NF>& uf) {return uf*op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator*(uint64_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath<NI, NF> operator*(uint64_t op, const SFixMath<NI, NF>& uf) {return uf*op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator*(int8_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath<NI, NF> operator*(int8_t op, const SFixMath<NI, NF>& uf) {return uf*op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator*(int16_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath<NI, NF> operator*(int16_t op, const SFixMath<NI, NF>& uf) {return uf*op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator*(int32_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath<NI, NF> operator*(int32_t op, const SFixMath<NI, NF>& uf) {return uf*op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator*(int64_t op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath<NI, NF> operator*(int64_t op, const SFixMath<NI, NF>& uf) {return uf*op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator*(float op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath<NI, NF> operator*(float op, const SFixMath<NI, NF>& uf) {return uf*op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator*(double op, const SFixMath2<NI, NF>& uf) {return uf*op;}
+SFixMath<NI, NF> operator*(double op, const SFixMath<NI, NF>& uf) {return uf*op;}
 
 // Addition
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator+(uint8_t op, const SFixMath2<NI, NF>& uf) {return uf+op;}
+SFixMath<NI, NF> operator+(uint8_t op, const SFixMath<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator+(uint16_t op, const SFixMath2<NI, NF>& uf) {return uf+op;}
+SFixMath<NI, NF> operator+(uint16_t op, const SFixMath<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator+(uint32_t op, const SFixMath2<NI, NF>& uf) {return uf+op;}
+SFixMath<NI, NF> operator+(uint32_t op, const SFixMath<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator+(uint64_t op, const SFixMath2<NI, NF>& uf) {return uf+op;}
+SFixMath<NI, NF> operator+(uint64_t op, const SFixMath<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator+(int8_t op, const SFixMath2<NI, NF>& uf) {return uf+op;}
+SFixMath<NI, NF> operator+(int8_t op, const SFixMath<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator+(int16_t op, const SFixMath2<NI, NF>& uf) {return uf+op;}
+SFixMath<NI, NF> operator+(int16_t op, const SFixMath<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator+(int32_t op, const SFixMath2<NI, NF>& uf) {return uf+op;}
+SFixMath<NI, NF> operator+(int32_t op, const SFixMath<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator+(int64_t op, const SFixMath2<NI, NF>& uf) {return uf+op;}
+SFixMath<NI, NF> operator+(int64_t op, const SFixMath<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator+(float op, const SFixMath2<NI, NF>& uf) {return uf+op;}
+SFixMath<NI, NF> operator+(float op, const SFixMath<NI, NF>& uf) {return uf+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator+(double op, const SFixMath2<NI, NF>& uf) {return uf+op;}
+SFixMath<NI, NF> operator+(double op, const SFixMath<NI, NF>& uf) {return uf+op;}
 
 // Substraction
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(uint8_t op, const SFixMath2<NI, NF>& uf) {return (-uf)+op;}
+SFixMath<NI, NF> operator-(uint8_t op, const SFixMath<NI, NF>& uf) {return (-uf)+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(uint16_t op, const SFixMath2<NI, NF>& uf) {return (-uf)+op;}
+SFixMath<NI, NF> operator-(uint16_t op, const SFixMath<NI, NF>& uf) {return (-uf)+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(uint32_t op, const SFixMath2<NI, NF>& uf) {return (-uf)+op;}
+SFixMath<NI, NF> operator-(uint32_t op, const SFixMath<NI, NF>& uf) {return (-uf)+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(uint64_t op, const SFixMath2<NI, NF>& uf) {return (-uf)+op;}
+SFixMath<NI, NF> operator-(uint64_t op, const SFixMath<NI, NF>& uf) {return (-uf)+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(int8_t op, const SFixMath2<NI, NF>& uf) {return (-uf)+op;}
+SFixMath<NI, NF> operator-(int8_t op, const SFixMath<NI, NF>& uf) {return (-uf)+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(int16_t op, const SFixMath2<NI, NF>& uf) {return (-uf)+op;}
+SFixMath<NI, NF> operator-(int16_t op, const SFixMath<NI, NF>& uf) {return (-uf)+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(int32_t op, const SFixMath2<NI, NF>& uf) {return (-uf)+op;}
+SFixMath<NI, NF> operator-(int32_t op, const SFixMath<NI, NF>& uf) {return (-uf)+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(int64_t op, const SFixMath2<NI, NF>& uf) {return (-uf)+op;}
+SFixMath<NI, NF> operator-(int64_t op, const SFixMath<NI, NF>& uf) {return (-uf)+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(float op, const SFixMath2<NI, NF>& uf) {return (-uf)+op;}
+SFixMath<NI, NF> operator-(float op, const SFixMath<NI, NF>& uf) {return (-uf)+op;}
 
 template <byte NI, byte NF>
-SFixMath2<NI, NF> operator-(double op, const SFixMath2<NI, NF>& uf) {return (-uf)+op;}
+SFixMath<NI, NF> operator-(double op, const SFixMath<NI, NF>& uf) {return (-uf)+op;}
 
 
 
@@ -783,90 +783,90 @@ SFixMath2<NI, NF> operator-(double op, const SFixMath2<NI, NF>& uf) {return (-uf
 
 
 
-/** Multiplication between a SFixMath2 and a UFixMath2. Safe.
-    @param op1 A SFixMath2
-    @param op2 A UFixMath2
-    @return The result of the multiplication of op1 and op2. As a SFixMath2
+/** Multiplication between a SFixMath and a UFixMath. Safe.
+    @param op1 A SFixMath
+    @param op2 A UFixMath
+    @return The result of the multiplication of op1 and op2. As a SFixMath
 */
 template<byte NI, byte NF, byte _NI, byte _NF>
-SFixMath2<NI+_NI,NF+_NF> operator* (const SFixMath2<NI,NF>& op1, const UFixMath2<_NI,_NF>& op2 )
+SFixMath<NI+_NI,NF+_NF> operator* (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 )
 {
   typedef typename IntegerType< SBITSTOBYTES(NI+_NI+NF+_NF)>::signed_type return_type ;
   return_type tt = return_type(op1.asRaw())*op2.asRaw();
-  return SFixMath2<NI+_NI,NF+_NF>(tt,true);
+  return SFixMath<NI+_NI,NF+_NF>(tt,true);
 }
 
-/** Multiplication between a UFixMath2 and a SFixMath2. Safe.
-    @param op1 A UFixMath2
-    @param op2 A SFixMath2
-    @return The result of the multiplication of op1 and op2. As a SFixMath2
+/** Multiplication between a UFixMath and a SFixMath. Safe.
+    @param op1 A UFixMath
+    @param op2 A SFixMath
+    @return The result of the multiplication of op1 and op2. As a SFixMath
 */
 template<byte NI, byte NF, byte _NI, byte _NF>
-SFixMath2<NI+_NI,NF+_NF> operator* (const UFixMath2<NI,NF>& op1, const SFixMath2<_NI,_NF>& op2 )
+SFixMath<NI+_NI,NF+_NF> operator* (const UFixMath<NI,NF>& op1, const SFixMath<_NI,_NF>& op2 )
 {
   return op2*op1;
 }
 
 
-// Addition between SFixMath2 and UFixMath2 (promotion to next SFixMath2)
+// Addition between SFixMath and UFixMath (promotion to next SFixMath)
 
 
-/** Addition between a SFixMath2 and a UFixMath2. Safe.
-    @param op1 A SFixMath2
-    @param op2 A UFixMath2
-    @return The result of the addition of op1 and op2. As a SFixMath2
+/** Addition between a SFixMath and a UFixMath. Safe.
+    @param op1 A SFixMath
+    @param op2 A UFixMath
+    @return The result of the addition of op1 and op2. As a SFixMath
 */
 template<byte NI, byte NF, byte _NI, byte _NF>
-SFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)> operator+ (const SFixMath2<NI,NF>& op1, const UFixMath2<_NI,_NF>& op2 )
+SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator+ (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 )
 {
   constexpr byte new_NI = MAX(NI, _NI) + 1;
   constexpr byte new_NF = MAX(NF, _NF);
     
   typedef typename IntegerType<SBITSTOBYTES(new_NI+new_NF)>::signed_type return_type;
-  SFixMath2<new_NI,new_NF> left(op1);
-  SFixMath2<new_NI,new_NF> right(op2);
+  SFixMath<new_NI,new_NF> left(op1);
+  SFixMath<new_NI,new_NF> right(op2);
   return_type tt = return_type(left.asRaw()) + right.asRaw();
-  return SFixMath2<new_NI,new_NF>(tt,true);
+  return SFixMath<new_NI,new_NF>(tt,true);
 }
 
-/** Addition between a UFixMath2 and a SFixMath2. Safe.
-    @param op1 A UFixMath2
-    @param op2 A SFixMath2
-    @return The result of the addition of op1 and op2. As a SFixMath2
+/** Addition between a UFixMath and a SFixMath. Safe.
+    @param op1 A UFixMath
+    @param op2 A SFixMath
+    @return The result of the addition of op1 and op2. As a SFixMath
 */
 template<byte NI, byte NF, byte _NI, byte _NF>
-SFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)> operator+ (const UFixMath2<NI,NF>& op1, const SFixMath2<_NI,_NF>& op2 )
+SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator+ (const UFixMath<NI,NF>& op1, const SFixMath<_NI,_NF>& op2 )
 {
   return op2+op1;
 }
 
-// Substraction between SFixMath2 and UFixMath2 (promotion to next SFixMath2)
+// Substraction between SFixMath and UFixMath (promotion to next SFixMath)
 
-/** Subtraction between a SFixMath2 and a UFixMath2. Safe.
-    @param op1 A SFixMath2
-    @param op2 A UFixMath2
-    @return The result of the subtraction of op1 by op2. As a SFixMath2
+/** Subtraction between a SFixMath and a UFixMath. Safe.
+    @param op1 A SFixMath
+    @param op2 A UFixMath
+    @return The result of the subtraction of op1 by op2. As a SFixMath
 */
 template<byte NI, byte NF, byte _NI, byte _NF>
-SFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)> operator- (const SFixMath2<NI,NF>& op1, const UFixMath2<_NI,_NF>& op2 )
+SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator- (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 )
 {
   constexpr byte new_NI = MAX(NI, _NI) + 1;
   constexpr byte new_NF = MAX(NF, _NF);
     
   typedef typename IntegerType<SBITSTOBYTES(new_NI+new_NF)>::signed_type return_type;
-  SFixMath2<new_NI,new_NF> left(op1);
-  SFixMath2<new_NI,new_NF> right(op2);
+  SFixMath<new_NI,new_NF> left(op1);
+  SFixMath<new_NI,new_NF> right(op2);
   return_type tt = return_type(left.asRaw()) - right.asRaw();
-  return SFixMath2<new_NI,new_NF>(tt,true);
+  return SFixMath<new_NI,new_NF>(tt,true);
 }
 
-/** Subtraction between a UFixMath2 and a SFixMath2. Safe.
-    @param op1 A UFixMath2
-    @param op2 A SFixMath2
-    @return The result of the subtraction of op1 by op2. As a SFixMath2
+/** Subtraction between a UFixMath and a SFixMath. Safe.
+    @param op1 A UFixMath
+    @param op2 A SFixMath
+    @return The result of the subtraction of op1 by op2. As a SFixMath
 */
 template<byte NI, byte NF, byte _NI, byte _NF>
-SFixMath2<MAX(NI,_NI)+1,MAX(NF,_NF)> operator- (const UFixMath2<NI,NF>& op1, const SFixMath2<_NI,_NF>& op2 )
+SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator- (const UFixMath<NI,NF>& op1, const SFixMath<_NI,_NF>& op2 )
 {
   return -op2+op1;
 }

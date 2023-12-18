@@ -166,3 +166,15 @@ A good choice if you're using whole note values, want speed and simplicity, and 
 int mtof(int midi_note){
 	return (FLASH_OR_RAM_READ<const uint32_t>(midiToFreq + midi_note) >> 16);
 }
+
+inline UFixMath<16,16> mtof(UFixMath<16,16> midival)
+{
+  return Q16n16_mtof(midival.asRaw());
+}
+
+
+template<byte NI, byte NF>
+ inline UFixMath<16,16> mtof(UFixMath<NI,NF> midival)
+{
+  return Q16n16_mtof(UFixMath<16,16>(midival).asRaw());
+}

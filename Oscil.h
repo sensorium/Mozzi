@@ -278,11 +278,24 @@ public:
 	@note This should work OK with tables 2048 cells or smaller and
 	frequencies up to 4096 Hz.  Can't be used with UPDATE_RATE less than 64 Hz.
 	@note This didn't run faster than float last time it was tested, after 2014 code changes.  Need to see if 2014 changes improved or worsened performance.
-	@param frequency in UFixMath<16,16> fixed-point number format.
+	@param frequency in UFixMath<NI,NF> fixed-point number format.
 	*/
         template <byte NI, byte NF>
         inline
   	void setFreq(UFixMath<NI,NF> frequency)
+        {
+	  setFreq_Q16n16(UFixMath<16,16>(frequency).asRaw());
+        }
+
+  	/** Set the frequency using SFixMath<NI,NF> fixed-point number format. This falls back to using UFixMath<16,16> internally and is provided as a fallout for other UFixMath types. If possible try to use directly UFixMath<16,16> or UFixMath<24,8> for well defined (and well tested) behaviors.
+	@note This should work OK with tables 2048 cells or smaller and
+	frequencies up to 4096 Hz.  Can't be used with UPDATE_RATE less than 64 Hz.
+	@note This didn't run faster than float last time it was tested, after 2014 code changes.  Need to see if 2014 changes improved or worsened performance.
+	@param frequency in SFixMath<16,16> fixed-point number format.
+	*/
+        template <byte NI, byte NF>
+        inline
+  	void setFreq(SFixMath<NI,NF> frequency)
         {
 	  setFreq_Q16n16(UFixMath<16,16>(frequency).asRaw());
         }

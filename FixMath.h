@@ -269,6 +269,8 @@ public:
   }
 
 
+  //////// SHIFTS OVERLOADS
+
   /** Right shift. This won't overflow but will not leverage on the bits freed by the shift.
       Better to use .sR<shift>() if possible instead.
       @param op The shift number
@@ -306,11 +308,47 @@ public:
   template<byte op>
   UFixMath<NI+op,NF-op> sL()
   {
-    //return UFixMath<NI+op,NF-op>((typename IntegerType<((NI+op+NF-op-1)>>3)+1>::unsigned_type) internal_value<<op,true);
-    //return UFixMath<NI+op,NF-op>((typename IntegerType<UBITSTOBYTES(NI+op+NF-op)>::unsigned_type) internal_value,true);
     return UFixMath<NI+op,NF-op>(internal_value,true);
   }
 
+  
+  //////// COMPARISON OVERLOADS
+   
+  template<byte _NI, byte _NF>
+  bool operator> (const UFixMath<_NI,_NF>& op) const
+  {
+    constexpr byte new_NI = MAX(NI, _NI);
+    constexpr byte new_NF = MAX(NF, _NF);
+    UFixMath<new_NI,new_NF> left(*this);
+    UFixMath<new_NI,new_NF> right(op);
+    return left.asRaw()>right.asRaw();
+  }
+
+  template<byte _NI, byte _NF>
+  bool operator< (const UFixMath<_NI,_NF>& op) const
+  {
+    return op > *this;
+  }
+
+  template<byte _NI, byte _NF>
+  bool operator== (const UFixMath<_NI,_NF>& op) const
+  {
+    constexpr byte new_NI = MAX(NI, _NI);
+    constexpr byte new_NF = MAX(NF, _NF);
+    UFixMath<new_NI,new_NF> left(*this);
+    UFixMath<new_NI,new_NF> right(op);
+    return left.asRaw()==right.asRaw();
+  }
+
+  template<byte _NI, byte _NF>
+  bool operator!= (const UFixMath<_NI,_NF>& op) const
+  {
+    constexpr byte new_NI = MAX(NI, _NI);
+    constexpr byte new_NF = MAX(NF, _NF);
+    UFixMath<new_NI,new_NF> left(*this);
+    UFixMath<new_NI,new_NF> right(op);
+    return left.asRaw()!=right.asRaw();
+  }
 
 
   // Division. Might actually more misleading than helping. NON Working version below.
@@ -614,6 +652,8 @@ public:
   }
 
 
+  //////// SHIFTS OVERLOADS
+
   /** Right shift. This won't overflow but will not leverage on the bits freed by the shift.
       Better to use .sR<shift>() if possible instead.
       @param op The shift number
@@ -653,6 +693,46 @@ public:
   {
     return SFixMath<NI+op,NF-op>(internal_value,true);
   }
+
+
+  //////// COMPARISON OVERLOADS
+   
+  template<byte _NI, byte _NF>
+  bool operator> (const SFixMath<_NI,_NF>& op) const
+  {
+    constexpr byte new_NI = MAX(NI, _NI);
+    constexpr byte new_NF = MAX(NF, _NF);
+    SFixMath<new_NI,new_NF> left(*this);
+    SFixMath<new_NI,new_NF> right(op);
+    return left.asRaw()>right.asRaw();
+  }
+
+  template<byte _NI, byte _NF>
+  bool operator< (const SFixMath<_NI,_NF>& op) const
+  {
+    return op > *this;
+  }
+
+  template<byte _NI, byte _NF>
+  bool operator== (const SFixMath<_NI,_NF>& op) const
+  {
+    constexpr byte new_NI = MAX(NI, _NI);
+    constexpr byte new_NF = MAX(NF, _NF);
+    SFixMath<new_NI,new_NF> left(*this);
+    SFixMath<new_NI,new_NF> right(op);
+    return left.asRaw()==right.asRaw();
+  }
+
+  template<byte _NI, byte _NF>
+  bool operator!= (const SFixMath<_NI,_NF>& op) const
+  {
+    constexpr byte new_NI = MAX(NI, _NI);
+    constexpr byte new_NF = MAX(NF, _NF);
+    SFixMath<new_NI,new_NF> left(*this);
+    SFixMath<new_NI,new_NF> right(op);
+    return left.asRaw()!=right.asRaw();
+  }
+  
 
   /** Returns the value as floating point number.
       @return The floating point value.
@@ -870,6 +950,77 @@ SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator- (const UFixMath<NI,NF>& op1, const
 {
   return -op2+op1;
 }
+
+// Comparaison between SFixMath and UFixmath
+
+template<byte NI, byte NF, byte _NI, byte _NF>
+bool operator> (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 )
+{
+  constexpr byte new_NI = MAX(NI, _NI);
+  constexpr byte new_NF = MAX(NF, _NF);    
+  SFixMath<new_NI,new_NF> left(op1);
+  SFixMath<new_NI,new_NF> right(op2);
+  return left.asRaw() > right.asRaw();
+}
+
+template<byte NI, byte NF, byte _NI, byte _NF>
+bool operator> (const UFixMath<NI,NF>& op1, const SFixMath<_NI,_NF>& op2 )
+{
+  constexpr byte new_NI = MAX(NI, _NI);
+  constexpr byte new_NF = MAX(NF, _NF);    
+  SFixMath<new_NI,new_NF> left(op1);
+  SFixMath<new_NI,new_NF> right(op2);
+  return left.asRaw() > right.asRaw();
+}
+
+template<byte NI, byte NF, byte _NI, byte _NF>
+bool operator< (const UFixMath<NI,NF>& op1, const SFixMath<_NI,_NF>& op2 )
+{
+  return op2 > op1;
+}
+
+template<byte NI, byte NF, byte _NI, byte _NF>
+bool operator< (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 )
+{
+  return op2 > op1;
+}
+
+
+
+template<byte NI, byte NF, byte _NI, byte _NF>
+bool operator== (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 )
+{
+  constexpr byte new_NI = MAX(NI, _NI);
+  constexpr byte new_NF = MAX(NF, _NF);    
+  SFixMath<new_NI,new_NF> left(op1);
+  SFixMath<new_NI,new_NF> right(op2);
+  return left.asRaw() == right.asRaw();
+}
+
+template<byte NI, byte NF, byte _NI, byte _NF>
+bool operator== (const UFixMath<NI,NF>& op1, const SFixMath<_NI,_NF>& op2 )
+{
+  return op2 == op1;
+}
+
+template<byte NI, byte NF, byte _NI, byte _NF>
+bool operator!= (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 )
+{
+  constexpr byte new_NI = MAX(NI, _NI);
+  constexpr byte new_NF = MAX(NF, _NF);    
+  SFixMath<new_NI,new_NF> left(op1);
+  SFixMath<new_NI,new_NF> right(op2);
+  return left.asRaw() != right.asRaw();
+}
+
+template<byte NI, byte NF, byte _NI, byte _NF>
+bool operator!= (const UFixMath<NI,NF>& op1, const SFixMath<_NI,_NF>& op2 )
+{
+  return op2 != op1;
+}
+
+
+
 
 #undef MAX
 #undef UBITSTOBYTES

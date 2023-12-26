@@ -7,7 +7,16 @@
 
 
 
-static CONSTTABLE_STORAGE(uint32_t) midiToFreq[128] =
+class MidiToFreqPrivate {
+private:
+  friend int mtof(uint8_t);
+  friend int mtof(int);
+  friend Q16n16  Q16n16_mtof(Q16n16);
+  static CONSTTABLE_STORAGE(uint32_t) midiToFreq[128];
+};
+
+
+CONSTTABLE_STORAGE(uint32_t) MidiToFreqPrivate::midiToFreq[128] =
     {
     0, 567670, 601425, 637188, 675077, 715219, 757748, 802806, 850544, 901120,
     954703, 1011473, 1071618, 1135340, 1202851, 1274376, 1350154, 1430438, 1515497,
@@ -59,7 +68,7 @@ A good choice if you're using whole note values, want speed and simplicity, and 
 @return an integer approximation of the midi note's frequency.
 */
 int mtof(uint8_t midi_note){
-	return (FLASH_OR_RAM_READ<const uint32_t>(midiToFreq + midi_note) >> 16);
+  return (FLASH_OR_RAM_READ<const uint32_t>(MidiToFreqPrivate::midiToFreq + midi_note) >> 16);
 };
 
 /** @ingroup midi
@@ -68,7 +77,7 @@ A good choice if you're using whole note values, want speed and simplicity, and 
 @return an integer approximation of the midi note's frequency.
 */
 int mtof(int midi_note){
-	return (FLASH_OR_RAM_READ<const uint32_t>(midiToFreq + midi_note) >> 16);
+	return (FLASH_OR_RAM_READ<const uint32_t>(MidiToFreqPrivate::midiToFreq + midi_note) >> 16);
 };
 
 
@@ -89,8 +98,8 @@ Q16n16  Q16n16_mtof(Q16n16 midival_fractional)
 	Q16n16 diff_fraction;
 	uint8_t index = midival_fractional >> 16;
 	uint16_t fraction = (uint16_t) midival_fractional; // keeps low word
-	Q16n16 freq1 = (Q16n16) FLASH_OR_RAM_READ<const uint32_t>(midiToFreq + index);
-	Q16n16 freq2 = (Q16n16) FLASH_OR_RAM_READ<const uint32_t>((midiToFreq + 1) + index);
+	Q16n16 freq1 = (Q16n16) FLASH_OR_RAM_READ<const uint32_t>(MidiToFreqPrivate::midiToFreq + index);
+	Q16n16 freq2 = (Q16n16) FLASH_OR_RAM_READ<const uint32_t>((MidiToFreqPrivate::midiToFreq + 1) + index);
 	Q16n16 difference = freq2 - freq1;
 	if (difference>=65536)
 	{

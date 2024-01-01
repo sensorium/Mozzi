@@ -20,12 +20,12 @@
  * The following audio modes (see @ref MOZZI_AUDIO_MODE) are currently supported on this hardware:
  *   - MOZZI_OUTPUT_EXTERNAL_TIMED
  *   - MOZZI_OUTPUT_EXTERNAL_CUSTOM
- *   - MOZZI_OUTPUT_PDM
+ *   - MOZZI_OUTPUT_PWM
  *   - MOZZI_OUTPUT_I2S_DAC
  *
- * The default mode is @ref rp2040_pdm .
+ * The default mode is @ref rp2040_pwm .
  *
- * @section rp2040_pdm MOZZI_OUTPUT_PDM
+ * @section rp2040_pdm MOZZI_OUTPUT_PWM
  * Audio output is written to pin 0 (mono) or 0 and 1 (stereo), by default, with 11 bits of ouput resolution.
  * One hardware timer interrupt and one DMA channel are claimed (number not hardcoded), a non-exclusive handler is installed on DMA_IRQ_0.
  *

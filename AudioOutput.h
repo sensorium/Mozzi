@@ -1,5 +1,5 @@
 /** @ingroup conre
-/** @page mozzi_audio_output_architecture Basic architecture of audio generation, buffering, and output in Mozzi
+ * @page mozzi_audio_output_architecture Basic architecture of audio generation, buffering, and output in Mozzi
  *
  * Mozzi provides support for audio ouput on a range of different boards and CPUs. This page is about the following related topics:
  *

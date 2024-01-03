@@ -63,7 +63,7 @@ void setupFastAnalogRead(int8_t speed) {
 
 
 //// BEGIN AUDIO OUTPUT code ///////
-#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXERNAL_TIMED)
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)
 HardwareTimer audio_update_timer(MOZZI_AUDIO_UPDATE_TIMER);
 #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_2PIN_PWM)
 HardwareTimer audio_update_timer(MOZZI_AUDIO_UPDATE_TIMER);
@@ -83,7 +83,7 @@ inline void audioOutput(const AudioOutput f) {
 #endif
 
 static void startAudio() {
-#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_2PIN_PWM, MOZZI_OUTPUT_EXERNAL_TIMED)
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_2PIN_PWM, MOZZI_OUTPUT_EXTERNAL_TIMED)
   audio_update_timer.pause();
   //audio_update_timer.setPeriod(1000000UL / AUDIO_RATE);
   // Manually calculate prescaler and overflow instead of using setPeriod, to avoid rounding errors
@@ -132,7 +132,7 @@ static void startAudio() {
 }
 
 void stopMozzi() {
-#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_2PIN_PWM, MOZZI_OUTPUT_EXERNAL_TIMED)
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_2PIN_PWM, MOZZI_OUTPUT_EXTERNAL_TIMED)
   audio_update_timer.pause();
 #endif
 }

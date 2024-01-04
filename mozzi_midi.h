@@ -15,25 +15,7 @@ private:
 };
 
 
-CONSTTABLE_STORAGE(uint32_t) MidiToFreqPrivate::midiToFreq[128] =
-    {
-    0, 567670, 601425, 637188, 675077, 715219, 757748, 802806, 850544, 901120,
-    954703, 1011473, 1071618, 1135340, 1202851, 1274376, 1350154, 1430438, 1515497,
-    1605613, 1701088, 1802240, 1909406, 2022946, 2143236, 2270680, 2405702, 2548752,
-    2700309, 2860877, 3030994, 3211226, 3402176, 3604479, 3818813, 4045892, 4286472,
-    4541359, 4811404, 5097504, 5400618, 5721756, 6061988, 6422452, 6804352, 7208959,
-    7637627, 8091785, 8572945, 9082719, 9622808, 10195009, 10801235, 11443507,
-    12123974, 12844905, 13608704, 14417917, 15275252, 16183563, 17145888, 18165438,
-    19245616, 20390018, 21602470, 22887014, 24247948, 25689810, 27217408, 28835834,
-    30550514, 32367136, 34291776, 36330876, 38491212, 40780036, 43204940, 45774028,
-    48495912, 51379620, 54434816, 57671668, 61101028, 64734272, 68583552, 72661752,
-    76982424, 81560072, 86409880, 91548056, 96991792, 102759240, 108869632,
-    115343336, 122202056, 129468544, 137167104, 145323504, 153964848, 163120144,
-    172819760, 183096224, 193983648, 205518336, 217739200, 230686576, 244403840,
-    258937008, 274334112, 290647008, 307929696, 326240288, 345639520, 366192448,
-    387967040, 411036672, 435478400, 461373152, 488807680, 517874016, 548668224,
-    581294016, 615859392, 652480576, 691279040, 732384896, 775934592, 822073344
-  };
+
 
 
 
@@ -48,7 +30,7 @@ calculation.
 @param midival a midi note number, 1.0 or greater.  Like the mtof object in Pd, midi values can have fractions.
 @return the frequency represented by the input midi note number..
  */
-float mtof(float midival)
+inline float mtof(float midival)
 {
 	 // http://en.wikipedia.org/wiki/Note
 	 // f = pow(2,(p-69/12) * 440Hz
@@ -66,7 +48,7 @@ A good choice if you're using whole note values, want speed and simplicity, and 
 @param midi_note a midi note number.
 @return an integer approximation of the midi note's frequency.
 */
-int mtof(uint8_t midi_note){
+inline int mtof(uint8_t midi_note){
   return (FLASH_OR_RAM_READ<const uint32_t>(MidiToFreqPrivate::midiToFreq + midi_note) >> 16);
 };
 
@@ -75,7 +57,7 @@ A good choice if you're using whole note values, want speed and simplicity, and 
 @param midi_note a midi note number.
 @return an integer approximation of the midi note's frequency.
 */
-int mtof(int midi_note){
+inline int mtof(int midi_note){
 	return (FLASH_OR_RAM_READ<const uint32_t>(MidiToFreqPrivate::midiToFreq + midi_note) >> 16);
 };
 
@@ -92,7 +74,7 @@ for non-whole midi values.
 @return the frequency represented by the input midi note number, in Q16n16
 fixed point fractional integer format, where the lower word is a fractional value.
 */
-Q16n16  Q16n16_mtof(Q16n16 midival_fractional)
+inline Q16n16  Q16n16_mtof(Q16n16 midival_fractional)
 {
 	Q16n16 diff_fraction;
 	uint8_t index = midival_fractional >> 16;

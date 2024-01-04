@@ -158,8 +158,8 @@ void stopMozzi() {
 ////// END audio output code //////
 
 //// BEGIN Random seeding ////////
-void autoRandomSeeds(uint32_t *x, uint32_t *y, uint32_t *z) {
-  // Add here code to initialize the values pointed to by x, y, and z to some random values
+void MozziRandPrivate::autoSeed() {
+  // Add here code to initialize the values of MozziRandPrivate::x, MozziRandPrivate::y, and MozziRandPrivate::z to some random values
   // This doesn't need to be crypographically safe. If nothing better is available, e.g. try reading an internal temperature sensor
   // in order to get some noise. It also doesn't have to be fast.
   // It *should* however ensure that rand() sequences will differ across reboots, after randSeed() has been called.

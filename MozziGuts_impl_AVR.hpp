@@ -409,15 +409,15 @@ static long longRandom()
 }
 #endif
 
-void autoRandomSeeds(uint32_t *x, uint32_t *y, uint32_t *z) {
+void MozziRandPrivate::autoSeed() {
   ADCSRA &= ~ (1 << ADIE); // adc Disable Interrupt, re-enable at end
   // this attempt at remembering analog_reference stops it working
   // maybe needs a delay after changing analog reference in longRandom (Arduino reference suggests this)
   // because the analog reads return 0
   //uint8_t analog_reference_orig = ADMUX&192; // analog_reference is high 2 bits of ADMUX, store this because longRandom sets it to internal
-  *x = longRandom();
-  *y = longRandom();
-  *z = longRandom();
+  x = longRandom();
+  y = longRandom();
+  z = longRandom();
   //analogReference(analog_reference_orig); // change back to original
   ADCSRA |= (1 << ADIE); // adc re-Enable Interrupt
 }

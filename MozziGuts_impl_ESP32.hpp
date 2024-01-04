@@ -162,10 +162,10 @@ void stopMozzi() {
 //// END AUDIO OUTPUT code ///////
 
 //// BEGIN Random seeding ////////
-void autoRandomSeeds(uint32_t *x, uint32_t *y, uint32_t *z) {
-  *x = esp_random();
-  *y = esp_random();
-  *z = esp_random();
+void MozziRandPrivate::autoSeed() {
+  x = esp_random();
+  y = esp_random();
+  z = esp_random();
 }
 //// END Random seeding ////////
 

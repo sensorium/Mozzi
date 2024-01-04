@@ -14,7 +14,7 @@
 #include "CircularBuffer.h"
 #include "MozziGuts.h"
 #include "mozzi_analog.h"
-//#include "mozzi_utils.h"
+#include "internal/mozzi_rand_p.h"
 #include "AudioOutput.h"
 
 // Forward declarations of functions to be provided by platform specific implementations
@@ -273,6 +273,10 @@ void startMozzi(int control_rate_hz) {
   update_control_timeout = MOZZI_AUDIO_RATE / control_rate_hz;
   startAudio();
 }
+
+uint32_t MozziRandPrivate::x=132456789;
+uint32_t MozziRandPrivate::y=362436069;
+uint32_t MozziRandPrivate::z=521288629;
 
 ////// END initialization ///////
 

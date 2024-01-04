@@ -98,12 +98,25 @@ Ranged random number generator, faster than Arduino's built-in random function, 
 @param minval the minimum signed int value of the range to be chosen from.  Minval will be the minimum value possibly returned by the function.
 @param maxval the maximum signed int value of the range to be chosen from.  Maxval-1 will be the largest value possibly returned by the function.
 @return a random int between minval and maxval-1 inclusive.
+
+@note The returned value is always in the 16 bit range, even on platforms where int is wider. If you need 32 bits, call xorshift96(), directly.
 */
-inline int16_t rand(int16_t minval, int16_t maxval)
+inline int rand(int minval, int maxval)
 {
-  return (int16_t) ((((xorshift96() & 0xFFFF) * (maxval-minval))>>16) + minval);
+  return (int) ((((xorshift96() & 0xFFFF) * (maxval-minval))>>16) + minval);
 }
 
+/** @ingroup random
+Ranged random number generator, faster than Arduino's built-in random function, which is too slow for generating at audio rate with Mozzi.
+@param maxval the maximum signed int value of the range to be chosen from.  Maxval-1 will be the largest value possibly returned by the function.
+@return a random int between 0 and maxval-1 inclusive.
+
+@note The returned value is always in the 16 bit range, even on platforms where int is wider. If you need 32 bits, call xorshift96(), directly.
+*/
+inline int rand(int maxval)
+{
+  return (int) (((xorshift96() & 0xFFFF) * maxval)>>16);
+}
 
 /** @ingroup random
 Ranged random number generator, faster than Arduino's built-in random function, which is too slow for generating at audio rate with Mozzi.
@@ -111,33 +124,22 @@ Ranged random number generator, faster than Arduino's built-in random function, 
 @param maxval the maximum unsigned int value of the range to be chosen from.  Maxval-1 will be the largest value possibly returned by the function.
 @return a random unsigned int between minval and maxval-1 inclusive.
 */
-inline uint16_t rand(uint16_t minval, uint16_t maxval)
+inline unsigned int rand(unsigned int minval, unsigned int maxval)
 {
-  return (uint16_t) ((((xorshift96() & 0xFFFF) * (maxval-minval))>>16) + minval);
+  return (unsigned int) ((((xorshift96() & 0xFFFF) * (maxval-minval))>>16) + minval);
 }
-
-
-/** @ingroup random
-Ranged random number generator, faster than Arduino's built-in random function, which is too slow for generating at audio rate with Mozzi.
-@param maxval the maximum signed int value of the range to be chosen from.  Maxval-1 will be the largest value possibly returned by the function.
-@return a random int between 0 and maxval-1 inclusive.
-*/
-inline int16_t rand(int16_t maxval)
-{
-  return (int16_t) (((xorshift96() & 0xFFFF) * maxval)>>16);
-}
-
 
 /** @ingroup random
 Ranged random number generator, faster than Arduino's built-in random function, which is too slow for generating at audio rate with Mozzi.
 @param maxval the maximum unsigned int value of the range to be chosen from.  Maxval-1 will be the largest value possibly returned by the function.
 @return a random unsigned int between 0 and maxval-1 inclusive.
-*/
-inline uint16_t rand(uint16_t maxval)
-{
-  return (uint16_t) (((xorshift96() & 0xFFFF) * maxval)>>16);
-}
 
+@note The returned value is always in the 16 bit range, even on platforms where int is wider. If you need 32 bits, call xorshift96(), directly.
+*/
+inline unsigned int rand(unsigned int maxval)
+{
+  return (unsigned int) (((xorshift96() & 0xFFFF) * maxval)>>16);
+}
 
 /** @ingroup random
 Generates a random number in the range for midi notes.

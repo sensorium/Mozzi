@@ -14,6 +14,8 @@
 #  error "Wrong implementation included for this platform"
 #endif
 
+namespace MozziPrivate {
+
 ////// BEGIN analog input code ////////
 #if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
 #error not yet implemented
@@ -34,19 +36,21 @@ void setupFastAnalogRead(int8_t speed) {
 #endif
 ////// END analog input code ////////
 
-
-
 //// BEGIN AUDIO OUTPUT code ///////
 #define LOOP_YIELD yield();
 
+} // namespace MozziPrivate
 #include <uart.h>
 #include <I2S.h>
+namespace MozziPrivate {
 uint16_t output_buffer_size = 0;
 
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S, MOZZI_OUTPUT_PDM_VIA_SERIAL, MOZZI_OUTPUT_I2S_DAC) // i.e. not external
 
 #  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S)
+} // namespace MozziPrivate
 #    include <i2s.h>
+namespace MozziPrivate {
 inline bool canBufferAudioOutput() {
   return (i2s_available() >= MOZZI_PDM_RESOLUTION);
 }
@@ -56,7 +60,9 @@ inline void audioOutput(const AudioOutput f) {
   }
 }
 #  elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC)
+} // namespace MozziPrivate
 #    include <i2s.h>
+namespace MozziPrivate {
 inline bool canBufferAudioOutput() {
   return (i2s_available() >= MOZZI_PDM_RESOLUTION);
 }
@@ -138,7 +144,9 @@ void stopMozzi() {
 //// END AUDIO OUTPUT code ///////
 
 //// BEGIN Random seeding ////////
+} //namespace MozziPrivate
 #include <esp8266_peri.h>
+namespace MozziPrivate {
 void MozziRandPrivate::autoSeed() {
   x = RANDOM_REG32;
   // TODO: The XORs may not be needed, but for lack of documentation (that I could find), let's assume RANDOM_REG32
@@ -147,3 +155,4 @@ void MozziRandPrivate::autoSeed() {
   z = z ^ RANDOM_REG32;
 }
 //// END Random seeding ////////
+} // namespace MozziPrivate

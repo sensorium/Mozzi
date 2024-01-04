@@ -12,6 +12,7 @@
 
 #include "HardwareTimer.h"
 
+namespace MozziPrivate {
 ////// BEGIN analog input code ////////
 
 #if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
@@ -36,7 +37,9 @@ int16_t previously_sampled_pin = -1;
 bool conversion_running = false;
 ADC_HandleTypeDef AdcHandle = {};
 
+} // namespace MozziPrivate
 #include "MozziGuts_impl_STM32duino_analog.hpp"
+namespace MozziPrivate {
 
 void adcStartConversion(int8_t pin) {
   if (pin != previously_sampled_pin) {
@@ -177,3 +180,5 @@ void MozziRandPrivate::autoSeed() {
 #warning Automatic random seedings is not implemented on this platform
 }
 //// END Random seeding ////////
+
+} // namespace MozziPrivate

@@ -12,13 +12,7 @@
 #ifndef MOZZIGUTS_H_
 #define MOZZIGUTS_H_
 
-//#define F_CPU 8000000 // testing
-
-#if ARDUINO >= 100
  #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
 
 #include "hardware_defines.h"
 #include "mozzi_config.h"
@@ -32,10 +26,6 @@
 
 
 #include "internal/config_checks_generic.h"
-
-#if (STEREO_HACK == true)
-extern int audio_out_1, audio_out_2;
-#endif
 
 #include "AudioOutput.h"
 
@@ -182,5 +172,9 @@ is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when 
 @todo  incorporate mozziMicros() in a more accurate EventDelay()?
 */
 unsigned long mozziMicros();
+
+#ifndef MOZZI_HEADER_ONLY
+#include "MozziGuts.hpp"
+#endif
 
 #endif /* MOZZIGUTS_H_ */

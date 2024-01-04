@@ -37,6 +37,17 @@
 #endif
 // Add platform specific includes and declarations, here
 
+//#include <my_hardware_header.h>
+
+// In order to allow simple yet efficient user configuration, the entire contents of this file are compiled in the same translation unit
+// as (the main file of) the user sketch. To avoid name clashes, we encapsulate everyghing in a namespace.
+// For the most part, this namescape can just extend from the start of the file to the end (as shown, here), and you will not have to
+// worry about it. However, there may be a few situations, where you have to "leave" the MozziPrivate namespace. This includes:
+// - When you include a further (hardware-dependent library). Consider gathering all includes at the top of this file, instead.
+// - When you provide definitions for special names, importantly for ISR-functions. If these would be placed in the namespace, the linker would not
+//   recognize them as the definition of the intended ISR-vector. See MozziGuts_impl_AVR.hpp for examples.
+
+namespace MozziPrivate {
 
 ////// BEGIN analog input code ////////
 
@@ -165,6 +176,8 @@ void MozziRandPrivate::autoSeed() {
   // It *should* however ensure that rand() sequences will differ across reboots, after randSeed() has been called.
   // x, y, and z are already initialized to non-zero, when this function is called.
   // It's ok to leave this unimplemented, initially.
-#warning Automatic random seedings is not implemented on this platform
+#warning Automatic random seeding is not implemented on this platform
 }
 //// END Random seeding ////////
+
+} // namespace MozziPrivate

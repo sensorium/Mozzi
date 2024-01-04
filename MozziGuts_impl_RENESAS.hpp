@@ -16,6 +16,7 @@
 
 #include <FspTimer.h>
 
+namespace MozziPrivate {
 
 ////// BEGIN analog input code ////////
 
@@ -31,7 +32,11 @@ void adc_callback(adc_callback_args_t *p_args) {
   advanceADCStep();
 }
 
+} // namespace MozziPrivate
+
 #include "MozziGuts_impl_RENESAS_ADC.hpp"
+
+namespace MozziPrivate {
 
 #define getADCReading() readADC(r4_pin)
 
@@ -83,7 +88,9 @@ FspTimer timer;
 
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
 CircularBuffer<uint16_t> output_buffer;
+} // namespace MozziPrivate
 #include "MozziGuts_impl_RENESAS_analog.hpp"
+namespace MozziPrivate {
 #endif
 
 
@@ -174,3 +181,5 @@ void MozziRandPrivate::autoSeed() {
 #warning Automatic random seedings is not implemented on this platform
 }
 //// END Random seeding ////////
+
+} // namespace MozziPrivate

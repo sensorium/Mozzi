@@ -14,6 +14,7 @@
 #  error "Wrong implementation included for this platform"
 #endif
 
+namespace MozziPrivate {
 ////// BEGIN analog input code ////////
 #if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
 #error not yet implemented
@@ -36,11 +37,11 @@ void setupFastAnalogRead(int8_t speed) {
 ////// END analog input code ////////
 
 
-
-
 //// BEGIN AUDIO OUTPUT code ///////
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC) || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC) || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S)
+} // namespace MozziPrivate
 #  include <driver/i2s.h>   // for I2S-based output modes, including - technically - internal DAC
+namespace MozziPrivate {
 const i2s_port_t i2s_num = MOZZI_I2S_PORT;
 
 // On ESP32 we cannot test wether the DMA buffer has room. Instead, we have to use a one-sample mini buffer. In each iteration we
@@ -93,7 +94,11 @@ inline void audioOutput(const AudioOutput f) {
 #endif
 
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)
+
+} // namespace MozziPrivate
 #  include <driver/timer.h>
+namespace MozziPrivate {
+
 void CACHED_FUNCTION_ATTR timer0_audio_output_isr(void *) {
   TIMERG0.int_clr_timers.t0 = 1;
   TIMERG0.hw_timer[0].config.alarm_en = 1;
@@ -170,3 +175,5 @@ void MozziRandPrivate::autoSeed() {
 //// END Random seeding ////////
 
 #undef ESP_SAMPLE_SIZE    // only used inside this file
+
+} // namespace MozziPrivate

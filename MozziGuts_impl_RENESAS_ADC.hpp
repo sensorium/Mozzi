@@ -8,6 +8,7 @@ It contains functions to interact with the ADC in order to implement async ADC r
 //#include <analog.cpp>
 #include <IRQManager.h>
 
+namespace MozziPrivate {
 
 /** VERBATIM from Arduino's analog.cpp
  */
@@ -119,3 +120,5 @@ uint16_t readADC(int pin)
   R_ADC_Read(&(_adc->ctrl), (adc_channel_t)GET_CHANNEL(cfg_adc), &result);
   return result;
 }
+
+} // namespace MozziPrivate

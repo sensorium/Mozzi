@@ -11,7 +11,7 @@ Based on Marsaglia, George. (2003). Xorshift RNGs. http://www.jstatsoft.org/v08/
 @return a random 32 bit integer.
 @todo check timing of xorshift96(), rand() and other PRNG candidates.
  */
-inline uint32_t xorshift96() { return MozziRandPrivate::xorshift96(); };
+inline uint32_t xorshift96() { return MozziPrivate::MozziRandPrivate::xorshift96(); };
 
 /** @ingroup random
 Initialises Mozzi's (pseudo)random number generator xorshift96(), which is used
@@ -22,9 +22,7 @@ for randomSeed(). randSeed is the same as xorshift96Seed(), but easier to
 remember. 
 @param seed a number to use as a seed.
 */
-inline void randSeed(uint32_t seed) {
-  MozziRandPrivate::x=seed;
-}
+inline void randSeed(uint32_t seed) { MozziPrivate::randSeed(seed); };
 
 /** @ingroup random
 Initialises Mozzi's (pseudo)random number generator xorshift96(), which is used
@@ -42,7 +40,7 @@ by Rob Tillaart.
       You will often get better results by calling analogRead() - @em not mozziAnalogRead(0), in this case! -
       on one or two floating (non-connected) analog pins.
 */
-inline void randSeed() { MozziRandPrivate::autoSeed(); };
+inline void randSeed() { MozziPrivate::MozziRandPrivate::autoSeed(); };
 
 /** @ingroup random
 Initialises Mozzi's (pseudo)random number generator xorshift96() with a chosen seed number.

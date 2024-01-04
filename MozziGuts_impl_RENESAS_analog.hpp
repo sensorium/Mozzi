@@ -4,11 +4,13 @@ for Renesas board from Arduino.
 It contains functions to create and start the on-board DAC (and associate timer).
 */
 
-FspTimer timer_dac;
 #include <dac.h>
 #include <FspTimer.h>
 #include <r_dtc.h>
 
+namespace MozziPrivate {
+
+FspTimer timer_dac;
 
 volatile uint32_t pin;
 uint8_t dac_bits;
@@ -86,3 +88,4 @@ void dac_init() {
   }
 }
 
+}

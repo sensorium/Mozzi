@@ -24,44 +24,6 @@
 #warning "Using AUDIO_INPUT_PIN defined in mozzi_config.h for audio input."
 #endif
 
-// hack for Teensy 2 (ATmega32U4), which has "adc_mapping" instead of "analog_pin_to_channel_PGM"
-#if defined(__AVR_ATmega32U4__) && defined(CORE_TEENSY) 
-//pasted from hardware/arduino/variants/leonardo/pins_arduino.h, doesn't work as of mozzi 0.01.2a
-//	__AVR_ATmega32U4__ has an unusual mapping of pins to channels
-//extern const uint8_t PROGMEM analog_pin_to_channel_PGM[];
-//#define analogPinToChannel(P)  ( pgm_read_byte( analog_pin_to_channel_PGM + (P) ) )
-
-// look at Arduino.app/Contents/Resources/Java/hardware/teensy/cores/teensy/pins_teensy.c - analogRead
-// adc_mapping is already declared in pins_teensy.c, but it's static there so we can't access it
-static const uint8_t PROGMEM adc_mapping[] = {
-// 0, 1, 4, 5, 6, 7, 13, 12, 11, 10, 9, 8
-   0, 1, 4, 5, 6, 7, 13, 12, 11, 10, 9, 8, 10, 11, 12, 13, 7, 6, 5, 4, 1, 0, 8 
-};
-#define analogPinToChannel(P)  ( pgm_read_byte( adc_mapping + (P) ) )
-#endif
-
-
-// include this although already in teensy 3 analog.c, because it is static there
-#if defined(__MK20DX128__)
-static const uint8_t channel2sc1a[] = {
-	5, 14, 8, 9, 13, 12, 6, 7, 15, 4,
-	0, 19, 3, 21, 26, 22, 23
-};
-#elif defined(__MK20DX256__)
-static const uint8_t channel2sc1a[] = {
-	5, 14, 8, 9, 13, 12, 6, 7, 15, 4,
-	0, 19, 3, 19+128, 26, 18+128, 23,
-	5+192, 5+128, 4+128, 6+128, 7+128, 4+192
-// A15  26   E1   ADC1_SE5a  5+64
-// A16  27   C9   ADC1_SE5b  5
-// A17  28   C8   ADC1_SE4b  4
-// A18  29   C10  ADC1_SE6b  6
-// A19  30   C11  ADC1_SE7b  7
-// A20  31   E0   ADC1_SE4a  4+64
-};
-#endif
-
-
 // for setupFastAnalogRead()
 enum ANALOG_READ_SPEED {FAST_ADC,FASTER_ADC,FASTEST_ADC};
 
@@ -124,6 +86,8 @@ Digital Input Disable bits.
 inline void disconnectDigitalIn(uint8_t channel_num) {
 #if IS_AVR()
 	DIDR0 |= 1<<channel_num;
+#else
+	(void) channel_num; // unused, suppress warning
 #endif
 }
 
@@ -135,6 +99,8 @@ been set for analog input with disconnectDigitalIn().
 inline void reconnectDigitalIn(uint8_t channel_num) {
 #if IS_AVR()
 	DIDR0 &= ~(1<<channel_num);
+#else
+	(void) channel_num; // unused, suppress warning
 #endif
 }
 

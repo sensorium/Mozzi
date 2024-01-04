@@ -31,8 +31,8 @@ general:
  Other removed stuff:
  - pauseMozzi() - was still declared but not defined -> not usable, anyway
  - unpauseMozzi() - was still declared but not defined -> not usable, anyway
-
-
+ - Teensy3/4: channel2sc1a -> thought to be unused, removed
+ - Teensy2: adc_mapping -> hidden away; use adcPinToChannelNum(), as on all other platforms, instead
 
 Documentation bits that still need to find a new home (many other bits were moved around, many, many duplicates merged into a common place, and seom obsoleted bits discarded):
 

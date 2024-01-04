@@ -14,6 +14,8 @@
 #  error "Wrong implementation included for this platform"
 #endif
 
+namespace MozziPrivate {
+
 ////// BEGIN analog input code ////////
 #if MOZZI_IS(MOZZI_ANALOG_READ, NOZZI_ANALOG_READ_STANDARD)
 #error not yet implemented
@@ -93,18 +95,23 @@ static void tcConfigure(uint32_t sampleRate) {
     ;
 }
 
+} // namespace MozziPrivate
+
 void TC5_Handler(void) __attribute__((weak, alias("samd21AudioOutput")));
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 void samd21AudioOutput() {
-  defaultAudioOutput();
+  MozziPrivate::defaultAudioOutput();
   TC5->COUNT16.INTFLAG.bit.MC0 = 1;
 }
 #ifdef __cplusplus
 }
 #endif
+
+namespace MozziPrivate {
+
 #endif // MOZZI_AUDIO_MODE
 
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
@@ -144,3 +151,5 @@ void MozziRandPrivate::autoSeed() {
 #warning Automatic random seedings is not implemented on this platform
 }
 //// END Random seeding ////////
+
+} // namespace MozziPrivate

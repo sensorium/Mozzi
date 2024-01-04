@@ -17,6 +17,8 @@
 
 #include <hardware/dma.h>
 
+namespace MozziPrivate {
+
 ////// BEGIN analog input code ////////
 
 #if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
@@ -28,7 +30,11 @@
  *    We'll abuse that to connect a callback to the DMA channel, instead.
 */
 
+} // namespace MozziPrivate
+
 #include <hardware/adc.h>
+
+namespace MozziPrivate {
 
 #define getADCReading() rp2040_adc_result
 #define channelNumToIndex(channel) channel
@@ -69,7 +75,7 @@ void rp2040_adc_queue_handler();
 static uint16_t rp2040_adc_result = 0;
 int rp2040_adc_dma_chan;
 void setupMozziADC(int8_t speed) {
-  for (int i = 0;  i < NUM_ANALOG_INPUTS; ++i) {
+  for (int i = 0; i < (int) NUM_ANALOG_INPUTS; ++i) {
     adc_gpio_init(i); 
   }
 
@@ -116,6 +122,7 @@ void rp2040_adc_queue_handler() {
   dma_channel_set_trans_count(rp2040_adc_dma_chan, 1, true);  // set up for another read
   advanceADCStep();
 }
+
 #endif // MOZZI_ANALOG_READ
 
 ////// END analog input code ////////
@@ -137,7 +144,9 @@ inline void audioOutput(const AudioOutput f) {
 }
 #  endif  // MOZZI_OUTPUT_PWM
 
+} // namespace MozziPrivate
 #include <pico/time.h>
+namespace MozziPrivate {
 /** Implementation notes:
  *  - For the time being this port uses a very crude approach to audio output: PWM updated by a hardware timer running at AUDIO_RATE
  *  - Hardware timer isn't fixed, but rather we claim the first unclaimed one
@@ -159,7 +168,9 @@ void audioOutputCallback(uint) {
 }
  
 #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC)
+} // namespace MozziPrivate
 #include <I2S.h>
+namespace MozziPrivate {
 I2S i2s(OUTPUT);
 
 inline bool canBufferAudioOutput() {
@@ -271,6 +282,8 @@ void MozziRandPrivate::autoSeed() {
 #warning Automatic random seedings is not implemented on this platform
 }
 //// END Random seeding ////////
+
+} // namespace MozziPrivate
 
 #undef MOZZI_RP2040_BUFFERS
 #undef MOZZI_RP2040_BUFFER_SIZE

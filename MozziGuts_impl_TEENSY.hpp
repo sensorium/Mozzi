@@ -19,10 +19,13 @@
     "Mozzi has been tested with a cpu clock speed of 16MHz on Arduino and 48MHz on Teensy 3!  Results may vary with other speeds."
 #endif
 
+namespace MozziPrivate {
 ////// BEGIN analog input code ////////
 #if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
 // required from http://github.com/pedvide/ADC for Teensy 3.*
+} //namespace MozziPrivate
 #include <ADC.h>
+namespace MozziPrivate {
 
 ADC *adc; // adc object
 uint8_t teensy_pin;   // TODO: this is actually a "channel" according to our terminology, but "channel" and "pin" are equal on this platform
@@ -42,14 +45,16 @@ void setupFastAnalogRead(int8_t speed) {
 #endif
 }
 
+} // namespace MozziPrivate
 void adc0_isr(void)
 {
-  advanceADCStep();
+  MozziPrivate::advanceADCStep();
 }
+namespace MozziPrivate {
 
 void setupMozziADC(int8_t speed) {
   adc = new ADC();
-  adc->adc0->enableInterrupts(adc0_isr);
+  adc->adc0->enableInterrupts(adc0_isr);  // TODO: is this even correct? Does the function take a parameter? And is adc0_isr a predefined name, or are we free to move this to MozziPrivate?
 #ifdef ADC_DUAL_ADCS
   adc->adc1->enableInterrupts(adc0_isr);
 #endif
@@ -75,7 +80,9 @@ static void startSecondADCReadOnCurrentChannel() {
 
 //// BEGIN AUDIO OUTPUT code ///////
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_INTERNAL_DAC, MOZZI_OUTPUT_EXTERNAL_TIMED)
+} // namespace MozziPrivate
 #include "IntervalTimer.h"
+namespace MozziPrivate {
 IntervalTimer timer1;
 #endif
 
@@ -118,3 +125,5 @@ void MozziRandPrivate::autoSeed() {
 #warning Automatic random seedings is not implemented on this platform
 }
 //// END Random seeding ////////
+
+} // namespace MozziPrivate

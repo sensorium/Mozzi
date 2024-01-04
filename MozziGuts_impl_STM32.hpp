@@ -12,10 +12,15 @@
 
 #include "HardwareTimer.h"
 
+namespace MozziPrivate {
+
 ////// BEGIN analog input code ////////
 #if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
 
+} // namespace MozziPrivate
 //#include <STM32ADC.h>  // Disabled, here. See hardware_defines.h
+namespace MozziPrivate {
+
 STM32ADC adc(ADC1);
 uint8_t stm32_current_adc_pin;   // TODO: this is actually a "channel" according to our terminology, but "channel" and "pin" are equal on this platform
 #define getADCReading() adc.getData()
@@ -159,3 +164,5 @@ void MozziRandPrivate::autoSeed() {
   z=z^conv.ci;
 }
 //// END Random seeding ////////
+
+} // namespace MozziPrivate

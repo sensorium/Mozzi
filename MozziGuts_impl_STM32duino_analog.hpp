@@ -1,3 +1,4 @@
+namespace MozziPrivate {
 // NOTE: The contents of this file are copied mostly verbatim from Arduino_Core_STM32, (c) STMicroelectronics, BSD 3-clause license.
 static PinName g_current_pin = NC;
 
@@ -310,3 +311,5 @@ bool adc_setup_read(PinName pin, uint32_t resolution) {
 
   return HAL_OK;
 }
+
+} // namespace MozziPrivate

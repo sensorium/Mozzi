@@ -10,8 +10,8 @@
  *
  */
 
-#include "FrequencyTimer2.h"
-#include "TimerOne.h"
+#include "utility/FrequencyTimer2.h"
+#include "utility/TimerOne.h"
 
 #if (F_CPU != 16000000)
 #warning                                                                       \
@@ -22,6 +22,12 @@
 #if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
 extern uint8_t analog_reference;
 
+ISR(ADC_vect, ISR_BLOCK)
+{
+  MozziPrivate::advanceADCStep();
+}
+
+namespace MozziPrivate {
 #define getADCReading() ADC  /* officially (ADCL | (ADCH << 8)) but the compiler works it out */
 #define channelNumToIndex(channel) channel
 uint8_t adcPinToChannelNum(uint8_t pin) {
@@ -29,7 +35,15 @@ uint8_t adcPinToChannelNum(uint8_t pin) {
 	if (pin >= 54) pin -= 54; // allow for channel or pin numbers
 #elif defined(__AVR_ATmega32U4__)
 	if (pin >= 18) pin -= 18; // allow for channel or pin numbers
-	pin = analogPinToChannel(pin); // moved from extra #if which was below in Arduino code, and redefined in mozzi_analog.h, with notes
+#  if defined(CORE_TEENSY) // special handling for Teensy2, which does not (did not?) have an analogPinToChannel() define (see https://github.com/sensorium/Mozzi/issues/10)
+	static const uint8_t PROGMEM adc_mapping[] = {
+	// 0, 1, 4, 5, 6, 7, 13, 12, 11, 10, 9, 8
+	0, 1, 4, 5, 6, 7, 13, 12, 11, 10, 9, 8, 10, 11, 12, 13, 7, 6, 5, 4, 1, 0, 8
+	};
+	pin = pgm_read_byte(adc_mapping + (P));
+#  else
+	pin = analogPinToChannel(pin);
+#  endif
 #elif defined(__AVR_ATmega1284__)
 	if (pin >= 24) pin -= 24; // allow for channel or pin numbers
 #else
@@ -74,11 +88,6 @@ void adcEnableInterrupt(){
 }
 */
 
-ISR(ADC_vect, ISR_BLOCK)
-{
-  advanceADCStep();
-}
-
 void setupMozziADC(int8_t speed) {
 	ADCSRA |= (1 << ADIE); // adc Enable Interrupt
 	adcDisconnectAllDigitalIns();
@@ -100,13 +109,14 @@ void setupFastAnalogRead(int8_t speed) {
 		ADCSRA &= ~(1 << ADPS0);
 	}
 }
+}
 
 #endif
 
 ////// END analog input code ////////
 
 
-
+namespace MozziPrivate {
 //// BEGIN AUDIO OUTPUT code ///////
 /*
 ATmega328 technical manual, Section 12.7.4:
@@ -181,9 +191,13 @@ static void startAudio() {
                        // Timer1.attachInterrupt())
 }
 
+} // namespace MozziPrivate
+
 ISR(TIMER1_OVF_vect, ISR_BLOCK) {
   defaultAudioOutput();
 }
+
+namespace MozziPrivate {
 #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
 inline void audioOutput(const AudioOutput f)
 {
@@ -221,9 +235,10 @@ static void startAudio() {
                        // Timer1.attachInterrupt())
 }
 
+} // namespace MozziPrivate
+
 /* Interrupt service routine moves sound data from the output buffer to the
 Arduino output register, running at AUDIO_RATE. */
-
 ISR(TIMER1_OVF_vect, ISR_BLOCK) {
 #  if (MOZZI_AUDIO_RATE < MOZZI_PWM_RATE) // only update every second ISR, if lower audio rate
   static_assert(2l*MOZZI_AUDIO_RATE == MOZZI_PWM_RATE, "audio rate must the same, or exactly half of the pwm rate!");
@@ -232,9 +247,10 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK) {
   if (alternate) return;
 #  endif
 
-  defaultAudioOutput();
+ MozziPrivate::defaultAudioOutput();
 }
 
+namespace MozziPrivate {
 #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_2PIN_PWM)
 inline void audioOutput(const AudioOutput f) {
   // read about dual pwm at
@@ -314,6 +330,8 @@ static void setupTimer2() {
   FrequencyTimer2::enable();
 }
 
+} // namespace MozziPrivate
+
 #if defined(TIMER2_COMPA_vect)
 ISR(TIMER2_COMPA_vect)
 #elif defined(TIMER2_COMP_vect)
@@ -326,10 +344,12 @@ ISR(TIMER4_COMPA_vect)
 void dummy_function(void)
 #endif
 {
-  defaultAudioOutput();
+  MozziPrivate::defaultAudioOutput();
 }
 
 //  end of HIFI
+
+namespace MozziPrivate {
 
 #endif
 
@@ -423,3 +443,4 @@ void MozziRandPrivate::autoSeed() {
 }
 
 //// END Random seeding ////////
+}

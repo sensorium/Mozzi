@@ -16,12 +16,16 @@
 
 #define CHUNKSIZE 64
 
+namespace MozziPrivate {
+
 ////// BEGIN analog input code ////////
 
 #if MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_STANDARD)
 #define MOZZI__LEGACY_AUDIO_INPUT_IMPL 0
 
+} // namespace MozziPrivate
 #include <Arduino_AdvancedAnalog.h>
+namespace MozziPrivate {
 
 AdvancedADC adc(MOZZI_AUDIO_INPUT_PIN);
 Sample inbuf[CHUNKSIZE];
@@ -107,7 +111,9 @@ void setupMozziADC(int8_t speed) {
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)
 
 #define US_PER_AUDIO_TICK (1000000L / MOZZI_AUDIO_RATE)
+} // namespace MozziPrivate
 #include <mbed.h>
+namespace MozziPrivate {
 mbed::Ticker audio_output_timer;
 
 volatile bool audio_output_requested = false;
@@ -128,7 +134,9 @@ void stopMozzi() {
 
 #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
 
+} // namespace MozziPrivate
 #include <Arduino_AdvancedAnalog.h>
+namespace MozziPrivate {
 
 AdvancedDAC dac1(MOZZI_AUDIO_PIN_1);
 Sample buf1[CHUNKSIZE];
@@ -192,7 +200,9 @@ void stopMozzi() {
 
 #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_SERIAL)
 
+} // namespace MozziPrivate
 #include <mbed.h>
+namespace MozziPrivate {
 
 mbed::BufferedSerial serial_out1(digitalPinToPinName(MOZZI_SERIAL_PIN_TX), digitalPinToPinName(MOZZI_SERIAL_PIN_RX));
 uint8_t buf[MOZZI_PDM_RESOLUTION*4];
@@ -226,6 +236,8 @@ void MozziRandPrivate::autoSeed() {
 #warning Automatic random seedings is not implemented on this platform
 }
 //// END Random seeding ////////
+
+} // namespace MozziPrivate
 
 #undef CHUNKSIZE
 #undef US_PER_AUDIO_TICK

@@ -17,6 +17,8 @@
 #include "internal/mozzi_rand_p.h"
 #include "AudioOutput.h"
 
+namespace MozziPrivate {
+
 // Forward declarations of functions to be provided by platform specific implementations
 #if (!BYPASS_MOZZI_OUTPUT_BUFFER)
 static void CACHED_FUNCTION_ATTR defaultAudioOutput();
@@ -26,6 +28,7 @@ static void advanceADCStep();                       // to be provided by platfor
 static void startSecondADCReadOnCurrentChannel();   // to be provided by platform implementation
 static uint8_t adc_count = 0;                       // needed below
 #endif
+}
 
 // Include the appropriate implementation
 #if IS_AVR()
@@ -63,6 +66,7 @@ static uint8_t adc_count = 0;                       // needed below
 #  endif
 #endif
 
+namespace MozziPrivate {
 ////// BEGIN Output buffering /////
 #if BYPASS_MOZZI_OUTPUT_BUFFER == true
 uint64_t samples_written_to_buffer = 0;
@@ -266,7 +270,7 @@ unsigned long mozziMicros() { return audioTicks() * MICROS_PER_AUDIO_TICK; }
 ////// BEGIN initialization ///////
 void startMozzi(int control_rate_hz) {
 #if !MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE)
-  setupMozziADC(); // you can use setupFastAnalogRead() with FASTER_ADC or FASTEST_ADC
+  MozziPrivate::setupMozziADC(FAST_ADC); // you can use setupFastAnalogRead() with FASTER_ADC or FASTEST_ADC
                    // in setup() if desired (not for Teensy 3.* )
 #endif
   // delay(200); // so AutoRange doesn't read 0 to start with
@@ -279,6 +283,7 @@ uint32_t MozziRandPrivate::y=362436069;
 uint32_t MozziRandPrivate::z=521288629;
 
 ////// END initialization ///////
+}
 
 // reduce Macro leakage
 #undef LOOP_YIELD
@@ -286,3 +291,19 @@ uint32_t MozziRandPrivate::z=521288629;
 #undef AUDIO_HOOK_HOOK
 #undef AUDIOTICK_ADJUSTMENT
 #undef MOZZI__LEGACY_AUDIO_INPUT_IMPL
+
+// "export" publically accessible functions defined in this file
+unsigned long mozziMicros() { return MozziPrivate::mozziMicros(); };
+unsigned long audioTicks() { return MozziPrivate::audioTicks(); };
+void startMozzi(int control_rate_hz) { MozziPrivate::startMozzi(control_rate_hz); };
+void stopMozzi() { MozziPrivate::stopMozzi(); };
+int mozziAnalogRead(uint8_t pin) { return MozziPrivate::mozziAnalogRead(pin); };
+#if !MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE)
+AudioOutputStorage_t getAudioInput() { return MozziPrivate::getAudioInput(); };
+#endif
+#if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
+void setupMozziADC(int8_t speed) { MozziPrivate::setupMozziADC(speed); };
+void setupFastAnalogRead(int8_t speed) { MozziPrivate::setupFastAnalogRead(speed); };
+uint8_t adcPinToChannelNum(uint8_t pin) { return MozziPrivate::adcPinToChannelNum(pin); };
+#endif
+void audioHook() { MozziPrivate::audioHook(); };

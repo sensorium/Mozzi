@@ -136,3 +136,14 @@ void stopMozzi() {
 #endif
 
 //// END AUDIO OUTPUT code ///////
+
+//// BEGIN Random seeding ////////
+#include <esp8266_peri.h>
+void autoRandomSeeds(uint32_t *x, uint32_t *y, uint32_t *z) {
+  *x = RANDOM_REG32;
+  // TODO: The XORs may not be needed, but for lack of documentation (that I could find), let's assume RANDOM_REG32
+  //       itself might not get updated on every read. NOTE: x, y, and z are initialized to non-zero, before this.
+  *y = *y ^ RANDOM_REG32;
+  *z = *z ^ RANDOM_REG32;
+}
+//// END Random seeding ////////

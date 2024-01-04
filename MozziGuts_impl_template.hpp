@@ -156,3 +156,15 @@ void stopMozzi() {
   // Add here code to pause whatever mechanism moves audio samples to the output
 }
 ////// END audio output code //////
+
+//// BEGIN Random seeding ////////
+void autoRandomSeeds(uint32_t *x, uint32_t *y, uint32_t *z) {
+  // Add here code to initialize the values pointed to by x, y, and z to some random values
+  // This doesn't need to be crypographically safe. If nothing better is available, e.g. try reading an internal temperature sensor
+  // in order to get some noise. It also doesn't have to be fast.
+  // It *should* however ensure that rand() sequences will differ across reboots, after randSeed() has been called.
+  // x, y, and z are already initialized to non-zero, when this function is called.
+  // It's ok to leave this unimplemented, initially.
+#warning Automatic random seedings is not implemented on this platform
+}
+//// END Random seeding ////////

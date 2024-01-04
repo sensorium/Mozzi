@@ -112,3 +112,9 @@ void stopMozzi() {
   interrupts();
 }
 //// END AUDIO OUTPUT code ///////
+
+//// BEGIN Random seeding ////////
+void autoRandomSeeds(uint32_t *x, uint32_t *y, uint32_t *z) {
+#warning Automatic random seedings is not implemented on this platform
+}
+//// END Random seeding ////////

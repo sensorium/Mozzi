@@ -377,3 +377,49 @@ void stopMozzi() {
 // 	Timer1.isrCallback();
 // }
 //// END AUDIO OUTPUT code ///////
+
+//// BEGIN Random seeding ////////
+#if defined (__AVR_ATmega644P__)
+
+// a less fancy version for gizduino (__AVR_ATmega644P__) which doesn't know INTERNAL
+static long longRandom()
+{
+	return ((long)analogRead(0)+63)*(analogRead(1)+97); // added offsets in case analogRead is 0
+}
+
+#else
+
+/*
+longRandom(), used as a seed generator, comes from:
+http://arduino.cc/forum/index.php/topic,38091.0.html
+//  AUTHOR: Rob Tillaart
+// PURPOSE: Simple Random functions based upon unreliable internal temp sensor
+// VERSION: 0.1
+//       DATE: 2011-05-01
+//
+// Released to the public domain, use at own risk
+//
+*/
+static long longRandom()
+{
+	//analogReference(INTERNAL);
+	unsigned long rv = 0;
+	for (uint8_t i=0; i< 32; i++) rv |= ((analogRead(8)+1171) & 1L) << i; // added 1171 in case analogRead is 0
+	return rv;
+}
+#endif
+
+void autoRandomSeeds(uint32_t *x, uint32_t *y, uint32_t *z) {
+  ADCSRA &= ~ (1 << ADIE); // adc Disable Interrupt, re-enable at end
+  // this attempt at remembering analog_reference stops it working
+  // maybe needs a delay after changing analog reference in longRandom (Arduino reference suggests this)
+  // because the analog reads return 0
+  //uint8_t analog_reference_orig = ADMUX&192; // analog_reference is high 2 bits of ADMUX, store this because longRandom sets it to internal
+  *x = longRandom();
+  *y = longRandom();
+  *z = longRandom();
+  //analogReference(analog_reference_orig); // change back to original
+  ADCSRA |= (1 << ADIE); // adc re-Enable Interrupt
+}
+
+//// END Random seeding ////////

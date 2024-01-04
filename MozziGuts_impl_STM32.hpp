@@ -138,3 +138,24 @@ void stopMozzi() {
 }
 
 //// END AUDIO OUTPUT code ///////
+
+//// BEGIN Random seeding ////////
+void autoRandomSeeds(uint32_t *x, uint32_t *y, uint32_t *z) {
+  // Unfortunately the internal temp sensor on STM32s does _not_ appear to create a lot of noise.
+  // Ironically, the calls to calibrate help induce some random noise. You're still fairly likely to produce two equal
+  // random seeds in two subsequent runs, however.
+  adc.enableInternalReading();
+  union {
+    float cf;
+    uint32_t ci;
+  } conv;
+  conv.cf = adc.readTemp();
+  *x=*x^conv.ci;
+  adc.calibrate();
+  conv.cf = adc.readTemp();
+  *y=*y^conv.ci;
+  adc.calibrate();
+  conv.cf = adc.readTemp();
+  *z=*z^conv.ci;
+}
+//// END Random seeding ////////

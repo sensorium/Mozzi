@@ -121,31 +121,47 @@ and ADC6 do not have digital input buffers, and therefore do not require
 Digital Input Disable bits.
 @param channel_num the analog input channel you wish to use.
 */
-void disconnectDigitalIn(uint8_t channel_num);
-
+inline void disconnectDigitalIn(uint8_t channel_num) {
+#if IS_AVR()
+	DIDR0 |= 1<<channel_num;
+#endif
+}
 
 /** @ingroup analog
 Reconnect the digital input buffer for an analog input channel which has
 been set for analog input with disconnectDigitalIn().
 @param channel_num the analog input channel you wish to reconnect.
 */
-void reconnectDigitalIn(uint8_t channel_num);
-
+inline void reconnectDigitalIn(uint8_t channel_num) {
+#if IS_AVR()
+	DIDR0 &= ~(1<<channel_num);
+#endif
+}
 
 /**  @ingroup analog
 Prepare all analog input channels by turning off their digital input buffers.
 This helps to reduce noise, increase analog reading speed, and save power.
 */
-void adcDisconnectAllDigitalIns();
+inline void adcDisconnectAllDigitalIns() {
+#if IS_AVR()
+	for (uint8_t i = 0; i<NUM_ANALOG_INPUTS; i++){
+		DIDR0 |= 1<<i;
+	}
+#endif
+}
 
 
 /** @ingroup analog
 Reconnect the digital input buffers for analog input channels which have
 been set for analog input with disconnectDigitalIn().
 */
-void adcReconnectAllDigitalIns();
-
-
+inline void adcReconnectAllDigitalIns() {
+#if IS_AVR()
+	for (uint8_t i = 0; i<NUM_ANALOG_INPUTS; i++){
+		DIDR0 &= ~(1<<i);
+	}
+#endif
+}
 
 /* @ingroup analog
 Starts an analog to digital conversion of the voltage on a specified channel.  Unlike

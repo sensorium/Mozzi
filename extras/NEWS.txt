@@ -3,7 +3,11 @@ Mozzi sound synthesis library for Arduino
 NEWS
 get the latest version from https://sensorium.github.io/Mozzi/
 
-not yet released (latest github version)
+NOT YET RELEASED (github version): Mozzi 2.0
+- explicitly specify bit depth for "int" or "long" in several places, for better cross-platform consistency
+- restructured configuration options for more consistency across platforms, and easier customization
+
+release v1.1.2
 - new partial port of the Arduino Uno R4
 - new partial port of the Arduino Giga by Thomas Friedrichsmeier & Thomas Combriat
 - new (partial) port to the STM32duino core by Thomas Friedrichsmeier

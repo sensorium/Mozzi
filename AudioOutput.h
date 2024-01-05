@@ -97,6 +97,9 @@ struct StereoOutput {
       This _could_ be turned into an operator for implicit conversion in this case. For now we chose to apply conversion on demand, only, as most of the time
       using StereoOutput in a mono config, is not intended. */
   inline AudioOutput_t portable() const __attribute__((deprecated("Sketch generates stereo output, but Mozzi is configured for mono. Check MOZZI_AUDIO_CHANNELS setting."))) { return _l; };
+#  if GITHUB_RUNNER_ACCEPT_STEREO_IN_MONO
+  inline operator AudioOutput_t() const __attribute__((deprecated("Stereo converted to mono on github runner"))) { return _l; };
+#  endif
 #endif
   AudioOutputStorage_t l() const { return _l; };
   AudioOutputStorage_t r() const { return _r; };

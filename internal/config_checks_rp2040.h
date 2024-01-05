@@ -62,6 +62,7 @@
 #error This header should be included for RP2040 architecture (Raspberry Pi Pico and others), only
 #endif
 
+#include "disable_2pinmode_on_github_workflow.h"
 #if !defined(MOZZI_AUDIO_MODE)
 #  define MOZZI_AUDIO_MODE MOZZI_OUTPUT_PWM
 #endif

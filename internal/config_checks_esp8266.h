@@ -62,6 +62,7 @@
 #error This header should be included for ESP architecture, only
 #endif
 
+#include "disable_2pinmode_on_github_workflow.h"
 #if !defined(MOZZI_AUDIO_MODE)
 #define MOZZI_AUDIO_MODE MOZZI_OUTPUT_PDM_VIA_SERIAL
 #endif
@@ -86,6 +87,7 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE)
 #  if !defined(PDM_RESOLUTION)
 #    define MOZZI_PDM_RESOLUTION 2
 #  endif
+#  include "disable_stereo_on_github_workflow.h"
 MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_CHANNELS, 1)
 MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_BITS, 16)
 #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC)

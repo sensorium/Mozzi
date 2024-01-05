@@ -35,6 +35,7 @@
 #error This header should be included for RENESAS (Arduino Uno R4) architecture, only
 #endif
 
+#include "disable_2pinmode_on_github_workflow.h"
 #if !defined(MOZZI_AUDIO_MODE)
 #define MOZZI_AUDIO_MODE MOZZI_OUTPUT_INTERNAL_DAC
 #endif
@@ -62,6 +63,7 @@ MOZZI_CHECK_SUPPORTED(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE, MOZZI_ANALOG_RE
 #    define MOZZI_AUDIO_PIN_1 A0
 #  endif
 #  define BYPASS_MOZZI_OUTPUT_BUFFER true
+#  include "disable_stereo_on_github_workflow.h"
 MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_CHANNELS, 1)
 #endif
 

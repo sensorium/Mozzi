@@ -70,6 +70,7 @@
 #error This header should be included for ESP32 architecture, only
 #endif
 
+#include "disable_2pinmode_on_github_workflow.h"
 #if !defined(MOZZI_AUDIO_MODE)
 #define MOZZI_AUDIO_MODE MOZZI_OUTPUT_INTERNAL_DAC
 #endif

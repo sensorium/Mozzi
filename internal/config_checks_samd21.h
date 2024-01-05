@@ -35,6 +35,7 @@
 #error This header should be included for SAMD21 architecture (Arduino Circuitplayground M0 and others), only
 #endif
 
+#include "disable_2pinmode_on_github_workflow.h"
 #if !defined(MOZZI_AUDIO_MODE)
 #define MOZZI_AUDIO_MODE MOZZI_OUTPUT_INTERNAL_DAC
 #endif
@@ -61,6 +62,7 @@ MOZZI_CHECK_SUPPORTED(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE)
 #  if !defined(MOZZI_AUDIO_PIN_1)
 #    define MOZZI_AUDIO_PIN_1 DAC0
 #  endif
+#  include "disable_stereo_on_github_workflow.h"
 MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_CHANNELS, 1)
 #endif
 

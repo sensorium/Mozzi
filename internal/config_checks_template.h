@@ -9,6 +9,8 @@
  * 3) Document some details of your port
  */
 
+/** NOTE: If your port doesn't support MOZZI_OUTPUT_2PIN_PWM, add this include to make compilation of HIFI examples pass on the github runner */
+#include "disable_2pinmode_on_github_workflow.h"
 /** NOTE: All ports need to provide a default for this */
 #if not defined(MOZZI_AUDIO_MODE)
 #  define MOZZI_AUDIO_MODE MOZZI_OUTPUT_PWM
@@ -39,6 +41,7 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_EXTERNAL_
 #    define MOZZI_AUDIO_BITS 10
 #  endif
 /** NOTE: If only mono is supported in this output mode: */
+#  include "disable_stereo_on_github_workflow.h"   // This allows stereo sketches to compile (in mono) in automated testing builds.
 MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_CHANNELS, MOZZI_MONO)
 #endif
 

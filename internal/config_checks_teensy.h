@@ -84,11 +84,13 @@
 
 
 #if IS_TEENSY3()
+#  include "disable_2pinmode_on_github_workflow.h"
 #  if !defined(MOZZI_AUDIO_MODE)
 #    define MOZZI_AUDIO_MODE MOZZI_OUTPUT_INTERNAL_DAC
 #  endif
 MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPUT_EXTERNAL_CUSTOM, MOZZI_OUTPUT_INTERNAL_DAC)
 #elif IS_TEENSY4()
+#  include "disable_2pinmode_on_github_workflow.h"
 #  if !defined(MOZZI_AUDIO_MODE)
 #    define MOZZI_AUDIO_MODE MOZZI_OUTPUT_PWM
 #  endif
@@ -124,6 +126,7 @@ MOZZI_CHECK_SUPPORTED(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE, MOZZI_ANALOG_RE
 #      error DAC pin not know for this board. Please define MOZZI_AUDIO_PIN_1 as appropriate
 #    endif
 #  endif
+#  include "disable_stereo_on_github_workflow.h"
 MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_CHANNELS, 1)
 #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
 #  define MOZZI_AUDIO_BITS 10   // not configurable

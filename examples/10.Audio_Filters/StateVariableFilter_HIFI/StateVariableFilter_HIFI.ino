@@ -5,16 +5,10 @@
     which in this case requires the input signal level to be reduced
     to avoid distortion which can occur with sharp resonance settings.
 
-    This sketch using HIFI mode is not for Teensy 3.1.
-
-    IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
-    be changed from STANDARD mode to HIFI.
-    In Mozz/mozzi_config.h, change
-    #define AUDIO_MODE STANDARD
-    //#define AUDIO_MODE HIFI
-    to
-    //#define AUDIO_MODE STANDARD
-    #define AUDIO_MODE HIFI
+    Important:
+    This sketch uses MOZZI_OUTPUT_2PIN_PWM (aka HIFI) output mode, which
+    is not available on all boards (among others, it works on the
+    classic Arduino boards, but not Teensy 3.x and friends).
 
     Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
     Check the Mozzi core module documentation for others and more detail
@@ -42,6 +36,9 @@
 
     Tim Barrass 2012, CC by-nc-sa.
 */
+
+#include <MozziConfigValues.h>
+#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_2PIN_PWM
 
 #include <Mozzi.h>
 #include <Oscil.h>

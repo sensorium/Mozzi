@@ -77,7 +77,7 @@
  */
 #define AudioOutput_t AudioOutputStorage_t
 /** Representation of an single audio output sample/frame. This #define maps to either MonoOutput or StereoOutput, depending on what is configured
- *  in mozzi_config.h. Since the two are source compatible to a large degree, it often isn't even necessary to test, which it is, in your code. E.g.
+ *  in MOZZI_AUDIO_CHANNELS. Since the two are source compatible to a large degree, it often isn't even necessary to test, which it is, in your code. E.g.
  *  both have functions l() and r(), to return "two" audio channels (which will be the same in case of mono).
  *
  *  You will not usually use or encounter this definition, unless using @ref external_audio output mode.
@@ -96,7 +96,7 @@ struct StereoOutput {
   /** Conversion to int operator: If used in a mono config, returns only the left channel (and gives a compile time warning). 
       This _could_ be turned into an operator for implicit conversion in this case. For now we chose to apply conversion on demand, only, as most of the time
       using StereoOutput in a mono config, is not intended. */
-  inline AudioOutput_t portable() const __attribute__((deprecated("Sketch generates stereo output, but Mozzi is configured for mono. Check mozzi_config.h."))) { return _l; };
+  inline AudioOutput_t portable() const __attribute__((deprecated("Sketch generates stereo output, but Mozzi is configured for mono. Check MOZZI_AUDIO_CHANNELS setting."))) { return _l; };
 #endif
   AudioOutputStorage_t l() const { return _l; };
   AudioOutputStorage_t r() const { return _r; };
@@ -137,7 +137,7 @@ struct MonoOutput {
   /** Conversion to stereo operator: If used in a stereo config, returns identical channels (and gives a compile time warning).
       This _could_ be turned into an operator for implicit conversion in this case. For now we chose to apply conversion on demand, only, as most of the time
       using StereoOutput in a mono config, is not intended. */
-  inline StereoOutput portable() const __attribute__((deprecated("Sketch generates mono output, but Mozzi is configured for stereo. Check mozzi_config.h."))) { return StereoOutput(_l, _l); };
+  inline StereoOutput portable() const __attribute__((deprecated("Sketch generates mono output, but Mozzi is configured for stereo. Check MOZZI_AUDIO_CHANNELS setting."))) { return StereoOutput(_l, _l); };
 #else
   /** Conversion to int operator. */
   inline operator AudioOutput_t() const { return _l; };

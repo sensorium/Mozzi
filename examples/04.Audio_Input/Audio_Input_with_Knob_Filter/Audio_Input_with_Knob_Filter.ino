@@ -2,9 +2,11 @@
   Test of audio input and processing with control input,
   using Mozzi sonification library.
 
-  Configuration: requires these lines in the Mozzi/mozzi_config.h file:
-  #define USE_AUDIO_INPUT true
-  #define AUDIO_INPUT_PIN 0
+  An audio input using the range between 0 to 5V on analog pin A0 (or as
+  set in MOZZI_AUDIO_INPUT_PIN) is sampled and output on digital pin 9.
+
+  NOTE: MOZZI_AUDIO_INPUT_STANDARD is not available as an option on all
+  platforms.
 
   Circuit:
     Audio input on pin analog 0
@@ -22,6 +24,10 @@
   https://groups.google.com/forum/#!forum/mozzi-users
 
 */
+
+#include <MozziConfigValues.h>
+#define MOZZI_AUDIO_INPUT MOZZI_AUDIO_INPUT_STANDARD
+#define MOZZI_AUDIO_INPUT_PIN 0
 
 #include <Mozzi.h>
 #include <LowPassFilter.h>

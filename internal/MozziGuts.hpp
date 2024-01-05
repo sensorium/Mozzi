@@ -12,7 +12,6 @@
 #include <Arduino.h>
 
 #include "CircularBuffer.h"
-#include "MozziGuts.h"
 #include "mozzi_analog.h"
 #include "internal/mozzi_rand_p.h"
 #include "AudioOutput.h"

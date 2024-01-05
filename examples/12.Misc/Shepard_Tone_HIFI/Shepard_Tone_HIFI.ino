@@ -30,7 +30,7 @@
     Tim Barrass 2018, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/sin8192_int8.h>
 #include "triangle512_uint8.h"

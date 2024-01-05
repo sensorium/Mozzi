@@ -47,7 +47,7 @@
     T. Combriat 2020, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator
 #include<SPI.h> // needed for the shift register

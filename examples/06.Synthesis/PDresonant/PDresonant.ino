@@ -28,7 +28,7 @@
 
 //#include <MIDI.h> may be needed on some systems/versions
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 
 // for fake midi
 #include <EventDelay.h>

@@ -16,7 +16,7 @@
 		Tim Barrass 2013, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Metronome.h>
 #include <SampleHuffman.h>
 #include <mozzi_rand.h>

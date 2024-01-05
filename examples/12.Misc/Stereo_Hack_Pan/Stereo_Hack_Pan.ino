@@ -15,7 +15,7 @@
     This example code is in the public domain.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h> // oscil for audio sig
 #include <tables/pinknoise8192_int8.h> // table for audio oscillator
 #include <tables/sin2048_int8.h> // sine table for pan oscillator

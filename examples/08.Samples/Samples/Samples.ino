@@ -18,7 +18,7 @@
     Tim Barrass 2012, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Sample.h> // Sample template
 #include <samples/bamboo/bamboo_00_2048_int8.h> // wavetable data
 #include <samples/bamboo/bamboo_01_2048_int8.h> // wavetable data

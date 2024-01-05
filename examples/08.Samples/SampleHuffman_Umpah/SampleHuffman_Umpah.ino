@@ -41,7 +41,7 @@
  Tim Barrass 2013, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <SampleHuffman.h>
 #include "umpah_huff.h"
 

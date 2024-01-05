@@ -23,7 +23,7 @@
 
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <LowPassFilter.h>
 
 #define KNOB_PIN 1

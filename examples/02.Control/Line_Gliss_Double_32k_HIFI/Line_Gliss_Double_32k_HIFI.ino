@@ -57,7 +57,7 @@
     Tim Barrass 2012, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Line.h> // for smooth transitions
 #include <Oscil.h> // oscillator template
 #include <tables/saw8192_int8.h> // saw table for oscillator

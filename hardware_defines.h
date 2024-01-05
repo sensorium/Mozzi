@@ -1,11 +1,7 @@
 #ifndef HARDWARE_DEFINES_H_
 #define HARDWARE_DEFINES_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include "Arduino.h"
 
 /* Macros to tell apart the supported platforms. The advantages of using these are, rather than the underlying defines
 - Easier to read and write

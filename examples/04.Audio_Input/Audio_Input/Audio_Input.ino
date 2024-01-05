@@ -18,7 +18,7 @@
   Tim Barrass 2013, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 
 void setup(){
   startMozzi();

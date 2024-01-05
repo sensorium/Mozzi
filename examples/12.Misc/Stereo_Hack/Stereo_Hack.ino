@@ -12,7 +12,7 @@
  *  This example code is in the public domain.
  */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Phasor.h> // for controlling panning position
 #include <Oscil.h> // oscil for audio sig
 #include <tables/pinknoise8192_int8.h> // table for oscillator

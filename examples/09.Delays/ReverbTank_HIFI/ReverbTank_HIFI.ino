@@ -22,7 +22,7 @@
     Tim Barrass 2013, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <ReverbTank.h>
 #include <Oscil.h>
 #include <tables/cos8192_int8.h>

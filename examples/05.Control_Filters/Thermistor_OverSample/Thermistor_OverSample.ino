@@ -29,7 +29,7 @@
   Tim Barrass 2013, CC by-nc-sa.
  */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <Line.h>
 #include <tables/sin2048_int8.h> // SINe table for oscillator

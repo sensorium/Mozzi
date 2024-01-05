@@ -20,7 +20,7 @@
     This example code is in the public domain.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <Ead.h> // exponential attack decay
 #include <tables/sin2048_int8.h> // sine table for oscillator

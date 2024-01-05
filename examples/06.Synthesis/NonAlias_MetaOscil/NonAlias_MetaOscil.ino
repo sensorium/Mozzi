@@ -35,7 +35,7 @@
     Tim Barrass 2012, Combriat T. 2021, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <MetaOscil.h>
 

@@ -28,7 +28,7 @@
   Tim Barrass 2013, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Sample.h> // Sample template
 #include "blahblah4b_int8.h"
 #include <Line.h>

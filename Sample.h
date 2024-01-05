@@ -12,7 +12,7 @@
 #ifndef SAMPLE_H_
 #define SAMPLE_H_
 
-#include "MozziGuts.h"
+#include "MozziHeadersOnly.h"
 #include "mozzi_fixmath.h"
 #include "mozzi_pgmspace.h"
 

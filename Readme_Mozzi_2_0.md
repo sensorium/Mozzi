@@ -33,16 +33,12 @@ Other removed stuff:
  - unpauseMozzi() - was still declared but not defined -> not usable, anyway
  - Teensy3/4: channel2sc1a -> thought to be unused, removed
  - Teensy2: adc_mapping -> hidden away; use adcPinToChannelNum(), as on all other platforms, instead
- - removed inclusion of "WProgram.h". If using Arduino versions < 1.0, you need to update, seriously ;-)
+ - removed several inclusions of "WProgram.h". If using Arduino versions < 1.0, you need to update, seriously ;-)  (TODO many, many, instances of this are still around)
+ - Since Mozzi (AVR-port) no longer uses Timer 0 since a long time, the corresponding library (utility/TimerZero.h) has now been removed, too.
+   The Arduino functions delay(), millis(), micros() and delayMicroseconds() should now be usable in theory. That said,
+   you should avoid these functions, as they are slow (or even blocking). For measuring time, refer
+   to mozziMircos(). For delaying events, you can use Mozzi's EventDelay() unit instead (not to be confused with AudioDelay()).
 
 Moved headers:
  - Header files not meant for user inclusion have been moved to "internal"
  - New sketches should include "Mozzi.h", rather than "MozziGuts.h", thereby documenting, they have been written for Mozzi 2.0+
-
-Documentation bits that still need to find a new home (many other bits were moved around, many, many duplicates merged into a common place, and seom obsoleted bits discarded):
-
-Contrary to earlier versions of Mozzi, this version does not take over Timer 0, and thus Arduino
-functions delay(), millis(), micros() and delayMicroseconds() remain usable in theory. That said,
-you should avoid these functions, as they are slow (or even blocking). For measuring time, refer
-to mozziMircos(). For delaying events, you can use Mozzi's EventDelay() unit instead
-(not to be confused with AudioDelay()).

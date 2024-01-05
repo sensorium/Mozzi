@@ -44,6 +44,7 @@
 #endif
 
 #if !MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE) && !defined(MOZZI_AUDIO_INPUT_PIN)
+#warning Using audio input, but no audio input pin defined, explicitly. Defaulting to pin 0.
 #define MOZZI_AUDIO_INPUT_PIN 0
 #endif
 

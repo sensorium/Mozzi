@@ -4,7 +4,7 @@
  *  Unless you have good reason to do this, it is recommended to base your sketch on the
  *  single-file "Skeleton" example, instead. */
 
-#include <MozziGuts.h>        // at the top of your sketch
+#include <Mozzi.h>        // at the top of your sketch
 
 void setup() {
   startMozzi(64);

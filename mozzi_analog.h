@@ -12,17 +12,9 @@
 #ifndef MOZZI_ANALOG_H_
 #define MOZZI_ANALOG_H_
 
- #if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include "Arduino.h"
 
 #include "hardware_defines.h"
-
-#if (USE_AUDIO_INPUT==true)
-#warning "Using AUDIO_INPUT_PIN defined in mozzi_config.h for audio input."
-#endif
 
 // for setupFastAnalogRead()
 enum ANALOG_READ_SPEED {FAST_ADC,FASTER_ADC,FASTEST_ADC};

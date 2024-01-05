@@ -28,11 +28,16 @@ all new
 general:
  - Added many config sanity checks. Some may be too strict, if so please mention
 
- Other removed stuff:
+Other removed stuff:
  - pauseMozzi() - was still declared but not defined -> not usable, anyway
  - unpauseMozzi() - was still declared but not defined -> not usable, anyway
  - Teensy3/4: channel2sc1a -> thought to be unused, removed
  - Teensy2: adc_mapping -> hidden away; use adcPinToChannelNum(), as on all other platforms, instead
+ - removed inclusion of "WProgram.h". If using Arduino versions < 1.0, you need to update, seriously ;-)
+
+Moved headers:
+ - Header files not meant for user inclusion have been moved to "internal"
+ - New sketches should include "Mozzi.h", rather than "MozziGuts.h", thereby documenting, they have been written for Mozzi 2.0+
 
 Documentation bits that still need to find a new home (many other bits were moved around, many, many duplicates merged into a common place, and seom obsoleted bits discarded):
 

@@ -12,7 +12,14 @@
 #ifndef MOZZIGUTS_H_
 #define MOZZIGUTS_H_
 
- #include "Arduino.h"
+#include "Arduino.h"
+
+#include "MozziConfigValues.h"
+
+#if !(defined(MOZZI_H_) || defined(MOZZI_HEADERS_ONLY_H_))
+#warning Direct inclusion of MozziGuts.h is deprecated. Use Mozzi.h, instead, and read about porting to Mozzi 2.0
+#define MOZZI_COMPATIBILITY_LEVEL MOZZI_COMPATIBILITY_1_1
+#endif
 
 #include "hardware_defines.h"
 #include "mozzi_config.h"
@@ -82,7 +89,7 @@ forked version of Mozzi on github, so sound production can continue while
 reading sensors.
 
 As it is, stopMozzi restores all the Timers used by Mozzi to their previous
-settings. Another scenario which could be easily hacked in MozziGuts.cpp could
+settings. Another scenario which could be easily hacked in MozziGuts.hpp could
 involve individually saving and restoring particular Timer registers depending
 on which one(s) are required for other tasks.
 
@@ -173,8 +180,8 @@ is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when 
 */
 unsigned long mozziMicros();
 
-#ifndef MOZZI_HEADER_ONLY
-#include "MozziGuts.hpp"
+#ifndef _MOZZI_HEADER_ONLY
+#include "internal/MozziGuts.hpp"
 #endif
 
 #endif /* MOZZIGUTS_H_ */

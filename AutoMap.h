@@ -21,6 +21,9 @@
 
 #include "AutoRange.h"
 
+/** @defgroup sensortools Automatic range adjustment
+*/
+
 /** @ingroup sensortools
 Automatically map an input value to an output range without knowing the precise range of inputs beforehand.
 */

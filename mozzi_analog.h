@@ -19,6 +19,8 @@
 // for setupFastAnalogRead()
 enum ANALOG_READ_SPEED {FAST_ADC,FASTER_ADC,FASTEST_ADC};
 
+/** @defgroup analog Functions for taking (non-blocking) analog readings. */
+
 /** 
 @ingroup analog
 This is automatically called in startMozzi.

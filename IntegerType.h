@@ -3,6 +3,9 @@
 
 #include <Arduino.h>
 
+/** @ingroup util
+Provides appropriate integer types that can bit the given number of bytes on this platform (at most 64).
+*/
 template<uint8_t BYTES> struct IntegerType {
     // at an odd value, such as 3 bytes? Add one more byte (up to at most 8 bytes)..
     typedef typename IntegerType<(BYTES < 8) ? (BYTES+1) : 8>::unsigned_type unsigned_type;

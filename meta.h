@@ -6,6 +6,8 @@ Template meta-programming extras.
 #ifndef META_H_
 #define META_H_
 
+/** @defgroup util Assorted meta-programming utils
+*/
 
 /** @ingroup util
 Enables you to instantiate a template based on an integer value.

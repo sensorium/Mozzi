@@ -1,8 +1,10 @@
 #ifdef FOR_DOXYGEN_ONLY
 /** @file */
 
-/*! @defgroup config Mozzi Configuration options
- * @brief Mozzi Configuration
+/*! @defgroup config Mozzi Configuration options */
+
+/** @ingroup config
+ * @page config_main Mozzi Configuration
  *
  * @section config_general Configuring Mozzi
  *

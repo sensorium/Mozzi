@@ -1,6 +1,8 @@
 #ifndef INTTYPE_H_
 #define INTTYPE_H_
 
+#include <Arduino.h>
+
 template<uint8_t BYTES> struct IntegerType {
     // at an odd value, such as 3 bytes? Add one more byte (up to at most 8 bytes)..
     typedef typename IntegerType<(BYTES < 8) ? (BYTES+1) : 8>::unsigned_type unsigned_type;

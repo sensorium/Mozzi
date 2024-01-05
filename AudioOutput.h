@@ -1,4 +1,8 @@
-/** @ingroup conre
+/** @defgroup audio_output Audio Output and Buffering
+ *
+ * @details Documentation on basic Mozzi architecture and output modes */
+
+/** @ingroup audio_output
  * @page mozzi_audio_output_architecture Basic architecture of audio generation, buffering, and output in Mozzi
  *
  * Mozzi provides support for audio ouput on a range of different boards and CPUs. This page is about the following related topics:
@@ -26,7 +30,7 @@
  * have to provide a custom definition of canBufferAudioOutput(), returning true, whenever a new sample of output can be accepted. No timer at audio-rate is set up in this
  * case.
  *
- * Finally, the @ref external_audio output mode @ref MOZZI_OUTPUT_EXTERNAL_CUSTOM is essentially a combination of the two. Here, the user sketch needs to provide
+ * Finally, the @ref external_audio output mode (@ref MOZZI_AUDIO_MODE MOZZI_OUTPUT_EXTERNAL_CUSTOM) is essentially a combination of the two. Here, the user sketch needs to provide
  * both audioOutput() and canBufferAudioOutput(). The latter is again called from audioHook(), and whenever it returns true, a new sample is generated and passed to
  * audioOutput().
  *

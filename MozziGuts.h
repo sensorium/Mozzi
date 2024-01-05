@@ -51,6 +51,7 @@ typedef signed long int32_t;
 // Other supported arches add typedefs, here, unless already defined for that platform needed
 #endif
 
+/*! @defgroup core Mozzi Core Functions
 
 /** @ingroup core
 Sets up the timers for audio and control rate processes, storing the timer

@@ -40,10 +40,8 @@
  * @see MonoOutput::fromNBit(), StereoOutput::fromNBit()
  */
 
-#ifndef AUDIOOUTPUT
-#define AUDIOOUTPUT
-
-#include "mozzi_config.h"
+#ifndef AUDIOOUTPUT_H
+#define AUDIOOUTPUT_H
 
 /** The type used to store a single channel of a single frame, internally. For compatibility with earlier versions of Mozzi this is defined as int.
  *  If you do not care about keeping old sketches working, you may be able to save some RAM by using int16_t, instead (on boards where int is larger
@@ -172,9 +170,11 @@ private:
 };
 
 
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPUT_EXTERNAL_CUSTOM)
 /** When setting using one of the external output modes (@ref MOZZI_OUTPUT_EXTERNAL_TIMED or @ref MOZZI_OUTPUT_EXTERNAL_CUSTOM) implement this function to take care of writing samples to the hardware.
  *  In all otther cases, it will be provided by the platform implementation. You should never call this function, directly, in your sketch. */
 void audioOutput(const AudioOutput f);
+#endif
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_CUSTOM)
 /** For @ref MOZZI_OUTPUT_EXTERNAL_CUSTOM implement this function to return true, if and only if your hardware (or custom buffer) is ready to accept the next sample. */
 inline bool canBufferAudioOutput();

@@ -13,10 +13,6 @@
 #define TEENSYPINMAP_H
 
 
-#include "mozzi_config.h"
-
-
-
 inline uint8_t teensyPinMap(uint8_t pin)
 {  
   if (pin < 24) return pin-14;  // common to all teensys

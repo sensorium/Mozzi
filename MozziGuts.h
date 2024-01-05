@@ -22,18 +22,15 @@
 #endif
 
 #include "hardware_defines.h"
-#include "mozzi_config.h"
 
 #if IS_TEENSY3() || IS_TEENSY4()
 // required from http://github.com/pedvide/ADC for Teensy 3.*
 #include <ADC.h>
 #endif
 
-#include "mozzi_analog.h"
-
-
 #include "internal/config_checks_generic.h"
 
+#include "mozzi_analog.h"
 #include "AudioOutput.h"
 
 // TODO Mozzi 2.0: These typedef probably obsolete?

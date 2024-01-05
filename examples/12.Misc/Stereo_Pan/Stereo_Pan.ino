@@ -1,9 +1,11 @@
 /*  Example of constant power panning to test stereo output hack,
     using Mozzi sonification library.
 
-    Tests stereo output.  This requires #define AUDIO_CHANNELS STEREO in mozzi_config.h
+    Tests stereo output.
 
-    Circuit: Audio outputs on digital pins 9 and 10.
+    NOTE: Stereo output is not supported on all platforms / configurations!
+
+    Circuit: Audio outputs on digital pins 9 and 10 (on classic Arduino).
 
     Mozzi documentation/API
     https://sensorium.github.io/Mozzi/doc/html/index.html
@@ -14,6 +16,11 @@
     Tim Barrass 2017.
     This example code is in the public domain.
 */
+
+// Configure Mozzi for Stereo output. This must be done before #include <Mozzi.h>
+// MozziConfigValues.h provides named defines for available config options.
+#include <MozziConfigValues.h>
+#define MOZZI_AUDIO_CHANNELS MOZZI_STEREO
 
 #include <Mozzi.h>
 #include <Oscil.h> // oscil for audio sig

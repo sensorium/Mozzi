@@ -309,3 +309,11 @@ void setupFastAnalogRead(int8_t speed) { MozziPrivate::setupFastAnalogRead(speed
 uint8_t adcPinToChannelNum(uint8_t pin) { return MozziPrivate::adcPinToChannelNum(pin); };
 #endif
 void audioHook() { MozziPrivate::audioHook(); };
+
+// This is not strictly needed, but we want it to throw an error, if users have audioOutput() in their sketch without external output configured
+#if !MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPUT_EXTERNAL_CUSTOM)
+MOZZI_DEPRECATED("n/a", "Sketch has audioOutput() function, although external output is not configured.") void audioOutput(const AudioOutput) {};
+#endif
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_CUSTOM)
+MOZZI_DEPRECATED("n/a", "Sketch has canBufferAudioOutput() function, although custom external output is not configured.") bool canBufferAudioOutput() {};
+#endif

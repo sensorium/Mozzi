@@ -5,10 +5,6 @@
     using an user-defined audioOutput() function. I2S, the protocol used by this DAC, is here emulated in synced way using SPI.
 
 
-    #define EXTERNAL_AUDIO_OUTPUT true should be uncommented in mozzi_config.h.
-    #define AUDIO_CHANNELS STEREO should be set in mozzi_config.h
-
-
     Circuit: 
     
     PT8211   //  Connect to:
@@ -30,12 +26,16 @@
     T. Combriat 2020, CC by-nc-sa.
 */
 
+// before including Mozzi.h, configure external audio output mode:
+#include "MozziConfigValues.h"  // for named option values
+#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_EXTERNAL_TIMED
+#define MOZZI_AUDIO_CHANNELS MOZZI_STEREO
+#define CONTROL_RATE 256 // Hz, powers of 2 are most reliable
+
 #include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/cos2048_int8.h> // table for Oscils to play
 #include <SPI.h>
-
-#define CONTROL_RATE 256 // Hz, powers of 2 are most reliable
 
 
 // Synthesis part
@@ -50,11 +50,6 @@ Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kEnv2(COS2048_DATA);
 // External audio output parameters
 #define WS_pin 5   // channel select pin for the DAC
 
-//#define AUDIO_BIAS 0  // this DAC works on 0-centered signals
-
-
-
-
 
 
 
@@ -67,7 +62,7 @@ void audioOutput(const AudioOutput f) // f is a structure containing both channe
  */
 
   digitalWrite(WS_pin, LOW);  //select Right channel
-  SPI.transfer16(f.r());
+  SPI.transfer16(f.r());      // Note: This DAC works on 0-centered samples, no need to add MOZZI_AUDIO_BIAS
 
   digitalWrite(WS_pin, HIGH);  // select Left channel
   SPI.transfer16(f.l());

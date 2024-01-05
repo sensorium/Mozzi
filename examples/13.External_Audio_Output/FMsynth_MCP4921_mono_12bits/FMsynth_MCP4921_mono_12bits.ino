@@ -3,8 +3,6 @@
     using an user-defined audioOutput() function.
     Based on Mozzi's example: FMsynth.
 
-    #define EXTERNAL_AUDIO_OUTPUT true should be uncommented in mozzi_config.h.
-
     Circuit: (see the DAC library README for details)
 
     MCP4921   //  Connect to:
@@ -28,6 +26,12 @@
     Tim Barrass 2012, CC by-nc-sa.
     T. Combriat 2020, CC by-nc-sa.
 */
+
+// before including Mozzi.h, configure external audio output mode:
+#include "MozziConfigValues.h"  // for named option values
+#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_EXTERNAL_TIMED
+// Note: For demonstration purposes, this sketch does *not* set the following (although it would make sense):
+//#define MOZZI_AUDIO_BITS 12  // the default value of 16 for external audio is thus used, instead
 
 #include <Mozzi.h>
 #include <Oscil.h>

@@ -4,9 +4,6 @@
 
     WARNING: YOU CANNOT ACHEIVE MORE THAN 16BITS ON AN AVR ARDUINO, THIS EXAMPLE WON'T WORK AS IT IS.
 
-    #define EXTERNAL_AUDIO_OUTPUT true should be uncommented in mozzi_config.h.
-    #define EXTERNAL_AUDIO_BITS 24 should be set in mozzi_config.h
-
     Circuit: (see the DAC library README for details)
 
     MCP4921   //  Connect to:
@@ -50,6 +47,11 @@
     T. Combriat 2020, CC by-nc-sa.
 */
 
+// before including Mozzi.h, configure external audio output mode:
+#include "MozziConfigValues.h"  // for named option values
+#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_EXTERNAL_TIMED
+#define MOZZI_AUDIO_BITS 24
+
 #include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/cos2048_int8.h> // table for Oscils to play
@@ -71,7 +73,6 @@ Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kEnv1(COS2048_DATA);
 
 // External audio output parameters and DAC declaration
 #define SS_PIN 38  // if you are on AVR and using PortWrite you need still need to put the pin you are actually using: 7 on Uno, 38 on Mega
-//#define AUDIO_BIAS 8388608  // we are at 24 bits, so we have to bias the signal of 2^(24-1) = 8388608 (not needed since PR #98)
 #define BITS_PER_CHANNEL 12  // each channel of the DAC is outputting 12 bits
 DAC_MCP49xx dac(DAC_MCP49xx::MCP4922, SS_PIN);
 
@@ -80,7 +81,7 @@ DAC_MCP49xx dac(DAC_MCP49xx::MCP4922, SS_PIN);
 void audioOutput(const AudioOutput f) // f is a structure containing both channels
 {
 
-  int out = AUDIO_BIAS + f.l();
+  int out = MOZZI_AUDIO_BIAS + f.l();
 
   unsigned short lowBits = (unsigned short) out;  //
   unsigned short highBits =  out >> BITS_PER_CHANNEL;

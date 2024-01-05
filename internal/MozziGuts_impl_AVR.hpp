@@ -194,7 +194,7 @@ static void startAudio() {
 } // namespace MozziPrivate
 
 ISR(TIMER1_OVF_vect, ISR_BLOCK) {
-  defaultAudioOutput();
+  MozziPrivate::defaultAudioOutput();
 }
 
 namespace MozziPrivate {
@@ -247,7 +247,7 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK) {
   if (alternate) return;
 #  endif
 
- MozziPrivate::defaultAudioOutput();
+  MozziPrivate::defaultAudioOutput();
 }
 
 namespace MozziPrivate {

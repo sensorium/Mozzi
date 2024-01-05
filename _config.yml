@@ -13,17 +13,17 @@
 #theme                  : "minimal-mistakes-jekyll"
 # tb: replace above line with this for github pages to work
 remote_theme:             "mmistakes/minimal-mistakes@4.20.1"
-minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "en-GB"
-title                    : "Mozzi"
+title                    : "Mozzi - Development version"
 title_separator          : "-"
 name                     : "Tim Barrass"
 description              : "audio synthesis library for Arduino"
-url                      : "https://sensorium.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url                      : "https://tfry.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "/Mozzi" # the subpath of your site, e.g. "/blog"
-repository               : "sensorium/Mozzi" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
+repository               : "tfry/Mozzi" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : "" # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200

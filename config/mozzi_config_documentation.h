@@ -1,7 +1,13 @@
+#ifdef FOR_DOXYGEN_ONLY
+/** @file */
+
 /*! @defgroup config Mozzi Configuration options
- * @section Mozzi Configuration
- *
  * @brief Mozzi Configuration
+ *
+ * @section config_general Configuring Mozzi
+ *
+ * Mozzi configuration options include details such as audio rate, number of audio channels (mono or stereo), output generation method and many others,
+ * where details on the available options differ between the different platforms (see @ref hardware), and may include additional options beyond those listed, here.
  *
  * @note
  * It is generally safe to leave the Mozzi Configuration unchanged, and that's very much recommended _until_ you have a very specific need to customize something.
@@ -12,7 +18,23 @@
  * to save Flash, RAM, and CPU use at runtime. This section lists various global options, but in addition, most ports allow additional hardware dependent
  * configuration options. See @ref hardware.
  *
- * Several configuration examples are provided in the "config" folder of the Mozzi sources. You may want to look at these, first.
+ * Several configuration examples are provided in the "config" folder of the Mozzi sources. You may want to look at these, first. The general approach is as follows:
+ *
+ * @code
+ * #include <MozziConfigValues.h>                      // include this first, for named option values
+ * #define MOZZI_AUDIO_CHANNELS MOZZI_STEREO           // set to stereo mode
+ *
+ * #include <Mozzi.h>                                  // *after* all configuration options, include the main Mozzi headers
+ * @endcode
+ *
+ * Alternatively, if a suitable configuration example exists, use:
+ * @code
+ * #include <config/config_example_avr_stereo.h>       // again, do this, before including the main headers
+ * @endcode
+ *
+ * @note
+ * Should you include Mozzi headers in more than one compilation unit (i.e. more than one .cpp file) inside the same sketch, you *must* use identical
+ * configuration options at the top of each file!
  *
  * TODO: Fix and complete Doxygen coverage
 */
@@ -32,6 +54,7 @@
  * @note
  * MOZZI_COMPATIBILITY_V1_1 does not guarantee, that *everything* from Mozzi 1.1 will continue to work, just that we're doing a reasonable effort.
 */
+#define MOZZI_COMPATIBILITY_LEVEL FOR_DOXYGEN_ONLY
 
 /** @ingroup config
  * @def MOZZI_AUDIO_MODE
@@ -62,7 +85,7 @@
  *
  * TODO: Adding an R2R-DAC option would be cool,  http://blog.makezine.com/2008/05/29/makeit-protodac-shield-fo/ , some discussion on Mozzi-users.
 */
-
+#define MOZZI_AUDIO_MODE FOR_DOXYGEN_ONLY
 
 /** @ingroup config
  * @def MOZZI_AUDIO_CHANNELS
@@ -79,6 +102,7 @@
  * @note At the time of this writing, only MOZZI_MONO and MOZZI_STEREO are supported. The value of
  *       MOZZI_MONO is 1 and the value of MOZZI_STEREO is 2, so future extensions are also expected
  *       to set this to the number of available channels, and it's ok to use numerical comparison. */
+#define MOZZI_AUDIO_CHANNELS FOR_DOXYGEN_ONLY
 
 
 /** @ingroup config
@@ -101,7 +125,7 @@
  * It is advised to use only MOZZI_AUDIO_RATE in new code, however.
  * TODO: Only do the above, if MozziGuts.h, rather than Mozzi.h was included?
  */
-
+#define MOZZI_AUDIO_RATE FOR_DOXYGEN_ONLY
 
 
 /** @ingroup config
@@ -120,6 +144,7 @@
  *
  * TODO: If a definition of CONTROL_RATE is detected, apply that with a warning.
 */
+#define MOZZI_CONTROL_RATE FOR_DOXYGEN_ONLY
 
 
 /** @ingroup config
@@ -140,6 +165,7 @@
  *   - MOZZI_ANALOG_READ_STANDARD
  *     Analog read implementation enabled (currently there is only the "standard" method, but future versions might allow additional choice, here).
 */
+#define MOZZI_ANALOG_READ FOR_DOXYGEN_ONLY
 
 
 /** @ingroup config
@@ -158,6 +184,7 @@
  *
  * Further reading and config: @ref getAudioInput() @ref MOZZI_AUDIO_INPUT_PIN
 */
+#define MOZZI_AUDIO_INPUT FOR_DOXYGEN_ONLY
 
 
 /** @ingroup config
@@ -166,6 +193,8 @@
  * This sets which analog input channel to use for audio input, if you have enabled MOZZI_AUDIO_INPUT, above.
  * Not all pins may be available for this, be sure to check the documentation for your platform.
 */
+#define MOZZI_AUDIO_INPUT_PIN FOR_DOXYGEN_ONLY
+
 
 /** @ingroup config
  * @def MOZZI_PWM_RATE
@@ -179,6 +208,8 @@
  * In other words, increasing this improves the signal quality at less cost than doubling the audio rate itself. However, increasing this too far will limit the dynamic resolution of the samples that can be
  * written to the output pin(s): 2 ^ (output bits) * MOZZI_PWM_RATE cannot be higher than the CPU frequency!
 */
+#define MOZZI_PWM_RATE FOR_DOXYGEN_ONLY
+
 
 /** @ingroup config
  * @def MOZZI_AUDIO_BITS_PER_CHANNEL
@@ -188,6 +219,8 @@
  *
  * See @ref hardware_avr for a more detailed description.
 */
+#define MOZZI_AUDIO_BITS_PER_CHANNEL FOR_DOXYGEN_ONLY
+
 
 /** @ingroup config
  * @def MOZZI_AUDIO_PIN_1
@@ -213,6 +246,7 @@
  *
  * @see config/known_16bit_timers.h
  * */
+#define MOZZI_AUDIO_PIN_1 FOR_DOXYGEN_ONLY
 
 
 /***************************************** ADVANCED SETTTINGS -- External audio output ******************************************
@@ -221,10 +255,11 @@
  *
 ********************************************************************************************************************************/
 
-/** @ingroup hardware
- * @page external_audio External audio output
+/** @ingroup audio_output
  *
- * <em>Only for MOZZI_AUDIO_MODE s MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM</em>. Most (all?) platforms support
+ * @page external_audio External audio output
+ * @details
+ * <em>Only for @ref MOZZI_AUDIO_MODE set to MOZZI_OUTPUT_EXTERNAL_TIMED or MOZZI_OUTPUT_EXTERNAL_CUSTOM</em>. Most (all?) platforms support
  * output using an "external" function. When using this option, you will need to provide a suitable definition for audioOutput() in
  * your own sketch, yourself. Some understanding of the general Mozzi audio output architecture may be recommendable, when using this
  * mode: See @ref AudioOutput .
@@ -241,6 +276,8 @@
  *
  * One additional configuration setting is MOZZI_AUDIO_BITS, which defaults to 16 bits for this mode, but might be set higher, if your
  * hardware supports it.
+ *
+ * @see config
 */
 
 
@@ -255,4 +292,6 @@
  * At the time of this writng single audio samples are stored as "int", unconditionally. This limits MOZZI_AUDIO_BITS to a maximum of 16 bits on
  * some 8 bit boards!
  */
+#define MOZZI_AUDIO_BITS FOR_DOXYGEN_ONLY
 
+#endif

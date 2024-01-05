@@ -292,8 +292,11 @@ uint32_t MozziRandPrivate::z=521288629;
 #undef AUDIOTICK_ADJUSTMENT
 #undef MOZZI__LEGACY_AUDIO_INPUT_IMPL
 
-// "export" publically accessible functions defined in this file
-unsigned long mozziMicros() { return MozziPrivate::mozziMicros(); };
+// "export" publicly accessible functions defined in this file
+// NOTE: unfortunately, we cannot just write using MozziPrivate::mozziMicros(), and that will conflict with, rather than define mozziMicros()
+//       we might want to rethink how this is done. What matters is that these functions are user accessible, though, while most of what we
+//       now keep in MozziPrivate is hidden away.
+//unsigned long mozziMicros() { return MozziPrivate::mozziMicros(); };
 unsigned long audioTicks() { return MozziPrivate::audioTicks(); };
 void startMozzi(int control_rate_hz) { MozziPrivate::startMozzi(control_rate_hz); };
 void stopMozzi() { MozziPrivate::stopMozzi(); };

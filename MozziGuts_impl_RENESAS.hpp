@@ -178,7 +178,7 @@ void stopMozzi() {
 
 //// BEGIN Random seeding ////////
 void MozziRandPrivate::autoSeed() {
-#warning Automatic random seedings is not implemented on this platform
+#warning Automatic random seeding is not implemented on this platform
 }
 //// END Random seeding ////////
 

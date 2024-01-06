@@ -30,7 +30,8 @@ USB cable
 
 WARNING: This tutorial assumes working with a classic 5V Arduino Nano (V3.0). For other boards, the placement of the pins
 may be vastly different. Also, be aware that other boards may require other voltages (e.g., only 3.3V), and following
-these instructions, blindly, could easily destroy them.{: .notice--danger}
+these instructions, blindly, could easily destroy them.
+{: .notice--danger}
 
 ---
 
@@ -126,7 +127,8 @@ In Audacity,
 Some new laptops have a single audio socket that requires a 4-pole audio input cable. If you don't have the cable then just listen to the audio through headphones which will be a bit noisy but good enough for learning….  
 
 WARNING: Directly attaching a headphone will not work with all boards, and could destroy your MCU, if you exceed the current rating of the output pins. Using a simple (high input impedance) headphone
-amplifier or an _active_ speaker is generally a safer choice.{: .notice--danger}
+amplifier or an _active_ speaker is generally a safer choice.
+{: .notice--danger}
 
 ---
 

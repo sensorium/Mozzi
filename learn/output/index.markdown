@@ -11,7 +11,8 @@ However, to keep things somewhat simple, on each platform the default is to outp
 
 ## Single pin output circuits
 
-Here, "single pin" means one output pin per audio channel, so it could also be two for stereo output. In that case, obviously, you need the same circuit twice.{: .notice--info}
+Here, "single pin" means one output pin per audio channel, so it could also be two for stereo output. In that case, obviously, you need the same circuit twice.
+{: .notice--info}
 
 ### Output using a true hardware DAC
 
@@ -32,9 +33,9 @@ For Mozzi, an RC filter with a roll-off frequency of just under 6kHz works well,
 
 ![RC circuit](https://farm9.staticflickr.com/8317/7934584004_096300ef0d.jpg)
 
-### Notch filter for 16768 Hz carrier frequency
+### Notch filter for 16384 Hz carrier frequency
 
-First versions of Mozzi used a 16768 Hz PWM carrier frequency on AVR CPUs (originally known as the "STANDARD" mode). This was soon doubled,
+First versions of Mozzi used a 16384 Hz PWM carrier frequency on AVR CPUs (originally known as the "STANDARD" mode). This was soon doubled,
 but if you want to squeeze out a few % more CPU power, or you want to trade a lower frequency for a higher output signal resolution, you may
 once again end up with audible artifacts. In particular children will typically find a 16786 Hz carrier frequency irritating, while adults
 are often unable to perceive it at any level!
@@ -42,9 +43,10 @@ are often unable to perceive it at any level!
 Simply put, using pulse width modulation (PWM), if you want 12 bits of output resolution, i.e. 4096 distrinc signal levels, a digital output
 pin will have to be held high (or low) for up to that many CPU cycles, so this will generally require a clock on the order of at least 100 Mhz
 in oder to push the carrier frequency outside the audible range. See configuration options `MOZZI_PWM_RATE`, and `M̀OZZI_AUDIO_BITS`,
-or `MOZZI_PDM_RESOLUTION` if you want to tweak this tradeoff.{: .notice--info}
+or `MOZZI_PDM_RESOLUTION` if you want to tweak this tradeoff.
+{: .notice--info}
 
-Many thanks to Andrew McPherson, who sent a schematic and equation for a twin-T notch filter which he used successfully to remove the offending 16768 Hz frequency.
+Many thanks to Andrew McPherson, who sent a schematic and equation for a twin-T notch filter which he used successfully to remove the offending 16384 Hz frequency.
 
 ![Twin-T Notch Filter](https://farm9.staticflickr.com/8470/8124196839_6f3e506525.jpg)
 ![equation](https://farm9.staticflickr.com/8472/8124196815_6c02f4fb86.jpg)
@@ -64,7 +66,8 @@ Mozzi's MOZZI_OUTPUT_2PIN_PWM ("HIFI") audio mode combines the output of 2 pins 
 
 This output mode needs a differnt and more complex output circuitry than the single pin modes, and using the regular single pin circuit for "HIFI" will result in
 terribly distorted sound. In case of difficiculties (but also in general), it is very much recommended to try the default output mode, first, and switch to any
-other mode only once you've verified that works. Don't go straight for "HIFI" just because is sounds promising.{: notice-warning}
+other mode only once you've verified that works. Don't go straight for "HIFI" just because is sounds promising.
+{: notice--warning}
 
 Here's the circuit for Mozzi, based on the Open Music Labs article.
 

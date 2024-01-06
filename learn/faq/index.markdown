@@ -8,32 +8,40 @@ layout: single
 [3. My patch was working and now it sounds horrible!](#q3)  
 [4. How can I optimise my code to get the most out of Mozzi?](#q4)  
 [5. How can I extend Mozzi? ](#q5)  
-[6. Can I contribute developments?  How?](#q6)  
+[6. How can I use Mozzi on my all new hardware? ](#q6)  
+[7. Can I contribute developments?  How?](#q7)  
 
 ---
 
 <a id="q1"></a>
 ### Everything sounds glitchy, including the examples.
 
-Maybe you're listening to a `STANDARD` or `STANDARD_PLUS` sketch, but `AUDIO_MODE` is set to `HIFI`.
-Check the file __Mozzi/mozzi_config.h__.  Look for:
-``` c
-//#define AUDIO_MODE STANDARD
-#define AUDIO_MODE STANDARD_PLUS
-//#define AUDIO_MODE HIFI
-```
-For `STANDARD_PLUS` mode, the lines should appear as above,
-with the `STANDARD` and `HIFI` lines commented out.  Most of the examples work in
-`STANDARD_PLUS` mode, unless they say otherwise.
+Check that you output circuit matches the output mode (`MOZZI_AUDIO_MODE`) you have configured.
+For instance, `MOZZI_OUTPUT_MODE_2PIN_PWM` (aka "HIFI") needs an entirely different hardware
+setup than `MOZZI_OUTPUT_MODE_PWM`.
+
+Most of the examples use the default output mode, but some do not. Be sure to read the advice
+given at the top of each example, and - especially if using hardware other than the classic
+Arduino AVR boards - make sure you understand what pins to expect the audio output on.
+
+TODO: Link to hardware and config sections in the API docs.
 
 [(go to top)](#top)   
 
 ---
 
 <a id="q2"></a>
-### Everything sounds too quiet.
+### Everything sounds too quiet (or too loud and is clipping).
 
-Check if you're listening to a `HIFI` sketch in `STANDARD` or `STANDARD_PLUS` mode.  See the previous answer.
+You may have miscalculated the sample range in your `updateAudio()` function, and need to
+scale from a different number of bits (e.g. feeding only 14 bits into `MonoOutput::from16Bit(sample)`
+will sound too quiet, and you'd need `MonoOutput::fromNBit(14, sample)`, instead).
+
+When trying some older example found on the internet, it's even quite possible that the
+`updateAudio()` function does not perform any scaling at all, and simply returns a plain integer value
+that was appropriate for whatever hardware and configuration they used. In this case, try to understand
+the range produced in those examples, and conver to an appropriate `MonoOutput::fromXY()` scaling,
+instead.
 
 [(go to top)](#top)  
 
@@ -42,7 +50,7 @@ Check if you're listening to a `HIFI` sketch in `STANDARD` or `STANDARD_PLUS` mo
 <a id="q3"></a>
 ### My patch was working and now it sounds horrible!
 
-* Has the `AUDIO_MODE` changed in __Mozzi/mozzi_config.h__?  
+* Have you done any changes to the `MOZZI_AUDIO_MODE`?  
 * Is the processor having trouble keeping up with the amount of calculations it's doing?  
 * Has a signed or unsigned variable been cast to the wrong sign?  
 * Is there a data type overflowing somewhere?  
@@ -76,7 +84,7 @@ If you _still_ need more speed, Arduino 1.0.5 compiles code that runs slightly f
 
 It's easy!  I usually copy the simplest class.h file I can find in the Mozzi folder and base the next thing on that.
 Usually it'll have a `next()` method, maybe a couple of `set()` methods and whetever else you decide on.
-It might make use of `AUDIO_RATE` or `CONTROL_RATE`.
+It might make use of `MOZZI_AUDIO_RATE` or `MOZZI_CONTROL_RATE`.
 It seems self-explanatory to me, but then I haven't ever explained it to anyone.
 
 [(go to top)](#top)  
@@ -84,6 +92,18 @@ It seems self-explanatory to me, but then I haven't ever explained it to anyone.
 ---
 
 <a id="q6"></a>
+### How can I use Mozzi on my all new hardware?
+
+If your CPU is not yet supported by Mozzi, things are a bit more involved. However, by now, ports to many very
+different MCU exist, and so you can go by example to quite some degreee.
+
+The whole process is outlined in some detail in [internal/MOzziGuts_impl_template.cpp](https://github.com/sensorium/Mozzi/blob/master/internal/MozziGuts_impl_template.hpp).
+
+[(go to top)](#top)  
+
+---
+
+<a id="q7"></a>
 ### Can I contribute developments?  How?
 
 [Fork Mozzi on GitHub](https://github.com/sensorium/Mozzi), and your changes will become part of the "development graph", or just post to the [users' list](https://groups.google.com/forum/#!forum/mozzi-users/).

@@ -42,7 +42,7 @@ are often unable to perceive it at any level!
 
 Simply put, using pulse width modulation (PWM), if you want 12 bits of output resolution, i.e. 4096 distrinc signal levels, a digital output
 pin will have to be held high (or low) for up to that many CPU cycles, so this will generally require a clock on the order of at least 100 Mhz
-in oder to push the carrier frequency outside the audible range. See configuration options `MOZZI_PWM_RATE`, and `M̀OZZI_AUDIO_BITS`,
+in oder to push the carrier frequency outside the audible range. See configuration options `MOZZI_PWM_RATE`, and `MOZZI_AUDIO_BITS`,
 or `MOZZI_PDM_RESOLUTION` if you want to tweak this tradeoff.
 {: .notice--info}
 

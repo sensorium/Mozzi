@@ -6,20 +6,20 @@ The interface between Mozzi and the Arduino environment consists of four main fu
 
 ![Mozzi system architecture](images/Mozzi-system.jpg)
 
-`startMozzi(control_rate)` goes in Arduino's `setup()`. It starts a timer which regularly sends audio out from the audio output buffer, and calls updateControl() at the requested control rate given in Hz as a parameter, or defaulting to 64 Hz without a parameter.
+Internal details differ in some implementations, but the above schematic, prepared for early Mozzi versions, is still accurate where it comes to the interaction of the four user space functions, and hopefully gives a basic idea.
+
+`startMozzi()` goes in Arduino's `setup()`. It starts a timer which regularly sends audio out from the audio output buffer, and calls updateControl() at the configured `MOZZI_CONTROL_RATE` in Hz (defaulting to 64 Hz).
 
 `updateControl()` is where any analog or digital input sensing code should be placed and relatively slow changes such as LFO's or frequency changes can be performed.
 
-`updateAudio()` is where audio synthesis code should be placed. This runs on average 16384 times per second, so code here needs to be lean. The only other strict requirement is that it returns an integer between -244 and 243 inclusive in STANDARD mode or -8192 to 8191 in HIFI mode.
+`updateAudio()` is where audio synthesis code should be placed. This runs on average at MOZZI_AUDIO_RATE, i.e. typically 16384 times per second or even twice as much, so code here needs to be lean. The only other strict requirement is that it needs to return zero-centered samples in the required bit range. The functions `MonoOutput::from8Bit()`, `MonoOutput::from16Bit()`, and `MonoOutput::fromNBit()` (or their `StereoOuput`-counterparts) help in scaling the result of your computations to the required output range, portably, and efficiently.
 
-`audioHook()` goes in Arduino's `loop()`. It wraps `updateAudio()` and takes care of filling the output buffer, hiding the details of this from user space.
+`audioHook()` goes in Arduino's `loop()`. It wraps `updateAudio()` and takes care of filling the output buffer, hiding the details of buffering and actual output on hardware from user space.
 
-Mozzi uses hardware interrupts on the processor which automatically call
+In most implementations Mozzi uses hardware interrupts / timers on the processor which automatically call
 interrupt service routines (ISR) at regular intervals. `startMozzi()` sets
-up an interrupt for audio output at a sample rate of 16384 Hz. A counter in the audio output routine is used to call `updateControl`.  In earlier versions, a separate interrupt on Timer 0 was used for control.  
+up an interrupt for audio output at a sample rate of `MOZZI_AUDIO_RATE` (16384 Hz on AVR or 32768 Hz elsewhere, by default). A counter in the audio output routine is used to call `updateControl`.
 
-In `STANDARD_PLUS` (and old `STANDARD`) mode, the 16 bit Timer 1 is used by Mozzi on the ATmega processors for audio and control.  
+On the AVR (ATmega) architecture, the 16 bit Timer 1 is claimed by Mozzi on the ATmega processors for audio and control. 2-pin PWM ("HIFI") mode additionally employs Timer 2 with Timer 1 for audio.
 
-`HIFI` mode additionally employs Timer 2 with Timer 1 for audio.
-
-The output buffer has 256 cells which equates to a maximum latency of about 15 milliseconds, to give leeway for control operations without interrupting audio output. The buffer is emptied behind the scenes by the regular 16384 Hz audio interrupt.
+The output buffer has 256 cells which equates to a maximum latency of about 15 milliseconds at 16384 Hz (half as much at 32768 Hz), to give leeway for control operations without interrupting audio output. The buffer is emptied behind the scenes by the regular 16384 Hz / 32768 Hz audio interrupt.

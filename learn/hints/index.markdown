@@ -29,7 +29,7 @@ the compiler for small code size rather than speed!  Here's a great read ; ) [At
 
 ## Debugging
 
-* Printing to the Arduino Serial monitor is a useful tool for debugging, but beware of trying to print too much or your whole computer might freeze! It's mostly OK to print from `updateControl()` with a `CONTROL_RATE` of 64, and it works well with a baud rate of 9600, ie. `Serial.begin(9600)`. Remember to set it in the monitor window too. Notice that using Serial adds size to your sketch and can often disrupt audio, so check if you've got print statements interfering if you're hearing audio clicks.
+* Printing to the Arduino Serial monitor is a useful tool for debugging, but beware of trying to print too much or your whole computer might freeze! It's mostly OK to print from `updateControl()` with the default `MOZZI_CONTROL_RATE` of 64, and it works well with a baud rate of 9600, ie. `Serial.begin(9600)`. Remember to set it in the monitor window too. Notice that using Serial adds size to your sketch and can often disrupt audio, so check if you've got print statements interfering if you're hearing audio clicks.
 
 * To print audio rate debugging info, don't use the Arduino serial monitor, try [CoolTerm](https://freeware.the-meiers.org/), it's a great application which performs much better and can capture incoming data to a file.
 
@@ -49,7 +49,9 @@ ___
 [Baudline](https://www.baudline.com/) signal analyser, and
 [SignalScope](https://www.faberacoustical.com/products/signalscope/).
 
-* In Audacity, set the Project Rate to Mozzi's audio rate of 16384 Hz before recording. This will make the PWM artifacts disappear and the waves will look like normal, non-PWM sound. You need to adjust the recording level by ear, because the sound distorts at a lower level than expected even though the levels in the window look OK.
+* In Audacity, set the Project Rate to Mozzi's audio rate of 16384 Hz before recording (at least if you are using Mozzi on a classic Arduino at default settings; most other platforms
+deafult to a `MOZZI_AUDIO_RATE` of 32768). This will make the PWM artifacts disappear and the waves will look like normal, non-PWM sound. You need to adjust the recording level by ear,
+because the sound distorts at a lower level than expected even though the levels in the window look OK.
 
 * If you're stuck with a fixed recording rate and you need to see what's
 happening in your synthesis, filtering makes a big difference. There's a Pure Data patch in Mozzi/pd with 4 4000Hz filters in series which can be used with a utility like Jack or Soundflower to filter the audio before it gets to your sound program. This allows you to check what's happening in real time.

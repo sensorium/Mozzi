@@ -32,7 +32,7 @@ jobs:
           if: github.event_name == 'push'
           id: debounce
           run: |
-            pr_branches=$(gh pr list --json headRefName --repo $GITHUB_REPOSITORY | jq -r '.[].headRefName')
+            pr_branches=$(gh pr list --repo $GITHUB_REPOSITORY -q '.[] | select(.isCrossRepository == false)' --json isCrossRepository --json headRefName)
             this_branch=$(echo $GITHUB_REF | sed -e 's/refs\/heads\///')
             if [[ $(echo "$pr_branches" | grep "$this_branch") ]]; then
               echo "This push is associated with a pull request. Skipping the job."

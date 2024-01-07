@@ -20,9 +20,29 @@ on:
   repository_dispatch:
 
 jobs:
+  # debounce job taken from https://stackoverflow.com/questions/75714742/do-not-trigger-github-action-workflow-on-push-if-a-pr-is-open-on-the-branch to reduce duplicate compilations
+  debounce:
+      runs-on: ubuntu-latest
+      env:
+        GH_TOKEN: ${{ github.token }}
+      outputs:
+        abort: ${{ steps.debounce.outputs.abort }}
+      steps:
+        - name: Debounce
+          if: github.event_name == 'push'
+          id: debounce
+          run: |
+            pr_branches=$(gh pr list --json headRefName --repo $GITHUB_REPOSITORY)
+            if [[ $(echo "$pr_branches" | jq -r --arg GITHUB_REF '.[].headRefName | select(. == $GITHUB_REF)') ]]; then
+              echo "This push is associated with a pull request. Skipping the job."
+              echo "abort=true" >> "$GITHUB_OUTPUT"
+            fi
+
   build:
     name: ${{ matrix.board.fqbn }}
     runs-on: ubuntu-latest
+    needs: debounce
+    if: needs.debounce.outputs.abort != 'true'
 
     env:
       SKETCHES_REPORTS_PATH: sketches-reports

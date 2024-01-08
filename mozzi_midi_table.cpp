@@ -1,5 +1,11 @@
 #include "mozzi_midi.h"
 
+/* MidiToFreqPrivate
+Stores the frequency values corresponding to whole MIDI notes
+in fixed point format (Q16n16).
+Used internally by the functions defined in mozzi_midi.h.
+ */
+
 CONSTTABLE_STORAGE(uint32_t) MidiToFreqPrivate::midiToFreq[128] =
     {
     0, 567670, 601425, 637188, 675077, 715219, 757748, 802806, 850544, 901120,

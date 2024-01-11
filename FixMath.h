@@ -69,6 +69,7 @@
 #define MAX(N1,N2) (N1 > N2 ? N1 : N2)
 #define UBITSTOBYTES(N) (((N-1)>>3)+1)
 #define SBITSTOBYTES(N) (((N)>>3)+1)
+#define ONESBITMASK(N) ((1ULL<<(N)) - 1)
 
 // Experiments
 /*#define NBITSREAL(X,N) (abs(X) < (1<<N) ? N : NBITSREAL2(X,N+1))
@@ -267,6 +268,21 @@ public:
   {
     return UFixMath<NI,NF>(internal_value*op,true);
   }
+
+
+  //////// INVERSE
+  UFixMath<NF,NI> invFast() const
+  {
+    return UFixMath<NF,NI>((ONESBITMASK(NI+NF)/internal_value),true);
+  }
+
+
+
+  UFixMath<NF,NI*2+NF> invAccurate() const
+  {
+    return UFixMath<NF,NI*2+NF>((ONESBITMASK(NI*2+NF*2)/ (typename IntegerType<UBITSTOBYTES(2*NI+2*NF)>::unsigned_type)internal_value),true);
+    }
+  
 
 
   //////// SHIFTS OVERLOADS
@@ -1025,6 +1041,7 @@ bool operator!= (const UFixMath<NI,NF>& op1, const SFixMath<_NI,_NF>& op2 )
 #undef MAX
 #undef UBITSTOBYTES
 #undef SBITSTOBYTES
+#undef ONESBITMASK
 
 
 #endif

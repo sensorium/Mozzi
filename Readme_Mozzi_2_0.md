@@ -1,6 +1,6 @@
 Porting to Mozzi 2.0
 
-// TODO: properly type up
+// TODO: These are just short notes taken while working. Needs to be typed up properly, in the end.
 
 
 changed config names and semantics TODO (incomplete)
@@ -37,7 +37,7 @@ Other removed stuff:
  - Since Mozzi (AVR-port) no longer uses Timer 0 since a long time, the corresponding library (utility/TimerZero.h) has now been removed, too.
    The Arduino functions delay(), millis(), micros() and delayMicroseconds() should now be usable in theory. That said,
    you should avoid these functions, as they are slow (or even blocking). For measuring time, refer
-   to mozziMircos(). For delaying events, you can use Mozzi's EventDelay() unit instead (not to be confused with AudioDelay()).
+   to mozziMicros(). For delaying events, you can use Mozzi's EventDelay() unit instead (not to be confused with AudioDelay()).
 
 Moved headers:
  - Header files not meant for user inclusion have been moved to "internal"

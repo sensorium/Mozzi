@@ -67,7 +67,7 @@
 #include "IntegerType.h"
 
 #define MOZZI_SHIFTR(x,bits) (bits > 0 ? (x >> (bits)) : (x << (-bits))) // shift right for positive shift numbers, and left for negative ones.
-#define MAX(N1,N2) (N1 > N2 ? N1 : N2)
+#define MAX(N1,N2) ((N1) > (N2) ? (N1) : (N2))
 #define UBITSTOBYTES(N) (((N-1)>>3)+1)
 #define SBITSTOBYTES(N) (((N)>>3)+1)
 #define ONESBITMASK(N) ((1ULL<<(N)) - 1)

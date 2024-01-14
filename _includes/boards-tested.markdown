@@ -10,52 +10,55 @@ Legend:
  - inbuilt DAC: `MOZZI_OUTPUT_INTERNAL_DAC`
  - I2S DAC (native): native support for externally connected I2S DACs (`MOZZI_OUTPUT_I2S_DAC`). Since this requires several, often
    configurable pins, and is never the default option, no pin numbers are shown in this table.
- - **All** platforms also all "external" output modes (`MOZZI_OUTPUT_EXTERNAL_TIMED` or `MOZZI_OUTPUT_EXTERNAL_CUSTOM`), which allow
+ - **All** platforms also support "external" output modes (`MOZZI_OUTPUT_EXTERNAL_TIMED` or `MOZZI_OUTPUT_EXTERNAL_CUSTOM`), which allow
    for connecting DACs or other external circtuity.
 
-|  __Board or family__  / __Output mode__                   | PWM-1   | PWM-2   | PDM     | inbuilt<br>DAC | I2S DAC<br>(native) |
-|------------------------------------------------------------------------------|---------|---------|---------|---------|---------|
-| _ATmega328/168_: Uno (R3), Nano, Pro Mini, Duemilanove, Leonardo, etc.       | **9**   | 9, 10   | -       | -       | -       |
-| Stereo (additional pin for right channel):                                   | 10      | -       | -       | -       | -       |
-|------------------------------------------------------------------------------|---------|---------|---------|---------|---------|
-| _ATmega32U4_: Teensy, Teensy2, 2++                                           | **B5** (14) | B5, B6 | -    | -       | -       |
-| Stereo:                                                                      | B6 (15) | -       | -       | -       | -       |
-|------------------------------------------------------------------------------|---------|---------|---------|---------|---------|
-| _ATmega2560_: Arduino Mega, Freetronics EtherMega, etc.                      | 11      | 11, 12  | -       | -       | -       |
-| Stereo:                                                                      | 12      | -       | -       | -       | -       |
-|------------------------------------------------------------------------------|---------|---------|---------|---------|---------|
-| _ATmega1284_: Sanguino                                                       | 13      | 13, 12  | -       | -       | -       |
-| Stereo:                                                                      | 12      | -       | -       | -       | -       |
-|------------------------------------------------------------------------------|---------|---------|---------|---------|---------|
-| Teensy3.x - _note: DAC Pin number depends on model: A14, A12, or A21_        | -       | -       | –       | **DAC** | -       |
-| Stereo:                                                                      | -       | -       | -       | -       | -       |
-|------------------------------------------------------------------------------|---------|---------|---------|---------|---------|
-| _LGT8F328P_: "Register clone" of the ATmega328, uses the same code in Mozzi  | **9**   | 9, 10   | -       | -       | -       |
-| Stereo:                                                                      | 10      | -       | -       | -       | -       |
-|------------------------------------------------------------------------------|---------|---------|---------|---------|---------|
-| _SAMD_: Arduino Nano 33 Iot, Adafruit Playground Express, Gemma M0 etc.      | -       | -       | -       | A0      | -       |
-|                                                                              |         |         |         |(speaker)|         |
-| Stereo:                                                                      | -       | -       | -       | -       | -       |
-|------------------------------------------------------------------------------|---------|---------|---------|---------|---------|
-| _Renesas Arduino Core_: Arduino Uno R4                                       | -       | -       | -       | A0      | -       |
-| Stereo:                                                                      | -       | -       | -       | -       | -       |
-|------------------------------------------------------------------------------|---------|---------|---------|---------|---------|
-| _Arduino MBED Core_: Arduino Giga (only model tested so far in this family)  | -       | -       | SERIAL2_TX | **A13** | -    |
-| Stereo:                                                                      | -       | -       | -       | A12     | -       |
-|------------------------------------------------------------------------------|---------|---------|---------|---------|---------|
-| _STM32 maple core_: Various STM32F1 and STM32F4 boards, "Blue/Black Pill"    | **PB8** | PB8, PB9| -       | -       | -       |
-| Stereo:                                                                      | PB9     | -       | -       | -       | -       |
-|------------------------------------------------------------------------------|---------|---------|---------|---------|---------|
-| _STM32duino (STM official) core_: Huge range of STM32Fx boards               | **PA8** | PA8, PA9| -       | -       | -       |
-| Stereo:                                                                      | PA9     | -       | -       | -       | -       |
-|------------------------------------------------------------------------------|---------|---------|---------|---------|---------|
-| _ESP8266_: ESP-01, Wemos D1 mini, etc. _note: Beware of erratic pin labels_  | -       | -       | **GPIO2** | -     | yes     |
-| Stereo:                                                                      | -       | -       | -       | -       | yes     |
-|------------------------------------------------------------------------------|---------|---------|---------|---------|---------|
-| _ESP32_: _note: Beware of vastly different pin labels across board variants_ | -       | -       | yes     | **GPIO25** | yes  |
-| Stereo:                                                                      | -       | -       | -       | GPIO26  | yes     |
-|------------------------------------------------------------------------------|---------|---------|---------|---------|---------|
-| _RP2040_: Raspberry Pi Pico and friends                                      | **0**   | 0, 1    | -       | -       | yes     |
-| Stereo:                                                                      | 1       | -       | -       | -       | yes     |
-|------------------------------------------------------------------------------|---------|---------|---------|---------|---------|
-
+<table border="0">
+<thead>
+<tr><td><b>Board or family</b>  / <b>Output mode</b>                                           </td><td> PWM-1      </td><td> PWM-2      </td><td> PDM        </td><td>inbuilt DAC </td><td>I2S DAC (native)</td></tr>
+</thead>
+<tbody>
+<tr style="border-top: 2px solid">
+    <td><i>ATmega328/168</i>: Uno (R3), Nano, Pro Mini, Duemilanove, Leonardo, etc.            </td><td><b>9</b>    </td><td> 9, 10      </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr><td>Stereo (additional pin for right channel):                                             </td><td> 10         </td><td> -          </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 2px solid">
+    <td><i>ATmega32U4</i>: Teensy, Teensy2, 2++                                                </td><td><b>B5</b> (14)</td><td> B5, B6   </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr><td>Stereo:                                                                                </td><td> B6 (15)    </td><td> -          </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 2px solid">
+    <td><i>ATmega2560</i>: Arduino Mega, Freetronics EtherMega, etc.                           </td><td><b>11</b>   </td><td> 11, 12     </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr><td>Stereo:                                                                                </td><td> 12         </td><td> -          </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 2px solid">
+    <td><i>ATmega1284</i>: Sanguino                                                            </td><td><b>13</b>   </td><td> 13, 12     </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr><td>Stereo:                                                                                </td><td> 12         </td><td> -          </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 2px solid">
+    <td>Teensy3.x - <i>note: DAC Pin number depends on model: A14, A12, or A21</i>             </td><td> -          </td><td> -          </td><td> –          </td><td><b>DAC</b>  </td><td> -          </td></tr>
+<tr><td>Stereo:                                                                                </td><td> -          </td><td> -          </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 2px solid">
+    <td><i>LGT8F328P</i>: "Register clone" of the ATmega328, uses the same code in Mozzi       </td><td><b>9</b>    </td><td> 9, 10      </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr><td>Stereo:                                                                                </td><td> 10         </td><td> -          </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 2px solid">
+    <td><i>SAMD</i>: Arduino Nano 33 Iot, Adafruit Playground Express, Gemma M0 etc.           </td><td> -          </td><td> -          </td><td> -          </td><td><b>A0</b> (speaker)</td><td> -   </td></tr>
+<tr><td>Stereo:                                                                                </td><td> -          </td><td> -          </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 2px solid">
+    <td><i>Renesas Arduino Core</i>: Arduino Uno R4                                            </td><td> -          </td><td> -          </td><td> -          </td><td><b>A0</b>   </td><td> -          </td></tr>
+<tr><td>Stereo:                                                                                </td><td> -          </td><td> -          </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 2px solid">
+    <td><i>Arduino MBED Core</i>: Arduino Giga (only model tested so far in this family)       </td><td> -          </td><td> -          </td><td> SERIAL2TX  </td><td><b>A13</b  ></td><td> -          </td></tr>
+<tr><td>Stereo:                                                                                </td><td> -          </td><td> -          </td><td> -          </td><td> A12        </td><td> -          </td></tr>
+<tr style="border-top: 2px solid">
+    <td><i>STM32 maple core</i>: Various STM32F1 and STM32F4 boards, "Blue/Black Pill"         </td><td><b>PB8</b>  </td><td> PB8, PB9   </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr><td>Stereo:                                                                                </td><td> PB9        </td><td> -          </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 2px solid">
+    <td><i>STM32duino (STM official) core</i>: Huge range of STM32Fx boards                    </td><td><b>PA8</b>  </td><td> PA8, PA9   </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr><td>Stereo:                                                                                </td><td> PA9        </td><td> -          </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 2px solid">
+    <td><i>ESP8266</i>: ESP-01, Wemos D1 mini, etc. <i>note: Beware of erratic pin labels</i>  </td><td> -          </td><td> -          </td><td><b>GPIO2</b></td><td> -          </td><td> yes        </td></tr>
+<tr><td>Stereo:                                                                                </td><td> -          </td><td> -          </td><td> -          </td><td> -          </td><td> yes        </td></tr>
+<tr style="border-top: 2px solid">
+    <td><i>ESP32</i>: <i>note: Beware of vastly different pin labels across board variants</i> </td><td> -          </td><td> -          </td><td> yes        </td><td><b>GPIO25</b></td><td> yes       </td></tr>
+<tr><td>Stereo:                                                                                </td><td> -          </td><td> -          </td><td> -          </td><td> GPIO26     </td><td> yes        </td></tr>
+<tr style="border-top: 2px solid">
+    <td><i>RP2040</i>: Raspberry Pi Pico and friends                                           </td><td><b>0</b>    </td><td> 0, 1       </td><td> -          </td><td> -          </td><td> yes        </td></tr>
+<tr><td>Stereo:                                                                                </td><td> 1          </td><td> -          </td><td> -          </td><td> -          </td><td> yes        </td></tr>
+</tbody>
+</table>

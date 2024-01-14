@@ -272,17 +272,30 @@ public:
 
 
   //////// INVERSE
+
+  /** Compute the inverse of a UFixMath<NI,NF>, as a UFixMath<NF,NI> (not a typo).
+      This inverse is able to represent accurately the inverse of the smallest and biggest of the initial number, but might lead to a lot of duplicates in between.
+      Good if precision is not a premium but type conservation and speeds are. 
+      This is still slower than a multiplication, hence the suggested workflow is to compute the inverse when time is not critical, for instance in updateControl(), and multiply it afterward, for instance in updateAudio(), if you need a division.
+      @return The inverse of the number.
+  */
+
   UFixMath<NF,NI> invFast() const
   {
+    static_assert(NI+NF<=63, "The fast inverse cannot be computed for when NI+NF>63. Reduce the number of bits.");
     return UFixMath<NF,NI>((ONESBITMASK(NI+NF)/internal_value),true);
   }
 
-
-
+  /** Compute the inverse of a UFixMath<NI,NF>, as a UFixMath<NF,NI*2+NF>.
+      This inverse is more accurate than invFast, and usually leads to non common values on the whole input range. This comes at the cost of a way bigger resulting type.
+      This is still slower than a multiplication, hence the suggested workflow is to compute the inverse when time is not critical, for instance in updateControl(), and multiply it afterward, for instance in updateAudio(), if you need a division.
+      @return The inverse of the number.
+  */
   UFixMath<NF,NI*2+NF> invAccurate() const // TODO ADD STATIC ASSERT
   {
+    static_assert(2*NI+2*NF<=63, "The accurate inverse cannot be computed for when 2*NI+2*NF>63. Reduce the number of bits.");
     return UFixMath<NF,NI*2+NF>((ONESBITMASK(NI*2+NF*2)/ (typename IntegerType<UBITSTOBYTES(2*NI+2*NF)>::unsigned_type)internal_value),true);
-    }
+  }
   
 
 
@@ -668,6 +681,32 @@ public:
     return SFixMath<NI,NF>(internal_value*op,true);
   }
 
+
+    //////// INVERSE
+
+  /** Compute the inverse of a SFixMath<NI,NF>, as a SFixMath<NF,NI> (not a typo).
+      This inverse is able to represent accurately the inverse of the smallest and biggest of the initial number, but might lead to a lot of duplicates in between.
+      Good if precision is not a premium but type conservation and speeds are. 
+      This is still slower than a multiplication, hence the suggested workflow is to compute the inverse when time is not critical, for instance in updateControl(), and multiply it afterward, for instance in updateAudio(), if you need a division.
+      @return The inverse of the number.
+  */
+
+  SFixMath<NF,NI> invFast() const
+  {
+    static_assert(NI+NF<=62, "The fast inverse cannot be computed for when NI+NF>63. Reduce the number of bits.");
+    return SFixMath<NF,NI>((ONESBITMASK(NI+NF)/internal_value),true);
+  }
+
+  /** Compute the inverse of a SFixMath<NI,NF>, as a SFixMath<NF,NI*2+NF>.
+      This inverse is more accurate than invFast, and usually leads to non common values on the whole input range. This comes at the cost of a way bigger resulting type.
+      This is still slower than a multiplication, hence the suggested workflow is to compute the inverse when time is not critical, for instance in updateControl(), and multiply it afterward, for instance in updateAudio(), if you need a division.
+      @return The inverse of the number.
+  */
+  SFixMath<NF,NI*2+NF> invAccurate() const // TODO ADD STATIC ASSERT
+  {
+    static_assert(2*NI+2*NF<=62, "The accurate inverse cannot be computed for when 2*NI+2*NF>63. Reduce the number of bits.");
+    return SFixMath<NF,NI*2+NF>((ONESBITMASK(NI*2+NF*2)/ (typename IntegerType<UBITSTOBYTES(2*NI+2*NF)>::unsigned_type)internal_value),true);
+  }
 
   //////// SHIFTS OVERLOADS
 

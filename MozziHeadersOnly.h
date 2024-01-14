@@ -1,7 +1,7 @@
 /*
- * Mozzi.h
+ * MozziHeadersOnly.h
  *
- * Copyright 2023, Thomas Combriat and the Mozzi team
+ * Copyright 2024, Tim Barrass and the Mozzi team
  *
  * This file is part of Mozzi.
  *

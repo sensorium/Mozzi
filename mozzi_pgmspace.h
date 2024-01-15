@@ -53,7 +53,7 @@ template<typename T> inline T FLASH_OR_RAM_READ(T* address) {
  *  Declare a variable such that it will be stored in flash memory, instead of RAM, on platforms where this
  *  is reasonably possible (i.e. not on ESP8266, where random location flash memory access is too slow).
  *  To read the variable in a cross-platform compatible way, use FLASH_OR_RAM_READ(). */
-#define CONSTTABLE_STORAGE(X) const X __attribute__((section(".progmem.data")))
+#define CONSTTABLE_STORAGE(X) const X __attribute__((section(".irom.text.template")))
 #endif
 
 #endif

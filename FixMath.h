@@ -283,7 +283,8 @@ public:
   UFixMath<NF,NI> invFast() const
   {
     static_assert(NI+NF<=63, "The fast inverse cannot be computed for when NI+NF>63. Reduce the number of bits.");
-    return UFixMath<NF,NI>((ONESBITMASK(NI+NF)/internal_value),true);
+    //return UFixMath<NF,NI>((ONESBITMASK(NI+NF)/internal_value),true);
+     return UFixMath<NF,NI>((onesbitmask()/internal_value),true);
   }
 
   /** Compute the inverse of a UFixMath<NI,NF>, as a UFixMath<NF,NI*2+NF>.
@@ -294,7 +295,8 @@ public:
   UFixMath<NF,NI*2+NF> invAccurate() const // TODO ADD STATIC ASSERT
   {
     static_assert(2*NI+2*NF<=63, "The accurate inverse cannot be computed for when 2*NI+2*NF>63. Reduce the number of bits.");
-    return UFixMath<NF,NI*2+NF>((ONESBITMASK(NI*2+NF*2)/ (typename IntegerType<UBITSTOBYTES(2*NI+2*NF)>::unsigned_type)internal_value),true);
+    //return UFixMath<NF,NI*2+NF>((ONESBITMASK(NI*2+NF*2)/ (typename IntegerType<UBITSTOBYTES(2*NI+2*NF)>::unsigned_type)internal_value),true);
+    return UFixMath<NF,NI*2+NF>((onesbitmaskfull()/ (typename IntegerType<UBITSTOBYTES(2*NI+2*NF)>::unsigned_type)internal_value),true);
   }
   
 
@@ -415,6 +417,8 @@ public:
   
 private:
   internal_type internal_value;
+  static constexpr internal_type onesbitmask() { return (internal_type) ((1ULL<< (NI+NF)) - 1); }
+  static constexpr typename IntegerType<UBITSTOBYTES(2*NI+2*NF)>::unsigned_type onesbitmaskfull() { return (typename IntegerType<UBITSTOBYTES(2*NI+2*NF)>::unsigned_type) ((1ULL<< (NI*2+NF*2)) - 1); }
   
 };
 

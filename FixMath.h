@@ -287,6 +287,7 @@ public:
      return UFixMath<NF,NI>((onesbitmask()/internal_value),true);
   }
 
+
   /** Compute the inverse of a UFixMath<NI,NF>, as a UFixMath<NF,NI*2+NF>.
       This inverse is more accurate than invFast, and usually leads to non common values on the whole input range. This comes at the cost of a way bigger resulting type.
       This is still slower than a multiplication, hence the suggested workflow is to compute the inverse when time is not critical, for instance in updateControl(), and multiply it afterward, for instance in updateAudio(), if you need a division.
@@ -296,7 +297,7 @@ public:
   {
     static_assert(2*NI+2*NF<=63, "The accurate inverse cannot be computed for when 2*NI+2*NF>63. Reduce the number of bits.");
     //return UFixMath<NF,NI*2+NF>((ONESBITMASK(NI*2+NF*2)/ (typename IntegerType<UBITSTOBYTES(2*NI+2*NF)>::unsigned_type)internal_value),true);
-    return UFixMath<NF,NI*2+NF>((onesbitmaskfull()/ (typename IntegerType<UBITSTOBYTES(2*NI+2*NF)>::unsigned_type)internal_value),true);
+    return UFixMath<NF,NI*2+NF>((onesbitmaskfull() / (typename IntegerType<UBITSTOBYTES(2*NI+2*NF)>::unsigned_type)internal_value),true);
   }
   
 
@@ -698,7 +699,8 @@ public:
   SFixMath<NF,NI> invFast() const
   {
     static_assert(NI+NF<=62, "The fast inverse cannot be computed for when NI+NF>63. Reduce the number of bits.");
-    return SFixMath<NF,NI>((ONESBITMASK(NI+NF)/internal_value),true);
+    //return SFixMath<NF,NI>((ONESBITMASK(NI+NF)/internal_value),true);
+    return SFixMath<NF,NI>((onesbitmask()/internal_value),true);
   }
 
   /** Compute the inverse of a SFixMath<NI,NF>, as a SFixMath<NF,NI*2+NF>.
@@ -709,7 +711,8 @@ public:
   SFixMath<NF,NI*2+NF> invAccurate() const // TODO ADD STATIC ASSERT
   {
     static_assert(2*NI+2*NF<=62, "The accurate inverse cannot be computed for when 2*NI+2*NF>63. Reduce the number of bits.");
-    return SFixMath<NF,NI*2+NF>((ONESBITMASK(NI*2+NF*2)/ (typename IntegerType<UBITSTOBYTES(2*NI+2*NF)>::unsigned_type)internal_value),true);
+    //return SFixMath<NF,NI*2+NF>((ONESBITMASK(NI*2+NF*2)/ (typename IntegerType<SBITSTOBYTES(2*NI+2*NF)>::signed_type)internal_value),true);
+    return SFixMath<NF,NI*2+NF>((onesbitmaskfull() / (typename IntegerType<SBITSTOBYTES(2*NI+2*NF)>::signed_type)internal_value),true);
   }
 
   //////// SHIFTS OVERLOADS
@@ -817,6 +820,8 @@ public:
 
 private:
   internal_type internal_value;
+  static constexpr internal_type onesbitmask() { return (internal_type) ((1ULL<< (NI+NF)) - 1); }
+  static constexpr typename IntegerType<SBITSTOBYTES(2*NI+2*NF)>::signed_type onesbitmaskfull() { return (typename IntegerType<SBITSTOBYTES(2*NI+2*NF)>::signed_type) ((1ULL<< (NI*2+NF*2)) - 1); }
 
 };
 

@@ -271,6 +271,7 @@ defaults:
       comments: # true
       share: true
       related: true
+      classes: wide
       #excerpt: ""
 
 
@@ -280,5 +281,6 @@ defaults:
     values:
       #excerpt: "audio synthesis library for Arduino"
       subtitle: "audio synthesis library for Arduino"
+      classes: wide
       header:
         overlay_image: /assets/images/mozzi-square.png

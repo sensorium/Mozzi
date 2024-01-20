@@ -1,24 +1,14 @@
-
-List of supported boards and output modes (not necessarily complete). The default output mode and framed with a border in each row.
+## Supported boards, output modes and default pins
+Table is not necessarily complete. *Abbreviations explained below the table.* The default output mode is framed with a border in each row.
 If stereo is supported, in a mode, the cell has a red/blue background, and (where applicable) the second pin number is given in parentheses (+X).
-In many cases, pins are configurable, however, and also, some platform specific hints may be available. Check the hardware
-section of the API documentation (TODO: Add link).
-
-Legend:
- - PWM-1: 1-pin PWM mode (`MOZZI_OUTPUT_PWM`)
- - PWM-2: 2-pin PWM mode (`MOZZI_OUTPUT_2PIN_PWM`)
- - PDM: Pulse density modulation, may be either `MOZZI_OUTPUT_PDM_VIA_SERIAL` or `MOZZI_OUTPUT_PDM_VIA_I2S`
- - inbuilt DAC: `MOZZI_OUTPUT_INTERNAL_DAC`
- - I2S DAC (native): native support for externally connected I2S DACs (`MOZZI_OUTPUT_I2S_DAC`). Since this requires several, often
-   configurable pins, and is never the default option, no pin numbers are shown in this table.
- - **All** platforms also support "external" output modes (`MOZZI_OUTPUT_EXTERNAL_TIMED` or `MOZZI_OUTPUT_EXTERNAL_CUSTOM`), which allow
-   for connecting DACs or other external circtuity.
+Check the hardware section of the API documentation (TODO: Add link) for platform specific notes and (pin) configuration options.
 
 <style>
 td[data-def] { border: 2px solid; }
 td[data-st] { background: linear-gradient(-45deg,rgba(0,0,255,.5) 50%, rgba(255,0,0,.5) 50%); }
 td[data-sd] { border: 2px solid; background: linear-gradient(-45deg,rgba(0,0,255,.5) 50%, rgba(255,0,0,.5) 50%); }
 </style>
+
 <table border="0">
 <thead>
 <tr><td><b>Board or family</b>  / <b>Output mode</b>                                            </td><td> PWM-1          </td><td> PWM-2      </td><td> PDM        </td><td>inbuilt DAC </td><td>I2S DAC (native)</td></tr>
@@ -54,3 +44,14 @@ td[data-sd] { border: 2px solid; background: linear-gradient(-45deg,rgba(0,0,255
     <td><i>RP2040</i>: Raspberry Pi Pico and friends                                            </td><td data-sd>0 (+1)  </td><td> 0, 1       </td><td> -          </td><td> -          </td><td data-st>yes </td></tr>
 </tbody>
 </table>
+
+<span style="font-size: .6em">
+ - PWM-1: 1-pin PWM mode (`MOZZI_OUTPUT_PWM`)
+ - PWM-2: 2-pin PWM mode (`MOZZI_OUTPUT_2PIN_PWM`)
+ - PDM: Pulse density modulation, may be either `MOZZI_OUTPUT_PDM_VIA_SERIAL` or `MOZZI_OUTPUT_PDM_VIA_I2S`
+ - inbuilt DAC: `MOZZI_OUTPUT_INTERNAL_DAC`
+ - I2S DAC (native): native support for externally connected I2S DACs (`MOZZI_OUTPUT_I2S_DAC`). Since this requires several, often
+   configurable pins, and is never the default option, no pin numbers are shown in this table.
+ - **All** platforms also support "external" output modes (`MOZZI_OUTPUT_EXTERNAL_TIMED` or `MOZZI_OUTPUT_EXTERNAL_CUSTOM`), which allow
+   for connecting DACs or other external circuitry.
+</span>

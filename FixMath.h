@@ -68,8 +68,8 @@
 
 #define MOZZI_SHIFTR(x,bits) (bits > 0 ? (x >> (bits)) : (x << (-bits))) // shift right for positive shift numbers, and left for negative ones.
 #define MAX(N1,N2) ((N1) > (N2) ? (N1) : (N2))
-#define UBITSTOBYTES(N) (((N-1)>>3)+1)
-#define SBITSTOBYTES(N) (((N)>>3)+1)
+//#define UBITSTOBYTES(N) (((N-1)>>3)+1)
+//#define SBITSTOBYTES(N) (((N)>>3)+1)
 //#define ONESBITMASK(N) ((1ULL<<(N)) - 1)
 
 // Experiments
@@ -94,9 +94,11 @@
  
 // This works, but then spills out of this file. The results of the macros need to be known at compile time for the templates
 // hence it is fair to think that this should be equivalent.
-//constexpr byte SBITSTOBYTES(byte N) { return (((N)>>3)+1);}
-//constexpr byte UBITSTOBYTES(byte N) { return (((N-1)>>3)+1);}
 
+namespace MozziPrivate {
+constexpr byte sBitsToBytes(byte N) { return (((N)>>3)+1);}
+constexpr byte uBitsToBytes(byte N) { return (((N-1)>>3)+1);}
+}
 
 // Forward declaration
 template<byte NI, byte NF>
@@ -112,8 +114,8 @@ template<byte NI, byte NF> // NI and NF being the number of bits for the integra
 class UFixMath
 {
   static_assert(NI+NF<=64, "The total width of a UFixMath cannot exceed 64bits");
-  typedef typename IntegerType<UBITSTOBYTES(NI+NF)>::unsigned_type internal_type ; // smallest size that fits our internal integer
-  typedef typename IntegerType<UBITSTOBYTES(NI+NF+1)>::unsigned_type next_greater_type ; // smallest size that fits 1<<NF for sure (NI could be equal to 0). It can be the same than internal_type in some cases.
+  typedef typename IntegerType<MozziPrivate::uBitsToBytes(NI+NF)>::unsigned_type internal_type ; // smallest size that fits our internal integer
+  typedef typename IntegerType<MozziPrivate::uBitsToBytes(NI+NF+1)>::unsigned_type next_greater_type ; // smallest size that fits 1<<NF for sure (NI could be equal to 0). It can be the same than internal_type in some cases.
   
 public:
   /** Constructor
@@ -166,7 +168,7 @@ public:
   template<byte _NI, byte _NF>
   UFixMath(const UFixMath<_NI,_NF>& uf) {
     //internal_value = MOZZI_SHIFTR((typename IntegerType<((MAX(NI+NF-1,_NI+_NF-1))>>3)+1>::unsigned_type) uf.asRaw(),(_NF-NF));
-    internal_value = MOZZI_SHIFTR((typename IntegerType<UBITSTOBYTES(MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
+    internal_value = MOZZI_SHIFTR((typename IntegerType<MozziPrivate::uBitsToBytes(MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
   }
 
   /** Constructor from another SFixMath. 
@@ -175,7 +177,7 @@ public:
   */
   template<byte _NI, byte _NF>
   UFixMath(const SFixMath<_NI,_NF>& uf) {
-    internal_value = MOZZI_SHIFTR((typename IntegerType<UBITSTOBYTES(MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
+    internal_value = MOZZI_SHIFTR((typename IntegerType<MozziPrivate::uBitsToBytes(MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
   }
 
 
@@ -190,7 +192,7 @@ public:
   {
     constexpr byte new_NI = MAX(NI, _NI) + 1;
     constexpr byte new_NF = MAX(NF, _NF);
-    typedef typename IntegerType<UBITSTOBYTES(new_NI+new_NF)>::unsigned_type return_type;
+    typedef typename IntegerType<MozziPrivate::uBitsToBytes(new_NI+new_NF)>::unsigned_type return_type;
     UFixMath<new_NI,new_NF> left(*this);
     UFixMath<new_NI,new_NF> right(op);
 
@@ -220,7 +222,7 @@ public:
   {
     constexpr byte new_NI = MAX(NI, _NI);
     constexpr byte new_NF = MAX(NF, _NF);
-    typedef typename IntegerType<SBITSTOBYTES(new_NI+new_NF)>::signed_type return_type;
+    typedef typename IntegerType<MozziPrivate::sBitsToBytes(new_NI+new_NF)>::signed_type return_type;
     SFixMath<new_NI,new_NF> left(*this);
     SFixMath<new_NI,new_NF> right(op);
 
@@ -244,7 +246,7 @@ public:
   */
   SFixMath<NI,NF> operator-() const
   {
-    return SFixMath<NI,NF>( -(typename IntegerType<SBITSTOBYTES(NI+NF)>::signed_type)(internal_value),true);
+    return SFixMath<NI,NF>( -(typename IntegerType<MozziPrivate::sBitsToBytes(NI+NF)>::signed_type)(internal_value),true);
   }
 
   //////// MULTIPLICATION OVERLOADS
@@ -257,7 +259,7 @@ public:
   UFixMath<NI+_NI,NF+_NF> operator* (const UFixMath<_NI,_NF>& op) const
   {
     //typedef typename IntegerType< ((NI+_NI+NF+_NF-1)>>3)+1>::unsigned_type return_type ;
-    typedef typename IntegerType<UBITSTOBYTES(NI+_NI+NF+_NF)>::unsigned_type return_type ;
+    typedef typename IntegerType<MozziPrivate::uBitsToBytes(NI+_NI+NF+_NF)>::unsigned_type return_type ;
     return_type tt = return_type(internal_value)*op.asRaw();
     return UFixMath<NI+_NI,NF+_NF>(tt,true);
   }
@@ -298,8 +300,8 @@ public:
   UFixMath<NF,NI*2+NF> invAccurate() const // TODO ADD STATIC ASSERT
   {
     static_assert(2*NI+2*NF<=63, "The accurate inverse cannot be computed for when 2*NI+2*NF>63. Reduce the number of bits.");
-    //return UFixMath<NF,NI*2+NF>((ONESBITMASK(NI*2+NF*2)/ (typename IntegerType<UBITSTOBYTES(2*NI+2*NF)>::unsigned_type)internal_value),true);
-    return UFixMath<NF,NI*2+NF>((onesbitmaskfull() / (typename IntegerType<UBITSTOBYTES(2*NI+2*NF)>::unsigned_type)internal_value),true);
+    //return UFixMath<NF,NI*2+NF>((ONESBITMASK(NI*2+NF*2)/ (typename IntegerType<MozziPrivate::uBitsToBytes(2*NI+2*NF)>::unsigned_type)internal_value),true);
+    return UFixMath<NF,NI*2+NF>((onesbitmaskfull() / (typename IntegerType<MozziPrivate::uBitsToBytes(2*NI+2*NF)>::unsigned_type)internal_value),true);
   }
   
 
@@ -421,7 +423,7 @@ public:
 private:
   internal_type internal_value;
   static constexpr internal_type onesbitmask() { return (internal_type) ((1ULL<< (NI+NF)) - 1); }
-  static constexpr typename IntegerType<UBITSTOBYTES(2*NI+2*NF)>::unsigned_type onesbitmaskfull() { return (typename IntegerType<UBITSTOBYTES(2*NI+2*NF)>::unsigned_type) ((1ULL<< (NI*2+NF*2)) - 1); }
+  static constexpr typename IntegerType<MozziPrivate::uBitsToBytes(2*NI+2*NF)>::unsigned_type onesbitmaskfull() { return (typename IntegerType<MozziPrivate::uBitsToBytes(2*NI+2*NF)>::unsigned_type) ((1ULL<< (NI*2+NF*2)) - 1); }
   
 };
 
@@ -533,8 +535,8 @@ template<byte NI, byte NF> // NI and NF being the number of bits for the integra
 class SFixMath
 {
   static_assert(NI+NF<64, "The total width of a SFixMath cannot exceed 63bits");
-  typedef typename IntegerType<SBITSTOBYTES(NI+NF)>::signed_type internal_type ; // smallest size that fits our internal integer
-  typedef typename IntegerType<SBITSTOBYTES(NI+NF+1)>::signed_type next_greater_type ; // smallest size that fits 1<<NF for sure (NI could be equal to 0). It can be the same than internal_type in some cases.
+  typedef typename IntegerType<MozziPrivate::sBitsToBytes(NI+NF)>::signed_type internal_type ; // smallest size that fits our internal integer
+  typedef typename IntegerType<MozziPrivate::sBitsToBytes(NI+NF+1)>::signed_type next_greater_type ; // smallest size that fits 1<<NF for sure (NI could be equal to 0). It can be the same than internal_type in some cases.
   
 public:
   /** Constructor
@@ -582,7 +584,7 @@ public:
   template<byte _NI, byte _NF>
   SFixMath(const SFixMath<_NI,_NF>& uf) {
     //internal_value = MOZZI_SHIFTR((typename IntegerType<((MAX(NI+NF,_NI+_NF))>>3)+1>::unsigned_type) uf.asRaw(),(_NF-NF));
-    internal_value = MOZZI_SHIFTR((typename IntegerType<SBITSTOBYTES(MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
+    internal_value = MOZZI_SHIFTR((typename IntegerType<MozziPrivate::sBitsToBytes(MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
     
   }
 
@@ -592,7 +594,7 @@ public:
   */
   template<byte _NI, byte _NF>
   SFixMath(const UFixMath<_NI,_NF>& uf) {
-    internal_value = MOZZI_SHIFTR((typename IntegerType<UBITSTOBYTES(MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
+    internal_value = MOZZI_SHIFTR((typename IntegerType<MozziPrivate::uBitsToBytes(MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
   }
 
   //////// ADDITION OVERLOADS
@@ -606,7 +608,7 @@ public:
   {
     constexpr byte new_NI = MAX(NI, _NI) + 1;
     constexpr byte new_NF = MAX(NF, _NF);
-    typedef typename IntegerType<SBITSTOBYTES(new_NI+new_NF)>::unsigned_type return_type;
+    typedef typename IntegerType<MozziPrivate::sBitsToBytes(new_NI+new_NF)>::unsigned_type return_type;
     SFixMath<new_NI,new_NF> left(*this);
     SFixMath<new_NI,new_NF> right(op);
 
@@ -636,7 +638,7 @@ public:
   {
     constexpr byte new_NI = MAX(NI, _NI) + 1;
     constexpr byte new_NF = MAX(NF, _NF);
-    typedef typename IntegerType<SBITSTOBYTES(new_NI+new_NF)>::unsigned_type return_type;
+    typedef typename IntegerType<MozziPrivate::sBitsToBytes(new_NI+new_NF)>::unsigned_type return_type;
     SFixMath<new_NI,new_NF> left(*this);
     SFixMath<new_NI,new_NF> right(op);
 
@@ -673,7 +675,7 @@ public:
   template<byte _NI, byte _NF>
   SFixMath<NI+_NI,NF+_NF> operator* (const SFixMath<_NI,_NF>& op) const
   {
-    typedef typename IntegerType<SBITSTOBYTES(NI+_NI+NF+_NF)>::signed_type return_type ;
+    typedef typename IntegerType<MozziPrivate::sBitsToBytes(NI+_NI+NF+_NF)>::signed_type return_type ;
     return_type tt = return_type(internal_value)*op.asRaw();
     return SFixMath<NI+_NI,NF+_NF>(tt,true);
   }
@@ -713,8 +715,8 @@ public:
   SFixMath<NF,NI*2+NF> invAccurate() const // TODO ADD STATIC ASSERT
   {
     static_assert(2*NI+2*NF<=62, "The accurate inverse cannot be computed for when 2*NI+2*NF>63. Reduce the number of bits.");
-    //return SFixMath<NF,NI*2+NF>((ONESBITMASK(NI*2+NF*2)/ (typename IntegerType<SBITSTOBYTES(2*NI+2*NF)>::signed_type)internal_value),true);
-    return SFixMath<NF,NI*2+NF>((onesbitmaskfull() / (typename IntegerType<SBITSTOBYTES(2*NI+2*NF)>::signed_type)internal_value),true);
+    //return SFixMath<NF,NI*2+NF>((ONESBITMASK(NI*2+NF*2)/ (typename IntegerType<MozziPrivate::sBitsToBytes(2*NI+2*NF)>::signed_type)internal_value),true);
+    return SFixMath<NF,NI*2+NF>((onesbitmaskfull() / (typename IntegerType<MozziPrivate::sBitsToBytes(2*NI+2*NF)>::signed_type)internal_value),true);
   }
 
   //////// SHIFTS OVERLOADS
@@ -823,7 +825,7 @@ public:
 private:
   internal_type internal_value;
   static constexpr internal_type onesbitmask() { return (internal_type) ((1ULL<< (NI+NF)) - 1); }
-  static constexpr typename IntegerType<SBITSTOBYTES(2*NI+2*NF)>::signed_type onesbitmaskfull() { return (typename IntegerType<SBITSTOBYTES(2*NI+2*NF)>::signed_type) ((1ULL<< (NI*2+NF*2)) - 1); }
+  static constexpr typename IntegerType<MozziPrivate::sBitsToBytes(2*NI+2*NF)>::signed_type onesbitmaskfull() { return (typename IntegerType<MozziPrivate::sBitsToBytes(2*NI+2*NF)>::signed_type) ((1ULL<< (NI*2+NF*2)) - 1); }
 
 };
 
@@ -938,7 +940,7 @@ inline SFixMath<NI, NF> operator-(double op, const SFixMath<NI, NF>& uf) {return
 template<byte NI, byte NF, byte _NI, byte _NF>
 inline SFixMath<NI+_NI,NF+_NF> operator* (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 )
 {
-  typedef typename IntegerType< SBITSTOBYTES(NI+_NI+NF+_NF)>::signed_type return_type ;
+  typedef typename IntegerType< MozziPrivate::sBitsToBytes(NI+_NI+NF+_NF)>::signed_type return_type ;
   return_type tt = return_type(op1.asRaw())*op2.asRaw();
   return SFixMath<NI+_NI,NF+_NF>(tt,true);
 }
@@ -969,7 +971,7 @@ inline SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator+ (const SFixMath<NI,NF>& op1
   constexpr byte new_NI = MAX(NI, _NI) + 1;
   constexpr byte new_NF = MAX(NF, _NF);
     
-  typedef typename IntegerType<SBITSTOBYTES(new_NI+new_NF)>::signed_type return_type;
+  typedef typename IntegerType<MozziPrivate::sBitsToBytes(new_NI+new_NF)>::signed_type return_type;
   SFixMath<new_NI,new_NF> left(op1);
   SFixMath<new_NI,new_NF> right(op2);
   return_type tt = return_type(left.asRaw()) + right.asRaw();
@@ -1000,7 +1002,7 @@ inline SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator- (const SFixMath<NI,NF>& op1
   constexpr byte new_NI = MAX(NI, _NI) + 1;
   constexpr byte new_NF = MAX(NF, _NF);
     
-  typedef typename IntegerType<SBITSTOBYTES(new_NI+new_NF)>::signed_type return_type;
+  typedef typename IntegerType<MozziPrivate::sBitsToBytes(new_NI+new_NF)>::signed_type return_type;
   SFixMath<new_NI,new_NF> left(op1);
   SFixMath<new_NI,new_NF> right(op2);
   return_type tt = return_type(left.asRaw()) - right.asRaw();
@@ -1090,8 +1092,8 @@ inline bool operator!= (const UFixMath<NI,NF>& op1, const SFixMath<_NI,_NF>& op2
 
 
 #undef MAX
-#undef UBITSTOBYTES
-#undef SBITSTOBYTES
+//#undef UBITSTOBYTES
+//#undef SBITSTOBYTES
 //#undef ONESBITMASK
 
 

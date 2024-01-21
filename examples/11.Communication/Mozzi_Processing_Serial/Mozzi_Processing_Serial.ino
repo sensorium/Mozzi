@@ -6,7 +6,7 @@
  in individual bytes, each of which ranges from 0 to 255.  Arduino
  reads these bytes and uses them to set the frequency of the oscillator.
  
- Circuit: Audio output on digital pin 9. (STANDARD_PLUS mode in mozzi_config.h)
+ Circuit: Audio output on digital pin 9. (on Arduino Uno/Nano, in default config)
  Serial connection to Processing, Max/MSP, or another serial application
  
  Dimmer example created 2006
@@ -19,8 +19,7 @@
  
 */
 
-
-
+#include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator
 

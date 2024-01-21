@@ -38,7 +38,7 @@ sPin ---\/\/\/-----.
 
  */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/sin2048_int8.h> // sine table for oscillator
 #include <RCpoll.h>

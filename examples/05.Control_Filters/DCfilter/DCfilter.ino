@@ -17,7 +17,7 @@
 
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <DCfilter.h>
 
 int sensorPin = A0;

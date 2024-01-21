@@ -13,13 +13,13 @@
 #ifndef WAVEPACKET_H
 #define WAVEPACKET_H
 
-#include <MozziGuts.h>
-#include <Oscil.h>
-#include <tables/cos8192_int8.h>
-#include <mozzi_fixmath.h>
-#include <Phasor.h>
-#include <Line.h>
-#include <meta.h>
+#include "MozziHeadersOnly.h"
+#include "Oscil.h"
+#include "tables/cos8192_int8.h"
+#include "mozzi_fixmath.h"
+#include "Phasor.h"
+#include "Line.h"
+#include "meta.h"
 
 
 enum algorithms {SINGLE,DOUBLE};

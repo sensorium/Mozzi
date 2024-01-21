@@ -22,7 +22,7 @@
     Tim Barrass 2012, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Sample.h>
 #include <EventDelay.h>
 #include <mozzi_rand.h> // for rand()

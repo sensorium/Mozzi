@@ -1,4 +1,4 @@
-#include <MozziGuts.h>        // at the top of your sketch
+#include <Mozzi.h>        // at the top of your sketch
 #define CONTROL_RATE 64
 
 void setup() {

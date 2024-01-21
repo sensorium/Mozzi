@@ -2,9 +2,6 @@
     using Mozzi sonification library and an user-defined
     audioOutput() function.
 
-    #define EXTERNAL_AUDIO_OUTPUT true should be uncommented in mozzi_config.h.
-    #define EXTERNAL_AUDIO_BITS 8 should be set in mozzi_config.h, as the 74HC595 has 8 outputs.
-
     Demonstrates the use of audioOutput() using a R/2R DAC
     connected on a shift register 74HC595.
 
@@ -47,7 +44,12 @@
     T. Combriat 2020, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include "MozziConfigValues.h"  // for named option values
+#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_EXTERNAL_TIMED
+#define MOZZI_AUDIO_BITS 8
+#define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
+
+#include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator
 #include<SPI.h> // needed for the shift register
@@ -55,19 +57,12 @@
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
-// use #define for CONTROL_RATE, not a constant
-#define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
-
-
-
 // External output parameters for this example
 #define LATCH_PIN 31  // Number of stage of the resistance ladder = number of digits of the DAC
 
-//#define AUDIO_BIAS 128    // not needed since PR#98
-
-void audioOutput(const AudioOutput f) // f is a structure potentially containing both channels, scaled according to EXTERNAL_AUDIO_BITS
+void audioOutput(const AudioOutput f) // f is a structure potentially containing both channels, scaled according to MOZZI_AUDIO_BITS
 {
-  int out = f.l() + AUDIO_BIAS;   // make the signal positive
+  int out = f.l() + MOZZI_AUDIO_BIAS;   // make the (zero centered) signal positive
   digitalWrite(LATCH_PIN, LOW);
   SPI.transfer(out);
   digitalWrite(LATCH_PIN, HIGH);

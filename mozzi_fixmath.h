@@ -18,7 +18,9 @@
  #include "WProgram.h"
 #endif
 
-/**@ingroup fixmath
+/** @defgroup fixmath Fast integer based fixed-point arithmetic */
+
+/** @ingroup fixmath
 @{
 */
 // types

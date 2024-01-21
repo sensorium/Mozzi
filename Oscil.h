@@ -14,12 +14,8 @@
 #ifndef OSCIL_H_
 #define OSCIL_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
-#include "MozziGuts.h"
+#include "Arduino.h"
+#include "MozziHeadersOnly.h"
 #include "mozzi_fixmath.h"
 #include "FixMath.h"
 #include "mozzi_pgmspace.h"

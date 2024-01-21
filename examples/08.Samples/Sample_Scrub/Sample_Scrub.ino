@@ -15,7 +15,7 @@
    CC by-nc-sa
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Sample.h> // Sample template
 #include <samples/burroughs1_18649_int8.h>
 #include <mozzi_rand.h>

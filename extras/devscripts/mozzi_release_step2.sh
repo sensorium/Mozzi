@@ -4,24 +4,6 @@
 
 NOW=$(date +"%Y-%m-%d-%H:%M")
 
-#ensure STANDARD config  again
-#  uncomment STANDARD
-#sed -i.bak 's/\/\/#define AUDIO_MODE STANDARD/#define AUDIO_MODE STANDARD/' ~/Mozzi/mozzi_config.h
-# comment HIFI, ^ matches start of line
-#sed -i.bak 's/^#define AUDIO_MODE HIFI/\/\/#define AUDIO_MODE HIFI/' ~/Mozzi/mozzi_config.h
-
-# make sure STANDARD is commented, ^ matches start of line
-sed -i.bak 's/^#define AUDIO_MODE STANDARD/\/\/#define AUDIO_MODE STANDARD/' ~/Mozzi/mozzi_config.h
-# change mozzi config to STANDARD_PLUS, make sure STANDARD_PLUS is uncommented
-sed -i.bak 's/\/\/#define AUDIO_MODE STANDARD_PLUS/#define AUDIO_MODE STANDARD_PLUS/'  ~/Mozzi/mozzi_config.h
-# make sure HIFI is commented, ^ matches start of line
-sed -i.bak 's/^#define AUDIO_MODE HIFI/\/\/#define AUDIO_MODE HIFI/'  ~/Mozzi/mozzi_config.h
-
-
-# make sure audio input is off
-sed -i.bak 's/#define USE_AUDIO_INPUT true/#define USE_AUDIO_INPUT false/' ~/Mozzi/mozzi_config.h
-
-
 #delete wav files
 find ~/Documents/Arduino/mozzi_compile/examples -name "*.wav" -print -delete
 

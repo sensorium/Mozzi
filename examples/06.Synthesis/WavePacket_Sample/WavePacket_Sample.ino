@@ -32,6 +32,7 @@
     Tim Barrass 2013, CC by-nc-sa.
 */
 
+#include <Mozzi.h>
 #include <mozzi_analog.h>
 #include <WavePacketSample.h>
 #include <RollingAverage.h>

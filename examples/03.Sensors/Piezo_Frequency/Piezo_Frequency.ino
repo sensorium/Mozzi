@@ -26,7 +26,7 @@
    Tim Barrass 2013, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h> // oscillator
 #include <tables/sin2048_int8.h> // table for Oscils to play
 #include <Smooth.h>

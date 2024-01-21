@@ -16,7 +16,7 @@
     Tim Barrass 2012-13, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/triangle_analogue512_int8.h> // wavetable
 #include <tables/triangle512_int8.h> // wavetable

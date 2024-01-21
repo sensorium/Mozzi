@@ -14,7 +14,7 @@
     Tim Barrass 2012, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/cos8192_int8.h>
 #include <tables/envelop2048_uint8.h>

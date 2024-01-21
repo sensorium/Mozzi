@@ -21,7 +21,7 @@
     Tim Barrass 2012, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/triangle_valve_2048_int8.h>
 #include <tables/sin2048_int8.h>

@@ -20,7 +20,7 @@
     Tim Barrass 2012, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Sample.h> // Sample template
 #include <samples/abomb16384_int8.h> // table for Sample
 #include <EventDelay.h>

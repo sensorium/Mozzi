@@ -18,7 +18,7 @@
     Tim Barrass 2012-13, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h>
 #include <AudioDelayFeedback.h>
 #include <Ead.h> // exponential attack decay

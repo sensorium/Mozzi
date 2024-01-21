@@ -3,8 +3,10 @@
     The Arduino-compatible "Pro Micro" board sent with Mozzibytes 
     needs "Arduino Leonardo" to be set under Arduino>Tools>Board.
     
-   Important:
-    #define AUDIO_MODE HIFI in mozzi_config.h
+    Important:
+    This sketch uses MOZZI_OUTPUT_2PIN_PWM (aka HIFI) output mode, which
+    is not available on all boards (among others, it works on the
+    classic Arduino boards, but not Teensy 3.x and friends).
 
     Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
     Check the Mozzi core module documentation for others and more detail
@@ -28,7 +30,10 @@
 
     Tim Barrass 2018, CC by-nc-sa.
 */
+#include <MozziConfigValues.h>
+#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_2PIN_PWM
 
+#include <Mozzi.h>
 #include <WavePacketSample.h>
 #include <EventDelay.h>
 #include <mozzi_rand.h>

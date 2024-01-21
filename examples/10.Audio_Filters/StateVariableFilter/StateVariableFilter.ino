@@ -16,7 +16,7 @@
     Tim Barrass 2012, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/whitenoise8192_int8.h>
 #include <tables/cos2048_int8.h> // for filter modulation

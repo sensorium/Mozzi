@@ -7,20 +7,13 @@
 
     This sketch using HIFI mode is not for Teensy 3.1.
 
-    IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
-    be changed from STANDARD mode to HIFI.
-    In Mozz/mozzi_config.h, change
-    //#define AUDIO_MODE STANDARD
-    #define AUDIO_MODE STANDARD_PLUS
-    //#define AUDIO_MODE HIFI
-    to
-    //#define AUDIO_MODE STANDARD
-    //#define AUDIO_MODE STANDARD_PLUS
-    #define AUDIO_MODE HIFI
+    This sketch uses MOZZI_OUTPUT_2PIN_PWM (aka HIFI) output mode, which
+    is not available on all boards (among others, it works on the
+    classic Arduino boards, but not Teensy 3.x and friends).
 
-  The sketch also sounds better with a faster sample rate, for less aliasing
-  #define AUDIO_RATE 32768
-  in mozzi_config.
+    The MOZZI_AUDIO_RATE (sample rate) is additionally configured at 32768 Hz,
+    which is the default on most platforms, but twice the standard rate on
+    AVR-CPUs. Try chaging it back to hear the difference.
 
     Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
     Check the Mozzi core module documentation for others and more detail
@@ -49,7 +42,11 @@
     Tim Barrass 2012-13, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include <MozziConfigValues.h>
+#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_2PIN_PWM
+#define MOZZI_AUDIO_RATE 32768
+
+#include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/cos2048_int8.h> // table for Oscils to play
 #include <mozzi_midi.h>

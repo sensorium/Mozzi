@@ -22,7 +22,7 @@
 */
 
 #include <MIDI.h>
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <Line.h> // for envelope
 #include <tables/sin2048_int8.h> // sine table for oscillator

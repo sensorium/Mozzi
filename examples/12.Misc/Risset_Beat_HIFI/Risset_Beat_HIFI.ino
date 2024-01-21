@@ -5,7 +5,9 @@
     Demonstrates Sample(), EventDelay(), Line(), fixed pint numbers and bit-shifting
 
     Important:
-    #define AUDIO_MODE HIFI in mozzi_config.h
+    This sketch uses MOZZI_OUTPUT_2PIN_PWM (aka HIFI) output mode, which
+    is not available on all boards (among others, it works on the
+    classic Arduino boards, but not Teensy 3.x and friends).
 
     Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
     Check the Mozzi core module documentation for others and more detail
@@ -32,8 +34,10 @@
 
     Tim Barrass 2018, CC by-nc-sa.
 */
+#include <MozziConfigValues.h>
+#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_2PIN_PWM
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Sample.h> // Sample template
 #include <samples/abomb16384_int8.h> // table for Sample
 #include <EventDelay.h>

@@ -1,11 +1,10 @@
 /*  Test of audio input using Mozzi sonification library.
 
- An audio input using the range between 0 to 5V on analog pin A0
- is sampled and output on digital pin 9.
+ An audio input using the range between 0 to 5V on analog pin A0 (or as
+ set in MOZZI_AUDIO_INPUT_PIN) is sampled and output on digital pin 9.
 
-  Configuration: requires these lines in the Mozzi/mozzi_config.h file:
-  #define USE_AUDIO_INPUT true
-  #define AUDIO_INPUT_PIN 0
+ NOTE: MOZZI_AUDIO_INPUT_STANDARD is not available as an option on all
+ platforms.
 
  Circuit:
  Audio cable centre wire on pin A0, outer shielding to Arduino Ground.
@@ -18,7 +17,11 @@
   Tim Barrass 2013, CC by-nc-sa.
 */
 
-#include <MozziGuts.h>
+#include <MozziConfigValues.h>
+#define MOZZI_AUDIO_INPUT MOZZI_AUDIO_INPUT_STANDARD
+#define MOZZI_AUDIO_INPUT_PIN 0
+
+#include <Mozzi.h>
 
 void setup(){
   startMozzi();

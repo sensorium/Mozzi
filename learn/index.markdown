@@ -19,6 +19,12 @@ Where to connect your audio hardware to your MCU, and the different mode availab
 [Output Circuits](output_circuits/)  
 Hardware filtering of undesired frequencies (carrier frequency noise which some people can hear in the regular PWM modes), and amplification circuits.
 
+[Configuring Mozzi](config/)  
+So you've read about all these available configuration options, but just how to use them?
+
+[Porting old sketches to a new Mozzi](porting/)  
+Your old sketch no longer compiles, or only with a bunch of warnings? Usually only some very minor adjustments are needed. See this guide for what may have to be changed.
+
 [Hints and Tips](hints/)  
 What kind of code Mozzi likes best, debugging and monitoring your sketches.
 

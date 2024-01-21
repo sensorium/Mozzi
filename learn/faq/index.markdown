@@ -1,19 +1,12 @@
 ---
 layout: single
+toc: true
 ---
 
-<a id = "top"> </a>  
-[1. Everything sounds glitchy, including the examples.](#q1)   
-[2. Everything sounds too quiet.](#q2)  
-[3. My patch was working and now it sounds horrible!](#q3)  
-[4. How can I optimise my code to get the most out of Mozzi?](#q4)  
-[5. How can I extend Mozzi? ](#q5)  
-[6. How can I use Mozzi on my all new hardware? ](#q6)  
-[7. Can I contribute developments?  How?](#q7)  
+<a id="top"></a>
 
 ---
 
-<a id="q1"></a>
 ### Everything sounds glitchy, including the examples.
 
 Check that you output circuit matches the output mode (`MOZZI_AUDIO_MODE`) you have configured.
@@ -30,7 +23,6 @@ TODO: Link to hardware and config sections in the API docs.
 
 ---
 
-<a id="q2"></a>
 ### Everything sounds too quiet (or too loud and is clipping).
 
 You may have miscalculated the sample range in your `updateAudio()` function, and need to
@@ -47,7 +39,6 @@ instead.
 
 ---
 
-<a id="q3"></a>
 ### My patch was working and now it sounds horrible!
 
 * Have you done any changes to the `MOZZI_AUDIO_MODE`?  
@@ -60,7 +51,6 @@ instead.
 
 ---
 
-<a id="q4"></a>
 ### How can I optimise my code to get the most out of Mozzi?
 
 Read this: [Atmel AVR4027: Tips and Tricks to Optimize. Your C Code for 8-bit AVR Microcontrollers](https://ww1.microchip.com/downloads/en/AppNotes/doc8453.pdf).  
@@ -79,7 +69,55 @@ If you _still_ need more speed, Arduino 1.0.5 compiles code that runs slightly f
 
 ---
 
-<a id="q5"></a>
+### I added a second .cpp-file to my project, and now I get "duplicate definition" errors while linking!
+
+To allow direct configuration of Mozzi, while also optimizing some computations, aggressively, most of Mozzi is actually compiled in the same "compilation unit"
+as your sketch. However, when including ```Mozzi.h``` from both you ```.ino```-file, and a separate ```.cpp``` file, this will essentially cause Mozzi to
+be included twice, resulting in a linker error. Instead, include ```Mozzi.h``` in only one of the files, and, instead, include ```MozziHeadersOnly.h``` in the
+other. (Alternatively concentrate all calls to Mozzi-code in either of the files, and don't include Mozzi-headers at all, in the other.)
+
+[(go to top)](#top)  
+
+---
+
+### I'm trying to use multiplexing of analog input, but it doesn't work in Mozzi!
+
+Depending on your board, trying to use analog input multiplexing libraries such as PotMux may either fail to compile, or fail to produce meaningful readings.
+To fix this, set Mozzi's analog input to disabled at the top of your sketch: ```#define MOZZI_ANALOG_READ MOZZI_ANALOG_READ_NONE```. Keep in mind, however,
+that analog read implementations are usually synchronous, and thus slow, especially on the classic AVR-based Arduinos. It will generally be a good idea to
+limit the number of analog reads per ```updateControl()```, e.g. by only taking every other (or even every 10th) reading per iteration.
+
+[(go to top)](#top)  
+
+---
+
+### Somehow my configuration options do not seem to work
+
+Be sure to always adhere the following pattern
+```
+// No other Mozzi include above this line
+#include <MozziConfigValues.h>
+#define MOZZI_SOME_OPTION MOZZI_SOME_VALUE
+[...]
+#include <Mozzi.h>
+```
+Also, in case you are including Mozzi from more than one own source file, be sure to set **identic** options in both files.
+See [Configuring Mozzi](../configuration/) for some additional hints.
+
+[(go to top)](#top)  
+
+---
+
+### My sketch used to work, and now it will no longer compile!
+
+We try to keep Mozzi backwards compatible with your earlier sketches as much as possible, but sometimes that will not be 100% possible. If that is the case,
+adjusting your sketch to work with the latest and greatest Mozzi is generally very simple, however. See [Porting](../porting_sketches/) for specific
+information on what has changed, and how to adjust.
+
+[(go to top)](#top)  
+
+---
+
 ### How can I extend Mozzi?
 
 It's easy!  I usually copy the simplest class.h file I can find in the Mozzi folder and base the next thing on that.
@@ -91,7 +129,6 @@ It seems self-explanatory to me, but then I haven't ever explained it to anyone.
 
 ---
 
-<a id="q6"></a>
 ### How can I use Mozzi on my all new hardware?
 
 If your CPU is not yet supported by Mozzi, things are a bit more involved. However, by now, ports to many very
@@ -103,8 +140,7 @@ The whole process is outlined in some detail in [internal/MOzziGuts_impl_templat
 
 ---
 
-<a id="q7"></a>
-### Can I contribute developments?  How?
+### Can I contribute developments? How?
 
 [Fork Mozzi on GitHub](https://github.com/sensorium/Mozzi), and your changes will become part of the "development graph", or just post to the [users' list](https://groups.google.com/forum/#!forum/mozzi-users/).
 

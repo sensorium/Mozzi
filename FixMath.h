@@ -572,7 +572,7 @@ public:
       @return A SFixMath.
   */  
   template<typename T>
-  static SFixMath<NI,NF> fromRaw(T raw){return UFixMath<NI,NF>(raw,true);}
+  static SFixMath<NI,NF> fromRaw(T raw){return SFixMath<NI,NF>(raw,true);}
 
 
   /** Constructor from another SFixMath. 

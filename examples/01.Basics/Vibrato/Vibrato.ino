@@ -20,14 +20,18 @@
 #include <Oscil.h>
 #include <tables/cos2048_int8.h> // table for Oscils to play
 #include <mozzi_midi.h> // for mtof
-#include <mozzi_fixmath.h>
+//#include <mozzi_fixmath.h>
+#include <FixMath.h> // Fixed point arithmetics
 
 #define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
 
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCos(COS2048_DATA);
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aVibrato(COS2048_DATA);
 
-const byte intensity = 255;
+//const byte intensity = 255;
+const UFixMath<0,8> intensity = 0.5; // amplitude of the phase modulation
+                                     // 0.5 leads to a modulation of half the
+                                     // wavetable
 
 void setup(){
   startMozzi(CONTROL_RATE);
@@ -41,7 +45,8 @@ void updateControl(){
 
 
 AudioOutput_t updateAudio(){
-    Q15n16 vibrato = (Q15n16) intensity * aVibrato.next();
+  //Q15n16 vibrato = (Q15n16) intensity * aVibrato.next();
+  auto vibrato = intensity * SFixMath<0, 7>::fromRaw(aVibrato.next()); // Oscils in Mozzi are 8bits: 7bits of signal plus one bit of sign, so what they fit into a SFixMath<0,7> which is a signed fixMath type with 7 bits of value. 
     return MonoOutput::from8Bit(aCos.phMod(vibrato)); // phase modulation to modulate frequency
 }
 

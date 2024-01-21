@@ -70,7 +70,7 @@
 #define MAX(N1,N2) ((N1) > (N2) ? (N1) : (N2))
 #define UBITSTOBYTES(N) (((N-1)>>3)+1)
 #define SBITSTOBYTES(N) (((N)>>3)+1)
-#define ONESBITMASK(N) ((1ULL<<(N)) - 1)
+//#define ONESBITMASK(N) ((1ULL<<(N)) - 1)
 
 // Experiments
 /*#define NBITSREAL(X,N) (abs(X) < (1<<N) ? N : NBITSREAL2(X,N+1))
@@ -92,8 +92,10 @@
 */
 
  
-
-
+// This works, but then spills out of this file. The results of the macros need to be known at compile time for the templates
+// hence it is fair to think that this should be equivalent.
+//constexpr byte SBITSTOBYTES(byte N) { return (((N)>>3)+1);}
+//constexpr byte UBITSTOBYTES(byte N) { return (((N-1)>>3)+1);}
 
 
 // Forward declaration
@@ -1090,7 +1092,7 @@ inline bool operator!= (const UFixMath<NI,NF>& op1, const SFixMath<_NI,_NF>& op2
 #undef MAX
 #undef UBITSTOBYTES
 #undef SBITSTOBYTES
-#undef ONESBITMASK
+//#undef ONESBITMASK
 
 
 #endif

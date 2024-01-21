@@ -13,8 +13,11 @@ This shows how to set up an Arduino with Mozzi from scratch and use analog input
 [Anatomy of a Mozzi sketch](a-simple-sketch/)  
 A detailed introduction to the parts of a Mozzi sketch, showing how to use an oscillator to generate audio and control signals.
 
-[Output Circuits](output/)  
-Shows how to connect Mozzi for audio output, including a schematic for 2-pin PWM ("HIFI") mode using only 3 components, and a filter for reducing carrier frequency noise which some people can hear in the regular PWM modes.
+[Output Modes](output/)  
+Where to connect your audio hardware to your MCU, and the different mode available for high quality sound output.
+
+[Output Circuits](output_circuits/)  
+Hardware filtering of undesired frequencies (carrier frequency noise which some people can hear in the regular PWM modes), and amplification circuits.
 
 [Hints and Tips](hints/)  
 What kind of code Mozzi likes best, debugging and monitoring your sketches.

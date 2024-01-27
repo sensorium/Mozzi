@@ -3,6 +3,7 @@
 
 #include "mozzi_fixmath.h"
 #include "FixMath.h"
+
 #include "mozzi_pgmspace.h"
 
 
@@ -49,7 +50,7 @@ calculation.
 @param midival a midi note number, 1.0 or greater.  Like the mtof object in Pd, midi values can have fractions.
 @return the frequency represented by the input midi note number..
  */
-float mtof(float midival)
+inline float mtof(float midival)
 {
 	 // http://en.wikipedia.org/wiki/Note
 	 // f = pow(2,(p-69/12) * 440Hz
@@ -67,7 +68,7 @@ A good choice if you're using whole note values, want speed and simplicity, and 
 @param midi_note a midi note number.
 @return an integer approximation of the midi note's frequency.
 */
-int mtof(uint8_t midi_note){
+inline int mtof(uint8_t midi_note){
   return (FLASH_OR_RAM_READ<const uint32_t>(MidiToFreqPrivate::midiToFreq + midi_note) >> 16);
 };
 
@@ -76,7 +77,7 @@ A good choice if you're using whole note values, want speed and simplicity, and 
 @param midi_note a midi note number.
 @return an integer approximation of the midi note's frequency.
 */
-int mtof(int midi_note){
+inline int mtof(int midi_note){
 	return (FLASH_OR_RAM_READ<const uint32_t>(MidiToFreqPrivate::midiToFreq + midi_note) >> 16);
 };
 
@@ -93,7 +94,7 @@ for non-whole midi values.
 @return the frequency represented by the input midi note number, in Q16n16
 fixed point fractional integer format, where the lower word is a fractional value.
 */
-Q16n16  Q16n16_mtof(Q16n16 midival_fractional)
+inline Q16n16  Q16n16_mtof(Q16n16 midival_fractional)
 {
 	Q16n16 diff_fraction;
 	uint8_t index = midival_fractional >> 16;

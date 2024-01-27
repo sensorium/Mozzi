@@ -83,7 +83,7 @@ void CACHED_FUNCTION_ATTR esp8266_serial_audio_output() {
 inline void audioOutput(const AudioOutput f) {
   // optimized version of: Serial1.write(...);
   for (uint8_t i = 0; i < MOZZI_PDM_RESOLUTION*4; ++i) {
-    U1F = pdmCode8(f+MOZZI_AUDIO_BIAS);
+    U1F = pdmCode8(f.l()+MOZZI_AUDIO_BIAS);
   }
 }
 #  endif

@@ -52,9 +52,9 @@
  *  than 16 bits). */
 #define AudioOutputStorage_t int
 
-#define SCALE_AUDIO(x,bits) (bits > MOZZI_AUDIO_BITS ? (x) >> (bits - MOZZI_AUDIO_BITS) : (x) << (MOZZI_AUDIO_BITS - bits))
-#define SCALE_AUDIO_NEAR(x,bits) (bits > MOZZI_AUDIO_BITS_OPTIMISTIC ? (x) >> (bits - MOZZI_AUDIO_BITS_OPTIMISTIC) : (x) << (MOZZI_AUDIO_BITS_OPTIMISTIC - bits))
-#define CLIP_AUDIO(x) constrain((x), (-(AudioOutputStorage_t) MOZZI_AUDIO_BIAS), (AudioOutputStorage_t) MOZZI_AUDIO_BIAS-1)
+template<typename T> constexpr AudioOutputStorage_t SCALE_AUDIO(T x, byte bits) { return (bits > MOZZI_AUDIO_BITS ? (x) >> (bits - MOZZI_AUDIO_BITS) : (x) << (MOZZI_AUDIO_BITS - bits)); }
+template<typename T> constexpr AudioOutputStorage_t SCALE_AUDIO_NEAR(T x, byte bits) { return (bits > MOZZI_AUDIO_BITS_OPTIMISTIC ? (x) >> (bits - MOZZI_AUDIO_BITS_OPTIMISTIC) : (x) << (MOZZI_AUDIO_BITS_OPTIMISTIC - bits)); }
+template<typename T> constexpr AudioOutputStorage_t CLIP_AUDIO(T x) { return (constrain((x), (-(AudioOutputStorage_t) MOZZI_AUDIO_BIAS), (AudioOutputStorage_t) MOZZI_AUDIO_BIAS-1)); }
 
 struct MonoOutput;
 struct StereoOutput;

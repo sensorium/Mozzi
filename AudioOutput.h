@@ -56,13 +56,23 @@
 #define SCALE_AUDIO_NEAR(x,bits) (bits > MOZZI_AUDIO_BITS_OPTIMISTIC ? (x) >> (bits - MOZZI_AUDIO_BITS_OPTIMISTIC) : (x) << (MOZZI_AUDIO_BITS_OPTIMISTIC - bits))
 #define CLIP_AUDIO(x) constrain((x), (-(AudioOutputStorage_t) MOZZI_AUDIO_BIAS), (AudioOutputStorage_t) MOZZI_AUDIO_BIAS-1)
 
+struct MonoOutput;
+struct StereoOutput;
+
 #if MOZZI_IS(MOZZI_AUDIO_CHANNELS, MOZZI_STEREO)
-#define AudioOutput StereoOutput
-#if (STEREO_HACK == true)
-#define AudioOutput_t void
+typedef StereoOutput AudioOutput;
 #else
-#define AudioOutput_t StereoOutput
+/** Representation of an single audio output sample/frame. This typedef maps to either MonoOutput or StereoOutput, depending on what is configured
+ *  in MOZZI_AUDIO_CHANNELS. Since the two are source compatible to a large degree, it often isn't even necessary to test, which it is, in your code. E.g.
+ *  both have functions l() and r(), to return "two" audio channels (which will be the same in case of mono).
+ *
+ *  You will not usually use or encounter this definition, unless using @ref external_audio output mode.
+ */
+typedef MonoOutput AudioOutput;
 #endif
+
+#if MOZZI_COMPATIBILITY_LEVEL < MOZZI_COMPATIBILITY_LEVEL_2_0
+typedef int AudioOutput_t;     // keep sketches using "int updateAudio()" alive
 #else
 /** Representation of an single audio output sample/frame. For mono output, this is really just a single zero-centered int,
  *  but for stereo it's a struct containing two ints.
@@ -75,15 +85,66 @@
  *        dummy used to make the "same" function signature work across different configurations (importantly mono/stereo). It's true value
  *        might be subject to change, and it may even be void. Use either MonoOutput or StereoOutput to represent a piece of audio output.
  */
-#define AudioOutput_t AudioOutputStorage_t
-/** Representation of an single audio output sample/frame. This #define maps to either MonoOutput or StereoOutput, depending on what is configured
- *  in MOZZI_AUDIO_CHANNELS. Since the two are source compatible to a large degree, it often isn't even necessary to test, which it is, in your code. E.g.
- *  both have functions l() and r(), to return "two" audio channels (which will be the same in case of mono).
- *
- *  You will not usually use or encounter this definition, unless using @ref external_audio output mode.
- */
-#define AudioOutput MonoOutput
+typedef AudioOutput AudioOutput_t;  // Note: Needed for pre 1.1 backwards compatibility
+// TODO AudioOutput_t itself could be phased out, eventually, simply using AudioOutput, instead.
 #endif
+
+/** This struct encapsulates one frame of mono audio output. Internally, it really just boils down to a single int value, but the struct provides
+ *  useful API an top of that, for the following:
+ *
+ * a) To construct an output frame, you should use one of the from8Bit(), fromNBit(), etc. functions. Given a raw input value, at a known resolution (number of bits), 
+ *    this scales the output efficiently to whatever is needed on the target platform. Using this, your updateAudio() function will be portable across different CPU and
+ *    different output methods, including external DACs.
+ * b) The struct provides some convenience API on top of this. Right now, this is the function clip(), replacing the more verbose, and non-portable constrain(x, -244, 243)
+ *    found in some old sketches.
+ * c) The struct provides accessors l() and r() that are source-compatible with StereoOutput, making it easy to e.g. implement support for an external DAC in both mono
+ *    and stereo.
+ * d) Finally, an automatic conversion operator to int aka AudioOutput_t provides backward compatibility with old Mozzi sketches. Internally, the compiler will actually
+ *    do away with this whole struct, leaving just the same basic fast integer operations as in older Mozzi sketches. However, now, you don't have to rewrite those for
+ *    different configurations.
+ */
+struct MonoOutput {
+  /** Construct an audio frame from raw values (zero-centered) */
+  MonoOutput(AudioOutputStorage_t l=0) : _l(l) {};
+#if (MOZZI_AUDIO_CHANNELS > 1)
+  /** Conversion to stereo operator: If used in a stereo config, returns identical channels (and gives a compile time warning).
+      This _could_ be turned into an operator for implicit conversion in this case. For now we chose to apply conversion on demand, only, as most of the time
+      using StereoOutput in a mono config, is not intended. */
+  StereoOutput portable() const __attribute__((deprecated("Sketch generates mono output, but Mozzi is configured for stereo. Check MOZZI_AUDIO_CHANNELS setting.")));  // Note: defintion below
+#elif MOZZI_COMPATIBILITY_LEVEL < MOZZI_COMPATIBILITY_LEVEL_2_0
+  /** Conversion to int operator. */
+  operator AudioOutput_t() const { return _l; };
+#endif
+  AudioOutputStorage_t l() const { return _l; };
+  AudioOutputStorage_t r() const { return _l; };
+  /** Clip frame to supported range. This is useful when at times, but only rarely, the signal may exceed the usual range. Using this function does not avoid
+   *  artifacts, entirely, but gives much better results than an overflow. */
+  MonoOutput& clip() { _l = CLIP_AUDIO(_l); return *this; };
+
+  /** Construct an audio frame a zero-centered value known to be in the N bit range. Appropriate left- or right-shifting will be performed, based on the number of output
+   *  bits available. While this function takes care of the shifting, beware of potential overflow issues, if your intermediary results exceed the 16 bit range. Use proper
+   *  casts to int32_t or larger in that case (and the compiler will automatically pick the 32 bit overload in this case) */
+  template<typename T> static inline MonoOutput fromNBit(uint8_t bits, T l) { return MonoOutput(SCALE_AUDIO(l, bits)); }
+  /** Construct an audio frame from a zero-centered value known to be in the 8 bit range. On AVR, if MOZZI_OUTPUT_PWM mode, this is effectively the same as calling the
+   * constructor, directly (no scaling gets applied). On platforms/configs using more bits, an appropriate left-shift will be performed. */
+  static inline MonoOutput from8Bit(int16_t l) { return fromNBit(8, l); }
+  /** Construct an audio frame a zero-centered value known to be in the 16 bit range. This is jsut a shortcut for fromNBit(16, ...) provided for convenience. */
+  static inline MonoOutput from16Bit(int16_t l) { return fromNBit(16, l); }
+  /** Construct an audio frame a zero-centered value known to be above at almost but not quite the N bit range, e.g. at N=8 bits and a litte. On most platforms, this is
+   *  exactly the same as fromNBit(), shifting up or down to the platforms' available resolution.
+   *
+   *  However, on AVR, MOZZI_OUTPUT_PWM mode (where about 8.5 bits are usable), the value will be shifted to the (almost) 9 bit range, instead of to the 8 bit range. allowing to
+   *  make use of that extra half bit of resolution. In many cases it is useful to follow up this call with clip(). E.g.:
+   *
+   *  @code
+   *  return MonoOutput::fromAlmostNBit(10, oscilA.next() + oscilB.next() + oscilC.next()).clip();
+   *  @endcode
+   */
+  template<typename A, typename B> static inline MonoOutput fromAlmostNBit(A bits, B l) { return MonoOutput(SCALE_AUDIO_NEAR(l, bits)); }
+
+private:
+  AudioOutputStorage_t _l;
+};
 
 /** This struct encapsulates one frame of mono audio output. Internally, it really just boils down to two int values, but the struct provides
  *  useful API an top of that. For more detail see @ref MonoOutput . */
@@ -119,63 +180,9 @@ private:
   AudioOutputStorage_t _r;
 };
 
-/** This struct encapsulates one frame of mono audio output. Internally, it really just boils down to a single int value, but the struct provides
- *  useful API an top of that, for the following:
- *
- * a) To construct an output frame, you should use one of the from8Bit(), fromNBit(), etc. functions. Given a raw input value, at a known resolution (number of bits), 
- *    this scales the output efficiently to whatever is needed on the target platform. Using this, your updateAudio() function will be portable across different CPU and
- *    different output methods, including external DACs.
- * b) The struct provides some convenience API on top of this. Right now, this is the function clip(), replacing the more verbose, and non-portable constrain(x, -244, 243)
- *    found in some old sketches.
- * c) The struct provides accessors l() and r() that are source-compatible with StereoOutput, making it easy to e.g. implement support for an external DAC in both mono
- *    and stereo.
- * d) Finally, an automatic conversion operator to int aka AudioOutput_t provides backward compatibility with old Mozzi sketches. Internally, the compiler will actually
- *    do away with this whole struct, leaving just the same basic fast integer operations as in older Mozzi sketches. However, now, you don't have to rewrite those for
- *    different configurations.
- */
-struct MonoOutput {
-  /** Construct an audio frame from raw values (zero-centered) */
-  MonoOutput(AudioOutputStorage_t l=0) : _l(l) {};
-#if (MOZZI_AUDIO_CHANNELS > 1)
-  /** Conversion to stereo operator: If used in a stereo config, returns identical channels (and gives a compile time warning).
-      This _could_ be turned into an operator for implicit conversion in this case. For now we chose to apply conversion on demand, only, as most of the time
-      using StereoOutput in a mono config, is not intended. */
-  inline StereoOutput portable() const __attribute__((deprecated("Sketch generates mono output, but Mozzi is configured for stereo. Check MOZZI_AUDIO_CHANNELS setting."))) { return StereoOutput(_l, _l); };
-#else
-  /** Conversion to int operator. */
-  inline operator AudioOutput_t() const { return _l; };
+#if MOZZI_AUDIO_CHANNELS > 1
+StereoOutput MonoOutput::portable() const { return StereoOutput(_l, _l); };
 #endif
-  AudioOutputStorage_t l() const { return _l; };
-  AudioOutputStorage_t r() const { return _l; };
-  /** Clip frame to supported range. This is useful when at times, but only rarely, the signal may exceed the usual range. Using this function does not avoid
-   *  artifacts, entirely, but gives much better results than an overflow. */
-  MonoOutput& clip() { _l = CLIP_AUDIO(_l); return *this; };
-
-  /** Construct an audio frame a zero-centered value known to be in the N bit range. Appropriate left- or right-shifting will be performed, based on the number of output
-   *  bits available. While this function takes care of the shifting, beware of potential overflow issues, if your intermediary results exceed the 16 bit range. Use proper
-   *  casts to int32_t or larger in that case (and the compiler will automatically pick the 32 bit overload in this case) */
-  template<typename T> static inline MonoOutput fromNBit(uint8_t bits, T l) { return MonoOutput(SCALE_AUDIO(l, bits)); }
-  /** Construct an audio frame from a zero-centered value known to be in the 8 bit range. On AVR, if MOZZI_OUTPUT_PWM mode, this is effectively the same as calling the
-   * constructor, directly (no scaling gets applied). On platforms/configs using more bits, an appropriate left-shift will be performed. */
-  static inline MonoOutput from8Bit(int16_t l) { return fromNBit(8, l); }
-  /** Construct an audio frame a zero-centered value known to be in the 16 bit range. This is jsut a shortcut for fromNBit(16, ...) provided for convenience. */
-  static inline MonoOutput from16Bit(int16_t l) { return fromNBit(16, l); }
-  /** Construct an audio frame a zero-centered value known to be above at almost but not quite the N bit range, e.g. at N=8 bits and a litte. On most platforms, this is
-   *  exactly the same as fromNBit(), shifting up or down to the platforms' available resolution.
-   *
-   *  However, on AVR, MOZZI_OUTPUT_PWM mode (where about 8.5 bits are usable), the value will be shifted to the (almost) 9 bit range, instead of to the 8 bit range. allowing to
-   *  make use of that extra half bit of resolution. In many cases it is useful to follow up this call with clip(). E.g.:
-   *
-   *  @code
-   *  return MonoOutput::fromAlmostNBit(10, oscilA.next() + oscilB.next() + oscilC.next()).clip();
-   *  @endcode
-   */
-  template<typename A, typename B> static inline MonoOutput fromAlmostNBit(A bits, B l) { return MonoOutput(SCALE_AUDIO_NEAR(l, bits)); }
-
-private:
-  AudioOutputStorage_t _l;
-};
-
 
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPUT_EXTERNAL_CUSTOM)
 /** When setting using one of the external output modes (@ref MOZZI_OUTPUT_EXTERNAL_TIMED or @ref MOZZI_OUTPUT_EXTERNAL_CUSTOM) implement this function to take care of writing samples to the hardware.

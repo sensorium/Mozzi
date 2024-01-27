@@ -19,12 +19,7 @@
 #endif
 
 #if not defined(MOZZI_AUDIO_CHANNELS)
-#if (MOZZI_COMPATIBILITY_LEVEL <= MOZZI_COMPATIBILITY_1_1) && (STEREO_HACK == true)
-#warning Use of STEREO_HACK is deprecated. Use AUDIO_CHANNELS STEREO, instead.
-#define MOZZI_AUDIO_CHANNELS MOZZI_STEREO
-#else
 #define MOZZI_AUDIO_CHANNELS MOZZI_MONO
-#endif
 #endif
 
 //MOZZI_AUDIO_MODE -> hardware specific

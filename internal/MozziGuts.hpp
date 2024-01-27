@@ -75,12 +75,7 @@ inline void bufferAudioOutput(const AudioOutput_t f) {
   ++samples_written_to_buffer;
 }
 #else
-#  if (STEREO_HACK == true)
-// ring buffer for audio output
-CircularBuffer<StereoOutput> output_buffer;  // fixed size 256
-#  else
 CircularBuffer<AudioOutput_t> output_buffer;  // fixed size 256
-#  endif
 #  define canBufferAudioOutput() (!output_buffer.isFull())
 #  define bufferAudioOutput(f) output_buffer.write(f)
 static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
@@ -225,12 +220,7 @@ void audioHook() // 2us on AVR excluding updateAudio()
 // setPin13High();
   if (canBufferAudioOutput()) {
     advanceControlLoop();
-#if (STEREO_HACK == true)
-    updateAudio(); // in hacked version, this returns void
-    bufferAudioOutput(StereoOutput(audio_out_1, audio_out_2));
-#else
     bufferAudioOutput(updateAudio());
-#endif
 
 #if defined(LOOP_YIELD)
     LOOP_YIELD

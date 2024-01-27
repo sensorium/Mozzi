@@ -98,8 +98,7 @@
  * config, or vice versa will continue to work, but will generate a warning a
  * compile time.
  *
- * @note This option superseeds the earlier STEREO_HACK, which is still available at
- *       the time of this writing, but should not be used in new sketches.
+ * @note This option superseeds the earlier STEREO_HACK in Mozzi < 1.1
  *
  * @note At the time of this writing, only MOZZI_MONO and MOZZI_STEREO are supported. The value of
  *       MOZZI_MONO is 1 and the value of MOZZI_STEREO is 2, so future extensions are also expected

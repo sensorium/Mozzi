@@ -71,8 +71,9 @@ typedef StereoOutput AudioOutput;
 typedef MonoOutput AudioOutput;
 #endif
 
-#if MOZZI_COMPATIBILITY_LEVEL < MOZZI_COMPATIBILITY_LEVEL_2_0
-typedef int AudioOutput_t;     // keep sketches using "int updateAudio()" alive
+#if MOZZI_AUDIO_CHANNELS < MOZZI_STEREO
+// NOTE / TODO: Unfortunately, for reasons yet to investigate, aliasing to MonoOutput, instead, here, adds a bunch of flash usage
+typedef AudioOutputStorage_t AudioOutput_t;     // keep sketches using "int updateAudio()" alive
 #else
 /** Representation of an single audio output sample/frame. For mono output, this is really just a single zero-centered int,
  *  but for stereo it's a struct containing two ints.
@@ -86,7 +87,6 @@ typedef int AudioOutput_t;     // keep sketches using "int updateAudio()" alive
  *        might be subject to change, and it may even be void. Use either MonoOutput or StereoOutput to represent a piece of audio output.
  */
 typedef AudioOutput AudioOutput_t;  // Note: Needed for pre 1.1 backwards compatibility
-// TODO AudioOutput_t itself could be phased out, eventually, simply using AudioOutput, instead.
 #endif
 
 /** This struct encapsulates one frame of mono audio output. Internally, it really just boils down to a single int value, but the struct provides
@@ -111,10 +111,10 @@ struct MonoOutput {
       This _could_ be turned into an operator for implicit conversion in this case. For now we chose to apply conversion on demand, only, as most of the time
       using StereoOutput in a mono config, is not intended. */
   StereoOutput portable() const __attribute__((deprecated("Sketch generates mono output, but Mozzi is configured for stereo. Check MOZZI_AUDIO_CHANNELS setting.")));  // Note: defintion below
-#elif MOZZI_COMPATIBILITY_LEVEL < MOZZI_COMPATIBILITY_LEVEL_2_0
-  /** Conversion to int operator. */
-  operator AudioOutput_t() const { return _l; };
 #endif
+  /** Conversion to int operator. */
+  operator AudioOutputStorage_t() const { return _l; };
+
   AudioOutputStorage_t l() const { return _l; };
   AudioOutputStorage_t r() const { return _l; };
   /** Clip frame to supported range. This is useful when at times, but only rarely, the signal may exceed the usual range. Using this function does not avoid

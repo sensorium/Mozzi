@@ -133,3 +133,8 @@ return MonoOutput::fromAlmostNbit(9, value);
 
 *Only* on classic Arduino, default output mode, this will assume the value still fits into the output range, while everywhere else, it will be shifted as if
 it was using 9 bits.
+
+### "STEREO_HACK"
+
+Use ```#define MOZZI_AUDIO_CHANNELS MOZZI_STEREO``` in your configuration, instead. ```updateAudio()``` must then return pairs of L/R-samples
+encapsuled in the ```StereoOutput```-class. See e.g. Examples->Mozzi->12.Misc->Stereo.

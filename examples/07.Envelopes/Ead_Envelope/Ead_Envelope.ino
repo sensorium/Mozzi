@@ -13,6 +13,7 @@
 		Tim Barrass 2012, CC by-nc-sa
  */
 
+#define MOZZI_CONTROL_RATE 256 // Hz, powers of 2 are most reliable
 #include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <tables/brownnoise8192_int8.h> // recorded audio wavetable
@@ -20,11 +21,9 @@
 #include <EventDelay.h>
 #include <mozzi_rand.h>
 
-#define CONTROL_RATE 256 // Hz, powers of 2 are most reliable
-
 Oscil<BROWNNOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(BROWNNOISE8192_DATA);
 EventDelay kDelay; // for triggering envelope start
-Ead kEnvelope(CONTROL_RATE); // resolution will be CONTROL_RATE
+Ead kEnvelope(MOZZI_CONTROL_RATE); // resolution will be MOZZI_CONTROL_RATE
 
 int gain;
 
@@ -33,7 +32,7 @@ void setup(){
   // use float to set freq because it will be small and fractional
   aNoise.setFreq((float)AUDIO_RATE/BROWNNOISE8192_SAMPLERATE);
   randSeed(); // fresh random, MUST be called before startMozzi - wierd bug
-  startMozzi(CONTROL_RATE);
+  startMozzi();
   kDelay.start(1000);
 }
 

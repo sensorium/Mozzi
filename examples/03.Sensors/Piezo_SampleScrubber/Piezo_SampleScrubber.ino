@@ -47,7 +47,7 @@ Sample <BLAHBLAH4B_NUM_CELLS, AUDIO_RATE, INTERP_LINEAR> aSample(BLAHBLAH4B_DATA
 Line <Q16n16> scrub; // Q16n16 fixed point for high precision
 
 // the number of audio steps the line has to take to reach the next offset
-const unsigned int AUDIO_STEPS_PER_CONTROL = AUDIO_RATE / CONTROL_RATE;
+const unsigned int AUDIO_STEPS_PER_CONTROL = AUDIO_RATE / MOZZI_CONTROL_RATE;
 
 
 void setup(){

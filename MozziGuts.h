@@ -62,7 +62,7 @@ This function intializes the timer(s) needed to move audio samples to the output
 configured @ref MOZZI_AUDIO_MODE .
 
 @param control_rate_hz Sets how often updateControl() is called.  It must be a power of 2.
-If no parameter is provided, control_rate_hz is set to CONTROL_RATE,
+If no parameter is provided, control_rate_hz is set to MOZZI_CONTROL_RATE,
 which has a default value of 64 (you can re-\#define it in your sketch).
 The practical upper limit for control rate depends on how busy the processor is,
 and you might need to do some tests to find the best setting.
@@ -72,7 +72,7 @@ which disables digital inputs on all analog input pins.  All in mozzi_analog.h a
 They are all called automatically and hidden away because it keeps things simple for a STANDARD_PLUS set up,
 but if it turns out to be confusing, they might need to become visible again.
 */
-void startMozzi(int control_rate_hz = CONTROL_RATE);
+void startMozzi(int control_rate_hz = MOZZI_CONTROL_RATE);
 
 
 

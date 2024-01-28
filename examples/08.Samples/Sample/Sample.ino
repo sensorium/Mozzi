@@ -31,7 +31,7 @@ EventDelay kTriggerDelay;
 void setup(){
   startMozzi();
   aSample.setFreq((float) BURROUGHS1_18649_SAMPLERATE / (float) BURROUGHS1_18649_NUM_CELLS); // play at the speed it was recorded
-  kTriggerDelay.set(1500); // 1500 msec countdown, within resolution of CONTROL_RATE
+  kTriggerDelay.set(1500); // 1500 msec countdown, within resolution of MOZZI_CONTROL_RATE
 }
 
 

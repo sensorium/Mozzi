@@ -24,8 +24,8 @@
 #include <WaveFolder.h>
 
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA); // audio oscillator
-Oscil <SIN2048_NUM_CELLS, CONTROL_RATE> kBias(SIN2048_DATA);  // LFO changing the bias
-Oscil <SAW512_NUM_CELLS, CONTROL_RATE> kGain(SAW512_DATA);  // Gain oscillator
+Oscil <SIN2048_NUM_CELLS, MOZZI_CONTROL_RATE> kBias(SIN2048_DATA);  // LFO changing the bias
+Oscil <SAW512_NUM_CELLS, MOZZI_CONTROL_RATE> kGain(SAW512_DATA);  // Gain oscillator
 
 
 // Create a WaveFolder on the native audio type (int).
@@ -40,8 +40,8 @@ void setup() {
   kBias.setFreq(0.3f); // set the frequency
   kGain.setFreq(0.2f);
   wf.setLimits(-2047, 2047);  // sets the values the wavefolder will start folding (in this case, containing in 12 bits)
-                            // can also be done at CONTROL_RATE (even maybe at AUDIO_RATE)
-  startMozzi(CONTROL_RATE);
+                            // can also be done at MOZZI_CONTROL_RATE (even maybe at AUDIO_RATE)
+  startMozzi();
 }
 
 void updateControl() {

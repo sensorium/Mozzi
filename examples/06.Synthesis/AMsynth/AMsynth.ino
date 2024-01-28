@@ -20,6 +20,7 @@
     Tim Barrass 2012, CC by-nc-sa.
 */
 
+#define MOZZI_CONTROL_RATE 64 // Hz, powers of 2 are most reliable
 #include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/cos2048_int8.h> // table for Oscils to play
@@ -27,8 +28,6 @@
 #include <EventDelay.h>
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
-
-#define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
 
 // audio oscils
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCarrier(COS2048_DATA);
@@ -48,10 +47,10 @@ Q8n0 octave_start_note = 42;
 
 void setup(){
   ratio = float_to_Q8n8(3.0f);   // define modulation ratio in float and convert to fixed-point
-  kNoteChangeDelay.set(200); // note duration ms, within resolution of CONTROL_RATE
+  kNoteChangeDelay.set(200); // note duration ms, within resolution of MOZZI_CONTROL_RATE
   aModDepth.setFreq(13.f);     // vary mod depth to highlight am effects
   randSeed(); // reseed the random generator for different results each time the sketch runs
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 void updateControl(){

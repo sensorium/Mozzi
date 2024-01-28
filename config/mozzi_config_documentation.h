@@ -143,7 +143,7 @@
  * can sometimes give smoother results, avoiding the need to interpolate
  * sensitive variables at audio rate in updateAudio().
  *
- * TODO: If a definition of CONTROL_RATE is detected, apply that with a warning.
+ * TODO: If a definition of MOZZI_CONTROL_RATE is detected, apply that with a warning.
 */
 #define MOZZI_CONTROL_RATE FOR_DOXYGEN_ONLY
 

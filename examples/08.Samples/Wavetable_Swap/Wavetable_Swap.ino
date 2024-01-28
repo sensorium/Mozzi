@@ -26,7 +26,7 @@ boolean using_sin = true;
 
 void setup(){
   startMozzi();
-  kSwapTablesDelay.set(1000); // 1 second countdown, within resolution of CONTROL_RATE
+  kSwapTablesDelay.set(1000); // 1 second countdown, within resolution of MOZZI_CONTROL_RATE
   aOscil.setFreq(440.f);
 }
 

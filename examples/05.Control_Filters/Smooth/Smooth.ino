@@ -18,14 +18,13 @@
     Tim Barrass 2012, CC by-nc-sa.
 */
 
+#define MOZZI_CONTROL_RATE 128
 #include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator
 #include <EventDelay.h>
 #include <Smooth.h>
 #include <mozzi_rand.h>
-
-#define CONTROL_RATE 128
 
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
@@ -47,7 +46,7 @@ void setup(){
   aSin.setFreq(330); // set the frequency
   kGainChangeDelay.set(gainChangeMsec);
   kSmoothOnOff.set(smoothOnOffMsec);
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 

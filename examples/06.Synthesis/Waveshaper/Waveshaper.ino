@@ -57,7 +57,7 @@ void setup(){
   aSin.setFreq(110); // set the frequency
   aGain1.setFreq(2.f); // use a float for low frequencies, in setup it doesn't need to be fast
   aGain2.setFreq(.4f);
-  kChangeNoteDelay.set(4000); // note duration ms, within resolution of CONTROL_RATE
+  kChangeNoteDelay.set(4000); // note duration ms, within resolution of MOZZI_CONTROL_RATE
 }
 
 byte rndPentatonic(){

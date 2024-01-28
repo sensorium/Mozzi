@@ -30,7 +30,7 @@
 // use: Oscil <table_size, update_rate> oscilName (wavetable)
 Oscil <PINKNOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(PINKNOISE8192_DATA);
 
-Oscil <SIN2048_NUM_CELLS, CONTROL_RATE> kPan(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_CONTROL_RATE> kPan(SIN2048_DATA);
 
 byte ampA, ampB; // convey amplitudes from updateControl() to updateAudioStereo();
 

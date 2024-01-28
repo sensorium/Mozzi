@@ -18,6 +18,7 @@
     Tim Barrass 2012-13, CC by-nc-sa.
 */
 
+#define MOZZI_CONTROL_RATE 128 // Hz, powers of 2 are most reliable
 #include <Mozzi.h>
 #include <Oscil.h>
 #include <AudioDelayFeedback.h>
@@ -26,11 +27,9 @@
 #include <mozzi_rand.h>
 #include <tables/whitenoise8192_int8.h>
 
-#define CONTROL_RATE 128 // Hz, powers of 2 are most reliable
-
 Oscil <WHITENOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(WHITENOISE8192_DATA); // audio noise
 EventDelay kDelay; // for triggering envelope start
-Ead kEnvelope(CONTROL_RATE); // resolution will be CONTROL_RATE
+Ead kEnvelope(MOZZI_CONTROL_RATE); // resolution will be MOZZI_CONTROL_RATE
 
 AudioDelayFeedback <256, ALLPASS> aDel;
 
@@ -39,7 +38,7 @@ int gain;
 
 void setup(){
   //Serial.begin(9600);
-  startMozzi(CONTROL_RATE);
+  startMozzi();
   randSeed(); // reseed the random generator for different results each time the sketch runs
   // use float to set freq because it will be small and fractional
   aNoise.setFreq((float)AUDIO_RATE/WHITENOISE8192_SAMPLERATE);

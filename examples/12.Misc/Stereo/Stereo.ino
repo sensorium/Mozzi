@@ -28,7 +28,7 @@
 Oscil <PINKNOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(PINKNOISE8192_DATA);
 
 //Phasor for panning
-Phasor <CONTROL_RATE> kPan; // outputs an unsigned long 0-max 32 bit positive number
+Phasor <MOZZI_CONTROL_RATE> kPan; // outputs an unsigned long 0-max 32 bit positive number
 unsigned int pan; // convey pan from updateControl() to updateAudioStereo();
 
 

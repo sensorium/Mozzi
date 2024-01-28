@@ -29,7 +29,7 @@ Sample <BURROUGHS1_18649_NUM_CELLS, AUDIO_RATE, INTERP_LINEAR> aSample(BURROUGHS
 Line <Q16n16> scrub; // Q16n16 fixed point for high precision
 
 // the number of audio steps the line has to take to reach the next offset
-const unsigned int AUDIO_STEPS_PER_CONTROL = AUDIO_RATE / CONTROL_RATE;
+const unsigned int AUDIO_STEPS_PER_CONTROL = AUDIO_RATE / MOZZI_CONTROL_RATE;
 
 int offset = 0;
 int offset_advance = 400; // just a guess
@@ -50,8 +50,8 @@ void updateControl(){
 
   // wandering advance rate
   offset_advance += (int)rand(20)-rand(20);
-  if(!rand(CONTROL_RATE)) offset_advance = -offset_advance; // reverse sometimes
-  if(!rand(CONTROL_RATE)) offset_advance = 500-rand(1000); // jump speed sometimes
+  if(!rand(MOZZI_CONTROL_RATE)) offset_advance = -offset_advance; // reverse sometimes
+  if(!rand(MOZZI_CONTROL_RATE)) offset_advance = 500-rand(1000); // jump speed sometimes
 
   int smooth_offset_advance = kSmoothOffsetAdvance.next(offset_advance);
 

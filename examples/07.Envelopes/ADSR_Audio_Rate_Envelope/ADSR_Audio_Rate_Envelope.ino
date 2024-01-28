@@ -3,7 +3,7 @@
     how to use an ADSR which updates at AUDIO_RATE, in updateAudio(),
     and output using next() at AUDIO_RATE in updateAudio().
 
-    Another example in this folder shows an ADSR updating at CONTROL_RATE,
+    Another example in this folder shows an ADSR updating at MOZZI_CONTROL_RATE,
     which is more efficient, but AUDIO_RATE updates shown in this example
     enable faster envelope transitions.
 

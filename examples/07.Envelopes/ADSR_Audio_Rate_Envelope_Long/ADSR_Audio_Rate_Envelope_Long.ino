@@ -6,7 +6,7 @@
     unsigned long as the third ADSR parameter to allow long envelopes
     to be updated at AUDIO_RATE.
 
-    Another example in this folder shows an ADSR updating at CONTROL_RATE,
+    Another example in this folder shows an ADSR updating at MOZZI_CONTROL_RATE,
     which is more efficient, but AUDIO_RATE updates shown in this example
     enable faster envelope transitions.
 

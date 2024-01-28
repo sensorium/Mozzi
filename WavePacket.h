@@ -39,7 +39,7 @@ public:
 
 	/** Constructor.
 	*/
-	WavePacket():AUDIO_STEPS_PER_CONTROL(AUDIO_RATE / CONTROL_RATE)
+	WavePacket():AUDIO_STEPS_PER_CONTROL(MOZZI_AUDIO_RATE / MOZZI_CONTROL_RATE)
 	{
 		aCos.setTable(COS8192_DATA);
 	}

@@ -51,6 +51,7 @@
 #include "MozziConfigValues.h"  // for named option values
 #define MOZZI_AUDIO_MODE MOZZI_OUTPUT_EXTERNAL_TIMED
 #define MOZZI_AUDIO_BITS 24
+#define MOZZI_CONTROL_RATE 256 // Hz, powers of 2 are most reliable
 
 #include <Mozzi.h>
 #include <Oscil.h>
@@ -59,13 +60,10 @@
 #include <DAC_MCP49xx.h>  // https://github.com/tomcombriat/DAC_MCP49XX 
 // which is an adapted fork from https://github.com/exscape/electronics/tree/master/Arduino/Libraries/DAC_MCP49xx  (Thomas Backman)
 
-#define CONTROL_RATE 256 // Hz, powers of 2 are most reliable
-
-
 // Synthesis part
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCos1(COS2048_DATA);
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCos2(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kEnv1(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kEnv1(COS2048_DATA);
 
 
 
@@ -101,7 +99,7 @@ void setup() {
 
   //dac.setPortWrite(true);  //comment this line if you do not want to use PortWrite (for non-AVR platforms)
 
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 

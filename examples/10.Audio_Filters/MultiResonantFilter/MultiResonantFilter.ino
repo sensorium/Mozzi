@@ -31,8 +31,8 @@
 #include <mozzi_rand.h>
 
 Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound(CHUM9_DATA);
-Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFilterMod(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFilterMod2(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kFilterMod(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kFilterMod2(COS2048_DATA);
 
 MultiResonantFilter<uint8_t> mf; // Multifilter applied to a 8 bits signal.
                          // MultiResonantFilter<uint16_t> can also be used for signals with higher number of bits
@@ -56,7 +56,7 @@ void loop() {
 }
 
 void updateControl() {
-  if (rand(CONTROL_RATE / 2) == 0) { // about once every half second
+  if (rand(MOZZI_CONTROL_RATE / 2) == 0) { // about once every half second
     kFilterMod.setFreq((float)rand(255) / 64); // choose a new modulation frequency
     filter_type = rand(4);  // change the filter type, randomly
   }

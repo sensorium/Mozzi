@@ -35,6 +35,8 @@
     Tim Barrass 2012, Combriat T. 2021, CC by-nc-sa.
 */
 
+// use #define for MOZZI_CONTROL_RATE, not a constant
+#define MOZZI_CONTROL_RATE 256 // Hz, powers of 2 are most reliable
 #include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <MetaOscil.h>
@@ -81,10 +83,6 @@ Oscil <SQUARE_MAX_8192_AT_16384_512_NUM_CELLS, AUDIO_RATE> aSq8192(SQUARE_MAX_81
 // use: MetaOscil <table_size, update_rate, number_of_oscil> MetaoscilName. All oscils used should have the same table_size and **have to be put in increasing order of cutoff_frequencies**.
 MetaOscil<SQUARE_MAX_90_AT_16384_512_NUM_CELLS, AUDIO_RATE, 16> BL_aSq {&aSq90, &aSq101, &aSq122, &aSq138, &aSq154, &aSq174, &aSq210, &aSq264, &aSq327, &aSq431, &aSq546, &aSq744, &aSq1170, &aSq1638, &aSq2730, &aSq8192};
 
-
-// use #define for CONTROL_RATE, not a constant
-#define CONTROL_RATE 256 // Hz, powers of 2 are most reliable
-
 int freq = 10;
 
 
@@ -95,7 +93,7 @@ void setup() {
 
   // Cutoff frequencies can also be set or changed individually.
   BL_aSq.setCutoffFreq(3000, 14);
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 

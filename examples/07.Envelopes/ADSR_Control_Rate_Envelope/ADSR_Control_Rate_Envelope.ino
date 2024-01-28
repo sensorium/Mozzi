@@ -1,6 +1,6 @@
 /*  Example applying an ADSR envelope to an audio signal
     with Mozzi sonification library.  This shows
-    internal updates as well as interpolation at CONTROL_RATE, using both
+    internal updates as well as interpolation at MOZZI_CONTROL_RATE, using both
     update() and next()  in updateControl().
     This is less computationally intensive than doing interpolation with
     next() in updateAudio(), but can be less smooth, especially with fast envelopes.
@@ -11,6 +11,7 @@
     Tim Barrass 2013-14, CC by-nc-sa.
 */
 
+#define MOZZI_CONTROL_RATE 128 // faster than usual to help smooth MOZZI_CONTROL_RATE adsr interpolation (next())
 #include <Mozzi.h>
 #include <Oscil.h>
 #include <EventDelay.h>
@@ -19,14 +20,12 @@
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
 
-#define CONTROL_RATE 128 // faster than usual to help smooth CONTROL_RATE adsr interpolation (next())
-
 Oscil <8192, AUDIO_RATE> aOscil(SIN8192_DATA);;
 
 // for triggering the envelope
 EventDelay noteDelay;
 
-ADSR <CONTROL_RATE, CONTROL_RATE> envelope;
+ADSR <MOZZI_CONTROL_RATE, MOZZI_CONTROL_RATE> envelope;
 
 boolean note_is_on = true;
 byte gain;
@@ -36,7 +35,7 @@ void setup(){
   Serial.begin(115200);
   randSeed(); // fresh random
   noteDelay.set(2000); // 2 second countdown
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 

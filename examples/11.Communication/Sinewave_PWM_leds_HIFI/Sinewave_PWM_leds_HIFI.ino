@@ -66,9 +66,9 @@ const byte BLUE_PIN = 5;
 byte red_brightness, green_brightness, blue_brightness;
 
 // control oscillators using sinewaves to modulate LED brightness
-Oscil <SIN2048_NUM_CELLS, CONTROL_RATE> kRed(SIN2048_DATA);
-Oscil <SIN2048_NUM_CELLS, CONTROL_RATE> kGreen(SIN2048_DATA);
-Oscil <SIN2048_NUM_CELLS, CONTROL_RATE> kBlue(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_CONTROL_RATE> kRed(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_CONTROL_RATE> kGreen(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_CONTROL_RATE> kBlue(SIN2048_DATA);
 
 // audio oscillator
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);

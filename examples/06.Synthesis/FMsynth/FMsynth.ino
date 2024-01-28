@@ -22,6 +22,7 @@
     Tim Barrass 2012, CC by-nc-sa.
 */
 
+#define MOZZI_CONTROL_RATE 256 // Hz, powers of 2 are most reliable
 #include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/cos2048_int8.h> // table for Oscils to play
@@ -30,11 +31,9 @@
 #include <EventDelay.h>
 #include <Smooth.h>
 
-#define CONTROL_RATE 256 // Hz, powers of 2 are most reliable
-
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCarrier(COS2048_DATA);
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aModulator(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kModIndex(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kModIndex(COS2048_DATA);
 
 // The ratio of deviation to modulation frequency is called the "index of modulation". ( I = d / Fm )
 // It will vary according to the frequency that is modulating the carrier and the amount of deviation.
@@ -60,7 +59,7 @@ Q7n8 target_note, note0, note1, note_upper_limit, note_lower_limit, note_change_
 Smooth <int> kSmoothNote(0.95f);
 
 void setup(){
-  kNoteChangeDelay.set(768); // ms countdown, taylored to resolution of CONTROL_RATE
+  kNoteChangeDelay.set(768); // ms countdown, taylored to resolution of MOZZI_CONTROL_RATE
   kModIndex.setFreq(.768f); // sync with kNoteChangeDelay
   target_note = note0;
   note_change_step = Q7n0_to_Q7n8(3);
@@ -68,7 +67,7 @@ void setup(){
   note_lower_limit = Q7n0_to_Q7n8(32);
   note0 = note_lower_limit;
   note1 = note_lower_limit + Q7n0_to_Q7n8(5);
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 void setFreqs(Q8n8 midi_note){

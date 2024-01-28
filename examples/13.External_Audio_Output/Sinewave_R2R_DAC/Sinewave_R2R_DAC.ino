@@ -42,7 +42,7 @@
 #include "MozziConfigValues.h"  // for named option values
 #define MOZZI_AUDIO_MODE MOZZI_OUTPUT_EXTERNAL_TIMED
 #define MOZZI_AUDIO_BITS 6
-#define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
+#define MOZZI_CONTROL_RATE 64 // Hz, powers of 2 are most reliable
 
 #include <Mozzi.h>
 #include <Oscil.h> // oscillator template
@@ -73,7 +73,7 @@ void audioOutput(const AudioOutput f) // f is a structure potentially containing
 
 void setup() {
   for (int i = 0; i < R2R_N_PIN; i++) pinMode(r2r_pin[i], OUTPUT);
-  startMozzi(CONTROL_RATE); // :)
+  startMozzi(); // :)
   aSin.setFreq(200); // set the frequency
 }
 

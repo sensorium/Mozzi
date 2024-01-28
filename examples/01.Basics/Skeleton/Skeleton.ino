@@ -1,8 +1,9 @@
-#include <Mozzi.h>        // at the top of your sketch
-#define CONTROL_RATE 64
+#include <MozziConfigValues.h> // only needed, if you want to change some defaults
+#define MOZZI_CONTROL_RATE 64  // any options then go above the Mozzi.h include
+#include <Mozzi.h>             // needed once in each sketch
 
 void setup() {
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 void updateControl() {

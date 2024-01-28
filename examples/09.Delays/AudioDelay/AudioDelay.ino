@@ -16,6 +16,7 @@
     Tim Barrass 2012, CC by-nc-sa.
 */
 
+#define MOZZI_CONTROL_RATE 256 // Hz, powers of 2 are most reliable
 #include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/triangle_analogue512_int8.h> // wavetable
@@ -23,10 +24,8 @@
 #include <AudioDelay.h>
 #include <mozzi_midi.h> // for mtof
 
-#define CONTROL_RATE 256 // Hz, powers of 2 are most reliable
-
 Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, AUDIO_RATE> aTriangle(TRIANGLE_ANALOGUE512_DATA);
-Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFreq(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kFreq(COS2048_DATA);
 
 AudioDelay <256> aDel;
 int del_samps;
@@ -34,7 +33,7 @@ int del_samps;
 void setup(){
   aTriangle.setFreq(mtof(60.f));
   kFreq.setFreq(.63f);
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 void loop(){

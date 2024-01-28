@@ -35,8 +35,8 @@ using.  The sound table can be arbitrary length for Sample.
 It's important that NUM_TABLE_CELLS is either a literal number (eg. "8192") or a
 defined macro, rather than a const or int, for the Sample to run fast enough.
 @tparam UPDATE_RATE This will be AUDIO_RATE if the Sample is updated in
-updateAudio(), or CONTROL_RATE if it's updated each time updateControl() is
-called. It could also be a fraction of CONTROL_RATE if you are doing some kind
+updateAudio(), or MOZZI_CONTROL_RATE if it's updated each time updateControl() is
+called. It could also be a fraction of MOZZI_CONTROL_RATE if you are doing some kind
 of cyclic updating in updateControl(), for example, to spread out the processor load.
 @section int8_t2mozzi
 Converting soundfiles for Mozzi.

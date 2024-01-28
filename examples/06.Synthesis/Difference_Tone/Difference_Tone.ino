@@ -40,7 +40,7 @@ void setup(){
   startMozzi(); // :)
   aSin1.setFreq_Q16n16(freq1); // set the frequency with a Q16n16 fractional number
   aGain.setFreq(0.2f); // use a float for low frequencies, in setup it doesn't need to be fast
-  kChangeNoteDelay.set(2000); // note duration ms, within resolution of CONTROL_RATE
+  kChangeNoteDelay.set(2000); // note duration ms, within resolution of MOZZI_CONTROL_RATE
 }
 
 

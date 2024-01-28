@@ -20,6 +20,8 @@
 */
 
 #include <MIDI.h>
+// use #define for MOZZI_CONTROL_RATE, not a constant
+#define MOZZI_CONTROL_RATE 128 // Hz, powers of 2 are most reliable
 #include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator
@@ -29,14 +31,11 @@
 
 MIDI_CREATE_DEFAULT_INSTANCE();
 
-// use #define for CONTROL_RATE, not a constant
-#define CONTROL_RATE 128 // Hz, powers of 2 are most reliable
-
 // audio sinewave oscillator
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
 // envelope generator
-ADSR <CONTROL_RATE, AUDIO_RATE> envelope;
+ADSR <MOZZI_CONTROL_RATE, AUDIO_RATE> envelope;
 
 #define LED 13 // shows if MIDI is being recieved
 
@@ -64,7 +63,7 @@ void setup() {
   envelope.setTimes(50,200,10000,200); // 10000 is so the note will sustain 10 seconds unless a noteOff comes
 
   aSin.setFreq(440); // default frequency
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 

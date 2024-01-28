@@ -39,8 +39,8 @@ cycling oscillator, or atIndex() for a particular sample in the table.
 using. It's important that it's a power of 2, and either a literal number (eg. "8192") or a
 defined macro, rather than a const or int, for the Oscil to run fast enough.
 @tparam UPDATE_RATE This will be AUDIO_RATE if the Oscil is updated in
-updateAudio(), or CONTROL_RATE if it's updated each time updateControl() is
-called. It could also be a fraction of CONTROL_RATE if you are doing some kind
+updateAudio(), or MOZZI_CONTROL_RATE if it's updated each time updateControl() is
+called. It could also be a fraction of MOZZI_CONTROL_RATE if you are doing some kind
 of cyclic updating in updateControl(), for example, to spread out the processor load.
 @todo Use conditional compilation to optimise setFreq() variations for different table
 sizes.

@@ -12,11 +12,7 @@
 #ifndef PHASOR_H_
 #define PHASOR_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include "Arduino.h"
 #include "mozzi_fixmath.h"
 
 #define PHASOR_MAX_VALUE_UL 4294967295UL
@@ -25,7 +21,7 @@
 The output of Phasor.next() is an unsigned number between 0 and 4294967295, the
 maximum that can be expressed by an unsigned 32 bit integer.
 @tparam UPDATE_RATE the rate at which the Phasor will be updated,
-usually CONTROL_RATE or AUDIO_RATE.
+usually MOZZI_CONTROL_RATE or MOZZI_AUDIO_RATE.
 */
 
 template <unsigned int UPDATE_RATE>

@@ -28,7 +28,7 @@
 #include <mozzi_rand.h>
 
 Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound(CHUM9_DATA);
-Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFilterMod(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kFilterMod(COS2048_DATA);
 
 //Different types of filters available
 LowPassFilter rf; // Equivalent to ResonantFilter<LOWPASS>
@@ -49,7 +49,7 @@ void loop(){
 }
 
 void updateControl(){
-  if (rand(CONTROL_RATE/2) == 0){ // about once every half second
+  if (rand(MOZZI_CONTROL_RATE/2) == 0){ // about once every half second
     kFilterMod.setFreq((float)rand(255)/64);  // choose a new modulation frequency
   }
   // map the modulation into the filter range (0-255), corresponds with 0-AUDIO_RATE/(sqrt(2)*pi) Hz

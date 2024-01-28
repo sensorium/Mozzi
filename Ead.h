@@ -33,7 +33,7 @@ public:
 
 	/** Constructor
 	@param update_rate
-	Usually this will be CONTROL_RATE or AUDIO_RATE, unless you
+	Usually this will be MOZZI_CONTROL_RATE or MOZZI_AUDIO_RATE, unless you
 	design another scheme for updating. One such alternative scheme could take turns
 	for various control changes in a rotating schedule to spread out calculations
 	made in successive updateControl() routines. 

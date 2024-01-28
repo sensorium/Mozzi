@@ -74,7 +74,7 @@ byte lo_note = 24; // midi note numbers
 byte hi_note = 46;
 
 long audio_steps_per_gliss = AUDIO_RATE / 4; // ie. 4 glisses per second
-long control_steps_per_gliss = CONTROL_RATE / 4;
+long control_steps_per_gliss = MOZZI_CONTROL_RATE / 4;
 
 // stuff for changing starting positions, probably just confusing really
 int counter = 0;

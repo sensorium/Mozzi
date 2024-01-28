@@ -4,7 +4,7 @@
     This shows how to use an ADSR which updates at AUDIO_RATE,
     in updateAudio(), and output using next() at AUDIO_RATE in updateAudio().
 
-    Another example in this folder shows an ADSR updating at CONTROL_RATE,
+    Another example in this folder shows an ADSR updating at MOZZI_CONTROL_RATE,
     which is more efficient, but AUDIO_RATE updates shown in this example
     enable faster envelope transitions.
 
@@ -32,8 +32,8 @@ Oscil <8192, AUDIO_RATE> aOscil1(SIN8192_DATA);
 EventDelay noteDelay;
 
 // ADSR update_rate, interpolation_rte
-ADSR <CONTROL_RATE,AUDIO_RATE> envelope0;
-ADSR <CONTROL_RATE,AUDIO_RATE> envelope1;
+ADSR <MOZZI_CONTROL_RATE,AUDIO_RATE> envelope0;
+ADSR <MOZZI_CONTROL_RATE,AUDIO_RATE> envelope1;
 
 boolean note_is_on = true;
 

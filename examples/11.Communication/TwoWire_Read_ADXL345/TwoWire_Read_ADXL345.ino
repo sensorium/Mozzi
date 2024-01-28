@@ -20,17 +20,16 @@
     This example code is in the public domain.
 */
 
+#define MOZZI_CONTROL_RATE 128 // Hz, powers of 2 are most reliable
 #include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <Ead.h> // exponential attack decay
 #include <tables/sin2048_int8.h> // sine table for oscillator
 #include <twi_nonblock.h>
 
-#define CONTROL_RATE 128 // Hz, powers of 2 are most reliable
-
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
-Ead kEnvelope(CONTROL_RATE); // resolution will be CONTROL_RATE
+Ead kEnvelope(MOZZI_CONTROL_RATE); // resolution will be MOZZI_CONTROL_RATE
 
 int gain;
 
@@ -140,7 +139,7 @@ void acc_writeTo(byte address, byte val) {
 
 void setup(){
   setup_accelero();
-  startMozzi(CONTROL_RATE);
+  startMozzi();
   aSin.setFreq(800);
   int attack = 30;
   int decay = 500;

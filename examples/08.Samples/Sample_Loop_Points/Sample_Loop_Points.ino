@@ -20,13 +20,12 @@
     Tim Barrass 2012, CC by-nc-sa.
 */
 
+#define MOZZI_CONTROL_RATE 128
 #include <Mozzi.h>
 #include <Sample.h> // Sample template
 #include <samples/abomb16384_int8.h> // table for Sample
 #include <EventDelay.h>
 #include <mozzi_rand.h>
-
-#define CONTROL_RATE 128
 
 // use: Sample <table_size, update_rate> SampleName (wavetable)
 Sample <ABOMB_NUM_CELLS, AUDIO_RATE> aSample(ABOMB_DATA);
@@ -39,14 +38,14 @@ const float playspeed = 1.3;
 float playspeedmod = 0;
 float speedchange = 0;
 
-const unsigned int full = (int) (1000.f/playspeed) - 23; // adjustment approx for CONTROL_RATE difference
+const unsigned int full = (int) (1000.f/playspeed) - 23; // adjustment approx for MOZZI_CONTROL_RATE difference
 
 void setup(){
   randSeed(); // reseed the random generator for different results each time the sketch runs
   aSample.setFreq(playspeed*((float) ABOMB_SAMPLERATE / (float) ABOMB_NUM_CELLS));
   kTriggerDelay.set(full);
   aSample.setLoopingOn();
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 

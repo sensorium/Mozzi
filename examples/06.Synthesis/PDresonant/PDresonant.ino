@@ -69,7 +69,7 @@ void setup(){
   //MIDI.setHandleNoteOff(HandleNoteOff);
 
   // open MOZZI (:
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 
 }
 

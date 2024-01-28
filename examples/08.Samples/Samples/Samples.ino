@@ -39,7 +39,7 @@ void setup(){
   aBamboo0.setFreq((float) BAMBOO_00_2048_SAMPLERATE / (float) BAMBOO_00_2048_NUM_CELLS); // play at the speed it was recorded at
   aBamboo1.setFreq((float) BAMBOO_01_2048_SAMPLERATE / (float) BAMBOO_01_2048_NUM_CELLS);
   aBamboo2.setFreq((float) BAMBOO_02_2048_SAMPLERATE / (float) BAMBOO_02_2048_NUM_CELLS);
-  kTriggerDelay.set(111); // countdown ms, within resolution of CONTROL_RATE
+  kTriggerDelay.set(111); // countdown ms, within resolution of MOZZI_CONTROL_RATE
 }
 
 

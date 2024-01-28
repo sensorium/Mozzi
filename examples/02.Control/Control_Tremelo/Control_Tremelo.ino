@@ -21,6 +21,7 @@
     Tim Barrass 2012, CC by-nc-sa.
 */
 
+#define MOZZI_CONTROL_RATE 64 // Hz, powers of 2 are most reliable
 #include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/triangle_valve_2048_int8.h>
@@ -28,12 +29,10 @@
 #include <Line.h>
 #include <mozzi_midi.h>
 
-#define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
-
 // audio oscillator
 Oscil<TRIANGLE_VALVE_2048_NUM_CELLS, AUDIO_RATE> aSig(TRIANGLE_VALVE_2048_DATA);
 // control oscillator for tremelo
-Oscil<SIN2048_NUM_CELLS, CONTROL_RATE> kTremelo(SIN2048_DATA);
+Oscil<SIN2048_NUM_CELLS, MOZZI_CONTROL_RATE> kTremelo(SIN2048_DATA);
 // a line to interpolate control tremolo at audio rate
 Line <unsigned int> aGain;
 
@@ -41,14 +40,14 @@ Line <unsigned int> aGain;
 void setup(){
   aSig.setFreq(mtof(65.f));
   kTremelo.setFreq(5.5f);
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 
 void updateControl(){
   // gain shifted up to give enough range for line's internal steps
    unsigned int gain = (128u+kTremelo.next())<<8;
-   aGain.set(gain, AUDIO_RATE / CONTROL_RATE); // divide of literals should get optimised away
+   aGain.set(gain, AUDIO_RATE / MOZZI_CONTROL_RATE); // divide of literals should get optimised away
 }
 
 

@@ -68,10 +68,10 @@ Q8n0 octave_start_note = 42;
 
 void setup(){
   ratio = float_to_Q8n8(3.0f);   // define modulation ratio in float and convert to fixed-point
-  kNoteChangeDelay.set(200); // note duration ms, within resolution of CONTROL_RATE
+  kNoteChangeDelay.set(200); // note duration ms, within resolution of MOZZI_CONTROL_RATE
   aModDepth.setFreq(13.f);     // vary mod depth to highlight am effects
   randSeed(); // reseed the random generator for different results each time the sketch runs
-  startMozzi(); // use default CONTROL_RATE 64
+  startMozzi(); // use default MOZZI_CONTROL_RATE 64
 }
 
 

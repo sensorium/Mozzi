@@ -25,6 +25,7 @@
     Tim Barrass 2013, CC by-nc-sa.
 */
 
+#define MOZZI_CONTROL_RATE 64 // Hz, powers of 2 are most reliable
 #include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/sin2048_int8.h> // sine table for oscillator
@@ -32,8 +33,6 @@
 #include <Line.h>
 #include <Smooth.h>
 #include <mozzi_analog.h>
-
-#define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
 
 // 2 oscillators to compare linear interpolated vs smoothed control
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin0(SIN2048_DATA);
@@ -50,7 +49,7 @@ Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin1(SIN2048_DATA);
 Line <Q16n16> aInterpolate;
 
 // the number of audio steps the line has to take to reach the next control value
-const unsigned int AUDIO_STEPS_PER_CONTROL = AUDIO_RATE / CONTROL_RATE;
+const unsigned int AUDIO_STEPS_PER_CONTROL = AUDIO_RATE / MOZZI_CONTROL_RATE;
 
 // Smoothing unit for aSin1
 // This might be better with Q24n8 numbers for more precision,
@@ -63,7 +62,7 @@ Smooth <unsigned int> aSmooth(smoothness); // to smooth frequency for aSin1
 void setup(){
   aSin0.setFreq(660.f);
   aSin1.setFreq(220.f);
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 

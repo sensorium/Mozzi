@@ -49,7 +49,7 @@ const byte INPUT_PIN = 1;
 
 float ENVELOPE_DURATION = 1.f;
 
-const byte LINE_LENGTH = (byte)((float)CONTROL_RATE*ENVELOPE_DURATION*0.5); // 0.5 seconds per line
+const byte LINE_LENGTH = (byte)((float)MOZZI_CONTROL_RATE*ENVELOPE_DURATION*0.5); // 0.5 seconds per line
 
 // adjustments to get tremelo in useful range from oversampled temperature input
 const int TREMOLO_OFFSET = 4000;

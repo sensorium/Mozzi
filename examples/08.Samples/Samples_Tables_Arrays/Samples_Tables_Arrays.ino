@@ -42,7 +42,7 @@
 EventDelay kTriggerDelay;
 EventDelay kTriggerSlowDelay;
 
-byte ms_per_note = 111; // subject to CONTROL_RATE
+byte ms_per_note = 111; // subject to MOZZI_CONTROL_RATE
 
 const byte NUM_PLAYERS = 3; // 3 seems to be enough
 const byte NUM_TABLES = 11;
@@ -76,7 +76,7 @@ void setup(){
   for (int i=0;i<NUM_PLAYERS;i++){  // play at the speed they're sampled at
     (aSample[i]).setFreq((float) BAMBOO_00_2048_SAMPLERATE / (float) BAMBOO_00_2048_NUM_CELLS);
   }
-  kTriggerDelay.set(ms_per_note); // countdown ms, within resolution of CONTROL_RATE
+  kTriggerDelay.set(ms_per_note); // countdown ms, within resolution of MOZZI_CONTROL_RATE
   kTriggerSlowDelay.set(ms_per_note*6); // resolution-dependent inaccuracy leads to polyrhythm :)
 
   startMozzi();

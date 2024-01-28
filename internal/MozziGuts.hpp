@@ -314,6 +314,6 @@ void audioHook() { MozziPrivate::audioHook(); };
 #if !MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPUT_EXTERNAL_CUSTOM)
 MOZZI_DEPRECATED("n/a", "Sketch has audioOutput() function, although external output is not configured.") void audioOutput(const AudioOutput) {};
 #endif
-#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_CUSTOM)
+#if !MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_CUSTOM)
 MOZZI_DEPRECATED("n/a", "Sketch has canBufferAudioOutput() function, although custom external output is not configured.") bool canBufferAudioOutput() {};
 #endif

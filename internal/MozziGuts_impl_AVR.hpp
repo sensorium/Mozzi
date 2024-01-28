@@ -177,7 +177,7 @@ static uint8_t mozzi_TCCR4A, mozzi_TCCR4B, mozzi_TCCR4C, mozzi_TCCR4D,
 #endif
 #endif
 
-#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)  // TODO: Check: This block used to compile also for BYPASS_MOZZI_OUTPUT_BUFFER, but I think unneccessarily so.
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)
 static void startAudio() {
   backupPreMozziTimer1();
   Timer1.initializeCPUCycles(
@@ -198,6 +198,8 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK) {
 }
 
 namespace MozziPrivate {
+#elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_CUSTOM)
+static void startAudio() {}  
 #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
 inline void audioOutput(const AudioOutput f)
 {

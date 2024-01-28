@@ -114,6 +114,7 @@ jobs:
             - name: Arduino_AdvancedAnalog
           enable-deltas-report: true
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
+          enable-warnings-report: true
 
       - name: Save sketches report as workflow artifact
         uses: actions/upload-artifact@v4

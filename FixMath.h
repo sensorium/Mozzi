@@ -92,12 +92,10 @@
 */
 
  
-// This works, but then spills out of this file. The results of the macros need to be known at compile time for the templates
-// hence it is fair to think that this should be equivalent.
 
 namespace MozziPrivate {
-constexpr byte sBitsToBytes(byte N) { return (((N)>>3)+1);}
-constexpr byte uBitsToBytes(byte N) { return (((N-1)>>3)+1);}
+  constexpr byte sBitsToBytes(byte N) { return (((N)>>3)+1);}
+  constexpr byte uBitsToBytes(byte N) { return (((N-1)>>3)+1);}
 }
 
 // Forward declaration
@@ -288,21 +286,37 @@ public:
   {
     static_assert(NI+NF<=63, "The fast inverse cannot be computed for when NI+NF>63. Reduce the number of bits.");
     //return UFixMath<NF,NI>((ONESBITMASK(NI+NF)/internal_value),true);
-     return UFixMath<NF,NI>((onesbitmask()/internal_value),true);
+    return UFixMath<NF,NI>((onesbitmask()/internal_value),true);
   }
 
 
+  /** Compute the inverse of a UFixMath<NI,NF>, as a UFixMath<NF,_NF>.
+      _NF is the number of precision bits for the output. Can be any number but especially useful for case between invFast() (_NF=NI) and invAccurate() (_NF=2*NI+NF)
+      @return The inverse of the number.
+  */
+  template<byte _NF>
+  UFixMath<NF,_NF> inv() const
+  {
+    return UFixMath<_NF,NF>(internal_value,true).invFast();  
+  }
+
+
+  
   /** Compute the inverse of a UFixMath<NI,NF>, as a UFixMath<NF,NI*2+NF>.
       This inverse is more accurate than invFast, and usually leads to non common values on the whole input range. This comes at the cost of a way bigger resulting type.
       This is still slower than a multiplication, hence the suggested workflow is to compute the inverse when time is not critical, for instance in updateControl(), and multiply it afterward, for instance in updateAudio(), if you need a division.
       @return The inverse of the number.
   */
-  UFixMath<NF,NI*2+NF> invAccurate() const // TODO ADD STATIC ASSERT
-  {
-    static_assert(2*NI+2*NF<=63, "The accurate inverse cannot be computed for when 2*NI+2*NF>63. Reduce the number of bits.");
-    //return UFixMath<NF,NI*2+NF>((ONESBITMASK(NI*2+NF*2)/ (typename IntegerType<MozziPrivate::uBitsToBytes(2*NI+2*NF)>::unsigned_type)internal_value),true);
-    return UFixMath<NF,NI*2+NF>((onesbitmaskfull() / (typename IntegerType<MozziPrivate::uBitsToBytes(2*NI+2*NF)>::unsigned_type)internal_value),true);
+  UFixMath<NF,NI*2+NF> invAccurate() const
+  {/*
+     static_assert(2*NI+2*NF<=63, "The accurate inverse cannot be computed for when 2*NI+2*NF>63. Reduce the number of bits.");
+     return UFixMath<NI*2+NF,NF>(internal_value,true).invFast(); */
+    //return UFixMath<NI*2+NF,NF>(internal_value,true).inv<NI*2+NF>();
+    return inv<NI*2+NF>();
   }
+
+
+  
   
 
 
@@ -423,7 +437,7 @@ public:
 private:
   internal_type internal_value;
   static constexpr internal_type onesbitmask() { return (internal_type) ((1ULL<< (NI+NF)) - 1); }
-  static constexpr typename IntegerType<MozziPrivate::uBitsToBytes(2*NI+2*NF)>::unsigned_type onesbitmaskfull() { return (typename IntegerType<MozziPrivate::uBitsToBytes(2*NI+2*NF)>::unsigned_type) ((1ULL<< (NI*2+NF*2)) - 1); }
+  //static constexpr typename IntegerType<MozziPrivate::uBitsToBytes(2*NI+2*NF)>::unsigned_type onesbitmaskfull() { return (typename IntegerType<MozziPrivate::uBitsToBytes(2*NI+2*NF)>::unsigned_type) ((1ULL<< (NI*2+NF*2)) - 1); }
   
 };
 
@@ -691,7 +705,7 @@ public:
   }
 
 
-    //////// INVERSE
+  //////// INVERSE
 
   /** Compute the inverse of a SFixMath<NI,NF>, as a SFixMath<NF,NI> (not a typo).
       This inverse is able to represent accurately the inverse of the smallest and biggest of the initial number, but might lead to a lot of duplicates in between.
@@ -707,17 +721,26 @@ public:
     return SFixMath<NF,NI>((onesbitmask()/internal_value),true);
   }
 
+  /** Compute the inverse of a SFixMath<NI,NF>, as a SFixMath<NF,_NF>.
+      _NF is the number of precision bits for the output. Can be any number but especially useful for case between invFast() (_NF=NI) and invAccurate() (_NF=2*NI+NF)
+      @return The inverse of the number.
+  */
+  template<byte _NF>
+  SFixMath<NF,_NF> inv() const
+  {
+    return SFixMath<_NF,NF>(internal_value,true).invFast();  
+  }
+
   /** Compute the inverse of a SFixMath<NI,NF>, as a SFixMath<NF,NI*2+NF>.
       This inverse is more accurate than invFast, and usually leads to non common values on the whole input range. This comes at the cost of a way bigger resulting type.
       This is still slower than a multiplication, hence the suggested workflow is to compute the inverse when time is not critical, for instance in updateControl(), and multiply it afterward, for instance in updateAudio(), if you need a division.
       @return The inverse of the number.
   */
-  SFixMath<NF,NI*2+NF> invAccurate() const // TODO ADD STATIC ASSERT
+  SFixMath<NF,NI*2+NF> invAccurate() const
   {
-    static_assert(2*NI+2*NF<=62, "The accurate inverse cannot be computed for when 2*NI+2*NF>63. Reduce the number of bits.");
-    //return SFixMath<NF,NI*2+NF>((ONESBITMASK(NI*2+NF*2)/ (typename IntegerType<MozziPrivate::sBitsToBytes(2*NI+2*NF)>::signed_type)internal_value),true);
-    return SFixMath<NF,NI*2+NF>((onesbitmaskfull() / (typename IntegerType<MozziPrivate::sBitsToBytes(2*NI+2*NF)>::signed_type)internal_value),true);
+    return inv<NI*2+NF>();
   }
+
 
   //////// SHIFTS OVERLOADS
 
@@ -825,7 +848,7 @@ public:
 private:
   internal_type internal_value;
   static constexpr internal_type onesbitmask() { return (internal_type) ((1ULL<< (NI+NF)) - 1); }
-  static constexpr typename IntegerType<MozziPrivate::sBitsToBytes(2*NI+2*NF)>::signed_type onesbitmaskfull() { return (typename IntegerType<MozziPrivate::sBitsToBytes(2*NI+2*NF)>::signed_type) ((1ULL<< (NI*2+NF*2)) - 1); }
+  //static constexpr typename IntegerType<MozziPrivate::sBitsToBytes(2*NI+2*NF)>::signed_type onesbitmaskfull() { return (typename IntegerType<MozziPrivate::sBitsToBytes(2*NI+2*NF)>::signed_type) ((1ULL<< (NI*2+NF*2)) - 1); }
 
 };
 

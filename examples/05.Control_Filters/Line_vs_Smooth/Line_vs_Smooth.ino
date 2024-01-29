@@ -35,8 +35,8 @@
 #include <mozzi_analog.h>
 
 // 2 oscillators to compare linear interpolated vs smoothed control
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin0(SIN2048_DATA);
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin1(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin0(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin1(SIN2048_DATA);
 
 
 // Line to interpolate frequency for aSin0.
@@ -49,7 +49,7 @@ Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin1(SIN2048_DATA);
 Line <Q16n16> aInterpolate;
 
 // the number of audio steps the line has to take to reach the next control value
-const unsigned int AUDIO_STEPS_PER_CONTROL = AUDIO_RATE / MOZZI_CONTROL_RATE;
+const unsigned int AUDIO_STEPS_PER_CONTROL = MOZZI_AUDIO_RATE / MOZZI_CONTROL_RATE;
 
 // Smoothing unit for aSin1
 // This might be better with Q24n8 numbers for more precision,

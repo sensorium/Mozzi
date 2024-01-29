@@ -33,7 +33,7 @@
 #include <mozzi_midi.h>
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SAW8192_NUM_CELLS, AUDIO_RATE> aSaw(SAW8192_DATA);
+Oscil <SAW8192_NUM_CELLS, MOZZI_AUDIO_RATE> aSaw(SAW8192_DATA);
 
 // use: Line <type> lineName
 Line <long> aGliss;
@@ -41,7 +41,7 @@ Line <long> aGliss;
 byte lo_note = 24; // midi note numbers
 byte hi_note = 36;
 
-long audio_steps_per_gliss = AUDIO_RATE / 4; // ie. 4 glisses per second
+long audio_steps_per_gliss = MOZZI_AUDIO_RATE / 4; // ie. 4 glisses per second
 long control_steps_per_gliss = MOZZI_CONTROL_RATE / 4;
 
 // stuff for changing starting positions, probably just confusing really

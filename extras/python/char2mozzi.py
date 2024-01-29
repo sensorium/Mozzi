@@ -22,7 +22,7 @@
 #	length.
 #	
 #	For a recorded audio sample, set the project rate to the
-#	Mozzi AUDIO_RATE (16384 in the current version). 
+#	MOZZI_AUDIO_RATE (16384 in the current version). 
 #	Samples can be any length, as long as they fit in your Arduino.
 #	
 #	Save by exporting with the format set to "Other uncompressed formats",

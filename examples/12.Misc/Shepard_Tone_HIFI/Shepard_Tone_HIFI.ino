@@ -63,8 +63,8 @@ Line <Q16n16> kGliss0; // Line to slide frequency
 Line <Q16n16> kGliss1; // Line to slide frequency
 
 // harmonics
-Oscil<SIN8192_NUM_CELLS, AUDIO_RATE> aCos0(SIN8192_DATA);
-Oscil<SIN8192_NUM_CELLS, AUDIO_RATE> aCos1(SIN8192_DATA);
+Oscil<SIN8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos0(SIN8192_DATA);
+Oscil<SIN8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos1(SIN8192_DATA);
 
 // volume envelope oscils
 Oscil<TRIANGLE512_NUM_CELLS, MOZZI_CONTROL_RATE> kVol0(TRIANGLE512_DATA);

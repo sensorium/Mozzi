@@ -142,7 +142,7 @@ AudioOutputStorage_t getAudioInput() { return audio_input; }
 CircularBuffer<unsigned int> input_buffer; // fixed size 256
 #define audioInputAvailable() (!input_buffer.isEmpty())
 #define readAudioInput() (input_buffer.read())
-/** NOTE: Triggered at AUDIO_RATE via defaultAudioOutput(). In addition to the AUDIO_INPUT_PIN, at most one reading is taken for mozziAnalogRead().  */
+/** NOTE: Triggered at MOZZI_AUDIO_RATE via defaultAudioOutput(). In addition to the AUDIO_INPUT_PIN, at most one reading is taken for mozziAnalogRead().  */
 inline void advanceADCStep() {
   switch (adc_count) {
   case 0:

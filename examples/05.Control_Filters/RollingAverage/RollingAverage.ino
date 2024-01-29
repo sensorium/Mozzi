@@ -27,8 +27,8 @@
 #define INPUT_PIN 0 // analog control input
 
 // oscils to compare bumpy to averaged control input
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin0(SIN2048_DATA);
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin1(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin0(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin1(SIN2048_DATA);
 
 // use: RollingAverage <number_type, how_many_to_average> myThing
 RollingAverage <int, 32> kAverage; // how_many_to_average has to be power of 2

@@ -23,7 +23,7 @@
 #include <EventDelay.h>
 
 // use: Sample <table_size, update_rate> SampleName (wavetable)
-Sample <BURROUGHS1_18649_NUM_CELLS, AUDIO_RATE> aSample(BURROUGHS1_18649_DATA);
+Sample <BURROUGHS1_18649_NUM_CELLS, MOZZI_AUDIO_RATE> aSample(BURROUGHS1_18649_DATA);
 
 // for scheduling sample start
 EventDelay kTriggerDelay;

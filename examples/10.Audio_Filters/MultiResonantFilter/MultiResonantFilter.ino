@@ -30,7 +30,7 @@
 #include <ResonantFilter.h>
 #include <mozzi_rand.h>
 
-Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound(CHUM9_DATA);
+Oscil<CHUM9_NUM_CELLS, MOZZI_AUDIO_RATE> aCrunchySound(CHUM9_DATA);
 Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kFilterMod(COS2048_DATA);
 Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kFilterMod2(COS2048_DATA);
 
@@ -60,7 +60,7 @@ void updateControl() {
     kFilterMod.setFreq((float)rand(255) / 64); // choose a new modulation frequency
     filter_type = rand(4);  // change the filter type, randomly
   }
-  // map the modulation into the filter range (0-255), corresponds with 0-AUDIO_RATE/(sqrt(2)*pi) Hz
+  // map the modulation into the filter range (0-255), corresponds with 0-MOZZI_AUDIO_RATE/(sqrt(2)*pi) Hz
   uint8_t cutoff_freq = (100 + kFilterMod.next() / 2) ;
   mf.setCutoffFreqAndResonance(cutoff_freq, resonance);
 }

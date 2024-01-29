@@ -32,10 +32,10 @@
 MIDI_CREATE_DEFAULT_INSTANCE();
 
 // audio sinewave oscillator
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 // envelope generator
-ADSR <MOZZI_CONTROL_RATE, AUDIO_RATE> envelope;
+ADSR <MOZZI_CONTROL_RATE, MOZZI_AUDIO_RATE> envelope;
 
 #define LED 13 // shows if MIDI is being recieved
 

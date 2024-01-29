@@ -28,10 +28,10 @@ and then next() is in updateAudio(), called much more often, where it interpolat
 This also allows the ADSR updates to be made even more sparsely if desired, eg. every 3rd control update.
 @tparam CONTROL_UPDATE_RATE The frequency of control updates.
 Ordinarily this will be MOZZI_CONTROL_RATE, but an alternative (amongst others) is
-to set this as well as the LERP_RATE parameter to AUDIO_RATE, and call both update() and next() in updateAudio().
+to set this as well as the LERP_RATE parameter to MOZZI_AUDIO_RATE, and call both update() and next() in updateAudio().
 Such a use would allow accurate envelopes with finer resolution of the control points than MOZZI_CONTROL_RATE.
 @tparam LERP_RATE Sets how often next() will be called, to interpolate between updates set by CONTROL_UPDATE_RATE.
-This will produce the smoothest results if it's set to AUDIO_RATE, but if you need to save processor time and your
+This will produce the smoothest results if it's set to MOZZI_AUDIO_RATE, but if you need to save processor time and your
 envelope changes slowly or controls something like a filter where there may not be problems with glitchy or clicking transitions,
 LERP_RATE could be set to MOZZI_CONTROL_RATE (for instance).  Then update() and next() could both be called in updateControl(),
 greatly reducing the amount of processing required compared to calling next() in updateAudio().

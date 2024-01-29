@@ -44,7 +44,7 @@ const char KNOB_PIN = 0; // set the input for the knob to analog pin 0
 const char LDR_PIN = 1; // set the input for the LDR to analog pin 1
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 byte volume;
 

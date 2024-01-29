@@ -81,7 +81,7 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPU
 #endif
 
 #if defined(MOZZI_PWM_RATE)
-#error Configuration of MOZZI_PWM_RATE is not currently supported on this platform (always same as AUDIO_RATE)
+#error Configuration of MOZZI_PWM_RATE is not currently supported on this platform (always same as MOZZI_AUDIO_RATE)
 #endif
 
 #if !defined(MOZZI_ANALOG_READ)

@@ -23,13 +23,13 @@
 #include <Smooth.h>
 
 // use: Sample <table_size, update_rate, interpolation > SampleName (wavetable)
-Sample <BURROUGHS1_18649_NUM_CELLS, AUDIO_RATE, INTERP_LINEAR> aSample(BURROUGHS1_18649_DATA);
+Sample <BURROUGHS1_18649_NUM_CELLS, MOZZI_AUDIO_RATE, INTERP_LINEAR> aSample(BURROUGHS1_18649_DATA);
 
 //Line to scrub through sample at audio rate, Line target is set at control rate
 Line <Q16n16> scrub; // Q16n16 fixed point for high precision
 
 // the number of audio steps the line has to take to reach the next offset
-const unsigned int AUDIO_STEPS_PER_CONTROL = AUDIO_RATE / MOZZI_CONTROL_RATE;
+const unsigned int AUDIO_STEPS_PER_CONTROL = MOZZI_AUDIO_RATE / MOZZI_CONTROL_RATE;
 
 int offset = 0;
 int offset_advance = 400; // just a guess

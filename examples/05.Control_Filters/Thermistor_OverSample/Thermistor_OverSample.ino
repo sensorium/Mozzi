@@ -37,9 +37,9 @@
 #include <ControlDelay.h>
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable)
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aTremelo(SIN2048_DATA);
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aEnvelope(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aTremelo(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aEnvelope(SIN2048_DATA);
 
 Line <float> freqLine;
 

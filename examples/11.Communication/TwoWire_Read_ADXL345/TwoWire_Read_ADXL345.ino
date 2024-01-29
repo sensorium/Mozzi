@@ -28,7 +28,7 @@
 #include <twi_nonblock.h>
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 Ead kEnvelope(MOZZI_CONTROL_RATE); // resolution will be MOZZI_CONTROL_RATE
 
 int gain;

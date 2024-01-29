@@ -21,7 +21,7 @@
 #include <EventDelay.h>
 #include <mozzi_rand.h>
 
-Oscil<BROWNNOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(BROWNNOISE8192_DATA);
+Oscil<BROWNNOISE8192_NUM_CELLS, MOZZI_AUDIO_RATE> aNoise(BROWNNOISE8192_DATA);
 EventDelay kDelay; // for triggering envelope start
 Ead kEnvelope(MOZZI_CONTROL_RATE); // resolution will be MOZZI_CONTROL_RATE
 
@@ -30,7 +30,7 @@ int gain;
 
 void setup(){
   // use float to set freq because it will be small and fractional
-  aNoise.setFreq((float)AUDIO_RATE/BROWNNOISE8192_SAMPLERATE);
+  aNoise.setFreq((float)MOZZI_AUDIO_RATE/BROWNNOISE8192_SAMPLERATE);
   randSeed(); // fresh random, MUST be called before startMozzi - wierd bug
   startMozzi();
   kDelay.start(1000);

@@ -23,7 +23,7 @@
 #include <tables/saw512_int8.h> // saw table for oscillator
 #include <WaveFolder.h>
 
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA); // audio oscillator
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA); // audio oscillator
 Oscil <SIN2048_NUM_CELLS, MOZZI_CONTROL_RATE> kBias(SIN2048_DATA);  // LFO changing the bias
 Oscil <SAW512_NUM_CELLS, MOZZI_CONTROL_RATE> kGain(SAW512_DATA);  // Gain oscillator
 
@@ -40,7 +40,7 @@ void setup() {
   kBias.setFreq(0.3f); // set the frequency
   kGain.setFreq(0.2f);
   wf.setLimits(-2047, 2047);  // sets the values the wavefolder will start folding (in this case, containing in 12 bits)
-                            // can also be done at MOZZI_CONTROL_RATE (even maybe at AUDIO_RATE)
+                            // can also be done at MOZZI_CONTROL_RATE (even maybe at MOZZI_AUDIO_RATE)
   startMozzi();
 }
 

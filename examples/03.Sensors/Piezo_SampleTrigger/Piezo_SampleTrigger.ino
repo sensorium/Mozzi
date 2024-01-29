@@ -41,7 +41,7 @@ const char PIEZO_PIN = 3;  // set the analog input pin for the piezo
 const int threshold = 80;  // threshold value to decide when the detected signal is a knock or not
 
 // use: Sample <table_size, update_rate> SampleName (wavetable)
-Sample <BURROUGHS1_18649_NUM_CELLS, AUDIO_RATE> aSample(BURROUGHS1_18649_DATA);
+Sample <BURROUGHS1_18649_NUM_CELLS, MOZZI_AUDIO_RATE> aSample(BURROUGHS1_18649_DATA);
 float recorded_pitch = (float) BURROUGHS1_18649_SAMPLERATE / (float) BURROUGHS1_18649_NUM_CELLS;
 
 boolean triggered = false;

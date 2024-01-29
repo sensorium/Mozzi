@@ -23,7 +23,7 @@
 #include <StateVariable.h>
 #include <mozzi_rand.h> // for rand()
 
-Oscil <WHITENOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(WHITENOISE8192_DATA); // audio noise
+Oscil <WHITENOISE8192_NUM_CELLS, MOZZI_AUDIO_RATE> aNoise(WHITENOISE8192_DATA); // audio noise
 Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kFilterMod(COS2048_DATA);
 
 StateVariable <NOTCH> svf; // can be LOWPASS, BANDPASS, HIGHPASS or NOTCH
@@ -32,7 +32,7 @@ StateVariable <NOTCH> svf; // can be LOWPASS, BANDPASS, HIGHPASS or NOTCH
 void setup(){
   startMozzi();
   // cast to float because the resulting freq will be small and fractional
-  aNoise.setFreq((float)AUDIO_RATE/WHITENOISE8192_SAMPLERATE);
+  aNoise.setFreq((float)MOZZI_AUDIO_RATE/WHITENOISE8192_SAMPLERATE);
   kFilterMod.setFreq(1.3f);
   svf.setResonance(25);
   svf.setCentreFreq(1200);

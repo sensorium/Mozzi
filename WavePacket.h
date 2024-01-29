@@ -147,8 +147,8 @@ private:
 	// the number of audio steps the line has to take to reach the next control value
 	const unsigned int AUDIO_STEPS_PER_CONTROL;
 
-	Oscil <COS8192_NUM_CELLS, AUDIO_RATE> aCos;
-	Phasor <AUDIO_RATE> aPhasor;
+	Oscil <COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos;
+	Phasor <MOZZI_AUDIO_RATE> aPhasor;
 
 
 	inline

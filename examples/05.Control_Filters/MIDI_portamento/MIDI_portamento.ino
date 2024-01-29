@@ -36,12 +36,12 @@
 MIDI_CREATE_DEFAULT_INSTANCE();
 
 // audio sinewave oscillator
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 // envelope generator
 ADSR <MOZZI_CONTROL_RATE> envelope;
 
-Portamento <MOZZI_CONTROL_RATE, AUDIO_RATE>aPortamento;
+Portamento <MOZZI_CONTROL_RATE, MOZZI_AUDIO_RATE>aPortamento;
 
 #define LED 13
 

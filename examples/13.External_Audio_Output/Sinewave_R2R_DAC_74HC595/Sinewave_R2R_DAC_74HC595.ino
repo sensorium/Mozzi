@@ -55,7 +55,7 @@
 #include<SPI.h> // needed for the shift register
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 // External output parameters for this example
 #define LATCH_PIN 31  // Number of stage of the resistance ladder = number of digits of the DAC

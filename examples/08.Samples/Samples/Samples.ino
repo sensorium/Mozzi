@@ -27,9 +27,9 @@
 #include <mozzi_rand.h>
 
 // use: Sample <table_size, update_rate> SampleName (wavetable)
-Sample <BAMBOO_00_2048_NUM_CELLS, AUDIO_RATE>aBamboo0(BAMBOO_00_2048_DATA);
-Sample <BAMBOO_01_2048_NUM_CELLS, AUDIO_RATE>aBamboo1(BAMBOO_01_2048_DATA);
-Sample <BAMBOO_02_2048_NUM_CELLS, AUDIO_RATE>aBamboo2(BAMBOO_02_2048_DATA);
+Sample <BAMBOO_00_2048_NUM_CELLS, MOZZI_AUDIO_RATE>aBamboo0(BAMBOO_00_2048_DATA);
+Sample <BAMBOO_01_2048_NUM_CELLS, MOZZI_AUDIO_RATE>aBamboo1(BAMBOO_01_2048_DATA);
+Sample <BAMBOO_02_2048_NUM_CELLS, MOZZI_AUDIO_RATE>aBamboo2(BAMBOO_02_2048_DATA);
 
 // for scheduling audio gain changes
 EventDelay kTriggerDelay;

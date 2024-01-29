@@ -27,7 +27,7 @@
 #include <mozzi_rand.h>
 #include <tables/whitenoise8192_int8.h>
 
-Oscil <WHITENOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(WHITENOISE8192_DATA); // audio noise
+Oscil <WHITENOISE8192_NUM_CELLS, MOZZI_AUDIO_RATE> aNoise(WHITENOISE8192_DATA); // audio noise
 EventDelay kDelay; // for triggering envelope start
 Ead kEnvelope(MOZZI_CONTROL_RATE); // resolution will be MOZZI_CONTROL_RATE
 
@@ -41,7 +41,7 @@ void setup(){
   startMozzi();
   randSeed(); // reseed the random generator for different results each time the sketch runs
   // use float to set freq because it will be small and fractional
-  aNoise.setFreq((float)AUDIO_RATE/WHITENOISE8192_SAMPLERATE);
+  aNoise.setFreq((float)MOZZI_AUDIO_RATE/WHITENOISE8192_SAMPLERATE);
   kDelay.start(1000);
 }
 

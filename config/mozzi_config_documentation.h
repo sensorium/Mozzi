@@ -122,7 +122,7 @@
  * It is highly recommended to keep the audio rate a power of two (16384, 32678, 64536, etc.), as some internal calculations can be highly be optimised for speed, this way.
  *
  * @note
- * For compatibility reasons, the option AUDIO_RATE is automatically set to the same value as this option, and you will find some uses of that in old (pre Mozzi 2.0) code examples.
+ * For compatibility reasons, the option MOZZI_AUDIO_RATE is automatically set to the same value as this option, and you will find some uses of that in old (pre Mozzi 2.0) code examples.
  * It is advised to use only MOZZI_AUDIO_RATE in new code, however.
  * TODO: Only do the above, for MOZZI_COMPATIBILITY_LEVEL < MOZZI_COMPATIBILITY_2_0?
  */

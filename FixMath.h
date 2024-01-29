@@ -281,7 +281,6 @@ public:
       This is still slower than a multiplication, hence the suggested workflow is to compute the inverse when time is not critical, for instance in updateControl(), and multiply it afterward, for instance in updateAudio(), if you need a division.
       @return The inverse of the number.
   */
-
   UFixMath<NF,NI> invFast() const
   {
     static_assert(NI+NF<=63, "The fast inverse cannot be computed for when NI+NF>63. Reduce the number of bits.");
@@ -537,6 +536,39 @@ inline SFixMath<NI, NF> operator-(float op, const UFixMath<NI, NF>& uf) {return 
 template <byte NI, byte NF>
 inline SFixMath<NI, NF> operator-(double op, const UFixMath<NI, NF>& uf) {return -uf+op;}
 
+////// Helper functions to build SFix from a normal type automatically
+
+
+/** Create a *pure* fractional unsigned fixed number (UFixMath) from an unsigned integer.
+    The number of fractional bits (NF) is chosen automatically depending on the input 
+    type. Hence toUFraction(255) and toUFraction(uint8_t(255)) *do not* lead to the 
+    same thing: on an AVR, the former will lead to NF=16 - which is overkill and 
+    incorrect if you expect toUFraction(255) = 1 -
+    whereas the latter will lead to NF=8. Mozzi's objects (Oscil and the like)
+    returns correct types, hence you can use this function to convert the return
+    value of a Mozzi's function/class member into a pure fractional number.
+    @param val The value to be converted into a pure fractional number.
+    @return A UFixMath<0,NF> with NF chosen according to the input type
+*/
+template<typename T>
+inline UFixMath<0, sizeof(T)*8> toUFraction(T val) {
+  return UFixMath<0, sizeof(T)*8>::fromRaw(val); 
+}
+
+/** Create a *pure* integer unsigned fixed number (UFixMath) from an unsigned integer.
+    The number of fractional bits (NI) is chosen automatically depending on the input 
+    type. Hence toUInt(255) and toSInt(uint8_t(255)) *do not* lead to the 
+    same thing: on an AVR, the former will lead to NI=16 - which is overkill -
+    whereas the latter will lead to NI=8. Mozzi's objects (Oscil and the like)
+    returns correct types, hence you can use this function to convert the return
+    value of a Mozzi's function/class member into a pure fractional number.
+    @param val The value to be converted into a pure unsigned integer fixed math number.
+    @return A UFixMath<NI,0> with NI chosen according to the input type
+*/
+template<typename T>
+inline UFixMath<sizeof(T)*8-1,0> toUInt(T val) {
+  return UFixMath<sizeof(T)*8-1,0>::fromRaw(val); 
+}
 
 
 
@@ -1109,6 +1141,40 @@ template<byte NI, byte NF, byte _NI, byte _NF>
 inline bool operator!= (const UFixMath<NI,NF>& op1, const SFixMath<_NI,_NF>& op2 )
 {
   return op2 != op1;
+}
+
+////// Helper functions to build SFix from a normal type automatically
+
+
+/** Create a *pure* fractional signed fixed number (SFixMath) from a integer.
+    The number of fractional bits (NF) is chosen automatically depending on the input 
+    type. Hence toSFraction(127) and toSFraction(int8_t(127)) *do not* lead to the 
+    same thing: on an AVR, the former will lead to NF=15 - which is overkill and 
+    incorrect if you expect toSFraction(127) = 1 -
+    whereas the latter will lead to NF=7. Mozzi's objects (Oscil and the like)
+    returns correct types, hence you can use this function to convert the return
+    value of a Mozzi's function/class member into a pure fractional number.
+    @param val The value to be converted into a pure fractional number.
+    @return A SFixMath<0,NF> with NF chosen according to the input type
+*/
+template<typename T>
+inline SFixMath<0, sizeof(T)*8-1> toSFraction(T val) {
+  return SFixMath<0, sizeof(T)*8-1>::fromRaw(val); 
+}
+
+/** Create a *pure* integer signed fixed number (SFixMath) from a integer.
+    The number of fractional bits (NI) is chosen automatically depending on the input 
+    type. Hence toSInt(127) and toSInt(int8_t(127)) *do not* lead to the 
+    same thing: on an AVR, the former will lead to NI=15 - which is overkill -
+    whereas the latter will lead to NI=7. Mozzi's objects (Oscil and the like)
+    returns correct types, hence you can use this function to convert the return
+    value of a Mozzi's function/class member into a pure fractional number.
+    @param val The value to be converted into a pure integer fixed math number.
+    @return A SFixMath<NI,0> with NI chosen according to the input type
+*/
+template<typename T>
+inline SFixMath<sizeof(T)*8-1,0> toSInt(T val) {
+  return SFixMath<sizeof(T)*8-1,0>::fromRaw(val); 
 }
 
 

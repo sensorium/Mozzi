@@ -86,7 +86,7 @@ public:
   resonance).
 
   Set the cut off frequency,
-  @param cutoff use the range 0-255 to represent 0-8191 Hz (AUDIO_RATE/2) for ResonantFilter, cutoff use the range 0-65535 to represent 0-AUDIO_RATE/2.
+  @param cutoff use the range 0-255 to represent 0-8191 Hz (MOZZI_AUDIO_RATE/2) for ResonantFilter, cutoff use the range 0-65535 to represent 0-MOZZI_AUDIO_RATE/2.
   Be careful of distortion at the lower end, especially with high resonance.
   */
   void setCutoffFreq(su cutoff)
@@ -108,7 +108,7 @@ public:
   /**
   Set the cut off frequency and resonance.  Replaces setCutoffFreq() and
   setResonance().  (Because the internal calculations need to be done whenever either parameter changes.)
-  @param cutoff range 0-255 represents 0-8191 Hz (AUDIO_RATE/2) for ResonantFilter, range 0-65535 for ResonantFilter16
+  @param cutoff range 0-255 represents 0-8191 Hz (MOZZI_AUDIO_RATE/2) for ResonantFilter, range 0-65535 for ResonantFilter16
   Be careful of distortion at the lower end, especially with high resonance.
   @param resonance range 0-255 for ResonantFilter, 0-65535 for ResonantFilter<FILTER_TYPE, uint16_t>, 255/65535 is most resonant.
   */

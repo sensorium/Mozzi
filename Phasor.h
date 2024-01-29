@@ -32,8 +32,8 @@ private:
 	volatile uint32_t step_size;
 
 public:
-	/** Constructor. "Phasor <AUDIO_RATE> myphasor;"
-	makes a Phasor which updates at AUDIO_RATE.
+	/** Constructor. "Phasor <MOZZI_AUDIO_RATE> myphasor;"
+	makes a Phasor which updates at MOZZI_AUDIO_RATE.
 	*/
 	Phasor (){
 		;

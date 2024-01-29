@@ -46,7 +46,7 @@ sPin ---\/\/\/-----.
 
 #define SENSOR_PIN 4            // digital pin for sensor input
 
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 RCpoll <SENSOR_PIN> sensor;
 
 

@@ -43,8 +43,8 @@ public:
 	
 	/** Constructor.
 	@param delaytime_cells delay time expressed in cells.  
-	For example, 128 cells delay at AUDIO_RATE would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms
-	Put another way, num_cells = delay_seconds * AUDIO_RATE.
+	For example, 128 cells delay at MOZZI_AUDIO_RATE would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms
+	Put another way, num_cells = delay_seconds * MOZZI_AUDIO_RATE.
 	*/
 	AudioDelay(unsigned int delaytime_cells): _write_pos(0), _delaytime_cells(delaytime_cells)
 	{}

@@ -25,9 +25,9 @@
 #include <tables/sin2048_int8.h>
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin1(SIN2048_DATA); // sine wave sound source
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin2(SIN2048_DATA); // sine wave sound source
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aGain(SIN2048_DATA); // to fade audio signal in and out before waveshaping
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin1(SIN2048_DATA); // sine wave sound source
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin2(SIN2048_DATA); // sine wave sound source
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aGain(SIN2048_DATA); // to fade audio signal in and out before waveshaping
 
 // for scheduling note changes
 EventDelay kChangeNoteDelay;

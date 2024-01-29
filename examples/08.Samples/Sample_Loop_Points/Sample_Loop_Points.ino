@@ -28,7 +28,7 @@
 #include <mozzi_rand.h>
 
 // use: Sample <table_size, update_rate> SampleName (wavetable)
-Sample <ABOMB_NUM_CELLS, AUDIO_RATE> aSample(ABOMB_DATA);
+Sample <ABOMB_NUM_CELLS, MOZZI_AUDIO_RATE> aSample(ABOMB_DATA);
 
 // for scheduling changes
 EventDelay  kTriggerDelay;

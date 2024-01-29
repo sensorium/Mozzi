@@ -25,7 +25,7 @@
 #include <Oscil.h>
 #include <tables/sin2048_int8.h> // sine table for oscillator
 
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 #define STOP_PIN 4
 

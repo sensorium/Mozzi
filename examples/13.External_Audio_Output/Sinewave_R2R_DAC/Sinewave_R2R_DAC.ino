@@ -49,7 +49,7 @@
 #include <tables/sin2048_int8.h> // sine table for oscillator
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 // External output parameters for this example
 #define R2R_N_PIN MOZZI_AUDIO_BITS  // Number of stage of the resistance ladder = number of digits of the DAC, can be defined through MOZZI_AUDIO_BITS

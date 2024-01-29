@@ -32,7 +32,7 @@ public:
 	}
 	
 private:
-		Oscil <8192, AUDIO_RATE> aWav;
+		Oscil <8192, MOZZI_AUDIO_RATE> aWav;
 };
 
 /** @example 06.Synthesis/WavePacket_Sample/WavePacket_Sample.ino

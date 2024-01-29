@@ -30,9 +30,9 @@
 #include <tables/waveshape_compress_512_to_488_int16.h>
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA); // sine wave sound source
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aGain1(SIN2048_DATA); // to fade sine wave in and out before waveshaping
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aGain2(SIN2048_DATA); // to fade sine wave in and out before waveshaping
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA); // sine wave sound source
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aGain1(SIN2048_DATA); // to fade sine wave in and out before waveshaping
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aGain2(SIN2048_DATA); // to fade sine wave in and out before waveshaping
 
 // Chebyshev polynomial curves, The nth curve produces the n+2th harmonic component.
 WaveShaper <char> aCheby3rd(CHEBYSHEV_3RD_256_DATA); // 5th harmonic

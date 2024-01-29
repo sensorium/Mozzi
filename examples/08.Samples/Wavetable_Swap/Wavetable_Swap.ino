@@ -16,7 +16,7 @@
 #include <tables/saw_analogue512_int8.h>
 
 // declare with or without a wavetable, and use setTable() later
-Oscil <512, AUDIO_RATE> aOscil;
+Oscil <512, MOZZI_AUDIO_RATE> aOscil;
 
 // for scheduling table swaps
 EventDelay kSwapTablesDelay;

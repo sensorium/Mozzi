@@ -45,13 +45,13 @@
 #include <tables/whitenoise8192_int8.h>
 #include <StateVariable.h>
 
-Oscil <WHITENOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(WHITENOISE8192_DATA); // audio noise
+Oscil <WHITENOISE8192_NUM_CELLS, MOZZI_AUDIO_RATE> aNoise(WHITENOISE8192_DATA); // audio noise
 StateVariable <BANDPASS> svf; // can be LOWPASS, BANDPASS, HIGHPASS or NOTCH
 
 
 void setup(){
   startMozzi();
-  aNoise.setFreq(1.27f*(float)AUDIO_RATE/WHITENOISE8192_SAMPLERATE);   // * by an oddish number (1.27) to avoid exact repeating of noise oscil
+  aNoise.setFreq(1.27f*(float)MOZZI_AUDIO_RATE/WHITENOISE8192_SAMPLERATE);   // * by an oddish number (1.27) to avoid exact repeating of noise oscil
   svf.setResonance(1); // 0 to 255, 0 is the "sharp" end
   svf.setCentreFreq(3500);
 }

@@ -42,7 +42,7 @@ const int threshold = 80;  // threshold value to decide when the detected signal
 const int BUTTON_PIN = 4;  // set the digital input pin for the button
 
 // use: Sample <table_size, update_rate> SampleName (wavetable)
-Sample <BURROUGHS1_18649_NUM_CELLS, AUDIO_RATE> aSample(BURROUGHS1_18649_DATA);
+Sample <BURROUGHS1_18649_NUM_CELLS, MOZZI_AUDIO_RATE> aSample(BURROUGHS1_18649_DATA);
 float recorded_pitch = (float) BURROUGHS1_18649_SAMPLERATE / (float) BURROUGHS1_18649_NUM_CELLS;
 
 char button_state, previous_button_state; // variable for reading the pushbutton status

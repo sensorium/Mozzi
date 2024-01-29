@@ -1,10 +1,10 @@
 /*  Example applying an ADSR envelope to an audio signal
     with Mozzi sonification library.  This shows
-    how to use an ADSR which updates at AUDIO_RATE, in updateAudio(),
-    and output using next() at AUDIO_RATE in updateAudio().
+    how to use an ADSR which updates at MOZZI_AUDIO_RATE, in updateAudio(),
+    and output using next() at MOZZI_AUDIO_RATE in updateAudio().
 
     Another example in this folder shows an ADSR updating at MOZZI_CONTROL_RATE,
-    which is more efficient, but AUDIO_RATE updates shown in this example
+    which is more efficient, but MOZZI_AUDIO_RATE updates shown in this example
     enable faster envelope transitions.
 
     Demonstrates a simple ADSR object being controlled with
@@ -27,12 +27,12 @@
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
 
-Oscil <8192, AUDIO_RATE> aOscil(SIN8192_DATA);;
+Oscil <8192, MOZZI_AUDIO_RATE> aOscil(SIN8192_DATA);;
 
 // for triggering the envelope
 EventDelay noteDelay;
 
-ADSR <AUDIO_RATE, AUDIO_RATE> envelope;
+ADSR <MOZZI_AUDIO_RATE, MOZZI_AUDIO_RATE> envelope;
 
 boolean note_is_on = true;
 

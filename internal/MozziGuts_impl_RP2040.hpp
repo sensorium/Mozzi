@@ -148,7 +148,7 @@ inline void audioOutput(const AudioOutput f) {
 #include <pico/time.h>
 namespace MozziPrivate {
 /** Implementation notes:
- *  - For the time being this port uses a very crude approach to audio output: PWM updated by a hardware timer running at AUDIO_RATE
+ *  - For the time being this port uses a very crude approach to audio output: PWM updated by a hardware timer running at MOZZI_AUDIO_RATE
  *  - Hardware timer isn't fixed, but rather we claim the first unclaimed one
  *  - Quite pleasently, the RP2040 latches PWM duty cycle, so we do not have to worry about updating whilst in the middle of the previous PWM cycle.
  *  - The more simple add_repeating_timer_us has appers to have far too much jitter

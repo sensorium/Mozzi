@@ -46,8 +46,8 @@
 #include <mozzi_fixmath.h> // for fixed-point fractional numbers
 
 // use: Sample <table_size, update_rate> SampleName (wavetable)
-Sample <ABOMB_NUM_CELLS, AUDIO_RATE> aSample0(ABOMB_DATA);
-Sample <ABOMB_NUM_CELLS, AUDIO_RATE> aSample1(ABOMB_DATA);
+Sample <ABOMB_NUM_CELLS, MOZZI_AUDIO_RATE> aSample0(ABOMB_DATA);
+Sample <ABOMB_NUM_CELLS, MOZZI_AUDIO_RATE> aSample1(ABOMB_DATA);
 
 // for scheduling changes
 EventDelay  kTriggerDelay;

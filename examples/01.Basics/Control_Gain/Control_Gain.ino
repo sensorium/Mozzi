@@ -22,7 +22,7 @@
 #include <tables/sin2048_int8.h> // sine table for oscillator
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 // control variable, use the smallest data size you can for anything used in audio
 byte gain = 255;

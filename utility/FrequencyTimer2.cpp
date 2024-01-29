@@ -99,7 +99,7 @@ void FrequencyTimer2::setPeriodCPUCycles(unsigned long period){
 	if ( period <= 256) {
 		pre = 1;
 		top = period-1;
-	} else if ( period <= 256L*8) { // this for AUDIO_RATE 16384, pre=2 is a bitfield 010 which means prescaler = 8
+	} else if ( period <= 256L*8) { // this for MOZZI_AUDIO_RATE 16384, pre=2 is a bitfield 010 which means prescaler = 8
 		pre = 2;
 		top = period/8-1;
 	} else if ( period <= 256L*32) {
@@ -132,7 +132,7 @@ void FrequencyTimer2::setPeriodCPUCycles(unsigned long period){
 		prescaler *= 2;
 	}
 
-	//pre = 4; // this for AUDIO_RATE 16384, pre=4 is a bitfield 100 which means prescaler = 8
+	//pre = 4; // this for MOZZI_AUDIO_RATE 16384, pre=4 is a bitfield 100 which means prescaler = 8
 	//top = period/8-1;
 #endif
 

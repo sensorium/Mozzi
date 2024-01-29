@@ -25,8 +25,8 @@
 #include <AudioDelayFeedback.h>
 #include <mozzi_midi.h> // for mtof
 
-Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, AUDIO_RATE> aTriangle1(TRIANGLE_ANALOGUE512_DATA); // audio oscillator
-Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, AUDIO_RATE> aTriangle2(TRIANGLE_ANALOGUE512_DATA); // audio oscillator
+Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, MOZZI_AUDIO_RATE> aTriangle1(TRIANGLE_ANALOGUE512_DATA); // audio oscillator
+Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, MOZZI_AUDIO_RATE> aTriangle2(TRIANGLE_ANALOGUE512_DATA); // audio oscillator
 
 Oscil<TRIANGLE512_NUM_CELLS, MOZZI_CONTROL_RATE> kDelSamps1(TRIANGLE512_DATA); // for modulating delay time, measured in audio samples
 Oscil<TRIANGLE512_NUM_CELLS, MOZZI_CONTROL_RATE> kDelSamps2(TRIANGLE512_DATA); // for modulating delay time, measured in audio samples

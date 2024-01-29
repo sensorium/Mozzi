@@ -61,8 +61,8 @@
 // which is an adapted fork from https://github.com/exscape/electronics/tree/master/Arduino/Libraries/DAC_MCP49xx  (Thomas Backman)
 
 // Synthesis part
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCos1(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCos2(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aCos1(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aCos2(COS2048_DATA);
 Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kEnv1(COS2048_DATA);
 
 

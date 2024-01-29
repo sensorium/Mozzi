@@ -23,8 +23,8 @@
 #include <ResonantFilter.h>
 #include <mozzi_rand.h> // for rand()
 
-Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound1(CHUM9_DATA); //audio oscillator
-Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound2(CHUM9_DATA); //audio oscillator
+Oscil<CHUM9_NUM_CELLS, MOZZI_AUDIO_RATE> aCrunchySound1(CHUM9_DATA); //audio oscillator
+Oscil<CHUM9_NUM_CELLS, MOZZI_AUDIO_RATE> aCrunchySound2(CHUM9_DATA); //audio oscillator
 Oscil<COS512_NUM_CELLS, MOZZI_CONTROL_RATE> kFilterMod1(COS512_DATA); // to modulate filter frequency
 Oscil<COS512_NUM_CELLS, MOZZI_CONTROL_RATE> kFilterMod2(COS512_DATA); // to modulate filter frequency
 

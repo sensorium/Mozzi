@@ -20,7 +20,7 @@
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
 
-Oscil <8192, AUDIO_RATE> aOscil(SIN8192_DATA);;
+Oscil <8192, MOZZI_AUDIO_RATE> aOscil(SIN8192_DATA);;
 
 // for triggering the envelope
 EventDelay noteDelay;

@@ -99,7 +99,7 @@ void stopMozzi();
 
 /** @ingroup core
 This is where you put your audio code. updateAudio() has to keep up with the
-AUDIO_RATE of 16384 Hz, so to keep things running smoothly, avoid doing any
+MOZZI_AUDIO_RATE of 16384 Hz, so to keep things running smoothly, avoid doing any
 calculations here which could be done in setup() or updateControl().
 @return an audio sample.  In STANDARD modes this is between -244 and 243 inclusive.
 In HIFI mode, it's a 14 bit number between -16384 and 16383 inclusive.
@@ -156,9 +156,9 @@ int getAudioInput();
 /** @ingroup core
 An alternative for Arduino time functions like micros() and millis(). This is slightly faster than micros(),
 and also it is synchronized with the currently processed audio sample (which, due to the audio
-output buffer, could diverge up to 256/AUDIO_RATE seconds from the current time).
+output buffer, could diverge up to 256/MOZZI_AUDIO_RATE seconds from the current time).
 audioTicks() is updated each time an audio sample
-is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when AUDIO_RATE is
+is output, so the resolution is 1/MOZZI_AUDIO_RATE microseconds (61 microseconds when MOZZI_AUDIO_RATE is
 16384 Hz).
 @return the number of audio ticks since the program began.
 */
@@ -169,9 +169,9 @@ unsigned long audioTicks();
 /** @ingroup core
 An alternative for Arduino time functions like micros() and millis(). This is slightly faster than micros(),
 and also it is synchronized with the currently processed audio sample (which, due to the audio
-output buffer, could diverge up to 256/AUDIO_RATE seconds from the current time).
+output buffer, could diverge up to 256/MOZZI_AUDIO_RATE seconds from the current time).
 audioTicks() is updated each time an audio sample
-is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when AUDIO_RATE is
+is output, so the resolution is 1/MOZZI_AUDIO_RATE microseconds (61 microseconds when MOZZI_AUDIO_RATE is
 16384 Hz).
 @return the approximate number of microseconds since the program began.
 @todo  incorporate mozziMicros() in a more accurate EventDelay()?

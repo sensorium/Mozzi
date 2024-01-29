@@ -23,8 +23,8 @@
 #include <mozzi_midi.h> // for mtof
 #include <mozzi_fixmath.h>
 
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCos(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aVibrato(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aCos(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aVibrato(COS2048_DATA);
 
 const byte intensity = 255;
 

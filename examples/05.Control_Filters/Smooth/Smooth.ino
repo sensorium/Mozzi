@@ -26,7 +26,7 @@
 #include <Smooth.h>
 #include <mozzi_rand.h>
 
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 // for scheduling audio gain changes
 EventDelay kGainChangeDelay;

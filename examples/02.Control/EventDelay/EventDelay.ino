@@ -27,7 +27,7 @@
 #include <EventDelay.h>
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN8192_NUM_CELLS, AUDIO_RATE> aSin(SIN8192_DATA);
+Oscil <SIN8192_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN8192_DATA);
 
 // for scheduling audio gain changes
 EventDelay kGainChangeDelay;

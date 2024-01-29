@@ -25,7 +25,7 @@
 #include <tables/pinknoise8192_int8.h> // table for oscillator
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable)
-Oscil <PINKNOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(PINKNOISE8192_DATA);
+Oscil <PINKNOISE8192_NUM_CELLS, MOZZI_AUDIO_RATE> aNoise(PINKNOISE8192_DATA);
 
 //Phasor for panning
 Phasor <MOZZI_CONTROL_RATE> kPan; // outputs an unsigned long 0-max 32 bit positive number

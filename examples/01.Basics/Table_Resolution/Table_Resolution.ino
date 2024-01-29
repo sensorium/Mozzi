@@ -27,12 +27,12 @@
 #include <Line.h>
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN256_NUM_CELLS, AUDIO_RATE> aSin0(SIN256_DATA); // can hear significant aliasing noise
-Oscil <SIN512_NUM_CELLS, AUDIO_RATE> aSin1(SIN512_DATA); // noise still there but less noticeable
-Oscil <SIN1024_NUM_CELLS, AUDIO_RATE> aSin2(SIN1024_DATA); // borderline, hardly there if at all
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin3(SIN2048_DATA); // no audible improvement from here on
-Oscil <SIN4096_NUM_CELLS, AUDIO_RATE> aSin4(SIN4096_DATA); // for 45 year old loud sound damaged ears
-Oscil <SIN8192_NUM_CELLS, AUDIO_RATE> aSin5(SIN8192_DATA);
+Oscil <SIN256_NUM_CELLS, MOZZI_AUDIO_RATE> aSin0(SIN256_DATA); // can hear significant aliasing noise
+Oscil <SIN512_NUM_CELLS, MOZZI_AUDIO_RATE> aSin1(SIN512_DATA); // noise still there but less noticeable
+Oscil <SIN1024_NUM_CELLS, MOZZI_AUDIO_RATE> aSin2(SIN1024_DATA); // borderline, hardly there if at all
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin3(SIN2048_DATA); // no audible improvement from here on
+Oscil <SIN4096_NUM_CELLS, MOZZI_AUDIO_RATE> aSin4(SIN4096_DATA); // for 45 year old loud sound damaged ears
+Oscil <SIN8192_NUM_CELLS, MOZZI_AUDIO_RATE> aSin5(SIN8192_DATA);
 
 EventDelay kWhoseTurnDelay;
 

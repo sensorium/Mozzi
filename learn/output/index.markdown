@@ -29,27 +29,27 @@ of providing enough output current. I.e. you may need to follow up with a generi
 ### Modulated output (PWM or PDM)
 
 Most boards do not feature a hardware DAC, however. In this case, an analog signal needs to be emulated by quickly toggling a digital pin high or low.
-This can either happen using so-called pusle width modulation (```MOZZI_OUTPUT_PWM```) or pulse density modulation (```MOZZI_OUTPUT_PDM_VIA_I2S``` or (```MOZZI_OUTPUT_PDM_VIA_SERIAL```). We're not going into detail, here, but it should be noted that in both cases there is a trade-off between the
+This can either happen using so-called pulse width modulation (```MOZZI_OUTPUT_PWM```) or pulse density modulation (```MOZZI_OUTPUT_PDM_VIA_I2S``` or (```MOZZI_OUTPUT_PDM_VIA_SERIAL```). We're not going into detail, here, but it should be noted that in both cases there is a trade-off between the
 granularity of the output voltages (i.e. how may different voltage levels can be emulated between logical high and logical low, and the speed at which
 these values can be emulated (the carrier frequency).
 
-Simply put, using pulse width modulation (PWM), if you want 12 bits of output resolution, i.e. 4096 distrinc signal levels, a digital output
+Simply put, using pulse width modulation (PWM), if you want 12 bits of output resolution, i.e. 4096 distinct signal levels, a digital output
 pin will have to be held high (or low) for up to that many CPU cycles, so this will generally require a clock on the order of at least 100 Mhz
 in oder to push the carrier frequency outside the audible range. See configuration options `MOZZI_PWM_RATE`, and `MOZZI_AUDIO_BITS`,
 or `MOZZI_PDM_RESOLUTION` if you want to tweak this tradeoff.
 {: .notice--info}
 
-In some configurations, you (or your kids/pets, how can perceive high frequncies much better), may notice a high-pitch noise, at the carrier frequency.
+In some configurations, you (or your kids/pets, how can perceive high frequencies much better), may notice a high-pitch noise, at the carrier frequency.
 Using a higher carrier frequency - if possible - may mitigate this to some degree. See the [API documentation](/Mozzi/doc/html/group__hardware.html) for details
 on what you can tweak. However, for best quality it will often make sense to add a low-pass filter, which may be as easy as adding a capacitor and a resistor.
-See the [output circuis](../output/) page for details.
+See the [output circuits](../output/) page for details.
 
 ## Output circuit for 2-pin-PWM ("HIFI") mode
 
 Mozzi's ```MOZZI_OUTPUT_2PIN_PWM``` (formerly known as "HIFI") audio mode combines the output of 2 pins in a technique called dual PWM, which is explained in detail at [Open Music Labs](https://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/).
 
-This output mode needs a differnt and more complex output circuitry than the single pin modes, and using the regular single pin circuit for "HIFI" will result in
-terribly distorted sound. In case of difficiculties (but also in general), it is very much recommended to try the default output mode, first, and switch to any
+This output mode needs a different and more complex output circuitry than the single pin modes, and using the regular single pin circuit for "HIFI" will result in
+terribly distorted sound. In case of difficulties (but also in general), it is very much recommended to try the default output mode, first, and switch to any
 other mode only once you've verified that works. Don't go straight for "HIFI" just because is sounds promising.
 {: notice--warning}
 
@@ -78,7 +78,7 @@ Download a Fritzing file with breadboard, schematic and circuit board layouts [h
 ### Native (I2S) DAC interface
 
 On a few platforms (including ESP8266 and ESP32), Mozzi has inbuilt support for interfacing with certain DAC ICs using the I2S interface. This interface
-uses (usually) three pins to transmit audio samples in a digial format:
+uses (usually) three pins to transmit audio samples in a digital format:
  - a bit clock line, usually labelled SCK or BCLK
  - a word clock line, usually labelled WS or LRCLK
  - a data line, often labelled SD, SDATA, SDIN, SDOUT, DACDAT, or similar

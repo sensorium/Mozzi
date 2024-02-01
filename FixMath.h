@@ -72,6 +72,7 @@
 //#define SBITSTOBYTES(N) (((N)>>3)+1)
 //#define ONESBITMASK(N) ((1ULL<<(N)) - 1)
 #define FULLRANGE(N) ((1ULL<<(N)) - 1)
+#define NEEDEDNI(NI, _NI, RANGE, _RANGE) ((RANGE+_RANGE)>FULLRANGE(MAX(NI, _NI)) ? (MAX(NI, _NI)+1) : (MAX(NI, _NI)))
 
 // Experiments
 /*#define NBITSREAL(X,N) (abs(X) < (1<<N) ? N : NBITSREAL2(X,N+1))
@@ -164,8 +165,8 @@ public:
       @param uf An unsigned fixed type number which value can be represented in this type.
       @return A unsigned fixed type number
   */
-  template<byte _NI, byte _NF>
-  UFixMath(const UFixMath<_NI,_NF>& uf) {
+  template<byte _NI, byte _NF, uint64_t _RANGE>
+  UFixMath(const UFixMath<_NI,_NF, _RANGE>& uf) {
     //internal_value = MOZZI_SHIFTR((typename IntegerType<((MAX(NI+NF-1,_NI+_NF-1))>>3)+1>::unsigned_type) uf.asRaw(),(_NF-NF));
     internal_value = MOZZI_SHIFTR((typename IntegerType<MozziPrivate::uBitsToBytes(MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
   }
@@ -181,23 +182,23 @@ public:
 
 
   //////// ADDITION OVERLOADS
-
+  
   /** Addition with another UFixMath. Safe.
       @param op The UFixMath to be added.
       @return The result of the addition as a UFixMath.
   */
-  template<byte _NI, byte _NF>
-  UFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator+ (const UFixMath<_NI,_NF>& op) const
+   template<byte _NI, byte _NF, uint64_t _RANGE>
+  UFixMath<NEEDEDNI(NI,_NI,RANGE,_RANGE), MAX(NF,_NF), RANGE+_RANGE> operator+ (const UFixMath<_NI,_NF,_RANGE>& op) const
   {
-    constexpr byte new_NI = MAX(NI, _NI) + 1;
+    constexpr byte new_NI = NEEDEDNI(NI,_NI,RANGE,_RANGE);
     constexpr byte new_NF = MAX(NF, _NF);
     typedef typename IntegerType<MozziPrivate::uBitsToBytes(new_NI+new_NF)>::unsigned_type return_type;
     UFixMath<new_NI,new_NF> left(*this);
     UFixMath<new_NI,new_NF> right(op);
 
     return_type tt = return_type(left.asRaw()) + right.asRaw();
-    return UFixMath<new_NI,new_NF>(tt,true);
-  }
+    return UFixMath<new_NI,new_NF,RANGE+_RANGE>(tt,true);
+    }
 
   /** Addition with another type. Unsafe
       @param op The number to be added.
@@ -440,6 +441,7 @@ private:
   //static constexpr typename IntegerType<MozziPrivate::uBitsToBytes(2*NI+2*NF)>::unsigned_type onesbitmaskfull() { return (typename IntegerType<MozziPrivate::uBitsToBytes(2*NI+2*NF)>::unsigned_type) ((1ULL<< (NI*2+NF*2)) - 1); }
   
 };
+
 
 
 /// Reverse overloadings, making a template here leads to an ambiguity, forcing us to specify them one by one??

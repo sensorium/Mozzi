@@ -71,6 +71,7 @@
 //#define UBITSTOBYTES(N) (((N-1)>>3)+1)
 //#define SBITSTOBYTES(N) (((N)>>3)+1)
 //#define ONESBITMASK(N) ((1ULL<<(N)) - 1)
+#define FULLRANGE(N) ((1ULL<<(N)) - 1)
 
 // Experiments
 /*#define NBITSREAL(X,N) (abs(X) < (1<<N) ? N : NBITSREAL2(X,N+1))
@@ -108,7 +109,7 @@ class SFixMath;
     @param NI The number of bits encoding the integer part. The integral part can range into [0, 2^NI -1]
     @param NF The number of bits encoding the fractional part
 */
-template<byte NI, byte NF> // NI and NF being the number of bits for the integral and the fractionnal parts respectively.
+template<byte NI, byte NF, uint64_t RANGE=FULLRANGE(NI)> // NI and NF being the number of bits for the integral and the fractionnal parts respectively.
 class UFixMath
 {
   static_assert(NI+NF<=64, "The total width of a UFixMath cannot exceed 64bits");
@@ -1181,6 +1182,7 @@ inline SFixMath<sizeof(T)*8-1,0> toSInt(T val) {
 
 
 #undef MAX
+#undef FULLRANGE
 //#undef UBITSTOBYTES
 //#undef SBITSTOBYTES
 //#undef ONESBITMASK

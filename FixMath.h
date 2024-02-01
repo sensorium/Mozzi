@@ -101,7 +101,7 @@ namespace MozziPrivate {
 }
 
 // Forward declaration
-template<byte NI, byte NF>
+template<byte NI, byte NF, uint64_t RANGE=FULLRANGE(NI)>
 class SFixMath;
 
 
@@ -217,8 +217,8 @@ public:
       @param op The UFixMath to be subtracted.
       @return The result of the subtraction as a SFixMath.
   */
-  template<byte _NI, byte _NF> // We do not have the +1 after MAX(NI, _NI) because the substraction between two UFix should fit in the biggest of the two.
-  SFixMath<MAX(NI,_NI),MAX(NF,_NF)> operator- (const UFixMath<_NI,_NF>& op) const
+  template<byte _NI, byte _NF, uint64_t _RANGE> // We do not have the +1 after MAX(NI, _NI) because the substraction between two UFix should fit in the biggest of the two.
+  SFixMath<MAX(NI,_NI),MAX(NF,_NF), MAX(RANGE, _RANGE)> operator- (const UFixMath<_NI,_NF, _RANGE>& op) const
   {
     constexpr byte new_NI = MAX(NI, _NI);
     constexpr byte new_NF = MAX(NF, _NF);
@@ -227,7 +227,7 @@ public:
     SFixMath<new_NI,new_NF> right(op);
 
     return_type tt = return_type(left.asRaw()) - right.asRaw();
-    return SFixMath<new_NI,new_NF>(tt,true);
+    return SFixMath<new_NI,new_NF,MAX(RANGE,_RANGE)>(tt,true);
   }
 
   
@@ -240,6 +240,7 @@ public:
   {
     return UFixMath<NI,NF>(internal_value-((internal_type)op<<NF),true);
   }
+
 
   /** Opposite of the number.
       @return The opposite numberas a SFixMath.
@@ -580,7 +581,7 @@ inline UFixMath<sizeof(T)*8-1,0> toUInt(T val) {
     @param NF The number of bits encoding the fractional part
     @note The total number of the underlying int will be NI+NF+1 in order to accomodate the sign. It follows that, if you want something that reproduces the behavior of a int8_t, it should be declared as SFixMath<7,0>.
 */
-template<byte NI, byte NF> // NI and NF being the number of bits for the integral and the fractionnal parts respectively.
+template<byte NI, byte NF, uint64_t RANGE> // NI and NF being the number of bits for the integral and the fractionnal parts respectively.
 class SFixMath
 {
   static_assert(NI+NF<64, "The total width of a SFixMath cannot exceed 63bits");

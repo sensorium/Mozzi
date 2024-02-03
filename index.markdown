@@ -122,14 +122,14 @@ Look for code and usage changes [here](extras/NEWS.txt).
 For hardware specific details, including supported features, caveats, and hardware-dependent configuration options,
 refer to the [Hardware Section of the API-Documentation](https://sensorium.github.io/Mozzi/doc/html/group__hardware.html).  
 
-## Weird things
+## Compatibiliy issues
 
-### AVR
+* In most setups, Mozzi claims one or two hardware timers. This may result in incompatibilities with certain libraries, and / or the ability to use timer-based functions such as `analogWrite()`. As the details on this
+  differ a lot between the supported boards, read up on the details - and available workarounds - in the [ardware Section of the API-Documentation](https://sensorium.github.io/Mozzi/doc/html/group__hardware.html).
 
-* Mozzi interferes with `analogWrite()`.  In `MOZZI_OUTPUT_PWM` audio modes, Mozzi takes over Timer1 (pins 9 and 10), but you can use the Timer2 pins, 3 and 11 (your board may differ).  In `MOZZI_OUTPUT_2PIN_PWM` mode, Mozzi uses Timer1 (or Timer4 on some boards), and Timer2, so pins 3 and 11 are also out.  If you need `analogWrite()`, you can do PWM output on any digital pins using the technique in *Mozzi>examples>11.Communication>Sinewave_PWM_pins_HIFI*.
+* There is also an example on emulating `analogWrite()` on any digitial pin in *Mozzi>examples>11.Communication>Sinewave_PWM_pins_HIFI*.
 
 * The timers can be made available with `stopMozzi()`, which stops audio interrupts, until you call `startMozzi()`.
-
 
 ## Contributions / Included Dependencies
 Modified versions of the following libraries are included in the Mozzi download:  

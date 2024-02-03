@@ -4,9 +4,9 @@ If stereo is supported, in a mode, the cell has a red/blue background, and (wher
 Check the [hardware section of the API-documentation](https://sensorium.github.io/Mozzi/doc/html/group__hardware.html) for platform specific notes and (pin) configuration options.
 
 <style>
-td[data-mo] { background: rgba(255,0,0,.5) 50%); }
+td[data-mo] { background-color: rgba(0,0,255,.5); }
 td[data-st] { background: linear-gradient(-45deg,rgba(0,0,255,.5) 50%, rgba(255,0,0,.5) 50%); }
-td[data-md] { border: 2px solid; background: rgba(255,0,0,.5) 50%); }
+td[data-md] { border: 2px solid; background-color: rgba(0,0,255,.5); }
 td[data-sd] { border: 2px solid; background: linear-gradient(-45deg,rgba(0,0,255,.5) 50%, rgba(255,0,0,.5) 50%); }
 </style>
 
@@ -24,7 +24,7 @@ td[data-sd] { border: 2px solid; background: linear-gradient(-45deg,rgba(0,0,255
 <tr style="border-top: 1px solid">
     <td><i>ATmega1284</i>: Sanguino                                                             </td><td data-sd>13 (+12)</td><td data-mo>13, 12     </td><td> -          </td><td> -          </td><td> -          </td></tr>
 <tr style="border-top: 1px solid">
-    <td>Teensy3.x - <i>note: DAC Pin number depends on model: A14, A12, or A21</i>              </td><td> -              </td><td> -                 </td><td> –          </td><td data-md>DAC </td><td> -          </td></tr>
+    <td>Teensy3.x - <i>note: DAC Pin number depends on model: A14, A12, or A21</i>              </td><td> -              </td><td> -                 </td><td> -          </td><td data-md>DAC </td><td> -          </td></tr>
 <tr style="border-top: 1px solid">
     <td><i>LGT8F328P</i>: "Register clone" of the ATmega328, uses the same code in Mozzi        </td><td data-sd>9 (+10) </td><td data-mo>9, 10      </td><td> -          </td><td> -          </td><td> -          </td></tr>
 <tr style="border-top: 1px solid">

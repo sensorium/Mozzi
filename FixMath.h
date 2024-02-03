@@ -73,6 +73,7 @@
 //#define ONESBITMASK(N) ((1ULL<<(N)) - 1)
 #define FULLRANGE(N) ((1ULL<<(N)) - 1)
 #define NEEDEDNI(NI, _NI, RANGE, _RANGE) ((RANGE+_RANGE)>FULLRANGE(MAX(NI, _NI)) ? (MAX(NI, _NI)+1) : (MAX(NI, _NI)))
+#define NEEDEDNIMUL(NI, _NI, RANGE, _RANGE) ((RANGE*_RANGE)>FULLRANGE((NI+ _NI-1)) ? ((NI+ _NI)) : ((NI+ _NI-1)))
 
 // Experiments
 /*#define NBITSREAL(X,N) (abs(X) < (1<<N) ? N : NBITSREAL2(X,N+1))
@@ -256,13 +257,14 @@ public:
       @param op The UFixMath to be multiplied.
       @return The result of the multiplication as a UFixMath.
   */
-  template<byte _NI, byte _NF>
-  UFixMath<NI+_NI,NF+_NF> operator* (const UFixMath<_NI,_NF>& op) const
+  template<byte _NI, byte _NF, uint64_t _RANGE>
+  //UFixMath<NI+_NI,NF+_NF, RANGE*_RANGE> operator* (const UFixMath<_NI,_NF>& op) const
+  UFixMath<NEEDEDNIMUL(NI, _NI, RANGE, _RANGE),NF+_NF, RANGE*_RANGE> operator* (const UFixMath<_NI,_NF>& op) const // TODO: check, throughfully, probably only true for UFix
   {
     //typedef typename IntegerType< ((NI+_NI+NF+_NF-1)>>3)+1>::unsigned_type return_type ;
-    typedef typename IntegerType<MozziPrivate::uBitsToBytes(NI+_NI+NF+_NF)>::unsigned_type return_type ;
+    typedef typename IntegerType<MozziPrivate::uBitsToBytes(<NEEDEDNIMUL(NI, _NI, RANGE, _RANGE)+NF+_NF)>::unsigned_type return_type ;
     return_type tt = return_type(internal_value)*op.asRaw();
-    return UFixMath<NI+_NI,NF+_NF>(tt,true);
+    return UFixMath<<NEEDEDNIMUL(NI, _NI, RANGE, _RANGE),NF+_NF,RANGE*_RANGE>(tt,true);
   }
 
   /** Multiplication with another type. Unsafe.
@@ -1186,6 +1188,7 @@ inline SFixMath<sizeof(T)*8-1,0> toSInt(T val) {
 
 #undef MAX
 #undef FULLRANGE
+#undef NEEDEDNI
 //#undef UBITSTOBYTES
 //#undef SBITSTOBYTES
 //#undef ONESBITMASK

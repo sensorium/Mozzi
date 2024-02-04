@@ -81,6 +81,7 @@
 //#define NEEDEDNIADD(NI, NF, RANGE) (RANGE > (UFULLRANGE(NI+NF)) ? (NI+1) : (NI))  // NEEDED NI TO AVOID OVERFLOW
 #define NEEDEDNIEXTRA(NI, NF, RANGE) (RANGE > (UFULLRANGE(NI+NF)) ? (NI+1) : (RANGE > (UFULLRANGE(NI+NF-1)) ? (NI) : (NI-1)))  // NEEDED NI TO AVOID OVERFLOW, GIVEN A RANGE
 //#define NEEDEDNIMULEXTRA(NI, NF, RANGE) (RANGE > (UFULLRANGE(NI+NF)) ? (NI+1) : (RANGE > (UFULLRANGE(NI+NF-1)) ? (NI) : (NI-1))
+#define NEEDEDSNIEXTRA(NI, NF, RANGE) (RANGE > (SFULLRANGE(NI+NF)) ? (NI+1) : (RANGE > (SFULLRANGE(NI+NF-1)) ? (NI) : (NI-1)))
 #define RANGESHIFT(N,SH,RANGE) ((SH < N) ? (RANGE) : (MOZZI_SHIFTR(RANGE,(N-SH)))) // to increase the range with shifts in case NI or NF reaches 0 (we then need to increase the range)
 
 
@@ -653,10 +654,10 @@ public:
       @param uf A signed fixed type number which value can be represented in this type.
       @return A signed fixed type number
   */
-  template<int8_t _NI, int8_t _NF>
-  SFixMath(const SFixMath<_NI,_NF>& uf) {
+  template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
+  SFixMath(const SFixMath<_NI,_NF, _RANGE>& uf) {
     //internal_value = MOZZI_SHIFTR((typename IntegerType<((MAX(NI+NF,_NI+_NF))>>3)+1>::unsigned_type) uf.asRaw(),(_NF-NF));
-    internal_value = MOZZI_SHIFTR((typename IntegerType<MozziPrivate::sBitsToBytes(MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
+    internal_value = MOZZI_SHIFTR((typename IntegerType<MozziPrivate::sBitsToBytes(MAX(NI+NF,_NI+_NF))>::signed_type) uf.asRaw(),(_NF-NF));
     
   }
 
@@ -675,17 +676,19 @@ public:
       @param op The SFixMath to be added.
       @return The result of the addition as a SFixMath.
   */
-  template<int8_t _NI, int8_t _NF>
-  SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator+ (const SFixMath<_NI,_NF>& op) const
+  template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
+  //SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator+ (const SFixMath<_NI,_NF>& op) const
+  SFixMath<NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),RANGEADD(NF,_NF,RANGE,_RANGE)),MAX(NF, _NF), RANGEADD(NF,_NF,RANGE,_RANGE)> operator+ (const SFixMath<_NI,_NF,_RANGE>& op) const
   {
-    constexpr int8_t new_NI = MAX(NI, _NI) + 1;
+    constexpr uint64_t new_RANGE = RANGEADD(NF,_NF,RANGE,_RANGE);
+    constexpr int8_t new_NI = NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),new_RANGE);
     constexpr int8_t new_NF = MAX(NF, _NF);
-    typedef typename IntegerType<MozziPrivate::sBitsToBytes(new_NI+new_NF)>::unsigned_type return_type;
+    typedef typename IntegerType<MozziPrivate::sBitsToBytes(new_NI+new_NF)>::signed_type return_type;
     SFixMath<new_NI,new_NF> left(*this);
     SFixMath<new_NI,new_NF> right(op);
 
     return_type tt = return_type(left.asRaw()) + right.asRaw();
-    return SFixMath<new_NI,new_NF>(tt,true);
+    return SFixMath<new_NI, new_NF, new_RANGE>(tt,true);
   }
 
   /** Addition with another type. Unsafe
@@ -705,17 +708,18 @@ public:
       @param op The SFixMath to be subtracted.
       @return The result of the subtraction as a SFixMath.
   */ 
-  template<int8_t _NI, int8_t _NF>
-  SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator- (const SFixMath<_NI,_NF>& op) const
+  template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
+  //SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator- (const SFixMath<_NI,_NF>& op) const
+  SFixMath<NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),RANGEADD(NF,_NF,RANGE,_RANGE)),MAX(NF, _NF), RANGEADD(NF,_NF,RANGE,_RANGE)> operator- (const SFixMath<_NI,_NF, _RANGE>& op) const
   {
-    constexpr int8_t new_NI = MAX(NI, _NI) + 1;
+    constexpr uint64_t new_RANGE = RANGEADD(NF,_NF,RANGE,_RANGE);
+    constexpr int8_t new_NI = NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),new_RANGE);
     constexpr int8_t new_NF = MAX(NF, _NF);
-    typedef typename IntegerType<MozziPrivate::sBitsToBytes(new_NI+new_NF)>::unsigned_type return_type;
+    typedef typename IntegerType<MozziPrivate::sBitsToBytes(new_NI+new_NF)>::signed_type return_type;
     SFixMath<new_NI,new_NF> left(*this);
     SFixMath<new_NI,new_NF> right(op);
-
-    return_type tt = return_type(left.asRaw()) - right.asRaw();
-    return SFixMath<new_NI,new_NF>(tt,true);
+    return_type tt = return_type(left.asRaw()) - return_type(right.asRaw());
+    return SFixMath<new_NI, new_NF, new_RANGE>(tt,true);
   }
 
   
@@ -723,11 +727,11 @@ public:
       @param op The number to be subtracted.
       @return The result of the subtraction as a SFixMath.
   */
-  template<typename T>
+   template<typename T>
   SFixMath<NI,NF> operator- (const T op) const
   {
     return SFixMath<NI,NF>(internal_value-(op<<NF),true);
-  }
+    }
 
 
   /** Opposite of the number.
@@ -794,10 +798,10 @@ public:
       This is still slower than a multiplication, hence the suggested workflow is to compute the inverse when time is not critical, for instance in updateControl(), and multiply it afterward, for instance in updateAudio(), if you need a division.
       @return The inverse of the number.
   */
-  SFixMath<NF,NI*2+NF> invAccurate() const
+   SFixMath<NF,NI*2+NF> invAccurate() const
   {
     return inv<NI*2+NF>();
-  }
+    }
 
 
   //////// SHIFTS OVERLOADS

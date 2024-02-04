@@ -74,6 +74,9 @@
 #define FULLRANGE(N) ((1ULL<<(N)) - 1)
 #define NEEDEDNI(NI, _NI, RANGE, _RANGE) ((RANGE+_RANGE)>FULLRANGE(MAX(NI, _NI)) ? (MAX(NI, _NI)+1) : (MAX(NI, _NI)))
 #define NEEDEDNIMUL(NI, _NI, RANGE, _RANGE) ((RANGE*_RANGE)>FULLRANGE((NI+ _NI-1)) ? ((NI+ _NI)) : ((NI+ _NI-1)))
+#define RANGEADD(NF, _NF, RANGE, _RANGE) ((NF > _NF) ? (RANGE + (_RANGE<<(NF-_NF))) : (_RANGE + (RANGE<<(_NF-NF))))  // resulting range when adding
+#define NEEDEDNIADD(NI, NF, RANGE) (RANGE > (FULLRANGE(NI+NF)) ? (NI+1) : (NI))  // NEEDED NI TO AVOID OVERFLOW
+#define NEEDEDNIEXTRA(NI, NF, RANGE) (RANGE > (FULLRANGE(NI+NF)) ? (NI+1) : (RANGE > (FULLRANGE(NI+NF-1)) ? (NI) : (NI-1)))  // NEEDED NI TO AVOID OVERFLOW
 
 // Experiments
 /*#define NBITSREAL(X,N) (abs(X) < (1<<N) ? N : NBITSREAL2(X,N+1))
@@ -102,7 +105,7 @@ namespace MozziPrivate {
 }
 
 // Forward declaration
-template<byte NI, byte NF, uint64_t RANGE=FULLRANGE(NI)>
+template<byte NI, byte NF, uint64_t RANGE=FULLRANGE(NI+NF)>
 class SFixMath;
 
 
@@ -111,7 +114,7 @@ class SFixMath;
     @param NI The number of bits encoding the integer part. The integral part can range into [0, 2^NI -1]
     @param NF The number of bits encoding the fractional part
 */
-template<byte NI, byte NF, uint64_t RANGE=FULLRANGE(NI)> // NI and NF being the number of bits for the integral and the fractionnal parts respectively.
+template<byte NI, byte NF, uint64_t RANGE=FULLRANGE(NI+NF)> // NI and NF being the number of bits for the integral and the fractionnal parts respectively.
 class UFixMath
 {
   static_assert(NI+NF<=64, "The total width of a UFixMath cannot exceed 64bits");
@@ -166,9 +169,8 @@ public:
       @param uf An unsigned fixed type number which value can be represented in this type.
       @return A unsigned fixed type number
   */
-  template<byte _NI, byte _NF, uint64_t _RANGE>
+  template<byte _NI, byte _NF, uint64_t _RANGE> // maybe move as free function to allow setting of the RANGE?
   UFixMath(const UFixMath<_NI,_NF, _RANGE>& uf) {
-    //internal_value = MOZZI_SHIFTR((typename IntegerType<((MAX(NI+NF-1,_NI+_NF-1))>>3)+1>::unsigned_type) uf.asRaw(),(_NF-NF));
     internal_value = MOZZI_SHIFTR((typename IntegerType<MozziPrivate::uBitsToBytes(MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
   }
 
@@ -189,16 +191,17 @@ public:
       @return The result of the addition as a UFixMath.
   */
    template<byte _NI, byte _NF, uint64_t _RANGE>
-  UFixMath<NEEDEDNI(NI,_NI,RANGE,_RANGE), MAX(NF,_NF), RANGE+_RANGE> operator+ (const UFixMath<_NI,_NF,_RANGE>& op) const
+   UFixMath<NEEDEDNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),RANGEADD(NF,_NF,RANGE,_RANGE)),MAX(NF, _NF), RANGEADD(NF,_NF,RANGE,_RANGE)> operator+ (const UFixMath<_NI,_NF,_RANGE>& op) const
   {
-    constexpr byte new_NI = NEEDEDNI(NI,_NI,RANGE,_RANGE);
+    constexpr uint64_t new_RANGE = RANGEADD(NF,_NF,RANGE,_RANGE);
+    constexpr byte new_NI = NEEDEDNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),new_RANGE);
     constexpr byte new_NF = MAX(NF, _NF);
     typedef typename IntegerType<MozziPrivate::uBitsToBytes(new_NI+new_NF)>::unsigned_type return_type;
-    UFixMath<new_NI,new_NF> left(*this);
-    UFixMath<new_NI,new_NF> right(op);
+    UFixMath<new_NI,new_NF,new_RANGE> left(*this);
+    UFixMath<new_NI,new_NF, new_RANGE> right(op);
 
     return_type tt = return_type(left.asRaw()) + right.asRaw();
-    return UFixMath<new_NI,new_NF,RANGE+_RANGE>(tt,true);
+    return UFixMath<new_NI,new_NF,new_RANGE>(tt,true);
     }
 
   /** Addition with another type. Unsafe
@@ -262,9 +265,9 @@ public:
   UFixMath<NEEDEDNIMUL(NI, _NI, RANGE, _RANGE),NF+_NF, RANGE*_RANGE> operator* (const UFixMath<_NI,_NF>& op) const // TODO: check, throughfully, probably only true for UFix
   {
     //typedef typename IntegerType< ((NI+_NI+NF+_NF-1)>>3)+1>::unsigned_type return_type ;
-    typedef typename IntegerType<MozziPrivate::uBitsToBytes(<NEEDEDNIMUL(NI, _NI, RANGE, _RANGE)+NF+_NF)>::unsigned_type return_type ;
+    typedef typename IntegerType<MozziPrivate::uBitsToBytes(NEEDEDNIMUL(NI, _NI, RANGE, _RANGE)+NF+_NF)>::unsigned_type return_type ;
     return_type tt = return_type(internal_value)*op.asRaw();
-    return UFixMath<<NEEDEDNIMUL(NI, _NI, RANGE, _RANGE),NF+_NF,RANGE*_RANGE>(tt,true);
+    return UFixMath<NEEDEDNIMUL(NI, _NI, RANGE, _RANGE),NF+_NF,RANGE*_RANGE>(tt,true);
   }
 
   /** Multiplication with another type. Unsafe.
@@ -1186,9 +1189,9 @@ inline SFixMath<sizeof(T)*8-1,0> toSInt(T val) {
 
 
 
-#undef MAX
-#undef FULLRANGE
-#undef NEEDEDNI
+//#undef MAX
+//#undef FULLRANGE
+//#undef NEEDEDNI
 //#undef UBITSTOBYTES
 //#undef SBITSTOBYTES
 //#undef ONESBITMASK

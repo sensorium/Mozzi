@@ -96,17 +96,21 @@ on which one(s) are required for other tasks.
 void stopMozzi();
 
 
-
+#if (MOZZI_COMPATIBILITY_LEVEL <= MOZZI_COMPATIBILITY_1_1) && MOZZI_IS(MOZZI_AUDIO_CHANNELS, MOZZI_MONO)
+AudioOutput_t updateAudio();
+#else
 /** @ingroup core
 This is where you put your audio code. updateAudio() has to keep up with the
-MOZZI_AUDIO_RATE of 16384 Hz, so to keep things running smoothly, avoid doing any
+MOZZI_AUDIO_RATE of 16384 or 32768 Hz, so to keep things running smoothly, avoid doing any
 calculations here which could be done in setup() or updateControl().
-@return an audio sample.  In STANDARD modes this is between -244 and 243 inclusive.
-In HIFI mode, it's a 14 bit number between -16384 and 16383 inclusive.
+@return an audio sample.
 
-TODO: Update documentation
+While is possible (in mono sketches) to return a plain unscaled int, it is generally best to return
+auto-scaled samples using MonoOutput::from8Bit(), MonoOutput::from16Bit(), MonoOutput::fromNbit(), or
+their StereoOutput equivalents.
 */
-AudioOutput_t updateAudio();
+AudioOutput updateAudio();
+#endif
 
 /** @ingroup core
 This is where you put your control code. You need updateControl() somewhere in

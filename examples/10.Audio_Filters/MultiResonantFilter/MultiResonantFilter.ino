@@ -65,8 +65,8 @@ void updateControl() {
   mf.setCutoffFreqAndResonance(cutoff_freq, resonance);
 }
 
-AudioOutput_t updateAudio() {  
-  AudioOutput_t asig;
+AudioOutput updateAudio() {  
+  AudioOutput asig;
   mf.next(aCrunchySound.next()); // this send the current sample to the filter, does not return anything
   switch (filter_type) // recover the output from the current selected filter type.
   {

@@ -56,7 +56,7 @@ void updateControl()
 }
 
 
-AudioOutput_t updateAudio() {
+AudioOutput updateAudio() {
   int asig = aNoise.next();
   return StereoOutput::from16Bit(asig*ampA, asig*ampB);
 }

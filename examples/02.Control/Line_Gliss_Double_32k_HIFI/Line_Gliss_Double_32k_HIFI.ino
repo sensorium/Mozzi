@@ -134,7 +134,7 @@ void updateControl(){ // 900 us floats vs 160 fixed
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   aSaw1.setPhaseInc(aGliss1.next());
   aSaw2.setPhaseInc(aGliss2.next());
   return MonoOutput::fromNBit(9, (int)aSaw1.next()+aSaw2.next());

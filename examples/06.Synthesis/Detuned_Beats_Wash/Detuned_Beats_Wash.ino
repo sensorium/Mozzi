@@ -141,7 +141,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
 
   int asig =
     aCos1.next() + aCos1b.next() +

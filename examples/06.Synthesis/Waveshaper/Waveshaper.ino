@@ -97,7 +97,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   char asig0 = aSin.next(); // sine wave source
   // make 2 signals fading in and out to show effect of amplitude when waveshaping with Chebyshev polynomial curves
   // offset the signals by 128 to fit in the 0-255 range for the waveshaping table lookups

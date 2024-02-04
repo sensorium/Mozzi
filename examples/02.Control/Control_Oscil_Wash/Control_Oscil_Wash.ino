@@ -93,7 +93,7 @@ void updateControl(){
    v8 = kVol8.next();
 }
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   long asig = (long)
     aCos1.next()*v1 +
     aCos2.next()*v2 +

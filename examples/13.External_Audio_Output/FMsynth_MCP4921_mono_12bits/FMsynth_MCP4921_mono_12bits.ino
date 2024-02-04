@@ -134,7 +134,7 @@ void updateControl() {
 }
 
 
-AudioOutput_t updateAudio() {
+AudioOutput updateAudio() {
   Q15n16 modulation = deviation * aModulator.next() >> 8;
 
   return MonoOutput::from8Bit(aCarrier.phMod(modulation));

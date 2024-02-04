@@ -100,7 +100,7 @@ void updateControl() {
 }
 
 
-AudioOutput_t updateAudio() {
+AudioOutput updateAudio() {
   return MonoOutput::fromNBit(17, ((long)aSample0.next() * alevel0) + ((long)aSample1.next() * alevel1));
 }
 

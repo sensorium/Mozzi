@@ -160,7 +160,7 @@ void updateControl(){
 
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   long asig = (long)
     aCos0.next()*v0 +
       aCos1.next()*v1 +

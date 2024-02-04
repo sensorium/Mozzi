@@ -50,7 +50,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   // subtracting 512 moves the unsigned audio data into 0-centred,
   // signed range required by all Mozzi units
   int asig = getAudioInput()-512;

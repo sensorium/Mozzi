@@ -49,7 +49,7 @@ void updateControl() {
   gain = (kGain.next()>>1)+64;  
 }
 
-AudioOutput_t updateAudio() {
+AudioOutput updateAudio() {
   int sample = (gain * aSin.next() >> 1) + (bias<<4);  // this is 8 + 7 - 1 + 1 = 15bits maximum.
                                                       // the wavefolder, set on an output of 12 bits will fold the exceeding values.
   return MonoOutput::fromNBit(12, wf.next(sample));   // return an int signal centred around 0

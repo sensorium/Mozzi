@@ -41,7 +41,7 @@ void updateControl()
 }
 
 
-AudioOutput_t updateAudio()
+AudioOutput updateAudio()
 {
   static int filtered;
 

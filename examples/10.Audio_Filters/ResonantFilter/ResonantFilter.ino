@@ -57,7 +57,7 @@ void updateControl(){
   rf.setCutoffFreqAndResonance(cutoff_freq, resonance);
 }
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   char asig = rf.next(aCrunchySound.next());
   return MonoOutput::from8Bit(asig);
 }

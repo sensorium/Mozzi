@@ -67,7 +67,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   unsigned int index = Q16n16_to_Q16n0(scrub.next());
   return MonoOutput::from8Bit(aSample.atIndex(index));
 }

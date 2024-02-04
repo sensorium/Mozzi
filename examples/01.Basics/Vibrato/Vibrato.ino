@@ -39,7 +39,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
     Q15n16 vibrato = (Q15n16) intensity * aVibrato.next();
     return MonoOutput::from8Bit(aCos.phMod(vibrato)); // phase modulation to modulate frequency
 }

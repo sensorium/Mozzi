@@ -75,7 +75,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   Q16n16 interpolatedFreq = aInterpolate.next(); // get the next linear interpolated freq
   aSin0.setFreq_Q16n16(interpolatedFreq);
 

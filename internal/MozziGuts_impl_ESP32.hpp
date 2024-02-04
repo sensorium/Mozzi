@@ -126,7 +126,7 @@ static void startAudio() {
   timer_isr_register(TIMER_GROUP_0, TIMER_0, &timer0_audio_output_isr, nullptr, 0, &s_timer_handle);
   timer_start(TIMER_GROUP_0, TIMER_0);
 
-#else
+#elif !MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_CUSTOM)
   static const i2s_config_t i2s_config = {
 #  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC) || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S)
     .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX),

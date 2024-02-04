@@ -68,15 +68,19 @@
 
 #define MOZZI_SHIFTR(x,bits) (bits > 0 ? (x >> (bits)) : (x << (-bits))) // shift right for positive shift numbers, and left for negative ones.
 #define MAX(N1,N2) ((N1) > (N2) ? (N1) : (N2))
+#define MIN(N1,N2) ((N1) > (N2) ? (N2) : (N1))
 //#define UBITSTOBYTES(N) (((N-1)>>3)+1)
 //#define SBITSTOBYTES(N) (((N)>>3)+1)
 //#define ONESBITMASK(N) ((1ULL<<(N)) - 1)
-#define FULLRANGE(N) ((1ULL<<(N)) - 1)
-#define NEEDEDNI(NI, _NI, RANGE, _RANGE) ((RANGE+_RANGE)>FULLRANGE(MAX(NI, _NI)) ? (MAX(NI, _NI)+1) : (MAX(NI, _NI)))
-#define NEEDEDNIMUL(NI, _NI, RANGE, _RANGE) ((RANGE*_RANGE)>FULLRANGE((NI+ _NI-1)) ? ((NI+ _NI)) : ((NI+ _NI-1)))
+#define UFULLRANGE(N) ((1ULL<<(N)) - 1) // MAX value represented by an unsigned of N bits
+#define SFULLRANGE(N) ((1ULL<<(N))) // MAX value represented by a signed of N bits
+//#define NEEDEDNI(NI, _NI, RANGE, _RANGE) ((RANGE+_RANGE)>UFULLRANGE(MAX(NI, _NI)) ? (MAX(NI, _NI)+1) : (MAX(NI, _NI)))
+//#define NEEDEDNIMUL(NI, _NI, RANGE, _RANGE) ((RANGE*_RANGE)>UFULLRANGE((NI+ _NI-1)) ? ((NI+ _NI)) : ((NI+ _NI-1)))  // NEEDED NI TO AVOID OVERFLOW WHEN MULTIPLYING
+
 #define RANGEADD(NF, _NF, RANGE, _RANGE) ((NF > _NF) ? (RANGE + (_RANGE<<(NF-_NF))) : (_RANGE + (RANGE<<(_NF-NF))))  // resulting range when adding
-#define NEEDEDNIADD(NI, NF, RANGE) (RANGE > (FULLRANGE(NI+NF)) ? (NI+1) : (NI))  // NEEDED NI TO AVOID OVERFLOW
-#define NEEDEDNIEXTRA(NI, NF, RANGE) (RANGE > (FULLRANGE(NI+NF)) ? (NI+1) : (RANGE > (FULLRANGE(NI+NF-1)) ? (NI) : (NI-1)))  // NEEDED NI TO AVOID OVERFLOW
+//#define NEEDEDNIADD(NI, NF, RANGE) (RANGE > (UFULLRANGE(NI+NF)) ? (NI+1) : (NI))  // NEEDED NI TO AVOID OVERFLOW
+#define NEEDEDNIEXTRA(NI, NF, RANGE) (RANGE > (UFULLRANGE(NI+NF)) ? (NI+1) : (RANGE > (UFULLRANGE(NI+NF-1)) ? (NI) : (NI-1)))  // NEEDED NI TO AVOID OVERFLOW, GIVEN A RANGE
+//#define NEEDEDNIMULEXTRA(NI, NF, RANGE) (RANGE > (UFULLRANGE(NI+NF)) ? (NI+1) : (RANGE > (UFULLRANGE(NI+NF-1)) ? (NI) : (NI-1))
 #define RANGESHIFT(N,SH,RANGE) ((SH < N) ? (RANGE) : (MOZZI_SHIFTR(RANGE,(N-SH)))) // to increase the range with shifts in case NI or NF reaches 0 (we then need to increase the range)
 
 
@@ -107,7 +111,7 @@ namespace MozziPrivate {
 }
 
 // Forward declaration
-template<int8_t NI, int8_t NF, uint64_t RANGE=FULLRANGE(NI+NF)>
+template<int8_t NI, int8_t NF, uint64_t RANGE=SFULLRANGE(NI+NF)>
 class SFixMath;
 
 
@@ -116,7 +120,7 @@ class SFixMath;
     @param NI The number of bits encoding the integer part. The integral part can range into [0, 2^NI -1]
     @param NF The number of bits encoding the fractional part
 */
-template<int8_t NI, int8_t NF, uint64_t RANGE=FULLRANGE(NI+NF)> // NI and NF being the number of bits for the integral and the fractionnal parts respectively.
+template<int8_t NI, int8_t NF, uint64_t RANGE=UFULLRANGE(NI+NF)> // NI and NF being the number of bits for the integral and the fractionnal parts respectively.
 class UFixMath
 {
   static_assert(NI+NF<=64, "The total width of a UFixMath cannot exceed 64bits");
@@ -151,8 +155,13 @@ public:
   template<typename T>
   UFixMath(T value,bool as_raw=false)
   {
+    
     if (as_raw) internal_value = value;
-    else internal_value = (internal_type(value) << NF);
+    else
+      {
+	//static_assert(NI>0, "Creating an UFixMath as an integer with NI=0 is not possible");
+	internal_value = (internal_type(value) << NF);
+      }
   }
 
 
@@ -265,12 +274,15 @@ public:
   */
   template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
   //UFixMath<NI+_NI,NF+_NF, RANGE*_RANGE> operator* (const UFixMath<_NI,_NF>& op) const
-  UFixMath<NEEDEDNIMUL(NI, _NI, RANGE, _RANGE),NF+_NF, RANGE*_RANGE> operator* (const UFixMath<_NI,_NF>& op) const // TODO: check, throughfully, probably only true for UFix
+  //UFixMath<NEEDEDNIMUL(NI, _NI, RANGE, _RANGE),NF+_NF, RANGE*_RANGE> operator* (const UFixMath<_NI,_NF>& op) const // TODO: check, throughfully, probably only true for UFix
+  UFixMath<NEEDEDNIEXTRA(NI+_NI, NF+_NF, RANGE*_RANGE),NF+_NF, RANGE*_RANGE> operator* (const UFixMath<_NI,_NF,_RANGE>& op) const // TODO: check, throughfully, probably only true for UFix
   {
+    constexpr int8_t NEW_NI = NEEDEDNIEXTRA(NI+_NI, NF+_NF, RANGE*_RANGE);
     //typedef typename IntegerType< ((NI+_NI+NF+_NF-1)>>3)+1>::unsigned_type return_type ;
-    typedef typename IntegerType<MozziPrivate::uBitsToBytes(NEEDEDNIMUL(NI, _NI, RANGE, _RANGE)+NF+_NF)>::unsigned_type return_type ;
+    //typedef typename IntegerType<MozziPrivate::uBitsToBytes(NEEDEDNIMUL(NI, _NI, RANGE, _RANGE)+NF+_NF)>::unsigned_type return_type ;
+    typedef typename IntegerType<MozziPrivate::uBitsToBytes(NEW_NI+NF+_NF)>::unsigned_type return_type ;
     return_type tt = return_type(internal_value)*op.asRaw();
-    return UFixMath<NEEDEDNIMUL(NI, _NI, RANGE, _RANGE),NF+_NF,RANGE*_RANGE>(tt,true);
+    return UFixMath<NEW_NI,(NF+_NF),RANGE*_RANGE>(tt,true);
   }
 
   /** Multiplication with another type. Unsafe.
@@ -317,11 +329,13 @@ public:
       This is still slower than a multiplication, hence the suggested workflow is to compute the inverse when time is not critical, for instance in updateControl(), and multiply it afterward, for instance in updateAudio(), if you need a division.
       @return The inverse of the number.
   */
-  UFixMath<NF,NI*2+NF> invAccurate() const
+  UFixMath<NF,MIN(NI*2+NF,63-NF)> invAccurate() const // The MIN is just to remove compiler error when a big FixMath is instanciated but no accurate inverse is actually computed (this would be catch by the static_assert)
   {/*
      static_assert(2*NI+2*NF<=63, "The accurate inverse cannot be computed for when 2*NI+2*NF>63. Reduce the number of bits.");
      return UFixMath<NI*2+NF,NF>(internal_value,true).invFast(); */
     //return UFixMath<NI*2+NF,NF>(internal_value,true).inv<NI*2+NF>();
+
+    static_assert(2*NI+2*NF<=63, "The accurate inverse cannot be computed for when 2*NI+2*NF>63. Reduce the number of bits.");
     return inv<NI*2+NF>();
   }
 
@@ -1193,7 +1207,7 @@ inline SFixMath<sizeof(T)*8-1,0> toSInt(T val) {
 
 
 //#undef MAX
-//#undef FULLRANGE
+//#undef UFULLRANGE
 //#undef NEEDEDNI
 //#undef UBITSTOBYTES
 //#undef SBITSTOBYTES

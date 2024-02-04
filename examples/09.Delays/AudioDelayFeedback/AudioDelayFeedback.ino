@@ -55,7 +55,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   char asig = aTriangle.next(); // get this so it can be used twice without calling next() again
   //return asig/8 + aDel.next(asig, (uint16_t) del_samps); // mix some straight signal with the delayed signal
   //return aDel.next(aTriangle.next(), (uint16_t) del_samps); // instead of the previous 2 lines for only the delayed signal

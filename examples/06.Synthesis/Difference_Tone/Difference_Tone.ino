@@ -59,7 +59,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   int asig = (int)((((uint32_t)aSin1.next()+ aSin2.next())*(200u+aGain.next()))>>3);
   return MonoOutput::fromAlmostNBit(9, asig).clip();
 }

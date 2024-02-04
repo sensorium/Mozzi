@@ -219,7 +219,7 @@ void updateControl() {
 }
 
 
-AudioOutput_t updateAudio() {
+AudioOutput updateAudio() {
   int32_t asig = aSmoothLevel.next(k_leveltarget) * wavey.next();
   return MonoOutput::fromNBit(23, asig); // avoid distortion
 }

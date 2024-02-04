@@ -71,22 +71,15 @@ typedef StereoOutput AudioOutput;
 typedef MonoOutput AudioOutput;
 #endif
 
-#if MOZZI_AUDIO_CHANNELS < MOZZI_STEREO
-// NOTE / TODO: Unfortunately, for reasons yet to investigate, aliasing to MonoOutput, instead, here, adds a bunch of flash usage
-typedef AudioOutputStorage_t AudioOutput_t;     // keep sketches using "int updateAudio()" alive
+#if MOZZI_COMPATIBILITY_LEVEL < MOZZI_COMPATIBILITY_LATEST
+#if (MOZZI_COMPATIBILITY_LEVEL <= MOZZI_COMPATIBILITY_1_1) && MOZZI_IS(MOZZI_AUDIO_CHANNELS, MOZZI_MONO)
+typedef int AudioOutput_t;  // Note: Needed for pre 1.1 backwards compatibility
 #else
-/** Representation of an single audio output sample/frame. For mono output, this is really just a single zero-centered int,
- *  but for stereo it's a struct containing two ints.
- *
- *  While it may be tempting (and is possible) to use an int, directly, using AudioOutput_t and the functions AudioOutput::from8Bit(),
- *  AudioOutput::fromNBit(), or AudioOutput::fromAlmostNBit() will allow you to write code that will work across different platforms, even
- *  when those use a different output resolution.
- *
- *  @note The only place where you should be using AudioOutput_t, directly, is in your updateAudio() function signature. It's really just a
- *        dummy used to make the "same" function signature work across different configurations (importantly mono/stereo). It's true value
- *        might be subject to change, and it may even be void. Use either MonoOutput or StereoOutput to represent a piece of audio output.
- */
-typedef AudioOutput AudioOutput_t;  // Note: Needed for pre 1.1 backwards compatibility
+/** Transitory alias to AudioOutput. The only point of this typedef is to keep old code working. In new code,
+ *  use AudioOutput, directly, instead.
+*/
+MOZZI_DEPRECATED("2.0", "Replace AudioOutput_t with simple AudioOutput") typedef AudioOutput AudioOutput_t;
+#endif
 #endif
 
 /** This struct encapsulates one frame of mono audio output. Internally, it really just boils down to a single int value, but the struct provides
@@ -104,8 +97,10 @@ typedef AudioOutput AudioOutput_t;  // Note: Needed for pre 1.1 backwards compat
  *    different configurations.
  */
 struct MonoOutput {
+  /** Default constructor. Does not initialize the sample! */
+  MonoOutput() {};
   /** Construct an audio frame from raw values (zero-centered) */
-  MonoOutput(AudioOutputStorage_t l=0) : _l(l) {};
+  MonoOutput(AudioOutputStorage_t l) : _l(l) {};
 #if (MOZZI_AUDIO_CHANNELS > 1)
   /** Conversion to stereo operator: If used in a stereo config, returns identical channels (and gives a compile time warning).
       This _could_ be turned into an operator for implicit conversion in this case. For now we chose to apply conversion on demand, only, as most of the time
@@ -151,15 +146,15 @@ private:
 struct StereoOutput {
   /** Construct an audio frame from raw values (zero-centered) */
   StereoOutput(AudioOutputStorage_t l, AudioOutputStorage_t r) : _l(l), _r(r) {};
-  /** Default contstructor */
-  StereoOutput() : _l(0), _r(0) {};
+  /** Default constructor. Does not initialize the sample! */
+  StereoOutput() {};
 #if !MOZZI_IS(MOZZI_AUDIO_CHANNELS, MOZZI_STEREO)
   /** Conversion to int operator: If used in a mono config, returns only the left channel (and gives a compile time warning). 
       This _could_ be turned into an operator for implicit conversion in this case. For now we chose to apply conversion on demand, only, as most of the time
       using StereoOutput in a mono config, is not intended. */
-  inline AudioOutput_t portable() const __attribute__((deprecated("Sketch generates stereo output, but Mozzi is configured for mono. Check MOZZI_AUDIO_CHANNELS setting."))) { return _l; };
+  inline AudioOutput portable() const __attribute__((deprecated("Sketch generates stereo output, but Mozzi is configured for mono. Check MOZZI_AUDIO_CHANNELS setting."))) { return _l; };
 #  if GITHUB_RUNNER_ACCEPT_STEREO_IN_MONO
-  inline operator AudioOutput_t() const __attribute__((deprecated("Stereo converted to mono on github runner"))) { return _l; };
+  inline operator AudioOutput() const __attribute__((deprecated("Stereo converted to mono on github runner"))) { return _l; };
 #  endif
 #endif
   AudioOutputStorage_t l() const { return _l; };

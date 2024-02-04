@@ -51,7 +51,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   // cast to long before multiply to give room for intermediate result,
   // and also before shift,
   // to give consistent results for both 8 and 32 bit processors.

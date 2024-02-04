@@ -85,7 +85,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   int asig;
   switch (whose_turn) {
   case 0:

@@ -107,7 +107,7 @@ void updateControl() {
 }
 
 
-AudioOutput_t updateAudio() {
+AudioOutput updateAudio() {
   //return MonoOutput::from8Bit(aSq90.next());  // try to use this line instead to hear the non-band limited version, sounds a bit like a radio
   return MonoOutput::from8Bit(BL_aSq.next());  // return a sample of the correct oscil to acheive no alias
 

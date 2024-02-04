@@ -85,7 +85,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   aSaw.setPhaseInc(aGliss.next());
   return MonoOutput::from8Bit(aSaw.next());
 }

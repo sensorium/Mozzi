@@ -95,7 +95,7 @@ void updateControl() {
 }
 
 
-AudioOutput_t updateAudio() {
+AudioOutput updateAudio() {
   return StereoOutput::from16Bit(aCos1.next() * env1, aCos2.next() * env2);
 }
 

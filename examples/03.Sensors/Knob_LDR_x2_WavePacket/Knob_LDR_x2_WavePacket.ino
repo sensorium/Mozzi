@@ -103,7 +103,7 @@ void updateControl(){
 
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   return MonoOutput::from16Bit(wavey.next());
 }
 

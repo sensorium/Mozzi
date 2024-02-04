@@ -10,7 +10,7 @@ void updateControl() {
   // your control code
 }
 
-AudioOutput_t updateAudio() {
+AudioOutput updateAudio() {
   // For mono output, the return value of this function is really just a signed integer.
   // However, for best portability of your sketch to different boards and configurations,
   // pick one of the variants below, depending on the "natural" range of the audio values

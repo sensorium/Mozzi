@@ -114,7 +114,7 @@ void updateControl() {
 
 
 
-AudioOutput_t updateAudio() {
+AudioOutput updateAudio() {
   return MonoOutput::fromNBit(24, (int32_t)aCos1.next() * aCos2.next() * env1) ; // specify that the audio we are sending here is 24 bits.
 }
 

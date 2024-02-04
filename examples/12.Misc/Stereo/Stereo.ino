@@ -45,7 +45,7 @@ void updateControl(){
   Serial.println(pan);
 }
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   int asig = aNoise.next();
   return StereoOutput::fromNBit(24, (long)pan*asig, (long)(65535-pan)*asig);
 }

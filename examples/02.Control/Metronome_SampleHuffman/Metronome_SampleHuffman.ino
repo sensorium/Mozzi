@@ -74,7 +74,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   int asig = (int)
   thumb0.next() +
   thumb1.next() +

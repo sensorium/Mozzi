@@ -111,7 +111,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   long asig=0;
   for (byte i=0;i<NUM_PLAYERS;i++){
     asig += (int) (aSample[i]).next() * gain[i];

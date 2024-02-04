@@ -58,7 +58,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   int synth = aCarrier.phMod((int)aModulator.next()*(150u+aModWidth.next()));
   synth *= (byte)aEnvelop.next();
   // here's the reverb

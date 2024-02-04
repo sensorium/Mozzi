@@ -108,7 +108,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   updateRGB(red_brightness, green_brightness, blue_brightness);
   // this would make more sense with a higher resolution signal
   // but still benefits from using HIFI to avoid the 16kHz pwm noise

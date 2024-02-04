@@ -44,7 +44,7 @@ void updateControl(){
   del_samps = 128+kFreq.next();
 }
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   char asig = aDel.next(aTriangle.next(), del_samps);
   return MonoOutput::from8Bit(asig);
 }

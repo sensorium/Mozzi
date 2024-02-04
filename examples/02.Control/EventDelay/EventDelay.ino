@@ -49,7 +49,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   return AudioOutput::from8Bit(aSin.next()*gain);
 }
 

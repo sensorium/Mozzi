@@ -75,7 +75,7 @@ inline void bufferAudioOutput(const AudioOutput_t f) {
   ++samples_written_to_buffer;
 }
 #else
-CircularBuffer<AudioOutput_t> output_buffer;  // fixed size 256
+CircularBuffer<AudioOutput> output_buffer;  // fixed size 256
 #  define canBufferAudioOutput() (!output_buffer.isFull())
 #  define bufferAudioOutput(f) output_buffer.write(f)
 static void CACHED_FUNCTION_ATTR defaultAudioOutput() {

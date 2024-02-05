@@ -276,7 +276,7 @@ public:
   template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
   //UFixMath<NI+_NI,NF+_NF, RANGE*_RANGE> operator* (const UFixMath<_NI,_NF>& op) const
   //UFixMath<NEEDEDNIMUL(NI, _NI, RANGE, _RANGE),NF+_NF, RANGE*_RANGE> operator* (const UFixMath<_NI,_NF>& op) const // TODO: check, throughfully, probably only true for UFix
-  UFixMath<NEEDEDNIEXTRA(NI+_NI, NF+_NF, RANGE*_RANGE),NF+_NF, RANGE*_RANGE> operator* (const UFixMath<_NI,_NF,_RANGE>& op) const // TODO: check, throughfully, probably only true for UFix
+  UFixMath<NEEDEDNIEXTRA(NI+_NI, NF+_NF, RANGE*_RANGE),NF+_NF, RANGE*_RANGE> operator* (const UFixMath<_NI,_NF,_RANGE>& op) const 
   {
     constexpr int8_t NEW_NI = NEEDEDNIEXTRA(NI+_NI, NF+_NF, RANGE*_RANGE);
     //typedef typename IntegerType< ((NI+_NI+NF+_NF-1)>>3)+1>::unsigned_type return_type ;
@@ -737,9 +737,9 @@ public:
   /** Opposite of the number.
       @return The opposite numberas a SFixMath.
   */
-  SFixMath<NI,NF> operator-() const
+  SFixMath<NI,NF,RANGE> operator-() const
   {
-    return SFixMath<NI,NF>(-internal_value,true);
+    return SFixMath<NI,NF,RANGE>(-internal_value,true);
   }
   
   //////// MULTIPLICATION OVERLOADS
@@ -748,9 +748,11 @@ public:
       @param op The SFixMath to be multiplied.
       @return The result of the multiplication as a SFixMath.
   */
-  template<int8_t _NI, int8_t _NF>
-  SFixMath<NI+_NI,NF+_NF> operator* (const SFixMath<_NI,_NF>& op) const
+  template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
+  //SFixMath<NI+_NI,NF+_NF> operator* (const SFixMath<_NI,_NF>& op) const
+  SFixMath<NEEDEDSNIEXTRA(NI+_NI, NF+_NF, RANGE*_RANGE),NF+_NF, RANGE*_RANGE> operator* (const SFixMath<_NI,_NF,_RANGE>& op) const
   {
+    constexpr int8_t NEW_NI = NEEDEDSNIEXTRA(NI+_NI, NF+_NF, RANGE*_RANGE);
     typedef typename IntegerType<MozziPrivate::sBitsToBytes(NI+_NI+NF+_NF)>::signed_type return_type ;
     return_type tt = return_type(internal_value)*op.asRaw();
     return SFixMath<NI+_NI,NF+_NF>(tt,true);
@@ -798,7 +800,7 @@ public:
       This is still slower than a multiplication, hence the suggested workflow is to compute the inverse when time is not critical, for instance in updateControl(), and multiply it afterward, for instance in updateAudio(), if you need a division.
       @return The inverse of the number.
   */
-   SFixMath<NF,NI*2+NF> invAccurate() const
+  SFixMath<NF,MIN(NI*2+NF,62-NF)> invAccurate() const
   {
     return inv<NI*2+NF>();
     }
@@ -831,19 +833,19 @@ public:
       @return The result of the shift as a UFixMath of smaller size.
   */
   template<int8_t op>
-  SFixMath<NI-op,NF+op> sR()
+  SFixMath<MAX(NI-op,0), NF+op, RANGESHIFT(NI,op,RANGE)> sR()
   {
-    return SFixMath<NI-op,NF+op>(internal_value,true);
+    return SFixMath<MAX(NI-op,0),NF+op,RANGESHIFT(NI,op,RANGE)>(internal_value,true);
   }
 
   /** Safe and optimal left shift. The returned type will be adjusted accordingly
       @param op The shift number
       @return The result of the shift as a UFixMath of bigger size.
   */
-  template<int8_t op>
-  SFixMath<NI+op,NF-op> sL()
+template<int8_t op>
+  SFixMath<NI+op,MAX(NF-op,0),RANGESHIFT(NF,op,RANGE)> sL()
   {
-    return SFixMath<NI+op,NF-op>(internal_value,true);
+    return SFixMath<NI+op,MAX(NF-op,0)>(internal_value,true);
   }
 
 

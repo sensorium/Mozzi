@@ -176,13 +176,13 @@ public:
   }
 
 
-  // IS THAT REALLY NEEDED?
-  /** Constructor from another SFixMath. 
+
+  /** Constructor from a SFixMath. 
       @param uf An signed fixed type number which value can be represented in this type: sign is thus discarded.
       @return A unsigned fixed type number
   */
-  template<int8_t _NI, int8_t _NF>
-  UFixMath(const SFixMath<_NI,_NF>& uf) {
+  template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
+  UFixMath(const SFixMath<_NI,_NF, _RANGE>& uf) {
     internal_value = MOZZI_SHIFTR((typename IntegerType<MozziPrivate::uBitsToBytes(MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
   }
 
@@ -662,12 +662,12 @@ public:
     
   }
 
-  /** Constructor from another UFixMath. 
+  /** Constructor from an UFixMath. 
       @param uf A unsigned fixed type number which value can be represented in this type.
       @return A signed fixed type number
   */
-  template<int8_t _NI, int8_t _NF>
-  SFixMath(const UFixMath<_NI,_NF>& uf) {
+  template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
+  SFixMath(const UFixMath<_NI,_NF, _RANGE>& uf) {
     internal_value = MOZZI_SHIFTR((typename IntegerType<MozziPrivate::uBitsToBytes(MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
   }
 

@@ -70,8 +70,9 @@
 #define MOZZI_SHIFTR(x,bits) (bits > 0 ? (x >> (bits)) : (x << (-bits))) // shift right for positive shift numbers, and left for negative ones.
 #define MAX(N1,N2) ((N1) > (N2) ? (N1) : (N2))
 #define MIN(N1,N2) ((N1) > (N2) ? (N2) : (N1))
-#define UFULLRANGE(N) ((1ULL<<(N)) - 1) // MAX value represented by an unsigned of N bits
+//#define UFULLRANGE(N) ((1ULL<<(N)) - 1) // MAX value represented by an unsigned of N bits
 #define SFULLRANGE(N) ((1ULL<<(N))) // MAX value represented by a signed of N bits
+#define UFULLRANGE(N) (((1ULL<<(N-1)) - 1) + (1ULL << (N-1)))
 #define RANGEADD(NF, _NF, RANGE, _RANGE) ((NF > _NF) ? (RANGE + (_RANGE<<(NF-_NF))) : (_RANGE + (RANGE<<(_NF-NF))))  // resulting range when adding
 #define NEEDEDNIEXTRA(NI, NF, RANGE) (RANGE > (UFULLRANGE(NI+NF)) ? (NI+1) : (RANGE > (UFULLRANGE(NI+NF-1)) ? (NI) : (NI-1)))  // NEEDED NI TO AVOID OVERFLOW, GIVEN A RANGE
 #define NEEDEDSNIEXTRA(NI, NF, RANGE) (RANGE > (SFULLRANGE(NI+NF)) ? (NI+1) : (RANGE > (SFULLRANGE(NI+NF-1)) ? (NI) : (NI-1)))

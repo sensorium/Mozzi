@@ -221,10 +221,10 @@ public:
       @return The result of the addition as a SFixMath.
   */
    template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
-   SFixMath<NEEDEDNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),RANGEADD(NF,_NF,RANGE,_RANGE)),MAX(NF, _NF), RANGEADD(NF,_NF,RANGE,_RANGE)> operator+ (const SFixMath<_NI,_NF,_RANGE>& op) const
+   SFixMath<NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),RANGEADD(NF,_NF,RANGE,_RANGE)),MAX(NF, _NF), RANGEADD(NF,_NF,RANGE,_RANGE)> operator+ (const SFixMath<_NI,_NF,_RANGE>& op) const
   {
     constexpr uint64_t new_RANGE = RANGEADD(NF,_NF,RANGE,_RANGE);
-    constexpr int8_t new_NI = NEEDEDNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),new_RANGE);
+    constexpr int8_t new_NI = NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),new_RANGE);
     constexpr int8_t new_NF = MAX(NF, _NF);
     typedef typename IntegerType<MozziPrivate::uBitsToBytes(new_NI+new_NF)>::signed_type return_type;
     SFixMath<new_NI,new_NF> left(*this);
@@ -710,6 +710,26 @@ public:
     return SFixMath<new_NI, new_NF, new_RANGE>(tt,true);
   }
 
+    /** Addition with a UFixMath. Safe.
+      @param op The UFixMath to be added.
+      @return The result of the addition as a SFixMath.
+  */
+  /*template<int8_t _NI, int8_t _NF, uint64_t _RANGE>  
+  SFixMath<NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),RANGEADD(NF,_NF,RANGE,_RANGE)),MAX(NF, _NF), RANGEADD(NF,_NF,RANGE,_RANGE)> operator+ (const UFixMath<_NI,_NF,_RANGE>& op) const
+  {
+    constexpr uint64_t new_RANGE = RANGEADD(NF,_NF,RANGE,_RANGE);
+    constexpr int8_t new_NI = NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),new_RANGE);
+    constexpr int8_t new_NF = MAX(NF, _NF);
+    typedef typename IntegerType<MozziPrivate::sBitsToBytes(new_NI+new_NF)>::signed_type return_type;
+    SFixMath<new_NI,new_NF> left(*this);
+    SFixMath<new_NI,new_NF> right(op);
+
+    return_type tt = return_type(left.asRaw()) + right.asRaw();
+    return SFixMath<new_NI, new_NF, new_RANGE>(tt,true);
+    }*/
+
+  
+
   /** Addition with another type. Unsafe
       @param op The number to be added.
       @return The result of the addition as a UFixMath.
@@ -730,6 +750,24 @@ public:
   template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
   //SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator- (const SFixMath<_NI,_NF>& op) const
   SFixMath<NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),RANGEADD(NF,_NF,RANGE,_RANGE)),MAX(NF, _NF), RANGEADD(NF,_NF,RANGE,_RANGE)> operator- (const SFixMath<_NI,_NF, _RANGE>& op) const
+  {
+    constexpr uint64_t new_RANGE = RANGEADD(NF,_NF,RANGE,_RANGE);
+    constexpr int8_t new_NI = NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),new_RANGE);
+    constexpr int8_t new_NF = MAX(NF, _NF);
+    typedef typename IntegerType<MozziPrivate::sBitsToBytes(new_NI+new_NF)>::signed_type return_type;
+    SFixMath<new_NI,new_NF> left(*this);
+    SFixMath<new_NI,new_NF> right(op);
+    return_type tt = return_type(left.asRaw()) - return_type(right.asRaw());
+    return SFixMath<new_NI, new_NF, new_RANGE>(tt,true);
+  }
+
+    /** Subtraction with a UFixMath. Safe.
+      @param op The SFixMath to be subtracted.
+      @return The result of the subtraction as a SFixMath.
+  */ 
+  template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
+  //SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator- (const SFixMath<_NI,_NF>& op) const
+  SFixMath<NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),RANGEADD(NF,_NF,RANGE,_RANGE)),MAX(NF, _NF), RANGEADD(NF,_NF,RANGE,_RANGE)> operator- (const UFixMath<_NI,_NF, _RANGE>& op) const
   {
     constexpr uint64_t new_RANGE = RANGEADD(NF,_NF,RANGE,_RANGE);
     constexpr int8_t new_NI = NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),new_RANGE);
@@ -1084,25 +1122,25 @@ inline SFixMath<NEEDEDNIEXTRA(MAX(NI,_NI),MAX(NF,_NF)> operator+ (const SFixMath
   return SFixMath<new_NI,new_NF>(tt,true);
   }*/
 
-/** Addition between a UFixMath and a SFixMath. Safe.
-    @param op1 A UFixMath
-    @param op2 A SFixMath
+/** Addition between a SFixMath and a UFixMath. Safe.
+    @param op1 A SFixMath
+    @param op2 A UFixMath
     @return The result of the addition of op1 and op2. As a SFixMath
 */
 template<int8_t NI, int8_t NF, uint64_t RANGE, int8_t _NI, int8_t _NF, uint64_t _RANGE>
-SFixMath<NEEDEDNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),RANGEADD(NF,_NF,RANGE,_RANGE)),MAX(NF, _NF), RANGEADD(NF,_NF,RANGE,_RANGE)> operator+ (const SFixMath<NI,NF,RANGE>& op1, const UFixMath<_NI,_NF,_RANGE>& op2 )
+SFixMath<NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),RANGEADD(NF,_NF,RANGE,_RANGE)),MAX(NF, _NF), RANGEADD(NF,_NF,RANGE,_RANGE)> operator+ (const SFixMath<NI,NF,RANGE>& op1, const UFixMath<_NI,_NF,_RANGE>& op2 )
 {
   return op2+op1;
   }
 
-// Substraction between SFixMath and UFixMath (promotion to next SFixMath)
+// Substraction between UFixMath and SFixMath
 
 /** Subtraction between a SFixMath and a UFixMath. Safe.
     @param op1 A SFixMath
     @param op2 A UFixMath
     @return The result of the subtraction of op1 by op2. As a SFixMath
 */
-template<int8_t NI, int8_t NF, int8_t _NI, int8_t _NF>
+/*template<int8_t NI, int8_t NF, int8_t _NI, int8_t _NF>
 inline SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator- (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 )
 {
   constexpr int8_t new_NI = MAX(NI, _NI) + 1;
@@ -1113,18 +1151,18 @@ inline SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator- (const SFixMath<NI,NF>& op1
   SFixMath<new_NI,new_NF> right(op2);
   return_type tt = return_type(left.asRaw()) - right.asRaw();
   return SFixMath<new_NI,new_NF>(tt,true);
-}
+  }*/
 
 /** Subtraction between a UFixMath and a SFixMath. Safe.
     @param op1 A UFixMath
     @param op2 A SFixMath
     @return The result of the subtraction of op1 by op2. As a SFixMath
 */
-template<int8_t NI, int8_t NF, int8_t _NI, int8_t _NF>
-inline SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator- (const UFixMath<NI,NF>& op1, const SFixMath<_NI,_NF>& op2 )
+template<int8_t NI, int8_t NF, uint64_t RANGE, int8_t _NI, int8_t _NF, uint64_t _RANGE>
+inline SFixMath<NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),RANGEADD(NF,_NF,RANGE,_RANGE)),MAX(NF, _NF), RANGEADD(NF,_NF,RANGE,_RANGE)> operator- (const UFixMath<NI,NF, RANGE>& op1, const SFixMath<_NI,_NF, _RANGE>& op2)
 {
   return -op2+op1;
-}
+  }
 
 // Comparaison between SFixMath and UFixmath
 

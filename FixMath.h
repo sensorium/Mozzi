@@ -146,15 +146,10 @@ public:
       @return An unsigned fixed point number
   */
   template<typename T>
-  UFixMath(T value,bool as_raw=false)
-  {
+  UFixMath(T value,bool as_raw=false)  {
     
     if (as_raw) internal_value = value;
-    else
-      {
-	//static_assert(NI>0, "Creating an UFixMath as an integer with NI=0 is not possible");
-	internal_value = (internal_type(value) << NF);
-      }
+    else internal_value = (internal_type(value) << NF);      
   }
 
 
@@ -173,11 +168,13 @@ public:
       @param uf An unsigned fixed type number which value can be represented in this type.
       @return A unsigned fixed type number
   */
-  template<int8_t _NI, int8_t _NF, uint64_t _RANGE> // maybe move as free function to allow setting of the RANGE?
+  template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
   UFixMath(const UFixMath<_NI,_NF, _RANGE>& uf) {
     internal_value = MOZZI_SHIFTR((typename IntegerType<MozziPrivate::uBitsToBytes(MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
   }
 
+
+  // IS THAT REALLY NEEDED?
   /** Constructor from another SFixMath. 
       @param uf An signed fixed type number which value can be represented in this type: sign is thus discarded.
       @return A unsigned fixed type number
@@ -245,7 +242,6 @@ public:
       @return The result of the subtraction as a SFixMath.
   */
   template<int8_t _NI, int8_t _NF, uint64_t _RANGE> // We do not have the +1 after MAX(NI, _NI) because the substraction between two UFix should fit in the biggest of the two.
-  //SFixMath<MAX(NI,_NI),MAX(NF,_NF), MAX(RANGE, _RANGE)> operator- (const UFixMath<_NI,_NF, _RANGE>& op) const
   SFixMath<MAX(NI,_NI),MAX(NF,_NF), MAX(MOZZI_SHIFTR(RANGE,MAX(NF,_NF)-NF), MOZZI_SHIFTR(_RANGE,MAX(NF,_NF)-_NF))> operator- (const UFixMath<_NI,_NF, _RANGE>& op) const
   {
     constexpr int8_t new_NI = MAX(NI, _NI);
@@ -271,7 +267,7 @@ public:
 
 
   /** Opposite of the number.
-      @return The opposite numberas a SFixMath.
+      @return The opposite number as a SFixMath.
   */
   SFixMath<NI,NF,RANGE> operator-() const
   {
@@ -285,13 +281,9 @@ public:
       @return The result of the multiplication as a UFixMath.
   */
   template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
-  //UFixMath<NI+_NI,NF+_NF, RANGE*_RANGE> operator* (const UFixMath<_NI,_NF>& op) const
-  //UFixMath<NEEDEDNIMUL(NI, _NI, RANGE, _RANGE),NF+_NF, RANGE*_RANGE> operator* (const UFixMath<_NI,_NF>& op) const // TODO: check, throughfully, probably only true for UFix
   UFixMath<NEEDEDNIEXTRA(NI+_NI, NF+_NF, RANGE*_RANGE),NF+_NF, RANGE*_RANGE> operator* (const UFixMath<_NI,_NF,_RANGE>& op) const 
   {
     constexpr int8_t NEW_NI = NEEDEDNIEXTRA(NI+_NI, NF+_NF, RANGE*_RANGE);
-    //typedef typename IntegerType< ((NI+_NI+NF+_NF-1)>>3)+1>::unsigned_type return_type ;
-    //typedef typename IntegerType<MozziPrivate::uBitsToBytes(NEEDEDNIMUL(NI, _NI, RANGE, _RANGE)+NF+_NF)>::unsigned_type return_type ;
     typedef typename IntegerType<MozziPrivate::uBitsToBytes(NEW_NI+NF+_NF)>::unsigned_type return_type ;
     return_type tt = return_type(internal_value)*op.asRaw();
     return UFixMath<NEW_NI,(NF+_NF),RANGE*_RANGE>(tt,true);
@@ -332,7 +324,6 @@ public:
   UFixMath<NF,NI> invFast() const
   {
     static_assert(NI+NF<=63, "The fast inverse cannot be computed for when NI+NF>63. Reduce the number of bits.");
-    //return UFixMath<NF,NI>((ONESBITMASK(NI+NF)/internal_value),true);
     return UFixMath<NF,NI>((onesbitmask()/internal_value),true);
   }
 
@@ -355,11 +346,7 @@ public:
       @return The inverse of the number.
   */
   UFixMath<NF,MIN(NI*2+NF,63-NF)> invAccurate() const // The MIN is just to remove compiler error when a big FixMath is instanciated but no accurate inverse is actually computed (this would be catch by the static_assert)
-  {/*
-     static_assert(2*NI+2*NF<=63, "The accurate inverse cannot be computed for when 2*NI+2*NF>63. Reduce the number of bits.");
-     return UFixMath<NI*2+NF,NF>(internal_value,true).invFast(); */
-    //return UFixMath<NI*2+NF,NF>(internal_value,true).inv<NI*2+NF>();
-
+  {
     static_assert(2*NI+2*NF<=63, "The accurate inverse cannot be computed for when 2*NI+2*NF>63. Reduce the number of bits.");
     return inv<NI*2+NF>();
   }
@@ -451,17 +438,6 @@ public:
   }
 
 
-  // Division. Might actually more misleading than helping. NON Working version below.
-  /*
-    template<int8_t NI1, int8_t NF1, int8_t NI2, int8_t NF2>
-    UFixMath<NI1-NI2, NF1-NF2> operator/(const UFixMath<NI1, NF1>& op1, const UFixMath<NI2, NF2>& op2)
-    {
-    typedef typename IntegerType< ((NI1-NI2+NF1-NF2+1)>>3)+1>::unsigned_type return_type ;
-    return_type tt = (return_type(op1.getInt())<<(NF1-NF2))/op2.getInt();
-    return UFixMath<NI1-NI2, NF1-NF2>(tt,true);
-    }
-  */
-
 
   /** Returns the value as floating point number.
       @return The floating point value.
@@ -486,13 +462,9 @@ public:
 private:
   internal_type internal_value;
   static constexpr internal_type onesbitmask() { return (internal_type) ((1ULL<< (NI+NF)) - 1); }
-  //static constexpr typename IntegerType<MozziPrivate::uBitsToBytes(2*NI+2*NF)>::unsigned_type onesbitmaskfull() { return (typename IntegerType<MozziPrivate::uBitsToBytes(2*NI+2*NF)>::unsigned_type) ((1ULL<< (NI*2+NF*2)) - 1); }
-  
 };
 
 
-
-/// Reverse overloadings, making a template here leads to an ambiguity, forcing us to specify them one by one??
 
 // Multiplication
 template <int8_t NI, int8_t NF>
@@ -680,7 +652,6 @@ public:
   */
   template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
   SFixMath(const SFixMath<_NI,_NF, _RANGE>& uf) {
-    //internal_value = MOZZI_SHIFTR((typename IntegerType<((MAX(NI+NF,_NI+_NF))>>3)+1>::unsigned_type) uf.asRaw(),(_NF-NF));
     internal_value = MOZZI_SHIFTR((typename IntegerType<MozziPrivate::sBitsToBytes(MAX(NI+NF,_NI+_NF))>::signed_type) uf.asRaw(),(_NF-NF));
     
   }
@@ -701,7 +672,6 @@ public:
       @return The result of the addition as a SFixMath.
   */
   template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
-  //SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator+ (const SFixMath<_NI,_NF>& op) const
   SFixMath<NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),RANGEADD(NF,_NF,RANGE,_RANGE)),MAX(NF, _NF), RANGEADD(NF,_NF,RANGE,_RANGE)> operator+ (const SFixMath<_NI,_NF,_RANGE>& op) const
   {
     constexpr uint64_t new_RANGE = RANGEADD(NF,_NF,RANGE,_RANGE);
@@ -714,25 +684,6 @@ public:
     return_type tt = return_type(left.asRaw()) + right.asRaw();
     return SFixMath<new_NI, new_NF, new_RANGE>(tt,true);
   }
-
-    /** Addition with a UFixMath. Safe.
-      @param op The UFixMath to be added.
-      @return The result of the addition as a SFixMath.
-  */
-  /*template<int8_t _NI, int8_t _NF, uint64_t _RANGE>  
-  SFixMath<NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),RANGEADD(NF,_NF,RANGE,_RANGE)),MAX(NF, _NF), RANGEADD(NF,_NF,RANGE,_RANGE)> operator+ (const UFixMath<_NI,_NF,_RANGE>& op) const
-  {
-    constexpr uint64_t new_RANGE = RANGEADD(NF,_NF,RANGE,_RANGE);
-    constexpr int8_t new_NI = NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),new_RANGE);
-    constexpr int8_t new_NF = MAX(NF, _NF);
-    typedef typename IntegerType<MozziPrivate::sBitsToBytes(new_NI+new_NF)>::signed_type return_type;
-    SFixMath<new_NI,new_NF> left(*this);
-    SFixMath<new_NI,new_NF> right(op);
-
-    return_type tt = return_type(left.asRaw()) + right.asRaw();
-    return SFixMath<new_NI, new_NF, new_RANGE>(tt,true);
-    }*/
-
   
 
   /** Addition with another type. Unsafe
@@ -753,7 +704,6 @@ public:
       @return The result of the subtraction as a SFixMath.
   */ 
   template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
-  //SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator- (const SFixMath<_NI,_NF>& op) const
   SFixMath<NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),RANGEADD(NF,_NF,RANGE,_RANGE)),MAX(NF, _NF), RANGEADD(NF,_NF,RANGE,_RANGE)> operator- (const SFixMath<_NI,_NF, _RANGE>& op) const
   {
     constexpr uint64_t new_RANGE = RANGEADD(NF,_NF,RANGE,_RANGE);
@@ -771,7 +721,6 @@ public:
       @return The result of the subtraction as a SFixMath.
   */ 
   template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
-  //SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator- (const SFixMath<_NI,_NF>& op) const
   SFixMath<NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),RANGEADD(NF,_NF,RANGE,_RANGE)),MAX(NF, _NF), RANGEADD(NF,_NF,RANGE,_RANGE)> operator- (const UFixMath<_NI,_NF, _RANGE>& op) const
   {
     constexpr uint64_t new_RANGE = RANGEADD(NF,_NF,RANGE,_RANGE);
@@ -811,7 +760,6 @@ public:
       @return The result of the multiplication as a SFixMath.
   */
   template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
-  //SFixMath<NI+_NI,NF+_NF> operator* (const SFixMath<_NI,_NF>& op) const
   SFixMath<NEEDEDSNIEXTRA(NI+_NI, NF+_NF, RANGE*_RANGE),NF+_NF, RANGE*_RANGE> operator* (const SFixMath<_NI,_NF,_RANGE>& op) const
   {
     constexpr int8_t NEW_NI = NEEDEDSNIEXTRA(NI+_NI, NF+_NF, RANGE*_RANGE);
@@ -843,7 +791,6 @@ public:
   SFixMath<NF,NI> invFast() const
   {
     static_assert(NI+NF<=62, "The fast inverse cannot be computed for when NI+NF>63. Reduce the number of bits.");
-    //return SFixMath<NF,NI>((ONESBITMASK(NI+NF)/internal_value),true);
     return SFixMath<NF,NI>((onesbitmask()/internal_value),true);
   }
 
@@ -974,8 +921,6 @@ template<int8_t op>
 private:
   internal_type internal_value;
   static constexpr internal_type onesbitmask() { return (internal_type) ((1ULL<< (NI+NF)) - 1); }
-  //static constexpr typename IntegerType<MozziPrivate::sBitsToBytes(2*NI+2*NF)>::signed_type onesbitmaskfull() { return (typename IntegerType<MozziPrivate::sBitsToBytes(2*NI+2*NF)>::signed_type) ((1ULL<< (NI*2+NF*2)) - 1); }
-
 };
 
 /// Reverse overloadings, 
@@ -1081,18 +1026,6 @@ inline SFixMath<NI, NF> operator-(double op, const SFixMath<NI, NF>& uf) {return
 
 
 
-/** Multiplication between a SFixMath and a UFixMath. Safe.
-    @param op1 A SFixMath
-    @param op2 A UFixMath
-    @return The result of the multiplication of op1 and op2. As a SFixMath
-*/
-template<int8_t NI, int8_t NF, uint64_t RANGE, int8_t _NI, int8_t _NF, uint64_t _RANGE>
-inline SFixMath<NEEDEDSNIEXTRA(NI+_NI, NF+_NF, RANGE*_RANGE),NF+_NF, RANGE*_RANGE> operator* (const SFixMath<_NI,_NF,_RANGE>& op1, const UFixMath<NI,NF,RANGE>& op2)
-{
-  return op2*op1;
-}
-
-
 /** Addition between a SFixMath and a UFixMath. Safe.
     @param op1 A SFixMath
     @param op2 A UFixMath
@@ -1115,6 +1048,18 @@ inline SFixMath<NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),RANGEADD(NF,_NF,RANGE,_RA
 {
   return -op2+op1;
   }
+
+
+/** Multiplication between a SFixMath and a UFixMath. Safe.
+    @param op1 A SFixMath
+    @param op2 A UFixMath
+    @return The result of the multiplication of op1 and op2. As a SFixMath
+*/
+template<int8_t NI, int8_t NF, uint64_t RANGE, int8_t _NI, int8_t _NF, uint64_t _RANGE>
+inline SFixMath<NEEDEDSNIEXTRA(NI+_NI, NF+_NF, RANGE*_RANGE),NF+_NF, RANGE*_RANGE> operator* (const SFixMath<_NI,_NF,_RANGE>& op1, const UFixMath<NI,NF,RANGE>& op2)
+{
+  return op2*op1;
+}
 
 // Comparaison between SFixMath and UFixmath
 

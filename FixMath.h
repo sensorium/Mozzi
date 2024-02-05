@@ -63,6 +63,7 @@
 #ifndef FIXMATH2_H_
 #define FIXMATH2_H_
 
+
 #include<Arduino.h>
 #include "IntegerType.h"
 
@@ -223,7 +224,7 @@ public:
     return SFixMath<new_NI,new_NF,new_RANGE>(tt,true);
     }
   
-
+#ifdef FIXMATHUNSAFE
   /** Addition with another type. Unsafe
       @param op The number to be added.
       @return The result of the addition as a UFixMath.
@@ -233,7 +234,7 @@ public:
   {
     return UFixMath<NI,NF>(internal_value+((internal_type)op<<NF),true);
   }
-
+#endif
 
   //////// SUBSTRACTION OVERLOADS
 
@@ -254,7 +255,7 @@ public:
     return SFixMath<new_NI,new_NF,MAX(MOZZI_SHIFTR(RANGE,MAX(NF,_NF)-NF), MOZZI_SHIFTR(_RANGE,MAX(NF,_NF)-_NF))>(tt,true);
   }
 
-  
+  #ifdef FIXMATHUNSAFE
   /** Subtraction with another type. Unsafe
       @param op The number to be subtracted.
       @return The result of the subtraction as a UFixMath.
@@ -264,7 +265,7 @@ public:
   {
     return UFixMath<NI,NF>(internal_value-((internal_type)op<<NF),true);
   }
-
+#endif
 
   /** Opposite of the number.
       @return The opposite number as a SFixMath.
@@ -302,6 +303,7 @@ public:
     return SFixMath<NEW_NI,(NF+_NF),RANGE*_RANGE>(tt,true);
   }
 
+  #ifdef FIXMATHUNSAFE
   /** Multiplication with another type. Unsafe.
       @param op The number to be multiplied.
       @return The result of the multiplication as a UFixMath.
@@ -311,7 +313,7 @@ public:
   {
     return UFixMath<NI,NF>(internal_value*op,true);
   }
-
+#endif
 
   //////// INVERSE
 
@@ -368,6 +370,8 @@ public:
     return UFixMath<NI,NF>(internal_value>>op,true);
   }
 
+
+  #ifdef FIXMATHUNSAFE
   /** Left shift. This can overflow if you shift to a value that cannot be represented.
       Better to use .sL<shift>() if possible instead.
       @param op The shift number
@@ -377,7 +381,8 @@ public:
   {
     return UFixMath<NI,NF>(internal_value<<op,true);
   }
-
+#endif
+  
   /** Safe and optimal right shift. The returned type will be adjusted accordingly
       @param op The shift number
       @return The result of the shift as a UFixMath of smaller size.
@@ -465,7 +470,7 @@ private:
 };
 
 
-
+#ifdef FIXMATHUNSAFE
 // Multiplication
 template <int8_t NI, int8_t NF>
 inline UFixMath<NI, NF> operator*(uint8_t op, const UFixMath<NI, NF>& uf) {return uf*op;}
@@ -558,7 +563,7 @@ inline SFixMath<NI, NF> operator-(float op, const UFixMath<NI, NF>& uf) {return 
 
 template <int8_t NI, int8_t NF>
 inline SFixMath<NI, NF> operator-(double op, const UFixMath<NI, NF>& uf) {return -uf+op;}
-
+#endif
 ////// Helper functions to build SFix from a normal type automatically
 
 
@@ -685,7 +690,7 @@ public:
     return SFixMath<new_NI, new_NF, new_RANGE>(tt,true);
   }
   
-
+#ifdef FIXMATHUNSAFE
   /** Addition with another type. Unsafe
       @param op The number to be added.
       @return The result of the addition as a UFixMath.
@@ -695,7 +700,7 @@ public:
   {
     return SFixMath<NI,NF>(internal_value+(op<<NF),true);
   }
-
+#endif
 
   //////// SUBSTRACTION OVERLOADS
 
@@ -733,7 +738,7 @@ public:
     return SFixMath<new_NI, new_NF, new_RANGE>(tt,true);
   }
 
-  
+  #ifdef FIXMATHUNSAFE
   /** Subtraction with another type. Unsafe
       @param op The number to be subtracted.
       @return The result of the subtraction as a SFixMath.
@@ -743,7 +748,7 @@ public:
   {
     return SFixMath<NI,NF>(internal_value-(op<<NF),true);
     }
-
+#endif
 
   /** Opposite of the number.
       @return The opposite numberas a SFixMath.
@@ -768,6 +773,7 @@ public:
     return SFixMath<NI+_NI,NF+_NF>(tt,true);
   }
 
+  #ifdef FIXMATHUNSAFE
   /** Multiplication with another type. Unsafe.
       @param op The number to be multiplied.
       @return The result of the multiplication as a UFixMath.
@@ -777,6 +783,7 @@ public:
   {
     return SFixMath<NI,NF>(internal_value*op,true);
   }
+#endif
 
 
   //////// INVERSE
@@ -827,6 +834,7 @@ public:
     return SFixMath<NI,NF>(internal_value>>op,true);
   }
 
+  #ifdef FIXMATHUNSAFE
   /** Left shift. This can overflow if you shift to a value that cannot be represented.
       Better to use .sL<shift>() if possible instead.
       @param op The shift number
@@ -836,6 +844,7 @@ public:
   {
     return SFixMath<NI,NF>(internal_value<<op,true);
   }
+  #endif
 
   /** Safe and optimal right shift. The returned type will be adjusted accordingly
       @param op The shift number
@@ -923,6 +932,8 @@ private:
   static constexpr internal_type onesbitmask() { return (internal_type) ((1ULL<< (NI+NF)) - 1); }
 };
 
+
+#ifdef FIXMATHUNSAFE
 /// Reverse overloadings, 
 
 // Multiplication
@@ -1018,8 +1029,7 @@ inline SFixMath<NI, NF> operator-(float op, const SFixMath<NI, NF>& uf) {return 
 template <int8_t NI, int8_t NF>
 inline SFixMath<NI, NF> operator-(double op, const SFixMath<NI, NF>& uf) {return (-uf)+op;}
 
-
-
+#endif
 
 
 
@@ -1032,7 +1042,7 @@ inline SFixMath<NI, NF> operator-(double op, const SFixMath<NI, NF>& uf) {return
     @return The result of the addition of op1 and op2. As a SFixMath
 */
 template<int8_t NI, int8_t NF, uint64_t RANGE, int8_t _NI, int8_t _NF, uint64_t _RANGE>
-SFixMath<NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),RANGEADD(NF,_NF,RANGE,_RANGE)),MAX(NF, _NF), RANGEADD(NF,_NF,RANGE,_RANGE)> operator+ (const SFixMath<NI,NF,RANGE>& op1, const UFixMath<_NI,_NF,_RANGE>& op2 )
+inline SFixMath<NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),RANGEADD(NF,_NF,RANGE,_RANGE)),MAX(NF, _NF), RANGEADD(NF,_NF,RANGE,_RANGE)> operator+ (const SFixMath<NI,NF,RANGE>& op1, const UFixMath<_NI,_NF,_RANGE>& op2 )
 {
   return op2+op1;
   }

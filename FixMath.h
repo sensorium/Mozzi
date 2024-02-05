@@ -69,18 +69,10 @@
 #define MOZZI_SHIFTR(x,bits) (bits > 0 ? (x >> (bits)) : (x << (-bits))) // shift right for positive shift numbers, and left for negative ones.
 #define MAX(N1,N2) ((N1) > (N2) ? (N1) : (N2))
 #define MIN(N1,N2) ((N1) > (N2) ? (N2) : (N1))
-//#define UBITSTOBYTES(N) (((N-1)>>3)+1)
-//#define SBITSTOBYTES(N) (((N)>>3)+1)
-//#define ONESBITMASK(N) ((1ULL<<(N)) - 1)
 #define UFULLRANGE(N) ((1ULL<<(N)) - 1) // MAX value represented by an unsigned of N bits
 #define SFULLRANGE(N) ((1ULL<<(N))) // MAX value represented by a signed of N bits
-//#define NEEDEDNI(NI, _NI, RANGE, _RANGE) ((RANGE+_RANGE)>UFULLRANGE(MAX(NI, _NI)) ? (MAX(NI, _NI)+1) : (MAX(NI, _NI)))
-//#define NEEDEDNIMUL(NI, _NI, RANGE, _RANGE) ((RANGE*_RANGE)>UFULLRANGE((NI+ _NI-1)) ? ((NI+ _NI)) : ((NI+ _NI-1)))  // NEEDED NI TO AVOID OVERFLOW WHEN MULTIPLYING
-
 #define RANGEADD(NF, _NF, RANGE, _RANGE) ((NF > _NF) ? (RANGE + (_RANGE<<(NF-_NF))) : (_RANGE + (RANGE<<(_NF-NF))))  // resulting range when adding
-//#define NEEDEDNIADD(NI, NF, RANGE) (RANGE > (UFULLRANGE(NI+NF)) ? (NI+1) : (NI))  // NEEDED NI TO AVOID OVERFLOW
 #define NEEDEDNIEXTRA(NI, NF, RANGE) (RANGE > (UFULLRANGE(NI+NF)) ? (NI+1) : (RANGE > (UFULLRANGE(NI+NF-1)) ? (NI) : (NI-1)))  // NEEDED NI TO AVOID OVERFLOW, GIVEN A RANGE
-//#define NEEDEDNIMULEXTRA(NI, NF, RANGE) (RANGE > (UFULLRANGE(NI+NF)) ? (NI+1) : (RANGE > (UFULLRANGE(NI+NF-1)) ? (NI) : (NI-1))
 #define NEEDEDSNIEXTRA(NI, NF, RANGE) (RANGE > (SFULLRANGE(NI+NF)) ? (NI+1) : (RANGE > (SFULLRANGE(NI+NF-1)) ? (NI) : (NI-1)))
 #define RANGESHIFT(N,SH,RANGE) ((SH < N) ? (RANGE) : (MOZZI_SHIFTR(RANGE,(N-SH)))) // to increase the range with shifts in case NI or NF reaches 0 (we then need to increase the range)
 
@@ -303,6 +295,19 @@ public:
     typedef typename IntegerType<MozziPrivate::uBitsToBytes(NEW_NI+NF+_NF)>::unsigned_type return_type ;
     return_type tt = return_type(internal_value)*op.asRaw();
     return UFixMath<NEW_NI,(NF+_NF),RANGE*_RANGE>(tt,true);
+  }
+
+    /** Multiplication with a SFixMath. Safe.
+      @param op The SFixMath to be multiplied.
+      @return The result of the multiplication as a SFixMath.
+  */
+  template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
+  SFixMath<NEEDEDSNIEXTRA(NI+_NI, NF+_NF, RANGE*_RANGE),NF+_NF, RANGE*_RANGE> operator* (const SFixMath<_NI,_NF,_RANGE>& op) const 
+  {
+    constexpr int8_t NEW_NI = NEEDEDSNIEXTRA(NI+_NI, NF+_NF, RANGE*_RANGE);
+    typedef typename IntegerType<MozziPrivate::sBitsToBytes(NEW_NI+NF+_NF)>::signed_type return_type ;
+    return_type tt = return_type(internal_value)*op.asRaw();
+    return SFixMath<NEW_NI,(NF+_NF),RANGE*_RANGE>(tt,true);
   }
 
   /** Multiplication with another type. Unsafe.
@@ -1081,46 +1086,12 @@ inline SFixMath<NI, NF> operator-(double op, const SFixMath<NI, NF>& uf) {return
     @param op2 A UFixMath
     @return The result of the multiplication of op1 and op2. As a SFixMath
 */
-template<int8_t NI, int8_t NF, int8_t _NI, int8_t _NF>
-inline SFixMath<NI+_NI,NF+_NF> operator* (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 )
-{
-  typedef typename IntegerType< MozziPrivate::sBitsToBytes(NI+_NI+NF+_NF)>::signed_type return_type ;
-  return_type tt = return_type(op1.asRaw())*op2.asRaw();
-  return SFixMath<NI+_NI,NF+_NF>(tt,true);
-}
-
-/** Multiplication between a UFixMath and a SFixMath. Safe.
-    @param op1 A UFixMath
-    @param op2 A SFixMath
-    @return The result of the multiplication of op1 and op2. As a SFixMath
-*/
-template<int8_t NI, int8_t NF, int8_t _NI, int8_t _NF>
-inline SFixMath<NI+_NI,NF+_NF> operator* (const UFixMath<NI,NF>& op1, const SFixMath<_NI,_NF>& op2 )
+template<int8_t NI, int8_t NF, uint64_t RANGE, int8_t _NI, int8_t _NF, uint64_t _RANGE>
+inline SFixMath<NEEDEDSNIEXTRA(NI+_NI, NF+_NF, RANGE*_RANGE),NF+_NF, RANGE*_RANGE> operator* (const SFixMath<_NI,_NF,_RANGE>& op1, const UFixMath<NI,NF,RANGE>& op2)
 {
   return op2*op1;
 }
 
-
-// Addition between SFixMath and UFixMath (promotion to next SFixMath)
-
-
-/** Addition between a SFixMath and a UFixMath. Safe.
-    @param op1 A SFixMath
-    @param op2 A UFixMath
-    @return The result of the addition of op1 and op2. As a SFixMath
-*/
-/*template<int8_t NI, int8_t NF, int8_t _NI, int8_t _NF>
-inline SFixMath<NEEDEDNIEXTRA(MAX(NI,_NI),MAX(NF,_NF)> operator+ (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 )
-{
-  constexpr int8_t new_NI = MAX(NI, _NI) + 1;
-  constexpr int8_t new_NF = MAX(NF, _NF);
-    
-  typedef typename IntegerType<MozziPrivate::sBitsToBytes(new_NI+new_NF)>::signed_type return_type;
-  SFixMath<new_NI,new_NF> left(op1);
-  SFixMath<new_NI,new_NF> right(op2);
-  return_type tt = return_type(left.asRaw()) + right.asRaw();
-  return SFixMath<new_NI,new_NF>(tt,true);
-  }*/
 
 /** Addition between a SFixMath and a UFixMath. Safe.
     @param op1 A SFixMath
@@ -1133,25 +1104,6 @@ SFixMath<NEEDEDSNIEXTRA(MAX(NI,_NI),MAX(NF,_NF),RANGEADD(NF,_NF,RANGE,_RANGE)),M
   return op2+op1;
   }
 
-// Substraction between UFixMath and SFixMath
-
-/** Subtraction between a SFixMath and a UFixMath. Safe.
-    @param op1 A SFixMath
-    @param op2 A UFixMath
-    @return The result of the subtraction of op1 by op2. As a SFixMath
-*/
-/*template<int8_t NI, int8_t NF, int8_t _NI, int8_t _NF>
-inline SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> operator- (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 )
-{
-  constexpr int8_t new_NI = MAX(NI, _NI) + 1;
-  constexpr int8_t new_NF = MAX(NF, _NF);
-    
-  typedef typename IntegerType<MozziPrivate::sBitsToBytes(new_NI+new_NF)>::signed_type return_type;
-  SFixMath<new_NI,new_NF> left(op1);
-  SFixMath<new_NI,new_NF> right(op2);
-  return_type tt = return_type(left.asRaw()) - right.asRaw();
-  return SFixMath<new_NI,new_NF>(tt,true);
-  }*/
 
 /** Subtraction between a UFixMath and a SFixMath. Safe.
     @param op1 A UFixMath
@@ -1269,12 +1221,14 @@ inline SFixMath<sizeof(T)*8-1,0> toSInt(T val) {
 
 
 
-//#undef MAX
-//#undef UFULLRANGE
-//#undef NEEDEDNI
-//#undef UBITSTOBYTES
-//#undef SBITSTOBYTES
-//#undef ONESBITMASK
+#undef MAX
+#undef MIN
+#undef UFULLRANGE
+#undef SFULLRANGE
+#undef RANGEADD
+#undef NEEDEDNIEXTRA
+#undef NEEDEDSNIEXTRA
+#undef RANGESHIFT
 
 
 #endif

@@ -92,11 +92,50 @@ refer to the [API documentation](/Mozzi/doc/html/group__hardware.html) for confi
 
 ### Custom interface to external DACs or other hardware
 
-On all platforms, you can provide custom output routines, which allow you to output to anything from hand-made resistor ladders to purchased dedicated ICs. To enable this,
-take a look at the configuration options `MOZZI_OUTPUT_EXTERNAL_TIMED` and `MOZZI_OUTPUT_EXTERNAL_CUSTOM` (TODO: add link). Mozzi also ships with a whole section
-of examples for connecting to external components, including MCP4922 and PT8211 DACs (File->Examples->Mozzi->13.External_Audio_Output).
+On all platforms, you can provide custom output routines, which allow you to output to anything from hand-made resistor ladders over purchased dedicated DAC ICs to
+a bluetooth audio sink. To enable this, take a look at the configuration options `MOZZI_OUTPUT_EXTERNAL_TIMED` and `MOZZI_OUTPUT_EXTERNAL_CUSTOM` (see [API documentation](/Mozzi/doc/html/group__hardware.html)).
+Mozzi also ships with a whole section of examples for connecting to external components, including MCP4922 and PT8211 DACs (File->Examples->Mozzi->13.External_Audio_Output).
 
-TODO: Describe some circuits here, so sketches can link here.
+The basic procedure for using the two external output modes is this:
+
+```
+// before including Mozzi.h, configure external audio output mode:
+#include "MozziConfigValues.h"                        // for named option values
+#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_EXTERNAL_TIMED  // configure external mode
+#include <Mozzi.h>
+
+// [most of your sketch is as usual]
+
+// additionally provide this function.
+void audioOutput(const AudioOutput f) {
+  // put here code to output the sample encapsulated by the structure f:
+  // This holds either one (mono) or two (stereo) channels, which can be
+  // obtained using f.l() and f.r().
+  // Each contains a zero-centered integer value scaled to MOZZI_AUDIO_BITS resolution
+
+  // e.g.:
+  myDAC.write(f.l() + MOZZI_AUDIO_BIAS, f.r() + MOZZI_AUDIO_BIAS);
+}
+```
+
+The ```audioOutput()``` function in the above example will now be called at ```MOZZI_AUDIO_RATE```. In some cases, however, it will be preferrable to delegate the rate
+control elsewhere. For instance, maybe you have a library that will feed an external DAC via a hardware DMA mechanism. For such a case set the output mode to
+```MOZZI_OUTPUT_EXTERNAL_CUSTOM``` and provide an additional function ```canBufferAudioOutput()``` which should return true whenever another sample should be generated:
+
+```
+#include "MozziConfigValues.h"
+#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_EXTERNAL_CUSTOM
+#include <Mozzi.h>
+
+void audioOutput(const AudioOutput f) {
+  // e.g.:
+  myDAC.write(f.l() + MOZZI_AUDIO_BIAS, f.r() + MOZZI_AUDIO_BIAS);
+}
+
+bool canBufferAudioOutput() {
+  return (!myDAC.bufferFull());
+}
+```
 
 ## Matrix of supported platforms and output modes
 

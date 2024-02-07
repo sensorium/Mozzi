@@ -106,8 +106,8 @@ namespace MozziPrivate {
   template<typename T> constexpr T shiftR(T x, int8_t bits) {return (bits > 0 ? (x >> (bits)) : (x << (-bits)));}
   constexpr int8_t sBitsToBytes(int8_t N) { return (((N)>>3)+1);}
   constexpr int8_t uBitsToBytes(int8_t N) { return (((N-1)>>3)+1);}
-  template<typename T>  constexpr T MAX(T N1, T N2) { return (N1) > (N2) ? (N1) : (N2);}
-  template<typename T>  constexpr T MIN(T N1, T N2) { return (N1) > (N2) ? (N2) : (N1);}
+  template<typename T>  constexpr T mozziMax(T N1, T N2) { return (N1) > (N2) ? (N1) : (N2);}
+  template<typename T>  constexpr T mozziMin(T N1, T N2) { return (N1) > (N2) ? (N2) : (N1);}
   constexpr uint64_t sFullRange(int8_t N) { return uint64_t(1)<<N;}
   constexpr uint64_t uFullRange(int8_t N) { return ((uint64_t(1)<<(N-1))-1) + (uint64_t(1)<<(N-1));}
   constexpr uint64_t rangeAdd(byte NF, byte _NF, uint64_t RANGE, uint64_t _RANGE) { return ((NF > _NF) ? (RANGE + (_RANGE<<(NF-_NF))) : (_RANGE + (RANGE<<(_NF-NF))));}
@@ -183,7 +183,7 @@ public:
   */
   template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
   UFixMath(const UFixMath<_NI,_NF, _RANGE>& uf) {
-    internal_value = MozziPrivate::shiftR((typename IntegerType<MozziPrivate::uBitsToBytes(MozziPrivate::MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
+    internal_value = MozziPrivate::shiftR((typename IntegerType<MozziPrivate::uBitsToBytes(MozziPrivate::mozziMax(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
   }
 
 
@@ -194,7 +194,7 @@ public:
   */
   template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
   UFixMath(const SFixMath<_NI,_NF, _RANGE>& uf) {
-    internal_value = MozziPrivate::shiftR((typename IntegerType<MozziPrivate::uBitsToBytes(MozziPrivate::MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
+    internal_value = MozziPrivate::shiftR((typename IntegerType<MozziPrivate::uBitsToBytes(MozziPrivate::mozziMax(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
   }
 
 
@@ -205,11 +205,11 @@ public:
       @return The result of the addition as a UFixMath.
   */
    template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
-   UFixMath<MozziPrivate::neededNIExtra(MozziPrivate::MAX(NI,_NI),MozziPrivate::MAX(NF,_NF),MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)),MozziPrivate::MAX(NF, _NF), MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)> operator+ (const UFixMath<_NI,_NF,_RANGE>& op) const
+   UFixMath<MozziPrivate::neededNIExtra(MozziPrivate::mozziMax(NI,_NI),MozziPrivate::mozziMax(NF,_NF),MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)),MozziPrivate::mozziMax(NF, _NF), MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)> operator+ (const UFixMath<_NI,_NF,_RANGE>& op) const
   {
     constexpr uint64_t new_RANGE = MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE);
-    constexpr int8_t new_NI = MozziPrivate::neededNIExtra(MozziPrivate::MAX(NI,_NI),MozziPrivate::MAX(NF,_NF),new_RANGE);
-    constexpr int8_t new_NF = MozziPrivate::MAX(NF, _NF);
+    constexpr int8_t new_NI = MozziPrivate::neededNIExtra(MozziPrivate::mozziMax(NI,_NI),MozziPrivate::mozziMax(NF,_NF),new_RANGE);
+    constexpr int8_t new_NF = MozziPrivate::mozziMax(NF, _NF);
     typedef typename IntegerType<MozziPrivate::uBitsToBytes(new_NI+new_NF)>::unsigned_type return_type;
     UFixMath<new_NI,new_NF> left(*this);
     UFixMath<new_NI,new_NF> right(op);
@@ -223,11 +223,11 @@ public:
       @return The result of the addition as a SFixMath.
   */
    template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
-   SFixMath<MozziPrivate::neededSNIExtra(MozziPrivate::MAX(NI,_NI),MozziPrivate::MAX(NF,_NF),MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)),MozziPrivate::MAX(NF, _NF), MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)> operator+ (const SFixMath<_NI,_NF,_RANGE>& op) const
+   SFixMath<MozziPrivate::neededSNIExtra(MozziPrivate::mozziMax(NI,_NI),MozziPrivate::mozziMax(NF,_NF),MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)),MozziPrivate::mozziMax(NF, _NF), MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)> operator+ (const SFixMath<_NI,_NF,_RANGE>& op) const
   {
     constexpr uint64_t new_RANGE = MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE);
-    constexpr int8_t new_NI = MozziPrivate::neededSNIExtra(MozziPrivate::MAX(NI,_NI),MozziPrivate::MAX(NF,_NF),new_RANGE);
-    constexpr int8_t new_NF = MozziPrivate::MAX(NF, _NF);
+    constexpr int8_t new_NI = MozziPrivate::neededSNIExtra(MozziPrivate::mozziMax(NI,_NI),MozziPrivate::mozziMax(NF,_NF),new_RANGE);
+    constexpr int8_t new_NF = MozziPrivate::mozziMax(NF, _NF);
     typedef typename IntegerType<MozziPrivate::uBitsToBytes(new_NI+new_NF)>::signed_type return_type;
     SFixMath<new_NI,new_NF> left(*this);
     SFixMath<new_NI,new_NF> right(op);
@@ -254,17 +254,17 @@ public:
       @param op The UFixMath to be subtracted.
       @return The result of the subtraction as a SFixMath.
   */
-  template<int8_t _NI, int8_t _NF, uint64_t _RANGE> // We do not have the +1 after MozziPrivate::MAX(NI, _NI) because the substraction between two UFix should fit in the biggest of the two.
-  SFixMath<MozziPrivate::MAX(NI,_NI),MozziPrivate::MAX(NF,_NF), MozziPrivate::MAX(MozziPrivate::shiftR(RANGE,MozziPrivate::MAX(NF,_NF)-NF), MozziPrivate::shiftR(_RANGE,MozziPrivate::MAX(NF,_NF)-_NF))> operator- (const UFixMath<_NI,_NF, _RANGE>& op) const
+  template<int8_t _NI, int8_t _NF, uint64_t _RANGE> // We do not have the +1 after MozziPrivate::mozziMax(NI, _NI) because the substraction between two UFix should fit in the biggest of the two.
+  SFixMath<MozziPrivate::mozziMax(NI,_NI),MozziPrivate::mozziMax(NF,_NF), MozziPrivate::mozziMax(MozziPrivate::shiftR(RANGE,MozziPrivate::mozziMax(NF,_NF)-NF), MozziPrivate::shiftR(_RANGE,MozziPrivate::mozziMax(NF,_NF)-_NF))> operator- (const UFixMath<_NI,_NF, _RANGE>& op) const
   {
-    constexpr int8_t new_NI = MozziPrivate::MAX(NI, _NI);
-    constexpr int8_t new_NF = MozziPrivate::MAX(NF, _NF);
+    constexpr int8_t new_NI = MozziPrivate::mozziMax(NI, _NI);
+    constexpr int8_t new_NF = MozziPrivate::mozziMax(NF, _NF);
     typedef typename IntegerType<MozziPrivate::sBitsToBytes(new_NI+new_NF)>::signed_type return_type;
     SFixMath<new_NI,new_NF> left(*this);
     SFixMath<new_NI,new_NF> right(op);
 
     return_type tt = return_type(left.asRaw()) - right.asRaw();
-    return SFixMath<new_NI,new_NF,MozziPrivate::MAX(MozziPrivate::shiftR(RANGE,MozziPrivate::MAX(NF,_NF)-NF), MozziPrivate::shiftR(_RANGE,MozziPrivate::MAX(NF,_NF)-_NF))>(tt,true);
+    return SFixMath<new_NI,new_NF,MozziPrivate::mozziMax(MozziPrivate::shiftR(RANGE,MozziPrivate::mozziMax(NF,_NF)-NF), MozziPrivate::shiftR(_RANGE,MozziPrivate::mozziMax(NF,_NF)-_NF))>(tt,true);
   }
 
   #ifdef FIXMATHUNSAFE
@@ -359,7 +359,7 @@ public:
       This is still slower than a multiplication, hence the suggested workflow is to compute the inverse when time is not critical, for instance in updateControl(), and multiply it afterward, for instance in updateAudio(), if you need a division.
       @return The inverse of the number.
   */
-  UFixMath<NF,MozziPrivate::MIN(NI*2+NF,63-NF)> invAccurate() const // The MozziPrivate::MIN is just to remove compiler error when a big FixMath is instanciated but no accurate inverse is actually computed (this would be catch by the static_assert)
+  UFixMath<NF,MozziPrivate::mozziMin(NI*2+NF,63-NF)> invAccurate() const // The MozziPrivate::mozziMin is just to remove compiler error when a big FixMath is instanciated but no accurate inverse is actually computed (this would be catch by the static_assert)
   {
     static_assert(2*NI+2*NF<=63, "The accurate inverse cannot be computed for when 2*NI+2*NF>63. Reduce the number of bits.");
     return inv<NI*2+NF>();
@@ -400,9 +400,9 @@ public:
       @return The result of the shift as a UFixMath of smaller size.
   */
   template<int8_t op>
-  UFixMath<MozziPrivate::MAX(NI-op,0),NF+op, MozziPrivate::RANGESHIFT(NI,op,RANGE)> sR()
+  UFixMath<MozziPrivate::mozziMax(NI-op,0),NF+op, MozziPrivate::RANGESHIFT(NI,op,RANGE)> sR()
   {
-    return UFixMath<MozziPrivate::MAX(NI-op,0),NF+op,MozziPrivate::RANGESHIFT(NI,op,RANGE)>(internal_value,true);
+    return UFixMath<MozziPrivate::mozziMax(NI-op,0),NF+op,MozziPrivate::RANGESHIFT(NI,op,RANGE)>(internal_value,true);
   }
 
   /** Safe and optimal left shift. The returned type will be adjusted accordingly
@@ -410,9 +410,9 @@ public:
       @return The result of the shift as a UFixMath of bigger size.
   */
   template<int8_t op>
-  UFixMath<NI+op,MozziPrivate::MAX(NF-op,0),MozziPrivate::RANGESHIFT(NF,op,RANGE)> sL()
+  UFixMath<NI+op,MozziPrivate::mozziMax(NF-op,0),MozziPrivate::RANGESHIFT(NF,op,RANGE)> sL()
   {
-    return UFixMath<NI+op,MozziPrivate::MAX(NF-op,0)>(internal_value,true);
+    return UFixMath<NI+op,MozziPrivate::mozziMax(NF-op,0)>(internal_value,true);
   }
 
   
@@ -421,8 +421,8 @@ public:
   template<int8_t _NI, int8_t _NF>
   bool operator> (const UFixMath<_NI,_NF>& op) const
   {
-    constexpr int8_t new_NI = MozziPrivate::MAX(NI, _NI);
-    constexpr int8_t new_NF = MozziPrivate::MAX(NF, _NF);
+    constexpr int8_t new_NI = MozziPrivate::mozziMax(NI, _NI);
+    constexpr int8_t new_NF = MozziPrivate::mozziMax(NF, _NF);
     UFixMath<new_NI,new_NF> left(*this);
     UFixMath<new_NI,new_NF> right(op);
     return left.asRaw()>right.asRaw();
@@ -437,8 +437,8 @@ public:
   template<int8_t _NI, int8_t _NF>
   bool operator== (const UFixMath<_NI,_NF>& op) const
   {
-    constexpr int8_t new_NI = MozziPrivate::MAX(NI, _NI);
-    constexpr int8_t new_NF = MozziPrivate::MAX(NF, _NF);
+    constexpr int8_t new_NI = MozziPrivate::mozziMax(NI, _NI);
+    constexpr int8_t new_NF = MozziPrivate::mozziMax(NF, _NF);
     UFixMath<new_NI,new_NF> left(*this);
     UFixMath<new_NI,new_NF> right(op);
     return left.asRaw()==right.asRaw();
@@ -447,8 +447,8 @@ public:
   template<int8_t _NI, int8_t _NF>
   bool operator!= (const UFixMath<_NI,_NF>& op) const
   {
-    constexpr int8_t new_NI = MozziPrivate::MAX(NI, _NI);
-    constexpr int8_t new_NF = MozziPrivate::MAX(NF, _NF);
+    constexpr int8_t new_NI = MozziPrivate::mozziMax(NI, _NI);
+    constexpr int8_t new_NF = MozziPrivate::mozziMax(NF, _NF);
     UFixMath<new_NI,new_NF> left(*this);
     UFixMath<new_NI,new_NF> right(op);
     return left.asRaw()!=right.asRaw();
@@ -675,7 +675,7 @@ public:
   */
   template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
   SFixMath(const SFixMath<_NI,_NF, _RANGE>& uf) {
-    internal_value = MozziPrivate::shiftR((typename IntegerType<MozziPrivate::sBitsToBytes(MozziPrivate::MAX(NI+NF,_NI+_NF))>::signed_type) uf.asRaw(),(_NF-NF));
+    internal_value = MozziPrivate::shiftR((typename IntegerType<MozziPrivate::sBitsToBytes(MozziPrivate::mozziMax(NI+NF,_NI+_NF))>::signed_type) uf.asRaw(),(_NF-NF));
     
   }
 
@@ -685,7 +685,7 @@ public:
   */
   template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
   SFixMath(const UFixMath<_NI,_NF, _RANGE>& uf) {
-    internal_value = MozziPrivate::shiftR((typename IntegerType<MozziPrivate::uBitsToBytes(MozziPrivate::MAX(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
+    internal_value = MozziPrivate::shiftR((typename IntegerType<MozziPrivate::uBitsToBytes(MozziPrivate::mozziMax(NI+NF,_NI+_NF))>::unsigned_type) uf.asRaw(),(_NF-NF));
   }
 
   //////// ADDITION OVERLOADS
@@ -695,11 +695,11 @@ public:
       @return The result of the addition as a SFixMath.
   */
   template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
-  SFixMath<MozziPrivate::neededSNIExtra(MozziPrivate::MAX(NI,_NI),MozziPrivate::MAX(NF,_NF),MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)),MozziPrivate::MAX(NF, _NF), MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)> operator+ (const SFixMath<_NI,_NF,_RANGE>& op) const
+  SFixMath<MozziPrivate::neededSNIExtra(MozziPrivate::mozziMax(NI,_NI),MozziPrivate::mozziMax(NF,_NF),MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)),MozziPrivate::mozziMax(NF, _NF), MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)> operator+ (const SFixMath<_NI,_NF,_RANGE>& op) const
   {
     constexpr uint64_t new_RANGE = MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE);
-    constexpr int8_t new_NI = MozziPrivate::neededSNIExtra(MozziPrivate::MAX(NI,_NI),MozziPrivate::MAX(NF,_NF),new_RANGE);
-    constexpr int8_t new_NF = MozziPrivate::MAX(NF, _NF);
+    constexpr int8_t new_NI = MozziPrivate::neededSNIExtra(MozziPrivate::mozziMax(NI,_NI),MozziPrivate::mozziMax(NF,_NF),new_RANGE);
+    constexpr int8_t new_NF = MozziPrivate::mozziMax(NF, _NF);
     typedef typename IntegerType<MozziPrivate::sBitsToBytes(new_NI+new_NF)>::signed_type return_type;
     SFixMath<new_NI,new_NF> left(*this);
     SFixMath<new_NI,new_NF> right(op);
@@ -727,11 +727,11 @@ public:
       @return The result of the subtraction as a SFixMath.
   */ 
   template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
-  SFixMath<MozziPrivate::neededSNIExtra(MozziPrivate::MAX(NI,_NI),MozziPrivate::MAX(NF,_NF),MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)),MozziPrivate::MAX(NF, _NF), MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)> operator- (const SFixMath<_NI,_NF, _RANGE>& op) const
+  SFixMath<MozziPrivate::neededSNIExtra(MozziPrivate::mozziMax(NI,_NI),MozziPrivate::mozziMax(NF,_NF),MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)),MozziPrivate::mozziMax(NF, _NF), MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)> operator- (const SFixMath<_NI,_NF, _RANGE>& op) const
   {
     constexpr uint64_t new_RANGE = MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE);
-    constexpr int8_t new_NI = MozziPrivate::neededSNIExtra(MozziPrivate::MAX(NI,_NI),MozziPrivate::MAX(NF,_NF),new_RANGE);
-    constexpr int8_t new_NF = MozziPrivate::MAX(NF, _NF);
+    constexpr int8_t new_NI = MozziPrivate::neededSNIExtra(MozziPrivate::mozziMax(NI,_NI),MozziPrivate::mozziMax(NF,_NF),new_RANGE);
+    constexpr int8_t new_NF = MozziPrivate::mozziMax(NF, _NF);
     typedef typename IntegerType<MozziPrivate::sBitsToBytes(new_NI+new_NF)>::signed_type return_type;
     SFixMath<new_NI,new_NF> left(*this);
     SFixMath<new_NI,new_NF> right(op);
@@ -744,11 +744,11 @@ public:
       @return The result of the subtraction as a SFixMath.
   */ 
   template<int8_t _NI, int8_t _NF, uint64_t _RANGE>
-  SFixMath<MozziPrivate::neededSNIExtra(MozziPrivate::MAX(NI,_NI),MozziPrivate::MAX(NF,_NF),MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)),MozziPrivate::MAX(NF, _NF), MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)> operator- (const UFixMath<_NI,_NF, _RANGE>& op) const
+  SFixMath<MozziPrivate::neededSNIExtra(MozziPrivate::mozziMax(NI,_NI),MozziPrivate::mozziMax(NF,_NF),MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)),MozziPrivate::mozziMax(NF, _NF), MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)> operator- (const UFixMath<_NI,_NF, _RANGE>& op) const
   {
     constexpr uint64_t new_RANGE = MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE);
-    constexpr int8_t new_NI = MozziPrivate::neededSNIExtra(MozziPrivate::MAX(NI,_NI),MozziPrivate::MAX(NF,_NF),new_RANGE);
-    constexpr int8_t new_NF = MozziPrivate::MAX(NF, _NF);
+    constexpr int8_t new_NI = MozziPrivate::neededSNIExtra(MozziPrivate::mozziMax(NI,_NI),MozziPrivate::mozziMax(NF,_NF),new_RANGE);
+    constexpr int8_t new_NF = MozziPrivate::mozziMax(NF, _NF);
     typedef typename IntegerType<MozziPrivate::sBitsToBytes(new_NI+new_NF)>::signed_type return_type;
     SFixMath<new_NI,new_NF> left(*this);
     SFixMath<new_NI,new_NF> right(op);
@@ -834,7 +834,7 @@ public:
       This is still slower than a multiplication, hence the suggested workflow is to compute the inverse when time is not critical, for instance in updateControl(), and multiply it afterward, for instance in updateAudio(), if you need a division.
       @return The inverse of the number.
   */
-  SFixMath<NF,MozziPrivate::MIN(NI*2+NF,62-NF)> invAccurate() const
+  SFixMath<NF,MozziPrivate::mozziMin(NI*2+NF,62-NF)> invAccurate() const
   {
     return inv<NI*2+NF>();
     }
@@ -869,9 +869,9 @@ public:
       @return The result of the shift as a UFixMath of smaller size.
   */
   template<int8_t op>
-  SFixMath<MozziPrivate::MAX(NI-op,0), NF+op, MozziPrivate::RANGESHIFT(NI,op,RANGE)> sR()
+  SFixMath<MozziPrivate::mozziMax(NI-op,0), NF+op, MozziPrivate::RANGESHIFT(NI,op,RANGE)> sR()
   {
-    return SFixMath<MozziPrivate::MAX(NI-op,0),NF+op,MozziPrivate::RANGESHIFT(NI,op,RANGE)>(internal_value,true);
+    return SFixMath<MozziPrivate::mozziMax(NI-op,0),NF+op,MozziPrivate::RANGESHIFT(NI,op,RANGE)>(internal_value,true);
   }
 
   /** Safe and optimal left shift. The returned type will be adjusted accordingly
@@ -879,9 +879,9 @@ public:
       @return The result of the shift as a UFixMath of bigger size.
   */
 template<int8_t op>
-  SFixMath<NI+op,MozziPrivate::MAX(NF-op,0),MozziPrivate::RANGESHIFT(NF,op,RANGE)> sL()
+  SFixMath<NI+op,MozziPrivate::mozziMax(NF-op,0),MozziPrivate::RANGESHIFT(NF,op,RANGE)> sL()
   {
-    return SFixMath<NI+op,MozziPrivate::MAX(NF-op,0)>(internal_value,true);
+    return SFixMath<NI+op,MozziPrivate::mozziMax(NF-op,0)>(internal_value,true);
   }
 
 
@@ -890,8 +890,8 @@ template<int8_t op>
   template<int8_t _NI, int8_t _NF>
   bool operator> (const SFixMath<_NI,_NF>& op) const
   {
-    constexpr int8_t new_NI = MozziPrivate::MAX(NI, _NI);
-    constexpr int8_t new_NF = MozziPrivate::MAX(NF, _NF);
+    constexpr int8_t new_NI = MozziPrivate::mozziMax(NI, _NI);
+    constexpr int8_t new_NF = MozziPrivate::mozziMax(NF, _NF);
     SFixMath<new_NI,new_NF> left(*this);
     SFixMath<new_NI,new_NF> right(op);
     return left.asRaw()>right.asRaw();
@@ -906,8 +906,8 @@ template<int8_t op>
   template<int8_t _NI, int8_t _NF>
   bool operator== (const SFixMath<_NI,_NF>& op) const
   {
-    constexpr int8_t new_NI = MozziPrivate::MAX(NI, _NI);
-    constexpr int8_t new_NF = MozziPrivate::MAX(NF, _NF);
+    constexpr int8_t new_NI = MozziPrivate::mozziMax(NI, _NI);
+    constexpr int8_t new_NF = MozziPrivate::mozziMax(NF, _NF);
     SFixMath<new_NI,new_NF> left(*this);
     SFixMath<new_NI,new_NF> right(op);
     return left.asRaw()==right.asRaw();
@@ -916,8 +916,8 @@ template<int8_t op>
   template<int8_t _NI, int8_t _NF>
   bool operator!= (const SFixMath<_NI,_NF>& op) const
   {
-    constexpr int8_t new_NI = MozziPrivate::MAX(NI, _NI);
-    constexpr int8_t new_NF = MozziPrivate::MAX(NF, _NF);
+    constexpr int8_t new_NI = MozziPrivate::mozziMax(NI, _NI);
+    constexpr int8_t new_NF = MozziPrivate::mozziMax(NF, _NF);
     SFixMath<new_NI,new_NF> left(*this);
     SFixMath<new_NI,new_NF> right(op);
     return left.asRaw()!=right.asRaw();
@@ -1069,7 +1069,7 @@ inline SFixMath<NI, NF> operator-(double op, const SFixMath<NI, NF>& uf) {return
     @return The result of the addition of op1 and op2. As a SFixMath
 */
 template<int8_t NI, int8_t NF, uint64_t RANGE, int8_t _NI, int8_t _NF, uint64_t _RANGE>
-inline SFixMath<MozziPrivate::neededSNIExtra(MozziPrivate::MAX(NI,_NI),MozziPrivate::MAX(NF,_NF),MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)),MozziPrivate::MAX(NF, _NF), MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)> operator+ (const SFixMath<NI,NF,RANGE>& op1, const UFixMath<_NI,_NF,_RANGE>& op2 )
+inline SFixMath<MozziPrivate::neededSNIExtra(MozziPrivate::mozziMax(NI,_NI),MozziPrivate::mozziMax(NF,_NF),MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)),MozziPrivate::mozziMax(NF, _NF), MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)> operator+ (const SFixMath<NI,NF,RANGE>& op1, const UFixMath<_NI,_NF,_RANGE>& op2 )
 {
   return op2+op1;
   }
@@ -1081,7 +1081,7 @@ inline SFixMath<MozziPrivate::neededSNIExtra(MozziPrivate::MAX(NI,_NI),MozziPriv
     @return The result of the subtraction of op1 by op2. As a SFixMath
 */
 template<int8_t NI, int8_t NF, uint64_t RANGE, int8_t _NI, int8_t _NF, uint64_t _RANGE>
-inline SFixMath<MozziPrivate::neededSNIExtra(MozziPrivate::MAX(NI,_NI),MozziPrivate::MAX(NF,_NF),MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)),MozziPrivate::MAX(NF, _NF), MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)> operator- (const UFixMath<NI,NF, RANGE>& op1, const SFixMath<_NI,_NF, _RANGE>& op2)
+inline SFixMath<MozziPrivate::neededSNIExtra(MozziPrivate::mozziMax(NI,_NI),MozziPrivate::mozziMax(NF,_NF),MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)),MozziPrivate::mozziMax(NF, _NF), MozziPrivate::rangeAdd(NF,_NF,RANGE,_RANGE)> operator- (const UFixMath<NI,NF, RANGE>& op1, const SFixMath<_NI,_NF, _RANGE>& op2)
 {
   return -op2+op1;
   }
@@ -1103,8 +1103,8 @@ inline SFixMath<MozziPrivate::neededSNIExtra(NI+_NI, NF+_NF, RANGE*_RANGE),NF+_N
 template<int8_t NI, int8_t NF, int8_t _NI, int8_t _NF>
 inline bool operator> (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 )
 {
-  constexpr int8_t new_NI = MozziPrivate::MAX(NI, _NI);
-  constexpr int8_t new_NF = MozziPrivate::MAX(NF, _NF);    
+  constexpr int8_t new_NI = MozziPrivate::mozziMax(NI, _NI);
+  constexpr int8_t new_NF = MozziPrivate::mozziMax(NF, _NF);    
   SFixMath<new_NI,new_NF> left(op1);
   SFixMath<new_NI,new_NF> right(op2);
   return left.asRaw() > right.asRaw();
@@ -1113,8 +1113,8 @@ inline bool operator> (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 
 template<int8_t NI, int8_t NF, int8_t _NI, int8_t _NF>
 inline bool operator> (const UFixMath<NI,NF>& op1, const SFixMath<_NI,_NF>& op2 )
 {
-  constexpr int8_t new_NI = MozziPrivate::MAX(NI, _NI);
-  constexpr int8_t new_NF = MozziPrivate::MAX(NF, _NF);    
+  constexpr int8_t new_NI = MozziPrivate::mozziMax(NI, _NI);
+  constexpr int8_t new_NF = MozziPrivate::mozziMax(NF, _NF);    
   SFixMath<new_NI,new_NF> left(op1);
   SFixMath<new_NI,new_NF> right(op2);
   return left.asRaw() > right.asRaw();
@@ -1137,8 +1137,8 @@ inline bool operator< (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 
 template<int8_t NI, int8_t NF, int8_t _NI, int8_t _NF>
 inline bool operator== (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 )
 {
-  constexpr int8_t new_NI = MozziPrivate::MAX(NI, _NI);
-  constexpr int8_t new_NF = MozziPrivate::MAX(NF, _NF);    
+  constexpr int8_t new_NI = MozziPrivate::mozziMax(NI, _NI);
+  constexpr int8_t new_NF = MozziPrivate::mozziMax(NF, _NF);    
   SFixMath<new_NI,new_NF> left(op1);
   SFixMath<new_NI,new_NF> right(op2);
   return left.asRaw() == right.asRaw();
@@ -1153,8 +1153,8 @@ inline bool operator== (const UFixMath<NI,NF>& op1, const SFixMath<_NI,_NF>& op2
 template<int8_t NI, int8_t NF, int8_t _NI, int8_t _NF>
 inline bool operator!= (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 )
 {
-  constexpr int8_t new_NI = MozziPrivate::MAX(NI, _NI);
-  constexpr int8_t new_NF = MozziPrivate::MAX(NF, _NF);    
+  constexpr int8_t new_NI = MozziPrivate::mozziMax(NI, _NI);
+  constexpr int8_t new_NF = MozziPrivate::mozziMax(NF, _NF);    
   SFixMath<new_NI,new_NF> left(op1);
   SFixMath<new_NI,new_NF> right(op2);
   return left.asRaw() != right.asRaw();

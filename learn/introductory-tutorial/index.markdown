@@ -28,6 +28,11 @@ Audio socket
 Audio cable  
 USB cable    
 
+WARNING: This tutorial assumes working with a classic 5V Arduino Nano (V3.0). For other boards, the placement of the pins
+may be vastly different. Also, be aware that other boards may require other voltages (e.g., only 3.3V), and following
+these instructions, blindly, could easily destroy them.
+{: .notice--danger}
+
 ---
 
 ## 2. Arduino
@@ -39,7 +44,7 @@ _Figure 2: Nano on breadboard_
 
 ![Nano](images/fig2.jpg "Figure 2: Nano on breadboard")
 
-* Download the [Arduino application](https://www.arduino.cc), version 1.0.5 or better.
+* Download the [Arduino application](https://www.arduino.cc).
 * Download and install [FTDI drivers](https://www.ftdichip.com/Drivers/VCP.htm) so Arduino can access the USB port.
 * Start the Arduino application and set it up for a Nano clone.
 _Arduino➞Tools➞Board➞Arduino Nano w/ Atmega 328_
@@ -59,10 +64,12 @@ Edit the code to make the light blink twice as fast by changing the delay from 1
 
 OK - now the Arduino is working we are ready to install Mozzi.
 
-* [Download Mozzi](https://sensorium.github.io/Mozzi/) from Github.
-* Now let's import Mozzi into the Arduino system.  
-Go _Arduino➞Sketch➞Import Library➞Add Library_ and select the Mozzi.zip file from your Downloads folder.
-* You should now be able to see Mozzi in the list under
+* The easiest installation option nowadays is to install Mozzi via the Library Manager in your Arduino application: 
+  _Arduino➞Sketch➞Include Library➞Library Manager_ type "Mozzi" into the search field, then click "install".
+* If you want the latest and greatest development version of Mozzi, instead, you can get [Mozzi from Github](https://sensorium.github.io/Mozzi/).
+  The are a lot of step-by-step tutorials on how to install directly from Github on the internet, but be prepared
+  that the procedure is slightly more involved.
+* Using either installation method, you should now be able to see Mozzi in the list under
 _Arduino➞Sketch➞Import Library_.
 
 ---
@@ -87,7 +94,7 @@ _Figure 3: 5V and GND pins connected to +V and -V rails_
 * Unplug the USB cable (!)  
 * Push a black wire into __b14__ which is __GND__ on the Nano.   
 * Push the other end into the __-V__ rail on the left of the board at row __14__.  
-*  Push another black wire into the top of the left hand __-V__ rail  and connect it across the board to the top of the right hand  __-V__ rail.  
+* Push another black wire into the top of the left hand __-V__ rail  and connect it across the board to the top of the right hand  __-V__ rail.  
 * Push a red wire into __b12__ that connects to the __5V__ pin on the Nano.
 * Push the other end into the left  __+V__ rail at row __14__.
 * Push another red wire into the top left  __+V__ rail and connect it to the top of the right  __+V__ rail.
@@ -115,8 +122,13 @@ In Audacity,
 
 * set the _Input_ to __Built-in Input, 1 (Mono)__.
 * in the _Project Rate (Hz)_ box, type __16384__.  This is Mozzi's sample rate and will help show your waveforms clearly, otherwise they'll appear as scrambled, aliased Pulse Width Modulated square waves.
+  (only applicable to classic Arduino boards).
 
 Some new laptops have a single audio socket that requires a 4-pole audio input cable. If you don't have the cable then just listen to the audio through headphones which will be a bit noisy but good enough for learning….  
+
+WARNING: Directly attaching a headphone will not work with all boards, and could destroy your MCU, if you exceed the current rating of the output pins. Using a simple (high input impedance) headphone
+amplifier or an _active_ speaker is generally a safer choice.
+{: .notice--danger}
 
 ---
 

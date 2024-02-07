@@ -14,12 +14,12 @@ sketches doing it without Mozzi, but it gives the gist of how a
 Mozzi sketch works. You don't need much experience with
 Arduino or programming.  
 
-First `#include <MozziGuts.h>`. You always need this, as well as headers for any
+First `#include <Mozzi.h>`. You always need this, as well as headers for any
 Mozzi classes, modules or tables used in the sketch.  This time we'll have an oscillator
 and a wavetable for the oscillator to play:
 
 {% highlight c++ %}
-#include <MozziGuts.h> // this makes everything work
+#include <Mozzi.h> // this makes everything work
 #include <Oscil.h>  // a template for an oscillator
 #include <tables/sin2048_int8.h>  // a wavetable holding a sine wave
 {% endhighlight %}
@@ -38,32 +38,23 @@ same operations over and over while the program runs.
 
 The table used by an `Oscil` needs to be a power of two, typically at least 256
 cells and preferably longer for lower aliasing noise. This Oscil will be
-operating as an audio generator, so the update rate will be `AUDIO_RATE`. The
+operating as an audio generator, so the update rate will be `MOZZI_AUDIO_RATE`. The
 `table_data` is an array which you can find the name of in the table file included
 at the top of the sketch.  If you look in Mozzi/tables/sin2048_int8.h, you'll find `SIN2048_DATA`.
 
 So, an audio sine tone oscillator for our sketch is created like this:
 
 {% highlight c++ %}
-Oscil <2048, AUDIO_RATE> aSin(SIN2048_DATA);
-{% endhighlight %}
-
-The `CONTROL_RATE` has a default value of 64, but you can change it if you want
-control updates to happen more frequently. Like the audio rate, it must be a
-literal number and power of two to allow Mozzi to optimise internal calculations
-for run-time speed.
-
-{% highlight c++ %}
-#define CONTROL_RATE 128
+Oscil <2048, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 {% endhighlight %}
 
 Now to the program functions.  In Arduino's `setup()` routine goes:
 
 {% highlight c++ %}
-startMozzi(CONTROL_RATE);
+startMozzi();
 {% endhighlight %}
 
-This sets up one timer to call `updateControl()` at the rate chosen and another
+This sets up one timer to call `updateControl()` at the default rate of 64 Hz, and another
 timer which works behind the scenes to send audio samples to the output pin at
 the fixed rate of 16384 Hz.
 
@@ -77,7 +68,7 @@ Now Arduino's `setup()` function looks like this:
 
 {% highlight c++ %}
 void setup(){
-	startMozzi(CONTROL_RATE);
+	startMozzi();
 	aSin.setFreq(440);
 }
 {% endhighlight %}
@@ -85,17 +76,24 @@ void setup(){
 The next parts of the sketch are `updateControl()` and `updateAudio()`, which
 are both required. In this example the frequency has already been set and the
 oscillator just needs to be run in `updateAudio()`, using the Oscil's `next()`
-method which returns a signed 8 bit value from the oscillator's wavetable. The
-`int` return value of `updateAudio()` must be in the range -244 to 243 in Mozzi's
-default `STANDARD` audio mode.
+method which returns a signed 8 bit value from the oscillator's wavetable. In
+this example, the`AudioOutput_t` return value of `updateAudio()` is really just
+a zero-centered integer, but could also be configured to hold a stereo sample.
+
+When working with an Arduino Uno/Nano/Pro Mini in the default mode, the output
+range may be in the range of -244 to 243, but this differs for different boards
+and configurations. To scale the value appropriately in all cases, use
+'MonoOutput::from8Bit()' on the 8 bit value coming from the Oscil. (In case you
+are wondering, this simply performs an appropriate left or right shift operation,
+so it's very fast).
 
 {% highlight c++ %}
 void updateControl(){
 	// no controls being changed
 }
 
-int updateAudio(){
-	return aSin.next();
+AudioOutput_t updateAudio(){
+	return MonoOutput::from8bit(aSin.next());
 }
 {% endhighlight %}
 Finally, `audioHook()` goes in Arduino's `loop()`.
@@ -118,23 +116,22 @@ efficiently interpolated with a `Line` object in `updateAudio()` if necessary.
 Here's the whole sketch:
 
 {% highlight c++ %}
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/sin2048_int8.h>
 
-#define CONTROL_RATE 128
-Oscil <2048, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <2048, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 void setup(){
 	aSin.setFreq(440);
-	startMozzi(CONTROL_RATE);
+	startMozzi();
 }
 
 void updateControl(){
 }
 
-int updateAudio(){
-	return aSin.next();
+AudioOutput_t updateAudio(){
+	return MonoOutput::from8Bit(aSin.next());
 }
 
 void loop(){
@@ -147,12 +144,23 @@ void loop(){
 
 Vibrato can be added to the sketch by periodically changing the frequency of the
 audio wave with a low frequency oscillator. The new oscillator can use the same
-wave table but this time it's set up to update at control rate. The
-naming convention of using a prefix of `k` for control and `a` for audio rate units
+wave table but this time it's set up to update at control rate. For a smoother sound,
+we increase the rate at which `updateControl()` is called, by defining the configuration option
+`MOZZI_CONTROL_RATE` as 128 (Hz) rather than the default of 64. Like the audio rate, this must be a
+literal number and power of two to allow Mozzi to optimise internal calculations
+for run-time speed. Also, like all configuration options, it needs to be set at the
+top of the sketch, _before_ the Mozzi includes:
+
+{% highlight c++ %}
+#define MOZZI_CONTROL_RATE 128
+#include <Mozzi.h>
+{% endhighlight %}
+
+The naming convention of using a prefix of `k` for control and `a` for audio rate units
 is a personal mnemonic, influenced by Csound.
 
 {% highlight c++ %}
-Oscil <2048, CONTROL_RATE> kVib(SIN2048_DATA);
+Oscil <2048, MOZZI_CONTROL_RATE> kVib(SIN2048_DATA);
 {% endhighlight %}
 
 This time the frequency can be set with a floating point value:
@@ -176,20 +184,20 @@ void updateControl(){
 Here's the modified sketch complete with vibrato:
 
 {% highlight c++ %}
-#include <MozziGuts.h>
+#define MOZZI_CONTROL_RATE 128
+#include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/sin2048_int8.h>
 
-#define CONTROL_RATE 128
-Oscil <2048, AUDIO_RATE> aSin(SIN2048_DATA);
-Oscil <2048, CONTROL_RATE> kVib(SIN2048_DATA);
+Oscil <2048, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <2048, MOZZI_CONTROL_RATE> kVib(SIN2048_DATA);
 
 float centre_freq = 440.0;
 float depth = 0.25;
 
 void setup(){
 	kVib.setFreq(6.5f);
-	startMozzi(CONTROL_RATE);
+	startMozzi(MOZZI_CONTROL_RATE);
 }
 
 void updateControl(){
@@ -197,8 +205,8 @@ void updateControl(){
 	aSin.setFreq(centre_freq+vibrato);
 }
 
-int updateAudio(){
-	return aSin.next();
+AudioOutput_t updateAudio(){
+	return MonoOutput::from8Bit(aSin.next());
 }
 
 void loop(){

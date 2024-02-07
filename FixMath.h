@@ -442,8 +442,14 @@ public:
     UFixMath<new_NI,new_NF> right(op);
     return left.asRaw()!=right.asRaw();
   }
-
-
+  
+  /** Returns the number as a SFixMath of same range and precision. This is more optimized than a cast.
+      @return a SFixMath 
+  */
+  SFixMath<NI,NF,RANGE> asSFix()
+  {
+    return SFixMath<NI,NF,RANGE>(internal_value,true);
+  }
 
   /** Returns the value as floating point number.
       @return The floating point value.
@@ -904,6 +910,15 @@ template<int8_t op>
     SFixMath<new_NI,new_NF> left(*this);
     SFixMath<new_NI,new_NF> right(op);
     return left.asRaw()!=right.asRaw();
+  }
+
+
+  /** Returns the number as a UFixMath of same (positive) range and precision. The initial value has to be positive to return something correct. This is more optimized than a cast.
+      @return a UFixMath 
+  */
+  UFixMath<NI,NF,RANGE> asUFix()
+  {
+    return UFixMath<NI,NF,RANGE>(internal_value,true);
   }
   
 

@@ -61,7 +61,8 @@ Your browser does not support the audio element. </audio>
 -    Available for a wide and growing range of MCUs, with and without inbuilt DACs: Arduino Uno R3 and R4, STM32, Teensy, ESP8266, ESP32, Raspberry Pi Pico, and more.
 -    Configurable sample rate, usually in powers of two (16384 Hz, 32768 Hz, 64536 Ht).
 -    Variable control rate from 64 Hz upwards.
--    Various output modes, including 16 bit output to an external DAC.
+-    Various inbuilt output modes, including 16 bit output to an external DAC.
+-    Allows interfacing to custom output routines, with examples for playing audio on external DAC modules, and even bluetooth.
 -    Useful basic audio toolkit: oscillators, samples, lines, envelopes, scheduling, filtering.
 -    Fast ADC and other cpu-efficient code utilities to help keep audio running smoothly.
 -    Example sketches for easy modification.

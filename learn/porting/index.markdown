@@ -21,7 +21,7 @@ at the top of your sketch (above any other Mozzi headers).
 
 ### All sketches must include Mozzi.h (instead of MozziGuts.h)
 
-In you sketches, replace ```#include <MozziGuts.h>``` with ```#include <Mozzi.h>```. While this adjustment is not currently strictly required, MozziGuts.h may be removed some
+In your sketches, replace ```#include <MozziGuts.h>``` with ```#include <Mozzi.h>```. While this adjustment is not currently strictly required, MozziGuts.h may be removed some
 time in the future. Also, when you include MozziGuts.h rather than Mozzi.h, the code will assume that your sketch has not been ported, yet, and will omit a few
 (currently only minor) optimizations in favour of backwards compatibilty.
 
@@ -106,10 +106,10 @@ Renamed to ```IS_STM32MAPLE()```, in order to avoid confusion with ```IS_STM32DU
 
 ## Older changes (that should have happened before Mozzi 1.1, but might still be missing in really old code)
 
-### updateAudio() shall return AudioOutput_t
+### updateAudio() shall return AudioOutput
 
-Formerly, ```updateAudio()``` was expected to return ```int```. Instead it shall now return ```AudioOutput_t``` (which, in many cases is the same as ```int```, but
-not, for example, in stereo mode).
+Formerly, ```updateAudio()``` was expected to return ```int```, and as a transitory step ```AudioOutput_t```. Instead it shall now return ```AudioOutput```
+(which, depending on mono or stereo being configured, is an alias to either MonoOutput or StereoOutput).
 
 ### Scale audio output
 

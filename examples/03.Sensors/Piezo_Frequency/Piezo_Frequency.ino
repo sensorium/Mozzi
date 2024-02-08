@@ -27,7 +27,7 @@
 */
 
 // increase the rate of updateControl from the default of 64, to catch the piezo's rapid transients
-#define MOZZI_CONTROL_RATE 150
+#define MOZZI_CONTROL_RATE 128
 #include <Mozzi.h>
 #include <Oscil.h> // oscillator
 #include <tables/sin2048_int8.h> // table for Oscils to play
@@ -41,8 +41,8 @@ Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 void setup(){
   //Serial.begin(9600); // for Teensy 3.1, beware printout can cause glitches
-  Serial.begin(115200); // set up the Serial output so we can look at the piezo values // set up the Serial output so we can look at the piezo values
-  startMozzi(); // :)) use the control rate defined above
+  Serial.begin(115200); // set up the Serial output so we can look at the piezo values
+  startMozzi(); // :)) uses the control rate defined above
 }
 
 

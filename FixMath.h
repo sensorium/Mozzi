@@ -17,43 +17,68 @@
     signed (SFixMath) or unsigned (UFixMath).
 
     A fixed point number has its range defined by the number of bits encoding the integer part (NI 
-    in the following) and its precision by the number of bits encoding the fractional part (NF). For UFixMath types, the integral part can hold values in [0,2^NI-1], for SFixMath types, the integral part can hold values in [-2^NI,2^NI-1].
+    in the following) and its precision by the number of bits encoding the fractional part (NF). For UFixMath types, the integral part can hold values in [0,2^NI-1], for SFixMath types, the integral part can hold values in [-2^NI,2^NI-1]. The number of bits encoding the fractional can be considered as the precision of the number: given NF, the number of possible values in the  [0,1[ range will 2^NF. Hence, given NF, the resolution will be 1/(2^NF).
+
+    Under the hood, these types will keep track of the maximum possible value they might hold (this is the RANGE template parameter), and, if only *SAFE* operations (see below) are used, will automatically adjust there NI and NF to accomodate the result of a operation. It will also try not to promote there internal type when possible, assuming that you use the complete range of a given type.
+
+    The operations possible with these types can be divided into two categories:
+    - the operations between FixMath types are all safe (aka won't overflow) and are the only one included by default
+    - the operations between a FixMath and a native C type (int, float) are NOT safe and are not included by default. In order to activate them, you need to `#define FIXMATHUNSAFE` before including FixMath.h.
+
 
     Like standard C(++) types, the fixed point numbers defined here are following some rules:
     - any fixed type can be converted to another *as long as the value can be represented in the destination type*. Casting to a bigger type in term of NI and NF is safe, but reducing NI can lead to an overflow if the new type cannot hold the integer value and reducing NF leads to a loss of precision.
+    - Fixed types can be constructed from and converted to standard C types.
     - all operations between fixed point number is safe (it won't overflow) and preserve the precision. In particular:
-    - only addition, subtraction and multiplication are implemented
+    - only addition, subtraction and multiplication are implemented (this is a design choice, see below)
     - any operation between a signed and an unsigned leads to a signed number
     - resulting numbers will be casted to a type big enough to store the expected values. It follows that it is worth starting with types that are as small as possible to hold the initial value.
-    - all operations between a fixed point number and a native type (int, float, uint) are *not* safe. If the resulting value cannot be represented in the fixed point type it will overflow. Only addition, subtraction, multiplication and right/left shift are implemented.
-    - safe right/left shifts, which return the correct value in the correct type are implemented as .sR<shift>() and .sL<shift>() respectively, shift being the shifting amount. These shifts are basically on
+    - all operations between a fixed point number and a native type (int, float, uint) are *not* safe. If the resulting value cannot be represented in the fixed point type it will overflow. Only addition, subtraction, multiplication and right/left shift are implemented. These are only accessible activating the `FIXMATHUNSAFE` set.
+    - safe right/left shifts, which return the correct value in the correct type are implemented as .sR<shift>() and .sL<shift>() respectively, shift being the shifting amount.
 
     More specifically on the returned types of the operations between fixed point math types:
     - Additions:
-    - UFixMath<NI,NF> + UFixMath<_NI,_NF> returns UFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)>
-    - SFixMath<NI,NF> + SFixMath<_NI,_NF> returns SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)>
-    - UFixMath<NI,NF> + SFixMath<_NI,_NF> returns SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)>
-    - UFixMath<NI,NF> + anything_else returns UFixMath<NI,NF>
-    - SFixMath<NI,NF> + anything_else returns SFixMath<NI,NF>
+      - UFixMath<NI,NF> + UFixMath<_NI,_NF> returns UFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> at worse
+      - SFixMath<NI,NF> + SFixMath<_NI,_NF> returns SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> at worse
+      - UFixMath<NI,NF> + SFixMath<_NI,_NF> returns SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> at worse
+      - UFixMath<NI,NF> + anything_else returns UFixMath<NI,NF> (only available with `FIXMATHUNSAFE`)
+      - SFixMath<NI,NF> + anything_else returns SFixMath<NI,NF> (only available with `FIXMATHUNSAFE`)
     - Subtractions:
-    - UFixMath<NI,NF> - UFixMath<_NI,_NF> returns SFixMath<MAX(NI,_NI),MAX(NF,_NF)>
-    - SFixMath<NI,NF> - SFixMath<_NI,_NF> returns SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)>
-    - SFixMath<NI,NF> - UFixMath<_NI,_NF> returns SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)>
-    - UFixMath<NI,NF> - anything_else returns UFixMath<NI,NF>
-    - SFixMath<NI,NF> - anything_else returns SFixMath<NI,NF>
-    - (-)SFixMath<NI,NF> return SFixMath<NI,NF>
-    - (-)UFixMath<NI,NF> return SFixMath<NI,NF>
+      - UFixMath<NI,NF> - UFixMath<_NI,_NF> returns SFixMath<MAX(NI,_NI),MAX(NF,_NF)> at worse
+      - SFixMath<NI,NF> - SFixMath<_NI,_NF> returns SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> at worse
+      - SFixMath<NI,NF> - UFixMath<_NI,_NF> returns SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> at worse
+      - UFixMath<NI,NF> - anything_else returns UFixMath<NI,NF> (only available with `FIXMATHUNSAFE`)
+      - SFixMath<NI,NF> - anything_else returns SFixMath<NI,NF> (only available with `FIXMATHUNSAFE`)
+      - (-)SFixMath<NI,NF> return SFixMath<NI,NF>
+      - (-)UFixMath<NI,NF> return SFixMath<NI,NF>
     - Multiplications:
-    - UFixMath<NI,NF> * UFixMath<_NI,_NF> returns UFixMath<NI+_NI,NF+_NF>
-    - UFixMath<NI,NF> * SFixMath<_NI,_NF> returns SFixMath<NI+_NI,NF+_NF>
-    - SFixMath<NI,NF> * SFixMath<_NI,_NF> returns SFixMath<NI+_NI,NF+_NF>
-    - UFixMath<NI,NF> * anything_else returns UFixMath<NI,NF>
-    - SFixMath<NI,NF> * anything_else returns SFixMath<NI,NF>
+      - UFixMath<NI,NF> * UFixMath<_NI,_NF> returns UFixMath<NI+_NI,NF+_NF> at worse
+      - UFixMath<NI,NF> * SFixMath<_NI,_NF> returns SFixMath<NI+_NI,NF+_NF> at worse
+      - SFixMath<NI,NF> * SFixMath<_NI,_NF> returns SFixMath<NI+_NI,NF+_NF> at worse
+      - UFixMath<NI,NF> * anything_else returns UFixMath<NI,NF> (only available with `FIXMATHUNSAFE`)
+      - SFixMath<NI,NF> * anything_else returns SFixMath<NI,NF> (only available with `FIXMATHUNSAFE`)
     - Shifts:
-    - UFixMath<NI,NF> .sR<NS> returns UFixMath<NI-NS,NF+NS>
-    - UFixMath<NI,NF> .sL<NS> returns UFixMath<NI+NS,NF-NS>
-    - same for SFixMath.
-      
+      - UFixMath<NI,NF> .sR<NS> returns UFixMath<NI-NS,NF+NS>
+      - UFixMath<NI,NF> .sL<NS> returns UFixMath<NI+NS,NF-NS>
+      - same for SFixMath.
+    - Inverse:
+      - UFixMath<NI,NF>.invFast() returns the inverse of the number as UFixMath<NF,NI>
+      - SFixMath<NI,NF>.invFast() returns the inverse of the number as SFixMath<NF,NI>
+      - UFixMath<NI,NF>.invAccurate() returns the inverse of the number as UFixMath<NF,2*NI+NF>
+      - SFixMath<NI,NF>.invAccurate() returns the inverse of the number as SFixMath<NF,2*NI+NF>
+      - UFixMath<NI,NF>.inv<_NF>() returns the inverse of the number as UFixMath<NF,_NF>
+      - SFixMath<NI,NF>.inv<_NF>() returns the inverse of the number as SFixMath<NF,_NF>
+    - Conversion (should be preferred over casting, when possible):
+      - UFixMath<NI,NF>.asSFix() returns SFixMath<NI,NF>
+      - SFixMath<NI,NF>.asUFix() returns UFixMath<NI,NF>
+      - UFixMath<NI,NF>.asFloat() returns the value as a float.
+      - SFixMath<NI,NF>.asFloat() returns the value as a float.
+      - UFixMath<NI,NF>.asRaw() returns the internal value.
+      - SFixMath<NI,NF>.asRaw() returns the internal value.
+      - T.toUFraction() returns UFixMath<0,NF> with NF the number of bits of T (uint8_t leads to NF=8bits).
+      - T.toSFraction() returns SFixMath<0,NF> with NF the number of bits of T (int8_t leads to NF=7bits).
+      - T.toUInt() returns UFixMath<NI,0> with NI the number of bits of T (uint8_t leads to NI=8bits).
+      - T.toSInt() returns SFixMath<NI,> with NI the number of bits of T (int8_t leads to NI=7bits).   
    
 */
 
@@ -66,54 +91,20 @@
 
 #include<Arduino.h>
 #include "IntegerType.h"
-
-//#define MOZZI_SHIFTR(x,bits) (bits > 0 ? (x >> (bits)) : (x << (-bits))) // shift right for positive shift numbers, and left for negative ones.
-
-//#define MAX(N1,N2) ((N1) > (N2) ? (N1) : (N2))
-//#define MIN(N1,N2) ((N1) > (N2) ? (N2) : (N1))
-//#define UFULLRANGE(N) ((1ULL<<(N)) - 1) // MAX value represented by an unsigned of N bits
-//#define SFULLRANGE(N) ((1ULL<<(N))) // MAX value represented by a signed of N bits
-//#define UFULLRANGE(N) (((1ULL<<(N-1)) - 1) + (1ULL << (N-1)))
-//#define RANGEADD(NF, _NF, RANGE, _RANGE) ((NF > _NF) ? (RANGE + (_RANGE<<(NF-_NF))) : (_RANGE + (RANGE<<(_NF-NF))))  // resulting range when adding
-//#define NEEDEDNIEXTRA(NI, NF, RANGE) (RANGE > (UFULLRANGE(NI+NF)) ? (NI+1) : (RANGE > (UFULLRANGE(NI+NF-1)) ? (NI) : (NI-1)))  // NEEDED NI TO AVOID OVERFLOW, GIVEN A RANGE
-//#define NEEDEDSNIEXTRA(NI, NF, RANGE) (RANGE > (SFULLRANGE(NI+NF)) ? (NI+1) : (RANGE > (SFULLRANGE(NI+NF-1)) ? (NI) : (NI-1)))
-//#define RANGESHIFT(N,SH,RANGE) ((SH < N) ? (RANGE) : (MOZZI_SHIFTR(RANGE,(N-SH)))) // to increase the range with shifts in case NI or NF reaches 0 (we then need to increase the range)
-//#define RANGESHIFT(N,SH,RANGE) ((SH < N) ? (RANGE) : (mozzi_shiftr(RANGE,(N-SH)))) // to increase the range with shifts in case NI or NF reaches 0 (we then need to increase the range)
-
-
-// Experiments
-/*#define NBITSREAL(X,N) (abs(X) < (1<<N) ? N : NBITSREAL2(X,N+1))
-  #define NBITSREAL2(X,N) (abs(X) < (1<<N) ? N : NBITSREAL(X,N+1))
-  #define UFixAuto(X) (UFixMath<NBITSREAL(X,0),0>(X))
-  #define UFixAuto(X) (UFixMath<NBITSREAL(X,0),0>(X))*/
-
-/*
-  template<typename T>
-  constexpr int8_t nBitsReal(T x, int8_t n=0) {
-  if (abs(x) < ((T)1 << n)) {
-  return n;
-  } else {
-  return nBitsReal(x, n + 1);
-  }
-  }
-
-  #define UFixAuto(X) (UFixMath<nBitsReal(X),0>(X))
-*/
-
  
 
 namespace MozziPrivate {
-  template<typename T> constexpr T shiftR(T x, int8_t bits) {return (bits > 0 ? (x >> (bits)) : (x << (-bits)));}
-  constexpr int8_t sBitsToBytes(int8_t N) { return (((N)>>3)+1);}
+  template<typename T> constexpr T shiftR(T x, int8_t bits) {return (bits > 0 ? (x >> (bits)) : (x << (-bits)));} // shift right with positive values, left with negative
+  constexpr int8_t sBitsToBytes(int8_t N) { return (((N)>>3)+1);}  // conversion between Bits and Bytes for signed
   constexpr int8_t uBitsToBytes(int8_t N) { return (((N-1)>>3)+1);}
   template<typename T>  constexpr T mozziMax(T N1, T N2) { return (N1) > (N2) ? (N1) : (N2);}
   template<typename T>  constexpr T mozziMin(T N1, T N2) { return (N1) > (N2) ? (N2) : (N1);}
-  constexpr uint64_t sFullRange(int8_t N) { return uint64_t(1)<<N;}
+  constexpr uint64_t sFullRange(int8_t N) { return uint64_t(1)<<N;} // maximum absolute value that can be hold in a signed of size N
   constexpr uint64_t uFullRange(int8_t N) { return ((uint64_t(1)<<(N-1))-1) + (uint64_t(1)<<(N-1));}
-  constexpr uint64_t rangeAdd(byte NF, byte _NF, uint64_t RANGE, uint64_t _RANGE) { return ((NF > _NF) ? (RANGE + (_RANGE<<(NF-_NF))) : (_RANGE + (RANGE<<(_NF-NF))));}
-  constexpr int8_t neededNIExtra(int8_t NI, int8_t NF, uint64_t RANGE) { return (RANGE > (uFullRange(NI+NF)) ? (NI+1) : (RANGE > (uFullRange(NI+NF-1)) ? (NI) : (NI-1)));}
-  constexpr int8_t neededSNIExtra(int8_t NI, int8_t NF, uint64_t RANGE) { return (RANGE > (sFullRange(NI+NF)) ? (NI+1) : (RANGE > (sFullRange(NI+NF-1)) ? (NI) : (NI-1)));}
-  constexpr uint64_t RANGESHIFT(int8_t N, int8_t SH, uint64_t RANGE) { return ((SH < N) ? (RANGE) : (shiftR(RANGE,(N-SH))));}
+  constexpr uint64_t rangeAdd(byte NF, byte _NF, uint64_t RANGE, uint64_t _RANGE) { return ((NF > _NF) ? (RANGE + (_RANGE<<(NF-_NF))) : (_RANGE + (RANGE<<(_NF-NF))));}  // returns the RANGE following an addition
+  constexpr int8_t neededNIExtra(int8_t NI, int8_t NF, uint64_t RANGE) { return (RANGE > (uFullRange(NI+NF)) ? (NI+1) : (RANGE > (uFullRange(NI+NF-1)) ? (NI) : (NI-1)));} // check if RANGE can be hold in the unsigned type defined by NI and NF
+  constexpr int8_t neededSNIExtra(int8_t NI, int8_t NF, uint64_t RANGE) { return (RANGE > (sFullRange(NI+NF)) ? (NI+1) : (RANGE > (sFullRange(NI+NF-1)) ? (NI) : (NI-1)));}  // same for signed
+  constexpr uint64_t RANGESHIFT(int8_t N, int8_t SH, uint64_t RANGE) { return ((SH < N) ? (RANGE) : (shiftR(RANGE,(N-SH))));}  // make sure that NI or NF does not turn negative when safe shifts are used.
 }
 
 // Forward declaration
@@ -237,7 +228,8 @@ public:
     }
   
 #ifdef FIXMATHUNSAFE
-  /** Addition with another type. Unsafe
+  /** Addition with another type.
+      @note Unsafe. Only available with `FIXMATHUNSAFE`
       @param op The number to be added.
       @return The result of the addition as a UFixMath.
   */
@@ -268,7 +260,8 @@ public:
   }
 
   #ifdef FIXMATHUNSAFE
-  /** Subtraction with another type. Unsafe
+  /** Subtraction with another type.
+      @note Unsafe. Only available with `FIXMATHUNSAFE`
       @param op The number to be subtracted.
       @return The result of the subtraction as a UFixMath.
   */
@@ -316,9 +309,10 @@ public:
   }
 
   #ifdef FIXMATHUNSAFE
-  /** Multiplication with another type. Unsafe.
+  /** Multiplication with another type.
+      @note Unsafe. Only available with `FIXMATHUNSAFE`
       @param op The number to be multiplied.
-      @return The result of the multiplication as a UFixMath.
+      @return The result of the multiplication as a UFixMath of identical NI and NF
   */
   template<typename T>
   UFixMath<NI,NF> operator* (const T op) const
@@ -386,6 +380,7 @@ public:
   #ifdef FIXMATHUNSAFE
   /** Left shift. This can overflow if you shift to a value that cannot be represented.
       Better to use .sL<shift>() if possible instead.
+      @note Unsafe. Only available with `FIXMATHUNSAFE`
       @param op The shift number
       @return The result of the shift as a UFixMath.
   */
@@ -417,7 +412,10 @@ public:
 
   
   //////// COMPARISON OVERLOADS
-   
+  /** Comparison with another UFixMath.
+      @param op A UFixMath
+      @return true if this is bigger than op, false otherwise
+  */
   template<int8_t _NI, int8_t _NF>
   bool operator> (const UFixMath<_NI,_NF>& op) const
   {
@@ -428,12 +426,21 @@ public:
     return left.asRaw()>right.asRaw();
   }
 
+  /** Comparison with another UFixMath.
+      @param op A UFixMath
+      @return true if this is smaller than op, false otherwise
+  */
   template<int8_t _NI, int8_t _NF>
   bool operator< (const UFixMath<_NI,_NF>& op) const
   {
     return op > *this;
   }
 
+
+  /** Comparison with another UFixMath.
+      @param op A UFixMath
+      @return true if this equal to op, false otherwise
+  */
   template<int8_t _NI, int8_t _NF>
   bool operator== (const UFixMath<_NI,_NF>& op) const
   {
@@ -444,6 +451,10 @@ public:
     return left.asRaw()==right.asRaw();
   }
 
+  /** Comparison with another UFixMath.
+      @param op A UFixMath
+      @return true if this not equal to op, false otherwise
+  */
   template<int8_t _NI, int8_t _NF>
   bool operator!= (const UFixMath<_NI,_NF>& op) const
   {
@@ -709,7 +720,8 @@ public:
   }
   
 #ifdef FIXMATHUNSAFE
-  /** Addition with another type. Unsafe
+  /** Addition with another type.
+      @note Unsafe. Only available with `FIXMATHUNSAFE`
       @param op The number to be added.
       @return The result of the addition as a UFixMath.
   */
@@ -757,7 +769,8 @@ public:
   }
 
   #ifdef FIXMATHUNSAFE
-  /** Subtraction with another type. Unsafe
+  /** Subtraction with another type.
+      @note Unsafe. Only available with `FIXMATHUNSAFE`
       @param op The number to be subtracted.
       @return The result of the subtraction as a SFixMath.
   */
@@ -792,7 +805,8 @@ public:
   }
 
   #ifdef FIXMATHUNSAFE
-  /** Multiplication with another type. Unsafe.
+  /** Multiplication with another type.
+      @note Unsafe. Only available with `FIXMATHUNSAFE`
       @param op The number to be multiplied.
       @return The result of the multiplication as a UFixMath.
   */
@@ -855,6 +869,7 @@ public:
   #ifdef FIXMATHUNSAFE
   /** Left shift. This can overflow if you shift to a value that cannot be represented.
       Better to use .sL<shift>() if possible instead.
+      @note Unsafe. Only available with `FIXMATHUNSAFE`
       @param op The shift number
       @return The result of the shift as a UFixMath.
   */
@@ -886,7 +901,11 @@ template<int8_t op>
 
 
   //////// COMPARISON OVERLOADS
-   
+
+  /** Comparison with another SFixMath.
+      @param op A UFixMath
+      @return true if this is bigger than op, false otherwise
+  */
   template<int8_t _NI, int8_t _NF>
   bool operator> (const SFixMath<_NI,_NF>& op) const
   {
@@ -897,12 +916,21 @@ template<int8_t op>
     return left.asRaw()>right.asRaw();
   }
 
+  /** Comparison with another SFixMath.
+      @param op A UFixMath
+      @return true if this is smaller than op, false otherwise
+  */
   template<int8_t _NI, int8_t _NF>
   bool operator< (const SFixMath<_NI,_NF>& op) const
   {
     return op > *this;
   }
 
+
+  /** Comparison with another SFixMath.
+      @param op A UFixMath
+      @return true if this is equal to op, false otherwise
+  */
   template<int8_t _NI, int8_t _NF>
   bool operator== (const SFixMath<_NI,_NF>& op) const
   {
@@ -913,6 +941,10 @@ template<int8_t op>
     return left.asRaw()==right.asRaw();
   }
 
+  /** Comparison with another SFixMath.
+      @param op A UFixMath
+      @return true if this is not equal to op, false otherwise
+  */
   template<int8_t _NI, int8_t _NF>
   bool operator!= (const SFixMath<_NI,_NF>& op) const
   {
@@ -1098,8 +1130,13 @@ inline SFixMath<MozziPrivate::neededSNIExtra(NI+_NI, NF+_NF, RANGE*_RANGE),NF+_N
   return op2*op1;
 }
 
-// Comparaison between SFixMath and UFixmath
+// Comparison between SFixMath and UFixmath
 
+/** Comparison between a SFixMath and an UFixMath.
+    @param op1 a SFixMath
+    @param op2 A UFixMath
+    @return true if op1 is bigger than op2, false otherwise
+*/
 template<int8_t NI, int8_t NF, int8_t _NI, int8_t _NF>
 inline bool operator> (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 )
 {
@@ -1110,6 +1147,11 @@ inline bool operator> (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 
   return left.asRaw() > right.asRaw();
 }
 
+/** Comparison between a UFixMath and an SFixMath.
+    @param op1 a UFixMath
+    @param op2 A SFixMath
+    @return true if op1 is bigger than op2, false otherwise
+*/
 template<int8_t NI, int8_t NF, int8_t _NI, int8_t _NF>
 inline bool operator> (const UFixMath<NI,NF>& op1, const SFixMath<_NI,_NF>& op2 )
 {
@@ -1120,12 +1162,23 @@ inline bool operator> (const UFixMath<NI,NF>& op1, const SFixMath<_NI,_NF>& op2 
   return left.asRaw() > right.asRaw();
 }
 
+/** Comparison between a UFixMath and an SFixMath.
+    @param op1 a UFixMath
+    @param op2 A SFixMath
+    @return true if op1 is smaller than op2, false otherwise
+*/
 template<int8_t NI, int8_t NF, int8_t _NI, int8_t _NF>
 inline bool operator< (const UFixMath<NI,NF>& op1, const SFixMath<_NI,_NF>& op2 )
 {
   return op2 > op1;
 }
 
+
+/** Comparison between a SFixMath and an UFixMath.
+    @param op1 a SFixMath
+    @param op2 A UFixMath
+    @return true if op1 is smaller than op2, false otherwise
+*/
 template<int8_t NI, int8_t NF, int8_t _NI, int8_t _NF>
 inline bool operator< (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 )
 {
@@ -1133,7 +1186,11 @@ inline bool operator< (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 
 }
 
 
-
+/** Comparison between a SFixMath and an UFixMath.
+    @param op1 a SFixMath
+    @param op2 A UFixMath
+    @return true if op1 is equal to op2, false otherwise
+*/
 template<int8_t NI, int8_t NF, int8_t _NI, int8_t _NF>
 inline bool operator== (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 )
 {
@@ -1144,12 +1201,23 @@ inline bool operator== (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2
   return left.asRaw() == right.asRaw();
 }
 
+
+/** Comparison between a UFixMath and an SFixMath.
+    @param op1 a UFixMath
+    @param op2 A SFixMath
+    @return true if op1 is equal to op2, false otherwise
+*/
 template<int8_t NI, int8_t NF, int8_t _NI, int8_t _NF>
 inline bool operator== (const UFixMath<NI,NF>& op1, const SFixMath<_NI,_NF>& op2 )
 {
   return op2 == op1;
 }
 
+/** Comparison between a SFixMath and an UFixMath.
+    @param op1 a SFixMath
+    @param op2 A UFixMath
+    @return true if op1 is not equal to op2, false otherwise
+*/
 template<int8_t NI, int8_t NF, int8_t _NI, int8_t _NF>
 inline bool operator!= (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2 )
 {
@@ -1160,6 +1228,12 @@ inline bool operator!= (const SFixMath<NI,NF>& op1, const UFixMath<_NI,_NF>& op2
   return left.asRaw() != right.asRaw();
 }
 
+
+/** Comparison between a UFixMath and an SFixMath.
+    @param op1 a UFixMath
+    @param op2 A SFixMath
+    @return true if op1 is not equal to op2, false otherwise
+*/
 template<int8_t NI, int8_t NF, int8_t _NI, int8_t _NF>
 inline bool operator!= (const UFixMath<NI,NF>& op1, const SFixMath<_NI,_NF>& op2 )
 {
@@ -1203,14 +1277,6 @@ inline SFixMath<sizeof(T)*8-1,0> toSInt(T val) {
 
 
 
-// #undef MAX
-// #undef MIN
-// #undef UFULLRANGE
-// #undef SFULLRANGE
-// #undef RANGEADD
-// #undef NEEDEDNIEXTRA
-// #undef NEEDEDSNIEXTRA
-// #undef RANGESHIFT
 
 
 #endif

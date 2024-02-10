@@ -79,6 +79,11 @@
       - T.toSFraction() returns SFixMath<0,NF> with NF the number of bits of T (int8_t leads to NF=7bits).
       - T.toUInt() returns UFixMath<NI,0> with NI the number of bits of T (uint8_t leads to NI=8bits).
       - T.toSInt() returns SFixMath<NI,> with NI the number of bits of T (int8_t leads to NI=7bits).   
+    
+    Note on division:
+      The division is not implemented. This is a deliberate choice made for two reasons:
+        - in contrast with all the other fundamental operations, it is not possible to guarantee that precision will be kept (other operations returns *exact* results whenever the operands were also exactly represented. Note that this is actually not the case when using normal floating point numbers. The inverse functions can be used to fake a division, by multiplying by the inverse of a number.
+	- division are usually very slow operations on MCU, hence there usage is discouraged. The ideal way of doing it is to compute the inverse whenever needed and only when needed. In the context of Mozzi for instance, a good way to do it would be to compute needed inverses in updateControl(), and use them in updateAudio().
    
 */
 

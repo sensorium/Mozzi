@@ -23,7 +23,7 @@
 
     The operations possible with these types can be divided into two categories:
     - the operations between FixMath types are all safe (aka won't overflow) and are the only one included by default
-    - the operations between a FixMath and a native C type (int, float) are NOT safe and are not included by default. In order to activate them, you need to `#define FIXMATHUNSAFE` before including FixMath.h.
+    - the operations between a FixMath and a native C type (int, float) are NOT safe and are not included by default. In order to activate them, you need to `#define MOZZI_FIXMATH_UNSAFE` before including FixMath.h.
 
 
     Like standard C(++) types, the fixed point numbers defined here are following some rules:
@@ -33,7 +33,7 @@
     - only addition, subtraction and multiplication are implemented (this is a design choice, see below)
     - any operation between a signed and an unsigned leads to a signed number
     - resulting numbers will be casted to a type big enough to store the expected values. It follows that it is worth starting with types that are as small as possible to hold the initial value.
-    - all operations between a fixed point number and a native type (int, float, uint) are *not* safe. If the resulting value cannot be represented in the fixed point type it will overflow. Only addition, subtraction, multiplication and right/left shift are implemented. These are only accessible activating the `FIXMATHUNSAFE` set.
+    - all operations between a fixed point number and a native type (int, float, uint) are *not* safe. If the resulting value cannot be represented in the fixed point type it will overflow. Only addition, subtraction, multiplication and right/left shift are implemented. These are only accessible activating the `MOZZI_FIXMATH_UNSAFE` set.
     - safe right/left shifts, which return the correct value in the correct type are implemented as .sR<shift>() and .sL<shift>() respectively, shift being the shifting amount.
 
     More specifically on the returned types of the operations between fixed point math types:
@@ -41,22 +41,22 @@
       - UFixMath<NI,NF> + UFixMath<_NI,_NF> returns UFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> at worse
       - SFixMath<NI,NF> + SFixMath<_NI,_NF> returns SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> at worse
       - UFixMath<NI,NF> + SFixMath<_NI,_NF> returns SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> at worse
-      - UFixMath<NI,NF> + anything_else returns UFixMath<NI,NF> (only available with `FIXMATHUNSAFE`)
-      - SFixMath<NI,NF> + anything_else returns SFixMath<NI,NF> (only available with `FIXMATHUNSAFE`)
+      - UFixMath<NI,NF> + anything_else returns UFixMath<NI,NF> (only available with `MOZZI_FIXMATH_UNSAFE`)
+      - SFixMath<NI,NF> + anything_else returns SFixMath<NI,NF> (only available with `MOZZI_FIXMATH_UNSAFE`)
     - Subtractions:
       - UFixMath<NI,NF> - UFixMath<_NI,_NF> returns SFixMath<MAX(NI,_NI),MAX(NF,_NF)> at worse
       - SFixMath<NI,NF> - SFixMath<_NI,_NF> returns SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> at worse
       - SFixMath<NI,NF> - UFixMath<_NI,_NF> returns SFixMath<MAX(NI,_NI)+1,MAX(NF,_NF)> at worse
-      - UFixMath<NI,NF> - anything_else returns UFixMath<NI,NF> (only available with `FIXMATHUNSAFE`)
-      - SFixMath<NI,NF> - anything_else returns SFixMath<NI,NF> (only available with `FIXMATHUNSAFE`)
+      - UFixMath<NI,NF> - anything_else returns UFixMath<NI,NF> (only available with `MOZZI_FIXMATH_UNSAFE`)
+      - SFixMath<NI,NF> - anything_else returns SFixMath<NI,NF> (only available with `MOZZI_FIXMATH_UNSAFE`)
       - (-)SFixMath<NI,NF> return SFixMath<NI,NF>
       - (-)UFixMath<NI,NF> return SFixMath<NI,NF>
     - Multiplications:
       - UFixMath<NI,NF> * UFixMath<_NI,_NF> returns UFixMath<NI+_NI,NF+_NF> at worse
       - UFixMath<NI,NF> * SFixMath<_NI,_NF> returns SFixMath<NI+_NI,NF+_NF> at worse
       - SFixMath<NI,NF> * SFixMath<_NI,_NF> returns SFixMath<NI+_NI,NF+_NF> at worse
-      - UFixMath<NI,NF> * anything_else returns UFixMath<NI,NF> (only available with `FIXMATHUNSAFE`)
-      - SFixMath<NI,NF> * anything_else returns SFixMath<NI,NF> (only available with `FIXMATHUNSAFE`)
+      - UFixMath<NI,NF> * anything_else returns UFixMath<NI,NF> (only available with `MOZZI_FIXMATH_UNSAFE`)
+      - SFixMath<NI,NF> * anything_else returns SFixMath<NI,NF> (only available with `MOZZI_FIXMATH_UNSAFE`)
     - Shifts:
       - UFixMath<NI,NF> .sR<NS> returns UFixMath<NI-NS,NF+NS>
       - UFixMath<NI,NF> .sL<NS> returns UFixMath<NI+NS,NF-NS>
@@ -232,9 +232,9 @@ public:
     return SFixMath<new_NI,new_NF,new_RANGE>(tt,true);
     }
   
-#ifdef FIXMATHUNSAFE
+#ifdef MOZZI_FIXMATH_UNSAFE
   /** Addition with another type.
-      @note Unsafe. Only available with `FIXMATHUNSAFE`
+      @note Unsafe. Only available with `MOZZI_FIXMATH_UNSAFE`
       @param op The number to be added.
       @return The result of the addition as a UFixMath.
   */
@@ -264,9 +264,9 @@ public:
     return SFixMath<new_NI,new_NF,MozziPrivate::mozziMax(MozziPrivate::shiftR(RANGE,MozziPrivate::mozziMax(NF,_NF)-NF), MozziPrivate::shiftR(_RANGE,MozziPrivate::mozziMax(NF,_NF)-_NF))>(tt,true);
   }
 
-  #ifdef FIXMATHUNSAFE
+  #ifdef MOZZI_FIXMATH_UNSAFE
   /** Subtraction with another type.
-      @note Unsafe. Only available with `FIXMATHUNSAFE`
+      @note Unsafe. Only available with `MOZZI_FIXMATH_UNSAFE`
       @param op The number to be subtracted.
       @return The result of the subtraction as a UFixMath.
   */
@@ -313,9 +313,9 @@ public:
     return SFixMath<NEW_NI,(NF+_NF),RANGE*_RANGE>(tt,true);
   }
 
-  #ifdef FIXMATHUNSAFE
+  #ifdef MOZZI_FIXMATH_UNSAFE
   /** Multiplication with another type.
-      @note Unsafe. Only available with `FIXMATHUNSAFE`
+      @note Unsafe. Only available with `MOZZI_FIXMATH_UNSAFE`
       @param op The number to be multiplied.
       @return The result of the multiplication as a UFixMath of identical NI and NF
   */
@@ -382,10 +382,10 @@ public:
   }
 
 
-  #ifdef FIXMATHUNSAFE
+  #ifdef MOZZI_FIXMATH_UNSAFE
   /** Left shift. This can overflow if you shift to a value that cannot be represented.
       Better to use .sL<shift>() if possible instead.
-      @note Unsafe. Only available with `FIXMATHUNSAFE`
+      @note Unsafe. Only available with `MOZZI_FIXMATH_UNSAFE`
       @param op The shift number
       @return The result of the shift as a UFixMath.
   */
@@ -504,7 +504,7 @@ private:
 };
 
 
-#ifdef FIXMATHUNSAFE
+#ifdef MOZZI_FIXMATH_UNSAFE
 // Multiplication
 template <int8_t NI, int8_t NF>
 inline UFixMath<NI, NF> operator*(uint8_t op, const UFixMath<NI, NF>& uf) {return uf*op;}
@@ -724,9 +724,9 @@ public:
     return SFixMath<new_NI, new_NF, new_RANGE>(tt,true);
   }
   
-#ifdef FIXMATHUNSAFE
+#ifdef MOZZI_FIXMATH_UNSAFE
   /** Addition with another type.
-      @note Unsafe. Only available with `FIXMATHUNSAFE`
+      @note Unsafe. Only available with `MOZZI_FIXMATH_UNSAFE`
       @param op The number to be added.
       @return The result of the addition as a UFixMath.
   */
@@ -773,9 +773,9 @@ public:
     return SFixMath<new_NI, new_NF, new_RANGE>(tt,true);
   }
 
-  #ifdef FIXMATHUNSAFE
+  #ifdef MOZZI_FIXMATH_UNSAFE
   /** Subtraction with another type.
-      @note Unsafe. Only available with `FIXMATHUNSAFE`
+      @note Unsafe. Only available with `MOZZI_FIXMATH_UNSAFE`
       @param op The number to be subtracted.
       @return The result of the subtraction as a SFixMath.
   */
@@ -809,9 +809,9 @@ public:
     return SFixMath<NI+_NI,NF+_NF>(tt,true);
   }
 
-  #ifdef FIXMATHUNSAFE
+  #ifdef MOZZI_FIXMATH_UNSAFE
   /** Multiplication with another type.
-      @note Unsafe. Only available with `FIXMATHUNSAFE`
+      @note Unsafe. Only available with `MOZZI_FIXMATH_UNSAFE`
       @param op The number to be multiplied.
       @return The result of the multiplication as a UFixMath.
   */
@@ -871,10 +871,10 @@ public:
     return SFixMath<NI,NF>(internal_value>>op,true);
   }
 
-  #ifdef FIXMATHUNSAFE
+  #ifdef MOZZI_FIXMATH_UNSAFE
   /** Left shift. This can overflow if you shift to a value that cannot be represented.
       Better to use .sL<shift>() if possible instead.
-      @note Unsafe. Only available with `FIXMATHUNSAFE`
+      @note Unsafe. Only available with `MOZZI_FIXMATH_UNSAFE`
       @param op The shift number
       @return The result of the shift as a UFixMath.
   */
@@ -997,7 +997,7 @@ private:
 };
 
 
-#ifdef FIXMATHUNSAFE
+#ifdef MOZZI_FIXMATH_UNSAFE
 /// Reverse overloadings, 
 
 // Multiplication

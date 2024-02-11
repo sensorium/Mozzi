@@ -153,12 +153,27 @@ public:
 
 	/** Returns the next sample given a phase modulation value.
 	@param phmod_proportion a phase modulation value given as a proportion of the wave. The
-	phmod_proportion parameter is a SFixMath<15,16> fixed-point number where the fractional part represents almost -1 to almost 1, modulating the phase by one whole table length in
+	phmod_proportion parameter is a SFix<NI,NF> fixed-point number where the fractional part represents almost -1 to almost 1, modulating the phase by one whole table length in
+	each direction. This fixed point math number is interpreted as a SFix<15,16> internally.
+	@return a sample from the table.
+	*/
+  template <byte NI, byte NF>
+	inline
+	int8_t phMod(SFix<NI,NF> phmod_proportion)
+	{
+	  return phMod(SFix<15,16>(phmod_proportion).asRaw());
+	}
+
+
+  
+	/** Returns the next sample given a phase modulation value.
+	@param phmod_proportion a phase modulation value given as a proportion of the wave. The
+	phmod_proportion parameter is a SFix<15,16> fixed-point number where the fractional part represents almost -1 to almost 1, modulating the phase by one whole table length in
 	each direction.
 	@return a sample from the table.
 	*/
 	inline
-	int8_t phMod(SFixMath<15,16> phmod_proportion)
+	int8_t phMod(SFix<15,16> phmod_proportion)
 	{
 	  return phMod(phmod_proportion.asRaw());
 	}
@@ -193,6 +208,21 @@ public:
 	}
 
 
+	/** Set the frequency using UFix<NI,NF> fixed-point number format. This falls back to using UFix<16,16> internally and is provided as a fallout for other UFix types. If possible try to use directly UFix<16,16> or UFix<24,8> for well defined (and well tested) behaviors.
+	@note This should work OK with tables 2048 cells or smaller and
+	frequencies up to 4096 Hz.  Can't be used with UPDATE_RATE less than 64 Hz.
+	@note This didn't run faster than float last time it was tested, after 2014 code changes.  Need to see if 2014 changes improved or worsened performance.
+	@param frequency in UFix<NI,NF> fixed-point number format.
+	*/
+        template <byte NI, byte NF>
+        inline
+  	void setFreq(UFix<NI,NF> frequency)
+        {
+	  setFreq_Q16n16(UFix<16,16>(frequency).asRaw());
+        }
+
+  
+  
 	/** Set the frequency using Q24n8 fixed-point number format.
 	This might be faster than the float version for setting low frequencies such as
 	1.5 Hz, or other values which may not work well with your table size. A Q24n8
@@ -217,15 +247,15 @@ public:
 		}
 	}
 
-  	/** Set the frequency using UFixMath<24,8> fixed-point number format.
+  	/** Set the frequency using UFix<24,8> fixed-point number format.
 	This might be faster than the float version for setting low frequencies such as
-	1.5 Hz, or other values which may not work well with your table size. A UFixMath<24,8>
+	1.5 Hz, or other values which may not work well with your table size. A UFix<24,8>
 	representation of 1.5 is 384 (ie. 1.5 * 256). Can't be used with UPDATE_RATE
 	less than 64 Hz.
-	@param frequency in UFixMath<24,8> fixed-point number format.
+	@param frequency in UFix<24,8> fixed-point number format.
 	*/
         inline
-	void setFreq(UFixMath<24,8> frequency)
+	void setFreq(UFix<24,8> frequency)
         {
 	  setFreq_Q24n8(frequency.asRaw());
         }
@@ -255,45 +285,33 @@ public:
 	}
 
 
-	/** Set the frequency using UFixMath<16,16> fixed-point number format. This is useful in
-	combination with Q16n16_mtof(), a fast alternative to mtof(), using UFixMath<16,16>
+	/** Set the frequency using UFix<16,16> fixed-point number format. This is useful in
+	combination with Q16n16_mtof(), a fast alternative to mtof(), using UFix<16,16>
 	fixed-point format instead of fractional numbers.
 	@note This should work OK with tables 2048 cells or smaller and
 	frequencies up to 4096 Hz.  Can't be used with UPDATE_RATE less than 64 Hz.
 	@note This didn't run faster than float last time it was tested, after 2014 code changes.  Need to see if 2014 changes improved or worsened performance.
-	@param frequency in UFixMath<16,16> fixed-point number format.
+	@param frequency in UFix<16,16> fixed-point number format.
 	*/
         inline
-	void setFreq(UFixMath<16,16> frequency)
+	void setFreq(UFix<16,16> frequency)
         {
 	  setFreq_Q16n16(frequency.asRaw());
         }
 
   
-	/** Set the frequency using UFixMath<NI,NF> fixed-point number format. This falls back to using UFixMath<16,16> internally and is provided as a fallout for other UFixMath types. If possible try to use directly UFixMath<16,16> or UFixMath<24,8> for well defined (and well tested) behaviors.
-	@note This should work OK with tables 2048 cells or smaller and
-	frequencies up to 4096 Hz.  Can't be used with UPDATE_RATE less than 64 Hz.
-	@note This didn't run faster than float last time it was tested, after 2014 code changes.  Need to see if 2014 changes improved or worsened performance.
-	@param frequency in UFixMath<NI,NF> fixed-point number format.
-	*/
-        template <byte NI, byte NF>
-        inline
-  	void setFreq(UFixMath<NI,NF> frequency)
-        {
-	  setFreq_Q16n16(UFixMath<16,16>(frequency).asRaw());
-        }
 
-  	/** Set the frequency using SFixMath<NI,NF> fixed-point number format. This falls back to using UFixMath<16,16> internally and is provided as a fallout for other UFixMath types. If possible try to use directly UFixMath<16,16> or UFixMath<24,8> for well defined (and well tested) behaviors.
+  	/** Set the frequency using SFix<NI,NF> fixed-point number format. This falls back to using UFix<16,16> internally and is provided as a fallout for other UFix types. If possible try to use directly UFix<16,16> or UFix<24,8> for well defined (and well tested) behaviors.
 	@note This should work OK with tables 2048 cells or smaller and
 	frequencies up to 4096 Hz.  Can't be used with UPDATE_RATE less than 64 Hz.
 	@note This didn't run faster than float last time it was tested, after 2014 code changes.  Need to see if 2014 changes improved or worsened performance.
-	@param frequency in SFixMath<16,16> fixed-point number format.
+	@param frequency in SFix<16,16> fixed-point number format.
 	*/
         template <byte NI, byte NF>
         inline
-  	void setFreq(SFixMath<NI,NF> frequency)
+  	void setFreq(SFix<NI,NF> frequency)
         {
-	  setFreq_Q16n16(UFixMath<16,16>(frequency).asRaw());
+	  setFreq_Q16n16(UFix<16,16>(frequency).asRaw());
         }
   
 /*

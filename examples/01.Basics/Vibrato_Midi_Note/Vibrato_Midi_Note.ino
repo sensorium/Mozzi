@@ -27,14 +27,14 @@
 Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCos(COS2048_DATA);
 Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kVibrato(COS2048_DATA);
 
-UFixMath<7, 0> midi_note = 65;
-UFixMath<2, 1> mod_amplitude = 2.5;  // the amplitude of the vibrato, in semi-tones.
+UFix<7, 0> midi_note = 65;
+UFix<2, 1> mod_amplitude = 2.5;  // the amplitude of the vibrato, in semi-tones.
                                      // 2.5 can be represented with only 2 integer bits
                                      // and 1 fractionnal bit
-                                     // hence UFixMath<2,1> is good enough to represent
+                                     // hence UFix<2,1> is good enough to represent
                                      // that number. You can put numbers with decimals
                                      // or higher ones, but beware to adjust the number
-                                     // of bits NI and NF of the UFixMath<NI,NF> accordingly.
+                                     // of bits NI and NF of the UFix<NI,NF> accordingly.
                                      // It is always good to keep these as small as possible
                                      // for performances.
 
@@ -42,12 +42,12 @@ UFixMath<2, 1> mod_amplitude = 2.5;  // the amplitude of the vibrato, in semi-to
 void setup() {
   startMozzi(CONTROL_RATE);
   aCos.setFreq(mtof(midi_note));
-  kVibrato.setFreq(UFixMath<16, 16>(10));  // frequency of the modulation
+  kVibrato.setFreq(UFix<16, 16>(10));  // frequency of the modulation
 }
 
 
 void updateControl() {
-  auto modulation = SFixMath<0, 7>::fromRaw(kVibrato.next()) * mod_amplitude;  // Oscil in Mozzi are fundamentally 8 bits: 7bits of data and 1bit of sign.
+  auto modulation = toSFraction(kVibrato.next()) * mod_amplitude;  // Oscil in Mozzi are fundamentally 8 bits: 7bits of data and 1bit of sign.
                                                                                // Here, we make it oscillate between nearly -1 and 1 (no integer bit).
                                                                                // The FixMath class will take care of making modulation the correct type
                                                                                // to preserve range and precision.

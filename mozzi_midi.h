@@ -118,13 +118,13 @@ inline UFix<16,16> mtof(UFix<16,16> midival)
   return UFix<16,16>::fromRaw(Q16n16_mtof(midival.asRaw()));
 }
 
-template<byte NI, byte NF>
+template<int8_t NI, int8_t NF>
   inline UFix<16,16> mtof(UFix<NI,NF> midival)
 {
   return UFix<16,16>::fromRaw(Q16n16_mtof(UFix<16,16>(midival).asRaw()));
 }
 
-template<byte NI, byte NF>
+template<int8_t NI, int8_t NF>
   inline UFix<16,16> mtof(SFix<NI,NF> midival)
 {
   return UFix<16,16>::fromRaw(Q16n16_mtof(UFix<16,16>(midival).asRaw()));

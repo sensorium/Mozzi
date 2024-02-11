@@ -214,7 +214,7 @@ public:
 	@note This didn't run faster than float last time it was tested, after 2014 code changes.  Need to see if 2014 changes improved or worsened performance.
 	@param frequency in UFix<NI,NF> fixed-point number format.
 	*/
-        template <byte NI, byte NF>
+  template <int8_t NI, int8_t NF>
         inline
   	void setFreq(UFix<NI,NF> frequency)
         {
@@ -254,11 +254,11 @@ public:
 	less than 64 Hz.
 	@param frequency in UFix<24,8> fixed-point number format.
 	*/
-        inline
+  inline
 	void setFreq(UFix<24,8> frequency)
         {
 	  setFreq_Q24n8(frequency.asRaw());
-        }
+	  }
 
 
 	/** Set the frequency using Q16n16 fixed-point number format. This is useful in
@@ -293,11 +293,11 @@ public:
 	@note This didn't run faster than float last time it was tested, after 2014 code changes.  Need to see if 2014 changes improved or worsened performance.
 	@param frequency in UFix<16,16> fixed-point number format.
 	*/
-        inline
+   inline
 	void setFreq(UFix<16,16> frequency)
         {
 	  setFreq_Q16n16(frequency.asRaw());
-        }
+	  }
 
   
 

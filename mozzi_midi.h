@@ -113,21 +113,21 @@ inline Q16n16  Q16n16_mtof(Q16n16 midival_fractional)
 	return (Q16n16) (freq1+ diff_fraction);
 };
 
-inline UFixMath<16,16> mtof(UFixMath<16,16> midival)
+inline UFix<16,16> mtof(UFix<16,16> midival)
 {
-  return UFixMath<16,16>::fromRaw(Q16n16_mtof(midival.asRaw()));
+  return UFix<16,16>::fromRaw(Q16n16_mtof(midival.asRaw()));
 }
 
 template<byte NI, byte NF>
-  inline UFixMath<16,16> mtof(UFixMath<NI,NF> midival)
+  inline UFix<16,16> mtof(UFix<NI,NF> midival)
 {
-  return UFixMath<16,16>::fromRaw(Q16n16_mtof(UFixMath<16,16>(midival).asRaw()));
+  return UFix<16,16>::fromRaw(Q16n16_mtof(UFix<16,16>(midival).asRaw()));
 }
 
 template<byte NI, byte NF>
-  inline UFixMath<16,16> mtof(SFixMath<NI,NF> midival)
+  inline UFix<16,16> mtof(SFix<NI,NF> midival)
 {
-  return UFixMath<16,16>::fromRaw(Q16n16_mtof(UFixMath<16,16>(midival).asRaw()));
+  return UFix<16,16>::fromRaw(Q16n16_mtof(UFix<16,16>(midival).asRaw()));
 }
 
 #endif /* MOZZI_MIDI_H_ */

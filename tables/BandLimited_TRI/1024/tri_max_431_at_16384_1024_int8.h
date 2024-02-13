@@ -1,11 +1,7 @@
 #ifndef TRI_MAX_431_AT_16384_1024INT8_H_
 #define TRI_MAX_431_AT_16384_1024INT8_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 
 

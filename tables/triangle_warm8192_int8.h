@@ -1,11 +1,7 @@
 #ifndef TRIANGLE_WARM8192_INT8_H_
 #define TRIANGLE_WARM8192_INT8_H_
 
-#if ARDUINO >= 100
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 
 /* triangle wave with "warmth" from Audacity

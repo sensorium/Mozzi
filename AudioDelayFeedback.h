@@ -12,11 +12,7 @@
 #ifndef AUDIODELAY_FEEDBACK_H_
 #define AUDIODELAY_FEEDBACK_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 
 #include "mozzi_utils.h"
 #include "meta.h"

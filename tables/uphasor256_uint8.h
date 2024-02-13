@@ -1,11 +1,7 @@
 #ifndef UPHASOR256_H_
 #define UPHASOR256_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 
 /* ramp

@@ -12,11 +12,7 @@
 #ifndef LINE_H_
 #define LINE_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 
 /** For linear changes with a minimum of calculation at each step. For instance,
 you can use Line to make an oscillator glide from one frequency to another,

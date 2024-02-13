@@ -13,11 +13,7 @@
 #define AUTOMAP_H_
 
 // for map - maybe rewrite my own templated map for better efficiency
-#if ARDUINO >= 100
- #include "Arduino.h" // for map
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h> // for map
 
 #include "AutoRange.h"
 

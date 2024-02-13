@@ -1,11 +1,7 @@
 #ifndef WAVESHAPE_COMPRESS_512_TO_488_H_
 #define WAVESHAPE_COMPRESS_512_TO_488_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 
 /* table for waveshaper to impart compression

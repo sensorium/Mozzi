@@ -27,11 +27,7 @@
 MODIFIED by Tim Barrass 2013,2014: see .cpp file
 */
 
-#if ARDUINO >= 100
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
+#include <Arduino.h>
 
 /*
 // Arduino Mega

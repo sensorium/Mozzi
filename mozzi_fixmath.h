@@ -12,11 +12,7 @@
 #ifndef FIXEDMATH_H_
 #define FIXEDMATH_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 
 /** @defgroup fixmath Fast integer based fixed-point arithmetic */
 

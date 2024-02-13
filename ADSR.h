@@ -12,11 +12,7 @@
 #ifndef ADSR_H_
 #define ADSR_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "Line.h"
 #include "mozzi_fixmath.h"
 

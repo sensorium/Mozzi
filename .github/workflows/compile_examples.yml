@@ -88,6 +88,11 @@ jobs:
             platforms: |
               - name: arduino:renesas_uno
             internalid: arduino_unor4
+          - fqbn: teensy:avr:teensy36
+            platforms: |
+              - name: teensy:avr
+                source-url: https://www.pjrc.com/teensy/package_teensy_index.json
+            internalid: teensy36
 
     steps:
       - name: Checkout repository

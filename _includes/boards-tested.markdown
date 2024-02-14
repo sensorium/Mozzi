@@ -26,6 +26,8 @@ td[data-sd] { border: 2px solid; background: linear-gradient(-45deg,rgba(0,0,255
 <tr style="border-top: 1px solid">
     <td>Teensy3.x - <i>note: DAC Pin number depends on model: A14, A12, or A21</i>              </td><td> -              </td><td> -                 </td><td> -          </td><td data-md>DAC </td><td> -          </td></tr>
 <tr style="border-top: 1px solid">
+    <td>Teensy4.x                                                                               </td><td data-sd>A8 (+A9)</td><td> -                 </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
     <td><i>LGT8F328P</i>: "Register clone" of the ATmega328, uses the same code in Mozzi        </td><td data-sd>9 (+10) </td><td data-mo>9, 10      </td><td> -          </td><td> -          </td><td> -          </td></tr>
 <tr style="border-top: 1px solid">
     <td><i>SAMD</i>: Arduino Nano 33 Iot, Adafruit Playground Express, Gemma M0 etc.            </td><td> -              </td><td> -                 </td><td> -          </td><td data-md>A0/speaker</td><td> -   </td></tr>

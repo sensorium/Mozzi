@@ -40,9 +40,9 @@ MIDI_CREATE_DEFAULT_INSTANCE();
 Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
 
 // envelope generator
-ADSR <CONTROL_RATE> envelope;
+ADSR <CONTROL_RATE, AUDIO_RATE> envelope;
 
-Portamento <CONTROL_RATE, AUDIO_RATE>aPortamento;
+Portamento <CONTROL_RATE>aPortamento;
 
 #define LED 13
 

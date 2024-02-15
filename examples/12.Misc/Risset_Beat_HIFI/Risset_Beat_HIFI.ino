@@ -36,6 +36,7 @@
 */
 #include <MozziConfigValues.h>
 #define MOZZI_AUDIO_MODE MOZZI_OUTPUT_2PIN_PWM
+#define MOZZI_CONTROL_RATE 128
 
 #include <Mozzi.h>
 #include <Sample.h> // Sample template
@@ -44,11 +45,9 @@
 #include <Line.h>
 #include <mozzi_fixmath.h> // for fixed-point fractional numbers
 
-#define CONTROL_RATE 128
-
 // use: Sample <table_size, update_rate> SampleName (wavetable)
-Sample <ABOMB_NUM_CELLS, AUDIO_RATE> aSample0(ABOMB_DATA);
-Sample <ABOMB_NUM_CELLS, AUDIO_RATE> aSample1(ABOMB_DATA);
+Sample <ABOMB_NUM_CELLS, MOZZI_AUDIO_RATE> aSample0(ABOMB_DATA);
+Sample <ABOMB_NUM_CELLS, MOZZI_AUDIO_RATE> aSample1(ABOMB_DATA);
 
 // for scheduling changes
 EventDelay  kTriggerDelay;
@@ -70,13 +69,13 @@ Line <Q15n16> kLevel1;
 #define SAMPLE_FREQ_FIXEDPOINT float_to_Q16n16(SAMPLE_FREQ) // so Line gliss has enough precision
 
 #define GLISS_SECONDS (0.666f*SAMPLE_LENGTH_SECONDS*NUM_LOOPS_IN_GLISS)
-#define CONTROL_STEPS_PER_GLISS ((unsigned int)((float)CONTROL_RATE * GLISS_SECONDS))
+#define CONTROL_STEPS_PER_GLISS ((unsigned int)((float)MOZZI_CONTROL_RATE * GLISS_SECONDS))
 
 void setup() {
   kTriggerDelay.start(0); // start trigger before polling in updateControl()
   aSample0.setLoopingOn();
   aSample1.setLoopingOn();
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 byte alevel0, alevel1;
@@ -101,7 +100,7 @@ void updateControl() {
 }
 
 
-AudioOutput_t updateAudio() {
+AudioOutput updateAudio() {
   return MonoOutput::fromNBit(17, ((long)aSample0.next() * alevel0) + ((long)aSample1.next() * alevel1));
 }
 

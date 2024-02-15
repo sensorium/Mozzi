@@ -19,19 +19,19 @@
 #endif
 
 #if not defined(MOZZI_AUDIO_CHANNELS)
-#if (MOZZI_COMPATIBILITY_LEVEL <= MOZZI_COMPATIBILITY_1_1) && (STEREO_HACK == true)
-#warning Use of STEREO_HACK is deprecated. Use AUDIO_CHANNELS STEREO, instead.
-#define MOZZI_AUDIO_CHANNELS MOZZI_STEREO
-#else
 #define MOZZI_AUDIO_CHANNELS MOZZI_MONO
-#endif
 #endif
 
 //MOZZI_AUDIO_MODE -> hardware specific
 //MOZZI_AUDIO_RATE -> hardware specific
 
 #if not defined(MOZZI_CONTROL_RATE)
-#define MOZZI_CONTROL_RATE 64
+#  if defined(CONTROL_RATE) && (MOZZI_COMPATIBILITY_LEVEL < MOZZI_COMPATIBILITY_LATEST)
+#    warning Please change CONTROL_RATE to MOZZI_CONTROL_RATE
+#    define MOZZI_CONTROL_RATE CONTROL_RATE
+#  else
+#    define MOZZI_CONTROL_RATE 64
+#  endif
 #endif
 
 //MOZZI_ANALOG_READ -> hardware specific, but we want to insert a warning, if not supported, and user has not explicitly configured anything
@@ -151,8 +151,10 @@ MOZZI_CHECK_SUPPORTED(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE, MOZZI_ANALOG_RE
 
 /// Step 5: Patch up some backwards compatibility issues as far as config-related
 #if MOZZI_COMPATIBILITY_LEVEL < MOZZI_COMPATIBILITY_LATEST
-#define AUDIO_RATE MOZZI_AUDIO_RATE
-#define CONTROL_RATE MOZZI_CONTROL_RATE
+#  define AUDIO_RATE MOZZI_AUDIO_RATE
+#  if !defined(CONTROL_RATE)
+#    define CONTROL_RATE MOZZI_CONTROL_RATE
+#  endif
 #endif
 
 /// Step 6: Some more checks that need to be at the end, because of requiring end of the foodchain headers

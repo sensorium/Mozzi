@@ -69,7 +69,7 @@ void setup(){
   //MIDI.setHandleNoteOff(HandleNoteOff);
 
   // open MOZZI (:
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 
 }
 
@@ -132,7 +132,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   return MonoOutput::from8Bit(voice.next());
 }
 

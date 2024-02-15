@@ -22,6 +22,7 @@
     Tim Barrass 2013, CC by-nc-sa.
 */
 
+#define MOZZI_CONTROL_RATE 640 // quite fast, keeps modulation smooth
 #include <Mozzi.h>
 #include <ReverbTank.h>
 #include <Oscil.h>
@@ -30,15 +31,13 @@
 
 ReverbTank reverb;
 
-#define CONTROL_RATE 640 // quite fast, keeps modulation smooth
-
 // Synth from PhaseMod_Envelope example
-Oscil <COS8192_NUM_CELLS, AUDIO_RATE> aCarrier(COS8192_DATA);
-Oscil <COS8192_NUM_CELLS, AUDIO_RATE> aModulator(COS8192_DATA);
-Oscil <COS8192_NUM_CELLS, AUDIO_RATE> aModWidth(COS8192_DATA);
-Oscil <COS8192_NUM_CELLS, CONTROL_RATE> kModFreq1(COS8192_DATA);
-Oscil <COS8192_NUM_CELLS, CONTROL_RATE> kModFreq2(COS8192_DATA);
-Oscil <ENVELOP2048_NUM_CELLS, AUDIO_RATE> aEnvelop(ENVELOP2048_DATA);
+Oscil <COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCarrier(COS8192_DATA);
+Oscil <COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aModulator(COS8192_DATA);
+Oscil <COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aModWidth(COS8192_DATA);
+Oscil <COS8192_NUM_CELLS, MOZZI_CONTROL_RATE> kModFreq1(COS8192_DATA);
+Oscil <COS8192_NUM_CELLS, MOZZI_CONTROL_RATE> kModFreq2(COS8192_DATA);
+Oscil <ENVELOP2048_NUM_CELLS, MOZZI_AUDIO_RATE> aEnvelop(ENVELOP2048_DATA);
 
 
 void setup(){
@@ -49,7 +48,7 @@ void setup(){
   aModWidth.setFreq(2.52434f);
   aEnvelop.setFreq(9.0f);
 
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 
@@ -59,7 +58,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   int synth = aCarrier.phMod((int)aModulator.next()*(150u+aModWidth.next()));
   synth *= (byte)aEnvelop.next();
   // here's the reverb

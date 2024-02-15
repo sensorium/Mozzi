@@ -130,7 +130,7 @@ returning, adcStartConversion() only sets the conversion to begin, so you can us
 the cpu for other things and call for the result later with adcGetResult().
 @param channel is the analog channel number (0 to ....), which is not necessarily the same as the pin number
 Use adcPinToChannelNum() to convert the pin number to its channel number.
-@note Timing: about 1us when used in updateControl() with CONTROL_RATE 64.
+@note Timing: about 1us when used in updateControl() with MOZZI_CONTROL_RATE 64.
 */
 void adcStartConversion(uint8_t channel);
 

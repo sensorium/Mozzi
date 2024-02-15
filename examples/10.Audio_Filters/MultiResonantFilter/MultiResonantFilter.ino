@@ -30,9 +30,9 @@
 #include <ResonantFilter.h>
 #include <mozzi_rand.h>
 
-Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound(CHUM9_DATA);
-Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFilterMod(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFilterMod2(COS2048_DATA);
+Oscil<CHUM9_NUM_CELLS, MOZZI_AUDIO_RATE> aCrunchySound(CHUM9_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kFilterMod(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kFilterMod2(COS2048_DATA);
 
 MultiResonantFilter<uint8_t> mf; // Multifilter applied to a 8 bits signal.
                          // MultiResonantFilter<uint16_t> can also be used for signals with higher number of bits
@@ -56,17 +56,17 @@ void loop() {
 }
 
 void updateControl() {
-  if (rand(CONTROL_RATE / 2) == 0) { // about once every half second
+  if (rand(MOZZI_CONTROL_RATE / 2) == 0) { // about once every half second
     kFilterMod.setFreq((float)rand(255) / 64); // choose a new modulation frequency
     filter_type = rand(4);  // change the filter type, randomly
   }
-  // map the modulation into the filter range (0-255), corresponds with 0-AUDIO_RATE/(sqrt(2)*pi) Hz
+  // map the modulation into the filter range (0-255), corresponds with 0-MOZZI_AUDIO_RATE/(sqrt(2)*pi) Hz
   uint8_t cutoff_freq = (100 + kFilterMod.next() / 2) ;
   mf.setCutoffFreqAndResonance(cutoff_freq, resonance);
 }
 
-AudioOutput_t updateAudio() {  
-  AudioOutput_t asig;
+AudioOutput updateAudio() {  
+  AudioOutput asig;
   mf.next(aCrunchySound.next()); // this send the current sample to the filter, does not return anything
   switch (filter_type) // recover the output from the current selected filter type.
   {

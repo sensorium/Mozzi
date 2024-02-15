@@ -20,6 +20,7 @@
     Tim Barrass 2012, CC by-nc-sa.
 */
 
+#define MOZZI_CONTROL_RATE 64 // Hz, powers of 2 are most reliable
 #include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/cos2048_int8.h> // table for Oscils to play
@@ -28,12 +29,10 @@
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
 
-#define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
-
 // audio oscils
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCarrier(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aModulator(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aModDepth(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aCarrier(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aModulator(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aModDepth(COS2048_DATA);
 
 // for scheduling note changes in updateControl()
 EventDelay  kNoteChangeDelay;
@@ -48,10 +47,10 @@ Q8n0 octave_start_note = 42;
 
 void setup(){
   ratio = float_to_Q8n8(3.0f);   // define modulation ratio in float and convert to fixed-point
-  kNoteChangeDelay.set(200); // note duration ms, within resolution of CONTROL_RATE
+  kNoteChangeDelay.set(200); // note duration ms, within resolution of MOZZI_CONTROL_RATE
   aModDepth.setFreq(13.f);     // vary mod depth to highlight am effects
   randSeed(); // reseed the random generator for different results each time the sketch runs
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 void updateControl(){
@@ -100,7 +99,7 @@ void updateControl(){
 
 }
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   long mod = (128u+ aModulator.next()) * ((byte)128+ aModDepth.next());
   return MonoOutput::fromNBit(24, mod * aCarrier.next());
 }

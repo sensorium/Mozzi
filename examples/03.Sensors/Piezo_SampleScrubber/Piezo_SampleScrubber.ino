@@ -41,13 +41,13 @@ Smooth <int> kSmoothOffset(0.85f);
 
 
 // use: Sample <table_size, update_rate, interpolation > SampleName (wavetable)
-Sample <BLAHBLAH4B_NUM_CELLS, AUDIO_RATE, INTERP_LINEAR> aSample(BLAHBLAH4B_DATA);
+Sample <BLAHBLAH4B_NUM_CELLS, MOZZI_AUDIO_RATE, INTERP_LINEAR> aSample(BLAHBLAH4B_DATA);
 
 //Line to scrub through sample at audio rate, Line target is set at control rate
 Line <Q16n16> scrub; // Q16n16 fixed point for high precision
 
 // the number of audio steps the line has to take to reach the next offset
-const unsigned int AUDIO_STEPS_PER_CONTROL = AUDIO_RATE / CONTROL_RATE;
+const unsigned int AUDIO_STEPS_PER_CONTROL = MOZZI_AUDIO_RATE / MOZZI_CONTROL_RATE;
 
 
 void setup(){
@@ -70,7 +70,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   return MonoOutput::from8Bit(aSample.atIndex(Q16n16_to_Q16n0(scrub.next())));
 }
 

@@ -62,9 +62,9 @@ const int KNOB_PIN = 0; // set the input for the knob to analog pin 0
 const int LDR1_PIN=1; // set the analog input for fm_intensity to pin 1
 const int LDR2_PIN=2; // set the analog input for mod rate to pin 2
 
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCarrier(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aModulator(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kIntensityMod(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aCarrier(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aModulator(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kIntensityMod(COS2048_DATA);
 
 int mod_ratio = 5; // brightness (harmonics)
 long fm_intensity; // carries control info from updateControl to updateAudio
@@ -129,7 +129,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   long modulation = aSmoothIntensity.next(fm_intensity) * aModulator.next();
   return MonoOutput::from8Bit(aCarrier.phMod(modulation));
 }

@@ -52,8 +52,8 @@ AutoMap kMapIntensity(0,1023,MIN_INTENSITY,MAX_INTENSITY);
 const int KNOB_PIN = 0; // set the input for the knob to analog pin 0
 const int LDR_PIN = 1; // set the input for the LDR to analog pin 1
 
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCarrier(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aModulator(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aCarrier(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aModulator(COS2048_DATA);
 
 int mod_ratio = 3; // harmonics
 long fm_intensity; // carries control info from updateControl() to updateAudio()
@@ -97,7 +97,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   long modulation = fm_intensity * aModulator.next();
   return MonoOutput::from8Bit(aCarrier.phMod(modulation)); // phMod does the FM
 }

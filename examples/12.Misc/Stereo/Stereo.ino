@@ -25,10 +25,10 @@
 #include <tables/pinknoise8192_int8.h> // table for oscillator
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable)
-Oscil <PINKNOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(PINKNOISE8192_DATA);
+Oscil <PINKNOISE8192_NUM_CELLS, MOZZI_AUDIO_RATE> aNoise(PINKNOISE8192_DATA);
 
 //Phasor for panning
-Phasor <CONTROL_RATE> kPan; // outputs an unsigned long 0-max 32 bit positive number
+Phasor <MOZZI_CONTROL_RATE> kPan; // outputs an unsigned long 0-max 32 bit positive number
 unsigned int pan; // convey pan from updateControl() to updateAudioStereo();
 
 
@@ -45,7 +45,7 @@ void updateControl(){
   Serial.println(pan);
 }
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   int asig = aNoise.next();
   return StereoOutput::fromNBit(24, (long)pan*asig, (long)(65535-pan)*asig);
 }

@@ -30,9 +30,9 @@
 #include <tables/waveshape_compress_512_to_488_int16.h>
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA); // sine wave sound source
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aGain1(SIN2048_DATA); // to fade sine wave in and out before waveshaping
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aGain2(SIN2048_DATA); // to fade sine wave in and out before waveshaping
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA); // sine wave sound source
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aGain1(SIN2048_DATA); // to fade sine wave in and out before waveshaping
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aGain2(SIN2048_DATA); // to fade sine wave in and out before waveshaping
 
 // Chebyshev polynomial curves, The nth curve produces the n+2th harmonic component.
 WaveShaper <char> aCheby3rd(CHEBYSHEV_3RD_256_DATA); // 5th harmonic
@@ -57,7 +57,7 @@ void setup(){
   aSin.setFreq(110); // set the frequency
   aGain1.setFreq(2.f); // use a float for low frequencies, in setup it doesn't need to be fast
   aGain2.setFreq(.4f);
-  kChangeNoteDelay.set(4000); // note duration ms, within resolution of CONTROL_RATE
+  kChangeNoteDelay.set(4000); // note duration ms, within resolution of MOZZI_CONTROL_RATE
 }
 
 byte rndPentatonic(){
@@ -97,7 +97,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   char asig0 = aSin.next(); // sine wave source
   // make 2 signals fading in and out to show effect of amplitude when waveshaping with Chebyshev polynomial curves
   // offset the signals by 128 to fit in the 0-255 range for the waveshaping table lookups

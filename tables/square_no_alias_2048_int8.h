@@ -4,11 +4,7 @@ If anyone knows an efficient way to do bandlimited synthesis which could work fo
 #ifndef SQUARE_NO_ALIAS_2048_H_
 #define SQUARE_NO_ALIAS_2048_H_
  
-#if ARDUINO >= 100
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
  
 #define SQUARE_NO_ALIAS_2048_NUM_CELLS 2048

@@ -26,7 +26,7 @@ public:
 	Declare an EventDelay object.
 	@param delay_milliseconds how long until ready() returns true, after calling start().  Defaults to 0 if no parameter is supplied.
 	*/
-	EventDelay(unsigned int delay_milliseconds = 0): AUDIO_TICKS_PER_MILLISECOND((float)AUDIO_RATE/1000.0f)
+	EventDelay(unsigned int delay_milliseconds = 0): AUDIO_TICKS_PER_MILLISECOND((float)MOZZI_AUDIO_RATE/1000.0f)
 	{
 		set(delay_milliseconds);
 	}	

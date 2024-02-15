@@ -1,11 +1,7 @@
 #ifndef EMPTY_0_H_
 #define EMPTY_0_H_
  
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
  
 #define EMPTY_0_NUM_CELLS 0

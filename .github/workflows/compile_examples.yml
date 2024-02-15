@@ -57,7 +57,11 @@ jobs:
           - fqbn: arduino:avr:uno
             platforms: |
               - name: arduino:avr
-            internalid: arduino_avr   # This is just some unique id string we assign for use in the artifact name (fqbn does not qualify due to containing colons)
+            internalid: arduino_uno  # This is just some unique id string we assign for use in the artifact name (fqbn does not qualify due to containing colons)
+          - fqbn: arduino:avr:mega
+            platforms: |
+              - name: arduino:avr
+            internalid: arduino_mega
           - fqbn: esp8266:esp8266:huzzah
             type: 8266
             platforms: |
@@ -88,10 +92,20 @@ jobs:
             platforms: |
               - name: arduino:renesas_uno
             internalid: arduino_unor4
+          - fqbn: teensy:avr:teensy36
+            platforms: |
+              - name: teensy:avr
+                source-url: https://www.pjrc.com/teensy/package_teensy_index.json
+            internalid: teensy36
+          - fqbn: teensy:avr:teensy41
+            platforms: |
+              - name: teensy:avr
+                source-url: https://www.pjrc.com/teensy/package_teensy_index.json
+            internalid: teensy41
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Add marker file for github run
         run: echo "#define IN_GITHUB_RUNNER 1" > detect_github_runner.h
@@ -114,6 +128,7 @@ jobs:
             - name: Arduino_AdvancedAnalog
           enable-deltas-report: true
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
+          enable-warnings-report: true
 
       - name: Save sketches report as workflow artifact
         uses: actions/upload-artifact@v4

@@ -27,9 +27,9 @@
 #include <mozzi_rand.h>
 
 // use: Sample <table_size, update_rate> SampleName (wavetable)
-Sample <BAMBOO_00_2048_NUM_CELLS, AUDIO_RATE>aBamboo0(BAMBOO_00_2048_DATA);
-Sample <BAMBOO_01_2048_NUM_CELLS, AUDIO_RATE>aBamboo1(BAMBOO_01_2048_DATA);
-Sample <BAMBOO_02_2048_NUM_CELLS, AUDIO_RATE>aBamboo2(BAMBOO_02_2048_DATA);
+Sample <BAMBOO_00_2048_NUM_CELLS, MOZZI_AUDIO_RATE>aBamboo0(BAMBOO_00_2048_DATA);
+Sample <BAMBOO_01_2048_NUM_CELLS, MOZZI_AUDIO_RATE>aBamboo1(BAMBOO_01_2048_DATA);
+Sample <BAMBOO_02_2048_NUM_CELLS, MOZZI_AUDIO_RATE>aBamboo2(BAMBOO_02_2048_DATA);
 
 // for scheduling audio gain changes
 EventDelay kTriggerDelay;
@@ -39,7 +39,7 @@ void setup(){
   aBamboo0.setFreq((float) BAMBOO_00_2048_SAMPLERATE / (float) BAMBOO_00_2048_NUM_CELLS); // play at the speed it was recorded at
   aBamboo1.setFreq((float) BAMBOO_01_2048_SAMPLERATE / (float) BAMBOO_01_2048_NUM_CELLS);
   aBamboo2.setFreq((float) BAMBOO_02_2048_SAMPLERATE / (float) BAMBOO_02_2048_NUM_CELLS);
-  kTriggerDelay.set(111); // countdown ms, within resolution of CONTROL_RATE
+  kTriggerDelay.set(111); // countdown ms, within resolution of MOZZI_CONTROL_RATE
 }
 
 
@@ -79,7 +79,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   int asig= (int)
     ((long) aBamboo0.next()*gains.gain0 +
       aBamboo1.next()*gains.gain1 +

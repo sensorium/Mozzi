@@ -23,10 +23,10 @@
 #include <ResonantFilter.h>
 #include <mozzi_rand.h> // for rand()
 
-Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound1(CHUM9_DATA); //audio oscillator
-Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound2(CHUM9_DATA); //audio oscillator
-Oscil<COS512_NUM_CELLS, CONTROL_RATE> kFilterMod1(COS512_DATA); // to modulate filter frequency
-Oscil<COS512_NUM_CELLS, CONTROL_RATE> kFilterMod2(COS512_DATA); // to modulate filter frequency
+Oscil<CHUM9_NUM_CELLS, MOZZI_AUDIO_RATE> aCrunchySound1(CHUM9_DATA); //audio oscillator
+Oscil<CHUM9_NUM_CELLS, MOZZI_AUDIO_RATE> aCrunchySound2(CHUM9_DATA); //audio oscillator
+Oscil<COS512_NUM_CELLS, MOZZI_CONTROL_RATE> kFilterMod1(COS512_DATA); // to modulate filter frequency
+Oscil<COS512_NUM_CELLS, MOZZI_CONTROL_RATE> kFilterMod2(COS512_DATA); // to modulate filter frequency
 
 LowPassFilter lpf1;  // can be changed to HighPassFilter, BandPassFilter or NotchFilter
 LowPassFilter lpf2;
@@ -53,7 +53,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   return MonoOutput::fromAlmostNBit(9, (((char)lpf1.next(aCrunchySound1.next()))>>1) + (char)lpf2.next(aCrunchySound2.next()));
 }
 

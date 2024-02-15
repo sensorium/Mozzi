@@ -1,11 +1,7 @@
 #ifndef WHITENOISE8192_H_
 #define WHITENOISE8192_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 
 #define WHITENOISE8192_NUM_CELLS 8192

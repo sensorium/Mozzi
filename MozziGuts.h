@@ -53,7 +53,7 @@ typedef signed long int32_t;
 
 /*! @defgroup core Mozzi Core Functions
 
-/** @ingroup core
+@ingroup core
 Sets up the timers for audio and control rate processes, storing the timer
 registers so they can be restored when Mozzi stops. startMozzi() goes in your sketch's
 setup() routine.
@@ -62,7 +62,7 @@ This function intializes the timer(s) needed to move audio samples to the output
 configured @ref MOZZI_AUDIO_MODE .
 
 @param control_rate_hz Sets how often updateControl() is called.  It must be a power of 2.
-If no parameter is provided, control_rate_hz is set to CONTROL_RATE,
+If no parameter is provided, control_rate_hz is set to MOZZI_CONTROL_RATE,
 which has a default value of 64 (you can re-\#define it in your sketch).
 The practical upper limit for control rate depends on how busy the processor is,
 and you might need to do some tests to find the best setting.
@@ -72,7 +72,7 @@ which disables digital inputs on all analog input pins.  All in mozzi_analog.h a
 They are all called automatically and hidden away because it keeps things simple for a STANDARD_PLUS set up,
 but if it turns out to be confusing, they might need to become visible again.
 */
-void startMozzi(int control_rate_hz = CONTROL_RATE);
+void startMozzi(int control_rate_hz = MOZZI_CONTROL_RATE);
 
 
 
@@ -96,17 +96,21 @@ on which one(s) are required for other tasks.
 void stopMozzi();
 
 
-
+#if (MOZZI_COMPATIBILITY_LEVEL <= MOZZI_COMPATIBILITY_1_1) && MOZZI_IS(MOZZI_AUDIO_CHANNELS, MOZZI_MONO)
+AudioOutput_t updateAudio();
+#else
 /** @ingroup core
 This is where you put your audio code. updateAudio() has to keep up with the
-AUDIO_RATE of 16384 Hz, so to keep things running smoothly, avoid doing any
+MOZZI_AUDIO_RATE of 16384 or 32768 Hz, so to keep things running smoothly, avoid doing any
 calculations here which could be done in setup() or updateControl().
-@return an audio sample.  In STANDARD modes this is between -244 and 243 inclusive.
-In HIFI mode, it's a 14 bit number between -16384 and 16383 inclusive.
+@return an audio sample.
 
-TODO: Update documentation
+While is possible (in mono sketches) to return a plain unscaled int, it is generally best to return
+auto-scaled samples using MonoOutput::from8Bit(), MonoOutput::from16Bit(), MonoOutput::fromNbit(), or
+their StereoOutput equivalents.
 */
-AudioOutput_t updateAudio();
+AudioOutput updateAudio();
+#endif
 
 /** @ingroup core
 This is where you put your control code. You need updateControl() somewhere in
@@ -156,9 +160,9 @@ int getAudioInput();
 /** @ingroup core
 An alternative for Arduino time functions like micros() and millis(). This is slightly faster than micros(),
 and also it is synchronized with the currently processed audio sample (which, due to the audio
-output buffer, could diverge up to 256/AUDIO_RATE seconds from the current time).
+output buffer, could diverge up to 256/MOZZI_AUDIO_RATE seconds from the current time).
 audioTicks() is updated each time an audio sample
-is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when AUDIO_RATE is
+is output, so the resolution is 1/MOZZI_AUDIO_RATE microseconds (61 microseconds when MOZZI_AUDIO_RATE is
 16384 Hz).
 @return the number of audio ticks since the program began.
 */
@@ -169,9 +173,9 @@ unsigned long audioTicks();
 /** @ingroup core
 An alternative for Arduino time functions like micros() and millis(). This is slightly faster than micros(),
 and also it is synchronized with the currently processed audio sample (which, due to the audio
-output buffer, could diverge up to 256/AUDIO_RATE seconds from the current time).
+output buffer, could diverge up to 256/MOZZI_AUDIO_RATE seconds from the current time).
 audioTicks() is updated each time an audio sample
-is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when AUDIO_RATE is
+is output, so the resolution is 1/MOZZI_AUDIO_RATE microseconds (61 microseconds when MOZZI_AUDIO_RATE is
 16384 Hz).
 @return the approximate number of microseconds since the program began.
 @todo  incorporate mozziMicros() in a more accurate EventDelay()?

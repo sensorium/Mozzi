@@ -35,7 +35,7 @@
 #define PIN 4  // the pin we are interested in
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 
 void setup(){
@@ -70,7 +70,7 @@ void changeFreq()
 
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   return MonoOutput::from8Bit(aSin.next()); // return an int signal centred around 0
 }
 

@@ -1,11 +1,7 @@
 #ifndef sin1024_uint_H_
 #define sin1024_uint_H_
  
-#if ARDUINO >= 100
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
  
 #define sin1024_uint_NUM_CELLS 1024

@@ -1,11 +1,7 @@
 #ifndef BAMBOO_00_4096_H_
 #define BAMBOO_00_4096_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 
 #define BAMBOO_00_4096_NUM_CELLS 4096

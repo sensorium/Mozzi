@@ -1,11 +1,7 @@
 #ifndef WAVESHAPE2_SOFTERCLIP_H_
 #define WAVESHAPE2_SOFTERCLIP_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 
 /* table for waveshaper to impose softer clipping

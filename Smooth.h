@@ -268,6 +268,160 @@ public:
 
 /** @endcond */
 
+
+/* Specialization for UFix */
+template<int8_t NI, int8_t NF>
+class Smooth<UFix<NI,NF>>
+{
+private:
+  typedef UFix<NI, NF> internal_type;
+  internal_type last_out;
+  UFix<0,16> a;
+
+public:
+
+
+  /** Constructor.
+      @param smoothness sets how much smoothing the filter will apply to
+      its input. Use a float or a UFix<0,NF> in the range 0~1, where 0 is not very smooth and 0.99 is
+      very smooth.
+  */
+  template<typename T>
+  Smooth(T smoothness)
+  {
+    setSmoothness(smoothness);
+  }
+
+  /** Constructor.
+      This constructor which doesn't take a smoothness parameter is useful when you incorporate Smooth into another class definition.
+      You need to call setSmoothness(float) for your object before using Smooth.
+      @note there's probably a better way to do this...
+  */
+  Smooth()
+  {}
+
+
+  /** Filters the input and returns the filtered value.  You can also use the operator() function, eg. something like mySmoother(input-value).
+      @param in the signal to be smoothed.
+      @return the filtered signal.
+  */
+  inline
+  internal_type next(internal_type in)
+  {
+    internal_type out = last_out + a * (in - last_out);  // With FixMath, the syntax is actually the same than with floats :)
+    last_out = out;
+    return out;
+  }
+
+  
+
+  inline
+  internal_type operator()(internal_type n) {
+    return next(n);
+  }
+
+  /** Sets how much smoothing the filter will apply to its input.
+      @param smoothness sets how much smoothing the filter will apply to
+      its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
+      very smooth.
+  */
+  inline
+  void setSmoothness(float smoothness)
+  {
+    a=internal_type(1.f-smoothness);
+  }
+
+  /** Sets how much smoothing the filter will apply to its input.
+      @param smoothness sets how much smoothing the filter will apply to
+      its input. Use a UFix<0,NF> in the range 0~1, where 0 is not very smooth and 0.99 is
+      very smooth.
+  */
+  template<int8_t _NF>
+  void setSmoothness(UFix<0,_NF> smoothness)
+  {
+    a = UFix<1,0>(1) - smoothness;
+  }  
+
+};
+
+
+
+
+/* Specialization for SFix */
+template<int8_t NI, int8_t NF>
+class Smooth<SFix<NI,NF>>
+{
+private:
+  typedef SFix<NI, NF> internal_type;
+  internal_type last_out;
+  UFix<0,16> a;
+
+public:
+
+
+  /** Constructor.
+      @param smoothness sets how much smoothing the filter will apply to
+      its input. Use a float or a UFix<0,NF> in the range 0~1, where 0 is not very smooth and 0.99 is
+      very smooth.
+  */
+  template<typename T>
+  Smooth(T smoothness)
+  {
+    setSmoothness(smoothness);
+  }
+
+  /** Constructor.
+      This constructor which doesn't take a smoothness parameter is useful when you incorporate Smooth into another class definition.
+      You need to call setSmoothness(float) for your object before using Smooth.
+      @note there's probably a better way to do this...
+  */
+  Smooth()
+  {}
+
+
+  /** Filters the input and returns the filtered value.  You can also use the operator() function, eg. something like mySmoother(input-value).
+      @param in the signal to be smoothed.
+      @return the filtered signal.
+  */
+  inline
+  internal_type next(internal_type in)
+  {
+    internal_type out = last_out + a * (in - last_out);
+    last_out = out;
+    return out;
+  }
+
+  
+
+  inline
+  internal_type operator()(internal_type n) {
+    return next(n);
+  }
+
+  /** Sets how much smoothing the filter will apply to its input.
+      @param smoothness sets how much smoothing the filter will apply to
+      its input. Use a float in the range 0~1, where 0 is not very smooth and 0.99 is
+      very smooth.
+  */
+  inline
+  void setSmoothness(float smoothness)
+  {
+    a=internal_type(1.f-smoothness);
+  }
+
+  /** Sets how much smoothing the filter will apply to its input.
+      @param smoothness sets how much smoothing the filter will apply to
+      its input. Use a UFix<0,NF> in the range 0~1, where 0 is not very smooth and 0.99 is
+      very smooth.
+  */
+  template<int8_t _NF>
+  void setSmoothness(UFix<0,_NF> smoothness)
+  {
+    a = UFix<1,0>(1) - smoothness;
+  }  
+
+};
+
 /**
 @example 05.Control_Filters/Smooth/Smooth.ino
 This example demonstrates the Smooth class.

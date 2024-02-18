@@ -18,6 +18,8 @@
  #include "WProgram.h"
 #endif
 
+#include<FixMath.h>
+
 /** For linear changes with a minimum of calculation at each step. For instance,
 you can use Line to make an oscillator glide from one frequency to another,
 pre-calculating the required phase increments for each end and then letting your
@@ -32,6 +34,9 @@ away. Use Mozzi's fixed-point number types in mozzi_fixmath.h, which enable you 
 represent fractional numbers. Google "fixed point arithmetic" if this is new to
 you.
 */
+
+
+
 
 template <class T>
 class Line
@@ -314,6 +319,174 @@ public:
 		set(targetvalue, num_steps);
 	}
 };
+
+
+/* UFix specialisation */
+template<int8_t NI, int8_t NF>
+class Line<UFix<NI, NF>>
+{
+private:
+  typedef UFix<NI, NF> internal_type;
+  internal_type current_value;
+  internal_type step_size;
+
+public:
+  /** Constructor. Use the template parameter to set the type of numbers you
+      want to use. For example, Line \<int\> myline; makes a Line which uses ints.
+  */
+  Line (){;}
+
+  /** Increments one step along the line.
+      @return the next value.
+  */
+  inline
+  internal_type next()
+  {
+    current_value = current_value + step_size;
+    return current_value;
+  }
+
+  /** Set the current value of the line. 
+      The Line will continue incrementing from this
+      value using any previously calculated step size.
+      @param value the number to set the Line's current_value to.
+  */
+  inline
+  void set(internal_type value)
+  {
+    current_value=value;
+  }
+
+  /** Given a target value and the number of steps to take on the way, this calculates the step size needed to get there from the current value.
+      @param targetvalue the value to move towards.
+      @param num_steps how many steps to take to reach the target as a UFix<_NI,0>
+  */
+  template<int8_t _NI>
+  void set(internal_type targetvalue, UFix<_NI,0> num_steps)
+  {
+    if(num_steps.asRaw()) {
+      internal_type numerator = targetvalue-current_value;
+      step_size = numerator*num_steps.invAccurate();
+    } else {
+      step_size = 0;
+      current_value = targetvalue;
+    }
+  }
+
+
+  /** Given a target value and the number of steps to take on the way, this calculates the step size needed to get there from the current value.
+      @param targetvalue the value to move towards.
+      @param num_steps how many steps to take to reach the target.
+  */
+  template<typename T>
+  void set(internal_type targetvalue, T num_steps)
+  {
+    if(num_steps) {
+      internal_type numerator = targetvalue-current_value;
+      step_size = internal_type(numerator.asRaw()/num_steps,true);
+    } else {
+      step_size = 0;
+      current_value = targetvalue;
+    }
+  }
+
+  /** Given a new starting value, target value and the number of steps to take on the way, this sets the step size needed to get there.
+      @param startvalue the number to set the Line's current_value to.
+      @param targetvalue the value to move towards.
+      @param num_steps how many steps to take to reach the target.
+  */
+  template<typename T>
+  void set(internal_type startvalue, internal_type targetvalue, T num_steps)
+  {
+    set(startvalue);
+    set(targetvalue, num_steps);
+  }  
+};
+
+
+/* SFix specialisation (if someone has an idea to avoid duplication with UFix) */
+template<int8_t NI, int8_t NF>
+class Line<SFix<NI, NF>>
+{
+private:
+  typedef SFix<NI, NF> internal_type;
+  internal_type current_value;
+  internal_type step_size;
+
+public:
+  /** Constructor. Use the template parameter to set the type of numbers you
+      want to use. For example, Line \<int\> myline; makes a Line which uses ints.
+  */
+  Line (){;}
+
+  /** Increments one step along the line.
+      @return the next value.
+  */
+  inline
+  internal_type next()
+  {
+    current_value = current_value + step_size;
+    return current_value;
+  }
+
+  /** Set the current value of the line. 
+      The Line will continue incrementing from this
+      value using any previously calculated step size.
+      @param value the number to set the Line's current_value to.
+  */
+  inline
+  void set(internal_type value)
+  {
+    current_value=value;
+  }
+
+  /** Given a target value and the number of steps to take on the way, this calculates the step size needed to get there from the current value.
+      @param targetvalue the value to move towards.
+      @param num_steps how many steps to take to reach the target as a UFix<_NI,0>
+  */
+  template<int8_t _NI>
+  void set(internal_type targetvalue, UFix<_NI,0> num_steps)
+  {
+    if(num_steps.asRaw()) {
+      internal_type numerator = targetvalue-current_value;
+      step_size = numerator*num_steps.invAccurate();
+    } else {
+      step_size = 0;
+      current_value = targetvalue;
+    }
+  }
+
+
+  /** Given a target value and the number of steps to take on the way, this calculates the step size needed to get there from the current value.
+      @param targetvalue the value to move towards.
+      @param num_steps how many steps to take to reach the target.
+  */
+  template<typename T>
+  void set(internal_type targetvalue, T num_steps)
+  {
+    if(num_steps) {
+      internal_type numerator = targetvalue-current_value;
+      step_size = internal_type(numerator.asRaw()/num_steps,true);
+    } else {
+      step_size = 0;
+      current_value = targetvalue;
+    }
+  }
+
+  /** Given a new starting value, target value and the number of steps to take on the way, this sets the step size needed to get there.
+      @param startvalue the number to set the Line's current_value to.
+      @param targetvalue the value to move towards.
+      @param num_steps how many steps to take to reach the target.
+  */
+  template<typename T>
+  void set(internal_type startvalue, internal_type targetvalue, T num_steps)
+  {
+    set(startvalue);
+    set(targetvalue, num_steps);
+  }  
+};
+
+
 
 /**
 @example 02.Control/Control_Tremelo/Control_Tremelo.ino

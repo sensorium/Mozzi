@@ -42,8 +42,8 @@ template <class T>
 class Line
 {
 private:
-	volatile T current_value; // volatile because it could be set in control interrupt and updated in audio
-	volatile T step_size;
+	T current_value;
+	T step_size;
 
 public:
 	/** Constructor. Use the template parameter to set the type of numbers you
@@ -117,7 +117,7 @@ template <>
 class Line <unsigned char>
 {
 private:
-	volatile unsigned char current_value; // volatile because it could be set in control interrupt and updated in audio
+	unsigned char current_value;
 	char step_size;
 
 public:
@@ -186,7 +186,7 @@ template <>
 class Line <unsigned int>
 {
 private:
-	volatile unsigned int current_value; // volatile because it could be set in control interrupt and updated in audio
+	unsigned int current_value;
 	int step_size;
 
 public:
@@ -258,7 +258,7 @@ template <>
 class Line <unsigned long>
 {
 private:
-	volatile unsigned long current_value; // volatile because it could be set in control interrupt and updated in audio
+	unsigned long current_value;
 	long step_size;
 
 public:

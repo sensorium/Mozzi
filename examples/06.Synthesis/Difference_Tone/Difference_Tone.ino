@@ -3,6 +3,8 @@
     using Mozzi sonification library.
 
     Demonstrates the use of EventDelay(), rand() and fixed-point numbers.
+    
+    Note that an example using the newer FixMath paradigm is also available: Difference_Tone_FixMath.
 
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
     DAC/A14 on Teensy 3.1, or

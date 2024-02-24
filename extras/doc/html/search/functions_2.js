@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['dcfilter',['DCfilter',['../class_d_cfilter.html#ab55e871fc9d11dfb9231e44627181c2c',1,'DCfilter']]],
-  ['disconnectdigitalin',['disconnectDigitalIn',['../group__analog.html#ga532fe99fe78e34d4e6ae0ae2c7528353',1,'disconnectDigitalIn(uint8_t channel_num):&#160;mozzi_analog.cpp'],['../group__analog.html#ga532fe99fe78e34d4e6ae0ae2c7528353',1,'disconnectDigitalIn(uint8_t channel_num):&#160;mozzi_analog.cpp']]]
+  ['cappoll',['CapPoll',['../class_cap_poll.html#a4f691e78391a306d9ee89cdb1026096f',1,'CapPoll']]],
+  ['circularbuffer',['CircularBuffer',['../class_circular_buffer.html#a6789c0d6d73594fdd412a39445b5cd67',1,'CircularBuffer']]],
+  ['clip',['clip',['../struct_stereo_output.html#ac949f14e2d88f3c4e11986675addb228',1,'StereoOutput::clip()'],['../struct_mono_output.html#a0e641cbab9732214c696cd1071e45de5',1,'MonoOutput::clip()']]]
 ];

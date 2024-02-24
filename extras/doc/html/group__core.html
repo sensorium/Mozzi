@@ -120,11 +120,11 @@ Macros</h2></td></tr>
 <tr class="memdesc:ga5b972bafb3267e820993812beca1b298"><td class="mdescLeft">&#160;</td><td class="mdescRight">Holds the audio rate setting.  <a href="#ga5b972bafb3267e820993812beca1b298">More...</a><br /></td></tr>
 <tr class="separator:ga5b972bafb3267e820993812beca1b298"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad6f503b77ed0c93394363460509f5cbd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#gad6f503b77ed0c93394363460509f5cbd">AUDIO_INPUT_PIN</a>&#160;&#160;&#160;0</td></tr>
-<tr class="memdesc:gad6f503b77ed0c93394363460509f5cbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether or not to use audio input.  <a href="#gad6f503b77ed0c93394363460509f5cbd">More...</a><br /></td></tr>
+<tr class="memdesc:gad6f503b77ed0c93394363460509f5cbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">This sets which analog input channel to use for audio input, if you have uncommented #define USE_AUDIO_INPUT true in mozz_config.h.  <a href="#gad6f503b77ed0c93394363460509f5cbd">More...</a><br /></td></tr>
 <tr class="separator:gad6f503b77ed0c93394363460509f5cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga41e77c76435031bd6088de496aa2a9e0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga41e77c76435031bd6088de496aa2a9e0">STEREO_HACK</a>&#160;&#160;&#160;false</td></tr>
-<tr class="memdesc:ga41e77c76435031bd6088de496aa2a9e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This sets an option for stereo output, a hack which requires variables audio_signal_1 and audio_signal_2 to be set in <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a>, instead of returning a single audio value as is usual for standard mono.  <a href="#ga41e77c76435031bd6088de496aa2a9e0">More...</a><br /></td></tr>
-<tr class="separator:ga41e77c76435031bd6088de496aa2a9e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8fc745a0f6e356f4b79cb0ab059c40f0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#ga8fc745a0f6e356f4b79cb0ab059c40f0">AUDIO_CHANNELS</a>&#160;&#160;&#160;MONO</td></tr>
+<tr class="memdesc:ga8fc745a0f6e356f4b79cb0ab059c40f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This sets allows to change from a single/mono audio output channel to stereo output.  <a href="#ga8fc745a0f6e356f4b79cb0ab059c40f0">More...</a><br /></td></tr>
+<tr class="separator:ga8fc745a0f6e356f4b79cb0ab059c40f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gafed43d5318cc354fe1ab9ede77da8e94"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__core.html#gafed43d5318cc354fe1ab9ede77da8e94">EXTERNAL_AUDIO_OUTPUT</a>&#160;&#160;&#160;false</td></tr>
 <tr class="memdesc:gafed43d5318cc354fe1ab9ede77da8e94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defining this option as true in <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a> allows to completely customize the audio output, e.g.  <a href="#gafed43d5318cc354fe1ab9ede77da8e94">More...</a><br /></td></tr>
 <tr class="separator:gafed43d5318cc354fe1ab9ede77da8e94"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,6 +142,9 @@ Macros</h2></td></tr>
 <tr class="separator:ga800c094e0a14fc31d87a360b3807a1b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa2b18130c536085943a5768146fcb8bb"><td class="memItemLeft" align="right" valign="top"><a id="gaa2b18130c536085943a5768146fcb8bb"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>AUDIO_BIAS</b>&#160;&#160;&#160;((uint16_t) 2048)</td></tr>
+<tr class="separator:gaa2b18130c536085943a5768146fcb8bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa2b18130c536085943a5768146fcb8bb"><td class="memItemLeft" align="right" valign="top"><a id="gaa2b18130c536085943a5768146fcb8bb"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>AUDIO_BIAS</b>&#160;&#160;&#160;((uint16_t) 512)</td></tr>
 <tr class="separator:gaa2b18130c536085943a5768146fcb8bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -180,6 +183,28 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
  Core definitions and functions. </p>
 <p>The bones of every Mozzi sketch. </p>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ga8fc745a0f6e356f4b79cb0ab059c40f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8fc745a0f6e356f4b79cb0ab059c40f0">&#9670;&nbsp;</a></span>AUDIO_CHANNELS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define AUDIO_CHANNELS&#160;&#160;&#160;MONO</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This sets allows to change from a single/mono audio output channel to stereo output. </p>
+<p>To actually generate two channels, your <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a>-function should return a <a class="el" href="struct_stereo_output.html" title="This struct encapsulates one frame of mono audio output. ">StereoOutput()</a>. Sketches returning a <a class="el" href="struct_mono_output.html" title="This struct encapsulates one frame of mono audio output. ">MonoOutput()</a> in a stereo config, or vice versa will continue to work, but will generate a warning a compile time.</p>
+<dl class="section note"><dt>Note</dt><dd>This option superseeds the earlier STEREO_HACK, which is still available at the time of this writing, but should not be used in new sketches.</dd>
+<dd>
+At the time of this writing, only MONO and STEREO are supported. The value of MONO is 1 and the value of STEREO is 2, so future extensions are also expected to set this to the number of available channels. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="mozzi__config_8h_source.html#l00092">92</a> of file <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a>.</p>
+
+</div>
+</div>
 <a id="gad6f503b77ed0c93394363460509f5cbd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gad6f503b77ed0c93394363460509f5cbd">&#9670;&nbsp;</a></span>AUDIO_INPUT_PIN</h2>
 
@@ -192,10 +217,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
       </table>
 </div><div class="memdoc">
 
-<p>Whether or not to use audio input. </p>
-<p>Put #define USE_AUDIO_INPUT true in <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> to enable audio input on analog pin AUDIO_INPUT_PIN, otherwise make it false, to save resources. This sets which analog input channel to use for audio input, if you have #define USE_AUDIO_INPUT true in mozz_config.h </p>
+<p>This sets which analog input channel to use for audio input, if you have uncommented #define USE_AUDIO_INPUT true in mozz_config.h. </p>
+<dl class="section note"><dt>Note</dt><dd>You may have to call setupFastAnalogReads(FASTEST_ADC) after setupMozzi(), when using this. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__config_8h_source.html#l00082">82</a> of file <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__config_8h_source.html#l00076">76</a> of file <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a>.</p>
 
 </div>
 </div>
@@ -282,20 +307,53 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <p>STANDARD_PLUS mode uses 32768 Hz PWM rate, so the PWM carrier is out of hearing range. In this mode every alternate interrupt is used for the sample update (unless you /#define AUDIO_RATE 32768 in <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a>), which makes it slightly less efficient than STANDARD, but almost always better.</p>
 <p>Advantages: Only uses one timer for audio, and one output pin. Disadvantages: low dynamic range.</p>
 <p>Below is a list of the Digital Pins used by Mozzi for STANDARD and STANDARD_PLUS audio out on different boards. Those which have been tested and reported to work have an x. Feedback about others is welcome.</p>
-<p>x....9........Arduino Uno <br />
-x....9........Arduino Duemilanove <br />
-x....9........Arduino Nano <br />
-x....9........Arduino Leonardo <br />
-x....9........Ardweeny <br />
-x....9........Boarduino <br />
-x...11.......Freetronics EtherMega *broken since Jan 2015 <br />
-x...11.......Arduino Mega *broken since Jan 2015 <br />
-....14........Teensy <br />
-x..B5........Teensy2 <br />
-x..B5(25)..Teensy2++ <br />
-x..A14.....Teensy 3.0, 3.1 and 3.2 <br />
-....13 .......Sanguino <br />
- On Teensy 3.* STANDARD and STANDARD_PLUS are the same, providing 16384Hz sample rate and 12 bit resolution on pin A14/ADC. The Teensy 3.* DAC output does not rely on PWM.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Model  </th><th class="markdownTableHeadNone">Pin  </th><th class="markdownTableHeadNone">Tested   </th></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Arduino Uno  </td><td class="markdownTableBodyNone">9  </td><td class="markdownTableBodyNone">yes   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Arduino Duemilanove  </td><td class="markdownTableBodyNone">9  </td><td class="markdownTableBodyNone">yes   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Arduino Nano  </td><td class="markdownTableBodyNone">9  </td><td class="markdownTableBodyNone">yes   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Arduino Pro Mini  </td><td class="markdownTableBodyNone">9  </td><td class="markdownTableBodyNone">yes   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Arduino Leonardo  </td><td class="markdownTableBodyNone">9  </td><td class="markdownTableBodyNone">yes   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Arduino Mega  </td><td class="markdownTableBodyNone">11  </td><td class="markdownTableBodyNone">yes   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Freetronics EtherMega  </td><td class="markdownTableBodyNone">11  </td><td class="markdownTableBodyNone">yes   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Ardweeny  </td><td class="markdownTableBodyNone">9  </td><td class="markdownTableBodyNone">yes   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Boarduino  </td><td class="markdownTableBodyNone">9  </td><td class="markdownTableBodyNone">yes   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Teensy  </td><td class="markdownTableBodyNone">14  </td><td class="markdownTableBodyNone">-   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Teensy2  </td><td class="markdownTableBodyNone">B5  </td><td class="markdownTableBodyNone">yes   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Teensy2++  </td><td class="markdownTableBodyNone">B5(25)  </td><td class="markdownTableBodyNone">yes   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Teensy 3.0 3.1 LC 3.2  </td><td class="markdownTableBodyNone">DAC/D  </td><td class="markdownTableBodyNone">yes   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Teensy 3.4, 3.5  </td><td class="markdownTableBodyNone">DAC/D  </td><td class="markdownTableBodyNone">-   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Teensy 4.0 4.1  </td><td class="markdownTableBodyNone">A8  </td><td class="markdownTableBodyNone">yes   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Gemma M0  </td><td class="markdownTableBodyNone">A0  </td><td class="markdownTableBodyNone">yes   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Adafruit Playground Express  </td><td class="markdownTableBodyNone">Built in Speaker  </td><td class="markdownTableBodyNone">yes   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Sanguino  </td><td class="markdownTableBodyNone">13  </td><td class="markdownTableBodyNone">-   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">STM32duino (see "Hardware specific notes", below)  </td><td class="markdownTableBodyNone">PB8  </td><td class="markdownTableBodyNone">yes   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">ESP8266 <em>see details in README</em>  </td><td class="markdownTableBodyNone">GPIO2  </td><td class="markdownTableBodyNone">yes   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">RP2040  </td><td class="markdownTableBodyNone">0  </td><td class="markdownTableBodyNone">yes   </td></tr>
+</table>
+<p>On Teensy 3.* STANDARD and STANDARD_PLUS are the same, providing 16384Hz sample rate and 12 bit resolution on pin A14/ADC. The Teensy 3.* DAC output does not rely on PWM.</p>
 <p>Used to set AUDIO_MODE to HIFI.</p>
 <h2>HIFI for AVR and STM32 (not for Teensy 3.*) </h2>
 <p>Use #define AUDIO_MODE HIFI in Mozzi/config.h to set the audio mode to HIFI for output 14 bit sound at 16384 Hz sample rate and 125kHz PWM rate. The high PWM rate of HIFI mode places the carrier frequency beyond audible range.</p>
@@ -322,7 +380,7 @@ x...........B5(25)...B6(26)...........Teensy2++ <br />
 .................13.........12...............Sanguino <br />
  HIFI is not available/not required on Teensy 3.* or ARM. </p>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00153">153</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00164">164</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -364,25 +422,6 @@ x...........B5(25)...B6(26)...........Teensy2++ <br />
 
 </div>
 </div>
-<a id="ga41e77c76435031bd6088de496aa2a9e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga41e77c76435031bd6088de496aa2a9e0">&#9670;&nbsp;</a></span>STEREO_HACK</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define STEREO_HACK&#160;&#160;&#160;false</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This sets an option for stereo output, a hack which requires variables audio_signal_1 and audio_signal_2 to be set in <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a>, instead of returning a single audio value as is usual for standard mono. </p>
-<p>You need to have #define STEREO_HACK true in <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a> </p>
-
-<p class="definition">Definition at line <a class="el" href="mozzi__config_8h_source.html#l00092">92</a> of file <a class="el" href="mozzi__config_8h_source.html">mozzi_config.h</a>.</p>
-
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga2fca37b988ab369e2f3c3108c683e59d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga2fca37b988ab369e2f3c3108c683e59d">&#9670;&nbsp;</a></span>audioHook()</h2>
@@ -402,7 +441,7 @@ x...........B5(25)...B6(26)...........Teensy2++ <br />
 <p>This is required in Arduino's loop(). </p>
 <p>If there is room in Mozzi's output buffer, <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop(). ">audioHook()</a> calls <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a> once and puts the result into the output buffer. Also, if #define USE_AUDIO_INPUT true is in <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a>, <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop(). ">audioHook()</a> takes care of moving audio input from the input buffer so it can be accessed with <a class="el" href="group__analog.html#ga3f15eb8d6694020d170ebcbedb645de7" title="This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the Mozzi/mozzi...">getAudioInput()</a> in your <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a> routine. If other functions are called in loop() along with <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop(). ">audioHook()</a>, see if they can be called less often by moving them into <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>, to save processing power. Otherwise it may be most efficient to calculate a block of samples at a time by putting <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop(). ">audioHook()</a> in a loop of its own, rather than calculating only 1 sample for each time your other functions are called. </p>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00325">325</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00190">190</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -424,7 +463,7 @@ x...........B5(25)...B6(26)...........Teensy2++ <br />
 <p>An alternative for Arduino time functions like micros() and millis(). </p>
 <p>This is slightly faster than micros(), and also it is synchronized with the currently processed audio sample (which, due to the audio output buffer, could diverge up to 256/AUDIO_RATE seconds from the current time). <a class="el" href="group__core.html#ga55fa9d48f327b646c2f71cef7da7b8f0" title="An alternative for Arduino time functions like micros() and millis(). ">audioTicks()</a> is updated each time an audio sample is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when AUDIO_RATE is 16384 Hz). </p><dl class="section return"><dt>Returns</dt><dd>the number of audio ticks since the program began. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00752">752</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00219">219</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -446,7 +485,7 @@ x...........B5(25)...B6(26)...........Teensy2++ <br />
 <p>An alternative for Arduino time functions like micros() and millis(). </p>
 <p>This is slightly faster than micros(), and also it is synchronized with the currently processed audio sample (which, due to the audio output buffer, could diverge up to 256/AUDIO_RATE seconds from the current time). <a class="el" href="group__core.html#ga55fa9d48f327b646c2f71cef7da7b8f0" title="An alternative for Arduino time functions like micros() and millis(). ">audioTicks()</a> is updated each time an audio sample is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when AUDIO_RATE is 16384 Hz). </p><dl class="section return"><dt>Returns</dt><dd>the approximate number of microseconds since the program began. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00768">768</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00229">229</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -479,7 +518,7 @@ x...........B5(25)...B6(26)...........Teensy2++ <br />
 </dl>
 <dl class="section note"><dt>Note</dt><dd>startMozzi calls setupMozziADC(), which calls <a class="el" href="group__analog.html#gae909f8857d71ed79f277ee024de52574" title="  This is automatically called in startMozzi. ">setupFastAnalogRead()</a> and <a class="el" href="group__analog.html#ga5042e7c576dd0307be38eb70efdb69fe" title="Prepare all analog input channels by turning off their digital input buffers. ">adcDisconnectAllDigitalIns()</a>, which disables digital inputs on all analog input pins. All in <a class="el" href="mozzi__analog_8h_source.html">mozzi_analog.h</a> and easy to change if you need to (hack). They are all called automatically and hidden away because it keeps things simple for a STANDARD_PLUS set up, but if it turns out to be confusing, they might need to become visible again. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00689">689</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00234">234</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
 
 </div>
 </div>
@@ -503,7 +542,7 @@ x...........B5(25)...B6(26)...........Teensy2++ <br />
 <p>A potentially better option for resolving timer conflicts involves using non-blocking methods, such as demonstrated by the twowire_nonblock code in the forked version of Mozzi on github, so sound production can continue while reading sensors.</p>
 <p>As it is, stopMozzi restores all the Timers used by Mozzi to their previous settings. Another scenario which could be easily hacked in <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a> could involve individually saving and restoring particular Timer registers depending on which one(s) are required for other tasks. </p>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00704">704</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts__impl___a_v_r_8hpp_source.html#l00337">337</a> of file <a class="el" href="_mozzi_guts__impl___a_v_r_8hpp_source.html">MozziGuts_impl_AVR.hpp</a>.</p>
 
 </div>
 </div>
@@ -572,7 +611,7 @@ x...........B5(25)...B6(26)...........Teensy2++ <br />
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Feb 8 2021 17:03:47 for Mozzi by
+    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

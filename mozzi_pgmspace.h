@@ -6,7 +6,7 @@
 
 #include "hardware_defines.h"
 
-#if IS_ESP8266() || IS_ESP32() || IS_RP2040()
+#if IS_ESP8266() || IS_ESP32() || IS_RP2040() || IS_RENESAS()
 template<typename T> inline T FLASH_OR_RAM_READ(T* address) {
     return (T) (*address);
 }
@@ -14,8 +14,8 @@ template<typename T> inline T FLASH_OR_RAM_READ(T* address) {
 #else
 #include <avr/pgmspace.h>
 // work around missing std::is_const
-template<typename T> inline bool mozzi_is_const_pointer(T* x) { return false; }
-template<typename T> inline bool mozzi_is_const_pointer(const T* x) { return true; }
+template<typename T> inline bool mozzi_is_const_pointer(T*) { return false; }
+template<typename T> inline bool mozzi_is_const_pointer(const T*) { return true; }
 /** @ingroup core
  *  Helper function to FLASH_OR_RAM_READ(). You do not want to call this, directly. */
 template<typename T> inline T mozzi_pgm_read_wrapper(const T* address) {

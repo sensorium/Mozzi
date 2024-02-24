@@ -3,9 +3,9 @@
   in the background with an interrupt, using PinChangeInt library
   with Mozzi sonification library.
 
-  Demonstrates using Mozzi with PinChangeInt library from:
-  http://code.google.com/p/arduino-pinchangeint/
-  (Not for Teensy 3.1)
+  Demonstrates using Mozzi with PinChangeInterrupt library from:
+  https://github.com/NicoHood/PinChangeInterrupt
+  (AVR only)
 
   Circuit:
 
@@ -30,7 +30,7 @@
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator
-#include <PinChangeInt.h>
+#include <PinChangeInterrupt.h>
 
 #define PIN 4  // the pin we are interested in
 
@@ -42,7 +42,7 @@ void setup(){
   aSin.setFreq(440);
   pinMode(PIN, INPUT);     //set the pin to input
   digitalWrite(PIN, HIGH); //use the internal pullup resistor
-  PCintPort::attachInterrupt(PIN, changeFreq,RISING); // attach a PinChange Interrupt to our pin on the rising edge
+  attachPCINT(digitalPinToPCINT(PIN), changeFreq, RISING); // attach a PinChange Interrupt to our pin on the rising edge
   // (RISING, FALLING and CHANGE all work with this library)
   // and execute the function changeFreq when that pin changes
   startMozzi();

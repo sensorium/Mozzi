@@ -102,6 +102,7 @@ $(document).ready(function(){initNavTree('struct_stereo_output.html','');});
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="struct_stereo_output-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">StereoOutput Struct Reference</div>  </div>
@@ -123,6 +124,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_stereo_output.html#a78371f79ab53e2b7c6ec5e0e04fc5062">StereoOutput</a> ()</td></tr>
 <tr class="memdesc:a78371f79ab53e2b7c6ec5e0e04fc5062"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default contstructor. <br /></td></tr>
 <tr class="separator:a78371f79ab53e2b7c6ec5e0e04fc5062"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac87c6503c5850eef507af9cc8eebd4b8"><td class="memItemLeft" align="right" valign="top">AudioOutput_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_stereo_output.html#ac87c6503c5850eef507af9cc8eebd4b8">portable</a> () const __attribute__((deprecated(&quot;Sketch generates stereo output</td></tr>
+<tr class="memdesc:ac87c6503c5850eef507af9cc8eebd4b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Conversion to int operator: If used in a mono config, returns only the left channel (and gives a compile time warning).  <a href="#ac87c6503c5850eef507af9cc8eebd4b8">More...</a><br /></td></tr>
+<tr class="separator:ac87c6503c5850eef507af9cc8eebd4b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f5572fce5164f49fc21d7a828fe04a8"><td class="memItemLeft" align="right" valign="top"><a id="a1f5572fce5164f49fc21d7a828fe04a8"></a>
 AudioOutputStorage_t&#160;</td><td class="memItemRight" valign="bottom"><b>l</b> () const</td></tr>
 <tr class="separator:a1f5572fce5164f49fc21d7a828fe04a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,24 +138,28 @@ AudioOutputStorage_t&#160;</td><td class="memItemRight" valign="bottom"><b>r</b>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ad466b7b3a4a5334042f9c4dd99f3347b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_stereo_output.html">StereoOutput</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_stereo_output.html#ad466b7b3a4a5334042f9c4dd99f3347b">fromNBit</a> (uint8_t bits, int16_t l, int16_t r)</td></tr>
-<tr class="separator:ad466b7b3a4a5334042f9c4dd99f3347b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37c7c0de638ba07d99b14e23c617d264"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_stereo_output.html">StereoOutput</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_stereo_output.html#a37c7c0de638ba07d99b14e23c617d264">fromNBit</a> (uint8_t bits, int32_t l, int32_t r)</td></tr>
-<tr class="separator:a37c7c0de638ba07d99b14e23c617d264"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba322189d188eb977cc74a8c6ae909c1"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aba322189d188eb977cc74a8c6ae909c1"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="struct_stereo_output.html">StereoOutput</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_stereo_output.html#aba322189d188eb977cc74a8c6ae909c1">fromNBit</a> (uint8_t bits, T l, T r)</td></tr>
+<tr class="separator:aba322189d188eb977cc74a8c6ae909c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3cdc76d522f2b290dc1b64a504373a4f"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_stereo_output.html">StereoOutput</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_stereo_output.html#a3cdc76d522f2b290dc1b64a504373a4f">from8Bit</a> (int16_t l, int16_t r)</td></tr>
 <tr class="separator:a3cdc76d522f2b290dc1b64a504373a4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a971c9597ec68cc46b831c9aaee020431"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_stereo_output.html">StereoOutput</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_stereo_output.html#a971c9597ec68cc46b831c9aaee020431">from16Bit</a> (int16_t l, int16_t r)</td></tr>
 <tr class="separator:a971c9597ec68cc46b831c9aaee020431"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a721fd2497bd004f4e7192528b8f1e435"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_stereo_output.html">StereoOutput</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_stereo_output.html#a721fd2497bd004f4e7192528b8f1e435">fromAlmostNBit</a> (uint8_t bits, int16_t l, int16_t r)</td></tr>
-<tr class="separator:a721fd2497bd004f4e7192528b8f1e435"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3ee590c8ec9316d9e02d5ddb692a6cf"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_stereo_output.html">StereoOutput</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_stereo_output.html#aa3ee590c8ec9316d9e02d5ddb692a6cf">fromAlmostNBit</a> (uint8_t bits, int32_t l, int32_t r)</td></tr>
-<tr class="separator:aa3ee590c8ec9316d9e02d5ddb692a6cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a132016fd745ea97426eaf29510f1be0f"><td class="memTemplParams" colspan="2">template&lt;typename A , typename B &gt; </td></tr>
+<tr class="memitem:a132016fd745ea97426eaf29510f1be0f"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="struct_stereo_output.html">StereoOutput</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_stereo_output.html#a132016fd745ea97426eaf29510f1be0f">fromAlmostNBit</a> (A bits, B l, B r)</td></tr>
+<tr class="separator:a132016fd745ea97426eaf29510f1be0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a702097070786b8471c3a04e6c1bb707b"><td class="memItemLeft" align="right" valign="top"><a id="a702097070786b8471c3a04e6c1bb707b"></a>
+AudioOutput_t but Mozzi is configured for mono Check mozzi_config&#160;</td><td class="memItemRight" valign="bottom"><b>h</b> { return _l</td></tr>
+<tr class="separator:a702097070786b8471c3a04e6c1bb707b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This struct encapsulates one frame of mono audio output. </p>
 <p>Internally, it really just boils down to two int values, but the struct provides useful API an top of that. For more detail </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_mono_output.html" title="This struct encapsulates one frame of mono audio output. ">MonoOutput</a> . </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_output_8h_source.html#l00085">85</a> of file <a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_output_8h_source.html#l00089">89</a> of file <a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac949f14e2d88f3c4e11986675addb228"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac949f14e2d88f3c4e11986675addb228">&#9670;&nbsp;</a></span>clip()</h2>
@@ -177,7 +185,7 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_mono_output.html#a0e641cbab9732214c696cd1071e45de5" title="Clip frame to supported range. ">MonoOutput::clip()</a>. Clips both channels. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_output_8h_source.html#l00097">97</a> of file <a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_output_8h_source.html#l00103">103</a> of file <a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a>.</p>
 
 </div>
 </div>
@@ -216,7 +224,7 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_mono_output.html#a67ed90efb5e8c00ae880f2d15b1ce0bd" title="Construct an audio frame a zero-centered value known to be in the 16 bit range. ">MonoOutput::from16Bit()</a>, stereo variant </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_output_8h_source.html#l00106">106</a> of file <a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_output_8h_source.html#l00110">110</a> of file <a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a>.</p>
 
 </div>
 </div>
@@ -255,15 +263,17 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_mono_output.html#a7478d3111845040f553a965e7e54a539" title="Construct an audio frame from a zero-centered value known to be in the 8 bit range. ">MonoOutput::from8Bit()</a>, stereo variant </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_output_8h_source.html#l00104">104</a> of file <a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_output_8h_source.html#l00108">108</a> of file <a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a>.</p>
 
 </div>
 </div>
-<a id="a721fd2497bd004f4e7192528b8f1e435"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a721fd2497bd004f4e7192528b8f1e435">&#9670;&nbsp;</a></span>fromAlmostNBit() <span class="overload">[1/2]</span></h2>
+<a id="a132016fd745ea97426eaf29510f1be0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a132016fd745ea97426eaf29510f1be0f">&#9670;&nbsp;</a></span>fromAlmostNBit()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename A , typename B &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -271,19 +281,19 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">static <a class="el" href="struct_stereo_output.html">StereoOutput</a> StereoOutput::fromAlmostNBit </td>
           <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramtype">A&#160;</td>
           <td class="paramname"><em>bits</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramtype">B&#160;</td>
           <td class="paramname"><em>l</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramtype">B&#160;</td>
           <td class="paramname"><em>r</em>&#160;</td>
         </tr>
         <tr>
@@ -300,60 +310,17 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <dl class="section see"><dt>See also</dt><dd>MonoOutput::fromAlmostNBit(), stereo variant </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_output_8h_source.html#l00108">108</a> of file <a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_output_8h_source.html#l00112">112</a> of file <a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a>.</p>
 
 </div>
 </div>
-<a id="aa3ee590c8ec9316d9e02d5ddb692a6cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3ee590c8ec9316d9e02d5ddb692a6cf">&#9670;&nbsp;</a></span>fromAlmostNBit() <span class="overload">[2/2]</span></h2>
+<a id="aba322189d188eb977cc74a8c6ae909c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba322189d188eb977cc74a8c6ae909c1">&#9670;&nbsp;</a></span>fromNBit()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="struct_stereo_output.html">StereoOutput</a> StereoOutput::fromAlmostNBit </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>bits</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int32_t&#160;</td>
-          <td class="paramname"><em>l</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int32_t&#160;</td>
-          <td class="paramname"><em>r</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section see"><dt>See also</dt><dd>MonoOutput::fromAlmostNBit(), stereo variant, 32 bit overload </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_audio_output_8h_source.html#l00110">110</a> of file <a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a>.</p>
-
-</div>
-</div>
-<a id="ad466b7b3a4a5334042f9c4dd99f3347b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad466b7b3a4a5334042f9c4dd99f3347b">&#9670;&nbsp;</a></span>fromNBit() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -367,13 +334,13 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>l</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>r</em>&#160;</td>
         </tr>
         <tr>
@@ -388,14 +355,14 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_mono_output.html#a21139c109ba81705fcb4decddac19f9c" title="Construct an audio frame a zero-centered value known to be in the N bit range. ">MonoOutput::fromNBit()</a>, stereo variant </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_mono_output.html#a02f9adf531ab61ce96ed80a8319bdeea" title="Construct an audio frame a zero-centered value known to be in the N bit range. ">MonoOutput::fromNBit()</a>, stereo variant </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_output_8h_source.html#l00100">100</a> of file <a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_output_8h_source.html#l00106">106</a> of file <a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a>.</p>
 
 </div>
 </div>
-<a id="a37c7c0de638ba07d99b14e23c617d264"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37c7c0de638ba07d99b14e23c617d264">&#9670;&nbsp;</a></span>fromNBit() <span class="overload">[2/2]</span></h2>
+<a id="ac87c6503c5850eef507af9cc8eebd4b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac87c6503c5850eef507af9cc8eebd4b8">&#9670;&nbsp;</a></span>portable()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -404,38 +371,21 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="struct_stereo_output.html">StereoOutput</a> StereoOutput::fromNBit </td>
+          <td class="memname">AudioOutput_t StereoOutput::portable </td>
           <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>bits</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int32_t&#160;</td>
-          <td class="paramname"><em>l</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int32_t&#160;</td>
-          <td class="paramname"><em>r</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_mono_output.html#a21139c109ba81705fcb4decddac19f9c" title="Construct an audio frame a zero-centered value known to be in the N bit range. ">MonoOutput::fromNBit()</a>, stereo variant, 32 bit overload </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_output_8h_source.html#l00102">102</a> of file <a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a>.</p>
+<p>Conversion to int operator: If used in a mono config, returns only the left channel (and gives a compile time warning). </p>
+<p>This <em>could</em> be turned into an operator for implicit conversion in this case. For now we chose to apply conversion on demand, only, as most of the time using <a class="el" href="struct_stereo_output.html" title="This struct encapsulates one frame of mono audio output. ">StereoOutput</a> in a mono config, is not intended. </p>
 
 </div>
 </div>
@@ -445,7 +395,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="struct_stereo_output.html">StereoOutput</a></li>
-    <li class="footer">Generated on Mon Feb 8 2021 17:03:48 for Mozzi by
+    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

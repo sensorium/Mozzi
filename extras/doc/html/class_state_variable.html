@@ -107,7 +107,9 @@ $(document).ready(function(){initNavTree('class_state_variable.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>A State Variable filter which offers 12db resonant low, high, bandpass and notch modes.  
+<p><br />
+<br />
+State Variable Filter (approximation of Chamberlin version) Informed by pseudocode at <a href="http://www.musicdsp.org/showone.php?id=23">http://www.musicdsp.org/showone.php?id=23</a> and <a href="http://www.musicdsp.org/showone.php?id=142">http://www.musicdsp.org/showone.php?id=142</a>.  
  <a href="class_state_variable.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>&gt;</code></p>
@@ -132,8 +134,15 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><h3>template&lt;int8_t FILTER_TYPE&gt;<br />
 class StateVariable&lt; FILTER_TYPE &gt;</h3>
 
-<p>A State Variable filter which offers 12db resonant low, high, bandpass and notch modes. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
+<p><br />
+<br />
+State Variable Filter (approximation of Chamberlin version) Informed by pseudocode at <a href="http://www.musicdsp.org/showone.php?id=23">http://www.musicdsp.org/showone.php?id=23</a> and <a href="http://www.musicdsp.org/showone.php?id=142">http://www.musicdsp.org/showone.php?id=142</a>. </p>
+<h2>Here's the original: </h2>
+<p>cutoff = cutoff freq in Hz fs = sampling frequency //(e.g. 44100Hz) f = 2 sin (pi * cutoff / fs) //[approximately] q = resonance/bandwidth [0 &lt; q &lt;= 1] most res: q=1, less: q=0 low = lowpass output high = highpass output band = bandpass output notch = notch output</p>
+<p>scale = q</p>
+<p>low=high=band=0;</p>
+<p>&ndash;beginloop low = low + f * band; high = scale * input - low - q*band; band = f * high + band; notch = high + low; </p><h2>&ndash;endloop </h2>
+<p>References : Hal Chamberlin, Musical Applications of Microprocessors, 2nd Ed, Hayden Book Company 1985. pp 490-492. Jon Dattorro, Effect Design Part 1, J. Audio Eng. Soc., Vol 45, No. 9, 1997 September A State Variable filter which offers 12db resonant low, high, bandpass and notch modes. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">FILTER_TYPE</td><td>choose between LOWPASS, BANDPASS, HIGHPASS and NOTCH. </td></tr>
   </table>
@@ -141,7 +150,7 @@ class StateVariable&lt; FILTER_TYPE &gt;</h3>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>To save processing time, this version of the filter does not saturate internally, so any resonant peaks are unceremoniously truncated. It may be worth adding code to constrain the internal variables to enable resonant saturating effects. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_state_variable_8h_source.html#l00065">65</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_state_variable_8h_source.html#l00066">66</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a14cb100c22e4a33025665ef3620ca2b8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a14cb100c22e4a33025665ef3620ca2b8">&#9670;&nbsp;</a></span>next()</h2>
@@ -179,7 +188,7 @@ template&lt;int8_t FILTER_TYPE&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>the signal output. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Timing: 16 - 20 us </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_state_variable_8h_source.html#l00112">112</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_state_variable_8h_source.html#l00113">113</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
 
 </div>
 </div>
@@ -220,7 +229,7 @@ template&lt;int8_t FILTER_TYPE&gt; </div>
 <dd>
 The frequency calculation is VERY "approximate". This really needs to be fixed. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_state_variable_8h_source.html#l00094">94</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_state_variable_8h_source.html#l00095">95</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
 
 </div>
 </div>
@@ -259,7 +268,7 @@ template&lt;int8_t FILTER_TYPE&gt; </div>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>Timing &lt; 500 ns </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_state_variable_8h_source.html#l00079">79</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_state_variable_8h_source.html#l00080">80</a> of file <a class="el" href="_state_variable_8h_source.html">StateVariable.h</a>.</p>
 
 </div>
 </div>
@@ -269,7 +278,7 @@ template&lt;int8_t FILTER_TYPE&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_state_variable.html">StateVariable</a></li>
-    <li class="footer">Generated on Mon Feb 8 2021 17:03:48 for Mozzi by
+    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

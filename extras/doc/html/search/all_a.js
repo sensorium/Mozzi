@@ -1,10 +1,11 @@
 var searchData=
 [
-  ['operator_20stereooutput',['operator StereoOutput',['../struct_mono_output.html#aca2b1f7d1c71c21743827ea1f0040ec4',1,'MonoOutput']]],
-  ['operator_28_29',['operator()',['../class_auto_map.html#afd49885d3f05ca0a2f417199a9e7cf10',1,'AutoMap::operator()()'],['../class_int_map.html#ae3bf8b61f2ab79ac6626245213e7cb2a',1,'IntMap::operator()()'],['../class_smooth.html#a24eb02e4c4bfe9401f24ed0399b1e392',1,'Smooth::operator()()']]],
-  ['oscil',['Oscil',['../class_oscil.html',1,'Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;'],['../class_oscil.html#afe6a75646d2dd822a654bcd85242e800',1,'Oscil::Oscil(const int8_t *TABLE_NAME)'],['../class_oscil.html#ab7dc5f97742d841fff6a4dca6d7242f3',1,'Oscil::Oscil()']]],
-  ['oscil_3c_208192_2c_20audio_5frate_20_3e',['Oscil&lt; 8192, AUDIO_RATE &gt;',['../class_oscil.html',1,'']]],
-  ['oscil_3c_20cos8192_5fnum_5fcells_2c_20audio_5frate_20_3e',['Oscil&lt; COS8192_NUM_CELLS, AUDIO_RATE &gt;',['../class_oscil.html',1,'']]],
-  ['oscil_3c_20sin2048_5fnum_5fcells_2c_20audio_5frate_20_3e',['Oscil&lt; SIN2048_NUM_CELLS, AUDIO_RATE &gt;',['../class_oscil.html',1,'']]],
-  ['oversample',['OverSample',['../class_over_sample.html',1,'']]]
+  ['metaoscil',['MetaOscil',['../class_meta_oscil.html',1,'MetaOscil&lt; NUM_TABLE_CELLS, UPDATE_RATE, N_OSCIL &gt;'],['../class_meta_oscil.html#a019b888e600142805c4bc5c71a6ddf17',1,'MetaOscil::MetaOscil()']]],
+  ['metronome',['Metronome',['../class_metronome.html',1,'Metronome'],['../class_metronome.html#a37e8b0aa5a9aa8fa0f33212360cc0928',1,'Metronome::Metronome()']]],
+  ['midi',['Midi',['../group__midi.html',1,'']]],
+  ['monooutput',['MonoOutput',['../struct_mono_output.html',1,'MonoOutput'],['../struct_mono_output.html#a89428135a43dd00ea52a1bd49bbfece9',1,'MonoOutput::MonoOutput()']]],
+  ['mozzianalogread',['mozziAnalogRead',['../group__analog.html#gae9536bf35f6ea46a6938d5eb52b947c3',1,'mozziAnalogRead(uint8_t pin):&#160;MozziGuts.cpp'],['../group__analog.html#gae9536bf35f6ea46a6938d5eb52b947c3',1,'mozziAnalogRead(uint8_t pin):&#160;MozziGuts.cpp']]],
+  ['mozzimicros',['mozziMicros',['../group__core.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe',1,'mozziMicros():&#160;MozziGuts.cpp'],['../group__core.html#gaaa6a42d80c5297407a45ca8bf3c1c7fe',1,'mozziMicros():&#160;MozziGuts.cpp']]],
+  ['mtof',['mtof',['../group__midi.html#gafacb8849f96270644ea79184fde7db37',1,'mtof(float midival):&#160;mozzi_midi.cpp'],['../group__midi.html#ga07d1ca985403df63f75aa5d143477206',1,'mtof(uint8_t midi_note):&#160;mozzi_midi.cpp'],['../group__midi.html#ga08102facf170648591b2ca24a3c39712',1,'mtof(int midi_note):&#160;mozzi_midi.cpp'],['../group__midi.html#gafacb8849f96270644ea79184fde7db37',1,'mtof(float x):&#160;mozzi_midi.cpp'],['../group__midi.html#ga07d1ca985403df63f75aa5d143477206',1,'mtof(uint8_t midi_note):&#160;mozzi_midi.cpp'],['../group__midi.html#ga08102facf170648591b2ca24a3c39712',1,'mtof(int midi_note):&#160;mozzi_midi.cpp']]],
+  ['multiresonantfilter',['MultiResonantFilter',['../class_multi_resonant_filter.html',1,'']]]
 ];

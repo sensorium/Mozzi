@@ -104,6 +104,12 @@ void stm32_adc_eoc_handler() {
  * running smoothly. */
 //#define LOOP_YIELD yield();
 
+/* NOTE: On some platforms, what can be called in the ISR used to output the sound is limited.
+ * This define can be used, for instance, to output the sound in audioHook() instead to overcome
+ * this limitation (see MozziGuts_impl_MBED.hpp). It can also be used if something needs to be called in audioHook() regarding
+ * analog reads for instance. */
+//#define AUDIO_HOOK_HOOK
+
 #if (EXTERNAL_AUDIO_OUTPUT != true) // otherwise, the last stage - audioOutput() - will be provided by the user
 /** NOTE: This is the function that actually write a sample to the output. In case of EXTERNAL_AUDIO_OUTPUT == true, it is provided by the library user, instead. */
 inline void audioOutput(const AudioOutput f) {

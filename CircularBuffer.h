@@ -5,6 +5,10 @@ On 18 April 2014, the simplified version on the Wikipedia page for power of 2 si
 doesn't work - cbIsEmpty() returns true whether the buffer is full or empty.
 */
 
+#define MOZZI_BUFFER_SIZE 256 // do not expect to change and it to work.
+                              // just here for forward compatibility if one day
+                              // the buffer size might be editable
+
 /** Circular buffer object.  Has a fixed number of cells, set to 256.
 @tparam ITEM_TYPE the kind of data to store, eg. int, int8_t etc.
 */
@@ -47,9 +51,13 @@ public:
 	unsigned long count() {
 		return (num_buffers_read << 8) + start;
 	}
+        inline
+	ITEM_TYPE * address() {
+	  return items;
+	}
 
 private:
-	ITEM_TYPE items[256];
+	ITEM_TYPE items[MOZZI_BUFFER_SIZE];
 	uint8_t         start;  /* index of oldest itement              */
 	uint8_t         end;    /* index at which to write new itement  */
 	uint8_t         s_msb;

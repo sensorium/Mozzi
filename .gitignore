@@ -1,5 +1,6 @@
 .DS_Store
 Mozzi-resources
+.vscode
 *.out
 *.ogg
 *.mp3

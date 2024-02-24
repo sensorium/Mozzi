@@ -65,21 +65,13 @@ Mozzi-users list has a thread on this.
 //#define AUDIO_RATE 65536 // try on Teensy3/3.1 or other strong cpus
 
 
-/** @ingroup core
-Whether or not to use audio input.
-Put \#define USE_AUDIO_INPUT true in Mozzi/mozzi_config.h to enable audio input on analog pin AUDIO_INPUT_PIN,
-otherwise make it false, to save resources.
-
-@note You may have to call setupFastAnalogReads(FASTEST_ADC) after setupMozzi(), when using this.
-*/
 //#define USE_AUDIO_INPUT true
 
-
-
 /** @ingroup core
-This sets which analog input channel to use for audio input, if you have
+This sets which analog input channel to use for audio input, if you have uncommented
 \#define USE_AUDIO_INPUT  true
 in mozz_config.h
+@note You may have to call setupFastAnalogReads(FASTEST_ADC) after setupMozzi(), when using this.
 */
 #define AUDIO_INPUT_PIN 0
 

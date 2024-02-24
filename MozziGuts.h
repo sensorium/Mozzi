@@ -72,19 +72,30 @@ Below is a list of the Digital Pins used by Mozzi for STANDARD and STANDARD_PLUS
 Those which have been tested and reported to work have an x.
 Feedback about others is welcome.
 
-x....9........Arduino Uno \n
-x....9........Arduino Duemilanove \n
-x....9........Arduino Nano  \n
-x....9........Arduino Leonardo  \n
-x....9........Ardweeny  \n
-x....9........Boarduino  \n
-x...11.......Freetronics EtherMega  *broken since Jan 2015 \n
-x...11.......Arduino Mega  *broken since Jan 2015 \n
-....14........Teensy  \n
-x..B5........Teensy2  \n
-x..B5(25)..Teensy2++  \n
-x..A14.....Teensy 3.0, 3.1 and 3.2  \n
-....13	.......Sanguino  \n
+Model | Pin | Tested
+----- | --- | ------
+Arduino Uno | 9	| yes
+Arduino Duemilanove | 9	| yes
+Arduino Nano | 9 | yes
+Arduino Pro Mini | 9 | yes
+Arduino Leonardo | 9 | yes
+Arduino Mega | 11 | yes
+Freetronics EtherMega | 11 | yes
+Ardweeny | 9 | yes     
+Boarduino | 9 | yes
+Teensy | 14 | -
+Teensy2 | B5 | yes  
+Teensy2++ | B5(25) | yes
+Teensy 3.0 3.1 LC 3.2 | DAC/D | yes
+Teensy 3.4, 3.5 | DAC/D | -
+Teensy 4.0 4.1 | A8 | yes
+Gemma M0 | A0 | yes
+Adafruit Playground Express | Built in Speaker | yes    
+Sanguino | 13	| -  
+STM32duino (see "Hardware specific notes", below) | PB8 | yes
+ESP8266 *see details in README* | GPIO2 | yes
+RP2040 | 0 | yes
+
 
 On Teensy 3.* STANDARD and STANDARD_PLUS are the same, providing 16384Hz sample rate and 12 bit resolution on pin A14/ADC.
 The Teensy 3.* DAC output does not rely on PWM.
@@ -195,6 +206,8 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #include "AudioConfigTeensy4.h"
 #elif IS_STM32()
 #include "AudioConfigSTM32.h"
+#elif IS_STM32DUINO()
+#include "AudioConfigSTM32duino.h"
 #elif IS_ESP8266()
 #include "AudioConfigESP.h"
 #elif IS_ESP32()
@@ -203,12 +216,16 @@ HIFI is not available/not required on Teensy 3.* or ARM.
 #include "AudioConfigSAMD21.h"
 #elif IS_RP2040()
 #include "AudioConfigRP2040.h"
+#elif IS_MBED()
+#include "AudioConfigMBED.h"
 #elif IS_AVR() && (AUDIO_MODE == STANDARD)
 #include "AudioConfigStandard9bitPwm.h"
 #elif IS_AVR() && (AUDIO_MODE == STANDARD_PLUS)
 #include "AudioConfigStandardPlus.h"
 #elif IS_AVR() && (AUDIO_MODE == HIFI)
 #include "AudioConfigHiSpeed14bitPwm.h"
+#elif IS_RENESAS()
+#include "AudioConfigRenesas.h"
 #endif
 #else // EXTERNAL_AUDIO_OUTPUT==true
 #if !defined(EXTERNAL_AUDIO_BITS)

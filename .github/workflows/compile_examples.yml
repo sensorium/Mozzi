@@ -1,0 +1,139 @@
+name: Compile Examples
+
+# See: https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
+on:
+  push:
+    paths:
+      - ".github/workflows/**"
+      - "examples/**"
+      - "**.cpp"
+      - "**.h"
+      - "**.hpp"
+  pull_request:
+    paths:
+      - ".github/workflows/**"
+      - "examples/**"
+      - "**.cpp"
+      - "**.h"
+      - "**.hpp"
+  workflow_dispatch:
+  repository_dispatch:
+
+jobs:
+  # debounce job to reduce duplicate compilations, taken from https://stackoverflow.com/questions/75714742/do-not-trigger-github-action-workflow-on-push-if-a-pr-is-open-on-the-branch
+  debounce:
+      runs-on: ubuntu-latest
+      env:
+        GH_TOKEN: ${{ github.token }}
+      outputs:
+        abort: ${{ steps.debounce.outputs.abort }}
+      steps:
+        - name: Debounce
+          if: github.event_name == 'push'
+          id: debounce
+          run: |
+            pr_branches=$(gh pr list --repo $GITHUB_REPOSITORY -q '.[] | select(.isCrossRepository == false)' --json isCrossRepository --json headRefName)
+            this_branch=$(echo $GITHUB_REF | sed -e 's/refs\/heads\///')
+            if [[ $(echo "$pr_branches" | grep "$this_branch") ]]; then
+              echo "This push is associated with a pull request. Skipping the job."
+              echo "abort=true" >> "$GITHUB_OUTPUT"
+            fi
+
+  build:
+    name: ${{ matrix.board.fqbn }}
+    runs-on: ubuntu-latest
+    needs: debounce
+    if: needs.debounce.outputs.abort != 'true'
+
+    env:
+      SKETCHES_REPORTS_PATH: sketches-reports
+
+    strategy:
+      fail-fast: false
+
+# Of course we'll want to add all supported arches. See https://github.com/arduino-libraries/ArduinoIoTCloud/blob/master/.github/workflows/compile-examples.yml for a complex multi-board setup
+      matrix:
+        board:
+          - fqbn: arduino:avr:uno
+            platforms: |
+              - name: arduino:avr
+            internalid: arduino_avr   # This is just some unique id string we assign for use in the artifact name (fqbn does not qualify due to containing colons)
+          - fqbn: esp8266:esp8266:huzzah
+            type: 8266
+            platforms: |
+              - name: esp8266:esp8266
+                source-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
+            internalid: esp8266
+          - fqbn: STMicroelectronics:stm32:GenF1:pnum=BLUEPILL_F103C8
+            platforms: |
+              - name: STMicroelectronics:stm32
+                source-url: https://github.com/stm32duino/BoardManagerFiles/raw/main/package_stmicroelectronics_index.json
+            internalid: stm32_official
+          - fqbn: arduino:mbed_giga:giga
+            platforms: |
+              - name: arduino:mbed_giga
+            internalid: arduino_giga
+          # SAMD boards. There is also an Adrafruit fork of this core, and the two seem to have diverged, considerably. I have no idea on the differences.
+          - fqbn: arduino:samd:adafruit_circuitplayground_m0
+            platforms: |
+              - name: arduino:samd
+            internalid: arduino_samd
+          - fqbn: rp2040:rp2040:rpipico
+            type: rp2040
+            platforms: |
+              - name: rp2040:rp2040
+                source-url: https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
+            internalid: rp2040
+          - fqbn: arduino:renesas_uno:minima
+            platforms: |
+              - name: arduino:renesas_uno
+            internalid: arduino_unor4
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Compile examples
+        uses: arduino/compile-sketches@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          fqbn: ${{ matrix.board.fqbn }}
+          platforms: ${{ matrix.board.platforms }}
+# limit to only some sketches for now, while figuring out the workflow
+          sketch-paths: |
+            - examples/01.Basics
+            - examples/02.Control
+            - examples/06.Synthesis
+          libraries: |
+            - source-path: ./
+            - name: PinChangeInterrupt
+            - name: MIDI Library
+            - name: Arduino_AdvancedAnalog
+          enable-deltas-report: true
+          sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
+
+      - name: Save sketches report as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          if-no-files-found: error
+          path: ${{ env.SKETCHES_REPORTS_PATH }}
+          name: sketches-reports-artifact-${{ matrix.board.internalid }}
+
+  # When using a matrix to compile for multiple boards, it's necessary to use a separate job for the deltas report
+  report:
+    needs: build # Wait for the compile job to finish to get the data for the report
+    if: github.event_name == 'pull_request' # Only run the job when the workflow is triggered by a pull request
+    continue-on-error: true # Not the programmer's fault, if reporting fails
+    runs-on: ubuntu-latest
+    steps:
+      # This step is needed to get the size data produced by the compile jobs
+      - name: Download sketches reports artifact
+        uses: actions/download-artifact@v4
+        with:
+          pattern: sketches-reports-artifact-*
+          merge-multiple: true
+          path: ${{ env.SKETCHES_REPORTS_PATH }}
+
+      - uses: arduino/report-size-deltas@v1
+        with:
+          sketches-reports-source: ${{ env.SKETCHES_REPORTS_PATH }}

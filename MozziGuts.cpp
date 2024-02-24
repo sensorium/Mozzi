@@ -140,7 +140,7 @@ int mozziAnalogRead(uint8_t pin) {
 #endif
 }
 
-#if (USE_AUDIO_INPUT == true)
+#if (USE_AUDIO_INPUT == true && !defined(USE_CUSTOM_AUDIO_INPUT))
 static AudioOutputStorage_t audio_input; // holds the latest audio from input_buffer
 AudioOutputStorage_t getAudioInput() { return audio_input; }
 #endif

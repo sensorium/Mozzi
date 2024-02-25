@@ -126,6 +126,7 @@ jobs:
             - name: PinChangeInterrupt
             - name: MIDI Library
             - name: Arduino_AdvancedAnalog
+	    - name: FixMath
           enable-deltas-report: true
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
           enable-warnings-report: true

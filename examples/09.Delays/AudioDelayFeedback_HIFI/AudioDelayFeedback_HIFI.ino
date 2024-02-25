@@ -42,6 +42,7 @@
 #include <MozziConfigValues.h>
 #define MOZZI_AUDIO_MODE MOZZI_OUTPUT_2PIN_PWM
 #define MOZZI_AUDIO_RATE 32768
+#define MOZZI_CONTROL_RATE 128 // Hz, powers of 2 are most reliable
 
 #include <Mozzi.h>
 #include <Oscil.h>
@@ -50,10 +51,8 @@
 #include <AudioDelayFeedback.h>
 #include <mozzi_midi.h> // for mtof
 
-#define CONTROL_RATE 128 // Hz, powers of 2 are most reliable
-
-Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, AUDIO_RATE> aTriangle(TRIANGLE_ANALOGUE512_DATA); // audio oscillator
-Oscil<TRIANGLE512_NUM_CELLS, CONTROL_RATE> kDelSamps(TRIANGLE512_DATA); // for modulating delay time, measured in audio samples
+Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, MOZZI_AUDIO_RATE> aTriangle(TRIANGLE_ANALOGUE512_DATA); // audio oscillator
+Oscil<TRIANGLE512_NUM_CELLS, MOZZI_CONTROL_RATE> kDelSamps(TRIANGLE512_DATA); // for modulating delay time, measured in audio samples
 
 AudioDelayFeedback <128> aDel;
 
@@ -62,7 +61,7 @@ byte del_samps;
 Q16n16 del_samps_fractional;
 
 void setup(){
-  startMozzi(CONTROL_RATE);
+  startMozzi();
   aTriangle.setFreq(mtof(48.f));
   kDelSamps.setFreq(.163f); // set the delay time modulation frequency (ie. the sweep frequency)
   aDel.setFeedbackLevel(-111); // can be -128 to 127
@@ -81,7 +80,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   char asig = aTriangle.next(); // get this so it can be used twice without calling next() again
   //return asig/8 + aDel.next(asig, del_samps); // mix some straight signal with the delayed signal
   //return aDel.next(aTriangle.next(), del_samps); // instead of the previous 2 lines for only the delayed signal

@@ -128,11 +128,11 @@ private:
 	byte amp;
 	int freq;
 
-	Phasor <AUDIO_RATE> aBaseCounter;
-	Phasor <AUDIO_RATE> aResonanceFreqCounter;
+	Phasor <MOZZI_AUDIO_RATE> aBaseCounter;
+	Phasor <MOZZI_AUDIO_RATE> aResonanceFreqCounter;
 
-	Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aOsc;
-	ADSR <CONTROL_RATE, AUDIO_RATE> aAmpEnv;
-	ADSR <CONTROL_RATE, CONTROL_RATE> kResonantFreqEnv;
+	Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aOsc;
+	ADSR <MOZZI_CONTROL_RATE, MOZZI_AUDIO_RATE> aAmpEnv;
+	ADSR <MOZZI_CONTROL_RATE, MOZZI_CONTROL_RATE> kResonantFreqEnv;
 
 };

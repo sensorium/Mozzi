@@ -7,7 +7,7 @@
 #include <Mozzi.h>        // at the top of your sketch
 
 void setup() {
-  startMozzi(64);
+  startMozzi();
 }
 
 void updateControl() {

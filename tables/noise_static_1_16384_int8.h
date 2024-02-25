@@ -1,11 +1,7 @@
 #ifndef NOISE_STATIC_1_16384_H_
 #define NOISE_STATIC_1_16384_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 
 /* static noise from needle on old record

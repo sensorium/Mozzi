@@ -14,24 +14,23 @@
     Tim Barrass 2012, CC by-nc-sa.
 */
 
+#define MOZZI_CONTROL_RATE 640 // quite fast, keeps modulation smooth
 #include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/cos8192_int8.h>
 #include <tables/envelop2048_uint8.h>
 
-#define CONTROL_RATE 640 // quite fast, keeps modulation smooth
-
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <COS8192_NUM_CELLS, AUDIO_RATE> aCarrier(COS8192_DATA);
-Oscil <COS8192_NUM_CELLS, AUDIO_RATE> aModulator(COS8192_DATA);
-Oscil <COS8192_NUM_CELLS, AUDIO_RATE> aModWidth(COS8192_DATA);
-Oscil <COS8192_NUM_CELLS, CONTROL_RATE> kModFreq1(COS8192_DATA);
-Oscil <COS8192_NUM_CELLS, CONTROL_RATE> kModFreq2(COS8192_DATA);
-Oscil <ENVELOP2048_NUM_CELLS, AUDIO_RATE> aEnvelop(ENVELOP2048_DATA);
+Oscil <COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCarrier(COS8192_DATA);
+Oscil <COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aModulator(COS8192_DATA);
+Oscil <COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aModWidth(COS8192_DATA);
+Oscil <COS8192_NUM_CELLS, MOZZI_CONTROL_RATE> kModFreq1(COS8192_DATA);
+Oscil <COS8192_NUM_CELLS, MOZZI_CONTROL_RATE> kModFreq2(COS8192_DATA);
+Oscil <ENVELOP2048_NUM_CELLS, MOZZI_AUDIO_RATE> aEnvelop(ENVELOP2048_DATA);
 
 
 void setup() {
-  startMozzi(CONTROL_RATE);
+  startMozzi();
   aCarrier.setFreq(220);
   kModFreq1.setFreq(1.78f);
   kModFreq2.setFreq(0.1757f);
@@ -45,7 +44,7 @@ void updateControl() {
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   int asig = aCarrier.phMod((int)aModulator.next()*(260u+aModWidth.next()));
   return MonoOutput::from16Bit(asig*(byte)aEnvelop.next());
 }

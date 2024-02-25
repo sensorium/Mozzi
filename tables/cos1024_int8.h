@@ -1,11 +1,7 @@
 #ifndef COS1024_H_
 #define COS1024_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 
 #define COS1024_NUM_CELLS 1024

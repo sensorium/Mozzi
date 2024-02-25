@@ -1,11 +1,7 @@
 #ifndef TRIANGLE_HERMES_2048_H_
 #define TRIANGLE_HERMES_2048_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 
 /* triangle wave with distortion from Audacity

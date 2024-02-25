@@ -24,8 +24,8 @@
 #include <Mozzi.h>
 #include <Phasor.h>
 
-Phasor <AUDIO_RATE> aPhasor1;
-Phasor <AUDIO_RATE> aPhasor2;
+Phasor <MOZZI_AUDIO_RATE> aPhasor1;
+Phasor <MOZZI_AUDIO_RATE> aPhasor2;
 
 float freq = 55.f;
 
@@ -40,7 +40,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   char asig1 = (char)(aPhasor1.next()>>24);
   char asig2 = (char)(aPhasor2.next()>>24);
   return MonoOutput::fromNBit(9, ((int)asig1-asig2));

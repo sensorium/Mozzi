@@ -18,6 +18,7 @@
     Tim Barrass 2012, CC by-nc-sa.
 */
 
+#define MOZZI_CONTROL_RATE 128
 #include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator
@@ -25,9 +26,7 @@
 #include <Smooth.h>
 #include <mozzi_rand.h>
 
-#define CONTROL_RATE 128
-
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 // for scheduling audio gain changes
 EventDelay kGainChangeDelay;
@@ -47,7 +46,7 @@ void setup(){
   aSin.setFreq(330); // set the frequency
   kGainChangeDelay.set(gainChangeMsec);
   kSmoothOnOff.set(smoothOnOffMsec);
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 
@@ -74,7 +73,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   return MonoOutput::from16Bit(aSmoothGain.next(target_gain) * aSin.next());
 }
 

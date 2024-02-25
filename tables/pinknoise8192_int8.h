@@ -1,11 +1,7 @@
 #ifndef PINKNOISE8192_H_
 #define PINKNOISE8192_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 
 /* generated pink noise

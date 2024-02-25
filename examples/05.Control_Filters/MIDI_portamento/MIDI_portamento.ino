@@ -22,6 +22,8 @@
 */
 
 #include <MIDI.h>
+// use #define for MOZZI_CONTROL_RATE, not a constant
+#define MOZZI_CONTROL_RATE 128 // Hz, powers of 2 are most reliable
 #include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <Line.h> // for envelope
@@ -33,16 +35,13 @@
 
 MIDI_CREATE_DEFAULT_INSTANCE();
 
-// use #define for CONTROL_RATE, not a constant
-#define CONTROL_RATE 128 // Hz, powers of 2 are most reliable
-
 // audio sinewave oscillator
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 // envelope generator
-ADSR <CONTROL_RATE, AUDIO_RATE> envelope;
+ADSR <MOZZI_CONTROL_RATE, MOZZI_AUDIO_RATE> envelope;
 
-Portamento <CONTROL_RATE>aPortamento;
+Portamento <MOZZI_CONTROL_RATE>aPortamento;
 
 #define LED 13
 
@@ -77,7 +76,7 @@ void setup() {
 
   aPortamento.setTime(300u);
 
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 
@@ -88,7 +87,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   return MonoOutput::from16Bit((int) (envelope.next() * aSin.next()));
 }
 

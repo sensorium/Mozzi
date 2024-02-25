@@ -1,11 +1,7 @@
 #ifndef BAMBOO_02_2048_H_
 #define BAMBOO_02_2048_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 
 #define BAMBOO_02_2048_NUM_CELLS 2048

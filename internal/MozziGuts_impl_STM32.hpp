@@ -90,9 +90,9 @@ inline void audioOutput(const AudioOutput f) {
 static void startAudio() {
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_2PIN_PWM, MOZZI_OUTPUT_EXTERNAL_TIMED)
   audio_update_timer.pause();
-  //audio_update_timer.setPeriod(1000000UL / AUDIO_RATE);
+  //audio_update_timer.setPeriod(1000000UL / MOZZI_AUDIO_RATE);
   // Manually calculate prescaler and overflow instead of using setPeriod, to avoid rounding errors
-  uint32_t period_cyc = F_CPU / AUDIO_RATE;
+  uint32_t period_cyc = F_CPU / MOZZI_AUDIO_RATE;
   uint16_t prescaler = (uint16_t)(period_cyc / 65535 + 1);
   uint16_t overflow = (uint16_t)((period_cyc + (prescaler / 2)) / prescaler);
   audio_update_timer.setPrescaleFactor(prescaler);

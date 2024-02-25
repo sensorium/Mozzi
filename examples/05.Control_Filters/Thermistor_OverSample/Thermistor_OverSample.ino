@@ -37,9 +37,9 @@
 #include <ControlDelay.h>
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable)
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aTremelo(SIN2048_DATA);
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aEnvelope(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aTremelo(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aEnvelope(SIN2048_DATA);
 
 Line <float> freqLine;
 
@@ -49,7 +49,7 @@ const byte INPUT_PIN = 1;
 
 float ENVELOPE_DURATION = 1.f;
 
-const byte LINE_LENGTH = (byte)((float)CONTROL_RATE*ENVELOPE_DURATION*0.5); // 0.5 seconds per line
+const byte LINE_LENGTH = (byte)((float)MOZZI_CONTROL_RATE*ENVELOPE_DURATION*0.5); // 0.5 seconds per line
 
 // adjustments to get tremelo in useful range from oversampled temperature input
 const int TREMOLO_OFFSET = 4000;
@@ -108,7 +108,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   return MonoOutput::from16Bit((((int)aSin.next()*(128+aTremelo.next()))>>8)*aEnvelope.next());
 }
 

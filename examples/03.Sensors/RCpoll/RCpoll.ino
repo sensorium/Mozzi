@@ -38,22 +38,22 @@ sPin ---\/\/\/-----.
 
  */
 
+#define MOZZI_CONTROL_RATE 128 // Hz, powers of 2 are most reliable
 #include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/sin2048_int8.h> // sine table for oscillator
 #include <RCpoll.h>
 
-#define CONTROL_RATE 128 // Hz, powers of 2 are most reliable
 #define SENSOR_PIN 4            // digital pin for sensor input
 
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 RCpoll <SENSOR_PIN> sensor;
 
 
 void setup(){
   //Serial.begin(9600); // for Teensy 3.1, beware printout can cause glitches
   Serial.begin(115200);
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 
@@ -65,7 +65,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   return MonoOutput::from8Bit(aSin.next());
 }
 

@@ -1,11 +1,7 @@
 #ifndef WAVESHAPE_SIGMOID_H_
 #define WAVESHAPE_SIGMOID_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 
 #define WAVESHAPE_SIGMOID_NUM_CELLS 256

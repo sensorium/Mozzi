@@ -25,16 +25,15 @@
     Tim Barrass 2012, CC by-nc-sa.
 */
 
+#define MOZZI_CONTROL_RATE 64 // Hz, powers of 2 are most reliable
 #include <Mozzi.h>
 #include <Line.h> // for smooth transitions
 #include <Oscil.h> // oscillator template
 #include <tables/saw8192_int8.h> // saw table for oscillator
 #include <mozzi_midi.h>
 
-#define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
-
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SAW8192_NUM_CELLS, AUDIO_RATE> aSaw(SAW8192_DATA);
+Oscil <SAW8192_NUM_CELLS, MOZZI_AUDIO_RATE> aSaw(SAW8192_DATA);
 
 // use: Line <type> lineName
 Line <long> aGliss;
@@ -42,8 +41,8 @@ Line <long> aGliss;
 byte lo_note = 24; // midi note numbers
 byte hi_note = 36;
 
-long audio_steps_per_gliss = AUDIO_RATE / 4; // ie. 4 glisses per second
-long control_steps_per_gliss = CONTROL_RATE / 4;
+long audio_steps_per_gliss = MOZZI_AUDIO_RATE / 4; // ie. 4 glisses per second
+long control_steps_per_gliss = MOZZI_CONTROL_RATE / 4;
 
 // stuff for changing starting positions, probably just confusing really
 int counter = 0;
@@ -53,7 +52,7 @@ byte  gliss_offset_max = 36;
 
 
 void setup(){
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 
@@ -86,7 +85,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   aSaw.setPhaseInc(aGliss.next());
   return MonoOutput::from8Bit(aSaw.next());
 }

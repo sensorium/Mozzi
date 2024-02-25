@@ -98,8 +98,7 @@
  * config, or vice versa will continue to work, but will generate a warning a
  * compile time.
  *
- * @note This option superseeds the earlier STEREO_HACK, which is still available at
- *       the time of this writing, but should not be used in new sketches.
+ * @note This option superseeds the earlier STEREO_HACK in Mozzi < 1.1
  *
  * @note At the time of this writing, only MOZZI_MONO and MOZZI_STEREO are supported. The value of
  *       MOZZI_MONO is 1 and the value of MOZZI_STEREO is 2, so future extensions are also expected
@@ -123,7 +122,7 @@
  * It is highly recommended to keep the audio rate a power of two (16384, 32678, 64536, etc.), as some internal calculations can be highly be optimised for speed, this way.
  *
  * @note
- * For compatibility reasons, the option AUDIO_RATE is automatically set to the same value as this option, and you will find some uses of that in old (pre Mozzi 2.0) code examples.
+ * For compatibility reasons, the option MOZZI_AUDIO_RATE is automatically set to the same value as this option, and you will find some uses of that in old (pre Mozzi 2.0) code examples.
  * It is advised to use only MOZZI_AUDIO_RATE in new code, however.
  * TODO: Only do the above, for MOZZI_COMPATIBILITY_LEVEL < MOZZI_COMPATIBILITY_2_0?
  */
@@ -144,7 +143,7 @@
  * can sometimes give smoother results, avoiding the need to interpolate
  * sensitive variables at audio rate in updateAudio().
  *
- * TODO: If a definition of CONTROL_RATE is detected, apply that with a warning.
+ * TODO: If a definition of MOZZI_CONTROL_RATE is detected, apply that with a warning.
 */
 #define MOZZI_CONTROL_RATE FOR_DOXYGEN_ONLY
 

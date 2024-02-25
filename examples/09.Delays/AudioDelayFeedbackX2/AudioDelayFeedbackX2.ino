@@ -17,6 +17,7 @@
     Tim Barrass 2012-13, CC by-nc-sa.
 */
 
+#define MOZZI_CONTROL_RATE 128 // Hz, powers of 2 are most reliable
 #include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/triangle_analogue512_int8.h> // wavetable for audio
@@ -24,13 +25,11 @@
 #include <AudioDelayFeedback.h>
 #include <mozzi_midi.h> // for mtof
 
-#define CONTROL_RATE 128 // Hz, powers of 2 are most reliable
+Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, MOZZI_AUDIO_RATE> aTriangle1(TRIANGLE_ANALOGUE512_DATA); // audio oscillator
+Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, MOZZI_AUDIO_RATE> aTriangle2(TRIANGLE_ANALOGUE512_DATA); // audio oscillator
 
-Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, AUDIO_RATE> aTriangle1(TRIANGLE_ANALOGUE512_DATA); // audio oscillator
-Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, AUDIO_RATE> aTriangle2(TRIANGLE_ANALOGUE512_DATA); // audio oscillator
-
-Oscil<TRIANGLE512_NUM_CELLS, CONTROL_RATE> kDelSamps1(TRIANGLE512_DATA); // for modulating delay time, measured in audio samples
-Oscil<TRIANGLE512_NUM_CELLS, CONTROL_RATE> kDelSamps2(TRIANGLE512_DATA); // for modulating delay time, measured in audio samples
+Oscil<TRIANGLE512_NUM_CELLS, MOZZI_CONTROL_RATE> kDelSamps1(TRIANGLE512_DATA); // for modulating delay time, measured in audio samples
+Oscil<TRIANGLE512_NUM_CELLS, MOZZI_CONTROL_RATE> kDelSamps2(TRIANGLE512_DATA); // for modulating delay time, measured in audio samples
 
 AudioDelayFeedback <128> aDel1;
 AudioDelayFeedback <128> aDel2;
@@ -49,7 +48,7 @@ void setup(){
   kDelSamps2.setFreq(1.43f); // set the delay time modulation frequency (ie. the sweep frequency)
   aDel2.setFeedbackLevel(109); // can be -128 to 127
 
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 
@@ -62,7 +61,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   char asig1 = aTriangle1.next(); // get this so it can be used twice without calling next() again
   int aflange1 = (asig1>>3) + aDel1.next(asig1, del_samps1); // mix some straignt signal with the delayed signal
 

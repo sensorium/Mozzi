@@ -33,6 +33,7 @@
 */
 #include <MozziConfigValues.h>
 #define MOZZI_AUDIO_MODE MOZZI_OUTPUT_2PIN_PWM
+#define MOZZI_CONTROL_RATE 128
 
 #include <Mozzi.h>
 #include <Oscil.h>
@@ -42,8 +43,6 @@
 #include <EventDelay.h>
 #include <Line.h>
 #include <mozzi_fixmath.h> // for fixed-point fractional numbers
-
-#define CONTROL_RATE 128
 
 // reset and sync vol and freq controls each cycle
 EventDelay  kTriggerDelay0;
@@ -56,7 +55,7 @@ EventDelay  kTriggerDelay1;
 #define NOTE_END_FIXEDPOINT float_to_Q16n16(NOTE_CENTRE - NOTE_RANGE) // so Line gliss has enough precision
 
 #define GLISS_SECONDS 3.f
-#define CONTROL_STEPS_PER_GLISS ((unsigned int)((float)CONTROL_RATE * GLISS_SECONDS))
+#define CONTROL_STEPS_PER_GLISS ((unsigned int)((float)MOZZI_CONTROL_RATE * GLISS_SECONDS))
 
 // use: Line <type> lineName
 // audio oscils
@@ -64,12 +63,12 @@ Line <Q16n16> kGliss0; // Line to slide frequency
 Line <Q16n16> kGliss1; // Line to slide frequency
 
 // harmonics
-Oscil<SIN8192_NUM_CELLS, AUDIO_RATE> aCos0(SIN8192_DATA);
-Oscil<SIN8192_NUM_CELLS, AUDIO_RATE> aCos1(SIN8192_DATA);
+Oscil<SIN8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos0(SIN8192_DATA);
+Oscil<SIN8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos1(SIN8192_DATA);
 
 // volume envelope oscils
-Oscil<TRIANGLE512_NUM_CELLS, CONTROL_RATE> kVol0(TRIANGLE512_DATA);
-Oscil<TRIANGLE512_NUM_CELLS, CONTROL_RATE> kVol1(TRIANGLE512_DATA);
+Oscil<TRIANGLE512_NUM_CELLS, MOZZI_CONTROL_RATE> kVol0(TRIANGLE512_DATA);
+Oscil<TRIANGLE512_NUM_CELLS, MOZZI_CONTROL_RATE> kVol1(TRIANGLE512_DATA);
 
 // audio volumes updated each control interrupt and reused in audio
 long v0, v1;
@@ -87,7 +86,7 @@ void setup() {
   kTriggerDelay0.start(0); // start trigger before polling in updateControl()
   kTriggerDelay1.start((int)((GLISS_SECONDS * 1000.f) / 2.f));
 
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 
@@ -126,7 +125,7 @@ void updateControl() {
   v1 *= v1;
 }
 
-AudioOutput_t updateAudio() {
+AudioOutput updateAudio() {
   long asig = ((v0 * aCos0.next()) >> 8) +
               ((v1 * aCos1.next()) >> 8);
   return AudioOutput::fromNBit(17, asig);

@@ -1,11 +1,7 @@
 #ifndef SAW512_H_
 #define SAW512_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 
 #define SAW512_NUM_CELLS 512

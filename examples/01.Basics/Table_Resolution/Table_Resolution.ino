@@ -14,6 +14,7 @@
 	 Tim Barrass 2012, CC by-nc-sa.
 */
 
+#define MOZZI_CONTROL_RATE 64
 #include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/sin256_int8.h>
@@ -25,15 +26,13 @@
 #include <EventDelay.h> // for scheduling events
 #include <Line.h>
 
-#define CONTROL_RATE 64
-
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN256_NUM_CELLS, AUDIO_RATE> aSin0(SIN256_DATA); // can hear significant aliasing noise
-Oscil <SIN512_NUM_CELLS, AUDIO_RATE> aSin1(SIN512_DATA); // noise still there but less noticeable
-Oscil <SIN1024_NUM_CELLS, AUDIO_RATE> aSin2(SIN1024_DATA); // borderline, hardly there if at all
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin3(SIN2048_DATA); // no audible improvement from here on
-Oscil <SIN4096_NUM_CELLS, AUDIO_RATE> aSin4(SIN4096_DATA); // for 45 year old loud sound damaged ears
-Oscil <SIN8192_NUM_CELLS, AUDIO_RATE> aSin5(SIN8192_DATA);
+Oscil <SIN256_NUM_CELLS, MOZZI_AUDIO_RATE> aSin0(SIN256_DATA); // can hear significant aliasing noise
+Oscil <SIN512_NUM_CELLS, MOZZI_AUDIO_RATE> aSin1(SIN512_DATA); // noise still there but less noticeable
+Oscil <SIN1024_NUM_CELLS, MOZZI_AUDIO_RATE> aSin2(SIN1024_DATA); // borderline, hardly there if at all
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin3(SIN2048_DATA); // no audible improvement from here on
+Oscil <SIN4096_NUM_CELLS, MOZZI_AUDIO_RATE> aSin4(SIN4096_DATA); // for 45 year old loud sound damaged ears
+Oscil <SIN8192_NUM_CELLS, MOZZI_AUDIO_RATE> aSin5(SIN8192_DATA);
 
 EventDelay kWhoseTurnDelay;
 
@@ -43,11 +42,11 @@ byte whose_turn = 0; // which oscil to listen to
 // Line to sweep frequency at control rate
 Line <float> kSweep;
 const unsigned int MILLIS_PER_SWEEP = 2000;
-const unsigned int MILLIS_PER_CONTROL = 1000u / CONTROL_RATE;
+const unsigned int MILLIS_PER_CONTROL = 1000u / MOZZI_CONTROL_RATE;
 const unsigned long CONTROL_STEPS_PER_SWEEP = (unsigned long) MILLIS_PER_SWEEP / MILLIS_PER_CONTROL;
 
 void setup(){
-  startMozzi(CONTROL_RATE);
+  startMozzi();
   kWhoseTurnDelay.set(MILLIS_PER_SWEEP);
   kSweep.set(0.f, 8192.f, CONTROL_STEPS_PER_SWEEP);
 }
@@ -86,7 +85,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   int asig;
   switch (whose_turn) {
   case 0:

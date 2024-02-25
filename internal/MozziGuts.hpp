@@ -75,12 +75,7 @@ inline void bufferAudioOutput(const AudioOutput_t f) {
   ++samples_written_to_buffer;
 }
 #else
-#  if (STEREO_HACK == true)
-// ring buffer for audio output
-CircularBuffer<StereoOutput> output_buffer;  // fixed size 256
-#  else
-CircularBuffer<AudioOutput_t> output_buffer;  // fixed size 256
-#  endif
+CircularBuffer<AudioOutput> output_buffer;  // fixed size 256
 #  define canBufferAudioOutput() (!output_buffer.isFull())
 #  define bufferAudioOutput(f) output_buffer.write(f)
 static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
@@ -147,7 +142,7 @@ AudioOutputStorage_t getAudioInput() { return audio_input; }
 CircularBuffer<unsigned int> input_buffer; // fixed size 256
 #define audioInputAvailable() (!input_buffer.isEmpty())
 #define readAudioInput() (input_buffer.read())
-/** NOTE: Triggered at AUDIO_RATE via defaultAudioOutput(). In addition to the AUDIO_INPUT_PIN, at most one reading is taken for mozziAnalogRead().  */
+/** NOTE: Triggered at MOZZI_AUDIO_RATE via defaultAudioOutput(). In addition to the AUDIO_INPUT_PIN, at most one reading is taken for mozziAnalogRead().  */
 inline void advanceADCStep() {
   switch (adc_count) {
   case 0:
@@ -225,12 +220,7 @@ void audioHook() // 2us on AVR excluding updateAudio()
 // setPin13High();
   if (canBufferAudioOutput()) {
     advanceControlLoop();
-#if (STEREO_HACK == true)
-    updateAudio(); // in hacked version, this returns void
-    bufferAudioOutput(StereoOutput(audio_out_1, audio_out_2));
-#else
     bufferAudioOutput(updateAudio());
-#endif
 
 #if defined(LOOP_YIELD)
     LOOP_YIELD
@@ -314,6 +304,7 @@ void audioHook() { MozziPrivate::audioHook(); };
 #if !MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPUT_EXTERNAL_CUSTOM)
 MOZZI_DEPRECATED("n/a", "Sketch has audioOutput() function, although external output is not configured.") void audioOutput(const AudioOutput) {};
 #endif
-#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_CUSTOM)
-MOZZI_DEPRECATED("n/a", "Sketch has canBufferAudioOutput() function, although custom external output is not configured.") bool canBufferAudioOutput() {};
+#if !MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_CUSTOM)
+// TODO: This won't work without a rename:
+//MOZZI_DEPRECATED("n/a", "Sketch has canBufferAudioOutput() function, although custom external output is not configured.") bool canBufferAudioOutput() {};
 #endif

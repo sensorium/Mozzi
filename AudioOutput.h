@@ -128,7 +128,7 @@ struct MonoOutput {
   static inline MonoOutput from16Bit(int16_t l) { return fromNBit(16, l); }
   /** Construct an audio frame from a SFix type from FixMath. Mozzi will figure out how many bits are in there and performs appropriate shifting to match the output range. */
   template<int8_t NI, int8_t NF, uint64_t RANGE>
-  static inline MonoOutput fromSFix(SFix<NI,NF,RANGE> l) { return MonoOutput(SCALE_AUDIO(l.asRaw(), (NI+NF))) ;}
+  static inline MonoOutput fromSFix(SFix<NI,NF,RANGE> l) { return MonoOutput(SCALE_AUDIO(l.asRaw(), (NI+NF+1))) ;}
   /** Construct an audio frame a zero-centered value known to be above at almost but not quite the N bit range, e.g. at N=8 bits and a litte. On most platforms, this is
    *  exactly the same as fromNBit(), shifting up or down to the platforms' available resolution.
    *
@@ -174,7 +174,7 @@ template<typename T> static inline StereoOutput fromNBit(uint8_t bits, T l, T r)
   static inline StereoOutput from16Bit(int16_t l, int16_t r) { return fromNBit(16, l, r); }
 /** See @ref MonoOutput::fromSFix(), stereo variant. Note that the two channels do not need to have the same number of bits. */
   template<int8_t NI, int8_t NF, uint64_t RANGE, int8_t _NI, int8_t _NF, uint64_t _RANGE>
-  static inline StereoOutput fromSFix(SFix<NI,NF,RANGE> l, SFix<_NI,_NF,_RANGE> r) { return StereoOutput(SCALE_AUDIO(l.asRaw(), (NI+NF)), SCALE_AUDIO(r.asRaw(), (_NI+_NF))); }
+  static inline StereoOutput fromSFix(SFix<NI,NF,RANGE> l, SFix<_NI,_NF,_RANGE> r) { return StereoOutput(SCALE_AUDIO(l.asRaw(), (NI+NF+1)), SCALE_AUDIO(r.asRaw(), (_NI+_NF+1))); }
   /** See @ref MonoOutput::fromAlmostNBit(), stereo variant */
   template<typename A, typename B> static inline StereoOutput fromAlmostNBit(A bits, B l, B r) { return StereoOutput(SCALE_AUDIO_NEAR(l, bits), SCALE_AUDIO_NEAR(r, bits)); }
 private:

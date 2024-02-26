@@ -157,9 +157,9 @@ public:
 	each direction. This fixed point math number is interpreted as a SFix<15,16> internally.
 	@return a sample from the table.
 	*/
-  template <byte NI, byte NF>
+  template <int8_t NI, int8_t NF, uint8_t RANGE>
 	inline
-	int8_t phMod(SFix<NI,NF> phmod_proportion)
+  int8_t phMod(SFix<NI,NF,RANGE> phmod_proportion)
 	{
 	  return phMod(SFix<15,16>(phmod_proportion).asRaw());
 	}
@@ -254,8 +254,9 @@ public:
 	less than 64 Hz.
 	@param frequency in UFix<24,8> fixed-point number format.
 	*/
+  template <uint64_t RANGE>
   inline
-	void setFreq(UFix<24,8> frequency)
+  void setFreq(UFix<24,8,RANGE> frequency)
         {
 	  setFreq_Q24n8(frequency.asRaw());
 	  }
@@ -293,8 +294,9 @@ public:
 	@note This didn't run faster than float last time it was tested, after 2014 code changes.  Need to see if 2014 changes improved or worsened performance.
 	@param frequency in UFix<16,16> fixed-point number format.
 	*/
+  template <uint64_t RANGE>
    inline
-	void setFreq(UFix<16,16> frequency)
+  void setFreq(UFix<16,16,RANGE> frequency)
         {
 	  setFreq_Q16n16(frequency.asRaw());
 	  }
@@ -307,9 +309,9 @@ public:
 	@note This didn't run faster than float last time it was tested, after 2014 code changes.  Need to see if 2014 changes improved or worsened performance.
 	@param frequency in SFix<16,16> fixed-point number format.
 	*/
-        template <byte NI, byte NF>
+  template <int8_t NI, int8_t NF, uint64_t RANGE>
         inline
-  	void setFreq(SFix<NI,NF> frequency)
+  void setFreq(SFix<NI,NF,RANGE> frequency)
         {
 	  setFreq_Q16n16(UFix<16,16>(frequency).asRaw());
         }

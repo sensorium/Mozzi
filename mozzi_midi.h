@@ -113,21 +113,34 @@ inline Q16n16  Q16n16_mtof(Q16n16 midival_fractional)
 	return (Q16n16) (freq1+ diff_fraction);
 };
 
-inline UFix<16,16> mtof(UFix<16,16> midival)
+/** @ingroup midi
+Converts midi note number with speed and accuracy from a UFix<16,16>.
+Uses Q16n16_mtof internally.
+*/
+template <uint64_t RANGE>
+inline UFix<16,16> mtof(UFix<16,16,RANGE> midival)
 {
   return UFix<16,16>::fromRaw(Q16n16_mtof(midival.asRaw()));
-}
+};
 
-template<int8_t NI, int8_t NF>
-  inline UFix<16,16> mtof(UFix<NI,NF> midival)
+/** @ingroup midi
+Converts midi note number with speed and accuracy from any UFix.
+Uses Q16n16_mtof internally.
+*/
+template<int8_t NI, int8_t NF, uint64_t RANGE>
+inline UFix<16,16> mtof(UFix<NI,NF,RANGE> midival)
 {
   return UFix<16,16>::fromRaw(Q16n16_mtof(UFix<16,16>(midival).asRaw()));
-}
+};
 
-template<int8_t NI, int8_t NF>
-  inline UFix<16,16> mtof(SFix<NI,NF> midival)
+/** @ingroup midi
+Converts midi note number with speed and accuracy from any SFix.
+Uses Q16n16_mtof internally.
+*/
+template<int8_t NI, int8_t NF, uint64_t RANGE>
+inline UFix<16,16> mtof(SFix<NI,NF,RANGE> midival)
 {
   return UFix<16,16>::fromRaw(Q16n16_mtof(UFix<16,16>(midival).asRaw()));
-}
+};
 
 #endif /* MOZZI_MIDI_H_ */

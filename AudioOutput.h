@@ -174,7 +174,7 @@ template<typename T> static inline StereoOutput fromNBit(uint8_t bits, T l, T r)
   static inline StereoOutput from16Bit(int16_t l, int16_t r) { return fromNBit(16, l, r); }
 /** See @ref MonoOutput::fromSFix(), stereo variant. Note that the two channels do not need to have the same number of bits. */
   template<int8_t NI, int8_t NF, uint64_t RANGE, int8_t _NI, int8_t _NF, uint64_t _RANGE>
-  static inline StereoOutput fromSFix(SFix<NI,NF,RANGE> l, SFix<_NI,_NF,_RANGE> r) { return MonoOutput(SCALE_AUDIO(l.asRaw(), (NI+NF)), SCALE_AUDIO(r.asRaw(), (_NI+_NF))); }
+  static inline StereoOutput fromSFix(SFix<NI,NF,RANGE> l, SFix<_NI,_NF,_RANGE> r) { return StereoOutput(SCALE_AUDIO(l.asRaw(), (NI+NF)), SCALE_AUDIO(r.asRaw(), (_NI+_NF))); }
   /** See @ref MonoOutput::fromAlmostNBit(), stereo variant */
   template<typename A, typename B> static inline StereoOutput fromAlmostNBit(A bits, B l, B r) { return StereoOutput(SCALE_AUDIO_NEAR(l, bits), SCALE_AUDIO_NEAR(r, bits)); }
 private:

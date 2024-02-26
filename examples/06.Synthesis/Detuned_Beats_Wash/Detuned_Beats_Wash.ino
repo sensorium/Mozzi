@@ -37,22 +37,22 @@
 #include <FixMath.h>
 
 // harmonics
-Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos1(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos2(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos3(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos4(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos5(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos6(COS8192_DATA);
-//Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos7(COS8192_DATA); // used to work smoothly in Arduino 1.05
+Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos1(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos2(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos3(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos4(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos5(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos6(COS8192_DATA);
+//Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos7(COS8192_DATA); // used to work smoothly in Arduino 1.05
 
 // duplicates but slightly off frequency for adding to originals
-Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos1b(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos2b(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos3b(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos4b(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos5b(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos6b(COS8192_DATA);
-//Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos7b(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos1b(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos2b(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos3b(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos4b(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos5b(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos6b(COS8192_DATA);
+//Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos7b(COS8192_DATA);
 
 // base pitch frequencies in Q16n16 fixed int format (for speed later)
 UFix<12,15> f1,f2,f3,f4,f5,f6;//,f7;
@@ -148,8 +148,13 @@ void updateControl(){
 
 
 AudioOutput updateAudio(){
+  /*
+The following block is the "classical" way of outputting the sound, from a standard C/C++ type. 
+You need to know how many bits you are dealing with and can use a reduced number to bring in some
+distorsion with .clip() if you want.
+  */
 
-  int asig =
+ /* int asig =
     aCos1.next() + aCos1b.next() +
     aCos2.next() + aCos2b.next() +
     aCos3.next() + aCos3b.next() +
@@ -157,10 +162,26 @@ AudioOutput updateAudio(){
     aCos5.next() + aCos5b.next() +
     aCos6.next() + aCos6b.next();// +
     // aCos7.next() + aCos7b.next();
-/*
-auto asig = 
-toSFraction(aCos1.next()) + toSFraction(aCos1b.next());
-
-  return MonoOutput::fromNBit(asig.getNF()+asig.getNI(), asig.asRaw());*/
     return MonoOutput::fromAlmostNBit(12, asig);
+*/
+
+
+/*
+  This is letting Mozzi compute the number of bits for you.
+  The syntax is a bit more cumbersome but FixMath will be
+  clever enough to figure out the exact number of bits needed
+  to create asig without any overflow, but no more.
+  This number of bits will be used by Mozzi for right/left shifting
+  the number to match the capability of the system.
+*/
+  auto asig = 
+  toSFraction(aCos1.next()) + toSFraction(aCos1b.next()) +
+  toSFraction(aCos2.next()) + toSFraction(aCos2b.next()) +
+  toSFraction(aCos3.next()) + toSFraction(aCos3b.next()) +
+  toSFraction(aCos4.next()) + toSFraction(aCos4b.next()) +
+  toSFraction(aCos5.next()) + toSFraction(aCos5b.next()) +
+  toSFraction(aCos6.next()) + toSFraction(aCos6b.next()); /* +
+toSFraction(aCos7.next()) + toSFraction(aCos7b.next()) +*/
+  return MonoOutput::fromSFix(asig);
+ 
 }

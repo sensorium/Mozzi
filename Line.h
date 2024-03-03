@@ -324,7 +324,7 @@ class Line<UFix<NI, NF>>
 private:
   typedef UFix<NI, NF> internal_type;
   internal_type current_value;
-  internal_type step_size;
+  SFix<NI,NF> step_size;
 
 public:
   /** Constructor. Use the template parameter to set the type of numbers you
@@ -361,7 +361,7 @@ public:
   void set(internal_type targetvalue, UFix<_NI,0> num_steps)
   {
     if(num_steps.asRaw()) {
-      internal_type numerator = targetvalue-current_value;
+      auto numerator = targetvalue-current_value;
       step_size = numerator*num_steps.invAccurate();
     } else {
       step_size = 0;
@@ -378,7 +378,7 @@ public:
   void set(internal_type targetvalue, T num_steps)
   {
     if(num_steps) {
-      internal_type numerator = targetvalue-current_value;
+      auto numerator = targetvalue-current_value;
       step_size = internal_type(numerator.asRaw()/num_steps,true);
     } else {
       step_size = 0;
@@ -407,7 +407,7 @@ class Line<SFix<NI, NF>>
 private:
   typedef SFix<NI, NF> internal_type;
   internal_type current_value;
-  internal_type step_size;
+  SFix<NI+1, NF> step_size;
 
 public:
   /** Constructor. Use the template parameter to set the type of numbers you
@@ -444,7 +444,7 @@ public:
   void set(internal_type targetvalue, UFix<_NI,0> num_steps)
   {
     if(num_steps.asRaw()) {
-      internal_type numerator = targetvalue-current_value;
+      auto numerator = targetvalue-current_value;
       step_size = numerator*num_steps.invAccurate();
     } else {
       step_size = 0;
@@ -461,7 +461,7 @@ public:
   void set(internal_type targetvalue, T num_steps)
   {
     if(num_steps) {
-      internal_type numerator = targetvalue-current_value;
+      auto numerator = targetvalue-current_value;
       step_size = internal_type(numerator.asRaw()/num_steps,true);
     } else {
       step_size = 0;

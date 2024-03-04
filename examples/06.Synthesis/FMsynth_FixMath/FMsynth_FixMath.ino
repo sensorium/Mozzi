@@ -13,10 +13,11 @@
 		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
 
-    Thomas Combriat and the Mozzi team 2023, CC by-nc-sa.
+    Tim Barrass 2012, Thomas Combriat and the Mozzi team 2023, CC by-nc-sa.
 */
 
-
+#include <MozziConfigValues.h>
+#define MOZZI_CONTROL_RATE 256  // Hz, powers of 2 are most reliable
 
 #include <Mozzi.h>
 #include <Oscil.h>
@@ -27,11 +28,10 @@
 #include <Smooth.h>
 
 
-#define CONTROL_RATE 256  // Hz, powers of 2 are most reliable
 
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCarrier(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aModulator(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kModIndex(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aCarrier(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aModulator(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kModIndex(COS2048_DATA);
 
 UFix<0, 16> mod_index;
 UFix<16, 16> deviation;
@@ -47,7 +47,7 @@ EventDelay kNoteChangeDelay;
 
 const UFix<7, 0> note_upper_limit = 50, note_lower_limit = 32;
 
-UFix<7, 0> note0 = note_lower_limit, note1 = note_lower_limit + UFix<7, 0>(5), target_note = note0;
+UFix<7, 0> note0 = note_lower_limit, note1 = note_lower_limit + UFix<7, 0>(5), target_note = 0;
 SFix<2, 0> note_change_step = 3;  // will only take +3 or -3, 2bits are enough for that
 
 UFix<7,8> smoothed_note;
@@ -57,7 +57,7 @@ Smooth<UFix<7, 8>> kSmoothNote(0.95f);
 void setup() {
   kNoteChangeDelay.set(768);
   kModIndex.setFreq(.768f);  // sync with kNoteChangeDelay
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 void setFreqs(UFix<7, 8> midi_note) {
@@ -92,7 +92,7 @@ void updateControl() {
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
 auto modulation = (deviation * toSFraction(aModulator.next()));
 return MonoOutput::from8Bit(aCarrier.phMod(modulation));
 }

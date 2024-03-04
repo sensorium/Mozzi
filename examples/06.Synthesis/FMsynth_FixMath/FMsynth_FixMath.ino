@@ -7,6 +7,11 @@
     This is the same technique than the FMsynth example but
     using FixMath instead of mozzi_fixmath.
 
+    Note that it is slightly less optimized (but runs fine on an
+    Uno) in order to make the underlying algorithm clearer.
+    An optimized version, using FixMath can be found in the 
+    example FMsynth_32k_HIFI.
+
 		Mozzi documentation/API
 		https://sensorium.github.io/Mozzi/doc/html/index.html
 

@@ -3,7 +3,7 @@
 
     Demonstrates Oscil::phMod() for phase modulation,
     Smooth() for smoothing control signals,
-    and Mozzi's fixed point number types for fractional frequencies.
+    and FixMath fixed point number types for fractional frequencies.
 
     This sketch using HIFI mode is not for Teensy 3.1.
 
@@ -39,93 +39,82 @@
 		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012-13, CC by-nc-sa.
+    Tim Barrass 2012-13, Thomas Combriat and the Mozzi team 2024, CC by-nc-sa.
 */
 
 #include <MozziConfigValues.h>
 #define MOZZI_AUDIO_MODE MOZZI_OUTPUT_2PIN_PWM
 #define MOZZI_AUDIO_RATE 32768
-#define MOZZI_CONTROL_RATE 256 // Hz, powers of 2 are most reliable
+#define MOZZI_CONTROL_RATE 256  // Hz, powers of 2 are most reliable
 
 #include <Mozzi.h>
 #include <Oscil.h>
-#include <tables/cos2048_int8.h> // table for Oscils to play
+#include <tables/cos2048_int8.h>  // table for Oscils to play
 #include <mozzi_midi.h>
-#include <mozzi_fixmath.h>
+#include <FixMath.h>
 #include <EventDelay.h>
 #include <Smooth.h>
+
+
 
 Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aCarrier(COS2048_DATA);
 Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aModulator(COS2048_DATA);
 Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kModIndex(COS2048_DATA);
 
-// The ratio of deviation to modulation frequency is called the "index of modulation". ( I = d / Fm )
-// It will vary according to the frequency that is modulating the carrier and the amount of deviation.
-// so deviation d = I   Fm
-// haven't quite worked this out properly yet...
+UFix<0, 16> mod_index;
+UFix<8, 16> deviation;  // 8 so that we do not exceed 32bits in updateAudio
 
-Q8n8 mod_index;// = float_to_Q8n8(2.0f); // constant version
-Q16n16 deviation;
+UFix<16, 16> carrier_freq, mod_freq;
+const UFix<0,16> modulation_amp = 0.001; // how much the modulation index will vary around its mean
+const UFix<2,0> mean_modulation_unscaled = 2; // the real mean modulation will be mean_modulation_unscaled * modulation_max 
+                                        // this one is adding a bias to the oscillator, hence it should be bigger than one.
 
-Q16n16 carrier_freq, mod_freq;
-
-// FM ratio between oscillator frequencies, stays the same through note range
-Q8n8 mod_to_carrier_ratio = float_to_Q8n8(3.f);
+const UFix<2, 0> mod_to_carrier_ratio = 3;  // 3 fits in UFix<2,0> which has a maximum range of (2^2)-1=3
 
 EventDelay kNoteChangeDelay;
 
-// for note changes
-Q7n8 target_note, note0, note1, note_upper_limit, note_lower_limit, note_change_step, smoothed_note;
+const UFix<7, 0> note_upper_limit = 50, note_lower_limit = 32;
 
-// using Smooth on midi notes rather than frequency,
-// because fractional frequencies need larger types than Smooth can handle
-// Inefficient, but...until there is a better Smooth....
-Smooth <int> kSmoothNote(0.95f);
+UFix<7, 0> note0 = note_lower_limit, note1 = note_lower_limit + UFix<7, 0>(5), target_note = 0;
+SFix<2, 0> note_change_step = 3;  // will only take +3 or -3, 2bits are enough for that
 
-void setup(){
-  kNoteChangeDelay.set(768); // ms countdown, taylored to resolution of MOZZI_CONTROL_RATE
-  kModIndex.setFreq(.768f); // sync with kNoteChangeDelay
-  target_note = note0;
-  note_change_step = Q7n0_to_Q7n8(3);
-  note_upper_limit = Q7n0_to_Q7n8(50);
-  note_lower_limit = Q7n0_to_Q7n8(32);
-  note0 = note_lower_limit;
-  note1 = note_lower_limit + Q7n0_to_Q7n8(5);
+UFix<7,8> smoothed_note;
+
+Smooth<UFix<7, 8>> kSmoothNote(0.95f);
+
+void setup() {
+  kNoteChangeDelay.set(768);
+  kModIndex.setFreq(.768f);  // sync with kNoteChangeDelay
   startMozzi();
 }
 
-void setFreqs(Q8n8 midi_note){
-  carrier_freq = Q16n16_mtof(Q8n8_to_Q16n16(midi_note)); // convert midi note to fractional frequency
-  mod_freq = ((carrier_freq>>8) * mod_to_carrier_ratio)  ; // (Q16n16>>8)   Q8n8 = Q16n16, beware of overflow
-  deviation = ((mod_freq>>16) * mod_index); // (Q16n16>>16)   Q8n8 = Q24n8, beware of overflow
-  aCarrier.setFreq_Q16n16(carrier_freq);
-  aModulator.setFreq_Q16n16(mod_freq);
+void setFreqs(UFix<7, 8> midi_note) {
+  carrier_freq = mtof(midi_note);
+  mod_freq = UFix<14,16>(carrier_freq) * mod_to_carrier_ratio;
+  deviation = ((UFix<16,0>(mod_freq)) * mod_index).sR<8>();  // the sR here cheaply divides the deviation by 256.
+
+  aCarrier.setFreq(carrier_freq);
+  aModulator.setFreq(mod_freq);
 }
 
-void updateControl(){
-  // change note
-  if(kNoteChangeDelay.ready()){
-    if (target_note==note0){
-      note1 += note_change_step;
-      target_note=note1;
+void updateControl() {
+  if (kNoteChangeDelay.ready()) {
+    if (target_note == note0) 
+    {
+      note1 = note1 + note_change_step;
+      target_note = note1;
+    } 
+    else 
+    {
+      note0 = note0 + note_change_step;
+      target_note = note0;
     }
-    else{
-      note0 += note_change_step;
-      target_note=note0;
-    }
-
-    // change direction
-    if(note0>note_upper_limit) note_change_step = Q7n0_to_Q7n8(-3);
-    if(note0<note_lower_limit) note_change_step = Q7n0_to_Q7n8(3);
-
-    // reset eventdelay
+    if(note0>note_upper_limit) note_change_step = -3;
+    if(note0<note_lower_limit) note_change_step = 3;
     kNoteChangeDelay.start();
   }
+  mod_index = (toSFraction(kModIndex.next()) + mean_modulation_unscaled).sR<2>(); // the sR is to scale back in pure fractional range
 
-  // vary the modulation index
-  mod_index = (Q8n8)350+kModIndex.next();
-
-  // here's where the smoothing happens
   smoothed_note = kSmoothNote.next(target_note);
   setFreqs(smoothed_note);
 
@@ -133,11 +122,11 @@ void updateControl(){
 
 
 AudioOutput updateAudio(){
-  Q15n16 modulation = deviation * aModulator.next() >> 8;
-  return MonoOutput::from8Bit(aCarrier.phMod(modulation)); // Internally still only 8 bits, will be shifted up to 14 bits in HIFI mode
+auto modulation = (deviation * toSFraction(aModulator.next()));
+return MonoOutput::from8Bit(aCarrier.phMod(modulation));
 }
 
 
-void loop(){
-  audioHook();
+void loop() {
+    audioHook();
 }

@@ -13,6 +13,12 @@ private:
   friend int mtof(uint8_t);
   friend int mtof(int);
   friend Q16n16  Q16n16_mtof(Q16n16);
+  template<int8_t NI, uint64_t RANGE>
+  friend UFix<16,16> mtof(UFix<NI,0,RANGE>);
+
+  template<int8_t NI, uint64_t RANGE>
+  friend UFix<16,16> mtof(SFix<NI,0,RANGE>);
+  
   static CONSTTABLE_STORAGE(uint32_t) midiToFreq[128];
 };
 
@@ -141,6 +147,24 @@ template<int8_t NI, int8_t NF, uint64_t RANGE>
 inline UFix<16,16> mtof(SFix<NI,NF,RANGE> midival)
 {
   return UFix<16,16>::fromRaw(Q16n16_mtof(UFix<16,16>(midival).asRaw()));
+};
+
+/** @ingroup midi
+Converts *whole* midi note number with speed and accuracy (more accurate that mtof(uint8_t))
+*/
+template<int8_t NI, uint64_t RANGE>
+inline UFix<16,16> mtof(UFix<NI,0,RANGE> midival)
+{
+  return UFix<16,16>::fromRaw((FLASH_OR_RAM_READ<const uint32_t>(MidiToFreqPrivate::midiToFreq + midival.asRaw())));
+};
+
+/** @ingroup midi
+Converts *whole* midi note number with speed and accuracy (more accurate that mtof(uint8_t))
+*/
+template<int8_t NI, uint64_t RANGE>
+inline UFix<16,16> mtof(SFix<NI,0,RANGE> midival)
+{
+  return UFix<16,16>::fromRaw((FLASH_OR_RAM_READ<const uint32_t>(MidiToFreqPrivate::midiToFreq + midival.asUFix().asRaw())));
 };
 
 #endif /* MOZZI_MIDI_H_ */

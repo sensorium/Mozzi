@@ -66,16 +66,17 @@ void setup(){
 }
 
 
-volatile unsigned int freq1;  // global so it can be used in updateAudio, volatile to stop it getting changed while being used
+unsigned int freq1;  // global so it can be used in updateAudio
 
 void updateControl(){
   UFix<16,16> freq0 = mozziAnalogRead(0); // 0 to 1023, with an additionnal 16bits of precision (which will be used in the interpolation.)
   freq1 = (unsigned int) mozziAnalogRead(1); // 0 to 1023
+  aInterpolate.set(freq0, AUDIO_STEPS_PER_CONTROL);
 }
 
 
 AudioOutput updateAudio(){
-  UFix<16,16> interpolatedFreq = aInterpolate.next(); // get the next linear interpolated freq
+  auto interpolatedFreq = aInterpolate.next(); // get the next linear interpolated freq
   aSin0.setFreq(interpolatedFreq);
 
   int smoothedFreq = aSmooth.next(freq1); // get the next filtered frequency

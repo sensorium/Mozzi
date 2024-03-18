@@ -20,6 +20,9 @@
     https://groups.google.com/forum/#!forum/mozzi-users
 
     Tim Barrass 2012, CC by-nc-sa.
+
+    Note: an similar example, but using the newer FixMath
+    framework is given is FMsynth_FixMath.
 */
 
 #define MOZZI_CONTROL_RATE 256 // Hz, powers of 2 are most reliable

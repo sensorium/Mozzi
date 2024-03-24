@@ -143,7 +143,7 @@ template<byte RES> int16_t mozziAnalogRead(uint8_t pin);
 See mozziAnalogRead() but always returns the value shifted to 16 bit range. THis is exactly
 equivalent to mozziAnalogRead<16>(pin);
 */
-int16_t mozziAnalogRead16(uint8_t pin) { return mozziAnalogRead<16>(pin); };
+inline int16_t mozziAnalogRead16(uint8_t pin) { return mozziAnalogRead<16>(pin); };
 
 #if defined(FOR_DOXYGEN_ONLY) || defined(MOZZI_ANALOG_READ_RESOLUTION)
 /** @ingroup analog
@@ -165,9 +165,9 @@ interrupt.
 @param pin_or_channel the analog pin or channel number.
 @return the digitised value of the voltage on the chosen channel. See the note above regarding the output range!
 */
-int16_t mozziAnalogRead(uint8_t pin) { return mozziAnalogRead<MOZZI_ANALOG_READ_RESOLUTION>(pin); }
+inline int16_t mozziAnalogRead(uint8_t pin) { return mozziAnalogRead<MOZZI_ANALOG_READ_RESOLUTION>(pin); }
 #else
-MOZZI_DEPRECATED("2.0", "This use of mozziAnalogRead() is not portable.") int16_t mozziAnalogRead(uint8_t pin) { return mozziAnalogRead<MOZZI__INTERNAL_ANALOG_READ_RESOLUTION>(pin); }
+MOZZI_DEPRECATED("2.0", "This use of mozziAnalogRead() is not portable.") inline int16_t mozziAnalogRead(uint8_t pin) { return mozziAnalogRead<MOZZI__INTERNAL_ANALOG_READ_RESOLUTION>(pin); }
 #endif
 
 uint8_t adcPinToChannelNum(uint8_t pin);

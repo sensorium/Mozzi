@@ -31,6 +31,15 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_EXTERNAL_
 /** NOTE: *Otherwise* you may additionally document that as not-yet-supported like so: */
 // MOZZI_CHECK_SUPPORTED(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ)
 
+/** NOTE: This should be set to whichever resolution (in bits) mozziAnalogRead() returns values in by default in your implementation.
+ * mozziAnalogRead<bits>() will shift the return value accordingly.
+ *
+ * Generally you will set this to the default hardware resolution for this platform, but of course it's also possible - for instance -
+ * to set this to the user configurable MOZZI_ANALOG_READ_RESOLUTION (if it has been defined), and configure your ADC reads, accordingly,
+ * avoiding the extra shift operation.
+*/
+#define MOZZI__INTERNAL_ANALOG_READ_RESOLUTION 10
+
 /** NOTE: Example for additional config options depending on a specific output mode: */
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_INTERNAL_DAC)
 #  if !defined(MOZZI_AUDIO_PIN_1)
@@ -44,6 +53,7 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_EXTERNAL_
 #  include "disable_stereo_on_github_workflow.h"   // This allows stereo sketches to compile (in mono) in automated testing builds.
 MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_CHANNELS, MOZZI_MONO)
 #endif
+
 
 /** NOTE: You may also set further, implementation-specific defines, here. E.g. BYPASS_MOZZI_OUTPUT_BUFFER. Defines that are purely
  * specific to your port (i.e. only needed inside MozziGuts_impt_YOURPLATFORM.h, should be #undef'ed at the end of that file. */

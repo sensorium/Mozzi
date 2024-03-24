@@ -126,7 +126,7 @@ __attribute__((noinline)) void adcStartReadCycle() {
 	}
 }
 
-int mozziAnalogRead(uint8_t pin) {
+int16_t mozziAnalogRead(uint8_t pin) {
 	pin = adcPinToChannelNum(pin); // allow for channel or pin numbers; on most platforms other than AVR this has no effect. See note on pins/channels
 	adc_channels_to_read.push(pin);
 	return analog_readings[channelNumToIndex(pin)];
@@ -190,7 +190,7 @@ inline void advanceADCStep() {
 #else
 MOZZI_ASSERT_EQUAL(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE)
 
-int mozziAnalogRead(uint8_t pin) {
+int16_t mozziAnalogRead(uint8_t pin) {
   return analogRead(pin);
 }
 
@@ -289,7 +289,9 @@ uint32_t MozziRandPrivate::z=521288629;
 unsigned long audioTicks() { return MozziPrivate::audioTicks(); };
 void startMozzi(int control_rate_hz) { MozziPrivate::startMozzi(control_rate_hz); };
 void stopMozzi() { MozziPrivate::stopMozzi(); };
-int mozziAnalogRead(uint8_t pin) { return MozziPrivate::mozziAnalogRead(pin); };
+template<byte RES> int16_t mozziAnalogRead(uint8_t pin) { return (RES > MOZZI__INTERNAL_ANALOG_READ_RESOLUTION) ? MozziPrivate::mozziAnalogRead(pin) << (RES - MOZZI__INTERNAL_ANALOG_READ_RESOLUTION) :
+                                                                  (RES < MOZZI__INTERNAL_ANALOG_READ_RESOLUTION) ? MozziPrivate::mozziAnalogRead(pin) >> (RES - MOZZI__INTERNAL_ANALOG_READ_RESOLUTION) :
+                                                                  MozziPrivate::mozziAnalogRead(pin);};
 #if !MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE)
 AudioOutputStorage_t getAudioInput() { return MozziPrivate::getAudioInput(); };
 #endif

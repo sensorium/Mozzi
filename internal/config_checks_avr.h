@@ -133,6 +133,8 @@
 #define MOZZI_AUDIO_BITS (2*MOZZI_AUDIO_BITS_PER_CHANNEL)
 #endif
 
+#define MOZZI__INTERNAL_ANALOG_READ_RESOLUTION 10
+
 // Step 2: Check
 // NOTE: This step is not technically required, but a good idea in any port
 

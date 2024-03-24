@@ -27,6 +27,11 @@ static void advanceADCStep();                       // to be provided by platfor
 static void startSecondADCReadOnCurrentChannel();   // to be provided by platform implementation
 static uint8_t adc_count = 0;                       // needed below
 #endif
+
+// TODO: make this helper public?
+template<byte BITS_IN, byte BITS_OUT, typename T> constexpr T smartShift(T value) {
+    return (BITS_IN > BITS_OUT) ? value >> (BITS_IN - BITS_OUT) : (BITS_IN < BITS_OUT) ? value << (BITS_OUT - BITS_IN) : value;
+}
 }
 
 // Include the appropriate implementation
@@ -134,7 +139,7 @@ int16_t mozziAnalogRead(uint8_t pin) {
 
 #if !MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE)
 static AudioOutputStorage_t audio_input; // holds the latest audio from input_buffer
-AudioOutputStorage_t getAudioInput() { return audio_input; }
+int16_t getAudioInput() { return audio_input; }
 #endif
 
 #if MOZZI_IS(MOZZI__LEGACY_AUDIO_INPUT_IMPL, 1)
@@ -289,11 +294,9 @@ uint32_t MozziRandPrivate::z=521288629;
 unsigned long audioTicks() { return MozziPrivate::audioTicks(); };
 void startMozzi(int control_rate_hz) { MozziPrivate::startMozzi(control_rate_hz); };
 void stopMozzi() { MozziPrivate::stopMozzi(); };
-template<byte RES> int16_t mozziAnalogRead(uint8_t pin) { return (RES > MOZZI__INTERNAL_ANALOG_READ_RESOLUTION) ? MozziPrivate::mozziAnalogRead(pin) << (RES - MOZZI__INTERNAL_ANALOG_READ_RESOLUTION) :
-                                                                  (RES < MOZZI__INTERNAL_ANALOG_READ_RESOLUTION) ? MozziPrivate::mozziAnalogRead(pin) >> (RES - MOZZI__INTERNAL_ANALOG_READ_RESOLUTION) :
-                                                                  MozziPrivate::mozziAnalogRead(pin);};
+template<byte RES> int16_t mozziAnalogRead(uint8_t pin) { return MozziPrivate::smartShift<MOZZI__INTERNAL_ANALOG_READ_RESOLUTION, RES>(MozziPrivate::mozziAnalogRead(pin));};
 #if !MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE)
-AudioOutputStorage_t getAudioInput() { return MozziPrivate::getAudioInput(); };
+template<byte RES> int16_t getAudioInput() { return MozziPrivate::smartShift<MOZZI__INTERNAL_ANALOG_READ_RESOLUTION, RES>(MozziPrivate::getAudioInput()); };
 #endif
 #if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
 void setupMozziADC(int8_t speed) { MozziPrivate::setupMozziADC(speed); };

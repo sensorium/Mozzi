@@ -136,7 +136,15 @@ are called.
 */
 void audioHook();
 
+/** @ingroup analog
 
+See getAudioInput(). The template parameter specifies the desired value range in bits. */
+template<byte RES> int16_t getAudioInput();
+
+/** @ingroup analog
+
+See getAudioInput(). Equivalent to getAudioInput<16>(). */
+template<byte RES> int16_t getAudioInput16() { return getAudioInput<16>(); }
 
 /** @ingroup analog
 This returns audio input from the input buffer, if
@@ -150,10 +158,19 @@ and
 http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/ .
 A circuit and instructions for amplifying and biasing a microphone signal can be found at
 http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS
+
+@note The value range returned by this function follows the same rules as detailed in the documentation
+      for mozziAnalogRead(): For portable code, define MOZZI_ANALGO_READ_RESOLUTION at the top of your
+      sketch, or use the templated version of this function.
+
 @return audio data from the input buffer
 */
-#if !MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE)
-int getAudioInput();
+#if defined(FOR_DOXYGEN_ONLY) || (!MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE))
+#if defined(FOR_DOXYGEN_ONLY) || defined(MOZZI_ANALOG_READ_RESOLUTION)
+int16_t getAudioInput() { return getAudioInput<MOZZI_ANALOG_READ_RESOLUTION>(); };
+#else
+MOZZI_DEPRECATED("2.0", "This use of getAudioInput() is not portable") int16_t getAudioInput() { return getAudioInput<MOZZI__INTERNAL_ANALOG_READ_RESOLUTION>(); };
+#endif
 #endif
 
 

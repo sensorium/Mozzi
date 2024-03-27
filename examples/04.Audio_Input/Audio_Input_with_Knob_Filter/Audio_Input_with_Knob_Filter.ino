@@ -44,8 +44,7 @@ void setup(){
 
 
 void updateControl(){
-  int knob = mozziAnalogRead(KNOB_PIN);
-  byte cutoff_freq = knob>>2; // range 0-255
+  byte cutoff_freq = mozziAnalogRead<8>(KNOB_PIN); // range 0-255
   lpf.setCutoffFreq(cutoff_freq);
 }
 

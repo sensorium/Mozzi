@@ -56,11 +56,8 @@ void setup(){
 
 
 void updateControl(){
-  // read the potentiometer
-  int knob_value = mozziAnalogRead(KNOB_PIN); // value is 0-1023
-
-  // map it to an 8 bit volume range for efficient calculations in updateAudio
-  volume = knob_value >> 2;  // 10 bits (0->1023) shifted right by 2 bits to give 8 bits (0->255)
+  // read the potentiometer as only 8 bit volume range for efficient calculations in updateAudio
+  volume = mozziAnalogRead<8>(KNOB_PIN); // value is 0-255
 
   // print the value to the Serial monitor for debugging
   Serial.print("volume = ");
@@ -68,7 +65,7 @@ void updateControl(){
   Serial.print("\t"); // prints a tab
 
   // read the light dependent resistor
-  int light_level = mozziAnalogRead(LDR_PIN); // value is 0-1023
+  int light_level = mozziAnalogRead<10>(LDR_PIN); // We request 10 bits, here, however. Value is 0-1023
 
   // print the value to the Serial monitor for debugging
   Serial.print("light level = ");

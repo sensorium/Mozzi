@@ -36,6 +36,7 @@
   Tim Barrass 2013, CC by-nc-sa.
 */
 
+#define MOZZI_ANALOG_READ_RESOLUTION 10 // code below assumes readings to be in the classic 10-bit (0-1023) range
 #include <Mozzi.h>
 #include <Oscil.h> // oscillator
 #include <tables/cos2048_int8.h> // table for Oscils to play

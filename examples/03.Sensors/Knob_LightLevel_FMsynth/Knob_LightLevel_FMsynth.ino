@@ -68,7 +68,7 @@ void setup(){
 
 void updateControl(){
   // read the knob
-  int knob_value = mozziAnalogRead(KNOB_PIN); // value is 0-1023
+  int knob_value = mozziAnalogRead<10>(KNOB_PIN); // value is 0-1023
 
   // map the knob to carrier frequency
   int carrier_freq = kMapCarrierFreq(knob_value);
@@ -81,7 +81,7 @@ void updateControl(){
   aModulator.setFreq(mod_freq);
 
   // read the light dependent resistor on the Analog input pin
-  int light_level= mozziAnalogRead(LDR_PIN); // value is 0-1023
+  int light_level= mozziAnalogRead<10>(LDR_PIN); // value is 0-1023
 
   // print the value to the Serial monitor for debugging
   Serial.print("light_level = ");

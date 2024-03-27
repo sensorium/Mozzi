@@ -37,6 +37,8 @@
   Tim Barrass 2013, CC by-nc-sa.
 */
 
+#define MOZZI_ANALOG_READ_RESOLUTION 10 // code below assumes readings to be in the classic 10-bit (0-1023) range
+#include <Mozzi.h>
 #include <WavePacket.h>
 #include <RollingAverage.h>
 #include <AutoMap.h>

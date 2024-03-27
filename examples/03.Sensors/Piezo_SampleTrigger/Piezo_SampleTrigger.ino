@@ -55,7 +55,7 @@ void setup(){
 
 void updateControl(){
   // read the knob
-  int knob_value = mozziAnalogRead(KNOB_PIN); // value is 0-1023
+  int knob_value = mozziAnalogRead<10>(KNOB_PIN); // value is 0-1023
 
   // map it to values between 0.1 and about double the recorded pitch
   float pitch = (recorded_pitch * (float) knob_value / 512.f) + 0.1f;
@@ -64,7 +64,7 @@ void updateControl(){
   aSample.setFreq(pitch);
 
   // read the piezo
-  int piezo_value = mozziAnalogRead(PIEZO_PIN); // value is 0-1023
+  int piezo_value = mozziAnalogRead<10>(PIEZO_PIN); // value is 0-1023
 
   // print the value to the Serial monitor for debugging
   Serial.print("piezo value = ");

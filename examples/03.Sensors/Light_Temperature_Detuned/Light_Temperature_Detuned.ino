@@ -102,8 +102,8 @@ void loop(){
 
 void updateControl(){
   // read analog inputs
-  int temperature = mozziAnalogRead(THERMISTOR_PIN); // not calibrated to degrees!
-  int light_input = mozziAnalogRead(LDR_PIN);
+  int temperature = mozziAnalogRead<10>(THERMISTOR_PIN); // not calibrated to degrees! Simply a 10-bit voltage reading (0-1023)
+  int light_input = mozziAnalogRead<10>(LDR_PIN);
 
   float base_freq_offset = OFFSET_SCALE*temperature;
   float divergence = DIVERGENCE_SCALE*light_input;

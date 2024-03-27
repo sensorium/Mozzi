@@ -69,7 +69,7 @@ void updateControl(){
   static int counter, old_oversampled;
 
   // read the variable resistor
-  int sensor_value = mozziAnalogRead(INPUT_PIN); // value is 0-1023
+  int sensor_value = mozziAnalogRead<10>(INPUT_PIN); // value is 0-1023
 
   // get the next oversampled sensor value
   int oversampled = overSampler.next(sensor_value);

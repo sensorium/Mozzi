@@ -32,8 +32,8 @@ void setup() {
 
 
 void updateControl(){
-  // read the value from the sensor:
-  int sensorValue = mozziAnalogRead(sensorPin);
+  // read the value from the sensor in 10 bit resolution:
+  int sensorValue = mozziAnalogRead<10>(sensorPin);
   Serial.print(sensorValue);
   Serial.print("  Filtered = ");
   Serial.println(dcFiltered.next(sensorValue));

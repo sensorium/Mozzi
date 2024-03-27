@@ -59,7 +59,7 @@ void setup(){
 void updateControl(){
 
   // read the pot
-  int sensor_value = mozziAnalogRead(INPUT_PIN); // value is 0-1023
+  int sensor_value = mozziAnalogRead<10>(INPUT_PIN); // value is 0-1023
 
   // map it to an 8 bit range for efficient calculations in updateAudio
   int target = ((long) sensor_value * BLAHBLAH4B_NUM_CELLS) >> 10; // >> 10 is / 1024

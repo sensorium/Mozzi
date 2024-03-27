@@ -94,8 +94,8 @@ void updateControl(){
   static float previous_pulse_freq;
 
   // read analog inputs
-  int temperature = mozziAnalogRead(THERMISTOR_PIN); // not calibrated to degrees!
-  int light = mozziAnalogRead(LDR_PIN);
+  int temperature = mozziAnalogRead<10>(THERMISTOR_PIN); // not calibrated to degrees!
+  int light = mozziAnalogRead<10>(LDR_PIN);
 
   // map light reading to volume pulse frequency
   float pulse_freq = (float)light/256;

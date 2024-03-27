@@ -47,15 +47,15 @@ void setup(){
 
 
 void updateControl(){
-  // read the piezo
+  // read the piezo. We request 12-bits resolution, here, for values of 0-4095. Some boards
+  // will actually provide that much accuracy, for others the readings are simply shifted to a
+  // larger range.
   int piezo_value = mozziAnalogRead(PIEZO_PIN); // value is 0-1023
 
   // print the value to the Serial monitor for debugging
   Serial.print("piezo_value = ");
   Serial.print(piezo_value);
   Serial.print("\t \t"); // prints 2 tabs
-
-  int frequency = piezo_value*3; // calibrate
 
   // print the frequency to the Serial monitor for debugging
   Serial.print("frequency = ");

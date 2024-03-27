@@ -167,9 +167,9 @@ http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS
 */
 #if defined(FOR_DOXYGEN_ONLY) || (!MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE))
 #if defined(FOR_DOXYGEN_ONLY) || defined(MOZZI_ANALOG_READ_RESOLUTION)
-inline int16_t getAudioInput() { return getAudioInput<MOZZI_ANALOG_READ_RESOLUTION>(); };
+inline uint16_t getAudioInput() { return getAudioInput<MOZZI_ANALOG_READ_RESOLUTION>(); };
 #else
-MOZZI_DEPRECATED("2.0", "This use of getAudioInput() is not portable") inline int16_t getAudioInput() { return getAudioInput<MOZZI__INTERNAL_ANALOG_READ_RESOLUTION>(); };
+MOZZI_DEPRECATED("2.0", "This use of getAudioInput() is not portable. Refer to the API documentation for suggested alternatives") inline uint16_t getAudioInput() { return getAudioInput<MOZZI__INTERNAL_ANALOG_READ_RESOLUTION>(); };
 #endif
 #endif
 

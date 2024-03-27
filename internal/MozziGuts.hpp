@@ -195,7 +195,7 @@ inline void advanceADCStep() {
 #else
 MOZZI_ASSERT_EQUAL(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE)
 
-int16_t mozziAnalogRead(uint8_t pin) {
+uint16_t mozziAnalogRead(uint8_t pin) {
   return analogRead(pin);
 }
 
@@ -294,9 +294,9 @@ uint32_t MozziRandPrivate::z=521288629;
 unsigned long audioTicks() { return MozziPrivate::audioTicks(); };
 void startMozzi(int control_rate_hz) { MozziPrivate::startMozzi(control_rate_hz); };
 void stopMozzi() { MozziPrivate::stopMozzi(); };
-template<byte RES> int16_t mozziAnalogRead(uint8_t pin) { return MozziPrivate::smartShift<MOZZI__INTERNAL_ANALOG_READ_RESOLUTION, RES>(MozziPrivate::mozziAnalogRead(pin));};
+template<byte RES> uint16_t mozziAnalogRead(uint8_t pin) { return MozziPrivate::smartShift<MOZZI__INTERNAL_ANALOG_READ_RESOLUTION, RES>(MozziPrivate::mozziAnalogRead(pin));};
 #if !MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE)
-template<byte RES> int16_t getAudioInput() { return MozziPrivate::smartShift<MOZZI__INTERNAL_ANALOG_READ_RESOLUTION, RES>(MozziPrivate::getAudioInput()); };
+template<byte RES> uint16_t getAudioInput() { return MozziPrivate::smartShift<MOZZI__INTERNAL_ANALOG_READ_RESOLUTION, RES>(MozziPrivate::getAudioInput()); };
 #endif
 #if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
 void setupMozziADC(int8_t speed) { MozziPrivate::setupMozziADC(speed); };

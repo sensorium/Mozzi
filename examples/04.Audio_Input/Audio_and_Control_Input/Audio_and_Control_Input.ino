@@ -44,7 +44,7 @@ void setup() {
 
 void updateControl(){
   for (int i=1;i<NUM_ANALOG_INPUTS;i++) { // analog 0 is configured for audio
-    Serial.print(mozziAnalogRead(i)); // mozziAnalogRead is better than analogRead
+    Serial.print(mozziAnalogRead16(i)); // mozziAnalogRead is better than analogRead
     Serial.print("\t"); // tab
   }
   Serial.println();

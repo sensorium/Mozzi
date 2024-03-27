@@ -120,13 +120,13 @@ void updateControl(){
   //MIDI.read();
 
   // analog joystick for controlling speed of modulation: assigned to attack, decay times and sustain level
-  //x_axis = mozziAnalogRead(X);
-  //y_axis = mozziAnalogRead(Y);
+  //x_axis = mozziAnalogRead<10>(X);
+  //y_axis = mozziAnalogRead<10>(Y);
 
   // for testing/demo without external input
   fakeMidiRead();
-  x_axis = 512; //mozziAnalogRead(X);
-  y_axis = 512; // mozziAnalogRead(Y);
+  x_axis = 512; //mozziAnalogRead<10>(X);
+  y_axis = 512; // mozziAnalogRead<10>(Y);
 
   voice.update();
 }

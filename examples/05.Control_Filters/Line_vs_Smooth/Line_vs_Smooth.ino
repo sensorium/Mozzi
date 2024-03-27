@@ -69,9 +69,9 @@ void setup(){
 volatile unsigned int freq1;  // global so it can be used in updateAudio, volatile to stop it getting changed while being used
 
 void updateControl(){
-  Q16n16 freq0 = Q16n0_to_Q16n16(mozziAnalogRead(0)); // 0 to 1023, scaled up to Q16n16 format
-  freq1 = (unsigned int) mozziAnalogRead(1); // 0 to 1023
-   aInterpolate.set(freq0, AUDIO_STEPS_PER_CONTROL);
+  Q16n16 freq0 = Q16n0_to_Q16n16(mozziAnalogRead<10>(0)); // 0 to 1023, scaled up to Q16n16 format
+  freq1 = (unsigned int) mozziAnalogRead<10>(1); // 0 to 1023
+  aInterpolate.set(freq0, AUDIO_STEPS_PER_CONTROL);
 }
 
 

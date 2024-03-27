@@ -60,9 +60,9 @@ void setup(){
 
 
 void updateControl(){
-  int f = kAverageF.next(mozziAnalogRead(FUNDAMENTAL_PIN))+1;
-  int b = kAverageBw.next(mozziAnalogRead(BANDWIDTH_PIN));
-  int cf = kAverageCf.next(2*mozziAnalogRead(CENTREFREQ_PIN));
+  int f = kAverageF.next(mozziAnalogRead<10>(FUNDAMENTAL_PIN))+1;
+  int b = kAverageBw.next(mozziAnalogRead<10>(BANDWIDTH_PIN));
+  int cf = kAverageCf.next(mozziAnalogRead<11>(CENTREFREQ_PIN));
   wavey.set(f, b, cf);
 }
 

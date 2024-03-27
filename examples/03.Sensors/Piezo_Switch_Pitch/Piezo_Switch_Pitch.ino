@@ -79,7 +79,7 @@ void buttonChangePitch(){
 
 void updateControl(){
   // read the piezo
-  int piezo_value = mozziAnalogRead(PIEZO_PIN); // value is 0-1023
+  int piezo_value = mozziAnalogRead<10>(PIEZO_PIN); // value is 0-1023
 
   // print the value to the Serial monitor for debugging
   Serial.print("piezo value = ");

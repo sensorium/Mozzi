@@ -57,7 +57,7 @@ void setup(){
 
 
 void updateControl(){
-  int bumpy_input = mozziAnalogRead(INPUT_PIN);
+  int bumpy_input = mozziAnalogRead<10>(INPUT_PIN); // request reading at 10-bit resolution, i.e. 0-1023
   averaged = kAverage.next(bumpy_input);
   aSin0.setFreq(averaged);
   aSin1.setFreq(kDelay.next(averaged));

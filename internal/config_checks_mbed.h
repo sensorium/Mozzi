@@ -111,4 +111,7 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE, MOZZI_AUDIO_INP
 #  define BYPASS_MOZZI_OUTPUT_BUFFER true
 #endif
 
+// TODO: This value is correct for Arduino Giga and Arduino Portenta, but not necessarily everywhere else
+#define MOZZI__INTERNAL_ANALOG_READ_RESOLUTION 16
+
 #endif        //  #ifndef CONFIG_CHECK_MBED_H

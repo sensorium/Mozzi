@@ -27,6 +27,11 @@ static void advanceADCStep();                       // to be provided by platfor
 static void startSecondADCReadOnCurrentChannel();   // to be provided by platform implementation
 static uint8_t adc_count = 0;                       // needed below
 #endif
+
+// TODO: make this helper public?
+template<byte BITS_IN, byte BITS_OUT, typename T> constexpr T smartShift(T value) {
+    return (BITS_IN > BITS_OUT) ? value >> (BITS_IN - BITS_OUT) : (BITS_IN < BITS_OUT) ? value << (BITS_OUT - BITS_IN) : value;
+}
 }
 
 // Include the appropriate implementation
@@ -126,7 +131,7 @@ __attribute__((noinline)) void adcStartReadCycle() {
 	}
 }
 
-int mozziAnalogRead(uint8_t pin) {
+int16_t mozziAnalogRead(uint8_t pin) {
 	pin = adcPinToChannelNum(pin); // allow for channel or pin numbers; on most platforms other than AVR this has no effect. See note on pins/channels
 	adc_channels_to_read.push(pin);
 	return analog_readings[channelNumToIndex(pin)];
@@ -134,7 +139,7 @@ int mozziAnalogRead(uint8_t pin) {
 
 #if !MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE)
 static AudioOutputStorage_t audio_input; // holds the latest audio from input_buffer
-AudioOutputStorage_t getAudioInput() { return audio_input; }
+int16_t getAudioInput() { return audio_input; }
 #endif
 
 #if MOZZI_IS(MOZZI__LEGACY_AUDIO_INPUT_IMPL, 1)
@@ -190,7 +195,7 @@ inline void advanceADCStep() {
 #else
 MOZZI_ASSERT_EQUAL(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE)
 
-int mozziAnalogRead(uint8_t pin) {
+uint16_t mozziAnalogRead(uint8_t pin) {
   return analogRead(pin);
 }
 
@@ -282,16 +287,17 @@ uint32_t MozziRandPrivate::z=521288629;
 #undef MOZZI__LEGACY_AUDIO_INPUT_IMPL
 
 // "export" publicly accessible functions defined in this file
-// NOTE: unfortunately, we cannot just write using MozziPrivate::mozziMicros(), and that will conflict with, rather than define mozziMicros()
-//       we might want to rethink how this is done. What matters is that these functions are user accessible, though, while most of what we
+// NOTE: unfortunately, we cannot just write "using MozziPrivate::mozziMicros()", etc. as that would conflict with, rather than define mozziMicros().
+//       Instead, for now, we forward the global-scope functions to their implementations inside MozziPrivate.
+//       We might want to rethink how this is done. What matters is that these functions are user accessible, though, while most of what we
 //       now keep in MozziPrivate is hidden away.
-//unsigned long mozziMicros() { return MozziPrivate::mozziMicros(); };
+unsigned long mozziMicros() { return MozziPrivate::mozziMicros(); };
 unsigned long audioTicks() { return MozziPrivate::audioTicks(); };
 void startMozzi(int control_rate_hz) { MozziPrivate::startMozzi(control_rate_hz); };
 void stopMozzi() { MozziPrivate::stopMozzi(); };
-int mozziAnalogRead(uint8_t pin) { return MozziPrivate::mozziAnalogRead(pin); };
+template<byte RES> uint16_t mozziAnalogRead(uint8_t pin) { return MozziPrivate::smartShift<MOZZI__INTERNAL_ANALOG_READ_RESOLUTION, RES>(MozziPrivate::mozziAnalogRead(pin));};
 #if !MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE)
-AudioOutputStorage_t getAudioInput() { return MozziPrivate::getAudioInput(); };
+template<byte RES> uint16_t getAudioInput() { return MozziPrivate::smartShift<MOZZI__INTERNAL_ANALOG_READ_RESOLUTION, RES>(MozziPrivate::getAudioInput()); };
 #endif
 #if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
 void setupMozziADC(int8_t speed) { MozziPrivate::setupMozziADC(speed); };

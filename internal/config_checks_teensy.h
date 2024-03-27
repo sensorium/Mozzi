@@ -138,4 +138,7 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_CHANNELS, 1)
 #  endif
 #endif
 
+//TODO: Not 100% sure this is correct in all cases.
+#define MOZZI__INTERNAL_ANALOG_READ_RESOLUTION 10
+
 #endif        //  #ifndef CONFIG_CHECK_TEENSY_H

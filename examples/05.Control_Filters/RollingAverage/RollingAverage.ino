@@ -42,7 +42,7 @@ void setup(){
 
 
 void updateControl(){
-  int bumpy_input = mozziAnalogRead(INPUT_PIN);
+  int bumpy_input = mozziAnalogRead<10>(INPUT_PIN);
   averaged = kAverage.next(bumpy_input);
 
   Serial.print("bumpy \t");

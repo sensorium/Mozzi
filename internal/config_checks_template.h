@@ -32,11 +32,26 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_EXTERNAL_
 // MOZZI_CHECK_SUPPORTED(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ)
 
 /** NOTE: This should be set to whichever resolution (in bits) mozziAnalogRead() returns values in by default in your implementation.
- * mozziAnalogRead<bits>() will shift the return value accordingly.
+ * mozziAnalogRead<bits>() will shift the return value accordingly. Generally you will set this to the default hardware resolution for this platform.
  *
- * Generally you will set this to the default hardware resolution for this platform, but of course it's also possible - for instance -
- * to set this to the user configurable MOZZI_ANALOG_READ_RESOLUTION (if it has been defined), and configure your ADC reads, accordingly,
- * avoiding the extra shift operation.
+ * @em Optionally, you could to set this to the user configurable MOZZI_ANALOG_READ_RESOLUTION (if it has been defined), and configure your ADC reads,
+ * accordingly, avoiding the extra shift operation:
+ *
+ * @code
+#ifdef MOZZI_ANALOG_READ_RESOLUTION
+#define MOZZI__INTERNAL_ANALOG_READ_RESOLUTION MOZZI_ANALOG_READ_RESOLUTION
+#define MOZZI__IMPL_SET_ANALOG_READ_RESOLUTION
+#else
+#define MOZZI__INTERNAL_ANALOG_READ_RESOLUTION 16
+#endif
+
+[...]
+
+//inside MozziGuts_impl_MPLATFORM, function setupMozziADC():
+#ifdef MOZZI__IMPL_SET_ANALOG_READ_RESOLUTION
+analogReadResolution(MOZZI_ANALOG_READ_RESOLUTION);
+#endif
+ * @endcode
 */
 #define MOZZI__INTERNAL_ANALOG_READ_RESOLUTION 10
 

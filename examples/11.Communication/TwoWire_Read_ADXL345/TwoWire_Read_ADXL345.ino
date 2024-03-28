@@ -9,15 +9,15 @@
 
     Circuit: Audio output on digital pin 9.
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Marije Baalman 2012.
-    Small modifications by TIm Barrass to retain Mozzi compatibility.
-    This example code is in the public domain.
+   Copyright 2012-2024 Marije Baalman and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #define MOZZI_CONTROL_RATE 128 // Hz, powers of 2 are most reliable

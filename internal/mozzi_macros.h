@@ -1,3 +1,14 @@
+/*
+ * mozzi_macros.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
+
 /** This file contains some macros used internally inside Mozzi. These are not meant to be useful in user code. */
 
 #ifndef MOZZI_MACROS_H

@@ -1,13 +1,13 @@
 /*
  * teensyPinMap.h
  *
- * Copyright 2021 T. Combriat.
- *
  * This file is part of Mozzi.
  *
- * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2021-2024 T. Combriat and the Mozzi Team
  *
- */
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
 
 #ifndef TEENSYPINMAP_H_
 #define TEENSYPINMAP_H

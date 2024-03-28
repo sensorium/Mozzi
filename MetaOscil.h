@@ -4,7 +4,13 @@
  * A wrap-up to swap between different oscillators seemlessly, allowing to produce non-aliased sounds by automatically switching between oscillators.
  *
  * This file is part of Mozzi.
+ *
+ * Copyright 2021-2024 T. Combriat and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
  */
+
 
 #ifndef META_OSCIL_H
 #define META_OSCIL_H

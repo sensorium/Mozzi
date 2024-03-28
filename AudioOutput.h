@@ -1,3 +1,14 @@
+/*
+ * AudioOutput.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2021-2024 Thomas Friedrichsmeier and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+ */
+
 /** @defgroup audio_output Audio Output and Buffering
  *
  * @details Documentation on basic Mozzi architecture and output modes */

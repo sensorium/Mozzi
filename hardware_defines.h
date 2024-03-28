@@ -1,3 +1,15 @@
+/*
+ * hardware_defines.h.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+ */
+
+
 #ifndef HARDWARE_DEFINES_H_
 #define HARDWARE_DEFINES_H_
 

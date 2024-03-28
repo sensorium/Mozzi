@@ -1,12 +1,11 @@
 /*
  * FixMath.h
  *
- * Copyright 2023, Thomas Combriat and the Mozzi team
- *
  * This file is part of Mozzi.
  *
- * Mozzi is licensed under a Creative Commons
- * Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2023-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
 

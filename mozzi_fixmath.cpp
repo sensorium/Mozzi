@@ -1,3 +1,14 @@
+/*
+ * mozzi_fixmath.cpp
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2012-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+ */
+
 #include "mozzi_fixmath.h"
 
 /** @ingroup fixmath

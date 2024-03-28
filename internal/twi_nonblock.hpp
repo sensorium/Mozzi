@@ -10,11 +10,11 @@
  */
 
 #include "hardware_defines.h"
+#if !IS_AVR()
+#error Wrong include
+#endif
 
 // Added by TB2014 for Mozzi library, to hide code from Teensy 3.1
-#if IS_AVR()
-
-#include "twi_nonblock.h"
 
 
 #include <avr/interrupt.h>
@@ -601,4 +601,3 @@ ISR(TWI_vect)
   }
 }
 
-#endif

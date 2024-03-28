@@ -90,4 +90,9 @@ uint8_t twi_readFromBlocking(uint8_t address, uint8_t* data, uint8_t length);
 uint8_t twi_writeToBlocking(uint8_t address, uint8_t* data, uint8_t length, uint8_t wait);
 
 #endif
+
+#if !defined _MOZZI_TWI_HEADER_ONLY
+#include "internal/twi_nonblock.hpp"
+#endif
+
 #endif

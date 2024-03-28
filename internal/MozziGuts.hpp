@@ -131,20 +131,20 @@ __attribute__((noinline)) void adcStartReadCycle() {
 	}
 }
 
-int16_t mozziAnalogRead(uint8_t pin) {
+uint16_t mozziAnalogRead(uint8_t pin) {
 	pin = adcPinToChannelNum(pin); // allow for channel or pin numbers; on most platforms other than AVR this has no effect. See note on pins/channels
 	adc_channels_to_read.push(pin);
 	return analog_readings[channelNumToIndex(pin)];
 }
 
 #if !MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE)
-static AudioOutputStorage_t audio_input; // holds the latest audio from input_buffer
-int16_t getAudioInput() { return audio_input; }
+static uint16_t audio_input; // holds the latest audio from input_buffer
+uint16_t getAudioInput() { return audio_input; }
 #endif
 
 #if MOZZI_IS(MOZZI__LEGACY_AUDIO_INPUT_IMPL, 1)
 // ring buffer for audio input
-CircularBuffer<unsigned int> input_buffer; // fixed size 256
+CircularBuffer<uint16_t> input_buffer; // fixed size 256
 #define audioInputAvailable() (!input_buffer.isEmpty())
 #define readAudioInput() (input_buffer.read())
 /** NOTE: Triggered at MOZZI_AUDIO_RATE via defaultAudioOutput(). In addition to the AUDIO_INPUT_PIN, at most one reading is taken for mozziAnalogRead().  */

@@ -139,12 +139,12 @@ void audioHook();
 /** @ingroup analog
 
 See getAudioInput(). The template parameter specifies the desired value range in bits. */
-template<byte RES> int16_t getAudioInput();
+template<byte RES> uint16_t getAudioInput();
 
 /** @ingroup analog
 
 See getAudioInput(). Equivalent to getAudioInput<16>(). */
-template<byte RES> inline int16_t getAudioInput16() { return getAudioInput<16>(); }
+template<byte RES> inline uint16_t getAudioInput16() { return getAudioInput<16>(); }
 
 /** @ingroup analog
 This returns audio input from the input buffer, if

@@ -119,6 +119,13 @@ MOZZI_CHECK_SUPPORTED(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE, MOZZI_ANALOG_RE
 #  undef MOZZI__ANALOG_READ_NOT_CONFIGURED
 #endif
 
+#if defined(MOZZI_ANALOG_READ_RESOLUTION)
+#  if (MOZZI_ANALOG_READ_RESOLUTION < 1) || (MOZZI_ANALOG_READ_RESOLUTION > 16)
+//   NOTE: We could certainly allow more than 16 bits, but then the data type would need to be adjusted/adjustable, accrodingly.
+#    error MOZZI_ANALOG_READ_RESOLUTION must be between 1 and 16 bits
+#  endif
+#endif
+
 /// Step 4: Init Read-only defines that depend on other values
 #if !defined(MOZZI_AUDIO_BIAS)
 #define MOZZI_AUDIO_BIAS ((uint16_t) 1<<(MOZZI_AUDIO_BITS-1))

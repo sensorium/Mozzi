@@ -34,6 +34,12 @@ must include Mozzi.h.
 have to ```#include <MozziHeadersOnly.h>```, instead (if Mozzi headers are need at all in that file). Failure to do so will lead to "multiple definition" errors while
 linking.
 
+### twi_nonblock
+
+(AVR only): The TWI code is now only compiled if / when twi_nonblock.h is explicitly included in a sketch. Should more than one source .cpp file need to access
+twi_nonblock functions, the same procedure as above is needed: Exactly one of these files shall ```#include <twi_nonblock.h>```, while any others shall use
+```#include <twi_nonblockHeadersOnly.h>```. If you have no use for these functions, simply don't include the header, and save ~400 bytes of flash.
+
 ### Moved / internal headers
 
 Some header files that were never meant to be used directly in user code have been moved to the subdirectory "internal", inside Mozzi. Including these headers,
@@ -62,8 +68,9 @@ Some things have been removed for good. If you need any of these, let us know, s
 
 ### Fixed point arithmethic (Q16n16, etc.)
 
-Q16n16, and further typedefs for fixed point arithmetic are still around, with no intention to remove them, soon. However, consider porting to the new
-SFixMath / UFixMath types, which are typesafe and much more comfortable to use. Q16n16, etc. are no longer recommended to be used in new code.
+Q16n16, and further typedefs for fixed point arithmetic are still around, with no intention to remove them, soon. However, consider porting such code to the new
+FixMath library (a spin-off by the Mozzi team, available at https://github.com/tomcombriat/FixMath), with its SFix and UFix types, which are typesafe and much more
+comfortable to use. Functions accepting Q16n16, etc. have gained overloads for these types. The old Q16n16, etc. types are no longer recommended to be used in new code. 
 
 ### Configuration
 
@@ -103,6 +110,23 @@ information.
 ### IS_STM32()
 
 Renamed to ```IS_STM32MAPLE()```, in order to avoid confusion with ```IS_STM32DUINO()```.
+
+### mozziAnalogRead() and getAudioInput()
+
+```mozziAnalogRead()``` and ```getAudioInput()``` (if configured) be used exactly as before, but will produce a compile time warning, that this use is not portable.
+The background is that different boards return analog readings at a different resolutions. To silence the warnings, and obtain readings at a defined resolution - let's
+assume 12 bits, as an example - you can either add ```#define MOZZI_ANALOG_READ_RESOLUTION 12``` above ```#include <Mozzi.h>``` to configure a specific resolution, or
+you can specify the desired resolution in each call as ```uint16_t value = mozziAnalogRead<12>(inputpin);```. Platforms that read analog measures at a different (higher or lower)
+resolution, internally, will automatically shift the reading to the desired range. ```getAudioInput()``` respects the same config define, but may also be used with
+a template parameter as ```uint16_t value = getAudioInput<12>();```.
+
+The return value of both function has also been changed from ```int``` to ```uint16_t``` (the functions have always been returning only positive values).
+
+### Licence
+
+Starting with Mozzi 2.0, the Mozzi licence has been changed to LGPL version 2.1 or (at your option) any later version of the LGPL. This removes barriers in particular concerning
+conflicts of the previous "non-commercial" clause when mixing with GPL'ed code. If you feel a bit lost, what this all means for your project: Probably not very much at all.
+The bottom of our main Readme has a short summary of the main points.
 
 ## Older changes (that should have happened before Mozzi 1.1, but might still be missing in really old code)
 

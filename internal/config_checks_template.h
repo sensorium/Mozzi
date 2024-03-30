@@ -9,6 +9,18 @@
  * 3) Document some details of your port
  */
 
+/*
+ * config_checks_template.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
+ * NOTE: In your port, don't forget to update the above copyright notice!
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
+
 /** NOTE: If your port doesn't support MOZZI_OUTPUT_2PIN_PWM, add this include to make compilation of HIFI examples pass on the github runner */
 #include "disable_2pinmode_on_github_workflow.h"
 /** NOTE: All ports need to provide a default for this */

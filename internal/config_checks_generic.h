@@ -1,3 +1,14 @@
+/*
+ * config_checks_generic.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
+
 /** For Mozzi-internal use: Check configuration options for (some) invalid settings, and apply default for options that have not been set, so far.
  * */
 

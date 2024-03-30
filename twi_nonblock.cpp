@@ -1,7 +1,11 @@
 /*
  * twi_nonblock.cpp
  *
- * Copyright 2012 Marije Baalman.
+ * This file is part of Mozzi.
+ *
+ * Copyright 2012-2024 Marije Baalman and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
 

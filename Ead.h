@@ -2,13 +2,14 @@
  * Ead.h
  *
  * Adapted from ead~.c puredata external (creb library)
- * Copyright (c) 2000-2003 by Tom Schouten
- *
- * Copyright 2012 Tim Barrass, 2000-2003 Tom Schouten
  *
  * This file is part of Mozzi.
  *
- * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright (c) 2000-2003 by Tom Schouten
+ * Copyright 2012 Tim Barrass
+ * Copyright 2012-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
 

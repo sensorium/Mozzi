@@ -1,3 +1,14 @@
+/*
+ * config_checks_stm32maple.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
+
 #ifndef CONFIG_CHECKS_STM32MAPLE_H
 #define CONFIG_CHECKS_STM32MAPLE_H
 

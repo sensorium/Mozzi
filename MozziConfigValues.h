@@ -1,8 +1,18 @@
-/** This file keeps a list of named configuration values. 
- 
-Note that these are all given as defines, instead of e.g. const ints or enum values, because they need to be usable at preprocessor level, in order to control conditional compilation.
+/*
+ * MozziConfigValues.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+ */
 
-TODO: Fix documentation
+/** @file MozziConfigValues.h 
+ * This file keeps a list of named configuration values. 
+ *
+ * Note that these are all given as defines, instead of e.g. const ints or enum values, because they need to be usable at preprocessor level, in order to control conditional compilation.
 */
 
 #ifndef MOZZICONFIG_VALUES_H

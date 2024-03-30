@@ -6,6 +6,7 @@ get the latest version from https://sensorium.github.io/Mozzi/
 NOT YET RELEASED (github version): Mozzi 2.0
 - explicitly specify bit depth for "int" or "long" in several places, for better cross-platform consistency
 - restructured configuration options for more consistency across platforms, and easier customization
+- changed licence to LGPL version 2.1 or later
 
 release v1.1.2
 - new partial port of the Arduino Uno R4

@@ -1,4 +1,11 @@
 /*
+ * MozziGuts_impl_ADC.hpp
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2023-2024 T. Combriat and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 
 Parts of this file are drawn from Arduino's source code for analogRead() (https://github.com/arduino/ArduinoCore-renesas/blob/main/cores/arduino/analog.cpp) and part from Renesas' documentation (https://renesas.github.io/fsp/group___a_d_c.html), among other things.
 It contains functions to interact with the ADC in order to implement async ADC reads, aka mozziAnalogRead().

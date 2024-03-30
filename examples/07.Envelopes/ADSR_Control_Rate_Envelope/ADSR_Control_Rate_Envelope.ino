@@ -8,7 +8,15 @@
     Demonstrates a simple ADSR object being controlled with
     noteOn() and noteOff() instructions.
 
-    Tim Barrass 2013-14, CC by-nc-sa.
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
+
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
+
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #define MOZZI_CONTROL_RATE 128 // faster than usual to help smooth MOZZI_CONTROL_RATE adsr interpolation (next())

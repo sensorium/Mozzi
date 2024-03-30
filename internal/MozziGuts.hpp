@@ -105,7 +105,7 @@ http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=789581
 #if MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_STANDARD)
 
 #include "Stack.h"
-static volatile int analog_readings[NUM_ANALOG_INPUTS];
+static volatile uint16_t analog_readings[NUM_ANALOG_INPUTS];
 static Stack <volatile int8_t,NUM_ANALOG_INPUTS> adc_channels_to_read;
 volatile static int8_t current_channel = -1; // volatile because accessed in control and adc ISRs
 

@@ -225,7 +225,7 @@ static void startAudio() {
   pwm_config_set_wrap(&c, 1l << MOZZI_AUDIO_BITS);  // 11 bits output resolution means FCPU / 2048 values per second, which is around 60kHz for 133Mhz clock speed.
   pwm_init(pwm_gpio_to_slice_num(MOZZI_AUDIO_PIN_1), &c, true);
   gpio_set_function(MOZZI_AUDIO_PIN_1, GPIO_FUNC_PWM);
-  gpio_set_drive_strength(MOZZI_AUDIO_PIN_2, GPIO_DRIVE_STRENGTH_12MA); // highest we can get
+  gpio_set_drive_strength(MOZZI_AUDIO_PIN_1, GPIO_DRIVE_STRENGTH_12MA); // highest we can get
 #  if (MOZZI_AUDIO_CHANNELS > 1)
 #    if ((MOZZI_AUDIO_PIN_1 / 2) != (MOZZI_AUDIO_PIN_1 / 2))
 #      error Audio channel pins for stereo or HIFI must be on the same PWM slice (which is the case for the pairs (0,1), (2,3), (4,5), etc. Adjust MOZZI_AUDIO_PIN_1/2 .

@@ -1,17 +1,21 @@
-/*  Example crudely panning noise to test stereo output,
- *  using Mozzi sonification library.
- *
- *  Tests stereo output.
- *
- *  NOTE: Stereo output is not supported on all platforms / configurations!
- *
- *  Circuit: Audio outputs on digital pins 9 and 10 (on classic Arduino).
- *
- *  		Mozzi help/discussion/announcements:
- *  https://groups.google.com/forum/#!forum/mozzi-users
- *
- *  Tim Barrass 2012.
- *  This example code is in the public domain.
+/* Example crudely panning noise to test stereo output,
+   using Mozzi sonification library.
+
+   Tests stereo output.
+
+   NOTE: Stereo output is not supported on all platforms / configurations!
+
+   Circuit: Audio outputs on digital pins 9 and 10 (on classic Arduino).
+
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
+
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
+
+   Copyright 2012-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  */
 
 // Configure Mozzi for Stereo output. This must be done before #include <Mozzi.h>

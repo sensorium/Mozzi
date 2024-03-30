@@ -1,17 +1,19 @@
-/*  Example playing a sinewave with vibrato,
-    using Mozzi sonification library.
+/* Example playing a sinewave with vibrato,
+   using Mozzi sonification library.
 
-    Demonstrates how to use fixed point arithmetics and midi notes to make an easy-to-adjust vibrato effect.
-    This is probably less efficient than the Vibrato example, but is also easier to understand the amount
-    of modulation
+   Demonstrates how to use fixed point arithmetics and midi notes to make an easy-to-adjust vibrato effect.
+   This is probably less efficient than the Vibrato example, but is also easier to understand the amount
+   of modulation
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Thomas Combriat and the Mozzi team 2024, CC by-nc-sa.
+   Copyright 2012-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #include <Mozzi.h>

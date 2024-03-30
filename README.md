@@ -215,16 +215,14 @@ applicable to your hardware.
 ***
 
 ## Use and Remix
-Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License, which is detailed in LICENSE.txt
+Mozzi is licensed under a the LGPL version 2.1 or (at your option) any later version of the license.
 
 Disclaimer: This is a human-readable summary of (and not a substitute for) the license.
+- You may copy, distribute and modify the Mozzi library itself provided that you state modifications and license them under LGPL-2.1.
 
-You are free to:
- - Share — copy and redistribute the material in any medium or format
- - Adapt — remix, transform, and build upon the material
+- You may distribute *your own* source code which merely *uses* the Mozzi-API under any licence that you wish.
 
-The licensor cannot revoke these freedoms as long as you follow the license terms.
-Under the following terms:
- - Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
- - NonCommercial — You may not use the material for commercial purposes.
- - No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+- Regarding distribution of *binaries* (also inside a hardware project) that include Mozzi, the Arduino FAQ sums up the situation as follows:
+  "Using the Arduino core and libraries for the firmware of a commercial product does not require you to release the source code for the firmware. The LGPL does, however, require you to make available object files that allow for the relinking of the firmware against updated versions of the Arduino core and libraries. Any modifications to the core and libraries must be released under the LGPL."
+
+- Note that using third-party libraries/code - including as shown in some of the Mozzi examples - may introduce additional restrictions.

@@ -1,15 +1,13 @@
 /*
  * PDResonant.h
  *
- * This implementation copyright 2012 Tim Barrass.
- *
  * This file is part of Mozzi.
  *
- * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2013-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
-
-
 
 #include <mozzi_midi.h>
 #include <ADSR.h>

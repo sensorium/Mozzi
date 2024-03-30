@@ -1,3 +1,14 @@
+/*
+ * IntegerType.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2021-2024 Thomas Friedrichsmeier and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+ */
+
 #ifndef INTTYPE_H_
 #define INTTYPE_H_
 

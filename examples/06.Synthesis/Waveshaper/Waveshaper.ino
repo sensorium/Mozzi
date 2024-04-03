@@ -2,7 +2,7 @@
     using Mozzi sonification library.
 
     Demonstrates the use of WaveShaper(), EventDelay(), Smooth(),
-    rand(), and fixed-point numbers.
+    rand(), and FixMath.
 
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
     DAC/A14 on Teensy 3.1, or
@@ -26,6 +26,7 @@
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
 #include <Smooth.h>
+#include <FixMath.h>
 #include <tables/sin2048_int8.h>
 #include <tables/waveshape_chebyshev_3rd_256_int8.h>
 #include <tables/waveshape_chebyshev_6th_256_int8.h>
@@ -45,12 +46,11 @@ WaveShaper <int> aCompress(WAVESHAPE_COMPRESS_512_TO_488_DATA); // to compress i
 EventDelay kChangeNoteDelay;
 
 // for random notes
-Q8n0 octave_start_note = 42;
-Q24n8 carrier_freq; // unsigned long with 24 integer bits and 8 fractional bits
+UFix<7,0> octave_start_note = 42;
 
 // smooth transitions between notes
-Smooth <unsigned int> kSmoothFreq(0.85f);
-int target_freq, smoothed_freq;
+Smooth <UFix<14,12>> kSmoothFreq(0.85f);
+UFix<14,2> target_freq, smoothed_freq;  //Optimization to have the frequencies on 16bits only. 
 
 
 void setup(){
@@ -90,12 +90,12 @@ void updateControl(){
       // change octave to midi 24 or any of 3 octaves above
       octave_start_note = (rand((byte)4)*12)+36;
     }
-    Q16n16 midi_note = Q8n0_to_Q16n16(octave_start_note+rndPentatonic());
-    target_freq = Q16n16_to_Q16n0(Q16n16_mtof(midi_note)); // has to be 16 bits for Smooth
+    auto midi_note = octave_start_note + toUInt(rndPentatonic());
+    target_freq = mtof(midi_note); // mtof return a UFix<16,16>, which is casted to UFix<14,2> (could overflow if the frequency is greater than 16kHz)
     kChangeNoteDelay.start();
   }
-  smoothed_freq = kSmoothFreq.next(target_freq*4); // temporarily scale up target_freq to get better int smoothing at low values
-  aSin.setFreq(smoothed_freq/4); // then scale it back down after it's smoothed
+  smoothed_freq = kSmoothFreq.next(target_freq); // temporarily scale up target_freq to get better int smoothing at low values
+  aSin.setFreq(smoothed_freq); 
 }
 
 

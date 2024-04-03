@@ -19,13 +19,15 @@
     - connection of the piezo attached to ground
     1-megOhm resistor attached from the analog pin to ground
 
-  Mozzi documentation/API
-  https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-  Mozzi help/discussion/announcements:
-  https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-  Tim Barrass 2013, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #include <Mozzi.h>
@@ -59,7 +61,7 @@ void setup(){
 void updateControl(){
 
   // read the pot
-  int sensor_value = mozziAnalogRead(INPUT_PIN); // value is 0-1023
+  int sensor_value = mozziAnalogRead<10>(INPUT_PIN); // value is 0-1023
 
   // map it to an 8 bit range for efficient calculations in updateAudio
   int target = ((long) sensor_value * BLAHBLAH4B_NUM_CELLS) >> 10; // >> 10 is / 1024

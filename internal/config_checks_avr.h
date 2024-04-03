@@ -1,3 +1,14 @@
+/*
+ * config_checks_avr.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
+
 /* For Mozzi-internal use: Apply hardware specific config defaults and config checks: AVR */
 
 /** @defgroup hardware
@@ -132,6 +143,8 @@
 
 #define MOZZI_AUDIO_BITS (2*MOZZI_AUDIO_BITS_PER_CHANNEL)
 #endif
+
+#define MOZZI__INTERNAL_ANALOG_READ_RESOLUTION 10
 
 // Step 2: Check
 // NOTE: This step is not technically required, but a good idea in any port

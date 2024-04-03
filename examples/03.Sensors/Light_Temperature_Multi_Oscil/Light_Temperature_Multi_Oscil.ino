@@ -20,13 +20,15 @@
       LDR from analog pin to +5V (3.3V on Teensy 3.1)
       5.1k resistor from analog pin to ground
 
-  Mozzi documentation/API
-  https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-  Mozzi help/discussion/announcements:
-  https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-  Tim Barrass 2013, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #define MOZZI_CONTROL_RATE 256
@@ -94,8 +96,8 @@ void updateControl(){
   static float previous_pulse_freq;
 
   // read analog inputs
-  int temperature = mozziAnalogRead(THERMISTOR_PIN); // not calibrated to degrees!
-  int light = mozziAnalogRead(LDR_PIN);
+  int temperature = mozziAnalogRead<10>(THERMISTOR_PIN); // not calibrated to degrees!
+  int light = mozziAnalogRead<10>(LDR_PIN);
 
   // map light reading to volume pulse frequency
   float pulse_freq = (float)light/256;

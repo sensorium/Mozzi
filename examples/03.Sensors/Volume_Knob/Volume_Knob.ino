@@ -22,13 +22,15 @@
               /
  GND ---|
 
- Mozzi documentation/API
- https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
- Mozzi help/discussion/announcements:
- https://groups.google.com/forum/#!forum/mozzi-users
- 
-  Tim Barrass 2013, CC by-nc-sa.
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
+
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #include <Mozzi.h>
@@ -53,11 +55,9 @@ void setup(){
 
 
 void updateControl(){
-  // read the variable resistor for volume
-  int sensor_value = mozziAnalogRead(INPUT_PIN); // value is 0-1023
-
-  // map it to an 8 bit range for efficient calculations in updateAudio
-  volume = map(sensor_value, 0, 1023, 0, 255);
+  // read the variable resistor for volume. We specifically request only 8 bits of resolution, here, which
+  // is less than the default on most platforms, but a convenient range to work with, where accuracy is not too important.
+  volume = mozziAnalogRead<8>(INPUT_PIN);
 
   // print the value to the Serial monitor for debugging
   Serial.print("volume = ");

@@ -9,6 +9,18 @@
  * 3) Document some details of your port
  */
 
+/*
+ * config_checks_template.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
+ * NOTE: In your port, don't forget to update the above copyright notice!
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
+
 /** NOTE: If your port doesn't support MOZZI_OUTPUT_2PIN_PWM, add this include to make compilation of HIFI examples pass on the github runner */
 #include "disable_2pinmode_on_github_workflow.h"
 /** NOTE: All ports need to provide a default for this */
@@ -31,6 +43,30 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_EXTERNAL_
 /** NOTE: *Otherwise* you may additionally document that as not-yet-supported like so: */
 // MOZZI_CHECK_SUPPORTED(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ)
 
+/** NOTE: This should be set to whichever resolution (in bits) mozziAnalogRead() returns values in by default in your implementation.
+ * mozziAnalogRead<bits>() will shift the return value accordingly. Generally you will set this to the default hardware resolution for this platform.
+ *
+ * @em Optionally, you could to set this to the user configurable MOZZI_ANALOG_READ_RESOLUTION (if it has been defined), and configure your ADC reads,
+ * accordingly, avoiding the extra shift operation:
+ *
+ * @code
+#ifdef MOZZI_ANALOG_READ_RESOLUTION
+#define MOZZI__INTERNAL_ANALOG_READ_RESOLUTION MOZZI_ANALOG_READ_RESOLUTION
+#define MOZZI__IMPL_SET_ANALOG_READ_RESOLUTION
+#else
+#define MOZZI__INTERNAL_ANALOG_READ_RESOLUTION 16
+#endif
+
+[...]
+
+//inside MozziGuts_impl_MPLATFORM, function setupMozziADC():
+#ifdef MOZZI__IMPL_SET_ANALOG_READ_RESOLUTION
+analogReadResolution(MOZZI_ANALOG_READ_RESOLUTION);
+#endif
+ * @endcode
+*/
+#define MOZZI__INTERNAL_ANALOG_READ_RESOLUTION 10
+
 /** NOTE: Example for additional config options depending on a specific output mode: */
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_INTERNAL_DAC)
 #  if !defined(MOZZI_AUDIO_PIN_1)
@@ -44,6 +80,7 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_EXTERNAL_
 #  include "disable_stereo_on_github_workflow.h"   // This allows stereo sketches to compile (in mono) in automated testing builds.
 MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_CHANNELS, MOZZI_MONO)
 #endif
+
 
 /** NOTE: You may also set further, implementation-specific defines, here. E.g. BYPASS_MOZZI_OUTPUT_BUFFER. Defines that are purely
  * specific to your port (i.e. only needed inside MozziGuts_impt_YOURPLATFORM.h, should be #undef'ed at the end of that file. */

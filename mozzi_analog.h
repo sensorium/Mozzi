@@ -1,13 +1,14 @@
 /*
  * mozzi_analog.h
  *
- * Copyright 2012 Tim Barrass.
- *
  * This file is part of Mozzi.
  *
- * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2012-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
+
 
 #ifndef MOZZI_ANALOG_H_
 #define MOZZI_ANALOG_H_
@@ -134,19 +135,41 @@ Use adcPinToChannelNum() to convert the pin number to its channel number.
 */
 void adcStartConversion(uint8_t channel);
 
+/** @ingroup analog
+See mozziAnalogRead(). The template parameter RES specifies the number of bits to return.
+*/
+template<byte RES> uint16_t mozziAnalogRead(uint8_t pin);
 
+/** @ingroup analog
+See mozziAnalogRead() but always returns the value shifted to 16 bit range. THis is exactly
+equivalent to mozziAnalogRead<16>(pin);
+*/
+inline uint16_t mozziAnalogRead16(uint8_t pin) { return mozziAnalogRead<16>(pin); };
 
+#if defined(FOR_DOXYGEN_ONLY) || defined(MOZZI_ANALOG_READ_RESOLUTION)
 /** @ingroup analog
 Reads the analog input of a chosen channel, without blocking other operations from running.
 It actually returns the most recent analog reading and puts the chosen pin or channel
 on the stack of channels to be read in the background before the next control
 interrupt.
-@param pin_or_channel the analog pin or channel number.
-@return the digitised value of the voltage on the chosen channel, in the range 0-1023. @Note that non-AVR
-hardware may return a different range, e.g. 0-4095 on STM32 boards.
-*/
-int mozziAnalogRead(uint8_t pin);
 
+@note Analog reads have different hardware resolution on different platforms. E.g. an analog read
+      on an Arduino Uno R3 will return a value in the range 0-1023 (10 bits), on a Raspberry Pi Pico
+      it will return 0-4095 (12 bits). For portable code, it is thus necessary to specify the desired
+      resolution of reads. This can be done by setting MOZZI_ANALOG_READ_RESOLUTION to the resolution
+      in bits, near the top of your sketch. All reads will then be adjusted to that range, automatically
+      (using a simple bit-shift). Alternatively, the templated version of mozziAanalogRead() allows
+      to specifiy the target resolution per read.
+      If MOZZI_ANALOG_READ_RESOLUTION is not defined, this (non-templated) function returns a value
+      in the default hardware resolution, with a warning.
+
+@param pin_or_channel the analog pin or channel number.
+@return the digitised value of the voltage on the chosen channel. See the note above regarding the output range!
+*/
+inline uint16_t mozziAnalogRead(uint8_t pin) { return mozziAnalogRead<MOZZI_ANALOG_READ_RESOLUTION>(pin); }
+#else
+MOZZI_DEPRECATED("2.0", "This use of mozziAnalogRead() is not portable. Refer to the API documentation for suggested alternatives.") inline uint16_t mozziAnalogRead(uint8_t pin) { return mozziAnalogRead<MOZZI__INTERNAL_ANALOG_READ_RESOLUTION>(pin); }
+#endif
 
 uint8_t adcPinToChannelNum(uint8_t pin);
 

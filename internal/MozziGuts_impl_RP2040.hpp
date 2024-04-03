@@ -1,14 +1,13 @@
 /*
- * MozziGuts.cpp
- *
- * Copyright 2012 Tim Barrass.
+ * MozziGuts_impl_RP2040.hpp
  *
  * This file is part of Mozzi.
  *
- * Mozzi by Tim Barrass is licensed under a Creative Commons
- * Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2022-2024 Thomas Friedrichsmeier and the Mozzi Team
  *
- */
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
 
 // The main point of this check is to document, what platform & variants this implementation file is for.
 #if !(IS_RP2040())
@@ -226,7 +225,7 @@ static void startAudio() {
   pwm_config_set_wrap(&c, 1l << MOZZI_AUDIO_BITS);  // 11 bits output resolution means FCPU / 2048 values per second, which is around 60kHz for 133Mhz clock speed.
   pwm_init(pwm_gpio_to_slice_num(MOZZI_AUDIO_PIN_1), &c, true);
   gpio_set_function(MOZZI_AUDIO_PIN_1, GPIO_FUNC_PWM);
-  gpio_set_drive_strength(MOZZI_AUDIO_PIN_2, GPIO_DRIVE_STRENGTH_12MA); // highest we can get
+  gpio_set_drive_strength(MOZZI_AUDIO_PIN_1, GPIO_DRIVE_STRENGTH_12MA); // highest we can get
 #  if (MOZZI_AUDIO_CHANNELS > 1)
 #    if ((MOZZI_AUDIO_PIN_1 / 2) != (MOZZI_AUDIO_PIN_1 / 2))
 #      error Audio channel pins for stereo or HIFI must be on the same PWM slice (which is the case for the pairs (0,1), (2,3), (4,5), etc. Adjust MOZZI_AUDIO_PIN_1/2 .

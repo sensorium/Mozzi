@@ -17,7 +17,10 @@
 # purehuff: https://grrrr.org/data/dev/purehuff/
 # pylab / matplotlib (only for plotting): http://matplotlib.sourceforge.net/
 #
-# For help on options invoke with:
+# NOTE: the scikits.audiolab dependency requires Python 2!
+#       see https://github.com/Roger-random/mozzi_wilhelm/issues/1#issuecomment-770141226
+# 
+#For help on options invoke with:
 # audio2huff --help
 
 import sys,os.path

@@ -16,13 +16,16 @@
     connected to analog pins 0, 1 and 2, and
     outside leads to ground and +5V.
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2013, Thomas Combriat and the Mozzi team 2024, CC by-nc-sa.
+
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #define MOZZI_CONTROL_RATE 64 // Hz, powers of 2 are most reliable

@@ -23,13 +23,15 @@
       Center pin of the potentiometer goes to the analog pin.
       Side pins of the potentiometer go to +5V and ground
       
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2013, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #include <Mozzi.h>
@@ -60,9 +62,9 @@ void setup(){
 
 
 void updateControl(){
-  int f = kAverageF.next(mozziAnalogRead(FUNDAMENTAL_PIN))+1;
-  int b = kAverageBw.next(mozziAnalogRead(BANDWIDTH_PIN));
-  int cf = kAverageCf.next(2*mozziAnalogRead(CENTREFREQ_PIN));
+  int f = kAverageF.next(mozziAnalogRead<10>(FUNDAMENTAL_PIN))+1;
+  int b = kAverageBw.next(mozziAnalogRead<10>(BANDWIDTH_PIN));
+  int cf = kAverageCf.next(mozziAnalogRead<11>(CENTREFREQ_PIN));
   wavey.set(f, b, cf);
 }
 

@@ -3,13 +3,15 @@
  *
  * Oscil.h owes much to AF_precision_synthesis.pde, 2009, Adrian Freed.
  *
- * Copyright 2012 Tim Barrass, 2009 Adrian Freed.
- *
  * This file is part of Mozzi.
  *
- * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 20009 Arian Freed
+ * Copyright 2012-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
+
 
 #ifndef OSCIL_H_
 #define OSCIL_H_

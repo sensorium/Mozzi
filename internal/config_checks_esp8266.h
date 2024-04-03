@@ -1,3 +1,14 @@
+/*
+ * config_checks_esp8266.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
+
 #ifndef CONFIG_CHECK_ESP8266_H
 #define CONFIG_CHECK_ESP8266_H
 
@@ -104,5 +115,7 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_BITS, 16)
 // separate output timer
 #define BYPASS_MOZZI_OUTPUT_BUFFER true
 #endif
+
+#define MOZZI__INTERNAL_ANALOG_READ_RESOLUTION 10
 
 #endif        //  #ifndef CONFIG_CHECK_ESP8266_H

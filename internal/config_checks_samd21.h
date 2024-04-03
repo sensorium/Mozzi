@@ -1,3 +1,14 @@
+/*
+ * config_checks_samd21.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
+
 #ifndef CONFIG_CHECK_SAMD21_H
 #define CONFIG_CHECK_SAMD21_H
 
@@ -65,5 +76,7 @@ MOZZI_CHECK_SUPPORTED(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE)
 #  include "disable_stereo_on_github_workflow.h"
 MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_CHANNELS, 1)
 #endif
+
+#define MOZZI__INTERNAL_ANALOG_READ_RESOLUTION 12
 
 #endif        //  #ifndef CONFIG_CHECK_SAMD21_H

@@ -7,14 +7,15 @@
     If the input changes, the filter output swings to track the change and
     eventually settles back to 0.
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2013, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
 
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #include <Mozzi.h>
@@ -32,15 +33,15 @@ void setup() {
 
 
 void updateControl(){
-  // read the value from the sensor:
-  int sensorValue = mozziAnalogRead(sensorPin);
+  // read the value from the sensor in 10 bit resolution:
+  int sensorValue = mozziAnalogRead<10>(sensorPin);
   Serial.print(sensorValue);
   Serial.print("  Filtered = ");
   Serial.println(dcFiltered.next(sensorValue));
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   return 0;
 }
 

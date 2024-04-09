@@ -1,3 +1,14 @@
+/*
+ * config_checks_generic.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
+
 /** For Mozzi-internal use: Check configuration options for (some) invalid settings, and apply default for options that have not been set, so far.
  * */
 
@@ -19,19 +30,19 @@
 #endif
 
 #if not defined(MOZZI_AUDIO_CHANNELS)
-#if (MOZZI_COMPATIBILITY_LEVEL <= MOZZI_COMPATIBILITY_1_1) && (STEREO_HACK == true)
-#warning Use of STEREO_HACK is deprecated. Use AUDIO_CHANNELS STEREO, instead.
-#define MOZZI_AUDIO_CHANNELS MOZZI_STEREO
-#else
 #define MOZZI_AUDIO_CHANNELS MOZZI_MONO
-#endif
 #endif
 
 //MOZZI_AUDIO_MODE -> hardware specific
 //MOZZI_AUDIO_RATE -> hardware specific
 
 #if not defined(MOZZI_CONTROL_RATE)
-#define MOZZI_CONTROL_RATE 64
+#  if defined(CONTROL_RATE) && (MOZZI_COMPATIBILITY_LEVEL < MOZZI_COMPATIBILITY_LATEST)
+#    warning Please change CONTROL_RATE to MOZZI_CONTROL_RATE
+#    define MOZZI_CONTROL_RATE CONTROL_RATE
+#  else
+#    define MOZZI_CONTROL_RATE 64
+#  endif
 #endif
 
 //MOZZI_ANALOG_READ -> hardware specific, but we want to insert a warning, if not supported, and user has not explicitly configured anything
@@ -119,6 +130,13 @@ MOZZI_CHECK_SUPPORTED(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE, MOZZI_ANALOG_RE
 #  undef MOZZI__ANALOG_READ_NOT_CONFIGURED
 #endif
 
+#if defined(MOZZI_ANALOG_READ_RESOLUTION)
+#  if (MOZZI_ANALOG_READ_RESOLUTION < 1) || (MOZZI_ANALOG_READ_RESOLUTION > 16)
+//   NOTE: We could certainly allow more than 16 bits, but then the data type would need to be adjusted/adjustable, accrodingly.
+#    error MOZZI_ANALOG_READ_RESOLUTION must be between 1 and 16 bits
+#  endif
+#endif
+
 /// Step 4: Init Read-only defines that depend on other values
 #if !defined(MOZZI_AUDIO_BIAS)
 #define MOZZI_AUDIO_BIAS ((uint16_t) 1<<(MOZZI_AUDIO_BITS-1))
@@ -151,8 +169,10 @@ MOZZI_CHECK_SUPPORTED(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE, MOZZI_ANALOG_RE
 
 /// Step 5: Patch up some backwards compatibility issues as far as config-related
 #if MOZZI_COMPATIBILITY_LEVEL < MOZZI_COMPATIBILITY_LATEST
-#define AUDIO_RATE MOZZI_AUDIO_RATE
-#define CONTROL_RATE MOZZI_CONTROL_RATE
+#  define AUDIO_RATE MOZZI_AUDIO_RATE
+#  if !defined(CONTROL_RATE)
+#    define CONTROL_RATE MOZZI_CONTROL_RATE
+#  endif
 #endif
 
 /// Step 6: Some more checks that need to be at the end, because of requiring end of the foodchain headers

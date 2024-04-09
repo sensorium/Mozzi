@@ -1,11 +1,11 @@
 /*
  * EventDelay.h
  *
- * Copyright 2012 Tim Barrass.
- *
  * This file is part of Mozzi.
  *
- * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2012-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
 
@@ -26,7 +26,7 @@ public:
 	Declare an EventDelay object.
 	@param delay_milliseconds how long until ready() returns true, after calling start().  Defaults to 0 if no parameter is supplied.
 	*/
-	EventDelay(unsigned int delay_milliseconds = 0): AUDIO_TICKS_PER_MILLISECOND((float)AUDIO_RATE/1000.0f)
+	EventDelay(unsigned int delay_milliseconds = 0): AUDIO_TICKS_PER_MILLISECOND((float)MOZZI_AUDIO_RATE/1000.0f)
 	{
 		set(delay_milliseconds);
 	}	

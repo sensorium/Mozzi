@@ -1,11 +1,7 @@
 #ifndef TRIANGLE2048_H_
 #define TRIANGLE2048_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 
 #define TRIANGLE2048_NUM_CELLS 2048

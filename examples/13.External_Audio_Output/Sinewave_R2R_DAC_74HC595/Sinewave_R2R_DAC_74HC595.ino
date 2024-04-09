@@ -34,20 +34,21 @@
     For more details on the R/2R DAC see:
     https://hackaday.com/2015/11/05/logic-noise-digital-to-analog-with-an-r-2r-dac/
 
-    Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012, CC by-nc-sa.
-    T. Combriat 2020, CC by-nc-sa.
+   Copyright 2020-2024 T. Combriat and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #include "MozziConfigValues.h"  // for named option values
 #define MOZZI_AUDIO_MODE MOZZI_OUTPUT_EXTERNAL_TIMED
 #define MOZZI_AUDIO_BITS 8
-#define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
+#define MOZZI_CONTROL_RATE 64 // Hz, powers of 2 are most reliable
 
 #include <Mozzi.h>
 #include <Oscil.h> // oscillator template
@@ -55,7 +56,7 @@
 #include<SPI.h> // needed for the shift register
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 // External output parameters for this example
 #define LATCH_PIN 31  // Number of stage of the resistance ladder = number of digits of the DAC
@@ -74,7 +75,7 @@ void setup() {
   SPI.begin();
   SPI.beginTransaction(SPISettings(2000000000, MSBFIRST, SPI_MODE0));  // Qa is the last so we have to set as MSBFIRST
                                                                        // if you reverse the DAC you should put LSBFIRST
-  startMozzi(CONTROL_RATE); // :)
+  startMozzi(); // :)
   aSin.setFreq(200); // set the frequency
 }
 
@@ -84,7 +85,7 @@ void updateControl() {
 }
 
 
-AudioOutput_t updateAudio() {
+AudioOutput updateAudio() {
   return MonoOutput::from8Bit(aSin.next()); // return an int signal centred around 0, 8bits wide
 }                 
                       

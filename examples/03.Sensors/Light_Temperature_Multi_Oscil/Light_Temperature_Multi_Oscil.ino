@@ -20,21 +20,22 @@
       LDR from analog pin to +5V (3.3V on Teensy 3.1)
       5.1k resistor from analog pin to ground
 
-  Mozzi documentation/API
-  https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-  Mozzi help/discussion/announcements:
-  https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-  Tim Barrass 2013, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
+#define MOZZI_CONTROL_RATE 256
 #include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/cos8192_int8.h>
 #include <mozzi_midi.h>
-
-#define CONTROL_RATE 256
 
 #define THERMISTOR_PIN 1
 #define LDR_PIN 2
@@ -42,24 +43,24 @@
 #define THRESHOLD 10
 
 // harmonics
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos1(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos2(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos3(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos4(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos5(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos6(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos7(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos0(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos1(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos2(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos3(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos4(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos5(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos6(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos7(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos0(COS8192_DATA);
 
 // volume controls
-Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kVol1(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kVol2(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kVol3(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kVol4(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kVol5(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kVol6(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kVol7(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kVol0(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_CONTROL_RATE> kVol1(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_CONTROL_RATE> kVol2(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_CONTROL_RATE> kVol3(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_CONTROL_RATE> kVol4(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_CONTROL_RATE> kVol5(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_CONTROL_RATE> kVol6(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_CONTROL_RATE> kVol7(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_CONTROL_RATE> kVol0(COS8192_DATA);
 
 // audio volumes updated each control interrupt and reused in audio till next control
 char v1,v2,v3,v4,v5,v6,v7,v0;
@@ -73,7 +74,7 @@ float downnotes[NUM_VOICES] = {
 
 
 void setup(){
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 
@@ -95,8 +96,8 @@ void updateControl(){
   static float previous_pulse_freq;
 
   // read analog inputs
-  int temperature = mozziAnalogRead(THERMISTOR_PIN); // not calibrated to degrees!
-  int light = mozziAnalogRead(LDR_PIN);
+  int temperature = mozziAnalogRead<10>(THERMISTOR_PIN); // not calibrated to degrees!
+  int light = mozziAnalogRead<10>(LDR_PIN);
 
   // map light reading to volume pulse frequency
   float pulse_freq = (float)light/256;
@@ -161,7 +162,7 @@ void updateControl(){
 
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   long asig = (long)
     aCos0.next()*v0 +
       aCos1.next()*v1 +

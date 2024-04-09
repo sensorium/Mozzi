@@ -1,14 +1,13 @@
 /*
- * MozziGuts.cpp
- *
- * Copyright 2012 Tim Barrass.
+ * MozziGuts_impl_AVR.hpp
  *
  * This file is part of Mozzi.
  *
- * Mozzi by Tim Barrass is licensed under a Creative Commons
- * Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2012-2024 Tim Barrass and the Mozzi Team
  *
- */
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
 
 #include "utility/FrequencyTimer2.h"
 #include "utility/TimerOne.h"
@@ -181,7 +180,7 @@ static uint8_t mozzi_TCCR4A, mozzi_TCCR4B, mozzi_TCCR4C, mozzi_TCCR4D,
 static void startAudio() {
   backupPreMozziTimer1();
   Timer1.initializeCPUCycles(
-     (F_CPU/AUDIO_RATE)-1, // the -1 here is a result of empirical tests
+     (F_CPU/MOZZI_AUDIO_RATE)-1, // the -1 here is a result of empirical tests
                            // that showed that it brings the resulting frequency
                            // closer to what is expected.
                            // see: https://github.com/sensorium/Mozzi/pull/202
@@ -240,7 +239,7 @@ static void startAudio() {
 } // namespace MozziPrivate
 
 /* Interrupt service routine moves sound data from the output buffer to the
-Arduino output register, running at AUDIO_RATE. */
+Arduino output register, running at MOZZI_AUDIO_RATE. */
 ISR(TIMER1_OVF_vect, ISR_BLOCK) {
 #  if (MOZZI_AUDIO_RATE < MOZZI_PWM_RATE) // only update every second ISR, if lower audio rate
   static_assert(2l*MOZZI_AUDIO_RATE == MOZZI_PWM_RATE, "audio rate must the same, or exactly half of the pwm rate!");

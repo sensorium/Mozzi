@@ -1,3 +1,14 @@
+/*
+ * config_checks_mbed.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
+
 #ifndef CONFIG_CHECK_MBED_H
 #define CONFIG_CHECK_MBED_H
 
@@ -67,7 +78,7 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPU
 #endif
 
 #if defined(MOZZI_PWM_RATE)
-#error Configuration of MOZZI_PWM_RATE is not currently supported on this platform (always same as AUDIO_RATE)
+#error Configuration of MOZZI_PWM_RATE is not currently supported on this platform (always same as MOZZI_AUDIO_RATE)
 #endif
 
 #if !defined(MOZZI_ANALOG_READ)
@@ -110,5 +121,8 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE, MOZZI_AUDIO_INP
 #if !MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)
 #  define BYPASS_MOZZI_OUTPUT_BUFFER true
 #endif
+
+// TODO: This value is correct for Arduino Giga and Arduino Portenta, but not necessarily everywhere else
+#define MOZZI__INTERNAL_ANALOG_READ_RESOLUTION 16
 
 #endif        //  #ifndef CONFIG_CHECK_MBED_H

@@ -11,25 +11,27 @@
     DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.io/Mozzi/
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012, CC by-nc-sa.
+   Copyright 2012-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+
 */
 
+#define MOZZI_CONTROL_RATE 128
 #include <Mozzi.h>
 #include <Sample.h> // Sample template
 #include <samples/abomb16384_int8.h> // table for Sample
 #include <EventDelay.h>
 #include <mozzi_rand.h>
 
-#define CONTROL_RATE 128
-
 // use: Sample <table_size, update_rate> SampleName (wavetable)
-Sample <ABOMB_NUM_CELLS, AUDIO_RATE> aSample(ABOMB_DATA);
+Sample <ABOMB_NUM_CELLS, MOZZI_AUDIO_RATE> aSample(ABOMB_DATA);
 
 // for scheduling changes
 EventDelay  kTriggerDelay;
@@ -39,14 +41,14 @@ const float playspeed = 1.3;
 float playspeedmod = 0;
 float speedchange = 0;
 
-const unsigned int full = (int) (1000.f/playspeed) - 23; // adjustment approx for CONTROL_RATE difference
+const unsigned int full = (int) (1000.f/playspeed) - 23; // adjustment approx for MOZZI_CONTROL_RATE difference
 
 void setup(){
   randSeed(); // reseed the random generator for different results each time the sketch runs
   aSample.setFreq(playspeed*((float) ABOMB_SAMPLERATE / (float) ABOMB_NUM_CELLS));
   kTriggerDelay.set(full);
   aSample.setLoopingOn();
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 
@@ -99,7 +101,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   return MonoOutput::from8Bit(aSample.next());
 }
 

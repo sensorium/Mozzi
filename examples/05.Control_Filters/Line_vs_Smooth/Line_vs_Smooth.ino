@@ -6,7 +6,7 @@
     updated in the background while audio generation continues,
     and the most recent readings can be read anytime from an array.
     Also demonstrates linear interpolation with Line(),
-    filtering with Smooth(), and fixed point numbers.
+    filtering with Smooth(), and fixed point numbers from FixMath
 
     Circuit: Audio output on digital pin 9
     (for standard output on a Uno or similar), or
@@ -16,41 +16,43 @@
     connected to analog pins 0, 1 and 2, and
     outside leads to ground and +5V.
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2013, CC by-nc-sa.
+
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
+#define MOZZI_CONTROL_RATE 64 // Hz, powers of 2 are most reliable
 #include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/sin2048_int8.h> // sine table for oscillator
-#include <mozzi_fixmath.h>
+#include <FixMath.h>
 #include <Line.h>
 #include <Smooth.h>
 #include <mozzi_analog.h>
 
-#define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
-
 // 2 oscillators to compare linear interpolated vs smoothed control
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin0(SIN2048_DATA);
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin1(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin0(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin1(SIN2048_DATA);
 
 
 // Line to interpolate frequency for aSin0.
-// Q16n16 is basically (yourNumber << 16)
+// UFix<16,16>(yourNumber) is basically encoded in 16bits 
+// with 16 extra bits for additionnal precision.
 // Line needs the small analog input integer values of 0-1023
 // to be scaled up if the time (the number of steps) is big
 // enough that distance/time gives a step-size of 0.
-// Then you need floats (which are sometimes too slow and create glitches),
-// or fixed point.  Q16n16: ugly but good.
-Line <Q16n16> aInterpolate;
+// Then you need floats (which are sometimes too slow and create glitches).
+Line <UFix<16,16>> aInterpolate;
 
 // the number of audio steps the line has to take to reach the next control value
-const unsigned int AUDIO_STEPS_PER_CONTROL = AUDIO_RATE / CONTROL_RATE;
+const unsigned int AUDIO_STEPS_PER_CONTROL = MOZZI_AUDIO_RATE / MOZZI_CONTROL_RATE;
 
 // Smoothing unit for aSin1
 // This might be better with Q24n8 numbers for more precision,
@@ -61,29 +63,31 @@ Smooth <unsigned int> aSmooth(smoothness); // to smooth frequency for aSin1
 
 
 void setup(){
-  aSin0.setFreq(660.f);
-  aSin1.setFreq(220.f);
-  startMozzi(CONTROL_RATE);
+  aSin0.setFreq(660);
+  aSin1.setFreq(220);
+  startMozzi();
 }
 
 
-volatile unsigned int freq1;  // global so it can be used in updateAudio, volatile to stop it getting changed while being used
+unsigned int freq1;  // global so it can be used in updateAudio
 
 void updateControl(){
-  Q16n16 freq0 = Q16n0_to_Q16n16(mozziAnalogRead(0)); // 0 to 1023, scaled up to Q16n16 format
+  UFix<16,16> freq0 = mozziAnalogRead(0); // 0 to 1023, with an additionnal 16bits of precision (which will be used in the interpolation.)
   freq1 = (unsigned int) mozziAnalogRead(1); // 0 to 1023
-   aInterpolate.set(freq0, AUDIO_STEPS_PER_CONTROL);
+  aInterpolate.set(freq0, AUDIO_STEPS_PER_CONTROL);
 }
 
 
-AudioOutput_t updateAudio(){
-  Q16n16 interpolatedFreq = aInterpolate.next(); // get the next linear interpolated freq
-  aSin0.setFreq_Q16n16(interpolatedFreq);
+AudioOutput updateAudio(){
+  auto interpolatedFreq = aInterpolate.next(); // get the next linear interpolated freq
+  aSin0.setFreq(interpolatedFreq);
 
   int smoothedFreq = aSmooth.next(freq1); // get the next filtered frequency
   aSin1.setFreq(smoothedFreq);
 
-  return MonoOutput::fromNBit(9, (int) (aSin0.next() + aSin1.next()));
+
+  // Here we add to SFix numbers, created from the Oscil, for the output. Mozzi knows what is the final range of this allowing for auto-scaling.
+  return MonoOutput::fromSFix(toSFraction(aSin0.next()) + toSFraction(aSin1.next())); // auto-scaling of the output.
 }
 
 

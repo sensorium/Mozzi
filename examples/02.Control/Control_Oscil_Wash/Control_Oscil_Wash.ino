@@ -12,41 +12,42 @@
     DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.io/Mozzi/
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012, CC by-nc-sa.
+   Copyright 2012-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
+#define MOZZI_CONTROL_RATE 128
 #include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/cos8192_int8.h>
 #include <mozzi_midi.h>
 
-#define CONTROL_RATE 128
-
 // harmonics
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos1(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos2(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos3(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos4(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos5(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos6(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos7(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos8(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos1(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos2(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos3(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos4(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos5(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos6(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos7(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos8(COS8192_DATA);
 
 // volume controls
-Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kVol1(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kVol2(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kVol3(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kVol4(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kVol5(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kVol6(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kVol7(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, CONTROL_RATE> kVol8(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_CONTROL_RATE> kVol1(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_CONTROL_RATE> kVol2(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_CONTROL_RATE> kVol3(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_CONTROL_RATE> kVol4(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_CONTROL_RATE> kVol5(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_CONTROL_RATE> kVol6(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_CONTROL_RATE> kVol7(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, MOZZI_CONTROL_RATE> kVol8(COS8192_DATA);
 
 // audio volumes updated each control interrupt and reused in audio till next control
 char v1,v2,v3,v4,v5,v6,v7,v8;
@@ -75,7 +76,7 @@ void setup(){
 
   v1=v2=v3=v4=v5=v6=v7=v8=127;
 
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 void loop(){
@@ -94,7 +95,7 @@ void updateControl(){
    v8 = kVol8.next();
 }
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   long asig = (long)
     aCos1.next()*v1 +
     aCos2.next()*v2 +

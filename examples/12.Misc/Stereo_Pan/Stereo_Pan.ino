@@ -7,14 +7,15 @@
 
     Circuit: Audio outputs on digital pins 9 and 10 (on classic Arduino).
 
-    Mozzi documentation/API
-    https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-    Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2017.
-    This example code is in the public domain.
+   Copyright 2017-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 // Configure Mozzi for Stereo output. This must be done before #include <Mozzi.h>
@@ -28,9 +29,9 @@
 #include <tables/sin2048_int8.h> // sine table for pan oscillator
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable)
-Oscil <PINKNOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(PINKNOISE8192_DATA);
+Oscil <PINKNOISE8192_NUM_CELLS, MOZZI_AUDIO_RATE> aNoise(PINKNOISE8192_DATA);
 
-Oscil <SIN2048_NUM_CELLS, CONTROL_RATE> kPan(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_CONTROL_RATE> kPan(SIN2048_DATA);
 
 byte ampA, ampB; // convey amplitudes from updateControl() to updateAudioStereo();
 
@@ -56,7 +57,7 @@ void updateControl()
 }
 
 
-AudioOutput_t updateAudio() {
+AudioOutput updateAudio() {
   int asig = aNoise.next();
   return StereoOutput::from16Bit(asig*ampA, asig*ampB);
 }

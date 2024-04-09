@@ -1,14 +1,13 @@
 /*
- * MozziGuts.cpp
- *
- * Copyright 2012 Tim Barrass.
+ * MozziGuts_impl_STM32duino.hpp
  *
  * This file is part of Mozzi.
  *
- * Mozzi by Tim Barrass is licensed under a Creative Commons
- * Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
  *
- */
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
 
 #include "HardwareTimer.h"
 
@@ -119,7 +118,7 @@ inline void audioOutput(const AudioOutput f) {
 static void startAudio() {
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_2PIN_PWM, MOZZI_OUTPUT_EXTERNAL_TIMED)
   audio_update_timer.pause();
-  //audio_update_timer.setPeriod(1000000UL / AUDIO_RATE);
+  //audio_update_timer.setPeriod(1000000UL / MOZZI_AUDIO_RATE);
   // Manually calculate prescaler and overflow instead of using setPeriod, to avoid rounding errors
   uint32_t period_cyc = F_CPU / MOZZI_AUDIO_RATE;
   uint16_t prescaler = (uint16_t)(period_cyc / 65535 + 1);
@@ -142,7 +141,7 @@ static void startAudio() {
 #  endif
 
 #  define MAX_CARRIER_FREQ (F_CPU / (1 << MOZZI_AUDIO_BITS_PER_CHANNEL))
-  // static_assert(MAX_CARRIER_FREQ >= AUDIO_RATE); // Unfortunately, we cannot test this at compile time. F_CPU expands to a runtime variable
+  // static_assert(MAX_CARRIER_FREQ >= MOZZI_AUDIO_RATE); // Unfortunately, we cannot test this at compile time. F_CPU expands to a runtime variable
   TIM_TypeDef *pwm_timer_tim = (TIM_TypeDef *) pinmap_peripheral(output_pin_1, PinMap_TIM);
   pwm_timer_ht = new HardwareTimer(pwm_timer_tim);
   pwm_timer_ht->setMode(pwm_timer_channel_1, TIMER_OUTPUT_COMPARE_PWM1, output_pin_1);

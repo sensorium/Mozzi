@@ -20,13 +20,15 @@
     Thermistor from analog pin to +5V (3.3V on Teensy 3.1)
     5.1k resistor from analog pin to ground
 
-  Mozzi documentation/API
-  https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-  Mozzi help/discussion/announcements:
-  https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-  Tim Barrass 2013, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  */
 
 #include <Mozzi.h>
@@ -37,9 +39,9 @@
 #include <ControlDelay.h>
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable)
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aTremelo(SIN2048_DATA);
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aEnvelope(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aTremelo(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aEnvelope(SIN2048_DATA);
 
 Line <float> freqLine;
 
@@ -49,7 +51,7 @@ const byte INPUT_PIN = 1;
 
 float ENVELOPE_DURATION = 1.f;
 
-const byte LINE_LENGTH = (byte)((float)CONTROL_RATE*ENVELOPE_DURATION*0.5); // 0.5 seconds per line
+const byte LINE_LENGTH = (byte)((float)MOZZI_CONTROL_RATE*ENVELOPE_DURATION*0.5); // 0.5 seconds per line
 
 // adjustments to get tremelo in useful range from oversampled temperature input
 const int TREMOLO_OFFSET = 4000;
@@ -69,7 +71,7 @@ void updateControl(){
   static int counter, old_oversampled;
 
   // read the variable resistor
-  int sensor_value = mozziAnalogRead(INPUT_PIN); // value is 0-1023
+  int sensor_value = mozziAnalogRead<10>(INPUT_PIN); // value is 0-1023
 
   // get the next oversampled sensor value
   int oversampled = overSampler.next(sensor_value);
@@ -108,7 +110,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   return MonoOutput::from16Bit((((int)aSin.next()*(128+aTremelo.next()))>>8)*aEnvelope.next());
 }
 

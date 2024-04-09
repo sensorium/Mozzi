@@ -10,13 +10,15 @@
     DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.io/Mozzi/
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2013, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #include <Mozzi.h>
@@ -27,8 +29,8 @@
 #define INPUT_PIN 0 // analog control input
 
 // oscils to compare bumpy to averaged control input
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin0(SIN2048_DATA);
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin1(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin0(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin1(SIN2048_DATA);
 
 // use: RollingAverage <number_type, how_many_to_average> myThing
 RollingAverage <int, 32> kAverage; // how_many_to_average has to be power of 2
@@ -42,7 +44,7 @@ void setup(){
 
 
 void updateControl(){
-  int bumpy_input = mozziAnalogRead(INPUT_PIN);
+  int bumpy_input = mozziAnalogRead<10>(INPUT_PIN);
   averaged = kAverage.next(bumpy_input);
 
   Serial.print("bumpy \t");
@@ -55,7 +57,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   return MonoOutput::fromAlmostNBit(10, 3*(aSin0.next()+aSin1.next()));
 }
 

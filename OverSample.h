@@ -1,18 +1,18 @@
-#ifndef OVERSAMPLE_H
-#define OVERSAMPLE_H
-
 /*
  * OverSample.h
  *
- * Copyright 2013 Tim Barrass.
- *
  * This file is part of Mozzi.
  *
- * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2013-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
 
- #include "RollingAverage.h"
+#ifndef OVERSAMPLE_H
+#define OVERSAMPLE_H
+
+#include "RollingAverage.h"
 
 
 /** @ingroup sensortools

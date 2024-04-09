@@ -22,7 +22,7 @@
 #	length.
 #	
 #	For a recorded audio sample, set the project rate to the
-#	Mozzi AUDIO_RATE (16384 in the current version). 
+#	MOZZI_AUDIO_RATE (16384 in the current version). 
 #	Samples can be any length, as long as they fit in your Arduino.
 #	
 #	Save by exporting with the format set to "Other uncompressed formats",
@@ -56,11 +56,7 @@ def char2mozzi(infile, outfile, tablename, samplerate):
 	fout = open(os.path.expanduser(outfile), "w")
 	fout.write('#ifndef ' + tablename + '_H_' + '\n')
 	fout.write('#define ' + tablename + '_H_' + '\n \n')
-	fout.write('#if ARDUINO >= 100'+'\n')
-	fout.write('#include "Arduino.h"'+'\n')
-	fout.write('#else'+'\n')
-	fout.write('#include "WProgram.h"'+'\n')
-	fout.write('#endif'+'\n')   
+	fout.write('#include <Arduino.h>'+'\n')
 	fout.write('#include "mozzi_pgmspace.h"'+'\n \n')
 	fout.write('#define ' + tablename + '_NUM_CELLS '+ str(len(values))+'\n')
 	fout.write('#define ' + tablename + '_SAMPLERATE '+ str(samplerate)+'\n \n')

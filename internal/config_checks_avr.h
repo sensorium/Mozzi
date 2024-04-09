@@ -1,3 +1,14 @@
+/*
+ * config_checks_avr.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
+
 /* For Mozzi-internal use: Apply hardware specific config defaults and config checks: AVR */
 
 /** @defgroup hardware
@@ -12,14 +23,17 @@
  * flash, RAM, and CPU power.
  *
  * @section avr_output Output modes
- * The following audio modes (see @ref MOZZI_AUDIO_MODE) are currently supported on this hardware. In all cases, Timer 1 is claimed, and
- * is not available for any other purpose:
+ * The following audio modes (see @ref MOZZI_AUDIO_MODE) are currently supported on this hardware:
  *   - MOZZI_OUTPUT_PWM
  *   - MOZZI_OUTPUT_2PIN_PWM
  *   - MOZZI_OUTPUT_EXTERNAL_TIMED
  *   - MOZZI_OUTPUT_EXTERNAL_CUSTOM
  *
- * In all cases, except MOZZI_OUTPUT_EXTERNAL_CUSTOM, Timer 1 is claimed, and is not available for any other purpose.
+ * In all modes, except MOZZI_OUTPUT_EXTERNAL_CUSTOM, Timer 1 is claimed, and is not available for any other purpose.
+ * This means, among other things, that pins 9 and 10 cannot be used for analogWrite(), while pins 3 and 11 should still be available
+ * @em except in MOZZI_OUTPUT_2PIN_PWM mode (as Timer2 is also claimed, then; for definite info on which pin is connected to which timer,
+ * check a suitable reference, as your board may differ). See *Mozzi>examples>11.Communication>Sinewave_PWM_pins_HIFI*. for an example
+ * of emulating analogWrite() on any digital pin, without the need for a hardware timer.
  *
  * @section avr_pwm MOZZI_OUTPUT_PWM
  * For MOZZI_OUTPUT_PWM, output is restricted to pins that are hardware-attached to Timer 1, but can be configured
@@ -42,13 +56,7 @@
  *
  * On the downside, this mode requires an extra hardware timer (Timer2 in addition to Timer1), which may increase compatibility
  * problems with other Arduino libraries that also require a timer. Further, a more elaborate hardware setup is needed, making it less convenient
- * for rapid prototyping:
- *
- * TODO: Move this bit to a dedicated page on output circuits?
- * In hardware, add the two signals through a 3.9k resistor on the "high" pin and 499k resistor on "low" pin.
- * Use 0.5% resistors or select the most accurate from a batch. It is further recommended to place a 4.7nF capacitor between the summing junction
- * of the resistors and ground. This is discussed in much more detail on http://www.openmusiclabs.com/learning/digital/pwm-dac/dual-pwm-circuits/
- * Also, there are higher quality output circuits are on the site.
+ * for rapid prototyping. For circuit details, see https://sensorium.github.io/Mozzi/learn/output/ .
  *
  * On the classic Arduino Uno, the default pinout in this mode is:
  *    - Pin 9 (high bits) and Pin 10 (low bits) -> configurable using MOZZI_AUDIO_PIN_1 and MOZZI_AUDIO_PIN_1_LOW
@@ -135,6 +143,8 @@
 
 #define MOZZI_AUDIO_BITS (2*MOZZI_AUDIO_BITS_PER_CHANNEL)
 #endif
+
+#define MOZZI__INTERNAL_ANALOG_READ_RESOLUTION 10
 
 // Step 2: Check
 // NOTE: This step is not technically required, but a good idea in any port

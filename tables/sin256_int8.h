@@ -1,11 +1,7 @@
 #ifndef SIN256_INT8_H_
 #define SIN256_INT8_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 
 #define SIN256_NUM_CELLS 256

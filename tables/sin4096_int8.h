@@ -1,11 +1,7 @@
 #ifndef SIN4096_H_
 #define SIN4096_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 
 #define SIN4096_NUM_CELLS 4096

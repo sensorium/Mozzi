@@ -1,22 +1,18 @@
 /*
  * AudioDelayFeedback.h
  *
- * Copyright 2012 Tim Barrass.
- *
  * This file is part of Mozzi.
  *
- * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2012-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
 
 #ifndef AUDIODELAY_FEEDBACK_H_
 #define AUDIODELAY_FEEDBACK_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 
 #include "mozzi_utils.h"
 #include "meta.h"
@@ -49,8 +45,8 @@ public:
 
 	/** Constructor.
 	@param delaytime_cells delay time expressed in cells.
-	For example, 128 cells delay at AUDIO_RATE 16384 would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms
-	Put another way, num_cells = delay_seconds * AUDIO_RATE.
+	For example, 128 cells delay at MOZZI_AUDIO_RATE 16384 would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms
+	Put another way, num_cells = delay_seconds * MOZZI_AUDIO_RATE.
 	*/
 	AudioDelayFeedback(uint16_t delaytime_cells): write_pos(0), _feedback_level(0), _delaytime_cells(delaytime_cells)
 	{}
@@ -58,8 +54,8 @@ public:
 
 	/** Constructor.
 	@param delaytime_cells delay time expressed in cells.
-	For example, 128 cells delay at AUDIO_RATE 16384 would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms
-	Put another way, num_cells = delay_seconds * AUDIO_RATE.
+	For example, 128 cells delay at MOZZI_AUDIO_RATE 16384 would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms
+	Put another way, num_cells = delay_seconds * MOZZI_AUDIO_RATE.
 	@param feedback_level is the feedback level from -128 to 127 (representing -1 to 1).
 	*/
 	AudioDelayFeedback(uint16_t delaytime_cells, int8_t feedback_level): write_pos(0),  _feedback_level(feedback_level), _delaytime_cells(delaytime_cells)
@@ -200,9 +196,9 @@ public:
 
 
 	/**  Set delay time expressed in samples.
-	@param delaytime_cells delay time expressed in cells, with each cell played per tick of AUDIO_RATE.
-	For example, 128 cells delay at AUDIO_RATE would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms
-	Put another way, num_cells = delay_seconds * AUDIO_RATE.
+	@param delaytime_cells delay time expressed in cells, with each cell played per tick of MOZZI_AUDIO_RATE.
+	For example, 128 cells delay at MOZZI_AUDIO_RATE would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms
+	Put another way, num_cells = delay_seconds * MOZZI_AUDIO_RATE.
 	*/
 	inline
 	void setDelayTimeCells(uint16_t delaytime_cells)
@@ -212,9 +208,9 @@ public:
 
 
 	/**  Set delay time expressed in samples, fractional Q16n16 for an interpolating delay.
-	@param delaytime_cells delay time expressed in cells, with each cell played per tick of AUDIO_RATE.
-	For example, 128 cells delay at AUDIO_RATE would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms
-	Put another way, num_cells = delay_seconds * AUDIO_RATE.
+	@param delaytime_cells delay time expressed in cells, with each cell played per tick of MOZZI_AUDIO_RATE.
+	For example, 128 cells delay at MOZZI_AUDIO_RATE would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms
+	Put another way, num_cells = delay_seconds * MOZZI_AUDIO_RATE.
 	*/
 	inline
 	void setDelayTimeCells(Q16n16 delaytime_cells)
@@ -224,9 +220,9 @@ public:
 
 
 	/**  Set delay time expressed in samples, fractional float for an interpolating delay.
-	@param delaytime_cells delay time expressed in cells, with each cell played per tick of AUDIO_RATE.
-	For example, 128 cells delay at AUDIO_RATE would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms
-	Put another way, num_cells = delay_seconds * AUDIO_RATE.
+	@param delaytime_cells delay time expressed in cells, with each cell played per tick of MOZZI_AUDIO_RATE.
+	For example, 128 cells delay at MOZZI_AUDIO_RATE would produce a time delay of 128/16384 = 0.0078125 s = 7.8 ms
+	Put another way, num_cells = delay_seconds * MOZZI_AUDIO_RATE.
 	*/
 	inline
 	void setDelayTimeCells(float delaytime_cells)

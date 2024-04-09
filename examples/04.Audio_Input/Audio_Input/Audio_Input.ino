@@ -11,10 +11,15 @@
  Audio output on DAC/A14 on Teensy 3.0, 3.1, or digital pin 9 on a Uno or similar, or
  check the README or http://sensorium.github.io/Mozzi/
 
- 		Mozzi help/discussion/announcements:
-  https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-  Tim Barrass 2013, CC by-nc-sa.
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
+
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #include <MozziConfigValues.h>
@@ -32,7 +37,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   int asig = getAudioInput(); // range 0-1023
   asig = asig - 512; // now range is -512 to 511
   // output range in STANDARD mode is -244 to 243,

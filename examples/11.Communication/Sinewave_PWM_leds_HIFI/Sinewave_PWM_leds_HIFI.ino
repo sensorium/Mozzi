@@ -42,13 +42,15 @@
     Green led from pin 4 through a 1.5k resistor to ground
     Blue led from pin 5 through a 1.5k resistor to ground
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012-13, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 #include <MozziConfigValues.h>
 #define MOZZI_AUDIO_MODE MOZZI_OUTPUT_2PIN_PWM
@@ -66,12 +68,12 @@ const byte BLUE_PIN = 5;
 byte red_brightness, green_brightness, blue_brightness;
 
 // control oscillators using sinewaves to modulate LED brightness
-Oscil <SIN2048_NUM_CELLS, CONTROL_RATE> kRed(SIN2048_DATA);
-Oscil <SIN2048_NUM_CELLS, CONTROL_RATE> kGreen(SIN2048_DATA);
-Oscil <SIN2048_NUM_CELLS, CONTROL_RATE> kBlue(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_CONTROL_RATE> kRed(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_CONTROL_RATE> kGreen(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_CONTROL_RATE> kBlue(SIN2048_DATA);
 
 // audio oscillator
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 
 void updateRGB(byte r, byte g, byte b){
@@ -108,7 +110,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   updateRGB(red_brightness, green_brightness, blue_brightness);
   // this would make more sense with a higher resolution signal
   // but still benefits from using HIFI to avoid the 16kHz pwm noise

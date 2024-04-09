@@ -1,14 +1,13 @@
 /*
- * MozziGuts.cpp
- *
- * Copyright 2012 Tim Barrass.
+ * MozziGuts_impl_ESP32.hpp
  *
  * This file is part of Mozzi.
  *
- * Mozzi by Tim Barrass is licensed under a Creative Commons
- * Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2020-2024 Dieter Vandoren, Thomas Friedrichsmeier and the Mozzi Team
  *
- */
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
 
 #if !(IS_ESP32())
 #  error "Wrong implementation included for this platform"
@@ -126,7 +125,7 @@ static void startAudio() {
   timer_isr_register(TIMER_GROUP_0, TIMER_0, &timer0_audio_output_isr, nullptr, 0, &s_timer_handle);
   timer_start(TIMER_GROUP_0, TIMER_0);
 
-#else
+#elif !MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_CUSTOM)
   static const i2s_config_t i2s_config = {
 #  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC) || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S)
     .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX),

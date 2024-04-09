@@ -22,14 +22,15 @@
        - connection of the piezo attached to ground
        1-megohm resistor between the analog pin and ground
 
-    Mozzi documentation/API
-    https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-    Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-   Tim Barrass 2013.
-   CC by-nc-sa
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #include <Mozzi.h>
@@ -41,7 +42,7 @@ const char PIEZO_PIN = 3;  // set the analog input pin for the piezo
 const int threshold = 80;  // threshold value to decide when the detected signal is a knock or not
 
 // use: Sample <table_size, update_rate> SampleName (wavetable)
-Sample <BURROUGHS1_18649_NUM_CELLS, AUDIO_RATE> aSample(BURROUGHS1_18649_DATA);
+Sample <BURROUGHS1_18649_NUM_CELLS, MOZZI_AUDIO_RATE> aSample(BURROUGHS1_18649_DATA);
 float recorded_pitch = (float) BURROUGHS1_18649_SAMPLERATE / (float) BURROUGHS1_18649_NUM_CELLS;
 
 boolean triggered = false;
@@ -55,7 +56,7 @@ void setup(){
 
 void updateControl(){
   // read the knob
-  int knob_value = mozziAnalogRead(KNOB_PIN); // value is 0-1023
+  int knob_value = mozziAnalogRead<10>(KNOB_PIN); // value is 0-1023
 
   // map it to values between 0.1 and about double the recorded pitch
   float pitch = (recorded_pitch * (float) knob_value / 512.f) + 0.1f;
@@ -64,7 +65,7 @@ void updateControl(){
   aSample.setFreq(pitch);
 
   // read the piezo
-  int piezo_value = mozziAnalogRead(PIEZO_PIN); // value is 0-1023
+  int piezo_value = mozziAnalogRead<10>(PIEZO_PIN); // value is 0-1023
 
   // print the value to the Serial monitor for debugging
   Serial.print("piezo value = ");
@@ -84,7 +85,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   return MonoOutput::from8Bit(aSample.next());
 }
 

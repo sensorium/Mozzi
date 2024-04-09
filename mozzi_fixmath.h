@@ -1,22 +1,18 @@
 /*
  * mozzi_fixmath.h
  *
- * Copyright 2012 Tim Barrass.
- *
  * This file is part of Mozzi.
  *
- * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2012-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
 
 #ifndef FIXEDMATH_H_
 #define FIXEDMATH_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 
 /** @defgroup fixmath Fast integer based fixed-point arithmetic */
 

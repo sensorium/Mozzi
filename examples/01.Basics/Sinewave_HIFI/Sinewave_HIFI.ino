@@ -27,12 +27,14 @@
     work directly with headphones.
 
     Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+    https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
+    Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012-13, CC by-nc-sa.
+    Copyright 2012-2024 Tim Barrass and the Mozzi Team
+
+    Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #include <MozziConfigValues.h>
@@ -43,7 +45,7 @@
 #include <tables/sin2048_int8.h> // sine table for oscillator
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 void setup(){
   startMozzi(); // uses the default control rate of 64
@@ -54,7 +56,7 @@ void setup(){
 void updateControl(){}
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   // this would make more sense with a higher resolution signal
   // MonoOutput::from8Bit() (and it friends from16Bit() and fromNBit()) take care of scaling the output signal
   // as appropiate for the platform (to 14 bits on AVR with AUDIO_MODE HIFI).

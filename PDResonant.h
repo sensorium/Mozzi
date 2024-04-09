@@ -1,15 +1,13 @@
 /*
  * PDResonant.h
  *
- * This implementation copyright 2012 Tim Barrass.
- *
  * This file is part of Mozzi.
  *
- * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2013-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
-
-
 
 #include <mozzi_midi.h>
 #include <ADSR.h>
@@ -128,11 +126,11 @@ private:
 	byte amp;
 	int freq;
 
-	Phasor <AUDIO_RATE> aBaseCounter;
-	Phasor <AUDIO_RATE> aResonanceFreqCounter;
+	Phasor <MOZZI_AUDIO_RATE> aBaseCounter;
+	Phasor <MOZZI_AUDIO_RATE> aResonanceFreqCounter;
 
-	Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aOsc;
-	ADSR <CONTROL_RATE, AUDIO_RATE> aAmpEnv;
-	ADSR <CONTROL_RATE, CONTROL_RATE> kResonantFreqEnv;
+	Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aOsc;
+	ADSR <MOZZI_CONTROL_RATE, MOZZI_AUDIO_RATE> aAmpEnv;
+	ADSR <MOZZI_CONTROL_RATE, MOZZI_CONTROL_RATE> kResonantFreqEnv;
 
 };

@@ -1,3 +1,14 @@
+/*
+ * config_checks_renesas.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
+
 #ifndef CONFIG_CHECK_RENESAS_H
 #define CONFIG_CHECK_RENESAS_H
 
@@ -46,7 +57,7 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPU
 #endif
 
 #if defined(MOZZI_PWM_RATE)
-#error Configuration of MOZZI_PWM_RATE is not currently supported on this platform (always same as AUDIO_RATE)
+#error Configuration of MOZZI_PWM_RATE is not currently supported on this platform (always same as MOZZI_AUDIO_RATE)
 #endif
 
 #if !defined(MOZZI_ANALOG_READ)
@@ -66,5 +77,7 @@ MOZZI_CHECK_SUPPORTED(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE, MOZZI_ANALOG_RE
 #  include "disable_stereo_on_github_workflow.h"
 MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_CHANNELS, 1)
 #endif
+
+#define MOZZI__INTERNAL_ANALOG_READ_RESOLUTION 14
 
 #endif        //  #ifndef CONFIG_CHECK_RENESAS_H

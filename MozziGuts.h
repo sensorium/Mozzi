@@ -1,11 +1,11 @@
 /*
  * MozziGuts.h
  *
- * Copyright 2012 Tim Barrass.
- *
  * This file is part of Mozzi.
  *
- * Mozzi by Tim Barrass is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2012-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
 
@@ -53,7 +53,7 @@ typedef signed long int32_t;
 
 /*! @defgroup core Mozzi Core Functions
 
-/** @ingroup core
+@ingroup core
 Sets up the timers for audio and control rate processes, storing the timer
 registers so they can be restored when Mozzi stops. startMozzi() goes in your sketch's
 setup() routine.
@@ -62,7 +62,7 @@ This function intializes the timer(s) needed to move audio samples to the output
 configured @ref MOZZI_AUDIO_MODE .
 
 @param control_rate_hz Sets how often updateControl() is called.  It must be a power of 2.
-If no parameter is provided, control_rate_hz is set to CONTROL_RATE,
+If no parameter is provided, control_rate_hz is set to MOZZI_CONTROL_RATE,
 which has a default value of 64 (you can re-\#define it in your sketch).
 The practical upper limit for control rate depends on how busy the processor is,
 and you might need to do some tests to find the best setting.
@@ -72,7 +72,7 @@ which disables digital inputs on all analog input pins.  All in mozzi_analog.h a
 They are all called automatically and hidden away because it keeps things simple for a STANDARD_PLUS set up,
 but if it turns out to be confusing, they might need to become visible again.
 */
-void startMozzi(int control_rate_hz = CONTROL_RATE);
+void startMozzi(int control_rate_hz = MOZZI_CONTROL_RATE);
 
 
 
@@ -96,17 +96,21 @@ on which one(s) are required for other tasks.
 void stopMozzi();
 
 
-
+#if (MOZZI_COMPATIBILITY_LEVEL <= MOZZI_COMPATIBILITY_1_1) && MOZZI_IS(MOZZI_AUDIO_CHANNELS, MOZZI_MONO)
+AudioOutput_t updateAudio();
+#else
 /** @ingroup core
 This is where you put your audio code. updateAudio() has to keep up with the
-AUDIO_RATE of 16384 Hz, so to keep things running smoothly, avoid doing any
+MOZZI_AUDIO_RATE of 16384 or 32768 Hz, so to keep things running smoothly, avoid doing any
 calculations here which could be done in setup() or updateControl().
-@return an audio sample.  In STANDARD modes this is between -244 and 243 inclusive.
-In HIFI mode, it's a 14 bit number between -16384 and 16383 inclusive.
+@return an audio sample.
 
-TODO: Update documentation
+While is possible (in mono sketches) to return a plain unscaled int, it is generally best to return
+auto-scaled samples using MonoOutput::from8Bit(), MonoOutput::from16Bit(), MonoOutput::fromNbit(), or
+their StereoOutput equivalents.
 */
-AudioOutput_t updateAudio();
+AudioOutput updateAudio();
+#endif
 
 /** @ingroup core
 This is where you put your control code. You need updateControl() somewhere in
@@ -132,7 +136,15 @@ are called.
 */
 void audioHook();
 
+/** @ingroup analog
 
+See getAudioInput(). The template parameter specifies the desired value range in bits. */
+template<byte RES> uint16_t getAudioInput();
+
+/** @ingroup analog
+
+See getAudioInput(). Equivalent to getAudioInput<16>(). */
+template<byte RES> inline uint16_t getAudioInput16() { return getAudioInput<16>(); }
 
 /** @ingroup analog
 This returns audio input from the input buffer, if
@@ -146,19 +158,28 @@ and
 http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/ .
 A circuit and instructions for amplifying and biasing a microphone signal can be found at
 http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS
+
+@note The value range returned by this function follows the same rules as detailed in the documentation
+      for mozziAnalogRead(): For portable code, define MOZZI_ANALGO_READ_RESOLUTION at the top of your
+      sketch, or use the templated version of this function.
+
 @return audio data from the input buffer
 */
-#if !MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE)
-int getAudioInput();
+#if defined(FOR_DOXYGEN_ONLY) || (!MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE))
+#if defined(FOR_DOXYGEN_ONLY) || defined(MOZZI_ANALOG_READ_RESOLUTION)
+inline uint16_t getAudioInput() { return getAudioInput<MOZZI_ANALOG_READ_RESOLUTION>(); };
+#else
+MOZZI_DEPRECATED("2.0", "This use of getAudioInput() is not portable. Refer to the API documentation for suggested alternatives") inline uint16_t getAudioInput() { return getAudioInput<MOZZI__INTERNAL_ANALOG_READ_RESOLUTION>(); };
+#endif
 #endif
 
 
 /** @ingroup core
 An alternative for Arduino time functions like micros() and millis(). This is slightly faster than micros(),
 and also it is synchronized with the currently processed audio sample (which, due to the audio
-output buffer, could diverge up to 256/AUDIO_RATE seconds from the current time).
+output buffer, could diverge up to 256/MOZZI_AUDIO_RATE seconds from the current time).
 audioTicks() is updated each time an audio sample
-is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when AUDIO_RATE is
+is output, so the resolution is 1/MOZZI_AUDIO_RATE microseconds (61 microseconds when MOZZI_AUDIO_RATE is
 16384 Hz).
 @return the number of audio ticks since the program began.
 */
@@ -169,9 +190,9 @@ unsigned long audioTicks();
 /** @ingroup core
 An alternative for Arduino time functions like micros() and millis(). This is slightly faster than micros(),
 and also it is synchronized with the currently processed audio sample (which, due to the audio
-output buffer, could diverge up to 256/AUDIO_RATE seconds from the current time).
+output buffer, could diverge up to 256/MOZZI_AUDIO_RATE seconds from the current time).
 audioTicks() is updated each time an audio sample
-is output, so the resolution is 1/AUDIO_RATE microseconds (61 microseconds when AUDIO_RATE is
+is output, so the resolution is 1/MOZZI_AUDIO_RATE microseconds (61 microseconds when MOZZI_AUDIO_RATE is
 16384 Hz).
 @return the approximate number of microseconds since the program began.
 @todo  incorporate mozziMicros() in a more accurate EventDelay()?

@@ -16,21 +16,22 @@
     GND           GND
     L/R           to audio outputs
 
-    Mozzi documentation/API
-    https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-    Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012, CC by-nc-sa.
-    T. Combriat 2020, CC by-nc-sa.
+   Copyright 2020-2024 T. Combriat and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 // before including Mozzi.h, configure external audio output mode:
 #include "MozziConfigValues.h"  // for named option values
 #define MOZZI_AUDIO_MODE MOZZI_OUTPUT_EXTERNAL_TIMED
 #define MOZZI_AUDIO_CHANNELS MOZZI_STEREO
-#define CONTROL_RATE 256 // Hz, powers of 2 are most reliable
+#define MOZZI_CONTROL_RATE 256 // Hz, powers of 2 are most reliable
 
 #include <Mozzi.h>
 #include <Oscil.h>
@@ -39,10 +40,10 @@
 
 
 // Synthesis part
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCos1(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCos2(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kEnv1(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kEnv2(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aCos1(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aCos2(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kEnv1(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kEnv2(COS2048_DATA);
 
 
 
@@ -81,7 +82,7 @@ void setup() {
   aCos2.setFreq(220.f);
   kEnv1.setFreq(0.25f);
   kEnv2.setFreq(0.30f);
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 
@@ -95,7 +96,7 @@ void updateControl() {
 }
 
 
-AudioOutput_t updateAudio() {
+AudioOutput updateAudio() {
   return StereoOutput::from16Bit(aCos1.next() * env1, aCos2.next() * env2);
 }
 

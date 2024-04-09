@@ -1,12 +1,11 @@
 /*
  * StateVariable.h
  *
- * This implementation copyright 2012 Tim Barrass.
- *
  * This file is part of Mozzi.
  *
- * Mozzi is licensed under a Creative Commons
- * Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2012-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
 
@@ -85,7 +84,7 @@ public:
   }
 
   /** Set the centre or corner frequency of the filter.
-  @param centre_freq 20 - 4096 Hz (AUDIO_RATE/4).
+  @param centre_freq 20 - 4096 Hz (MOZZI_AUDIO_RATE/4).
   This will be the cut-off frequency for LOWPASS and HIGHPASS, and the
   centre frequency to pass or reduce for BANDPASS and NOTCH.
   @note Timing 25-30us

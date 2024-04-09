@@ -1,14 +1,13 @@
 /*
- * MozziGuts.cpp
- *
- * Copyright 2012 Tim Barrass.
+ * MozziGuts_impl_ESP8266.hpp
  *
  * This file is part of Mozzi.
  *
- * Mozzi by Tim Barrass is licensed under a Creative Commons
- * Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2020-2024 Thomas Friedrichsmeier and the Mozzi Team
  *
- */
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
 
 #if !(IS_ESP8266())
 #  error "Wrong implementation included for this platform"
@@ -71,7 +70,7 @@ inline void audioOutput(const AudioOutput f) {
 }
 #  else
 MOZZI_ASSERT_EQUAL(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_SERIAL)
-// NOTE: This intermediate step is needed because the output timer is running at a rate higher than AUDIO_RATE, and we need to rely on the (tiny)
+// NOTE: This intermediate step is needed because the output timer is running at a rate higher than MOZZI_AUDIO_RATE, and we need to rely on the (tiny)
 //       serial buffer itself to achieve appropriate rate control
 void CACHED_FUNCTION_ATTR esp8266_serial_audio_output() {
   // Note: That unreadble mess is an optimized version of Serial1.availableForWrite()
@@ -83,7 +82,7 @@ void CACHED_FUNCTION_ATTR esp8266_serial_audio_output() {
 inline void audioOutput(const AudioOutput f) {
   // optimized version of: Serial1.write(...);
   for (uint8_t i = 0; i < MOZZI_PDM_RESOLUTION*4; ++i) {
-    U1F = pdmCode8(f+MOZZI_AUDIO_BIAS);
+    U1F = pdmCode8(f.l()+MOZZI_AUDIO_BIAS);
   }
 }
 #  endif

@@ -1,3 +1,14 @@
+/*
+ * config_checks_stm32maple.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
+
 #ifndef CONFIG_CHECKS_STM32MAPLE_H
 #define CONFIG_CHECKS_STM32MAPLE_H
 
@@ -13,7 +24,7 @@
  *
  * @section stm32_maple_status Status and peculiarities of this port
  * Compiles for and runs on a STM32F103C8T6 blue pill board, with a bunch of caveats (see below), i.e. on a board _without_ a
- * real DAC. Should probably run on any other board supported by [Roger Clark's libmaple-based core](https://github.com/rogerclarkmelbourne/Arduino_STM32) (although this theory is untested).
+ * real DAC. Should probably run on any other board supported by [Roger Clark's libmaple-based core](https://github.com/rogerclarkmelbourne/Ardu0ino_STM32) (although this theory is untested).
  *
  * @note that at the time of this writing, [Stev Strong's slightliy more recent fork of this core](https://github.com/stevstrong/Arduino_STM32/) does *not* work with
  * Mozzi, apparently due to a bug in pwmWrite().
@@ -120,5 +131,7 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_CHANNELS, 1)
 #define MOZZI_ANALOG_READ MOZZI_ANALOG_READ_STANDARD
 #endif
 
+// TODO: This probably isn't correct for all boards!
+#define MOZZI__INTERNAL_ANALOG_READ_RESOLUTION 12
 
 #endif        //  #ifndef CONFIG_CHECKS_STM32MAPLE_H

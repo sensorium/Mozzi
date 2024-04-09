@@ -23,8 +23,15 @@
 		Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012, CC by-nc-sa.
-    T. Combriat 2020, CC by-nc-sa.
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
+
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
+
+   Copyright 2020-2024 T. Combriat and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 // before including Mozzi.h, configure external audio output mode:
@@ -32,6 +39,7 @@
 #define MOZZI_AUDIO_MODE MOZZI_OUTPUT_EXTERNAL_TIMED
 // Note: For demonstration purposes, this sketch does *not* set the following (although it would make sense):
 //#define MOZZI_AUDIO_BITS 12  // the default value of 16 for external audio is thus used, instead
+#define MOZZI_CONTROL_RATE 256 // Hz, powers of 2 are most reliable
 
 #include <Mozzi.h>
 #include <Oscil.h>
@@ -43,13 +51,10 @@
 #include <DAC_MCP49xx.h>  // https://github.com/tomcombriat/DAC_MCP49XX 
                           // which is an adapted fork from https://github.com/exscape/electronics/tree/master/Arduino/Libraries/DAC_MCP49xx  (Thomas Backman)
 
-#define CONTROL_RATE 256 // Hz, powers of 2 are most reliable
-
-
 // Synthesis part
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCarrier(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aModulator(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kModIndex(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aCarrier(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aModulator(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kModIndex(COS2048_DATA);
 
 
 Q8n8 mod_index;
@@ -82,7 +87,7 @@ void audioOutput(const AudioOutput f)
 void setup() {
   dac.init();
 
-  kNoteChangeDelay.set(768); // ms countdown, taylored to resolution of CONTROL_RATE
+  kNoteChangeDelay.set(768); // ms countdown, taylored to resolution of MOZZI_CONTROL_RATE
   kModIndex.setFreq(.768f); // sync with kNoteChangeDelay
   target_note = note0;
   note_change_step = Q7n0_to_Q7n8(3);
@@ -95,7 +100,7 @@ void setup() {
 
 
   dac.setPortWrite(true);  //comment this line if you do not want to use PortWrite (for non-AVR platforms)
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 void setFreqs(Q8n8 midi_note) {
@@ -136,7 +141,7 @@ void updateControl() {
 }
 
 
-AudioOutput_t updateAudio() {
+AudioOutput updateAudio() {
   Q15n16 modulation = deviation * aModulator.next() >> 8;
 
   return MonoOutput::from8Bit(aCarrier.phMod(modulation));

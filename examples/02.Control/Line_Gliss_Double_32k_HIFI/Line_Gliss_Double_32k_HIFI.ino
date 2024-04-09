@@ -41,13 +41,15 @@
     Alternatively using 39 ohm, 4.99k and 470nF components will
     work directly with headphones.
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012, CC by-nc-sa.
+   Copyright 2012-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #include <MozziConfigValues.h>
@@ -63,8 +65,8 @@
 #include <mozzi_fixmath.h>
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SAW8192_NUM_CELLS, AUDIO_RATE> aSaw1(SAW8192_DATA);
-Oscil <SAW8192_NUM_CELLS, AUDIO_RATE> aSaw2(SAW8192_DATA);
+Oscil <SAW8192_NUM_CELLS, MOZZI_AUDIO_RATE> aSaw1(SAW8192_DATA);
+Oscil <SAW8192_NUM_CELLS, MOZZI_AUDIO_RATE> aSaw2(SAW8192_DATA);
 
 // use: Line <type> lineName
 Line <long> aGliss1;
@@ -73,8 +75,8 @@ Line <long> aGliss2;
 byte lo_note = 24; // midi note numbers
 byte hi_note = 46;
 
-long audio_steps_per_gliss = AUDIO_RATE / 4; // ie. 4 glisses per second
-long control_steps_per_gliss = CONTROL_RATE / 4;
+long audio_steps_per_gliss = MOZZI_AUDIO_RATE / 4; // ie. 4 glisses per second
+long control_steps_per_gliss = MOZZI_CONTROL_RATE / 4;
 
 // stuff for changing starting positions, probably just confusing really
 int counter = 0;
@@ -134,7 +136,7 @@ void updateControl(){ // 900 us floats vs 160 fixed
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   aSaw1.setPhaseInc(aGliss1.next());
   aSaw2.setPhaseInc(aGliss2.next());
   return MonoOutput::fromNBit(9, (int)aSaw1.next()+aSaw2.next());

@@ -1,22 +1,18 @@
 /*
  * ADSR.h
  *
- * Copyright 2012 Tim Barrass.
- *
  * This file is part of Mozzi.
  *
- * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2012-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
 
 #ifndef ADSR_H_
 #define ADSR_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "Line.h"
 #include "mozzi_fixmath.h"
 
@@ -27,13 +23,13 @@ The "normal" way to use this would be with update() in updateControl(), where it
 and then next() is in updateAudio(), called much more often, where it interpolates between the control values.
 This also allows the ADSR updates to be made even more sparsely if desired, eg. every 3rd control update.
 @tparam CONTROL_UPDATE_RATE The frequency of control updates.
-Ordinarily this will be CONTROL_RATE, but an alternative (amongst others) is
-to set this as well as the LERP_RATE parameter to AUDIO_RATE, and call both update() and next() in updateAudio().
-Such a use would allow accurate envelopes with finer resolution of the control points than CONTROL_RATE.
+Ordinarily this will be MOZZI_CONTROL_RATE, but an alternative (amongst others) is
+to set this as well as the LERP_RATE parameter to MOZZI_AUDIO_RATE, and call both update() and next() in updateAudio().
+Such a use would allow accurate envelopes with finer resolution of the control points than MOZZI_CONTROL_RATE.
 @tparam LERP_RATE Sets how often next() will be called, to interpolate between updates set by CONTROL_UPDATE_RATE.
-This will produce the smoothest results if it's set to AUDIO_RATE, but if you need to save processor time and your
+This will produce the smoothest results if it's set to MOZZI_AUDIO_RATE, but if you need to save processor time and your
 envelope changes slowly or controls something like a filter where there may not be problems with glitchy or clicking transitions,
-LERP_RATE could be set to CONTROL_RATE (for instance).  Then update() and next() could both be called in updateControl(),
+LERP_RATE could be set to MOZZI_CONTROL_RATE (for instance).  Then update() and next() could both be called in updateControl(),
 greatly reducing the amount of processing required compared to calling next() in updateAudio().
 @todo Test whether using the template parameters makes any difference to speed,
 and rationalise which units do and don't need them.
@@ -278,7 +274,7 @@ public:
 
 
 	/** Set the attack time of the ADSR in milliseconds.
-	The actual time taken will be resolved within the resolution of CONTROL_RATE.
+	The actual time taken will be resolved within the resolution of MOZZI_CONTROL_RATE.
 	@param msec the unsigned int attack time in milliseconds.
 	@note Beware of low values (less than 20 or so, depending on how many steps are being taken),
 	in case internal step size gets calculated as 0, which would mean nothing happens.
@@ -291,7 +287,7 @@ public:
 
 
 	/** Set the decay time of the ADSR in milliseconds.
-	The actual time taken will be resolved within the resolution of CONTROL_RATE.
+	The actual time taken will be resolved within the resolution of MOZZI_CONTROL_RATE.
 	@param msec the unsigned int decay time in milliseconds.
 	@note Beware of low values (less than 20 or so, depending on how many steps are being taken),
 	in case internal step size gets calculated as 0, which would mean nothing happens.
@@ -304,7 +300,7 @@ public:
 
 
 	/** Set the sustain time of the ADSR in milliseconds.
-	The actual time taken will be resolved within the resolution of CONTROL_RATE.
+	The actual time taken will be resolved within the resolution of MOZZI_CONTROL_RATE.
 	The sustain phase will finish if the ADSR recieves a noteOff().
 	@param msec the unsigned int sustain time in milliseconds.
 	@note Beware of low values (less than 20 or so, depending on how many steps are being taken),
@@ -319,7 +315,7 @@ public:
 
 
 	/** Set the release time of the ADSR in milliseconds.
-	The actual time taken will be resolved within the resolution of CONTROL_RATE.
+	The actual time taken will be resolved within the resolution of MOZZI_CONTROL_RATE.
 	@param msec the unsigned int release time in milliseconds.
 	@note Beware of low values (less than 20 or so, depending on how many steps are being taken),
 	in case internal step size gets calculated as 0, which would mean nothing happens.
@@ -339,7 +335,7 @@ public:
 
 
 	/** Set the attack, decay and release times of the ADSR in milliseconds.
-	The actual times will be resolved within the resolution of CONTROL_RATE.
+	The actual times will be resolved within the resolution of MOZZI_CONTROL_RATE.
 	@param attack_ms the new attack time in milliseconds.
 	@param decay_ms the new decay time in milliseconds.
 	@param sustain_ms the new sustain time in milliseconds.

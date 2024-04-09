@@ -1,3 +1,14 @@
+/*
+ * config_checks_teensy.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
+
 #ifndef CONFIG_CHECK_TEENSY_H
 #define CONFIG_CHECK_TEENSY_H
 
@@ -102,7 +113,7 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPU
 #endif
 
 #if defined(MOZZI_PWM_RATE)
-#error Configuration of MOZZI_PWM_RATE is not currently supported on this platform (always same as AUDIO_RATE)
+#error Configuration of MOZZI_PWM_RATE is not currently supported on this platform (always same as MOZZI_AUDIO_RATE)
 #endif
 
 #if !defined(MOZZI_ANALOG_READ)
@@ -137,5 +148,8 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_CHANNELS, 1)
 #    define MOZZI_AUDIO_PIN_2 A9
 #  endif
 #endif
+
+//TODO: Not 100% sure this is correct in all cases.
+#define MOZZI__INTERNAL_ANALOG_READ_RESOLUTION 10
 
 #endif        //  #ifndef CONFIG_CHECK_TEENSY_H

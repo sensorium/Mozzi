@@ -1,3 +1,14 @@
+/*
+ * config_checks_stm32duino.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
+
 #ifndef CONFIG_CHECKS_STM32DUINO_H
 #define CONFIG_CHECKS_STM32DUINO_H
 
@@ -129,5 +140,6 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_CHANNELS, 1)
 #define MOZZI_ANALOG_READ MOZZI_ANALOG_READ_STANDARD
 #endif
 
+#define MOZZI__INTERNAL_ANALOG_READ_RESOLUTION ADC_RESOLUTION
 
 #endif        //  #ifndef CONFIG_CHECKS_STM32DUINO_H

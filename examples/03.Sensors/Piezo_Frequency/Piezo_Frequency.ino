@@ -17,13 +17,15 @@
        - connection of the piezo attached to ground
        1-megohm resistor between the analog pin and ground
 
-    Mozzi documentation/API
-    https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-    Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-   Tim Barrass 2013, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 // increase the rate of updateControl from the default of 64, to catch the piezo's rapid transients
@@ -47,15 +49,15 @@ void setup(){
 
 
 void updateControl(){
-  // read the piezo
+  // read the piezo. We request 12-bits resolution, here, for values of 0-4095. Some boards
+  // will actually provide that much accuracy, for others the readings are simply shifted to a
+  // larger range.
   int piezo_value = mozziAnalogRead(PIEZO_PIN); // value is 0-1023
 
   // print the value to the Serial monitor for debugging
   Serial.print("piezo_value = ");
   Serial.print(piezo_value);
   Serial.print("\t \t"); // prints 2 tabs
-
-  int frequency = piezo_value*3; // calibrate
 
   // print the frequency to the Serial monitor for debugging
   Serial.print("frequency = ");

@@ -1,16 +1,20 @@
 /*
  * twi_nonblock.cpp
  *
- * Copyright 2012 Marije Baalman.
+ * This file is part of Mozzi.
+ *
+ * Copyright 2012-2024 Marije Baalman and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
 
 #include "hardware_defines.h"
+#if !IS_AVR()
+#error Wrong include
+#endif
 
 // Added by TB2014 for Mozzi library, to hide code from Teensy 3.1
-#if IS_AVR()
-
-#include "twi_nonblock.h"
 
 
 #include <avr/interrupt.h>
@@ -597,4 +601,3 @@ ISR(TWI_vect)
   }
 }
 
-#endif

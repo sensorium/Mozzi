@@ -7,7 +7,7 @@
     values, random numbers with rand(), and EventDelay()
     for scheduling.
 
-    Important:
+      Important:
     This sketch uses MOZZI_OUTPUT_2PIN_PWM (aka HIFI) output mode, which
     is not available on all boards (among others, it works on the
     classic Arduino boards, but not Teensy 3.x and friends).
@@ -30,25 +30,28 @@
     Alternatively using 39 ohm, 4.99k and 470nF components will
     work directly with headphones.
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012-13, CC by-nc-sa.
+   Copyright 2012-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
+
 
 #include <MozziConfigValues.h>
 #define MOZZI_AUDIO_MODE MOZZI_OUTPUT_2PIN_PWM
-
 #include <Mozzi.h>
 #include <Oscil.h>
-#include <tables/cos2048_int8.h> // table for Oscils to play
-#include <mozzi_fixmath.h>
+#include <tables/cos2048_int8.h>  // table for Oscils to play
 #include <EventDelay.h>
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
+#include <Smooth.h>
+
 
 // audio oscils
 Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aCarrier(COS2048_DATA);
@@ -56,76 +59,71 @@ Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aModulator(COS2048_DATA);
 Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aModDepth(COS2048_DATA);
 
 // for scheduling note changes in updateControl()
-EventDelay  kNoteChangeDelay;
+EventDelay kNoteChangeDelay;
 
-// synthesis parameters in fixed point formats
-Q8n8 ratio; // unsigned int with 8 integer bits and 8 fractional bits
-Q24n8 carrier_freq; // unsigned long with 24 integer bits and 8 fractional bits
-Q24n8 mod_freq; // unsigned long with 24 integer bits and 8 fractional bits
+UFix<8, 8> ratio;          // unsigned int with 8 integer bits and 8 fractional bits
+UFix<24, 8> carrier_freq;  // unsigned long with 24 integer bits and 8 fractional bits
 
 // for random notes
-Q8n0 octave_start_note = 42;
+const UFix<7, 0> octave_start_note = 42;
 
-void setup(){
-  ratio = float_to_Q8n8(3.0f);   // define modulation ratio in float and convert to fixed-point
-  kNoteChangeDelay.set(200); // note duration ms, within resolution of MOZZI_CONTROL_RATE
-  aModDepth.setFreq(13.f);     // vary mod depth to highlight am effects
-  randSeed(); // reseed the random generator for different results each time the sketch runs
-  startMozzi(); // use default MOZZI_CONTROL_RATE 64
+void setup() {
+  ratio = 3;
+  kNoteChangeDelay.set(200);  // note duration ms, within resolution of MOZZI_CONTROL_RATE
+  aModDepth.setFreq(13.f);    // vary mod depth to highlight am effects
+  randSeed();                 // reseed the random generator for different results each time the sketch runs
+  startMozzi();
 }
 
 
-void updateControl(){
-  static Q16n16 last_note = octave_start_note;
+void updateControl() {
+  static auto last_note = octave_start_note;
 
-  if(kNoteChangeDelay.ready()){
 
+  if (kNoteChangeDelay.ready()) {
     // change octave now and then
-    if(rand((byte)5)==0){
-      last_note = 36+(rand((byte)6)*12);
+    if (rand((byte)5) == 0) {
+      last_note = UFix<7, 0>(36 + (rand((byte)6) * 12));
     }
 
     // change step up or down a semitone occasionally
-    if(rand((byte)13)==0){
-      last_note += 1-rand((byte)3);
+    if (rand((byte)13) == 0) {
+      last_note = last_note + SFix<7, 0>(1 - rand((byte)3));
     }
 
     // change modulation ratio now and then
-    if(rand((byte)5)==0){
-      ratio = ((Q8n8) 1+ rand((byte)5)) <<8;
+    if (rand((byte)5) == 0) {
+      ratio = 1 + rand((byte)5);
     }
 
-    // sometimes add a fraction to the ratio
-    if(rand((byte)5)==0){
-      ratio += rand((byte)255);
+    // sometimes add a fractionto the ratio
+    if (rand((byte)5) == 0) {
+      ratio = ratio + toUFraction(rand((byte)255));
     }
 
     // step up or down 3 semitones (or 0)
-    last_note += 3 * (1-rand((byte)3));
+    last_note = last_note + SFix<7, 0>(3 * (1 - rand((byte)3)));
 
     // convert midi to frequency
-    Q16n16 midi_note = Q8n0_to_Q16n16(last_note);
-    carrier_freq = Q16n16_to_Q24n8(Q16n16_mtof(midi_note));
+    carrier_freq = mtof(last_note);
 
     // calculate modulation frequency to stay in ratio with carrier
-    mod_freq = (carrier_freq * ratio)>>8; // (Q24n8   Q8n8) >> 8 = Q24n8
+    auto mod_freq = carrier_freq * ratio;
 
     // set frequencies of the oscillators
-    aCarrier.setFreq_Q24n8(carrier_freq);
-    aModulator.setFreq_Q24n8(mod_freq);
+    aCarrier.setFreq(carrier_freq);
+    aModulator.setFreq(mod_freq);
 
     // reset the note scheduler
     kNoteChangeDelay.start();
   }
 }
 
-
-AudioOutput updateAudio(){
-  unsigned int mod = (128u+ aModulator.next()) * ((byte)128+ aModDepth.next());
-  return MonoOutput::fromNBit(24, (long)mod * aCarrier.next());  // 16 bit * 8 bit = 24 bit
+AudioOutput updateAudio() {
+  auto mod = UFix<8, 0>(128 + aModulator.next()) * UFix<8, 0>(128 + aModDepth.next());
+  return MonoOutput::fromSFix(mod * toSFraction(aCarrier.next()));
 }
 
-
-void loop(){
+void loop() {
   audioHook();
 }

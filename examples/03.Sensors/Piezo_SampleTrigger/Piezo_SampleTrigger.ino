@@ -22,14 +22,15 @@
        - connection of the piezo attached to ground
        1-megohm resistor between the analog pin and ground
 
-    Mozzi documentation/API
-    https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-    Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-   Tim Barrass 2013.
-   CC by-nc-sa
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #include <Mozzi.h>
@@ -55,7 +56,7 @@ void setup(){
 
 void updateControl(){
   // read the knob
-  int knob_value = mozziAnalogRead(KNOB_PIN); // value is 0-1023
+  int knob_value = mozziAnalogRead<10>(KNOB_PIN); // value is 0-1023
 
   // map it to values between 0.1 and about double the recorded pitch
   float pitch = (recorded_pitch * (float) knob_value / 512.f) + 0.1f;
@@ -64,7 +65,7 @@ void updateControl(){
   aSample.setFreq(pitch);
 
   // read the piezo
-  int piezo_value = mozziAnalogRead(PIEZO_PIN); // value is 0-1023
+  int piezo_value = mozziAnalogRead<10>(PIEZO_PIN); // value is 0-1023
 
   // print the value to the Serial monitor for debugging
   Serial.print("piezo value = ");

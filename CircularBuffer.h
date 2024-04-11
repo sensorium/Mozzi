@@ -1,4 +1,15 @@
 /*
+ * CircularBuffer.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2014-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+ */
+
+/*
 Modified from https://en.wikipedia.org/wiki/Circular_buffer
 Mirroring version
 On 18 April 2014, the simplified version on the Wikipedia page for power of 2 sized buffers 

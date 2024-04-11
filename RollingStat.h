@@ -1,18 +1,17 @@
-#ifndef ROLLINGSTAT_H
-#define ROLLINGSTAT_H
-
 /*
  * RollingStat.h
  *
- * WARNING: this code is incomplete, it doesn't work yet
- *
- * Copyright 2013 Tim Barrass.
- *
  * This file is part of Mozzi.
  *
- * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2013-2024 Tim Barrass and the Mozzi Team
  *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+ * WARNING: this code is incomplete, it doesn't work yet
  */
+
+#ifndef ROLLINGSTAT_H
+#define ROLLINGSTAT_H
 
 #include "RollingAverage.h"
 #include "mozzi_fixmath.h"

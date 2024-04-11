@@ -1,5 +1,16 @@
-namespace MozziPrivate {
+/*
+ * MozziGuts_impl_STM32duino_analog.hpp
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
 // NOTE: The contents of this file are copied mostly verbatim from Arduino_Core_STM32, (c) STMicroelectronics, BSD 3-clause license.
+*/
+
+namespace MozziPrivate {
 static PinName g_current_pin = NC;
 
 #ifndef ADC_SAMPLINGTIME

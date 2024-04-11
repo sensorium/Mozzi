@@ -24,13 +24,15 @@
        LDR from analog pin to +5V (3.3V on Teensy 3.1)
        5.1k resistor from analog pin to ground
 
-  Mozzi documentation/API
-  https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-  Mozzi help/discussion/announcements:
-  https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-  Tim Barrass 2013, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #include <Mozzi.h>
@@ -68,7 +70,7 @@ void setup(){
 
 void updateControl(){
   // read the knob
-  int knob_value = mozziAnalogRead(KNOB_PIN); // value is 0-1023
+  int knob_value = mozziAnalogRead<10>(KNOB_PIN); // value is 0-1023
 
   // map the knob to carrier frequency
   int carrier_freq = kMapCarrierFreq(knob_value);
@@ -81,7 +83,7 @@ void updateControl(){
   aModulator.setFreq(mod_freq);
 
   // read the light dependent resistor on the Analog input pin
-  int light_level= mozziAnalogRead(LDR_PIN); // value is 0-1023
+  int light_level= mozziAnalogRead<10>(LDR_PIN); // value is 0-1023
 
   // print the value to the Serial monitor for debugging
   Serial.print("light_level = ");

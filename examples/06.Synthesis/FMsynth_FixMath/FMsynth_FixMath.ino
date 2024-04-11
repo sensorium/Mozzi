@@ -4,49 +4,24 @@
     Demonstrates Oscil::phMod() for phase modulation,
     Smooth() for smoothing control signals,
     and FixMath fixed point number types for fractional frequencies.
+    This is the same technique than the FMsynth example but
+    using FixMath instead of mozzi_fixmath.
 
-    This sketch using HIFI mode is not for Teensy 3.1.
+    Note that it is slightly less optimized (but runs fine on an
+    Uno) in order to make the underlying algorithm clearer.
+    An optimized version, using FixMath can be found in the 
+    example FMsynth_32k_HIFI.
 
-    This sketch uses MOZZI_OUTPUT_2PIN_PWM (aka HIFI) output mode, which
-    is not available on all boards (among others, it works on the
-    classic Arduino boards, but not Teensy 3.x and friends).
+		Mozzi documentation/API
+		https://sensorium.github.io/Mozzi/doc/html/index.html
 
-    The MOZZI_AUDIO_RATE (sample rate) is additionally configured at 32768 Hz,
-    which is the default on most platforms, but twice the standard rate on
-    AVR-CPUs. Try chaging it back to hear the difference.
+		Mozzi help/discussion/announcements:
+    https://groups.google.com/forum/#!forum/mozzi-users
 
-    Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
-    Check the Mozzi core module documentation for others and more detail
-
-                     3.9k
-     pin 9  ---WWWW-----|-----output
-                    499k           |
-     pin 10 ---WWWW---- |
-                                       |
-                             4.7n  ==
-                                       |
-                                   ground
-
-    Resistors are ±0.5%  Measure and choose the most precise
-    from a batch of whatever you can get.  Use two 1M resistors
-    in parallel if you can't find 499k.
-    Alternatively using 39 ohm, 4.99k and 470nF components will
-    work directly with headphones.
-
-   Mozzi documentation/API
-   https://sensorium.github.io/Mozzi/doc/html/index.html
-
-   Mozzi help/discussion/announcements:
-   https://groups.google.com/forum/#!forum/mozzi-users
-
-   Copyright 2012-2024 Tim Barrass and the Mozzi Team
-
-   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+    Tim Barrass 2012, Thomas Combriat and the Mozzi team 2023, CC by-nc-sa.
 */
 
 #include <MozziConfigValues.h>
-#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_2PIN_PWM
-#define MOZZI_AUDIO_RATE 32768
 #define MOZZI_CONTROL_RATE 256  // Hz, powers of 2 are most reliable
 
 #include <Mozzi.h>
@@ -64,7 +39,7 @@ Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aModulator(COS2048_DATA);
 Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kModIndex(COS2048_DATA);
 
 UFix<0, 16> mod_index;
-UFix<8, 16> deviation;  // 8 so that we do not exceed 32bits in updateAudio
+UFix<16, 16> deviation;
 
 UFix<16, 16> carrier_freq, mod_freq;
 const UFix<0,16> modulation_amp = 0.001; // how much the modulation index will vary around its mean
@@ -92,9 +67,8 @@ void setup() {
 
 void setFreqs(UFix<7, 8> midi_note) {
   carrier_freq = mtof(midi_note);
-  mod_freq = UFix<14,16>(carrier_freq) * mod_to_carrier_ratio;
-  deviation = ((UFix<16,0>(mod_freq)) * mod_index).sR<8>();  // the sR here cheaply divides the deviation by 256.
-
+  mod_freq = carrier_freq * mod_to_carrier_ratio;
+  deviation = mod_freq * mod_index;
   aCarrier.setFreq(carrier_freq);
   aModulator.setFreq(mod_freq);
 }
@@ -115,11 +89,11 @@ void updateControl() {
     if(note0<note_lower_limit) note_change_step = 3;
     kNoteChangeDelay.start();
   }
-  mod_index = (toSFraction(kModIndex.next()) + mean_modulation_unscaled).sR<2>(); // the sR is to scale back in pure fractional range
+  mod_index = (toSFraction(kModIndex.next()) + mean_modulation_unscaled) * modulation_amp; // toSFraction(kModIndex.next() is in [-1,1[, 
+                                                                                          // we bias it to [1, 3[ and then scale it with modulation_amp to [0.001, 0.003[
 
   smoothed_note = kSmoothNote.next(target_note);
   setFreqs(smoothed_note);
-
 }
 
 

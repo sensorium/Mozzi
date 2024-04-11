@@ -6,12 +6,12 @@
     updateControl(), and the outputs of 12 audio
     oscillators are summed in updateAudio().
 
-    Demonstrates the use of fixed-point Q16n16
+    Demonstrates the use of FixMath fixed point
     format numbers, mtof() for converting midi note
     values to frequency, and xorshift96() for random numbers.
 
     This sketch is pushing the limits of computing power on the
-    8-biit AVR boards. At the time of this writing, you will have
+    8-bit AVR boards. At the time of this writing, you will have
     to manually alter your platform.txt file to use optimization
     for speed rather than size on Arduino Uno and similar.
     (Alternatively, remove one of the oscillators)
@@ -20,13 +20,15 @@
     DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.io/Mozzi/
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012, CC by-nc-sa.
+   Copyright 2012-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #include <Mozzi.h>
@@ -34,7 +36,7 @@
 #include <tables/cos8192_int8.h>
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
-#include <mozzi_fixmath.h> // for Q16n16 fixed-point fractional number type
+#include <FixMath.h>
 
 // harmonics
 Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos1(COS8192_DATA);
@@ -55,13 +57,19 @@ Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos6b(COS8192_DATA);
 //Oscil<COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos7b(COS8192_DATA);
 
 // base pitch frequencies in Q16n16 fixed int format (for speed later)
-Q16n16 f1,f2,f3,f4,f5,f6;//,f7;
+UFix<12,15> f1,f2,f3,f4,f5,f6;//,f7;
 
 
-Q16n16 variation() {
+/*Q16n16 variation() {
   // 32 random bits & with 524287 (b111 1111 1111 1111 1111)
   // gives between 0-8 in Q16n16 format
   return  (Q16n16) (xorshift96() & 524287UL);
+}*/
+
+UFix<3,16> variation()  // changing the return type here enables to easily
+                        // increase or decrease the variation
+{
+  return  UFix<3,16>::fromRaw(xorshift96() & 524287UL);
 }
 
 
@@ -69,31 +77,31 @@ void setup(){
   startMozzi();
 
   // select base frequencies using mtof (midi to freq) and fixed-point numbers
-  f1 = Q16n16_mtof(Q16n0_to_Q16n16(48));
-  f2 = Q16n16_mtof(Q16n0_to_Q16n16(74));
-  f3 = Q16n16_mtof(Q16n0_to_Q16n16(64));
-  f4 = Q16n16_mtof(Q16n0_to_Q16n16(77));
-  f5 = Q16n16_mtof(Q16n0_to_Q16n16(67));
-  f6 = Q16n16_mtof(Q16n0_to_Q16n16(57));
-  // f7 = Q16n16_mtof(Q16n0_to_Q16n16(60));
+  f1 = mtof(UFix<7,0>(48));
+  f2 = mtof(UFix<7,0>(74));
+  f3 = mtof(UFix<7,0>(64));
+  f4 = mtof(UFix<7,0>(77));
+  f5 = mtof(UFix<7,0>(67));
+  f6 = mtof(UFix<7,0>(57));
+  // f7 = mtof(UFix<7,0>(60));
 
   // set Oscils with chosen frequencies
-  aCos1.setFreq_Q16n16(f1);
-  aCos2.setFreq_Q16n16(f2);
-  aCos3.setFreq_Q16n16(f3);
-  aCos4.setFreq_Q16n16(f4);
-  aCos5.setFreq_Q16n16(f5);
-  aCos6.setFreq_Q16n16(f6);
-  // aCos7.setFreq_Q16n16(f7);
+  aCos1.setFreq(f1);
+  aCos2.setFreq(f2);
+  aCos3.setFreq(f3);
+  aCos4.setFreq(f4);
+  aCos5.setFreq(f5);
+  aCos6.setFreq(f6);
+  // aCos7.setFreq(f7);
 
   // set frequencies of duplicate oscillators
-  aCos1b.setFreq_Q16n16(f1+variation());
-  aCos2b.setFreq_Q16n16(f2+variation());
-  aCos3b.setFreq_Q16n16(f3+variation());
-  aCos4b.setFreq_Q16n16(f4+variation());
-  aCos5b.setFreq_Q16n16(f5+variation());
-  aCos6b.setFreq_Q16n16(f6+variation());
-  //aCos7b.setFreq_Q16n16(f7+variation());
+  aCos1b.setFreq(f1+variation());
+  aCos2b.setFreq(f2+variation());
+  aCos3b.setFreq(f3+variation());
+  aCos4b.setFreq(f4+variation());
+  aCos5b.setFreq(f5+variation());
+  aCos6b.setFreq(f6+variation());
+  //aCos7b.setFreq(f7+variation());
 }
 
 
@@ -110,31 +118,31 @@ void updateControl(){
   switch (lowByte(xorshift96()) & 7){ // 7 is 0111
 
     case 0:
-      aCos1b.setFreq_Q16n16(f1+variation());
+      aCos1b.setFreq(f1+variation());
     break;
 
     case 1:
-       aCos2b.setFreq_Q16n16(f2+variation());
+       aCos2b.setFreq(f2+variation());
     break;
 
     case 2:
-       aCos3b.setFreq_Q16n16(f3+variation());
+       aCos3b.setFreq(f3+variation());
     break;
 
     case 3:
-       aCos4b.setFreq_Q16n16(f4+variation());
+       aCos4b.setFreq(f4+variation());
     break;
 
     case 4:
-       aCos5b.setFreq_Q16n16(f5+variation());
+       aCos5b.setFreq(f5+variation());
     break;
 
     case 5:
-       aCos6b.setFreq_Q16n16(f6+variation());
+       aCos6b.setFreq(f6+variation());
     break;
     /*
     case 6:
-       aCos7b.setFreq_Q16n16(f7+variation());
+       aCos7b.setFreq(f7+variation());
     break;
     */
   }
@@ -142,8 +150,13 @@ void updateControl(){
 
 
 AudioOutput updateAudio(){
+  /*
+The following block is the "classical" way of outputting the sound, from a standard C/C++ type. 
+You need to know how many bits you are dealing with and can use a reduced number to bring in some
+distorsion with .clip() if you want.
+  */
 
-  int asig =
+ /* int asig =
     aCos1.next() + aCos1b.next() +
     aCos2.next() + aCos2b.next() +
     aCos3.next() + aCos3b.next() +
@@ -151,6 +164,26 @@ AudioOutput updateAudio(){
     aCos5.next() + aCos5b.next() +
     aCos6.next() + aCos6b.next();// +
     // aCos7.next() + aCos7b.next();
+    return MonoOutput::fromAlmostNBit(12, asig);
+*/
 
-  return MonoOutput::fromAlmostNBit(12, asig);
+
+/*
+  This is letting Mozzi compute the number of bits for you.
+  The syntax is a bit more cumbersome but FixMath will be
+  clever enough to figure out the exact number of bits needed
+  to create asig without any overflow, but no more.
+  This number of bits will be used by Mozzi for right/left shifting
+  the number to match the capability of the system.
+*/
+  auto asig = 
+  toSFraction(aCos1.next()) + toSFraction(aCos1b.next()) +
+  toSFraction(aCos2.next()) + toSFraction(aCos2b.next()) +
+  toSFraction(aCos3.next()) + toSFraction(aCos3b.next()) +
+  toSFraction(aCos4.next()) + toSFraction(aCos4b.next()) +
+  toSFraction(aCos5.next()) + toSFraction(aCos5b.next()) +
+  toSFraction(aCos6.next()) + toSFraction(aCos6b.next()); /* +
+toSFraction(aCos7.next()) + toSFraction(aCos7b.next()) +*/
+  return MonoOutput::fromSFix(asig);
+ 
 }

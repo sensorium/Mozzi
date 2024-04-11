@@ -20,13 +20,15 @@
     Thermistor from analog pin to +5V (3.3V on Teensy 3.1)
     5.1k resistor from analog pin to ground
 
-  Mozzi documentation/API
-  https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-  Mozzi help/discussion/announcements:
-  https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-  Tim Barrass 2013, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  */
 
 #include <Mozzi.h>
@@ -69,7 +71,7 @@ void updateControl(){
   static int counter, old_oversampled;
 
   // read the variable resistor
-  int sensor_value = mozziAnalogRead(INPUT_PIN); // value is 0-1023
+  int sensor_value = mozziAnalogRead<10>(INPUT_PIN); // value is 0-1023
 
   // get the next oversampled sensor value
   int oversampled = overSampler.next(sensor_value);

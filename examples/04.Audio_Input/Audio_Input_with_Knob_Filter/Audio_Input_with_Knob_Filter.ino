@@ -17,12 +17,15 @@
      Center pin of the potentiometer goes to the analog pin.
      Side pins of the potentiometer go to +5V and ground
 
-  Mozzi documentation/API
-  https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-  Mozzi help/discussion/announcements:
-  https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #include <MozziConfigValues.h>
@@ -44,8 +47,7 @@ void setup(){
 
 
 void updateControl(){
-  int knob = mozziAnalogRead(KNOB_PIN);
-  byte cutoff_freq = knob>>2; // range 0-255
+  byte cutoff_freq = mozziAnalogRead<8>(KNOB_PIN); // range 0-255
   lpf.setCutoffFreq(cutoff_freq);
 }
 

@@ -29,14 +29,15 @@
     For more details on the R/2R DAC see:
     https://hackaday.com/2015/11/05/logic-noise-digital-to-analog-with-an-r-2r-dac/
 
-    Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012, CC by-nc-sa.
-    T. Combriat 2020, CC by-nc-sa.
+   Copyright 2020-2024 T. Combriat and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #include "MozziConfigValues.h"  // for named option values

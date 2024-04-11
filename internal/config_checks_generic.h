@@ -1,3 +1,14 @@
+/*
+ * config_checks_generic.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+*/
+
 /** For Mozzi-internal use: Check configuration options for (some) invalid settings, and apply default for options that have not been set, so far.
  * */
 
@@ -117,6 +128,13 @@ MOZZI_CHECK_SUPPORTED(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE, MOZZI_ANALOG_RE
 #    warning Asynchronous analog reads not implemented on this platform
 #  endif
 #  undef MOZZI__ANALOG_READ_NOT_CONFIGURED
+#endif
+
+#if defined(MOZZI_ANALOG_READ_RESOLUTION)
+#  if (MOZZI_ANALOG_READ_RESOLUTION < 1) || (MOZZI_ANALOG_READ_RESOLUTION > 16)
+//   NOTE: We could certainly allow more than 16 bits, but then the data type would need to be adjusted/adjustable, accrodingly.
+#    error MOZZI_ANALOG_READ_RESOLUTION must be between 1 and 16 bits
+#  endif
 #endif
 
 /// Step 4: Init Read-only defines that depend on other values

@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version v1.1.0</span>
+   &#160;<span id="projectnumber">version v2.0</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -111,7 +111,21 @@ $(document).ready(function(){initNavTree('class_smooth.html','');});
  <a href="class_smooth.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_smooth_8h_source.html">Smooth.h</a>&gt;</code></p>
-<table class="memberdecls">
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class T&gt;<br />
+class Smooth&lt; T &gt;</h3>
+
+<p>A simple infinite impulse response low pass filter for smoothing control or audio signals. </p>
+<p>This algorithm comes from <a href="http://en.wikipedia.org/wiki/Low-pass_filter:">http://en.wikipedia.org/wiki/Low-pass_filter:</a> y[i] := y[i-1] + α * (x[i] - y[i-1]), translated as out = last_out + a * (in - last_out). It's not calibrated to any real-world update rate, so if you use it at MOZZI_CONTROL_RATE and you change MOZZI_CONTROL_RATE, you'll need to adjust the smoothness value to suit. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>the type of numbers being smoothed. Watch out for numbers overflowing the internal calculations. Some experimentation is recommended. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Timing: ~5us for 16 bit types, ~1us for 8 bit types. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_smooth_8h_source.html#l00035">35</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac6626aae94eb7a22024e2054c1bbbb26"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smooth.html#ac6626aae94eb7a22024e2054c1bbbb26">Smooth</a> (float smoothness)</td></tr>
@@ -130,21 +144,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aac44bbf7a9bc6b9bae80eecc1be6e188"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets how much smoothing the filter will apply to its input.  <a href="#aac44bbf7a9bc6b9bae80eecc1be6e188">More...</a><br /></td></tr>
 <tr class="separator:aac44bbf7a9bc6b9bae80eecc1be6e188"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class T&gt;<br />
-class Smooth&lt; T &gt;</h3>
-
-<p>A simple infinite impulse response low pass filter for smoothing control or audio signals. </p>
-<p>This algorithm comes from <a href="http://en.wikipedia.org/wiki/Low-pass_filter:">http://en.wikipedia.org/wiki/Low-pass_filter:</a> y[i] := y[i-1] + α * (x[i] - y[i-1]), translated as out = last_out + a * (in - last_out). It's not calibrated to any real-world update rate, so if you use it at CONTROL_RATE and you change CONTROL_RATE, you'll need to adjust the smoothness value to suit. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>the type of numbers being smoothed. Watch out for numbers overflowing the internal calculations. Some experimentation is recommended. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>Timing: ~5us for 16 bit types, ~1us for 8 bit types. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_smooth_8h_source.html#l00035">35</a> of file <a class="el" href="_smooth_8h_source.html">Smooth.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac6626aae94eb7a22024e2054c1bbbb26"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac6626aae94eb7a22024e2054c1bbbb26">&#9670;&nbsp;</a></span>Smooth() <span class="overload">[1/2]</span></h2>
 
@@ -338,7 +338,7 @@ template&lt;class T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_smooth.html">Smooth</a></li>
-    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
+    <li class="footer">Generated on Thu Apr 11 2024 13:20:17 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

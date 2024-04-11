@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version v1.1.0</span>
+   &#160;<span id="projectnumber">version v2.0</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -124,7 +124,21 @@ Wavepacket synthesis, with two overlapping streams of wave packets.
 <area href="class_wave_packet_sample.html" title="A WavePacket which allows a custom table to be set as the audio source for the wavepackets (or grains..." alt="WavePacketSample&lt; ALGORITHM &gt;" shape="rect" coords="0,56,220,80"/>
 </map>
  </div></div>
-<table class="memberdecls">
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;int8_t ALGORITHM&gt;<br />
+class WavePacket&lt; ALGORITHM &gt;</h3>
+
+<p><br />
+Wavepacket synthesis, with two overlapping streams of wave packets. </p>
+<p>Draws on Miller Puckette's Pure Data example, F14.wave.packet.pd. Each packet is an enveloped grain of a sin (or cos) wave. The frequency of the wave, the width of the envelopes and the rate of release of envelopes are the parameters which can be changed. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ALGORITHM</td><td>options are SINGLE or DOUBLE, for a single non-overlapping stream of packets or a double, overlapping stream. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_wave_packet_8h_source.html#l00036">36</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a09afa3b26d61c97e24ccbae9cba2fd57"><td class="memItemLeft" align="right" valign="top"><a id="a09afa3b26d61c97e24ccbae9cba2fd57"></a>
@@ -147,21 +161,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab4e35082b60d3ccc29c86d09078329bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the next synthesised sample.  <a href="#ab4e35082b60d3ccc29c86d09078329bd">More...</a><br /></td></tr>
 <tr class="separator:ab4e35082b60d3ccc29c86d09078329bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;int8_t ALGORITHM&gt;<br />
-class WavePacket&lt; ALGORITHM &gt;</h3>
-
-<p><br />
-Wavepacket synthesis, with two overlapping streams of wave packets. </p>
-<p>Draws on Miller Puckette's Pure Data example, F14.wave.packet.pd. Each packet is an enveloped grain of a sin (or cos) wave. The frequency of the wave, the width of the envelopes and the rate of release of envelopes are the parameters which can be changed. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">ALGORITHM</td><td>options are SINGLE or DOUBLE, for a single non-overlapping stream of packets or a double, overlapping stream. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="_wave_packet_8h_source.html#l00036">36</a> of file <a class="el" href="_wave_packet_8h_source.html">WavePacket.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="ab4e35082b60d3ccc29c86d09078329bd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab4e35082b60d3ccc29c86d09078329bd">&#9670;&nbsp;</a></span>next()</h2>
 
@@ -372,7 +372,7 @@ template&lt;int8_t ALGORITHM&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_wave_packet.html">WavePacket</a></li>
-    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
+    <li class="footer">Generated on Thu Apr 11 2024 13:20:17 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version v1.1.0</span>
+   &#160;<span id="projectnumber">version v2.0</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -123,7 +123,13 @@ $(document).ready(function(){initNavTree('class_metronome.html','');});
 <area href="class_event_delay.html" title="A non-blocking replacement for Arduino&#39;s delay() function. " alt="EventDelay" shape="rect" coords="0,0,77,24"/>
 </map>
  </div></div>
-<table class="memberdecls">
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A metronome class which is like an <a class="el" href="class_event_delay.html" title="A non-blocking replacement for Arduino&#39;s delay() function. ">EventDelay</a> which retriggers itself when the delay time is up, to produce a repeating beat. </p>
+<p><a class="el" href="class_metronome.html" title="A metronome class which is like an EventDelay which retriggers itself when the delay time is up...">Metronome</a> can be <a class="el" href="class_event_delay.html#a937c86f3b05ccb6138ff7927713820da" title="Set the delay time. ">set()</a> to a number of milliseconds, then after calling <a class="el" href="class_metronome.html#ab85d2f5bdc5cb00d5056b0c2c6eed987" title="Start the metronome. ">start()</a>, <a class="el" href="class_metronome.html#adc67bd96eac9f9b9260f8b070b7db75f" title="Call this in updateControl() or updateAudio() to check if it is time for a beat. ">ready()</a> will return true when the time is up. <br />
+Alternatively, start(milliseconds) will call <a class="el" href="class_event_delay.html#a937c86f3b05ccb6138ff7927713820da" title="Set the delay time. ">set()</a> and <a class="el" href="class_metronome.html#ab85d2f5bdc5cb00d5056b0c2c6eed987" title="Start the metronome. ">start()</a> together. This is called <a class="el" href="class_metronome.html" title="A metronome class which is like an EventDelay which retriggers itself when the delay time is up...">Metronome</a> to avoid conflict with the Arduino Metro library. </p>
+
+<p class="definition">Definition at line <a class="el" href="_metronome_8h_source.html#l00022">22</a> of file <a class="el" href="_metronome_8h_source.html">Metronome.h</a>.</p>
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a37e8b0aa5a9aa8fa0f33212360cc0928"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_metronome.html#a37e8b0aa5a9aa8fa0f33212360cc0928">Metronome</a> (unsigned int delay_milliseconds=0)</td></tr>
@@ -139,7 +145,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aab384673719ebd552dd72d474ed58556"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the beats per minute.  <a href="#aab384673719ebd552dd72d474ed58556">More...</a><br /></td></tr>
 <tr class="separator:aab384673719ebd552dd72d474ed58556"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc67bd96eac9f9b9260f8b070b7db75f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_metronome.html#adc67bd96eac9f9b9260f8b070b7db75f">ready</a> ()</td></tr>
-<tr class="memdesc:adc67bd96eac9f9b9260f8b070b7db75f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call this in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> or <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a> to check if it is time for a beat.  <a href="#adc67bd96eac9f9b9260f8b070b7db75f">More...</a><br /></td></tr>
+<tr class="memdesc:adc67bd96eac9f9b9260f8b070b7db75f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call this in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> or <a class="el" href="group__core.html#ga936b78c8ab7a4d7f7075b41e32780d3e" title="This is where you put your audio code. ">updateAudio()</a> to check if it is time for a beat.  <a href="#adc67bd96eac9f9b9260f8b070b7db75f">More...</a><br /></td></tr>
 <tr class="separator:adc67bd96eac9f9b9260f8b070b7db75f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d77db8aafda48abf3f2a91b9d898ad7"><td class="memItemLeft" align="right" valign="top"><a id="a6d77db8aafda48abf3f2a91b9d898ad7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>stop</b> ()</td></tr>
@@ -157,13 +163,7 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>deadline</b>
 unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>ticks</b></td></tr>
 <tr class="separator:a6e8230d6e291a8c23ebdb1704caabb5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A metronome class which is like an <a class="el" href="class_event_delay.html" title="A non-blocking replacement for Arduino&#39;s delay() function. ">EventDelay</a> which retriggers itself when the delay time is up, to produce a repeating beat. </p>
-<p><a class="el" href="class_metronome.html" title="A metronome class which is like an EventDelay which retriggers itself when the delay time is up...">Metronome</a> can be <a class="el" href="class_event_delay.html#a937c86f3b05ccb6138ff7927713820da" title="Set the delay time. ">set()</a> to a number of milliseconds, then after calling <a class="el" href="class_metronome.html#ab85d2f5bdc5cb00d5056b0c2c6eed987" title="Start the metronome. ">start()</a>, <a class="el" href="class_metronome.html#adc67bd96eac9f9b9260f8b070b7db75f" title="Call this in updateControl() or updateAudio() to check if it is time for a beat. ">ready()</a> will return true when the time is up. <br />
-Alternatively, start(milliseconds) will call <a class="el" href="class_event_delay.html#a937c86f3b05ccb6138ff7927713820da" title="Set the delay time. ">set()</a> and <a class="el" href="class_metronome.html#ab85d2f5bdc5cb00d5056b0c2c6eed987" title="Start the metronome. ">start()</a> together. This is called <a class="el" href="class_metronome.html" title="A metronome class which is like an EventDelay which retriggers itself when the delay time is up...">Metronome</a> to avoid conflict with the Arduino Metro library. </p>
-
-<p class="definition">Definition at line <a class="el" href="_metronome_8h_source.html#l00022">22</a> of file <a class="el" href="_metronome_8h_source.html">Metronome.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a37e8b0aa5a9aa8fa0f33212360cc0928"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a37e8b0aa5a9aa8fa0f33212360cc0928">&#9670;&nbsp;</a></span>Metronome()</h2>
 
@@ -224,7 +224,7 @@ Alternatively, start(milliseconds) will call <a class="el" href="class_event_del
 </table>
 </div><div class="memdoc">
 
-<p>Call this in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> or <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a> to check if it is time for a beat. </p>
+<p>Call this in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> or <a class="el" href="group__core.html#ga936b78c8ab7a4d7f7075b41e32780d3e" title="This is where you put your audio code. ">updateAudio()</a> to check if it is time for a beat. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if the time for one is up. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_metronome_8h_source.html#l00075">75</a> of file <a class="el" href="_metronome_8h_source.html">Metronome.h</a>.</p>
@@ -375,7 +375,7 @@ Alternatively, start(milliseconds) will call <a class="el" href="class_event_del
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_metronome.html">Metronome</a></li>
-    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
+    <li class="footer">Generated on Thu Apr 11 2024 13:20:17 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

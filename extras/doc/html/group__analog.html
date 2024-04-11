@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Mozzi: Analog</title>
+<title>Mozzi: Functions for taking (non-blocking) analog readings.</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version v1.1.0</span>
+   &#160;<span id="projectnumber">version v2.0</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -102,12 +102,15 @@ $(document).ready(function(){initNavTree('group__analog.html','');});
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Analog</div>  </div>
+<div class="title">Functions for taking (non-blocking) analog readings.</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Efficient analog input functions for sensors and audio.  
 <a href="#details">More...</a></p>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>Efficient analog input functions for sensors and audio. </p>
+<p>Helps produce glitch-free audio by allowing analog input functions which normally block processing to be performed in the background. </p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -132,18 +135,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <tr class="memdesc:gae9536bf35f6ea46a6938d5eb52b947c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the analog input of a chosen channel, without blocking other operations from running.  <a href="#gae9536bf35f6ea46a6938d5eb52b947c3">More...</a><br /></td></tr>
 <tr class="separator:gae9536bf35f6ea46a6938d5eb52b947c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3f15eb8d6694020d170ebcbedb645de7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__analog.html#ga3f15eb8d6694020d170ebcbedb645de7">getAudioInput</a> ()</td></tr>
-<tr class="memdesc:ga3f15eb8d6694020d170ebcbedb645de7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> file.  <a href="#ga3f15eb8d6694020d170ebcbedb645de7">More...</a><br /></td></tr>
+<tr class="memdesc:ga3f15eb8d6694020d170ebcbedb645de7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This returns audio input from the input buffer, if @ref MOZZI_AUDIO_INPUT is enabled in the config (see also the related option MOZZI_AUDIO_INPUT_PIN).  <a href="#ga3f15eb8d6694020d170ebcbedb645de7">More...</a><br /></td></tr>
 <tr class="separator:ga3f15eb8d6694020d170ebcbedb645de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Efficient analog input functions for sensors and audio. </p>
-<p>Helps produce glitch-free audio by allowing analog input functions which normally block processing to be performed in the background. </p>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga5042e7c576dd0307be38eb70efdb69fe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga5042e7c576dd0307be38eb70efdb69fe">&#9670;&nbsp;</a></span>adcDisconnectAllDigitalIns()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void adcDisconnectAllDigitalIns </td>
@@ -152,12 +155,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Prepare all analog input channels by turning off their digital input buffers. </p>
 <p>This helps to reduce noise, increase analog reading speed, and save power. </p>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00039">39</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__analog_8h_source.html#l00105">105</a> of file <a class="el" href="mozzi__analog_8h_source.html">mozzi_analog.h</a>.</p>
 
 </div>
 </div>
@@ -166,6 +174,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void disconnectDigitalIn </td>
@@ -175,6 +186,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Prepare an analog input channel by turning off its digital input buffer. </p>
@@ -184,14 +200,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <p>And from the ATmega328p datasheet, p266:</p>
 <p>When an analog signal is applied to the ADC pin and the digital input from this pin is not needed, this bit should be written logic one to reduce power consumption in the digital input buffer. Note that ADC named_pins ADC7 and ADC6 do not have digital input buffers, and therefore do not require Digital Input Disable bits. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">channel_num</td><td>the analog input channel you wish to use.</td></tr>
+    <tr><td class="paramname">channel_num</td><td>the analog input channel you wish to use. </td></tr>
   </table>
   </dd>
 </dl>
-<p>Prepare an analog input channel by turning off its digital input buffer.</p>
-<p>TODO: The (dis|re)connect functions below remain for now, as I'm not sure what to do about them. They were only ever implemented for AVR. </p>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00025">25</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__analog_8h_source.html#l00080">80</a> of file <a class="el" href="mozzi__analog_8h_source.html">mozzi_analog.h</a>.</p>
 
 </div>
 </div>
@@ -210,10 +224,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
       </table>
 </div><div class="memdoc">
 
-<p>This returns audio input from the input buffer, if #define USE_AUDIO_INPUT true is in the <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> file. </p>
-<p>The pin used for audio input is set in <a class="el" href="mozzi__config_8h_source.html">Mozzi/mozzi_config.h</a> with #define AUDIO_INPUT_PIN 0 (or other analog input pin). The audio signal needs to be in the range 0 to 5 volts. Circuits and discussions about biasing a signal in the middle of this range can be found at <a href="http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal">http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal</a> and <a href="http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/">http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/</a> . A circuit and instructions for amplifying and biasing a microphone signal can be found at <a href="http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS">http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS</a> </p><dl class="section return"><dt>Returns</dt><dd>audio data from the input buffer </dd></dl>
+<p>This returns audio input from the input buffer, if @ref MOZZI_AUDIO_INPUT is enabled in the config (see also the related option MOZZI_AUDIO_INPUT_PIN). </p>
+<p>The audio signal needs to be in the range 0 to VCC volts (i.e. 5 volts on Arduino Uno R3). Circuits and discussions about biasing a signal in the middle of this range can be found at <a href="http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal">http://electronics.stackexchange.com/questions/14404/dc-biasing-audio-signal</a> and <a href="http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/">http://interface.khm.de/index.php/lab/experiments/arduino-realtime-audio-processing/</a> . A circuit and instructions for amplifying and biasing a microphone signal can be found at <a href="http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS">http://www.instructables.com/id/Arduino-Audio-Input/?ALLSTEPS</a> </p><dl class="section return"><dt>Returns</dt><dd>audio data from the input buffer </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00126">126</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8hpp_source.html#l00294">294</a> of file <a class="el" href="_mozzi_guts_8hpp_source.html">MozziGuts.hpp</a>.</p>
 
 </div>
 </div>
@@ -242,7 +256,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the digitised value of the voltage on the chosen channel, in the range 0-1023.  that non-AVR hardware may return a different range, e.g. 0-4095 on STM32 boards. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8cpp_source.html#l00109">109</a> of file <a class="el" href="_mozzi_guts_8cpp_source.html">MozziGuts.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8hpp_source.html#l00193">193</a> of file <a class="el" href="_mozzi_guts_8hpp_source.html">MozziGuts.hpp</a>.</p>
 
 </div>
 </div>
@@ -251,6 +265,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void reconnectDigitalIn </td>
@@ -260,6 +277,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Reconnect the digital input buffer for an analog input channel which has been set for analog input with <a class="el" href="group__analog.html#ga532fe99fe78e34d4e6ae0ae2c7528353" title="Prepare an analog input channel by turning off its digital input buffer. ">disconnectDigitalIn()</a>. </p>
@@ -270,7 +292,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__analog_8cpp_source.html#l00032">32</a> of file <a class="el" href="mozzi__analog_8cpp_source.html">mozzi_analog.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__analog_8h_source.html#l00093">93</a> of file <a class="el" href="mozzi__analog_8h_source.html">mozzi_analog.h</a>.</p>
 
 </div>
 </div>
@@ -284,7 +306,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
           <td class="memname">void setupFastAnalogRead </td>
           <td>(</td>
           <td class="paramtype">int8_t&#160;</td>
-          <td class="paramname"><em>speed</em></td><td>)</td>
+          <td class="paramname"><em>speed</em> = <code>FAST_ADC</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -292,17 +314,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 
 <p><br />
  This is automatically called in startMozzi. </p>
-<p>It makes <a class="el" href="group__analog.html#gae9536bf35f6ea46a6938d5eb52b947c3" title="Reads the analog input of a chosen channel, without blocking other operations from running...">mozziAnalogRead()</a> happen faster than the standard Arduino analogRead(), changing the duration from about 105 in unmodified Arduino to about 16 microseconds for a dependable read with the default speed parameter FAST_ADC. If you want to set on of the faster modes (see params) you can call this after <a class="el" href="group__core.html#ga75aa9f4a501f4b167343b8caac8c6837" title="Sets up the timers for audio and control rate processes, storing the timer registers so they can be r...">startMozzi()</a>. See: <a href="http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11,">http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11,</a> and <a href="http://www.marulaberry.co.za/index.php/tutorials/code/arduino-adc/">http://www.marulaberry.co.za/index.php/tutorials/code/arduino-adc/</a> </p><dl class="params"><dt>Parameters</dt><dd>
+<p>It makes <a class="el" href="group__analog.html#gae9536bf35f6ea46a6938d5eb52b947c3" title="Reads the analog input of a chosen channel, without blocking other operations from running...">mozziAnalogRead()</a> happen faster than the standard Arduino analogRead(), changing the duration from about 105 in unmodified Arduino to about 16 microseconds for a dependable read with the default speed parameter FAST_ADC. If you want to set on of the faster modes (see params) you can call this after startMozzi(). See: <a href="http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11,">http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11,</a> and <a href="http://www.marulaberry.co.za/index.php/tutorials/code/arduino-adc/">http://www.marulaberry.co.za/index.php/tutorials/code/arduino-adc/</a> </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">speed</td><td>FAST_ADC, FASTER_ADC or FASTEST_ADC. If no parameter is supplied, the default is FAST_ADC, which sets the analog conversion clock predivide rate to 16, giving 1Mhz on a 16MHz board, the fastest rate for which behaviour is defined (~16us per sample). However, divisors of 8 and 4 also show usable results in the graphs in this paper: <a href="http://dam.mellis.org/Mellis%20-%20Sensor%20Library%20for%20Arduino%20-%20Paper.pdf,">http://dam.mellis.org/Mellis%20-%20Sensor%20Library%20for%20Arduino%20-%20Paper.pdf,</a> so you can also try FASTER_ADC or FASTEST_ADC for divide rates of 8 or 4, giving times of about 8us or 4us per sample. Beware, reliable results will depend on the sort of input signal you have. Only use FASTER_ADC or FASTEST_ADC if you know what you're doing.</td></tr>
+    <tr><td class="paramname">speed</td><td>FAST_ADC, FASTER_ADC or FASTEST_ADC. If no parameter is supplied, the default is FAST_ADC, which sets the analog conversion clock predivide rate to 16, giving 1Mhz on a 16MHz board, the fastest rate for which behaviour is defined (~16us per sample). However, divisors of 8 and 4 also show usable results in the graphs in this paper: <a href="http://dam.mellis.org/Mellis%20-%20Sensor%20Library%20for%20Arduino%20-%20Paper.pdf,">http://dam.mellis.org/Mellis%20-%20Sensor%20Library%20for%20Arduino%20-%20Paper.pdf,</a> so you can also try FASTER_ADC or FASTEST_ADC for divide rates of 8 or 4, giving times of about 8us or 4us per sample. Beware, reliable results will depend on the sort of input signal you have. Only use FASTER_ADC or FASTEST_ADC if you know what you're doing. </td></tr>
   </table>
   </dd>
 </dl>
-<p><br />
- This is automatically called in startMozzi.</p>
-<p>specifying the number of CPU cycles that the ADC waits for the result to stabilize. This particular function is not super important, so may be ok to leave empty, at least, if the ADC is fast enough by default. </p>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts__impl___a_v_r_8hpp_source.html#l00082">82</a> of file <a class="el" href="_mozzi_guts__impl___a_v_r_8hpp_source.html">MozziGuts_impl_AVR.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts__impl___s_t_m32duino_8hpp_source.html#l00081">81</a> of file <a class="el" href="_mozzi_guts__impl___s_t_m32duino_8hpp_source.html">MozziGuts_impl_STM32duino.hpp</a>.</p>
 
 </div>
 </div>
@@ -311,7 +330,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
+    <li class="footer">Generated on Thu Apr 11 2024 13:20:17 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

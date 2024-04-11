@@ -25,26 +25,17 @@ var NAVTREE =
 [
   [ "Mozzi", "index.html", [
     [ "Modules", "modules.html", "modules" ],
-    [ "Classes", "annotated.html", [
-      [ "Class List", "annotated.html", "annotated_dup" ],
-      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
-      [ "Class Members", "functions.html", [
-        [ "All", "functions.html", "functions_dup" ],
-        [ "Functions", "functions_func.html", "functions_func" ]
-      ] ]
-    ] ],
-    [ "Files", "files.html", [
-      [ "File List", "files.html", "files_dup" ]
-    ] ],
-    [ "Examples", "examples.html", "examples" ]
+    [ "Namespace Members", "namespacemembers.html", [
+      [ "All", "namespacemembers.html", null ],
+      [ "Functions", "namespacemembers_func.html", null ]
+    ] ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"01_8_basics_2_vibrato_2_vibrato_8ino-example.html",
-"class_multi_resonant_filter.html#a477e6e40d56d5e8f65ec3f6a5559581a",
-"group__fixmath.html#ga17dd8cb80ef87b6573926e411618105a"
+"group__analog.html",
+"group__hardware.html#teensy3_output"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

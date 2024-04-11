@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version v1.1.0</span>
+   &#160;<span id="projectnumber">version v2.0</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -111,7 +111,21 @@ $(document).ready(function(){initNavTree('class_line.html','');});
  <a href="class_line.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_line_8h_source.html">Line.h</a>&gt;</code></p>
-<table class="memberdecls">
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class T&gt;<br />
+class Line&lt; T &gt;</h3>
+
+<p>For linear changes with a minimum of calculation at each step. </p>
+<p>For instance, you can use <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step. ">Line</a> to make an oscillator glide from one frequency to another, pre-calculating the required phase increments for each end and then letting your <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step. ">Line</a> change the phase increment with only a simple addition at each step. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>the type of numbers to use. For example, <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step. ">Line</a> &lt;int&gt; myline; makes a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step. ">Line</a> which uses ints. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Watch out for underflows in the internal calcualtion of <a class="el" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51" title="Constructor. ">Line()</a> if you're not using floats (but on the other hand try to avoid lots of floats, they're too slow!). If it seems like the <a class="el" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51" title="Constructor. ">Line()</a> is not working, there's a good chance you need to scale up the numbers you're using, so internal calculations don't get truncated away. Use Mozzi's fixed-point number types in <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>, which enable you to represent fractional numbers. Google "fixed point arithmetic" if this is new to you. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_line_8h_source.html#l00033">33</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa6a80df90da15782ca88889ef9c8dd51"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51">Line</a> ()</td></tr>
@@ -130,21 +144,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a24ad85c17562e97b6823a010a5ba04c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a new starting value, target value and the number of steps to take on the way, this sets the step size needed to get there.  <a href="#a24ad85c17562e97b6823a010a5ba04c6">More...</a><br /></td></tr>
 <tr class="separator:a24ad85c17562e97b6823a010a5ba04c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class T&gt;<br />
-class Line&lt; T &gt;</h3>
-
-<p>For linear changes with a minimum of calculation at each step. </p>
-<p>For instance, you can use <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step. ">Line</a> to make an oscillator glide from one frequency to another, pre-calculating the required phase increments for each end and then letting your <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step. ">Line</a> change the phase increment with only a simple addition at each step. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>the type of numbers to use. For example, <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step. ">Line</a> &lt;int&gt; myline; makes a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step. ">Line</a> which uses ints. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>Watch out for underflows in the internal calcualtion of <a class="el" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51" title="Constructor. ">Line()</a> if you're not using floats (but on the other hand try to avoid lots of floats, they're too slow!). If it seems like the <a class="el" href="class_line.html#aa6a80df90da15782ca88889ef9c8dd51" title="Constructor. ">Line()</a> is not working, there's a good chance you need to scale up the numbers you're using, so internal calculations don't get truncated away. Use Mozzi's fixed-point number types in <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>, which enable you to represent fractional numbers. Google "fixed point arithmetic" if this is new to you. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_line_8h_source.html#l00037">37</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa6a80df90da15782ca88889ef9c8dd51"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa6a80df90da15782ca88889ef9c8dd51">&#9670;&nbsp;</a></span>Line()</h2>
 
@@ -173,7 +173,7 @@ template&lt;class T&gt; </div>
 <p>Constructor. </p>
 <p>Use the template parameter to set the type of numbers you want to use. For example, <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step. ">Line</a> &lt;int&gt; myline; makes a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step. ">Line</a> which uses ints. </p>
 
-<p class="definition">Definition at line <a class="el" href="_line_8h_source.html#l00047">47</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_line_8h_source.html#l00043">43</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
 
 </div>
 </div>
@@ -206,7 +206,7 @@ template&lt;class T&gt; </div>
 <p>Increments one step along the line. </p>
 <dl class="section return"><dt>Returns</dt><dd>the next value. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_line_8h_source.html#l00058">58</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_line_8h_source.html#l00054">54</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
 
 </div>
 </div>
@@ -244,7 +244,7 @@ template&lt;class T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_line_8h_source.html#l00073">73</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_line_8h_source.html#l00069">69</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
 
 </div>
 </div>
@@ -293,7 +293,7 @@ template&lt;class T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_line_8h_source.html#l00085">85</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_line_8h_source.html#l00081">81</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
 
 </div>
 </div>
@@ -349,7 +349,7 @@ template&lt;class T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_line_8h_source.html#l00102">102</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_line_8h_source.html#l00098">98</a> of file <a class="el" href="_line_8h_source.html">Line.h</a>.</p>
 
 </div>
 </div>
@@ -359,7 +359,7 @@ template&lt;class T&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_line.html">Line</a></li>
-    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
+    <li class="footer">Generated on Thu Apr 11 2024 13:20:17 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

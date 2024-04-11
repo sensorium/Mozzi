@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version v1.1.0</span>
+   &#160;<span id="projectnumber">version v2.0</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -111,7 +111,24 @@ $(document).ready(function(){initNavTree('class_sample.html','');});
  <a href="class_sample.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_sample_8h_source.html">Sample.h</a>&gt;</code></p>
-<table class="memberdecls">
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, uint8_t INTERP = INTERP_NONE&gt;<br />
+class Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</h3>
+
+<p><a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable. ">Sample</a> is like <a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>, it plays a wavetable. </p>
+<p>However, <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable. ">Sample</a> can be set to play once through only, with variable start and end points, or can loop, also with variable start and end points. It defaults to playing once through the whole sound table, from start to finish. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">NUM_TABLE_CELLS</td><td>This is defined in the table ".h" file the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable. ">Sample</a> will be using. The sound table can be arbitrary length for <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable. ">Sample</a>. It's important that NUM_TABLE_CELLS is either a literal number (eg. "8192") or a defined macro, rather than a const or int, for the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable. ">Sample</a> to run fast enough. </td></tr>
+    <tr><td class="paramname">UPDATE_RATE</td><td>This will be MOZZI_AUDIO_RATE if the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable. ">Sample</a> is updated in <a class="el" href="group__core.html#ga936b78c8ab7a4d7f7075b41e32780d3e" title="This is where you put your audio code. ">updateAudio()</a>, or MOZZI_CONTROL_RATE if it's updated each time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> is called. It could also be a fraction of MOZZI_CONTROL_RATE if you are doing some kind of cyclic updating in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>, for example, to spread out the processor load. </td></tr>
+  </table>
+  </dd>
+</dl>
+<h1><a class="anchor" id="int8_t2mozzi"></a>
+int8_t2mozzi</h1>
+<p>Converting soundfiles for Mozzi. There is a python script called int8_t2mozzi.py in the Mozzi/python folder. The script converts raw sound data saved from a program like Audacity. Instructions are in the int8_t2mozzi.py file. </p>
+
+<p class="definition">Definition at line <a class="el" href="_sample_8h_source.html#l00048">48</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a0a22d5d06e5665853432fe1949e9d514"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample.html#a0a22d5d06e5665853432fe1949e9d514">Sample</a> (const int8_t *TABLE_NAME)</td></tr>
@@ -174,24 +191,7 @@ Returns the sample at the current phase position, or 0 if looping is off and the
 <tr class="memdesc:aaff03b2a14f8f0f79c13840948151a1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a specific phase increment.  <a href="#aaff03b2a14f8f0f79c13840948151a1d">More...</a><br /></td></tr>
 <tr class="separator:aaff03b2a14f8f0f79c13840948151a1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, uint8_t INTERP = INTERP_NONE&gt;<br />
-class Sample&lt; NUM_TABLE_CELLS, UPDATE_RATE, INTERP &gt;</h3>
-
-<p><a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable. ">Sample</a> is like <a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>, it plays a wavetable. </p>
-<p>However, <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable. ">Sample</a> can be set to play once through only, with variable start and end points, or can loop, also with variable start and end points. It defaults to playing once through the whole sound table, from start to finish. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">NUM_TABLE_CELLS</td><td>This is defined in the table ".h" file the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable. ">Sample</a> will be using. The sound table can be arbitrary length for <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable. ">Sample</a>. It's important that NUM_TABLE_CELLS is either a literal number (eg. "8192") or a defined macro, rather than a const or int, for the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable. ">Sample</a> to run fast enough. </td></tr>
-    <tr><td class="paramname">UPDATE_RATE</td><td>This will be AUDIO_RATE if the <a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable. ">Sample</a> is updated in <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a>, or CONTROL_RATE if it's updated each time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> is called. It could also be a fraction of CONTROL_RATE if you are doing some kind of cyclic updating in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>, for example, to spread out the processor load. </td></tr>
-  </table>
-  </dd>
-</dl>
-<h1><a class="anchor" id="int8_t2mozzi"></a>
-int8_t2mozzi</h1>
-<p>Converting soundfiles for Mozzi. There is a python script called int8_t2mozzi.py in the Mozzi/python folder. The script converts raw sound data saved from a program like Audacity. Instructions are in the int8_t2mozzi.py file. </p>
-
-<p class="definition">Definition at line <a class="el" href="_sample_8h_source.html#l00048">48</a> of file <a class="el" href="_sample_8h_source.html">Sample.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a0a22d5d06e5665853432fe1949e9d514"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0a22d5d06e5665853432fe1949e9d514">&#9670;&nbsp;</a></span>Sample() <span class="overload">[1/2]</span></h2>
 
@@ -716,7 +716,7 @@ template&lt;unsigned int NUM_TABLE_CELLS, unsigned int UPDATE_RATE, uint8_t INTE
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_sample.html">Sample</a></li>
-    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
+    <li class="footer">Generated on Thu Apr 11 2024 13:20:17 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

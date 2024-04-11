@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version v1.1.0</span>
+   &#160;<span id="projectnumber">version v2.0</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -123,7 +123,13 @@ $(document).ready(function(){initNavTree('class_event_delay.html','');});
 <area href="class_metronome.html" title="A metronome class which is like an EventDelay which retriggers itself when the delay time is up..." alt="Metronome" shape="rect" coords="0,56,77,80"/>
 </map>
  </div></div>
-<table class="memberdecls">
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A non-blocking replacement for Arduino's delay() function. </p>
+<p><a class="el" href="class_event_delay.html" title="A non-blocking replacement for Arduino&#39;s delay() function. ">EventDelay</a> can be <a class="el" href="class_event_delay.html#a937c86f3b05ccb6138ff7927713820da" title="Set the delay time. ">set()</a> to a number of milliseconds, then after calling <a class="el" href="class_event_delay.html#a97a07c9371040d6388b8369352b08d83" title="Start the delay. ">start()</a>, <a class="el" href="class_event_delay.html#a2267889678fb75df2f6bdcbd0be0ea8a" title="Call this in updateControl() or updateAudio() to check if the delay time is up. ">ready()</a> will return true when the time is up. <br />
+Alternatively, start(milliseconds) will call <a class="el" href="class_event_delay.html#a937c86f3b05ccb6138ff7927713820da" title="Set the delay time. ">set()</a> and <a class="el" href="class_event_delay.html#a97a07c9371040d6388b8369352b08d83" title="Start the delay. ">start()</a> together. </p>
+
+<p class="definition">Definition at line <a class="el" href="_event_delay_8h_source.html#l00020">20</a> of file <a class="el" href="_event_delay_8h_source.html">EventDelay.h</a>.</p>
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:acd7b63341732ac4c23bce04d81316017"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event_delay.html#acd7b63341732ac4c23bce04d81316017">EventDelay</a> (unsigned int delay_milliseconds=0)</td></tr>
@@ -139,7 +145,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a0943cb52a1ee36fda1156f8dd762a105"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the delay time and start the delay.  <a href="#a0943cb52a1ee36fda1156f8dd762a105">More...</a><br /></td></tr>
 <tr class="separator:a0943cb52a1ee36fda1156f8dd762a105"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2267889678fb75df2f6bdcbd0be0ea8a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event_delay.html#a2267889678fb75df2f6bdcbd0be0ea8a">ready</a> ()</td></tr>
-<tr class="memdesc:a2267889678fb75df2f6bdcbd0be0ea8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call this in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> or <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a> to check if the delay time is up.  <a href="#a2267889678fb75df2f6bdcbd0be0ea8a">More...</a><br /></td></tr>
+<tr class="memdesc:a2267889678fb75df2f6bdcbd0be0ea8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call this in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> or <a class="el" href="group__core.html#ga936b78c8ab7a4d7f7075b41e32780d3e" title="This is where you put your audio code. ">updateAudio()</a> to check if the delay time is up.  <a href="#a2267889678fb75df2f6bdcbd0be0ea8a">More...</a><br /></td></tr>
 <tr class="separator:a2267889678fb75df2f6bdcbd0be0ea8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -151,13 +157,7 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>deadline</b>
 unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>ticks</b></td></tr>
 <tr class="separator:a6e8230d6e291a8c23ebdb1704caabb5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A non-blocking replacement for Arduino's delay() function. </p>
-<p><a class="el" href="class_event_delay.html" title="A non-blocking replacement for Arduino&#39;s delay() function. ">EventDelay</a> can be <a class="el" href="class_event_delay.html#a937c86f3b05ccb6138ff7927713820da" title="Set the delay time. ">set()</a> to a number of milliseconds, then after calling <a class="el" href="class_event_delay.html#a97a07c9371040d6388b8369352b08d83" title="Start the delay. ">start()</a>, <a class="el" href="class_event_delay.html#a2267889678fb75df2f6bdcbd0be0ea8a" title="Call this in updateControl() or updateAudio() to check if the delay time is up. ">ready()</a> will return true when the time is up. <br />
-Alternatively, start(milliseconds) will call <a class="el" href="class_event_delay.html#a937c86f3b05ccb6138ff7927713820da" title="Set the delay time. ">set()</a> and <a class="el" href="class_event_delay.html#a97a07c9371040d6388b8369352b08d83" title="Start the delay. ">start()</a> together. </p>
-
-<p class="definition">Definition at line <a class="el" href="_event_delay_8h_source.html#l00020">20</a> of file <a class="el" href="_event_delay_8h_source.html">EventDelay.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="acd7b63341732ac4c23bce04d81316017"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acd7b63341732ac4c23bce04d81316017">&#9670;&nbsp;</a></span>EventDelay()</h2>
 
@@ -218,7 +218,7 @@ Alternatively, start(milliseconds) will call <a class="el" href="class_event_del
 </table>
 </div><div class="memdoc">
 
-<p>Call this in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> or <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a> to check if the delay time is up. </p>
+<p>Call this in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> or <a class="el" href="group__core.html#ga936b78c8ab7a4d7f7075b41e32780d3e" title="This is where you put your audio code. ">updateAudio()</a> to check if the delay time is up. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if the time is up. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>timing: 1us. </dd></dl>
 
@@ -334,7 +334,7 @@ Alternatively, start(milliseconds) will call <a class="el" href="class_event_del
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_event_delay.html">EventDelay</a></li>
-    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
+    <li class="footer">Generated on Thu Apr 11 2024 13:20:17 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

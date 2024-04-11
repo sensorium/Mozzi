@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version v1.1.0</span>
+   &#160;<span id="projectnumber">version v2.0</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -111,7 +111,12 @@ $(document).ready(function(){initNavTree('class_p_d_resonant.html','');});
  <a href="class_p_d_resonant.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_p_d_resonant_8h_source.html">PDResonant.h</a>&gt;</code></p>
-<table class="memberdecls">
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="class_p_d_resonant.html" title="PDResonant is a simple midi instrument using Phase distortion used to simulate resonant filter...">PDResonant</a> is a simple midi instrument using Phase distortion used to simulate resonant filter, based on <a href="https://en.wikipedia.org/wiki/Phase_distortion_synthesis">https://en.wikipedia.org/wiki/Phase_distortion_synthesis</a>. </p>
+<p>The class shows how the Mozzi <a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency. ">Phasor</a> class can be used to generate an index into a wavetable, and an <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> is used to modulate the effect by modifying the <a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency. ">Phasor</a> frequency and sync. More complex phase distortion effects could be developed by using precalculated tables, or calcuating tables on the fly using a double buffer, or a line-breakpoint model, a sort of hybridPhasor-Line object. </p>
+
+<p class="definition">Definition at line <a class="el" href="_p_d_resonant_8h_source.html#l00033">33</a> of file <a class="el" href="_p_d_resonant_8h_source.html">PDResonant.h</a>.</p>
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a2bd77e08be68fc6ce89f1f71a7e1e069"><td class="memItemLeft" align="right" valign="top"><a id="a2bd77e08be68fc6ce89f1f71a7e1e069"></a>
@@ -134,12 +139,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a80bd42c7ea92a64c3b8a42779a1e0d26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Produce the audio output.  <a href="#a80bd42c7ea92a64c3b8a42779a1e0d26">More...</a><br /></td></tr>
 <tr class="separator:a80bd42c7ea92a64c3b8a42779a1e0d26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_p_d_resonant.html" title="PDResonant is a simple midi instrument using Phase distortion used to simulate resonant filter...">PDResonant</a> is a simple midi instrument using Phase distortion used to simulate resonant filter, based on <a href="https://en.wikipedia.org/wiki/Phase_distortion_synthesis">https://en.wikipedia.org/wiki/Phase_distortion_synthesis</a>. </p>
-<p>The class shows how the Mozzi <a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency. ">Phasor</a> class can be used to generate an index into a wavetable, and an <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> is used to modulate the effect by modifying the <a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency. ">Phasor</a> frequency and sync. More complex phase distortion effects could be developed by using precalculated tables, or calcuating tables on the fly using a double buffer, or a line-breakpoint model, a sort of hybridPhasor-Line object. </p>
-
-<p class="definition">Definition at line <a class="el" href="_p_d_resonant_8h_source.html#l00033">33</a> of file <a class="el" href="_p_d_resonant_8h_source.html">PDResonant.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a80bd42c7ea92a64c3b8a42779a1e0d26"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a80bd42c7ea92a64c3b8a42779a1e0d26">&#9670;&nbsp;</a></span>next()</h2>
 
@@ -164,7 +164,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Produce the audio output. </p>
-<p>This goes in <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a>. </p>
+<p>This goes in <a class="el" href="group__core.html#ga936b78c8ab7a4d7f7075b41e32780d3e" title="This is where you put your audio code. ">updateAudio()</a>. </p>
 
 <p class="definition">Definition at line <a class="el" href="_p_d_resonant_8h_source.html#l00104">104</a> of file <a class="el" href="_p_d_resonant_8h_source.html">PDResonant.h</a>.</p>
 
@@ -361,7 +361,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_p_d_resonant.html">PDResonant</a></li>
-    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
+    <li class="footer">Generated on Thu Apr 11 2024 13:20:17 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

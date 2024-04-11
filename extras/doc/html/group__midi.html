@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version v1.1.0</span>
+   &#160;<span id="projectnumber">version v2.0</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -108,31 +108,34 @@ $(document).ready(function(){initNavTree('group__midi.html','');});
 
 <p>Midi note number to frequency conversions.  
 <a href="#details">More...</a></p>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>Midi note number to frequency conversions. </p>
+<p>Useful if you like playing notes in tune. </p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:gafacb8849f96270644ea79184fde7db37"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__midi.html#gafacb8849f96270644ea79184fde7db37">mtof</a> (float midival)</td></tr>
 <tr class="memdesc:gafacb8849f96270644ea79184fde7db37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts midi note number to frequency.  <a href="#gafacb8849f96270644ea79184fde7db37">More...</a><br /></td></tr>
 <tr class="separator:gafacb8849f96270644ea79184fde7db37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga45bd3f3abd7ae5fa509eac3d3931a5b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__fixmath.html#gab3127fd8ac279e1d8dda0292bc1fc8dc">Q16n16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__midi.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2">Q16n16_mtof</a> (<a class="el" href="group__fixmath.html#gab3127fd8ac279e1d8dda0292bc1fc8dc">Q16n16</a> midival_fractional)</td></tr>
-<tr class="memdesc:ga45bd3f3abd7ae5fa509eac3d3931a5b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts midi note number to frequency with speed and accuracy.  <a href="#ga45bd3f3abd7ae5fa509eac3d3931a5b2">More...</a><br /></td></tr>
-<tr class="separator:ga45bd3f3abd7ae5fa509eac3d3931a5b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga07d1ca985403df63f75aa5d143477206"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__midi.html#ga07d1ca985403df63f75aa5d143477206">mtof</a> (uint8_t midi_note)</td></tr>
 <tr class="memdesc:ga07d1ca985403df63f75aa5d143477206"><td class="mdescLeft">&#160;</td><td class="mdescRight">A good choice if you're using whole note values, want speed and simplicity, and accuracy isn't important.  <a href="#ga07d1ca985403df63f75aa5d143477206">More...</a><br /></td></tr>
 <tr class="separator:ga07d1ca985403df63f75aa5d143477206"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga08102facf170648591b2ca24a3c39712"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__midi.html#ga08102facf170648591b2ca24a3c39712">mtof</a> (int midi_note)</td></tr>
 <tr class="memdesc:ga08102facf170648591b2ca24a3c39712"><td class="mdescLeft">&#160;</td><td class="mdescRight">A good choice if you're using whole note values, want speed and simplicity, and accuracy isn't important.  <a href="#ga08102facf170648591b2ca24a3c39712">More...</a><br /></td></tr>
 <tr class="separator:ga08102facf170648591b2ca24a3c39712"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga45bd3f3abd7ae5fa509eac3d3931a5b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__fixmath.html#gab3127fd8ac279e1d8dda0292bc1fc8dc">Q16n16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__midi.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2">Q16n16_mtof</a> (<a class="el" href="group__fixmath.html#gab3127fd8ac279e1d8dda0292bc1fc8dc">Q16n16</a> midival_fractional)</td></tr>
+<tr class="memdesc:ga45bd3f3abd7ae5fa509eac3d3931a5b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts midi note number to frequency with speed and accuracy.  <a href="#ga45bd3f3abd7ae5fa509eac3d3931a5b2">More...</a><br /></td></tr>
+<tr class="separator:ga45bd3f3abd7ae5fa509eac3d3931a5b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Midi note number to frequency conversions. </p>
-<p>Useful if you like playing notes in tune. </p>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="gafacb8849f96270644ea79184fde7db37"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gafacb8849f96270644ea79184fde7db37">&#9670;&nbsp;</a></span>mtof() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">float mtof </td>
@@ -142,10 +145,15 @@ Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Converts midi note number to frequency. </p>
-<p>Caution: this can take up to 400 microseconds to run. It can seriously mess up the audio output if you use it in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> or <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a>. This is a good choice in setup(), or where you need precise midi-pitch conversion and aren't doing much other audio calculation. </p><dl class="section note"><dt>Note</dt><dd>Beware this returns an invalid result for midi note 0. </dd>
+<p>Caution: this can take up to 400 microseconds to run. It can seriously mess up the audio output if you use it in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> or <a class="el" href="group__core.html#ga936b78c8ab7a4d7f7075b41e32780d3e" title="This is where you put your audio code. ">updateAudio()</a>. This is a good choice in setup(), or where you need precise midi-pitch conversion and aren't doing much other audio calculation. </p><dl class="section note"><dt>Note</dt><dd>Beware this returns an invalid result for midi note 0. </dd>
 <dd>
 Timing: ~350 us </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -156,7 +164,7 @@ Timing: ~350 us </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the frequency represented by the input midi note number.. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__midi_8cpp_source.html#l00018">18</a> of file <a class="el" href="mozzi__midi_8cpp_source.html">mozzi_midi.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__midi_8h_source.html#l00053">53</a> of file <a class="el" href="mozzi__midi_8h_source.html">mozzi_midi.h</a>.</p>
 
 </div>
 </div>
@@ -165,6 +173,9 @@ Timing: ~350 us </dd></dl>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">int mtof </td>
@@ -174,6 +185,11 @@ Timing: ~350 us </dd></dl>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>A good choice if you're using whole note values, want speed and simplicity, and accuracy isn't important. </p>
@@ -185,7 +201,7 @@ Timing: ~350 us </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>an integer approximation of the midi note's frequency. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__midi_8cpp_source.html#l00156">156</a> of file <a class="el" href="mozzi__midi_8cpp_source.html">mozzi_midi.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__midi_8h_source.html#l00071">71</a> of file <a class="el" href="mozzi__midi_8h_source.html">mozzi_midi.h</a>.</p>
 
 </div>
 </div>
@@ -194,6 +210,9 @@ Timing: ~350 us </dd></dl>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">int mtof </td>
@@ -203,6 +222,11 @@ Timing: ~350 us </dd></dl>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>A good choice if you're using whole note values, want speed and simplicity, and accuracy isn't important. </p>
@@ -214,7 +238,7 @@ Timing: ~350 us </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>an integer approximation of the midi note's frequency. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__midi_8cpp_source.html#l00166">166</a> of file <a class="el" href="mozzi__midi_8cpp_source.html">mozzi_midi.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__midi_8h_source.html#l00080">80</a> of file <a class="el" href="mozzi__midi_8h_source.html">mozzi_midi.h</a>.</p>
 
 </div>
 </div>
@@ -223,6 +247,9 @@ Timing: ~350 us </dd></dl>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="group__fixmath.html#gab3127fd8ac279e1d8dda0292bc1fc8dc">Q16n16</a> Q16n16_mtof </td>
@@ -232,6 +259,11 @@ Timing: ~350 us </dd></dl>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Converts midi note number to frequency with speed and accuracy. </p>
@@ -244,7 +276,7 @@ Timing: ~350 us </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the frequency represented by the input midi note number, in Q16n16 fixed point fractional integer format, where the lower word is a fractional value. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__midi_8cpp_source.html#l00132">132</a> of file <a class="el" href="mozzi__midi_8cpp_source.html">mozzi_midi.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__midi_8h_source.html#l00097">97</a> of file <a class="el" href="mozzi__midi_8h_source.html">mozzi_midi.h</a>.</p>
 
 </div>
 </div>
@@ -253,7 +285,7 @@ Timing: ~350 us </dd></dl>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
+    <li class="footer">Generated on Thu Apr 11 2024 13:20:17 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

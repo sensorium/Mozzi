@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version v1.1.0</span>
+   &#160;<span id="projectnumber">version v2.0</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -111,7 +111,12 @@ $(document).ready(function(){initNavTree('class_ead.html','');});
  <a href="class_ead.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_ead_8h_source.html">Ead.h</a>&gt;</code></p>
-<table class="memberdecls">
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Exponential attack decay envelope. </p>
+<p>This produces a natural sounding envelope. It calculates a new value each time <a class="el" href="class_ead.html#a57e6f7b304c2bd7dd8cedf7f4fba66c9" title="Calculate and return the next envelope value, in the range -128 to 127. ">next()</a> is called, which can be mapped to other parameters to change the amplitude or timbre of a sound. </p><dl class="section note"><dt>Note</dt><dd>Currently doesn't work at audio rate... may need larger number types for Q8n8attack and Q8n8decay ? </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_ead_8h_source.html#l00029">29</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4862282805c2ac3255a34a99a31564d5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ead.html#a4862282805c2ac3255a34a99a31564d5">Ead</a> (unsigned int update_rate)</td></tr>
@@ -136,12 +141,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a57e6f7b304c2bd7dd8cedf7f4fba66c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate and return the next envelope value, in the range -128 to 127.  <a href="#a57e6f7b304c2bd7dd8cedf7f4fba66c9">More...</a><br /></td></tr>
 <tr class="separator:a57e6f7b304c2bd7dd8cedf7f4fba66c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Exponential attack decay envelope. </p>
-<p>This produces a natural sounding envelope. It calculates a new value each time <a class="el" href="class_ead.html#a57e6f7b304c2bd7dd8cedf7f4fba66c9" title="Calculate and return the next envelope value, in the range -128 to 127. ">next()</a> is called, which can be mapped to other parameters to change the amplitude or timbre of a sound. </p><dl class="section note"><dt>Note</dt><dd>Currently doesn't work at audio rate... may need larger number types for Q8n8attack and Q8n8decay ? </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_ead_8h_source.html#l00029">29</a> of file <a class="el" href="_ead_8h_source.html">Ead.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4862282805c2ac3255a34a99a31564d5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4862282805c2ac3255a34a99a31564d5">&#9670;&nbsp;</a></span>Ead()</h2>
 
@@ -169,7 +169,7 @@ Public Member Functions</h2></td></tr>
 <p>Constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">update_rate</td><td>Usually this will be CONTROL_RATE or AUDIO_RATE, unless you design another scheme for updating. One such alternative scheme could take turns for various control changes in a rotating schedule to spread out calculations made in successive <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> routines. </td></tr>
+    <tr><td class="paramname">update_rate</td><td>Usually this will be MOZZI_CONTROL_RATE or MOZZI_AUDIO_RATE, unless you design another scheme for updating. One such alternative scheme could take turns for various control changes in a rotating schedule to spread out calculations made in successive <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> routines. </td></tr>
   </table>
   </dd>
 </dl>
@@ -411,7 +411,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_ead.html">Ead</a></li>
-    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
+    <li class="footer">Generated on Thu Apr 11 2024 13:20:17 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

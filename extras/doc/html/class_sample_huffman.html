@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version v1.1.0</span>
+   &#160;<span id="projectnumber">version v2.0</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -111,7 +111,19 @@ $(document).ready(function(){initNavTree('class_sample_huffman.html','');});
  <a href="class_sample_huffman.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_sample_huffman_8h_source.html">SampleHuffman.h</a>&gt;</code></p>
-<table class="memberdecls">
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A sample player for samples encoded with Huffman compression. </p>
+<p>This class and the <a class="el" href="audio2huff_8py_source.html">audio2huff.py</a> script are adapted from "audioout", an Arduino sketch by Thomas Grill, 2011 http//grrrr.org</p>
+<p>Huffman decoding is used on sample differentials, saving 50-70% of space for 8 bit data, depending on the sample rate.</p>
+<p>This implementation just plays back one sample each time <a class="el" href="class_sample_huffman.html#a8ec7bbb21f5cf0e780611a7539e86695" title="Update and return the next audio sample. ">next()</a> is called, with no speed or other adjustments. It's slow, so it's likely you will only be able to play one sound at a time.</p>
+<p>Audio data, Huffman decoder table, sample rate and bit depth are defined in a sounddata.h header file. This file can be generated for a sound file with the accompanying Python script <a class="el" href="audio2huff_8py_source.html">audio2huff.py</a>, in Mozzi/extras/python/</p>
+<p>Invoke with: python <a class="el" href="audio2huff_8py_source.html">audio2huff.py</a> &ndash;sndfile=arduinosnd.wav &ndash;hdrfile=sounddata.h &ndash;bits=8 &ndash;name=soundtablename</p>
+<p>You can resample and dither your audio file with SOX, e.g. to 8 bits depth @ Mozzi's 16384 Hz sample rate: sox fullglory.wav -b 8 -r 16384 arduinosnd.wav</p>
+<p>Alternatively you can export a sound from Audacity, which seems to have less noticeable or no dithering, using Project Rate 16384 Hz and these output options: Other uncompressed files, Header: WAV(Microsoft), Encoding: Unsigned 8 bit PCM</p>
+<p>The header file contains two lengthy arrays: One is "SOUNDDATA" which must fit into Flash RAM (available in total: 32k for ATMega328) The other is "HUFFMAN" which must also fit into Flash RAM </p>
+
+<p class="definition">Definition at line <a class="el" href="_sample_huffman_8h_source.html#l00049">49</a> of file <a class="el" href="_sample_huffman_8h_source.html">SampleHuffman.h</a>.</p>
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8587f641949024cd5aad7bfc1715adff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample_huffman.html#a8587f641949024cd5aad7bfc1715adff">SampleHuffman</a> (uint8_t const *SOUNDDATA, int16_t const *HUFFMAN_DATA, uint32_t const SOUNDDATA_BITS)</td></tr>
@@ -133,19 +145,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:a15ead859261d3d916d700b75f4626f15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the playhead to the beginning of the sample. <br /></td></tr>
 <tr class="separator:a15ead859261d3d916d700b75f4626f15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A sample player for samples encoded with Huffman compression. </p>
-<p>This class and the <a class="el" href="audio2huff_8py_source.html">audio2huff.py</a> script are adapted from "audioout", an Arduino sketch by Thomas Grill, 2011 http//grrrr.org</p>
-<p>Huffman decoding is used on sample differentials, saving 50-70% of space for 8 bit data, depending on the sample rate.</p>
-<p>This implementation just plays back one sample each time <a class="el" href="class_sample_huffman.html#a8ec7bbb21f5cf0e780611a7539e86695" title="Update and return the next audio sample. ">next()</a> is called, with no speed or other adjustments. It's slow, so it's likely you will only be able to play one sound at a time.</p>
-<p>Audio data, Huffman decoder table, sample rate and bit depth are defined in a <a class="el" href="sounddata_8h_source.html">sounddata.h</a> header file. This file can be generated for a sound file with the accompanying Python script <a class="el" href="audio2huff_8py_source.html">audio2huff.py</a>, in Mozzi/extras/python/</p>
-<p>Invoke with: python <a class="el" href="audio2huff_8py_source.html">audio2huff.py</a> &ndash;sndfile=arduinosnd.wav &ndash;hdrfile=<a class="el" href="sounddata_8h_source.html">sounddata.h</a> &ndash;bits=8 &ndash;name=soundtablename</p>
-<p>You can resample and dither your audio file with SOX, e.g. to 8 bits depth @ Mozzi's 16384 Hz sample rate: sox fullglory.wav -b 8 -r 16384 arduinosnd.wav</p>
-<p>Alternatively you can export a sound from Audacity, which seems to have less noticeable or no dithering, using Project Rate 16384 Hz and these output options: Other uncompressed files, Header: WAV(Microsoft), Encoding: Unsigned 8 bit PCM</p>
-<p>The header file contains two lengthy arrays: One is "SOUNDDATA" which must fit into Flash RAM (available in total: 32k for ATMega328) The other is "HUFFMAN" which must also fit into Flash RAM </p>
-
-<p class="definition">Definition at line <a class="el" href="_sample_huffman_8h_source.html#l00049">49</a> of file <a class="el" href="_sample_huffman_8h_source.html">SampleHuffman.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8587f641949024cd5aad7bfc1715adff"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8587f641949024cd5aad7bfc1715adff">&#9670;&nbsp;</a></span>SampleHuffman()</h2>
 
@@ -238,7 +238,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_sample_huffman.html">SampleHuffman</a></li>
-    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
+    <li class="footer">Generated on Thu Apr 11 2024 13:20:17 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version v1.1.0</span>
+   &#160;<span id="projectnumber">version v2.0</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -107,26 +107,32 @@ $(document).ready(function(){initNavTree('class_oscil.html','');});
 <p>This is the complete list of members for <a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a>, including all inherited members.</p>
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="class_oscil.html#a97f2c0f28751641417202fee2a0776d3">atIndex</a>(unsigned int index)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_oscil.html#aa774ef68b06f9652e6ac23d4e9332554">getPhaseFractional</a>()</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_oscil.html#aefafa92dd2065243a164c1d824f292d7">getPhaseFractional</a>()</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_oscil.html#a655de04690650b27182e3b4d07768d46">next</a>()</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_oscil.html#afe6a75646d2dd822a654bcd85242e800">Oscil</a>(const int8_t *TABLE_NAME)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_oscil.html#ab7dc5f97742d841fff6a4dca6d7242f3">Oscil</a>()</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_oscil.html#a184110cb1901d2742a6016b46cbea027">phaseIncFromFreq</a>(int frequency)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_oscil.html#a48ad51d7fbac24263008a9931f537baf">phaseIncFromFreq</a>(int frequency)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_oscil.html#a4c6de90bc2d4183a5146eb2ae5e3dd2c">phMod</a>(Q15n16 phmod_proportion)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_oscil.html#ad2103f6d29e5e4702857cb15e7795909">phMod</a>(SFix&lt; NI, NF &gt; phmod_proportion)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_oscil.html#ae12f5e34705bb92394c4941aebe5a8ea">phMod</a>(SFix&lt; 15, 16 &gt; phmod_proportion)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_oscil.html#a23121f22ea447918088a79c7f9748b3d">setFreq</a>(int frequency)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_oscil.html#aa342e74f8e73edda0b0f042770e3fba4">setFreq</a>(float frequency)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_oscil.html#ad4b11a132484bc72def165f4f92007d6">setFreq</a>(UFix&lt; NI, NF &gt; frequency)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_oscil.html#a7c77b26a13e7a29b80b484f8f47b8fda">setFreq</a>(UFix&lt; 24, 8 &gt; frequency)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_oscil.html#a8994a4d78ad4a825549062adf4d8adf6">setFreq</a>(UFix&lt; 16, 16 &gt; frequency)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_oscil.html#a857784168a8fdf6fc3df81db8c7c064e">setFreq</a>(SFix&lt; NI, NF &gt; frequency)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_oscil.html#a73b52741178ed490463d9ff471cebef3">setFreq_Q16n16</a>(Q16n16 frequency)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_oscil.html#abc8a4ee236f7fd45dda9dece7292b6e7">setFreq_Q24n8</a>(Q24n8 frequency)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_oscil.html#ab7b740eec56740426a47508562ed4dd5">setPhase</a>(unsigned int phase)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_oscil.html#afc77bfc5a1ad5926ad8df37725d480d7">setPhaseFractional</a>(unsigned long phase)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_oscil.html#a2ff9bfcc57e07bf0df2ed7db186ecff7">setPhaseInc</a>(unsigned long phaseinc_fractional)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_oscil.html#a9befaff8a21a4915b647636e821435f9">setPhaseFractional</a>(uint32_t phase)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_oscil.html#aced127a46f0e45c259f1a788b6c31074">setPhaseInc</a>(uint32_t phaseinc_fractional)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_oscil.html#a0b22d79fb2d6c7fb50b19c00f249ed84">setTable</a>(const int8_t *TABLE_NAME)</td><td class="entry"><a class="el" href="class_oscil.html">Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
+    <li class="footer">Generated on Thu Apr 11 2024 13:20:17 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

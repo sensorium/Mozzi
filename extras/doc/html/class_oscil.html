@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version v1.1.0</span>
+   &#160;<span id="projectnumber">version v2.0</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -112,7 +112,26 @@ $(document).ready(function(){initNavTree('class_oscil.html','');});
  <a href="class_oscil.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_oscil_8h_source.html">Oscil.h</a>&gt;</code></p>
-<table class="memberdecls">
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt;<br />
+class Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</h3>
+
+<p><br />
+<a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> plays a wavetable, cycling through the table to generate an audio or control signal. </p>
+<p>The frequency of the signal can be set or changed with <a class="el" href="class_oscil.html#a23121f22ea447918088a79c7f9748b3d" title="Set the oscillator frequency with an unsigned int. ">setFreq()</a>, and the output of an <a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> can be produced with <a class="el" href="class_oscil.html#a655de04690650b27182e3b4d07768d46" title="Updates the phase according to the current frequency and returns the sample at the new phase position...">next()</a> for a simple cycling oscillator, or <a class="el" href="class_oscil.html#a97f2c0f28751641417202fee2a0776d3" title="Returns the sample at the given table index. ">atIndex()</a> for a particular sample in the table. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">NUM_TABLE_CELLS</td><td>This is defined in the table ".h" file the <a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> will be using. It's important that it's a power of 2, and either a literal number (eg. "8192") or a defined macro, rather than a const or int, for the <a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> to run fast enough. </td></tr>
+    <tr><td class="paramname">UPDATE_RATE</td><td>This will be MOZZI_AUDIO_RATE if the <a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> is updated in <a class="el" href="group__core.html#ga936b78c8ab7a4d7f7075b41e32780d3e" title="This is where you put your audio code. ">updateAudio()</a>, or MOZZI_CONTROL_RATE if it's updated each time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> is called. It could also be a fraction of MOZZI_CONTROL_RATE if you are doing some kind of cyclic updating in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>, for example, to spread out the processor load. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>If you #define OSCIL_DITHER_PHASE before you #include &lt;<a class="el" href="_oscil_8h_source.html">Oscil.h</a>&gt;, the phase increments will be dithered, which reduces spurious frequency spurs in the audio output, at the cost of some extra processing and memory. </dd></dl>
+<h1><a class="anchor" id="int8_t2mozzi"></a>
+int8_t2mozzi</h1>
+<p>Converting soundfiles for Mozzi There is a python script called <a class="el" href="char2mozzi_8py.html" title="A script for converting raw 8 bit sound data files to wavetables for Mozzi. ">char2mozzi.py</a> in the Mozzi/python folder. The usage is: <a class="el" href="char2mozzi_8py.html" title="A script for converting raw 8 bit sound data files to wavetables for Mozzi. ">char2mozzi.py</a> infilename outfilename tablename samplerate </p>
+
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00059">59</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afe6a75646d2dd822a654bcd85242e800"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#afe6a75646d2dd822a654bcd85242e800">Oscil</a> (const int8_t *TABLE_NAME)</td></tr>
@@ -130,57 +149,59 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab7b740eec56740426a47508562ed4dd5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#ab7b740eec56740426a47508562ed4dd5">setPhase</a> (unsigned int phase)</td></tr>
 <tr class="memdesc:ab7b740eec56740426a47508562ed4dd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the phase of the <a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>.  <a href="#ab7b740eec56740426a47508562ed4dd5">More...</a><br /></td></tr>
 <tr class="separator:ab7b740eec56740426a47508562ed4dd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc77bfc5a1ad5926ad8df37725d480d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#afc77bfc5a1ad5926ad8df37725d480d7">setPhaseFractional</a> (unsigned long phase)</td></tr>
-<tr class="memdesc:afc77bfc5a1ad5926ad8df37725d480d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the phase of the <a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>.  <a href="#afc77bfc5a1ad5926ad8df37725d480d7">More...</a><br /></td></tr>
-<tr class="separator:afc77bfc5a1ad5926ad8df37725d480d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa774ef68b06f9652e6ac23d4e9332554"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#aa774ef68b06f9652e6ac23d4e9332554">getPhaseFractional</a> ()</td></tr>
-<tr class="memdesc:aa774ef68b06f9652e6ac23d4e9332554"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the phase of the <a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> in fractional format.  <a href="#aa774ef68b06f9652e6ac23d4e9332554">More...</a><br /></td></tr>
-<tr class="separator:aa774ef68b06f9652e6ac23d4e9332554"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9befaff8a21a4915b647636e821435f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a9befaff8a21a4915b647636e821435f9">setPhaseFractional</a> (uint32_t phase)</td></tr>
+<tr class="memdesc:a9befaff8a21a4915b647636e821435f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the phase of the <a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>.  <a href="#a9befaff8a21a4915b647636e821435f9">More...</a><br /></td></tr>
+<tr class="separator:a9befaff8a21a4915b647636e821435f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefafa92dd2065243a164c1d824f292d7"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#aefafa92dd2065243a164c1d824f292d7">getPhaseFractional</a> ()</td></tr>
+<tr class="memdesc:aefafa92dd2065243a164c1d824f292d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the phase of the <a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> in fractional format.  <a href="#aefafa92dd2065243a164c1d824f292d7">More...</a><br /></td></tr>
+<tr class="separator:aefafa92dd2065243a164c1d824f292d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c6de90bc2d4183a5146eb2ae5e3dd2c"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a4c6de90bc2d4183a5146eb2ae5e3dd2c">phMod</a> (<a class="el" href="group__fixmath.html#ga3e1cab88474edfa08535402573125cae">Q15n16</a> phmod_proportion)</td></tr>
 <tr class="memdesc:a4c6de90bc2d4183a5146eb2ae5e3dd2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next sample given a phase modulation value.  <a href="#a4c6de90bc2d4183a5146eb2ae5e3dd2c">More...</a><br /></td></tr>
 <tr class="separator:a4c6de90bc2d4183a5146eb2ae5e3dd2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2103f6d29e5e4702857cb15e7795909"><td class="memTemplParams" colspan="2">template&lt;byte NI, byte NF&gt; </td></tr>
+<tr class="memitem:ad2103f6d29e5e4702857cb15e7795909"><td class="memTemplItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_oscil.html#ad2103f6d29e5e4702857cb15e7795909">phMod</a> (SFix&lt; NI, NF &gt; phmod_proportion)</td></tr>
+<tr class="memdesc:ad2103f6d29e5e4702857cb15e7795909"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next sample given a phase modulation value.  <a href="#ad2103f6d29e5e4702857cb15e7795909">More...</a><br /></td></tr>
+<tr class="separator:ad2103f6d29e5e4702857cb15e7795909"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae12f5e34705bb92394c4941aebe5a8ea"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#ae12f5e34705bb92394c4941aebe5a8ea">phMod</a> (SFix&lt; 15, 16 &gt; phmod_proportion)</td></tr>
+<tr class="memdesc:ae12f5e34705bb92394c4941aebe5a8ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next sample given a phase modulation value.  <a href="#ae12f5e34705bb92394c4941aebe5a8ea">More...</a><br /></td></tr>
+<tr class="separator:ae12f5e34705bb92394c4941aebe5a8ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23121f22ea447918088a79c7f9748b3d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a23121f22ea447918088a79c7f9748b3d">setFreq</a> (int frequency)</td></tr>
 <tr class="memdesc:a23121f22ea447918088a79c7f9748b3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the oscillator frequency with an unsigned int.  <a href="#a23121f22ea447918088a79c7f9748b3d">More...</a><br /></td></tr>
 <tr class="separator:a23121f22ea447918088a79c7f9748b3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa342e74f8e73edda0b0f042770e3fba4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#aa342e74f8e73edda0b0f042770e3fba4">setFreq</a> (float frequency)</td></tr>
 <tr class="memdesc:aa342e74f8e73edda0b0f042770e3fba4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the oscillator frequency with a float.  <a href="#aa342e74f8e73edda0b0f042770e3fba4">More...</a><br /></td></tr>
 <tr class="separator:aa342e74f8e73edda0b0f042770e3fba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4b11a132484bc72def165f4f92007d6"><td class="memTemplParams" colspan="2">template&lt;int8_t NI, int8_t NF&gt; </td></tr>
+<tr class="memitem:ad4b11a132484bc72def165f4f92007d6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_oscil.html#ad4b11a132484bc72def165f4f92007d6">setFreq</a> (UFix&lt; NI, NF &gt; frequency)</td></tr>
+<tr class="memdesc:ad4b11a132484bc72def165f4f92007d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the frequency using UFix&lt;NI,NF&gt; fixed-point number format.  <a href="#ad4b11a132484bc72def165f4f92007d6">More...</a><br /></td></tr>
+<tr class="separator:ad4b11a132484bc72def165f4f92007d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc8a4ee236f7fd45dda9dece7292b6e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#abc8a4ee236f7fd45dda9dece7292b6e7">setFreq_Q24n8</a> (<a class="el" href="group__fixmath.html#ga940a116ff2bfbd1b013b41b1be73f70f">Q24n8</a> frequency)</td></tr>
 <tr class="memdesc:abc8a4ee236f7fd45dda9dece7292b6e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the frequency using Q24n8 fixed-point number format.  <a href="#abc8a4ee236f7fd45dda9dece7292b6e7">More...</a><br /></td></tr>
 <tr class="separator:abc8a4ee236f7fd45dda9dece7292b6e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c77b26a13e7a29b80b484f8f47b8fda"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a7c77b26a13e7a29b80b484f8f47b8fda">setFreq</a> (UFix&lt; 24, 8 &gt; frequency)</td></tr>
+<tr class="memdesc:a7c77b26a13e7a29b80b484f8f47b8fda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the frequency using UFix&lt;24,8&gt; fixed-point number format.  <a href="#a7c77b26a13e7a29b80b484f8f47b8fda">More...</a><br /></td></tr>
+<tr class="separator:a7c77b26a13e7a29b80b484f8f47b8fda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73b52741178ed490463d9ff471cebef3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a73b52741178ed490463d9ff471cebef3">setFreq_Q16n16</a> (<a class="el" href="group__fixmath.html#gab3127fd8ac279e1d8dda0292bc1fc8dc">Q16n16</a> frequency)</td></tr>
 <tr class="memdesc:a73b52741178ed490463d9ff471cebef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the frequency using Q16n16 fixed-point number format.  <a href="#a73b52741178ed490463d9ff471cebef3">More...</a><br /></td></tr>
 <tr class="separator:a73b52741178ed490463d9ff471cebef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8994a4d78ad4a825549062adf4d8adf6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a8994a4d78ad4a825549062adf4d8adf6">setFreq</a> (UFix&lt; 16, 16 &gt; frequency)</td></tr>
+<tr class="memdesc:a8994a4d78ad4a825549062adf4d8adf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the frequency using UFix&lt;16,16&gt; fixed-point number format.  <a href="#a8994a4d78ad4a825549062adf4d8adf6">More...</a><br /></td></tr>
+<tr class="separator:a8994a4d78ad4a825549062adf4d8adf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a857784168a8fdf6fc3df81db8c7c064e"><td class="memTemplParams" colspan="2">template&lt;byte NI, byte NF&gt; </td></tr>
+<tr class="memitem:a857784168a8fdf6fc3df81db8c7c064e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_oscil.html#a857784168a8fdf6fc3df81db8c7c064e">setFreq</a> (SFix&lt; NI, NF &gt; frequency)</td></tr>
+<tr class="memdesc:a857784168a8fdf6fc3df81db8c7c064e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the frequency using SFix&lt;NI,NF&gt; fixed-point number format.  <a href="#a857784168a8fdf6fc3df81db8c7c064e">More...</a><br /></td></tr>
+<tr class="separator:a857784168a8fdf6fc3df81db8c7c064e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97f2c0f28751641417202fee2a0776d3"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a97f2c0f28751641417202fee2a0776d3">atIndex</a> (unsigned int index)</td></tr>
 <tr class="memdesc:a97f2c0f28751641417202fee2a0776d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sample at the given table index.  <a href="#a97f2c0f28751641417202fee2a0776d3">More...</a><br /></td></tr>
 <tr class="separator:a97f2c0f28751641417202fee2a0776d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a184110cb1901d2742a6016b46cbea027"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a184110cb1901d2742a6016b46cbea027">phaseIncFromFreq</a> (int frequency)</td></tr>
-<tr class="memdesc:a184110cb1901d2742a6016b46cbea027"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_oscil.html#a184110cb1901d2742a6016b46cbea027" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a> and <a class="el" href="class_oscil.html#a2ff9bfcc57e07bf0df2ed7db186ecff7" title="Set a specific phase increment. ">setPhaseInc()</a> are for saving processor time when sliding between frequencies.  <a href="#a184110cb1901d2742a6016b46cbea027">More...</a><br /></td></tr>
-<tr class="separator:a184110cb1901d2742a6016b46cbea027"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ff9bfcc57e07bf0df2ed7db186ecff7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a2ff9bfcc57e07bf0df2ed7db186ecff7">setPhaseInc</a> (unsigned long phaseinc_fractional)</td></tr>
-<tr class="memdesc:a2ff9bfcc57e07bf0df2ed7db186ecff7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a specific phase increment.  <a href="#a2ff9bfcc57e07bf0df2ed7db186ecff7">More...</a><br /></td></tr>
-<tr class="separator:a2ff9bfcc57e07bf0df2ed7db186ecff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48ad51d7fbac24263008a9931f537baf"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#a48ad51d7fbac24263008a9931f537baf">phaseIncFromFreq</a> (int frequency)</td></tr>
+<tr class="memdesc:a48ad51d7fbac24263008a9931f537baf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_oscil.html#a48ad51d7fbac24263008a9931f537baf" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a> and <a class="el" href="class_oscil.html#aced127a46f0e45c259f1a788b6c31074" title="Set a specific phase increment. ">setPhaseInc()</a> are for saving processor time when sliding between frequencies.  <a href="#a48ad51d7fbac24263008a9931f537baf">More...</a><br /></td></tr>
+<tr class="separator:a48ad51d7fbac24263008a9931f537baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aced127a46f0e45c259f1a788b6c31074"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_oscil.html#aced127a46f0e45c259f1a788b6c31074">setPhaseInc</a> (uint32_t phaseinc_fractional)</td></tr>
+<tr class="memdesc:aced127a46f0e45c259f1a788b6c31074"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a specific phase increment.  <a href="#aced127a46f0e45c259f1a788b6c31074">More...</a><br /></td></tr>
+<tr class="separator:aced127a46f0e45c259f1a788b6c31074"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt;<br />
-class Oscil&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;</h3>
-
-<p><br />
-<a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> plays a wavetable, cycling through the table to generate an audio or control signal. </p>
-<p>The frequency of the signal can be set or changed with <a class="el" href="class_oscil.html#a23121f22ea447918088a79c7f9748b3d" title="Set the oscillator frequency with an unsigned int. ">setFreq()</a>, and the output of an <a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> can be produced with <a class="el" href="class_oscil.html#a655de04690650b27182e3b4d07768d46" title="Updates the phase according to the current frequency and returns the sample at the new phase position...">next()</a> for a simple cycling oscillator, or <a class="el" href="class_oscil.html#a97f2c0f28751641417202fee2a0776d3" title="Returns the sample at the given table index. ">atIndex()</a> for a particular sample in the table. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">NUM_TABLE_CELLS</td><td>This is defined in the table ".h" file the <a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> will be using. It's important that it's a power of 2, and either a literal number (eg. "8192") or a defined macro, rather than a const or int, for the <a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> to run fast enough. </td></tr>
-    <tr><td class="paramname">UPDATE_RATE</td><td>This will be AUDIO_RATE if the <a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> is updated in <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a>, or CONTROL_RATE if it's updated each time <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a> is called. It could also be a fraction of CONTROL_RATE if you are doing some kind of cyclic updating in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>, for example, to spread out the processor load. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>If you #define OSCIL_DITHER_PHASE before you #include &lt;<a class="el" href="_oscil_8h_source.html">Oscil.h</a>&gt;, the phase increments will be dithered, which reduces spurious frequency spurs in the audio output, at the cost of some extra processing and memory. </dd></dl>
-<h1><a class="anchor" id="int8_t2mozzi"></a>
-int8_t2mozzi</h1>
-<p>Converting soundfiles for Mozzi There is a python script called <a class="el" href="char2mozzi_8py.html" title="A script for converting raw 8 bit sound data files to wavetables for Mozzi. ">char2mozzi.py</a> in the Mozzi/python folder. The usage is: <a class="el" href="char2mozzi_8py.html" title="A script for converting raw 8 bit sound data files to wavetables for Mozzi. ">char2mozzi.py</a> infilename outfilename tablename samplerate </p>
-
-<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00062">62</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afe6a75646d2dd822a654bcd85242e800"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afe6a75646d2dd822a654bcd85242e800">&#9670;&nbsp;</a></span>Oscil() <span class="overload">[1/2]</span></h2>
 
@@ -215,7 +236,7 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00072">72</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00069">69</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -247,7 +268,7 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
 <p>Constructor. </p>
 <p>Declare an <a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> with template TABLE_NUM_CELLS and UPDATE_RATE parameters, without specifying a particular wave table for it to play. The table can be set or changed on the fly with <a class="el" href="class_oscil.html#a0b22d79fb2d6c7fb50b19c00f249ed84" title="Change the sound table which will be played by the Oscil. ">setTable()</a>. Any tables used by the <a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> must be the same size. </p>
 
-<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00082">82</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00079">79</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -287,12 +308,12 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the sample at the given table index. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00245">245</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00329">329</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
-<a id="aa774ef68b06f9652e6ac23d4e9332554"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa774ef68b06f9652e6ac23d4e9332554">&#9670;&nbsp;</a></span>getPhaseFractional()</h2>
+<a id="aefafa92dd2065243a164c1d824f292d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefafa92dd2065243a164c1d824f292d7">&#9670;&nbsp;</a></span>getPhaseFractional()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -303,7 +324,7 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned long <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::getPhaseFractional </td>
+          <td class="memname">uint32_t <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::getPhaseFractional </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -319,7 +340,7 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
 <p>Get the phase of the <a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a> in fractional format. </p>
 <dl class="section return"><dt>Returns</dt><dd>position in the wavetable, shifted left by OSCIL_F_BITS (which is 16 when this was written). </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00132">132</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00129">129</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -351,12 +372,12 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
 <p>Updates the phase according to the current frequency and returns the sample at the new phase position. </p>
 <dl class="section return"><dt>Returns</dt><dd>the next sample. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00090">90</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00087">87</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
-<a id="a184110cb1901d2742a6016b46cbea027"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a184110cb1901d2742a6016b46cbea027">&#9670;&nbsp;</a></span>phaseIncFromFreq()</h2>
+<a id="a48ad51d7fbac24263008a9931f537baf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48ad51d7fbac24263008a9931f537baf">&#9670;&nbsp;</a></span>phaseIncFromFreq()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -367,7 +388,7 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned long <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::phaseIncFromFreq </td>
+          <td class="memname">uint32_t <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::phaseIncFromFreq </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>frequency</em></td><td>)</td>
@@ -381,8 +402,8 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_oscil.html#a184110cb1901d2742a6016b46cbea027" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a> and <a class="el" href="class_oscil.html#a2ff9bfcc57e07bf0df2ed7db186ecff7" title="Set a specific phase increment. ">setPhaseInc()</a> are for saving processor time when sliding between frequencies. </p>
-<p>Instead of recalculating the phase increment for each frequency in between, you can just calculate the phase increment for each end frequency with <a class="el" href="class_oscil.html#a184110cb1901d2742a6016b46cbea027" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a>, then use a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step. ">Line</a> to interpolate on the fly and use <a class="el" href="class_oscil.html#a2ff9bfcc57e07bf0df2ed7db186ecff7" title="Set a specific phase increment. ">setPhaseInc()</a> to set the phase increment at each step. (Note: I should really profile this with the oscilloscope to see if it's worth the extra confusion!) </p><dl class="params"><dt>Parameters</dt><dd>
+<p><a class="el" href="class_oscil.html#a48ad51d7fbac24263008a9931f537baf" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a> and <a class="el" href="class_oscil.html#aced127a46f0e45c259f1a788b6c31074" title="Set a specific phase increment. ">setPhaseInc()</a> are for saving processor time when sliding between frequencies. </p>
+<p>Instead of recalculating the phase increment for each frequency in between, you can just calculate the phase increment for each end frequency with <a class="el" href="class_oscil.html#a48ad51d7fbac24263008a9931f537baf" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a>, then use a <a class="el" href="class_line.html" title="For linear changes with a minimum of calculation at each step. ">Line</a> to interpolate on the fly and use <a class="el" href="class_oscil.html#aced127a46f0e45c259f1a788b6c31074" title="Set a specific phase increment. ">setPhaseInc()</a> to set the phase increment at each step. (Note: I should really profile this with the oscilloscope to see if it's worth the extra confusion!) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">frequency</td><td>for which you want to calculate a phase increment value. </td></tr>
   </table>
@@ -390,12 +411,12 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the phase increment value which will produce a given frequency. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00262">262</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00346">346</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
 <a id="a4c6de90bc2d4183a5146eb2ae5e3dd2c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c6de90bc2d4183a5146eb2ae5e3dd2c">&#9670;&nbsp;</a></span>phMod()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c6de90bc2d4183a5146eb2ae5e3dd2c">&#9670;&nbsp;</a></span>phMod() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -429,12 +450,92 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a sample from the table. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00150">150</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00147">147</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+
+</div>
+</div>
+<a id="ad2103f6d29e5e4702857cb15e7795909"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2103f6d29e5e4702857cb15e7795909">&#9670;&nbsp;</a></span>phMod() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
+<div class="memtemplate">
+template&lt;byte NI, byte NF&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::phMod </td>
+          <td>(</td>
+          <td class="paramtype">SFix&lt; NI, NF &gt;&#160;</td>
+          <td class="paramname"><em>phmod_proportion</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the next sample given a phase modulation value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">phmod_proportion</td><td>a phase modulation value given as a proportion of the wave. The phmod_proportion parameter is a SFix&lt;NI,NF&gt; fixed-point number where the fractional part represents almost -1 to almost 1, modulating the phase by one whole table length in each direction. This fixed point math number is interpreted as a SFix&lt;15,16&gt; internally. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a sample from the table. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00162">162</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+
+</div>
+</div>
+<a id="ae12f5e34705bb92394c4941aebe5a8ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae12f5e34705bb92394c4941aebe5a8ea">&#9670;&nbsp;</a></span>phMod() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::phMod </td>
+          <td>(</td>
+          <td class="paramtype">SFix&lt; 15, 16 &gt;&#160;</td>
+          <td class="paramname"><em>phmod_proportion</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the next sample given a phase modulation value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">phmod_proportion</td><td>a phase modulation value given as a proportion of the wave. The phmod_proportion parameter is a SFix&lt;15,16&gt; fixed-point number where the fractional part represents almost -1 to almost 1, modulating the phase by one whole table length in each direction. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a sample from the table. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00176">176</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
 <a id="a23121f22ea447918088a79c7f9748b3d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23121f22ea447918088a79c7f9748b3d">&#9670;&nbsp;</a></span>setFreq() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a23121f22ea447918088a79c7f9748b3d">&#9670;&nbsp;</a></span>setFreq() <span class="overload">[1/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -467,12 +568,12 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00165">165</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00190">190</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
 <a id="aa342e74f8e73edda0b0f042770e3fba4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa342e74f8e73edda0b0f042770e3fba4">&#9670;&nbsp;</a></span>setFreq() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa342e74f8e73edda0b0f042770e3fba4">&#9670;&nbsp;</a></span>setFreq() <span class="overload">[2/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -505,7 +606,172 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00180">180</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00205">205</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+
+</div>
+</div>
+<a id="ad4b11a132484bc72def165f4f92007d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4b11a132484bc72def165f4f92007d6">&#9670;&nbsp;</a></span>setFreq() <span class="overload">[3/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
+<div class="memtemplate">
+template&lt;int8_t NI, int8_t NF&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setFreq </td>
+          <td>(</td>
+          <td class="paramtype">UFix&lt; NI, NF &gt;&#160;</td>
+          <td class="paramname"><em>frequency</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the frequency using UFix&lt;NI,NF&gt; fixed-point number format. </p>
+<p>This falls back to using UFix&lt;16,16&gt; internally and is provided as a fallout for other UFix types. If possible try to use directly UFix&lt;16,16&gt; or UFix&lt;24,8&gt; for well defined (and well tested) behaviors. </p><dl class="section note"><dt>Note</dt><dd>This should work OK with tables 2048 cells or smaller and frequencies up to 4096 Hz. Can't be used with UPDATE_RATE less than 64 Hz. </dd>
+<dd>
+This didn't run faster than float last time it was tested, after 2014 code changes. Need to see if 2014 changes improved or worsened performance. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frequency</td><td>in UFix&lt;NI,NF&gt; fixed-point number format. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00219">219</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+
+</div>
+</div>
+<a id="a7c77b26a13e7a29b80b484f8f47b8fda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c77b26a13e7a29b80b484f8f47b8fda">&#9670;&nbsp;</a></span>setFreq() <span class="overload">[4/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setFreq </td>
+          <td>(</td>
+          <td class="paramtype">UFix&lt; 24, 8 &gt;&#160;</td>
+          <td class="paramname"><em>frequency</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the frequency using UFix&lt;24,8&gt; fixed-point number format. </p>
+<p>This might be faster than the float version for setting low frequencies such as 1.5 Hz, or other values which may not work well with your table size. A UFix&lt;24,8&gt; representation of 1.5 is 384 (ie. 1.5 * 256). Can't be used with UPDATE_RATE less than 64 Hz. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frequency</td><td>in UFix&lt;24,8&gt; fixed-point number format. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00258">258</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+
+</div>
+</div>
+<a id="a8994a4d78ad4a825549062adf4d8adf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8994a4d78ad4a825549062adf4d8adf6">&#9670;&nbsp;</a></span>setFreq() <span class="overload">[5/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setFreq </td>
+          <td>(</td>
+          <td class="paramtype">UFix&lt; 16, 16 &gt;&#160;</td>
+          <td class="paramname"><em>frequency</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the frequency using UFix&lt;16,16&gt; fixed-point number format. </p>
+<p>This is useful in combination with <a class="el" href="group__midi.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2" title="Converts midi note number to frequency with speed and accuracy. ">Q16n16_mtof()</a>, a fast alternative to <a class="el" href="group__midi.html#gafacb8849f96270644ea79184fde7db37" title="Converts midi note number to frequency. ">mtof()</a>, using UFix&lt;16,16&gt; fixed-point format instead of fractional numbers. </p><dl class="section note"><dt>Note</dt><dd>This should work OK with tables 2048 cells or smaller and frequencies up to 4096 Hz. Can't be used with UPDATE_RATE less than 64 Hz. </dd>
+<dd>
+This didn't run faster than float last time it was tested, after 2014 code changes. Need to see if 2014 changes improved or worsened performance. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frequency</td><td>in UFix&lt;16,16&gt; fixed-point number format. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00297">297</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+
+</div>
+</div>
+<a id="a857784168a8fdf6fc3df81db8c7c064e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a857784168a8fdf6fc3df81db8c7c064e">&#9670;&nbsp;</a></span>setFreq() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
+<div class="memtemplate">
+template&lt;byte NI, byte NF&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setFreq </td>
+          <td>(</td>
+          <td class="paramtype">SFix&lt; NI, NF &gt;&#160;</td>
+          <td class="paramname"><em>frequency</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the frequency using SFix&lt;NI,NF&gt; fixed-point number format. </p>
+<p>This falls back to using UFix&lt;16,16&gt; internally and is provided as a fallout for other UFix types. If possible try to use directly UFix&lt;16,16&gt; or UFix&lt;24,8&gt; for well defined (and well tested) behaviors. </p><dl class="section note"><dt>Note</dt><dd>This should work OK with tables 2048 cells or smaller and frequencies up to 4096 Hz. Can't be used with UPDATE_RATE less than 64 Hz. </dd>
+<dd>
+This didn't run faster than float last time it was tested, after 2014 code changes. Need to see if 2014 changes improved or worsened performance. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frequency</td><td>in SFix&lt;16,16&gt; fixed-point number format. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00312">312</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -546,7 +812,7 @@ This didn't run faster than float last time it was tested, after 2014 code chang
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00220">220</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00273">273</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -584,7 +850,7 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00194">194</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00234">234</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -622,12 +888,12 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00112">112</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00109">109</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
-<a id="afc77bfc5a1ad5926ad8df37725d480d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc77bfc5a1ad5926ad8df37725d480d7">&#9670;&nbsp;</a></span>setPhaseFractional()</h2>
+<a id="a9befaff8a21a4915b647636e821435f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9befaff8a21a4915b647636e821435f9">&#9670;&nbsp;</a></span>setPhaseFractional()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -640,7 +906,7 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setPhaseFractional </td>
           <td>(</td>
-          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramtype">uint32_t&#160;</td>
           <td class="paramname"><em>phase</em></td><td>)</td>
           <td></td>
         </tr>
@@ -653,19 +919,19 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
 </div><div class="memdoc">
 
 <p>Set the phase of the <a class="el" href="class_oscil.html" title=" Oscil plays a wavetable, cycling through the table to generate an audio or control signal...">Oscil</a>. </p>
-<p>Might be useful with <a class="el" href="class_oscil.html#aa774ef68b06f9652e6ac23d4e9332554" title="Get the phase of the Oscil in fractional format. ">getPhaseFractional()</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Might be useful with <a class="el" href="class_oscil.html#aefafa92dd2065243a164c1d824f292d7" title="Get the phase of the Oscil in fractional format. ">getPhaseFractional()</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">phase</td><td>a position in the wavetable. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00123">123</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00120">120</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
-<a id="a2ff9bfcc57e07bf0df2ed7db186ecff7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ff9bfcc57e07bf0df2ed7db186ecff7">&#9670;&nbsp;</a></span>setPhaseInc()</h2>
+<a id="aced127a46f0e45c259f1a788b6c31074"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aced127a46f0e45c259f1a788b6c31074">&#9670;&nbsp;</a></span>setPhaseInc()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -678,7 +944,7 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="class_oscil.html">Oscil</a>&lt; NUM_TABLE_CELLS, UPDATE_RATE &gt;::setPhaseInc </td>
           <td>(</td>
-          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramtype">uint32_t&#160;</td>
           <td class="paramname"><em>phaseinc_fractional</em></td><td>)</td>
           <td></td>
         </tr>
@@ -691,14 +957,14 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
 </div><div class="memdoc">
 
 <p>Set a specific phase increment. </p>
-<p>See <a class="el" href="class_oscil.html#a184110cb1901d2742a6016b46cbea027" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>See <a class="el" href="class_oscil.html#a48ad51d7fbac24263008a9931f537baf" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">phaseinc_fractional</td><td>a phase increment value as calculated by <a class="el" href="class_oscil.html#a184110cb1901d2742a6016b46cbea027" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a>. </td></tr>
+    <tr><td class="paramname">phaseinc_fractional</td><td>a phase increment value as calculated by <a class="el" href="class_oscil.html#a48ad51d7fbac24263008a9931f537baf" title="phaseIncFromFreq() and setPhaseInc() are for saving processor time when sliding between frequencies...">phaseIncFromFreq()</a>. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00275">275</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00359">359</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -736,7 +1002,7 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00100">100</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_oscil_8h_source.html#l00097">97</a> of file <a class="el" href="_oscil_8h_source.html">Oscil.h</a>.</p>
 
 </div>
 </div>
@@ -746,7 +1012,7 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_oscil.html">Oscil</a></li>
-    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
+    <li class="footer">Generated on Thu Apr 11 2024 13:20:17 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version v1.1.0</span>
+   &#160;<span id="projectnumber">version v2.0</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -111,7 +111,20 @@ $(document).ready(function(){initNavTree('class_phasor.html','');});
  <a href="class_phasor.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_phasor_8h_source.html">Phasor.h</a>&gt;</code></p>
-<table class="memberdecls">
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;unsigned int UPDATE_RATE&gt;<br />
+class Phasor&lt; UPDATE_RATE &gt;</h3>
+
+<p><a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency. ">Phasor</a> repeatedly generates a high resolution ramp at a variable frequency. </p>
+<p>The output of <a class="el" href="class_phasor.html#a696198206182acaed5cf27fef226118d" title="Increments one step along the phase. ">Phasor.next()</a> is an unsigned number between 0 and 4294967295, the maximum that can be expressed by an unsigned 32 bit integer. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">UPDATE_RATE</td><td>the rate at which the <a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency. ">Phasor</a> will be updated, usually MOZZI_CONTROL_RATE or MOZZI_AUDIO_RATE. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_phasor_8h_source.html#l00028">28</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a147c4c3aa7506c3da800e6cc77deb4ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phasor.html#a147c4c3aa7506c3da800e6cc77deb4ac">Phasor</a> ()</td></tr>
@@ -136,20 +149,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:adf134d4e4ce960e4c773830fd8467e4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a specific phase increment.  <a href="#adf134d4e4ce960e4c773830fd8467e4b">More...</a><br /></td></tr>
 <tr class="separator:adf134d4e4ce960e4c773830fd8467e4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;unsigned int UPDATE_RATE&gt;<br />
-class Phasor&lt; UPDATE_RATE &gt;</h3>
-
-<p><a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency. ">Phasor</a> repeatedly generates a high resolution ramp at a variable frequency. </p>
-<p>The output of <a class="el" href="class_phasor.html#a696198206182acaed5cf27fef226118d" title="Increments one step along the phase. ">Phasor.next()</a> is an unsigned number between 0 and 4294967295, the maximum that can be expressed by an unsigned 32 bit integer. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">UPDATE_RATE</td><td>the rate at which the <a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency. ">Phasor</a> will be updated, usually CONTROL_RATE or AUDIO_RATE. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="_phasor_8h_source.html#l00032">32</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a147c4c3aa7506c3da800e6cc77deb4ac"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a147c4c3aa7506c3da800e6cc77deb4ac">&#9670;&nbsp;</a></span>Phasor()</h2>
 
@@ -176,9 +176,9 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
 </div><div class="memdoc">
 
 <p>Constructor. </p>
-<p>"Phasor &lt;AUDIO_RATE&gt; myphasor;" makes a <a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency. ">Phasor</a> which updates at AUDIO_RATE. </p>
+<p>"Phasor &lt;MOZZI_AUDIO_RATE&gt; myphasor;" makes a <a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency. ">Phasor</a> which updates at MOZZI_AUDIO_RATE. </p>
 
-<p class="definition">Definition at line <a class="el" href="_phasor_8h_source.html#l00042">42</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_phasor_8h_source.html#l00038">38</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
 
 </div>
 </div>
@@ -211,7 +211,7 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
 <p>Increments one step along the phase. </p>
 <dl class="section return"><dt>Returns</dt><dd>the next value. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_phasor_8h_source.html#l00050">50</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_phasor_8h_source.html#l00046">46</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
 
 </div>
 </div>
@@ -250,7 +250,7 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the phase increment value which will produce a given frequency. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_phasor_8h_source.html#l00098">98</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_phasor_8h_source.html#l00094">94</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
 
 </div>
 </div>
@@ -283,7 +283,7 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
 <p>Set the current value of the phasor. </p>
 <p>The <a class="el" href="class_phasor.html" title="Phasor repeatedly generates a high resolution ramp at a variable frequency. ">Phasor</a> will continue incrementing from this value using any previously calculated step size. </p>
 
-<p class="definition">Definition at line <a class="el" href="_phasor_8h_source.html#l00060">60</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_phasor_8h_source.html#l00056">56</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
 
 </div>
 </div>
@@ -322,7 +322,7 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>Timing 8us </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_phasor_8h_source.html#l00072">72</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_phasor_8h_source.html#l00068">68</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
 
 </div>
 </div>
@@ -360,7 +360,7 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_phasor_8h_source.html#l00083">83</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_phasor_8h_source.html#l00079">79</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
 
 </div>
 </div>
@@ -398,7 +398,7 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_phasor_8h_source.html#l00108">108</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_phasor_8h_source.html#l00104">104</a> of file <a class="el" href="_phasor_8h_source.html">Phasor.h</a>.</p>
 
 </div>
 </div>
@@ -408,7 +408,7 @@ template&lt;unsigned int UPDATE_RATE&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_phasor.html">Phasor</a></li>
-    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
+    <li class="footer">Generated on Thu Apr 11 2024 13:20:17 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

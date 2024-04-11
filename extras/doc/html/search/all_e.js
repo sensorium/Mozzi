@@ -42,7 +42,7 @@ var searchData=
   ['q16n16',['Q16n16',['../group__fixmath.html#gab3127fd8ac279e1d8dda0292bc1fc8dc',1,'mozzi_fixmath.h']]],
   ['q16n16_5f2pi',['Q16n16_2PI',['../group__fixmath.html#ga4bf1124c7bdac767263b2037211933e3',1,'mozzi_fixmath.h']]],
   ['q16n16_5ffix1',['Q16n16_FIX1',['../group__fixmath.html#gaa4538a17e7e75b14a5826405ad06acef',1,'mozzi_fixmath.h']]],
-  ['q16n16_5fmtof',['Q16n16_mtof',['../group__midi.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2',1,'Q16n16_mtof(Q16n16 midival_fractional):&#160;mozzi_midi.cpp'],['../group__midi.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2',1,'Q16n16_mtof(Q16n16 midival):&#160;mozzi_midi.cpp']]],
+  ['q16n16_5fmtof',['Q16n16_mtof',['../class_midi_to_freq_private.html#a84543eb6614218d9fee74b960b8a7644',1,'MidiToFreqPrivate::Q16n16_mtof()'],['../group__midi.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2',1,'Q16n16_mtof():&#160;mozzi_midi.h']]],
   ['q16n16_5fpi',['Q16n16_PI',['../group__fixmath.html#gafd4492673766377d6d9202e43bb3d8dd',1,'mozzi_fixmath.h']]],
   ['q16n16_5fpow2',['Q16n16_pow2',['../group__fixmath.html#ga2e1d9d0fe4ba7edb9830efb7887c36bd',1,'mozzi_fixmath.cpp']]],
   ['q16n16_5fto_5ffloat',['Q16n16_to_float',['../group__fixmath.html#gafcb57f2d0fdcce65b60401f47b871d14',1,'mozzi_fixmath.h']]],

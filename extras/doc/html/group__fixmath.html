@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Mozzi: Fixmath</title>
+<title>Mozzi: Fast integer based fixed-point arithmetic</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version v1.1.0</span>
+   &#160;<span id="projectnumber">version v2.0</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -102,12 +102,17 @@ $(document).ready(function(){initNavTree('group__fixmath.html','');});
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Fixmath</div>  </div>
+<div class="title">Fast integer based fixed-point arithmetic</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Fixed point fractional number types and conversion routines.  
 <a href="#details">More...</a></p>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>Fixed point fractional number types and conversion routines. </p>
+<p>Fixed point is often best for fast audio code for Arduino, and these can ease some of the pain. </p><dl class="section note"><dt>Note</dt><dd>Take care when converting that the important bits of your numbers will fit in the types you choose! </dd>
+<dd>
+Timing: converting between fixed and float 10-12us, converting between fixed types about 1us. </dd></dl>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -226,71 +231,71 @@ typedef uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el
 <tr class="memdesc:gab3127fd8ac279e1d8dda0292bc1fc8dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">unsigned fractional number using 16 integer bits and 16 fractional bits, represents 0 to 65535.999 <br /></td></tr>
 <tr class="separator:gab3127fd8ac279e1d8dda0292bc1fc8dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga42c55269acbc41ca1fbcbb7aea5e8767"><td class="memItemLeft" align="right" valign="top"><a id="ga42c55269acbc41ca1fbcbb7aea5e8767"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga42c55269acbc41ca1fbcbb7aea5e8767">Q0n7_FIX1</a>&#160;&#160;&#160;((<a class="el" href="group__fixmath.html#ga9a64ce80fa7c320187d2cf2104a96daa">Q0n7</a>) 127)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga42c55269acbc41ca1fbcbb7aea5e8767">Q0n7_FIX1</a></td></tr>
 <tr class="memdesc:ga42c55269acbc41ca1fbcbb7aea5e8767"><td class="mdescLeft">&#160;</td><td class="mdescRight">0.992 in Q0n7 format <br /></td></tr>
 <tr class="separator:ga42c55269acbc41ca1fbcbb7aea5e8767"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1a04e29b3420231fc54039caf460a88c"><td class="memItemLeft" align="right" valign="top"><a id="ga1a04e29b3420231fc54039caf460a88c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga1a04e29b3420231fc54039caf460a88c">Q7n8_FIX1</a>&#160;&#160;&#160;((<a class="el" href="group__fixmath.html#ga65001bd29222d896ae9256fd7a415d41">Q7n8</a>) 256)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga1a04e29b3420231fc54039caf460a88c">Q7n8_FIX1</a></td></tr>
 <tr class="memdesc:ga1a04e29b3420231fc54039caf460a88c"><td class="mdescLeft">&#160;</td><td class="mdescRight">1 in Q7n8 format <br /></td></tr>
 <tr class="separator:ga1a04e29b3420231fc54039caf460a88c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga00d3299412f5460cae3af8f0c58b2db1"><td class="memItemLeft" align="right" valign="top"><a id="ga00d3299412f5460cae3af8f0c58b2db1"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga00d3299412f5460cae3af8f0c58b2db1">Q8n8_FIX1</a>&#160;&#160;&#160;((<a class="el" href="group__fixmath.html#ga8dcb8a23bfed3b8404f7a0d73f300c8a">Q8n8</a>) 256)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga00d3299412f5460cae3af8f0c58b2db1">Q8n8_FIX1</a></td></tr>
 <tr class="memdesc:ga00d3299412f5460cae3af8f0c58b2db1"><td class="mdescLeft">&#160;</td><td class="mdescRight">1 in Q8n8 format <br /></td></tr>
 <tr class="separator:ga00d3299412f5460cae3af8f0c58b2db1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaad55b32c6590a3e4bb07972a7acec4a9"><td class="memItemLeft" align="right" valign="top"><a id="gaad55b32c6590a3e4bb07972a7acec4a9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#gaad55b32c6590a3e4bb07972a7acec4a9">Q23n8_FIX1</a>&#160;&#160;&#160;((<a class="el" href="group__fixmath.html#gaa43a54806ef427491497cc1762480d13">Q23n8</a>) 256)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#gaad55b32c6590a3e4bb07972a7acec4a9">Q23n8_FIX1</a></td></tr>
 <tr class="memdesc:gaad55b32c6590a3e4bb07972a7acec4a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">1 in Q23n8 format <br /></td></tr>
 <tr class="separator:gaad55b32c6590a3e4bb07972a7acec4a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6f99802ebadd6b1b3ee707892e36cab9"><td class="memItemLeft" align="right" valign="top"><a id="ga6f99802ebadd6b1b3ee707892e36cab9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga6f99802ebadd6b1b3ee707892e36cab9">Q1n14_FIX1</a>&#160;&#160;&#160;((<a class="el" href="group__fixmath.html#ga856876974bff2af13e507f42af0c4925">Q1n14</a>) 16384)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga6f99802ebadd6b1b3ee707892e36cab9">Q1n14_FIX1</a></td></tr>
 <tr class="memdesc:ga6f99802ebadd6b1b3ee707892e36cab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">1 in Q1n14 format <br /></td></tr>
 <tr class="separator:ga6f99802ebadd6b1b3ee707892e36cab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8124fb8d1bcb111532f22726dbf3e5cc"><td class="memItemLeft" align="right" valign="top"><a id="ga8124fb8d1bcb111532f22726dbf3e5cc"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga8124fb8d1bcb111532f22726dbf3e5cc">Q1n15_FIX1</a>&#160;&#160;&#160;((<a class="el" href="group__fixmath.html#gadefb02e4d84cdb085fbc6251b8f4e8be">Q1n15</a>) 32768)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga8124fb8d1bcb111532f22726dbf3e5cc">Q1n15_FIX1</a></td></tr>
 <tr class="memdesc:ga8124fb8d1bcb111532f22726dbf3e5cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">1 in Q1n15 format <br /></td></tr>
 <tr class="separator:ga8124fb8d1bcb111532f22726dbf3e5cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa4538a17e7e75b14a5826405ad06acef"><td class="memItemLeft" align="right" valign="top"><a id="gaa4538a17e7e75b14a5826405ad06acef"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#gaa4538a17e7e75b14a5826405ad06acef">Q16n16_FIX1</a>&#160;&#160;&#160;((<a class="el" href="group__fixmath.html#gab3127fd8ac279e1d8dda0292bc1fc8dc">Q16n16</a>) 65536)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#gaa4538a17e7e75b14a5826405ad06acef">Q16n16_FIX1</a></td></tr>
 <tr class="memdesc:gaa4538a17e7e75b14a5826405ad06acef"><td class="mdescLeft">&#160;</td><td class="mdescRight">1 in Q16n16 format <br /></td></tr>
 <tr class="separator:gaa4538a17e7e75b14a5826405ad06acef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga38ec011e7e3e08f5df091b608ce621e2"><td class="memItemLeft" align="right" valign="top"><a id="ga38ec011e7e3e08f5df091b608ce621e2"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga38ec011e7e3e08f5df091b608ce621e2">Q0n15_FIX1</a>&#160;&#160;&#160;((<a class="el" href="group__fixmath.html#ga7b0aeeb726b5790b7b181f4f1ba08ee4">Q0n15</a>) 32767)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga38ec011e7e3e08f5df091b608ce621e2">Q0n15_FIX1</a></td></tr>
 <tr class="memdesc:ga38ec011e7e3e08f5df091b608ce621e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">0.999 in Q0n15 format <br /></td></tr>
 <tr class="separator:ga38ec011e7e3e08f5df091b608ce621e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa1e02cbcdc65171103653df03fec3b76"><td class="memItemLeft" align="right" valign="top"><a id="gaa1e02cbcdc65171103653df03fec3b76"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#gaa1e02cbcdc65171103653df03fec3b76">Q0n16_FIX1</a>&#160;&#160;&#160;((<a class="el" href="group__fixmath.html#ga38b7537c31ebeb6a2aba2ea34d23f230">Q0n16</a>) 65535)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#gaa1e02cbcdc65171103653df03fec3b76">Q0n16_FIX1</a></td></tr>
 <tr class="memdesc:gaa1e02cbcdc65171103653df03fec3b76"><td class="mdescLeft">&#160;</td><td class="mdescRight">0.999 in Q0n16 format <br /></td></tr>
 <tr class="separator:gaa1e02cbcdc65171103653df03fec3b76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gafa16db677f958c243a826695b2c14c3c"><td class="memItemLeft" align="right" valign="top"><a id="gafa16db677f958c243a826695b2c14c3c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#gafa16db677f958c243a826695b2c14c3c">Q15n0_FIX1</a>&#160;&#160;&#160;((<a class="el" href="group__fixmath.html#ga97de6e3641b7638093a53cd137c8568c">Q15n0</a>) 16384)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#gafa16db677f958c243a826695b2c14c3c">Q15n0_FIX1</a></td></tr>
 <tr class="memdesc:gafa16db677f958c243a826695b2c14c3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">1 in Q15n0 format <br /></td></tr>
 <tr class="separator:gafa16db677f958c243a826695b2c14c3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga7933033ba3cd84a4d09c0bd652378a38"><td class="memItemLeft" align="right" valign="top"><a id="ga7933033ba3cd84a4d09c0bd652378a38"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga7933033ba3cd84a4d09c0bd652378a38">Q15n16_FIX1</a>&#160;&#160;&#160;((<a class="el" href="group__fixmath.html#ga3e1cab88474edfa08535402573125cae">Q15n16</a>) 65536)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga7933033ba3cd84a4d09c0bd652378a38">Q15n16_FIX1</a></td></tr>
 <tr class="memdesc:ga7933033ba3cd84a4d09c0bd652378a38"><td class="mdescLeft">&#160;</td><td class="mdescRight">1 in Q15n16 format <br /></td></tr>
 <tr class="separator:ga7933033ba3cd84a4d09c0bd652378a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5083b2bbeeb968258e2da31d3af26a25"><td class="memItemLeft" align="right" valign="top"><a id="ga5083b2bbeeb968258e2da31d3af26a25"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga5083b2bbeeb968258e2da31d3af26a25">Q8n24_FIX1</a>&#160;&#160;&#160;((<a class="el" href="group__fixmath.html#ga5ce3f8456c6ea996029b8ea0d96fb3e8">Q8n24</a>) 16777216)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga5083b2bbeeb968258e2da31d3af26a25">Q8n24_FIX1</a></td></tr>
 <tr class="memdesc:ga5083b2bbeeb968258e2da31d3af26a25"><td class="mdescLeft">&#160;</td><td class="mdescRight">1 in Q8n24 format <br /></td></tr>
 <tr class="separator:ga5083b2bbeeb968258e2da31d3af26a25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gacb7fad10f1c2b67504271149f8f1215f"><td class="memItemLeft" align="right" valign="top"><a id="gacb7fad10f1c2b67504271149f8f1215f"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#gacb7fad10f1c2b67504271149f8f1215f">Q0n32_FIX1</a>&#160;&#160;&#160;((<a class="el" href="group__fixmath.html#gae32cb6df74dc8053c5da2a7b6378583b">Q0n32</a>) 4294967295)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#gacb7fad10f1c2b67504271149f8f1215f">Q0n32_FIX1</a></td></tr>
 <tr class="memdesc:gacb7fad10f1c2b67504271149f8f1215f"><td class="mdescLeft">&#160;</td><td class="mdescRight">0.999999999767169 in Q0n32 format <br /></td></tr>
 <tr class="separator:gacb7fad10f1c2b67504271149f8f1215f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gafd4492673766377d6d9202e43bb3d8dd"><td class="memItemLeft" align="right" valign="top"><a id="gafd4492673766377d6d9202e43bb3d8dd"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#gafd4492673766377d6d9202e43bb3d8dd">Q16n16_PI</a>&#160;&#160;&#160;((<a class="el" href="group__fixmath.html#gab3127fd8ac279e1d8dda0292bc1fc8dc">Q16n16</a>) 205887)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#gafd4492673766377d6d9202e43bb3d8dd">Q16n16_PI</a></td></tr>
 <tr class="memdesc:gafd4492673766377d6d9202e43bb3d8dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">PI in Q16n16 format. <br /></td></tr>
 <tr class="separator:gafd4492673766377d6d9202e43bb3d8dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac065d8a968cb7c4dd713458682ee1308"><td class="memItemLeft" align="right" valign="top"><a id="gac065d8a968cb7c4dd713458682ee1308"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#gac065d8a968cb7c4dd713458682ee1308">Q3n13_2PI</a>&#160;&#160;&#160;((<a class="el" href="group__fixmath.html#ga2ca0a65f5b9ddef56756b4a75b3b8a68">Q3n13</a>) 411775)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#gac065d8a968cb7c4dd713458682ee1308">Q3n13_2PI</a></td></tr>
 <tr class="memdesc:gac065d8a968cb7c4dd713458682ee1308"><td class="mdescLeft">&#160;</td><td class="mdescRight">2*PI in Q3n13 format <br /></td></tr>
 <tr class="separator:gac065d8a968cb7c4dd713458682ee1308"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4bf1124c7bdac767263b2037211933e3"><td class="memItemLeft" align="right" valign="top"><a id="ga4bf1124c7bdac767263b2037211933e3"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga4bf1124c7bdac767263b2037211933e3">Q16n16_2PI</a>&#160;&#160;&#160;((<a class="el" href="group__fixmath.html#gab3127fd8ac279e1d8dda0292bc1fc8dc">Q16n16</a>) 411775)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga4bf1124c7bdac767263b2037211933e3">Q16n16_2PI</a></td></tr>
 <tr class="memdesc:ga4bf1124c7bdac767263b2037211933e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">2*PI in Q16n16 format <br /></td></tr>
 <tr class="separator:ga4bf1124c7bdac767263b2037211933e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac357561cf7360f82a264d90096d0126b"><td class="memItemLeft" align="right" valign="top"><a id="gac357561cf7360f82a264d90096d0126b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#gac357561cf7360f82a264d90096d0126b">low15bits</a>&#160;&#160;&#160;((<a class="el" href="group__fixmath.html#gadefb02e4d84cdb085fbc6251b8f4e8be">Q1n15</a>) 32767)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#gac357561cf7360f82a264d90096d0126b">low15bits</a></td></tr>
 <tr class="memdesc:gac357561cf7360f82a264d90096d0126b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Useful for keeping the lower 15 bits of a Q1n15 number, using &amp;. <br /></td></tr>
 <tr class="separator:gac357561cf7360f82a264d90096d0126b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1e0eab490ffe9a47fd78bcc449e3b995"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__fixmath.html#ga9a64ce80fa7c320187d2cf2104a96daa">Q0n7</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fixmath.html#ga1e0eab490ffe9a47fd78bcc449e3b995">float_to_Q0n7</a> (float a)</td></tr>
@@ -501,11 +506,6 @@ typedef uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el
 <tr class="memdesc:gafcb57f2d0fdcce65b60401f47b871d14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert fix to float.  <a href="#gafcb57f2d0fdcce65b60401f47b871d14">More...</a><br /></td></tr>
 <tr class="separator:gafcb57f2d0fdcce65b60401f47b871d14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Fixed point fractional number types and conversion routines. </p>
-<p>Fixed point is often best for fast audio code for Arduino, and these can ease some of the pain. </p><dl class="section note"><dt>Note</dt><dd>Take care when converting that the important bits of your numbers will fit in the types you choose! </dd>
-<dd>
-Timing: converting between fixed and float 10-12us, converting between fixed types about 1us. </dd></dl>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga4d20591828f0189963f1190f7197ba68"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga4d20591828f0189963f1190f7197ba68">&#9670;&nbsp;</a></span>float_to_Q0n16()</h2>
@@ -539,7 +539,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00124">124</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00122">122</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -575,7 +575,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00094">94</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00092">92</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -611,7 +611,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00097">97</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00095">95</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -647,7 +647,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00127">127</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00125">125</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -683,7 +683,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00121">121</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00119">119</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -719,7 +719,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00106">106</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00104">104</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -755,7 +755,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00109">109</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00107">107</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -791,7 +791,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00115">115</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00113">113</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -827,7 +827,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00118">118</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00116">116</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -863,7 +863,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00100">100</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00098">98</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -899,7 +899,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00112">112</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00110">110</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -935,7 +935,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00103">103</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00101">101</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -971,7 +971,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00208">208</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00206">206</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1007,7 +1007,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00136">136</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00134">134</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1043,7 +1043,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00133">133</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00131">131</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1079,7 +1079,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00130">130</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00128">128</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1115,7 +1115,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00157">157</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00155">155</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1151,7 +1151,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00151">151</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00149">149</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1187,7 +1187,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00154">154</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00152">152</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1223,7 +1223,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00139">139</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00137">137</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1259,7 +1259,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00148">148</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00146">146</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1295,7 +1295,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00145">145</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00143">143</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1331,7 +1331,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00142">142</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00140">140</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1367,7 +1367,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00211">211</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00209">209</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1403,7 +1403,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00285">285</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00283">283</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1439,7 +1439,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00267">267</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00265">265</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1475,7 +1475,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00273">273</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00271">271</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1511,7 +1511,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00282">282</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00280">280</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1547,7 +1547,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00276">276</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00274">274</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1583,7 +1583,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00270">270</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00268">268</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1619,7 +1619,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00279">279</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00277">277</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1655,7 +1655,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00226">226</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00224">224</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1691,7 +1691,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00214">214</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00212">212</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1727,7 +1727,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00223">223</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00221">221</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1763,7 +1763,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00217">217</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00215">215</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1799,7 +1799,7 @@ Timing: converting between fixed and float 10-12us, converting between fixed typ
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00220">220</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00218">218</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1865,7 +1865,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00300">300</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00298">298</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1901,7 +1901,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00288">288</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00286">286</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1937,7 +1937,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00294">294</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00292">292</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -1973,7 +1973,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00297">297</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00295">295</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2009,7 +2009,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00291">291</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00289">289</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2045,7 +2045,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00199">199</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00197">197</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2081,7 +2081,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00196">196</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00194">194</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2117,7 +2117,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00205">205</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00203">203</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2153,7 +2153,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00202">202</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00200">200</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2189,7 +2189,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00249">249</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00247">247</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2225,7 +2225,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00242">242</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00240">240</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2261,7 +2261,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00239">239</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00237">237</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2297,7 +2297,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00236">236</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00234">234</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2333,7 +2333,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00245">245</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00243">243</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2369,7 +2369,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00264">264</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00262">262</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2405,7 +2405,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00252">252</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00250">250</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2441,7 +2441,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00255">255</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00253">253</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2477,7 +2477,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00261">261</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00259">259</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2513,7 +2513,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00258">258</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00256">256</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2549,7 +2549,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00163">163</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00161">161</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2585,7 +2585,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00160">160</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00158">158</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2633,7 +2633,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a Q7n8 format product </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00340">340</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00338">338</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2669,7 +2669,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00184">184</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00182">182</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2705,7 +2705,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00181">181</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00179">179</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2741,7 +2741,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00178">178</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00176">176</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2777,7 +2777,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00172">172</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00170">170</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2813,7 +2813,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00175">175</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00173">173</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2849,7 +2849,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00166">166</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00164">164</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2885,7 +2885,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00169">169</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00167">167</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2921,7 +2921,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00232">232</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00230">230</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2957,7 +2957,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00229">229</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00227">227</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -2993,7 +2993,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00193">193</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00191">191</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -3029,7 +3029,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00190">190</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00188">188</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -3065,7 +3065,7 @@ fast replacement for pow(2,x), where x is a Q8n8 fractional fixed-point exponent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00187">187</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__fixmath_8h_source.html#l00185">185</a> of file <a class="el" href="mozzi__fixmath_8h_source.html">mozzi_fixmath.h</a>.</p>
 
 </div>
 </div>
@@ -3155,7 +3155,7 @@ fast uint8_t modulus </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
+    <li class="footer">Generated on Thu Apr 11 2024 13:20:17 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

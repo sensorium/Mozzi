@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version v1.1.0</span>
+   &#160;<span id="projectnumber">version v2.0</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -112,7 +112,13 @@ A DC-blocking filter useful for highlighting changes in control signals.
  <a href="class_d_cfilter.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_d_cfilter_8h_source.html">DCfilter.h</a>&gt;</code></p>
-<table class="memberdecls">
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><br />
+A DC-blocking filter useful for highlighting changes in control signals. </p>
+<p>The output of the filter settles to 0 if the incoming signal stays constant. If the input changes, the filter output swings to track the change and eventually settles back to 0. </p>
+
+<p class="definition">Definition at line <a class="el" href="_d_cfilter_8h_source.html#l00032">32</a> of file <a class="el" href="_d_cfilter_8h_source.html">DCfilter.h</a>.</p>
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab55e871fc9d11dfb9231e44627181c2c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d_cfilter.html#ab55e871fc9d11dfb9231e44627181c2c">DCfilter</a> (float pole)</td></tr>
@@ -124,13 +130,7 @@ Instantiate a DC-blocking filter.  <a href="#ab55e871fc9d11dfb9231e44627181c2c">
 Filter the incoming value and return the result.  <a href="#ae900f943d9520fbf3a522508231d82b0">More...</a><br /></td></tr>
 <tr class="separator:ae900f943d9520fbf3a522508231d82b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><br />
-A DC-blocking filter useful for highlighting changes in control signals. </p>
-<p>The output of the filter settles to 0 if the incoming signal stays constant. If the input changes, the filter output swings to track the change and eventually settles back to 0. </p>
-
-<p class="definition">Definition at line <a class="el" href="_d_cfilter_8h_source.html#l00032">32</a> of file <a class="el" href="_d_cfilter_8h_source.html">DCfilter.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab55e871fc9d11dfb9231e44627181c2c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab55e871fc9d11dfb9231e44627181c2c">&#9670;&nbsp;</a></span>DCfilter()</h2>
 
@@ -213,7 +213,7 @@ Filter the incoming value and return the result. </p>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_d_cfilter.html">DCfilter</a></li>
-    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
+    <li class="footer">Generated on Thu Apr 11 2024 13:20:17 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

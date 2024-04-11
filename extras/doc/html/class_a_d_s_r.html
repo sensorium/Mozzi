@@ -37,7 +37,7 @@
   <td id="projectlogo"><img alt="Logo" src="mozzi-circle.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Mozzi
-   &#160;<span id="projectnumber">version v1.1.0</span>
+   &#160;<span id="projectnumber">version v2.0</span>
    </div>
    <div id="projectbrief">sound synthesis library for Arduino</div>
   </td>
@@ -113,7 +113,21 @@ $(document).ready(function(){initNavTree('class_a_d_s_r.html','');});
  <a href="class_a_d_s_r.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>&gt;</code></p>
-<table class="memberdecls">
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt;<br />
+class ADSR&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;</h3>
+
+<p>A simple <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> envelope generator. </p>
+<p>This implementation has separate <a class="el" href="class_a_d_s_r.html#a1bef7104c263fc1f0df28809a788ee23" title="Updates the internal controls of the ADSR. ">update()</a> and <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> methods, where <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> interpolates values between each <a class="el" href="class_a_d_s_r.html#a1bef7104c263fc1f0df28809a788ee23" title="Updates the internal controls of the ADSR. ">update()</a>. The "normal" way to use this would be with <a class="el" href="class_a_d_s_r.html#a1bef7104c263fc1f0df28809a788ee23" title="Updates the internal controls of the ADSR. ">update()</a> in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>, where it calculates a new internal state each control step, and then <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> is in <a class="el" href="group__core.html#ga936b78c8ab7a4d7f7075b41e32780d3e" title="This is where you put your audio code. ">updateAudio()</a>, called much more often, where it interpolates between the control values. This also allows the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> updates to be made even more sparsely if desired, eg. every 3rd control update. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">CONTROL_UPDATE_RATE</td><td>The frequency of control updates. Ordinarily this will be MOZZI_CONTROL_RATE, but an alternative (amongst others) is to set this as well as the LERP_RATE parameter to MOZZI_AUDIO_RATE, and call both <a class="el" href="class_a_d_s_r.html#a1bef7104c263fc1f0df28809a788ee23" title="Updates the internal controls of the ADSR. ">update()</a> and <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> in <a class="el" href="group__core.html#ga936b78c8ab7a4d7f7075b41e32780d3e" title="This is where you put your audio code. ">updateAudio()</a>. Such a use would allow accurate envelopes with finer resolution of the control points than MOZZI_CONTROL_RATE. </td></tr>
+    <tr><td class="paramname">LERP_RATE</td><td>Sets how often <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> will be called, to interpolate between updates set by CONTROL_UPDATE_RATE. This will produce the smoothest results if it's set to MOZZI_AUDIO_RATE, but if you need to save processor time and your envelope changes slowly or controls something like a filter where there may not be problems with glitchy or clicking transitions, LERP_RATE could be set to MOZZI_CONTROL_RATE (for instance). Then <a class="el" href="class_a_d_s_r.html#a1bef7104c263fc1f0df28809a788ee23" title="Updates the internal controls of the ADSR. ">update()</a> and <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> could both be called in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>, greatly reducing the amount of processing required compared to calling <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> in <a class="el" href="group__core.html#ga936b78c8ab7a4d7f7075b41e32780d3e" title="This is where you put your audio code. ">updateAudio()</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00041">41</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4bd943baa8c5b68d3ee7b3d385e77221"><td class="memItemLeft" align="right" valign="top"><a id="a4bd943baa8c5b68d3ee7b3d385e77221"></a>
@@ -199,21 +213,7 @@ Public Attributes</h2></td></tr>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>adsr_playing</b></td></tr>
 <tr class="separator:aff42b7b93bb272371a90af7d8a935695"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T = unsigned int&gt;<br />
-class ADSR&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;</h3>
-
-<p>A simple <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> envelope generator. </p>
-<p>This implementation has separate <a class="el" href="class_a_d_s_r.html#a1bef7104c263fc1f0df28809a788ee23" title="Updates the internal controls of the ADSR. ">update()</a> and <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> methods, where <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> interpolates values between each <a class="el" href="class_a_d_s_r.html#a1bef7104c263fc1f0df28809a788ee23" title="Updates the internal controls of the ADSR. ">update()</a>. The "normal" way to use this would be with <a class="el" href="class_a_d_s_r.html#a1bef7104c263fc1f0df28809a788ee23" title="Updates the internal controls of the ADSR. ">update()</a> in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>, where it calculates a new internal state each control step, and then <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> is in <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a>, called much more often, where it interpolates between the control values. This also allows the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> updates to be made even more sparsely if desired, eg. every 3rd control update. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">CONTROL_UPDATE_RATE</td><td>The frequency of control updates. Ordinarily this will be CONTROL_RATE, but an alternative (amongst others) is to set this as well as the LERP_RATE parameter to AUDIO_RATE, and call both <a class="el" href="class_a_d_s_r.html#a1bef7104c263fc1f0df28809a788ee23" title="Updates the internal controls of the ADSR. ">update()</a> and <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> in <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a>. Such a use would allow accurate envelopes with finer resolution of the control points than CONTROL_RATE. </td></tr>
-    <tr><td class="paramname">LERP_RATE</td><td>Sets how often <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> will be called, to interpolate between updates set by CONTROL_UPDATE_RATE. This will produce the smoothest results if it's set to AUDIO_RATE, but if you need to save processor time and your envelope changes slowly or controls something like a filter where there may not be problems with glitchy or clicking transitions, LERP_RATE could be set to CONTROL_RATE (for instance). Then <a class="el" href="class_a_d_s_r.html#a1bef7104c263fc1f0df28809a788ee23" title="Updates the internal controls of the ADSR. ">update()</a> and <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> could both be called in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>, greatly reducing the amount of processing required compared to calling <a class="el" href="class_a_d_s_r.html#aa032d8689ff618dbfa974ec6803803ef" title="Advances one audio step along the ADSR and returns the level. ">next()</a> in <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a>. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00045">45</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="aa032d8689ff618dbfa974ec6803803ef"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa032d8689ff618dbfa974ec6803803ef">&#9670;&nbsp;</a></span>next()</h2>
 
@@ -240,9 +240,9 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
 </div><div class="memdoc">
 
 <p>Advances one audio step along the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> and returns the level. </p>
-<p>Call this in <a class="el" href="group__core.html#ga41f0db3f560ff1fdec78f9c60822466e" title="This is where you put your audio code. ">updateAudio()</a>. </p><dl class="section return"><dt>Returns</dt><dd>the next value, as an unsigned char. </dd></dl>
+<p>Call this in <a class="el" href="group__core.html#ga936b78c8ab7a4d7f7075b41e32780d3e" title="This is where you put your audio code. ">updateAudio()</a>. </p><dl class="section return"><dt>Returns</dt><dd>the next value, as an unsigned char. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00165">165</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00161">161</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -273,7 +273,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
 
 <p>Start the release phase of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00192">192</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00188">188</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -311,7 +311,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00180">180</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00176">176</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -343,7 +343,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
 <p>Tells if the envelope is currently playing. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if playing, false if in IDLE state </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00431">431</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00427">427</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -392,7 +392,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00253">253</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00249">249</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -455,7 +455,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00415">415</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00411">411</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -493,7 +493,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00202">202</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00198">198</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -524,7 +524,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
 </div><div class="memdoc">
 
 <p>Set the attack time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> in milliseconds. </p>
-<p>The actual time taken will be resolved within the resolution of CONTROL_RATE. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The actual time taken will be resolved within the resolution of MOZZI_CONTROL_RATE. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">msec</td><td>the unsigned int attack time in milliseconds. </td></tr>
   </table>
@@ -532,7 +532,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
 </dl>
 <dl class="section note"><dt>Note</dt><dd>Beware of low values (less than 20 or so, depending on how many steps are being taken), in case internal step size gets calculated as 0, which would mean nothing happens. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00287">287</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00283">283</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -570,7 +570,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00366">366</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00362">362</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -608,7 +608,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00213">213</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00209">209</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -639,7 +639,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
 </div><div class="memdoc">
 
 <p>Set the decay time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> in milliseconds. </p>
-<p>The actual time taken will be resolved within the resolution of CONTROL_RATE. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The actual time taken will be resolved within the resolution of MOZZI_CONTROL_RATE. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">msec</td><td>the unsigned int decay time in milliseconds. </td></tr>
   </table>
@@ -647,7 +647,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
 </dl>
 <dl class="section note"><dt>Note</dt><dd>Beware of low values (less than 20 or so, depending on how many steps are being taken), in case internal step size gets calculated as 0, which would mean nothing happens. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00300">300</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00296">296</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -685,7 +685,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00376">376</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00372">372</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -748,7 +748,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00270">270</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00266">266</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -786,7 +786,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00234">234</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00230">230</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -817,7 +817,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
 </div><div class="memdoc">
 
 <p>Set the release time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> in milliseconds. </p>
-<p>The actual time taken will be resolved within the resolution of CONTROL_RATE. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The actual time taken will be resolved within the resolution of MOZZI_CONTROL_RATE. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">msec</td><td>the unsigned int release time in milliseconds. </td></tr>
   </table>
@@ -825,7 +825,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
 </dl>
 <dl class="section note"><dt>Note</dt><dd>Beware of low values (less than 20 or so, depending on how many steps are being taken), in case internal step size gets calculated as 0, which would mean nothing happens. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00328">328</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00324">324</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -863,7 +863,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00396">396</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00392">392</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -901,7 +901,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00224">224</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00220">220</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -932,7 +932,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
 </div><div class="memdoc">
 
 <p>Set the sustain time of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> in milliseconds. </p>
-<p>The actual time taken will be resolved within the resolution of CONTROL_RATE. The sustain phase will finish if the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> recieves a <a class="el" href="class_a_d_s_r.html#a3c7362c1c91486e09a306b5109ad498c" title="Start the release phase of the ADSR. ">noteOff()</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The actual time taken will be resolved within the resolution of MOZZI_CONTROL_RATE. The sustain phase will finish if the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> recieves a <a class="el" href="class_a_d_s_r.html#a3c7362c1c91486e09a306b5109ad498c" title="Start the release phase of the ADSR. ">noteOff()</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">msec</td><td>the unsigned int sustain time in milliseconds. </td></tr>
   </table>
@@ -940,7 +940,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
 </dl>
 <dl class="section note"><dt>Note</dt><dd>Beware of low values (less than 20 or so, depending on how many steps are being taken), in case internal step size gets calculated as 0, which would mean nothing happens. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00314">314</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00310">310</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -978,7 +978,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00386">386</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00382">382</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -1031,7 +1031,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
 </div><div class="memdoc">
 
 <p>Set the attack, decay and release times of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a> in milliseconds. </p>
-<p>The actual times will be resolved within the resolution of CONTROL_RATE. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The actual times will be resolved within the resolution of MOZZI_CONTROL_RATE. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">attack_ms</td><td>the new attack time in milliseconds. </td></tr>
     <tr><td class="paramname">decay_ms</td><td>the new decay time in milliseconds. </td></tr>
@@ -1042,7 +1042,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
 </dl>
 <dl class="section note"><dt>Note</dt><dd>Beware of low values (less than 20 or so, depending on how many steps are being taken), in case internal step size gets calculated as 0, which would mean nothing happens. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00351">351</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00347">347</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -1074,7 +1074,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
 <p>Updates the internal controls of the <a class="el" href="class_a_d_s_r.html" title="A simple ADSR envelope generator. ">ADSR</a>. </p>
 <p>Call this in <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code. ">updateControl()</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00132">132</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_s_r_8h_source.html#l00128">128</a> of file <a class="el" href="_a_d_s_r_8h_source.html">ADSR.h</a>.</p>
 
 </div>
 </div>
@@ -1084,7 +1084,7 @@ template&lt;unsigned int CONTROL_UPDATE_RATE, unsigned int LERP_RATE, typename T
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_a_d_s_r.html">ADSR</a></li>
-    <li class="footer">Generated on Thu Mar 16 2023 14:01:36 for Mozzi by
+    <li class="footer">Generated on Thu Apr 11 2024 13:20:17 for Mozzi by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

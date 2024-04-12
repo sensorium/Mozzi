@@ -132,33 +132,61 @@ refer to the [Hardware Section of the API-Documentation](https://sensorium.githu
 
 * The timers can be made available with `stopMozzi()`, which stops audio interrupts, until you call `startMozzi()`.
 
-## Contributions / Included Dependencies
+* Note that it is of utmost importance to write non-blocking code, such that the
+  audio buffer never runs low. Hints on how to do this, including why, and how you
+  should avoid using `delay()`, `analogRead()`, and how to make your code run faster,
+  can be found at [on the learn pages](https://sensorium.github.io/Mozzi/learn/hints/).
+
+
+## Extending Mozzi
+
+### Using external chips to produce the sound
+
+External chips (DAC) can also be used on any platform which does not support natively the I2S protocol  using an user defined `audioOutput` function. This can allow a greater audio quality over the native ways to output the sound (PWM for AVR Arduinos and STM32 and 12 bit DAC for Teensy 3.*).
+Examples are provided for the MCP492X DAC (12 bit on SPI) and for the (PT8211) 16 bit stereo DAC using SPI port to emulate the I2S protocol. The latter should be compatible with any DAC using I2S.
+
+### Extendig the library itself
+
+If you enjoy using Mozzi for a project, or have extended it, we would be
+pleased to hear about it and provide support wherever possible. Contribute
+suggestions, improvements and bug fixes to the Mozzi wiki on Github, or
+Fork it to contribute directly to future developments.
+
+Mozzi is a development of research into Mobile Sonification in the
+[SweatSonics](http://stephenbarrass.wordpress.com/tag/sweatsonics/) project.
+
+***
+
+## Contributions / Included Dependencies  
 Modified versions of the following libraries are included in the Mozzi download:  
 
-[TimerOne library](https://www.pjrc.com/teensy/td_libs_TimerOne.html)  
-[FrequencyTimer2 library](https://www.pjrc.com/teensy/td_libs_FrequencyTimer2.html) - now a [fork with support for ATmega32u4 processors](https://github.com/sensorium/FrequencyTimer2/)   
+[TimerOne library](http://www.pjrc.com/teensy/td_libs_TimerOne.html)  
+[FrequencyTimer2 library](http://www.pjrc.com/teensy/td_libs_FrequencyTimer2.html) - now a [fork with support for ATmega32u4 processors](https://github.com/sensorium/FrequencyTimer2/)   
 
 Mozzi has also drawn on and been influenced by (among many others):  
 
-[xorshift](https://school.anhb.uwa.edu.au/personalpages/kwessen/shared/Marsaglia03.html) random number generator, George Marsaglia, (2003)  
+[xorshift](http://www.jstatsoft.org/v08/i14/xorshift.pdf) random number generator, George Marsaglia, (2003)  
 ead~.c puredata external (creb library) Copyright (c) 2000-2003 by Tom Schouten (GPL2)  
-[AF_precision_synthesis](https://adrianfreed.com/content/arduino-sketch-high-frequency-precision-sine-wave-tone-sound-synthesis)
+[AF_precision_synthesis](http://adrianfreed.com/content/arduino-sketch-high-frequency-precision-sine-wave-tone-sound-synthesis)
 by Adrian Freed, 2009  
-[Resonant filter](https://www.musicdsp.org/archive.php?classid=3#259) posted to musicdsp.org by Paul Kellett,
-and fixed point version of the filter on  [dave's blog of art and programming](https://www.pawfal.org/dave/blog/2011/09/)  
-State Variable filter pseudocode at musicdsp.org  [here](https://www.musicdsp.org/showone.php?id=23) and  [here](https://www.musicdsp.org/showone.php?id=142)  
-Various examples from  [Pure Data](https://puredata.info/) by Miller Puckette  
-[Practical synthesis tutorials](https://www.moz.ac.at/sem/lehre/lib/pd-sounddesign/index.html) by Andy Farnell  
-
-
-
-## Contact   
-If you enjoy using Mozzi for a project, or have extended it, we would be
-pleased to hear about it and provide support wherever possible. Contribute
-suggestions, improvements and bug fixes to the [users forum](https://groups.google.com/forum/#!forum/mozzi-users/)
-or [GitHub Mozzi site](https://github.com/sensorium/Mozzi/issues/). Fork it to contribute directly to future developments.
-
-Mozzi began as a development of research into Mobile Sonification in the
-[SweatSonics](https://stephenbarrass.wordpress.com/tag/sweatsonics/) project.
+[Resonant filter](http://www.musicdsp.org/archive.php?classid=3#259) posted to musicdsp.org by Paul Kellett,
+and fixed point version of the filter on [dave's blog of art and programming](http://www.pawfal.org/dave/blog/2011/09/)  
+State Variable filter pseudocode at [musicdsp.org](http://www.musicdsp.org/showone.php?id=23) and [here](http://www.musicdsp.org/showone.php?id=142)  
+Various examples from [Pure Data](http://puredata.info/) by Miller Puckette  
+[Practical synthesis tutorials](http://www.obiwannabe.co.uk/) by Andy Farnell  
+  
 
 ***
+
+## Use and Remix
+Mozzi is licensed under a the LGPL version 2.1 or (at your option) any later version of the license.
+
+Disclaimer: This is a human-readable summary of (and not a substitute for) the license.
+- You may copy, distribute and modify the Mozzi library itself provided that you state modifications and license them under LGPL-2.1.
+
+- You may distribute *your own* source code which merely *uses* the Mozzi-API under any licence that you wish.
+
+- Regarding distribution of *binaries* (also inside a hardware project) that include Mozzi, the Arduino FAQ sums up the situation as follows:
+  "Using the Arduino core and libraries for the firmware of a commercial product does not require you to release the source code for the firmware. The LGPL does, however, require you to make available object files that allow for the relinking of the firmware against updated versions of the Arduino core and libraries. Any modifications to the core and libraries must be released under the LGPL."
+
+- Note that using third-party libraries/code - including as shown in some of the Mozzi examples - may introduce additional restrictions.

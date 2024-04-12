@@ -85,7 +85,7 @@ The names of most configuration defines have undergone some changes, and in some
 Importantly, also, configuration defines have been unified across the different platforms as much as possible. For a reference of all available options, see:
 
   - [Generic Configuration options](Mozzi/doc/html/group__config.html)
-  - [Hardware specific info](Mozzi/doc/html/group__hardware.html)
+  - [Hardware specific info](Mozzi/doc/html/hardware.html)
 
 Here's a list of adjustments needed for some "popular" configuration values:
 

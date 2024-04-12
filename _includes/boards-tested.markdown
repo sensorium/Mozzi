@@ -1,7 +1,7 @@
 ## Supported boards, output modes and default pins
 Table is not necessarily complete. *Abbreviations explained below the table.* The default output mode is framed with a border in each row.
 If stereo is supported, in a mode, the cell has a red/blue background, and (where applicable) the second pin number is given in parentheses (+X).
-Check the [hardware section of the API-documentation](https://sensorium.github.io/Mozzi/doc/html/group__hardware.html) for platform specific notes and (pin) configuration options.
+Check the [hardware section of the API-documentation](https://sensorium.github.io/Mozzi/doc/html/hardware.html) for platform specific notes and (pin) configuration options.
 
 <style>
 td[data-mo] { background-color: rgba(0,0,255,.5); }

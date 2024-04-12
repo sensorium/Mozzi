@@ -40,7 +40,7 @@ or `MOZZI_PDM_RESOLUTION` if you want to tweak this tradeoff.
 {: .notice--info}
 
 In some configurations, you (or your kids/pets, how can perceive high frequencies much better), may notice a high-pitch noise, at the carrier frequency.
-Using a higher carrier frequency - if possible - may mitigate this to some degree. See the [API documentation](/Mozzi/doc/html/group__hardware.html) for details
+Using a higher carrier frequency - if possible - may mitigate this to some degree. See the [API documentation](/Mozzi/doc/html/hardware.html) for details
 on what you can tweak. However, for best quality it will often make sense to add a low-pass filter, which may be as easy as adding a capacitor and a resistor.
 See the [output circuits](../output/) page for details.
 
@@ -84,16 +84,16 @@ uses (usually) three pins to transmit audio samples in a digital format:
  - a data line, often labelled SD, SDATA, SDIN, SDOUT, DACDAT, or similar
  - (some variants may include additional pins, but these do not seem common on MCUs, at the time of this writing)
 
-The pins used for these lines may or may not be configurable, depending on your hardware. See the [API documentation](/Mozzi/doc/html/group__hardware.html) for details.
+The pins used for these lines may or may not be configurable, depending on your hardware. See the [API documentation](/Mozzi/doc/html/hardware.html) for details.
 
 Unfortunately, the I2S format comes in several variants, and feeding a DAC data in the wrong format will lead to terribly distorted sound. Again,
-refer to the [API documentation](/Mozzi/doc/html/group__hardware.html) for configuration options, and/or make sure to use a DAC chip that is known to be supported.
+refer to the [API documentation](/Mozzi/doc/html/hardware.html) for configuration options, and/or make sure to use a DAC chip that is known to be supported.
 {: .notice--warning}
 
 ### Custom interface to external DACs or other hardware
 
 On all platforms, you can provide custom output routines, which allow you to output to anything from hand-made resistor ladders over purchased dedicated DAC ICs to
-a bluetooth audio sink. To enable this, take a look at the configuration options `MOZZI_OUTPUT_EXTERNAL_TIMED` and `MOZZI_OUTPUT_EXTERNAL_CUSTOM` (see [API documentation](/Mozzi/doc/html/group__hardware.html)).
+a bluetooth audio sink. To enable this, take a look at the configuration options `MOZZI_OUTPUT_EXTERNAL_TIMED` and `MOZZI_OUTPUT_EXTERNAL_CUSTOM` (see [API documentation](/Mozzi/doc/html/hardware.html)).
 Mozzi also ships with a whole section of examples for connecting to external components, including MCP4922 and PT8211 DACs (File->Examples->Mozzi->13.External_Audio_Output).
 
 The basic procedure for using the two external output modes is this:

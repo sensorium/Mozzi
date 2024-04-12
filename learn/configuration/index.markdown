@@ -74,4 +74,4 @@ For an up-to-date list of configuration options available in Mozzi, you will hav
 supported on all platforms:
 
   - [Generic Configuration options](Mozzi/doc/html/group__config.html)
-  - [Hardware specific info](Mozzi/doc/html/group__hardware.html)
+  - [Hardware specific info](Mozzi/doc/html/hardware.html)

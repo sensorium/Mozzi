@@ -1,5 +1,10 @@
 # Mozzi  
 
+## Mozzi 1.x branch
+
+**Note**: This branch contains the Mozzi 1.x sources. For actively developed or new projects
+it is very much recommended to work with Mozzi >= 2.0.
+
 ### sound synthesis library for Arduino  
 
 

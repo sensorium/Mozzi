@@ -146,9 +146,9 @@ Macros</h2></td></tr>
 
 <h3><a id="config_main"></a>Mozzi Configuration</h3><div class="textblock"><h1><a class="anchor" id="config_general"></a>
 Configuring Mozzi</h1>
-<p>Mozzi configuration options include details such as audio rate, number of audio channels (mono or stereo), output generation method and many others, where details on the available options differ between the different platforms (see <a class="el" href="group__hardware.html">Hardware</a>), and may include additional options beyond those listed, here.</p>
+<p>Mozzi configuration options include details such as audio rate, number of audio channels (mono or stereo), output generation method and many others, where details on the available options differ between the different platforms (see <a class="el" href="hardware.html">Hardware and configuration</a>), and may include additional options beyond those listed, here.</p>
 <dl class="section note"><dt>Note</dt><dd>It is generally safe to leave the Mozzi Configuration unchanged, and that's very much recommended <em>until</em> you have a very specific need to customize something. Contrary to past versions of Mozzi, all configuration options have a (usually sensible) default value, so you do not have to configure <em>anything</em>, unless you actually want to change something.</dd></dl>
-<p>Configuring Mozzi is mostly done using various preprocessor definitions. This approach is used to move as much of the processing involved to compile time, in order to save Flash, RAM, and CPU use at runtime. This section lists various global options, but in addition, most ports allow additional hardware dependent configuration options. See <a class="el" href="group__hardware.html">Hardware</a>.</p>
+<p>Configuring Mozzi is mostly done using various preprocessor definitions. This approach is used to move as much of the processing involved to compile time, in order to save Flash, RAM, and CPU use at runtime. This section lists various global options, but in addition, most ports allow additional hardware dependent configuration options. See <a class="el" href="hardware.html">Hardware and configuration</a>.</p>
 <p>Several configuration examples are provided in the "config" folder of the Mozzi sources. You may want to look at these, first. The general approach is as follows:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_mozzi_config_values_8h.html">MozziConfigValues.h</a>&gt;</span>                      <span class="comment">// include this first, for named option values</span></div>
 <div class="line"><span class="preprocessor">#define MOZZI_AUDIO_CHANNELS MOZZI_STEREO           </span><span class="comment">// set to stereo mode</span></div>
@@ -198,7 +198,7 @@ Configuring Mozzi</h1>
 </div><div class="memdoc">
 
 <p>Output resolution of audio samples. </p>
-<p>In most cases you should leave this value untouched (for the defaults that get applied, see <a class="el" href="group__hardware.html">Hardware</a> . However, for MOZZI_AUDIO_MODE s MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM you way wish to customize the default value of 16 bits.</p>
+<p>In most cases you should leave this value untouched (for the defaults that get applied, see <a class="el" href="hardware.html">Hardware and configuration</a> . However, for MOZZI_AUDIO_MODE s MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM you way wish to customize the default value of 16 bits.</p>
 <dl class="section note"><dt>Note</dt><dd>At the time of this writng single audio samples are stored as "int", unconditionally. This limits MOZZI_AUDIO_BITS to a maximum of 16 bits on some 8 bit boards! </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="mozzi__config__documentation_8h_source.html#l00296">296</a> of file <a class="el" href="mozzi__config__documentation_8h_source.html">mozzi_config_documentation.h</a>.</p>
@@ -219,7 +219,7 @@ Configuring Mozzi</h1>
 
 <p><em>Only for MOZZI_AUDIO_MODE MOZZI_OUTPUT_2PIN_PWM</em>. </p>
 <p><a class="el" href="class_sample.html" title="Sample is like Oscil, it plays a wavetable.">Sample</a> resolution per channel to use in 2 pin output, given in bits (i.e. total resolution is twice as much). Defaults to 7 bits per channel. Note that increasing this requires very, very well matched output resistors.</p>
-<p>See <a class="el" href="group__hardware.html">Mozzi on classic Arduino, Teensy 2.x, Arduino Mega, and other 8 bit "AVR"/ATMEGA architecture boards</a> for a more detailed description. </p>
+<p>See <a class="el" href="hardware_avr.html">Mozzi on classic Arduino, Teensy 2.x, Arduino Mega, and other 8 bit "AVR"/ATMEGA architecture boards</a> for a more detailed description. </p>
 
 <p class="definition">Definition at line <a class="el" href="mozzi__config__documentation_8h_source.html#l00223">223</a> of file <a class="el" href="mozzi__config__documentation_8h_source.html">mozzi_config_documentation.h</a>.</p>
 
@@ -304,7 +304,7 @@ At the time of this writing, only MOZZI_MONO and MOZZI_STEREO are supported. The
 
 <p>Configure how Mozzi outputs generated sounds. </p>
 <dl class="section note"><dt>Note</dt><dd>Not all options are available on all platforms, and several options require specific wiring or external components to function on top of this! When customizing this, it is highly recommended to start experimenting with a simple and known-to-work sketch (such as a basic sinewave) to verify that your hardware setup is correct. Similarly, if you observe problems running your "real" sketch, it is often a good idea ot test your sketch with the default audio mode, too (by leaving this option, and preferrably all others, unset).</dd></dl>
-<p>Refer to the <a class="el" href="group__hardware.html">Hardware</a> specific documentation for which modes are supported on your hardware, and further details!</p>
+<p>Refer to the <a class="el" href="hardware.html">Hardware and configuration</a> specific documentation for which modes are supported on your hardware, and further details!</p>
 <p>Supported values:</p><ul>
 <li>MOZZI_OUTPUT_PWM Output using pulse width modulation (PWM) on a GPIO pin. This is the default on most platforms. On the Arduino Uno (more generally ATMEGA328P), this allows for a sample resolution of 488 (almost 9 bits) on pin 9. Usable pins and resolution will be different on other boards.</li>
 <li>MOZZI_OUTPUT_2PIN_PWM Output using pulse width modulation on two GPIO pins, where one pin represents the lower bits, and the other the higer bits of the sample. On the Aduino Uno, this allows for 14 bits of resolution on pins 9 (low) and 10 (high). For further information (wiring etc.) see hardware_avr_2pin.</li>
@@ -442,7 +442,7 @@ At the time of this writing, only MOZZI_MONO and MOZZI_STEREO are supported. The
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Apr 12 2024 15:57:28 for Mozzi by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Apr 12 2024 17:52:28 for Mozzi by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

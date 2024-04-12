@@ -12,7 +12,7 @@
 #ifndef CONFIG_CHECKS_STM32DUINO_H
 #define CONFIG_CHECKS_STM32DUINO_H
 
-/** @ingroup hardware
+/**
 * @page hardware_stm32_disambiguation Mozzi on STM32-based boards - disambiguation
 *
 *  * The situation on STM32-based boards is rather confusing, as there are several competing Arduino cores. Importantly:

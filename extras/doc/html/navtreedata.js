@@ -25,6 +25,8 @@
 var NAVTREE =
 [
   [ "Mozzi", "index.html", [
+    [ "Hardware and configuration", "hardware.html", "hardware" ],
+    [ "Getting Started", "basic_info.html", null ],
     [ "Modules", "modules.html", "modules" ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -49,9 +51,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "01_8_basics_2_vibrato_2_vibrato_8ino-example.html",
-"class_meta_oscil.html#a98794f84684b257079e79bd9f92d0892",
-"functions_func_h.html",
-"group__hardware.html#renesas_external"
+"class_meta_oscil.html#a9309def78e90d419d569b0acd9a80bf3",
+"functions_func_g.html",
+"hardware_esp8266.html#esp8266_i2s_dac"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

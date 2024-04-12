@@ -12,7 +12,7 @@
 #ifndef CONFIG_CHECK_RP2040_H
 #define CONFIG_CHECK_RP2040_H
 
-/** @ingroup hardware
+/**
  * @page hardware_rp2040 Mozzi on RP2040 (Raspberry Pi Pico)
  *
  * port by Thomas Friedrichsmeier

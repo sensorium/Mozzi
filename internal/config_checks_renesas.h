@@ -12,7 +12,7 @@
 #ifndef CONFIG_CHECK_RENESAS_H
 #define CONFIG_CHECK_RENESAS_H
 
-/** @ingroup hardware
+/**
  * @page hardware_renesas Mozzi on Arduino Uno R4 - Renesas.
  *
  * port by Thomas Combriat

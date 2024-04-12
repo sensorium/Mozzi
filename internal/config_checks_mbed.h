@@ -12,7 +12,7 @@
 #ifndef CONFIG_CHECK_MBED_H
 #define CONFIG_CHECK_MBED_H
 
-/** @ingroup hardware
+/**
  * @page hardware_mbed Mozzi on MBED-based boards (Arduino Giga / Portenta).
  *
  * port by Thomas Friedrichsmeier & Thomas Combriat

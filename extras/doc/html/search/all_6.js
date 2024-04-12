@@ -8,5 +8,6 @@ var searchData=
   ['getphasefractional_58',['getPhaseFractional',['../class_meta_oscil.html#a20f0dcb30669eee21bfaa237f038c35d',1,'MetaOscil::getPhaseFractional()'],['../class_oscil.html#aefafa92dd2065243a164c1d824f292d7',1,'Oscil::getPhaseFractional()']]],
   ['getrange_59',['getRange',['../group__sensortools.html#a75c842b27ad3917be6d29e3d35b485f3',1,'AutoRange']]],
   ['getstandarddeviation_60',['getStandardDeviation',['../group__sensortools.html#a234ab1d244e4b392056fcaa1fc1e4fc4',1,'RollingStat']]],
-  ['getvariance_61',['getVariance',['../group__sensortools.html#a3e7e5f706e3b5ac2496f14b7b639775d',1,'RollingStat']]]
+  ['getting_20started_61',['Getting Started',['../basic_info.html',1,'']]],
+  ['getvariance_62',['getVariance',['../group__sensortools.html#a3e7e5f706e3b5ac2496f14b7b639775d',1,'RollingStat']]]
 ];

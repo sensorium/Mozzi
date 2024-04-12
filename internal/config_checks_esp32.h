@@ -12,7 +12,7 @@
 #ifndef CONFIG_CHECK_ESP32_H
 #define CONFIG_CHECK_ESP32_H
 
-/** @ingroup hardware
+/**
  * @page hardware_esp32 Mozzi on ESP32-based boards.
  *
  * port by Dieter Vandoren and Thomas Friedrichsmeier

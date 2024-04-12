@@ -12,7 +12,7 @@
 #ifndef CONFIG_CHECKS_STM32MAPLE_H
 #define CONFIG_CHECKS_STM32MAPLE_H
 
-/** @ingroup hardware
+/**
  * @page hardware_stm32_maple Mozzi on STM32duino-based boards.
  * port by Thomas Friedrichsmeier
  *

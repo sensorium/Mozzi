@@ -11,10 +11,6 @@
 
 /* For Mozzi-internal use: Apply hardware specific config defaults and config checks: AVR */
 
-/** @defgroup hardware
- *
- * @details This page details hardware specific notes, and availabe configuration options for the various platforms. */
-
 /** @ingroup hardware
  * @page hardware_avr Mozzi on classic Arduino, Teensy 2.x, Arduino Mega, and other 8 bit "AVR"/ATMEGA architecture boards
  *

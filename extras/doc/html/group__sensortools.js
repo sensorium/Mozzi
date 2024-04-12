@@ -16,7 +16,6 @@ var group__sensortools =
       [ "next", "group__sensortools.html#a788fca4c9f1e6699eb1990582015c0e3", null ]
     ] ],
     [ "OverSample", "group__sensortools.html#class_over_sample", [
-      [ "add", "group__sensortools.html#a9c9f4083b726ed046c97a91535486317", null ],
       [ "next", "group__sensortools.html#a413ca7de0dbf3d2afafd84aa75857442", null ]
     ] ],
     [ "RollingAverage", "group__sensortools.html#class_rolling_average", [
@@ -29,7 +28,7 @@ var group__sensortools =
       [ "getMean", "group__sensortools.html#a8521a53cde7c5d28ac9c375aaee3a972", null ],
       [ "getStandardDeviation", "group__sensortools.html#a234ab1d244e4b392056fcaa1fc1e4fc4", null ],
       [ "getVariance", "group__sensortools.html#a3e7e5f706e3b5ac2496f14b7b639775d", null ],
-      [ "update", "group__sensortools.html#a85750e78ac282caec24408dce6e78201", null ],
-      [ "update", "group__sensortools.html#a6f7b384ab338da5ba10200fbce7f2eb0", null ]
+      [ "update", "group__sensortools.html#a6f7b384ab338da5ba10200fbce7f2eb0", null ],
+      [ "update", "group__sensortools.html#a85750e78ac282caec24408dce6e78201", null ]
     ] ]
 ];

@@ -18,78 +18,102 @@ passing or external synths.
 
 ***
 
-## Features  
--    16384 Hz sample rate, or experimental 32768 Hz rate.
--    8 bit or 14 bit audio output modes on a bare Arduino, up to 16 bit using an external DAC.
+## Features
+-    Available for a wide and growing range of MCUs, with and without inbuilt DACs: Arduino Uno R3 and R4, STM32, Teensy, ESP8266, ESP32, Raspberry Pi Pico, and more.
+-    Configurable sample rate, usually in powers of two (16384 Hz, 32768 Hz, 64536 Ht).
 -    Variable control rate from 64 Hz upwards.
+-    Various inbuilt output modes, including 16 bit output to an external DAC.
+-    Allows interfacing to custom output routines, with examples for playing audio on external DAC modules, and even bluetooth.
 -    Useful basic audio toolkit: oscillators, samples, lines, envelopes, scheduling, filtering.
 -    Fast ADC and other cpu-efficient code utilities to help keep audio running smoothly.
 -    Example sketches for easy modification.
 -    Readymade wavetables and a script to convert your own soundfiles for Mozzi.
--    Usable on several platforms: Arduino, STM32, ESP, Teensy.
 -    Mozzi is designed to be easy to use, open source and extendable.
 
 ***
 
-## Installation  
-Use the "code" button on Mozzi's Github page to download a ZIP file of the latest developing code.  Import this into Arduino, following the instructions from the [Arduino libraries guide](http://arduino.cc/en/Guide/Libraries).
+## Installation
+The easiest installation option nowadays is to install Mozzi via the Library Manager in your Arduino application:
+_Arduino➞Sketch➞Include Library➞Library Manager_ type "Mozzi" into the search field, then click "install".
 
-*In the Arduino IDE, navigate to Sketch > Include Library > Add .ZIP Library. At the top of the drop down list, select the option to "Add .ZIP Library".*
+For other installation methods (e.g. the development version), see the [Download page](https://sensorium.github.io/Mozzi/download).
 
-(Note: the files in the "releases" section on Github are now legacy.  The development code is recommended.)
+## Quick Start
+To hear Mozzi, wire a 3.5mm audio jack with the centre to the audio out pin for your Arduino as shown in the table below, and the shield to GND on the Arduino.
+Plug into your computer and listen with a sound program like [Audacity](https://audacity.sourceforge.net/). (Or connect any other high-impedance input, like an active speaker)
+Try some examples from the __File > Examples > Mozzi__ menu.
+
+For more about audio output, including high quality output modes [Mozzi Output tutorial](https://sensorium.github.io/Mozzi/learn/output/).  
+
+
+## Supported boards, output modes and default pins
+Table is not necessarily complete. *Abbreviations explained below the table.* The default output mode is framed with a border in each row.
+If stereo is supported, in a mode, the cell has a red/blue background, and (where applicable) the second pin number is given in parentheses (+X).
+Check the [hardware section of the API-documentation](https://sensorium.github.io/Mozzi/doc/html/hardware.html) for platform specific notes and (pin) configuration options.
+
+<style>
+td[data-mo] { background-color: rgba(0,0,255,.5); }
+td[data-st] { background: linear-gradient(-45deg,rgba(0,0,255,.5) 50%, rgba(255,0,0,.5) 50%); }
+td[data-md] { border: 2px solid; background-color: rgba(0,0,255,.5); }
+td[data-sd] { border: 2px solid; background: linear-gradient(-45deg,rgba(0,0,255,.5) 50%, rgba(255,0,0,.5) 50%); }
+</style>
+
+<table border="0">
+<thead>
+<tr><td><b>Board or family</b>  / <b>Output mode</b>                                            </td><td> PWM-1          </td><td> PWM-2             </td><td> PDM        </td><td>inbuilt DAC </td><td>I2S DAC (native)</td></tr>
+</thead>
+<tbody>
+<tr style="border-top: 1px solid">
+    <td><i>ATmega328/168</i>: Uno (R3), Nano, Pro Mini, Duemilanove, Leonardo, etc.             </td><td data-sd>9 (+10) </td><td data-mo>9, 10      </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>ATmega32U4</i>: Teensy, Teensy2, 2++ <i>B5/B6 correspond to pins 14/15 in Arduino</i></td><td data-sd>B5 (+B6)</td><td data-mo>B5, B6     </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>ATmega2560</i>: Arduino Mega, Freetronics EtherMega, etc.                            </td><td data-sd>11 (+12)</td><td data-mo>11, 12     </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>ATmega1284</i>: Sanguino                                                             </td><td data-sd>13 (+12)</td><td data-mo>13, 12     </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
+    <td>Teensy3.x - <i>note: DAC Pin number depends on model: A14, A12, or A21</i>              </td><td> -              </td><td> -                 </td><td> -          </td><td data-md>DAC </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
+    <td>Teensy4.x                                                                               </td><td data-sd>A8 (+A9)</td><td> -                 </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>LGT8F328P</i>: "Register clone" of the ATmega328, uses the same code in Mozzi        </td><td data-sd>9 (+10) </td><td data-mo>9, 10      </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>SAMD</i>: Arduino Nano 33 Iot, Adafruit Playground Express, Gemma M0 etc.            </td><td> -              </td><td> -                 </td><td> -          </td><td data-md>A0/speaker</td><td> -   </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>Renesas Arduino Core</i>: Arduino Uno R4                                             </td><td> -              </td><td> -                 </td><td> -          </td><td data-md>A0  </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>Arduino MBED Core</i>: Arduino Giga (only model tested so far in this family)        </td><td> -              </td><td> -                 </td><td data-mo>SERIAL2TX</td><td data-sd>A13 (+A12)</td><td> -    </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>STM32 maple core</i>: Various STM32F1 and STM32F4 boards, "Blue/Black Pill"          </td><td data-sd>PB8 (+PB9)</td><td data-mo>PB8, PB9 </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>STM32duino (STM official) core</i>: Huge range of STM32Fx boards                     </td><td data-sd>PA8 (+PA8)</td><td data-mo>PA8, PA9 </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>ESP8266</i>: ESP-01, Wemos D1 mini, etc. <i>note: Beware of erratic pin labels</i>   </td><td> -              </td><td> -                 </td><td data-md>GPIO2</td><td> -         </td><td data-st>yes </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>ESP32</i>: <i>note: Beware of vastly different pin labels across board variants</i>  </td><td> -              </td><td> -                 </td><td data-mo>yes </td><td data-sd>GPIO25 (+GPIO26)</td><td data-st>yes</td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>RP2040</i>: Raspberry Pi Pico and friends                                            </td><td data-sd>0 (+1)  </td><td data-mo>0, 1       </td><td> -          </td><td> -          </td><td data-st>yes </td></tr>
+</tbody>
+</table>
+
+<span style="font-size: .6em">
+ - PWM-1: 1-pin PWM mode (`MOZZI_OUTPUT_PWM`)
+ - PWM-2: 2-pin PWM mode (`MOZZI_OUTPUT_2PIN_PWM`)
+ - PDM: Pulse density modulation, may be either `MOZZI_OUTPUT_PDM_VIA_SERIAL` or `MOZZI_OUTPUT_PDM_VIA_I2S`
+ - inbuilt DAC: `MOZZI_OUTPUT_INTERNAL_DAC`
+ - I2S DAC (native): native support for externally connected I2S DACs (`MOZZI_OUTPUT_I2S_DAC`). Since this requires several, often
+   configurable pins, and is never the default option, no pin numbers are shown in this table.
+ - **All** platforms also support "external" output modes (`MOZZI_OUTPUT_EXTERNAL_TIMED` or `MOZZI_OUTPUT_EXTERNAL_CUSTOM`), which allow
+   for connecting DACs or other external circuitry.
+</span>
 
 ***
 
-## Quick Start  
-To hear Mozzi, connect a 3.5mm audio jack with the centre wire to the PWM output
-on Digital Pin 9 on the Arduino, and the ground to the Ground on the Arduino.
-Use this as a line out which you can plug into your computer and listen to with
-a sound program like [Audacity](http://audacity.sourceforge.net/).
-Try some examples from the __File > Examples > Mozzi__ menu.  
+## Using Mozzi
+Here's a template for an empty Mozzi sketch:
 
-Below is a list of the Digital Pins used by Mozzi for STANDARD_PLUS mode PWM audio out on different boards.
-Feedback about others is welcome.
-
-Model | Pin | Tested
------ | --- | ------
-Arduino Uno | 9	| yes
-Arduino Uno R4 | A0 | yes
-Arduino Duemilanove | 9	| yes
-Arduino Nano | 9 | yes
-Arduino Nano 33 Iot | A0 | yes
-Arduino Pro Mini | 9 | yes
-Arduino Leonardo | 9 | yes
-Arduino Mega | 11 | yes
-Arduino MBED (only the Giga has been tested, see "Hardware specific notes", below) | A13 | no
-Arduino Giga | A13 (jack) | yes
-Freetronics EtherMega | 11 | yes
-Ardweeny | 9 | yes     
-Boarduino | 9 | yes
-Teensy | 14 | -
-Teensy2 | B5 | yes  
-Teensy2++ | B5(25) | yes
-Teensy 3.0 3.1 LC 3.2 | DAC/D | yes
-Teensy 3.4, 3.5 | DAC/D | -
-Teensy 4.0 4.1 | A8 | yes
-Gemma M0 | A0 | yes
-Adafruit Playground Express | Built in Speaker | yes    
-Sanguino | 13	| -  
-STM32F1 maple core | PB8 | yes
-STM32F1 STM core | PA8 | yes
-STM32F4 STM core | PA8 | yes
-ESP8266 *see details* | GPIO2 | yes
-RP2040 | 0 | yes
-
-For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.io/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).  
-
-***
-
-## Using Mozzi  
-Here's a template for an empty Mozzi sketch:  
-
-
-```
-#include <MozziGuts.h>   // at the top of your sketch
+{% highlight c++ %}
+#include <Mozzi.h>   // at the top of your sketch
 
 void setup() {
 	startMozzi();
@@ -99,44 +123,27 @@ void updateControl(){
 	// your control code
 }
 
-AudioOutput_t updateAudio() {
-	// your audio code which returns a 0-centered integer, typically in the 8bit or 16-bit range
-	return MonoOutput::from16Bit( [myvalue] );
+AudioOutput_t updateAudio(){
+	MonoOutput::from16Bit( [my_cool_sample] );
 }
 
 void loop() {
 	audioHook();
 }
-```
+{% endhighlight %}
 
-There's a detailed example explaining the different parts [here](http://sensorium.github.io/Mozzi/learn/a-simple-sketch/).
+There's a detailed example explaining the different parts [here](https://sensorium.github.io/Mozzi/learn/a-simple-sketch/).
 
-***
 
 ## Documentation
 
-There's documentation in the doc folder in the Mozzi download and [online](http://sensorium.github.io/Mozzi/doc/html/index.html).  
-There is practical help on the [learn](http://sensorium.github.io/Mozzi/learn/) page on the Mozzi site.  
+For getting started, browse the practical help on the [learn](https://sensorium.github.io/Mozzi/learn/) page on the Mozzi site.  
+API reference documentation is available in the doc folder in the Mozzi download and [online](http://sensorium.github.io/Mozzi/doc/html/index.html).  
 Start or look up a topic on the [users forum](https://groups.google.com/forum/#!forum/mozzi-users/).  
 Also, feel free to submit any issues on the [GitHub Mozzi site](https://github.com/sensorium/Mozzi/issues/).  
 Look for code and usage changes [here](extras/NEWS.txt).  
-
-***
-
-## General caveats and Workarounds
-
-* While Mozzi is running, calling `delay()`, `delayMicroseconds()`, or other functions which wait or cycle through loops can cause audio glitches.
-Mozzi provides `EventDelay()` for scheduling instead of `delay`. In general, make sure to write non-blocking code!
-
-* `analogRead()` is a time-consuming operation especially on the classic AVR boards. Mozzi provides `mozziAnalogRead()` as a drop-in replacement, which works in the
-background instead of blocking the processor.
-
-* Depending on the hardware and configured audio output mode, Mozzi will usually claim one or more hardware timers. This may affect, among other things, the ability to
-use `analogWrite()`. Check the [Hardware Section of the Documentation](https://sensorium.github.io/Mozzi/doc/html/group__hardware.html) to options to configure ressource
-usage.
-  - If you need `analogWrite()`, you can do PWM output on any digital pins using the technique in *Mozzi>examples>11.Communication>Sinewave_PWM_pins_HIFI*.  
-
-* As last resort, the timers can be made available with `stopMozzi()`, which stops audio interrupts, until you call `startMozzi()`.
+For hardware specific details, including supported features, caveats, and hardware-dependent configuration options,
+refer to the [Hardware Section of the API-Documentation](https://sensorium.github.io/Mozzi/doc/html/hardware.html).
 
 ***
 
@@ -189,27 +196,6 @@ and fixed point version of the filter on [dave's blog of art and programming](ht
 State Variable filter pseudocode at [musicdsp.org](http://www.musicdsp.org/showone.php?id=23) and [here](http://www.musicdsp.org/showone.php?id=142)  
 Various examples from [Pure Data](http://puredata.info/) by Miller Puckette  
 [Practical synthesis tutorials](http://www.obiwannabe.co.uk/) by Andy Farnell  
-
-
-## Hardware compatibility and hardware specific notes
-
-While originating on the 8 bit AVR based "classic Arduino" boards, Mozzi supports a wide variety of different MCUs, these days, including:
-  - Classic AVR boards: Arduino Uno, Duemilanove, Nano, Nano 33, Pro Mini, Leonardo, Mega, many others, and countless clones, Teensy 1 and 2.x, ...
-  - Various Teensy 3.x boards: Teensy 3.0/3.1/3.2/3.4/3.5/LC
-  - Teensy 4.x boards: Teensy 4.0 and 4.1 are known to work, future boards stand good chances of working with Mozzi out of the box
-  - STM32-based boards: Confusingly, several popular Arduino cores exist for these MCUs - and Mozzi supports several. Refer to the documentation
-    linked below. Mozzi has been tested on the popule STM32F1 "blue pill" and STM32F4 "black pill" boards, but should support a very wide range
-    of further boards out of the box.
-  - SAMD21-based boards: Tested on the Arduino Circuitplayground M0, expect to work on others, too.
-  - ESP8266: Should run on the whole range of boards, including the minimal ESP-01
-  - ESP32: Should run on the wohle range of boards
-  - Arduiono Giga/MBED: The Arduino Giga, and - in untested theory - the Arduion Portenta
-  - RP2040: The Raspberry Pi Pico and other boards using RP2040
-  - Arduino Uno R4: The new Uno, based on a 32-bit Renesas MCU
-
-Since the hardware capatibilies of these boards are vastly different, the ports, too, differ in their internals and their capabilities. Importantly,
-of course, they also differ in what pin(s) are used for audio output by default. Refer to the [Hardware Section of the Documentation](https://sensorium.github.io/Mozzi/doc/html/group__hardware.html) for the details
-applicable to your hardware.
   
 
 ***

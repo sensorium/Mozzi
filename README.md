@@ -145,29 +145,29 @@ Look for code and usage changes [here](extras/NEWS.txt).
 For hardware specific details, including supported features, caveats, and hardware-dependent configuration options,
 refer to the [Hardware Section of the API-Documentation](https://sensorium.github.io/Mozzi/doc/html/hardware.html).
 
-***
+## Compatibiliy issues
 
-## Tweaking Arduino for Faster Audio Code
+* In most setups, Mozzi claims one or two hardware timers. This may result in incompatibilities with certain libraries, and / or the ability to use timer-based functions such as `analogWrite()`. As the details on this
+  differ a lot between the supported boards, read up on the details - and available workarounds - in the [ardware Section of the API-Documentation](https://sensorium.github.io/Mozzi/doc/html/hardware.html).
 
-If you need your synth to run faster on AVR architectures, Arduino versions above 1.5 can be tweaked to optimise compiled code for speed instead of small size.  
+* There is also an example on emulating `analogWrite()` on any digitial pin in *Mozzi>examples>11.Communication>Sinewave_PWM_pins_HIFI*.
 
-Find Arduino’s platform.txt (on OSX you can find it by searching in Users/your_name/Library/Arduino15). Search and replace -Os with -O2. Save.
+* The timers can be made available with `stopMozzi()`, which stops audio interrupts, until you call `startMozzi()`.
 
-It’s explained more thoroughly (for Windows) [here](http://www.instructables.com/id/Arduino-IDE-16x-compiler-optimisations-faster-code/?ALLSTEPS).
+* Note that it is of utmost importance to write non-blocking code, such that the
+  audio buffer never runs low. Hints on how to do this, including why, and how you
+  should avoid using `delay()`, `analogRead()`, and how to make your code run faster,
+  can be found at [on the learn pages](https://sensorium.github.io/Mozzi/learn/hints/).
 
-If you still need more speed, Arduino 1.0.5 produces slightly faster code.
 
-Mozzi itself offers many helpers for producing faster code, such as Fixed-Point integer maths, fast replacements for `map()`, `random()`, `millis()`, and other functions.
-Be sure to use these!
+## Extending Mozzi
 
-***
-
-## Using external chips to produce the sound
+### Using external chips to produce the sound
 
 External chips (DAC) can also be used on any platform which does not support natively the I2S protocol  using an user defined `audioOutput` function. This can allow a greater audio quality over the native ways to output the sound (PWM for AVR Arduinos and STM32 and 12 bit DAC for Teensy 3.*).
 Examples are provided for the MCP492X DAC (12 bit on SPI) and for the (PT8211) 16 bit stereo DAC using SPI port to emulate the I2S protocol. The latter should be compatible with any DAC using I2S.
 
-***
+### Extendig the library itself
 
 If you enjoy using Mozzi for a project, or have extended it, we would be
 pleased to hear about it and provide support wherever possible. Contribute

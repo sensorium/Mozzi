@@ -82,6 +82,8 @@ var NAVTREEINDEX0 =
 "_mozzi_guts__impl___s_t_m32duino_8hpp_source.html":[4,0,72],
 "_mozzi_guts__impl___s_t_m32duino__analog_8hpp_source.html":[4,0,73],
 "_mozzi_guts__impl___t_e_e_n_s_y_8hpp_source.html":[4,0,74],
+"_mozzi_guts__impl__template_8hpp.html":[4,0,75],
+"_mozzi_guts__impl__template_8hpp.html#adc93e260b19c511c78b82a5ea449c8e6":[4,0,75,0],
 "_mozzi_guts__impl__template_8hpp_source.html":[4,0,75],
 "_mozzi_headers_only_8h.html":[4,0,76],
 "_mozzi_headers_only_8h.html#a89b59c01543e6c4ac8542308cc22d977":[4,0,76,0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX0 =
 "class_meta_oscil.html#a3390f39fbaa06276398624bd14a639ad":[3,0,25,15],
 "class_meta_oscil.html#a3a1bf4af017c5c39d736f78d3c3e1bee":[3,0,25,10],
 "class_meta_oscil.html#a3bed37fc800a93ff95af445d25eaf57d":[3,0,25,18],
-"class_meta_oscil.html#a4216906e9233b737d50848bf268e55a2":[3,0,25,1],
-"class_meta_oscil.html#a7567da1ff25347c8d44fad66efe28af1":[3,0,25,9],
-"class_meta_oscil.html#a889ea6de8595838ef735f8237a0abc51":[3,0,25,16]
+"class_meta_oscil.html#a4216906e9233b737d50848bf268e55a2":[3,0,25,1]
 };

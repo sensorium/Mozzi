@@ -205,7 +205,7 @@ Functions</h2></td></tr>
 <p>This is required in Arduino's loop(). </p>
 <p>If there is room in Mozzi's output buffer, <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook()</a> calls <a class="el" href="group__core.html#ga936b78c8ab7a4d7f7075b41e32780d3e" title="This is where you put your audio code.">updateAudio()</a> once and puts the result into the output buffer. Also, if @ref MOZZI_AUDIO_INPUT is enabled in the config, <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook()</a> takes care of moving audio input from the input buffer so it can be accessed with <a class="el" href="group__analog.html#gacd5e655ae9057843ade0d7647f909663" title="See getAudioInput().">getAudioInput()</a> in your <a class="el" href="group__core.html#ga936b78c8ab7a4d7f7075b41e32780d3e" title="This is where you put your audio code.">updateAudio()</a> routine. If other functions are called in loop() along with <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook()</a>, see if they can be called less often by moving them into <a class="el" href="group__core.html#ga59d187b915b2e366c88489e52801951a" title="This is where you put your control code.">updateControl()</a>, to save processing power. Otherwise it may be most efficient to calculate a block of samples at a time by putting <a class="el" href="group__core.html#ga2fca37b988ab369e2f3c3108c683e59d" title="This is required in Arduino&#39;s loop().">audioHook()</a> in a loop of its own, rather than calculating only 1 sample for each time your other functions are called. </p>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8hpp_source.html#l00307">307</a> of file <a class="el" href="_mozzi_guts_8hpp_source.html">MozziGuts.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8hpp_source.html#l00313">313</a> of file <a class="el" href="_mozzi_guts_8hpp_source.html">MozziGuts.hpp</a>.</p>
 
 </div>
 </div>
@@ -227,7 +227,7 @@ Functions</h2></td></tr>
 <p>An alternative for Arduino time functions like micros() and millis(). </p>
 <p>This is slightly faster than micros(), and also it is synchronized with the currently processed audio sample (which, due to the audio output buffer, could diverge up to 256/MOZZI_AUDIO_RATE seconds from the current time). <a class="el" href="group__core.html#ga55fa9d48f327b646c2f71cef7da7b8f0" title="An alternative for Arduino time functions like micros() and millis().">audioTicks()</a> is updated each time an audio sample is output, so the resolution is 1/MOZZI_AUDIO_RATE microseconds (61 microseconds when MOZZI_AUDIO_RATE is 16384 Hz). </p><dl class="section return"><dt>Returns</dt><dd>the number of audio ticks since the program began. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8hpp_source.html#l00295">295</a> of file <a class="el" href="_mozzi_guts_8hpp_source.html">MozziGuts.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8hpp_source.html#l00301">301</a> of file <a class="el" href="_mozzi_guts_8hpp_source.html">MozziGuts.hpp</a>.</p>
 
 </div>
 </div>
@@ -315,7 +315,7 @@ template&lt;typename T &gt; </div>
 <p>An alternative for Arduino time functions like micros() and millis(). </p>
 <p>This is slightly faster than micros(), and also it is synchronized with the currently processed audio sample (which, due to the audio output buffer, could diverge up to 256/MOZZI_AUDIO_RATE seconds from the current time). <a class="el" href="group__core.html#ga55fa9d48f327b646c2f71cef7da7b8f0" title="An alternative for Arduino time functions like micros() and millis().">audioTicks()</a> is updated each time an audio sample is output, so the resolution is 1/MOZZI_AUDIO_RATE microseconds (61 microseconds when MOZZI_AUDIO_RATE is 16384 Hz). </p><dl class="section return"><dt>Returns</dt><dd>the approximate number of microseconds since the program began. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8hpp_source.html#l00294">294</a> of file <a class="el" href="_mozzi_guts_8hpp_source.html">MozziGuts.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8hpp_source.html#l00300">300</a> of file <a class="el" href="_mozzi_guts_8hpp_source.html">MozziGuts.hpp</a>.</p>
 
 </div>
 </div>
@@ -340,7 +340,7 @@ template&lt;typename T &gt; </div>
 <p>As it is, stopMozzi restores all the Timers used by Mozzi to their previous settings. Another scenario which could be easily hacked in <a class="el" href="_mozzi_guts_8hpp_source.html">MozziGuts.hpp</a> could involve individually saving and restoring particular Timer registers depending on which one(s) are required for other tasks.</p>
 <dl class="section note"><dt>Note</dt><dd>This function is not actually implemented on all platforms. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8hpp_source.html#l00297">297</a> of file <a class="el" href="_mozzi_guts_8hpp_source.html">MozziGuts.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8hpp_source.html#l00303">303</a> of file <a class="el" href="_mozzi_guts_8hpp_source.html">MozziGuts.hpp</a>.</p>
 
 </div>
 </div>
@@ -389,11 +389,8 @@ template&lt;typename T &gt; </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="footer">Generated on Sun Apr 14 2024 11:05:48 for Mozzi by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
-  </ul>
+<div id="nav-path" class="navpath">
+<ul><li class="footer">Generated automatically using Doxygen. If info on this page is outdated, incomplete, or wrong, please open an issue at https://github.com/sensorium/Mozzi/issues</li></ul>
 </div>
 </body>
 </html>

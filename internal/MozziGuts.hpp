@@ -16,6 +16,12 @@
 #include "internal/mozzi_rand_p.h"
 #include "AudioOutput.h"
 
+/** @brief Internal. Do not use function in this namespace in your sketch!
+
+This namespace contains various functions that are used by Mozzi, internally, but are not meant to be used in a sketch.
+
+The details of these may change without warning. I repeat: Do not use these in your sketch!
+*/
 namespace MozziPrivate {
 
 // Forward declarations of functions to be provided by platform specific implementations

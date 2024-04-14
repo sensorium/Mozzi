@@ -40,7 +40,7 @@ var hierarchy =
     [ "Line< unsigned int >", "class_line_3_01unsigned_01int_01_4.html", null ],
     [ "Line< unsigned long >", "class_line_3_01unsigned_01long_01_4.html", null ],
     [ "MetaOscil< NUM_TABLE_CELLS, UPDATE_RATE, N_OSCIL >", "class_meta_oscil.html", null ],
-    [ "MidiToFreqPrivate", "class_midi_to_freq_private.html", null ],
+    [ "MozziPrivate::MidiToFreq", "class_mozzi_private_1_1_midi_to_freq.html", null ],
     [ "MonoOutput", "struct_mono_output.html", null ],
     [ "MozziPrivate::MozziRandPrivate", "class_mozzi_private_1_1_mozzi_rand_private.html", null ],
     [ "Oscil< NUM_TABLE_CELLS, UPDATE_RATE >", "class_oscil.html", null ],

@@ -104,12 +104,15 @@ $(document).ready(function(){initNavTree('namespace_mozzi_private.html',''); ini
 </div><!--header-->
 <div class="contents">
 
-<p>README! This file is meant to be used as a template when adding support for a new platform.  
+<p>Internal.  
 <a href="namespace_mozzi_private.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mozzi_private_1_1_mozzi_rand_private.html">MozziRandPrivate</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mozzi_private_1_1_midi_to_freq.html">MidiToFreq</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal.  <a href="class_mozzi_private_1_1_midi_to_freq.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -195,30 +198,14 @@ transfer_cfg_t&#160;</td><td class="memItemRight" valign="bottom"><b>dtc_cfg</b>
 <tr class="separator:a9f13b81da8d751d03a5b52e5d3d5bc37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>README! This file is meant to be used as a template when adding support for a new platform. </p>
-<p>Please read these instructions, first.</p>
-<p>Files involved:</p><ol type="1">
-<li>Modify <a class="el" href="hardware__defines_8h_source.html">hardware_defines.h</a>, adding a macro to detect your target platform</li>
-<li>Modify MozziGuts.cpp to include MozziGuts_impl_YOURPLATFORM.hpp</li>
-<li>Modify <a class="el" href="config__checks__generic_8h_source.html">internal/config_checks_generic.h</a> to include internal/config_checks_YOURPLATFORM.h</li>
-<li>Copy this file to MozziGuts_impl_YOURPLATFORM.hpp and adjust as necessary, same for <a class="el" href="config__checks__template_8h_source.html">internal/config_checks_template.h</a> (If your platform is very similar to an existing port, it may instead be better to modify the existing MozziGuts_impl_XYZ.hpp/config_checks_XYZ.h, instead of steps 2-3.). Some platforms may need small modifications to other files as well, e.g. <a class="el" href="mozzi__pgmspace_8h_source.html">mozzi_pgmspace.h</a></li>
-</ol>
-<p>How to implement MozziGuts_impl_YOURPLATFORM.hpp:</p><ul>
-<li>Follow the NOTEs provided in this file</li>
-<li>Read the doc at the top of <a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a> for a better understanding of the basic audio output framework</li>
-<li>Take a peek at existing implementations for other hardware (e.g. TEENSY3/4 is rather complete while also simple at the time of this writing)</li>
-<li>Wait for more documentation to arrive</li>
-<li>Ask when in doubt</li>
-<li>Don't forget to provide a PR when done (it does not have to be perfect; e.g. many ports skip analog input, initially) </li>
-</ul>
+<div class="textblock"><p>Internal. </p>
+<p>Do not use function in this namespace in your sketch!</p>
+<p>This namespace contains various functions that are used by Mozzi, internally, but are not meant to be used in a sketch.</p>
+<p>The details of these may change without warning. I repeat: Do not use these in your sketch! </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
-<!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="namespace_mozzi_private.html">MozziPrivate</a></li>
-    <li class="footer">Generated on Sun Apr 14 2024 11:05:48 for Mozzi by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
-  </ul>
+<div id="nav-path" class="navpath">
+<ul><li class="footer">Generated automatically using Doxygen. If info on this page is outdated, incomplete, or wrong, please open an issue at https://github.com/sensorium/Mozzi/issues</li></ul>
 </div>
 </body>
 </html>

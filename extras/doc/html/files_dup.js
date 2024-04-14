@@ -75,7 +75,7 @@ var files_dup =
     [ "MozziGuts_impl_STM32duino.hpp", "_mozzi_guts__impl___s_t_m32duino_8hpp_source.html", null ],
     [ "MozziGuts_impl_STM32duino_analog.hpp", "_mozzi_guts__impl___s_t_m32duino__analog_8hpp_source.html", null ],
     [ "MozziGuts_impl_TEENSY.hpp", "_mozzi_guts__impl___t_e_e_n_s_y_8hpp_source.html", null ],
-    [ "MozziGuts_impl_template.hpp", "_mozzi_guts__impl__template_8hpp_source.html", null ],
+    [ "MozziGuts_impl_template.hpp", "_mozzi_guts__impl__template_8hpp.html", "_mozzi_guts__impl__template_8hpp" ],
     [ "MozziHeadersOnly.h", "_mozzi_headers_only_8h.html", "_mozzi_headers_only_8h" ],
     [ "mult16x16.h", "mult16x16_8h_source.html", null ],
     [ "mult16x8.h", "mult16x8_8h_source.html", null ],

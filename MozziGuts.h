@@ -53,6 +53,8 @@ typedef signed long int32_t;
 
 /*! @defgroup core Mozzi Core Functions
 
+The bones of every Mozzi sketch. 
+
 @ingroup core
 Sets up the timers for audio and control rate processes, storing the timer
 registers so they can be restored when Mozzi stops. startMozzi() goes in your sketch's

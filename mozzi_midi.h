@@ -18,7 +18,9 @@
 #include "mozzi_pgmspace.h"
 
 
+/**  @brief Internal. Do not use in your sketches.
 
+Internal helper class. Not intended for use in your sketches, and details may change without notic. */ 
 class MidiToFreqPrivate {
 private:
   friend int mtof(uint8_t);
@@ -55,6 +57,10 @@ CONSTTABLE_STORAGE(uint32_t) MidiToFreqPrivate::midiToFreq[128] =
   };
 
 
+/** @defgroup midi Midi note number to frequency conversions
+
+Useful if you like playing notes in tune.
+*/
 
 /** @ingroup midi
 Converts midi note number to frequency. Caution: this can take up to 400

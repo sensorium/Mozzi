@@ -119,10 +119,10 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>autoSeed</b> (
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:a83ff6b4e38c84713e0d67aa1ec06af66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mozzi_private_1_1_mozzi_rand_private.html#a83ff6b4e38c84713e0d67aa1ec06af66">randSeed</a> ()</td></tr>
-<tr class="memdesc:a83ff6b4e38c84713e0d67aa1ec06af66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises Mozzi's (pseudo)random number generator <a class="el" href="class_mozzi_private_1_1_mozzi_rand_private.html#a68ed69ece800f0c1e5819c05aed8d398" title="Random number generator.">xorshift96()</a>, which is used in Mozzi's rand() function.  <a href="class_mozzi_private_1_1_mozzi_rand_private.html#a83ff6b4e38c84713e0d67aa1ec06af66">More...</a><br /></td></tr>
+<tr class="memdesc:a83ff6b4e38c84713e0d67aa1ec06af66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises Mozzi's (pseudo)random number generator <a class="el" href="class_mozzi_private_1_1_mozzi_rand_private.html#a68ed69ece800f0c1e5819c05aed8d398" title="Random number generator.">xorshift96()</a>, which is used in Mozzi's <a class="el" href="group__random.html#gabe026433bdf21da516984d35730672fc" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand()</a> function.  <a href="class_mozzi_private_1_1_mozzi_rand_private.html#a83ff6b4e38c84713e0d67aa1ec06af66">More...</a><br /></td></tr>
 <tr class="separator:a83ff6b4e38c84713e0d67aa1ec06af66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4647c5989e5cf1ada9d952d5eb943d13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mozzi_private_1_1_mozzi_rand_private.html#a4647c5989e5cf1ada9d952d5eb943d13">randSeed</a> (uint32_t)</td></tr>
-<tr class="memdesc:a4647c5989e5cf1ada9d952d5eb943d13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises Mozzi's (pseudo)random number generator <a class="el" href="class_mozzi_private_1_1_mozzi_rand_private.html#a68ed69ece800f0c1e5819c05aed8d398" title="Random number generator.">xorshift96()</a>, which is used in Mozzi's rand() function.  <a href="class_mozzi_private_1_1_mozzi_rand_private.html#a4647c5989e5cf1ada9d952d5eb943d13">More...</a><br /></td></tr>
+<tr class="memdesc:a4647c5989e5cf1ada9d952d5eb943d13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises Mozzi's (pseudo)random number generator <a class="el" href="class_mozzi_private_1_1_mozzi_rand_private.html#a68ed69ece800f0c1e5819c05aed8d398" title="Random number generator.">xorshift96()</a>, which is used in Mozzi's <a class="el" href="group__random.html#gabe026433bdf21da516984d35730672fc" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand()</a> function.  <a href="class_mozzi_private_1_1_mozzi_rand_private.html#a4647c5989e5cf1ada9d952d5eb943d13">More...</a><br /></td></tr>
 <tr class="separator:a4647c5989e5cf1ada9d952d5eb943d13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68ed69ece800f0c1e5819c05aed8d398"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mozzi_private_1_1_mozzi_rand_private.html#a68ed69ece800f0c1e5819c05aed8d398">xorshift96</a> ()</td></tr>
 <tr class="memdesc:a68ed69ece800f0c1e5819c05aed8d398"><td class="mdescLeft">&#160;</td><td class="mdescRight">Random number generator.  <a href="class_mozzi_private_1_1_mozzi_rand_private.html#a68ed69ece800f0c1e5819c05aed8d398">More...</a><br /></td></tr>
@@ -152,11 +152,11 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Initialises Mozzi's (pseudo)random number generator <a class="el" href="class_mozzi_private_1_1_mozzi_rand_private.html#a68ed69ece800f0c1e5819c05aed8d398" title="Random number generator.">xorshift96()</a>, which is used in Mozzi's rand() function. </p>
+<p>Initialises Mozzi's (pseudo)random number generator <a class="el" href="class_mozzi_private_1_1_mozzi_rand_private.html#a68ed69ece800f0c1e5819c05aed8d398" title="Random number generator.">xorshift96()</a>, which is used in Mozzi's <a class="el" href="group__random.html#gabe026433bdf21da516984d35730672fc" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand()</a> function. </p>
 <p>This can be useful if you want random sequences to be different on each run of a sketch, by seeding with a fairly random input. <a class="el" href="class_mozzi_private_1_1_mozzi_rand_private.html#a83ff6b4e38c84713e0d67aa1ec06af66" title="Initialises Mozzi&#39;s (pseudo)random number generator xorshift96(), which is used in Mozzi&#39;s rand() fun...">randSeed()</a> called without a parameter uses noise from reading the Arduino's internal temperature as the seed, a technique discussed at <a href="http://arduino.cc/forum/index.php/topic,38091.0.html">http://arduino.cc/forum/index.php/topic,38091.0.html</a>, borrowing code put there by Rob Tillaart.</p>
 <dl class="section note"><dt>Note</dt><dd>Intialization of the random seed is done differently on different MCUs, but is nowhere near perfect for most (and for some it is not even implemented at all). Many implementations (e.g. on AVR, STM32) simply rely on reading a (hopefully noisy) internal temperature sensor. You will often get better results by calling analogRead() - <em>not</em> mozziAnalogRead(0), in this case! - on one or two floating (non-connected) analog pins. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__rand_8h_source.html#l00054">54</a> of file <a class="el" href="mozzi__rand_8h_source.html">mozzi_rand.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__rand_8h_source.html#l00059">59</a> of file <a class="el" href="mozzi__rand_8h_source.html">mozzi_rand.h</a>.</p>
 
 </div>
 </div>
@@ -184,7 +184,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Initialises Mozzi's (pseudo)random number generator <a class="el" href="class_mozzi_private_1_1_mozzi_rand_private.html#a68ed69ece800f0c1e5819c05aed8d398" title="Random number generator.">xorshift96()</a>, which is used in Mozzi's rand() function. </p>
+<p>Initialises Mozzi's (pseudo)random number generator <a class="el" href="class_mozzi_private_1_1_mozzi_rand_private.html#a68ed69ece800f0c1e5819c05aed8d398" title="Random number generator.">xorshift96()</a>, which is used in Mozzi's <a class="el" href="group__random.html#gabe026433bdf21da516984d35730672fc" title="Ranged random number generator, faster than Arduino&#39;s built-in random function, which is too slow for...">rand()</a> function. </p>
 <p>This can be useful if you want random sequences to be different on each run of a sketch, by seeding with fairly random input, such as analogRead() on an unconnected pin (as explained in the Arduino documentation for randomSeed(). randSeed is the same as xorshift96Seed(), but easier to remember. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">seed</td><td>a number to use as a seed. </td></tr>
@@ -222,7 +222,7 @@ Friends</h2></td></tr>
 <p>Random number generator. </p>
 <p>A faster replacement for Arduino's random function, which is too slow to use with Mozzi. Based on Marsaglia, George. (2003). Xorshift RNGs. <a href="http://www.jstatsoft.org/v08/i14/xorshift.pdf">http://www.jstatsoft.org/v08/i14/xorshift.pdf</a> </p><dl class="section return"><dt>Returns</dt><dd>a random 32 bit integer. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__rand_8h_source.html#l00025">25</a> of file <a class="el" href="mozzi__rand_8h_source.html">mozzi_rand.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__rand_8h_source.html#l00030">30</a> of file <a class="el" href="mozzi__rand_8h_source.html">mozzi_rand.h</a>.</p>
 
 </div>
 </div>
@@ -232,7 +232,7 @@ Friends</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_mozzi_private.html">MozziPrivate</a></li><li class="navelem"><a class="el" href="class_mozzi_private_1_1_mozzi_rand_private.html">MozziRandPrivate</a></li>
-    <li class="footer">Generated on Fri Apr 12 2024 19:13:30 for Mozzi by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sun Apr 14 2024 11:05:48 for Mozzi by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

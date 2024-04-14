@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Mozzi: Functions for taking (non-blocking) analog readings.</title>
+<title>Mozzi: Analog</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -98,10 +98,15 @@ $(document).ready(function(){initNavTree('group__analog.html',''); initResizable
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Functions for taking (non-blocking) analog readings.</div>  </div>
+<div class="title">Analog</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Efficient analog input functions for sensors and audio.  
+<a href="#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>Efficient analog input functions for sensors and audio. </p>
+<p>Helps produce glitch-free audio by allowing analog input functions which normally block processing to be performed in the background. </p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -164,7 +169,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <p>Prepare all analog input channels by turning off their digital input buffers. </p>
 <p>This helps to reduce noise, increase analog reading speed, and save power. </p>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__analog_8h_source.html#l00106">106</a> of file <a class="el" href="mozzi__analog_8h_source.html">mozzi_analog.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__analog_8h_source.html#l00111">111</a> of file <a class="el" href="mozzi__analog_8h_source.html">mozzi_analog.h</a>.</p>
 
 </div>
 </div>
@@ -204,7 +209,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__analog_8h_source.html#l00081">81</a> of file <a class="el" href="mozzi__analog_8h_source.html">mozzi_analog.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__analog_8h_source.html#l00086">86</a> of file <a class="el" href="mozzi__analog_8h_source.html">mozzi_analog.h</a>.</p>
 
 </div>
 </div>
@@ -232,7 +237,7 @@ template&lt;byte RES&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>The value range returned by this function follows the same rules as detailed in the documentation for <a class="el" href="group__analog.html#gadedb573129313bad0c183af2486c5283" title="See mozziAnalogRead().">mozziAnalogRead()</a>: For portable code, define MOZZI_ANALGO_READ_RESOLUTION at the top of your sketch, or use the templated version of this function.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>audio data from the input buffer </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00170">170</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00172">172</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -264,7 +269,7 @@ template&lt;byte RES&gt; </div>
 <p>See <a class="el" href="group__analog.html#gacd5e655ae9057843ade0d7647f909663" title="See getAudioInput().">getAudioInput()</a>. </p>
 <p>Equivalent to <a class="el" href="group__analog.html#gacd5e655ae9057843ade0d7647f909663" title="See getAudioInput().">getAudioInput&lt;16&gt;()</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00147">147</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mozzi_guts_8h_source.html#l00149">149</a> of file <a class="el" href="_mozzi_guts_8h_source.html">MozziGuts.h</a>.</p>
 
 </div>
 </div>
@@ -299,7 +304,7 @@ template&lt;byte RES&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the digitised value of the voltage on the chosen channel. See the note above regarding the output range! </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__analog_8h_source.html#l00169">169</a> of file <a class="el" href="mozzi__analog_8h_source.html">mozzi_analog.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__analog_8h_source.html#l00174">174</a> of file <a class="el" href="mozzi__analog_8h_source.html">mozzi_analog.h</a>.</p>
 
 </div>
 </div>
@@ -330,7 +335,7 @@ template&lt;byte RES&gt; </div>
 <p>See <a class="el" href="group__analog.html#gadedb573129313bad0c183af2486c5283" title="See mozziAnalogRead().">mozziAnalogRead()</a> but always returns the value shifted to 16 bit range. </p>
 <p>THis is exactly equivalent to mozziAnalogRead&lt;16&gt;(pin); </p>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__analog_8h_source.html#l00147">147</a> of file <a class="el" href="mozzi__analog_8h_source.html">mozzi_analog.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__analog_8h_source.html#l00152">152</a> of file <a class="el" href="mozzi__analog_8h_source.html">mozzi_analog.h</a>.</p>
 
 </div>
 </div>
@@ -366,7 +371,7 @@ template&lt;byte RES&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mozzi__analog_8h_source.html#l00094">94</a> of file <a class="el" href="mozzi__analog_8h_source.html">mozzi_analog.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mozzi__analog_8h_source.html#l00099">99</a> of file <a class="el" href="mozzi__analog_8h_source.html">mozzi_analog.h</a>.</p>
 
 </div>
 </div>
@@ -401,7 +406,7 @@ template&lt;byte RES&gt; </div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Apr 12 2024 19:13:29 for Mozzi by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sun Apr 14 2024 11:05:48 for Mozzi by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

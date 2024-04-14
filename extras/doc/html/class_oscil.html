@@ -678,7 +678,7 @@ template&lt;uint64_t RANGE&gt; </div>
 </div><div class="memdoc">
 
 <p>Set the frequency using UFix&lt;16,16&gt; fixed-point number format. </p>
-<p>This is useful in combination with Q16n16_mtof(), a fast alternative to mtof(), using UFix&lt;16,16&gt; fixed-point format instead of fractional numbers. </p><dl class="section note"><dt>Note</dt><dd>This should work OK with tables 2048 cells or smaller and frequencies up to 4096 Hz. Can't be used with UPDATE_RATE less than 64 Hz. </dd>
+<p>This is useful in combination with <a class="el" href="group__midi.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2" title="Converts midi note number to frequency with speed and accuracy.">Q16n16_mtof()</a>, a fast alternative to <a class="el" href="group__midi.html#gafacb8849f96270644ea79184fde7db37" title="Converts midi note number to frequency.">mtof()</a>, using UFix&lt;16,16&gt; fixed-point format instead of fractional numbers. </p><dl class="section note"><dt>Note</dt><dd>This should work OK with tables 2048 cells or smaller and frequencies up to 4096 Hz. Can't be used with UPDATE_RATE less than 64 Hz. </dd>
 <dd>
 This didn't run faster than float last time it was tested, after 2014 code changes. Need to see if 2014 changes improved or worsened performance. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -802,7 +802,7 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
 </div><div class="memdoc">
 
 <p>Set the frequency using Q16n16 fixed-point number format. </p>
-<p>This is useful in combination with Q16n16_mtof(), a fast alternative to mtof(), using Q16n16 fixed-point format instead of floats. </p><dl class="section note"><dt>Note</dt><dd>This should work OK with tables 2048 cells or smaller and frequencies up to 4096 Hz. Can't be used with UPDATE_RATE less than 64 Hz. </dd>
+<p>This is useful in combination with <a class="el" href="group__midi.html#ga45bd3f3abd7ae5fa509eac3d3931a5b2" title="Converts midi note number to frequency with speed and accuracy.">Q16n16_mtof()</a>, a fast alternative to <a class="el" href="group__midi.html#gafacb8849f96270644ea79184fde7db37" title="Converts midi note number to frequency.">mtof()</a>, using Q16n16 fixed-point format instead of floats. </p><dl class="section note"><dt>Note</dt><dd>This should work OK with tables 2048 cells or smaller and frequencies up to 4096 Hz. Can't be used with UPDATE_RATE less than 64 Hz. </dd>
 <dd>
 This didn't run faster than float last time it was tested, after 2014 code changes. Need to see if 2014 changes improved or worsened performance. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -1012,7 +1012,7 @@ template&lt;uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_oscil.html">Oscil</a></li>
-    <li class="footer">Generated on Fri Apr 12 2024 19:13:30 for Mozzi by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sun Apr 14 2024 11:05:48 for Mozzi by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

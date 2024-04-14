@@ -20,7 +20,12 @@
 // for setupFastAnalogRead()
 enum ANALOG_READ_SPEED {FAST_ADC,FASTER_ADC,FASTEST_ADC};
 
-/** @defgroup analog Functions for taking (non-blocking) analog readings. */
+/** @defgroup analog
+
+@brief Efficient analog input functions for sensors and audio.
+
+Helps produce glitch-free audio by allowing analog input functions which normally block processing to be performed in the background. 
+*/
 
 /** 
 @ingroup analog

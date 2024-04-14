@@ -53,7 +53,7 @@ var NAVTREEINDEX =
 "01_8_basics_2_vibrato_2_vibrato_8ino-example.html",
 "class_meta_oscil.html#a9309def78e90d419d569b0acd9a80bf3",
 "functions_func_g.html",
-"hardware_esp8266.html#esp8266_i2s_dac"
+"group__soundtables.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

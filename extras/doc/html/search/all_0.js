@@ -5,7 +5,7 @@ var searchData=
   ['adsr_2',['ADSR',['../class_a_d_s_r.html',1,'ADSR&lt; CONTROL_UPDATE_RATE, LERP_RATE, T &gt;'],['../class_a_d_s_r.html#a4bd943baa8c5b68d3ee7b3d385e77221',1,'ADSR::ADSR()']]],
   ['adsr_3c_20mozzi_5fcontrol_5frate_2c_20mozzi_5faudio_5frate_20_3e_3',['ADSR&lt; MOZZI_CONTROL_RATE, MOZZI_AUDIO_RATE &gt;',['../class_a_d_s_r.html',1,'']]],
   ['adsr_3c_20mozzi_5fcontrol_5frate_2c_20mozzi_5fcontrol_5frate_20_3e_4',['ADSR&lt; MOZZI_CONTROL_RATE, MOZZI_CONTROL_RATE &gt;',['../class_a_d_s_r.html',1,'']]],
-  ['assorted_20meta_2dprogramming_20utils_5',['Assorted meta-programming utils',['../group__util.html',1,'']]],
+  ['analog_5',['Analog',['../group__analog.html',1,'']]],
   ['atindex_6',['atIndex',['../class_meta_oscil.html#ab74ebc6bde8fa15288df547c41e9206b',1,'MetaOscil::atIndex()'],['../class_oscil.html#a97f2c0f28751641417202fee2a0776d3',1,'Oscil::atIndex()'],['../class_sample.html#a86948f48dcdc0cb19f6e256ece70149d',1,'Sample::atIndex()']]],
   ['audio_20output_20and_20buffering_7',['Audio Output and Buffering',['../group__audio__output.html',1,'']]],
   ['audiodelay_8',['AudioDelay',['../class_audio_delay.html',1,'AudioDelay&lt; NUM_BUFFER_SAMPLES, T &gt;'],['../class_audio_delay.html#a688f69088f96bf3976a8555d3026365f',1,'AudioDelay::AudioDelay()'],['../class_audio_delay.html#a79be253fcb5709624c8fb708e54f069f',1,'AudioDelay::AudioDelay(unsigned int delaytime_cells)']]],

@@ -147,8 +147,8 @@ $(document).ready(function(){initNavTree('primes_8h_source.html',''); initResiza
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">You need to &quot;#include &lt;primes.h&gt;&quot; separately to mozzi_rand.h.</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">inline</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> randPrime(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n){</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">return</span> FLASH_OR_RAM_READ&lt;<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>&gt;(primes+rand(n));</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="group__random.html#gab6c2b444d462461b82997e04105d0398">randPrime</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n){</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">return</span> FLASH_OR_RAM_READ&lt;<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>&gt;(primes+<a class="code" href="group__random.html#ga4ad4ab94c8b0e8a4d4be925490378733">rand</a><a class="code" href="group__random.html#ga4ad4ab94c8b0e8a4d4be925490378733">(</a>n<a class="code" href="group__random.html#ga4ad4ab94c8b0e8a4d4be925490378733">)</a>);</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">/** @ingroup random</span></div>
@@ -162,10 +162,10 @@ $(document).ready(function(){initNavTree('primes_8h_source.html',''); initResiza
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">You need to &quot;#include &lt;primes.h&gt;&quot; separately to mozzi_utils.h.</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">inline</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> randPrimeUpTo(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n){</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="group__random.html#gaead8db89e2403d5ef7842f894552c629">randPrimeUpTo</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n){</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> p;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">do</span> {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        p = FLASH_OR_RAM_READ&lt;<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>&gt;(primes+rand(TOP_PRIME_INDEX));</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        p = FLASH_OR_RAM_READ&lt;<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>&gt;(primes+<a class="code" href="group__random.html#ga4ad4ab94c8b0e8a4d4be925490378733">rand</a><a class="code" href="group__random.html#ga4ad4ab94c8b0e8a4d4be925490378733">(</a>TOP_PRIME_INDEX<a class="code" href="group__random.html#ga4ad4ab94c8b0e8a4d4be925490378733">)</a>);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    } <span class="keywordflow">while</span> (p &gt; n);</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordflow">return</span> p;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
@@ -177,7 +177,7 @@ $(document).ready(function(){initNavTree('primes_8h_source.html',''); initResiza
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>primes.h</b></li>
-    <li class="footer">Generated on Fri Apr 12 2024 19:13:29 for Mozzi by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sun Apr 14 2024 11:05:47 for Mozzi by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

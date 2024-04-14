@@ -5,16 +5,10 @@
     which in this case requires the input signal level to be reduced
     to avoid distortion which can occur with sharp resonance settings.
 
-    This sketch using HIFI mode is not for Teensy 3.1.
-
-    IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
-    be changed from STANDARD mode to HIFI.
-    In Mozz/mozzi_config.h, change
-    #define AUDIO_MODE STANDARD
-    //#define AUDIO_MODE HIFI
-    to
-    //#define AUDIO_MODE STANDARD
-    #define AUDIO_MODE HIFI
+    Important:
+    This sketch uses MOZZI_OUTPUT_2PIN_PWM (aka HIFI) output mode, which
+    is not available on all boards (among others, it works on the
+    classic Arduino boards, but not Teensy 3.x and friends).
 
     Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
     Check the Mozzi core module documentation for others and more detail
@@ -34,27 +28,32 @@
     Alternatively using 39 ohm, 4.99k and 470nF components will
     work directly with headphones.
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012, CC by-nc-sa.
+   Copyright 2012-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+#include <MozziConfigValues.h>
+#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_2PIN_PWM
+
+#include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/whitenoise8192_int8.h>
 #include <StateVariable.h>
 
-Oscil <WHITENOISE8192_NUM_CELLS, AUDIO_RATE> aNoise(WHITENOISE8192_DATA); // audio noise
+Oscil <WHITENOISE8192_NUM_CELLS, MOZZI_AUDIO_RATE> aNoise(WHITENOISE8192_DATA); // audio noise
 StateVariable <BANDPASS> svf; // can be LOWPASS, BANDPASS, HIGHPASS or NOTCH
 
 
 void setup(){
   startMozzi();
-  aNoise.setFreq(1.27f*(float)AUDIO_RATE/WHITENOISE8192_SAMPLERATE);   // * by an oddish number (1.27) to avoid exact repeating of noise oscil
+  aNoise.setFreq(1.27f*(float)MOZZI_AUDIO_RATE/WHITENOISE8192_SAMPLERATE);   // * by an oddish number (1.27) to avoid exact repeating of noise oscil
   svf.setResonance(1); // 0 to 255, 0 is the "sharp" end
   svf.setCentreFreq(3500);
 }
@@ -64,10 +63,10 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput updateAudio(){
   int input = aNoise.next()>>1; // shift down (ie. fast /) to avoid distortion with extreme resonant filter setting
   int output = svf.next(input);
-  return output<<4; // shift up for HIFI resolution
+  return MonoOutput::fromNBit(10, output);
 }
 
 

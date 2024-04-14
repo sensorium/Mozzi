@@ -7,27 +7,28 @@
     DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.io/Mozzi/
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012, CC by-nc-sa.
+   Copyright 2012-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+// this is a high value to avoid zipper noise
+#define MOZZI_CONTROL_RATE 1280
+#include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator
 #include <EventDelay.h>
 #include <Smooth.h>
 #include <mozzi_midi.h>
 
-// this is a high value to avoid zipper noise
-#define CONTROL_RATE 1280
-
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 // for scheduling freq changes
 EventDelay kFreqChangeDelay;
@@ -39,8 +40,8 @@ int target_freq, target_freq1, target_freq2;
 void setup(){
   target_freq1 = 441;
   target_freq2 = 330;
-  kFreqChangeDelay.set(1000); // 1000ms countdown, within resolution of CONTROL_RATE
-  startMozzi(CONTROL_RATE);
+  kFreqChangeDelay.set(1000); // 1000ms countdown, within resolution of MOZZI_CONTROL_RATE
+  startMozzi();
 }
 
 
@@ -60,8 +61,8 @@ void updateControl(){
 }
 
 
-int updateAudio(){
-  return aSin.next();
+AudioOutput updateAudio(){
+  return MonoOutput::from8Bit(aSin.next());
 }
 
 

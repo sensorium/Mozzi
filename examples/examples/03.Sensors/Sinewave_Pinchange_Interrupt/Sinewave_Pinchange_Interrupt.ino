@@ -3,9 +3,9 @@
   in the background with an interrupt, using PinChangeInt library
   with Mozzi sonification library.
 
-  Demonstrates using Mozzi with PinChangeInt library from:
-  http://code.google.com/p/arduino-pinchangeint/
-  (Not for Teensy 3.1)
+  Demonstrates using Mozzi with PinChangeInterrupt library from:
+  https://github.com/NicoHood/PinChangeInterrupt
+  (AVR only)
 
   Circuit:
 
@@ -18,31 +18,33 @@
       6.8nf capacitor from the digital pin to ground
 
 
-  Mozzi documentation/API
-  https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-  Mozzi help/discussion/announcements:
-  https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-  Tim Barrass 2013, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator
-#include <PinChangeInt.h>
+#include <PinChangeInterrupt.h>
 
 #define PIN 4  // the pin we are interested in
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 
 void setup(){
   aSin.setFreq(440);
   pinMode(PIN, INPUT);     //set the pin to input
   digitalWrite(PIN, HIGH); //use the internal pullup resistor
-  PCintPort::attachInterrupt(PIN, changeFreq,RISING); // attach a PinChange Interrupt to our pin on the rising edge
+  attachPCINT(digitalPinToPCINT(PIN), changeFreq, RISING); // attach a PinChange Interrupt to our pin on the rising edge
   // (RISING, FALLING and CHANGE all work with this library)
   // and execute the function changeFreq when that pin changes
   startMozzi();
@@ -70,8 +72,8 @@ void changeFreq()
 
 
 
-int updateAudio(){
-  return aSin.next(); // return an int signal centred around 0
+AudioOutput updateAudio(){
+  return MonoOutput::from8Bit(aSin.next()); // return an int signal centred around 0
 }
 
 

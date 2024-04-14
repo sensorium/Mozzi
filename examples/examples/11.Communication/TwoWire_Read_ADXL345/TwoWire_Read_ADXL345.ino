@@ -9,28 +9,27 @@
 
     Circuit: Audio output on digital pin 9.
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Marije Baalman 2012.
-    Small modifications by TIm Barrass to retain Mozzi compatibility.
-    This example code is in the public domain.
+   Copyright 2012-2024 Marije Baalman and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+#define MOZZI_CONTROL_RATE 128 // Hz, powers of 2 are most reliable
+#include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <Ead.h> // exponential attack decay
 #include <tables/sin2048_int8.h> // sine table for oscillator
 #include <twi_nonblock.h>
 
-#define CONTROL_RATE 128 // Hz, powers of 2 are most reliable
-
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
-Ead kEnvelope(CONTROL_RATE); // resolution will be CONTROL_RATE
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
+Ead kEnvelope(MOZZI_CONTROL_RATE); // resolution will be MOZZI_CONTROL_RATE
 
 int gain;
 
@@ -140,7 +139,7 @@ void acc_writeTo(byte address, byte val) {
 
 void setup(){
   setup_accelero();
-  startMozzi(CONTROL_RATE);
+  startMozzi();
   aSin.setFreq(800);
   int attack = 30;
   int decay = 500;
@@ -193,8 +192,8 @@ void updateControl(){
 }
 
 
-int updateAudio(){
-  return (aSin.next()*gain)>>8;
+AudioOutput updateAudio(){
+  return MonoOutput::from16Bit(aSin.next()*gain);
 }
 
 

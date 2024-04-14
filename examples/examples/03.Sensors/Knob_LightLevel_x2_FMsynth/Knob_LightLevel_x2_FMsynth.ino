@@ -27,16 +27,19 @@
        LDR from analog pin to +5V (3.3V on Teensy 3.1)
        5.1k resistor from analog pin to ground
 
-    Mozzi documentation/API
-    https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-    Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-  Tim Barrass 2013, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+#define MOZZI_ANALOG_READ_RESOLUTION 10 // code below assumes readings to be in the classic 10-bit (0-1023) range
+#include <Mozzi.h>
 #include <Oscil.h> // oscillator
 #include <tables/cos2048_int8.h> // table for Oscils to play
 #include <Smooth.h>
@@ -62,9 +65,9 @@ const int KNOB_PIN = 0; // set the input for the knob to analog pin 0
 const int LDR1_PIN=1; // set the analog input for fm_intensity to pin 1
 const int LDR2_PIN=2; // set the analog input for mod rate to pin 2
 
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCarrier(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aModulator(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kIntensityMod(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aCarrier(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aModulator(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kIntensityMod(COS2048_DATA);
 
 int mod_ratio = 5; // brightness (harmonics)
 long fm_intensity; // carries control info from updateControl to updateAudio
@@ -129,9 +132,9 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput updateAudio(){
   long modulation = aSmoothIntensity.next(fm_intensity) * aModulator.next();
-  return aCarrier.phMod(modulation);
+  return MonoOutput::from8Bit(aCarrier.phMod(modulation));
 }
 
 

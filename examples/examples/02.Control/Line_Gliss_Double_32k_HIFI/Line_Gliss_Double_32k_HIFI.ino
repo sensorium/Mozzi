@@ -14,21 +14,14 @@
     Also shows how to use random offsets between the oscillators'
     frequencies to produce a chorusing/doubling effect.
 
-    This sketch using HIFI mode is not for Teensy 3.1.
+    Important:
+    This sketch uses MOZZI_OUTPUT_2PIN_PWM (aka HIFI) output mode, which
+    is not available on all boards (among others, it works on the
+    classic Arduino boards, but not Teensy 3.x and friends).
 
-    IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
-    be changed from STANDARD mode to HIFI.
-    In Mozz/mozzi_config.h, change
-    #define AUDIO_MODE STANDARD
-    //#define AUDIO_MODE STANDARD_PLUS
-    //#define AUDIO_MODE HIFI
-    to
-    //#define AUDIO_MODE STANDARD
-    //#define AUDIO_MODE STANDARD_PLUS
-    #define AUDIO_MODE HIFI
-
-    Also, AUDIO_RATE can be changed from 16384 to 32768 in mozzi_config.h,
-    to try out the higher sample rate.
+    The MOZZI_AUDIO_RATE (sample rate) is additionally configured at 32768 Hz,
+    which is the default on most platforms, but twice the standard rate on
+    AVR-CPUs.
 
     Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
     Check the Mozzi core module documentation for others and more detail
@@ -48,16 +41,22 @@
     Alternatively using 39 ohm, 4.99k and 470nF components will
     work directly with headphones.
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012, CC by-nc-sa.
+   Copyright 2012-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+#include <MozziConfigValues.h>
+#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_2PIN_PWM
+#define MOZZI_AUDIO_RATE 32768
+
+#include <Mozzi.h>
 #include <Line.h> // for smooth transitions
 #include <Oscil.h> // oscillator template
 #include <tables/saw8192_int8.h> // saw table for oscillator
@@ -66,8 +65,8 @@
 #include <mozzi_fixmath.h>
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SAW8192_NUM_CELLS, AUDIO_RATE> aSaw1(SAW8192_DATA);
-Oscil <SAW8192_NUM_CELLS, AUDIO_RATE> aSaw2(SAW8192_DATA);
+Oscil <SAW8192_NUM_CELLS, MOZZI_AUDIO_RATE> aSaw1(SAW8192_DATA);
+Oscil <SAW8192_NUM_CELLS, MOZZI_AUDIO_RATE> aSaw2(SAW8192_DATA);
 
 // use: Line <type> lineName
 Line <long> aGliss1;
@@ -76,8 +75,8 @@ Line <long> aGliss2;
 byte lo_note = 24; // midi note numbers
 byte hi_note = 46;
 
-long audio_steps_per_gliss = AUDIO_RATE / 4; // ie. 4 glisses per second
-long control_steps_per_gliss = CONTROL_RATE / 4;
+long audio_steps_per_gliss = MOZZI_AUDIO_RATE / 4; // ie. 4 glisses per second
+long control_steps_per_gliss = MOZZI_CONTROL_RATE / 4;
 
 // stuff for changing starting positions, probably just confusing really
 int counter = 0;
@@ -137,10 +136,10 @@ void updateControl(){ // 900 us floats vs 160 fixed
 }
 
 
-int updateAudio(){
+AudioOutput updateAudio(){
   aSaw1.setPhaseInc(aGliss1.next());
   aSaw2.setPhaseInc(aGliss2.next());
-  return ((int)aSaw1.next()+aSaw2.next())<<5;
+  return MonoOutput::fromNBit(9, (int)aSaw1.next()+aSaw2.next());
 }
 
 

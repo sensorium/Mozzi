@@ -77,6 +77,9 @@ _Arduino➞Sketch➞Include Library➞Library Manager_ type "Mozzi" into the sea
 
 For other installation methods (e.g. the development version), see the [Download page](https://sensorium.github.io/Mozzi/download).
 
+### Dependencies
+Starting in version 2.0, Mozzi requires [FixMath](https://github.com/tomcombriat/FixMath) to be installed. If you install Mozzi via the Library Manager of Arduino, FixMath should be automatically installed. 
+
 ## Quick Start
 To hear Mozzi, wire a 3.5mm audio jack with the centre to the audio out pin for your Arduino as shown in the table below, and the shield to GND on the Arduino.
 Plug into your computer and listen with a sound program like [Audacity](https://audacity.sourceforge.net/). (Or connect any other high-impedance input, like an active speaker)

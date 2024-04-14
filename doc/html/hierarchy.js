@@ -1,18 +1,19 @@
 var hierarchy =
 [
     [ "ADSR< CONTROL_UPDATE_RATE, LERP_RATE, T >", "class_a_d_s_r.html", null ],
-    [ "ADSR< CONTROL_RATE, AUDIO_RATE >", "class_a_d_s_r.html", null ],
-    [ "ADSR< CONTROL_RATE, CONTROL_RATE >", "class_a_d_s_r.html", null ],
-    [ "AudioDelay< NUM_BUFFER_SAMPLES, T >", "class_audio_delay.html", [
-      [ "ControlDelay< NUM_BUFFER_SAMPLES, T >", "class_control_delay.html", null ]
-    ] ],
+    [ "ADSR< MOZZI_CONTROL_RATE, MOZZI_AUDIO_RATE >", "class_a_d_s_r.html", null ],
+    [ "ADSR< MOZZI_CONTROL_RATE, MOZZI_CONTROL_RATE >", "class_a_d_s_r.html", null ],
+    [ "AudioDelay< NUM_BUFFER_SAMPLES, T >", "class_audio_delay.html", null ],
     [ "AudioDelay< 128 >", "class_audio_delay.html", null ],
     [ "AudioDelay< 128, int >", "class_audio_delay.html", null ],
     [ "AudioDelay< 256, int >", "class_audio_delay.html", null ],
+    [ "AudioDelay< NUM_BUFFER_SAMPLES, int >", "class_audio_delay.html", [
+      [ "ControlDelay< NUM_BUFFER_SAMPLES, T >", "class_control_delay.html", null ]
+    ] ],
     [ "AudioDelayFeedback< NUM_BUFFER_SAMPLES, INTERP_TYPE >", "class_audio_delay_feedback.html", null ],
-    [ "AutoRange< T >", "class_auto_range.html", null ],
-    [ "AutoRange< int >", "class_auto_range.html", [
-      [ "AutoMap", "class_auto_map.html", null ]
+    [ "AutoRange< T >", "group__sensortools.html#class_auto_range", null ],
+    [ "AutoRange< int >", "group__sensortools.html", [
+      [ "AutoMap", "group__sensortools.html#class_auto_map", null ]
     ] ],
     [ "CapPoll< SENSOR_PIN, SEND_PIN >", "class_cap_poll.html", null ],
     [ "CircularBuffer< ITEM_TYPE >", "class_circular_buffer.html", null ],
@@ -22,44 +23,50 @@ var hierarchy =
       [ "Metronome", "class_metronome.html", null ]
     ] ],
     [ "Int2Type< I >", "group__util.html#struct_int2_type", null ],
-    [ "IntegerType< BYTES >", "struct_integer_type.html", null ],
+    [ "IntegerType< BYTES >", "group__util.html#struct_integer_type", null ],
     [ "IntegerType< 1 >", "struct_integer_type_3_011_01_4.html", null ],
     [ "IntegerType< 2 >", "struct_integer_type_3_012_01_4.html", null ],
     [ "IntegerType< 4 >", "struct_integer_type_3_014_01_4.html", null ],
     [ "IntegerType< 8 >", "struct_integer_type_3_018_01_4.html", null ],
-    [ "IntegerType< sizeof(su)+sizeof(su)>", "struct_integer_type.html", null ],
-    [ "IntegerType< sizeof(T)>", "struct_integer_type.html", null ],
+    [ "IntegerType< sizeof(AudioOutputStorage_t)>", "group__util.html", null ],
+    [ "IntegerType< sizeof(uint8_t)+sizeof(uint8_t)>", "group__util.html", null ],
     [ "IntMap", "class_int_map.html", null ],
     [ "Line< T >", "class_line.html", null ],
     [ "Line< Q15n16 >", "class_line.html", null ],
     [ "Line< Q16n16 >", "class_line.html", null ],
+    [ "Line< SFix< NI, NF > >", "class_line_3_01_s_fix_3_01_n_i_00_01_n_f_01_4_01_4.html", null ],
+    [ "Line< UFix< NI, NF > >", "class_line_3_01_u_fix_3_01_n_i_00_01_n_f_01_4_01_4.html", null ],
     [ "Line< unsigned char >", "class_line_3_01unsigned_01char_01_4.html", null ],
     [ "Line< unsigned int >", "class_line_3_01unsigned_01int_01_4.html", null ],
     [ "Line< unsigned long >", "class_line_3_01unsigned_01long_01_4.html", null ],
     [ "MetaOscil< NUM_TABLE_CELLS, UPDATE_RATE, N_OSCIL >", "class_meta_oscil.html", null ],
+    [ "MozziPrivate::MidiToFreq", "class_mozzi_private_1_1_midi_to_freq.html", null ],
     [ "MonoOutput", "struct_mono_output.html", null ],
+    [ "MozziPrivate::MozziRandPrivate", "class_mozzi_private_1_1_mozzi_rand_private.html", null ],
     [ "Oscil< NUM_TABLE_CELLS, UPDATE_RATE >", "class_oscil.html", null ],
-    [ "Oscil< 8192, AUDIO_RATE >", "class_oscil.html", null ],
-    [ "Oscil< COS8192_NUM_CELLS, AUDIO_RATE >", "class_oscil.html", null ],
-    [ "Oscil< SIN2048_NUM_CELLS, AUDIO_RATE >", "class_oscil.html", null ],
+    [ "Oscil< 8192, MOZZI_AUDIO_RATE >", "class_oscil.html", null ],
+    [ "Oscil< COS8192_NUM_CELLS, MOZZI_AUDIO_RATE >", "class_oscil.html", null ],
+    [ "Oscil< SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE >", "class_oscil.html", null ],
     [ "PDResonant", "class_p_d_resonant.html", null ],
     [ "Phasor< UPDATE_RATE >", "class_phasor.html", null ],
-    [ "Phasor< AUDIO_RATE >", "class_phasor.html", null ],
+    [ "Phasor< MOZZI_AUDIO_RATE >", "class_phasor.html", null ],
     [ "Portamento< CONTROL_UPDATE_RATE >", "class_portamento.html", null ],
     [ "RCpoll< SENSOR_PIN >", "class_r_cpoll.html", null ],
     [ "ResonantFilter< FILTER_TYPE, su >", "class_resonant_filter.html", null ],
-    [ "ResonantFilter< LOWPASS, su >", "class_resonant_filter.html", [
+    [ "ResonantFilter< LOWPASS, uint8_t >", "class_resonant_filter.html", [
       [ "MultiResonantFilter< su >", "class_multi_resonant_filter.html", null ]
     ] ],
     [ "ReverbTank", "class_reverb_tank.html", null ],
-    [ "RollingAverage< T, WINDOW_LENGTH >", "class_rolling_average.html", null ],
-    [ "RollingAverage< T,(1<<(RESOLUTION_INCREASE_BITS *2))>", "class_rolling_average.html", [
-      [ "OverSample< T, RESOLUTION_INCREASE_BITS >", "class_over_sample.html", null ]
+    [ "RollingAverage< T, WINDOW_LENGTH >", "group__sensortools.html#class_rolling_average", null ],
+    [ "RollingAverage< T,(1<<(RESOLUTION_INCREASE_BITS *2))>", null, [
+      [ "OverSample< T, RESOLUTION_INCREASE_BITS >", "group__sensortools.html#class_over_sample", null ]
     ] ],
-    [ "RollingStat< T, WINDOW_LENGTH >", "class_rolling_stat.html", null ],
+    [ "RollingStat< T, WINDOW_LENGTH >", "group__sensortools.html#class_rolling_stat", null ],
     [ "Sample< NUM_TABLE_CELLS, UPDATE_RATE, INTERP >", "class_sample.html", null ],
     [ "SampleHuffman", "class_sample_huffman.html", null ],
     [ "Smooth< T >", "class_smooth.html", null ],
+    [ "Smooth< SFix< NI, NF > >", "class_smooth_3_01_s_fix_3_01_n_i_00_01_n_f_01_4_01_4.html", null ],
+    [ "Smooth< UFix< NI, NF > >", "class_smooth_3_01_u_fix_3_01_n_i_00_01_n_f_01_4_01_4.html", null ],
     [ "Stack< T, NUM_ITEMS >", "class_stack.html", null ],
     [ "StateVariable< FILTER_TYPE >", "class_state_variable.html", null ],
     [ "StereoOutput", "struct_stereo_output.html", null ],

@@ -21,7 +21,7 @@ Here, "single pin" means one output pin *per audio channel*, so it could also be
 
 Things are easy, if your MCU comes with a true hardware DAC, which outputs a true analog signal. This corresponds to the "DAC" column in the table
 below, and the configuration option ```MOZZI_OUTPUT_INTERNAL_DAC```.
-Boards that fall into this category include Teensy 3.1, Arduino Giga, and ESP32. Note however, that for the latter two, the output resolution is only 8 bits.
+Boards that fall into this category include Teensy 3.1, Arduino Giga, and ESP32. Note however, that for the last one, the output resolution is only 8 bits.
 
 When using this modes, all you need to worry about is whether the output is capable
 of providing enough output current. I.e. you may need to follow up with a generic amplifier circuit to drive low impedance speakers, but that's it.

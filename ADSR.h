@@ -72,7 +72,7 @@ private:
 	inline
 	void setPhase(phase * next_phase) {
 		update_step_counter = 0;
-		num_update_steps = next_phase->update_steps;
+		num_update_steps = next_phase->update_steps - LERPS_PER_CONTROL; // so that we stop slightly before, rather than slightly after the end of the phase, avoiding artefacts
 		transition.set(Q8n0_to_Q15n16(next_phase->level),next_phase->lerp_steps);
 		current_phase = next_phase;
 	}

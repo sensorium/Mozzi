@@ -59,7 +59,7 @@ Your browser does not support the audio element. </audio>
 
 ## Features
 -    Available for a wide and growing range of MCUs, with and without inbuilt DACs: Arduino Uno R3 and R4, STM32, Teensy, ESP8266, ESP32, Raspberry Pi Pico, and more.
--    Configurable sample rate, usually in powers of two (16384 Hz, 32768 Hz, 64536 Ht).
+-    Configurable sample rate, usually in powers of two (16384 Hz, or 32768 Hz).
 -    Variable control rate from 64 Hz upwards.
 -    Various inbuilt output modes, including 16 bit output to an external DAC.
 -    Allows interfacing to custom output routines, with examples for playing audio on external DAC modules, and even bluetooth.
@@ -83,6 +83,12 @@ Plug into your computer and listen with a sound program like [Audacity](https://
 Try some examples from the __File > Examples > Mozzi__ menu.
 
 For more about audio output, including high quality output modes [Mozzi Output tutorial](https://sensorium.github.io/Mozzi/learn/output/).  
+
+### A note for users coming from Mozzi 1.x
+Mozzi 2.0 brings a lot of changes under the hood, and is not 100% source compatible with earlier versions of Mozzi. Most sketches should continue to compile, but with
+a lot of warnings. A few others will no longer work. See [Porting to Mozzi 2.0](https://sensorium.github.io/Mozzi/learn/porting/) for what to change.
+If desparate, there is still a "Mozzi_1" branch in the git repository, but this will not get any new development.
+
 
 {% include boards-tested.markdown %}
 

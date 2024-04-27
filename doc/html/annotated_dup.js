@@ -1,8 +1,7 @@
 var annotated_dup =
 [
     [ "MozziPrivate", "namespace_mozzi_private.html", [
-      [ "MozziRandPrivate", "class_mozzi_private_1_1_mozzi_rand_private.html", "class_mozzi_private_1_1_mozzi_rand_private" ],
-      [ "MidiToFreq", "class_mozzi_private_1_1_midi_to_freq.html", "class_mozzi_private_1_1_midi_to_freq" ]
+      [ "MozziRandPrivate", "class_mozzi_private_1_1_mozzi_rand_private.html", "class_mozzi_private_1_1_mozzi_rand_private" ]
     ] ],
     [ "ADSR", "class_a_d_s_r.html", "class_a_d_s_r" ],
     [ "AudioDelay", "class_audio_delay.html", "class_audio_delay" ],
@@ -30,6 +29,7 @@ var annotated_dup =
     [ "Line< unsigned long >", "class_line_3_01unsigned_01long_01_4.html", "class_line_3_01unsigned_01long_01_4" ],
     [ "MetaOscil", "class_meta_oscil.html", "class_meta_oscil" ],
     [ "Metronome", "class_metronome.html", "class_metronome" ],
+    [ "MidiToFreqPrivate", "class_midi_to_freq_private.html", "class_midi_to_freq_private" ],
     [ "MonoOutput", "struct_mono_output.html", "struct_mono_output" ],
     [ "MultiResonantFilter", "class_multi_resonant_filter.html", "class_multi_resonant_filter" ],
     [ "Oscil", "class_oscil.html", "class_oscil" ],

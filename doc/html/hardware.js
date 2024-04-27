@@ -40,7 +40,7 @@ var hardware =
     [ "Mozzi on RP2040 (Raspberry Pi Pico)", "hardware_rp2040.html", [
       [ "Port status and notes", "hardware_rp2040.html#rp2040_status", null ],
       [ "Output modes", "hardware_rp2040.html#rp2040_output", null ],
-      [ "MOZZI_OUTPUT_PWM", "hardware_rp2040.html#rp2040_pdm", null ],
+      [ "MOZZI_OUTPUT_PWM", "hardware_rp2040.html#rp2040_pwm", null ],
       [ "MOZZI_OUTPUT_I2S_DAC", "hardware_rp2040.html#rp2040_i2s_dac", null ],
       [ "MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM", "hardware_rp2040.html#rp2040_external", null ]
     ] ],
@@ -53,7 +53,7 @@ var hardware =
       [ "MOZZI_OUTPUT_PWM", "hardware_stm32duino.html#stm32duino_pwm", null ],
       [ "MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM", "hardware_stm32duino.html#stm32duino_external", null ]
     ] ],
-    [ "Mozzi on STM32duino-based boards.", "hardware_stm32_maple.html", [
+    [ "Mozzi on STM32-boards with libmaple based core.", "hardware_stm32_maple.html", [
       [ "Status and peculiarities of this port", "hardware_stm32_maple.html#stm32_maple_status", null ],
       [ "Output modes", "hardware_stm32_maple.html#stm32_output_modes", null ],
       [ "MOZZI_OUTPUT_PWM", "hardware_stm32_maple.html#stm32_maple_pwm", null ],

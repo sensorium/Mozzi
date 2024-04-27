@@ -13,7 +13,7 @@
 #define CONFIG_CHECKS_STM32MAPLE_H
 
 /**
- * @page hardware_stm32_maple Mozzi on STM32duino-based boards.
+ * @page hardware_stm32_maple Mozzi on STM32-boards with libmaple based core.
  * port by Thomas Friedrichsmeier
  *
  * @note

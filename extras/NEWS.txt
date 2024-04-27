@@ -4,9 +4,15 @@ NEWS
 get the latest version from https://sensorium.github.io/Mozzi/
 
 NOT YET RELEASED (github version): Mozzi 2.0
-- explicitly specify bit depth for "int" or "long" in several places, for better cross-platform consistency
-- restructured configuration options for more consistency across platforms, and easier customization
-- changed licence to LGPL version 2.1 or later
+- This release is *not* 100% source compatible to earlier versions of Mozzi. Most sketches will continue to compile,
+  but with warnings. Some will need adjustments to keep working. See https://sensorium.github.io/Mozzi/learn/porting/ .
+  If porting is not an option, install an earlier (1.x) version of Mozzi, or use the "Mozzi_1" branch in git.
+- Now depends on FixMath library for enhanced fixed point arithmetic (which is actually spin-off originating in the Mozzi project)
+- Explicitly specify bit depth for "int" or "long" in several places, for better cross-platform consistency
+- Restructured configuration options for more consistency across platforms, and easier customization.
+  There is no longer a central mozzi_config.h file, but rather config options can be customized using
+  #defines at the top of a sketch.
+- Changed licence to LGPL version 2.1 or later
 
 release v1.1.2
 - new partial port of the Arduino Uno R4

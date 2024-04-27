@@ -36,7 +36,7 @@
  *
  * The default mode is @ref rp2040_pwm .
  *
- * @section rp2040_pdm MOZZI_OUTPUT_PWM
+ * @section rp2040_pwm MOZZI_OUTPUT_PWM
  * Audio output is written to pin 0 (mono) or 0 and 1 (stereo), by default, with 11 bits of ouput resolution.
  * One hardware timer interrupt and one DMA channel are claimed (number not hardcoded), a non-exclusive handler is installed on DMA_IRQ_0.
  *

@@ -118,8 +118,8 @@ Output modes</h1>
 <li>MOZZI_OUTPUT_PWM</li>
 <li>MOZZI_OUTPUT_I2S_DAC</li>
 </ul>
-<p>The default mode is rp2040_pwm .</p>
-<h1><a class="anchor" id="rp2040_pdm"></a>
+<p>The default mode is <a class="el" href="hardware_rp2040.html#rp2040_pwm">MOZZI_OUTPUT_PWM</a> .</p>
+<h1><a class="anchor" id="rp2040_pwm"></a>
 MOZZI_OUTPUT_PWM</h1>
 <p>Audio output is written to pin 0 (mono) or 0 and 1 (stereo), by default, with 11 bits of ouput resolution. One hardware timer interrupt and one DMA channel are claimed (number not hardcoded), a non-exclusive handler is installed on DMA_IRQ_0.</p>
 <p>Configuration options: </p><div class="fragment"><div class="line"><span class="preprocessor">#define MOZZI_AUDIO_PIN_1   ...  </span><span class="comment">// default is 0</span></div>

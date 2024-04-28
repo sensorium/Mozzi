@@ -6,6 +6,11 @@ Here are some projects by people using Mozzi. If you have something you'd like t
 
 ***
 
+[Musical Instrument From Fidget Spinners](https://github.com/JensMakerAdventure...) by Jens Oosterkamp
+{% include video id="xIgIhpeJyNA" provider="youtube" %}
+
+***
+
 Mutant and Freaq generative synths from [Meebleeps](https://github.com/Meebleeps):
 {% include video id="d2Lml1Z9uWc" provider="youtube" %}
 {% include video id="KD6IrcmMkoA" provider="youtube" %}

@@ -6,7 +6,7 @@ Here are some projects by people using Mozzi. If you have something you'd like t
 
 ***
 
-[Musical Instrument From Fidget Spinners](https://github.com/JensMakerAdventures/FidgetSpinnerInstrument) by Jens Oosterkamp.
+[Musical Instrument From Fidget Spinners](https://github.com/JensMakerAdventures/FidgetSpinnerInstrument) by Jens Maker Adventures.
 {% include video id="xIgIhpeJyNA" provider="youtube" %}
 
 ***

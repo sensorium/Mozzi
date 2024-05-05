@@ -72,7 +72,7 @@ private:
 	inline
 	void setPhase(phase * next_phase) {
 		update_step_counter = 0;
-		num_update_steps = next_phase->update_steps - LERPS_PER_CONTROL; // so that we stop slightly before, rather than slightly after the end of the phase, avoiding artefacts
+		num_update_steps = next_phase->update_steps;
 		transition.set(Q8n0_to_Q15n16(next_phase->level),next_phase->lerp_steps);
 		current_phase = next_phase;
 	}
@@ -91,7 +91,7 @@ private:
 	void setTime(phase * p, unsigned int msec)
 	{
 		p->update_steps = convertMsecToControlUpdateSteps(msec);
-		p->lerp_steps = (long) p->update_steps * LERPS_PER_CONTROL;
+		p->lerp_steps = (long) p->update_steps * (LERPS_PER_CONTROL + 1); // We increase slightly the number of interpolated steps at audio rate to be sure that the transition does not over/under flow because of the approximation made by Line.
 	}
 
 
@@ -99,7 +99,7 @@ private:
 	void setUpdateSteps(phase * p, unsigned int steps)
 	{
 		p->update_steps = steps;
-		p->lerp_steps = (long) steps * LERPS_PER_CONTROL;
+		p->lerp_steps = (long) steps * (LERPS_PER_CONTROL + 1) ;
 	}
 
 

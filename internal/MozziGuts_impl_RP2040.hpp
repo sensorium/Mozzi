@@ -179,12 +179,16 @@ namespace MozziPrivate {
  */
 #    if (MOZZI_AUDIO_CHANNELS > 1)
   PWMAudio pwm(MOZZI_AUDIO_PIN_1,true);
+  inline bool canBufferAudioOutput() {
+    return (pwm.availableForWrite()>1);  // we will need to transfer 2 samples, for it to be non-blocking we need to ensure there is enough room.
+}
 #    else
   PWMAudio pwm(MOZZI_AUDIO_PIN_1);
-#   endif
-inline bool canBufferAudioOutput() {
-  return (pwm.availableForWrite());
+    inline bool canBufferAudioOutput() {
+    return (pwm.availableForWrite()); 
 }
+#   endif
+
 
   inline void audioOutput(const AudioOutput f) {
     pwm.write(f.l());

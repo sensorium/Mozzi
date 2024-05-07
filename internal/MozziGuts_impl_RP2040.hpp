@@ -157,11 +157,14 @@ namespace MozziPrivate {
 absolute_time_t next_audio_update;
 uint64_t micros_per_update;
 uint audio_update_alarm_num;
+bool flip_flop=0;
+// NOTE: unfortunately, on the RP2040, alarms can only be set with us resolution. At 32768Hz, we ideally would like to output every 30.51us, so we alternate between outputting after 30us and 31us, using the flip_flop to alternate between these two values,
 
 void audioOutputCallback(uint) {
   do {
     defaultAudioOutput();
-    next_audio_update = delayed_by_us(next_audio_update, micros_per_update);
+    flip_flop = !flip_flop;;
+    next_audio_update = delayed_by_us(next_audio_update, micros_per_update+flip_flop);
     // NOTE: hardware_alarm_set_target returns true, if the target was already missed. In that case, keep pushing samples, until we have caught up.
   } while (hardware_alarm_set_target(audio_update_alarm_num, next_audio_update));
 }

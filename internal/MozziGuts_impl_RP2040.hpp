@@ -134,16 +134,7 @@ void rp2040_adc_queue_handler() {
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)
 #include <hardware/pwm.h>
 
-  /*
-#  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
-inline void audioOutput(const AudioOutput f) {
-  pwm_set_gpio_level(MOZZI_AUDIO_PIN_1, f.l()+MOZZI_AUDIO_BIAS);
-#    if (MOZZI_AUDIO_CHANNELS > 1)
-  pwm_set_gpio_level(MOZZI_AUDIO_PIN_2, f.r()+MOZZI_AUDIO_BIAS);
-#    endif
-}
-#  endif  // MOZZI_OUTPUT_PWM
-  */
+
 } // namespace MozziPrivate
 #include <pico/time.h>
 namespace MozziPrivate {
@@ -245,25 +236,7 @@ inline void audioOutput(const AudioOutput f) {
 
 static void startAudio() {
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
-  // calling analogWrite for the first time will try to init the pwm frequency and range on all pins. We don't want that happening after we've set up our own,
-  // so we start off with a dummy call to analogWrite:
-  //analogWrite(MOZZI_AUDIO_PIN_1, MOZZI_AUDIO_BIAS);
-  // Set up fast PWM on the output pins
-  // TODO: This is still very crude!
-  /*
-  pwm_config c = pwm_get_default_config();
-  pwm_config_set_clkdiv(&c, 1);  // Fastest we can get: PWM clock running at full CPU speed
-  pwm_config_set_wrap(&c, 1l << MOZZI_AUDIO_BITS);  // 11 bits output resolution means FCPU / 2048 values per second, which is around 60kHz for 133Mhz clock speed.
-  pwm_init(pwm_gpio_to_slice_num(MOZZI_AUDIO_PIN_1), &c, true);
-  gpio_set_function(MOZZI_AUDIO_PIN_1, GPIO_FUNC_PWM);
-  gpio_set_drive_strength(MOZZI_AUDIO_PIN_1, GPIO_DRIVE_STRENGTH_12MA); // highest we can get
-#  if (MOZZI_AUDIO_CHANNELS > 1)
-#    if ((MOZZI_AUDIO_PIN_1 / 2) != (MOZZI_AUDIO_PIN_1 / 2))
-#      error Audio channel pins for stereo or HIFI must be on the same PWM slice (which is the case for the pairs (0,1), (2,3), (4,5), etc. Adjust MOZZI_AUDIO_PIN_1/2 .
-#    endif
-  gpio_set_function(MOZZI_AUDIO_PIN_2, GPIO_FUNC_PWM);
-  gpio_set_drive_strength(MOZZI_AUDIO_PIN_2, GPIO_DRIVE_STRENGTH_12MA); // highest we can get*/
-
+  
   gpio_set_drive_strength(MOZZI_AUDIO_PIN_1, GPIO_DRIVE_STRENGTH_12MA); // highest we can get
   #  if (MOZZI_AUDIO_CHANNELS > 1)
 #    if ((MOZZI_AUDIO_PIN_1 / 2) != (MOZZI_AUDIO_PIN_1 / 2))

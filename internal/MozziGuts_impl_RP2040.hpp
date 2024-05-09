@@ -150,21 +150,20 @@ namespace MozziPrivate {
 /** Implementation notes:
  *  - For once, two different approaches are used between EXTERNAL_TIMED and PWM:
  *  - EXTERNAL_TIMED (here), uses a repeating alarm to induce the user's callback
- *  - because the alarm only has a resolution of 1us, we need to trick a bit to get the correct frequency (see below).
+ *  - because the alarm only has a resolution of 1us, we need to trick a bit to get the correct frequency: we compute the desired time target at a higher resolution (next_audio_update_shifted) so that the error is compensated by the higher precision sum.
  */
 absolute_time_t next_audio_update;
-uint64_t micros_per_update;
+uint64_t micros_per_update, next_audio_update_shifted;
+const uint64_t micros_per_update_shifted = (1000000l << 8) / MOZZI_AUDIO_RATE;
 uint audio_update_alarm_num;
-bool flip_flop=0;
-// NOTE: unfortunately, on the RP2040, alarms can only be set with us resolution. At 32768Hz, we ideally would like to output every 30.51us, so we alternate between outputting after 30us and 31us, using the flip_flop to alternate between these two values,
 
 void audioOutputCallback(uint) {
   do {
     defaultAudioOutput();
-    flip_flop = !flip_flop;;
-    next_audio_update = delayed_by_us(next_audio_update, micros_per_update+flip_flop);
+    next_audio_update_shifted += micros_per_update_shifted;
+    next_audio_update = delayed_by_us(nil_time, next_audio_update_shifted>>8);
     // NOTE: hardware_alarm_set_target returns true, if the target was already missed. In that case, keep pushing samples, until we have caught up.
-  } while (hardware_alarm_set_target(audio_update_alarm_num, next_audio_update));
+      } while (hardware_alarm_set_target(audio_update_alarm_num, next_audio_update));
 }
 
 #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
@@ -288,6 +287,7 @@ static void startAudio() {
   micros_per_update = 1000000l / MOZZI_AUDIO_RATE;
   do {
     next_audio_update = make_timeout_time_us(micros_per_update);
+    next_audio_update_shifted = to_us_since_boot(next_audio_update);
     // See audioOutputCallback(), above. In _theory_ some interrupt stuff might delay us, here, causing us to miss the first beat (and everything that follows)
   } while (hardware_alarm_set_target(audio_update_alarm_num, next_audio_update));
 

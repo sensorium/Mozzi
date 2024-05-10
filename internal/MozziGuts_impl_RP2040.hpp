@@ -260,7 +260,7 @@ static void startAudio() {
   micros_per_update = 1000000l / MOZZI_AUDIO_RATE;
   do {
     next_audio_update = make_timeout_time_us(micros_per_update);
-    next_audio_update_shifted = to_us_since_boot(next_audio_update);
+    next_audio_update_shifted = to_us_since_boot(next_audio_update) << 8;
     // See audioOutputCallback(), above. In _theory_ some interrupt stuff might delay us, here, causing us to miss the first beat (and everything that follows)
   } while (hardware_alarm_set_target(audio_update_alarm_num, next_audio_update));
 

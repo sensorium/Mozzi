@@ -274,7 +274,7 @@ void startMozzi(int control_rate_hz) {
                    // in setup() if desired (not for Teensy 3.* )
 #endif
   // delay(200); // so AutoRange doesn't read 0 to start with
-  update_control_timeout = MOZZI_AUDIO_RATE / control_rate_hz;
+  update_control_timeout = MOZZI_AUDIO_RATE / control_rate_hz - 1;
   startAudio();
 }
 

@@ -131,41 +131,62 @@ void rp2040_adc_queue_handler() {
 #define LOOP_YIELD tight_loop_contents();  // apparently needed, among other things, to service the alarm pool
 
 
-#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_EXTERNAL_TIMED)
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)
 #include <hardware/pwm.h>
 
-#  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
-inline void audioOutput(const AudioOutput f) {
-  pwm_set_gpio_level(MOZZI_AUDIO_PIN_1, f.l()+MOZZI_AUDIO_BIAS);
-#    if (MOZZI_AUDIO_CHANNELS > 1)
-  pwm_set_gpio_level(MOZZI_AUDIO_PIN_2, f.r()+MOZZI_AUDIO_BIAS);
-#    endif
-}
-#  endif  // MOZZI_OUTPUT_PWM
 
 } // namespace MozziPrivate
 #include <pico/time.h>
 namespace MozziPrivate {
 /** Implementation notes:
- *  - For the time being this port uses a very crude approach to audio output: PWM updated by a hardware timer running at MOZZI_AUDIO_RATE
- *  - Hardware timer isn't fixed, but rather we claim the first unclaimed one
- *  - Quite pleasently, the RP2040 latches PWM duty cycle, so we do not have to worry about updating whilst in the middle of the previous PWM cycle.
- *  - The more simple add_repeating_timer_us has appers to have far too much jitter
- *  - Using DMA transfers, instead of a manual timer, would be much more elegant, but I'll leave that as an exercise to the reader ;-)
- *  - Not to mention PWM output, etc.
+ *  - For once, two different approaches are used between EXTERNAL_TIMED and PWM:
+ *  - EXTERNAL_TIMED (here), uses a repeating alarm to induce the user's callback
+ *  - because the alarm only has a resolution of 1us, we need to trick a bit to get the correct frequency: we compute the desired time target at a higher resolution (next_audio_update_shifted) so that the error is compensated by the higher precision sum.
  */
 absolute_time_t next_audio_update;
-uint64_t micros_per_update;
+uint64_t micros_per_update, next_audio_update_shifted;
+const uint64_t micros_per_update_shifted = (1000000l << 8) / MOZZI_AUDIO_RATE;
 uint audio_update_alarm_num;
 
 void audioOutputCallback(uint) {
   do {
     defaultAudioOutput();
-    next_audio_update = delayed_by_us(next_audio_update, micros_per_update);
+    next_audio_update_shifted += micros_per_update_shifted;
+    next_audio_update = delayed_by_us(nil_time, next_audio_update_shifted>>8);
     // NOTE: hardware_alarm_set_target returns true, if the target was already missed. In that case, keep pushing samples, until we have caught up.
-  } while (hardware_alarm_set_target(audio_update_alarm_num, next_audio_update));
+      } while (hardware_alarm_set_target(audio_update_alarm_num, next_audio_update));
 }
- 
+
+#elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
+} // namespace MozziPrivate
+#include<PWMAudio.h>
+namespace MozziPrivate {
+  /** Implementation notes:
+ *  - This uses, straight out of the box, PWMAudio from Arduino-pico
+ *  - thanks to that, it uses DMA transfer to update the audio output
+ *  - implementation is extremely similar to I2S case.
+ *  - PWMAudio expects 16bits samples. 
+ */
+#    if (MOZZI_AUDIO_CHANNELS > 1)
+  PWMAudio pwm(MOZZI_AUDIO_PIN_1,true);
+  inline bool canBufferAudioOutput() {
+    return (pwm.availableForWrite()>1);  // we will need to transfer 2 samples, for it to be non-blocking we need to ensure there is enough room.
+}
+#    else
+  PWMAudio pwm(MOZZI_AUDIO_PIN_1);
+    inline bool canBufferAudioOutput() {
+    return (pwm.availableForWrite()); 
+}
+#   endif
+
+
+  inline void audioOutput(const AudioOutput f) {
+    pwm.write(f.l());
+    #    if (MOZZI_AUDIO_CHANNELS > 1)
+    pwm.write(f.r());
+    #endif
+  }
+
 #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC)
 } // namespace MozziPrivate
 #include <I2S.h>
@@ -215,27 +236,20 @@ inline void audioOutput(const AudioOutput f) {
 
 static void startAudio() {
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
-  // calling analogWrite for the first time will try to init the pwm frequency and range on all pins. We don't want that happening after we've set up our own,
-  // so we start off with a dummy call to analogWrite:
-  analogWrite(MOZZI_AUDIO_PIN_1, MOZZI_AUDIO_BIAS);
-  // Set up fast PWM on the output pins
-  // TODO: This is still very crude!
-  pwm_config c = pwm_get_default_config();
-  pwm_config_set_clkdiv(&c, 1);  // Fastest we can get: PWM clock running at full CPU speed
-  pwm_config_set_wrap(&c, 1l << MOZZI_AUDIO_BITS);  // 11 bits output resolution means FCPU / 2048 values per second, which is around 60kHz for 133Mhz clock speed.
-  pwm_init(pwm_gpio_to_slice_num(MOZZI_AUDIO_PIN_1), &c, true);
-  gpio_set_function(MOZZI_AUDIO_PIN_1, GPIO_FUNC_PWM);
+  
   gpio_set_drive_strength(MOZZI_AUDIO_PIN_1, GPIO_DRIVE_STRENGTH_12MA); // highest we can get
-#  if (MOZZI_AUDIO_CHANNELS > 1)
+  #  if (MOZZI_AUDIO_CHANNELS > 1)
 #    if ((MOZZI_AUDIO_PIN_1 / 2) != (MOZZI_AUDIO_PIN_1 / 2))
 #      error Audio channel pins for stereo or HIFI must be on the same PWM slice (which is the case for the pairs (0,1), (2,3), (4,5), etc. Adjust MOZZI_AUDIO_PIN_1/2 .
 #    endif
-  gpio_set_function(MOZZI_AUDIO_PIN_2, GPIO_FUNC_PWM);
   gpio_set_drive_strength(MOZZI_AUDIO_PIN_2, GPIO_DRIVE_STRENGTH_12MA); // highest we can get
-#  endif
 #endif
+  pwm.setBuffers(MOZZI_RP2040_BUFFERS, (size_t) (MOZZI_RP2040_BUFFER_SIZE/MOZZI_RP2040_BUFFERS));
+  
+  pwm.begin(MOZZI_AUDIO_RATE);
+#  endif
 
-#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_EXTERNAL_TIMED)
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)
   for (audio_update_alarm_num = 0; audio_update_alarm_num < 4; ++audio_update_alarm_num) {
     if (!hardware_alarm_is_claimed(audio_update_alarm_num)) {
       hardware_alarm_claim(audio_update_alarm_num);
@@ -246,6 +260,7 @@ static void startAudio() {
   micros_per_update = 1000000l / MOZZI_AUDIO_RATE;
   do {
     next_audio_update = make_timeout_time_us(micros_per_update);
+    next_audio_update_shifted = to_us_since_boot(next_audio_update) << 8;
     // See audioOutputCallback(), above. In _theory_ some interrupt stuff might delay us, here, causing us to miss the first beat (and everything that follows)
   } while (hardware_alarm_set_target(audio_update_alarm_num, next_audio_update));
 
@@ -267,10 +282,12 @@ static void startAudio() {
 }
 
 void stopMozzi() {
-#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM, MOZZI_OUTPUT_EXTERNAL_TIMED)
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)
   hardware_alarm_set_callback(audio_update_alarm_num, NULL);
 #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC)
   i2s.end();
+#elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
+  pwm.end();
 #endif
   
 }

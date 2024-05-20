@@ -81,7 +81,7 @@ namespace MozziPrivate {
 #if BYPASS_MOZZI_OUTPUT_BUFFER == true
 uint64_t samples_written_to_buffer = 0;
 
-inline void bufferAudioOutput(const AudioOutput_t f) {
+inline void bufferAudioOutput(const AudioOutput f) {
   audioOutput(f);
   ++samples_written_to_buffer;
 }

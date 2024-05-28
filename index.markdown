@@ -135,7 +135,7 @@ refer to the [Hardware Section of the API-Documentation](https://sensorium.githu
 ## Compatibiliy issues
 
 * In most setups, Mozzi claims one or two hardware timers. This may result in incompatibilities with certain libraries, and / or the ability to use timer-based functions such as `analogWrite()`. As the details on this
-  differ a lot between the supported boards, read up on the details - and available workarounds - in the [ardware Section of the API-Documentation](https://sensorium.github.io/Mozzi/doc/html/hardware.html).
+  differ a lot between the supported boards, read up on the details - and available workarounds - in the [Hardware Section of the API-Documentation](https://sensorium.github.io/Mozzi/doc/html/hardware.html).
 
 * There is also an example on emulating `analogWrite()` on any digitial pin in *Mozzi>examples>11.Communication>Sinewave_PWM_pins_HIFI*.
 

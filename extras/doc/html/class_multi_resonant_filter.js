@@ -2,9 +2,9 @@ var class_multi_resonant_filter =
 [
     [ "advanceBuffers", "class_multi_resonant_filter.html#abff68aae1ffc1bd9894e8f824365e84a", null ],
     [ "band", "class_multi_resonant_filter.html#a93c35829c63addc2f54f42ca3b30b37e", null ],
-    [ "current", "class_multi_resonant_filter.html#adbf4efd639c951276ee5e8612b6818ee", null ],
-    [ "current", "class_multi_resonant_filter.html#a0dc200c213651f770768cffff90bcf26", null ],
     [ "current", "class_multi_resonant_filter.html#a319f11e6f6a9cfb3570a335bf1dc0866", null ],
+    [ "current", "class_multi_resonant_filter.html#a0dc200c213651f770768cffff90bcf26", null ],
+    [ "current", "class_multi_resonant_filter.html#adbf4efd639c951276ee5e8612b6818ee", null ],
     [ "current", "class_multi_resonant_filter.html#a496a19cd2b4ce184374ce78bd83bbbee", null ],
     [ "fxmul", "class_multi_resonant_filter.html#a8d6056a34164a1ed81732f1f09c75268", null ],
     [ "high", "class_multi_resonant_filter.html#a1a624bcfa3ad251c2e4af27a6a453006", null ],

@@ -3,7 +3,18 @@ Mozzi sound synthesis library for Arduino
 NEWS
 get the latest version from https://sensorium.github.io/Mozzi/
 
-not yet released (latest github version)
+NOT YET RELEASED (github version): Mozzi 2.0
+- This release is *not* 100% source compatible to earlier versions of Mozzi. Most sketches will continue to compile,
+  but with warnings. Some will need adjustments to keep working. See https://sensorium.github.io/Mozzi/learn/porting/ .
+  If porting is not an option, install an earlier (1.x) version of Mozzi, or use the "Mozzi_1" branch in git.
+- Now depends on FixMath library for enhanced fixed point arithmetic (which is actually spin-off originating in the Mozzi project)
+- Explicitly specify bit depth for "int" or "long" in several places, for better cross-platform consistency
+- Restructured configuration options for more consistency across platforms, and easier customization.
+  There is no longer a central mozzi_config.h file, but rather config options can be customized using
+  #defines at the top of a sketch.
+- Changed licence to LGPL version 2.1 or later
+
+release v1.1.2
 - new partial port of the Arduino Uno R4
 - new partial port of the Arduino Giga by Thomas Friedrichsmeier & Thomas Combriat
 - new (partial) port to the STM32duino core by Thomas Friedrichsmeier
@@ -239,7 +250,7 @@ version_2013-08-25-18:38
 - examples/envelopes/ADSR_Envelope - now plays random envelopes as a more thorough test/demo.
 - add examples/envelopes/ADSR_Envelope_x2 - shows an additive sound combining 2 oscillators with individual envelopes.
 - Sample.h - added linear interpolation as optional template parameter, eg.:
-	Sample <SAMPLE_NUM_CELLS, AUDIO_RATE, INTERP_LINEAR> aSample(SAMPLE_DATA);
+	Sample <SAMPLE_NUM_CELLS, MOZZI_AUDIO_RATE, INTERP_LINEAR> aSample(SAMPLE_DATA);
 	The default parameter is INTERP_NONE.
 - removed examples/08.Samples/Sample_Offset too horrible
 - added examples/08.Samples/Sample_Scrub...uses interpolation/smoothing at different scales
@@ -382,7 +393,7 @@ Version_0.01.1z
 	This will re-enable the Arduino time functions delay() and delayMicroseconds() while paused.
 	- Added unPauseMozzi(), allowing Mozzi to continue again after being paused.
 	- added mozziMicros(), a replacement for Arduino micros().
-- mozzi_config.h - AUDIO_RATE is now a configuration option which can be defined as 16384 (default) or 32768.
+- mozzi_config.h - MOZZI_AUDIO_RATE is now a configuration option which can be defined as 16384 (default) or 32768.
 	16384 obviously allows more time for each sample to be calculated, but the higher rate may
 	be useful in some situations (experimental).
 - AudioDelayFeedback.h

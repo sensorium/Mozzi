@@ -1,69 +1,31 @@
 /*
  * mozzi_analog.h
  *
- * Copyright 2012 Tim Barrass.
- *
  * This file is part of Mozzi.
  *
- * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2012-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
+
 
 #ifndef MOZZI_ANALOG_H_
 #define MOZZI_ANALOG_H_
 
- #if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include "Arduino.h"
 
 #include "hardware_defines.h"
 
-#if (USE_AUDIO_INPUT==true)
-#warning "Using AUDIO_INPUT_PIN defined in mozzi_config.h for audio input."
-#endif
-
-// hack for Teensy 2 (ATmega32U4), which has "adc_mapping" instead of "analog_pin_to_channel_PGM"
-#if defined(__AVR_ATmega32U4__) && defined(CORE_TEENSY) 
-//pasted from hardware/arduino/variants/leonardo/pins_arduino.h, doesn't work as of mozzi 0.01.2a
-//	__AVR_ATmega32U4__ has an unusual mapping of pins to channels
-//extern const uint8_t PROGMEM analog_pin_to_channel_PGM[];
-//#define analogPinToChannel(P)  ( pgm_read_byte( analog_pin_to_channel_PGM + (P) ) )
-
-// look at Arduino.app/Contents/Resources/Java/hardware/teensy/cores/teensy/pins_teensy.c - analogRead
-// adc_mapping is already declared in pins_teensy.c, but it's static there so we can't access it
-static const uint8_t PROGMEM adc_mapping[] = {
-// 0, 1, 4, 5, 6, 7, 13, 12, 11, 10, 9, 8
-   0, 1, 4, 5, 6, 7, 13, 12, 11, 10, 9, 8, 10, 11, 12, 13, 7, 6, 5, 4, 1, 0, 8 
-};
-#define analogPinToChannel(P)  ( pgm_read_byte( adc_mapping + (P) ) )
-#endif
-
-
-// include this although already in teensy 3 analog.c, because it is static there
-#if defined(__MK20DX128__)
-static const uint8_t channel2sc1a[] = {
-	5, 14, 8, 9, 13, 12, 6, 7, 15, 4,
-	0, 19, 3, 21, 26, 22, 23
-};
-#elif defined(__MK20DX256__)
-static const uint8_t channel2sc1a[] = {
-	5, 14, 8, 9, 13, 12, 6, 7, 15, 4,
-	0, 19, 3, 19+128, 26, 18+128, 23,
-	5+192, 5+128, 4+128, 6+128, 7+128, 4+192
-// A15  26   E1   ADC1_SE5a  5+64
-// A16  27   C9   ADC1_SE5b  5
-// A17  28   C8   ADC1_SE4b  4
-// A18  29   C10  ADC1_SE6b  6
-// A19  30   C11  ADC1_SE7b  7
-// A20  31   E0   ADC1_SE4a  4+64
-};
-#endif
-
-
 // for setupFastAnalogRead()
 enum ANALOG_READ_SPEED {FAST_ADC,FASTER_ADC,FASTEST_ADC};
+
+/** @defgroup analog
+
+@brief Efficient analog input functions for sensors and audio.
+
+Helps produce glitch-free audio by allowing analog input functions which normally block processing to be performed in the background. 
+*/
 
 /** 
 @ingroup analog
@@ -121,31 +83,51 @@ and ADC6 do not have digital input buffers, and therefore do not require
 Digital Input Disable bits.
 @param channel_num the analog input channel you wish to use.
 */
-void disconnectDigitalIn(uint8_t channel_num);
-
+inline void disconnectDigitalIn(uint8_t channel_num) {
+#if IS_AVR()
+	DIDR0 |= 1<<channel_num;
+#else
+	(void) channel_num; // unused, suppress warning
+#endif
+}
 
 /** @ingroup analog
 Reconnect the digital input buffer for an analog input channel which has
 been set for analog input with disconnectDigitalIn().
 @param channel_num the analog input channel you wish to reconnect.
 */
-void reconnectDigitalIn(uint8_t channel_num);
-
+inline void reconnectDigitalIn(uint8_t channel_num) {
+#if IS_AVR()
+	DIDR0 &= ~(1<<channel_num);
+#else
+	(void) channel_num; // unused, suppress warning
+#endif
+}
 
 /**  @ingroup analog
 Prepare all analog input channels by turning off their digital input buffers.
 This helps to reduce noise, increase analog reading speed, and save power.
 */
-void adcDisconnectAllDigitalIns();
+inline void adcDisconnectAllDigitalIns() {
+#if IS_AVR()
+	for (uint8_t i = 0; i<NUM_ANALOG_INPUTS; i++){
+		DIDR0 |= 1<<i;
+	}
+#endif
+}
 
 
 /** @ingroup analog
 Reconnect the digital input buffers for analog input channels which have
 been set for analog input with disconnectDigitalIn().
 */
-void adcReconnectAllDigitalIns();
-
-
+inline void adcReconnectAllDigitalIns() {
+#if IS_AVR()
+	for (uint8_t i = 0; i<NUM_ANALOG_INPUTS; i++){
+		DIDR0 &= ~(1<<i);
+	}
+#endif
+}
 
 /* @ingroup analog
 Starts an analog to digital conversion of the voltage on a specified channel.  Unlike
@@ -154,23 +136,45 @@ returning, adcStartConversion() only sets the conversion to begin, so you can us
 the cpu for other things and call for the result later with adcGetResult().
 @param channel is the analog channel number (0 to ....), which is not necessarily the same as the pin number
 Use adcPinToChannelNum() to convert the pin number to its channel number.
-@note Timing: about 1us when used in updateControl() with CONTROL_RATE 64.
+@note Timing: about 1us when used in updateControl() with MOZZI_CONTROL_RATE 64.
 */
 void adcStartConversion(uint8_t channel);
 
+/** @ingroup analog
+See mozziAnalogRead(). The template parameter RES specifies the number of bits to return.
+*/
+template<byte RES> uint16_t mozziAnalogRead(uint8_t pin);
 
+/** @ingroup analog
+See mozziAnalogRead() but always returns the value shifted to 16 bit range. THis is exactly
+equivalent to mozziAnalogRead<16>(pin);
+*/
+inline uint16_t mozziAnalogRead16(uint8_t pin) { return mozziAnalogRead<16>(pin); };
 
+#if defined(FOR_DOXYGEN_ONLY) || defined(MOZZI_ANALOG_READ_RESOLUTION)
 /** @ingroup analog
 Reads the analog input of a chosen channel, without blocking other operations from running.
 It actually returns the most recent analog reading and puts the chosen pin or channel
 on the stack of channels to be read in the background before the next control
 interrupt.
-@param pin_or_channel the analog pin or channel number.
-@return the digitised value of the voltage on the chosen channel, in the range 0-1023. @Note that non-AVR
-hardware may return a different range, e.g. 0-4095 on STM32 boards.
-*/
-int mozziAnalogRead(uint8_t pin);
 
+@note Analog reads have different hardware resolution on different platforms. E.g. an analog read
+      on an Arduino Uno R3 will return a value in the range 0-1023 (10 bits), on a Raspberry Pi Pico
+      it will return 0-4095 (12 bits). For portable code, it is thus necessary to specify the desired
+      resolution of reads. This can be done by setting MOZZI_ANALOG_READ_RESOLUTION to the resolution
+      in bits, near the top of your sketch. All reads will then be adjusted to that range, automatically
+      (using a simple bit-shift). Alternatively, the templated version of mozziAanalogRead() allows
+      to specifiy the target resolution per read.
+      If MOZZI_ANALOG_READ_RESOLUTION is not defined, this (non-templated) function returns a value
+      in the default hardware resolution, with a warning.
+
+@param pin_or_channel the analog pin or channel number.
+@return the digitised value of the voltage on the chosen channel. See the note above regarding the output range!
+*/
+inline uint16_t mozziAnalogRead(uint8_t pin) { return mozziAnalogRead<MOZZI_ANALOG_READ_RESOLUTION>(pin); }
+#else
+MOZZI_DEPRECATED("2.0", "This use of mozziAnalogRead() is not portable. Refer to the API documentation for suggested alternatives.") inline uint16_t mozziAnalogRead(uint8_t pin) { return mozziAnalogRead<MOZZI__INTERNAL_ANALOG_READ_RESOLUTION>(pin); }
+#endif
 
 uint8_t adcPinToChannelNum(uint8_t pin);
 

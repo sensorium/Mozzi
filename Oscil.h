@@ -3,24 +3,23 @@
  *
  * Oscil.h owes much to AF_precision_synthesis.pde, 2009, Adrian Freed.
  *
- * Copyright 2012 Tim Barrass, 2009 Adrian Freed.
- *
  * This file is part of Mozzi.
  *
- * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 20009 Arian Freed
+ * Copyright 2012-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
+
 
 #ifndef OSCIL_H_
 #define OSCIL_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
-#include "MozziGuts.h"
+#include "Arduino.h"
+#include "MozziHeadersOnly.h"
 #include "mozzi_fixmath.h"
+#include "FixMath.h"
 #include "mozzi_pgmspace.h"
 
 #ifdef OSCIL_DITHER_PHASE
@@ -42,9 +41,9 @@ cycling oscillator, or atIndex() for a particular sample in the table.
 @tparam NUM_TABLE_CELLS This is defined in the table ".h" file the Oscil will be
 using. It's important that it's a power of 2, and either a literal number (eg. "8192") or a
 defined macro, rather than a const or int, for the Oscil to run fast enough.
-@tparam UPDATE_RATE This will be AUDIO_RATE if the Oscil is updated in
-updateAudio(), or CONTROL_RATE if it's updated each time updateControl() is
-called. It could also be a fraction of CONTROL_RATE if you are doing some kind
+@tparam UPDATE_RATE This will be MOZZI_AUDIO_RATE if the Oscil is updated in
+updateAudio(), or MOZZI_CONTROL_RATE if it's updated each time updateControl() is
+called. It could also be a fraction of MOZZI_CONTROL_RATE if you are doing some kind
 of cyclic updating in updateControl(), for example, to spread out the processor load.
 @todo Use conditional compilation to optimise setFreq() variations for different table
 sizes.
@@ -154,6 +153,34 @@ public:
 	}
 
 
+	/** Returns the next sample given a phase modulation value.
+	@param phmod_proportion a phase modulation value given as a proportion of the wave. The
+	phmod_proportion parameter is a SFix<NI,NF> fixed-point number where the fractional part represents almost -1 to almost 1, modulating the phase by one whole table length in
+	each direction. This fixed point math number is interpreted as a SFix<15,16> internally.
+	@return a sample from the table.
+	*/
+  template <int8_t NI, int8_t NF, uint8_t RANGE>
+	inline
+  int8_t phMod(SFix<NI,NF,RANGE> phmod_proportion)
+	{
+	  return phMod(SFix<15,16>(phmod_proportion).asRaw());
+	}
+
+
+  
+	/** Returns the next sample given a phase modulation value.
+	@param phmod_proportion a phase modulation value given as a proportion of the wave. The
+	phmod_proportion parameter is a SFix<15,16> fixed-point number where the fractional part represents almost -1 to almost 1, modulating the phase by one whole table length in
+	each direction.
+	@return a sample from the table.
+	*/
+	inline
+	int8_t phMod(SFix<15,16> phmod_proportion)
+	{
+	  return phMod(phmod_proportion.asRaw());
+	}
+
+
 	/** Set the oscillator frequency with an unsigned int. This is faster than using a
 	float, so it's useful when processor time is tight, but it can be tricky with
 	low and high frequencies, depending on the size of the wavetable being used. If
@@ -183,6 +210,21 @@ public:
 	}
 
 
+	/** Set the frequency using UFix<NI,NF> fixed-point number format. This falls back to using UFix<16,16> internally and is provided as a fallout for other UFix types. If possible try to use directly UFix<16,16> or UFix<24,8> for well defined (and well tested) behaviors.
+	@note This should work OK with tables 2048 cells or smaller and
+	frequencies up to 4096 Hz.  Can't be used with UPDATE_RATE less than 64 Hz.
+	@note This didn't run faster than float last time it was tested, after 2014 code changes.  Need to see if 2014 changes improved or worsened performance.
+	@param frequency in UFix<NI,NF> fixed-point number format.
+	*/
+        template <int8_t NI, int8_t NF, uint64_t RANGE>
+        inline
+        void setFreq(UFix<NI,NF,RANGE> frequency)
+        {
+        setFreq_Q16n16(UFix<16,16>(frequency).asRaw());
+        }
+
+  
+  
 	/** Set the frequency using Q24n8 fixed-point number format.
 	This might be faster than the float version for setting low frequencies such as
 	1.5 Hz, or other values which may not work well with your table size. A Q24n8
@@ -207,6 +249,20 @@ public:
 		}
 	}
 
+  	/** Set the frequency using UFix<24,8> fixed-point number format.
+	This might be faster than the float version for setting low frequencies such as
+	1.5 Hz, or other values which may not work well with your table size. A UFix<24,8>
+	representation of 1.5 is 384 (ie. 1.5 * 256). Can't be used with UPDATE_RATE
+	less than 64 Hz.
+	@param frequency in UFix<24,8> fixed-point number format.
+	*/
+  template <uint64_t RANGE>
+  inline
+  void setFreq(UFix<24,8,RANGE> frequency)
+        {
+	  setFreq_Q24n8(frequency.asRaw());
+	  }
+
 
 	/** Set the frequency using Q16n16 fixed-point number format. This is useful in
 	combination with Q16n16_mtof(), a fast alternative to mtof(), using Q16n16
@@ -230,6 +286,38 @@ public:
 			phase_increment_fractional = ((uint32_t)frequency) / (UPDATE_RATE/NUM_TABLE_CELLS);
 		}
 	}
+
+
+	/** Set the frequency using UFix<16,16> fixed-point number format. This is useful in
+	combination with Q16n16_mtof(), a fast alternative to mtof(), using UFix<16,16>
+	fixed-point format instead of fractional numbers.
+	@note This should work OK with tables 2048 cells or smaller and
+	frequencies up to 4096 Hz.  Can't be used with UPDATE_RATE less than 64 Hz.
+	@note This didn't run faster than float last time it was tested, after 2014 code changes.  Need to see if 2014 changes improved or worsened performance.
+	@param frequency in UFix<16,16> fixed-point number format.
+	*/
+  template <uint64_t RANGE>
+   inline
+  void setFreq(UFix<16,16,RANGE> frequency)
+        {
+	  setFreq_Q16n16(frequency.asRaw());
+	  }
+
+  
+
+  	/** Set the frequency using SFix<NI,NF> fixed-point number format. This falls back to using UFix<16,16> internally and is provided as a fallout for other UFix types. If possible try to use directly UFix<16,16> or UFix<24,8> for well defined (and well tested) behaviors.
+	@note This should work OK with tables 2048 cells or smaller and
+	frequencies up to 4096 Hz.  Can't be used with UPDATE_RATE less than 64 Hz.
+	@note This didn't run faster than float last time it was tested, after 2014 code changes.  Need to see if 2014 changes improved or worsened performance.
+	@param frequency in SFix<16,16> fixed-point number format.
+	*/
+  template <int8_t NI, int8_t NF, uint64_t RANGE>
+        inline
+  void setFreq(SFix<NI,NF,RANGE> frequency)
+        {
+	  setFreq_Q16n16(UFix<16,16>(frequency).asRaw());
+        }
+  
 /*
 	inline
 	void setFreqMidi(int8_t note_num) {

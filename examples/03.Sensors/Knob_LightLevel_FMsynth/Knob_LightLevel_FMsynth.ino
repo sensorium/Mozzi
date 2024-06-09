@@ -24,16 +24,18 @@
        LDR from analog pin to +5V (3.3V on Teensy 3.1)
        5.1k resistor from analog pin to ground
 
-  Mozzi documentation/API
-  https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-  Mozzi help/discussion/announcements:
-  https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-  Tim Barrass 2013, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h> // oscillator
 #include <tables/cos2048_int8.h> // table for Oscils to play
 #include <AutoMap.h> // maps unpredictable inputs to a range
@@ -52,8 +54,8 @@ AutoMap kMapIntensity(0,1023,MIN_INTENSITY,MAX_INTENSITY);
 const int KNOB_PIN = 0; // set the input for the knob to analog pin 0
 const int LDR_PIN = 1; // set the input for the LDR to analog pin 1
 
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCarrier(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aModulator(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aCarrier(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aModulator(COS2048_DATA);
 
 int mod_ratio = 3; // harmonics
 long fm_intensity; // carries control info from updateControl() to updateAudio()
@@ -68,7 +70,7 @@ void setup(){
 
 void updateControl(){
   // read the knob
-  int knob_value = mozziAnalogRead(KNOB_PIN); // value is 0-1023
+  int knob_value = mozziAnalogRead<10>(KNOB_PIN); // value is 0-1023
 
   // map the knob to carrier frequency
   int carrier_freq = kMapCarrierFreq(knob_value);
@@ -81,7 +83,7 @@ void updateControl(){
   aModulator.setFreq(mod_freq);
 
   // read the light dependent resistor on the Analog input pin
-  int light_level= mozziAnalogRead(LDR_PIN); // value is 0-1023
+  int light_level= mozziAnalogRead<10>(LDR_PIN); // value is 0-1023
 
   // print the value to the Serial monitor for debugging
   Serial.print("light_level = ");
@@ -97,7 +99,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   long modulation = fm_intensity * aModulator.next();
   return MonoOutput::from8Bit(aCarrier.phMod(modulation)); // phMod does the FM
 }

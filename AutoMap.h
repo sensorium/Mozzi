@@ -1,11 +1,13 @@
 /*
  * AutoMap.h
- *
- * Copyright 2012 Tim Barrass.
+/*
+ * AutoMap.h
  *
  * This file is part of Mozzi.
  *
- * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2012-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
 
@@ -13,13 +15,12 @@
 #define AUTOMAP_H_
 
 // for map - maybe rewrite my own templated map for better efficiency
-#if ARDUINO >= 100
- #include "Arduino.h" // for map
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h> // for map
 
 #include "AutoRange.h"
+
+/** @defgroup sensortools Automatic range adjustment
+*/
 
 /** @ingroup sensortools
 Automatically map an input value to an output range without knowing the precise range of inputs beforehand.

@@ -3,22 +3,14 @@
 
     Demonstrates AudioDelayFeedback.
 
-    This sketch using HIFI mode is not for Teensy 3.1.
+    This sketch uses MOZZI_OUTPUT_2PIN_PWM (aka HIFI) output mode, which
+    is not available on all boards (among others, it works on the
+    classic Arduino boards, but not Teensy 3.x and friends).
 
-    IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
-    be changed from STANDARD mode to HIFI.
-    In Mozz/mozzi_config.h, change
-    //#define AUDIO_MODE STANDARD
-    #define AUDIO_MODE STANDARD_PLUS
-    //#define AUDIO_MODE HIFI
-    to
-    //#define AUDIO_MODE STANDARD
-    //#define AUDIO_MODE STANDARD_PLUS
-    #define AUDIO_MODE HIFI
-
-  The sketch also sounds better with a faster sample rate, for less aliasing
-  #define AUDIO_RATE 32768
-  in mozzi_config.
+    Important:
+    The MOZZI_AUDIO_RATE (sample rate) is additionally configured at 32768 Hz,
+    which is the default on most platforms, but twice the standard rate on
+    AVR-CPUs. Try chaging it back to hear the difference.
 
     Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
     Check the Mozzi core module documentation for others and more detail
@@ -38,26 +30,31 @@
     Alternatively using 39 ohm, 4.99k and 470nF components will
     work directly with headphones.
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012-13, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+#include <MozziConfigValues.h>
+#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_2PIN_PWM
+#define MOZZI_AUDIO_RATE 32768
+#define MOZZI_CONTROL_RATE 128 // Hz, powers of 2 are most reliable
+
+#include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/triangle_analogue512_int8.h> // wavetable
 #include <tables/triangle512_int8.h> // wavetable
 #include <AudioDelayFeedback.h>
 #include <mozzi_midi.h> // for mtof
 
-#define CONTROL_RATE 128 // Hz, powers of 2 are most reliable
-
-Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, AUDIO_RATE> aTriangle(TRIANGLE_ANALOGUE512_DATA); // audio oscillator
-Oscil<TRIANGLE512_NUM_CELLS, CONTROL_RATE> kDelSamps(TRIANGLE512_DATA); // for modulating delay time, measured in audio samples
+Oscil<TRIANGLE_ANALOGUE512_NUM_CELLS, MOZZI_AUDIO_RATE> aTriangle(TRIANGLE_ANALOGUE512_DATA); // audio oscillator
+Oscil<TRIANGLE512_NUM_CELLS, MOZZI_CONTROL_RATE> kDelSamps(TRIANGLE512_DATA); // for modulating delay time, measured in audio samples
 
 AudioDelayFeedback <128> aDel;
 
@@ -66,7 +63,7 @@ byte del_samps;
 Q16n16 del_samps_fractional;
 
 void setup(){
-  startMozzi(CONTROL_RATE);
+  startMozzi();
   aTriangle.setFreq(mtof(48.f));
   kDelSamps.setFreq(.163f); // set the delay time modulation frequency (ie. the sweep frequency)
   aDel.setFeedbackLevel(-111); // can be -128 to 127
@@ -85,7 +82,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   char asig = aTriangle.next(); // get this so it can be used twice without calling next() again
   //return asig/8 + aDel.next(asig, del_samps); // mix some straight signal with the delayed signal
   //return aDel.next(aTriangle.next(), del_samps); // instead of the previous 2 lines for only the delayed signal

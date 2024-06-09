@@ -1,9 +1,14 @@
 /*
  * twi_nonblock.h
  *
- * Copyright 2012 Marije Baalman.
+ * This file is part of Mozzi.
+ *
+ * Copyright 2012-2024 Marije Baalman and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
+
 
 #ifndef TWI_NONBLOCK_H_
 #define TWI_NONBLOCK_H_
@@ -85,4 +90,9 @@ uint8_t twi_readFromBlocking(uint8_t address, uint8_t* data, uint8_t length);
 uint8_t twi_writeToBlocking(uint8_t address, uint8_t* data, uint8_t length, uint8_t wait);
 
 #endif
+
+#if !defined _MOZZI_TWI_HEADER_ONLY
+#include "internal/twi_nonblock.hpp"
+#endif
+
 #endif

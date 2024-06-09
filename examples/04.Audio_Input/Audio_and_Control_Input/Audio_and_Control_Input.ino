@@ -5,12 +5,10 @@
   All the other analog channels are sampled at control rate and printed to Serial.
 
   Demonstrates mozziAnalogRead(pin), which reads analog inputs in the background,
-  and getAudioInput(), which samples audio on AUDIO_INPUT_PIN, configured in mozzi_config.h.
+  and getAudioInput(), which samples audio on MOZZI_AUDIO_INPUT_PIN, configured below.
 
-  Configuration: requires these lines in the Mozzi/mozzi_config.h file:
-  #define USE_AUDIO_INPUT true
-  #define AUDIO_INPUT_PIN 0
-
+  NOTE: MOZZI_AUDIO_INPUT_STANDARD is not available as an option on all
+  platforms.
 
   Circuit:
   Audio cable centre wire on pin A0, outer shielding to Arduino Ground.
@@ -20,16 +18,22 @@
   The serial printing might cause glitches, so try commenting
   them out to test if this is a problem.
 
-  Mozzi documentation/API
-  https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-  Mozzi help/discussion/announcements:
-  https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-  Tim Barrass 2013, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+#include <MozziConfigValues.h>
+#define MOZZI_AUDIO_INPUT MOZZI_AUDIO_INPUT_STANDARD
+#define MOZZI_AUDIO_INPUT_PIN 0
+
+#include <Mozzi.h>
 
 
 void setup() {
@@ -43,14 +47,14 @@ void setup() {
 
 void updateControl(){
   for (int i=1;i<NUM_ANALOG_INPUTS;i++) { // analog 0 is configured for audio
-    Serial.print(mozziAnalogRead(i)); // mozziAnalogRead is better than analogRead
+    Serial.print(mozziAnalogRead16(i)); // mozziAnalogRead is better than analogRead
     Serial.print("\t"); // tab
   }
   Serial.println();
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   int asig = getAudioInput(); // range 0-1023
   asig = asig - 512; // now range is -512 to 511
   return MonoOutput::fromAlmostNBit(9, asig).clip();

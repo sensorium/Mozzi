@@ -1,11 +1,7 @@
 #ifndef COSPHASE2048_H_
 #define COSPHASE2048_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 
 /** Cosine wave, out-of-phase so it starts at 127, cycles to -128 and ends at 127

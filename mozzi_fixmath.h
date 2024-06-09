@@ -1,24 +1,30 @@
 /*
  * mozzi_fixmath.h
  *
- * Copyright 2012 Tim Barrass.
- *
  * This file is part of Mozzi.
  *
- * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2012-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
 
 #ifndef FIXEDMATH_H_
 #define FIXEDMATH_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 
-/**@ingroup fixmath
+/** @defgroup fixmath Fast integer based fixed-point arithmetic
+
+@note For new sketches it is recommended to utitlize the FixMath library with its typesafe classes UFix and SFix, instead of these
+      typedefs! See https://github.com/tomcombriat/FixMath . These are provided for backwards compatibility, only.
+
+Fixed point fractional number types and conversion routines. Fixed point is often best for fast audio code for Arduino, and these can ease some of the pain. </p><dl class="section note"><dt>Note</dt><dd>Take care when converting that the important bits of your numbers will fit in the types you choose!
+
+Timing: converting between fixed and float 10-12us, converting between fixed types about 1us.
+*/
+
+/** @ingroup fixmath
 @{
 */
 // types

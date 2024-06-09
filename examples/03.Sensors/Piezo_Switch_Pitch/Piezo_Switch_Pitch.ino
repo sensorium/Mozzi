@@ -23,16 +23,18 @@
       button between the digital pin and +5V
       10K resistor from the digital pin to ground
 
-    Mozzi documentation/API
-    https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-    Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-  Tim Barrass 2013, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Sample.h> // Sample template
 #include <samples/burroughs1_18649_int8.h> // a converted audio sample included in the Mozzi download
 
@@ -42,7 +44,7 @@ const int threshold = 80;  // threshold value to decide when the detected signal
 const int BUTTON_PIN = 4;  // set the digital input pin for the button
 
 // use: Sample <table_size, update_rate> SampleName (wavetable)
-Sample <BURROUGHS1_18649_NUM_CELLS, AUDIO_RATE> aSample(BURROUGHS1_18649_DATA);
+Sample <BURROUGHS1_18649_NUM_CELLS, MOZZI_AUDIO_RATE> aSample(BURROUGHS1_18649_DATA);
 float recorded_pitch = (float) BURROUGHS1_18649_SAMPLERATE / (float) BURROUGHS1_18649_NUM_CELLS;
 
 char button_state, previous_button_state; // variable for reading the pushbutton status
@@ -79,7 +81,7 @@ void buttonChangePitch(){
 
 void updateControl(){
   // read the piezo
-  int piezo_value = mozziAnalogRead(PIEZO_PIN); // value is 0-1023
+  int piezo_value = mozziAnalogRead<10>(PIEZO_PIN); // value is 0-1023
 
   // print the value to the Serial monitor for debugging
   Serial.print("piezo value = ");
@@ -104,7 +106,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   return MonoOutput::from8Bit(aSample.next());
 }
 

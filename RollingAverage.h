@@ -1,24 +1,23 @@
-#ifndef ROLLINGAVERAGE_H
-#define ROLLINGAVERAGE_H
-
 /*
  * RollingAverage.h
  *
- * Copyright 2013 Tim Barrass.
- *
- * This file is part of Mozzi.
- *
- * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
- *
- */
-/*
   Draws on Arduino Smoothing example,
   Created 22 April 2007
   By David A. Mellis  <dam@mellis.org>
   modified 9 Apr 2012
   by Tom Igoe
   http://www.arduino.cc/en/Tutorial/Smoothing
-*/
+
+ * This file is part of Mozzi.
+ *
+ * Copyright 2013-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+ */
+
+#ifndef ROLLINGAVERAGE_H
+#define ROLLINGAVERAGE_H
 
 #include "mozzi_utils.h" // for trailingZeros()
 

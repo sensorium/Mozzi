@@ -3,8 +3,10 @@
     The Arduino-compatible "Pro Micro" board sent with Mozzibytes 
     needs "Arduino Leonardo" to be set under Arduino>Tools>Board.
     
-   Important:
-    #define AUDIO_MODE HIFI in mozzi_config.h
+    Important:
+    This sketch uses MOZZI_OUTPUT_2PIN_PWM (aka HIFI) output mode, which
+    is not available on all boards (among others, it works on the
+    classic Arduino boards, but not Teensy 3.x and friends).
 
     Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
     Check the Mozzi core module documentation for others and more detail
@@ -23,20 +25,27 @@
     DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.io/Mozzi/
 
-    Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-    Tim Barrass 2018, CC by-nc-sa.
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
+
+   Copyright 2018-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
+#include <MozziConfigValues.h>
+#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_2PIN_PWM
+#define MOZZI_CONTROL_RATE 128
 
+#include <Mozzi.h>
 #include <WavePacketSample.h>
 #include <EventDelay.h>
 #include <mozzi_rand.h>
 #include <Smooth.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin1024_int8.h> // sine table for oscillator
-
-#define CONTROL_RATE 128
 
 #define F_MAX ((int) 750)
 #define F_MIN ((int) 150)
@@ -57,10 +66,10 @@
 #define OFFSET_TIME_MAX_MS ((int) 500)
 #define SYNTH_PARAM_MAX_MS ((byte) 200)
 
-Oscil <SIN1024_NUM_CELLS, CONTROL_RATE> kFOffsetTrem(SIN1024_DATA);
-Oscil <SIN1024_NUM_CELLS, CONTROL_RATE> kBOffsetTrem(SIN1024_DATA);
-Oscil <SIN1024_NUM_CELLS, CONTROL_RATE> kCFOffsetTrem(SIN1024_DATA);
-Oscil <SIN1024_NUM_CELLS, CONTROL_RATE> kLevelOffsetTrem(SIN1024_DATA);
+Oscil <SIN1024_NUM_CELLS, MOZZI_CONTROL_RATE> kFOffsetTrem(SIN1024_DATA);
+Oscil <SIN1024_NUM_CELLS, MOZZI_CONTROL_RATE> kBOffsetTrem(SIN1024_DATA);
+Oscil <SIN1024_NUM_CELLS, MOZZI_CONTROL_RATE> kCFOffsetTrem(SIN1024_DATA);
+Oscil <SIN1024_NUM_CELLS, MOZZI_CONTROL_RATE> kLevelOffsetTrem(SIN1024_DATA);
 
 WavePacketSample <SINGLE> wavey;
 
@@ -111,7 +120,7 @@ void setup() {
   kBOffsetTime.start(rand(200));
   kCFOffsetTime.start(rand(200));
   kLevelOffsetTime.start(rand(200));
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 
@@ -215,7 +224,7 @@ void updateControl() {
 }
 
 
-AudioOutput_t updateAudio() {
+AudioOutput updateAudio() {
   int32_t asig = aSmoothLevel.next(k_leveltarget) * wavey.next();
   return MonoOutput::fromNBit(23, asig); // avoid distortion
 }

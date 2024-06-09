@@ -1,11 +1,7 @@
 #ifndef WAVESHAPE_TANH_H_
 #define WAVESHAPE_TANH_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 
 #define WAVESHAPE_TANH_NUM_CELLS 256

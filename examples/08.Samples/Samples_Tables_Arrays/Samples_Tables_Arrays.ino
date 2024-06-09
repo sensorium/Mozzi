@@ -13,16 +13,18 @@
     DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.io/Mozzi/
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012, CC by-nc-sa.
+   Copyright 2012-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Sample.h>
 #include <EventDelay.h>
 #include <mozzi_rand.h> // for rand()
@@ -42,15 +44,15 @@
 EventDelay kTriggerDelay;
 EventDelay kTriggerSlowDelay;
 
-byte ms_per_note = 111; // subject to CONTROL_RATE
+byte ms_per_note = 111; // subject to MOZZI_CONTROL_RATE
 
 const byte NUM_PLAYERS = 3; // 3 seems to be enough
 const byte NUM_TABLES = 11;
 
-Sample <BAMBOO_00_2048_NUM_CELLS, AUDIO_RATE> aSample[NUM_PLAYERS] ={
-  Sample <BAMBOO_00_2048_NUM_CELLS, AUDIO_RATE> (BAMBOO_00_2048_DATA),
-  Sample <BAMBOO_01_2048_NUM_CELLS, AUDIO_RATE> (BAMBOO_01_2048_DATA),
-  Sample <BAMBOO_02_2048_NUM_CELLS, AUDIO_RATE> (BAMBOO_02_2048_DATA),
+Sample <BAMBOO_00_2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSample[NUM_PLAYERS] ={
+  Sample <BAMBOO_00_2048_NUM_CELLS, MOZZI_AUDIO_RATE> (BAMBOO_00_2048_DATA),
+  Sample <BAMBOO_01_2048_NUM_CELLS, MOZZI_AUDIO_RATE> (BAMBOO_01_2048_DATA),
+  Sample <BAMBOO_02_2048_NUM_CELLS, MOZZI_AUDIO_RATE> (BAMBOO_02_2048_DATA),
 };
 
 // watch out - tables are const (but you can choose which ones you reference)
@@ -76,7 +78,7 @@ void setup(){
   for (int i=0;i<NUM_PLAYERS;i++){  // play at the speed they're sampled at
     (aSample[i]).setFreq((float) BAMBOO_00_2048_SAMPLERATE / (float) BAMBOO_00_2048_NUM_CELLS);
   }
-  kTriggerDelay.set(ms_per_note); // countdown ms, within resolution of CONTROL_RATE
+  kTriggerDelay.set(ms_per_note); // countdown ms, within resolution of MOZZI_CONTROL_RATE
   kTriggerSlowDelay.set(ms_per_note*6); // resolution-dependent inaccuracy leads to polyrhythm :)
 
   startMozzi();
@@ -111,7 +113,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   long asig=0;
   for (byte i=0;i<NUM_PLAYERS;i++){
     asig += (int) (aSample[i]).next() * gain[i];

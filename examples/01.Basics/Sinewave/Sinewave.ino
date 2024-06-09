@@ -8,27 +8,26 @@
     check the README or http://sensorium.github.io/Mozzi/
 
     Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+    https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
+    Mozzi help/discussion/announcements:
     https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012, CC by-nc-sa.
+    Copyright 2012-2024 Tim Barrass and the Mozzi Team
+
+    Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+#define MOZZI_CONTROL_RATE 64    // Hz, powers of 2 are most reliable; 64 Hz is actually the default, but shown here, for clarity
+#include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
-
-// use #define for CONTROL_RATE, not a constant
-#define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
-
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 void setup(){
-  startMozzi(CONTROL_RATE); // :)
+  startMozzi(); // :)
   aSin.setFreq(440); // set the frequency
 }
 
@@ -38,7 +37,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   return MonoOutput::from8Bit(aSin.next()); // return an int signal centred around 0
 }
 

@@ -8,22 +8,16 @@
     between 0-255.
     The technique is explained here:
      http://playground.arduino.cc/Main/PWMallPins
-    With AUDIO_RATE at 16384 Hz, this gives a 64 Hz pwm duty cycle for the LEDs.
+
+    With MOZZI_AUDIO_RATE at 16384 Hz (default on AVR), this gives a 64 Hz pwm duty cycle for the LEDs.
     If there is visible flicker, the resolution of the pwm could be made lower,
-    or the AUDIO_RATE could be increased to 32768 Hz, if the
+    or the MOZZI_AUDIO_RATE could be increased to 32768 Hz, if the
     cpu isn't too busy.
 
-    HIFI mode is not for Teensy 3.x, but the PWM led part should work.
-
-    IMPORTANT: this sketch requires Mozzi/mozzi_config.h to be
-    be changed from STANDARD mode to HIFI.
-    In Mozz/mozzi_config.h, change
-    #define AUDIO_MODE STANDARD
-    //#define AUDIO_MODE HIFI
-    to
-    //#define AUDIO_MODE STANDARD
-    #define AUDIO_MODE HIFI
-
+    Important:
+    This sketch uses MOZZI_OUTPUT_2PIN_PWM (aka HIFI) output mode, which
+    is not available on all boards (among others, it works on the
+    classic Arduino boards, but not Teensy 3.x and friends).
 
     Circuit: Audio output on digital pin 9 and 10 (on a Uno or similar),
     Check the Mozzi core module documentation for others and more detail
@@ -48,16 +42,21 @@
     Green led from pin 4 through a 1.5k resistor to ground
     Blue led from pin 5 through a 1.5k resistor to ground
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012-13, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
+#include <MozziConfigValues.h>
+#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_2PIN_PWM
+//#define MOZZI_AUDIO_RATE 32768
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator
 
@@ -69,12 +68,12 @@ const byte BLUE_PIN = 5;
 byte red_brightness, green_brightness, blue_brightness;
 
 // control oscillators using sinewaves to modulate LED brightness
-Oscil <SIN2048_NUM_CELLS, CONTROL_RATE> kRed(SIN2048_DATA);
-Oscil <SIN2048_NUM_CELLS, CONTROL_RATE> kGreen(SIN2048_DATA);
-Oscil <SIN2048_NUM_CELLS, CONTROL_RATE> kBlue(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_CONTROL_RATE> kRed(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_CONTROL_RATE> kGreen(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_CONTROL_RATE> kBlue(SIN2048_DATA);
 
 // audio oscillator
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 
 void updateRGB(byte r, byte g, byte b){
@@ -100,7 +99,7 @@ void setup(){
   kBlue.setFreq(0.27f);
   // set audio oscil frequency
   aSin.setFreq(440);
-  startMozzi(); // uses the default control rate of 64, defined in mozzi_config.h
+  startMozzi(); // uses the default control rate of 64
 }
 
 
@@ -111,7 +110,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   updateRGB(red_brightness, green_brightness, blue_brightness);
   // this would make more sense with a higher resolution signal
   // but still benefits from using HIFI to avoid the 16kHz pwm noise

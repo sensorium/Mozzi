@@ -1,11 +1,11 @@
 /*
  * WavePacket.h
  *
- * Copyright 2013 Tim Barrass.
- *
  * This file is part of Mozzi.
  *
- * Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * Copyright 2013-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
  */
 
@@ -13,13 +13,13 @@
 #ifndef WAVEPACKET_H
 #define WAVEPACKET_H
 
-#include <MozziGuts.h>
-#include <Oscil.h>
-#include <tables/cos8192_int8.h>
-#include <mozzi_fixmath.h>
-#include <Phasor.h>
-#include <Line.h>
-#include <meta.h>
+#include "MozziHeadersOnly.h"
+#include "Oscil.h"
+#include "tables/cos8192_int8.h"
+#include "mozzi_fixmath.h"
+#include "Phasor.h"
+#include "Line.h"
+#include "meta.h"
 
 
 enum algorithms {SINGLE,DOUBLE};
@@ -39,7 +39,7 @@ public:
 
 	/** Constructor.
 	*/
-	WavePacket():AUDIO_STEPS_PER_CONTROL(AUDIO_RATE / CONTROL_RATE)
+	WavePacket():AUDIO_STEPS_PER_CONTROL(MOZZI_AUDIO_RATE / MOZZI_CONTROL_RATE)
 	{
 		aCos.setTable(COS8192_DATA);
 	}
@@ -147,8 +147,8 @@ private:
 	// the number of audio steps the line has to take to reach the next control value
 	const unsigned int AUDIO_STEPS_PER_CONTROL;
 
-	Oscil <COS8192_NUM_CELLS, AUDIO_RATE> aCos;
-	Phasor <AUDIO_RATE> aPhasor;
+	Oscil <COS8192_NUM_CELLS, MOZZI_AUDIO_RATE> aCos;
+	Phasor <MOZZI_AUDIO_RATE> aPhasor;
 
 
 	inline

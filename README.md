@@ -18,78 +18,106 @@ passing or external synths.
 
 ***
 
-## Features  
--    16384 Hz sample rate, or experimental 32768 Hz rate.
--    8 bit or 14 bit audio output modes on a bare Arduino, up to 16 bit using an external DAC.
+## Features
+-    Available for a wide and growing range of MCUs, with and without inbuilt DACs: Arduino Uno R3 and R4, STM32, Teensy, ESP8266, ESP32, Raspberry Pi Pico, and more.
+-    Configurable sample rate, usually in powers of two (16384 Hz, or 32768 Hz).
 -    Variable control rate from 64 Hz upwards.
+-    Various inbuilt output modes, including 16 bit output to an external DAC.
+-    Allows interfacing to custom output routines, with examples for playing audio on external DAC modules, and even bluetooth.
 -    Useful basic audio toolkit: oscillators, samples, lines, envelopes, scheduling, filtering.
 -    Fast ADC and other cpu-efficient code utilities to help keep audio running smoothly.
 -    Example sketches for easy modification.
 -    Readymade wavetables and a script to convert your own soundfiles for Mozzi.
--    Usable on several platforms: Arduino, STM32, ESP, Teensy.
 -    Mozzi is designed to be easy to use, open source and extendable.
 
 ***
 
-## Installation  
-Use the "code" button on Mozzi's Github page to download a ZIP file of the latest developing code.  Import this into Arduino, following the instructions from the [Arduino libraries guide](http://arduino.cc/en/Guide/Libraries).
+## Installation
+The easiest installation option nowadays is to install Mozzi via the Library Manager in your Arduino application:
+_Arduino➞Sketch➞Include Library➞Library Manager_ type "Mozzi" into the search field, then click "install".
 
-*In the Arduino IDE, navigate to Sketch > Include Library > Add .ZIP Library. At the top of the drop down list, select the option to "Add .ZIP Library".*
+For other installation methods (e.g. the development version), see the [Download page](https://sensorium.github.io/Mozzi/download).
 
-(Note: the files in the "releases" section on Github are now legacy.  The development code is recommended.)
+## Quick Start
+To hear Mozzi, wire a 3.5mm audio jack with the centre to the audio out pin for your Arduino as shown in the table below, and the shield to GND on the Arduino.
+Plug into your computer and listen with a sound program like [Audacity](https://audacity.sourceforge.net/). (Or connect any other high-impedance input, like an active speaker)
+Try some examples from the __File > Examples > Mozzi__ menu.
+
+For more about audio output, including high quality output modes [Mozzi Output tutorial](https://sensorium.github.io/Mozzi/learn/output/).  
+
+### A note for users coming from Mozzi 1.x
+Mozzi 2.0 brings a lot of changes under the hood, and is not 100% source compatible with earlier versions of Mozzi. Most sketches should continue to compile, but with
+a lot of warnings. A few others will no longer work. See [Porting to Mozzi 2.0](https://sensorium.github.io/Mozzi/learn/porting/) for what to change.
+If desparate, there is still a "Mozzi_1" branch in the git repository, but this will not get any new development.
+
+## Supported boards, output modes and default pins
+Table is not necessarily complete. *Abbreviations explained below the table.* The default output mode is framed with a border in each row.
+If stereo is supported, in a mode, the cell has a red/blue background, and (where applicable) the second pin number is given in parentheses (+X).
+Check the [hardware section of the API-documentation](https://sensorium.github.io/Mozzi/doc/html/hardware.html) for platform specific notes and (pin) configuration options.
+
+<style>
+td[data-mo] { background-color: rgba(0,0,255,.5); }
+td[data-st] { background: linear-gradient(-45deg,rgba(0,0,255,.5) 50%, rgba(255,0,0,.5) 50%); }
+td[data-md] { border: 2px solid; background-color: rgba(0,0,255,.5); }
+td[data-sd] { border: 2px solid; background: linear-gradient(-45deg,rgba(0,0,255,.5) 50%, rgba(255,0,0,.5) 50%); }
+</style>
+
+<table border="0">
+<thead>
+<tr><td><b>Board or family</b>  / <b>Output mode</b>                                            </td><td> PWM-1          </td><td> PWM-2             </td><td> PDM        </td><td>inbuilt DAC </td><td>I2S DAC (native)</td></tr>
+</thead>
+<tbody>
+<tr style="border-top: 1px solid">
+    <td><i>ATmega328/168</i>: Uno (R3), Nano, Pro Mini, Duemilanove, Leonardo, etc.             </td><td data-sd>9 (+10) </td><td data-mo>9, 10      </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>ATmega32U4</i>: Teensy, Teensy2, 2++ <i>B5/B6 correspond to pins 14/15 in Arduino</i></td><td data-sd>B5 (+B6)</td><td data-mo>B5, B6     </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>ATmega2560</i>: Arduino Mega, Freetronics EtherMega, etc.                            </td><td data-sd>11 (+12)</td><td data-mo>11, 12     </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>ATmega1284</i>: Sanguino                                                             </td><td data-sd>13 (+12)</td><td data-mo>13, 12     </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
+    <td>Teensy3.x - <i>note: DAC Pin number depends on model: A14, A12, or A21</i>              </td><td> -              </td><td> -                 </td><td> -          </td><td data-md>DAC </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
+    <td>Teensy4.x                                                                               </td><td data-sd>A8 (+A9)</td><td> -                 </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>LGT8F328P</i>: "Register clone" of the ATmega328, uses the same code in Mozzi        </td><td data-sd>9 (+10) </td><td data-mo>9, 10      </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>SAMD</i>: Arduino Nano 33 Iot, Adafruit Playground Express, Gemma M0 etc.            </td><td> -              </td><td> -                 </td><td> -          </td><td data-md>A0/speaker</td><td> -   </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>Renesas Arduino Core</i>: Arduino Uno R4                                             </td><td> -              </td><td> -                 </td><td> -          </td><td data-md>A0  </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>Arduino MBED Core</i>: Arduino Giga (only model tested so far in this family)        </td><td> -              </td><td> -                 </td><td data-mo>SERIAL2TX</td><td data-sd>A13 (+A12)</td><td> -    </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>STM32 maple core</i>: Various STM32F1 and STM32F4 boards, "Blue/Black Pill"          </td><td data-sd>PB8 (+PB9)</td><td data-mo>PB8, PB9 </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>STM32duino (STM official) core</i>: Huge range of STM32Fx boards                     </td><td data-sd>PA8 (+PA8)</td><td data-mo>PA8, PA9 </td><td> -          </td><td> -          </td><td> -          </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>ESP8266</i>: ESP-01, Wemos D1 mini, etc. <i>note: Beware of erratic pin labels</i>   </td><td> -              </td><td> -                 </td><td data-md>GPIO2</td><td> -         </td><td data-st>yes </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>ESP32</i>: <i>note: Beware of vastly different pin labels across board variants</i>  </td><td> -              </td><td> -                 </td><td data-mo>yes </td><td data-sd>GPIO25 (+GPIO26)</td><td data-st>yes</td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>RP2040</i>: Raspberry Pi Pico and friends                                            </td><td data-sd>0 (+1)  </td><td data-mo>0, 1       </td><td> -          </td><td> -          </td><td data-st>yes </td></tr>
+</tbody>
+</table>
+
+<span style="font-size: .6em">
+ - PWM-1: 1-pin PWM mode (`MOZZI_OUTPUT_PWM`)
+ - PWM-2: 2-pin PWM mode (`MOZZI_OUTPUT_2PIN_PWM`)
+ - PDM: Pulse density modulation, may be either `MOZZI_OUTPUT_PDM_VIA_SERIAL` or `MOZZI_OUTPUT_PDM_VIA_I2S`
+ - inbuilt DAC: `MOZZI_OUTPUT_INTERNAL_DAC`
+ - I2S DAC (native): native support for externally connected I2S DACs (`MOZZI_OUTPUT_I2S_DAC`). Since this requires several, often
+   configurable pins, and is never the default option, no pin numbers are shown in this table.
+ - **All** platforms also support "external" output modes (`MOZZI_OUTPUT_EXTERNAL_TIMED` or `MOZZI_OUTPUT_EXTERNAL_CUSTOM`), which allow
+   for connecting DACs or other external circuitry.
+</span>
 
 ***
 
-## Quick Start  
-To hear Mozzi, connect a 3.5mm audio jack with the centre wire to the PWM output
-on Digital Pin 9 on the Arduino, and the ground to the Ground on the Arduino.
-Use this as a line out which you can plug into your computer and listen to with
-a sound program like [Audacity](http://audacity.sourceforge.net/).
-Try some examples from the __File > Examples > Mozzi__ menu.  
+## Using Mozzi
+Here's a template for an empty Mozzi sketch:
 
-Below is a list of the Digital Pins used by Mozzi for STANDARD_PLUS mode PWM audio out on different boards.
-Feedback about others is welcome.
-
-Model | Pin | Tested
------ | --- | ------
-Arduino Uno | 9	| yes
-Arduino Uno R4 | A0 | yes
-Arduino Duemilanove | 9	| yes
-Arduino Nano | 9 | yes
-Arduino Nano 33 Iot | A0 | yes
-Arduino Pro Mini | 9 | yes
-Arduino Leonardo | 9 | yes
-Arduino Mega | 11 | yes
-Arduino MBED (only the Giga has been tested, see "Hardware specific notes", below) | A13 | no
-Arduino Giga | A13 (jack) | yes
-Freetronics EtherMega | 11 | yes
-Ardweeny | 9 | yes     
-Boarduino | 9 | yes
-Teensy | 14 | -
-Teensy2 | B5 | yes  
-Teensy2++ | B5(25) | yes
-Teensy 3.0 3.1 LC 3.2 | DAC/D | yes
-Teensy 3.4, 3.5 | DAC/D | -
-Teensy 4.0 4.1 | A8 | yes
-Gemma M0 | A0 | yes
-Adafruit Playground Express | Built in Speaker | yes    
-Sanguino | 13	| -  
-STM32F1 maple core (see "Hardware specific notes", below) | PB8 | yes
-STM32F1 STM core (see "Hardware specific notes", below) | PA8 | yes
-STM32F4 STM core (see "Hardware specific notes", below) | PA8 | yes
-ESP8266 *see details* | GPIO2 | yes
-RP2040 | 0 | yes
-
-For details about HIFI mode, read the [Mozzi core module documentation](http://sensorium.github.io/Mozzi/doc/html/group__core.html#gae99eb43cb29bb03d862ae829999916c4/).  
-
-***
-
-## Using Mozzi  
-Here's a template for an empty Mozzi sketch:  
-
-
-```
-#include <MozziGuts.h>   // at the top of your sketch
+{% highlight c++ %}
+#include <Mozzi.h>   // at the top of your sketch
 
 void setup() {
 	startMozzi();
@@ -99,65 +127,51 @@ void updateControl(){
 	// your control code
 }
 
-int updateAudio(){
-	// your audio code which returns an int between -244 and 243
+AudioOutput_t updateAudio(){
+	MonoOutput::from16Bit( [my_cool_sample] );
 }
 
 void loop() {
 	audioHook();
 }
-```
+{% endhighlight %}
 
-There's a detailed example explaining the different parts [here](http://sensorium.github.io/Mozzi/learn/a-simple-sketch/).
+There's a detailed example explaining the different parts [here](https://sensorium.github.io/Mozzi/learn/a-simple-sketch/).
 
-***
 
 ## Documentation
 
-There's documentation in the doc folder in the Mozzi download and [online](http://sensorium.github.io/Mozzi/doc/html/index.html).  
-There is practical help on the [learn](http://sensorium.github.io/Mozzi/learn/) page on the Mozzi site.  
+For getting started, browse the practical help on the [learn](https://sensorium.github.io/Mozzi/learn/) page on the Mozzi site.  
+API reference documentation is available in the doc folder in the Mozzi download and [online](http://sensorium.github.io/Mozzi/doc/html/index.html).  
 Start or look up a topic on the [users forum](https://groups.google.com/forum/#!forum/mozzi-users/).  
 Also, feel free to submit any issues on the [GitHub Mozzi site](https://github.com/sensorium/Mozzi/issues/).  
 Look for code and usage changes [here](extras/NEWS.txt).  
+For hardware specific details, including supported features, caveats, and hardware-dependent configuration options,
+refer to the [Hardware Section of the API-Documentation](https://sensorium.github.io/Mozzi/doc/html/hardware.html).
 
-***
+## Compatibiliy issues
 
-## Caveats and Workarounds
+* In most setups, Mozzi claims one or two hardware timers. This may result in incompatibilities with certain libraries, and / or the ability to use timer-based functions such as `analogWrite()`. As the details on this
+  differ a lot between the supported boards, read up on the details - and available workarounds - in the [ardware Section of the API-Documentation](https://sensorium.github.io/Mozzi/doc/html/hardware.html).
 
-#### AVR
+* There is also an example on emulating `analogWrite()` on any digitial pin in *Mozzi>examples>11.Communication>Sinewave_PWM_pins_HIFI*.
 
-* While Mozzi is running, calling `delay()`, `delayMicroseconds()`, or other functions which wait or cycle through loops can cause audio glitches.
-Mozzi provides `EventDelay()` for scheduling instead of `delay`.
+* The timers can be made available with `stopMozzi()`, which stops audio interrupts, until you call `startMozzi()`.
 
-* `analogRead()` is replaced by `mozziAnalogRead()`, which works in the background instead of blocking the processor.  
+* Note that it is of utmost importance to write non-blocking code, such that the
+  audio buffer never runs low. Hints on how to do this, including why, and how you
+  should avoid using `delay()`, `analogRead()`, and how to make your code run faster,
+  can be found at [on the learn pages](https://sensorium.github.io/Mozzi/learn/hints/).
 
-* Mozzi interferes with `analogWrite()`.  In `STANDARD` and `STANDARD_PLUS` audio modes, Mozzi takes over Timer1 (pins 9 and 10), but you can use the Timer2 pins, 3 and 11 (your board may differ).  In `HIFI` mode, Mozzi uses Timer1 (or Timer4 on some boards), and Timer2, so pins 3 and 11 are also out.  
-If you need `analogWrite()`, you can do PWM output on any digital pins using the technique in *Mozzi>examples>11.Communication>Sinewave_PWM_pins_HIFI*.  
 
+## Extending Mozzi
 
-#### Last Resort
-The timers can be made available with `stopMozzi()`, which stops audio interrupts, until you call `startMozzi()`.  
-
-***
-
-## Tweaking Arduino for Faster Audio Code
-
-If you need your synth to run faster on AVR architectures, Arduino versions above 1.5 can be tweaked to optimise compiled code for speed instead of small size.  
-
-Find Arduino’s platform.txt (on OSX you can find it by searching in Users/your_name/Library/Arduino15). Search and replace -Os with -O2. Save.
-
-It’s explained more thoroughly (for Windows) [here](http://www.instructables.com/id/Arduino-IDE-16x-compiler-optimisations-faster-code/?ALLSTEPS).
-
-If you still need more speed, Arduino 1.0.5 produces slightly faster code.
-
-***
-
-## Using external chips to produce the sound
+### Using external chips to produce the sound
 
 External chips (DAC) can also be used on any platform which does not support natively the I2S protocol  using an user defined `audioOutput` function. This can allow a greater audio quality over the native ways to output the sound (PWM for AVR Arduinos and STM32 and 12 bit DAC for Teensy 3.*).
 Examples are provided for the MCP492X DAC (12 bit on SPI) and for the (PT8211) 16 bit stereo DAC using SPI port to emulate the I2S protocol. The latter should be compatible with any DAC using I2S.
 
-***
+### Extendig the library itself
 
 If you enjoy using Mozzi for a project, or have extended it, we would be
 pleased to hear about it and provide support wherever possible. Contribute
@@ -186,202 +200,19 @@ and fixed point version of the filter on [dave's blog of art and programming](ht
 State Variable filter pseudocode at [musicdsp.org](http://www.musicdsp.org/showone.php?id=23) and [here](http://www.musicdsp.org/showone.php?id=142)  
 Various examples from [Pure Data](http://puredata.info/) by Miller Puckette  
 [Practical synthesis tutorials](http://www.obiwannabe.co.uk/) by Andy Farnell  
-
-
-## Hardware specific notes
-
-### STM32
-The situation on STM32-based boards is rather confusing, as there are several competing Arduino cores. Importantly:
-- Some boards use dedicated cores (e.g. Arduino Giga / Protenta) etc. For those, see the relevant sections (if we support them)
-- There is a series of libmaple-based cores, including [Roger Clark's libmaple-based core](https://github.com/rogerclarkmelbourne/Arduino_STM32). These are highly optimized, and provide very complete support, but only for a limited number of boards. Unfortunately, at the time of this writing (2023/04), they are not available for installation via the Arduino Board Manager, and they do not currently seem actively maintained.
-- A generic Arduino core for STM32 is the [STM32duino core](https://github.com/stm32duino/Arduino_Core_STM32). It supports a huge step of boards, and seems to have offical backing by STM, but some features of the libmaple based cores are still lacking. To complete confusion, this core now uses the label "STM32duino", which used to be what the libmaple cores above were known by (don't blame Mozzi for this mess!).
-
-Mozzi supports both of the latter, but currently not at the same level of completeness.
-
-#### STM32 libmaple based
-port by Thomas Friedrichsmeier
-
-Compiles for and runs on a STM32F103C8T6 blue pill board, with a bunch of caveats (see below), i.e. on a board _without_ a
-real DAC. Should probably run on any other board supported by [Roger Clark's libmaple-based core](https://github.com/rogerclarkmelbourne/Arduino_STM32) (although this theory is untested).
-
-*NOTE* that at the time of this writing, [Stev Strong's slightliy more recent fork of this core](https://github.com/stevstrong/Arduino_STM32/) does *not* work with
-Mozzi, apparently due to a bug in pwmWrite().
-
-- You will need a very recent checkout of the Arduino_STM32 repository, otherwise compilation will fail.
-- Audio output is to pin PB8, by default (HIFI-mode: PB8 and PB9)
-- If you want to use MIDI, be sure to replace "MIDI_CREATE_DEFAULT_INSTANCE()" with "MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, MIDI)" (or Serial2)
-- Timers 4 (PWM output), and 2 (audio rate) are used by default.
-- The STM32-specific options (pins, timers) can be configured in AudioConfigSTM32.h
-- Default audio resolution is currently set to 10 bits, which yields 70khZ PWM frequency on a 72MHz CPU. HIFI mode is 2*7bits at up to 560Khz (but limited to 5 times audio rate)
-- AUDIO_INPUT is completely untested (but implemented in theory)
-- Note that AUDIO_INPUT and mozziAnalogRead() return values in the STM32's full ADC resolution of 0-4095 rather than AVR's 0-1023.
-- twi_nonblock is not ported
-
-#### STM32 STM32duino
-port by Thomas Friedrichsmeier
-
-Tested on a STM32F103C8T6 blue pill board as well as an STM32F411CE black pill board, i.e. on sboards _without_ a
-real DAC. Compiles and runs, with a bunch of caveats (see below). Should probably run on any other board supported by the
-[STM32duino core](https://github.com/stm32duino/Arduino_Core_STM32) (although this theory is untested).
-When trying any other board, you probably want to check the platform specific settings (see below), carefully, importantly, whether the desired output resolution is
-achievable, and whether the desired output pins are PWM capable.
-
-- Audio output is PWM-based to pin PA8, by default (HIFI-mode: PA8 and PA9)
-- Timers 3 (PWM output), and 2 (audio rate) are used by default.
-- The STM32-specific options (pins, timers) can be configured in AudioConfigSTM32duino.h
-- Default audio resolution is currently set to 10 bits, which yields 70khZ PWM frequency on a 72MHz CPU. IMPORTANT: Should your CPU be slower, you will need to lower the audio resolution!
-- HIFI mode is 2*7bits at up to 560Khz with a 72MHz CPU (but limited to 5 times audio rate)
-- Analog input implementation is somewhat experimental, and may not be able to service a whole lot of pins (contributions welcome)
-- AUDIO_INPUT is completely untested (but implemented in theory)
-- Note that AUDIO_INPUT and mozziAnalogRead() return values in the STM32's full ADC resolution (the exact range depending on the board in use) rather than AVR's 0-1023.
-- twi_nonblock is not ported
-
-### Teensy 3.0/3.1/3.2/3.4/3.5/LC
-
-This port is working with the latest version of Teensyduino (1.8.5)
-Extra libraries required for use with Teensy 3.*:
-These are included in the standard Teensyduino install unless you explicitly disable them
-- [Timer library](https://github.com/loglow/IntervalTimer) for Teensy 3.* by Daniel Gilbert
-- [ADC library](http://github.com/pedvide/ADC) by Pedro Villanueva
-
-Some of the differences for Teensy 3.* which will affect users include:
-
-- On Teeensy 3.0/3.1/3.2/Audio output is on pin A14/DAC, in STANDARD or STANDARD_PLUS audio modes.
-    These modes are identical on Teensy 3.0/3.1/3.2, as the output is via DAC rather than PWM.
-- Output is 12 bits in STANDARD and STANDARD_PLUS modes, up from nearly 9 bits for Atmel based boards. HIFI audio, which works by summing two output pins, is not available on Teensy 3.0/3.1.
-- twi_nonblock code by Marije Baalman for non-blocking I2C is not compatible with Teensy 3.0/3.1/3.2.
-
-### Teensy 4.0/4.1
-port by Thomas Combriat
-
-This port is working with the latest version of Teensyduino (1.8.5)
-Extra libraries required for use with Teensy 4.*:
-These are included in the standard Teensyduino install unless you explicitly disable them
-- [Timer library](https://github.com/loglow/IntervalTimer) for Teensy 3.* by Daniel Gilbert
-- [ADC library](http://github.com/pedvide/ADC) by Pedro Villanueva
-
-Some of the differences for Teensy 4.*:
-
-- Contrary to the Teensy 3, the Teensy 4 do not have any DAC. The output is done on pin A8 (PWM) by default (editable in `AudioConfigTeensy4.h`
-
-### SAMD21 architecture (Arduino Circuitplayground M0 and others)
-port by Adrian Freed
-
-- Currently, only output on the inbuilt DAC (pin DAC0) is supported. So, obviously, boards without a DAC are not yet convered (in theory you can still use EXTERNAL_AUDIO_OUTPUT)
-- Output resolution is fixed at 10 bits. If your board supports more, configure in AudioConfigSAMD21.h
-- mozziAnalogRead() and AUDIO_INPUT are not implemented (contributions welcome)
-- We don't have a lot of data, which boards this port has been tested on. Success or not, let us know, if you are using Mozzi on SAMD21 boards
-
-### ESP8266
-port by Thomas Friedrichsmeier
-
-- Since flash memory is not built into the ESP8266, but connected, externally, it is much too slow for keeping wave tables, audio samples, etc. Instead, these are kept in RAM on this platform.
-- Asynchronous analog reads are not implemented. `mozziAnalogRead()` relays to `analogRead()`.
-- AUDIO_INPUT is not implemented.
-- twi_nonblock is not ported
-- Several audio output modes exist, the default being PDM_VIA_SERIAL (configurable in AudioConfigESP.h):
-  - PDM_VIA_SERIAL: Output is coded using pulse density modulation, and sent via GPIO2 (Serial1 TX).
-    - This output mode uses timer1 for queuing audio sample, so that timer is not available for other uses.
-    - Note that this mode has slightly lower effective analog output range than PDM_VIA_I2S, due to start/stop bits being added to the output stream.
-  - PDM_VIA_I2S: Output is coded using pulse density modulation, and sent via the I2S pins. The I2S data out pin (GPIO3, which is also "RX") will have the output,
-  but *all* I2S output pins (RX, GPIO2 and GPIO15) will be affected. Mozzi tries to set GPIO2 and GPIO15 to input mode, and *at the time of this writing*, this allows
-  I2S output on RX even on boards such as the ESP01 (where GPIO15 is tied to Gnd). However, it seems safest to assume that this mode may not be useable on boards where
-  GPIO2 or GPIO15 are not available as output pins.
-  - EXTERNAL_DAC_VIA_I2S: Output is sent to an external DAC (such as a PT8211), digitally coded. This is the only mode that supports STEREO. It also needs the least processing power.
-- There is no "HIFI_MODE" in addition to the above output options. For high quality output, either use an external DAC, or increase the PDM_RESOLUTION value.
-- Note that the ESP8266 pins can output less current than the other supported CPUs. The maximum is 12mA, with a recommendation to stay below 6mA.
-  - WHEN CONNECTING A HEADPHONE, DIRECTLY, USE APPROPRIATE CURRENT LIMITING RESISTORS (>= 500Ohms).
-- _Any_ WiFi-activity can cause severe spikes in power consumption. This can cause audible "ticking" artifacts, long before any other symptoms.
-  - If you do not require WiFi in your sketch, you should turn it off, _explicitly_, using `WiFi.mode(WIFI_OFF)`.
-  - A juicy enough, well regulated power supply, and a stabilizing capacitor between VCC and Gnd can help a lot.
-  - As the (PDM) output signal is digital, a single transistor can be used to amplify it to an independent voltage level.
-- The audio output resolution is always 16 bits on this platform, _internally_. Thus, in updateAudio(), you should scale your output samples to a full 16 bit range. The effective number of output bits cannot easily
-  be quantified, due to PDM coding.
-- audioHook() calls `yield()` once for every audio sample generated. Thus, as long as your audio output buffer does not run empty, you should not need any additional `yield()`s inside `loop()`.
-
-### ESP32
-port by Dieter Vandoren and Thomas Friedrichsmeier
-
-- Since flash memory is not built into the ESP32, but connected, externally, it is much too slow for keeping wave tables, audio samples, etc. Instead, these are kept in RAM on this platform.
-- Asynchronous analog reads are not implemented. `mozziAnalogRead()` relays to `analogRead()`.
-- AUDIO_INPUT is not implemented.
-- twi_nonblock is not ported
-- Currently, three audio output modes exist, the default being INTERNAL_DAC (configurable in AudioConfigESP32.h). *The configuration details may still be subject to change; please be prepared to make some minimal adjustments to your code, when upgrading Mozzi*:
-  - INTERNAL_DAC: Output using the built-in DAC on GPIO pins 25 and 26.
-    - 8 bits resolution, mono (on both pins) or stereo
-    - For simplicity of code, both pins are always used, even in mono output mode
-  - PT8211_DAC: Output is sent via I2S in a format suitable for the PT8211 external EXTERNAL_DAC
-    - 16 bits resolution, mono or stereo. Remember to shift your audio accordingly.
-    - Output pins can be configured in AudioConfigESP32.h. Default is BCK: 26, WS: 15, DATA: 33
-  - PDM_VIA_I2S: Output is converted using pulse density modulation, sent to the I2S data pin. No external hardware needed.
-    - 16 bits resolution. Remember to shift your audio accordingly.
-    - Output (DATA) pin can be configured in AudioConfigESP32.h. Default 33. Note that the BCK and WS pins are also used in this mode.
-    - The PDM_RESOLUTION parameter can be used to reduce noise at the cost of more CPU power.
-    - Mono, only.
-- "HIFI_MODE" is not currently implemented, but could conceivably be realized for the INTERNAL_DAC mode. Patches welcome.
-- WIFI-activity not yet tested, but likely the same notes as for ESP8266 apply. Consider turning off WIFI.
-- The implementation of audioTicks() may be slightly inaccurate on this platform.
-
-### RP2040 (Raspberry Pi Pico)
-port by Thomas Friedrichsmeier
-
-Compiles and runs using [this core](https://github.com/earlephilhower/arduino-pico). Can probably be ported to the Mbed core for RP2040, relatively easily, as it relies mostly
-on the RP2040 SDK API. Tested on a Pi Pico.
-
-- This is a recent addition, implementation details may still change (currently just PWM driven by a timer; this may be worth changing to a DMA driven output)
-- Wavetables and samples are not kept in progmem on this platform. While apparently speed (of the external flash) is not much of an issue, the data always seems to be copied into RAM, anyway.
-- Currently, two audio output modes exist (configurable in AudioConfigRP2040.h) in addition to using an user-defined `audioOutput` function, with the default being PWM_VIA_BARE_CHIP:
-  - PWM_VIA_BARE_CHIP: PWM audio output on pin 0, by default, with 11 bits default output resolution
-    - One hardware timer interrupt and one DMA channel are claimed (number not hardcoded), a non-exclusive handler is installed on DMA_IRQ_0.
-    - HIFI_MODE not yet implemented (although that should not be too hard to do).
-  - EXTERNAL_DAC_VIA_I2S: I2S output to be connected to an external DAC
-    - 16 bits resolution by default (configurable in AudioConfigRP2040.h), 8, 16, 24 (left aligned) and 32 resolution are available.
-    - Both plain I2S and LSBJ_FORMAT (for the PT8211 for instance) are available (configurable in AudioConfigRP2040.h), default is LSBJ.
-    - Outputs pins can be configured in AudioConfigRP2040.h. Default is BCK: 20, WS: 21, DATA: 22.
-    - Two DMA channels are claimed (numbers not hardcoded), non-exclusive handlers are installed on DMA_IRQ_0.
-    - At the time of writing, LSBJ is only available with github arduino-pico core.
-- Note that AUDIO_INPUT and mozziAnalogRead() return values in the RP2040's full ADC resolution of 0-4095 rather than AVR's 0-1023.
-- twi_nonblock is not ported
-- Code uses only one CPU core
-
-### Arduino Giga/MBED
-port by Thomas Friedrichsmeier & Thomas Combriat
-
-Compiles and runs using Arduino's standard and Arduino_AdvancedAnalog libraries. This port is still **experimental**, testing reveals some instabilities for some configurations (in particular with USE_AUDIO_INPUT) that are under active investigations.
-
-- This port is not complete yet, in particular:
-  - Asynchroneous analog reads are not implemented (yet), `mozziAnalogRead()` relays to `analogRead()`.
-  - HIFI mode is not implemented.
-- In addition to using an user-defined `audioOutput()` by setting `EXTERNAL_AUDIO_OUTPUT` to `true` in mozzi_config.h, two bare chip output modes exist (configurable in AudioConfigMBED.h):
-  - INTERNAL_DAC: uses the DAC present on the board and outputs by default on pin A13 (3.5mm jack connector's tip). Stereo mode uses pin A12 (3.5mm jack connector's first ring) additionally.
-  - PDM_VIA_SERIAL: returns a pulse-density modulated signal on one of the hardware UART of the board (Serial ports). Default is using the SERIAL2, on pin D18.
-- This port should support other MBED based Arduino boards like the Arduino Portenta, in *theory*. It has only been tested on the giga but feedbacks are welcome!
-
-### Arduino Uno R4
-port by Thomas Combriat
-
-Compiles and runs using Arduino's standard library (Renesas 0.8.7 at the time of this writing).
-
-- A few particularities:
-
-  - Because this board has an on-board DAC (A0), but only one, STEREO is not implemented and Mozzi uses this pin. Usage of other pins using PWM for instance is not implemented yet.
-  - Two timers are claimed by Mozzi when using the on-board DAC, one when using `EXTERNAL_AUDIO_OUTPUT`.
-  - `mozziAnalogRead()` returns values in the Renesas' full ADC resolution of 0-16384 rather than AVR's 0-1023. *This might change in the near future for speed purposes.*
   
 
 ***
 
 ## Use and Remix
-Mozzi is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License, which is detailed in LICENSE.txt
+Mozzi is licensed under a the LGPL version 2.1 or (at your option) any later version of the license.
 
 Disclaimer: This is a human-readable summary of (and not a substitute for) the license.
+- You may copy, distribute and modify the Mozzi library itself provided that you state modifications and license them under LGPL-2.1.
 
-You are free to:
- - Share — copy and redistribute the material in any medium or format
- - Adapt — remix, transform, and build upon the material
+- You may distribute *your own* source code which merely *uses* the Mozzi-API under any licence that you wish.
 
-The licensor cannot revoke these freedoms as long as you follow the license terms.
-Under the following terms:
- - Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
- - NonCommercial — You may not use the material for commercial purposes.
- - No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+- Regarding distribution of *binaries* (also inside a hardware project) that include Mozzi, the Arduino FAQ sums up the situation as follows:
+  "Using the Arduino core and libraries for the firmware of a commercial product does not require you to release the source code for the firmware. The LGPL does, however, require you to make available object files that allow for the relinking of the firmware against updated versions of the Arduino core and libraries. Any modifications to the core and libraries must be released under the LGPL."
+
+- Note that using third-party libraries/code - including as shown in some of the Mozzi examples - may introduce additional restrictions.

@@ -8,14 +8,18 @@
     DAC/A14 on Teensy 3.1, or
    check the README or http://sensorium.github.io/Mozzi/
 
-   		Mozzi help/discussion/announcements:
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
+
+   Mozzi help/discussion/announcements:
    https://groups.google.com/forum/#!forum/mozzi-users
 
-   Tim Barrass 2012-13.
-   CC by-nc-sa
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Sample.h> // Sample template
 #include <samples/burroughs1_18649_int8.h>
 #include <mozzi_rand.h>
@@ -23,13 +27,13 @@
 #include <Smooth.h>
 
 // use: Sample <table_size, update_rate, interpolation > SampleName (wavetable)
-Sample <BURROUGHS1_18649_NUM_CELLS, AUDIO_RATE, INTERP_LINEAR> aSample(BURROUGHS1_18649_DATA);
+Sample <BURROUGHS1_18649_NUM_CELLS, MOZZI_AUDIO_RATE, INTERP_LINEAR> aSample(BURROUGHS1_18649_DATA);
 
 //Line to scrub through sample at audio rate, Line target is set at control rate
 Line <Q16n16> scrub; // Q16n16 fixed point for high precision
 
 // the number of audio steps the line has to take to reach the next offset
-const unsigned int AUDIO_STEPS_PER_CONTROL = AUDIO_RATE / CONTROL_RATE;
+const unsigned int AUDIO_STEPS_PER_CONTROL = MOZZI_AUDIO_RATE / MOZZI_CONTROL_RATE;
 
 int offset = 0;
 int offset_advance = 400; // just a guess
@@ -50,8 +54,8 @@ void updateControl(){
 
   // wandering advance rate
   offset_advance += (int)rand(20)-rand(20);
-  if(!rand(CONTROL_RATE)) offset_advance = -offset_advance; // reverse sometimes
-  if(!rand(CONTROL_RATE)) offset_advance = 500-rand(1000); // jump speed sometimes
+  if(!rand(MOZZI_CONTROL_RATE)) offset_advance = -offset_advance; // reverse sometimes
+  if(!rand(MOZZI_CONTROL_RATE)) offset_advance = 500-rand(1000); // jump speed sometimes
 
   int smooth_offset_advance = kSmoothOffsetAdvance.next(offset_advance);
 
@@ -67,7 +71,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   unsigned int index = Q16n16_to_Q16n0(scrub.next());
   return MonoOutput::from8Bit(aSample.atIndex(index));
 }

@@ -19,16 +19,18 @@
     - connection of the piezo attached to ground
     1-megOhm resistor attached from the analog pin to ground
 
-  Mozzi documentation/API
-  https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-  Mozzi help/discussion/announcements:
-  https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-  Tim Barrass 2013, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Sample.h> // Sample template
 #include "blahblah4b_int8.h"
 #include <Line.h>
@@ -41,13 +43,13 @@ Smooth <int> kSmoothOffset(0.85f);
 
 
 // use: Sample <table_size, update_rate, interpolation > SampleName (wavetable)
-Sample <BLAHBLAH4B_NUM_CELLS, AUDIO_RATE, INTERP_LINEAR> aSample(BLAHBLAH4B_DATA);
+Sample <BLAHBLAH4B_NUM_CELLS, MOZZI_AUDIO_RATE, INTERP_LINEAR> aSample(BLAHBLAH4B_DATA);
 
 //Line to scrub through sample at audio rate, Line target is set at control rate
 Line <Q16n16> scrub; // Q16n16 fixed point for high precision
 
 // the number of audio steps the line has to take to reach the next offset
-const unsigned int AUDIO_STEPS_PER_CONTROL = AUDIO_RATE / CONTROL_RATE;
+const unsigned int AUDIO_STEPS_PER_CONTROL = MOZZI_AUDIO_RATE / MOZZI_CONTROL_RATE;
 
 
 void setup(){
@@ -59,7 +61,7 @@ void setup(){
 void updateControl(){
 
   // read the pot
-  int sensor_value = mozziAnalogRead(INPUT_PIN); // value is 0-1023
+  int sensor_value = mozziAnalogRead<10>(INPUT_PIN); // value is 0-1023
 
   // map it to an 8 bit range for efficient calculations in updateAudio
   int target = ((long) sensor_value * BLAHBLAH4B_NUM_CELLS) >> 10; // >> 10 is / 1024
@@ -70,7 +72,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   return MonoOutput::from8Bit(aSample.atIndex(Q16n16_to_Q16n0(scrub.next())));
 }
 

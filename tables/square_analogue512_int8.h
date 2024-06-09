@@ -1,11 +1,7 @@
 #ifndef SQUARE_ANALOGUE512_INT8_H_
 #define SQUARE_ANALOGUE512_INT8_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 
 /* generated "analogue"  square wave from Audacity

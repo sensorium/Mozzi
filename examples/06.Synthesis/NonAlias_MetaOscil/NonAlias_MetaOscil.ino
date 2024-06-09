@@ -2,7 +2,7 @@
     using Mozzi sonification library.
 
     Waveforms which are not only sines (Saw, square, triangle) are composed by a lot of harmonics which are at frequencies multiple of the fundamental frequency.
-    If the frequency of one of these harmonics is higher than half the sampling frequency (https://en.wikipedia.org/wiki/Nyquist_frequency) (AUDIO_RATE/2 here)
+    If the frequency of one of these harmonics is higher than half the sampling frequency (https://en.wikipedia.org/wiki/Nyquist_frequency) (MOZZI_AUDIO_RATE/2 here)
     it will create "aliases" (https://en.wikipedia.org/wiki/Aliasing) which will sound out of tune are they not harmonically related to the fundamental.
     The higher the pitch, the more harmonics are above the Nyquist limit and the more aliased will be present for a given waveform. 
 
@@ -26,16 +26,20 @@
     DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.io/Mozzi/
 
-    Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012, Combriat T. 2021, CC by-nc-sa.
+   Copyright 2021-2024 Tom Combriat and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+// use #define for MOZZI_CONTROL_RATE, not a constant
+#define MOZZI_CONTROL_RATE 256 // Hz, powers of 2 are most reliable
+#include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <MetaOscil.h>
 
@@ -60,30 +64,26 @@
 
 // The proper Oscillators that will be managed by the MetaOscil
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SQUARE_MAX_90_AT_16384_512_NUM_CELLS, AUDIO_RATE> aSq90(SQUARE_MAX_90_AT_16384_512_DATA);
-Oscil <SQUARE_MAX_101_AT_16384_512_NUM_CELLS, AUDIO_RATE> aSq101(SQUARE_MAX_101_AT_16384_512_DATA);
-Oscil <SQUARE_MAX_122_AT_16384_512_NUM_CELLS, AUDIO_RATE> aSq122(SQUARE_MAX_122_AT_16384_512_DATA);
-Oscil <SQUARE_MAX_138_AT_16384_512_NUM_CELLS, AUDIO_RATE> aSq138(SQUARE_MAX_138_AT_16384_512_DATA);
-Oscil <SQUARE_MAX_154_AT_16384_512_NUM_CELLS, AUDIO_RATE> aSq154(SQUARE_MAX_154_AT_16384_512_DATA);
-Oscil <SQUARE_MAX_174_AT_16384_512_NUM_CELLS, AUDIO_RATE> aSq174(SQUARE_MAX_174_AT_16384_512_DATA);
-Oscil <SQUARE_MAX_210_AT_16384_512_NUM_CELLS, AUDIO_RATE> aSq210(SQUARE_MAX_210_AT_16384_512_DATA);
-Oscil <SQUARE_MAX_264_AT_16384_512_NUM_CELLS, AUDIO_RATE> aSq264(SQUARE_MAX_264_AT_16384_512_DATA);
-Oscil <SQUARE_MAX_327_AT_16384_512_NUM_CELLS, AUDIO_RATE> aSq327(SQUARE_MAX_327_AT_16384_512_DATA);
-Oscil <SQUARE_MAX_431_AT_16384_512_NUM_CELLS, AUDIO_RATE> aSq431(SQUARE_MAX_431_AT_16384_512_DATA);
-Oscil <SQUARE_MAX_546_AT_16384_512_NUM_CELLS, AUDIO_RATE> aSq546(SQUARE_MAX_546_AT_16384_512_DATA);
-Oscil <SQUARE_MAX_744_AT_16384_512_NUM_CELLS, AUDIO_RATE> aSq744(SQUARE_MAX_744_AT_16384_512_DATA);
-Oscil <SQUARE_MAX_910_AT_16384_512_NUM_CELLS, AUDIO_RATE> aSq910(SQUARE_MAX_910_AT_16384_512_DATA);
-Oscil <SQUARE_MAX_1170_AT_16384_512_NUM_CELLS, AUDIO_RATE> aSq1170(SQUARE_MAX_1170_AT_16384_512_DATA);
-Oscil <SQUARE_MAX_1638_AT_16384_512_NUM_CELLS, AUDIO_RATE> aSq1638(SQUARE_MAX_1638_AT_16384_512_DATA);
-Oscil <SQUARE_MAX_2730_AT_16384_512_NUM_CELLS, AUDIO_RATE> aSq2730(SQUARE_MAX_2730_AT_16384_512_DATA);
-Oscil <SQUARE_MAX_8192_AT_16384_512_NUM_CELLS, AUDIO_RATE> aSq8192(SQUARE_MAX_8192_AT_16384_512_DATA);
+Oscil <SQUARE_MAX_90_AT_16384_512_NUM_CELLS, MOZZI_AUDIO_RATE> aSq90(SQUARE_MAX_90_AT_16384_512_DATA);
+Oscil <SQUARE_MAX_101_AT_16384_512_NUM_CELLS, MOZZI_AUDIO_RATE> aSq101(SQUARE_MAX_101_AT_16384_512_DATA);
+Oscil <SQUARE_MAX_122_AT_16384_512_NUM_CELLS, MOZZI_AUDIO_RATE> aSq122(SQUARE_MAX_122_AT_16384_512_DATA);
+Oscil <SQUARE_MAX_138_AT_16384_512_NUM_CELLS, MOZZI_AUDIO_RATE> aSq138(SQUARE_MAX_138_AT_16384_512_DATA);
+Oscil <SQUARE_MAX_154_AT_16384_512_NUM_CELLS, MOZZI_AUDIO_RATE> aSq154(SQUARE_MAX_154_AT_16384_512_DATA);
+Oscil <SQUARE_MAX_174_AT_16384_512_NUM_CELLS, MOZZI_AUDIO_RATE> aSq174(SQUARE_MAX_174_AT_16384_512_DATA);
+Oscil <SQUARE_MAX_210_AT_16384_512_NUM_CELLS, MOZZI_AUDIO_RATE> aSq210(SQUARE_MAX_210_AT_16384_512_DATA);
+Oscil <SQUARE_MAX_264_AT_16384_512_NUM_CELLS, MOZZI_AUDIO_RATE> aSq264(SQUARE_MAX_264_AT_16384_512_DATA);
+Oscil <SQUARE_MAX_327_AT_16384_512_NUM_CELLS, MOZZI_AUDIO_RATE> aSq327(SQUARE_MAX_327_AT_16384_512_DATA);
+Oscil <SQUARE_MAX_431_AT_16384_512_NUM_CELLS, MOZZI_AUDIO_RATE> aSq431(SQUARE_MAX_431_AT_16384_512_DATA);
+Oscil <SQUARE_MAX_546_AT_16384_512_NUM_CELLS, MOZZI_AUDIO_RATE> aSq546(SQUARE_MAX_546_AT_16384_512_DATA);
+Oscil <SQUARE_MAX_744_AT_16384_512_NUM_CELLS, MOZZI_AUDIO_RATE> aSq744(SQUARE_MAX_744_AT_16384_512_DATA);
+Oscil <SQUARE_MAX_910_AT_16384_512_NUM_CELLS, MOZZI_AUDIO_RATE> aSq910(SQUARE_MAX_910_AT_16384_512_DATA);
+Oscil <SQUARE_MAX_1170_AT_16384_512_NUM_CELLS, MOZZI_AUDIO_RATE> aSq1170(SQUARE_MAX_1170_AT_16384_512_DATA);
+Oscil <SQUARE_MAX_1638_AT_16384_512_NUM_CELLS, MOZZI_AUDIO_RATE> aSq1638(SQUARE_MAX_1638_AT_16384_512_DATA);
+Oscil <SQUARE_MAX_2730_AT_16384_512_NUM_CELLS, MOZZI_AUDIO_RATE> aSq2730(SQUARE_MAX_2730_AT_16384_512_DATA);
+Oscil <SQUARE_MAX_8192_AT_16384_512_NUM_CELLS, MOZZI_AUDIO_RATE> aSq8192(SQUARE_MAX_8192_AT_16384_512_DATA);
 
 // use: MetaOscil <table_size, update_rate, number_of_oscil> MetaoscilName. All oscils used should have the same table_size and **have to be put in increasing order of cutoff_frequencies**.
-MetaOscil<SQUARE_MAX_90_AT_16384_512_NUM_CELLS, AUDIO_RATE, 16> BL_aSq {&aSq90, &aSq101, &aSq122, &aSq138, &aSq154, &aSq174, &aSq210, &aSq264, &aSq327, &aSq431, &aSq546, &aSq744, &aSq1170, &aSq1638, &aSq2730, &aSq8192};
-
-
-// use #define for CONTROL_RATE, not a constant
-#define CONTROL_RATE 256 // Hz, powers of 2 are most reliable
+MetaOscil<SQUARE_MAX_90_AT_16384_512_NUM_CELLS, MOZZI_AUDIO_RATE, 16> BL_aSq {&aSq90, &aSq101, &aSq122, &aSq138, &aSq154, &aSq174, &aSq210, &aSq264, &aSq327, &aSq431, &aSq546, &aSq744, &aSq1170, &aSq1638, &aSq2730, &aSq8192};
 
 int freq = 10;
 
@@ -95,7 +95,7 @@ void setup() {
 
   // Cutoff frequencies can also be set or changed individually.
   BL_aSq.setCutoffFreq(3000, 14);
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 
@@ -109,7 +109,7 @@ void updateControl() {
 }
 
 
-AudioOutput_t updateAudio() {
+AudioOutput updateAudio() {
   //return MonoOutput::from8Bit(aSq90.next());  // try to use this line instead to hear the non-band limited version, sounds a bit like a radio
   return MonoOutput::from8Bit(BL_aSq.next());  // return a sample of the correct oscil to acheive no alias
 

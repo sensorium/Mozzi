@@ -2,12 +2,6 @@
     using Mozzi sonification library and an external dual DAC MCP4922 (original library by Thomas Backman - https://github.com/exscape/electronics/tree/master/Arduino/Libraries/DAC_MCP49xx)
     using an user-defined audioOutput() function.
 
-
-    #define EXTERNAL_AUDIO_OUTPUT true should be uncommented in mozzi_config.h.
-    #define AUDIO_CHANNELS STEREO should be set in mozzi_config.h
-
-
-
     Circuit: (see the DAC library README for details)
 
     MCP4921   //  Connect to:
@@ -22,31 +16,36 @@
     LDAC          to GND
 
 
-    Mozzi documentation/API
-    https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-    Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012, CC by-nc-sa.
-    T. Combriat 2020, CC by-nc-sa.
+   Copyright 2020-2024 T. Combriat and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+#include "MozziConfigValues.h"  // for named option values
+#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_EXTERNAL_TIMED
+#define MOZZI_AUDIO_CHANNELS MOZZI_STEREO
+#define MOZZI_AUDIO_BITS 12
+#define MOZZI_CONTROL_RATE 256 // Hz, powers of 2 are most reliable
+
+#include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/cos2048_int8.h> // table for Oscils to play
 #include <SPI.h>
 #include <DAC_MCP49xx.h>  // https://github.com/tomcombriat/DAC_MCP49XX 
                           // which is an adapted fork from https://github.com/exscape/electronics/tree/master/Arduino/Libraries/DAC_MCP49xx  (Thomas Backman)
 
-#define CONTROL_RATE 256 // Hz, powers of 2 are most reliable
-
 
 // Synthesis part
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCos1(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, AUDIO_RATE> aCos2(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kEnv1(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kEnv2(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aCos1(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_AUDIO_RATE> aCos2(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kEnv1(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kEnv2(COS2048_DATA);
 
 
 
@@ -60,8 +59,8 @@ DAC_MCP49xx dac(DAC_MCP49xx::MCP4922, SS_PIN);
 
 void audioOutput(const AudioOutput f) // f is a structure containing both channels
 {
-  int out_l = f.l() + AUDIO_BIAS;  // the DAC wants positive signals only, so we need to add a bias.
-  int out_r = f.r() + AUDIO_BIAS;
+  int out_l = f.l() + MOZZI_AUDIO_BIAS;  // the DAC wants positive signals only, so we need to add a bias.
+  int out_r = f.r() + MOZZI_AUDIO_BIAS;
 
   dac.output2(out_l, out_r);  // outputs the two channels in one call.
 
@@ -80,7 +79,7 @@ void setup() {
 
   dac.setPortWrite(true);  //comment this line if you do not want to use PortWrite (for non-AVR platforms)
 
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 }
 
 
@@ -94,7 +93,7 @@ void updateControl() {
 }
 
 
-AudioOutput_t updateAudio() {
+AudioOutput updateAudio() {
   return StereoOutput::fromNBit(12, aCos1.next() * env1, aCos2.next() * env2);
 }
 

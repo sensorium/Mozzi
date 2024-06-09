@@ -1,25 +1,27 @@
 /*  Example applying an ADSR envelope to an audio signal
     with Mozzi sonification library.  This shows
-    how to use an ADSR which updates at AUDIO_RATE, in updateAudio(),
-    and output using next() at AUDIO_RATE in updateAudio().
+    how to use an ADSR which updates at MOZZI_AUDIO_RATE, in updateAudio(),
+    and output using next() at MOZZI_AUDIO_RATE in updateAudio().
 
-    Another example in this folder shows an ADSR updating at CONTROL_RATE,
-    which is more efficient, but AUDIO_RATE updates shown in this example
+    Another example in this folder shows an ADSR updating at MOZZI_CONTROL_RATE,
+    which is more efficient, but MOZZI_AUDIO_RATE updates shown in this example
     enable faster envelope transitions.
 
     Demonstrates a simple ADSR object being controlled with
     noteOn() and noteOff() instructions.
 
-    Mozzi documentation/API
-    https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-    Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2013, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h>
 #include <EventDelay.h>
 #include <ADSR.h>
@@ -27,12 +29,12 @@
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
 
-Oscil <8192, AUDIO_RATE> aOscil(SIN8192_DATA);;
+Oscil <8192, MOZZI_AUDIO_RATE> aOscil(SIN8192_DATA);;
 
 // for triggering the envelope
 EventDelay noteDelay;
 
-ADSR <AUDIO_RATE, AUDIO_RATE> envelope;
+ADSR <MOZZI_AUDIO_RATE, MOZZI_AUDIO_RATE> envelope;
 
 boolean note_is_on = true;
 
@@ -98,7 +100,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   envelope.update();
   return MonoOutput::from16Bit((int) (envelope.next() * aOscil.next()));
 }

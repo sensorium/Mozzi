@@ -1,4 +1,15 @@
 /*
+ * meta.h
+ *
+ * This file is part of Mozzi.
+ *
+ * Copyright 2012-2024 Tim Barrass and the Mozzi Team
+ *
+ * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
+ *
+ */
+
+/*
 http://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Int-To-Type
 Template meta-programming extras.
 */
@@ -6,6 +17,15 @@ Template meta-programming extras.
 #ifndef META_H_
 #define META_H_
 
+/** @defgroup soundtables Look-up-tables and python scripts to generate tables or convert sounds.
+
+Look-up-tables and python scripts to generate tables or convert sounds. Includes ready-to-use wave tables and a few example samples which are in the Mozzi/tables and Mozzi/samples folders. You can convert your own sounds from a program like Audacity to tables for Mozzi with a script called char2mozzi.py, in Mozzi/python. Read the int8_t2mozzi.py file for instructions. Also check out the other scripts in the python folder for templates to use if you want to do your own thing.
+*/
+
+/** @defgroup util Utility functions, and debugging
+
+Utility functions. Includes functions for debugging and profiling high frequency code with an oscilloscope when serial is too slow, some miscellaneous functions used internally by Mozzi, python scripts for converting or generating sound tables, and assorted meta-programming utils.
+*/
 
 /** @ingroup util
 Enables you to instantiate a template based on an integer value.

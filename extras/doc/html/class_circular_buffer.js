@@ -1,6 +1,7 @@
 var class_circular_buffer =
 [
     [ "CircularBuffer", "class_circular_buffer.html#a6789c0d6d73594fdd412a39445b5cd67", null ],
+    [ "address", "class_circular_buffer.html#a508cea340f76cea1dc993f0b5124a522", null ],
     [ "count", "class_circular_buffer.html#a04c3ee378688439c72760034e314eed3", null ],
     [ "isEmpty", "class_circular_buffer.html#ad0fa3e6277c9ab56d8bfc190b4271d41", null ],
     [ "isFull", "class_circular_buffer.html#a023321c0416562f30532d5c4848c383b", null ],

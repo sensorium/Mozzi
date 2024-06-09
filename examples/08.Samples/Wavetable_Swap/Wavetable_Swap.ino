@@ -4,10 +4,18 @@
     Demonstrates declaring an Oscil without a table,
     and Oscil::setTable() method.
 
-    Tim Barrass 2012, CC by-nc-sa.
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
+
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
+
+   Copyright 2012-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h>
 #include <EventDelay.h>
 
@@ -16,7 +24,7 @@
 #include <tables/saw_analogue512_int8.h>
 
 // declare with or without a wavetable, and use setTable() later
-Oscil <512, AUDIO_RATE> aOscil;
+Oscil <512, MOZZI_AUDIO_RATE> aOscil;
 
 // for scheduling table swaps
 EventDelay kSwapTablesDelay;
@@ -26,7 +34,7 @@ boolean using_sin = true;
 
 void setup(){
   startMozzi();
-  kSwapTablesDelay.set(1000); // 1 second countdown, within resolution of CONTROL_RATE
+  kSwapTablesDelay.set(1000); // 1 second countdown, within resolution of MOZZI_CONTROL_RATE
   aOscil.setFreq(440.f);
 }
 
@@ -45,7 +53,7 @@ void updateControl(){
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   return MonoOutput::from8Bit(aOscil.next());
 }
 

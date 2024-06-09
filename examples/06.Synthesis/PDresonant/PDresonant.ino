@@ -17,18 +17,20 @@
       (midi has to be disconnected from rx for sketch to upload)
       Audio output on digital pin 9 on a Uno or similar.
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2013-14, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  */
 
 //#include <MIDI.h> may be needed on some systems/versions
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 
 // for fake midi
 #include <EventDelay.h>
@@ -69,7 +71,7 @@ void setup(){
   //MIDI.setHandleNoteOff(HandleNoteOff);
 
   // open MOZZI (:
-  startMozzi(CONTROL_RATE);
+  startMozzi();
 
 }
 
@@ -120,19 +122,19 @@ void updateControl(){
   //MIDI.read();
 
   // analog joystick for controlling speed of modulation: assigned to attack, decay times and sustain level
-  //x_axis = mozziAnalogRead(X);
-  //y_axis = mozziAnalogRead(Y);
+  //x_axis = mozziAnalogRead<10>(X);
+  //y_axis = mozziAnalogRead<10>(Y);
 
   // for testing/demo without external input
   fakeMidiRead();
-  x_axis = 512; //mozziAnalogRead(X);
-  y_axis = 512; // mozziAnalogRead(Y);
+  x_axis = 512; //mozziAnalogRead<10>(X);
+  y_axis = 512; // mozziAnalogRead<10>(Y);
 
   voice.update();
 }
 
 
-AudioOutput_t updateAudio(){
+AudioOutput updateAudio(){
   return MonoOutput::from8Bit(voice.next());
 }
 

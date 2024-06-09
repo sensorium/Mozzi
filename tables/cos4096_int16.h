@@ -1,11 +1,7 @@
 #ifndef COS4096X16_H_
 #define COS4096X16_H_
  
-#if ARDUINO >= 100
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
 #define COS4096X16_NUM_CELLS 4096
 #define COS4096X16_SAMPLERATE 4096

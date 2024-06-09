@@ -13,25 +13,27 @@
     DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.io/Mozzi/
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012, CC by-nc-sa.
+   Copyright 2012-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/chum9_int8.h> // recorded audio wavetable
 #include <tables/cos2048_int8.h> // for filter modulation
 #include <ResonantFilter.h>
 #include <mozzi_rand.h>
 
-Oscil<CHUM9_NUM_CELLS, AUDIO_RATE> aCrunchySound(CHUM9_DATA);
-Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFilterMod(COS2048_DATA);
-Oscil<COS2048_NUM_CELLS, CONTROL_RATE> kFilterMod2(COS2048_DATA);
+Oscil<CHUM9_NUM_CELLS, MOZZI_AUDIO_RATE> aCrunchySound(CHUM9_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kFilterMod(COS2048_DATA);
+Oscil<COS2048_NUM_CELLS, MOZZI_CONTROL_RATE> kFilterMod2(COS2048_DATA);
 
 //Different types of filters available
 LowPassFilter16 rf;  // Equivalent to ResonantFilter<LOWPASS, uint16_t>
@@ -55,15 +57,15 @@ void loop(){
 }
 
 void updateControl(){
-  if (rand(CONTROL_RATE/2) == 0){ // about once every half second
+  if (rand(MOZZI_CONTROL_RATE/2) == 0){ // about once every half second
     kFilterMod.setFreq((float)rand(255)/64);  // choose a new modulation frequency
   }
-  // map the modulation into the filter range (0-255), corresponds with 0-AUDIO_RATE/(sqrt(2)*pi) Hz
+  // map the modulation into the filter range (0-255), corresponds with 0-MOZZI_AUDIO_RATE/(sqrt(2)*pi) Hz
   uint16_t cutoff_freq = (100 + kFilterMod.next()/2) * (170+kFilterMod2.next());
   rf.setCutoffFreqAndResonance(cutoff_freq, resonance);
 }
 
-AudioOutput_t updateAudio(){
-  AudioOutput_t asig = rf.next(aCrunchySound.next());
+AudioOutput updateAudio(){
+  AudioOutput asig = rf.next(aCrunchySound.next());
   return MonoOutput::from8Bit(asig);
 }

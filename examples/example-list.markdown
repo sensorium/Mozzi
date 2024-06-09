@@ -59,6 +59,18 @@ Skeleton
 {% endhighlight %}
 </div>
 ***
+<a id='Skeleton_Multi top'></a>
+Skeleton_Multi
+...(no recording of this one)
+
+<button type='button' id='Skeleton_Multiexpand' onclick='javascript:toggleDisplay(Skeleton_Multi, Skeleton_Multiexpand, Skeleton_Multicollapse)'>show sketch</button>
+<button id='Skeleton_Multicollapse' style='display:none' onclick='javascript:toggleDisplay(Skeleton_Multi, Skeleton_Multiexpand, Skeleton_Multicollapse)'>hide sketch</button>
+<div id='Skeleton_Multi' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/01.Basics/Skeleton_Multi/Skeleton_Multi.ino %}
+{% endhighlight %}
+</div>
+***
 <a id='Table_Resolution top'></a>
 Table_Resolution
 
@@ -88,6 +100,18 @@ Your browser does not support the audio element.</audio>
 <div id='Vibrato' style='display:none'>
 {% highlight c++ %}
 {% include_relative examples/01.Basics/Vibrato/Vibrato.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='Vibrato_Midi_Note top'></a>
+Vibrato_Midi_Note
+...(no recording of this one)
+
+<button type='button' id='Vibrato_Midi_Noteexpand' onclick='javascript:toggleDisplay(Vibrato_Midi_Note, Vibrato_Midi_Noteexpand, Vibrato_Midi_Notecollapse)'>show sketch</button>
+<button id='Vibrato_Midi_Notecollapse' style='display:none' onclick='javascript:toggleDisplay(Vibrato_Midi_Note, Vibrato_Midi_Noteexpand, Vibrato_Midi_Notecollapse)'>hide sketch</button>
+<div id='Vibrato_Midi_Note' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/01.Basics/Vibrato_Midi_Note/Vibrato_Midi_Note.ino %}
 {% endhighlight %}
 </div>
 ***
@@ -664,6 +688,18 @@ Difference_Tone
 {% endhighlight %}
 </div>
 ***
+<a id='Difference_Tone_FixMath top'></a>
+Difference_Tone_FixMath
+...(no recording of this one)
+
+<button type='button' id='Difference_Tone_FixMathexpand' onclick='javascript:toggleDisplay(Difference_Tone_FixMath, Difference_Tone_FixMathexpand, Difference_Tone_FixMathcollapse)'>show sketch</button>
+<button id='Difference_Tone_FixMathcollapse' style='display:none' onclick='javascript:toggleDisplay(Difference_Tone_FixMath, Difference_Tone_FixMathexpand, Difference_Tone_FixMathcollapse)'>hide sketch</button>
+<div id='Difference_Tone_FixMath' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/06.Synthesis/Difference_Tone_FixMath/Difference_Tone_FixMath.ino %}
+{% endhighlight %}
+</div>
+***
 <a id='FMsynth top'></a>
 FMsynth
 
@@ -696,6 +732,30 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='FMsynth_FixMath top'></a>
+FMsynth_FixMath
+...(no recording of this one)
+
+<button type='button' id='FMsynth_FixMathexpand' onclick='javascript:toggleDisplay(FMsynth_FixMath, FMsynth_FixMathexpand, FMsynth_FixMathcollapse)'>show sketch</button>
+<button id='FMsynth_FixMathcollapse' style='display:none' onclick='javascript:toggleDisplay(FMsynth_FixMath, FMsynth_FixMathexpand, FMsynth_FixMathcollapse)'>hide sketch</button>
+<div id='FMsynth_FixMath' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/06.Synthesis/FMsynth_FixMath/FMsynth_FixMath.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='NonAlias_MetaOscil top'></a>
+NonAlias_MetaOscil
+...(no recording of this one)
+
+<button type='button' id='NonAlias_MetaOscilexpand' onclick='javascript:toggleDisplay(NonAlias_MetaOscil, NonAlias_MetaOscilexpand, NonAlias_MetaOscilcollapse)'>show sketch</button>
+<button id='NonAlias_MetaOscilcollapse' style='display:none' onclick='javascript:toggleDisplay(NonAlias_MetaOscil, NonAlias_MetaOscilexpand, NonAlias_MetaOscilcollapse)'>hide sketch</button>
+<div id='NonAlias_MetaOscil' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/06.Synthesis/NonAlias_MetaOscil/NonAlias_MetaOscil.ino %}
+{% endhighlight %}
+</div>
+***
 <a id='PDresonant top'></a>
 PDresonant
 
@@ -725,6 +785,18 @@ Your browser does not support the audio element.</audio>
 <div id='PWM_Phasing' style='display:none'>
 {% highlight c++ %}
 {% include_relative examples/06.Synthesis/PWM_Phasing/PWM_Phasing.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='WaveFolder top'></a>
+WaveFolder
+...(no recording of this one)
+
+<button type='button' id='WaveFolderexpand' onclick='javascript:toggleDisplay(WaveFolder, WaveFolderexpand, WaveFoldercollapse)'>show sketch</button>
+<button id='WaveFoldercollapse' style='display:none' onclick='javascript:toggleDisplay(WaveFolder, WaveFolderexpand, WaveFoldercollapse)'>hide sketch</button>
+<div id='WaveFolder' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/06.Synthesis/WaveFolder/WaveFolder.ino %}
 {% endhighlight %}
 </div>
 ***
@@ -822,6 +894,18 @@ Your browser does not support the audio element.</audio>
 <div id='ADSR_Audio_Rate_Envelope' style='display:none'>
 {% highlight c++ %}
 {% include_relative examples/07.Envelopes/ADSR_Audio_Rate_Envelope/ADSR_Audio_Rate_Envelope.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='ADSR_Audio_Rate_Envelope_Long top'></a>
+ADSR_Audio_Rate_Envelope_Long
+...(no recording of this one)
+
+<button type='button' id='ADSR_Audio_Rate_Envelope_Longexpand' onclick='javascript:toggleDisplay(ADSR_Audio_Rate_Envelope_Long, ADSR_Audio_Rate_Envelope_Longexpand, ADSR_Audio_Rate_Envelope_Longcollapse)'>show sketch</button>
+<button id='ADSR_Audio_Rate_Envelope_Longcollapse' style='display:none' onclick='javascript:toggleDisplay(ADSR_Audio_Rate_Envelope_Long, ADSR_Audio_Rate_Envelope_Longexpand, ADSR_Audio_Rate_Envelope_Longcollapse)'>hide sketch</button>
+<div id='ADSR_Audio_Rate_Envelope_Long' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/07.Envelopes/ADSR_Audio_Rate_Envelope_Long/ADSR_Audio_Rate_Envelope_Long.ino %}
 {% endhighlight %}
 </div>
 ***
@@ -1144,6 +1228,42 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='MultiResonantFilter top'></a>
+MultiResonantFilter
+...(no recording of this one)
+
+<button type='button' id='MultiResonantFilterexpand' onclick='javascript:toggleDisplay(MultiResonantFilter, MultiResonantFilterexpand, MultiResonantFiltercollapse)'>show sketch</button>
+<button id='MultiResonantFiltercollapse' style='display:none' onclick='javascript:toggleDisplay(MultiResonantFilter, MultiResonantFilterexpand, MultiResonantFiltercollapse)'>hide sketch</button>
+<div id='MultiResonantFilter' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/10.Audio_Filters/MultiResonantFilter/MultiResonantFilter.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='ResonantFilter top'></a>
+ResonantFilter
+...(no recording of this one)
+
+<button type='button' id='ResonantFilterexpand' onclick='javascript:toggleDisplay(ResonantFilter, ResonantFilterexpand, ResonantFiltercollapse)'>show sketch</button>
+<button id='ResonantFiltercollapse' style='display:none' onclick='javascript:toggleDisplay(ResonantFilter, ResonantFilterexpand, ResonantFiltercollapse)'>hide sketch</button>
+<div id='ResonantFilter' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/10.Audio_Filters/ResonantFilter/ResonantFilter.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='ResonantFilter16 top'></a>
+ResonantFilter16
+...(no recording of this one)
+
+<button type='button' id='ResonantFilter16expand' onclick='javascript:toggleDisplay(ResonantFilter16, ResonantFilter16expand, ResonantFilter16collapse)'>show sketch</button>
+<button id='ResonantFilter16collapse' style='display:none' onclick='javascript:toggleDisplay(ResonantFilter16, ResonantFilter16expand, ResonantFilter16collapse)'>hide sketch</button>
+<div id='ResonantFilter16' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/10.Audio_Filters/ResonantFilter16/ResonantFilter16.ino %}
+{% endhighlight %}
+</div>
+***
 <a id='StateVariableFilter top'></a>
 StateVariableFilter
 
@@ -1290,6 +1410,18 @@ Shepard_Tone_HIFI
 {% endhighlight %}
 </div>
 ***
+<a id='Stereo top'></a>
+Stereo
+...(no recording of this one)
+
+<button type='button' id='Stereoexpand' onclick='javascript:toggleDisplay(Stereo, Stereoexpand, Stereocollapse)'>show sketch</button>
+<button id='Stereocollapse' style='display:none' onclick='javascript:toggleDisplay(Stereo, Stereoexpand, Stereocollapse)'>hide sketch</button>
+<div id='Stereo' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/12.Misc/Stereo/Stereo.ino %}
+{% endhighlight %}
+</div>
+***
 <a id='Stereo_Hack top'></a>
 Stereo_Hack
 
@@ -1315,6 +1447,115 @@ Stereo_Hack_Pan
 <div id='Stereo_Hack_Pan' style='display:none'>
 {% highlight c++ %}
 {% include_relative examples/12.Misc/Stereo_Hack_Pan/Stereo_Hack_Pan.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='Stereo_Pan top'></a>
+Stereo_Pan
+...(no recording of this one)
+
+<button type='button' id='Stereo_Panexpand' onclick='javascript:toggleDisplay(Stereo_Pan, Stereo_Panexpand, Stereo_Pancollapse)'>show sketch</button>
+<button id='Stereo_Pancollapse' style='display:none' onclick='javascript:toggleDisplay(Stereo_Pan, Stereo_Panexpand, Stereo_Pancollapse)'>hide sketch</button>
+<div id='Stereo_Pan' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/12.Misc/Stereo_Pan/Stereo_Pan.ino %}
+{% endhighlight %}
+</div>
+***
+<h2 id='13.External_Audio_Output'> 13.External_Audio_Output </h2>
+<a id='ESP32_Bluetooth top'></a>
+ESP32_Bluetooth
+...(no recording of this one)
+
+<button type='button' id='ESP32_Bluetoothexpand' onclick='javascript:toggleDisplay(ESP32_Bluetooth, ESP32_Bluetoothexpand, ESP32_Bluetoothcollapse)'>show sketch</button>
+<button id='ESP32_Bluetoothcollapse' style='display:none' onclick='javascript:toggleDisplay(ESP32_Bluetooth, ESP32_Bluetoothexpand, ESP32_Bluetoothcollapse)'>hide sketch</button>
+<div id='ESP32_Bluetooth' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/13.External_Audio_Output/ESP32_Bluetooth/ESP32_Bluetooth.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='FMsynth_MCP4921_mono_12bits top'></a>
+FMsynth_MCP4921_mono_12bits
+...(no recording of this one)
+
+<button type='button' id='FMsynth_MCP4921_mono_12bitsexpand' onclick='javascript:toggleDisplay(FMsynth_MCP4921_mono_12bits, FMsynth_MCP4921_mono_12bitsexpand, FMsynth_MCP4921_mono_12bitscollapse)'>show sketch</button>
+<button id='FMsynth_MCP4921_mono_12bitscollapse' style='display:none' onclick='javascript:toggleDisplay(FMsynth_MCP4921_mono_12bits, FMsynth_MCP4921_mono_12bitsexpand, FMsynth_MCP4921_mono_12bitscollapse)'>hide sketch</button>
+<div id='FMsynth_MCP4921_mono_12bits' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/13.External_Audio_Output/FMsynth_MCP4921_mono_12bits/FMsynth_MCP4921_mono_12bits.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='MCP4922_mono_24bits top'></a>
+MCP4922_mono_24bits
+...(no recording of this one)
+
+<button type='button' id='MCP4922_mono_24bitsexpand' onclick='javascript:toggleDisplay(MCP4922_mono_24bits, MCP4922_mono_24bitsexpand, MCP4922_mono_24bitscollapse)'>show sketch</button>
+<button id='MCP4922_mono_24bitscollapse' style='display:none' onclick='javascript:toggleDisplay(MCP4922_mono_24bits, MCP4922_mono_24bitsexpand, MCP4922_mono_24bitscollapse)'>hide sketch</button>
+<div id='MCP4922_mono_24bits' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/13.External_Audio_Output/MCP4922_mono_24bits/MCP4922_mono_24bits.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='PT8211_stereo_16bits top'></a>
+PT8211_stereo_16bits
+...(no recording of this one)
+
+<button type='button' id='PT8211_stereo_16bitsexpand' onclick='javascript:toggleDisplay(PT8211_stereo_16bits, PT8211_stereo_16bitsexpand, PT8211_stereo_16bitscollapse)'>show sketch</button>
+<button id='PT8211_stereo_16bitscollapse' style='display:none' onclick='javascript:toggleDisplay(PT8211_stereo_16bits, PT8211_stereo_16bitsexpand, PT8211_stereo_16bitscollapse)'>hide sketch</button>
+<div id='PT8211_stereo_16bits' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/13.External_Audio_Output/PT8211_stereo_16bits/PT8211_stereo_16bits.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='PT8211_stereo_16bits_STM32_SPI2 top'></a>
+PT8211_stereo_16bits_STM32_SPI2
+...(no recording of this one)
+
+<button type='button' id='PT8211_stereo_16bits_STM32_SPI2expand' onclick='javascript:toggleDisplay(PT8211_stereo_16bits_STM32_SPI2, PT8211_stereo_16bits_STM32_SPI2expand, PT8211_stereo_16bits_STM32_SPI2collapse)'>show sketch</button>
+<button id='PT8211_stereo_16bits_STM32_SPI2collapse' style='display:none' onclick='javascript:toggleDisplay(PT8211_stereo_16bits_STM32_SPI2, PT8211_stereo_16bits_STM32_SPI2expand, PT8211_stereo_16bits_STM32_SPI2collapse)'>hide sketch</button>
+<div id='PT8211_stereo_16bits_STM32_SPI2' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/13.External_Audio_Output/PT8211_stereo_16bits_STM32_SPI2/PT8211_stereo_16bits_STM32_SPI2.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='Sinewave_R2R_DAC top'></a>
+Sinewave_R2R_DAC
+...(no recording of this one)
+
+<button type='button' id='Sinewave_R2R_DACexpand' onclick='javascript:toggleDisplay(Sinewave_R2R_DAC, Sinewave_R2R_DACexpand, Sinewave_R2R_DACcollapse)'>show sketch</button>
+<button id='Sinewave_R2R_DACcollapse' style='display:none' onclick='javascript:toggleDisplay(Sinewave_R2R_DAC, Sinewave_R2R_DACexpand, Sinewave_R2R_DACcollapse)'>hide sketch</button>
+<div id='Sinewave_R2R_DAC' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/13.External_Audio_Output/Sinewave_R2R_DAC/Sinewave_R2R_DAC.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='Sinewave_R2R_DAC_74HC595 top'></a>
+Sinewave_R2R_DAC_74HC595
+...(no recording of this one)
+
+<button type='button' id='Sinewave_R2R_DAC_74HC595expand' onclick='javascript:toggleDisplay(Sinewave_R2R_DAC_74HC595, Sinewave_R2R_DAC_74HC595expand, Sinewave_R2R_DAC_74HC595collapse)'>show sketch</button>
+<button id='Sinewave_R2R_DAC_74HC595collapse' style='display:none' onclick='javascript:toggleDisplay(Sinewave_R2R_DAC_74HC595, Sinewave_R2R_DAC_74HC595expand, Sinewave_R2R_DAC_74HC595collapse)'>hide sketch</button>
+<div id='Sinewave_R2R_DAC_74HC595' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/13.External_Audio_Output/Sinewave_R2R_DAC_74HC595/Sinewave_R2R_DAC_74HC595.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='Stereo_Pan_MCP4922_stereo_12bits top'></a>
+Stereo_Pan_MCP4922_stereo_12bits
+...(no recording of this one)
+
+<button type='button' id='Stereo_Pan_MCP4922_stereo_12bitsexpand' onclick='javascript:toggleDisplay(Stereo_Pan_MCP4922_stereo_12bits, Stereo_Pan_MCP4922_stereo_12bitsexpand, Stereo_Pan_MCP4922_stereo_12bitscollapse)'>show sketch</button>
+<button id='Stereo_Pan_MCP4922_stereo_12bitscollapse' style='display:none' onclick='javascript:toggleDisplay(Stereo_Pan_MCP4922_stereo_12bits, Stereo_Pan_MCP4922_stereo_12bitsexpand, Stereo_Pan_MCP4922_stereo_12bitscollapse)'>hide sketch</button>
+<div id='Stereo_Pan_MCP4922_stereo_12bits' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/13.External_Audio_Output/Stereo_Pan_MCP4922_stereo_12bits/Stereo_Pan_MCP4922_stereo_12bits.ino %}
 {% endhighlight %}
 </div>
 ***

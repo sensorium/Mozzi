@@ -9,16 +9,18 @@
     DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.io/Mozzi/
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012, CC by-nc-sa.
+   Copyright 2012-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Sample.h> // Sample template
 #include <samples/bamboo/bamboo_00_2048_int8.h> // wavetable data
 #include <samples/bamboo/bamboo_01_2048_int8.h> // wavetable data
@@ -27,9 +29,9 @@
 #include <mozzi_rand.h>
 
 // use: Sample <table_size, update_rate> SampleName (wavetable)
-Sample <BAMBOO_00_2048_NUM_CELLS, AUDIO_RATE>aBamboo0(BAMBOO_00_2048_DATA);
-Sample <BAMBOO_01_2048_NUM_CELLS, AUDIO_RATE>aBamboo1(BAMBOO_01_2048_DATA);
-Sample <BAMBOO_02_2048_NUM_CELLS, AUDIO_RATE>aBamboo2(BAMBOO_02_2048_DATA);
+Sample <BAMBOO_00_2048_NUM_CELLS, MOZZI_AUDIO_RATE>aBamboo0(BAMBOO_00_2048_DATA);
+Sample <BAMBOO_01_2048_NUM_CELLS, MOZZI_AUDIO_RATE>aBamboo1(BAMBOO_01_2048_DATA);
+Sample <BAMBOO_02_2048_NUM_CELLS, MOZZI_AUDIO_RATE>aBamboo2(BAMBOO_02_2048_DATA);
 
 // for scheduling audio gain changes
 EventDelay kTriggerDelay;
@@ -39,7 +41,7 @@ void setup(){
   aBamboo0.setFreq((float) BAMBOO_00_2048_SAMPLERATE / (float) BAMBOO_00_2048_NUM_CELLS); // play at the speed it was recorded at
   aBamboo1.setFreq((float) BAMBOO_01_2048_SAMPLERATE / (float) BAMBOO_01_2048_NUM_CELLS);
   aBamboo2.setFreq((float) BAMBOO_02_2048_SAMPLERATE / (float) BAMBOO_02_2048_NUM_CELLS);
-  kTriggerDelay.set(111); // countdown ms, within resolution of CONTROL_RATE
+  kTriggerDelay.set(111); // countdown ms, within resolution of MOZZI_CONTROL_RATE
 }
 
 
@@ -79,15 +81,13 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput updateAudio(){
   int asig= (int)
     ((long) aBamboo0.next()*gains.gain0 +
       aBamboo1.next()*gains.gain1 +
       aBamboo2.next()*gains.gain2)>>4;
-  //clip to keep audio loud but still in range
-  if (asig > 243) asig = 243;
-  if (asig < -244) asig = -244;
-  return asig;
+  // clip to keep sample loud but still in range
+  return MonoOutput::fromAlmostNBit(9, asig).clip();
 }
 
 

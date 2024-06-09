@@ -12,20 +12,22 @@
     DAC/A14 on Teensy 3.1, or
     check the README or http://sensorium.github.io/Mozzi/
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012, CC by-nc-sa.
+   Copyright 2012-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <Phasor.h>
 
-Phasor <AUDIO_RATE> aPhasor1;
-Phasor <AUDIO_RATE> aPhasor2;
+Phasor <MOZZI_AUDIO_RATE> aPhasor1;
+Phasor <MOZZI_AUDIO_RATE> aPhasor2;
 
 float freq = 55.f;
 
@@ -40,10 +42,10 @@ void updateControl(){
 }
 
 
-int updateAudio(){
+AudioOutput updateAudio(){
   char asig1 = (char)(aPhasor1.next()>>24);
   char asig2 = (char)(aPhasor2.next()>>24);
-  return ((int)asig1-asig2)/2;
+  return MonoOutput::fromNBit(9, ((int)asig1-asig2));
 }
 
 

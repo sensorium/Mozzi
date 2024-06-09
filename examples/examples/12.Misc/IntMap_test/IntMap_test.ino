@@ -1,14 +1,19 @@
 /* Maps a range of input numbers to an output range, comparing
-	 the results of Mozzi's IntMap object with Arduino map().
+   the results of Mozzi's IntMap object with Arduino map().
 
-	 Demonstrates IntMap, a fast integer replacement for map().
+   Demonstrates IntMap, a fast integer replacement for map().
 
-	 Circuit: not required
+   Circuit: not required
 
-	 Mozzi help/discussion/announcements:
-	 https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-	 Tim Barrass 2014, CC by-nc-sa.
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
+
+   Copyright 2014-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
 #include <IntMap.h>

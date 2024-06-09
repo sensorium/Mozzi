@@ -1,11 +1,7 @@
 #ifndef BLAHBLAH4B_H_
 #define BLAHBLAH4B_H_
  
-#if ARDUINO >= 100
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include "mozzi_pgmspace.h"
  
 #define BLAHBLAH4B_NUM_CELLS 22569

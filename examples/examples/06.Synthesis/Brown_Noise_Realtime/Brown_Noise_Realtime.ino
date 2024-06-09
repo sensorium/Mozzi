@@ -9,16 +9,18 @@
 
     Circuit: Audio output on digital pin 9 on a Uno or similar.
 
-		Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 20118, CC by-nc-sa.
+   Copyright 2013-2024 Tim Barrass and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+#include <Mozzi.h>
 #include <mozzi_rand.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator
@@ -26,7 +28,7 @@
 #define FILTER_SHIFT 6 // 5 or 6 work well - the spectrum of 6 looks a bit more linear, like the generated brown noise in Audacity
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 void setup()
 {
@@ -41,7 +43,7 @@ void updateControl()
 }
 
 
-int updateAudio()
+AudioOutput updateAudio()
 {
   static int filtered;
 
@@ -49,7 +51,7 @@ int updateAudio()
   filtered = filtered - (filtered>>FILTER_SHIFT) + whitenoise;
 
   int asig = filtered>>3; // shift to 8 bit range (trial and error)
-  return ((int)asig * aSin.next())>>8;
+  return MonoOutput::from16Bit((int)asig * aSin.next());
 }
 
 

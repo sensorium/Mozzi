@@ -2,9 +2,6 @@
     using Mozzi sonification library and an user-defined
     audioOutput() function.
 
-    #define EXTERNAL_AUDIO_OUTPUT true should be uncommented
-    in mozzi_config.h.
-
     Demonstrates the use of audioOutput() using a R/2R DAC
     connected on 6 digital pins of an Arduino.
 
@@ -32,44 +29,44 @@
     For more details on the R/2R DAC see:
     https://hackaday.com/2015/11/05/logic-noise-digital-to-analog-with-an-r-2r-dac/
 
-    Mozzi documentation/API
-		https://sensorium.github.io/Mozzi/doc/html/index.html
+   Mozzi documentation/API
+   https://sensorium.github.io/Mozzi/doc/html/index.html
 
-		Mozzi help/discussion/announcements:
-    https://groups.google.com/forum/#!forum/mozzi-users
+   Mozzi help/discussion/announcements:
+   https://groups.google.com/forum/#!forum/mozzi-users
 
-    Tim Barrass 2012, CC by-nc-sa.
-    T. Combriat 2020, CC by-nc-sa.
+   Copyright 2020-2024 T. Combriat and the Mozzi Team
+
+   Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#include <MozziGuts.h>
+#include "MozziConfigValues.h"  // for named option values
+#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_EXTERNAL_TIMED
+#define MOZZI_AUDIO_BITS 6
+#define MOZZI_CONTROL_RATE 64 // Hz, powers of 2 are most reliable
+
+#include <Mozzi.h>
 #include <Oscil.h> // oscillator template
 #include <tables/sin2048_int8.h> // sine table for oscillator
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
-
-// use #define for CONTROL_RATE, not a constant
-#define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
-
-
+Oscil <SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
 // External output parameters for this example
-#define R2R_N_PIN 6  // Number of stage of the resistance ladder = number of digits of the DAC
+#define R2R_N_PIN MOZZI_AUDIO_BITS  // Number of stage of the resistance ladder = number of digits of the DAC, can be defined through MOZZI_AUDIO_BITS
 const int r2r_pin[R2R_N_PIN] = {30, 31, 32, 33, 34, 35}; // pins to the resistance ladder, in order,
                                                          // starting with LSB (pin closer to GND)
                                                          // so D0, D1, etc.
 
-#define AUDIO_BIAS 32    // we are at 6 bits so we have to bias the signal of 2^(6-1)=32
+//#define AUDIO_BIAS 32    // we are at 6 bits so we have to bias the signal of 2^(6-1)=32, not needed since PR#98
 
-void audioOutput(int l, int r) // l is the sample we want to output, it is zero-centered
-                               // r is used when using STEREO_HACK (see mozzi_config.h)
+void audioOutput(const AudioOutput f) // f is a structure potentially containing both channels, scaled according to MOZZI_AUDIO_BITS
 {
-  l += AUDIO_BIAS;   // make the signal positive
+  int out = f.l() + MOZZI_AUDIO_BIAS; // get the audio and make it positive
   int mask = 0b00000001;   // mask for outputting only 1 bit (one per pin)
     for (int i = 0; i < R2R_N_PIN; i++)
     {
-      digitalWrite(r2r_pin[i], bool((l >> i) & mask));  // write on digital Pins:
+      digitalWrite(r2r_pin[i], bool((out >> i) & mask));  // write on digital Pins:
     }                                                   // shift the value to the right
 }                                                       // apply the mask to get only the last bit
                                                         // use that value in digitalWrite()
@@ -77,7 +74,7 @@ void audioOutput(int l, int r) // l is the sample we want to output, it is zero-
 
 void setup() {
   for (int i = 0; i < R2R_N_PIN; i++) pinMode(r2r_pin[i], OUTPUT);
-  startMozzi(CONTROL_RATE); // :)
+  startMozzi(); // :)
   aSin.setFreq(200); // set the frequency
 }
 
@@ -87,12 +84,9 @@ void updateControl() {
 }
 
 
-int updateAudio() {
-  return aSin.next()>>2; // return an int signal centred around 0
-}                        // as we are using only 6 bits, and aSin 
-                         // is returning of 8 we have to get rid 
-                         // of two
-
+AudioOutput updateAudio() {
+  return MonoOutput::from8Bit(aSin.next()); // return an int signal centred around 0, 8bits wide
+}                 
 
 
 void loop() {

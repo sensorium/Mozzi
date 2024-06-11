@@ -86,7 +86,7 @@ If desparate, there is still a "Mozzi_1" branch in the git repository, but this 
 ## Using Mozzi
 Here's a template for an empty Mozzi sketch:
 
-{% highlight c++ %}
+```
 #include <Mozzi.h>   // at the top of your sketch
 
 void setup() {
@@ -104,7 +104,7 @@ AudioOutput_t updateAudio(){
 void loop() {
 	audioHook();
 }
-{% endhighlight %}
+```
 
 There's a detailed example explaining the different parts [here](https://sensorium.github.io/Mozzi/learn/a-simple-sketch/).
 

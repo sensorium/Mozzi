@@ -132,7 +132,7 @@ Look for code and usage changes [here](extras/NEWS.txt).
 For hardware specific details, including supported features, caveats, and hardware-dependent configuration options,
 refer to the [Hardware Section of the API-Documentation](https://sensorium.github.io/Mozzi/doc/html/hardware.html).
 
-## Compatibiliy issues
+## Compatibility issues
 
 * In most setups, Mozzi claims one or two hardware timers. This may result in incompatibilities with certain libraries, and / or the ability to use timer-based functions such as `analogWrite()`. As the details on this
   differ a lot between the supported boards, read up on the details - and available workarounds - in the [Hardware Section of the API-Documentation](https://sensorium.github.io/Mozzi/doc/html/hardware.html).
@@ -154,7 +154,7 @@ refer to the [Hardware Section of the API-Documentation](https://sensorium.githu
 External chips (DAC) can also be used on any platform which does not support natively the I2S protocol  using an user defined `audioOutput` function. This can allow a greater audio quality over the native ways to output the sound (PWM for AVR Arduinos and STM32 and 12 bit DAC for Teensy 3.*).
 Examples are provided for the MCP492X DAC (12 bit on SPI) and for the (PT8211) 16 bit stereo DAC using SPI port to emulate the I2S protocol. The latter should be compatible with any DAC using I2S.
 
-### Extendig the library itself
+### Extending the library itself
 
 If you enjoy using Mozzi for a project, or have extended it, we would be
 pleased to hear about it and provide support wherever possible. Contribute

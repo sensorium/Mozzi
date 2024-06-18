@@ -153,7 +153,7 @@ uint16_t getAudioInput() { return audio_input; }
 CircularBuffer<uint16_t> input_buffer; // fixed size 256
 #define audioInputAvailable() (!input_buffer.isEmpty())
 #define readAudioInput() (input_buffer.read())
-/** NOTE: Triggered at MOZZI_AUDIO_RATE via defaultAudioOutput(). In addition to the AUDIO_INPUT_PIN, at most one reading is taken for mozziAnalogRead().  */
+/** NOTE: Triggered at MOZZI_AUDIO_RATE via defaultAudioOutput(). In addition to the MOZZI_AUDIO_INPUT_PIN, at most one reading is taken for mozziAnalogRead().  */
 inline void advanceADCStep() {
   switch (adc_count) {
   case 0:
@@ -172,7 +172,7 @@ inline void advanceADCStep() {
   case 2:
     // 3us
     analog_readings[channelNumToIndex(current_channel)] = getADCReading();
-    adcStartConversion(adcPinToChannelNum(AUDIO_INPUT_PIN));  // -> result is ignored, but first thing in the next cycle, a second reading is taken.
+    adcStartConversion(adcPinToChannelNum(MOZZI_AUDIO_INPUT_PIN));  // -> result is ignored, but first thing in the next cycle, a second reading is taken.
     break;
 
   }

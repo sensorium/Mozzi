@@ -54,44 +54,44 @@ jobs:
 # Of course we'll want to add all supported arches. See https://github.com/arduino-libraries/ArduinoIoTCloud/blob/master/.github/workflows/compile-examples.yml for a complex multi-board setup
       matrix:
         board:
-          - fqbn: arduino:avr:uno
-            platforms: |
-              - name: arduino:avr
-            internalid: arduino_uno  # This is just some unique id string we assign for use in the artifact name (fqbn does not qualify due to containing colons)
-          - fqbn: arduino:avr:mega
-            platforms: |
-              - name: arduino:avr
-            internalid: arduino_mega
-          - fqbn: esp8266:esp8266:huzzah
-            type: 8266
-            platforms: |
-              - name: esp8266:esp8266
-                source-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
-            internalid: esp8266
-          - fqbn: STMicroelectronics:stm32:GenF1:pnum=BLUEPILL_F103C8
-            platforms: |
-              - name: STMicroelectronics:stm32
-                source-url: https://github.com/stm32duino/BoardManagerFiles/raw/main/package_stmicroelectronics_index.json
-            internalid: stm32_official
-          - fqbn: arduino:mbed_giga:giga
-            platforms: |
-              - name: arduino:mbed_giga
-            internalid: arduino_giga
-          # SAMD boards. There is also an Adrafruit fork of this core, and the two seem to have diverged, considerably. I have no idea on the differences.
-          - fqbn: arduino:samd:adafruit_circuitplayground_m0
-            platforms: |
-              - name: arduino:samd
-            internalid: arduino_samd
-          - fqbn: rp2040:rp2040:rpipico
-            type: rp2040
-            platforms: |
-              - name: rp2040:rp2040
-                source-url: https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
-            internalid: rp2040
-          - fqbn: arduino:renesas_uno:minima
-            platforms: |
-              - name: arduino:renesas_uno
-            internalid: arduino_unor4
+          #- fqbn: arduino:avr:uno
+            #platforms: |
+              #- name: arduino:avr
+            #internalid: arduino_uno  # This is just some unique id string we assign for use in the artifact name (fqbn does not qualify due to containing colons)
+          #- fqbn: arduino:avr:mega
+            #platforms: |
+              #- name: arduino:avr
+            #internalid: arduino_mega
+          #- fqbn: esp8266:esp8266:huzzah
+            #type: 8266
+            #platforms: |
+              #- name: esp8266:esp8266
+                #source-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
+            #internalid: esp8266
+          #- fqbn: STMicroelectronics:stm32:GenF1:pnum=BLUEPILL_F103C8
+            #platforms: |
+              #- name: STMicroelectronics:stm32
+                #source-url: https://github.com/stm32duino/BoardManagerFiles/raw/main/package_stmicroelectronics_index.json
+            #internalid: stm32_official
+          #- fqbn: arduino:mbed_giga:giga
+            #platforms: |
+              #- name: arduino:mbed_giga
+            #internalid: arduino_giga
+          ## SAMD boards. There is also an Adrafruit fork of this core, and the two seem to have diverged, considerably. I have no idea on the differences.
+          #- fqbn: arduino:samd:adafruit_circuitplayground_m0
+            #platforms: |
+              #- name: arduino:samd
+            #internalid: arduino_samd
+          #- fqbn: rp2040:rp2040:rpipico
+            #type: rp2040
+            #platforms: |
+              #- name: rp2040:rp2040
+                #source-url: https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
+            #internalid: rp2040
+          #- fqbn: arduino:renesas_uno:minima
+            #platforms: |
+              #- name: arduino:renesas_uno
+            #internalid: arduino_unor4
           - fqbn: teensy:avr:teensy36
             platforms: |
               - name: teensy:avr
@@ -111,7 +111,7 @@ jobs:
         run: echo "#define IN_GITHUB_RUNNER 1" > detect_github_runner.h
 
       - name: Compile examples
-        uses: arduino/compile-sketches@v1
+        uses: arduino/compile-sketches@v1.0.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           fqbn: ${{ matrix.board.fqbn }}

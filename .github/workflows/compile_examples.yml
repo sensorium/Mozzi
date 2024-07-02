@@ -95,6 +95,7 @@ jobs:
           - fqbn: teensy:avr:teensy36
             platforms: |
               - name: teensy:avr
+                version: 1.57.3
                 source-url: https://www.pjrc.com/teensy/package_teensy_index.json
             internalid: teensy36
           - fqbn: teensy:avr:teensy41
@@ -111,7 +112,7 @@ jobs:
         run: echo "#define IN_GITHUB_RUNNER 1" > detect_github_runner.h
 
       - name: Compile examples
-        uses: arduino/compile-sketches@v1.0.0
+        uses: arduino/compile-sketches@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           fqbn: ${{ matrix.board.fqbn }}

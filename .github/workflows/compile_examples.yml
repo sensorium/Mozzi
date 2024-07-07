@@ -113,6 +113,7 @@ jobs:
       - name: Compile examples
         uses: arduino/compile-sketches@v1.0.0
         with:
+          cli-version: 0.35.3
           github-token: ${{ secrets.GITHUB_TOKEN }}
           fqbn: ${{ matrix.board.fqbn }}
           platforms: ${{ matrix.board.platforms }}

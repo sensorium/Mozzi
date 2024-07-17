@@ -113,6 +113,7 @@ jobs:
       - name: Compile examples
         uses: arduino/compile-sketches@v1
         with:
+          cli-version: 0.35.3 # See https://github.com/arduino/arduino-cli/issues/2658. Current version (1.0.2) breaks with Teensy.
           github-token: ${{ secrets.GITHUB_TOKEN }}
           fqbn: ${{ matrix.board.fqbn }}
           platforms: ${{ matrix.board.platforms }}

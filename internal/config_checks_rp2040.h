@@ -12,7 +12,7 @@
 #ifndef CONFIG_CHECK_RP2040_H
 #define CONFIG_CHECK_RP2040_H
 
-/** @ingroup hardware
+/**
  * @page hardware_rp2040 Mozzi on RP2040 (Raspberry Pi Pico)
  *
  * port by Thomas Friedrichsmeier
@@ -36,7 +36,7 @@
  *
  * The default mode is @ref rp2040_pwm .
  *
- * @section rp2040_pdm MOZZI_OUTPUT_PWM
+ * @section rp2040_pwm MOZZI_OUTPUT_PWM
  * Audio output is written to pin 0 (mono) or 0 and 1 (stereo), by default, with 11 bits of ouput resolution.
  * One hardware timer interrupt and one DMA channel are claimed (number not hardcoded), a non-exclusive handler is installed on DMA_IRQ_0.
  *
@@ -85,7 +85,7 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPU
 
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
 #  if !defined(MOZZI_AUDIO_BITS)
-#    define MOZZI_AUDIO_BITS 11
+#    define MOZZI_AUDIO_BITS 16 // PWMAudio expects 16bits
 #  endif
 #  if !defined(MOZZI_AUDIO_PIN_1)
 #    define MOZZI_AUDIO_PIN_1 0
@@ -93,6 +93,9 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPU
 #  if !defined(MOZZI_AUDIO_PIN_2)
 #    define MOZZI_AUDIO_PIN_2 1
 #  endif
+#  define BYPASS_MOZZI_OUTPUT_BUFFER true
+#  define MOZZI_RP2040_BUFFERS 8       // number of DMA buffers used
+#  define MOZZI_RP2040_BUFFER_SIZE 256  // total size of the buffer, in samples
 #endif
 
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC)

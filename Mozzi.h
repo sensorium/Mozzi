@@ -10,6 +10,13 @@
  */
 
 
+/** @page basic_info Getting Started
+ *
+ * You are currently looking at the Mozzi API documentation. It is the most comprehensive source of all functions and
+ * classes available in Mozzi, but not necesarrily the best starting point for learning about Mozzi. For getting
+ * started, it is recommended to browse through the tutorials at https://sensorium.github.io/Mozzi/learn/ .
+ */
+
 /** @ingroup core 
  * @file Mozzi.h
  *

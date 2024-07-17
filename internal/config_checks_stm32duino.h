@@ -12,7 +12,7 @@
 #ifndef CONFIG_CHECKS_STM32DUINO_H
 #define CONFIG_CHECKS_STM32DUINO_H
 
-/** @ingroup hardware
+/**
 * @page hardware_stm32_disambiguation Mozzi on STM32-based boards - disambiguation
 *
 *  * The situation on STM32-based boards is rather confusing, as there are several competing Arduino cores. Importantly:
@@ -27,13 +27,13 @@
 *      For using this with Mozzi, see @ref hardware_stm32duino
 * */
 
-/** @ingroup hardware
+/**
  * @page hardware_stm32duino Mozzi on STM32duino-based boards.
  *
  * port by Thomas Friedrichsmeier
  *
  * @note
- * Be sure to understand the info given at @ref hardwware_stm32_disambiguation . This page is about using Mozzi with the STM32duino core.
+ * Be sure to understand the info given at @ref hardware_stm32_disambiguation . This page is about using Mozzi with the STM32duino core.
  *
  * @section stm32duino_status Port status and usage notes
  * Tested on a STM32F103C8T6 blue pill board as well as an STM32F411CE black pill board, i.e. on sboards _without_ a

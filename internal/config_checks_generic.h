@@ -9,6 +9,25 @@
  *
 */
 
+/** @page hardware Hardware and configuration
+ *
+ * Mozzi works on many different platforms, but not the same output modes are available on all hardware. For boards specific notes
+ * and configuration options, see the relevant sub-pages in this section:
+ *
+ *   - @subpage hardware_avr
+ *   - @subpage hardware_esp32
+ *   - @subpage hardware_esp8266
+ *   - @subpage hardware_mbed
+ *   - @subpage hardware_renesas
+ *   - @subpage hardware_rp2040
+ *   - @subpage hardware_samd
+ *   - @subpage hardware_stm32duino
+ *   - @subpage hardware_stm32_maple
+ *   - (@subpage hardware_stm32_disambiguation)
+ *   - @subpage hardware_teensy3
+ *   - @subpage hardware_teensy4
+*/
+
 /** For Mozzi-internal use: Check configuration options for (some) invalid settings, and apply default for options that have not been set, so far.
  * */
 
@@ -107,7 +126,7 @@ MOZZI_CHECK_POW2(MOZZI_CONTROL_RATE)
 #error "MOZZI_AUDIO_INPUT depends on MOZZI_ANALOG_READ option"
 #endif
 
-#if !MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE) && defined(MOZZI_AUDIO_INPUT_PIN)
+#if MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE) && defined(MOZZI_AUDIO_INPUT_PIN)
 #warning "MOZZI_AUDIO_INPUT_PIN defined without MOZZI_AUDIO_INPUT"
 #endif
 

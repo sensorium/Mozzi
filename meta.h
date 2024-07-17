@@ -17,7 +17,14 @@ Template meta-programming extras.
 #ifndef META_H_
 #define META_H_
 
-/** @defgroup util Assorted meta-programming utils
+/** @defgroup soundtables Look-up-tables and python scripts to generate tables or convert sounds.
+
+Look-up-tables and python scripts to generate tables or convert sounds. Includes ready-to-use wave tables and a few example samples which are in the Mozzi/tables and Mozzi/samples folders. You can convert your own sounds from a program like Audacity to tables for Mozzi with a script called char2mozzi.py, in Mozzi/python. Read the int8_t2mozzi.py file for instructions. Also check out the other scripts in the python folder for templates to use if you want to do your own thing.
+*/
+
+/** @defgroup util Utility functions, and debugging
+
+Utility functions. Includes functions for debugging and profiling high frequency code with an oscilloscope when serial is too slow, some miscellaneous functions used internally by Mozzi, python scripts for converting or generating sound tables, and assorted meta-programming utils.
 */
 
 /** @ingroup util

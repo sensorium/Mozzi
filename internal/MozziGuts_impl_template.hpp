@@ -9,7 +9,9 @@
  *
 */
 
-/** README! 
+/** @file MozziGuts_impl_template.hpp Template for implementation of new ports
+ *
+ * README!
  * This file is meant to be used as a template when adding support for a new platform. Please read these instructions, first.
  *
  *  Files involved:

@@ -12,7 +12,7 @@
 #ifndef CONFIG_CHECK_ESP8266_H
 #define CONFIG_CHECK_ESP8266_H
 
-/** @ingroup hardware
+/**
  * @page hardware_esp8266 Mozzi on ESP32-based boards.
  *
  * port by Thomas Friedrichsmeier

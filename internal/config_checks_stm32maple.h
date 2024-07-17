@@ -12,15 +12,15 @@
 #ifndef CONFIG_CHECKS_STM32MAPLE_H
 #define CONFIG_CHECKS_STM32MAPLE_H
 
-/** @ingroup hardware
- * @page hardware_stm32_maple Mozzi on STM32duino-based boards.
+/**
+ * @page hardware_stm32_maple Mozzi on STM32-boards with libmaple based core.
  * port by Thomas Friedrichsmeier
  *
  * @note
- * Be sure to understand the info given at @ref hardwware_stm32_disambiguation . This page is about using Mozzi with the STM32 "libmaple based" core.
+ * Be sure to understand the info given at @ref hardware_stm32_disambiguation . This page is about using Mozzi with the STM32 "libmaple based" core.
  *
  * @note
- * This port may look similar to, but uses a different default GPIO pinout than @hardware_stm32duino !
+ * This port may look similar to, but uses a different default GPIO pinout than @ref @hardware_stm32duino !
  *
  * @section stm32_maple_status Status and peculiarities of this port
  * Compiles for and runs on a STM32F103C8T6 blue pill board, with a bunch of caveats (see below), i.e. on a board _without_ a

@@ -16,6 +16,12 @@
 #include "internal/mozzi_rand_p.h"
 #include "AudioOutput.h"
 
+/** @brief Internal. Do not use function in this namespace in your sketch!
+
+This namespace contains various functions that are used by Mozzi, internally, but are not meant to be used in a sketch.
+
+The details of these may change without warning. I repeat: Do not use these in your sketch!
+*/
 namespace MozziPrivate {
 
 // Forward declarations of functions to be provided by platform specific implementations
@@ -75,7 +81,7 @@ namespace MozziPrivate {
 #if BYPASS_MOZZI_OUTPUT_BUFFER == true
 uint64_t samples_written_to_buffer = 0;
 
-inline void bufferAudioOutput(const AudioOutput_t f) {
+inline void bufferAudioOutput(const AudioOutput f) {
   audioOutput(f);
   ++samples_written_to_buffer;
 }
@@ -147,7 +153,7 @@ uint16_t getAudioInput() { return audio_input; }
 CircularBuffer<uint16_t> input_buffer; // fixed size 256
 #define audioInputAvailable() (!input_buffer.isEmpty())
 #define readAudioInput() (input_buffer.read())
-/** NOTE: Triggered at MOZZI_AUDIO_RATE via defaultAudioOutput(). In addition to the AUDIO_INPUT_PIN, at most one reading is taken for mozziAnalogRead().  */
+/** NOTE: Triggered at MOZZI_AUDIO_RATE via defaultAudioOutput(). In addition to the MOZZI_AUDIO_INPUT_PIN, at most one reading is taken for mozziAnalogRead().  */
 inline void advanceADCStep() {
   switch (adc_count) {
   case 0:
@@ -166,7 +172,7 @@ inline void advanceADCStep() {
   case 2:
     // 3us
     analog_readings[channelNumToIndex(current_channel)] = getADCReading();
-    adcStartConversion(adcPinToChannelNum(AUDIO_INPUT_PIN));  // -> result is ignored, but first thing in the next cycle, a second reading is taken.
+    adcStartConversion(adcPinToChannelNum(MOZZI_AUDIO_INPUT_PIN));  // -> result is ignored, but first thing in the next cycle, a second reading is taken.
     break;
 
   }
@@ -268,7 +274,7 @@ void startMozzi(int control_rate_hz) {
                    // in setup() if desired (not for Teensy 3.* )
 #endif
   // delay(200); // so AutoRange doesn't read 0 to start with
-  update_control_timeout = MOZZI_AUDIO_RATE / control_rate_hz;
+  update_control_timeout = MOZZI_AUDIO_RATE / control_rate_hz - 1;
   startAudio();
 }
 

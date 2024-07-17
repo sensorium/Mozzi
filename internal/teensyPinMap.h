@@ -47,8 +47,7 @@ inline uint8_t teensyPinMap(uint8_t pin)
     case 31:
       return 20;
     }
-
-
+  return pin - 24;  // probably incorrect
 
 
 #elif defined (__MKL26Z64__) //TeensyLC
@@ -93,6 +92,7 @@ inline uint8_t teensyPinMap(uint8_t pin)
     case 69:
       return 26;   
     }
+  return pin-14;  // probably incorrect, but we need to return *something*
 
 #elif defined ARDUINO_TEENSY40
   return pin-14;
@@ -101,9 +101,6 @@ inline uint8_t teensyPinMap(uint8_t pin)
   if (pin< 28) return pin-14;
   return pin-24;
 #endif
-
-
-  
 }
 
 

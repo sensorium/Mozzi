@@ -12,7 +12,7 @@
 #ifndef CONFIG_CHECK_SAMD21_H
 #define CONFIG_CHECK_SAMD21_H
 
-/** @ingroup hardware
+/**
  * @page hardware_samd Mozzi on SAMD21 based boards (Arduino Circuitplayground M0 and others)
  *
  * port by Adrian Freed

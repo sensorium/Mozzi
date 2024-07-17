@@ -14,7 +14,15 @@
 
 #include <Arduino.h>
 
-/** @defgroup fixmath Fast integer based fixed-point arithmetic */
+/** @defgroup fixmath Fast integer based fixed-point arithmetic
+
+@note For new sketches it is recommended to utitlize the FixMath library with its typesafe classes UFix and SFix, instead of these
+      typedefs! See https://github.com/tomcombriat/FixMath . These are provided for backwards compatibility, only.
+
+Fixed point fractional number types and conversion routines. Fixed point is often best for fast audio code for Arduino, and these can ease some of the pain. </p><dl class="section note"><dt>Note</dt><dd>Take care when converting that the important bits of your numbers will fit in the types you choose!
+
+Timing: converting between fixed and float 10-12us, converting between fixed types about 1us.
+*/
 
 /** @ingroup fixmath
 @{

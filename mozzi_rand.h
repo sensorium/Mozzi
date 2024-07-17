@@ -15,6 +15,11 @@
 #include <Arduino.h>
 #include "internal/mozzi_rand_p.h"
 
+/** @defgroup random Fast random number generator functions
+
+These replace Arduino random() which is so slow it will stop your audio. They can even be used to generate audio noise.
+*/
+
 /** @ingroup random
 Random number generator. A faster replacement for Arduino's random function,
 which is too slow to use with Mozzi.

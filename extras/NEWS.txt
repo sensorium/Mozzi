@@ -3,7 +3,12 @@ Mozzi sound synthesis library for Arduino
 NEWS
 get the latest version from https://sensorium.github.io/Mozzi/
 
-NOT YET RELEASED (github version): Mozzi 2.0
+release: v2.0.1
+- Fix compilation with configuration option MOZZI_AUDIO_INPUT
+- Fix compilation with ATMEGA328PB CPUs
+- Fix some erroneous compilation warnings
+
+release: v2.0.0
 - This release is *not* 100% source compatible to earlier versions of Mozzi. Most sketches will continue to compile,
   but with warnings. Some will need adjustments to keep working. See https://sensorium.github.io/Mozzi/learn/porting/ .
   If porting is not an option, install an earlier (1.x) version of Mozzi, or use the "Mozzi_1" branch in git.

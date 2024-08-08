@@ -76,7 +76,7 @@ comfortable to use. Functions accepting Q16n16, etc. have gained overloads for t
 
 #### Configuration is now "inline", rather than in mozzi_config.h
 
-Read the [configuration tutorial](../config/) for a description of how configuration is done in Mozzi 2.0. *Only* if you have customized your
+Read the [configuration tutorial](../configuration/) for a description of how configuration is done in Mozzi 2.0. *Only* if you have customized your
 mozzi_config.h, you will now have to adjust. Importantly, configuration is now done per sketch, rather than centrally.
 
 #### Changed config names

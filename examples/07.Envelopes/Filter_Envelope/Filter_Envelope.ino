@@ -22,11 +22,11 @@
 #include <EventDelay.h>
 #include <ADSR.h>
 #include <ResonantFilter.h>
-#include <tables/triangle2048_int8.h>
+#include <tables/saw2048_int8.h>
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
 
-Oscil<TRIANGLE2048_NUM_CELLS, MOZZI_AUDIO_RATE> aOscil(TRIANGLE2048_DATA);
+Oscil<SAW2048_NUM_CELLS, MOZZI_AUDIO_RATE> aOscil(SAW2048_DATA);
 
 
 // for triggering the envelope

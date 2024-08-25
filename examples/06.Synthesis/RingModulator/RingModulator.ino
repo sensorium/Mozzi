@@ -1,7 +1,22 @@
-/*  Example playing a sinewave at a set frequency,
+/*  Example of Ring Modulation synthesis,
     using Mozzi sonification library.
 
-    Demonstrates the use of Oscil to play a wavetable.
+    Demonstrates the use of Oscil::phMod to modulate an Oscillator by itself: a ring modulator.
+    Ring Modulation is a part of frequency modulation synthesis (FM). 
+    Compared to "standard" FM where one oscillator modulates another
+    in Ring Modulation the output of one oscillator is used to modulate
+    itself, directly, of after further modulation, or to modulate one of its
+    modulator (looking at the DX7 diagram is probably clearer).
+
+    Here we demonstrate the simple case of RM, one oscillator modulating himself.
+    The equivalent diagram is:
+
+       _____   
+      \/    |
+    |----|  |
+    | 1  |  |
+    |----|  |
+      |_____|
 
     Circuit: Audio output on digital pin 9 on a Uno or similar, or
     DAC/A14 on Teensy 3.1, or
@@ -25,39 +40,43 @@
 #include <EventDelay.h>
 #include <Smooth.h>
 #include <mozzi_rand.h>
+#include <mozzi_midi.h>
 
-EventDelay kModulationChangeDelay;
-Smooth<uint8_t> kSmoothModulation(0.9f);
-// use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
+EventDelay kModulationChangeDelay;  // to change the modulation amount
+EventDelay kChangeNoteDelay;        // to change the base note
+Smooth<uint8_t> kSmoothModulation(0.99f);
 Oscil<SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
-//Oscil <SIN2048_NUM_CELLS, MOZZI_CONTROL_RATE> aSin2(SIN2048_DATA); // controls the amount of Ring Modulation
 
-int8_t prev_sample = 0;
-uint8_t ring_mod, smoothed_ring_mod;
+uint8_t ring_mod_amount, smoothed_ring_mod_amount;
+
+UFix<8, 0> notes[4] = { 40 - 12, 52 - 12, 28 - 12, 30 - 12 };  // note played. Because of the ringModulation the oscillator is called *two times* 
+                                                              // hence produces a note which an octave to high, so we compensate for that here (12 midi notes makes an octave).
+  
 
 void setup() {
-  Serial.begin(115200);
   kModulationChangeDelay.set(2000);
-  startMozzi();      // :)
-  aSin.setFreq(64);  // set the frequency
+  kChangeNoteDelay.set(300);
+  startMozzi();                  // :)
+  aSin.setFreq(mtof(notes[0]));  // set the frequency
 }
 
 
 void updateControl() {
-  //ring_mod_amount = int(aSin2.next() + 128);
-  //Serial.println(ring_mod_amount);
-  //ring_mod_amount = 255;
   if (kModulationChangeDelay.ready()) {
-    ring_mod = rand(150);
+    ring_mod_amount = rand(255);  // next target value of modulation
     kModulationChangeDelay.start();
   }
-  smoothed_ring_mod = kSmoothModulation(ring_mod);
+  smoothed_ring_mod_amount = kSmoothModulation(ring_mod_amount); // smoothing of the modulation
+  
+  if (kChangeNoteDelay.ready()) {
+    aSin.setFreq(mtof(notes[rand(4)]));
+    kChangeNoteDelay.start();
+  }
 }
 
 
 AudioOutput updateAudio() {
-  prev_sample = aSin.phMod(int32_t(prev_sample) * smoothed_ring_mod);
-  return MonoOutput::from8Bit(prev_sample);  // return an int signal centred around 0
+  return MonoOutput::from8Bit(aSin.phMod((int32_t(aSin.next()) * smoothed_ring_mod_amount) << 4));
 }
 
 

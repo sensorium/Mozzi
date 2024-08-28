@@ -1,14 +1,14 @@
-/*  Example of Ring Modulation synthesis,
+/*  Example of Self Modulation synthesis,
     using Mozzi sonification library.
 
-    Demonstrates the use of Oscil::phMod to modulate an Oscillator by itself: a ring modulator.
-    Ring Modulation is a part of frequency modulation synthesis (FM). 
+    Demonstrates the use of Oscil::phMod to modulate an Oscillator by itself.
+    Self Modulation is a part of frequency modulation synthesis (FM). 
     Compared to "standard" FM where one oscillator modulates another
-    in Ring Modulation the output of one oscillator is used to modulate
+    in Self Modulation the output of one oscillator is used to modulate
     itself, directly, of after further modulation, or to modulate one of its
     modulator (looking at the DX7 diagram is probably clearer).
 
-    Here we demonstrate the simple case of RM, one oscillator modulating himself.
+    Here we demonstrate the simple case of Self Modulation, one oscillator modulating himself.
     The equivalent diagram is:
 
        _____   
@@ -33,7 +33,7 @@
     Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#define MOZZI_CONTROL_RATE 64  // Hz, powers of 2 are most reliable; 64 Hz is actually the default, but shown here, for clarity
+
 #include <Mozzi.h>
 #include <Oscil.h>                // oscillator template
 #include <tables/sin2048_int8.h>  // sine table for oscillator
@@ -47,10 +47,10 @@ EventDelay kChangeNoteDelay;        // to change the base note
 Smooth<uint8_t> kSmoothModulation(0.99f);
 Oscil<SIN2048_NUM_CELLS, MOZZI_AUDIO_RATE> aSin(SIN2048_DATA);
 
-uint8_t ring_mod_amount, smoothed_ring_mod_amount;
+uint8_t self_mod_amount, smoothed_self_mod_amount;
 
-UFix<8, 0> notes[4] = { 40 - 12, 52 - 12, 28 - 12, 30 - 12 };  // note played. Because of the ringModulation the oscillator is called *two times* 
-                                                              // hence produces a note which an octave to high, so we compensate for that here (12 midi notes makes an octave).
+UFix<8, 0> notes[4] = { 40 - 12, 52 - 12, 28 - 12, 30 - 12 };  // note played. Because of the Modulation the oscillator is called *two times* 
+                                                              // hence produces a note is which an octave to high, so we compensate for that here (12 midi notes makes an octave).
   
 
 void setup() {
@@ -63,10 +63,10 @@ void setup() {
 
 void updateControl() {
   if (kModulationChangeDelay.ready()) {
-    ring_mod_amount = rand(255);  // next target value of modulation
+    self_mod_amount = rand(255);  // next target value of modulation
     kModulationChangeDelay.start();
   }
-  smoothed_ring_mod_amount = kSmoothModulation(ring_mod_amount); // smoothing of the modulation
+  smoothed_self_mod_amount = kSmoothModulation(self_mod_amount); // smoothing of the modulation
   
   if (kChangeNoteDelay.ready()) {
     aSin.setFreq(mtof(notes[rand(4)]));
@@ -76,7 +76,7 @@ void updateControl() {
 
 
 AudioOutput updateAudio() {
-  return MonoOutput::from8Bit(aSin.phMod((int32_t(aSin.next()) * smoothed_ring_mod_amount) << 4));
+  return MonoOutput::from8Bit(aSin.phMod((int32_t(aSin.next()) * smoothed_self_mod_amount) << 4));
 }
 
 

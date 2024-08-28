@@ -39,8 +39,6 @@ LowPassFilter lpf;
 
 
 void setup() {
-  //Serial.begin(9600); // for Teensy 3.1, beware printout can cause glitches
-  Serial.begin(115200);
   randSeed();  // fresh random
   envelope.setADLevels(128, 64);
   envelope.setTimes(2000, 1500, 250, 1250);  // always the same envelope times
@@ -49,8 +47,6 @@ void setup() {
   startMozzi();
 }
 
-
-unsigned int duration, attack, decay, sustain, release_ms;
 
 void updateControl() {
   if (noteDelay.ready()) {

@@ -896,18 +896,6 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
-<a id='Waveshaper_Difference_Tone_FixMath top'></a>
-Waveshaper_Difference_Tone_FixMath
-...(no recording of this one)
-
-<button type='button' id='Waveshaper_Difference_Tone_FixMathexpand' onclick='javascript:toggleDisplay(Waveshaper_Difference_Tone_FixMath, Waveshaper_Difference_Tone_FixMathexpand, Waveshaper_Difference_Tone_FixMathcollapse)'>show sketch</button>
-<button id='Waveshaper_Difference_Tone_FixMathcollapse' style='display:none' onclick='javascript:toggleDisplay(Waveshaper_Difference_Tone_FixMath, Waveshaper_Difference_Tone_FixMathexpand, Waveshaper_Difference_Tone_FixMathcollapse)'>hide sketch</button>
-<div id='Waveshaper_Difference_Tone_FixMath' style='display:none'>
-{% highlight c++ %}
-{% include_relative examples/06.Synthesis/Waveshaper_Difference_Tone_FixMath/Waveshaper_Difference_Tone_FixMath.ino %}
-{% endhighlight %}
-</div>
-***
 <h2 id='07.Envelopes'> 07.Envelopes </h2>
 <a id='ADSR_Audio_Rate_Envelope top'></a>
 ADSR_Audio_Rate_Envelope

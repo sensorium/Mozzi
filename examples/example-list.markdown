@@ -880,22 +880,6 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
-<a id='Waveshaper_Difference_Tone top'></a>
-Waveshaper_Difference_Tone
-
-<audio controls>
-<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/06.Synthesis/Waveshaper_Difference_Tone/Waveshaper_Difference_Tone.ogg?raw=true' preload='auto'></source>
-<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/06.Synthesis/Waveshaper_Difference_Tone/Waveshaper_Difference_Tone.mp3?raw=true' preload='auto'></source>
-Your browser does not support the audio element.</audio>
-
-<button type='button' id='Waveshaper_Difference_Toneexpand' onclick='javascript:toggleDisplay(Waveshaper_Difference_Tone, Waveshaper_Difference_Toneexpand, Waveshaper_Difference_Tonecollapse)'>show sketch</button>
-<button id='Waveshaper_Difference_Tonecollapse' style='display:none' onclick='javascript:toggleDisplay(Waveshaper_Difference_Tone, Waveshaper_Difference_Toneexpand, Waveshaper_Difference_Tonecollapse)'>hide sketch</button>
-<div id='Waveshaper_Difference_Tone' style='display:none'>
-{% highlight c++ %}
-{% include_relative examples/06.Synthesis/Waveshaper_Difference_Tone/Waveshaper_Difference_Tone.ino %}
-{% endhighlight %}
-</div>
-***
 <h2 id='07.Envelopes'> 07.Envelopes </h2>
 <a id='ADSR_Audio_Rate_Envelope top'></a>
 ADSR_Audio_Rate_Envelope

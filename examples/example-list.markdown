@@ -788,6 +788,22 @@ Your browser does not support the audio element.</audio>
 {% endhighlight %}
 </div>
 ***
+<a id='SelfModulator top'></a>
+SelfModulator
+
+<audio controls>
+<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/06.Synthesis/SelfModulator/SelfModulator.ogg?raw=true' preload='auto'></source>
+<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/06.Synthesis/SelfModulator/SelfModulator.mp3?raw=true' preload='auto'></source>
+Your browser does not support the audio element.</audio>
+
+<button type='button' id='SelfModulatorexpand' onclick='javascript:toggleDisplay(SelfModulator, SelfModulatorexpand, SelfModulatorcollapse)'>show sketch</button>
+<button id='SelfModulatorcollapse' style='display:none' onclick='javascript:toggleDisplay(SelfModulator, SelfModulatorexpand, SelfModulatorcollapse)'>hide sketch</button>
+<div id='SelfModulator' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/06.Synthesis/SelfModulator/SelfModulator.ino %}
+{% endhighlight %}
+</div>
+***
 <a id='WaveFolder top'></a>
 WaveFolder
 ...(no recording of this one)
@@ -861,22 +877,6 @@ Your browser does not support the audio element.</audio>
 <div id='Waveshaper' style='display:none'>
 {% highlight c++ %}
 {% include_relative examples/06.Synthesis/Waveshaper/Waveshaper.ino %}
-{% endhighlight %}
-</div>
-***
-<a id='Waveshaper_Difference_Tone top'></a>
-Waveshaper_Difference_Tone
-
-<audio controls>
-<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/06.Synthesis/Waveshaper_Difference_Tone/Waveshaper_Difference_Tone.ogg?raw=true' preload='auto'></source>
-<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/06.Synthesis/Waveshaper_Difference_Tone/Waveshaper_Difference_Tone.mp3?raw=true' preload='auto'></source>
-Your browser does not support the audio element.</audio>
-
-<button type='button' id='Waveshaper_Difference_Toneexpand' onclick='javascript:toggleDisplay(Waveshaper_Difference_Tone, Waveshaper_Difference_Toneexpand, Waveshaper_Difference_Tonecollapse)'>show sketch</button>
-<button id='Waveshaper_Difference_Tonecollapse' style='display:none' onclick='javascript:toggleDisplay(Waveshaper_Difference_Tone, Waveshaper_Difference_Toneexpand, Waveshaper_Difference_Tonecollapse)'>hide sketch</button>
-<div id='Waveshaper_Difference_Tone' style='display:none'>
-{% highlight c++ %}
-{% include_relative examples/06.Synthesis/Waveshaper_Difference_Tone/Waveshaper_Difference_Tone.ino %}
 {% endhighlight %}
 </div>
 ***
@@ -954,6 +954,22 @@ Your browser does not support the audio element.</audio>
 <div id='Ead_Envelope' style='display:none'>
 {% highlight c++ %}
 {% include_relative examples/07.Envelopes/Ead_Envelope/Ead_Envelope.ino %}
+{% endhighlight %}
+</div>
+***
+<a id='Filter_Envelope top'></a>
+Filter_Envelope
+
+<audio controls>
+<source type='audio/ogg' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/07.Envelopes/Filter_Envelope/Filter_Envelope.ogg?raw=true' preload='auto'></source>
+<source type='audio/mp3' src='https://github.com/sensorium/Mozzi/blob/gh-pages/examples/examples/07.Envelopes/Filter_Envelope/Filter_Envelope.mp3?raw=true' preload='auto'></source>
+Your browser does not support the audio element.</audio>
+
+<button type='button' id='Filter_Envelopeexpand' onclick='javascript:toggleDisplay(Filter_Envelope, Filter_Envelopeexpand, Filter_Envelopecollapse)'>show sketch</button>
+<button id='Filter_Envelopecollapse' style='display:none' onclick='javascript:toggleDisplay(Filter_Envelope, Filter_Envelopeexpand, Filter_Envelopecollapse)'>hide sketch</button>
+<div id='Filter_Envelope' style='display:none'>
+{% highlight c++ %}
+{% include_relative examples/07.Envelopes/Filter_Envelope/Filter_Envelope.ino %}
 {% endhighlight %}
 </div>
 ***

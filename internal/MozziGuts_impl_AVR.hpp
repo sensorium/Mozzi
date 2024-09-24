@@ -39,7 +39,7 @@ uint8_t adcPinToChannelNum(uint8_t pin) {
 	// 0, 1, 4, 5, 6, 7, 13, 12, 11, 10, 9, 8
 	0, 1, 4, 5, 6, 7, 13, 12, 11, 10, 9, 8, 10, 11, 12, 13, 7, 6, 5, 4, 1, 0, 8
 	};
-	pin = pgm_read_byte(adc_mapping + (P));
+	pin = pgm_read_byte(adc_mapping + (pin));
 #  else
 	pin = analogPinToChannel(pin);
 #  endif

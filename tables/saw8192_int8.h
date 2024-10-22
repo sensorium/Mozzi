@@ -1,5 +1,5 @@
-#ifndef SAW8192_INT8_H_
-#define SAW8192_INT8_H_
+#ifndef SAW8192_H_
+#define SAW8192_H_
  
 /**
  This table is part of Mozzi
@@ -9,10 +9,10 @@
 #include <Arduino.h>
 #include "mozzi_pgmspace.h"
  
-#define SAW8192_INT8_NUM_CELLS 8192
-#define SAW8192_INT8_SAMPLERATE 8192
+#define SAW8192_NUM_CELLS 8192
+#define SAW8192_SAMPLERATE 8192
  
-CONSTTABLE_STORAGE(int8_t) SAW8192_INT8_DATA [] = {
+CONSTTABLE_STORAGE(int8_t) SAW8192_DATA [] = {
 -127, -127, -127, -127, -127, -127, -127, -127, -127, -127, -127, -127, -127,
 -127, -127, -127, -127, -126, -126, -126, -126, -126, -126, -126, -126, -126,
 -126, -126, -126, -126, -126, -126, -126, -126, -126, -126, -126, -126, -126,
@@ -492,4 +492,4 @@ CONSTTABLE_STORAGE(int8_t) SAW8192_INT8_DATA [] = {
 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,
  }; 
  
- #endif /* SAW8192_INT8_H_ */
+ #endif /* SAW8192_H_ */

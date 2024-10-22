@@ -1,5 +1,5 @@
-#ifndef SAW256_INT8_H_
-#define SAW256_INT8_H_
+#ifndef SAW256_H_
+#define SAW256_H_
  
 /**
  This table is part of Mozzi
@@ -9,10 +9,10 @@
 #include <Arduino.h>
 #include "mozzi_pgmspace.h"
  
-#define SAW256_INT8_NUM_CELLS 256
-#define SAW256_INT8_SAMPLERATE 256
+#define SAW256_NUM_CELLS 256
+#define SAW256_SAMPLERATE 256
  
-CONSTTABLE_STORAGE(int8_t) SAW256_INT8_DATA [] = {
+CONSTTABLE_STORAGE(int8_t) SAW256_DATA [] = {
 -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115,
 -114, -113, -112, -111, -110, -109, -108, -107, -106, -105, -104, -103, -102,
 -101, -100, -99, -98, -97, -96, -95, -94, -93, -92, -91, -90, -89, -88, -87,
@@ -30,4 +30,4 @@ CONSTTABLE_STORAGE(int8_t) SAW256_INT8_DATA [] = {
 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127,
  }; 
  
- #endif /* SAW256_INT8_H_ */
+ #endif /* SAW256_H_ */

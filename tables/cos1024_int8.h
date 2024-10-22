@@ -1,5 +1,5 @@
-#ifndef COS1024_INT8_H_
-#define COS1024_INT8_H_
+#ifndef COS1024_H_
+#define COS1024_H_
  
 /**
  This table is part of Mozzi
@@ -9,10 +9,10 @@
 #include <Arduino.h>
 #include "mozzi_pgmspace.h"
  
-#define COS1024_INT8_NUM_CELLS 1024
-#define COS1024_INT8_SAMPLERATE 1024
+#define COS1024_NUM_CELLS 1024
+#define COS1024_SAMPLERATE 1024
  
-CONSTTABLE_STORAGE(int8_t) COS1024_INT8_DATA [] = {
+CONSTTABLE_STORAGE(int8_t) COS1024_DATA [] = {
 -127, -127, -127, -127, -127, -127, -127, -127, -127, -127, -127, -127, -127,
 -127, -127, -126, -126, -126, -126, -126, -126, -126, -126, -126, -126, -126,
 -125, -125, -125, -125, -125, -125, -125, -124, -124, -124, -124, -124, -124,
@@ -78,4 +78,4 @@ CONSTTABLE_STORAGE(int8_t) COS1024_INT8_DATA [] = {
 -127, -127, -127, -127, -127, -127, -127, -127, -127, -127, -127, -127,
  }; 
  
- #endif /* COS1024_INT8_H_ */
+ #endif /* COS1024_H_ */

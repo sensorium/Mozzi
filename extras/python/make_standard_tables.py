@@ -20,7 +20,7 @@ import os as os
 folder = ".."+os.sep+".."+os.sep+"tables" + os.sep
 
 def write_header(fout, samplerate,name):
-    tablename = name.upper()+str(samplerate)+"_INT8"
+    tablename = name.upper()+str(samplerate)
     fout.write('#ifndef ' + tablename + '_H_' + '\n')
     fout.write('#define ' + tablename + '_H_' + '\n \n')
     fout.write("/**\n This table is part of Mozzi\n Generated with extras/python/make_standard_tables.py\n*/\n\n")
@@ -31,7 +31,7 @@ def write_header(fout, samplerate,name):
     fout.write('CONSTTABLE_STORAGE(int8_t) ' + tablename + '_DATA [] = {\n')
 
 def write_footer(fout,samplerate,name):
-    tablename = name.upper()+str(samplerate)+"_INT8"
+    tablename = name.upper()+str(samplerate)
     fout.write('\n }; \n \n #endif /* ' + tablename + '_H_ */\n')
 
 

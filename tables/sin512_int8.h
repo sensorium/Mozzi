@@ -1,5 +1,5 @@
-#ifndef SIN512_INT8_H_
-#define SIN512_INT8_H_
+#ifndef SIN512_H_
+#define SIN512_H_
  
 /**
  This table is part of Mozzi
@@ -9,10 +9,10 @@
 #include <Arduino.h>
 #include "mozzi_pgmspace.h"
  
-#define SIN512_INT8_NUM_CELLS 512
-#define SIN512_INT8_SAMPLERATE 512
+#define SIN512_NUM_CELLS 512
+#define SIN512_SAMPLERATE 512
  
-CONSTTABLE_STORAGE(int8_t) SIN512_INT8_DATA [] = {
+CONSTTABLE_STORAGE(int8_t) SIN512_DATA [] = {
 0, 2, 3, 5, 6, 8, 9, 11, 12, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32,
 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 51, 53, 54, 56, 57, 58, 60, 61,
 63, 64, 65, 67, 68, 69, 71, 72, 73, 74, 76, 77, 78, 79, 81, 82, 83, 84, 85, 86,
@@ -47,4 +47,4 @@ CONSTTABLE_STORAGE(int8_t) SIN512_INT8_DATA [] = {
 -12, -11, -9, -8, -6, -5, -3, -2,
  }; 
  
- #endif /* SIN512_INT8_H_ */
+ #endif /* SIN512_H_ */

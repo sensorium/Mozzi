@@ -1,5 +1,5 @@
-#ifndef COS512_INT8_H_
-#define COS512_INT8_H_
+#ifndef COS512_H_
+#define COS512_H_
  
 /**
  This table is part of Mozzi
@@ -9,10 +9,10 @@
 #include <Arduino.h>
 #include "mozzi_pgmspace.h"
  
-#define COS512_INT8_NUM_CELLS 512
-#define COS512_INT8_SAMPLERATE 512
+#define COS512_NUM_CELLS 512
+#define COS512_SAMPLERATE 512
  
-CONSTTABLE_STORAGE(int8_t) COS512_INT8_DATA [] = {
+CONSTTABLE_STORAGE(int8_t) COS512_DATA [] = {
 -127, -127, -127, -127, -127, -127, -127, -127, -126, -126, -126, -126, -126,
 -125, -125, -125, -125, -124, -124, -124, -123, -123, -122, -122, -122, -121,
 -121, -120, -120, -119, -118, -118, -117, -117, -116, -115, -115, -114, -113,
@@ -47,4 +47,4 @@ CONSTTABLE_STORAGE(int8_t) COS512_INT8_DATA [] = {
 -127, -127, -127, -127, -127, -127,
  }; 
  
- #endif /* COS512_INT8_H_ */
+ #endif /* COS512_H_ */

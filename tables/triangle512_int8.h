@@ -1,5 +1,5 @@
-#ifndef TRIANGLE512_INT8_H_
-#define TRIANGLE512_INT8_H_
+#ifndef TRIANGLE512_H_
+#define TRIANGLE512_H_
  
 /**
  This table is part of Mozzi
@@ -9,10 +9,10 @@
 #include <Arduino.h>
 #include "mozzi_pgmspace.h"
  
-#define TRIANGLE512_INT8_NUM_CELLS 512
-#define TRIANGLE512_INT8_SAMPLERATE 512
+#define TRIANGLE512_NUM_CELLS 512
+#define TRIANGLE512_SAMPLERATE 512
  
-CONSTTABLE_STORAGE(int8_t) TRIANGLE512_INT8_DATA [] = {
+CONSTTABLE_STORAGE(int8_t) TRIANGLE512_DATA [] = {
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61,
@@ -45,4 +45,4 @@ CONSTTABLE_STORAGE(int8_t) TRIANGLE512_INT8_DATA [] = {
 -16, -15, -14, -13, -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1,
  }; 
  
- #endif /* TRIANGLE512_INT8_H_ */
+ #endif /* TRIANGLE512_H_ */

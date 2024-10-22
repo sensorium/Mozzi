@@ -1,5 +1,5 @@
 ## generates a sin-shaped table with values -128 to 127
-
+## NOTE: this table has been generated using the "make_standard_tables.py" script, which produces a symetric table.
 
 import array
 import os

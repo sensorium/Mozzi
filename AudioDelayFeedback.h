@@ -16,6 +16,7 @@
 
 #include "mozzi_utils.h"
 #include "meta.h"
+#include "IntegerType.h"
 
 enum interpolation_types {LINEAR,ALLPASS};
 
@@ -32,7 +33,7 @@ than a plain AudioDelay, but allows for more dramatic effects with feedback.
 @tparam INTERP_TYPE a choice of LINEAR (default) or ALLPASS interpolation.  LINEAR is better
 for sweeping delay times, ALLPASS may be better for reverb-like effects.
 */
-template <uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR>
+template <uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR, typename su=int8_t>
 class AudioDelayFeedback
 {
 
@@ -68,7 +69,7 @@ public:
 	@note slower than next(int8_t input, uint16_t delaytime_cells)
 	*/
 	inline
-	int16_t next(int8_t input)
+	typename IntegerType<sizeof(su)+sizeof(su)>::signed_type next(su input)
 	{
 		// chooses a different next() function depending on whether the
 		// the template parameter is LINEAR(default if none provided) or ALLPASS.
@@ -85,23 +86,24 @@ public:
 	@note Timing: 4us
 	*/
 	inline
-	int16_t next(int8_t input, uint16_t delaytime_cells)
+	typename IntegerType<sizeof(su)+sizeof(su)>::signed_type next(su input, uint16_t delaytime_cells)
 	{
 		//setPin13High();
 		++write_pos &= (NUM_BUFFER_SAMPLES - 1);
 		uint16_t read_pos = (write_pos - delaytime_cells) & (NUM_BUFFER_SAMPLES - 1);
 		// < 1us to here
-		int16_t delay_sig = delay_array[read_pos];								// read the delay buffer
+		IntegerType<sizeof(su)+sizeof(su)>::signed_type delay_sig = delay_array[read_pos];								// read the delay buffer
 		// with this line, the method takes 18us
 		//int8_t feedback_sig = (int8_t) min(max(((delay_sig * _feedback_level)/128),-128),127); // feedback clipped
 		// this line, the whole method takes 4us... Compiler doesn't optimise pow2 divides.  Why?
-		int8_t feedback_sig = (int8_t) min(max(((delay_sig * _feedback_level)>>7),-128),127); // feedback clipped
-		delay_array[write_pos] = (int16_t) input + feedback_sig;					// write to buffer
+		//int8_t feedback_sig = (int8_t) min(max(((delay_sig * _feedback_level)>>7),-128),127); // feedback clipped
+		su feedback_sig = (su) constrain( ((delay_sig * feedback_level)>>7), (1<<((sizeof(su)<<3)-1))-1, -(1<<((sizeof(su)<<3)-1)));
+		delay_array[write_pos] = (IntegerType<sizeof(su)+sizeof(su)>::signed_type) input + feedback_sig;					// write to buffer
 		//setPin13Low();
 		return delay_sig;
 	}
 
-
+  ///////// STOPPED HERE FOR NOW
 
 	/** Input a value to the delay, retrieve the signal in the delay line at the interpolated fractional position delaytime_cells, and add feedback from the output to the input.
 	@param input the signal input.

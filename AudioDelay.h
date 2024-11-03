@@ -63,7 +63,7 @@ public:
 
 		// why does delay jump if I read it before writing?
 		delay_array[_write_pos] = in_value;			// write to buffer
-		int8_t delay_sig = delay_array[read_pos] ;	// read the delay buffer
+		T delay_sig = delay_array[read_pos] ;	// read the delay buffer
 
 		return (T)delay_sig;
 	}

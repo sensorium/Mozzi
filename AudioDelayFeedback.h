@@ -100,7 +100,7 @@ public:
 		// this line, the whole method takes 4us... Compiler doesn't optimise pow2 divides.  Why?
 		//int8_t feedback_sig = (int8_t) min(max(((delay_sig * _feedback_level)>>7),-128),127); // feedback clipped
 		su feedback_sig = (su) constrain( ((delay_sig * _feedback_level)>>7), (1<<((sizeof(su)<<3)-1))-1, -(1<<((sizeof(su)<<3)-1)));
-		delay_array[write_pos] = (return_type) input + feedback_sig;					// write to buffer
+		delay_array[write_pos] = (return_type)input + feedback_sig;					// write to buffer
 		//setPin13Low();
 		return delay_sig;
 	}
@@ -131,14 +131,14 @@ public:
 
 		return_type difference = delay_sig2 - delay_sig1;
 		//int16_t delay_sig_fraction = (int16_t)((int32_t)((int32_t) fraction * difference) >> 16);
-		return_type delay_sig_fraction = (return_type) ((typename IntegerType<sizeof(return_type)+sizeof(return_type)>::signed_type)fraction * difference) >> 16;
+		return_type delay_sig_fraction = (return_type)((typename IntegerType<sizeof(return_type)+sizeof(return_type)>::signed_type)((typename IntegerType<sizeof(return_type)+sizeof(return_type)>::signed_type)fraction * difference) >> 16);
 
 		return_type delay_sig = delay_sig1+delay_sig_fraction;
 
 		//int16_t delay_sig = delay_sig1 + ((int32_t)delay_sig2*fraction)>>16;
 
 		//int8_t feedback_sig = (int8_t) min(max((((int16_t)(delay_sig * _feedback_level))>>7),-128),127); // feedback clipped
-			su feedback_sig = (su) constrain( ((delay_sig * _feedback_level)>>7), (1<<((sizeof(su)<<3)-1))-1, -(1<<((sizeof(su)<<3)-1)));
+		su feedback_sig = (su) constrain(((delay_sig * _feedback_level)>>7), (1<<((sizeof(su)<<3)-1))-1, -(1<<((sizeof(su)<<3)-1)));
 		delay_array[write_pos] = (return_type) input + feedback_sig;					// write to buffer
 		//setPin13Low();
 		return delay_sig;
@@ -270,7 +270,7 @@ private:
 
 		return_type delay_sig = delay_array[read_pos];								// read the delay buffer
 		//int8_t feedback_sig = (int8_t) min(max(((delay_sig * _feedback_level)/128),-128),127); // feedback clipped
-		su feedback_sig = (su) constrain( ((delay_sig * _feedback_level)>>7), (1<<((sizeof(su)<<3)-1))-1, -(1<<((sizeof(su)<<3)-1)));
+		su feedback_sig = (su) constrain(((delay_sig * _feedback_level)>>7), (1<<((sizeof(su)<<3)-1))-1, -(1<<((sizeof(su)<<3)-1)));
 		delay_array[write_pos] = (return_type) in_value + feedback_sig;					// write to buffer
 
 		return delay_sig;
@@ -315,7 +315,7 @@ private:
 		delay_sig += interp;
 
 		//int8_t feedback_sig = (int8_t) min(max(((delay_sig * _feedback_level)>>7),-128),127); // feedback clipped
-		su feedback_sig = (su) constrain( ((delay_sig * _feedback_level)>>7), (1<<((sizeof(su)<<3)-1))-1, -(1<<((sizeof(su)<<3)-1)));
+		su feedback_sig = (su) constrain(((delay_sig * _feedback_level)>>7), (1<<((sizeof(su)<<3)-1))-1, -(1<<((sizeof(su)<<3)-1)));
 		delay_array[write_pos] = (return_type) input + feedback_sig;					// write to buffer
 
 		last_in = input;

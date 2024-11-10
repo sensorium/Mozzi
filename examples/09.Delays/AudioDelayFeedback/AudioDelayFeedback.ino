@@ -58,7 +58,7 @@ void updateControl(){
 
 
 AudioOutput updateAudio(){
-  char asig = aTriangle.next(); // get this so it can be used twice without calling next() again
+  int8_t asig = aTriangle.next(); // get this so it can be used twice without calling next() again
   //return asig/8 + aDel.next(asig, (uint16_t) del_samps); // mix some straight signal with the delayed signal
   //return aDel.next(aTriangle.next(), (uint16_t) del_samps); // instead of the previous 2 lines for only the delayed signal
   return MonoOutput::fromAlmostNBit(9, (asig >> 3) + aDel.next(asig, deltime)); // mix some straight signal with the delayed signal

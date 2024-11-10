@@ -62,7 +62,7 @@ void updateControl(){
     // set random delay parameters
     float del_cells = (float)rand(65535u)/256;
     aDel.setDelayTimeCells(del_cells); // Allpass interpolation for fractional delay time
-    char fb = rand(-50,50);
+    int8_t fb = rand(-50,50);
     aDel.setFeedbackLevel(fb);
     kDelay.start(duration+500);
   }

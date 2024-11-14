@@ -55,8 +55,8 @@ void setup(){
 
 
 void updateControl(){
-  // delay time range from 0 to 127 samples, @ 16384 samps per sec = 0 to 7 milliseconds
-  del_samps1 = 64+kDelSamps1.next();
+  // delay time range from 1 to 128 samples, @ 16384 samps per sec = 0 to 7 milliseconds
+  del_samps1 = 65+(kDelSamps1.next()>>1);
 
   // delay time range from 1 to 33 samples, @ 16384 samps per sec = 0 to 2 milliseconds
   del_samps2 = 17+kDelSamps2.next()/8;
@@ -64,12 +64,12 @@ void updateControl(){
 
 
 AudioOutput updateAudio(){
-  char asig1 = aTriangle1.next(); // get this so it can be used twice without calling next() again
-  int aflange1 = (asig1>>3) + aDel1.next(asig1, del_samps1); // mix some straignt signal with the delayed signal
+  int8_t asig1 = aTriangle1.next(); // get this so it can be used twice without calling next() again
+  int16_t aflange1 = (asig1>>3) + aDel1.next(asig1, del_samps1); // mix some straignt signal with the delayed signal
 
-  char asig2 = aTriangle2.next(); // get this so it can be used twice without calling next() again
-  int aflange2 = (asig2>>3) + aDel2.next(asig2, del_samps2); // mix some straignt signal with the delayed signal
-  return MonoOutput::fromAlmostNBit(10, aflange1 + aflange2);
+  int8_t asig2 = aTriangle2.next(); // get this so it can be used twice without calling next() again
+  int16_t aflange2 = (asig2>>3) + aDel2.next(asig2, del_samps2); // mix some straignt signal with the delayed signal
+  return MonoOutput::fromAlmostNBit(10, aflange1 + aflange2).clip();
 }
 
 

@@ -16,6 +16,7 @@
 
 #include "mozzi_utils.h"
 #include "meta.h"
+#include "IntegerType.h"
 
 enum interpolation_types {LINEAR,ALLPASS};
 
@@ -31,10 +32,13 @@ with the input, do it in your sketch. AudioDelayFeedback uses more processing an
 than a plain AudioDelay, but allows for more dramatic effects with feedback.
 @tparam INTERP_TYPE a choice of LINEAR (default) or ALLPASS interpolation.  LINEAR is better
 for sweeping delay times, ALLPASS may be better for reverb-like effects.
+@tparam the type of numbers to use for the signal in the delay.  The default is int8_t, but int16_t could be useful. Larger types (int32_t) might produce overflows as of v2.0.2.
 */
-template <uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR>
+template <uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR, typename su=int8_t>
 class AudioDelayFeedback
 {
+
+  typedef typename IntegerType<sizeof(su)+sizeof(su)>::signed_type return_type;
 
 public:
 	/** Constructor.
@@ -68,7 +72,7 @@ public:
 	@note slower than next(int8_t input, uint16_t delaytime_cells)
 	*/
 	inline
-	int16_t next(int8_t input)
+	return_type next(su input)
 	{
 		// chooses a different next() function depending on whether the
 		// the template parameter is LINEAR(default if none provided) or ALLPASS.
@@ -85,18 +89,19 @@ public:
 	@note Timing: 4us
 	*/
 	inline
-	int16_t next(int8_t input, uint16_t delaytime_cells)
+	return_type next(su input, uint16_t delaytime_cells)
 	{
 		//setPin13High();
 		++write_pos &= (NUM_BUFFER_SAMPLES - 1);
 		uint16_t read_pos = (write_pos - delaytime_cells) & (NUM_BUFFER_SAMPLES - 1);
 		// < 1us to here
-		int16_t delay_sig = delay_array[read_pos];								// read the delay buffer
+		return_type delay_sig = delay_array[read_pos];								// read the delay buffer
 		// with this line, the method takes 18us
 		//int8_t feedback_sig = (int8_t) min(max(((delay_sig * _feedback_level)/128),-128),127); // feedback clipped
 		// this line, the whole method takes 4us... Compiler doesn't optimise pow2 divides.  Why?
-		int8_t feedback_sig = (int8_t) min(max(((delay_sig * _feedback_level)>>7),-128),127); // feedback clipped
-		delay_array[write_pos] = (int16_t) input + feedback_sig;					// write to buffer
+		//int8_t feedback_sig = (int8_t) min(max(((delay_sig * _feedback_level)>>7),-128),127); // feedback clipped
+		su feedback_sig = (su) constrain( ((delay_sig * _feedback_level)>>7), -(1<<((sizeof(su)<<3)-1)), (1<<((sizeof(su)<<3)-1))-1);
+		delay_array[write_pos] = (return_type)input + feedback_sig;					// write to buffer
 		//setPin13Low();
 		return delay_sig;
 	}
@@ -110,7 +115,7 @@ public:
 	value of _delaytime_cells.
 	*/
 	inline
-	int16_t next(int8_t input, Q16n16 delaytime_cells)
+	return_type next(su input, Q16n16 delaytime_cells)
 	{
 		//setPin13High();
 		++write_pos &= (NUM_BUFFER_SAMPLES - 1);
@@ -119,21 +124,23 @@ public:
 		uint16_t fraction = (uint16_t) delaytime_cells; // keeps low word
 
 		uint16_t read_pos1 = (write_pos - index) & (NUM_BUFFER_SAMPLES - 1);
-		int16_t delay_sig1 = delay_array[read_pos1];								// read the delay buffer
+		return_type delay_sig1 = delay_array[read_pos1];								// read the delay buffer
 
 		uint16_t read_pos2 = (write_pos - (index+1)) & (NUM_BUFFER_SAMPLES - 1);
-		int16_t delay_sig2 = delay_array[read_pos2];								// read the delay buffer
+		return_type delay_sig2 = delay_array[read_pos2];								// read the delay buffer
 
 
-		int16_t difference = delay_sig2 - delay_sig1;
-		int16_t delay_sig_fraction = (int16_t)((int32_t)((int32_t) fraction * difference) >> 16);
+		return_type difference = delay_sig2 - delay_sig1;
+		//int16_t delay_sig_fraction = (int16_t)((int32_t)((int32_t) fraction * difference) >> 16);
+		return_type delay_sig_fraction = (return_type)((typename IntegerType<sizeof(return_type)+sizeof(return_type)>::signed_type)((typename IntegerType<sizeof(return_type)+sizeof(return_type)>::signed_type)fraction * difference) >> 16);
 
-		int16_t delay_sig = delay_sig1+delay_sig_fraction;
+		return_type delay_sig = delay_sig1+delay_sig_fraction;
 
 		//int16_t delay_sig = delay_sig1 + ((int32_t)delay_sig2*fraction)>>16;
 
-		int8_t feedback_sig = (int8_t) min(max((((int16_t)(delay_sig * _feedback_level))>>7),-128),127); // feedback clipped
-		delay_array[write_pos] = (int16_t) input + feedback_sig;					// write to buffer
+		//int8_t feedback_sig = (int8_t) min(max((((int16_t)(delay_sig * _feedback_level))>>7),-128),127); // feedback clipped
+		su feedback_sig = (su) constrain(((delay_sig * _feedback_level)>>7), -(1<<((sizeof(su)<<3)-1)), (1<<((sizeof(su)<<3)-1))-1);
+		delay_array[write_pos] = (return_type) input + feedback_sig;					// write to buffer
 		//setPin13Low();
 		return delay_sig;
 	}
@@ -143,7 +150,7 @@ public:
 	@param input the signal input.
 	*/
 	inline
-	void write(int8_t input)
+	void write(su input)
 	{
 		++write_pos &= (NUM_BUFFER_SAMPLES - 1);
 		delay_array[write_pos] = input;
@@ -155,7 +162,7 @@ public:
 	@param input the signal input.
 	*/
 	inline
-	void writeFeedback(int8_t input)
+	void writeFeedback(su input)
 	{
 		delay_array[write_pos] = input;
 	}
@@ -167,7 +174,7 @@ public:
 	@param offset the number of cells behind the ordinary write position where the input will be written.
 	*/
 	inline
-	void write(int8_t input, uint16_t offset)
+	void write(su input, uint16_t offset)
 	{
     uint16_t _pos = (write_pos + offset) & (NUM_BUFFER_SAMPLES - 1);
     delay_array[_pos] = input;
@@ -179,7 +186,7 @@ public:
 	@param delaytime_cells indicates the delay time in terms of cells in the delay buffer.
 	*/
 	inline
-	int16_t read(Q16n16 delaytime_cells)
+	return_type read(Q16n16 delaytime_cells)
 	{
 		return read(delaytime_cells, Int2Type<INTERP_TYPE>());
 	}
@@ -189,7 +196,7 @@ public:
 	It doesn't change the stored internal value of _delaytime_cells or feedback the output to the input.
 	*/
 	inline
-	int16_t read()
+	return_type read()
 	{
 		return read(Int2Type<INTERP_TYPE>());
 	}
@@ -243,11 +250,13 @@ public:
 
 
 private:
-	int16_t delay_array[NUM_BUFFER_SAMPLES];
+	return_type delay_array[NUM_BUFFER_SAMPLES];
 	uint16_t write_pos;
 	int8_t _feedback_level;
 	uint16_t _delaytime_cells;
 	Q15n16 _coeff; // for allpass interpolation
+        su last_in;
+        return_type last_out;
 
 
 
@@ -255,14 +264,15 @@ private:
 	@param in_value the signal input.
 	*/
 	inline
-	int16_t next(int8_t in_value, Int2Type<LINEAR>)
+	return_type next(su in_value, Int2Type<LINEAR>)
 	{
 		++write_pos &= (NUM_BUFFER_SAMPLES - 1);
 		uint16_t read_pos = (write_pos - _delaytime_cells) & (NUM_BUFFER_SAMPLES - 1);
 
-		int16_t delay_sig = delay_array[read_pos];								// read the delay buffer
-		int8_t feedback_sig = (int8_t) min(max(((delay_sig * _feedback_level)/128),-128),127); // feedback clipped
-		delay_array[write_pos] = (int16_t) in_value + feedback_sig;					// write to buffer
+		return_type delay_sig = delay_array[read_pos];								// read the delay buffer
+		//int8_t feedback_sig = (int8_t) min(max(((delay_sig * _feedback_level)/128),-128),127); // feedback clipped
+		su feedback_sig = (su) constrain(((delay_sig * _feedback_level)>>7), -(1<<((sizeof(su)<<3)-1)), (1<<((sizeof(su)<<3)-1))-1);
+		delay_array[write_pos] = (return_type) in_value + feedback_sig;					// write to buffer
 
 		return delay_sig;
 	}
@@ -277,7 +287,7 @@ private:
 	@note Timing: 10us
 	*/
 	inline
-	int16_t next(int8_t input, Int2Type<ALLPASS>)
+	return_type next(su input, Int2Type<ALLPASS>)
 	{
 		/*
 		http://www.scandalis.com/Jarrah/Documents/DelayLine.pdf
@@ -290,19 +300,24 @@ private:
 		= coeff * (in-last_out) + last_in
 		*/
 		//setPin13High();
+
+	  /* I think these should **not** be static 
 		static int8_t last_in;
 		static int16_t last_out;
-
+	  */
+	  
 		++write_pos &= (NUM_BUFFER_SAMPLES - 1);
 
 		uint16_t read_pos1 = (write_pos - _delaytime_cells) & (NUM_BUFFER_SAMPLES - 1);
-		int16_t delay_sig = delay_array[read_pos1];								// read the delay buffer
+		return_type delay_sig = delay_array[read_pos1];								// read the delay buffer
 
-		int16_t interp = (int16_t)(_coeff * ((int16_t)input - last_out)>>16) + last_in; // Q15n16*Q15n0 + Q15n0 = Q15n16 + Q15n0 = Q15n16
+		//int16_t interp = (int16_t)(_coeff * ((int16_t)input - last_out)>>16) + last_in; // Q15n16*Q15n0 + Q15n0 = Q15n16 + Q15n0 = Q15n16
+		return_type interp = (return_type)(_coeff * ((return_type)input - last_out)>>(sizeof(su)<<4)) + last_in;
 		delay_sig += interp;
 
-		int8_t feedback_sig = (int8_t) min(max(((delay_sig * _feedback_level)>>7),-128),127); // feedback clipped
-		delay_array[write_pos] = (int16_t) input + feedback_sig;					// write to buffer
+		//int8_t feedback_sig = (int8_t) min(max(((delay_sig * _feedback_level)>>7),-128),127); // feedback clipped
+		su feedback_sig = (su) constrain(((delay_sig * _feedback_level)>>7), -(1<<((sizeof(su)<<3)-1)), (1<<((sizeof(su)<<3)-1))-1);
+		delay_array[write_pos] = (return_type) input + feedback_sig;					// write to buffer
 
 		last_in = input;
 		last_out = delay_sig;
@@ -372,16 +387,16 @@ private:
 	@param delaytime_cells indicates the delay time in terms of cells in the delay buffer.
 	*/
 	inline
-	int16_t read(Q16n16 delaytime_cells, Int2Type<LINEAR>)
+	return_type read(Q16n16 delaytime_cells, Int2Type<LINEAR>)
 	{
 		uint16_t index = (Q16n16)delaytime_cells >> 16;
 		uint16_t fraction = (uint16_t) delaytime_cells; // keeps low word
 
 		uint16_t read_pos1 = (write_pos - index) & (NUM_BUFFER_SAMPLES - 1);
-		int16_t delay_sig1 = delay_array[read_pos1];								// read the delay buffer
+		return_type delay_sig1 = delay_array[read_pos1];								// read the delay buffer
 
 		uint16_t read_pos2 = (write_pos - (index+1)) & (NUM_BUFFER_SAMPLES - 1);
-		int16_t delay_sig2 = delay_array[read_pos2];								// read the delay buffer
+		return_type delay_sig2 = delay_array[read_pos2];								// read the delay buffer
 
 		/*
 		int16_t difference = delay_sig2 - delay_sig1;
@@ -389,7 +404,8 @@ private:
 
 		int16_t delay_sig = delay_sig1+delay_sig_fraction;
 		*/
-		int16_t delay_sig = delay_sig1 + ((int32_t)delay_sig2*fraction)>>16;
+		//int16_t delay_sig = delay_sig1 + ((int32_t)delay_sig2*fraction)>>16;
+		return_type delay_sig = delay_sig1 + ((typename IntegerType<sizeof(return_type)+sizeof(return_type)>::signed_type)delay_sig2*fraction)>>16;
 
 		return delay_sig;
 	}

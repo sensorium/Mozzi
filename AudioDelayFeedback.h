@@ -32,7 +32,7 @@ with the input, do it in your sketch. AudioDelayFeedback uses more processing an
 than a plain AudioDelay, but allows for more dramatic effects with feedback.
 @tparam INTERP_TYPE a choice of LINEAR (default) or ALLPASS interpolation.  LINEAR is better
 for sweeping delay times, ALLPASS may be better for reverb-like effects.
-@tparam the type of numbers to use for the signal in the delay.  The default is int8_t, but int16_t could be useful. Larger types (int32_t) might produce overflows as of v2.0.2.
+@tparam su the type of numbers to use for the signal in the delay.  The default is int8_t, but int16_t could be useful. Larger types (int32_t) might produce overflows as of v2.0.2.
 */
 template <uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR, typename su=int8_t>
 class AudioDelayFeedback

@@ -149,7 +149,7 @@ $(document).ready(function(){initNavTree('09_8_delays_2_audio_delay_2_audio_dela
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line">AudioOutput updateAudio(){</div>
-<div class="line">  char asig = aDel.next(aTriangle.next(), del_samps);</div>
+<div class="line">  int8_t asig = aDel.next(aTriangle.next(), del_samps);</div>
 <div class="line">  return MonoOutput::from8Bit(asig);</div>
 <div class="line">}</div>
 </div><!-- fragment --> </div><!-- contents -->

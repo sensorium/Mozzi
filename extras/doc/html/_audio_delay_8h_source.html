@@ -164,7 +164,7 @@ $(document).ready(function(){initNavTree('_audio_delay_8h_source.html',''); init
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="comment">// why does delay jump if I read it before writing?</span></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        delay_array[_write_pos] = in_value;         <span class="comment">// write to buffer</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        int8_t delay_sig = delay_array[read_pos] ;  <span class="comment">// read the delay buffer</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        T delay_sig = delay_array[read_pos] ;   <span class="comment">// read the delay buffer</span></div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">return</span> (T)delay_sig;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div>

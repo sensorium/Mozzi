@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Mozzi: AudioDelayFeedback&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt; Class Template Reference</title>
+<title>Mozzi: AudioDelayFeedback&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE, su &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('class_audio_delay_feedback.html',''); 
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="class_audio_delay_feedback-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">AudioDelayFeedback&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt; Class Template Reference</div>  </div>
+<div class="title">AudioDelayFeedback&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE, su &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -108,83 +108,84 @@ $(document).ready(function(){initNavTree('class_audio_delay_feedback.html',''); 
 
 <p><code>#include &lt;<a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt;<br />
-class AudioDelayFeedback&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;</h3>
+<div class="textblock"><h3>template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR, typename su = int8_t&gt;<br />
+class AudioDelayFeedback&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE, su &gt;</h3>
 
 <p>Audio delay line with feedback for comb filter, flange, chorus and short echo effects. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">NUM_BUFFER_SAMPLES</td><td>is the length of the delay buffer in samples, and should be a power of two. The maximum delay length which will fit in an atmega328 is half that of a plain <a class="el" href="class_audio_delay.html" title="Audio delay line for comb filter, flange, chorus and short echo effects.">AudioDelay</a> object, in this case 256 cells, or about 15 milliseconds. <a class="el" href="class_audio_delay_feedback.html" title="Audio delay line with feedback for comb filter, flange, chorus and short echo effects.">AudioDelayFeedback</a> uses int16_t sized cells to accomodate the higher amplitude of direct input to the delay as well as the feedback, without losing precision. Output is only the delay line signal. If you want to mix the delay with the input, do it in your sketch. <a class="el" href="class_audio_delay_feedback.html" title="Audio delay line with feedback for comb filter, flange, chorus and short echo effects.">AudioDelayFeedback</a> uses more processing and memory than a plain <a class="el" href="class_audio_delay.html" title="Audio delay line for comb filter, flange, chorus and short echo effects.">AudioDelay</a>, but allows for more dramatic effects with feedback. </td></tr>
     <tr><td class="paramname">INTERP_TYPE</td><td>a choice of LINEAR (default) or ALLPASS interpolation. LINEAR is better for sweeping delay times, ALLPASS may be better for reverb-like effects. </td></tr>
+    <tr><td class="paramname">su</td><td>the type of numbers to use for the signal in the delay. The default is int8_t, but int16_t could be useful. Larger types (int32_t) might produce overflows as of v2.0.2. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00036">36</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00038">38</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6e6352413ac4ee9b2bc03684b072fdc7"><td class="memItemLeft" align="right" valign="top"><a id="a6e6352413ac4ee9b2bc03684b072fdc7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a6e6352413ac4ee9b2bc03684b072fdc7">AudioDelayFeedback</a> ()</td></tr>
-<tr class="memdesc:a6e6352413ac4ee9b2bc03684b072fdc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
-<tr class="separator:a6e6352413ac4ee9b2bc03684b072fdc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d038aff13126acbca484b74b1ee5620"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a7d038aff13126acbca484b74b1ee5620">AudioDelayFeedback</a> (uint16_t delaytime_cells)</td></tr>
-<tr class="memdesc:a7d038aff13126acbca484b74b1ee5620"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="class_audio_delay_feedback.html#a7d038aff13126acbca484b74b1ee5620">More...</a><br /></td></tr>
-<tr class="separator:a7d038aff13126acbca484b74b1ee5620"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54d7f001d6a99bd3955fb7dab94fbfe8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a54d7f001d6a99bd3955fb7dab94fbfe8">AudioDelayFeedback</a> (uint16_t delaytime_cells, int8_t feedback_level)</td></tr>
-<tr class="memdesc:a54d7f001d6a99bd3955fb7dab94fbfe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="class_audio_delay_feedback.html#a54d7f001d6a99bd3955fb7dab94fbfe8">More...</a><br /></td></tr>
-<tr class="separator:a54d7f001d6a99bd3955fb7dab94fbfe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a702d1a0a9b104beb0b18c80422500e"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a5a702d1a0a9b104beb0b18c80422500e">next</a> (int8_t input)</td></tr>
-<tr class="memdesc:a5a702d1a0a9b104beb0b18c80422500e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay and retrieve the signal in the delay line at the position delaytime_cells.  <a href="class_audio_delay_feedback.html#a5a702d1a0a9b104beb0b18c80422500e">More...</a><br /></td></tr>
-<tr class="separator:a5a702d1a0a9b104beb0b18c80422500e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c7745dd84f01dbdc9b6552a4c427f0b"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a7c7745dd84f01dbdc9b6552a4c427f0b">next</a> (int8_t input, uint16_t delaytime_cells)</td></tr>
-<tr class="memdesc:a7c7745dd84f01dbdc9b6552a4c427f0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay, retrieve the signal in the delay line at the position delaytime_cells, and add feedback from the output to the input.  <a href="class_audio_delay_feedback.html#a7c7745dd84f01dbdc9b6552a4c427f0b">More...</a><br /></td></tr>
-<tr class="separator:a7c7745dd84f01dbdc9b6552a4c427f0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9cc2cf135fa0f1a1f0d50ca7d9f89ea"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#af9cc2cf135fa0f1a1f0d50ca7d9f89ea">next</a> (int8_t input, <a class="el" href="group__fixmath.html#gab3127fd8ac279e1d8dda0292bc1fc8dc">Q16n16</a> delaytime_cells)</td></tr>
-<tr class="memdesc:af9cc2cf135fa0f1a1f0d50ca7d9f89ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay, retrieve the signal in the delay line at the interpolated fractional position delaytime_cells, and add feedback from the output to the input.  <a href="class_audio_delay_feedback.html#af9cc2cf135fa0f1a1f0d50ca7d9f89ea">More...</a><br /></td></tr>
-<tr class="separator:af9cc2cf135fa0f1a1f0d50ca7d9f89ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3232fec9e7f90169e8d8eab85f39394"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#aa3232fec9e7f90169e8d8eab85f39394">write</a> (int8_t input)</td></tr>
-<tr class="memdesc:aa3232fec9e7f90169e8d8eab85f39394"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay but don't change the delay time or retrieve the output signal.  <a href="class_audio_delay_feedback.html#aa3232fec9e7f90169e8d8eab85f39394">More...</a><br /></td></tr>
-<tr class="separator:aa3232fec9e7f90169e8d8eab85f39394"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27e773a0ae0c2cee895fbcf18c1351e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a27e773a0ae0c2cee895fbcf18c1351e1">writeFeedback</a> (int8_t input)</td></tr>
-<tr class="memdesc:a27e773a0ae0c2cee895fbcf18c1351e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay but don't advance the write position, change the delay time or retrieve the output signal.  <a href="class_audio_delay_feedback.html#a27e773a0ae0c2cee895fbcf18c1351e1">More...</a><br /></td></tr>
-<tr class="separator:a27e773a0ae0c2cee895fbcf18c1351e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeeec669071403fc0a294724e775e3812"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#aeeec669071403fc0a294724e775e3812">write</a> (int8_t input, uint16_t offset)</td></tr>
-<tr class="memdesc:aeeec669071403fc0a294724e775e3812"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay at an offset from the current write position.  <a href="class_audio_delay_feedback.html#aeeec669071403fc0a294724e775e3812">More...</a><br /></td></tr>
-<tr class="separator:aeeec669071403fc0a294724e775e3812"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77508ec1d8da719edbc7c34173c9d7cb"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a77508ec1d8da719edbc7c34173c9d7cb">read</a> (<a class="el" href="group__fixmath.html#gab3127fd8ac279e1d8dda0292bc1fc8dc">Q16n16</a> delaytime_cells)</td></tr>
-<tr class="memdesc:a77508ec1d8da719edbc7c34173c9d7cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the signal in the delay line at the interpolated fractional position delaytime_cells.  <a href="class_audio_delay_feedback.html#a77508ec1d8da719edbc7c34173c9d7cb">More...</a><br /></td></tr>
-<tr class="separator:a77508ec1d8da719edbc7c34173c9d7cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b6cefa45ecaa174320effe25b9ce6c5"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a8b6cefa45ecaa174320effe25b9ce6c5">read</a> ()</td></tr>
-<tr class="memdesc:a8b6cefa45ecaa174320effe25b9ce6c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the signal in the delay line at the current stored delaytime_cells.  <a href="class_audio_delay_feedback.html#a8b6cefa45ecaa174320effe25b9ce6c5">More...</a><br /></td></tr>
-<tr class="separator:a8b6cefa45ecaa174320effe25b9ce6c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcf71a86083db5a48ef71c1397247886"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#abcf71a86083db5a48ef71c1397247886">setDelayTimeCells</a> (uint16_t delaytime_cells)</td></tr>
-<tr class="memdesc:abcf71a86083db5a48ef71c1397247886"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set delay time expressed in samples.  <a href="class_audio_delay_feedback.html#abcf71a86083db5a48ef71c1397247886">More...</a><br /></td></tr>
-<tr class="separator:abcf71a86083db5a48ef71c1397247886"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e8344af6962ea061da8f70ed119b2bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a8e8344af6962ea061da8f70ed119b2bd">setDelayTimeCells</a> (<a class="el" href="group__fixmath.html#gab3127fd8ac279e1d8dda0292bc1fc8dc">Q16n16</a> delaytime_cells)</td></tr>
-<tr class="memdesc:a8e8344af6962ea061da8f70ed119b2bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set delay time expressed in samples, fractional Q16n16 for an interpolating delay.  <a href="class_audio_delay_feedback.html#a8e8344af6962ea061da8f70ed119b2bd">More...</a><br /></td></tr>
-<tr class="separator:a8e8344af6962ea061da8f70ed119b2bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c54b49ae9f25baaf8714528295c53e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a7c54b49ae9f25baaf8714528295c53e2">setDelayTimeCells</a> (float delaytime_cells)</td></tr>
-<tr class="memdesc:a7c54b49ae9f25baaf8714528295c53e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set delay time expressed in samples, fractional float for an interpolating delay.  <a href="class_audio_delay_feedback.html#a7c54b49ae9f25baaf8714528295c53e2">More...</a><br /></td></tr>
-<tr class="separator:a7c54b49ae9f25baaf8714528295c53e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2cd87a7dc91187ed439a8ec1d7e00d29"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a2cd87a7dc91187ed439a8ec1d7e00d29">setFeedbackLevel</a> (int8_t feedback_level)</td></tr>
-<tr class="memdesc:a2cd87a7dc91187ed439a8ec1d7e00d29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the feedback gain.  <a href="class_audio_delay_feedback.html#a2cd87a7dc91187ed439a8ec1d7e00d29">More...</a><br /></td></tr>
-<tr class="separator:a2cd87a7dc91187ed439a8ec1d7e00d29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbc1ecd0dffe273cac87b8fc888e28f0"><td class="memItemLeft" align="right" valign="top"><a id="adbc1ecd0dffe273cac87b8fc888e28f0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#adbc1ecd0dffe273cac87b8fc888e28f0">AudioDelayFeedback</a> ()</td></tr>
+<tr class="memdesc:adbc1ecd0dffe273cac87b8fc888e28f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
+<tr class="separator:adbc1ecd0dffe273cac87b8fc888e28f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0412c5d62f72a881d95504d9d0018245"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a0412c5d62f72a881d95504d9d0018245">AudioDelayFeedback</a> (uint16_t delaytime_cells)</td></tr>
+<tr class="memdesc:a0412c5d62f72a881d95504d9d0018245"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="class_audio_delay_feedback.html#a0412c5d62f72a881d95504d9d0018245">More...</a><br /></td></tr>
+<tr class="separator:a0412c5d62f72a881d95504d9d0018245"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61f3c90f752d8b15c0f7a19e03bc4f03"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a61f3c90f752d8b15c0f7a19e03bc4f03">AudioDelayFeedback</a> (uint16_t delaytime_cells, int8_t feedback_level)</td></tr>
+<tr class="memdesc:a61f3c90f752d8b15c0f7a19e03bc4f03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="class_audio_delay_feedback.html#a61f3c90f752d8b15c0f7a19e03bc4f03">More...</a><br /></td></tr>
+<tr class="separator:a61f3c90f752d8b15c0f7a19e03bc4f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a566593f5ea6d2d8bac9c45aa592f40fb"><td class="memItemLeft" align="right" valign="top">return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a566593f5ea6d2d8bac9c45aa592f40fb">next</a> (su input)</td></tr>
+<tr class="memdesc:a566593f5ea6d2d8bac9c45aa592f40fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay and retrieve the signal in the delay line at the position delaytime_cells.  <a href="class_audio_delay_feedback.html#a566593f5ea6d2d8bac9c45aa592f40fb">More...</a><br /></td></tr>
+<tr class="separator:a566593f5ea6d2d8bac9c45aa592f40fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a335ce266a8b40173f3279b96f9c6c050"><td class="memItemLeft" align="right" valign="top">return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a335ce266a8b40173f3279b96f9c6c050">next</a> (su input, uint16_t delaytime_cells)</td></tr>
+<tr class="memdesc:a335ce266a8b40173f3279b96f9c6c050"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay, retrieve the signal in the delay line at the position delaytime_cells, and add feedback from the output to the input.  <a href="class_audio_delay_feedback.html#a335ce266a8b40173f3279b96f9c6c050">More...</a><br /></td></tr>
+<tr class="separator:a335ce266a8b40173f3279b96f9c6c050"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af94a6f68bc932e4e2ce99b3a43713825"><td class="memItemLeft" align="right" valign="top">return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#af94a6f68bc932e4e2ce99b3a43713825">next</a> (su input, <a class="el" href="group__fixmath.html#gab3127fd8ac279e1d8dda0292bc1fc8dc">Q16n16</a> delaytime_cells)</td></tr>
+<tr class="memdesc:af94a6f68bc932e4e2ce99b3a43713825"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay, retrieve the signal in the delay line at the interpolated fractional position delaytime_cells, and add feedback from the output to the input.  <a href="class_audio_delay_feedback.html#af94a6f68bc932e4e2ce99b3a43713825">More...</a><br /></td></tr>
+<tr class="separator:af94a6f68bc932e4e2ce99b3a43713825"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5197399a986922eee160a455069dc93e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a5197399a986922eee160a455069dc93e">write</a> (su input)</td></tr>
+<tr class="memdesc:a5197399a986922eee160a455069dc93e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay but don't change the delay time or retrieve the output signal.  <a href="class_audio_delay_feedback.html#a5197399a986922eee160a455069dc93e">More...</a><br /></td></tr>
+<tr class="separator:a5197399a986922eee160a455069dc93e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae83d67ec86483bae489a6a17e8d0e5e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#ae83d67ec86483bae489a6a17e8d0e5e3">writeFeedback</a> (su input)</td></tr>
+<tr class="memdesc:ae83d67ec86483bae489a6a17e8d0e5e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay but don't advance the write position, change the delay time or retrieve the output signal.  <a href="class_audio_delay_feedback.html#ae83d67ec86483bae489a6a17e8d0e5e3">More...</a><br /></td></tr>
+<tr class="separator:ae83d67ec86483bae489a6a17e8d0e5e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93231df73010a40da2d4092b94a99f9d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a93231df73010a40da2d4092b94a99f9d">write</a> (su input, uint16_t offset)</td></tr>
+<tr class="memdesc:a93231df73010a40da2d4092b94a99f9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input a value to the delay at an offset from the current write position.  <a href="class_audio_delay_feedback.html#a93231df73010a40da2d4092b94a99f9d">More...</a><br /></td></tr>
+<tr class="separator:a93231df73010a40da2d4092b94a99f9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb77aac1acba3b0a31428345342a5205"><td class="memItemLeft" align="right" valign="top">return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#adb77aac1acba3b0a31428345342a5205">read</a> (<a class="el" href="group__fixmath.html#gab3127fd8ac279e1d8dda0292bc1fc8dc">Q16n16</a> delaytime_cells)</td></tr>
+<tr class="memdesc:adb77aac1acba3b0a31428345342a5205"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the signal in the delay line at the interpolated fractional position delaytime_cells.  <a href="class_audio_delay_feedback.html#adb77aac1acba3b0a31428345342a5205">More...</a><br /></td></tr>
+<tr class="separator:adb77aac1acba3b0a31428345342a5205"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabcade306904f5f6ac43d12bb00606e6"><td class="memItemLeft" align="right" valign="top">return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#aabcade306904f5f6ac43d12bb00606e6">read</a> ()</td></tr>
+<tr class="memdesc:aabcade306904f5f6ac43d12bb00606e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the signal in the delay line at the current stored delaytime_cells.  <a href="class_audio_delay_feedback.html#aabcade306904f5f6ac43d12bb00606e6">More...</a><br /></td></tr>
+<tr class="separator:aabcade306904f5f6ac43d12bb00606e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f49d5e601799487237266621245c7a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a3f49d5e601799487237266621245c7a4">setDelayTimeCells</a> (uint16_t delaytime_cells)</td></tr>
+<tr class="memdesc:a3f49d5e601799487237266621245c7a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set delay time expressed in samples.  <a href="class_audio_delay_feedback.html#a3f49d5e601799487237266621245c7a4">More...</a><br /></td></tr>
+<tr class="separator:a3f49d5e601799487237266621245c7a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c5c805eb4d62e4650b08400409863a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a2c5c805eb4d62e4650b08400409863a9">setDelayTimeCells</a> (<a class="el" href="group__fixmath.html#gab3127fd8ac279e1d8dda0292bc1fc8dc">Q16n16</a> delaytime_cells)</td></tr>
+<tr class="memdesc:a2c5c805eb4d62e4650b08400409863a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set delay time expressed in samples, fractional Q16n16 for an interpolating delay.  <a href="class_audio_delay_feedback.html#a2c5c805eb4d62e4650b08400409863a9">More...</a><br /></td></tr>
+<tr class="separator:a2c5c805eb4d62e4650b08400409863a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6fb7260a540416018ebfac7aeac32f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#ab6fb7260a540416018ebfac7aeac32f1">setDelayTimeCells</a> (float delaytime_cells)</td></tr>
+<tr class="memdesc:ab6fb7260a540416018ebfac7aeac32f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set delay time expressed in samples, fractional float for an interpolating delay.  <a href="class_audio_delay_feedback.html#ab6fb7260a540416018ebfac7aeac32f1">More...</a><br /></td></tr>
+<tr class="separator:ab6fb7260a540416018ebfac7aeac32f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1408da9125a0d6c38ce89b11d7d93113"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_delay_feedback.html#a1408da9125a0d6c38ce89b11d7d93113">setFeedbackLevel</a> (int8_t feedback_level)</td></tr>
+<tr class="memdesc:a1408da9125a0d6c38ce89b11d7d93113"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the feedback gain.  <a href="class_audio_delay_feedback.html#a1408da9125a0d6c38ce89b11d7d93113">More...</a><br /></td></tr>
+<tr class="separator:a1408da9125a0d6c38ce89b11d7d93113"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a7d038aff13126acbca484b74b1ee5620"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d038aff13126acbca484b74b1ee5620">&#9670;&nbsp;</a></span>AudioDelayFeedback() <span class="overload">[1/2]</span></h2>
+<a id="a0412c5d62f72a881d95504d9d0018245"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0412c5d62f72a881d95504d9d0018245">&#9670;&nbsp;</a></span>AudioDelayFeedback() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
+template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR, typename su  = int8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;::<a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a> </td>
+          <td class="memname"><a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE, su &gt;::<a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a> </td>
           <td>(</td>
           <td class="paramtype">uint16_t&#160;</td>
           <td class="paramname"><em>delaytime_cells</em></td><td>)</td>
@@ -206,23 +207,23 @@ template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00051">51</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00055">55</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
-<a id="a54d7f001d6a99bd3955fb7dab94fbfe8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54d7f001d6a99bd3955fb7dab94fbfe8">&#9670;&nbsp;</a></span>AudioDelayFeedback() <span class="overload">[2/2]</span></h2>
+<a id="a61f3c90f752d8b15c0f7a19e03bc4f03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61f3c90f752d8b15c0f7a19e03bc4f03">&#9670;&nbsp;</a></span>AudioDelayFeedback() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
+template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR, typename su  = int8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;::<a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a> </td>
+          <td class="memname"><a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE, su &gt;::<a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a> </td>
           <td>(</td>
           <td class="paramtype">uint16_t&#160;</td>
           <td class="paramname"><em>delaytime_cells</em>, </td>
@@ -255,26 +256,26 @@ template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00061">61</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00065">65</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a5a702d1a0a9b104beb0b18c80422500e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a702d1a0a9b104beb0b18c80422500e">&#9670;&nbsp;</a></span>next() <span class="overload">[1/3]</span></h2>
+<a id="a566593f5ea6d2d8bac9c45aa592f40fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a566593f5ea6d2d8bac9c45aa592f40fb">&#9670;&nbsp;</a></span>next() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
+template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR, typename su  = int8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int16_t <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;::next </td>
+          <td class="memname">return_type <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE, su &gt;::next </td>
           <td>(</td>
-          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramtype">su&#160;</td>
           <td class="paramname"><em>input</em></td><td>)</td>
           <td></td>
         </tr>
@@ -293,27 +294,27 @@ template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>slower than <a class="el" href="class_audio_delay_feedback.html#a7c7745dd84f01dbdc9b6552a4c427f0b" title="Input a value to the delay, retrieve the signal in the delay line at the position delaytime_cells,...">next(int8_t input, uint16_t delaytime_cells)</a> </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>slower than next(int8_t input, uint16_t delaytime_cells) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00071">71</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00075">75</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
-<a id="af9cc2cf135fa0f1a1f0d50ca7d9f89ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af9cc2cf135fa0f1a1f0d50ca7d9f89ea">&#9670;&nbsp;</a></span>next() <span class="overload">[2/3]</span></h2>
+<a id="af94a6f68bc932e4e2ce99b3a43713825"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af94a6f68bc932e4e2ce99b3a43713825">&#9670;&nbsp;</a></span>next() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
+template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR, typename su  = int8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int16_t <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;::next </td>
+          <td class="memname">return_type <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE, su &gt;::next </td>
           <td>(</td>
-          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramtype">su&#160;</td>
           <td class="paramname"><em>input</em>, </td>
         </tr>
         <tr>
@@ -344,25 +345,25 @@ template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00113">113</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00118">118</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
-<a id="a7c7745dd84f01dbdc9b6552a4c427f0b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c7745dd84f01dbdc9b6552a4c427f0b">&#9670;&nbsp;</a></span>next() <span class="overload">[3/3]</span></h2>
+<a id="a335ce266a8b40173f3279b96f9c6c050"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a335ce266a8b40173f3279b96f9c6c050">&#9670;&nbsp;</a></span>next() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
+template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR, typename su  = int8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int16_t <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;::next </td>
+          <td class="memname">return_type <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE, su &gt;::next </td>
           <td>(</td>
-          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramtype">su&#160;</td>
           <td class="paramname"><em>input</em>, </td>
         </tr>
         <tr>
@@ -394,23 +395,23 @@ template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>Timing: 4us </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00088">88</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00092">92</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
-<a id="a8b6cefa45ecaa174320effe25b9ce6c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b6cefa45ecaa174320effe25b9ce6c5">&#9670;&nbsp;</a></span>read() <span class="overload">[1/2]</span></h2>
+<a id="aabcade306904f5f6ac43d12bb00606e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabcade306904f5f6ac43d12bb00606e6">&#9670;&nbsp;</a></span>read() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
+template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR, typename su  = int8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int16_t <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;::read </td>
+          <td class="memname">return_type <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE, su &gt;::read </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -426,23 +427,23 @@ template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
 <p>Retrieve the signal in the delay line at the current stored delaytime_cells. </p>
 <p>It doesn't change the stored internal value of _delaytime_cells or feedback the output to the input. </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00192">192</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00199">199</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
-<a id="a77508ec1d8da719edbc7c34173c9d7cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77508ec1d8da719edbc7c34173c9d7cb">&#9670;&nbsp;</a></span>read() <span class="overload">[2/2]</span></h2>
+<a id="adb77aac1acba3b0a31428345342a5205"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb77aac1acba3b0a31428345342a5205">&#9670;&nbsp;</a></span>read() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
+template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR, typename su  = int8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int16_t <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;::read </td>
+          <td class="memname">return_type <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE, su &gt;::read </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__fixmath.html#gab3127fd8ac279e1d8dda0292bc1fc8dc">Q16n16</a>&#160;</td>
           <td class="paramname"><em>delaytime_cells</em></td><td>)</td>
@@ -464,23 +465,23 @@ template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00182">182</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00189">189</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
-<a id="a7c54b49ae9f25baaf8714528295c53e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c54b49ae9f25baaf8714528295c53e2">&#9670;&nbsp;</a></span>setDelayTimeCells() <span class="overload">[1/3]</span></h2>
+<a id="ab6fb7260a540416018ebfac7aeac32f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6fb7260a540416018ebfac7aeac32f1">&#9670;&nbsp;</a></span>setDelayTimeCells() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
+template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR, typename su  = int8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;::setDelayTimeCells </td>
+          <td class="memname">void <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE, su &gt;::setDelayTimeCells </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>delaytime_cells</em></td><td>)</td>
@@ -502,23 +503,23 @@ template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00228">228</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00235">235</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
-<a id="a8e8344af6962ea061da8f70ed119b2bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e8344af6962ea061da8f70ed119b2bd">&#9670;&nbsp;</a></span>setDelayTimeCells() <span class="overload">[2/3]</span></h2>
+<a id="a2c5c805eb4d62e4650b08400409863a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c5c805eb4d62e4650b08400409863a9">&#9670;&nbsp;</a></span>setDelayTimeCells() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
+template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR, typename su  = int8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;::setDelayTimeCells </td>
+          <td class="memname">void <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE, su &gt;::setDelayTimeCells </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__fixmath.html#gab3127fd8ac279e1d8dda0292bc1fc8dc">Q16n16</a>&#160;</td>
           <td class="paramname"><em>delaytime_cells</em></td><td>)</td>
@@ -540,23 +541,23 @@ template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00216">216</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00223">223</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
-<a id="abcf71a86083db5a48ef71c1397247886"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abcf71a86083db5a48ef71c1397247886">&#9670;&nbsp;</a></span>setDelayTimeCells() <span class="overload">[3/3]</span></h2>
+<a id="a3f49d5e601799487237266621245c7a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f49d5e601799487237266621245c7a4">&#9670;&nbsp;</a></span>setDelayTimeCells() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
+template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR, typename su  = int8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;::setDelayTimeCells </td>
+          <td class="memname">void <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE, su &gt;::setDelayTimeCells </td>
           <td>(</td>
           <td class="paramtype">uint16_t&#160;</td>
           <td class="paramname"><em>delaytime_cells</em></td><td>)</td>
@@ -578,23 +579,23 @@ template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00204">204</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00211">211</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
-<a id="a2cd87a7dc91187ed439a8ec1d7e00d29"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2cd87a7dc91187ed439a8ec1d7e00d29">&#9670;&nbsp;</a></span>setFeedbackLevel()</h2>
+<a id="a1408da9125a0d6c38ce89b11d7d93113"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1408da9125a0d6c38ce89b11d7d93113">&#9670;&nbsp;</a></span>setFeedbackLevel()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
+template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR, typename su  = int8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;::setFeedbackLevel </td>
+          <td class="memname">void <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE, su &gt;::setFeedbackLevel </td>
           <td>(</td>
           <td class="paramtype">int8_t&#160;</td>
           <td class="paramname"><em>feedback_level</em></td><td>)</td>
@@ -616,25 +617,25 @@ template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00238">238</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00245">245</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
-<a id="aa3232fec9e7f90169e8d8eab85f39394"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3232fec9e7f90169e8d8eab85f39394">&#9670;&nbsp;</a></span>write() <span class="overload">[1/2]</span></h2>
+<a id="a5197399a986922eee160a455069dc93e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5197399a986922eee160a455069dc93e">&#9670;&nbsp;</a></span>write() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
+template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR, typename su  = int8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;::write </td>
+          <td class="memname">void <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE, su &gt;::write </td>
           <td>(</td>
-          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramtype">su&#160;</td>
           <td class="paramname"><em>input</em></td><td>)</td>
           <td></td>
         </tr>
@@ -654,25 +655,25 @@ template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00146">146</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00153">153</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
-<a id="aeeec669071403fc0a294724e775e3812"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeeec669071403fc0a294724e775e3812">&#9670;&nbsp;</a></span>write() <span class="overload">[2/2]</span></h2>
+<a id="a93231df73010a40da2d4092b94a99f9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93231df73010a40da2d4092b94a99f9d">&#9670;&nbsp;</a></span>write() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
+template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR, typename su  = int8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;::write </td>
+          <td class="memname">void <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE, su &gt;::write </td>
           <td>(</td>
-          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramtype">su&#160;</td>
           <td class="paramname"><em>input</em>, </td>
         </tr>
         <tr>
@@ -703,25 +704,25 @@ template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00170">170</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00177">177</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>
-<a id="a27e773a0ae0c2cee895fbcf18c1351e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a27e773a0ae0c2cee895fbcf18c1351e1">&#9670;&nbsp;</a></span>writeFeedback()</h2>
+<a id="ae83d67ec86483bae489a6a17e8d0e5e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae83d67ec86483bae489a6a17e8d0e5e3">&#9670;&nbsp;</a></span>writeFeedback()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
+template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR, typename su  = int8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE &gt;::writeFeedback </td>
+          <td class="memname">void <a class="el" href="class_audio_delay_feedback.html">AudioDelayFeedback</a>&lt; NUM_BUFFER_SAMPLES, INTERP_TYPE, su &gt;::writeFeedback </td>
           <td>(</td>
-          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramtype">su&#160;</td>
           <td class="paramname"><em>input</em></td><td>)</td>
           <td></td>
         </tr>
@@ -741,7 +742,7 @@ template&lt;uint16_t NUM_BUFFER_SAMPLES, int8_t INTERP_TYPE = LINEAR&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00158">158</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_delay_feedback_8h_source.html#l00165">165</a> of file <a class="el" href="_audio_delay_feedback_8h_source.html">AudioDelayFeedback.h</a>.</p>
 
 </div>
 </div>

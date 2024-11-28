@@ -10,7 +10,7 @@ var hierarchy =
     [ "AudioDelay< NUM_BUFFER_SAMPLES, int >", "class_audio_delay.html", [
       [ "ControlDelay< NUM_BUFFER_SAMPLES, T >", "class_control_delay.html", null ]
     ] ],
-    [ "AudioDelayFeedback< NUM_BUFFER_SAMPLES, INTERP_TYPE >", "class_audio_delay_feedback.html", null ],
+    [ "AudioDelayFeedback< NUM_BUFFER_SAMPLES, INTERP_TYPE, su >", "class_audio_delay_feedback.html", null ],
     [ "AutoRange< T >", "group__sensortools.html#class_auto_range", null ],
     [ "AutoRange< int >", "group__sensortools.html", [
       [ "AutoMap", "group__sensortools.html#class_auto_map", null ]
@@ -29,6 +29,7 @@ var hierarchy =
     [ "IntegerType< 4 >", "struct_integer_type_3_014_01_4.html", null ],
     [ "IntegerType< 8 >", "struct_integer_type_3_018_01_4.html", null ],
     [ "IntegerType< sizeof(AudioOutputStorage_t)>", "group__util.html", null ],
+    [ "IntegerType< sizeof(int8_t)+sizeof(int8_t)>", "group__util.html", null ],
     [ "IntegerType< sizeof(uint8_t)+sizeof(uint8_t)>", "group__util.html", null ],
     [ "IntMap", "class_int_map.html", null ],
     [ "Line< T >", "class_line.html", null ],

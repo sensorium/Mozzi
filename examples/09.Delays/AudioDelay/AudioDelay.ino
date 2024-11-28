@@ -47,6 +47,6 @@ void updateControl(){
 }
 
 AudioOutput updateAudio(){
-  char asig = aDel.next(aTriangle.next(), del_samps);
+  int8_t asig = aDel.next(aTriangle.next(), del_samps);
   return MonoOutput::from8Bit(asig);
 }

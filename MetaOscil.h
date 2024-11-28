@@ -20,6 +20,7 @@
 
 #include "Oscil.h"
 #include "mozzi_fixmath.h"
+#include <FixMath.h>
 
 
 /**
@@ -172,6 +173,19 @@ template<uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE, byte N_OSCIL>
     setFreq((int) frequency, false);
     current_osc->setFreq(frequency);    
   }
+  
+
+    /** Set the MetaOsc frequency with a UFix<NI,NF> fixed-point number format. This falls back to using UFix<16,16> internally and is provided as a fallout for other UFix types..
+      @param frequency to play the wave table.
+*/
+  template <int8_t NI, int8_t NF, uint64_t RANGE>
+  inline
+    void setFreq(UFix<NI,NF,RANGE> frequency)
+  {
+    setFreq(frequency.asInt(), false);
+    current_osc->setFreq(frequency);
+  }
+  
 
 
   /** Set the MetaOsc frequency with a Q24n8 fixed-point number format.
@@ -182,6 +196,7 @@ template<uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE, byte N_OSCIL>
     setFreq((int) (frequency>>8), false);
     current_osc->setFreq_Q24n8(frequency);
   }
+    
 
   
   /** Set the MetaOsc frequency with a Q16n16 fixed-point number format.

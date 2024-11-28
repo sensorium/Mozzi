@@ -129,8 +129,5 @@ var NAVTREEINDEX3 =
 "triangle_8py_source.html":[4,0,102],
 "twi__nonblock_8h_source.html":[4,0,103],
 "twi__nonblock_8hpp_source.html":[4,0,104],
-"twi__nonblock___headers_only_8h.html":[4,0,105],
-"twi__nonblock___headers_only_8h.html#a83f4357fd165be2f25322454042ff71b":[4,0,105,0],
-"twi__nonblock___headers_only_8h_source.html":[4,0,105],
-"umpah__huff_8h_source.html":[4,0,106]
+"umpah__huff_8h_source.html":[4,0,105]
 };

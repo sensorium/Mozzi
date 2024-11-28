@@ -2,7 +2,6 @@ var group__core =
 [
     [ "MozziHeadersOnly.h", "_mozzi_headers_only_8h.html", null ],
     [ "Mozzi.h", "_mozzi_8h.html", null ],
-    [ "twi_nonblock_HeadersOnly.h", "twi__nonblock___headers_only_8h.html", null ],
     [ "CONSTTABLE_STORAGE", "group__core.html#gad03d3ea20c802844460cd1ad636cf6a9", null ],
     [ "audioHook", "group__core.html#ga2fca37b988ab369e2f3c3108c683e59d", null ],
     [ "audioTicks", "group__core.html#ga55fa9d48f327b646c2f71cef7da7b8f0", null ],

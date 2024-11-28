@@ -105,7 +105,6 @@ var files_dup =
     [ "triangle.py", "triangle_8py_source.html", null ],
     [ "twi_nonblock.h", "twi__nonblock_8h_source.html", null ],
     [ "twi_nonblock.hpp", "twi__nonblock_8hpp_source.html", null ],
-    [ "twi_nonblock_HeadersOnly.h", "twi__nonblock___headers_only_8h.html", "twi__nonblock___headers_only_8h" ],
     [ "umpah_huff.h", "umpah__huff_8h_source.html", null ],
     [ "WaveFolder.h", "_wave_folder_8h_source.html", null ],
     [ "WavePacket.h", "_wave_packet_8h_source.html", null ],

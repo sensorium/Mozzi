@@ -28,6 +28,10 @@ var NAVTREE =
     [ "Hardware and configuration", "hardware.html", "hardware" ],
     [ "Getting Started", "basic_info.html", null ],
     [ "Modules", "modules.html", "modules" ],
+    [ "Namespace Members", "namespacemembers.html", [
+      [ "All", "namespacemembers.html", null ],
+      [ "Variables", "namespacemembers_vars.html", null ]
+    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
@@ -52,8 +56,8 @@ var NAVTREEINDEX =
 [
 "01_8_basics_2_vibrato_2_vibrato_8ino-example.html",
 "class_meta_oscil.html#a7567da1ff25347c8d44fad66efe28af1",
-"functions_func_e.html",
-"group__sensortools.html#class_rolling_average"
+"functions_func_d.html",
+"group__sensortools.html#class_over_sample"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

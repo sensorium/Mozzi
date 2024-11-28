@@ -45,6 +45,7 @@ var files_dup =
     [ "known_16bit_timers.h", "known__16bit__timers_8h_source.html", null ],
     [ "Line.h", "_line_8h_source.html", null ],
     [ "LowPassFilter.h", "_low_pass_filter_8h_source.html", null ],
+    [ "make_standard_tables.py", "make__standard__tables_8py_source.html", null ],
     [ "meta.h", "meta_8h_source.html", null ],
     [ "MetaOscil.h", "_meta_oscil_8h_source.html", null ],
     [ "Metronome.h", "_metronome_8h_source.html", null ],

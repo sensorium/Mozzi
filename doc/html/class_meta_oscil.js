@@ -12,6 +12,7 @@ var class_meta_oscil =
     [ "setCutoffFreqs", "class_meta_oscil.html#a7567da1ff25347c8d44fad66efe28af1", null ],
     [ "setFreq", "class_meta_oscil.html#a3a1bf4af017c5c39d736f78d3c3e1bee", null ],
     [ "setFreq", "class_meta_oscil.html#a1960b7c4012424058876085c76d1dfd9", null ],
+    [ "setFreq", "class_meta_oscil.html#aafb4c01a8ce6b4d880fd1ecf59bd3bfd", null ],
     [ "setFreq_Q16n16", "class_meta_oscil.html#a98794f84684b257079e79bd9f92d0892", null ],
     [ "setFreq_Q24n8", "class_meta_oscil.html#adcadf4935c390cd8d2eea9623365bf70", null ],
     [ "setOscils", "class_meta_oscil.html#afb893462be24c907f87bc6ee05595475", null ],

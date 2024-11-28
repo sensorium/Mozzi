@@ -13,7 +13,7 @@
 #define CONFIG_CHECK_ESP8266_H
 
 /**
- * @page hardware_esp8266 Mozzi on ESP32-based boards.
+ * @page hardware_esp8266 Mozzi on ESP8266-based boards.
  *
  * port by Thomas Friedrichsmeier
  *

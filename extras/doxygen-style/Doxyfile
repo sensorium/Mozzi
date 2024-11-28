@@ -51,7 +51,7 @@ PROJECT_BRIEF          = "sound synthesis library for Arduino"
 # pixels and the maximum width should not exceed 200 pixels. Doxygen will copy
 # the logo to the output directory.
 
-PROJECT_LOGO           = /Users/timbarrass/Documents/Arduino/libraries/Mozzi/extras/doxygen-style/mozzi-circle.png
+PROJECT_LOGO           = mozzi-circle.png
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) path
 # into which the generated documentation will be written. If a relative path is

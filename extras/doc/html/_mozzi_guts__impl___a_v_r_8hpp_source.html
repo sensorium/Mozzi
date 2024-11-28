@@ -140,7 +140,7 @@ $(document).ready(function(){initNavTree('_mozzi_guts__impl___a_v_r_8hpp_source.
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">// 0, 1, 4, 5, 6, 7, 13, 12, 11, 10, 9, 8</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    0, 1, 4, 5, 6, 7, 13, 12, 11, 10, 9, 8, 10, 11, 12, 13, 7, 6, 5, 4, 1, 0, 8</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    };</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    pin = pgm_read_byte(adc_mapping + (P));</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    pin = pgm_read_byte(adc_mapping + (pin));</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#</span>  <span class="preprocessor">else</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    pin = analogPinToChannel(pin);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#</span>  <span class="preprocessor">endif</span></div>

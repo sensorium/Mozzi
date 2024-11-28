@@ -17,7 +17,7 @@ var hardware =
       [ "MOZZI_OUTPUT_PDM_VIA_I2S", "hardware_esp32.html#esp32_pdm_via_i2s", null ],
       [ "MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM", "hardware_esp32.html#esp32_external", null ]
     ] ],
-    [ "Mozzi on ESP32-based boards.", "hardware_esp8266.html", [
+    [ "Mozzi on ESP8266-based boards.", "hardware_esp8266.html", [
       [ "Port status and notes", "hardware_esp8266.html#esp8266_status", null ],
       [ "Output modes", "hardware_esp8266.html#esp8266_output", null ],
       [ "MOZZI_OUTPUT_PDM_VIA_SERIAL", "hardware_esp8266.html#esp8266_pdm_via_serial", null ],

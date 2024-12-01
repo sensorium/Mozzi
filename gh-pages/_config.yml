@@ -21,9 +21,9 @@ title                    : "Mozzi"
 title_separator          : "-"
 name                     : "Mozzi Team"
 description              : "audio synthesis library for Arduino"
-url                      : "https://sensorium.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url                      : "https://tomcombriat.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "/Mozzi" # the subpath of your site, e.g. "/blog"
-repository               : "sensorium/Mozzi" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
+repository               : "tomcombriat/Mozzi" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : "" # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200

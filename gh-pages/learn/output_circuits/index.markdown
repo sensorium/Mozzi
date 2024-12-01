@@ -62,7 +62,7 @@ Simple low-pass filtering is usually enough when outputting straight from chips 
 
 However, more advanced outputting schemes, for instance with an audio DAC (usually 16bits), can greatly benefit more advanced filtering and power stabilization. This schematic is an example of such filtering. It implements a second order low-pass filter (which will attenuate more quickly frequencies beyond its cutoff than a first order) with stabilized audio-type operational amplifiers (TL074).
 
-![Schematic]({{ site.baseurl }}images/advanced_filter.png)
+![Schematic](images/advanced_filter.png)
 
 ### Quick functional description
 #### Stabilization and virtual mass

@@ -8,7 +8,6 @@ sonar-project.properties
 *.bak
 *.gch
 *#*
-images
 Makefile*
 tags
 user_guide.md

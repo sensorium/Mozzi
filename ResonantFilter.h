@@ -69,7 +69,7 @@ fixed point version of the filter
 
 enum filter_types { LOWPASS, BANDPASS, HIGHPASS, NOTCH };
 
-/** A generic resonant filter for audio signals.
+/** A generic resonant filter for audio signals TEST TEST.
  */
 template<int8_t FILTER_TYPE, typename su=uint8_t>
 class ResonantFilter

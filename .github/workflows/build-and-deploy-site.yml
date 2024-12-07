@@ -30,7 +30,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Doxygen Action
-        uses: mattnotmitt/doxygen-action@1.9.8
+        uses: mattnotmitt/doxygen-action@1.9.1
         with:
           working-directory: extras/doxygen-style
           doxyfile-path: Doxyfile

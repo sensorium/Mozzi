@@ -95,35 +95,46 @@ inline void audioOutput(const AudioOutput f) {
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)
 
 } // namespace MozziPrivate
-#  include <driver/timer.h>
+
+#include <driver/gptimer.h>
 namespace MozziPrivate {
 
-void CACHED_FUNCTION_ATTR timer0_audio_output_isr(void *) {
-  TIMERG0.int_clr_timers.t0 = 1;
-  TIMERG0.hw_timer[0].config.alarm_en = 1;
-  defaultAudioOutput();
-}
+
+  bool CACHED_FUNCTION_ATTR timer_on_alarm_cb(gptimer_handle_t timer, const gptimer_alarm_event_data_t *edata, void *user_ctx)
+ {
+   defaultAudioOutput();
+   return true;
+ }
+
 #endif
 
 static void startAudio() {
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)  // for external audio output, set up a timer running a audio rate
-  static intr_handle_t s_timer_handle;
-  const int div = 2;
-  timer_config_t config = {
-    .alarm_en = (timer_alarm_t)true,
-    .counter_en = (timer_start_t)false,
-    .intr_type = (timer_intr_mode_t) TIMER_INTR_LEVEL,
-    .counter_dir = TIMER_COUNT_UP,
-    .auto_reload = (timer_autoreload_t) true,
-    .divider = div // For max available precision: The APB_CLK clock signal is running at 80 MHz, i.e. 2/80 uS per tick
-                 // Min acceptable value is 2
+  
+  static gptimer_handle_t gptimer = NULL;
+  gptimer_config_t timer_config = {
+    .clk_src = GPTIMER_CLK_SRC_DEFAULT,
+    .direction = GPTIMER_COUNT_UP,
+    .resolution_hz = 40 * 1000 * 1000, // 40MHz
+    
   };
-  timer_init(TIMER_GROUP_0, TIMER_0, &config);
-  timer_set_counter_value(TIMER_GROUP_0, TIMER_0, 0);
-  timer_set_alarm_value(TIMER_GROUP_0, TIMER_0, 80000000UL / MOZZI_AUDIO_RATE / div);
-  timer_enable_intr(TIMER_GROUP_0, TIMER_0);
-  timer_isr_register(TIMER_GROUP_0, TIMER_0, &timer0_audio_output_isr, nullptr, 0, &s_timer_handle);
-  timer_start(TIMER_GROUP_0, TIMER_0);
+  gptimer_new_timer(&timer_config, &gptimer);
+ 
+  gptimer_alarm_config_t alarm_config; // note: inline config for the flag does not work unless we have access to c++20, hence the manual attributes setting.
+  alarm_config.reload_count = 0;
+  alarm_config.alarm_count = (40000000UL / MOZZI_AUDIO_RATE);
+  alarm_config.flags.auto_reload_on_alarm = true;
+
+  gptimer_set_alarm_action(gptimer, &alarm_config);
+
+  gptimer_event_callbacks_t cbs = {
+    .on_alarm = timer_on_alarm_cb, // register user callback
+  };
+
+  gptimer_register_event_callbacks(gptimer,&cbs,NULL);
+  gptimer_enable(gptimer);
+  gptimer_start(gptimer);
+
 
 #elif !MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_CUSTOM)
   static const i2s_config_t i2s_config = {

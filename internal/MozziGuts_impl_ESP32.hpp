@@ -81,8 +81,7 @@ namespace MozziPrivate {
     size_t bytes_written;
     //i2s_write(i2s_num, &_esp32_prev_sample, ESP_SAMPLE_SIZE, &bytes_written, 0);
     #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC) || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S)
-    i2s_channel_write(tx_handle,&_esp32_prev_sample, ESP_SAMPLE_SIZE, &bytes_written, 0);
-    
+    i2s_channel_write(tx_handle,_esp32_prev_sample, sizeof(_esp32_prev_sample[0]), &bytes_written, 0);// TODO STEREO    
      #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
     dac_continuous_write(dac_handle, _esp32_prev_sample, ESP_SAMPLE_SIZE, &bytes_written, 0);
     /*uint8_t tt = 120;
@@ -97,7 +96,6 @@ namespace MozziPrivate {
   inline bool canBufferAudioOutput() {
     if (_esp32_can_buffer_next) return true;
     _esp32_can_buffer_next = esp32_tryWriteSample();
-    //if(_esp32_can_buffer_next) digitalWrite(2,!digitalRead(2));
     return _esp32_can_buffer_next;
   }
 
@@ -171,9 +169,10 @@ namespace MozziPrivate {
     //static const i2s_config_t i2s_config = {
     i2s_std_config_t std_cfg = {
       .clk_cfg = I2S_STD_CLK_DEFAULT_CONFIG(MOZZI_AUDIO_RATE),    
-      .slot_cfg = I2S_STD_MSB_SLOT_DEFAULT_CONFIG(ESP_SAMPLE_SIZE, I2S_SLOT_MODE_STEREO), // TODO: add between the different modes?
+      .slot_cfg = I2S_STD_MSB_SLOT_DEFAULT_CONFIG(ESP_SAMPLE_SIZE, I2S_SLOT_MODE_MONO), // TODO: add between the different modes? AND STEREO
+      //.slot_cfg = I2S_STD_PHILIPS_SLOT_DEFAULT_CONFIG(ESP_SAMPLE_SIZE, I2S_SLOT_MODE_MONO),
       .gpio_cfg = {
-        .mclk = I2S_GPIO_UNUSED,
+        .mclk = gpio_num_t(MOZZI_I2S_PIN_MCLK),
         .bclk = gpio_num_t(MOZZI_I2S_PIN_BCK),
         .ws = gpio_num_t(MOZZI_I2S_PIN_WS),
         .dout = gpio_num_t(MOZZI_I2S_PIN_DATA),
@@ -181,7 +180,7 @@ namespace MozziPrivate {
         .invert_flags = {
 	  .mclk_inv = false,
 	  .bclk_inv = false,
-	  .ws_inv = false,
+	  .ws_inv = true,
         },
       },
 	

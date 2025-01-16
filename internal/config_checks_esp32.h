@@ -15,7 +15,7 @@
 /**
  * @page hardware_esp32 Mozzi on ESP32-based boards.
  *
- * port by Dieter Vandoren and Thomas Friedrichsmeier
+ * port by Dieter Vandoren, Thomas Friedrichsmeier and Thomas Combriat
  *
  * @section esp32_status Port status and notes
  *   - Since flash memory is not built into the ESP32, but connected, externally, it is much too slow for keeping wave tables, audio samples, etc. Instead, these are kept in RAM on this platform.
@@ -51,19 +51,34 @@
  * @endcode
  *
  * @section esp32_i2s_dac MOZZI_OUTPUT_I2S_DAC
- * This mode outputs to a PT8211 (or compatible) I2S DAC, which allows for very high quality (mono or stereo) output. Communication needs the BCK, WS, and DATA(out) pins
- * of one I2S interface. Presumably, any pins qualify, and you can configure this using:
+ * This mode outputs to a PT8211 (or compatible) I2S DAC, which allows for very high quality (mono or stereo) output. By default this mode outputs a plain I2S signal, with BCK, WS and DATA lines defined (but configurable, see after), which is equivalent to defining:
+ *
+ * @code
+ * #define MOZZI_I2S_FORMAT MOZZI_I2S_FORMAT_PLAIN
+ * @endcode
+ *
+ * The mode can be changed to LSBJ format (the PT8211 DAC for instance uses this format) by using:
+ *
+ * @code
+ * #define MOZZI_I2S_FORMAT MOZZI_I2S_FORMAT_LSBJ
+ * @endcode
+ *
+ * In addition to the three pins referred above, MCLK pin, which is of use in some DAC can be defined. 
+ * Presumably, any pins qualify, and you can configure this using:
  * @code
  * #define MOZZI_I2S_PIN_BCK  ... // (default: 26)
  * #define MOZZI_I2S_PIN_WS   ... // (default: 15)
  * #define MOZZI_I2S_PIN_DATA ... // (default: 33)
+ * #define MOZZI_I2S_PIN_MCLK ... // (default: UNDEFINED)
  * #define MOZZI_I2S_PORT     ... // (default: I2S_NUM_0)
  * @endcode
  *
- * See the note above (@ref esp_internal_dac) regarding pin numbering. Also, please always test the default pinout, should a custom setting fail!
- *
- * As a technical note, I2S support in the ESP32 SDK has been reworked since this was implemented in Mozzi, and Mozzi uses the "legacy" implementation "i2s.h".
- * This should not be an issue, unless you want to connect additional I2S components, yourself. In which case contributions are certainly welcome!
+ * For further customization, the signals outputted on some of these pins can be inverted, to accomodate DAC that would not fall into the standard, by using:
+ * @code
+ * #define MOZZI_I2S_BCK_INV  ... // (default: 0)
+ * #define MOZZI_I2S_WS_INV   ... // (default: 0 for PLAIN format, 1 for LSBJ)
+ * #define MOZZI_I2S_MBCK_INV ... // (default: 0)
+ * @endcode
  *
  * @section esp32_pdm_via_i2s MOZZI_OUTPUT_PDM_VIA_I2S
  * This mode uses the same setup as @ref esp32_i2s_dac, but rather than using an external DAC, the communication signal itself is modulated in PDM
@@ -103,6 +118,9 @@ MOZZI_CHECK_SUPPORTED(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE)
 MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE)
 
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC, MOZZI_OUTPUT_PDM_VIA_I2S)
+#  if !defined(MOZZI_I2S_FORMAT)
+#    define MOZZI_I2S_FORMAT MOZZI_I2S_FORMAT_PLAIN
+#  endif
 #  if !defined(MOZZI_I2S_PIN_BCK)
 #    define MOZZI_I2S_PIN_BCK 26
 #  endif
@@ -114,6 +132,19 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE)
 #  endif
 #  if !defined(MOZZI_I2S_PIN_MCLK)
 #    define MOZZI_I2S_PIN_MCLK I2S_GPIO_UNUSED
+#  endif
+#  if !defined(MOZZI_I2S_BCK_INV)
+#    define MOZZI_I2S_BCK_INV 0
+#  endif
+#  if !defined(MOZZI_I2S_WS_INV)
+#    if MOZZI_IS(MOZZI_I2S_FORMAT, MOZZI_I2S_FORMAT_PLAIN)
+#      define MOZZI_I2S_WS_INV 0
+#    elif MOZZI_IS(MOZZI_I2S_FORMAT, MOZZI_I2S_FORMAT_LSBJ)
+#      define MOZZI_I2S_WS_INV 1
+#    endif
+#  endif
+#  if !defined(MOZZI_I2S_MBCK_INV)
+#    define MOZZI_I2S_MBCK_INV 0
 #  endif
 #endif
 

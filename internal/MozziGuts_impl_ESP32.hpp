@@ -4,6 +4,7 @@
  * This file is part of Mozzi.
  *
  * Copyright 2020-2024 Dieter Vandoren, Thomas Friedrichsmeier and the Mozzi Team
+ * Copyright 2025 Thomas Combriat and the Mozzi Team
  *
  * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
@@ -81,7 +82,11 @@ namespace MozziPrivate {
     size_t bytes_written;
     //i2s_write(i2s_num, &_esp32_prev_sample, ESP_SAMPLE_SIZE, &bytes_written, 0);
     #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC) || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S)
-    i2s_channel_write(tx_handle,_esp32_prev_sample, sizeof(_esp32_prev_sample[0]), &bytes_written, 0);// TODO STEREO    
+#     if (MOZZI_AUDIO_CHANNELS > 1)
+        i2s_channel_write(tx_handle,_esp32_prev_sample, sizeof(_esp32_prev_sample[0]), &bytes_written, 0);
+#     else
+        i2s_channel_write(tx_handle,_esp32_prev_sample, 2*sizeof(_esp32_prev_sample[0]), &bytes_written, 0);
+#     endif
      #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
     dac_continuous_write(dac_handle, _esp32_prev_sample, ESP_SAMPLE_SIZE, &bytes_written, 0);
     /*uint8_t tt = 120;
@@ -118,7 +123,7 @@ namespace MozziPrivate {
     _esp32_prev_sample[0] = f.l();
     _esp32_prev_sample[1] = f.r();
 #  endif
-    _esp32_can_buffer_next = esp32_tryWriteSample();
+     _esp32_can_buffer_next = esp32_tryWriteSample();
   }
   #endif
   } // namespace MozziPrivate
@@ -168,9 +173,20 @@ namespace MozziPrivate {
     i2s_new_channel(&chan_cfg, &tx_handle, NULL);
     //static const i2s_config_t i2s_config = {
     i2s_std_config_t std_cfg = {
-      .clk_cfg = I2S_STD_CLK_DEFAULT_CONFIG(MOZZI_AUDIO_RATE),    
-      .slot_cfg = I2S_STD_MSB_SLOT_DEFAULT_CONFIG(ESP_SAMPLE_SIZE, I2S_SLOT_MODE_MONO), // TODO: add between the different modes? AND STEREO
-      //.slot_cfg = I2S_STD_PHILIPS_SLOT_DEFAULT_CONFIG(ESP_SAMPLE_SIZE, I2S_SLOT_MODE_MONO),
+      .clk_cfg = I2S_STD_CLK_DEFAULT_CONFIG(MOZZI_AUDIO_RATE),
+#     if (MOZZI_IS, MOZZI_I2S_FORMAT_PLAIN)
+#       if (MOZZI_AUDIO_CHANNELS > 1)
+      .slot_cfg = I2S_STD_PHILIPS_SLOT_DEFAULT_CONFIG(ESP_SAMPLE_SIZE, I2S_SLOT_MODE_STEREO),
+#       else
+      .slot_cfg = I2S_STD_PHILIPS_SLOT_DEFAULT_CONFIG(ESP_SAMPLE_SIZE, I2S_SLOT_MODE_MONO),
+#       endif
+#     elif (MOZZI_IS, MOZZI_I2S_FORMAT_LSBJ)
+#       if (MOZZI_AUDIO_CHANNELS > 1)
+      .slot_cfg = I2S_STD_MSB_SLOT_DEFAULT_CONFIG(ESP_SAMPLE_SIZE, I2S_SLOT_MODE_STEREO), // TODO: add  STEREO
+#       else     
+      .slot_cfg = I2S_STD_MSB_SLOT_DEFAULT_CONFIG(ESP_SAMPLE_SIZE, I2S_SLOT_MODE_MONO), // TODO: add  STEREO
+#       endif
+#     endif
       .gpio_cfg = {
         .mclk = gpio_num_t(MOZZI_I2S_PIN_MCLK),
         .bclk = gpio_num_t(MOZZI_I2S_PIN_BCK),
@@ -178,9 +194,9 @@ namespace MozziPrivate {
         .dout = gpio_num_t(MOZZI_I2S_PIN_DATA),
         .din = I2S_GPIO_UNUSED,
         .invert_flags = {
-	  .mclk_inv = false,
-	  .bclk_inv = false,
-	  .ws_inv = true,
+	  .mclk_inv = MOZZI_I2S_MBCK_INV,
+	  .bclk_inv = MOZZI_I2S_BCK_INV,
+	  .ws_inv = MOZZI_I2S_WS_INV,
         },
       },
 	

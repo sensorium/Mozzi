@@ -74,7 +74,6 @@ namespace MozziPrivate {
     static uint32_t _esp32_prev_sample[PDM_RESOLUTION];
     #    define ESP_SAMPLE_SIZE (PDM_RESOLUTION*sizeof(uint32_t))
     #  endif
-  // static int16_t _esp32_prev_sample[2];
   
 
 
@@ -87,13 +86,9 @@ namespace MozziPrivate {
 #     else
         i2s_channel_write(tx_handle,_esp32_prev_sample, 2*sizeof(_esp32_prev_sample[0]), &bytes_written, 0);
 #     endif
-     #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
+	/* #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
     dac_continuous_write(dac_handle, _esp32_prev_sample, ESP_SAMPLE_SIZE, &bytes_written, 0);
-    /*uint8_t tt = 120;
-    esp_err_t err;
-    err = dac_continuous_write(dac_handle, &tt , 2, &bytes_written, 0);
-    Serial.println(err==ESP_ERR_TIMEOUT);*/
-
+	*/
     #endif
     return (bytes_written != 0);
   }
@@ -106,6 +101,7 @@ namespace MozziPrivate {
 
 # if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC) || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S) || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
   inline void audioOutput(const AudioOutput f) {
+    /*
 #  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
     _esp32_prev_sample[0] = (f.l() + MOZZI_AUDIO_BIAS) << 8;
 #    if (MOZZI_AUDIO_CHANNELS > 1)
@@ -113,6 +109,11 @@ namespace MozziPrivate {
 #    else
     // For simplicity of code, even in mono, we're writing stereo samples
     _esp32_prev_sample[1] = _esp32_prev_sample[0];
+    #    endif*/
+#  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
+    dacWrite(25, f.l() + MOZZI_AUDIO_BIAS);
+#    if (MOZZI_AUDIO_CHANNELS > 1)
+    dacWrite(26, f.l() + MOZZI_AUDIO_BIAS);
 #    endif
 #  elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S)
     for (uint8_t i=0; i<MOZZI_PDM_RESOLUTION; ++i) {
@@ -130,7 +131,7 @@ namespace MozziPrivate {
 
 
 namespace MozziPrivate {
-#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPUT_INTERNAL_DAC)
 #include <driver/gptimer.h>
 
   bool CACHED_FUNCTION_ATTR timer_on_alarm_cb(gptimer_handle_t timer, const gptimer_alarm_event_data_t *edata, void *user_ctx)
@@ -141,7 +142,9 @@ namespace MozziPrivate {
 #endif
 
   static void startAudio() {
-#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)  // for external audio output, set up a timer running a audio rate
+    /* Normally, the internal DAC can run on DMA, hence self triggering. Did not managed to get that to work (see: https://github.com/espressif/arduino-esp32/issues/10851) so, for now, we are just using the Mozzi buffer and send dacWrite orders.
+     */
+#if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED) || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC) ||  MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM) // set up a timer running a audio rate
   
     gptimer_handle_t gptimer = NULL;
     gptimer_config_t timer_config = {
@@ -211,12 +214,9 @@ namespace MozziPrivate {
     i2s_channel_init_std_mode(tx_handle, &std_cfg);
     i2s_channel_enable(tx_handle);
     
-#elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
-    // static dac_continuous_handle_t dac_handle = NULL;
+    /*   #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
      dac_continuous_config_t dac_config= {
        .chan_mask = DAC_CHANNEL_MASK_ALL,
-       /*.desc_num = 8,
-	 .buf_size = 64,*/
        .desc_num = 2,
 	 .buf_size = 4,
        .freq_hz = MOZZI_AUDIO_RATE,
@@ -227,7 +227,7 @@ namespace MozziPrivate {
      esp_err_t err;
      dac_continuous_new_channels(&dac_config, &dac_handle);
      err =  dac_continuous_enable(dac_handle);
-    
+    */
     #endif
   }
 

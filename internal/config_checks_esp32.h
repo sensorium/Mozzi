@@ -4,6 +4,7 @@
  * This file is part of Mozzi.
  *
  * Copyright 2023-2024 Thomas Friedrichsmeier and the Mozzi Team
+ * Copyright 2025 Thomas Combriat and the Mozzi Team
  *
  * Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
  *
@@ -31,8 +32,9 @@
  *   - MOZZI_OUTPUT_PDM_VIA_I2S
  *   - MOZZI_OUTPUT_I2S_DAC
  *   - MOZZI_OUTPUT_INTERNAL_DAC
+ *   - MOZZI_OUTPUT_PWM
  *
- * The default mode is @ref esp32_internal_dac .
+ * The default mode is @ref esp32_internal_dac for the ESP32 (that has a built-in DAC) and @ref esp32_pwm for all other ESP32 flavours.
  *
  * @section esp32_internal_dac MOZZI_OUTPUT_INTERNAL_DAC
  * The internal DAC has 8 bit resolution, and outputs to GPIO pins 25 and 26 (non-configurable). For simplicity of code, both pins are always used.
@@ -88,6 +90,13 @@
  * Output resolution may be adjusted by defining MOZZI_PDM_RESOLUTION , where the default value of 4 means that each audio sample is encoded into four 32 bit blocks
  * of ones and zeros. Obviously, more is potentially better, but at the cost of considerable computation power.
  *
+ *  @section esp32_pwm MOZZI_OUTPUT_PWM
+ * This mode outputs a standard PWM signal (10 bits) cadenced at MOZZI_AUDIO_RATE. Allegedly, any pin should qualify but by default it is set to GPIO 15 (left/mono) and GPIO 16 (right). They can be customized by using:
+ * @code
+ * #define MOZZI_AUDIO_PIN_1  ... // (default: 15)
+ * #define MOZZI_AUDIO_PIN_2  ... // (default: 16)
+ * @endcode
+ *
  * @section esp32_external MOZZI_OUTPUT_EXTERNAL_TIMED and MOZZI_OUTPUT_EXTERNAL_CUSTOM
  * See @ref external_audio
 */
@@ -98,7 +107,11 @@
 
 #include "disable_2pinmode_on_github_workflow.h"
 #if !defined(MOZZI_AUDIO_MODE)
-#define MOZZI_AUDIO_MODE MOZZI_OUTPUT_INTERNAL_DAC
+#  if CONFIG_IDF_TARGET_ESP32
+#    define MOZZI_AUDIO_MODE MOZZI_OUTPUT_INTERNAL_DAC
+#  else // only ESP32 carries an internal DAC
+#    define MOZZI_AUDIO_MODE MOZZI_OUTPUT_PWM
+#  endif
 #endif
 MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPUT_EXTERNAL_CUSTOM, MOZZI_OUTPUT_PDM_VIA_I2S, MOZZI_OUTPUT_I2S_DAC, MOZZI_OUTPUT_INTERNAL_DAC, MOZZI_OUTPUT_PWM)
 
@@ -156,12 +169,12 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE)
 #endif
 
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
-#  define MOZZI_AUDIO_BITS 10   // not configurable (could be 8)
+#  define MOZZI_AUDIO_BITS 10   // not configurable (could be 8 at AUDIO_RATE, working combinations are not specified on espressif's doc)
 #  if !defined(MOZZI_AUDIO_PIN_1)
-#    define MOZZI_AUDIO_PIN_1 18
+#    define MOZZI_AUDIO_PIN_1 15
 #  endif
 #  if !defined(MOZZI_AUDIO_PIN_2)
-#    define MOZZI_AUDIO_PIN_2 19
+#    define MOZZI_AUDIO_PIN_2 16
 #  endif
 #endif
 

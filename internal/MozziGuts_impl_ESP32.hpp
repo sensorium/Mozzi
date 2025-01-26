@@ -79,8 +79,10 @@ namespace MozziPrivate {
   inline bool esp32_tryWriteSample() {
     size_t bytes_written;
     //i2s_write(i2s_num, &_esp32_prev_sample, ESP_SAMPLE_SIZE, &bytes_written, 0);
-    #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC) || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S)
+    #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC)
         i2s_channel_write(tx_handle,_esp32_prev_sample, 2*sizeof(_esp32_prev_sample[0]), &bytes_written, 0);
+    #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S)
+	i2s_channel_write(tx_handle,_esp32_prev_sample, MOZZI_PDM_RESOLUTION*sizeof(_esp32_prev_sample[0]), &bytes_written, 0);
 	/* #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
     dac_continuous_write(dac_handle, _esp32_prev_sample, ESP_SAMPLE_SIZE, &bytes_written, 0);
 	*/

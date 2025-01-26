@@ -187,8 +187,9 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE)
 #endif
 
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S)
+#  define MOZZI_I2S_FORMAT MOZZI_I2S_FORMAT_LSBJ  // pdm codes are for LSBJ format
 #  if !defined(MOZZI_PDM_RESOLUTION)
-#    define MOZZI_PDM_RESOLUTION 8
+#    define MOZZI_PDM_RESOLUTION 2  // we send two 16 bits values
 #  endif
 #else
 #  define MOZZI_PDM_RESOLUTION 1  // unconditionally, no other value allowed

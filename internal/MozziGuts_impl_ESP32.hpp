@@ -65,14 +65,13 @@ namespace MozziPrivate {
   
     #  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
     static uint8_t _esp32_prev_sample[2];
-  // #    define ESP_SAMPLE_SIZE (2*sizeof(uint8_t))
   #    define ESP_SAMPLE_SIZE (sizeof(uint8_t))
-    #  elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC)
-    static int16_t _esp32_prev_sample[2];
+    #  elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC)  
     #    define ESP_SAMPLE_SIZE I2S_DATA_BIT_WIDTH_16BIT
+  static int16_t _esp32_prev_sample[2]; // for simplicity, but also because the output is cleaner (why??) we always send stereo samples
     #  elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S)
-    static uint32_t _esp32_prev_sample[PDM_RESOLUTION];
-    #    define ESP_SAMPLE_SIZE (PDM_RESOLUTION*sizeof(uint32_t))
+    static uint32_t _esp32_prev_sample[MOZZI_PDM_RESOLUTION];
+  #    define ESP_SAMPLE_SIZE I2S_DATA_BIT_WIDTH_16BIT
     #  endif
   
 
@@ -81,11 +80,7 @@ namespace MozziPrivate {
     size_t bytes_written;
     //i2s_write(i2s_num, &_esp32_prev_sample, ESP_SAMPLE_SIZE, &bytes_written, 0);
     #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC) || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S)
-#     if (MOZZI_AUDIO_CHANNELS > 1)
-        i2s_channel_write(tx_handle,_esp32_prev_sample, sizeof(_esp32_prev_sample[0]), &bytes_written, 0);
-#     else
         i2s_channel_write(tx_handle,_esp32_prev_sample, 2*sizeof(_esp32_prev_sample[0]), &bytes_written, 0);
-#     endif
 	/* #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
     dac_continuous_write(dac_handle, _esp32_prev_sample, ESP_SAMPLE_SIZE, &bytes_written, 0);
 	*/
@@ -102,25 +97,16 @@ namespace MozziPrivate {
   
 # if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC) || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S) || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)  || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
   inline void audioOutput(const AudioOutput f) {
-    /*
-#  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
-    _esp32_prev_sample[0] = (f.l() + MOZZI_AUDIO_BIAS) << 8;
-#    if (MOZZI_AUDIO_CHANNELS > 1)
-    _esp32_prev_sample[1] = (f.r() + MOZZI_AUDIO_BIAS) << 8;
-#    else
-    // For simplicity of code, even in mono, we're writing stereo samples
-    _esp32_prev_sample[1] = _esp32_prev_sample[0];
-    #    endif*/
 #  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
     dacWrite(25, f.l() + MOZZI_AUDIO_BIAS);
 #    if (MOZZI_AUDIO_CHANNELS > 1)
-    dacWrite(26, f.l() + MOZZI_AUDIO_BIAS);
+    dacWrite(26, f.r() + MOZZI_AUDIO_BIAS);
 #    endif
     
 #  elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
     ledcWrite(MOZZI_AUDIO_PIN_1,(f.l()+MOZZI_AUDIO_BIAS));
 #    if (MOZZI_AUDIO_CHANNELS > 1)
-    ledcWrite(MOZZI_AUDIO_PIN_2,(f.l()+MOZZI_AUDIO_BIAS));
+    ledcWrite(MOZZI_AUDIO_PIN_2,(f.r()+MOZZI_AUDIO_BIAS));
 #    endif
     
 #  elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S)
@@ -130,8 +116,12 @@ namespace MozziPrivate {
 #  else  // EXTERNAL I2S
     // PT8211 takes signed samples
     _esp32_prev_sample[0] = f.l();
+    #    if (MOZZI_AUDIO_CHANNELS > 1)
     _esp32_prev_sample[1] = f.r();
-#  endif
+    #    else
+    _esp32_prev_sample[1] = 0;
+    #    endif
+#   endif
 #  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC) || MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S)
      _esp32_can_buffer_next = esp32_tryWriteSample();
 #  endif
@@ -194,18 +184,18 @@ namespace MozziPrivate {
     i2s_new_channel(&chan_cfg, &tx_handle, NULL);
     //static const i2s_config_t i2s_config = {
     i2s_std_config_t std_cfg = {
-      .clk_cfg = I2S_STD_CLK_DEFAULT_CONFIG(MOZZI_AUDIO_RATE),
-#     if (MOZZI_IS, MOZZI_I2S_FORMAT_PLAIN)
+      .clk_cfg = I2S_STD_CLK_DEFAULT_CONFIG(MOZZI_AUDIO_RATE * MOZZI_PDM_RESOLUTION),
+#     if MOZZI_IS(MOZZI_I2S_FORMAT, MOZZI_I2S_FORMAT_PLAIN)
 #       if (MOZZI_AUDIO_CHANNELS > 1)
       .slot_cfg = I2S_STD_PHILIPS_SLOT_DEFAULT_CONFIG(ESP_SAMPLE_SIZE, I2S_SLOT_MODE_STEREO),
-#       else
-      .slot_cfg = I2S_STD_PHILIPS_SLOT_DEFAULT_CONFIG(ESP_SAMPLE_SIZE, I2S_SLOT_MODE_MONO),
+#       else  // for some reason, sound is way better in stereo. Keeping that here in case this gets solved
+      .slot_cfg = I2S_STD_PHILIPS_SLOT_DEFAULT_CONFIG(ESP_SAMPLE_SIZE, I2S_SLOT_MODE_STEREO),
 #       endif
-#     elif (MOZZI_IS, MOZZI_I2S_FORMAT_LSBJ)
+#     elif MOZZI_IS(MOZZI_I2S_FORMAT, MOZZI_I2S_FORMAT_LSBJ)
 #       if (MOZZI_AUDIO_CHANNELS > 1)
-      .slot_cfg = I2S_STD_MSB_SLOT_DEFAULT_CONFIG(ESP_SAMPLE_SIZE, I2S_SLOT_MODE_STEREO), // TODO: add  STEREO
-#       else     
-      .slot_cfg = I2S_STD_MSB_SLOT_DEFAULT_CONFIG(ESP_SAMPLE_SIZE, I2S_SLOT_MODE_MONO), // TODO: add  STEREO
+      .slot_cfg = I2S_STD_MSB_SLOT_DEFAULT_CONFIG(ESP_SAMPLE_SIZE, I2S_SLOT_MODE_STEREO), 
+#       else   // for some reason, sound is way better in stereo. Keeping that here in case this gets solved 
+      .slot_cfg = I2S_STD_MSB_SLOT_DEFAULT_CONFIG(ESP_SAMPLE_SIZE, I2S_SLOT_MODE_STEREO), 
 #       endif
 #     endif
       .gpio_cfg = {

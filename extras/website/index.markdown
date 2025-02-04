@@ -90,7 +90,7 @@ For more about audio output, including high quality output modes [Mozzi Output t
 ### A note for users coming from Mozzi 1.x
 Mozzi 2.0 brings a lot of changes under the hood, and is not 100% source compatible with earlier versions of Mozzi. Most sketches should continue to compile, but with
 a lot of warnings. A few others will no longer work. See [Porting to Mozzi 2.0](https://sensorium.github.io/Mozzi/learn/porting/) for what to change.
-If desparate, there is still a "Mozzi_1" branch in the git repository, but this will not get any new development.
+If desparate, there is still a "Mozzi_1" branch in the git repository which contains the last stable version of Mozzi 1.x and packages for this version can be found on [Github](https://github.com/sensorium/Mozzi/releases/tag/1.1.2), but this will not get any new development. Users still on these versions are encouraged to migrate to Mozzi 2.
 
 
 {% include boards-tested.markdown %}

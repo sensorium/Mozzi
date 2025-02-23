@@ -43,6 +43,15 @@ namespace MozziPrivate {
 
 //#  include <driver/i2s.h>   // for I2S-based output modes, including - technically - internal DAC
 #include<driver/i2s_std.h>
+
+////// FIX BAD IDF MACRO AS PER: https://github.com/espressif/arduino-esp32/issues/10975
+////// TODO: REMOVE WHEN FIX PROPAGATED TO ARDUINO-ESP32
+#if SOC_I2S_HW_VERSION_2
+#undef I2S_STD_CLK_DEFAULT_CONFIG
+#define I2S_STD_CLK_DEFAULT_CONFIG(rate) \
+  { .sample_rate_hz = rate, .clk_src = I2S_CLK_SRC_DEFAULT, .ext_clk_freq_hz = 0, .mclk_multiple = I2S_MCLK_MULTIPLE_256, }
+#endif
+/////// END FIX
 /*
 #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
 #include<driver/dac_continuous.h>

@@ -45,7 +45,7 @@ For more about audio output, including high quality output modes [Mozzi Output t
 ### A note for users coming from Mozzi 1.x
 Mozzi 2.0 brings a lot of changes under the hood, and is not 100% source compatible with earlier versions of Mozzi. Most sketches should continue to compile, but with
 a lot of warnings. A few others will no longer work. See [Porting to Mozzi 2.0](https://sensorium.github.io/Mozzi/learn/porting/) for what to change.
-If desparate, there is still a "Mozzi_1" branch in the git repository, but this will not get any new development.
+If desparate, there is still a "Mozzi_1" branch in the git repository which contains the last stable version of Mozzi 1.x and packages for this version can be found on [Github](https://github.com/sensorium/Mozzi/releases/tag/1.1.2), but this will not get any new development. Users still on these versions are encouraged to migrate to Mozzi 2.
 
 ## Supported boards, output modes and default pins
 > Table is not necessarily complete. Abbreviations explained below the table. The default output mode is in bold for each row. If stereo is supported, in a mode, the cell PWM-1 has two numbers with the second pin number is given in parentheses (+X).
@@ -66,7 +66,8 @@ If desparate, there is still a "Mozzi_1" branch in the git repository, but this 
 | *STM32 maple core*: Various STM32F1 and STM32F4 boards, "Blue/Black Pill"  | **PB8 (+PB9)** | PB8, PB9 |  |  |  |
 | *STM32duino (STM official) core*: Huge range of STM32Fx boards  | **PA8 (+PA9)** | PA8, PA9 |  |  |  |
 | *ESP8266*: ESP-01, Wemos D1 mini, etc. note: Beware of erratic pin labels |  |  | **GPIO2** |  | yes |
-| *ESP32: note: Beware of vastly different pin labels across board variants* |  |  | yes | **GPIO25 (+GPIO26)** | yes |
+| *ESP32: that has an external DAC (only ESP32) note: Beware of vastly different pin labels across board variants* | 15 (+16)  |  | yes | **GPIO25 (+GPIO26)** | yes |
+| *ESP32-S/C/H/P: that do not have an external DAC note: Beware of vastly different pin labels across board variants* | **15 (+16)**  |  | yes |  | yes |
 | *RP2040*: Raspberry Pi Pico and friends  | **0 (+1)** | 0, 1 |  |  | yes |
 
 > - PWM-1: 1-pin PWM mode (`MOZZI_OUTPUT_PWM`)

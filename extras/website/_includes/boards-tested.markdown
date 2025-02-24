@@ -4,10 +4,10 @@ If stereo is supported, in a mode, the cell has a red/blue background, and (wher
 Check the [hardware section of the API-documentation](https://sensorium.github.io/Mozzi/doc/html/hardware.html) for platform specific notes and (pin) configuration options.
 
 <style>
-td[data-mo] { background-color: rgba(0,0,255,.5); } <!-- Mono output --->
-td[data-st] { background: linear-gradient(-45deg,rgba(0,0,255,.5) 50%, rgba(255,0,0,.5) 50%); } <!-- Stereo output --->
-td[data-md] { border: 2px solid; background-color: rgba(0,0,255,.5); } <!-- Mono default --->
-td[data-sd] { border: 2px solid; background: linear-gradient(-45deg,rgba(0,0,255,.5) 50%, rgba(255,0,0,.5) 50%); } <!-- Stereo default --->
+td[data-mo] { background-color: rgba(0,0,255,.5); } /* Mono output */
+td[data-st] { background: linear-gradient(-45deg,rgba(0,0,255,.5) 50%, rgba(255,0,0,.5) 50%); } /* Stereo output */
+td[data-md] { border: 2px solid; background-color: rgba(0,0,255,.5); } /* Mono default */
+td[data-sd] { border: 2px solid; background: linear-gradient(-45deg,rgba(0,0,255,.5) 50%, rgba(255,0,0,.5) 50%); } /* Stereo default */
 </style>
 
 <table border="0">
@@ -42,9 +42,9 @@ td[data-sd] { border: 2px solid; background: linear-gradient(-45deg,rgba(0,0,255
 <tr style="border-top: 1px solid">
     <td><i>ESP8266</i>: ESP-01, Wemos D1 mini, etc. <i>note: Beware of erratic pin labels</i>   </td><td> -              </td><td> -                 </td><td data-md>GPIO2</td><td> -         </td><td data-st>yes </td></tr>
 <tr style="border-top: 1px solid">
-    <td><i>ESP32</i>: that has an internal DAC (only ESP32)<i>note: Beware of vastly different pin labels across board variants</i>  </td><td data-st>15 (+16) </td><td>                 </td><td data-mo>yes </td><td data-sd>GPIO25 (+GPIO26)</td><td data-st>yes</td></tr>
+    <td><i>ESP32</i>: that has an internal DAC (only ESP32) <i>note: Beware of vastly different pin labels across board variants</i>  </td><td data-st>15 (+16) </td><td>                 </td><td data-mo>yes </td><td data-sd>GPIO25 (+GPIO26)</td><td data-st>yes</td></tr>
 	<tr style="border-top: 1px solid">
-    <td><i>ESP32-S/C/H/P</i>: that do not have an internal DAC<i>note: Beware of vastly different pin labels across board variants</i>  </td><td data-sd>15 (+16) </td><td>                 </td><td data-mo>yes </td><td></td><td data-st>yes</td></tr>
+    <td><i>ESP32-S/C/H/P</i>: that do not have an internal DAC <i>note: Beware of vastly different pin labels across board variants</i>  </td><td data-sd>15 (+16) </td><td>                 </td><td data-mo>yes </td><td></td><td data-st>yes</td></tr>
 <tr style="border-top: 1px solid">
     <td><i>RP2040</i>: Raspberry Pi Pico and friends                                            </td><td data-sd>0 (+1)  </td><td data-mo>0, 1       </td><td> -          </td><td> -          </td><td data-st>yes </td></tr>
 </tbody>

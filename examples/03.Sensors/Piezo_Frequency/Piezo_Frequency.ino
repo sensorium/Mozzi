@@ -59,6 +59,7 @@ void updateControl(){
   Serial.print(piezo_value);
   Serial.print("\t \t"); // prints 2 tabs
 
+  int frequency = piezo_value/2; // do whatever you like with the piezo value
   // print the frequency to the Serial monitor for debugging
   Serial.print("frequency = ");
   Serial.print(frequency);

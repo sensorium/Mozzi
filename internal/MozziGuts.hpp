@@ -86,7 +86,7 @@ inline void bufferAudioOutput(const AudioOutput f) {
   ++samples_written_to_buffer;
 }
 #else
-CircularBuffer<AudioOutput> output_buffer;  // fixed size 256
+  CircularBuffer<AudioOutput, MOZZI_OUTPUT_BUFFER_SIZE> output_buffer; 
 #  define canBufferAudioOutput() (!output_buffer.isFull())
 #  define bufferAudioOutput(f) output_buffer.write(f)
 static void CACHED_FUNCTION_ATTR defaultAudioOutput() {
@@ -150,7 +150,7 @@ uint16_t getAudioInput() { return audio_input; }
 
 #if MOZZI_IS(MOZZI__LEGACY_AUDIO_INPUT_IMPL, 1)
 // ring buffer for audio input
-CircularBuffer<uint16_t> input_buffer; // fixed size 256
+  CircularBuffer<uint16_t, 256> input_buffer; // fixed size 256
 #define audioInputAvailable() (!input_buffer.isEmpty())
 #define readAudioInput() (input_buffer.read())
 /** NOTE: Triggered at MOZZI_AUDIO_RATE via defaultAudioOutput(). In addition to the MOZZI_AUDIO_INPUT_PIN, at most one reading is taken for mozziAnalogRead().  */

@@ -20,26 +20,26 @@ of Meebleeps (https://github.com/sensorium/Mozzi/issues/281)
 */
 
 // TODO: remove this define from here, put a default value in config
-#define MOZZI_BUFFER_SIZE 256
+#define MOZZI_OUTPUT_BUFFER_SIZE 256
 
-// This is to get the correct cound for audioticks()
-#if (MOZZI_BUFFER_SIZE == 256)
+// This is to get the correct cound for audioticks() (there might be a smarter way...)
+#if (MOZZI_OUTPUT_BUFFER_SIZE == 256)
 #define COUNT_LSHIFT 8
-#elif (MOZZI_BUFFER_SIZE == 128)
+#elif (MOZZI_OUTPUT_BUFFER_SIZE == 128)
 #define COUNT_LSHIFT 7
-#elif (MOZZI_BUFFER_SIZE == 64)
+#elif (MOZZI_OUTPUT_BUFFER_SIZE == 64)
 #define COUNT_LSHIFT 6
-#elif (MOZZI_BUFFER_SIZE == 32)
+#elif (MOZZI_OUTPUT_BUFFER_SIZE == 32)
 #define COUNT_LSHIFT 5
-#elif (MOZZI_BUFFER_SIZE == 16)
+#elif (MOZZI_OUTPUT_BUFFER_SIZE == 16)
 #define COUNT_LSHIFT 4
-#elif (MOZZI_BUFFER_SIZE == 8)
+#elif (MOZZI_OUTPUT_BUFFER_SIZE == 8)
 #define COUNT_LSHIFT 3
-#elif (MOZZI_BUFFER_SIZE == 4)
+#elif (MOZZI_OUTPUT_BUFFER_SIZE == 4)
 #define COUNT_LSHIFT 2
-#elif (MOZZI_BUFFER_SIZE == 2)
+#elif (MOZZI_OUTPUT_BUFFER_SIZE == 2)
 #define COUNT_LSHIFT 1
-#elif (MOZZI_BUFFER_SIZE == 1)
+#elif (MOZZI_OUTPUT_BUFFER_SIZE == 1)
 #define COUNT_LSHIFT 0
 #endif
 
@@ -93,14 +93,14 @@ public:
 	}
 
 private:
-	ITEM_TYPE items[MOZZI_BUFFER_SIZE];
+	ITEM_TYPE items[MOZZI_OUTPUT_BUFFER_SIZE];
 	uint8_t         start;  /* index of oldest itement              */
 	uint8_t         end;    /* index at which to write new itement  */
 	uint8_t         s_msb;
 	uint8_t         e_msb;
 	unsigned long num_buffers_read;
 
-#if (CIRCULAR_BUFFER_SIZE == 256)
+#if (MOZZI_OUTPUT_BUFFER_SIZE == 256)
 	inline
 	void cbIncrStart() {
 		start++;
@@ -119,7 +119,7 @@ private:
   inline
   void cbIncrStart()  {
     start++;
-    if (start == CIRCULAR_BUFFER_SIZE)
+    if (start == MOZZI_OUTPUT_BUFFER_SIZE)
       {
 	start = 0;
 	s_msb ^= 1;
@@ -131,7 +131,7 @@ private:
   void cbIncrEnd()
   {
     end++;
-    if (end == CIRCULAR_BUFFER_SIZE)
+    if (end == MOZZI_OUTPUT_BUFFER_SIZE)
       {
 	end = 0;
 	e_msb ^= 1;

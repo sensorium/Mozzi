@@ -86,7 +86,7 @@ FspTimer timer;
 #endif
 
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
-CircularBuffer<uint16_t> output_buffer;
+  CircularBuffer<uint16_t, MOZZI_OUTPUT_BUFFER_SIZE> output_buffer;
 } // namespace MozziPrivate
 #include "MozziGuts_impl_RENESAS_analog.hpp"
 namespace MozziPrivate {

@@ -14,11 +14,36 @@ Modified from https://en.wikipedia.org/wiki/Circular_buffer
 Mirroring version
 On 18 April 2014, the simplified version on the Wikipedia page for power of 2 sized buffers 
 doesn't work - cbIsEmpty() returns true whether the buffer is full or empty.
+
+April 2025: modified for different buffer sizes under the suggestion
+of Meebleeps (https://github.com/sensorium/Mozzi/issues/281)
 */
 
-#define MOZZI_BUFFER_SIZE 256 // do not expect to change and it to work.
-                              // just here for forward compatibility if one day
-                              // the buffer size might be editable
+// TODO: remove this define from here, put a default value in config
+#define MOZZI_BUFFER_SIZE 256
+
+// This is to get the correct cound for audioticks()
+#if (MOZZI_BUFFER_SIZE == 256)
+#define COUNT_LSHIFT 8
+#elif (MOZZI_BUFFER_SIZE == 128)
+#define COUNT_LSHIFT 7
+#elif (MOZZI_BUFFER_SIZE == 64)
+#define COUNT_LSHIFT 6
+#elif (MOZZI_BUFFER_SIZE == 32)
+#define COUNT_LSHIFT 5
+#elif (MOZZI_BUFFER_SIZE == 16)
+#define COUNT_LSHIFT 4
+#elif (MOZZI_BUFFER_SIZE == 8)
+#define COUNT_LSHIFT 3
+#elif (MOZZI_BUFFER_SIZE == 4)
+#define COUNT_LSHIFT 2
+#elif (MOZZI_BUFFER_SIZE == 2)
+#define COUNT_LSHIFT 1
+#elif (MOZZI_BUFFER_SIZE == 1)
+#define COUNT_LSHIFT 0
+#endif
+
+
 
 /** Circular buffer object.  Has a fixed number of cells, set to 256.
 @tparam ITEM_TYPE the kind of data to store, eg. int, int8_t etc.
@@ -60,7 +85,7 @@ public:
 
 	inline
 	unsigned long count() {
-		return (num_buffers_read << 8) + start;
+		return (num_buffers_read << COUNT_LSHIFT) + start;
 	}
         inline
 	ITEM_TYPE * address() {
@@ -75,7 +100,7 @@ private:
 	uint8_t         e_msb;
 	unsigned long num_buffers_read;
 
-
+#if (CIRCULAR_BUFFER_SIZE == 256)
 	inline
 	void cbIncrStart() {
 		start++;
@@ -90,5 +115,32 @@ private:
 		end++;
 		if (end == 0) e_msb ^= 1;
 	}
+#else // if circular buffer length is != 256, use less efficient version for to manage start/end index buffer index
+  inline
+  void cbIncrStart()  {
+    start++;
+    if (start == CIRCULAR_BUFFER_SIZE)
+      {
+	start = 0;
+	s_msb ^= 1;
+	num_buffers_read++;
+      }
+  }
+
+  inline
+  void cbIncrEnd()
+  {
+    end++;
+    if (end == CIRCULAR_BUFFER_SIZE)
+      {
+	end = 0;
+	e_msb ^= 1;
+      }
+  }
+#endif
+  
 
 };
+
+
+#undef COUNT_LSHIFT // avoid macro spil

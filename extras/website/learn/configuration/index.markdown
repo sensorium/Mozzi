@@ -73,5 +73,5 @@ Not all options are available on all boards. If you want to set an option only f
 For an up-to-date list of configuration options available in Mozzi, you will have to look at two places in the API documentation, because not all options are
 supported on all platforms:
 
-  - [Generic Configuration options](Mozzi/doc/html/group__config.html)
-  - [Hardware specific info](Mozzi/doc/html/hardware.html)
+  - [Generic Configuration options](/doc/html/group__config.html)
+  - [Hardware specific info](/doc/html/hardware.html)

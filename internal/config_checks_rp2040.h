@@ -95,7 +95,12 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPU
 #  endif
 #  define BYPASS_MOZZI_OUTPUT_BUFFER true
 #  define MOZZI_RP2040_BUFFERS 8       // number of DMA buffers used
-#  define MOZZI_RP2040_BUFFER_SIZE 256  // total size of the buffer, in samples
+#  if !defined MOZZI_RP2040_BUFFER_SIZE
+#    define MOZZI_RP2040_BUFFER_SIZE MOZZI_OUTPUT_BUFFER_SIZE  // total size of the buffer, in samples
+#    if (MOZZI_OUTPUT_BUFFER_SIZE < MOZZI_RP2040_BUFFERS)
+#      error MOZZI_OUTPUT_BUFFER_SIZE cannot be lower than 8 on this platform at the moment
+#    endif
+#  endif
 #endif
 
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC)
@@ -115,7 +120,12 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED, MOZZI_OUTPU
 MOZZI_CHECK_SUPPORTED(MOZZI_I2S_FORMAT, MOZZI_I2S_FORMAT_PLAIN, MOZZI_I2S_FORMAT_LSBJ)
 #  define BYPASS_MOZZI_OUTPUT_BUFFER true
 #  define MOZZI_RP2040_BUFFERS 8       // number of DMA buffers used
-#  define MOZZI_RP2040_BUFFER_SIZE 256  // total size of the buffer, in samples
+#  if !defined MOZZI_RP2040_BUFFER_SIZE
+#    define MOZZI_RP2040_BUFFER_SIZE MOZZI_OUTPUT_BUFFER_SIZE  // total size of the buffer, in samples
+#    if (MOZZI_OUTPUT_BUFFER_SIZE < MOZZI_RP2040_BUFFERS)
+#      error MOZZI_OUTPUT_BUFFER_SIZE cannot be lower than 8 on this platform at the moment
+#    endif
+#  endif
 #endif
 
 #if !defined(MOZZI_ANALOG_READ)

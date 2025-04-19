@@ -262,7 +262,6 @@
  * Valid values are power of two from 256 downward (128, 64, …).
  * Note that this might not have an effect in all modes/platforms combination as Mozzi is sometimes using an external buffer which is not always configurable.
  *
- * TODO: Throw a warning if config does not have an effect
 */
 #define MOZZI_OUTPUT_BUFFER_SIZE FOR_DOXYGEN_ONLY
 

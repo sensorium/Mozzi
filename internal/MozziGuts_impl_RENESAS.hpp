@@ -86,7 +86,7 @@ FspTimer timer;
 #endif
 
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
-CircularBuffer<uint16_t> output_buffer;
+  CircularBuffer<uint16_t, MOZZI_OUTPUT_BUFFER_SIZE> output_buffer;
 } // namespace MozziPrivate
 #include "MozziGuts_impl_RENESAS_analog.hpp"
 namespace MozziPrivate {
@@ -159,7 +159,7 @@ static void startAudio() {
 
   // The following branches the DAC straight on Mozzi's circular buffer.
   dtc_cfg.p_info->p_src = output_buffer.address();
-  dtc_cfg.p_info->length = MOZZI_BUFFER_SIZE;
+  dtc_cfg.p_info->length = MOZZI_OUTPUT_BUFFER_SIZE;
   R_DTC_Reconfigure(&dtc_ctrl, dtc_cfg.p_info);
   timer_dac.start();
 #endif

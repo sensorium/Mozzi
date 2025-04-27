@@ -114,6 +114,9 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_BITS, 16)
 // esp. since i2s output already has output rate control -> no need for a
 // separate output timer
 #define BYPASS_MOZZI_OUTPUT_BUFFER true
+#if (MOZZI_OUTPUT_BUFFER_SIZE != 256)
+#  warning MOZZI_OUTPUT_BUFFER_SIZE does not have an effect in this mode.
+#endif
 #endif
 
 #define MOZZI__INTERNAL_ANALOG_READ_RESOLUTION 10

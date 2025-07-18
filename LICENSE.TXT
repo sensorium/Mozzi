@@ -2,6 +2,6 @@ Mozzi - Sound Synthesis Library for Arduino
 
 Copyright 2012-2024 Tim Barrass and the Mozzi Team
 
-Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later. A full copy of this licence is included in these sources as LICENCE.LPGL.
+Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later. A full copy of this licence is included in these sources as LICENCE.LGPL.
 
 Note that some of the provided code examples show the use of separate third-party libraries, which may come with different licences.

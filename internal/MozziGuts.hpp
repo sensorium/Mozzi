@@ -84,6 +84,13 @@ uint64_t samples_written_to_buffer = 0;
 inline void bufferAudioOutput(const AudioOutput f) {
   audioOutput(f);
   ++samples_written_to_buffer;
+  #if MOZZI_IS(MOZZI__LEGACY_AUDIO_INPUT_IMPL, 1) // in that case, we rely on asynchroneous ADC reads implemented for mozziAnalogRead to get the audio in samples
+  MOZZI_ASSERT_NOTEQUAL(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE);
+  adc_count = 0;
+  startSecondADCReadOnCurrentChannel();
+ #endif
+
+  
 }
 #else
 CircularBuffer<AudioOutput> output_buffer;  // fixed size 256

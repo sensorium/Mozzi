@@ -16,7 +16,7 @@
    Mozzi is licensed under the GNU Lesser General Public Licence (LGPL) Version 2.1 or later.
 */
 
-#define MOZZI_CONTROL_RATE 640 // quite fast, keeps modulation smooth
+#define MOZZI_CONTROL_RATE 64 // quite fast, keeps modulation smooth
 #include <Mozzi.h>
 #include <Oscil.h>
 #include <tables/cos8192_int8.h>

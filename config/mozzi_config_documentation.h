@@ -119,7 +119,7 @@
  * may only be useful for relatively simple sketches. The increased frequency response can also make
  * unwanted artefacts of low resolution synthesis calculations more apparent, so it's not always a bonus.
  *
- * It is highly recommended to keep the audio rate a power of two (16384, 32678, 64536, etc.), as some internal calculations can be highly be optimised for speed, this way.
+ * It is highly recommended to keep the audio rate a power of two (16384, 32678, 65536, etc.), as some internal calculations can be highly be optimised for speed, this way.
  *
  * @note
  * For compatibility reasons, the option MOZZI_AUDIO_RATE is automatically set to the same value as this option, and you will find some uses of that in old (pre Mozzi 2.0) code examples.

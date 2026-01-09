@@ -48,7 +48,7 @@ uint16_t output_buffer_size = 0;
 
 #  if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PDM_VIA_I2S)
 } // namespace MozziPrivate
-#    include <I2S.h>
+
 namespace MozziPrivate {
 inline bool canBufferAudioOutput() {
   return (i2s_available() >= MOZZI_PDM_RESOLUTION);
@@ -60,7 +60,7 @@ inline void audioOutput(const AudioOutput f) {
 }
 #  elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_I2S_DAC)
 } // namespace MozziPrivate
-#    include <I2S.h>
+
 namespace MozziPrivate {
 inline bool canBufferAudioOutput() {
   return (i2s_available() >= MOZZI_PDM_RESOLUTION);

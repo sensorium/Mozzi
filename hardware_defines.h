@@ -102,7 +102,13 @@
 #define IS_ESP32() 0
 #endif
 
-#if !(IS_AVR() || IS_TEENSY3() || IS_TEENSY4() || IS_STM32MAPLE() || IS_STM32DUINO() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() || IS_RP2040() || IS_MBED() || IS_RENESAS())
+#if (defined(ARDUINO_ARCH_CH32) || defined(ARDUINO_ARCH_CH32V) || defined(CH32X035))
+#define IS_CH32() 1
+#else
+#define IS_CH32() 0
+#endif
+
+#if !(IS_AVR() || IS_TEENSY3() || IS_TEENSY4() || IS_STM32MAPLE() || IS_STM32DUINO() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() || IS_RP2040() || IS_MBED() || IS_RENESAS() || IS_CH32())
 // TODO: add an exception for MOZZI_OUTPUT_EXTERNAL_CUSTOM
 #error Your hardware is not supported by Mozzi or not recognized. Edit hardware_defines.h to proceed.
 #endif

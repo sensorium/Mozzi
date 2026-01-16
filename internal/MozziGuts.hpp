@@ -61,6 +61,8 @@ template<byte BITS_IN, byte BITS_OUT, typename T> constexpr T smartShift(T value
 #  include "MozziGuts_impl_MBED.hpp"
 #elif (IS_RENESAS())
 #  include "MozziGuts_impl_RENESAS.hpp"
+#elif (IS_CH32())
+#  include "MozziGuts_impl_CH32.hpp"
 #else
 #  error "Platform not (yet) supported. Check MozziGuts_impl_template.hpp and existing implementations for a blueprint for adding your favorite MCU."
 #endif

@@ -15,7 +15,7 @@
 
 #include <Arduino.h>
 
-#include<FixMath.h>
+#include "mozzi_fixmath.h"
 
 /** For linear changes with a minimum of calculation at each step. For instance,
 you can use Line to make an oscillator glide from one frequency to another,

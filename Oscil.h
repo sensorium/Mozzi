@@ -19,7 +19,6 @@
 #include "Arduino.h"
 #include "MozziHeadersOnly.h"
 #include "mozzi_fixmath.h"
-#include "FixMath.h"
 #include "mozzi_pgmspace.h"
 
 #ifdef OSCIL_DITHER_PHASE

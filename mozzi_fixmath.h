@@ -13,6 +13,7 @@
 #define FIXEDMATH_H_
 
 #include <Arduino.h>
+#include <FixMath.h>
 
 /** @defgroup fixmath Fast integer based fixed-point arithmetic
 

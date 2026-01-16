@@ -13,11 +13,9 @@
 #define MOZZI_MIDI_H_
 
 #include "mozzi_fixmath.h"
-#include "FixMath.h"
 
-#include "mozzi_pgmspace.h"
-
-/**  @brief Internal. Do not use in your sketches.
+/** @defgroup midi_frequency MIDI Frequency conversion
+Midi note number to frequency conversion functions.
 
 Internal helper class. Not intended for use in your sketches, and details may change without notic. */ 
 class MidiToFreqPrivate {

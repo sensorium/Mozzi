@@ -13,6 +13,10 @@
 #  error "Wrong implementation included for this platform"
 #endif
 
+#if !defined(CH32X035)
+#  error "This CH32 chip is not supported by Mozzi yet. Only CH32X035 is currently supported."
+#endif
+
 #include <Arduino.h>
 
 // Forward declare the ISR to ensure C linkage

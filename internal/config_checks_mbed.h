@@ -117,9 +117,12 @@ MOZZI_CHECK_SUPPORTED(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_NONE, MOZZI_AUDIO_INP
 #  endif
 #endif
 
-// All modes besides timed external bypass the output buffer!
+// All modes besides timed external bypass the output buffer! In these modes, the buffer size is not configurable at the moment: throw an error if the user tries to change it.
 #if !MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_TIMED)
 #  define BYPASS_MOZZI_OUTPUT_BUFFER true
+#  if (MOZZI_OUTPUT_BUFFER_SIZE != 256) // has been modified
+#    warning MOZZI_OUTPUT_BUFFER_SIZE does not have an effect in this mode.
+#  endif
 #endif
 
 // TODO: This value is correct for Arduino Giga and Arduino Portenta, but not necessarily everywhere else

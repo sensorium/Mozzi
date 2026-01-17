@@ -78,6 +78,10 @@
 #define MOZZI_AUDIO_INPUT_PIN 0
 #endif
 
+#if not defined(MOZZI_OUTPUT_BUFFER_SIZE)
+#define MOZZI_OUTPUT_BUFFER_SIZE 256
+#endif
+
 //MOZZI_PWM_RATE -> hardware specific
 //MOZZI_AUDIO_PIN_1 -> hardware specific
 //MOZZI_AUDIO_PIN_1_LOW -> hardware specific
@@ -121,6 +125,10 @@
 /// Step 3: Apply various generic checks that make sense on more than one platform
 MOZZI_CHECK_POW2(MOZZI_AUDIO_RATE)
 MOZZI_CHECK_POW2(MOZZI_CONTROL_RATE)
+MOZZI_CHECK_POW2(MOZZI_OUTPUT_BUFFER_SIZE)
+#if (MOZZI_OUTPUT_BUFFER_SIZE > 256)
+#error "Mozzi does not support buffer sizes greated than 256 at the moment"
+#endif
 
 #if MOZZI_IS(MOZZI_AUDIO_INPUT, MOZZI_AUDIO_INPUT_STANDARD) && MOZZI_IS(MOZZI_ANALOG_READ, MOZZI_ANALOG_READ_NONE)
 #error "MOZZI_AUDIO_INPUT depends on MOZZI_ANALOG_READ option"

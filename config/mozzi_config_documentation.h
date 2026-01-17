@@ -249,6 +249,22 @@
  * */
 #define MOZZI_AUDIO_PIN_1 FOR_DOXYGEN_ONLY
 
+/** @ingroup config
+ * @def MOZZI_OUTPUT_BUFFER_SIZE
+ *
+ * @brief Audio buffer setting.
+ *
+ * For a lot of outputting modes, Mozzi is buffering the audio samples in order to be able to coop with varying loads on the processor.
+ * The bigger the buffer, the more able Mozzi will be to coop with big change of processor loads as the buffered values can compensate for that.
+ * At the same time, a bigger buffer produces a bigger latency as the time between when Mozzi produces the sample and the time it is actually outputted increases. For instance, for a long time Mozzi's buffer size was of a fixed size of 256. This produces a potential latency of 15.6 ms for a MOZZI_AUDIO_RATE of 16384, and half this value for a MOZZI_AUDIO_RATE of 32768.
+ * Depending on the application, this is usually not a problem but can lead to synchronisation issues in some cases (for instance when working with clocks).
+ * MOZZI_OUTPUT_BUFFER_SIZE can be reduced to smaller values with this config, leading to more accurate timings but potentially to glitches if the buffer runs low.
+ * Valid values are power of two from 256 downward (128, 64, …).
+ * Note that this might not have an effect in all modes/platforms combination as Mozzi is sometimes using an external buffer which is not always configurable.
+ *
+*/
+#define MOZZI_OUTPUT_BUFFER_SIZE FOR_DOXYGEN_ONLY
+
 
 /***************************************** ADVANCED SETTTINGS -- External audio output ******************************************
  *

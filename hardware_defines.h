@@ -85,7 +85,7 @@
 #endif
 
 // CH32 Architecture (WCH RISC-V)
-#if (defined(ARDUINO_ARCH_CH32V) || defined(ARDUINO_ARCH_CH32))
+#if (defined(ARDUINO_ARCH_CH32V) || defined(ARDUINO_ARCH_CH32) || defined(CH32X035))
 #define IS_CH32() 1
 #else
 #define IS_CH32() 0

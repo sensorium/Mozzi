@@ -1,5 +1,5 @@
 /*
- * hardware_defines.h.h
+ * hardware_defines.h
  *
  * This file is part of Mozzi.
  *
@@ -84,6 +84,14 @@
 #define IS_RENESAS() 0
 #endif
 
+// CH32 Architecture (WCH RISC-V)
+// Explicit check for CH32X035 is needed as ARDUINO_ARCH macros might not be defined by all cores/tools
+#if (defined(ARDUINO_ARCH_CH32V) || defined(ARDUINO_ARCH_CH32) || defined(CH32X035))
+#define IS_CH32() 1
+#else
+#define IS_CH32() 0
+#endif
+
 #if (defined(__arm__) && !IS_STM32MAPLE() && !IS_TEENSY3() && !IS_TEENSY4() && !IS_RP2040() && !IS_SAMD21() && !IS_MBED() && !IS_RENESAS())
 #define IS_STM32DUINO() 1
 #else
@@ -102,9 +110,9 @@
 #define IS_ESP32() 0
 #endif
 
-#if !(IS_AVR() || IS_TEENSY3() || IS_TEENSY4() || IS_STM32MAPLE() || IS_STM32DUINO() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() || IS_RP2040() || IS_MBED() || IS_RENESAS())
+#if !(IS_AVR() || IS_TEENSY3() || IS_TEENSY4() || IS_STM32MAPLE() || IS_STM32DUINO() || IS_ESP8266() || IS_SAMD21() || IS_ESP32() || IS_RP2040() || IS_MBED() || IS_RENESAS() || IS_CH32())
 // TODO: add an exception for MOZZI_OUTPUT_EXTERNAL_CUSTOM
-#error Your hardware is not supported by Mozzi or not recognized. Edit hardware_defines.h to proceed.
+#error Your hardware is not supported by Mozzi or not recognized. Edit hardware_defines.h to proceed.    
 #endif
 
 // Hardware detail defines

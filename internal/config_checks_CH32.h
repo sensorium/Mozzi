@@ -8,7 +8,7 @@
 // Configure Audio Bits based on Mode
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
     #if !defined(MOZZI_AUDIO_BITS)
-    #define MOZZI_AUDIO_BITS 16 // Internal calc at 16, output scaled to 8
+    #define MOZZI_AUDIO_BITS 8 // Output resolution is 8-bit
     #endif
 #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_2PIN_PWM)
     #if !defined(MOZZI_AUDIO_BITS)

@@ -47,6 +47,8 @@ td[data-sd] { border: 2px solid; background: linear-gradient(-45deg,rgba(0,0,255
     <td><i>ESP32-S/C/H/P</i>: that do not have an internal DAC <i>note: Beware of vastly different pin labels across board variants</i>  </td><td data-sd>15 (+16) </td><td>                 </td><td data-mo>yes </td><td></td><td data-st>yes</td></tr>
 <tr style="border-top: 1px solid">
     <td><i>RP2040</i>: Raspberry Pi Pico and friends                                            </td><td data-sd>0 (+1)  </td><td data-mo>0, 1       </td><td> -          </td><td> -          </td><td data-st>yes </td></tr>
+<tr style="border-top: 1px solid">
+    <td><i>CH32</i>: WCH CH32X035 (RISC-V)                                                     </td><td data-md>PA6     </td><td data-mo>PA6, PA7 </td><td> -          </td><td> -          </td><td> -          </td></tr>
 </tbody>
 </table>
 

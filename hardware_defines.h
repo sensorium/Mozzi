@@ -85,6 +85,7 @@
 #endif
 
 // CH32 Architecture (WCH RISC-V)
+// Explicit check for CH32X035 is needed as ARDUINO_ARCH macros might not be defined by all cores/tools
 #if (defined(ARDUINO_ARCH_CH32V) || defined(ARDUINO_ARCH_CH32) || defined(CH32X035))
 #define IS_CH32() 1
 #else

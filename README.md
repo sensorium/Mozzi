@@ -16,7 +16,7 @@ passing or external synths.
 ***
 
 ## Features
--    Available for a wide and growing range of MCUs, with and without inbuilt DACs: Arduino Uno R3 and R4, STM32, Teensy, ESP8266, ESP32, Raspberry Pi Pico, and more.
+-    Available for a wide and growing range of MCUs, with and without inbuilt DACs: Arduino Uno R3 and R4, STM32, Teensy, ESP8266, ESP32, Raspberry Pi Pico, CH32, and more.
 -    Configurable sample rate, usually in powers of two (16384 Hz, or 32768 Hz).
 -    Variable control rate from 64 Hz upwards.
 -    Various inbuilt output modes, including 16 bit output to an external DAC.
@@ -69,6 +69,7 @@ If desparate, there is still a "Mozzi_1" branch in the git repository which cont
 | *ESP32: that has an external DAC (only ESP32) note: Beware of vastly different pin labels across board variants* | 15 (+16)  |  | yes | **GPIO25 (+GPIO26)** | yes |
 | *ESP32-S/C/H/P: that do not have an external DAC note: Beware of vastly different pin labels across board variants* | **15 (+16)**  |  | yes |  | yes |
 | *RP2040*: Raspberry Pi Pico and friends  | **0 (+1)** | 0, 1 |  |  | yes |
+| *CH32*: WCH CH32X035 (RISC-V) | **PA6** | PA6, PA7 | | | |
 
 > - PWM-1: 1-pin PWM mode (`MOZZI_OUTPUT_PWM`)
 > - PWM-2: 2-pin PWM mode (`MOZZI_OUTPUT_2PIN_PWM`)

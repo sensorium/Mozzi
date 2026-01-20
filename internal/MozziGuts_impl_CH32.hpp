@@ -141,16 +141,13 @@ void setupFastAnalogRead(int8_t speed) {
     // 1. Enable ADC1 Clock
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
 
-    // 2. Configure ADC Clock Divider (PCLK2 / Div)
-    // CH32X035 PCLK2 is typically 48MHz. 
-    // ADCCLK max is usually 14MHz.
-    // Div4 = 12MHz (Safe, Fast), Div6 = 8MHz, Div8 = 6MHz
+    // 2. Configure ADC Clock Divider
     if (speed == FASTEST_ADC) {
-        RCC_ADCCLKConfig(RCC_PCLK2_Div4); 
+        ADC_CLKConfig(ADC1, ADC_CLK_Div4); 
     } else if (speed == FASTER_ADC) {
-        RCC_ADCCLKConfig(RCC_PCLK2_Div6);
+        ADC_CLKConfig(ADC1, ADC_CLK_Div6);
     } else {
-        RCC_ADCCLKConfig(RCC_PCLK2_Div8); // Default safe speed
+        ADC_CLKConfig(ADC1, ADC_CLK_Div8); // Default safe speed
     }
 
     // 3. Reset ADC
@@ -165,14 +162,8 @@ void setupFastAnalogRead(int8_t speed) {
     ADC_InitStructure.ADC_NbrOfChannel = 1;
     ADC_Init(ADC1, &ADC_InitStructure);
 
-    // 5. Calibration (Crucial for accuracy)
+    // 5. Enable ADC
     ADC_Cmd(ADC1, ENABLE);
-    
-    ADC_ResetCalibration(ADC1);
-    while(ADC_GetResetCalibrationStatus(ADC1));
-    
-    ADC_StartCalibration(ADC1);
-    while(ADC_GetCalibrationStatus(ADC1));
 
     // 6. Configure Interrupts (NVIC)
     // ADC1 is usually IRQ channel 29 on CH32
@@ -195,9 +186,7 @@ void adcStartConversion(uint8_t channel) {
     
     // Select the channel
     // Rank 1, and sample time. 
-    // 241 Cycles is safer for higher impedance, but 43 or 55 is faster.
-    // Let's stick to a middle ground or safe default for audio (55 or 71 cycles).
-    ADC_RegularChannelConfig(ADC1, channel, 1, ADC_SampleTime_71Cycles5);
+    ADC_RegularChannelConfig(ADC1, channel, 1, ADC_SampleTime_11Cycles);
 
     // Trigger conversion
     ADC_SoftwareStartConvCmd(ADC1, ENABLE);

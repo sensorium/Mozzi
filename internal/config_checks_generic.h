@@ -108,6 +108,8 @@
 #include "config_checks_stm32duino.h"
 #elif IS_STM32MAPLE()
 #include "config_checks_stm32maple.h"
+#elif IS_CH32()
+#include "config_checks_CH32.h"
 #elif (IS_TEENSY3() || IS_TEENSY4())
 #include "config_checks_teensy.h"
 #else

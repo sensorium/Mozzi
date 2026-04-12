@@ -7,6 +7,12 @@
 
 // Configure Audio Bits based on Mode
 #if MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_PWM)
+    #if !defined(MOZZI_AUDIO_PIN_1)
+      #define MOZZI_AUDIO_PIN_1 0
+    #endif
+    #if !defined(MOZZI_AUDIO_PIN_2)
+      #define MOZZI_AUDIO_PIN_2 1
+    #endif
     #if !defined(MOZZI_AUDIO_BITS)
     #define MOZZI_AUDIO_BITS 8 // Output resolution is 8-bit
     #endif

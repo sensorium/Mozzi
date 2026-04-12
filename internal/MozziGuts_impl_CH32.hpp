@@ -25,8 +25,6 @@ extern "C" void ADC1_IRQHandler(void) __attribute__((interrupt("WCH-Interrupt-fa
 
 namespace MozziPrivate {
 
-#define MOZZI_AUDIO_PIN_1 PA6 // High Byte (Main)
-#define MOZZI_AUDIO_PIN_2 PA7 // Low Byte (Fine tune) for 2PIN_PWM
 
 static void startAudio() {
     // --- 1. Audio Interrupt Timer Setup (TIM1) ---

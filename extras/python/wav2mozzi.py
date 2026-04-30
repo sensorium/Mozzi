@@ -23,7 +23,7 @@ import sys, os, textwrap, struct, random, argparse, re
 
 def read_wav(infile):
     """Read a WAV file, supporting both PCM and IEEE float formats.
-    Returns (nchannels, sampwidth, samplerate, nframes, raw_bytes, is_float)."""
+    Returns (nchannels, sample_size, samplerate, nframes, raw_bytes, is_float)."""
     with open(infile, 'rb') as f:
         # Parse RIFF header
         riff = f.read(4)
@@ -39,10 +39,10 @@ def read_wav(infile):
         fmt_found = False
         data_raw = None
         audio_format = None
-        nchannels = None
-        samplerate = None
-        sampwidth = None
-        nframes = None
+        n_channels = None
+        sample_rate = None
+        sample_size = None
+        n_frames = None
 
         while True:
             chunk_header = f.read(8)
@@ -54,14 +54,14 @@ def read_wav(infile):
             if chunk_id == b'fmt ':
                 fmt_data = f.read(chunk_size)
                 audio_format = struct.unpack('<H', fmt_data[0:2])[0]
-                nchannels = struct.unpack('<H', fmt_data[2:4])[0]
-                samplerate = struct.unpack('<I', fmt_data[4:8])[0]
+                n_channels = struct.unpack('<H', fmt_data[2:4])[0]
+                sample_rate = struct.unpack('<I', fmt_data[4:8])[0]
                 bits_per_sample = struct.unpack('<H', fmt_data[14:16])[0]
-                sampwidth = bits_per_sample // 8
+                sample_size = bits_per_sample // 8
                 fmt_found = True
             elif chunk_id == b'data':
                 data_raw = f.read(chunk_size)
-                nframes = len(data_raw) // (nchannels * sampwidth)
+                n_frames = len(data_raw) // (n_channels * sample_size)
                 break
             else:
                 f.read(chunk_size)
@@ -78,48 +78,50 @@ def read_wav(infile):
             print("Error: unsupported WAV format code %d (only PCM=1 and IEEE float=3 are supported)" % audio_format)
             sys.exit(1)
 
-        return nchannels, sampwidth, samplerate, nframes, data_raw, is_float
+        return n_channels, sample_size, sample_rate, n_frames, data_raw, is_float
 
 def wav2mozzi(infile, outfile, tablename):
-    nchannels, sampwidth, samplerate, nframes, raw, is_float = read_wav(infile)
+    """
+    Convert a WAV file to a Mozzi wavetable header.
+    - infile: input WAV file path
+    - outfile: output .h file path
+    - tablename: name to use for the generated variables (e.g. "MYTABLE")
+    """
+    n_channels, sample_size, sample_rate, n_frames, data_bytes, is_float = read_wav(infile)
     print("opened " + infile)
-    print("  channels: %d, sample width: %d bytes, rate: %d, frames: %d, format: %s" %
-          (nchannels, sampwidth, samplerate, nframes, "float" if is_float else "PCM"))
+    print("  channels: %d, rate: %d Hz, sample size: %dbit, samples: %d, format: %s" %
+          (n_channels, sample_rate, sample_size * 8, n_frames, "float" if is_float else "PCM"))
 
-    # Decode raw bytes into samples (mono only – take first channel)
+    # Decode raw bytes into samples (mono only - take first channel)
     values = []
     is_float_data = is_float
-    frame_size = nchannels * sampwidth
-    for i in range(nframes):
+    frame_size = n_channels * sample_size
+    for i in range(n_frames):
         offset = i * frame_size
-        sample_bytes = raw[offset:offset + sampwidth]  # first channel only
+        sample_bytes = data_bytes[offset:offset + sample_size]  # first channel only
         if is_float:
-            if sampwidth == 4:
+            if sample_size == 4:
                 val = struct.unpack('<f', sample_bytes)[0]
-            elif sampwidth == 3:
-                # 24-bit float is non-standard but sometimes encountered;
-                # pad to 32-bit float
-                val = struct.unpack('<f', b'\x00' + sample_bytes)[0]
             else:
-                print("Unsupported float sample width: %d bytes" % sampwidth)
+                print("Unsupported float sample size: %d B" % sample_size)
                 sys.exit(1)
         else:
-            if sampwidth == 1:
+            if sample_size == 1:
                 # 8-bit WAV is unsigned 0..255 -> convert to signed -128..127
                 val = struct.unpack('B', sample_bytes)[0] - 128
-            elif sampwidth == 2:
+            elif sample_size == 2:
                 # 16-bit little-endian signed
                 val = struct.unpack('<h', sample_bytes)[0]
-            elif sampwidth == 3:
+            elif sample_size == 3:
                 # 24-bit little-endian signed
                 b = sample_bytes
                 val = b[0] | (b[1] << 8) | (b[2] << 16)
                 if val >= 0x800000:
                     val -= 0x1000000
-            elif sampwidth == 4:
+            elif sample_size == 4:
                 val = struct.unpack('<i', sample_bytes)[0]
             else:
-                print("Unsupported sample width: %d" % sampwidth)
+                print("Unsupported sample size: %d B" % sample_size)
                 sys.exit(1)
         values.append(val)
 
@@ -130,20 +132,20 @@ def wav2mozzi(infile, outfile, tablename):
     if is_float_data:
         # Float WAV: values are in -1.0..1.0 range
         store_values = [max(-128, min(127, int(v * 128 + 0.5))) for v in values]
-    elif sampwidth == 1:
+    elif sample_size == 1:
         # already int8 range
         store_values = values
-    elif sampwidth == 2:
+    elif sample_size == 2:
         # 16-bit -> int8: divide by 256
         store_values = [max(-128, min(127, int(round(v / 256.0)))) for v in values]
-    elif sampwidth == 3:
+    elif sample_size == 3:
         # 24-bit -> int8: divide by 65536
         store_values = [max(-128, min(127, int(round(v / 65536.0)))) for v in values]
-    elif sampwidth == 4:
+    elif sample_size == 4:
         # 32-bit -> int8: divide by 16777216
         store_values = [max(-128, min(127, int(round(v / 16777216.0)))) for v in values]
     else:
-        print("Unsupported sample width: %d bytes" % sampwidth)
+        print("Unsupported sample size: %d bytes" % sample_size)
         sys.exit(1)
 
     # Dither triple-33 sequences (taken from char2mozzi.py)
@@ -157,12 +159,12 @@ def wav2mozzi(infile, outfile, tablename):
     fout.write('#include <Arduino.h>\n')
     fout.write('#include "mozzi_pgmspace.h"\n\n')
     fout.write('#define ' + tablename + '_NUM_CELLS ' + str(len(store_values)) + '\n')
-    fout.write('#define ' + tablename + '_SAMPLERATE ' + str(samplerate) + '\n\n')
+    fout.write('#define ' + tablename + '_SAMPLERATE ' + str(sample_rate) + '\n\n')
     fout.write('CONSTTABLE_STORAGE(' + c_type + ') ' + tablename + '_DATA [] = {\n')
     outstring = ''
     for v in store_values:
         outstring += str(v) + ", "
-    outstring = textwrap.fill(outstring, 80)
+    outstring = textwrap.fill(outstring, width=80, initial_indent='  ', subsequent_indent='  ')
     fout.write(outstring)
     fout.write('\n};\n')
     fout.write('\n#endif /* ' + tablename + '_H_ */\n')

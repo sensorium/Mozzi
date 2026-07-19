@@ -182,8 +182,7 @@ public:
 	int8_t next() { // 4us
 
 		if (paused) return 0;
-
-		if (phase_fractional>endpos_fractional){
+		if (phase_fractional>=endpos_fractional){
 			if (looping) {
 				phase_fractional = startpos_fractional + (phase_fractional - endpos_fractional);
 			}else{

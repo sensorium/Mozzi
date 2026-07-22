@@ -95,12 +95,15 @@ public:
 	}
 
 
-	/** Resets the phase (the playhead) to the start position, which will be 0 unless set to another value with setStart();
-	*/
+	/** 
+	 * Resets the phase (the playhead) to the start position, which will be 0 unless set to another value with setStart();
+	 * Also unpauses playback if it's paused.
+	 */
 	inline
 	void start()
 	{
 		phase_fractional = startpos_fractional;
+		if(paused) setPaused(false);
 	}
 
 
@@ -113,6 +116,20 @@ public:
 		setStart(startpos);
 		start();
 	}
+
+	/** Puts playback of the sample on pause or unpauses it.  
+	 * When paused, "next()" does not advance position and returns 0.
+	 * @param to_pause whether to pause or unpause, default true
+	 */
+	inline
+	void setPaused(bool to_pause = true) 
+	{
+		paused = to_pause; 
+	}
+
+	/** Checks whether playback is paused. */
+	inline
+	bool isPaused() const { return paused; }
 
 
 	/** Sets the end position in samples from the beginning of the sound.
@@ -164,6 +181,7 @@ public:
 	inline
 	int8_t next() { // 4us
 
+		if (paused) return 0;
 		if (phase_fractional>=endpos_fractional){
 			if (looping) {
 				phase_fractional = startpos_fractional + (phase_fractional - endpos_fractional);
@@ -192,7 +210,7 @@ public:
 	*/
 	inline
 	boolean isPlaying(){
-		return phase_fractional<endpos_fractional;
+		return phase_fractional<endpos_fractional && !paused;
 	}
 
 
@@ -315,6 +333,7 @@ static const uint8_t ADJUST_FOR_NUM_TABLE_CELLS = (NUM_TABLE_CELLS<2048) ? 8 : 0
 	volatile unsigned long phase_increment_fractional;
 	const int8_t * table;
 	bool looping;
+	bool paused{false};
 	unsigned long startpos_fractional, endpos_fractional;
 };
 

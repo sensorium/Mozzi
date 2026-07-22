@@ -129,7 +129,7 @@ public:
 
 	/** Checks whether playback is paused. */
 	inline
-	bool isPaused() { return paused; }
+	bool isPaused() const { return paused; }
 
 
 	/** Sets the end position in samples from the beginning of the sound.

@@ -1,0 +1,13 @@
+{
+  "name": "Mozzi",
+  "keywords": "audio, sound, synthesis, music",
+  "description": "A sound synthesis library",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/sensorium/Mozzi.git"
+  },
+  "examples": "examples/*/*/*.ino",
+  "frameworks": "arduino",
+  "platforms": "atmelavr"
+}

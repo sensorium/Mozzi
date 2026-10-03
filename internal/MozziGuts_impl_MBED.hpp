@@ -131,6 +131,19 @@ void stopMozzi() {
   audio_output_timer.detach();
 }
 
+#elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_EXTERNAL_CUSTOM)
+// Demand-driven: no timer is claimed and no interrupt is installed. The sketch
+// drives audioHook() itself and provides audioOutput() / canBufferAudioOutput(),
+// so startAudio() has nothing to attach and stopMozzi() nothing to detach.
+// startAudioInput() is still called so a sketch using
+// MOZZI_AUDIO_INPUT_STANDARD gets its acquisition running.
+static void startAudio() {
+  startAudioInput();
+}
+
+void stopMozzi() {
+}
+
 #elif MOZZI_IS(MOZZI_AUDIO_MODE, MOZZI_OUTPUT_INTERNAL_DAC)
 
 } // namespace MozziPrivate

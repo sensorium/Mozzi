@@ -174,7 +174,7 @@ template<uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE, byte N_OSCIL>
       }
     else  // dichotomic search
       {
-	byte low_point = 0, high_point = N_OSCIL-2, mid_point = (N_OSCIL-1)>>1;
+	byte low_point = 0, high_point = N_OSCIL-1, mid_point = (N_OSCIL-1)>>1;
 	while(low_point != high_point)
 	  {
 	    if (frequency > cutoff_freqs[mid_point]) low_point = mid_point+1;

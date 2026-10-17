@@ -166,7 +166,7 @@ template<uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE, byte N_OSCIL>
 	current_osc->setFreq(frequency);
       }
     
-    else if (frequency > cutoff_freqs[N_OSCIL-2])
+    else if (frequency > cutoff_freqs[N_OSCIL-1])
       {	    
 	oscillators[N_OSCIL-1]->setPhaseFractional(current_osc->getPhaseFractional());
 	current_osc = oscillators[N_OSCIL-1];

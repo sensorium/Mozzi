@@ -126,6 +126,34 @@ template<uint16_t NUM_TABLE_CELLS, uint16_t UPDATE_RATE, byte N_OSCIL>
     int8_t phMod(Q15n16 phmod_proportion) {return current_osc->phMod(phmod_proportion);}
 
 
+	/** Returns the next sample given a phase modulation value.
+	@param phmod_proportion a phase modulation value given as a proportion of the wave. The
+	phmod_proportion parameter is a SFix<NI,NF> fixed-point number where the fractional part represents almost -1 to almost 1, modulating the phase by one whole table length in
+	each direction. This fixed point math number is interpreted as a SFix<15,16> internally.
+	@return a sample from the table.
+	*/
+  template <int8_t NI, int8_t NF, uint8_t RANGE>
+	inline
+  int8_t phMod(SFix<NI,NF,RANGE> phmod_proportion)
+	{
+	  return current_osc->phMod(phmod_proportion);
+	}
+
+
+  
+	/** Returns the next sample given a phase modulation value.
+	@param phmod_proportion a phase modulation value given as a proportion of the wave. The
+	phmod_proportion parameter is a SFix<15,16> fixed-point number where the fractional part represents almost -1 to almost 1, modulating the phase by one whole table length in
+	each direction.
+	@return a sample from the table.
+	*/
+	inline
+	int8_t phMod(SFix<15,16> phmod_proportion)
+	{
+	  return current_osc->phMod(phmod_proportion);
+	}
+
+
   /** Set the MetaOsc frequency with an unsigned int.
       @param frequency to play the wave table.*/
   inline
